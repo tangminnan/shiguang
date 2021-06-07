@@ -37,7 +37,7 @@ public class LogAspect {
     LogService logService;
 
 
-    @Pointcut("@annotation(com.shaicha.common.annotation.Log)")
+    @Pointcut("@annotation(com.shiguang.common.annotation.Log)")
     public void logPointCut() {
     }
 
