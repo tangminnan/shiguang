@@ -27,8 +27,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.shaicha.common.config.BootdoConfig;
-import com.shaicha.information.service.impl.StudentServiceImpl;
+import com.shiguang.common.config.BootdoConfig;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

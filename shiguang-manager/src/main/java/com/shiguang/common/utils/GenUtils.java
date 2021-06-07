@@ -11,9 +11,9 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
-import com.shaicha.common.config.Constant;
-import com.shaicha.common.domain.ColumnDO;
-import com.shaicha.common.domain.TableDO;
+import com.shiguang.common.config.Constant;
+import com.shiguang.common.domain.ColumnDO;
+import com.shiguang.common.domain.TableDO;
 
 import java.io.File;
 import java.io.IOException;
