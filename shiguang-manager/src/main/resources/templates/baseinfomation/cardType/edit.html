@@ -1,10 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${type.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">会员卡类型名称：</label>
+								<div class="col-sm-6">
+									<input id="cardName" name="cardName" th:value="${type.cardName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">积分范围：</label>
+								<div class="col-sm-8">
+									<input id="integerFirst" name="integerFirst" th:value="${type.integerFirst}"  type="text">
+									至
+									<input id="integerLast" name="integerLast" th:value="${type.integerLast}" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">升级后会员卡类型：</label>
+								<div class="col-sm-8">
+									<select name="upgradeCard" id="upgradeCard" th:value="${type.upgradeCard}" class="form-control" data-actions-box="false" data-size="5">
+										<option></option>
+										<option th:each="ls:${cardTypeDOList}"
+												th:text="${ls.cardName}"
+												th:value="${ls.cardName}"></option>
+									</select>
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">会员升级扣除积分数：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="integerNum" name="integerNum" th:value="${type.integerNum}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">按商品类型设置默认折扣：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="discount" name="discount" th:value="${type.discount}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">默认会员卡类型)：</label>
+								<div class="col-sm-8">
+									<label class="radio-inline"> <input type="radio"
+																		th:field="*{type.isDefault}" name="isDefault" value="0" /> 是
+									</label>
+									<label class="radio-inline"> <input type="radio"
+																		th:field="*{type.isDefault}" name="isDefault" value="1" /> 否
+									</label>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">参与优惠活动：</label>
+								<div class="col-sm-8">
+									<label class="radio-inline"> <input type="radio"
+																		th:field="*{type.isPartake}" name="isPartake" value="0" /> 是
+									</label>
+									<label class="radio-inline"> <input type="radio"
+																		th:field="*{type.isPartake}" name="isPartake" value="1" /> 否
+									</label>
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/baseinfomation/cardType/edit.js">
+	</script>
 </body>
 </html>
