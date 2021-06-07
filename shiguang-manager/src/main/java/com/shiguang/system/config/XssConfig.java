@@ -1,7 +1,7 @@
 package com.shiguang.system.config;
 
 import com.google.common.collect.Maps;
-import com.shaicha.system.filter.XssFilter;
+import com.shiguang.system.filter.XssFilter;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
