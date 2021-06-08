@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.baseinfomation.dao.SourceDao">
+
+    <select id="get" resultType="com.shiguang.baseinfomation.domain.SourceDO">
+		select `id`,`source_number`,`source_name` from source where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.baseinfomation.domain.SourceDO">
+        select `id`,`source_number`,`source_name` from source
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="sourceNumber != null and sourceNumber != ''"> and source_number = #{sourceNumber} </if>
+            <if test="sourceName != null and sourceName != ''"> and source_name = #{sourceName} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from source
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="sourceNumber != null and sourceNumber != ''"> and source_number = #{sourceNumber} </if>
+            <if test="sourceName != null and sourceName != ''"> and source_name = #{sourceName} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.baseinfomation.domain.SourceDO" useGeneratedKeys="true" keyProperty="id">
+		insert into source
+		(
+			`source_number`,
+			`source_name`
+		)
+		values
+		(
+			#{sourceNumber},
+			#{sourceName}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.baseinfomation.domain.SourceDO">
+        update source
+        <set>
+            <if test="sourceNumber != null">`source_number` = #{sourceNumber}, </if>
+            <if test="sourceName != null">`source_name` = #{sourceName}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from source where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from source where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
