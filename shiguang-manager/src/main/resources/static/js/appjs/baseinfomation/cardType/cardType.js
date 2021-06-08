@@ -46,15 +46,18 @@ function load() {
 						columns : [
 																{
 									field : 'cardName', 
-									title : '会员卡类型名称' 
+									title : '会员卡类型名称',
+									align : 'center'
 								},
                                 {
                                     field : 'upgradeCard',
-                                    title : '升级后会员卡类型'
+                                    title : '升级后会员卡类型',
+                                    align : 'center'
                                 },
 																{
 									field : 'integerFirst', 
-									title : '积分范围' 
+									title : '积分范围',
+                                    align : 'center'
 								},
 																{
 									field : 'isDefault',

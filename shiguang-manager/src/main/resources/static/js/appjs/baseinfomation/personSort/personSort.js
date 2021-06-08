@@ -46,11 +46,13 @@ function load() {
 						columns : [
 																{
 									field : 'crowdNumber', 
-									title : '人群编码' 
+									title : '人群编码',
+                                    align : 'center'
 								},
 																{
 									field : 'crowdName', 
-									title : '人群分类名称' 
+									title : '人群分类名称',
+                                    align : 'center'
 								},
 																{
 									title : '操作',

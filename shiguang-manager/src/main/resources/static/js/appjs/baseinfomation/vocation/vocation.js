@@ -46,11 +46,13 @@ function load() {
 						columns : [
 																{
 									field : 'vocationNumber', 
-									title : '职业编码' 
+									title : '职业编码',
+                                    align : 'center'
 								},
 																{
 									field : 'vocationName', 
-									title : '职业名称' 
+									title : '职业名称',
+									align : 'center'
 								},
 																{
 									title : '操作',
