@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.member.dao.MemberDao">
+
+    <select id="get" resultType="com.shiguang.member.domain.MemberDO">
+		select `id`,`name`,`card_number`,`sex`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.member.domain.MemberDO">
+        select `id`,`name`,`card_number`,`sex`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="birthdayYear != null and birthdayYear != ''"> and birthday_year = #{birthdayYear} </if>
+            <if test="birthdayMonth != null and birthdayMonth != ''"> and birthday_month = #{birthdayMonth} </if>
+            <if test="birthdayDay != null and birthdayDay != ''"> and birthday_day = #{birthdayDay} </if>
+            <if test="age != null and age != ''"> and age = #{age} </if>
+            <if test="phone1 != null and phone1 != ''"> and phone_1 = #{phone1} </if>
+            <if test="phone2 != null and phone2 != ''"> and phone_2 = #{phone2} </if>
+            <if test="phone3 != null and phone3 != ''"> and phone_3 = #{phone3} </if>
+            <if test="provinceCode != null and provinceCode != ''"> and province_code = #{provinceCode} </if>
+            <if test="provinceName != null and provinceName != ''"> and province_name = #{provinceName} </if>
+            <if test="cityCode != null and cityCode != ''"> and city_code = #{cityCode} </if>
+            <if test="cityName != null and cityName != ''"> and city_name = #{cityName} </if>
+            <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
+            <if test="areaName != null and areaName != ''"> and area_name = #{areaName} </if>
+            <if test="cardType != null and cardType != ''"> and card_type = #{cardType} </if>
+            <if test="masterCard != null and masterCard != ''"> and master_card = #{masterCard} </if>
+            <if test="minorName != null and minorName != ''"> and minor_name = #{minorName} </if>
+            <if test="crowdType != null and crowdType != ''"> and crowd_type = #{crowdType} </if>
+            <if test="exclusiveCustomer != null and exclusiveCustomer != ''"> and exclusive_customer = #{exclusiveCustomer} </if>
+            <if test="exclusiveCustomerId != null and exclusiveCustomerId != ''"> and exclusive_customer_id = #{exclusiveCustomerId} </if>
+            <if test="identityType != null and identityType != ''"> and identity_type = #{identityType} </if>
+            <if test="identityId != null and identityId != ''"> and identity_id = #{identityId} </if>
+            <if test="vocation != null and vocation != ''"> and vocation = #{vocation} </if>
+            <if test="school != null and school != ''"> and school = #{school} </if>
+            <if test="qqNumber != null and qqNumber != ''"> and qq_number = #{qqNumber} </if>
+            <if test="email != null and email != ''"> and email = #{mail} </if>
+            <if test="address != null and address != ''"> and address = #{address} </if>
+            <if test="postalCode != null and postalCode != ''"> and postal_code = #{postalCode} </if>
+            <if test="interest != null and interest != ''"> and interest = #{interest} </if>
+            <if test="source != null and source != ''"> and source = #{source} </if>
+            <if test="integralPasd != null and integralPasd != ''"> and integral_pasd = #{integralPasd} </if>
+            <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+            <if test="registerTime != null and registerTime != ''"> and register_time = #{registerTime} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from member
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="birthdayYear != null and birthdayYear != ''"> and birthday_year = #{birthdayYear} </if>
+            <if test="birthdayMonth != null and birthdayMonth != ''"> and birthday_month = #{birthdayMonth} </if>
+            <if test="birthdayDay != null and birthdayDay != ''"> and birthday_day = #{birthdayDay} </if>
+            <if test="age != null and age != ''"> and age = #{age} </if>
+            <if test="phone1 != null and phone1 != ''"> and phone_1 = #{phone1} </if>
+            <if test="phone2 != null and phone2 != ''"> and phone_2 = #{phone2} </if>
+            <if test="phone3 != null and phone3 != ''"> and phone_3 = #{phone3} </if>
+            <if test="provinceCode != null and provinceCode != ''"> and province_code = #{provinceCode} </if>
+            <if test="provinceName != null and provinceName != ''"> and province_name = #{provinceName} </if>
+            <if test="cityCode != null and cityCode != ''"> and city_code = #{cityCode} </if>
+            <if test="cityName != null and cityName != ''"> and city_name = #{cityName} </if>
+            <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
+            <if test="areaName != null and areaName != ''"> and area_name = #{areaName} </if>
+            <if test="cardType != null and cardType != ''"> and card_type = #{cardType} </if>
+            <if test="masterCard != null and masterCard != ''"> and master_card = #{masterCard} </if>
+            <if test="minorName != null and minorName != ''"> and minor_name = #{minorName} </if>
+            <if test="crowdType != null and crowdType != ''"> and crowd_type = #{crowdType} </if>
+            <if test="exclusiveCustomer != null and exclusiveCustomer != ''"> and exclusive_customer = #{exclusiveCustomer} </if>
+            <if test="exclusiveCustomerId != null and exclusiveCustomerId != ''"> and exclusive_customer_id = #{exclusiveCustomerId} </if>
+            <if test="identityType != null and identityType != ''"> and identity_type = #{identityType} </if>
+            <if test="identityId != null and identityId != ''"> and identity_id = #{identityId} </if>
+            <if test="vocation != null and vocation != ''"> and vocation = #{vocation} </if>
+            <if test="school != null and school != ''"> and school = #{school} </if>
+            <if test="qqNumber != null and qqNumber != ''"> and qq_number = #{qqNumber} </if>
+            <if test="email != null and email != ''"> and email = #{email} </if>
+            <if test="address != null and address != ''"> and address = #{address} </if>
+            <if test="postalCode != null and postalCode != ''"> and postal_code = #{postalCode} </if>
+            <if test="interest != null and interest != ''"> and interest = #{interest} </if>
+            <if test="source != null and source != ''"> and source = #{source} </if>
+            <if test="integralPasd != null and integralPasd != ''"> and integral_pasd = #{integralPasd} </if>
+            <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+            <if test="registerTime != null and registerTime != ''"> and register_time = #{registerTime} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.member.domain.MemberDO" useGeneratedKeys="true" keyProperty="id">
+		insert into member
+		(
+			`name`,
+			`card_number`,
+			`sex`,
+			`birthday_year`,
+			`birthday_month`,
+			`birthday_day`,
+			`age`,
+			`phone_1`,
+			`phone_2`,
+			`phone_3`,
+			`province_code`,
+			`province_name`,
+			`city_code`,
+			`city_name`,
+			`area_code`,
+			`area_name`,
+			`card_type`,
+			`master_card`,
+			`minor_name`,
+			`crowd_type`,
+			`exclusive_customer`,
+			`exclusive_customer_id`,
+			`identity_type`,
+			`identity_id`,
+			`vocation`,
+			`school`,
+			`qq_number`,
+			`email`,
+			`address`,
+			`postal_code`,
+			`interest`,
+			`source`,
+			`integral_pasd`,
+			`remark`,
+			`register_time`,
+			`status`
+		)
+		values
+		(
+			#{name},
+			#{cardNumber},
+			#{sex},
+			#{birthdayYear},
+			#{birthdayMonth},
+			#{birthdayDay},
+			#{age},
+			#{phone1},
+			#{phone2},
+			#{phone3},
+			#{provinceCode},
+			#{provinceName},
+			#{cityCode},
+			#{cityName},
+			#{areaCode},
+			#{areaName},
+			#{cardType},
+			#{masterCard},
+			#{minorName},
+			#{crowdType},
+			#{exclusiveCustomer},
+			#{exclusiveCustomerId},
+			#{identityType},
+			#{identityId},
+			#{vocation},
+			#{school},
+			#{qqNumber},
+			#{email},
+			#{address},
+			#{postalCode},
+			#{interest},
+			#{source},
+			#{integralPasd},
+			#{remark},
+			#{registerTime},
+			#{status}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.member.domain.MemberDO">
+        update member
+        <set>
+            <if test="name != null">`name` = #{name}, </if>
+            <if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+            <if test="sex != null">`sex` = #{sex}, </if>
+            <if test="birthdayYear != null">`birthday_year` = #{birthdayYear}, </if>
+            <if test="birthdayMonth != null">`birthday_month` = #{birthdayMonth}, </if>
+            <if test="birthdayDay != null">`birthday_day` = #{birthdayDay}, </if>
+            <if test="age != null">`age` = #{age}, </if>
+            <if test="phone1 != null">`phone_1` = #{phone1}, </if>
+            <if test="phone2 != null">`phone_2` = #{phone2}, </if>
+            <if test="phone3 != null">`phone_3` = #{phone3}, </if>
+            <if test="provinceCode != null">`province_code` = #{provinceCode}, </if>
+            <if test="provinceName != null">`province_name` = #{provinceName}, </if>
+            <if test="cityCode != null">`city_code` = #{cityCode}, </if>
+            <if test="cityName != null">`city_name` = #{cityName}, </if>
+            <if test="areaCode != null">`area_code` = #{areaCode}, </if>
+            <if test="areaName != null">`area_name` = #{areaName}, </if>
+            <if test="cardType != null">`card_type` = #{cardType}, </if>
+            <if test="masterCard != null">`master_card` = #{masterCard}, </if>
+            <if test="minorName != null">`minor_name` = #{minorName}, </if>
+            <if test="crowdType != null">`crowd_type` = #{crowdType}, </if>
+            <if test="exclusiveCustomer != null">`exclusive_customer` = #{exclusiveCustomer}, </if>
+            <if test="exclusiveCustomerId != null">`exclusive_customer_id` = #{exclusiveCustomerId}, </if>
+            <if test="identityType != null">`identity_type` = #{identityType}, </if>
+            <if test="identityId != null">`identity_id` = #{identityId}, </if>
+            <if test="vocation != null">`vocation` = #{vocation}, </if>
+            <if test="school != null">`school` = #{school}, </if>
+            <if test="qqNumber != null">`qq_number` = #{qqNumber}, </if>
+            <if test="email != null">`email` = #{email}, </if>
+            <if test="address != null">`address` = #{address}, </if>
+            <if test="postalCode != null">`postal_code` = #{postalCode}, </if>
+            <if test="interest != null">`interest` = #{interest}, </if>
+            <if test="source != null">`source` = #{source}, </if>
+            <if test="integralPasd != null">`integral_pasd` = #{integralPasd}, </if>
+            <if test="remark != null">`remark` = #{remark}, </if>
+            <if test="registerTime != null">`register_time` = #{registerTime}</if>
+            <if test="status != null">`status` = #{status}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from member where id = #{value}
+	</delete>
+
+    <update id="batchRemove" >
+        update member
+        <set>
+            <if test="status != null">`status` = #{status}</if>
+        </set>
+
+        where id in
+        <foreach item="item" collection="id" open="(" separator="," close=")" index="index">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>
