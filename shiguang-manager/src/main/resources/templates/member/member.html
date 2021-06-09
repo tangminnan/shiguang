@@ -12,6 +12,9 @@
 							<button shiro:hasPermission="information:member:add" type="button" class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
+							<button shiro:hasPermission="information:member:member" type="button" class="btn  btn-default" onclick="importtemplate()">
+								会员信息导入
+							</button>
 							<button shiro:hasPermission="information:member:batchRemove" type="button" class="btn  btn-danger"
 								onclick="batchRemove(1)">
 								<i class="fa fa-trash" aria-hidden="true"></i>批量启用
@@ -37,10 +40,11 @@
 								   placeholder="联系电话">
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
-							<select class="form-control" name="sex" id="sex" >
-								<option value="">性别</option>
-								<option value="1">男</option>
-								<option value="2">女</option>
+							<select name="departNumber" id="departNumber" class="form-control" data-actions-box="false" data-size="5">
+								<option value="">请选择部门</option>
+								<option th:each="ls:${departmentDOList}"
+										th:text="${ls.departName}"
+										th:value="${ls.departNumber}"></option>
 							</select>
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">

@@ -1,6 +1,8 @@
 package com.shiguang.member.service;
 
+import com.shiguang.common.utils.R;
 import com.shiguang.member.domain.MemberDO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -20,4 +22,6 @@ public interface MemberService {
 
     int batchRemove(Long[] ids,Long status);
     int updateStatus(MemberDO memberDO);
+
+    R importMember(String departNumber, String checkType, MultipartFile file);
 }

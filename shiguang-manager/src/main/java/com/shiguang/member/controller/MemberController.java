@@ -1,16 +1,11 @@
 package com.shiguang.member.controller;
 
-import com.shiguang.baseinfomation.domain.CardTypeDO;
-import com.shiguang.baseinfomation.domain.PersonSortDO;
-import com.shiguang.baseinfomation.domain.SourceDO;
-import com.shiguang.baseinfomation.domain.VocationDO;
-import com.shiguang.baseinfomation.service.CardTypeService;
-import com.shiguang.baseinfomation.service.PersonSortService;
-import com.shiguang.baseinfomation.service.SourceService;
-import com.shiguang.baseinfomation.service.VocationService;
+import com.shiguang.baseinfomation.domain.*;
+import com.shiguang.baseinfomation.service.*;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -18,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.jws.WebParam;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,10 +34,17 @@ public class MemberController {
     private VocationService vocationService;
     @Autowired
     private SourceService sourceService;
+    @Autowired
+    private InterestService interestService;
+    @Autowired
+    private DepartmentService departmentService;
 
     @GetMapping()
     @RequiresPermissions("information:member:member")
-    String Member(){
+    String Member(Model model){
+        Map<String, Object> map = new HashMap<>();
+        List<DepartmentDO> departmentDOList = departmentService.list(map);
+        model.addAttribute("departmentDOList",departmentDOList);
         return "member/member";
     }
 
@@ -68,6 +72,8 @@ public class MemberController {
         model.addAttribute("vocationDOList",vocationDOList);
         List<SourceDO> sourceDOList = sourceService.list(map);
         model.addAttribute("sourceDOList",sourceDOList);
+        List<InterestDO> interestDOList = interestService.list(map);
+        model.addAttribute("interestDOList",interestDOList);
         return "member/add";
     }
 
@@ -85,7 +91,33 @@ public class MemberController {
         model.addAttribute("vocationDOList",vocationDOList);
         List<SourceDO> sourceDOList = sourceService.list(map);
         model.addAttribute("sourceDOList",sourceDOList);
+        List<InterestDO> interestDOList = interestService.list(map);
+        model.addAttribute("interestDOList",interestDOList);
         return "member/edit";
+    }
+
+    @GetMapping("/information/{checkType}")
+    @RequiresPermissions("information:member:member")
+    public String importtemplate(Model model, @PathVariable("checkType") String checkType) {
+        model.addAttribute("checkType", checkType);
+        Map<String, Object> map = new HashMap<>();
+        List<DepartmentDO> departmentDOList = departmentService.list(map);
+        model.addAttribute("departmentDOList",departmentDOList);
+        if ("PU_TONG".equals(checkType)) {
+            return "member/importtemplate";
+        }
+        return null;
+    }
+
+    /**
+     * 导入
+     */
+    @PostMapping("/importMember")
+    @ResponseBody
+    @RequiresPermissions("information:member:member")
+    public R importMember(String departNumber, String checkType, MultipartFile file) {
+        return memberService.importMember(departNumber, checkType, file);
+
     }
 
     /**

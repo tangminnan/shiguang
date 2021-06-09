@@ -14,6 +14,8 @@ public class MemberDO implements Serializable {
     private String cardNumber;
     //顾客性别(1:男2:女)
     private Long sex;
+    //部门编码
+    private String departNumber;
     //出生日期-年
     private Long birthdayYear;
     //出生日期-月
@@ -129,6 +131,20 @@ public class MemberDO implements Serializable {
     public Long getSex() {
         return sex;
     }
+
+    /**
+     * 设置：部门编码
+     */
+    public void setDepartNumber(String departNumber) {
+        this.departNumber = departNumber;
+    }
+    /**
+     * 获取：部门编码
+     */
+    public String getDepartNumber() {
+        return departNumber;
+    }
+
     /**
      * 设置：出生日期-年
      */

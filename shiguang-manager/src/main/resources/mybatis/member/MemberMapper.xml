@@ -4,14 +4,15 @@
 <mapper namespace="com.shiguang.member.dao.MemberDao">
 
     <select id="get" resultType="com.shiguang.member.domain.MemberDO">
-		select `id`,`name`,`card_number`,`sex`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member where id = #{value}
+		select `id`,`name`,`card_number`,`sex`,`depart_number`,birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.member.domain.MemberDO">
-        select `id`,`name`,`card_number`,`sex`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member
+        select `id`,`name`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
             <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and birthday_year = #{birthdayYear} </if>
@@ -66,6 +67,7 @@
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
             <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and birthday_year = #{birthdayYear} </if>
@@ -110,6 +112,7 @@
 			`name`,
 			`card_number`,
 			`sex`,
+			`depart_number`,
 			`birthday_year`,
 			`birthday_month`,
 			`birthday_day`,
@@ -149,6 +152,7 @@
 			#{name},
 			#{cardNumber},
 			#{sex},
+			#{departNumber},
 			#{birthdayYear},
 			#{birthdayMonth},
 			#{birthdayDay},
@@ -191,6 +195,7 @@
             <if test="name != null">`name` = #{name}, </if>
             <if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
             <if test="sex != null">`sex` = #{sex}, </if>
+            <if test="departNumber != null">`depart_number` = #{departNumber}</if>
             <if test="birthdayYear != null">`birthday_year` = #{birthdayYear}, </if>
             <if test="birthdayMonth != null">`birthday_month` = #{birthdayMonth}, </if>
             <if test="birthdayDay != null">`birthday_day` = #{birthdayDay}, </if>

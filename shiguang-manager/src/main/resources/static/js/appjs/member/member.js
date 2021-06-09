@@ -37,7 +37,8 @@ function load() {
                                 phone1: $("#phone1").val(),
 					           name:$('#name').val(),
 								cardNumber:$('#cardNumber').val(),
-                                age: $("#age").val()
+                                age: $("#age").val(),
+                                departNumber: $("#departNumber").val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -70,9 +71,9 @@ function load() {
 									title : '顾客性别',
 									align : 'center',
 									formatter : function(value, row, index) {
-										if(value == '1'){
+										if(value == '0'){
 											return '<span class="label">男</span>';
-										}else if(value == '2'){
+										}else if(value == '1'){
 											return '<span class="label">女</span>';
 
 										}
@@ -98,7 +99,7 @@ function load() {
                                     str +=' <div class="onoffswitch"> ';
                                     str +=' <input name="allowComment" ';
                                     //启用状态 0：是；1：否
-                                    if(row.status == 0)
+                                    if(row.status == 1)
                                         str += ' checked="" ';
 
                                     str +=' type="checkbox" onchange="updateEnable(' +row.id+ ',this)" value="' +row.id+ '" class="onoffswitch-checkbox" id="example1' +row.id+ '">  ';
@@ -148,6 +149,22 @@ function add() {
 		content : prefix + '/add' // iframe的url
 	});
 }
+
+/**
+ * 模板导入会员
+ */
+function importtemplate(){
+    var checkType='PU_TONG';
+    layer.open({
+        type : 2,
+        title : '导入会员',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : prefix + '/information/'+checkType // iframe的url
+    });
+}
+
 function updateEnable(id,enable){
     var isEnable = 1;
     if($(enable).prop("checked")){
