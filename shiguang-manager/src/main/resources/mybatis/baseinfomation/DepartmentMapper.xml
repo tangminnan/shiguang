@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.baseinfomation.dao.DepartmentDao">
+
+    <select id="get" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
+		select `id`,`depart_number`,`depart_name`,`depart_type`,`company`,`person_charge`,`status` from department where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
+        select `id`,`depart_number`,`depart_name`,`depart_type`,`company`,`person_charge`,`status` from department
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
+            <if test="departName != null and departName != ''"> and depart_name = #{departName} </if>
+            <if test="departType != null and departType != ''"> and depart_type = #{departType} </if>
+            <if test="company != null and company != ''"> and company = #{company} </if>
+            <if test="personCharge != null and personCharge != ''"> and person_charge = #{personCharge} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from department
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
+            <if test="departName != null and departName != ''"> and depart_name = #{departName} </if>
+            <if test="departType != null and departType != ''"> and depart_type = #{departType} </if>
+            <if test="company != null and company != ''"> and company = #{company} </if>
+            <if test="personCharge != null and personCharge != ''"> and person_charge = #{personCharge} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.baseinfomation.domain.DepartmentDO" useGeneratedKeys="true" keyProperty="id">
+		insert into department
+		(
+			`depart_number`,
+			`depart_name`,
+			`depart_type`,
+			`company`,
+			`person_charge`,
+			`status`
+		)
+		values
+		(
+			#{departNumber},
+			#{departName},
+			#{departType},
+			#{company},
+			#{personCharge},
+			#{status}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.baseinfomation.domain.DepartmentDO">
+        update department
+        <set>
+            <if test="departNumber != null">`depart_number` = #{departNumber}, </if>
+            <if test="departName != null">`depart_name` = #{departName}, </if>
+            <if test="departType != null">`depart_type` = #{departType}, </if>
+            <if test="company != null">`company` = #{company}, </if>
+            <if test="personCharge != null">`person_charge` = #{personCharge}, </if>
+            <if test="status != null">`status` = #{status}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from department where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from department where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

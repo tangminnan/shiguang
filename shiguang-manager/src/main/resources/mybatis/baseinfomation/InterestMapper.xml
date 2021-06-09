@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.baseinfomation.dao.InterestDao">
+
+    <select id="get" resultType="com.shiguang.baseinfomation.domain.InterestDO">
+		select `id`,`interest_number`,`imterest_name` from interest where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.baseinfomation.domain.InterestDO">
+        select `id`,`interest_number`,`imterest_name` from interest
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="interestNumber != null and interestNumber != ''"> and interest_number = #{interestNumber} </if>
+            <if test="imterestName != null and imterestName != ''"> and imterest_name = #{imterestName} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from interest
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="interestNumber != null and interestNumber != ''"> and interest_number = #{interestNumber} </if>
+            <if test="imterestName != null and imterestName != ''"> and imterest_name = #{imterestName} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.baseinfomation.domain.InterestDO" useGeneratedKeys="true" keyProperty="id">
+		insert into interest
+		(
+			`interest_number`,
+			`imterest_name`
+		)
+		values
+		(
+			#{interestNumber},
+			#{imterestName}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.baseinfomation.domain.InterestDO">
+        update interest
+        <set>
+            <if test="interestNumber != null">`interest_number` = #{interestNumber}, </if>
+            <if test="imterestName != null">`imterest_name` = #{imterestName}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from interest where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from interest where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
