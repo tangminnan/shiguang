@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.mfrs.dao.MfrsDao">
+
+	<select id="get" resultType="com.shiguang.mfrs.domain.MfrsDO">
+		select `mfrsid`,`mfrsnum`,`mfrsname`,`mfrscontacts`,`mfrsrealname`,`mfrstelephone`,`mfrsphone`,`goodsid`,`mfrsfax`,`mfrsaddress`,`payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday` from c_mfrs where mfrsid = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.mfrs.domain.MfrsDO">
+		select `mfrsid`,`mfrsnum`,`mfrsname`,`mfrscontacts`,`mfrsrealname`,`mfrstelephone`,`mfrsphone`,`goodsid`,`mfrsfax`,`mfrsaddress`,`payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday` from c_mfrs
+        <where>  
+		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+		  		  <if test="mfrsnum != null and mfrsnum != ''"> and mfrsnum = #{mfrsnum} </if>
+		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+		  		  <if test="mfrscontacts != null and mfrscontacts != ''"> and mfrscontacts = #{mfrscontacts} </if>
+		  		  <if test="mfrsrealname != null and mfrsrealname != ''"> and mfrsrealname = #{mfrsrealname} </if>
+		  		  <if test="mfrstelephone != null and mfrstelephone != ''"> and mfrstelephone = #{mfrstelephone} </if>
+		  		  <if test="mfrsphone != null and mfrsphone != ''"> and mfrsphone = #{mfrsphone} </if>
+		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
+		  		  <if test="mfrsfax != null and mfrsfax != ''"> and mfrsfax = #{mfrsfax} </if>
+		  		  <if test="mfrsaddress != null and mfrsaddress != ''"> and mfrsaddress = #{mfrsaddress} </if>
+		  		  <if test="payid != null and payid != ''"> and payid = #{payid} </if>
+		  		  <if test="invoiceid != null and invoiceid != ''"> and invoiceid = #{invoiceid} </if>
+		  		  <if test="creditcode != null and creditcode != ''"> and creditcode = #{creditcode} </if>
+		  		  <if test="creditcodeday != null and creditcodeday != ''"> and creditcodeday = #{creditcodeday} </if>
+		  		  <if test="medicinecode != null and medicinecode != ''"> and medicinecode = #{medicinecode} </if>
+		  		  <if test="medicinecodeday != null and medicinecodeday != ''"> and medicinecodeday = #{medicinecodeday} </if>
+		  		  <if test="productscode != null and productscode != ''"> and productscode = #{productscode} </if>
+		  		  <if test="productscodeday != null and productscodeday != ''"> and productscodeday = #{productscodeday} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by mfrsid desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from c_mfrs
+		 <where>  
+		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+		  		  <if test="mfrsnum != null and mfrsnum != ''"> and mfrsnum = #{mfrsnum} </if>
+		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+		  		  <if test="mfrscontacts != null and mfrscontacts != ''"> and mfrscontacts = #{mfrscontacts} </if>
+		  		  <if test="mfrsrealname != null and mfrsrealname != ''"> and mfrsrealname = #{mfrsrealname} </if>
+		  		  <if test="mfrstelephone != null and mfrstelephone != ''"> and mfrstelephone = #{mfrstelephone} </if>
+		  		  <if test="mfrsphone != null and mfrsphone != ''"> and mfrsphone = #{mfrsphone} </if>
+		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
+		  		  <if test="mfrsfax != null and mfrsfax != ''"> and mfrsfax = #{mfrsfax} </if>
+		  		  <if test="mfrsaddress != null and mfrsaddress != ''"> and mfrsaddress = #{mfrsaddress} </if>
+		  		  <if test="payid != null and payid != ''"> and payid = #{payid} </if>
+		  		  <if test="invoiceid != null and invoiceid != ''"> and invoiceid = #{invoiceid} </if>
+		  		  <if test="creditcode != null and creditcode != ''"> and creditcode = #{creditcode} </if>
+		  		  <if test="creditcodeday != null and creditcodeday != ''"> and creditcodeday = #{creditcodeday} </if>
+		  		  <if test="medicinecode != null and medicinecode != ''"> and medicinecode = #{medicinecode} </if>
+		  		  <if test="medicinecodeday != null and medicinecodeday != ''"> and medicinecodeday = #{medicinecodeday} </if>
+		  		  <if test="productscode != null and productscode != ''"> and productscode = #{productscode} </if>
+		  		  <if test="productscodeday != null and productscodeday != ''"> and productscodeday = #{productscodeday} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.mfrs.domain.MfrsDO" useGeneratedKeys="true" keyProperty="mfrsid">
+		insert into c_mfrs
+		(
+			`mfrsnum`, 
+			`mfrsname`, 
+			`mfrscontacts`, 
+			`mfrsrealname`, 
+			`mfrstelephone`, 
+			`mfrsphone`, 
+			`goodsid`, 
+			`mfrsfax`, 
+			`mfrsaddress`, 
+			`payid`, 
+			`invoiceid`, 
+			`creditcode`, 
+			`creditcodeday`, 
+			`medicinecode`, 
+			`medicinecodeday`, 
+			`productscode`, 
+			`productscodeday`
+		)
+		values
+		(
+			#{mfrsnum}, 
+			#{mfrsname}, 
+			#{mfrscontacts}, 
+			#{mfrsrealname}, 
+			#{mfrstelephone}, 
+			#{mfrsphone}, 
+			#{goodsid}, 
+			#{mfrsfax}, 
+			#{mfrsaddress}, 
+			#{payid}, 
+			#{invoiceid}, 
+			#{creditcode}, 
+			#{creditcodeday}, 
+			#{medicinecode}, 
+			#{medicinecodeday}, 
+			#{productscode}, 
+			#{productscodeday}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.mfrs.domain.MfrsDO">
+		update c_mfrs 
+		<set>
+			<if test="mfrsnum != null">`mfrsnum` = #{mfrsnum}, </if>
+			<if test="mfrsname != null">`mfrsname` = #{mfrsname}, </if>
+			<if test="mfrscontacts != null">`mfrscontacts` = #{mfrscontacts}, </if>
+			<if test="mfrsrealname != null">`mfrsrealname` = #{mfrsrealname}, </if>
+			<if test="mfrstelephone != null">`mfrstelephone` = #{mfrstelephone}, </if>
+			<if test="mfrsphone != null">`mfrsphone` = #{mfrsphone}, </if>
+			<if test="goodsid != null">`goodsid` = #{goodsid}, </if>
+			<if test="mfrsfax != null">`mfrsfax` = #{mfrsfax}, </if>
+			<if test="mfrsaddress != null">`mfrsaddress` = #{mfrsaddress}, </if>
+			<if test="payid != null">`payid` = #{payid}, </if>
+			<if test="invoiceid != null">`invoiceid` = #{invoiceid}, </if>
+			<if test="creditcode != null">`creditcode` = #{creditcode}, </if>
+			<if test="creditcodeday != null">`creditcodeday` = #{creditcodeday}, </if>
+			<if test="medicinecode != null">`medicinecode` = #{medicinecode}, </if>
+			<if test="medicinecodeday != null">`medicinecodeday` = #{medicinecodeday}, </if>
+			<if test="productscode != null">`productscode` = #{productscode}, </if>
+			<if test="productscodeday != null">`productscodeday` = #{productscodeday}</if>
+		</set>
+		where mfrsid = #{mfrsid}
+	</update>
+	
+	<delete id="remove">
+		delete from c_mfrs where mfrsid = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from c_mfrs where mfrsid in 
+		<foreach item="mfrsid" collection="array" open="(" separator="," close=")">
+			#{mfrsid}
+		</foreach>
+	</delete>
+
+</mapper>
