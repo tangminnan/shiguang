@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.mfrs.dao.BrandDao">
+
+	<select id="get" resultType="com.shiguang.mfrs.domain.BrandDO">
+		select `brandid`,`brandnum`,`brandname`,`mfrsname`,`goodsid`,`address`,`unitid`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,`productionkey` from c_brand where brandid = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.mfrs.domain.BrandDO">
+		select `brandid`,`brandnum`,`brandname`,`mfrsname`,`goodsid`,`address`,`unitid`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,`productionkey` from c_brand
+        <where>  
+		  		  <if test="brandid != null and brandid != ''"> and brandid = #{brandid} </if>
+		  		  <if test="brandnum != null and brandnum != ''"> and brandnum = #{brandnum} </if>
+		  		  <if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
+		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="unitid != null and unitid != ''"> and unitid = #{unitid} </if>
+		  		  <if test="payid != null and payid != ''"> and payid = #{payid} </if>
+		  		  <if test="batchid != null and batchid != ''"> and batchid = #{batchid} </if>
+		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
+		  		  <if test="money != null and money != ''"> and money = #{money} </if>
+		  		  <if test="shorthandcode != null and shorthandcode != ''"> and shorthandcode = #{shorthandcode} </if>
+		  		  <if test="productionkey != null and productionkey != ''"> and productionkey = #{productionkey} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by brandid desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from c_brand
+		 <where>  
+		  		  <if test="brandid != null and brandid != ''"> and brandid = #{brandid} </if>
+		  		  <if test="brandnum != null and brandnum != ''"> and brandnum = #{brandnum} </if>
+		  		  <if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
+		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="unitid != null and unitid != ''"> and unitid = #{unitid} </if>
+		  		  <if test="payid != null and payid != ''"> and payid = #{payid} </if>
+		  		  <if test="batchid != null and batchid != ''"> and batchid = #{batchid} </if>
+		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
+		  		  <if test="money != null and money != ''"> and money = #{money} </if>
+		  		  <if test="shorthandcode != null and shorthandcode != ''"> and shorthandcode = #{shorthandcode} </if>
+		  		  <if test="productionkey != null and productionkey != ''"> and productionkey = #{productionkey} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.mfrs.domain.BrandDO" useGeneratedKeys="true" keyProperty="brandid">
+		insert into c_brand
+		(
+			`brandnum`, 
+			`brandname`, 
+			`mfrsname`, 
+			`goodsid`, 
+			`address`, 
+			`unitid`, 
+			`payid`, 
+			`batchid`, 
+			`factory`, 
+			`money`, 
+			`shorthandcode`, 
+			`productionkey`
+		)
+		values
+		(
+			#{brandnum}, 
+			#{brandname}, 
+			#{mfrsname}, 
+			#{goodsid}, 
+			#{address}, 
+			#{unitid}, 
+			#{payid}, 
+			#{batchid}, 
+			#{factory}, 
+			#{money}, 
+			#{shorthandcode}, 
+			#{productionkey}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.mfrs.domain.BrandDO">
+		update c_brand 
+		<set>
+			<if test="brandnum != null">`brandnum` = #{brandnum}, </if>
+			<if test="brandname != null">`brandname` = #{brandname}, </if>
+			<if test="mfrsname != null">`mfrsname` = #{mfrsname}, </if>
+			<if test="goodsid != null">`goodsid` = #{goodsid}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="unitid != null">`unitid` = #{unitid}, </if>
+			<if test="payid != null">`payid` = #{payid}, </if>
+			<if test="batchid != null">`batchid` = #{batchid}, </if>
+			<if test="factory != null">`factory` = #{factory}, </if>
+			<if test="money != null">`money` = #{money}, </if>
+			<if test="shorthandcode != null">`shorthandcode` = #{shorthandcode}, </if>
+			<if test="productionkey != null">`productionkey` = #{productionkey}</if>
+		</set>
+		where brandid = #{brandid}
+	</update>
+	
+	<delete id="remove">
+		delete from c_brand where brandid = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from c_brand where brandid in 
+		<foreach item="brandid" collection="array" open="(" separator="," close=")">
+			#{brandid}
+		</foreach>
+	</delete>
+
+</mapper>
