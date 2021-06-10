@@ -4,19 +4,28 @@
 <mapper namespace="com.shiguang.baseinfomation.dao.DepartmentDao">
 
     <select id="get" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
-		select `id`,`depart_number`,`depart_name`,`depart_type`,`company`,`person_charge`,`status` from department where id = #{value}
+		select `id`,`depart_number`,`depart_name`,`depart_full_name`,`depart_tel`,`depart_address`,`depart_type`,`company`,`person_charge`,`status`,`fanuc`,`mirror`,`sell_ways`,`same_sell`,`read_card`,`company_name` from department where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
-        select `id`,`depart_number`,`depart_name`,`depart_type`,`company`,`person_charge`,`status` from department
+        select `id`,`depart_number`,`depart_name`,`depart_full_name`,`depart_tel`,`depart_address`,`depart_type`,`company`,`person_charge`,`status`,`fanuc`,`mirror`,`sell_ways`,`same_sell`,`read_card`,`company_name` from department
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
             <if test="departName != null and departName != ''"> and depart_name = #{departName} </if>
+            <if test="departFullName != null and departFullName != ''"> and depart_full_name = #{departFullName} </if>
+            <if test="departTel != null and departTel != ''"> and depart_tel = #{departTel} </if>
+            <if test="departAddress != null and departAddress != ''"> and depart_address = #{departAddress} </if>
             <if test="departType != null and departType != ''"> and depart_type = #{departType} </if>
             <if test="company != null and company != ''"> and company = #{company} </if>
             <if test="personCharge != null and personCharge != ''"> and person_charge = #{personCharge} </if>
             <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="fanuc != null and fanuc != ''"> and fanuc = #{fanuc} </if>
+            <if test="mirror != null and mirror != ''"> and mirror = #{mirror} </if>
+            <if test="sellWays != null and sellWays != ''"> and sell_ways = #{sellWays} </if>
+            <if test="sameSell != null and sameSell != ''"> and same_sell = #{sameSell} </if>
+            <if test="readCard != null and readCard != ''"> and read_card = #{readCard} </if>
+            <if test="companyName != null and companyName != ''"> and company_name = #{companyName} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -37,10 +46,19 @@
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
             <if test="departName != null and departName != ''"> and depart_name = #{departName} </if>
+            <if test="departFullName != null and departFullName != ''"> and depart_full_name = #{departFullName} </if>
+            <if test="departTel != null and departTel != ''"> and depart_tel = #{departTel} </if>
+            <if test="departAddress != null and departAddress != ''"> and depart_address = #{departAddress} </if>
             <if test="departType != null and departType != ''"> and depart_type = #{departType} </if>
             <if test="company != null and company != ''"> and company = #{company} </if>
             <if test="personCharge != null and personCharge != ''"> and person_charge = #{personCharge} </if>
             <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="fanuc != null and fanuc != ''"> and fanuc = #{fanuc} </if>
+            <if test="mirror != null and mirror != ''"> and mirror = #{mirror} </if>
+            <if test="sellWays != null and sellWays != ''"> and sell_ways = #{sellWays} </if>
+            <if test="sameSell != null and sameSell != ''"> and same_sell = #{sameSell} </if>
+            <if test="readCard != null and readCard != ''"> and read_card = #{readCard} </if>
+            <if test="companyName != null and companyName != ''"> and company_name = #{companyName} </if>
         </where>
     </select>
 
@@ -49,19 +67,37 @@
 		(
 			`depart_number`,
 			`depart_name`,
+			`depart_full_name`,
+			`depart_tel`,
+			`depart_address`,
 			`depart_type`,
 			`company`,
 			`person_charge`,
-			`status`
+			`status`,
+			`fanuc`,
+			`mirror`,
+			`sell_ways`,
+			`same_sell`,
+			`read_card`,
+			`company_name`
 		)
 		values
 		(
 			#{departNumber},
 			#{departName},
+			#{departFullName},
+			#{departTel},
+			#{departAddress},
 			#{departType},
 			#{company},
 			#{personCharge},
-			#{status}
+			#{status},
+			#{fanuc},
+			#{mirror},
+			#{sellWays},
+			#{sameSell},
+			#{readCard},
+			#{companyName}
 		)
 	</insert>
 
@@ -70,10 +106,19 @@
         <set>
             <if test="departNumber != null">`depart_number` = #{departNumber}, </if>
             <if test="departName != null">`depart_name` = #{departName}, </if>
+            <if test="departFullName != null">`depart_full_name` = #{departFullName}, </if>
+            <if test="departTel != null">`depart_tel` = #{departTel}, </if>
+            <if test="departAddress != null">`depart_address` = #{departAddress}, </if>
             <if test="departType != null">`depart_type` = #{departType}, </if>
             <if test="company != null">`company` = #{company}, </if>
             <if test="personCharge != null">`person_charge` = #{personCharge}, </if>
-            <if test="status != null">`status` = #{status}</if>
+            <if test="status != null">`status` = #{status}, </if>
+            <if test="fanuc != null">`fanuc` = #{fanuc}, </if>
+            <if test="mirror != null">`mirror` = #{mirror}, </if>
+            <if test="sellWays != null">`sell_ways` = #{sellWays}, </if>
+            <if test="sameSell != null">`same_sell` = #{sameSell}, </if>
+            <if test="readCard != null">`read_card` = #{readCard}, </if>
+            <if test="companyName != null">`company_name` = #{companyName}</if>
         </set>
         where id = #{id}
     </update>

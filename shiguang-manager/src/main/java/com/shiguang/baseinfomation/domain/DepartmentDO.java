@@ -1,6 +1,7 @@
 package com.shiguang.baseinfomation.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class DepartmentDO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -11,6 +12,12 @@ public class DepartmentDO implements Serializable {
     private String departNumber;
     //部门名称
     private String departName;
+    //部门全称
+    private String departFullName;
+    //部门电话
+    private String departTel;
+    //部门地址
+    private String departAddress;
     //部门类型
     private String departType;
     //所属公司
@@ -19,6 +26,18 @@ public class DepartmentDO implements Serializable {
     private String personCharge;
     //部门状态(0:禁用1:启用)
     private Long status;
+    //所属加工中心
+    private String fanuc;
+    //成品取镜时间
+    private Long mirror;
+    //销售方式(0:验光+销售+收银1:验光+销售)
+    private Long sellWays;
+    //隐形和护理液同单销售(0:可以同单销售1:不可以同单销售2:未设置)
+    private Long sameSell;
+    //读取读卡器方式
+    private Long readCard;
+    //公司名称
+    private String companyName;
 
     /**
      * 设置：
@@ -55,6 +74,42 @@ public class DepartmentDO implements Serializable {
      */
     public String getDepartName() {
         return departName;
+    }
+    /**
+     * 设置：部门全称
+     */
+    public void setDepartFullName(String departFullName) {
+        this.departFullName = departFullName;
+    }
+    /**
+     * 获取：部门全称
+     */
+    public String getDepartFullName() {
+        return departFullName;
+    }
+    /**
+     * 设置：部门电话
+     */
+    public void setDepartTel(String departTel) {
+        this.departTel = departTel;
+    }
+    /**
+     * 获取：部门电话
+     */
+    public String getDepartTel() {
+        return departTel;
+    }
+    /**
+     * 设置：部门地址
+     */
+    public void setDepartAddress(String departAddress) {
+        this.departAddress = departAddress;
+    }
+    /**
+     * 获取：部门地址
+     */
+    public String getDepartAddress() {
+        return departAddress;
     }
     /**
      * 设置：部门类型
@@ -103,5 +158,77 @@ public class DepartmentDO implements Serializable {
      */
     public Long getStatus() {
         return status;
+    }
+    /**
+     * 设置：所属加工中心
+     */
+    public void setFanuc(String fanuc) {
+        this.fanuc = fanuc;
+    }
+    /**
+     * 获取：所属加工中心
+     */
+    public String getFanuc() {
+        return fanuc;
+    }
+    /**
+     * 设置：成品取镜时间
+     */
+    public void setMirror(Long mirror) {
+        this.mirror = mirror;
+    }
+    /**
+     * 获取：成品取镜时间
+     */
+    public Long getMirror() {
+        return mirror;
+    }
+    /**
+     * 设置：销售方式(0:验光+销售+收银1:验光+销售)
+     */
+    public void setSellWays(Long sellWays) {
+        this.sellWays = sellWays;
+    }
+    /**
+     * 获取：销售方式(0:验光+销售+收银1:验光+销售)
+     */
+    public Long getSellWays() {
+        return sellWays;
+    }
+    /**
+     * 设置：隐形和护理液同单销售(0:可以同单销售1:不可以同单销售2:未设置)
+     */
+    public void setSameSell(Long sameSell) {
+        this.sameSell = sameSell;
+    }
+    /**
+     * 获取：隐形和护理液同单销售(0:可以同单销售1:不可以同单销售2:未设置)
+     */
+    public Long getSameSell() {
+        return sameSell;
+    }
+    /**
+     * 设置：读取读卡器方式
+     */
+    public void setReadCard(Long readCard) {
+        this.readCard = readCard;
+    }
+    /**
+     * 获取：读取读卡器方式
+     */
+    public Long getReadCard() {
+        return readCard;
+    }
+    /**
+     * 设置：公司名称
+     */
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+    /**
+     * 获取：公司名称
+     */
+    public String getCompanyName() {
+        return companyName;
     }
 }
