@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.baseinfomation.dao.ReadDao">
+    <select id="get" resultType="com.shiguang.baseinfomation.domain.ReadDO">
+		select `id`,`card_id`,`card_name`,`area_code`,`block_code`,`simple_type`,`simple_value`,`data_format`,`order_field`,`is_cut`,`remark` from card_read where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.baseinfomation.domain.ReadDO">
+        select `id`,`card_id`,`card_name`,`area_code`,`block_code`,`simple_type`,`simple_value`,`data_format`,`order_field`,`is_cut`,`remark` from card_read
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="cardId != null and cardId != ''"> and card_id = #{cardId} </if>
+            <if test="cardName != null and cardName != ''"> and card_name = #{cardName} </if>
+            <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
+            <if test="blockCode != null and blockCode != ''"> and block_code = #{blockCode} </if>
+            <if test="simpleType != null and simpleType != ''"> and simple_type = #{simpleType} </if>
+            <if test="simpleValue != null and simpleValue != ''"> and simple_value = #{simpleValue} </if>
+            <if test="dataFormat != null and dataFormat != ''"> and data_format = #{dataFormat} </if>
+            <if test="orderField != null and orderField != ''"> and order_field = #{orderField} </if>
+            <if test="isCut != null and isCut != ''"> and is_cut = #{isCut} </if>
+            <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from card_read
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="cardId != null and cardId != ''"> and card_id = #{cardId} </if>
+            <if test="cardName != null and cardName != ''"> and card_name = #{cardName} </if>
+            <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
+            <if test="blockCode != null and blockCode != ''"> and block_code = #{blockCode} </if>
+            <if test="simpleType != null and simpleType != ''"> and simple_type = #{simpleType} </if>
+            <if test="simpleValue != null and simpleValue != ''"> and simple_value = #{simpleValue} </if>
+            <if test="dataFormat != null and dataFormat != ''"> and data_format = #{dataFormat} </if>
+            <if test="orderField != null and orderField != ''"> and order_field = #{orderField} </if>
+            <if test="isCut != null and isCut != ''"> and is_cut = #{isCut} </if>
+            <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.baseinfomation.domain.ReadDO" useGeneratedKeys="true" keyProperty="id">
+		insert into card_read
+		(
+			`card_id`,
+			`card_name`,
+			`area_code`,
+			`block_code`,
+			`simple_type`,
+			`simple_value`,
+			`data_format`,
+			`order_field`,
+			`is_cut`,
+			`remark`
+		)
+		values
+		(
+			#{cardId},
+			#{cardName},
+			#{areaCode},
+			#{blockCode},
+			#{simpleType},
+			#{simpleValue},
+			#{dataFormat},
+			#{orderField},
+			#{isCut},
+			#{remark}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.baseinfomation.domain.ReadDO">
+        update card_read
+        <set>
+            <if test="cardId != null">`card_id` = #{cardId}, </if>
+            <if test="cardName != null">`card_name` = #{cardName}, </if>
+            <if test="areaCode != null">`area_code` = #{areaCode}, </if>
+            <if test="blockCode != null">`block_code` = #{blockCode}, </if>
+            <if test="simpleType != null">`simple_type` = #{simpleType}, </if>
+            <if test="simpleValue != null">`simple_value` = #{simpleValue}, </if>
+            <if test="dataFormat != null">`data_format` = #{dataFormat}, </if>
+            <if test="orderField != null">`order_field` = #{orderField}, </if>
+            <if test="isCut != null">`is_cut` = #{isCut}, </if>
+            <if test="remark != null">`remark` = #{remark}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from card_read where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from card_read where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
