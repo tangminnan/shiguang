@@ -5,7 +5,6 @@ $().ready(function() {
 $.validator.setDefaults({
 	submitHandler : function() {
 		update();
-		updates();
 	}
 });
 function update() {
