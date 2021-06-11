@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 制造商维护表
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-09 11:19:50
+ * @date 2021-06-10 11:33:55
  */
 @Mapper
 public interface MfrsDao {

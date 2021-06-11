@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.mfrs.dao.MaterialDao">
+
+	<select id="get" resultType="com.shiguang.mfrs.domain.MaterialDO">
+		select `materialid`,`materialnum`,`materialname` from c_material where materialid = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.mfrs.domain.MaterialDO">
+		select `materialid`,`materialnum`,`materialname` from c_material
+        <where>  
+		  		  <if test="materialid != null and materialid != ''"> and materialid = #{materialid} </if>
+		  		  <if test="materialnum != null and materialnum != ''"> and materialnum = #{materialnum} </if>
+		  		  <if test="materialname != null and materialname != ''"> and materialname = #{materialname} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by materialid desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from c_material
+		 <where>  
+		  		  <if test="materialid != null and materialid != ''"> and materialid = #{materialid} </if>
+		  		  <if test="materialnum != null and materialnum != ''"> and materialnum = #{materialnum} </if>
+		  		  <if test="materialname != null and materialname != ''"> and materialname = #{materialname} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.mfrs.domain.MaterialDO">
+		insert into c_material
+		(
+			`materialid`, 
+			`materialnum`, 
+			`materialname`
+		)
+		values
+		(
+			#{materialid}, 
+			#{materialnum}, 
+			#{materialname}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.mfrs.domain.MaterialDO">
+		update c_material 
+		<set>
+			<if test="materialnum != null">`materialnum` = #{materialnum}, </if>
+			<if test="materialname != null">`materialname` = #{materialname}</if>
+		</set>
+		where materialid = #{materialid}
+	</update>
+	
+	<delete id="remove">
+		delete from c_material where materialid = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from c_material where materialid in 
+		<foreach item="materialid" collection="array" open="(" separator="," close=")">
+			#{materialid}
+		</foreach>
+	</delete>
+
+</mapper>

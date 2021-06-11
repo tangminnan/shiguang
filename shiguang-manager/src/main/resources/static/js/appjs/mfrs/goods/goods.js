@@ -47,18 +47,19 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
-									field : 'goodsid', 
-									title : '商品id' 
+								// 								{
+								// 	field : 'goodsid',
+								// 	title : '商品id'
+								// },
+								{
+									field : 'goodsnum',
+									title : '商品代码'
 								},
 																{
 									field : 'goodsname', 
 									title : '商品类别' 
 								},
-																{
-									field : 'goodsnum', 
-									title : '商品代码' 
-								},
+
 																{
 									title : '操作',
 									field : 'id',

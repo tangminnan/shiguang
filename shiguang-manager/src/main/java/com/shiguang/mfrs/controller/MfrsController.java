@@ -36,77 +36,77 @@ import com.shiguang.common.utils.R;
 @Controller
 @RequestMapping("/mfrs/mfrs")
 public class MfrsController {
-	@Autowired
-	private MfrsService mfrsService;
-	@Autowired
-	private GoodsService goodsService;
-	@Autowired
-	private PayService payService;
-	@Autowired
-	private InvoiceService invoiceService;
-	@Autowired
-	private MfrsGoodsService mfrsGoodsService;
+    @Autowired
+    private MfrsService mfrsService;
+    @Autowired
+    private GoodsService goodsService;
+    @Autowired
+    private PayService payService;
+    @Autowired
+    private InvoiceService invoiceService;
 
-	@GetMapping()
-	@RequiresPermissions("mfrs:mfrs:mfrs")
-	String Mfrs(){
-	    return "mfrs/mfrs/mfrs";
-	}
 
-	@ResponseBody
-	@GetMapping("/list")
-	@RequiresPermissions("mfrs:mfrs:mfrs")
-	public PageUtils list(@RequestParam Map<String, Object> params){
-		//查询列表数据
+    @GetMapping()
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    String Mfrs() {
+        return "mfrs/mfrs/mfrs";
+    }
+
+    @ResponseBody
+    @GetMapping("/list")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils list(@RequestParam Map<String, Object> params) {
+        //查询列表数据
         Query query = new Query(params);
-		List<MfrsDO> mfrsList = mfrsService.list(query);
-		int total = mfrsService.count(query);
-		PageUtils pageUtils = new PageUtils(mfrsList, total);
-		return pageUtils;
-	}
+        List<MfrsDO> mfrsList = mfrsService.list(query);
+        int total = mfrsService.count(query);
+        PageUtils pageUtils = new PageUtils(mfrsList, total);
+        return pageUtils;
+    }
 
-	@GetMapping("/add")
-	@RequiresPermissions("mfrs:mfrs:add")
-	String add(Model model){
-		Map<String,Object> map = new HashMap<>();
-		//商品
-		List<GoodsDO> goodsDOList = goodsService.list(map);
-		model.addAttribute("goodsDOList",goodsDOList);
-		//支付
-		List<PayDO> payDOList = payService.list(map);
-		model.addAttribute("payDOList",payDOList);
-		//开票
-		List<InvoiceDO> invoiceDOList = invoiceService.list(map);
-		model.addAttribute("invoiceDOList",invoiceDOList);
-	    return "mfrs/mfrs/add";
-	}
+    @GetMapping("/add")
+    @RequiresPermissions("mfrs:mfrs:add")
+    String add(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //商品
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
+        //支付
+        List<PayDO> payDOList = payService.list(map);
+        model.addAttribute("payDOList", payDOList);
+        //开票
+        List<InvoiceDO> invoiceDOList = invoiceService.list(map);
+        model.addAttribute("invoiceDOList", invoiceDOList);
+        return "mfrs/mfrs/add";
+    }
 
-	@GetMapping("/edit/{mfrsid}")
-	@RequiresPermissions("mfrs:mfrs:edit")
-	String edit(@PathVariable("mfrsid") Integer mfrsid,Model model){
-		MfrsDO mfrs = mfrsService.get(mfrsid);
-		model.addAttribute("mfrs", mfrs);
-		Map<String,Object> map = new HashMap<>();
-		//商品
-		List<GoodsDO> goodsDOList = goodsService.list(map);
-		model.addAttribute("goodsDOList",goodsDOList);
-		//支付
-		List<PayDO> payDOList = payService.list(map);
-		model.addAttribute("payDOList",payDOList);
-		//开票
-		List<InvoiceDO> invoiceDOList = invoiceService.list(map);
-		model.addAttribute("invoiceDOList",invoiceDOList);
-	    return "mfrs/mfrs/edit";
-	}
+    @GetMapping("/edit/{mfrsid}")
+    @RequiresPermissions("mfrs:mfrs:edit")
+    String edit(@PathVariable("mfrsid") Integer mfrsid, Model model) {
+        MfrsDO mfrs = mfrsService.get(mfrsid);
+        model.addAttribute("mfrs", mfrs);
+        Map<String, Object> map = new HashMap<>();
+        //商品
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
+        //支付
+        List<PayDO> payDOList = payService.list(map);
+        model.addAttribute("payDOList", payDOList);
+        //开票
+        List<InvoiceDO> invoiceDOList = invoiceService.list(map);
+        model.addAttribute("invoiceDOList", invoiceDOList);
+        return "mfrs/mfrs/edit";
+    }
 
-	/**
-	 * 保存
-	 */
-	@ResponseBody
-	@PostMapping("/save")
-	@RequiresPermissions("mfrs:mfrs:add")
-	public R save( MfrsDO mfrs){
-		mfrs.getGoodsid();
+    /**
+     * 保存
+     */
+    @ResponseBody
+    @PostMapping("/save")
+    @RequiresPermissions("mfrs:mfrs:add")
+    public R save(MfrsDO mfrs) {
+
+//     mfrs.getGoodsid();
 //
 //		for (){
 //			MfrsGoodsDO mfrsGoodsDO = new MfrsGoodsDO();
@@ -114,44 +114,45 @@ public class MfrsController {
 //			mfrsGoodsDO.setGoodsid();
 //			mfrsGoodsService.save(mfrsGoodsDO);
 //		}
-		if(mfrsService.save(mfrs)>0){
-			return R.ok();
-		}
-		return R.error();
-	}
-	/**
-	 * 修改
-	 */
-	@ResponseBody
-	@RequestMapping("/update")
-	@RequiresPermissions("mfrs:mfrs:edit")
-	public R update( MfrsDO mfrs){
-		mfrsService.update(mfrs);
-		return R.ok();
-	}
+        if (mfrsService.save(mfrs) > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
 
-	/**
-	 * 删除
-	 */
-	@PostMapping( "/remove")
-	@ResponseBody
-	@RequiresPermissions("mfrs:mfrs:remove")
-	public R remove( Integer mfrsid){
-		if(mfrsService.remove(mfrsid)>0){
-		return R.ok();
-		}
-		return R.error();
-	}
+    /**
+     * 修改
+     */
+    @ResponseBody
+    @RequestMapping("/update")
+    @RequiresPermissions("mfrs:mfrs:edit")
+    public R update(MfrsDO mfrs) {
+        mfrsService.update(mfrs);
+        return R.ok();
+    }
 
-	/**
-	 * 删除
-	 */
-	@PostMapping( "/batchRemove")
-	@ResponseBody
-	@RequiresPermissions("mfrs:mfrs:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] mfrsids){
-		mfrsService.batchRemove(mfrsids);
-		return R.ok();
-	}
+    /**
+     * 删除
+     */
+    @PostMapping("/remove")
+    @ResponseBody
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R remove(Integer mfrsid) {
+        if (mfrsService.remove(mfrsid) > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    /**
+     * 删除
+     */
+    @PostMapping("/batchRemove")
+    @ResponseBody
+    @RequiresPermissions("mfrs:mfrs:batchRemove")
+    public R remove(@RequestParam("ids[]") Integer[] mfrsids) {
+        mfrsService.batchRemove(mfrsids);
+        return R.ok();
+    }
 
 }

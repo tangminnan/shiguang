@@ -205,7 +205,7 @@ public class GenUtils {
         }
 
         if (template.contains("Mapper.xml.vm")) {
-            return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + packageName + File.separator + className + "Mapper.xml";
+            return "main" + File.separator + "resources" + File.separator + "mybatis" + File.separator + packageName + File.separator + className + "Mapper.xml";
         }
 
         if (template.contains("list.html.vm")) {
