@@ -71,6 +71,13 @@ public class CardTypeController {
     @PostMapping("/save")
     @RequiresPermissions("information:cardType:add")
     public R save(CardTypeDO type){
+        String cardName = type.getCardName();
+        Map<String,Object> map = new HashMap<>();
+        map.put("cardName",cardName);
+        List<CardTypeDO> list = typeService.list(map);
+        if (list.size() > 0){
+            return R.error("会员卡名称已存在");
+        }
         if(typeService.save(type)>0){
             return R.ok();
         }

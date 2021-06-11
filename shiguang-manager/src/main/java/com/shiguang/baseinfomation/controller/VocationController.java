@@ -1,5 +1,6 @@
 package com.shiguang.baseinfomation.controller;
 
+import com.shiguang.baseinfomation.domain.PersonSortDO;
 import com.shiguang.baseinfomation.domain.VocationDO;
 import com.shiguang.baseinfomation.service.VocationService;
 import com.shiguang.common.utils.PageUtils;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +61,13 @@ public class VocationController {
     @PostMapping("/save")
     @RequiresPermissions("information:vocation:add")
     public R save(VocationDO vocation){
+        String vocationNumber = vocation.getVocationNumber();
+        Map<String, Object> map = new HashMap<>();
+        map.put("vocationNumber",vocationNumber);
+        List<VocationDO> list = vocationService.list(map);
+        if (list.size() > 0){
+            return R.error("职业编码已存在");
+        }
         if(vocationService.save(vocation)>0){
             return R.ok();
         }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,6 +68,13 @@ public class PersonSortController {
     @PostMapping("/save")
     @RequiresPermissions("information:personSort:add")
     public R save(PersonSortDO sort){
+        String crowdNumber = sort.getCrowdNumber();
+        Map<String, Object> map = new HashMap<>();
+        map.put("crowdNumber",crowdNumber);
+        List<PersonSortDO> list = sortService.list(map);
+        if (list.size() > 0){
+            return R.error("人群编码已存在");
+        }
         if(sortService.save(sort)>0){
             return R.ok();
         }

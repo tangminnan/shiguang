@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +60,13 @@ public class InterestController {
     @PostMapping("/save")
     @RequiresPermissions("information:interest:add")
     public R save( InterestDO interest){
+        String interestNumber = interest.getInterestNumber();
+        Map<String, Object> map = new HashMap<>();
+        map.put("interestNumber",interestNumber);
+        List<InterestDO> list = interestService.list(map);
+        if (list.size() > 0){
+            return R.error("兴趣编码已存在");
+        }
         if(interestService.save(interest)>0){
             return R.ok();
         }

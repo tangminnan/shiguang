@@ -1,5 +1,6 @@
 package com.shiguang.baseinfomation.controller;
 
+import com.shiguang.baseinfomation.domain.PersonSortDO;
 import com.shiguang.baseinfomation.domain.ReadDO;
 import com.shiguang.baseinfomation.service.ReadService;
 import com.shiguang.common.utils.PageUtils;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +64,13 @@ public class ReadController {
     @PostMapping("/save")
     @RequiresPermissions("information:read:add")
     public R save( ReadDO read){
+        String cardId = read.getCardId();
+        Map<String, Object> map = new HashMap<>();
+        map.put("cardId",cardId);
+        List<ReadDO> list = readService.list(map);
+        if (list.size() > 0){
+            return R.error("读卡方式id已存在");
+        }
         if(readService.save(read)>0){
             return R.ok();
         }

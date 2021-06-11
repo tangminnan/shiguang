@@ -104,8 +104,8 @@ function load() {
 
                                     str +=' type="checkbox" onchange="updateEnable(' +row.id+ ',this)" value="' +row.id+ '" class="onoffswitch-checkbox" id="example1' +row.id+ '">  ';
                                     str +=' <label class="onoffswitch-label" for="example1' +row.id+ '">  ';
-                                    str +=' <span class="onoffswitch-inner"></span> ';
-                                    str +=' <span class="onoffswitch-switch"></span> ';
+                                    str +=' <span class="onoffswitch-inner" ></span> ';
+                                    str +=' <span class="onoffswitch-switch" ></span> ';
                                     str +=' </label> ';
                                     str +=' </div>';
                                     str +=' </div>';

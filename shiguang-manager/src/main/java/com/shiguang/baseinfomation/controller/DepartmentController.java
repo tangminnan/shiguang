@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +60,13 @@ public class DepartmentController {
     @PostMapping("/save")
     @RequiresPermissions("information:department:add")
     public R save( DepartmentDO department){
+        Map<String,Object> map = new HashMap<>();
+        String departNumber = department.getDepartNumber();
+        map.put("departNumber",departNumber);
+        List<DepartmentDO> list = departmentService.list(map);
+        if (list.size() > 0){
+            return R.error("部门编码已存在");
+        }
         if(departmentService.save(department)>0){
             return R.ok();
         }

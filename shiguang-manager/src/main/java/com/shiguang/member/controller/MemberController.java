@@ -131,6 +131,13 @@ public class MemberController {
         member.setProvinceName(member.getProvinceName().substring(0,member.getProvinceName().length() -1));
         member.setCityName(member.getCityName().substring(0,member.getCityName().length()-1));
         member.setAreaName(member.getAreaName().substring(0,member.getAreaName().length()-1));
+        String cardNumber = member.getCardNumber();
+        Map<String, Object> map = new HashMap<>();
+        map.put("cardNumber",cardNumber);
+        List<MemberDO> list = memberService.list(map);
+        if (list.size() > 0){
+            return R.error("会员卡号已存在");
+        }
         if(memberService.save(member)>0){
             return R.ok();
         }
