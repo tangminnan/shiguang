@@ -1,6 +1,6 @@
 package com.shiguang.mfrs.dao;
 
-import com.shiguang.mfrs.domain.CompanyDO;
+import com.shiguang.mfrs.domain.ProvincesDO;
 
 import java.util.List;
 import java.util.Map;
@@ -8,23 +8,23 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 公司维护表
+ * 省份信息表
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-16 09:59:28
+ * @date 2021-06-15 17:18:59
  */
 @Mapper
-public interface CompanyDao {
+public interface ProvincesDao {
 
-	CompanyDO get(Integer id);
+	ProvincesDO get(Integer id);
 	
-	List<CompanyDO> list(Map<String,Object> map);
+	List<ProvincesDO> list(Map<String,Object> map);
 	
 	int count(Map<String,Object> map);
 	
-	int save(CompanyDO company);
+	int save(ProvincesDO provinces);
 	
-	int update(CompanyDO company);
+	int update(ProvincesDO provinces);
 	
 	int remove(Integer id);
 	

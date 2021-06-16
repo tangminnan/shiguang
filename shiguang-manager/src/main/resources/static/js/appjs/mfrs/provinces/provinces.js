@@ -1,5 +1,5 @@
 
-var prefix = "/mfrs/mfrs"
+var prefix = "/mfrs/provinces"
 $(function() {
 	load();
 });
@@ -32,12 +32,8 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset,
-                                //mfrsnum:$("#mfrsnum").val()
-                                mfrsnum: $('#mfrsnum').val(),
-                                mfrsname: $('#mfrsname').val(),
-                                goodsid: $('#goodsid').val(),
-                                invoiceid: $('#invoiceid').val()
+								offset:params.offset
+					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
 						},
@@ -51,95 +47,31 @@ function load() {
 								{
 									checkbox : true
 								},
-								// 								{
-								// 	field : 'mfrsid',
-								// 	title : '制造商id'
-								// },
 																{
-									field : 'mfrsnum', 
-									title : '制造商代码' 
+									field : 'id', 
+									title : '' 
 								},
 																{
-									field : 'mfrsname', 
-									title : '制造商简称' 
+									field : 'provinceid', 
+									title : '' 
 								},
 																{
-									field : 'mfrscontacts', 
-									title : '制造商联系人' 
+									field : 'province', 
+									title : '' 
 								},
-								// 								{
-								// 	field : 'mfrsrealname',
-								// 	title : '制造商全称'
-								// },
-								// 								{
-								// 	field : 'mfrstelephone',
-								// 	title : '制造商电话'
-								// },
-																{
-									field : 'mfrsphone', 
-									title : '联系人电话' 
-								},
-								// 								{
-								// 	field : 'goodsid',
-								// 	title : '商品类别'
-								// },
-																{
-									field : 'mfrsfax',
-									title : '制造商传真'
-								},
-																{
-									field : 'mfrsaddress', 
-									title : '制造商地址' 
-								},
-								// 								{
-								// 	field : 'payid',
-								// 	title : '采购结算方式'
-								// },
-								// 								{
-								// 	field : 'invoiceid',
-								// 	title : '开票状态(1开票、2不开票)'
-								// },
-								// 								{
-								// 	field : 'creditcode',
-								// 	title : '统一社会信用代码'
-								// },
-								// 								{
-								// 	field : 'creditcodeday',
-								// 	title : '统一社会信用代码效期'
-								// },
-								// 								{
-								// 	field : 'medicinecode',
-								// 	title : '医疗器械经营许可证号'
-								// },
-								// 								{
-								// 	field : 'medicinecodeday',
-								// 	title : '医疗器械经营许可证有效期'
-								// },
-								// 								{
-								// 	field : 'productscode',
-								// 	title : '全国工业品生产许可证号'
-								// },
-								// 								{
-								// 	field : 'productscodeday',
-								// 	title : '全国工业品生产许可证有效期'
-								// },
-								// 	{
-								// 		field : 'remarks',
-								// 		title : '备注'
-								// 	},
 																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.mfrsid
+												+ row.id
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.mfrsid
+												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.mfrsid
+												+ row.id
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
@@ -177,7 +109,7 @@ function remove(id) {
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'mfrsid' : id
+				'id' : id
 			},
 			success : function(r) {
 				if (r.code==0) {
@@ -206,7 +138,7 @@ function batchRemove() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['mfrsid'];
+			ids[i] = row['id'];
 		});
 		$.ajax({
 			type : 'POST',

@@ -38,17 +38,28 @@ import com.shiguang.common.utils.R;
 public class MfrsController {
     @Autowired
     private MfrsService mfrsService;
+    //商品类别
     @Autowired
     private GoodsService goodsService;
+    //支付方式
     @Autowired
     private PayService payService;
+    //开票状态
     @Autowired
     private InvoiceService invoiceService;
 
 
     @GetMapping()
     @RequiresPermissions("mfrs:mfrs:mfrs")
-    String Mfrs() {
+    String Mfrs(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //商品
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
+        //开票状态
+        List<InvoiceDO> invoiceDOList = invoiceService.list(map);
+        model.addAttribute("invoiceDOList",invoiceDOList);
+
         return "mfrs/mfrs/mfrs";
     }
 

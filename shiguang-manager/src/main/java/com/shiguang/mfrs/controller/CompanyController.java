@@ -1,10 +1,14 @@
 package com.shiguang.mfrs.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.shiguang.common.config.BootdoConfig;
 import com.shiguang.common.utils.FileUtil;
+import com.shiguang.mfrs.domain.GoodsDO;
+import com.shiguang.mfrs.domain.ProvincesDO;
+import com.shiguang.mfrs.service.ProvincesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -39,10 +43,17 @@ public class CompanyController {
 	private CompanyService companyService;
 	@Autowired
 	private BootdoConfig bootdoConfig;
+	//省
+	@Autowired
+	private ProvincesService provincesService;
 	
 	@GetMapping()
 	@RequiresPermissions("mfrs:company:company")
-	String Company(){
+	String Company(Model model ){
+		Map<String, Object> map = new HashMap<>();
+		//省
+		List<ProvincesDO> provincesDOList = provincesService.list(map);
+		model.addAttribute("provincesDOList", provincesDOList);
 	    return "mfrs/company/company";
 	}
 	
@@ -60,7 +71,11 @@ public class CompanyController {
 	
 	@GetMapping("/add")
 	@RequiresPermissions("mfrs:company:add")
-	String add(){
+	String add(Model model){
+		Map<String, Object> map = new HashMap<>();
+		//省
+		List<ProvincesDO> provincesDOList = provincesService.list(map);
+		model.addAttribute("provincesDOList", provincesDOList);
 	    return "mfrs/company/add";
 	}
 
@@ -69,6 +84,10 @@ public class CompanyController {
 	String edit(@PathVariable("id") Integer id,Model model){
 		CompanyDO company = companyService.get(id);
 		model.addAttribute("company", company);
+		Map<String,Object> map = new HashMap<>();
+		//省
+		List<ProvincesDO> provincesDOList = provincesService.list(map);
+		model.addAttribute("provincesDOList", provincesDOList);
 	    return "mfrs/company/edit";
 	}
 	
@@ -122,6 +141,9 @@ public class CompanyController {
 	@RequestMapping("/update")
 	@RequiresPermissions("mfrs:company:edit")
 	public R update( CompanyDO company){
+//		String str = company.getProvince();
+//		String str1=str.substring(0, str.indexOf(","));
+//		company.setProvince(str1);
 		try{
 			MultipartFile file = company.getImgFile();
 			if(file!=null && file.getSize()>0){
@@ -156,6 +178,7 @@ public class CompanyController {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		companyService.update(company);
 		return R.ok();
 	}

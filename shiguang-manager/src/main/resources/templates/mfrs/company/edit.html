@@ -27,15 +27,36 @@
                             <!--</div>-->
                         <!--</div>-->
 
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">所属区域：</label>-->
+                            <!--<div class="col-sm-8 form-inline" data-toggle="distpicker">-->
+                                <!--<select id="eprovinceName" name="province" class="form-control chosen-select" ></select>-->
+                                <!--<span style="color: red">*</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<input id="province" name="province" th:value="${company.province}" class="form-control" type="hidden">-->
+
+
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">所属区域：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input id="province" name="province" th:value="${company.province}" class="form-control" type="text">-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">地区(3级)：</label>
-                            <div class="col-sm-8 form-inline" data-toggle="distpicker">
-                                <select id="eprovinceName" name="provinceName" class="form-control chosen-select" ></select>
-                                <span style="color: red">*</span>
+                            <label class="col-sm-3 control-label">所属区域：</label>
+                            <div class="col-sm-8">
+                                <select name="province" id="province" th:value="${company.province}" class="form-control"
+                                        data-actions-box="false" data-size="5">
+                                    <option th:each="ls:${provincesDOList}"
+                                            th:text="${ls.province}"
+                                            th:value="${ls.province}"></option>
+                                </select>
+                                <input id="provinces" name="provinces" th:value="${company.province}" class="form-control"
+                                       type="hidden">
                             </div>
                         </div>
-                        <input id="region" name="region" th:value="${company.region}" class="form-control" type="hidden">
-                        <!--<input id="provincename" name="provincename" th:value="${member.provinceName}" class="form-control" type="hidden">-->
+
 
 
                         <div class="form-group">
@@ -172,18 +193,20 @@
 <script type="text/javascript" src="/js/appjs/mfrs/company/edit.js">
 </script>
 <script type="text/javascript">
-    $().ready(function () {
-       var approvedamount =  $('#colors input:radio:checked').val();
-        // alert(approvedamount);
-        if (approvedamount == '2') {
-            tab.style = "display: block";
-        }
-        var region = $("input[name='region']").val();
-        alert(region);
-        $("#eprovinceName").find("[value="+region+"]").attr("selected",true);
-        $("#eprovinceName").trigger("change");
-    });
+    //城市
+    // $().ready(function () {
+    //    var approvedamount =  $('#colors input:radio:checked').val();
+    //     // alert(approvedamount);
+    //     if (approvedamount == '2') {
+    //         tab.style = "display: block";
+    //     }
+    //     var province = $("input[name='province']").val();
+    //     //alert(region);
+    //     $("#eprovinceName").find("[value="+province+"]").attr("selected",true);
+    //     $("#eprovinceName").trigger("change");
+    // });
 
+    //批调金额——显隐
     function setChange(value) {
         if (value == '2') {
             tab.style = "display: block";
@@ -192,6 +215,8 @@
         }
     }
 
+
+    //图片保存修改
     function udpateFileUrl(obj) {
         var fileURL = getObjectURL(obj.files[0]);
         if (fileURL) {
@@ -226,7 +251,17 @@
         return url;
     }
 </script>
+//省
+<script type="text/javascript">
+    $().ready(function () {
+        //省的选择
+        var provinces = $("input[name='provinces']").val();
+        $("#province").find("[value=" + provinces + "]").attr("selected", true);
 
+    })
+
+
+</script>
 
 </body>
 </html>

@@ -12,7 +12,7 @@ import java.util.Date;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-10 15:09:26
+ * @date 2021-06-16 09:59:28
  */
 public class CompanyDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,10 +22,7 @@ public class CompanyDO implements Serializable {
 	//公司名称
 	private String name;
 	//所属区域
-	private String region;
-	private MultipartFile imgFile;
-	private MultipartFile imgFile1;
-	private MultipartFile imgFile2;
+	private String province;
 	//公司电话
 	private String telephone;
 	//法人
@@ -52,6 +49,33 @@ public class CompanyDO implements Serializable {
 	private String backgroundimage;
 	//部门选择背景图
 	private String departmentimage;
+	private MultipartFile imgFile;
+	private MultipartFile imgFile1;
+	private MultipartFile imgFile2;
+
+	public MultipartFile getImgFile() {
+		return imgFile;
+	}
+
+	public void setImgFile(MultipartFile imgFile) {
+		this.imgFile = imgFile;
+	}
+
+	public MultipartFile getImgFile1() {
+		return imgFile1;
+	}
+
+	public void setImgFile1(MultipartFile imgFile1) {
+		this.imgFile1 = imgFile1;
+	}
+
+	public MultipartFile getImgFile2() {
+		return imgFile2;
+	}
+
+	public void setImgFile2(MultipartFile imgFile2) {
+		this.imgFile2 = imgFile2;
+	}
 
 	/**
 	 * 设置：公司id
@@ -80,14 +104,14 @@ public class CompanyDO implements Serializable {
 	/**
 	 * 设置：所属区域
 	 */
-	public void setRegion(String region) {
-		this.region = region;
+	public void setProvince(String province) {
+		this.province = province;
 	}
 	/**
 	 * 获取：所属区域
 	 */
-	public String getRegion() {
-		return region;
+	public String getProvince() {
+		return province;
 	}
 	/**
 	 * 设置：公司电话
@@ -244,29 +268,5 @@ public class CompanyDO implements Serializable {
 	 */
 	public String getDepartmentimage() {
 		return departmentimage;
-	}
-
-	public MultipartFile getImgFile() {
-		return imgFile;
-	}
-	public void setImgFile(MultipartFile imgFile) {
-		this.imgFile = imgFile;
-	}
-
-
-
-	public MultipartFile getImgFile1() {
-		return imgFile1;
-	}
-	public void setImgFile1(MultipartFile imgFile1) {
-		this.imgFile1 = imgFile1;
-	}
-
-
-	public MultipartFile getImgFile2() {
-		return imgFile2;
-	}
-	public void setImgFile2(MultipartFile imgFile2) {
-		this.imgFile2 = imgFile2;
 	}
 }

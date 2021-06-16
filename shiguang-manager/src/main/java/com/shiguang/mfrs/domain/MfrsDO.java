@@ -51,6 +51,8 @@ public class MfrsDO implements Serializable {
 	private String productscode;
 	//全国工业品生产许可证有效期
 	private Date productscodeday;
+	//备注
+	private String remarks;
 
 	/**
 	 * 设置：制造商id
@@ -267,5 +269,19 @@ public class MfrsDO implements Serializable {
 	 */
 	public Date getProductscodeday() {
 		return productscodeday;
+	}
+
+
+	/**
+	 * 设置：备注
+	 */
+	public String getRemarks() {
+		return remarks;
+	}
+	/**
+	 * 获取：备注
+	 */
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 }
