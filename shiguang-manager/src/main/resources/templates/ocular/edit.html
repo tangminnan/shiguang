@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<!--<input id="id" name="id" th:value="${eyes.id}"  type="hidden">-->
+							<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">会员卡号 ：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="memberNumber" name="memberNumber" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">眼轴AL：</label>
+								<div class="col-sm-8">
+									<input id="axis" name="axis"  type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">中央角膜厚度(OD)：</label>
+								<div class="col-sm-8">
+									<input id="centralThicknessRight" name="centralThicknessRight" type="text">
+									<label class="control-label">&nbsp;&nbsp;中央角膜厚度(OS)：</label>
+									<input id="centralThicknessLeft" name="centralThicknessLeft" type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">中央角膜厚度(OS)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="centralThicknessLeft" name="centralThicknessLeft" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房水深度(OD)：</label>
+								<div class="col-sm-8">
+									<input id="depthHumorRight" name="depthHumorRight" type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;房水深度(OS)：
+									<input id="depthHumorLeft" name="depthHumorLeft"  type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">房水深度(OS)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="depthHumorLeft" name="depthHumorLeft"  type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">前房深度ACD(OD)：</label>
+								<div class="col-sm-8">
+									<input id="anteriorChamberDepthRight" name="anteriorChamberDepthRight" type="text">
+									&nbsp;&nbsp;前房深度ACD(OS)：<input id="anteriorChamberDepthLeft" name="anteriorChamberDepthLeft" type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">前房深度ACD(OS)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="anteriorChamberDepthLeft" name="anteriorChamberDepthLeft" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">晶状体厚度(OD)：</label>
+								<div class="col-sm-8">
+									<input id="lensThicknessRight" name="lensThicknessRight" type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;晶状体厚度(OS)：<input id="lensThicknessLeft" name="lensThicknessLeft" type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">晶状体厚度(OS)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="lensThicknessLeft" name="lensThicknessLeft" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">瞳孔直径PD(OD)：</label>
+								<div class="col-sm-8">
+									<input id="pupilSizeRight" name="pupilSizeRight"  type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;瞳孔直径PD(OS)：<input id="pupilSizeLeft" name="pupilSizeLeft"  type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">瞳孔直径PD(OS)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="pupilSizeLeft" name="pupilSizeLeft"  type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">白到白WTW(OD)：</label>
+								<div class="col-sm-8">
+									<input id="whiteRight" name="whiteRight" type="text">
+									&nbsp;&nbsp;&nbsp; 白到白WTW(OS)：<input id="whiteLeft" name="whiteLeft"  type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">白到白WTW(OS)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="whiteLeft" name="whiteLeft"  type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">玻璃体厚度VT(OD)：</label>
+								<div class="col-sm-8">
+									<input id="vitreousThicknessRight" name="vitreousThicknessRight"  type="text">
+									&nbsp;玻璃体厚度VT(OS)：<input id="vitreousThicknessLeft" name="vitreousThicknessLeft"  type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">玻璃体厚度VT(OS)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="vitreousThicknessLeft" name="vitreousThicknessLeft"  type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">角膜K1值@A(OD)：</label>
+								<div class="col-sm-8">
+									<input id="cornealFirstK1Right" name="cornealFirstK1Right" type="text">
+                                    @<input id="cornealLastK1Right" name="cornealLastK1Right" type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">角膜K1值@A(右眼)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="cornealLastK1Right" name="cornealLastK1Right" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">角膜K1值@A(OS)：</label>
+								<div class="col-sm-8">
+									<input id="cornealFirstK1Left" name="cornealFirstK1Left" type="text">
+                                    @<input id="cornealLastK1Left" name="cornealLastK1Left"  type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">角膜K1值@A(左眼)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="cornealLastK1Left" name="cornealLastK1Left" th:value="${eyes.cornealLastK1Left}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">角膜K2值@A(OD)：</label>
+								<div class="col-sm-8">
+									<input id="cornealFirstK2Right" name="cornealFirstK2Right" type="text">
+                                    @<input id="cornealLastK2Right" name="cornealLastK2Right" type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">角膜K1值@A(右眼)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="cornealLastK2Right" name="cornealLastK2Right" th:value="${eyes.cornealLastK2Right}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">角膜K2值@A(OS)：</label>
+								<div class="col-sm-8">
+									<input id="cornealFirstK2Left" name="cornealFirstK2Left" type="text">
+                                    @<input id="cornealLastK2Left" name="cornealLastK2Left" type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">角膜K1值@A(左眼)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="cornealLastK2Left" name="cornealLastK2Left" th:value="${eyes.cornealLastK2Left}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">散光AST(OD)：</label>
+								<div class="col-sm-8">
+									<input id="astigmiaFirstRight" name="astigmiaFirstRight" type="text">
+                                    @<input id="astigmiaLastRight" name="astigmiaLastRight" type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">散光@A(右眼)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="astigmiaLastRight" name="astigmiaLastRight" th:value="${eyes.astigmiaLastRight}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">散光AST(OS)：</label>
+								<div class="col-sm-8">
+									<input id="astigmiaFirstLeft" name="astigmiaFirstLeft" type="text">
+                                    @<input id="astigmiaLastLeft" name="astigmiaLastLeft"  type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">散光@A(左眼)：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="astigmiaLastLeft" name="astigmiaLastLeft"  class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/ocular/edit.js">
+	</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<!--<button shiro:hasPermission="information:member:add" type="button" class="btn  btn-primary" onclick="add()">-->
+								<!--<i class="fa fa-plus" aria-hidden="true"></i>添加-->
+							<!--</button>-->
+							<!--<button shiro:hasPermission="information:member:member" type="button" class="btn  btn-default" onclick="importtemplate()">-->
+								<!--会员信息导入-->
+							<!--</button>-->
+							<!--<button shiro:hasPermission="information:member:batchRemove" type="button" class="btn  btn-danger"-->
+								<!--onclick="batchRemove(1)">-->
+								<!--<i class="fa fa-trash" aria-hidden="true"></i>批量启用-->
+							<!--</button>-->
+							<!--<button shiro:hasPermission="information:member:batchRemove" type="button" class="btn  btn-danger"-->
+									<!--onclick="batchRemove(0)">-->
+								<!--<i class="fa fa-trash" aria-hidden="true"></i>批量停用-->
+							<!--</button>-->
+						</div>
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="cardNumber" type="text" class="form-control"
+								   placeholder="会员卡号">
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="name" type="text" class="form-control"
+								placeholder="顾客姓名">
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+						<select class="form-control" name="sex" id="sex" >
+							<option value="">请选择顾客性别</option>
+							<option value="0">男</option>
+							<option value="1">女</option>
+						</select>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+								<input id="age" type="text" class="form-control"
+									   placeholder="会员年龄">
+
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="phone1" type="text" class="form-control"
+								   placeholder="联系电话">
+						</div>
+						<!--<div class="columns pull-right col-md-2 nopadding">-->
+							<!--<select name="departNumber" id="departNumber" class="form-control" data-actions-box="false" data-size="5">-->
+								<!--<option value="">请选择部门</option>-->
+								<!--<option th:each="ls:${departmentDOList}"-->
+										<!--th:text="${ls.departName}"-->
+										<!--th:value="${ls.departNumber}"></option>-->
+							<!--</select>-->
+						<!--</div>-->
+						<div class="columns pull-right col-md-2 nopadding">
+							<div class="form-inline" data-toggle="distpicker">
+								<select id="eprovinceName" name="provinceName" class="form-control chosen-select" ></select>
+								<select id="ecityName"  name="cityName" class="form-control chosen-select" ></select>
+								<select id="eareaName" name="areaName" class="form-control chosen-select" ></select>
+
+							</div>
+						</div>
+						<input id="provinceCode" name="provinceCode" class="form-control" type="hidden">
+						<input id="provinceName" name="provinceName" class="form-control" type="hidden">
+						<input id="cityCode" name="cityCode" class="form-control" type="hidden">
+						<input id="cityName" name="cityName" class="form-control" type="hidden">
+						<input id="areaCode" name="areaCode" class="form-control" type="hidden">
+						<input id="areaName" name="areaName" class="form-control" type="hidden">
+					</div>
+					<div class="columns pull-right col-md-2 nopadding">
+						<select name="vocation" id="vocation" class="form-control" data-actions-box="false" data-size="5">
+							<option value="">请选择职业</option>
+							<option th:each="ls:${vocationDOList}"
+									th:text="${ls.vocationName}"
+									th:value="${ls.vocationName}"></option>
+						</select>
+					</div>
+					<div class="columns pull-right col-md-2 nopadding">
+					<select name="source" id="source" class="form-control" data-actions-box="false" data-size="5">
+						<option value="">请选择来源</option>
+						<option th:each="ls:${sourceDOList}"
+								th:text="${ls.sourceName}"
+								th:value="${ls.sourceName}"></option>
+					</select>
+				</div>
+					<div class="columns pull-right col-md-2 nopadding">
+					<select name="cardType" id="cardType" class="form-control" data-actions-box="false" data-size="5">
+						<option value="">请选择会员卡类型</option>
+						<option th:each="ls:${cardTypeDOList}"
+								th:text="${ls.cardName}"
+								th:value="${ls.cardName}"></option>
+					</select>
+				</div>
+					<div class="columns pull-right col-md-2 nopadding">
+						<select name="departNumber" id="departNumber" multiple class="selectpicker form-control" >
+							<option value="">请选择销售门店</option>
+							<option th:each="ls:${departmentDOList}"
+									th:text="${ls.departName}"
+									th:value="${ls.departNumber}"></option>
+						</select>
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+                var s_detail_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:highmember:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:highmember:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:highmember:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:highmember:detail">
+			<script type="text/javascript">
+				var s_detail_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/highmember/highmember.js"></script>
+</body>
+</html>

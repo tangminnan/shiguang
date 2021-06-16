@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+	<div class="col-sm-12">
+		<div class="ibox">
+			<div class="ibox-body">
+				<div class="fixed-table-toolbar">
+					<input id="id" name="id" th:value="${member.id}"  type="hidden">
+					<input id="provinceName" name="provinceName" th:value="${member.provinceName}" type="hidden" >
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div>
+	<ul class="nav nav-tabs" id="myTab">
+		<li class="active"><a class="btn btn-primary btn-xs" href="#huiyuandetail" mce_href="#" style="text-decoration: none;">会员详细</a></li>
+		<!--<li><a class="btn btn-primary btn-xs" href="#binglidetail" mce_href="#" style="text-decoration: none;">病历信息</a></li>-->
+		<!-- <li><a class="btn btn-primary btn-xs" href="#yanguangdetail" mce_href="#" style="text-decoration: none;">验光详情</a></li> -->
+	</ul>
+
+	<div class="tab-content">
+		<div class="tab-pane active " id="huiyuandetail">
+			<table id="exampleTable1" data-mobile-responsive="true">
+				<h1 style="text-align: center;font-size: 15px">--基本信息--</h1>
+				<div class="form-inline">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">顾客姓名：&nbsp;&nbsp;</label>
+						<div class="col-sm-6">
+							<input id="name" name="name" th:value="${member.name}"  type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">顾客性别：</label>
+						<div class="col-sm-6">
+						 <input type="text" th:value="${member.sexx}" name="sexx"  disabled/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">出生日期：</label>
+						<div class="col-sm-6">
+							<input id="birthdayYear" name="birthdayYear" th:value="${member.birthdayYear}+'-'+${member.birthdayMonth}+'-'+${member.birthdayDay}" type="text" disabled>
+						</div>
+					</div>
+				</div>
+				<div class="form-inline">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄：</label>
+						<div class="col-sm-6">
+							<input id="age" name="age" th:value="${member.age}" type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group" >
+						<label class="col-sm-4 control-label">地区(3级)：</label>
+						<div class="col-sm-6" >
+							<input id="div1" name="provinceName" style="display: none" value="" type="text" disabled>
+							<input id="div2" name="provinceName" style="display: none" th:value="${member.provinceName}+','+${member.cityName}+','+${member.areaName}" type="text" disabled>
+						</div>
+					</div>
+					<!--<div class="form-group" id="div2" style="display: none">-->
+						<!--<label class="col-sm-4 control-label">地区(3级)：</label>-->
+						<!--<div class="col-sm-6" >-->
+							<!--<input  name="provinceName" th:value="${member.provinceName}+','+${member.cityName}+','+${member.areaName}" type="text" disabled>-->
+						<!--</div>-->
+					<!--</div>-->
+					<div class="form-group">
+						<label class="col-sm-4 control-label">关联顾客：</label>
+						<div class="col-sm-6">
+							<input id="masterCard" name="masterCard" th:value="${member.masterCard}" type="text" disabled>
+						</div>
+					</div>
+				</div>
+				<div class="form-inline">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">联系电话1：</label>
+						<div class="col-sm-6">
+							<input id="phone1" name="phone1" th:value="${member.phone1}" type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">联系电话2：</label>
+						<div class="col-sm-6">
+							<input id="phone2" name="phone2" th:value="${member.phone2}" type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">联系电话3：</label>
+						<div class="col-sm-6">
+							<input id="phone3" name="phone3" th:value="${member.phone3}" type="text" disabled>
+						</div>
+					</div>
+				</div>
+				<h1 style="text-align: center;font-size: 15px">--会员卡信息--</h1>
+				<div class="form-inline">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">会员卡号：</label>
+						<div class="col-sm-6">
+							<input id="cardNumber" name="cardNumber" th:value="${member.cardNumber}"  type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">会员卡名：</label>
+						<div class="col-sm-6">
+							<input id="cardType" name="cardType" th:value="${member.cardType}"  type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">积分：</label>
+						<div class="col-sm-6">
+							<input id="inteNum" name="inteNum" th:value="0"  type="text" disabled>
+						</div>
+					</div>
+				</div>
+			</table>
+		</div>
+
+		<div class="tab-pane" id="binglidetail">
+			<table id="exampleTable2" data-mobile-responsive="true">
+				<h1 style="text-align: center;font-size: 15px">--基本信息--</h1>
+				<div class="form-inline">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">顾客姓名：</label>
+						<div class="col-sm-6">
+							<input name="name" th:value="${member.name}"  type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">顾客性别：</label>
+						<div class="col-sm-6">
+							<input type="text" th:value="${member.sex}" name="sexx"  disabled/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">出生日期：</label>
+						<div class="col-sm-6">
+							<input name="birthdayYear" th:value="${member.birthdayYear}+'-'+${member.birthdayMonth}+'-'+${member.birthdayDay}" type="text" disabled>
+						</div>
+					</div>
+				</div>
+			</table>
+		</div>
+
+		<!-- <div class="tab-pane" id="yanguangdetail">
+            <table id="exampleTable6" data-mobile-responsive="true"></table>
+        </div> -->
+	</div>
+
+</div>
+
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+	<script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+	</script>
+</div>
+<div shiro:hasPermission="information:highmember:edit">
+	<script type="text/javascript">
+        s_edit_h = '';
+	</script>
+</div>
+<div shiro:hasPermission="information:highmember:remove">
+	<script type="text/javascript">
+        var s_remove_h = '';
+	</script>
+</div>
+<div shiro:hasPermission="information:highmember:resetPwd">
+	<script type="text/javascript">
+        var s_resetPwd_h = '';
+	</script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/highmember/detail.js"></script>
+<script type="text/javascript">
+    $().ready(function(){
+        var proviceName = $("#provinceName").val();
+        if (proviceName == 0){
+            div1.style="display: block";
+		} else {
+            div2.style="display: block";
+		}
+    });
+    $('#myTab a').click(function (e) {
+        //e.preventDefault();
+        $(this).tab('show');
+    });
+    function reLoad() {
+        $('#exampleTable1').bootstrapTable('refresh');
+        $('#exampleTable2').bootstrapTable('refresh');
+    }
+</script>
+</body>
+</html>
