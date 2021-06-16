@@ -9,6 +9,7 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
+							<input id="cardNumber" name="cardNumber" th:value="${cardNumber}"  type="hidden">
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">是否散瞳：</label>
 								<div class="col-sm-8">
@@ -71,7 +72,12 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/optometry/edit.js">
+	<script type="text/javascript" src="/js/appjs/optometry/add.js">
 	</script>
+<script type="text/javascript">
+    $().ready(function(){
+        var cardNumber = $("#cardNumber").val();
+    });
+</script>
 </body>
 </html>

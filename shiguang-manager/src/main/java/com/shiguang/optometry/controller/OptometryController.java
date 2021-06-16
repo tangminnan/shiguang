@@ -61,6 +61,7 @@ public class OptometryController {
 //        OptometryDO optometry = optometryService.get(id);
 //        model.addAttribute("optometry", optometry);
         //ResultDiopterDO resultDiopterDO = resultDiopterService.
+        model.addAttribute("cardNumber",cardNumber);
         return "optometry/edit";
     }
 

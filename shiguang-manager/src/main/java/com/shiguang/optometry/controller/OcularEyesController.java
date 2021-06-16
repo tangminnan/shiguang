@@ -57,6 +57,7 @@ public class OcularEyesController {
     String edit(@PathVariable("cardNumber") String cardNumber,Model model){
 //        OcularEyesDO eyes = eyesService.get(id);
 //        model.addAttribute("eyes", eyes);
+        model.addAttribute("cardNumber",cardNumber);
         return "ocular/edit";
     }
 
