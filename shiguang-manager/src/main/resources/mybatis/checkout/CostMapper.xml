@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.checkout.dao.CostDao">
+
+    <select id="get" resultType="com.shiguang.checkout.domain.CostDO">
+		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale` from cost where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.checkout.domain.CostDO">
+        select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale` from cost
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+            <if test="costType != null and costType != ''"> and cost_type = #{costType} </if>
+            <if test="shorthandCode != null and shorthandCode != ''"> and shorthand_code = #{shorthandCode} </if>
+            <if test="costName != null and costName != ''"> and cost_name = #{costName} </if>
+            <if test="costMoney != null and costMoney != ''"> and cost_money = #{costMoney} </if>
+            <if test="arrearMoney != null and arrearMoney != ''"> and arrear_money = #{arrearMoney} </if>
+            <if test="saleName != null and saleName != ''"> and sale_name = #{saleName} </if>
+            <if test="isSale != null and isSale != ''"> and is_sale = #{isSale} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from cost
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+            <if test="costType != null and costType != ''"> and cost_type = #{costType} </if>
+            <if test="shorthandCode != null and shorthandCode != ''"> and shorthand_code = #{shorthandCode} </if>
+            <if test="costName != null and costName != ''"> and cost_name = #{costName} </if>
+            <if test="costMoney != null and costMoney != ''"> and cost_money = #{costMoney} </if>
+            <if test="arrearMoney != null and arrearMoney != ''"> and arrear_money = #{arrearMoney} </if>
+            <if test="saleName != null and saleName != ''"> and sale_name = #{saleName} </if>
+            <if test="isSale != null and isSale != ''"> and is_sale = #{isSale} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.checkout.domain.CostDO">
+		insert into cost
+		(
+			`id`,
+			`member_number`,
+			`sale_number`,
+			`cost_type`,
+			`shorthand_code`,
+			`cost_name`,
+			`cost_money`,
+			`arrear_money`,
+			`sale_name`,
+			`is_sale`
+		)
+		values
+		(
+			#{id},
+			#{memberNumber},
+			#{saleNumber},
+			#{costType},
+			#{shorthandCode},
+			#{costName},
+			#{costMoney},
+			#{arrearMoney},
+			#{saleName},
+			#{isSale}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.checkout.domain.CostDO">
+        update cost
+        <set>
+            <if test="memberNumber != null">`member_number` = #{memberNumber}, </if>
+            <if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
+            <if test="costType != null">`cost_type` = #{costType}, </if>
+            <if test="shorthandCode != null">`shorthand_code` = #{shorthandCode}, </if>
+            <if test="costName != null">`cost_name` = #{costName}, </if>
+            <if test="costMoney != null">`cost_money` = #{costMoney}, </if>
+            <if test="arrearMoney != null">`arrear_money` = #{arrearMoney}, </if>
+            <if test="saleName != null">`sale_name` = #{saleName}, </if>
+            <if test="isSale != null">`is_sale` = #{isSale}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from cost where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from cost where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
