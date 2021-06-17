@@ -66,7 +66,7 @@ public class OcularEyesController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("information:eyes:add")
+    @RequiresPermissions("information:ocular:add")
     public R save( OcularEyesDO eyes){
         if(eyesService.save(eyes)>0){
             return R.ok();
@@ -78,7 +78,7 @@ public class OcularEyesController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("information:eyes:edit")
+    @RequiresPermissions("information:ocular:edit")
     public R update( OcularEyesDO eyes){
         eyesService.update(eyes);
         return R.ok();
@@ -89,7 +89,7 @@ public class OcularEyesController {
      */
     @PostMapping( "/remove")
     @ResponseBody
-    @RequiresPermissions("information:eyes:remove")
+    @RequiresPermissions("information:ocular:remove")
     public R remove(Long id){
         if(eyesService.remove(id)>0){
             return R.ok();
@@ -102,7 +102,7 @@ public class OcularEyesController {
      */
     @PostMapping( "/batchRemove")
     @ResponseBody
-    @RequiresPermissions("information:eyes:batchRemove")
+    @RequiresPermissions("information:ocular:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] ids){
         eyesService.batchRemove(ids);
         return R.ok();
