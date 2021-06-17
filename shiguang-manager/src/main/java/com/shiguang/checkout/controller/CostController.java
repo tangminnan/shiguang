@@ -70,6 +70,8 @@ public class CostController {
         JSONArray json=JSONArray.parseArray(codeall);
         JSONObject jsonOne;
         CostDO cost = new CostDO();
+        Long saleNumber =  GuuidUtil.getUUID();
+        cost.setSaleNumber("X"+saleNumber);
         for (int i=0;i<json.size();i++) {
             jsonOne = json.getJSONObject(i);
             String key = (String) jsonOne.get("Key");
@@ -87,17 +89,17 @@ public class CostController {
                 cost.setIsSale(0L);
                 String username = ShiroUtils.getUser().getUsername();
                 cost.setSaleName(username);
-                Long saleNumber =  GuuidUtil.getUUID();
-                cost.setSaleNumber("X"+saleNumber);
                 costService.save(cost);
+                String number = cost.getSaleNumber();
                 cost = new CostDO();
+                cost.setSaleNumber(number);
             }
         }
 
 //        if(costService.save(cost)>0){
 //            return R.ok();
 //        }
-        return R.error();
+        return R.ok();
     }
     /**
      * 修改

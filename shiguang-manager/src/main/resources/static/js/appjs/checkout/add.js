@@ -31,11 +31,9 @@ function getClick(obj) {
     // codeall.push(costname);
     // codeall.push(costMoney);
      postData =  JSON.stringify(codeall);
-    alert(postData)
 }
 
 function save() {
-	alert(postData)
 	$.ajax({
 		cache : true,
 		type : "POST",
