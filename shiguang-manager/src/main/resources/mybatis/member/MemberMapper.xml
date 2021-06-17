@@ -7,6 +7,10 @@
 		select `id`,`name`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member where id = #{value}
 	</select>
 
+    <select id="getCardNumber" resultType="com.shiguang.member.domain.MemberDO">
+		select `id`,`name`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member where card_number = #{value}
+	</select>
+
     <select id="list" resultType="com.shiguang.member.domain.MemberDO">
         select `id`,`name`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member
         <where>
@@ -60,6 +64,58 @@
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
         </if>
+    </select>
+
+    <select id="payList" resultType="com.shiguang.member.domain.MemberDO">
+    select m.`id`,m.`name`,m.`card_number`,c.`is_sale`,m.`sex`,m.`depart_number`,m.`birthday_year`,m.`birthday_month`,m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,m.`address`,m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status` from member m
+    join cost c on c.member_number = m.card_number
+    <where>
+        <if test="id != null and id != ''"> and m.id = #{id} </if>
+        <if test="name != null and name != ''"> and m.name = #{name} </if>
+        <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
+        <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+        <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
+        <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
+        <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
+        <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
+        <if test="age != null and age != ''"> and m.age = #{age} </if>
+        <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+        <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
+        <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+    </where>
+    <choose>
+        <when test="sort != null and sort.trim() != ''">
+            group by m.`id`
+            order by ${sort} ${order}
+        </when>
+        <otherwise>
+            group by m.`id`
+            order by m.id desc
+        </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+        limit #{offset}, #{limit}
+    </if>
+
+</select>
+
+    <select id="payCount" resultType="int">
+        select count(DISTINCT m.id) from member m
+        join cost c on c.member_number = m.card_number
+        <where>
+            <if test="id != null and id != ''"> and m.id = #{id} </if>
+            <if test="name != null and name != ''"> and m.name = #{name} </if>
+            <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+            <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
+            <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
+            <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
+            <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
+            <if test="age != null and age != ''"> and m.age = #{age} </if>
+            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+            <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
+            <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+        </where>
     </select>
 
     <select id="count" resultType="int">

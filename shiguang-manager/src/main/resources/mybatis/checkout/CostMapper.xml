@@ -7,6 +7,10 @@
 		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale` from cost where id = #{value}
 	</select>
 
+    <select id="getMemberNum" resultType="com.shiguang.checkout.domain.CostDO">
+		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale` from cost where member_number = #{value}
+	</select>
+
     <select id="list" resultType="com.shiguang.checkout.domain.CostDO">
         select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale` from cost
         <where>
@@ -93,6 +97,14 @@
             <if test="isSale != null">`is_sale` = #{isSale}</if>
         </set>
         where id = #{id}
+    </update>
+
+    <update id="updateMember" parameterType="com.shiguang.checkout.domain.CostDO">
+        update cost
+        <set>
+            <if test="isSale != null">`is_sale` = #{isSale}</if>
+        </set>
+        where member_number = #{memberNumber}
     </update>
 
     <delete id="remove">

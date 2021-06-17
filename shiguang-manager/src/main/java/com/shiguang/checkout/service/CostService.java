@@ -16,6 +16,8 @@ import java.util.Map;
 public interface CostService {
 	
 	CostDO get(Long id);
+
+	List<CostDO> getMemberNum(String cardNumber);
 	
 	List<CostDO> list(Map<String, Object> map);
 	
@@ -24,6 +26,8 @@ public interface CostService {
 	int save(CostDO cost);
 	
 	int update(CostDO cost);
+
+	int updateMember(CostDO costDO);
 	
 	int remove(Long id);
 	

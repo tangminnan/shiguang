@@ -12,6 +12,8 @@ public class MemberDO implements Serializable {
     private String name;
     //会员卡号
     private String cardNumber;
+    //是否缴费
+    private Long isSale;
     //顾客性别(1:男2:女)
     private Long sex;
     private String sexx;
@@ -120,6 +122,20 @@ public class MemberDO implements Serializable {
     public String getCardNumber() {
         return cardNumber;
     }
+
+    /**
+     * 设置：是否缴费
+     */
+    public void seIsSale(Long isSale) {
+        this.isSale = isSale;
+    }
+    /**
+     * 获取：是否缴费
+     */
+    public Long getIsSale() {
+        return isSale;
+    }
+
     /**
      * 设置：顾客性别(0:男1:女)
      */

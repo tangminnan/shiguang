@@ -21,6 +21,8 @@ public class CostDO implements Serializable {
 	private String memberNumber;
 	//销售单号
 	private String saleNumber;
+	//应收金额
+	private Double sumMoney;
 	//缴费类型(0:缴费1:退费)
 	private Long costType;
 	//速记码
@@ -71,6 +73,18 @@ public class CostDO implements Serializable {
 	 */
 	public String getSaleNumber() {
 		return saleNumber;
+	}
+	/**
+	 * 设置：应收金额
+	 */
+	public void setSumMoney(Double sumMoney) {
+		this.sumMoney = sumMoney;
+	}
+	/**
+	 * 获取：应收金额
+	 */
+	public Double getSumMoney() {
+		return sumMoney;
 	}
 	/**
 	 * 设置：缴费类型(0:缴费1:退费)

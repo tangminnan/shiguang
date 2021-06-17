@@ -10,9 +10,15 @@ import java.util.Map;
 public interface MemberService {
     MemberDO get(Long id);
 
+    MemberDO getCardNumber(String cardNumber);
+
     List<MemberDO> list(Map<String, Object> map);
 
+    List<MemberDO> payList(Map<String,Object> map);
+
     int count(Map<String, Object> map);
+
+    int payCount(Map<String, Object> map);
 
     int save(MemberDO member);
 

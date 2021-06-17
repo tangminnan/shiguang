@@ -19,6 +19,8 @@ import org.springframework.stereotype.Repository;
 public interface CostDao {
 
 	CostDO get(Long id);
+
+	List<CostDO> getMemberNum(String cardNumber);
 	
 	List<CostDO> list(Map<String, Object> map);
 	
@@ -27,6 +29,8 @@ public interface CostDao {
 	int save(CostDO cost);
 	
 	int update(CostDO cost);
+
+	int updateMember(CostDO costDO);
 	
 	int remove(Long id);
 	

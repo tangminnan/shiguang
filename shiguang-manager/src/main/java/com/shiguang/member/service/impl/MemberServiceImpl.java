@@ -36,13 +36,28 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public MemberDO getCardNumber(String cardNumber){
+        return memberDao.getCardNumber(cardNumber);
+    }
+
+    @Override
     public List<MemberDO> list(Map<String, Object> map){
         return memberDao.list(map);
     }
 
     @Override
+    public List<MemberDO> payList(Map<String, Object> map){
+        return memberDao.payList(map);
+    }
+
+    @Override
     public int count(Map<String, Object> map){
         return memberDao.count(map);
+    }
+
+    @Override
+    public int payCount(Map<String, Object> map){
+        return memberDao.payCount(map);
     }
 
     @Override

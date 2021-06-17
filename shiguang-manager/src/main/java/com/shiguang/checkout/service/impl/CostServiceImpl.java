@@ -21,6 +21,11 @@ public class CostServiceImpl implements CostService {
 	public CostDO get(Long id){
 		return costDao.get(id);
 	}
+
+	@Override
+	public List<CostDO> getMemberNum(String cardNumber){
+		return costDao.getMemberNum(cardNumber);
+	}
 	
 	@Override
 	public List<CostDO> list(Map<String, Object> map){
@@ -40,6 +45,11 @@ public class CostServiceImpl implements CostService {
 	@Override
 	public int update(CostDO cost){
 		return costDao.update(cost);
+	}
+
+	@Override
+	public int updateMember(CostDO cost){
+		return costDao.updateMember(cost);
 	}
 	
 	@Override

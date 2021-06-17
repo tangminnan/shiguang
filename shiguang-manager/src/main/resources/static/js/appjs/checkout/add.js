@@ -18,15 +18,34 @@ var codeall = [];
 // var moneyall = [];
 var postData="";
 function getClick(obj) {
+	console.log($(obj).val())
     var code =  $(obj).parent().siblings("[name='shorthandCode']").text();
     var costname = $(obj).parent().siblings("[name='costName']").text();
     var costMoney = $(obj).parent().siblings("[name='costMoney']").text();
+
     var s1=new ObjData("code",code);
     var s2=new ObjData("costname",costname);
     var s3=new ObjData("costMoney",costMoney);
-    codeall.push(s1);
-    codeall.push(s2);
-    codeall.push(s3);
+    var jsonData = JSON.stringify(codeall);
+    if (obj.checked == true){
+            codeall.push(s1);
+            codeall.push(s2);
+            codeall.push(s3);
+
+	} else if (obj.checked == false){
+        var num;
+        var ss;
+		for (var i=0;i<codeall.length;i++){
+        	if (s1.Value == codeall[i].Value){
+        		 num = i;
+        		break;
+			}
+		}
+        codeall.splice(num,3);
+	}
+
+    // codeall.push(s2);
+    // codeall.push(s3);
     // codeall.push(code);
     // codeall.push(costname);
     // codeall.push(costMoney);
