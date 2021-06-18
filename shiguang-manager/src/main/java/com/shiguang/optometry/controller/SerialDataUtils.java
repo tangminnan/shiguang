@@ -1,18 +1,25 @@
 package com.shiguang.optometry.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 import com.shiguang.common.utils.Intrinsics;
 import com.shiguang.common.utils.SpringUtil;
-import com.shiguang.optometry.dao.ResultDiopterDao;
 import com.shiguang.optometry.domain.*;
 import org.apache.commons.io.Charsets;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 
 public class SerialDataUtils {
-    private ResultDiopterDao resultDiopterDao = (ResultDiopterDao) SpringUtil.getBean("resultDiopterDao");
+
+
+//    private BloodPressureService bloodPressureService = (BloodPressureService) SpringUtil.getBean("bloodPressureServiceImpl");
+//
+//    private HeightweightDao heightweightDao = (HeightweightDao) SpringUtil.getBean("heightweightDao");
+//
+//    private EyePressureDao eyePressureDao = (EyePressureDao) SpringUtil.getBean("eyePressureDao");
+
     public static SerialDataUtils serialDataUtils = null;
 
     private SerialDataUtils() {
@@ -67,9 +74,82 @@ public class SerialDataUtils {
     private static String type = "";
 
     /**
+     * 判断是那种条件类型
+     *
+     * @param data
+     * @return
+     */
+//    public void toData(String data) {
+//        if (!isBT) {
+//            if (data.contains("53204E6F3D303030303020")) {
+//                isBT = true;
+//                type = "isOptometry";
+//                return;
+//            }
+//            if (data.length() == 9) {
+//                String isHW = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+//                GetCheckBean.HeightAndWeight tohw = tohw(isHW);
+//                heightweightDao.lsSave(tohw);
+//                return;
+//            }
+//            String s = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+//            if (s.contains("bp")) {
+//                isBT = true;
+//                type = "isBlood";
+//                return;
+//            }
+//            byte[] bytes = data.getBytes();//获得byte数组
+////        byte[] bytes = ByteUtils.hexStr2Byte(data);//获得byte数组
+//            for (int i = 0; i < bytes.length; i++) {
+//                if (i < bytes.length - 3) {
+//                    byte[] btByte = new byte[]{bytes[i], bytes[i + 1], bytes[i + 2]};
+//                    if (Arrays.equals(btByte, DNT)) {
+//                        isBT = true;
+//                        type = "isPressure";
+//                        return;
+//                    }
+//                    if (Arrays.equals(btByte, Drm) || Arrays.equals(btByte, drm) || Arrays.equals(btByte, DRM) || Arrays.equals(btByte, DKM)) {
+//                        isBT = true;
+//                        type = "isOptometry";
+//                        return;
+//                    }
+//                }
+//            }
+//        } else {
+//            switch (type) {
+//                case "isBlood":
+//                    String isBlood = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+//                    GetCheckBean.BloodPressure toBlood = toBlood(isBlood);
+//                    bloodPressureService.lsSave(toBlood);
+//                    isBT = false;
+//                    type = "";
+//                    break;
+//                case "isPressure":
+//                    String isPressure = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+//                    GetCheckBean.ResultEyepressureDOBean eyepressureDOBean = toIOP(isPressure);
+//                    eyePressureDao.lsSave(eyepressureDOBean);
+//                    isBT = false;
+//                    type = "";
+//                    break;
+//                case "isOptometry":
+//                    String isOptometry = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+//                    linShiData linShiData = new linShiData();
+//                    linShiData.setData(isOptometry);
+//                    linShiData.setAddDate(new Date());
+//                    heightweightDao.dataSave(linShiData);
+//                    isBT = false;
+//                    type = "";
+//                    break;
+//            }
+//        }
+//
+//
+//    }
+
+    /**
      * 验光
      */
-    public void  toOptometry(String data) {
+    public static BleDataBean toOptometry(String data) {
         try {
             byte[] bytes = data.getBytes();
 //            byte[] bytes = ByteUtils.hexStr2Byte(data);
@@ -133,7 +213,6 @@ public class SerialDataUtils {
                             var19 = new String(AXIS, Charsets.UTF_8);
                             var38 = Double.parseDouble(var19);
                             diopterDoBean.setDiopterA(var38);
-                            resultDiopterDao.save(diopterDoBean);
                             diopterDOs.add(diopterDoBean);
                         } else if (isDRM && !Byte.valueOf(bytes[i + 1]).equals("E")) {
                             PD1 = new byte[]{bytes[i + 3], bytes[i + 4], bytes[i + 5], bytes[i + 6], bytes[i + 7], bytes[i + 8]};
@@ -160,7 +239,7 @@ public class SerialDataUtils {
                                 var45 = Integer.parseInt(var19);
                                 diopterDoBean.setBelieve(var45);
                             }
-                            resultDiopterDao.save(diopterDoBean);
+
                             diopterDOs.add(diopterDoBean);
                         }
                     }
@@ -182,7 +261,6 @@ public class SerialDataUtils {
                             var19 = new String(AXIS, Charsets.UTF_8);
                             var38 = Double.parseDouble(var19);
                             diopterDoBean.setDiopterA(var38);
-                            resultDiopterDao.save(diopterDoBean);
                             diopterDOs.add(diopterDoBean);
                         } else if (isDRM && !Byte.valueOf(bytes[i + 1]).equals("E")) {
                             PD1 = new byte[]{bytes[i + 3], bytes[i + 4], bytes[i + 5], bytes[i + 6], bytes[i + 7], bytes[i + 8]};
@@ -209,7 +287,7 @@ public class SerialDataUtils {
                                 var45 = Integer.parseInt(var19);
                                 diopterDoBean.setBelieve(var45);
                             }
-                            resultDiopterDao.save(diopterDoBean);
+
                             diopterDOs.add(diopterDoBean);
                         }
                     }
@@ -424,12 +502,12 @@ public class SerialDataUtils {
 
             bleDataBean.setSca((List) diopters);
             bleDataBean.setRdDeg((List) corneals);
-            //return bleDataBean;
+            return bleDataBean;
         } catch (Exception var21) {
             var21.printStackTrace();
             String var3 = "数据解析错误";
             System.out.println(var3);
-           // return null;
+            return null;
         }
     }
 

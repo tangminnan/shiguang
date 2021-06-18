@@ -14,6 +14,8 @@ public interface OptometryDao {
 
     List<OptometryDO> list(Map<String,Object> map);
 
+    List<OptometryDO> optoList(Map<String,Object> map);
+
     int count(Map<String,Object> map);
 
     int save(OptometryDO optometry);

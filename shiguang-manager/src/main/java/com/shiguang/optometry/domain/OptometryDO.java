@@ -1,6 +1,7 @@
 package com.shiguang.optometry.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class OptometryDO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -23,6 +24,8 @@ public class OptometryDO implements Serializable {
     private Double axialRight;
     //轴向(左眼OS)
     private Double axialLeft;
+    //创建时间
+    private Date createTime;
 
     /**
      * 设置：主键
@@ -131,5 +134,17 @@ public class OptometryDO implements Serializable {
      */
     public Double getAxialLeft() {
         return axialLeft;
+    }
+    /**
+     * 设置：创建时间
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+    /**
+     * 获取：创建时间
+     */
+    public Date getCreateTime() {
+        return createTime;
     }
 }

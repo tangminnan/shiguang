@@ -83,7 +83,7 @@ public class MemberDO implements Serializable {
     private String remark;
     //注册时间
     private Date registerTime;
-    //状态(0:停用1:启用)
+    //状态(0:启用1:禁用)
     private Long status;
 
     /**

@@ -57,7 +57,13 @@ public class OcularEyesController {
     String edit(@PathVariable("cardNumber") String cardNumber,Model model){
 //        OcularEyesDO eyes = eyesService.get(id);
 //        model.addAttribute("eyes", eyes);
-        model.addAttribute("cardNumber",cardNumber);
+        MemberDO memberDO = memberService.getCardNumber(cardNumber);
+        if (memberDO.getSex() == 0){
+            memberDO.setSexx("男");
+        } else {
+            memberDO.setSexx("女");
+        }
+        model.addAttribute("memberDO",memberDO);
         return "ocular/edit";
     }
 

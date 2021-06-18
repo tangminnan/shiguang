@@ -110,7 +110,7 @@ function edit(cardNumber) {
 		title : '眼生物参数',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '950px', '820px' ],
+		area : [ '1000px', '820px' ],
 		content : prefix + '/edit/' + cardNumber // iframe的url
 	});
 }

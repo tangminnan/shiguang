@@ -1,14 +1,23 @@
 package com.shiguang.common.utils;
 
+import com.shiguang.optometry.controller.SerialDataUtils;
+import com.shiguang.optometry.domain.BleDataBean;
+import com.shiguang.optometry.domain.OptometryDO;
+import com.shiguang.optometry.domain.ResultDiopterDO;
+import com.shiguang.optometry.service.OptometryService;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+import org.hibernate.validator.constraints.ModCheck;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 
 
 /**
@@ -20,6 +29,8 @@ public class SerialPortUtils implements SerialPortEventListener {
     private CommPortIdentifier commPortId;
     // 枚举类型
     private Enumeration<CommPortIdentifier> portList;
+    @Autowired
+    private OptometryService optometryService;
     // RS232串口
     private SerialPort serialPort;
     // 输入流
@@ -30,6 +41,7 @@ public class SerialPortUtils implements SerialPortEventListener {
     private String data;
     // 保存串口返回信息十六进制
     private String dataHex;/**
+
      * 初始化串口
      * @param: paramConfig  存放串口连接必要参数的对象（会在下方给出类代码）    
      * @return: void      
@@ -106,6 +118,7 @@ public class SerialPortUtils implements SerialPortEventListener {
      */
     public void readComm() {
         try {
+            StringBuilder builder = new StringBuilder();
             inputStream = serialPort.getInputStream();
             // 通过输入流对象的available方法获取数组字节长度
             byte[] readBuffer = new byte[inputStream.available()];
@@ -116,12 +129,31 @@ public class SerialPortUtils implements SerialPortEventListener {
                // data = new String(readBuffer, 0, len).trim();
                 // 转为十六进制数据
                 dataHex = bytesToHexString(readBuffer);
+                builder.append(dataHex);
                 //System.out.println("data:" + data);
                 System.out.println("dataHex:" + dataHex);// 读取后置空流对象
                 inputStream.close();
                 inputStream = null;
                 break;
             }
+            BleDataBean bleDataBean = SerialDataUtils.toOptometry(builder.toString());
+            List<ResultDiopterDO> list = bleDataBean.getSca();
+            OptometryDO optometryDO = new OptometryDO();
+            for (int i=0;i<list.size();i++){
+                if ("AVG".equals(list.get(i).getType())){
+                    if ("L".equals(list.get(i).getIfrl())){
+                        optometryDO.setSphereLeft(list.get(i).getDiopterS());
+                        optometryDO.setAxialLeft(list.get(i).getDiopterA());
+                        optometryDO.setCylinderLeft(list.get(i).getDiopterC());
+                    } else if ("R".equals(list.get(i).getIfrl())){
+                        optometryDO.setSphereRight(list.get(i).getDiopterS());
+                        optometryDO.setAxialRight(list.get(i).getDiopterA());
+                        optometryDO.setCylinderRight(list.get(i).getDiopterC());
+                    }
+                }
+            }
+            optometryDO.setCreateTime(new Date());
+            optometryService.save(optometryDO);
         } catch (IOException e) {
         	System.out.println("读取串口数据时发生IO异常");
         }

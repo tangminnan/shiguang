@@ -3,11 +3,11 @@
 
 <mapper namespace="com.shiguang.optometry.dao.OptometryDao">
     <select id="get" resultType="com.shiguang.optometry.domain.OptometryDO">
-		select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left` from optometry where id = #{value}
+		select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`create_time` from optometry where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.optometry.domain.OptometryDO">
-        select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left` from optometry
+        select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`create_time` from optometry
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberInumber != null and memberInumber != ''"> and member_inumber = #{memberInumber} </if>
@@ -18,6 +18,7 @@
             <if test="cylinderLeft != null and cylinderLeft != ''"> and cylinder_left = #{cylinderLeft} </if>
             <if test="axialRight != null and axialRight != ''"> and axial_right = #{axialRight} </if>
             <if test="axialLeft != null and axialLeft != ''"> and axial_left = #{axialLeft} </if>
+            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -44,6 +45,7 @@
             <if test="cylinderLeft != null and cylinderLeft != ''"> and cylinder_left = #{cylinderLeft} </if>
             <if test="axialRight != null and axialRight != ''"> and axial_right = #{axialRight} </if>
             <if test="axialLeft != null and axialLeft != ''"> and axial_left = #{axialLeft} </if>
+            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
         </where>
     </select>
 
@@ -57,7 +59,8 @@
 			`cylinder_right`,
 			`cylinder_left`,
 			`axial_right`,
-			`axial_left`
+			`axial_left`,
+			`create_time`
 		)
 		values
 		(
@@ -68,7 +71,8 @@
 			#{cylinderRight},
 			#{cylinderLeft},
 			#{axialRight},
-			#{axialLeft}
+			#{axialLeft},
+			#{createTime}
 		)
 	</insert>
 
@@ -82,7 +86,8 @@
             <if test="cylinderRight != null">`cylinder_right` = #{cylinderRight}, </if>
             <if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft}, </if>
             <if test="axialRight != null">`axial_right` = #{axialRight}, </if>
-            <if test="axialLeft != null">`axial_left` = #{axialLeft}</if>
+            <if test="axialLeft != null">`axial_left` = #{axialLeft}, </if>
+            <if test="createTime != null">`create_time` = #{createTime}</if>
         </set>
         where id = #{id}
     </update>
@@ -97,5 +102,33 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="optoList" resultType="com.shiguang.optometry.domain.OptometryDO">
+        select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`create_time` from optometry
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="memberInumber != null and memberInumber != ''"> and member_inumber = #{memberInumber} </if>
+            <if test="mydriasis != null and mydriasis != ''"> and mydriasis = #{mydriasis} </if>
+            <if test="sphereRight != null and sphereRight != ''"> and sphere_right = #{sphereRight} </if>
+            <if test="sphereLeft != null and sphereLeft != ''"> and sphere_left = #{sphereLeft} </if>
+            <if test="cylinderRight != null and cylinderRight != ''"> and cylinder_right = #{cylinderRight} </if>
+            <if test="cylinderLeft != null and cylinderLeft != ''"> and cylinder_left = #{cylinderLeft} </if>
+            <if test="axialRight != null and axialRight != ''"> and axial_right = #{axialRight} </if>
+            <if test="axialLeft != null and axialLeft != ''"> and axial_left = #{axialLeft} </if>
+            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+        </where>
+        order by create_time desc
+        <!--<choose>-->
+            <!--<when test="sort != null and sort.trim() != ''">-->
+                <!--order by ${sort} ${order}-->
+            <!--</when>-->
+            <!--<otherwise>-->
+                <!--order by id desc-->
+            <!--</otherwise>-->
+        <!--</choose>-->
+        <!--<if test="offset != null and limit != null">-->
+            <!--limit #{offset}, #{limit}-->
+        <!--</if>-->
+    </select>
 
 </mapper>

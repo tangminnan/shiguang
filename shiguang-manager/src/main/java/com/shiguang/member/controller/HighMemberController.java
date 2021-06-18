@@ -140,4 +140,17 @@ public class HighMemberController {
         return R.error();
     }
 
+    /**
+     * 修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value="/updateEnable")
+    public R updateEnable(Long id,Long enable) {
+        MemberDO memberDO = new MemberDO();
+        memberDO.setId(id);
+        memberDO.setStatus(enable);
+        memberService.updateStatus(memberDO);
+        return R.ok();
+    }
+
 }

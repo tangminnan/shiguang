@@ -19,4 +19,6 @@ public interface OptometryService {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    List<OptometryDO> optoList(Map<String, Object> map);
 }

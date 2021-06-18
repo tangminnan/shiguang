@@ -25,6 +25,11 @@ public class OptometryServiceImpl implements OptometryService {
     }
 
     @Override
+    public List<OptometryDO> optoList(Map<String, Object> map){
+        return optometryDao.optoList(map);
+    }
+
+    @Override
     public int count(Map<String, Object> map){
         return optometryDao.count(map);
     }

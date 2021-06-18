@@ -98,8 +98,8 @@ function load() {
                                     str +=' <div class="switch onoffswitch col-sm-1"> ';
                                     str +=' <div class="onoffswitch"> ';
                                     str +=' <input name="allowComment" ';
-                                    //启用状态 0：是；1：否
-                                    if(row.status == 1)
+                                    //启用状态 0：启用；1：禁用
+                                    if(row.status == 0)
                                         str += ' checked="" ';
 
                                     str +=' type="checkbox" onchange="updateEnable(' +row.id+ ',this)" value="' +row.id+ '" class="onoffswitch-checkbox" id="example1' +row.id+ '">  ';

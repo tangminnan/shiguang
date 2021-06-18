@@ -5,6 +5,7 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
+import com.shiguang.optometry.domain.BleDataBean;
 import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.domain.ResultDiopterDO;
 import com.shiguang.optometry.service.OptometryService;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +63,27 @@ public class OptometryController {
 //        OptometryDO optometry = optometryService.get(id);
 //        model.addAttribute("optometry", optometry);
         //ResultDiopterDO resultDiopterDO = resultDiopterService.
-        model.addAttribute("cardNumber",cardNumber);
+        MemberDO memberDO = memberService.getCardNumber(cardNumber);
+        if (memberDO.getSex() == 0){
+            memberDO.setSexx("男");
+        } else {
+            memberDO.setSexx("女");
+        }
+        model.addAttribute("memberDO",memberDO);
+        Map<String,Object> map = new HashMap<>();
+        List<OptometryDO> list = optometryService.optoList(map);
+        OptometryDO optometryDO = new OptometryDO();
+        if (list.size() > 0){
+            optometryDO.setCylinderRight(list.get(0).getCylinderRight());
+            optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
+            optometryDO.setAxialRight(list.get(0).getAxialRight());
+            optometryDO.setAxialLeft(list.get(0).getAxialLeft());
+            optometryDO.setSphereRight(list.get(0).getSphereRight());
+            optometryDO.setSphereLeft(list.get(0).getSphereLeft());
+
+        }
+        model.addAttribute("optometryDO",optometryDO);
+        //OptometryDO optometryDO = optometryService.
         return "optometry/edit";
     }
 

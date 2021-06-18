@@ -178,7 +178,7 @@ public class MemberController {
         return R.ok();
     }
     /**
-     * 修改
+     * 修改状态
      */
     @ResponseBody
     @RequestMapping(value="/updateEnable")
