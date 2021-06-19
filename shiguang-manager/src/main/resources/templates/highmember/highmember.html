@@ -60,19 +60,19 @@
 							<!--</select>-->
 						<!--</div>-->
 						<div class="columns pull-right col-md-2 nopadding">
-							<div class="form-inline" data-toggle="distpicker">
-								<select id="eprovinceName" name="provinceName" class="form-control chosen-select" ></select>
-								<select id="ecityName"  name="cityName" class="form-control chosen-select" ></select>
-								<select id="eareaName" name="areaName" class="form-control chosen-select" ></select>
+							<div class="form-inline" data-toggle="distpicker" id="distpicker1">
+								<select id="provinceName" name="provinceName" class="form-control chosen-select" data-province="---- 选择省 ----"></select>
+								<select id="cityName"  name="cityName" class="form-control chosen-select" data-city="---- 选择市 ----"></select>
+								<select id="areaName" name="areaName" class="form-control chosen-select" data-district="---- 选择区 ----"></select>
 
 							</div>
 						</div>
-						<input id="provinceCode" name="provinceCode" class="form-control" type="hidden">
-						<input id="provinceName" name="provinceName" class="form-control" type="hidden">
-						<input id="cityCode" name="cityCode" class="form-control" type="hidden">
-						<input id="cityName" name="cityName" class="form-control" type="hidden">
-						<input id="areaCode" name="areaCode" class="form-control" type="hidden">
-						<input id="areaName" name="areaName" class="form-control" type="hidden">
+						<!--<input id="provinceCode" name="provinceCode" class="form-control" type="hidden">-->
+						<!--<input id="provinceName" name="provinceName" class="form-control" type="hidden">-->
+						<!--<input id="cityCode" name="cityCode" class="form-control" type="hidden">-->
+						<!--<input id="cityName" name="cityName" class="form-control" type="hidden">-->
+						<!--<input id="areaCode" name="areaCode" class="form-control" type="hidden">-->
+						<!--<input id="areaName" name="areaName" class="form-control" type="hidden">-->
 					</div>
 					<div class="columns pull-right col-md-2 nopadding">
 						<select name="vocation" id="vocation" class="form-control" data-actions-box="false" data-size="5">
@@ -144,5 +144,10 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/highmember/highmember.js"></script>
+<script type="text/javascript">
+    $('#distpicker1').distpicker({
+        autoSelect: false
+    });
+</script>
 </body>
 </html>
