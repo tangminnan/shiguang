@@ -231,9 +231,9 @@ function batchRemove(status) {
 		return;
 	}
 	var msg;
-	if (status == 0){
+	if (status == 1){
 		msg = "确认要停用选中的"
-	} else if (status == 1){
+	} else if (status == 0){
         msg = "确认要启用选中的"
 	}
 	layer.confirm(msg+"'" + rows.length + "'条数据吗?", {
