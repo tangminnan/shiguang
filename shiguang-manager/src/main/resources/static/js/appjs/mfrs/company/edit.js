@@ -42,12 +42,18 @@ function validateRule() {
 		rules : {
 			name : {
 				required : true
-			}
+			},
+            telephone : {
+                required : true
+            }
 		},
 		messages : {
-			name : {
-				required : icon + "请输入名字"
-			}
+            name : {
+                required : icon + "请输入公司名称"
+            },
+            telephone : {
+                required : icon + "请输入公司电话"
+            }
 		}
 	})
 }
