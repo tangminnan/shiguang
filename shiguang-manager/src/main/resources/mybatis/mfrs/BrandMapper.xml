@@ -3,120 +3,174 @@
 
 <mapper namespace="com.shiguang.mfrs.dao.BrandDao">
 
-	<select id="get" resultType="com.shiguang.mfrs.domain.BrandDO">
-		select `brandid`,`brandnum`,`brandname`,`mfrsname`,`goodsid`,`address`,`unitid`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,`productionkey` from c_brand where brandid = #{value}
+    <select id="get" resultType="com.shiguang.mfrs.domain.BrandDO">
+		select `brandid`,`brandnum`,`brandname`,`goodsid`,`materialname`,`lens_name`,`light_name`,`refractivityvalue`,`function_name`,`gradual_name`,`mfrsid`,`mfrsname`,`unitid`,`address`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,`productionkey`,`status` from c_brand where brandid = #{value}
 	</select>
 
-	<select id="list" resultType="com.shiguang.mfrs.domain.BrandDO">
-		select `brandid`,`brandnum`,`brandname`,`mfrsname`,`goodsid`,`address`,`unitid`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,`productionkey` from c_brand
-        <where>  
-		  		  <if test="brandid != null and brandid != ''"> and brandid = #{brandid} </if>
-		  		  <if test="brandnum != null and brandnum != ''"> and brandnum = #{brandnum} </if>
-		  		  <if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
-		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
-		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
-		  		  <if test="address != null and address != ''"> and address = #{address} </if>
-		  		  <if test="unitid != null and unitid != ''"> and unitid = #{unitid} </if>
-		  		  <if test="payid != null and payid != ''"> and payid = #{payid} </if>
-		  		  <if test="batchid != null and batchid != ''"> and batchid = #{batchid} </if>
-		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
-		  		  <if test="money != null and money != ''"> and money = #{money} </if>
-		  		  <if test="shorthandcode != null and shorthandcode != ''"> and shorthandcode = #{shorthandcode} </if>
-		  		  <if test="productionkey != null and productionkey != ''"> and productionkey = #{productionkey} </if>
-		  		</where>
+    <select id="list" resultType="com.shiguang.mfrs.domain.BrandDO">
+        select
+        `brandid`,`brandnum`,`brandname`,`goodsid`,`materialname`,`lens_name`,`light_name`,`refractivityvalue`,`function_name`,`gradual_name`,`mfrsid`,`mfrsname`,`unitid`,`address`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,`productionkey`,`status`
+        from c_brand
+        <where>
+            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
+            <if test="brandname != null and brandname != ''">and brandname = #{brandname}</if>
+            <if test="goodsid != null and goodsid != ''">and goodsid = #{goodsid}</if>
+            <if test="materialname != null and materialname != ''">and materialname = #{materialname}</if>
+            <if test="lensName != null and lensName != ''">and lens_name = #{lensName}</if>
+            <if test="lightName != null and lightName != ''">and light_name = #{lightName}</if>
+            <if test="refractivityvalue != null and refractivityvalue != ''">and refractivityvalue =
+                #{refractivityvalue}
+            </if>
+            <if test="functionName != null and functionName != ''">and function_name = #{functionName}</if>
+            <if test="gradualName != null and gradualName != ''">and gradual_name = #{gradualName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and mfrsname = #{mfrsname}</if>
+            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
+            <if test="address != null and address != ''">and address = #{address}</if>
+            <if test="payid != null and payid != ''">and payid = #{payid}</if>
+            <if test="batchid != null and batchid != ''">and batchid = #{batchid}</if>
+            <if test="factory != null and factory != ''">and factory = #{factory}</if>
+            <if test="money != null and money != ''">and money = #{money}</if>
+            <if test="shorthandcode != null and shorthandcode != ''">and shorthandcode = #{shorthandcode}</if>
+            <if test="productionkey != null and productionkey != ''">and productionkey = #{productionkey}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by brandid desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from c_brand
-		 <where>  
-		  		  <if test="brandid != null and brandid != ''"> and brandid = #{brandid} </if>
-		  		  <if test="brandnum != null and brandnum != ''"> and brandnum = #{brandnum} </if>
-		  		  <if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
-		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
-		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
-		  		  <if test="address != null and address != ''"> and address = #{address} </if>
-		  		  <if test="unitid != null and unitid != ''"> and unitid = #{unitid} </if>
-		  		  <if test="payid != null and payid != ''"> and payid = #{payid} </if>
-		  		  <if test="batchid != null and batchid != ''"> and batchid = #{batchid} </if>
-		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
-		  		  <if test="money != null and money != ''"> and money = #{money} </if>
-		  		  <if test="shorthandcode != null and shorthandcode != ''"> and shorthandcode = #{shorthandcode} </if>
-		  		  <if test="productionkey != null and productionkey != ''"> and productionkey = #{productionkey} </if>
-		  		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.shiguang.mfrs.domain.BrandDO" useGeneratedKeys="true" keyProperty="brandid">
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from c_brand
+        <where>
+            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
+            <if test="brandname != null and brandname != ''">and brandname = #{brandname}</if>
+            <if test="goodsid != null and goodsid != ''">and goodsid = #{goodsid}</if>
+            <if test="materialname != null and materialname != ''">and materialname = #{materialname}</if>
+            <if test="lensName != null and lensName != ''">and lens_name = #{lensName}</if>
+            <if test="lightName != null and lightName != ''">and light_name = #{lightName}</if>
+            <if test="refractivityvalue != null and refractivityvalue != ''">and refractivityvalue =
+                #{refractivityvalue}
+            </if>
+            <if test="functionName != null and functionName != ''">and function_name = #{functionName}</if>
+            <if test="gradualName != null and gradualName != ''">and gradual_name = #{gradualName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and mfrsname = #{mfrsname}</if>
+            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
+            <if test="address != null and address != ''">and address = #{address}</if>
+            <if test="payid != null and payid != ''">and payid = #{payid}</if>
+            <if test="batchid != null and batchid != ''">and batchid = #{batchid}</if>
+            <if test="factory != null and factory != ''">and factory = #{factory}</if>
+            <if test="money != null and money != ''">and money = #{money}</if>
+            <if test="shorthandcode != null and shorthandcode != ''">and shorthandcode = #{shorthandcode}</if>
+            <if test="productionkey != null and productionkey != ''">and productionkey = #{productionkey}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.mfrs.domain.BrandDO" useGeneratedKeys="true" keyProperty="brandid">
 		insert into c_brand
 		(
 			`brandnum`, 
 			`brandname`, 
-			`mfrsname`, 
 			`goodsid`, 
-			`address`, 
+			`materialname`, 
+			`lens_name`, 
+			`light_name`, 
+			`refractivityvalue`, 
+			`function_name`, 
+			`gradual_name`, 
+			`mfrsid`, 
+			`mfrsname`, 
 			`unitid`, 
+			`address`, 
 			`payid`, 
 			`batchid`, 
 			`factory`, 
 			`money`, 
 			`shorthandcode`, 
-			`productionkey`
+			`productionkey`, 
+			`status`
 		)
 		values
 		(
 			#{brandnum}, 
 			#{brandname}, 
-			#{mfrsname}, 
 			#{goodsid}, 
-			#{address}, 
+			#{materialname}, 
+			#{lensName}, 
+			#{lightName}, 
+			#{refractivityvalue}, 
+			#{functionName}, 
+			#{gradualName}, 
+			#{mfrsid}, 
+			#{mfrsname}, 
 			#{unitid}, 
+			#{address}, 
 			#{payid}, 
 			#{batchid}, 
 			#{factory}, 
 			#{money}, 
 			#{shorthandcode}, 
-			#{productionkey}
+			#{productionkey}, 
+			#{status}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="com.shiguang.mfrs.domain.BrandDO">
-		update c_brand 
-		<set>
-			<if test="brandnum != null">`brandnum` = #{brandnum}, </if>
-			<if test="brandname != null">`brandname` = #{brandname}, </if>
-			<if test="mfrsname != null">`mfrsname` = #{mfrsname}, </if>
-			<if test="goodsid != null">`goodsid` = #{goodsid}, </if>
-			<if test="address != null">`address` = #{address}, </if>
-			<if test="unitid != null">`unitid` = #{unitid}, </if>
-			<if test="payid != null">`payid` = #{payid}, </if>
-			<if test="batchid != null">`batchid` = #{batchid}, </if>
-			<if test="factory != null">`factory` = #{factory}, </if>
-			<if test="money != null">`money` = #{money}, </if>
-			<if test="shorthandcode != null">`shorthandcode` = #{shorthandcode}, </if>
-			<if test="productionkey != null">`productionkey` = #{productionkey}</if>
-		</set>
-		where brandid = #{brandid}
-	</update>
-	
-	<delete id="remove">
+
+    <update id="update" parameterType="com.shiguang.mfrs.domain.BrandDO">
+        update c_brand
+        <set>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
+            <if test="brandname != null">`brandname` = #{brandname},</if>
+            <if test="goodsid != null">`goodsid` = #{goodsid},</if>
+            <if test="materialname != null">`materialname` = #{materialname},</if>
+            <if test="lensName != null">`lens_name` = #{lensName},</if>
+            <if test="lightName != null">`light_name` = #{lightName},</if>
+            <if test="refractivityvalue != null">`refractivityvalue` = #{refractivityvalue},</if>
+            <if test="functionName != null">`function_name` = #{functionName},</if>
+            <if test="gradualName != null">`gradual_name` = #{gradualName},</if>
+            <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
+            <if test="mfrsname != null">`mfrsname` = #{mfrsname},</if>
+            <if test="unitid != null">`unitid` = #{unitid},</if>
+            <if test="address != null">`address` = #{address},</if>
+            <if test="payid != null">`payid` = #{payid},</if>
+            <if test="batchid != null">`batchid` = #{batchid},</if>
+            <if test="factory != null">`factory` = #{factory},</if>
+            <if test="money != null">`money` = #{money},</if>
+            <if test="shorthandcode != null">`shorthandcode` = #{shorthandcode},</if>
+            <if test="productionkey != null">`productionkey` = #{productionkey},</if>
+            <if test="status != null">`status` = #{status}</if>
+        </set>
+        where brandid = #{brandid}
+    </update>
+
+    <delete id="remove">
 		delete from c_brand where brandid = #{value}
 	</delete>
-	
-	<delete id="batchRemove">
-		delete from c_brand where brandid in 
-		<foreach item="brandid" collection="array" open="(" separator="," close=")">
-			#{brandid}
-		</foreach>
-	</delete>
+
+    <delete id="batchRemove">
+        delete from c_brand where brandid in
+        <foreach item="brandid" collection="array" open="(" separator="," close=")">
+            #{brandid}
+        </foreach>
+    </delete>
+
+    <!--菜单联动显示-->
+    <select id="caidan" resultType="com.shiguang.mfrs.domain.GoodsDO">
+        select g.goodsid,g.goodsname from c_goods g left join cc_mg mg on g.goodsid=mg.goodsid
+        <where>
+            <if test="mfrsid != null and mfrsid != ''">and mg.mfrsid = #{mfrsid}</if>
+        </where>
+    </select>
 
 </mapper>

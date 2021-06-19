@@ -1,8 +1,10 @@
 package com.shiguang.mfrs.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.mfrs.domain.GoodsDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -74,6 +76,17 @@ public class RefractivityController {
 	@PostMapping("/save")
 	@RequiresPermissions("mfrs:refractivity:add")
 	public R save( RefractivityDO refractivity){
+
+		//判断是否已存在
+		String refractivitynum = refractivity.getRefractivitynum();
+		Map<String, Object> map = new HashMap<>();
+		map.put("refractivitynum",refractivitynum);
+		List<RefractivityDO> list = refractivityService.list(map);
+		if (list.size() > 0){
+			return R.error("折射率编码已存在");
+		}
+
+
 		if(refractivityService.save(refractivity)>0){
 			return R.ok();
 		}

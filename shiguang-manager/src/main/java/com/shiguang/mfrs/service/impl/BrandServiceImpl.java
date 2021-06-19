@@ -1,5 +1,6 @@
 package com.shiguang.mfrs.service.impl;
 
+import com.shiguang.mfrs.domain.GoodsDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,10 @@ public class BrandServiceImpl implements BrandService {
 	public int batchRemove(Integer[] brandids){
 		return brandDao.batchRemove(brandids);
 	}
-	
+	//菜单联动显示
+
+	@Override
+	public List<GoodsDO> caidan(Integer mfrsid) {
+		return brandDao.caidan(mfrsid);
+	}
 }

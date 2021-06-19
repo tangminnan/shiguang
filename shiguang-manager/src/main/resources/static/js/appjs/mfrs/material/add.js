@@ -36,14 +36,20 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+            materialnum : {
 				required : true
-			}
+			},
+            materialname : {
+                required : true
+            }
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
+            materialnum : {
+				required : icon + "请输入镜架材质代码"
+			},
+            materialname : {
+                required : icon + "请输入镜架材质名称"
+            },
 		}
 	})
 }

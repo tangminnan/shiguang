@@ -15,56 +15,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shiguang.mfrs.domain.MfrsGoodsDO;
-import com.shiguang.mfrs.service.MfrsGoodsService;
+import com.shiguang.mfrs.domain.LightDO;
+import com.shiguang.mfrs.service.LightService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 
 /**
- * 制造商与商品类别关联表
+ * 光度分类表
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-09 16:09:37
+ * @date 2021-06-17 10:40:35
  */
  
 @Controller
-@RequestMapping("/mfrs/mfrsGoods")
-public class MfrsGoodsController {
+@RequestMapping("/mfrs/light")
+public class LightController {
 	@Autowired
-	private MfrsGoodsService mfrsGoodsService;
+	private LightService lightService;
 	
 	@GetMapping()
-	@RequiresPermissions("mfrs:mfrsGoods:mfrsGoods")
-	String MfrsGoods(){
-	    return "mfrs/mfrsGoods/mfrsGoods";
+	@RequiresPermissions("mfrs:light:light")
+	String Light(){
+	    return "mfrs/light/light";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("mfrs:mfrsGoods:mfrsGoods")
+	@RequiresPermissions("mfrs:light:light")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		List<MfrsGoodsDO> mfrsGoodsList = mfrsGoodsService.list(query);
-		int total = mfrsGoodsService.count(query);
-		PageUtils pageUtils = new PageUtils(mfrsGoodsList, total);
+		List<LightDO> lightList = lightService.list(query);
+		int total = lightService.count(query);
+		PageUtils pageUtils = new PageUtils(lightList, total);
 		return pageUtils;
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("mfrs:mfrsGoods:add")
+	@RequiresPermissions("mfrs:light:add")
 	String add(){
-	    return "mfrs/mfrsGoods/add";
+	    return "mfrs/light/add";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("mfrs:mfrsGoods:edit")
+	@RequiresPermissions("mfrs:light:edit")
 	String edit(@PathVariable("id") Integer id,Model model){
-		MfrsGoodsDO mfrsGoods = mfrsGoodsService.get(id);
-		model.addAttribute("mfrsGoods", mfrsGoods);
-	    return "mfrs/mfrsGoods/edit";
+		LightDO light = lightService.get(id);
+		model.addAttribute("light", light);
+	    return "mfrs/light/edit";
 	}
 	
 	/**
@@ -72,9 +72,9 @@ public class MfrsGoodsController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("mfrs:mfrsGoods:add")
-	public R save( MfrsGoodsDO mfrsGoods){
-		if(mfrsGoodsService.save(mfrsGoods)>0){
+	@RequiresPermissions("mfrs:light:add")
+	public R save( LightDO light){
+		if(lightService.save(light)>0){
 			return R.ok();
 		}
 		return R.error();
@@ -84,9 +84,9 @@ public class MfrsGoodsController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("mfrs:mfrsGoods:edit")
-	public R update( MfrsGoodsDO mfrsGoods){
-		mfrsGoodsService.update(mfrsGoods);
+	@RequiresPermissions("mfrs:light:edit")
+	public R update( LightDO light){
+		lightService.update(light);
 		return R.ok();
 	}
 	
@@ -95,9 +95,9 @@ public class MfrsGoodsController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("mfrs:mfrsGoods:remove")
+	@RequiresPermissions("mfrs:light:remove")
 	public R remove( Integer id){
-		if(mfrsGoodsService.remove(id)>0){
+		if(lightService.remove(id)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -108,9 +108,9 @@ public class MfrsGoodsController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("mfrs:mfrsGoods:batchRemove")
+	@RequiresPermissions("mfrs:light:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] ids){
-		mfrsGoodsService.batchRemove(ids);
+		lightService.batchRemove(ids);
 		return R.ok();
 	}
 	

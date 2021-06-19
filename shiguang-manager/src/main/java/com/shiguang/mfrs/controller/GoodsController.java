@@ -1,8 +1,10 @@
 package com.shiguang.mfrs.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.mfrs.domain.UnitDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -74,6 +76,16 @@ public class GoodsController {
 	@PostMapping("/save")
 	@RequiresPermissions("mfrs:goods:add")
 	public R save( GoodsDO goods){
+		//判断是否已存在
+		String goodsnum = goods.getGoodsnum();
+		Map<String, Object> map = new HashMap<>();
+		map.put("goodsnum",goodsnum);
+		List<GoodsDO> list = goodsService.list(map);
+		if (list.size() > 0){
+			return R.error("商品代码已存在");
+		}
+
+
 		if(goodsService.save(goods)>0){
 			return R.ok();
 		}

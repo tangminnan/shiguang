@@ -1,8 +1,10 @@
 package com.shiguang.mfrs.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.mfrs.domain.MfrsDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -74,6 +76,16 @@ public class MaterialController {
 	@PostMapping("/save")
 	@RequiresPermissions("mfrs:material:add")
 	public R save( MaterialDO material){
+
+		//判断是否已存在
+		String materialnum = material.getMaterialnum();
+		Map<String, Object> map = new HashMap<>();
+		map.put("materialnum",materialnum);
+		List<MaterialDO> list = materialService.list(map);
+		if (list.size() > 0){
+			return R.error("镜架材质代码已存在");
+		}
+
 		if(materialService.save(material)>0){
 			return R.ok();
 		}

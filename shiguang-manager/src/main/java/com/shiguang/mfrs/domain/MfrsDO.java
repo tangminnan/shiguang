@@ -53,6 +53,8 @@ public class MfrsDO implements Serializable {
 	private Date productscodeday;
 	//备注
 	private String remarks;
+	//状态(0:停用1:启用)
+	private Long status;
 
 	/**
 	 * 设置：制造商id
@@ -283,5 +285,18 @@ public class MfrsDO implements Serializable {
 	 */
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	/**
+	 * 设置：状态(0:停用1:启用)
+	 */
+	public void setStatus(Long status) {
+		this.status = status;
+	}
+	/**
+	 * 获取：状态(0:停用1:启用)
+	 */
+	public Long getStatus() {
+		return status;
 	}
 }

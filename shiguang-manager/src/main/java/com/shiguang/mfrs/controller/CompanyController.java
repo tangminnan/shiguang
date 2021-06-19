@@ -7,6 +7,7 @@ import java.util.Map;
 import com.shiguang.common.config.BootdoConfig;
 import com.shiguang.common.utils.FileUtil;
 import com.shiguang.mfrs.domain.GoodsDO;
+import com.shiguang.mfrs.domain.MfrsDO;
 import com.shiguang.mfrs.domain.ProvincesDO;
 import com.shiguang.mfrs.service.ProvincesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -129,6 +130,19 @@ public class CompanyController {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		//判断是否已存在
+		String name = company.getName();
+		Map<String, Object> map = new HashMap<>();
+		map.put("name",name);
+		List<CompanyDO> list = companyService.list(map);
+		if (list.size() > 0){
+			return R.error("公司名称已存在");
+		}
+
+
+
+
 		if(companyService.save(company)>0){
 			return R.ok();
 		}

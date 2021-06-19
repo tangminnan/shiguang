@@ -9,10 +9,10 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="mfrs:mfrsGoods:add" type="button" class="btn  btn-primary" onclick="add()">
+							<button shiro:hasPermission="mfrs:mg:add" type="button" class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
-							<button shiro:hasPermission="mfrs:mfrsGoods:batchRemove" type="button" class="btn  btn-danger"
+							<button shiro:hasPermission="mfrs:mg:batchRemove" type="button" class="btn  btn-danger"
 								onclick="batchRemove()">
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
@@ -39,23 +39,23 @@
 				var s_resetPwd_h = 'hidden';
 			</script>
 		</div>
-		<div shiro:hasPermission="mfrs:mfrsGoods:edit">
+		<div shiro:hasPermission="mfrs:mg:edit">
 			<script type="text/javascript">
 				s_edit_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="mfrs:mfrsGoods:remove">
+		<div shiro:hasPermission="mfrs:mg:remove">
 			<script type="text/javascript">
 				var s_remove_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="mfrs:mfrsGoods:resetPwd">
+		<div shiro:hasPermission="mfrs:mg:resetPwd">
 			<script type="text/javascript">
 				var s_resetPwd_h = '';
 			</script>
 		</div>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/mfrs/mfrsGoods/mfrsGoods.js"></script>
+	<script type="text/javascript" src="/js/appjs/mfrs/mg/mg.js"></script>
 </body>
 </html>

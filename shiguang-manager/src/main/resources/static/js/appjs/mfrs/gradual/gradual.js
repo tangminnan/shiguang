@@ -1,5 +1,5 @@
 
-var prefix = "/mfrs/mfrsGoods"
+var prefix = "/mfrs/gradual"
 $(function() {
 	load();
 });
@@ -49,15 +49,11 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '制造商——商品类别id' 
+									title : '渐进片分类id' 
 								},
 																{
-									field : 'mfrsnum', 
-									title : '制造商代码' 
-								},
-																{
-									field : 'goodsnum', 
-									title : '商品类别代码' 
+									field : 'gradualName', 
+									title : '渐进片分类' 
 								},
 																{
 									title : '操作',

@@ -35,15 +35,21 @@ function save() {
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
-		rules : {
-			name : {
-				required : true
-			}
-		},
-		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
-		}
-	})
+        rules: {
+            refractivitynum: {
+                required: true
+            },
+            refractivityvalue: {
+                required: true
+            }
+        },
+        messages: {
+            goodsnum: {
+                required: icon + "请输入折射率编码"
+            },
+            goodsname: {
+                required: icon + "请输入折射率值"
+            }
+        }
+    })
 }

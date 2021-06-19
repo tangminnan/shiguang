@@ -5,13 +5,15 @@ import com.shiguang.mfrs.domain.BrandDO;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.mfrs.domain.GoodsDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
- * 
+ * 品牌维护表
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-09 12:01:40
+ * @date 2021-06-17 18:07:13
  */
 @Mapper
 public interface BrandDao {
@@ -29,4 +31,7 @@ public interface BrandDao {
 	int remove(Integer brandid);
 	
 	int batchRemove(Integer[] brandids);
+
+	//菜单联动显示
+	List<GoodsDO> caidan(@Param("mfrsid") Integer mfrsid);
 }
