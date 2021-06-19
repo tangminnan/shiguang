@@ -107,7 +107,7 @@
                                     <option></option>
                                     <option th:each="ls:${functionDOList}"
                                             th:text="${ls.functionName}"
-                                            th:value="${ls.id}"
+                                            th:value="${ls.functionName}"
                                     ></option>
                                 </select>
                             </div>
@@ -170,7 +170,7 @@
                                                                     name="batchid" value="1"/> 是
                                 </label>
                                 <label class="radio-inline"> <input type="radio"
-                                                                    name="batchid" value="2"/> 否
+                                                                    name="batchid" value="2" checked/> 否
                                 </label>
                             </div>
                         </div>
@@ -221,7 +221,8 @@
 </script>
 <script>
     function caidan(value) {
-        alert(value);
+        // alert(value);
+        $("#goodsid").empty("");
         $.ajax({
             url: "/mfrs/brand/caidan",
             type: "post",
@@ -231,27 +232,20 @@
             dataType: 'JSON',
             async: false,
             success: function (datajson) {
-                alert(datajson);
+                // alert(datajson);
                 $(datajson).each(function (key) {  //循环读取后台传来的Json数据
                     var id = datajson[key].goodsid;   //角色id
                     var roleName = datajson[key].goodsname; //角色名称
                     //调用自定义方法
-                    //AppendNode(id, roleName);   //将value和text添加到下拉框中
-                    $("#goodsid").append("<option value='" + id + "'>" + roleName + "</option>");
+                    AppendNode(id, roleName);   //将value和text添加到下拉框中
+                    // $("#goodsid").append("<option value='" + id + "'>" + roleName + "</option>");
                 });
-                // if (r.code == 0) {
-                //     layer.msg(r.msg);
-                //     reLoad();
-                // } else {
-                //     layer.msg(r.msg);
-                // }
             }
         });
     }
-
-    // function AppendNode(value, text) {
-    //     $("#goodsid").append("<option value='" + value + "'>" + text + "</option>");
-    // }
+    function AppendNode(value, text) {
+        $("#goodsid").append("<option value='" + value + "'>" + text + "</option>");
+    }
 </script>
 
 

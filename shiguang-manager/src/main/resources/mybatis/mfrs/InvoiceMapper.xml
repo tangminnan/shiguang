@@ -18,7 +18,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by invoiceid desc
+                order by invoiceid
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">

@@ -18,7 +18,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by batchid desc
+                order by batchid
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
