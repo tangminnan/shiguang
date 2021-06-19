@@ -99,12 +99,12 @@
 					</select>
 				</div>
 					<div class="columns pull-right col-md-2 nopadding">
-						<select name="departNumber" id="departNumber" multiple class="selectpicker form-control" >
-							<option value="">请选择销售门店</option>
+						<select name="departNumbers" id="departNumbers" multiple class="selectpicker form-control" onchange="changeDepart()">
 							<option th:each="ls:${departmentDOList}"
 									th:text="${ls.departName}"
 									th:value="${ls.departNumber}"></option>
 						</select>
+						<input id="departNumber" name="departNumber" class="form-control" type="hidden">
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
 					</table>
@@ -148,6 +148,18 @@
     $('#distpicker1').distpicker({
         autoSelect: false
     });
+</script>
+<script type="text/javascript">
+    function changeDepart() {
+        var interester = [];
+        var obj = document.getElementById("departNumbers");
+        for (var i = 0; i < obj.options.length; i++) {
+            if (obj.options[i].selected) {
+                interester.push(obj.options[i].value);// 收集选中项
+            }
+        }
+        $("#departNumber").val(interester);
+    }
 </script>
 </body>
 </html>

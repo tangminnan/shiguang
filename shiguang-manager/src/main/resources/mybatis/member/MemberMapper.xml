@@ -16,7 +16,9 @@
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
-            <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
+            <if test="departNumber != null and departNumber != ''">
+             and depart_number in (${departNumber})
+            </if>
             <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and birthday_year = #{birthdayYear} </if>
@@ -123,7 +125,7 @@
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
-            <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
+            <if test="departNumber != null and departNumber != ''"> and depart_number in (#{departNumber}) </if>
             <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and birthday_year = #{birthdayYear} </if>
