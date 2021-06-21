@@ -2,10 +2,7 @@ package com.shiguang.member.controller;
 
 import com.shiguang.baseinfomation.domain.*;
 import com.shiguang.baseinfomation.service.*;
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
-import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.common.utils.*;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.WebParam;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -79,8 +77,12 @@ public class MemberController {
 
     @GetMapping("/edit/{id}")
     @RequiresPermissions("information:member:edit")
-    String edit(@PathVariable("id") Long id,Model model){
+    String edit(@PathVariable("id") Long id,Model model)throws Exception{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         MemberDO member = memberService.get(id);
+        Date date = member.getRegisterTime();
+        String strDate = sdf.format(date);
+        member.setCreateTime(strDate);
         model.addAttribute("member", member);
         Map<String,Object> map = new HashMap<>();
         List<CardTypeDO> cardTypeDOList = typeService.list(map);
@@ -133,11 +135,17 @@ public class MemberController {
         member.setAreaName(member.getAreaName().substring(0,member.getAreaName().length()-1));
         String cardNumber = member.getCardNumber();
         Map<String, Object> map = new HashMap<>();
-        map.put("cardNumber",cardNumber);
-        List<MemberDO> list = memberService.list(map);
-        if (list.size() > 0){
-            return R.error("会员卡号已存在");
+        if (!"".equals(cardNumber)){
+            map.put("cardNumber",cardNumber);
+            List<MemberDO> list = memberService.list(map);
+            if (list.size() > 0){
+                return R.error("会员卡号已存在");
+            }
         }
+        if (member.getMemberOption() == 1){
+            member.setCardNumber("H"+GuuidUtil.getUUID());
+        }
+        member.setStatus(0L);
         if(memberService.save(member)>0){
             return R.ok();
         }

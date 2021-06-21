@@ -1,5 +1,6 @@
 package com.shiguang.member.service.impl;
 
+import com.shiguang.common.utils.GuuidUtil;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.common.utils.isIDCardUtil;
@@ -151,8 +152,10 @@ public class MemberServiceImpl implements MemberService {
                         member.setCardNumber(memberCard);
                         member.setPhone1(phone);
                         member.setRemark(remark);
-                        member.setStatus(1L);
+                        member.setStatus(0L);
                         member.setDepartNumber(departNumber);
+                        member.setRegisterTime(new Date());
+                        member.setMemberOption(0L);
 
                         Date dd = new Date();
                         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");

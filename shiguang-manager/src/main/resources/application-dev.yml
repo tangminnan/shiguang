@@ -4,7 +4,7 @@ shaicha:
 logging:
   level:
     root: info
-    com.dingshi: debug
+    com.shiguang: debug
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

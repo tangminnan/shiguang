@@ -43,8 +43,8 @@ public class SerialPortUtils implements SerialPortEventListener {
     private String dataHex;/**
 
      * 初始化串口
-     * @param: paramConfig  存放串口连接必要参数的对象（会在下方给出类代码）    
-     * @return: void      
+     * @param: paramConfig  存放串口连接必要参数的对象（会在下方给出类代码）
+     * @return: void
      * @throws
      */
     @SuppressWarnings("unchecked")
@@ -75,7 +75,7 @@ public class SerialPortUtils implements SerialPortEventListener {
                                 paramConfig.getStopBit(), paramConfig.getCheckoutBit());
                     } catch (Exception e) {
                     	System.out.println("端口被占用");
-                    } 
+                    }
                     // 结束循环
                     break;
 //                }
@@ -114,7 +114,7 @@ public class SerialPortUtils implements SerialPortEventListener {
 
     /**
      * 读取串口返回信息
-     * @return: void      
+     * @return: void
      */
     public void readComm() {
         try {
@@ -161,8 +161,8 @@ public class SerialPortUtils implements SerialPortEventListener {
 
     /**
      * 发送信息到串口
-     * @param: data      
-     * @return: void      
+     * @param: data
+     * @return: void
      * @throws
      */
     public void sendComm(String data) {
@@ -186,8 +186,8 @@ public class SerialPortUtils implements SerialPortEventListener {
     /**
      * 关闭串口
      * @Description: 关闭串口
-     * @param:       
-     * @return: void      
+     * @param:
+     * @return: void
      * @throws
      */
     public void closeSerialPort() {

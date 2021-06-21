@@ -24,6 +24,8 @@ public class OptometryDO implements Serializable {
     private Double axialRight;
     //轴向(左眼OS)
     private Double axialLeft;
+    //验光师
+    private String optometryName;
     //创建时间
     private Date createTime;
 
@@ -134,6 +136,18 @@ public class OptometryDO implements Serializable {
      */
     public Double getAxialLeft() {
         return axialLeft;
+    }
+    /**
+     * 设置：验光师
+     */
+    public void setOptometryName(String optometryName) {
+        this.optometryName = optometryName;
+    }
+    /**
+     * 获取：验光师
+     */
+    public String getOptometryName() {
+        return optometryName;
     }
     /**
      * 设置：创建时间

@@ -10,6 +10,8 @@ public class MemberDO implements Serializable {
     private Long id;
     //
     private String name;
+    //会员选项(0:普通会员1:自动生成)
+    private Long memberOption;
     //会员卡号
     private String cardNumber;
     //是否缴费
@@ -85,6 +87,8 @@ public class MemberDO implements Serializable {
     private Date registerTime;
     //状态(0:启用1:禁用)
     private Long status;
+    //注册时间
+    private String createTime;
 
     /**
      * 设置：
@@ -109,6 +113,18 @@ public class MemberDO implements Serializable {
      */
     public String getName() {
         return name;
+    }
+    /**
+     * 设置：会员选项(0:普通会员1:自动生成)
+     */
+    public void setMemberOption(Long memberOption) {
+        this.memberOption = memberOption;
+    }
+    /**
+     * 获取：会员选项(0:普通会员1:自动生成)
+     */
+    public Long getMemberOption() {
+        return memberOption;
     }
     /**
      * 设置：会员卡号
@@ -570,5 +586,17 @@ public class MemberDO implements Serializable {
      */
     public Long getStatus() {
         return status;
+    }
+    /**
+     * 设置：注册时间
+     */
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+    /**
+     * 获取：注册时间
+     */
+    public String getCreateTime() {
+        return createTime;
     }
 }
