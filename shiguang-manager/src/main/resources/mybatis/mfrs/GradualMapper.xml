@@ -4,13 +4,13 @@
 <mapper namespace="com.shiguang.mfrs.dao.GradualDao">
 
 	<select id="get" resultType="com.shiguang.mfrs.domain.GradualDO">
-		select `id`,`gradual_name` from p_gradual where id = #{value}
+		select `gradual_id`,`gradual_name` from p_gradual where gradual_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.mfrs.domain.GradualDO">
-		select `id`,`gradual_name` from p_gradual
+		select `gradual_id`,`gradual_name` from p_gradual
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="gradualId != null and gradualId != ''"> and gradual_id = #{gradualId} </if>
 		  		  <if test="gradualName != null and gradualName != ''"> and gradual_name = #{gradualName} </if>
 		  		</where>
         <choose>
@@ -18,7 +18,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id
+                order by gradual_id
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -29,12 +29,12 @@
  	<select id="count" resultType="int">
 		select count(*) from p_gradual
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="gradualId != null and gradualId != ''"> and gradual_id = #{gradualId} </if>
 		  		  <if test="gradualName != null and gradualName != ''"> and gradual_name = #{gradualName} </if>
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.shiguang.mfrs.domain.GradualDO" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.shiguang.mfrs.domain.GradualDO" useGeneratedKeys="true" keyProperty="gradualId">
 		insert into p_gradual
 		(
 			`gradual_name`
@@ -50,17 +50,17 @@
 		<set>
 			<if test="gradualName != null">`gradual_name` = #{gradualName}</if>
 		</set>
-		where id = #{id}
+		where gradual_id = #{gradualId}
 	</update>
 	
 	<delete id="remove">
-		delete from p_gradual where id = #{value}
+		delete from p_gradual where gradual_id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from p_gradual where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
+		delete from p_gradual where gradual_id in 
+		<foreach item="gradualId" collection="array" open="(" separator="," close=")">
+			#{gradualId}
 		</foreach>
 	</delete>
 

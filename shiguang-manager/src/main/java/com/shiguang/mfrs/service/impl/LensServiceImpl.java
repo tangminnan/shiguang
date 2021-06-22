@@ -18,8 +18,8 @@ public class LensServiceImpl implements LensService {
 	private LensDao lensDao;
 	
 	@Override
-	public LensDO get(Integer id){
-		return lensDao.get(id);
+	public LensDO get(Integer lensId){
+		return lensDao.get(lensId);
 	}
 	
 	@Override
@@ -43,13 +43,13 @@ public class LensServiceImpl implements LensService {
 	}
 	
 	@Override
-	public int remove(Integer id){
-		return lensDao.remove(id);
+	public int remove(Integer lensId){
+		return lensDao.remove(lensId);
 	}
 	
 	@Override
-	public int batchRemove(Integer[] ids){
-		return lensDao.batchRemove(ids);
+	public int batchRemove(Integer[] lensIds){
+		return lensDao.batchRemove(lensIds);
 	}
 	
 }

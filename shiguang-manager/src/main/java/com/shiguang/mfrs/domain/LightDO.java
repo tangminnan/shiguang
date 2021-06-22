@@ -10,27 +10,27 @@ import java.util.Date;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
 public class LightDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//光度分类id
-	private Integer id;
+	private Integer lightId;
 	//光度分类
 	private String lightName;
 
 	/**
 	 * 设置：光度分类id
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public void setLightId(Integer lightId) {
+		this.lightId = lightId;
 	}
 	/**
 	 * 获取：光度分类id
 	 */
-	public Integer getId() {
-		return id;
+	public Integer getLightId() {
+		return lightId;
 	}
 	/**
 	 * 设置：光度分类

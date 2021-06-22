@@ -11,12 +11,12 @@ import org.apache.ibatis.annotations.Mapper;
  * 镜片功能表
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
 @Mapper
 public interface FunctionDao {
 
-	FunctionDO get(Integer id);
+	FunctionDO get(Integer functionId);
 	
 	List<FunctionDO> list(Map<String,Object> map);
 	
@@ -26,7 +26,7 @@ public interface FunctionDao {
 	
 	int update(FunctionDO function);
 	
-	int remove(Integer id);
+	int remove(Integer function_id);
 	
-	int batchRemove(Integer[] ids);
+	int batchRemove(Integer[] functionIds);
 }

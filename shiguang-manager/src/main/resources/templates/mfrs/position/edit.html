@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="positionId" name="positionId" th:value="${position.positionId}" type="hidden">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">仓位代码：</label>
+                            <div class="col-sm-8">
+                                <input id="positionNum" name="positionNum" th:value="${position.positionNum}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">所属部门：</label>
+                            <div class="col-sm-8">
+                                <!--<input id="departNumber" name="departNumber" th:value="${position.departNumber}" class="form-control" type="text">-->
+                                <select name="departNumber" id="departNumber" th:value="${position.departNumber}"
+                                        class="form-control"
+                                        data-actions-box="false" data-size="5" >
+                                    <option th:each="ls:${departmentDOList}"
+                                            th:text="${ls.departName}"
+                                            th:value="${ls.departNumber}"
+                                    ></option>
+                                </select>
+                                <input id="goodsids" name="goodsids" th:value="${position.departNumber}"
+                                       class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">仓位名称：</label>
+                            <div class="col-sm-8">
+                                <input id="positionName" name="positionName" th:value="${position.positionName}"
+                                       class="form-control" type="text">
+                                <span style="color: red">*</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">排列序号：</label>
+                            <div class="col-sm-8">
+                                <input id="positionOrder" name="positionOrder" th:value="${position.positionOrder}"
+                                       class="form-control" type="text">
+                                <span style="color: red">*</span>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">状态id：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input id="stateId" name="stateId" th:value="${position.stateId}" class="form-control"-->
+                                       <!--type="text">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">状态（1停用：2启用）：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input id="status" name="status" th:value="${position.status}" class="form-control"-->
+                                       <!--type="text">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">状态(0:删除1:未删除)：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input id="state" name="state" th:value="${position.state}" class="form-control"-->
+                                       <!--type="text">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/mfrs/position/edit.js">
+</script>
+</body>
+</html>

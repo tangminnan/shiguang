@@ -18,8 +18,8 @@ public class FunctionServiceImpl implements FunctionService {
 	private FunctionDao functionDao;
 	
 	@Override
-	public FunctionDO get(Integer id){
-		return functionDao.get(id);
+	public FunctionDO get(Integer functionId){
+		return functionDao.get(functionId);
 	}
 	
 	@Override
@@ -43,13 +43,13 @@ public class FunctionServiceImpl implements FunctionService {
 	}
 	
 	@Override
-	public int remove(Integer id){
-		return functionDao.remove(id);
+	public int remove(Integer functionId){
+		return functionDao.remove(functionId);
 	}
 	
 	@Override
-	public int batchRemove(Integer[] ids){
-		return functionDao.batchRemove(ids);
+	public int batchRemove(Integer[] functionIds){
+		return functionDao.batchRemove(functionIds);
 	}
 	
 }

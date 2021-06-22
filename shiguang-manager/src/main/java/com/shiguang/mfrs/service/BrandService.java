@@ -15,7 +15,9 @@ import java.util.Map;
  */
 public interface BrandService {
 
-    BrandDO get(Integer brandid);
+//    BrandDO get(Integer brandid);
+    //关联所有品牌维护所需表
+    BrandDO getall(Integer brandid);
 
     List<BrandDO> list(Map<String, Object> map);
 

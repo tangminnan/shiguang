@@ -10,27 +10,27 @@ import java.util.Date;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
 public class LensDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//材料分类id
-	private Integer id;
+	private Integer lensId;
 	//材料分类
 	private String lensName;
 
 	/**
 	 * 设置：材料分类id
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public void setLensId(Integer lensId) {
+		this.lensId = lensId;
 	}
 	/**
 	 * 获取：材料分类id
 	 */
-	public Integer getId() {
-		return id;
+	public Integer getLensId() {
+		return lensId;
 	}
 	/**
 	 * 设置：材料分类

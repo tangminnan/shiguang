@@ -11,12 +11,12 @@ import org.apache.ibatis.annotations.Mapper;
  * 渐进片分类表
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
 @Mapper
 public interface GradualDao {
 
-	GradualDO get(Integer id);
+	GradualDO get(Integer gradualId);
 	
 	List<GradualDO> list(Map<String,Object> map);
 	
@@ -26,7 +26,7 @@ public interface GradualDao {
 	
 	int update(GradualDO gradual);
 	
-	int remove(Integer id);
+	int remove(Integer gradual_id);
 	
-	int batchRemove(Integer[] ids);
+	int batchRemove(Integer[] gradualIds);
 }

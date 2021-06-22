@@ -26,7 +26,7 @@ import com.shiguang.common.utils.R;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
  
 @Controller
@@ -59,10 +59,10 @@ public class LightController {
 	    return "mfrs/light/add";
 	}
 
-	@GetMapping("/edit/{id}")
+	@GetMapping("/edit/{lightId}")
 	@RequiresPermissions("mfrs:light:edit")
-	String edit(@PathVariable("id") Integer id,Model model){
-		LightDO light = lightService.get(id);
+	String edit(@PathVariable("lightId") Integer lightId,Model model){
+		LightDO light = lightService.get(lightId);
 		model.addAttribute("light", light);
 	    return "mfrs/light/edit";
 	}
@@ -96,8 +96,8 @@ public class LightController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("mfrs:light:remove")
-	public R remove( Integer id){
-		if(lightService.remove(id)>0){
+	public R remove( Integer lightId){
+		if(lightService.remove(lightId)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -109,8 +109,8 @@ public class LightController {
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("mfrs:light:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] ids){
-		lightService.batchRemove(ids);
+	public R remove(@RequestParam("ids[]") Integer[] lightIds){
+		lightService.batchRemove(lightIds);
 		return R.ok();
 	}
 	

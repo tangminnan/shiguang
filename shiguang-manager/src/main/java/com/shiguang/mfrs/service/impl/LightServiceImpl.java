@@ -18,8 +18,8 @@ public class LightServiceImpl implements LightService {
 	private LightDao lightDao;
 	
 	@Override
-	public LightDO get(Integer id){
-		return lightDao.get(id);
+	public LightDO get(Integer lightId){
+		return lightDao.get(lightId);
 	}
 	
 	@Override
@@ -43,13 +43,13 @@ public class LightServiceImpl implements LightService {
 	}
 	
 	@Override
-	public int remove(Integer id){
-		return lightDao.remove(id);
+	public int remove(Integer lightId){
+		return lightDao.remove(lightId);
 	}
 	
 	@Override
-	public int batchRemove(Integer[] ids){
-		return lightDao.batchRemove(ids);
+	public int batchRemove(Integer[] lightIds){
+		return lightDao.batchRemove(lightIds);
 	}
 	
 }

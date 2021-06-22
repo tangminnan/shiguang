@@ -76,13 +76,21 @@ public class GoodsController {
 	@PostMapping("/save")
 	@RequiresPermissions("mfrs:goods:add")
 	public R save( GoodsDO goods){
-		//判断是否已存在
+		//判断是否已存在代码
 		String goodsnum = goods.getGoodsnum();
 		Map<String, Object> map = new HashMap<>();
 		map.put("goodsnum",goodsnum);
 		List<GoodsDO> list = goodsService.list(map);
 		if (list.size() > 0){
 			return R.error("商品代码已存在");
+		}
+		//判断是否已存在商品类别
+		String goodsname = goods.getGoodsname();
+		Map<String, Object> mapname = new HashMap<>();
+		map.put("goodsnum",goodsnum);
+		List<GoodsDO> listname = goodsService.list(mapname);
+		if (listname.size() > 0){
+			return R.error("商品类别已存在");
 		}
 
 

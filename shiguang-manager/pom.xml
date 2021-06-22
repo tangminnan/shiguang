@@ -6,7 +6,7 @@
     <groupId>com.shiguang</groupId>
     <artifactId>shiguang-manager</artifactId>
     <version>1.6.9</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 	 
     <name>shiguang-manager</name>
     <description>Demo project for Spring Boot</description>
@@ -310,6 +310,24 @@
             <artifactId>barcode4j</artifactId>
             <version>2.1</version>
         </dependency>
+
+        <!-- war包部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
 		
         <!--war包部署需要-->
         <!--<dependency>-->
@@ -341,6 +359,17 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <executable>true</executable>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <compilerArguments>
+                        <extdirs>F:\sg\shiguang\shiguang-manager\lib</extdirs>
+                    </compilerArguments>
                 </configuration>
             </plugin>
         </plugins>

@@ -18,8 +18,8 @@ public class GradualServiceImpl implements GradualService {
 	private GradualDao gradualDao;
 	
 	@Override
-	public GradualDO get(Integer id){
-		return gradualDao.get(id);
+	public GradualDO get(Integer gradualId){
+		return gradualDao.get(gradualId);
 	}
 	
 	@Override
@@ -43,13 +43,13 @@ public class GradualServiceImpl implements GradualService {
 	}
 	
 	@Override
-	public int remove(Integer id){
-		return gradualDao.remove(id);
+	public int remove(Integer gradualId){
+		return gradualDao.remove(gradualId);
 	}
 	
 	@Override
-	public int batchRemove(Integer[] ids){
-		return gradualDao.batchRemove(ids);
+	public int batchRemove(Integer[] gradualIds){
+		return gradualDao.batchRemove(gradualIds);
 	}
 	
 }

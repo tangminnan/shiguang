@@ -26,7 +26,7 @@ import com.shiguang.common.utils.R;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
  
 @Controller
@@ -59,10 +59,10 @@ public class GradualController {
 	    return "mfrs/gradual/add";
 	}
 
-	@GetMapping("/edit/{id}")
+	@GetMapping("/edit/{gradualId}")
 	@RequiresPermissions("mfrs:gradual:edit")
-	String edit(@PathVariable("id") Integer id,Model model){
-		GradualDO gradual = gradualService.get(id);
+	String edit(@PathVariable("gradualId") Integer gradualId,Model model){
+		GradualDO gradual = gradualService.get(gradualId);
 		model.addAttribute("gradual", gradual);
 	    return "mfrs/gradual/edit";
 	}
@@ -96,8 +96,8 @@ public class GradualController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("mfrs:gradual:remove")
-	public R remove( Integer id){
-		if(gradualService.remove(id)>0){
+	public R remove( Integer gradualId){
+		if(gradualService.remove(gradualId)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -109,8 +109,8 @@ public class GradualController {
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("mfrs:gradual:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] ids){
-		gradualService.batchRemove(ids);
+	public R remove(@RequestParam("ids[]") Integer[] gradualIds){
+		gradualService.batchRemove(gradualIds);
 		return R.ok();
 	}
 	

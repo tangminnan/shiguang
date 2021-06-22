@@ -18,11 +18,16 @@ public class BrandServiceImpl implements BrandService {
 	@Autowired
 	private BrandDao brandDao;
 	
+//	@Override
+//	public BrandDO get(Integer brandid){
+//		return brandDao.get(brandid);
+//	}
+	//关联所有品牌维护所需表
 	@Override
-	public BrandDO get(Integer brandid){
-		return brandDao.get(brandid);
+	public BrandDO getall(Integer brandid) {
+		return brandDao.getall(brandid);
 	}
-	
+
 	@Override
 	public List<BrandDO> list(Map<String, Object> map){
 		return brandDao.list(map);

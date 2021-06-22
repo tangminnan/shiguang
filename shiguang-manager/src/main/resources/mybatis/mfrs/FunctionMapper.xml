@@ -4,13 +4,13 @@
 <mapper namespace="com.shiguang.mfrs.dao.FunctionDao">
 
 	<select id="get" resultType="com.shiguang.mfrs.domain.FunctionDO">
-		select `id`,`function_name` from p_function where id = #{value}
+		select `function_id`,`function_name` from p_function where function_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.mfrs.domain.FunctionDO">
-		select `id`,`function_name` from p_function
+		select `function_id`,`function_name` from p_function
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="functionId != null and functionId != ''"> and function_id = #{functionId} </if>
 		  		  <if test="functionName != null and functionName != ''"> and function_name = #{functionName} </if>
 		  		</where>
         <choose>
@@ -18,7 +18,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id
+                order by function_id
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -29,12 +29,12 @@
  	<select id="count" resultType="int">
 		select count(*) from p_function
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="functionId != null and functionId != ''"> and function_id = #{functionId} </if>
 		  		  <if test="functionName != null and functionName != ''"> and function_name = #{functionName} </if>
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.shiguang.mfrs.domain.FunctionDO" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.shiguang.mfrs.domain.FunctionDO" useGeneratedKeys="true" keyProperty="functionId">
 		insert into p_function
 		(
 			`function_name`
@@ -50,17 +50,17 @@
 		<set>
 			<if test="functionName != null">`function_name` = #{functionName}</if>
 		</set>
-		where id = #{id}
+		where function_id = #{functionId}
 	</update>
 	
 	<delete id="remove">
-		delete from p_function where id = #{value}
+		delete from p_function where function_id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from p_function where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
+		delete from p_function where function_id in 
+		<foreach item="functionId" collection="array" open="(" separator="," close=")">
+			#{functionId}
 		</foreach>
 	</delete>
 

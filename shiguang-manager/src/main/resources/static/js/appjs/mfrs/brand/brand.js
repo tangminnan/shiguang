@@ -31,7 +31,12 @@ function load() {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
-                        offset: params.offset
+                        offset: params.offset,
+                        goodsid: $('#goodsid').val(),
+                        mfrsid: $('#mfrsid').val(),
+                        brandnum: $('#brandnum').val(),
+                        stateId: $('#stateId').val(),
+                        payid: $('#payid').val()
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };
@@ -58,33 +63,81 @@ function load() {
                         field: 'brandname',
                         title: '品牌名称'
                     },
+                    // {
+                    //     field: 'goodsid',
+                    //     title: '商品类别id'
+                    // },
                     {
-                        field: 'goodsid',
+                        field: 'goodsname',
                         title: '商品类别'
                     },
-                    // 								{
-                    // 	field : 'materialname',
-                    // 	title : '镜架材质名称'
+                    // {
+                    //     field: 'materialid',
+                    //     title: '镜架材质名称id'
                     // },
-                    // 								{
-                    // 	field : 'lensName',
-                    // 	title : '材料分类'
+                    // {
+                    //     field: 'materialname',
+                    //     title: '镜架材质名称'
                     // },
-                    // 								{
-                    // 	field : 'lightName',
-                    // 	title : '光度分类'
+                    // {
+                    //     field: 'lensId',
+                    //     title: '材料分类id'
                     // },
-                    // 								{
-                    // 	field : 'refractivityvalue',
-                    // 	title : '折射率值'
+                    // {
+                    //     field: 'lensName',
+                    //     title: '材料分类'
                     // },
-                    // 								{
-                    // 	field : 'functionName',
-                    // 	title : '镜片功能'
+                    // {
+                    //     field: 'lightId',
+                    //     title: '光度分类id'
                     // },
-                    // 								{
-                    // 	field : 'gradualName',
-                    // 	title : '渐进片分类'
+                    // {
+                    //     field: 'lightName',
+                    //     title: '光度分类'
+                    // },
+                    // {
+                    //     field: 'refractivityid',
+                    //     title: '折射率值id'
+                    // },
+                    // {
+                    //     field: 'refractivityvalue',
+                    //     title: '折射率值'
+                    // },
+                    // {
+                    //     field: 'functionId',
+                    //     title: '镜片功能id'
+                    // },
+                    // {
+                    //     field: 'functionName',
+                    //     title: '镜片功能'
+                    // },
+                    // {
+                    //     field: 'gradualId',
+                    //     title: '渐进片分类id'
+                    // },
+                    // {
+                    //     field: 'gradualName',
+                    //     title: '渐进片分类'
+                    // },
+                    // {
+                    //     field: 'usageId',
+                    //     title: '使用类型id'
+                    // },
+                    // {
+                    //     field: 'usageName',
+                    //     title: '使用类型'
+                    // },
+                    // {
+                    //     field: 'typeId',
+                    //     title: '抛弃型分类id'
+                    // },
+                    // {
+                    //     field: 'typeName',
+                    //     title: '抛弃型分类'
+                    // },
+                    // {
+                    //     field: 'registration',
+                    //     title: '注册证号'
                     // },
                     // {
                     //     field: 'mfrsid',
@@ -126,9 +179,13 @@ function load() {
                     // 	field : 'productionkey',
                     // 	title : '生产企业许可证号'
                     // },
-                    // 								{
-                    // 	field : 'status',
-                    // 	title : '状态(0:停用1:启用)'
+                    // {
+                    //     field : 'stateId',
+                    //     title : '状态(1:停用2:启用)'
+                    // },
+                    // {
+                    //     field : 'status',
+                    //     title : '状态（1：停用2：启用）'
                     // },
                     {
                         title: '操作',
