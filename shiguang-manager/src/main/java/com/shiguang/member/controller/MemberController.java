@@ -52,6 +52,7 @@ public class MemberController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("state",1);
         List<MemberDO> memberList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberList, total);
@@ -146,6 +147,7 @@ public class MemberController {
             member.setCardNumber("H"+GuuidUtil.getUUID());
         }
         member.setStatus(0L);
+        member.setState(1L);
         if(memberService.save(member)>0){
             return R.ok();
         }
@@ -169,11 +171,27 @@ public class MemberController {
     @ResponseBody
     @RequiresPermissions("information:member:remove")
     public R remove(Long id){
-        if(memberService.remove(id)>0){
+        MemberDO memberDO = new MemberDO();
+        memberDO.setState(0L);
+        memberDO.setId(id);
+        if(memberService.update(memberDO)>0){
             return R.ok();
         }
         return R.error();
     }
+
+//    /**
+//     * 删除
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    @RequiresPermissions("information:member:remove")
+//    public R remove(Long id){
+//        if(memberService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 批量停用或启用

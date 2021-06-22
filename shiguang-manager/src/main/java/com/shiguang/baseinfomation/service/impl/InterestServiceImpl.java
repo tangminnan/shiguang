@@ -48,4 +48,9 @@ public class InterestServiceImpl implements InterestService {
     public int batchRemove(Long[] ids){
         return interestDao.batchRemove(ids);
     }
+
+    @Override
+    public int updateStatus(InterestDO interestDO) {
+        return interestDao.updateStatus(interestDO);
+    }
 }

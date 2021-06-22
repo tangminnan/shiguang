@@ -23,4 +23,6 @@ public interface ReadDao {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    int updateStatus(ReadDO readDO);
 }

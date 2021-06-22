@@ -23,4 +23,6 @@ public interface InterestDao {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    int updateStatus(InterestDO interestDO);
 }

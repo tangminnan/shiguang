@@ -34,6 +34,7 @@ public class PersonSortController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("status",1);
         List<PersonSortDO> sortList = sortService.list(query);
 //        if (null != sortList && sortList.size() > 0){
 //            for (PersonSortDO personSortDO : sortList){
@@ -75,6 +76,7 @@ public class PersonSortController {
         if (list.size() > 0){
             return R.error("人群编码已存在");
         }
+        sort.setStatus(1L);
         if(sortService.save(sort)>0){
             return R.ok();
         }
@@ -97,12 +99,28 @@ public class PersonSortController {
     @PostMapping( "/remove")
     @ResponseBody
     @RequiresPermissions("information:personSort:remove")
-    public R remove( Long id){
-        if(sortService.remove(id)>0){
+    public R updateStatus( Long id){
+        PersonSortDO personSortDO = new PersonSortDO();
+        personSortDO.setStatus(0L);
+        personSortDO.setId(id);
+        if(sortService.updateStatus(personSortDO)>0){
             return R.ok();
         }
         return R.error();
     }
+
+//    /**
+//     * 删除
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    @RequiresPermissions("information:personSort:remove")
+//    public R remove( Long id){
+//        if(sortService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 删除

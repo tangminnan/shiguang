@@ -48,4 +48,9 @@ public class CardTypeServiceImpl implements CardTypeService {
     public int batchRemove(Long[] ids){
         return typeDao.batchRemove(ids);
     }
+
+    @Override
+    public int updateStatus(CardTypeDO cardTypeDO){
+        return typeDao.updateStatus(cardTypeDO);
+    }
 }

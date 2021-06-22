@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
+<meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
@@ -24,6 +24,8 @@
 								<i class="fa fa-trash" aria-hidden="true"></i>批量停用
 							</button>
 						</div>
+						<br>
+						<div class="columns pull-left" style="display:flex; margin-top:20px;margin-left: -375px">
 						<div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
@@ -51,6 +53,7 @@
 							<input id="age" type="text" class="form-control"
 								   placeholder="会员年龄">
 						</div>
+					</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
 					</table>

@@ -37,6 +37,7 @@ public class ReadController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("status",1);
         List<ReadDO> readList = readService.list(query);
         int total = readService.count(query);
         PageUtils pageUtils = new PageUtils(readList, total);
@@ -71,6 +72,7 @@ public class ReadController {
         if (list.size() > 0){
             return R.error("读卡方式id已存在");
         }
+        read.setStatus(1L);
         if(readService.save(read)>0){
             return R.ok();
         }
@@ -93,12 +95,28 @@ public class ReadController {
     @PostMapping( "/remove")
     @ResponseBody
     @RequiresPermissions("information:read:remove")
-    public R remove(Long id){
-        if(readService.remove(id)>0){
+    public R updateStatus(Long id){
+        ReadDO readDO = new ReadDO();
+        readDO.setStatus(0L);
+        readDO.setId(id);
+        if(readService.updateStatus(readDO)>0){
             return R.ok();
         }
         return R.error();
     }
+
+//    /**
+//     * 删除
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    @RequiresPermissions("information:read:remove")
+//    public R remove(Long id){
+//        if(readService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 删除

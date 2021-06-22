@@ -105,7 +105,7 @@ function add() {
 	});
 }
 function edit(cardNumber) {
-	layer.open({
+    var toIndex = layer.open({
 		type : 2,
 		title : '眼生物参数',
 		maxmin : true,
@@ -113,6 +113,7 @@ function edit(cardNumber) {
 		area : [ '1000px', '820px' ],
 		content : prefix + '/edit/' + cardNumber // iframe的url
 	});
+    layer.full(toIndex);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

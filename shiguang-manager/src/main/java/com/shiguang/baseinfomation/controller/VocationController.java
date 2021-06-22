@@ -34,6 +34,7 @@ public class VocationController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("status",1);
         List<VocationDO> vocationList = vocationService.list(query);
         int total = vocationService.count(query);
         PageUtils pageUtils = new PageUtils(vocationList, total);
@@ -68,6 +69,7 @@ public class VocationController {
         if (list.size() > 0){
             return R.error("职业编码已存在");
         }
+        vocation.setStatus(1L);
         if(vocationService.save(vocation)>0){
             return R.ok();
         }
@@ -90,12 +92,28 @@ public class VocationController {
     @PostMapping( "/remove")
     @ResponseBody
     @RequiresPermissions("information:vocation:remove")
-    public R remove( Long id){
-        if(vocationService.remove(id)>0){
+    public R updateStatus( Long id){
+        VocationDO vocationDO = new VocationDO();
+        vocationDO.setStatus(0L);
+        vocationDO.setId(id);
+        if(vocationService.updateStatus(vocationDO)>0){
             return R.ok();
         }
         return R.error();
     }
+
+//    /**
+//     * 删除
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    @RequiresPermissions("information:vocation:remove")
+//    public R remove( Long id){
+//        if(vocationService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 删除

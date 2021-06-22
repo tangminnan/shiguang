@@ -55,6 +55,18 @@
 									<input id="departTypes" name="departTypes" th:value="${department.departType}" class="form-control" type="hidden">
 								</div>
 							</div>
+							<div class="form-group" id="tab3" style="display: none">
+								<label class="col-sm-3 control-label">关联加工中心：</label>
+								<div class="col-sm-8">
+									<select name="fanuc" id="fanuc" class="form-control" data-actions-box="false" data-size="5">
+										<option></option>
+										<option th:each="ls:${departmentDOList}"
+												th:text="${ls.departName}"
+												th:value="${ls.departName}"></option>
+									</select>
+									<input id="fanucs" name="fanucs" th:value="${department.fanuc}" class="form-control" type="hidden">
+								</div>
+							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">销售方式：</label>
 								<div class="col-sm-8">
@@ -84,6 +96,18 @@
 										<option value="1">不可以同单销售</option>
 									</select>
 									<input id="sameSells" name="sameSells" th:value="${department.sameSell}" class="form-control" type="hidden"
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">所属公司：</label>
+								<div class="col-sm-8">
+									<select name="companyId" id="companyId" class="form-control" data-actions-box="false" data-size="5">
+										<option></option>
+										<option th:each="ls:${companyList}"
+												th:text="${ls.name}"
+												th:value="${ls.id}"></option>
+									</select>
+									<input id="companyIds" name="companyIds" th:value="${department.companyId}" class="form-control" type="hidden">
 								</div>
 							</div>
 							<!--<div class="form-group">	-->
@@ -138,21 +162,28 @@
 	<script type="text/javascript">
         $().ready(function(){
             var departTypes = $("input[name='departTypes']").val();
-            $("#departType").find("[value="+departTypes+"]").attr("selected",true);
+            $("#departType").find("[value='"+departTypes+"']").attr("selected",true);
             var sameSells = $("input[name='sameSells']").val();
-            $("#sameSell").find("[value="+sameSells+"]").attr("selected",true);
+            $("#sameSell").find("[value='"+sameSells+"']").attr("selected",true);
+            var fanucs = $("input[name='fanucs']").val();
+            $("#fanuc").find("[value='"+fanucs+"']").attr("selected",true);
+            var companyIds = $("input[name='companyIds']").val();
+            $("#companyId").find("[value='"+companyIds+"']").attr("selected",true);
             if (departTypes == '销售门店'){
                 tab1.style="display: block";
                 tab2.style="display: block";
+                tab3.style="display: block";
 			}
         });
 		function setChange(value){
             if (value == '销售门店'){
                 tab1.style="display: block";
                 tab2.style="display: block";
+                tab3.style="display: block";
             } else {
                 tab1.style="display: none";
                 tab2.style="display: none";
+                tab3.style="display: none";
             }
 		}
 	</script>

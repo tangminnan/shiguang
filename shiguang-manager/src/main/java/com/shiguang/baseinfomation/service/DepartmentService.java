@@ -19,4 +19,6 @@ public interface DepartmentService {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    int updateStatus(DepartmentDO departmentDO);
 }

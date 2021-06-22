@@ -1,5 +1,6 @@
 package com.shiguang.baseinfomation.service;
 
+import com.shiguang.baseinfomation.domain.InterestDO;
 import com.shiguang.baseinfomation.domain.PersonSortDO;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface PersonSortService {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    int updateStatus(PersonSortDO personSortDO);
 }

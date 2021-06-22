@@ -11,6 +11,8 @@ public class InterestDO implements Serializable {
     private String interestNumber;
     //兴趣名称
     private String imterestName;
+    //状态(0:删除1:未删除)
+    private Long status;
 
     /**
      * 设置：
@@ -47,5 +49,17 @@ public class InterestDO implements Serializable {
      */
     public String getImterestName() {
         return imterestName;
+    }
+    /**
+     * 设置：状态(0:删除1:未删除)
+     */
+    public void setStatus(Long status) {
+        this.status = status;
+    }
+    /**
+     * 获取：状态(0:删除1:未删除)
+     */
+    public Long getStatus() {
+        return status;
     }
 }

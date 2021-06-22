@@ -33,6 +33,7 @@ public class CardTypeController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("status",1);
         List<CardTypeDO> typeList = typeService.list(query);
         if (null != typeList && typeList.size() > 0){
             for (CardTypeDO cardTypeDO : typeList){
@@ -78,6 +79,7 @@ public class CardTypeController {
         if (list.size() > 0){
             return R.error("会员卡名称已存在");
         }
+        type.setStatus(1L);
         if(typeService.save(type)>0){
             return R.ok();
         }
@@ -97,15 +99,31 @@ public class CardTypeController {
     /**
      * 删除
      */
-    @PostMapping( "/remove")
     @ResponseBody
+    @RequestMapping("/remove")
     @RequiresPermissions("information:cardType:remove")
-    public R remove( Long id){
-        if(typeService.remove(id)>0){
+    public R updateStatus( Long id){
+        CardTypeDO cardTypeDO = new CardTypeDO();
+        cardTypeDO.setStatus(0L);
+        cardTypeDO.setId(id);
+        if(typeService.updateStatus(cardTypeDO)>0){
             return R.ok();
         }
         return R.error();
     }
+
+//    /**
+//     * 删除
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    @RequiresPermissions("information:cardType:remove")
+//    public R remove( Long id){
+//        if(typeService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 删除

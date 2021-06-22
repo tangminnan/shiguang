@@ -186,7 +186,7 @@ function updateEnable(id,enable){
     });
 }
 function edit(id) {
-	layer.open({
+	var toIndex = layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
@@ -194,6 +194,7 @@ function edit(id) {
 		area : [ '1000px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
+    layer.full(toIndex);
 }
 function detail(id) {
     layer.open({

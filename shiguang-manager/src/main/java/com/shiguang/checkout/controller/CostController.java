@@ -39,6 +39,7 @@ public class CostController {
 //        List<CostDO> costList = costService.list(query);
 //        int total = costService.count(query);
 //        PageUtils pageUtils = new PageUtils(costList, total);
+        query.put("state",1);
         List<MemberDO> memberDOList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);

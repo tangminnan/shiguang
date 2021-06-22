@@ -140,7 +140,7 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	layer.open({
+	var toIndex = layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
@@ -148,6 +148,7 @@ function add() {
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
+    layer.full(toIndex);
 }
 
 /**
@@ -155,7 +156,7 @@ function add() {
  */
 function importtemplate(){
     var checkType='PU_TONG';
-    layer.open({
+    var toIndex = layer.open({
         type : 2,
         title : '导入会员',
         maxmin : true,
@@ -163,6 +164,7 @@ function importtemplate(){
         area : [ '800px', '520px' ],
         content : prefix + '/information/'+checkType // iframe的url
     });
+    layer.full(toIndex)
 }
 
 function updateEnable(id,enable){
@@ -191,7 +193,7 @@ function updateEnable(id,enable){
     });
 }
 function edit(id) {
-	layer.open({
+    var toIndex = layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
@@ -199,6 +201,7 @@ function edit(id) {
 		area : [ '900px', '820px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
+    layer.full(toIndex);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

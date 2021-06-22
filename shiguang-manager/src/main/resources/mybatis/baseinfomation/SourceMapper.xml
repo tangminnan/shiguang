@@ -4,15 +4,16 @@
 <mapper namespace="com.shiguang.baseinfomation.dao.SourceDao">
 
     <select id="get" resultType="com.shiguang.baseinfomation.domain.SourceDO">
-		select `id`,`source_number`,`source_name` from source where id = #{value}
+		select `id`,`source_number`,`source_name`,`status` from source where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.baseinfomation.domain.SourceDO">
-        select `id`,`source_number`,`source_name` from source
+        select `id`,`source_number`,`source_name`,`status` from source
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="sourceNumber != null and sourceNumber != ''"> and source_number = #{sourceNumber} </if>
             <if test="sourceName != null and sourceName != ''"> and source_name = #{sourceName} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -33,6 +34,7 @@
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="sourceNumber != null and sourceNumber != ''"> and source_number = #{sourceNumber} </if>
             <if test="sourceName != null and sourceName != ''"> and source_name = #{sourceName} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
         </where>
     </select>
 
@@ -40,12 +42,14 @@
 		insert into source
 		(
 			`source_number`,
-			`source_name`
+			`source_name`,
+			`status`
 		)
 		values
 		(
 			#{sourceNumber},
-			#{sourceName}
+			#{sourceName},
+			#{status}
 		)
 	</insert>
 
@@ -61,6 +65,10 @@
     <delete id="remove">
 		delete from source where id = #{value}
 	</delete>
+
+    <update id="updateStatus" parameterType="com.shiguang.baseinfomation.domain.SourceDO">
+        update source set `status` = #{status} where id = #{id}
+    </update>
 
     <delete id="batchRemove">
         delete from source where id in

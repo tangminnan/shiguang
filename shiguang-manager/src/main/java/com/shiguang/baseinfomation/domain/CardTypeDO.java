@@ -22,6 +22,8 @@ public class CardTypeDO implements Serializable {
     private Long isDefault;
     //参与优惠活动(0:参与1:否)
     private Long isPartake;
+    //状态(0:删除1:未删除)
+    private Long status;
 
     /**
      * 设置：
@@ -130,5 +132,17 @@ public class CardTypeDO implements Serializable {
      */
     public Long getIsPartake() {
         return isPartake;
+    }
+    /**
+     * 设置：状态(0:删除1:未删除)
+     */
+    public void setStatus(Long status) {
+        this.status = status;
+    }
+    /**
+     * 获取：状态(0:删除1:未删除)
+     */
+    public Long getStatus() {
+        return status;
     }
 }

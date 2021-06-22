@@ -1,5 +1,6 @@
 package com.shiguang.baseinfomation.service;
 
+import com.shiguang.baseinfomation.domain.SourceDO;
 import com.shiguang.baseinfomation.domain.VocationDO;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface VocationService {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    int updateStatus(VocationDO vocationDO);
 }

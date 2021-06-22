@@ -23,4 +23,6 @@ public interface VocationDao {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    int updateStatus(VocationDO vocationDO);
 }

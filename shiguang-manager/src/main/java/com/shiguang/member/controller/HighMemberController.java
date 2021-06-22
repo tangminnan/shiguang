@@ -42,9 +42,11 @@ public class HighMemberController {
     String Member(Model model){
         Map<String, Object> map = new HashMap<>();
         map.put("departType","销售门店");
+        map.put("state",1);
         List<DepartmentDO> departmentDOList = departmentService.list(map);
         model.addAttribute("departmentDOList",departmentDOList);
         Map<String, Object> maps = new HashMap<>();
+        maps.put("status",1);
         List<CardTypeDO> cardTypeDOList = typeService.list(maps);
         model.addAttribute("cardTypeDOList",cardTypeDOList);
         List<PersonSortDO> personSortDOList = personSortService.list(maps);
@@ -64,6 +66,7 @@ public class HighMemberController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("state",1);
         List<MemberDO> memberList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberList, total);
@@ -134,11 +137,27 @@ public class HighMemberController {
     @ResponseBody
     @RequiresPermissions("information:highmember:remove")
     public R remove(Long id){
-        if(memberService.remove(id)>0){
+        MemberDO memberDO = new MemberDO();
+        memberDO.setState(0L);
+        memberDO.setId(id);
+        if(memberService.update(memberDO)>0){
             return R.ok();
         }
         return R.error();
     }
+
+//    /**
+//     * 删除
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    @RequiresPermissions("information:highmember:remove")
+//    public R remove(Long id){
+//        if(memberService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 修改状态

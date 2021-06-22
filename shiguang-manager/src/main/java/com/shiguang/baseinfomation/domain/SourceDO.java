@@ -11,6 +11,8 @@ public class SourceDO implements Serializable {
     private String sourceNumber;
     //来源名称
     private String sourceName;
+    //状态(0:删除1:未删除)
+    private Long status;
 
     /**
      * 设置：主键
@@ -47,5 +49,17 @@ public class SourceDO implements Serializable {
      */
     public String getSourceName() {
         return sourceName;
+    }
+    /**
+     * 设置：状态(0:删除1:未删除)
+     */
+    public void setStatus(Long status) {
+        this.status = status;
+    }
+    /**
+     * 获取：状态(0:删除1:未删除)
+     */
+    public Long getStatus() {
+        return status;
     }
 }

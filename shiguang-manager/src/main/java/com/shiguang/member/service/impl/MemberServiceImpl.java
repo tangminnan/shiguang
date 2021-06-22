@@ -156,6 +156,7 @@ public class MemberServiceImpl implements MemberService {
                         member.setDepartNumber(departNumber);
                         member.setRegisterTime(new Date());
                         member.setMemberOption(0L);
+                        member.setState(1L);
 
                         Date dd = new Date();
                         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");

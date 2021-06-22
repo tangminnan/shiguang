@@ -48,4 +48,9 @@ public class ReadServiceImpl implements ReadService {
     public int batchRemove(Long[] ids){
         return readDao.batchRemove(ids);
     }
+
+    @Override
+    public int updateStatus(ReadDO readDO){
+        return readDao.updateStatus(readDO);
+    }
 }

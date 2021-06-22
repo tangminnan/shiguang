@@ -56,6 +56,18 @@
 									<span style="color: red">*</span>
 								</div>
 							</div>
+							<div class="form-group" id="tab3" style="display: none">
+								<label class="col-sm-3 control-label">关联加工中心：</label>
+								<div class="col-sm-8">
+									<select name="fanuc" id="fanuc" class="form-control" data-actions-box="false" data-size="5">
+										<option></option>
+										<option th:each="ls:${departmentDOList}"
+												th:text="${ls.departName}"
+												th:value="${ls.departName}"></option>
+									</select>
+									<!--<input id="fanuc" name="fanuc" class="form-control" type="text">-->
+								</div>
+							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">销售方式：</label>
 								<div class="col-sm-8">
@@ -86,12 +98,18 @@
 							</select>
 							</div>
 							</div>
-																												<!--<div class="form-group">	-->
-								<!--<label class="col-sm-3 control-label">所属公司：</label>-->
-								<!--<div class="col-sm-8">-->
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">所属公司：</label>
+								<div class="col-sm-8">
+									<select name="companyId" id="companyId" class="form-control" data-actions-box="false" data-size="5">
+										<option></option>
+										<option th:each="ls:${companyList}"
+												th:text="${ls.name}"
+												th:value="${ls.id}"></option>
+									</select>
 									<!--<input id="company" name="company" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
+								</div>
+							</div>
 
 							<div class="form-group">
 								<label class="col-sm-3 control-label">部门全称：</label>
@@ -134,9 +152,11 @@
 			if (value == '销售门店'){
                 tab1.style="display: block";
                 tab2.style="display: block";
+                tab3.style="display: block"
 			} else {
                 tab1.style="display: none";
                 tab2.style="display: none";
+                tab3.style="display: none"
 			}
 		}
     </script>

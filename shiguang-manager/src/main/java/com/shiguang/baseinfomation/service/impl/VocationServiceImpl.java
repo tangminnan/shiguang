@@ -1,6 +1,7 @@
 package com.shiguang.baseinfomation.service.impl;
 
 import com.shiguang.baseinfomation.dao.VocationDao;
+import com.shiguang.baseinfomation.domain.SourceDO;
 import com.shiguang.baseinfomation.domain.VocationDO;
 import com.shiguang.baseinfomation.service.VocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,10 @@ public class VocationServiceImpl implements VocationService {
     @Override
     public int batchRemove(Long[] ids){
         return vocationDao.batchRemove(ids);
+    }
+
+    @Override
+    public int updateStatus(VocationDO vocationDO) {
+        return vocationDao.updateStatus(vocationDO);
     }
 }

@@ -3,11 +3,11 @@
 
 <mapper namespace="com.shiguang.baseinfomation.dao.ReadDao">
     <select id="get" resultType="com.shiguang.baseinfomation.domain.ReadDO">
-		select `id`,`card_id`,`card_name`,`area_code`,`block_code`,`simple_type`,`simple_value`,`data_format`,`order_field`,`is_cut`,`remark` from card_read where id = #{value}
+		select `id`,`card_id`,`card_name`,`area_code`,`block_code`,`simple_type`,`simple_value`,`data_format`,`order_field`,`is_cut`,`remark`,`status` from card_read where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.baseinfomation.domain.ReadDO">
-        select `id`,`card_id`,`card_name`,`area_code`,`block_code`,`simple_type`,`simple_value`,`data_format`,`order_field`,`is_cut`,`remark` from card_read
+        select `id`,`card_id`,`card_name`,`area_code`,`block_code`,`simple_type`,`simple_value`,`data_format`,`order_field`,`is_cut`,`remark`,`status` from card_read
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="cardId != null and cardId != ''"> and card_id = #{cardId} </if>
@@ -20,6 +20,7 @@
             <if test="orderField != null and orderField != ''"> and order_field = #{orderField} </if>
             <if test="isCut != null and isCut != ''"> and is_cut = #{isCut} </if>
             <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -48,6 +49,7 @@
             <if test="orderField != null and orderField != ''"> and order_field = #{orderField} </if>
             <if test="isCut != null and isCut != ''"> and is_cut = #{isCut} </if>
             <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
         </where>
     </select>
 
@@ -63,7 +65,8 @@
 			`data_format`,
 			`order_field`,
 			`is_cut`,
-			`remark`
+			`remark`,
+			`status`
 		)
 		values
 		(
@@ -76,7 +79,8 @@
 			#{dataFormat},
 			#{orderField},
 			#{isCut},
-			#{remark}
+			#{remark},
+			#{status}
 		)
 	</insert>
 
@@ -100,6 +104,10 @@
     <delete id="remove">
 		delete from card_read where id = #{value}
 	</delete>
+
+    <update id="updateStatus" parameterType="com.shiguang.baseinfomation.domain.ReadDO">
+        update card_read set `status` = #{status} where id = #{id}
+    </update>
 
     <delete id="batchRemove">
         delete from card_read where id in

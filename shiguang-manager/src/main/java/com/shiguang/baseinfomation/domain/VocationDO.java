@@ -11,6 +11,8 @@ public class VocationDO implements Serializable {
     private String vocationNumber;
     //职业名称
     private String vocationName;
+    //状态(0:删除1:未删除)
+    private Long status;
 
     /**
      * 设置：
@@ -47,5 +49,17 @@ public class VocationDO implements Serializable {
      */
     public String getVocationName() {
         return vocationName;
+    }
+    /**
+     * 设置：状态(0:删除1:未删除)
+     */
+    public void setStatus(Long status) {
+        this.status = status;
+    }
+    /**
+     * 获取：状态(0:删除1:未删除)
+     */
+    public Long getStatus() {
+        return status;
     }
 }

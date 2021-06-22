@@ -48,4 +48,9 @@ public class SourceServiceImpl implements SourceService {
     public int batchRemove(Long[] ids){
         return sourceDao.batchRemove(ids);
     }
+
+    @Override
+    public int updateStatus(SourceDO sourceDO) {
+        return sourceDao.updateStatus(sourceDO);
+    }
 }

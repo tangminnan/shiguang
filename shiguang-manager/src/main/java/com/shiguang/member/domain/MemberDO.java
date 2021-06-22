@@ -89,6 +89,8 @@ public class MemberDO implements Serializable {
     private Long status;
     //注册时间
     private String createTime;
+    //状态(0:删除1:未删除)
+    private Long state;
 
     /**
      * 设置：
@@ -598,5 +600,17 @@ public class MemberDO implements Serializable {
      */
     public String getCreateTime() {
         return createTime;
+    }
+    /**
+     * 设置：状态(0:删除1:未删除)
+     */
+    public void setState(Long state) {
+        this.state = state;
+    }
+    /**
+     * 获取：状态(0:删除1:未删除)
+     */
+    public Long getState() {
+        return state;
     }
 }

@@ -3,15 +3,16 @@
 
 <mapper namespace="com.shiguang.baseinfomation.dao.PersonSortDao">
     <select id="get" resultType="com.shiguang.baseinfomation.domain.PersonSortDO">
-		select `id`,`crowd_number`,`crowd_name` from crowd_sort where id = #{value}
+		select `id`,`crowd_number`,`crowd_name`,`status` from crowd_sort where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.baseinfomation.domain.PersonSortDO">
-        select `id`,`crowd_number`,`crowd_name` from crowd_sort
+        select `id`,`crowd_number`,`crowd_name`,`status` from crowd_sort
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="crowdNumber != null and crowdNumber != ''"> and crowd_number = #{crowdNumber} </if>
             <if test="crowdName != null and crowdName != ''"> and crowd_name = #{crowdName} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -32,6 +33,7 @@
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="crowdNumber != null and crowdNumber != ''"> and crowd_number = #{crowdNumber} </if>
             <if test="crowdName != null and crowdName != ''"> and crowd_name = #{crowdName} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
         </where>
     </select>
 
@@ -40,13 +42,15 @@
 		(
 			`id`,
 			`crowd_number`,
-			`crowd_name`
+			`crowd_name`,
+			`status`
 		)
 		values
 		(
 			#{id},
 			#{crowdNumber},
-			#{crowdName}
+			#{crowdName},
+			#{status}
 		)
 	</insert>
 
@@ -55,6 +59,7 @@
         <set>
             <if test="crowdNumber != null">`crowd_number` = #{crowdNumber}, </if>
             <if test="crowdName != null">`crowd_name` = #{crowdName}</if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
         </set>
         where id = #{id}
     </update>
@@ -62,6 +67,10 @@
     <delete id="remove">
 		delete from crowd_sort where id = #{value}
 	</delete>
+
+    <update id="updateStatus" parameterType="com.shiguang.baseinfomation.domain.PersonSortDO">
+        update crowd_sort set `status` = #{status} where id = #{id}
+    </update>
 
     <delete id="batchRemove">
         delete from crowd_sort where id in

@@ -106,7 +106,7 @@ function add() {
 	});
 }
 function edit(cardNumber) {
-	layer.open({
+   var toIndex = layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
@@ -114,6 +114,7 @@ function edit(cardNumber) {
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + cardNumber // iframe的url
 	});
+   layer.full(toIndex);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

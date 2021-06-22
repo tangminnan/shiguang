@@ -21,7 +21,9 @@ public class DepartmentDO implements Serializable {
     //部门类型
     private String departType;
     //所属公司
-    private String company;
+    private Integer companyId;
+    //所属公司名称
+    private String name;
     //负责人
     private String personCharge;
     //部门状态(0:禁用1:启用)
@@ -38,6 +40,8 @@ public class DepartmentDO implements Serializable {
     private Long readCard;
     //公司名称
     private String companyName;
+    //状态(0:删除1:未删除)
+    private Long state;
 
     /**
      * 设置：
@@ -126,14 +130,26 @@ public class DepartmentDO implements Serializable {
     /**
      * 设置：所属公司
      */
-    public void setCompany(String company) {
-        this.company = company;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
     /**
      * 获取：所属公司
      */
-    public String getCompany() {
-        return company;
+    public Integer getCompanyId() {
+        return companyId;
+    }
+    /**
+     * 设置：所属公司名称
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+    /**
+     * 获取：所属公司名称
+     */
+    public String getName() {
+        return name;
     }
     /**
      * 设置：负责人
@@ -230,5 +246,17 @@ public class DepartmentDO implements Serializable {
      */
     public String getCompanyName() {
         return companyName;
+    }
+    /**
+     * 设置：状态(0:删除1:未删除)
+     */
+    public void setState(Long state) {
+        this.state = state;
+    }
+    /**
+     * 获取：状态(0:删除1:未删除)
+     */
+    public Long getState() {
+        return state;
     }
 }

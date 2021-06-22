@@ -1,6 +1,7 @@
 package com.shiguang.baseinfomation.service;
 
 import com.shiguang.baseinfomation.domain.ReadDO;
+import com.shiguang.baseinfomation.domain.SourceDO;
 
 import java.util.List;
 import java.util.Map;
@@ -19,4 +20,6 @@ public interface ReadService {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    int updateStatus(ReadDO readDO);
 }

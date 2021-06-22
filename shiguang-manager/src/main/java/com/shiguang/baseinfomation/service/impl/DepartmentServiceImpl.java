@@ -48,4 +48,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     public int batchRemove(Long[] ids){
         return departmentDao.batchRemove(ids);
     }
+
+    @Override
+    public int updateStatus(DepartmentDO departmentDO) {
+        return departmentDao.updateStatus(departmentDO);
+    }
 }

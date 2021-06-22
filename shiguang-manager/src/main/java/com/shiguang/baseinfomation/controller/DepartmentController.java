@@ -5,6 +5,9 @@ import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.member.domain.MemberDO;
+import com.shiguang.mfrs.domain.CompanyDO;
+import com.shiguang.mfrs.service.CompanyService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,8 @@ import java.util.Map;
 public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private CompanyService companyService;
 
     @GetMapping()
     @RequiresPermissions("information:department:department")
@@ -33,6 +38,7 @@ public class DepartmentController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("state",1);
         List<DepartmentDO> departmentList = departmentService.list(query);
         int total = departmentService.count(query);
         PageUtils pageUtils = new PageUtils(departmentList, total);
@@ -41,7 +47,13 @@ public class DepartmentController {
 
     @GetMapping("/add")
     @RequiresPermissions("information:department:add")
-    String add(){
+    String add(Model model){
+        Map<String, Object> map = new HashMap<>();
+        List<CompanyDO> list = companyService.list(map);
+        model.addAttribute("companyList",list);
+        map.put("departType","加工中心");
+        List<DepartmentDO> departmentDOList = departmentService.list(map);
+        model.addAttribute("departmentDOList",departmentDOList);
         return "baseinfomation/department/add";
     }
 
@@ -50,6 +62,12 @@ public class DepartmentController {
     String edit(@PathVariable("id") Long id,Model model){
         DepartmentDO department = departmentService.get(id);
         model.addAttribute("department", department);
+        Map<String,Object> map = new HashMap<>();
+        List<CompanyDO> list = companyService.list(map);
+        model.addAttribute("companyList",list);
+        map.put("departType","加工中心");
+        List<DepartmentDO> departmentDOList = departmentService.list(map);
+        model.addAttribute("departmentDOList",departmentDOList);
         return "baseinfomation/department/edit";
     }
 
@@ -67,6 +85,11 @@ public class DepartmentController {
         if (list.size() > 0){
             return R.error("部门编码已存在");
         }
+        if (null == department.getSameSell()){
+            department.setSameSell(2L);
+        }
+        department.setStatus(0L);
+        department.setState(1L);
         if(departmentService.save(department)>0){
             return R.ok();
         }
@@ -86,15 +109,44 @@ public class DepartmentController {
     /**
      * 删除
      */
-    @PostMapping( "/remove")
     @ResponseBody
+    @RequestMapping("/remove")
     @RequiresPermissions("information:department:remove")
-    public R remove(Long id){
-        if(departmentService.remove(id)>0){
+    public R updateStatus( Long id){
+        DepartmentDO departmentDO = new DepartmentDO();
+        departmentDO.setState(0L);
+        departmentDO.setId(id);
+        if(departmentService.updateStatus(departmentDO)>0){
             return R.ok();
         }
         return R.error();
     }
+
+    /**
+     * 修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value="/updateEnable")
+    public R updateEnable(Long id,Long enable) {
+        DepartmentDO departmentDO = new DepartmentDO();
+        departmentDO.setId(id);
+        departmentDO.setStatus(enable);
+        departmentService.update(departmentDO);
+        return R.ok();
+    }
+
+//    /**
+//     * 删除
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    @RequiresPermissions("information:department:remove")
+//    public R remove(Long id){
+//        if(departmentService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 删除

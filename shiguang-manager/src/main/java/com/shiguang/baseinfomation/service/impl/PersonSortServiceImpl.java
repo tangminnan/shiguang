@@ -48,4 +48,9 @@ public class PersonSortServiceImpl implements PersonSortService {
     public int batchRemove(Long[] ids){
         return sortDao.batchRemove(ids);
     }
+
+    @Override
+    public int updateStatus(PersonSortDO personSortDO) {
+        return sortDao.updateStatus(personSortDO);
+    }
 }

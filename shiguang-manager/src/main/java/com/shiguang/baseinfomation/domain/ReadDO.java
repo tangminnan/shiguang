@@ -33,6 +33,8 @@ public class ReadDO implements Serializable {
     private String isCut;
     //备注
     private String remark;
+    //状态(0:删除1:未删除)
+    private Long status;
 
     /**
      * 设置：主键
@@ -165,5 +167,17 @@ public class ReadDO implements Serializable {
      */
     public String getRemark() {
         return remark;
+    }
+    /**
+     * 设置：状态(0:删除1:未删除)
+     */
+    public void setStatus(Long status) {
+        this.status = status;
+    }
+    /**
+     * 获取：状态(0:删除1:未删除)
+     */
+    public Long getStatus() {
+        return status;
     }
 }

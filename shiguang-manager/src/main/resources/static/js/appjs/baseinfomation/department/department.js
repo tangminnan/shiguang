@@ -60,27 +60,54 @@ function load() {
 									title : '部门类型',
                                     align : 'center'
 								},
+								{
+									field : 'fanuc',
+									title : '加工中心',
+									align : 'center'
+								},
 																{
-									field : 'company', 
+									field : 'name',
 									title : '所属公司',
                                     align : 'center'
 								},
 																{
-									field : 'personCharge', 
-									title : '负责人',
-                                    align : 'center'
+									field : 'sameSell',
+									title : '隐形和护理液同单销售',
+                                    align : 'center',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return '<span class="label">可以同单销售</span>';
+										}else if(value == '1'){
+                                            return '<span class="label">不可以同单销售</span>';
+
+                                        }else if(value == '2'){
+                                            return '<span class="label">未设置</span>';
+
+                                        }
+									}
 								},
 																{
 									field : 'status', 
 									title : '部门状态',
                                     align : 'center',
 									formatter : function(value, row, index) {
-										if(value == '0'){
-											return '<span class="label">禁用</span>';
-										}else if(value == '1'){
-											return '<span class="label">启用</span>';
+										var str = '';
 
-										}
+										str +=' <div class="switch onoffswitch col-sm-1"> ';
+										str +=' <div class="onoffswitch"> ';
+										str +=' <input name="allowComment" ';
+										//启用状态 0：启用；1：禁用
+										if(row.status == 0)
+											str += ' checked="" ';
+
+										str +=' type="checkbox" onchange="updateEnable(' +row.id+ ',this)" value="' +row.id+ '" class="onoffswitch-checkbox" id="example1' +row.id+ '">  ';
+										str +=' <label class="onoffswitch-label" for="example1' +row.id+ '">  ';
+										str +=' <span class="onoffswitch-inner" ></span> ';
+										str +=' <span class="onoffswitch-switch" ></span> ';
+										str +=' </label> ';
+										str +=' </div>';
+										str +=' </div>';
+										return str;
 									}
 								},
 																{
@@ -106,7 +133,7 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	layer.open({
+	var toIndex = layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
@@ -114,9 +141,10 @@ function add() {
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
+	layer.full(toIndex)
 }
 function edit(id) {
-	layer.open({
+    var toIndex = layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
@@ -124,7 +152,35 @@ function edit(id) {
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
+    layer.full(toIndex)
 }
+
+function updateEnable(id,enable){
+    var isEnable = 1;
+    if($(enable).prop("checked")){
+        isEnable = 0;
+    }
+
+    $.ajax({
+        url : prefix + "/updateEnable",
+        type : "post",
+        data : {
+            'id' : id,
+            'enable' : isEnable
+        },
+        dataType: 'JSON',
+        async : false,
+        success : function(r) {
+            if (r.code == 0) {
+                layer.msg(r.msg);
+                reLoad();
+            } else {
+                layer.msg(r.msg);
+            }
+        }
+    });
+}
+
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]

@@ -33,6 +33,7 @@ public class InterestController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("status",1);
         List<InterestDO> interestList = interestService.list(query);
         int total = interestService.count(query);
         PageUtils pageUtils = new PageUtils(interestList, total);
@@ -67,6 +68,7 @@ public class InterestController {
         if (list.size() > 0){
             return R.error("兴趣编码已存在");
         }
+        interest.setStatus(1L);
         if(interestService.save(interest)>0){
             return R.ok();
         }
@@ -89,12 +91,28 @@ public class InterestController {
     @PostMapping( "/remove")
     @ResponseBody
     @RequiresPermissions("information:interest:remove")
-    public R remove(Long id){
-        if(interestService.remove(id)>0){
+    public R updateStatus(Long id){
+        InterestDO interestDO = new InterestDO();
+        interestDO.setStatus(0L);
+        interestDO.setId(id);
+        if(interestService.updateStatus(interestDO)>0){
             return R.ok();
         }
         return R.error();
     }
+
+//    /**
+//     * 删除
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    @RequiresPermissions("information:interest:remove")
+//    public R remove(Long id){
+//        if(interestService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 删除

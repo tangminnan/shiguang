@@ -4,15 +4,15 @@
 <mapper namespace="com.shiguang.member.dao.MemberDao">
 
     <select id="get" resultType="com.shiguang.member.domain.MemberDO">
-		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member where id = #{value}
+		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member where id = #{value}
 	</select>
 
     <select id="getCardNumber" resultType="com.shiguang.member.domain.MemberDO">
-		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member where card_number = #{value}
+		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member where card_number = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.member.domain.MemberDO">
-        select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status` from member
+        select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
@@ -55,6 +55,7 @@
             <if test="remark != null and remark != ''"> and remark = #{remark} </if>
             <if test="registerTime != null and registerTime != ''"> and register_time = #{registerTime} </if>
             <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="state != null and state != ''"> and state = #{state} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -85,6 +86,7 @@
         <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
         <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
         <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+        <if test="state != null and state != ''"> and m.state = #{state} </if>
     </where>
     <choose>
         <when test="sort != null and sort.trim() != ''">
@@ -118,6 +120,7 @@
             <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
             <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
             <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+            <if test="state != null and state != ''"> and m.state = #{state} </if>
         </where>
     </select>
 
@@ -165,6 +168,7 @@
             <if test="remark != null and remark != ''"> and remark = #{remark} </if>
             <if test="registerTime != null and registerTime != ''"> and register_time = #{registerTime} </if>
             <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="state != null and state != ''"> and state = #{state} </if>
         </where>
     </select>
 
@@ -208,7 +212,8 @@
 			`integral_pasd`,
 			`remark`,
 			`register_time`,
-			`status`
+			`status`,
+			`state`
 		)
 		values
 		(
@@ -249,7 +254,8 @@
 			#{integralPasd},
 			#{remark},
 			#{registerTime},
-			#{status}
+			#{status},
+			#{state}
 		)
 	</insert>
 
@@ -294,6 +300,7 @@
             <if test="remark != null">`remark` = #{remark}, </if>
             <if test="registerTime != null">`register_time` = #{registerTime}</if>
             <if test="status != null">`status` = #{status}</if>
+            <if test="state != null">`state` = #{state}</if>
         </set>
         where id = #{id}
     </update>

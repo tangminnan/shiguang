@@ -3,11 +3,11 @@
 
 <mapper namespace="com.shiguang.baseinfomation.dao.CardTypeDao">
     <select id="get" resultType="com.shiguang.baseinfomation.domain.CardTypeDO">
-		select `id`,`card_name`,`integer_first`,`integer_last`,`upgrade_card`,`integer_num`,`discount`,`is_default`,`is_partake` from card_type where id = #{value}
+		select `id`,`card_name`,`integer_first`,`integer_last`,`upgrade_card`,`integer_num`,`discount`,`is_default`,`is_partake`,`status` from card_type where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.baseinfomation.domain.CardTypeDO">
-        select `id`,`card_name`,`integer_first`,`integer_last`,`upgrade_card`,`integer_num`,`discount`,`is_default`,`is_partake` from card_type
+        select `id`,`card_name`,`integer_first`,`integer_last`,`upgrade_card`,`integer_num`,`discount`,`is_default`,`is_partake`,`status` from card_type
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="cardName != null and cardName != ''"> and card_name = #{cardName} </if>
@@ -18,6 +18,7 @@
             <if test="discount != null and discount != ''"> and discount = #{discount} </if>
             <if test="isDefault != null and isDefault != ''"> and is_default = #{isDefault} </if>
             <if test="isPartake != null and isPartake != ''"> and is_partake = #{isPartake} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -44,6 +45,7 @@
             <if test="discount != null and discount != ''"> and discount = #{discount} </if>
             <if test="isDefault != null and isDefault != ''"> and is_default = #{isDefault} </if>
             <if test="isPartake != null and isPartake != ''"> and is_partake = #{isPartake} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
         </where>
     </select>
 
@@ -58,7 +60,8 @@
 			`integer_num`,
 			`discount`,
 			`is_default`,
-			`is_partake`
+			`is_partake`,
+			`status`
 		)
 		values
 		(
@@ -70,7 +73,8 @@
 			#{integerNum},
 			#{discount},
 			#{isDefault},
-			#{isPartake}
+			#{isPartake},
+			#{status}
 		)
 	</insert>
 
@@ -92,6 +96,10 @@
     <delete id="remove">
 		delete from card_type where id = #{value}
 	</delete>
+
+    <update id="updateStatus" parameterType="com.shiguang.baseinfomation.domain.CardTypeDO">
+        update card_type set `status` = #{status} where id = #{id}
+    </update>
 
     <delete id="batchRemove">
         delete from card_type where id in

@@ -45,6 +45,7 @@ public class OptometryController {
         Query query = new Query(params);
 //        List<OptometryDO> optometryList = optometryService.list(query);
 //        int total = optometryService.count(query);
+        query.put("state",1);
         List<MemberDO> memberDOList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);

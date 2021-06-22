@@ -34,6 +34,7 @@ public class SourceController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("status",1);
         List<SourceDO> sourceList = sourceService.list(query);
         int total = sourceService.count(query);
         PageUtils pageUtils = new PageUtils(sourceList, total);
@@ -68,6 +69,7 @@ public class SourceController {
         if (list.size() > 0){
             return R.error("来源编码已存在");
         }
+        source.setStatus(1L);
         if(sourceService.save(source)>0){
             return R.ok();
         }
@@ -91,11 +93,27 @@ public class SourceController {
     @ResponseBody
     @RequiresPermissions("information:source:remove")
     public R remove(Long id){
-        if(sourceService.remove(id)>0){
+        SourceDO sourceDO = new SourceDO();
+        sourceDO.setStatus(0L);
+        sourceDO.setId(id);
+        if(sourceService.updateStatus(sourceDO)>0){
             return R.ok();
         }
         return R.error();
     }
+
+//    /**
+//     * 删除
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    @RequiresPermissions("information:source:remove")
+//    public R remove(Long id){
+//        if(sourceService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 删除
