@@ -10,11 +10,11 @@ import java.util.Map;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
 public interface GradualService {
 	
-	GradualDO get(Integer id);
+	GradualDO get(Integer gradualId);
 	
 	List<GradualDO> list(Map<String, Object> map);
 	
@@ -24,7 +24,7 @@ public interface GradualService {
 	
 	int update(GradualDO gradual);
 	
-	int remove(Integer id);
+	int remove(Integer gradualId);
 	
-	int batchRemove(Integer[] ids);
+	int batchRemove(Integer[] gradualIds);
 }

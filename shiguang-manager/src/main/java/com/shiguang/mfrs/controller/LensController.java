@@ -26,7 +26,7 @@ import com.shiguang.common.utils.R;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
  
 @Controller
@@ -59,10 +59,10 @@ public class LensController {
 	    return "mfrs/lens/add";
 	}
 
-	@GetMapping("/edit/{id}")
+	@GetMapping("/edit/{lensId}")
 	@RequiresPermissions("mfrs:lens:edit")
-	String edit(@PathVariable("id") Integer id,Model model){
-		LensDO lens = lensService.get(id);
+	String edit(@PathVariable("lensId") Integer lensId,Model model){
+		LensDO lens = lensService.get(lensId);
 		model.addAttribute("lens", lens);
 	    return "mfrs/lens/edit";
 	}
@@ -96,8 +96,8 @@ public class LensController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("mfrs:lens:remove")
-	public R remove( Integer id){
-		if(lensService.remove(id)>0){
+	public R remove( Integer lensId){
+		if(lensService.remove(lensId)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -109,8 +109,8 @@ public class LensController {
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("mfrs:lens:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] ids){
-		lensService.batchRemove(ids);
+	public R remove(@RequestParam("ids[]") Integer[] lensIds){
+		lensService.batchRemove(lensIds);
 		return R.ok();
 	}
 	

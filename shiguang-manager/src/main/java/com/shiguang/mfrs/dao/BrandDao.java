@@ -18,8 +18,10 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface BrandDao {
 
-	BrandDO get(Integer brandid);
-	
+//	BrandDO get(Integer brandid);
+	//关联所有品牌维护所需表
+	BrandDO getall(Integer brandid);
+
 	List<BrandDO> list(Map<String,Object> map);
 	
 	int count(Map<String,Object> map);

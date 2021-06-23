@@ -10,11 +10,11 @@ import java.util.Map;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
 public interface FunctionService {
 	
-	FunctionDO get(Integer id);
+	FunctionDO get(Integer functionId);
 	
 	List<FunctionDO> list(Map<String, Object> map);
 	
@@ -24,7 +24,7 @@ public interface FunctionService {
 	
 	int update(FunctionDO function);
 	
-	int remove(Integer id);
+	int remove(Integer functionId);
 	
-	int batchRemove(Integer[] ids);
+	int batchRemove(Integer[] functionIds);
 }

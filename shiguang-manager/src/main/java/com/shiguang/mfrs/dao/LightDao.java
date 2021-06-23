@@ -11,12 +11,12 @@ import org.apache.ibatis.annotations.Mapper;
  * 光度分类表
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
 @Mapper
 public interface LightDao {
 
-	LightDO get(Integer id);
+	LightDO get(Integer lightId);
 	
 	List<LightDO> list(Map<String,Object> map);
 	
@@ -26,7 +26,7 @@ public interface LightDao {
 	
 	int update(LightDO light);
 	
-	int remove(Integer id);
+	int remove(Integer light_id);
 	
-	int batchRemove(Integer[] ids);
+	int batchRemove(Integer[] lightIds);
 }

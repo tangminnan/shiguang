@@ -36,7 +36,7 @@
 				order by ${sort} ${order}
 			</when>
 			<otherwise>
-				order by mfrsid desc
+				order by mfrsid
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -102,7 +102,7 @@
 			</when>
 			<otherwise>
 				group by m.mfrsid
-				order by m.mfrsid desc
+				order by m.mfrsid
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">

@@ -41,102 +41,161 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">商品类别：</label>
                             <div class="col-sm-8">
-                                <select id="goodsid" name="goodsid" class="form-control">
-                                    <!--<option></option>-->
-                                    <!--<option th:each="ls:${goodsDOList}"-->
-                                            <!--th:text="${ls.goodsname}"-->
-                                            <!--th:value="${ls.goodsid}"></option>-->
-                                </select>
+                                <select id="goodsid" name="goodsid" class="form-control"
+                                        onchange="goodsidstr(this.options[this.options.selectedIndex].value)"></select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">镜架材质名称id：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="materialid" name="materialid" class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group" id="tab1" style="display: none">
                             <label class="col-sm-3 control-label">镜架材质名称：</label>
                             <div class="col-sm-8">
-                                <select id="materialname" name="materialname" class="form-control">
+                                <select id="materialid" name="materialid" class="form-control">
                                     <option></option>
                                     <option th:each="ls:${materialDOList}"
                                             th:text="${ls.materialname}"
-                                            th:value="${ls.materialname}"
+                                            th:value="${ls.materialid}"
                                     ></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">材料分类id：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="lensId" name="lensId" class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group" id="tab2" style="display: none">
                             <label class="col-sm-3 control-label">材料分类：</label>
                             <div class="col-sm-8">
-                                <select id="lensName" name="lensName" class="form-control">
+                                <select id="lensId" name="lensId" class="form-control">
                                     <option></option>
                                     <option th:each="ls:${lensDOList}"
                                             th:text="${ls.lensName}"
-                                            th:value="${ls.lensName}"
+                                            th:value="${ls.lensId}"
                                     ></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">光度分类id：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="lightId" name="lightId" class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group" id="tab3" style="display: none">
                             <label class="col-sm-3 control-label">光度分类：</label>
                             <div class="col-sm-8">
                                 <!--<input id="lightName" name="lightName" class="form-control" type="text">-->
-                                <select id="lightName" name="lightName" class="form-control">
+                                <select id="lightId" name="lightId" class="form-control"  onchange="lightIdstr(this.options[this.options.selectedIndex].value)">
                                     <option></option>
                                     <option th:each="ls:${lightDOList}"
                                             th:text="${ls.lightName}"
-                                            th:value="${ls.lightName}"
+                                            th:value="${ls.lightId}"
                                     ></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">折射率值：</label>
-                            <div class="col-sm-8">
-                                <!--<input id="refractivityvalue" name="refractivityvalue" class="form-control" type="text">-->
-                                <select id="refractivityvalue" name="refractivityvalue" class="form-control">
-                                    <option></option>
-                                    <option th:each="ls:${refractivityDOList}"
-                                            th:text="${ls.refractivityvalue}"
-                                            th:value="${ls.refractivityvalue}"
-                                    ></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">镜片功能：</label>
-                            <div class="col-sm-8">
-                                <!--<input id="functionName" name="functionName" class="form-control" type="text">-->
-                                <select id="functionName" name="functionName" class="form-control">
-                                    <option></option>
-                                    <option th:each="ls:${functionDOList}"
-                                            th:text="${ls.functionName}"
-                                            th:value="${ls.id}"
-                                    ></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">渐进片分类id：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="gradualId" name="gradualId" class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group" id="tab6" style="display: none">
                             <label class="col-sm-3 control-label">渐进片分类：</label>
                             <div class="col-sm-8">
-                                <!--<input id="gradualName" name="gradualName" class="form-control" type="text">-->
-                                <select id="gradualName" name="gradualName" class="form-control">
+                                <select id="gradualId" name="gradualId" class="form-control">
                                     <option></option>
                                     <option th:each="ls:${gradualDOList}"
                                             th:text="${ls.gradualName}"
-                                            th:value="${ls.gradualName}"
+                                            th:value="${ls.gradualId}"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">折射率值id：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="refractivityid" name="refractivityid" class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group" id="tab4" style="display: none">
+                            <label class="col-sm-3 control-label">折射率值：</label>
+                            <div class="col-sm-8">
+                                <select id="refractivityid" name="refractivityid" class="form-control">
+                                    <option></option>
+                                    <option th:each="ls:${refractivityDOList}"
+                                            th:text="${ls.refractivityvalue}"
+                                            th:value="${ls.refractivityid}"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">镜片功能id：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="functionId" name="functionId" class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group" id="tab5" style="display: none">
+                            <label class="col-sm-3 control-label">镜片功能：</label>
+                            <div class="col-sm-8">
+                                <!--<input id="functionName" name="functionName" class="form-control" type="text">-->
+                                <select id="functionId" name="functionId" class="form-control">
+                                    <option></option>
+                                    <option th:each="ls:${functionDOList}"
+                                            th:text="${ls.functionName}"
+                                            th:value="${ls.functionId}"
                                     ></option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">计量单位：</label>
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">使用类型id：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="usageId" name="usageId" class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group" id="tab7" style="display: none">
+                            <label class="col-sm-3 control-label">使用类型：</label>
                             <div class="col-sm-8">
-                                <!--<input id="unitid" name="unitid" class="form-control" type="text">-->
-                                <select id="unitid" name="unitid" class="form-control">
+                                <select id="usageId" name="usageId" class="form-control">
                                     <option></option>
-                                    <option th:each="ls:${unitDOList}"
-                                            th:text="${ls.unitname}"
-                                            th:value="${ls.unitname}"
+                                    <option th:each="ls:${usageDOList}"
+                                            th:text="${ls.usageName}"
+                                            th:value="${ls.usageId}"
                                     ></option>
                                 </select>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">抛弃型分类id：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="typeId" name="typeId" class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group" id="tab8" style="display: none">
+                            <label class="col-sm-3 control-label">抛弃型分类：</label>
+                            <div class="col-sm-8">
+                                <select id="typeId" name="typeId" class="form-control">
+                                    <option></option>
+                                    <option th:each="ls:${typeDOList}"
+                                            th:text="${ls.typeName}"
+                                            th:value="${ls.typeId}"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="tab9" style="display: none">
+                            <label class="col-sm-3 control-label">注册证号：</label>
+                            <div class="col-sm-8">
+                                <input id="registration" name="registration" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
@@ -145,6 +204,20 @@
                                 <input id="address" name="address" class="form-control" type="text">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">计量单位：</label>
+                            <div class="col-sm-8">
+                                <!--<input id="unitid" name="unitid" class="form-control" type="text">-->
+                                <select id="unitid" name="unitid" class="form-control">
+                                    <option></option>
+                                    <option th:each="ls:${unitDOList}"
+                                            th:text="${ls.unitname}"
+                                            th:value="${ls.unitid}"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="col-sm-3 control-label">采购结算方式：</label>
                             <div class="col-sm-8">
@@ -170,7 +243,7 @@
                                                                     name="batchid" value="1"/> 是
                                 </label>
                                 <label class="radio-inline"> <input type="radio"
-                                                                    name="batchid" value="2"/> 否
+                                                                    name="batchid" value="2" checked/> 否
                                 </label>
                             </div>
                         </div>
@@ -181,30 +254,43 @@
                                 <span style="color: red">品牌型号为默认商品型号</span>
                             </div>
                         </div>
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label">促销金额：</label>
+                        <div class="col-sm-8">
+                        <input id="money" name="money" class="form-control" type="text">
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label">速记码：</label>
+                        <div class="col-sm-8">
+                        <input id="shorthandcode" name="shorthandcode" class="form-control" type="text">
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label">生产企业许可证号：</label>
+                        <div class="col-sm-8">
+                        <input id="productionkey" name="productionkey" class="form-control" type="text">
+                        </div>
+                        </div>
+
                         <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">促销金额：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="money" name="money" class="form-control" type="text">-->
+                            <!--<label class="col-sm-3 control-label">状态(1:启用2:停用)：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input id="stateId" name="stateId" class="form-control" type="text">-->
+                            <!--</div>-->
                         <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">速记码：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="shorthandcode" name="shorthandcode" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">生产企业许可证号：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="productionkey" name="productionkey" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">状态(0:停用1:启用)：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="status" name="status" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">状态：</label>
+                            <div class="col-sm-8">
+                                <!--<input id="status" name="status" class="form-control" type="text">-->
+                                <label class="radio-inline"> <input type="radio"
+                                                                    name="stateId" value="1" checked/> 启用
+                                </label>
+                                <label class="radio-inline"> <input type="radio"
+                                                                    name="stateId" value="2" /> 停用
+                                </label>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <button type="submit" class="btn btn-primary">提交</button>
@@ -220,8 +306,22 @@
 <script type="text/javascript" src="/js/appjs/mfrs/brand/add.js">
 </script>
 <script>
+
     function caidan(value) {
-        alert(value);
+
+        tab1.style = "display: none";
+        tab2.style = "display: none";
+        tab3.style = "display: none";
+        tab4.style = "display: none";
+        tab5.style = "display: none";
+        tab6.style = "display: none";
+        tab7.style = "display: none";
+        tab8.style = "display: none";
+        tab9.style = "display: none";
+
+        // alert(value);
+        $("#goodsid").empty("");
+        $("#goodsid").append("<option value=''></option>");
         $.ajax({
             url: "/mfrs/brand/caidan",
             type: "post",
@@ -231,22 +331,139 @@
             dataType: 'JSON',
             async: false,
             success: function (datajson) {
-                alert(datajson);
+                // alert(datajson);
+
                 $(datajson).each(function (key) {  //循环读取后台传来的Json数据
                     var id = datajson[key].goodsid;   //角色id
                     var roleName = datajson[key].goodsname; //角色名称
                     //调用自定义方法
                     //AppendNode(id, roleName);   //将value和text添加到下拉框中
                     $("#goodsid").append("<option value='" + id + "'>" + roleName + "</option>");
+                    //2配件7老花镜8视光9耗材
                 });
-                // if (r.code == 0) {
-                //     layer.msg(r.msg);
-                //     reLoad();
-                // } else {
-                //     layer.msg(r.msg);
-                // }
             }
         });
+    }
+
+    function goodsidstr(value) {
+        //2配件6太阳镜7老花镜8耗材9视光
+        if (value == '1') {
+            tab1.style = "display: block";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '2') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '3') {
+            tab1.style = "display: none";
+            tab2.style = "display: block";
+            tab3.style = "display: block";
+            tab4.style = "display: block";
+            tab5.style = "display: block";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '4') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: block";
+            tab8.style = "display: block";
+            tab9.style = "display: block";
+        } else if (value == '5') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: block";
+        } else if (value == '6') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '7') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '8') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '9') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        }
+    }
+
+    function lightIdstr(value) {
+        // alert(value+"光度分类的值")
+        if (value == '1') {
+            tab6.style = "display: none";
+        }else if(value=='2'){
+            tab6.style = "display: none";
+        }else if(value=='3'){
+            tab6.style = "display: none";
+        }else if(value=='4'){
+            tab6.style = "display: none";
+        }else if(value=='5'){
+            tab6.style = "display: block";
+        }
+
     }
 
     // function AppendNode(value, text) {

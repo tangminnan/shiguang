@@ -10,27 +10,27 @@ import java.util.Date;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
 public class FunctionDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//镜片功能id
-	private Integer id;
+	private Integer functionId;
 	//镜片功能
 	private String functionName;
 
 	/**
 	 * 设置：镜片功能id
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public void setFunctionId(Integer functionId) {
+		this.functionId = functionId;
 	}
 	/**
 	 * 获取：镜片功能id
 	 */
-	public Integer getId() {
-		return id;
+	public Integer getFunctionId() {
+		return functionId;
 	}
 	/**
 	 * 设置：镜片功能

@@ -4,13 +4,13 @@
 <mapper namespace="com.shiguang.mfrs.dao.LightDao">
 
 	<select id="get" resultType="com.shiguang.mfrs.domain.LightDO">
-		select `id`,`light_name` from p_light where id = #{value}
+		select `light_id`,`light_name` from p_light where light_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.mfrs.domain.LightDO">
-		select `id`,`light_name` from p_light
+		select `light_id`,`light_name` from p_light
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="lightId != null and lightId != ''"> and light_id = #{lightId} </if>
 		  		  <if test="lightName != null and lightName != ''"> and light_name = #{lightName} </if>
 		  		</where>
         <choose>
@@ -18,7 +18,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id desc
+                order by light_id
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -29,7 +29,7 @@
  	<select id="count" resultType="int">
 		select count(*) from p_light
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="lightId != null and lightId != ''"> and light_id = #{lightId} </if>
 		  		  <if test="lightName != null and lightName != ''"> and light_name = #{lightName} </if>
 		  		</where>
 	</select>
@@ -37,12 +37,12 @@
 	<insert id="save" parameterType="com.shiguang.mfrs.domain.LightDO">
 		insert into p_light
 		(
-			`id`, 
+			`light_id`, 
 			`light_name`
 		)
 		values
 		(
-			#{id}, 
+			#{lightId}, 
 			#{lightName}
 		)
 	</insert>
@@ -52,17 +52,17 @@
 		<set>
 			<if test="lightName != null">`light_name` = #{lightName}</if>
 		</set>
-		where id = #{id}
+		where light_id = #{lightId}
 	</update>
 	
 	<delete id="remove">
-		delete from p_light where id = #{value}
+		delete from p_light where light_id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from p_light where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
+		delete from p_light where light_id in 
+		<foreach item="lightId" collection="array" open="(" separator="," close=")">
+			#{lightId}
 		</foreach>
 	</delete>
 

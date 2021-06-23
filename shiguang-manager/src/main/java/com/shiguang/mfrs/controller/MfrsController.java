@@ -119,6 +119,27 @@ public class MfrsController {
     }
 
     /**
+     * 详情
+     */
+    @GetMapping("/detail/{mfrsid}")
+    @RequiresPermissions("mfrs:mfrs:detail")
+    String detail(@PathVariable("mfrsid") Integer mfrsid, Model model) {
+        MfrsDO mfrs = mfrsService.get(mfrsid);
+        model.addAttribute("mfrs", mfrs);
+        Map<String, Object> map = new HashMap<>();
+        //商品
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
+        //支付
+        List<PayDO> payDOList = payService.list(map);
+        model.addAttribute("payDOList", payDOList);
+        //开票
+        List<InvoiceDO> invoiceDOList = invoiceService.list(map);
+        model.addAttribute("invoiceDOList", invoiceDOList);
+        return "mfrs/mfrs/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody

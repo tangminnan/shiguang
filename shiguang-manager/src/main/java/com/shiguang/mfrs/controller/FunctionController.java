@@ -26,7 +26,7 @@ import com.shiguang.common.utils.R;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
  
 @Controller
@@ -59,10 +59,10 @@ public class FunctionController {
 	    return "mfrs/function/add";
 	}
 
-	@GetMapping("/edit/{id}")
+	@GetMapping("/edit/{functionId}")
 	@RequiresPermissions("mfrs:function:edit")
-	String edit(@PathVariable("id") Integer id,Model model){
-		FunctionDO function = functionService.get(id);
+	String edit(@PathVariable("functionId") Integer functionId,Model model){
+		FunctionDO function = functionService.get(functionId);
 		model.addAttribute("function", function);
 	    return "mfrs/function/edit";
 	}
@@ -96,8 +96,8 @@ public class FunctionController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("mfrs:function:remove")
-	public R remove( Integer id){
-		if(functionService.remove(id)>0){
+	public R remove( Integer functionId){
+		if(functionService.remove(functionId)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -109,8 +109,8 @@ public class FunctionController {
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("mfrs:function:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] ids){
-		functionService.batchRemove(ids);
+	public R remove(@RequestParam("ids[]") Integer[] functionIds){
+		functionService.batchRemove(functionIds);
 		return R.ok();
 	}
 	

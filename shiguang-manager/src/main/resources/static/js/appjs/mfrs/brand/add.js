@@ -41,6 +41,9 @@ function validateRule() {
 			},
             brandname : {
                 required : true
+            },
+            mfrsid : {
+                required : true
             }
 		},
 		messages : {
@@ -49,6 +52,9 @@ function validateRule() {
 			},
             brandname : {
                 required : icon + "请输入品牌名称"
+            },
+            mfrsid : {
+                required : icon + "制造商简称不能为空"
             }
 		}
 	})

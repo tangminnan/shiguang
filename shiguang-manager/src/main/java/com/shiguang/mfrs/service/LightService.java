@@ -10,11 +10,11 @@ import java.util.Map;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-17 10:40:35
+ * @date 2021-06-21 15:08:08
  */
 public interface LightService {
 	
-	LightDO get(Integer id);
+	LightDO get(Integer lightId);
 	
 	List<LightDO> list(Map<String, Object> map);
 	
@@ -24,7 +24,7 @@ public interface LightService {
 	
 	int update(LightDO light);
 	
-	int remove(Integer id);
+	int remove(Integer lightId);
 	
-	int batchRemove(Integer[] ids);
+	int batchRemove(Integer[] lightIds);
 }

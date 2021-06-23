@@ -35,15 +35,57 @@ function update() {
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
-		rules : {
-			name : {
-				required : true
-			}
-		},
-		messages : {
-			name : {
-				required : icon + "请输入名字"
-			}
-		}
-	})
+        rules: {
+            mfrsnum: {
+                required: true
+            },
+            mfrsname: {
+                required: true
+            },
+            mfrscontacts: {
+                required: true
+            },
+            mfrsrealname: {
+                required: true
+            },
+            mfrstelephone: {
+                required: true
+            },
+            mfrsphone: {
+                required: true
+            },
+            interest: {
+                required: true
+            },
+            mfrsfax: {
+                required: true
+            }
+        },
+        messages: {
+            mfrsnum: {
+                required: icon + "请输入制造商代码"
+            },
+            mfrsname: {
+                required: icon + "请输入制造商简称"
+            },
+            mfrscontacts: {
+                required: icon + "请输入制造商联系人"
+            },
+            mfrsrealname: {
+                required: icon + "请输入制造商全称"
+            },
+            mfrstelephone: {
+                required: icon + "请输入制造商电话"
+            },
+            mfrsphone: {
+                required: icon + "请输入联系人电话"
+            },
+            interest: {
+                required: icon + "请选择商品类别"
+            },
+            mfrsfax: {
+                required: icon + "请输入制造商传真"
+            }
+        }
+    })
 }
