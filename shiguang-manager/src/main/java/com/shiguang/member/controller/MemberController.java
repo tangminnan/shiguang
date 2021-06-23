@@ -63,6 +63,8 @@ public class MemberController {
     @RequiresPermissions("information:member:add")
     String add(Model model){
         Map<String,Object> map = new HashMap<>();
+        map.put("state",1);
+        map.put("status",1);
         List<CardTypeDO> cardTypeDOList = typeService.list(map);
         model.addAttribute("cardTypeDOList",cardTypeDOList);
         List<PersonSortDO> personSortDOList = personSortService.list(map);
@@ -86,6 +88,8 @@ public class MemberController {
         member.setCreateTime(strDate);
         model.addAttribute("member", member);
         Map<String,Object> map = new HashMap<>();
+        map.put("state",1);
+        map.put("status",1);
         List<CardTypeDO> cardTypeDOList = typeService.list(map);
         model.addAttribute("cardTypeDOList",cardTypeDOList);
         List<PersonSortDO> personSortDOList = personSortService.list(map);
@@ -105,6 +109,7 @@ public class MemberController {
         model.addAttribute("checkType", checkType);
         Map<String, Object> map = new HashMap<>();
         List<DepartmentDO> departmentDOList = departmentService.list(map);
+        map.put("state",1);
         model.addAttribute("departmentDOList",departmentDOList);
         if ("PU_TONG".equals(checkType)) {
             return "member/importtemplate";

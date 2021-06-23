@@ -52,6 +52,7 @@ public class DepartmentController {
         List<CompanyDO> list = companyService.list(map);
         model.addAttribute("companyList",list);
         map.put("departType","加工中心");
+        map.put("state",1);
         List<DepartmentDO> departmentDOList = departmentService.list(map);
         model.addAttribute("departmentDOList",departmentDOList);
         return "baseinfomation/department/add";
@@ -66,6 +67,7 @@ public class DepartmentController {
         List<CompanyDO> list = companyService.list(map);
         model.addAttribute("companyList",list);
         map.put("departType","加工中心");
+        map.put("state",1);
         List<DepartmentDO> departmentDOList = departmentService.list(map);
         model.addAttribute("departmentDOList",departmentDOList);
         return "baseinfomation/department/edit";

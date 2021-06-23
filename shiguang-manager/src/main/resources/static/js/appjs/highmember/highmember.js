@@ -197,7 +197,7 @@ function edit(id) {
     layer.full(toIndex);
 }
 function detail(id) {
-    layer.open({
+   var toIndex = layer.open({
         type : 2,
         title : '详情',
         maxmin : true,
@@ -205,6 +205,7 @@ function detail(id) {
         area : [ '1100px', '620px' ],
         content : prefix + '/detail/' + id // iframe的url
     });
+   layer.full(toIndex);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

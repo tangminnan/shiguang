@@ -49,6 +49,7 @@ public class CardTypeController {
     @RequiresPermissions("information:cardType:add")
     String add(Model model){
         Map<String,Object> map = new HashMap<>();
+        map.put("status",1);
         List<CardTypeDO> cardTypeDOList = typeService.list(map);
         model.addAttribute("cardTypeDOList",cardTypeDOList);
         return "baseinfomation/cardType/add";
@@ -60,6 +61,7 @@ public class CardTypeController {
         CardTypeDO type = typeService.get(id);
         model.addAttribute("type", type);
         Map<String,Object> map = new HashMap<>();
+        map.put("status",1);
         List<CardTypeDO> cardTypeDOList = typeService.list(map);
         model.addAttribute("cardTypeDOList",cardTypeDOList);
         return "baseinfomation/cardType/edit";
