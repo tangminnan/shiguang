@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.baseinfomation.dao.DepartmentDao">
+
+    <select id="get" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
+		select `id`,`depart_number`,`depart_name`,`depart_full_name`,`depart_tel`,`depart_address`,`depart_type`,`company_id`,`person_charge`,`status`,`fanuc`,`mirror`,`sell_ways`,`same_sell`,`read_card`,`company_name`,`state` from department where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
+        select d.`id`,d.`depart_number`,d.`depart_name`,d.`depart_full_name`,d.`depart_tel`,d.`depart_address`,d.`depart_type`,d.`company_id`,c.`name`,d.`person_charge`,d.`status`,d.`fanuc`,d.`mirror`,d.`sell_ways`,d.`same_sell`,d.`read_card`,d.`company_name`,d.`state` from department d
+        left join c_company c on c.id = d.company_id
+        <where>
+            <if test="id != null and id != ''"> and d.id = #{id} </if>
+            <if test="departNumber != null and departNumber != ''"> and d.depart_number = #{departNumber} </if>
+            <if test="departName != null and departName != ''"> and d.depart_name = #{departName} </if>
+            <if test="departFullName != null and departFullName != ''"> and d.depart_full_name = #{departFullName} </if>
+            <if test="departTel != null and departTel != ''"> and d.depart_tel = #{departTel} </if>
+            <if test="departAddress != null and departAddress != ''"> and d.depart_address = #{departAddress} </if>
+            <if test="departType != null and departType != ''"> and d.depart_type = #{departType} </if>
+            <if test="companyId != null and companyId != ''"> and d.company_id = #{companyId} </if>
+            <if test="personCharge != null and personCharge != ''"> and d.person_charge = #{personCharge} </if>
+            <if test="status != null and status != ''"> and d.status = #{status} </if>
+            <if test="fanuc != null and fanuc != ''"> and d.fanuc = #{fanuc} </if>
+            <if test="mirror != null and mirror != ''"> and d.mirror = #{mirror} </if>
+            <if test="sellWays != null and sellWays != ''"> and d.sell_ways = #{sellWays} </if>
+            <if test="sameSell != null and sameSell != ''"> and d.same_sell = #{sameSell} </if>
+            <if test="readCard != null and readCard != ''"> and d.read_card = #{readCard} </if>
+            <if test="companyName != null and companyName != ''"> and d.company_name = #{companyName} </if>
+            <if test="state != null and state != ''"> and d.state = #{state} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from department
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
+            <if test="departName != null and departName != ''"> and depart_name = #{departName} </if>
+            <if test="departFullName != null and departFullName != ''"> and depart_full_name = #{departFullName} </if>
+            <if test="departTel != null and departTel != ''"> and depart_tel = #{departTel} </if>
+            <if test="departAddress != null and departAddress != ''"> and depart_address = #{departAddress} </if>
+            <if test="departType != null and departType != ''"> and depart_type = #{departType} </if>
+            <if test="companyId != null and companyId != ''"> and company_id = #{companyId} </if>
+            <if test="personCharge != null and personCharge != ''"> and person_charge = #{personCharge} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="fanuc != null and fanuc != ''"> and fanuc = #{fanuc} </if>
+            <if test="mirror != null and mirror != ''"> and mirror = #{mirror} </if>
+            <if test="sellWays != null and sellWays != ''"> and sell_ways = #{sellWays} </if>
+            <if test="sameSell != null and sameSell != ''"> and same_sell = #{sameSell} </if>
+            <if test="readCard != null and readCard != ''"> and read_card = #{readCard} </if>
+            <if test="companyName != null and companyName != ''"> and company_name = #{companyName} </if>
+            <if test="state != null and state != ''"> and state = #{state} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.baseinfomation.domain.DepartmentDO" useGeneratedKeys="true" keyProperty="id">
+		insert into department
+		(
+			`depart_number`,
+			`depart_name`,
+			`depart_full_name`,
+			`depart_tel`,
+			`depart_address`,
+			`depart_type`,
+			`company_id`,
+			`person_charge`,
+			`status`,
+			`fanuc`,
+			`mirror`,
+			`sell_ways`,
+			`same_sell`,
+			`read_card`,
+			`company_name`,
+			`state`
+		)
+		values
+		(
+			#{departNumber},
+			#{departName},
+			#{departFullName},
+			#{departTel},
+			#{departAddress},
+			#{departType},
+			#{companyId},
+			#{personCharge},
+			#{status},
+			#{fanuc},
+			#{mirror},
+			#{sellWays},
+			#{sameSell},
+			#{readCard},
+			#{companyName},
+			#{state}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.baseinfomation.domain.DepartmentDO">
+        update department
+        <set>
+            <if test="departNumber != null">`depart_number` = #{departNumber}, </if>
+            <if test="departName != null">`depart_name` = #{departName}, </if>
+            <if test="departFullName != null">`depart_full_name` = #{departFullName}, </if>
+            <if test="departTel != null">`depart_tel` = #{departTel}, </if>
+            <if test="departAddress != null">`depart_address` = #{departAddress}, </if>
+            <if test="departType != null">`depart_type` = #{departType}, </if>
+            <if test="companyId != null">`company_id` = #{companyId}, </if>
+            <if test="personCharge != null">`person_charge` = #{personCharge}, </if>
+            <if test="status != null">`status` = #{status}, </if>
+            <if test="fanuc != null">`fanuc` = #{fanuc}, </if>
+            <if test="mirror != null">`mirror` = #{mirror}, </if>
+            <if test="sellWays != null">`sell_ways` = #{sellWays}, </if>
+            <if test="sameSell != null">`same_sell` = #{sameSell}, </if>
+            <if test="readCard != null">`read_card` = #{readCard}, </if>
+            <if test="companyName != null">`company_name` = #{companyName}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from department where id = #{value}
+	</delete>
+
+    <update id="updateStatus" parameterType="com.shiguang.baseinfomation.domain.DepartmentDO">
+        update department set `state` = #{state} where id = #{id}
+    </update>
+
+    <delete id="batchRemove">
+        delete from department where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
