@@ -4,6 +4,7 @@
 <head th:include="include :: header"></head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content ">
+    <h1>详情页面</h1>
     <div class="row">
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
@@ -21,7 +22,7 @@
                             <label class="col-sm-3 control-label">制造商简称：</label>
                             <div class="col-sm-8">
                                 <input id="mfrsname" name="mfrsname" th:value="${mfrs.mfrsname}" class="form-control"
-                                       type="text">
+                                       readonly    type="text">
                                 <span style="color: red">*</span>
                             </div>
                         </div>
@@ -29,7 +30,7 @@
                             <label class="col-sm-3 control-label">制造商联系人：</label>
                             <div class="col-sm-8">
                                 <input id="mfrscontacts" name="mfrscontacts" th:value="${mfrs.mfrscontacts}"
-                                       class="form-control" type="text">
+                                       readonly   class="form-control" type="text">
                                 <span style="color: red">*</span>
                             </div>
                         </div>
@@ -37,7 +38,7 @@
                             <label class="col-sm-3 control-label">制造商全称：</label>
                             <div class="col-sm-8">
                                 <input id="mfrsrealname" name="mfrsrealname" th:value="${mfrs.mfrsrealname}"
-                                       class="form-control" type="text">
+                                       readonly   class="form-control" type="text">
                                 <span style="color: red">*</span>
                             </div>
                         </div>
@@ -45,7 +46,7 @@
                             <label class="col-sm-3 control-label">制造商电话：</label>
                             <div class="col-sm-8">
                                 <input id="mfrstelephone" name="mfrstelephone" th:value="${mfrs.mfrstelephone}"
-                                       class="form-control" type="text">
+                                       readonly   class="form-control" type="text">
                                 <span style="color: red">*如：022-85123455</span>
                             </div>
                         </div>
@@ -53,7 +54,7 @@
                             <label class="col-sm-3 control-label">联系人电话：</label>
                             <div class="col-sm-8">
                                 <input id="mfrsphone" name="mfrsphone" th:value="${mfrs.mfrsphone}" class="form-control"
-                                       type="text">
+                                       readonly  type="text">
                                 <span style="color: red">*如：022-85123455</span>
                             </div>
                         </div>
@@ -67,7 +68,7 @@
                             <label class="col-sm-3 control-label">商品类别：</label>
                             <div class="col-sm-8">
                                 <select name="goodsid" id="goodsid" multiple
-                                        class="selectpicker show-tick form-control">
+                                        class="selectpicker show-tick form-control" disabled>
                                     <option th:each="ls:${goodsDOList}"
                                             th:text="${ls.goodsname}"
                                             th:value="${ls.goodsid}"></option>
@@ -82,7 +83,7 @@
                             <label class="col-sm-3 control-label">制造商传真：</label>
                             <div class="col-sm-8">
                                 <input id="mfrsfax" name="mfrsfax" th:value="${mfrs.mfrsfax}" class="form-control"
-                                       type="text">
+                                    readonly   type="text">
                                 <span style="color: red">*如：022-85123455</span>
                             </div>
                         </div>
@@ -90,7 +91,7 @@
                             <label class="col-sm-3 control-label">制造商地址：</label>
                             <div class="col-sm-8">
                                 <input id="mfrsaddress" name="mfrsaddress" th:value="${mfrs.mfrsaddress}"
-                                       class="form-control" type="text">
+                                    readonly   class="form-control" type="text">
                             </div>
                         </div>
                         <!--<div class="form-group">	-->
@@ -104,7 +105,7 @@
                             <div class="col-sm-8">
                                 <!--<input id="payid" name="payid" th:value="${mfrs.payid}" class="form-control" type="text">-->
                                 <select name="payid" id="payid" th:value="${mfrs.payid}" class="form-control"
-                                        data-actions-box="false" data-size="5">
+                                        data-actions-box="false" data-size="5" disabled>
                                     <option th:each="ls:${payDOList}"
                                             th:text="${ls.paymethod}"
                                             th:value="${ls.payid}"></option>
@@ -123,10 +124,10 @@
                             <label class="col-sm-3 control-label">开票状态：</label>
                             <div class="col-sm-8">
                                 <label class="radio-inline"> <input type="radio" th:field="*{mfrs.invoiceid}"
-                                                                    name="invoiceid" value="1"/> 开票
+                                                                  readonly  name="invoiceid" value="1"/> 开票
                                 </label>
                                 <label class="radio-inline"> <input type="radio" th:field="*{mfrs.invoiceid}"
-                                                                    name="invoiceid" value="2"/> 不开票
+                                                                 readonly   name="invoiceid" value="2"/> 不开票
                                 </label>
                             </div>
                         </div>
@@ -170,7 +171,7 @@
                             <label class="col-sm-3 control-label">备注：</label>
                             <div class="col-sm-8">
                                 <input id="remarks" name="remarks" th:value="${mfrs.remarks}" class="form-control"
-                                       type="text">
+                                      readonly type="text">
                             </div>
                         </div>
                         <div class="form-group">

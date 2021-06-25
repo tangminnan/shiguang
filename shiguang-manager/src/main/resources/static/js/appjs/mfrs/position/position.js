@@ -31,7 +31,11 @@ function load() {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
-                        offset: params.offset
+                        offset: params.offset,
+                        positionNum :$('#positionNum').val(),
+                        positionName :$('#positionName').val(),
+                        departNumber :$('#departNumber').val(),
+                        stateId :$('#stateId').val()
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };
@@ -58,9 +62,13 @@ function load() {
                         field: 'positionName',
                         title: '仓位名称'
                     },
+                    // {
+                    //     field : 'departNumber',
+                    //     title : '部门编码'
+                    // },
                     {
-                        field: 'departNumber',
-                        title: '所属部门'
+                        field : 'departName',
+                        title : '所属部门'
                     },
 
                     {
@@ -104,7 +112,7 @@ function reLoad() {
 }
 
 function add() {
-    layer.open({
+    var toIndex = layer.open({
         type: 2,
         title: '增加',
         maxmin: true,
@@ -112,10 +120,11 @@ function add() {
         area: ['800px', '520px'],
         content: prefix + '/add' // iframe的url
     });
+    layer.full(toIndex);
 }
 
 function edit(id) {
-    layer.open({
+    var toIndex = layer.open({
         type: 2,
         title: '编辑',
         maxmin: true,
@@ -123,6 +132,7 @@ function edit(id) {
         area: ['800px', '520px'],
         content: prefix + '/edit/' + id // iframe的url
     });
+    layer.full(toIndex);
 }
 
 function remove(id) {

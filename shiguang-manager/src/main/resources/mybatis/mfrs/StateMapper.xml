@@ -18,7 +18,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by state_id desc
+                order by state_id
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">

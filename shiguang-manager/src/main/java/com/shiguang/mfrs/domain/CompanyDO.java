@@ -23,6 +23,8 @@ public class CompanyDO implements Serializable {
 	private String name;
 	//所属区域
 	private String province;
+	//公司类型
+	private String type;
 	//公司电话
 	private String telephone;
 	//法人
@@ -112,6 +114,18 @@ public class CompanyDO implements Serializable {
 	 */
 	public String getProvince() {
 		return province;
+	}
+	/**
+	 * 设置：公司类型
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+	/**
+	 * 获取：公司类型
+	 */
+	public String getType() {
+		return type;
 	}
 	/**
 	 * 设置：公司电话

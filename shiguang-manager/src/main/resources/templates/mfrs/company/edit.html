@@ -18,46 +18,29 @@
                                 <span style="color: red">*(公司名称涉及登录页面、部门选择、主页、报表4部分的更换。)</span>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">所属区域：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<input id="region" name="region" th:value="${company.region}" class="form-control"-->
-                                       <!--type="text">-->
-                                <!--<span style="color: red">*</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">所属区域：</label>-->
-                            <!--<div class="col-sm-8 form-inline" data-toggle="distpicker">-->
-                                <!--<select id="eprovinceName" name="province" class="form-control chosen-select" ></select>-->
-                                <!--<span style="color: red">*</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<input id="province" name="province" th:value="${company.province}" class="form-control" type="hidden">-->
-
-
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">所属区域：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<input id="province" name="province" th:value="${company.province}" class="form-control" type="text">-->
-                            <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所属区域：</label>
                             <div class="col-sm-8">
-                                <select name="province" id="province" th:value="${company.province}" class="form-control"
+                                <select name="province" id="province" th:value="${company.province}"
+                                        class="form-control"
                                         data-actions-box="false" data-size="5">
                                     <option th:each="ls:${provincesDOList}"
                                             th:text="${ls.province}"
                                             th:value="${ls.province}"></option>
                                 </select>
-                                <input id="provinces" name="provinces" th:value="${company.province}" class="form-control"
+                                <input id="provinces" name="provinces" th:value="${company.province}"
+                                       class="form-control"
                                        type="hidden">
                             </div>
                         </div>
 
-
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">公司类型：</label>
+                            <div class="col-sm-8">
+                                <input id="type" name="type" th:value="${company.type}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公司电话：</label>

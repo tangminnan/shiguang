@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.product.dao.StyleDao">
+
+	<select id="get" resultType="com.shiguang.product.domain.StyleDO">
+		select `style_id`,`style` from a_style where style_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.product.domain.StyleDO">
+		select `style_id`,`style` from a_style
+        <where>  
+		  		  <if test="styleId != null and styleId != ''"> and style_id = #{styleId} </if>
+		  		  <if test="style != null and style != ''"> and style = #{style} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by style_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from a_style
+		 <where>  
+		  		  <if test="styleId != null and styleId != ''"> and style_id = #{styleId} </if>
+		  		  <if test="style != null and style != ''"> and style = #{style} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.product.domain.StyleDO">
+		insert into a_style
+		(
+			`style_id`, 
+			`style`
+		)
+		values
+		(
+			#{styleId}, 
+			#{style}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.product.domain.StyleDO">
+		update a_style 
+		<set>
+			<if test="style != null">`style` = #{style}</if>
+		</set>
+		where style_id = #{styleId}
+	</update>
+	
+	<delete id="remove">
+		delete from a_style where style_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from a_style where style_id in 
+		<foreach item="styleId" collection="array" open="(" separator="," close=")">
+			#{styleId}
+		</foreach>
+	</delete>
+
+</mapper>

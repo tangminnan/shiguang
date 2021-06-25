@@ -161,9 +161,9 @@ function load() {
                             var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
                                 + row.mfrsid
                                 + '\')"><i class="fa fa-remove"></i></a> ';
-                            var a = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="详情" onclick="detail(\''
-                                + row.mfrsid
-                                + '\')">详情</a> ';
+                            // var a = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="详情" onclick="detail(\''
+                            //     + row.mfrsid
+                            //     + '\')">详情</a> ';
                             var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
                                 + row.mfrsid
                                 + '\')"><i class="fa fa-key"></i></a> ';
@@ -178,18 +178,19 @@ function reLoad() {
 }
 
 function add() {
-    layer.open({
-        type: 2,
-        title: '增加',
-        maxmin: true,
-        shadeClose: false, // 点击遮罩关闭层
-        area: ['800px', '520px'],
-        content: prefix + '/add' // iframe的url
+    var toIndex = layer.open({
+        type : 2,
+        title : '增加',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : prefix + '/add' // iframe的url
     });
+    layer.full(toIndex);
 }
 
 function edit(id) {
-    layer.open({
+    var toIndex = layer.open({
         type: 2,
         title: '编辑',
         maxmin: true,
@@ -197,18 +198,20 @@ function edit(id) {
         area: ['800px', '520px'],
         content: prefix + '/edit/' + id // iframe的url
     });
+    layer.full(toIndex);
 }
 
-function detail(id) {
-    layer.open({
-        type: 2,
-        title: '详情',
-        maxmin: true,
-        shadeClose: false, // 点击遮罩关闭层
-        area: ['800px', '520px'],
-        content: prefix + '/edit/' + id // iframe的url
-    });
-}
+// function detail(id) {
+//     var toIndex =layer.open({
+//         type: 2,
+//         title: '详情',
+//         maxmin: true,
+//         shadeClose: false, // 点击遮罩关闭层
+//         area: ['800px', '520px'],
+//         content: prefix + '/detial/' + id // iframe的url
+//     });
+//
+// }
 
 function remove(id) {
     layer.confirm('确定要删除选中的记录？', {

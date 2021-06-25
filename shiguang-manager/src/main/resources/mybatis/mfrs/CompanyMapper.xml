@@ -3,70 +3,75 @@
 
 <mapper namespace="com.shiguang.mfrs.dao.CompanyDao">
 
-	<select id="get" resultType="com.shiguang.mfrs.domain.CompanyDO">
-		select `id`,`name`,`province`,`telephone`,`legalperson`,`phone`,`purchaseaddress`,`purchasepeople`,`purchasephone`,`purchasefax`,`headername`,`approvedamount`,`proportion`,`logo`,`backgroundimage`,`departmentimage` from c_company where id = #{value}
+    <select id="get" resultType="com.shiguang.mfrs.domain.CompanyDO">
+		select `id`,`name`,`province`,`type`,`telephone`,`legalperson`,`phone`,`purchaseaddress`,`purchasepeople`,`purchasephone`,`purchasefax`,`headername`,`approvedamount`,`proportion`,`logo`,`backgroundimage`,`departmentimage` from c_company where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.shiguang.mfrs.domain.CompanyDO">
-		select `id`,`name`,`province`,`telephone`,`legalperson`,`phone`,`purchaseaddress`,`purchasepeople`,`purchasephone`,`purchasefax`,`headername`,`approvedamount`,`proportion`,`logo`,`backgroundimage`,`departmentimage` from c_company
-        <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="province != null and province != ''"> and province = #{province} </if>
-		  		  <if test="telephone != null and telephone != ''"> and telephone = #{telephone} </if>
-		  		  <if test="legalperson != null and legalperson != ''"> and legalperson = #{legalperson} </if>
-		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
-		  		  <if test="purchaseaddress != null and purchaseaddress != ''"> and purchaseaddress = #{purchaseaddress} </if>
-		  		  <if test="purchasepeople != null and purchasepeople != ''"> and purchasepeople = #{purchasepeople} </if>
-		  		  <if test="purchasephone != null and purchasephone != ''"> and purchasephone = #{purchasephone} </if>
-		  		  <if test="purchasefax != null and purchasefax != ''"> and purchasefax = #{purchasefax} </if>
-		  		  <if test="headername != null and headername != ''"> and headername = #{headername} </if>
-		  		  <if test="approvedamount != null and approvedamount != ''"> and approvedamount = #{approvedamount} </if>
-		  		  <if test="proportion != null and proportion != ''"> and proportion = #{proportion} </if>
-		  		  <if test="logo != null and logo != ''"> and logo = #{logo} </if>
-		  		  <if test="backgroundimage != null and backgroundimage != ''"> and backgroundimage = #{backgroundimage} </if>
-		  		  <if test="departmentimage != null and departmentimage != ''"> and departmentimage = #{departmentimage} </if>
-		  		</where>
+    <select id="list" resultType="com.shiguang.mfrs.domain.CompanyDO">
+        select
+        `id`,`name`,`province`,`type`,`telephone`,`legalperson`,`phone`,`purchaseaddress`,`purchasepeople`,`purchasephone`,`purchasefax`,`headername`,`approvedamount`,`proportion`,`logo`,`backgroundimage`,`departmentimage`
+        from c_company
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="province != null and province != ''">and province = #{province}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="telephone != null and telephone != ''">and telephone = #{telephone}</if>
+            <if test="legalperson != null and legalperson != ''">and legalperson = #{legalperson}</if>
+            <if test="phone != null and phone != ''">and phone = #{phone}</if>
+            <if test="purchaseaddress != null and purchaseaddress != ''">and purchaseaddress = #{purchaseaddress}</if>
+            <if test="purchasepeople != null and purchasepeople != ''">and purchasepeople = #{purchasepeople}</if>
+            <if test="purchasephone != null and purchasephone != ''">and purchasephone = #{purchasephone}</if>
+            <if test="purchasefax != null and purchasefax != ''">and purchasefax = #{purchasefax}</if>
+            <if test="headername != null and headername != ''">and headername = #{headername}</if>
+            <if test="approvedamount != null and approvedamount != ''">and approvedamount = #{approvedamount}</if>
+            <if test="proportion != null and proportion != ''">and proportion = #{proportion}</if>
+            <if test="logo != null and logo != ''">and logo = #{logo}</if>
+            <if test="backgroundimage != null and backgroundimage != ''">and backgroundimage = #{backgroundimage}</if>
+            <if test="departmentimage != null and departmentimage != ''">and departmentimage = #{departmentimage}</if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by id
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from c_company
-		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="province != null and province != ''"> and province = #{province} </if>
-		  		  <if test="telephone != null and telephone != ''"> and telephone = #{telephone} </if>
-		  		  <if test="legalperson != null and legalperson != ''"> and legalperson = #{legalperson} </if>
-		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
-		  		  <if test="purchaseaddress != null and purchaseaddress != ''"> and purchaseaddress = #{purchaseaddress} </if>
-		  		  <if test="purchasepeople != null and purchasepeople != ''"> and purchasepeople = #{purchasepeople} </if>
-		  		  <if test="purchasephone != null and purchasephone != ''"> and purchasephone = #{purchasephone} </if>
-		  		  <if test="purchasefax != null and purchasefax != ''"> and purchasefax = #{purchasefax} </if>
-		  		  <if test="headername != null and headername != ''"> and headername = #{headername} </if>
-		  		  <if test="approvedamount != null and approvedamount != ''"> and approvedamount = #{approvedamount} </if>
-		  		  <if test="proportion != null and proportion != ''"> and proportion = #{proportion} </if>
-		  		  <if test="logo != null and logo != ''"> and logo = #{logo} </if>
-		  		  <if test="backgroundimage != null and backgroundimage != ''"> and backgroundimage = #{backgroundimage} </if>
-		  		  <if test="departmentimage != null and departmentimage != ''"> and departmentimage = #{departmentimage} </if>
-		  		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.shiguang.mfrs.domain.CompanyDO" useGeneratedKeys="true" keyProperty="id">
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from c_company
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="province != null and province != ''">and province = #{province}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="telephone != null and telephone != ''">and telephone = #{telephone}</if>
+            <if test="legalperson != null and legalperson != ''">and legalperson = #{legalperson}</if>
+            <if test="phone != null and phone != ''">and phone = #{phone}</if>
+            <if test="purchaseaddress != null and purchaseaddress != ''">and purchaseaddress = #{purchaseaddress}</if>
+            <if test="purchasepeople != null and purchasepeople != ''">and purchasepeople = #{purchasepeople}</if>
+            <if test="purchasephone != null and purchasephone != ''">and purchasephone = #{purchasephone}</if>
+            <if test="purchasefax != null and purchasefax != ''">and purchasefax = #{purchasefax}</if>
+            <if test="headername != null and headername != ''">and headername = #{headername}</if>
+            <if test="approvedamount != null and approvedamount != ''">and approvedamount = #{approvedamount}</if>
+            <if test="proportion != null and proportion != ''">and proportion = #{proportion}</if>
+            <if test="logo != null and logo != ''">and logo = #{logo}</if>
+            <if test="backgroundimage != null and backgroundimage != ''">and backgroundimage = #{backgroundimage}</if>
+            <if test="departmentimage != null and departmentimage != ''">and departmentimage = #{departmentimage}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.mfrs.domain.CompanyDO" useGeneratedKeys="true" keyProperty="id">
 		insert into c_company
 		(
 			`name`, 
-			`province`, 
+			`province`,
+            `type`,
 			`telephone`, 
 			`legalperson`, 
 			`phone`, 
@@ -84,7 +89,8 @@
 		values
 		(
 			#{name}, 
-			#{province}, 
+			#{province},
+            #{type},
 			#{telephone}, 
 			#{legalperson}, 
 			#{phone}, 
@@ -100,38 +106,39 @@
 			#{departmentimage}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="com.shiguang.mfrs.domain.CompanyDO">
-		update c_company 
-		<set>
-			<if test="name != null">`name` = #{name}, </if>
-			<if test="province != null">`province` = #{province}, </if>
-			<if test="telephone != null">`telephone` = #{telephone}, </if>
-			<if test="legalperson != null">`legalperson` = #{legalperson}, </if>
-			<if test="phone != null">`phone` = #{phone}, </if>
-			<if test="purchaseaddress != null">`purchaseaddress` = #{purchaseaddress}, </if>
-			<if test="purchasepeople != null">`purchasepeople` = #{purchasepeople}, </if>
-			<if test="purchasephone != null">`purchasephone` = #{purchasephone}, </if>
-			<if test="purchasefax != null">`purchasefax` = #{purchasefax}, </if>
-			<if test="headername != null">`headername` = #{headername}, </if>
-			<if test="approvedamount != null">`approvedamount` = #{approvedamount}, </if>
-			<if test="proportion != null">`proportion` = #{proportion}, </if>
-			<if test="logo != null">`logo` = #{logo}, </if>
-			<if test="backgroundimage != null">`backgroundimage` = #{backgroundimage}, </if>
-			<if test="departmentimage != null">`departmentimage` = #{departmentimage}</if>
-		</set>
-		where id = #{id}
-	</update>
-	
-	<delete id="remove">
+
+    <update id="update" parameterType="com.shiguang.mfrs.domain.CompanyDO">
+        update c_company
+        <set>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="province != null">`province` = #{province},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="telephone != null">`telephone` = #{telephone},</if>
+            <if test="legalperson != null">`legalperson` = #{legalperson},</if>
+            <if test="phone != null">`phone` = #{phone},</if>
+            <if test="purchaseaddress != null">`purchaseaddress` = #{purchaseaddress},</if>
+            <if test="purchasepeople != null">`purchasepeople` = #{purchasepeople},</if>
+            <if test="purchasephone != null">`purchasephone` = #{purchasephone},</if>
+            <if test="purchasefax != null">`purchasefax` = #{purchasefax},</if>
+            <if test="headername != null">`headername` = #{headername},</if>
+            <if test="approvedamount != null">`approvedamount` = #{approvedamount},</if>
+            <if test="proportion != null">`proportion` = #{proportion},</if>
+            <if test="logo != null">`logo` = #{logo},</if>
+            <if test="backgroundimage != null">`backgroundimage` = #{backgroundimage},</if>
+            <if test="departmentimage != null">`departmentimage` = #{departmentimage}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
 		delete from c_company where id = #{value}
 	</delete>
-	
-	<delete id="batchRemove">
-		delete from c_company where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+
+    <delete id="batchRemove">
+        delete from c_company where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

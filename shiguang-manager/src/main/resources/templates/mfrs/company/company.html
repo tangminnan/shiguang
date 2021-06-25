@@ -8,7 +8,7 @@
         <div class="ibox">
             <div class="ibox-body">
                 <div class="fixed-table-toolbar">
-                    <div class="columns pull-left">
+                    <div class="columns pull-right">
                         <button shiro:hasPermission="mfrs:company:add" type="button" class="btn  btn-primary"
                                 onclick="add()">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
@@ -18,54 +18,33 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
                         </button>
                     </div>
-                    <div class="columns pull-right">
-                        <button class="btn btn-success" onclick="reLoad()">查询</button>
+                    <br>
+                    <div class="columns pull-left" style="display:flex;  margin-top:20px">
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <input id="name" type="text" class="form-control"
+                                   placeholder="公司名称">
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <select name="province" id="province" class="form-control" data-actions-box="false"
+                                    data-size="5">
+                                <option value="">所属区域</option>
+                                <option th:each="ls:${provincesDOList}"
+                                        th:text="${ls.province}"
+                                        th:value="${ls.province}"></option>
+                            </select>
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <input id="type" type="text" class="form-control"
+                                   placeholder="公司类型">
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <input id="telephone" type="text" class="form-control"
+                                   placeholder="公司电话">
+                        </div>
+                        <div class="columns pull-right">
+                            <button class="btn btn-success" onclick="reLoad()">查询</button>
+                        </div>
                     </div>
-
-
-
-
-
-                    <!--<div class="form-group">-->
-                    <!--<label class="col-sm-3 control-label">所属区域：</label>-->
-                    <!--<div class="col-sm-8 form-inline" data-toggle="distpicker">-->
-                    <!--<select id="region" name="region" class="form-control chosen-select"></select>-->
-                    <!--<span style="color: red">*</span>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="columns pull-right col-md-2 nopadding" data-toggle="distpicker">-->
-                        <!--&lt;!&ndash;<div class="col-sm-8 form-inline" >&ndash;&gt;-->
-                        <!--<select id="region" name="region" class="form-control chosen-select"></select>-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                    <!--</div>-->
-
-                    <div class="columns pull-right col-md-2 nopadding">
-                    <select name="province" id="province" class="form-control" data-actions-box="false" data-size="5" >
-                    <option value="">所属区域</option>
-                    <option th:each="ls:${provincesDOList}"
-                    th:text="${ls.province}"
-                    th:value="${ls.province}"></option>
-                    </select>
-                    </div>
-
-
-                    <!--<div class="columns pull-right col-md-2 nopadding">-->
-                        <!--<select name="province" id="id" class="form-control" data-actions-box="false" data-size="5" >-->
-                            <!--<option value="">所属区域</option>-->
-                            <!--<option th:each="ls:${provincesDOList}"-->
-                                    <!--th:text="${ls.province}"-->
-                                    <!--th:value="${ls.province}"></option>-->
-                        <!--</select>-->
-                    <!--</div>-->
-
-
-
-
-                    <div class="columns pull-right col-md-2 nopadding">
-                        <input id="name" type="text" class="form-control"
-                               placeholder="公司名称">
-                    </div>
-
                 </div>
                 <table id="exampleTable" data-mobile-responsive="true">
                 </table>

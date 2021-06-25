@@ -8,6 +8,8 @@ import com.shiguang.baseinfomation.domain.CardTypeDO;
 import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.mfrs.domain.MfrsDO;
+import com.shiguang.mfrs.domain.StateDO;
+import com.shiguang.mfrs.service.StateService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -42,10 +44,20 @@ public class PositionController {
 	//部门维护
 	@Autowired
 	private DepartmentService departmentService;
+	//状态
+	@Autowired
+	private StateService stateService;
 	
 	@GetMapping()
 	@RequiresPermissions("mfrs:position:position")
-	String Position(){
+	String Position(Model model){
+		//部门
+		Map<String,Object> map = new HashMap<>();
+		List<DepartmentDO> departmentDOList = departmentService.list(map);
+		model.addAttribute("departmentDOList",departmentDOList);
+		//状态
+		List<StateDO> stateDOList = stateService.list(map);
+		model.addAttribute("stateDOList", stateDOList);
 	    return "mfrs/position/position";
 	}
 	
@@ -64,6 +76,7 @@ public class PositionController {
 	@GetMapping("/add")
 	@RequiresPermissions("mfrs:position:add")
 	String add(Model model){
+		//部门
 		Map<String,Object> map = new HashMap<>();
 		List<DepartmentDO> departmentDOList = departmentService.list(map);
 		model.addAttribute("departmentDOList",departmentDOList);
@@ -95,27 +108,6 @@ public class PositionController {
 		List<PositionDO> list = positionService.list(map);
 		if (list.size() > 0){
 			return R.error("仓位代码已存在");
-		}
-		String departNumber = position.getDepartNumber();
-		Map<String, Object> map1 = new HashMap<>();
-		map.put("departNumber",departNumber);
-		List<PositionDO> list1 = positionService.list(map1);
-		if (list1.size() > 0){
-			return R.error("所属部门已存在");
-		}
-		String positionName = position.getPositionName();
-		Map<String, Object> map2 = new HashMap<>();
-		map.put("positionName",positionName);
-		List<PositionDO> list2 = positionService.list(map2);
-		if (list2.size() > 0){
-			return R.error("仓位名称已存在");
-		}
-		String positionOrder = position.getPositionNum();
-		Map<String, Object> map3 = new HashMap<>();
-		map.put("positionOrder",positionOrder);
-		List<PositionDO> list3 = positionService.list(map3);
-		if (list3.size() > 0){
-			return R.error("排列序号已存在");
 		}
 
 		if(positionService.save(position)>0){

@@ -36,7 +36,8 @@ function load() {
                         mfrsid: $('#mfrsid').val(),
                         brandnum: $('#brandnum').val(),
                         stateId: $('#stateId').val(),
-                        payid: $('#payid').val()
+                        payid: $('#payid').val(),
+                        brandname :$('#brandname').val()
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };
@@ -212,7 +213,7 @@ function reLoad() {
 }
 
 function add() {
-    layer.open({
+    var toIndex = layer.open({
         type: 2,
         title: '增加',
         maxmin: true,
@@ -220,10 +221,11 @@ function add() {
         area: ['800px', '520px'],
         content: prefix + '/add' // iframe的url
     });
+    layer.full(toIndex);
 }
 
 function edit(id) {
-    layer.open({
+    var toIndex = layer.open({
         type: 2,
         title: '编辑',
         maxmin: true,
@@ -231,6 +233,7 @@ function edit(id) {
         area: ['800px', '520px'],
         content: prefix + '/edit/' + id // iframe的url
     });
+    layer.full(toIndex);
 }
 
 function remove(id) {

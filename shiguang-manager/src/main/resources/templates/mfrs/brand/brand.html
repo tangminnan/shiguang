@@ -3,41 +3,31 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="col-sm-12">
-			<div class="ibox">
-				<div class="ibox-body">
-					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
-							<button shiro:hasPermission="mfrs:brand:add" type="button" class="btn  btn-primary" onclick="add()">
-								<i class="fa fa-plus" aria-hidden="true"></i>添加
-							</button>
-							<button shiro:hasPermission="mfrs:brand:batchRemove" type="button" class="btn  btn-danger"
-								onclick="batchRemove()">
-								<i class="fa fa-trash" aria-hidden="true"></i>删除
-							</button>
-						</div>
-						<div class="columns pull-right">
-							<button class="btn btn-success" onclick="reLoad()">查询</button>
-						</div>
-						<div class="columns pull-right col-md-2 nopadding">
-							<select name="payid" id="payid" class="form-control" data-actions-box="false"
-									data-size="5">
-								<option value="">采购结算方式</option>
-								<option th:each="ls:${payDOList}"
-										th:text="${ls.paymethod}"
-										th:value="${ls.payid}"
-								></option>
-							</select>
-						</div>
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-right">
+                        <button shiro:hasPermission="mfrs:brand:add" type="button" class="btn  btn-primary"
+                                onclick="add()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>添加
+                        </button>
+                        <button shiro:hasPermission="mfrs:brand:batchRemove" type="button" class="btn  btn-danger"
+                                onclick="batchRemove()">
+                            <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </div>
+                    <br>
+                    <div class="columns pull-left" style="display:flex;  margin-top:20px">
                         <div class="columns pull-right col-md-2 nopadding">
-                            <select name="stateId" id="stateId" class="form-control" data-actions-box="false"
+                            <select name="goodsid" id="goodsid" class="form-control" data-actions-box="false"
                                     data-size="5">
-                                <option value="">启用状态</option>
-								<option th:each="ls:${stateDOList}"
-										th:text="${ls.status}"
-										th:value="${ls.stateId}"
-								></option>
+                                <option value="">商品类别</option>
+                                <option th:each="ls:${goodsDOList}"
+                                        th:text="${ls.goodsname}"
+                                        th:value="${ls.goodsid}"></option>
+
                             </select>
                         </div>
                         <div class="columns pull-right col-md-2 nopadding">
@@ -51,47 +41,72 @@
                             </select>
                         </div>
                         <div class="columns pull-right col-md-2 nopadding">
-							<select name="goodsid" id="goodsid" class="form-control" data-actions-box="false"
-									data-size="5">
-								<option value="">商品类别</option>
-								<option th:each="ls:${goodsDOList}"
-										th:text="${ls.goodsname}"
-										th:value="${ls.goodsid}"></option>
+                            <input id="brandnum" type="text" class="form-control"
+                                   placeholder="品牌代码">
+                        </div>
 
-							</select>
-						</div>
-					</div>
-					<table id="exampleTable" data-mobile-responsive="true">
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-		<div>
-			<script type="text/javascript">
-				var s_edit_h = 'hidden';
-				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
-			</script>
-		</div>
-		<div shiro:hasPermission="mfrs:brand:edit">
-			<script type="text/javascript">
-				s_edit_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="mfrs:brand:remove">
-			<script type="text/javascript">
-				var s_remove_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="mfrs:brand:resetPwd">
-			<script type="text/javascript">
-				var s_resetPwd_h = '';
-			</script>
-		</div>
-	</div>
-	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/mfrs/brand/brand.js"></script>
+
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <input id="brandname" type="text" class="form-control"
+                                   placeholder="品牌名称">
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <select name="stateId" id="stateId" class="form-control" data-actions-box="false"
+                                    data-size="5">
+                                <option value="">启用状态</option>
+                                <option th:each="ls:${stateDOList}"
+                                        th:text="${ls.status}"
+                                        th:value="${ls.stateId}"
+                                ></option>
+                            </select>
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <select name="payid" id="payid" class="form-control" data-actions-box="false"
+                                    data-size="5">
+                                <option value="">采购结算方式</option>
+                                <option th:each="ls:${payDOList}"
+                                        th:text="${ls.paymethod}"
+                                        th:value="${ls.payid}"
+                                ></option>
+                            </select>
+                        </div>
+
+                        <div class="columns pull-right">
+                            <button class="btn btn-success" onclick="reLoad()">查询</button>
+                        </div>
+                    </div>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+    </script>
+</div>
+<div shiro:hasPermission="mfrs:brand:edit">
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="mfrs:brand:remove">
+    <script type="text/javascript">
+        var s_remove_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="mfrs:brand:resetPwd">
+    <script type="text/javascript">
+        var s_resetPwd_h = '';
+    </script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/mfrs/brand/brand.js"></script>
 </body>
 </html>

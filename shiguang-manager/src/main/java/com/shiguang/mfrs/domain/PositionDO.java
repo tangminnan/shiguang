@@ -7,27 +7,29 @@ import java.util.Date;
 
 /**
  * 仓位维护表
- * 
+ *
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-22 17:49:08
+ * @date 2021-06-23 09:31:48
  */
 public class PositionDO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	//仓位id
 	private Long positionId;
 	//仓位代码
 	private String positionNum;
 	//部门编码
 	private String departNumber;
+	//部门名称
+	private String departName;
 	//仓位名称
 	private String positionName;
 	//排列序号
 	private String positionOrder;
 	//状态id
 	private Integer stateId;
-	//状态（1停用：2启用）
+	//状态（1启用：2停用）
 	private String status;
 	//状态(0:删除1:未删除)
 	private Long state;
@@ -69,6 +71,18 @@ public class PositionDO implements Serializable {
 		return departNumber;
 	}
 	/**
+	 * 设置：部门名称
+	 */
+	public void setDepartName(String departName) {
+		this.departName = departName;
+	}
+	/**
+	 * 获取：部门名称
+	 */
+	public String getDepartName() {
+		return departName;
+	}
+	/**
 	 * 设置：仓位名称
 	 */
 	public void setPositionName(String positionName) {
@@ -105,13 +119,13 @@ public class PositionDO implements Serializable {
 		return stateId;
 	}
 	/**
-	 * 设置：状态（1停用：2启用）
+	 * 设置：状态（1启用：2停用）
 	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
 	/**
-	 * 获取：状态（1停用：2启用）
+	 * 获取：状态（1启用：2停用）
 	 */
 	public String getStatus() {
 		return status;

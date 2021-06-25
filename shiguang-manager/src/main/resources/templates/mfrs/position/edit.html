@@ -14,22 +14,30 @@
                             <label class="col-sm-3 control-label">仓位代码：</label>
                             <div class="col-sm-8">
                                 <input id="positionNum" name="positionNum" th:value="${position.positionNum}"
-                                       class="form-control" type="text">
+                                   readonly    class="form-control" type="text">
                             </div>
                         </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">部门编码：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input id="departNumber" name="departNumber" th:value="${position.departNumber}"-->
+                                       <!--class="form-control" type="text">-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所属部门：</label>
                             <div class="col-sm-8">
-                                <!--<input id="departNumber" name="departNumber" th:value="${position.departNumber}" class="form-control" type="text">-->
+                                <!--<input id="departName" name="departName" th:value="${position.departName}"-->
+                                       <!--class="form-control" type="text">-->
                                 <select name="departNumber" id="departNumber" th:value="${position.departNumber}"
                                         class="form-control"
-                                        data-actions-box="false" data-size="5" >
+                                       disabled data-actions-box="false" data-size="5" >
                                     <option th:each="ls:${departmentDOList}"
                                             th:text="${ls.departName}"
                                             th:value="${ls.departNumber}"
                                     ></option>
                                 </select>
-                                <input id="goodsids" name="goodsids" th:value="${position.departNumber}"
+                                <input id="departNumbers" name="departNumbers" th:value="${position.departNumber}"
                                        class="form-control"
                                        type="hidden">
                             </div>

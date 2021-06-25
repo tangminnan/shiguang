@@ -1,5 +1,5 @@
 
-var prefix = "/mfrs/batch"
+var prefix = "/product/style"
 $(function() {
 	load();
 });
@@ -48,12 +48,12 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'batchid', 
-									title : '批号管理id' 
+									field : 'styleId', 
+									title : '款式id' 
 								},
 																{
-									field : 'batchstate', 
-									title : '批号管理' 
+									field : 'style', 
+									title : '款式' 
 								},
 																{
 									title : '操作',
@@ -61,13 +61,13 @@ function load() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.batchid
+												+ row.styleId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.batchid
+												+ row.styleId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.batchid
+												+ row.styleId
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
@@ -105,7 +105,7 @@ function remove(id) {
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'batchid' : id
+				'styleId' : id
 			},
 			success : function(r) {
 				if (r.code==0) {
@@ -134,7 +134,7 @@ function batchRemove() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['batchid'];
+			ids[i] = row['styleId'];
 		});
 		$.ajax({
 			type : 'POST',

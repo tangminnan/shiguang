@@ -3,12 +3,13 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
+
 <div class="wrapper wrapper-content ">
     <div class="col-sm-12">
         <div class="ibox">
             <div class="ibox-body">
                 <div class="fixed-table-toolbar">
-                    <div class="columns pull-left">
+                    <div class="columns pull-right">
                         <button shiro:hasPermission="mfrs:mfrs:add" type="button" class="btn  btn-primary"
                                 onclick="add()">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
@@ -26,47 +27,39 @@
                         <!--<i class="fa fa-trash" aria-hidden="true"></i>批量停用-->
                         <!--</button>-->
                     </div>
-                    <div class="columns pull-right">
-                        <button class="btn btn-success" onclick="reLoad()">查询</button>
-                    </div>
-                    <div class="columns pull-right col-md-2 nopadding">
-                        <select name="invoiceid" id="invoiceid" class="form-control" data-actions-box="false"
-                                data-size="5">
-                            <option value="">开票状态</option>
-                            <option th:each="ls:${invoiceDOList}"
-                                    th:text="${ls.invoicestate}"
-                                    th:value="${ls.invoiceid}"></option>
-                        </select>
-                    </div>
-                    <div class="columns pull-right col-md-2 nopadding">
-                        <select name="goodsid" id="goodsid" class="form-control" data-actions-box="false"
-                                data-size="5">
-                            <option value="">商品类别</option>
-                            <option th:each="ls:${goodsDOList}"
-                                    th:text="${ls.goodsname}"
-                                    th:value="${ls.goodsid}"></option>
+                    <br>
+                    <div class="columns pull-left" style="display:flex;  margin-top:20px">
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <input id="mfrsnum" type="text" class="form-control"
+                                   placeholder="制造商代码">
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <input id="mfrsname" type="text" class="form-control"
+                                   placeholder="制造商简称">
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <select name="goodsid" id="goodsid" class="form-control" data-actions-box="false"
+                                    data-size="5">
+                                <option value="">商品类别</option>
+                                <option th:each="ls:${goodsDOList}"
+                                        th:text="${ls.goodsname}"
+                                        th:value="${ls.goodsid}"></option>
 
-                        </select>
-                    </div>
-                    <!--<div class="columns pull-right col-md-2 nopadding">-->
-                    <!--<select name="goodsid" id="goodsid" multiple class="selectpicker form-control"-->
-                    <!--onchange="changeInterest()">-->
-                    <!--<option>商品类别</option>-->
-                    <!--<option th:each="ls:${goodsDOList}"-->
-                    <!--th:text="${ls.goodsname}"-->
-                    <!--th:value="${ls.goodsid}"></option>-->
-                    <!--</select>-->
-                    <!--<input id="interest" name="interest" class="form-control" type="hidden">-->
+                            </select>
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <select name="invoiceid" id="invoiceid" class="form-control" data-actions-box="false"
+                                    data-size="5">
+                                <option value="">开票状态</option>
+                                <option th:each="ls:${invoiceDOList}"
+                                        th:text="${ls.invoicestate}"
+                                        th:value="${ls.invoiceid}"></option>
+                            </select>
+                        </div>
 
-                    <!--</div>-->
-
-                    <div class="columns pull-right col-md-2 nopadding">
-                        <input id="mfrsname" type="text" class="form-control"
-                               placeholder="制造商简称">
-                    </div>
-                    <div class="columns pull-right col-md-2 nopadding">
-                        <input id="mfrsnum" type="text" class="form-control"
-                               placeholder="制造商代码">
+                        <div class="columns pull-right">
+                            <button class="btn btn-success" onclick="reLoad()">查询</button>
+                        </div>
                     </div>
                 </div>
                 <table id="exampleTable" data-mobile-responsive="true">
