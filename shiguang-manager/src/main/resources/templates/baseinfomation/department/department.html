@@ -8,7 +8,7 @@
 			<div class="ibox">
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
+						<div class="columns pull-right">
 							<button shiro:hasPermission="information:department:add" type="button" class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
@@ -17,12 +17,15 @@
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
 						</div>
+						<br>
+						<div class="columns pull-left" style="display:flex; margin-top:20px;">
 						<div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
 							<input id="departNumber" type="text" class="form-control"
 								placeholder="部门编码">
+						</div>
 						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">

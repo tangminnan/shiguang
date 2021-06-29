@@ -79,6 +79,8 @@ public class HighMemberController {
         MemberDO member = memberService.get(id);
         model.addAttribute("member", member);
         Map<String,Object> map = new HashMap<>();
+        map.put("state",1);
+        map.put("status",1);
         List<CardTypeDO> cardTypeDOList = typeService.list(map);
         model.addAttribute("cardTypeDOList",cardTypeDOList);
         List<PersonSortDO> personSortDOList = personSortService.list(map);
@@ -106,6 +108,8 @@ public class HighMemberController {
         }
         model.addAttribute("member", member);
         Map<String,Object> map = new HashMap<>();
+        map.put("state",1);
+        map.put("status",1);
         List<CardTypeDO> cardTypeDOList = typeService.list(map);
         model.addAttribute("cardTypeDOList",cardTypeDOList);
         List<PersonSortDO> personSortDOList = personSortService.list(map);
