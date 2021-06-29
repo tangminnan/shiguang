@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.product.dao.PartsDao">
+
+	<select id="get" resultType="com.shiguang.product.domain.PartsDO">
+		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`proid`,`parts_style`,`unitid`,`batchid`,`refractivityid`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_parts where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.product.domain.PartsDO">
+		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`proid`,`parts_style`,`unitid`,`batchid`,`refractivityid`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_parts
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="producNum != null and producNum != ''"> and produc_num = #{producNum} </if>
+		  		  <if test="producCode != null and producCode != ''"> and produc_code = #{producCode} </if>
+		  		  <if test="producName != null and producName != ''"> and produc_name = #{producName} </if>
+		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+		  		  <if test="brandid != null and brandid != ''"> and brandid = #{brandid} </if>
+		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
+		  		  <if test="producFactory != null and producFactory != ''"> and produc_factory = #{producFactory} </if>
+		  		  <if test="proid != null and proid != ''"> and proid = #{proid} </if>
+		  		  <if test="partsStyle != null and partsStyle != ''"> and parts_style = #{partsStyle} </if>
+		  		  <if test="unitid != null and unitid != ''"> and unitid = #{unitid} </if>
+		  		  <if test="batchid != null and batchid != ''"> and batchid = #{batchid} </if>
+		  		  <if test="refractivityid != null and refractivityid != ''"> and refractivityid = #{refractivityid} </if>
+		  		  <if test="tax != null and tax != ''"> and tax = #{tax} </if>
+		  		  <if test="taxPrice != null and taxPrice != ''"> and tax_price = #{taxPrice} </if>
+		  		  <if test="tradePrice != null and tradePrice != ''"> and trade_price = #{tradePrice} </if>
+		  		  <if test="transferPrice != null and transferPrice != ''"> and transfer_price = #{transferPrice} </if>
+		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from aa_parts
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="producNum != null and producNum != ''"> and produc_num = #{producNum} </if>
+		  		  <if test="producCode != null and producCode != ''"> and produc_code = #{producCode} </if>
+		  		  <if test="producName != null and producName != ''"> and produc_name = #{producName} </if>
+		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+		  		  <if test="brandid != null and brandid != ''"> and brandid = #{brandid} </if>
+		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
+		  		  <if test="producFactory != null and producFactory != ''"> and produc_factory = #{producFactory} </if>
+		  		  <if test="proid != null and proid != ''"> and proid = #{proid} </if>
+		  		  <if test="partsStyle != null and partsStyle != ''"> and parts_style = #{partsStyle} </if>
+		  		  <if test="unitid != null and unitid != ''"> and unitid = #{unitid} </if>
+		  		  <if test="batchid != null and batchid != ''"> and batchid = #{batchid} </if>
+		  		  <if test="refractivityid != null and refractivityid != ''"> and refractivityid = #{refractivityid} </if>
+		  		  <if test="tax != null and tax != ''"> and tax = #{tax} </if>
+		  		  <if test="taxPrice != null and taxPrice != ''"> and tax_price = #{taxPrice} </if>
+		  		  <if test="tradePrice != null and tradePrice != ''"> and trade_price = #{tradePrice} </if>
+		  		  <if test="transferPrice != null and transferPrice != ''"> and transfer_price = #{transferPrice} </if>
+		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.product.domain.PartsDO" useGeneratedKeys="true" keyProperty="id">
+		insert into aa_parts
+		(
+			`produc_num`, 
+			`produc_code`, 
+			`produc_name`, 
+			`mfrsid`, 
+			`brandid`, 
+			`factory`, 
+			`produc_factory`, 
+			`proid`, 
+			`parts_style`, 
+			`unitid`, 
+			`batchid`, 
+			`refractivityid`, 
+			`tax`, 
+			`tax_price`, 
+			`trade_price`, 
+			`transfer_price`, 
+			`retail_price`
+		)
+		values
+		(
+			#{producNum}, 
+			#{producCode}, 
+			#{producName}, 
+			#{mfrsid}, 
+			#{brandid}, 
+			#{factory}, 
+			#{producFactory}, 
+			#{proid}, 
+			#{partsStyle}, 
+			#{unitid}, 
+			#{batchid}, 
+			#{refractivityid}, 
+			#{tax}, 
+			#{taxPrice}, 
+			#{tradePrice}, 
+			#{transferPrice}, 
+			#{retailPrice}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.product.domain.PartsDO">
+		update aa_parts 
+		<set>
+			<if test="producNum != null">`produc_num` = #{producNum}, </if>
+			<if test="producCode != null">`produc_code` = #{producCode}, </if>
+			<if test="producName != null">`produc_name` = #{producName}, </if>
+			<if test="mfrsid != null">`mfrsid` = #{mfrsid}, </if>
+			<if test="brandid != null">`brandid` = #{brandid}, </if>
+			<if test="factory != null">`factory` = #{factory}, </if>
+			<if test="producFactory != null">`produc_factory` = #{producFactory}, </if>
+			<if test="proid != null">`proid` = #{proid}, </if>
+			<if test="partsStyle != null">`parts_style` = #{partsStyle}, </if>
+			<if test="unitid != null">`unitid` = #{unitid}, </if>
+			<if test="batchid != null">`batchid` = #{batchid}, </if>
+			<if test="refractivityid != null">`refractivityid` = #{refractivityid}, </if>
+			<if test="tax != null">`tax` = #{tax}, </if>
+			<if test="taxPrice != null">`tax_price` = #{taxPrice}, </if>
+			<if test="tradePrice != null">`trade_price` = #{tradePrice}, </if>
+			<if test="transferPrice != null">`transfer_price` = #{transferPrice}, </if>
+			<if test="retailPrice != null">`retail_price` = #{retailPrice}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from aa_parts where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from aa_parts where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

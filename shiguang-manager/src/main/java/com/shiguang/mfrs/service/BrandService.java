@@ -33,4 +33,5 @@ public interface BrandService {
 
     //菜单联动显示
     List<GoodsDO> caidan(Integer mfrsid);
+
 }

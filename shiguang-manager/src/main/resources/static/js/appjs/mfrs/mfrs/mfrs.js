@@ -167,7 +167,7 @@ function load() {
                             var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
                                 + row.mfrsid
                                 + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d + a ;
+                            return e + d  ;
                         }
                     }]
             });

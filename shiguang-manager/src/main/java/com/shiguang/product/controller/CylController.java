@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shiguang.product.domain.CylDO;
 import com.shiguang.product.service.CylService;
-import com.bootdo.common.utils.PageUtils;
-import com.bootdo.common.utils.Query;
-import com.bootdo.common.utils.R;
+import com.shiguang.common.utils.PageUtils;
+import com.shiguang.common.utils.Query;
+import com.shiguang.common.utils.R;
 
 /**
  * 柱镜表
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-25 16:58:42
+ * @date 2021-06-25 17:26:17
  */
  
 @Controller

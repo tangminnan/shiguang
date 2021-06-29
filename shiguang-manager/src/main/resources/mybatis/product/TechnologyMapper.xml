@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.product.dao.TechnologyDao">
+
+	<select id="get" resultType="com.shiguang.product.domain.TechnologyDO">
+		select `technology_id`,`technology_num`,`technology_type` from a_technology where technology_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.product.domain.TechnologyDO">
+		select `technology_id`,`technology_num`,`technology_type` from a_technology
+        <where>  
+		  		  <if test="technologyId != null and technologyId != ''"> and technology_id = #{technologyId} </if>
+		  		  <if test="technologyNum != null and technologyNum != ''"> and technology_num = #{technologyNum} </if>
+		  		  <if test="technologyType != null and technologyType != ''"> and technology_type = #{technologyType} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by technology_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from a_technology
+		 <where>  
+		  		  <if test="technologyId != null and technologyId != ''"> and technology_id = #{technologyId} </if>
+		  		  <if test="technologyNum != null and technologyNum != ''"> and technology_num = #{technologyNum} </if>
+		  		  <if test="technologyType != null and technologyType != ''"> and technology_type = #{technologyType} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.product.domain.TechnologyDO">
+		insert into a_technology
+		(
+			`technology_id`, 
+			`technology_num`, 
+			`technology_type`
+		)
+		values
+		(
+			#{technologyId}, 
+			#{technologyNum}, 
+			#{technologyType}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.product.domain.TechnologyDO">
+		update a_technology 
+		<set>
+			<if test="technologyNum != null">`technology_num` = #{technologyNum}, </if>
+			<if test="technologyType != null">`technology_type` = #{technologyType}</if>
+		</set>
+		where technology_id = #{technologyId}
+	</update>
+	
+	<delete id="remove">
+		delete from a_technology where technology_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from a_technology where technology_id in 
+		<foreach item="technologyId" collection="array" open="(" separator="," close=")">
+			#{technologyId}
+		</foreach>
+	</delete>
+
+</mapper>

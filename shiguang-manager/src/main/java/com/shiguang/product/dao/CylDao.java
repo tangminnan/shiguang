@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 柱镜表
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-25 16:58:42
+ * @date 2021-06-25 17:26:17
  */
 @Mapper
 public interface CylDao {

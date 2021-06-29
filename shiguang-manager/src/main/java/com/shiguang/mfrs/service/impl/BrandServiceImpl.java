@@ -57,8 +57,8 @@ public class BrandServiceImpl implements BrandService {
 	public int batchRemove(Integer[] brandids){
 		return brandDao.batchRemove(brandids);
 	}
-	//菜单联动显示
 
+	//菜单联动显示
 	@Override
 	public List<GoodsDO> caidan(Integer mfrsid) {
 		return brandDao.caidan(mfrsid);

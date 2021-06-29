@@ -1,4 +1,4 @@
-package com.shiguang.mfrs.controller;
+package com.shiguang.product.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -15,56 +15,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shiguang.mfrs.domain.BatchDO;
-import com.shiguang.mfrs.service.BatchService;
+import com.shiguang.product.domain.PartsDO;
+import com.shiguang.product.service.PartsService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 
 /**
- * 批号管理表
+ * 配件表
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-09 11:43:55
+ * @date 2021-06-25 18:06:25
  */
  
 @Controller
-@RequestMapping("/mfrs/batch")
-public class BatchController {
+@RequestMapping("/product/parts")
+public class PartsController {
 	@Autowired
-	private BatchService batchService;
+	private PartsService partsService;
 	
 	@GetMapping()
-	@RequiresPermissions("mfrs:batch:batch")
-	String Batch(){
-	    return "mfrs/batch/batch";
+	@RequiresPermissions("product:parts:parts")
+	String Parts(){
+	    return "product/parts/parts";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("mfrs:batch:batch")
+	@RequiresPermissions("product:parts:parts")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		List<BatchDO> batchList = batchService.list(query);
-		int total = batchService.count(query);
-		PageUtils pageUtils = new PageUtils(batchList, total);
+		List<PartsDO> partsList = partsService.list(query);
+		int total = partsService.count(query);
+		PageUtils pageUtils = new PageUtils(partsList, total);
 		return pageUtils;
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("mfrs:batch:add")
+	@RequiresPermissions("product:parts:add")
 	String add(){
-	    return "mfrs/batch/add";
+	    return "product/parts/add";
 	}
 
-	@GetMapping("/edit/{batchid}")
-	@RequiresPermissions("mfrs:batch:edit")
-	String edit(@PathVariable("batchid") Integer batchid,Model model){
-		BatchDO batch = batchService.get(batchid);
-		model.addAttribute("batch", batch);
-	    return "mfrs/batch/edit";
+	@GetMapping("/edit/{id}")
+	@RequiresPermissions("product:parts:edit")
+	String edit(@PathVariable("id") Long id,Model model){
+		PartsDO parts = partsService.get(id);
+		model.addAttribute("parts", parts);
+	    return "product/parts/edit";
 	}
 	
 	/**
@@ -72,9 +72,9 @@ public class BatchController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("mfrs:batch:add")
-	public R save( BatchDO batch){
-		if(batchService.save(batch)>0){
+	@RequiresPermissions("product:parts:add")
+	public R save( PartsDO parts){
+		if(partsService.save(parts)>0){
 			return R.ok();
 		}
 		return R.error();
@@ -84,9 +84,9 @@ public class BatchController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("mfrs:batch:edit")
-	public R update( BatchDO batch){
-		batchService.update(batch);
+	@RequiresPermissions("product:parts:edit")
+	public R update( PartsDO parts){
+		partsService.update(parts);
 		return R.ok();
 	}
 	
@@ -95,9 +95,9 @@ public class BatchController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("mfrs:batch:remove")
-	public R remove( Integer batchid){
-		if(batchService.remove(batchid)>0){
+	@RequiresPermissions("product:parts:remove")
+	public R remove( Long id){
+		if(partsService.remove(id)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -108,9 +108,9 @@ public class BatchController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("mfrs:batch:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] batchids){
-		batchService.batchRemove(batchids);
+	@RequiresPermissions("product:parts:batchRemove")
+	public R remove(@RequestParam("ids[]") Long[] ids){
+		partsService.batchRemove(ids);
 		return R.ok();
 	}
 	
