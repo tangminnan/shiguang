@@ -12,78 +12,110 @@
 							<div style="border:1px solid #000">
 								<h1 style="position: absolute;top: 10px;width: 150px;left: 100px;z-index: 99;background-color: white;">
 									必填项</h1>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">商品信息代码：</label>
+									<div class="col-sm-8">
+										<input id="producNum" name="producNum" class="form-control" type="text"
+											   value="1.00.00.000000000.0000">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">商品条码：</label>
+									<div class="col-sm-8">
+										<input id="producCode" name="producCode" class="form-control" type="text"
+											   value="1.00.00.000000000.0000">
+										<span style="color: red">*</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">商品名称：</label>
+									<div class="col-sm-8">
+										<input id="producName" name="producName" class="form-control" type="text">
+										<span style="color: red">*</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">制造商简称：</label>
+									<div class="col-sm-8">
+										<select id="mfrsid" name="mfrsid" class="form-control"
+												onchange="choice(this.options[this.options.selectedIndex].value)">
+											<option></option>
+											<option th:each="ls:${mfrsDOList}"
+													th:text="${ls.mfrsname}"
+													th:value="${ls.mfrsid}"
+											></option>
+										</select>
+										<span style="color: red">*</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">商品品种：</label>
+									<div class="col-sm-8">
+										<select id="brandid" name="brandid" class="form-control"></select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">厂家型号：</label>
+									<div class="col-sm-8">
+										<input id="factory" name="factory" onkeyup="factory1(this.value=this.value.toUpperCase())"
+											   class="form-control" type="text">
+										<span style="color: red">*</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">型号：</label>
+									<div class="col-sm-8">
+										<input id="producFactory" name="factory" onkeyup="factory1(this.value=this.value.toUpperCase())"
+											   class="form-control" type="text">
+										<span style="color: red">*</span>
+									</div>
+								</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">商品信息代码：</label>
-								<div class="col-sm-8">
-									<input id="producNum" name="producNum" class="form-control" type="text">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">商品条码：</label>
-								<div class="col-sm-8">
-									<input id="producCode" name="producCode" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">商品名称：</label>
-								<div class="col-sm-8">
-									<input id="producName" name="producName" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">制造商id：</label>
-								<div class="col-sm-8">
-									<input id="mfrsid" name="mfrsid" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">商品品种（品牌id：</label>
-								<div class="col-sm-8">
-									<input id="brandid" name="brandid" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">
-								<label class="col-sm-3 control-label">厂家型号（品牌维护有：</label>
-								<div class="col-sm-8">
-									<input id="factory" name="factory" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">
-								<label class="col-sm-3 control-label">型号：</label>
-								<div class="col-sm-8">
-									<input id="producFactory" name="producFactory" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
 								<label class="col-sm-3 control-label">商品编号：</label>
 								<div class="col-sm-8">
 									<input id="proid" name="proid" class="form-control" type="text">
 								</div>
 							</div>
-																												<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">配件型：</label>
 								<div class="col-sm-8">
 									<input id="partsStyle" name="partsStyle" class="form-control" type="text">
 								</div>
 							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">计量单位：</label>
-								<div class="col-sm-8">
-									<input id="unitid" name="unitid" class="form-control" type="text">
+								<div class="form-group">
+									<label class="col-sm-3 control-label">计量单位：</label>
+									<div class="col-sm-8">
+										<select id="unitid" name="unitid" class="form-control">
+											<option></option>
+											<option th:each="ls:${unitDOList}"
+													th:text="${ls.unitname}"
+													th:value="${ls.unitid}"
+											></option>
+										</select>
+									</div>
 								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">批号管理（1是：2否）：</label>
-								<div class="col-sm-8">
-									<input id="batchid" name="batchid" class="form-control" type="text">
+								<div class="form-group">
+									<label class="col-sm-3 control-label">批号管理：</label>
+									<div class="col-sm-8">
+										<label class="radio-inline"> <input type="radio"
+																			name="batchid" value="1"/> 是
+										</label>
+										<label class="radio-inline"> <input type="radio"
+																			name="batchid" value="2" checked/> 否
+										</label>
+									</div>
 								</div>
-							</div>
 							</div>
 
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">折射率id：</label>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">折射率：</label>
 								<div class="col-sm-8">
-									<input id="refractivityid" name="refractivityid" class="form-control" type="text">
+									<option></option>
+									<option th:each="ls:${refractivityDOList}"
+											th:text="${ls.refractivityvalue}"
+											th:value="${ls.refractivityid}"
+									></option>
 								</div>
 							</div>
 																												<div class="form-group">	
