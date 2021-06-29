@@ -8,6 +8,7 @@ public class RoleDO {
 	private Long roleId;
 	private String roleName;
 	private String roleSign;
+	private Long roleType;
 	private String remark;
 	private Long userIdCreate;
 	private Timestamp gmtCreate;
@@ -37,6 +38,14 @@ public class RoleDO {
 
 	public void setRoleSign(String roleSign) {
 		this.roleSign = roleSign;
+	}
+
+	public Long getRoleType() {
+		return roleType;
+	}
+
+	public void setRoleType(Long roleType) {
+		this.roleType = roleType;
 	}
 
 	public String getRemark() {
@@ -93,6 +102,7 @@ public class RoleDO {
 				"roleId=" + roleId +
 				", roleName='" + roleName + '\'' +
 				", roleSign='" + roleSign + '\'' +
+				", roleType='" + roleType + '\'' +
 				", remark='" + remark + '\'' +
 				", userIdCreate=" + userIdCreate +
 				", gmtCreate=" + gmtCreate +

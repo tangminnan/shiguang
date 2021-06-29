@@ -18,6 +18,8 @@ public interface UserService {
 	
 	List<UserDO> getbyphone(String phone);
 
+	List<UserDO> getRoleList(Map<String, Object> map);
+
 	List<UserDO> list(Map<String, Object> map);
 
 	int count(Map<String, Object> map);
