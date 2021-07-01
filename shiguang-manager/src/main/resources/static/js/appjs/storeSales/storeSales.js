@@ -78,23 +78,9 @@ function load() {
 									field : 'cardNumber',
 									align : 'center',
 									formatter : function(value, row, index) {
-                                        var e;
-										if (row.isSale == 0) {
-											   e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                                                + value
-                                                + '\')"><i class="fa fa-edit"></i></a> ';
-										} else if (row.isSale == 1) {
-                                               e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" onclick="detail(\''
-                                                + value
-                                                + '\')" style="text-decoration: none;">详情</a>';
-										}
-
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.id
-												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
+										  var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="下单" onclick="edit(\''
+											+ value
+											+ '\')"><i class="fa fa-edit"></i></a> ';
 										return e ;
 									}
 								} ]
@@ -117,7 +103,7 @@ function add() {
 function edit(cardNumber) {
     var toIndex = layer.open({
 		type : 2,
-		title : '结款',
+		title : '门店销售',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '1500px', '520px' ],

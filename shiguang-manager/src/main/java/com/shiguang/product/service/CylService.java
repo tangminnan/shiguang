@@ -10,11 +10,11 @@ import java.util.Map;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-25 17:26:17
+ * @date 2021-06-30 09:53:22
  */
 public interface CylService {
 	
-	CylDO get(Integer id);
+	CylDO get(Long cylId);
 	
 	List<CylDO> list(Map<String, Object> map);
 	
@@ -24,7 +24,7 @@ public interface CylService {
 	
 	int update(CylDO cyl);
 	
-	int remove(Integer id);
+	int remove(Long cylId);
 	
-	int batchRemove(Integer[] ids);
+	int batchRemove(Long[] cylIds);
 }

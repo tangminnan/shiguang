@@ -125,7 +125,7 @@ h1, h2, h3, h4, h5, h6{ font-size:100%;font-weight: normal;}
 
 .colorTab{overflow: hidden;}
 .colorTab table{background: none;margin:0;width: 100%;}
-.blueLeft{width: 25%;border:1px solid #499dfc;overflow: hidden;border-left:none;float: left;}
+.blueLeft{width: 25%;border:1px solid #499dfc;overflow: hidden;float: left;}
 .blueLeft table td{border-left:1px solid #499dfc;border-bottom:1px solid #499dfc;}
 .blueTop{background: #499dfc;color:#fff;font-weight: bold;}
 .blueTop td{text-align: center;padding:8px 0;}

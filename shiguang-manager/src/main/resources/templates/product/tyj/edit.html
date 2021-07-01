@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${tyj.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">商品信息代码：</label>
+								<div class="col-sm-8">
+									<input id="producNum" name="producNum" th:value="${tyj.producNum}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">商品条码：</label>
+								<div class="col-sm-8">
+									<input id="producCode" name="producCode" th:value="${tyj.producCode}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">商品名称：</label>
+								<div class="col-sm-8">
+									<input id="producName" name="producName" th:value="${tyj.producName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">制造商id：</label>
+								<div class="col-sm-8">
+									<input id="mfrsid" name="mfrsid" th:value="${tyj.mfrsid}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">商品品种：</label>
+								<div class="col-sm-8">
+									<input id="brandid" name="brandid" th:value="${tyj.brandid}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">厂家型号：</label>
+								<div class="col-sm-8">
+									<input id="factory" name="factory" th:value="${tyj.factory}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">型号：</label>
+								<div class="col-sm-8">
+									<input id="producFactory" name="producFactory" th:value="${tyj.producFactory}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">计量单位：</label>
+								<div class="col-sm-8">
+									<input id="unitid" name="unitid" th:value="${tyj.unitid}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">厂家色号：</label>
+								<div class="col-sm-8">
+									<input id="producFactorycolor" name="producFactorycolor" th:value="${tyj.producFactorycolor}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">色号：</label>
+								<div class="col-sm-8">
+									<input id="producColor" name="producColor" th:value="${tyj.producColor}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">批号管理(1是、2否)：</label>
+								<div class="col-sm-8">
+									<input id="batchid" name="batchid" th:value="${tyj.batchid}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">镜架尺寸：</label>
+								<div class="col-sm-8">
+									<input id="size" name="size" th:value="${tyj.size}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">功能：</label>
+								<div class="col-sm-8">
+									<input id="function" name="function" th:value="${tyj.function}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">颜色：</label>
+								<div class="col-sm-8">
+									<input id="color" name="color" th:value="${tyj.color}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">款式id：</label>
+								<div class="col-sm-8">
+									<input id="styleId" name="styleId" th:value="${tyj.styleId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">采购年份(年份后两位+两位月份)：</label>
+								<div class="col-sm-8">
+									<input id="year" name="year" th:value="${tyj.year}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">税率(%)：</label>
+								<div class="col-sm-8">
+									<input id="tax" name="tax" th:value="${tyj.tax}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">含税单价：</label>
+								<div class="col-sm-8">
+									<input id="taxPrice" name="taxPrice" th:value="${tyj.taxPrice}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">批发价格：</label>
+								<div class="col-sm-8">
+									<input id="tradePrice" name="tradePrice" th:value="${tyj.tradePrice}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">调货成本：</label>
+								<div class="col-sm-8">
+									<input id="transferPrice" name="transferPrice" th:value="${tyj.transferPrice}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">标准零售价格：</label>
+								<div class="col-sm-8">
+									<input id="retailPrice" name="retailPrice" th:value="${tyj.retailPrice}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/product/tyj/edit.js">
+	</script>
+</body>
+</html>

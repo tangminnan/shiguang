@@ -4,21 +4,21 @@
 <mapper namespace="com.shiguang.product.dao.LightbelowDao">
 
 	<select id="get" resultType="com.shiguang.product.domain.LightbelowDO">
-		select `id`,`light_below` from a_lightbelow where id = #{value}
+		select `lightbelow_id`,`lightbelow` from a_lightbelow where lightbelow_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.product.domain.LightbelowDO">
-		select `id`,`light_below` from a_lightbelow
+		select `lightbelow_id`,`lightbelow` from a_lightbelow
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="lightBelow != null and lightBelow != ''"> and light_below = #{lightBelow} </if>
+		  		  <if test="lightbelowId != null and lightbelowId != ''"> and lightbelow_id = #{lightbelowId} </if>
+		  		  <if test="lightbelow != null and lightbelow != ''"> and lightbelow = #{lightbelow} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id desc
+                order by lightbelow_id desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -29,40 +29,38 @@
  	<select id="count" resultType="int">
 		select count(*) from a_lightbelow
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="lightBelow != null and lightBelow != ''"> and light_below = #{lightBelow} </if>
+		  		  <if test="lightbelowId != null and lightbelowId != ''"> and lightbelow_id = #{lightbelowId} </if>
+		  		  <if test="lightbelow != null and lightbelow != ''"> and lightbelow = #{lightbelow} </if>
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.shiguang.product.domain.LightbelowDO">
+	<insert id="save" parameterType="com.shiguang.product.domain.LightbelowDO" useGeneratedKeys="true" keyProperty="lightbelowId">
 		insert into a_lightbelow
 		(
-			`id`, 
-			`light_below`
+			`lightbelow`
 		)
 		values
 		(
-			#{id}, 
-			#{lightBelow}
+			#{lightbelow}
 		)
 	</insert>
 	 
 	<update id="update" parameterType="com.shiguang.product.domain.LightbelowDO">
 		update a_lightbelow 
 		<set>
-			<if test="lightBelow != null">`light_below` = #{lightBelow}</if>
+			<if test="lightbelow != null">`lightbelow` = #{lightbelow}</if>
 		</set>
-		where id = #{id}
+		where lightbelow_id = #{lightbelowId}
 	</update>
 	
 	<delete id="remove">
-		delete from a_lightbelow where id = #{value}
+		delete from a_lightbelow where lightbelow_id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from a_lightbelow where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
+		delete from a_lightbelow where lightbelow_id in 
+		<foreach item="lightbelowId" collection="array" open="(" separator="," close=")">
+			#{lightbelowId}
 		</foreach>
 	</delete>
 

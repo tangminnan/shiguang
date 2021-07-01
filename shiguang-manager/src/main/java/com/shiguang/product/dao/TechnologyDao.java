@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 工艺类型表
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-25 17:58:57
+ * @date 2021-06-30 09:53:22
  */
 @Mapper
 public interface TechnologyDao {

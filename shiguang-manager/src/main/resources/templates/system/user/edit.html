@@ -24,6 +24,18 @@
 									type="text" th:value="${user.username}" readonly>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">所属门店：</label>
+							<div class="col-sm-8">
+								<select name="store" id="store" class="form-control" data-actions-box="false" data-size="5">
+									<option></option>
+									<option th:each="ls:${storeList}"
+											th:text="${ls.departName}"
+											th:value="${ls.departName}"></option>
+								</select>
+								<input id="stores" name="stores" th:value="${user.store}" type="hidden">
+							</div>
+						</div>
 <!-- 						<div class="form-group">
 								<label class="col-sm-3 control-label">部门：</label>
 								<div class="col-sm-8">
@@ -83,5 +95,11 @@
 	<div th:include="include::footer"></div>
 	<script type="text/javascript" src="/js/appjs/sys/user/edit.js">
 	</script>
+<script type="text/javascript">
+    $().ready(function(){
+        var stores = $("input[name='stores']").val();
+        $("#store").find("[value="+stores+"]").attr("selected",true);
+    });
+</script>
 </body>
 </html>

@@ -4,10 +4,10 @@
 <mapper namespace="com.shiguang.system.dao.UserDao">
 
 	<select id="get" resultType="com.shiguang.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user where user_id = #{value}
+		select `user_id`,`username`,`name`,`password`,`store`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user where user_id = #{value}
 	</select>
 	<select id="getbyphone" resultType="com.shiguang.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user where mobile = #{value}
+		select `user_id`,`username`,`name`,`password`,`store`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user where mobile = #{value}
 	</select>
 
 	<select id="getRoleList" resultType="com.shiguang.system.domain.UserDO">
@@ -18,12 +18,13 @@
 	</select>
 
 	<select id="list" resultType="com.shiguang.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user
+		select `user_id`,`username`,`name`,`password`,`store`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user
         <where>  
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
 		  		  <if test="password != null and password != ''"> and password = #{password} </if>
+			      <if test="store != null and store != ''"> and store = #{store} </if>
 		  		  <if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
 		  		  <if test="email != null and email != ''"> and email = #{email} </if>
 		  		  <if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
@@ -60,6 +61,7 @@
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
 		  		  <if test="password != null and password != ''"> and password = #{password} </if>
+			      <if test="store != null and store != ''"> and store = #{store} </if>
 		  		  <if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
 		  		  <if test="email != null and email != ''"> and email = #{email} </if>
 		  		  <if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
@@ -83,7 +85,8 @@
 		(
 			`username`, 
 			`name`, 
-			`password`, 
+			`password`,
+			`store`,
 			`dept_id`, 
 			`email`, 
 			`mobile`, 
@@ -110,7 +113,8 @@
 		(
 			#{username}, 
 			#{name}, 
-			#{password}, 
+			#{password},
+			#{store},
 			#{deptId}, 
 			#{email}, 
 			#{mobile}, 
@@ -141,6 +145,7 @@
 			<if test="username != null">`username` = #{username}, </if>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="password != null">`password` = #{password}, </if>
+			<if test="store != null and store != ''">`store` = #{store}, </if>
 			<if test="deptId != null">`dept_id` = #{deptId}, </if>
 			<if test="email != null">`email` = #{email}, </if>
 			<if test="mobile != null">`mobile` = #{mobile}, </if>

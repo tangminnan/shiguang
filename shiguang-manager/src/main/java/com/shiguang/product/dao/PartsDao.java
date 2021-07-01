@@ -1,11 +1,14 @@
 package com.shiguang.product.dao;
 
+import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.domain.PartsDO;
 
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 配件表
@@ -29,4 +32,8 @@ public interface PartsDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+	//查询配件制造商
+	List<MgDO> mglist(Map<String, Object> map);
+	//菜单联动显示
+	List<BrandDO> choice(@Param("mfrsid") Integer mfrsid);
 }

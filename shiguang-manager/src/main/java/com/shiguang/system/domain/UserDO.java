@@ -17,6 +17,8 @@ public class UserDO implements Serializable {
     private String name;
     // 密码
     private String password;
+    //门店
+    private String store;
     // 部门
     private Long deptId;
     private String deptName;
@@ -156,6 +158,12 @@ public class UserDO implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getStore() { return store; }
+
+    public void setStore(String store) {
+        this.store = store;
     }
 
     public Long getDeptId() {

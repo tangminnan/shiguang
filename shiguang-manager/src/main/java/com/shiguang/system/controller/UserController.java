@@ -2,6 +2,8 @@ package com.shiguang.system.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.shiguang.baseinfomation.domain.DepartmentDO;
+import com.shiguang.baseinfomation.service.DepartmentService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +41,8 @@ public class UserController extends BaseController {
 	DictService dictService;
 	@Autowired
 	private BootdoConfig bootdoConfig;
+	@Autowired
+	private DepartmentService departmentService;
 	
 	
 	@RequiresPermissions("sys:user:user")
@@ -76,6 +80,10 @@ public class UserController extends BaseController {
 	String add(Model model) {
 		List<RoleDO> roles = roleService.list();
 		model.addAttribute("roles", roles);
+		Map<String,Object> map = new HashMap<>();
+		map.put("departType","销售门店");
+		List<DepartmentDO> storeList = departmentService.list(map);
+		model.addAttribute("storeList",storeList);
 		return prefix + "/add";
 	}
 
@@ -87,6 +95,10 @@ public class UserController extends BaseController {
 		model.addAttribute("user", userDO);
 		List<RoleDO> roles = roleService.list(id);
 		model.addAttribute("roles", roles);
+		Map<String,Object> map = new HashMap<>();
+		map.put("departType","销售门店");
+		List<DepartmentDO> storeList = departmentService.list(map);
+		model.addAttribute("storeList",storeList);
 		return prefix+"/edit";
 	}
 

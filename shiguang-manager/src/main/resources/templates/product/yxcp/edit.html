@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${yxcp.id}" type="hidden">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品信息代码：</label>
+                            <div class="col-sm-8">
+                                <input id="producNum" name="producNum" th:value="${yxcp.producNum}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品条码：</label>
+                            <div class="col-sm-8">
+                                <input id="producCode" name="producCode" th:value="${yxcp.producCode}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品名称：</label>
+                            <div class="col-sm-8">
+                                <input id="producName" name="producName" th:value="${yxcp.producName}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">制造商id：</label>
+                            <div class="col-sm-8">
+                                <input id="mfrsid" name="mfrsid" th:value="${yxcp.mfrsid}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品品种：</label>
+                            <div class="col-sm-8">
+                                <input id="brandid" name="brandid" th:value="${yxcp.brandid}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品编号：</label>
+                            <div class="col-sm-8">
+                                <input id="proid" name="proid" th:value="${yxcp.proid}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">计量单位：</label>
+                            <div class="col-sm-8">
+                                <input id="unitid" name="unitid" th:value="${yxcp.unitid}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">球镜id：</label>
+                            <div class="col-sm-8">
+                                <input id="sphId" name="sphId" th:value="${yxcp.sphId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">柱镜id：</label>
+                            <div class="col-sm-8">
+                                <input id="cylId" name="cylId" th:value="${yxcp.cylId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">曲率：</label>
+                            <div class="col-sm-8">
+                                <input id="curvature" name="curvature" th:value="${yxcp.curvature}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">直径：</label>
+                            <div class="col-sm-8">
+                                <input id="diameter" name="diameter" th:value="${yxcp.diameter}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">厂家型号：</label>
+                            <div class="col-sm-8">
+                                <input id="factory" name="factory" th:value="${yxcp.factory}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">使用类型id：</label>
+                            <div class="col-sm-8">
+                                <input id="usageId" name="usageId" th:value="${yxcp.usageId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">抛弃型分类id：</label>
+                            <div class="col-sm-8">
+                                <input id="typeId" name="typeId" th:value="${yxcp.typeId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品可使用天数：</label>
+                            <div class="col-sm-8">
+                                <input id="useDays" name="useDays" th:value="${yxcp.useDays}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">效期提醒上限（有效期前【】天提醒进入滞销状态）：</label>
+                            <div class="col-sm-8">
+                                <input id="upday" name="upday" th:value="${yxcp.upday}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">效期提醒下限（有效期前【】天提醒进入即将失效状态）：</label>
+                            <div class="col-sm-8">
+                                <input id="downday" name="downday" th:value="${yxcp.downday}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">颜色：</label>
+                            <div class="col-sm-8">
+                                <input id="color" name="color" th:value="${yxcp.color}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">隐形类别：</label>
+                            <div class="col-sm-8">
+                                <input id="invisibleId" name="invisibleId" th:value="${yxcp.invisibleId}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">材质id：</label>
+                            <div class="col-sm-8">
+                                <input id="caizhiId" name="caizhiId" th:value="${yxcp.caizhiId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">税率(%)：</label>
+                            <div class="col-sm-8">
+                                <input id="tax" name="tax" th:value="${yxcp.tax}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">含税单价：</label>
+                            <div class="col-sm-8">
+                                <input id="taxPrice" name="taxPrice" th:value="${yxcp.taxPrice}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">批发价格：</label>
+                            <div class="col-sm-8">
+                                <input id="tradePrice" name="tradePrice" th:value="${yxcp.tradePrice}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">调货成本：</label>
+                            <div class="col-sm-8">
+                                <input id="transferPrice" name="transferPrice" th:value="${yxcp.transferPrice}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标准零售价：</label>
+                            <div class="col-sm-8">
+                                <input id="retailPrice" name="retailPrice" th:value="${yxcp.retailPrice}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/product/yxcp/edit.js">
+</script>
+</body>
+</html>

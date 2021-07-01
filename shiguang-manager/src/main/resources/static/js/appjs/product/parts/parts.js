@@ -47,14 +47,14 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
-									field : 'id', 
-									title : '配件id' 
-								},
-																{
-									field : 'producNum', 
-									title : '商品信息代码' 
-								},
+								// 								{
+								// 	field : 'id',
+								// 	title : '配件id'
+								// },
+								// 								{
+								// 	field : 'producNum',
+								// 	title : '商品信息代码'
+								// },
 																{
 									field : 'producCode', 
 									title : '商品条码' 
@@ -63,14 +63,14 @@ function load() {
 									field : 'producName', 
 									title : '商品名称' 
 								},
-																{
-									field : 'mfrsid', 
-									title : '制造商id' 
-								},
-																{
-									field : 'brandid', 
-									title : '商品品种（品牌id' 
-								},
+								// 								{
+								// 	field : 'mfrsid',
+								// 	title : '制造商id'
+								// },
+								// 								{
+								// 	field : 'brandid',
+								// 	title : '商品品种（品牌id'
+								// },
 																{
 									field : 'factory', 
 									title : '厂家型号（品牌维护有' 
@@ -91,34 +91,34 @@ function load() {
 									field : 'unitid', 
 									title : '计量单位' 
 								},
-																{
-									field : 'batchid', 
-									title : '批号管理（1是：2否）' 
-								},
-																{
-									field : 'refractivityid', 
-									title : '折射率id' 
-								},
-																{
-									field : 'tax', 
-									title : '税率(%)' 
-								},
-																{
-									field : 'taxPrice', 
-									title : '含税单价' 
-								},
-																{
-									field : 'tradePrice', 
-									title : '批发价格' 
-								},
-																{
-									field : 'transferPrice', 
-									title : '调货成本' 
-								},
-																{
-									field : 'retailPrice', 
-									title : '标准零售价' 
-								},
+								// 								{
+								// 	field : 'batchid',
+								// 	title : '批号管理（1是：2否）'
+								// },
+								// 								{
+								// 	field : 'refractivityid',
+								// 	title : '折射率id'
+								// },
+								// 								{
+								// 	field : 'tax',
+								// 	title : '税率(%)'
+								// },
+								// 								{
+								// 	field : 'taxPrice',
+								// 	title : '含税单价'
+								// },
+								// 								{
+								// 	field : 'tradePrice',
+								// 	title : '批发价格'
+								// },
+								// 								{
+								// 	field : 'transferPrice',
+								// 	title : '调货成本'
+								// },
+								// 								{
+								// 	field : 'retailPrice',
+								// 	title : '标准零售价'
+								// },
 																{
 									title : '操作',
 									field : 'id',
@@ -142,7 +142,7 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	layer.open({
+	var toIndex=layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
@@ -150,9 +150,10 @@ function add() {
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
+    layer.full(toIndex);
 }
 function edit(id) {
-	layer.open({
+	var toIndex=layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
@@ -160,6 +161,7 @@ function edit(id) {
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
+    layer.full(toIndex);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

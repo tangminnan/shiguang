@@ -2,6 +2,7 @@ package com.shiguang.optometry.service.impl;
 
 import com.shiguang.optometry.dao.OptometryDao;
 import com.shiguang.optometry.domain.OptometryDO;
+import com.shiguang.optometry.domain.ProcessAskDO;
 import com.shiguang.optometry.service.OptometryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,10 @@ public class OptometryServiceImpl implements OptometryService {
     @Override
     public int batchRemove(Long[] ids){
         return optometryDao.batchRemove(ids);
+    }
+
+    @Override
+    public List<ProcessAskDO> processlist(Map<String, Object> map){
+        return optometryDao.processlist(map);
     }
 }

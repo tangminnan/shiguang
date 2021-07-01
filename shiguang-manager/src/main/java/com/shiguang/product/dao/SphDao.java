@@ -11,12 +11,12 @@ import org.apache.ibatis.annotations.Mapper;
  * 球镜表
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-25 17:26:17
+ * @date 2021-06-30 09:53:22
  */
 @Mapper
 public interface SphDao {
 
-	SphDO get(Long id);
+	SphDO get(Long sphId);
 	
 	List<SphDO> list(Map<String,Object> map);
 	
@@ -26,7 +26,7 @@ public interface SphDao {
 	
 	int update(SphDO sph);
 	
-	int remove(Long id);
+	int remove(Long sph_id);
 	
-	int batchRemove(Long[] ids);
+	int batchRemove(Long[] sphIds);
 }

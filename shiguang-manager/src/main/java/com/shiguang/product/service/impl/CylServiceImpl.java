@@ -18,8 +18,8 @@ public class CylServiceImpl implements CylService {
 	private CylDao cylDao;
 	
 	@Override
-	public CylDO get(Integer id){
-		return cylDao.get(id);
+	public CylDO get(Long cylId){
+		return cylDao.get(cylId);
 	}
 	
 	@Override
@@ -43,13 +43,13 @@ public class CylServiceImpl implements CylService {
 	}
 	
 	@Override
-	public int remove(Integer id){
-		return cylDao.remove(id);
+	public int remove(Long cylId){
+		return cylDao.remove(cylId);
 	}
 	
 	@Override
-	public int batchRemove(Integer[] ids){
-		return cylDao.batchRemove(ids);
+	public int batchRemove(Long[] cylIds){
+		return cylDao.batchRemove(cylIds);
 	}
 	
 }

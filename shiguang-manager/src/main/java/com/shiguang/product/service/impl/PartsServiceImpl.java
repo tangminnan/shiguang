@@ -1,5 +1,7 @@
 package com.shiguang.product.service.impl;
 
+import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.mfrs.domain.MgDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +53,14 @@ public class PartsServiceImpl implements PartsService {
 	public int batchRemove(Long[] ids){
 		return partsDao.batchRemove(ids);
 	}
-	
+	//查询配件制造商
+	@Override
+	public List<MgDO> mglist(Map<String, Object> map) {
+		return partsDao.mglist(map);
+	}
+	//菜单联动显示
+	@Override
+	public List<BrandDO> choice(Integer mfrsid) {
+		return partsDao.choice(mfrsid);
+	}
 }

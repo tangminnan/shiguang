@@ -10,27 +10,27 @@ import java.util.Date;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-25 17:26:17
+ * @date 2021-06-30 09:53:22
  */
 public class CylDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//柱镜id
-	private Integer id;
+	private Long cylId;
 	//柱镜
 	private String cyl;
 
 	/**
 	 * 设置：柱镜id
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCylId(Long cylId) {
+		this.cylId = cylId;
 	}
 	/**
 	 * 获取：柱镜id
 	 */
-	public Integer getId() {
-		return id;
+	public Long getCylId() {
+		return cylId;
 	}
 	/**
 	 * 设置：柱镜

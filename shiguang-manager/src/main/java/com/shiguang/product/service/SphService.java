@@ -10,11 +10,11 @@ import java.util.Map;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-25 17:26:17
+ * @date 2021-06-30 09:53:22
  */
 public interface SphService {
 	
-	SphDO get(Long id);
+	SphDO get(Long sphId);
 	
 	List<SphDO> list(Map<String, Object> map);
 	
@@ -24,7 +24,7 @@ public interface SphService {
 	
 	int update(SphDO sph);
 	
-	int remove(Long id);
+	int remove(Long sphId);
 	
-	int batchRemove(Long[] ids);
+	int batchRemove(Long[] sphIds);
 }

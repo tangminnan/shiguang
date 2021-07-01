@@ -1,13 +1,19 @@
 package com.shiguang.storeSales.controller;
 
+import com.shiguang.baseinfomation.domain.AdditionalDO;
+import com.shiguang.baseinfomation.service.AdditionalService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.optometry.domain.OptometryDO;
+import com.shiguang.optometry.domain.ProcessAskDO;
 import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
+import com.shiguang.product.domain.ProducaDO;
+import com.shiguang.product.service.ProducaService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -31,6 +37,10 @@ public class StoreSalesController {
     private MemberService memberService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AdditionalService additionalService;
+    @Autowired
+    private ProducaService producaService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -66,9 +76,6 @@ public class StoreSalesController {
     @GetMapping("/edit/{cardNumber}")
     @RequiresPermissions("information:store:edit")
     String edit(@PathVariable("cardNumber") String cardNumber,Model model){
-//        OptometryDO optometry = optometryService.get(id);
-//        model.addAttribute("optometry", optometry);
-        //ResultDiopterDO resultDiopterDO = resultDiopterService.
         MemberDO memberDO = memberService.getCardNumber(cardNumber);
         if (memberDO.getSex() == 0){
             memberDO.setSexx("男");
@@ -76,23 +83,103 @@ public class StoreSalesController {
             memberDO.setSexx("女");
         }
         model.addAttribute("memberDO",memberDO);
+        //通过验光师手动输入数据
         Map<String,Object> maps = new HashMap<>();
+        maps.put("memberInumber",cardNumber);
         List<OptometryDO> list = optometryService.optoList(maps);
         OptometryDO optometryDO = new OptometryDO();
-        if (list.size() > 0){
+        if (null != list && list.size() > 0){
             optometryDO.setCylinderRight(list.get(0).getCylinderRight());
             optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
             optometryDO.setAxialRight(list.get(0).getAxialRight());
             optometryDO.setAxialLeft(list.get(0).getAxialLeft());
             optometryDO.setSphereRight(list.get(0).getSphereRight());
             optometryDO.setSphereLeft(list.get(0).getSphereLeft());
-
+            optometryDO.setOptometryName(list.get(0).getOptometryName());
+            optometryDO.setCreateTime(list.get(0).getCreateTime());
         }
         model.addAttribute("optometryDO",optometryDO);
-        //OptometryDO optometryDO = optometryService.
+        Map<String, Object> map = new HashMap<>();
+        map.put("roleType",1);
+        List<UserDO> userDOList = userService.getRoleList(map);
+        model.addAttribute("userDOList",userDOList);
+        List<ProcessAskDO> proList = optometryService.processlist(map);
+        model.addAttribute("proList",proList);
+        List<AdditionalDO> addlist =additionalService.list(map);
+        model.addAttribute("addlist",addlist);
+        UserDO userDO = ShiroUtils.getUser();
+        String storeName = userDO.getStore();
+        model.addAttribute("storeName",storeName);
         return "storeSales/edit";
     }
 
+    /**
+     * 镜架
+     */
+    @GetMapping("/jingjia")
+    @RequiresPermissions("information:store:jingjia")
+    String jingjia(Model model){
+        return "storeSales/jingjia";
+    }
+
+    /**
+     * 查询镜架
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/jingjialist")
+    @RequiresPermissions("information:store:jingjia")
+    public PageUtils jingjialist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        List<ProducaDO> producaDOList = producaService.listmateria(query);
+        int total = producaService.countmateria(query);
+        PageUtils pageUtils = new PageUtils(producaDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 镜片
+     */
+    @GetMapping("/jingpian")
+    @RequiresPermissions("information:store:jingpian")
+    String jingpian(Model model){
+        return "storeSales/jingpian";
+    }
+
+    /**
+     * 查询镜片
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/jingpianlist")
+    @RequiresPermissions("information:store:jingpian")
+    public PageUtils jingpianlist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        PageUtils pageUtils = null;
+        if (null != params.get("dzType")){
+            String dzType = params.get("dzType").toString();
+            if ("0".equals(dzType)){
+                List<ProducaDO> producaDOList = producaService.listmateria(query);
+                int total = producaService.countmateria(query);
+                 pageUtils = new PageUtils(producaDOList, total);
+            } else if ("1".equals(dzType)){
+                List<ProducaDO> producaDOList = producaService.listmateria(query);
+                int total = producaService.countmateria(query);
+                pageUtils = new PageUtils(producaDOList, total);
+            }
+        } else {
+            List<ProducaDO> producaDOList = producaService.listmateria(query);
+            int total = producaService.countmateria(query);
+            pageUtils = new PageUtils(producaDOList, total);
+
+        }
+        return pageUtils;
+
+    }
 
     /**
      * 查询会员

@@ -18,8 +18,8 @@ public class SphServiceImpl implements SphService {
 	private SphDao sphDao;
 	
 	@Override
-	public SphDO get(Long id){
-		return sphDao.get(id);
+	public SphDO get(Long sphId){
+		return sphDao.get(sphId);
 	}
 	
 	@Override
@@ -43,13 +43,13 @@ public class SphServiceImpl implements SphService {
 	}
 	
 	@Override
-	public int remove(Long id){
-		return sphDao.remove(id);
+	public int remove(Long sphId){
+		return sphDao.remove(sphId);
 	}
 	
 	@Override
-	public int batchRemove(Long[] ids){
-		return sphDao.batchRemove(ids);
+	public int batchRemove(Long[] sphIds){
+		return sphDao.batchRemove(sphIds);
 	}
 	
 }

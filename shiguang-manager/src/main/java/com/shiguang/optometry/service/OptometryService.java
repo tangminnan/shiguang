@@ -1,6 +1,7 @@
 package com.shiguang.optometry.service;
 
 import com.shiguang.optometry.domain.OptometryDO;
+import com.shiguang.optometry.domain.ProcessAskDO;
 
 import java.util.List;
 import java.util.Map;
@@ -21,4 +22,6 @@ public interface OptometryService {
     int batchRemove(Long[] ids);
 
     List<OptometryDO> optoList(Map<String, Object> map);
+
+    List<ProcessAskDO> processlist(Map<String,Object> map);
 }

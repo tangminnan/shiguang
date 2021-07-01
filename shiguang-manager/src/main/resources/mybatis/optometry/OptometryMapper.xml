@@ -136,4 +136,13 @@
         <!--</if>-->
     </select>
 
+    <select id="processlist" resultType="com.shiguang.optometry.domain.ProcessAskDO">
+        select `id`,`process_num`,`process_name` from process_ask
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="processNum != null and processNum != ''"> and process_num = #{processNum} </if>
+            <if test="processName != null and processName != ''"> and process_name = #{processName} </if>
+        </where>
+    </select>
+
 </mapper>

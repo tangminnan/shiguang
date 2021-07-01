@@ -1,6 +1,7 @@
 package com.shiguang.optometry.dao;
 
 import com.shiguang.optometry.domain.OptometryDO;
+import com.shiguang.optometry.domain.ProcessAskDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +26,6 @@ public interface OptometryDao {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    List<ProcessAskDO> processlist(Map<String,Object> map);
 }

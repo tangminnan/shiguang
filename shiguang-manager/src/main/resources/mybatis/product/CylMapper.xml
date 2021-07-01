@@ -4,13 +4,13 @@
 <mapper namespace="com.shiguang.product.dao.CylDao">
 
 	<select id="get" resultType="com.shiguang.product.domain.CylDO">
-		select `id`,`cyl` from a_cyl where id = #{value}
+		select `cyl_id`,`cyl` from a_cyl where cyl_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.product.domain.CylDO">
-		select `id`,`cyl` from a_cyl
+		select `cyl_id`,`cyl` from a_cyl
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cylId != null and cylId != ''"> and cyl_id = #{cylId} </if>
 		  		  <if test="cyl != null and cyl != ''"> and cyl = #{cyl} </if>
 		  		</where>
         <choose>
@@ -18,7 +18,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id desc
+                order by cyl_id desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -29,20 +29,18 @@
  	<select id="count" resultType="int">
 		select count(*) from a_cyl
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cylId != null and cylId != ''"> and cyl_id = #{cylId} </if>
 		  		  <if test="cyl != null and cyl != ''"> and cyl = #{cyl} </if>
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.shiguang.product.domain.CylDO">
+	<insert id="save" parameterType="com.shiguang.product.domain.CylDO" useGeneratedKeys="true" keyProperty="cylId">
 		insert into a_cyl
 		(
-			`id`, 
 			`cyl`
 		)
 		values
 		(
-			#{id}, 
 			#{cyl}
 		)
 	</insert>
@@ -52,17 +50,17 @@
 		<set>
 			<if test="cyl != null">`cyl` = #{cyl}</if>
 		</set>
-		where id = #{id}
+		where cyl_id = #{cylId}
 	</update>
 	
 	<delete id="remove">
-		delete from a_cyl where id = #{value}
+		delete from a_cyl where cyl_id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from a_cyl where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
+		delete from a_cyl where cyl_id in 
+		<foreach item="cylId" collection="array" open="(" separator="," close=")">
+			#{cylId}
 		</foreach>
 	</delete>
 

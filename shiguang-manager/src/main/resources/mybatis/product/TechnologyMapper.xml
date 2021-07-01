@@ -36,16 +36,14 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.shiguang.product.domain.TechnologyDO">
+	<insert id="save" parameterType="com.shiguang.product.domain.TechnologyDO" useGeneratedKeys="true" keyProperty="technologyId">
 		insert into a_technology
 		(
-			`technology_id`, 
 			`technology_num`, 
 			`technology_type`
 		)
 		values
 		(
-			#{technologyId}, 
 			#{technologyNum}, 
 			#{technologyType}
 		)

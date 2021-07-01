@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.product.dao.HlyDao">
+
+    <select id="get" resultType="com.shiguang.product.domain.HlyDO">
+		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`proid`,`unitid`,`product_type`,`main_capacity`,`second_capacity`,`produc_factory`,`upday`,`downday`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_hly where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.product.domain.HlyDO">
+        select
+        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`proid`,`unitid`,`product_type`,`main_capacity`,`second_capacity`,`produc_factory`,`upday`,`downday`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price`
+        from aa_hly
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and factory = #{factory}</if>
+            <if test="proid != null and proid != ''">and proid = #{proid}</if>
+            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
+            <if test="productType != null and productType != ''">and product_type = #{productType}</if>
+            <if test="mainCapacity != null and mainCapacity != ''">and main_capacity = #{mainCapacity}</if>
+            <if test="secondCapacity != null and secondCapacity != ''">and second_capacity = #{secondCapacity}</if>
+            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
+            <if test="upday != null and upday != ''">and upday = #{upday}</if>
+            <if test="downday != null and downday != ''">and downday = #{downday}</if>
+            <if test="tax != null and tax != ''">and tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from aa_hly
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and factory = #{factory}</if>
+            <if test="proid != null and proid != ''">and proid = #{proid}</if>
+            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
+            <if test="productType != null and productType != ''">and product_type = #{productType}</if>
+            <if test="mainCapacity != null and mainCapacity != ''">and main_capacity = #{mainCapacity}</if>
+            <if test="secondCapacity != null and secondCapacity != ''">and second_capacity = #{secondCapacity}</if>
+            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
+            <if test="upday != null and upday != ''">and upday = #{upday}</if>
+            <if test="downday != null and downday != ''">and downday = #{downday}</if>
+            <if test="tax != null and tax != ''">and tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.product.domain.HlyDO" useGeneratedKeys="true" keyProperty="id">
+		insert into aa_hly
+		(
+			`produc_num`, 
+			`produc_code`, 
+			`produc_name`, 
+			`mfrsid`, 
+			`brandid`, 
+			`factory`, 
+			`proid`, 
+			`unitid`, 
+			`product_type`, 
+			`main_capacity`, 
+			`second_capacity`, 
+			`produc_factory`, 
+			`upday`, 
+			`downday`, 
+			`tax`, 
+			`tax_price`, 
+			`trade_price`, 
+			`transfer_price`, 
+			`retail_price`
+		)
+		values
+		(
+			#{producNum}, 
+			#{producCode}, 
+			#{producName}, 
+			#{mfrsid}, 
+			#{brandid}, 
+			#{factory}, 
+			#{proid}, 
+			#{unitid}, 
+			#{productType}, 
+			#{mainCapacity}, 
+			#{secondCapacity}, 
+			#{producFactory}, 
+			#{upday}, 
+			#{downday}, 
+			#{tax}, 
+			#{taxPrice}, 
+			#{tradePrice}, 
+			#{transferPrice}, 
+			#{retailPrice}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.product.domain.HlyDO">
+        update aa_hly
+        <set>
+            <if test="producNum != null">`produc_num` = #{producNum},</if>
+            <if test="producCode != null">`produc_code` = #{producCode},</if>
+            <if test="producName != null">`produc_name` = #{producName},</if>
+            <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
+            <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="factory != null">`factory` = #{factory},</if>
+            <if test="proid != null">`proid` = #{proid},</if>
+            <if test="unitid != null">`unitid` = #{unitid},</if>
+            <if test="productType != null">`product_type` = #{productType},</if>
+            <if test="mainCapacity != null">`main_capacity` = #{mainCapacity},</if>
+            <if test="secondCapacity != null">`second_capacity` = #{secondCapacity},</if>
+            <if test="producFactory != null">`produc_factory` = #{producFactory},</if>
+            <if test="upday != null">`upday` = #{upday},</if>
+            <if test="downday != null">`downday` = #{downday},</if>
+            <if test="tax != null">`tax` = #{tax},</if>
+            <if test="taxPrice != null">`tax_price` = #{taxPrice},</if>
+            <if test="tradePrice != null">`trade_price` = #{tradePrice},</if>
+            <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
+            <if test="retailPrice != null">`retail_price` = #{retailPrice}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from aa_hly where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from aa_hly where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--查询镜片定做制造商-->
+    <select id="mglist" resultType="com.shiguang.product.domain.PartsDO">
+		select m.mfrsid,m.mfrsname from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid
+		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=5
+	</select>
+    <!--菜单联动显示-->
+    <select id="choice" resultType="com.shiguang.product.domain.PartsDO">
+		select b.brandid,b.brandname from c_brand b left join  cc_mg mg on b.goodsid = mg.goodsid
+		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=5 and b.mfrsid = #{mfrsid} group by  b.brandid;
+	</select>
+
+</mapper>

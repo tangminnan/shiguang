@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.product.dao.SpanDao">
+
+	<select id="get" resultType="com.shiguang.product.domain.SpanDO">
+		select `span_id`,`span` from a_span where span_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.product.domain.SpanDO">
+		select `span_id`,`span` from a_span
+        <where>  
+		  		  <if test="spanId != null and spanId != ''"> and span_id = #{spanId} </if>
+		  		  <if test="span != null and span != ''"> and span = #{span} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by span_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from a_span
+		 <where>  
+		  		  <if test="spanId != null and spanId != ''"> and span_id = #{spanId} </if>
+		  		  <if test="span != null and span != ''"> and span = #{span} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.product.domain.SpanDO" useGeneratedKeys="true" keyProperty="spanId">
+		insert into a_span
+		(
+			`span`
+		)
+		values
+		(
+			#{span}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.product.domain.SpanDO">
+		update a_span 
+		<set>
+			<if test="span != null">`span` = #{span}</if>
+		</set>
+		where span_id = #{spanId}
+	</update>
+	
+	<delete id="remove">
+		delete from a_span where span_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from a_span where span_id in 
+		<foreach item="spanId" collection="array" open="(" separator="," close=")">
+			#{spanId}
+		</foreach>
+	</delete>
+
+</mapper>
