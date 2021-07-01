@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.product.dao.CaizhiDao">
+
+	<select id="get" resultType="com.shiguang.product.domain.CaizhiDO">
+		select `caizhi_id`,`caizhi` from a_caizhi where caizhi_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.product.domain.CaizhiDO">
+		select `caizhi_id`,`caizhi` from a_caizhi
+        <where>  
+		  		  <if test="caizhiId != null and caizhiId != ''"> and caizhi_id = #{caizhiId} </if>
+		  		  <if test="caizhi != null and caizhi != ''"> and caizhi = #{caizhi} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by caizhi_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from a_caizhi
+		 <where>  
+		  		  <if test="caizhiId != null and caizhiId != ''"> and caizhi_id = #{caizhiId} </if>
+		  		  <if test="caizhi != null and caizhi != ''"> and caizhi = #{caizhi} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.product.domain.CaizhiDO" useGeneratedKeys="true" keyProperty="caizhiId">
+		insert into a_caizhi
+		(
+			`caizhi`
+		)
+		values
+		(
+			#{caizhi}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.product.domain.CaizhiDO">
+		update a_caizhi 
+		<set>
+			<if test="caizhi != null">`caizhi` = #{caizhi}</if>
+		</set>
+		where caizhi_id = #{caizhiId}
+	</update>
+	
+	<delete id="remove">
+		delete from a_caizhi where caizhi_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from a_caizhi where caizhi_id in 
+		<foreach item="caizhiId" collection="array" open="(" separator="," close=")">
+			#{caizhiId}
+		</foreach>
+	</delete>
+
+</mapper>

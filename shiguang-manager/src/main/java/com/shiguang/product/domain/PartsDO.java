@@ -25,8 +25,10 @@ public class PartsDO implements Serializable {
 	private String producName;
 	//制造商id
 	private Integer mfrsid;
+	private String mfrsname;
 	//商品品种（品牌id
 	private Integer brandid;
+	private String brandname;
 	//厂家型号（品牌维护有
 	private String factory;
 	//型号
@@ -44,13 +46,13 @@ public class PartsDO implements Serializable {
 	//税率(%)
 	private String tax;
 	//含税单价
-	private String taxPrice;
+	private Double taxPrice;
 	//批发价格
-	private String tradePrice;
+	private Double tradePrice;
 	//调货成本
-	private String transferPrice;
+	private Double transferPrice;
 	//标准零售价
-	private String retailPrice;
+	private Double retailPrice;
 
 	/**
 	 * 设置：配件id
@@ -112,6 +114,15 @@ public class PartsDO implements Serializable {
 	public Integer getMfrsid() {
 		return mfrsid;
 	}
+
+	public String getMfrsname() {
+		return mfrsname;
+	}
+
+	public void setMfrsname(String mfrsname) {
+		this.mfrsname = mfrsname;
+	}
+
 	/**
 	 * 设置：商品品种（品牌id
 	 */
@@ -124,6 +135,15 @@ public class PartsDO implements Serializable {
 	public Integer getBrandid() {
 		return brandid;
 	}
+
+	public String getBrandname() {
+		return brandname;
+	}
+
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
+	}
+
 	/**
 	 * 设置：厂家型号（品牌维护有
 	 */
@@ -223,49 +243,49 @@ public class PartsDO implements Serializable {
 	/**
 	 * 设置：含税单价
 	 */
-	public void setTaxPrice(String taxPrice) {
+	public void setTaxPrice(Double taxPrice) {
 		this.taxPrice = taxPrice;
 	}
 	/**
 	 * 获取：含税单价
 	 */
-	public String getTaxPrice() {
+	public Double getTaxPrice() {
 		return taxPrice;
 	}
 	/**
 	 * 设置：批发价格
 	 */
-	public void setTradePrice(String tradePrice) {
+	public void setTradePrice(Double tradePrice) {
 		this.tradePrice = tradePrice;
 	}
 	/**
 	 * 获取：批发价格
 	 */
-	public String getTradePrice() {
+	public Double getTradePrice() {
 		return tradePrice;
 	}
 	/**
 	 * 设置：调货成本
 	 */
-	public void setTransferPrice(String transferPrice) {
+	public void setTransferPrice(Double transferPrice) {
 		this.transferPrice = transferPrice;
 	}
 	/**
 	 * 获取：调货成本
 	 */
-	public String getTransferPrice() {
+	public Double getTransferPrice() {
 		return transferPrice;
 	}
 	/**
 	 * 设置：标准零售价
 	 */
-	public void setRetailPrice(String retailPrice) {
+	public void setRetailPrice(Double retailPrice) {
 		this.retailPrice = retailPrice;
 	}
 	/**
 	 * 获取：标准零售价
 	 */
-	public String getRetailPrice() {
+	public Double getRetailPrice() {
 		return retailPrice;
 	}
 }

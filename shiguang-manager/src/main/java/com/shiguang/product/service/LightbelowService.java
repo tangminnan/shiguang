@@ -10,11 +10,11 @@ import java.util.Map;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-25 17:26:17
+ * @date 2021-06-30 09:53:22
  */
 public interface LightbelowService {
 	
-	LightbelowDO get(Long id);
+	LightbelowDO get(Long lightbelowId);
 	
 	List<LightbelowDO> list(Map<String, Object> map);
 	
@@ -24,7 +24,7 @@ public interface LightbelowService {
 	
 	int update(LightbelowDO lightbelow);
 	
-	int remove(Long id);
+	int remove(Long lightbelowId);
 	
-	int batchRemove(Long[] ids);
+	int batchRemove(Long[] lightbelowIds);
 }

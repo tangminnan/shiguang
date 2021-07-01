@@ -34,15 +34,13 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.shiguang.product.domain.StyleDO">
+	<insert id="save" parameterType="com.shiguang.product.domain.StyleDO" useGeneratedKeys="true" keyProperty="styleId">
 		insert into a_style
 		(
-			`style_id`, 
 			`style`
 		)
 		values
 		(
-			#{styleId}, 
 			#{style}
 		)
 	</insert>

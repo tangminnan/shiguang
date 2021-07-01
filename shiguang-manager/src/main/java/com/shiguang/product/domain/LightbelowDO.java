@@ -10,38 +10,38 @@ import java.util.Date;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-25 17:26:17
+ * @date 2021-06-30 09:53:22
  */
 public class LightbelowDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//下加光id
-	private Long id;
+	private Long lightbelowId;
 	//下加光
-	private String lightBelow;
+	private String lightbelow;
 
 	/**
 	 * 设置：下加光id
 	 */
-	public void setId(Long id) {
-		this.id = id;
+	public void setLightbelowId(Long lightbelowId) {
+		this.lightbelowId = lightbelowId;
 	}
 	/**
 	 * 获取：下加光id
 	 */
-	public Long getId() {
-		return id;
+	public Long getLightbelowId() {
+		return lightbelowId;
 	}
 	/**
 	 * 设置：下加光
 	 */
-	public void setLightBelow(String lightBelow) {
-		this.lightBelow = lightBelow;
+	public void setLightbelow(String lightbelow) {
+		this.lightbelow = lightbelow;
 	}
 	/**
 	 * 获取：下加光
 	 */
-	public String getLightBelow() {
-		return lightBelow;
+	public String getLightbelow() {
+		return lightbelow;
 	}
 }

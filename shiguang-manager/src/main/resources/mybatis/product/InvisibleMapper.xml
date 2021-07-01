@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.product.dao.InvisibleDao">
+
+	<select id="get" resultType="com.shiguang.product.domain.InvisibleDO">
+		select `invisible_id`,`invisible` from a_invisible where invisible_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.product.domain.InvisibleDO">
+		select `invisible_id`,`invisible` from a_invisible
+        <where>  
+		  		  <if test="invisibleId != null and invisibleId != ''"> and invisible_id = #{invisibleId} </if>
+		  		  <if test="invisible != null and invisible != ''"> and invisible = #{invisible} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by invisible_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from a_invisible
+		 <where>  
+		  		  <if test="invisibleId != null and invisibleId != ''"> and invisible_id = #{invisibleId} </if>
+		  		  <if test="invisible != null and invisible != ''"> and invisible = #{invisible} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.product.domain.InvisibleDO" useGeneratedKeys="true" keyProperty="invisibleId">
+		insert into a_invisible
+		(
+			`invisible`
+		)
+		values
+		(
+			#{invisible}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.product.domain.InvisibleDO">
+		update a_invisible 
+		<set>
+			<if test="invisible != null">`invisible` = #{invisible}</if>
+		</set>
+		where invisible_id = #{invisibleId}
+	</update>
+	
+	<delete id="remove">
+		delete from a_invisible where invisible_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from a_invisible where invisible_id in 
+		<foreach item="invisibleId" collection="array" open="(" separator="," close=")">
+			#{invisibleId}
+		</foreach>
+	</delete>
+
+</mapper>

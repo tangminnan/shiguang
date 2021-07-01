@@ -18,8 +18,8 @@ public class LightbelowServiceImpl implements LightbelowService {
 	private LightbelowDao lightbelowDao;
 	
 	@Override
-	public LightbelowDO get(Long id){
-		return lightbelowDao.get(id);
+	public LightbelowDO get(Long lightbelowId){
+		return lightbelowDao.get(lightbelowId);
 	}
 	
 	@Override
@@ -43,13 +43,13 @@ public class LightbelowServiceImpl implements LightbelowService {
 	}
 	
 	@Override
-	public int remove(Long id){
-		return lightbelowDao.remove(id);
+	public int remove(Long lightbelowId){
+		return lightbelowDao.remove(lightbelowId);
 	}
 	
 	@Override
-	public int batchRemove(Long[] ids){
-		return lightbelowDao.batchRemove(ids);
+	public int batchRemove(Long[] lightbelowIds){
+		return lightbelowDao.batchRemove(lightbelowIds);
 	}
 	
 }

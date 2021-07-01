@@ -4,13 +4,13 @@
 <mapper namespace="com.shiguang.product.dao.SphDao">
 
 	<select id="get" resultType="com.shiguang.product.domain.SphDO">
-		select `id`,`sph` from a_sph where id = #{value}
+		select `sph_id`,`sph` from a_sph where sph_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.product.domain.SphDO">
-		select `id`,`sph` from a_sph
+		select `sph_id`,`sph` from a_sph
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="sphId != null and sphId != ''"> and sph_id = #{sphId} </if>
 		  		  <if test="sph != null and sph != ''"> and sph = #{sph} </if>
 		  		</where>
         <choose>
@@ -18,7 +18,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id desc
+                order by sph_id desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -29,20 +29,18 @@
  	<select id="count" resultType="int">
 		select count(*) from a_sph
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="sphId != null and sphId != ''"> and sph_id = #{sphId} </if>
 		  		  <if test="sph != null and sph != ''"> and sph = #{sph} </if>
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.shiguang.product.domain.SphDO">
+	<insert id="save" parameterType="com.shiguang.product.domain.SphDO" useGeneratedKeys="true" keyProperty="sphId">
 		insert into a_sph
 		(
-			`id`, 
 			`sph`
 		)
 		values
 		(
-			#{id}, 
 			#{sph}
 		)
 	</insert>
@@ -52,17 +50,17 @@
 		<set>
 			<if test="sph != null">`sph` = #{sph}</if>
 		</set>
-		where id = #{id}
+		where sph_id = #{sphId}
 	</update>
 	
 	<delete id="remove">
-		delete from a_sph where id = #{value}
+		delete from a_sph where sph_id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from a_sph where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
+		delete from a_sph where sph_id in 
+		<foreach item="sphId" collection="array" open="(" separator="," close=")">
+			#{sphId}
 		</foreach>
 	</delete>
 

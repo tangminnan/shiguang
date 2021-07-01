@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${yxdz.id}" type="hidden">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品信息代码：</label>
+                            <div class="col-sm-8">
+                                <input id="producNum" name="producNum" th:value="${yxdz.producNum}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品条码：</label>
+                            <div class="col-sm-8">
+                                <input id="producCode" name="producCode" th:value="${yxdz.producCode}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品名称：</label>
+                            <div class="col-sm-8">
+                                <input id="producName" name="producName" th:value="${yxdz.producName}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">制造商id：</label>
+                            <div class="col-sm-8">
+                                <input id="mfrsid" name="mfrsid" th:value="${yxdz.mfrsid}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品品种：</label>
+                            <div class="col-sm-8">
+                                <input id="brandid" name="brandid" th:value="${yxdz.brandid}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">厂家型号：</label>
+                            <div class="col-sm-8">
+                                <input id="factory" name="factory" th:value="${yxdz.factory}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">型号：</label>
+                            <div class="col-sm-8">
+                                <input id="producFactory" name="producFactory" th:value="${yxdz.producFactory}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品编号：</label>
+                            <div class="col-sm-8">
+                                <input id="proid" name="proid" th:value="${yxdz.proid}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">计量单位：</label>
+                            <div class="col-sm-8">
+                                <input id="unitid" name="unitid" th:value="${yxdz.unitid}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">球镜id：</label>
+                            <div class="col-sm-8">
+                                <input id="sphId" name="sphId" th:value="${yxdz.sphId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">跨度id：</label>
+                            <div class="col-sm-8">
+                                <input id="spanId" name="spanId" th:value="${yxdz.spanId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">柱镜id：</label>
+                            <div class="col-sm-8">
+                                <input id="cylId" name="cylId" th:value="${yxdz.cylId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">球镜上限：</label>
+                            <div class="col-sm-8">
+                                <input id="sphUp" name="sphUp" th:value="${yxdz.sphUp}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">球镜下限：</label>
+                            <div class="col-sm-8">
+                                <input id="sphDown" name="sphDown" th:value="${yxdz.sphDown}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">球镜跨度：</label>
+                            <div class="col-sm-8">
+                                <input id="sphSpan" name="sphSpan" th:value="${yxdz.sphSpan}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">柱镜上限：</label>
+                            <div class="col-sm-8">
+                                <input id="cylUp" name="cylUp" th:value="${yxdz.cylUp}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">柱镜下限：</label>
+                            <div class="col-sm-8">
+                                <input id="cylDown" name="cylDown" th:value="${yxdz.cylDown}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">柱镜跨度：</label>
+                            <div class="col-sm-8">
+                                <input id="cylSpan" name="cylSpan" th:value="${yxdz.cylSpan}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">曲率1：</label>
+                            <div class="col-sm-8">
+                                <input id="curvatureOne" name="curvatureOne" th:value="${yxdz.curvatureOne}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">-曲率1：</label>
+                            <div class="col-sm-8">
+                                <input id="curvatureYi" name="curvatureYi" th:value="${yxdz.curvatureYi}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">曲率2：</label>
+                            <div class="col-sm-8">
+                                <input id="curvatureTwo" name="curvatureTwo" th:value="${yxdz.curvatureTwo}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">-曲率2：</label>
+                            <div class="col-sm-8">
+                                <input id="diameterOne" name="diameterOne" th:value="${yxdz.curvatureEr}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">曲率2：</label>
+                            <div class="col-sm-8">
+                                <input id="diameterYi" name="diameterYi" th:value="${yxdz.curvatureTwo}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">-曲率2：</label>
+                            <div class="col-sm-8">
+                                <input id="curvatureEr" name="curvatureEr" th:value="${yxdz.curvatureEr}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">接触镜类别：</label>
+                            <div class="col-sm-8">
+                                <input id="contactLens" name="contactLens" th:value="${yxdz.contactLens}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">定做周期（天）：</label>
+                            <div class="col-sm-8">
+                                <input id="cycle" name="cycle" th:value="${yxdz.cycle}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">使用类型id：</label>
+                            <div class="col-sm-8">
+                                <input id="usageId" name="usageId" th:value="${yxdz.usageId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">抛弃型分类id：</label>
+                            <div class="col-sm-8">
+                                <input id="typeId" name="typeId" th:value="${yxdz.typeId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品可使用天数：</label>
+                            <div class="col-sm-8">
+                                <input id="useDays" name="useDays" th:value="${yxdz.useDays}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">效期提醒上限（有效期前【】天提醒进入滞销状态）：</label>
+                            <div class="col-sm-8">
+                                <input id="upday" name="upday" th:value="${yxdz.upday}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">效期提醒下限（有效期前【】天提醒进入即将失效状态）：</label>
+                            <div class="col-sm-8">
+                                <input id="downday" name="downday" th:value="${yxdz.downday}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">颜色：</label>
+                            <div class="col-sm-8">
+                                <input id="color" name="color" th:value="${yxdz.color}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">隐形类别id：</label>
+                            <div class="col-sm-8">
+                                <input id="invisibleId" name="invisibleId" th:value="${yxdz.invisibleId}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">材质id：</label>
+                            <div class="col-sm-8">
+                                <input id="caizhiId" name="caizhiId" th:value="${yxdz.caizhiId}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">联合光度【格式：1.25】：</label>
+                            <div class="col-sm-8">
+                                <input id="combinedPhotometry" name="combinedPhotometry"
+                                       th:value="${yxdz.combinedPhotometry}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">税率(%)：</label>
+                            <div class="col-sm-8">
+                                <input id="tax" name="tax" th:value="${yxdz.tax}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">含税单价：</label>
+                            <div class="col-sm-8">
+                                <input id="taxPrice" name="taxPrice" th:value="${yxdz.taxPrice}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">批发价格：</label>
+                            <div class="col-sm-8">
+                                <input id="tradePrice" name="tradePrice" th:value="${yxdz.tradePrice}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">调货成本：</label>
+                            <div class="col-sm-8">
+                                <input id="transferPrice" name="transferPrice" th:value="${yxdz.transferPrice}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标准零售价：</label>
+                            <div class="col-sm-8">
+                                <input id="retailPrice" name="retailPrice" th:value="${yxdz.retailPrice}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/product/yxdz/edit.js">
+</script>
+</body>
+</html>

@@ -6,11 +6,6 @@
     <select id="get" resultType="com.shiguang.product.domain.ProducaDO">
 		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`produc_factorycolor`,`produc_color`,`unitid`,`batchid`,`size`,`technology_id`,`materialid`,`color`,`style_id`,`year`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_produca where id = #{value}
 	</select>
-    <select id="mglist" resultType="com.shiguang.product.domain.ProducaDO">
-		select * from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid where mg.goodsid=1
-
-	</select>
-
     <select id="list" resultType="com.shiguang.product.domain.ProducaDO">
         select
         `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`produc_factorycolor`,`produc_color`,`unitid`,`batchid`,`size`,`technology_id`,`materialid`,`color`,`style_id`,`year`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price`
@@ -178,11 +173,14 @@
             #{id}
         </foreach>
     </delete>
-
+    <!--查询镜架制造商-->
+    <select id="mglist" resultType="com.shiguang.product.domain.ProducaDO">
+		select m.mfrsid,m.mfrsname  from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=1
+	</select>
     <!--菜单联动显示-->
     <select id="choice" resultType="com.shiguang.product.domain.ProducaDO">
 		select b.brandid,b.brandname from c_brand b left join  cc_mg mg
-		on b.goodsid = mg.goodsid where mg.goodsid=1 and b.mfrsid = #{mfrsid} group by  b.brandid;
+		on b.goodsid = mg.goodsid  left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=1 and b.mfrsid = #{mfrsid} group by  b.brandid;
 	</select>
 
 </mapper>

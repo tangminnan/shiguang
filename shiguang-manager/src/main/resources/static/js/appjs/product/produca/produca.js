@@ -68,7 +68,7 @@ function load() {
                     // },
                     {
                         field: 'brandid',
-                        title: '商品品种（品牌id'
+                        title: '商品品种'
                     },
                     // {
                     //     field: 'factory',
