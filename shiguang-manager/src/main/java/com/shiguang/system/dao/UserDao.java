@@ -19,6 +19,8 @@ public interface UserDao {
 	UserDO get(Long userId);
 	
 	List<UserDO> getbyphone(String phone);
+
+	List<UserDO> getRoleList(Map<String, Object> map);
 	
 	List<UserDO> list(Map<String,Object> map);
 	

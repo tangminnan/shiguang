@@ -1,5 +1,7 @@
 package com.shiguang.system.controller;
 
+import com.shiguang.system.domain.RoleTypeDO;
+import com.shiguang.system.service.RoleTypeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,9 @@ import com.shiguang.system.domain.RoleDO;
 import com.shiguang.system.service.RoleService;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/sys/role")
 @Controller
@@ -22,6 +26,8 @@ public class RoleController extends BaseController {
 	String prefix = "system/role";
 	@Autowired
 	RoleService roleService;
+	@Autowired
+	RoleTypeService roleTypeService;
 
 	@RequiresPermissions("sys:role:role")
 	@GetMapping()
@@ -40,7 +46,10 @@ public class RoleController extends BaseController {
 	@Log("添加角色")
 	@RequiresPermissions("sys:role:add")
 	@GetMapping("/add")
-	String add() {
+	String add(Model model) {
+		Map<String,Object> map = new HashMap<>();
+		List<RoleTypeDO> list =roleTypeService.list(map);
+		model.addAttribute("roleTypelIst",list);
 		return prefix + "/add";
 	}
 
@@ -50,6 +59,9 @@ public class RoleController extends BaseController {
 	String edit(@PathVariable("id") Long id, Model model) {
 		RoleDO roleDO = roleService.get(id);
 		model.addAttribute("role", roleDO);
+		Map<String,Object> map = new HashMap<>();
+		List<RoleTypeDO> list =roleTypeService.list(map);
+		model.addAttribute("roleTypelIst",list);
 		return prefix + "/edit";
 	}
 

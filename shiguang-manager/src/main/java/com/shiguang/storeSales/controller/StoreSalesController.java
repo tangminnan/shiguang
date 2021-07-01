@@ -8,6 +8,8 @@ import com.shiguang.member.service.MemberService;
 import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
+import com.shiguang.system.domain.UserDO;
+import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ public class StoreSalesController {
     private ResultDiopterService resultDiopterService;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -51,7 +55,11 @@ public class StoreSalesController {
 
     @GetMapping("/add")
     @RequiresPermissions("information:store:add")
-    String add(){
+    String add(Model model){
+        Map<String, Object> map = new HashMap<>();
+        map.put("roleType",1);
+        List<UserDO> userDOList = userService.getRoleList(map);
+        model.addAttribute("userDOList",userDOList);
         return "storeSales/add";
     }
 
@@ -68,8 +76,8 @@ public class StoreSalesController {
             memberDO.setSexx("女");
         }
         model.addAttribute("memberDO",memberDO);
-        Map<String,Object> map = new HashMap<>();
-        List<OptometryDO> list = optometryService.optoList(map);
+        Map<String,Object> maps = new HashMap<>();
+        List<OptometryDO> list = optometryService.optoList(maps);
         OptometryDO optometryDO = new OptometryDO();
         if (list.size() > 0){
             optometryDO.setCylinderRight(list.get(0).getCylinderRight());

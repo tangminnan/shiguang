@@ -35,21 +35,22 @@
 		</span>
 		<span class="s5">
 			<input type="button" value="更换销售人员" />
-			<select>
-				<option value="">维护</option>
-				<option value="">维护1</option>
-				<option value="">维护2</option>
-			</select>
+				<select >
+					<option></option>
+					<option th:each="ls:${userDOList}"
+							th:text="${ls.name}"
+							th:value="${ls.name}"></option>
+				</select>
 		</span>
 	</div>
 	<div class="gukeMSG2">
-		顾客姓名：<input type="text" id="memberName"/>
-		顾客电话：<input type="text"  id="memberTel"/>
-		性别：<input class="short" type="text" id="memberSex"/>
-		年龄：<input class="short" type="text" id="memberAge"/>
-		会员卡类型：<input type="text" id="memberType"/>
-		积分：<input type="text" id="memberPoint"/>
-		来源：<input type="text" id="memberSource"/>
+		顾客姓名：<input type="text" id="memberName" disabled/>
+		顾客电话：<input type="text"  id="memberTel" disabled/>
+		性别：<input class="short" type="text" id="memberSex" disabled/>
+		年龄：<input class="short" type="text" id="memberAge" disabled/>
+		会员卡类型：<input type="text" id="memberType" disabled/>
+		积分：<input type="text" id="memberPoint" disabled/>
+		来源：<input type="text" id="memberSource" disabled/>
 		<input class="xiangQ" type="button" value="详情" />
 	</div>
 </div>
@@ -76,7 +77,7 @@
 				<tr id="tab11" style="display:none;">
 					<td>验光师</td>
 					<td>
-						<select>
+						<select id="disaa" style="width: 100px;">
 							<option value="">--请选择--</option>
 							<option value="1">选择1</option>
 							<option value="2">选择2</option>
@@ -87,11 +88,11 @@
 				<tr id="tab111" style="display:none;">
 					<td>外来处方</td>
 					<td class="wailai">
-						<label><input name="wailai" type="checkbox" > 外来处方</label>
-						<select>
+						<label><input name="wailai" type="checkbox" onclick="check(this)"> 外来处方</label>
+						<select id="sele" style="display: none;width: 100px;">
 							<option value="">--请选择--</option>
-							<option value="1">选择1</option>
-							<option value="2">选择2</option>
+							<option value="1">自报光度</option>
+							<option value="2">医院处方</option>
 						</select>
 					</td>
 				</tr>
@@ -103,8 +104,8 @@
 					<td>处方类型</td>
 					<td>
 						<select onchange="getType(this.value)">
-							<option value="1" >近用</option>
 							<option value="2" >远用</option>
+							<option value="1" >近用</option>
 							<option value="3" >渐进/双光</option>
 							<option value="4" >中用</option>
 							<option value="5" >隐形</option>
@@ -115,7 +116,7 @@
 							<option value="10" >RGP</option>
 							<option value="11" >药品</option>
 						</select>
-						<input class="empty" type="button" value="清空" />
+						<!--<input class="empty" type="button" value="清空" />-->
 					</td>
 				</tr>
 				<tr id="tab111111" style="display:none;">
@@ -221,8 +222,10 @@
 				<td>
 					<select>
 						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
+						<option value="">内</option>
+						<option value="">外</option>
+						<option value="">上</option>
+						<option value="">下</option>
 					</select>
 				</td>
 				<td><input type="text" value="0.75" /></td>
@@ -238,8 +241,10 @@
 				<td>
 					<select>
 						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
 					</select>
 				</td>
 				<td><input type="text" value=" " /></td>
@@ -357,8 +362,10 @@
 				<td>
 					<select>
 						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
 					</select>
 				</td>
 				<td><input type="text" value="0.75" /></td>
@@ -374,8 +381,10 @@
 				<td>
 					<select>
 						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
 					</select>
 				</td>
 				<td><input type="text" value=" " /></td>
@@ -441,8 +450,10 @@
 				<td>
 					<select>
 						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
 					</select>
 				</td>
 				<td><input type="text" value="0.75" /></td>
@@ -458,8 +469,10 @@
 				<td>
 					<select>
 						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
 					</select>
 				</td>
 				<td><input type="text" value=" " /></td>
@@ -525,8 +538,10 @@
 				<td>
 					<select>
 						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
 					</select>
 				</td>
 				<td><input type="text" value="0.75" /></td>
@@ -542,8 +557,10 @@
 				<td>
 					<select>
 						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
 					</select>
 				</td>
 				<td><input type="text" value=" " /></td>
@@ -681,8 +698,10 @@
 				<td>
 					<select>
 						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
 					</select>
 				</td>
 				<td><input type="text" value="0.75" /></td>
@@ -699,8 +718,10 @@
 				<td>
 					<select>
 						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
 					</select>
 				</td>
 				<td><input type="text" value=" " /></td>
@@ -740,13 +761,7 @@
 				<td><input type="text" value="0.75" /></td>
 				<td><input type="text" value="0.75" /></td>
 				<td><input type="text" value="0.75" /></td>
-				<td>
-					<select>
-						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
-					</select>
-				</td>
+				<td><input type="text" value="0.75" /></td>
 				<td><input type="text" value="0.75" /></td>
 				<td><input type="text" value="0.75" /></td>
 			</tr>
@@ -756,13 +771,7 @@
 				<td><input type="text" value=" " /></td>
 				<td><input type="text" value=" " /></td>
 				<td><input type="text" value=" " /></td>
-				<td>
-					<select>
-						<option value="">请选择</option>
-						<option value="">选择1</option>
-						<option value="">选择2</option>
-					</select>
-				</td>
+				<td><input type="text" value=" " /></td>
 				<td><input type="text" value=" " /></td>
 				<td><input type="text" value=" " /></td>
 			</tr>
@@ -983,9 +992,11 @@
 			<li>
 				取镜方式：
 				<select>
-					<option value="">正常</option>
-					<option value="">选择1</option>
-					<option value="">选择2</option>
+					<option value="1">正常</option>
+					<option value="2">订做7</option>
+					<option value="3">订做10</option>
+					<option value="4">订做15</option>
+					<option value="5">订做25</option>
 				</select>
 			</li>
 			<li>取镜日期：<input type="text" value="2021-06-10 12:30" /></li>
@@ -1001,8 +1012,8 @@
 			<li>
 				加急状态：
 				<select>
-					<option value="">正常</option>
-					<option value="">加急</option>
+					<option value="1">正常</option>
+					<option value="2">加急</option>
 				</select>
 			</li>
 			<li><input class="youji" type="button" value="填写邮寄信息" /></li>
@@ -1481,7 +1492,6 @@
     }
     function getSelect(){
         var cardMember = $("#cardMember").val();
-        alert(cardMember);
         $.ajax({
             url : "/information/store/select",
             type : "post",
@@ -1489,16 +1499,30 @@
                 'cardMember' : cardMember
             },
             success : function(r) {
-                alert(r);
-				alert(r.name);
-                if (r.code==0) {
-                    layer.msg(r.msg);
-                    reLoad();
-                }else{
-                    layer.msg(r.msg);
-                }
+				$("#memberName").val(r.name);
+				$("#memberTel").val(r.phone1);
+				$("#memberSex").val(r.sexx);
+				$("#memberAge").val(r.age);
+				$("#memberType").val(r.cardType);
+				$("#memberPoint").val(100);
+				$("#memberSource").val(r.source);
+                // if (r.code==0) {
+                //     layer.msg(r.msg);
+                //     reLoad();
+                // }else{
+                //     layer.msg(r.msg);
+                // }
             }
         });
+	}
+	function check(a){
+		if (a.checked == true){
+            document.getElementById('disaa').disabled = true;
+            sele.style = "display:''";
+		} else if (a.checked == false){
+            document.getElementById('disaa').disabled = false;
+            sele.style = "display:none;";
+		}
 	}
 </script>
 </body>
