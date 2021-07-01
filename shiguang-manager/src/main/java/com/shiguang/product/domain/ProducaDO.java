@@ -7,14 +7,14 @@ import java.util.Date;
 
 /**
  * 镜架新增表
- * 
+ *
  * @author cln
  * @email bushuo@163.com
  * @date 2021-06-25 18:06:25
  */
 public class ProducaDO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	//商品信息id
 	private Long id;
 	//商品信息代码
@@ -48,8 +48,6 @@ public class ProducaDO implements Serializable {
 	private Long technologyId;
 	//镜架材质id
 	private Integer materialid;
-	//镜架材质
-	private String materialName;
 	//颜色
 	private String color;
 	//款式id
@@ -66,7 +64,6 @@ public class ProducaDO implements Serializable {
 	private String transferPrice;
 	//标准零售价格
 	private String retailPrice;
-	private String dzType;
 
 	/**
 	 * 设置：商品信息id
@@ -361,29 +358,5 @@ public class ProducaDO implements Serializable {
 	 */
 	public String getRetailPrice() {
 		return retailPrice;
-	}
-	/**
-	 * 镜架材质
-	 */
-	public void setMaterialName(String materialName){
-		this.materialName = materialName;
-	}
-	/**
-	 * 镜架材质
-	 */
-	public String getMaterialName(){
-		return materialName;
-	}
-	/**
-	 * 镜架材质
-	 */
-	public void setDzType(String dzType){
-		this.dzType = dzType;
-	}
-	/**
-	 * 镜架材质
-	 */
-	public String getDzType(){
-		return dzType;
 	}
 }
