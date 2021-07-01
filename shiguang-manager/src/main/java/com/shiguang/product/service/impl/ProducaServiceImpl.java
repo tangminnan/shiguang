@@ -39,6 +39,16 @@ public class ProducaServiceImpl implements ProducaService {
 	public int count(Map<String, Object> map){
 		return producaDao.count(map);
 	}
+
+	@Override
+	public List<ProducaDO> listmateria(Map<String, Object> map){
+		return producaDao.listmateria(map);
+	}
+
+	@Override
+	public int countmateria(Map<String, Object> map){
+		return producaDao.countmateria(map);
+	}
 	
 	@Override
 	public int save(ProducaDO produca){

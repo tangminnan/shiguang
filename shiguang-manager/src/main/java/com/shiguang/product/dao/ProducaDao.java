@@ -26,6 +26,9 @@ public interface ProducaDao {
 	List<ProducaDO> list(Map<String,Object> map);
 
 	int count(Map<String,Object> map);
+
+	List<ProducaDO> listmateria(Map<String,Object> map);
+	int countmateria(Map<String, Object> map);
 	
 	int save(ProducaDO produca);
 	
