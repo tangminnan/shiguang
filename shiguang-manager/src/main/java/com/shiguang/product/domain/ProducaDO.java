@@ -48,6 +48,8 @@ public class ProducaDO implements Serializable {
 	private Long technologyId;
 	//镜架材质id
 	private Integer materialid;
+	//镜架材质
+	private String materialName;
 	//颜色
 	private String color;
 	//款式id
@@ -358,5 +360,17 @@ public class ProducaDO implements Serializable {
 	 */
 	public String getRetailPrice() {
 		return retailPrice;
+	}
+	/**
+	 * 镜架材质
+	 */
+	public void setMaterialName(String materialName){
+		this.materialName = materialName;
+	}
+	/**
+	 * 镜架材质
+	 */
+	public String getMaterialName(){
+		return materialName;
 	}
 }

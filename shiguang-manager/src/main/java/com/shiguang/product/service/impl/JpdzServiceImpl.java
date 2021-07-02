@@ -64,4 +64,14 @@ public class JpdzServiceImpl implements JpdzService {
         return jpdzDao.choice(mfrsid);
     }
 
+    @Override
+    public List<JpdzDO> listDz(Map<String, Object> map) {
+        return jpdzDao.listDz(map);
+    }
+
+    @Override
+    public int countDz(Map<String, Object> map) {
+        return jpdzDao.countDz(map);
+    }
+
 }

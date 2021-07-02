@@ -1,0 +1,1595 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>门店销售</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+	<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body>
+<!--<div class="topTab">-->
+	<!--<ul>-->
+		<!--<li class="on"><a href="">门店销售</a></li>-->
+		<!--&lt;!&ndash;<li><a href="">当日未结算管理</a></li>&ndash;&gt;-->
+	<!--</ul>-->
+<!--</div>-->
+
+<!--顾客资料-->
+<div class="m40 msgBox">
+	<h3>顾客资料 <span class="sure_red">可直接输入会员卡号并按【回车键】确认</span></h3>
+	<div class="gukeMSG1">
+		<span class="s1"><input type="button" value="查询" onclick="getSelect()"/></span>
+		<span class="s2">卡号：<input type="text" value="" id="cardMember" th:value="${memberDO.cardNumber}"/></span>
+		<span class="s3">
+			<input type="button" value="会员新增" />
+			<input type="button" value="会员修改" />
+		</span>
+		<span class="s4">
+			<label><input name="ss" type="radio" value="1" checked onchange="getCheck(this.value)"> 框镜</label>
+			<label><input name="ss" type="radio" value="2" onchange="getCheck(this.value)"> 隐形</label>
+			<label><input name="ss" type="radio" value="3" onchange="getCheck(this.value)"> 辅料</label>
+		</span>
+		<span class="s5">
+			<input type="button" value="更换销售人员" />
+				<select >
+					<option></option>
+					<option th:each="ls:${userDOList}"
+							th:text="${ls.name}"
+							th:value="${ls.name}"></option>
+				</select>
+		</span>
+	</div>
+	<div class="gukeMSG2">
+		顾客姓名：<input type="text" id="memberName" th:value="${memberDO.name}" disabled/>
+		顾客电话：<input type="text"  id="memberTel" th:value="${memberDO.phone1}" disabled/>
+		性别：<input class="short" type="text" id="memberSex" th:value="${memberDO.sexx}" disabled/>
+		年龄：<input class="short" type="text" id="memberAge" th:value="${memberDO.age}" disabled/>
+		会员卡类型：<input type="text" id="memberType" th:value="${memberDO.cardType}" disabled/>
+		积分：<input type="text" id="memberPoint" value="200" disabled/>
+		来源：<input type="text" id="memberSource" th:value="${memberDO.source}" disabled/>
+		<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">
+		<input id="memname" name="memname" th:value="${memberDO.name}"  type="hidden">
+		<!--<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">-->
+		<!--<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">-->
+		<input class="xiangQ" type="button" value="详情" />
+	</div>
+</div>
+
+<!--处方类型-->
+<div class="m40 tabS colorTab">
+	<h3>处方类型</h3>
+
+	<!--左侧表格-->
+	<div class="blueLeft">
+		<div class="blueLeft_top">
+			<table cellspacing="0" cellpadding="0">
+				<tr class="blueTop">
+					<td colspan="3">
+						<label><input name="chufang" type="radio" value="1" checked onchange="getChufang(this.value)"> 提交处方</label>
+						<label><input name="chufang" type="radio" value="2" onchange="getChufang(this.value)"> 手填处方</label>
+					</td>
+				</tr>
+
+				<tr id="tab1" style="display:none">
+					<td style="width: 24%;">验光号</td>
+					<td>001</td>
+				</tr>
+				<tr id="tab11" style="display:none;">
+					<td>验光师</td>
+					<td>
+						<select id="disaa" style="width: 100px;">
+							<option value="">--请选择--</option>
+							<option value="1">选择1</option>
+							<option value="2">选择2</option>
+						</select>
+						<em></em>
+					</td>
+				</tr>
+				<tr id="tab111" style="display:none;">
+					<td>外来处方</td>
+					<td class="wailai">
+						<label><input name="wailai" type="checkbox" onclick="check(this)"> 外来处方</label>
+						<select id="sele" style="display: none;width: 100px;">
+							<option value="">--请选择--</option>
+							<option value="1">自报光度</option>
+							<option value="2">医院处方</option>
+						</select>
+					</td>
+				</tr>
+				<tr id="tab1111" style="display:none;">
+					<td>验光时间</td>
+					<td>2021-06-05 14:28</td>
+				</tr>
+				<tr id="tab11111" style="display:none;">
+					<td>处方类型</td>
+					<td>
+						<select onchange="getType(this.value)">
+							<option value="2" >远用</option>
+							<option value="1" >近用</option>
+							<option value="3" >渐进/双光</option>
+							<option value="4" >中用</option>
+							<option value="5" >隐形</option>
+							<option value="6" >角膜塑形镜</option>
+							<option value="7" >视觉训练</option>
+							<option value="8" >角膜塑形镜VST</option>
+							<option value="9" >角膜塑形镜CRT</option>
+							<option value="10" >RGP</option>
+							<option value="11" >药品</option>
+						</select>
+						<!--<input class="empty" type="button" value="清空" />-->
+					</td>
+				</tr>
+				<tr id="tab111111" style="display:none;">
+					<td class="chuF_red" colspan="2" style="color: #fc4242">会员使用外来处方或者未通过验光正式提交处方时使用！</td>
+				</tr>
+
+				<tr id="tab2" style="display:''">
+					<td style="width:25%;">处方类型</td>
+					<td style="width:25%;">验光师</td>
+					<td>验光时间</td>
+				</tr>
+			</table>
+		</div>
+		<div class="blueLeft_down" id="tab22" style="display: '';">
+			<table cellspacing="0" cellpadding="0">
+				<tbody id="tbodys">
+				<!--<tr>-->
+				<!--<td style="width:25%;" id="recipel"></td>-->
+				<!--<td style="width:25%;" id="name"></td>-->
+				<!--<td id="time"></td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td style="width:25%;">远用</td>-->
+					<!--<td style="width:25%;">王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>远用</td>-->
+					<!--<td>王依依</td>-->
+					<!--<td>2021-06-05 14:28</td>-->
+				<!--</tr>-->
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: block;" id="kuangjing">
+		<table class="greenTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_green">
+				<td>远用</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>三棱镜</td>
+				<td>基地</td>
+				<td>远用瞳距（mm）</td>
+				<td>瞳高(mm)</td>
+				<td>远用VA</td>
+			</tr>
+			<tr>
+				<td class="Light_green">OD</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td>
+					<select>
+						<option value="">请选择</option>
+						<option value="">内</option>
+						<option value="">外</option>
+						<option value="">上</option>
+						<option value="">下</option>
+					</select>
+				</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+			</tr>
+			<tr>
+				<td class="Light_green">OS</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td>
+					<select>
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_green aling_left">
+				<td colspan="3">建议镜片材质：</td>
+				<td colspan="3">处理方式：</td>
+				<td colspan="3">建议镜框：</td>
+			</tr>
+			<tr>
+				<td class="Light_green">备注：</td>
+				<td colspan="8"><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_green">
+				<td> </td>
+				<td>旧瞳距(mm)</td>
+				<td>片高(mm)</td>
+				<td>片宽(mm)</td>
+				<td>中梁(mm)</td>
+				<td>镜片通道(mm)</td>
+				<td>对角线(mm)</td>
+				<td>框型</td>
+				<td>直径(mm)</td>
+			</tr>
+			<tr>
+				<td class="Light_green">手动填写</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none" id="yinxing">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td> </td>
+				<td>BC</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>曲率</td>
+				<td>直径</td>
+				<td>隐形VA</td>
+				<td>适用镜片</td>
+				<td>适用镜片</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_pink aling_left">
+				<td>建议护理液：</td>
+				<td colspan="9"> </td>
+			</tr>
+			<tr>
+				<td class="Light_pink">备注：</td>
+				<td colspan="9"><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none" id="fuliao">
+		<table class="greenTab blueTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_blue">
+				<td>近用</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>三棱镜</td>
+				<td>基地</td>
+				<td>远用瞳距（mm）</td>
+				<td>瞳高(mm)</td>
+				<td>远用VA</td>
+			</tr>
+			<tr>
+				<td class="Light_blue">OD</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td>
+					<select>
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+			</tr>
+			<tr>
+				<td class="Light_blue">OS</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td>
+					<select>
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_blue aling_left">
+				<td colspan="3">建议镜片材质：</td>
+				<td colspan="3">处理方式：</td>
+				<td colspan="3">建议镜框：</td>
+			</tr>
+			<tr>
+				<td class="Light_blue">备注：</td>
+				<td colspan="8"><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_blue">
+				<td> </td>
+				<td>旧瞳距(mm)</td>
+				<td>片高(mm)</td>
+				<td>片宽(mm)</td>
+				<td>中梁(mm)</td>
+				<td>镜片通道(mm)</td>
+				<td>对角线(mm)</td>
+				<td>框型</td>
+				<td>直径(mm)</td>
+			</tr>
+			<tr>
+				<td class="Light_blue">手动填写</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="jianjinsg">
+		<table class="greenTab yellowTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_yellow">
+				<td>渐进/双光近用</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>三棱镜</td>
+				<td>基地</td>
+				<td>远用瞳距（mm）</td>
+				<td>瞳高(mm)</td>
+				<td>远用VA</td>
+			</tr>
+			<tr>
+				<td class="Light_yellow">OD</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td>
+					<select>
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+			</tr>
+			<tr>
+				<td class="Light_yellow">OS</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td>
+					<select>
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_yellow aling_left">
+				<td colspan="3">建议镜片材质：</td>
+				<td colspan="3">处理方式：</td>
+				<td colspan="3">建议镜框：</td>
+			</tr>
+			<tr>
+				<td class="Light_yellow">备注：</td>
+				<td colspan="8"><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_yellow">
+				<td> </td>
+				<td>旧瞳距(mm)</td>
+				<td>片高(mm)</td>
+				<td>片宽(mm)</td>
+				<td>中梁(mm)</td>
+				<td>镜片通道(mm)</td>
+				<td>对角线(mm)</td>
+				<td>框型</td>
+				<td>直径(mm)</td>
+			</tr>
+			<tr>
+				<td class="Light_yellow">手动填写</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="zhongyong">
+		<table class="greenTab darkBlueTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_darkBlue">
+				<td>中用</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>三棱镜</td>
+				<td>基地</td>
+				<td>远用瞳距（mm）</td>
+				<td>瞳高(mm)</td>
+				<td>远用VA</td>
+			</tr>
+			<tr>
+				<td class="Light_darkBlue">OD</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td>
+					<select>
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+			</tr>
+			<tr>
+				<td class="Light_darkBlue">OS</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td>
+					<select>
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_darkBlue aling_left">
+				<td colspan="3">建议镜片材质：</td>
+				<td colspan="3">处理方式：</td>
+				<td colspan="3">建议镜框：</td>
+			</tr>
+			<tr>
+				<td class="Light_darkBlue">备注：</td>
+				<td colspan="8"><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_darkBlue">
+				<td> </td>
+				<td>旧瞳距(mm)</td>
+				<td>片高(mm)</td>
+				<td>片宽(mm)</td>
+				<td>中梁(mm)</td>
+				<td>镜片通道(mm)</td>
+				<td>对角线(mm)</td>
+				<td>框型</td>
+				<td>直径(mm)</td>
+			</tr>
+			<tr>
+				<td class="Light_darkBlue">手动填写</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="jiaomosx">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td> </td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>平K</td>
+				<td>陡K</td>
+				<td>e值</td>
+				<td>角膜直径</td>
+				<td>试戴片K</td>
+				<td>K1</td>
+				<td>K2</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+			</tr>
+			<tr class="Light_pink">
+				<td> </td>
+				<td>光度</td>
+				<td>降幅</td>
+				<td>直径</td>
+				<td>适用镜片</td>
+				<td colspan="6">片/盒数</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td colspan="6"><input type="text" value=" " /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td colspan="6"><input type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="shijuexl">
+		<table class="greenTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_green">
+				<td>视觉训练</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>三棱镜</td>
+				<td style="width:11%;">基地</td>
+				<td>远用瞳距（mm）</td>
+				<td>近用瞳距（mm）</td>
+				<td>远用VA</td>
+				<td>近用VA</td>
+			</tr>
+			<tr>
+				<td class="Light_green">OD</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td>
+					<select>
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+			</tr>
+			<tr>
+				<td class="Light_green">OS</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td>
+					<select>
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_green aling_left">
+				<td colspan="6">家庭训练：</td>
+				<td colspan="4">训练室训练：</td>
+			</tr>
+			<tr>
+				<td class="Light_green">备注：</td>
+				<td colspan="9"><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="jiaomosxVST">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td>角膜塑形镜VST</td>
+				<td>试戴片编号</td>
+				<td>FK</td>
+				<td>曲率半径</td>
+				<td>AC</td>
+				<td style="width:14%;">降幅</td>
+				<td>DIA</td>
+				<td>BC</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+			</tr>
+			<tr class="Light_pink">
+				<td> </td>
+				<td>CP/CLY</td>
+				<td>E值</td>
+				<td>VA</td>
+				<td colspan="2">镜片颜色</td>
+				<td colspan="2">品牌</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td colspan="2">
+					<select>
+						<option value="">无色</option>
+						<option value="">蓝色</option>
+						<option value="">粉色</option>
+					</select>
+				</td>
+				<td colspan="2"><input type="text" value=" " /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td colspan="2">
+					<select>
+						<option value="">无色</option>
+						<option value="">蓝色</option>
+						<option value="">粉色</option>
+					</select>
+				</td>
+				<td colspan="2"><input type="text" value=" " /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">备注：</td>
+				<td colspan="8"><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="jiaomosxCRT">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td>角膜塑形镜CRT</td>
+				<td>试戴片编号</td>
+				<td>BC</td>
+				<td>RZD</td>
+				<td>LZA</td>
+				<td>RZD2</td>
+				<td>LZA2</td>
+				<td>降幅</td>
+				<td>DIA</td>
+				<td>VA</td>
+				<td style="width:10%;">镜片颜色</td>
+				<td style="width:12%;">品牌</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td>
+					<select>
+						<option value="">无色</option>
+						<option value="">蓝色</option>
+						<option value="">粉色</option>
+					</select>
+				</td>
+				<td><input type="text" value="" /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td>
+					<select>
+						<option value="">无色</option>
+						<option value="">蓝色</option>
+						<option value="">粉色</option>
+					</select>
+				</td>
+				<td><input type="text" value="" /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">备注：</td>
+				<td colspan="11"><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="rgp">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td>RGP</td>
+				<td>SK</td>
+				<td>FK</td>
+				<td>屈光度</td>
+				<td>BC</td>
+				<td>DIA</td>
+				<td>散光</td>
+				<td style="width:10%;">镜片颜色</td>
+				<td style="width:14%">特殊设计</td>
+				<td style="width:14%">品牌</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td>
+					<select>
+						<option value="">无色</option>
+						<option value="">蓝色</option>
+						<option value="">粉色</option>
+					</select>
+				</td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" /></td>
+				<td>
+					<select>
+						<option value="">无色</option>
+						<option value="">蓝色</option>
+						<option value="">粉色</option>
+					</select>
+				</td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">备注：</td>
+				<td colspan="11"><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="yaopin">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td>药品</td>
+				<td style="border-left:none;"> </td>
+			</tr>
+			<tr>
+				<td class="Light_pink">内容</td>
+				<td><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">药名</td>
+				<td ><input class="aling_left" type="text" value=" " /></td>
+			</tr>
+			<tr style="background:#f9d2d7;">
+				<td> </td>
+				<td class="pinkCho">
+					<input type="button" value="选择" />
+					<input class="empty" type="button" value="清空" />
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
+
+<!--商品结算-->
+<div class="m40" style="overflow: hidden;margin-bottom: 80px;">
+	<h3>商品结算</h3>
+
+	<!--上面一排金额结算表-->
+	<div class="settlement">
+		<ul class="ulA">
+			<li>原价合计：0.00</li>
+			<li>折扣金额：0.00</li>
+			<li>优惠金额：0.00</li>
+			<li>抹零金额：0.00</li>
+			<li>应收金额：0.00</li>
+			<li>实收金额：0.00</li>
+		</ul>
+		<ul class="ulB">
+			<li>
+				取镜方式：
+				<select>
+					<option value="1">正常</option>
+					<option value="2">订做7</option>
+					<option value="3">订做10</option>
+					<option value="4">订做15</option>
+					<option value="5">订做25</option>
+				</select>
+			</li>
+			<li>取镜日期：<input type="text" id="mirrorTime" name="mirrorTime" /></li>
+			<li>
+				取镜地点：
+				<input id="storeName" name="storeName" type="text" th:value="${storeName}" disabled>
+				<!--<select>-->
+					<!--<option value="">中心店</option>-->
+					<!--<option value="">选择1</option>-->
+					<!--<option value="">选择2</option>-->
+				<!--</select>-->
+				<em></em>
+			</li>
+			<li>
+				加急状态：
+				<select>
+					<option value="1">正常</option>
+					<option value="2">加急</option>
+				</select>
+			</li>
+			<li><input class="youji" type="button" value="填写邮寄信息" /></li>
+		</ul>
+		<ul class="ulC">
+			<li>实收金额：<input type="text" value="128" /></li>
+			<li>商品打折：<input type="text" value="128" /><input type="button" value="还原" /></li>
+			<li>一口价：<input type="text" value="128" /><input type="button" class="qianpi" value="签批" /><input type="button" value="还原" /></li>
+			<li>抹零金额：<input type="text" value="128" /></li>
+		</ul>
+		<div class="JSbtn"><input type="button" value="结算" /></div>
+	</div>
+
+	<!--结算下面左侧套餐盒子-->
+	<div class="taoCanbox">
+		<div class="gray box1"><h4>条码扫描</h4><input type="text" /></div>
+		<div class="gray box2">
+			<h4>套餐</h4>
+			<input class="inp1" type="button" value="套餐选择" />
+			<input class="inp2" type="button" value="套餐查看" />
+			<input type="button" value="还原" />
+		</div>
+		<div class="box3" style="display: block;" id="boxkuangjing">
+			<ul class="ulUp">
+				<li><span onclick="getJingjia()">镜架</span></li>
+				<li><span onclick="getJingpian()">镜片</span></li>
+				<li><span>镜架配件</span></li>
+				<li><span>太阳镜</span></li>
+				<li><span>耗材</span></li>
+				<li><span>老花镜</span></li>
+				<li><span>视光</span></li>
+				<li><span>护理液</span></li>
+				<li><span>配件</span></li>
+			</ul>
+			<ul class="ulDown">
+				<li><span>自架</span></li>
+				<li><span>自片</span></li>
+				<li><span>赠品</span></li>
+			</ul>
+		</div>
+
+		<div class="box33" style="display: none;" id="boxyinxing">
+			<ul class="ulUn">
+				<li><span>隐形</span></li>
+				<li><span>护理液</span></li>
+				<li><span>隐形配件</span></li>
+				<li><span>镜架</span></li>
+				<li><span>镜架配件</span></li>
+				<li><span>太阳镜</span></li>
+				<li><span>耗材</span></li>
+				<li><span>老花镜</span></li>
+				<li><span>视光</span></li>
+			</ul>
+			<ul class="ulYin">
+				<li><span>赠品</span></li>
+			</ul>
+		</div>
+
+		<div class="box333" style="display: none;" id="boxfuliao">
+			<ul class="ulUm">
+				<li><span>镜架</span></li>
+				<li><span>配件</span></li>
+				<li><span>镜片</span></li>
+				<li><span>隐形</span></li>
+				<li><span>护理液</span></li>
+				<li><span>太阳镜</span></li>
+				<li><span>耗材</span></li>
+				<li><span>老花镜</span></li>
+				<li><span>视光</span></li>
+			</ul>
+			<ul class="ulFu">
+				<li><span>赠品</span></li>
+			</ul>
+		</div>
+
+		<div class="gray box4">
+			<h4>赠品快捷键</h4>
+			<ul>
+				<li><span>眼镜清洗液</span></li>
+				<li><span>镜盒</span></li>
+				<li><span>镜布</span></li>
+				<li><span>小米背包</span></li>
+				<li><span>闯关迷宫</span></li>
+			</ul>
+		</div>
+		<div class="gray box5">
+			<h4>附加费用</h4>
+			<select>
+				<option value="">--请选择--</option>
+				<option th:each="ls:${addlist}"
+						th:text="${ls.additionName}"
+						th:value="${ls.additionName}"></option>
+			</select>
+			<h4>加工要求</h4>
+			<select>
+				<option value="">--请选择--</option>
+				<option th:each="ls:${proList}"
+						th:text="${ls.processName}"
+						th:value="${ls.processName}"></option>
+			</select>
+		</div>
+	</div>
+
+	<!--结算下面右侧选择商品盒子-->
+	<div class="Choose">
+		<h4>选择商品</h4>
+		<table class="cho_tabA" cellspacing="0" cellpadding="0">
+			<thead>
+			<tr>
+				<th><input name="cho" type="checkbox" />选择</th>
+				<th>商品名称</th>
+				<th>单价</th>
+				<th>可用库存</th>
+				<th>数量</th>
+				<th>原价合计</th>
+				<th>折扣率</th>
+				<th>最大折扣</th>
+				<th>折扣金额</th>
+				<th>优惠金额</th>
+				<th>抹零金额</th>
+				<th>应收金额</th>
+				<th>商品描述</th>
+				<th>删除</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td><input name="cho" type="checkbox" /></td>
+				<td>xxx镜架</td>
+				<td>580.00</td>
+				<td>3</td>
+				<td>1</td>
+				<td>580.00</td>
+				<td>0.00</td>
+				<td>0.2</td>
+				<td>580.00</td>
+				<td>0.00</td>
+				<td>0.00</td>
+				<td>580.00</td>
+				<td>镜架</td>
+				<td><em></em></td>
+			</tr>
+			<tr>
+				<td><input name="cho" type="checkbox" /></td>
+				<td>xxx镜架</td>
+				<td>580.00</td>
+				<td>3</td>
+				<td>1</td>
+				<td>580.00</td>
+				<td>0.00</td>
+				<td>0.2</td>
+				<td>580.00</td>
+				<td>0.00</td>
+				<td>0.00</td>
+				<td>580.00</td>
+				<td>镜架</td>
+				<td><em></em></td>
+			</tr>
+			<tr>
+				<td><input name="cho" type="checkbox" /></td>
+				<td>xxx镜架</td>
+				<td>580.00</td>
+				<td>3</td>
+				<td>1</td>
+				<td>580.00</td>
+				<td>0.00</td>
+				<td>0.2</td>
+				<td>580.00</td>
+				<td>0.00</td>
+				<td>0.00</td>
+				<td>580.00</td>
+				<td>镜架</td>
+				<td><em></em></td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="cho_tabS_three">
+			<table class="cho_tabB" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<th>赠品</th>
+					<th>删除</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>镜盒-型号：0000-标价：10.00</td>
+					<td><em></em></td>
+				</tr>
+				<tr>
+					<td>镜盒-型号：0000-标价：10.00</td>
+					<td><em></em></td>
+				</tr>
+				<tr>
+					<td>镜盒-型号：0000-标价：10.00</td>
+					<td><em></em></td>
+				</tr>
+				</tbody>
+			</table>
+
+			<table class="cho_tabC" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<th>附加费名称</th>
+					<th>金额</th>
+					<th width="80">数量</th>
+					<th>合计</th>
+					<th>删除</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>检查费300元</td>
+					<td>￥300.00</td>
+					<td><input type="text" /></td>
+					<td>￥300.00</td>
+					<td><em></em></td>
+				</tr>
+				<tr>
+					<td>检查费300元</td>
+					<td>￥300.00</td>
+					<td><input type="text" /></td>
+					<td>￥300.00</td>
+					<td><em></em></td>
+				</tr>
+				<tr>
+					<td>检查费300元</td>
+					<td>￥300.00</td>
+					<td><input type="text" /></td>
+					<td>￥300.00</td>
+					<td><em></em></td>
+				</tr>
+				</tbody>
+			</table>
+
+			<table class="cho_tabB" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<th>加工要求</th>
+					<th>删除</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td><input type="text" value="特殊磨片" /></td>
+					<td><em></em></td>
+				</tr>
+				<tr>
+					<td><input type="text" value="特殊磨片" /></td>
+					<td><em></em></td>
+				</tr>
+				<tr>
+					<td><input type="text" value="特殊磨片" /></td>
+					<td><em></em></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<!--备注-->
+		<table class="cho_beizhu" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr>
+				<td class="tdBB1">销售备注</td>
+				<td class="tdBB2"><textarea rows="2"></textarea></td>
+			</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/storeSales/edit.js"></script>
+<script type="text/javascript">
+    laydate.render({
+        elem: '#mirrorTime',
+        type: 'date'
+    });
+    function getCheck(value){
+        if (value == 1){
+            kuangjing.style="display: block";
+            yinxing.style="display: none";
+            fuliao.style="display:none"
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:block";
+            boxyinxing.style="display:none";
+            boxfuliao.style="display:none";
+        } else if (value == 2){
+            kuangjing.style="display: none";
+            yinxing.style="display: block";
+            fuliao.style="display:none"
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:block";
+            boxfuliao.style="display:none";
+        } else if (value == 3){
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            fuliao.style="display:block"
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:none";
+            boxfuliao.style="display:block";
+        }
+    }
+    function getChufang(value) {
+		if (value ==2){
+		    tab1.style="display:''";
+            tab11.style="display:''";
+            tab111.style="display:''";
+            tab1111.style="display:''";
+            tab11111.style="display:''";
+            tab111111.style="display:''";
+            tab2.style="display:none";
+            tab22.style="display:none";
+		} else if (value ==1){
+            tab1.style="display:none";
+            tab11.style="display:none";
+            tab111.style="display:none";
+            tab1111.style="display:none";
+            tab11111.style="display:none";
+            tab111111.style="display:none";
+            tab2.style="display:''";
+            tab22.style="display:''";
+		}
+    }
+    function getType(value) {
+		if (value == 1){
+            fuliao.style="display:block";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+		} else if (value == 2){
+            fuliao.style="display:none";
+            kuangjing.style="display: block";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+		} else if (value == 3){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:block";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+		} else if (value == 4){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:block";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+		} else if (value == 5){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: block";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+		} else if (value == 6){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:block";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+		} else if (value == 7){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:block";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+		} else if (value == 8){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:block";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+		} else if (value == 9){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:block";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+		} else if (value == 10){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:block";
+            yaopin.style="display:none";
+		} else if (value == 11){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:block";
+		}
+    }
+    document.onkeydown = function(e){
+        if((e||event).keyCode==13)
+            getSelect();
+    };
+
+    function getSelect(){
+        var cardMember = $("#cardMember").val();
+        $.ajax({
+            url : "/information/store/select",
+            type : "post",
+            data : {
+                'cardMember' : cardMember
+            },
+            success : function(r) {
+				$("#memberName").val(r.name);
+				$("#memberTel").val(r.phone1);
+				$("#memberSex").val(r.sexx);
+				$("#memberAge").val(r.age);
+				$("#memberType").val(r.cardType);
+				$("#memberPoint").val(100);
+				$("#memberSource").val(r.source);
+                // if (r.code==0) {
+                //     layer.msg(r.msg);
+                //     reLoad();
+                // }else{
+                //     layer.msg(r.msg);
+                // }
+            }
+        });
+	}
+	function check(a){
+		if (a.checked == true){
+            document.getElementById('disaa').disabled = true;
+            sele.style = "display:''";
+		} else if (a.checked == false){
+            document.getElementById('disaa').disabled = false;
+            sele.style = "display:none;";
+		}
+	}
+	function getJingjia(){
+        var toIndex = layer.open({
+            type : 2,
+            title : '镜架',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/store/jingjia/" // iframe的url
+        });
+        layer.full(toIndex)
+	}
+    function getJingpian(){
+        var toIndex = layer.open({
+            type : 2,
+            title : '镜片',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/store/jingpian/" // iframe的url
+        });
+        layer.full(toIndex)
+    }
+</script>
+<script th:inline="javascript">
+    $().ready(function(){
+        var name = $("#memname").val();
+        var list = [[${userDOList}]];
+        var len = list.length;
+        var trs = 7-len;
+		var html="";
+            for (var i = 0; i < list.length; i++) {
+                html = "<tr><td style=\"width:25%;\">"+list[i].name+"</td>";
+                html += "<td style=\"width:25%;\">"+name+"</td>";
+                html += "<td>2021-06-05 14:28</td></tr>";
+                $("#tbodys").append(html);
+            }
+            // for (var i = 0; i < trs; i++) {
+            //     html = "<tr><td style=\"width:25%;\"></td>";
+            //     html += "<td style=\"width:25%;\"></td>";
+            //     html += "<td></td></tr>";
+            //     $("#tbodys").append(html);
+            // }
+
+
+    });
+</script>
+</body>
+</html>

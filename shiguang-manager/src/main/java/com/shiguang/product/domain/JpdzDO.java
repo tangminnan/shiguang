@@ -45,12 +45,16 @@ public class JpdzDO implements Serializable {
     private Long sphUp;
     //球镜下限
     private Long sphDown;
+    //球镜区间
+    private String sphqj;
     //球镜跨度
     private Long sphSpan;
     //柱镜上限
     private Long cylUp;
     //柱镜下限
     private Long cylDown;
+    //柱镜区间
+    private String cylqj;
     //柱镜跨度
     private Long cylSpan;
     //下加光id
@@ -59,18 +63,30 @@ public class JpdzDO implements Serializable {
     private Long lightbelowRight;
     //下加光右
     private Long lightbelowLeft;
+    //下加光区间
+    private String lightbelowqj;
     //材料分类id
     private Integer lensId;
+    //材料分类
+    private String lens;
     //定做周期（天）
     private Long cycle;
     //光度分类id
     private Integer lightId;
+    //光度分类
+    private String light;
     //渐进片分类id
     private Integer gradualId;
+    //渐进片分类名称
+    private String gradual;
     //折射率id
     private Integer refractivityid;
+    //折射率
+    private String refractivity;
     //镜片功能id
     private Integer functionId;
+    //镜片功能名称
+    private String function;
     //联合光度【格式：1.25】
     private String combinedPhotometry;
     //柱镜为-0.25度（-25散）（1能：2不能）
@@ -590,5 +606,47 @@ public class JpdzDO implements Serializable {
 
     public void setBrandname(String brandname) {
         this.brandname = brandname;
+    }
+
+    public String getLens() { return lens; }
+
+    public void setLens(String lens) {
+        this.lens = lens;
+    }
+
+    public String getLight() { return light; }
+
+    public void setLight(String light) {
+        this.light = light;
+    }
+
+    public String getRefractivity() { return refractivity; }
+
+    public void setRefractivity(String refractivity) {
+        this.refractivity = refractivity;
+    }
+
+    public String getGradual() { return gradual; }
+
+    public void setGradual(String gradual) {
+        this.gradual = gradual;
+    }
+
+    public String getFunction() { return function; }
+
+    public void setFunction(String function) {
+        this.function = function;
+    }
+
+    public String getSphqj() { return sphqj; }
+
+    public void setSphqj(String sphqj) {
+        this.sphqj = sphqj;
+    }
+
+    public String getCylqj() { return cylqj; }
+
+    public void setCylqj(String cylqj) {
+        this.cylqj = cylqj;
     }
 }

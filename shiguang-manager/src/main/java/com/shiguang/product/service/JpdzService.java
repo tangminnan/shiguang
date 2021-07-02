@@ -35,4 +35,8 @@ public interface JpdzService {
 
     //菜单联动显示
     List<BrandDO> choice(Integer mfrsid);
+
+    List<JpdzDO> listDz(Map<String, Object> map);
+
+    int countDz(Map<String, Object> map);
 }

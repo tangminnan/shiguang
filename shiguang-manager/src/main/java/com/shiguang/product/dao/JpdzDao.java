@@ -38,4 +38,8 @@ public interface JpdzDao {
 
     //菜单联动显示
     List<BrandDO> choice(@Param("mfrsid") Integer mfrsid);
+
+    List<JpdzDO> listDz(Map<String, Object> map);
+
+    int countDz(Map<String, Object> map);
 }

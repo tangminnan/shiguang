@@ -12,7 +12,11 @@ import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.domain.ProcessAskDO;
 import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
+import com.shiguang.product.domain.JpcpDO;
+import com.shiguang.product.domain.JpdzDO;
 import com.shiguang.product.domain.ProducaDO;
+import com.shiguang.product.service.JpcpService;
+import com.shiguang.product.service.JpdzService;
 import com.shiguang.product.service.ProducaService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
@@ -41,6 +45,10 @@ public class StoreSalesController {
     private AdditionalService additionalService;
     @Autowired
     private ProducaService producaService;
+    @Autowired
+    private JpcpService jpcpService;
+    @Autowired
+    private JpdzService jpdzService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -163,19 +171,18 @@ public class StoreSalesController {
         if (null != params.get("dzType")){
             String dzType = params.get("dzType").toString();
             if ("0".equals(dzType)){
-                List<ProducaDO> producaDOList = producaService.listmateria(query);
-                int total = producaService.countmateria(query);
-                 pageUtils = new PageUtils(producaDOList, total);
+                List<JpcpDO> jpcpDOList = jpcpService.listCp(query);
+                int total = jpcpService.countCp(query);
+                 pageUtils = new PageUtils(jpcpDOList, total);
             } else if ("1".equals(dzType)){
-                List<ProducaDO> producaDOList = producaService.listmateria(query);
-                int total = producaService.countmateria(query);
-                pageUtils = new PageUtils(producaDOList, total);
+                List<JpdzDO> jpdzDOList = jpdzService.listDz(query);
+                int total = jpdzService.countDz(query);
+                pageUtils = new PageUtils(jpdzDOList, total);
             }
         } else {
-            List<ProducaDO> producaDOList = producaService.listmateria(query);
-            int total = producaService.countmateria(query);
-            pageUtils = new PageUtils(producaDOList, total);
-
+            List<JpcpDO> jpcpDOList = jpcpService.listCp(query);
+            int total = jpcpService.countCp(query);
+            pageUtils = new PageUtils(jpcpDOList, total);
         }
         return pageUtils;
 

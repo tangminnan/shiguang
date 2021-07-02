@@ -33,20 +33,32 @@ public class JpcpDO implements Serializable {
     private String unitid;
     //球镜id
     private Long sphId;
+    //球镜名称
+    private String sph;
     //柱镜id
     private Long cylId;
+    //柱镜名称
+    private String cyl;
     //下加光id
     private Long lightbelowId;
+    //下加光名称
+    private String lightbelow;
     //材料分类id
     private Integer lensId;
+    //材料分类
+    private String lens;
     //批号管理(1是、2否)
     private String batchid;
     //光度分类id
     private Integer lightId;
+    //光度分类
+    private String light;
     //渐进片分类id
     private Integer gradualId;
     //折射率id
     private Integer refractivityid;
+    //折射率
+    private String refractivity;
     //镜片功能id
     private Integer functionId;
     //税率(%)
@@ -382,5 +394,45 @@ public class JpcpDO implements Serializable {
 
     public void setBrandname(String brandname) {
         this.brandname = brandname;
+    }
+
+    public String getSph() {
+        return sph;
+    }
+
+    public void setSph(String sph) {
+        this.sph = sph;
+    }
+
+    public String getCyl() {
+        return cyl;
+    }
+
+    public void setCyl(String cyl) {
+        this.cyl = cyl;
+    }
+
+    public String getLens() { return lens; }
+
+    public void setLens(String lens) {
+        this.lens = lens;
+    }
+
+    public String getLightbelow() { return lightbelow; }
+
+    public void setLightbelow(String lightbelow) {
+        this.lightbelow = lightbelow;
+    }
+
+    public String getLight() { return light; }
+
+    public void setLight(String light) {
+        this.light = light;
+    }
+
+    public String getRefractivity() { return refractivity; }
+
+    public void setRefractivity(String refractivity) {
+        this.refractivity = refractivity;
     }
 }
