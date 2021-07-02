@@ -20,16 +20,17 @@ import java.util.Map;
 public class RoleTypeController extends BaseController {
     @Autowired
     private RoleTypeService roleTypeService;
+
     @GetMapping()
     @RequiresPermissions("information:roleType:roleType")
-    String Type(){
+    String Type() {
         return "system/roleType/roleType";
     }
 
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("information:roleType:roleType")
-    public PageUtils list(@RequestParam Map<String, Object> params){
+    public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         List<RoleTypeDO> typeList = roleTypeService.list(query);
@@ -40,13 +41,13 @@ public class RoleTypeController extends BaseController {
 
     @GetMapping("/add")
     @RequiresPermissions("information:roleType:add")
-    String add(){
+    String add() {
         return "system/roleType/add";
     }
 
     @GetMapping("/edit/{id}")
     @RequiresPermissions("information:roleType:edit")
-    String edit(@PathVariable("id") Long id,Model model){
+    String edit(@PathVariable("id") Long id, Model model) {
         RoleTypeDO type = roleTypeService.get(id);
         model.addAttribute("type", type);
         return "system/roleType/edit";
@@ -58,25 +59,26 @@ public class RoleTypeController extends BaseController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("information:roleType:add")
-    public R save( RoleTypeDO type){
+    public R save(RoleTypeDO type) {
         RoleTypeDO roleTypeDO = roleTypeService.getNum(type.getRoleNum());
-        if (null != roleTypeDO){
+        if (null != roleTypeDO) {
             return R.error("该角色已存在");
         }
-        if(roleTypeService.save(type)>0){
+        if (roleTypeService.save(type) > 0) {
             return R.ok();
         }
         return R.error();
     }
+
     /**
      * 修改
      */
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("information:roleType:edit")
-    public R update( RoleTypeDO type){
+    public R update(RoleTypeDO type) {
         RoleTypeDO roleTypeDO = roleTypeService.getNum(type.getRoleNum());
-        if (null != roleTypeDO){
+        if (null != roleTypeDO) {
             return R.error("该角色已存在");
         }
         roleTypeService.update(type);
@@ -86,11 +88,11 @@ public class RoleTypeController extends BaseController {
     /**
      * 删除
      */
-    @PostMapping( "/remove")
+    @PostMapping("/remove")
     @ResponseBody
     @RequiresPermissions("information:roleType:remove")
-    public R remove( Long id){
-        if(roleTypeService.remove(id)>0){
+    public R remove(Long id) {
+        if (roleTypeService.remove(id) > 0) {
             return R.ok();
         }
         return R.error();
@@ -99,10 +101,10 @@ public class RoleTypeController extends BaseController {
     /**
      * 删除
      */
-    @PostMapping( "/batchRemove")
+    @PostMapping("/batchRemove")
     @ResponseBody
     @RequiresPermissions("information:roleType:batchRemove")
-    public R remove(@RequestParam("ids[]") Long[] ids){
+    public R remove(@RequestParam("ids[]") Long[] ids) {
         roleTypeService.batchRemove(ids);
         return R.ok();
     }

@@ -5,12 +5,9 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
-import com.shiguang.optometry.domain.BleDataBean;
 import com.shiguang.optometry.domain.OptometryDO;
-import com.shiguang.optometry.domain.ResultDiopterDO;
 import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,19 +30,19 @@ public class OptometryController {
 
     @GetMapping()
     @RequiresPermissions("information:optometry:optometry")
-    String Optometry(){
+    String Optometry() {
         return "optometry/optometry";
     }
 
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("information:optometry:optometry")
-    public PageUtils list(@RequestParam Map<String, Object> params){
+    public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
 //        List<OptometryDO> optometryList = optometryService.list(query);
 //        int total = optometryService.count(query);
-        query.put("state",1);
+        query.put("state", 1);
         List<MemberDO> memberDOList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);
@@ -54,27 +51,27 @@ public class OptometryController {
 
     @GetMapping("/add")
     @RequiresPermissions("information:optometry:add")
-    String add(){
+    String add() {
         return "optometry/add";
     }
 
     @GetMapping("/edit/{cardNumber}")
     @RequiresPermissions("information:optometry:edit")
-    String edit(@PathVariable("cardNumber") String cardNumber,Model model){
+    String edit(@PathVariable("cardNumber") String cardNumber, Model model) {
 //        OptometryDO optometry = optometryService.get(id);
 //        model.addAttribute("optometry", optometry);
         //ResultDiopterDO resultDiopterDO = resultDiopterService.
         MemberDO memberDO = memberService.getCardNumber(cardNumber);
-        if (memberDO.getSex() == 0){
+        if (memberDO.getSex() == 0) {
             memberDO.setSexx("男");
         } else {
             memberDO.setSexx("女");
         }
-        model.addAttribute("memberDO",memberDO);
-        Map<String,Object> map = new HashMap<>();
+        model.addAttribute("memberDO", memberDO);
+        Map<String, Object> map = new HashMap<>();
         List<OptometryDO> list = optometryService.optoList(map);
         OptometryDO optometryDO = new OptometryDO();
-        if (list.size() > 0){
+        if (list.size() > 0) {
             optometryDO.setCylinderRight(list.get(0).getCylinderRight());
             optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
             optometryDO.setAxialRight(list.get(0).getAxialRight());
@@ -83,7 +80,7 @@ public class OptometryController {
             optometryDO.setSphereLeft(list.get(0).getSphereLeft());
 
         }
-        model.addAttribute("optometryDO",optometryDO);
+        model.addAttribute("optometryDO", optometryDO);
         //OptometryDO optometryDO = optometryService.
         return "optometry/edit";
     }
@@ -94,19 +91,20 @@ public class OptometryController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("information:optometry:add")
-    public R save( OptometryDO optometry){
-        if(optometryService.save(optometry)>0){
+    public R save(OptometryDO optometry) {
+        if (optometryService.save(optometry) > 0) {
             return R.ok();
         }
         return R.error();
     }
+
     /**
      * 修改
      */
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("information:optometry:edit")
-    public R update( OptometryDO optometry){
+    public R update(OptometryDO optometry) {
         optometryService.update(optometry);
         return R.ok();
     }
@@ -114,11 +112,11 @@ public class OptometryController {
     /**
      * 删除
      */
-    @PostMapping( "/remove")
+    @PostMapping("/remove")
     @ResponseBody
     @RequiresPermissions("information:optometry:remove")
-    public R remove(Long id){
-        if(optometryService.remove(id)>0){
+    public R remove(Long id) {
+        if (optometryService.remove(id) > 0) {
             return R.ok();
         }
         return R.error();
@@ -127,10 +125,10 @@ public class OptometryController {
     /**
      * 删除
      */
-    @PostMapping( "/batchRemove")
+    @PostMapping("/batchRemove")
     @ResponseBody
     @RequiresPermissions("information:optometry:batchRemove")
-    public R remove(@RequestParam("ids[]") Long[] ids){
+    public R remove(@RequestParam("ids[]") Long[] ids) {
         optometryService.batchRemove(ids);
         return R.ok();
     }

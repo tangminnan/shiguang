@@ -116,14 +116,14 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">球镜：</label>
                                 <div class="col-sm-8">
-                                    上限：-<select id="sphUp" name="sphUp">
+                                    上限：<select id="sphUp" name="sphUp">
                                     <option></option>
                                     <option th:each="ls:${sphDOList}"
                                             th:text="${ls.sph}"
                                             th:value="${ls.sphId}"
                                     ></option>
                                 </select>
-                                    下限：<select id="sphDown" name="sphDown">
+                                    -下限：<select id="sphDown" name="sphDown">
                                     <option></option>
                                     <option th:each="ls:${sphDOList}"
                                             th:text="${ls.sph}"
@@ -167,14 +167,14 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">柱镜：</label>
                                 <div class="col-sm-8">
-                                    上限：-<select id="cylUp" name="cylUp">
+                                    上限：<select id="cylUp" name="cylUp">
                                     <option></option>
                                     <option th:each="ls:${cylDOList}"
                                             th:text="${ls.cyl}"
                                             th:value="${ls.cylId}"
                                     ></option>
                                 </select>
-                                    下限：<select id="cylDown" name="cylDown">
+                                    -下限：<select id="cylDown" name="cylDown">
                                     <option></option>
                                     <option th:each="ls:${cylDOList}"
                                             th:text="${ls.cyl}"

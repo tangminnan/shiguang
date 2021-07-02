@@ -3,23 +3,26 @@
 
 <mapper namespace="com.shiguang.optometry.dao.OptometryDao">
     <select id="get" resultType="com.shiguang.optometry.domain.OptometryDO">
-		select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time` from optometry where id = #{value}
+		select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number` from optometry where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.optometry.domain.OptometryDO">
-        select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time` from optometry
+        select
+        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number`
+        from optometry
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="memberInumber != null and memberInumber != ''"> and member_inumber = #{memberInumber} </if>
-            <if test="mydriasis != null and mydriasis != ''"> and mydriasis = #{mydriasis} </if>
-            <if test="sphereRight != null and sphereRight != ''"> and sphere_right = #{sphereRight} </if>
-            <if test="sphereLeft != null and sphereLeft != ''"> and sphere_left = #{sphereLeft} </if>
-            <if test="cylinderRight != null and cylinderRight != ''"> and cylinder_right = #{cylinderRight} </if>
-            <if test="cylinderLeft != null and cylinderLeft != ''"> and cylinder_left = #{cylinderLeft} </if>
-            <if test="axialRight != null and axialRight != ''"> and axial_right = #{axialRight} </if>
-            <if test="axialLeft != null and axialLeft != ''"> and axial_left = #{axialLeft} </if>
-            <if test="optometryName != null and optometryName != ''"> and optometry_name = #{optometryName} </if>
-            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="memberInumber != null and memberInumber != ''">and member_inumber = #{memberInumber}</if>
+            <if test="mydriasis != null and mydriasis != ''">and mydriasis = #{mydriasis}</if>
+            <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
+            <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
+            <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
+            <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
+            <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
+            <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
+            <if test="optometryName != null and optometryName != ''">and optometry_name = #{optometryName}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -37,21 +40,23 @@
     <select id="count" resultType="int">
         select count(*) from optometry
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="memberInumber != null and memberInumber != ''"> and member_inumber = #{memberInumber} </if>
-            <if test="mydriasis != null and mydriasis != ''"> and mydriasis = #{mydriasis} </if>
-            <if test="sphereRight != null and sphereRight != ''"> and sphere_right = #{sphereRight} </if>
-            <if test="sphereLeft != null and sphereLeft != ''"> and sphere_left = #{sphereLeft} </if>
-            <if test="cylinderRight != null and cylinderRight != ''"> and cylinder_right = #{cylinderRight} </if>
-            <if test="cylinderLeft != null and cylinderLeft != ''"> and cylinder_left = #{cylinderLeft} </if>
-            <if test="axialRight != null and axialRight != ''"> and axial_right = #{axialRight} </if>
-            <if test="axialLeft != null and axialLeft != ''"> and axial_left = #{axialLeft} </if>
-            <if test="optometryName != null and optometryName != ''"> and optometry_name = #{optometryName} </if>
-            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="memberInumber != null and memberInumber != ''">and member_inumber = #{memberInumber}</if>
+            <if test="mydriasis != null and mydriasis != ''">and mydriasis = #{mydriasis}</if>
+            <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
+            <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
+            <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
+            <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
+            <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
+            <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
+            <if test="optometryName != null and optometryName != ''">and optometry_name = #{optometryName}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
         </where>
     </select>
 
-    <insert id="save" parameterType="com.shiguang.optometry.domain.OptometryDO" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="com.shiguang.optometry.domain.OptometryDO" useGeneratedKeys="true"
+            keyProperty="id">
 		insert into optometry
 		(
 			`member_inumber`,
@@ -63,7 +68,8 @@
 			`axial_right`,
 			`axial_left`,
 			`optometry_name`,
-			`create_time`
+			`create_time`,
+			`ptometry_number`
 		)
 		values
 		(
@@ -76,23 +82,25 @@
 			#{axialRight},
 			#{axialLeft},
 			#{optometryName},
-			#{createTime}
+			#{createTime},
+			#{ptometryNumber}
 		)
 	</insert>
 
     <update id="update" parameterType="com.shiguang.optometry.domain.OptometryDO">
         update optometry
         <set>
-            <if test="memberInumber != null">`member_inumber` = #{memberInumber}, </if>
-            <if test="mydriasis != null">`mydriasis` = #{mydriasis}, </if>
-            <if test="sphereRight != null">`sphere_right` = #{sphereRight}, </if>
-            <if test="sphereLeft != null">`sphere_left` = #{sphereLeft}, </if>
-            <if test="cylinderRight != null">`cylinder_right` = #{cylinderRight}, </if>
-            <if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft}, </if>
-            <if test="axialRight != null">`axial_right` = #{axialRight}, </if>
-            <if test="axialLeft != null">`axial_left` = #{axialLeft}, </if>
-            <if test="optometryName != null">`optometry_name` = #{optometryName}, </if>
+            <if test="memberInumber != null">`member_inumber` = #{memberInumber},</if>
+            <if test="mydriasis != null">`mydriasis` = #{mydriasis},</if>
+            <if test="sphereRight != null">`sphere_right` = #{sphereRight},</if>
+            <if test="sphereLeft != null">`sphere_left` = #{sphereLeft},</if>
+            <if test="cylinderRight != null">`cylinder_right` = #{cylinderRight},</if>
+            <if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft},</if>
+            <if test="axialRight != null">`axial_right` = #{axialRight},</if>
+            <if test="axialLeft != null">`axial_left` = #{axialLeft},</if>
+            <if test="optometryName != null">`optometry_name` = #{optometryName},</if>
             <if test="createTime != null">`create_time` = #{createTime}</if>
+            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber}</if>
         </set>
         where id = #{id}
     </update>
@@ -109,39 +117,46 @@
     </delete>
 
     <select id="optoList" resultType="com.shiguang.optometry.domain.OptometryDO">
-        select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time` from optometry
+        select
+        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number`
+        from optometry
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="memberInumber != null and memberInumber != ''"> and member_inumber = #{memberInumber} </if>
-            <if test="mydriasis != null and mydriasis != ''"> and mydriasis = #{mydriasis} </if>
-            <if test="sphereRight != null and sphereRight != ''"> and sphere_right = #{sphereRight} </if>
-            <if test="sphereLeft != null and sphereLeft != ''"> and sphere_left = #{sphereLeft} </if>
-            <if test="cylinderRight != null and cylinderRight != ''"> and cylinder_right = #{cylinderRight} </if>
-            <if test="cylinderLeft != null and cylinderLeft != ''"> and cylinder_left = #{cylinderLeft} </if>
-            <if test="axialRight != null and axialRight != ''"> and axial_right = #{axialRight} </if>
-            <if test="axialLeft != null and axialLeft != ''"> and axial_left = #{axialLeft} </if>
-            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="memberInumber != null and memberInumber != ''">and member_inumber = #{memberInumber}</if>
+            <if test="mydriasis != null and mydriasis != ''">and mydriasis = #{mydriasis}</if>
+            <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
+            <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
+            <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
+            <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
+            <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
+            <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
         </where>
         order by create_time desc
-        <!--<choose>-->
-            <!--<when test="sort != null and sort.trim() != ''">-->
-                <!--order by ${sort} ${order}-->
-            <!--</when>-->
-            <!--<otherwise>-->
-                <!--order by id desc-->
-            <!--</otherwise>-->
-        <!--</choose>-->
-        <!--<if test="offset != null and limit != null">-->
-            <!--limit #{offset}, #{limit}-->
-        <!--</if>-->
     </select>
+    <!--散瞳前-->
+    <select id="optoFrontList" resultType="com.shiguang.optometry.domain.OptometryDO">
+        select
+        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number`
+        from optometry
+        where mydriasis=0
 
+    </select>
+    <!--散瞳后-->
+    <select id="optoAfterList" resultType="com.shiguang.optometry.domain.OptometryDO">
+        select
+        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number`
+        from optometry
+        where mydriasis=1
+
+    </select>
     <select id="processlist" resultType="com.shiguang.optometry.domain.ProcessAskDO">
         select `id`,`process_num`,`process_name` from process_ask
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="processNum != null and processNum != ''"> and process_num = #{processNum} </if>
-            <if test="processName != null and processName != ''"> and process_name = #{processName} </if>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="processNum != null and processNum != ''">and process_num = #{processNum}</if>
+            <if test="processName != null and processName != ''">and process_name = #{processName}</if>
         </where>
     </select>
 

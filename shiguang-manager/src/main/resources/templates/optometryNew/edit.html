@@ -1,0 +1,1569 @@
+<!doctype html>
+<html>
+<style>
+    .none {
+        display: none;
+    }
+</style>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>屈光检查</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+
+</head>
+
+<body>
+<div id="quguangjiancha" style="text-decoration: none;">
+    <div class="topTab">
+        <ul>
+            <li class="on click1"><a href="#quguangjiancha">屈光检查</a></li>
+            <li class="click"><a href="#jianchajielun">检查结论</a></li>
+        </ul>
+    </div>
+
+
+    <!--验光信息-->
+    <div class="m40 msgBox">
+        <h3>验光信息</h3>
+        <ul>
+            <li>验光号：<input id="ptometryNumber" name="ptometryNumber" th:value="${uuidstr}"
+                           type="text"/></li>
+            <li>验光师/医生：<input id="optometryName" name="optometryName" th:value="${optometryName}"
+                              type="text"/></li>
+            <li>日期：<input input id="creatTime" name="creatTime" th:value="${creatTime}" type="text"/></li>
+        </ul>
+    </div>
+
+    <!--顾客资料-->
+    <div class="m40 msgBox">
+        <h3>顾客资料</h3>
+        <ul>
+            <!--<li>卡号：<input type="text" value="1566998"/></li>-->
+            <li>卡号：<input id="cardNumbers" name="cardNumber" th:value="${memberDO.cardNumber}" type="text"/></li>
+            <li>姓名：<input id="name" name="name" th:value="${memberDO.name}" type="text"/></li>
+            <li>性别：<input id="sexx" name="sexx" th:value="${memberDO.sexx}" class="short" type="text"/></li>
+            <li>年龄：<input id="age" name="age" th:value="${memberDO.age}" class="short" type="text"/></li>
+            <li>电话：<input type="text" value="12345698745"/></li>
+            <li><span>详情</span></li>
+        </ul>
+    </div>
+
+    <!--主诉-->
+    <div class="m40 tabS">
+        <h3>主诉</h3>
+        <table class="tabA" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="w170">转诊医生</td>
+                <td><input type="text"/></td>
+            </tr>
+            <tr>
+                <td>转诊</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>主诉</td>
+                <td><textarea rows="3"> </textarea></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--视力-->
+    <div class="m40 tabS">
+        <h3>视力</h3>
+        <table class="tabB" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td rowspan="2" class="w170">裸眼视力</td>
+                <td width="120">远</td>
+                <td>OU <input type="text" value="0.25"/></td>
+                <td>OD <input type="text"/></td>
+                <td>OS <input type="text"/></td>
+                <td rowspan="2" style="width:8%;">原镜视力</td>
+                <td width="120">远</td>
+                <td>OU <input type="text" value="0.25"/></td>
+                <td>OD <input type="text"/></td>
+                <td>OS <input type="text"/></td>
+            </tr>
+            <tr>
+                <td>近</td>
+                <td>OU <input type="text" value="0.25"/></td>
+                <td>OD <input type="text" value="0.3"/></td>
+                <td>OS <input type="text"/></td>
+                <td>近</td>
+                <td>OU <input type="text" value="0.25"/></td>
+                <td>OD <input type="text" value="0.3"/></td>
+                <td>OS <input type="text"/></td>
+            </tr>
+            <tr>
+                <td rowspan="2">小孔视力</td>
+                <td>远</td>
+                <td>OU <input type="text" value="0.25"/></td>
+                <td>OD <input type="text"/></td>
+                <td>OS <input type="text"/></td>
+                <td rowspan="2">主导眼</td>
+                <td rowspan="2">
+                    <select>
+                        <option value="">右</option>
+                        <option value="">交替</option>
+                        <option value="">左</option>
+                    </select>
+                </td>
+                <td rowspan="2" colspan="3"><input class="btnCK" type="button" value="查看眼底像"/></td>
+            </tr>
+            <tr>
+                <td>近</td>
+                <td>OU <input type="text" value="0.25"/></td>
+                <td>OD <input type="text" value="0.3"/></td>
+                <td>OS <input type="text"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--眼生物学参数-->
+    <div class="m40 tabS">
+        <h3>眼生物学参数</h3>
+        <table class="tabC" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr class="tabS_bg">
+                <td class="w170"></td>
+                <td>眼轴</td>
+                <td>角膜曲率K1</td>
+                <td>角膜曲率K2</td>
+                <td>眼压</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/> mm</td>
+                <td><input type="text" value="2.0"/>@<input type="text"/></td>
+                <td><input type="text" value="2.0"/>@<input type="text"/></td>
+                <td><input type="text" value="2.0"/> mmHg</td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/> mm</td>
+                <td><input type="text" value="2.0"/>@<input type="text"/></td>
+                <td><input type="text" value="2.0"/>@<input type="text"/></td>
+                <td><input type="text" value="2.0"/> mmHg</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--客观验光-->
+    <div class="m40 tabS">
+        <h3>客观验光</h3>
+        <table class="tabD" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr class="tabS_bg tabD_1">
+                <td class="w170">&nbsp;</td>
+                <td>是否散瞳</td>
+                <!--<td colspan="2">-->
+                <!--<label for="yes"><input name="sanT" type="radio" id="yes" > 是</label>-->
+                <!--<label for="no"><input name="sanT" type="radio" id="no"> 否</label>-->
+                <!--</td>-->
+                <td colspan="2">
+                    <label><input name="mydriasis" th:field="*{optometryDO.mydriasis}" type="radio" value="0"> 是</label>
+                    <label><input name="mydriasis" th:field="*{optometryDO.mydriasis}" type="radio" value="1"> 否</label>
+                </td>
+                <td>散瞳用药</td>
+                <td colspan="3">
+                    <select>
+                        <option value="">2%后马托品</option>
+                        <option value="">0.5%复方托呲卡胺（美丽多P）</option>
+                        <option value="">1%环戎通</option>
+                        <option value="">2%后马托品</option>
+                        <option value="">1%后马托品</option>
+                        <option value="">阿托品已散瞳</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr class="tabS_bg">
+                <td>电脑验光</td>
+                <td colspan="7"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td></td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input id="sphereRight" name="sphereRight" th:value="${optometryDO.sphereRight}" type="text"/></td>
+                <td><input id="cylinderRight" name="cylinderRight" th:value="${optometryDO.cylinderRight}" type="text"/>
+                </td>
+                <td><input id="axialRight" name="axialRight" th:value="${optometryDO.axialRight}" type="text"/></td>
+                <td rowspan="2">散瞳后</td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input id="sphereLeft" name="sphereLeft" th:value="${optometryDO.sphereLeft}" type="text"/></td>
+                <td><input id="cylinderLeft" name="cylinderLeft" th:value="${optometryDO.cylinderLeft}" type="text"/>
+                </td>
+                <td><input id="axialLeft" name="axialLeft" th:value="${optometryDO.axialLeft}" type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>平K</td>
+                <td>陡K</td>
+                <td>平均K</td>
+                <td>角膜散光</td>
+                <td>瞳距（mm）</td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input class="short" type="text"/> @ <input class="short" type="text"/></td>
+                <td><input class="short" type="text"/> @ <input class="short" type="text"/></td>
+                <td><input class="short" type="text"/> @ <input class="short" type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input class="short" type="text"/> @ <input class="short" type="text"/></td>
+                <td><input class="short" type="text"/> @ <input class="short" type="text"/></td>
+                <td><input class="short" type="text"/> @ <input class="short" type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td colspan="2"></td>
+            </tr>
+            <tr class="tabS_bg">
+                <td>检影验光</td>
+                <td colspan="7"><input type="button" value="检影"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>VA</td>
+                <td>瞳距（mm）</td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td colspan="2"></td>
+            </tr>
+            <tr class="tabS_bg">
+                <td>插片验光</td>
+                <td colspan="7"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>DVA</td>
+                <td>NVA</td>
+                <td>Add</td>
+                <td>测量距离（cm）</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+                <td><input type="text"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--主观验光-->
+    <div class="m40 tabS">
+        <h3>主观验光</h3>
+        <table class="tabE" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>DVA</td>
+                <td>NVA</td>
+                <td>三棱镜</td>
+                <td>基底</td>
+                <td>Add</td>
+                <td>远用瞳距(mm)</td>
+                <td>近用瞳距(mm)</td>
+                <td style="width: 150px;"></td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--试戴镜结果-->
+    <div class="m40 tabS">
+        <h3>试戴镜结果<input class="zgQG" type="button" value="主观屈光"/></h3>
+        <table class="tabE" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>DVA</td>
+                <td>NVA</td>
+                <td>三棱镜</td>
+                <td>基底</td>
+                <td>瞳高(mm)</td>
+                <td>Add</td>
+                <td>远用瞳距(mm)</td>
+                <td style="width: 150px;">近用瞳距(mm)</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--备注-->
+    <div class="m40 tabS">
+        <table class="tabF" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="w170">备注</td>
+                <td><textarea rows="3"> </textarea></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--保存-->
+    <div class="baoCun">
+        <div class="fl">
+            <label for="JK1"><input name="cont" type="radio" id="JK1" checked> NIDEK</label>
+            <label for="JK2"><input name="cont" type="radio" id="JK2"> TOPCON</label>
+            <input type="button" value="读取设备接口"/>
+        </div>
+        <div class="fr">
+            <input type="button" value="保存"/>
+        </div>
+    </div>
+</div>
+
+
+<div id="jianchajielun" class="none" style="text-decoration: none;">
+    <div class="topTab">
+        <ul>
+            <li class="click1"><a href="#quguangjiancha">屈光检查</a></li>
+            <li class="on click"><a href="#jianchajielun">检查结论</a></li>
+        </ul>
+    </div>
+
+
+    <!--验光信息-->
+    <div class="m40 msgBox">
+        <h3>验光信息</h3>
+        <ul>
+            <li>验光号：<input type="text" value="1566998"/></li>
+            <li>验光师/医生：<input type="text" value=" "/></li>
+            <li>日期：<input type="text" value="2021-06-08"/></li>
+        </ul>
+    </div>
+
+    <!--顾客资料-->
+    <div class="m40 msgBox">
+        <h3>顾客资料</h3>
+        <ul>
+            <li>卡号：<input type="text" value="1566998"/></li>
+            <li>姓名：<input type="text" value="王蓝"/></li>
+            <li>性别：<input class="short" type="text" value="女"/></li>
+            <li>年龄：<input class="short" type="text" value="28"/></li>
+            <li>电话：<input type="text" value="12345698745"/></li>
+            <li><span>详情</span></li>
+        </ul>
+    </div>
+
+    <!--初步诊断-->
+    <div class="m40 tabS">
+        <h3>初步诊断</h3>
+        <table class="tabG" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="w170">屈光不正</td>
+                <td style="text-align: left;">
+                    正规：
+                    <select>
+                        <option value="">是</option>
+                        <option value="">否</option>
+                    </select>
+                    远视眼：
+                    <select>
+                        <option value="">轴性</option>
+                        <option value="">曲率性</option>
+                        <option value="">屈光指数性</option>
+                    </select>
+                    近视眼：
+                    <select>
+                        <option value="">轴性</option>
+                        <option value="">曲率性</option>
+                        <option value="">屈光指数性</option>
+                    </select>
+                    散光：
+                    <select>
+                        <option value="">顺规性</option>
+                        <option value="">曲率性</option>
+                        <option value="">屈光指数性</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>其他</td>
+                <td style="text-align: left;">
+                    弱视：
+                    <select>
+                        <option value="">是</option>
+                        <option value="">否</option>
+                    </select>
+                    <label for="XS"><input name="vision" type="radio" id="XS" checked> 斜视</label>
+                    <label for="LS"><input name="vision" type="radio" id="LS"> 老视</label>
+                    <label for="ZC"><input name="vision" type="radio" id="ZC"> 眼球震颤</label>
+                    低视力：
+                    <select>
+                        <option value="">是</option>
+                        <option value="">否</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td><textarea rows="3"> </textarea></td>
+            </tr>
+            <tr>
+                <td>双眼视功能评估</td>
+                <td><textarea rows="3"> </textarea></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--建议矫正方案-->
+    <div class="m40 tabS">
+        <h3>建议矫正方案</h3>
+        <table class="tabG tabH" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="w170">框架眼镜：</td>
+                <td>
+                    <label><input name="spe" type="radio" checked> 非球面 </label>
+                    <label><input name="spe" type="radio"> 球面</label>
+                    <label><input name="spe" type="radio"> 渐进多焦点 </label>
+                    <label><input name="spe" type="radio"> 变色片 </label>
+                    <label><input name="spe" type="radio"> 防蓝光 </label>
+                    <label><input name="spe" type="radio"> 周边离焦 </label>
+                </td>
+            </tr>
+            <tr>
+                <td>角膜接触镜：</td>
+                <td>
+                    <label><input name="Corneal" type="radio" checked> OK </label>
+                    <label><input name="Corneal" type="radio"> RGP</label>
+                    <label><input name="Corneal" type="radio"> 散光 </label>
+                    <label><input name="Corneal" type="radio"> 传统型 </label>
+                    <label><input name="Corneal" type="radio"> 抛弃型 </label>
+                    <label><input name="Corneal" type="radio"> 周边离焦 </label>
+                </td>
+            </tr>
+            <tr>
+                <td>视觉训练：</td>
+                <td>
+                    <label><input name="train" type="radio" checked> 调节训练 </label>
+                    <label><input name="train" type="radio"> 融像训练</label>
+                    <label><input name="train" type="radio"> 精细训练 </label>
+                    <label><input name="train" type="radio"> 视认知训练 </label>
+                    <label><input name="train" type="radio"> 加强散开训练 </label>
+                    <label><input name="train" type="radio"> 加强集合训练 </label>
+                    <label><input name="train" type="radio"> 加强调节放松训练 </label>
+                </td>
+            </tr>
+            <tr>
+                <td>云夹监控用眼行为：</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>低视力助视器验配：</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>弱视遮盖方式：</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>用眼卫生：</td>
+                <td>&nbsp;</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--医嘱-->
+    <div class="m40 tabS">
+        <table class="tabF" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="w170">医嘱</td>
+                <td><textarea rows="3">1. 坚持佩戴眼镜； 2. 每天户外活动至少2小时，减少近距离用眼，保持良好读写姿势 3. 每3个月复查</textarea></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="maxL">
+            <input type="button" value="选择"/>
+            <span>* 最多可输入1000字</span>
+        </div>
+    </div>
+
+    <!--处方-->
+    <div class="m40 tabS">
+        <h3>处方</h3>
+        <table class="tabI tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="w170">处方类型：</td>
+                <td>
+                    <select>
+                        <option value="">远用</option>
+                        <option value="">近用</option>
+                        <option value="">渐进/双光</option>
+                        <option value="">软性角膜接触镜</option>
+                        <option value="">中用</option>
+                        <option value="">视觉训练</option>
+                        <option value="">角膜接触镜VST</option>
+                        <option value="">角膜接触镜CRT</option>
+                        <option value="">RGP</option>
+                        <option value="">药品</option>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="PL30" colspan="2">1 框架--远用 <input type="button" value="删 除"/></td>
+                <td style="text-align: right" colspan="7">
+                    医生：
+                    <select>
+                        <option value="">王依依</option>
+                        <option value="">李三思</option>
+                        <option value="">赵武林</option>
+                    </select>
+                    验光师：
+                    <select>
+                        <option value="">张三</option>
+                        <option value="">周五</option>
+                        <option value="">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>三棱镜</td>
+                <td>基底</td>
+                <td>远用瞳距(mm)</td>
+                <td>瞳高(mm)</td>
+                <td>远用VA</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>中距离：</td>
+                <td colspan="2" class="daK">
+                    <label><input name="jianyi" type="checkbox"/> 建议镜框：</label>
+                    <select style="width: 75%;">
+                        <option value="">打孔</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td colspan="6"><input style="text-align: left;" type="text"/></td>
+            </tr>
+            <tr>
+                <td>建议镜片材质:</td>
+                <td colspan="2" class="daK">
+                    <select>
+                        <option value="">青少年渐进</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td>建议镜片材质:</td>
+                <td colspan="2" class="daK">
+                    <select>
+                        <option value="">青少年渐进</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="8"><textarea rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="PL30" colspan="2">2 框架--近用 <input type="button" value="删 除"/></td>
+                <td style="text-align: right" colspan="7">
+                    医生：
+                    <select>
+                        <option value="">王依依</option>
+                        <option value="">李三思</option>
+                        <option value="">赵武林</option>
+                    </select>
+                    验光师：
+                    <select>
+                        <option value="">张三</option>
+                        <option value="">周五</option>
+                        <option value="">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>三棱镜</td>
+                <td>基底</td>
+                <td>近用瞳距(mm)</td>
+                <td>瞳高(mm)</td>
+                <td>近用VA</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>中距离：</td>
+                <td colspan="2" class="daK">
+                    <label><input name="jianyi" type="checkbox"/> 建议镜框：</label>
+                    <select style="width: 75%;">
+                        <option value="">打孔</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td colspan="6"><input style="text-align: left;" type="text"/></td>
+            </tr>
+            <tr>
+                <td>建议镜片材质:</td>
+                <td colspan="2" class="daK">
+                    <select>
+                        <option value="">青少年渐进</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td>建议镜片材质:</td>
+                <td colspan="2" class="daK">
+                    <select>
+                        <option value="">青少年渐进</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="8"><textarea rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="PL30" colspan="2">3 框架--双光/渐进 <input type="button" value="删 除"/></td>
+                <td style="text-align: right" colspan="8">
+                    医生：
+                    <select>
+                        <option value="">王依依</option>
+                        <option value="">李三思</option>
+                        <option value="">赵武林</option>
+                    </select>
+                    验光师：
+                    <select>
+                        <option value="">张三</option>
+                        <option value="">周五</option>
+                        <option value="">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>Add</td>
+                <td>远用瞳距(mm)</td>
+                <td>近用瞳距(mm)</td>
+                <td>瞳高(mm)</td>
+                <td>远用VA</td>
+                <td>近用VA</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>中距离：</td>
+                <td colspan="2" class="daK">
+                    <label><input name="jianyi" type="checkbox"/> 建议镜框：</label>
+                    <select style="width: 70%;">
+                        <option value="">打孔</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td colspan="7"><input style="text-align: left;" type="text"/></td>
+            </tr>
+            <tr>
+                <td>建议镜片材质:</td>
+                <td colspan="2" class="daK">
+                    <select>
+                        <option value="">青少年渐进</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td>建议镜片材质:</td>
+                <td colspan="2" class="daK">
+                    <select>
+                        <option value="">青少年渐进</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="9"><textarea rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="PL30" colspan="2">4 软性角膜接触镜 <input type="button" value="删 除"/></td>
+                <td style="text-align: right" colspan="8">
+                    医生：
+                    <select>
+                        <option value="">王依依</option>
+                        <option value="">李三思</option>
+                        <option value="">赵武林</option>
+                    </select>
+                    验光师：
+                    <select>
+                        <option value="">张三</option>
+                        <option value="">周五</option>
+                        <option value="">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>直径</td>
+                <td>软性角膜接触镜VA</td>
+                <td>软性角膜接触镜镜片</td>
+                <td>片/盒数</td>
+                <td width="220">软性角膜接触镜处理方式</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td>适用镜片：<input style="width:60%" type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td rowspan="2">
+                    <select style="width: 70%;">
+                        <option value="">足矫</option>
+                        <option value="">足矫2</option>
+                        <option value="">足矫3</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td>适用镜片：<input style="width:60%" type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>中距离：</td>
+                <td colspan="9">
+                    <textarea rows="3"></textarea>
+                    <div class="maxL" style="margin:5px 10px;">
+                        <input type="button" value="选择"/>
+                        <input class="empty" type="button" value="清空"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="9"><textarea rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="PL30" colspan="2">5 框架--中用 <input type="button" value="删 除"/></td>
+                <td style="text-align: right" colspan="7">
+                    医生：
+                    <select>
+                        <option value="">王依依</option>
+                        <option value="">李三思</option>
+                        <option value="">赵武林</option>
+                    </select>
+                    验光师：
+                    <select>
+                        <option value="">张三</option>
+                        <option value="">周五</option>
+                        <option value="">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>三棱镜</td>
+                <td>基底</td>
+                <td>中用瞳距(mm)</td>
+                <td>瞳高(mm)</td>
+                <td>近用VA</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>中距离：</td>
+                <td colspan="2" class="daK">
+                    <label><input name="jianyi" type="checkbox"/> 建议镜框：</label>
+                    <select style="width: 75%;">
+                        <option value="">打孔</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td colspan="6"><input style="text-align: left;" type="text"/></td>
+            </tr>
+            <tr>
+                <td>建议镜片材质:</td>
+                <td colspan="2" class="daK">
+                    <select>
+                        <option value="">青少年渐进</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td>建议镜片材质:</td>
+                <td colspan="2" class="daK">
+                    <select>
+                        <option value="">青少年渐进</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="8"><textarea rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="PL30" colspan="2">6 视觉训练 <input type="button" value="删 除"/></td>
+                <td style="text-align: right" colspan="8">
+                    医生：
+                    <select>
+                        <option value="">王依依</option>
+                        <option value="">李三思</option>
+                        <option value="">赵武林</option>
+                    </select>
+                    验光师：
+                    <select>
+                        <option value="">张三</option>
+                        <option value="">周五</option>
+                        <option value="">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>三棱镜</td>
+                <td>基底</td>
+                <td>中用瞳距(mm)</td>
+                <td>瞳高(mm)</td>
+                <td>近用VA</td>
+                <td>近用VA</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input class="short" type="text" value="2.0"/> △</td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+            </tr>
+            <tr>
+                <td>家庭训练：</td>
+                <td colspan="4">
+                    <textarea rows="3"></textarea>
+                    <div class="maxL" style="margin:5px 10px;">
+                        <input type="button" value="选择"/>
+                        <input class="empty" type="button" value="清空"/>
+                    </div>
+                </td>
+                <td>训练室训练：</td>
+                <td colspan="4">
+                    <textarea rows="3"></textarea>
+                    <div class="maxL" style="margin:5px 10px;">
+                        <input type="button" value="选择"/>
+                        <input class="empty" type="button" value="清空"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="9"><textarea rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="PL30" colspan="2">7 角膜接触镜VST <input type="button" value="删 除"/></td>
+                <td style="text-align: right" colspan="11">
+                    医生：
+                    <select>
+                        <option value="">王依依</option>
+                        <option value="">李三思</option>
+                        <option value="">赵武林</option>
+                    </select>
+                    验光师：
+                    <select>
+                        <option value="">张三</option>
+                        <option value="">周五</option>
+                        <option value="">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>试戴片编号</td>
+                <td>FK</td>
+                <td>曲率半径</td>
+                <td>AC</td>
+                <td>降幅</td>
+                <td>DIA</td>
+                <td>BC</td>
+                <td>CP/CLY</td>
+                <td>E值</td>
+                <td>VA</td>
+                <td>镜片颜色</td>
+                <td width="300">品牌</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="12"><textarea rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="button" value="删 除"/></td>
+                <td style="text-align: right" colspan="10">
+                    医生：
+                    <select>
+                        <option value="">王依依</option>
+                        <option value="">李三思</option>
+                        <option value="">赵武林</option>
+                    </select>
+                    验光师：
+                    <select>
+                        <option value="">张三</option>
+                        <option value="">周五</option>
+                        <option value="">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>试戴片编号</td>
+                <td>BC</td>
+                <td>RZD</td>
+                <td>LZA</td>
+                <td>RZD2</td>
+                <td>LZA2</td>
+                <td>降幅</td>
+                <td>DIA</td>
+                <td>VA</td>
+                <td>镜片颜色</td>
+                <td width="300">品牌</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="11"><textarea rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="PL30" colspan="2">9 RGP <input type="button" value="删 除"/></td>
+                <td style="text-align: right" colspan="6">
+                    医生：
+                    <select>
+                        <option value="">王依依</option>
+                        <option value="">李三思</option>
+                        <option value="">赵武林</option>
+                    </select>
+                    验光师：
+                    <select>
+                        <option value="">张三</option>
+                        <option value="">周五</option>
+                        <option value="">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>屈光度</td>
+                <td>BC</td>
+                <td>DIA</td>
+                <td>散光</td>
+                <td>镜片颜色</td>
+                <td>镜片颜色</td>
+                <td width="300">品牌</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value="2.0"/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td><input type="text" value=" "/></td>
+                <td>
+                    <select>
+                        <option value="">内</option>
+                        <option value="">外</option>
+                        <option value="">上</option>
+                        <option value="">下</option>
+                    </select>
+                </td>
+                <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="7"><textarea rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="PL30" colspan="2">10 药品 <input type="button" value="删 除"/></td>
+                <td style="text-align: right">
+                    医生：
+                    <select>
+                        <option value="">王依依</option>
+                        <option value="">李三思</option>
+                        <option value="">赵武林</option>
+                    </select>
+                    验光师：
+                    <select>
+                        <option value="">张三</option>
+                        <option value="">周五</option>
+                        <option value="">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="w170">内容：</td>
+                <td colspan="2"><textarea rows="2"></textarea></td>
+            </tr>
+            <tr>
+                <td>药名：</td>
+                <td colspan="2">
+                    <textarea rows="2"></textarea>
+                    <div class="maxL" style="margin:5px 10px;">
+                        <input type="button" value="选择"/>
+                        <input class="empty" type="button" value="清空"/>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="daijingFS">
+            <span>戴镜方式：</span>
+            <select>
+                <option value="">日戴</option>
+                <option value="">夜戴</option>
+            </select>
+            <span>复诊时间: </span>
+            <input type="text" value="2021-05-23"/>
+            <span>复诊类型：</span>
+            <select>
+                <option value="">--请选择--</option>
+                <option value="">方式一</option>
+                <option value="">方式二</option>
+            </select>
+        </div>
+
+    </div>
+
+    <!--保存-->
+    <div class="Keep"><input type="button" value="保存"/></div>
+
+</div>
+
+</body>
+<script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<script>
+    var click = $(".click")
+    var click1 = $(".click1")
+    click.click(function () {
+        $("#quguangjiancha").addClass("none")
+        $("#jianchajielun").removeClass("none")
+    })
+    click1.click(function () {
+        $("#jianchajielun").addClass("none")
+        $("#quguangjiancha").removeClass("none")
+    })
+</script>
+
+</html>

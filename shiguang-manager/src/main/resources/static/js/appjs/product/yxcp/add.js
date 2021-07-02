@@ -70,6 +70,21 @@ function validateRule() {
             },
             factory: {
                 required: true
+            },
+            tax: {
+                required: true
+            },
+            taxPrice: {
+                required: true
+            },
+            tradePrice: {
+                required: true
+            },
+            transferPrice: {
+                required: true
+            },
+            retailPrice: {
+                required: true
             }
         },
         messages: {
