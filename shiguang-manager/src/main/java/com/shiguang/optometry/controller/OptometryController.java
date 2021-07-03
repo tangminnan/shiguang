@@ -68,19 +68,19 @@ public class OptometryController {
             memberDO.setSexx("女");
         }
         model.addAttribute("memberDO", memberDO);
-        Map<String, Object> map = new HashMap<>();
-        List<OptometryDO> list = optometryService.optoList(map);
-        OptometryDO optometryDO = new OptometryDO();
-        if (list.size() > 0) {
-            optometryDO.setCylinderRight(list.get(0).getCylinderRight());
-            optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
-            optometryDO.setAxialRight(list.get(0).getAxialRight());
-            optometryDO.setAxialLeft(list.get(0).getAxialLeft());
-            optometryDO.setSphereRight(list.get(0).getSphereRight());
-            optometryDO.setSphereLeft(list.get(0).getSphereLeft());
-
-        }
-        model.addAttribute("optometryDO", optometryDO);
+//        Map<String, Object> map = new HashMap<>();
+//        List<OptometryDO> list = optometryService.optoList(map);
+//        OptometryDO optometryDO = new OptometryDO();
+//        if (list.size() > 0) {
+//            optometryDO.setCylinderRight(list.get(0).getCylinderRight());
+//            optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
+//            optometryDO.setAxialRight(list.get(0).getAxialRight());
+//            optometryDO.setAxialLeft(list.get(0).getAxialLeft());
+//            optometryDO.setSphereRight(list.get(0).getSphereRight());
+//            optometryDO.setSphereLeft(list.get(0).getSphereLeft());
+//
+//        }
+//        model.addAttribute("optometryDO", optometryDO);
         //OptometryDO optometryDO = optometryService.
         return "optometry/edit";
     }

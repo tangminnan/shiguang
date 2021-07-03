@@ -49,6 +49,10 @@ public class StoreSalesController {
     private TyjService tyjService;
     @Autowired
     private PartsService partsService;
+    @Autowired
+    private HcService hcService;
+    @Autowired
+    private OldlensService oldlensService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -263,9 +267,35 @@ public class StoreSalesController {
     public PageUtils haocailist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        List<TyjDO> tyjDOList = tyjService.list(query);
-        int total = tyjService.count(query);
-        PageUtils pageUtils = new PageUtils(tyjDOList, total);
+        List<HcDO> hcDOList = hcService.list(query);
+        int total = hcService.count(query);
+        PageUtils pageUtils = new PageUtils(hcDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 老花镜
+     */
+    @GetMapping("/laohuajing")
+    @RequiresPermissions("information:store:laohuajing")
+    String laohuajing(Model model){
+        return "storeSales/laohuajing";
+    }
+
+    /**
+     * 查询老花镜
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/laohuajinglist")
+    @RequiresPermissions("information:store:laohuajing")
+    public PageUtils laohuajinglist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        List<OldlensDO> oldlensDOList = oldlensService.list(query);
+        int total = oldlensService.count(query);
+        PageUtils pageUtils = new PageUtils(oldlensDOList, total);
         return pageUtils;
     }
 
