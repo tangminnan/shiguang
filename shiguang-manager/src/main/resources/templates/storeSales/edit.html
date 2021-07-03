@@ -25,8 +25,8 @@
 		<span class="s1"><input type="button" value="查询" onclick="getSelect()"/></span>
 		<span class="s2">卡号：<input type="text" value="" id="cardMember" th:value="${memberDO.cardNumber}"/></span>
 		<span class="s3">
-			<input type="button" value="会员新增" />
-			<input type="button" value="会员修改" />
+			<input type="button" value="会员新增" onclick="getMemberAdd()"/>
+			<input type="button" value="会员修改" onclick="getMemberEdit()"/>
 		</span>
 		<span class="s4">
 			<label><input name="ss" type="radio" value="1" checked onchange="getCheck(this.value)"> 框镜</label>
@@ -34,12 +34,13 @@
 			<label><input name="ss" type="radio" value="3" onchange="getCheck(this.value)"> 辅料</label>
 		</span>
 		<span class="s5">
-			<input type="button" value="更换销售人员" />
-				<select >
+			<input type="button" onclick="updatePerson()" value="更换销售人员" />
+				<select id="salename" name="salename" disabled="disabled">
 					<option></option>
 					<option th:each="ls:${userDOList}"
 							th:text="${ls.name}"
 							th:value="${ls.name}"></option>
+					<input id="salenames" name="salenames" th:value="${saleName}" type="hidden"/>
 				</select>
 		</span>
 	</div>
@@ -51,11 +52,12 @@
 		会员卡类型：<input type="text" id="memberType" th:value="${memberDO.cardType}" disabled/>
 		积分：<input type="text" id="memberPoint" value="200" disabled/>
 		来源：<input type="text" id="memberSource" th:value="${memberDO.source}" disabled/>
+		<input id="memberId" name="memberId" th:value="${memberDO.id}"  type="hidden">
 		<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">
 		<input id="memname" name="memname" th:value="${memberDO.name}"  type="hidden">
 		<!--<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">-->
 		<!--<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">-->
-		<input class="xiangQ" type="button" value="详情" />
+		<input class="xiangQ" type="button" value="详情" onclick="getMemberDetail()"/>
 	</div>
 </div>
 
@@ -1008,7 +1010,7 @@
 					<option value="5">订做25</option>
 				</select>
 			</li>
-			<li>取镜日期：<input type="text" id="mirrorTime" name="mirrorTime" /></li>
+			<li>取镜日期：<input type="text" id="mirrorTime" name="mirrorTime"/></li>
 			<li>
 				取镜地点：
 				<input id="storeName" name="storeName" type="text" th:value="${storeName}" disabled>
@@ -1029,10 +1031,10 @@
 			<li><input class="youji" type="button" value="填写邮寄信息" /></li>
 		</ul>
 		<ul class="ulC">
-			<li>实收金额：<input type="text" value="128" /></li>
-			<li>商品打折：<input type="text" value="128" /><input type="button" value="还原" /></li>
-			<li>一口价：<input type="text" value="128" /><input type="button" class="qianpi" value="签批" /><input type="button" value="还原" /></li>
-			<li>抹零金额：<input type="text" value="128" /></li>
+			<li>实收金额：<input type="text" id="shishouMoney" /></li>
+			<li>商品打折：<input type="text"  /><input type="button" value="还原" /></li>
+			<li>一口价：<input type="text" /><input type="button" class="qianpi" value="签批" /><input type="button" value="还原" /></li>
+			<li>抹零金额：<input type="text" value="0.00" /></li>
 		</ul>
 		<div class="JSbtn"><input type="button" value="结算" /></div>
 	</div>
@@ -1050,13 +1052,13 @@
 			<ul class="ulUp">
 				<li><span onclick="getJingjia()">镜架</span></li>
 				<li><span onclick="getJingpian()">镜片</span></li>
-				<li><span onclick="getKjpeijian">镜架配件</span></li>
+				<li><span onclick="getKjpeijian()">镜架配件</span></li>
 				<li><span onclick="getTaiyangjing()">太阳镜</span></li>
 				<li><span onclick="getHaocai()">耗材</span></li>
 				<li><span onclick="getLaohuajing()">老花镜</span></li>
-				<li><span>视光</span></li>
-				<li><span>护理液</span></li>
-				<li><span>配件</span></li>
+				<li><span onclick="getShiguang()">视光</span></li>
+				<li><span onclick="getHuliye()">护理液</span></li>
+				<li><span onclick="getPeijian()">配件</span></li>
 			</ul>
 			<ul class="ulDown">
 				<li><span>自架</span></li>
@@ -1067,15 +1069,15 @@
 
 		<div class="box33" style="display: none;" id="boxyinxing">
 			<ul class="ulUn">
-				<li><span>隐形</span></li>
-				<li><span>护理液</span></li>
-				<li><span>隐形配件</span></li>
-				<li><span>镜架</span></li>
-				<li><span>镜架配件</span></li>
-				<li><span>太阳镜</span></li>
-				<li><span>耗材</span></li>
-				<li><span>老花镜</span></li>
-				<li><span>视光</span></li>
+				<li><span onclick="getYinxing()">隐形</span></li>
+				<li><span onclick="getHuliye()">护理液</span></li>
+				<li><span onclick="getYinxingpj()">隐形配件</span></li>
+				<li><span onclick="getJingjia()">镜架</span></li>
+				<li><span onclick="getKjpeijian()">镜架配件</span></li>
+				<li><span onclick="getTaiyangjing()">太阳镜</span></li>
+				<li><span onclick="getHaocai()">耗材</span></li>
+				<li><span onclick="getLaohuajing()">老花镜</span></li>
+				<li><span onclick="getShiguang()">视光</span></li>
 			</ul>
 			<ul class="ulYin">
 				<li><span>赠品</span></li>
@@ -1084,15 +1086,15 @@
 
 		<div class="box333" style="display: none;" id="boxfuliao">
 			<ul class="ulUm">
-				<li><span>镜架</span></li>
-				<li><span>配件</span></li>
-				<li><span>镜片</span></li>
-				<li><span>隐形</span></li>
-				<li><span>护理液</span></li>
-				<li><span>太阳镜</span></li>
-				<li><span>耗材</span></li>
-				<li><span>老花镜</span></li>
-				<li><span>视光</span></li>
+				<li><span onclick="getJingjia()">镜架</span></li>
+				<li><span onclick="getPeijian()">配件</span></li>
+				<li><span onclick="getJingpian()">镜片</span></li>
+				<li><span onclick="getYinxing()">隐形</span></li>
+				<li><span onclick="getHuliye()">护理液</span></li>
+				<li><span onclick="getTaiyangjing()">太阳镜</span></li>
+				<li><span onclick="getHaocai()">耗材</span></li>
+				<li><span onclick="getLaohuajing()">老花镜</span></li>
+				<li><span onclick="getShiguang()">视光</span></li>
 			</ul>
 			<ul class="ulFu">
 				<li><span>赠品</span></li>
@@ -1134,8 +1136,8 @@
 			<thead>
 			<tr>
 				<th><input name="cho" type="checkbox" />选择</th>
-				<th>商品名称</th>
-				<th>单价</th>
+				<th style="width: 300px;">商品名称</th>
+				<th style="width: 50px;">单价</th>
 				<th>可用库存</th>
 				<th>数量</th>
 				<th>原价合计</th>
@@ -1310,7 +1312,28 @@
         lis += "<li>应收金额：0.00</li>";
         lis += "<li>实收金额：0.00</li>";
         $("#ula").append(lis)
+        var now = new Date();
+        var year = now.getFullYear(); //得到年份
+        var month = now.getMonth();//得到月份
+        var date = now.getDate();//得到日期
+        month = month + 1;
+        if (month < 10) month = "0" + month;
+        if (date < 10) date = "0" + date;
+        var time = "";
+        time = year + "-" + month + "-" + date;
+        //当前日期赋值给当前日期输入框中（jQuery easyUI）
+        $('#mirrorTime').val(time);
+
+        var salenames = $("input[name='salenames']").val();
+        $("#salename").find("[value="+salenames+"]").attr("selected",true);
+
     });
+
+    function updatePerson(){
+		$("#salename").attr("disabled",false);
+        //document.getElementById("salename").disabled="false"
+	}
+
     laydate.render({
         elem: '#mirrorTime',
         type: 'date'
@@ -1575,7 +1598,7 @@
                 // alert(rows.length)
                 for (var i=0;i<rows.length;i++){
                     html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                    html += "<td>"+rows[i].producName+"</td>";
+                    html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].producName+"</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>3</td>";
                     html += "<td>1</td>";
@@ -1595,12 +1618,13 @@
                 $("#ula").empty();
                 var lis="";
                 lis =  "<li>原价金额："+price+"</li>";
-                lis += "<li>折扣金额："+price+"</li>";
-                lis += "<li>优惠金额："+price+"</li>";
-                lis += "<li>抹零金额："+price+"</li>";
+                lis += "<li>折扣金额：0.00</li>";
+                lis += "<li>优惠金额：0.00</li>";
+                lis += "<li>抹零金额：0.00</li>";
                 lis += "<li>应收金额："+price+"</li>";
                 lis += "<li>实收金额："+price+"</li>";
                 $("#ula").append(lis)
+				$("#shishouMoney").val(price)
 
                 //son_msg就是子页面中的msg数据
                 //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -1616,12 +1640,13 @@
         $("#ula").empty();
         var lis="";
         lis =  "<li>原价金额："+price+"</li>";
-        lis += "<li>折扣金额："+price+"</li>";
-        lis += "<li>优惠金额："+price+"</li>";
-        lis += "<li>抹零金额："+price+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额：0.00</li>";
         lis += "<li>应收金额："+price+"</li>";
         lis += "<li>实收金额："+price+"</li>";
         $("#ula").append(lis)
+        $("#shishouMoney").val(price)
     }
 	
     function getJingpian(){
@@ -1638,7 +1663,7 @@
                 // alert(rows.length)
                 for (var i=0;i<rows.length;i++){
                     html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                    html += "<td>"+rows[i].producName+"</td>";
+                    html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].producName+"</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>3</td>";
                     html += "<td>1</td>";
@@ -1657,18 +1682,54 @@
                 $("#ula").empty();
                 var lis="";
                 lis =  "<li>原价金额："+price+"</li>";
-                lis += "<li>折扣金额："+price+"</li>";
-                lis += "<li>优惠金额："+price+"</li>";
-                lis += "<li>抹零金额："+price+"</li>";
+                lis += "<li>折扣金额：0.00</li>";
+                lis += "<li>优惠金额：0.00</li>";
+                lis += "<li>抹零金额：0.00</li>";
                 lis += "<li>应收金额："+price+"</li>";
                 lis += "<li>实收金额："+price+"</li>";
                 $("#ula").append(lis)
+                $("#shishouMoney").val(price)
                 //son_msg就是子页面中的msg数据
                 //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
             }
         });
         layer.full(toIndex)
     }
+    function getMemberAdd(){
+        var toIndex = layer.open({
+            type : 2,
+            title : '增加',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/member/add/" // iframe的url
+        });
+        layer.full(toIndex)
+    }
+    function getMemberEdit(){
+	    var id = $("#memberId").val();
+        var toIndex = layer.open({
+            type : 2,
+            title : '编辑',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/member/edit/"+ id  // iframe的url
+        });
+        layer.full(toIndex)
+    }
+    function getMemberDetail(){
+        var id = $("#memberId").val();
+        var toIndex = layer.open({
+            type : 2,
+            title : '详情',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/highmember/detail/" + id // iframe的url
+        });
+        layer.full(toIndex)
+	}
 </script>
 <script th:inline="javascript">
     $().ready(function(){

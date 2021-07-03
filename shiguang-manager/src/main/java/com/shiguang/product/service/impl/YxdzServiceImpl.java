@@ -65,4 +65,14 @@ public class YxdzServiceImpl implements YxdzService {
         return yxdzDao.choice(mfrsid);
     }
 
+    @Override
+    public List<YxdzDO> listYxDz(Map<String, Object> map) {
+        return yxdzDao.listYxDz(map);
+    }
+
+    @Override
+    public int countYxDz(Map<String, Object> map) {
+        return yxdzDao.countYxDz(map);
+    }
+
 }

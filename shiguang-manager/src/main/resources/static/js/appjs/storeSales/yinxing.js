@@ -2,21 +2,25 @@
 var prefix = "/information/store"
 $(function() {
 	load();
-    $('#exampleTable').bootstrapTable('hideColumn', 'sphqj');
+    $('#exampleTable').bootstrapTable('hideColumn', 'producNum');
+    $('#exampleTable').bootstrapTable('hideColumn', 'producName');
+    $('#exampleTable').bootstrapTable('hideColumn', 'retailPrice');
     $('#exampleTable').bootstrapTable('hideColumn', 'cylqj');
+    $('#exampleTable').bootstrapTable('hideColumn', 'sphqj');
     $('#exampleTable').bootstrapTable('hideColumn', 'lightbelowqj');
-    // $('#exampleTable').bootstrapTable('hideColumn', 'refractivity');
-    // $('#exampleTable').bootstrapTable('hideColumn', 'light');
+    $('#exampleTable').bootstrapTable('hideColumn', 'refractivity');
     $('#exampleTable').bootstrapTable('hideColumn', 'producFactory');
-    $('#exampleTable').bootstrapTable('hideColumn', 'gradual');
-    $('#exampleTable').bootstrapTable('hideColumn', 'function');
+    $('#exampleTable').bootstrapTable('hideColumn', 'usageName');
+    $('#exampleTable').bootstrapTable('hideColumn', 'typeName');
+    $('#exampleTable').bootstrapTable('hideColumn', 'cycle');
+    $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
 });
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/jingpianlist", // 服务器数据的加载地址
+						url : prefix + "/yinxinglist", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -40,9 +44,9 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                dzType:$("#dzType").val(),
-                                producName:$('#producName').val(),
-                                producNum:$('#producNum').val()
+                                yxType:$("#yxType").val(),
+                                producNum:$('#producNum').val(),
+                                producName:$('#producName').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -53,7 +57,8 @@ function load() {
 						// 返回false将会终止请求
 						columns : [
                             {
-                                checkbox : true
+                                checkbox : true,
+                                field:'checkid'
                             },
 								{
 									field : 'producNum',
@@ -70,37 +75,6 @@ function load() {
 									title : '销售价格',
 									align : 'center'
 								},
-								{
-									field : 'sph',
-									title : '球镜',
-									align : 'center'
-								},
-								{
-									field : 'cyl',
-									title : '柱镜',
-									align : 'center'
-								},
-								{
-									field : 'lightbelow',
-									title : '下加光',
-									align : 'center'
-
-								},
-								// {
-								// 	field : 'refractivity',
-								// 	title : '折射率',
-								// 	align : 'center'
-								// },
-								// {
-								// 	field : 'light',
-								// 	title : '光度分类',
-								// 	align : 'center'
-								// },
-								// {
-								// 	field : 'lens',
-								// 	title : '材料分类',
-								// 	align : 'center'
-								// },
                             {
                                 field : 'sphqj',
                                 title : '球镜区间',
@@ -118,13 +92,27 @@ function load() {
                             // },
                             {
                                 field : 'lightbelowqj',
-                                title : '下加光区间',
-                                align : 'center'
+                                title : '曲率1区间',
+                                align : 'center',
+                                formatter : function(value, row, index) {
+                                    if (row.curvatureOne != null && row.curvatureYi != null){
+                                        return row.curvatureOne +"～"+ row.curvatureYi
+                                    } else {
+                                        return ""
+                                    }
+                                }
                             },
                             {
                                 field : 'refractivity',
-                                title : '折射率',
-                                align : 'center'
+                                title : '曲率2区间',
+                                align : 'center',
+                                formatter : function(value, row, index) {
+                                    if (row.curvatureTwo != null && row.curvatureEr != null){
+                                        return row.curvatureTwo +"～"+ row.curvatureEr
+                                    } else {
+                                        return ""
+                                    }
+                                }
                             },
                             {
                                 field : 'producFactory',
@@ -132,63 +120,52 @@ function load() {
                                 align : 'center'
                             },
                             {
-                                field : 'light',
-                                title : '光度分类',
+                                field : 'usageName',
+                                title : '使用类型',
                                 align : 'center'
                             },
                             {
-                                field : 'lens',
-                                title : '材料分类',
+                                field : 'typeName',
+                                title : '抛弃类型',
                                 align : 'center'
                             },
                             {
-                                field : 'gradual',
-                                title : '渐进片分类',
-                                align : 'center'
-                            },
-                            {
-                                field : 'function',
-                                title : '镜片功能',
+                                field : 'cycle',
+                                title : '订做周期',
                                 align : 'center'
                             }
 						]
 					});
 }
 function reLoad() {
-    var dzType = $("#dzType").val();
+    var yxType = $("#yxType").val();
 	$('#exampleTable').bootstrapTable('refresh');
-    if(dzType == 1){
-        $('#exampleTable').bootstrapTable('hideColumn', 'sph');
-        $('#exampleTable').bootstrapTable('hideColumn', 'cyl');
-        $('#exampleTable').bootstrapTable('hideColumn', 'lightbelow');
-        // $('#exampleTable').bootstrapTable('hideColumn', 'refractivity');
-        // $('#exampleTable').bootstrapTable('hideColumn', 'light');
-        // $('#exampleTable').bootstrapTable('hideColumn', 'lens');
-        $('#exampleTable').bootstrapTable('showColumn', 'sphqj');
+    if(yxType == 1){
+        $('#exampleTable').bootstrapTable('showColumn', 'checkid');
+        $('#exampleTable').bootstrapTable('showColumn', 'producNum');
+        $('#exampleTable').bootstrapTable('showColumn', 'producName');
+        $('#exampleTable').bootstrapTable('showColumn', 'retailPrice');
         $('#exampleTable').bootstrapTable('showColumn', 'cylqj');
+        $('#exampleTable').bootstrapTable('showColumn', 'sphqj');
         $('#exampleTable').bootstrapTable('showColumn', 'lightbelowqj');
-        // $('#exampleTable').bootstrapTable('showColumn', 'refractivity');
-        // $('#exampleTable').bootstrapTable('showColumn', 'light');
-        // $('#exampleTable').bootstrapTable('showColumn', 'lens');
+        $('#exampleTable').bootstrapTable('showColumn', 'refractivity');
         $('#exampleTable').bootstrapTable('showColumn', 'producFactory');
-        $('#exampleTable').bootstrapTable('showColumn', 'gradual');
-        $('#exampleTable').bootstrapTable('showColumn', 'function');
+        $('#exampleTable').bootstrapTable('showColumn', 'usageName');
+        $('#exampleTable').bootstrapTable('showColumn', 'typeName');
+        $('#exampleTable').bootstrapTable('showColumn', 'cycle');
     } else {
-        $('#exampleTable').bootstrapTable('showColumn', 'sph');
-        $('#exampleTable').bootstrapTable('showColumn', 'cyl');
-        $('#exampleTable').bootstrapTable('showColumn', 'lightbelow');
-        // $('#exampleTable').bootstrapTable('showColumn', 'refractivity');
-        // $('#exampleTable').bootstrapTable('showColumn', 'light');
-        // $('#exampleTable').bootstrapTable('showColumn', 'lens');
-        $('#exampleTable').bootstrapTable('hideColumn', 'sphqj');
+        $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
+        $('#exampleTable').bootstrapTable('hideColumn', 'producNum');
+        $('#exampleTable').bootstrapTable('hideColumn', 'producName');
+        $('#exampleTable').bootstrapTable('hideColumn', 'retailPrice');
         $('#exampleTable').bootstrapTable('hideColumn', 'cylqj');
+        $('#exampleTable').bootstrapTable('hideColumn', 'sphqj');
         $('#exampleTable').bootstrapTable('hideColumn', 'lightbelowqj');
-        // $('#exampleTable').bootstrapTable('hideColumn', 'refractivity');
-        // $('#exampleTable').bootstrapTable('hideColumn', 'light');
-        // $('#exampleTable').bootstrapTable('hideColumn', 'lens');
+        $('#exampleTable').bootstrapTable('hideColumn', 'refractivity');
         $('#exampleTable').bootstrapTable('hideColumn', 'producFactory');
-        $('#exampleTable').bootstrapTable('hideColumn', 'gradual');
-        $('#exampleTable').bootstrapTable('hideColumn', 'function');
+        $('#exampleTable').bootstrapTable('hideColumn', 'usageName');
+        $('#exampleTable').bootstrapTable('hideColumn', 'typeName');
+        $('#exampleTable').bootstrapTable('hideColumn', 'cycle');
 	}
 }
 

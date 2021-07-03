@@ -8,7 +8,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/jingjialist", // 服务器数据的加载地址
+						url : prefix + "/peijianlist", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -69,22 +69,12 @@ function load() {
 								{
 									field : 'producFactory',
 									title : '型号',
-									align : 'center'
+									align : 'center',
 								},
 								{
-									field : 'producColor',
-									title : '色号',
-									align : 'center'
-								},
-								{
-									field : 'materialName',
-									title : '镜架材质',
-									align : 'center'
-								},
-								{
-									field : 'size',
-									title : '镜架尺寸',
-									align : 'center'
+									field : 'partsStyle',
+									title : '配件型',
+									align : 'center',
 								}
 						]
 					});

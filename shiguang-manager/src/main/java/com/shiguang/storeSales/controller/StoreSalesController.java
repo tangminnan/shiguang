@@ -53,6 +53,14 @@ public class StoreSalesController {
     private HcService hcService;
     @Autowired
     private OldlensService oldlensService;
+    @Autowired
+    private ShiguangService shiguangService;
+    @Autowired
+    private HlyService hlyService;
+    @Autowired
+    private YxcpService yxcpService;
+    @Autowired
+    private YxdzService yxdzService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -122,6 +130,8 @@ public class StoreSalesController {
         UserDO userDO = ShiroUtils.getUser();
         String storeName = userDO.getStore();
         model.addAttribute("storeName", storeName);
+        String saleName = ShiroUtils.getUser().getName();
+        model.addAttribute("saleName",saleName);
         return "storeSales/edit";
     }
 
@@ -296,6 +306,150 @@ public class StoreSalesController {
         List<OldlensDO> oldlensDOList = oldlensService.list(query);
         int total = oldlensService.count(query);
         PageUtils pageUtils = new PageUtils(oldlensDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 视光
+     */
+    @GetMapping("/shiguang")
+    @RequiresPermissions("information:store:shiguang")
+    String shiguang(Model model){
+        return "storeSales/shiguang";
+    }
+
+    /**
+     * 查询视光
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/shiguanglist")
+    @RequiresPermissions("information:store:shiguang")
+    public PageUtils shiguanglist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        List<ShiguangDO> shiguangDOList = shiguangService.list(query);
+        int total = shiguangService.count(query);
+        PageUtils pageUtils = new PageUtils(shiguangDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 护理液
+     */
+    @GetMapping("/huliye")
+    @RequiresPermissions("information:store:huliye")
+    String huliye(Model model){
+        return "storeSales/huliye";
+    }
+
+    /**
+     * 查询护理液
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/huliyelist")
+    @RequiresPermissions("information:store:huliye")
+    public PageUtils huliyelist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        List<HlyDO> hlyDOList = hlyService.list(query);
+        int total = hlyService.count(query);
+        PageUtils pageUtils = new PageUtils(hlyDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 配件
+     */
+    @GetMapping("/peijian")
+    @RequiresPermissions("information:store:peijian")
+    String peijian(Model model){
+        return "storeSales/peijian";
+    }
+
+    /**
+     * 查询配件
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/peijianlist")
+    @RequiresPermissions("information:store:peijian")
+    public PageUtils peijianlist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        List<PartsDO> partsDOList = partsService.list(query);
+        int total = partsService.count(query);
+        PageUtils pageUtils = new PageUtils(partsDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 隐形
+     */
+    @GetMapping("/yinxing")
+    @RequiresPermissions("information:store:yinxing")
+    String yinxing(Model model){
+        return "storeSales/yinxing";
+    }
+
+    /**
+     * 查询隐形
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/yinxinglist")
+    @RequiresPermissions("information:store:yinxing")
+    public PageUtils yinxinglist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        PageUtils pageUtils = null;
+        if (null != params.get("yxType")){
+            if ("0".equals(params.get("yxType"))){
+                List<YxcpDO> yxcpDOList = yxcpService.list(query);
+                int total = yxcpService.count(query);
+                pageUtils = new PageUtils(yxcpDOList, total);
+            } else if ("1".equals(params.get("yxType"))){
+                List<YxdzDO> yxdzDOList = yxdzService.listYxDz(query);
+                int total = yxdzService.countYxDz(query);
+                pageUtils = new PageUtils(yxdzDOList, total);
+            }
+        } else {
+            List<YxcpDO> yxcpDOList = yxcpService.list(query);
+            int total = yxcpService.count(query);
+            pageUtils = new PageUtils(yxcpDOList, total);
+        }
+        return pageUtils;
+    }
+
+    /**
+     * 隐形配件
+     */
+    @GetMapping("/yinxingpj")
+    @RequiresPermissions("information:store:yinxingpj")
+    String yinxingpj(Model model){
+        return "storeSales/yinxingpj";
+    }
+
+    /**
+     * 查询配件
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/yinxingpjlist")
+    @RequiresPermissions("information:store:yinxingpj")
+    public PageUtils yinxingpjlist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        query.put("partsStyle","隐形");
+        List<PartsDO> partsDOList = partsService.list(query);
+        int total = partsService.count(query);
+        PageUtils pageUtils = new PageUtils(partsDOList, total);
         return pageUtils;
     }
 

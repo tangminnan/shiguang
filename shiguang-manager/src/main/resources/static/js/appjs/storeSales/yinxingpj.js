@@ -8,7 +8,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/jingjialist", // 服务器数据的加载地址
+						url : prefix + "/yinxingpjlist", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -32,8 +32,8 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                producNum:$('#producNum').val(),
-                                producName:$('#producName').val()
+                                producName:$('#producName').val(),
+                                producNum:$('#producNum').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -72,18 +72,8 @@ function load() {
 									align : 'center'
 								},
 								{
-									field : 'producColor',
-									title : '色号',
-									align : 'center'
-								},
-								{
-									field : 'materialName',
-									title : '镜架材质',
-									align : 'center'
-								},
-								{
-									field : 'size',
-									title : '镜架尺寸',
+									field : 'partsStyle',
+									title : '配件型',
 									align : 'center'
 								}
 						]

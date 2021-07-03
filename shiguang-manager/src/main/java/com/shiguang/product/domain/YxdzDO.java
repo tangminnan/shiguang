@@ -71,8 +71,12 @@ public class YxdzDO implements Serializable {
     private Long cycle;
     //使用类型id
     private Integer usageId;
+    //使用类型
+    private String usageName;
     //抛弃型分类id
     private Integer typeId;
+    // 抛弃类型
+    private String typeName;
     //产品可使用天数
     private Integer useDays;
     //效期提醒上限（有效期前【】天提醒进入滞销状态）
@@ -675,4 +679,12 @@ public class YxdzDO implements Serializable {
     public void setBrandname(String brandname) {
         this.brandname = brandname;
     }
+
+    public void setUsageName(String usageName){ this.usageName = usageName; }
+
+    public String getUsageName(){return usageName;}
+
+    public void setTypeName(String typeName){this.typeName=typeName;}
+
+    public String getTypeName(){return typeName;}
 }

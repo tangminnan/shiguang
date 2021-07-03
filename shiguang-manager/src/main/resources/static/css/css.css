@@ -133,7 +133,7 @@ h1, h2, h3, h4, h5, h6{ font-size:100%;font-weight: normal;}
 .blueLeft_top tr:nth-child(2) td{color:#2d93f3;}
 .blueTop input{background:url(../img/check_no.png);width: 14px;height: 14px;vertical-align:middle;margin-top: -3px;margin-right:3px;}
 .blueTop input:checked{background-image:url(../img/check_yes.png);}
-.blueLeft_down{height:190px;overflow-y: scroll;width: 104%;}
+.blueLeft_down{overflow-y: scroll;width: 104%;}
 .blueLeft_down tr:hover{background: #d8ecfe;}
 
 /*提交处方-框镜*/
