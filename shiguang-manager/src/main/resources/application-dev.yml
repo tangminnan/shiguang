@@ -1,9 +1,5 @@
 shaicha:
-<<<<<<< HEAD
-  uploadPath: /uploaded_files/
-=======
   uploadPath: /www/uploaded_files/
->>>>>>> e2ad0c7c9c623bb0615b484b56db13f00940182a
   poiword: /www/poiword/
 logging:
   level:
