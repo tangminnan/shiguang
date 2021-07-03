@@ -1,5 +1,5 @@
 shaicha:
-  uploadPath: F:/www/uploaded_files/
+  uploadPath: /www/uploaded_files/
   poiword: /www/poiword/
 logging:
   level:
@@ -8,7 +8,7 @@ logging:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.jdbc.Driver  
+    driverClassName: com.mysql.jdbc.Driver
     #url: jdbc:mysql://rm-2zee8021e2232hhbcqo.mysql.rds.aliyuncs.com:3306/shaicha?useUnicode=true&characterEncoding=utf8
     #username: root
     #password: Tmn521hjj
@@ -38,18 +38,18 @@ spring:
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
   redis:
-      host: localhost
-      port: 6379
-      password:
-      # 连接超时时间（毫秒）
-      timeout: 10000
-      pool:
-        # 连接池中的最大空闲连接
-        max-idle: 8
-        # 连接池中的最小空闲连接
-        min-idle: 10
-        # 连接池最大连接数（使用负值表示没有限制）
-        max-active: 100
-        # 连接池最大阻塞等待时间（使用负值表示没有限制）
-        max-wait: -1
+    host: localhost
+    port: 6379
+    password:
+    # 连接超时时间（毫秒）
+    timeout: 10000
+    pool:
+      # 连接池中的最大空闲连接
+      max-idle: 8
+      # 连接池中的最小空闲连接
+      min-idle: 10
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 100
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
   
