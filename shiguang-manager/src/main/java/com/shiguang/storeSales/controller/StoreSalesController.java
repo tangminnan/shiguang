@@ -12,12 +12,8 @@ import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.domain.ProcessAskDO;
 import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
-import com.shiguang.product.domain.JpcpDO;
-import com.shiguang.product.domain.JpdzDO;
-import com.shiguang.product.domain.ProducaDO;
-import com.shiguang.product.service.JpcpService;
-import com.shiguang.product.service.JpdzService;
-import com.shiguang.product.service.ProducaService;
+import com.shiguang.product.domain.*;
+import com.shiguang.product.service.*;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -49,6 +45,10 @@ public class StoreSalesController {
     private JpcpService jpcpService;
     @Autowired
     private JpdzService jpdzService;
+    @Autowired
+    private TyjService tyjService;
+    @Autowired
+    private PartsService partsService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -186,6 +186,85 @@ public class StoreSalesController {
         }
         return pageUtils;
 
+    }
+
+    /**
+     * 镜架配件
+     */
+    @GetMapping("/jingjiapj")
+    @RequiresPermissions("information:store:jingjiapj")
+    String jingjiapj(Model model){
+        return "storeSales/jingjiapj";
+    }
+
+    /**
+     * 查询镜架配件
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/jingjiapjlist")
+    @RequiresPermissions("information:store:jingjiapj")
+    public PageUtils jingjiapjlist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        query.put("partsStyle","框镜");
+        List<PartsDO> partsDOList = partsService.list(query);
+        int total = partsService.count(query);
+        PageUtils pageUtils = new PageUtils(partsDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 太阳镜
+     */
+    @GetMapping("/taiyangjing")
+    @RequiresPermissions("information:store:taiyangjing")
+    String taiyangjing(Model model){
+        return "storeSales/taiyangjing";
+    }
+
+    /**
+     * 查询太阳镜
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/taiyangjinglist")
+    @RequiresPermissions("information:store:taiyangjing")
+    public PageUtils taiyangjinglist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        List<TyjDO> tyjDOList = tyjService.list(query);
+        int total = tyjService.count(query);
+        PageUtils pageUtils = new PageUtils(tyjDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 耗材
+     */
+    @GetMapping("/haocai")
+    @RequiresPermissions("information:store:haocai")
+    String haocai(Model model){
+        return "storeSales/haocai";
+    }
+
+    /**
+     * 查询耗材
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/haocailist")
+    @RequiresPermissions("information:store:haocai")
+    public PageUtils haocailist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        List<TyjDO> tyjDOList = tyjService.list(query);
+        int total = tyjService.count(query);
+        PageUtils pageUtils = new PageUtils(tyjDOList, total);
+        return pageUtils;
     }
 
     /**

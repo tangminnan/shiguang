@@ -989,13 +989,13 @@
 
 	<!--上面一排金额结算表-->
 	<div class="settlement">
-		<ul class="ulA">
-			<li>原价合计：0.00</li>
-			<li>折扣金额：0.00</li>
-			<li>优惠金额：0.00</li>
-			<li>抹零金额：0.00</li>
-			<li>应收金额：0.00</li>
-			<li>实收金额：0.00</li>
+		<ul class="ulA" id="ula">
+			<!--<li id="yuanjia"></li>-->
+			<!--<li id="zhekou"></li>-->
+			<!--<li id="youhui"></li>-->
+			<!--<li id="moling"></li>-->
+			<!--<li id="yingshou"></li>-->
+			<!--<li id="shishou"></li>-->
 		</ul>
 		<ul class="ulB">
 			<li>
@@ -1050,9 +1050,9 @@
 			<ul class="ulUp">
 				<li><span onclick="getJingjia()">镜架</span></li>
 				<li><span onclick="getJingpian()">镜片</span></li>
-				<li><span>镜架配件</span></li>
-				<li><span>太阳镜</span></li>
-				<li><span>耗材</span></li>
+				<li><span onclick="getKjpeijian">镜架配件</span></li>
+				<li><span onclick="getTaiyangjing()">太阳镜</span></li>
+				<li><span onclick="getHaocai()">耗材</span></li>
 				<li><span>老花镜</span></li>
 				<li><span>视光</span></li>
 				<li><span>护理液</span></li>
@@ -1149,55 +1149,55 @@
 				<th>删除</th>
 			</tr>
 			</thead>
-			<tbody>
-			<tr>
-				<td><input name="cho" type="checkbox" /></td>
-				<td>xxx镜架</td>
-				<td>580.00</td>
-				<td>3</td>
-				<td>1</td>
-				<td>580.00</td>
-				<td>0.00</td>
-				<td>0.2</td>
-				<td>580.00</td>
-				<td>0.00</td>
-				<td>0.00</td>
-				<td>580.00</td>
-				<td>镜架</td>
-				<td><em></em></td>
-			</tr>
-			<tr>
-				<td><input name="cho" type="checkbox" /></td>
-				<td>xxx镜架</td>
-				<td>580.00</td>
-				<td>3</td>
-				<td>1</td>
-				<td>580.00</td>
-				<td>0.00</td>
-				<td>0.2</td>
-				<td>580.00</td>
-				<td>0.00</td>
-				<td>0.00</td>
-				<td>580.00</td>
-				<td>镜架</td>
-				<td><em></em></td>
-			</tr>
-			<tr>
-				<td><input name="cho" type="checkbox" /></td>
-				<td>xxx镜架</td>
-				<td>580.00</td>
-				<td>3</td>
-				<td>1</td>
-				<td>580.00</td>
-				<td>0.00</td>
-				<td>0.2</td>
-				<td>580.00</td>
-				<td>0.00</td>
-				<td>0.00</td>
-				<td>580.00</td>
-				<td>镜架</td>
-				<td><em></em></td>
-			</tr>
+			<tbody id="goods">
+			<!--<tr>-->
+				<!--<td><input name="cho" type="checkbox" /></td>-->
+				<!--<td>xxx镜架</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>3</td>-->
+				<!--<td>1</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.2</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>镜架</td>-->
+				<!--<td ><em onclick="del(this)"></em></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input name="cho" type="checkbox" /></td>-->
+				<!--<td>xxx镜架</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>3</td>-->
+				<!--<td>1</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.2</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>镜架</td>-->
+				<!--<td ><em onclick="del(this)"></em></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input name="cho" type="checkbox" /></td>-->
+				<!--<td>xxx镜架</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>3</td>-->
+				<!--<td>1</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.2</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>580.00</td>-->
+				<!--<td>镜架</td>-->
+				<!--<td><em></em></td>-->
+			<!--</tr>-->
 			</tbody>
 		</table>
 		<div class="cho_tabS_three">
@@ -1208,19 +1208,19 @@
 					<th>删除</th>
 				</tr>
 				</thead>
-				<tbody>
-				<tr>
-					<td>镜盒-型号：0000-标价：10.00</td>
-					<td><em></em></td>
-				</tr>
-				<tr>
-					<td>镜盒-型号：0000-标价：10.00</td>
-					<td><em></em></td>
-				</tr>
-				<tr>
-					<td>镜盒-型号：0000-标价：10.00</td>
-					<td><em></em></td>
-				</tr>
+				<tbody id="zengpin">
+				<!--<tr>-->
+					<!--<td>镜盒-型号：0000-标价：10.00</td>-->
+					<!--<td><em></em></td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>镜盒-型号：0000-标价：10.00</td>-->
+					<!--<td><em></em></td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>镜盒-型号：0000-标价：10.00</td>-->
+					<!--<td><em></em></td>-->
+				<!--</tr>-->
 				</tbody>
 			</table>
 
@@ -1234,28 +1234,28 @@
 					<th>删除</th>
 				</tr>
 				</thead>
-				<tbody>
-				<tr>
-					<td>检查费300元</td>
-					<td>￥300.00</td>
-					<td><input type="text" /></td>
-					<td>￥300.00</td>
-					<td><em></em></td>
-				</tr>
-				<tr>
-					<td>检查费300元</td>
-					<td>￥300.00</td>
-					<td><input type="text" /></td>
-					<td>￥300.00</td>
-					<td><em></em></td>
-				</tr>
-				<tr>
-					<td>检查费300元</td>
-					<td>￥300.00</td>
-					<td><input type="text" /></td>
-					<td>￥300.00</td>
-					<td><em></em></td>
-				</tr>
+				<tbody id="fujia">
+				<!--<tr>-->
+					<!--<td>检查费300元</td>-->
+					<!--<td>￥300.00</td>-->
+					<!--<td><input type="text" /></td>-->
+					<!--<td>￥300.00</td>-->
+					<!--<td><em></em></td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>检查费300元</td>-->
+					<!--<td>￥300.00</td>-->
+					<!--<td><input type="text" /></td>-->
+					<!--<td>￥300.00</td>-->
+					<!--<td><em></em></td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td>检查费300元</td>-->
+					<!--<td>￥300.00</td>-->
+					<!--<td><input type="text" /></td>-->
+					<!--<td>￥300.00</td>-->
+					<!--<td><em></em></td>-->
+				<!--</tr>-->
 				</tbody>
 			</table>
 
@@ -1266,19 +1266,19 @@
 					<th>删除</th>
 				</tr>
 				</thead>
-				<tbody>
-				<tr>
-					<td><input type="text" value="特殊磨片" /></td>
-					<td><em></em></td>
-				</tr>
-				<tr>
-					<td><input type="text" value="特殊磨片" /></td>
-					<td><em></em></td>
-				</tr>
-				<tr>
-					<td><input type="text" value="特殊磨片" /></td>
-					<td><em></em></td>
-				</tr>
+				<tbody id="jiagong">
+				<!--<tr>-->
+					<!--<td><input type="text" value="特殊磨片" /></td>-->
+					<!--<td><em></em></td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td><input type="text" value="特殊磨片" /></td>-->
+					<!--<td><em></em></td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td><input type="text" value="特殊磨片" /></td>-->
+					<!--<td><em></em></td>-->
+				<!--</tr>-->
 				</tbody>
 			</table>
 		</div>
@@ -1297,7 +1297,20 @@
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/storeSales/edit.js"></script>
+<script type="text/javascript" src="/js/appjs/storeSales/store.js"></script>
 <script type="text/javascript">
+    $().ready(function(){
+        //sessionStorage.clear();
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额：0.00</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额：0.00</li>";
+        lis += "<li>应收金额：0.00</li>";
+        lis += "<li>实收金额：0.00</li>";
+        $("#ula").append(lis)
+    });
     laydate.render({
         elem: '#mirrorTime',
         type: 'date'
@@ -1545,6 +1558,9 @@
             sele.style = "display:none;";
 		}
 	}
+    var array=[]
+    var html ="";
+    var price=0.00;
 	function getJingjia(){
         var toIndex = layer.open({
             type : 2,
@@ -1552,10 +1568,62 @@
             maxmin : true,
             shadeClose : false, // 点击遮罩关闭层
             area : [ '800px', '520px' ],
-            content : "/information/store/jingjia/" // iframe的url
+            content : "/information/store/jingjia/",// iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                // var rows = sessionStorage.getItem("row");
+                // alert(rows.length)
+                for (var i=0;i<rows.length;i++){
+                    html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                    html += "<td>"+rows[i].producName+"</td>";
+                    html += "<td>"+rows[i].retailPrice+"</td>";
+                    html += "<td>3</td>";
+                    html += "<td>1</td>";
+                    html += "<td>"+rows[i].retailPrice+"</td>";
+                    html += "<td>1.0000</td>";
+                    html += "<td>0.000</td>";
+                    html += "<td>0.00</td>";
+                    html += "<td>0.00</td>";
+                    html += "<td>0.00</td>";
+                    html += "<td>"+rows[i].retailPrice+"</td>";
+                    html += "<td>镜架</td>";
+                    html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                    $("#goods").append(html);
+                    price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+				}
+
+                $("#ula").empty();
+                var lis="";
+                lis =  "<li>原价金额："+price+"</li>";
+                lis += "<li>折扣金额："+price+"</li>";
+                lis += "<li>优惠金额："+price+"</li>";
+                lis += "<li>抹零金额："+price+"</li>";
+                lis += "<li>应收金额："+price+"</li>";
+                lis += "<li>实收金额："+price+"</li>";
+                $("#ula").append(lis)
+
+                //son_msg就是子页面中的msg数据
+                //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            }
         });
         layer.full(toIndex)
 	}
+
+	function del(obj,prices) {
+        var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+        tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+        price = (parseFloat(price)- parseFloat(prices)).toFixed(2)
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+price+"</li>";
+        lis += "<li>折扣金额："+price+"</li>";
+        lis += "<li>优惠金额："+price+"</li>";
+        lis += "<li>抹零金额："+price+"</li>";
+        lis += "<li>应收金额："+price+"</li>";
+        lis += "<li>实收金额："+price+"</li>";
+        $("#ula").append(lis)
+    }
+	
     function getJingpian(){
         var toIndex = layer.open({
             type : 2,
@@ -1563,7 +1631,41 @@
             maxmin : true,
             shadeClose : false, // 点击遮罩关闭层
             area : [ '800px', '520px' ],
-            content : "/information/store/jingpian/" // iframe的url
+            content : "/information/store/jingpian/", // iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                // var rows = sessionStorage.getItem("row");
+                // alert(rows.length)
+                for (var i=0;i<rows.length;i++){
+                    html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                    html += "<td>"+rows[i].producName+"</td>";
+                    html += "<td>"+rows[i].retailPrice+"</td>";
+                    html += "<td>3</td>";
+                    html += "<td>1</td>";
+                    html += "<td>"+rows[i].retailPrice+"</td>";
+                    html += "<td>1.0000</td>";
+                    html += "<td>0.000</td>";
+                    html += "<td>0.00</td>";
+                    html += "<td>0.00</td>";
+                    html += "<td>0.00</td>";
+                    html += "<td>"+rows[i].retailPrice+"</td>";
+                    html += "<td>镜片</td>";
+                    html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                    $("#goods").append(html);
+                    price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                }
+                $("#ula").empty();
+                var lis="";
+                lis =  "<li>原价金额："+price+"</li>";
+                lis += "<li>折扣金额："+price+"</li>";
+                lis += "<li>优惠金额："+price+"</li>";
+                lis += "<li>抹零金额："+price+"</li>";
+                lis += "<li>应收金额："+price+"</li>";
+                lis += "<li>实收金额："+price+"</li>";
+                $("#ula").append(lis)
+                //son_msg就是子页面中的msg数据
+                //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            }
         });
         layer.full(toIndex)
     }
