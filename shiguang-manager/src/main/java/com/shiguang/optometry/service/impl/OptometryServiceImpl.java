@@ -16,47 +16,59 @@ public class OptometryServiceImpl implements OptometryService {
     private OptometryDao optometryDao;
 
     @Override
-    public OptometryDO get(Long id){
+    public OptometryDO get(Long id) {
         return optometryDao.get(id);
     }
 
     @Override
-    public List<OptometryDO> list(Map<String, Object> map){
+    public List<OptometryDO> list(Map<String, Object> map) {
         return optometryDao.list(map);
     }
 
     @Override
-    public List<OptometryDO> optoList(Map<String, Object> map){
-        return optometryDao.optoList(map);
+    public List<OptometryDO> optoList(Map<String, Object> map) {
+        return optometryDao.optoFrontList(map);
+    }
+
+    //散瞳前
+    @Override
+    public List<OptometryDO> optoFrontList(Map<String, Object> map) {
+        return optometryDao.optoFrontList(map);
+    }
+
+    //散瞳后
+    @Override
+    public List<OptometryDO> optoAfterList(Map<String, Object> map) {
+        return optometryDao.optoAfterList(map);
     }
 
     @Override
-    public int count(Map<String, Object> map){
+    public int count(Map<String, Object> map) {
         return optometryDao.count(map);
     }
 
     @Override
-    public int save(OptometryDO optometry){
+    public int save(OptometryDO optometry) {
         return optometryDao.save(optometry);
     }
 
     @Override
-    public int update(OptometryDO optometry){
+    public int update(OptometryDO optometry) {
         return optometryDao.update(optometry);
     }
 
     @Override
-    public int remove(Long id){
+    public int remove(Long id) {
         return optometryDao.remove(id);
     }
 
     @Override
-    public int batchRemove(Long[] ids){
+    public int batchRemove(Long[] ids) {
         return optometryDao.batchRemove(ids);
     }
 
     @Override
-    public List<ProcessAskDO> processlist(Map<String, Object> map){
+    public List<ProcessAskDO> processlist(Map<String, Object> map) {
         return optometryDao.processlist(map);
     }
 }

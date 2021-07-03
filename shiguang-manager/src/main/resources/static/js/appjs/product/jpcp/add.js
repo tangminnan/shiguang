@@ -68,6 +68,21 @@ function validateRule() {
             },
             batchid: {
                 required: true
+            },
+            tax: {
+                required: true
+            },
+            taxPrice: {
+                required: true
+            },
+            tradePrice: {
+                required: true
+            },
+            transferPrice: {
+                required: true
+            },
+            retailPrice: {
+                required: true
             }
         },
         messages: {
@@ -77,7 +92,7 @@ function validateRule() {
             mfrsid: {
                 required: icon + "请选择制造商"
             },
-           
+
             proid: {
                 required: icon + "请输入商品编号"
             },

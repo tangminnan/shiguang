@@ -52,19 +52,19 @@ public class StoreSalesController {
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
-    String Optometry(){
+    String Optometry() {
         return "storeSales/storeSales";
     }
 
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("information:store:storeSales")
-    public PageUtils list(@RequestParam Map<String, Object> params){
+    public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
 //        List<OptometryDO> optometryList = optometryService.list(query);
 //        int total = optometryService.count(query);
-        query.put("state",1);
+        query.put("state", 1);
         List<MemberDO> memberDOList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);
@@ -73,30 +73,30 @@ public class StoreSalesController {
 
     @GetMapping("/add")
     @RequiresPermissions("information:store:add")
-    String add(Model model){
+    String add(Model model) {
         Map<String, Object> map = new HashMap<>();
-        map.put("roleType",1);
+        map.put("roleType", 1);
         List<UserDO> userDOList = userService.getRoleList(map);
-        model.addAttribute("userDOList",userDOList);
+        model.addAttribute("userDOList", userDOList);
         return "storeSales/add";
     }
 
     @GetMapping("/edit/{cardNumber}")
     @RequiresPermissions("information:store:edit")
-    String edit(@PathVariable("cardNumber") String cardNumber,Model model){
+    String edit(@PathVariable("cardNumber") String cardNumber, Model model) {
         MemberDO memberDO = memberService.getCardNumber(cardNumber);
-        if (memberDO.getSex() == 0){
+        if (memberDO.getSex() == 0) {
             memberDO.setSexx("男");
         } else {
             memberDO.setSexx("女");
         }
-        model.addAttribute("memberDO",memberDO);
+        model.addAttribute("memberDO", memberDO);
         //通过验光师手动输入数据
-        Map<String,Object> maps = new HashMap<>();
-        maps.put("memberInumber",cardNumber);
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("memberInumber", cardNumber);
         List<OptometryDO> list = optometryService.optoList(maps);
         OptometryDO optometryDO = new OptometryDO();
-        if (null != list && list.size() > 0){
+        if (null != list && list.size() > 0) {
             optometryDO.setCylinderRight(list.get(0).getCylinderRight());
             optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
             optometryDO.setAxialRight(list.get(0).getAxialRight());
@@ -106,18 +106,18 @@ public class StoreSalesController {
             optometryDO.setOptometryName(list.get(0).getOptometryName());
             optometryDO.setCreateTime(list.get(0).getCreateTime());
         }
-        model.addAttribute("optometryDO",optometryDO);
+        model.addAttribute("optometryDO", optometryDO);
         Map<String, Object> map = new HashMap<>();
-        map.put("roleType",1);
+        map.put("roleType", 1);
         List<UserDO> userDOList = userService.getRoleList(map);
-        model.addAttribute("userDOList",userDOList);
+        model.addAttribute("userDOList", userDOList);
         List<ProcessAskDO> proList = optometryService.processlist(map);
-        model.addAttribute("proList",proList);
-        List<AdditionalDO> addlist =additionalService.list(map);
-        model.addAttribute("addlist",addlist);
+        model.addAttribute("proList", proList);
+        List<AdditionalDO> addlist = additionalService.list(map);
+        model.addAttribute("addlist", addlist);
         UserDO userDO = ShiroUtils.getUser();
         String storeName = userDO.getStore();
-        model.addAttribute("storeName",storeName);
+        model.addAttribute("storeName", storeName);
         return "storeSales/edit";
     }
 
@@ -126,19 +126,20 @@ public class StoreSalesController {
      */
     @GetMapping("/jingjia")
     @RequiresPermissions("information:store:jingjia")
-    String jingjia(Model model){
+    String jingjia(Model model) {
         return "storeSales/jingjia";
     }
 
     /**
      * 查询镜架
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/jingjialist")
     @RequiresPermissions("information:store:jingjia")
-    public PageUtils jingjialist(@RequestParam Map<String, Object> params){
+    public PageUtils jingjialist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         List<ProducaDO> producaDOList = producaService.listmateria(query);
@@ -152,29 +153,30 @@ public class StoreSalesController {
      */
     @GetMapping("/jingpian")
     @RequiresPermissions("information:store:jingpian")
-    String jingpian(Model model){
+    String jingpian(Model model) {
         return "storeSales/jingpian";
     }
 
     /**
      * 查询镜片
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/jingpianlist")
     @RequiresPermissions("information:store:jingpian")
-    public PageUtils jingpianlist(@RequestParam Map<String, Object> params){
+    public PageUtils jingpianlist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         PageUtils pageUtils = null;
-        if (null != params.get("dzType")){
+        if (null != params.get("dzType")) {
             String dzType = params.get("dzType").toString();
-            if ("0".equals(dzType)){
+            if ("0".equals(dzType)) {
                 List<JpcpDO> jpcpDOList = jpcpService.listCp(query);
                 int total = jpcpService.countCp(query);
-                 pageUtils = new PageUtils(jpcpDOList, total);
-            } else if ("1".equals(dzType)){
+                pageUtils = new PageUtils(jpcpDOList, total);
+            } else if ("1".equals(dzType)) {
                 List<JpdzDO> jpdzDOList = jpdzService.listDz(query);
                 int total = jpdzService.countDz(query);
                 pageUtils = new PageUtils(jpdzDOList, total);
@@ -272,10 +274,10 @@ public class StoreSalesController {
      */
     @ResponseBody
     @RequestMapping(value = "/select")
-    public MemberDO remove(String cardMember){
+    public MemberDO remove(String cardMember) {
         MemberDO memberDO = memberService.getCardNumber(cardMember);
-        if (null != memberDO){
-            if (memberDO.getSex() == 0){
+        if (null != memberDO) {
+            if (memberDO.getSex() == 0) {
                 memberDO.setSexx("男");
             } else {
                 memberDO.setSexx("女");
@@ -292,19 +294,20 @@ public class StoreSalesController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("information:store:add")
-    public R save( OptometryDO optometry){
-        if(optometryService.save(optometry)>0){
+    public R save(OptometryDO optometry) {
+        if (optometryService.save(optometry) > 0) {
             return R.ok();
         }
         return R.error();
     }
+
     /**
      * 修改
      */
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("information:store:edit")
-    public R update( OptometryDO optometry){
+    public R update(OptometryDO optometry) {
         optometryService.update(optometry);
         return R.ok();
     }
@@ -312,11 +315,11 @@ public class StoreSalesController {
     /**
      * 删除
      */
-    @PostMapping( "/remove")
+    @PostMapping("/remove")
     @ResponseBody
     @RequiresPermissions("information:store:remove")
-    public R remove(Long id){
-        if(optometryService.remove(id)>0){
+    public R remove(Long id) {
+        if (optometryService.remove(id) > 0) {
             return R.ok();
         }
         return R.error();
@@ -325,10 +328,10 @@ public class StoreSalesController {
     /**
      * 删除
      */
-    @PostMapping( "/batchRemove")
+    @PostMapping("/batchRemove")
     @ResponseBody
     @RequiresPermissions("information:store:batchRemove")
-    public R remove(@RequestParam("ids[]") Long[] ids){
+    public R remove(@RequestParam("ids[]") Long[] ids) {
         optometryService.batchRemove(ids);
         return R.ok();
     }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.product.dao.OlddegreesDao">
+
+	<select id="get" resultType="com.shiguang.product.domain.OlddegreesDO">
+		select `old_id`,`degrees` from a_olddegrees where old_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.product.domain.OlddegreesDO">
+		select `old_id`,`degrees` from a_olddegrees
+        <where>  
+		  		  <if test="oldId != null and oldId != ''"> and old_id = #{oldId} </if>
+		  		  <if test="degrees != null and degrees != ''"> and degrees = #{degrees} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by old_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from a_olddegrees
+		 <where>  
+		  		  <if test="oldId != null and oldId != ''"> and old_id = #{oldId} </if>
+		  		  <if test="degrees != null and degrees != ''"> and degrees = #{degrees} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.product.domain.OlddegreesDO" useGeneratedKeys="true" keyProperty="oldId">
+		insert into a_olddegrees
+		(
+			`degrees`
+		)
+		values
+		(
+			#{degrees}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.product.domain.OlddegreesDO">
+		update a_olddegrees 
+		<set>
+			<if test="degrees != null">`degrees` = #{degrees}</if>
+		</set>
+		where old_id = #{oldId}
+	</update>
+	
+	<delete id="remove">
+		delete from a_olddegrees where old_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from a_olddegrees where old_id in 
+		<foreach item="oldId" collection="array" open="(" separator="," close=")">
+			#{oldId}
+		</foreach>
+	</delete>
+
+</mapper>

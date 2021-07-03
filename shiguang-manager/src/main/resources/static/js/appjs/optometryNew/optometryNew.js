@@ -112,7 +112,7 @@ function add() {
 function edit(cardNumber) {
     var toIndex = layer.open({
         type: 2,
-        title: '电脑验光',
+        title: '检查',
         maxmin: true,
         shadeClose: false, // 点击遮罩关闭层
         area: ['1000px', '520px'],
