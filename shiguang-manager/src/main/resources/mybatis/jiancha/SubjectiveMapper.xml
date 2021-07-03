@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.SubjectiveDao">
+
+    <select id="get" resultType="com.shiguang.jiancha.domain.SubjectiveDO">
+		select `id`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`dva_right`,`dva_left`,`nva_right`,`nva_left`,
+		`prism_right`,`prism_left`,`basal_right`,`basal_left`,`add_right`,`add_left`,`far_right`,`far_left`,`near_right`,`near_left`,
+		`ptometry_number`,`optometry_name`,`create_time` from jc_subjective where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.jiancha.domain.SubjectiveDO">
+        select
+        `id`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`dva_right`,`dva_left`,`nva_right`,`nva_left`,
+        `prism_right`,`prism_left`,`basal_right`,`basal_left`,`add_right`,`add_left`,`far_right`,`far_left`,`near_right`,`near_left`,
+        `ptometry_number`,`optometry_name`,`create_time` from jc_subjective
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
+            <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
+            <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
+            <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
+            <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
+            <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
+            <if test="dvaRight != null and dvaRight != ''">and dva_right = #{dvaRight}</if>
+            <if test="dvaLeft != null and dvaLeft != ''">and dva_left = #{dvaLeft}</if>
+            <if test="nvaRight != null and nvaRight != ''">and nva_right = #{nvaRight}</if>
+            <if test="nvaLeft != null and nvaLeft != ''">and nva_left = #{nvaLeft}</if>
+            <if test="prismRight != null and prismRight != ''">and prism_right = #{prismRight}</if>
+            <if test="prismLeft != null and prismLeft != ''">and prism_left = #{prismLeft}</if>
+            <if test="basalRight != null and basalRight != ''">and basal_right = #{basalRight}</if>
+            <if test="basalLeft != null and basalLeft != ''">and basal_left = #{basalLeft}</if>
+            <if test="addRight != null and addRight != ''">and add_right = #{addRight}</if>
+            <if test="addLeft != null and addLeft != ''">and add_left = #{addLeft}</if>
+            <if test="farRight != null and farRight != ''">and far_right = #{farRight}</if>
+            <if test="farLeft != null and farLeft != ''">and far_left = #{farLeft}</if>
+            <if test="nearRight != null and nearRight != ''">and near_right = #{nearRight}</if>
+            <if test="nearLeft != null and nearLeft != ''">and near_left = #{nearLeft}</if>
+            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
+            <if test="optometryName != null and optometryName != ''">and optometry_name = #{optometryName}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from jc_subjective
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
+            <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
+            <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
+            <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
+            <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
+            <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
+            <if test="dvaRight != null and dvaRight != ''">and dva_right = #{dvaRight}</if>
+            <if test="dvaLeft != null and dvaLeft != ''">and dva_left = #{dvaLeft}</if>
+            <if test="nvaRight != null and nvaRight != ''">and nva_right = #{nvaRight}</if>
+            <if test="nvaLeft != null and nvaLeft != ''">and nva_left = #{nvaLeft}</if>
+            <if test="prismRight != null and prismRight != ''">and prism_right = #{prismRight}</if>
+            <if test="prismLeft != null and prismLeft != ''">and prism_left = #{prismLeft}</if>
+            <if test="basalRight != null and basalRight != ''">and basal_right = #{basalRight}</if>
+            <if test="basalLeft != null and basalLeft != ''">and basal_left = #{basalLeft}</if>
+            <if test="addRight != null and addRight != ''">and add_right = #{addRight}</if>
+            <if test="addLeft != null and addLeft != ''">and add_left = #{addLeft}</if>
+            <if test="farRight != null and farRight != ''">and far_right = #{farRight}</if>
+            <if test="farLeft != null and farLeft != ''">and far_left = #{farLeft}</if>
+            <if test="nearRight != null and nearRight != ''">and near_right = #{nearRight}</if>
+            <if test="nearLeft != null and nearLeft != ''">and near_left = #{nearLeft}</if>
+            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
+            <if test="optometryName != null and optometryName != ''">and optometry_name = #{optometryName}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.jiancha.domain.SubjectiveDO" useGeneratedKeys="true" keyProperty="id">
+		insert into jc_subjective
+		(
+			`sphere_right`, 
+			`sphere_left`, 
+			`cylinder_right`, 
+			`cylinder_left`, 
+			`axial_right`, 
+			`axial_left`, 
+			`dva_right`, 
+			`dva_left`, 
+			`nva_right`, 
+			`nva_left`, 
+			`prism_right`, 
+			`prism_left`, 
+			`basal_right`,
+			`basal_left`,
+			`add_right`, 
+			`add_left`, 
+			`far_right`,
+			`far_left`,
+			`near_right`, 
+			`near_left`, 
+			`ptometry_number`, 
+			`optometry_name`, 
+			`create_time`
+		)
+		values
+		(
+			#{sphereRight}, 
+			#{sphereLeft}, 
+			#{cylinderRight}, 
+			#{cylinderLeft}, 
+			#{axialRight}, 
+			#{axialLeft}, 
+			#{dvaRight}, 
+			#{dvaLeft}, 
+			#{nvaRight}, 
+			#{nvaLeft}, 
+			#{prismRight}, 
+			#{prismLeft}, 
+			#{basalRight},
+			#{basalLeft},
+			#{addRight}, 
+			#{addLeft}, 
+			#{farRight},
+			#{farLeft},
+			#{nearRight}, 
+			#{nearLeft}, 
+			#{ptometryNumber}, 
+			#{optometryName}, 
+			#{createTime}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.jiancha.domain.SubjectiveDO">
+        update jc_subjective
+        <set>
+            <if test="sphereRight != null">`sphere_right` = #{sphereRight},</if>
+            <if test="sphereLeft != null">`sphere_left` = #{sphereLeft},</if>
+            <if test="cylinderRight != null">`cylinder_right` = #{cylinderRight},</if>
+            <if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft},</if>
+            <if test="axialRight != null">`axial_right` = #{axialRight},</if>
+            <if test="axialLeft != null">`axial_left` = #{axialLeft},</if>
+            <if test="dvaRight != null">`dva_right` = #{dvaRight},</if>
+            <if test="dvaLeft != null">`dva_left` = #{dvaLeft},</if>
+            <if test="nvaRight != null">`nva_right` = #{nvaRight},</if>
+            <if test="nvaLeft != null">`nva_left` = #{nvaLeft},</if>
+            <if test="prismRight != null">`prism_right` = #{prismRight},</if>
+            <if test="prismLeft != null">`prism_left` = #{prismLeft},</if>
+            <if test="basalRight != null">`basal_right` = #{basalRight},
+            </if>
+            <if test="basalLeft != null">`basal_left` = #{basalLeft},
+            </if>
+            <if test="addRight != null">`add_right` = #{addRight},</if>
+            <if test="addLeft != null">`add_left` = #{addLeft},</if>
+            <if test="farRight != null">`far_right` = #{farRight},
+            </if>
+            <if test="farLeft != null">`far_left` = #{farLeft},
+            </if>
+            <if test="nearRight != null">`near_right` = #{nearRight},</if>
+            <if test="nearLeft != null">`near_left` = #{nearLeft},</if>
+            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber},</if>
+            <if test="optometryName != null">`optometry_name` = #{optometryName},</if>
+            <if test="createTime != null">`create_time` = #{createTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from jc_subjective where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from jc_subjective where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

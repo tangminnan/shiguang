@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,9 +91,12 @@ public class OptometryController {
     @PostMapping("/save")
     @RequiresPermissions("information:optometry:add")
     public R save(OptometryDO optometry) {
+        //保存创建时间
+//        optometry.setCreateTime(new Date());
         if (optometryService.save(optometry) > 0) {
             return R.ok();
         }
+
         return R.error();
     }
 
@@ -105,6 +107,7 @@ public class OptometryController {
     @RequestMapping("/update")
     @RequiresPermissions("information:optometry:edit")
     public R update(OptometryDO optometry) {
+
         optometryService.update(optometry);
         return R.ok();
     }

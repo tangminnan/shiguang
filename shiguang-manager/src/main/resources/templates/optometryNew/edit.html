@@ -164,12 +164,16 @@
                 <td class="w170">&nbsp;</td>
                 <td>是否散瞳</td>
                 <!--<td colspan="2">-->
-                <!--<label for="yes"><input name="sanT" type="radio" id="yes" > 是</label>-->
-                <!--<label for="no"><input name="sanT" type="radio" id="no"> 否</label>-->
+                <!--<label><input name="mydriasis" th:field="*{optometryAfterDO.mydriasis}"  type="radio" value="1">-->
+                <!--是</label>-->
+                <!--<label><input name="mydriasis" th:field="*{optometryAfterDO.mydriasis}" type="radio" value="0">-->
+                <!--否</label>-->
                 <!--</td>-->
                 <td colspan="2">
-                    <label><input name="mydriasis" th:field="*{optometryDO.mydriasis}" type="radio" value="0"> 是</label>
-                    <label><input name="mydriasis" th:field="*{optometryDO.mydriasis}" type="radio" value="1"> 否</label>
+                    <label><input id="xz1" name="mydriasis" th:value="${optometryAfterDO.mydriasis}" type="radio">
+                        是</label>
+                    <label><input id="xz2" name="mydriasis" th:value="${optometryAfterDO.mydriasis}" type="radio">
+                        否</label>
                 </td>
                 <td>散瞳用药</td>
                 <td colspan="3">
@@ -200,24 +204,46 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input id="sphereRight" name="sphereRight" th:value="${optometryDO.sphereRight}" type="text"/></td>
-                <td><input id="cylinderRight" name="cylinderRight" th:value="${optometryDO.cylinderRight}" type="text"/>
+                <td>
+                    <input name="sphereRight" th:value="${optometryFrontDO.sphereRight}" type="text"/>
                 </td>
-                <td><input id="axialRight" name="axialRight" th:value="${optometryDO.axialRight}" type="text"/></td>
+                <td>
+                    <input name="cylinderRight" th:value="${optometryFrontDO.cylinderRight}" type="text"/>
+                </td>
+                <td>
+                    <input name="axialRight" th:value="${optometryFrontDO.axialRight}" type="text"/>
+                </td>
                 <td rowspan="2">散瞳后</td>
-                <td><input type="text"/></td>
-                <td><input type="text"/></td>
-                <td><input type="text"/></td>
+                <td>
+                    <input name="sphereRight" th:value="${optometryAfterDO.sphereRight}" type="text"/>
+                </td>
+                <td>
+                    <input name="cylinderRight" th:value="${optometryAfterDO.cylinderRight}" type="text"/>
+                </td>
+                <td>
+                    <input name="axialRight" th:value="${optometryAfterDO.axialRight}" type="text"/>
+                </td>
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input id="sphereLeft" name="sphereLeft" th:value="${optometryDO.sphereLeft}" type="text"/></td>
-                <td><input id="cylinderLeft" name="cylinderLeft" th:value="${optometryDO.cylinderLeft}" type="text"/>
+                <td>
+                    <input name="sphereLeft" th:value="${optometryFrontDO.sphereLeft}" type="text"/>
                 </td>
-                <td><input id="axialLeft" name="axialLeft" th:value="${optometryDO.axialLeft}" type="text"/></td>
-                <td><input type="text"/></td>
-                <td><input type="text"/></td>
-                <td><input type="text"/></td>
+                <td>
+                    <input name="cylinderLeft" th:value="${optometryFrontDO.cylinderLeft}" type="text"/>
+                </td>
+                <td>
+                    <input name="axialLeft" th:value="${optometryFrontDO.axialLeft}" type="text"/>
+                </td>
+                <td>
+                    <input name="sphereLeft" th:value="${optometryAfterDO.sphereLeft}" type="text"/>
+                </td>
+                <td>
+                    <input name="cylinderLeft" th:value="${optometryAfterDO.cylinderLeft}" type="text"/>
+                </td>
+                <td>
+                    <input name="axialLeft" th:value="${optometryAfterDO.axialLeft}" type="text"/>
+                </td>
             </tr>
             <tr>
                 <td></td>
@@ -465,7 +491,7 @@
             <input type="button" value="读取设备接口"/>
         </div>
         <div class="fr">
-            <input type="button" value="保存"/>
+            <input type="button" value="保存" onclick="add()"/>
         </div>
     </div>
 </div>
@@ -1564,6 +1590,26 @@
         $("#jianchajielun").addClass("none")
         $("#quguangjiancha").removeClass("none")
     })
+
+
+    //————是否散瞳判读选中
+    //
+    //
+    //
+    // ——————————
+    var choices = $("#xz1").val();
+    // alert(choices + "是");
+    // var choices2 = $("#xz2").val();
+    // alert(choices2 + "否");
+    if (choices == "1") {
+        document.getElementById("xz1").checked = "checked";
+    } else {
+        document.getElementById("xz2").checked = "checked";
+    }
+
+    function add() {
+
+    }
 </script>
 
 </html>
