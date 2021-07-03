@@ -1,5 +1,5 @@
 shaicha:
-  uploadPath: F:/www/uploaded_files/
+  uploadPath: /uploaded_files/
   poiword: /www/poiword/
 logging:
   level:
