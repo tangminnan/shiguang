@@ -1,6 +1,7 @@
 package com.shiguang.optometryNEW.controller;
 
 import com.shiguang.common.utils.*;
+import com.shiguang.jiancha.service.SubjectiveService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.optometry.domain.OptometryDO;
@@ -27,6 +28,9 @@ public class OptometryNewController {
     private ResultDiopterService resultDiopterService;
     @Autowired
     private MemberService memberService;
+    //检查主观验光
+    @Autowired
+    private SubjectiveService subjectiveService;
 
     @GetMapping()
     @RequiresPermissions("information:optometryNew:optometryNew")
@@ -68,22 +72,39 @@ public class OptometryNewController {
         model.addAttribute("memberDO", memberDO);
 //————电脑验光————
         Map<String, Object> map = new HashMap<>();
-
-        List<OptometryDO> list = optometryService.optoFrontList(map);
-        OptometryDO optometryDO = new OptometryDO();
-        if (list.size() > 0) {
-            optometryDO.setMydriasis(list.get(0).getMydriasis());
-            optometryDO.setCylinderRight(list.get(0).getCylinderRight());
-            optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
-            optometryDO.setAxialRight(list.get(0).getAxialRight());
-            optometryDO.setAxialLeft(list.get(0).getAxialLeft());
-            optometryDO.setSphereRight(list.get(0).getSphereRight());
-            optometryDO.setSphereLeft(list.get(0).getSphereLeft());
-            optometryDO.setOptometryName(list.get(0).getOptometryName());
-            optometryDO.setPtometryNumber(list.get(0).getPtometryNumber());
+        //散瞳前
+        List<OptometryDO> list1 = optometryService.optoFrontList(map);
+        OptometryDO optometryFrontDO = new OptometryDO();
+        if (list1.size() > 0) {
+            optometryFrontDO.setCylinderRight(list1.get(0).getCylinderRight());
+            optometryFrontDO.setCylinderLeft(list1.get(0).getCylinderLeft());
+            optometryFrontDO.setAxialRight(list1.get(0).getAxialRight());
+            optometryFrontDO.setAxialLeft(list1.get(0).getAxialLeft());
+            optometryFrontDO.setSphereRight(list1.get(0).getSphereRight());
+            optometryFrontDO.setSphereLeft(list1.get(0).getSphereLeft());
+            optometryFrontDO.setOptometryName(list1.get(0).getOptometryName());
+            optometryFrontDO.setPtometryNumber(list1.get(0).getPtometryNumber());
 
         }
-        model.addAttribute("optometryDO", optometryDO);
+        model.addAttribute("optometryFrontDO", optometryFrontDO);
+
+        //散瞳后
+        List<OptometryDO> list2 = optometryService.optoAfterList(map);
+        OptometryDO optometryAfterDO = new OptometryDO();
+        if (list2.size() > 0) {
+            optometryAfterDO.setMydriasis(list2.get(0).getMydriasis());
+            optometryAfterDO.setCylinderRight(list2.get(0).getCylinderRight());
+            optometryAfterDO.setCylinderLeft(list2.get(0).getCylinderLeft());
+            optometryAfterDO.setAxialRight(list2.get(0).getAxialRight());
+            optometryAfterDO.setAxialLeft(list2.get(0).getAxialLeft());
+            optometryAfterDO.setSphereRight(list2.get(0).getSphereRight());
+            optometryAfterDO.setSphereLeft(list2.get(0).getSphereLeft());
+            optometryAfterDO.setOptometryName(list2.get(0).getOptometryName());
+            optometryAfterDO.setPtometryNumber(list2.get(0).getPtometryNumber());
+
+        }
+        model.addAttribute("optometryAfterDO", optometryAfterDO);
+
 //———生成验光号————
         Long uuid = GuuidUtil.getUUID();
         String uuidstr = "Y" + uuid.toString();
@@ -106,6 +127,7 @@ public class OptometryNewController {
     @PostMapping("/save")
     @RequiresPermissions("information:optometryNew:add")
     public R save(OptometryDO optometry) {
+
         if (optometryService.save(optometry) > 0) {
             return R.ok();
         }

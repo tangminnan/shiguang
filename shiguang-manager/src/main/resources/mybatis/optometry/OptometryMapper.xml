@@ -141,7 +141,7 @@
         `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number`
         from optometry
         where mydriasis=0
-
+        order by id desc
     </select>
     <!--散瞳后-->
     <select id="optoAfterList" resultType="com.shiguang.optometry.domain.OptometryDO">
@@ -149,7 +149,7 @@
         `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number`
         from optometry
         where mydriasis=1
-
+        order by id desc
     </select>
     <select id="processlist" resultType="com.shiguang.optometry.domain.ProcessAskDO">
         select `id`,`process_num`,`process_name` from process_ask

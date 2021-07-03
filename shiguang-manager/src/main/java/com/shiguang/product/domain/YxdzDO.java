@@ -82,7 +82,7 @@ public class YxdzDO implements Serializable {
     //效期提醒上限（有效期前【】天提醒进入滞销状态）
     private Integer upday;
     //效期提醒下限（有效期前【】天提醒进入即将失效状态）
-    private Double downday;
+    private Integer downday;
     //颜色
     private String color;
     //隐形类别id
@@ -527,14 +527,14 @@ public class YxdzDO implements Serializable {
     /**
      * 设置：效期提醒下限（有效期前【】天提醒进入即将失效状态）
      */
-    public void setDownday(Double downday) {
+    public void setDownday(Integer downday) {
         this.downday = downday;
     }
 
     /**
      * 获取：效期提醒下限（有效期前【】天提醒进入即将失效状态）
      */
-    public Double getDownday() {
+    public Integer getDownday() {
         return downday;
     }
 
