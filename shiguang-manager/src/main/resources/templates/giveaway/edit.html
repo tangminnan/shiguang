@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${giveaway.id}"  type="hidden">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">商品名称：</label>
+								<div class="col-sm-8">
+									<input id="giveName" name="giveName" th:value="${giveaway.giveName}" class="form-control" disabled type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">商品代码：</label>
+								<div class="col-sm-8">
+									<input id="giveNumber" name="giveNumber" th:value="${giveaway.giveNumber}" disabled class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">赠品简称：</label>
+								<div class="col-sm-8">
+									<input id="giveJc" name="giveJc" th:value="${giveaway.giveJc}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">活动门店：</label>
+								<div class="col-sm-8">
+									<input id="stores" disabled name="stores" th:value="${giveaway.stores}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">赠品类型：</label>
+								<div class="col-sm-8">
+									<input id="giveType" name="giveType" th:value="${giveaway.giveType}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/giveaway/edit.js">
+	</script>
+</body>
+</html>

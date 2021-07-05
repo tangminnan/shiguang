@@ -40,6 +40,8 @@ public class ProducaDO implements Serializable {
 	private String producColor;
 	//计量单位
 	private Integer unitid;
+	//计量单位
+	private String unitName;
 	//批号管理(1是、2否)
 	private Integer batchid;
 	//镜架尺寸
@@ -216,6 +218,18 @@ public class ProducaDO implements Serializable {
 	 */
 	public Integer getUnitid() {
 		return unitid;
+	}
+	/**
+	 * 设置：计量单位
+	 */
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
+	}
+	/**
+	 * 获取：计量单位
+	 */
+	public String getUnitName() {
+		return unitName;
 	}
 	/**
 	 * 设置：批号管理(1是、2否)

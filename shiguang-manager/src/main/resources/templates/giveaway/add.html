@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">商品名称：</label>
+								<div class="col-sm-8">
+									<input id="giveName" name="giveName" type="text" readonly>
+									<input type="button" onclick="addGoods()" value="单品添加商品">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">商品代码：</label>
+								<div class="col-sm-8">
+									<input id="giveNumber" name="giveNumber" type="text" readonly>
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">赠品简称：</label>
+								<div class="col-sm-8">
+									<input id="giveJc" name="giveJc"  type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">活动门店：</label>
+								<div class="col-sm-8">
+									<select name="storesstr" id="storesstr" multiple class="selectpicker form-control" onchange="changeDepart()">
+									<option th:each="ls:${departmentDOList}"
+											th:text="${ls.departName}"
+											th:value="${ls.departName}"></option>
+								</select>
+									<input id="stores" name="stores" class="form-control" type="hidden">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">赠品类型：</label>
+								<div class="col-sm-8">
+									<select name="giveType" id="giveType" class="form-control" data-actions-box="false" data-size="5">
+										<option></option>
+										<option th:each="ls:${giftDOList}"
+												th:text="${ls.giftName}"
+												th:value="${ls.giftNum}"></option>
+									</select>
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/giveaway/add.js">
+	</script>
+<script type="text/javascript">
+    function changeDepart() {
+        var interester = [];
+        var obj = document.getElementById("storesstr");
+        for (var i = 0; i < obj.options.length; i++) {
+            if (obj.options[i].selected) {
+                interester.push(obj.options[i].value);// 收集选中项
+            }
+        }
+        $("#stores").val(interester);
+    }
+    function addGoods(){
+        var toIndex = layer.open({
+            type : 2,
+            title : '商品信息',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/giveaway/goods/",// iframe的url
+            cancel: function(index, layero){
+                var data = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                for (var i=0;i<data.length;i++){
+                    //$("input[name='giveName']").val(data[i].producName)
+                    $("#giveName").val(data[i].producName)
+                    $("#giveNumber").val(data[i].producNum)
+				}
+
+                //son_msg就是子页面中的msg数据
+                //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            }
+        });
+        layer.full(toIndex)
+	}
+</script>
+</body>
+</html>

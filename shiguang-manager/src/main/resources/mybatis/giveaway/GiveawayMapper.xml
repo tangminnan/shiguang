@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.giveaway.dao.GiveawayDao">
+
+    <select id="get" resultType="com.shiguang.giveaway.domain.GiveawayDO">
+		select `id`,`give_number`,`give_name`,`give_jc`,`stores`,`give_type` from giveaway where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.giveaway.domain.GiveawayDO">
+        select gw.`id`,gw.`give_number`,gw.`give_name`,gw.`give_jc`,gw.`stores`,gw.`give_type`,gi.`gift_name` from giveaway gw
+        left join gift gi on gi.gift_num = gw.give_type
+        <where>
+            <if test="id != null and id != ''"> and gw.id = #{id} </if>
+            <if test="giveNumber != null and giveNumber != ''"> and gw.give_number = #{giveNumber} </if>
+            <if test="giveName != null and giveName != ''"> and gw.give_name = #{giveName} </if>
+            <if test="giveJc != null and giveJc != ''"> and gw.give_jc = #{giveJc} </if>
+            <if test="stores != null and stores != ''"> and gw.stores = #{stores} </if>
+            <if test="giveType != null and giveType != ''"> and gw.give_type = #{giveType} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from giveaway
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="giveNumber != null and giveNumber != ''"> and give_number = #{giveNumber} </if>
+            <if test="giveName != null and giveName != ''"> and give_name = #{giveName} </if>
+            <if test="giveJc != null and giveJc != ''"> and give_jc = #{giveJc} </if>
+            <if test="stores != null and stores != ''"> and stores = #{stores} </if>
+            <if test="giveType != null and giveType != ''"> and give_type = #{giveType} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.giveaway.domain.GiveawayDO" useGeneratedKeys="true" keyProperty="id">
+		insert into giveaway
+		(
+			`give_number`,
+			`give_name`,
+			`give_jc`,
+			`stores`,
+			`give_type`
+		)
+		values
+		(
+			#{giveNumber},
+			#{giveName},
+			#{giveJc},
+			#{stores},
+			#{giveType}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.giveaway.domain.GiveawayDO">
+        update giveaway
+        <set>
+            <if test="giveNumber != null">`give_number` = #{giveNumber}, </if>
+            <if test="giveName != null">`give_name` = #{giveName}, </if>
+            <if test="giveJc != null">`give_jc` = #{giveJc}, </if>
+            <if test="stores != null">`stores` = #{stores}, </if>
+            <if test="giveType != null">`give_type` = #{giveType}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from giveaway where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from giveaway where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 联合查询商品信息 -->
+    <select id="findGoods" resultType="com.shiguang.product.domain.ProducaDO">
+      select p.produc_num,p.produc_name,p.size,u.unitname,p.retail_price
+         from aa_produca p left join c_unit u on u.unitid = p.unitid
+        <where>
+            <if test="num != null and num != ''">and 1=#{num}</if>
+        </where>
+        UNION
+
+        select jc.produc_num,jc.produc_name,'' as size,u.unitname,jc.retail_price
+        from aa_jpcp jc LEFT JOIN c_unit u on u.unitid = jc.unitid
+        <where>
+            <if test="num != null and num != ''">and 2=#{num}</if>
+        </where>
+        UNION
+
+        select jd.produc_num,jd.produc_name,'' as size,u.unitname,jd.retail_price
+        from aa_jpdz jd LEFT JOIN c_unit u on u.unitid = jd.unitid
+        <where>
+            <if test="num != null and num != ''">and 2=#{num}</if>
+        </where>
+        UNION
+
+        select pa.produc_num,pa.produc_name,'' as size,u.unitname,pa.retail_price
+        from aa_parts pa LEFT JOIN c_unit u on u.unitid = pa.unitid
+        <where>
+            <if test="num != null and num != ''">and 3=#{num}</if>
+        </where>
+        UNION
+
+        select yc.produc_num,yc.produc_name,'' as size,u.unitname,yc.retail_price
+        from aa_yxcp yc LEFT JOIN c_unit u on u.unitid = yc.unitid
+        <where>
+            <if test="num != null and num != ''">and 4=#{num}</if>
+        </where>
+        UNION
+
+        select yd.produc_num,yd.produc_name,'' as size,u.unitname,yd.retail_price
+        from aa_yxdz yd LEFT JOIN c_unit u on u.unitid = yd.unitid
+        <where>
+            <if test="num != null and num != ''">and 4=#{num}</if>
+        </where>
+        UNION
+
+        select h.produc_num,h.produc_name,'' as size,u.unitname,h.retail_price
+        from aa_hly h LEFT JOIN c_unit u on u.unitid = h.unitid
+        <where>
+            <if test="num != null and num != ''">and 5=#{num}</if>
+        </where>
+        UNION
+
+        select t.produc_num,t.produc_name,'' as size,u.unitname,t.retail_price
+        from aa_tyj t LEFT JOIN c_unit u on u.unitid = t.unitid
+        <where>
+            <if test="num != null and num != ''">and 6=#{num}</if>
+        </where>
+        UNION
+
+        select ol.produc_num,ol.produc_name,ol.size,u.unitname,ol.retail_price
+        from aa_oldlens ol LEFT JOIN c_unit u on u.unitid = ol.unitid
+        <where>
+            <if test="num != null and num != ''">and 7=#{num}</if>
+        </where>
+        UNION
+
+        select hc.produc_num,hc.produc_name,'' as size,u.unitname,hc.retail_price
+        from aa_hc hc LEFT JOIN c_unit u on u.unitid = hc.unitid
+        <where>
+            <if test="num != null and num != ''">and 8=#{num}</if>
+        </where>
+        UNION
+
+        select sh.produc_num,sh.produc_name,'' as size,u.unitname,sh.retail_price
+        from aa_shiguang sh LEFT JOIN c_unit u on u.unitid = sh.unitid
+        <where>
+            <if test="num != null and num != ''">and 9=#{num}</if>
+        </where>
+    </select>
+    <select id="coungGoods" resultType="int">
+        select count(*) from (
+        select p.produc_num,p.produc_name,p.size,u.unitname,p.retail_price
+        from aa_produca p left join c_unit u on u.unitid = p.unitid
+        <where>
+            <if test="num != null and num != ''">and 1=#{num}</if>
+        </where>
+        UNION
+
+        select jc.produc_num,jc.produc_name,'' as size,u.unitname,jc.retail_price
+        from aa_jpcp jc LEFT JOIN c_unit u on u.unitid = jc.unitid
+        <where>
+            <if test="num != null and num != ''">and 2=#{num}</if>
+        </where>
+        UNION
+
+        select jd.produc_num,jd.produc_name,'' as size,u.unitname,jd.retail_price
+        from aa_jpdz jd LEFT JOIN c_unit u on u.unitid = jd.unitid
+        <where>
+            <if test="num != null and num != ''">and 2=#{num}</if>
+        </where>
+        UNION
+
+        select pa.produc_num,pa.produc_name,'' as size,u.unitname,pa.retail_price
+        from aa_parts pa LEFT JOIN c_unit u on u.unitid = pa.unitid
+        <where>
+            <if test="num != null and num != ''">and 3=#{num}</if>
+        </where>
+        UNION
+
+        select yc.produc_num,yc.produc_name,'' as size,u.unitname,yc.retail_price
+        from aa_yxcp yc LEFT JOIN c_unit u on u.unitid = yc.unitid
+        <where>
+            <if test="num != null and num != ''">and 4=#{num}</if>
+        </where>
+        UNION
+
+        select yd.produc_num,yd.produc_name,'' as size,u.unitname,yd.retail_price
+        from aa_yxdz yd LEFT JOIN c_unit u on u.unitid = yd.unitid
+        <where>
+            <if test="num != null and num != ''">and 4=#{num}</if>
+        </where>
+        UNION
+
+        select h.produc_num,h.produc_name,'' as size,u.unitname,h.retail_price
+        from aa_hly h LEFT JOIN c_unit u on u.unitid = h.unitid
+        <where>
+            <if test="num != null and num != ''">and 5=#{num}</if>
+        </where>
+        UNION
+
+        select t.produc_num,t.produc_name,'' as size,u.unitname,t.retail_price
+        from aa_tyj t LEFT JOIN c_unit u on u.unitid = t.unitid
+        <where>
+            <if test="num != null and num != ''">and 6=#{num}</if>
+        </where>
+        UNION
+
+        select ol.produc_num,ol.produc_name,ol.size,u.unitname,ol.retail_price
+        from aa_oldlens ol LEFT JOIN c_unit u on u.unitid = ol.unitid
+        <where>
+            <if test="num != null and num != ''">and 7=#{num}</if>
+        </where>
+        UNION
+
+        select hc.produc_num,hc.produc_name,'' as size,u.unitname,hc.retail_price
+        from aa_hc hc LEFT JOIN c_unit u on u.unitid = hc.unitid
+        <where>
+            <if test="num != null and num != ''">and 8=#{num}</if>
+        </where>
+        UNION
+
+        select sh.produc_num,sh.produc_name,'' as size,u.unitname,sh.retail_price
+        from aa_shiguang sh LEFT JOIN c_unit u on u.unitid = sh.unitid
+        <where>
+            <if test="num != null and num != ''">and 9=#{num}</if>
+        </where>
+        )a
+    </select>
+    <!-- 查询赠品类型 -->
+    <select id="findGiftList" resultType="com.shiguang.giveaway.domain.GiftDO">
+        select `id`,`gift_num`,`gift_name` from gift
+    </select>
+</mapper>
