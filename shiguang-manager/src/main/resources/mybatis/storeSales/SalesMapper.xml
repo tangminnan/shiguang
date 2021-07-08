@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.storeSales.dao.SalesDao">
+
+	<select id="get" resultType="com.shiguang.storeSales.domain.SalesDO">
+		select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name` from store_sales where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.storeSales.domain.SalesDO">
+		select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name` from store_sales
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+		  		  <if test="saleName != null and saleName != ''"> and sale_name = #{saleName} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+		  		  <if test="eyeType != null and eyeType != ''"> and eye_type = #{eyeType} </if>
+		  		  <if test="amountMoney != null and amountMoney != ''"> and amount_money = #{amountMoney} </if>
+		  		  <if test="mirrorWay != null and mirrorWay != ''"> and mirror_way = #{mirrorWay} </if>
+		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
+		  		  <if test="mirorAddress != null and mirorAddress != ''"> and miror_address = #{mirorAddress} </if>
+		  		  <if test="urgentStatus != null and urgentStatus != ''"> and urgent_status = #{urgentStatus} </if>
+		  		  <if test="goodsRebate != null and goodsRebate != ''"> and goods_rebate = #{goodsRebate} </if>
+		  		  <if test="fixedPrice != null and fixedPrice != ''"> and fixed_price = #{fixedPrice} </if>
+		  		  <if test="molingMoney != null and molingMoney != ''"> and moling_money = #{molingMoney} </if>
+		  		  <if test="additionalCost != null and additionalCost != ''"> and additional_cost = #{additionalCost} </if>
+		  		  <if test="processAsk != null and processAsk != ''"> and process_ask = #{processAsk} </if>
+		  		  <if test="storeName != null and storeName != ''"> and store_name = #{storeName} </if>
+		  		  <if test="storeDescribe != null and storeDescribe != ''"> and store_describe = #{storeDescribe} </if>
+		  		  <if test="storeUnit != null and storeUnit != ''"> and store_unit = #{storeUnit} </if>
+		  		  <if test="storeCount != null and storeCount != ''"> and store_count = #{storeCount} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="giveName != null and giveName != ''"> and give_name = #{giveName} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from store_sales
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+		  		  <if test="saleName != null and saleName != ''"> and sale_name = #{saleName} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+		  		  <if test="eyeType != null and eyeType != ''"> and eye_type = #{eyeType} </if>
+		  		  <if test="amountMoney != null and amountMoney != ''"> and amount_money = #{amountMoney} </if>
+		  		  <if test="mirrorWay != null and mirrorWay != ''"> and mirror_way = #{mirrorWay} </if>
+		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
+		  		  <if test="mirorAddress != null and mirorAddress != ''"> and miror_address = #{mirorAddress} </if>
+		  		  <if test="urgentStatus != null and urgentStatus != ''"> and urgent_status = #{urgentStatus} </if>
+		  		  <if test="goodsRebate != null and goodsRebate != ''"> and goods_rebate = #{goodsRebate} </if>
+		  		  <if test="fixedPrice != null and fixedPrice != ''"> and fixed_price = #{fixedPrice} </if>
+		  		  <if test="molingMoney != null and molingMoney != ''"> and moling_money = #{molingMoney} </if>
+		  		  <if test="additionalCost != null and additionalCost != ''"> and additional_cost = #{additionalCost} </if>
+		  		  <if test="processAsk != null and processAsk != ''"> and process_ask = #{processAsk} </if>
+		  		  <if test="storeName != null and storeName != ''"> and store_name = #{storeName} </if>
+		  		  <if test="storeDescribe != null and storeDescribe != ''"> and store_describe = #{storeDescribe} </if>
+		  		  <if test="storeUnit != null and storeUnit != ''"> and store_unit = #{storeUnit} </if>
+		  		  <if test="storeCount != null and storeCount != ''"> and store_count = #{storeCount} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="giveName != null and giveName != ''"> and give_name = #{giveName} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.storeSales.domain.SalesDO" useGeneratedKeys="true" keyProperty="id">
+		insert into store_sales
+		(
+			`member_number`, 
+			`sale_name`, 
+			`sale_number`, 
+			`eye_type`, 
+			`amount_money`, 
+			`mirror_way`, 
+			`mirror_time`, 
+			`miror_address`, 
+			`urgent_status`, 
+			`goods_rebate`, 
+			`fixed_price`, 
+			`moling_money`, 
+			`additional_cost`, 
+			`process_ask`, 
+			`store_name`, 
+			`store_describe`, 
+			`store_unit`, 
+			`store_count`, 
+			`remark`, 
+			`give_name`
+		)
+		values
+		(
+			#{memberNumber}, 
+			#{saleName}, 
+			#{saleNumber}, 
+			#{eyeType}, 
+			#{amountMoney}, 
+			#{mirrorWay}, 
+			#{mirrorTime}, 
+			#{mirorAddress}, 
+			#{urgentStatus}, 
+			#{goodsRebate}, 
+			#{fixedPrice}, 
+			#{molingMoney}, 
+			#{additionalCost}, 
+			#{processAsk}, 
+			#{storeName}, 
+			#{storeDescribe}, 
+			#{storeUnit}, 
+			#{storeCount}, 
+			#{remark}, 
+			#{giveName}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.storeSales.domain.SalesDO">
+		update store_sales 
+		<set>
+			<if test="memberNumber != null">`member_number` = #{memberNumber}, </if>
+			<if test="saleName != null">`sale_name` = #{saleName}, </if>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
+			<if test="eyeType != null">`eye_type` = #{eyeType}, </if>
+			<if test="amountMoney != null">`amount_money` = #{amountMoney}, </if>
+			<if test="mirrorWay != null">`mirror_way` = #{mirrorWay}, </if>
+			<if test="mirrorTime != null">`mirror_time` = #{mirrorTime}, </if>
+			<if test="mirorAddress != null">`miror_address` = #{mirorAddress}, </if>
+			<if test="urgentStatus != null">`urgent_status` = #{urgentStatus}, </if>
+			<if test="goodsRebate != null">`goods_rebate` = #{goodsRebate}, </if>
+			<if test="fixedPrice != null">`fixed_price` = #{fixedPrice}, </if>
+			<if test="molingMoney != null">`moling_money` = #{molingMoney}, </if>
+			<if test="additionalCost != null">`additional_cost` = #{additionalCost}, </if>
+			<if test="processAsk != null">`process_ask` = #{processAsk}, </if>
+			<if test="storeName != null">`store_name` = #{storeName}, </if>
+			<if test="storeDescribe != null">`store_describe` = #{storeDescribe}, </if>
+			<if test="storeUnit != null">`store_unit` = #{storeUnit}, </if>
+			<if test="storeCount != null">`store_count` = #{storeCount}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="giveName != null">`give_name` = #{giveName}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from store_sales where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from store_sales where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 根据会员卡号查询数据 -->
+	<select id="findDataByNumber" resultType="com.shiguang.storeSales.domain.SalesDO">
+				select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name` from store_sales where member_number = #{value}
+	</select>
+
+	<!-- 取镜方式 -->
+	<select id="findWay" resultType="com.shiguang.storeSales.domain.EyesWay" >
+		select `id`,`way_num`,`eye_way` from eyesway
+	</select>
+	<!-- 查询自片和自架 -->
+	<select id="findZpian" resultType="com.shiguang.storeSales.domain.ZipianDO">
+		select `id`,`produc_num`,`produc_name`,`retail_price`,`sph`,`cyl`,`lightbelow`,`refractivity`,`light`,`lens` from zipian
+	</select>
+	<select id="countZpian" resultType="int">
+		select count(*) from zipian
+	</select>
+	<select id="findZjia" resultType="com.shiguang.storeSales.domain.ZijiaDO">
+		select `id`,`produc_num`,`produc_code`,`produc_name`,`produc_factory`,`retail_price`,`produc_color` from zijia
+	</select>
+	<select id="countZjia" resultType="int">
+		select count(*) from zijia
+	</select>
+</mapper>

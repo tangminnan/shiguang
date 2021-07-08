@@ -24,11 +24,21 @@ function getKjpeijian() {
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>框镜</td>";
-                html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='镜架配件' type='hidden' />"
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(rows[i].retailPrice);
+                arraycount.push(1)
             }
-
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -38,7 +48,7 @@ function getKjpeijian() {
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
-            $("#shishouMoney").val(price)
+            $("#amountMoney").val(price)
 
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -72,11 +82,21 @@ function getTaiyangjing(){
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>太阳镜</td>";
-                html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\",)'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='太阳镜' type='hidden' />"
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(rows[i].retailPrice);
+                arraycount.push(1)
             }
-
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -86,7 +106,7 @@ function getTaiyangjing(){
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
-            $("#shishouMoney").val(price)
+            $("#amountMoney").val(price)
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -119,11 +139,21 @@ function getHaocai() {
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>耗材</td>";
-                html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='耗材' type='hidden' />"
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(rows[i].retailPrice);
+                arraycount.push(1)
             }
-
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -133,7 +163,7 @@ function getHaocai() {
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
-            $("#shishouMoney").val(price)
+            $("#amountMoney").val(price)
 
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -166,12 +196,22 @@ function getLaohuajing() {
                 html += "<td>0.00</td>";
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td>耗材</td>";
-                html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                html += "<td>老花镜</td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='老花镜' type='hidden' />"
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(rows[i].retailPrice);
+                arraycount.push(1)
             }
-
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -181,7 +221,7 @@ function getLaohuajing() {
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
-            $("#shishouMoney").val(price)
+            $("#amountMoney").val(price)
 
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -214,12 +254,22 @@ function getShiguang(){
                 html += "<td>0.00</td>";
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td>耗材</td>";
-                html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                html += "<td>视光</td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='视光' type='hidden' />"
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(rows[i].retailPrice);
+                arraycount.push(1)
             }
-
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -229,7 +279,7 @@ function getShiguang(){
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
-            $("#shishouMoney").val(price)
+            $("#amountMoney").val(price)
 
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -263,12 +313,22 @@ function getHuliye(){
                 html += "<td>0.00</td>";
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td>耗材</td>";
-                html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                html += "<td>护理液</td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='护理液' type='hidden' />"
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(rows[i].retailPrice);
+                arraycount.push(1)
             }
-
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -278,7 +338,7 @@ function getHuliye(){
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
-            $("#shishouMoney").val(price)
+            $("#amountMoney").val(price)
 
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -312,12 +372,22 @@ function getPeijian(){
                 html += "<td>0.00</td>";
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td>耗材</td>";
-                html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                html += "<td>配件</td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='配件' type='hidden' />"
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(rows[i].retailPrice);
+                arraycount.push(1)
             }
-
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -327,7 +397,7 @@ function getPeijian(){
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
-            $("#shishouMoney").val(price)
+            $("#amountMoney").val(price)
 
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -361,12 +431,22 @@ function getYinxing(){
                 html += "<td>0.00</td>";
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td>耗材</td>";
-                html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                html += "<td>隐形</td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='隐形' type='hidden' />"
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(rows[i].retailPrice);
+                arraycount.push(1)
             }
-
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -376,7 +456,7 @@ function getYinxing(){
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
-            $("#shishouMoney").val(price)
+            $("#amountMoney").val(price)
 
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -409,12 +489,22 @@ function getYinxingpj(){
                 html += "<td>0.00</td>";
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td>耗材</td>";
-                html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                html += "<td>隐形配件</td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='隐形配件' type='hidden' />"
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(rows[i].retailPrice);
+                arraycount.push(1)
             }
-
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -424,8 +514,150 @@ function getYinxingpj(){
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
-            $("#shishouMoney").val(price)
+            $("#amountMoney").val(price)
 
+            //son_msg就是子页面中的msg数据
+            //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+        }
+    });
+    layer.full(toIndex)
+}
+
+function getZengpin(){
+    var toIndex = layer.open({
+        type : 2,
+        title : '赠品',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : "/information/store/zengpin/",// iframe的url
+        cancel: function(index, layero){
+            var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            // var rows = sessionStorage.getItem("row");
+            // alert(rows.length)
+            for (var i=0;i<rows.length;i++){
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                html += "<td>"+rows[i].giveJc+"</td>";
+                html += "<td>0.00</td>";
+                html += "<td>3</td>";
+                html += "<td>1</td>";
+                html += "<td>0.00</td>";
+                html += "<td>1.0000</td>";
+                html += "<td>0.000</td>";
+                html += "<td>0.00</td>";
+                html += "<td>0.00</td>";
+                html += "<td>0.00</td>";
+                html += "<td>0.00</td>";
+                html += "<td>赠品</td>";
+                html += "<td><em onclick='del(this,0.00,\""+rows[i].giveJc+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='赠品' type='hidden' />"
+                $("#goods").append(html);
+                //price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].giveJc);
+                arrayunit.push(0.00);
+                arraycount.push(1)
+            }
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
+            //son_msg就是子页面中的msg数据
+            //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+        }
+    });
+    layer.full(toIndex)
+}
+function getZijia(){
+    var toIndex = layer.open({
+        type : 2,
+        title : '自架',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : "/information/store/zijia/",// iframe的url
+        cancel: function(index, layero){
+            var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            // var rows = sessionStorage.getItem("row");
+            // alert(rows.length)
+            for (var i=0;i<rows.length;i++){
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>0.00</td>";
+                html += "<td>3</td>";
+                html += "<td>1</td>";
+                html += "<td>0.00</td>";
+                html += "<td>1.0000</td>";
+                html += "<td>0.000</td>";
+                html += "<td>0.00</td>";
+                html += "<td>0.00</td>";
+                html += "<td>0.00</td>";
+                html += "<td>0.00</td>";
+                html += "<td>自架</td>";
+                html += "<td><em onclick='del(this,0.00,\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='自架' type='hidden' />"
+                $("#goods").append(html);
+                //price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(0.00);
+                arraycount.push(1)
+            }
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
+            //son_msg就是子页面中的msg数据
+            //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+        }
+    });
+    layer.full(toIndex)
+}
+function getZipian(){
+    var toIndex = layer.open({
+        type : 2,
+        title : '自片',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : "/information/store/zipian/",// iframe的url
+        cancel: function(index, layero){
+            var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            // var rows = sessionStorage.getItem("row");
+            // alert(rows.length)
+            for (var i=0;i<rows.length;i++){
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>0.00</td>";
+                html += "<td>3</td>";
+                html += "<td>1</td>";
+                html += "<td>0.00</td>";
+                html += "<td>1.0000</td>";
+                html += "<td>0.000</td>";
+                html += "<td>0.00</td>";
+                html += "<td>0.00</td>";
+                html += "<td>0.00</td>";
+                html += "<td>0.00</td>";
+                html += "<td>自片</td>";
+                html += "<td><em onclick='del(this,0.00,\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='storeName'name='storeName' type='hidden' />"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='自片' type='hidden' />"
+                $("#goods").append(html);
+                //price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                arraystore.push(rows[i].producName);
+                arrayunit.push(0.00);
+                arraycount.push(1)
+            }
+            $("#storeName").val(arraystore);
+            $("#storeUnit").val(arrayunit);
+            $("#storeCount").val(arraycount);
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }

@@ -27,7 +27,7 @@ public class GiveawayDO implements Serializable {
 	private String stores;
 	//赠品类型
 	private Long giveType;
-	private String giveTypeName;
+	private String giftName;
 
 	/**
 	 * 设置：主键
@@ -102,7 +102,7 @@ public class GiveawayDO implements Serializable {
 		return giveType;
 	}
 
-	public void setGiveTypeName(String giveTypeName) {this.giveTypeName = giveTypeName;}
+	public void setGiftName(String giftName) {this.giftName = giftName;}
 
-	public String getGiveTypeName(){return giveTypeName;}
+	public String getGiftName(){return giftName;}
 }

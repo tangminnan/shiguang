@@ -17,7 +17,7 @@
 		<!--&lt;!&ndash;<li><a href="">当日未结算管理</a></li>&ndash;&gt;-->
 	<!--</ul>-->
 <!--</div>-->
-
+<form class="form-horizontal m-t" id="signupForm">
 <!--顾客资料-->
 <div class="m40 msgBox">
 	<h3>顾客资料 <span class="sure_red">可直接输入会员卡号并按【回车键】确认</span></h3>
@@ -29,13 +29,13 @@
 			<input type="button" value="会员修改" onclick="getMemberEdit()"/>
 		</span>
 		<span class="s4">
-			<label><input name="ss" type="radio" value="1" checked onchange="getCheck(this.value)"> 框镜</label>
-			<label><input name="ss" type="radio" value="2" onchange="getCheck(this.value)"> 隐形</label>
-			<label><input name="ss" type="radio" value="3" onchange="getCheck(this.value)"> 辅料</label>
+			<label><input name="eyeType" type="radio" value="框镜" checked onchange="getCheck(this.value)"> 框镜</label>
+			<label><input name="eyeType" type="radio" value="隐形" onchange="getCheck(this.value)"> 隐形</label>
+			<label><input name="eyeType" type="radio" value="辅料" onchange="getCheck(this.value)"> 辅料</label>
 		</span>
 		<span class="s5">
 			<input type="button" onclick="updatePerson()" value="更换销售人员" />
-				<select id="salename" name="salename" disabled="disabled">
+				<select id="saleName" name="saleName" disabled="disabled">
 					<option></option>
 					<option th:each="ls:${userDOList}"
 							th:text="${ls.name}"
@@ -55,7 +55,7 @@
 		<input id="memberId" name="memberId" th:value="${memberDO.id}"  type="hidden">
 		<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">
 		<input id="memname" name="memname" th:value="${memberDO.name}"  type="hidden">
-		<!--<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">-->
+		<input id="memberNumber" name="memberNumber" th:value="${memberDO.cardNumber}"  type="hidden">
 		<!--<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">-->
 		<input class="xiangQ" type="button" value="详情" onclick="getMemberDetail()"/>
 	</div>
@@ -139,71 +139,6 @@
 		<div class="blueLeft_down" id="tab22" style="display: '';">
 			<table cellspacing="0" cellpadding="0">
 				<tbody id="tbodys">
-				<!--<tr>-->
-				<!--<td style="width:25%;" id="recipel"></td>-->
-				<!--<td style="width:25%;" id="name"></td>-->
-				<!--<td id="time"></td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td style="width:25%;">远用</td>-->
-					<!--<td style="width:25%;">王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>远用</td>-->
-					<!--<td>王依依</td>-->
-					<!--<td>2021-06-05 14:28</td>-->
-				<!--</tr>-->
 				</tbody>
 			</table>
 		</div>
@@ -988,55 +923,46 @@
 <!--商品结算-->
 <div class="m40" style="overflow: hidden;margin-bottom: 80px;">
 	<h3>商品结算</h3>
-
 	<!--上面一排金额结算表-->
 	<div class="settlement">
 		<ul class="ulA" id="ula">
-			<!--<li id="yuanjia"></li>-->
-			<!--<li id="zhekou"></li>-->
-			<!--<li id="youhui"></li>-->
-			<!--<li id="moling"></li>-->
-			<!--<li id="yingshou"></li>-->
-			<!--<li id="shishou"></li>-->
 		</ul>
 		<ul class="ulB">
 			<li>
 				取镜方式：
-				<select>
-					<option value="1">正常</option>
-					<option value="2">订做7</option>
-					<option value="3">订做10</option>
-					<option value="4">订做15</option>
-					<option value="5">订做25</option>
+				<select id="mirrorWay" name="mirrorWay">
+					<option th:each="ls:${eyesWayList}"
+							th:text="${ls.eyeWay}"
+							th:value="${ls.eyeWay}"></option>
+					<!--<option value="正常">正常</option>-->
+					<!--<option value="订做7">订做7</option>-->
+					<!--<option value="订做10">订做10</option>-->
+					<!--<option value="订做15">订做15</option>-->
+					<!--<option value="订做25">订做25</option>-->
 				</select>
 			</li>
 			<li>取镜日期：<input type="text" id="mirrorTime" name="mirrorTime"/></li>
 			<li>
 				取镜地点：
-				<input id="storeName" name="storeName" type="text" th:value="${storeName}" disabled>
-				<!--<select>-->
-					<!--<option value="">中心店</option>-->
-					<!--<option value="">选择1</option>-->
-					<!--<option value="">选择2</option>-->
-				<!--</select>-->
+				<input id="mirorAddress" name="mirorAddress" type="text" th:value="${storeName}" disabled>
 				<em></em>
 			</li>
 			<li>
 				加急状态：
-				<select>
-					<option value="1">正常</option>
-					<option value="2">加急</option>
+				<select id="urgentStatus" name="urgentStatus">
+					<option value="正常">正常</option>
+					<option value="加急">加急</option>
 				</select>
 			</li>
 			<li><input class="youji" type="button" value="填写邮寄信息" /></li>
 		</ul>
 		<ul class="ulC">
-			<li>实收金额：<input type="text" id="shishouMoney" /></li>
+			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney"/></li>
 			<li>商品打折：<input type="text"  /><input type="button" value="还原" /></li>
 			<li>一口价：<input type="text" /><input type="button" class="qianpi" value="签批" /><input type="button" value="还原" /></li>
-			<li>抹零金额：<input type="text" value="0.00" /></li>
+			<li>抹零金额：<input type="text" value="0.00" id="molingMoney" name="molingMoney"/></li>
 		</ul>
-		<div class="JSbtn"><input type="button" value="结算" /></div>
+		<div class="JSbtn"><input type="submit" value="结算"/></div>
 	</div>
 
 	<!--结算下面左侧套餐盒子-->
@@ -1061,9 +987,9 @@
 				<li><span onclick="getPeijian()">配件</span></li>
 			</ul>
 			<ul class="ulDown">
-				<li><span>自架</span></li>
-				<li><span>自片</span></li>
-				<li><span>赠品</span></li>
+				<li><span onclick="getZijia()">自架</span></li>
+				<li><span onclick="getZipian()">自片</span></li>
+				<li><span onclick="getZengpin()">赠品</span></li>
 			</ul>
 		</div>
 
@@ -1080,7 +1006,7 @@
 				<li><span onclick="getShiguang()">视光</span></li>
 			</ul>
 			<ul class="ulYin">
-				<li><span>赠品</span></li>
+				<li><span onclick="getZengpin()">赠品</span></li>
 			</ul>
 		</div>
 
@@ -1097,30 +1023,25 @@
 				<li><span onclick="getShiguang()">视光</span></li>
 			</ul>
 			<ul class="ulFu">
-				<li><span>赠品</span></li>
+				<li><span onclick="getZengpin()">赠品</span></li>
 			</ul>
 		</div>
 
-		<div class="gray box4">
+		<div class="gray box4" id="giveDev" style="display: block;">
 			<h4>赠品快捷键</h4>
-			<ul>
-				<li><span>眼镜清洗液</span></li>
-				<li><span>镜盒</span></li>
-				<li><span>镜布</span></li>
-				<li><span>小米背包</span></li>
-				<li><span>闯关迷宫</span></li>
+			<ul id="give">
 			</ul>
 		</div>
 		<div class="gray box5">
 			<h4>附加费用</h4>
-			<select>
+			<select id="additionalName" onchange="getFujia()">
 				<option value="">--请选择--</option>
 				<option th:each="ls:${addlist}"
 						th:text="${ls.additionName}"
-						th:value="${ls.additionName}"></option>
+						th:value="${ls.price}"></option>
 			</select>
 			<h4>加工要求</h4>
-			<select>
+			<select id="processName" onchange="getJiagong()">
 				<option value="">--请选择--</option>
 				<option th:each="ls:${proList}"
 						th:text="${ls.processName}"
@@ -1152,54 +1073,6 @@
 			</tr>
 			</thead>
 			<tbody id="goods">
-			<!--<tr>-->
-				<!--<td><input name="cho" type="checkbox" /></td>-->
-				<!--<td>xxx镜架</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>3</td>-->
-				<!--<td>1</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>0.00</td>-->
-				<!--<td>0.2</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>0.00</td>-->
-				<!--<td>0.00</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>镜架</td>-->
-				<!--<td ><em onclick="del(this)"></em></td>-->
-			<!--</tr>-->
-			<!--<tr>-->
-				<!--<td><input name="cho" type="checkbox" /></td>-->
-				<!--<td>xxx镜架</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>3</td>-->
-				<!--<td>1</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>0.00</td>-->
-				<!--<td>0.2</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>0.00</td>-->
-				<!--<td>0.00</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>镜架</td>-->
-				<!--<td ><em onclick="del(this)"></em></td>-->
-			<!--</tr>-->
-			<!--<tr>-->
-				<!--<td><input name="cho" type="checkbox" /></td>-->
-				<!--<td>xxx镜架</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>3</td>-->
-				<!--<td>1</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>0.00</td>-->
-				<!--<td>0.2</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>0.00</td>-->
-				<!--<td>0.00</td>-->
-				<!--<td>580.00</td>-->
-				<!--<td>镜架</td>-->
-				<!--<td><em></em></td>-->
-			<!--</tr>-->
 			</tbody>
 		</table>
 		<div class="cho_tabS_three">
@@ -1211,18 +1084,6 @@
 				</tr>
 				</thead>
 				<tbody id="zengpin">
-				<!--<tr>-->
-					<!--<td>镜盒-型号：0000-标价：10.00</td>-->
-					<!--<td><em></em></td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>镜盒-型号：0000-标价：10.00</td>-->
-					<!--<td><em></em></td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>镜盒-型号：0000-标价：10.00</td>-->
-					<!--<td><em></em></td>-->
-				<!--</tr>-->
 				</tbody>
 			</table>
 
@@ -1237,27 +1098,6 @@
 				</tr>
 				</thead>
 				<tbody id="fujia">
-				<!--<tr>-->
-					<!--<td>检查费300元</td>-->
-					<!--<td>￥300.00</td>-->
-					<!--<td><input type="text" /></td>-->
-					<!--<td>￥300.00</td>-->
-					<!--<td><em></em></td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>检查费300元</td>-->
-					<!--<td>￥300.00</td>-->
-					<!--<td><input type="text" /></td>-->
-					<!--<td>￥300.00</td>-->
-					<!--<td><em></em></td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td>检查费300元</td>-->
-					<!--<td>￥300.00</td>-->
-					<!--<td><input type="text" /></td>-->
-					<!--<td>￥300.00</td>-->
-					<!--<td><em></em></td>-->
-				<!--</tr>-->
 				</tbody>
 			</table>
 
@@ -1269,18 +1109,6 @@
 				</tr>
 				</thead>
 				<tbody id="jiagong">
-				<!--<tr>-->
-					<!--<td><input type="text" value="特殊磨片" /></td>-->
-					<!--<td><em></em></td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td><input type="text" value="特殊磨片" /></td>-->
-					<!--<td><em></em></td>-->
-				<!--</tr>-->
-				<!--<tr>-->
-					<!--<td><input type="text" value="特殊磨片" /></td>-->
-					<!--<td><em></em></td>-->
-				<!--</tr>-->
 				</tbody>
 			</table>
 		</div>
@@ -1289,7 +1117,7 @@
 			<tbody>
 			<tr>
 				<td class="tdBB1">销售备注</td>
-				<td class="tdBB2"><textarea rows="2"></textarea></td>
+				<td class="tdBB2"><textarea rows="2" id="remark" name="remark"></textarea></td>
 			</tr>
 			</tbody>
 		</table>
@@ -1297,8 +1125,9 @@
 	</div>
 
 </div>
+</form>
 <div th:include="include :: footer"></div>
-<script type="text/javascript" src="/js/appjs/storeSales/edit.js"></script>
+<script type="text/javascript" src="/js/appjs/storeSales/add.js"></script>
 <script type="text/javascript" src="/js/appjs/storeSales/store.js"></script>
 <script type="text/javascript">
     $().ready(function(){
@@ -1339,7 +1168,7 @@
         type: 'date'
     });
     function getCheck(value){
-        if (value == 1){
+        if (value == "框镜"){
             kuangjing.style="display: block";
             yinxing.style="display: none";
             fuliao.style="display:none"
@@ -1354,7 +1183,7 @@
             boxkuangjing.style="display:block";
             boxyinxing.style="display:none";
             boxfuliao.style="display:none";
-        } else if (value == 2){
+        } else if (value == "隐形"){
             kuangjing.style="display: none";
             yinxing.style="display: block";
             fuliao.style="display:none"
@@ -1369,7 +1198,7 @@
             boxkuangjing.style="display:none";
             boxyinxing.style="display:block";
             boxfuliao.style="display:none";
-        } else if (value == 3){
+        } else if (value == "辅料"){
             kuangjing.style="display: none";
             yinxing.style="display: none";
             fuliao.style="display:block"
@@ -1581,7 +1410,10 @@
             sele.style = "display:none;";
 		}
 	}
-    var array=[]
+    var arraystore=[]
+	var arrayunit=[]
+	var arraycount=[]
+	var arrayjp=0
     var html ="";
     var price=0.00;
 	function getJingjia(){
@@ -1599,6 +1431,7 @@
                 for (var i=0;i<rows.length;i++){
                     html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
                     html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].producName+"</td>";
+                    html += "<input id='storeName' name='storeName' value="+rows[i].producName+" text='hidden'/>"
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>3</td>";
                     html += "<td>1</td>";
@@ -1610,11 +1443,23 @@
                     html += "<td>0.00</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>镜架</td>";
-                    html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                    html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                    html += "<input id='storeName' name='storeName' type='hidden' />"
+                    html += "<input id='storeUnit' name='storeUnit' type='hidden' />"
+                    html += "<input id='storeCount' name='storeCount' type='hidden' />"
+                    html += "<input id='isJj' name='isJj' type='hidden' />"
+                    html += "<input id='storeDescribe'name='storeDescribe' value='镜架' type='hidden' />"
                     $("#goods").append(html);
                     price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                    //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                    arraystore.push(rows[i].producName);
+                    arrayunit.push(rows[i].retailPrice);
+                    arraycount.push(1)
+					$("#isJj").val("有")
 				}
-
+                $("#storeName").val(arraystore);
+                $("#storeUnit").val(arrayunit);
+                $("#storeCount").val(arraycount);
                 $("#ula").empty();
                 var lis="";
                 lis =  "<li>原价金额："+price+"</li>";
@@ -1624,7 +1469,7 @@
                 lis += "<li>应收金额："+price+"</li>";
                 lis += "<li>实收金额："+price+"</li>";
                 $("#ula").append(lis)
-				$("#shishouMoney").val(price)
+				$("#amountMoney").val(price)
 
                 //son_msg就是子页面中的msg数据
                 //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -1633,7 +1478,7 @@
         layer.full(toIndex)
 	}
 
-	function del(obj,prices) {
+	function del(obj,prices,produName) {
         var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
         tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
         price = (parseFloat(price)- parseFloat(prices)).toFixed(2)
@@ -1645,8 +1490,14 @@
         lis += "<li>抹零金额：0.00</li>";
         lis += "<li>应收金额："+price+"</li>";
         lis += "<li>实收金额："+price+"</li>";
-        $("#ula").append(lis)
-        $("#shishouMoney").val(price)
+        $("#ula").append(lis);
+        $("#amountMoney").val(price);
+        arraystore.remove(produName);
+        arrayunit.remove(prices);
+        arraycount.remove(1);
+        $("#storeName").val(arraystore);
+        $("#storeUnit").val(arrayunit);
+        $("#storeCount").val(arraycount);
     }
 	
     function getJingpian(){
@@ -1661,6 +1512,7 @@
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 // var rows = sessionStorage.getItem("row");
                 // alert(rows.length)
+                arrayjp = rows.length;
                 for (var i=0;i<rows.length;i++){
                     html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
                     html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].producName+"</td>";
@@ -1675,10 +1527,23 @@
                     html += "<td>0.00</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>镜片</td>";
-                    html += "<td><em onclick=\"del(this,"+rows[i].retailPrice+")\"></em></td>";
+                    html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                    html += "<input id='storeName'name='storeName' type='hidden' />"
+                    html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                    html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                    html += "<input id='isJp'name='isJp' type='hidden' />"
+                    html += "<input id='storeDescribe'name='storeDescribe' value='镜片' type='hidden' />"
                     $("#goods").append(html);
                     price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                    //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                    arraystore.push(rows[i].producName);
+                    arrayunit.push(rows[i].retailPrice);
+                    arraycount.push(1);
                 }
+                $("#isJp").val(arrayjp);
+                $("#storeName").val(arraystore);
+                $("#storeUnit").val(arrayunit);
+                $("#storeCount").val(arraycount);
                 $("#ula").empty();
                 var lis="";
                 lis =  "<li>原价金额："+price+"</li>";
@@ -1688,7 +1553,7 @@
                 lis += "<li>应收金额："+price+"</li>";
                 lis += "<li>实收金额："+price+"</li>";
                 $("#ula").append(lis)
-                $("#shishouMoney").val(price)
+                $("#amountMoney").val(price)
                 //son_msg就是子页面中的msg数据
                 //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
             }
@@ -1730,10 +1595,118 @@
         });
         layer.full(toIndex)
 	}
+    var addhtml = "";
+	var prce=0;
+	var addinal=[];
+	function getFujia(){
+        var options=$("#additionalName option:selected")
+		if (options.val() == ''){
+            return
+		}
+        var pe = 1;
+        prce = pe;
+        price =(parseFloat(price)+ parseFloat(options.val())).toFixed(2);
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+price+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额：0.00</li>";
+        lis += "<li>应收金额："+price+"</li>";
+        lis += "<li>实收金额："+price+"</li>";
+        $("#ula").append(lis)
+        $("#amountMoney").val(price)
+		addhtml = "<tr><td>"+options.text()+"</td>";
+		addhtml += "<td>"+options.val()+"</td>";
+		addhtml += "<td><input type=\"text\" id='prival' value='1' onkeyup=\"sum("+options.val()+")\"/></td>";
+		addhtml += "<td id='sumprice'>"+options.val()+"</td>";
+		addhtml += "<td><em onclick='delss(this,\"" + options.val() + "\",\"" + options.text() + "\")'></em></td>";
+		addhtml += "</tr>";
+		addhtml += "<input id='additionalCost' name='additionalCost' type='hidden'/>"
+		$("#fujia").append(addhtml);
+        addinal.push(options.text());
+        $("#additionalCost").val(addinal);
+	}
+    function sum(obj){
+        var privaul = $("#prival").val();
+        prce = privaul;
+        var sumprices = (parseFloat(privaul) * parseFloat(obj)).toFixed(2)
+        sumprice.innerText = sumprices;
+        //$("#sumprice").val(sumprices);
+		price = sumprices;
+        //price =(parseFloat(price)+ parseFloat(sumprices)).toFixed(2);
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+price+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额：0.00</li>";
+        lis += "<li>应收金额："+price+"</li>";
+        lis += "<li>实收金额："+price+"</li>";
+        $("#ula").append(lis)
+        $("#amountMoney").val(price)
+    }
+    function delss(obj,privals,addinalname) {
+        var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+        tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+		//var dd = $("#prival").val();
+		//alert(prce);
+		var dsf = (parseFloat(prce) * parseFloat(privals)).toFixed(2);
+		price = (parseFloat(price) - parseFloat(dsf)).toFixed(2);
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+price+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额：0.00</li>";
+        lis += "<li>应收金额："+price+"</li>";
+        lis += "<li>实收金额："+price+"</li>";
+        $("#ula").append(lis)
+        $("#amountMoney").val(price)
+        addinal.remove(addinalname);
+        $("#additionalCost").val(addinal);
+    }
+    //加工要求
+	var jiagonghtml="";
+	var ask=[];
+	function getJiagong() {
+        var options=$("#processName option:selected")
+		var jianame = options.text();
+        jiagonghtml = "<tr>";
+        jiagonghtml += "<td><input type=\"text\" value="+options.text()+"></td>";
+        jiagonghtml += "<td><em onclick='getDeljia(this,\"" + jianame + "\")'></em></td>";
+        jiagonghtml += "</tr>";
+        jiagonghtml += "<input name=\"processAsk\"id=\"processAsk\" type=\"hidden\" />"
+        $("#jiagong").append(jiagonghtml);
+        ask.push(options.text())
+        $("#processAsk").val(ask);
+    }
+    Array.prototype.remove = function(val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    };
+    function getDeljia(obj,jianame) {
+        var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+        tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+		ask.remove(jianame)
+        $("#processAsk").val(ask);
+	}
 </script>
 <script th:inline="javascript">
     $().ready(function(){
         var name = $("#memname").val();
+        //赠品
+        var giveList = [[${giveawayDOList}]];
+        if (giveList.length >0){
+            giveDev.style = "display:block;"
+		} else {
+            giveDev.style = "display:none;"
+		}
+		//附加费用
+		var addlist = [[${addlist}]];
+		//处方
         var list = [[${userDOList}]];
         var len = list.length;
         var trs = 7-len;
@@ -1744,15 +1717,32 @@
                 html += "<td>2021-06-05 14:28</td></tr>";
                 $("#tbodys").append(html);
             }
-            // for (var i = 0; i < trs; i++) {
-            //     html = "<tr><td style=\"width:25%;\"></td>";
-            //     html += "<td style=\"width:25%;\"></td>";
-            //     html += "<td></td></tr>";
-            //     $("#tbodys").append(html);
-            // }
-
-
+            var newli = "";
+            for (var t=0;t<giveList.length;t++){
+                newli = "<li><span onclick=getgive('"+giveList[t].giveName+"')>"+giveList[t].giveJc+"</span></li>";
+                $("#give").append(newli);
+			}
     });
+    //赠品
+    var newGive=""
+	var give = [];
+    function getgive(obj) {
+        var ss = obj;
+        newGive = "<tr><td>"+obj+"</td>";
+        newGive += "<td><em onclick='dels(this,\"" + ss + "\")'></em></td>";
+        newGive += "</tr>";
+        newGive += "<input id='giveName' name='giveName' type='hidden' />";
+        $("#zengpin").append(newGive);
+        give.push(obj);
+		$("#giveName").val(give);
+    }
+    function dels(obj,str) {
+        alert(str);
+        var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+        tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+		give.remove(str)
+        $("#giveName").val(give);
+    }
 </script>
 </body>
 </html>

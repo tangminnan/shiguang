@@ -2,10 +2,10 @@ package com.shiguang.storeSales.controller;
 
 import com.shiguang.baseinfomation.domain.AdditionalDO;
 import com.shiguang.baseinfomation.service.AdditionalService;
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
-import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.checkout.domain.CostDO;
+import com.shiguang.common.utils.*;
+import com.shiguang.giveaway.domain.GiveawayDO;
+import com.shiguang.giveaway.service.GiveawayService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.optometry.domain.OptometryDO;
@@ -14,6 +14,11 @@ import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
+import com.shiguang.storeSales.domain.EyesWay;
+import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.domain.ZijiaDO;
+import com.shiguang.storeSales.domain.ZipianDO;
+import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -33,6 +38,8 @@ public class StoreSalesController {
     private OptometryService optometryService;
     @Autowired
     private ResultDiopterService resultDiopterService;
+    @Autowired
+    private SalesService salesService;
     @Autowired
     private MemberService memberService;
     @Autowired
@@ -61,6 +68,8 @@ public class StoreSalesController {
     private YxcpService yxcpService;
     @Autowired
     private YxdzService yxdzService;
+    @Autowired
+    private GiveawayService giveawayService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -115,8 +124,6 @@ public class StoreSalesController {
             optometryDO.setAxialLeft(list.get(0).getAxialLeft());
             optometryDO.setSphereRight(list.get(0).getSphereRight());
             optometryDO.setSphereLeft(list.get(0).getSphereLeft());
-            optometryDO.setOptometryName(list.get(0).getOptometryName());
-            optometryDO.setCreateTime(list.get(0).getCreateTime());
         }
         model.addAttribute("optometryDO", optometryDO);
         Map<String, Object> map = new HashMap<>();
@@ -125,6 +132,8 @@ public class StoreSalesController {
         model.addAttribute("userDOList", userDOList);
         List<ProcessAskDO> proList = optometryService.processlist(map);
         model.addAttribute("proList", proList);
+        List<EyesWay> eyesWayList = salesService.findWay(map);
+        model.addAttribute("eyesWayList",eyesWayList);
         List<AdditionalDO> addlist = additionalService.list(map);
         model.addAttribute("addlist", addlist);
         UserDO userDO = ShiroUtils.getUser();
@@ -132,8 +141,62 @@ public class StoreSalesController {
         model.addAttribute("storeName", storeName);
         String saleName = ShiroUtils.getUser().getName();
         model.addAttribute("saleName",saleName);
+        String store = ShiroUtils.getUser().getStore();
+        map.put("stores",store);
+        List<GiveawayDO> giveawayDOList = giveawayService.list(map);
+        model.addAttribute("giveawayDOList",giveawayDOList);
         return "storeSales/edit";
     }
+
+    /**
+     * 保存
+     */
+    @ResponseBody
+    @PostMapping("/save")
+    @RequiresPermissions("information:store:add")
+    public R save(SalesDO salesDO) {
+        if (null == salesDO.getIsJp() || null == salesDO.getIsJj()){
+            salesDO.setIsJp(0L);
+            salesDO.setIsJj("无");
+        }
+        if ("镜架".equals(salesDO.getStoreDescribe())
+                || "镜片".equals(salesDO.getStoreDescribe())
+                || "太阳镜".equals(salesDO.getStoreDescribe())){
+            if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
+                return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
+            }
+        }
+        Long saleNumber =  GuuidUtil.getUUID();
+        salesDO.setSaleNumber("X"+saleNumber);
+        if(null != salesDO){
+            if (null != salesDO.getAdditionalCost()){
+                salesDO.setAdditionalCost(salesDO.getAdditionalCost().substring(0,salesDO.getAdditionalCost().length()-1));
+            }
+            if (null != salesDO.getGiveName()){
+                salesDO.setGiveName(salesDO.getGiveName().substring(0,salesDO.getGiveName().length()-1));
+            }
+            if (null != salesDO.getProcessAsk()){
+                salesDO.setProcessAsk(salesDO.getProcessAsk().substring(0,salesDO.getProcessAsk().length()-1));
+            }
+//            if (null != salesDO.getStoreName()){
+//                salesDO.setStoreName(salesDO.getStoreName().substring(0,salesDO.getStoreName().length()-3));
+//            }
+//            if (null != salesDO.getStoreUnit()){
+//                salesDO.setStoreUnit(salesDO.getStoreUnit().substring(0,salesDO.getStoreUnit().length()-3));
+//            }
+//            if (null != salesDO.getStoreCount()){
+//                salesDO.setStoreCount(salesDO.getStoreCount().substring(0,salesDO.getStoreCount().length()-2));
+//            }
+        }
+        //Model model=null;
+        if (salesService.save(salesDO) > 0){
+            //this.editsetle(salesDO,model);
+            return R.ok();
+        }
+        return R.error();
+    }
+
+
 
     /**
      * 镜架
@@ -454,6 +517,86 @@ public class StoreSalesController {
     }
 
     /**
+     * 赠品
+     */
+    @GetMapping("/zengpin")
+    @RequiresPermissions("information:store:zengpin")
+    String zengpin(Model model){
+        return "storeSales/zengpin";
+    }
+
+    /**
+     * 查询赠品
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/zengpinlist")
+    @RequiresPermissions("information:store:zengpin")
+    public PageUtils zengpinlist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        String store = ShiroUtils.getUser().getStore();
+        query.put("stores",store);
+        List<GiveawayDO> giveawayDOList = giveawayService.list(query);
+        int total = giveawayService.count(query);
+        PageUtils pageUtils = new PageUtils(giveawayDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 自片
+     */
+    @GetMapping("/zipian")
+    @RequiresPermissions("information:store:zipian")
+    String zipian(Model model){
+        return "storeSales/zipian";
+    }
+
+    /**
+     * 查询自片
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/zipianlist")
+    @RequiresPermissions("information:store:zipian")
+    public PageUtils zipianlist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        List<ZipianDO> zipianDOList = salesService.findZpian(query);
+        int total = salesService.countZpian(query);
+        PageUtils pageUtils = new PageUtils(zipianDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 自架
+     */
+    @GetMapping("/zijia")
+    @RequiresPermissions("information:store:zijia")
+    String zijia(Model model){
+        return "storeSales/zijia";
+    }
+
+    /**
+     * 查询自架
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/zijialist")
+    @RequiresPermissions("information:store:zijia")
+    public PageUtils zijialist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        List<ZijiaDO> zijiaDOList = salesService.findZjia(query);
+        int total = salesService.countZjia(query);
+        PageUtils pageUtils = new PageUtils(zijiaDOList, total);
+        return pageUtils;
+    }
+
+    /**
      * 查询会员
      */
     @ResponseBody
@@ -470,19 +613,6 @@ public class StoreSalesController {
 
         //model.addAttribute("memberDO",memberDO);
         return memberDO;
-    }
-
-    /**
-     * 保存
-     */
-    @ResponseBody
-    @PostMapping("/save")
-    @RequiresPermissions("information:store:add")
-    public R save(OptometryDO optometry) {
-        if (optometryService.save(optometry) > 0) {
-            return R.ok();
-        }
-        return R.error();
     }
 
     /**

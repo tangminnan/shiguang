@@ -12,6 +12,8 @@ import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
+import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -41,6 +43,8 @@ public class SettlementController {
 	private MemberService memberService;
 	@Autowired
 	private CostService costService;
+	@Autowired
+	private SalesService salesService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:settlement:settlement")
@@ -93,6 +97,21 @@ public class SettlementController {
 //		SettlementDO settlement = settlementService.get(id);
 //		model.addAttribute("settlement", settlement);
 	    return "settlement/edit";
+	}
+
+	@GetMapping("/editMoney/{cardNumber}")
+	@RequiresPermissions("information:settlement:edit")
+	String editMoney(@PathVariable("cardNumber") String cardNumber,Model model){
+		MemberDO memberDO = memberService.getCardNumber(cardNumber);
+		model.addAttribute("memberDO",memberDO);
+		CostDO costDO = new CostDO();
+		SalesDO salesDO = salesService.findDataByNumber(cardNumber);
+		costDO.setMemberNumber(salesDO.getMemberNumber());
+		costDO.setSaleNumber(salesDO.getSaleNumber());
+		costDO.setSumMoney(salesDO.getAmountMoney());
+		costDO.setSaleName(salesDO.getSaleName());
+		model.addAttribute("costDO",costDO);
+		return "settlement/edit";
 	}
 
 	@GetMapping("/detail/{cardNumber}")

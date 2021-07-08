@@ -8,6 +8,7 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+	var cardNumber = $("#memberInumber").val();
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -23,7 +24,16 @@ function save() {
 				parent.reLoad();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 				parent.layer.close(index);
-
+                var toIndex = layer.open({
+                    type : 2,
+                    title : '结算',
+                    maxmin : true,
+                    shadeClose : false, // 点击遮罩关闭层
+                    area : [ '800px', '520px' ],
+                    content : "/information/settlement/editMoney/" + cardNumber // iframe的url
+                });
+                alert(toIndex);
+                layer.full(toIndex)
 			} else {
 				parent.layer.alert(data.msg)
 			}
