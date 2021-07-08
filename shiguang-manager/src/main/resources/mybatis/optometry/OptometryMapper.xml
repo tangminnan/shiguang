@@ -3,12 +3,12 @@
 
 <mapper namespace="com.shiguang.optometry.dao.OptometryDao">
     <select id="get" resultType="com.shiguang.optometry.domain.OptometryDO">
-		select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number` from optometry where id = #{value}
+		select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left` from optometry where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.optometry.domain.OptometryDO">
         select
-        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number`
+        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`
         from optometry
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
@@ -20,9 +20,6 @@
             <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
             <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
             <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
-            <if test="optometryName != null and optometryName != ''">and optometry_name = #{optometryName}</if>
-            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
-            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -49,9 +46,6 @@
             <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
             <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
             <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
-            <if test="optometryName != null and optometryName != ''">and optometry_name = #{optometryName}</if>
-            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
-            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
         </where>
     </select>
 
@@ -66,10 +60,7 @@
 			`cylinder_right`,
 			`cylinder_left`,
 			`axial_right`,
-			`axial_left`,
-			`optometry_name`,
-			`create_time`,
-			`ptometry_number`
+			`axial_left`
 		)
 		values
 		(
@@ -80,10 +71,7 @@
 			#{cylinderRight},
 			#{cylinderLeft},
 			#{axialRight},
-			#{axialLeft},
-			#{optometryName},
-			#{createTime},
-			#{ptometryNumber}
+			#{axialLeft}
 		)
 	</insert>
 
@@ -97,10 +85,7 @@
             <if test="cylinderRight != null">`cylinder_right` = #{cylinderRight},</if>
             <if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft},</if>
             <if test="axialRight != null">`axial_right` = #{axialRight},</if>
-            <if test="axialLeft != null">`axial_left` = #{axialLeft},</if>
-            <if test="optometryName != null">`optometry_name` = #{optometryName},</if>
-            <if test="createTime != null">`create_time` = #{createTime}</if>
-            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber}</if>
+            <if test="axialLeft != null">`axial_left` = #{axialLeft}</if>
         </set>
         where id = #{id}
     </update>
@@ -118,7 +103,7 @@
 
     <select id="optoList" resultType="com.shiguang.optometry.domain.OptometryDO">
         select
-        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number`
+        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`
         from optometry
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
@@ -130,15 +115,13 @@
             <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
             <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
             <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
-            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
-            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
         </where>
         order by create_time desc
     </select>
     <!--散瞳前-->
     <select id="optoFrontList" resultType="com.shiguang.optometry.domain.OptometryDO">
         select
-        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number`
+        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`
         from optometry
         where mydriasis=0
         order by id desc
@@ -146,7 +129,7 @@
     <!--散瞳后-->
     <select id="optoAfterList" resultType="com.shiguang.optometry.domain.OptometryDO">
         select
-        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`optometry_name`,`create_time`,`ptometry_number`
+        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`
         from optometry
         where mydriasis=1
         order by id desc
