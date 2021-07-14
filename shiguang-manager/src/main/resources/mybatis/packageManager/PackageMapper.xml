@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.packageManager.dao.PackageDao">
+
+	<select id="get" resultType="com.shiguang.packageManager.domain.PackageDO">
+		select `id`,`package_name`,`package_time`,`package_form`,`effective_date`,`expiry_date`,`package_type`,`start_price`,`end_price`,`package_price`,`is_cumulative_points`,`is_add`,`fold_up`,`retail_price`,`store`,`remark` from package where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.packageManager.domain.PackageDO">
+		select `id`,`package_name`,`package_time`,`package_form`,`effective_date`,`expiry_date`,`package_type`,`start_price`,`end_price`,`package_price`,`is_cumulative_points`,`is_add`,`fold_up`,`retail_price`,`store`,`remark` from package
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="packageName != null and packageName != ''"> and package_name = #{packageName} </if>
+		  		  <if test="packageTime != null and packageTime != ''"> and package_time = #{packageTime} </if>
+		  		  <if test="packageForm != null and packageForm != ''"> and package_form = #{packageForm} </if>
+		  		  <if test="effectiveDate != null and effectiveDate != ''"> and effective_date = #{effectiveDate} </if>
+		  		  <if test="expiryDate != null and expiryDate != ''"> and expiry_date = #{expiryDate} </if>
+		  		  <if test="packageType != null and packageType != ''"> and package_type = #{packageType} </if>
+		  		  <if test="startPrice != null and startPrice != ''"> and start_price = #{startPrice} </if>
+		  		  <if test="endPrice != null and endPrice != ''"> and end_price = #{endPrice} </if>
+		  		  <if test="packagePrice != null and packagePrice != ''"> and package_price = #{packagePrice} </if>
+		  		  <if test="isCumulativePoints != null and isCumulativePoints != ''"> and is_cumulative_points = #{isCumulativePoints} </if>
+		  		  <if test="isAdd != null and isAdd != ''"> and is_add = #{isAdd} </if>
+		  		  <if test="foldUp != null and foldUp != ''"> and fold_up = #{foldUp} </if>
+		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
+		  		  <if test="store != null and store != ''"> and store = #{store} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from package
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="packageName != null and packageName != ''"> and package_name = #{packageName} </if>
+		  		  <if test="packageTime != null and packageTime != ''"> and package_time = #{packageTime} </if>
+		  		  <if test="packageForm != null and packageForm != ''"> and package_form = #{packageForm} </if>
+		  		  <if test="effectiveDate != null and effectiveDate != ''"> and effective_date = #{effectiveDate} </if>
+		  		  <if test="expiryDate != null and expiryDate != ''"> and expiry_date = #{expiryDate} </if>
+		  		  <if test="packageType != null and packageType != ''"> and package_type = #{packageType} </if>
+		  		  <if test="startPrice != null and startPrice != ''"> and start_price = #{startPrice} </if>
+		  		  <if test="endPrice != null and endPrice != ''"> and end_price = #{endPrice} </if>
+		  		  <if test="packagePrice != null and packagePrice != ''"> and package_price = #{packagePrice} </if>
+		  		  <if test="isCumulativePoints != null and isCumulativePoints != ''"> and is_cumulative_points = #{isCumulativePoints} </if>
+		  		  <if test="isAdd != null and isAdd != ''"> and is_add = #{isAdd} </if>
+		  		  <if test="foldUp != null and foldUp != ''"> and fold_up = #{foldUp} </if>
+		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
+		  		  <if test="store != null and store != ''"> and store = #{store} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.packageManager.domain.PackageDO" useGeneratedKeys="true" keyProperty="id">
+		insert into package
+		(
+			`package_name`, 
+			`package_time`, 
+			`package_form`, 
+			`effective_date`, 
+			`expiry_date`, 
+			`package_type`, 
+			`start_price`, 
+			`end_price`, 
+			`package_price`, 
+			`is_cumulative_points`, 
+			`is_add`, 
+			`fold_up`, 
+			`retail_price`, 
+			`store`, 
+			`remark`
+		)
+		values
+		(
+			#{packageName}, 
+			#{packageTime}, 
+			#{packageForm}, 
+			#{effectiveDate}, 
+			#{expiryDate}, 
+			#{packageType}, 
+			#{startPrice}, 
+			#{endPrice}, 
+			#{packagePrice}, 
+			#{isCumulativePoints}, 
+			#{isAdd}, 
+			#{foldUp}, 
+			#{retailPrice}, 
+			#{store}, 
+			#{remark}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.packageManager.domain.PackageDO">
+		update package 
+		<set>
+			<if test="packageName != null">`package_name` = #{packageName}, </if>
+			<if test="packageTime != null">`package_time` = #{packageTime}, </if>
+			<if test="packageForm != null">`package_form` = #{packageForm}, </if>
+			<if test="effectiveDate != null">`effective_date` = #{effectiveDate}, </if>
+			<if test="expiryDate != null">`expiry_date` = #{expiryDate}, </if>
+			<if test="packageType != null">`package_type` = #{packageType}, </if>
+			<if test="startPrice != null">`start_price` = #{startPrice}, </if>
+			<if test="endPrice != null">`end_price` = #{endPrice}, </if>
+			<if test="packagePrice != null">`package_price` = #{packagePrice}, </if>
+			<if test="isCumulativePoints != null">`is_cumulative_points` = #{isCumulativePoints}, </if>
+			<if test="isAdd != null">`is_add` = #{isAdd}, </if>
+			<if test="foldUp != null">`fold_up` = #{foldUp}, </if>
+			<if test="retailPrice != null">`retail_price` = #{retailPrice}, </if>
+			<if test="store != null">`store` = #{store}, </if>
+			<if test="remark != null">`remark` = #{remark}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from package where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from package where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -100,7 +100,7 @@ public class SettlementController {
 	}
 
 	@GetMapping("/editMoney/{cardNumber}")
-	@RequiresPermissions("information:settlement:edit")
+	@RequiresPermissions("information:settlement:editMoney")
 	String editMoney(@PathVariable("cardNumber") String cardNumber,Model model){
 		MemberDO memberDO = memberService.getCardNumber(cardNumber);
 		model.addAttribute("memberDO",memberDO);

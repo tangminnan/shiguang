@@ -53,4 +53,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     public int updateStatus(DepartmentDO departmentDO) {
         return departmentDao.updateStatus(departmentDO);
     }
+
+    @Override
+    public DepartmentDO getDepartName(String departNumber){
+        return departmentDao.getDepartName(departNumber);
+    }
 }

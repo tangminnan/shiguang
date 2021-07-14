@@ -61,6 +61,14 @@ public class SalesDO implements Serializable {
 	private String isJj;
 	//是否有镜架
 	private Long isJp;
+	//配镜日期
+	private Date peijingTime;
+	//验光师
+	private String optometryName;
+	//外来处方类型
+	private String outRecipel;
+	//处方类型
+	private Long recipelType;
 
 	/**
 	 * 设置：主键
@@ -322,4 +330,56 @@ public class SalesDO implements Serializable {
 	public void setIsJp(Long isJp){this.isJp=isJp;}
 
 	public Long getIsJp(){return isJp;}
+
+	/**
+	 * 设置：配镜日期
+	 */
+	public void setPeijingTime(Date peijingTime) {
+		this.peijingTime = peijingTime;
+	}
+	/**
+	 * 获取：配镜日期
+	 */
+	public Date getPeijingTime() {
+		return peijingTime;
+	}
+
+	/**
+	 * 获取：验光师
+	 */
+	public String getOptometryName() {
+		return optometryName;
+	}
+	/**
+	 * 设置：验光师
+	 */
+	public void setOptometryName(String optometryName) {
+		this.optometryName = optometryName;
+	}
+
+	/**
+	 * 获取：外来处方
+	 */
+	public String getOutRecipel() {
+		return outRecipel;
+	}
+	/**
+	 * 设置：外来处方
+	 */
+	public void setOutRecipel(String outRecipel) {
+		this.outRecipel = outRecipel;
+	}
+
+	/**
+	 * 获取：处方类型
+	 */
+	public Long getRecipelType() {
+		return recipelType;
+	}
+	/**
+	 * 设置：外来类型
+	 */
+	public void setRecipelType(Long recipelType) {
+		this.recipelType = recipelType;
+	}
 }

@@ -32,8 +32,8 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                producName:$('#producName').val(),
-                                producNum:$('#producNum').val()
+                                producName:$('#goodsName').val(),
+                                producNum:$('#goodsNum').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -47,17 +47,17 @@ function load() {
                                 checkbox : true
                             },
 								{
-									field : 'producNum',
+									field : 'goodsNum',
 									title : '商品代码',
 									align : 'center'
 								},
 								{
-									field : 'producCode',
+									field : 'goodsCode',
 									title : '商品条码',
 									align : 'center'
 								},
 								{
-									field : 'producName',
+									field : 'goodsName',
 									title : '商品名称',
 									align : 'center'
 								},
@@ -75,7 +75,18 @@ function load() {
 									field : 'partsStyle',
 									title : '配件型',
 									align : 'center'
-								}
+								},
+                            {
+                                field : 'positionName',
+                                title : '仓位',
+                                align : 'center'
+                            }
+                            ,
+                            {
+                                field : 'goodsCount',
+                                title : '数量',
+                                align : 'center'
+                            }
 						]
 					});
 }

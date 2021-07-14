@@ -25,4 +25,6 @@ public interface DepartmentDao {
     int batchRemove(Long[] ids);
 
     int updateStatus(DepartmentDO departmentDO);
+
+    DepartmentDO getDepartName(String departmentNumber);
 }

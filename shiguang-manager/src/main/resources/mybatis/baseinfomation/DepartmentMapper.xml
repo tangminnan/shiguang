@@ -143,4 +143,8 @@
         </foreach>
     </delete>
 
+    <select id="getDepartName" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
+		select `id`,`depart_number`,`depart_name`,`depart_full_name`,`depart_tel`,`depart_address`,`depart_type`,`company_id`,`person_charge`,`status`,`fanuc`,`mirror`,`sell_ways`,`same_sell`,`read_card`,`company_name`,`state` from department where depart_number = #{value}
+	</select>
+
 </mapper>

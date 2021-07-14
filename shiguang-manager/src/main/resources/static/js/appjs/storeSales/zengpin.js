@@ -32,8 +32,8 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                producNum:$('#producNum').val(),
-                                producName:$('#producName').val()
+                                goodsNum:$('#goodsNum').val(),
+                                goodsName:$('#goodsName').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -47,12 +47,12 @@ function load() {
                                 checkbox : true
                             },
 								{
-									field : 'giveNumber',
+									field : 'goodsNum',
 									title : '商品代码',
 									align : 'center'
 								},
 								{
-									field : 'giveJc',
+									field : 'goodsName',
 									title : '商品名称',
 									align : 'center'
 								},
@@ -60,7 +60,18 @@ function load() {
 									field : 'giftName',
 									title : '赠品类型',
 									align : 'center',
-								}
+								},
+                            {
+                                field : 'positionName',
+                                title : '仓位',
+                                align : 'center'
+                            }
+                            ,
+                            {
+                                field : 'goodsCount',
+                                title : '数量',
+                                align : 'center'
+                            }
 						]
 					});
 }

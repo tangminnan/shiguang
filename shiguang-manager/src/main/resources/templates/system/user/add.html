@@ -33,11 +33,11 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">所属门店：</label>
 								<div class="col-sm-8">
-									<select name="store" id="store" class="form-control" data-actions-box="false" data-size="5">
+									<select name="storeNum" id="storeNum" class="form-control" data-actions-box="false" data-size="5">
 										<option></option>
 										<option th:each="ls:${storeList}"
 												th:text="${ls.departName}"
-												th:value="${ls.departName}"></option>
+												th:value="${ls.departNumber}"></option>
 									</select>
 								</div>
 							</div>

@@ -3,17 +3,23 @@ package com.shiguang.storeSales.controller;
 import com.shiguang.baseinfomation.domain.AdditionalDO;
 import com.shiguang.baseinfomation.service.AdditionalService;
 import com.shiguang.checkout.domain.CostDO;
+import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.*;
 import com.shiguang.giveaway.domain.GiveawayDO;
 import com.shiguang.giveaway.service.GiveawayService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
+import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.domain.ProcessAskDO;
 import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
+import com.shiguang.packageManager.domain.PackageDO;
+import com.shiguang.packageManager.service.PackageService;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import com.shiguang.storeSales.domain.EyesWay;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.domain.ZijiaDO;
@@ -27,6 +33,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +77,12 @@ public class StoreSalesController {
     private YxdzService yxdzService;
     @Autowired
     private GiveawayService giveawayService;
+    @Autowired
+    private StockService stockService;
+    @Autowired
+    private CostService costService;
+    @Autowired
+    private PackageService packageService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -130,6 +143,9 @@ public class StoreSalesController {
         map.put("roleType", 1);
         List<UserDO> userDOList = userService.getRoleList(map);
         model.addAttribute("userDOList", userDOList);
+        map.put("roleType", 2);
+        List<UserDO> yanguangDOList = userService.getRoleList(map);
+        model.addAttribute("yanguangDOList", yanguangDOList);
         List<ProcessAskDO> proList = optometryService.processlist(map);
         model.addAttribute("proList", proList);
         List<EyesWay> eyesWayList = salesService.findWay(map);
@@ -189,6 +205,16 @@ public class StoreSalesController {
 //            }
         }
         //Model model=null;
+        CostDO costDO = new CostDO();
+        costDO.setIsSale(0L);
+        costDO.setMemberNumber(salesDO.getMemberNumber());
+        costDO.setSaleNumber(salesDO.getSaleNumber());
+        costDO.setCostType(0L);
+        costDO.setCostMoney(salesDO.getAmountMoney());
+        costDO.setSaleName(salesDO.getSaleName());
+        costDO.setIsSale(0L);
+        costService.save(costDO);
+        salesDO.setPeijingTime(new Date());
         if (salesService.save(salesDO) > 0){
             //this.editsetle(salesDO,model);
             return R.ok();
@@ -196,7 +222,43 @@ public class StoreSalesController {
         return R.error();
     }
 
+    /**
+     * 套餐
+     */
+    @GetMapping("/taocan")
+    @RequiresPermissions("information:store:taocan")
+    String taocan(Model model) {
+        return "storeSales/taocan";
+    }
 
+    /**
+     * 查询套餐
+     *
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/taocanlist")
+    @RequiresPermissions("information:store:taocan")
+    public PageUtils taocanlist(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        Date currentTime = new Date();
+//        query.put("packageType",params.get("packageType"));
+        List<PackageDO> packageDOList = packageService.list(query);
+        if (null != packageDOList && packageDOList.size() > 0){
+            for (PackageDO packageDO : packageDOList){
+                if (currentTime.compareTo(packageDO.getExpiryDate()) > 0){
+                    packageDO.setLose(0L);
+                } else {
+                    packageDO.setLose(1L);
+                }
+            }
+        }
+        int total = packageService.count(query);
+        PageUtils pageUtils = new PageUtils(packageDOList, total);
+        return pageUtils;
+    }
 
     /**
      * 镜架
@@ -219,9 +281,21 @@ public class StoreSalesController {
     public PageUtils jingjialist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<ProducaDO> producaDOList = producaService.listmateria(query);
-        int total = producaService.countmateria(query);
-        PageUtils pageUtils = new PageUtils(producaDOList, total);
+//        List<ProducaDO> producaDOList = producaService.listmateria(query);
+//        int total = producaService.countmateria(query);
+        //query.put("goodsType","镜架");
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
+        List<StockDO> stockDOList = stockService.listJiajia(query);
+        int total = stockService.countJiajia(query);
+        PageUtils pageUtils = new PageUtils(stockDOList, total);
         return pageUtils;
     }
 
@@ -247,20 +321,29 @@ public class StoreSalesController {
         //查询列表数据
         Query query = new Query(params);
         PageUtils pageUtils = null;
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
         if (null != params.get("dzType")) {
             String dzType = params.get("dzType").toString();
             if ("0".equals(dzType)) {
-                List<JpcpDO> jpcpDOList = jpcpService.listCp(query);
-                int total = jpcpService.countCp(query);
+                List<StockDO> jpcpDOList = stockService.listJpcp(query);
+                int total = stockService.countJpcp(query);
                 pageUtils = new PageUtils(jpcpDOList, total);
             } else if ("1".equals(dzType)) {
-                List<JpdzDO> jpdzDOList = jpdzService.listDz(query);
-                int total = jpdzService.countDz(query);
+                List<StockDO> jpdzDOList = stockService.listJpdz(query);
+                int total = stockService.countJpdz(query);
                 pageUtils = new PageUtils(jpdzDOList, total);
             }
         } else {
-            List<JpcpDO> jpcpDOList = jpcpService.listCp(query);
-            int total = jpcpService.countCp(query);
+            List<StockDO> jpcpDOList = stockService.listJpcp(query);
+            int total = stockService.countJpcp(query);
             pageUtils = new PageUtils(jpcpDOList, total);
         }
         return pageUtils;
@@ -288,8 +371,17 @@ public class StoreSalesController {
         //查询列表数据
         Query query = new Query(params);
         query.put("partsStyle","框镜");
-        List<PartsDO> partsDOList = partsService.list(query);
-        int total = partsService.count(query);
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
+        List<StockDO> partsDOList = stockService.listJiajiapj(query);
+        int total = stockService.countJiajiapj(query);
         PageUtils pageUtils = new PageUtils(partsDOList, total);
         return pageUtils;
     }
@@ -314,8 +406,17 @@ public class StoreSalesController {
     public PageUtils taiyangjinglist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        List<TyjDO> tyjDOList = tyjService.list(query);
-        int total = tyjService.count(query);
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
+        List<StockDO> tyjDOList = stockService.listTaiyj(query);
+        int total = stockService.countTaiyj(query);
         PageUtils pageUtils = new PageUtils(tyjDOList, total);
         return pageUtils;
     }
@@ -340,8 +441,17 @@ public class StoreSalesController {
     public PageUtils haocailist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        List<HcDO> hcDOList = hcService.list(query);
-        int total = hcService.count(query);
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
+        List<StockDO> hcDOList = stockService.listHaocai(query);
+        int total = stockService.countHaocai(query);
         PageUtils pageUtils = new PageUtils(hcDOList, total);
         return pageUtils;
     }
@@ -366,8 +476,17 @@ public class StoreSalesController {
     public PageUtils laohuajinglist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        List<OldlensDO> oldlensDOList = oldlensService.list(query);
-        int total = oldlensService.count(query);
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
+        List<StockDO> oldlensDOList = stockService.listLaohj(query);
+        int total = stockService.countLaohj(query);
         PageUtils pageUtils = new PageUtils(oldlensDOList, total);
         return pageUtils;
     }
@@ -392,8 +511,17 @@ public class StoreSalesController {
     public PageUtils shiguanglist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        List<ShiguangDO> shiguangDOList = shiguangService.list(query);
-        int total = shiguangService.count(query);
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
+        List<StockDO> shiguangDOList = stockService.listShiguang(query);
+        int total = stockService.countShiguang(query);
         PageUtils pageUtils = new PageUtils(shiguangDOList, total);
         return pageUtils;
     }
@@ -418,8 +546,17 @@ public class StoreSalesController {
     public PageUtils huliyelist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        List<HlyDO> hlyDOList = hlyService.list(query);
-        int total = hlyService.count(query);
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
+        List<StockDO> hlyDOList = stockService.listHuly(query);
+        int total = stockService.countHuly(query);
         PageUtils pageUtils = new PageUtils(hlyDOList, total);
         return pageUtils;
     }
@@ -444,8 +581,17 @@ public class StoreSalesController {
     public PageUtils peijianlist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        List<PartsDO> partsDOList = partsService.list(query);
-        int total = partsService.count(query);
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
+        List<StockDO> partsDOList = stockService.listJiajiapj(query);
+        int total = stockService.countJiajiapj(query);
         PageUtils pageUtils = new PageUtils(partsDOList, total);
         return pageUtils;
     }
@@ -477,7 +623,16 @@ public class StoreSalesController {
                 int total = yxcpService.count(query);
                 pageUtils = new PageUtils(yxcpDOList, total);
             } else if ("1".equals(params.get("yxType"))){
-                List<YxdzDO> yxdzDOList = yxdzService.listYxDz(query);
+                String departNumber = ShiroUtils.getUser().getStoreNum();
+                Map<String,Object> map = new HashMap<>();
+                map.put("departNumber",departNumber);
+                PositionDO positionDO = stockService.findPosition(map);
+                String positionName = "";
+                if (null != positionDO){
+                    positionName = positionDO.getPositionName();
+                }
+                query.put("positionName",positionName);
+                List<StockDO> yxdzDOList = stockService.listYxdz(query);
                 int total = yxdzService.countYxDz(query);
                 pageUtils = new PageUtils(yxdzDOList, total);
             }
@@ -499,7 +654,7 @@ public class StoreSalesController {
     }
 
     /**
-     * 查询配件
+     * 查询隐形配件
      * @param params
      * @return
      */
@@ -510,8 +665,17 @@ public class StoreSalesController {
         //查询列表数据
         Query query = new Query(params);
         query.put("partsStyle","隐形");
-        List<PartsDO> partsDOList = partsService.list(query);
-        int total = partsService.count(query);
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
+        List<StockDO> partsDOList = stockService.listJiajiapj(query);
+        int total = stockService.countJiajiapj(query);
         PageUtils pageUtils = new PageUtils(partsDOList, total);
         return pageUtils;
     }
@@ -538,8 +702,17 @@ public class StoreSalesController {
         Query query = new Query(params);
         String store = ShiroUtils.getUser().getStore();
         query.put("stores",store);
-        List<GiveawayDO> giveawayDOList = giveawayService.list(query);
-        int total = giveawayService.count(query);
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",departNumber);
+        PositionDO positionDO = stockService.findPosition(map);
+        String positionName = "";
+        if (null != positionDO){
+            positionName = positionDO.getPositionName();
+        }
+        query.put("positionName",positionName);
+        List<StockDO> giveawayDOList = stockService.listZengpin(query);
+        int total = stockService.countZengpin(query);
         PageUtils pageUtils = new PageUtils(giveawayDOList, total);
         return pageUtils;
     }

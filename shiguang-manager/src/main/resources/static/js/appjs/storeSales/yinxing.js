@@ -2,8 +2,8 @@
 var prefix = "/information/store"
 $(function() {
 	load();
-    $('#exampleTable').bootstrapTable('hideColumn', 'producNum');
-    $('#exampleTable').bootstrapTable('hideColumn', 'producName');
+    $('#exampleTable').bootstrapTable('hideColumn', 'goodsNum');
+    $('#exampleTable').bootstrapTable('hideColumn', 'goodsName');
     $('#exampleTable').bootstrapTable('hideColumn', 'retailPrice');
     $('#exampleTable').bootstrapTable('hideColumn', 'cylqj');
     $('#exampleTable').bootstrapTable('hideColumn', 'sphqj');
@@ -14,6 +14,8 @@ $(function() {
     $('#exampleTable').bootstrapTable('hideColumn', 'typeName');
     $('#exampleTable').bootstrapTable('hideColumn', 'cycle');
     $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
+    $('#exampleTable').bootstrapTable('hideColumn', 'positionName');
+    $('#exampleTable').bootstrapTable('hideColumn', 'goodsCount');
 });
 function load() {
 	$('#exampleTable')
@@ -61,12 +63,12 @@ function load() {
                                 field:'checkid'
                             },
 								{
-									field : 'producNum',
+									field : 'goodsNum',
 									title : '商品代码',
 									align : 'center'
 								},
 								{
-									field : 'producName',
+									field : 'goodsName',
 									title : '商品名称',
 									align : 'center'
 								},
@@ -78,12 +80,26 @@ function load() {
                             {
                                 field : 'sphqj',
                                 title : '球镜区间',
-                                align : 'center'
+                                align : 'center',
+                                formatter : function(value, row, index) {
+                                    if (row.sphUp != null && row.sphDown != null){
+                                        return row.sphUp +"～"+ row.sphDown
+                                    } else {
+                                        return ""
+                                    }
+                                }
                             },
                             {
                                 field : 'cylqj',
                                 title : '柱镜区间',
-                                align : 'center'
+                                align : 'center',
+                                formatter : function(value, row, index) {
+                                    if (row.cylUp != null && row.cylDown != null){
+                                        return row.cylUp +"～"+ row.cylDown
+                                    } else {
+                                        return ""
+                                    }
+                                }
                             },
                             // {
                             //     field : '0',
@@ -132,6 +148,28 @@ function load() {
                             {
                                 field : 'cycle',
                                 title : '订做周期',
+                                align : 'center'
+                            },
+                            {
+                                field : 'positionName',
+                                title : '仓位',
+                                align : 'center'
+                            }
+                            ,
+                            {
+                                field : 'goodsCount',
+                                title : '数量',
+                                align : 'center'
+                            },
+                            {
+                                field : 'positionName',
+                                title : '仓位',
+                                align : 'center'
+                            }
+                            ,
+                            {
+                                field : 'goodsCount',
+                                title : '数量',
                                 align : 'center'
                             }
 						]

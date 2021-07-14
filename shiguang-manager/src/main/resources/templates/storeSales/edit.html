@@ -40,7 +40,7 @@
 					<option th:each="ls:${userDOList}"
 							th:text="${ls.name}"
 							th:value="${ls.name}"></option>
-					<input id="salenames" name="salenames" th:value="${saleName}" type="hidden"/>
+					<input id="salenames" name="saleName" th:value="${saleName}" type="hidden"/>
 				</select>
 		</span>
 	</div>
@@ -83,10 +83,10 @@
 				<tr id="tab11" style="display:none;">
 					<td>验光师</td>
 					<td>
-						<select id="disaa" style="width: 100px;">
-							<option value="">--请选择--</option>
-							<option value="1">选择1</option>
-							<option value="2">选择2</option>
+						<select id="disaa" name="optometryName" style="width: 100px;">
+							<option th:each="ls:${yanguangDOList}"
+									th:text="${ls.name}"
+									th:value="${ls.name}"></option>
 						</select>
 						<em></em>
 					</td>
@@ -95,21 +95,21 @@
 					<td>外来处方</td>
 					<td class="wailai">
 						<label><input name="wailai" type="checkbox" onclick="check(this)"> 外来处方</label>
-						<select id="sele" style="display: none;width: 100px;">
+						<select id="outRecipel" name="outRecipel" style="display: none;width: 100px;">
 							<option value="">--请选择--</option>
-							<option value="1">自报光度</option>
-							<option value="2">医院处方</option>
+							<option value="自报光度">自报光度</option>
+							<option value="医院处方">医院处方</option>
 						</select>
 					</td>
 				</tr>
 				<tr id="tab1111" style="display:none;">
 					<td>验光时间</td>
-					<td>2021-06-05 14:28</td>
+					<td><input id="yanguangTime" name="yanguangTime" readonly/></td>
 				</tr>
 				<tr id="tab11111" style="display:none;">
 					<td>处方类型</td>
 					<td>
-						<select onchange="getType(this.value)">
+						<select id="recipelType" name="recipelType" onchange="getType(this.value)">
 							<option value="2" >远用</option>
 							<option value="1" >近用</option>
 							<option value="3" >渐进/双光</option>
@@ -958,9 +958,9 @@
 		</ul>
 		<ul class="ulC">
 			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney"/></li>
-			<li>商品打折：<input type="text"  /><input type="button" value="还原" /></li>
-			<li>一口价：<input type="text" /><input type="button" class="qianpi" value="签批" /><input type="button" value="还原" /></li>
-			<li>抹零金额：<input type="text" value="0.00" id="molingMoney" name="molingMoney"/></li>
+			<li>商品打折：<input type="text"  disabled /><input type="button" value="还原" /></li>
+			<li>一口价：<input type="text" disabled /><input type="button" class="qianpi" value="签批" /><input type="button" value="还原" /></li>
+			<li>抹零金额：<input type="text" value="0.00" id="molingMoney" onfocus="if (value =='0.00'){value =''}" onblur="if (value ==''){value='0.00'}" name="molingMoney" onchange="getChangeValue()"/></li>
 		</ul>
 		<div class="JSbtn"><input type="submit" value="结算"/></div>
 	</div>
@@ -1145,6 +1145,9 @@
         var year = now.getFullYear(); //得到年份
         var month = now.getMonth();//得到月份
         var date = now.getDate();//得到日期
+		var hour = now.getHours();//小时
+        var minutes = now.getMinutes();//分钟
+        var seconds = now.getSeconds();//秒
         month = month + 1;
         if (month < 10) month = "0" + month;
         if (date < 10) date = "0" + date;
@@ -1152,14 +1155,16 @@
         time = year + "-" + month + "-" + date;
         //当前日期赋值给当前日期输入框中（jQuery easyUI）
         $('#mirrorTime').val(time);
-
-        var salenames = $("input[name='salenames']").val();
-        $("#salename").find("[value="+salenames+"]").attr("selected",true);
+        var myTime = "";
+        myTime = year + "-" + month + "-" + date +" "+ hour + ":"+ minutes + ":"+ seconds;
+        $("#yanguangTime").val(myTime);
+        var salenames = $("input[name='saleName']").val();
+        $("#saleName").find("[value="+salenames+"]").attr("selected",true);
 
     });
 
     function updatePerson(){
-		$("#salename").attr("disabled",false);
+		$("#saleName").attr("disabled",false);
         //document.getElementById("salename").disabled="false"
 	}
 
@@ -1404,12 +1409,13 @@
 	function check(a){
 		if (a.checked == true){
             document.getElementById('disaa').disabled = true;
-            sele.style = "display:''";
+            outRecipel.style = "display:''";
 		} else if (a.checked == false){
             document.getElementById('disaa').disabled = false;
-            sele.style = "display:none;";
+            outRecipel.style = "display:none;";
 		}
 	}
+
     var arraystore=[]
 	var arrayunit=[]
 	var arraycount=[]
@@ -1431,7 +1437,7 @@
                 for (var i=0;i<rows.length;i++){
                     html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
                     html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].producName+"</td>";
-                    html += "<input id='storeName' name='storeName' value="+rows[i].producName+" text='hidden'/>"
+                    html += "<input id='storeName' name='storeName' value="+rows[i].goodsName+" text='hidden'/>"
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>3</td>";
                     html += "<td>1</td>";
@@ -1452,7 +1458,7 @@
                     $("#goods").append(html);
                     price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                    arraystore.push(rows[i].producName);
+                    arraystore.push(rows[i].goodsName);
                     arrayunit.push(rows[i].retailPrice);
                     arraycount.push(1)
 					$("#isJj").val("有")
@@ -1515,7 +1521,7 @@
                 arrayjp = rows.length;
                 for (var i=0;i<rows.length;i++){
                     html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                    html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].producName+"</td>";
+                    html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].goodsName+"</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>3</td>";
                     html += "<td>1</td>";
@@ -1527,7 +1533,7 @@
                     html += "<td>0.00</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>镜片</td>";
-                    html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                    html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                     html += "<input id='storeName'name='storeName' type='hidden' />"
                     html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                     html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -1536,7 +1542,7 @@
                     $("#goods").append(html);
                     price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                    arraystore.push(rows[i].producName);
+                    arraystore.push(rows[i].goodsName);
                     arrayunit.push(rows[i].retailPrice);
                     arraycount.push(1);
                 }
@@ -1693,6 +1699,25 @@
 		ask.remove(jianame)
         $("#processAsk").val(ask);
 	}
+    function getChangeValue(){
+        var molingMoney = $("#molingMoney").val();
+        if (parseInt(molingMoney) >= parseInt(price)){
+            $("#molingMoney").val(0.00);
+            return alert("抹零金额不能大于实收金额");
+        }
+        price = (parseFloat(price) - parseFloat(molingMoney)).toFixed(2);
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+price+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额：0.00</li>";
+        lis += "<li>应收金额："+price+"</li>";
+        lis += "<li>实收金额："+price+"</li>";
+        $("#ula").append(lis)
+        $("#amountMoney").val(price)
+        //$("#amountMoney").val(price);
+    }
 </script>
 <script th:inline="javascript">
     $().ready(function(){
@@ -1737,7 +1762,6 @@
 		$("#giveName").val(give);
     }
     function dels(obj,str) {
-        alert(str);
         var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
         tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
 		give.remove(str)

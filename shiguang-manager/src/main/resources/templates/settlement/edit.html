@@ -59,7 +59,7 @@
 										<option value="2">医院收费处</option>
 										<option value="3">一卡通</option>
 									</select>
-									&nbsp;&nbsp;&nbsp;&nbsp;<input id="payMoney" name="payMoney" onpropertychange="cop()" oninput="cop()" style="width: 20%" type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;<input id="payMoney" name="payMoney" onchange="cop()" style="width: 20%" type="text">
 								</div>
 							</div>
 														<!--<div class="form-group">-->
@@ -110,7 +110,10 @@
         var str=document.getElementById("payMoney").value;
         document.getElementById("paymentMoney").value = str;
         var actualMoney = $("#actualMoney").val();
-        var change = actualMoney - str;
+        if ( parseFloat(str) < parseFloat(actualMoney)){
+            return alert("缴费金额不能小于实际缴费金额")
+		}
+        var change = str - actualMoney;
         var dd = change.toFixed(2);
         $("#changeMoney").val(dd)
 	}

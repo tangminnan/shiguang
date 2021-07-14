@@ -8,8 +8,8 @@ $(function() {
     // $('#exampleTable').bootstrapTable('hideColumn', 'refractivity');
     // $('#exampleTable').bootstrapTable('hideColumn', 'light');
     $('#exampleTable').bootstrapTable('hideColumn', 'producFactory');
-    $('#exampleTable').bootstrapTable('hideColumn', 'gradual');
-    $('#exampleTable').bootstrapTable('hideColumn', 'function');
+    $('#exampleTable').bootstrapTable('hideColumn', 'gradualName');
+    $('#exampleTable').bootstrapTable('hideColumn', 'functionName');
 });
 function load() {
 	$('#exampleTable')
@@ -41,8 +41,8 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
                                 dzType:$("#dzType").val(),
-                                producName:$('#producName').val(),
-                                producNum:$('#producNum').val()
+                                goodsName:$('#goodsName').val(),
+                                goodsNum:$('#goodsNum').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -56,12 +56,12 @@ function load() {
                                 checkbox : true
                             },
 								{
-									field : 'producNum',
+									field : 'goodsNum',
 									title : '商品代码',
 									align : 'center'
 								},
 								{
-									field : 'producName',
+									field : 'goodsName',
 									title : '商品名称',
 									align : 'center'
 								},
@@ -104,12 +104,26 @@ function load() {
                             {
                                 field : 'sphqj',
                                 title : '球镜区间',
-                                align : 'center'
+                                align : 'center',
+                                formatter : function(value, row, index) {
+                                    if (row.sphUp != null && row.sphDown != null){
+                                        return row.sphUp +"～"+ row.sphDown
+                                    } else {
+                                        return ""
+                                    }
+                                }
                             },
                             {
                                 field : 'cylqj',
                                 title : '柱镜区间',
-                                align : 'center'
+                                align : 'center',
+                                formatter : function(value, row, index) {
+                                    if (row.cylUp != null && row.cylDown != null){
+                                        return row.cylUp +"～"+ row.cylDown
+                                    } else {
+                                        return ""
+                                    }
+                                }
                             },
                             // {
                             //     field : '0',
@@ -119,10 +133,17 @@ function load() {
                             {
                                 field : 'lightbelowqj',
                                 title : '下加光区间',
-                                align : 'center'
+                                align : 'center',
+                                formatter : function(value, row, index) {
+                                    if (row.lightbelowLeft != null && row.lightbelowRight != null){
+                                        return row.lightbelowLeft +"～"+ row.lightbelowRight
+                                    } else {
+                                        return ""
+                                    }
+                                }
                             },
                             {
-                                field : 'refractivity',
+                                field : 'refractivityvalue',
                                 title : '折射率',
                                 align : 'center'
                             },
@@ -132,23 +153,34 @@ function load() {
                                 align : 'center'
                             },
                             {
-                                field : 'light',
+                                field : 'lightName',
                                 title : '光度分类',
                                 align : 'center'
                             },
                             {
-                                field : 'lens',
+                                field : 'lensName',
                                 title : '材料分类',
                                 align : 'center'
                             },
                             {
-                                field : 'gradual',
+                                field : 'gradualName',
                                 title : '渐进片分类',
                                 align : 'center'
                             },
                             {
-                                field : 'function',
+                                field : 'functionName',
                                 title : '镜片功能',
+                                align : 'center'
+                            },
+                            {
+                                field : 'positionName',
+                                title : '仓位',
+                                align : 'center'
+                            }
+                            ,
+                            {
+                                field : 'goodsCount',
+                                title : '数量',
                                 align : 'center'
                             }
 						]
@@ -171,8 +203,8 @@ function reLoad() {
         // $('#exampleTable').bootstrapTable('showColumn', 'light');
         // $('#exampleTable').bootstrapTable('showColumn', 'lens');
         $('#exampleTable').bootstrapTable('showColumn', 'producFactory');
-        $('#exampleTable').bootstrapTable('showColumn', 'gradual');
-        $('#exampleTable').bootstrapTable('showColumn', 'function');
+        $('#exampleTable').bootstrapTable('showColumn', 'gradualName');
+        $('#exampleTable').bootstrapTable('showColumn', 'functionName');
     } else {
         $('#exampleTable').bootstrapTable('showColumn', 'sph');
         $('#exampleTable').bootstrapTable('showColumn', 'cyl');
@@ -187,8 +219,8 @@ function reLoad() {
         // $('#exampleTable').bootstrapTable('hideColumn', 'light');
         // $('#exampleTable').bootstrapTable('hideColumn', 'lens');
         $('#exampleTable').bootstrapTable('hideColumn', 'producFactory');
-        $('#exampleTable').bootstrapTable('hideColumn', 'gradual');
-        $('#exampleTable').bootstrapTable('hideColumn', 'function');
+        $('#exampleTable').bootstrapTable('hideColumn', 'gradualName');
+        $('#exampleTable').bootstrapTable('hideColumn', 'functionName');
 	}
 }
 

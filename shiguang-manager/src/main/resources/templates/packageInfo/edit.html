@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${package.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">套餐名称：</label>
+								<div class="col-sm-8">
+									<input id="packageName" name="packageName" th:value="${package.packageName}" type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;套餐日期：<input id="packageTime" name="packageTime" th:value="${package.packageTime}" type="text" readonly>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;套餐形式：<input  name="packageForm" value="0" th:field="*{package.packageForm}" type="radio"/>多种优惠方式
+									<input  name="packageForm" th:field="*{package.packageForm}" value="1" type="radio" /> 单一优惠方式
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">生效日期：</label>
+								<div class="col-sm-8">
+									<input id="effectiveDate" name="effectiveDate" th:value="${package.effectiveDate}" type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;截至日期：<input id="expiryDate" name="expiryDate" th:value="${package.expiryDate}" type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;套餐分类：<select id="packageTypes" name="packageTypes" >
+									<option value="框镜销售">框镜销售</option>
+									<option value="隐形销售">隐形销售</option>
+									<option value="辅料销售">辅料销售</option>
+								</select>
+									<input id="packageType" name="packageType" th:value="${package.packageType}" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">套餐价格区间开始：</label>
+								<div class="col-sm-8">
+									<input id="startPrice" name="startPrice"  type="text">
+									    至
+									<input id="endPrice" name="endPrice"  type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;套餐金额：<input id="packagePrice" name="packagePrice" type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;允许累计积分：<input name="isCumulativePoints" th:field="*{package.isCumulativePoints}" type="radio" value="0"/>允许
+									<input name="isCumulativePoints" th:field="*{package.isCumulativePoints}" type="radio" value="1" />不允许
+								</div>
+							</div>
+
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">是否允许累加：</label>
+								<div class="col-sm-8">
+									<input name="isAdd" value="0" th:field="*{package.isAdd}" type="radio"/>允许
+									<input name="isAdd" value="1" th:field="*{package.isAdd}" type="radio"/>不允许
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;折上折：
+									<input name="foldUp" value="0" th:field="*{package.foldUp}" type="radio"/>允许
+									<input name="foldUp" value="1" th:field="*{package.foldUp}" type="radio"/>不允许
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;零售价格：<select id="retailPrices" name="retailPrice">
+									<option value="标准零售价格">标准零售价格</option>s
+									<input id="retailPrice" name="retailPrice" th:value="${package.retailPrice}" type="text">
+								</select>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">活动门店：</label>
+								<div class="col-sm-8">
+									<select name="storesstr" id="storesstr" multiple class="selectpicker form-control" onchange="changeDepart()">
+										<option th:each="ls:${departmentDOList}"
+												th:text="${ls.departName}"
+												th:value="${ls.departName}"></option>
+									</select>
+									<input id="store" name="store" th:value="${package.store}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" th:value="${package.remark}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/packageInfo/edit.js">
+	</script>
+<script type="text/javascript">
+    function changeDepart() {
+        var interester = [];
+        var obj = document.getElementById("storesstr");
+        for (var i = 0; i < obj.options.length; i++) {
+            if (obj.options[i].selected) {
+                interester.push(obj.options[i].value);// 收集选中项
+            }
+        }
+        $("#store").val(interester);
+    }
+</script>
+</body>
+</html>

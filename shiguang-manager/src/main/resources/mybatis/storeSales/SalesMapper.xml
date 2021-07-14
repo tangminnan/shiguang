@@ -94,7 +94,9 @@
 			`store_unit`, 
 			`store_count`, 
 			`remark`, 
-			`give_name`
+			`give_name`,
+			`peijing_time`,
+			`optometry_name`
 		)
 		values
 		(
@@ -117,7 +119,9 @@
 			#{storeUnit}, 
 			#{storeCount}, 
 			#{remark}, 
-			#{giveName}
+			#{giveName},
+			#{peijingTime},
+			#{optometryName}
 		)
 	</insert>
 	 
