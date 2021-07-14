@@ -63,6 +63,19 @@ public class OcularEyesDO implements Serializable {
     private Double astigmiaFirstLeft;
     //散光@A(左眼)
     private Double astigmiaLastLeft;
+    //平均K(OD)
+    private Double pjkOd;
+    //平均K(OS)
+    private Double pjkOs;
+    //平均K2(OD)
+    private Double pjkOd2;
+    //平均K2(OS)
+    private Double pjkOs2;
+    //眼压(OD)
+    private Double intraocularOd;
+    //眼压(OS)
+    private Double intraocularOs;
+    private Double axisLeft;
 
     /**
      * 设置：主键
@@ -70,346 +83,495 @@ public class OcularEyesDO implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
     /**
      * 获取：主键
      */
     public Long getId() {
         return id;
     }
+
     /**
      * 设置：会员卡号
      */
     public void setMemberNumber(String memberNumber) {
         this.memberNumber = memberNumber;
     }
+
     /**
      * 获取：会员卡号
      */
     public String getMemberNumber() {
         return memberNumber;
     }
+
     /**
      * 设置：眼轴
      */
     public void setAxis(Double axis) {
         this.axis = axis;
     }
+
     /**
      * 获取：眼轴
      */
     public Double getAxis() {
         return axis;
     }
+
     /**
      * 设置：中央角膜厚度(右眼)
      */
     public void setCentralThicknessRight(Double centralThicknessRight) {
         this.centralThicknessRight = centralThicknessRight;
     }
+
     /**
      * 获取：中央角膜厚度(右眼)
      */
     public Double getCentralThicknessRight() {
         return centralThicknessRight;
     }
+
     /**
      * 设置：中央角膜厚度(左眼)
      */
     public void setCentralThicknessLeft(Double centralThicknessLeft) {
         this.centralThicknessLeft = centralThicknessLeft;
     }
+
     /**
      * 获取：中央角膜厚度(左眼)
      */
     public Double getCentralThicknessLeft() {
         return centralThicknessLeft;
     }
+
     /**
      * 设置：房水深度(右眼)
      */
     public void setDepthHumorRight(Double depthHumorRight) {
         this.depthHumorRight = depthHumorRight;
     }
+
     /**
      * 获取：房水深度(右眼)
      */
     public Double getDepthHumorRight() {
         return depthHumorRight;
     }
+
     /**
      * 设置：房水深度(左眼)
      */
     public void setDepthHumorLeft(Double depthHumorLeft) {
         this.depthHumorLeft = depthHumorLeft;
     }
+
     /**
      * 获取：房水深度(左眼)
      */
     public Double getDepthHumorLeft() {
         return depthHumorLeft;
     }
+
     /**
      * 设置：前房深度(右眼)
      */
     public void setAnteriorChamberDepthRight(Double anteriorChamberDepthRight) {
         this.anteriorChamberDepthRight = anteriorChamberDepthRight;
     }
+
     /**
      * 获取：前房深度(右眼)
      */
     public Double getAnteriorChamberDepthRight() {
         return anteriorChamberDepthRight;
     }
+
     /**
      * 设置：前房深度(左眼)
      */
     public void setAnteriorChamberDepthLeft(Double anteriorChamberDepthLeft) {
         this.anteriorChamberDepthLeft = anteriorChamberDepthLeft;
     }
+
     /**
      * 获取：前房深度(左眼)
      */
     public Double getAnteriorChamberDepthLeft() {
         return anteriorChamberDepthLeft;
     }
+
     /**
      * 设置：晶状体厚度(右眼)
      */
     public void setLensThicknessRight(Double lensThicknessRight) {
         this.lensThicknessRight = lensThicknessRight;
     }
+
     /**
      * 获取：晶状体厚度(右眼)
      */
     public Double getLensThicknessRight() {
         return lensThicknessRight;
     }
+
     /**
      * 设置：晶状体厚度(左眼)
      */
     public void setLensThicknessLeft(Double lensThicknessLeft) {
         this.lensThicknessLeft = lensThicknessLeft;
     }
+
     /**
      * 获取：晶状体厚度(左眼)
      */
     public Double getLensThicknessLeft() {
         return lensThicknessLeft;
     }
+
     /**
      * 设置：瞳孔直径(右眼)
      */
     public void setPupilSizeRight(Double pupilSizeRight) {
         this.pupilSizeRight = pupilSizeRight;
     }
+
     /**
      * 获取：瞳孔直径(右眼)
      */
     public Double getPupilSizeRight() {
         return pupilSizeRight;
     }
+
     /**
      * 设置：瞳孔直径(左眼)
      */
     public void setPupilSizeLeft(Double pupilSizeLeft) {
         this.pupilSizeLeft = pupilSizeLeft;
     }
+
     /**
      * 获取：瞳孔直径(左眼)
      */
     public Double getPupilSizeLeft() {
         return pupilSizeLeft;
     }
+
     /**
      * 设置：白到白(右眼)
      */
     public void setWhiteRight(Double whiteRight) {
         this.whiteRight = whiteRight;
     }
+
     /**
      * 获取：白到白(右眼)
      */
     public Double getWhiteRight() {
         return whiteRight;
     }
+
     /**
      * 设置：白到白(左眼)
      */
     public void setWhiteLeft(Double whiteLeft) {
         this.whiteLeft = whiteLeft;
     }
+
     /**
      * 获取：白到白(左眼)
      */
     public Double getWhiteLeft() {
         return whiteLeft;
     }
+
     /**
      * 设置：玻璃体厚度(右眼)
      */
     public void setVitreousThicknessRight(Double vitreousThicknessRight) {
         this.vitreousThicknessRight = vitreousThicknessRight;
     }
+
     /**
      * 获取：玻璃体厚度(右眼)
      */
     public Double getVitreousThicknessRight() {
         return vitreousThicknessRight;
     }
+
     /**
      * 设置：玻璃体厚度(左眼)
      */
     public void setVitreousThicknessLeft(Double vitreousThicknessLeft) {
         this.vitreousThicknessLeft = vitreousThicknessLeft;
     }
+
     /**
      * 获取：玻璃体厚度(左眼)
      */
     public Double getVitreousThicknessLeft() {
         return vitreousThicknessLeft;
     }
+
     /**
      * 设置：角膜K1值(右眼)
      */
     public void setCornealFirstK1Right(Double cornealFirstK1Right) {
         this.cornealFirstK1Right = cornealFirstK1Right;
     }
+
     /**
      * 获取：角膜K1值(右眼)
      */
     public Double getCornealFirstK1Right() {
         return cornealFirstK1Right;
     }
+
     /**
      * 设置：角膜K1值@A(右眼)
      */
     public void setCornealLastK1Right(Double cornealLastK1Right) {
         this.cornealLastK1Right = cornealLastK1Right;
     }
+
     /**
      * 获取：角膜K1值@A(右眼)
      */
     public Double getCornealLastK1Right() {
         return cornealLastK1Right;
     }
+
     /**
      * 设置：角膜K1值(左眼)
      */
     public void setCornealFirstK1Left(Double cornealFirstK1Left) {
         this.cornealFirstK1Left = cornealFirstK1Left;
     }
+
     /**
      * 获取：角膜K1值(左眼)
      */
     public Double getCornealFirstK1Left() {
         return cornealFirstK1Left;
     }
+
     /**
      * 设置：角膜K1值@A(左眼)
      */
     public void setCornealLastK1Left(Double cornealLastK1Left) {
         this.cornealLastK1Left = cornealLastK1Left;
     }
+
     /**
      * 获取：角膜K1值@A(左眼)
      */
     public Double getCornealLastK1Left() {
         return cornealLastK1Left;
     }
+
     /**
      * 设置：角膜K1值(右眼)
      */
     public void setCornealFirstK2Right(Double cornealFirstK2Right) {
         this.cornealFirstK2Right = cornealFirstK2Right;
     }
+
     /**
      * 获取：角膜K1值(右眼)
      */
     public Double getCornealFirstK2Right() {
         return cornealFirstK2Right;
     }
+
     /**
      * 设置：角膜K1值@A(右眼)
      */
     public void setCornealLastK2Right(Double cornealLastK2Right) {
         this.cornealLastK2Right = cornealLastK2Right;
     }
+
     /**
      * 获取：角膜K1值@A(右眼)
      */
     public Double getCornealLastK2Right() {
         return cornealLastK2Right;
     }
+
     /**
      * 设置：角膜K1值(左眼)
      */
     public void setCornealFirstK2Left(Double cornealFirstK2Left) {
         this.cornealFirstK2Left = cornealFirstK2Left;
     }
+
     /**
      * 获取：角膜K1值(左眼)
      */
     public Double getCornealFirstK2Left() {
         return cornealFirstK2Left;
     }
+
     /**
      * 设置：角膜K1值@A(左眼)
      */
     public void setCornealLastK2Left(Double cornealLastK2Left) {
         this.cornealLastK2Left = cornealLastK2Left;
     }
+
     /**
      * 获取：角膜K1值@A(左眼)
      */
     public Double getCornealLastK2Left() {
         return cornealLastK2Left;
     }
+
     /**
      * 设置：散光(右眼)
      */
     public void setAstigmiaFirstRight(Double astigmiaFirstRight) {
         this.astigmiaFirstRight = astigmiaFirstRight;
     }
+
     /**
      * 获取：散光(右眼)
      */
     public Double getAstigmiaFirstRight() {
         return astigmiaFirstRight;
     }
+
     /**
      * 设置：散光@A(右眼)
      */
     public void setAstigmiaLastRight(Double astigmiaLastRight) {
         this.astigmiaLastRight = astigmiaLastRight;
     }
+
     /**
      * 获取：散光@A(右眼)
      */
     public Double getAstigmiaLastRight() {
         return astigmiaLastRight;
     }
+
     /**
      * 设置：散光(左眼)
      */
     public void setAstigmiaFirstLeft(Double astigmiaFirstLeft) {
         this.astigmiaFirstLeft = astigmiaFirstLeft;
     }
+
     /**
      * 获取：散光(左眼)
      */
     public Double getAstigmiaFirstLeft() {
         return astigmiaFirstLeft;
     }
+
     /**
      * 设置：散光@A(左眼)
      */
     public void setAstigmiaLastLeft(Double astigmiaLastLeft) {
         this.astigmiaLastLeft = astigmiaLastLeft;
     }
+
     /**
      * 获取：散光@A(左眼)
      */
     public Double getAstigmiaLastLeft() {
         return astigmiaLastLeft;
+    }
+
+    /**
+     * 设置：平均K(OD)
+     */
+    public void setPjkOd(Double pjkOd) {
+        this.pjkOd = pjkOd;
+    }
+
+    /**
+     * 获取：平均K(OD)
+     */
+    public Double getPjkOd() {
+        return pjkOd;
+    }
+
+    /**
+     * 设置：平均K(OS)
+     */
+    public void setPjkOs(Double pjkOs) {
+        this.pjkOs = pjkOs;
+    }
+
+    /**
+     * 获取：平均K(OS)
+     */
+    public Double getPjkOs() {
+        return pjkOs;
+    }
+
+    /**
+     * 设置：平均K2(OD)
+     */
+    public void setPjkOd2(Double pjkOd2) {
+        this.pjkOd2 = pjkOd2;
+    }
+
+    /**
+     * 获取：平均K2(OD)
+     */
+    public Double getPjkOd2() {
+        return pjkOd2;
+    }
+
+    /**
+     * 设置：平均K2(OS)
+     */
+    public void setPjkOs2(Double pjkOs2) {
+        this.pjkOs2 = pjkOs2;
+    }
+
+    /**
+     * 获取：平均K2(OS)
+     */
+    public Double getPjkOs2() {
+        return pjkOs2;
+    }
+
+    /**
+     * 设置：眼压(OD)
+     */
+    public void setIntraocularOd(Double intraocularOd) {
+        this.intraocularOd = intraocularOd;
+    }
+
+    /**
+     * 获取：眼压(OD)
+     */
+    public Double getIntraocularOd() {
+        return intraocularOd;
+    }
+
+    /**
+     * 设置：眼压(OS)
+     */
+    public void setIntraocularOs(Double intraocularOs) {
+        this.intraocularOs = intraocularOs;
+    }
+
+    /**
+     * 获取：眼压(OS)
+     */
+    public Double getIntraocularOs() {
+        return intraocularOs;
+    }
+
+    public Double getAxisLeft() {
+        return axisLeft;
+    }
+
+    public void setAxisLeft(Double axisLeft) {
+        this.axisLeft = axisLeft;
     }
 }

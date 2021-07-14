@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.ResultDao">
+
+	<select id="get" resultType="com.shiguang.jiancha.domain.ResultDO">
+		select `id`,`card_number`,`cbzd_zg`,`cbzd_ysy`,`cbzd_jsy`,`cbzd_sg`,`cbzd_qgcc`,`cbzd_rs`,`cbzd_xs`,`cbzd_ls`,`cbzd_yqzc`,`cbzd_dsl`,`cbzd_bz`,`cbzd_sypg`,`kjyj`,`kjyj_fqm`,`kjyj_qm`,`kjyj_jjdjd`,`kjyj_bsp`,`kjyj_flg`,`kjyj_zblj`,`jmjcj`,`jmjcj_ok`,`jmjcj_rgb`,`jmjcj_sg`,`jmjcj_ctx`,`jmjcj_pqx`,`jmjcj_zblj`,`sjxl`,`sjxl_tjxl`,`sjxl_rxxl`,`sjxl_jxxl`,`sjxl_srzxl`,`sjxl_jqskxl`,`sjxl_jqjhxl`,`sjxl_jqtjfsxl`,`yjjkyyxw`,`dslzsqjp`,`rszgfs`,`yyws`,`yizhu` from jc_result where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.jiancha.domain.ResultDO">
+		select `id`,`card_number`,`cbzd_zg`,`cbzd_ysy`,`cbzd_jsy`,`cbzd_sg`,`cbzd_qgcc`,`cbzd_rs`,`cbzd_xs`,`cbzd_ls`,`cbzd_yqzc`,`cbzd_dsl`,`cbzd_bz`,`cbzd_sypg`,`kjyj`,`kjyj_fqm`,`kjyj_qm`,`kjyj_jjdjd`,`kjyj_bsp`,`kjyj_flg`,`kjyj_zblj`,`jmjcj`,`jmjcj_ok`,`jmjcj_rgb`,`jmjcj_sg`,`jmjcj_ctx`,`jmjcj_pqx`,`jmjcj_zblj`,`sjxl`,`sjxl_tjxl`,`sjxl_rxxl`,`sjxl_jxxl`,`sjxl_srzxl`,`sjxl_jqskxl`,`sjxl_jqjhxl`,`sjxl_jqtjfsxl`,`yjjkyyxw`,`dslzsqjp`,`rszgfs`,`yyws`,`yizhu` from jc_result
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="cbzdZg != null and cbzdZg != ''"> and cbzd_zg = #{cbzdZg} </if>
+		  		  <if test="cbzdYsy != null and cbzdYsy != ''"> and cbzd_ysy = #{cbzdYsy} </if>
+		  		  <if test="cbzdJsy != null and cbzdJsy != ''"> and cbzd_jsy = #{cbzdJsy} </if>
+		  		  <if test="cbzdSg != null and cbzdSg != ''"> and cbzd_sg = #{cbzdSg} </if>
+		  		  <if test="cbzdQgcc != null and cbzdQgcc != ''"> and cbzd_qgcc = #{cbzdQgcc} </if>
+		  		  <if test="cbzdRs != null and cbzdRs != ''"> and cbzd_rs = #{cbzdRs} </if>
+		  		  <if test="cbzdXs != null and cbzdXs != ''"> and cbzd_xs = #{cbzdXs} </if>
+		  		  <if test="cbzdLs != null and cbzdLs != ''"> and cbzd_ls = #{cbzdLs} </if>
+		  		  <if test="cbzdYqzc != null and cbzdYqzc != ''"> and cbzd_yqzc = #{cbzdYqzc} </if>
+		  		  <if test="cbzdDsl != null and cbzdDsl != ''"> and cbzd_dsl = #{cbzdDsl} </if>
+		  		  <if test="cbzdBz != null and cbzdBz != ''"> and cbzd_bz = #{cbzdBz} </if>
+		  		  <if test="cbzdSypg != null and cbzdSypg != ''"> and cbzd_sypg = #{cbzdSypg} </if>
+		  		  <if test="kjyj != null and kjyj != ''"> and kjyj = #{kjyj} </if>
+		  		  <if test="kjyjFqm != null and kjyjFqm != ''"> and kjyj_fqm = #{kjyjFqm} </if>
+		  		  <if test="kjyjQm != null and kjyjQm != ''"> and kjyj_qm = #{kjyjQm} </if>
+		  		  <if test="kjyjJjdjd != null and kjyjJjdjd != ''"> and kjyj_jjdjd = #{kjyjJjdjd} </if>
+		  		  <if test="kjyjBsp != null and kjyjBsp != ''"> and kjyj_bsp = #{kjyjBsp} </if>
+		  		  <if test="kjyjFlg != null and kjyjFlg != ''"> and kjyj_flg = #{kjyjFlg} </if>
+		  		  <if test="kjyjZblj != null and kjyjZblj != ''"> and kjyj_zblj = #{kjyjZblj} </if>
+		  		  <if test="jmjcj != null and jmjcj != ''"> and jmjcj = #{jmjcj} </if>
+		  		  <if test="jmjcjOk != null and jmjcjOk != ''"> and jmjcj_ok = #{jmjcjOk} </if>
+		  		  <if test="jmjcjRgb != null and jmjcjRgb != ''"> and jmjcj_rgb = #{jmjcjRgb} </if>
+		  		  <if test="jmjcjSg != null and jmjcjSg != ''"> and jmjcj_sg = #{jmjcjSg} </if>
+		  		  <if test="jmjcjCtx != null and jmjcjCtx != ''"> and jmjcj_ctx = #{jmjcjCtx} </if>
+		  		  <if test="jmjcjPqx != null and jmjcjPqx != ''"> and jmjcj_pqx = #{jmjcjPqx} </if>
+		  		  <if test="jmjcjZblj != null and jmjcjZblj != ''"> and jmjcj_zblj = #{jmjcjZblj} </if>
+		  		  <if test="sjxl != null and sjxl != ''"> and sjxl = #{sjxl} </if>
+		  		  <if test="sjxlTjxl != null and sjxlTjxl != ''"> and sjxl_tjxl = #{sjxlTjxl} </if>
+		  		  <if test="sjxlRxxl != null and sjxlRxxl != ''"> and sjxl_rxxl = #{sjxlRxxl} </if>
+		  		  <if test="sjxlJxxl != null and sjxlJxxl != ''"> and sjxl_jxxl = #{sjxlJxxl} </if>
+		  		  <if test="sjxlSrzxl != null and sjxlSrzxl != ''"> and sjxl_srzxl = #{sjxlSrzxl} </if>
+		  		  <if test="sjxlJqskxl != null and sjxlJqskxl != ''"> and sjxl_jqskxl = #{sjxlJqskxl} </if>
+		  		  <if test="sjxlJqjhxl != null and sjxlJqjhxl != ''"> and sjxl_jqjhxl = #{sjxlJqjhxl} </if>
+		  		  <if test="sjxlJqtjfsxl != null and sjxlJqtjfsxl != ''"> and sjxl_jqtjfsxl = #{sjxlJqtjfsxl} </if>
+		  		  <if test="yjjkyyxw != null and yjjkyyxw != ''"> and yjjkyyxw = #{yjjkyyxw} </if>
+		  		  <if test="dslzsqjp != null and dslzsqjp != ''"> and dslzsqjp = #{dslzsqjp} </if>
+		  		  <if test="rszgfs != null and rszgfs != ''"> and rszgfs = #{rszgfs} </if>
+		  		  <if test="yyws != null and yyws != ''"> and yyws = #{yyws} </if>
+		  		  <if test="yizhu != null and yizhu != ''"> and yizhu = #{yizhu} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from jc_result
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="cbzdZg != null and cbzdZg != ''"> and cbzd_zg = #{cbzdZg} </if>
+		  		  <if test="cbzdYsy != null and cbzdYsy != ''"> and cbzd_ysy = #{cbzdYsy} </if>
+		  		  <if test="cbzdJsy != null and cbzdJsy != ''"> and cbzd_jsy = #{cbzdJsy} </if>
+		  		  <if test="cbzdSg != null and cbzdSg != ''"> and cbzd_sg = #{cbzdSg} </if>
+		  		  <if test="cbzdQgcc != null and cbzdQgcc != ''"> and cbzd_qgcc = #{cbzdQgcc} </if>
+		  		  <if test="cbzdRs != null and cbzdRs != ''"> and cbzd_rs = #{cbzdRs} </if>
+		  		  <if test="cbzdXs != null and cbzdXs != ''"> and cbzd_xs = #{cbzdXs} </if>
+		  		  <if test="cbzdLs != null and cbzdLs != ''"> and cbzd_ls = #{cbzdLs} </if>
+		  		  <if test="cbzdYqzc != null and cbzdYqzc != ''"> and cbzd_yqzc = #{cbzdYqzc} </if>
+		  		  <if test="cbzdDsl != null and cbzdDsl != ''"> and cbzd_dsl = #{cbzdDsl} </if>
+		  		  <if test="cbzdBz != null and cbzdBz != ''"> and cbzd_bz = #{cbzdBz} </if>
+		  		  <if test="cbzdSypg != null and cbzdSypg != ''"> and cbzd_sypg = #{cbzdSypg} </if>
+		  		  <if test="kjyj != null and kjyj != ''"> and kjyj = #{kjyj} </if>
+		  		  <if test="kjyjFqm != null and kjyjFqm != ''"> and kjyj_fqm = #{kjyjFqm} </if>
+		  		  <if test="kjyjQm != null and kjyjQm != ''"> and kjyj_qm = #{kjyjQm} </if>
+		  		  <if test="kjyjJjdjd != null and kjyjJjdjd != ''"> and kjyj_jjdjd = #{kjyjJjdjd} </if>
+		  		  <if test="kjyjBsp != null and kjyjBsp != ''"> and kjyj_bsp = #{kjyjBsp} </if>
+		  		  <if test="kjyjFlg != null and kjyjFlg != ''"> and kjyj_flg = #{kjyjFlg} </if>
+		  		  <if test="kjyjZblj != null and kjyjZblj != ''"> and kjyj_zblj = #{kjyjZblj} </if>
+		  		  <if test="jmjcj != null and jmjcj != ''"> and jmjcj = #{jmjcj} </if>
+		  		  <if test="jmjcjOk != null and jmjcjOk != ''"> and jmjcj_ok = #{jmjcjOk} </if>
+		  		  <if test="jmjcjRgb != null and jmjcjRgb != ''"> and jmjcj_rgb = #{jmjcjRgb} </if>
+		  		  <if test="jmjcjSg != null and jmjcjSg != ''"> and jmjcj_sg = #{jmjcjSg} </if>
+		  		  <if test="jmjcjCtx != null and jmjcjCtx != ''"> and jmjcj_ctx = #{jmjcjCtx} </if>
+		  		  <if test="jmjcjPqx != null and jmjcjPqx != ''"> and jmjcj_pqx = #{jmjcjPqx} </if>
+		  		  <if test="jmjcjZblj != null and jmjcjZblj != ''"> and jmjcj_zblj = #{jmjcjZblj} </if>
+		  		  <if test="sjxl != null and sjxl != ''"> and sjxl = #{sjxl} </if>
+		  		  <if test="sjxlTjxl != null and sjxlTjxl != ''"> and sjxl_tjxl = #{sjxlTjxl} </if>
+		  		  <if test="sjxlRxxl != null and sjxlRxxl != ''"> and sjxl_rxxl = #{sjxlRxxl} </if>
+		  		  <if test="sjxlJxxl != null and sjxlJxxl != ''"> and sjxl_jxxl = #{sjxlJxxl} </if>
+		  		  <if test="sjxlSrzxl != null and sjxlSrzxl != ''"> and sjxl_srzxl = #{sjxlSrzxl} </if>
+		  		  <if test="sjxlJqskxl != null and sjxlJqskxl != ''"> and sjxl_jqskxl = #{sjxlJqskxl} </if>
+		  		  <if test="sjxlJqjhxl != null and sjxlJqjhxl != ''"> and sjxl_jqjhxl = #{sjxlJqjhxl} </if>
+		  		  <if test="sjxlJqtjfsxl != null and sjxlJqtjfsxl != ''"> and sjxl_jqtjfsxl = #{sjxlJqtjfsxl} </if>
+		  		  <if test="yjjkyyxw != null and yjjkyyxw != ''"> and yjjkyyxw = #{yjjkyyxw} </if>
+		  		  <if test="dslzsqjp != null and dslzsqjp != ''"> and dslzsqjp = #{dslzsqjp} </if>
+		  		  <if test="rszgfs != null and rszgfs != ''"> and rszgfs = #{rszgfs} </if>
+		  		  <if test="yyws != null and yyws != ''"> and yyws = #{yyws} </if>
+		  		  <if test="yizhu != null and yizhu != ''"> and yizhu = #{yizhu} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="id">
+		insert into jc_result
+		(
+			`card_number`, 
+			`cbzd_zg`, 
+			`cbzd_ysy`, 
+			`cbzd_jsy`, 
+			`cbzd_sg`, 
+			`cbzd_qgcc`, 
+			`cbzd_rs`, 
+			`cbzd_xs`, 
+			`cbzd_ls`, 
+			`cbzd_yqzc`, 
+			`cbzd_dsl`, 
+			`cbzd_bz`, 
+			`cbzd_sypg`, 
+			`kjyj`, 
+			`kjyj_fqm`, 
+			`kjyj_qm`, 
+			`kjyj_jjdjd`, 
+			`kjyj_bsp`, 
+			`kjyj_flg`, 
+			`kjyj_zblj`, 
+			`jmjcj`, 
+			`jmjcj_ok`, 
+			`jmjcj_rgb`, 
+			`jmjcj_sg`, 
+			`jmjcj_ctx`, 
+			`jmjcj_pqx`, 
+			`jmjcj_zblj`, 
+			`sjxl`, 
+			`sjxl_tjxl`, 
+			`sjxl_rxxl`, 
+			`sjxl_jxxl`, 
+			`sjxl_srzxl`, 
+			`sjxl_jqskxl`, 
+			`sjxl_jqjhxl`, 
+			`sjxl_jqtjfsxl`, 
+			`yjjkyyxw`, 
+			`dslzsqjp`, 
+			`rszgfs`, 
+			`yyws`, 
+			`yizhu`
+		)
+		values
+		(
+			#{cardNumber}, 
+			#{cbzdZg}, 
+			#{cbzdYsy}, 
+			#{cbzdJsy}, 
+			#{cbzdSg}, 
+			#{cbzdQgcc}, 
+			#{cbzdRs}, 
+			#{cbzdXs}, 
+			#{cbzdLs}, 
+			#{cbzdYqzc}, 
+			#{cbzdDsl}, 
+			#{cbzdBz}, 
+			#{cbzdSypg}, 
+			#{kjyj}, 
+			#{kjyjFqm}, 
+			#{kjyjQm}, 
+			#{kjyjJjdjd}, 
+			#{kjyjBsp}, 
+			#{kjyjFlg}, 
+			#{kjyjZblj}, 
+			#{jmjcj}, 
+			#{jmjcjOk}, 
+			#{jmjcjRgb}, 
+			#{jmjcjSg}, 
+			#{jmjcjCtx}, 
+			#{jmjcjPqx}, 
+			#{jmjcjZblj}, 
+			#{sjxl}, 
+			#{sjxlTjxl}, 
+			#{sjxlRxxl}, 
+			#{sjxlJxxl}, 
+			#{sjxlSrzxl}, 
+			#{sjxlJqskxl}, 
+			#{sjxlJqjhxl}, 
+			#{sjxlJqtjfsxl}, 
+			#{yjjkyyxw}, 
+			#{dslzsqjp}, 
+			#{rszgfs}, 
+			#{yyws}, 
+			#{yizhu}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.jiancha.domain.ResultDO">
+		update jc_result 
+		<set>
+			<if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+			<if test="cbzdZg != null">`cbzd_zg` = #{cbzdZg}, </if>
+			<if test="cbzdYsy != null">`cbzd_ysy` = #{cbzdYsy}, </if>
+			<if test="cbzdJsy != null">`cbzd_jsy` = #{cbzdJsy}, </if>
+			<if test="cbzdSg != null">`cbzd_sg` = #{cbzdSg}, </if>
+			<if test="cbzdQgcc != null">`cbzd_qgcc` = #{cbzdQgcc}, </if>
+			<if test="cbzdRs != null">`cbzd_rs` = #{cbzdRs}, </if>
+			<if test="cbzdXs != null">`cbzd_xs` = #{cbzdXs}, </if>
+			<if test="cbzdLs != null">`cbzd_ls` = #{cbzdLs}, </if>
+			<if test="cbzdYqzc != null">`cbzd_yqzc` = #{cbzdYqzc}, </if>
+			<if test="cbzdDsl != null">`cbzd_dsl` = #{cbzdDsl}, </if>
+			<if test="cbzdBz != null">`cbzd_bz` = #{cbzdBz}, </if>
+			<if test="cbzdSypg != null">`cbzd_sypg` = #{cbzdSypg}, </if>
+			<if test="kjyj != null">`kjyj` = #{kjyj}, </if>
+			<if test="kjyjFqm != null">`kjyj_fqm` = #{kjyjFqm}, </if>
+			<if test="kjyjQm != null">`kjyj_qm` = #{kjyjQm}, </if>
+			<if test="kjyjJjdjd != null">`kjyj_jjdjd` = #{kjyjJjdjd}, </if>
+			<if test="kjyjBsp != null">`kjyj_bsp` = #{kjyjBsp}, </if>
+			<if test="kjyjFlg != null">`kjyj_flg` = #{kjyjFlg}, </if>
+			<if test="kjyjZblj != null">`kjyj_zblj` = #{kjyjZblj}, </if>
+			<if test="jmjcj != null">`jmjcj` = #{jmjcj}, </if>
+			<if test="jmjcjOk != null">`jmjcj_ok` = #{jmjcjOk}, </if>
+			<if test="jmjcjRgb != null">`jmjcj_rgb` = #{jmjcjRgb}, </if>
+			<if test="jmjcjSg != null">`jmjcj_sg` = #{jmjcjSg}, </if>
+			<if test="jmjcjCtx != null">`jmjcj_ctx` = #{jmjcjCtx}, </if>
+			<if test="jmjcjPqx != null">`jmjcj_pqx` = #{jmjcjPqx}, </if>
+			<if test="jmjcjZblj != null">`jmjcj_zblj` = #{jmjcjZblj}, </if>
+			<if test="sjxl != null">`sjxl` = #{sjxl}, </if>
+			<if test="sjxlTjxl != null">`sjxl_tjxl` = #{sjxlTjxl}, </if>
+			<if test="sjxlRxxl != null">`sjxl_rxxl` = #{sjxlRxxl}, </if>
+			<if test="sjxlJxxl != null">`sjxl_jxxl` = #{sjxlJxxl}, </if>
+			<if test="sjxlSrzxl != null">`sjxl_srzxl` = #{sjxlSrzxl}, </if>
+			<if test="sjxlJqskxl != null">`sjxl_jqskxl` = #{sjxlJqskxl}, </if>
+			<if test="sjxlJqjhxl != null">`sjxl_jqjhxl` = #{sjxlJqjhxl}, </if>
+			<if test="sjxlJqtjfsxl != null">`sjxl_jqtjfsxl` = #{sjxlJqtjfsxl}, </if>
+			<if test="yjjkyyxw != null">`yjjkyyxw` = #{yjjkyyxw}, </if>
+			<if test="dslzsqjp != null">`dslzsqjp` = #{dslzsqjp}, </if>
+			<if test="rszgfs != null">`rszgfs` = #{rszgfs}, </if>
+			<if test="yyws != null">`yyws` = #{yyws}, </if>
+			<if test="yizhu != null">`yizhu` = #{yizhu}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from jc_result where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from jc_result where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

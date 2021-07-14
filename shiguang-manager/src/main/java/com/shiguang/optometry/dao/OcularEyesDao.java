@@ -12,9 +12,9 @@ import java.util.Map;
 public interface OcularEyesDao {
     OcularEyesDO get(Long id);
 
-    List<OcularEyesDO> list(Map<String,Object> map);
+    List<OcularEyesDO> list(String cardNumber);
 
-    int count(Map<String,Object> map);
+    int count(Map<String, Object> map);
 
     int save(OcularEyesDO eyes);
 

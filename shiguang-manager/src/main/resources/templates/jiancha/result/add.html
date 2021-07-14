@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">卡号：</label>
+                            <div class="col-sm-8">
+                                <input id="cardNumber" name="cardNumber" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">正规：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdZg" name="cbzdZg" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">远视眼：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdYsy" name="cbzdYsy" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">近视眼：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdJsy" name="cbzdJsy" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">散光：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdSg" name="cbzdSg" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">屈光参差：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdQgcc" name="cbzdQgcc" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">弱视：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdRs" name="cbzdRs" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">斜视：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdXs" name="cbzdXs" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">老视：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdLs" name="cbzdLs" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">眼球震颤：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdYqzc" name="cbzdYqzc" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">低视力：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdDsl" name="cbzdDsl" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">备注：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdBz" name="cbzdBz" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">双眼视功能评估：</label>
+                            <div class="col-sm-8">
+                                <input id="cbzdSypg" name="cbzdSypg" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">框架眼镜：</label>
+                            <div class="col-sm-8">
+                                <input id="kjyj" name="kjyj" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">非球面：</label>
+                            <div class="col-sm-8">
+                                <input id="kjyjFqm" name="kjyjFqm" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">球面：</label>
+                            <div class="col-sm-8">
+                                <input id="kjyjQm" name="kjyjQm" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">渐进多焦点：</label>
+                            <div class="col-sm-8">
+                                <input id="kjyjJjdjd" name="kjyjJjdjd" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">变色片：</label>
+                            <div class="col-sm-8">
+                                <input id="kjyjBsp" name="kjyjBsp" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">防蓝光：</label>
+                            <div class="col-sm-8">
+                                <input id="kjyjFlg" name="kjyjFlg" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">周边离焦(框架眼镜)：</label>
+                            <div class="col-sm-8">
+                                <input id="kjyjZblj" name="kjyjZblj" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">角膜接触镜：</label>
+                            <div class="col-sm-8">
+                                <input id="jmjcj" name="jmjcj" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">OK：</label>
+                            <div class="col-sm-8">
+                                <input id="jmjcjOk" name="jmjcjOk" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">RGB：</label>
+                            <div class="col-sm-8">
+                                <input id="jmjcjRgb" name="jmjcjRgb" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">散光：</label>
+                            <div class="col-sm-8">
+                                <input id="jmjcjSg" name="jmjcjSg" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">传统型：</label>
+                            <div class="col-sm-8">
+                                <input id="jmjcjCtx" name="jmjcjCtx" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">抛弃型：</label>
+                            <div class="col-sm-8">
+                                <input id="jmjcjPqx" name="jmjcjPqx" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">周边离焦(角膜接触镜)：</label>
+                            <div class="col-sm-8">
+                                <input id="jmjcjZblj" name="jmjcjZblj" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">视觉训练：</label>
+                            <div class="col-sm-8">
+                                <input id="sjxl" name="sjxl" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">调节训练：</label>
+                            <div class="col-sm-8">
+                                <input id="sjxlTjxl" name="sjxlTjxl" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">融像训练：</label>
+                            <div class="col-sm-8">
+                                <input id="sjxlRxxl" name="sjxlRxxl" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">精细训练：</label>
+                            <div class="col-sm-8">
+                                <input id="sjxlJxxl" name="sjxlJxxl" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">视认知训练：</label>
+                            <div class="col-sm-8">
+                                <input id="sjxlSrzxl" name="sjxlSrzxl" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">加强散开训练：</label>
+                            <div class="col-sm-8">
+                                <input id="sjxlJqskxl" name="sjxlJqskxl" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">加强集合训练：</label>
+                            <div class="col-sm-8">
+                                <input id="sjxlJqjhxl" name="sjxlJqjhxl" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">加强调节放松训练：</label>
+                            <div class="col-sm-8">
+                                <input id="sjxlJqtjfsxl" name="sjxlJqtjfsxl" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">云夹监控用眼行为：</label>
+                            <div class="col-sm-8">
+                                <input id="yjjkyyxw" name="yjjkyyxw" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">低视力助视器验配：</label>
+                            <div class="col-sm-8">
+                                <input id="dslzsqjp" name="dslzsqjp" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">弱视遮盖方式：</label>
+                            <div class="col-sm-8">
+                                <input id="rszgfs" name="rszgfs" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">用眼卫生：</label>
+                            <div class="col-sm-8">
+                                <input id="yyws" name="yyws" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">医嘱：</label>
+                            <div class="col-sm-8">
+                                <input id="yizhu" name="yizhu" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/jiancha/result/add.js">
+</script>
+</body>
+</html>

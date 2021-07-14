@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.KjjyDao">
+
+    <select id="get" resultType="com.shiguang.jiancha.domain.KjjyDO">
+		select `kjjy_id`,`card_number`,`kjjy_prescription_type`,`kjjy_doctor`,`kjjy_optometry_name`,`kjjy_sphod`,`kjjy_sphos`,`kjjy_cylod`,`kjjy_cylos`,`kjjy_axialod`,`kjjy_axialos`,`kjjy_prismod`,`kjjy_prismos`,`kjjy_jdod`,`kjjy_jdos`,`kjjy_yytjod`,`kjjy_yytjos`,`kjjy_tgod`,`kjjy_tgos`,`kjjy_vaod`,`kjjy_vaos`,`kjjy_jpcz`,`kjjy_clfs`,`kjjy_jykj`,`kjjy_kjlx`,`kjjy_text`,`kjjy_beizhu` from jc_kjjy where kjjy_id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.jiancha.domain.KjjyDO">
+        select
+        `kjjy_id`,`card_number`,`kjjy_prescription_type`,`kjjy_doctor`,`kjjy_optometry_name`,`kjjy_sphod`,`kjjy_sphos`,`kjjy_cylod`,`kjjy_cylos`,`kjjy_axialod`,`kjjy_axialos`,`kjjy_prismod`,`kjjy_prismos`,`kjjy_jdod`,`kjjy_jdos`,`kjjy_yytjod`,`kjjy_yytjos`,`kjjy_tgod`,`kjjy_tgos`,`kjjy_vaod`,`kjjy_vaos`,`kjjy_jpcz`,`kjjy_clfs`,`kjjy_jykj`,`kjjy_kjlx`,`kjjy_text`,`kjjy_beizhu`
+        from jc_kjjy
+        <where>
+            <if test="kjjyId != null and kjjyId != ''">and kjjy_id = #{kjjyId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="kjjyPrescriptionType != null and kjjyPrescriptionType != ''">and kjjy_prescription_type =
+                #{kjjyPrescriptionType}
+            </if>
+            <if test="kjjyDoctor != null and kjjyDoctor != ''">and kjjy_doctor = #{kjjyDoctor}</if>
+            <if test="kjjyOptometryName != null and kjjyOptometryName != ''">and kjjy_optometry_name =
+                #{kjjyOptometryName}
+            </if>
+            <if test="kjjySphod != null and kjjySphod != ''">and kjjy_sphod = #{kjjySphod}</if>
+            <if test="kjjySphos != null and kjjySphos != ''">and kjjy_sphos = #{kjjySphos}</if>
+            <if test="kjjyCylod != null and kjjyCylod != ''">and kjjy_cylod = #{kjjyCylod}</if>
+            <if test="kjjyCylos != null and kjjyCylos != ''">and kjjy_cylos = #{kjjyCylos}</if>
+            <if test="kjjyAxialod != null and kjjyAxialod != ''">and kjjy_axialod = #{kjjyAxialod}</if>
+            <if test="kjjyAxialos != null and kjjyAxialos != ''">and kjjy_axialos = #{kjjyAxialos}</if>
+            <if test="kjjyPrismod != null and kjjyPrismod != ''">and kjjy_prismod = #{kjjyPrismod}</if>
+            <if test="kjjyPrismos != null and kjjyPrismos != ''">and kjjy_prismos = #{kjjyPrismos}</if>
+            <if test="kjjyJdod != null and kjjyJdod != ''">and kjjy_jdod = #{kjjyJdod}</if>
+            <if test="kjjyJdos != null and kjjyJdos != ''">and kjjy_jdos = #{kjjyJdos}</if>
+            <if test="kjjyYytjod != null and kjjyYytjod != ''">and kjjy_yytjod = #{kjjyYytjod}</if>
+            <if test="kjjyYytjos != null and kjjyYytjos != ''">and kjjy_yytjos = #{kjjyYytjos}</if>
+            <if test="kjjyTgod != null and kjjyTgod != ''">and kjjy_tgod = #{kjjyTgod}</if>
+            <if test="kjjyTgos != null and kjjyTgos != ''">and kjjy_tgos = #{kjjyTgos}</if>
+            <if test="kjjyVaod != null and kjjyVaod != ''">and kjjy_vaod = #{kjjyVaod}</if>
+            <if test="kjjyVaos != null and kjjyVaos != ''">and kjjy_vaos = #{kjjyVaos}</if>
+            <if test="kjjyJpcz != null and kjjyJpcz != ''">and kjjy_jpcz = #{kjjyJpcz}</if>
+            <if test="kjjyClfs != null and kjjyClfs != ''">and kjjy_clfs = #{kjjyClfs}</if>
+            <if test="kjjyJykj != null and kjjyJykj != ''">and kjjy_jykj = #{kjjyJykj}</if>
+            <if test="kjjyKjlx != null and kjjyKjlx != ''">and kjjy_kjlx = #{kjjyKjlx}</if>
+            <if test="kjjyText != null and kjjyText != ''">and kjjy_text = #{kjjyText}</if>
+            <if test="kjjyBeizhu != null and kjjyBeizhu != ''">and kjjy_beizhu = #{kjjyBeizhu}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by kjjy_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from jc_kjjy
+        <where>
+            <if test="kjjyId != null and kjjyId != ''">and kjjy_id = #{kjjyId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="kjjyPrescriptionType != null and kjjyPrescriptionType != ''">and kjjy_prescription_type =
+                #{kjjyPrescriptionType}
+            </if>
+            <if test="kjjyDoctor != null and kjjyDoctor != ''">and kjjy_doctor = #{kjjyDoctor}</if>
+            <if test="kjjyOptometryName != null and kjjyOptometryName != ''">and kjjy_optometry_name =
+                #{kjjyOptometryName}
+            </if>
+            <if test="kjjySphod != null and kjjySphod != ''">and kjjy_sphod = #{kjjySphod}</if>
+            <if test="kjjySphos != null and kjjySphos != ''">and kjjy_sphos = #{kjjySphos}</if>
+            <if test="kjjyCylod != null and kjjyCylod != ''">and kjjy_cylod = #{kjjyCylod}</if>
+            <if test="kjjyCylos != null and kjjyCylos != ''">and kjjy_cylos = #{kjjyCylos}</if>
+            <if test="kjjyAxialod != null and kjjyAxialod != ''">and kjjy_axialod = #{kjjyAxialod}</if>
+            <if test="kjjyAxialos != null and kjjyAxialos != ''">and kjjy_axialos = #{kjjyAxialos}</if>
+            <if test="kjjyPrismod != null and kjjyPrismod != ''">and kjjy_prismod = #{kjjyPrismod}</if>
+            <if test="kjjyPrismos != null and kjjyPrismos != ''">and kjjy_prismos = #{kjjyPrismos}</if>
+            <if test="kjjyJdod != null and kjjyJdod != ''">and kjjy_jdod = #{kjjyJdod}</if>
+            <if test="kjjyJdos != null and kjjyJdos != ''">and kjjy_jdos = #{kjjyJdos}</if>
+            <if test="kjjyYytjod != null and kjjyYytjod != ''">and kjjy_yytjod = #{kjjyYytjod}</if>
+            <if test="kjjyYytjos != null and kjjyYytjos != ''">and kjjy_yytjos = #{kjjyYytjos}</if>
+            <if test="kjjyTgod != null and kjjyTgod != ''">and kjjy_tgod = #{kjjyTgod}</if>
+            <if test="kjjyTgos != null and kjjyTgos != ''">and kjjy_tgos = #{kjjyTgos}</if>
+            <if test="kjjyVaod != null and kjjyVaod != ''">and kjjy_vaod = #{kjjyVaod}</if>
+            <if test="kjjyVaos != null and kjjyVaos != ''">and kjjy_vaos = #{kjjyVaos}</if>
+            <if test="kjjyJpcz != null and kjjyJpcz != ''">and kjjy_jpcz = #{kjjyJpcz}</if>
+            <if test="kjjyClfs != null and kjjyClfs != ''">and kjjy_clfs = #{kjjyClfs}</if>
+            <if test="kjjyJykj != null and kjjyJykj != ''">and kjjy_jykj = #{kjjyJykj}</if>
+            <if test="kjjyKjlx != null and kjjyKjlx != ''">and kjjy_kjlx = #{kjjyKjlx}</if>
+            <if test="kjjyText != null and kjjyText != ''">and kjjy_text = #{kjjyText}</if>
+            <if test="kjjyBeizhu != null and kjjyBeizhu != ''">and kjjy_beizhu = #{kjjyBeizhu}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.jiancha.domain.KjjyDO" useGeneratedKeys="true" keyProperty="kjjyId">
+		insert into jc_kjjy
+		(
+			`card_number`,
+			`kjjy_prescription_type`,
+			`kjjy_doctor`,
+			`kjjy_optometry_name`,
+			`kjjy_sphod`,
+			`kjjy_sphos`,
+			`kjjy_cylod`,
+			`kjjy_cylos`,
+			`kjjy_axialod`,
+			`kjjy_axialos`,
+			`kjjy_prismod`,
+			`kjjy_prismos`,
+			`kjjy_jdod`,
+			`kjjy_jdos`,
+			`kjjy_yytjod`,
+			`kjjy_yytjos`,
+			`kjjy_tgod`,
+			`kjjy_tgos`,
+			`kjjy_vaod`,
+			`kjjy_vaos`,
+			`kjjy_jpcz`,
+			`kjjy_clfs`,
+			`kjjy_jykj`,
+			`kjjy_kjlx`,
+			`kjjy_text`,
+			`kjjy_beizhu`
+		)
+		values
+		(
+			#{cardNumber},
+			#{kjjyPrescriptionType},
+			#{kjjyDoctor},
+			#{kjjyOptometryName},
+			#{kjjySphod},
+			#{kjjySphos},
+			#{kjjyCylod},
+			#{kjjyCylos},
+			#{kjjyAxialod},
+			#{kjjyAxialos},
+			#{kjjyPrismod},
+			#{kjjyPrismos},
+			#{kjjyJdod},
+			#{kjjyJdos},
+			#{kjjyYytjod},
+			#{kjjyYytjos},
+			#{kjjyTgod},
+			#{kjjyTgos},
+			#{kjjyVaod},
+			#{kjjyVaos},
+			#{kjjyJpcz},
+			#{kjjyClfs},
+			#{kjjyJykj},
+			#{kjjyKjlx},
+			#{kjjyText},
+			#{kjjyBeizhu}
+		)
+	</insert>
+    <insert id="savekjjy" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true"
+            keyProperty="kjjyId">
+		insert into jc_kjjy
+		(
+			`card_number`,
+			`kjjy_prescription_type`,
+			`kjjy_doctor`,
+			`kjjy_optometry_name`,
+			`kjjy_sphod`,
+			`kjjy_sphos`,
+			`kjjy_cylod`,
+			`kjjy_cylos`,
+			`kjjy_axialod`,
+			`kjjy_axialos`,
+			`kjjy_prismod`,
+			`kjjy_prismos`,
+			`kjjy_jdod`,
+			`kjjy_jdos`,
+			`kjjy_yytjod`,
+			`kjjy_yytjos`,
+			`kjjy_tgod`,
+			`kjjy_tgos`,
+			`kjjy_vaod`,
+			`kjjy_vaos`,
+			`kjjy_jpcz`,
+			`kjjy_clfs`,
+			`kjjy_jykj`,
+			`kjjy_kjlx`,
+			`kjjy_text`,
+			`kjjy_beizhu`
+		)
+		values
+		(
+			#{cardNumber},
+			#{kjjyPrescriptionType},
+			#{kjjyDoctor},
+			#{kjjyOptometryName},
+			#{kjjySphod},
+			#{kjjySphos},
+			#{kjjyCylod},
+			#{kjjyCylos},
+			#{kjjyAxialod},
+			#{kjjyAxialos},
+			#{kjjyPrismod},
+			#{kjjyPrismos},
+			#{kjjyJdod},
+			#{kjjyJdos},
+			#{kjjyYytjod},
+			#{kjjyYytjos},
+			#{kjjyTgod},
+			#{kjjyTgos},
+			#{kjjyVaod},
+			#{kjjyVaos},
+			#{kjjyJpcz},
+			#{kjjyClfs},
+			#{kjjyJykj},
+			#{kjjyKjlx},
+			#{kjjyText},
+			#{kjjyBeizhu}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.jiancha.domain.KjjyDO">
+        update jc_kjjy
+        <set>
+            <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+            <if test="kjjyPrescriptionType != null">`kjjy_prescription_type` = #{kjjyPrescriptionType},</if>
+            <if test="kjjyDoctor != null">`kjjy_doctor` = #{kjjyDoctor},</if>
+            <if test="kjjyOptometryName != null">`kjjy_optometry_name` = #{kjjyOptometryName},</if>
+            <if test="kjjySphod != null">`kjjy_sphod` = #{kjjySphod},</if>
+            <if test="kjjySphos != null">`kjjy_sphos` = #{kjjySphos},</if>
+            <if test="kjjyCylod != null">`kjjy_cylod` = #{kjjyCylod},</if>
+            <if test="kjjyCylos != null">`kjjy_cylos` = #{kjjyCylos},</if>
+            <if test="kjjyAxialod != null">`kjjy_axialod` = #{kjjyAxialod},</if>
+            <if test="kjjyAxialos != null">`kjjy_axialos` = #{kjjyAxialos},</if>
+            <if test="kjjyPrismod != null">`kjjy_prismod` = #{kjjyPrismod},</if>
+            <if test="kjjyPrismos != null">`kjjy_prismos` = #{kjjyPrismos},</if>
+            <if test="kjjyJdod != null">`kjjy_jdod` = #{kjjyJdod},</if>
+            <if test="kjjyJdos != null">`kjjy_jdos` = #{kjjyJdos},</if>
+            <if test="kjjyYytjod != null">`kjjy_yytjod` = #{kjjyYytjod},</if>
+            <if test="kjjyYytjos != null">`kjjy_yytjos` = #{kjjyYytjos},</if>
+            <if test="kjjyTgod != null">`kjjy_tgod` = #{kjjyTgod},</if>
+            <if test="kjjyTgos != null">`kjjy_tgos` = #{kjjyTgos},</if>
+            <if test="kjjyVaod != null">`kjjy_vaod` = #{kjjyVaod},</if>
+            <if test="kjjyVaos != null">`kjjy_vaos` = #{kjjyVaos},</if>
+            <if test="kjjyJpcz != null">`kjjy_jpcz` = #{kjjyJpcz},</if>
+            <if test="kjjyClfs != null">`kjjy_clfs` = #{kjjyClfs},</if>
+            <if test="kjjyJykj != null">`kjjy_jykj` = #{kjjyJykj},</if>
+            <if test="kjjyKjlx != null">`kjjy_kjlx` = #{kjjyKjlx},</if>
+            <if test="kjjyText != null">`kjjy_text` = #{kjjyText},</if>
+            <if test="kjjyBeizhu != null">`kjjy_beizhu` = #{kjjyBeizhu}</if>
+        </set>
+        where kjjy_id = #{kjjyId}
+    </update>
+
+    <delete id="remove">
+		delete from jc_kjjy where kjjy_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from jc_kjjy where kjjy_id in
+        <foreach item="kjjyId" collection="array" open="(" separator="," close=")">
+            #{kjjyId}
+        </foreach>
+    </delete>
+
+</mapper>

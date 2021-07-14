@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.YizhuDao">
+
+    <select id="get" resultType="com.shiguang.jiancha.domain.YizhuDO">
+		select `yizhu_id`,`yizhu_type`,`yizhu` from yizhu where yizhu_id = #{value}
+	</select>
+
+    <select id="findYizhu" resultType="com.shiguang.jiancha.domain.YizhuDO">
+        select `yizhu_id`,`yizhu_type`,`yizhu` from yizhu
+        <where>
+            <if test="yizhuId != null and yizhuId != ''">and yizhu_id = #{yizhuId}</if>
+            <if test="yizhuType != null and yizhuType != ''">and yizhu_type = #{yizhuType}</if>
+            <if test="yizhu != null and yizhu != ''">and yizhu = #{yizhu}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by yizhu_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="countYizhu" resultType="int">
+        select count(*) from yizhu
+        <where>
+            <if test="yizhuId != null and yizhuId != ''">and yizhu_id = #{yizhuId}</if>
+            <if test="yizhuType != null and yizhuType != ''">and yizhu_type = #{yizhuType}</if>
+            <if test="yizhu != null and yizhu != ''">and yizhu = #{yizhu}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.jiancha.domain.YizhuDO">
+		insert into yizhu
+		(
+			`yizhu_id`, 
+			`yizhu_type`, 
+			`yizhu`
+		)
+		values
+		(
+			#{yizhuId}, 
+			#{yizhuType}, 
+			#{yizhu}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.jiancha.domain.YizhuDO">
+        update yizhu
+        <set>
+            <if test="yizhuType != null">`yizhu_type` = #{yizhuType},</if>
+            <if test="yizhu != null">`yizhu` = #{yizhu}</if>
+        </set>
+        where yizhu_id = #{yizhuId}
+    </update>
+
+    <delete id="remove">
+		delete from yizhu where yizhu_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from yizhu where yizhu_id in
+        <foreach item="yizhuId" collection="array" open="(" separator="," close=")">
+            #{yizhuId}
+        </foreach>
+    </delete>
+
+</mapper>
