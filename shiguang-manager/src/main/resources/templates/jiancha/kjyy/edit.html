@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="kjyy_id" name="kjyy_id" th:value="${kjyy.kjyy_id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">处方类型：</label>
+								<div class="col-sm-8">
+									<input id="prescriptionType" name="prescriptionType" th:value="${kjyy.prescriptionType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">卡号：</label>
+								<div class="col-sm-8">
+									<input id="cardNumber" name="cardNumber" th:value="${kjyy.cardNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">医生：</label>
+								<div class="col-sm-8">
+									<input id="doctor" name="doctor" th:value="${kjyy.doctor}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">验光师：</label>
+								<div class="col-sm-8">
+									<input id="optometryName" name="optometryName" th:value="${kjyy.optometryName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">球镜OD：</label>
+								<div class="col-sm-8">
+									<input id="kjyySphod" name="kjyySphod" th:value="${kjyy.kjyySphod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">球镜OS：</label>
+								<div class="col-sm-8">
+									<input id="kjyySphos" name="kjyySphos" th:value="${kjyy.kjyySphos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">柱镜OD：</label>
+								<div class="col-sm-8">
+									<input id="kjyyCylod" name="kjyyCylod" th:value="${kjyy.kjyyCylod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">柱镜OS：</label>
+								<div class="col-sm-8">
+									<input id="kjyyCylos" name="kjyyCylos" th:value="${kjyy.kjyyCylos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">轴向OD：</label>
+								<div class="col-sm-8">
+									<input id="kjyyAxialod" name="kjyyAxialod" th:value="${kjyy.kjyyAxialod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">轴向OS：</label>
+								<div class="col-sm-8">
+									<input id="kjyyAxialos" name="kjyyAxialos" th:value="${kjyy.kjyyAxialos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">三棱镜(OD)：</label>
+								<div class="col-sm-8">
+									<input id="kjyyPrismod" name="kjyyPrismod" th:value="${kjyy.kjyyPrismod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">三棱镜(OS)：</label>
+								<div class="col-sm-8">
+									<input id="kjyyPrismos" name="kjyyPrismos" th:value="${kjyy.kjyyPrismos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">基底(OD)：</label>
+								<div class="col-sm-8">
+									<input id="kjyyJdod" name="kjyyJdod" th:value="${kjyy.kjyyJdod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">基底(OS)：</label>
+								<div class="col-sm-8">
+									<input id="kjyyJdos" name="kjyyJdos" th:value="${kjyy.kjyyJdos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">远用瞳距(mm)(OD)：</label>
+								<div class="col-sm-8">
+									<input id="kjyyYytjod" name="kjyyYytjod" th:value="${kjyy.kjyyYytjod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">远用瞳距(mm)(OS)：</label>
+								<div class="col-sm-8">
+									<input id="kjyyYytjos" name="kjyyYytjos" th:value="${kjyy.kjyyYytjos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">瞳高(mm)(OD)：</label>
+								<div class="col-sm-8">
+									<input id="kjyyTgod" name="kjyyTgod" th:value="${kjyy.kjyyTgod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">瞳高(mm)(OS)：</label>
+								<div class="col-sm-8">
+									<input id="kjyyTgos" name="kjyyTgos" th:value="${kjyy.kjyyTgos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">远用va(OD)：</label>
+								<div class="col-sm-8">
+									<input id="kjyyVaod" name="kjyyVaod" th:value="${kjyy.kjyyVaod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">远用va(OS)：</label>
+								<div class="col-sm-8">
+									<input id="kjyyVaos" name="kjyyVaos" th:value="${kjyy.kjyyVaos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">建议镜片材质：</label>
+								<div class="col-sm-8">
+									<input id="kjyyJpcz" name="kjyyJpcz" th:value="${kjyy.kjyyJpcz}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">处理方式：</label>
+								<div class="col-sm-8">
+									<input id="kjyyClfs" name="kjyyClfs" th:value="${kjyy.kjyyClfs}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">建议框架：</label>
+								<div class="col-sm-8">
+									<input id="kjyyJykj" name="kjyyJykj" th:value="${kjyy.kjyyJykj}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">框架类型：</label>
+								<div class="col-sm-8">
+									<input id="kjyyKjlx" name="kjyyKjlx" th:value="${kjyy.kjyyKjlx}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">文本：</label>
+								<div class="col-sm-8">
+									<input id="kjyyText" name="kjyyText" th:value="${kjyy.kjyyText}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="kjyyBeizhu" name="kjyyBeizhu" th:value="${kjyy.kjyyBeizhu}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/jiancha/kjyy/edit.js">
+	</script>
+</body>
+</html>

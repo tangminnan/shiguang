@@ -8,7 +8,7 @@ import java.util.Map;
 public interface OcularEyesService {
     OcularEyesDO get(Long id);
 
-    List<OcularEyesDO> list(Map<String, Object> map);
+    List<OcularEyesDO> list(String cardNumber);
 
     int count(Map<String, Object> map);
 

@@ -116,7 +116,7 @@ function edit(cardNumber) {
         maxmin: true,
         shadeClose: false, // 点击遮罩关闭层
         area: ['1000px', '520px'],
-        content: prefix + '/edit/' + cardNumber // iframe的url
+        content: prefix + '/edit/' + cardNumber  // iframe的url
     });
     layer.full(toIndex);
 

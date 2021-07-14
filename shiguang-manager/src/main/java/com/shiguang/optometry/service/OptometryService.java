@@ -24,11 +24,11 @@ public interface OptometryService {
     List<OptometryDO> optoList(Map<String, Object> map);
 
     //散瞳前
-    List<OptometryDO> optoFrontList(Map<String, Object> map);
+    List<OptometryDO> optoFrontList(String cardNumber);
 
 
     //散瞳后
-    List<OptometryDO> optoAfterList(Map<String, Object> map);
+    List<OptometryDO> optoAfterList(String cardNumber);
 
     List<ProcessAskDO> processlist(Map<String, Object> map);
 }

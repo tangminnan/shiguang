@@ -3,186 +3,218 @@
 
 <mapper namespace="com.shiguang.optometry.dao.OcularEyesDao">
     <select id="get" resultType="com.shiguang.optometry.domain.OcularEyesDO">
-		select `id`,`member_number`,`axis`,`central_thickness_right`,`central_thickness_left`,`depth_humor_right`,`depth_humor_left`,`anterior_chamber_depth_right`,`anterior_chamber_depth_left`,`lens_thickness_right`,`lens_thickness_left`,`pupil_size_right`,`pupil_size_left`,`white_right`,`white_left`,`vitreous_thickness_right`,`vitreous_thickness_left`,`corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,`corneal_first_K2_left`,`corneal_last_K2_left`,`astigmia_first_right`,`astigmia_last_right`,`astigmia_first_left`,`astigmia_last_left` from ocular_eyes where id = #{value}
+		select `id`,`member_number`,`axis`,`axis_left`,`central_thickness_right`,`central_thickness_left`,`depth_humor_right`,`depth_humor_left`,`anterior_chamber_depth_right`,`anterior_chamber_depth_left`,`lens_thickness_right`,`lens_thickness_left`,`pupil_size_right`,`pupil_size_left`,`white_right`,`white_left`,`vitreous_thickness_right`,`vitreous_thickness_left`,`corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,`corneal_first_K2_left`,`corneal_last_K2_left`,`astigmia_first_right`,`astigmia_last_right`,`astigmia_first_left`,`astigmia_last_left`,`pjk_od`,`pjk_os`,`intraocular_od`,`intraocular_os`,`pjk_od2`,`pjk_os2` from ocular_eyes where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.optometry.domain.OcularEyesDO">
-        select `id`,`member_number`,`axis`,`central_thickness_right`,`central_thickness_left`,`depth_humor_right`,`depth_humor_left`,`anterior_chamber_depth_right`,`anterior_chamber_depth_left`,`lens_thickness_right`,`lens_thickness_left`,`pupil_size_right`,`pupil_size_left`,`white_right`,`white_left`,`vitreous_thickness_right`,`vitreous_thickness_left`,`corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,`corneal_first_K2_left`,`corneal_last_K2_left`,`astigmia_first_right`,`astigmia_last_right`,`astigmia_first_left`,`astigmia_last_left` from ocular_eyes
-        <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
-            <if test="axis != null and axis != ''"> and axis = #{axis} </if>
-            <if test="centralThicknessRight != null and centralThicknessRight != ''"> and central_thickness_right = #{centralThicknessRight} </if>
-            <if test="centralThicknessLeft != null and centralThicknessLeft != ''"> and central_thickness_left = #{centralThicknessLeft} </if>
-            <if test="depthHumorRight != null and depthHumorRight != ''"> and depth_humor_right = #{depthHumorRight} </if>
-            <if test="depthHumorLeft != null and depthHumorLeft != ''"> and depth_humor_left = #{depthHumorLeft} </if>
-            <if test="anteriorChamberDepthRight != null and anteriorChamberDepthRight != ''"> and anterior_chamber_depth_right = #{anteriorChamberDepthRight} </if>
-            <if test="anteriorChamberDepthLeft != null and anteriorChamberDepthLeft != ''"> and anterior_chamber_depth_left = #{anteriorChamberDepthLeft} </if>
-            <if test="lensThicknessRight != null and lensThicknessRight != ''"> and lens_thickness_right = #{lensThicknessRight} </if>
-            <if test="lensThicknessLeft != null and lensThicknessLeft != ''"> and lens_thickness_left = #{lensThicknessLeft} </if>
-            <if test="pupilSizeRight != null and pupilSizeRight != ''"> and pupil_size_right = #{pupilSizeRight} </if>
-            <if test="pupilSizeLeft != null and pupilSizeLeft != ''"> and pupil_size_left = #{pupilSizeLeft} </if>
-            <if test="whiteRight != null and whiteRight != ''"> and white_right = #{whiteRight} </if>
-            <if test="whiteLeft != null and whiteLeft != ''"> and white_left = #{whiteLeft} </if>
-            <if test="vitreousThicknessRight != null and vitreousThicknessRight != ''"> and vitreous_thickness_right = #{vitreousThicknessRight} </if>
-            <if test="vitreousThicknessLeft != null and vitreousThicknessLeft != ''"> and vitreous_thickness_left = #{vitreousThicknessLeft} </if>
-            <if test="cornealFirstK1Right != null and cornealFirstK1Right != ''"> and corneal_first_K1_right = #{cornealFirstK1Right} </if>
-            <if test="cornealLastK1Right != null and cornealLastK1Right != ''"> and corneal_last_K1_right = #{cornealLastK1Right} </if>
-            <if test="cornealFirstK1Left != null and cornealFirstK1Left != ''"> and corneal_first_K1_left = #{cornealFirstK1Left} </if>
-            <if test="cornealLastK1Left != null and cornealLastK1Left != ''"> and corneal_last_K1_left = #{cornealLastK1Left} </if>
-            <if test="cornealFirstK2Right != null and cornealFirstK2Right != ''"> and corneal_first_K2_right = #{cornealFirstK2Right} </if>
-            <if test="cornealLastK2Right != null and cornealLastK2Right != ''"> and corneal_last_K2_right = #{cornealLastK2Right} </if>
-            <if test="cornealFirstK2Left != null and cornealFirstK2Left != ''"> and corneal_first_K2_left = #{cornealFirstK2Left} </if>
-            <if test="cornealLastK2Left != null and cornealLastK2Left != ''"> and corneal_last_K2_left = #{cornealLastK2Left} </if>
-            <if test="astigmiaFirstRight != null and astigmiaFirstRight != ''"> and astigmia_first_right = #{astigmiaFirstRight} </if>
-            <if test="astigmiaLastRight != null and astigmiaLastRight != ''"> and astigmia_last_right = #{astigmiaLastRight} </if>
-            <if test="astigmiaFirstLeft != null and astigmiaFirstLeft != ''"> and astigmia_first_left = #{astigmiaFirstLeft} </if>
-            <if test="astigmiaLastLeft != null and astigmiaLastLeft != ''"> and astigmia_last_left = #{astigmiaLastLeft} </if>
-        </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-                order by id desc
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
+        select
+        `id`,`member_number`,`axis`,`axis_left`,`central_thickness_right`,`central_thickness_left`,`depth_humor_right`,`depth_humor_left`,`anterior_chamber_depth_right`,`anterior_chamber_depth_left`,`lens_thickness_right`,`lens_thickness_left`,`pupil_size_right`,`pupil_size_left`,`white_right`,`white_left`,`vitreous_thickness_right`,`vitreous_thickness_left`,`corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,`corneal_first_K2_left`,`corneal_last_K2_left`,`astigmia_first_right`,`astigmia_last_right`,`astigmia_first_left`,`astigmia_last_left`,`pjk_od`,`pjk_os`,`intraocular_od`,`intraocular_os`,`pjk_od2`,`pjk_os2`
+        from ocular_eyes where member_number = #{cardNumber} order by id desc
     </select>
 
     <select id="count" resultType="int">
         select count(*) from ocular_eyes
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
-            <if test="axis != null and axis != ''"> and axis = #{axis} </if>
-            <if test="centralThicknessRight != null and centralThicknessRight != ''"> and central_thickness_right = #{centralThicknessRight} </if>
-            <if test="centralThicknessLeft != null and centralThicknessLeft != ''"> and central_thickness_left = #{centralThicknessLeft} </if>
-            <if test="depthHumorRight != null and depthHumorRight != ''"> and depth_humor_right = #{depthHumorRight} </if>
-            <if test="depthHumorLeft != null and depthHumorLeft != ''"> and depth_humor_left = #{depthHumorLeft} </if>
-            <if test="anteriorChamberDepthRight != null and anteriorChamberDepthRight != ''"> and anterior_chamber_depth_right = #{anteriorChamberDepthRight} </if>
-            <if test="anteriorChamberDepthLeft != null and anteriorChamberDepthLeft != ''"> and anterior_chamber_depth_left = #{anteriorChamberDepthLeft} </if>
-            <if test="lensThicknessRight != null and lensThicknessRight != ''"> and lens_thickness_right = #{lensThicknessRight} </if>
-            <if test="lensThicknessLeft != null and lensThicknessLeft != ''"> and lens_thickness_left = #{lensThicknessLeft} </if>
-            <if test="pupilSizeRight != null and pupilSizeRight != ''"> and pupil_size_right = #{pupilSizeRight} </if>
-            <if test="pupilSizeLeft != null and pupilSizeLeft != ''"> and pupil_size_left = #{pupilSizeLeft} </if>
-            <if test="whiteRight != null and whiteRight != ''"> and white_right = #{whiteRight} </if>
-            <if test="whiteLeft != null and whiteLeft != ''"> and white_left = #{whiteLeft} </if>
-            <if test="vitreousThicknessRight != null and vitreousThicknessRight != ''"> and vitreous_thickness_right = #{vitreousThicknessRight} </if>
-            <if test="vitreousThicknessLeft != null and vitreousThicknessLeft != ''"> and vitreous_thickness_left = #{vitreousThicknessLeft} </if>
-            <if test="cornealFirstK1Right != null and cornealFirstK1Right != ''"> and corneal_first_K1_right = #{cornealFirstK1Right} </if>
-            <if test="cornealLastK1Right != null and cornealLastK1Right != ''"> and corneal_last_K1_right = #{cornealLastK1Right} </if>
-            <if test="cornealFirstK1Left != null and cornealFirstK1Left != ''"> and corneal_first_K1_left = #{cornealFirstK1Left} </if>
-            <if test="cornealLastK1Left != null and cornealLastK1Left != ''"> and corneal_last_K1_left = #{cornealLastK1Left} </if>
-            <if test="cornealFirstK2Right != null and cornealFirstK2Right != ''"> and corneal_first_K2_right = #{cornealFirstK2Right} </if>
-            <if test="cornealLastK2Right != null and cornealLastK2Right != ''"> and corneal_last_K2_right = #{cornealLastK2Right} </if>
-            <if test="cornealFirstK2Left != null and cornealFirstK2Left != ''"> and corneal_first_K2_left = #{cornealFirstK2Left} </if>
-            <if test="cornealLastK2Left != null and cornealLastK2Left != ''"> and corneal_last_K2_left = #{cornealLastK2Left} </if>
-            <if test="astigmiaFirstRight != null and astigmiaFirstRight != ''"> and astigmia_first_right = #{astigmiaFirstRight} </if>
-            <if test="astigmiaLastRight != null and astigmiaLastRight != ''"> and astigmia_last_right = #{astigmiaLastRight} </if>
-            <if test="astigmiaFirstLeft != null and astigmiaFirstLeft != ''"> and astigmia_first_left = #{astigmiaFirstLeft} </if>
-            <if test="astigmiaLastLeft != null and astigmiaLastLeft != ''"> and astigmia_last_left = #{astigmiaLastLeft} </if>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="memberNumber != null and memberNumber != ''">and member_number = #{memberNumber}</if>
+            <if test="axis != null and axis != ''">and axis = #{axis}</if>
+            <if test="axisLeft != null and axisLeft != ''">and axis_left = #{axisLeft}</if>
+            <if test="centralThicknessRight != null and centralThicknessRight != ''">and central_thickness_right =
+                #{centralThicknessRight}
+            </if>
+            <if test="centralThicknessLeft != null and centralThicknessLeft != ''">and central_thickness_left =
+                #{centralThicknessLeft}
+            </if>
+            <if test="depthHumorRight != null and depthHumorRight != ''">and depth_humor_right = #{depthHumorRight}</if>
+            <if test="depthHumorLeft != null and depthHumorLeft != ''">and depth_humor_left = #{depthHumorLeft}</if>
+            <if test="anteriorChamberDepthRight != null and anteriorChamberDepthRight != ''">and
+                anterior_chamber_depth_right = #{anteriorChamberDepthRight}
+            </if>
+            <if test="anteriorChamberDepthLeft != null and anteriorChamberDepthLeft != ''">and
+                anterior_chamber_depth_left = #{anteriorChamberDepthLeft}
+            </if>
+            <if test="lensThicknessRight != null and lensThicknessRight != ''">and lens_thickness_right =
+                #{lensThicknessRight}
+            </if>
+            <if test="lensThicknessLeft != null and lensThicknessLeft != ''">and lens_thickness_left =
+                #{lensThicknessLeft}
+            </if>
+            <if test="pupilSizeRight != null and pupilSizeRight != ''">and pupil_size_right = #{pupilSizeRight}</if>
+            <if test="pupilSizeLeft != null and pupilSizeLeft != ''">and pupil_size_left = #{pupilSizeLeft}</if>
+            <if test="whiteRight != null and whiteRight != ''">and white_right = #{whiteRight}</if>
+            <if test="whiteLeft != null and whiteLeft != ''">and white_left = #{whiteLeft}</if>
+            <if test="vitreousThicknessRight != null and vitreousThicknessRight != ''">and vitreous_thickness_right =
+                #{vitreousThicknessRight}
+            </if>
+            <if test="vitreousThicknessLeft != null and vitreousThicknessLeft != ''">and vitreous_thickness_left =
+                #{vitreousThicknessLeft}
+            </if>
+            <if test="cornealFirstK1Right != null and cornealFirstK1Right != ''">and corneal_first_K1_right =
+                #{cornealFirstK1Right}
+            </if>
+            <if test="cornealLastK1Right != null and cornealLastK1Right != ''">and corneal_last_K1_right =
+                #{cornealLastK1Right}
+            </if>
+            <if test="cornealFirstK1Left != null and cornealFirstK1Left != ''">and corneal_first_K1_left =
+                #{cornealFirstK1Left}
+            </if>
+            <if test="cornealLastK1Left != null and cornealLastK1Left != ''">and corneal_last_K1_left =
+                #{cornealLastK1Left}
+            </if>
+            <if test="cornealFirstK2Right != null and cornealFirstK2Right != ''">and corneal_first_K2_right =
+                #{cornealFirstK2Right}
+            </if>
+            <if test="cornealLastK2Right != null and cornealLastK2Right != ''">and corneal_last_K2_right =
+                #{cornealLastK2Right}
+            </if>
+            <if test="cornealFirstK2Left != null and cornealFirstK2Left != ''">and corneal_first_K2_left =
+                #{cornealFirstK2Left}
+            </if>
+            <if test="cornealLastK2Left != null and cornealLastK2Left != ''">and corneal_last_K2_left =
+                #{cornealLastK2Left}
+            </if>
+            <if test="astigmiaFirstRight != null and astigmiaFirstRight != ''">and astigmia_first_right =
+                #{astigmiaFirstRight}
+            </if>
+            <if test="astigmiaLastRight != null and astigmiaLastRight != ''">and astigmia_last_right =
+                #{astigmiaLastRight}
+            </if>
+            <if test="astigmiaFirstLeft != null and astigmiaFirstLeft != ''">and astigmia_first_left =
+                #{astigmiaFirstLeft}
+            </if>
+            <if test="astigmiaLastLeft != null and astigmiaLastLeft != ''">and astigmia_last_left =
+                #{astigmiaLastLeft}
+            </if>
+            <if test="pjkOd != null and pjkOd != ''">and pjk_od = #{pjkOd}</if>
+            <if test="pjkOs != null and pjkOs != ''">and pjk_os = #{pjkOs}</if>
+            <if test="intraocularOd != null and intraocularOd != ''">and intraocular_od = #{intraocularOd}</if>
+            <if test="intraocularOs != null and intraocularOs != ''">and intraocular_os = #{intraocularOs}</if>
+            <if test="pjkOd2 != null and pjkOd2 != ''">and pjk_od2 = #{pjkOd2}</if>
+            <if test="pjkOs2 != null and pjkOs2 != ''">and pjk_os2 = #{pjkOs2}</if>
         </where>
     </select>
 
-    <insert id="save" parameterType="com.shiguang.optometry.domain.OcularEyesDO" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="com.shiguang.optometry.domain.OcularEyesDO" useGeneratedKeys="true"
+            keyProperty="id">
 		insert into ocular_eyes
 		(
-			`member_number`,
-			`axis`,
-			`central_thickness_right`,
-			`central_thickness_left`,
-			`depth_humor_right`,
-			`depth_humor_left`,
-			`anterior_chamber_depth_right`,
-			`anterior_chamber_depth_left`,
-			`lens_thickness_right`,
-			`lens_thickness_left`,
-			`pupil_size_right`,
-			`pupil_size_left`,
-			`white_right`,
-			`white_left`,
-			`vitreous_thickness_right`,
-			`vitreous_thickness_left`,
-			`corneal_first_K1_right`,
-			`corneal_last_K1_right`,
-			`corneal_first_K1_left`,
-			`corneal_last_K1_left`,
-			`corneal_first_K2_right`,
-			`corneal_last_K2_right`,
-			`corneal_first_K2_left`,
-			`corneal_last_K2_left`,
-			`astigmia_first_right`,
-			`astigmia_last_right`,
-			`astigmia_first_left`,
-			`astigmia_last_left`
+			`member_number`, 
+			`axis`, 
+			`axis_left`, 
+			`central_thickness_right`, 
+			`central_thickness_left`, 
+			`depth_humor_right`, 
+			`depth_humor_left`, 
+			`anterior_chamber_depth_right`, 
+			`anterior_chamber_depth_left`, 
+			`lens_thickness_right`, 
+			`lens_thickness_left`, 
+			`pupil_size_right`, 
+			`pupil_size_left`, 
+			`white_right`, 
+			`white_left`, 
+			`vitreous_thickness_right`, 
+			`vitreous_thickness_left`, 
+			`corneal_first_K1_right`, 
+			`corneal_last_K1_right`, 
+			`corneal_first_K1_left`, 
+			`corneal_last_K1_left`, 
+			`corneal_first_K2_right`, 
+			`corneal_last_K2_right`, 
+			`corneal_first_K2_left`, 
+			`corneal_last_K2_left`, 
+			`astigmia_first_right`, 
+			`astigmia_last_right`, 
+			`astigmia_first_left`, 
+			`astigmia_last_left`, 
+			`pjk_od`, 
+			`pjk_os`, 
+			`intraocular_od`, 
+			`intraocular_os`, 
+			`pjk_od2`, 
+			`pjk_os2`
 		)
 		values
 		(
-			#{memberNumber},
-			#{axis},
-			#{centralThicknessRight},
-			#{centralThicknessLeft},
-			#{depthHumorRight},
-			#{depthHumorLeft},
-			#{anteriorChamberDepthRight},
-			#{anteriorChamberDepthLeft},
-			#{lensThicknessRight},
-			#{lensThicknessLeft},
-			#{pupilSizeRight},
-			#{pupilSizeLeft},
-			#{whiteRight},
-			#{whiteLeft},
-			#{vitreousThicknessRight},
-			#{vitreousThicknessLeft},
-			#{cornealFirstK1Right},
-			#{cornealLastK1Right},
-			#{cornealFirstK1Left},
-			#{cornealLastK1Left},
-			#{cornealFirstK2Right},
-			#{cornealLastK2Right},
-			#{cornealFirstK2Left},
-			#{cornealLastK2Left},
-			#{astigmiaFirstRight},
-			#{astigmiaLastRight},
-			#{astigmiaFirstLeft},
-			#{astigmiaLastLeft}
+			#{memberNumber}, 
+			#{axis}, 
+			#{axisLeft}, 
+			#{centralThicknessRight}, 
+			#{centralThicknessLeft}, 
+			#{depthHumorRight}, 
+			#{depthHumorLeft}, 
+			#{anteriorChamberDepthRight}, 
+			#{anteriorChamberDepthLeft}, 
+			#{lensThicknessRight}, 
+			#{lensThicknessLeft}, 
+			#{pupilSizeRight}, 
+			#{pupilSizeLeft}, 
+			#{whiteRight}, 
+			#{whiteLeft}, 
+			#{vitreousThicknessRight}, 
+			#{vitreousThicknessLeft}, 
+			#{cornealFirstK1Right}, 
+			#{cornealLastK1Right}, 
+			#{cornealFirstK1Left}, 
+			#{cornealLastK1Left}, 
+			#{cornealFirstK2Right}, 
+			#{cornealLastK2Right}, 
+			#{cornealFirstK2Left}, 
+			#{cornealLastK2Left}, 
+			#{astigmiaFirstRight}, 
+			#{astigmiaLastRight}, 
+			#{astigmiaFirstLeft}, 
+			#{astigmiaLastLeft}, 
+			#{pjkOd}, 
+			#{pjkOs}, 
+			#{intraocularOd}, 
+			#{intraocularOs}, 
+			#{pjkOd2}, 
+			#{pjkOs2}
 		)
 	</insert>
 
     <update id="update" parameterType="com.shiguang.optometry.domain.OcularEyesDO">
         update ocular_eyes
         <set>
-            <if test="memberNumber != null">`member_number` = #{memberNumber}, </if>
-            <if test="axis != null">`axis` = #{axis}, </if>
-            <if test="centralThicknessRight != null">`central_thickness_right` = #{centralThicknessRight}, </if>
-            <if test="centralThicknessLeft != null">`central_thickness_left` = #{centralThicknessLeft}, </if>
-            <if test="depthHumorRight != null">`depth_humor_right` = #{depthHumorRight}, </if>
-            <if test="depthHumorLeft != null">`depth_humor_left` = #{depthHumorLeft}, </if>
-            <if test="anteriorChamberDepthRight != null">`anterior_chamber_depth_right` = #{anteriorChamberDepthRight}, </if>
-            <if test="anteriorChamberDepthLeft != null">`anterior_chamber_depth_left` = #{anteriorChamberDepthLeft}, </if>
-            <if test="lensThicknessRight != null">`lens_thickness_right` = #{lensThicknessRight}, </if>
-            <if test="lensThicknessLeft != null">`lens_thickness_left` = #{lensThicknessLeft}, </if>
-            <if test="pupilSizeRight != null">`pupil_size_right` = #{pupilSizeRight}, </if>
-            <if test="pupilSizeLeft != null">`pupil_size_left` = #{pupilSizeLeft}, </if>
-            <if test="whiteRight != null">`white_right` = #{whiteRight}, </if>
-            <if test="whiteLeft != null">`white_left` = #{whiteLeft}, </if>
-            <if test="vitreousThicknessRight != null">`vitreous_thickness_right` = #{vitreousThicknessRight}, </if>
-            <if test="vitreousThicknessLeft != null">`vitreous_thickness_left` = #{vitreousThicknessLeft}, </if>
-            <if test="cornealFirstK1Right != null">`corneal_first_K1_right` = #{cornealFirstK1Right}, </if>
-            <if test="cornealLastK1Right != null">`corneal_last_K1_right` = #{cornealLastK1Right}, </if>
-            <if test="cornealFirstK1Left != null">`corneal_first_K1_left` = #{cornealFirstK1Left}, </if>
-            <if test="cornealLastK1Left != null">`corneal_last_K1_left` = #{cornealLastK1Left}, </if>
-            <if test="cornealFirstK2Right != null">`corneal_first_K2_right` = #{cornealFirstK2Right}, </if>
-            <if test="cornealLastK2Right != null">`corneal_last_K2_right` = #{cornealLastK2Right}, </if>
-            <if test="cornealFirstK2Left != null">`corneal_first_K2_left` = #{cornealFirstK2Left}, </if>
-            <if test="cornealLastK2Left != null">`corneal_last_K2_left` = #{cornealLastK2Left}, </if>
-            <if test="astigmiaFirstRight != null">`astigmia_first_right` = #{astigmiaFirstRight}, </if>
-            <if test="astigmiaLastRight != null">`astigmia_last_right` = #{astigmiaLastRight}, </if>
-            <if test="astigmiaFirstLeft != null">`astigmia_first_left` = #{astigmiaFirstLeft}, </if>
-            <if test="astigmiaLastLeft != null">`astigmia_last_left` = #{astigmiaLastLeft}</if>
+            <if test="memberNumber != null">`member_number` = #{memberNumber},</if>
+            <if test="axis != null">`axis` = #{axis},</if>
+            <if test="axisLeft != null">`axis_left` = #{axisLeft},</if>
+            <if test="centralThicknessRight != null">`central_thickness_right` = #{centralThicknessRight},</if>
+            <if test="centralThicknessLeft != null">`central_thickness_left` = #{centralThicknessLeft},</if>
+            <if test="depthHumorRight != null">`depth_humor_right` = #{depthHumorRight},</if>
+            <if test="depthHumorLeft != null">`depth_humor_left` = #{depthHumorLeft},</if>
+            <if test="anteriorChamberDepthRight != null">`anterior_chamber_depth_right` =
+                #{anteriorChamberDepthRight},
+            </if>
+            <if test="anteriorChamberDepthLeft != null">`anterior_chamber_depth_left` = #{anteriorChamberDepthLeft},
+            </if>
+            <if test="lensThicknessRight != null">`lens_thickness_right` = #{lensThicknessRight},</if>
+            <if test="lensThicknessLeft != null">`lens_thickness_left` = #{lensThicknessLeft},</if>
+            <if test="pupilSizeRight != null">`pupil_size_right` = #{pupilSizeRight},</if>
+            <if test="pupilSizeLeft != null">`pupil_size_left` = #{pupilSizeLeft},</if>
+            <if test="whiteRight != null">`white_right` = #{whiteRight},</if>
+            <if test="whiteLeft != null">`white_left` = #{whiteLeft},</if>
+            <if test="vitreousThicknessRight != null">`vitreous_thickness_right` = #{vitreousThicknessRight},</if>
+            <if test="vitreousThicknessLeft != null">`vitreous_thickness_left` = #{vitreousThicknessLeft},</if>
+            <if test="cornealFirstK1Right != null">`corneal_first_K1_right` = #{cornealFirstK1Right},</if>
+            <if test="cornealLastK1Right != null">`corneal_last_K1_right` = #{cornealLastK1Right},</if>
+            <if test="cornealFirstK1Left != null">`corneal_first_K1_left` = #{cornealFirstK1Left},</if>
+            <if test="cornealLastK1Left != null">`corneal_last_K1_left` = #{cornealLastK1Left},</if>
+            <if test="cornealFirstK2Right != null">`corneal_first_K2_right` = #{cornealFirstK2Right},</if>
+            <if test="cornealLastK2Right != null">`corneal_last_K2_right` = #{cornealLastK2Right},</if>
+            <if test="cornealFirstK2Left != null">`corneal_first_K2_left` = #{cornealFirstK2Left},</if>
+            <if test="cornealLastK2Left != null">`corneal_last_K2_left` = #{cornealLastK2Left},</if>
+            <if test="astigmiaFirstRight != null">`astigmia_first_right` = #{astigmiaFirstRight},</if>
+            <if test="astigmiaLastRight != null">`astigmia_last_right` = #{astigmiaLastRight},</if>
+            <if test="astigmiaFirstLeft != null">`astigmia_first_left` = #{astigmiaFirstLeft},</if>
+            <if test="astigmiaLastLeft != null">`astigmia_last_left` = #{astigmiaLastLeft},</if>
+            <if test="pjkOd != null">`pjk_od` = #{pjkOd},</if>
+            <if test="pjkOs != null">`pjk_os` = #{pjkOs},</if>
+            <if test="intraocularOd != null">`intraocular_od` = #{intraocularOd},</if>
+            <if test="intraocularOs != null">`intraocular_os` = #{intraocularOs},</if>
+            <if test="pjkOd2 != null">`pjk_od2` = #{pjkOd2},</if>
+            <if test="pjkOs2 != null">`pjk_os2` = #{pjkOs2}</if>
         </set>
         where id = #{id}
     </update>

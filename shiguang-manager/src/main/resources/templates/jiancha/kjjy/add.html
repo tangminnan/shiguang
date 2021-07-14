@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+																																			<div class="form-group">	
+								<label class="col-sm-3 control-label">卡号：</label>
+								<div class="col-sm-8">
+									<input id="cardNumber" name="cardNumber" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">处方类型：</label>
+								<div class="col-sm-8">
+									<input id="prescriptionType" name="prescriptionType" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">医生：</label>
+								<div class="col-sm-8">
+									<input id="doctor" name="doctor" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">验光师：</label>
+								<div class="col-sm-8">
+									<input id="optometryName" name="optometryName" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">球镜OD：</label>
+								<div class="col-sm-8">
+									<input id="kjjySphod" name="kjjySphod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">球镜OS：</label>
+								<div class="col-sm-8">
+									<input id="kjjySphos" name="kjjySphos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">柱镜OD：</label>
+								<div class="col-sm-8">
+									<input id="kjjyCylod" name="kjjyCylod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">柱镜OS：</label>
+								<div class="col-sm-8">
+									<input id="kjjyCylos" name="kjjyCylos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">轴向OD：</label>
+								<div class="col-sm-8">
+									<input id="kjjyAxialod" name="kjjyAxialod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">轴向OS：</label>
+								<div class="col-sm-8">
+									<input id="kjjyAxialos" name="kjjyAxialos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">三棱镜(OD)：</label>
+								<div class="col-sm-8">
+									<input id="kjjyPrismod" name="kjjyPrismod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">三棱镜(OS)：</label>
+								<div class="col-sm-8">
+									<input id="kjjyPrismos" name="kjjyPrismos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">基底(OD)：</label>
+								<div class="col-sm-8">
+									<input id="kjjyJdod" name="kjjyJdod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">基底(OS)：</label>
+								<div class="col-sm-8">
+									<input id="kjjyJdos" name="kjjyJdos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">远用瞳距(mm)(OD)：</label>
+								<div class="col-sm-8">
+									<input id="kjjyYytjod" name="kjjyYytjod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">远用瞳距(mm)(OS)：</label>
+								<div class="col-sm-8">
+									<input id="kjjyYytjos" name="kjjyYytjos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">瞳高(mm)(OD)：</label>
+								<div class="col-sm-8">
+									<input id="kjjyTgod" name="kjjyTgod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">瞳高(mm)(OS)：</label>
+								<div class="col-sm-8">
+									<input id="kjjyTgos" name="kjjyTgos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">远用va(OD)：</label>
+								<div class="col-sm-8">
+									<input id="kjjyVaod" name="kjjyVaod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">远用va(OS)：</label>
+								<div class="col-sm-8">
+									<input id="kjjyVaos" name="kjjyVaos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">建议镜片材质：</label>
+								<div class="col-sm-8">
+									<input id="kjjyJpcz" name="kjjyJpcz" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">处理方式：</label>
+								<div class="col-sm-8">
+									<input id="kjjyClfs" name="kjjyClfs" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">建议框架：</label>
+								<div class="col-sm-8">
+									<input id="kjjyJykj" name="kjjyJykj" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">框架类型：</label>
+								<div class="col-sm-8">
+									<input id="kjjyKjlx" name="kjjyKjlx" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">文本：</label>
+								<div class="col-sm-8">
+									<input id="kjjyText" name="kjjyText" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="kjjyBeizhu" name="kjjyBeizhu" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/jiancha/kjjy/add.js">
+	</script>
+</body>
+</html>

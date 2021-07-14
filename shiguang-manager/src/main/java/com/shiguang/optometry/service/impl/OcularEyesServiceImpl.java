@@ -15,37 +15,37 @@ public class OcularEyesServiceImpl implements OcularEyesService {
     private OcularEyesDao eyesDao;
 
     @Override
-    public OcularEyesDO get(Long id){
+    public OcularEyesDO get(Long id) {
         return eyesDao.get(id);
     }
 
     @Override
-    public List<OcularEyesDO> list(Map<String, Object> map){
-        return eyesDao.list(map);
+    public List<OcularEyesDO> list(String cardNumber) {
+        return eyesDao.list(cardNumber);
     }
 
     @Override
-    public int count(Map<String, Object> map){
+    public int count(Map<String, Object> map) {
         return eyesDao.count(map);
     }
 
     @Override
-    public int save(OcularEyesDO eyes){
+    public int save(OcularEyesDO eyes) {
         return eyesDao.save(eyes);
     }
 
     @Override
-    public int update(OcularEyesDO eyes){
+    public int update(OcularEyesDO eyes) {
         return eyesDao.update(eyes);
     }
 
     @Override
-    public int remove(Long id){
+    public int remove(Long id) {
         return eyesDao.remove(id);
     }
 
     @Override
-    public int batchRemove(Long[] ids){
+    public int batchRemove(Long[] ids) {
         return eyesDao.batchRemove(ids);
     }
 }

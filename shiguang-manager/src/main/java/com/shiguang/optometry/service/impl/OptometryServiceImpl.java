@@ -27,19 +27,20 @@ public class OptometryServiceImpl implements OptometryService {
 
     @Override
     public List<OptometryDO> optoList(Map<String, Object> map) {
-        return optometryDao.optoFrontList(map);
+        return optometryDao.optoList(map);
     }
 
     //散瞳前
+
     @Override
-    public List<OptometryDO> optoFrontList(Map<String, Object> map) {
-        return optometryDao.optoFrontList(map);
+    public List<OptometryDO> optoFrontList(String cardNumber) {
+        return optometryDao.optoFrontList(cardNumber);
     }
 
     //散瞳后
     @Override
-    public List<OptometryDO> optoAfterList(Map<String, Object> map) {
-        return optometryDao.optoAfterList(map);
+    public List<OptometryDO> optoAfterList(String cardNumber) {
+        return optometryDao.optoAfterList(cardNumber);
     }
 
     @Override

@@ -3,184 +3,165 @@
 
 <mapper namespace="com.shiguang.jiancha.dao.SubjectiveDao">
 
-    <select id="get" resultType="com.shiguang.jiancha.domain.SubjectiveDO">
-		select `id`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`dva_right`,`dva_left`,`nva_right`,`nva_left`,
-		`prism_right`,`prism_left`,`basal_right`,`basal_left`,`add_right`,`add_left`,`far_right`,`far_left`,`near_right`,`near_left`,
-		`ptometry_number`,`optometry_name`,`create_time` from jc_subjective where id = #{value}
+	<select id="get" resultType="com.shiguang.jiancha.domain.SubjectiveDO">
+		select `id`,`card_number`,`sphere_rightz`,`sphere_leftz`,`cylinder_rightz`,`cylinder_leftz`,`axial_rightz`,`axial_leftz`,`dva_rightz`,`dva_leftz`,`nva_rightz`,`nva_leftz`,`prism_rightz`,`prism_leftz`,`jdr_z`,`jdl_z`,`add_rightz`,`add_leftz`,`yuan_rz`,`yuan_lz`,`near_rightz`,`near_leftz` from jc_subjective where id = #{value}
 	</select>
 
-    <select id="list" resultType="com.shiguang.jiancha.domain.SubjectiveDO">
-        select
-        `id`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`dva_right`,`dva_left`,`nva_right`,`nva_left`,
-        `prism_right`,`prism_left`,`basal_right`,`basal_left`,`add_right`,`add_left`,`far_right`,`far_left`,`near_right`,`near_left`,
-        `ptometry_number`,`optometry_name`,`create_time` from jc_subjective
-        <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
-            <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
-            <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
-            <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
-            <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
-            <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
-            <if test="dvaRight != null and dvaRight != ''">and dva_right = #{dvaRight}</if>
-            <if test="dvaLeft != null and dvaLeft != ''">and dva_left = #{dvaLeft}</if>
-            <if test="nvaRight != null and nvaRight != ''">and nva_right = #{nvaRight}</if>
-            <if test="nvaLeft != null and nvaLeft != ''">and nva_left = #{nvaLeft}</if>
-            <if test="prismRight != null and prismRight != ''">and prism_right = #{prismRight}</if>
-            <if test="prismLeft != null and prismLeft != ''">and prism_left = #{prismLeft}</if>
-            <if test="basalRight != null and basalRight != ''">and basal_right = #{basalRight}</if>
-            <if test="basalLeft != null and basalLeft != ''">and basal_left = #{basalLeft}</if>
-            <if test="addRight != null and addRight != ''">and add_right = #{addRight}</if>
-            <if test="addLeft != null and addLeft != ''">and add_left = #{addLeft}</if>
-            <if test="farRight != null and farRight != ''">and far_right = #{farRight}</if>
-            <if test="farLeft != null and farLeft != ''">and far_left = #{farLeft}</if>
-            <if test="nearRight != null and nearRight != ''">and near_right = #{nearRight}</if>
-            <if test="nearLeft != null and nearLeft != ''">and near_left = #{nearLeft}</if>
-            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
-            <if test="optometryName != null and optometryName != ''">and optometry_name = #{optometryName}</if>
-            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
-        </where>
+	<select id="list" resultType="com.shiguang.jiancha.domain.SubjectiveDO">
+		select `id`,`card_number`,`sphere_rightz`,`sphere_leftz`,`cylinder_rightz`,`cylinder_leftz`,`axial_rightz`,`axial_leftz`,`dva_rightz`,`dva_leftz`,`nva_rightz`,`nva_leftz`,`prism_rightz`,`prism_leftz`,`jdr_z`,`jdl_z`,`add_rightz`,`add_leftz`,`yuan_rz`,`yuan_lz`,`near_rightz`,`near_leftz` from jc_subjective
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="sphereRightz != null and sphereRightz != ''"> and sphere_rightz = #{sphereRightz} </if>
+		  		  <if test="sphereLeftz != null and sphereLeftz != ''"> and sphere_leftz = #{sphereLeftz} </if>
+		  		  <if test="cylinderRightz != null and cylinderRightz != ''"> and cylinder_rightz = #{cylinderRightz} </if>
+		  		  <if test="cylinderLeftz != null and cylinderLeftz != ''"> and cylinder_leftz = #{cylinderLeftz} </if>
+		  		  <if test="axialRightz != null and axialRightz != ''"> and axial_rightz = #{axialRightz} </if>
+		  		  <if test="axialLeftz != null and axialLeftz != ''"> and axial_leftz = #{axialLeftz} </if>
+		  		  <if test="dvaRightz != null and dvaRightz != ''"> and dva_rightz = #{dvaRightz} </if>
+		  		  <if test="dvaLeftz != null and dvaLeftz != ''"> and dva_leftz = #{dvaLeftz} </if>
+		  		  <if test="nvaRightz != null and nvaRightz != ''"> and nva_rightz = #{nvaRightz} </if>
+		  		  <if test="nvaLeftz != null and nvaLeftz != ''"> and nva_leftz = #{nvaLeftz} </if>
+		  		  <if test="prismRightz != null and prismRightz != ''"> and prism_rightz = #{prismRightz} </if>
+		  		  <if test="prismLeftz != null and prismLeftz != ''"> and prism_leftz = #{prismLeftz} </if>
+		  		  <if test="jdrZ != null and jdrZ != ''"> and jdr_z = #{jdrZ} </if>
+		  		  <if test="jdlZ != null and jdlZ != ''"> and jdl_z = #{jdlZ} </if>
+		  		  <if test="addRightz != null and addRightz != ''"> and add_rightz = #{addRightz} </if>
+		  		  <if test="addLeftz != null and addLeftz != ''"> and add_leftz = #{addLeftz} </if>
+		  		  <if test="yuanRz != null and yuanRz != ''"> and yuan_rz = #{yuanRz} </if>
+		  		  <if test="yuanLz != null and yuanLz != ''"> and yuan_lz = #{yuanLz} </if>
+		  		  <if test="nearRightz != null and nearRightz != ''"> and near_rightz = #{nearRightz} </if>
+		  		  <if test="nearLeftz != null and nearLeftz != ''"> and near_leftz = #{nearLeftz} </if>
+		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-            <otherwise>
+			<otherwise>
                 order by id desc
-            </otherwise>
+			</otherwise>
         </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
-    </select>
-
-    <select id="count" resultType="int">
-        select count(*) from jc_subjective
-        <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
-            <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
-            <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
-            <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
-            <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
-            <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
-            <if test="dvaRight != null and dvaRight != ''">and dva_right = #{dvaRight}</if>
-            <if test="dvaLeft != null and dvaLeft != ''">and dva_left = #{dvaLeft}</if>
-            <if test="nvaRight != null and nvaRight != ''">and nva_right = #{nvaRight}</if>
-            <if test="nvaLeft != null and nvaLeft != ''">and nva_left = #{nvaLeft}</if>
-            <if test="prismRight != null and prismRight != ''">and prism_right = #{prismRight}</if>
-            <if test="prismLeft != null and prismLeft != ''">and prism_left = #{prismLeft}</if>
-            <if test="basalRight != null and basalRight != ''">and basal_right = #{basalRight}</if>
-            <if test="basalLeft != null and basalLeft != ''">and basal_left = #{basalLeft}</if>
-            <if test="addRight != null and addRight != ''">and add_right = #{addRight}</if>
-            <if test="addLeft != null and addLeft != ''">and add_left = #{addLeft}</if>
-            <if test="farRight != null and farRight != ''">and far_right = #{farRight}</if>
-            <if test="farLeft != null and farLeft != ''">and far_left = #{farLeft}</if>
-            <if test="nearRight != null and nearRight != ''">and near_right = #{nearRight}</if>
-            <if test="nearLeft != null and nearLeft != ''">and near_left = #{nearLeft}</if>
-            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
-            <if test="optometryName != null and optometryName != ''">and optometry_name = #{optometryName}</if>
-            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
-        </where>
-    </select>
-
-    <insert id="save" parameterType="com.shiguang.jiancha.domain.SubjectiveDO" useGeneratedKeys="true" keyProperty="id">
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from jc_subjective
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="sphereRightz != null and sphereRightz != ''"> and sphere_rightz = #{sphereRightz} </if>
+		  		  <if test="sphereLeftz != null and sphereLeftz != ''"> and sphere_leftz = #{sphereLeftz} </if>
+		  		  <if test="cylinderRightz != null and cylinderRightz != ''"> and cylinder_rightz = #{cylinderRightz} </if>
+		  		  <if test="cylinderLeftz != null and cylinderLeftz != ''"> and cylinder_leftz = #{cylinderLeftz} </if>
+		  		  <if test="axialRightz != null and axialRightz != ''"> and axial_rightz = #{axialRightz} </if>
+		  		  <if test="axialLeftz != null and axialLeftz != ''"> and axial_leftz = #{axialLeftz} </if>
+		  		  <if test="dvaRightz != null and dvaRightz != ''"> and dva_rightz = #{dvaRightz} </if>
+		  		  <if test="dvaLeftz != null and dvaLeftz != ''"> and dva_leftz = #{dvaLeftz} </if>
+		  		  <if test="nvaRightz != null and nvaRightz != ''"> and nva_rightz = #{nvaRightz} </if>
+		  		  <if test="nvaLeftz != null and nvaLeftz != ''"> and nva_leftz = #{nvaLeftz} </if>
+		  		  <if test="prismRightz != null and prismRightz != ''"> and prism_rightz = #{prismRightz} </if>
+		  		  <if test="prismLeftz != null and prismLeftz != ''"> and prism_leftz = #{prismLeftz} </if>
+		  		  <if test="jdrZ != null and jdrZ != ''"> and jdr_z = #{jdrZ} </if>
+		  		  <if test="jdlZ != null and jdlZ != ''"> and jdl_z = #{jdlZ} </if>
+		  		  <if test="addRightz != null and addRightz != ''"> and add_rightz = #{addRightz} </if>
+		  		  <if test="addLeftz != null and addLeftz != ''"> and add_leftz = #{addLeftz} </if>
+		  		  <if test="yuanRz != null and yuanRz != ''"> and yuan_rz = #{yuanRz} </if>
+		  		  <if test="yuanLz != null and yuanLz != ''"> and yuan_lz = #{yuanLz} </if>
+		  		  <if test="nearRightz != null and nearRightz != ''"> and near_rightz = #{nearRightz} </if>
+		  		  <if test="nearLeftz != null and nearLeftz != ''"> and near_leftz = #{nearLeftz} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.jiancha.domain.SubjectiveDO" useGeneratedKeys="true" keyProperty="id">
 		insert into jc_subjective
 		(
-			`sphere_right`, 
-			`sphere_left`, 
-			`cylinder_right`, 
-			`cylinder_left`, 
-			`axial_right`, 
-			`axial_left`, 
-			`dva_right`, 
-			`dva_left`, 
-			`nva_right`, 
-			`nva_left`, 
-			`prism_right`, 
-			`prism_left`, 
-			`basal_right`,
-			`basal_left`,
-			`add_right`, 
-			`add_left`, 
-			`far_right`,
-			`far_left`,
-			`near_right`, 
-			`near_left`, 
-			`ptometry_number`, 
-			`optometry_name`, 
-			`create_time`
+			`card_number`, 
+			`sphere_rightz`, 
+			`sphere_leftz`, 
+			`cylinder_rightz`, 
+			`cylinder_leftz`, 
+			`axial_rightz`, 
+			`axial_leftz`, 
+			`dva_rightz`, 
+			`dva_leftz`, 
+			`nva_rightz`, 
+			`nva_leftz`, 
+			`prism_rightz`, 
+			`prism_leftz`, 
+			`jdr_z`, 
+			`jdl_z`, 
+			`add_rightz`, 
+			`add_leftz`, 
+			`yuan_rz`, 
+			`yuan_lz`, 
+			`near_rightz`, 
+			`near_leftz`
 		)
 		values
 		(
-			#{sphereRight}, 
-			#{sphereLeft}, 
-			#{cylinderRight}, 
-			#{cylinderLeft}, 
-			#{axialRight}, 
-			#{axialLeft}, 
-			#{dvaRight}, 
-			#{dvaLeft}, 
-			#{nvaRight}, 
-			#{nvaLeft}, 
-			#{prismRight}, 
-			#{prismLeft}, 
-			#{basalRight},
-			#{basalLeft},
-			#{addRight}, 
-			#{addLeft}, 
-			#{farRight},
-			#{farLeft},
-			#{nearRight}, 
-			#{nearLeft}, 
-			#{ptometryNumber}, 
-			#{optometryName}, 
-			#{createTime}
+			#{cardNumber}, 
+			#{sphereRightz}, 
+			#{sphereLeftz}, 
+			#{cylinderRightz}, 
+			#{cylinderLeftz}, 
+			#{axialRightz}, 
+			#{axialLeftz}, 
+			#{dvaRightz}, 
+			#{dvaLeftz}, 
+			#{nvaRightz}, 
+			#{nvaLeftz}, 
+			#{prismRightz}, 
+			#{prismLeftz}, 
+			#{jdrZ}, 
+			#{jdlZ}, 
+			#{addRightz}, 
+			#{addLeftz}, 
+			#{yuanRz}, 
+			#{yuanLz}, 
+			#{nearRightz}, 
+			#{nearLeftz}
 		)
 	</insert>
-
-    <update id="update" parameterType="com.shiguang.jiancha.domain.SubjectiveDO">
-        update jc_subjective
-        <set>
-            <if test="sphereRight != null">`sphere_right` = #{sphereRight},</if>
-            <if test="sphereLeft != null">`sphere_left` = #{sphereLeft},</if>
-            <if test="cylinderRight != null">`cylinder_right` = #{cylinderRight},</if>
-            <if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft},</if>
-            <if test="axialRight != null">`axial_right` = #{axialRight},</if>
-            <if test="axialLeft != null">`axial_left` = #{axialLeft},</if>
-            <if test="dvaRight != null">`dva_right` = #{dvaRight},</if>
-            <if test="dvaLeft != null">`dva_left` = #{dvaLeft},</if>
-            <if test="nvaRight != null">`nva_right` = #{nvaRight},</if>
-            <if test="nvaLeft != null">`nva_left` = #{nvaLeft},</if>
-            <if test="prismRight != null">`prism_right` = #{prismRight},</if>
-            <if test="prismLeft != null">`prism_left` = #{prismLeft},</if>
-            <if test="basalRight != null">`basal_right` = #{basalRight},
-            </if>
-            <if test="basalLeft != null">`basal_left` = #{basalLeft},
-            </if>
-            <if test="addRight != null">`add_right` = #{addRight},</if>
-            <if test="addLeft != null">`add_left` = #{addLeft},</if>
-            <if test="farRight != null">`far_right` = #{farRight},
-            </if>
-            <if test="farLeft != null">`far_left` = #{farLeft},
-            </if>
-            <if test="nearRight != null">`near_right` = #{nearRight},</if>
-            <if test="nearLeft != null">`near_left` = #{nearLeft},</if>
-            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber},</if>
-            <if test="optometryName != null">`optometry_name` = #{optometryName},</if>
-            <if test="createTime != null">`create_time` = #{createTime}</if>
-        </set>
-        where id = #{id}
-    </update>
-
-    <delete id="remove">
+	 
+	<update id="update" parameterType="com.shiguang.jiancha.domain.SubjectiveDO">
+		update jc_subjective 
+		<set>
+			<if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+			<if test="sphereRightz != null">`sphere_rightz` = #{sphereRightz}, </if>
+			<if test="sphereLeftz != null">`sphere_leftz` = #{sphereLeftz}, </if>
+			<if test="cylinderRightz != null">`cylinder_rightz` = #{cylinderRightz}, </if>
+			<if test="cylinderLeftz != null">`cylinder_leftz` = #{cylinderLeftz}, </if>
+			<if test="axialRightz != null">`axial_rightz` = #{axialRightz}, </if>
+			<if test="axialLeftz != null">`axial_leftz` = #{axialLeftz}, </if>
+			<if test="dvaRightz != null">`dva_rightz` = #{dvaRightz}, </if>
+			<if test="dvaLeftz != null">`dva_leftz` = #{dvaLeftz}, </if>
+			<if test="nvaRightz != null">`nva_rightz` = #{nvaRightz}, </if>
+			<if test="nvaLeftz != null">`nva_leftz` = #{nvaLeftz}, </if>
+			<if test="prismRightz != null">`prism_rightz` = #{prismRightz}, </if>
+			<if test="prismLeftz != null">`prism_leftz` = #{prismLeftz}, </if>
+			<if test="jdrZ != null">`jdr_z` = #{jdrZ}, </if>
+			<if test="jdlZ != null">`jdl_z` = #{jdlZ}, </if>
+			<if test="addRightz != null">`add_rightz` = #{addRightz}, </if>
+			<if test="addLeftz != null">`add_leftz` = #{addLeftz}, </if>
+			<if test="yuanRz != null">`yuan_rz` = #{yuanRz}, </if>
+			<if test="yuanLz != null">`yuan_lz` = #{yuanLz}, </if>
+			<if test="nearRightz != null">`near_rightz` = #{nearRightz}, </if>
+			<if test="nearLeftz != null">`near_leftz` = #{nearLeftz}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
 		delete from jc_subjective where id = #{value}
 	</delete>
-
-    <delete id="batchRemove">
-        delete from jc_subjective where id in
-        <foreach item="id" collection="array" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
+	
+	<delete id="batchRemove">
+		delete from jc_subjective where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
 
 </mapper>

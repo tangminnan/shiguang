@@ -3,23 +3,55 @@
 
 <mapper namespace="com.shiguang.optometry.dao.OptometryDao">
     <select id="get" resultType="com.shiguang.optometry.domain.OptometryDO">
-		select `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left` from optometry where id = #{value}
+		select `id`,`member_inumber`,`mydriasis`,`pharmacy_id`,`pharmacy`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`corneal_astigmatism_os`,`corneal_astigmatism_od`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,`axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,`dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os` from optometry where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.optometry.domain.OptometryDO">
         select
-        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`
+        `id`,`member_inumber`,`mydriasis`,`pharmacy_id`,`pharmacy`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`corneal_astigmatism_os`,`corneal_astigmatism_od`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,`axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,`dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`
         from optometry
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
             <if test="memberInumber != null and memberInumber != ''">and member_inumber = #{memberInumber}</if>
             <if test="mydriasis != null and mydriasis != ''">and mydriasis = #{mydriasis}</if>
+            <if test="pharmacyId != null and pharmacyId != ''">and pharmacy_id = #{pharmacyId}</if>
+            <if test="pharmacy != null and pharmacy != ''">and pharmacy = #{pharmacy}</if>
             <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
             <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
             <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
             <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
             <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
             <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
+            <if test="cornealAstigmatismOs != null and cornealAstigmatismOs != ''">and corneal_astigmatism_os =
+                #{cornealAstigmatismOs}
+            </if>
+            <if test="cornealAstigmatismOd != null and cornealAstigmatismOd != ''">and corneal_astigmatism_od =
+                #{cornealAstigmatismOd}
+            </if>
+            <if test="sphJyod != null and sphJyod != ''">and sph_jyod = #{sphJyod}</if>
+            <if test="sphJyos != null and sphJyos != ''">and sph_jyos = #{sphJyos}</if>
+            <if test="cylJyod != null and cylJyod != ''">and cyl_jyod = #{cylJyod}</if>
+            <if test="cylJyos != null and cylJyos != ''">and cyl_jyos = #{cylJyos}</if>
+            <if test="axialJyod != null and axialJyod != ''">and axial_jyod = #{axialJyod}</if>
+            <if test="axialJyos != null and axialJyos != ''">and axial_jyos = #{axialJyos}</if>
+            <if test="vaJyod != null and vaJyod != ''">and va_jyod = #{vaJyod}</if>
+            <if test="vaJyos != null and vaJyos != ''">and va_jyos = #{vaJyos}</if>
+            <if test="pdJyod != null and pdJyod != ''">and pd_jyod = #{pdJyod}</if>
+            <if test="pdJyos != null and pdJyos != ''">and pd_jyos = #{pdJyos}</if>
+            <if test="sphCpod != null and sphCpod != ''">and sph_cpod = #{sphCpod}</if>
+            <if test="sphCpos != null and sphCpos != ''">and sph_cpos = #{sphCpos}</if>
+            <if test="cylCpod != null and cylCpod != ''">and cyl_cpod = #{cylCpod}</if>
+            <if test="cylCpos != null and cylCpos != ''">and cyl_cpos = #{cylCpos}</if>
+            <if test="axialCpod != null and axialCpod != ''">and axial_cpod = #{axialCpod}</if>
+            <if test="axialCpos != null and axialCpos != ''">and axial_cpos = #{axialCpos}</if>
+            <if test="dvaCpod != null and dvaCpod != ''">and dva_cpod = #{dvaCpod}</if>
+            <if test="dvaCpos != null and dvaCpos != ''">and dva_cpos = #{dvaCpos}</if>
+            <if test="nvaCpod != null and nvaCpod != ''">and nva_cpod = #{nvaCpod}</if>
+            <if test="nvaCpos != null and nvaCpos != ''">and nva_cpos = #{nvaCpos}</if>
+            <if test="addCpod != null and addCpod != ''">and add_cpod = #{addCpod}</if>
+            <if test="addCpos != null and addCpos != ''">and add_cpos = #{addCpos}</if>
+            <if test="distanceOd != null and distanceOd != ''">and distance_od = #{distanceOd}</if>
+            <if test="distanceOs != null and distanceOs != ''">and distance_os = #{distanceOs}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -40,12 +72,44 @@
             <if test="id != null and id != ''">and id = #{id}</if>
             <if test="memberInumber != null and memberInumber != ''">and member_inumber = #{memberInumber}</if>
             <if test="mydriasis != null and mydriasis != ''">and mydriasis = #{mydriasis}</if>
+            <if test="pharmacyId != null and pharmacyId != ''">and pharmacy_id = #{pharmacyId}</if>
+            <if test="pharmacy != null and pharmacy != ''">and pharmacy = #{pharmacy}</if>
             <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
             <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
             <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
             <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
             <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
             <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
+            <if test="cornealAstigmatismOs != null and cornealAstigmatismOs != ''">and corneal_astigmatism_os =
+                #{cornealAstigmatismOs}
+            </if>
+            <if test="cornealAstigmatismOd != null and cornealAstigmatismOd != ''">and corneal_astigmatism_od =
+                #{cornealAstigmatismOd}
+            </if>
+            <if test="sphJyod != null and sphJyod != ''">and sph_jyod = #{sphJyod}</if>
+            <if test="sphJyos != null and sphJyos != ''">and sph_jyos = #{sphJyos}</if>
+            <if test="cylJyod != null and cylJyod != ''">and cyl_jyod = #{cylJyod}</if>
+            <if test="cylJyos != null and cylJyos != ''">and cyl_jyos = #{cylJyos}</if>
+            <if test="axialJyod != null and axialJyod != ''">and axial_jyod = #{axialJyod}</if>
+            <if test="axialJyos != null and axialJyos != ''">and axial_jyos = #{axialJyos}</if>
+            <if test="vaJyod != null and vaJyod != ''">and va_jyod = #{vaJyod}</if>
+            <if test="vaJyos != null and vaJyos != ''">and va_jyos = #{vaJyos}</if>
+            <if test="pdJyod != null and pdJyod != ''">and pd_jyod = #{pdJyod}</if>
+            <if test="pdJyos != null and pdJyos != ''">and pd_jyos = #{pdJyos}</if>
+            <if test="sphCpod != null and sphCpod != ''">and sph_cpod = #{sphCpod}</if>
+            <if test="sphCpos != null and sphCpos != ''">and sph_cpos = #{sphCpos}</if>
+            <if test="cylCpod != null and cylCpod != ''">and cyl_cpod = #{cylCpod}</if>
+            <if test="cylCpos != null and cylCpos != ''">and cyl_cpos = #{cylCpos}</if>
+            <if test="axialCpod != null and axialCpod != ''">and axial_cpod = #{axialCpod}</if>
+            <if test="axialCpos != null and axialCpos != ''">and axial_cpos = #{axialCpos}</if>
+            <if test="dvaCpod != null and dvaCpod != ''">and dva_cpod = #{dvaCpod}</if>
+            <if test="dvaCpos != null and dvaCpos != ''">and dva_cpos = #{dvaCpos}</if>
+            <if test="nvaCpod != null and nvaCpod != ''">and nva_cpod = #{nvaCpod}</if>
+            <if test="nvaCpos != null and nvaCpos != ''">and nva_cpos = #{nvaCpos}</if>
+            <if test="addCpod != null and addCpod != ''">and add_cpod = #{addCpod}</if>
+            <if test="addCpos != null and addCpos != ''">and add_cpos = #{addCpos}</if>
+            <if test="distanceOd != null and distanceOd != ''">and distance_od = #{distanceOd}</if>
+            <if test="distanceOs != null and distanceOs != ''">and distance_os = #{distanceOs}</if>
         </where>
     </select>
 
@@ -55,23 +119,79 @@
 		(
 			`member_inumber`,
 			`mydriasis`,
+			`pharmacy_id`,
+			`pharmacy`,
 			`sphere_right`,
 			`sphere_left`,
 			`cylinder_right`,
 			`cylinder_left`,
 			`axial_right`,
-			`axial_left`
+			`axial_left`,
+			`corneal_astigmatism_os`,
+			`corneal_astigmatism_od`,
+			`sph_jyod`,
+			`sph_jyos`,
+			`cyl_jyod`,
+			`cyl_jyos`,
+			`axial_jyod`,
+			`axial_jyos`,
+			`va_jyod`,
+			`va_jyos`,
+			`pd_jyod`,
+			`pd_jyos`,
+			`sph_cpod`,
+			`sph_cpos`,
+			`cyl_cpod`,
+			`cyl_cpos`,
+			`axial_cpod`,
+			`axial_cpos`,
+			`dva_cpod`,
+			`dva_cpos`,
+			`nva_cpod`,
+			`nva_cpos`,
+			`add_cpod`,
+			`add_cpos`,
+			`distance_od`,
+			`distance_os`
 		)
 		values
 		(
 			#{memberInumber},
 			#{mydriasis},
+			#{pharmacyId},
+			#{pharmacy},
 			#{sphereRight},
 			#{sphereLeft},
 			#{cylinderRight},
 			#{cylinderLeft},
 			#{axialRight},
-			#{axialLeft}
+			#{axialLeft},
+			#{cornealAstigmatismOs},
+			#{cornealAstigmatismOd},
+			#{sphJyod},
+			#{sphJyos},
+			#{cylJyod},
+			#{cylJyos},
+			#{axialJyod},
+			#{axialJyos},
+			#{vaJyod},
+			#{vaJyos},
+			#{pdJyod},
+			#{pdJyos},
+			#{sphCpod},
+			#{sphCpos},
+			#{cylCpod},
+			#{cylCpos},
+			#{axialCpod},
+			#{axialCpos},
+			#{dvaCpod},
+			#{dvaCpos},
+			#{nvaCpod},
+			#{nvaCpos},
+			#{addCpod},
+			#{addCpos},
+			#{distanceOd},
+			#{distanceOs}
 		)
 	</insert>
 
@@ -80,12 +200,40 @@
         <set>
             <if test="memberInumber != null">`member_inumber` = #{memberInumber},</if>
             <if test="mydriasis != null">`mydriasis` = #{mydriasis},</if>
+            <if test="pharmacyId != null">`pharmacy_id` = #{pharmacyId},</if>
+            <if test="pharmacy != null">`pharmacy` = #{pharmacy},</if>
             <if test="sphereRight != null">`sphere_right` = #{sphereRight},</if>
             <if test="sphereLeft != null">`sphere_left` = #{sphereLeft},</if>
             <if test="cylinderRight != null">`cylinder_right` = #{cylinderRight},</if>
             <if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft},</if>
             <if test="axialRight != null">`axial_right` = #{axialRight},</if>
-            <if test="axialLeft != null">`axial_left` = #{axialLeft}</if>
+            <if test="axialLeft != null">`axial_left` = #{axialLeft},</if>
+            <if test="cornealAstigmatismOs != null">`corneal_astigmatism_os` = #{cornealAstigmatismOs},</if>
+            <if test="cornealAstigmatismOd != null">`corneal_astigmatism_od` = #{cornealAstigmatismOd},</if>
+            <if test="sphJyod != null">`sph_jyod` = #{sphJyod},</if>
+            <if test="sphJyos != null">`sph_jyos` = #{sphJyos},</if>
+            <if test="cylJyod != null">`cyl_jyod` = #{cylJyod},</if>
+            <if test="cylJyos != null">`cyl_jyos` = #{cylJyos},</if>
+            <if test="axialJyod != null">`axial_jyod` = #{axialJyod},</if>
+            <if test="axialJyos != null">`axial_jyos` = #{axialJyos},</if>
+            <if test="vaJyod != null">`va_jyod` = #{vaJyod},</if>
+            <if test="vaJyos != null">`va_jyos` = #{vaJyos},</if>
+            <if test="pdJyod != null">`pd_jyod` = #{pdJyod},</if>
+            <if test="pdJyos != null">`pd_jyos` = #{pdJyos},</if>
+            <if test="sphCpod != null">`sph_cpod` = #{sphCpod},</if>
+            <if test="sphCpos != null">`sph_cpos` = #{sphCpos},</if>
+            <if test="cylCpod != null">`cyl_cpod` = #{cylCpod},</if>
+            <if test="cylCpos != null">`cyl_cpos` = #{cylCpos},</if>
+            <if test="axialCpod != null">`axial_cpod` = #{axialCpod},</if>
+            <if test="axialCpos != null">`axial_cpos` = #{axialCpos},</if>
+            <if test="dvaCpod != null">`dva_cpod` = #{dvaCpod},</if>
+            <if test="dvaCpos != null">`dva_cpos` = #{dvaCpos},</if>
+            <if test="nvaCpod != null">`nva_cpod` = #{nvaCpod},</if>
+            <if test="nvaCpos != null">`nva_cpos` = #{nvaCpos},</if>
+            <if test="addCpod != null">`add_cpod` = #{addCpod},</if>
+            <if test="addCpos != null">`add_cpos` = #{addCpos},</if>
+            <if test="distanceOd != null">`distance_od` = #{distanceOd},</if>
+            <if test="distanceOs != null">`distance_os` = #{distanceOs}</if>
         </set>
         where id = #{id}
     </update>
@@ -100,10 +248,12 @@
             #{id}
         </foreach>
     </delete>
-
     <select id="optoList" resultType="com.shiguang.optometry.domain.OptometryDO">
         select
-        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`
+        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,
+        `corneal_astigmatism_os`,`corneal_astigmatism_od`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,
+        `axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,
+        `dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`
         from optometry
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
@@ -115,25 +265,62 @@
             <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
             <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
             <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
+            <if test="cornealAstigmatismOs != null and cornealAstigmatismOs != ''">and corneal_astigmatism_os =
+                #{cornealAstigmatismOs}
+            </if>
+            <if test="cornealAstigmatismOd != null and cornealAstigmatismOd != ''">and corneal_astigmatism_od =
+                #{cornealAstigmatismOd}
+            </if>
+            <if test="sphJyod != null and sphJyod != ''">and sph_jyod = #{sphJyod}</if>
+            <if test="sphJyos != null and sphJyos != ''">and sph_jyos = #{sphJyos}</if>
+            <if test="cylJyod != null and cylJyod != ''">and cyl_jyod = #{cylJyod}</if>
+            <if test="cylJyos != null and cylJyos != ''">and cyl_jyos = #{cylJyos}</if>
+            <if test="axialJyod != null and axialJyod != ''">and axial_jyod = #{axialJyod}</if>
+            <if test="axialJyos != null and axialJyos != ''">and axial_jyos = #{axialJyos}</if>
+            <if test="vaJyod != null and vaJyod != ''">and va_jyod = #{vaJyod}</if>
+            <if test="vaJyos != null and vaJyos != ''">and va_jyos = #{vaJyos}</if>
+            <if test="pdJyod != null and pdJyod != ''">and pd_jyod = #{pdJyod}</if>
+            <if test="pdJyos != null and pdJyos != ''">and pd_jyos = #{pdJyos}</if>
+            <if test="sphCpod != null and sphCpod != ''">and sph_cpod = #{sphCpod}</if>
+            <if test="sphCpos != null and sphCpos != ''">and sph_cpos = #{sphCpos}</if>
+            <if test="cylCpod != null and cylCpod != ''">and cyl_cpod = #{cylCpod}</if>
+            <if test="cylCpos != null and cylCpos != ''">and cyl_cpos = #{cylCpos}</if>
+            <if test="axialCpod != null and axialCpod != ''">and axial_cpod = #{axialCpod}</if>
+            <if test="axialCpos != null and axialCpos != ''">and axial_cpos = #{axialCpos}</if>
+            <if test="dvaCpod != null and dvaCpod != ''">and dva_cpod = #{dvaCpod}</if>
+            <if test="dvaCpos != null and dvaCpos != ''">and dva_cpos = #{dvaCpos}</if>
+            <if test="nvaCpod != null and nvaCpod != ''">and nva_cpod = #{nvaCpod}</if>
+            <if test="nvaCpos != null and nvaCpos != ''">and nva_cpos = #{nvaCpos}</if>
+            <if test="addCpod != null and addCpod != ''">and add_cpod = #{addCpod}</if>
+            <if test="addCpos != null and addCpos != ''">and add_cpos = #{addCpos}</if>
+            <if test="distanceOd != null and distanceOd != ''">and distance_od = #{distanceOd}</if>
+            <if test="distanceOs != null and distanceOs != ''">and distance_os = #{distanceOs}</if>
         </where>
         order by create_time desc
     </select>
     <!--散瞳前-->
     <select id="optoFrontList" resultType="com.shiguang.optometry.domain.OptometryDO">
-        select
-        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`
-        from optometry
-        where mydriasis=0
-        order by id desc
-    </select>
+    select
+    `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,
+    `corneal_astigmatism_os`,`corneal_astigmatism_od`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,
+    `axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,
+    `dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`
+    from optometry
+    where mydriasis=0 and member_inumber = #{cardNumber}
+    order by create_time desc
+</select>
     <!--散瞳后-->
     <select id="optoAfterList" resultType="com.shiguang.optometry.domain.OptometryDO">
-        select
-        `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`
-        from optometry
-        where mydriasis=1
-        order by id desc
-    </select>
+    select
+    `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,
+    `corneal_astigmatism_os`,`corneal_astigmatism_od`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,
+    `axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,
+    `dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`
+    from optometry
+    where mydriasis=1 and member_inumber = #{cardNumber}
+    order by create_time desc
+</select>
+
     <select id="processlist" resultType="com.shiguang.optometry.domain.ProcessAskDO">
         select `id`,`process_num`,`process_name` from process_ask
         <where>
@@ -142,5 +329,4 @@
             <if test="processName != null and processName != ''">and process_name = #{processName}</if>
         </where>
     </select>
-
 </mapper>

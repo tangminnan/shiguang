@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${shili.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">卡号：</label>
+								<div class="col-sm-8">
+									<input id="cardNumber" name="cardNumber" th:value="${shili.cardNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">裸眼视力远OU：</label>
+								<div class="col-sm-8">
+									<input id="farLyou" name="farLyou" th:value="${shili.farLyou}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">裸眼视力远OD：</label>
+								<div class="col-sm-8">
+									<input id="farLyod" name="farLyod" th:value="${shili.farLyod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">裸眼视力远OS：</label>
+								<div class="col-sm-8">
+									<input id="farLyos" name="farLyos" th:value="${shili.farLyos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">裸眼视力近OU：</label>
+								<div class="col-sm-8">
+									<input id="nearLyou" name="nearLyou" th:value="${shili.nearLyou}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">裸眼视力近OD：</label>
+								<div class="col-sm-8">
+									<input id="nearLyod" name="nearLyod" th:value="${shili.nearLyod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">裸眼视力近OS：</label>
+								<div class="col-sm-8">
+									<input id="nearLyos" name="nearLyos" th:value="${shili.nearLyos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">原镜视力远OU：</label>
+								<div class="col-sm-8">
+									<input id="farYjou" name="farYjou" th:value="${shili.farYjou}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">原镜视力远OD：</label>
+								<div class="col-sm-8">
+									<input id="farYjod" name="farYjod" th:value="${shili.farYjod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">原镜视力远OS：</label>
+								<div class="col-sm-8">
+									<input id="farYjos" name="farYjos" th:value="${shili.farYjos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">原镜视力近OU：</label>
+								<div class="col-sm-8">
+									<input id="nearYjou" name="nearYjou" th:value="${shili.nearYjou}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">原镜视力近OD：</label>
+								<div class="col-sm-8">
+									<input id="nearYjod" name="nearYjod" th:value="${shili.nearYjod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">原镜视力近OS：</label>
+								<div class="col-sm-8">
+									<input id="nearYjos" name="nearYjos" th:value="${shili.nearYjos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小孔视力远OU：</label>
+								<div class="col-sm-8">
+									<input id="farXkou" name="farXkou" th:value="${shili.farXkou}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小孔视力远OD：</label>
+								<div class="col-sm-8">
+									<input id="farXkod" name="farXkod" th:value="${shili.farXkod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小孔视力远OS：</label>
+								<div class="col-sm-8">
+									<input id="farXkos" name="farXkos" th:value="${shili.farXkos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小孔视力近OU：</label>
+								<div class="col-sm-8">
+									<input id="nearXkou" name="nearXkou" th:value="${shili.nearXkou}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小孔视力近OD：</label>
+								<div class="col-sm-8">
+									<input id="nearXkod" name="nearXkod" th:value="${shili.nearXkod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小孔视力近OS：</label>
+								<div class="col-sm-8">
+									<input id="nearXkos" name="nearXkos" th:value="${shili.nearXkos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">主导眼：</label>
+								<div class="col-sm-8">
+									<input id="dominantEye" name="dominantEye" th:value="${shili.dominantEye}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/jiancha/shili/edit.js">
+	</script>
+</body>
+</html>

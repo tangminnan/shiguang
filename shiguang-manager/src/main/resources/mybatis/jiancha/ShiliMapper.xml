@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.ShiliDao">
+
+	<select id="get" resultType="com.shiguang.jiancha.domain.ShiliDO">
+		select `id`,`card_number`,`far_lyou`,`far_lyod`,`far_lyos`,`near_lyou`,`near_lyod`,`near_lyos`,`far_yjou`,`far_yjod`,`far_yjos`,`near_yjou`,`near_yjod`,`near_yjos`,`far_xkou`,`far_xkod`,`far_xkos`,`near_xkou`,`near_xkod`,`near_xkos`,`dominant_eye` from jc_shili where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.jiancha.domain.ShiliDO">
+		select `id`,`card_number`,`far_lyou`,`far_lyod`,`far_lyos`,`near_lyou`,`near_lyod`,`near_lyos`,`far_yjou`,`far_yjod`,`far_yjos`,`near_yjou`,`near_yjod`,`near_yjos`,`far_xkou`,`far_xkod`,`far_xkos`,`near_xkou`,`near_xkod`,`near_xkos`,`dominant_eye` from jc_shili
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="farLyou != null and farLyou != ''"> and far_lyou = #{farLyou} </if>
+		  		  <if test="farLyod != null and farLyod != ''"> and far_lyod = #{farLyod} </if>
+		  		  <if test="farLyos != null and farLyos != ''"> and far_lyos = #{farLyos} </if>
+		  		  <if test="nearLyou != null and nearLyou != ''"> and near_lyou = #{nearLyou} </if>
+		  		  <if test="nearLyod != null and nearLyod != ''"> and near_lyod = #{nearLyod} </if>
+		  		  <if test="nearLyos != null and nearLyos != ''"> and near_lyos = #{nearLyos} </if>
+		  		  <if test="farYjou != null and farYjou != ''"> and far_yjou = #{farYjou} </if>
+		  		  <if test="farYjod != null and farYjod != ''"> and far_yjod = #{farYjod} </if>
+		  		  <if test="farYjos != null and farYjos != ''"> and far_yjos = #{farYjos} </if>
+		  		  <if test="nearYjou != null and nearYjou != ''"> and near_yjou = #{nearYjou} </if>
+		  		  <if test="nearYjod != null and nearYjod != ''"> and near_yjod = #{nearYjod} </if>
+		  		  <if test="nearYjos != null and nearYjos != ''"> and near_yjos = #{nearYjos} </if>
+		  		  <if test="farXkou != null and farXkou != ''"> and far_xkou = #{farXkou} </if>
+		  		  <if test="farXkod != null and farXkod != ''"> and far_xkod = #{farXkod} </if>
+		  		  <if test="farXkos != null and farXkos != ''"> and far_xkos = #{farXkos} </if>
+		  		  <if test="nearXkou != null and nearXkou != ''"> and near_xkou = #{nearXkou} </if>
+		  		  <if test="nearXkod != null and nearXkod != ''"> and near_xkod = #{nearXkod} </if>
+		  		  <if test="nearXkos != null and nearXkos != ''"> and near_xkos = #{nearXkos} </if>
+		  		  <if test="dominantEye != null and dominantEye != ''"> and dominant_eye = #{dominantEye} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from jc_shili
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="farLyou != null and farLyou != ''"> and far_lyou = #{farLyou} </if>
+		  		  <if test="farLyod != null and farLyod != ''"> and far_lyod = #{farLyod} </if>
+		  		  <if test="farLyos != null and farLyos != ''"> and far_lyos = #{farLyos} </if>
+		  		  <if test="nearLyou != null and nearLyou != ''"> and near_lyou = #{nearLyou} </if>
+		  		  <if test="nearLyod != null and nearLyod != ''"> and near_lyod = #{nearLyod} </if>
+		  		  <if test="nearLyos != null and nearLyos != ''"> and near_lyos = #{nearLyos} </if>
+		  		  <if test="farYjou != null and farYjou != ''"> and far_yjou = #{farYjou} </if>
+		  		  <if test="farYjod != null and farYjod != ''"> and far_yjod = #{farYjod} </if>
+		  		  <if test="farYjos != null and farYjos != ''"> and far_yjos = #{farYjos} </if>
+		  		  <if test="nearYjou != null and nearYjou != ''"> and near_yjou = #{nearYjou} </if>
+		  		  <if test="nearYjod != null and nearYjod != ''"> and near_yjod = #{nearYjod} </if>
+		  		  <if test="nearYjos != null and nearYjos != ''"> and near_yjos = #{nearYjos} </if>
+		  		  <if test="farXkou != null and farXkou != ''"> and far_xkou = #{farXkou} </if>
+		  		  <if test="farXkod != null and farXkod != ''"> and far_xkod = #{farXkod} </if>
+		  		  <if test="farXkos != null and farXkos != ''"> and far_xkos = #{farXkos} </if>
+		  		  <if test="nearXkou != null and nearXkou != ''"> and near_xkou = #{nearXkou} </if>
+		  		  <if test="nearXkod != null and nearXkod != ''"> and near_xkod = #{nearXkod} </if>
+		  		  <if test="nearXkos != null and nearXkos != ''"> and near_xkos = #{nearXkos} </if>
+		  		  <if test="dominantEye != null and dominantEye != ''"> and dominant_eye = #{dominantEye} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.jiancha.domain.ShiliDO">
+		insert into jc_shili
+		(
+			`id`, 
+			`card_number`, 
+			`far_lyou`, 
+			`far_lyod`, 
+			`far_lyos`, 
+			`near_lyou`, 
+			`near_lyod`, 
+			`near_lyos`, 
+			`far_yjou`, 
+			`far_yjod`, 
+			`far_yjos`, 
+			`near_yjou`, 
+			`near_yjod`, 
+			`near_yjos`, 
+			`far_xkou`, 
+			`far_xkod`, 
+			`far_xkos`, 
+			`near_xkou`, 
+			`near_xkod`, 
+			`near_xkos`, 
+			`dominant_eye`
+		)
+		values
+		(
+			#{id}, 
+			#{cardNumber}, 
+			#{farLyou}, 
+			#{farLyod}, 
+			#{farLyos}, 
+			#{nearLyou}, 
+			#{nearLyod}, 
+			#{nearLyos}, 
+			#{farYjou}, 
+			#{farYjod}, 
+			#{farYjos}, 
+			#{nearYjou}, 
+			#{nearYjod}, 
+			#{nearYjos}, 
+			#{farXkou}, 
+			#{farXkod}, 
+			#{farXkos}, 
+			#{nearXkou}, 
+			#{nearXkod}, 
+			#{nearXkos}, 
+			#{dominantEye}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.jiancha.domain.ShiliDO">
+		update jc_shili 
+		<set>
+			<if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+			<if test="farLyou != null">`far_lyou` = #{farLyou}, </if>
+			<if test="farLyod != null">`far_lyod` = #{farLyod}, </if>
+			<if test="farLyos != null">`far_lyos` = #{farLyos}, </if>
+			<if test="nearLyou != null">`near_lyou` = #{nearLyou}, </if>
+			<if test="nearLyod != null">`near_lyod` = #{nearLyod}, </if>
+			<if test="nearLyos != null">`near_lyos` = #{nearLyos}, </if>
+			<if test="farYjou != null">`far_yjou` = #{farYjou}, </if>
+			<if test="farYjod != null">`far_yjod` = #{farYjod}, </if>
+			<if test="farYjos != null">`far_yjos` = #{farYjos}, </if>
+			<if test="nearYjou != null">`near_yjou` = #{nearYjou}, </if>
+			<if test="nearYjod != null">`near_yjod` = #{nearYjod}, </if>
+			<if test="nearYjos != null">`near_yjos` = #{nearYjos}, </if>
+			<if test="farXkou != null">`far_xkou` = #{farXkou}, </if>
+			<if test="farXkod != null">`far_xkod` = #{farXkod}, </if>
+			<if test="farXkos != null">`far_xkos` = #{farXkos}, </if>
+			<if test="nearXkou != null">`near_xkou` = #{nearXkou}, </if>
+			<if test="nearXkod != null">`near_xkod` = #{nearXkod}, </if>
+			<if test="nearXkos != null">`near_xkos` = #{nearXkos}, </if>
+			<if test="dominantEye != null">`dominant_eye` = #{dominantEye}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from jc_shili where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from jc_shili where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
