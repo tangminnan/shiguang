@@ -82,31 +82,31 @@
                 <tr>
                     <td rowspan="2" class="w170">裸眼视力</td>
                     <td width="120">远</td>
-                    <td>OU <input name="farLyou" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OD <input name="farLyod" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OS <input name="farLyos" type="text" onblur="onlyNum(this)"/></td>
+                    <td>OU <input name="farLyou" type="text"/></td>
+                    <td>OD <input name="farLyod" type="text"/></td>
+                    <td>OS <input name="farLyos" type="text"/></td>
                     <td rowspan="2" style="width:8%;">原镜视力</td>
                     <td width="120">远</td>
-                    <td>OU <input name="farYjou" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OD <input name="farYjod" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OS <input name="farYjos" type="text" onblur="onlyNum(this)"/></td>
+                    <td>OU <input name="farYjou" type="text"/></td>
+                    <td>OD <input name="farYjod" type="text"/></td>
+                    <td>OS <input name="farYjos" type="text"/></td>
                 </tr>
                 <tr>
                     <td>近</td>
-                    <td>OU <input name="nearLyou" type="text" onblur="onlyNum(this)"></td>
-                    <td>OD <input name="nearLyod" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OS <input name="nearLyos" type="text" onblur="onlyNum(this)"/></td>
+                    <td>OU <input name="nearLyou" type="text"></td>
+                    <td>OD <input name="nearLyod" type="text"/></td>
+                    <td>OS <input name="nearLyos" type="text"/></td>
                     <td>近</td>
-                    <td>OU <input name="nearYjou" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OD <input name="nearYjod" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OS <input name="nearYjos" type="text" onblur="onlyNum(this)"/></td>
+                    <td>OU <input name="nearYjou" type="text"/></td>
+                    <td>OD <input name="nearYjod" type="text"/></td>
+                    <td>OS <input name="nearYjos" type="text"/></td>
                 </tr>
                 <tr>
                     <td rowspan="2">小孔视力</td>
                     <td>远</td>
-                    <td>OU <input name="farXkou" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OD <input name="farXkod" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OS <input name="farXkos" type="text" onblur="onlyNum(this)"/></td>
+                    <td>OU <input name="farXkou" type="text"/></td>
+                    <td>OD <input name="farXkod" type="text"/></td>
+                    <td>OS <input name="farXkos" type="text"/></td>
                     <td rowspan="2">主导眼</td>
                     <td rowspan="2">
                         <select id="dominantEye" name="dominantEye">
@@ -120,9 +120,9 @@
                 </tr>
                 <tr>
                     <td>近</td>
-                    <td>OU <input name="nearXkou" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OD <input name="nearXkod" type="text" onblur="onlyNum(this)"/></td>
-                    <td>OS <input name="nearXkos" type="text" onblur="onlyNum(this)"/></td>
+                    <td>OU <input name="nearXkou" type="text"/></td>
+                    <td>OD <input name="nearXkod" type="text"/></td>
+                    <td>OS <input name="nearXkos" type="text"/></td>
                 </tr>
                 </tbody>
             </table>
@@ -143,7 +143,8 @@
                 <tr>
                     <td>OD</td>
                     <td>
-                        <input name="axis" th:value="${ocularEyesDO.axis}" type="text"/> mm
+                        <input name="axis" th:value="${ocularEyesDO.axis}" type="text" onblur="shuzi(this)"/>
+                        mm
                     </td>
                     <td>
                         <input name="cornealFirstK1Right" th:value="${ocularEyesDO.cornealFirstK1Right}"
@@ -237,7 +238,8 @@
                         <input name="cylinderRight" th:value="${optometryFrontDO.cylinderRight}" type="text"/>
                     </td>
                     <td>
-                        <input name="axialRight" th:value="${optometryFrontDO.axialRight}" type="text"/>
+                        <input name="axialRight" th:value="${optometryFrontDO.axialRight}" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
                     </td>
                     <td rowspan="2">散瞳后</td>
                     <td>
@@ -247,7 +249,8 @@
                         <input name="cylinderRight" th:value="${optometryAfterDO.cylinderRight}" type="text"/>
                     </td>
                     <td>
-                        <input name="axialRight" th:value="${optometryAfterDO.axialRight}" type="text"/>
+                        <input name="axialRight" th:value="${optometryAfterDO.axialRight}" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -259,7 +262,9 @@
                         <input name="cylinderLeft" th:value="${optometryFrontDO.cylinderLeft}" type="text"/>
                     </td>
                     <td>
-                        <input name="axialLeft" th:value="${optometryFrontDO.axialLeft}" type="text"/>
+                        <input name="axialLeft" th:value="${optometryFrontDO.axialLeft}" type="text"
+                               onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
                     </td>
                     <td>
                         <input name="sphereLeft" th:value="${optometryAfterDO.sphereLeft}" type="text"/>
@@ -268,7 +273,9 @@
                         <input name="cylinderLeft" th:value="${optometryAfterDO.cylinderLeft}" type="text"/>
                     </td>
                     <td>
-                        <input name="axialLeft" th:value="${optometryAfterDO.axialLeft}" type="text"/>
+                        <input name="axialLeft" th:value="${optometryAfterDO.axialLeft}" type="text"
+                               onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
                     </td>
                 </tr>
                 <tr>
@@ -342,10 +349,12 @@
                     <td colspan="2"></td>
                 </tr>
                 <tr>
+
                     <td>OD</td>
                     <td><input name="sphJyod" th:value="${optometryDO.sphJyod}" type="text"/></td>
                     <td><input name="cylJyod" th:value="${optometryDO.cylJyod}" type="text"/></td>
-                    <td><input name="axialJyod" th:value="${optometryDO.axialJyod}" type="text"/></td>
+                    <td><input name="axialJyod" th:value="${optometryDO.axialJyod}" type="text"
+                               onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                     <td><input name="vaJyod" th:value="${optometryDO.vaJyod}" type="text"/></td>
                     <td><input name="pdJyod" th:value="${optometryDO.pdJyod}" type="text"/></td>
                     <td colspan="2"></td>
@@ -354,7 +363,8 @@
                     <td>OS</td>
                     <td><input name="sphJyos" th:value="${optometryDO.sphJyos}" type="text"/></td>
                     <td><input name="cylJyos" th:value="${optometryDO.cylJyos}" type="text"/></td>
-                    <td><input name="axialJyos" th:value="${optometryDO.axialJyos}" type="text"/></td>
+                    <td><input name="axialJyos" th:value="${optometryDO.axialJyos}" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
                     <td><input name="vaJyos" th:value="${optometryDO.vaJyos}" type="text"/></td>
                     <td><input name="pdJyod" th:value="${optometryDO.pdJyos}" type="text"/></td>
                     <td colspan="2"></td>
@@ -377,7 +387,8 @@
                     <td>OD</td>
                     <td><input name="sphCpod" th:value="${optometryDO.sphCpod}" type="text"/></td>
                     <td><input name="cylCpod" th:value="${optometryDO.cylCpod}" type="text"/></td>
-                    <td><input name="axialCpod" th:value="${optometryDO.axialCpod}" type="text"/></td>
+                    <td><input name="axialCpod" th:value="${optometryDO.axialCpod}" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
                     <td><input name="dvaCpod" th:value="${optometryDO.dvaCpod}" type="text"/></td>
                     <td><input name="nvaCpod" th:value="${optometryDO.nvaCpod}" type="text"/></td>
                     <td><input name="addCpod" th:value="${optometryDO.addCpod}" type="text"/></td>
@@ -387,7 +398,8 @@
                     <td>OS</td>
                     <td><input name="sphCpos" th:value="${optometryDO.sphCpos}" type="text"/></td>
                     <td><input name="cylCpos" th:value="${optometryDO.cylCpos}" type="text"/></td>
-                    <td><input name="axialCpos" th:value="${optometryDO.axialCpos}" type="text"/></td>
+                    <td><input name="axialCpos" th:value="${optometryDO.axialCpos}" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
                     <td><input name="dvaCpos" th:value="${optometryDO.dvaCpos}" type="text"/></td>
                     <td><input name="nvaCpos" th:value="${optometryDO.nvaCpos}" type="text"/></td>
                     <td><input name="addCpos" th:value="${optometryDO.addCpos}" type="text"/></td>
@@ -396,7 +408,6 @@
                 </tbody>
             </table>
         </div>
-
         <!--主观验光-->
         <div class="m40 tabS zhuguan">
             <h3>主观验光</h3>
@@ -420,10 +431,11 @@
                     <td>OD</td>
                     <td><input class="input_text" id="sphereRightz" name="sphereRightz" type="text"/></td>
                     <td><input class="input_text" id="cylinderRightz" name="cylinderRightz" type="text"/></td>
-                    <td><input class="input_text" id="axialRightz" name="axialRightz" type="text"/></td>
+                    <td><input class="input_text" id="axialRightz" name="axialRightz" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
                     <td><input class="input_text" id="dvaRightz" name="dvaRightz" type="text"/></td>
                     <td><input class="input_text" id="nvaRightz" name="nvaRightz" type="text"/></td>
-                    <td><input class="input_text" id="prismRightz" name="prismRightz" class="short"
+                    <td><input id="prismRightz" name="prismRightz" class="short input_text"
                                type="text"/> △
                     </td>
                     <td>
@@ -437,17 +449,18 @@
                     </td>
                     <td><input class="input_text" id="addRightz" name="addRightz" type="text"/></td>
                     <td><input class="input_text" id="yuanRz" name="yuanRz" type="text"/></td>
-                    <td><input class="input_text" id="nearRightz" name="nearRightz" type="text"/></td>
+                    <td><input id="nearRightz" name="nearRightz" type="text"/></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>OS</td>
                     <td><input class="input_text" id="sphereLeftz" name="sphereLeftz" type="text"/></td>
                     <td><input class="input_text" id="cylinderLeftz" name="cylinderLeftz" type="text"/></td>
-                    <td><input class="input_text" id="axialLeftz" name="axialLeftz" type="text"/></td>
+                    <td><input class="input_text" id="axialLeftz" name="axialLeftz" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
                     <td><input class="input_text" id="dvaLeftz" name="dvaLeftz" type="text"/></td>
                     <td><input class="input_text" id="nvaLeftz" name="nvaLeftz" type="text"/></td>
-                    <td><input class="input_text" id="prismLeftz" name="prismLeftz" class="short" type="text"/>
+                    <td><input id="prismLeftz" name="prismLeftz" class="short input_text" type="text"/>
                         △
                     </td>
                     <td>
@@ -461,7 +474,7 @@
                     </td>
                     <td><input class="input_text" id="addLeftz" name="addLeftz" type="text"/></td>
                     <td><input class="input_text" id="yuanLz" name="yuanLz" type="text"/></td>
-                    <td><input class="input_text" id="nearLeftz" name="nearLeftz" type="text"/></td>
+                    <td><input id="nearLeftz" name="nearLeftz" type="text"/></td>
                     <td></td>
                 </tr>
                 </tbody>
@@ -492,10 +505,11 @@
                     <td><input class="input_text" id="sphereRighttry" name="sphereRighttry" type="text"/></td>
                     <td><input class="input_text" id="cylinderRighttry" name="cylinderRighttry" type="text"/>
                     </td>
-                    <td><input class="input_text" id="axialRighttry" name="axialRighttry" type="text"/></td>
+                    <td><input class="input_text" id="axialRighttry" name="axialRighttry" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
                     <td><input class="input_text" id="dvaRighttry" name="dvaRighttry" type="text"/></td>
                     <td><input class="input_text" id="nvaRighttry" name="nvaRighttry" type="text"/></td>
-                    <td><input class="input_text" id="prismRighttry" name="prismRighttry" class="short"
+                    <td><input id="prismRighttry" name="prismRighttry" class="short input_text"
                                type="text"/> △
                     </td>
                     <td>
@@ -507,7 +521,7 @@
                             <option value="下">下</option>
                         </select>
                     </td>
-                    <td><input class="input_text" id="heightRighttry" name="heightRighttry" type="text"/></td>
+                    <td><input id="heightRighttry" name="heightRighttry" type="text"/></td>
                     <td><input class="input_text" id="addRighttry" name="addRighttry" type="text"/></td>
                     <td><input class="input_text" id="yuanRrty" name="yuanRrty" type="text"/></td>
                     <td></td>
@@ -517,10 +531,11 @@
                     <td><input class="input_text" id="sphereLefttry" name="sphereLefttry" type="text"/></td>
                     <td><input class="input_text" id="cylinderLefttry" name="cylinderLefttry" type="text"/>
                     </td>
-                    <td><input class="input_text" id="axialLefttry" name="axialLefttry" type="text"/></td>
+                    <td><input class="input_text" id="axialLefttry" name="axialLefttry" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
                     <td><input class="input_text" id="dvaLefttry" name="dvaLefttry" type="text"/></td>
                     <td><input class="input_text" id="nvaLefttry" name="nvaLefttry" type="text"/></td>
-                    <td><input class="input_text" id="prismLefttry" name="prismLefttry" class="short"
+                    <td><input id="prismLefttry" name="prismLefttry" class="short input_text"
                                type="text"/> △
                     </td>
                     <td>
@@ -532,7 +547,7 @@
                             <option value="下">下</option>
                         </select>
                     </td>
-                    <td><input class="input_text" id="heightLefttry" name="heightLefttry" type="text"/></td>
+                    <td><input id="heightLefttry" name="heightLefttry" type="text"/></td>
                     <td><input class="input_text" id="addLefttry" name="addLefttry" type="text"/></td>
                     <td><input class="input_text" id="yuanLrty" name="yuanLrty" type="text"/></td>
                     <td></td>
@@ -559,7 +574,7 @@
     </div>
 </form>
 <div th:include="include :: footer"></div>
-<script type="text/javascript" src="/js/appjs/optometryNew/add.js"></script>
+<script type="text/javascript" src="/js/appjs/optometryNew/jctryresults.js"></script>
 
 <form class="form-horizontal m-t" id="jielun">
     <div id="jianchajielun" class="none" style="text-decoration: none;">
@@ -728,7 +743,7 @@
                 <tbody>
                 <tr>
                     <td class="w170">医嘱</td>
-                    <td><textarea rows="3" name="yizhu" value="yizhu"></textarea></td>
+                    <td><textarea rows="3" id="yizhus" name="yizhu"></textarea></td>
                 </tr>
                 </tbody>
             </table>
@@ -759,7 +774,7 @@
                             <option value="10">RGP</option>
                             <option value="11">药品</option>
                         </select>
-                        <span class="maxL" style="margin: 10px" onclick="cf()" id="xuanze">
+                        <span class="maxL" style="margin: 10px" id="xuanze">
                                 <input class="button_true" type="button" value="选择"/>
                             </span>
 
@@ -770,9 +785,9 @@
             </table>
 
             <table id="tab1" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody>
+                <tbody id="kuangjiayy">
                 <tr>
-                    <td class="PL30" colspan="2"><span name="prescriptionType" value="2">1 框架--远用</span>
+                    <td class="PL30" colspan="2">1 框架--远用
                         <input type="button" class="input_del" value="删 除"/>
                     </td>
                     <td style="text-align: right" colspan="7">
@@ -901,9 +916,9 @@
             </table>
 
             <table id="tab2" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody>
+                <tbody id="kuangjiajy">
                 <tr>
-                    <td class="PL30" colspan="2" name="prescriptionType" value="1">2 框架--近用
+                    <td class="PL30" colspan="2">2 框架--近用
                         <input type="button" class="input_del" value="删 除"/></td>
                     <td style="text-align: right" colspan="7">
                         医生：
@@ -919,17 +934,6 @@
                             <option value="陈静">陈静</option>
                         </select>
                     </td>
-                </tr>
-                <tr class="tabS_bg">
-                    <td class="w170">&nbsp;</td>
-                    <td>球镜</td>
-                    <td>柱镜</td>
-                    <td>轴向</td>
-                    <td>三棱镜</td>
-                    <td>基底</td>
-                    <td>近用瞳距(mm)</td>
-                    <td>瞳高(mm)</td>
-                    <td>近用VA</td>
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
@@ -1037,22 +1041,23 @@
             </table>
 
             <table id="tab3" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody>
+                <tbody id="jianjsg">
                 <tr>
-                    <td class="PL30" colspan="2">3 框架--双光/渐进 <input type="button" class="input_del" value="删 除"/>
+                    <td class="PL30" colspan="2">3
+                        框架--双光/渐进 <input type="button" class="input_del" value="删 除"/>
                     </td>
                     <td style="text-align: right" colspan="8">
                         医生：
-                        <select>
-                            <option value="">王依依</option>
-                            <option value="">李三思</option>
-                            <option value="">赵武林</option>
+                        <select name="sgjjDoctor">
+                            <option value="王依依">王依依</option>
+                            <option value="李三思">李三思</option>
+                            <option value="赵武林">赵武林</option>
                         </select>
                         验光师：
-                        <select>
-                            <option value="">张三</option>
-                            <option value="">周五</option>
-                            <option value="">陈静</option>
+                        <select name="sgjjOptometryName">
+                            <option value="张三">张三</option>
+                            <option value="周五">周五</option>
+                            <option value="陈静">陈静</option>
                         </select>
                     </td>
                 </tr>
@@ -1070,92 +1075,107 @@
                 </tr>
                 <tr>
                     <td>OD</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="sgjjSphod" type="text"/></td>
+                    <td><input name="sgjjCylod" type="text"/></td>
+                    <td><input name="sgjjAxialod" type="text"/></td>
+                    <td><input name="sgjjAddod" type="text"/></td>
+                    <td><input name="sgjjYytjod" type="text"/></td>
+                    <td><input name="sgjjJytjod" type="text"/></td>
+                    <td><input name="sgjjTgod" type="text"/></td>
+                    <td><input name="sgjjYyvaod" type="text"/></td>
+                    <td><input name="sgjjJyvaod" type="text"/></td>
                 </tr>
                 <tr>
                     <td>OS</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="sgjjSphos" type="text"/></td>
+                    <td><input name="sgjjCylos" type="text"/></td>
+                    <td><input name="sgjjAxialos" type="text"/></td>
+                    <td><input name="sgjjAddos" type="text"/></td>
+                    <td><input name="sgjjYytjos" type="text"/></td>
+                    <td><input name="sgjjJytjos" type="text"/></td>
+                    <td><input name="sgjjTgos" type="text"/></td>
+                    <td><input name="sgjjYyvaos" type="text"/></td>
+                    <td><input name="sgjjJyvaos" type="text"/></td>
                 </tr>
                 <tr>
-                    <td>中距离：</td>
-                    <td colspan="2" class="daK">
-                        <label><input name="jianyi" type="checkbox"/> 建议镜框：</label>
-                        <select style="width: 70%;">
-                            <option value="">打孔</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
+                    <td rowspan="2" colspan="1">建议镜片材质:</td>
+                    <td rowspan="1" colspan="3" class="daK">
+                        <select name="sgjjJpcz">
+                            <option></option>
+                            <option value="老花渐进">老花渐进</option>
+                            <option value="青少年渐进">青少年渐进</option>
+                            <option value="非球面树脂">老非球面树脂花渐进</option>
+                            <option value="抗辐射镜片">抗辐射镜片</option>
+                            <option value="染色镜片">染色镜片</option>
+                            <option value="变色镜片">变色镜片</option>
+                            <option value="普通树脂">普通树脂</option>
+                            <option value="高折玻璃">高折玻璃</option>
+                            <option value="玻璃片">玻璃片</option>
+                            <option value="树脂抗疲劳镜片">树脂抗疲劳镜片</option>
+                            <option value="树脂偏光镜片（茶/灰）">树脂偏光镜片（茶/灰）</option>
                         </select>
                     </td>
-                    <td colspan="7"><input style="text-align: left;" type="text"/></td>
+                    <td rowspan="1" colspan="1">处理方式:</td>
+                    <td rowspan="1" colspan="3" class="daK">
+                        <select name="sgjjClfs">
+                            <option></option>
+                            <option value="足矫">足矫</option>
+                            <option value="欠矫">欠矫</option>
+                            <option value="过矫">过矫</option>
+                            <option value="附加棱镜">附加棱镜</option>
+                            <option value="调整">调整</option>
+                            <option value="平衡">平衡</option>
+                            <option value="医嘱">医嘱</option>
+                            <option value="全矫">全矫</option>
+                            <option value="患者要求减度">患者要求减度</option>
+                        </select>
+                    </td>
+                    <td colspan="3"></td>
                 </tr>
+                <tr></tr>
                 <tr>
-                    <td>建议镜片材质:</td>
-                    <td colspan="2" class="daK">
-                        <select>
-                            <option value="">青少年渐进</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
+                    <td rowspan="1" colspan="1">中距离：</td>
+                    <td rowspan="1" colspan="3" class="daK">
+                        <label><input name="sgjjJykj" value="建议镜框" type="checkbox"/> 建议镜框：</label>
+                        <select style="width: 30%;" name="sgjjKjlx">
+                            <option></option>
+                            <option value="打孔">打孔</option>
+                            <option value="拉丝">拉丝</option>
+                            <option value="板材">板材</option>
+                            <option value="框高">框高</option>
                         </select>
+                        <input name="sgjjText" style="width: 40%;" type="text"/>
                     </td>
-                    <td>建议镜片材质:</td>
-                    <td colspan="2" class="daK">
-                        <select>
-                            <option value="">青少年渐进</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
-                        </select>
-                    </td>
-                    <td colspan="4">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>备注</td>
-                    <td colspan="9"><textarea rows="3"></textarea></td>
+                    <td rowspan="1" colspan="1">备注</td>
+                    <td rowspan="1" colspan="2"><textarea name="sgjjBeizhu" rows="3"></textarea></td>
+                    <td colspan="3"></td>
                 </tr>
                 </tbody>
             </table>
 
             <table id="tab4" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody>
+                <tbody id="ruanxjmjcj">
                 <tr>
                     <td class="PL30" colspan="2">4 软性角膜接触镜 <input type="button" class="input_del" value="删 除"/>
                     </td>
                     <td style="text-align: right" colspan="8">
                         医生：
-                        <select>
-                            <option value="">王依依</option>
-                            <option value="">李三思</option>
-                            <option value="">赵武林</option>
+                        <select name="rxDoctor">
+                            <option value="王依依">王依依</option>
+                            <option value="李三思">李三思</option>
+                            <option value="赵武林">赵武林</option>
                         </select>
                         验光师：
-                        <select>
-                            <option value="">张三</option>
-                            <option value="">周五</option>
-                            <option value="">陈静</option>
+                        <select name="rxOptometryName">
+                            <option value="张三">张三</option>
+                            <option value="周五">周五</option>
+                            <option value="陈静">陈静</option>
                         </select>
                     </td>
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
-                    <td>球镜</td>
+                    <td>BC</td>
                     <td>球镜</td>
                     <td>柱镜</td>
                     <td>轴向</td>
@@ -1167,37 +1187,37 @@
                 </tr>
                 <tr>
                     <td>OD</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td>适用镜片：<input style="width:60%" type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="rxBcod" type="text"/></td>
+                    <td><input name="rxSphod" type="text"/></td>
+                    <td><input name="rxCylod" type="text"/></td>
+                    <td><input name="rxAxialod" type="text"/></td>
+                    <td><input name="rxZjod" type="text"/></td>
+                    <td><input name="rxVaod" type="text"/></td>
+                    <td>适用镜片：<input name="rxSyjpod" style="width:60%" type="text"/></td>
+                    <td><input name="rxUnitod" type="text"/></td>
                     <td rowspan="2">
-                        <select style="width: 70%;">
-                            <option value="">足矫</option>
-                            <option value="">足矫2</option>
-                            <option value="">足矫3</option>
+                        <select name="rxClfs" style="width: 70%;">
+                            <option value="足矫">足矫</option>
+                            <option value="欠矫">欠矫</option>
+                            <option value="过矫">过矫</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>OS</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td>适用镜片：<input style="width:60%" type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="rxBcos" type="text"/></td>
+                    <td><input name="rxSphos" type="text"/></td>
+                    <td><input name="rxCylos" type="text"/></td>
+                    <td><input name="rxAxialos" type="text"/></td>
+                    <td><input name="rxZjos" type="text"/></td>
+                    <td><input name="rxVaos" type="text"/></td>
+                    <td>适用镜片：<input name="rxSyjpos" style="width:60%" type="text"/></td>
+                    <td><input name="rxUnitos" type="text"/></td>
                 </tr>
                 <tr>
-                    <td>中距离：</td>
+                    <td>护理液品种：</td>
                     <td colspan="9">
-                        <textarea rows="3"></textarea>
+                        <textarea name="rxHlypz" rows="3"></textarea>
                         <div class="maxL" style="margin:5px 10px;">
                             <input type="button" value="选择"/>
                             <input class="empty" type="button" value="清空"/>
@@ -1206,27 +1226,27 @@
                 </tr>
                 <tr>
                     <td>备注</td>
-                    <td colspan="9"><textarea rows="3"></textarea></td>
+                    <td colspan="9"><textarea name="rxBeizhu" rows="3"></textarea></td>
                 </tr>
                 </tbody>
             </table>
 
             <table id="tab5" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody>
+                <tbody id="kuangjiazy">
                 <tr>
                     <td class="PL30" colspan="2">5 框架--中用 <input type="button" class="input_del" value="删 除"/></td>
                     <td style="text-align: right" colspan="7">
                         医生：
-                        <select>
-                            <option value="">王依依</option>
-                            <option value="">李三思</option>
-                            <option value="">赵武林</option>
+                        <select name="zyDoctor">
+                            <option value="王依依">王依依</option>
+                            <option value="李三思">李三思</option>
+                            <option value="赵武林">赵武林</option>
                         </select>
                         验光师：
-                        <select>
-                            <option value="">张三</option>
-                            <option value="">周五</option>
-                            <option value="">陈静</option>
+                        <select name="zyOptometryName">
+                            <option value="张三">张三</option>
+                            <option value="周五">周五</option>
+                            <option value="陈静">陈静</option>
                         </select>
                     </td>
                 </tr>
@@ -1243,97 +1263,115 @@
                 </tr>
                 <tr>
                     <td>OD</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input class="short" type="text" value=""/> △</td>
+                    <td><input name="zySphod" type="text"/></td>
+                    <td><input name="zyCylod" type="text"/></td>
+                    <td><input name="zyAxialod" type="text"/></td>
+                    <td><input name="zyPrismod" class="short" type="text"/> △</td>
                     <td>
-                        <select>
-                            <option value="">内</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
+                        <select name="zyJdod">
+                            <option></option>
+                            <option value="内">内</option>
+                            <option value="外">外</option>
+                            <option value="上">上</option>
+                            <option value="下">下</option>
                         </select>
                     </td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="zyZytjod" type="text"/></td>
+                    <td><input name="zyTgod" type="text"/></td>
+                    <td><input name="zyVaod" type="text"/></td>
                 </tr>
                 <tr>
                     <td>OS</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input class="short" type="text" value=""/> △</td>
+                    <td><input name="zySphos" type="text"/></td>
+                    <td><input name="zyCylos" type="text"/></td>
+                    <td><input name="zyAxialos" type="text"/></td>
+                    <td><input name="zyPrismos" class="short" type="text"/> △</td>
                     <td>
-                        <select>
-                            <option value="">内</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
+                        <select name="zyJdos">
+                            <option></option>
+                            <option value="内">内</option>
+                            <option value="外">外</option>
+                            <option value="上">上</option>
+                            <option value="下">下</option>
                         </select>
                     </td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="zyZytjos" type="text"/></td>
+                    <td><input name="zyTgos" type="text"/></td>
+                    <td><input name="zyVaos" type="text"/></td>
                 </tr>
                 <tr>
-                    <td>中距离：</td>
-                    <td colspan="2" class="daK">
-                        <label><input name="jianyi" type="checkbox"/> 建议镜框：</label>
-                        <select style="width: 75%;">
-                            <option value="">打孔</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
+                    <td rowspan="2" colspan="1">建议镜片材质:</td>
+                    <td rowspan="1" colspan="3" class="daK">
+                        <select name="zyJpcz">
+                            <option></option>
+                            <option value="老花渐进">老花渐进</option>
+                            <option value="青少年渐进">青少年渐进</option>
+                            <option value="非球面树脂">老非球面树脂花渐进</option>
+                            <option value="抗辐射镜片">抗辐射镜片</option>
+                            <option value="染色镜片">染色镜片</option>
+                            <option value="变色镜片">变色镜片</option>
+                            <option value="普通树脂">普通树脂</option>
+                            <option value="高折玻璃">高折玻璃</option>
+                            <option value="玻璃片">玻璃片</option>
+                            <option value="树脂抗疲劳镜片">树脂抗疲劳镜片</option>
+                            <option value="树脂偏光镜片（茶/灰）">树脂偏光镜片（茶/灰）</option>
                         </select>
                     </td>
-                    <td colspan="6"><input style="text-align: left;" type="text"/></td>
+                    <td rowspan="1" colspan="1">处理方式:</td>
+                    <td rowspan="1" colspan="3" class="daK">
+                        <select name="zyClfs">
+                            <option></option>
+                            <option value="足矫">足矫</option>
+                            <option value="欠矫">欠矫</option>
+                            <option value="过矫">过矫</option>
+                            <option value="附加棱镜">附加棱镜</option>
+                            <option value="调整">调整</option>
+                            <option value="平衡">平衡</option>
+                            <option value="医嘱">医嘱</option>
+                            <option value="全矫">全矫</option>
+                            <option value="患者要求减度">患者要求减度</option>
+                        </select>
+                    </td>
+                    <td colspan="3"></td>
                 </tr>
+                <tr></tr>
                 <tr>
-                    <td>建议镜片材质:</td>
-                    <td colspan="2" class="daK">
-                        <select>
-                            <option value="">青少年渐进</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
+                    <td rowspan="1" colspan="1">中距离：</td>
+                    <td rowspan="1" colspan="3" class="daK">
+                        <label><input name="zyJyjk" value="建议镜框" type="checkbox"/> 建议镜框：</label>
+                        <select style="width: 30%;" name="zyJklx">
+                            <option></option>
+                            <option value="打孔">打孔</option>
+                            <option value="拉丝">拉丝</option>
+                            <option value="板材">板材</option>
+                            <option value="框高">框高</option>
                         </select>
+                        <input name="zyText" style="width: 40%;" type="text"/>
                     </td>
-                    <td>建议镜片材质:</td>
-                    <td colspan="2" class="daK">
-                        <select>
-                            <option value="">青少年渐进</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
-                        </select>
-                    </td>
-                    <td colspan="4">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>备注</td>
-                    <td colspan="8"><textarea rows="3"></textarea></td>
+                    <td rowspan="1" colspan="1">备注</td>
+                    <td rowspan="1" colspan="2"><textarea name="zyBeizhu" rows="3"></textarea></td>
+                    <td colspan="3"></td>
                 </tr>
                 </tbody>
             </table>
 
             <table id="tab6" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody>
+                <tbody id="shijxl">
                 <tr>
-                    <td class="PL30" colspan="2">6 视觉训练 <input type="button" class="input_del" value="删 除"/></td>
+                    <td class="PL30" colspan="2">6 视觉训练
+                        <input type="button" class="input_del" value="删 除"/></td>
                     <td style="text-align: right" colspan="8">
                         医生：
-                        <select>
-                            <option value="">王依依</option>
-                            <option value="">李三思</option>
-                            <option value="">赵武林</option>
+                        <select name="sjxlDoctor">
+                            <option value="王依依">王依依</option>
+                            <option value="李三思">李三思</option>
+                            <option value="赵武林">赵武林</option>
                         </select>
                         验光师：
-                        <select>
-                            <option value="">张三</option>
-                            <option value="">周五</option>
-                            <option value="">陈静</option>
+                        <select name="sjxlOptometryName">
+                            <option value="张三">张三</option>
+                            <option value="周五">周五</option>
+                            <option value="陈静">陈静</option>
                         </select>
                     </td>
                 </tr>
@@ -1351,46 +1389,48 @@
                 </tr>
                 <tr>
                     <td>OD</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input class="short" type="text" value=""/> △</td>
+                    <td><input name="sjxlSphod" type="text"/></td>
+                    <td><input name="sjxlCylod" type="text"/></td>
+                    <td><input name="sjxlAxialod" type="text"/></td>
+                    <td><input name="sjxlSljod" class="short" type="text"/> △</td>
                     <td>
-                        <select>
-                            <option value="">内</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
+                        <select name="sjxlJdod">
+                            <option></option>
+                            <option value="内">内</option>
+                            <option value="外">外</option>
+                            <option value="上">上</option>
+                            <option value="下">下</option>
                         </select>
                     </td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="sjxlYytjod" type="text"/></td>
+                    <td><input name="sjxlJytjod" type="text"/></td>
+                    <td><input name="sjxlYyvaod" type="text"/></td>
+                    <td><input name="sjxlJyvaod" type="text"/></td>
                 </tr>
                 <tr>
                     <td>OS</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input class="short" type="text" value=""/> △</td>
+                    <td><input name="sjxlSphos" type="text"/></td>
+                    <td><input name="sjxlCylos" type="text"/></td>
+                    <td><input name="sjxlAxialos" type="text"/></td>
+                    <td><input name="sjxlSljos" class="short" type="text"/> △</td>
                     <td>
-                        <select>
-                            <option value="">内</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
+                        <select name="sjxlJdos">
+                            <option></option>
+                            <option value="内">内</option>
+                            <option value="外">外</option>
+                            <option value="上">上</option>
+                            <option value="下">下</option>
                         </select>
                     </td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="sjxlYytjos" type="text"/></td>
+                    <td><input name="sjxlJytjos" type="text"/></td>
+                    <td><input name="sjxlYyvaos" type="text"/></td>
+                    <td><input name="sjxlJyvaos" type="text"/></td>
                 </tr>
                 <tr>
                     <td>家庭训练：</td>
                     <td colspan="4">
-                        <textarea rows="3"></textarea>
+                        <textarea name="sjxlJtxl" rows="3"></textarea>
                         <div class="maxL" style="margin:5px 10px;">
                             <input type="button" value="选择"/>
                             <input class="empty" type="button" value="清空"/>
@@ -1398,7 +1438,7 @@
                     </td>
                     <td>训练室训练：</td>
                     <td colspan="4">
-                        <textarea rows="3"></textarea>
+                        <textarea name="sjxlXlsxl" rows="3"></textarea>
                         <div class="maxL" style="margin:5px 10px;">
                             <input type="button" value="选择"/>
                             <input class="empty" type="button" value="清空"/>
@@ -1407,28 +1447,28 @@
                 </tr>
                 <tr>
                     <td>备注</td>
-                    <td colspan="9"><textarea rows="3"></textarea></td>
+                    <td colspan="9"><textarea name="sjxlBeizhu" rows="3"></textarea></td>
                 </tr>
                 </tbody>
             </table>
 
             <table id="tab7" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody>
+                <tbody id="jmvst">
                 <tr>
                     <td class="PL30" colspan="2">7 角膜接触镜VST <input type="button" class="input_del" value="删 除"/>
                     </td>
                     <td style="text-align: right" colspan="11">
                         医生：
-                        <select>
-                            <option value="">王依依</option>
-                            <option value="">李三思</option>
-                            <option value="">赵武林</option>
+                        <select name="vstDoctor">
+                            <option value="1">王依依</option>
+                            <option value="2">李三思</option>
+                            <option value="3">赵武林</option>
                         </select>
                         验光师：
-                        <select>
-                            <option value="">张三</option>
-                            <option value="">周五</option>
-                            <option value="">陈静</option>
+                        <select name="vstDoctor">
+                            <option value="32">张三</option>
+                            <option value="42">周五</option>
+                            <option value="112">陈静</option>
                         </select>
                     </td>
                 </tr>
@@ -1449,72 +1489,62 @@
                 </tr>
                 <tr>
                     <td>OD</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
+                    <td><input name="vstSdbhod" type="text"/></td>
+                    <td><input name="vstFkod" type="text"/></td>
+                    <td><input name="vstQlbjod" type="text"/></td>
+                    <td><input name="vstAcod" type="text"/></td>
+                    <td><input name="vstJfod" type="text"/></td>
+                    <td><input name="vstDiaod" type="text"/></td>
+                    <td><input name="vstBcod" type="text"/></td>
+                    <td><input name="vstCpclyod" type="text"/></td>
+                    <td><input name="vstEod" type="text"/></td>
+                    <td><input name="vstVaod" type="text"/></td>
                     <td>
-                        <select>
-                            <option value="">内</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
-                        </select>
+                        <select name="vstJpysod"></select>
                     </td>
-                    <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+                    <td>适用镜片： <input name="vstSyjpod" style="width: 60%;text-align: left;" type="text"/></td>
                 </tr>
                 <tr>
                     <td>OS</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="vstSdbhos" type="text"/></td>
+                    <td><input name="vstFkos" type="text"/></td>
+                    <td><input name="vstQlbjos" type="text"/></td>
+                    <td><input name="vstAcos" type="text"/></td>
+                    <td><input name="vstJfos" type="text"/></td>
+                    <td><input name="vstDiaos" type="text"/></td>
+                    <td><input name="vstBcos" type="text"/></td>
+                    <td><input name="vstCpclyos" type="text"/></td>
+                    <td><input name="vstEos" type="text"/></td>
+                    <td><input name="vstVaos" type="text"/></td>
                     <td>
-                        <select>
-                            <option value="">内</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
-                        </select>
+                        <select name="vstJpysos"></select>
                     </td>
-                    <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+                    <td>适用镜片： <input name="vstSyjpos" style="width: 60%;text-align: left;" type="text"/></td>
                 </tr>
                 <tr>
                     <td>备注</td>
-                    <td colspan="12"><textarea rows="3"></textarea></td>
+                    <td colspan="12"><textarea name="vstBeizhu" rows="3"></textarea></td>
                 </tr>
                 </tbody>
             </table>
 
             <table id="tab8" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody>
+                <tbody id="jmcrt">
                 <tr>
                     <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="button" class="input_del" value="删 除"/>
                     </td>
                     <td style="text-align: right" colspan="10">
                         医生：
-                        <select>
-                            <option value="">王依依</option>
-                            <option value="">李三思</option>
-                            <option value="">赵武林</option>
+                        <select name="crtDoctor">
+                            <option value="21">王依依</option>
+                            <option value="2">李三思</option>
+                            <option value="122">赵武林</option>
                         </select>
                         验光师：
-                        <select>
-                            <option value="">张三</option>
-                            <option value="">周五</option>
-                            <option value="">陈静</option>
+                        <select name="crtOptometryName">
+                            <option value="2edw1">张三</option>
+                            <option value="2edw2">周五</option>
+                            <option value="2ew">陈静</option>
                         </select>
                     </td>
                 </tr>
@@ -1534,69 +1564,60 @@
                 </tr>
                 <tr>
                     <td>OD</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
+                    <td><input name="crtSdbhod" type="text"/></td>
+                    <td><input name="ctrBcod" type="text"/></td>
+                    <td><input name="crtRzdod" type="text"/></td>
+                    <td><input name="crtLzaod" type="text"/></td>
+                    <td><input name="crtRzd2od" type="text"/></td>
+                    <td><input name="crtLza2od" type="text"/></td>
+                    <td><input name="crtJfod" type="text"/></td>
+                    <td><input name="crtDiaod" type="text"/></td>
+                    <td><input name="crtVaod" type="text"/></td>
                     <td>
-                        <select>
-                            <option value="">内</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
-                        </select>
+                        <select name="crtJpysod"></select>
                     </td>
-                    <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+                    <td>适用镜片： <input name="crtSyjpod" style="width: 60%;text-align: left;" type="text"/></td>
                 </tr>
                 <tr>
                     <td>OS</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="crtSdbhos" type="text"/></td>
+                    <td><input name="ctrBcos" type="text"/></td>
+                    <td><input name="crtRzdos" type="text"/></td>
+                    <td><input name="crtLzaos" type="text"/></td>
+                    <td><input name="crtRzd2os" type="text"/></td>
+                    <td><input name="crtLza2os" type="text"/></td>
+                    <td><input name="crtJfos" type="text"/></td>
+                    <td><input name="crtDiaos" type="text"/></td>
+                    <td><input name="crtVaos" type="text"/></td>
                     <td>
-                        <select>
-                            <option value="">内</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
-                        </select>
+                        <select name="crtJpysos"></select>
                     </td>
-                    <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+                    <td>适用镜片： <input name="crtSyjpos" style="width: 60%;text-align: left;" type="text"/></td>
                 </tr>
                 <tr>
                     <td>备注</td>
-                    <td colspan="11"><textarea rows="3"></textarea></td>
+                    <td colspan="11"><textarea name="crtBeizhu" rows="3"></textarea></td>
                 </tr>
                 </tbody>
             </table>
 
             <table id="tab9" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody>
+                <tbody id="jcrgp">
                 <tr>
-                    <td class="PL30" colspan="2">9 RGP <input type="button" class="input_del" value="删 除"/></td>
+                    <td class="PL30" colspan="2">9 RGP
+                        <input type="button" class="input_del" value="删 除"/></td>
                     <td style="text-align: right" colspan="6">
                         医生：
-                        <select>
-                            <option value="">王依依</option>
-                            <option value="">李三思</option>
-                            <option value="">赵武林</option>
+                        <select name="rgpDoctor">
+                            <option value="21s">王依依</option>
+                            <option value="2s1">李三思</option>
+                            <option value="2ff1">赵武林</option>
                         </select>
                         验光师：
-                        <select>
-                            <option value="">张三</option>
-                            <option value="">周五</option>
-                            <option value="">陈静</option>
+                        <select name="rgpOptometryName">
+                            <option value="12ws">张三</option>
+                            <option value="1s2w">周五</option>
+                            <option value="1sd2">陈静</option>
                         </select>
                     </td>
                 </tr>
@@ -1607,77 +1628,68 @@
                     <td>DIA</td>
                     <td>散光</td>
                     <td>镜片颜色</td>
-                    <td>镜片颜色</td>
+                    <td>特殊设计</td>
                     <td width="300">品牌</td>
                 </tr>
                 <tr>
                     <td>OD</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
+                    <td><input name="rgpQgdod" type="text"/></td>
+                    <td><input name="rgpBcod" type="text"/></td>
+                    <td><input name="rgpDiaod" type="text"/></td>
+                    <td><input name="rgpSgod" type="text"/></td>
                     <td>
-                        <select>
-                            <option value="">内</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
-                        </select>
+                        <select name="rgpJpysod"></select>
                     </td>
-                    <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+                    <td><input name="rgpTssjod" type="text"/></td>
+                    <td>适用镜片： <input name="rgpSyjpod" style="width: 60%;text-align: left;" type="text"/></td>
                 </tr>
                 <tr>
                     <td>OS</td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=""/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
-                    <td><input type="text" value=" "/></td>
+                    <td><input name="rgpQgdos" type="text"/></td>
+                    <td><input name="rgpBcos" type="text"/></td>
+                    <td><input name="rgpDiaos" type="text"/></td>
+                    <td><input name="rgpSgos" type="text"/></td>
                     <td>
-                        <select>
-                            <option value="">内</option>
-                            <option value="">外</option>
-                            <option value="">上</option>
-                            <option value="">下</option>
-                        </select>
+                        <select name="rgpJpysos"></select>
                     </td>
-                    <td>适用镜片： <input style="width: 60%;text-align: left;" type="text" value=""/></td>
+                    <td><input name="rgpTssjos" type="text"/></td>
+                    <td>适用镜片： <input name="rgpSyjpos" style="width: 60%;text-align: left;" type="text"/></td>
                 </tr>
                 <tr>
                     <td>备注</td>
-                    <td colspan="7"><textarea rows="3"></textarea></td>
+                    <td colspan="7"><textarea name="rgpBeizhu" rows="3"></textarea></td>
                 </tr>
                 </tbody>
             </table>
 
             <table id="tab10" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody>
+                <tbody id="jcyp">
                 <tr>
-                    <td class="PL30" colspan="2">10 药品 <input type="button" class="input_del" value="删 除"/></td>
+                    <td class="PL30" colspan="2">10 药品
+                        <input type="button" class="input_del" value="删 除"/></td>
                     <td style="text-align: right">
                         医生：
-                        <select>
-                            <option value="">王依依</option>
-                            <option value="">李三思</option>
-                            <option value="">赵武林</option>
+                        <select name="ypDoctor">
+                            <option value="21">王依依</option>
+                            <option value="32">李三思</option>
+                            <option value="12">赵武林</option>
                         </select>
                         验光师：
-                        <select>
-                            <option value="">张三</option>
-                            <option value="">周五</option>
-                            <option value="">陈静</option>
+                        <select name="ypOptometryName">
+                            <option value="s">张三</option>
+                            <option value="qWD">周五</option>
+                            <option value="DQx">陈静</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td class="w170">内容：</td>
-                    <td colspan="2"><textarea rows="2"></textarea></td>
+                    <td colspan="2"><textarea name="ypNr" rows="2"></textarea></td>
                 </tr>
                 <tr>
                     <td>药名：</td>
                     <td colspan="2">
-                        <textarea rows="2"></textarea>
+                        <textarea rows="2" name="ypYm"></textarea>
                         <div class="maxL" style="margin:5px 10px;">
                             <input type="button" value="选择"/>
                             <input class="empty" type="button" value="清空"/>
@@ -1694,7 +1706,7 @@
                     <option value="">夜戴</option>
                 </select>
                 <span>复诊时间: </span>
-                <input type="text" value="2021-05-23"/>
+                <input id="riqi" type="text" value="2021-05-23"/>
                 <span>复诊类型：</span>
                 <select>
                     <option value="">--请选择--</option>
@@ -1711,7 +1723,7 @@
     </div>
 </form>
 <div th:include="include :: footer"></div>
-<script type="text/javascript" src="/js/appjs/optometryNew/result.js"></script>
+<script type="text/javascript" src="/js/appjs/optometryNew/jcresult.js"></script>
 </body>
 
 <!--第一个页面-->
@@ -1741,61 +1753,119 @@
             $(".zhuguan2 .input_text").eq(i).val($(".zhuguan .input_text").eq(i).val())
         }
     });
-
-    // 保留小数
-    function onlyNum(that) {
-        var _value = $(that).val();
-        //确保最多两位小数
-        var regs = "/^(([1-9]\\d*)|(([0]\\.\\d{1,2}|[1-9][0-9]*\\.\\d{1,2})))$/";
-        regs = regs.substr(1, regs.length - 2);
-        var reg = new RegExp(regs);
-        if (!reg.test(_value)) {
-            return false;
-        }
-        //去除非数字字符
-        var vv = Math.round(that.value.replace(/[^\d.]/g, "") * 100) / 100;
-        vv = Number(vv);
-        vv = vv.toFixed(2);//四舍五入
-        that.value = vv;
-    }
 </script>
-
-
 <!--第二个页面-->
-<script type="text/javascript" src="/js/appjs/optometryNew/store.js"></script>
+<script type="text/javascript" src="/js/appjs/optometryNew/jcyizhu.js"></script>
 <script type="text/javascript">
     //处方显隐增加
     function goodsidstr(value) {
         if (value == '2') {
             tab1.style = "display: block";
+            var html1 = "";
+            html1 = "<input type=\"text\" name=\"kjyyPrescriptionType\" value=\"2\" hidden/>";
+            $("#kuangjiayy").append(html1);
         } else if (value == '1') {
             tab2.style = "display: block";
+            var html2 = "";
+            html2 = "<input type=\"text\" name=\"kjjyPrescriptionType\" value=\"1\" hidden/>";
+            $("#kuangjiajy").append(html2);
         } else if (value == '3') {
             tab3.style = "display: block";
+            var html3 = "";
+            html3 = "<input type=\"text\" name=\"sgjjPrescriptionType\" value=\"3\" hidden/>";
+            $("#jianjsg").append(html3);
         } else if (value == '5') {
             tab4.style = "display: block";
+            var html4 = "";
+            html4 = "<input type=\"text\" name=\"rxPrescriptionType\" value=\"5\" hidden/>";
+            $("#ruanxjmjcj").append(html4);
         } else if (value == '4') {
             tab5.style = "display: block";
+            var html5 = "";
+            html5 = "<input type=\"text\" name=\"zyPrescriptionType\" value=\"4\" hidden/>";
+            $("#kuangjiazy").append(html5);
         } else if (value == '7') {
             tab6.style = "display: block";
+            var html6 = "";
+            html6 = "<input type=\"text\" name=\"sjxlPrescriptionType\" value=\"7\" hidden/>";
+            $("#shijxl").append(html6);
         } else if (value == '8') {
             tab7.style = "display: block";
+            var html7 = "";
+            html7 = "<input type=\"text\" name=\"vstPrescriptionType\" value=\"8\" hidden/>";
+            $("#jmvst").append(html7);
         } else if (value == '9') {
             tab8.style = "display: block";
+            var html8 = "";
+            html8 = "<input type=\"text\" name=\"crtPrescriptionType\" value=\"9\" hidden/>";
+            $("#jmcrt").append(html8);
         } else if (value == '10') {
             tab9.style = "display: block";
+            var html9 = "";
+            html9 = "<input type=\"text\" name=\"rgpPrescriptionType\" value=\"10\" hidden/>";
+            $("#jcrgp").append(html9);
         } else if (value == '11') {
             tab10.style = "display: block";
+            var html10 = "";
+            html10 = "<input type=\"text\" name=\"ypPrescriptionType\" value=\"11\" hidden/>";
+            $("#jcyp").append(html10);
         }
     };
     $(".button_true").click(function () {
-        goodsidstr($(".select_value").val())
+        goodsidstr($(".select_value").val());
     });
     $(".input_del").click(function () {
-        $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none")
+        $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+    });
+    //日期
+    laydate.render({
+        elem: '#riqi',
+        type: 'date'
     });
 
+    //正负+—
+    function zhengfu(e) {//正负用onblur事件触发
+        alert("+-");
+        var val = parseFloat(e.value)
+        if (val > 0) {
+            e.value = "+" + val.toFixed(2)
+        } else if (val <= 0) {
+            e.value = val.toFixed(2)
+        }
+    };
 
+    //
+    function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用
+        var val = parseFloat(e.value)
+        var num = e.indexOf(".") + 3
+        if (val.length > num) {
+            e.value = val.toFixed(2)
+        }
+    }
+
+    //自动补0
+    function shuzi(e) {
+        var val = parseFloat(e.value)
+        if (val > 0) {
+            e.value = val.toFixed(2)
+        } else if (val <= 0) {
+            e.value = val.toFixed(2)
+        }
+        var num = e.indexOf(".") + 3
+        if (val.length > num) {
+            e.value = val.toFixed(2)
+        }
+    };
+
+    //轴向正确表示规则
+    function zhouxiang(e) {//用onblur事件触发
+        var val = parseFloat(e.value);
+        if (val < 0 || val > 180) {
+            alert("轴向在0-180之间")
+        } else {
+            e.value = val.toFixed(0)
+        }
+    }
 </script>
 
 </html>

@@ -15,13 +15,18 @@ import java.util.Map;
  */
 public interface BrandService {
 
-//    BrandDO get(Integer brandid);
+    //    BrandDO get(Integer brandid);
     //关联所有品牌维护所需表
     BrandDO getall(Integer brandid);
 
     List<BrandDO> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);
+
+    //选择制造商
+    List<BrandDO> findzzs(Map<String, Object> map);
+
+    int countzzs(Map<String, Object> map);
 
     int save(BrandDO brand);
 
@@ -33,5 +38,6 @@ public interface BrandService {
 
     //菜单联动显示
     List<GoodsDO> caidan(Integer mfrsid);
+
 
 }

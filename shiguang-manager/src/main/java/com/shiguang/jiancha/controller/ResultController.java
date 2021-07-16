@@ -4,9 +4,7 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.jiancha.domain.ResultDO;
-import com.shiguang.jiancha.service.KjjyService;
-import com.shiguang.jiancha.service.KjyyService;
-import com.shiguang.jiancha.service.ResultService;
+import com.shiguang.jiancha.service.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +33,27 @@ public class ResultController {
     //2 框架--近用
     @Autowired
     private KjjyService kjjyService;
+    //双光/渐进
+    @Autowired
+    private SgjjService sgjjService;
+    //软性角膜接触镜
+    @Autowired
+    private RxjmjcjService rxjmjcjService;
+    //视觉训练
+    @Autowired
+    private SjxlService sjxlService;
+    //角膜VST
+    @Autowired
+    private VstService vstService;
+    //角膜CRT
+    @Autowired
+    private CrtService crtService;
+    //RGP
+    @Autowired
+    private RgpService rgpService;
+    //药品
+    @Autowired
+    private YaopinService yaopinService;
 
 
     @GetMapping()
@@ -76,10 +95,37 @@ public class ResultController {
     @PostMapping("/save")
     @RequiresPermissions("jiancha:result:add")
     public R save(ResultDO result) {
-        kjyyServce.savekjyy(result);
-        kjjyService.savekjjy(result);
+//        处方类型所有数据保存
+        if (result.getKjyyPrescriptionType() != null) {
+            kjyyServce.savekjyy(result);
+        }
+        if (result.getKjjyPrescriptionType() != null) {
+            kjjyService.savekjjy(result);
+        }
+        if (result.getSgjjPrescriptionType() != null) {
+            sgjjService.savesgjj(result);
+        }
+        if (result.getRxPrescriptionType() != null) {
+            rxjmjcjService.saveRxjmjcj(result);
+        }
+        if (result.getSjxlPrescriptionType() != null) {
+            sjxlService.saveSjxl(result);
+        }
+        if (result.getVstPrescriptionType() != null) {
+            vstService.saveVst(result);
+        }
+        if (result.getCrtPrescriptionType() != null) {
+            crtService.saveCrt(result);
+        }
+        if (result.getRgpPrescriptionType() != null) {
+            rgpService.saveRgp(result);
+        }
+        if (result.getYpPrescriptionType() != null) {
+            yaopinService.saveYaopin(result);
+        }
         if (resultService.save(result) > 0) {
             return R.ok();
+
         }
         return R.error();
     }

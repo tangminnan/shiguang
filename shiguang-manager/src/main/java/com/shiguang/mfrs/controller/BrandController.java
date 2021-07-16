@@ -1,33 +1,20 @@
 package com.shiguang.mfrs.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.shiguang.common.utils.PageUtils;
+import com.shiguang.common.utils.Query;
+import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.*;
 import com.shiguang.mfrs.service.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 品牌维护表
@@ -78,7 +65,7 @@ public class BrandController {
     //支付方式
     @Autowired
     private PayService payService;
-//    //制造商商品表
+    //    //制造商商品表
 //    @Autowired
 //    private MgService mgService;
     //状态
@@ -90,10 +77,10 @@ public class BrandController {
     String Brand(Model model) {
         Map<String, Object> map = new HashMap<>();
         //品牌
-        List<BrandDO> brandDOList =brandService .list(map);
+        List<BrandDO> brandDOList = brandService.list(map);
         model.addAttribute("brandDOList", brandDOList);
         //商品类别
-        List<GoodsDO> goodsDOList =goodsService .list(map);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         //制造商
         List<MfrsDO> mfrsDOList = mfrsService.list(map);
@@ -244,9 +231,6 @@ public class BrandController {
 //            }
 
 
-
-
-
             return R.ok();
         }
         return R.error();
@@ -296,4 +280,46 @@ public class BrandController {
         return goodsDOList;
     }
 
+    //    //跳转制造商
+//    @GetMapping("/yizhu")
+//    @RequiresPermissions("information:optometryNew:yizhu")
+//    String yizhu() {
+//        return "jiancha/yizhu/yizhu";
+//    }
+//
+//    /**
+//     * 查询医嘱
+//     */
+//    @ResponseBody
+//    @GetMapping("/yizhulist")
+//    @RequiresPermissions("information:optometryNew:yizhu")
+//    public PageUtils yizhulist(@RequestParam Map<String, Object> params) {
+//        //查询列表数据
+//        Query query = new Query(params);
+//        List<YizhuDO> yizhuList = yizhuService.findYizhu(query);
+//        int total = yizhuService.countYizhu(query);
+//        PageUtils pageUtils = new PageUtils(yizhuList, total);
+//        return pageUtils;
+//    }
+//跳转制造商
+    @GetMapping("/brandmfrs")
+    @RequiresPermissions("mfrs:brand:brandmfrs")
+    String yizhu() {
+        return "mfrs/brand/brandmfrs";
+    }
+
+    /**
+     * 查询医嘱
+     */
+    @ResponseBody
+    @GetMapping("/brandmfrslist")
+    @RequiresPermissions("mfrs:brand:brandmfrs")
+    public PageUtils brandmfrslist(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<BrandDO> brandmfrslist = brandService.findzzs(query);
+        int total = brandService.countzzs(query);
+        PageUtils pageUtils = new PageUtils(brandmfrslist, total);
+        return pageUtils;
+    }
 }

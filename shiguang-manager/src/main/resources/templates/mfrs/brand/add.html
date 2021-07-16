@@ -23,6 +23,20 @@
                                 <span style="color: red">*</span>
                             </div>
                         </div>
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">制造商简称：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<select id="mfrsid" name="mfrsid" class="form-control"-->
+                        <!--onchange="caidan(this.options[this.options.selectedIndex].value)">-->
+                        <!--<option></option>-->
+                        <!--<option th:each="ls:${mfrsDOList}"-->
+                        <!--th:text="${ls.mfrsname}"-->
+                        <!--th:value="${ls.mfrsid}"-->
+                        <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<span style="color: red">*</span>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商简称：</label>
                             <div class="col-sm-8">
@@ -34,7 +48,24 @@
                                             th:value="${ls.mfrsid}"
                                     ></option>
                                 </select>
+                                <input id="yizhus" name="yizhu"/>
+                                <input type="button" value="选择" onclick="getZhizaoshang()" style="color: red"/>
                                 <span style="color: red">*</span>
+                            </div>
+                        </div>
+                        <div class="m40 tabS">
+                            <table class="tabF" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                <tr>
+                                    <td class="w170">医嘱</td>
+                                    <!--<td><textarea rows="3" id="yizhus" name="yizhu"></textarea></td>-->
+                                    <!--<input id="yizhus" name="yizhu"/>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="maxL">
+                                <input type="button" value="选择" onclick="getYizhu()"/>
+                                <span>* 最多可输入1000字</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -44,12 +75,6 @@
                                         onchange="goodsidstr(this.options[this.options.selectedIndex].value)"></select>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">镜架材质名称id：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="materialid" name="materialid" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group" id="tab1" style="display: none">
                             <label class="col-sm-3 control-label">镜架材质名称：</label>
                             <div class="col-sm-8">
@@ -62,12 +87,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">材料分类id：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="lensId" name="lensId" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group" id="tab2" style="display: none">
                             <label class="col-sm-3 control-label">材料分类：</label>
                             <div class="col-sm-8">
@@ -80,17 +99,12 @@
                                 </select>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">光度分类id：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="lightId" name="lightId" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group" id="tab3" style="display: none">
                             <label class="col-sm-3 control-label">光度分类：</label>
                             <div class="col-sm-8">
                                 <!--<input id="lightName" name="lightName" class="form-control" type="text">-->
-                                <select id="lightId" name="lightId" class="form-control"  onchange="lightIdstr(this.options[this.options.selectedIndex].value)">
+                                <select id="lightId" name="lightId" class="form-control"
+                                        onchange="lightIdstr(this.options[this.options.selectedIndex].value)">
                                     <option></option>
                                     <option th:each="ls:${lightDOList}"
                                             th:text="${ls.lightName}"
@@ -99,12 +113,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">渐进片分类id：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="gradualId" name="gradualId" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group" id="tab6" style="display: none">
                             <label class="col-sm-3 control-label">渐进片分类：</label>
                             <div class="col-sm-8">
@@ -117,12 +125,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">折射率值id：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="refractivityid" name="refractivityid" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group" id="tab4" style="display: none">
                             <label class="col-sm-3 control-label">折射率值：</label>
                             <div class="col-sm-8">
@@ -135,12 +137,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">镜片功能id：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="functionId" name="functionId" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group" id="tab5" style="display: none">
                             <label class="col-sm-3 control-label">镜片功能：</label>
                             <div class="col-sm-8">
@@ -154,13 +150,6 @@
                                 </select>
                             </div>
                         </div>
-
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">使用类型id：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="usageId" name="usageId" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group" id="tab7" style="display: none">
                             <label class="col-sm-3 control-label">使用类型：</label>
                             <div class="col-sm-8">
@@ -173,12 +162,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">抛弃型分类id：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="typeId" name="typeId" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group" id="tab8" style="display: none">
                             <label class="col-sm-3 control-label">抛弃型分类：</label>
                             <div class="col-sm-8">
@@ -229,12 +212,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">批号管理(1是、2否)：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="batchid" name="batchid" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">批号管理：</label>
                             <div class="col-sm-8">
@@ -254,30 +231,23 @@
                             </div>
                         </div>
                         <div class="form-group">
-                        <label class="col-sm-3 control-label">促销金额：</label>
-                        <div class="col-sm-8">
-                        <input id="money" name="money" class="form-control" type="text">
-                        </div>
-                        </div>
-                        <div class="form-group">
-                        <label class="col-sm-3 control-label">速记码：</label>
-                        <div class="col-sm-8">
-                        <input id="shorthandcode" name="shorthandcode" class="form-control" type="text">
-                        </div>
+                            <label class="col-sm-3 control-label">促销金额：</label>
+                            <div class="col-sm-8">
+                                <input id="money" name="money" class="form-control" type="text">
+                            </div>
                         </div>
                         <div class="form-group">
-                        <label class="col-sm-3 control-label">生产企业许可证号：</label>
-                        <div class="col-sm-8">
-                        <input id="productionkey" name="productionkey" class="form-control" type="text">
+                            <label class="col-sm-3 control-label">速记码：</label>
+                            <div class="col-sm-8">
+                                <input id="shorthandcode" name="shorthandcode" class="form-control" type="text">
+                            </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">生产企业许可证号：</label>
+                            <div class="col-sm-8">
+                                <input id="productionkey" name="productionkey" class="form-control" type="text">
+                            </div>
                         </div>
-
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">状态(1:启用2:停用)：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<input id="stateId" name="stateId" class="form-control" type="text">-->
-                            <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">状态：</label>
                             <div class="col-sm-8">
@@ -286,7 +256,7 @@
                                                                     name="stateId" value="1" checked/> 启用
                                 </label>
                                 <label class="radio-inline"> <input type="radio"
-                                                                    name="stateId" value="2" /> 停用
+                                                                    name="stateId" value="2"/> 停用
                                 </label>
                             </div>
                         </div>
@@ -302,8 +272,8 @@
     </div>
 </div>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/mfrs/brand/add.js">
-</script>
+<script type="text/javascript" src="/js/appjs/optometryNew/brandmfrs.js"></script>
+<script type="text/javascript" src="/js/appjs/mfrs/brand/add.js"></script>
 <script>
 
     function caidan(value) {
@@ -453,21 +423,17 @@
         // alert(value+"光度分类的值")
         if (value == '1') {
             tab6.style = "display: none";
-        }else if(value=='2'){
+        } else if (value == '2') {
             tab6.style = "display: none";
-        }else if(value=='3'){
+        } else if (value == '3') {
             tab6.style = "display: none";
-        }else if(value=='4'){
+        } else if (value == '4') {
             tab6.style = "display: none";
-        }else if(value=='5'){
+        } else if (value == '5') {
             tab6.style = "display: block";
         }
 
     }
-
-    // function AppendNode(value, text) {
-    //     $("#goodsid").append("<option value='" + value + "'>" + text + "</option>");
-    // }
 </script>
 
 

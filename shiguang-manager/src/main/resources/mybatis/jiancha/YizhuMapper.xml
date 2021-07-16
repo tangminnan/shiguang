@@ -19,7 +19,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by yizhu_id desc
+                order by yizhu_id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

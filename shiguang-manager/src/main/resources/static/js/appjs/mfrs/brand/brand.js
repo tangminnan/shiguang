@@ -37,7 +37,7 @@ function load() {
                         brandnum: $('#brandnum').val(),
                         stateId: $('#stateId').val(),
                         payid: $('#payid').val(),
-                        brandname :$('#brandname').val()
+                        brandname: $('#brandname').val()
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };
@@ -295,3 +295,9 @@ function batchRemove() {
 
     });
 }
+
+//选择制造商
+function batchSelect() {
+    var rows = $("#exampleTable").bootstrapTable("getSelections");
+    return rows;
+};

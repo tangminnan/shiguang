@@ -1,4 +1,4 @@
-var prefix = "/jiancha/yizhu"
+var prefix = "/information/optometryNew"
 $(function () {
     load();
 });
@@ -8,7 +8,7 @@ function load() {
         .bootstrapTable(
             {
                 method: 'get', // 服务器数据的请求方式 get or post
-                url: prefix + "/list", // 服务器数据的加载地址
+                url: prefix + "/yizhulist", // 服务器数据的加载地址
                 //	showRefresh : true,
                 //	showToggle : true,
                 //	showColumns : true,
@@ -46,10 +46,10 @@ function load() {
                     {
                         checkbox: true
                     },
-                    {
-                        field: 'yizhuId',
-                        title: '医嘱id'
-                    },
+                    // {
+                    //     field: 'yizhuId',
+                    //     title: '医嘱id'
+                    // },
                     {
                         field: 'yizhuType',
                         title: '类型'
@@ -160,6 +160,11 @@ function batchRemove() {
             }
         });
     }, function () {
-
     });
 }
+
+//医嘱
+function batchSelect() {
+    var rows = $("#exampleTable").bootstrapTable("getSelections");
+    return rows;
+};
