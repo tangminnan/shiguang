@@ -407,13 +407,21 @@ function getPeijian(){
 }
 
 function getYinxing(){
+    var rightYuanYongQJ = $('input[name=rightQJ]').val();
+    var rightYuanYongZJ = $('input[name=rightZJ]').val();
+    var leftYuanYongQJ = $('input[name=leftQJ]').val();
+    var leftYuanYongZJ = $('input[name=leftZJ]').val();
+    if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
+        return alert("请选择球镜度数");
+    }
+    var str = 0;
     var toIndex = layer.open({
         type : 2,
         title : '隐形',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '520px' ],
-        content : "/information/store/yinxing/",// iframe的url
+        content : "/information/store/yinxing/"+rightYuanYongZJ+"/"+rightYuanYongQJ+"/"+leftYuanYongQJ+"/"+leftYuanYongZJ+"/"+str,// iframe的url
         cancel: function(index, layero){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             // var rows = sessionStorage.getItem("row");
@@ -661,6 +669,20 @@ function getZipian(){
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
+    });
+    layer.full(toIndex)
+}
+function getTaocanDetail(){
+    var toIndex = layer.open({
+        type : 2,
+        title : '套餐查看',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : "/information/store/taocan/"// iframe的url
+        // cancel: function(index, layero){
+        //     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+        // }
     });
     layer.full(toIndex)
 }

@@ -43,9 +43,6 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-                            {
-                                checkbox : true
-                            },
 								{
 									field : 'packageName',
 									title : '套餐标题',

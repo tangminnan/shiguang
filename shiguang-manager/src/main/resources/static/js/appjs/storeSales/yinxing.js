@@ -47,8 +47,13 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
                                 yxType:$("#yxType").val(),
-                                producNum:$('#producNum').val(),
-                                producName:$('#producName').val()
+                                goodsNum:$('#goodsNum').val(),
+                                goodsName:$('#goodsName').val(),
+                                jingpianType:$("#jingpianType").val(),
+                                rightYuanYongQJ:$("#rightYuanYongQJ").val(),
+                                rightYuanYongZJ:$("#rightYuanYongZJ").val(),
+                                leftYuanYongQJ:$("#leftYuanYongQJ").val(),
+                                leftYuanYongZJ:$("#leftYuanYongZJ").val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -191,6 +196,8 @@ function reLoad() {
         $('#exampleTable').bootstrapTable('showColumn', 'usageName');
         $('#exampleTable').bootstrapTable('showColumn', 'typeName');
         $('#exampleTable').bootstrapTable('showColumn', 'cycle');
+        $('#exampleTable').bootstrapTable('showColumn', 'positionName');
+        $('#exampleTable').bootstrapTable('showColumn', 'goodsCount');
     } else {
         $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
         $('#exampleTable').bootstrapTable('hideColumn', 'producNum');
@@ -204,6 +211,8 @@ function reLoad() {
         $('#exampleTable').bootstrapTable('hideColumn', 'usageName');
         $('#exampleTable').bootstrapTable('hideColumn', 'typeName');
         $('#exampleTable').bootstrapTable('hideColumn', 'cycle');
+        $('#exampleTable').bootstrapTable('hideColumn', 'positionName');
+        $('#exampleTable').bootstrapTable('hideColumn', 'goodsCount');
 	}
 }
 

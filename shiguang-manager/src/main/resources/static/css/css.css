@@ -272,6 +272,27 @@ h1, h2, h3, h4, h5, h6{ font-size:100%;font-weight: normal;}
 .taoCanbox .box333 .ulFu li:nth-child(1) span{background-image:url(../img/icon20.png);}
 .taoCanbox .box333 .ulFu li:nth-child(1) span:hover{background-image:url(../img/icon20_0.png);}
 
+.taoCanbox .box3333 ul{margin-bottom: 2px;background: #f0f0f0;overflow: hidden;}
+.taoCanbox .box3333 ul li{float: left;width: 33.33%;margin:5px 0;text-align: center;}
+.taoCanbox .box3333 ul li span{width: 100px;height: 24px;line-height: 24px;border-radius:3px;display: inline-block;text-align: left;padding-left: 34px;background:#fff url(../img/icon12.png) no-repeat 5px center;cursor: pointer;}
+.taoCanbox .box3333 ul li span:hover{background-color:#499dfc;background-image:url(../img/icon12_0.png);color:#fff;}
+.taoCanbox .box3333 .ulUy li:nth-child(2) span{background-image:url(../img/icon13.png);}
+.taoCanbox .box3333 .ulUy li:nth-child(2) span:hover{background-image:url(../img/icon13_0.png);}
+.taoCanbox .box3333 .ulUy li:nth-child(3) span{background-image:url(../img/icon14.png);}
+.taoCanbox .box3333 .ulUy li:nth-child(3) span:hover{background-image:url(../img/icon14_0.png);}
+.taoCanbox .box3333 .ulUy li:nth-child(4) span{background-image:url(../img/icon15.png);}
+.taoCanbox .box3333 .ulUy li:nth-child(4) span:hover{background-image:url(../img/icon15_0.png);}
+.taoCanbox .box3333 .ulUy li:nth-child(5) span{background-image:url(../img/icon16.png);}
+.taoCanbox .box3333 .ulUy li:nth-child(5) span:hover{background-image:url(../img/icon16_0.png);}
+.taoCanbox .box3333 .ulUy li:nth-child(6) span{background-image:url(../img/icon17.png);}
+.taoCanbox .box3333 .ulUy li:nth-child(6) span:hover{background-image:url(../img/icon17_0.png);}
+.taoCanbox .box3333 .ulDown li:nth-child(1) span{background-image:url(../img/icon18.png);}
+.taoCanbox .box3333 .ulDown li:nth-child(1) span:hover{background-image:url(../img/icon18_0.png);}
+.taoCanbox .box3333 .ulDown li:nth-child(2) span{background-image:url(../img/icon19.png);}
+.taoCanbox .box3333 .ulDown li:nth-child(2) span:hover{background-image:url(../img/icon19_0.png);}
+.taoCanbox .box3333 .ulDown li:nth-child(3) span{background-image:url(../img/icon20.png);}
+.taoCanbox .box3333 .ulDown li:nth-child(3) span:hover{background-image:url(../img/icon20_0.png);}
+
 .taoCanbox .box4 li{float: left;width: 50%;text-align: center;margin-bottom:8px;}
 .taoCanbox .box4 ul li span{width: 100px;height: 24px;line-height: 24px;border-radius:3px;display: inline-block;background:#fff;cursor: pointer;}
 .taoCanbox .box4 ul li span:hover{background-color:#499dfc;color:#fff;}
