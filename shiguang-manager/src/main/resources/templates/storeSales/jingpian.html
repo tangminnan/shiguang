@@ -23,31 +23,45 @@
 					<div class="columns pull-right col-md-2 nopadding">
 						<input id="goodsNum" type="text" class="form-control"
 							   placeholder="商品代码">
+						<input id="rightYuanYongQJ" th:value="${rightYuanYongQJ}" type="hidden" class="form-control"
+							   placeholder="右眼球镜">
+						<input id="rightYuanYongZJ" th:value="${rightYuanYongZJ}" type="hidden" class="form-control"
+							   placeholder="右眼柱镜">
+						<input id="leftYuanYongQJ" th:value="${leftYuanYongQJ}" type="hidden" class="form-control"
+							   placeholder="左眼球镜">
+						<input id="leftYuanYongZJ" th:value="${leftYuanYongZJ}" type="hidden" class="form-control"
+							   placeholder="左眼柱镜">
 					</div>
 					<div class="columns pull-right col-md-2 nopadding">
 						<input id="goodsName" type="text" class="form-control"
 							   placeholder="商品名称">
 					</div>
 					<div class="columns pull-right col-md-2 nopadding">
-						<select class="form-control" name="sex" id="dzType" >
+						<select class="form-control" id="dzType" >
 							<option value="0">成品片</option>
 							<option value="1">订做片</option>
 						</select>
 					</div>
 					<div class="columns pull-right col-md-2 nopadding">
-						<select class="form-control" name="sex" id="jpCaizhi" >
+						<select class="form-control" id="jpCaizhi" >
 							<option value="0">树脂</option>
 							<option value="1">玻璃</option>
 							<option value="2">PC</option>
 						</select>
 					</div>
 					<div class="columns pull-right col-md-2 nopadding">
-						<select class="form-control" name="sex" id="jpType" >
+						<select class="form-control" id="jpType" >
 							<option value="0">单光</option>
 							<option value="1">抗疲劳</option>
 							<option value="2">多光</option>
 							<option value="3">其他</option>
 							<option value="4">渐近</option>
+						</select>
+					</div>
+					<div class="columns pull-right col-md-2 nopadding">
+						<select class="form-control" id="jingpianType" >
+							<option value="0">右眼镜片</option>
+							<option value="1">左眼镜片</option>
 						</select>
 					</div>
 				</div>

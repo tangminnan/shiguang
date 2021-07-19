@@ -23,6 +23,14 @@
 					<div class="columns pull-right col-md-2 nopadding">
 						<input id="goodsNum" type="text" class="form-control"
 							   placeholder="商品代码">
+						<input id="rightYuanYongQJ" th:value="${rightYuanYongQJ}" type="hidden" class="form-control"
+							   placeholder="右眼球镜">
+						<input id="rightYuanYongZJ" th:value="${rightYuanYongZJ}" type="hidden" class="form-control"
+							   placeholder="右眼柱镜">
+						<input id="leftYuanYongQJ" th:value="${leftYuanYongQJ}" type="hidden" class="form-control"
+							   placeholder="左眼球镜">
+						<input id="leftYuanYongZJ" th:value="${leftYuanYongZJ}" type="hidden" class="form-control"
+							   placeholder="左眼柱镜">
 					</div>
 					<div class="columns pull-right col-md-2 nopadding">
 						<input id="goodsName" type="text" class="form-control"
@@ -32,6 +40,12 @@
 						<select class="form-control" name="sex" id="yxType" >
 							<option value="0">成品片</option>
 							<option value="1">订做片</option>
+						</select>
+					</div>
+					<div class="columns pull-right col-md-2 nopadding">
+						<select class="form-control" id="jingpianType" >
+							<option value="0">右眼镜片</option>
+							<option value="1">左眼镜片</option>
 						</select>
 					</div>
 				</div>

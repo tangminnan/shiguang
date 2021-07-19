@@ -302,11 +302,15 @@ public class StoreSalesController {
     /**
      * 镜片
      */
-    @GetMapping("/jingpian")
+    @GetMapping("/jingpian/{rightYuanYongZJ}/{rightYuanYongQJ}/{leftYuanYongQJ}/{leftYuanYongZJ}/{str}")
     @RequiresPermissions("information:store:jingpian")
-    String jingpian(Model model) {
+    String jingpian(@PathVariable("rightYuanYongZJ") Double rightYuanYongZJ,@PathVariable("rightYuanYongQJ") Double rightYuanYongQJ,@PathVariable("leftYuanYongQJ") Double leftYuanYongQJ,@PathVariable("leftYuanYongZJ") Double leftYuanYongZJ,@PathVariable("str") String str, Model model) {
+        model.addAttribute("rightYuanYongQJ",rightYuanYongQJ);
+        model.addAttribute("rightYuanYongZJ",rightYuanYongZJ);
+        model.addAttribute("leftYuanYongQJ",leftYuanYongQJ);
+        model.addAttribute("leftYuanYongZJ",leftYuanYongZJ);
         return "storeSales/jingpian";
-    }
+}
 
     /**
      * 查询镜片
@@ -323,15 +327,24 @@ public class StoreSalesController {
         PageUtils pageUtils = null;
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
-        PositionDO positionDO = stockService.findPosition(map);
-        String positionName = "";
-        if (null != positionDO){
-            positionName = positionDO.getPositionName();
+        if (null != departNumber){
+            map.put("departNumber",departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            String positionName = "";
+            if (null != positionDO){
+                positionName = positionDO.getPositionName();
+            }
+            query.put("positionName",positionName);
         }
-        query.put("positionName",positionName);
         if (null != params.get("dzType")) {
             String dzType = params.get("dzType").toString();
+            if ("0".equals(params.get("jingpianType").toString())){
+                query.put("rightYuanYongQJ",params.get("rightYuanYongQJ"));
+                query.put("rightYuanYongZJ",params.get("rightYuanYongZJ"));
+            } else if ("1".equals(params.get("jingpianType").toString())){
+                query.put("leftYuanYongQJ",params.get("leftYuanYongQJ"));
+                query.put("leftYuanYongZJ",params.get("leftYuanYongZJ"));
+            }
             if ("0".equals(dzType)) {
                 List<StockDO> jpcpDOList = stockService.listJpcp(query);
                 int total = stockService.countJpcp(query);
@@ -599,9 +612,13 @@ public class StoreSalesController {
     /**
      * 隐形
      */
-    @GetMapping("/yinxing")
+    @GetMapping("/yinxing/{rightYuanYongZJ}/{rightYuanYongQJ}/{leftYuanYongQJ}/{leftYuanYongZJ}/{str}")
     @RequiresPermissions("information:store:yinxing")
-    String yinxing(Model model){
+    String yinxing(@PathVariable("rightYuanYongZJ") Double rightYuanYongZJ,@PathVariable("rightYuanYongQJ") Double rightYuanYongQJ,@PathVariable("leftYuanYongQJ") Double leftYuanYongQJ,@PathVariable("leftYuanYongZJ") Double leftYuanYongZJ,@PathVariable("str") String str,Model model){
+        model.addAttribute("rightYuanYongQJ",rightYuanYongQJ);
+        model.addAttribute("rightYuanYongZJ",rightYuanYongZJ);
+        model.addAttribute("leftYuanYongQJ",leftYuanYongQJ);
+        model.addAttribute("leftYuanYongZJ",leftYuanYongZJ);
         return "storeSales/yinxing";
     }
 
@@ -618,6 +635,13 @@ public class StoreSalesController {
         Query query = new Query(params);
         PageUtils pageUtils = null;
         if (null != params.get("yxType")){
+            if ("0".equals(params.get("jingpianType").toString())){
+                query.put("rightYuanYongQJ",params.get("rightYuanYongQJ"));
+                query.put("rightYuanYongZJ",params.get("rightYuanYongZJ"));
+            } else if ("1".equals(params.get("jingpianType").toString())){
+                query.put("leftYuanYongQJ",params.get("leftYuanYongQJ"));
+                query.put("leftYuanYongZJ",params.get("leftYuanYongZJ"));
+            }
             if ("0".equals(params.get("yxType"))){
                 List<YxcpDO> yxcpDOList = yxcpService.list(query);
                 int total = yxcpService.count(query);

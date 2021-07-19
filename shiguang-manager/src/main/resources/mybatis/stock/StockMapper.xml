@@ -202,6 +202,10 @@
 			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
 			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
 			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
+			<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
+			<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
+			<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
+			<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -237,6 +241,10 @@
 			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
 			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
 			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
+			<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
+			<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
+			<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
+			<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
 		</where>
 	</select>
 
@@ -246,6 +254,7 @@
 		st.`whole_sum`,st.`position_name`,s.`sph`,c.`cyl`,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`,f.`function_name`,g.`gradual_name`,
 		j.`sph_up`,j.`sph_down`,j.`cyl_up`,j.`cyl_down`,j.`lightbelow_right`,j.`lightbelow_left`
 		from stock st left join aa_jpdz j on j.produc_num = st.goods_num
+		left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
 		left join c_refractivity r on r.refractivityid = j.refractivityid
 		left join p_light pl on pl.light_id = j.light_id
 		left join p_lens l on l.lens_id = j.lens_id
@@ -266,6 +275,11 @@
 			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
 			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
 			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
+			<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
+			<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
+			<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
+			<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
+
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -283,6 +297,7 @@
 	<select id="countJpdz" resultType="int">
 		select count(*)
 		from stock st left join aa_jpdz j on j.produc_num = st.goods_num
+		left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
 		left join c_refractivity r on r.refractivityid = j.refractivityid
 		left join p_light pl on pl.light_id = j.light_id
 		left join p_lens l on l.lens_id = j.lens_id
@@ -303,6 +318,10 @@
 			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
 			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
 			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
 		</where>
 	</select>
 
@@ -694,6 +713,7 @@
 		st.`whole_sum`,st.`position_name`,t.`type_name`,u.`usage_name`,y.`sph_up`,y.`sph_down`,y.`cyl_up`,y.`cyl_down`,
 		y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,y.`curvature_er`,s.`sph`,c.`cyl`
 		from stock st left join aa_yxdz y left join p_type t on t.type_id = y.type_id
+        left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
 		left join p_usage u on u.usage_id = y.usage_id
 		left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
 		<where>
@@ -711,6 +731,10 @@
 			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
 			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
 			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -745,6 +769,10 @@
 			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
 			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
 			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
 		</where>
 	</select>
 

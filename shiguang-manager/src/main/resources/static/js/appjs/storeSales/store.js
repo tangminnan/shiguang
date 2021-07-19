@@ -12,7 +12,7 @@ function getKjpeijian() {
             // alert(rows.length)
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>3</td>";
                 html += "<td>1</td>";
@@ -24,7 +24,7 @@ function getKjpeijian() {
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>框镜</td>";
-                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -32,7 +32,7 @@ function getKjpeijian() {
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].producName);
+                arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
                 arraycount.push(1)
             }
@@ -70,7 +70,7 @@ function getTaiyangjing(){
             // alert(rows.length)
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>3</td>";
                 html += "<td>1</td>";
@@ -82,7 +82,7 @@ function getTaiyangjing(){
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>太阳镜</td>";
-                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\",)'></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+ rows[i].goodsName +"\",)'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -90,7 +90,7 @@ function getTaiyangjing(){
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].producName);
+                arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
                 arraycount.push(1)
             }
@@ -127,7 +127,7 @@ function getHaocai() {
             // alert(rows.length)
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>3</td>";
                 html += "<td>1</td>";
@@ -139,7 +139,7 @@ function getHaocai() {
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>耗材</td>";
-                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -147,7 +147,7 @@ function getHaocai() {
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].producName);
+                arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
                 arraycount.push(1)
             }
@@ -185,7 +185,7 @@ function getLaohuajing() {
             // alert(rows.length)
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>3</td>";
                 html += "<td>1</td>";
@@ -197,7 +197,7 @@ function getLaohuajing() {
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>老花镜</td>";
-                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -205,7 +205,7 @@ function getLaohuajing() {
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].producName);
+                arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
                 arraycount.push(1)
             }
@@ -243,7 +243,7 @@ function getShiguang(){
             // alert(rows.length)
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>3</td>";
                 html += "<td>1</td>";
@@ -255,7 +255,7 @@ function getShiguang(){
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>视光</td>";
-                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -263,7 +263,7 @@ function getShiguang(){
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].producName);
+                arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
                 arraycount.push(1)
             }
@@ -302,7 +302,7 @@ function getHuliye(){
             // alert(rows.length)
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>3</td>";
                 html += "<td>1</td>";
@@ -314,7 +314,7 @@ function getHuliye(){
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>护理液</td>";
-                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -322,7 +322,7 @@ function getHuliye(){
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].producName);
+                arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
                 arraycount.push(1)
             }
@@ -361,7 +361,7 @@ function getPeijian(){
             // alert(rows.length)
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>3</td>";
                 html += "<td>1</td>";
@@ -373,7 +373,7 @@ function getPeijian(){
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>配件</td>";
-                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -381,7 +381,7 @@ function getPeijian(){
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].producName);
+                arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
                 arraycount.push(1)
             }
@@ -420,7 +420,7 @@ function getYinxing(){
             // alert(rows.length)
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>3</td>";
                 html += "<td>1</td>";
@@ -432,7 +432,7 @@ function getYinxing(){
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>隐形</td>";
-                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -440,7 +440,7 @@ function getYinxing(){
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].producName);
+                arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
                 arraycount.push(1)
             }
@@ -478,7 +478,7 @@ function getYinxingpj(){
             // alert(rows.length)
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                html += "<td>"+rows[i].producName+"</td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>3</td>";
                 html += "<td>1</td>";
@@ -490,7 +490,7 @@ function getYinxingpj(){
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>隐形配件</td>";
-                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -498,7 +498,7 @@ function getYinxingpj(){
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].producName);
+                arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
                 arraycount.push(1)
             }
@@ -537,7 +537,7 @@ function getZengpin(){
             // alert(rows.length)
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-                html += "<td>"+rows[i].giveJc+"</td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>0.00</td>";
                 html += "<td>3</td>";
                 html += "<td>1</td>";
@@ -549,7 +549,7 @@ function getZengpin(){
                 html += "<td>0.00</td>";
                 html += "<td>0.00</td>";
                 html += "<td>赠品</td>";
-                html += "<td><em onclick='del(this,0.00,\""+rows[i].giveJc+"\")'></em></td>";
+                html += "<td><em onclick='del(this,0.00,\""+rows[i].goodsName+"\")'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -557,7 +557,7 @@ function getZengpin(){
                 $("#goods").append(html);
                 //price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].giveJc);
+                arraystore.push(rows[i].goodsName);
                 arrayunit.push(0.00);
                 arraycount.push(1)
             }
