@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.YaopinDao">
+
+    <select id="get" resultType="com.shiguang.jiancha.domain.YaopinDO">
+		select `yp_id`,`card_number`,`yp_prescription_type`,`yp_doctor`,`yp_optometry_name`,`yp_nr`,`yp_ym` from jc_yaopin where yp_id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.jiancha.domain.YaopinDO">
+        select `yp_id`,`card_number`,`yp_prescription_type`,`yp_doctor`,`yp_optometry_name`,`yp_nr`,`yp_ym` from
+        jc_yaopin
+        <where>
+            <if test="ypId != null and ypId != ''">and yp_id = #{ypId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="ypPrescriptionType != null and ypPrescriptionType != ''">and yp_prescription_type =
+                #{ypPrescriptionType}
+            </if>
+            <if test="ypDoctor != null and ypDoctor != ''">and yp_doctor = #{ypDoctor}</if>
+            <if test="ypOptometryName != null and ypOptometryName != ''">and yp_optometry_name = #{ypOptometryName}</if>
+            <if test="ypNr != null and ypNr != ''">and yp_nr = #{ypNr}</if>
+            <if test="ypYm != null and ypYm != ''">and yp_ym = #{ypYm}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by yp_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from jc_yaopin
+        <where>
+            <if test="ypId != null and ypId != ''">and yp_id = #{ypId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="ypPrescriptionType != null and ypPrescriptionType != ''">and yp_prescription_type =
+                #{ypPrescriptionType}
+            </if>
+            <if test="ypDoctor != null and ypDoctor != ''">and yp_doctor = #{ypDoctor}</if>
+            <if test="ypOptometryName != null and ypOptometryName != ''">and yp_optometry_name = #{ypOptometryName}</if>
+            <if test="ypNr != null and ypNr != ''">and yp_nr = #{ypNr}</if>
+            <if test="ypYm != null and ypYm != ''">and yp_ym = #{ypYm}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.jiancha.domain.YaopinDO" useGeneratedKeys="true" keyProperty="ypId">
+		insert into jc_yaopin
+		(
+			`card_number`, 
+			`yp_prescription_type`, 
+			`yp_doctor`, 
+			`yp_optometry_name`, 
+			`yp_nr`, 
+			`yp_ym`
+		)
+		values
+		(
+			#{cardNumber}, 
+			#{ypPrescriptionType}, 
+			#{ypDoctor}, 
+			#{ypOptometryName}, 
+			#{ypNr}, 
+			#{ypYm}
+		)
+	</insert>
+    <insert id="saveYaopin" parameterType="com.shiguang.jiancha.dao.ResultDao" useGeneratedKeys="true"
+            keyProperty="ypId">
+		insert into jc_yaopin
+		(
+			`card_number`,
+			`yp_prescription_type`,
+			`yp_doctor`,
+			`yp_optometry_name`,
+			`yp_nr`,
+			`yp_ym`
+		)
+		values
+		(
+			#{cardNumber},
+			#{ypPrescriptionType},
+			#{ypDoctor},
+			#{ypOptometryName},
+			#{ypNr},
+			#{ypYm}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.jiancha.domain.YaopinDO">
+        update jc_yaopin
+        <set>
+            <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+            <if test="ypPrescriptionType != null">`yp_prescription_type` = #{ypPrescriptionType},</if>
+            <if test="ypDoctor != null">`yp_doctor` = #{ypDoctor},</if>
+            <if test="ypOptometryName != null">`yp_optometry_name` = #{ypOptometryName},</if>
+            <if test="ypNr != null">`yp_nr` = #{ypNr},</if>
+            <if test="ypYm != null">`yp_ym` = #{ypYm}</if>
+        </set>
+        where yp_id = #{ypId}
+    </update>
+
+    <delete id="remove">
+		delete from jc_yaopin where yp_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from jc_yaopin where yp_id in
+        <foreach item="ypId" collection="array" open="(" separator="," close=")">
+            #{ypId}
+        </foreach>
+    </delete>
+
+</mapper>

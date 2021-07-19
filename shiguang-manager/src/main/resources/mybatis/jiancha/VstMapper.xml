@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.VstDao">
+
+    <select id="get" resultType="com.shiguang.jiancha.domain.VstDO">
+		select `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu` from jc_vst where vst_id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.jiancha.domain.VstDO">
+        select
+        `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu`
+        from jc_vst
+        <where>
+            <if test="vstId != null and vstId != ''">and vst_id = #{vstId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="vstPrescriptionType != null and vstPrescriptionType != ''">and vst_prescription_type =
+                #{vstPrescriptionType}
+            </if>
+            <if test="vstDoctor != null and vstDoctor != ''">and vst_doctor = #{vstDoctor}</if>
+            <if test="vstSdbhod != null and vstSdbhod != ''">and vst_sdbhod = #{vstSdbhod}</if>
+            <if test="vstSdbhos != null and vstSdbhos != ''">and vst_sdbhos = #{vstSdbhos}</if>
+            <if test="vstFkod != null and vstFkod != ''">and vst_fkod = #{vstFkod}</if>
+            <if test="vstFkos != null and vstFkos != ''">and vst_fkos = #{vstFkos}</if>
+            <if test="vstQlbjod != null and vstQlbjod != ''">and vst_qlbjod = #{vstQlbjod}</if>
+            <if test="vstQlbjos != null and vstQlbjos != ''">and vst_qlbjos = #{vstQlbjos}</if>
+            <if test="vstAcod != null and vstAcod != ''">and vst_acod = #{vstAcod}</if>
+            <if test="vstAcos != null and vstAcos != ''">and vst_acos = #{vstAcos}</if>
+            <if test="vstJfod != null and vstJfod != ''">and vst_jfod = #{vstJfod}</if>
+            <if test="vstJfos != null and vstJfos != ''">and vst_jfos = #{vstJfos}</if>
+            <if test="vstDiaod != null and vstDiaod != ''">and vst_diaod = #{vstDiaod}</if>
+            <if test="vstDiaos != null and vstDiaos != ''">and vst_diaos = #{vstDiaos}</if>
+            <if test="vstBcod != null and vstBcod != ''">and vst_bcod = #{vstBcod}</if>
+            <if test="vstBcos != null and vstBcos != ''">and vst_bcos = #{vstBcos}</if>
+            <if test="vstCpclyod != null and vstCpclyod != ''">and vst_cpclyod = #{vstCpclyod}</if>
+            <if test="vstCpclyos != null and vstCpclyos != ''">and vst_cpclyos = #{vstCpclyos}</if>
+            <if test="vstEod != null and vstEod != ''">and vst_eod = #{vstEod}</if>
+            <if test="vstEos != null and vstEos != ''">and vst_eos = #{vstEos}</if>
+            <if test="vstVaod != null and vstVaod != ''">and vst_vaod = #{vstVaod}</if>
+            <if test="vstVaos != null and vstVaos != ''">and vst_vaos = #{vstVaos}</if>
+            <if test="vstJpysod != null and vstJpysod != ''">and vst_jpysod = #{vstJpysod}</if>
+            <if test="vstJpysos != null and vstJpysos != ''">and vst_jpysos = #{vstJpysos}</if>
+            <if test="vstSyjpod != null and vstSyjpod != ''">and vst_syjpod = #{vstSyjpod}</if>
+            <if test="vstSyjpos != null and vstSyjpos != ''">and vst_syjpos = #{vstSyjpos}</if>
+            <if test="vstBeizhu != null and vstBeizhu != ''">and vst_beizhu = #{vstBeizhu}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by vst_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from jc_vst
+        <where>
+            <if test="vstId != null and vstId != ''">and vst_id = #{vstId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="vstPrescriptionType != null and vstPrescriptionType != ''">and vst_prescription_type =
+                #{vstPrescriptionType}
+            </if>
+            <if test="vstDoctor != null and vstDoctor != ''">and vst_doctor = #{vstDoctor}</if>
+            <if test="vstSdbhod != null and vstSdbhod != ''">and vst_sdbhod = #{vstSdbhod}</if>
+            <if test="vstSdbhos != null and vstSdbhos != ''">and vst_sdbhos = #{vstSdbhos}</if>
+            <if test="vstFkod != null and vstFkod != ''">and vst_fkod = #{vstFkod}</if>
+            <if test="vstFkos != null and vstFkos != ''">and vst_fkos = #{vstFkos}</if>
+            <if test="vstQlbjod != null and vstQlbjod != ''">and vst_qlbjod = #{vstQlbjod}</if>
+            <if test="vstQlbjos != null and vstQlbjos != ''">and vst_qlbjos = #{vstQlbjos}</if>
+            <if test="vstAcod != null and vstAcod != ''">and vst_acod = #{vstAcod}</if>
+            <if test="vstAcos != null and vstAcos != ''">and vst_acos = #{vstAcos}</if>
+            <if test="vstJfod != null and vstJfod != ''">and vst_jfod = #{vstJfod}</if>
+            <if test="vstJfos != null and vstJfos != ''">and vst_jfos = #{vstJfos}</if>
+            <if test="vstDiaod != null and vstDiaod != ''">and vst_diaod = #{vstDiaod}</if>
+            <if test="vstDiaos != null and vstDiaos != ''">and vst_diaos = #{vstDiaos}</if>
+            <if test="vstBcod != null and vstBcod != ''">and vst_bcod = #{vstBcod}</if>
+            <if test="vstBcos != null and vstBcos != ''">and vst_bcos = #{vstBcos}</if>
+            <if test="vstCpclyod != null and vstCpclyod != ''">and vst_cpclyod = #{vstCpclyod}</if>
+            <if test="vstCpclyos != null and vstCpclyos != ''">and vst_cpclyos = #{vstCpclyos}</if>
+            <if test="vstEod != null and vstEod != ''">and vst_eod = #{vstEod}</if>
+            <if test="vstEos != null and vstEos != ''">and vst_eos = #{vstEos}</if>
+            <if test="vstVaod != null and vstVaod != ''">and vst_vaod = #{vstVaod}</if>
+            <if test="vstVaos != null and vstVaos != ''">and vst_vaos = #{vstVaos}</if>
+            <if test="vstJpysod != null and vstJpysod != ''">and vst_jpysod = #{vstJpysod}</if>
+            <if test="vstJpysos != null and vstJpysos != ''">and vst_jpysos = #{vstJpysos}</if>
+            <if test="vstSyjpod != null and vstSyjpod != ''">and vst_syjpod = #{vstSyjpod}</if>
+            <if test="vstSyjpos != null and vstSyjpos != ''">and vst_syjpos = #{vstSyjpos}</if>
+            <if test="vstBeizhu != null and vstBeizhu != ''">and vst_beizhu = #{vstBeizhu}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.jiancha.domain.VstDO" useGeneratedKeys="true" keyProperty="vstId">
+		insert into jc_vst
+		(
+			`card_number`, 
+			`vst_prescription_type`, 
+			`vst_doctor`, 
+			`vst_sdbhod`, 
+			`vst_sdbhos`, 
+			`vst_fkod`, 
+			`vst_fkos`, 
+			`vst_qlbjod`, 
+			`vst_qlbjos`, 
+			`vst_acod`, 
+			`vst_acos`, 
+			`vst_jfod`, 
+			`vst_jfos`, 
+			`vst_diaod`, 
+			`vst_diaos`, 
+			`vst_bcod`, 
+			`vst_bcos`, 
+			`vst_cpclyod`, 
+			`vst_cpclyos`, 
+			`vst_eod`, 
+			`vst_eos`, 
+			`vst_vaod`, 
+			`vst_vaos`, 
+			`vst_jpysod`, 
+			`vst_jpysos`, 
+			`vst_syjpod`, 
+			`vst_syjpos`, 
+			`vst_beizhu`
+		)
+		values
+		(
+			#{cardNumber}, 
+			#{vstPrescriptionType}, 
+			#{vstDoctor}, 
+			#{vstSdbhod}, 
+			#{vstSdbhos}, 
+			#{vstFkod}, 
+			#{vstFkos}, 
+			#{vstQlbjod}, 
+			#{vstQlbjos}, 
+			#{vstAcod}, 
+			#{vstAcos}, 
+			#{vstJfod}, 
+			#{vstJfos}, 
+			#{vstDiaod}, 
+			#{vstDiaos}, 
+			#{vstBcod}, 
+			#{vstBcos}, 
+			#{vstCpclyod}, 
+			#{vstCpclyos}, 
+			#{vstEod}, 
+			#{vstEos}, 
+			#{vstVaod}, 
+			#{vstVaos}, 
+			#{vstJpysod}, 
+			#{vstJpysos}, 
+			#{vstSyjpod}, 
+			#{vstSyjpos}, 
+			#{vstBeizhu}
+		)
+	</insert>
+    <insert id="saveVst" parameterType="com.shiguang.jiancha.dao.ResultDao" useGeneratedKeys="true" keyProperty="vstId">
+		insert into jc_vst
+		(
+			`card_number`,
+			`vst_prescription_type`,
+			`vst_doctor`,
+			`vst_sdbhod`,
+			`vst_sdbhos`,
+			`vst_fkod`,
+			`vst_fkos`,
+			`vst_qlbjod`,
+			`vst_qlbjos`,
+			`vst_acod`,
+			`vst_acos`,
+			`vst_jfod`,
+			`vst_jfos`,
+			`vst_diaod`,
+			`vst_diaos`,
+			`vst_bcod`,
+			`vst_bcos`,
+			`vst_cpclyod`,
+			`vst_cpclyos`,
+			`vst_eod`,
+			`vst_eos`,
+			`vst_vaod`,
+			`vst_vaos`,
+			`vst_jpysod`,
+			`vst_jpysos`,
+			`vst_syjpod`,
+			`vst_syjpos`,
+			`vst_beizhu`
+		)
+		values
+		(
+			#{cardNumber},
+			#{vstPrescriptionType},
+			#{vstDoctor},
+			#{vstSdbhod},
+			#{vstSdbhos},
+			#{vstFkod},
+			#{vstFkos},
+			#{vstQlbjod},
+			#{vstQlbjos},
+			#{vstAcod},
+			#{vstAcos},
+			#{vstJfod},
+			#{vstJfos},
+			#{vstDiaod},
+			#{vstDiaos},
+			#{vstBcod},
+			#{vstBcos},
+			#{vstCpclyod},
+			#{vstCpclyos},
+			#{vstEod},
+			#{vstEos},
+			#{vstVaod},
+			#{vstVaos},
+			#{vstJpysod},
+			#{vstJpysos},
+			#{vstSyjpod},
+			#{vstSyjpos},
+			#{vstBeizhu}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.jiancha.domain.VstDO">
+        update jc_vst
+        <set>
+            <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+            <if test="vstPrescriptionType != null">`vst_prescription_type` = #{vstPrescriptionType},</if>
+            <if test="vstDoctor != null">`vst_doctor` = #{vstDoctor},</if>
+            <if test="vstSdbhod != null">`vst_sdbhod` = #{vstSdbhod},</if>
+            <if test="vstSdbhos != null">`vst_sdbhos` = #{vstSdbhos},</if>
+            <if test="vstFkod != null">`vst_fkod` = #{vstFkod},</if>
+            <if test="vstFkos != null">`vst_fkos` = #{vstFkos},</if>
+            <if test="vstQlbjod != null">`vst_qlbjod` = #{vstQlbjod},</if>
+            <if test="vstQlbjos != null">`vst_qlbjos` = #{vstQlbjos},</if>
+            <if test="vstAcod != null">`vst_acod` = #{vstAcod},</if>
+            <if test="vstAcos != null">`vst_acos` = #{vstAcos},</if>
+            <if test="vstJfod != null">`vst_jfod` = #{vstJfod},</if>
+            <if test="vstJfos != null">`vst_jfos` = #{vstJfos},</if>
+            <if test="vstDiaod != null">`vst_diaod` = #{vstDiaod},</if>
+            <if test="vstDiaos != null">`vst_diaos` = #{vstDiaos},</if>
+            <if test="vstBcod != null">`vst_bcod` = #{vstBcod},</if>
+            <if test="vstBcos != null">`vst_bcos` = #{vstBcos},</if>
+            <if test="vstCpclyod != null">`vst_cpclyod` = #{vstCpclyod},</if>
+            <if test="vstCpclyos != null">`vst_cpclyos` = #{vstCpclyos},</if>
+            <if test="vstEod != null">`vst_eod` = #{vstEod},</if>
+            <if test="vstEos != null">`vst_eos` = #{vstEos},</if>
+            <if test="vstVaod != null">`vst_vaod` = #{vstVaod},</if>
+            <if test="vstVaos != null">`vst_vaos` = #{vstVaos},</if>
+            <if test="vstJpysod != null">`vst_jpysod` = #{vstJpysod},</if>
+            <if test="vstJpysos != null">`vst_jpysos` = #{vstJpysos},</if>
+            <if test="vstSyjpod != null">`vst_syjpod` = #{vstSyjpod},</if>
+            <if test="vstSyjpos != null">`vst_syjpos` = #{vstSyjpos},</if>
+            <if test="vstBeizhu != null">`vst_beizhu` = #{vstBeizhu}</if>
+        </set>
+        where vst_id = #{vstId}
+    </update>
+
+    <delete id="remove">
+		delete from jc_vst where vst_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from jc_vst where vst_id in
+        <foreach item="vstId" collection="array" open="(" separator="," close=")">
+            #{vstId}
+        </foreach>
+    </delete>
+
+</mapper>

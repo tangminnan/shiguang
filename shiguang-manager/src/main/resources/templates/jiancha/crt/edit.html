@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="crt_id" name="crt_id" th:value="${crt.crt_id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">卡号：</label>
+								<div class="col-sm-8">
+									<input id="cardNumber" name="cardNumber" th:value="${crt.cardNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">处方类型：</label>
+								<div class="col-sm-8">
+									<input id="crtPrescriptionType" name="crtPrescriptionType" th:value="${crt.crtPrescriptionType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">医生：</label>
+								<div class="col-sm-8">
+									<input id="crtDoctor" name="crtDoctor" th:value="${crt.crtDoctor}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">验光师：</label>
+								<div class="col-sm-8">
+									<input id="crtOptometryName" name="crtOptometryName" th:value="${crt.crtOptometryName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">试戴片编号OD：</label>
+								<div class="col-sm-8">
+									<input id="crtSdbhod" name="crtSdbhod" th:value="${crt.crtSdbhod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">试戴片编号OS：</label>
+								<div class="col-sm-8">
+									<input id="crtSdbhos" name="crtSdbhos" th:value="${crt.crtSdbhos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">BC(OD)：</label>
+								<div class="col-sm-8">
+									<input id="ctrBcod" name="ctrBcod" th:value="${crt.ctrBcod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">BC(OS)：</label>
+								<div class="col-sm-8">
+									<input id="crtBcos" name="crtBcos" th:value="${crt.crtBcos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">RZD(OD)：</label>
+								<div class="col-sm-8">
+									<input id="crtRzdod" name="crtRzdod" th:value="${crt.crtRzdod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">RZD(OS)：</label>
+								<div class="col-sm-8">
+									<input id="crtRzdos" name="crtRzdos" th:value="${crt.crtRzdos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">LZA(OD)：</label>
+								<div class="col-sm-8">
+									<input id="crtLzaod" name="crtLzaod" th:value="${crt.crtLzaod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">LZA(OS)：</label>
+								<div class="col-sm-8">
+									<input id="crtLzaos" name="crtLzaos" th:value="${crt.crtLzaos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">RZD2OD：</label>
+								<div class="col-sm-8">
+									<input id="crtRzd2od" name="crtRzd2od" th:value="${crt.crtRzd2od}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">RZD2OS：</label>
+								<div class="col-sm-8">
+									<input id="crtRzd2os" name="crtRzd2os" th:value="${crt.crtRzd2os}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">LZA2(OD)：</label>
+								<div class="col-sm-8">
+									<input id="crtLza2od" name="crtLza2od" th:value="${crt.crtLza2od}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">LZA2(OS)：</label>
+								<div class="col-sm-8">
+									<input id="crtLza2os" name="crtLza2os" th:value="${crt.crtLza2os}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">降幅(OD)：</label>
+								<div class="col-sm-8">
+									<input id="crtJfod" name="crtJfod" th:value="${crt.crtJfod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">降幅(OS)：</label>
+								<div class="col-sm-8">
+									<input id="crtJfos" name="crtJfos" th:value="${crt.crtJfos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">DIA(OD)：</label>
+								<div class="col-sm-8">
+									<input id="crtDiaod" name="crtDiaod" th:value="${crt.crtDiaod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">DIA(OS)：</label>
+								<div class="col-sm-8">
+									<input id="crtDiaos" name="crtDiaos" th:value="${crt.crtDiaos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">VA(OD)：</label>
+								<div class="col-sm-8">
+									<input id="crtVaod" name="crtVaod" th:value="${crt.crtVaod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">VA(OS)：</label>
+								<div class="col-sm-8">
+									<input id="crtVaos" name="crtVaos" th:value="${crt.crtVaos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">镜片颜色OD：</label>
+								<div class="col-sm-8">
+									<input id="crtJpysod" name="crtJpysod" th:value="${crt.crtJpysod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">镜片颜色OS：</label>
+								<div class="col-sm-8">
+									<input id="crtJpysos" name="crtJpysos" th:value="${crt.crtJpysos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">适用镜片OD：</label>
+								<div class="col-sm-8">
+									<input id="crtSyjpod" name="crtSyjpod" th:value="${crt.crtSyjpod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">适用镜片OS：</label>
+								<div class="col-sm-8">
+									<input id="crtSyjpos" name="crtSyjpos" th:value="${crt.crtSyjpos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="crtBeizhu" name="crtBeizhu" th:value="${crt.crtBeizhu}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/jiancha/crt/edit.js">
+	</script>
+</body>
+</html>

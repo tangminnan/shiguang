@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.SgjjDao">
+
+    <select id="get" resultType="com.shiguang.jiancha.domain.SgjjDO">
+		select `sgjj_id`,`card_number`,`sgjj_prescription_type`,`sgjj_doctor`,`sgjj_optometry_name`,`sgjj_sphod`,`sgjj_sphos`,`sgjj_cylod`,`sgjj_cylos`,`sgjj_axialod`,`sgjj_axialos`,`sgjj_addod`,`sgjj_addos`,`sgjj_yytjod`,`sgjj_yytjos`,`sgjj_jytjod`,`sgjj_jytjos`,`sgjj_tgod`,`sgjj_tgos`,`sgjj_yyvaod`,`sgjj_yyvaos`,`sgjj_jyvaod`,`sgjj_jyvaos`,`sgjj_jpcz`,`sgjj_clfs`,`sgjj_jykj`,`sgjj_kjlx`,`sgjj_text`,`sgjj_beizhu` from jc_sgjj where sgjj_id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.jiancha.domain.SgjjDO">
+        select
+        `sgjj_id`,`card_number`,`sgjj_prescription_type`,`sgjj_doctor`,`sgjj_optometry_name`,`sgjj_sphod`,`sgjj_sphos`,`sgjj_cylod`,`sgjj_cylos`,`sgjj_axialod`,`sgjj_axialos`,`sgjj_addod`,`sgjj_addos`,`sgjj_yytjod`,`sgjj_yytjos`,`sgjj_jytjod`,`sgjj_jytjos`,`sgjj_tgod`,`sgjj_tgos`,`sgjj_yyvaod`,`sgjj_yyvaos`,`sgjj_jyvaod`,`sgjj_jyvaos`,`sgjj_jpcz`,`sgjj_clfs`,`sgjj_jykj`,`sgjj_kjlx`,`sgjj_text`,`sgjj_beizhu`
+        from jc_sgjj
+        <where>
+            <if test="sgjjId != null and sgjjId != ''">and sgjj_id = #{sgjjId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="sgjjPrescriptionType != null and sgjjPrescriptionType != ''">and sgjj_prescription_type =
+                #{sgjjPrescriptionType}
+            </if>
+            <if test="sgjjDoctor != null and sgjjDoctor != ''">and sgjj_doctor = #{sgjjDoctor}</if>
+            <if test="sgjjOptometryName != null and sgjjOptometryName != ''">and sgjj_optometry_name =
+                #{sgjjOptometryName}
+            </if>
+            <if test="sgjjSphod != null and sgjjSphod != ''">and sgjj_sphod = #{sgjjSphod}</if>
+            <if test="sgjjSphos != null and sgjjSphos != ''">and sgjj_sphos = #{sgjjSphos}</if>
+            <if test="sgjjCylod != null and sgjjCylod != ''">and sgjj_cylod = #{sgjjCylod}</if>
+            <if test="sgjjCylos != null and sgjjCylos != ''">and sgjj_cylos = #{sgjjCylos}</if>
+            <if test="sgjjAxialod != null and sgjjAxialod != ''">and sgjj_axialod = #{sgjjAxialod}</if>
+            <if test="sgjjAxialos != null and sgjjAxialos != ''">and sgjj_axialos = #{sgjjAxialos}</if>
+            <if test="sgjjAddod != null and sgjjAddod != ''">and sgjj_addod = #{sgjjAddod}</if>
+            <if test="sgjjAddos != null and sgjjAddos != ''">and sgjj_addos = #{sgjjAddos}</if>
+            <if test="sgjjYytjod != null and sgjjYytjod != ''">and sgjj_yytjod = #{sgjjYytjod}</if>
+            <if test="sgjjYytjos != null and sgjjYytjos != ''">and sgjj_yytjos = #{sgjjYytjos}</if>
+            <if test="sgjjJytjod != null and sgjjJytjod != ''">and sgjj_jytjod = #{sgjjJytjod}</if>
+            <if test="sgjjJytjos != null and sgjjJytjos != ''">and sgjj_jytjos = #{sgjjJytjos}</if>
+            <if test="sgjjTgod != null and sgjjTgod != ''">and sgjj_tgod = #{sgjjTgod}</if>
+            <if test="sgjjTgos != null and sgjjTgos != ''">and sgjj_tgos = #{sgjjTgos}</if>
+            <if test="sgjjYyvaod != null and sgjjYyvaod != ''">and sgjj_yyvaod = #{sgjjYyvaod}</if>
+            <if test="sgjjYyvaos != null and sgjjYyvaos != ''">and sgjj_yyvaos = #{sgjjYyvaos}</if>
+            <if test="sgjjJyvaod != null and sgjjJyvaod != ''">and sgjj_jyvaod = #{sgjjJyvaod}</if>
+            <if test="sgjjJyvaos != null and sgjjJyvaos != ''">and sgjj_jyvaos = #{sgjjJyvaos}</if>
+            <if test="sgjjJpcz != null and sgjjJpcz != ''">and sgjj_jpcz = #{sgjjJpcz}</if>
+            <if test="sgjjClfs != null and sgjjClfs != ''">and sgjj_clfs = #{sgjjClfs}</if>
+            <if test="sgjjJykj != null and sgjjJykj != ''">and sgjj_jykj = #{sgjjJykj}</if>
+            <if test="sgjjKjlx != null and sgjjKjlx != ''">and sgjj_kjlx = #{sgjjKjlx}</if>
+            <if test="sgjjText != null and sgjjText != ''">and sgjj_text = #{sgjjText}</if>
+            <if test="sgjjBeizhu != null and sgjjBeizhu != ''">and sgjj_beizhu = #{sgjjBeizhu}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by sgjj_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from jc_sgjj
+        <where>
+            <if test="sgjjId != null and sgjjId != ''">and sgjj_id = #{sgjjId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="sgjjPrescriptionType != null and sgjjPrescriptionType != ''">and sgjj_prescription_type =
+                #{sgjjPrescriptionType}
+            </if>
+            <if test="sgjjDoctor != null and sgjjDoctor != ''">and sgjj_doctor = #{sgjjDoctor}</if>
+            <if test="sgjjOptometryName != null and sgjjOptometryName != ''">and sgjj_optometry_name =
+                #{sgjjOptometryName}
+            </if>
+            <if test="sgjjSphod != null and sgjjSphod != ''">and sgjj_sphod = #{sgjjSphod}</if>
+            <if test="sgjjSphos != null and sgjjSphos != ''">and sgjj_sphos = #{sgjjSphos}</if>
+            <if test="sgjjCylod != null and sgjjCylod != ''">and sgjj_cylod = #{sgjjCylod}</if>
+            <if test="sgjjCylos != null and sgjjCylos != ''">and sgjj_cylos = #{sgjjCylos}</if>
+            <if test="sgjjAxialod != null and sgjjAxialod != ''">and sgjj_axialod = #{sgjjAxialod}</if>
+            <if test="sgjjAxialos != null and sgjjAxialos != ''">and sgjj_axialos = #{sgjjAxialos}</if>
+            <if test="sgjjAddod != null and sgjjAddod != ''">and sgjj_addod = #{sgjjAddod}</if>
+            <if test="sgjjAddos != null and sgjjAddos != ''">and sgjj_addos = #{sgjjAddos}</if>
+            <if test="sgjjYytjod != null and sgjjYytjod != ''">and sgjj_yytjod = #{sgjjYytjod}</if>
+            <if test="sgjjYytjos != null and sgjjYytjos != ''">and sgjj_yytjos = #{sgjjYytjos}</if>
+            <if test="sgjjJytjod != null and sgjjJytjod != ''">and sgjj_jytjod = #{sgjjJytjod}</if>
+            <if test="sgjjJytjos != null and sgjjJytjos != ''">and sgjj_jytjos = #{sgjjJytjos}</if>
+            <if test="sgjjTgod != null and sgjjTgod != ''">and sgjj_tgod = #{sgjjTgod}</if>
+            <if test="sgjjTgos != null and sgjjTgos != ''">and sgjj_tgos = #{sgjjTgos}</if>
+            <if test="sgjjYyvaod != null and sgjjYyvaod != ''">and sgjj_yyvaod = #{sgjjYyvaod}</if>
+            <if test="sgjjYyvaos != null and sgjjYyvaos != ''">and sgjj_yyvaos = #{sgjjYyvaos}</if>
+            <if test="sgjjJyvaod != null and sgjjJyvaod != ''">and sgjj_jyvaod = #{sgjjJyvaod}</if>
+            <if test="sgjjJyvaos != null and sgjjJyvaos != ''">and sgjj_jyvaos = #{sgjjJyvaos}</if>
+            <if test="sgjjJpcz != null and sgjjJpcz != ''">and sgjj_jpcz = #{sgjjJpcz}</if>
+            <if test="sgjjClfs != null and sgjjClfs != ''">and sgjj_clfs = #{sgjjClfs}</if>
+            <if test="sgjjJykj != null and sgjjJykj != ''">and sgjj_jykj = #{sgjjJykj}</if>
+            <if test="sgjjKjlx != null and sgjjKjlx != ''">and sgjj_kjlx = #{sgjjKjlx}</if>
+            <if test="sgjjText != null and sgjjText != ''">and sgjj_text = #{sgjjText}</if>
+            <if test="sgjjBeizhu != null and sgjjBeizhu != ''">and sgjj_beizhu = #{sgjjBeizhu}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.jiancha.domain.SgjjDO" useGeneratedKeys="true" keyProperty="sgjjId">
+		insert into jc_sgjj
+		(
+			`card_number`, 
+			`sgjj_prescription_type`, 
+			`sgjj_doctor`, 
+			`sgjj_optometry_name`, 
+			`sgjj_sphod`, 
+			`sgjj_sphos`, 
+			`sgjj_cylod`, 
+			`sgjj_cylos`, 
+			`sgjj_axialod`, 
+			`sgjj_axialos`, 
+			`sgjj_addod`, 
+			`sgjj_addos`, 
+			`sgjj_yytjod`, 
+			`sgjj_yytjos`, 
+			`sgjj_jytjod`, 
+			`sgjj_jytjos`, 
+			`sgjj_tgod`, 
+			`sgjj_tgos`, 
+			`sgjj_yyvaod`, 
+			`sgjj_yyvaos`, 
+			`sgjj_jyvaod`, 
+			`sgjj_jyvaos`, 
+			`sgjj_jpcz`, 
+			`sgjj_clfs`, 
+			`sgjj_jykj`, 
+			`sgjj_kjlx`, 
+			`sgjj_text`, 
+			`sgjj_beizhu`
+		)
+		values
+		(
+			#{cardNumber}, 
+			#{sgjjPrescriptionType}, 
+			#{sgjjDoctor}, 
+			#{sgjjOptometryName}, 
+			#{sgjjSphod}, 
+			#{sgjjSphos}, 
+			#{sgjjCylod}, 
+			#{sgjjCylos}, 
+			#{sgjjAxialod}, 
+			#{sgjjAxialos}, 
+			#{sgjjAddod}, 
+			#{sgjjAddos}, 
+			#{sgjjYytjod}, 
+			#{sgjjYytjos}, 
+			#{sgjjJytjod}, 
+			#{sgjjJytjos}, 
+			#{sgjjTgod}, 
+			#{sgjjTgos}, 
+			#{sgjjYyvaod}, 
+			#{sgjjYyvaos}, 
+			#{sgjjJyvaod}, 
+			#{sgjjJyvaos}, 
+			#{sgjjJpcz}, 
+			#{sgjjClfs}, 
+			#{sgjjJykj}, 
+			#{sgjjKjlx}, 
+			#{sgjjText}, 
+			#{sgjjBeizhu}
+		)
+	</insert>
+    <insert id="savesgjj" parameterType="com.shiguang.jiancha.dao.ResultDao" useGeneratedKeys="true"
+            keyProperty="sgjjId">
+		insert into jc_sgjj
+		(
+			`card_number`,
+			`sgjj_prescription_type`,
+			`sgjj_doctor`,
+			`sgjj_optometry_name`,
+			`sgjj_sphod`,
+			`sgjj_sphos`,
+			`sgjj_cylod`,
+			`sgjj_cylos`,
+			`sgjj_axialod`,
+			`sgjj_axialos`,
+			`sgjj_addod`,
+			`sgjj_addos`,
+			`sgjj_yytjod`,
+			`sgjj_yytjos`,
+			`sgjj_jytjod`,
+			`sgjj_jytjos`,
+			`sgjj_tgod`,
+			`sgjj_tgos`,
+			`sgjj_yyvaod`,
+			`sgjj_yyvaos`,
+			`sgjj_jyvaod`,
+			`sgjj_jyvaos`,
+			`sgjj_jpcz`,
+			`sgjj_clfs`,
+			`sgjj_jykj`,
+			`sgjj_kjlx`,
+			`sgjj_text`,
+			`sgjj_beizhu`
+		)
+		values
+		(
+			#{cardNumber},
+			#{sgjjPrescriptionType},
+			#{sgjjDoctor},
+			#{sgjjOptometryName},
+			#{sgjjSphod},
+			#{sgjjSphos},
+			#{sgjjCylod},
+			#{sgjjCylos},
+			#{sgjjAxialod},
+			#{sgjjAxialos},
+			#{sgjjAddod},
+			#{sgjjAddos},
+			#{sgjjYytjod},
+			#{sgjjYytjos},
+			#{sgjjJytjod},
+			#{sgjjJytjos},
+			#{sgjjTgod},
+			#{sgjjTgos},
+			#{sgjjYyvaod},
+			#{sgjjYyvaos},
+			#{sgjjJyvaod},
+			#{sgjjJyvaos},
+			#{sgjjJpcz},
+			#{sgjjClfs},
+			#{sgjjJykj},
+			#{sgjjKjlx},
+			#{sgjjText},
+			#{sgjjBeizhu}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.jiancha.domain.SgjjDO">
+        update jc_sgjj
+        <set>
+            <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+            <if test="sgjjPrescriptionType != null">`sgjj_prescription_type` = #{sgjjPrescriptionType},</if>
+            <if test="sgjjDoctor != null">`sgjj_doctor` = #{sgjjDoctor},</if>
+            <if test="sgjjOptometryName != null">`sgjj_optometry_name` = #{sgjjOptometryName},</if>
+            <if test="sgjjSphod != null">`sgjj_sphod` = #{sgjjSphod},</if>
+            <if test="sgjjSphos != null">`sgjj_sphos` = #{sgjjSphos},</if>
+            <if test="sgjjCylod != null">`sgjj_cylod` = #{sgjjCylod},</if>
+            <if test="sgjjCylos != null">`sgjj_cylos` = #{sgjjCylos},</if>
+            <if test="sgjjAxialod != null">`sgjj_axialod` = #{sgjjAxialod},</if>
+            <if test="sgjjAxialos != null">`sgjj_axialos` = #{sgjjAxialos},</if>
+            <if test="sgjjAddod != null">`sgjj_addod` = #{sgjjAddod},</if>
+            <if test="sgjjAddos != null">`sgjj_addos` = #{sgjjAddos},</if>
+            <if test="sgjjYytjod != null">`sgjj_yytjod` = #{sgjjYytjod},</if>
+            <if test="sgjjYytjos != null">`sgjj_yytjos` = #{sgjjYytjos},</if>
+            <if test="sgjjJytjod != null">`sgjj_jytjod` = #{sgjjJytjod},</if>
+            <if test="sgjjJytjos != null">`sgjj_jytjos` = #{sgjjJytjos},</if>
+            <if test="sgjjTgod != null">`sgjj_tgod` = #{sgjjTgod},</if>
+            <if test="sgjjTgos != null">`sgjj_tgos` = #{sgjjTgos},</if>
+            <if test="sgjjYyvaod != null">`sgjj_yyvaod` = #{sgjjYyvaod},</if>
+            <if test="sgjjYyvaos != null">`sgjj_yyvaos` = #{sgjjYyvaos},</if>
+            <if test="sgjjJyvaod != null">`sgjj_jyvaod` = #{sgjjJyvaod},</if>
+            <if test="sgjjJyvaos != null">`sgjj_jyvaos` = #{sgjjJyvaos},</if>
+            <if test="sgjjJpcz != null">`sgjj_jpcz` = #{sgjjJpcz},</if>
+            <if test="sgjjClfs != null">`sgjj_clfs` = #{sgjjClfs},</if>
+            <if test="sgjjJykj != null">`sgjj_jykj` = #{sgjjJykj},</if>
+            <if test="sgjjKjlx != null">`sgjj_kjlx` = #{sgjjKjlx},</if>
+            <if test="sgjjText != null">`sgjj_text` = #{sgjjText},</if>
+            <if test="sgjjBeizhu != null">`sgjj_beizhu` = #{sgjjBeizhu}</if>
+        </set>
+        where sgjj_id = #{sgjjId}
+    </update>
+
+    <delete id="remove">
+		delete from jc_sgjj where sgjj_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from jc_sgjj where sgjj_id in
+        <foreach item="sgjjId" collection="array" open="(" separator="," close=")">
+            #{sgjjId}
+        </foreach>
+    </delete>
+
+</mapper>

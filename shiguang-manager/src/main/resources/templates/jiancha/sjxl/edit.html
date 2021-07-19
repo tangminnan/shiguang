@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="sjxl_id" name="sjxl_id" th:value="${sjxl.sjxl_id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">卡号：</label>
+								<div class="col-sm-8">
+									<input id="cardNumber" name="cardNumber" th:value="${sjxl.cardNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">处方类型：</label>
+								<div class="col-sm-8">
+									<input id="sjxlPrescriptionType" name="sjxlPrescriptionType" th:value="${sjxl.sjxlPrescriptionType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">医生：</label>
+								<div class="col-sm-8">
+									<input id="sjxlDoctor" name="sjxlDoctor" th:value="${sjxl.sjxlDoctor}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">验光师：</label>
+								<div class="col-sm-8">
+									<input id="sjxlOptometryName" name="sjxlOptometryName" th:value="${sjxl.sjxlOptometryName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">球镜OD：</label>
+								<div class="col-sm-8">
+									<input id="sjxlSphod" name="sjxlSphod" th:value="${sjxl.sjxlSphod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">球镜OS：</label>
+								<div class="col-sm-8">
+									<input id="sjxlSphos" name="sjxlSphos" th:value="${sjxl.sjxlSphos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">柱镜OD：</label>
+								<div class="col-sm-8">
+									<input id="sjxlCylod" name="sjxlCylod" th:value="${sjxl.sjxlCylod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">柱镜OS：</label>
+								<div class="col-sm-8">
+									<input id="sjxlCylos" name="sjxlCylos" th:value="${sjxl.sjxlCylos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">轴向OD：</label>
+								<div class="col-sm-8">
+									<input id="sjxlAxialod" name="sjxlAxialod" th:value="${sjxl.sjxlAxialod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">轴向OS：</label>
+								<div class="col-sm-8">
+									<input id="sjxlAxialos" name="sjxlAxialos" th:value="${sjxl.sjxlAxialos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">三棱镜(OD)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlSljod" name="sjxlSljod" th:value="${sjxl.sjxlSljod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">三棱镜(OS)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlSljos" name="sjxlSljos" th:value="${sjxl.sjxlSljos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">基底(OD)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlJdod" name="sjxlJdod" th:value="${sjxl.sjxlJdod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">基底(OS)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlJdos" name="sjxlJdos" th:value="${sjxl.sjxlJdos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">远用瞳距(mm)(OD)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlYytjod" name="sjxlYytjod" th:value="${sjxl.sjxlYytjod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">远用瞳距(mm)(OS)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlYytjos" name="sjxlYytjos" th:value="${sjxl.sjxlYytjos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">近用瞳距(mm)(OD)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlJytjod" name="sjxlJytjod" th:value="${sjxl.sjxlJytjod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">近用瞳距(mm)(OS)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlJytjos" name="sjxlJytjos" th:value="${sjxl.sjxlJytjos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">远用va(OD)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlYyvaod" name="sjxlYyvaod" th:value="${sjxl.sjxlYyvaod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">远用va(OS)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlYyvaos" name="sjxlYyvaos" th:value="${sjxl.sjxlYyvaos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">近用va(OD)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlJyvaod" name="sjxlJyvaod" th:value="${sjxl.sjxlJyvaod}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">近用va(OS)：</label>
+								<div class="col-sm-8">
+									<input id="sjxlJyvaos" name="sjxlJyvaos" th:value="${sjxl.sjxlJyvaos}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">家庭训练：</label>
+								<div class="col-sm-8">
+									<input id="sjxlJtxl" name="sjxlJtxl" th:value="${sjxl.sjxlJtxl}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">训练室训练：</label>
+								<div class="col-sm-8">
+									<input id="sjxlXlsxl" name="sjxlXlsxl" th:value="${sjxl.sjxlXlsxl}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="sjxlBeizhu" name="sjxlBeizhu" th:value="${sjxl.sjxlBeizhu}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/jiancha/sjxl/edit.js">
+	</script>
+</body>
+</html>

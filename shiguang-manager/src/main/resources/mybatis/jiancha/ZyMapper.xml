@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.ZyDao">
+
+	<select id="get" resultType="com.shiguang.jiancha.domain.ZyDO">
+		select `zy_id`,`card_number`,`zy_prescription_type`,`zy_doctor`,`zy_optometry_name`,`zy_sphod`,`zy_sphos`,`zy_cylod`,`zy_cylos`,`zy_axialod`,`zy_axialos`,`zy_prismod`,`zy_prismos`,`zy_jdod`,`zy_jdos`,`zy_zytjod`,`zy_zytjos`,`zy_tgod`,`zy_tgos`,`zy_vaod`,`zy_vaos`,`zy_jpcz`,`zy_clfs`,`zy_jyjk`,`zy_jklx`,`zy_text`,`zy_beizhu` from jc_zy where zy_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.jiancha.domain.ZyDO">
+		select `zy_id`,`card_number`,`zy_prescription_type`,`zy_doctor`,`zy_optometry_name`,`zy_sphod`,`zy_sphos`,`zy_cylod`,`zy_cylos`,`zy_axialod`,`zy_axialos`,`zy_prismod`,`zy_prismos`,`zy_jdod`,`zy_jdos`,`zy_zytjod`,`zy_zytjos`,`zy_tgod`,`zy_tgos`,`zy_vaod`,`zy_vaos`,`zy_jpcz`,`zy_clfs`,`zy_jyjk`,`zy_jklx`,`zy_text`,`zy_beizhu` from jc_zy
+        <where>  
+		  		  <if test="zyId != null and zyId != ''"> and zy_id = #{zyId} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="zyPrescriptionType != null and zyPrescriptionType != ''"> and zy_prescription_type = #{zyPrescriptionType} </if>
+		  		  <if test="zyDoctor != null and zyDoctor != ''"> and zy_doctor = #{zyDoctor} </if>
+		  		  <if test="zyOptometryName != null and zyOptometryName != ''"> and zy_optometry_name = #{zyOptometryName} </if>
+		  		  <if test="zySphod != null and zySphod != ''"> and zy_sphod = #{zySphod} </if>
+		  		  <if test="zySphos != null and zySphos != ''"> and zy_sphos = #{zySphos} </if>
+		  		  <if test="zyCylod != null and zyCylod != ''"> and zy_cylod = #{zyCylod} </if>
+		  		  <if test="zyCylos != null and zyCylos != ''"> and zy_cylos = #{zyCylos} </if>
+		  		  <if test="zyAxialod != null and zyAxialod != ''"> and zy_axialod = #{zyAxialod} </if>
+		  		  <if test="zyAxialos != null and zyAxialos != ''"> and zy_axialos = #{zyAxialos} </if>
+		  		  <if test="zyPrismod != null and zyPrismod != ''"> and zy_prismod = #{zyPrismod} </if>
+		  		  <if test="zyPrismos != null and zyPrismos != ''"> and zy_prismos = #{zyPrismos} </if>
+		  		  <if test="zyJdod != null and zyJdod != ''"> and zy_jdod = #{zyJdod} </if>
+		  		  <if test="zyJdos != null and zyJdos != ''"> and zy_jdos = #{zyJdos} </if>
+		  		  <if test="zyZytjod != null and zyZytjod != ''"> and zy_zytjod = #{zyZytjod} </if>
+		  		  <if test="zyZytjos != null and zyZytjos != ''"> and zy_zytjos = #{zyZytjos} </if>
+		  		  <if test="zyTgod != null and zyTgod != ''"> and zy_tgod = #{zyTgod} </if>
+		  		  <if test="zyTgos != null and zyTgos != ''"> and zy_tgos = #{zyTgos} </if>
+		  		  <if test="zyVaod != null and zyVaod != ''"> and zy_vaod = #{zyVaod} </if>
+		  		  <if test="zyVaos != null and zyVaos != ''"> and zy_vaos = #{zyVaos} </if>
+		  		  <if test="zyJpcz != null and zyJpcz != ''"> and zy_jpcz = #{zyJpcz} </if>
+		  		  <if test="zyClfs != null and zyClfs != ''"> and zy_clfs = #{zyClfs} </if>
+		  		  <if test="zyJyjk != null and zyJyjk != ''"> and zy_jyjk = #{zyJyjk} </if>
+		  		  <if test="zyJklx != null and zyJklx != ''"> and zy_jklx = #{zyJklx} </if>
+		  		  <if test="zyText != null and zyText != ''"> and zy_text = #{zyText} </if>
+		  		  <if test="zyBeizhu != null and zyBeizhu != ''"> and zy_beizhu = #{zyBeizhu} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by zy_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from jc_zy
+		 <where>  
+		  		  <if test="zyId != null and zyId != ''"> and zy_id = #{zyId} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="zyPrescriptionType != null and zyPrescriptionType != ''"> and zy_prescription_type = #{zyPrescriptionType} </if>
+		  		  <if test="zyDoctor != null and zyDoctor != ''"> and zy_doctor = #{zyDoctor} </if>
+		  		  <if test="zyOptometryName != null and zyOptometryName != ''"> and zy_optometry_name = #{zyOptometryName} </if>
+		  		  <if test="zySphod != null and zySphod != ''"> and zy_sphod = #{zySphod} </if>
+		  		  <if test="zySphos != null and zySphos != ''"> and zy_sphos = #{zySphos} </if>
+		  		  <if test="zyCylod != null and zyCylod != ''"> and zy_cylod = #{zyCylod} </if>
+		  		  <if test="zyCylos != null and zyCylos != ''"> and zy_cylos = #{zyCylos} </if>
+		  		  <if test="zyAxialod != null and zyAxialod != ''"> and zy_axialod = #{zyAxialod} </if>
+		  		  <if test="zyAxialos != null and zyAxialos != ''"> and zy_axialos = #{zyAxialos} </if>
+		  		  <if test="zyPrismod != null and zyPrismod != ''"> and zy_prismod = #{zyPrismod} </if>
+		  		  <if test="zyPrismos != null and zyPrismos != ''"> and zy_prismos = #{zyPrismos} </if>
+		  		  <if test="zyJdod != null and zyJdod != ''"> and zy_jdod = #{zyJdod} </if>
+		  		  <if test="zyJdos != null and zyJdos != ''"> and zy_jdos = #{zyJdos} </if>
+		  		  <if test="zyZytjod != null and zyZytjod != ''"> and zy_zytjod = #{zyZytjod} </if>
+		  		  <if test="zyZytjos != null and zyZytjos != ''"> and zy_zytjos = #{zyZytjos} </if>
+		  		  <if test="zyTgod != null and zyTgod != ''"> and zy_tgod = #{zyTgod} </if>
+		  		  <if test="zyTgos != null and zyTgos != ''"> and zy_tgos = #{zyTgos} </if>
+		  		  <if test="zyVaod != null and zyVaod != ''"> and zy_vaod = #{zyVaod} </if>
+		  		  <if test="zyVaos != null and zyVaos != ''"> and zy_vaos = #{zyVaos} </if>
+		  		  <if test="zyJpcz != null and zyJpcz != ''"> and zy_jpcz = #{zyJpcz} </if>
+		  		  <if test="zyClfs != null and zyClfs != ''"> and zy_clfs = #{zyClfs} </if>
+		  		  <if test="zyJyjk != null and zyJyjk != ''"> and zy_jyjk = #{zyJyjk} </if>
+		  		  <if test="zyJklx != null and zyJklx != ''"> and zy_jklx = #{zyJklx} </if>
+		  		  <if test="zyText != null and zyText != ''"> and zy_text = #{zyText} </if>
+		  		  <if test="zyBeizhu != null and zyBeizhu != ''"> and zy_beizhu = #{zyBeizhu} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.jiancha.domain.ZyDO" useGeneratedKeys="true" keyProperty="zyId">
+		insert into jc_zy
+		(
+			`card_number`, 
+			`zy_prescription_type`, 
+			`zy_doctor`, 
+			`zy_optometry_name`, 
+			`zy_sphod`, 
+			`zy_sphos`, 
+			`zy_cylod`, 
+			`zy_cylos`, 
+			`zy_axialod`, 
+			`zy_axialos`, 
+			`zy_prismod`, 
+			`zy_prismos`, 
+			`zy_jdod`, 
+			`zy_jdos`, 
+			`zy_zytjod`, 
+			`zy_zytjos`, 
+			`zy_tgod`, 
+			`zy_tgos`, 
+			`zy_vaod`, 
+			`zy_vaos`, 
+			`zy_jpcz`, 
+			`zy_clfs`, 
+			`zy_jyjk`, 
+			`zy_jklx`, 
+			`zy_text`, 
+			`zy_beizhu`
+		)
+		values
+		(
+			#{cardNumber}, 
+			#{zyPrescriptionType}, 
+			#{zyDoctor}, 
+			#{zyOptometryName}, 
+			#{zySphod}, 
+			#{zySphos}, 
+			#{zyCylod}, 
+			#{zyCylos}, 
+			#{zyAxialod}, 
+			#{zyAxialos}, 
+			#{zyPrismod}, 
+			#{zyPrismos}, 
+			#{zyJdod}, 
+			#{zyJdos}, 
+			#{zyZytjod}, 
+			#{zyZytjos}, 
+			#{zyTgod}, 
+			#{zyTgos}, 
+			#{zyVaod}, 
+			#{zyVaos}, 
+			#{zyJpcz}, 
+			#{zyClfs}, 
+			#{zyJyjk}, 
+			#{zyJklx}, 
+			#{zyText}, 
+			#{zyBeizhu}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.jiancha.domain.ZyDO">
+		update jc_zy 
+		<set>
+			<if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+			<if test="zyPrescriptionType != null">`zy_prescription_type` = #{zyPrescriptionType}, </if>
+			<if test="zyDoctor != null">`zy_doctor` = #{zyDoctor}, </if>
+			<if test="zyOptometryName != null">`zy_optometry_name` = #{zyOptometryName}, </if>
+			<if test="zySphod != null">`zy_sphod` = #{zySphod}, </if>
+			<if test="zySphos != null">`zy_sphos` = #{zySphos}, </if>
+			<if test="zyCylod != null">`zy_cylod` = #{zyCylod}, </if>
+			<if test="zyCylos != null">`zy_cylos` = #{zyCylos}, </if>
+			<if test="zyAxialod != null">`zy_axialod` = #{zyAxialod}, </if>
+			<if test="zyAxialos != null">`zy_axialos` = #{zyAxialos}, </if>
+			<if test="zyPrismod != null">`zy_prismod` = #{zyPrismod}, </if>
+			<if test="zyPrismos != null">`zy_prismos` = #{zyPrismos}, </if>
+			<if test="zyJdod != null">`zy_jdod` = #{zyJdod}, </if>
+			<if test="zyJdos != null">`zy_jdos` = #{zyJdos}, </if>
+			<if test="zyZytjod != null">`zy_zytjod` = #{zyZytjod}, </if>
+			<if test="zyZytjos != null">`zy_zytjos` = #{zyZytjos}, </if>
+			<if test="zyTgod != null">`zy_tgod` = #{zyTgod}, </if>
+			<if test="zyTgos != null">`zy_tgos` = #{zyTgos}, </if>
+			<if test="zyVaod != null">`zy_vaod` = #{zyVaod}, </if>
+			<if test="zyVaos != null">`zy_vaos` = #{zyVaos}, </if>
+			<if test="zyJpcz != null">`zy_jpcz` = #{zyJpcz}, </if>
+			<if test="zyClfs != null">`zy_clfs` = #{zyClfs}, </if>
+			<if test="zyJyjk != null">`zy_jyjk` = #{zyJyjk}, </if>
+			<if test="zyJklx != null">`zy_jklx` = #{zyJklx}, </if>
+			<if test="zyText != null">`zy_text` = #{zyText}, </if>
+			<if test="zyBeizhu != null">`zy_beizhu` = #{zyBeizhu}</if>
+		</set>
+		where zy_id = #{zyId}
+	</update>
+	
+	<delete id="remove">
+		delete from jc_zy where zy_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from jc_zy where zy_id in 
+		<foreach item="zyId" collection="array" open="(" separator="," close=")">
+			#{zyId}
+		</foreach>
+	</delete>
+
+</mapper>

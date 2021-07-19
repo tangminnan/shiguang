@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="yp_id" name="yp_id" th:value="${yaopin.yp_id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">卡号：</label>
+								<div class="col-sm-8">
+									<input id="cardNumber" name="cardNumber" th:value="${yaopin.cardNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">处方类型：</label>
+								<div class="col-sm-8">
+									<input id="ypPrescriptionType" name="ypPrescriptionType" th:value="${yaopin.ypPrescriptionType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">医生：</label>
+								<div class="col-sm-8">
+									<input id="ypDoctor" name="ypDoctor" th:value="${yaopin.ypDoctor}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">验光师：</label>
+								<div class="col-sm-8">
+									<input id="ypOptometryName" name="ypOptometryName" th:value="${yaopin.ypOptometryName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">内容：</label>
+								<div class="col-sm-8">
+									<input id="ypNr" name="ypNr" th:value="${yaopin.ypNr}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">药名：</label>
+								<div class="col-sm-8">
+									<input id="ypYm" name="ypYm" th:value="${yaopin.ypYm}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/jiancha/yaopin/edit.js">
+	</script>
+</body>
+</html>
