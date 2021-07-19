@@ -7,7 +7,7 @@
     <artifactId>shiguang-manager</artifactId>
     <version>1.6.9</version>
     <packaging>war</packaging>
-	 
+
     <name>shiguang-manager</name>
     <description>Demo project for Spring Boot</description>
 
@@ -28,26 +28,26 @@
     </properties>
 
     <dependencies>
- <!--    
-	<dependency>  
-	    <groupId>org.apache.poi</groupId>  
-	    <artifactId>poi</artifactId>  
-	    <version>3.14</version>  
-	</dependency>  
-	
+ <!--
+	<dependency>
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi</artifactId>
+	    <version>3.14</version>
+	</dependency>
+
 	<dependency>
 	  <groupId>org.apache.poi</groupId>
 	  <artifactId>poi-ooxml</artifactId>
 	  <version>3.14</version>
 	</dependency>
-	
+
 		excel
 		<dependency>
 			<groupId>org.apache.log4j</groupId>
 			<artifactId>com.springsource.org.apache.log4j</artifactId>
 			<version>1.2.15</version>
 		</dependency>
- 
+
 		jxl表格操作
 		<dependency>
 			<groupId>net.sourceforge.jexcelapi</groupId>
@@ -257,14 +257,14 @@
             <artifactId>activiti-diagram-rest</artifactId>
             <version>${activiti.version}</version>
         </dependency>
-        
+
        <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
 <dependency>
     <groupId>org.freemarker</groupId>
     <artifactId>freemarker</artifactId>
-   
+
 </dependency>
-       
+
 
         <!--swagger2-->
         <dependency>
@@ -297,7 +297,7 @@
 			<artifactId>xxl-excel</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-        
+
         <!-- 二维码 -->
         <dependency>
 		    <groupId>com.google.zxing</groupId>
@@ -311,7 +311,6 @@
             <version>2.1</version>
         </dependency>
 
-<<<<<<< HEAD
         <!--war包部署需要-->
         <!--&lt;!&ndash; 移除嵌入式tomcat插件 &ndash;&gt;-->
 
@@ -331,26 +330,24 @@
         <!--<version>3.1.0</version>-->
         <!--<scope>provided</scope>-->
         <!--</dependency>-->
-=======
         <!-- war包部署-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
->>>>>>> 8ba87beb364aea7c0ba088813457647019c602b9
-		
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-web</artifactId>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.springframework.boot</groupId>-->
+                    <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>javax.servlet-api</artifactId>-->
+            <!--<version>3.1.0</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+
         <!--war包部署需要-->
         <!--<dependency>-->
             <!--<groupId>org.springframework.boot</groupId>-->
@@ -383,7 +380,6 @@
                     <executable>true</executable>
                 </configuration>
             </plugin>
-<<<<<<< HEAD
             <!--<plugin>-->
                 <!--<groupId>org.apache.maven.plugins</groupId>-->
                 <!--<artifactId>maven-compiler-plugin</artifactId>-->
@@ -395,19 +391,6 @@
                     <!--</compilerArguments>-->
                 <!--</configuration>-->
             <!--</plugin>-->
-=======
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <compilerArguments>
-                        <extdirs>F:\sg\shiguang\shiguang-manager\lib</extdirs>
-                    </compilerArguments>
-                </configuration>
-            </plugin>
->>>>>>> 8ba87beb364aea7c0ba088813457647019c602b9
         </plugins>
     </build>
     <repositories>
