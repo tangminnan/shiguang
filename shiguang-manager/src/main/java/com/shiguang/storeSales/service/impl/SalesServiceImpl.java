@@ -1,10 +1,7 @@
 package com.shiguang.storeSales.service.impl;
 
 import com.shiguang.storeSales.dao.SalesDao;
-import com.shiguang.storeSales.domain.EyesWay;
-import com.shiguang.storeSales.domain.SalesDO;
-import com.shiguang.storeSales.domain.ZijiaDO;
-import com.shiguang.storeSales.domain.ZipianDO;
+import com.shiguang.storeSales.domain.*;
 import com.shiguang.storeSales.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,5 +80,10 @@ public class SalesServiceImpl implements SalesService {
 	@Override
 	public int countZjia(Map<String, Object> map){
 		return salesDao.count(map);
+	}
+
+	@Override
+	public List<Conclusion> conclusionList(Map<String, Object> map){
+		return salesDao.findAll(map);
 	}
 }

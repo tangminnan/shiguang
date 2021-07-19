@@ -1,10 +1,7 @@
 package com.shiguang.storeSales.service;
 
 
-import com.shiguang.storeSales.domain.EyesWay;
-import com.shiguang.storeSales.domain.SalesDO;
-import com.shiguang.storeSales.domain.ZijiaDO;
-import com.shiguang.storeSales.domain.ZipianDO;
+import com.shiguang.storeSales.domain.*;
 
 import java.util.List;
 import java.util.Map;
@@ -43,4 +40,6 @@ public interface SalesService {
 	int countZpian(Map<String, Object> map);
 
 	int countZjia(Map<String, Object> map);
+
+	List<Conclusion> conclusionList(Map<String,Object> map);
 }

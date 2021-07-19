@@ -407,10 +407,41 @@ function getPeijian(){
 }
 
 function getYinxing(){
-    var rightYuanYongQJ = $('input[name=rightQJ]').val();
-    var rightYuanYongZJ = $('input[name=rightZJ]').val();
-    var leftYuanYongQJ = $('input[name=leftQJ]').val();
-    var leftYuanYongZJ = $('input[name=leftZJ]').val();
+    var  rightYuanYongQJ = '';
+    var rightYuanYongZJ = '';
+    var leftYuanYongQJ = '';
+    var leftYuanYongZJ = '';
+    if (cfType == 1){
+        rightYuanYongQJ = $("#rightFuLiaoQJ").val();
+        rightYuanYongZJ = $("#rightFuLiaoZJ").val();
+        leftYuanYongQJ = $("#leftFuLiaoQJ").val();
+        leftYuanYongZJ = $("#leftFuLiaoZJ").val();
+    } else if (cfType == 2){
+        rightYuanYongQJ = $("#rightYuanYongQJ").val();
+        rightYuanYongZJ = $("#rightYuanYongZJ").val();
+        leftYuanYongQJ = $("#leftYuanYongQJ").val();
+        leftYuanYongZJ = $("#leftYuanYongZJ").val();
+    } else if (cfType == 3){
+        rightYuanYongQJ = $("#rightJianJinsgQJ").val();
+        rightYuanYongZJ = $("#rightJianJinsgZJ").val();
+        leftYuanYongQJ = $("#leftJianJinsgQJ").val();
+        leftYuanYongZJ = $("#leftJianJinsgZJ").val();
+    } else if (cfType == 4){
+        rightYuanYongQJ = $("#rightZhongYongQJ").val();
+        rightYuanYongZJ = $("#rightZhongYongZJ").val();
+        leftYuanYongQJ = $("#leftZhongYongQJ").val();
+        leftYuanYongZJ = $("#leftZhongYongZJ").val();
+    } else if (cfType == 5){
+        rightYuanYongQJ = $("#rightYinxingQJ").val();
+        rightYuanYongZJ = $("#rightYinxingZJ").val();
+        leftYuanYongQJ = $("#leftYinxingQJ").val();
+        leftYuanYongZJ = $("#leftYinxingZJ").val();
+    } else if (cfType == 7){
+        rightYuanYongQJ = $("#rightShiJuexlQJ").val();
+        rightYuanYongZJ = $("#rightShiJuexlZJ").val();
+        leftYuanYongQJ = $("#leftShiJuexlQJ").val();
+        leftYuanYongZJ = $("#leftShiJuexlZJ").val();
+    }
     if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
         return alert("请选择球镜度数");
     }

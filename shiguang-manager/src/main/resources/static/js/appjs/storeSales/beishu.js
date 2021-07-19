@@ -90,3 +90,8 @@ function qingkong() {
     document.getElementById("content").value="";
     document.getElementById("ypName").value="";
 }
+
+function getceshi(obj) {
+    var ss = $("#rightyuanyongtj").val();
+    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+}

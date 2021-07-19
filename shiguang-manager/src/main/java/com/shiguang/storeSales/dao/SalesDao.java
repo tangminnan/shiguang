@@ -4,10 +4,7 @@ package com.shiguang.storeSales.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.shiguang.storeSales.domain.EyesWay;
-import com.shiguang.storeSales.domain.SalesDO;
-import com.shiguang.storeSales.domain.ZijiaDO;
-import com.shiguang.storeSales.domain.ZipianDO;
+import com.shiguang.storeSales.domain.*;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -44,5 +41,7 @@ public interface SalesDao {
 	int countZpian(Map<String, Object> map);
 
 	int countZjia(Map<String, Object> map);
+
+	List<Conclusion> findAll(Map<String,Object> map);
 
 }

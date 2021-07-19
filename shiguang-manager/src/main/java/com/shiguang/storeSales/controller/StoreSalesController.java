@@ -7,6 +7,11 @@ import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.*;
 import com.shiguang.giveaway.domain.GiveawayDO;
 import com.shiguang.giveaway.service.GiveawayService;
+import com.shiguang.jiancha.domain.KjjyDO;
+import com.shiguang.jiancha.domain.ResultDO;
+import com.shiguang.jiancha.service.KjjyService;
+import com.shiguang.jiancha.service.KjyyService;
+import com.shiguang.jiancha.service.ResultService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.mfrs.domain.PositionDO;
@@ -20,10 +25,7 @@ import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
-import com.shiguang.storeSales.domain.EyesWay;
-import com.shiguang.storeSales.domain.SalesDO;
-import com.shiguang.storeSales.domain.ZijiaDO;
-import com.shiguang.storeSales.domain.ZipianDO;
+import com.shiguang.storeSales.domain.*;
 import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
@@ -33,6 +35,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -83,6 +86,12 @@ public class StoreSalesController {
     private CostService costService;
     @Autowired
     private PackageService packageService;
+    @Autowired
+    private ResultService resultService;
+    @Autowired
+    private KjjyService kjjyService;
+    @Autowired
+    private KjyyService kjyyService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -161,6 +170,48 @@ public class StoreSalesController {
         map.put("stores",store);
         List<GiveawayDO> giveawayDOList = giveawayService.list(map);
         model.addAttribute("giveawayDOList",giveawayDOList);
+        //处方
+        Map<String,Object> map1 = new HashMap<>();
+        map1.put("cardNumber",cardNumber);
+        List<ResultDO> resultDOList = resultService.list(map1);
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String datetime = sdf.format(date);
+        datetime = datetime + " 00:00:00";
+        Map<String,Object> map2 = new HashMap<>();
+        map2.put("cardNumber",cardNumber);
+        List<Conclusion> conclusionList = salesService.conclusionList(map2);
+        model.addAttribute("conclusionList",conclusionList);
+        SimpleDateFormat sdfs = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        if (null != conclusionList){
+            for (Conclusion c: conclusionList){
+                //String ygtime = sdfs.format(c.getCreateTime());
+                c.setYanguangTime(sdfs.format(c.getCreateTime()));
+                if ("1".equals(c.getChufangType())){
+                    c.setChufang("近用");
+                } else if ("2".equals(c.getChufangType())){
+                    c.setChufang("远用");
+                } else if ("3".equals(c.getChufangType())){
+                    c.setChufang("渐进/双光");
+                } else if ("4".equals(c.getChufangType())){
+                    c.setChufang("中用");
+                } else if ("5".equals(c.getChufangType())){
+                    c.setChufang("隐形");
+                } else if ("6".equals(c.getChufangType())){
+                    c.setChufang("角膜塑形镜");
+                }else if ("7".equals(c.getChufangType())){
+                    c.setChufang("视觉训练");
+                } else if ("8".equals(c.getChufangType())){
+                    c.setChufang("角膜塑形镜VST");
+                } else if ("9".equals(c.getChufangType())){
+                    c.setChufang("角膜塑形镜CRT");
+                } else if ("10".equals(c.getChufangType())){
+                    c.setChufang("RGP");
+                } else if ("11".equals(c.getChufangType())){
+                    c.setChufang("药品");
+                }
+            }
+        }
         return "storeSales/edit";
     }
 
@@ -205,6 +256,20 @@ public class StoreSalesController {
 //            }
         }
         //Model model=null;
+        if ("2".equals(salesDO.getChufang())){
+            if (salesDO.getRecipelType() == 1){
+                KjjyDO kjjyDO = new KjjyDO();
+                kjjyDO.setCardNumber(salesDO.getMemberNumber());
+                kjjyDO.setKjjyPrescriptionType(salesDO.getRecipelType().toString());
+                kjjyDO.setKjjyOptometryName(salesDO.getSaleName());
+                kjjyDO.setKjjySphod(salesDO.getRightQJ());
+                kjjyDO.setKjjySphos(salesDO.getLeftQJ());
+                kjjyDO.setKjjyCylod(salesDO.getRightZJ());
+                kjjyDO.setKjjyCylos(salesDO.getLeftZJ());
+                kjjyDO.setKjjyAxialod(salesDO.getRightzhouxiang());
+                kjjyDO.setKjjyAxialos(salesDO.getLeftzhouxiang());
+            }
+        }
         CostDO costDO = new CostDO();
         costDO.setIsSale(0L);
         costDO.setMemberNumber(salesDO.getMemberNumber());

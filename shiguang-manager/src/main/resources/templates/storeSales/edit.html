@@ -78,7 +78,7 @@
 
 				<tr id="tab1" style="display:none">
 					<td style="width: 24%;">验光号</td>
-					<td>001</td>
+					<td id="ygh"></td>
 				</tr>
 				<tr id="tab11" style="display:none;">
 					<td>验光师</td>
@@ -94,7 +94,7 @@
 				<tr id="tab111" style="display:none;">
 					<td>外来处方</td>
 					<td class="wailai">
-						<label><input name="wailai" type="checkbox" onclick="check(this)"> 外来处方</label>
+						<label><input name="wailai" id="wailai" type="checkbox" onclick="check(this)"> 外来处方</label>
 						<select id="outRecipel" name="outRecipel" style="display: none;width: 100px;">
 							<option value="">--请选择--</option>
 							<option value="自报光度">自报光度</option>
@@ -327,10 +327,10 @@
 				<td>
 					<select id="leftFLjidi" name="leftjidi">
 						<option value="">请选择</option>
-						<option value="1">内</option>
-						<option value="2">外</option>
-						<option value="3">上</option>
-						<option value="4">下</option>
+						<option value="内">内</option>
+						<option value="外">外</option>
+						<option value="上">上</option>
+						<option value="下">下</option>
 					</select>
 				</td>
 				<td><input type="text" id="leftFLyuanyTj" name="leftyuanyongtj"/></td>
@@ -471,7 +471,7 @@
 				<td>轴向</td>
 				<td>三棱镜</td>
 				<td>基地</td>
-				<td>远用瞳距（mm）</td>
+				<td>中用瞳距（mm）</td>
 				<td>瞳高(mm)</td>
 				<td>远用VA</td>
 			</tr>
@@ -640,9 +640,9 @@
 				<td><input type="text" value="0.75" id="rightShiJuexlQJ" name="rightQJ" onchange="getSjxlBs()"/></td>
 				<td><input type="text" value="0.75" id="rightShiJuexlZJ" name="rightZJ" onchange="getSjxlBs()"/></td>
 				<td><input type="text" value="0.75" id="rightSJXLzx" name="rightzhouxiang" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
-				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" id="rightSJXLslj" name="rightsanlingjing"/></td>
 				<td>
-					<select name="rightjidi" >
+					<select id="rightSJXLjidi" name="rightjidi" >
 						<option value="">请选择</option>
 						<option value="1">内</option>
 						<option value="2">外</option>
@@ -650,19 +650,19 @@
 						<option value="4">下</option>
 					</select>
 				</td>
-				<td><input type="text" value="0.75" /></td>
-				<td><input type="text" value="0.75" /></td>
-				<td><input type="text" value="0.75" /></td>
-				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" id="rightSJXLyytj"/></td>
+				<td><input type="text" value="0.75" id="rightSJXLjytj"/></td>
+				<td><input type="text" value="0.75" id="rightSJXLyyva"/></td>
+				<td><input type="text" value="0.75" id="rightSJXLjyva"/></td>
 			</tr>
 			<tr>
 				<td class="Light_green">OS</td>
 				<td><input type="text" value=" " id="leftShiJuexlQJ" name="leftQJ" onchange="getSjxlBs()"/></td>
 				<td><input type="text" value=" " id="leftShiJuexlZJ" name="leftZJ" onchange="getSjxlBs()"/></td>
 				<td><input type="text" value=" " id="leftSJXLzx" name="leftzhouxiang" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
-				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " id="leftSJXLslj" name="leftsanlingjing"/></td>
 				<td>
-					<select name="leftjidi">
+					<select id="leftSJXLjidi" name="leftjidi">
 						<option value="">请选择</option>
 						<option value="1">内</option>
 						<option value="2">外</option>
@@ -670,10 +670,10 @@
 						<option value="4">下</option>
 					</select>
 				</td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
+				<td><input type="text" value="0.75" id="leftSJXLyytj"/></td>
+				<td><input type="text" value="0.75" id="leftSJXLjytj"/></td>
+				<td><input type="text" value="0.75" id="leftSJXLyyva"/></td>
+				<td><input type="text" value="0.75" id="leftSJXLjyva"/></td>
 			</tr>
 			<tr class="Light_green aling_left">
 				<td colspan="6">家庭训练：</td>
@@ -849,39 +849,39 @@
 			</tr>
 			<tr>
 				<td class="Light_pink">OD</td>
-				<td><input type="text" value="0.75" id="rightRGPQJ" name="rightQJ"/></td>
-				<td><input type="text" value="0.75" id="rightRGPZJ" name="rightZJ"/></td>
-				<td><input type="text" value="0.75" /></td>
-				<td><input type="text" value="0.75" /></td>
-				<td><input type="text" value="0.75" /></td>
-				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" id="rightRGPsk" name="rightQJ"/></td>
+				<td><input type="text" value="0.75" id="rightRGPfk" name="rightZJ"/></td>
+				<td><input type="text" value="0.75" id="rightRGPqgd"/></td>
+				<td><input type="text" value="0.75" id="rightRGPbc"/></td>
+				<td><input type="text" value="0.75" id="rightRGPdia"/></td>
+				<td><input type="text" value="0.75" id="rightRGPsg"/></td>
 				<td>
 					<select>
-						<option value="">无色</option>
-						<option value="">蓝色</option>
-						<option value="">粉色</option>
+						<option value="无色">无色</option>
+						<option value="蓝色">蓝色</option>
+						<option value="粉色">粉色</option>
 					</select>
 				</td>
-				<td><input type="text" value="" /></td>
-				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" id="rightRGPtssj"/></td>
+				<td><input type="text" value="" id="rightRGPpinpai"/></td>
 			</tr>
 			<tr>
 				<td class="Light_pink">OS</td>
-				<td><input type="text" value="0.75" id="leftRGPQJ" name="leftQJ"/></td>
-				<td><input type="text" value="0.75" id="leftRGPZJ" name="leftZJ"/></td>
-				<td><input type="text" value="0.75" /></td>
-				<td><input type="text" value="0.75" /></td>
-				<td><input type="text" value="0.75" /></td>
-				<td><input type="text" value="0.75" /></td>
+				<td><input type="text" value="0.75" id="leftRGPsk" name="leftQJ"/></td>
+				<td><input type="text" value="0.75" id="leftRGPfk" name="leftZJ"/></td>
+				<td><input type="text" value="0.75" id="leftRGPqgd"/></td>
+				<td><input type="text" value="0.75" id="leftRGPbc"/></td>
+				<td><input type="text" value="0.75" id="leftRGPdia"/></td>
+				<td><input type="text" value="0.75" id="leftRGPsg"/></td>
 				<td>
 					<select>
-						<option value="">无色</option>
-						<option value="">蓝色</option>
-						<option value="">粉色</option>
+						<option value="无色">无色</option>
+						<option value="蓝色">蓝色</option>
+						<option value="粉色">粉色</option>
 					</select>
 				</td>
-				<td><input type="text" value="" /></td>
-				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" id="leftRGPtssj"/></td>
+				<td><input type="text" value="" id="leftRGPpinpai"/></td>
 			</tr>
 			<tr>
 				<td class="Light_pink">备注：</td>
@@ -1133,7 +1133,7 @@
 			<tbody>
 			<tr>
 				<td class="tdBB1">销售备注</td>
-				<td class="tdBB2"><textarea rows="2" id="remark" name="remark"></textarea></td>
+				<td class="tdBB2"><textarea rows="2" id="saleremark" name="saleremark"></textarea></td>
 			</tr>
 			</tbody>
 		</table>
@@ -1567,10 +1567,41 @@
     }
 
     function getJingpian(){
-	    var  rightYuanYongQJ = $('input[name=rightQJ]').val();
-	    var rightYuanYongZJ = $('input[name=rightZJ]').val();
-	    var leftYuanYongQJ = $('input[name=leftQJ]').val();
-	    var leftYuanYongZJ = $('input[name=leftZJ]').val();
+	    var  rightYuanYongQJ = '';
+	    var rightYuanYongZJ = '';
+	    var leftYuanYongQJ = '';
+	    var leftYuanYongZJ = '';
+	    if (cfType == 1){
+            rightYuanYongQJ = $("#rightFuLiaoQJ").val();
+            rightYuanYongZJ = $("#rightFuLiaoZJ").val();
+            leftYuanYongQJ = $("#leftFuLiaoQJ").val();
+            leftYuanYongZJ = $("#leftFuLiaoZJ").val();
+		} else if (cfType == 2){
+            rightYuanYongQJ = $("#rightYuanYongQJ").val();
+            rightYuanYongZJ = $("#rightYuanYongZJ").val();
+            leftYuanYongQJ = $("#leftYuanYongQJ").val();
+            leftYuanYongZJ = $("#leftYuanYongZJ").val();
+		} else if (cfType == 3){
+            rightYuanYongQJ = $("#rightJianJinsgQJ").val();
+            rightYuanYongZJ = $("#rightJianJinsgZJ").val();
+            leftYuanYongQJ = $("#leftJianJinsgQJ").val();
+            leftYuanYongZJ = $("#leftJianJinsgZJ").val();
+		} else if (cfType == 4){
+            rightYuanYongQJ = $("#rightZhongYongQJ").val();
+            rightYuanYongZJ = $("#rightZhongYongZJ").val();
+            leftYuanYongQJ = $("#leftZhongYongQJ").val();
+            leftYuanYongZJ = $("#leftZhongYongZJ").val();
+		} else if (cfType == 5){
+            rightYuanYongQJ = $("#rightYinxingQJ").val();
+            rightYuanYongZJ = $("#rightYinxingZJ").val();
+            leftYuanYongQJ = $("#leftYinxingQJ").val();
+            leftYuanYongZJ = $("#leftYinxingZJ").val();
+		} else if (cfType == 7){
+            rightYuanYongQJ = $("#rightShiJuexlQJ").val();
+            rightYuanYongZJ = $("#rightShiJuexlZJ").val();
+            leftYuanYongQJ = $("#leftShiJuexlQJ").val();
+            leftYuanYongZJ = $("#leftShiJuexlZJ").val();
+		}
         if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
             return alert("请选择球镜度数");
         }
@@ -1872,14 +1903,14 @@
 		//附加费用
 		var addlist = [[${addlist}]];
 		//处方
-        var list = [[${userDOList}]];
-        var len = list.length;
-        var trs = 7-len;
+        var list = [[${conclusionList}]];
 		var html="";
             for (var i = 0; i < list.length; i++) {
-                html = "<tr><td style=\"width:25%;\">"+list[i].name+"</td>";
-                html += "<td style=\"width:25%;\">"+name+"</td>";
-                html += "<td>2021-06-05 14:28</td></tr>";
+                var sd = list[i];
+                var data = JSON.stringify(sd);
+                html = "<tr onclick='getData("+data+")'><td style=\"width:25%;\">"+list[i].chufang+"</td>";
+                html += "<td style=\"width:25%;\">"+list[i].yangsName+"</td>";
+                html += "<td>"+list[i].yanguangTime+"</td></tr>";
                 $("#tbodys").append(html);
             }
             var newli = "";
@@ -1888,6 +1919,358 @@
                 $("#give").append(newli);
 			}
     });
+    var cfType="";
+    function getData(obj){
+        var ss = JSON.stringify(obj);
+        var data = JSON.parse(ss);
+        console.log(data);
+        cfType = data.chufangType;
+        getType(data.chufangType);
+        //$("#rightJianJinsgQJ").val(data.rightsph);
+        //document.getElementById("rightJianJinsgQJ").readOnly=true;
+        // document.getElementsByName("rightQJ").value = data.rightsph;
+        // document.getElementsByName("rightZJ").value = data.rightcyl;
+        // document.getElementsByName("rightzhouxiang")[0].value = data.rightzx;
+        // document.getElementsByName("rightsanlingjing")[0].value = data.rightprism;
+        // document.getElementsByName("rightjidi")[0].value = data.rightjd;
+        // document.getElementsByName("rightyuanyongtj")[0].value = data.rightyytj;
+        // document.getElementsByName("righttonggao")[0].value = data.righttg;
+        // document.getElementsByName("rightyuanyongVA")[0].value = data.rightva;
+        // document.getElementsByName("leftQJ")[0].value = data.leftsph;
+        // document.getElementsByName("leftZJ")[0].value = data.leftcyl;
+        // document.getElementsByName("leftzhouxiang")[0].value = data.leftzx;
+        // document.getElementsByName("leftsanlingjing")[0].value = data.leftprism;
+        // document.getElementsByName("leftjidi")[0].value = data.leftjd;
+        // document.getElementsByName("leftyuanyongtj")[0].value = data.leftyytj;
+        // document.getElementsByName("lefttonggao")[0].value = data.lefttg;
+        // document.getElementsByName("leftyuanyongVA")[0].value = data.leftva;
+        if (data.chufangType == 1){
+            $("#rightFuLiaoQJ").val(data.rightsph);
+            document.getElementById("rightFuLiaoQJ").readOnly=true;
+            $("#rightFuLiaoZJ").val(data.rightcyl);
+            document.getElementById("rightFuLiaoZJ").readOnly=true;
+            $("#rightzhouxiang").val(data.rightzx);
+            document.getElementById("rightzhouxiang").readOnly=true;
+            $("#rightFLslj").val(data.rightprism);
+            if (data.rightprism != ''){
+                document.getElementById("rightFLslj").readOnly=true;
+			}
+			var jidi = data.rightjd;
+            //$("#rightjidi").val(jidi);
+            $("#rightFLjidi").find("[value='"+jidi+"']").attr("selected",true);
+
+            $("#rightFLyuanyTj").val(data.rightyytj);
+            if (data.rightyytj != ''){
+                document.getElementById("rightFLyuanyTj").readOnly=true;
+			}
+			$("#rightFLtonggao").val(data.righttg);
+            if (data.righttg != ''){
+                document.getElementById("rightFLtonggao").readOnly=true;
+			}
+			$("#rightFLyuanyongVA").val(data.rightva);
+            if (data.rightva != ''){
+                document.getElementById("rightFLyuanyongVA").readOnly=true;
+			}
+			$("#leftFuLiaoQJ").val(data.leftsph);
+            document.getElementById("leftFuLiaoQJ").readOnly=true;
+            $("#leftFuLiaoZJ").val(data.leftcyl);
+            document.getElementById("leftFuLiaoZJ").readOnly=true;
+            $("#leftFLzhouxiang").val(data.leftzx);
+            document.getElementById("leftFLzhouxiang").readOnly=true;
+            $("#leftFLslj").val(data.leftprism);
+            if (data.leftprism != ''){
+                document.getElementById("leftFLslj").readOnly=true;
+            }
+            var leftjidi = data.leftjd;
+            $("#leftFLjidi").find("[value='"+leftjidi+"']").attr("selected",true);
+            $("#leftFLyuanyTj").val(data.leftyytj);
+            if (data.leftyytj != ''){
+                document.getElementById("leftFLyuanyTj").readOnly=true;
+            }
+            $("#leftFLtonggao").val(data.lefttg);
+            if (data.lefttg != ''){
+                document.getElementById("leftFLtonggao").readOnly=true;
+            }
+            $("#leftFLyuanyongVA").val(data.leftva);
+            if (data.leftva != ''){
+                document.getElementById("leftFLyuanyongVA").readOnly=true;
+            }
+		} else if (data.chufangType == 2){
+            $("#rightYuanYongQJ").val(data.rightsph);
+            document.getElementById("rightYuanYongQJ").readOnly=true;
+            $("#rightYuanYongZJ").val(data.rightcyl);
+            document.getElementById("rightYuanYongZJ").readOnly=true;
+            $("#rightzhouxiang").val(data.rightzx);
+            document.getElementById("rightzhouxiang").readOnly=true;
+            $("#rightsanlingjing").val(data.rightprism);
+            if (data.rightprism != ''){
+                document.getElementById("rightsanlingjing").readOnly=true;
+            }
+            var rihtjd = data.rightjd;
+			$("#rightjidi").find("[value='"+rihtjd+"']").attr("selected",true);
+            $("#rightyuanyongtj").val(data.rightyytj);
+            if (data.rightyytj != ''){
+                document.getElementById("rightyuanyongtj").readOnly=true;
+            }
+            $("#righttonggao").val(data.righttg);
+            if (data.righttg != ''){
+                document.getElementById("righttonggao").readOnly=true;
+            }
+            $("#rightyuanyongVA").val(data.rightva);
+            if (data.rightva != ''){
+                document.getElementById("rightyuanyongVA").readOnly=true;
+            }
+            $("#leftYuanYongQJ").val(data.leftsph);
+            document.getElementById("leftYuanYongQJ").readOnly=true;
+            $("#leftYuanYongZJ").val(data.leftcyl);
+            document.getElementById("leftYuanYongZJ").readOnly=true;
+            $("#leftzhouxiang").val(data.leftzx);
+            document.getElementById("leftzhouxiang").readOnly=true;
+            $("#leftsanlingjing").val(data.leftprism);
+            if (data.leftprism != ''){
+                document.getElementById("leftsanlingjing").readOnly=true;
+            }
+            var leftjd = data.leftjd;
+            $("#leftjidi").find("[value='"+leftjd+"']").attr("selected",true);
+            $("#leftyuanyongtj").val(data.leftyytj);
+            if (data.leftyytj != ''){
+                document.getElementById("leftyuanyongtj").readOnly=true;
+            }
+            $("#lefttonggao").val(data.lefttg);
+            if (data.lefttg != ''){
+                document.getElementById("lefttonggao").readOnly=true;
+            }
+            $("#leftyuanyongVA").val(data.leftva);
+            if (data.leftva != ''){
+                document.getElementById("leftyuanyongVA").readOnly=true;
+            }
+		} else if (data.chufangType == 3){
+            $("#rightJianJinsgQJ").val(data.rightsph);
+            document.getElementById("rightJianJinsgQJ").readOnly=true;
+            $("#rightJianJinsgZJ").val(data.rightcyl);
+            document.getElementById("rightJianJinsgZJ").readOnly=true;
+            $("#rightSGzhouxiang").val(data.rightzx);
+            document.getElementById("rightSGzhouxiang").readOnly=true;
+            $("#rightSGslj").val(data.rightprism);
+            if (data.rightprism != ''){
+                document.getElementById("rightSGslj").readOnly=true;
+            }
+            var rihtjd = data.rightjd;
+            $("#rightSGjidi").find("[value='"+rihtjd+"']").attr("selected",true);
+            $("#rightSGyuanyTj").val(data.rightyytj);
+            if (data.rightyytj != ''){
+                document.getElementById("rightSGyuanyTj").readOnly=true;
+            }
+            $("#rightSGTonggao").val(data.righttg);
+            if (data.righttg != ''){
+                document.getElementById("rightSGTonggao").readOnly=true;
+            }
+            $("#rightSGyuanyongVA").val(data.rightva);
+            if (data.rightva != ''){
+                document.getElementById("rightSGyuanyongVA").readOnly=true;
+            }
+            $("#leftJianJinsgQJ").val(data.leftsph);
+            document.getElementById("leftJianJinsgQJ").readOnly=true;
+            $("#leftJianJinsgZJ").val(data.leftcyl);
+            document.getElementById("leftJianJinsgZJ").readOnly=true;
+            $("#leftSGzhouxiang").val(data.leftzx);
+            document.getElementById("leftSGzhouxiang").readOnly=true;
+            $("#leftSGslj").val(data.leftprism);
+            if (data.leftprism != ''){
+                document.getElementById("leftSGslj").readOnly=true;
+            }
+            var leftjd = data.leftjd;
+            $("#leftSGjidi").find("[value='"+leftjd+"']").attr("selected",true);
+            $("#leftSGyuanyTj").val(data.leftyytj);
+            if (data.leftyytj != ''){
+                document.getElementById("leftSGyuanyTj").readOnly=true;
+            }
+            $("#leftSGTonggao").val(data.lefttg);
+            if (data.lefttg != ''){
+                document.getElementById("leftSGTonggao").readOnly=true;
+            }
+            $("#leftSGyuanyongVA").val(data.leftva);
+            if (data.leftva != ''){
+                document.getElementById("leftSGyuanyongVA").readOnly=true;
+            }
+		} else if (data.chufangType == 4){
+            $("#rightZhongYongQJ").val(data.rightsph);
+            document.getElementById("rightZhongYongQJ").readOnly=true;
+            $("#rightZhongYongZJ").val(data.rightcyl);
+            document.getElementById("rightZhongYongZJ").readOnly=true;
+            $("#rightzhongyongzx").val(data.rightzx);
+            document.getElementById("rightzhongyongzx").readOnly=true;
+            $("#rightzhongyongslj").val(data.rightprism);
+            if (data.rightprism != ''){
+                document.getElementById("rightzhongyongslj").readOnly=true;
+            }
+            var rihtjd = data.rightjd;
+            $("#rightzhongyongjd").find("[value='"+rihtjd+"']").attr("selected",true);
+            $("#rightzhongyongyuanytj").val(data.rightyytj);
+            if (data.rightyytj != ''){
+                document.getElementById("rightzhongyongyuanytj").readOnly=true;
+            }
+            $("#rightzhongyongtg").val(data.righttg);
+            if (data.righttg != ''){
+                document.getElementById("rightzhongyongtg").readOnly=true;
+            }
+            $("#rightzhongyongVA").val(data.rightva);
+            if (data.rightva != ''){
+                document.getElementById("rightzhongyongVA").readOnly=true;
+            }
+            $("#leftZhongYongQJ").val(data.leftsph);
+            document.getElementById("leftZhongYongQJ").readOnly=true;
+            $("#leftZhongYongZJ").val(data.leftcyl);
+            document.getElementById("leftZhongYongZJ").readOnly=true;
+            $("#leftzhongyongzx").val(data.leftzx);
+            document.getElementById("leftzhongyongzx").readOnly=true;
+            $("#leftzhongyongslj").val(data.leftprism);
+            if (data.leftprism != ''){
+                document.getElementById("leftzhongyongslj").readOnly=true;
+            }
+            var leftjd = data.leftjd;
+            $("#leftzhongyongjd").find("[value='"+leftjd+"']").attr("selected",true);
+            $("#leftzhongyongyuanytj").val(data.leftyytj);
+            if (data.leftyytj != ''){
+                document.getElementById("leftzhongyongyuanytj").readOnly=true;
+            }
+            $("#leftzhongyongtg").val(data.lefttg);
+            if (data.lefttg != ''){
+                document.getElementById("leftzhongyongtg").readOnly=true;
+            }
+            $("#leftzhongyongVA").val(data.leftva);
+            if (data.leftva != ''){
+                document.getElementById("leftzhongyongVA").readOnly=true;
+            }
+		} else if (data.chufangType == 5){
+            $("#rightYinxingQJ").val(data.rightsph);
+            document.getElementById("rightYinxingQJ").readOnly=true;
+            $("#rightYinxingZJ").val(data.rightcyl);
+            document.getElementById("rightYinxingZJ").readOnly=true;
+            $("#rightYXzhouxiang").val(data.rightzx);
+            document.getElementById("rightYXzhouxiang").readOnly=true;
+            $("#rightSYjingpian").val(data.rightsyjp);
+            if (data.rightsyjp != ''){
+                document.getElementById("rightSYjingpian").readOnly=true;
+            }
+            $("#rightPian").val(data.rightunit);
+            if (data.rightunit != ''){
+                document.getElementById("rightPian").readOnly=true;
+            }
+            $("#leftYinxingQJ").val(data.leftsph);
+            document.getElementById("leftYinxingQJ").readOnly=true;
+            $("#leftYinxingZJ").val(data.leftcyl);
+            document.getElementById("leftYinxingZJ").readOnly=true;
+            $("#leftYXzhouxiang").val(data.leftzx);
+            document.getElementById("leftYXzhouxiang").readOnly=true;
+            $("#leftSYjingpian").val(data.leftsyjp);
+            if (data.leftsyjp != ''){
+                document.getElementById("leftSYjingpian").readOnly=true;
+            }
+            $("#leftPian").val(data.leftunit);
+            if (data.leftunit != ''){
+                document.getElementById("leftPian").readOnly=true;
+            }
+		} else if (data.chufangType == 7){
+            $("#rightShiJuexlQJ").val(data.rightsph);
+            document.getElementById("rightShiJuexlQJ").readOnly=true;
+            $("#rightShiJuexlZJ").val(data.rightcyl);
+            document.getElementById("rightShiJuexlZJ").readOnly=true;
+            $("#rightSJXLzx").val(data.rightzx);
+            document.getElementById("rightSJXLzx").readOnly=true;
+            $("#rightSJXLslj").val(data.rightprism);
+            if (data.rightprism != ''){
+                document.getElementById("rightSJXLslj").readOnly=true;
+            }
+            var rihtjd = data.rightjd;
+            $("#rightSJXLjidi").find("[value='"+rihtjd+"']").attr("selected",true);
+            $("#rightSJXLyytj").val(data.rightyytj);
+            if (data.rightyytj != ''){
+                document.getElementById("rightSJXLyytj").readOnly=true;
+            }
+            $("#rightSJXLjytj").val(data.rightjytj);
+            if (data.rightjytj != ''){
+                document.getElementById("rightSJXLjytj").readOnly=true;
+            }
+            $("#rightSJXLyyva").val(data.rightva);
+            if (data.rightva != ''){
+                document.getElementById("rightSJXLyyva").readOnly=true;
+            }
+            $("#rightSJXLjyva").val(data.rightjyva);
+            if (data.rightjyva != ''){
+                document.getElementById("rightSJXLjyva").readOnly=true;
+            }
+            $("#leftShiJuexlQJ").val(data.leftsph);
+            document.getElementById("leftShiJuexlQJ").readOnly=true;
+            $("#leftShiJuexlZJ").val(data.leftcyl);
+            document.getElementById("leftShiJuexlZJ").readOnly=true;
+            $("#leftSJXLzx").val(data.leftzx);
+            document.getElementById("leftSJXLzx").readOnly=true;
+            $("#leftSJXLslj").val(data.leftprism);
+            if (data.leftprism != ''){
+                document.getElementById("leftSJXLslj").readOnly=true;
+            }
+            var leftjd = data.leftjd;
+            $("#leftSJXLjidi").find("[value='"+leftjd+"']").attr("selected",true);
+            $("#leftSJXLyytj").val(data.leftyytj);
+            if (data.leftyytj != ''){
+                document.getElementById("leftSJXLyytj").readOnly=true;
+            }
+            $("#leftSJXLjytj").val(data.leftjytj);
+            if (data.leftjytj != ''){
+                document.getElementById("leftSJXLjytj").readOnly=true;
+            }
+            $("#leftSJXLyyva").val(data.leftva);
+            if (data.leftva != ''){
+                document.getElementById("leftSJXLyyva").readOnly=true;
+            }
+            $("#leftSJXLjyva").val(data.leftjyva);
+            if (data.leftjyva != ''){
+                document.getElementById("leftSJXLjyva").readOnly=true;
+            }
+		} else if (data.chufangType == 10){
+            $("#rightRGPqgd").val(data.rightqgd);
+            if (data.rightqgd != ''){
+                document.getElementById("rightRGPqgd").readOnly=true;
+			}
+            $("#rightRGPbc").val(data.rightbc);
+            if (data.rightbc != ''){
+                document.getElementById("rightRGPbc").readOnly=true;
+			}
+            $("#rightRGPdia").val(data.rightdia);
+            if (data.rightdia != ''){
+                document.getElementById("rightRGPdia").readOnly=true;
+			}
+            $("#rightRGPsg").val(data.rightsg);
+            if (data.rightsg != ''){
+                document.getElementById("rightRGPsg").readOnly=true;
+            }
+            $("#rightRGPtssj").val(data.righttssj);
+            if (data.righttssj != ''){
+                document.getElementById("rightRGPtssj").readOnly=true;
+            }
+
+            $("#leftRGPqgd").val(data.leftqgd);
+            document.getElementById("leftRGPqgd").readOnly=true;
+            $("#leftRGPbc").val(data.leftbc);
+            document.getElementById("leftRGPbc").readOnly=true;
+            $("#leftRGPdia").val(data.leftdia);
+            document.getElementById("leftRGPdia").readOnly=true;
+            $("#leftRGPsg").val(data.leftsg);
+            if (data.leftsg != ''){
+                document.getElementById("leftRGPsg").readOnly=true;
+            }
+            $("#leftRGPtssj").val(data.lefttssj);
+            if (data.lefttssj != ''){
+                document.getElementById("leftRGPtssj").readOnly=true;
+            }
+		}
+        // alert(obj);
+        // alert(JSON.stringify(obj));
+        // alert(obj.chufang);
+        // getType(5);
+
+	}
     //赠品
     var newGive=""
 	var give = [];

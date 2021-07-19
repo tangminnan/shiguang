@@ -54,7 +54,7 @@ public class SalesDO implements Serializable {
 	//数量
 	private String storeCount;
 	//销售备注
-	private String remark;
+	private String saleremark;
 	//赠品
 	private String giveName;
 	//是否有镜片
@@ -69,6 +69,59 @@ public class SalesDO implements Serializable {
 	private String outRecipel;
 	//处方类型
 	private Long recipelType;
+	//外来处方
+	private String chufang;
+	//手填处方的度数
+	//球镜OD
+	private Double rightQJ;
+	//柱镜OD
+	private Double rightZJ;
+	//轴向OD
+	private Double rightzhouxiang;
+	//三棱镜OD
+	private Double rightsanlingjing;
+	//基地OD
+	private String rightjidi;
+	//远用瞳距OD
+	private Double rightyuanyongtj;
+	//瞳高OD
+	private Double righttonggao;
+	//远用VA(OD)
+	private Double rightyuanyongVA;
+	//球镜OS
+	private Double leftQJ;
+	//柱镜OS
+	private Double leftZJ;
+	//轴向OS
+	private Double leftzhouxiang;
+	//三棱镜OS
+	private Double leftsanlingjing;
+	//基地OS
+	private String leftjidi;
+	//远用瞳距OD
+	private Double leftyuanyongtj;
+	//瞳高OS
+	private Double lefttonggao;
+	//远用VA(OS)
+	private Double leftyuanyongVA;
+	//备注
+	private String remark;
+	//旧瞳距
+	private Double oldtongju;
+	//片高
+	private Double piangao;
+	//片宽
+	private Double piankuan;
+	//中梁
+	private Double zhongliang;
+	//镜片通道
+	private Double jingpiantongdao;
+	//对角线
+	private Double duijiaoxian;
+	//框型
+	private String kuangxing;
+	//直径
+	private Double zhijing;
 
 	/**
 	 * 设置：主键
@@ -301,15 +354,11 @@ public class SalesDO implements Serializable {
 	/**
 	 * 设置：销售备注
 	 */
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+	public void setSaleremark(String saleremark) {this.saleremark = saleremark;}
 	/**
 	 * 获取：销售备注
 	 */
-	public String getRemark() {
-		return remark;
-	}
+	public String getSaleremark() {return saleremark;}
 	/**
 	 * 设置：赠品
 	 */
@@ -382,4 +431,217 @@ public class SalesDO implements Serializable {
 	public void setRecipelType(Long recipelType) {
 		this.recipelType = recipelType;
 	}
+	/**
+	 * 外来处方
+	 */
+	public void setChufang(String chufang){this.chufang = chufang;}
+	/**
+	 * 外来处方
+	 */
+	public String getChufang() {return chufang;}
+	/**
+	 * 球镜OD
+	 */
+	public void setRightQJ(Double rightQJ) {this.rightQJ = rightQJ;}
+	/**
+	 * 球镜OD
+	 */
+	public Double getRightQJ(){return rightQJ;}
+	/**
+	 * 柱镜OD
+	 */
+	public void setRightZJ(Double rightZJ) {this.rightZJ = rightZJ;}
+	/**
+	 * 柱镜OD
+	 */
+	public Double getRightZJ() {return rightZJ;}
+	/**
+	 * 轴向OD
+	 */
+	public void setRightzhouxiang(Double rightzhouxiang) {this.rightzhouxiang = rightzhouxiang;}
+	/**
+	 * 轴向OD
+	 */
+	public Double getRightzhouxiang(){return rightzhouxiang;}
+	/**
+	 * 三棱镜OD
+	 */
+	public void setRightsanlingjing(Double rightsanlingjing) {this.rightsanlingjing = rightsanlingjing;}
+	/**
+	 * 三棱镜OD
+	 */
+	public Double getRightsanlingjing() {return rightsanlingjing;}
+	/**
+	 * 基地OD
+	 */
+	public void setRightjidi(String rightjidi) {this.rightjidi = rightjidi;}
+	/**
+	 * 基地OD
+	 */
+	public String getRightjidi() {return rightjidi;}
+	/**
+	 * 远用瞳距OD
+	 */
+	public void setRightyuanyongtj(Double rightyuanyongtj) {this.rightyuanyongtj = rightyuanyongtj;}
+	/**
+	 * 远用瞳距OD
+	 */
+	public Double getRightyuanyongtj() {return rightyuanyongtj;}
+	/**
+	 * 瞳高OD
+	 */
+	public void setRighttonggao(Double righttonggao) {this.righttonggao = righttonggao;}
+	/**
+	 * 瞳高OD
+	 */
+	public Double getRighttonggao() {return righttonggao;}
+	/**
+	 * 远用VA(OD)
+	 */
+	public void setRightyuanyongVA(Double rightyuanyongVA) {this.rightyuanyongVA = rightyuanyongVA;}
+	/**
+	 * 远用VA(OD)
+	 */
+	public Double getRightyuanyongVA() {return rightyuanyongVA;}
+	/**
+	 * 球镜OS
+	 */
+	public void setLeftQJ(Double leftQJ){this.leftQJ = leftQJ;}
+	/**
+	 * 球镜OS
+	 */
+	public Double getLeftQJ() {return leftQJ;}
+	/**
+	 * 柱镜OS
+	 */
+	public void setLeftZJ(Double leftZJ) {this.leftZJ = leftZJ;}
+	/**
+	 * 柱镜OS
+	 */
+	public Double getLeftZJ() {return leftZJ;}
+	/**
+	 * 轴向OS
+	 */
+	public void setLeftzhouxiang(Double leftzhouxiang) {this.leftzhouxiang = leftzhouxiang;}
+	/**
+	 * 轴向OS
+	 */
+	public Double getLeftzhouxiang() {return leftzhouxiang;}
+	/**
+	 * 三棱镜OS
+	 */
+	public void setLeftsanlingjing(Double leftsanlingjing) {this.leftsanlingjing = leftsanlingjing;}
+	/**
+	 * 三棱镜OS
+	 */
+	public Double getLeftsanlingjing(){return leftsanlingjing;}
+	/**
+	 * 基地OS
+	 */
+	public void setLeftjidi(String leftjidi) {this.leftjidi = leftjidi;}
+	/**
+	 * 基地OS
+	 */
+	public String getLeftjidi() {return leftjidi;}
+	/**
+	 * 远用瞳距OS
+	 */
+	public void setLeftyuanyongtj(Double leftyuanyongtj) {this.leftyuanyongtj = leftyuanyongtj;}
+	/**
+	 * 远用瞳距OS
+	 */
+	public Double getLeftyuanyongtj(){return leftyuanyongtj;}
+	/**
+	 * 瞳高OS
+	 */
+	public void setLefttonggao(Double lefttonggao){this.lefttonggao = lefttonggao;}
+	/**
+	 * 瞳高OS
+	 */
+	public Double getLefttonggao(){return lefttonggao;}
+	/**
+	 * 远用VA(OS)
+	 */
+	public void setLeftyuanyongVA(Double leftyuanyongVA) {this.leftyuanyongVA = leftyuanyongVA;}
+	/**
+	 * 远用VA(OS)
+	 */
+	public Double getLeftyuanyongVA() {return leftyuanyongVA;}
+	/**
+	 * 获取：备注
+	 */
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	/**
+	 * 设置：备注
+	 */
+	public String getRemark() {
+		return remark;
+	}
+	/**
+	 * 旧瞳距
+	 */
+	public void setOldtongju(Double oldtongju) {this.oldtongju = oldtongju;}
+	/**
+	 * 旧瞳距
+	 */
+	public Double getOldtongju(){return oldtongju;}
+	/**
+	 * 片高
+	 */
+	public void setPiangao(Double piangao) {this.piangao = piangao;}
+	/**
+	 * 片高
+	 */
+	public Double getPiangao() {return piangao;}
+	/**
+	 * 片宽
+	 */
+	public void setPiankuan(Double piankuan) {this.piankuan = piankuan;}
+	/**
+	 * 片宽
+	 */
+	public Double getPiankuan() {return piankuan;}
+	/**
+	 * 中梁
+	 */
+	public void setZhongliang(Double zhongliang) {this.zhongliang = zhongliang;}
+	/**
+	 * 中梁
+	 */
+	public Double getZhongliang() {return zhongliang;}
+	/**
+	 * 镜片通道
+	 */
+	public void setJingpiantongdao(Double jingpiantongdao) {this.jingpiantongdao = jingpiantongdao;}
+	/**
+	 * 镜片通道
+	 */
+	public Double getJingpiantongdao(){return jingpiantongdao;}
+	/**
+	 * 对角线
+	 */
+	public void setDuijiaoxian(Double duijiaoxian) {this.duijiaoxian = duijiaoxian;}
+	/**
+	 * 对角线
+	 */
+	public Double getDuijiaoxian() {return duijiaoxian;}
+	/**
+	 * 框型
+	 */
+	public void setKuangxing(String kuangxing) {this.kuangxing = kuangxing;}
+	/**
+	 * 框型
+	 */
+	public String getKuangxing() {return kuangxing;}
+	/**
+	 * 直径
+	 */
+	public void setZhijing(Double zhijing) {this.zhijing = zhijing;}
+	/**
+	 * 直径
+	 */
+	public Double getZhijing(){return zhijing;}
+
 }
