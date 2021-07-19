@@ -12,89 +12,104 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商代码：</label>
                             <div class="col-sm-8">
-                                <input id="mfrsnum" name="mfrsnum" class="form-control" type="text">
+                                <input id="mfrsnum" name="mfrsnum" type="text">
                                 <span style="color: red">*制造商代码不能超过2位</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商简称：</label>
                             <div class="col-sm-8">
-                                <input id="mfrsname" name="mfrsname" class="form-control" type="text">
+                                <input id="mfrsname" name="mfrsname" type="text">
                                 <span style="color: red">*</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商联系人：</label>
                             <div class="col-sm-8">
-                                <input id="mfrscontacts" name="mfrscontacts" class="form-control" type="text">
+                                <input id="mfrscontacts" name="mfrscontacts" type="text">
                                 <span style="color: red">*</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商全称：</label>
                             <div class="col-sm-8">
-                                <input id="mfrsrealname" name="mfrsrealname" class="form-control" type="text">
+                                <input id="mfrsrealname" name="mfrsrealname" type="text">
                                 <span style="color: red">*</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商电话：</label>
                             <div class="col-sm-8">
-                                <input id="mfrstelephone" name="mfrstelephone" class="form-control" type="text">
+                                <input id="mfrstelephone" name="mfrstelephone" type="text">
                                 <span style="color: red">*如：022-85123455</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系人电话：</label>
                             <div class="col-sm-8">
-                                <input id="mfrsphone" name="mfrsphone" class="form-control" type="text">
+                                <input id="mfrsphone" name="mfrsphone" type="text">
                                 <span style="color: red">*如：022-85123455</span>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">商品类别：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="goodsid" name="goodsid" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">商品类别：</label>
                             <div class="col-sm-8">
                                 <select name="goodsid" id="goodsid" multiple class="selectpicker form-control"
                                         onchange="changeInterest()">
-                                    <!--<option></option>-->
                                     <option th:each="ls:${goodsDOList}"
                                             th:text="${ls.goodsname}"
                                             th:value="${ls.goodsid}"></option>
                                 </select>
-                                <input id="interest" name="interest" class="form-control" type="hidden">
+                                <input id="interest" name="interest" type="hidden">
                                 <span style="color: red">*</span>
                             </div>
                         </div>
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">商品类别：</label>-->
+                        <!--<td name="goodsid" id="goodsid">-->
+                        <!--<label><input type="checkbox" value="1"> 镜架 </label>-->
+                        <!--<label><input type="checkbox" value="2"> 配件</label>-->
+                        <!--<label><input type="checkbox" value="3"> 镜片 </label>-->
+                        <!--<label><input type="checkbox" value="4"> 隐形镜片 </label>-->
+                        <!--<label><input type="checkbox" value="5"> 隐形护理液 </label>-->
+                        <!--<label><input type="checkbox" value="6"> 太阳镜 </label>-->
+                        <!--<label><input type="checkbox" value="7"> 老花镜 </label>-->
+                        <!--<label><input type="checkbox" value="8"> 耗材 </label>-->
+                        <!--<label><input type="checkbox" value="9"> 视光 </label>-->
+                        <!--</td>-->
+                        <!--&lt;!&ndash;<select name="goodsid" id="goodsid" multiple class="selectpicker form-control"&ndash;&gt;-->
+                        <!--&lt;!&ndash;onchange="changeInterest()">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option th:each="ls:${goodsDOList}"&ndash;&gt;-->
+                        <!--&lt;!&ndash;th:text="${ls.goodsname}"&ndash;&gt;-->
+                        <!--&lt;!&ndash;th:value="${ls.goodsid}"></option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                        <!--<input id="interest" name="interest" type="hidden">-->
+                        <!--<span style="color: red">*</span>-->
+                        <!--</div>-->
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商传真：</label>
                             <div class="col-sm-8">
-                                <input id="mfrsfax" name="mfrsfax" class="form-control" type="text">
+                                <input id="mfrsfax" name="mfrsfax" type="text">
                                 <span style="color: red">*如：022-85123455</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商地址：</label>
                             <div class="col-sm-8">
-                                <input id="mfrsaddress" name="mfrsaddress" class="form-control" type="text">
+                                <input id="mfrsaddress" name="mfrsaddress" type="text">
                             </div>
                         </div>
                         <!--<div class="form-group">	-->
                         <!--<label class="col-sm-3 control-label">采购结算方式：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input id="payid" name="payid" class="form-control" type="text">-->
+                        <!--<input id="payid" name="payid"   type="text">-->
                         <!--</div>-->
                         <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">采购结算方式：</label>
                             <div class="col-sm-8">
-                                <select id="payid" name="payid" class="form-control">
+                                <select id="payid" name="payid">
                                     <option></option>
                                     <option th:each="ls:${payDOList}"
                                             th:text="${ls.paymethod}"
@@ -117,43 +132,43 @@
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">统一社会信用代码：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input id="creditcode" name="creditcode" class="form-control" type="text">-->
+                        <!--<input id="creditcode" name="creditcode"   type="text">-->
                         <!--</div>-->
                         <!--</div>-->
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">统一社会信用代码效期：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input id="creditcodeday" name="creditcodeday" class="form-control" type="text">-->
+                        <!--<input id="creditcodeday" name="creditcodeday"   type="text">-->
                         <!--</div>-->
                         <!--</div>-->
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">医疗器械经营许可证号：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input id="medicinecode" name="medicinecode" class="form-control" type="text">-->
+                        <!--<input id="medicinecode" name="medicinecode"   type="text">-->
                         <!--</div>-->
                         <!--</div>-->
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">医疗器械经营许可证有效期：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input id="medicinecodeday" name="medicinecodeday" class="form-control" type="text">-->
+                        <!--<input id="medicinecodeday" name="medicinecodeday"   type="text">-->
                         <!--</div>-->
                         <!--</div>-->
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">全国工业品生产许可证号：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input id="productscode" name="productscode" class="form-control" type="text">-->
+                        <!--<input id="productscode" name="productscode"   type="text">-->
                         <!--</div>-->
                         <!--</div>-->
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">全国工业品生产许可证有效期：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input id="productscodeday" name="productscodeday" class="form-control" type="text">-->
+                        <!--<input id="productscodeday" name="productscodeday"   type="text">-->
                         <!--</div>-->
                         <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">备注：</label>
                             <div class="col-sm-8">
-                                <input id="remarks" name="remarks" class="form-control" type="text">
+                                <input id="remarks" name="remarks" type="text">
 
                             </div>
                         </div>
@@ -172,17 +187,17 @@
 <script type="text/javascript" src="/js/appjs/mfrs/mfrs/add.js">
 </script>
 
-<script>
-    function changeInterest() {
-        var interester = [];
-        var obj = document.getElementById("goodsid");
-        for (var i = 0; i < obj.options.length; i++) {
-            if (obj.options[i].selected) {
-                interester.push(obj.options[i].value);// 收集选中项
-            }
-        }
-        $("#interest").val(interester);
-    }
-</script>
+<!--<script>-->
+<!--function changeInterest() {-->
+<!--var interester = [];-->
+<!--var obj = document.getElementById("goodsid");-->
+<!--for (var i = 0; i < obj.options.length; i++) {-->
+<!--if (obj.options[i].selected) {-->
+<!--interester.push(obj.options[i].value);// 收集选中项-->
+<!--}-->
+<!--}-->
+<!--$("#interest").val(interester);-->
+<!--}-->
+<!--</script>-->
 </body>
 </html>

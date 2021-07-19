@@ -56,6 +56,18 @@ function load() {
 									title : '卡号' 
 								},
 																{
+									field : 'ptometryNumber', 
+									title : '验光号' 
+								},
+																{
+									field : 'optometryName', 
+									title : '验光师' 
+								},
+																{
+									field : 'createTime', 
+									title : '创建时间' 
+								},
+																{
 									field : 'cbzdZg', 
 									title : '正规' 
 								},
@@ -210,6 +222,18 @@ function load() {
 																{
 									field : 'yizhu', 
 									title : '医嘱' 
+								},
+																{
+									field : 'way', 
+									title : '戴镜方式' 
+								},
+																{
+									field : 'followTime', 
+									title : '复诊时间' 
+								},
+																{
+									field : 'visitType', 
+									title : '复诊类型' 
 								},
 																{
 									title : '操作',

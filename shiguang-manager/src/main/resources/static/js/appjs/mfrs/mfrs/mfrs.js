@@ -167,7 +167,7 @@ function load() {
                             var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
                                 + row.mfrsid
                                 + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d  ;
+                            return e + d;
                         }
                     }]
             });
@@ -179,12 +179,12 @@ function reLoad() {
 
 function add() {
     var toIndex = layer.open({
-        type : 2,
-        title : '增加',
-        maxmin : true,
-        shadeClose : false, // 点击遮罩关闭层
-        area : [ '800px', '520px' ],
-        content : prefix + '/add' // iframe的url
+        type: 2,
+        title: '增加',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/add' // iframe的url
     });
     layer.full(toIndex);
 }
@@ -281,29 +281,29 @@ function stop(status) {
         return;
     }
     var msg;
-    if (status == 0){
+    if (status == 0) {
         msg = "确认要停用选中的"
-    } else if (status == 1){
+    } else if (status == 1) {
         msg = "确认要启用选中的"
     }
-    layer.confirm(msg+"'" + rows.length + "'条数据吗?", {
-        btn : [ '确定', '取消' ]
+    layer.confirm(msg + "'" + rows.length + "'条数据吗?", {
+        btn: ['确定', '取消']
         // 按钮
-    }, function() {
+    }, function () {
         var ids = new Array();
         // 遍历所有选择的行数据，取每条数据对应的ID
-        $.each(rows, function(i, row) {
+        $.each(rows, function (i, row) {
             ids[i] = row['id'];
         });
 
         $.ajax({
-            type : 'POST',
-            data : {
-                "ids" : ids,
-                "status" : status
+            type: 'POST',
+            data: {
+                "ids": ids,
+                "status": status
             },
-            url : prefix + '/stop',
-            success : function(r) {
+            url: prefix + '/stop',
+            success: function (r) {
                 if (r.code == 0) {
                     layer.msg(r.msg);
                     reLoad();
@@ -312,7 +312,13 @@ function stop(status) {
                 }
             }
         });
-    }, function() {
+    }, function () {
 
     });
 }
+
+//选择制造商
+function batchSelect() {
+    var rows = $("#exampleTable").bootstrapTable("getSelections");
+    return rows;
+};

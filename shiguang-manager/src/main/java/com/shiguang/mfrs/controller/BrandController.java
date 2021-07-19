@@ -1,33 +1,20 @@
 package com.shiguang.mfrs.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.shiguang.common.utils.PageUtils;
+import com.shiguang.common.utils.Query;
+import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.*;
 import com.shiguang.mfrs.service.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 品牌维护表
@@ -78,7 +65,7 @@ public class BrandController {
     //支付方式
     @Autowired
     private PayService payService;
-//    //制造商商品表
+    //    //制造商商品表
 //    @Autowired
 //    private MgService mgService;
     //状态
@@ -90,10 +77,10 @@ public class BrandController {
     String Brand(Model model) {
         Map<String, Object> map = new HashMap<>();
         //品牌
-        List<BrandDO> brandDOList =brandService .list(map);
+        List<BrandDO> brandDOList = brandService.list(map);
         model.addAttribute("brandDOList", brandDOList);
         //商品类别
-        List<GoodsDO> goodsDOList =goodsService .list(map);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         //制造商
         List<MfrsDO> mfrsDOList = mfrsService.list(map);
@@ -217,23 +204,7 @@ public class BrandController {
     @PostMapping("/save")
     @RequiresPermissions("mfrs:brand:add")
     public R save(BrandDO brand) {
-
-//        //判断是否已存在
-//        Integer mfrsid = brand.getMfrsid();
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("mfrsid", mfrsid);
-//        List<BrandDO> list = brandService.list(map);
-//        if (list.size() > 0) {
-//            String brandnum = brand.getBrandnum();
-//            Map<String, Object> map1 = new HashMap<>();
-//            map.put("brandnum", brandnum);
-//            List<BrandDO> list1 = brandService.list(map1);
-//            if (list1.size()>0)
-//                return R.error("该品牌制造商已存在");
-//        }
-
         if (brandService.save(brand) > 0) {
-
             //获取制造商中的商品id,依次循环遍历，保存到关系表中，走两个保存方法
 //            String[] str = mfrs.getGoodsid().split(",");
 //            for (int i=0; i<str.length;i++){
@@ -242,11 +213,6 @@ public class BrandController {
 //                mgDO.setGoodsid(Integer.parseInt(str[i]));
 //                mgService.save(mgDO);
 //            }
-
-
-
-
-
             return R.ok();
         }
         return R.error();
@@ -294,6 +260,29 @@ public class BrandController {
         List<GoodsDO> goodsDOList = brandService.caidan(mfrsid);
         model.addAttribute("goodsDOList", goodsDOList);
         return goodsDOList;
+    }
+
+
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("mfrs:brand:findmfrs")
+    String findmfrs() {
+        return "mfrs/brand/findmfrs";
+    }
+
+    /**
+     * 制造商
+     */
+    @ResponseBody
+    @GetMapping("/findmfrslist")
+    @RequiresPermissions("mfrs:brand:findmfrs")
+    public PageUtils findmfrslist(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> findmfrslist = mfrsService.findmfrs(query);
+        int total = mfrsService.countmfrs(query);
+        PageUtils pageUtils = new PageUtils(findmfrslist, total);
+        return pageUtils;
     }
 
 }

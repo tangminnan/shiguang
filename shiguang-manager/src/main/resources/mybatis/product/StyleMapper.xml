@@ -3,38 +3,38 @@
 
 <mapper namespace="com.shiguang.product.dao.StyleDao">
 
-	<select id="get" resultType="com.shiguang.product.domain.StyleDO">
+    <select id="get" resultType="com.shiguang.product.domain.StyleDO">
 		select `style_id`,`style` from a_style where style_id = #{value}
 	</select>
 
-	<select id="list" resultType="com.shiguang.product.domain.StyleDO">
-		select `style_id`,`style` from a_style
-        <where>  
-		  		  <if test="styleId != null and styleId != ''"> and style_id = #{styleId} </if>
-		  		  <if test="style != null and style != ''"> and style = #{style} </if>
-		  		</where>
+    <select id="list" resultType="com.shiguang.product.domain.StyleDO">
+        select `style_id`,`style` from a_style
+        <where>
+            <if test="styleId != null and styleId != ''">and style_id = #{styleId}</if>
+            <if test="style != null and style != ''">and style = #{style}</if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
-                order by style_id desc
-			</otherwise>
+            <otherwise>
+                order by style_id
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from a_style
-		 <where>  
-		  		  <if test="styleId != null and styleId != ''"> and style_id = #{styleId} </if>
-		  		  <if test="style != null and style != ''"> and style = #{style} </if>
-		  		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.shiguang.product.domain.StyleDO" useGeneratedKeys="true" keyProperty="styleId">
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from a_style
+        <where>
+            <if test="styleId != null and styleId != ''">and style_id = #{styleId}</if>
+            <if test="style != null and style != ''">and style = #{style}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.product.domain.StyleDO" useGeneratedKeys="true" keyProperty="styleId">
 		insert into a_style
 		(
 			`style`
@@ -44,24 +44,24 @@
 			#{style}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="com.shiguang.product.domain.StyleDO">
-		update a_style 
-		<set>
-			<if test="style != null">`style` = #{style}</if>
-		</set>
-		where style_id = #{styleId}
-	</update>
-	
-	<delete id="remove">
+
+    <update id="update" parameterType="com.shiguang.product.domain.StyleDO">
+        update a_style
+        <set>
+            <if test="style != null">`style` = #{style}</if>
+        </set>
+        where style_id = #{styleId}
+    </update>
+
+    <delete id="remove">
 		delete from a_style where style_id = #{value}
 	</delete>
-	
-	<delete id="batchRemove">
-		delete from a_style where style_id in 
-		<foreach item="styleId" collection="array" open="(" separator="," close=")">
-			#{styleId}
-		</foreach>
-	</delete>
+
+    <delete id="batchRemove">
+        delete from a_style where style_id in
+        <foreach item="styleId" collection="array" open="(" separator="," close=")">
+            #{styleId}
+        </foreach>
+    </delete>
 
 </mapper>

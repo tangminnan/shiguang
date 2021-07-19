@@ -33,6 +33,11 @@ public class ShiguangServiceImpl implements ShiguangService {
     }
 
     @Override
+    public List<ShiguangDO> getshiguang(Map<String, Object> map) {
+        return shiguangDao.getshiguang(map);
+    }
+
+    @Override
     public int save(ShiguangDO shiguang) {
         return shiguangDao.save(shiguang);
     }

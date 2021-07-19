@@ -25,6 +25,10 @@ public interface ShiguangDao {
 
     int count(Map<String, Object> map);
 
+    //选择视觉训练-视光
+    List<ShiguangDO> getshiguang(Map<String, Object> map);
+
+
     int save(ShiguangDO shiguang);
 
     int update(ShiguangDO shiguang);

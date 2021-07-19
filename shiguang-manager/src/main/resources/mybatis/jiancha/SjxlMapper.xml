@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.SjxlDao">
+
+    <select id="get" resultType="com.shiguang.jiancha.domain.SjxlDO">
+		select `sjxl_id`,`card_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,`sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu` from jc_sjxl where sjxl_id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.jiancha.domain.SjxlDO">
+        select
+        `sjxl_id`,`card_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,`sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu`
+        from jc_sjxl
+        <where>
+            <if test="sjxlId != null and sjxlId != ''">and sjxl_id = #{sjxlId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="sjxlPrescriptionType != null and sjxlPrescriptionType != ''">and sjxl_prescription_type =
+                #{sjxlPrescriptionType}
+            </if>
+            <if test="sjxlDoctor != null and sjxlDoctor != ''">and sjxl_doctor = #{sjxlDoctor}</if>
+            <if test="sjxlOptometryName != null and sjxlOptometryName != ''">and sjxl_optometry_name =
+                #{sjxlOptometryName}
+            </if>
+            <if test="sjxlSphod != null and sjxlSphod != ''">and sjxl_sphod = #{sjxlSphod}</if>
+            <if test="sjxlSphos != null and sjxlSphos != ''">and sjxl_sphos = #{sjxlSphos}</if>
+            <if test="sjxlCylod != null and sjxlCylod != ''">and sjxl_cylod = #{sjxlCylod}</if>
+            <if test="sjxlCylos != null and sjxlCylos != ''">and sjxl_cylos = #{sjxlCylos}</if>
+            <if test="sjxlAxialod != null and sjxlAxialod != ''">and sjxl_axialod = #{sjxlAxialod}</if>
+            <if test="sjxlAxialos != null and sjxlAxialos != ''">and sjxl_axialos = #{sjxlAxialos}</if>
+            <if test="sjxlSljod != null and sjxlSljod != ''">and sjxl_sljod = #{sjxlSljod}</if>
+            <if test="sjxlSljos != null and sjxlSljos != ''">and sjxl_sljos = #{sjxlSljos}</if>
+            <if test="sjxlJdod != null and sjxlJdod != ''">and sjxl_jdod = #{sjxlJdod}</if>
+            <if test="sjxlJdos != null and sjxlJdos != ''">and sjxl_jdos = #{sjxlJdos}</if>
+            <if test="sjxlYytjod != null and sjxlYytjod != ''">and sjxl_yytjod = #{sjxlYytjod}</if>
+            <if test="sjxlYytjos != null and sjxlYytjos != ''">and sjxl_yytjos = #{sjxlYytjos}</if>
+            <if test="sjxlJytjod != null and sjxlJytjod != ''">and sjxl_jytjod = #{sjxlJytjod}</if>
+            <if test="sjxlJytjos != null and sjxlJytjos != ''">and sjxl_jytjos = #{sjxlJytjos}</if>
+            <if test="sjxlYyvaod != null and sjxlYyvaod != ''">and sjxl_yyvaod = #{sjxlYyvaod}</if>
+            <if test="sjxlYyvaos != null and sjxlYyvaos != ''">and sjxl_yyvaos = #{sjxlYyvaos}</if>
+            <if test="sjxlJyvaod != null and sjxlJyvaod != ''">and sjxl_jyvaod = #{sjxlJyvaod}</if>
+            <if test="sjxlJyvaos != null and sjxlJyvaos != ''">and sjxl_jyvaos = #{sjxlJyvaos}</if>
+            <if test="sjxlJtxl != null and sjxlJtxl != ''">and sjxl_jtxl = #{sjxlJtxl}</if>
+            <if test="sjxlXlsxl != null and sjxlXlsxl != ''">and sjxl_xlsxl = #{sjxlXlsxl}</if>
+            <if test="sjxlBeizhu != null and sjxlBeizhu != ''">and sjxl_beizhu = #{sjxlBeizhu}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by sjxl_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from jc_sjxl
+        <where>
+            <if test="sjxlId != null and sjxlId != ''">and sjxl_id = #{sjxlId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="sjxlPrescriptionType != null and sjxlPrescriptionType != ''">and sjxl_prescription_type =
+                #{sjxlPrescriptionType}
+            </if>
+            <if test="sjxlDoctor != null and sjxlDoctor != ''">and sjxl_doctor = #{sjxlDoctor}</if>
+            <if test="sjxlOptometryName != null and sjxlOptometryName != ''">and sjxl_optometry_name =
+                #{sjxlOptometryName}
+            </if>
+            <if test="sjxlSphod != null and sjxlSphod != ''">and sjxl_sphod = #{sjxlSphod}</if>
+            <if test="sjxlSphos != null and sjxlSphos != ''">and sjxl_sphos = #{sjxlSphos}</if>
+            <if test="sjxlCylod != null and sjxlCylod != ''">and sjxl_cylod = #{sjxlCylod}</if>
+            <if test="sjxlCylos != null and sjxlCylos != ''">and sjxl_cylos = #{sjxlCylos}</if>
+            <if test="sjxlAxialod != null and sjxlAxialod != ''">and sjxl_axialod = #{sjxlAxialod}</if>
+            <if test="sjxlAxialos != null and sjxlAxialos != ''">and sjxl_axialos = #{sjxlAxialos}</if>
+            <if test="sjxlSljod != null and sjxlSljod != ''">and sjxl_sljod = #{sjxlSljod}</if>
+            <if test="sjxlSljos != null and sjxlSljos != ''">and sjxl_sljos = #{sjxlSljos}</if>
+            <if test="sjxlJdod != null and sjxlJdod != ''">and sjxl_jdod = #{sjxlJdod}</if>
+            <if test="sjxlJdos != null and sjxlJdos != ''">and sjxl_jdos = #{sjxlJdos}</if>
+            <if test="sjxlYytjod != null and sjxlYytjod != ''">and sjxl_yytjod = #{sjxlYytjod}</if>
+            <if test="sjxlYytjos != null and sjxlYytjos != ''">and sjxl_yytjos = #{sjxlYytjos}</if>
+            <if test="sjxlJytjod != null and sjxlJytjod != ''">and sjxl_jytjod = #{sjxlJytjod}</if>
+            <if test="sjxlJytjos != null and sjxlJytjos != ''">and sjxl_jytjos = #{sjxlJytjos}</if>
+            <if test="sjxlYyvaod != null and sjxlYyvaod != ''">and sjxl_yyvaod = #{sjxlYyvaod}</if>
+            <if test="sjxlYyvaos != null and sjxlYyvaos != ''">and sjxl_yyvaos = #{sjxlYyvaos}</if>
+            <if test="sjxlJyvaod != null and sjxlJyvaod != ''">and sjxl_jyvaod = #{sjxlJyvaod}</if>
+            <if test="sjxlJyvaos != null and sjxlJyvaos != ''">and sjxl_jyvaos = #{sjxlJyvaos}</if>
+            <if test="sjxlJtxl != null and sjxlJtxl != ''">and sjxl_jtxl = #{sjxlJtxl}</if>
+            <if test="sjxlXlsxl != null and sjxlXlsxl != ''">and sjxl_xlsxl = #{sjxlXlsxl}</if>
+            <if test="sjxlBeizhu != null and sjxlBeizhu != ''">and sjxl_beizhu = #{sjxlBeizhu}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.jiancha.domain.SjxlDO" useGeneratedKeys="true" keyProperty="sjxlId">
+		insert into jc_sjxl
+		(
+			`card_number`, 
+			`sjxl_prescription_type`, 
+			`sjxl_doctor`, 
+			`sjxl_optometry_name`, 
+			`sjxl_sphod`, 
+			`sjxl_sphos`, 
+			`sjxl_cylod`, 
+			`sjxl_cylos`, 
+			`sjxl_axialod`, 
+			`sjxl_axialos`, 
+			`sjxl_sljod`, 
+			`sjxl_sljos`, 
+			`sjxl_jdod`, 
+			`sjxl_jdos`, 
+			`sjxl_yytjod`, 
+			`sjxl_yytjos`, 
+			`sjxl_jytjod`, 
+			`sjxl_jytjos`, 
+			`sjxl_yyvaod`, 
+			`sjxl_yyvaos`, 
+			`sjxl_jyvaod`, 
+			`sjxl_jyvaos`, 
+			`sjxl_jtxl`, 
+			`sjxl_xlsxl`, 
+			`sjxl_beizhu`
+		)
+		values
+		(
+			#{cardNumber}, 
+			#{sjxlPrescriptionType}, 
+			#{sjxlDoctor}, 
+			#{sjxlOptometryName}, 
+			#{sjxlSphod}, 
+			#{sjxlSphos}, 
+			#{sjxlCylod}, 
+			#{sjxlCylos}, 
+			#{sjxlAxialod}, 
+			#{sjxlAxialos}, 
+			#{sjxlSljod}, 
+			#{sjxlSljos}, 
+			#{sjxlJdod}, 
+			#{sjxlJdos}, 
+			#{sjxlYytjod}, 
+			#{sjxlYytjos}, 
+			#{sjxlJytjod}, 
+			#{sjxlJytjos}, 
+			#{sjxlYyvaod}, 
+			#{sjxlYyvaos}, 
+			#{sjxlJyvaod}, 
+			#{sjxlJyvaos}, 
+			#{sjxlJtxl}, 
+			#{sjxlXlsxl}, 
+			#{sjxlBeizhu}
+		)
+	</insert>
+    <insert id="saveSjxl" parameterType="com.shiguang.jiancha.dao.ResultDao" useGeneratedKeys="true"
+            keyProperty="sjxlId">
+		insert into jc_sjxl
+		(
+			`card_number`,
+			`sjxl_prescription_type`,
+			`sjxl_doctor`,
+			`sjxl_optometry_name`,
+			`sjxl_sphod`,
+			`sjxl_sphos`,
+			`sjxl_cylod`,
+			`sjxl_cylos`,
+			`sjxl_axialod`,
+			`sjxl_axialos`,
+			`sjxl_sljod`,
+			`sjxl_sljos`,
+			`sjxl_jdod`,
+			`sjxl_jdos`,
+			`sjxl_yytjod`,
+			`sjxl_yytjos`,
+			`sjxl_jytjod`,
+			`sjxl_jytjos`,
+			`sjxl_yyvaod`,
+			`sjxl_yyvaos`,
+			`sjxl_jyvaod`,
+			`sjxl_jyvaos`,
+			`sjxl_jtxl`,
+			`sjxl_xlsxl`,
+			`sjxl_beizhu`
+		)
+		values
+		(
+			#{cardNumber},
+			#{sjxlPrescriptionType},
+			#{sjxlDoctor},
+			#{sjxlOptometryName},
+			#{sjxlSphod},
+			#{sjxlSphos},
+			#{sjxlCylod},
+			#{sjxlCylos},
+			#{sjxlAxialod},
+			#{sjxlAxialos},
+			#{sjxlSljod},
+			#{sjxlSljos},
+			#{sjxlJdod},
+			#{sjxlJdos},
+			#{sjxlYytjod},
+			#{sjxlYytjos},
+			#{sjxlJytjod},
+			#{sjxlJytjos},
+			#{sjxlYyvaod},
+			#{sjxlYyvaos},
+			#{sjxlJyvaod},
+			#{sjxlJyvaos},
+			#{sjxlJtxl},
+			#{sjxlXlsxl},
+			#{sjxlBeizhu}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.jiancha.domain.SjxlDO">
+        update jc_sjxl
+        <set>
+            <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+            <if test="sjxlPrescriptionType != null">`sjxl_prescription_type` = #{sjxlPrescriptionType},</if>
+            <if test="sjxlDoctor != null">`sjxl_doctor` = #{sjxlDoctor},</if>
+            <if test="sjxlOptometryName != null">`sjxl_optometry_name` = #{sjxlOptometryName},</if>
+            <if test="sjxlSphod != null">`sjxl_sphod` = #{sjxlSphod},</if>
+            <if test="sjxlSphos != null">`sjxl_sphos` = #{sjxlSphos},</if>
+            <if test="sjxlCylod != null">`sjxl_cylod` = #{sjxlCylod},</if>
+            <if test="sjxlCylos != null">`sjxl_cylos` = #{sjxlCylos},</if>
+            <if test="sjxlAxialod != null">`sjxl_axialod` = #{sjxlAxialod},</if>
+            <if test="sjxlAxialos != null">`sjxl_axialos` = #{sjxlAxialos},</if>
+            <if test="sjxlSljod != null">`sjxl_sljod` = #{sjxlSljod},</if>
+            <if test="sjxlSljos != null">`sjxl_sljos` = #{sjxlSljos},</if>
+            <if test="sjxlJdod != null">`sjxl_jdod` = #{sjxlJdod},</if>
+            <if test="sjxlJdos != null">`sjxl_jdos` = #{sjxlJdos},</if>
+            <if test="sjxlYytjod != null">`sjxl_yytjod` = #{sjxlYytjod},</if>
+            <if test="sjxlYytjos != null">`sjxl_yytjos` = #{sjxlYytjos},</if>
+            <if test="sjxlJytjod != null">`sjxl_jytjod` = #{sjxlJytjod},</if>
+            <if test="sjxlJytjos != null">`sjxl_jytjos` = #{sjxlJytjos},</if>
+            <if test="sjxlYyvaod != null">`sjxl_yyvaod` = #{sjxlYyvaod},</if>
+            <if test="sjxlYyvaos != null">`sjxl_yyvaos` = #{sjxlYyvaos},</if>
+            <if test="sjxlJyvaod != null">`sjxl_jyvaod` = #{sjxlJyvaod},</if>
+            <if test="sjxlJyvaos != null">`sjxl_jyvaos` = #{sjxlJyvaos},</if>
+            <if test="sjxlJtxl != null">`sjxl_jtxl` = #{sjxlJtxl},</if>
+            <if test="sjxlXlsxl != null">`sjxl_xlsxl` = #{sjxlXlsxl},</if>
+            <if test="sjxlBeizhu != null">`sjxl_beizhu` = #{sjxlBeizhu}</if>
+        </set>
+        where sjxl_id = #{sjxlId}
+    </update>
+
+    <delete id="remove">
+		delete from jc_sjxl where sjxl_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from jc_sjxl where sjxl_id in
+        <foreach item="sjxlId" collection="array" open="(" separator="," close=")">
+            #{sjxlId}
+        </foreach>
+    </delete>
+
+</mapper>

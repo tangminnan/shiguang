@@ -10,7 +10,7 @@ import java.util.Map;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-07-12 17:47:08
+ * @date 2021-07-16 15:03:42
  */
 public interface ResultService {
 	

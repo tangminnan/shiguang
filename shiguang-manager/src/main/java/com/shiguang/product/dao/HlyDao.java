@@ -23,6 +23,8 @@ public interface HlyDao {
 
     List<HlyDO> list(Map<String, Object> map);
 
+    List<HlyDO> gethly(Map<String, Object> map);
+
     int count(Map<String, Object> map);
 
     int save(HlyDO hly);

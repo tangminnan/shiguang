@@ -4,14 +4,17 @@
 <mapper namespace="com.shiguang.jiancha.dao.ResultDao">
 
 	<select id="get" resultType="com.shiguang.jiancha.domain.ResultDO">
-		select `id`,`card_number`,`cbzd_zg`,`cbzd_ysy`,`cbzd_jsy`,`cbzd_sg`,`cbzd_qgcc`,`cbzd_rs`,`cbzd_xs`,`cbzd_ls`,`cbzd_yqzc`,`cbzd_dsl`,`cbzd_bz`,`cbzd_sypg`,`kjyj`,`kjyj_fqm`,`kjyj_qm`,`kjyj_jjdjd`,`kjyj_bsp`,`kjyj_flg`,`kjyj_zblj`,`jmjcj`,`jmjcj_ok`,`jmjcj_rgb`,`jmjcj_sg`,`jmjcj_ctx`,`jmjcj_pqx`,`jmjcj_zblj`,`sjxl`,`sjxl_tjxl`,`sjxl_rxxl`,`sjxl_jxxl`,`sjxl_srzxl`,`sjxl_jqskxl`,`sjxl_jqjhxl`,`sjxl_jqtjfsxl`,`yjjkyyxw`,`dslzsqjp`,`rszgfs`,`yyws`,`yizhu` from jc_result where id = #{value}
+		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`cbzd_zg`,`cbzd_ysy`,`cbzd_jsy`,`cbzd_sg`,`cbzd_qgcc`,`cbzd_rs`,`cbzd_xs`,`cbzd_ls`,`cbzd_yqzc`,`cbzd_dsl`,`cbzd_bz`,`cbzd_sypg`,`kjyj`,`kjyj_fqm`,`kjyj_qm`,`kjyj_jjdjd`,`kjyj_bsp`,`kjyj_flg`,`kjyj_zblj`,`jmjcj`,`jmjcj_ok`,`jmjcj_rgb`,`jmjcj_sg`,`jmjcj_ctx`,`jmjcj_pqx`,`jmjcj_zblj`,`sjxl`,`sjxl_tjxl`,`sjxl_rxxl`,`sjxl_jxxl`,`sjxl_srzxl`,`sjxl_jqskxl`,`sjxl_jqjhxl`,`sjxl_jqtjfsxl`,`yjjkyyxw`,`dslzsqjp`,`rszgfs`,`yyws`,`yizhu`,`way`,`follow_time`,`visit_type` from jc_result where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.jiancha.domain.ResultDO">
-		select `id`,`card_number`,`cbzd_zg`,`cbzd_ysy`,`cbzd_jsy`,`cbzd_sg`,`cbzd_qgcc`,`cbzd_rs`,`cbzd_xs`,`cbzd_ls`,`cbzd_yqzc`,`cbzd_dsl`,`cbzd_bz`,`cbzd_sypg`,`kjyj`,`kjyj_fqm`,`kjyj_qm`,`kjyj_jjdjd`,`kjyj_bsp`,`kjyj_flg`,`kjyj_zblj`,`jmjcj`,`jmjcj_ok`,`jmjcj_rgb`,`jmjcj_sg`,`jmjcj_ctx`,`jmjcj_pqx`,`jmjcj_zblj`,`sjxl`,`sjxl_tjxl`,`sjxl_rxxl`,`sjxl_jxxl`,`sjxl_srzxl`,`sjxl_jqskxl`,`sjxl_jqjhxl`,`sjxl_jqtjfsxl`,`yjjkyyxw`,`dslzsqjp`,`rszgfs`,`yyws`,`yizhu` from jc_result
+		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`cbzd_zg`,`cbzd_ysy`,`cbzd_jsy`,`cbzd_sg`,`cbzd_qgcc`,`cbzd_rs`,`cbzd_xs`,`cbzd_ls`,`cbzd_yqzc`,`cbzd_dsl`,`cbzd_bz`,`cbzd_sypg`,`kjyj`,`kjyj_fqm`,`kjyj_qm`,`kjyj_jjdjd`,`kjyj_bsp`,`kjyj_flg`,`kjyj_zblj`,`jmjcj`,`jmjcj_ok`,`jmjcj_rgb`,`jmjcj_sg`,`jmjcj_ctx`,`jmjcj_pqx`,`jmjcj_zblj`,`sjxl`,`sjxl_tjxl`,`sjxl_rxxl`,`sjxl_jxxl`,`sjxl_srzxl`,`sjxl_jqskxl`,`sjxl_jqjhxl`,`sjxl_jqtjfsxl`,`yjjkyyxw`,`dslzsqjp`,`rszgfs`,`yyws`,`yizhu`,`way`,`follow_time`,`visit_type` from jc_result
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		  		  <if test="optometryName != null and optometryName != ''"> and optometry_name = #{optometryName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="cbzdZg != null and cbzdZg != ''"> and cbzd_zg = #{cbzdZg} </if>
 		  		  <if test="cbzdYsy != null and cbzdYsy != ''"> and cbzd_ysy = #{cbzdYsy} </if>
 		  		  <if test="cbzdJsy != null and cbzdJsy != ''"> and cbzd_jsy = #{cbzdJsy} </if>
@@ -51,6 +54,9 @@
 		  		  <if test="rszgfs != null and rszgfs != ''"> and rszgfs = #{rszgfs} </if>
 		  		  <if test="yyws != null and yyws != ''"> and yyws = #{yyws} </if>
 		  		  <if test="yizhu != null and yizhu != ''"> and yizhu = #{yizhu} </if>
+		  		  <if test="way != null and way != ''"> and way = #{way} </if>
+		  		  <if test="followTime != null and followTime != ''"> and follow_time = #{followTime} </if>
+		  		  <if test="visitType != null and visitType != ''"> and visit_type = #{visitType} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -70,6 +76,9 @@
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		  		  <if test="optometryName != null and optometryName != ''"> and optometry_name = #{optometryName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="cbzdZg != null and cbzdZg != ''"> and cbzd_zg = #{cbzdZg} </if>
 		  		  <if test="cbzdYsy != null and cbzdYsy != ''"> and cbzd_ysy = #{cbzdYsy} </if>
 		  		  <if test="cbzdJsy != null and cbzdJsy != ''"> and cbzd_jsy = #{cbzdJsy} </if>
@@ -109,6 +118,9 @@
 		  		  <if test="rszgfs != null and rszgfs != ''"> and rszgfs = #{rszgfs} </if>
 		  		  <if test="yyws != null and yyws != ''"> and yyws = #{yyws} </if>
 		  		  <if test="yizhu != null and yizhu != ''"> and yizhu = #{yizhu} </if>
+		  		  <if test="way != null and way != ''"> and way = #{way} </if>
+		  		  <if test="followTime != null and followTime != ''"> and follow_time = #{followTime} </if>
+		  		  <if test="visitType != null and visitType != ''"> and visit_type = #{visitType} </if>
 		  		</where>
 	</select>
 	 
@@ -116,6 +128,9 @@
 		insert into jc_result
 		(
 			`card_number`, 
+			`ptometry_number`, 
+			`optometry_name`, 
+			`create_time`, 
 			`cbzd_zg`, 
 			`cbzd_ysy`, 
 			`cbzd_jsy`, 
@@ -154,11 +169,17 @@
 			`dslzsqjp`, 
 			`rszgfs`, 
 			`yyws`, 
-			`yizhu`
+			`yizhu`, 
+			`way`, 
+			`follow_time`, 
+			`visit_type`
 		)
 		values
 		(
 			#{cardNumber}, 
+			#{ptometryNumber}, 
+			#{optometryName}, 
+			#{createTime}, 
 			#{cbzdZg}, 
 			#{cbzdYsy}, 
 			#{cbzdJsy}, 
@@ -197,7 +218,10 @@
 			#{dslzsqjp}, 
 			#{rszgfs}, 
 			#{yyws}, 
-			#{yizhu}
+			#{yizhu}, 
+			#{way}, 
+			#{followTime}, 
+			#{visitType}
 		)
 	</insert>
 	 
@@ -205,6 +229,9 @@
 		update jc_result 
 		<set>
 			<if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+			<if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber}, </if>
+			<if test="optometryName != null">`optometry_name` = #{optometryName}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="cbzdZg != null">`cbzd_zg` = #{cbzdZg}, </if>
 			<if test="cbzdYsy != null">`cbzd_ysy` = #{cbzdYsy}, </if>
 			<if test="cbzdJsy != null">`cbzd_jsy` = #{cbzdJsy}, </if>
@@ -243,7 +270,10 @@
 			<if test="dslzsqjp != null">`dslzsqjp` = #{dslzsqjp}, </if>
 			<if test="rszgfs != null">`rszgfs` = #{rszgfs}, </if>
 			<if test="yyws != null">`yyws` = #{yyws}, </if>
-			<if test="yizhu != null">`yizhu` = #{yizhu}</if>
+			<if test="yizhu != null">`yizhu` = #{yizhu}, </if>
+			<if test="way != null">`way` = #{way}, </if>
+			<if test="followTime != null">`follow_time` = #{followTime}, </if>
+			<if test="visitType != null">`visit_type` = #{visitType}</if>
 		</set>
 		where id = #{id}
 	</update>

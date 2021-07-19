@@ -4,10 +4,7 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.*;
-import com.shiguang.mfrs.service.LensService;
-import com.shiguang.mfrs.service.MfrsService;
-import com.shiguang.mfrs.service.RefractivityService;
-import com.shiguang.mfrs.service.UnitService;
+import com.shiguang.mfrs.service.*;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -57,7 +54,15 @@ public class JpcpController {
     //材料分类
     @Autowired
     private LensService lensService;
-
+    //光度分类
+    @Autowired
+    private LightService lightService;
+    //镜片功能
+    @Autowired
+    private FunctionService functionService;
+    //渐进片分类
+    @Autowired
+    private GradualService gradualService;
 
     @GetMapping()
     @RequiresPermissions("product:jpcp:jpcp")
@@ -105,6 +110,17 @@ public class JpcpController {
         //材料分类
         List<LensDO> lensDOList = lensService.list(map);
         model.addAttribute("lensDOList", lensDOList);
+        //光度分类
+        List<LightDO> lightDOList = lightService.list(map);
+        model.addAttribute("lightDOList", lightDOList);
+        //渐进片分类
+        List<GradualDO> gradualDOList = gradualService.list(map);
+        model.addAttribute("gradualDOList", gradualDOList);
+
+        //镜片功能
+        List<FunctionDO> functionDOList = functionService.list(map);
+        model.addAttribute("functionDOList", functionDOList);
+
         return "product/jpcp/add";
     }
 

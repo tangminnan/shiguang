@@ -12,6 +12,10 @@ import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.service.OcularEyesService;
 import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
+import com.shiguang.product.domain.HlyDO;
+import com.shiguang.product.domain.ShiguangDO;
+import com.shiguang.product.service.HlyService;
+import com.shiguang.product.service.ShiguangService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,6 +56,12 @@ public class OptometryNewController {
     //医嘱
     @Autowired
     private YizhuService yizhuService;
+    //护理液
+    @Autowired
+    private HlyService hlyService;
+    //视光-----视觉训练
+    @Autowired
+    private ShiguangService shiguangService;
 
 
     @GetMapping()
@@ -218,7 +228,8 @@ public class OptometryNewController {
 
 
 //————试戴镜结论————
-        List<TryresultsDO> trylist = tryresultsService.list(map);
+        //根据人查相对应的验光号医生时间等信息
+        List<TryresultsDO> trylist = tryresultsService.listUser(cardNumber);
         TryresultsDO tryresultsDO = new TryresultsDO();
         if (trylist.size() > 0) {
             //验光信息
@@ -283,18 +294,67 @@ public class OptometryNewController {
         return R.ok();
     }
 
+    //跳转医嘱页面
+    @GetMapping("/yizhu")
+    @RequiresPermissions("information:optometryNew:yizhu")
+    String yizhu() {
+        return "jiancha/yizhu/yizhu";
+    }
+
     /**
-     * 查询医嘱
+     * 选择医嘱
      */
     @ResponseBody
     @GetMapping("/yizhulist")
-    @RequiresPermissions("information:optometryNew:yizhulist")
+    @RequiresPermissions("information:optometryNew:yizhu")
     public PageUtils yizhulist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<YizhuDO> yizhuList = yizhuService.findYizhu(query);
+        List<YizhuDO> yizhulist = yizhuService.findYizhu(query);
         int total = yizhuService.countYizhu(query);
-        PageUtils pageUtils = new PageUtils(yizhuList, total);
+        PageUtils pageUtils = new PageUtils(yizhulist, total);
         return pageUtils;
     }
+
+    //跳转护理液
+    @GetMapping("/hly")
+    @RequiresPermissions("information:optometryNew:hly")
+    String hly() {
+        return "product/hly/gethly";
+    }
+
+    //选择护理液
+    @ResponseBody
+    @GetMapping("/hlylist")
+    @RequiresPermissions("information:optometryNew:hly")
+    public PageUtils hlylist(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<HlyDO> hlylist = hlyService.gethly(query);
+        int total = hlyService.count(query);
+        PageUtils pageUtils = new PageUtils(hlylist, total);
+        return pageUtils;
+    }
+
+    //跳转视光---视觉训练
+    @GetMapping("/shiguang")
+    @RequiresPermissions("information:optometryNew:shiguang")
+    String shiguang() {
+        return "product/shiguang/getshiguang";
+    }
+
+    //选择视光---视觉训练
+    //选择护理液
+    @ResponseBody
+    @GetMapping("/shiguanglist")
+    @RequiresPermissions("information:optometryNew:hly")
+    public PageUtils shiguanglist(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<ShiguangDO> shiguanglist = shiguangService.getshiguang(query);
+        int total = shiguangService.count(query);
+        PageUtils pageUtils = new PageUtils(shiguanglist, total);
+        return pageUtils;
+    }
+
 }

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+																																			<div class="form-group">	
+								<label class="col-sm-3 control-label">卡号：</label>
+								<div class="col-sm-8">
+									<input id="cardNumber" name="cardNumber" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">处方类型：</label>
+								<div class="col-sm-8">
+									<input id="vstPrescriptionType" name="vstPrescriptionType" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">医生：</label>
+								<div class="col-sm-8">
+									<input id="vstDoctor" name="vstDoctor" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">试戴片编号OD：</label>
+								<div class="col-sm-8">
+									<input id="vstSdbhod" name="vstSdbhod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">试戴片编号OS：</label>
+								<div class="col-sm-8">
+									<input id="vstSdbhos" name="vstSdbhos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">FK(OD)：</label>
+								<div class="col-sm-8">
+									<input id="vstFkod" name="vstFkod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">FK(OS)：</label>
+								<div class="col-sm-8">
+									<input id="vstFkos" name="vstFkos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">曲率半径(OD)：</label>
+								<div class="col-sm-8">
+									<input id="vstQlbjod" name="vstQlbjod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">曲率半径(OS)：</label>
+								<div class="col-sm-8">
+									<input id="vstQlbjos" name="vstQlbjos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">AC(OD)：</label>
+								<div class="col-sm-8">
+									<input id="vstAcod" name="vstAcod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">AC(OS)：</label>
+								<div class="col-sm-8">
+									<input id="vstAcos" name="vstAcos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">降幅OD：</label>
+								<div class="col-sm-8">
+									<input id="vstJfod" name="vstJfod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">降幅OS：</label>
+								<div class="col-sm-8">
+									<input id="vstJfos" name="vstJfos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">DIA(OD)：</label>
+								<div class="col-sm-8">
+									<input id="vstDiaod" name="vstDiaod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">DIA(OS)：</label>
+								<div class="col-sm-8">
+									<input id="vstDiaos" name="vstDiaos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">BC(OD)：</label>
+								<div class="col-sm-8">
+									<input id="vstBcod" name="vstBcod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">BC(OS)：</label>
+								<div class="col-sm-8">
+									<input id="vstBcos" name="vstBcos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">CP/CLY(OD)：</label>
+								<div class="col-sm-8">
+									<input id="vstCpclyod" name="vstCpclyod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">CP/CLY(OS)：</label>
+								<div class="col-sm-8">
+									<input id="vstCpclyos" name="vstCpclyos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">E值(OD)：</label>
+								<div class="col-sm-8">
+									<input id="vstEod" name="vstEod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">E值(OS)：</label>
+								<div class="col-sm-8">
+									<input id="vstEos" name="vstEos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">VA(OD)：</label>
+								<div class="col-sm-8">
+									<input id="vstVaod" name="vstVaod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">VA(OS)：</label>
+								<div class="col-sm-8">
+									<input id="vstVaos" name="vstVaos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">镜片颜色OD：</label>
+								<div class="col-sm-8">
+									<input id="vstJpysod" name="vstJpysod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">镜片颜色OS：</label>
+								<div class="col-sm-8">
+									<input id="vstJpysos" name="vstJpysos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">适用镜片OD：</label>
+								<div class="col-sm-8">
+									<input id="vstSyjpod" name="vstSyjpod" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">适用镜片OS：</label>
+								<div class="col-sm-8">
+									<input id="vstSyjpos" name="vstSyjpos" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="vstBeizhu" name="vstBeizhu" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/jiancha/vst/add.js">
+	</script>
+</body>
+</html>

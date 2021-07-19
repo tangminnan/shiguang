@@ -1,15 +1,13 @@
 package com.shiguang.mfrs.service.impl;
 
-import com.shiguang.member.domain.MemberDO;
+import com.shiguang.mfrs.dao.MfrsDao;
+import com.shiguang.mfrs.domain.MfrsDO;
+import com.shiguang.mfrs.service.MfrsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
-import com.shiguang.mfrs.dao.MfrsDao;
-import com.shiguang.mfrs.domain.MfrsDO;
-import com.shiguang.mfrs.service.MfrsService;
 
 
 @Service
@@ -33,8 +31,6 @@ public class MfrsServiceImpl implements MfrsService {
     }
 
     //	---商品查询----
-
-
     @Override
     public List<MfrsDO> mglist(Map<String, Object> map) {
         return mfrsDao.mglist(map);
@@ -43,6 +39,18 @@ public class MfrsServiceImpl implements MfrsService {
     @Override
     public int mgcount(Map<String, Object> map) {
         return mfrsDao.mgcount(map);
+    }
+
+    //选择制造商
+    @Override
+    public List<MfrsDO> findmfrs(Map<String, Object> map) {
+        return null;
+    }
+
+    @Override
+    //选择制造商
+    public int countmfrs(Map<String, Object> map) {
+        return 0;
     }
 
     @Override
