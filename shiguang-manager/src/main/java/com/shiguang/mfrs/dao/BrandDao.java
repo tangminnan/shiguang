@@ -24,11 +24,12 @@ public interface BrandDao {
 
     List<BrandDO> list(Map<String, Object> map);
 
-    //选择制造商
-    List<BrandDO> findzzs(Map<String, Object> map);
-
     int count(Map<String, Object> map);
 
+    //选择品牌
+    List<BrandDO> findzzs(Map<String, Object> map);
+
+    //选择品牌
     int countzzs(Map<String, Object> map);
 
     int save(BrandDO brand);

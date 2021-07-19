@@ -296,8 +296,8 @@ function batchRemove() {
     });
 }
 
-//选择制造商
-function batchSelect() {
-    var rows = $("#exampleTable").bootstrapTable("getSelections");
-    return rows;
-};
+// //选择制造商
+// function batchSelect() {
+//     var rows = $("#exampleTable").bootstrapTable("getSelections");
+//     return rows;
+// };

@@ -27,6 +27,12 @@ public class HlyServiceImpl implements HlyService {
         return hlyDao.list(map);
     }
 
+    //选择护理液
+    @Override
+    public List<HlyDO> gethly(Map<String, Object> map) {
+        return hlyDao.gethly(map);
+    }
+
     @Override
     public int count(Map<String, Object> map) {
         return hlyDao.count(map);

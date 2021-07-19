@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiancha.dao.RxjmjcjDao">
+
+    <select id="get" resultType="com.shiguang.jiancha.domain.RxjmjcjDO">
+		select `rx_id`,`card_number`,`rx_prescription_type`,`rx_doctor`,`rx_optometry_name`,`rx_bcod`,`rx_bcos`,`rx_sphod`,`rx_sphos`,`rx_cylod`,`rx_cylos`,`rx_axialod`,`rx_axialos`,`rx_zjod`,`rx_zjos`,`rx_vaod`,`rx_vaos`,`rx_syjpod`,`rx_syjpos`,`rx_unitod`,`rx_unitos`,`rx_clfs`,`rx_hlypz`,`rx_beizhu` from jc_rxjmjcj where rx_id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.jiancha.domain.RxjmjcjDO">
+        select
+        `rx_id`,`card_number`,`rx_prescription_type`,`rx_doctor`,`rx_optometry_name`,`rx_bcod`,`rx_bcos`,`rx_sphod`,`rx_sphos`,`rx_cylod`,`rx_cylos`,`rx_axialod`,`rx_axialos`,`rx_zjod`,`rx_zjos`,`rx_vaod`,`rx_vaos`,`rx_syjpod`,`rx_syjpos`,`rx_unitod`,`rx_unitos`,`rx_clfs`,`rx_hlypz`,`rx_beizhu`
+        from jc_rxjmjcj
+        <where>
+            <if test="rxId != null and rxId != ''">and rx_id = #{rxId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="rxPrescriptionType != null and rxPrescriptionType != ''">and rx_prescription_type =
+                #{rxPrescriptionType}
+            </if>
+            <if test="rxDoctor != null and rxDoctor != ''">and rx_doctor = #{rxDoctor}</if>
+            <if test="rxOptometryName != null and rxOptometryName != ''">and rx_optometry_name = #{rxOptometryName}</if>
+            <if test="rxBcod != null and rxBcod != ''">and rx_bcod = #{rxBcod}</if>
+            <if test="rxBcos != null and rxBcos != ''">and rx_bcos = #{rxBcos}</if>
+            <if test="rxSphod != null and rxSphod != ''">and rx_sphod = #{rxSphod}</if>
+            <if test="rxSphos != null and rxSphos != ''">and rx_sphos = #{rxSphos}</if>
+            <if test="rxCylod != null and rxCylod != ''">and rx_cylod = #{rxCylod}</if>
+            <if test="rxCylos != null and rxCylos != ''">and rx_cylos = #{rxCylos}</if>
+            <if test="rxAxialod != null and rxAxialod != ''">and rx_axialod = #{rxAxialod}</if>
+            <if test="rxAxialos != null and rxAxialos != ''">and rx_axialos = #{rxAxialos}</if>
+            <if test="rxZjod != null and rxZjod != ''">and rx_zjod = #{rxZjod}</if>
+            <if test="rxZjos != null and rxZjos != ''">and rx_zjos = #{rxZjos}</if>
+            <if test="rxVaod != null and rxVaod != ''">and rx_vaod = #{rxVaod}</if>
+            <if test="rxVaos != null and rxVaos != ''">and rx_vaos = #{rxVaos}</if>
+            <if test="rxSyjpod != null and rxSyjpod != ''">and rx_syjpod = #{rxSyjpod}</if>
+            <if test="rxSyjpos != null and rxSyjpos != ''">and rx_syjpos = #{rxSyjpos}</if>
+            <if test="rxUnitod != null and rxUnitod != ''">and rx_unitod = #{rxUnitod}</if>
+            <if test="rxUnitos != null and rxUnitos != ''">and rx_unitos = #{rxUnitos}</if>
+            <if test="rxClfs != null and rxClfs != ''">and rx_clfs = #{rxClfs}</if>
+            <if test="rxHlypz != null and rxHlypz != ''">and rx_hlypz = #{rxHlypz}</if>
+            <if test="rxBeizhu != null and rxBeizhu != ''">and rx_beizhu = #{rxBeizhu}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by rx_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from jc_rxjmjcj
+        <where>
+            <if test="rxId != null and rxId != ''">and rx_id = #{rxId}</if>
+            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="rxPrescriptionType != null and rxPrescriptionType != ''">and rx_prescription_type =
+                #{rxPrescriptionType}
+            </if>
+            <if test="rxDoctor != null and rxDoctor != ''">and rx_doctor = #{rxDoctor}</if>
+            <if test="rxOptometryName != null and rxOptometryName != ''">and rx_optometry_name = #{rxOptometryName}</if>
+            <if test="rxBcod != null and rxBcod != ''">and rx_bcod = #{rxBcod}</if>
+            <if test="rxBcos != null and rxBcos != ''">and rx_bcos = #{rxBcos}</if>
+            <if test="rxSphod != null and rxSphod != ''">and rx_sphod = #{rxSphod}</if>
+            <if test="rxSphos != null and rxSphos != ''">and rx_sphos = #{rxSphos}</if>
+            <if test="rxCylod != null and rxCylod != ''">and rx_cylod = #{rxCylod}</if>
+            <if test="rxCylos != null and rxCylos != ''">and rx_cylos = #{rxCylos}</if>
+            <if test="rxAxialod != null and rxAxialod != ''">and rx_axialod = #{rxAxialod}</if>
+            <if test="rxAxialos != null and rxAxialos != ''">and rx_axialos = #{rxAxialos}</if>
+            <if test="rxZjod != null and rxZjod != ''">and rx_zjod = #{rxZjod}</if>
+            <if test="rxZjos != null and rxZjos != ''">and rx_zjos = #{rxZjos}</if>
+            <if test="rxVaod != null and rxVaod != ''">and rx_vaod = #{rxVaod}</if>
+            <if test="rxVaos != null and rxVaos != ''">and rx_vaos = #{rxVaos}</if>
+            <if test="rxSyjpod != null and rxSyjpod != ''">and rx_syjpod = #{rxSyjpod}</if>
+            <if test="rxSyjpos != null and rxSyjpos != ''">and rx_syjpos = #{rxSyjpos}</if>
+            <if test="rxUnitod != null and rxUnitod != ''">and rx_unitod = #{rxUnitod}</if>
+            <if test="rxUnitos != null and rxUnitos != ''">and rx_unitos = #{rxUnitos}</if>
+            <if test="rxClfs != null and rxClfs != ''">and rx_clfs = #{rxClfs}</if>
+            <if test="rxHlypz != null and rxHlypz != ''">and rx_hlypz = #{rxHlypz}</if>
+            <if test="rxBeizhu != null and rxBeizhu != ''">and rx_beizhu = #{rxBeizhu}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.jiancha.domain.RxjmjcjDO" useGeneratedKeys="true" keyProperty="rxId">
+		insert into jc_rxjmjcj
+		(
+			`card_number`, 
+			`rx_prescription_type`, 
+			`rx_doctor`, 
+			`rx_optometry_name`, 
+			`rx_bcod`, 
+			`rx_bcos`, 
+			`rx_sphod`, 
+			`rx_sphos`, 
+			`rx_cylod`, 
+			`rx_cylos`, 
+			`rx_axialod`, 
+			`rx_axialos`, 
+			`rx_zjod`, 
+			`rx_zjos`, 
+			`rx_vaod`, 
+			`rx_vaos`, 
+			`rx_syjpod`, 
+			`rx_syjpos`, 
+			`rx_unitod`, 
+			`rx_unitos`, 
+			`rx_clfs`, 
+			`rx_hlypz`, 
+			`rx_beizhu`
+		)
+		values
+		(
+			#{cardNumber}, 
+			#{rxPrescriptionType}, 
+			#{rxDoctor}, 
+			#{rxOptometryName}, 
+			#{rxBcod}, 
+			#{rxBcos}, 
+			#{rxSphod}, 
+			#{rxSphos}, 
+			#{rxCylod}, 
+			#{rxCylos}, 
+			#{rxAxialod}, 
+			#{rxAxialos}, 
+			#{rxZjod}, 
+			#{rxZjos}, 
+			#{rxVaod}, 
+			#{rxVaos}, 
+			#{rxSyjpod}, 
+			#{rxSyjpos}, 
+			#{rxUnitod}, 
+			#{rxUnitos}, 
+			#{rxClfs}, 
+			#{rxHlypz}, 
+			#{rxBeizhu}
+		)
+	</insert>
+    <insert id="saveRxjmjcj" parameterType="com.shiguang.jiancha.domain.RxjmjcjDO" useGeneratedKeys="true"
+            keyProperty="rxId">
+		insert into jc_rxjmjcj
+		(
+			`card_number`,
+			`rx_prescription_type`,
+			`rx_doctor`,
+			`rx_optometry_name`,
+			`rx_bcod`,
+			`rx_bcos`,
+			`rx_sphod`,
+			`rx_sphos`,
+			`rx_cylod`,
+			`rx_cylos`,
+			`rx_axialod`,
+			`rx_axialos`,
+			`rx_zjod`,
+			`rx_zjos`,
+			`rx_vaod`,
+			`rx_vaos`,
+			`rx_syjpod`,
+			`rx_syjpos`,
+			`rx_unitod`,
+			`rx_unitos`,
+			`rx_clfs`,
+			`rx_hlypz`,
+			`rx_beizhu`
+		)
+		values
+		(
+			#{cardNumber},
+			#{rxPrescriptionType},
+			#{rxDoctor},
+			#{rxOptometryName},
+			#{rxBcod},
+			#{rxBcos},
+			#{rxSphod},
+			#{rxSphos},
+			#{rxCylod},
+			#{rxCylos},
+			#{rxAxialod},
+			#{rxAxialos},
+			#{rxZjod},
+			#{rxZjos},
+			#{rxVaod},
+			#{rxVaos},
+			#{rxSyjpod},
+			#{rxSyjpos},
+			#{rxUnitod},
+			#{rxUnitos},
+			#{rxClfs},
+			#{rxHlypz},
+			#{rxBeizhu}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.jiancha.domain.RxjmjcjDO">
+        update jc_rxjmjcj
+        <set>
+            <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+            <if test="rxPrescriptionType != null">`rx_prescription_type` = #{rxPrescriptionType},</if>
+            <if test="rxDoctor != null">`rx_doctor` = #{rxDoctor},</if>
+            <if test="rxOptometryName != null">`rx_optometry_name` = #{rxOptometryName},</if>
+            <if test="rxBcod != null">`rx_bcod` = #{rxBcod},</if>
+            <if test="rxBcos != null">`rx_bcos` = #{rxBcos},</if>
+            <if test="rxSphod != null">`rx_sphod` = #{rxSphod},</if>
+            <if test="rxSphos != null">`rx_sphos` = #{rxSphos},</if>
+            <if test="rxCylod != null">`rx_cylod` = #{rxCylod},</if>
+            <if test="rxCylos != null">`rx_cylos` = #{rxCylos},</if>
+            <if test="rxAxialod != null">`rx_axialod` = #{rxAxialod},</if>
+            <if test="rxAxialos != null">`rx_axialos` = #{rxAxialos},</if>
+            <if test="rxZjod != null">`rx_zjod` = #{rxZjod},</if>
+            <if test="rxZjos != null">`rx_zjos` = #{rxZjos},</if>
+            <if test="rxVaod != null">`rx_vaod` = #{rxVaod},</if>
+            <if test="rxVaos != null">`rx_vaos` = #{rxVaos},</if>
+            <if test="rxSyjpod != null">`rx_syjpod` = #{rxSyjpod},</if>
+            <if test="rxSyjpos != null">`rx_syjpos` = #{rxSyjpos},</if>
+            <if test="rxUnitod != null">`rx_unitod` = #{rxUnitod},</if>
+            <if test="rxUnitos != null">`rx_unitos` = #{rxUnitos},</if>
+            <if test="rxClfs != null">`rx_clfs` = #{rxClfs},</if>
+            <if test="rxHlypz != null">`rx_hlypz` = #{rxHlypz},</if>
+            <if test="rxBeizhu != null">`rx_beizhu` = #{rxBeizhu}</if>
+        </set>
+        where rx_id = #{rxId}
+    </update>
+
+    <delete id="remove">
+		delete from jc_rxjmjcj where rx_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from jc_rxjmjcj where rx_id in
+        <foreach item="rxId" collection="array" open="(" separator="," close=")">
+            #{rxId}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author cln
  * @email bushuo@163.com
- * @date 2021-07-12 17:47:08
+ * @date 2021-07-16 15:03:42
  */
 
 @Controller
@@ -54,7 +54,6 @@ public class ResultController {
     //药品
     @Autowired
     private YaopinService yaopinService;
-
 
     @GetMapping()
     @RequiresPermissions("jiancha:result:result")
@@ -125,7 +124,6 @@ public class ResultController {
         }
         if (resultService.save(result) > 0) {
             return R.ok();
-
         }
         return R.error();
     }

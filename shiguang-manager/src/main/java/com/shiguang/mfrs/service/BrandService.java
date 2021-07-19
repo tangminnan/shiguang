@@ -23,9 +23,10 @@ public interface BrandService {
 
     int count(Map<String, Object> map);
 
-    //选择制造商
+    //选择品牌
     List<BrandDO> findzzs(Map<String, Object> map);
 
+    //选择品牌
     int countzzs(Map<String, Object> map);
 
     int save(BrandDO brand);

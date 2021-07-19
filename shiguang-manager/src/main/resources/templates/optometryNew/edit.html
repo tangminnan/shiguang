@@ -144,17 +144,17 @@
                     <td>OD</td>
                     <td>
                         <input name="axis" th:value="${ocularEyesDO.axis}" type="text" onblur="shuzi(this)"/>
-                        mm
+                        shuzionblur mm
                     </td>
                     <td>
                         <input name="cornealFirstK1Right" th:value="${ocularEyesDO.cornealFirstK1Right}"
-                               type="text"/>@
+                               type="text" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>小数@
                         <input name="cornealLastK1Right" th:value="${ocularEyesDO.cornealLastK1Right}"
-                               type="text"/>
+                               type="text" onchange="shuzi(this)"/>onchange
                     </td>
                     <td>
                         <input name="cornealFirstK2Right" th:value="${ocularEyesDO.cornealFirstK2Right}"
-                               type="text"/>@
+                               type="text" oninput="value=value.match(/^\d+(?:\.\d{0,2})?/)"/>2位@
                         <input name="cornealLastK2Right" th:value="${ocularEyesDO.cornealLastK2Right}"
                                type="text"/>
                     </td>
@@ -1217,10 +1217,12 @@
                 <tr>
                     <td>护理液品种：</td>
                     <td colspan="9">
-                        <textarea name="rxHlypz" rows="3"></textarea>
+                        <label class="text">
+                            <textarea id="hlys" name="rxHlypz" rows="3"></textarea>
+                        </label>
                         <div class="maxL" style="margin:5px 10px;">
-                            <input type="button" value="选择"/>
-                            <input class="empty" type="button" value="清空"/>
+                            <input type="button" value="选择" onclick="gethlys()"/>
+                            <input class="empty" type="button" value="清空" onclick="cleanhlys()"/>
                         </div>
                     </td>
                 </tr>
@@ -1430,18 +1432,22 @@
                 <tr>
                     <td>家庭训练：</td>
                     <td colspan="4">
-                        <textarea name="sjxlJtxl" rows="3"></textarea>
+                        <label class="text">
+                            <textarea id="jtxlsg" name="sjxlJtxl" rows="3"></textarea>
+                        </label>
                         <div class="maxL" style="margin:5px 10px;">
-                            <input type="button" value="选择"/>
-                            <input class="empty" type="button" value="清空"/>
+                            <input type="button" value="选择" onclick="getjtxlsg()"/>
+                            <input class="empty" type="button" value="清空" onclick="cleanjtxlsg()"/>
                         </div>
                     </td>
                     <td>训练室训练：</td>
                     <td colspan="4">
-                        <textarea name="sjxlXlsxl" rows="3"></textarea>
+                        <label class="text">
+                            <textarea id="xlsxlsg" name="sjxlXlsxl" rows="3"></textarea>
+                        </label>
                         <div class="maxL" style="margin:5px 10px;">
-                            <input type="button" value="选择"/>
-                            <input class="empty" type="button" value="清空"/>
+                            <input type="button" value="选择" onclick="getxlsxlsg()"/>
+                            <input class="empty" type="button" value="清空" onclick="cleanxlsxlsg()"/>
                         </div>
                     </td>
                 </tr>
@@ -1689,10 +1695,12 @@
                 <tr>
                     <td>药名：</td>
                     <td colspan="2">
-                        <textarea rows="2" name="ypYm"></textarea>
+                        <label class="text">
+                            <textarea id="ypYms" rows="2" name="ypYm"></textarea>
+                        </label>
                         <div class="maxL" style="margin:5px 10px;">
                             <input type="button" value="选择"/>
-                            <input class="empty" type="button" value="清空"/>
+                            <input class="empty" type="button" value="清空" onclick="cleanypYms()"/>
                         </div>
                     </td>
                 </tr>
@@ -1701,22 +1709,25 @@
 
             <div class="daijingFS">
                 <span>戴镜方式：</span>
-                <select>
-                    <option value="">日戴</option>
-                    <option value="">夜戴</option>
+                <select name="way">
+                    <option></option>
+                    <option value="日戴">日戴</option>
+                    <option value="夜戴">夜戴</option>
+                    <option value="连续戴">连续戴</option>
                 </select>
                 <span>复诊时间: </span>
-                <input id="riqi" type="text" value="2021-05-23"/>
+                <input id="followTime" name="followTime" type="text"/>
                 <span>复诊类型：</span>
-                <select>
-                    <option value="">--请选择--</option>
-                    <option value="">方式一</option>
-                    <option value="">方式二</option>
+                <select name="visitType">
+                    <option></option>
+                    <option value="硬镜复诊">硬镜复诊</option>
+                    <option value="软镜复诊">软镜复诊</option>
+                    <option value="框镜复诊">框镜复诊</option>
+                    <option value="视觉训练">视觉训练</option>
                 </select>
             </div>
 
         </div>
-
         <!--保存-->
         <div class="Keep"><input type="button" value="保存2" onclick="save2()"/></div>
 
@@ -1756,6 +1767,8 @@
 </script>
 <!--第二个页面-->
 <script type="text/javascript" src="/js/appjs/optometryNew/jcyizhu.js"></script>
+<script type="text/javascript" src="/js/appjs/product/hly/jchuliye.js"></script>
+<script type="text/javascript" src="/js/appjs/product/shiguang/jcshiguang.js"></script>
 <script type="text/javascript">
     //处方显隐增加
     function goodsidstr(value) {
@@ -1819,13 +1832,13 @@
     });
     //日期
     laydate.render({
-        elem: '#riqi',
+        elem: '#followTime',
         type: 'date'
     });
 
     //正负+—
     function zhengfu(e) {//正负用onblur事件触发
-        alert("+-");
+        // alert("+-");
         var val = parseFloat(e.value)
         if (val > 0) {
             e.value = "+" + val.toFixed(2)
@@ -1834,27 +1847,30 @@
         }
     };
 
-    //
-    function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用
+    function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用
         var val = parseFloat(e.value)
-        var num = e.indexOf(".") + 3
-        if (val.length > num) {
-            e.value = val.toFixed(2)
+        var val1 = e.value
+        // console.log(val);
+        var num = val1.indexOf(".") + 2
+        console.log(num);
+        if (val1.length > num) {
+            console.log(123);
+            var val2 = 0 | val * 100
+            e.value = val2 / 100
         }
     }
 
     //自动补0
     function shuzi(e) {
-        var val = parseFloat(e.value)
+        var val = parseFloat(e.value);
+        // val = val.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+        alert(val);
         if (val > 0) {
-            e.value = val.toFixed(2)
+            e.value = val.toFixed(2);
         } else if (val <= 0) {
-            e.value = val.toFixed(2)
+            e.value = val.toFixed(2);
         }
-        var num = e.indexOf(".") + 3
-        if (val.length > num) {
-            e.value = val.toFixed(2)
-        }
+
     };
 
     //轴向正确表示规则
@@ -1865,6 +1881,26 @@
         } else {
             e.value = val.toFixed(0)
         }
+    }
+
+    //清空护理液
+    function cleanhlys() {
+        $("#hlys").val("");
+    }
+
+    //清空家庭训练
+    function cleanjtxlsg() {
+        $("#jtxlsg").val("");
+    }
+
+    //清空训练室训练
+    function cleanxlsxlsg() {
+        $("#xlsxlsg").val("");
+    }
+
+    //清空药名
+    function cleanypYms() {
+        $("#ypYms").val("");
     }
 </script>
 

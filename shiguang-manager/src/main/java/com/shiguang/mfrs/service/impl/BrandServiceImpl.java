@@ -36,11 +36,13 @@ public class BrandServiceImpl implements BrandService {
         return brandDao.count(map);
     }//选择制造商
 
+    //选择品牌
     @Override
     public List<BrandDO> findzzs(Map<String, Object> map) {
         return brandDao.findzzs(map);
     }
 
+    //选择品牌
     @Override
     public int countzzs(Map<String, Object> map) {
         return brandDao.countzzs(map);

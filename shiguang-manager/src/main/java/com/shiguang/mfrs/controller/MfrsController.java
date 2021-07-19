@@ -1,30 +1,19 @@
 package com.shiguang.mfrs.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.shiguang.baseinfomation.domain.CardTypeDO;
-import com.shiguang.baseinfomation.domain.PersonSortDO;
-import com.shiguang.baseinfomation.domain.VocationDO;
-import com.shiguang.member.domain.MemberDO;
+import com.shiguang.common.utils.PageUtils;
+import com.shiguang.common.utils.Query;
+import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.*;
 import com.shiguang.mfrs.service.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 制造商维护表
@@ -45,7 +34,7 @@ public class MfrsController {
     //支付方式
     @Autowired
     private PayService payService;
-    //开票状态
+    //    //开票状态
     @Autowired
     private InvoiceService invoiceService;
     //制造商商品表
@@ -62,7 +51,7 @@ public class MfrsController {
         model.addAttribute("goodsDOList", goodsDOList);
         //开票状态
         List<InvoiceDO> invoiceDOList = invoiceService.list(map);
-        model.addAttribute("invoiceDOList",invoiceDOList);
+        model.addAttribute("invoiceDOList", invoiceDOList);
 
         return "mfrs/mfrs/mfrs";
     }
@@ -72,15 +61,10 @@ public class MfrsController {
     @RequiresPermissions("mfrs:mfrs:mfrs")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
-//        Query query = new Query(params);
-//        List<MfrsDO> mfrsList = mfrsService.list(query);
-//        int total = mfrsService.count(query);
-//        PageUtils pageUtils = new PageUtils(mfrsList, total);
-//        return pageUtils;
         Query query = new Query(params);
         List<MfrsDO> mfrsDOList = mfrsService.mglist(query);
         int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList,total);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
         return pageUtils;
     }
 
@@ -146,21 +130,21 @@ public class MfrsController {
     @PostMapping("/save")
     @RequiresPermissions("mfrs:mfrs:add")
     public R save(MfrsDO mfrs) {
-        if (null == mfrs.getGoodsid()){
+        if (null == mfrs.getGoodsid()) {
             return R.error("商品类别不能为空");
         }
         //判断是否已存在
         String mfrsnum = mfrs.getMfrsnum();
         Map<String, Object> map = new HashMap<>();
-        map.put("mfrsnum",mfrsnum);
+        map.put("mfrsnum", mfrsnum);
         List<MfrsDO> list = mfrsService.list(map);
-        if (list.size() > 0){
+        if (list.size() > 0) {
             return R.error("制造商代码已存在");
         }
         if (mfrsService.save(mfrs) > 0) {
             //获取制造商中的商品id,依次循环遍历，保存到关系表中，走两个保存方法
             String[] str = mfrs.getGoodsid().split(",");
-            for (int i=0; i<str.length;i++){
+            for (int i = 0; i < str.length; i++) {
                 MgDO mgDO = new MgDO();
                 mgDO.setMfrsid(mfrs.getMfrsid());
                 mgDO.setGoodsid(Integer.parseInt(str[i]));
@@ -179,24 +163,24 @@ public class MfrsController {
     @RequestMapping("/update")
     @RequiresPermissions("mfrs:mfrs:edit")
     public R update(MfrsDO mfrs) {
-        if (null == mfrs.getGoodsid()){
+        if (null == mfrs.getGoodsid()) {
             return R.error("商品类别不能为空");
         }
         //判断是否已存在商品
         Integer mfrsid = mfrs.getMfrsid();
         Map<String, Object> map = new HashMap<>();
-        map.put("mfrsid",mfrsid);
+        map.put("mfrsid", mfrsid);
         List<MgDO> list = mgService.mglist(map);
-        if (list.size() > 0){
+        if (list.size() > 0) {
             mgService.remove(mfrsid);
         }
-            String[] str = mfrs.getGoodsid().split(",");
-            for (int i=0; i<str.length;i++){
-                MgDO mgDO = new MgDO();
-                mgDO.setMfrsid(mfrs.getMfrsid());
-                mgDO.setGoodsid(Integer.parseInt(str[i]));
-                mgService.save(mgDO);
-            }
+        String[] str = mfrs.getGoodsid().split(",");
+        for (int i = 0; i < str.length; i++) {
+            MgDO mgDO = new MgDO();
+            mgDO.setMfrsid(mfrs.getMfrsid());
+            mgDO.setGoodsid(Integer.parseInt(str[i]));
+            mgService.save(mgDO);
+        }
         mfrsService.update(mfrs);
         return R.ok();
     }
@@ -228,20 +212,21 @@ public class MfrsController {
     /**
      * 批量停用或启用
      */
-    @PostMapping( "/stop")
+    @PostMapping("/stop")
     @ResponseBody
     @RequiresPermissions("mfrs:mfrs:stop")
-    public R stop(@RequestParam("ids[]") Integer[] ids,@RequestParam("status") Long status){
-        mfrsService.stop(ids,status);
+    public R stop(@RequestParam("ids[]") Integer[] ids, @RequestParam("status") Long status) {
+        mfrsService.stop(ids, status);
         return R.ok();
     }
+
     /**
      * 修改
      */
     @ResponseBody
-    @RequestMapping(value="/updateEnable")
-    public R updateEnable(Integer id,Long enable) {
-        MfrsDO mfrsDO=new MfrsDO();
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Integer id, Long enable) {
+        MfrsDO mfrsDO = new MfrsDO();
         mfrsDO.setMfrsid(id);
         mfrsDO.setStatus(enable);
         mfrsService.updateStatus(mfrsDO);

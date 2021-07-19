@@ -204,23 +204,7 @@ public class BrandController {
     @PostMapping("/save")
     @RequiresPermissions("mfrs:brand:add")
     public R save(BrandDO brand) {
-
-//        //判断是否已存在
-//        Integer mfrsid = brand.getMfrsid();
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("mfrsid", mfrsid);
-//        List<BrandDO> list = brandService.list(map);
-//        if (list.size() > 0) {
-//            String brandnum = brand.getBrandnum();
-//            Map<String, Object> map1 = new HashMap<>();
-//            map.put("brandnum", brandnum);
-//            List<BrandDO> list1 = brandService.list(map1);
-//            if (list1.size()>0)
-//                return R.error("该品牌制造商已存在");
-//        }
-
         if (brandService.save(brand) > 0) {
-
             //获取制造商中的商品id,依次循环遍历，保存到关系表中，走两个保存方法
 //            String[] str = mfrs.getGoodsid().split(",");
 //            for (int i=0; i<str.length;i++){
@@ -229,8 +213,6 @@ public class BrandController {
 //                mgDO.setGoodsid(Integer.parseInt(str[i]));
 //                mgService.save(mgDO);
 //            }
-
-
             return R.ok();
         }
         return R.error();
@@ -280,46 +262,27 @@ public class BrandController {
         return goodsDOList;
     }
 
-    //    //跳转制造商
-//    @GetMapping("/yizhu")
-//    @RequiresPermissions("information:optometryNew:yizhu")
-//    String yizhu() {
-//        return "jiancha/yizhu/yizhu";
-//    }
-//
-//    /**
-//     * 查询医嘱
-//     */
-//    @ResponseBody
-//    @GetMapping("/yizhulist")
-//    @RequiresPermissions("information:optometryNew:yizhu")
-//    public PageUtils yizhulist(@RequestParam Map<String, Object> params) {
-//        //查询列表数据
-//        Query query = new Query(params);
-//        List<YizhuDO> yizhuList = yizhuService.findYizhu(query);
-//        int total = yizhuService.countYizhu(query);
-//        PageUtils pageUtils = new PageUtils(yizhuList, total);
-//        return pageUtils;
-//    }
-//跳转制造商
-    @GetMapping("/brandmfrs")
-    @RequiresPermissions("mfrs:brand:brandmfrs")
-    String yizhu() {
-        return "mfrs/brand/brandmfrs";
+
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("mfrs:brand:findmfrs")
+    String findmfrs() {
+        return "mfrs/brand/findmfrs";
     }
 
     /**
-     * 查询医嘱
+     * 制造商
      */
     @ResponseBody
-    @GetMapping("/brandmfrslist")
-    @RequiresPermissions("mfrs:brand:brandmfrs")
-    public PageUtils brandmfrslist(@RequestParam Map<String, Object> params) {
+    @GetMapping("/findmfrslist")
+    @RequiresPermissions("mfrs:brand:findmfrs")
+    public PageUtils findmfrslist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<BrandDO> brandmfrslist = brandService.findzzs(query);
-        int total = brandService.countzzs(query);
-        PageUtils pageUtils = new PageUtils(brandmfrslist, total);
+        List<MfrsDO> findmfrslist = mfrsService.findmfrs(query);
+        int total = mfrsService.countmfrs(query);
+        PageUtils pageUtils = new PageUtils(findmfrslist, total);
         return pageUtils;
     }
+
 }

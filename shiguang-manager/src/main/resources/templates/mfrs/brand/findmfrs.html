@@ -10,10 +10,6 @@
             <div class="ibox-body">
                 <div class="fixed-table-toolbar">
                     <div class="columns pull-right">
-                        <!--<button shiro:hasPermission="mfrs:mfrs:add" type="button" class="btn  btn-primary"-->
-                        <!--onclick="add()">-->
-                        <!--<i class="fa fa-plus" aria-hidden="true"></i>添加-->
-                        <!--</button>-->
                         <button class="btn  btn-primary" onclick="batchSelect()" type="button">
                             <i aria-hidden="true" class="fa fa-plus"></i>确定
                         </button>
@@ -85,7 +81,6 @@
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/mfrs/mfrs/mfrs.js"></script>
-
 <script>
     function changeInterest() {
         var interester = [];

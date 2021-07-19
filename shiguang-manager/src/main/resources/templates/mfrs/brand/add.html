@@ -40,32 +40,9 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商简称：</label>
                             <div class="col-sm-8">
-                                <select id="mfrsid" name="mfrsid" class="form-control"
-                                        onchange="caidan(this.options[this.options.selectedIndex].value)">
-                                    <option></option>
-                                    <option th:each="ls:${mfrsDOList}"
-                                            th:text="${ls.mfrsname}"
-                                            th:value="${ls.mfrsid}"
-                                    ></option>
-                                </select>
-                                <input id="yizhus" name="yizhu"/>
-                                <input type="button" value="选择" onclick="getZhizaoshang()" style="color: red"/>
-                                <span style="color: red">*</span>
-                            </div>
-                        </div>
-                        <div class="m40 tabS">
-                            <table class="tabF" cellspacing="0" cellpadding="0">
-                                <tbody>
-                                <tr>
-                                    <td class="w170">医嘱</td>
-                                    <!--<td><textarea rows="3" id="yizhus" name="yizhu"></textarea></td>-->
-                                    <!--<input id="yizhus" name="yizhu"/>-->
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="maxL">
-                                <input type="button" value="选择" onclick="getYizhu()"/>
-                                <span>* 最多可输入1000字</span>
+                                <td><input type="text" id="mfrsName" name="mfrsid"/></td>
+                                <input type="hidden" id="mfrsid" name="mfrsid"/>
+                                <input type="button" value="选择*" onclick="getZhizaoshang()" style="color: red"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -251,7 +228,6 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">状态：</label>
                             <div class="col-sm-8">
-                                <!--<input id="status" name="status" class="form-control" type="text">-->
                                 <label class="radio-inline"> <input type="radio"
                                                                     name="stateId" value="1" checked/> 启用
                                 </label>
@@ -272,12 +248,12 @@
     </div>
 </div>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/optometryNew/brandmfrs.js"></script>
+<script type="text/javascript" src="/js/appjs/mfrs/brand/findmfrs.js"></script>
 <script type="text/javascript" src="/js/appjs/mfrs/brand/add.js"></script>
 <script>
 
     function caidan(value) {
-
+        alert(value);
         tab1.style = "display: none";
         tab2.style = "display: none";
         tab3.style = "display: none";
