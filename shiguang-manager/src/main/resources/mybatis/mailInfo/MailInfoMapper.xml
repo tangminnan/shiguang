@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.mailInfo.dao.MailInfoDao">
+
+    <select id="get" resultType="com.shiguang.mailInfo.domain.MailInfoDO">
+		select `id`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.mailInfo.domain.MailInfoDO">
+        select `id`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="cardMember != null and cardMember != ''"> and card_member = #{cardMember} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <if test="memberTel != null and memberTel != ''"> and member_tel = #{memberTel} </if>
+            <if test="memberAreacode != null and memberAreacode != ''"> and member_areacode = #{memberAreacode} </if>
+            <if test="consignee != null and consignee != ''"> and consignee = #{consignee} </if>
+            <if test="mailForm != null and mailForm != ''"> and mail_form = #{mailForm} </if>
+            <if test="enterName != null and enterName != ''"> and enter_name = #{enterName} </if>
+            <if test="enterTimr != null and enterTimr != ''"> and enter_timr = #{enterTimr} </if>
+            <if test="address != null and address != ''"> and address = #{address} </if>
+            <if test="insured != null and insured != ''"> and insured = #{insured} </if>
+            <if test="insuredMoney != null and insuredMoney != ''"> and insured_money = #{insuredMoney} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from mail_info
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="cardMember != null and cardMember != ''"> and card_member = #{cardMember} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <if test="memberTel != null and memberTel != ''"> and member_tel = #{memberTel} </if>
+            <if test="memberAreacode != null and memberAreacode != ''"> and member_areacode = #{memberAreacode} </if>
+            <if test="consignee != null and consignee != ''"> and consignee = #{consignee} </if>
+            <if test="mailForm != null and mailForm != ''"> and mail_form = #{mailForm} </if>
+            <if test="enterName != null and enterName != ''"> and enter_name = #{enterName} </if>
+            <if test="enterTimr != null and enterTimr != ''"> and enter_timr = #{enterTimr} </if>
+            <if test="address != null and address != ''"> and address = #{address} </if>
+            <if test="insured != null and insured != ''"> and insured = #{insured} </if>
+            <if test="insuredMoney != null and insuredMoney != ''"> and insured_money = #{insuredMoney} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.mailInfo.domain.MailInfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into mail_info
+		(
+			`card_member`,
+			`member_name`,
+			`member_tel`,
+			`member_areacode`,
+			`consignee`,
+			`mail_form`,
+			`enter_name`,
+			`enter_timr`,
+			`address`,
+			`insured`,
+			`insured_money`
+		)
+		values
+		(
+			#{cardMember},
+			#{memberName},
+			#{memberTel},
+			#{memberAreacode},
+			#{consignee},
+			#{mailForm},
+			#{enterName},
+			#{enterTimr},
+			#{address},
+			#{insured},
+			#{insuredMoney}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.mailInfo.domain.MailInfoDO">
+        update mail_info
+        <set>
+            <if test="cardMember != null">`card_member` = #{cardMember}, </if>
+            <if test="memberName != null">`member_name` = #{memberName}, </if>
+            <if test="memberTel != null">`member_tel` = #{memberTel}, </if>
+            <if test="memberAreacode != null">`member_areacode` = #{memberAreacode}, </if>
+            <if test="consignee != null">`consignee` = #{consignee}, </if>
+            <if test="mailForm != null">`mail_form` = #{mailForm}, </if>
+            <if test="enterName != null">`enter_name` = #{enterName}, </if>
+            <if test="enterTimr != null">`enter_timr` = #{enterTimr}, </if>
+            <if test="address != null">`address` = #{address}, </if>
+            <if test="insured != null">`insured` = #{insured}, </if>
+            <if test="insuredMoney != null">`insured_money` = #{insuredMoney}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from mail_info where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from mail_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -122,6 +122,40 @@ public class SalesDO implements Serializable {
 	private String kuangxing;
 	//直径
 	private Double zhijing;
+	//RGP
+	//屈光度(OD)
+	private Double rightRgpgd;
+	//屈光度OS
+	private Double leftRgpgd;
+	//BC(OD)
+	private Double rightBC;
+	//BC(OS)
+	private Double leftBC;
+	//DIA(OD)
+	private Double rightDIA;
+	//DIA(OS)
+	private Double leftDIA;
+	//散光OD
+	private Double rightsg;
+	//散光OS
+	private Double leftsg;
+	//镜片颜色OD
+	private String rightJPColor;
+	//镜片颜色OS
+	private String leftJPColor;
+	//特殊设计OD
+	private String rightTssj;
+	//特殊设计OS
+	private String leftTssj;
+	//品牌OD
+	private String rightPinpai;
+	//品牌OS
+	private String leftPinpai;
+	//药品
+	//内容
+	private String content;
+	//药名
+	private String ypName;
 
 	/**
 	 * 设置：主键
@@ -643,5 +677,135 @@ public class SalesDO implements Serializable {
 	 * 直径
 	 */
 	public Double getZhijing(){return zhijing;}
+
+	/**
+	 * 屈光度OD
+	 */
+	public void setRightRgpgd(Double rightRgpgd) {this.rightRgpgd = rightRgpgd;}
+	/**
+	 * 屈光度OD
+	 */
+	public Double getRightRgpgd() {return rightRgpgd;}
+	/**
+	 * 屈光度OS
+	 */
+	public void setLeftRgpgd(Double leftRgpgd) {this.leftRgpgd = leftRgpgd;}
+	/**
+	 * 屈光度OS
+	 */
+	public Double getLeftRgpgd() {return leftRgpgd;}
+	/**
+	 * BC(OD)
+	 */
+	public void setRightBC(Double rightBC) {this.rightBC = rightBC;}
+	/**
+	 * BC(OD)
+	 */
+	public Double getRightBC(){return rightBC;}
+	/**
+	 * BC(OS)
+	 */
+	public void setLeftBC(Double leftBC) {this.leftBC = leftBC;}
+	/**
+	 * BC(OS)
+	 */
+	public Double getLeftBC() {return leftBC;}
+	/**
+	 * DIA(OD)
+	 */
+	public void setRightDIA(Double rightDIA) {this.rightDIA = rightDIA;}
+	/**
+	 * DIA(OD)
+	 */
+	public Double getRightDIA() {return rightDIA;}
+	/**
+	 * DIA(OS)
+	 */
+	public void setLeftDIA(Double leftDIA) {this.leftDIA = leftDIA;}
+	/**
+	 * DIA(OS)
+	 */
+	public Double getLeftDIA() {return leftDIA;}
+	/**
+	 * 散光(OD)
+	 */
+	public void setRightsg(Double rightsg) {this.rightsg = rightsg;}
+	/**
+	 * 散光(OD)
+	 */
+	public Double getRightsg() {return rightsg;}
+	/**
+	 * 散光(OS)
+	 */
+	public void setLeftsg(Double leftsg) {this.leftsg = leftsg;}
+	/**
+	 * 散光(OS)
+	 */
+	public Double getLeftsg() {return leftsg;}
+	/**
+	 * 镜片颜色OD
+	 */
+	public void setRightJPColor(String rightJPColor) {this.rightJPColor = rightJPColor;}
+	/**
+	 * 镜片颜色OD
+	 */
+	public String getRightJPColor() {return rightJPColor;}
+	/**
+	 * 镜片颜色OS
+	 */
+	public void setLeftJPColor(String leftJPColor) {this.leftJPColor = leftJPColor;}
+	/**
+	 * 镜片颜色OS
+	 */
+	public String getLeftJPColor() {return leftJPColor;}
+	/**
+	 * 特殊设计OD
+	 */
+	public void setRightTssj(String rightTssj) {this.rightTssj = rightTssj;}
+	/**
+	 * 特殊设计OD
+	 */
+	public String getRightTssj() {return rightTssj;}
+	/**
+	 * 特殊设计OS
+	 */
+	public void setLeftTssj(String leftTssj) {this.leftTssj = leftTssj;}
+	/**
+	 * 特殊设计OS
+	 */
+	public String getLeftTssj(){return leftTssj;}
+	/**
+	 * 品牌OD
+	 */
+	public void setRightPinpai(String rightPinpai) {this.rightPinpai = rightPinpai;}
+	/**
+	 * 品牌OD
+	 */
+	public String getRightPinpai(){return rightPinpai;}
+	/**
+	 * 品牌OS
+	 */
+	public void setLeftPinpai(String leftPinpai) {this.leftPinpai = leftPinpai;}
+	/**
+	 * 品牌OS
+	 */
+	public String getLeftPinpai(){return leftPinpai;}
+
+	/**
+	 * 内容
+	 */
+	public String getContent() {return content;}
+	/**
+	 * 内容
+	 */
+	public void setContent(String content) {this.content= content;}
+	/**
+	 * 药名
+	 */
+	public void setYpName(String ypName) {this.ypName = ypName;}
+	/**
+	 * 药名
+	 */
+	public String getYpName() {return ypName;}
 
 }

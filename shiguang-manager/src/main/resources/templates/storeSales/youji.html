@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">卡号：</label>
+							<div class="col-sm-8">
+								<input id="cardMember" name="cardMember" th:value="${memberDO.cardNumber}" class="form-control" disabled type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">顾客姓名：</label>
+							<div class="col-sm-8">
+								<input id="memberName" name="memberName" th:value="${memberDO.name}" class="form-control"
+									   type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">顾客电话：</label>
+							<div class="col-sm-8">
+								<input id="memberTel" name="memberTel" th:value="${memberDO.phone1}" class="form-control"
+									   type="text" oninput="value=value.replace(/[^\d]/g,'')">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">顾客区号：</label>
+							<div class="col-sm-8">
+								<input id="memberAreacode" name="memberAreacode" class="form-control"
+									   type="text" oninput="value=value.replace(/[^\d]/g,'')">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">收件人：</label>
+							<div class="col-sm-8">
+								<input id="consignee" name="consignee" th:value="${memberDO.name}" class="form-control"
+									   type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">邮寄单：</label>
+							<div class="col-sm-8">
+								<select name="mailForm" id="mailForm" class="form-control" data-actions-box="false" data-size="5">
+									<option value="">--请选择--</option>
+									<option value="顺丰省内快递">顺丰省内快递</option>
+									<option value="顺丰省外快递">顺丰省外快递</option>
+									<option value="EMS快递">EMS快递</option>
+									<option value="邮政小包">邮政小包</option>
+									<option value="圆通快递">圆通快递</option>
+									<option value="中通快递">中通快递</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">地址：</label>
+							<div class="col-sm-8">
+								<input id="address" name="address" class="form-control"
+									   type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">保价:</label>
+							<div class="col-sm-8">
+								<label class="radio-inline"> <input type="radio"
+																	name="insured" value="1" /> 是
+								</label> <label class="radio-inline"> <input type="radio"
+																			 name="insured" value="0" /> 否
+							</label>
+								<input id="insuredMoney"  name="insuredMoney" style="display: none;">
+							</div>
+						</div>
+						<!--<input type="hidden" name="roleIds" id="roleIds">-->
+						<!--<div class="form-group">-->
+							<!--<label class="col-sm-3 control-label">角色</label>-->
+							<!--<div class="col-sm-8">-->
+								<!--<label th:each="role:${roles}" class="checkbox-inline">-->
+									<!--<input name="role" type="checkbox" th:value="${role.roleId}"-->
+										   <!--th:text="${role.roleName}">-->
+								<!--</label>-->
+							<!--</div>-->
+						<!--</div>-->
+						<div class="form-group">
+							<div class="col-sm-8 col-sm-offset-3">
+								<button type="submit" class="btn btn-primary">提交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/storeSales/mailInfoadd.js">
+</script>
+<script type="text/javascript">
+    $("input[name=insured]").click(function(){
+        var insured = $(this).val();
+        if (insured == 1){
+            insuredMoney.style="display:block;width: 10%;";
+		} else if (insured == 0){
+            insuredMoney.style="display:none";
+		}
+    });
+</script>
+</body>
+</html>

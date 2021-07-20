@@ -7,11 +7,8 @@ import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.*;
 import com.shiguang.giveaway.domain.GiveawayDO;
 import com.shiguang.giveaway.service.GiveawayService;
-import com.shiguang.jiancha.domain.KjjyDO;
-import com.shiguang.jiancha.domain.ResultDO;
-import com.shiguang.jiancha.service.KjjyService;
-import com.shiguang.jiancha.service.KjyyService;
-import com.shiguang.jiancha.service.ResultService;
+import com.shiguang.jiancha.domain.*;
+import com.shiguang.jiancha.service.*;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.mfrs.domain.PositionDO;
@@ -92,6 +89,18 @@ public class StoreSalesController {
     private KjjyService kjjyService;
     @Autowired
     private KjyyService kjyyService;
+    @Autowired
+    private SgjjService sgjjService;
+    @Autowired
+    private ZyService zyService;
+    @Autowired
+    private RxjmjcjService rxjmjcjService;
+    @Autowired
+    private SjxlService sjxlService;
+    @Autowired
+    private RgpService rgpService;
+    @Autowired
+    private YaopinService yaopinService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -268,6 +277,141 @@ public class StoreSalesController {
                 kjjyDO.setKjjyCylos(salesDO.getLeftZJ());
                 kjjyDO.setKjjyAxialod(salesDO.getRightzhouxiang());
                 kjjyDO.setKjjyAxialos(salesDO.getLeftzhouxiang());
+                kjjyDO.setKjjyPrismod(salesDO.getRightsanlingjing());
+                kjjyDO.setKjjyPrismos(salesDO.getLeftsanlingjing());
+                kjjyDO.setKjjyJdod(salesDO.getRightjidi());
+                kjjyDO.setKjjyJdos(salesDO.getLeftjidi());
+                kjjyDO.setKjjyYytjod(salesDO.getRightyuanyongtj());
+                kjjyDO.setKjjyYytjos(salesDO.getLeftyuanyongtj());
+                kjjyDO.setKjjyTgod(salesDO.getRighttonggao());
+                kjjyDO.setKjjyTgos(salesDO.getLefttonggao());
+                kjjyDO.setKjjyVaod(salesDO.getRightyuanyongVA());
+                kjjyDO.setKjjyVaos(salesDO.getLeftyuanyongVA());
+                kjjyService.save(kjjyDO);
+            } else if (salesDO.getRecipelType() == 2){
+                KjyyDO kjyyDO = new KjyyDO();
+                kjyyDO.setCardNumber(salesDO.getMemberNumber());
+                kjyyDO.setKjyyPrescriptionType(salesDO.getRecipelType().toString());
+                kjyyDO.setKjyyOptometryName(salesDO.getSaleName());
+                kjyyDO.setKjyySphod(salesDO.getRightQJ());
+                kjyyDO.setKjyySphos(salesDO.getLeftQJ());
+                kjyyDO.setKjyyCylod(salesDO.getRightZJ());
+                kjyyDO.setKjyyCylos(salesDO.getLeftZJ());
+                kjyyDO.setKjyyAxialod(salesDO.getRightzhouxiang());
+                kjyyDO.setKjyyAxialos(salesDO.getLeftzhouxiang());
+                kjyyDO.setKjyyPrismod(salesDO.getRightsanlingjing());
+                kjyyDO.setKjyyPrismos(salesDO.getLeftsanlingjing());
+                kjyyDO.setKjyyJdod(salesDO.getRightjidi());
+                kjyyDO.setKjyyJdos(salesDO.getLeftjidi());
+                kjyyDO.setKjyyYytjod(salesDO.getRightyuanyongtj());
+                kjyyDO.setKjyyYytjos(salesDO.getLeftyuanyongtj());
+                kjyyDO.setKjyyTgod(salesDO.getRighttonggao());
+                kjyyDO.setKjyyTgos(salesDO.getLefttonggao());
+                kjyyDO.setKjyyVaod(salesDO.getRightyuanyongVA());
+                kjyyDO.setKjyyVaos(salesDO.getLeftyuanyongVA());
+                kjyyService.save(kjyyDO);
+            } else if (salesDO.getRecipelType() == 3){
+                SgjjDO sgjjDO = new SgjjDO();
+                sgjjDO.setCardNumber(salesDO.getMemberNumber());
+                sgjjDO.setSgjjPrescriptionType(salesDO.getRecipelType().toString());
+                sgjjDO.setSgjjOptometryName(salesDO.getSaleName());
+                sgjjDO.setSgjjSphod(salesDO.getRightQJ());
+                sgjjDO.setSgjjSphos(salesDO.getLeftQJ());
+                sgjjDO.setSgjjCylod(salesDO.getRightZJ());
+                sgjjDO.setSgjjCylos(salesDO.getLeftZJ());
+                sgjjDO.setSgjjAxialod(salesDO.getRightzhouxiang());
+                sgjjDO.setSgjjAxialos(salesDO.getLeftzhouxiang());
+                sgjjDO.setSgjjYytjod(salesDO.getRightyuanyongtj());
+                sgjjDO.setSgjjYytjos(salesDO.getLeftyuanyongtj());
+                sgjjDO.setSgjjTgod(salesDO.getRighttonggao());
+                sgjjDO.setSgjjTgos(salesDO.getLefttonggao());
+                sgjjDO.setSgjjYyvaod(salesDO.getRightyuanyongVA());
+                sgjjDO.setSgjjYyvaos(salesDO.getLeftyuanyongVA());
+                sgjjService.save(sgjjDO);
+            } else if (salesDO.getRecipelType() == 4){
+                ZyDO zyDO = new ZyDO();
+                zyDO.setCardNumber(salesDO.getMemberNumber());
+                zyDO.setZyPrescriptionType(salesDO.getRecipelType().toString());
+                zyDO.setZyOptometryName(salesDO.getSaleName());
+                zyDO.setZySphod(salesDO.getRightQJ());
+                zyDO.setZySphos(salesDO.getLeftQJ());
+                zyDO.setZyCylod(salesDO.getRightZJ());
+                zyDO.setZyCylos(salesDO.getLeftZJ());
+                zyDO.setZyAxialod(salesDO.getRightzhouxiang());
+                zyDO.setZyAxialos(salesDO.getLeftzhouxiang());
+                zyDO.setZyPrismod(salesDO.getRightsanlingjing());
+                zyDO.setZyPrismos(salesDO.getLeftsanlingjing());
+                zyDO.setZyJdod(salesDO.getRightjidi());
+                zyDO.setZyJdos(salesDO.getLeftjidi());
+                zyDO.setZyZytjod(salesDO.getRightyuanyongtj());
+                zyDO.setZyZytjos(salesDO.getLeftyuanyongtj());
+                zyDO.setZyTgod(salesDO.getRighttonggao());
+                zyDO.setZyTgos(salesDO.getLefttonggao());
+                zyDO.setZyVaod(salesDO.getRightyuanyongVA());
+                zyDO.setZyVaos(salesDO.getLeftyuanyongVA());
+                zyService.save(zyDO);
+            } else if (salesDO.getRecipelType() == 5){
+                RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
+                rxjmjcjDO.setCardNumber(salesDO.getMemberNumber());
+                rxjmjcjDO.setRxPrescriptionType(salesDO.getRecipelType().toString());
+                rxjmjcjDO.setRxOptometryName(salesDO.getSaleName());
+                rxjmjcjDO.setRxSphod(salesDO.getRightQJ());
+                rxjmjcjDO.setRxSphos(salesDO.getLeftQJ());
+                rxjmjcjDO.setRxCylod(salesDO.getRightZJ());
+                rxjmjcjDO.setRxCylos(salesDO.getLeftZJ());
+                rxjmjcjDO.setRxAxialod(salesDO.getRightzhouxiang());
+                rxjmjcjDO.setRxAxialos(salesDO.getLeftzhouxiang());
+                rxjmjcjDO.setRxZjod(salesDO.getRightZJ());
+                rxjmjcjDO.setRxZjos(salesDO.getLeftZJ());
+                rxjmjcjDO.setRxVaod(salesDO.getRightyuanyongVA());
+                rxjmjcjDO.setRxVaos(salesDO.getLeftyuanyongVA());
+                rxjmjcjService.save(rxjmjcjDO);
+            } else if (salesDO.getRecipelType() == 7){
+                SjxlDO sjxlDO = new SjxlDO();
+                sjxlDO.setCardNumber(salesDO.getMemberNumber());
+                sjxlDO.setSjxlPrescriptionType(salesDO.getRecipelType().toString());
+                sjxlDO.setSjxlOptometryName(salesDO.getSaleName());
+                sjxlDO.setSjxlSphod(salesDO.getRightQJ());
+                sjxlDO.setSjxlSphos(salesDO.getLeftQJ());
+                sjxlDO.setSjxlCylod(salesDO.getRightZJ());
+                sjxlDO.setSjxlCylos(salesDO.getLeftZJ());
+                sjxlDO.setSjxlAxialod(salesDO.getRightzhouxiang());
+                sjxlDO.setSjxlAxialos(salesDO.getLeftzhouxiang());
+                sjxlDO.setSjxlJdod(salesDO.getRightjidi());
+                sjxlDO.setSjxlJdos(salesDO.getLeftjidi());
+                sjxlDO.setSjxlYytjod(salesDO.getRightyuanyongtj());
+                sjxlDO.setSjxlYytjos(salesDO.getLeftyuanyongtj());
+                sjxlDO.setSjxlYyvaod(salesDO.getRightyuanyongVA());
+                sjxlDO.setSjxlYyvaos(salesDO.getLeftyuanyongVA());
+                sjxlService.save(sjxlDO);
+            } else if (salesDO.getRecipelType() == 10){
+                RgpDO rgpDO = new RgpDO();
+                rgpDO.setCardNumber(salesDO.getMemberNumber());
+                rgpDO.setRgpPrescriptionType(salesDO.getRecipelType().toString());
+                rgpDO.setRgpOptometryName(salesDO.getSaleName());
+                rgpDO.setRgpQgdod(salesDO.getRightRgpgd());
+                rgpDO.setRgpQgdos(salesDO.getLeftRgpgd());
+                rgpDO.setRgpBcod(salesDO.getRightBC());
+                rgpDO.setRgpBcos(salesDO.getLeftBC());
+                rgpDO.setRgpDiaod(salesDO.getRightDIA());
+                rgpDO.setRgpDiaos(salesDO.getLeftDIA());
+                rgpDO.setRgpSgod(salesDO.getRightsg());
+                rgpDO.setRgpSgos(salesDO.getLeftsg());
+                rgpDO.setRgpJpysod(salesDO.getRightJPColor());
+                rgpDO.setRgpJpysos(salesDO.getLeftJPColor());
+                rgpDO.setRgpTssjod(salesDO.getRightTssj());
+                rgpDO.setRgpTssjos(salesDO.getLeftTssj());
+                rgpDO.setRgpSyjpod(salesDO.getRightPinpai());
+                rgpDO.setRgpSyjpos(salesDO.getLeftPinpai());
+                rgpService.save(rgpDO);
+            } else if (salesDO.getRecipelType() == 11){
+                YaopinDO yaopinDO = new YaopinDO();
+                yaopinDO.setCardNumber(salesDO.getMemberNumber());
+                yaopinDO.setYpPrescriptionType(salesDO.getRecipelType().toString());
+                yaopinDO.setYpOptometryName(salesDO.getSaleName());
+                yaopinDO.setYpNr(salesDO.getContent());
+                yaopinDO.setYpYm(salesDO.getYpName());
+                yaopinService.save(yaopinDO);
             }
         }
         CostDO costDO = new CostDO();
@@ -285,6 +429,22 @@ public class StoreSalesController {
             return R.ok();
         }
         return R.error();
+    }
+
+    /**
+     * 邮寄信息
+     */
+    @GetMapping("/youji/{cardNumber}")
+    @RequiresPermissions("information:store:youji")
+    String youji(@PathVariable("cardNumber") String cardNumber,Model model) {
+        MemberDO memberDO = memberService.getCardNumber(cardNumber);
+        if (memberDO.getSex() == 0) {
+            memberDO.setSexx("男");
+        } else {
+            memberDO.setSexx("女");
+        }
+        model.addAttribute("memberDO", memberDO);
+        return "storeSales/youji";
     }
 
     /**
