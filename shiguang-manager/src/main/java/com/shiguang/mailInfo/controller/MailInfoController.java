@@ -6,6 +6,8 @@ import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.mailInfo.domain.MailInfoDO;
 import com.shiguang.mailInfo.service.MailInfoService;
+import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ import java.util.Map;
 public class MailInfoController {
     @Autowired
     private MailInfoService infoService;
+    @Autowired
+    private SalesService salesService;
 
     @GetMapping()
     @RequiresPermissions("information:mailinfo:mailinfo")
@@ -36,6 +40,24 @@ public class MailInfoController {
         Query query = new Query(params);
         List<MailInfoDO> infoList = infoService.list(query);
         int total = infoService.count(query);
+        PageUtils pageUtils = new PageUtils(infoList, total);
+        return pageUtils;
+    }
+
+    @GetMapping("/peijingInfo")
+    @RequiresPermissions("information:mailinfo:peijingInfo")
+    String peijingInfo(){
+        return "mailinfo/peijingInfo";
+    }
+
+    @ResponseBody
+    @GetMapping("/peijinglist")
+    @RequiresPermissions("information:mailinfo:peijingInfo")
+    public PageUtils peijinglist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        List<SalesDO> infoList = salesService.peijinglist(query);
+        int total = salesService.peijingcount(query);
         PageUtils pageUtils = new PageUtils(infoList, total);
         return pageUtils;
     }
@@ -63,6 +85,7 @@ public class MailInfoController {
     public R save( MailInfoDO info){
         info.setEnterName(ShiroUtils.getUser().getName());
         info.setEnterTimr(new Date());
+        info.setStatus(0L);
         if(infoService.save(info)>0){
             return R.ok();
         }

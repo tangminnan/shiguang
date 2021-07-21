@@ -8,6 +8,8 @@ public class MailInfoDO implements Serializable {
 
     //主键
     private Long id;
+    //配镜单号
+    private String saleNumber;
     //会员卡号
     private String cardMember;
     //顾客姓名
@@ -30,6 +32,8 @@ public class MailInfoDO implements Serializable {
     private Long insured;
     //保价价格
     private String insuredMoney;
+    //状态
+    private Long status;
 
     /**
      * 设置：主键
@@ -42,6 +46,18 @@ public class MailInfoDO implements Serializable {
      */
     public Long getId() {
         return id;
+    }
+    /**
+     * 设置：配镜单号
+     */
+    public void setSaleNumber(String saleNumber) {
+        this.saleNumber = saleNumber;
+    }
+    /**
+     * 获取：配镜单号
+     */
+    public String getSaleNumber() {
+        return saleNumber;
     }
     /**
      * 设置：会员卡号
@@ -175,4 +191,6 @@ public class MailInfoDO implements Serializable {
     public String getInsuredMoney() {
         return insuredMoney;
     }
+    public void setStatus(Long status) {this.status = status;}
+    public Long getStatus(){return status;}
 }

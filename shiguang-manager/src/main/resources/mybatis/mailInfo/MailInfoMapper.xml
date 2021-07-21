@@ -8,9 +8,10 @@
 	</select>
 
     <select id="list" resultType="com.shiguang.mailInfo.domain.MailInfoDO">
-        select `id`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info
+        select `id`,`sale_number`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
             <if test="cardMember != null and cardMember != ''"> and card_member = #{cardMember} </if>
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <if test="memberTel != null and memberTel != ''"> and member_tel = #{memberTel} </if>
@@ -22,6 +23,7 @@
             <if test="address != null and address != ''"> and address = #{address} </if>
             <if test="insured != null and insured != ''"> and insured = #{insured} </if>
             <if test="insuredMoney != null and insuredMoney != ''"> and insured_money = #{insuredMoney} </if>
+            and status = 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -40,6 +42,7 @@
         select count(*) from mail_info
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
             <if test="cardMember != null and cardMember != ''"> and card_member = #{cardMember} </if>
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <if test="memberTel != null and memberTel != ''"> and member_tel = #{memberTel} </if>
@@ -57,6 +60,7 @@
     <insert id="save" parameterType="com.shiguang.mailInfo.domain.MailInfoDO" useGeneratedKeys="true" keyProperty="id">
 		insert into mail_info
 		(
+		    `sale_number`,
 			`card_member`,
 			`member_name`,
 			`member_tel`,
@@ -67,10 +71,12 @@
 			`enter_timr`,
 			`address`,
 			`insured`,
-			`insured_money`
+			`insured_money`,
+			`status`
 		)
 		values
 		(
+		    #{saleNumber},
 			#{cardMember},
 			#{memberName},
 			#{memberTel},
@@ -81,13 +87,15 @@
 			#{enterTimr},
 			#{address},
 			#{insured},
-			#{insuredMoney}
+			#{insuredMoney},
+			#{status}
 		)
 	</insert>
 
     <update id="update" parameterType="com.shiguang.mailInfo.domain.MailInfoDO">
         update mail_info
         <set>
+            <if test="saleNumber != null and saleNumber != ''"> `sale_number` = #{saleNumber}, </if>
             <if test="cardMember != null">`card_member` = #{cardMember}, </if>
             <if test="memberName != null">`member_name` = #{memberName}, </if>
             <if test="memberTel != null">`member_tel` = #{memberTel}, </if>
@@ -103,9 +111,10 @@
         where id = #{id}
     </update>
 
-    <delete id="remove">
-		delete from mail_info where id = #{value}
-	</delete>
+    <update id="remove">
+		update mail_info set `status`=1
+		 where id = #{value}
+	</update>
 
     <delete id="batchRemove">
         delete from mail_info where id in

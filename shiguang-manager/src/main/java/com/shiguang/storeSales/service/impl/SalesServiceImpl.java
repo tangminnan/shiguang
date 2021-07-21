@@ -86,4 +86,14 @@ public class SalesServiceImpl implements SalesService {
 	public List<Conclusion> conclusionList(Map<String, Object> map){
 		return salesDao.findAll(map);
 	}
+
+	@Override
+	public List<SalesDO> peijinglist(Map<String, Object> map){
+		return salesDao.peijinglist(map);
+	}
+
+	@Override
+	public int peijingcount(Map<String, Object> map){
+		return salesDao.peijingcount(map);
+	}
 }

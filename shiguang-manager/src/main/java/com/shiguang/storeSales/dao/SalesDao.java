@@ -44,4 +44,8 @@ public interface SalesDao {
 
 	List<Conclusion> findAll(Map<String,Object> map);
 
+	List<SalesDO> peijinglist(Map<String,Object> map);
+
+	int peijingcount(Map<String,Object> map);
+
 }

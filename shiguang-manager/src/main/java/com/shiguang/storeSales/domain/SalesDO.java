@@ -19,6 +19,8 @@ public class SalesDO implements Serializable {
 	private Long id;
 	//会员卡号
 	private String memberNumber;
+	private String memberName;
+	private String memberTel;
 	//销售人员
 	private String saleName;
 	//销售单号
@@ -181,6 +183,10 @@ public class SalesDO implements Serializable {
 	public String getMemberNumber() {
 		return memberNumber;
 	}
+	public void setMemberName(String memberName) {this.memberName = memberName;}
+	public String getMemberName() {return memberName;}
+	public void setMemberTel(String memberTel) {this.memberTel = memberTel;}
+	public String getMemberTel(){return memberTel;}
 	/**
 	 * 设置：销售人员
 	 */

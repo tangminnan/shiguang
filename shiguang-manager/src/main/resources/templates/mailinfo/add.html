@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">配镜单号：</label>
+								<div class="col-sm-8">
+									<input id="saleNumber" name="saleNumber" readonly type="text">
+									<input type="button" onclick="getPeijingNum()" value="选择">
+								</div>
+							</div>
+																																			<div class="form-group">	
+								<label class="col-sm-3 control-label">会员卡号：</label>
+								<div class="col-sm-8">
+									<input id="cardMember" name="cardMember" readonly type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">顾客姓名：</label>
+								<div class="col-sm-8">
+									<input id="memberName" name="memberName" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">联系人：</label>
+								<div class="col-sm-8">
+									<input id="consignee" name="consignee" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">顾客区号：</label>
+								<div class="col-sm-8">
+									<input id="memberAreacode" name="memberAreacode" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">顾客电话：</label>
+								<div class="col-sm-8">
+									<input id="memberTel" name="memberTel" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">邮寄单：</label>
+								<div class="col-sm-8">
+									<select name="mailForm" id="mailForm" class="form-control" data-actions-box="false" data-size="5">
+										<option value="">--请选择--</option>
+										<option value="顺丰省内快递">顺丰省内快递</option>
+										<option value="顺丰省外快递">顺丰省外快递</option>
+										<option value="EMS快递">EMS快递</option>
+										<option value="邮政小包">邮政小包</option>
+										<option value="圆通快递">圆通快递</option>
+										<option value="中通快递">中通快递</option>
+									</select>
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">地址：</label>
+								<div class="col-sm-8">
+									<input id="address" name="address" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">	
+								<label class="col-sm-3 control-label">报价：</label>
+								<div class="col-sm-8">
+									<label class="radio-inline"> <input type="radio"
+																		name="insured" value="1" /> 是
+									</label> <label class="radio-inline"> <input type="radio"
+																				 name="insured" value="0" /> 否
+								</label>
+									<input id="insuredMoney"  name="insuredMoney" style="display: none;">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/mailinfo/add.js">
+	</script>
+	<script type="text/javascript">
+        $("input[name=insured]").click(function(){
+            var insured = $(this).val();
+            if (insured == 1){
+                insuredMoney.style="display:block;width: 10%;";
+            } else if (insured == 0){
+                insuredMoney.style="display:none";
+            }
+        });
+        function getPeijingNum(){
+            var toIndex = layer.open({
+                type : 2,
+                title : '配镜信息',
+                maxmin : true,
+                shadeClose : false, // 点击遮罩关闭层
+                area : [ '800px', '520px' ],
+                content : "/information/mailinfo/peijingInfo/",// iframe的url
+                cancel: function(index, layero){
+                    var data = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i=0;i<data.length;i++){
+                        //$("input[name='giveName']").val(data[i].producName)
+                        $("#saleNumber").val(data[i].saleNumber)
+                        $("#cardMember").val(data[i].memberNumber)
+						$("#consignee").val(data[i].memberName)
+						$("#memberTel").val(data[i].memberTel)
+                    }
+
+                    //son_msg就是子页面中的msg数据
+                    //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                }
+            });
+            layer.full(toIndex)
+		}
+	</script>
+</body>
+</html>
