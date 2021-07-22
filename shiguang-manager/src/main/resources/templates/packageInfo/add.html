@@ -1,224 +1,515 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<meta charset="utf-8">
-<head th:include="include :: header">
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>套餐新增</title>
 	<link rel="stylesheet" href="/css/css.css" type="text/css">
 </head>
-<body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-																																			<div class="form-group">	
-								<label class="col-sm-3 control-label">套餐名称：</label>
-								<div class="col-sm-8">
-									<input id="packageName" name="packageName" type="text">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;套餐日期：<input id="packageTime" name="packageTime"  type="text" readonly>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;套餐形式：<input  name="packageForm" value="0" type="radio"/>多种优惠方式
-									<input  name="packageForm" value="1" type="radio" /> 单一优惠方式
-								</div>
-							</div>
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">套餐日期：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="packageTime" name="packageTime" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">	-->
-								<!--<label class="col-sm-3 control-label">套餐形式：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="packageForm" name="packageForm" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">生效日期：</label>
-								<div class="col-sm-8">
-									<input id="effectiveDate" name="effectiveDate" type="text">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;截至日期：<input id="expiryDate" name="expiryDate" type="text">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;套餐分类：<select id="packageType" name="packageType">
-									<option value="框镜销售">框镜销售</option>
-									<option value="隐形销售">隐形销售</option>
-									<option value="辅料销售">辅料销售</option>
-									</select>
-								</div>
-							</div>
-																												<!--<div class="form-group">	-->
-								<!--<label class="col-sm-3 control-label">截至日期：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="expiryDate" name="expiryDate" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">	-->
-								<!--<label class="col-sm-3 control-label">套餐分类：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<select id="packageType" name="packageType">-->
-										<!--<option value="框镜销售">框镜销售</option>-->
-										<!--<option value="隐形销售">隐形销售</option>-->
-										<!--<option value="辅料销售">辅料销售</option>-->
-									<!--</select>-->
-									<!--&lt;!&ndash;<input id="packageType" name="packageType" class="form-control" type="text">&ndash;&gt;-->
-								<!--</div>-->
-							<!--</div>-->
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">套餐价格区间：</label>
-								<div class="col-sm-8">
-									<input id="startPrice" name="startPrice" type="text">
-									    至
-									<input id="endPrice" name="endPrice" type="text">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;套餐金额：<input id="packagePrice" name="packagePrice" type="text">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;允许累计积分：<input name="isCumulativePoints" type="radio" value="0"/>允许
-									<input name="isCumulativePoints" type="radio" value="1" />不允许
-								</div>
-							</div>
-																												<!--<div class="form-group">	-->
-								<!--<label class="col-sm-3 control-label">套餐价格区间结束：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="endPrice" name="endPrice" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">	-->
-								<!--<label class="col-sm-3 control-label">套餐金额：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="packagePrice" name="packagePrice" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">	-->
-								<!--<label class="col-sm-3 control-label">是否允许累计积分：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="isCumulativePoints" name="isCumulativePoints" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">允许累加：</label>
-								<div class="col-sm-8">
-									<input name="isAdd" value="0" type="radio"/>允许
-									<input name="isAdd" value="1" type="radio"/>不允许
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;折上折：
-									<input name="foldUp" value="0" type="radio"/>允许
-									<input name="foldUp" value="1" type="radio"/>不允许
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;零售价格：<select id="retailPrice" name="retailPrice">
-										<option value="标准零售价格">标准零售价格</option>
-									</select>
-								</div>
-							</div>
-																												<!--<div class="form-group">	-->
-								<!--<label class="col-sm-3 control-label">是否允许折上折：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="foldUp" name="foldUp" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">	-->
-								<!--<label class="col-sm-3 control-label">零售价格：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="retailPrice" name="retailPrice" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">活动门店：</label>
-								<div class="col-sm-8">
-									<select name="storesstr" id="storesstr" multiple class="selectpicker form-control" onchange="changeDepart()">
-										<option th:each="ls:${departmentDOList}"
-												th:text="${ls.departName}"
-												th:value="${ls.departName}"></option>
-									</select>
-									<input id="store" name="store" class="form-control" type="hidden">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">备注：</label>
-								<div class="col-sm-8">
-									<input id="remark" name="remark" class="form-control" type="text">
-								</div>
-							</div>
-																					<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
-								</div>
-							</div>
-						</form>
-						<h3>购买商品</h3>
-						<input type="button" value="添加购买商品" onclick="getGoods()">
-						<table class="cho_tabA" cellspacing="0" cellpadding="0">
-							<thead>
-							<tr>
-								<th><input name="cho" type="checkbox" />选择</th>
-								<th>商品信息</th>
-								<th>商品原价区间</th>
-								<th>套餐价格区间</th>
-								<th>销售数量</th>
-								<th>消费满</th>
-								<th>优惠方式</th>
-								<th>套餐单价</th>
-								<th>特价金额</th>
-								<th>优惠金额</th>
-								<th>优惠折扣</th>
-							</tr>
-							</thead>
-							<tbody id="goods">
-							</tbody>
-						</table>
-					</div>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+<div class="new_h3">套餐新增</div>
+
+<!--详细信息-->
+<div class="m40 TC_msgNew">
+	<h3>详细信息</h3>
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tbody>
+		<tr>
+			<td>
+				<span>套餐标题：</span>
+				<input type="text" value="***" id="packageName" name="packageName"/>
+				<em>*（内容不超过50字）</em>
+			</td>
+			<td>
+				<span>套餐日期：</span>
+				<input type="text" name="packageTime" id="packageTime"/>
+			</td>
+			<td>
+				<span>套餐形式：</span>
+				<input name="packageForm" type="radio" id="YH1" value="0" checked onchange="getYouhui(0)"> <label for="YH1">多种优惠方式</label>
+				<input name="packageForm"  type="radio" id="YH2" value="1" onchange="getYouhui(1)"> <label for="YH2">单一优惠方式</label>
+				<em>*</em>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span>生效日期：</span>
+				<input type="text" id="effectiveDate" name="effectiveDate" />
+				<em>*</em>
+			</td>
+			<td>
+				<span>截止日期：</span>
+				<input type="text" id="expiryDate" name="expiryDate" />
+				<em>*</em>
+			</td>
+			<td>
+				<span>套餐分类：</span>
+				<select name="packageType" id="packageType">
+					<option value="框镜销售">框镜销售</option>
+					<option value="隐形销售">隐形销售</option>
+					<option value="辅料销售">辅料销售</option>
+				</select>
+				<em>*</em>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span>套餐价格区间：</span>
+				<input class="short" type="text" id="startPrice" name="startPrice" /> 至
+				<input class="short" type="text" id="endPrice" name="endPrice" />
+			</td>
+			<td>
+				<span>套餐金额：</span>500
+			</td>
+			<td>
+				<span>允许累计积分：</span>
+				<input name="isCumulativePoints" type="radio" id="YX1" value="0" checked> <label for="YX1">允许</label>
+				<input name="isCumulativePoints"  type="radio" id="YX2" value="1"> <label for="YX2">不允许</label>
+				<em>*</em>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span>允许累加：</span>
+				<input name="isAdd" type="radio" id="YEH1" value="0" checked> <label for="YEH1">允许</label>
+				<input name="isAdd"  type="radio" id="YEH2" value="1"> <label for="YEH2">不允许</label>
+				<em>*</em>
+			</td>
+			<td>
+				<span>折上折：</span>
+				<input name="foldUp" type="radio" id="ZSZ1" value="0" checked> <label for="ZSZ1">允许</label>
+				<input name="foldUp"  type="radio" id="ZSZ2" value="1"> <label for="ZSZ2">不允许</label>
+			</td>
+			<td>
+				<span>零售价格：</span>
+				<select name="retailPrice" id="retailPrice">
+					<option value="标准零售价格">标准零售价格</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<span>活动门店：</span>
+				<label for="MD"><input name="MD" type="checkbox" id="MD" checked> 所有门店</label> <br/>
+				<textarea rows="3" style="margin-left: 110px;" id="store" name="store"></textarea>
+				<div class="maxL" style="margin:15px 0 0;display: inline-block;vertical-align:top;">
+					<input type="button" onclick="getMendian()" value="选择" />
+					<input class="empty" type="button" onclick="getQingkong()" value="清空" />
 				</div>
-			</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<span style="vertical-align: top;">备注：</span>
+				<textarea rows="4" id="remark" name="remark"></textarea>
+				<em>（内容不超过1000字）</em>
+			</td>
+		</tr>
+		<tr>
+			<td ccolspan="3" style="padding-left: 110px;">
+				<input name="GX" type="checkbox" id="GX" checked> <label for="GX">保存并审核</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="HbcBtn">
+				<input type="button" value="保存" />
+				<input type="button" class="HbcBtn_QK" value="清空" />
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+
+</div>
+
+<!--多种优惠-->
+<div class="m40 TC_yhNew">
+	<h3>多种优惠</h3>
+	<div class="Hbox">
+		<h4><b>商品信息</b></h4>
+		<p>整单满：<input type="text" value="0.00" /> 至 <input type="text" value="0.00" /></p>
 	</div>
+
+	<div class="Hbox" id="goumai" style="display: block">
+		<h4><b>购买商品</b></h4>
+		<div class="pltjBox">
+			<span id="addGoods">添加购买商品</span>
+			<span>批量添加商品</span>
+			<input type="button" onclick="shanchu()" value="删除" />
+			<b>购买方式：</b>
+			<input name="FS" type="radio" id="FS1" checked> <label for="FS1">任选其一</label>
+			<input name="FS"  type="radio" id="FS2"> <label for="FS2">符合全部</label>
+		</div>
+		<table class="buyBox tabS" border="0" cellspacing="0" cellpadding="0">
+			<tbody id="tr1">
+			<tr class="thead" >
+				<td width="5%"><label for="ALL">全选 </label><input name="ALL" type="checkbox" id="ALL" /></td>
+				<td width="28%">商品信息</td>
+				<td>商品原件区间</td>
+				<td>套餐价格区间</td>
+				<td>销售数量</td>
+				<td>消费满</td>
+				<td width="5%">优惠方式</td>
+				<td>套餐单价</td>
+				<td>特价金额</td>
+				<td>优惠金额</td>
+				<td>优惠折扣</td>
+			</tr>
+
+			<!--<tr id="tr1">-->
+				<!--<td><input type="checkbox" /></td>-->
+				<!--<td>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">镜片</option>-->
+						<!--<option value="">镜片1</option>-->
+					<!--</select>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">镜片功能</option>-->
+						<!--<option value="">镜片功能1</option>-->
+					<!--</select>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">白色</option>-->
+						<!--<option value="">蓝色</option>-->
+					<!--</select>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">镜架</option>-->
+						<!--<option value="">镜架1</option>-->
+					<!--</select>-->
+				<!--</td>-->
+				<!--<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>-->
+				<!--<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>-->
+				<!--<td>-->
+					<!--<select name="" id="" style="width:100%">-->
+						<!--<option value="">原价</option>-->
+						<!--<option value="">9折</option>-->
+					<!--</select>-->
+				<!--</td>-->
+				<!--<td><input type="text" /></td>-->
+				<!--<td><input type="text" /></td>-->
+				<!--<td><input type="text" /></td>-->
+				<!--<td><input type="text" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="checkbox" /></td>-->
+				<!--<td>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">镜片</option>-->
+						<!--<option value="">镜片1</option>-->
+					<!--</select>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">镜片功能</option>-->
+						<!--<option value="">镜片功能1</option>-->
+					<!--</select>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">白色</option>-->
+						<!--<option value="">蓝色</option>-->
+					<!--</select>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">镜架</option>-->
+						<!--<option value="">镜架1</option>-->
+					<!--</select>-->
+				<!--</td>-->
+				<!--<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>-->
+				<!--<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>-->
+				<!--<td>-->
+					<!--<select name="" id="" style="width:100%">-->
+						<!--<option value="">原价</option>-->
+						<!--<option value="">9折</option>-->
+					<!--</select>-->
+				<!--</td>-->
+				<!--<td><input type="text" /></td>-->
+				<!--<td><input type="text" /></td>-->
+				<!--<td><input type="text" /></td>-->
+				<!--<td><input type="text" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="checkbox" /></td>-->
+				<!--<td>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">镜片</option>-->
+						<!--<option value="">镜片1</option>-->
+					<!--</select>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">镜片功能</option>-->
+						<!--<option value="">镜片功能1</option>-->
+					<!--</select>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">白色</option>-->
+						<!--<option value="">蓝色</option>-->
+					<!--</select>-->
+					<!--<select name="" id="">-->
+						<!--<option value="">镜架</option>-->
+						<!--<option value="">镜架1</option>-->
+					<!--</select>-->
+				<!--</td>-->
+				<!--<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>-->
+				<!--<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>-->
+				<!--<td>-->
+					<!--<select name="" id="" style="width:100%">-->
+						<!--<option value="">原价</option>-->
+						<!--<option value="">9折</option>-->
+					<!--</select>-->
+				<!--</td>-->
+				<!--<td><input type="text" /></td>-->
+				<!--<td><input type="text" /></td>-->
+				<!--<td><input type="text" /></td>-->
+				<!--<td><input type="text" /></td>-->
+			<!--</tr>-->
+			</tbody>
+		</table>
 	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/packageInfo/add.js">
-	</script>
+
+	<div class="Hbox" id="youhui" style="display: block">
+		<h4><b>优惠商品</b></h4>
+		<div class="pltjBox">
+			<span>添加消费抵扣商品</span>
+			<span>批量添加商品</span>
+			<input type="button" value="删除" />
+			<b>购买方式：</b>
+			<input name="FSA" type="radio" id="FSA1" checked> <label for="FSA1">任选其一</label>
+			<input name="FSA"  type="radio" id="FSA2"> <label for="FSA2">符合全部</label>
+		</div>
+		<table class="buyBox tabS" border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="thead">
+				<td width="5%"><label for="ALLA">全选 </label><input name="ALL" type="checkbox" id="ALLA" /></td>
+				<td width="28%">商品信息</td>
+				<td>商品原件区间</td>
+				<td>套餐价格区间</td>
+				<td>商品数量</td>
+				<td width="5%">优惠方式</td>
+				<td>套餐单价</td>
+				<td>特价金额</td>
+				<td>优惠金额</td>
+				<td>优惠折扣</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>
+					<select name="" id="">
+						<option value="">镜片</option>
+						<option value="">镜片1</option>
+					</select>
+					<select name="" id="">
+						<option value="">镜片功能</option>
+						<option value="">镜片功能1</option>
+					</select>
+					<select name="" id="">
+						<option value="">白色</option>
+						<option value="">蓝色</option>
+					</select>
+					<select name="" id="">
+						<option value="">镜架</option>
+						<option value="">镜架1</option>
+					</select>
+				</td>
+				<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>
+				<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>
+				<td><input type="text" value="2" /></td>
+				<td>
+					<select name="" id="" style="width:100%">
+						<option value="">原价</option>
+						<option value="">9折</option>
+					</select>
+				</td>
+				<td><input type="text" /></td>
+				<td><input type="text" /></td>
+				<td><input type="text" /></td>
+				<td><input type="text" /></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>
+					<select name="" id="">
+						<option value="">镜片</option>
+						<option value="">镜片1</option>
+					</select>
+					<select name="" id="">
+						<option value="">镜片功能</option>
+						<option value="">镜片功能1</option>
+					</select>
+					<select name="" id="">
+						<option value="">白色</option>
+						<option value="">蓝色</option>
+					</select>
+					<select name="" id="">
+						<option value="">镜架</option>
+						<option value="">镜架1</option>
+					</select>
+				</td>
+				<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>
+				<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>
+				<td><input type="text" value="2" /></td>
+				<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>
+				<td>
+					<select name="" id="" style="width:100%">
+						<option value="">原价</option>
+						<option value="">9折</option>
+					</select>
+				</td>
+				<td><input type="text" /></td>
+				<td><input type="text" /></td>
+				<td><input type="text" /></td>
+				<td><input type="text" /></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>
+					<select name="" id="">
+						<option value="">镜片</option>
+						<option value="">镜片1</option>
+					</select>
+					<select name="" id="">
+						<option value="">镜片功能</option>
+						<option value="">镜片功能1</option>
+					</select>
+					<select name="" id="">
+						<option value="">白色</option>
+						<option value="">蓝色</option>
+					</select>
+					<select name="" id="">
+						<option value="">镜架</option>
+						<option value="">镜架1</option>
+					</select>
+				</td>
+				<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>
+				<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>
+				<td><input type="text" value="2" /></td>
+				<td><input class="short" type="text" value="500.00" /> 至 <input class="short" type="text" value="600.00"></td>
+				<td>
+					<select name="" id="" style="width:100%">
+						<option value="">原价</option>
+						<option value="">9折</option>
+					</select>
+				</td>
+				<td><input type="text" /></td>
+				<td><input type="text" /></td>
+				<td><input type="text" /></td>
+				<td><input type="text" /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="buyBtns">
+		<input type="checkbox" id="buySH" checked> <label for="buySH">保存并审核</label> <br/><br/>
+		<input type="button" value="保存" />
+		<input type="button" class="HbcBtn_QK" value="清空" />
+	</div>
+
+</div>
+</form>
+<div th:include="include :: footer"></div>
 <script type="text/javascript">
-    $().ready(function(){
-        var now = new Date();
-        var year = now.getFullYear(); //得到年份
-        var month = now.getMonth();//得到月份
-        var date = now.getDate();//得到日期
-        var hour = now.getHours();//小时
-        var minutes = now.getMinutes();//分钟
-        var seconds = now.getSeconds();//秒
-        month = month + 1;
-        if (month < 10) month = "0" + month;
-        if (date < 10) date = "0" + date;
-        var time = "";
-        time = year + "-" + month + "-" + date;
-        $("#packageTime").val(time);
-    })
-    laydate.render({
-        elem: '#effectiveDate',
-        type: 'date'
-    });
-    laydate.render({
-        elem: '#expiryDate',
-        type: 'date'
-    });
-    function changeDepart() {
-        var interester = [];
-        var obj = document.getElementById("storesstr");
-        for (var i = 0; i < obj.options.length; i++) {
-            if (obj.options[i].selected) {
-                interester.push(obj.options[i].value);// 收集选中项
-            }
-        }
-        $("#store").val(interester);
-    }
-    var html ="";
-    function getGoods(){
-        html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
-        html += "<td><select><option value='镜架'>镜架</option><option value='配件'>配件</option><option value='镜片'>镜片</option>";
-        html += "<option value='成品片'>成品片</option><option value='订做片'>订做片</option><option value='太阳镜'>老花镜</option>";
-		html += "<option value='耗材'>耗材</option><option value='视光'>视光</option><option value='护理液'>护理液</option></select>";
-        html += "<input id='goodsName' /><input type='button' value='选择'/></td>";
-		html += "<td>至</td>";
-		html += "<td><input type='text' value='' />至<input type='text' value='' /></td>";
-        html += "<td><input type='text' value='' /></td>";
-        html += "<td><input type='text' value='' />至<input type='text' value='' /></td>";
-        html += "<td><select><option value='原价'>原价</option><option value='打折'>打折</option></select></td>";
-        html += "<td><input type='text' value='' /></td>";
-        html += "<td><input type='text' value='' /></td>";
-        html += "<td><input type='text' value='' /></td>";
-        html += "<td><input type='text' value='' /></td>";
-        $("#goods").append(html);
+	function getYouhui(obj){
+	    alert(obj)
+		if (obj == 0){
+	        goumai.style="display:block;"
+            youhui.style="display:block;"
+		} else if (obj == 1){
+            goumai.style="display:block;"
+            youhui.style="display:none;"
+		}
 	}
+	var array=[];
+    function getMendian(){
+        var toIndex = layer.open({
+            type : 2,
+            title : '门店信息',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/package/store/", // iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+				for (var i=0;i<rows.length;i++){
+                    array.push(rows[i].departName);
+				}
+				$("#store").val(array);
+                //son_msg就是子页面中的msg数据
+                //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            }
+        });
+        layer.full(toIndex)
+    }
+    function getQingkong(){
+        document.getElementById("store").value="";
+	}
+    var html = "";
+	$("#addGoods").click(function () {
+		html = "<tr>";
+		html += "<td><input type=\"checkbox\" id=\"allChecks\" /></td>";
+		html +="<td>";
+		html += " <select name='goodType' id='goodType' onchange='selectChange()'> <option value=''>--请选择--</option><option value='镜架'>镜架</option><option value='配件'>配件</option>" +
+			"<option value='镜片'>镜片</option><option value='成品片'>成品片</option><option value='订做片'>订做片</option><option value='太阳镜'>太阳镜</option>" +
+			"<option value='老花镜'>老花镜</option><option value='耗材'>耗材</option><option value='视光'>视光</option><option value='隐形护理液'>隐形护理液</option></select>";
+		html += "<select name='caizhi' id='caizhi' onchange='getCaizhi()' style='display: none'></select>";
+		html += "<select name='fenlei' id='fenlei' style='display: none'></select>";
+		html += "<input type='text' style='width: 20%;' id='goodsName'><input type='button' value='选择'>";
+		html += "</td>";
+		html += "<td><input class=\"short\" type=\"text\" value=\"500.00\" /> 至 <input class=\"short\" type=\"text\" value=\"600.00\"></td>";
+		html += "<td><input class=\"short\" type=\"text\" value=\"500.00\" /> 至 <input class=\"short\" type=\"text\" value=\"600.00\"></td>";
+		html += "<td><input type=\"text\" value=\"2\" /></td>";
+		html += "<td><input class=\"short\" type=\"text\" value=\"500.00\" /> 至 <input class=\"short\" type=\"text\" value=\"600.00\"></td>";
+		html += "<td>";
+		html += "<select name='' id='' style=\"width:100%\">";
+		html += "<option value=''>原价</option><option value=''>9折</option></select>";
+		html += "</td>";
+		html += "<td><input type=\"text\" /></td>";
+		html += "<td><input type=\"text\" /></td>";
+		html += "<td><input type=\"text\" /></td>";
+		html += "<td><input type=\"text\" /></td>";
+		html += "</tr>";
+		$("#tr1").append(html);
+    })
+	function selectChange(){
+	    var goods = $("#goodType").val();
+        $("#caizhi").empty();
+	    if (goods == '镜架'){
+            var s1=""
+            caizhi.style="display: ''";
+            s1="<option value=''>--请选择--</option><option value='材质'>材质</option>";
+            $("#caizhi").append(s1);
+		} else if(goods == '配件'){
+            caizhi.style="display: none";
+            fenlei.style="display: none";
+            document.getElementById("caizhi").value="";
+            document.getElementById("fenlei").value="";
+		} else if (goods == '镜片'){
+            var s1=""
+            caizhi.style="display: ''";
+            s1="<option value=''>--请选择--</option><option value='材料分类'>材料分类</option><option value='折射率'>折射率</option>" +
+				"<option value='光度分类'>光度分类</option><option value='镜片功能'>镜片功能</option><option value='球镜区间'>球镜区间</option>" +
+				"<option value='柱镜区间'>柱镜区间</option>";
+            $("#caizhi").append(s1);
+		}
+	}
+	function getCaizhi(){
+	    var cz = $("#caizhi").val();
+        $("#fenlei").empty();
+	    if (cz == "材质"){
+            var gn = "";
+            gn = "<option value=''>--请选择--</option><option value='合金'>合金</option><option value='钛合金'>钛合金</option>";
+            fenlei.style="display: ''";
+			$("#fenlei").append(gn);
+		} else if (cz == "材料分类"){
+            var gn = "";
+            gn = "<option value=''>--请选择--</option><option value='树脂'>树脂</option><option value='玻璃'>玻璃</option><option value='PC'>PC</option>";
+            fenlei.style="display: ''";
+            $("#fenlei").append(gn);
+		}
+	}
+
+
 </script>
 </body>
 </html>

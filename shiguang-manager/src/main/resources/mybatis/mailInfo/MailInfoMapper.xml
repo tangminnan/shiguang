@@ -54,6 +54,7 @@
             <if test="address != null and address != ''"> and address = #{address} </if>
             <if test="insured != null and insured != ''"> and insured = #{insured} </if>
             <if test="insuredMoney != null and insuredMoney != ''"> and insured_money = #{insuredMoney} </if>
+            and status = 0
         </where>
     </select>
 

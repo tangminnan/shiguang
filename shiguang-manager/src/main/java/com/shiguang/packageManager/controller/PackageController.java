@@ -76,6 +76,31 @@ public class PackageController {
 		model.addAttribute("package", packages);
 	    return "packageInfo/edit";
 	}
+
+	@GetMapping("/store")
+	@RequiresPermissions("information:package:store")
+	String store(){
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("departType","销售门店");
+//		map.put("state",1);
+//		List<DepartmentDO> departmentDOList = departmentService.list(map);
+//		model.addAttribute("departmentDOList",departmentDOList);
+		return "packageInfo/store";
+	}
+
+	@ResponseBody
+	@GetMapping("/storelist")
+	@RequiresPermissions("information:package:store")
+	public PageUtils storelist(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		query.put("departType","销售门店");
+		query.put("state",1);
+		List<DepartmentDO> departmentDOList = departmentService.list(query);
+		int total = departmentService.count(query);
+		PageUtils pageUtils = new PageUtils(departmentDOList, total);
+		return pageUtils;
+	}
 	
 	/**
 	 * 保存
