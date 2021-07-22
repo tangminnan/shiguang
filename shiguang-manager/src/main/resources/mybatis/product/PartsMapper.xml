@@ -4,32 +4,43 @@
 <mapper namespace="com.shiguang.product.dao.PartsDao">
 
     <select id="get" resultType="com.shiguang.product.domain.PartsDO">
-		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`proid`,`parts_style`,`unitid`,`batchid`,`refractivityid`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_parts where id = #{value}
-	</select>
+        select p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`factory`,p.`produc_factory`,p.`proid`,p.`parts_style`,
+          p.`unitid`,p.`batchid`,p.`refractivityid`,p.`tax`,p.`tax_price`,p.`trade_price`,p.`transfer_price`,p.`retail_price`
+          ,m.mfrsname,b.brandname,u.unitname
+          from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandid=b.brandid left join
+          c_unit u on p.unitid= u.unitid
+          where id = #{value}
+    </select>
 
     <select id="list" resultType="com.shiguang.product.domain.PartsDO">
         select
-        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`proid`,`parts_style`,`unitid`,`batchid`,`refractivityid`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price`
-        from aa_parts
+        p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`factory`,p.`produc_factory`,p.`proid`,p.`parts_style`,
+        p.`unitid`,p.`batchid`,p.`refractivityid`,p.`tax`,p.`tax_price`,p.`trade_price`,p.`transfer_price`,p.`retail_price`
+        ,m.mfrsname,b.brandname,u.unitname
+        from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandid=b.brandid left join
+        c_unit u on p.unitid= u.unitid
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
-            <if test="proid != null and proid != ''">and proid = #{proid}</if>
-            <if test="partsStyle != null and partsStyle != ''">and parts_style = #{partsStyle}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="batchid != null and batchid != ''">and batchid = #{batchid}</if>
-            <if test="refractivityid != null and refractivityid != ''">and refractivityid = #{refractivityid}</if>
-            <if test="tax != null and tax != ''">and tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="id != null and id != ''">and p.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and p.brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and p.factory = #{factory}</if>
+            <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
+            <if test="proid != null and proid != ''">and p.proid = #{proid}</if>
+            <if test="partsStyle != null and partsStyle != ''">and p.parts_style = #{partsStyle}</if>
+            <if test="unitid != null and unitid != ''">and p.unitid = #{unitid}</if>
+            <if test="batchid != null and batchid != ''">and p.batchid = #{batchid}</if>
+            <if test="refractivityid != null and refractivityid != ''">and p.refractivityid = #{refractivityid}</if>
+            <if test="tax != null and tax != ''">and p.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and p.tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and p.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and p.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and p.retail_price = #{retailPrice}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -71,42 +82,42 @@
     <insert id="save" parameterType="com.shiguang.product.domain.PartsDO" useGeneratedKeys="true" keyProperty="id">
 		insert into aa_parts
 		(
-			`produc_num`, 
-			`produc_code`, 
-			`produc_name`, 
-			`mfrsid`, 
-			`brandid`, 
-			`factory`, 
-			`produc_factory`, 
-			`proid`, 
-			`parts_style`, 
-			`unitid`, 
-			`batchid`, 
-			`refractivityid`, 
-			`tax`, 
-			`tax_price`, 
-			`trade_price`, 
-			`transfer_price`, 
+			`produc_num`,
+			`produc_code`,
+			`produc_name`,
+			`mfrsid`,
+			`brandid`,
+			`factory`,
+			`produc_factory`,
+			`proid`,
+			`parts_style`,
+			`unitid`,
+			`batchid`,
+			`refractivityid`,
+			`tax`,
+			`tax_price`,
+			`trade_price`,
+			`transfer_price`,
 			`retail_price`
 		)
 		values
 		(
-			#{producNum}, 
-			#{producCode}, 
-			#{producName}, 
-			#{mfrsid}, 
-			#{brandid}, 
-			#{factory}, 
-			#{producFactory}, 
-			#{proid}, 
-			#{partsStyle}, 
-			#{unitid}, 
-			#{batchid}, 
-			#{refractivityid}, 
-			#{tax}, 
-			#{taxPrice}, 
-			#{tradePrice}, 
-			#{transferPrice}, 
+			#{producNum},
+			#{producCode},
+			#{producName},
+			#{mfrsid},
+			#{brandid},
+			#{factory},
+			#{producFactory},
+			#{proid},
+			#{partsStyle},
+			#{unitid},
+			#{batchid},
+			#{refractivityid},
+			#{tax},
+			#{taxPrice},
+			#{tradePrice},
+			#{transferPrice},
 			#{retailPrice}
 		)
 	</insert>
@@ -145,7 +156,7 @@
             #{id}
         </foreach>
     </delete>
-    <!--查询镜架制造商-->
+    <!--查询配件制造商-->
     <select id="mglist" resultType="com.shiguang.product.domain.PartsDO">
 		select m.mfrsid,m.mfrsname from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid  left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=2
 	</select>

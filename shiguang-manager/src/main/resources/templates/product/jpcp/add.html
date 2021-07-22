@@ -37,15 +37,9 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">制造商简称：</label>
                                 <div class="col-sm-8">
-                                    <select id="mfrsid" name="mfrsid" class="form-control"
-                                            onchange="choice(this.options[this.options.selectedIndex].value)">
-                                        <option></option>
-                                        <option th:each="ls:${mfrsDOList}"
-                                                th:text="${ls.mfrsname}"
-                                                th:value="${ls.mfrsid}"
-                                        ></option>
-                                    </select>
-                                    <span style="color: red">*</span>
+                                    <td><input type="text" id="mfrsName" name="mfrsName"/></td>
+                                    <input type="hidden" id="mfrsid" name="mfrsid"/>
+                                    <input type="button" value="选择*" onclick="getMfrsJpcp()" style="color: red"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -149,9 +143,8 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">渐进片分类：</label>
-                            <div class="col-sm-8" id="tab6" style="display: none">
-                                <select id="gradualId" name="gradualId" class="form-control">
-                                    <option></option>
+                            <div class="col-sm-8">
+                                <select id="gradualId" name="gradualId" class="form-control" style="display: none">
                                     <option th:each="ls:${gradualDOList}"
                                             th:text="${ls.gradualName}"
                                             th:value="${ls.gradualId}"
@@ -174,7 +167,6 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">镜片功能：</label>
                             <div class="col-sm-8">
-                                <!--<input id="functionName" name="functionName" class="form-control" type="text">-->
                                 <select id="functionId" name="functionId" class="form-control">
                                     <option></option>
                                     <option th:each="ls:${functionDOList}"
@@ -228,6 +220,7 @@
 </div>
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/product/jpcp/add.js"></script>
+<script type="text/javascript" src="/js/appjs/mfrs/brand/findmfrs.js"></script>
 <script>
     <!--//———制造商与品种联动—————-->
     function choice(value) {
@@ -255,30 +248,21 @@
         });
     }
 
-    // <!--//———厂家型号与型号联动—————-->
-    function factory1(val) {
-        var inputs = document.getElementsByName("factory");
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].value = val;
-        }
-    }
-
-
+    // <!--//——— //根据光度分类选择控制渐进片分类显隐—————-->
     function lightIdstr(value) {
-        // alert(value+"光度分类的值")
         if (value == '1') {
-            tab6.style = "display: none";
+            gradualId.style = "display: none";
         } else if (value == '2') {
-            tab6.style = "display: none";
+            gradualId.style = "display: none";
         } else if (value == '3') {
-            tab6.style = "display: none";
+            gradualId.style = "display: none";
         } else if (value == '4') {
-            tab6.style = "display: none";
+            gradualId.style = "display: none";
         } else if (value == '5') {
-            tab6.style = "display: block";
+            gradualId.style = "display: block";
         }
-
     }
+
 </script>
 </body>
 </html>

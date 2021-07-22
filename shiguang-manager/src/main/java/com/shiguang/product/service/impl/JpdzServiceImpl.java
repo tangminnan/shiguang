@@ -23,13 +23,13 @@ public class JpdzServiceImpl implements JpdzService {
     }
 
     @Override
-    public List<JpdzDO> list(Map<String, Object> map) {
-        return jpdzDao.list(map);
+    public List<JpdzDO> listDz(Map<String, Object> map) {
+        return jpdzDao.listDz(map);
     }
 
     @Override
-    public int count(Map<String, Object> map) {
-        return jpdzDao.count(map);
+    public int countDz(Map<String, Object> map) {
+        return jpdzDao.countDz(map);
     }
 
     @Override
@@ -62,16 +62,6 @@ public class JpdzServiceImpl implements JpdzService {
     @Override
     public List<BrandDO> choice(Integer mfrsid) {
         return jpdzDao.choice(mfrsid);
-    }
-
-    @Override
-    public List<JpdzDO> listDz(Map<String, Object> map) {
-        return jpdzDao.listDz(map);
-    }
-
-    @Override
-    public int countDz(Map<String, Object> map) {
-        return jpdzDao.countDz(map);
     }
 
 }

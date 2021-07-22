@@ -4,36 +4,48 @@
 <mapper namespace="com.shiguang.product.dao.JpcpDao">
 
     <select id="get" resultType="com.shiguang.product.domain.JpcpDO">
-		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`proid`,`unitid`,`sph_id`,`cyl_id`,`lightbelow_id`,`lens_id`,`batchid`,`light_id`,`gradual_id`,`refractivityid`,`function_id`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_jpcp where id = #{value}
-	</select>
-
+        select j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
+        j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
+        j.`trade_price`,j.`transfer_price`,j.`retail_price` ,
+        m.mfrsname,b.brandname,u.unitname
+        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsid left join c_brand b on j.brandid=b.brandid left join
+        c_unit u on j.unitid= u.unitid
+        where id = #{value}	</select>
+    <!--//修改时显示制造商和商品品种名称-->
     <select id="list" resultType="com.shiguang.product.domain.JpcpDO">
         select
-        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`proid`,`unitid`,`sph_id`,`cyl_id`,`lightbelow_id`,`lens_id`,`batchid`,`light_id`,`gradual_id`,`refractivityid`,`function_id`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price`
-        from aa_jpcp
+        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
+        j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
+        j.`trade_price`,j.`transfer_price`,j.`retail_price` ,
+        m.mfrsname,b.brandname,u.unitname
+        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsid left join c_brand b on j.brandid=b.brandid left join
+        c_unit u on j.unitid= u.unitid
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-            <if test="proid != null and proid != ''">and proid = #{proid}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="sphId != null and sphId != ''">and sph_id = #{sphId}</if>
-            <if test="cylId != null and cylId != ''">and cyl_id = #{cylId}</if>
-            <if test="lightbelowId != null and lightbelowId != ''">and lightbelow_id = #{lightbelowId}</if>
-            <if test="lensId != null and lensId != ''">and lens_id = #{lensId}</if>
-            <if test="batchid != null and batchid != ''">and batchid = #{batchid}</if>
-            <if test="lightId != null and lightId != ''">and light_id = #{lightId}</if>
-            <if test="gradualId != null and gradualId != ''">and gradual_id = #{gradualId}</if>
-            <if test="refractivityid != null and refractivityid != ''">and refractivityid = #{refractivityid}</if>
-            <if test="functionId != null and functionId != ''">and function_id = #{functionId}</if>
-            <if test="tax != null and tax != ''">and tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="id != null and id != ''">and j.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
+            <if test="proid != null and proid != ''">and j.proid = #{proid}</if>
+            <if test="unitid != null and unitid != ''">and j.unitid = #{unitid}</if>
+            <if test="sphId != null and sphId != ''">and j.sph_id = #{sphId}</if>
+            <if test="cylId != null and cylId != ''">and j.cyl_id = #{cylId}</if>
+            <if test="lightbelowId != null and lightbelowId != ''">and j.lightbelow_id = #{lightbelowId}</if>
+            <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
+            <if test="batchid != null and batchid != ''">and j.batchid = #{batchid}</if>
+            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
+            <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
+            <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
+            <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
+            <if test="tax != null and tax != ''">and j.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and j.tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and j.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and j.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -47,7 +59,6 @@
             limit #{offset}, #{limit}
         </if>
     </select>
-
     <select id="count" resultType="int">
         select count(*) from aa_jpcp
         <where>
@@ -181,7 +192,8 @@
         select
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`proid`,j.`unitid`,j.`sph_id`,s.`sph`,j.`cyl_id`,c.`cyl`,j.`lightbelow_id`,l.`lightbelow`,j.`lens_id`,j.`batchid`,j.`light_id`,pl.`light_name`,j.`gradual_id`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,j.`tax`,j.`tax_price`,j.`trade_price`,j.`transfer_price`,j.`retail_price`
         from aa_jpcp j left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
-        left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid = j.refractivityid
+        left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
+        j.refractivityid
         left join p_light pl on pl.light_id = j.light_id
         <where>
             <if test="id != null and id != ''">and j.id = #{id}</if>
@@ -222,7 +234,8 @@
 
     <select id="countCp" resultType="int">
         select count(*) from aa_jpcp j left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
-        left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid = j.refractivityid
+        left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
+        j.refractivityid
         left join p_light pl on pl.light_id = j.light_id
         <where>
             <if test="id != null and id != ''">and j.id = #{id}</if>

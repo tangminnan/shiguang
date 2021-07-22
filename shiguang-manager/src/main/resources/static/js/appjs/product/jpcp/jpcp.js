@@ -62,12 +62,20 @@ function load() {
                         field: 'producName',
                         title: '商品名称'
                     },
+                    // {
+                    //     field: 'mfrsid',
+                    //     title: '制造商id'
+                    // },
                     {
-                        field: 'mfrsid',
-                        title: '制造商id'
+                        field: 'mfrsname',
+                        title: '制造商简称'
                     },
+                    // {
+                    //     field: 'brandid',
+                    //     title: '商品品种'
+                    // },
                     {
-                        field: 'brandid',
+                        field: 'brandname',
                         title: '商品品种'
                     },
                     {
@@ -78,6 +86,10 @@ function load() {
                     //     field: 'unitid',
                     //     title: '计量单位'
                     // },
+                    {
+                        field: 'unitname',
+                        title: '单位'
+                    },
                     // {
                     //     field: 'sphId',
                     //     title: '球镜id'

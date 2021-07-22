@@ -68,6 +68,58 @@ public class MfrsController {
         return pageUtils;
     }
 
+    //查询镜架制造商
+    @ResponseBody
+    @GetMapping("/producaList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils producaList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.producaList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
+    //查询配件制造商
+    @ResponseBody
+    @GetMapping("/partsList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils partsList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.partsList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
+    //查询镜片成片制造商
+    @ResponseBody
+    @GetMapping("/JpcpList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils JpcpList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.JpcpList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
+    //查询镜片成片制造商
+    @ResponseBody
+    @GetMapping("/JpdzList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils JpdzList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.JpcpList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
     @GetMapping("/add")
     @RequiresPermissions("mfrs:mfrs:add")
     String add(Model model) {
@@ -137,7 +189,7 @@ public class MfrsController {
         String mfrsnum = mfrs.getMfrsnum();
         Map<String, Object> map = new HashMap<>();
         map.put("mfrsnum", mfrsnum);
-        List<MfrsDO> list = mfrsService.list(map);
+        List<MfrsDO> list = mfrsService.mglist(map);
         if (list.size() > 0) {
             return R.error("制造商代码已存在");
         }

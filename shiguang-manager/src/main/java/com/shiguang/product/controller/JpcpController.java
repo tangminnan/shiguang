@@ -116,7 +116,6 @@ public class JpcpController {
         //渐进片分类
         List<GradualDO> gradualDOList = gradualService.list(map);
         model.addAttribute("gradualDOList", gradualDOList);
-
         //镜片功能
         List<FunctionDO> functionDOList = functionService.list(map);
         model.addAttribute("functionDOList", functionDOList);
@@ -129,6 +128,37 @@ public class JpcpController {
     String edit(@PathVariable("id") Long id, Model model) {
         JpcpDO jpcp = jpcpService.get(id);
         model.addAttribute("jpcp", jpcp);
+        Map<String, Object> map = new HashMap<>();
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        //球镜
+        List<SphDO> sphDOList = sphService.list(map);
+        model.addAttribute("sphDOList", sphDOList);
+        //柱镜
+        List<CylDO> cylDOList = cylService.list(map);
+        model.addAttribute("cylDOList", cylDOList);
+        //跨度
+        List<SpanDO> spanDOList = spanService.list(map);
+        model.addAttribute("spanDOList", spanDOList);
+        //下加光
+        List<LightbelowDO> lightbelowDOList = lightbelowService.list(map);
+        model.addAttribute("lightbelowDOList", lightbelowDOList);
+        //材料分类
+        List<LensDO> lensDOList = lensService.list(map);
+        model.addAttribute("lensDOList", lensDOList);
+        //光度分类
+        List<LightDO> lightDOList = lightService.list(map);
+        model.addAttribute("lightDOList", lightDOList);
+        //渐进片分类
+        List<GradualDO> gradualDOList = gradualService.list(map);
+        model.addAttribute("gradualDOList", gradualDOList);
+        //镜片功能
+        List<FunctionDO> functionDOList = functionService.list(map);
+        model.addAttribute("functionDOList", functionDOList);
         return "product/jpcp/edit";
     }
 
@@ -152,7 +182,13 @@ public class JpcpController {
     @RequestMapping("/update")
     @RequiresPermissions("product:jpcp:edit")
     public R update(JpcpDO jpcp) {
+        //判断是否已存在
+        Integer value = jpcp.getLightId();
+        if (value != 5) {
+            jpcp.setGradualId(1);
+        }
         jpcpService.update(jpcp);
+
         return R.ok();
     }
 
@@ -189,4 +225,10 @@ public class JpcpController {
         return brandDOList;
     }
 
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("product:jpcp:findmfrs")
+    String findmfrs() {
+        return "/mfrs/mfrs/findJpcpMfrs";
+    }
 }

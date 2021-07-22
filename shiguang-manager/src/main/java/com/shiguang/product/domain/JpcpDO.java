@@ -30,7 +30,9 @@ public class JpcpDO implements Serializable {
     //商品编号
     private String proid;
     //计量单位
-    private String unitid;
+    private Integer unitid;
+    //单位
+    private String unitname;
     //球镜id
     private Long sphId;
     //球镜名称
@@ -64,13 +66,13 @@ public class JpcpDO implements Serializable {
     //税率(%)
     private String tax;
     //含税单价
-    private Double taxPrice;
+    private String taxPrice;
     //批发价格
-    private Double tradePrice;
+    private String tradePrice;
     //调货成本
-    private Double transferPrice;
+    private String transferPrice;
     //标准零售价
-    private Double retailPrice;
+    private String retailPrice;
 
     /**
      * 设置：镜片成品id
@@ -173,16 +175,25 @@ public class JpcpDO implements Serializable {
     /**
      * 设置：计量单位
      */
-    public void setUnitid(String unitid) {
+    public void setUnitid(Integer unitid) {
         this.unitid = unitid;
+    }
+
+    public void setUnitname(String unitname) {
+        this.unitname = unitname;
     }
 
     /**
      * 获取：计量单位
      */
-    public String getUnitid() {
+    public Integer getUnitid() {
         return unitid;
     }
+
+    public String getUnitname() {
+        return unitname;
+    }
+
 
     /**
      * 设置：球镜id
@@ -327,56 +338,56 @@ public class JpcpDO implements Serializable {
     /**
      * 设置：含税单价
      */
-    public void setTaxPrice(Double taxPrice) {
+    public void setTaxPrice(String taxPrice) {
         this.taxPrice = taxPrice;
     }
 
     /**
      * 获取：含税单价
      */
-    public Double getTaxPrice() {
+    public String getTaxPrice() {
         return taxPrice;
     }
 
     /**
      * 设置：批发价格
      */
-    public void setTradePrice(Double tradePrice) {
+    public void setTradePrice(String tradePrice) {
         this.tradePrice = tradePrice;
     }
 
     /**
      * 获取：批发价格
      */
-    public Double getTradePrice() {
+    public String getTradePrice() {
         return tradePrice;
     }
 
     /**
      * 设置：调货成本
      */
-    public void setTransferPrice(Double transferPrice) {
+    public void setTransferPrice(String transferPrice) {
         this.transferPrice = transferPrice;
     }
 
     /**
      * 获取：调货成本
      */
-    public Double getTransferPrice() {
+    public String getTransferPrice() {
         return transferPrice;
     }
 
     /**
      * 设置：标准零售价
      */
-    public void setRetailPrice(Double retailPrice) {
+    public void setRetailPrice(String retailPrice) {
         this.retailPrice = retailPrice;
     }
 
     /**
      * 获取：标准零售价
      */
-    public Double getRetailPrice() {
+    public String getRetailPrice() {
         return retailPrice;
     }
 
@@ -412,25 +423,33 @@ public class JpcpDO implements Serializable {
         this.cyl = cyl;
     }
 
-    public String getLens() { return lens; }
+    public String getLens() {
+        return lens;
+    }
 
     public void setLens(String lens) {
         this.lens = lens;
     }
 
-    public String getLightbelow() { return lightbelow; }
+    public String getLightbelow() {
+        return lightbelow;
+    }
 
     public void setLightbelow(String lightbelow) {
         this.lightbelow = lightbelow;
     }
 
-    public String getLight() { return light; }
+    public String getLight() {
+        return light;
+    }
 
     public void setLight(String light) {
         this.light = light;
     }
 
-    public String getRefractivity() { return refractivity; }
+    public String getRefractivity() {
+        return refractivity;
+    }
 
     public void setRefractivity(String refractivity) {
         this.refractivity = refractivity;

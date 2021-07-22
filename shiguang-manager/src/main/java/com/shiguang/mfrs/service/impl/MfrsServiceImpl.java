@@ -20,37 +20,33 @@ public class MfrsServiceImpl implements MfrsService {
         return mfrsDao.get(mfrsid);
     }
 
-    @Override
-    public List<MfrsDO> list(Map<String, Object> map) {
-        return mfrsDao.list(map);
-    }
-
-    @Override
-    public int count(Map<String, Object> map) {
-        return mfrsDao.count(map);
-    }
-
     //	---商品查询----
     @Override
     public List<MfrsDO> mglist(Map<String, Object> map) {
         return mfrsDao.mglist(map);
     }
 
+    //    <!--查询镜架制造商-->
+    @Override
+    public List<MfrsDO> producaList(Map<String, Object> map) {
+        return mfrsDao.producaList(map);
+    }
+
+    //    <!--查询配件制造商-->
+    @Override
+    public List<MfrsDO> partsList(Map<String, Object> map) {
+        return mfrsDao.partsList(map);
+    }
+//查询镜片成片制造商
+
+    @Override
+    public List<MfrsDO> JpcpList(Map<String, Object> map) {
+        return mfrsDao.JpcpList(map);
+    }
+
     @Override
     public int mgcount(Map<String, Object> map) {
         return mfrsDao.mgcount(map);
-    }
-
-    //选择制造商
-    @Override
-    public List<MfrsDO> findmfrs(Map<String, Object> map) {
-        return null;
-    }
-
-    @Override
-    //选择制造商
-    public int countmfrs(Map<String, Object> map) {
-        return 0;
     }
 
     @Override

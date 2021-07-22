@@ -34,7 +34,9 @@ public class JpdzDO implements Serializable {
     //商品编号
     private String proid;
     //计量单位
-    private String unitid;
+    private Integer unitid;
+    //单位
+    private String unitname;
     //球镜id
     private Long sphId;
     //跨度id
@@ -94,13 +96,13 @@ public class JpdzDO implements Serializable {
     //税率(%)
     private String tax;
     //含税单价
-    private Double taxPrice;
+    private String taxPrice;
     //批发价格
-    private Double tradePrice;
+    private String tradePrice;
     //调货成本
-    private Double transferPrice;
+    private String transferPrice;
     //标准零售价
-    private Double retailPrice;
+    private String retailPrice;
 
     /**
      * 设置：镜片定做id
@@ -231,14 +233,14 @@ public class JpdzDO implements Serializable {
     /**
      * 设置：计量单位
      */
-    public void setUnitid(String unitid) {
+    public void setUnitid(Integer unitid) {
         this.unitid = unitid;
     }
 
     /**
      * 获取：计量单位
      */
-    public String getUnitid() {
+    public Integer getUnitid() {
         return unitid;
     }
 
@@ -539,59 +541,55 @@ public class JpdzDO implements Serializable {
     /**
      * 设置：含税单价
      */
-    public void setTaxPrice(Double taxPrice) {
+    public void setTaxPrice(String taxPrice) {
         this.taxPrice = taxPrice;
     }
 
     /**
      * 获取：含税单价
      */
-    public Double getTaxPrice() {
+    public String getTaxPrice() {
         return taxPrice;
     }
 
     /**
      * 设置：批发价格
      */
-    public void setTradePrice(Double tradePrice) {
+    public void setTradePrice(String tradePrice) {
         this.tradePrice = tradePrice;
     }
 
     /**
      * 获取：批发价格
      */
-    public Double getTradePrice() {
+    public String getTradePrice() {
         return tradePrice;
     }
 
     /**
      * 设置：调货成本
      */
-    public void setTransferPrice(Double transferPrice) {
+    public void setTransferPrice(String transferPrice) {
         this.transferPrice = transferPrice;
     }
 
     /**
      * 获取：调货成本
      */
-    public Double getTransferPrice() {
+    public String getTransferPrice() {
         return transferPrice;
     }
 
     /**
      * 设置：标准零售价
      */
-    public void setRetailPrice(Double retailPrice) {
+    public void setRetailPrice(String retailPrice) {
         this.retailPrice = retailPrice;
     }
 
     /**
      * 获取：标准零售价
      */
-    public Double getRetailPrice() {
-        return retailPrice;
-    }
-
     public String getMfrsname() {
         return mfrsname;
     }
@@ -608,45 +606,79 @@ public class JpdzDO implements Serializable {
         this.brandname = brandname;
     }
 
-    public String getLens() { return lens; }
-
-    public void setLens(String lens) {
-        this.lens = lens;
+    public String getUnitname() {
+        return unitname;
     }
 
-    public String getLight() { return light; }
-
-    public void setLight(String light) {
-        this.light = light;
+    public void setUnitname(String unitname) {
+        this.unitname = unitname;
     }
 
-    public String getRefractivity() { return refractivity; }
-
-    public void setRefractivity(String refractivity) {
-        this.refractivity = refractivity;
+    public String getSphqj() {
+        return sphqj;
     }
-
-    public String getGradual() { return gradual; }
-
-    public void setGradual(String gradual) {
-        this.gradual = gradual;
-    }
-
-    public String getFunction() { return function; }
-
-    public void setFunction(String function) {
-        this.function = function;
-    }
-
-    public String getSphqj() { return sphqj; }
 
     public void setSphqj(String sphqj) {
         this.sphqj = sphqj;
     }
 
-    public String getCylqj() { return cylqj; }
+    public String getCylqj() {
+        return cylqj;
+    }
 
     public void setCylqj(String cylqj) {
         this.cylqj = cylqj;
+    }
+
+    public String getLightbelowqj() {
+        return lightbelowqj;
+    }
+
+    public void setLightbelowqj(String lightbelowqj) {
+        this.lightbelowqj = lightbelowqj;
+    }
+
+    public String getLens() {
+        return lens;
+    }
+
+    public void setLens(String lens) {
+        this.lens = lens;
+    }
+
+    public String getLight() {
+        return light;
+    }
+
+    public void setLight(String light) {
+        this.light = light;
+    }
+
+    public String getGradual() {
+        return gradual;
+    }
+
+    public void setGradual(String gradual) {
+        this.gradual = gradual;
+    }
+
+    public String getRefractivity() {
+        return refractivity;
+    }
+
+    public void setRefractivity(String refractivity) {
+        this.refractivity = refractivity;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public void setFunction(String function) {
+        this.function = function;
+    }
+
+    public String getRetailPrice() {
+        return retailPrice;
     }
 }

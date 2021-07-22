@@ -23,24 +23,10 @@
                                 <span style="color: red">*</span>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">制造商简称：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<select id="mfrsid" name="mfrsid" class="form-control"-->
-                        <!--onchange="caidan(this.options[this.options.selectedIndex].value)">-->
-                        <!--<option></option>-->
-                        <!--<option th:each="ls:${mfrsDOList}"-->
-                        <!--th:text="${ls.mfrsname}"-->
-                        <!--th:value="${ls.mfrsid}"-->
-                        <!--&gt;</option>-->
-                        <!--</select>-->
-                        <!--<span style="color: red">*</span>-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商简称：</label>
                             <div class="col-sm-8">
-                                <td><input type="text" id="mfrsName" name="mfrsid"/></td>
+                                <td><input type="text" id="mfrsName" name="mfrsName"/></td>
                                 <input type="hidden" id="mfrsid" name="mfrsid"/>
                                 <input type="button" value="选择*" onclick="getZhizaoshang()" style="color: red"/>
                             </div>
@@ -116,7 +102,6 @@
                         <div class="form-group" id="tab5" style="display: none">
                             <label class="col-sm-3 control-label">镜片功能：</label>
                             <div class="col-sm-8">
-                                <!--<input id="functionName" name="functionName" class="form-control" type="text">-->
                                 <select id="functionId" name="functionId" class="form-control">
                                     <option></option>
                                     <option th:each="ls:${functionDOList}"
@@ -165,7 +150,6 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">计量单位：</label>
                             <div class="col-sm-8">
-                                <!--<input id="unitid" name="unitid" class="form-control" type="text">-->
                                 <select id="unitid" name="unitid" class="form-control">
                                     <option></option>
                                     <option th:each="ls:${unitDOList}"
@@ -250,9 +234,7 @@
 <script type="text/javascript" src="/js/appjs/mfrs/brand/findmfrs.js"></script>
 <script type="text/javascript" src="/js/appjs/mfrs/brand/add.js"></script>
 <script>
-
     function caidan(value) {
-        alert(value);
         tab1.style = "display: none";
         tab2.style = "display: none";
         tab3.style = "display: none";
@@ -262,8 +244,6 @@
         tab7.style = "display: none";
         tab8.style = "display: none";
         tab9.style = "display: none";
-
-        // alert(value);
         $("#goodsid").empty("");
         $("#goodsid").append("<option value=''></option>");
         $.ajax({
@@ -275,8 +255,6 @@
             dataType: 'JSON',
             async: false,
             success: function (datajson) {
-                // alert(datajson);
-
                 $(datajson).each(function (key) {  //循环读取后台传来的Json数据
                     var id = datajson[key].goodsid;   //角色id
                     var roleName = datajson[key].goodsname; //角色名称
@@ -395,7 +373,6 @@
     }
 
     function lightIdstr(value) {
-        // alert(value+"光度分类的值")
         if (value == '1') {
             tab6.style = "display: none";
         } else if (value == '2') {

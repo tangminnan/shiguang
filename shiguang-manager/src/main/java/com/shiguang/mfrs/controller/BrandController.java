@@ -83,7 +83,7 @@ public class BrandController {
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         //制造商
-        List<MfrsDO> mfrsDOList = mfrsService.list(map);
+        List<MfrsDO> mfrsDOList = mfrsService.mglist(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
         //支付
         List<PayDO> payDOList = payService.list(map);
@@ -111,7 +111,7 @@ public class BrandController {
     String add(Model model, BrandDO brand, HttpServletResponse resp) {
         Map<String, Object> map = new HashMap<>();
         //制造商
-        List<MfrsDO> mfrsDOList = mfrsService.list(map);
+        List<MfrsDO> mfrsDOList = mfrsService.mglist(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
         //镜架材质
         List<MaterialDO> materialDOList = materialService.list(map);
@@ -159,7 +159,7 @@ public class BrandController {
 
         Map<String, Object> map = new HashMap<>();
         //制造商
-        List<MfrsDO> mfrsDOList = mfrsService.list(map);
+        List<MfrsDO> mfrsDOList = mfrsService.mglist(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
         //商品
         List<GoodsDO> goodsDOList = goodsService.list(map);
@@ -269,20 +269,4 @@ public class BrandController {
     String findmfrs() {
         return "mfrs/brand/findmfrs";
     }
-
-    /**
-     * 制造商
-     */
-    @ResponseBody
-    @GetMapping("/findmfrslist")
-    @RequiresPermissions("mfrs:brand:findmfrs")
-    public PageUtils findmfrslist(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> findmfrslist = mfrsService.findmfrs(query);
-        int total = mfrsService.countmfrs(query);
-        PageUtils pageUtils = new PageUtils(findmfrslist, total);
-        return pageUtils;
-    }
-
 }

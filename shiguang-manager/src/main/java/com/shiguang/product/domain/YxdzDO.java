@@ -94,13 +94,13 @@ public class YxdzDO implements Serializable {
     //税率(%)
     private String tax;
     //含税单价
-    private Double taxPrice;
+    private String taxPrice;
     //批发价格
-    private Double tradePrice;
+    private String tradePrice;
     //调货成本
-    private Double transferPrice;
+    private String transferPrice;
     //标准零售价
-    private Double retailPrice;
+    private String retailPrice;
 
     /**
      * 设置：隐形定做id
@@ -611,56 +611,56 @@ public class YxdzDO implements Serializable {
     /**
      * 设置：含税单价
      */
-    public void setTaxPrice(Double taxPrice) {
+    public void setTaxPrice(String taxPrice) {
         this.taxPrice = taxPrice;
     }
 
     /**
      * 获取：含税单价
      */
-    public Double getTaxPrice() {
+    public String getTaxPrice() {
         return taxPrice;
     }
 
     /**
      * 设置：批发价格
      */
-    public void setTradePrice(Double tradePrice) {
+    public void setTradePrice(String tradePrice) {
         this.tradePrice = tradePrice;
     }
 
     /**
      * 获取：批发价格
      */
-    public Double getTradePrice() {
+    public String getTradePrice() {
         return tradePrice;
     }
 
     /**
      * 设置：调货成本
      */
-    public void setTransferPrice(Double transferPrice) {
+    public void setTransferPrice(String transferPrice) {
         this.transferPrice = transferPrice;
     }
 
     /**
      * 获取：调货成本
      */
-    public Double getTransferPrice() {
+    public String getTransferPrice() {
         return transferPrice;
     }
 
     /**
      * 设置：标准零售价
      */
-    public void setRetailPrice(Double retailPrice) {
+    public void setRetailPrice(String retailPrice) {
         this.retailPrice = retailPrice;
     }
 
     /**
      * 获取：标准零售价
      */
-    public Double getRetailPrice() {
+    public String getRetailPrice() {
         return retailPrice;
     }
 
@@ -680,11 +680,19 @@ public class YxdzDO implements Serializable {
         this.brandname = brandname;
     }
 
-    public void setUsageName(String usageName){ this.usageName = usageName; }
+    public void setUsageName(String usageName) {
+        this.usageName = usageName;
+    }
 
-    public String getUsageName(){return usageName;}
+    public String getUsageName() {
+        return usageName;
+    }
 
-    public void setTypeName(String typeName){this.typeName=typeName;}
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
 
-    public String getTypeName(){return typeName;}
+    public String getTypeName() {
+        return typeName;
+    }
 }

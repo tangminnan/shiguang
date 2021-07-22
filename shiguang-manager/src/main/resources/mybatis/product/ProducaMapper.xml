@@ -2,54 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shiguang.product.dao.ProducaDao">
-
+    <!--//修改时显示制造商和商品品种名称-->
     <select id="get" resultType="com.shiguang.product.domain.ProducaDO">
-		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`produc_factorycolor`,`produc_color`,`unitid`,`batchid`,`size`,`technology_id`,`materialid`,`color`,`style_id`,`year`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_produca where id = #{value}
+        select
+        p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,
+        p.`produc_color`,p.`unitid`,p.`batchid`,p.`size`,p.`technology_id`,p.`materialid`,p.`color`,p.`style_id`,p.`year`,p.`tax`,p.`tax_price`,
+        p.`trade_price`,p.`transfer_price`,p.`retail_price`,
+        m.mfrsname,b.brandname,u.unitname
+        from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandid=b.brandid left join
+        c_unit u on p.unitid= u.unitid
+        		where id = #{value}
 	</select>
+    <!--//修改时显示制造商和商品品种名称-->
     <select id="list" resultType="com.shiguang.product.domain.ProducaDO">
         select
-        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`produc_factorycolor`,`produc_color`,`unitid`,`batchid`,`size`,`technology_id`,`materialid`,`color`,`style_id`,`year`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price`
-        from aa_produca
+        p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,p.`produc_color`,
+        p.`unitid`,p.`batchid`,p.`size`,p.`technology_id`,p.`materialid`,p.`color`,p.`style_id`,p.`year`,p.`tax`,p.`tax_price`,p.`trade_price`,p.`transfer_price`,p.`retail_price`,
+        m.mfrsname,b.brandname,u.unitname
+        from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandid=b.brandid left join
+        c_unit u on p.unitid= u.unitid
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
-            <if test="producFactorycolor != null and producFactorycolor != ''">and produc_factorycolor =
+            <if test="id != null and id != ''">and p.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and p.brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and p.factory = #{factory}</if>
+            <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
+            <if test="producFactorycolor != null and producFactorycolor != ''">and p.produc_factorycolor =
                 #{producFactorycolor}
             </if>
-            <if test="producColor != null and producColor != ''">and produc_color = #{producColor}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="batchid != null and batchid != ''">and batchid = #{batchid}</if>
-            <if test="size != null and size != ''">and size = #{size}</if>
-            <if test="technologyId != null and technologyId != ''">and technology_id = #{technologyId}</if>
-            <if test="materialid != null and materialid != ''">and materialid = #{materialid}</if>
-            <if test="color != null and color != ''">and color = #{color}</if>
-            <if test="styleId != null and styleId != ''">and style_id = #{styleId}</if>
-            <if test="year != null and year != ''">and year = #{year}</if>
-            <if test="tax != null and tax != ''">and tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="producColor != null and producColor != ''">and p.produc_color = #{producColor}</if>
+            <if test="unitid != null and unitid != ''">and p.unitid = #{unitid}</if>
+            <if test="batchid != null and batchid != ''">and p.batchid = #{batchid}</if>
+            <if test="size != null and size != ''">and p.size = #{size}</if>
+            <if test="technologyId != null and technologyId != ''">and p.technology_id = #{technologyId}</if>
+            <if test="materialid != null and materialid != ''">and p.materialid = #{materialid}</if>
+            <if test="color != null and color != ''">and p.color = #{color}</if>
+            <if test="styleId != null and styleId != ''">and p.style_id = #{styleId}</if>
+            <if test="year != null and year != ''">and p.year = #{year}</if>
+            <if test="tax != null and tax != ''">and p.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and p.ax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and p.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and p.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and p.retail_price = #{retailPrice}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by id desc
+                order by id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
         </if>
     </select>
-
     <select id="count" resultType="int">
         select count(*) from aa_produca
         <where>
@@ -175,84 +188,11 @@
     </delete>
     <!--查询镜架制造商-->
     <select id="mglist" resultType="com.shiguang.product.domain.ProducaDO">
-		select m.mfrsid,m.mfrsname  from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=1
-	</select>
+    select m.mfrsid,m.mfrsname  from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=1
+    </select>
     <!--菜单联动显示-->
     <select id="choice" resultType="com.shiguang.product.domain.ProducaDO">
 		select b.brandid,b.brandname from c_brand b left join  cc_mg mg
 		on b.goodsid = mg.goodsid  left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=1 and b.mfrsid = #{mfrsid} group by  b.brandid;
 	</select>
-    <select id="listmateria" resultType="com.shiguang.product.domain.ProducaDO">
-        select
-        a.`id`,a.`produc_num`,a.`produc_code`,a.`produc_name`,a.`mfrsid`,a.`brandid`,a.`factory`,a.`produc_factory`,a.`produc_factorycolor`,a.`produc_color`,a.`unitid`,a.`batchid`,a.`size`,a.`technology_id`,a.`materialid`,c.`materialname`,a.`color`,a.`style_id`,a.`year`,a.`tax`,a.`tax_price`,a.`trade_price`,a.`transfer_price`,a.`retail_price`
-        from aa_produca a left join c_material c on c.materialid = a.materialid
-        <where>
-            <if test="id != null and id != ''">and a.id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and a.produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and a.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and a.produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and a.mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and a.brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and a.factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and a.produc_factory = #{producFactory}</if>
-            <if test="producFactorycolor != null and producFactorycolor != ''">and a.produc_factorycolor =
-                #{producFactorycolor}
-            </if>
-            <if test="producColor != null and producColor != ''">and a.produc_color = #{producColor}</if>
-            <if test="unitid != null and unitid != ''">and a.unitid = #{unitid}</if>
-            <if test="batchid != null and batchid != ''">and a.batchid = #{batchid}</if>
-            <if test="size != null and size != ''">and a.size = #{size}</if>
-            <if test="technologyId != null and technologyId != ''">and a.technology_id = #{technologyId}</if>
-            <if test="materialid != null and materialid != ''">and a.materialid = #{materialid}</if>
-            <if test="color != null and color != ''">and a.color = #{color}</if>
-            <if test="styleId != null and styleId != ''">and a.style_id = #{styleId}</if>
-            <if test="year != null and year != ''">and a.year = #{year}</if>
-            <if test="tax != null and tax != ''">and a.tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and a.tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and a.trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and a.transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and a.retail_price = #{retailPrice}</if>
-        </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-                order by id desc
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
-    </select>
-    <select id="countmateria" resultType="int">
-        select count(*) from aa_produca a left join c_material c on c.materialid = a.materialid
-        <where>
-            <if test="id != null and id != ''">and a.id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and a.produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and a.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and a.produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and a.mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and a.brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and a.factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and a.produc_factory = #{producFactory}</if>
-            <if test="producFactorycolor != null and producFactorycolor != ''">and a.produc_factorycolor =
-                #{producFactorycolor}
-            </if>
-            <if test="producColor != null and producColor != ''">and a.produc_color = #{producColor}</if>
-            <if test="unitid != null and unitid != ''">and a.unitid = #{unitid}</if>
-            <if test="batchid != null and batchid != ''">and a.batchid = #{batchid}</if>
-            <if test="size != null and size != ''">and a.size = #{size}</if>
-            <if test="technologyId != null and technologyId != ''">and a.technology_id = #{technologyId}</if>
-            <if test="materialid != null and materialid != ''">and a.materialid = #{materialid}</if>
-            <if test="color != null and color != ''">and a.color = #{color}</if>
-            <if test="styleId != null and styleId != ''">and a.style_id = #{styleId}</if>
-            <if test="year != null and year != ''">and a.year = #{year}</if>
-            <if test="tax != null and tax != ''">and a.tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and a.tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and a.trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and a.transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and a.retail_price = #{retailPrice}</if>
-        </where>
-    </select>
 </mapper>

@@ -4,10 +4,7 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.*;
-import com.shiguang.mfrs.service.LensService;
-import com.shiguang.mfrs.service.MfrsService;
-import com.shiguang.mfrs.service.RefractivityService;
-import com.shiguang.mfrs.service.UnitService;
+import com.shiguang.mfrs.service.*;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -57,6 +54,18 @@ public class YxcpController {
     //材料分类
     @Autowired
     private LensService lensService;
+    //使用类型
+    @Autowired
+    private UsageService usageService;
+    //抛弃类型分类
+    @Autowired
+    private TypeService typeService;
+    //隐形类别
+    @Autowired
+    private InvisibleService invisibleService;
+    //材质
+    @Autowired
+    private CaizhiService caizhiService;
 
     @GetMapping()
     @RequiresPermissions("product:yxcp:yxcp")
@@ -104,6 +113,18 @@ public class YxcpController {
         //材料分类
         List<LensDO> lensDOList = lensService.list(map);
         model.addAttribute("lensDOList", lensDOList);
+        //使用类型
+        List<UsageDO> usageDOList = usageService.list(map);
+        model.addAttribute("usageDOList", usageDOList);
+        //抛弃类型分类
+        List<TypeDO> typeDOList = typeService.list(map);
+        model.addAttribute("typeDOList", typeDOList);
+        //隐形类别
+        List<InvisibleDO> invisibleDOList = invisibleService.list(map);
+        model.addAttribute("invisibleDOList", invisibleDOList);
+        //材质
+        List<CaizhiDO> caizhiDOList = caizhiService.list(map);
+        model.addAttribute("caizhiDOList", caizhiDOList);
         return "product/yxcp/add";
     }
 

@@ -44,6 +44,9 @@ function validateRule() {
             mfrsid: {
                 required: true
             },
+            brandid: {
+                required: true
+            },
             factory: {
                 required: true
             },

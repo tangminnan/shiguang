@@ -4,10 +4,7 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.*;
-import com.shiguang.mfrs.service.LensService;
-import com.shiguang.mfrs.service.MfrsService;
-import com.shiguang.mfrs.service.RefractivityService;
-import com.shiguang.mfrs.service.UnitService;
+import com.shiguang.mfrs.service.*;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -57,6 +54,15 @@ public class JpdzController {
     //材料分类
     @Autowired
     private LensService lensService;
+    //光度分类
+    @Autowired
+    private LightService lightService;
+    //镜片功能
+    @Autowired
+    private FunctionService functionService;
+    //渐进片分类
+    @Autowired
+    private GradualService gradualService;
 
     @GetMapping()
     @RequiresPermissions("product:jpdz:jpdz")
@@ -70,8 +76,8 @@ public class JpdzController {
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<JpdzDO> jpdzList = jpdzService.list(query);
-        int total = jpdzService.count(query);
+        List<JpdzDO> jpdzList = jpdzService.listDz(query);
+        int total = jpdzService.countDz(query);
         PageUtils pageUtils = new PageUtils(jpdzList, total);
         return pageUtils;
     }
@@ -104,6 +110,15 @@ public class JpdzController {
         //材料分类
         List<LensDO> lensDOList = lensService.list(map);
         model.addAttribute("lensDOList", lensDOList);
+        //光度分类
+        List<LightDO> lightDOList = lightService.list(map);
+        model.addAttribute("lightDOList", lightDOList);
+        //渐进片分类
+        List<GradualDO> gradualDOList = gradualService.list(map);
+        model.addAttribute("gradualDOList", gradualDOList);
+        //镜片功能
+        List<FunctionDO> functionDOList = functionService.list(map);
+        model.addAttribute("functionDOList", functionDOList);
         return "product/jpdz/add";
     }
 
@@ -112,6 +127,37 @@ public class JpdzController {
     String edit(@PathVariable("id") Long id, Model model) {
         JpdzDO jpdz = jpdzService.get(id);
         model.addAttribute("jpdz", jpdz);
+        Map<String, Object> map = new HashMap<>();
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        //球镜
+        List<SphDO> sphDOList = sphService.list(map);
+        model.addAttribute("sphDOList", sphDOList);
+        //柱镜
+        List<CylDO> cylDOList = cylService.list(map);
+        model.addAttribute("cylDOList", cylDOList);
+        //跨度
+        List<SpanDO> spanDOList = spanService.list(map);
+        model.addAttribute("spanDOList", spanDOList);
+        //下加光
+        List<LightbelowDO> lightbelowDOList = lightbelowService.list(map);
+        model.addAttribute("lightbelowDOList", lightbelowDOList);
+        //材料分类
+        List<LensDO> lensDOList = lensService.list(map);
+        model.addAttribute("lensDOList", lensDOList);
+        //光度分类
+        List<LightDO> lightDOList = lightService.list(map);
+        model.addAttribute("lightDOList", lightDOList);
+        //渐进片分类
+        List<GradualDO> gradualDOList = gradualService.list(map);
+        model.addAttribute("gradualDOList", gradualDOList);
+        //镜片功能
+        List<FunctionDO> functionDOList = functionService.list(map);
+        model.addAttribute("functionDOList", functionDOList);
         return "product/jpdz/edit";
     }
 
@@ -170,5 +216,12 @@ public class JpdzController {
         List<BrandDO> brandDOList = jpdzService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
+    }
+
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("product:jpdz:findmfrs")
+    String findmfrs() {
+        return "/mfrs/mfrs/findJpcpMfrs";
     }
 }

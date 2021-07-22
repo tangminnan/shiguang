@@ -26,12 +26,6 @@ public interface BrandDao {
 
     int count(Map<String, Object> map);
 
-    //选择品牌
-    List<BrandDO> findzzs(Map<String, Object> map);
-
-    //选择品牌
-    int countzzs(Map<String, Object> map);
-
     int save(BrandDO brand);
 
     int update(BrandDO brand);

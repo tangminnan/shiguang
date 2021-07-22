@@ -84,6 +84,13 @@ public class PartsController {
     String edit(@PathVariable("id") Long id, Model model) {
         PartsDO parts = partsService.get(id);
         model.addAttribute("parts", parts);
+        Map<String, Object> map = new HashMap<>();
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
         return "product/parts/edit";
     }
 
@@ -144,4 +151,10 @@ public class PartsController {
         return brandDOList;
     }
 
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("product:parts:findmfrs")
+    String findmfrs() {
+        return "/mfrs/mfrs/findPartsMfrs";
+    }
 }

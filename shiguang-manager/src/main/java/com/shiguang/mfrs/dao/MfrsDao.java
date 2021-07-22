@@ -19,20 +19,19 @@ public interface MfrsDao {
 
     MfrsDO get(Integer mfrsid);
 
-    List<MfrsDO> list(Map<String, Object> map);
-
-    int count(Map<String, Object> map);
-
     //	//-----商品查询-------
     List<MfrsDO> mglist(Map<String, Object> map);
 
+    //    <!--查询镜架制造商-->
+    List<MfrsDO> producaList(Map<String, Object> map);
+
+    //    <!--查询配件制造商-->
+    List<MfrsDO> partsList(Map<String, Object> map);
+
+    //    <!--查询镜片成片制造商-->
+    List<MfrsDO> JpcpList(Map<String, Object> map);
+
     int mgcount(Map<String, Object> map);
-
-    //选择制造商
-    List<MfrsDO> findmfrs(Map<String, Object> map);
-
-    //选择制造商
-    int countmfrs(Map<String, Object> map);
 
     int save(MfrsDO mfrs);
 

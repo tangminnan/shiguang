@@ -4,51 +4,73 @@
 <mapper namespace="com.shiguang.product.dao.JpdzDao">
 
     <select id="get" resultType="com.shiguang.product.domain.JpdzDO">
-		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`proid`,`unitid`,`sph_id`,`span_id`,`cyl_id`,`sph_up`,`sph_down`,`sph_span`,`cyl_up`,`cyl_down`,`cyl_span`,`lightbelow_id`,`lightbelow_right`,`lightbelow_left`,`lens_id`,`cycle`,`light_id`,`gradual_id`,`refractivityid`,`function_id`,`combined_photometry`,`can`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_jpdz where id = #{value}
+		select
+        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`factory`,j.`produc_factory`,
+        j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
+        j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
+        j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
+        j.`trade_price`,j.`transfer_price`,j.`retail_price`
+        from aa_jpdz j
+        left join c_refractivity r on r.refractivityid = j.refractivityid
+        left join p_light pl on pl.light_id = j.light_id
+        left join p_lens l on l.lens_id = j.lens_id
+        left join p_gradual g on g.gradual_id = j.gradual_id
+        left join  p_function f on f.function_id = j.function_id
+		where id = #{value}
 	</select>
 
-    <select id="list" resultType="com.shiguang.product.domain.JpdzDO">
+    <select id="listDz" resultType="com.shiguang.product.domain.JpdzDO">
         select
-        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`proid`,`unitid`,`sph_id`,`span_id`,`cyl_id`,`sph_up`,`sph_down`,`sph_span`,`cyl_up`,`cyl_down`,`cyl_span`,`lightbelow_id`,`lightbelow_right`,`lightbelow_left`,`lens_id`,`cycle`,`light_id`,`gradual_id`,`refractivityid`,`function_id`,`combined_photometry`,`can`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price`
-        from aa_jpdz
+        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`factory`,j.`produc_factory`,
+        j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
+        j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
+        j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
+        j.`trade_price`,j.`transfer_price`,j.`retail_price`
+        from aa_jpdz j
+        left join c_refractivity r on r.refractivityid = j.refractivityid
+        left join p_light pl on pl.light_id = j.light_id
+        left join p_lens l on l.lens_id = j.lens_id
+        left join p_gradual g on g.gradual_id = j.gradual_id
+        left join p_function f on f.function_id = j.function_id
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
-            <if test="proid != null and proid != ''">and proid = #{proid}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="sphId != null and sphId != ''">and sph_id = #{sphId}</if>
-            <if test="spanId != null and spanId != ''">and span_id = #{spanId}</if>
-            <if test="cylId != null and cylId != ''">and cyl_id = #{cylId}</if>
-            <if test="sphUp != null and sphUp != ''">and sph_up = #{sphUp}</if>
-            <if test="sphDown != null and sphDown != ''">and sph_down = #{sphDown}</if>
-            <if test="sphSpan != null and sphSpan != ''">and sph_span = #{sphSpan}</if>
-            <if test="cylUp != null and cylUp != ''">and cyl_up = #{cylUp}</if>
-            <if test="cylDown != null and cylDown != ''">and cyl_down = #{cylDown}</if>
-            <if test="cylSpan != null and cylSpan != ''">and cyl_span = #{cylSpan}</if>
-            <if test="lightbelowId != null and lightbelowId != ''">and lightbelow_id = #{lightbelowId}</if>
-            <if test="lightbelowRight != null and lightbelowRight != ''">and lightbelow_right = #{lightbelowRight}</if>
-            <if test="lightbelowLeft != null and lightbelowLeft != ''">and lightbelow_left = #{lightbelowLeft}</if>
-            <if test="lensId != null and lensId != ''">and lens_id = #{lensId}</if>
-            <if test="cycle != null and cycle != ''">and cycle = #{cycle}</if>
-            <if test="lightId != null and lightId != ''">and light_id = #{lightId}</if>
-            <if test="gradualId != null and gradualId != ''">and gradual_id = #{gradualId}</if>
-            <if test="refractivityid != null and refractivityid != ''">and refractivityid = #{refractivityid}</if>
-            <if test="functionId != null and functionId != ''">and function_id = #{functionId}</if>
-            <if test="combinedPhotometry != null and combinedPhotometry != ''">and combined_photometry =
+            <if test="id != null and id != ''">and j.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
+            <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
+            <if test="proid != null and proid != ''">and j.proid = #{proid}</if>
+            <if test="unitid != null and unitid != ''">and j.unitid = #{unitid}</if>
+            <if test="sphId != null and sphId != ''">and j.sph_id = #{sphId}</if>
+            <if test="spanId != null and spanId != ''">and j.span_id = #{spanId}</if>
+            <if test="cylId != null and cylId != ''">and j.cyl_id = #{cylId}</if>
+            <if test="sphUp != null and sphUp != ''">and j.sph_up = #{sphUp}</if>
+            <if test="sphDown != null and sphDown != ''">and j.sph_down = #{sphDown}</if>
+            <if test="sphSpan != null and sphSpan != ''">and j.sph_span = #{sphSpan}</if>
+            <if test="cylUp != null and cylUp != ''">and j.cyl_up = #{cylUp}</if>
+            <if test="cylDown != null and cylDown != ''">and j.cyl_down = #{cylDown}</if>
+            <if test="cylSpan != null and cylSpan != ''">and j.cyl_span = #{cylSpan}</if>
+            <if test="lightbelowId != null and lightbelowId != ''">and j.lightbelow_id = #{lightbelowId}</if>
+            <if test="lightbelowRight != null and lightbelowRight != ''">and j.lightbelow_right = #{lightbelowRight}
+            </if>
+            <if test="lightbelowLeft != null and lightbelowLeft != ''">and j.lightbelow_left = #{lightbelowLeft}</if>
+            <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
+            <if test="cycle != null and cycle != ''">and j.cycle = #{cycle}</if>
+            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
+            <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
+            <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
+            <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
+            <if test="combinedPhotometry != null and combinedPhotometry != ''">and j.combined_photometry =
                 #{combinedPhotometry}
             </if>
-            <if test="can != null and can != ''">and can = #{can}</if>
-            <if test="tax != null and tax != ''">and tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="can != null and can != ''">and j.can = #{can}</if>
+            <if test="tax != null and tax != ''">and j.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and j.tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and j.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and j.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -63,46 +85,52 @@
         </if>
     </select>
 
-    <select id="count" resultType="int">
-        select count(*) from aa_jpdz
+    <select id="countDz" resultType="int">
+        select count(*) from aa_jpdz j
+        left join c_refractivity r on r.refractivityid = j.refractivityid
+        left join p_light pl on pl.light_id = j.light_id
+        left join p_lens l on l.lens_id = j.lens_id
+        left join p_gradual g on g.gradual_id = j.gradual_id
+        left join p_function f on f.function_id = j.function_id
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
-            <if test="proid != null and proid != ''">and proid = #{proid}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="sphId != null and sphId != ''">and sph_id = #{sphId}</if>
-            <if test="spanId != null and spanId != ''">and span_id = #{spanId}</if>
-            <if test="cylId != null and cylId != ''">and cyl_id = #{cylId}</if>
-            <if test="sphUp != null and sphUp != ''">and sph_up = #{sphUp}</if>
-            <if test="sphDown != null and sphDown != ''">and sph_down = #{sphDown}</if>
-            <if test="sphSpan != null and sphSpan != ''">and sph_span = #{sphSpan}</if>
-            <if test="cylUp != null and cylUp != ''">and cyl_up = #{cylUp}</if>
-            <if test="cylDown != null and cylDown != ''">and cyl_down = #{cylDown}</if>
-            <if test="cylSpan != null and cylSpan != ''">and cyl_span = #{cylSpan}</if>
-            <if test="lightbelowId != null and lightbelowId != ''">and lightbelow_id = #{lightbelowId}</if>
-            <if test="lightbelowRight != null and lightbelowRight != ''">and lightbelow_right = #{lightbelowRight}</if>
-            <if test="lightbelowLeft != null and lightbelowLeft != ''">and lightbelow_left = #{lightbelowLeft}</if>
-            <if test="lensId != null and lensId != ''">and lens_id = #{lensId}</if>
-            <if test="cycle != null and cycle != ''">and cycle = #{cycle}</if>
-            <if test="lightId != null and lightId != ''">and light_id = #{lightId}</if>
-            <if test="gradualId != null and gradualId != ''">and gradual_id = #{gradualId}</if>
-            <if test="refractivityid != null and refractivityid != ''">and refractivityid = #{refractivityid}</if>
-            <if test="functionId != null and functionId != ''">and function_id = #{functionId}</if>
-            <if test="combinedPhotometry != null and combinedPhotometry != ''">and combined_photometry =
+            <if test="id != null and id != ''">and j.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
+            <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
+            <if test="proid != null and proid != ''">and j.proid = #{proid}</if>
+            <if test="unitid != null and unitid != ''">and j.unitid = #{unitid}</if>
+            <if test="sphId != null and sphId != ''">and j.sph_id = #{sphId}</if>
+            <if test="spanId != null and spanId != ''">and j.span_id = #{spanId}</if>
+            <if test="cylId != null and cylId != ''">and j.cyl_id = #{cylId}</if>
+            <if test="sphUp != null and sphUp != ''">and j.sph_up = #{sphUp}</if>
+            <if test="sphDown != null and sphDown != ''">and j.sph_down = #{sphDown}</if>
+            <if test="sphSpan != null and sphSpan != ''">and j.sph_span = #{sphSpan}</if>
+            <if test="cylUp != null and cylUp != ''">and j.cyl_up = #{cylUp}</if>
+            <if test="cylDown != null and cylDown != ''">and j.cyl_down = #{cylDown}</if>
+            <if test="cylSpan != null and cylSpan != ''">and j.cyl_span = #{cylSpan}</if>
+            <if test="lightbelowId != null and lightbelowId != ''">and j.lightbelow_id = #{lightbelowId}</if>
+            <if test="lightbelowRight != null and lightbelowRight != ''">and j.lightbelow_right = #{lightbelowRight}
+            </if>
+            <if test="lightbelowLeft != null and lightbelowLeft != ''">and j.lightbelow_left = #{lightbelowLeft}</if>
+            <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
+            <if test="cycle != null and cycle != ''">and j.cycle = #{cycle}</if>
+            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
+            <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
+            <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
+            <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
+            <if test="combinedPhotometry != null and combinedPhotometry != ''">and j.combined_photometry =
                 #{combinedPhotometry}
             </if>
-            <if test="can != null and can != ''">and can = #{can}</if>
-            <if test="tax != null and tax != ''">and tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="can != null and can != ''">and j.can = #{can}</if>
+            <if test="tax != null and tax != ''">and j.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and j.tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and j.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and j.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
         </where>
     </select>
 
@@ -245,117 +273,5 @@
 		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=3 and b.mfrsid = #{mfrsid} group by  b.brandid;
 	</select>
 
-    <select id="listDz" resultType="com.shiguang.product.domain.JpdzDO">
-        select
-        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`factory`,j.`produc_factory`,
-        j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
-        j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
-        j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
-        j.`trade_price`,j.`transfer_price`,j.`retail_price`
-        from aa_jpdz j
-        left join c_refractivity r on r.refractivityid = j.refractivityid
-        left join p_light pl on pl.light_id = j.light_id
-        left join p_lens l on l.lens_id = j.lens_id
-        left join p_gradual g on g.gradual_id = j.gradual_id
-        left join  p_function f on f.function_id = j.function_id
-        <where>
-            <if test="id != null and id != ''">and j.id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
-            <if test="proid != null and proid != ''">and j.proid = #{proid}</if>
-            <if test="unitid != null and unitid != ''">and j.unitid = #{unitid}</if>
-            <if test="sphId != null and sphId != ''">and j.sph_id = #{sphId}</if>
-            <if test="spanId != null and spanId != ''">and j.span_id = #{spanId}</if>
-            <if test="cylId != null and cylId != ''">and j.cyl_id = #{cylId}</if>
-            <if test="sphUp != null and sphUp != ''">and j.sph_up = #{sphUp}</if>
-            <if test="sphDown != null and sphDown != ''">and j.sph_down = #{sphDown}</if>
-            <if test="sphSpan != null and sphSpan != ''">and j.sph_span = #{sphSpan}</if>
-            <if test="cylUp != null and cylUp != ''">and j.cyl_up = #{cylUp}</if>
-            <if test="cylDown != null and cylDown != ''">and j.cyl_down = #{cylDown}</if>
-            <if test="cylSpan != null and cylSpan != ''">and j.cyl_span = #{cylSpan}</if>
-            <if test="lightbelowId != null and lightbelowId != ''">and j.lightbelow_id = #{lightbelowId}</if>
-            <if test="lightbelowRight != null and lightbelowRight != ''">and j.lightbelow_right = #{lightbelowRight}</if>
-            <if test="lightbelowLeft != null and lightbelowLeft != ''">and j.lightbelow_left = #{lightbelowLeft}</if>
-            <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
-            <if test="cycle != null and cycle != ''">and j.cycle = #{cycle}</if>
-            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
-            <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
-            <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
-            <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
-            <if test="combinedPhotometry != null and combinedPhotometry != ''">and j.combined_photometry =
-                #{combinedPhotometry}
-            </if>
-            <if test="can != null and can != ''">and j.can = #{can}</if>
-            <if test="tax != null and tax != ''">and j.tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and j.tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and j.trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and j.transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
-        </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-                order by id desc
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
-    </select>
-
-    <select id="countDz" resultType="int">
-        select count(*) from aa_jpdz j
-        left join c_refractivity r on r.refractivityid = j.refractivityid
-        left join p_light pl on pl.light_id = j.light_id
-        left join p_lens l on l.lens_id = j.lens_id
-        left join p_gradual g on g.gradual_id = j.gradual_id
-        left join  p_function f on f.function_id = j.function_id
-        <where>
-            <if test="id != null and id != ''">and j.id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
-            <if test="proid != null and proid != ''">and j.proid = #{proid}</if>
-            <if test="unitid != null and unitid != ''">and j.unitid = #{unitid}</if>
-            <if test="sphId != null and sphId != ''">and j.sph_id = #{sphId}</if>
-            <if test="spanId != null and spanId != ''">and j.span_id = #{spanId}</if>
-            <if test="cylId != null and cylId != ''">and j.cyl_id = #{cylId}</if>
-            <if test="sphUp != null and sphUp != ''">and j.sph_up = #{sphUp}</if>
-            <if test="sphDown != null and sphDown != ''">and j.sph_down = #{sphDown}</if>
-            <if test="sphSpan != null and sphSpan != ''">and j.sph_span = #{sphSpan}</if>
-            <if test="cylUp != null and cylUp != ''">and j.cyl_up = #{cylUp}</if>
-            <if test="cylDown != null and cylDown != ''">and j.cyl_down = #{cylDown}</if>
-            <if test="cylSpan != null and cylSpan != ''">and j.cyl_span = #{cylSpan}</if>
-            <if test="lightbelowId != null and lightbelowId != ''">and j.lightbelow_id = #{lightbelowId}</if>
-            <if test="lightbelowRight != null and lightbelowRight != ''">and j.lightbelow_right = #{lightbelowRight}</if>
-            <if test="lightbelowLeft != null and lightbelowLeft != ''">and j.lightbelow_left = #{lightbelowLeft}</if>
-            <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
-            <if test="cycle != null and cycle != ''">and j.cycle = #{cycle}</if>
-            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
-            <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
-            <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
-            <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
-            <if test="combinedPhotometry != null and combinedPhotometry != ''">and j.combined_photometry =
-                #{combinedPhotometry}
-            </if>
-            <if test="can != null and can != ''">and j.can = #{can}</if>
-            <if test="tax != null and tax != ''">and j.tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and j.tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and j.trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and j.transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
-        </where>
-    </select>
 
 </mapper>

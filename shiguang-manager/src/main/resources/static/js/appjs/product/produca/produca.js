@@ -31,9 +31,20 @@ function load() {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
-                        offset: params.offset
+                        offset: params.offset,
                         // name:$('#searchName').val(),
-                        // username:$('#searchName').val()
+                        producCode: $('#producCode').val(),
+                        producName: $('#producName').val(),
+                        mfrsid: $('#mfrsid').val(),
+                        brandid: $('#brandid').val(),
+                        retailPrice: $('#retailPrice').val(),
+                        taxPrice: $('#taxPrice').val(),
+                        producFactory: $('#producFactory').val(),
+                        producColor: $('#producColor').val(),
+                        size: $('#size').val(),
+                        technologyId: $('#technologyId').val(),
+                        materialid: $('#materialid').val(),
+                        styleId: $('#styleId').val()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -52,7 +63,7 @@ function load() {
                     // },
                     {
                         field: 'producNum',
-                        title: '商品信息代码'
+                        title: '商品代码'
                     },
                     // {
                     //     field: 'producCode',
@@ -66,8 +77,16 @@ function load() {
                     //     field: 'mfrsid',
                     //     title: '制造商id'
                     // },
+                    // {
+                    //     field: 'mfrsname',
+                    //     title: '制造商简称'
+                    // },
+                    // {
+                    //     field: 'brandid',
+                    //     title: '商品品种'
+                    // },
                     {
-                        field: 'brandid',
+                        field: 'brandname',
                         title: '商品品种'
                     },
                     // {
@@ -86,8 +105,12 @@ function load() {
                     //     field: 'producColor',
                     //     title: '色号'
                     // },
+                    // {
+                    //     field: 'unitid',
+                    //     title: '单位'
+                    // },
                     {
-                        field: 'unitid',
+                        field: 'unitname',
                         title: '单位'
                     },
                     // {
@@ -122,6 +145,15 @@ function load() {
                     //     field: 'tax',
                     //     title: '税率(%)'
                     // },
+
+                    // {
+                    //     field: 'transferPrice',
+                    //     title: '调货成本'
+                    // },
+                    {
+                        field: 'retailPrice',
+                        title: '标准零售价格'
+                    },
                     {
                         field: 'taxPrice',
                         title: '含税单价'
@@ -130,14 +162,6 @@ function load() {
                         field: 'tradePrice',
                         title: '批发价格'
                     },
-                    // {
-                    //     field: 'transferPrice',
-                    //     title: '调货成本'
-                    // },
-                    // {
-                    //     field: 'retailPrice',
-                    //     title: '标准零售价格'
-                    // },
                     {
                         title: '操作',
                         field: 'id',
@@ -245,3 +269,9 @@ function batchRemove() {
 
     });
 }
+
+//选择制造商
+function batchSelect() {
+    var rows = $("#exampleTable").bootstrapTable("getSelections");
+    return rows;
+};

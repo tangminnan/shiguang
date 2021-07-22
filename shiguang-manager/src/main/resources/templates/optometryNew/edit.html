@@ -148,13 +148,13 @@
                     </td>
                     <td>
                         <input name="cornealFirstK1Right" th:value="${ocularEyesDO.cornealFirstK1Right}"
-                               type="text" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>小数@
+                               type="text" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>@
                         <input name="cornealLastK1Right" th:value="${ocularEyesDO.cornealLastK1Right}"
                                type="text" onchange="shuzi(this)"/>onchange
                     </td>
                     <td>
                         <input name="cornealFirstK2Right" th:value="${ocularEyesDO.cornealFirstK2Right}"
-                               type="text" oninput="value=value.match(/^\d+(?:\.\d{0,2})?/)"/>2位@
+                               type="text" oninput="value=value.match(/^\d+(?:\.\d{0,2})?/)"/>@
                         <input name="cornealLastK2Right" th:value="${ocularEyesDO.cornealLastK2Right}"
                                type="text"/>
                     </td>
@@ -1830,6 +1830,27 @@
     $(".input_del").click(function () {
         $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
     });
+
+    //清空护理液
+    function cleanhlys() {
+        $("#hlys").val("");
+    }
+
+    //清空家庭训练
+    function cleanjtxlsg() {
+        $("#jtxlsg").val("");
+    }
+
+    //清空训练室训练
+    function cleanxlsxlsg() {
+        $("#xlsxlsg").val("");
+    }
+
+    //清空药名
+    function cleanypYms() {
+        $("#ypYms").val("");
+    }
+
     //日期
     laydate.render({
         elem: '#followTime',
@@ -1860,17 +1881,15 @@
         }
     }
 
-    //自动补0
+    //自动补0，四舍五入
     function shuzi(e) {
         var val = parseFloat(e.value);
-        // val = val.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
         alert(val);
         if (val > 0) {
             e.value = val.toFixed(2);
         } else if (val <= 0) {
             e.value = val.toFixed(2);
         }
-
     };
 
     //轴向正确表示规则
@@ -1883,25 +1902,7 @@
         }
     }
 
-    //清空护理液
-    function cleanhlys() {
-        $("#hlys").val("");
-    }
 
-    //清空家庭训练
-    function cleanjtxlsg() {
-        $("#jtxlsg").val("");
-    }
-
-    //清空训练室训练
-    function cleanxlsxlsg() {
-        $("#xlsxlsg").val("");
-    }
-
-    //清空药名
-    function cleanypYms() {
-        $("#ypYms").val("");
-    }
 </script>
 
 </html>

@@ -66,10 +66,18 @@ function load() {
                     //     field: 'mfrsid',
                     //     title: '制造商id'
                     // },
+                    {
+                        field: 'mfrsname',
+                        title: '制造商简称'
+                    },
                     // {
                     //     field: 'brandid',
                     //     title: '商品品种'
                     // },
+                    {
+                        field: 'brandname',
+                        title: '商品品种'
+                    },
                     // {
                     //     field: 'factory',
                     //     title: '厂家型号'
