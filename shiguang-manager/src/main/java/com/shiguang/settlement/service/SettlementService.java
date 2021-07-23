@@ -17,7 +17,9 @@ public interface SettlementService {
 	
 	SettlementDO get(Long id);
 
-	SettlementDO getMember(String cardMember);
+	List<SettlementDO> getMember(String cardMember);
+
+	SettlementDO getCostId(Long costId);
 	
 	List<SettlementDO> list(Map<String, Object> map);
 	

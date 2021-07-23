@@ -9,6 +9,14 @@ import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.mfrs.domain.FunctionDO;
+import com.shiguang.mfrs.domain.LightDO;
+import com.shiguang.mfrs.domain.MaterialDO;
+import com.shiguang.mfrs.domain.RefractivityDO;
+import com.shiguang.mfrs.service.FunctionService;
+import com.shiguang.mfrs.service.LightService;
+import com.shiguang.mfrs.service.MaterialService;
+import com.shiguang.mfrs.service.RefractivityService;
 import com.shiguang.packageManager.domain.PackageDO;
 import com.shiguang.packageManager.service.PackageService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -39,6 +47,14 @@ public class PackageController {
 	private PackageService packageService;
 	@Autowired
 	private DepartmentService departmentService;
+	@Autowired
+	private RefractivityService refractivityService;
+	@Autowired
+	private MaterialService materialService;
+	@Autowired
+	private LightService lightService;
+	@Autowired
+	private FunctionService functionService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:package:package")
@@ -61,11 +77,24 @@ public class PackageController {
 	@GetMapping("/add")
 	@RequiresPermissions("information:package:add")
 	String add(Model model){
-		Map<String, Object> map = new HashMap<>();
-		map.put("departType","销售门店");
-		map.put("state",1);
-		List<DepartmentDO> departmentDOList = departmentService.list(map);
-		model.addAttribute("departmentDOList",departmentDOList);
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("departType","销售门店");
+//		map.put("state",1);
+//		List<DepartmentDO> departmentDOList = departmentService.list(map);
+//		model.addAttribute("departmentDOList",departmentDOList);
+		Map<String,Object> map = new HashMap<>();
+		//镜架材质
+		List<MaterialDO> materialDOList = materialService.list(map);
+		model.addAttribute("materialDOList",materialDOList);
+		//折射率
+		List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+		model.addAttribute("refractivityDOList",refractivityDOList);
+		//光度分类
+		List<LightDO> lightDOList = lightService.list(map);
+		model.addAttribute("lightDOList",lightDOList);
+		//镜片功能
+		List<FunctionDO> functionDOList = functionService.list(map);
+		model.addAttribute("functionDOList",functionDOList);
 	    return "packageInfo/add";
 	}
 

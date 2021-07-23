@@ -17,6 +17,8 @@ public class SettlementDO implements Serializable {
 	
 	//主键
 	private Long id;
+	//检查费用id
+	private Long costId;
 	//会员卡号
 	private String memberNumber;
 	//实际金额
@@ -42,6 +44,11 @@ public class SettlementDO implements Serializable {
 	public Long getId() {
 		return id;
 	}
+
+	public void setCostId(Long costId) {this.costId = costId;}
+
+	public Long getCostId() {return costId;}
+
 	/**
 	 * 设置：会员卡号
 	 */

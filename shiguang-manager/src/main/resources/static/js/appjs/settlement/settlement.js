@@ -80,13 +80,11 @@ function load() {
 									formatter : function(value, row, index) {
                                         var e;
 										if (row.isSale == 0) {
-											   e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                                                + value
-                                                + '\')"><i class="fa fa-edit"></i></a> ';
+											   e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" ' +
+												   'onclick="edit(\''+value+'\',\''+row.costId+'\')"><i class="fa fa-edit"></i></a> ';
 										} else if (row.isSale == 1) {
-                                               e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" onclick="detail(\''
-                                                + value
-                                                + '\')" style="text-decoration: none;">详情</a>';
+                                               e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" ' +
+												   'onclick="detail(\''+value+'\',\''+row.costId+'\')" style="text-decoration: none;">详情</a>';
 										}
 
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
@@ -114,26 +112,26 @@ function add() {
 	});
     layer.full(toIndex)
 }
-function edit(cardNumber) {
+function edit(cardNumber,costId) {
     var toIndex = layer.open({
 		type : 2,
 		title : '结款',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '1500px', '520px' ],
-		content : prefix + '/edit/' + cardNumber // iframe的url
+		content : prefix + '/edit/'+cardNumber+'/'+ costId // iframe的url
 	});
     layer.full(toIndex)
 }
 
-function detail(cardNumber) {
+function detail(cardNumber,costId) {
     var toIndex = layer.open({
         type : 2,
         title : '详情',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '1500px', '520px' ],
-        content : prefix + '/detail/' + cardNumber // iframe的url
+        content : prefix + '/detail/' + cardNumber+'/'+ costId // iframe的url
     });
     layer.full(toIndex)
 }

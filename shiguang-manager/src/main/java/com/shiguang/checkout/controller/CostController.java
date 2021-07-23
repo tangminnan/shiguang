@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +72,7 @@ public class CostController {
         JSONArray json=JSONArray.parseArray(codeall);
         JSONObject jsonOne;
         CostDO cost = new CostDO();
+        cost.setCreateTime(new Date());
         Long saleNumber =  GuuidUtil.getUUID();
         cost.setSaleNumber("X"+saleNumber);
         for (int i=0;i<json.size();i++) {
@@ -96,7 +98,6 @@ public class CostController {
                 cost.setSaleNumber(number);
             }
         }
-
 //        if(costService.save(cost)>0){
 //            return R.ok();
 //        }

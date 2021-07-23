@@ -12,7 +12,7 @@
 	</select>
 
     <select id="list" resultType="com.shiguang.checkout.domain.CostDO">
-        select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale` from cost
+        select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`create_time` from cost
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
@@ -66,7 +66,8 @@
 			`cost_money`,
 			`arrear_money`,
 			`sale_name`,
-			`is_sale`
+			`is_sale`,
+			`create_time`
 		)
 		values
 		(
@@ -79,7 +80,8 @@
 			#{costMoney},
 			#{arrearMoney},
 			#{saleName},
-			#{isSale}
+			#{isSale},
+			#{createTime}
 		)
 	</insert>
 
@@ -104,7 +106,7 @@
         <set>
             <if test="isSale != null">`is_sale` = #{isSale}</if>
         </set>
-        where member_number = #{memberNumber}
+        where id = #{id}
     </update>
 
     <delete id="remove">

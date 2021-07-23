@@ -23,8 +23,13 @@ public class SettlementServiceImpl implements SettlementService {
 	}
 
 	@Override
-	public SettlementDO getMember(String cardMember){
+	public List<SettlementDO> getMember(String cardMember){
 		return settlementDao.getMember(cardMember);
+	}
+
+	@Override
+	public SettlementDO getCostId(Long costId){
+		return settlementDao.getCostId(costId);
 	}
 	
 	@Override

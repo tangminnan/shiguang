@@ -422,6 +422,7 @@ public class StoreSalesController {
         costDO.setCostMoney(salesDO.getAmountMoney());
         costDO.setSaleName(salesDO.getSaleName());
         costDO.setIsSale(0L);
+        costDO.setCreateTime(new Date());
         costService.save(costDO);
         salesDO.setPeijingTime(new Date());
         if (salesService.save(salesDO) > 0){

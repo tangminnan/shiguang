@@ -14,6 +14,8 @@ public class MemberDO implements Serializable {
     private Long memberOption;
     //会员卡号
     private String cardNumber;
+    //检查项目id
+    private Long costId;
     //是否缴费
     private Long isSale;
     //顾客性别(1:男2:女)
@@ -140,6 +142,10 @@ public class MemberDO implements Serializable {
     public String getCardNumber() {
         return cardNumber;
     }
+
+    public void setCostId(Long costId) {this.costId = costId;}
+
+    public Long getCostId() {return costId;}
 
     /**
      * 设置：是否缴费

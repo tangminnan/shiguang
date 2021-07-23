@@ -1694,15 +1694,15 @@
     }
     function getMemberDetail(){
         var id = $("#memberId").val();
-        var toIndex = layer.open({
+        layer.open({
             type : 2,
             title : '详情',
             maxmin : true,
             shadeClose : false, // 点击遮罩关闭层
-            area : [ '800px', '520px' ],
+            area : [ '1200px', '520px' ],
             content : "/information/highmember/detail/" + id // iframe的url
         });
-        layer.full(toIndex)
+
 	}
     var addhtml = "";
 	var prce=0;

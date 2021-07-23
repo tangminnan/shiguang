@@ -4,15 +4,19 @@
 <mapper namespace="com.shiguang.settlement.dao.SettlementDao">
 
 	<select id="get" resultType="com.shiguang.settlement.domain.SettlementDO">
-		select `id`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement where id = #{value}
+		select `id`,`cost_id`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement where id = #{value}
 	</select>
 
 	<select id="getMember" resultType="com.shiguang.settlement.domain.SettlementDO">
-		select `id`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement where member_number = #{value}
+		select `id`,`cost_id`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement where member_number = #{value}
+	</select>
+
+	<select id="getCostId" resultType="com.shiguang.settlement.domain.SettlementDO">
+		select `id`,`cost_id`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement where cost_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.settlement.domain.SettlementDO">
-		select `id`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement
+		select `id`,`cost_id`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
@@ -51,6 +55,7 @@
 	<insert id="save" parameterType="com.shiguang.settlement.domain.SettlementDO" useGeneratedKeys="true" keyProperty="id">
 		insert into settlement
 		(
+		    `cost_id`,
 			`member_number`, 
 			`actual_money`, 
 			`payment_money`, 
@@ -60,6 +65,7 @@
 		)
 		values
 		(
+		    #{costId},
 			#{memberNumber}, 
 			#{actualMoney}, 
 			#{paymentMoney}, 
@@ -72,6 +78,7 @@
 	<update id="update" parameterType="com.shiguang.settlement.domain.SettlementDO">
 		update settlement 
 		<set>
+			<if test="costId != null"> `cost_id` = #{costId}</if>
 			<if test="memberNumber != null">`member_number` = #{memberNumber}, </if>
 			<if test="actualMoney != null">`actual_money` = #{actualMoney}, </if>
 			<if test="paymentMoney != null">`payment_money` = #{paymentMoney}, </if>
