@@ -101,7 +101,7 @@ public class MfrsController {
     public PageUtils JpcpList(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.JpcpList(query);
+        List<MfrsDO> mfrsDOList = mfrsService.jpcpList(query);
         int total = mfrsService.mgcount(query);
         PageUtils pageUtils = new PageUtils(mfrsDOList, total);
         return pageUtils;
@@ -114,7 +114,20 @@ public class MfrsController {
     public PageUtils JpdzList(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.JpcpList(query);
+        List<MfrsDO> mfrsDOList = mfrsService.jpcpList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
+    //查询隐形成片制造商
+    @ResponseBody
+    @GetMapping("/YxcpList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils YxcpList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.yxcpList(query);
         int total = mfrsService.mgcount(query);
         PageUtils pageUtils = new PageUtils(mfrsDOList, total);
         return pageUtils;

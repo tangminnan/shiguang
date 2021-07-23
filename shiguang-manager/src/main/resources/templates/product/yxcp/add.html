@@ -37,15 +37,9 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">制造商简称：</label>
                                 <div class="col-sm-8">
-                                    <select id="mfrsid" name="mfrsid" class="form-control"
-                                            onchange="choice(this.options[this.options.selectedIndex].value)">
-                                        <option></option>
-                                        <option th:each="ls:${mfrsDOList}"
-                                                th:text="${ls.mfrsname}"
-                                                th:value="${ls.mfrsid}"
-                                        ></option>
-                                    </select>
-                                    <span style="color: red">*</span>
+                                    <td><input type="text" id="mfrsName" name="mfrsName"/></td>
+                                    <input type="hidden" id="mfrsid" name="mfrsid"/>
+                                    <input type="button" value="选择*" onclick="getMfrsYxcp()" style="color: red"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -238,12 +232,12 @@
     </div>
 </div>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/product/yxcp/add.js">
-</script>
+<script type="text/javascript" src="/js/appjs/product/yxcp/add.js"></script>
+<!--//选择制造商-->
+<script type="text/javascript" src="/js/appjs/mfrs/brand/findmfrs.js"></script>
 <script>
     <!--//———制造商与品种联动—————-->
     function choice(value) {
-        // alert(value);
         $("#brandid").empty("");
         $("#brandid").append("<option value=''></option>");
         $.ajax({
@@ -255,12 +249,9 @@
             dataType: 'JSON',
             async: false,
             success: function (datajson) {
-                alert(datajson);
                 $(datajson).each(function (key) {
                     var id = datajson[key].brandid;
-                    alert("id" + id);
                     var roleName = datajson[key].brandname;
-                    alert("roleName" + roleName);
                     $("#brandid").append("<option value='" + id + "'>" + roleName + "</option>")
                 });
             }
@@ -268,12 +259,7 @@
     }
 
     // <!--//———厂家型号与型号联动—————-->
-    function factory1(val) {
-        var inputs = document.getElementsByName("factory");
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].value = val;
-        }
-    }
+
 </script>
 </body>
 </html>

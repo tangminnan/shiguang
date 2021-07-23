@@ -192,4 +192,11 @@ public class YxcpController {
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
     }
+
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("product:yxcp:findmfrs")
+    String findmfrs() {
+        return "/mfrs/mfrs/findYxcpMfrs";
+    }
 }

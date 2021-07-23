@@ -37,11 +37,17 @@ public class MfrsServiceImpl implements MfrsService {
     public List<MfrsDO> partsList(Map<String, Object> map) {
         return mfrsDao.partsList(map);
     }
-//查询镜片成片制造商
 
+    //查询镜片成片制造商
     @Override
-    public List<MfrsDO> JpcpList(Map<String, Object> map) {
-        return mfrsDao.JpcpList(map);
+    public List<MfrsDO> jpcpList(Map<String, Object> map) {
+        return mfrsDao.jpcpList(map);
+    }
+
+    //    <!--查询隐形成片制造商-->
+    @Override
+    public List<MfrsDO> yxcpList(Map<String, Object> map) {
+        return mfrsDao.yxcpList(map);
     }
 
     @Override

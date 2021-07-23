@@ -36,7 +36,4 @@ public interface JpcpService {
     //菜单联动显示
     List<BrandDO> choice(Integer mfrsid);
 
-    List<JpcpDO> listCp(Map<String, Object> map);
-
-    int countCp(Map<String, Object> map);
 }

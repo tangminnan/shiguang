@@ -39,7 +39,4 @@ public interface JpcpDao {
     //菜单联动显示
     List<BrandDO> choice(@Param("mfrsid") Integer mfrsid);
 
-    List<JpcpDO> listCp(Map<String, Object> map);
-
-    int countCp(Map<String, Object> map);
 }

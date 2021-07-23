@@ -64,13 +64,5 @@ public class JpcpServiceImpl implements JpcpService {
         return jpcpDao.choice(mfrsid);
     }
 
-    @Override
-    public List<JpcpDO> listCp(Map<String, Object> map) {
-        return jpcpDao.listCp(map);
-    }
 
-    @Override
-    public int countCp(Map<String, Object> map) {
-        return jpcpDao.countCp(map);
-    }
 }

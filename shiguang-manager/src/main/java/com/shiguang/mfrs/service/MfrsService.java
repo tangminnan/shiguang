@@ -26,7 +26,10 @@ public interface MfrsService {
     List<MfrsDO> partsList(Map<String, Object> map);
 
     //    <!--查询镜片成片制造商-->
-    List<MfrsDO> JpcpList(Map<String, Object> map);
+    List<MfrsDO> jpcpList(Map<String, Object> map);
+
+    //    <!--查询隐形成片制造商-->
+    List<MfrsDO> yxcpList(Map<String, Object> map);
 
     int mgcount(Map<String, Object> map);
 

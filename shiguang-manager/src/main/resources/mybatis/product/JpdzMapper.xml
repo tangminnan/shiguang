@@ -9,13 +9,17 @@
         j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
         j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
         j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
-        j.`trade_price`,j.`transfer_price`,j.`retail_price`
+        j.`trade_price`,j.`transfer_price`,j.`retail_price`,
+        m.mfrsname,b.brandname,u.unitnum
         from aa_jpdz j
         left join c_refractivity r on r.refractivityid = j.refractivityid
         left join p_light pl on pl.light_id = j.light_id
         left join p_lens l on l.lens_id = j.lens_id
         left join p_gradual g on g.gradual_id = j.gradual_id
         left join  p_function f on f.function_id = j.function_id
+				left join c_mfrs m on j.mfrsid=m.mfrsid
+				left join c_brand b on j.brandid=b.brandid
+				left join c_unit u on u.unitid=j.unitid
 		where id = #{value}
 	</select>
 
@@ -25,13 +29,16 @@
         j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
         j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
         j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
-        j.`trade_price`,j.`transfer_price`,j.`retail_price`
+        j.`trade_price`,j.`transfer_price`,j.`retail_price`,m.mfrsname,b.brandname,u.unitnum
         from aa_jpdz j
         left join c_refractivity r on r.refractivityid = j.refractivityid
         left join p_light pl on pl.light_id = j.light_id
         left join p_lens l on l.lens_id = j.lens_id
         left join p_gradual g on g.gradual_id = j.gradual_id
         left join p_function f on f.function_id = j.function_id
+        left join c_mfrs m on j.mfrsid=m.mfrsid
+        left join c_brand b on j.brandid=b.brandid
+        left join c_unit u on u.unitid=j.unitid
         <where>
             <if test="id != null and id != ''">and j.id = #{id}</if>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
@@ -71,6 +78,9 @@
             <if test="tradePrice != null and tradePrice != ''">and j.trade_price = #{tradePrice}</if>
             <if test="transferPrice != null and transferPrice != ''">and j.transfer_price = #{transferPrice}</if>
             <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
