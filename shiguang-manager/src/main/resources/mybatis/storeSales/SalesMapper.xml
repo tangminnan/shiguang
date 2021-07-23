@@ -233,7 +233,12 @@
 
 	<!-- 根据会员卡号查询数据 -->
 	<select id="findDataByNumber" resultType="com.shiguang.storeSales.domain.SalesDO">
-				select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name` from store_sales where member_number = #{value}
+				select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name`
+				from store_sales
+				<where>
+					<if test="cardNumber != null and cardNumber != ''">and member_number = #{cardNumber}</if>
+					<if test="dateTime != null and dateTime != ''">and mirror_time = #{dateTime}</if>
+				</where>
 	</select>
 
 	<!-- 取镜方式 -->

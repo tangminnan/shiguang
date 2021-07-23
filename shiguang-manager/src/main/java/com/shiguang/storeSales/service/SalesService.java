@@ -31,7 +31,7 @@ public interface SalesService {
 
 	List<EyesWay> findWay(Map<String,Object> map);
 
-	SalesDO findDataByNumber(String memberNumber);
+	SalesDO findDataByNumber(Map<String,Object> map);
 
 	List<ZipianDO> findZpian(Map<String,Object> map);
 

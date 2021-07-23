@@ -1,5 +1,8 @@
 package com.shiguang.settlement.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,14 +86,17 @@ public class SettlementController {
 		Double sumMoney =0.00;
 		CostDO costDO = new CostDO();
 		for (CostDO costDO1 : costDOList){
-			sumMoney = sumMoney + costDO1.getCostMoney();
-			costDO1.setSumMoney(sumMoney);
-			costDO = new CostDO();
-			costDO.setId(costDO1.getId());
-			costDO.setMemberNumber(costDO1.getMemberNumber());
-			costDO.setSaleNumber(costDO1.getSaleNumber());
-			costDO.setSumMoney(sumMoney);
-			costDO.setSaleName(costDO1.getSaleName());
+			if (null != costDO1.getCostMoney()) {
+				sumMoney = sumMoney + costDO1.getCostMoney();
+				costDO1.setSumMoney(sumMoney);
+				costDO = new CostDO();
+				costDO.setId(costDO1.getId());
+				costDO.setMemberNumber(costDO1.getMemberNumber());
+				costDO.setSaleNumber(costDO1.getSaleNumber());
+				costDO.setSumMoney(sumMoney);
+				costDO.setSaleName(costDO1.getSaleName());
+			}
+
 		}
 
 		model.addAttribute("costDO",costDO);
@@ -105,13 +111,19 @@ public class SettlementController {
 		MemberDO memberDO = memberService.getCardNumber(cardNumber);
 		model.addAttribute("memberDO",memberDO);
 		CostDO costDO = new CostDO();
-		SalesDO salesDO = salesService.findDataByNumber(cardNumber);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Map<String,Object> map = new HashMap<>();
+		map.put("cardNumber",cardNumber);
+		String dt = sdf.format(date) + " 00:00:00";
+		map.put("dateTime",dt);
+		SalesDO salesDO = salesService.findDataByNumber(map);
 		costDO.setMemberNumber(salesDO.getMemberNumber());
 		costDO.setSaleNumber(salesDO.getSaleNumber());
 		costDO.setSumMoney(salesDO.getAmountMoney());
 		costDO.setSaleName(salesDO.getSaleName());
 		model.addAttribute("costDO",costDO);
-		return "settlement/edit";
+		return "settlement/jsedit";
 	}
 
 	@GetMapping("/detail/{cardNumber}")

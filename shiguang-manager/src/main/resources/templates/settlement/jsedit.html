@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="cardNumber" name="cardNumber" th:value="${memberDO.cardNumber}"  type="hidden">
+							<input id="saleNumber" name="saleNumber" th:value="${costDO.saleNumber}"  type="hidden">
+							<input id="saleName" name="saleName" th:value="${costDO.saleName}"  type="hidden">
+							<input id="sumMoney" name="sumMoney" th:value="${costDO.sumMoney}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">会员卡号：</label>
+								<div class="col-sm-8">
+									<input id="memberNumber" name="memberNumber" th:value="${memberDO.cardNumber}" type="text" readonly>
+									&nbsp;&nbsp;&nbsp;&nbsp;顾客姓名：<input id="cardName" name="cardName" th:value="${memberDO.name}" type="text" readonly>
+								</div>
+							</div>
+							<h1 style="float: left;font-size: 20px">查询信息</h1>
+							<table class="table table-bordered table-hover" >
+								<thead>
+								<tr class="success">
+									<th style="text-align: center">销售单号</th>
+									<th style="text-align: center">销售人员</th>
+									<th style="text-align: center">原价合计</th>
+									<th style="text-align: center">应收金额</th>
+									<th style="text-align: center">实缴金额</th>
+								</tr>
+								</thead>
+								<tbody >
+								<tr>
+									<td id="aa" style="text-align: center"></td>
+									<td id="bb" style="text-align: center"></td>
+									<td id="cc" style="text-align: center"></td>
+									<td id="dd" style="text-align: center"></td>
+									<td id="ee" style="text-align: center"></td>
+								</tr>
+								</tbody>
+							</table>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">实缴金额：</label>
+								<div class="col-sm-8">
+									<input id="actualMoney" name="actualMoney" type="text" th:value="${costDO.sumMoney}" style="width: 20%">
+									&nbsp;&nbsp;&nbsp;&nbsp;缴费金额：<input id="paymentMoney" name="paymentMoney"  style="width: 20%" type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;找零金额：<input id="changeMoney" name="changeMoney" style="width: 20%" type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">缴费方式：</label>
+								<div class="col-sm-8">
+									<select  name="payModel" id="payModel" style="width: 30%">
+										<option value="">请选择</option>
+										<option value="0">微信</option>
+										<option value="1">支付宝</option>
+										<option value="2">医院收费处</option>
+										<option value="3">一卡通</option>
+									</select>
+									&nbsp;&nbsp;&nbsp;&nbsp;<input id="payMoney" name="payMoney" onchange="cop()" style="width: 20%" type="text">
+								</div>
+							</div>
+														<!--<div class="form-group">-->
+								<!--<label class="col-sm-3 control-label">找零金额：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="changeMoney" name="changeMoney" th:value="${settlement.changeMoney}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">支付方式：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="payModel" name="payModel" th:value="${settlement.payModel}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+														<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">缴费金额：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<input id="payMoney" name="payMoney" th:value="${settlement.payMoney}" class="form-control" type="text">-->
+								<!--</div>-->
+							<!--</div>-->
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/settlement/add.js">
+	</script>
+<script type="text/javascript">
+    $().ready(function(){
+        var saleNumber = $("#saleNumber").val()
+        var saleName = $("#saleName").val()
+        var sumMoney = $("#sumMoney").val()
+		$("#aa").text(saleNumber)
+        $("#bb").text(saleName)
+        $("#cc").text(sumMoney)
+        $("#dd").text(sumMoney)
+        $("#ee").text(sumMoney)
+    });
+
+    function cop(){
+        var str=document.getElementById("payMoney").value;
+        document.getElementById("paymentMoney").value = str;
+        var actualMoney = $("#actualMoney").val();
+        if ( parseFloat(str) < parseFloat(actualMoney)){
+            return alert("缴费金额不能小于实际缴费金额")
+		}
+        var change = str - actualMoney;
+        var dd = change.toFixed(2);
+        $("#changeMoney").val(dd)
+	}
+
+</script>
+</body>
+</html>

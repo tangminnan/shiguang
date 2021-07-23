@@ -58,8 +58,8 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public SalesDO findDataByNumber(String memberNumber){
-		return salesDao.findDataByNumber(memberNumber);
+	public SalesDO findDataByNumber(Map<String,Object> map){
+		return salesDao.findDataByNumber(map);
 	}
 
 	@Override
