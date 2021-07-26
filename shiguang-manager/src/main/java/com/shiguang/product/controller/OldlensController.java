@@ -93,6 +93,19 @@ public class OldlensController {
     String edit(@PathVariable("id") Long id, Model model) {
         OldlensDO oldlens = oldlensService.get(id);
         model.addAttribute("oldlens", oldlens);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = oldlensService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //款式
+        List<StyleDO> styleDOList = styleService.list(map);
+        model.addAttribute("styleDOList", styleDOList);
+        //老花镜度数
+        List<OlddegreesDO> olddegreesDOList = olddegreesService.list(map);
+        model.addAttribute("olddegreesDOList", olddegreesDOList);
         return "product/oldlens/edit";
     }
 
@@ -151,5 +164,12 @@ public class OldlensController {
         List<BrandDO> brandDOList = oldlensService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
+    }
+
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("product:oldlens:findmfrs")
+    String findmfrs() {
+        return "/mfrs/mfrs/findOldlensMfrs";
     }
 }

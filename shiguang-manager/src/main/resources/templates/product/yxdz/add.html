@@ -13,7 +13,7 @@
                             <h1 style="position: absolute;top: 10px;width: 150px;left: 100px;z-index: 99;background-color: white;">
                                 必填项</h1>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">商品信息代码：</label>
+                                <label class="col-sm-3 control-label">商品代码：</label>
                                 <div class="col-sm-8">
                                     <input id="producNum" name="producNum" class="form-control" type="text"
                                            value="1.00.00.000000000.0000">
@@ -37,22 +37,15 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">制造商简称：</label>
                                 <div class="col-sm-8">
-                                    <select id="mfrsid" name="mfrsid" class="form-control"
-                                            onchange="choice(this.options[this.options.selectedIndex].value)">
-                                        <option></option>
-                                        <option th:each="ls:${mfrsDOList}"
-                                                th:text="${ls.mfrsname}"
-                                                th:value="${ls.mfrsid}"
-                                        ></option>
-                                    </select>
-                                    <span style="color: red">*</span>
+                                    <td><input type="text" id="mfrsName" name="mfrsName"/></td>
+                                    <input type="hidden" id="mfrsid" name="mfrsid"/>
+                                    <input type="button" value="选择*" onclick="getMfrsYxdz()" style="color: red"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">商品品种：</label>
                                 <div class="col-sm-8">
                                     <select id="brandid" name="brandid" class="form-control"></select>
-                                    <span style="color: red">*</span>
                                 </div>
                             </div>
 
@@ -61,7 +54,8 @@
                                 <label class="col-sm-3 control-label">厂家型号：</label>
                                 <div class="col-sm-8">
                                     <input id="factory" name="factory"
-                                           onkeyup="factory1(this.value=this.value.toUpperCase())"
+                                           onkeyup="liandong1()"
+                                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
                                            class="form-control" type="text">
                                     <span style="color: red">*</span>
                                 </div>
@@ -69,8 +63,9 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">型号：</label>
                                 <div class="col-sm-8">
-                                    <input id="producFactory" name="factory"
-                                           onkeyup="factory1(this.value=this.value.toUpperCase())"
+                                    <input id="producFactory" name="producFactory"
+                                           onkeyup="liandong2()"
+                                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
                                            class="form-control" type="text">
                                     <span style="color: red">*</span>
                                 </div>
@@ -95,24 +90,7 @@
                                 </div>
                                 <span style="color: red">*</span>
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">球镜id：</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<input id="sphId" name="sphId" class="form-control" type="text">-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">跨度id：</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<input id="spanId" name="spanId" class="form-control" type="text">-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">柱镜id：</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<input id="cylId" name="cylId" class="form-control" type="text">-->
-                            <!--</div>-->
-                            <!--</div>-->
+
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">球镜：</label>
                                 <div class="col-sm-8">
@@ -140,30 +118,7 @@
                                 </div>
                                 <span style="color: red">*</span>
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">球镜下限：</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<select id="sphDown" name="sphDown" class="form-control">-->
-                            <!--<option></option>-->
-                            <!--<option th:each="ls:${sphDOList}"-->
-                            <!--th:text="${ls.sph}"-->
-                            <!--th:value="${ls.sphId}"-->
-                            <!--&gt;</option>-->
-                            <!--</select>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">跨度：</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<select id="sphSpan" name="sphSpan" class="form-control">-->
-                            <!--<option></option>-->
-                            <!--<option th:each="ls:${spanDOList}"-->
-                            <!--th:text="${ls.span}"-->
-                            <!--th:value="${ls.spanId}"-->
-                            <!--&gt;</option>-->
-                            <!--</select>-->
-                            <!--</div>-->
-                            <!--</div>-->
+
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">柱镜：</label>
                                 <div class="col-sm-8">
@@ -191,30 +146,7 @@
                                 </div>
                                 <span style="color: red">*</span>
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">柱镜下限：</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<select id="cylDown" name="cylDown" class="form-control">-->
-                            <!--<option></option>-->
-                            <!--<option th:each="ls:${cylDOList}"-->
-                            <!--th:text="${ls.cyl}"-->
-                            <!--th:value="${ls.cylId}"-->
-                            <!--&gt;</option>-->
-                            <!--</select>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">跨度：</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<select id="cylSpan" name="cylSpan" class="form-control">-->
-                            <!--<option></option>-->
-                            <!--<option th:each="ls:${spanDOList}"-->
-                            <!--th:text="${ls.span}"-->
-                            <!--th:value="${ls.spanId}"-->
-                            <!--&gt;</option>-->
-                            <!--</select>-->
-                            <!--</div>-->
-                            <!--</div>-->
+
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">曲率1：</label>
                                 <div class="col-sm-8">
@@ -224,12 +156,7 @@
                                 </div>
                                 <span style="color: red">*</span>
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">-曲率1：</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<input id="curvatureYi" name="curvatureYi" class="form-control" type="text">-->
-                            <!--</div>-->
-                            <!--</div>-->
+
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">曲率2：</label>
                                 <div class="col-sm-8">
@@ -239,12 +166,7 @@
                                 </div>
 
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">-曲率2：</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<input id="curvatureEr" name="curvatureEr" class="form-control" type="text">-->
-                            <!--</div>-->
-                            <!--</div>-->
+
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">直径：</label>
                                 <div class="col-sm-8">
@@ -254,12 +176,7 @@
                                 </div>
                                 <span style="color: red">*</span>
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">直径1：</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<input id="diameterYi" name="diameterYi" class="form-control" type="text">-->
-                            <!--</div>-->
-                            <!--</div>-->
+
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">接触镜类别：</label>
                                 <div class="col-sm-8">
@@ -314,21 +231,21 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">效期提醒上限：</label>
                                 <div class="col-sm-8">
-                                    <!--<input id="upday" name="upday" class="form-control" type="text">-->
                                     有效期前 <input id="upday" name="upday" type="text"> 天提醒进入滞销状态
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">效期提醒下限：</label>
                                 <div class="col-sm-8">
-                                    <!--<input id="downday" name="downday" class="form-control" type="text">-->
                                     有效期前 <input id="downday" name="downday" type="text"> 天提醒进入即将失效状态
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">颜色：</label>
                                 <div class="col-sm-8">
-                                    <input id="color" name="color" class="form-control" type="text">
+                                    <select id="color" name="color" class="form-control">
+                                        <option></option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -358,8 +275,9 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">联合光度：</label>
                                 <div class="col-sm-8">
-                                    <input id="combinedPhotometry" name="combinedPhotometry" class="form-control"
+                                    <input id="combinedPhotometry" name="combinedPhotometry"
                                            type="text">
+                                    <span style="color: red">【格式：1.25】</span>
                                 </div>
                             </div>
                         </div>
@@ -414,12 +332,12 @@
     </div>
 </div>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/product/yxdz/add.js">
-</script>
+<script type="text/javascript" src="/js/appjs/product/yxdz/add.js"></script>
+<!--//选择制造商-->
+<script type="text/javascript" src="/js/appjs/mfrs/brand/findmfrs.js"></script>
 <script>
     <!--//———制造商与品种联动—————-->
     function choice(value) {
-        // alert(value);
         $("#brandid").empty("");
         $("#brandid").append("<option value=''></option>");
         $.ajax({
@@ -431,12 +349,9 @@
             dataType: 'JSON',
             async: false,
             success: function (datajson) {
-                alert(datajson);
                 $(datajson).each(function (key) {
                     var id = datajson[key].brandid;
-                    alert("id" + id);
                     var roleName = datajson[key].brandname;
-                    alert("roleName" + roleName);
                     $("#brandid").append("<option value='" + id + "'>" + roleName + "</option>")
                 });
             }
@@ -444,12 +359,18 @@
     }
 
     // <!--//———厂家型号与型号联动—————-->
-    function factory1(val) {
-        var inputs = document.getElementsByName("factory");
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].value = val;
-        }
+    function liandong1() {
+        var val1 = document.getElementById("factory").value;
+        var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
+        document.getElementById("producFactory").value = va1;
     }
+
+    function liandong2() {
+        var val2 = document.getElementById("producFactory").value;
+        var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
+        document.getElementById("factory").value = va2;
+    }
+
 </script>
 </body>
 </html>

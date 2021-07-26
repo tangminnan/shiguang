@@ -76,6 +76,13 @@ public class HlyController {
     String edit(@PathVariable("id") Long id, Model model) {
         HlyDO hly = hlyService.get(id);
         model.addAttribute("hly", hly);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = hlyService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
         return "product/hly/edit";
     }
 
@@ -134,6 +141,13 @@ public class HlyController {
         List<BrandDO> brandDOList = hlyService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
+    }
+
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("product:hly:findmfrs")
+    String findmfrs() {
+        return "/mfrs/mfrs/findHlyMfrs";
     }
 
 }

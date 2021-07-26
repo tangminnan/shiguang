@@ -23,16 +23,22 @@ public class ShiguangDO implements Serializable {
     private String producName;
     //制造商id
     private Integer mfrsid;
-    //商品品种
+    //制造商代码
+    private String mfrsname;
+    //品牌id
     private Integer brandid;
+    //品牌代码
+    private String brandname;
     //厂家型号
     private String factory;
     //型号
     private String producFactory;
     //商品编号
     private String proid;
-    //计量单位
+    //计量单位id
     private Integer unitid;
+    //单位
+    private String unitname;
     //批号管理(1是、2否)
     private Integer batchid;
     //类型
@@ -284,5 +290,29 @@ public class ShiguangDO implements Serializable {
      */
     public String getRetailPrice() {
         return retailPrice;
+    }
+
+    public String getMfrsname() {
+        return mfrsname;
+    }
+
+    public void setMfrsname(String mfrsname) {
+        this.mfrsname = mfrsname;
+    }
+
+    public String getBrandname() {
+        return brandname;
+    }
+
+    public void setBrandname(String brandname) {
+        this.brandname = brandname;
+    }
+
+    public String getUnitname() {
+        return unitname;
+    }
+
+    public void setUnitname(String unitname) {
+        this.unitname = unitname;
     }
 }

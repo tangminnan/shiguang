@@ -50,54 +50,66 @@ function load() {
                     //     field: 'id',
                     //     title: '隐形定做id'
                     // },
-                    // {
-                    //     field: 'producNum',
-                    //     title: '商品信息代码'
-                    // },
                     {
-                        field: 'producCode',
-                        title: '商品条码'
+                        field: 'producNum',
+                        title: '商品代码'
                     },
+                    // {
+                    //     field: 'producCode',
+                    //     title: '商品条码'
+                    // },
                     {
                         field: 'producName',
                         title: '商品名称'
                     },
-                    {
-                        field: 'mfrsid',
-                        title: '制造商id'
-                    },
-                    {
-                        field: 'brandid',
-                        title: '商品品种'
-                    },
-                    {
-                        field: 'factory',
-                        title: '厂家型号'
-                    },
-                    {
-                        field: 'producFactory',
-                        title: '型号'
-                    },
-                    {
-                        field: 'proid',
-                        title: '商品编号'
-                    },
+                    // {
+                    //     field: 'mfrsid',
+                    //     title: '制造商id'
+                    // },
+                    // {
+                    //     field: 'mfrsname',
+                    //     title: '制造商'
+                    // },
+                    // {
+                    //     field: 'brandid',
+                    //     title: '商品品种'
+                    // },
+                    // {
+                    //     field: 'brandname',
+                    //     title: '商品品种'
+                    // },
+                    // {
+                    //     field: 'factory',
+                    //     title: '厂家型号'
+                    // },
+                    // {
+                    //     field: 'producFactory',
+                    //     title: '型号'
+                    // },
+                    // {
+                    //     field: 'proid',
+                    //     title: '商品编号'
+                    // },
                     // {
                     //     field: 'unitid',
                     //     title: '计量单位'
                     // },
                     // {
-                    //     field: 'sphId',
-                    //     title: '球镜id'
+                    //     field: 'unitname',
+                    //     title: '单位'
                     // },
+                    {
+                        field: 'sphUp' + '/' + 'sphDown',
+                        title: '球镜'
+                    },
                     // {
                     //     field: 'spanId',
                     //     title: '跨度id'
                     // },
-                    // {
-                    //     field: 'cylId',
-                    //     title: '柱镜id'
-                    // },
+                    {
+                        field: 'cylUp' + '/' + 'cylDown',
+                        title: '柱镜'
+                    },
                     // {
                     //     field: 'sphUp',
                     //     title: '球镜上限'
@@ -122,6 +134,10 @@ function load() {
                     //     field: 'cylSpan',
                     //     title: '柱镜跨度'
                     // },
+                    {
+                        field: 'curvatureOne' + '/' + 'curvatureYi',
+                        title: '曲率1'
+                    },
                     // {
                     //     field: 'curvatureOne',
                     //     title: '曲率1'
@@ -130,6 +146,10 @@ function load() {
                     //     field: 'curvatureYi',
                     //     title: '-曲率1'
                     // },
+                    {
+                        field: 'curvatureTwo' + '/' + 'curvatureEr',
+                        title: '曲率2'
+                    },
                     // {
                     //     field: 'curvatureTwo',
                     //     title: '曲率2'
@@ -138,6 +158,10 @@ function load() {
                     //     field: 'curvatureEr',
                     //     title: '-曲率2'
                     // },
+                    {
+                        field: 'diameterOne' + '/' + 'diameterYi',
+                        title: '直径'
+                    },
                     // {
                     //     field: 'diameterOne',
                     //     title: '直径'
@@ -194,22 +218,23 @@ function load() {
                     //     field: 'tax',
                     //     title: '税率(%)'
                     // },
-                    // {
-                    //     field: 'taxPrice',
-                    //     title: '含税单价'
-                    // },
-                    // {
-                    //     field: 'tradePrice',
-                    //     title: '批发价格'
-                    // },
-                    // {
-                    //     field: 'transferPrice',
-                    //     title: '调货成本'
-                    // },
                     {
                         field: 'retailPrice',
                         title: '标准零售价'
                     },
+                    {
+                        field: 'taxPrice',
+                        title: '含税单价'
+                    },
+                    {
+                        field: 'tradePrice',
+                        title: '批发价格'
+                    },
+                    // {
+                    //     field: 'transferPrice',
+                    //     title: '调货成本'
+                    // },
+
                     {
                         title: '操作',
                         field: 'id',

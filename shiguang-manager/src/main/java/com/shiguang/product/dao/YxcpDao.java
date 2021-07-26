@@ -14,7 +14,7 @@ import java.util.Map;
  *
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-30 16:07:55
+ * @date 2021-07-23 13:35:38
  */
 @Mapper
 public interface YxcpDao {
@@ -33,7 +33,7 @@ public interface YxcpDao {
 
     int batchRemove(Long[] ids);
 
-    //查询隐形成品制造商
+    //查询镜片定做制造商
     List<MgDO> mglist(Map<String, Object> map);
 
     //菜单联动显示

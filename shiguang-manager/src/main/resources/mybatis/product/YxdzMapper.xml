@@ -4,57 +4,72 @@
 <mapper namespace="com.shiguang.product.dao.YxdzDao">
 
     <select id="get" resultType="com.shiguang.product.domain.YxdzDO">
-		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`proid`,`unitid`,`sph_id`,`span_id`,`cyl_id`,`sph_up`,`sph_down`,`sph_span`,`cyl_up`,`cyl_down`,`cyl_span`,`curvature_one`,`curvature_yi`,`curvature_two`,`curvature_er`,`diameter_one`,`diameter_yi`,`contact_lens`,`cycle`,`usage_id`,`type_id`,`use_days`,`upday`,`downday`,`color`,`invisible_id`,`caizhi_id`,`combined_photometry`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_yxdz where id = #{value}
+		select m.`mfrsname`,b.`brandname`,u.`unitname`,
+		y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`factory`,y.`produc_factory`,y.`proid`,y.`unitid`,y.`sph_id`,
+		y.`span_id`,y.`cyl_id`,y.`sph_up`,y.`sph_down`,y.`sph_span`,y.`cyl_up`,y.`cyl_down`,y.`cyl_span`,y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,
+		y.`curvature_er`,y.`diameter_one`,y.`diameter_yi`,y.`contact_lens`,y.`cycle`,y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,
+		y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,y.`retail_price`
+		from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
+        left join  c_unit u on y.unitid= u.unitid
+
+		where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.product.domain.YxdzDO">
-        select
-        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`proid`,`unitid`,`sph_id`,`span_id`,`cyl_id`,`sph_up`,`sph_down`,`sph_span`,`cyl_up`,`cyl_down`,`cyl_span`,`curvature_one`,`curvature_yi`,`curvature_two`,`curvature_er`,`diameter_one`,`diameter_yi`,`contact_lens`,`cycle`,`usage_id`,`type_id`,`use_days`,`upday`,`downday`,`color`,`invisible_id`,`caizhi_id`,`combined_photometry`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price`
-        from aa_yxdz
+        select m.`mfrsname`,b.`brandname`,u.`unitname`,
+        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`factory`,y.`produc_factory`,y.`proid`,y.`unitid`,y.`sph_id`,
+        y.`span_id`,y.`cyl_id`,y.`sph_up`,y.`sph_down`,y.`sph_span`,y.`cyl_up`,y.`cyl_down`,y.`cyl_span`,y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,
+        y.`curvature_er`,y.`diameter_one`,y.`diameter_yi`,y.`contact_lens`,y.`cycle`,y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,
+        y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,y.`retail_price`
+        from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
+        left join c_unit u on y.unitid= u.unitid
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
-            <if test="proid != null and proid != ''">and proid = #{proid}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="sphId != null and sphId != ''">and sph_id = #{sphId}</if>
-            <if test="spanId != null and spanId != ''">and span_id = #{spanId}</if>
-            <if test="cylId != null and cylId != ''">and cyl_id = #{cylId}</if>
-            <if test="sphUp != null and sphUp != ''">and sph_up = #{sphUp}</if>
-            <if test="sphDown != null and sphDown != ''">and sph_down = #{sphDown}</if>
-            <if test="sphSpan != null and sphSpan != ''">and sph_span = #{sphSpan}</if>
-            <if test="cylUp != null and cylUp != ''">and cyl_up = #{cylUp}</if>
-            <if test="cylDown != null and cylDown != ''">and cyl_down = #{cylDown}</if>
-            <if test="cylSpan != null and cylSpan != ''">and cyl_span = #{cylSpan}</if>
-            <if test="curvatureOne != null and curvatureOne != ''">and curvature_one = #{curvatureOne}</if>
-            <if test="curvatureYi != null and curvatureYi != ''">and curvature_yi = #{curvatureYi}</if>
-            <if test="curvatureTwo != null and curvatureTwo != ''">and curvature_two = #{curvatureTwo}</if>
-            <if test="curvatureEr != null and curvatureEr != ''">and curvature_er = #{curvatureEr}</if>
-            <if test="diameterOne != null and diameterOne != ''">and diameter_one = #{diameterOne}</if>
-            <if test="diameterYi != null and diameterYi != ''">and diameter_yi = #{diameterYi}</if>
-            <if test="contactLens != null and contactLens != ''">and contact_lens = #{contactLens}</if>
-            <if test="cycle != null and cycle != ''">and cycle = #{cycle}</if>
-            <if test="usageId != null and usageId != ''">and usage_id = #{usageId}</if>
-            <if test="typeId != null and typeId != ''">and type_id = #{typeId}</if>
-            <if test="useDays != null and useDays != ''">and use_days = #{useDays}</if>
-            <if test="upday != null and upday != ''">and upday = #{upday}</if>
-            <if test="downday != null and downday != ''">and downday = #{downday}</if>
-            <if test="color != null and color != ''">and color = #{color}</if>
-            <if test="invisibleId != null and invisibleId != ''">and invisible_id = #{invisibleId}</if>
-            <if test="caizhiId != null and caizhiId != ''">and caizhi_id = #{caizhiId}</if>
-            <if test="combinedPhotometry != null and combinedPhotometry != ''">and combined_photometry =
+            <if test="id != null and id != ''">and y.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and y.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and y.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and y.brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and y.factory = #{factory}</if>
+            <if test="producFactory != null and producFactory != ''">and y.produc_factory = #{producFactory}</if>
+            <if test="proid != null and proid != ''">and y.proid = #{proid}</if>
+            <if test="unitid != null and unitid != ''">and y.unitid = #{unitid}</if>
+            <if test="sphId != null and sphId != ''">and y.sph_id = #{sphId}</if>
+            <if test="spanId != null and spanId != ''">and y.span_id = #{spanId}</if>
+            <if test="cylId != null and cylId != ''">and y.cyl_id = #{cylId}</if>
+            <if test="sphUp != null and sphUp != ''">and y.sph_up = #{sphUp}</if>
+            <if test="sphDown != null and sphDown != ''">and y.sph_down = #{sphDown}</if>
+            <if test="sphSpan != null and sphSpan != ''">and y.sph_span = #{sphSpan}</if>
+            <if test="cylUp != null and cylUp != ''">and y.cyl_up = #{cylUp}</if>
+            <if test="cylDown != null and cylDown != ''">and y.cyl_down = #{cylDown}</if>
+            <if test="cylSpan != null and cylSpan != ''">and y.cyl_span = #{cylSpan}</if>
+            <if test="curvatureOne != null and curvatureOne != ''">and y.curvature_one = #{curvatureOne}</if>
+            <if test="curvatureYi != null and curvatureYi != ''">and y.curvature_yi = #{curvatureYi}</if>
+            <if test="curvatureTwo != null and curvatureTwo != ''">and y.curvature_two = #{curvatureTwo}</if>
+            <if test="curvatureEr != null and curvatureEr != ''">and y.curvature_er = #{curvatureEr}</if>
+            <if test="diameterOne != null and diameterOne != ''">and y.diameter_one = #{diameterOne}</if>
+            <if test="diameterYi != null and diameterYi != ''">and y.diameter_yi = #{diameterYi}</if>
+            <if test="contactLens != null and contactLens != ''">and y.contact_lens = #{contactLens}</if>
+            <if test="cycle != null and cycle != ''">and y.ycle = #{cycle}</if>
+            <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
+            <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
+            <if test="useDays != null and useDays != ''">and y.use_days = #{useDays}</if>
+            <if test="upday != null and upday != ''">and y.upday = #{upday}</if>
+            <if test="downday != null and downday != ''">and y.downday = #{downday}</if>
+            <if test="color != null and color != ''">and y.color = #{color}</if>
+            <if test="invisibleId != null and invisibleId != ''">and y.invisible_id = #{invisibleId}</if>
+            <if test="caizhiId != null and caizhiId != ''">and y.caizhi_id = #{caizhiId}</if>
+            <if test="combinedPhotometry != null and combinedPhotometry != ''">and y.combined_photometry =
                 #{combinedPhotometry}
             </if>
-            <if test="tax != null and tax != ''">and tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="tax != null and tax != ''">and y.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and y.tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and y.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and y.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and y.retail_price = #{retailPrice}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -274,7 +289,6 @@
 		select b.brandid,b.brandname from c_brand b left join  cc_mg mg on b.goodsid = mg.goodsid
 		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=4 and b.mfrsid = #{mfrsid} group by  b.brandid;
 	</select>
-
     <select id="listYxDz" resultType="com.shiguang.product.domain.YxdzDO">
         select
         y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`factory`,y.`produc_factory`,

@@ -4,34 +4,44 @@
 <mapper namespace="com.shiguang.product.dao.HlyDao">
 
     <select id="get" resultType="com.shiguang.product.domain.HlyDO">
-		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`proid`,`unitid`,`product_type`,`main_capacity`,`second_capacity`,`produc_factory`,`upday`,`downday`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_hly where id = #{value}
+		select m.`mfrsname`,b.`brandname`,u.`unitname`,
+		h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
+		h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`
+		from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandid=b.brandid
+        left join  c_unit u on h.unitid= u.unitid
+		where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.product.domain.HlyDO">
-        select
-        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`proid`,`unitid`,`product_type`,`main_capacity`,`second_capacity`,`produc_factory`,`upday`,`downday`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price`
-        from aa_hly
+        select m.`mfrsname`,b.`brandname`,u.`unitname`,
+        h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
+        h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`
+        from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandid=b.brandid
+        left join c_unit u on h.unitid= u.unitid
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and factory = #{factory}</if>
-            <if test="proid != null and proid != ''">and proid = #{proid}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="productType != null and productType != ''">and product_type = #{productType}</if>
-            <if test="mainCapacity != null and mainCapacity != ''">and main_capacity = #{mainCapacity}</if>
-            <if test="secondCapacity != null and secondCapacity != ''">and second_capacity = #{secondCapacity}</if>
-            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
-            <if test="upday != null and upday != ''">and upday = #{upday}</if>
-            <if test="downday != null and downday != ''">and downday = #{downday}</if>
-            <if test="tax != null and tax != ''">and tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="id != null and id != ''">and h.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
+            <if test="proid != null and proid != ''">and h.proid = #{proid}</if>
+            <if test="unitid != null and unitid != ''">and h.unitid = #{unitid}</if>
+            <if test="productType != null and productType != ''">and h.product_type = #{productType}</if>
+            <if test="mainCapacity != null and mainCapacity != ''">and h.main_capacity = #{mainCapacity}</if>
+            <if test="secondCapacity != null and secondCapacity != ''">and h.second_capacity = #{secondCapacity}</if>
+            <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
+            <if test="upday != null and upday != ''">and h.upday = #{upday}</if>
+            <if test="downday != null and downday != ''">and h.downday = #{downday}</if>
+            <if test="tax != null and tax != ''">and h.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and h.tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and h.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and h.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and h.retail_price = #{retailPrice}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

@@ -61,6 +61,8 @@ public class JpdzDO implements Serializable {
     private Long cylSpan;
     //下加光id
     private Long lightbelowId;
+    //下加光
+    private String lightbelow;
     //下加光左
     private Long lightbelowRight;
     //下加光右
@@ -680,5 +682,13 @@ public class JpdzDO implements Serializable {
 
     public String getRetailPrice() {
         return retailPrice;
+    }
+
+    public String getLightbelow() {
+        return lightbelow;
+    }
+
+    public void setLightbelow(String lightbelow) {
+        this.lightbelow = lightbelow;
     }
 }

@@ -34,13 +34,18 @@ public class YxdzDO implements Serializable {
     //商品编号
     private String proid;
     //计量单位
-    private String unitid;
-    //球镜id
-    private Long sphId;
+    private Integer unitid;
+    private String unitname;
     //跨度id
     private Long spanId;
     //柱镜id
     private Long cylId;
+    //柱镜
+    private String cyl;
+    //球镜id
+    private Long sphId;
+    //球镜
+    private String sph;
     //球镜上限
     private Long sphUp;
     //球镜下限
@@ -231,15 +236,21 @@ public class YxdzDO implements Serializable {
     /**
      * 设置：计量单位
      */
-    public void setUnitid(String unitid) {
+
+    public Integer getUnitid() {
+        return unitid;
+    }
+
+    public void setUnitid(Integer unitid) {
         this.unitid = unitid;
     }
 
-    /**
-     * 获取：计量单位
-     */
-    public String getUnitid() {
-        return unitid;
+    public String getUnitname() {
+        return unitname;
+    }
+
+    public void setUnitname(String unitname) {
+        this.unitname = unitname;
     }
 
     /**
@@ -694,5 +705,21 @@ public class YxdzDO implements Serializable {
 
     public String getTypeName() {
         return typeName;
+    }
+
+    public String getCyl() {
+        return cyl;
+    }
+
+    public void setCyl(String cyl) {
+        this.cyl = cyl;
+    }
+
+    public String getSph() {
+        return sph;
+    }
+
+    public void setSph(String sph) {
+        this.sph = sph;
     }
 }
