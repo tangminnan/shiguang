@@ -31,6 +31,8 @@ public class SettlementDO implements Serializable {
 	private Long payModel;
 	//缴费金额
 	private Double payMoney;
+	//销售单号
+	private String saleNumber;
 
 	/**
 	 * 设置：主键
@@ -121,4 +123,8 @@ public class SettlementDO implements Serializable {
 	public Double getPayMoney() {
 		return payMoney;
 	}
+
+	public void setSaleNumber(String saleNumber){this.saleNumber = saleNumber;}
+
+	public String getSaleNumber() {return saleNumber;}
 }

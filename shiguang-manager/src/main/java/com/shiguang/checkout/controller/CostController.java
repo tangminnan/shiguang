@@ -72,7 +72,6 @@ public class CostController {
         JSONArray json=JSONArray.parseArray(codeall);
         JSONObject jsonOne;
         CostDO cost = new CostDO();
-        cost.setCreateTime(new Date());
         Long saleNumber =  GuuidUtil.getUUID();
         cost.setSaleNumber("X"+saleNumber);
         for (int i=0;i<json.size();i++) {
@@ -92,6 +91,8 @@ public class CostController {
                 cost.setIsSale(0L);
                 String username = ShiroUtils.getUser().getUsername();
                 cost.setSaleName(username);
+                cost.setCreateTime(new Date());
+                cost.setType("检查单");
                 costService.save(cost);
                 String number = cost.getSaleNumber();
                 cost = new CostDO();

@@ -4,15 +4,15 @@
 <mapper namespace="com.shiguang.checkout.dao.CostDao">
 
     <select id="get" resultType="com.shiguang.checkout.domain.CostDO">
-		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale` from cost where id = #{value}
+		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`type` from cost where id = #{value}
 	</select>
 
     <select id="getMemberNum" resultType="com.shiguang.checkout.domain.CostDO">
-		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale` from cost where member_number = #{value}
+		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`type` from cost where member_number = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.checkout.domain.CostDO">
-        select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`create_time` from cost
+        select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`create_time`,`type` from cost
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
@@ -67,7 +67,8 @@
 			`arrear_money`,
 			`sale_name`,
 			`is_sale`,
-			`create_time`
+			`create_time`,
+			`type`
 		)
 		values
 		(
@@ -81,7 +82,8 @@
 			#{arrearMoney},
 			#{saleName},
 			#{isSale},
-			#{createTime}
+			#{createTime},
+			#{type}
 		)
 	</insert>
 

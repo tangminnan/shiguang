@@ -423,6 +423,7 @@ public class StoreSalesController {
         costDO.setSaleName(salesDO.getSaleName());
         costDO.setIsSale(0L);
         costDO.setCreateTime(new Date());
+        costDO.setType("配镜单");
         costService.save(costDO);
         salesDO.setPeijingTime(new Date());
         if (salesService.save(salesDO) > 0){

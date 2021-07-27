@@ -93,6 +93,10 @@ public class MemberDO implements Serializable {
     private String createTime;
     //状态(0:删除1:未删除)
     private Long state;
+    //检查类型
+    private String type;
+    //销售单号
+    private String saleNumber;
 
     /**
      * 设置：
@@ -619,4 +623,12 @@ public class MemberDO implements Serializable {
     public Long getState() {
         return state;
     }
+
+    public void setType(String type){this.type = type;}
+
+    public String getType(){return type;}
+
+    public void setSaleNumber(String saleNumber) {this.saleNumber = saleNumber;}
+
+    public String getSaleNumber() {return saleNumber;}
 }

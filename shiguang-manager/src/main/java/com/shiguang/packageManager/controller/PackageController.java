@@ -1,5 +1,6 @@
 package com.shiguang.packageManager.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,8 @@ import com.shiguang.mfrs.service.MaterialService;
 import com.shiguang.mfrs.service.RefractivityService;
 import com.shiguang.packageManager.domain.PackageDO;
 import com.shiguang.packageManager.service.PackageService;
+import com.shiguang.product.domain.*;
+import com.shiguang.product.service.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -55,6 +58,24 @@ public class PackageController {
 	private LightService lightService;
 	@Autowired
 	private FunctionService functionService;
+	@Autowired
+	private ProducaService producaService;
+	@Autowired
+	private PartsService partsService;
+	@Autowired
+	private JpcpService jpcpService;
+	@Autowired
+	private JpdzService jpdzService;
+	@Autowired
+	private TyjService tyjService;
+	@Autowired
+	private OldlensService oldlensService;
+	@Autowired
+	private HcService hcService;
+	@Autowired
+	private ShiguangService shiguangService;
+	@Autowired
+	private HlyService hlyService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:package:package")
@@ -130,7 +151,83 @@ public class PackageController {
 		PageUtils pageUtils = new PageUtils(departmentDOList, total);
 		return pageUtils;
 	}
-	
+
+	@GetMapping("/goodsInfo/{goodsType}")
+	@RequiresPermissions("information:package:goodsInfo")
+	String goodsInfo(@PathVariable("goodsType") String goodsType,Model model){
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("departType","销售门店");
+//		map.put("state",1);
+//		List<DepartmentDO> departmentDOList = departmentService.list(map);
+//		model.addAttribute("departmentDOList",departmentDOList);
+		model.addAttribute("goodsType",goodsType);
+		return "packageInfo/goodsInfo";
+	}
+
+	@ResponseBody
+	@GetMapping("/goodsInfolist")
+	@RequiresPermissions("information:package:goodsInfo")
+	public PageUtils goodsInfolist(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		List<ProducaDO> producaDOList =new ArrayList<>();
+		List<PartsDO> partsDOList = new ArrayList<>();
+		List<JpcpDO> jpcpDOList = new ArrayList<>();
+		List<JpdzDO> jpdzDOList = new ArrayList<>();
+		List<TyjDO> tyjDOList = new ArrayList<>();
+		List<OldlensDO> oldlensDOList = new ArrayList<>();
+		List<HcDO> hcDOList = new ArrayList<>();
+		List<ShiguangDO> shiguangDOList = new ArrayList<>();
+		List<HlyDO> hlyDOList = new ArrayList<>();
+		PageUtils pageUtils = null;
+		if ("镜架".equals(query.get("goodsType"))){
+			producaDOList = producaService.list(query);
+//			if(null != producaDOList && producaDOList.size() > 0){
+//				for (ProducaDO producaDO : producaDOList){
+//					producaDO.
+//				}
+//			}
+			int total = producaService.count(query);
+			pageUtils = new PageUtils(producaDOList, total);
+		} else if ("配件".equals(query.get("goodsType"))){
+			partsDOList = partsService.list(query);
+			int total = partsService.count(query);
+			pageUtils = new PageUtils(partsDOList, total);
+		} else if ("成品片".equals(query.get("goodsType"))){
+			jpcpDOList = jpcpService.list(query);
+			int total = jpcpService.count(query);
+			pageUtils = new PageUtils(jpcpDOList, total);
+		} else if ("订做片".equals(query.get("goodsType"))){
+			jpdzDOList = jpdzService.listDz(query);
+			int total = jpdzService.countDz(query);
+			pageUtils = new PageUtils(jpdzDOList, total);
+		} else if ("太阳镜".equals(query.get("goodsType"))){
+			tyjDOList = tyjService.list(query);
+			int total = tyjService.count(query);
+			pageUtils = new PageUtils(tyjDOList,total);
+		} else if ("老花镜".equals(query.get("goodsType"))){
+			oldlensDOList = oldlensService.list(query);
+			int total = oldlensService.count(query);
+			pageUtils = new PageUtils(oldlensDOList,total);
+		} else if ("耗材".equals(query.get("goodsType"))){
+			hcDOList = hcService.list(query);
+			int total = hcService.count(query);
+			pageUtils = new PageUtils(hcDOList,total);
+		} else if ("视光".equals(query.get("goodsType"))){
+			shiguangDOList = shiguangService.list(query);
+			int total = shiguangService.count(query);
+			pageUtils = new PageUtils(shiguangDOList,total);
+		} else if ("隐形护理液".equals(query.get("goodsType"))){
+			hlyDOList = hlyService.list(query);
+			int total = hlyService.count(query);
+			pageUtils = new PageUtils(hlyDOList,total);
+		}
+//		List<DepartmentDO> departmentDOList = departmentService.list(query);
+//		int total = departmentService.count(query);
+//		PageUtils pageUtils = new PageUtils(departmentDOList, total);
+		return pageUtils;
+	}
+
 	/**
 	 * 保存
 	 */

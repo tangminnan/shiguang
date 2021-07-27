@@ -52,6 +52,7 @@ public class HcDO implements Serializable {
 	//标准零售价格
 	private Double retailPrice;
 
+
 	/**
 	 * 设置：耗材id
 	 */
@@ -268,4 +269,5 @@ public class HcDO implements Serializable {
 	public Double getRetailPrice() {
 		return retailPrice;
 	}
+	
 }

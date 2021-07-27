@@ -79,21 +79,24 @@ function load() {
 									align : 'center',
 									formatter : function(value, row, index) {
                                         var e;
+                                        var t;
 										if (row.isSale == 0) {
 											   e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" ' +
-												   'onclick="edit(\''+value+'\',\''+row.costId+'\')"><i class="fa fa-edit"></i></a> ';
+												   'onclick="edit(\''+value+'\',\''+row.saleNumber+'\')"><i class="fa fa-edit"></i></a> ';
+											   t='';
 										} else if (row.isSale == 1) {
                                                e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" ' +
-												   'onclick="detail(\''+value+'\',\''+row.costId+'\')" style="text-decoration: none;">详情</a>';
+												   'onclick="detail(\''+value+'\',\''+row.saleNumber+'\',\''+row.costId+'\')" style="text-decoration: none;">详情</a>';
+                                               t = '<a class="btn btn-primary btn-xs" href="#" title="打印"  mce_href="#" ' +
+                                                'onclick="dayin(\''+row.type+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印</a>';
 										}
-
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ row.id
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e ;
+										return e + t;
 									}
 								} ]
 					});
@@ -112,28 +115,34 @@ function add() {
 	});
     layer.full(toIndex)
 }
-function edit(cardNumber,costId) {
+function edit(cardNumber,saleNumber) {
     var toIndex = layer.open({
 		type : 2,
 		title : '结款',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '1500px', '520px' ],
-		content : prefix + '/edit/'+cardNumber+'/'+ costId // iframe的url
+		content : prefix + '/edit/'+cardNumber+'/'+ saleNumber // iframe的url
 	});
     layer.full(toIndex)
 }
 
-function detail(cardNumber,costId) {
+function detail(cardNumber,saleNumber,costId) {
     var toIndex = layer.open({
         type : 2,
         title : '详情',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '1500px', '520px' ],
-        content : prefix + '/detail/' + cardNumber+'/'+ costId // iframe的url
+        content : prefix + '/detail/' + cardNumber+'/'+ saleNumber+'/'+costId // iframe的url
     });
     layer.full(toIndex)
+}
+
+function dayin(type,saleNumber){
+	if (type == "检查单"){
+        window.open("/information/settlement/jianchadayin?saleNumber="+saleNumber);
+	}
 }
 
 function remove(id) {

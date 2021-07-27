@@ -77,23 +77,32 @@ public class SettlementController {
 	    return "settlement/add";
 	}
 
-	@GetMapping("/edit/{cardNumber}/{costId}")
+	@GetMapping("/edit/{cardNumber}/{saleNumber}")
 	@RequiresPermissions("information:settlement:edit")
-	String edit(@PathVariable("cardNumber") String cardNumber,@PathVariable("costId") Long costId,Model model){
+	String edit(@PathVariable("cardNumber") String cardNumber,@PathVariable("saleNumber") String saleNumber,Model model){
 		MemberDO memberDO = memberService.getCardNumber(cardNumber);
 		model.addAttribute("memberDO",memberDO);
 		//List<CostDO> costDOList = costService.getMemberNum(cardNumber);
-		CostDO costDO = costService.get(costId);
+		//CostDO costDO = costService.get(costId);
+		Map<String,Object> map = new HashMap<>();
+		map.put("saleNumber",saleNumber);
+		List<CostDO> costDOList = costService.list(map);
 		Double sumMoney =0.00;
-		//CostDO costDO = new CostDO();
-//		for (CostDO costDO1 : costDOList){
-			if (null != costDO.getCostMoney()) {
-				if (null != costDO.getCostMoney()){
-					sumMoney = sumMoney + costDO.getCostMoney();
+		CostDO costDO = new CostDO();
+		for (CostDO costDO1 : costDOList){
+			if (null != costDO1.getCostMoney()){
+				if (null != costDO1.getCostMoney()){
+					sumMoney = sumMoney + costDO1.getCostMoney();
+					costDO1.setSumMoney(sumMoney);
+					costDO = new CostDO();
+					costDO.setId(costDO1.getId());
+					costDO.setMemberNumber(costDO1.getMemberNumber());
+					costDO.setSaleNumber(costDO1.getSaleNumber());
 					costDO.setSumMoney(sumMoney);
+					costDO.setSaleName(costDO1.getSaleName());
 				}
 			}
-//		}
+		}
 
 		model.addAttribute("costDO",costDO);
 //		SettlementDO settlement = settlementService.get(id);
@@ -122,36 +131,41 @@ public class SettlementController {
 		return "settlement/jsedit";
 	}
 
-	@GetMapping("/detail/{cardNumber}/{costId}")
+	@GetMapping("/detail/{cardNumber}/{saleNumber}/{costId}")
 	@RequiresPermissions("information:settlement:detail")
-	String detail(@PathVariable("cardNumber") String cardNumber,@PathVariable("costId") Long costId,Model model){
+	String detail(@PathVariable("cardNumber") String cardNumber,@PathVariable("saleNumber") String saleNumber,@PathVariable("costId") Long costId,Model model){
 		MemberDO memberDO = memberService.getCardNumber(cardNumber);
 		model.addAttribute("memberDO",memberDO);
-		CostDO costDO = costService.get(costId);
+//		CostDO costDO = costService.get(costId);
+		Map<String,Object> map = new HashMap<>();
+		map.put("saleNumber",saleNumber);
+		List<CostDO> costDOList = costService.list(map);
 		Double sumMoney =0.00;
-//		CostDO costDO = new CostDO();
-//		for (CostDO costDO1 : costDOList){
-//			if (null != costDO1.getCostMoney()){
-//				if (null != costDO1.getCostMoney()){
-//					sumMoney = sumMoney + costDO1.getCostMoney();
-//					costDO1.setSumMoney(sumMoney);
-//					costDO = new CostDO();
-//					costDO.setId(costDO1.getId());
-//					costDO.setMemberNumber(costDO1.getMemberNumber());
-//					costDO.setSaleNumber(costDO1.getSaleNumber());
-//					costDO.setSumMoney(sumMoney);
-//					costDO.setSaleName(costDO1.getSaleName());
-//				}
-//			}
-//		}
-		if (null != costDO.getCostMoney()) {
-			if (null != costDO.getCostMoney()){
-				sumMoney = sumMoney + costDO.getCostMoney();
-				costDO.setSumMoney(sumMoney);
+		CostDO costDO = new CostDO();
+		for (CostDO costDO1 : costDOList){
+			if (null != costDO1.getCostMoney()){
+				if (null != costDO1.getCostMoney()){
+					sumMoney = sumMoney + costDO1.getCostMoney();
+					costDO1.setSumMoney(sumMoney);
+					costDO = new CostDO();
+					costDO.setId(costDO1.getId());
+					costDO.setMemberNumber(costDO1.getMemberNumber());
+					costDO.setSaleNumber(costDO1.getSaleNumber());
+					costDO.setSumMoney(sumMoney);
+					costDO.setSaleName(costDO1.getSaleName());
+				}
 			}
 		}
+//		if (null != costDO.getCostMoney()) {
+//			if (null != costDO.getCostMoney()){
+//				sumMoney = sumMoney + costDO.getCostMoney();
+//				costDO.setSumMoney(sumMoney);
+//			}
+//		}
 		model.addAttribute("costDO",costDO);
 		SettlementDO settlement = settlementService.getCostId(costId);
+		//List<SettlementDO> settlement = settlementService.list(map);
+
 		model.addAttribute("settlement", settlement);
 		return "settlement/detail";
 	}
@@ -173,9 +187,33 @@ public class SettlementController {
 		}
 		return R.error();
 	}
-	/**
-	 * 修改
-	 */
+
+    /**
+     * 检查单打印
+     * @param saleNumber
+     * @param model
+     * @return
+     */
+	@GetMapping("/jianchadayin")
+	public String jianchadayin(String saleNumber, Model model) {
+	    Map<String,Object> map = new HashMap<>();
+	    map.put("saleNumber",saleNumber);
+		List<CostDO> costDOList = costService.list(map);
+		model.addAttribute("costDOList",costDOList);
+		Double sumMoney =0.00;
+		String jianchaDate="";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		for (CostDO costDO : costDOList){
+			sumMoney =sumMoney+costDO.getCostMoney();
+		}
+		model.addAttribute("sumMoney",sumMoney);
+		model.addAttribute("jianchaTime",simpleDateFormat.format(new Date()));
+		return "settlement/jianchadan";
+	}
+
+		/**
+         * 修改
+         */
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("information:settlement:edit")

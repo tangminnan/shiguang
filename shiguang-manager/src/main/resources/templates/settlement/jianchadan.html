@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head></head>
+<body style="width: 224px; border:0px solid #000000;">
+<form class="form-horizontal m-t">
+	<div style="float: left;width:150%; margin-left: 8px; margin-top: 30px;position: relative;border:2px solid #000000;">
+		<h1 style="text-align: center;">检查项目单</h1>
+		<table cellspacing="0" cellpadding="0" style=" width: 100%;border-top: 1px solid #000000;">
+			<tbody id="jiancha">
+				<tr>
+					<td>检查项目</td>
+                    <td>金额</td>
+				</tr>
+				<!--<tr>-->
+                    <!--<td><span th:text="${costDO.costName}" ></span></td>-->
+					<!--<td><span th:text="${costDO.costMoney}" ></span></td>-->
+				<!--</tr>-->
+			</tbody>
+		</table>
+		<p><span>总金额：</span><span style="margin-left: 170px;" th:text="${sumMoney}"></span></p>
+		<p><span>检查日期：</span><span style="margin-left: 70px;" th:text="${jianchaTime}"></span></p>
+	</div>
+	</form>
+<div th:include="include :: footer"></div>
+<script type="text/javascript"></script>
+<script th:inline="javascript">
+    $().ready(function(){
+        var costDOList = [[${costDOList}]];
+        var html="";
+        for (var i=0;i<costDOList.length;i++){
+            html = "<tr ><td >"+costDOList[i].costName+"</td>";
+            html += "<td >"+costDOList[i].costMoney+"</td>";
+            html += "</tr>";
+            $("#jiancha").append(html);
+		}
+    });
+</script>
+</body>
+</html>

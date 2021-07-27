@@ -39,6 +39,8 @@ public class CostDO implements Serializable {
 	private Long isSale;
 	//创建时间
 	private Date createTime;
+	//类型
+	private String type;
 
 	/**
 	 * 设置：主键
@@ -176,4 +178,8 @@ public class CostDO implements Serializable {
 	public void setCreateTime(Date createTime) {this.createTime = createTime;}
 
 	public Date getCreateTime() {return createTime;}
+
+	public void setType(String type) {this.type = type;}
+
+	public String getType() {return type;}
 }

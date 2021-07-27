@@ -19,6 +19,7 @@
 		select `id`,`cost_id`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+			      <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
 		  		  <if test="actualMoney != null and actualMoney != ''"> and actual_money = #{actualMoney} </if>
 		  		  <if test="paymentMoney != null and paymentMoney != ''"> and payment_money = #{paymentMoney} </if>
@@ -43,6 +44,7 @@
 		select count(*) from settlement
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+			      <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
 		  		  <if test="actualMoney != null and actualMoney != ''"> and actual_money = #{actualMoney} </if>
 		  		  <if test="paymentMoney != null and paymentMoney != ''"> and payment_money = #{paymentMoney} </if>
@@ -56,6 +58,7 @@
 		insert into settlement
 		(
 		    `cost_id`,
+		    `sale_number`,
 			`member_number`, 
 			`actual_money`, 
 			`payment_money`, 
@@ -66,6 +69,7 @@
 		values
 		(
 		    #{costId},
+		    #{saleNumber},
 			#{memberNumber}, 
 			#{actualMoney}, 
 			#{paymentMoney}, 
