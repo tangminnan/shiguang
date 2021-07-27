@@ -51,8 +51,8 @@ public class YxcpServiceImpl implements YxcpService {
     public int batchRemove(Long[] ids) {
         return yxcpDao.batchRemove(ids);
     }
+    //查询镜片定做制造商
 
-    //查询隐形成品制造商
     @Override
     public List<MgDO> mglist(Map<String, Object> map) {
         return yxcpDao.mglist(map);
@@ -61,8 +61,6 @@ public class YxcpServiceImpl implements YxcpService {
     //菜单联动显示
     @Override
     public List<BrandDO> choice(Integer mfrsid) {
-
         return yxcpDao.choice(mfrsid);
     }
-
 }

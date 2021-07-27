@@ -107,7 +107,7 @@ public class MfrsController {
         return pageUtils;
     }
 
-    //查询镜片成片制造商
+    //查询镜片定做制造商
     @ResponseBody
     @GetMapping("/JpdzList")
     @RequiresPermissions("mfrs:mfrs:mfrs")
@@ -132,6 +132,85 @@ public class MfrsController {
         PageUtils pageUtils = new PageUtils(mfrsDOList, total);
         return pageUtils;
     }
+
+    //查询隐形定做制造商
+    @ResponseBody
+    @GetMapping("/YxdzList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils YxdzList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.yxcpList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
+    //护理液制造商
+    @ResponseBody
+    @GetMapping("/HlyList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils HlyList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.hlyList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
+    //    <!--查询太阳镜制造商-->
+    @ResponseBody
+    @GetMapping("/tyjList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils tyjList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.tyjList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
+    //    <!--查询老花镜制造商-->
+    @ResponseBody
+    @GetMapping("/oldlensList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils oldlensList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.oldlensList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
+    //    <!--查询耗材制造商-->
+    @ResponseBody
+    @GetMapping("/hcList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils hcList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.hcList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
+    //    <!--查询视光制造商-->
+    @ResponseBody
+    @GetMapping("/shiguangList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils shiguangList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<MfrsDO> mfrsDOList = mfrsService.shiguangList(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
 
     @GetMapping("/add")
     @RequiresPermissions("mfrs:mfrs:add")

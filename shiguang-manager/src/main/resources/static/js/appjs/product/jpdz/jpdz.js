@@ -50,14 +50,14 @@ function load() {
                     //     field: 'id',
                     //     title: '镜片定做id'
                     // },
-                    // {
-                    //     field: 'producNum',
-                    //     title: '商品信息代码'
-                    // },
                     {
-                        field: 'producCode',
-                        title: '商品条码'
+                        field: 'producNum',
+                        title: '商品代码'
                     },
+                    // {
+                    //     field: 'producCode',
+                    //     title: '商品条码'
+                    // },
                     {
                         field: 'producName',
                         title: '商品名称'
@@ -66,18 +66,18 @@ function load() {
                     //     field: 'mfrsid',
                     //     title: '制造商id'
                     // },
-                    {
-                        field: 'mfrsname',
-                        title: '制造商简称'
-                    },
+                    // {
+                    //     field: 'mfrsname',
+                    //     title: '制造商简称'
+                    // },
                     // {
                     //     field: 'brandid',
                     //     title: '商品品种'
                     // },
-                    {
-                        field: 'brandname',
-                        title: '商品品种'
-                    },
+                    // {
+                    //     field: 'brandname',
+                    //     title: '商品品种'
+                    // },
                     // {
                     //     field: 'factory',
                     //     title: '厂家型号'
@@ -94,18 +94,19 @@ function load() {
                     //     field: 'unitid',
                     //     title: '计量单位'
                     // },
-                    // {
-                    //     field: 'sphId',
-                    //     title: '球镜id'
-                    // },
+                    {
+                        field: 'sphUp' + '/' + 'sphDown',
+                        title: '球镜'
+                    },
                     // {
                     //     field: 'spanId',
                     //     title: '跨度id'
                     // },
                     // {
-                    //     field: 'cylId',
-                    //     title: '柱镜id'
-                    // },
+                    {
+                        field: 'cylUp' + '/' + 'cylDown',
+                        title: '柱镜'
+                    },
                     // {
                     //     field: 'sphUp',
                     //     title: '球镜上限'
@@ -130,10 +131,10 @@ function load() {
                     //     field: 'cylSpan',
                     //     title: '柱镜跨度'
                     // },
-                    // {
-                    //     field: 'lightbelowId',
-                    //     title: '下加光id'
-                    // },
+                    {
+                        field: 'lightbelowRight' + "/" + 'lightbelowLeft',
+                        title: '下加光'
+                    },
                     // {
                     //     field: 'lightbelowRight',
                     //     title: '下加光左'
@@ -150,10 +151,10 @@ function load() {
                     //     field: 'cycle',
                     //     title: '定做周期（天）'
                     // },
-                    // {
-                    //     field: 'lightId',
-                    //     title: '光度分类id'
-                    // },
+                    {
+                        field: 'lightId',
+                        title: '镜片种类'
+                    },
                     // {
                     //     field: 'gradualId',
                     //     title: '渐进片分类id'
@@ -178,22 +179,23 @@ function load() {
                     //     field: 'tax',
                     //     title: '税率(%)'
                     // },
-                    // {
-                    //     field: 'taxPrice',
-                    //     title: '含税单价'
-                    // },
-                    // {
-                    //     field: 'tradePrice',
-                    //     title: '批发价格'
-                    // },
+                    {
+                        field: 'retailPrice',
+                        title: '标准零售价格'
+                    },
+                    {
+                        field: 'taxPrice',
+                        title: '含税单价'
+                    },
+                    {
+                        field: 'tradePrice',
+                        title: '批发价格'
+                    },
                     // {
                     //     field: 'transferPrice',
                     //     title: '调货成本'
                     // },
-                    {
-                        field: 'retailPrice',
-                        title: '标准零售价'
-                    },
+
                     {
                         title: '操作',
                         field: 'id',

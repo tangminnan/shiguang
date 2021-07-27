@@ -4,45 +4,56 @@
 <mapper namespace="com.shiguang.product.dao.TyjDao">
 
     <select id="get" resultType="com.shiguang.product.domain.TyjDO">
-		select `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`unitid`,`produc_factorycolor`,`produc_color`,`batchid`,`size`,`function`,`color`,`style_id`,`year`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price` from aa_tyj where id = #{value}
+		select t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
+		t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
+		t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`
+		from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandid=b.brandid
+        left join  c_unit u on t.unitid= u.unitid
+		where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.product.domain.TyjDO">
         select
-        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`produc_factory`,`unitid`,`produc_factorycolor`,`produc_color`,`batchid`,`size`,`function`,`color`,`style_id`,`year`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price`
-        from aa_tyj
+        t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
+        t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
+        t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`
+        from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandid=b.brandid
+        left join c_unit u on t.unitid= u.unitid
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="producFactorycolor != null and producFactorycolor != ''">and produc_factorycolor =
+            <if test="id != null and id != ''">and t.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and t.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and t.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and t.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and t.brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and t.factory = #{factory}</if>
+            <if test="producFactory != null and producFactory != ''">and t.produc_factory = #{producFactory}</if>
+            <if test="unitid != null and unitid != ''">and t.unitid = #{unitid}</if>
+            <if test="producFactorycolor != null and producFactorycolor != ''">and t.produc_factorycolor =
                 #{producFactorycolor}
             </if>
-            <if test="producColor != null and producColor != ''">and produc_color = #{producColor}</if>
-            <if test="batchid != null and batchid != ''">and batchid = #{batchid}</if>
-            <if test="size != null and size != ''">and size = #{size}</if>
-            <if test="function != null and function != ''">and function = #{function}</if>
-            <if test="color != null and color != ''">and color = #{color}</if>
-            <if test="styleId != null and styleId != ''">and style_id = #{styleId}</if>
-            <if test="year != null and year != ''">and year = #{year}</if>
-            <if test="tax != null and tax != ''">and tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="producColor != null and producColor != ''">and t.produc_color = #{producColor}</if>
+            <if test="batchid != null and batchid != ''">and t.batchid = #{batchid}</if>
+            <if test="size != null and size != ''">and t.size = #{size}</if>
+            <if test="function != null and function != ''">and t.function = #{function}</if>
+            <if test="color != null and color != ''">and t.color = #{color}</if>
+            <if test="styleId != null and styleId != ''">and t.style_id = #{styleId}</if>
+            <if test="year != null and year != ''">and t.year = #{year}</if>
+            <if test="tax != null and tax != ''">and t.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and t.tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and t.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and t.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and t.retail_price = #{retailPrice}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by id desc
+                order by id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

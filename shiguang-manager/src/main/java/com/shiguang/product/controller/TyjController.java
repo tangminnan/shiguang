@@ -84,6 +84,16 @@ public class TyjController {
     String edit(@PathVariable("id") Long id, Model model) {
         TyjDO tyj = tyjService.get(id);
         model.addAttribute("tyj", tyj);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = tyjService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //款式
+        List<StyleDO> styleDOList = styleService.list(map);
+        model.addAttribute("styleDOList", styleDOList);
         return "product/tyj/edit";
     }
 
@@ -142,6 +152,13 @@ public class TyjController {
         List<BrandDO> brandDOList = tyjService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
+    }
+
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("product:tyj:findmfrs")
+    String findmfrs() {
+        return "/mfrs/mfrs/findTyjMfrs";
     }
 
 }

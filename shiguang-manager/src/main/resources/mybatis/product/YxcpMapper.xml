@@ -2,25 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shiguang.product.dao.YxcpDao">
+
     <select id="get" resultType="com.shiguang.product.domain.YxcpDO">
-		select y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
+		select
+        m.`mfrsname`,b.`brandname`,u.`unitname`,
+        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
 		y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,y.`caizhi_id`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,
 		y.`retail_price`
-		  m.mfrsname,b.brandname,u.unitname
-   from aa_yxcp y left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandid=b.brandid left join
-        c_unit u on p.unitid= u.unitid
-        where id = #{value}
-
+   from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
+   left join  c_unit u on y.unitid= u.unitid
+		where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.product.domain.YxcpDO">
         select
+        m.`mfrsname`,b.`brandname`,u.`unitname`,
         y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
         y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,y.`caizhi_id`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,
         y.`retail_price`
-        m.mfrsname,b.brandname,u.unitname
-        from aa_yxcp y left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandid=b.brandid left join
-        c_unit u on p.unitid= u.unitid
+        from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
+        left join c_unit u on y.unitid= u.unitid
         <where>
             <if test="id != null and id != ''">and y.id = #{id}</if>
             <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
@@ -100,58 +101,58 @@
     <insert id="save" parameterType="com.shiguang.product.domain.YxcpDO" useGeneratedKeys="true" keyProperty="id">
 		insert into aa_yxcp
 		(
-			`produc_num`,
-			`produc_code`,
-			`produc_name`,
-			`mfrsid`,
-			`brandid`,
-			`proid`,
-			`unitid`,
-			`sph_id`,
-			`cyl_id`,
-			`curvature`,
-			`diameter`,
-			`factory`,
-			`usage_id`,
-			`type_id`,
-			`use_days`,
-			`upday`,
-			`downday`,
-			`color`,
-			`invisible_id`,
-			`caizhi_id`,
-			`tax`,
-			`tax_price`,
-			`trade_price`,
-			`transfer_price`,
+			`produc_num`, 
+			`produc_code`, 
+			`produc_name`, 
+			`mfrsid`, 
+			`brandid`, 
+			`proid`, 
+			`unitid`, 
+			`sph_id`, 
+			`cyl_id`, 
+			`curvature`, 
+			`diameter`, 
+			`factory`, 
+			`usage_id`, 
+			`type_id`, 
+			`use_days`, 
+			`upday`, 
+			`downday`, 
+			`color`, 
+			`invisible_id`, 
+			`caizhi_id`, 
+			`tax`, 
+			`tax_price`, 
+			`trade_price`, 
+			`transfer_price`, 
 			`retail_price`
 		)
 		values
 		(
-			#{producNum},
-			#{producCode},
-			#{producName},
-			#{mfrsid},
-			#{brandid},
-			#{proid},
-			#{unitid},
-			#{sphId},
-			#{cylId},
-			#{curvature},
-			#{diameter},
-			#{factory},
-			#{usageId},
-			#{typeId},
-			#{useDays},
-			#{upday},
-			#{downday},
-			#{color},
-			#{invisibleId},
-			#{caizhiId},
-			#{tax},
-			#{taxPrice},
-			#{tradePrice},
-			#{transferPrice},
+			#{producNum}, 
+			#{producCode}, 
+			#{producName}, 
+			#{mfrsid}, 
+			#{brandid}, 
+			#{proid}, 
+			#{unitid}, 
+			#{sphId}, 
+			#{cylId}, 
+			#{curvature}, 
+			#{diameter}, 
+			#{factory}, 
+			#{usageId}, 
+			#{typeId}, 
+			#{useDays}, 
+			#{upday}, 
+			#{downday}, 
+			#{color}, 
+			#{invisibleId}, 
+			#{caizhiId}, 
+			#{tax}, 
+			#{taxPrice}, 
+			#{tradePrice}, 
+			#{transferPrice}, 
 			#{retailPrice}
 		)
 	</insert>
@@ -198,16 +199,13 @@
             #{id}
         </foreach>
     </delete>
-
-
-    <!--查询隐形成品制造商-->
-    <select id="mglist" resultType="com.shiguang.product.domain.PartsDO">
-		select m.mfrsid,m.mfrsname from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid
-		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=4
-	</select>
+    <!--查询隐形成片制造商-->
+    <select id="mglist" resultType="com.shiguang.product.domain.ProducaDO">
+    select m.mfrsid,m.mfrsname  from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=4
+    </select>
     <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.PartsDO">
-		select b.brandid,b.brandname from c_brand b left join  cc_mg mg on b.goodsid = mg.goodsid
-		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=4 and b.mfrsid = #{mfrsid} group by  b.brandid;
+    <select id="choice" resultType="com.shiguang.product.domain.ProducaDO">
+		select b.brandid,b.brandname from c_brand b left join  cc_mg mg
+		on b.goodsid = mg.goodsid  left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=4 and b.mfrsid = #{mfrsid} group by  b.brandid;
 	</select>
 </mapper>

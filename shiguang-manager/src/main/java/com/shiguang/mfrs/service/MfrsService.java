@@ -31,6 +31,21 @@ public interface MfrsService {
     //    <!--查询隐形成片制造商-->
     List<MfrsDO> yxcpList(Map<String, Object> map);
 
+    //    <!--查询护理液制造商-->
+    List<MfrsDO> hlyList(Map<String, Object> map);
+
+    // <!--查询太阳镜制造商-->
+    List<MfrsDO> tyjList(Map<String, Object> map);
+
+    //    <!--查询老花镜制造商-->
+    List<MfrsDO> oldlensList(Map<String, Object> map);
+
+    //    <!--查询耗材制造商-->
+    List<MfrsDO> hcList(Map<String, Object> map);
+
+    //    <!--查询视光制造商-->
+    List<MfrsDO> shiguangList(Map<String, Object> map);
+
     int mgcount(Map<String, Object> map);
 
 

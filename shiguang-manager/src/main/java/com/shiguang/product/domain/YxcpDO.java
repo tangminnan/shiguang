@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-30 18:04:25
+ * @date 2021-07-23 13:35:38
  */
 public class YxcpDO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -23,19 +23,26 @@ public class YxcpDO implements Serializable {
     private String producName;
     //制造商id
     private Integer mfrsid;
+    //制造商代码
     private String mfrsname;
-    //商品品种
+    //品牌id
     private Integer brandid;
+    //品牌代码
     private String brandname;
     //商品编号
     private String proid;
-    //计量单位
+    //计量单位id
     private Integer unitid;
-    private Integer unitname;
-    //球镜id
-    private Long sphId;
+    //单位
+    private String unitname;
     //柱镜id
     private Long cylId;
+    //柱镜
+    private String cyl;
+    //球镜id
+    private Long sphId;
+    //球镜
+    private String sph;
     //曲率
     private String curvature;
     //直径
@@ -61,13 +68,14 @@ public class YxcpDO implements Serializable {
     //税率(%)
     private String tax;
     //含税单价
-    private Double taxPrice;
+    private String taxPrice;
     //批发价格
-    private Double tradePrice;
+    private String tradePrice;
     //调货成本
-    private Double transferPrice;
+    private String transferPrice;
     //标准零售价
-    private Double retailPrice;
+    private String retailPrice;
+
 
     /**
      * 设置：隐形成品id
@@ -380,56 +388,56 @@ public class YxcpDO implements Serializable {
     /**
      * 设置：含税单价
      */
-    public void setTaxPrice(Double taxPrice) {
+    public void setTaxPrice(String taxPrice) {
         this.taxPrice = taxPrice;
     }
 
     /**
      * 获取：含税单价
      */
-    public Double getTaxPrice() {
+    public String getTaxPrice() {
         return taxPrice;
     }
 
     /**
      * 设置：批发价格
      */
-    public void setTradePrice(Double tradePrice) {
+    public void setTradePrice(String tradePrice) {
         this.tradePrice = tradePrice;
     }
 
     /**
      * 获取：批发价格
      */
-    public Double getTradePrice() {
+    public String getTradePrice() {
         return tradePrice;
     }
 
     /**
      * 设置：调货成本
      */
-    public void setTransferPrice(Double transferPrice) {
+    public void setTransferPrice(String transferPrice) {
         this.transferPrice = transferPrice;
     }
 
     /**
      * 获取：调货成本
      */
-    public Double getTransferPrice() {
+    public String getTransferPrice() {
         return transferPrice;
     }
 
     /**
      * 设置：标准零售价
      */
-    public void setRetailPrice(Double retailPrice) {
+    public void setRetailPrice(String retailPrice) {
         this.retailPrice = retailPrice;
     }
 
     /**
      * 获取：标准零售价
      */
-    public Double getRetailPrice() {
+    public String getRetailPrice() {
         return retailPrice;
     }
 
@@ -449,11 +457,28 @@ public class YxcpDO implements Serializable {
         this.brandname = brandname;
     }
 
-    public Integer getUnitname() {
+
+    public String getUnitname() {
         return unitname;
     }
 
-    public void setUnitname(Integer unitname) {
+    public void setUnitname(String unitname) {
         this.unitname = unitname;
+    }
+
+    public String getCyl() {
+        return cyl;
+    }
+
+    public void setCyl(String cyl) {
+        this.cyl = cyl;
+    }
+
+    public String getSph() {
+        return sph;
+    }
+
+    public void setSph(String sph) {
+        this.sph = sph;
     }
 }

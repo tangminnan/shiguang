@@ -22,7 +22,7 @@ import java.util.Map;
  *
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-30 16:07:55
+ * @date 2021-07-23 13:35:38
  */
 
 @Controller
@@ -133,6 +133,43 @@ public class YxcpController {
     String edit(@PathVariable("id") Long id, Model model) {
         YxcpDO yxcp = yxcpService.get(id);
         model.addAttribute("yxcp", yxcp);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = yxcpService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        //球镜
+        List<SphDO> sphDOList = sphService.list(map);
+        model.addAttribute("sphDOList", sphDOList);
+        //柱镜
+        List<CylDO> cylDOList = cylService.list(map);
+        model.addAttribute("cylDOList", cylDOList);
+        //跨度
+        List<SpanDO> spanDOList = spanService.list(map);
+        model.addAttribute("spanDOList", spanDOList);
+        //下加光
+        List<LightbelowDO> lightbelowDOList = lightbelowService.list(map);
+        model.addAttribute("lightbelowDOList", lightbelowDOList);
+        //材料分类
+        List<LensDO> lensDOList = lensService.list(map);
+        model.addAttribute("lensDOList", lensDOList);
+        //使用类型
+        List<UsageDO> usageDOList = usageService.list(map);
+        model.addAttribute("usageDOList", usageDOList);
+        //抛弃类型分类
+        List<TypeDO> typeDOList = typeService.list(map);
+        model.addAttribute("typeDOList", typeDOList);
+        //隐形类别
+        List<InvisibleDO> invisibleDOList = invisibleService.list(map);
+        model.addAttribute("invisibleDOList", invisibleDOList);
+        //材质
+        List<CaizhiDO> caizhiDOList = caizhiService.list(map);
+        model.addAttribute("caizhiDOList", caizhiDOList);
         return "product/yxcp/edit";
     }
 
@@ -199,4 +236,5 @@ public class YxcpController {
     String findmfrs() {
         return "/mfrs/mfrs/findYxcpMfrs";
     }
+
 }

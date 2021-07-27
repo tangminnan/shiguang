@@ -46,46 +46,58 @@ function load() {
                     {
                         checkbox: true
                     },
-                    // {
-                    //     field: 'id',
-                    //     title: '隐形成品id'
-                    // },
-                    // {
-                    //     field: 'producNum',
-                    //     title: '商品信息代码'
+                    // 								{
+                    // 	field : 'id',
+                    // 	title : '隐形成品id'
                     // },
                     {
-                        field: 'producCode',
-                        title: '商品条码'
+                        field: 'producNum',
+                        title: '商品代码'
                     },
+                    // {
+                    //     field: 'producCode',
+                    //     title: '商品条码'
+                    // },
                     {
                         field: 'producName',
                         title: '商品名称'
                     },
+                    // {
+                    //     field: 'mfrsid',
+                    //     title: '制造商id'
+                    // },
+                    // {
+                    //     field: 'mfrsname',
+                    //     title: '制造商'
+                    // },
+                    // {
+                    //     field: 'brandid',
+                    //     title: '商品品种'
+                    // },
                     {
-                        field: 'mfrsid',
-                        title: '制造商id'
-                    },
-                    {
-                        field: 'brandid',
+                        field: 'brandname',
                         title: '商品品种'
                     },
-                    {
-                        field: 'proid',
-                        title: '商品编号'
-                    },
-                    {
-                        field: 'unitid',
-                        title: '计量单位'
-                    },
                     // {
-                    //     field: 'sphId',
-                    //     title: '球镜id'
+                    //     field: 'proid',
+                    //     title: '商品编号'
                     // },
                     // {
-                    //     field: 'cylId',
-                    //     title: '柱镜id'
+                    //     field: 'unitid',
+                    //     title: '计量单位'
                     // },
+                    {
+                        field: 'unitname',
+                        title: '单位'
+                    },
+                    {
+                        field: 'sphId',
+                        title: '球镜'
+                    },
+                    {
+                        field: 'cylId',
+                        title: '柱镜'
+                    },
                     {
                         field: 'curvature',
                         title: '曲率'
@@ -94,10 +106,10 @@ function load() {
                         field: 'diameter',
                         title: '直径'
                     },
-                    {
-                        field: 'factory',
-                        title: '厂家型号'
-                    },
+                    // {
+                    //     field: 'factory',
+                    //     title: '厂家型号'
+                    // },
                     // {
                     //     field: 'usageId',
                     //     title: '使用类型id'
@@ -124,7 +136,7 @@ function load() {
                     // },
                     // {
                     //     field: 'invisibleId',
-                    //     title: '隐形类别'
+                    //     title: '隐形类别id'
                     // },
                     // {
                     //     field: 'caizhiId',
@@ -134,22 +146,22 @@ function load() {
                     //     field: 'tax',
                     //     title: '税率(%)'
                     // },
-                    // {
-                    //     field: 'taxPrice',
-                    //     title: '含税单价'
-                    // },
-                    // {
-                    //     field: 'tradePrice',
-                    //     title: '批发价格'
-                    // },
-                    // {
-                    //     field: 'transferPrice',
-                    //     title: '调货成本'
-                    // },
                     {
                         field: 'retailPrice',
                         title: '标准零售价'
                     },
+                    {
+                        field: 'taxPrice',
+                        title: '含税单价'
+                    },
+                    {
+                        field: 'tradePrice',
+                        title: '批发价格'
+                    },
+                    // {
+                    //     field: 'transferPrice',
+                    //     title: '调货成本'
+                    // }
                     {
                         title: '操作',
                         field: 'id',
@@ -184,7 +196,6 @@ function add() {
         content: prefix + '/add' // iframe的url
     });
     layer.full(toIndex);
-
 }
 
 function edit(id) {
@@ -197,7 +208,6 @@ function edit(id) {
         content: prefix + '/edit/' + id // iframe的url
     });
     layer.full(toIndex);
-
 }
 
 function remove(id) {

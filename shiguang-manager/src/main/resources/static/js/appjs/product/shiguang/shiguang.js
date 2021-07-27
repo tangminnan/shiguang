@@ -50,14 +50,14 @@ function load() {
                     // 	field : 'id',
                     // 	title : '视光id'
                     // },
-                    // 								{
-                    // 	field : 'producNum',
-                    // 	title : '商品信息代码'
-                    // },
                     {
-                        field: 'producCode',
-                        title: '商品条码'
+                        field: 'producNum',
+                        title: '商品代码'
                     },
+                    // {
+                    //     field: 'producCode',
+                    //     title: '商品条码'
+                    // },
                     {
                         field: 'producName',
                         title: '商品名称'
@@ -70,6 +70,10 @@ function load() {
                     // 	field : 'brandid',
                     // 	title : '商品品种'
                     // },
+                    {
+                        field: 'brandname',
+                        title: '商品品种'
+                    },
                     // 								{
                     // 	field : 'factory',
                     // 	title : '厂家型号'
@@ -86,34 +90,39 @@ function load() {
                     // 	field : 'unitid',
                     // 	title : '计量单位'
                     // },
+                    {
+                        field: 'unitname',
+                        title: '单位'
+                    },
                     // 								{
                     // 	field : 'batchid',
                     // 	title : '批号管理(1是、2否)'
                     // },
-                    {
-                        field: 'leixing',
-                        title: '类型'
-                    },
+                    // {
+                    //     field: 'leixing',
+                    //     title: '类型'
+                    // },
                     // 								{
                     // 	field : 'tax',
                     // 	title : '税率(%)'
-                    // },
-                    // 								{
-                    // 	field : 'taxPrice',
-                    // 	title : '含税单价'
-                    // },
-                    // 								{
-                    // 	field : 'tradePrice',
-                    // 	title : '批发价格'
-                    // },
-                    // 								{
-                    // 	field : 'transferPrice',
-                    // 	title : '调货成本'
                     // },
                     {
                         field: 'retailPrice',
                         title: '标准零售价格'
                     },
+                    {
+                        field: 'taxPrice',
+                        title: '含税单价'
+                    },
+                    {
+                        field: 'tradePrice',
+                        title: '批发价格'
+                    },
+                    // 								{
+                    // 	field : 'transferPrice',
+                    // 	title : '调货成本'
+                    // },
+
                     {
                         title: '操作',
                         field: 'id',

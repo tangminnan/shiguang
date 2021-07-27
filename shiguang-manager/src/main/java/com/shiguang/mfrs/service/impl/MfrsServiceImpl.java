@@ -49,6 +49,43 @@ public class MfrsServiceImpl implements MfrsService {
     public List<MfrsDO> yxcpList(Map<String, Object> map) {
         return mfrsDao.yxcpList(map);
     }
+    //    <!--查询护理液制造商-->
+
+    @Override
+    public List<MfrsDO> hlyList(Map<String, Object> map) {
+        return mfrsDao.hlyList(map);
+    }
+
+    // <!--查询太阳镜制造商-->
+
+
+    @Override
+    public List<MfrsDO> tyjList(Map<String, Object> map) {
+        return mfrsDao.tyjList(map);
+    }
+
+    //    <!--查询老花镜制造商-->
+
+    @Override
+    public List<MfrsDO> oldlensList(Map<String, Object> map) {
+        return mfrsDao.oldlensList(map);
+    }
+
+
+    //    <!--查询耗材制造商-->
+
+    @Override
+    public List<MfrsDO> hcList(Map<String, Object> map) {
+        return mfrsDao.hcList(map);
+    }
+
+
+    //    <!--查询视光制造商-->
+
+    @Override
+    public List<MfrsDO> shiguangList(Map<String, Object> map) {
+        return mfrsDao.shiguangList(map);
+    }
 
     @Override
     public int mgcount(Map<String, Object> map) {
