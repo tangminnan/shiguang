@@ -77,6 +77,13 @@ public class ShiguangController {
     String edit(@PathVariable("id") Long id, Model model) {
         ShiguangDO shiguang = shiguangService.get(id);
         model.addAttribute("shiguang", shiguang);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = shiguangService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
         return "product/shiguang/edit";
     }
 
@@ -135,5 +142,12 @@ public class ShiguangController {
         List<BrandDO> brandDOList = shiguangService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
+    }
+
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("product:shiguang:findmfrs")
+    String findmfrs() {
+        return "/mfrs/mfrs/findShiguangMfrs";
     }
 }

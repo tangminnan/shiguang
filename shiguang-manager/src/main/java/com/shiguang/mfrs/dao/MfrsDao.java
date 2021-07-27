@@ -2,7 +2,6 @@ package com.shiguang.mfrs.dao;
 
 import com.shiguang.mfrs.domain.MfrsDO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -53,15 +52,14 @@ public interface MfrsDao {
 
     int save(MfrsDO mfrs);
 
+    //修改停用启用
     int update(MfrsDO mfrs);
 
     int remove(Integer mfrsid);
 
     int batchRemove(Integer[] mfrsids);
 
-    //停用启动
-    int stop(@Param("id") Integer[] ids, @Param("status") Long status);
-
-    int updateStatus(MfrsDO mfrsDO);
+    //删除修改状态
+    int updateState(MfrsDO mfrs);
 
 }

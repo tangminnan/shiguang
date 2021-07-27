@@ -39,10 +39,12 @@ public class JpdzDO implements Serializable {
     private String unitname;
     //球镜id
     private Long sphId;
+    private String sph;
     //跨度id
     private Long spanId;
     //柱镜id
     private Long cylId;
+    private String cyl;
     //球镜上限
     private Long sphUp;
     //球镜下限
@@ -77,6 +79,7 @@ public class JpdzDO implements Serializable {
     private Long cycle;
     //光度分类id
     private Integer lightId;
+    private String lightName;
     //光度分类
     private String light;
     //渐进片分类id
@@ -690,5 +693,29 @@ public class JpdzDO implements Serializable {
 
     public void setLightbelow(String lightbelow) {
         this.lightbelow = lightbelow;
+    }
+
+    public String getSph() {
+        return sph;
+    }
+
+    public void setSph(String sph) {
+        this.sph = sph;
+    }
+
+    public String getCyl() {
+        return cyl;
+    }
+
+    public void setCyl(String cyl) {
+        this.cyl = cyl;
+    }
+
+    public String getLightName() {
+        return lightName;
+    }
+
+    public void setLightName(String lightName) {
+        this.lightName = lightName;
     }
 }

@@ -4,32 +4,52 @@
 <mapper namespace="com.shiguang.product.dao.JpdzDao">
 
     <select id="get" resultType="com.shiguang.product.domain.JpdzDO">
-		select
-        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`factory`,j.`produc_factory`,
-        j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
-        j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
-        j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
-        j.`trade_price`,j.`transfer_price`,j.`retail_price`,
-        m.mfrsname,b.brandname,u.unitnum
-        from aa_jpdz j
-        left join c_refractivity r on r.refractivityid = j.refractivityid
-        left join p_light pl on pl.light_id = j.light_id
-        left join p_lens l on l.lens_id = j.lens_id
-        left join p_gradual g on g.gradual_id = j.gradual_id
-        left join  p_function f on f.function_id = j.function_id
-				left join c_mfrs m on j.mfrsid=m.mfrsid
-				left join c_brand b on j.brandid=b.brandid
-				left join c_unit u on u.unitid=j.unitid
-		where id = #{value}
+		select lig.light_name,
+      yl.cyl,
+      cyl.cyl,
+       ph.sph,
+       sph.sph,
+      lt.lightbelow,
+      ltb.lightbelow,
+       m.mfrsname,b.brandname,u.unitnum,
+      j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`factory`,j.`produc_factory`,
+      j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
+      j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
+      j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
+      j.`trade_price`,j.`transfer_price`,j.`retail_price`
+      from aa_jpdz j
+      left join c_refractivity r on r.refractivityid = j.refractivityid
+      left join p_light pl on pl.light_id = j.light_id
+      left join p_lens l on l.lens_id = j.lens_id
+      left join p_gradual g on g.gradual_id = j.gradual_id
+      left join  p_function f on f.function_id = j.function_id
+      left join c_mfrs m on j.mfrsid=m.mfrsid
+      left join c_brand b on j.brandid=b.brandid
+      left join c_unit u on u.unitid=j.unitid
+      left join a_cyl yl on yl.cyl_id=j.cyl_up
+      left join a_cyl cyl on cyl.cyl_id=j.cyl_down
+      left join a_sph ph on ph.sph_id=j.sph_up
+      left join a_sph sph on sph.sph_id=j.sph_down
+      left join a_lightbelow lt on lt.lightbelow_id=j.lightbelow_left
+      left join a_lightbelow ltb on ltb.lightbelow_id=j.lightbelow_right
+      left join p_light lig on lig.light_id=j.light_id
+      where id = #{value}
 	</select>
 
     <select id="listDz" resultType="com.shiguang.product.domain.JpdzDO">
-        select
+        select lig.light_name,
+        yl.cyl,
+        cyl.cyl,
+        ph.sph,
+        sph.sph,
+        lt.lightbelow,
+        ltb.lightbelow,
+        m.mfrsname,b.brandname,u.unitnum,
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`factory`,j.`produc_factory`,
         j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
         j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
         j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
-        j.`trade_price`,j.`transfer_price`,j.`retail_price`,m.mfrsname,b.brandname,u.unitnum
+        j.`trade_price`,j.`transfer_price`,j.`retail_price`
         from aa_jpdz j
         left join c_refractivity r on r.refractivityid = j.refractivityid
         left join p_light pl on pl.light_id = j.light_id
@@ -39,6 +59,13 @@
         left join c_mfrs m on j.mfrsid=m.mfrsid
         left join c_brand b on j.brandid=b.brandid
         left join c_unit u on u.unitid=j.unitid
+        left join a_cyl yl on yl.cyl_id=j.cyl_up
+        left join a_cyl cyl on cyl.cyl_id=j.cyl_down
+        left join a_sph ph on ph.sph_id=j.sph_up
+        left join a_sph sph on sph.sph_id=j.sph_down
+        left join a_lightbelow lt on lt.lightbelow_id=j.lightbelow_left
+        left join a_lightbelow ltb on ltb.lightbelow_id=j.lightbelow_right
+        left join p_light lig on lig.light_id=j.light_id
         <where>
             <if test="id != null and id != ''">and j.id = #{id}</if>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
@@ -69,8 +96,8 @@
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
             <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
-            <if test="combinedPhotometry != null and combinedPhotometry != ''">and j.combined_photometry =
-                #{combinedPhotometry}
+            <if test="combinedPhotometry != null and combinedPhotometry != ''">and j.combined_photometry
+                =#{combinedPhotometry}
             </if>
             <if test="can != null and can != ''">and j.can = #{can}</if>
             <if test="tax != null and tax != ''">and j.tax = #{tax}</if>
@@ -81,6 +108,7 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
+
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

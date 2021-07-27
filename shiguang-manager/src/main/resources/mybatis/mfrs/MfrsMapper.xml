@@ -4,48 +4,15 @@
 <mapper namespace="com.shiguang.mfrs.dao.MfrsDao">
 
     <select id="get" resultType="com.shiguang.mfrs.domain.MfrsDO">
-		select `mfrsid`,`mfrsnum`,`mfrsname`,`mfrscontacts`,`mfrsrealname`,`mfrstelephone`,`mfrsphone`,`goodsid`,`mfrsfax`,`mfrsaddress`,`payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday`,`remarks`,`status` from c_mfrs where mfrsid = #{value}
+		select `mfrsid`,`mfrsnum`,`mfrsname`,`mfrscontacts`,`mfrsrealname`,`mfrstelephone`,`mfrsphone`,`goodsid`,`mfrsfax`,`mfrsaddress`,`payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday`,`remarks`,`status`,`state` from c_mfrs where mfrsid = #{value}
 	</select>
     <!--商品查询-->
     <select id="mglist" resultType="com.shiguang.mfrs.domain.MfrsDO">
-        select
-        m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsrealname`,m.`mfrstelephone`,m.`mfrsphone`,m.`goodsid`,m.`mfrsfax`,m.`mfrsaddress`,m.`payid`,m.`invoiceid`,m.`creditcode`,m.`creditcodeday`,m.`medicinecode`,m.`medicinecodeday`,m.`productscode`,m.`productscodeday`,m.`remarks`,m.`status`
+       select
+        m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsrealname`,m.`mfrstelephone`,m.`mfrsphone`,m.`goodsid`,m.`mfrsfax`,m.`mfrsaddress`,m.`payid`,m.`invoiceid`,m.`creditcode`,m.`creditcodeday`,m.`medicinecode`,m.`medicinecodeday`,m.`productscode`,m.`productscodeday`,m.`remarks`,m.`status`,m.`state`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid
-        <where>
-            <if test="mfrsid != null and mfrsid != ''">and m.mfrsid = #{mfrsid}</if>
-            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="mfrscontacts != null and mfrscontacts != ''">and m.mfrscontacts = #{mfrscontacts}</if>
-            <if test="mfrsrealname != null and mfrsrealname != ''">and m.mfrsrealname = #{mfrsrealname}</if>
-            <if test="mfrstelephone != null and mfrstelephone != ''">and m.mfrstelephone = #{mfrstelephone}</if>
-            <if test="mfrsphone != null and mfrsphone != ''">and m.mfrsphone = #{mfrsphone}</if>
-            <if test="goodsid != null and goodsid != ''">and mg.goodsid = #{goodsid}</if>
-            <if test="mfrsfax != null and mfrsfax != ''">and m.mfrsfax = #{mfrsfax}</if>
-            <if test="mfrsaddress != null and mfrsaddress != ''">and m.mfrsaddress = #{mfrsaddress}</if>
-            <if test="payid != null and payid != ''">and m.payid = #{payid}</if>
-            <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
-            <if test="creditcode != null and creditcode != ''">and m.creditcode = #{creditcode}</if>
-            <if test="creditcodeday != null and creditcodeday != ''">and m.creditcodeday = #{creditcodeday}</if>
-            <if test="medicinecode != null and medicinecode != ''">and m.medicinecode = #{medicinecode}</if>
-            <if test="medicinecodeday != null and medicinecodeday != ''">and m.medicinecodeday = #{medicinecodeday}</if>
-            <if test="productscode != null and productscode != ''">and m.productscode = #{productscode}</if>
-            <if test="productscodeday != null and productscodeday != ''">and m.productscodeday = #{productscodeday}</if>
-            <if test="remarks != null and remarks != ''">and m.remarks = #{remarks}</if>
-            <if test="status != null and status != ''">and m.status = #{status}</if>
-        </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-                group by m.mfrsid
-                order by m.mfrsid
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
+				where m.state= 1
+				group by m.mfrsid order by m.mfrsid asc , m.status =0 desc
     </select>
     <!--查询镜架制造商-->
     <select id="producaList" resultType="com.shiguang.mfrs.domain.MfrsDO">
@@ -115,6 +82,7 @@
             <if test="productscodeday != null and productscodeday != ''">and m.productscodeday = #{productscodeday}</if>
             <if test="remarks != null and remarks != ''">and m.remarks = #{remarks}</if>
             <if test="status != null and status != ''">and m.status = #{status}</if>
+            <if test="state != null and state != ''">and m.state = #{state}</if>
         </where>
     </select>
 
@@ -140,7 +108,8 @@
 			`productscode`,
 			`productscodeday`,
 			`remarks`,
-			`status`
+			`status`,
+			`state`
 		)
 		values
 		(
@@ -162,7 +131,8 @@
 			#{productscode},
 			#{productscodeday},
 			#{remarks},
-			#{status}
+			#{status},
+			#{state}
 		)
 	</insert>
 
@@ -188,6 +158,7 @@
             <if test="productscodeday != null">`productscodeday` = #{productscodeday},</if>
             <if test="remarks != null">`remarks` = #{remarks},</if>
             <if test="status != null">`status` = #{status}</if>
+            <if test="state != null">`state` = #{state}</if>
         </set>
         where mfrsid = #{mfrsid}
     </update>
@@ -204,16 +175,8 @@
     </delete>
 
     <!--停用启动-->
-    <update id="stop">
-        update member
-        <set>
-            <if test="status != null">`status` = #{status}</if>
-        </set>
-
-        where id in
-        <foreach item="item" collection="id" open="(" separator="," close=")" index="index">
-            #{item}
-        </foreach>
+    <update id="updateState" parameterType="com.shiguang.mfrs.domain.MfrsDO">
+    update c_mfrs set `state` = #{state} where mfrsid = #{mfrsid}
     </update>
 
 </mapper>

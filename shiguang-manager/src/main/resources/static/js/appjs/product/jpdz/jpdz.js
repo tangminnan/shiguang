@@ -95,7 +95,7 @@ function load() {
                     //     title: '计量单位'
                     // },
                     {
-                        field: 'sphUp' + '/' + 'sphDown',
+                        field: 'sph',
                         title: '球镜'
                     },
                     // {
@@ -104,7 +104,7 @@ function load() {
                     // },
                     // {
                     {
-                        field: 'cylUp' + '/' + 'cylDown',
+                        field: 'cyl',
                         title: '柱镜'
                     },
                     // {
@@ -132,7 +132,7 @@ function load() {
                     //     title: '柱镜跨度'
                     // },
                     {
-                        field: 'lightbelowRight' + "/" + 'lightbelowLeft',
+                        field: 'lightbelow',
                         title: '下加光'
                     },
                     // {
@@ -152,7 +152,7 @@ function load() {
                     //     title: '定做周期（天）'
                     // },
                     {
-                        field: 'lightId',
+                        field: 'lightName',
                         title: '镜片种类'
                     },
                     // {

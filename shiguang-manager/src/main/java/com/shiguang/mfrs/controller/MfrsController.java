@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +61,7 @@ public class MfrsController {
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils list(@RequestParam Map<String, Object> params) {
+    public PageUtils list(@RequestParam Map<String, Object> params, MfrsDO mfrs) {
         //查询列表数据
         Query query = new Query(params);
         List<MfrsDO> mfrsDOList = mfrsService.mglist(query);
@@ -185,6 +187,7 @@ public class MfrsController {
         return pageUtils;
     }
 
+
     //    <!--查询耗材制造商-->
     @ResponseBody
     @GetMapping("/hcList")
@@ -216,6 +219,9 @@ public class MfrsController {
     @RequiresPermissions("mfrs:mfrs:add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MfrsDO> mfrsDOList = mfrsService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
         //商品
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
@@ -225,6 +231,8 @@ public class MfrsController {
         //开票
         List<InvoiceDO> invoiceDOList = invoiceService.list(map);
         model.addAttribute("invoiceDOList", invoiceDOList);
+
+
         return "mfrs/mfrs/add";
     }
 
@@ -243,29 +251,44 @@ public class MfrsController {
         //开票
         List<InvoiceDO> invoiceDOList = invoiceService.list(map);
         model.addAttribute("invoiceDOList", invoiceDOList);
+//------------修改时转换日期格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //统一社会信用代码效期
+        Date stime = mfrs.getCreditcodeday();
+        String str = sdf.format(stime);
+        mfrs.setCreditcodedays(str);
+        //医疗器械经营许可证有效期
+        Date stime2 = mfrs.getMedicinecodeday();
+        String str2 = sdf.format(stime2);
+        mfrs.setMedicinecodedays(str2);
+        //全国工业品生产许可证有效期
+        Date stime3 = mfrs.getProductscodeday();
+        String str3 = sdf.format(stime3);
+        mfrs.setProductscodedays(str3);
+
         return "mfrs/mfrs/edit";
     }
 
-//    /**
-//     * 详情
-//     */
-//    @GetMapping("/detail/{mfrsid}")
-//    @RequiresPermissions("mfrs:mfrs:detail")
-//    String detail(@PathVariable("mfrsid") Integer mfrsid, Model model) {
-//        MfrsDO mfrs = mfrsService.get(mfrsid);
-//        model.addAttribute("mfrs", mfrs);
-//        Map<String, Object> map = new HashMap<>();
-//        //商品
-//        List<GoodsDO> goodsDOList = goodsService.list(map);
-//        model.addAttribute("goodsDOList", goodsDOList);
-//        //支付
-//        List<PayDO> payDOList = payService.list(map);
-//        model.addAttribute("payDOList", payDOList);
-//        //开票
-//        List<InvoiceDO> invoiceDOList = invoiceService.list(map);
-//        model.addAttribute("invoiceDOList", invoiceDOList);
-//        return "mfrs/mfrs/detail";
-//    }
+    /**
+     * 详情
+     */
+    @GetMapping("/detail/{mfrsid}")
+    @RequiresPermissions("mfrs:mfrs:detail")
+    String detail(@PathVariable("mfrsid") Integer mfrsid, Model model) {
+        MfrsDO mfrs = mfrsService.get(mfrsid);
+        model.addAttribute("mfrs", mfrs);
+        Map<String, Object> map = new HashMap<>();
+        //商品
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
+        //支付
+        List<PayDO> payDOList = payService.list(map);
+        model.addAttribute("payDOList", payDOList);
+        //开票
+        List<InvoiceDO> invoiceDOList = invoiceService.list(map);
+        model.addAttribute("invoiceDOList", invoiceDOList);
+        return "mfrs/mfrs/detail";
+    }
 
     /**
      * 保存
@@ -329,21 +352,21 @@ public class MfrsController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("mfrs:mfrs:remove")
-    public R remove(Integer mfrsid) {
-        if (mfrsService.remove(mfrsid) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("mfrs:mfrs:remove")
+//    public R remove(Integer mfrsid) {
+//        if (mfrsService.remove(mfrsid) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -354,26 +377,32 @@ public class MfrsController {
     }
 
     /**
-     * 批量停用或启用
-     */
-    @PostMapping("/stop")
-    @ResponseBody
-    @RequiresPermissions("mfrs:mfrs:stop")
-    public R stop(@RequestParam("ids[]") Integer[] ids, @RequestParam("status") Long status) {
-        mfrsService.stop(ids, status);
-        return R.ok();
-    }
-
-    /**
-     * 修改
+     * 修改状态
      */
     @ResponseBody
     @RequestMapping(value = "/updateEnable")
-    public R updateEnable(Integer id, Long enable) {
+    public R updateEnable(Integer mfrsid, Long enable) {
         MfrsDO mfrsDO = new MfrsDO();
-        mfrsDO.setMfrsid(id);
+        mfrsDO.setMfrsid(mfrsid);
         mfrsDO.setStatus(enable);
-        mfrsService.updateStatus(mfrsDO);
+        mfrsService.update(mfrsDO);
         return R.ok();
+    }
+
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Integer mfrsid) {
+        MfrsDO mfrsDO = new MfrsDO();
+        mfrsDO.setState(0L);
+        mfrsDO.setMfrsid(mfrsid);
+        if (mfrsService.updateState(mfrsDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
     }
 }

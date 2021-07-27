@@ -199,28 +199,8 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/product/oldlens/add.js"></script>
 <!--选择制造商-->
-<!--<script type="text/javascript" src="/js/appjs/mfrs/brand/findmfrs.js"></script>-->
+<script type="text/javascript" src="/js/appjs/mfrs/brand/findmfrs.js"></script>
 <script>
-    function getMfrsOldlens() {
-        var toIndex = layer.open({
-            type: 2,
-            title: '制造商',
-            maxmin: true,
-            shadeClose: false, // 点击遮罩关闭层
-            area: ['800px', '520px'],
-            content: "/product/oldlens/findmfrs/",// iframe的url
-            cancel: function (index, layero) {
-                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                for (var i = 0; i < rows.length; i++) {
-                    $("#mfrsName").val(rows[i].mfrsname);
-                    $("#mfrsid").val(rows[i].mfrsid);
-                    choice(rows[i].mfrsid);
-                }
-            }
-        });
-        layer.full(toIndex)
-    }
-
     // <!--//———制造商与品种联动—————-->
     function choice(value) {
         // alert(value);

@@ -65,12 +65,6 @@ public class BrandController {
     //支付方式
     @Autowired
     private PayService payService;
-    //    //制造商商品表
-//    @Autowired
-//    private MgService mgService;
-    //状态
-    @Autowired
-    private StateService stateService;
 
     @GetMapping()
     @RequiresPermissions("mfrs:brand:brand")
@@ -88,9 +82,7 @@ public class BrandController {
         //支付
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
-        //状态
-        List<StateDO> stateDOList = stateService.list(map);
-        model.addAttribute("stateDOList", stateDOList);
+
         return "mfrs/brand/brand";
     }
 

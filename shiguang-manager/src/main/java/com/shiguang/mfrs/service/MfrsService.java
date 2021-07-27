@@ -51,14 +51,13 @@ public interface MfrsService {
 
     int save(MfrsDO mfrs);
 
+    //修改停用启用
     int update(MfrsDO mfrs);
 
     int remove(Integer mfrsid);
 
     int batchRemove(Integer[] mfrsids);
 
-    //停用启动
-    int stop(Integer[] ids, Long status);
-
-    int updateStatus(MfrsDO mfrsDO);
+    //删除修改状态
+    int updateState(MfrsDO mfrs);
 }

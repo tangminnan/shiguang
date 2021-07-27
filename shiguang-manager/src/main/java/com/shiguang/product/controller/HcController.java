@@ -76,6 +76,13 @@ public class HcController {
     String edit(@PathVariable("id") Long id, Model model) {
         HcDO hc = hcService.get(id);
         model.addAttribute("hc", hc);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = hcService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
         return "product/hc/edit";
     }
 
@@ -136,4 +143,10 @@ public class HcController {
         return brandDOList;
     }
 
+    //跳转制造商
+    @GetMapping("/findmfrs")
+    @RequiresPermissions("product:hc:findmfrs")
+    String findmfrs() {
+        return "/mfrs/mfrs/findHcMfrs";
+    }
 }

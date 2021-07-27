@@ -10,22 +10,9 @@
             <div class="ibox-body">
                 <div class="fixed-table-toolbar">
                     <div class="columns pull-right">
-                        <button shiro:hasPermission="mfrs:mfrs:add" type="button" class="btn  btn-primary"
-                                onclick="add()">
-                            <i class="fa fa-plus" aria-hidden="true"></i>添加
+                        <button class="btn  btn-primary" onclick="batchSelect()" type="button">
+                            <i aria-hidden="true" class="fa fa-plus"></i>确定
                         </button>
-                        <button shiro:hasPermission="mfrs:mfrs:batchRemove" type="button" class="btn  btn-danger"
-                                onclick="batchRemove()">
-                            <i class="fa fa-trash" aria-hidden="true"></i>删除
-                        </button>
-                        <!--<button shiro:hasPermission="mfrs:mfrs:stop" type="button" class="btn  btn-danger"-->
-                        <!--onclick="stop(1)">-->
-                        <!--<i class="fa fa-trash" aria-hidden="true"></i>批量启用-->
-                        <!--</button>-->
-                        <!--<button shiro:hasPermission="mfrs:mfrs:stop" type="button" class="btn  btn-danger"-->
-                        <!--onclick="stop(0)">-->
-                        <!--<i class="fa fa-trash" aria-hidden="true"></i>批量停用-->
-                        <!--</button>-->
                     </div>
                     <br>
                     <div class="columns pull-left" style="display:flex;  margin-top:20px">
@@ -62,7 +49,8 @@
                         </div>
                     </div>
                 </div>
-                <table id="exampleTable" data-mobile-responsive="true"></table>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
             </div>
         </div>
     </div>
@@ -85,26 +73,13 @@
         var s_remove_h = '';
     </script>
 </div>
-<div shiro:hasPermission="mfrs:mfrs:detail">
+<div shiro:hasPermission="mfrs:mfrs:resetPwd">
     <script type="text/javascript">
         var s_resetPwd_h = '';
     </script>
 </div>
 </div>
 <div th:include="include :: footer"></div>
-<script type="text/javascript" src="/js/appjs/mfrs/mfrs/mfrs.js"></script>
-<script>
-    function changeInterest() {
-        var interester = [];
-        var obj = document.getElementById("goodsid");
-        for (var i = 0; i < obj.options.length; i++) {
-            if (obj.options[i].selected) {
-                interester.push(obj.options[i].value);// 收集选中项
-            }
-        }
-        $("#interest").val(interester);
-    }
-
-</script>
+<script type="text/javascript" src="/js/appjs/mfrs/mfrs/getMfrsHc.js"></script>
 </body>
 </html>

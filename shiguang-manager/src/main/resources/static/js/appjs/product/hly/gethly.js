@@ -50,14 +50,14 @@ function load() {
                     // 	field : 'id',
                     // 	title : '隐形护理液id'
                     // },
-                    // 								{
-                    // 	field : 'producNum',
-                    // 	title : '商品信息代码'
-                    // },
                     {
-                        field: 'producCode',
-                        title: '商品条码'
+                        field: 'producNum',
+                        title: '商品代码'
                     },
+                    // {
+                    //     field: 'producCode',
+                    //     title: '商品条码'
+                    // },
                     {
                         field: 'producName',
                         title: '商品名称'
@@ -70,6 +70,10 @@ function load() {
                     // 	field : 'brandid',
                     // 	title : '商品品种'
                     // },
+                    {
+                        field: 'brandname',
+                        title: '商品品种'
+                    },
                     // 								{
                     // 	field : 'factory',
                     // 	title : '厂家型号'
@@ -87,18 +91,21 @@ function load() {
                     // 	title : '计量单位'
                     // },
                     {
-                        field: 'productType',
-                        title: '产品类型'
+                        field: 'unitname',
+                        title: '单位'
                     },
-                    {
-                        field: 'mainCapacity',
-                        title: '主容量'
-                    },
-                    {
-                        field: 'secondCapacity',
-                        title: '次容量'
-                    },
-
+                    // {
+                    //     field: 'productType',
+                    //     title: '产品类型'
+                    // },
+                    // {
+                    //     field: 'mainCapacity',
+                    //     title: '主容量'
+                    // },
+                    // {
+                    //     field: 'secondCapacity',
+                    //     title: '次容量'
+                    // },
                     // 								{
                     // 	field : 'upday',
                     // 	title : '效期提醒上限（有效期前【】天提醒进入滞销状态）'
@@ -111,22 +118,22 @@ function load() {
                     // 	field : 'tax',
                     // 	title : '税率(%)'
                     // },
-                    // 								{
-                    // 	field : 'taxPrice',
-                    // 	title : '含税单价'
-                    // },
-                    // 								{
-                    // 	field : 'tradePrice',
-                    // 	title : '批发价格'
-                    // },
+                    {
+                        field: 'retailPrice',
+                        title: '标准零售价格'
+                    },
+                    {
+                        field: 'taxPrice',
+                        title: '含税单价'
+                    },
+                    {
+                        field: 'tradePrice',
+                        title: '批发价格'
+                    },
                     // 								{
                     // 	field : 'transferPrice',
                     // 	title : '调货成本'
                     // },
-                    {
-                        field: 'retailPrice',
-                        title: '标准零售价'
-                    },
                     {
                         title: '操作',
                         field: 'id',

@@ -13,7 +13,7 @@
                             <h1 style="position: absolute;top: 10px;width: 150px;left: 100px;z-index: 99;background-color: white;">
                                 必填项</h1>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">商品信息代码：</label>
+                                <label class="col-sm-3 control-label">商品代码：</label>
                                 <div class="col-sm-8">
                                     <input id="producNum" name="producNum" class="form-control" type="text"
                                            value="1.00.00.000000000.0000">
@@ -37,15 +37,9 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">制造商简称：</label>
                                 <div class="col-sm-8">
-                                    <select id="mfrsid" name="mfrsid" class="form-control"
-                                            onchange="choice(this.options[this.options.selectedIndex].value)">
-                                        <option></option>
-                                        <option th:each="ls:${mfrsDOList}"
-                                                th:text="${ls.mfrsname}"
-                                                th:value="${ls.mfrsid}"
-                                        ></option>
-                                    </select>
-                                    <span style="color: red">*</span>
+                                    <td><input type="text" id="mfrsName" name="mfrsName"/></td>
+                                    <input type="hidden" id="mfrsid" name="mfrsid"/>
+                                    <input type="button" value="选择*" onclick="getMfrsShiguang()" style="color: red"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -54,12 +48,12 @@
                                     <select id="brandid" name="brandid" class="form-control"></select>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">厂家型号：</label>
                                 <div class="col-sm-8">
                                     <input id="factory" name="factory"
-                                           onkeyup="factory1(this.value=this.value.toUpperCase())"
+                                           onkeyup="liandong1()"
+                                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
                                            class="form-control" type="text">
                                     <span style="color: red">*</span>
                                 </div>
@@ -67,8 +61,9 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">型号：</label>
                                 <div class="col-sm-8">
-                                    <input id="producFactory" name="factory"
-                                           onkeyup="factory1(this.value=this.value.toUpperCase())"
+                                    <input id="producFactory" name="producFactory"
+                                           onkeyup="liandong2()"
+                                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
                                            class="form-control" type="text">
                                     <span style="color: red">*</span>
                                 </div>
@@ -167,6 +162,8 @@
 </div>
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/product/shiguang/add.js"></script>
+<!--选择制造商-->
+<script type="text/javascript" src="/js/appjs/mfrs/brand/findmfrs.js"></script>
 <script>
     <!--//———制造商与品种联动—————-->
     function choice(value) {
@@ -195,12 +192,19 @@
     }
 
     // <!--//———厂家型号与型号联动—————-->
-    function factory1(val) {
-        var inputs = document.getElementsByName("factory");
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].value = val;
-        }
+    function liandong1() {
+        var val1 = document.getElementById("factory").value;
+        var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
+        // alert(val);
+        document.getElementById("producFactory").value = va1;
     }
+
+    function liandong2() {
+        var val2 = document.getElementById("producFactory").value;
+        var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
+        document.getElementById("factory").value = va2;
+    }
+
 </script>
 </body>
 </html>

@@ -49,7 +49,11 @@
                 <li>性别：<input id="sexx" name="sexx" th:value="${memberDO.sexx}" class="short" type="text"/></li>
                 <li>年龄：<input id="age" name="age" th:value="${memberDO.age}" class="short" type="text"/></li>
                 <li>电话：<input type="text" name="phone1" th:value="${memberDO.phone1}"/></li>
-                <li><span>详情</span></li>
+                <input id="memberId" name="memberId" th:value="${memberDO.id}" type="hidden">
+                <input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}" type="hidden">
+                <input id="memname" name="memname" th:value="${memberDO.name}" type="hidden">
+                <input id="memberNumber" name="memberNumber" th:value="${memberDO.cardNumber}" type="hidden">
+                <li><span onclick="getMemberDetail()">详情</span></li>
             </ul>
         </div>
 
@@ -144,13 +148,13 @@
                     <td>OD</td>
                     <td>
                         <input name="axis" th:value="${ocularEyesDO.axis}" type="text" onblur="shuzi(this)"/>
-                        shuzionblur mm
+                        mm
                     </td>
                     <td>
                         <input name="cornealFirstK1Right" th:value="${ocularEyesDO.cornealFirstK1Right}"
                                type="text" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>@
                         <input name="cornealLastK1Right" th:value="${ocularEyesDO.cornealLastK1Right}"
-                               type="text" onchange="shuzi(this)"/>onchange
+                               type="text" onchange="shuzi(this)"/>
                     </td>
                     <td>
                         <input name="cornealFirstK2Right" th:value="${ocularEyesDO.cornealFirstK2Right}"
@@ -602,7 +606,7 @@
                 <li>性别：<input name="sexx" th:value="${memberDO.sexx}" class="short" type="text"/></li>
                 <li>年龄：<input name="age" th:value="${memberDO.age}" class="short" type="text"/></li>
                 <li>电话：<input name="phone1" th:value="${memberDO.phone1}" type="text"/></li>
-                <li><span>详情</span></li>
+                <li><span onclick="getMemberDetail()">详情</span></li>
             </ul>
         </div>
 
@@ -793,9 +797,9 @@
                     <td style="text-align: right" colspan="7">
                         医生：
                         <select name="kjyyDoctor">
-                            <option value="王依依">王依依</option>
-                            <option value="李三思">李三思</option>
-                            <option value="赵武林">赵武林</option>
+                            <option></option>
+                            <option value="孙伟">孙伟</option>
+                            <option value="维护二">维护二</option>
                         </select>
                         验光师：
                         <select name="kjyyOptometryName">
@@ -923,9 +927,9 @@
                     <td style="text-align: right" colspan="7">
                         医生：
                         <select name="kjjyDoctor">
-                            <option value="王依依">王依依</option>
-                            <option value="李三思">李三思</option>
-                            <option value="赵武林">赵武林</option>
+                            <option></option>
+                            <option value="孙伟">孙伟</option>
+                            <option value="维护二">维护二</option>
                         </select>
                         验光师：
                         <select name="kjjyOptometryName">
@@ -1049,9 +1053,9 @@
                     <td style="text-align: right" colspan="8">
                         医生：
                         <select name="sgjjDoctor">
-                            <option value="王依依">王依依</option>
-                            <option value="李三思">李三思</option>
-                            <option value="赵武林">赵武林</option>
+                            <option></option>
+                            <option value="孙伟">孙伟</option>
+                            <option value="维护二">维护二</option>
                         </select>
                         验光师：
                         <select name="sgjjOptometryName">
@@ -1161,9 +1165,9 @@
                     <td style="text-align: right" colspan="8">
                         医生：
                         <select name="rxDoctor">
-                            <option value="王依依">王依依</option>
-                            <option value="李三思">李三思</option>
-                            <option value="赵武林">赵武林</option>
+                            <option></option>
+                            <option value="孙伟">孙伟</option>
+                            <option value="维护二">维护二</option>
                         </select>
                         验光师：
                         <select name="rxOptometryName">
@@ -1240,9 +1244,9 @@
                     <td style="text-align: right" colspan="7">
                         医生：
                         <select name="zyDoctor">
-                            <option value="王依依">王依依</option>
-                            <option value="李三思">李三思</option>
-                            <option value="赵武林">赵武林</option>
+                            <option></option>
+                            <option value="孙伟">孙伟</option>
+                            <option value="维护二">维护二</option>
                         </select>
                         验光师：
                         <select name="zyOptometryName">
@@ -1365,9 +1369,9 @@
                     <td style="text-align: right" colspan="8">
                         医生：
                         <select name="sjxlDoctor">
-                            <option value="王依依">王依依</option>
-                            <option value="李三思">李三思</option>
-                            <option value="赵武林">赵武林</option>
+                            <option></option>
+                            <option value="孙伟">孙伟</option>
+                            <option value="维护二">维护二</option>
                         </select>
                         验光师：
                         <select name="sjxlOptometryName">
@@ -1466,9 +1470,9 @@
                     <td style="text-align: right" colspan="11">
                         医生：
                         <select name="vstDoctor">
-                            <option value="1">王依依</option>
-                            <option value="2">李三思</option>
-                            <option value="3">赵武林</option>
+                            <option></option>
+                            <option value="孙伟">孙伟</option>
+                            <option value="维护二">维护二</option>
                         </select>
                         验光师：
                         <select name="vstDoctor">
@@ -1542,9 +1546,9 @@
                     <td style="text-align: right" colspan="10">
                         医生：
                         <select name="crtDoctor">
-                            <option value="21">王依依</option>
-                            <option value="2">李三思</option>
-                            <option value="122">赵武林</option>
+                            <option></option>
+                            <option value="孙伟">孙伟</option>
+                            <option value="维护二">维护二</option>
                         </select>
                         验光师：
                         <select name="crtOptometryName">
@@ -1615,9 +1619,9 @@
                     <td style="text-align: right" colspan="6">
                         医生：
                         <select name="rgpDoctor">
-                            <option value="21s">王依依</option>
-                            <option value="2s1">李三思</option>
-                            <option value="2ff1">赵武林</option>
+                            <option></option>
+                            <option value="孙伟">孙伟</option>
+                            <option value="维护二">维护二</option>
                         </select>
                         验光师：
                         <select name="rgpOptometryName">
@@ -1676,9 +1680,9 @@
                     <td style="text-align: right">
                         医生：
                         <select name="ypDoctor">
-                            <option value="21">王依依</option>
-                            <option value="32">李三思</option>
-                            <option value="12">赵武林</option>
+                            <option></option>
+                            <option value="孙伟">孙伟</option>
+                            <option value="维护二">维护二</option>
                         </select>
                         验光师：
                         <select name="ypOptometryName">
@@ -1770,6 +1774,19 @@
 <script type="text/javascript" src="/js/appjs/product/hly/jchuliye.js"></script>
 <script type="text/javascript" src="/js/appjs/product/shiguang/jcshiguang.js"></script>
 <script type="text/javascript">
+    function getMemberDetail() {
+        var id = $("#memberId").val();
+        layer.open({
+            type: 2,
+            title: '详情',
+            maxmin: true,
+            shadeClose: false, // 点击遮罩关闭层
+            area: ['1200px', '520px'],
+            content: "/information/highmember/detail/" + id // iframe的url
+        });
+
+    }
+
     //处方显隐增加
     function goodsidstr(value) {
         if (value == '2') {

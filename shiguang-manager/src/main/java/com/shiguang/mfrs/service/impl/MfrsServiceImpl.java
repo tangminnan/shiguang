@@ -97,6 +97,7 @@ public class MfrsServiceImpl implements MfrsService {
         return mfrsDao.save(mfrs);
     }
 
+    //修改停用启用
     @Override
     public int update(MfrsDO mfrs) {
         return mfrsDao.update(mfrs);
@@ -112,14 +113,9 @@ public class MfrsServiceImpl implements MfrsService {
         return mfrsDao.batchRemove(mfrsids);
     }
 
-    //停用启动
+    //删除修改状态
     @Override
-    public int stop(Integer[] ids, Long status) {
-        return mfrsDao.stop(ids, status);
-    }
-
-    @Override
-    public int updateStatus(MfrsDO mfrsDO) {
-        return mfrsDao.update(mfrsDO);
+    public int updateState(MfrsDO mfrs) {
+        return mfrsDao.updateState(mfrs);
     }
 }

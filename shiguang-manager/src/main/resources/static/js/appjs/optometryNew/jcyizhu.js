@@ -1,5 +1,5 @@
 function getYizhu() {
-    var toIndex = layer.open({
+    layer.open({
         type: 2,
         title: '医嘱',
         maxmin: true,
@@ -16,5 +16,4 @@ function getYizhu() {
             $("#yizhus").val(yizhuyizhu);
         }
     });
-    layer.full(toIndex)
 }

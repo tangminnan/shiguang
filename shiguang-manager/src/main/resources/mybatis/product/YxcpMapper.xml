@@ -4,24 +4,26 @@
 <mapper namespace="com.shiguang.product.dao.YxcpDao">
 
     <select id="get" resultType="com.shiguang.product.domain.YxcpDO">
-		select
-        m.`mfrsname`,b.`brandname`,u.`unitname`,
-        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
-		y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,y.`caizhi_id`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,
-		y.`retail_price`
-   from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
-   left join  c_unit u on y.unitid= u.unitid
-		where id = #{value}
-	</select>
-
-    <select id="list" resultType="com.shiguang.product.domain.YxcpDO">
-        select
+		select l.cyl,s.sph,
         m.`mfrsname`,b.`brandname`,u.`unitname`,
         y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
         y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,y.`caizhi_id`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,
         y.`retail_price`
         from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
-        left join c_unit u on y.unitid= u.unitid
+        left join c_unit u on y.unitid= u.unitid left join a_cyl l on l.cyl_id=y.cyl_id left join a_sph s on
+        s.sph_id=y.sph_id
+		where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.product.domain.YxcpDO">
+        select l.cyl,s.sph,
+        m.`mfrsname`,b.`brandname`,u.`unitname`,
+        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
+        y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,y.`caizhi_id`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,
+        y.`retail_price`
+        from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
+        left join c_unit u on y.unitid= u.unitid left join a_cyl l on l.cyl_id=y.cyl_id left join a_sph s on
+        s.sph_id=y.sph_id
         <where>
             <if test="id != null and id != ''">and y.id = #{id}</if>
             <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
@@ -52,6 +54,8 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
+            <if test="cyl != null and cyl != ''">and l.cyl = #{cyl}</if>
+            <if test="sph != null and sph != ''">and s.sph = #{sph}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

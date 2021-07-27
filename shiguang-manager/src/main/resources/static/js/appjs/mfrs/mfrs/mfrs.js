@@ -126,30 +126,30 @@ function load() {
                     // 		field : 'remarks',
                     // 		title : '备注'
                     // 	},
-                    // 	{
-                    // {
-                    //     field : 'status',
-                    //     title : '状态',
-                    //     formatter : function(value, row, index) {
-                    //         var str = '';
-                    //
-                    //         str +=' <div class="switch onoffswitch col-sm-1"> ';
-                    //         str +=' <div class="onoffswitch"> ';
-                    //         str +=' <input name="allowComment" ';
-                    //         //启用状态 0：是；1：否
-                    //         if(row.status == 1)
-                    //             str += ' checked="" ';
-                    //
-                    //         str +=' type="checkbox" onchange="updateEnable(' +row.id+ ',this)" value="' +row.id+ '" class="onoffswitch-checkbox" id="example1' +row.id+ '">  ';
-                    //         str +=' <label class="onoffswitch-label" for="example1' +row.id+ '">  ';
-                    //         str +=' <span class="onoffswitch-inner" ></span> ';
-                    //         str +=' <span class="onoffswitch-switch" ></span> ';
-                    //         str +=' </label> ';
-                    //         str +=' </div>';
-                    //         str +=' </div>';
-                    //         return str;
-                    //     }
-                    // },
+                    {
+                        field: 'status',
+                        title: '状态',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            var str = '';
+                            str += ' <div class="switch onoffswitch col-sm-1"> ';
+                            str += ' <div class="onoffswitch"> ';
+                            str += ' <input name="allowComment" ';
+                            //启用状态 0：启用；1：禁用
+                            if (row.status == 0)
+                                str += ' checked="" ';
+
+                            str += ' type="checkbox" onchange="updateEnable(' + row.mfrsid + ',this)" value="' + row.mfrsid + '" class="onoffswitch-checkbox" id="example1' + row.mfrsid + '">  ';
+                            str += ' <label class="onoffswitch-label" for="example1' + row.mfrsid + '">  ';
+                            str += ' <span class="onoffswitch-inner" ></span> ';
+                            str += ' <span class="onoffswitch-switch" ></span> ';
+                            str += ' </label> ';
+                            str += ' </div>';
+                            str += ' </div>';
+                            return str;
+                        }
+                    },
+
                     {
                         title: '操作',
                         field: 'id',
@@ -161,13 +161,11 @@ function load() {
                             var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
                                 + row.mfrsid
                                 + '\')"><i class="fa fa-remove"></i></a> ';
-                            // var a = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="详情" onclick="detail(\''
-                            //     + row.mfrsid
-                            //     + '\')">详情</a> ';
-                            var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+
+                            var f = '<a class="btn btn-success btn-sm" href="#" title="详情"  mce_href="#" onclick="resetPwd(\''
                                 + row.mfrsid
-                                + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d;
+                                + '\')">详情</a> ';
+                            return e + d + f;
                         }
                     }]
             });
@@ -201,17 +199,6 @@ function edit(id) {
     layer.full(toIndex);
 }
 
-// function detail(id) {
-//     var toIndex =layer.open({
-//         type: 2,
-//         title: '详情',
-//         maxmin: true,
-//         shadeClose: false, // 点击遮罩关闭层
-//         area: ['800px', '520px'],
-//         content: prefix + '/detial/' + id // iframe的url
-//     });
-//
-// }
 
 function remove(id) {
     layer.confirm('确定要删除选中的记录？', {
@@ -236,6 +223,14 @@ function remove(id) {
 }
 
 function resetPwd(id) {
+    layer.open({
+        type: 2,
+        title: '详情',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/detail/' + id // iframe的url
+    });
 }
 
 function batchRemove() {
@@ -322,3 +317,31 @@ function batchSelect() {
     var rows = $("#exampleTable").bootstrapTable("getSelections");
     return rows;
 };
+
+//修改启用状态
+function updateEnable(mfrsid, enable) {
+    // alert(mfrsid);
+    var isEnable = 1;
+    if ($(enable).prop("checked")) {
+        isEnable = 0;
+    }
+
+    $.ajax({
+        url: prefix + "/updateEnable",
+        type: "post",
+        data: {
+            'mfrsid': mfrsid,
+            'enable': isEnable
+        },
+        dataType: 'JSON',
+        async: false,
+        success: function (r) {
+            if (r.code == 0) {
+                layer.msg(r.msg);
+                reLoad();
+            } else {
+                layer.msg(r.msg);
+            }
+        }
+    });
+}
