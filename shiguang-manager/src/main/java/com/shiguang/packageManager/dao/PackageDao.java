@@ -21,7 +21,7 @@ public interface PackageDao {
 	List<PackageDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
-	
+
 	int save(PackageDO packages);
 	
 	int update(PackageDO packages);

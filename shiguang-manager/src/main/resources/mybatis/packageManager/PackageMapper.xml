@@ -4,11 +4,11 @@
 <mapper namespace="com.shiguang.packageManager.dao.PackageDao">
 
 	<select id="get" resultType="com.shiguang.packageManager.domain.PackageDO">
-		select `id`,`package_name`,`package_time`,`package_form`,`effective_date`,`expiry_date`,`package_type`,`start_price`,`end_price`,`package_price`,`is_cumulative_points`,`is_add`,`fold_up`,`retail_price`,`store`,`remark` from package where id = #{value}
+		select `id`,`package_name`,`package_time`,`package_form`,`effective_date`,`expiry_date`,`package_type`,`start_price`,`end_price`,`package_price`,`is_cumulative_points`,`is_add`,`fold_up`,`retail_price`,`store`,`remark`,`whole_start`,`whole_end`,`danyiyh`,`danyi_price` from package where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.packageManager.domain.PackageDO">
-		select `id`,`package_name`,`package_time`,`package_form`,`effective_date`,`expiry_date`,`package_type`,`start_price`,`end_price`,`package_price`,`is_cumulative_points`,`is_add`,`fold_up`,`retail_price`,`store`,`remark` from package
+		select `id`,`package_name`,`package_time`,`package_form`,`effective_date`,`expiry_date`,`package_type`,`start_price`,`end_price`,`package_price`,`is_cumulative_points`,`is_add`,`fold_up`,`retail_price`,`store`,`remark`,`whole_start`,`whole_end`,`danyiyh`,`danyi_price` from package
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="packageName != null and packageName != ''"> and package_name = #{packageName} </if>
@@ -79,7 +79,11 @@
 			`fold_up`, 
 			`retail_price`, 
 			`store`, 
-			`remark`
+			`remark`,
+			`whole_start`,
+			`whole_end`,
+			`danyiyh`,
+			`danyi_price`
 		)
 		values
 		(
@@ -97,7 +101,11 @@
 			#{foldUp}, 
 			#{retailPrice}, 
 			#{store}, 
-			#{remark}
+			#{remark},
+			#{wholeStart},
+			#{wholeEnd},
+			#{danyiyh},
+			#{danyiPrice}
 		)
 	</insert>
 	 

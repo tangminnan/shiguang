@@ -1,5 +1,6 @@
 package com.shiguang.packageManager.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,8 @@ import com.shiguang.mfrs.service.LightService;
 import com.shiguang.mfrs.service.MaterialService;
 import com.shiguang.mfrs.service.RefractivityService;
 import com.shiguang.packageManager.domain.PackageDO;
+import com.shiguang.packageManager.domain.PackageInfoDO;
+import com.shiguang.packageManager.service.PackageInfoService;
 import com.shiguang.packageManager.service.PackageService;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
@@ -48,6 +51,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PackageController {
 	@Autowired
 	private PackageService packageService;
+	@Autowired
+	private PackageInfoService packageInfoService;
 	@Autowired
 	private DepartmentService departmentService;
 	@Autowired
@@ -228,6 +233,23 @@ public class PackageController {
 		return pageUtils;
 	}
 
+	@GetMapping("/detail/{id}")
+	@RequiresPermissions("information:package:detail")
+	String detail(@PathVariable("id") Long id,Model model){
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("departType","销售门店");
+//		map.put("state",1);
+//		List<DepartmentDO> departmentDOList = departmentService.list(map);
+//		model.addAttribute("departmentDOList",departmentDOList);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		PackageDO packageDO = packageService.get(id);
+		packageDO.setPackageDate(simpleDateFormat.format(packageDO.getPackageTime()));
+		packageDO.setEffectiveTime(simpleDateFormat.format(packageDO.getEffectiveDate()));
+		packageDO.setExpiryTime(simpleDateFormat.format(packageDO.getExpiryDate()));
+		model.addAttribute("package",packageDO);
+		return "packageInfo/detail";
+	}
+
 	/**
 	 * 保存
 	 */
@@ -235,9 +257,30 @@ public class PackageController {
 	@PostMapping("/save")
 	@RequiresPermissions("information:package:add")
 	public R save(PackageDO packages){
-		if(packageService.save(packages)>0){
+		int pack = packageService.save(packages);
+		PackageInfoDO packageInfoDO = new PackageInfoDO();
+		packageInfoDO.setPackageId(packages.getId());
+		packageInfoDO.setGoodsType(packages.getGoodsType());
+		packageInfoDO.setGoodsCode(packages.getGoodsCode());
+		packageInfoDO.setGoodsName(packages.getGoodsName());
+		packageInfoDO.setBuyWay(packages.getBuyWay());
+		packageInfoDO.setPackageStartPrice(packages.getPackageStartPrice());
+		packageInfoDO.setPackageEndPrice(packages.getPackageEndPrice());
+		packageInfoDO.setSaleNumber(packages.getSaleNumber());
+		packageInfoDO.setFullStartPrice(packages.getFullStartPrice());
+		packageInfoDO.setFullEndPrice(packages.getFullEndPrice());
+		packageInfoDO.setPreferentialWay(packages.getPreferentialWay());
+		packageInfoDO.setPreferentialPrice(packages.getPreferentialPrice());
+		packageInfoDO.setUnitPrice(packages.getUnitPrice());
+		packageInfoDO.setSpecialPrice(packages.getSpecialPrice());
+		packageInfoDO.setPreferentialRebate(packages.getPreferentialRebate());
+		int packinfo = packageInfoService.save(packageInfoDO);
+		if (pack > 0 && packinfo > 0){
 			return R.ok();
 		}
+//		if(packageService.save(packages)>0){
+//			return R.ok();
+//		}
 		return R.error();
 	}
 	/**

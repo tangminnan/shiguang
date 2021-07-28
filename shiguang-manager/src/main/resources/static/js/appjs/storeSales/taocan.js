@@ -1,5 +1,5 @@
 
-var prefix = "/information/taocan"
+var prefix = "/information/store"
 $(function() {
     load();
 });
@@ -67,18 +67,18 @@ function load() {
                                     }
 								},
 								{
-									field : 'packageTime',
+									field : 'packageDate',
 									title : '套餐日期',
 									align : 'center',
 								},
                             {
-                                field : 'effectiveDate',
+                                field : 'effectiveTime',
                                 title : '生效日期',
                                 align : 'center'
                             }
                             ,
                             {
-                                field : 'expiryDate',
+                                field : 'expiryTime',
                                 title : '截至日期',
                                 align : 'center'
                             },

@@ -1,5 +1,10 @@
-function getGoodsInfo(){
-    var goodsType = $("#goodType").val();
+function getGoodsInfo(obj){
+    alert(obj)
+    // var str = obj;
+    // var str = str.split("")
+    // var targetStr = str[str.length-1]
+    // alert(targetStr);
+    var goodsType = $("#goodType"+obj+"").val();
     // var fenlei = $("#fenlei").val();
     // var caizhi = $("#caizhi").val();
      layer.open({
@@ -13,10 +18,10 @@ function getGoodsInfo(){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             alert(JSON.stringify(rows));
             for (var i=0;i<rows.length;i++){
-                $("#goodsName").val(rows[i].producName);
-                $("#goodsid").val(rows[i].producNum);
-                $("#goodsYJStart").val(rows[i].retailPrice);
-                $("#goodsYJEnd").val(rows[i].retailPrice)
+                $("#goodsName"+obj+"").val(rows[i].producName);
+                $("#goodsid"+obj+"").val(rows[i].producNum);
+                $("#goodsYJStart"+obj+"").val(rows[i].retailPrice);
+                $("#goodsYJEnd"+obj+"").val(rows[i].retailPrice)
             }
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -26,12 +31,30 @@ function getGoodsInfo(){
 }
 var pricestart=0;
 var priceEnd=0;
-function getPrice() {
-    var taocanStart = $("#taocanStart").val();
-    var taocanEnd = $("#taocanEnd").val();
+function getStartPrice(obj) {
+    pricestart = $("#startPrice").val();
+    alert(pricestart);
+    if (pricestart == ''){
+        pricestart=0;
+    }
+    var str = obj.id;
+    var str = str.split("")
+    var targetStr = str[str.length-1]
+    var taocanStart = $("#taocanStart"+targetStr+"").val();
     taocanStart = parseFloat(pricestart)+parseFloat(taocanStart);
-    taocanEnd = parseFloat(priceEnd) + parseFloat(taocanEnd);
     $("#startPrice").val(taocanStart);
+
+}
+function getEndPrice(obj){
+    priceEnd = $("#endPrice").val();
+    if (priceEnd == ''){
+        priceEnd=0;
+    }
+    var str = obj.id;
+    var str = str.split("")
+    var targetStr = str[str.length-1];
+    var taocanEnd = $("#taocanEnd"+targetStr+"").val();
+    taocanEnd = parseFloat(priceEnd) + parseFloat(taocanEnd);
     $("#endPrice").val(taocanEnd)
 }
 var htmldy="";

@@ -382,4 +382,72 @@ input.HbcBtn_QK,
 .buyBtns input[type="checkbox"]{background:url(../img/Fcheck_no.png);width: 14px;height: 14px;vertical-align:middle;margin-top: -3px;margin-right:3px;}
 .buyBtns input[type="checkbox"]:checked{background-image:url(../img/Fcheck_yes.png);}
 
+/*===========20210727新增样式==========*/
+.PHGL table, .SPmsg table{background: #f6f5f5;}
+.PHGL table td:nth-child(odd){text-align: right;background: #e4e4e4;}
+.PHGL table td:nth-child(even){text-align: left;}
+.PHGL table input[type="text"],
+.PHGL table select{width:70%;text-align: left;}
+.PHGL table em{color:red;margin-left: 1%;}
+.PHGL input[type="radio"]{background:url(../img/check_no.png);width: 14px;height: 14px;vertical-align:middle;margin-top: -3px;margin-right:3px;margin-left: 10px;}
+.PHGL input[type="radio"]:checked{background-image:url(../img/check_yes.png);}
+.PHGL input[type="radio"]:checked + label{color:#1978f8;}
+.BQ-btn{margin-left: 40px;font-size: 15px;}
+.BQ-btn input{width: 110px;height: 30px;background: #358afd;color:#fff;box-shadow:0 0 5px #a2c6fb;margin:20px;cursor: pointer;}
+.BQ-btn input.empty{color:#358afd;background: #fff;border:1px solid #358afd;}
+.BQ-btn dl{margin: 20px;}
+.BQ-btn dl dd{padding-left:45px;color:red;margin-bottom: 3px;}
+.XZ-btn{background: #66b656 url(../img/xuanze.png) no-repeat 14px center;color:#fff;padding:7px 0;width:80px;border-radius:5px;border: none;cursor: pointer;text-indent: 26px;box-shadow:0 0 5px #87b77f;}
+
+.Xbtn input{background:#358afd url(../img/jia.png) no-repeat 8px center;padding:6px 15px 6px 30px;border-radius:3px;color:#fff;cursor: pointer;margin:20px 10px;}
+.Xbtn input:nth-child(1){background-image: url(../img/icon1.png);}
+.Xbtn input.HgreenBG{background-image: url(../img/prient.png);background-color: #66b656;}
+.Cbtn{margin:10px;}
+.H_bc{width: 110px;height: 30px;background: #358afd;color:#fff;box-shadow:0 0 5px #a2c6fb;cursor: pointer;font-size: 15px;}
+
+.SPmsg .thead td{background: #e4e4e4;font-size: 15px;}
+.SPmsg table td{padding:6px 0;}
+
+.spxxwh{overflow: hidden;background: #fff;margin:0 40px 5px;}
+.new_h4{color: #333;font-size: 17px;font-weight: bold;padding:0 12px;margin:20px 0 0;}
+.HspxxBtn input:nth-child(1){background-image: url(../img/piliang.png);}
+.HspxxBtn input:nth-child(2){background-image: url(../img/daochu.png);}
+.HspxxBtn input:nth-child(3),.HspxxBtn input:nth-child(4){background-color: #66b656;}
+.HspxxBtn input:nth-child(5){background-image: url(../img/icon0.png);}
+
+.msgBox table{background: #f6f5f5;text-align: left;}
+.msgBox table td:nth-child(odd){text-align: right;background: #e4e4e4;}
+.msgBox table select{width:30%;text-align: left;}
+
+.msgBoxDD_top{overflow: hidden;margin-bottom: 15px;}
+.PLbtns input{margin: 0 10px;}
+.PLbtns input:nth-child(1){background-image: url(../img/piliang_qy.png);}
+.PLbtns input:nth-child(2){background-image: url(../img/piliang_qy.png);}
+.PLbtns input:nth-child(5){background-image: url(../img/del.png);background-color: #fd536b;}
+.msgBoxDD .thead td{background: #ddd;padding:6px 0;font-weight: bold;}
+
+.Print{background: #fff;width: 900px;margin:0 auto;padding:15px;}
+.Print h3{text-align: center;font-weight: bold;font-size: 20px;border-bottom:1px solid #666;padding-bottom: 10px;}
+.Print table{width: 100%;}
+.Print table td{padding:5px 0;}
+.Print li{float: left;border-bottom:1px solid #666;padding:5px 0;}
+.Print .thead td{border-bottom:1px solid #666;text-align: center;font-weight: bold;}
+.Print .ul3 li{width: 33.33%;}
+.Print .ul3 li:nth-child(2){}
+.Print .ul3 li:nth-child(3){text-align: right;}
+.Print .ul5 li{margin-bottom: 15px;}
+.Print .ul5 li:nth-child(1){width: 33%;}
+.Print .ul5 li:nth-child(2){width: 15%;}
+.Print .ul5 li:nth-child(3){width: 15%;}
+.Print .ul5 li:nth-child(4){width: 15%;}
+.Print .ul5 li:nth-child(5){width: 22%;text-align: right;}
+.Print .Tabbor{border-bottom:1px solid #666;}
+.Print .Htab1{text-align: center;margin-bottom: 30px;}
+.Print .Htab2{margin-bottom: 30px;text-align: center;}
+.Print .Htab2 td:nth-child(1){width:35%;text-align: left;}
+.Print .Htab3{border-top:1px solid #666;border-bottom:1px solid #666;}
+.Print .Htab3 .td1{border-left:1px solid #666;vertical-align: top;}
+.Print .Htab3 .td1 p{margin-bottom:5px;padding-left:5px;}
+.Print .Htab3 .tr_last td{border-top:1px solid #666;}
+
 

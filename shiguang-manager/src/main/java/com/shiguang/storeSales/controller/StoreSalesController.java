@@ -471,6 +471,7 @@ public class StoreSalesController {
         //查询列表数据
         Query query = new Query(params);
         Date currentTime = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        query.put("packageType",params.get("packageType"));
         List<PackageDO> packageDOList = packageService.list(query);
         if (null != packageDOList && packageDOList.size() > 0){
@@ -480,6 +481,9 @@ public class StoreSalesController {
                 } else {
                     packageDO.setLose(1L);
                 }
+                packageDO.setPackageDate(simpleDateFormat.format(packageDO.getPackageTime()));
+                packageDO.setEffectiveTime(simpleDateFormat.format(packageDO.getEffectiveDate()));
+                packageDO.setExpiryTime(simpleDateFormat.format(packageDO.getExpiryDate()));
             }
         }
         int total = packageService.count(query);

@@ -142,6 +142,8 @@ function detail(cardNumber,saleNumber,costId) {
 function dayin(type,saleNumber){
 	if (type == "检查单"){
         window.open("/information/settlement/jianchadayin?saleNumber="+saleNumber);
+	} else if (type == "配镜单") {
+        window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
 	}
 }
 

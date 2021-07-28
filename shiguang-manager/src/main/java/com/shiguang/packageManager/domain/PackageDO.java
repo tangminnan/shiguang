@@ -1,5 +1,7 @@
 package com.shiguang.packageManager.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,12 +23,15 @@ public class PackageDO implements Serializable {
 	private String packageName;
 	//套餐日期
 	private Date packageTime;
+	private String packageDate;
 	//套餐形式
 	private String packageForm;
 	//生效日期
 	private Date effectiveDate;
+	private String effectiveTime;
 	//截至日期
 	private Date expiryDate;
+	private String expiryTime;
 	//套餐分类
 	private String packageType;
 	//套餐价格区间开始
@@ -49,6 +54,226 @@ public class PackageDO implements Serializable {
 	private String remark;
 	//失效状态
 	private Long lose;
+	//整单满(开始)
+	private String wholeStart;
+	//整单满(结束)
+	private String wholeEnd;
+	//单一优惠方式
+	private String danyiyh;
+	//优惠价格
+	private String danyiPrice;
+
+	//商品类型
+	private String goodsType;
+	//商品代码
+	private String goodsCode;
+	//商品名称
+	private String goodsName;
+	//购买方式
+	private Long buyWay;
+	//商品原价区间
+	private String originalPriceRange;
+	//套餐价格区间开始
+	private String packageStartPrice;
+	//套餐价格区间结束
+	private String packageEndPrice;
+	//销售数量
+	private Long saleNumber;
+	//消费满(开始价格)
+	private String fullStartPrice;
+	//消费满(结束价格)
+	private String fullEndPrice;
+	//优惠方式
+	private String preferentialWay;
+	//套餐单价
+	private String unitPrice;
+	//特价金额
+	private String specialPrice;
+	//优惠金额
+	private String preferentialPrice;
+	//优惠折扣
+	private String preferentialRebate;
+
+	/**
+	 * 设置：商品类型
+	 */
+	public void setGoodsType(String goodsType) {
+		this.goodsType = goodsType;
+	}
+	/**
+	 * 获取：商品类型
+	 */
+	public String getGoodsType() {
+		return goodsType;
+	}
+	/**
+	 * 设置：商品代码
+	 */
+	public void setGoodsCode(String goodsCode) {
+		this.goodsCode = goodsCode;
+	}
+	/**
+	 * 获取：商品代码
+	 */
+	public String getGoodsCode() {
+		return goodsCode;
+	}
+	/**
+	 * 设置：商品名称
+	 */
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+	/**
+	 * 获取：商品名称
+	 */
+	public String getGoodsName() {
+		return goodsName;
+	}
+	/**
+	 * 设置：购买方式
+	 */
+	public void setBuyWay(Long buyWay) {
+		this.buyWay = buyWay;
+	}
+	/**
+	 * 获取：购买方式
+	 */
+	public Long getBuyWay() {
+		return buyWay;
+	}
+	/**
+	 * 设置：商品原价区间
+	 */
+	public void setOriginalPriceRange(String originalPriceRange) {
+		this.originalPriceRange = originalPriceRange;
+	}
+	/**
+	 * 获取：商品原价区间
+	 */
+	public String getOriginalPriceRange() {
+		return originalPriceRange;
+	}
+	/**
+	 * 设置：套餐价格区间开始
+	 */
+	public void setPackageStartPrice(String packageStartPrice) {
+		this.packageStartPrice = packageStartPrice;
+	}
+	/**
+	 * 获取：套餐价格区间开始
+	 */
+	public String getPackageStartPrice() {
+		return packageStartPrice;
+	}
+	/**
+	 * 设置：套餐价格区间结束
+	 */
+	public void setPackageEndPrice(String packageEndPrice) {
+		this.packageEndPrice = packageEndPrice;
+	}
+	/**
+	 * 获取：套餐价格区间结束
+	 */
+	public String getPackageEndPrice() {
+		return packageEndPrice;
+	}
+	/**
+	 * 设置：销售数量
+	 */
+	public void setSaleNumber(Long saleNumber) {
+		this.saleNumber = saleNumber;
+	}
+	/**
+	 * 获取：销售数量
+	 */
+	public Long getSaleNumber() {
+		return saleNumber;
+	}
+	/**
+	 * 设置：消费满(开始价格)
+	 */
+	public void setFullStartPrice(String fullStartPrice) {
+		this.fullStartPrice = fullStartPrice;
+	}
+	/**
+	 * 获取：消费满(开始价格)
+	 */
+	public String getFullStartPrice() {
+		return fullStartPrice;
+	}
+	/**
+	 * 设置：消费满(结束价格)
+	 */
+	public void setFullEndPrice(String fullEndPrice) {
+		this.fullEndPrice = fullEndPrice;
+	}
+	/**
+	 * 获取：消费满(结束价格)
+	 */
+	public String getFullEndPrice() {
+		return fullEndPrice;
+	}
+	/**
+	 * 设置：优惠方式
+	 */
+	public void setPreferentialWay(String preferentialWay) {
+		this.preferentialWay = preferentialWay;
+	}
+	/**
+	 * 获取：优惠方式
+	 */
+	public String getPreferentialWay() {
+		return preferentialWay;
+	}
+	/**
+	 * 设置：套餐单价
+	 */
+	public void setUnitPrice(String unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+	/**
+	 * 获取：套餐单价
+	 */
+	public String getUnitPrice() {
+		return unitPrice;
+	}
+	/**
+	 * 设置：特价金额
+	 */
+	public void setSpecialPrice(String specialPrice) {
+		this.specialPrice = specialPrice;
+	}
+	/**
+	 * 获取：特价金额
+	 */
+	public String getSpecialPrice() {
+		return specialPrice;
+	}
+	/**
+	 * 设置：优惠金额
+	 */
+	public void setPreferentialPrice(String preferentialPrice) {
+		this.preferentialPrice = preferentialPrice;
+	}
+	/**
+	 * 获取：优惠金额
+	 */
+	public String getPreferentialPrice() {
+		return preferentialPrice;
+	}
+	/**
+	 * 设置：优惠折扣
+	 */
+	public void setPreferentialRebate(String preferentialRebate) {
+		this.preferentialRebate = preferentialRebate;
+	}
+	/**
+	 * 获取：优惠折扣
+	 */
+	public String getPreferentialRebate() {
+		return preferentialRebate;
+	}
 
 	/**
 	 * 设置：主键
@@ -86,6 +311,8 @@ public class PackageDO implements Serializable {
 	public Date getPackageTime() {
 		return packageTime;
 	}
+	public void setPackageDate(String packageDate) {this.packageDate = packageDate;}
+	public String getPackageDate() {return packageDate;}
 	/**
 	 * 设置：套餐形式
 	 */
@@ -110,6 +337,8 @@ public class PackageDO implements Serializable {
 	public Date getEffectiveDate() {
 		return effectiveDate;
 	}
+	public void setEffectiveTime(String effectiveTime) {this.effectiveTime = effectiveTime;}
+	public String getEffectiveTime(){return effectiveTime;}
 	/**
 	 * 设置：截至日期
 	 */
@@ -122,6 +351,8 @@ public class PackageDO implements Serializable {
 	public Date getExpiryDate() {
 		return expiryDate;
 	}
+	public void setExpiryTime(String expiryTime) {this.expiryTime = expiryTime;}
+	public String getExpiryTime() {return expiryTime;}
 	/**
 	 * 设置：套餐分类
 	 */
@@ -250,4 +481,13 @@ public class PackageDO implements Serializable {
 	 * 获取：失效
 	 */
 	public Long getLose(){return lose;}
+
+	public void setWholeStart(String wholeStart) {this.wholeStart = wholeStart;}
+	public String getWholeStart() {return wholeStart;}
+	public void setWholeEnd(String wholeEnd) {this.wholeEnd = wholeEnd;}
+	public String getWholeEnd(){return wholeEnd;}
+	public void setDanyiyh(String danyiyh) {this.danyiyh = danyiyh;}
+	public String getDanyiyh() {return danyiyh;}
+	public void setDanyiPrice(String danyiPrice) {this.danyiPrice = danyiPrice;}
+	public String getDanyiPrice() {return danyiPrice;}
 }
