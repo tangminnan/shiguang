@@ -31,8 +31,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-@Controller
-@RequestMapping("/information/package")
+
 public class PackageController {
     @Autowired
     private PackageService packageService;
@@ -281,7 +280,7 @@ public class PackageController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("information:package:edit")
-    public R update( PackageDO packages){
+    public R update(PackageDO packages){
         packageService.update(packages);
         return R.ok();
     }
@@ -292,7 +291,7 @@ public class PackageController {
     @PostMapping( "/remove")
     @ResponseBody
     @RequiresPermissions("information:package:remove")
-    public R remove(Long id){
+    public R remove( Long id){
         if(packageService.remove(id)>0){
             return R.ok();
         }
