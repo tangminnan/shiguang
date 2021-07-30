@@ -34,6 +34,19 @@
                                     <span style="color: red">*</span>
                                 </div>
                             </div>
+                            <!--启用状态-->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">销售状态：</label>
+                                <div class="col-sm-8">
+                                    <label class="radio-inline"> <input type="radio"
+                                                                        name="status" value="1"/> 禁用
+                                    </label>
+                                    <label class="radio-inline"> <input type="radio"
+                                                                        name="status" value="0"/> 启用
+                                    </label>
+                                    <span style="color: red">*</span>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">制造商简称：</label>
                                 <div class="col-sm-8">
@@ -280,6 +293,8 @@
                             </div>
                             <span style="color: red">*</span>
                         </div>
+                        <!--未删除-->
+                        <input id="state" name="state" value="1" type="hidden">
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <button type="submit" class="btn btn-primary">提交</button>

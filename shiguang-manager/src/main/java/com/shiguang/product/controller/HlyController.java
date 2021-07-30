@@ -87,6 +87,24 @@ public class HlyController {
     }
 
     /**
+     * 详情
+     */
+    @GetMapping("/detail/{id}")
+    @RequiresPermissions("product:hly:detail")
+    String detail(@PathVariable("id") Long id, Model model) {
+        HlyDO hly = hlyService.get(id);
+        model.addAttribute("hly", hly);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = hlyService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        return "product/hly/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
@@ -110,21 +128,21 @@ public class HlyController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:hly:remove")
-    public R remove(Long id) {
-        if (hlyService.remove(id) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("product:hly:remove")
+//    public R remove(Long id) {
+//        if (hlyService.remove(id) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -150,4 +168,33 @@ public class HlyController {
         return "/mfrs/mfrs/findHlyMfrs";
     }
 
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long id, Long enable) {
+        HlyDO hlyDO = new HlyDO();
+        hlyDO.setId(id);
+        hlyDO.setStatus(enable);
+        hlyService.update(hlyDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Long id) {
+        HlyDO hlyDO = new HlyDO();
+        hlyDO.setState(0L);
+        hlyDO.setId(id);
+        if (hlyService.updateState(hlyDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
 }
+

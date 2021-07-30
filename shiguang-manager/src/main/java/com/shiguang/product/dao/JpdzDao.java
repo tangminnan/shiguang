@@ -21,6 +21,10 @@ public interface JpdzDao {
 
     JpdzDO get(Long id);
 
+    List<JpdzDO> list(Map<String, Object> map);
+
+    int count(Map<String, Object> map);
+
     List<JpdzDO> listDz(Map<String, Object> map);
 
     int countDz(Map<String, Object> map);
@@ -39,5 +43,6 @@ public interface JpdzDao {
     //菜单联动显示
     List<BrandDO> choice(@Param("mfrsid") Integer mfrsid);
 
-
+    //删除修改状态
+    int updateState(JpdzDO jpdz);
 }

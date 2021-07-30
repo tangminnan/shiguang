@@ -16,10 +16,6 @@ public class BrandServiceImpl implements BrandService {
     @Autowired
     private BrandDao brandDao;
 
-    //	@Override
-//	public BrandDO get(Integer brandid){
-//		return brandDao.get(brandid);
-//	}
     //关联所有品牌维护所需表
     @Override
     public BrandDO getall(Integer brandid) {
@@ -29,6 +25,12 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public List<BrandDO> list(Map<String, Object> map) {
         return brandDao.list(map);
+    }
+
+    //    <!--//判断是否存在制造商代码-->
+    @Override
+    public List<BrandDO> haveNum(Map<String, Object> map) {
+        return brandDao.haveNum(map);
     }
 
     @Override
@@ -42,6 +44,7 @@ public class BrandServiceImpl implements BrandService {
         return brandDao.save(brand);
     }
 
+    //修改停用启用
     @Override
     public int update(BrandDO brand) {
         return brandDao.update(brand);
@@ -61,5 +64,11 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public List<GoodsDO> caidan(Integer mfrsid) {
         return brandDao.caidan(mfrsid);
+    }
+    //删除修改状态
+
+    @Override
+    public int updateState(BrandDO brand) {
+        return brandDao.updateState(brand);
     }
 }

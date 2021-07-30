@@ -18,8 +18,11 @@ public interface MfrsDao {
 
     MfrsDO get(Integer mfrsid);
 
+    //判断是否存在制造商代码
+    List<MfrsDO> haveNum(Map<String, Object> map);
+
     //	//-----商品查询-------
-    List<MfrsDO> mglist(Map<String, Object> map);
+    List<MfrsDO> list(Map<String, Object> map);
 
     //    <!--查询镜架制造商-->
     List<MfrsDO> producaList(Map<String, Object> map);

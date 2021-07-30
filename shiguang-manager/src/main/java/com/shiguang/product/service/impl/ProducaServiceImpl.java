@@ -43,6 +43,7 @@ public class ProducaServiceImpl implements ProducaService {
         return producaDao.save(produca);
     }
 
+    //修改停用启用
     @Override
     public int update(ProducaDO produca) {
         return producaDao.update(produca);
@@ -64,4 +65,9 @@ public class ProducaServiceImpl implements ProducaService {
         return producaDao.choice(mfrsid);
     }
 
+    //删除修改状态
+    @Override
+    public int updateState(ProducaDO produca) {
+        return producaDao.updateState(produca);
+    }
 }

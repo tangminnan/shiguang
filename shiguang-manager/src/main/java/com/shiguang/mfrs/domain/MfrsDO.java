@@ -60,6 +60,7 @@ public class MfrsDO implements Serializable {
     //状态(0:删除1:未删除)
     private Long state;
 
+
     /**
      * 设置：制造商id
      */

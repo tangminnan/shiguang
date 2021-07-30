@@ -77,7 +77,7 @@ public class BrandController {
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         //制造商
-        List<MfrsDO> mfrsDOList = mfrsService.mglist(map);
+        List<MfrsDO> mfrsDOList = mfrsService.list(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
         //支付
         List<PayDO> payDOList = payService.list(map);
@@ -103,7 +103,7 @@ public class BrandController {
     String add(Model model, BrandDO brand, HttpServletResponse resp) {
         Map<String, Object> map = new HashMap<>();
         //制造商
-        List<MfrsDO> mfrsDOList = mfrsService.mglist(map);
+        List<MfrsDO> mfrsDOList = mfrsService.list(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
         //镜架材质
         List<MaterialDO> materialDOList = materialService.list(map);
@@ -143,15 +143,14 @@ public class BrandController {
     @GetMapping("/edit/{brandid}")
     @RequiresPermissions("mfrs:brand:edit")
     String edit(@PathVariable("brandid") Integer brandid, Model model) {
-//        BrandDO brand = brandService.get(brandid);
-//        model.addAttribute("brand", brand);
+
         ////关联所有品牌维护所需表
         BrandDO brand = brandService.getall(brandid);
         model.addAttribute("brand", brand);
 
         Map<String, Object> map = new HashMap<>();
         //制造商
-        List<MfrsDO> mfrsDOList = mfrsService.mglist(map);
+        List<MfrsDO> mfrsDOList = mfrsService.list(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
         //商品
         List<GoodsDO> goodsDOList = goodsService.list(map);
@@ -190,21 +189,75 @@ public class BrandController {
     }
 
     /**
+     * 详情
+     */
+    @GetMapping("/detail/{brandid}")
+    @RequiresPermissions("mfrs:brand:detail")
+    String detail(@PathVariable("brandid") Integer brandid, Model model) {
+
+        ////关联所有品牌维护所需表
+        BrandDO brand = brandService.getall(brandid);
+        model.addAttribute("brand", brand);
+
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MfrsDO> mfrsDOList = mfrsService.list(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //商品
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
+        //镜架材质
+        List<MaterialDO> materialDOList = materialService.list(map);
+        model.addAttribute("materialDOList", materialDOList);
+        //材料分类
+        List<LensDO> lensDOList = lensService.list(map);
+        model.addAttribute("lensDOList", lensDOList);
+        //光度分类
+        List<LightDO> lightDOList = lightService.list(map);
+        model.addAttribute("lightDOList", lightDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        //镜片功能
+        List<FunctionDO> functionDOList = functionService.list(map);
+        model.addAttribute("functionDOList", functionDOList);
+        //渐进片分类
+        List<GradualDO> gradualDOList = gradualService.list(map);
+        model.addAttribute("gradualDOList", gradualDOList);
+        //使用分类
+        List<UsageDO> usageDOList = usageService.list(map);
+        model.addAttribute("usageDOList", usageDOList);
+        //抛弃型分类
+        List<TypeDO> typeDOList = typeService.list(map);
+        model.addAttribute("typeDOList", typeDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //支付
+        List<PayDO> payDOList = payService.list(map);
+        model.addAttribute("payDOList", payDOList);
+        return "mfrs/brand/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("mfrs:brand:add")
     public R save(BrandDO brand) {
+        if (null == brand.getGoodsid()) {
+            return R.error("商品类别不能为空");
+        }
+        //判断是否已存在
+        String brandnum = brand.getBrandnum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("brandnum", brandnum);
+        List<BrandDO> list = brandService.haveNum(map);
+        if (list.size() > 0) {
+            return R.error("品牌代码已存在");
+        }
         if (brandService.save(brand) > 0) {
-            //获取制造商中的商品id,依次循环遍历，保存到关系表中，走两个保存方法
-//            String[] str = mfrs.getGoodsid().split(",");
-//            for (int i=0; i<str.length;i++){
-//                MgDO mgDO = new MgDO();
-//                mgDO.setMfrsid(mfrs.getMfrsid());
-//                mgDO.setGoodsid(Integer.parseInt(str[i]));
-//                mgService.save(mgDO);
-//            }
             return R.ok();
         }
         return R.error();
@@ -221,21 +274,21 @@ public class BrandController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("mfrs:brand:remove")
-    public R remove(Integer brandid) {
-        if (brandService.remove(brandid) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("mfrs:brand:remove")
+//    public R remove(Integer brandid) {
+//        if (brandService.remove(brandid) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -260,5 +313,34 @@ public class BrandController {
     @RequiresPermissions("mfrs:brand:findmfrs")
     String findmfrs() {
         return "mfrs/brand/findmfrs";
+    }
+
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Integer brandid, Long enable) {
+        BrandDO brandDO = new BrandDO();
+        brandDO.setBrandid(brandid);
+        brandDO.setStatus(enable);
+        brandService.update(brandDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Integer brandid) {
+        BrandDO brandDO = new BrandDO();
+        brandDO.setState(0L);
+        brandDO.setBrandid(brandid);
+        if (brandService.updateState(brandDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
     }
 }

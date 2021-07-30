@@ -76,8 +76,8 @@ public class JpdzController {
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<JpdzDO> jpdzList = jpdzService.listDz(query);
-        int total = jpdzService.countDz(query);
+        List<JpdzDO> jpdzList = jpdzService.list(query);
+        int total = jpdzService.count(query);
         PageUtils pageUtils = new PageUtils(jpdzList, total);
         return pageUtils;
     }
@@ -162,6 +162,48 @@ public class JpdzController {
     }
 
     /**
+     * 详情
+     */
+    @GetMapping("/detail/{id}")
+    @RequiresPermissions("product:jpdz:detail")
+    String detail(@PathVariable("id") Long id, Model model) {
+        JpdzDO jpdz = jpdzService.get(id);
+        model.addAttribute("jpdz", jpdz);
+        Map<String, Object> map = new HashMap<>();
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        //球镜
+        List<SphDO> sphDOList = sphService.list(map);
+        model.addAttribute("sphDOList", sphDOList);
+        //柱镜
+        List<CylDO> cylDOList = cylService.list(map);
+        model.addAttribute("cylDOList", cylDOList);
+        //跨度
+        List<SpanDO> spanDOList = spanService.list(map);
+        model.addAttribute("spanDOList", spanDOList);
+        //下加光
+        List<LightbelowDO> lightbelowDOList = lightbelowService.list(map);
+        model.addAttribute("lightbelowDOList", lightbelowDOList);
+        //材料分类
+        List<LensDO> lensDOList = lensService.list(map);
+        model.addAttribute("lensDOList", lensDOList);
+        //光度分类
+        List<LightDO> lightDOList = lightService.list(map);
+        model.addAttribute("lightDOList", lightDOList);
+        //渐进片分类
+        List<GradualDO> gradualDOList = gradualService.list(map);
+        model.addAttribute("gradualDOList", gradualDOList);
+        //镜片功能
+        List<FunctionDO> functionDOList = functionService.list(map);
+        model.addAttribute("functionDOList", functionDOList);
+        return "product/jpdz/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
@@ -185,18 +227,18 @@ public class JpdzController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:jpdz:remove")
-    public R remove(Long id) {
-        if (jpdzService.remove(id) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("product:jpdz:remove")
+//    public R remove(Long id) {
+//        if (jpdzService.remove(id) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 删除
@@ -224,4 +266,34 @@ public class JpdzController {
     String findmfrs() {
         return "/mfrs/mfrs/findJpcpMfrs";
     }
+
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long id, Long enable) {
+        JpdzDO jpdzDO = new JpdzDO();
+        jpdzDO.setId(id);
+        jpdzDO.setStatus(enable);
+        jpdzService.update(jpdzDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Long id) {
+        JpdzDO jpdzDO = new JpdzDO();
+        jpdzDO.setState(0L);
+        jpdzDO.setId(id);
+        if (jpdzService.updateState(jpdzDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
 }
+

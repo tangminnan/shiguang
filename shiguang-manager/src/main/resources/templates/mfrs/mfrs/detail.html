@@ -107,10 +107,10 @@
                             <label class="col-sm-3 control-label">开票状态：</label>
                             <div class="col-sm-8">
                                 <label class="radio-inline"> <input type="radio" th:field="*{mfrs.invoiceid}"
-                                                                    name="invoiceid" value="1" readonly/> 开票
+                                                                    name="invoiceid" value="1" disabled/> 开票
                                 </label>
                                 <label class="radio-inline"> <input type="radio" th:field="*{mfrs.invoiceid}"
-                                                                    name="invoiceid" value="2" readonly/> 不开票
+                                                                    name="invoiceid" value="2" disabled/> 不开票
                                 </label>
                             </div>
                         </div>
@@ -168,19 +168,14 @@
                             <div class="col-sm-8">
                                 <label class="radio-inline"> <input type="radio"
                                                                     th:field="*{mfrs.status}" name="status" value="1"
-                                                                    readonly/>
+                                                                    disabled/>
                                     禁用
                                 </label>
                                 <label class="radio-inline"> <input type="radio"
                                                                     th:field="*{mfrs.status}" name="status" value="0"
-                                                                    readonly/>
+                                                                    disabled/>
                                     启用
                                 </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-8 col-sm-offset-3">
-                                <button type="submit" class="btn btn-primary">提交</button>
                             </div>
                         </div>
                     </form>

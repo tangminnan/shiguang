@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${parts.id}" type="hidden">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品代码：</label>
+                            <div class="col-sm-8">
+                                <input id="producNum" name="producNum" th:value="${parts.producNum}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品条码：</label>
+                            <div class="col-sm-8">
+                                <input id="producCode" name="producCode" th:value="${parts.producCode}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品名称：</label>
+                            <div class="col-sm-8">
+                                <input id="producName" name="producName" th:value="${parts.producName}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">制造商：</label>
+                            <div class="col-sm-8">
+                                <input th:value="${parts.mfrsname}"
+                                       class="form-control"
+                                       type="text" readonly>
+                                <input id="mfrsid" name="mfrsid" th:value="${parts.mfrsid}"
+                                       class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品品种：</label>
+                            <div class="col-sm-8">
+                                <input th:value="${parts.brandname}" class="form-control"
+                                       type="text" readonly>
+                                <input id="brandid" name="brandid" th:value="${parts.brandid}" class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">厂家型号：</label>
+                            <div class="col-sm-8">
+                                <input id="factory" name="factory" th:value="${parts.factory}" class="form-control"
+                                       type="text" onkeyup="liandong1()"
+                                       onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">型号：</label>
+                            <div class="col-sm-8">
+                                <input th:value="${parts.producFactory}"
+                                       class="form-control" type="text" readonly>
+                                <input id="producFactory" name="producFactory" th:value="${parts.producFactory}"
+                                       class="form-control" type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品编号：</label>
+                            <div class="col-sm-8">
+                                <input id="proid" name="proid" th:value="${parts.proid}" class="form-control"
+                                       type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">配件型：</label>
+                            <div class="col-sm-8">
+                                <select id="partsStyle" name="partsStyle" class="form-control" disabled>
+                                    <option></option>
+                                    <option value="框镜" th:field="*{parts.partsStyle}">框镜</option>
+                                    <option value="隐形" th:field="*{parts.partsStyle}">隐形</option>
+                                </select>
+                                <input id="partsStyles" name="partsStyles" th:value="${parts.partsStyle}"
+                                       class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">计量单位：</label>
+                            <div class="col-sm-8">
+                                <select name="unitid" id="unitid" th:value="${parts.unitid}" class="form-control"
+                                        data-actions-box="false" data-size="5" disabled>
+                                    <option th:each="ls:${unitDOList}"
+                                            th:text="${ls.unitname}"
+                                            th:value="${ls.unitid}"></option>
+                                </select>
+                                <input id="unitids" name="unitids" th:value="${parts.unitid}" class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">批号管理：</label>
+                            <div class="col-sm-8">
+                                <div class="col-sm-8">
+                                    <label class="radio-inline"> <input type="radio" th:field="*{parts.batchid}"
+                                                                        name="batchid" value="1" disabled/> 是
+                                    </label>
+                                    <label class="radio-inline"> <input type="radio" th:field="*{parts.batchid}"
+                                                                        name="batchid" value="2" disabled/> 否
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">折射率：</label>
+                            <div class="col-sm-8">
+                                <select id="refractivityid" name="refractivityid" th:value="${parts.refractivityid}"
+                                        class="form-control"
+                                        data-actions-box="false" data-size="5" disabled>
+                                    <option th:each="ls:${refractivityDOList}"
+                                            th:text="${ls.refractivityvalue}"
+                                            th:value="${ls.refractivityid}"
+                                    ></option>
+                                </select>
+                                <input id="refractivityids" name="refractivityids" th:value="${parts.refractivityid}"
+                                       class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">税率(%)：</label>
+                            <div class="col-sm-8">
+                                <input id="tax" name="tax" th:value="${parts.tax}" class="form-control" type="text"
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">含税单价：</label>
+                            <div class="col-sm-8">
+                                <input id="taxPrice" name="taxPrice" th:value="${parts.taxPrice}" class="form-control"
+                                       type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">批发价格：</label>
+                            <div class="col-sm-8">
+                                <input id="tradePrice" name="tradePrice" th:value="${parts.tradePrice}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">调货成本：</label>
+                            <div class="col-sm-8">
+                                <input id="transferPrice" name="transferPrice" th:value="${parts.transferPrice}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标准零售价格：</label>
+                            <div class="col-sm-8">
+                                <input id="retailPrice" name="retailPrice" th:value="${parts.retailPrice}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/product/parts/edit.js"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        //计量单位
+        var unitids = $("input[name='unitids']").val();
+        $("#unitid").find("[value='" + unitids + "']").attr("selected", true);
+        //折射率
+        var refractivityids = $("input[name='refractivityids']").val();
+        $("#refractivityid").find("[value='" + refractivityids + "']").attr("selected", true);
+        //配件型
+        var partsStyles = $("input[name='partsStyles']").val();
+        $("#partsStyle").find("[value='" + partsStyles + "']").attr("selected", true);
+
+    });
+</script>
+</body>
+</html>

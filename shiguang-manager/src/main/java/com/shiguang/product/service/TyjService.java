@@ -35,4 +35,7 @@ public interface TyjService {
 
     //菜单联动显示
     List<BrandDO> choice(Integer mfrsid);
+
+    //删除修改状态
+    int updateState(TyjDO tyj);
 }

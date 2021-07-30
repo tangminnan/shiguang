@@ -311,7 +311,6 @@
             <version>2.1</version>
         </dependency>
 
-<<<<<<< HEAD
         <!--war包部署需要-->
         <!--&lt;!&ndash; 移除嵌入式tomcat插件 &ndash;&gt;-->
 
@@ -370,8 +369,6 @@
           	<!--<groupId>org.scala-lang</groupId>-->
           	<!--<artifactId>scala-library</artifactId>-->
           	<!--<version>2.11.0</version>-->
-          <!--</dependency>-->
-=======
 
         <!-- war包部署-->
         <dependency>
@@ -390,8 +387,6 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
-
->>>>>>> c2f82e462f989e8bd1048e5555e41e00f9cc6c93
     </dependencies>
     <build>
         <plugins>
@@ -402,20 +397,6 @@
                     <executable>true</executable>
                 </configuration>
             </plugin>
-<<<<<<< HEAD
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<source>1.8</source>-->
-                    <!--<target>1.8</target>-->
-                    <!--<compilerArguments>-->
-                        <!--<extdirs>F:\shiguang\shiguang\shiguang-manager\lib</extdirs>-->
-                    <!--</compilerArguments>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-=======
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -423,12 +404,11 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <compilerArguments>
-                        <extdirs>F:\sg\shiguang\shiguang-manager\lib</extdirs>
+                        <extdirs>F:\shiguang\shiguang\shiguang-manager\lib</extdirs>
                     </compilerArguments>
                 </configuration>
             </plugin>
 
->>>>>>> c2f82e462f989e8bd1048e5555e41e00f9cc6c93
         </plugins>
     </build>
     <repositories>

@@ -76,6 +76,7 @@ public class HcController {
     String edit(@PathVariable("id") Long id, Model model) {
         HcDO hc = hcService.get(id);
         model.addAttribute("hc", hc);
+        String sm = hc.getSmall();
         Map<String, Object> map = new HashMap<>();
         //制造商
         List<MgDO> mfrsDOList = hcService.mglist(map);
@@ -84,6 +85,24 @@ public class HcController {
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
         return "product/hc/edit";
+    }
+
+    /**
+     * 详情
+     */
+    @GetMapping("/detail/{id}")
+    @RequiresPermissions("product:hc:detail")
+    String detail(@PathVariable("id") Long id, Model model) {
+        HcDO hc = hcService.get(id);
+        model.addAttribute("hc", hc);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = hcService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        return "product/hc/detail";
     }
 
     /**
@@ -110,21 +129,21 @@ public class HcController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:hc:remove")
-    public R remove(Long id) {
-        if (hcService.remove(id) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("product:hc:remove")
+//    public R remove(Long id) {
+//        if (hcService.remove(id) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -148,5 +167,34 @@ public class HcController {
     @RequiresPermissions("product:hc:findmfrs")
     String findmfrs() {
         return "/mfrs/mfrs/findHcMfrs";
+    }
+
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long id, Long enable) {
+        HcDO hcDO = new HcDO();
+        hcDO.setId(id);
+        hcDO.setStatus(enable);
+        hcService.update(hcDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Long id) {
+        HcDO hcDO = new HcDO();
+        hcDO.setState(0L);
+        hcDO.setId(id);
+        if (hcService.updateState(hcDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
     }
 }

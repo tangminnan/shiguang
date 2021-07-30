@@ -3,9 +3,6 @@
 
 <mapper namespace="com.shiguang.mfrs.dao.BrandDao">
 
-    <!--<select id="get" resultType="com.shiguang.mfrs.domain.BrandDO">-->
-    <!--select `brandid`,`brandnum`,`brandname`,`goodsid`,`materialid`,`materialname`,`lens_id`,`lens_name`,`light_id`,`light_name`,`refractivityid`,`refractivityvalue`,`function_id`,`function_name`,`gradual_id`,`gradual_name`,`usage_id`,`usage_name`,`type_id`,`type_name`,`registration`,`mfrsid`,`mfrsname`,`unitid`,`address`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,`productionkey`,`status` from c_brand where brandid = #{value}-->
-    <!--</select>-->
     <select id="getall" resultType="com.shiguang.mfrs.domain.BrandDO">
         select b.`brandid`,b.`brandnum`,b.`brandname`,b.`goodsid`,good.`goodsname`,
         b.`materialid`,ma.`materialname`,
@@ -14,7 +11,7 @@
         b.`gradual_id`,gr.`gradual_name`,
         b.`usage_id`,us.`usage_name`,b.`type_id`,ty.`type_name`,b.`registration`,
         b.`mfrsid`,mfrs.`mfrsname`,b.`unitid`,b.`address`,b.`payid`,b.`batchid`,b.`factory`,b.`money`,b.`shorthandcode`,b.`productionkey`,
-        b.`state_id`,sta.`status`
+        b.`status`,b.`state`
         from c_brand b
             left join c_goods good on b.goodsid=good.goodsid
             left join c_material ma on b.materialid=ma.materialid
@@ -26,65 +23,25 @@
             left join p_usage us on b.usage_id=us.usage_id
             left join p_type ty on b.type_id=ty.type_id
             left join c_mfrs mfrs on b.mfrsid=mfrs.mfrsid
-            left join c_state sta on b.state_id=sta.state_id
             where brandid = #{value}
 	</select>
-    <!--select m.mfrsname from  c_brand b left join c_mfrs m on b.mfrsid=m.mfrsid where b.mfrsid=78;-->
     <select id="list" resultType="com.shiguang.mfrs.domain.BrandDO">
-        select
-        b.`brandid`,b.`brandnum`,b.`brandname`,b.`goodsid`,good.`goodsname`,b.`materialid`,b.`materialname`,b.`lens_id`,b.`lens_name`,b.`light_id`,b.`light_name`,b.`refractivityid`,b.`refractivityvalue`,b.`function_id`,b.`function_name`,b.`gradual_id`,b.`gradual_name`,b.`usage_id`,b.`usage_name`,b.`type_id`,b.`type_name`,b.`registration`,b.`mfrsid`,m.`mfrsname`,b.`unitid`,b.`address`,b.`payid`,b.`batchid`,b.`factory`,b.`money`,b.`shorthandcode`,b.`productionkey`,b.`state_id`,b.`status`
+       select b.`status`,b.`state`,
+        b.`brandid`,b.`brandnum`,b.`brandname`,b.`goodsid`,good.`goodsname`,b.`materialid`,b.`materialname`,b.`lens_id`,b.`lens_name`,b.`light_id`,
+        b.`light_name`,b.`refractivityid`,b.`refractivityvalue`,b.`function_id`,b.`function_name`,b.`gradual_id`,b.`gradual_name`,b.`usage_id`,
+        b.`usage_name`,b.`type_id`,b.`type_name`,b.`registration`,b.`mfrsid`,m.`mfrsname`,b.`unitid`,b.`address`,b.`payid`,b.`batchid`,b.`factory`,
+        b.`money`,b.`shorthandcode`,b.`productionkey`
         from c_brand b left join c_mfrs m on b.mfrsid=m.mfrsid left join c_goods good on b.goodsid=good.goodsid
-        <where>
-            <if test="brandid != null and brandid != ''">and b.brandid = #{brandid}</if>
-            <if test="brandnum != null and brandnum != ''">and b.brandnum = #{brandnum}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-            <if test="goodsid != null and goodsid != ''">and b.goodsid = #{goodsid}</if>
-            <if test="goodsname != null and goodsname != ''">and good.goodsname = #{goodsname}</if>
-            <if test="materialid != null and materialid != ''">and b.materialid = #{materialid}</if>
-            <if test="materialname != null and materialname != ''">and b.materialname = #{materialname}</if>
-            <if test="lensId != null and lensId != ''">and b.lens_id = #{lensId}</if>
-            <if test="lensName != null and lensName != ''">and b.lens_name = #{lensName}</if>
-            <if test="lightId != null and lightId != ''">and b.light_id = #{lightId}</if>
-            <if test="lightName != null and lightName != ''">and b.light_name = #{lightName}</if>
-            <if test="refractivityid != null and refractivityid != ''">and b.refractivityid =
-                #{refractivityid}
-            </if>
-            <if test="refractivityvalue != null and refractivityvalue != ''">and b.refractivityvalue =
-                #{refractivityvalue}
-            </if>
-            <if test="functionId != null and functionId != ''">and b.function_id = #{functionId}</if>
-            <if test="functionName != null and functionName != ''">and b.function_name = #{functionName}</if>
-            <if test="gradualId != null and gradualId != ''">and b.gradual_id = #{gradualId}</if>
-            <if test="gradualName != null and gradualName != ''">and b.gradual_name = #{gradualName}</if>
-            <if test="usageId != null and usageId != ''">and b.usage_id = #{usageId}</if>
-            <if test="usageName != null and usageName != ''">and b.usage_name = #{usageName}</if>
-            <if test="typeId != null and typeId != ''">and b.type_id = #{typeId}</if>
-            <if test="typeName != null and typeName != ''">and b.type_name = #{typeName}</if>
-            <if test="registration != null and registration != ''">and b.registration = #{registration}</if>
-            <if test="mfrsid != null and mfrsid != ''">and b.mfrsid = #{mfrsid}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="unitid != null and unitid != ''">and b.unitid = #{unitid}</if>
-            <if test="address != null and address != ''">and b.address = #{address}</if>
-            <if test="payid != null and payid != ''">and b.payid = #{payid}</if>
-            <if test="batchid != null and batchid != ''">and b.batchid = #{batchid}</if>
-            <if test="factory != null and factory != ''">and b.factory = #{factory}</if>
-            <if test="money != null and money != ''">and b.money = #{money}</if>
-            <if test="shorthandcode != null and shorthandcode != ''">and b.shorthandcode = #{shorthandcode}</if>
-            <if test="productionkey != null and productionkey != ''">and b.productionkey = #{productionkey}</if>
-            <if test="stateId != null and stateId != ''">and b.state_id = #{stateId}</if>
-            <if test="status != null and status != ''">and b.status = #{status}</if>
-        </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-                order by brandid
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
+		where b.state= 1
+        group by b.brandid order by b.status asc ,b.brandid asc
+    </select>
+    <select id="haveNum" resultType="com.shiguang.mfrs.domain.BrandDO">
+        select `brandid`,`brandnum`,`brandname`,`goodsid`,`goodsname`,`materialid`,`materialname`,`lens_id`,`lens_name`,`light_id`,
+        `light_name`,`refractivityid`,`refractivityvalue`,`function_id`,`function_name`,`gradual_id`,`gradual_name`,`usage_id`,`usage_name`,
+        `type_id`,`type_name`,`registration`,`mfrsid`,`mfrsname`,`unitid`,`unitname`,`address`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,
+        `productionkey`,`status`,`state`
+        from c_brand
+        where brandnum = #{brandnum} order by brandid
     </select>
 
 
@@ -125,8 +82,8 @@
             <if test="money != null and money != ''">and money = #{money}</if>
             <if test="shorthandcode != null and shorthandcode != ''">and shorthandcode = #{shorthandcode}</if>
             <if test="productionkey != null and productionkey != ''">and productionkey = #{productionkey}</if>
-            <if test="stateId != null and stateId != ''">and state_id = #{stateId}</if>
             <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="state != null and state != ''">and state = #{state}</if>
         </where>
     </select>
     <insert id="save" parameterType="com.shiguang.mfrs.domain.BrandDO" useGeneratedKeys="true" keyProperty="brandid">
@@ -163,8 +120,8 @@
 			`money`,
 			`shorthandcode`,
 			`productionkey`,
-			`state_id`,
-			`status`
+			`status`,
+			`state`
 		)
 		values
 		(
@@ -199,8 +156,8 @@
 			#{money},
 			#{shorthandcode},
 			#{productionkey},
-			#{stateId},
-			#{status}
+			#{status},
+			#{state}
 		)
 	</insert>
 
@@ -238,8 +195,8 @@
             <if test="money != null">`money` = #{money},</if>
             <if test="shorthandcode != null">`shorthandcode` = #{shorthandcode},</if>
             <if test="productionkey != null">`productionkey` = #{productionkey},</if>
-            <if test="stateId != null">`state_id` = #{stateId},</if>
             <if test="status != null">`status` = #{status}</if>
+            <if test="state != null">`state` = #{state}</if>
         </set>
         where brandid = #{brandid}
     </update>
@@ -261,5 +218,8 @@
             <if test="mfrsid != null and mfrsid != ''">and mg.mfrsid = #{mfrsid}</if>
         </where>
     </select>
-
+    <!--删除状态修改-->
+    <update id="updateState" parameterType="com.shiguang.mfrs.domain.BrandDO">
+    update c_brand set `state` = #{state} where brandid = #{brandid}
+    </update>
 </mapper>

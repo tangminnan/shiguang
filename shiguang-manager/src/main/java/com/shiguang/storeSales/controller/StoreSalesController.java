@@ -20,7 +20,7 @@ import com.shiguang.packageManager.domain.PackageDO;
 import com.shiguang.packageManager.domain.PackageInfoDO;
 import com.shiguang.packageManager.service.PackageInfoService;
 import com.shiguang.packageManager.service.PackageService;
-import com.shiguang.product.domain.*;
+import com.shiguang.product.domain.YxcpDO;
 import com.shiguang.product.service.*;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
@@ -168,56 +168,56 @@ public class StoreSalesController {
         List<ProcessAskDO> proList = optometryService.processlist(map);
         model.addAttribute("proList", proList);
         List<EyesWay> eyesWayList = salesService.findWay(map);
-        model.addAttribute("eyesWayList",eyesWayList);
+        model.addAttribute("eyesWayList", eyesWayList);
         List<AdditionalDO> addlist = additionalService.list(map);
         model.addAttribute("addlist", addlist);
         UserDO userDO = ShiroUtils.getUser();
         String storeName = userDO.getStore();
         model.addAttribute("storeName", storeName);
         String saleName = ShiroUtils.getUser().getName();
-        model.addAttribute("saleName",saleName);
+        model.addAttribute("saleName", saleName);
         String store = ShiroUtils.getUser().getStore();
-        map.put("stores",store);
+        map.put("stores", store);
         List<GiveawayDO> giveawayDOList = giveawayService.list(map);
-        model.addAttribute("giveawayDOList",giveawayDOList);
+        model.addAttribute("giveawayDOList", giveawayDOList);
         //处方
-        Map<String,Object> map1 = new HashMap<>();
-        map1.put("cardNumber",cardNumber);
+        Map<String, Object> map1 = new HashMap<>();
+        map1.put("cardNumber", cardNumber);
         List<ResultDO> resultDOList = resultService.list(map1);
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String datetime = sdf.format(date);
         datetime = datetime + " 00:00:00";
-        Map<String,Object> map2 = new HashMap<>();
-        map2.put("cardNumber",cardNumber);
+        Map<String, Object> map2 = new HashMap<>();
+        map2.put("cardNumber", cardNumber);
         List<Conclusion> conclusionList = salesService.conclusionList(map2);
-        model.addAttribute("conclusionList",conclusionList);
+        model.addAttribute("conclusionList", conclusionList);
         SimpleDateFormat sdfs = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        if (null != conclusionList){
-            for (Conclusion c: conclusionList){
+        if (null != conclusionList) {
+            for (Conclusion c : conclusionList) {
                 //String ygtime = sdfs.format(c.getCreateTime());
                 c.setYanguangTime(sdfs.format(c.getCreateTime()));
-                if ("1".equals(c.getChufangType())){
+                if ("1".equals(c.getChufangType())) {
                     c.setChufang("近用");
-                } else if ("2".equals(c.getChufangType())){
+                } else if ("2".equals(c.getChufangType())) {
                     c.setChufang("远用");
-                } else if ("3".equals(c.getChufangType())){
+                } else if ("3".equals(c.getChufangType())) {
                     c.setChufang("渐进/双光");
-                } else if ("4".equals(c.getChufangType())){
+                } else if ("4".equals(c.getChufangType())) {
                     c.setChufang("中用");
-                } else if ("5".equals(c.getChufangType())){
+                } else if ("5".equals(c.getChufangType())) {
                     c.setChufang("隐形");
-                } else if ("6".equals(c.getChufangType())){
+                } else if ("6".equals(c.getChufangType())) {
                     c.setChufang("角膜塑形镜");
-                }else if ("7".equals(c.getChufangType())){
+                } else if ("7".equals(c.getChufangType())) {
                     c.setChufang("视觉训练");
-                } else if ("8".equals(c.getChufangType())){
+                } else if ("8".equals(c.getChufangType())) {
                     c.setChufang("角膜塑形镜VST");
-                } else if ("9".equals(c.getChufangType())){
+                } else if ("9".equals(c.getChufangType())) {
                     c.setChufang("角膜塑形镜CRT");
-                } else if ("10".equals(c.getChufangType())){
+                } else if ("10".equals(c.getChufangType())) {
                     c.setChufang("RGP");
-                } else if ("11".equals(c.getChufangType())){
+                } else if ("11".equals(c.getChufangType())) {
                     c.setChufang("药品");
                 }
             }
@@ -232,28 +232,28 @@ public class StoreSalesController {
     @PostMapping("/save")
     @RequiresPermissions("information:store:add")
     public R save(SalesDO salesDO) {
-        if (null == salesDO.getIsJp() || null == salesDO.getIsJj()){
+        if (null == salesDO.getIsJp() || null == salesDO.getIsJj()) {
             salesDO.setIsJp(0L);
             salesDO.setIsJj("无");
         }
         if ("镜架".equals(salesDO.getStoreDescribe())
                 || "镜片".equals(salesDO.getStoreDescribe())
-                || "太阳镜".equals(salesDO.getStoreDescribe())){
+                || "太阳镜".equals(salesDO.getStoreDescribe())) {
             if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
                 return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
             }
         }
-        Long saleNumber =  GuuidUtil.getUUID();
-        salesDO.setSaleNumber("X"+saleNumber);
-        if(null != salesDO){
-            if (null != salesDO.getAdditionalCost()){
-                salesDO.setAdditionalCost(salesDO.getAdditionalCost().substring(0,salesDO.getAdditionalCost().length()-1));
+        Long saleNumber = GuuidUtil.getUUID();
+        salesDO.setSaleNumber("X" + saleNumber);
+        if (null != salesDO) {
+            if (null != salesDO.getAdditionalCost()) {
+                salesDO.setAdditionalCost(salesDO.getAdditionalCost().substring(0, salesDO.getAdditionalCost().length() - 1));
             }
-            if (null != salesDO.getGiveName()){
-                salesDO.setGiveName(salesDO.getGiveName().substring(0,salesDO.getGiveName().length()-1));
+            if (null != salesDO.getGiveName()) {
+                salesDO.setGiveName(salesDO.getGiveName().substring(0, salesDO.getGiveName().length() - 1));
             }
-            if (null != salesDO.getProcessAsk()){
-                salesDO.setProcessAsk(salesDO.getProcessAsk().substring(0,salesDO.getProcessAsk().length()-1));
+            if (null != salesDO.getProcessAsk()) {
+                salesDO.setProcessAsk(salesDO.getProcessAsk().substring(0, salesDO.getProcessAsk().length() - 1));
             }
 //            if (null != salesDO.getStoreName()){
 //                salesDO.setStoreName(salesDO.getStoreName().substring(0,salesDO.getStoreName().length()-3));
@@ -266,8 +266,13 @@ public class StoreSalesController {
 //            }
         }
         //Model model=null;
+<<<<<<< HEAD
         if ("2".equals(salesDO.getChufang())){
             if (salesDO.getRecipelwlType() == 1){
+=======
+        if ("2".equals(salesDO.getChufang())) {
+            if (salesDO.getRecipelType() == 1) {
+>>>>>>> 8ab39c1aa472f433caf74281658d3a965d62bf87
                 KjjyDO kjjyDO = new KjjyDO();
                 kjjyDO.setCardNumber(salesDO.getMemberNumber());
                 kjjyDO.setKjjyPrescriptionType(salesDO.getRecipelType().toString());
@@ -289,7 +294,11 @@ public class StoreSalesController {
                 kjjyDO.setKjjyVaod(salesDO.getRightyuanyongVA());
                 kjjyDO.setKjjyVaos(salesDO.getLeftyuanyongVA());
                 kjjyService.save(kjjyDO);
+<<<<<<< HEAD
             } else if (salesDO.getRecipelwlType() == 2){
+=======
+            } else if (salesDO.getRecipelType() == 2) {
+>>>>>>> 8ab39c1aa472f433caf74281658d3a965d62bf87
                 KjyyDO kjyyDO = new KjyyDO();
                 kjyyDO.setCardNumber(salesDO.getMemberNumber());
                 kjyyDO.setKjyyPrescriptionType(salesDO.getRecipelType().toString());
@@ -311,7 +320,11 @@ public class StoreSalesController {
                 kjyyDO.setKjyyVaod(salesDO.getRightyuanyongVA());
                 kjyyDO.setKjyyVaos(salesDO.getLeftyuanyongVA());
                 kjyyService.save(kjyyDO);
+<<<<<<< HEAD
             } else if (salesDO.getRecipelwlType() == 3){
+=======
+            } else if (salesDO.getRecipelType() == 3) {
+>>>>>>> 8ab39c1aa472f433caf74281658d3a965d62bf87
                 SgjjDO sgjjDO = new SgjjDO();
                 sgjjDO.setCardNumber(salesDO.getMemberNumber());
                 sgjjDO.setSgjjPrescriptionType(salesDO.getRecipelType().toString());
@@ -329,7 +342,11 @@ public class StoreSalesController {
                 sgjjDO.setSgjjYyvaod(salesDO.getRightyuanyongVA());
                 sgjjDO.setSgjjYyvaos(salesDO.getLeftyuanyongVA());
                 sgjjService.save(sgjjDO);
+<<<<<<< HEAD
             } else if (salesDO.getRecipelwlType() == 4){
+=======
+            } else if (salesDO.getRecipelType() == 4) {
+>>>>>>> 8ab39c1aa472f433caf74281658d3a965d62bf87
                 ZyDO zyDO = new ZyDO();
                 zyDO.setCardNumber(salesDO.getMemberNumber());
                 zyDO.setZyPrescriptionType(salesDO.getRecipelType().toString());
@@ -351,7 +368,11 @@ public class StoreSalesController {
                 zyDO.setZyVaod(salesDO.getRightyuanyongVA());
                 zyDO.setZyVaos(salesDO.getLeftyuanyongVA());
                 zyService.save(zyDO);
+<<<<<<< HEAD
             } else if (salesDO.getRecipelwlType() == 5){
+=======
+            } else if (salesDO.getRecipelType() == 5) {
+>>>>>>> 8ab39c1aa472f433caf74281658d3a965d62bf87
                 RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
                 rxjmjcjDO.setCardNumber(salesDO.getMemberNumber());
                 rxjmjcjDO.setRxPrescriptionType(salesDO.getRecipelType().toString());
@@ -367,7 +388,11 @@ public class StoreSalesController {
                 rxjmjcjDO.setRxVaod(salesDO.getRightyuanyongVA());
                 rxjmjcjDO.setRxVaos(salesDO.getLeftyuanyongVA());
                 rxjmjcjService.save(rxjmjcjDO);
+<<<<<<< HEAD
             } else if (salesDO.getRecipelwlType() == 7){
+=======
+            } else if (salesDO.getRecipelType() == 7) {
+>>>>>>> 8ab39c1aa472f433caf74281658d3a965d62bf87
                 SjxlDO sjxlDO = new SjxlDO();
                 sjxlDO.setCardNumber(salesDO.getMemberNumber());
                 sjxlDO.setSjxlPrescriptionType(salesDO.getRecipelType().toString());
@@ -385,7 +410,11 @@ public class StoreSalesController {
                 sjxlDO.setSjxlYyvaod(salesDO.getRightyuanyongVA());
                 sjxlDO.setSjxlYyvaos(salesDO.getLeftyuanyongVA());
                 sjxlService.save(sjxlDO);
+<<<<<<< HEAD
             } else if (salesDO.getRecipelwlType() == 10){
+=======
+            } else if (salesDO.getRecipelType() == 10) {
+>>>>>>> 8ab39c1aa472f433caf74281658d3a965d62bf87
                 RgpDO rgpDO = new RgpDO();
                 rgpDO.setCardNumber(salesDO.getMemberNumber());
                 rgpDO.setRgpPrescriptionType(salesDO.getRecipelType().toString());
@@ -405,7 +434,11 @@ public class StoreSalesController {
                 rgpDO.setRgpSyjpod(salesDO.getRightPinpai());
                 rgpDO.setRgpSyjpos(salesDO.getLeftPinpai());
                 rgpService.save(rgpDO);
+<<<<<<< HEAD
             } else if (salesDO.getRecipelwlType() == 11){
+=======
+            } else if (salesDO.getRecipelType() == 11) {
+>>>>>>> 8ab39c1aa472f433caf74281658d3a965d62bf87
                 YaopinDO yaopinDO = new YaopinDO();
                 yaopinDO.setCardNumber(salesDO.getMemberNumber());
                 yaopinDO.setYpPrescriptionType(salesDO.getRecipelType().toString());
@@ -427,7 +460,7 @@ public class StoreSalesController {
         costDO.setType("配镜单");
         costService.save(costDO);
         salesDO.setPeijingTime(new Date());
-        if (salesService.save(salesDO) > 0){
+        if (salesService.save(salesDO) > 0) {
             //this.editsetle(salesDO,model);
             return R.ok();
         }
@@ -439,7 +472,7 @@ public class StoreSalesController {
      */
     @GetMapping("/youji/{cardNumber}")
     @RequiresPermissions("information:store:youji")
-    String youji(@PathVariable("cardNumber") String cardNumber,Model model) {
+    String youji(@PathVariable("cardNumber") String cardNumber, Model model) {
         MemberDO memberDO = memberService.getCardNumber(cardNumber);
         if (memberDO.getSex() == 0) {
             memberDO.setSexx("男");
@@ -475,9 +508,9 @@ public class StoreSalesController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        query.put("packageType",params.get("packageType"));
         List<PackageDO> packageDOList = packageService.list(query);
-        if (null != packageDOList && packageDOList.size() > 0){
-            for (PackageDO packageDO : packageDOList){
-                if (currentTime.compareTo(packageDO.getExpiryDate()) > 0){
+        if (null != packageDOList && packageDOList.size() > 0) {
+            for (PackageDO packageDO : packageDOList) {
+                if (currentTime.compareTo(packageDO.getExpiryDate()) > 0) {
                     packageDO.setLose(0L);
                 } else {
                     packageDO.setLose(1L);
@@ -567,14 +600,14 @@ public class StoreSalesController {
 //        int total = producaService.countmateria(query);
         //query.put("goodsType","镜架");
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO){
+        if (null != positionDO) {
             positionName = positionDO.getPositionName();
         }
-        query.put("positionName",positionName);
+        query.put("positionName", positionName);
         List<StockDO> stockDOList = stockService.listJiajia(query);
         int total = stockService.countJiajia(query);
         PageUtils pageUtils = new PageUtils(stockDOList, total);
@@ -586,13 +619,13 @@ public class StoreSalesController {
      */
     @GetMapping("/jingpian/{rightYuanYongZJ}/{rightYuanYongQJ}/{leftYuanYongQJ}/{leftYuanYongZJ}/{str}")
     @RequiresPermissions("information:store:jingpian")
-    String jingpian(@PathVariable("rightYuanYongZJ") Double rightYuanYongZJ,@PathVariable("rightYuanYongQJ") Double rightYuanYongQJ,@PathVariable("leftYuanYongQJ") Double leftYuanYongQJ,@PathVariable("leftYuanYongZJ") Double leftYuanYongZJ,@PathVariable("str") String str, Model model) {
-        model.addAttribute("rightYuanYongQJ",rightYuanYongQJ);
-        model.addAttribute("rightYuanYongZJ",rightYuanYongZJ);
-        model.addAttribute("leftYuanYongQJ",leftYuanYongQJ);
-        model.addAttribute("leftYuanYongZJ",leftYuanYongZJ);
+    String jingpian(@PathVariable("rightYuanYongZJ") Double rightYuanYongZJ, @PathVariable("rightYuanYongQJ") Double rightYuanYongQJ, @PathVariable("leftYuanYongQJ") Double leftYuanYongQJ, @PathVariable("leftYuanYongZJ") Double leftYuanYongZJ, @PathVariable("str") String str, Model model) {
+        model.addAttribute("rightYuanYongQJ", rightYuanYongQJ);
+        model.addAttribute("rightYuanYongZJ", rightYuanYongZJ);
+        model.addAttribute("leftYuanYongQJ", leftYuanYongQJ);
+        model.addAttribute("leftYuanYongZJ", leftYuanYongZJ);
         return "storeSales/jingpian";
-}
+    }
 
     /**
      * 查询镜片
@@ -608,24 +641,24 @@ public class StoreSalesController {
         Query query = new Query(params);
         PageUtils pageUtils = null;
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        if (null != departNumber){
-            map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        if (null != departNumber) {
+            map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
             String positionName = "";
-            if (null != positionDO){
+            if (null != positionDO) {
                 positionName = positionDO.getPositionName();
             }
-            query.put("positionName",positionName);
+            query.put("positionName", positionName);
         }
         if (null != params.get("dzType")) {
             String dzType = params.get("dzType").toString();
-            if ("0".equals(params.get("jingpianType").toString())){
-                query.put("rightYuanYongQJ",params.get("rightYuanYongQJ"));
-                query.put("rightYuanYongZJ",params.get("rightYuanYongZJ"));
-            } else if ("1".equals(params.get("jingpianType").toString())){
-                query.put("leftYuanYongQJ",params.get("leftYuanYongQJ"));
-                query.put("leftYuanYongZJ",params.get("leftYuanYongZJ"));
+            if ("0".equals(params.get("jingpianType").toString())) {
+                query.put("rightYuanYongQJ", params.get("rightYuanYongQJ"));
+                query.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
+            } else if ("1".equals(params.get("jingpianType").toString())) {
+                query.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
+                query.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
             }
             if ("0".equals(dzType)) {
                 List<StockDO> jpcpDOList = stockService.listJpcp(query);
@@ -650,31 +683,32 @@ public class StoreSalesController {
      */
     @GetMapping("/jingjiapj")
     @RequiresPermissions("information:store:jingjiapj")
-    String jingjiapj(Model model){
+    String jingjiapj(Model model) {
         return "storeSales/jingjiapj";
     }
 
     /**
      * 查询镜架配件
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/jingjiapjlist")
     @RequiresPermissions("information:store:jingjiapj")
-    public PageUtils jingjiapjlist(@RequestParam Map<String, Object> params){
+    public PageUtils jingjiapjlist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        query.put("partsStyle","框镜");
+        query.put("partsStyle", "框镜");
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO){
+        if (null != positionDO) {
             positionName = positionDO.getPositionName();
         }
-        query.put("positionName",positionName);
+        query.put("positionName", positionName);
         List<StockDO> partsDOList = stockService.listJiajiapj(query);
         int total = stockService.countJiajiapj(query);
         PageUtils pageUtils = new PageUtils(partsDOList, total);
@@ -686,30 +720,31 @@ public class StoreSalesController {
      */
     @GetMapping("/taiyangjing")
     @RequiresPermissions("information:store:taiyangjing")
-    String taiyangjing(Model model){
+    String taiyangjing(Model model) {
         return "storeSales/taiyangjing";
     }
 
     /**
      * 查询太阳镜
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/taiyangjinglist")
     @RequiresPermissions("information:store:taiyangjing")
-    public PageUtils taiyangjinglist(@RequestParam Map<String, Object> params){
+    public PageUtils taiyangjinglist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO){
+        if (null != positionDO) {
             positionName = positionDO.getPositionName();
         }
-        query.put("positionName",positionName);
+        query.put("positionName", positionName);
         List<StockDO> tyjDOList = stockService.listTaiyj(query);
         int total = stockService.countTaiyj(query);
         PageUtils pageUtils = new PageUtils(tyjDOList, total);
@@ -721,30 +756,31 @@ public class StoreSalesController {
      */
     @GetMapping("/haocai")
     @RequiresPermissions("information:store:haocai")
-    String haocai(Model model){
+    String haocai(Model model) {
         return "storeSales/haocai";
     }
 
     /**
      * 查询耗材
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/haocailist")
     @RequiresPermissions("information:store:haocai")
-    public PageUtils haocailist(@RequestParam Map<String, Object> params){
+    public PageUtils haocailist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO){
+        if (null != positionDO) {
             positionName = positionDO.getPositionName();
         }
-        query.put("positionName",positionName);
+        query.put("positionName", positionName);
         List<StockDO> hcDOList = stockService.listHaocai(query);
         int total = stockService.countHaocai(query);
         PageUtils pageUtils = new PageUtils(hcDOList, total);
@@ -756,30 +792,31 @@ public class StoreSalesController {
      */
     @GetMapping("/laohuajing")
     @RequiresPermissions("information:store:laohuajing")
-    String laohuajing(Model model){
+    String laohuajing(Model model) {
         return "storeSales/laohuajing";
     }
 
     /**
      * 查询老花镜
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/laohuajinglist")
     @RequiresPermissions("information:store:laohuajing")
-    public PageUtils laohuajinglist(@RequestParam Map<String, Object> params){
+    public PageUtils laohuajinglist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO){
+        if (null != positionDO) {
             positionName = positionDO.getPositionName();
         }
-        query.put("positionName",positionName);
+        query.put("positionName", positionName);
         List<StockDO> oldlensDOList = stockService.listLaohj(query);
         int total = stockService.countLaohj(query);
         PageUtils pageUtils = new PageUtils(oldlensDOList, total);
@@ -791,30 +828,31 @@ public class StoreSalesController {
      */
     @GetMapping("/shiguang")
     @RequiresPermissions("information:store:shiguang")
-    String shiguang(Model model){
+    String shiguang(Model model) {
         return "storeSales/shiguang";
     }
 
     /**
      * 查询视光
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/shiguanglist")
     @RequiresPermissions("information:store:shiguang")
-    public PageUtils shiguanglist(@RequestParam Map<String, Object> params){
+    public PageUtils shiguanglist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO){
+        if (null != positionDO) {
             positionName = positionDO.getPositionName();
         }
-        query.put("positionName",positionName);
+        query.put("positionName", positionName);
         List<StockDO> shiguangDOList = stockService.listShiguang(query);
         int total = stockService.countShiguang(query);
         PageUtils pageUtils = new PageUtils(shiguangDOList, total);
@@ -826,30 +864,31 @@ public class StoreSalesController {
      */
     @GetMapping("/huliye")
     @RequiresPermissions("information:store:huliye")
-    String huliye(Model model){
+    String huliye(Model model) {
         return "storeSales/huliye";
     }
 
     /**
      * 查询护理液
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/huliyelist")
     @RequiresPermissions("information:store:huliye")
-    public PageUtils huliyelist(@RequestParam Map<String, Object> params){
+    public PageUtils huliyelist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO){
+        if (null != positionDO) {
             positionName = positionDO.getPositionName();
         }
-        query.put("positionName",positionName);
+        query.put("positionName", positionName);
         List<StockDO> hlyDOList = stockService.listHuly(query);
         int total = stockService.countHuly(query);
         PageUtils pageUtils = new PageUtils(hlyDOList, total);
@@ -861,30 +900,31 @@ public class StoreSalesController {
      */
     @GetMapping("/peijian")
     @RequiresPermissions("information:store:peijian")
-    String peijian(Model model){
+    String peijian(Model model) {
         return "storeSales/peijian";
     }
 
     /**
      * 查询配件
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/peijianlist")
     @RequiresPermissions("information:store:peijian")
-    public PageUtils peijianlist(@RequestParam Map<String, Object> params){
+    public PageUtils peijianlist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO){
+        if (null != positionDO) {
             positionName = positionDO.getPositionName();
         }
-        query.put("positionName",positionName);
+        query.put("positionName", positionName);
         List<StockDO> partsDOList = stockService.listJiajiapj(query);
         int total = stockService.countJiajiapj(query);
         PageUtils pageUtils = new PageUtils(partsDOList, total);
@@ -896,50 +936,51 @@ public class StoreSalesController {
      */
     @GetMapping("/yinxing/{rightYuanYongZJ}/{rightYuanYongQJ}/{leftYuanYongQJ}/{leftYuanYongZJ}/{str}")
     @RequiresPermissions("information:store:yinxing")
-    String yinxing(@PathVariable("rightYuanYongZJ") Double rightYuanYongZJ,@PathVariable("rightYuanYongQJ") Double rightYuanYongQJ,@PathVariable("leftYuanYongQJ") Double leftYuanYongQJ,@PathVariable("leftYuanYongZJ") Double leftYuanYongZJ,@PathVariable("str") String str,Model model){
-        model.addAttribute("rightYuanYongQJ",rightYuanYongQJ);
-        model.addAttribute("rightYuanYongZJ",rightYuanYongZJ);
-        model.addAttribute("leftYuanYongQJ",leftYuanYongQJ);
-        model.addAttribute("leftYuanYongZJ",leftYuanYongZJ);
+    String yinxing(@PathVariable("rightYuanYongZJ") Double rightYuanYongZJ, @PathVariable("rightYuanYongQJ") Double rightYuanYongQJ, @PathVariable("leftYuanYongQJ") Double leftYuanYongQJ, @PathVariable("leftYuanYongZJ") Double leftYuanYongZJ, @PathVariable("str") String str, Model model) {
+        model.addAttribute("rightYuanYongQJ", rightYuanYongQJ);
+        model.addAttribute("rightYuanYongZJ", rightYuanYongZJ);
+        model.addAttribute("leftYuanYongQJ", leftYuanYongQJ);
+        model.addAttribute("leftYuanYongZJ", leftYuanYongZJ);
         return "storeSales/yinxing";
     }
 
     /**
      * 查询隐形
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/yinxinglist")
     @RequiresPermissions("information:store:yinxing")
-    public PageUtils yinxinglist(@RequestParam Map<String, Object> params){
+    public PageUtils yinxinglist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         PageUtils pageUtils = null;
-        if (null != params.get("yxType")){
-            if ("0".equals(params.get("jingpianType").toString())){
-                query.put("rightYuanYongQJ",params.get("rightYuanYongQJ"));
-                query.put("rightYuanYongZJ",params.get("rightYuanYongZJ"));
-            } else if ("1".equals(params.get("jingpianType").toString())){
-                query.put("leftYuanYongQJ",params.get("leftYuanYongQJ"));
-                query.put("leftYuanYongZJ",params.get("leftYuanYongZJ"));
+        if (null != params.get("yxType")) {
+            if ("0".equals(params.get("jingpianType").toString())) {
+                query.put("rightYuanYongQJ", params.get("rightYuanYongQJ"));
+                query.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
+            } else if ("1".equals(params.get("jingpianType").toString())) {
+                query.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
+                query.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
             }
-            if ("0".equals(params.get("yxType"))){
+            if ("0".equals(params.get("yxType"))) {
                 List<YxcpDO> yxcpDOList = yxcpService.list(query);
                 int total = yxcpService.count(query);
                 pageUtils = new PageUtils(yxcpDOList, total);
-            } else if ("1".equals(params.get("yxType"))){
+            } else if ("1".equals(params.get("yxType"))) {
                 String departNumber = ShiroUtils.getUser().getStoreNum();
-                Map<String,Object> map = new HashMap<>();
-                map.put("departNumber",departNumber);
+                Map<String, Object> map = new HashMap<>();
+                map.put("departNumber", departNumber);
                 PositionDO positionDO = stockService.findPosition(map);
                 String positionName = "";
-                if (null != positionDO){
+                if (null != positionDO) {
                     positionName = positionDO.getPositionName();
                 }
-                query.put("positionName",positionName);
+                query.put("positionName", positionName);
                 List<StockDO> yxdzDOList = stockService.listYxdz(query);
-                int total = yxdzService.countYxDz(query);
+                int total = yxdzService.count(query);
                 pageUtils = new PageUtils(yxdzDOList, total);
             }
         } else {
@@ -955,31 +996,32 @@ public class StoreSalesController {
      */
     @GetMapping("/yinxingpj")
     @RequiresPermissions("information:store:yinxingpj")
-    String yinxingpj(Model model){
+    String yinxingpj(Model model) {
         return "storeSales/yinxingpj";
     }
 
     /**
      * 查询隐形配件
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/yinxingpjlist")
     @RequiresPermissions("information:store:yinxingpj")
-    public PageUtils yinxingpjlist(@RequestParam Map<String, Object> params){
+    public PageUtils yinxingpjlist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        query.put("partsStyle","隐形");
+        query.put("partsStyle", "隐形");
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO){
+        if (null != positionDO) {
             positionName = positionDO.getPositionName();
         }
-        query.put("positionName",positionName);
+        query.put("positionName", positionName);
         List<StockDO> partsDOList = stockService.listJiajiapj(query);
         int total = stockService.countJiajiapj(query);
         PageUtils pageUtils = new PageUtils(partsDOList, total);
@@ -991,32 +1033,33 @@ public class StoreSalesController {
      */
     @GetMapping("/zengpin")
     @RequiresPermissions("information:store:zengpin")
-    String zengpin(Model model){
+    String zengpin(Model model) {
         return "storeSales/zengpin";
     }
 
     /**
      * 查询赠品
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/zengpinlist")
     @RequiresPermissions("information:store:zengpin")
-    public PageUtils zengpinlist(@RequestParam Map<String, Object> params){
+    public PageUtils zengpinlist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         String store = ShiroUtils.getUser().getStore();
-        query.put("stores",store);
+        query.put("stores", store);
         String departNumber = ShiroUtils.getUser().getStoreNum();
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",departNumber);
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO){
+        if (null != positionDO) {
             positionName = positionDO.getPositionName();
         }
-        query.put("positionName",positionName);
+        query.put("positionName", positionName);
         List<StockDO> giveawayDOList = stockService.listZengpin(query);
         int total = stockService.countZengpin(query);
         PageUtils pageUtils = new PageUtils(giveawayDOList, total);
@@ -1028,19 +1071,20 @@ public class StoreSalesController {
      */
     @GetMapping("/zipian")
     @RequiresPermissions("information:store:zipian")
-    String zipian(Model model){
+    String zipian(Model model) {
         return "storeSales/zipian";
     }
 
     /**
      * 查询自片
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/zipianlist")
     @RequiresPermissions("information:store:zipian")
-    public PageUtils zipianlist(@RequestParam Map<String, Object> params){
+    public PageUtils zipianlist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         List<ZipianDO> zipianDOList = salesService.findZpian(query);
@@ -1054,19 +1098,20 @@ public class StoreSalesController {
      */
     @GetMapping("/zijia")
     @RequiresPermissions("information:store:zijia")
-    String zijia(Model model){
+    String zijia(Model model) {
         return "storeSales/zijia";
     }
 
     /**
      * 查询自架
+     *
      * @param params
      * @return
      */
     @ResponseBody
     @GetMapping("/zijialist")
     @RequiresPermissions("information:store:zijia")
-    public PageUtils zijialist(@RequestParam Map<String, Object> params){
+    public PageUtils zijialist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         List<ZijiaDO> zijiaDOList = salesService.findZjia(query);

@@ -68,5 +68,10 @@ public class ShiguangServiceImpl implements ShiguangService {
     public List<BrandDO> choice(Integer mfrsid) {
         return shiguangDao.choice(mfrsid);
     }
+    //删除修改状态
 
+    @Override
+    public int updateState(ShiguangDO shiguang) {
+        return shiguangDao.updateState(shiguang);
+    }
 }

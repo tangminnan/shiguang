@@ -95,6 +95,24 @@ public class PartsController {
     }
 
     /**
+     * 详情
+     */
+    @GetMapping("/detail/{id}")
+    @RequiresPermissions("product:parts:detail")
+    String detail(@PathVariable("id") Long id, Model model) {
+        PartsDO parts = partsService.get(id);
+        model.addAttribute("parts", parts);
+        Map<String, Object> map = new HashMap<>();
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        return "product/parts/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
@@ -118,21 +136,21 @@ public class PartsController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:parts:remove")
-    public R remove(Long id) {
-        if (partsService.remove(id) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("product:parts:remove")
+//    public R remove(Long id) {
+//        if (partsService.remove(id) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -157,4 +175,35 @@ public class PartsController {
     String findmfrs() {
         return "/mfrs/mfrs/findPartsMfrs";
     }
+
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long id, Long enable) {
+        PartsDO partsDO = new PartsDO();
+        partsDO.setId(id);
+        partsDO.setStatus(enable);
+        partsService.update(partsDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Long id) {
+        PartsDO partsDO = new PartsDO();
+        partsDO.setState(0L);
+        partsDO.setId(id);
+        if (partsService.updateState(partsDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
 }
+

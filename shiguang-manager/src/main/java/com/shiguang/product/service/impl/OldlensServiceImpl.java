@@ -63,5 +63,10 @@ public class OldlensServiceImpl implements OldlensService {
     public List<BrandDO> choice(Integer mfrsid) {
         return oldlensDao.choice(mfrsid);
     }
+    //删除修改状态
 
+    @Override
+    public int updateState(OldlensDO oldlens) {
+        return oldlensDao.updateState(oldlens);
+    }
 }

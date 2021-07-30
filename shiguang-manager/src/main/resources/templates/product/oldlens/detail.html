@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${oldlens.id}" type="hidden">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品代码：</label>
+                            <div class="col-sm-8">
+                                <input id="producNum" name="producNum" th:value="${oldlens.producNum}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品条码：</label>
+                            <div class="col-sm-8">
+                                <input id="producCode" name="producCode" th:value="${oldlens.producCode}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品名称：</label>
+                            <div class="col-sm-8">
+                                <input id="producName" name="producName" th:value="${oldlens.producName}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">销售状态：</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline"> <input type="radio"
+                                                                    th:field="*{oldlens.status}" name="status"
+                                                                    value="1" disabled/>
+                                    禁用
+                                </label>
+                                <label class="radio-inline"> <input type="radio"
+                                                                    th:field="*{oldlens.status}" name="status"
+                                                                    value="0" disabled/>
+                                    启用
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">制造商：</label>
+                            <div class="col-sm-8">
+                                <input th:value="${oldlens.mfrsname}"
+                                       class="form-control"
+                                       type="text" readonly>
+                                <input id="mfrsid" name="mfrsid" th:value="${oldlens.mfrsid}"
+                                       class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品品种：</label>
+                            <div class="col-sm-8">
+                                <input th:value="${oldlens.brandname}" class="form-control"
+                                       type="text" readonly>
+                                <input id="brandid" name="brandid" th:value="${oldlens.brandid}" class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">厂家型号：</label>
+                            <div class="col-sm-8">
+                                <input id="factory" name="factory" th:value="${oldlens.factory}" class="form-control"
+                                       type="text" onkeyup="liandong1()"
+                                       onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">型号：</label>
+                            <div class="col-sm-8">
+                                <input th:value="${oldlens.producFactory}"
+                                       class="form-control" type="text" readonly>
+                                <input id="producFactory" name="producFactory" th:value="${oldlens.producFactory}"
+                                       class="form-control" type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">厂家色号：</label>
+                            <div class="col-sm-8">
+                                <input id="producFactorycolor" name="producFactorycolor"
+                                       th:value="${oldlens.producFactorycolor}" class="form-control" type="text"
+                                       onkeyup="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">计量单位：</label>
+                            <div class="col-sm-8">
+                                <select name="unitid" id="unitid" th:value="${oldlens.unitid}" class="form-control"
+                                        data-actions-box="false" data-size="5" disabled>
+                                    <option th:each="ls:${unitDOList}"
+                                            th:text="${ls.unitname}"
+                                            th:value="${ls.unitid}"></option>
+                                </select>
+                                <input id="unitids" name="unitids" th:value="${oldlens.unitid}" class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">老花镜度数：</label>
+                            <div class="col-sm-8">
+                                <select id="oldId" name="oldId" th:value="${oldlens.oldId}" class="form-control"
+                                        data-actions-box="false" data-size="5" disabled>
+                                    <option th:each="ls:${olddegreesDOList}"
+                                            th:text="${ls.degrees}"
+                                            th:value="${ls.oldId}"
+                                    ></option>
+                                </select>
+                                <input id="oldIds" name="oldIds" th:value="${oldlens.oldId}" class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">批号管理：</label>
+                            <div class="col-sm-8">
+                                <div class="col-sm-8">
+                                    <label class="radio-inline"> <input type="radio" th:field="*{oldlens.batchid}"
+                                                                        name="batchid" value="1" disabled/> 是
+                                    </label>
+                                    <label class="radio-inline"> <input type="radio" th:field="*{oldlens.batchid}"
+                                                                        name="batchid" value="2" disabled/> 否
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">镜架尺寸：</label>
+                            <div class="col-sm-8">
+                                <input id="size" name="size" th:value="${oldlens.size}" class="form-control"
+                                       type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">颜色：</label>
+                            <div class="col-sm-8">
+                                <select id="color" name="color" th:value="${oldlens.color}" class="form-control"
+                                        data-actions-box="false" data-size="5" disabled>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">款式：</label>
+                            <div class="col-sm-8">
+                                <select id="styleId" name="styleId" th:value="${oldlens.styleId}"
+                                        class="form-control"
+                                        data-actions-box="false" data-size="5" disabled>
+                                    <option th:each="ls:${styleDOList}"
+                                            th:text="${ls.style}"
+                                            th:value="${ls.styleId}"></option>
+                                </select>
+                                <input id="styleIds" name="styleIds" th:value="${oldlens.styleId}"
+                                       class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">税率(%)：</label>
+                            <div class="col-sm-8">
+                                <input id="tax" name="tax" th:value="${oldlens.tax}" class="form-control" type="text"
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">含税单价：</label>
+                            <div class="col-sm-8">
+                                <input id="taxPrice" name="taxPrice" th:value="${oldlens.taxPrice}" class="form-control"
+                                       type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">批发价格：</label>
+                            <div class="col-sm-8">
+                                <input id="tradePrice" name="tradePrice" th:value="${oldlens.tradePrice}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">调货成本：</label>
+                            <div class="col-sm-8">
+                                <input id="transferPrice" name="transferPrice" th:value="${oldlens.transferPrice}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标准零售价格：</label>
+                            <div class="col-sm-8">
+                                <input id="retailPrice" name="retailPrice" th:value="${oldlens.retailPrice}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/product/oldlens/edit.js"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        //计量单位
+        var unitids = $("input[name='unitids']").val();
+        $("#unitid").find("[value='" + unitids + "']").attr("selected", true);
+        //老花镜度数
+        var oldIds = $("input[name='oldIds']").val();
+        $("#oldId").find("[value='" + oldIds + "']").attr("selected", true);
+        //款式
+        var styleIds = $("input[name='styleIds']").val();
+        $("#styleId").find("[value='" + styleIds + "']").attr("selected", true);
+    });
+
+    // <!--//———厂家型号与型号联动—————-->
+    function liandong1() {
+        var val1 = document.getElementById("factory").value;
+        var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
+        // alert(val);
+        document.getElementById("producFactory").value = va1;
+    }
+
+
+</script>
+</body>
+</html>

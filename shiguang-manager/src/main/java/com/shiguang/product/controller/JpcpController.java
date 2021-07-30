@@ -163,6 +163,48 @@ public class JpcpController {
     }
 
     /**
+     * 详情
+     */
+    @GetMapping("/detail/{id}")
+    @RequiresPermissions("product:jpcp:detail")
+    String detail(@PathVariable("id") Long id, Model model) {
+        JpcpDO jpcp = jpcpService.get(id);
+        model.addAttribute("jpcp", jpcp);
+        Map<String, Object> map = new HashMap<>();
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        //球镜
+        List<SphDO> sphDOList = sphService.list(map);
+        model.addAttribute("sphDOList", sphDOList);
+        //柱镜
+        List<CylDO> cylDOList = cylService.list(map);
+        model.addAttribute("cylDOList", cylDOList);
+        //跨度
+        List<SpanDO> spanDOList = spanService.list(map);
+        model.addAttribute("spanDOList", spanDOList);
+        //下加光
+        List<LightbelowDO> lightbelowDOList = lightbelowService.list(map);
+        model.addAttribute("lightbelowDOList", lightbelowDOList);
+        //材料分类
+        List<LensDO> lensDOList = lensService.list(map);
+        model.addAttribute("lensDOList", lensDOList);
+        //光度分类
+        List<LightDO> lightDOList = lightService.list(map);
+        model.addAttribute("lightDOList", lightDOList);
+        //渐进片分类
+        List<GradualDO> gradualDOList = gradualService.list(map);
+        model.addAttribute("gradualDOList", gradualDOList);
+        //镜片功能
+        List<FunctionDO> functionDOList = functionService.list(map);
+        model.addAttribute("functionDOList", functionDOList);
+        return "product/jpcp/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
@@ -192,21 +234,21 @@ public class JpcpController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:jpcp:remove")
-    public R remove(Long id) {
-        if (jpcpService.remove(id) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("product:jpcp:remove")
+//    public R remove(Long id) {
+//        if (jpcpService.remove(id) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -230,5 +272,34 @@ public class JpcpController {
     @RequiresPermissions("product:jpcp:findmfrs")
     String findmfrs() {
         return "/mfrs/mfrs/findJpcpMfrs";
+    }
+
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long id, Long enable) {
+        JpcpDO jpcpDO = new JpcpDO();
+        jpcpDO.setId(id);
+        jpcpDO.setStatus(enable);
+        jpcpService.update(jpcpDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Long id) {
+        JpcpDO jpcpDO = new JpcpDO();
+        jpcpDO.setState(0L);
+        jpcpDO.setId(id);
+        if (jpcpService.updateState(jpcpDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
     }
 }

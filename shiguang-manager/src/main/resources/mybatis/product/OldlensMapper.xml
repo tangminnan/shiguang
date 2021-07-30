@@ -4,60 +4,24 @@
 <mapper namespace="com.shiguang.product.dao.OldlensDao">
 
     <select id="get" resultType="com.shiguang.product.domain.OldlensDO">
-		select m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandid`,o.`factory`,o.`produc_factory`,
-		o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
-		o.`transfer_price`,o.`retail_price` 
-		from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandid=b.brandid
-        left join  c_unit u on o.unitid= u.unitid
-        where id = #{value}
-	</select>
+select m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandid`,o.`factory`,o.`produc_factory`,
+o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
+o.`transfer_price`,o.`retail_price` ,o.`status`,o.`state`
+from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandid=b.brandid
+left join  c_unit u on o.unitid= u.unitid
+where id = #{value}
+</select>
 
     <select id="list" resultType="com.shiguang.product.domain.OldlensDO">
-        select
-        m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandid`,o.`factory`,o.`produc_factory`,
-        o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
-        o.`transfer_price`,o.`retail_price`
-        from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandid=b.brandid
-        left join c_unit u on o.unitid= u.unitid
-        <where>
-            <if test="id != null and id != ''">and o.id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and o.produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and o.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and o.produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and o.mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and o.brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and o.factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and o.produc_factory = #{producFactory}</if>
-            <if test="producFactorycolor != null and producFactorycolor != ''">and o.produc_factorycolor =
-                #{producFactorycolor}
-            </if>
-            <if test="unitid != null and unitid != ''">and o.unitid = #{unitid}</if>
-            <if test="oldId != null and oldId != ''">and o.old_id = #{oldId}</if>
-            <if test="batchid != null and batchid != ''">and o.batchid = #{batchid}</if>
-            <if test="size != null and size != ''">and o.size = #{size}</if>
-            <if test="color != null and color != ''">and o.color = #{color}</if>
-            <if test="styleId != null and styleId != ''">and o.style_id = #{styleId}</if>
-            <if test="tax != null and tax != ''">and o.tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and o.tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and o.trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and o.transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and o.retail_price = #{retailPrice}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-            <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
-        </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-                order by id desc
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
-    </select>
+select
+m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandid`,o.`factory`,o.`produc_factory`,
+o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
+o.`transfer_price`,o.`retail_price`,o.`status`,o.`state`
+from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandid=b.brandid
+left join c_unit u on o.unitid= u.unitid
+where o.state= 1
+group by o.id order by o.status asc ,o.id asc
+</select>
 
     <select id="count" resultType="int">
         select count(*) from aa_oldlens
@@ -84,55 +48,61 @@
             <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
             <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
             <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="state != null and state != ''">and state = #{state}</if>
         </where>
     </select>
 
     <insert id="save" parameterType="com.shiguang.product.domain.OldlensDO" useGeneratedKeys="true" keyProperty="id">
-		insert into aa_oldlens
-		(
-			`produc_num`, 
-			`produc_code`, 
-			`produc_name`, 
-			`mfrsid`, 
-			`brandid`, 
-			`factory`, 
-			`produc_factory`, 
-			`produc_factorycolor`, 
-			`unitid`, 
-			`old_id`, 
-			`batchid`, 
-			`size`, 
-			`color`, 
-			`style_id`, 
-			`tax`, 
-			`tax_price`, 
-			`trade_price`, 
-			`transfer_price`, 
-			`retail_price`
-		)
-		values
-		(
-			#{producNum}, 
-			#{producCode}, 
-			#{producName}, 
-			#{mfrsid}, 
-			#{brandid}, 
-			#{factory}, 
-			#{producFactory}, 
-			#{producFactorycolor}, 
-			#{unitid}, 
-			#{oldId}, 
-			#{batchid}, 
-			#{size}, 
-			#{color}, 
-			#{styleId}, 
-			#{tax}, 
-			#{taxPrice}, 
-			#{tradePrice}, 
-			#{transferPrice}, 
-			#{retailPrice}
-		)
-	</insert>
+insert into aa_oldlens
+(
+`produc_num`,
+`produc_code`,
+`produc_name`,
+`mfrsid`,
+`brandid`,
+`factory`,
+`produc_factory`,
+`produc_factorycolor`,
+`unitid`,
+`old_id`,
+`batchid`,
+`size`,
+`color`,
+`style_id`,
+`tax`,
+`tax_price`,
+`trade_price`,
+`transfer_price`,
+`retail_price`,
+`status`,
+`state`
+)
+values
+(
+#{producNum},
+#{producCode},
+#{producName},
+#{mfrsid},
+#{brandid},
+#{factory},
+#{producFactory},
+#{producFactorycolor},
+#{unitid},
+#{oldId},
+#{batchid},
+#{size},
+#{color},
+#{styleId},
+#{tax},
+#{taxPrice},
+#{tradePrice},
+#{transferPrice},
+#{retailPrice},
+#{status},
+#{state}
+)
+</insert>
 
     <update id="update" parameterType="com.shiguang.product.domain.OldlensDO">
         update aa_oldlens
@@ -156,13 +126,15 @@
             <if test="tradePrice != null">`trade_price` = #{tradePrice},</if>
             <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
             <if test="retailPrice != null">`retail_price` = #{retailPrice}</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="state != null">`state` = #{state}</if>
         </set>
         where id = #{id}
     </update>
 
     <delete id="remove">
-		delete from aa_oldlens where id = #{value}
-	</delete>
+delete from aa_oldlens where id = #{value}
+</delete>
 
     <delete id="batchRemove">
         delete from aa_oldlens where id in
@@ -171,12 +143,19 @@
         </foreach>
     </delete>
     <!--查询老花镜制造商-->
-    <select id="mglist" resultType="com.shiguang.product.domain.ProducaDO">
-		select m.mfrsid,m.mfrsname  from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=7
-	</select>
+    <select id="mglist" resultType="com.shiguang.product.domain.OldlensDO">
+select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
+from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=7
+and m.state= 1
+group by m.mfrsid order by m.mfrsid asc
+</select>
     <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.ProducaDO">
-		select b.brandid,b.brandname from c_brand b left join  cc_mg mg
-		on b.goodsid = mg.goodsid  left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=7 and b.mfrsid = #{mfrsid} group by  b.brandid;
-	</select>
+    <select id="choice" resultType="com.shiguang.product.domain.OldlensDO">
+select b.brandid,b.brandname from c_brand b left join  cc_mg mg
+on b.goodsid = mg.goodsid  left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=7 and b.mfrsid = #{mfrsid} group by  b.brandid;
+</select>
+    <!--删除状态修改-->
+    <update id="updateState" parameterType="com.shiguang.product.domain.OldlensDO">
+update aa_oldlens set `state` = #{state} where id = #{id}
+</update>
 </mapper>

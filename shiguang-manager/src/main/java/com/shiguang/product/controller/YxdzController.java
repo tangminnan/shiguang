@@ -174,6 +174,54 @@ public class YxdzController {
     }
 
     /**
+     * 详情
+     */
+    @GetMapping("/detail/{id}")
+    @RequiresPermissions("product:yxdz:detail")
+    String detail(@PathVariable("id") Long id, Model model) {
+        YxdzDO yxdz = yxdzService.get(id);
+        model.addAttribute("yxdz", yxdz);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = yxdzService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        //球镜
+        List<SphDO> sphDOList = sphService.list(map);
+        model.addAttribute("sphDOList", sphDOList);
+        //柱镜
+        List<CylDO> cylDOList = cylService.list(map);
+        model.addAttribute("cylDOList", cylDOList);
+        //跨度
+        List<SpanDO> spanDOList = spanService.list(map);
+        model.addAttribute("spanDOList", spanDOList);
+        //下加光
+        List<LightbelowDO> lightbelowDOList = lightbelowService.list(map);
+        model.addAttribute("lightbelowDOList", lightbelowDOList);
+        //材料分类
+        List<LensDO> lensDOList = lensService.list(map);
+        model.addAttribute("lensDOList", lensDOList);
+        //使用类型分类
+        List<UsageDO> usageDOList = usageService.list(map);
+        model.addAttribute("usageDOList", usageDOList);
+        //抛弃分类
+        List<TypeDO> typeDOList = typeService.list(map);
+        model.addAttribute("typeDOList", typeDOList);
+        //隐形类别
+        List<InvisibleDO> invisibleDOList = invisibleService.list(map);
+        model.addAttribute("invisibleDOList", invisibleDOList);
+        //材质
+        List<CaizhiDO> caizhiDOList = caizhiService.list(map);
+        model.addAttribute("caizhiDOList", caizhiDOList);
+        return "product/yxdz/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
@@ -235,5 +283,34 @@ public class YxdzController {
     @RequiresPermissions("product:yxdz:findmfrs")
     String findmfrs() {
         return "/mfrs/mfrs/findYxdzMfrs";
+    }
+
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long id, Long enable) {
+        YxdzDO yxdzDO = new YxdzDO();
+        yxdzDO.setId(id);
+        yxdzDO.setStatus(enable);
+        yxdzService.update(yxdzDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Long id) {
+        YxdzDO yxdzDO = new YxdzDO();
+        yxdzDO.setState(0L);
+        yxdzDO.setId(id);
+        if (yxdzService.updateState(yxdzDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
     }
 }

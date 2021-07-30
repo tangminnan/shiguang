@@ -128,7 +128,7 @@ function load() {
                     // 	},
                     {
                         field: 'status',
-                        title: '状态',
+                        title: '启用状态',
                         align: 'center',
                         formatter: function (value, row, index) {
                             var str = '';
@@ -222,7 +222,9 @@ function remove(id) {
     })
 }
 
+//详情
 function resetPwd(id) {
+    alert(id)
     layer.open({
         type: 2,
         title: '详情',
@@ -254,50 +256,6 @@ function batchRemove() {
                 "ids": ids
             },
             url: prefix + '/batchRemove',
-            success: function (r) {
-                if (r.code == 0) {
-                    layer.msg(r.msg);
-                    reLoad();
-                } else {
-                    layer.msg(r.msg);
-                }
-            }
-        });
-    }, function () {
-
-    });
-}
-
-//停用启动
-function stop(status) {
-    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-    if (rows.length == 0) {
-        layer.msg("请选择数据");
-        return;
-    }
-    var msg;
-    if (status == 0) {
-        msg = "确认要停用选中的"
-    } else if (status == 1) {
-        msg = "确认要启用选中的"
-    }
-    layer.confirm(msg + "'" + rows.length + "'条数据吗?", {
-        btn: ['确定', '取消']
-        // 按钮
-    }, function () {
-        var ids = new Array();
-        // 遍历所有选择的行数据，取每条数据对应的ID
-        $.each(rows, function (i, row) {
-            ids[i] = row['id'];
-        });
-
-        $.ajax({
-            type: 'POST',
-            data: {
-                "ids": ids,
-                "status": status
-            },
-            url: prefix + '/stop',
             success: function (r) {
                 if (r.code == 0) {
                     layer.msg(r.msg);

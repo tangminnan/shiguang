@@ -20,10 +20,16 @@ public class MfrsServiceImpl implements MfrsService {
         return mfrsDao.get(mfrsid);
     }
 
+    //判断是否存在制造商代码
+    @Override
+    public List<MfrsDO> haveNum(Map<String, Object> map) {
+        return mfrsDao.haveNum(map);
+    }
+
     //	---商品查询----
     @Override
-    public List<MfrsDO> mglist(Map<String, Object> map) {
-        return mfrsDao.mglist(map);
+    public List<MfrsDO> list(Map<String, Object> map) {
+        return mfrsDao.list(map);
     }
 
     //    <!--查询镜架制造商-->

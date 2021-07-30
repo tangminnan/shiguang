@@ -63,4 +63,11 @@ public class YxcpServiceImpl implements YxcpService {
     public List<BrandDO> choice(Integer mfrsid) {
         return yxcpDao.choice(mfrsid);
     }
+
+    //删除修改状态
+
+    @Override
+    public int updateState(YxcpDO yxcp) {
+        return yxcpDao.updateState(yxcp);
+    }
 }

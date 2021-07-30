@@ -4,6 +4,12 @@
     .none {
         display: none;
     }
+
+    input:disabled {
+        color: red;
+        opacity: 1;
+        -webkit-text-fill-color: red;
+    }
 </style>
 
 <head>
@@ -201,10 +207,10 @@
                     <td>是否散瞳</td>
                     <td colspan="2">
                         <label><input id="xz1" name="mydriasis" th:value="${optometryAfterDO.mydriasis}"
-                                      type="radio" onclick="this.checked=!this.checked">
+                                      type="radio" disabled>
                             是</label>
                         <label><input id="xz2" name="mydriasis" th:value="${optometryAfterDO.mydriasis}"
-                                      type="radio" onclick="this.checked=!this.checked">
+                                      type="radio" disabled>
                             否</label>
                     </td>
                     <td>散瞳用药</td>
@@ -1733,7 +1739,7 @@
 
         </div>
         <!--保存-->
-        <div class="Keep"><input type="button" value="保存2" onclick="save2()"/></div>
+        <div class="Keep"><input type="button" value="保存" onclick="save2()"/></div>
 
     </div>
 </form>
@@ -1876,7 +1882,6 @@
 
     //正负+—
     function zhengfu(e) {//正负用onblur事件触发
-        // alert("+-");
         var val = parseFloat(e.value)
         if (val > 0) {
             e.value = "+" + val.toFixed(2)
@@ -1901,7 +1906,6 @@
     //自动补0，四舍五入
     function shuzi(e) {
         var val = parseFloat(e.value);
-        alert(val);
         if (val > 0) {
             e.value = val.toFixed(2);
         } else if (val <= 0) {
@@ -1913,7 +1917,7 @@
     function zhouxiang(e) {//用onblur事件触发
         var val = parseFloat(e.value);
         if (val < 0 || val > 180) {
-            alert("轴向在0-180之间")
+            alert("轴向在0-180之间");
         } else {
             e.value = val.toFixed(0)
         }

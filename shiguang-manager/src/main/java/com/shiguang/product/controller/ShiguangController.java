@@ -88,6 +88,24 @@ public class ShiguangController {
     }
 
     /**
+     * 详情
+     */
+    @GetMapping("/detail/{id}")
+    @RequiresPermissions("product:shiguang:detail")
+    String detail(@PathVariable("id") Long id, Model model) {
+        ShiguangDO shiguang = shiguangService.get(id);
+        model.addAttribute("shiguang", shiguang);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = shiguangService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        return "product/shiguang/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
@@ -111,21 +129,21 @@ public class ShiguangController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:shiguang:remove")
-    public R remove(Long id) {
-        if (shiguangService.remove(id) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("product:shiguang:remove")
+//    public R remove(Long id) {
+//        if (shiguangService.remove(id) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -149,5 +167,34 @@ public class ShiguangController {
     @RequiresPermissions("product:shiguang:findmfrs")
     String findmfrs() {
         return "/mfrs/mfrs/findShiguangMfrs";
+    }
+
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long id, Long enable) {
+        ShiguangDO shiguangDO = new ShiguangDO();
+        shiguangDO.setId(id);
+        shiguangDO.setStatus(enable);
+        shiguangService.update(shiguangDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Long id) {
+        ShiguangDO shiguangDO = new ShiguangDO();
+        shiguangDO.setState(0L);
+        shiguangDO.setId(id);
+        if (shiguangService.updateState(shiguangDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
     }
 }
