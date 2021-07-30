@@ -1,0 +1,758 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>采购收货新增</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+<div class="new_h3">采购收货新增</div>
+
+<!--检查条件-->
+<div class="m40 tabS PHGL">
+    <h3>检查条件</h3>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td>单据编号：</td>
+            <td>
+                <input id="danjuNumber" name="danjuNumber" th:value="${uuidstr}" type="text"
+                       style="background-color: #e4e4e4" readonly/>
+            </td>
+            <td>订单单号：</td>
+            <td>
+                <input id="orderNumber" name="orderNumber" type="text"/>
+                <input type="button" class="XZ-btn" value="选择" onclick="dingdanNum()"/>
+            </td>
+            <td>采购类型：</td>
+            <td width="25%">
+                <select id="goodsid" name="goodsid"
+                        onchange="goodsidstr(this.options[this.options.selectedIndex].value)">
+                    <option></option>
+                    <option th:each="ls:${goodsDOList}"
+                            th:text="${ls.goodsname}"
+                            th:value="${ls.goodsid}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>制造商：</td>
+            <td>
+                <input id="mfrsid" name="mfrsid" type="hidden"/>
+                <input type="text" id="mfrsName" name="mfrsName"/>
+                <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
+            </td>
+            <td>供应商：</td>
+            <td>
+                <select name="" id="">
+                    <option value="欧普康视1">欧普康视1</option>
+                    <option value="欧普康视2">欧普康视2</option>
+                </select>
+            </td>
+            <td>收入仓位：</td>
+            <td>
+                <select id="positionId" name="positionId">
+                    <option th:each="ls:${positionDOList}"
+                            th:text="${ls.positionName}"
+                            th:value="${ls.positionId}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>运单号：</td>
+            <td><input type="text" value=""/></td>
+            <td>制单人：</td>
+            <td><input id="zhidanPeople" name="zhidanPeople" th:value="${optometryName}" type="text"
+                       style="background-color: #e4e4e4" readonly/></td>
+            <td>单据日期：</td>
+            <td>2021-07-05</td>
+        </tr>
+        <tr>
+            <td>退货单号：</td>
+            <td>
+                <input type="text"/>
+                <input type="button" class="XZ-btn" value="选择" onclick="tuihuiNum()"/>
+            </td>
+            <td>厂家订单号：</td>
+            <td colspan="3"><input type="text" value="允许"/></td>
+        </tr>
+        <tr>
+            <td>备注：</td>
+            <td colspan="5"><textarea id="beizhu" name="beizhu" rows="3"></textarea></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="HH_btns">
+        <div class="Xbtn">
+            <input type="button" value="单品添加商品" onclick="choiceGoods()"/>
+            <input type="button" value="已核销订单添加商品"/>
+            <input type="button" value="二维表添加商品"/>
+            <input class="HgreenBG" type="button" value="打印条码"/>
+        </div>
+        <div class="Cbtn buyBtns">
+            <input type="button" class="H_bc" value="保存"/>
+            <input type="checkbox" id="Hbc"/> <label for="Hbc">保存并审核</label>
+        </div>
+    </div>
+
+</div>
+
+<!--商品信息-->
+<div class="m40 tabS SPmsg">
+    <h3>商品信息</h3>
+    <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tbody>
+        <tr id="tab1" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>全选 <input type="checkbox"/></td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>球镜</td>
+                        <td>柱镜</td>
+                        <td>曲率</td>
+                        <td>直径</td>
+                        <td>使用类型</td>
+                        <td>抛弃型分类</td>
+                        <td>入库时间</td>
+                        <td>商品条码</td>
+                        <td>数量</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                        <td>镜架</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;">
+                        <td colspan="12" style="text-align:right;">合计：</td>
+                        <td>156698</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr id="tab2" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>全选 <input type="checkbox"/></td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>配件型</td>
+                        <td>入库时间</td>
+                        <td>商品条码</td>
+                        <td>数量</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>配件</td>
+                        <td>配件</td>
+                        <td>配件</td>
+                        <td>配件</td>
+                        <td>配件</td>
+                        <td>配件</td>
+                        <td>配件</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;">
+                        <td colspan="12" style="text-align:right;">合计：</td>
+                        <td>156698</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr id="tab3" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>全选 <input type="checkbox"/></td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>球镜</td>
+                        <td>柱镜</td>
+                        <td>下加光</td>
+                        <td>折射率</td>
+                        <td>光度分类</td>
+                        <td>材料分类</td>
+                        <td>入库时间</td>
+                        <td>商品条码</td>
+                        <td>数量</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                        <td>镜片</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;">
+                        <td colspan="12" style="text-align:right;">合计：</td>
+                        <td>156698</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr id="tab4" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>全选 <input type="checkbox"/></td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>球镜</td>
+                        <td>柱镜</td>
+                        <td>曲率</td>
+                        <td>直径</td>
+                        <td>使用类型</td>
+                        <td>抛弃型分类</td>
+                        <td>入库时间</td>
+                        <td>商品条码</td>
+                        <td>数量</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                        <td>隐形</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;">
+                        <td colspan="12" style="text-align:right;">合计：</td>
+                        <td>156698</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr id="tab5" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>全选 <input type="checkbox"/></td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>主容量</td>
+                        <td>次容量</td>
+                        <td>入库时间</td>
+                        <td>商品条码</td>
+                        <td>数量</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>护理液</td>
+                        <td>护理液</td>
+                        <td>护理液</td>
+                        <td>护理液</td>
+                        <td>护理液</td>
+                        <td>护理液</td>
+                        <td>护理液</td>
+                        <td>护理液</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;">
+                        <td colspan="12" style="text-align:right;">合计：</td>
+                        <td>156698</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr id="tab6" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>全选 <input type="checkbox"/></td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>色号</td>
+                        <td>框架尺寸</td>
+                        <td>入库时间</td>
+                        <td>商品条码</td>
+                        <td>数量</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>太阳镜</td>
+                        <td>太阳镜</td>
+                        <td>太阳镜</td>
+                        <td>太阳镜</td>
+                        <td>太阳镜</td>
+                        <td>太阳镜</td>
+                        <td>太阳镜</td>
+                        <td>太阳镜</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;">
+                        <td colspan="12" style="text-align:right;">合计：</td>
+                        <td>156698</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr id="tab7" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>全选 <input type="checkbox"/></td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>框架尺寸</td>
+                        <td>老花镜度数</td>
+                        <td>厂家色号</td>
+                        <td>入库时间</td>
+                        <td>商品条码</td>
+                        <td>数量</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>老花镜</td>
+                        <td>老花镜</td>
+                        <td>老花镜</td>
+                        <td>老花镜</td>
+                        <td>老花镜</td>
+                        <td>老花镜</td>
+                        <td>老花镜</td>
+                        <td>老花镜</td>
+                        <td>老花镜</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;">
+                        <td colspan="12" style="text-align:right;">合计：</td>
+                        <td>156698</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr id="tab8" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>全选 <input type="checkbox"/></td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>入库时间</td>
+                        <td>商品条码</td>
+                        <td>数量</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>耗材</td>
+                        <td>耗材</td>
+                        <td>耗材</td>
+                        <td>耗材</td>
+                        <td>耗材</td>
+                        <td>耗材</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;">
+                        <td colspan="12" style="text-align:right;">合计：</td>
+                        <td>156698</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr id="tab9" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>全选 <input type="checkbox"/></td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>入库时间</td>
+                        <td>商品条码</td>
+                        <td>数量</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>视光</td>
+                        <td>视光</td>
+                        <td>视光</td>
+                        <td>视光</td>
+                        <td>视光</td>
+                        <td>视光</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;">
+                        <td colspan="12" style="text-align:right;">合计：</td>
+                        <td>156698</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="Cbtn buyBtns">
+        <input type="button" class="H_bc" value="保存"/>
+        <input type="checkbox" id="HHbc"/> <label for="HHbc">保存并审核</label>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript"></script>
+<script type="text/javascript">
+    function dingdanNum() {
+        var goodsval = document.getElementById('goodsid').value;
+        var mfrsidval = document.getElementById('mfrsid').value;
+        // alert(goodsval);
+        if (goodsval == "") {
+            alert("请选择采购类型！");
+        } else if (goodsval != "" && mfrsidval == "") {
+            alert("请选择所属制造商！");
+        }
+        ;
+    }
+
+    function tuihuiNum() {
+        var goodsval = document.getElementById('goodsid').value;
+        var mfrsidval = document.getElementById('mfrsid').value;
+        // alert(goodsval);
+        if (goodsval == "") {
+            alert("请选择采购类型！");
+        } else if (goodsval != "" && mfrsidval == "") {
+            alert("请选择所属制造商！");
+        }
+        ;
+    }
+
+    function goodsidstr(value) {
+        if (value == '1') {
+            tab1.style = "display: block";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '2') {
+            tab1.style = "display: none";
+            tab2.style = "display: block";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '3') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: block";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '4') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: block";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '5') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: block";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '6') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: block";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '7') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: block";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '8') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: block";
+            tab9.style = "display: none";
+        } else if (value == '9') {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: block";
+        } else {
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        }
+    }
+
+    <!--选择制造商-->
+    function choiceMfrs() {
+        var goodsval = document.getElementById('goodsid').value;
+        // alert(goodsval);
+        if (goodsval == "") {
+            alert("请选择采购类型！");
+        } else if (goodsval == '1') {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findmfrs/",// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // choice(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        } else if (goodsval == '2') {
+            // 选择配件
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/parts/findmfrs/",// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // choice(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        } else if (goodsval == '3') {
+            //选择镜片
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/jpcp/findmfrs/",// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // choice(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        } else if (goodsval == '4') {
+            //选择隐形
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/yxcp/findmfrs/",// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // choice(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        } else if (goodsval == '5') {
+            //  护理液
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/hly/findmfrs/",// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // choice(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        } else if (goodsval == '6') {
+            //太阳镜
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/tyj/findmfrs/",// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // choice(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        } else if (goodsval == '7') {
+            //老花镜
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/oldlens/findmfrs/",// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // choice(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        } else if (goodsval == '8') {
+            //耗材
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/hc/findmfrs/",// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // choice(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        } else if (goodsval == '9') {
+            //视光  shiguang
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/shiguang/findmfrs/",// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // choice(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+
+    <!--单品添加商品-->
+    function choiceGoods() {
+        var goodsval = document.getElementById('goodsid').value;
+        var mfrsidval = document.getElementById('mfrsid').value;
+        if (goodsval == '1') {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findmfrs/",// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // choice(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+</script>
+</body>
+</html>

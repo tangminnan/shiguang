@@ -93,18 +93,18 @@
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/mfrs/mfrs/mfrs.js"></script>
-<script>
-    function changeInterest() {
-        var interester = [];
-        var obj = document.getElementById("goodsid");
-        for (var i = 0; i < obj.options.length; i++) {
-            if (obj.options[i].selected) {
-                interester.push(obj.options[i].value);// 收集选中项
-            }
-        }
-        $("#interest").val(interester);
-    }
+<!--<script>-->
+<!--function changeInterest() {-->
+<!--var interester = [];-->
+<!--var obj = document.getElementById("goodsid");-->
+<!--for (var i = 0; i < obj.options.length; i++) {-->
+<!--if (obj.options[i].selected) {-->
+<!--interester.push(obj.options[i].value);// 收集选中项-->
+<!--}-->
+<!--}-->
+<!--$("#interest").val(interester);-->
+<!--}-->
 
-</script>
+<!--</script>-->
 </body>
 </html>

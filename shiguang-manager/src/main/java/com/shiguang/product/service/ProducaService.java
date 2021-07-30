@@ -15,7 +15,6 @@ import java.util.Map;
  * @date 2021-06-25 18:06:25
  */
 public interface ProducaService {
-
     ProducaDO get(Long id);
 
     List<MgDO> mglist(Map<String, Object> map);
@@ -27,6 +26,7 @@ public interface ProducaService {
 
     int save(ProducaDO produca);
 
+    //修改停用启用
     int update(ProducaDO produca);
 
     int remove(Long id);
@@ -35,5 +35,8 @@ public interface ProducaService {
 
     //菜单联动显示
     List<BrandDO> choice(Integer mfrsid);
+
+    //删除修改状态
+    int updateState(ProducaDO produca);
 
 }

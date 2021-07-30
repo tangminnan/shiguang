@@ -16,7 +16,7 @@
       j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
       j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
       j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
-      j.`trade_price`,j.`transfer_price`,j.`retail_price`
+      j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`status`,j.`state`
       from aa_jpdz j
       left join c_refractivity r on r.refractivityid = j.refractivityid
       left join p_light pl on pl.light_id = j.light_id
@@ -35,6 +35,92 @@
       left join p_light lig on lig.light_id=j.light_id
       where id = #{value}
 	</select>
+
+    <select id="list" resultType="com.shiguang.product.domain.JpdzDO">
+        select lig.light_name,
+        yl.cyl,
+        cyl.cyl,
+        ph.sph,
+        sph.sph,
+        lt.lightbelow,
+        ltb.lightbelow,
+        m.mfrsname,b.brandname,u.unitnum,
+        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`factory`,j.`produc_factory`,
+        j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
+        j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
+        j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
+        j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`status`,j.`state`
+        from aa_jpdz j
+        left join c_refractivity r on r.refractivityid = j.refractivityid
+        left join p_light pl on pl.light_id = j.light_id
+        left join p_lens l on l.lens_id = j.lens_id
+        left join p_gradual g on g.gradual_id = j.gradual_id
+        left join p_function f on f.function_id = j.function_id
+        left join c_mfrs m on j.mfrsid=m.mfrsid
+        left join c_brand b on j.brandid=b.brandid
+        left join c_unit u on u.unitid=j.unitid
+        left join a_cyl yl on yl.cyl_id=j.cyl_up
+        left join a_cyl cyl on cyl.cyl_id=j.cyl_down
+        left join a_sph ph on ph.sph_id=j.sph_up
+        left join a_sph sph on sph.sph_id=j.sph_down
+        left join a_lightbelow lt on lt.lightbelow_id=j.lightbelow_left
+        left join a_lightbelow ltb on ltb.lightbelow_id=j.lightbelow_right
+        left join p_light lig on lig.light_id=j.light_id
+        where j.state= 1
+        group by j.id order by j.status asc ,j.id asc
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from aa_jpdz j
+        left join c_refractivity r on r.refractivityid = j.refractivityid
+        left join p_light pl on pl.light_id = j.light_id
+        left join p_lens l on l.lens_id = j.lens_id
+        left join p_gradual g on g.gradual_id = j.gradual_id
+        left join p_function f on f.function_id = j.function_id
+        <where>
+            <if test="id != null and id != ''">and j.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
+            <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
+            <if test="proid != null and proid != ''">and j.proid = #{proid}</if>
+            <if test="unitid != null and unitid != ''">and j.unitid = #{unitid}</if>
+            <if test="sphId != null and sphId != ''">and j.sph_id = #{sphId}</if>
+            <if test="spanId != null and spanId != ''">and j.span_id = #{spanId}</if>
+            <if test="cylId != null and cylId != ''">and j.cyl_id = #{cylId}</if>
+            <if test="sphUp != null and sphUp != ''">and j.sph_up = #{sphUp}</if>
+            <if test="sphDown != null and sphDown != ''">and j.sph_down = #{sphDown}</if>
+            <if test="sphSpan != null and sphSpan != ''">and j.sph_span = #{sphSpan}</if>
+            <if test="cylUp != null and cylUp != ''">and j.cyl_up = #{cylUp}</if>
+            <if test="cylDown != null and cylDown != ''">and j.cyl_down = #{cylDown}</if>
+            <if test="cylSpan != null and cylSpan != ''">and j.cyl_span = #{cylSpan}</if>
+            <if test="lightbelowId != null and lightbelowId != ''">and j.lightbelow_id = #{lightbelowId}</if>
+            <if test="lightbelowRight != null and lightbelowRight != ''">and j.lightbelow_right = #{lightbelowRight}
+            </if>
+            <if test="lightbelowLeft != null and lightbelowLeft != ''">and j.lightbelow_left = #{lightbelowLeft}</if>
+            <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
+            <if test="cycle != null and cycle != ''">and j.cycle = #{cycle}</if>
+            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
+            <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
+            <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
+            <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
+            <if test="combinedPhotometry != null and combinedPhotometry != ''">and j.combined_photometry =
+                #{combinedPhotometry}
+            </if>
+            <if test="can != null and can != ''">and j.can = #{can}</if>
+            <if test="tax != null and tax != ''">and j.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and j.tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and j.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and j.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
+            <if test="status != null and status != ''">and j.status = #{status}</if>
+            <if test="state != null and state != ''">and j.state = #{state}</if>
+        </where>
+    </select>
+
 
     <select id="listDz" resultType="com.shiguang.product.domain.JpdzDO">
         select lig.light_name,
@@ -208,7 +294,9 @@
 			`tax_price`, 
 			`trade_price`, 
 			`transfer_price`, 
-			`retail_price`
+			`retail_price`,
+			`status`,
+			`state`
 		)
 		values
 		(
@@ -245,7 +333,9 @@
 			#{taxPrice}, 
 			#{tradePrice}, 
 			#{transferPrice}, 
-			#{retailPrice}
+			#{retailPrice},
+			#{status},
+			#{state}
 		)
 	</insert>
 
@@ -285,7 +375,9 @@
             <if test="taxPrice != null">`tax_price` = #{taxPrice},</if>
             <if test="tradePrice != null">`trade_price` = #{tradePrice},</if>
             <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
-            <if test="retailPrice != null">`retail_price` = #{retailPrice}</if>
+            <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="state != null">`state` = #{state}</if>
         </set>
         where id = #{id}
     </update>
@@ -301,15 +393,20 @@
         </foreach>
     </delete>
     <!--查询镜片定做制造商-->
-    <select id="mglist" resultType="com.shiguang.product.domain.PartsDO">
-		select m.mfrsid,m.mfrsname from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid
-		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=3
+    <select id="mglist" resultType="com.shiguang.product.domain.JpdzDO">
+		select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
+        from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=4
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
 	</select>
     <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.PartsDO">
+    <select id="choice" resultType="com.shiguang.product.domain.JpdzDO">
 		select b.brandid,b.brandname from c_brand b left join  cc_mg mg on b.goodsid = mg.goodsid
 		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=3 and b.mfrsid = #{mfrsid} group by  b.brandid;
 	</select>
-
+    <!--删除状态修改-->
+    <update id="updateState" parameterType="com.shiguang.product.domain.JpdzDO">
+    update aa_jpdz set `state` = #{state} where id = #{id}
+    </update>
 
 </mapper>

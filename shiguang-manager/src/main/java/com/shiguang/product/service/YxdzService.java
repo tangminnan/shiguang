@@ -36,7 +36,7 @@ public interface YxdzService {
     //菜单联动显示
     List<BrandDO> choice(Integer mfrsid);
 
-    List<YxdzDO> listYxDz(Map<String, Object> map);
 
-    int countYxDz(Map<String, Object> map);
+    //删除修改状态
+    int updateState(YxdzDO yxdz);
 }

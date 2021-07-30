@@ -27,6 +27,7 @@ public interface JpcpDao {
 
     int save(JpcpDO jpcp);
 
+    //修改停用启用
     int update(JpcpDO jpcp);
 
     int remove(Long id);
@@ -39,4 +40,6 @@ public interface JpcpDao {
     //菜单联动显示
     List<BrandDO> choice(@Param("mfrsid") Integer mfrsid);
 
+    //删除修改状态
+    int updateState(JpcpDO jpcp);
 }

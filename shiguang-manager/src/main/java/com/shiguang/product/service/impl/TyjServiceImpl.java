@@ -63,4 +63,10 @@ public class TyjServiceImpl implements TyjService {
     public List<BrandDO> choice(Integer mfrsid) {
         return tyjDao.choice(mfrsid);
     }
+    //删除修改状态
+
+    @Override
+    public int updateState(TyjDO tyj) {
+        return tyjDao.updateState(tyj);
+    }
 }

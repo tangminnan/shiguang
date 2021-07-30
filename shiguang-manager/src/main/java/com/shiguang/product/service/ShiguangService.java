@@ -39,4 +39,7 @@ public interface ShiguangService {
 
     //菜单联动显示
     List<BrandDO> choice(Integer mfrsid);
+
+    //删除修改状态
+    int updateState(ShiguangDO shiguang);
 }

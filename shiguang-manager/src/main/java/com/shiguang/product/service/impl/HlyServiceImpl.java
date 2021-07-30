@@ -69,5 +69,10 @@ public class HlyServiceImpl implements HlyService {
     public List<BrandDO> choice(Integer mfrsid) {
         return hlyDao.choice(mfrsid);
     }
+    //删除修改状态
 
+    @Override
+    public int updateState(HlyDO hly) {
+        return hlyDao.updateState(hly);
+    }
 }

@@ -110,6 +110,30 @@ public class OldlensController {
     }
 
     /**
+     * 详情
+     */
+    @GetMapping("/detail/{id}")
+    @RequiresPermissions("product:oldlens:detail")
+    String detail(@PathVariable("id") Long id, Model model) {
+        OldlensDO oldlens = oldlensService.get(id);
+        model.addAttribute("oldlens", oldlens);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = oldlensService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //款式
+        List<StyleDO> styleDOList = styleService.list(map);
+        model.addAttribute("styleDOList", styleDOList);
+        //老花镜度数
+        List<OlddegreesDO> olddegreesDOList = olddegreesService.list(map);
+        model.addAttribute("olddegreesDOList", olddegreesDOList);
+        return "product/oldlens/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
@@ -133,21 +157,21 @@ public class OldlensController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:oldlens:remove")
-    public R remove(Long id) {
-        if (oldlensService.remove(id) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("product:oldlens:remove")
+//    public R remove(Long id) {
+//        if (oldlensService.remove(id) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -171,5 +195,34 @@ public class OldlensController {
     @RequiresPermissions("product:oldlens:findmfrs")
     String findmfrs() {
         return "/mfrs/mfrs/findOldlensMfrs";
+    }
+
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long id, Long enable) {
+        OldlensDO oldlensDO = new OldlensDO();
+        oldlensDO.setId(id);
+        oldlensDO.setStatus(enable);
+        oldlensService.update(oldlensDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Long id) {
+        OldlensDO oldlensDO = new OldlensDO();
+        oldlensDO.setState(0L);
+        oldlensDO.setId(id);
+        if (oldlensService.updateState(oldlensDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
     }
 }

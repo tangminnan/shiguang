@@ -32,6 +32,21 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">销售状态：</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline"> <input type="radio"
+                                                                    th:field="*{shiguang.status}" name="status"
+                                                                    value="1"/>
+                                    禁用
+                                </label>
+                                <label class="radio-inline"> <input type="radio"
+                                                                    th:field="*{shiguang.status}" name="status"
+                                                                    value="0"/>
+                                    启用
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">制造商：</label>
                             <div class="col-sm-8">
                                 <input th:value="${shiguang.mfrsname}"
@@ -124,28 +139,29 @@
                             <label class="col-sm-3 control-label">含税单价：</label>
                             <div class="col-sm-8">
                                 <input id="taxPrice" name="taxPrice" th:value="${shiguang.taxPrice}"
-                                       class="form-control" type="text">
+                                       class="form-control"
+                                       type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">批发价格：</label>
                             <div class="col-sm-8">
                                 <input id="tradePrice" name="tradePrice" th:value="${shiguang.tradePrice}"
-                                       class="form-control" type="text">
+                                       class="form-control" type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">调货成本：</label>
                             <div class="col-sm-8">
                                 <input id="transferPrice" name="transferPrice" th:value="${shiguang.transferPrice}"
-                                       class="form-control" type="text">
+                                       class="form-control" type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">标准零售价格：</label>
                             <div class="col-sm-8">
                                 <input id="retailPrice" name="retailPrice" th:value="${shiguang.retailPrice}"
-                                       class="form-control" type="text">
+                                       class="form-control" type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">

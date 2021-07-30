@@ -58,9 +58,6 @@ public class ProducaController {
     @RequiresPermissions("product:produca:produca")
     String Produca(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
-//        List<MgDO> mfrsDOList = producaService.mglist(map);
-//        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -93,9 +90,6 @@ public class ProducaController {
     @RequiresPermissions("product:produca:add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
-//        List<MgDO> mfrsDOList = producaService.mglist(map);
-//        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -134,6 +128,31 @@ public class ProducaController {
     }
 
     /**
+     * 详情
+     */
+    @GetMapping("/detail/{id}")
+    @RequiresPermissions("product:produca:detail")
+    String detial(@PathVariable("id") Long id, Model model) {
+        //修改时显示制造商和商品品种名称
+        ProducaDO produca = producaService.get(id);
+        model.addAttribute("produca", produca);
+        Map<String, Object> map = new HashMap<>();
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //工艺类型
+        List<TechnologyDO> technologyDOList = technologyService.list(map);
+        model.addAttribute("technologyDOList", technologyDOList);
+        //镜架材质
+        List<MaterialDO> materialDOList = materialService.list(map);
+        model.addAttribute("materialDOList", materialDOList);
+        //款式
+        List<StyleDO> styleDOList = styleService.list(map);
+        model.addAttribute("styleDOList", styleDOList);
+        return "product/produca/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
@@ -157,21 +176,21 @@ public class ProducaController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:produca:remove")
-    public R remove(Long id) {
-        if (producaService.remove(id) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("product:produca:remove")
+//    public R remove(Long id) {
+//        if (producaService.remove(id) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -195,6 +214,35 @@ public class ProducaController {
     @RequiresPermissions("product:produca:findmfrs")
     String findmfrs() {
         return "mfrs/mfrs/findProducaMfrs";
+    }
+
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long id, Long enable) {
+        ProducaDO producaDO = new ProducaDO();
+        producaDO.setId(id);
+        producaDO.setStatus(enable);
+        producaService.update(producaDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Long id) {
+        ProducaDO producaDO = new ProducaDO();
+        producaDO.setState(0L);
+        producaDO.setId(id);
+        if (producaService.updateState(producaDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
     }
 
 }

@@ -150,26 +150,27 @@ function load() {
                     //         return str;
                     //     }
                     // },
-                    {
-                        title: '操作',
-                        field: 'id',
-                        align: 'center',
-                        formatter: function (value, row, index) {
-                            var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                                + row.mfrsid
-                                + '\')"><i class="fa fa-edit"></i></a> ';
-                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                                + row.mfrsid
-                                + '\')"><i class="fa fa-remove"></i></a> ';
-                            // var a = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="详情" onclick="detail(\''
-                            //     + row.mfrsid
-                            //     + '\')">详情</a> ';
-                            var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-                                + row.mfrsid
-                                + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d;
-                        }
-                    }]
+                    // {
+                    //     title: '操作',
+                    //     field: 'id',
+                    //     align: 'center',
+                    //     formatter: function (value, row, index) {
+                    //         var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+                    //             + row.mfrsid
+                    //             + '\')"><i class="fa fa-edit"></i></a> ';
+                    //         var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                    //             + row.mfrsid
+                    //             + '\')"><i class="fa fa-remove"></i></a> ';
+                    //         // var a = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="详情" onclick="detail(\''
+                    //         //     + row.mfrsid
+                    //         //     + '\')">详情</a> ';
+                    //         var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+                    //             + row.mfrsid
+                    //             + '\')"><i class="fa fa-key"></i></a> ';
+                    //         return e + d;
+                    //     }
+                    // }
+                ]
             });
 }
 

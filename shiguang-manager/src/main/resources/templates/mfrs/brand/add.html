@@ -208,17 +208,21 @@
                                 <input id="productionkey" name="productionkey" class="form-control" type="text">
                             </div>
                         </div>
+                        <!--启用状态-->
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">状态：</label>
+                            <label class="col-sm-3 control-label">启用状态：</label>
                             <div class="col-sm-8">
                                 <label class="radio-inline"> <input type="radio"
-                                                                    name="stateId" value="1" checked/> 启用
+                                                                    name="status" value="1"/> 禁用
                                 </label>
                                 <label class="radio-inline"> <input type="radio"
-                                                                    name="stateId" value="2"/> 停用
+                                                                    name="status" value="0"/> 启用
                                 </label>
+                                <span style="color: red">*</span>
                             </div>
                         </div>
+                        <!--未删除-->
+                        <input id="state" name="state" value="1" type="hidden">
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <button type="submit" class="btn btn-primary">提交</button>
@@ -268,7 +272,6 @@
     }
 
     function goodsidstr(value) {
-        //2配件6太阳镜7老花镜8耗材9视光
         if (value == '1') {
             tab1.style = "display: block";
             tab2.style = "display: none";

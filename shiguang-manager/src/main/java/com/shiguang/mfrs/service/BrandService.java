@@ -21,11 +21,15 @@ public interface BrandService {
 
     List<BrandDO> list(Map<String, Object> map);
 
+    //    <!--//判断是否存在制造商代码-->
+    List<BrandDO> haveNum(Map<String, Object> map);
+
     int count(Map<String, Object> map);
 
 
     int save(BrandDO brand);
 
+    //修改停用启用
     int update(BrandDO brand);
 
     int remove(Integer brandid);
@@ -35,5 +39,7 @@ public interface BrandService {
     //菜单联动显示
     List<GoodsDO> caidan(Integer mfrsid);
 
+    //删除修改状态
+    int updateState(BrandDO brand);
 
 }

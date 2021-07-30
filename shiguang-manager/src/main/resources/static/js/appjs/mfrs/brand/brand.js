@@ -189,6 +189,30 @@ function load() {
                     //     title : '状态（1：停用2：启用）'
                     // },
                     {
+                        field: 'status',
+                        title: '启用状态',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            var str = '';
+                            str += ' <div class="switch onoffswitch col-sm-1"> ';
+                            str += ' <div class="onoffswitch"> ';
+                            str += ' <input name="allowComment" ';
+                            //启用状态 0：启用；1：禁用
+                            if (row.status == 0)
+                                str += ' checked="" ';
+
+                            str += ' type="checkbox" onchange="updateEnable(' + row.brandid + ',this)" value="' + row.brandid + '" class="onoffswitch-checkbox" id="example1' + row.brandid + '">  ';
+                            str += ' <label class="onoffswitch-label" for="example1' + row.brandid + '">  ';
+                            str += ' <span class="onoffswitch-inner" ></span> ';
+                            str += ' <span class="onoffswitch-switch" ></span> ';
+                            str += ' </label> ';
+                            str += ' </div>';
+                            str += ' </div>';
+                            return str;
+                        }
+                    },
+
+                    {
                         title: '操作',
                         field: 'id',
                         align: 'center',
@@ -199,10 +223,10 @@ function load() {
                             var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
                                 + row.brandid
                                 + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+                            var f = '<a class="btn btn-success btn-sm" href="#" title="详情"  mce_href="#" onclick="resetPwd(\''
                                 + row.brandid
-                                + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d;
+                                + '\')">详情</a> ';
+                            return e + d + f;
                         }
                     }]
             });
@@ -224,6 +248,7 @@ function add() {
     layer.full(toIndex);
 }
 
+
 function edit(id) {
     var toIndex = layer.open({
         type: 2,
@@ -234,6 +259,18 @@ function edit(id) {
         content: prefix + '/edit/' + id // iframe的url
     });
     layer.full(toIndex);
+}
+
+//详情
+function resetPwd(id) {
+    layer.open({
+        type: 2,
+        title: '详情',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/detail/' + id // iframe的url
+    });
 }
 
 function remove(id) {
@@ -258,8 +295,6 @@ function remove(id) {
     })
 }
 
-function resetPwd(id) {
-}
 
 function batchRemove() {
     var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
@@ -296,8 +331,29 @@ function batchRemove() {
     });
 }
 
-// //选择制造商
-// function batchSelect() {
-//     var rows = $("#exampleTable").bootstrapTable("getSelections");
-//     return rows;
-// };
+//修改启用状态
+function updateEnable(brandid, enable) {
+    var isEnable = 1;
+    if ($(enable).prop("checked")) {
+        isEnable = 0;
+    }
+
+    $.ajax({
+        url: prefix + "/updateEnable",
+        type: "post",
+        data: {
+            'brandid': brandid,
+            'enable': isEnable
+        },
+        dataType: 'JSON',
+        async: false,
+        success: function (r) {
+            if (r.code == 0) {
+                layer.msg(r.msg);
+                reLoad();
+            } else {
+                layer.msg(r.msg);
+            }
+        }
+    });
+}

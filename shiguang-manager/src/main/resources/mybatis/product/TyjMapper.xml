@@ -6,7 +6,7 @@
     <select id="get" resultType="com.shiguang.product.domain.TyjDO">
 		select t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
 		t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
-		t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`
+		t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`status`,t.`state`
 		from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandid=b.brandid
         left join  c_unit u on t.unitid= u.unitid
 		where id = #{value}
@@ -16,49 +16,11 @@
         select
         t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
         t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
-        t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`
+        t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`status`,t.`state`
         from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandid=b.brandid
         left join c_unit u on t.unitid= u.unitid
-        <where>
-            <if test="id != null and id != ''">and t.id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and t.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and t.produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and t.mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and t.brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and t.factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and t.produc_factory = #{producFactory}</if>
-            <if test="unitid != null and unitid != ''">and t.unitid = #{unitid}</if>
-            <if test="producFactorycolor != null and producFactorycolor != ''">and t.produc_factorycolor =
-                #{producFactorycolor}
-            </if>
-            <if test="producColor != null and producColor != ''">and t.produc_color = #{producColor}</if>
-            <if test="batchid != null and batchid != ''">and t.batchid = #{batchid}</if>
-            <if test="size != null and size != ''">and t.size = #{size}</if>
-            <if test="function != null and function != ''">and t.function = #{function}</if>
-            <if test="color != null and color != ''">and t.color = #{color}</if>
-            <if test="styleId != null and styleId != ''">and t.style_id = #{styleId}</if>
-            <if test="year != null and year != ''">and t.year = #{year}</if>
-            <if test="tax != null and tax != ''">and t.tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and t.tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and t.trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and t.transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and t.retail_price = #{retailPrice}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-            <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
-        </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-                order by id
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
+         where t.state= 1
+        group by t.id order by t.status asc ,t.id asc
     </select>
 
     <select id="count" resultType="int">
@@ -88,6 +50,8 @@
             <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
             <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
             <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="state != null and state != ''">and state = #{state}</if>
         </where>
     </select>
 
@@ -114,7 +78,9 @@
 			`tax_price`, 
 			`trade_price`, 
 			`transfer_price`, 
-			`retail_price`
+			`retail_price`,
+			`status`,
+			`state`
 		)
 		values
 		(
@@ -138,7 +104,9 @@
 			#{taxPrice}, 
 			#{tradePrice}, 
 			#{transferPrice}, 
-			#{retailPrice}
+			#{retailPrice},
+			#{status},
+			#{state}
 		)
 	</insert>
 
@@ -165,7 +133,9 @@
             <if test="taxPrice != null">`tax_price` = #{taxPrice},</if>
             <if test="tradePrice != null">`trade_price` = #{tradePrice},</if>
             <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
-            <if test="retailPrice != null">`retail_price` = #{retailPrice}</if>
+            <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="state != null">`state` = #{state}</if>
         </set>
         where id = #{id}
     </update>
@@ -181,13 +151,18 @@
         </foreach>
     </delete>
     <!--查询太阳镜制造商-->
-    <select id="mglist" resultType="com.shiguang.product.domain.ProducaDO">
-		select m.mfrsid,m.mfrsname  from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=6
-	</select>
+    <select id="mglist" resultType="com.shiguang.product.domain.TyjDO">
+select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
+        from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=6
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc	</select>
     <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.ProducaDO">
+    <select id="choice" resultType="com.shiguang.product.domain.TyjDO">
 		select b.brandid,b.brandname from c_brand b left join  cc_mg mg
 		on b.goodsid = mg.goodsid  left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=6 and b.mfrsid = #{mfrsid} group by  b.brandid;
 	</select>
-
+    <!--删除状态修改-->
+    <update id="updateState" parameterType="com.shiguang.product.domain.TyjDO">
+    update aa_tyj set `state` = #{state} where id = #{id}
+    </update>
 </mapper>

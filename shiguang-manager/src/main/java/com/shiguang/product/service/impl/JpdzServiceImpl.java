@@ -23,6 +23,16 @@ public class JpdzServiceImpl implements JpdzService {
     }
 
     @Override
+    public List<JpdzDO> list(Map<String, Object> map) {
+        return jpdzDao.list(map);
+    }
+
+    @Override
+    public int count(Map<String, Object> map) {
+        return jpdzDao.count(map);
+    }
+
+    @Override
     public List<JpdzDO> listDz(Map<String, Object> map) {
         return jpdzDao.listDz(map);
     }
@@ -63,5 +73,10 @@ public class JpdzServiceImpl implements JpdzService {
     public List<BrandDO> choice(Integer mfrsid) {
         return jpdzDao.choice(mfrsid);
     }
+    //删除修改状态
 
+    @Override
+    public int updateState(JpdzDO jpdz) {
+        return jpdzDao.updateState(jpdz);
+    }
 }

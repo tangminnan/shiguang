@@ -6,7 +6,8 @@
     <select id="get" resultType="com.shiguang.product.domain.HlyDO">
 		select m.`mfrsname`,b.`brandname`,u.`unitname`,
 		h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
-		h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`
+		h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
+		h.`status`,h.`state`
 		from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandid=b.brandid
         left join  c_unit u on h.unitid= u.unitid
 		where id = #{value}
@@ -15,49 +16,18 @@
     <select id="list" resultType="com.shiguang.product.domain.HlyDO">
         select m.`mfrsname`,b.`brandname`,u.`unitname`,
         h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
-        h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`
+        h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
+        h.`status`,h.`state`
         from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandid=b.brandid
         left join c_unit u on h.unitid= u.unitid
-        <where>
-            <if test="id != null and id != ''">and h.id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
-            <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
-            <if test="proid != null and proid != ''">and h.proid = #{proid}</if>
-            <if test="unitid != null and unitid != ''">and h.unitid = #{unitid}</if>
-            <if test="productType != null and productType != ''">and h.product_type = #{productType}</if>
-            <if test="mainCapacity != null and mainCapacity != ''">and h.main_capacity = #{mainCapacity}</if>
-            <if test="secondCapacity != null and secondCapacity != ''">and h.second_capacity = #{secondCapacity}</if>
-            <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
-            <if test="upday != null and upday != ''">and h.upday = #{upday}</if>
-            <if test="downday != null and downday != ''">and h.downday = #{downday}</if>
-            <if test="tax != null and tax != ''">and h.tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and h.tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and h.trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and h.transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and h.retail_price = #{retailPrice}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-            <if test="unitname != null and unitname != ''">and u.unitname = #{unitname}</if>
-        </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-                order by id desc
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
+        where h.state= 1
+        group by h.id order by h.status asc ,h.id asc
     </select>
     <select id="gethly" resultType="com.shiguang.product.domain.HlyDO">
         select
-        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`proid`,`unitid`,`product_type`,`main_capacity`,`second_capacity`,`produc_factory`,`upday`,`downday`,`tax`,`tax_price`,`trade_price`,`transfer_price`,`retail_price`
+        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`proid`,`unitid`,`product_type`,
+        `main_capacity`,`second_capacity`,`produc_factory`,`upday`,`downday`,`tax`,`tax_price`,`trade_price`,
+        `transfer_price`,`retail_price`,`status`,`state`
         from aa_hly
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
@@ -80,6 +50,8 @@
             <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
             <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
             <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="state != null and state != ''">and state = #{state}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -117,6 +89,8 @@
             <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
             <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
             <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="state != null and state != ''">and state = #{state}</if>
         </where>
     </select>
 
@@ -141,7 +115,9 @@
 			`tax_price`, 
 			`trade_price`, 
 			`transfer_price`, 
-			`retail_price`
+			`retail_price`,
+			`status`,
+			`state`
 		)
 		values
 		(
@@ -163,7 +139,9 @@
 			#{taxPrice}, 
 			#{tradePrice}, 
 			#{transferPrice}, 
-			#{retailPrice}
+			#{retailPrice},
+			#{status},
+			#{state}
 		)
 	</insert>
 
@@ -188,7 +166,9 @@
             <if test="taxPrice != null">`tax_price` = #{taxPrice},</if>
             <if test="tradePrice != null">`trade_price` = #{tradePrice},</if>
             <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
-            <if test="retailPrice != null">`retail_price` = #{retailPrice}</if>
+            <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="state != null">`state` = #{state}</if>
         </set>
         where id = #{id}
     </update>
@@ -204,14 +184,19 @@
         </foreach>
     </delete>
     <!--查询镜片定做制造商-->
-    <select id="mglist" resultType="com.shiguang.product.domain.PartsDO">
-		select m.mfrsid,m.mfrsname from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid
-		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=5
+    <select id="mglist" resultType="com.shiguang.product.domain.HlyDO">
+		select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
+        from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=5
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
 	</select>
     <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.PartsDO">
+    <select id="choice" resultType="com.shiguang.product.domain.HlyDO">
 		select b.brandid,b.brandname from c_brand b left join  cc_mg mg on b.goodsid = mg.goodsid
 		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=5 and b.mfrsid = #{mfrsid} group by  b.brandid;
 	</select>
-
+    <!--删除状态修改-->
+    <update id="updateState" parameterType="com.shiguang.product.domain.HlyDO">
+    update aa_hly set `state` = #{state} where id = #{id}
+    </update>
 </mapper>

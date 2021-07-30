@@ -63,5 +63,10 @@ public class HcServiceImpl implements HcService {
     public List<BrandDO> choice(Integer mfrsid) {
         return hcDao.choice(mfrsid);
     }
+    //删除修改状态
 
+    @Override
+    public int updateState(HcDO hc) {
+        return hcDao.updateState(hc);
+    }
 }

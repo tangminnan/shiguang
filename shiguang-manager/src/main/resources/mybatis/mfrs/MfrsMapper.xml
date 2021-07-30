@@ -6,58 +6,83 @@
     <select id="get" resultType="com.shiguang.mfrs.domain.MfrsDO">
 		select `mfrsid`,`mfrsnum`,`mfrsname`,`mfrscontacts`,`mfrsrealname`,`mfrstelephone`,`mfrsphone`,`goodsid`,`mfrsfax`,`mfrsaddress`,`payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday`,`remarks`,`status`,`state` from c_mfrs where mfrsid = #{value}
 	</select>
+    <!--//判断是否存在制造商代码-->
+    <select id="haveNum" resultType="com.shiguang.mfrs.domain.MfrsDO">
+        select `mfrsid`,`mfrsnum`,`mfrsname`,`mfrscontacts`,`mfrsrealname`,`mfrstelephone`,`mfrsphone`,`goodsid`,`mfrsfax`,`mfrsaddress`,
+        `payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday`,
+        `remarks`,`status`,`state`
+         from c_mfrs WHERE mfrsnum = #{mfrsnum} order by mfrsid
+    </select>
     <!--商品查询-->
-    <select id="mglist" resultType="com.shiguang.mfrs.domain.MfrsDO">
+    <select id="list" resultType="com.shiguang.mfrs.domain.MfrsDO">
        select
         m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsrealname`,m.`mfrstelephone`,m.`mfrsphone`,m.`goodsid`,m.`mfrsfax`,m.`mfrsaddress`,m.`payid`,m.`invoiceid`,m.`creditcode`,m.`creditcodeday`,m.`medicinecode`,m.`medicinecodeday`,m.`productscode`,m.`productscodeday`,m.`remarks`,m.`status`,m.`state`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid
-				where m.state= 1
-				group by m.mfrsid order by m.mfrsid asc , m.status =0 desc
+        where m.state= 1
+        group by m.mfrsid order by m.status asc ,m.mfrsid asc
     </select>
     <!--查询镜架制造商-->
     <select id="producaList" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=1
+		and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
     </select>
     <!--查询配件制造商-->
     <select id="partsList" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=2
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
     </select>
     <!--查询镜片制造商-->
     <select id="jpcpList" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=3
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
     </select>
     <!--查询隐形制造商-->
     <select id="yxcpList" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=4
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
     </select>
     <!--查询护理液制造商-->
     <select id="hlyList" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=5
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
     </select>
     <!--查询太阳镜制造商-->
     <select id="tyjList" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=6
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
     </select>
     <!--查询老花镜制造商-->
     <select id="oldlensList" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=7
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
     </select>
     <!--查询耗材制造商-->
     <select id="hcList" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=8
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
     </select>
     <!--查询视光制造商-->
     <select id="shiguangList" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=9
+        and m.state= 1
+        group by m.mfrsid order by m.mfrsid asc
     </select>
     <select id="mgcount" resultType="int">
         select count(*) from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid
@@ -174,7 +199,7 @@
         </foreach>
     </delete>
 
-    <!--停用启动-->
+    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.mfrs.domain.MfrsDO">
     update c_mfrs set `state` = #{state} where mfrsid = #{mfrsid}
     </update>

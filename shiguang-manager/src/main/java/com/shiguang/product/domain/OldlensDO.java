@@ -58,6 +58,10 @@ public class OldlensDO implements Serializable {
     private String transferPrice;
     //标准零售价格
     private String retailPrice;
+    //状态（0：启用1：停用）
+    private Long status;
+    //状态(0:删除1:未删除)
+    private Long state;
 
     /**
      * 设置：老花镜id
@@ -337,6 +341,34 @@ public class OldlensDO implements Serializable {
      */
     public String getRetailPrice() {
         return retailPrice;
+    }
+
+    /**
+     * 设置：状态(0：启用1：停用)
+     */
+    public Long getStatus() {
+        return status;
+    }
+
+    /**
+     * 获取：状态(0：启用1：停用)
+     */
+    public void setStatus(Long status) {
+        this.status = status;
+    }
+
+    /**
+     * 设置删除：//状态(0:删除1:未删除)
+     */
+    public Long getState() {
+        return state;
+    }
+
+    /**
+     * 获取删除：//状态(0:删除1:未删除)
+     */
+    public void setState(Long state) {
+        this.state = state;
     }
 
     public String getMfrsname() {

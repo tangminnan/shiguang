@@ -2,68 +2,93 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shiguang.stock.dao.StockDao">
-
-	<select id="get" resultType="com.shiguang.stock.domain.StockDO">
-		select `id`,`goods_code`,`goods_name`,`goods_num`,`goods_type`,`mfrsid`,`retail_price`,`price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time` from stock where id = #{value}
+    <!--&lt;!&ndash;菜单联动显示&ndash;&gt;-->
+    <!--<select id="choice" resultType="com.shiguang.stock.domain.StockDO">-->
+    <!--select b.brandid,b.brandname from c_brand b left join  cc_mg mg-->
+    <!--on b.goodsid = mg.goodsid  left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=8 and b.mfrsid = #{mfrsid} group by  b.brandid;-->
+    <!--</select>-->
+    <select id="get" resultType="com.shiguang.stock.domain.StockDO">
+		select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`retail_price`,`price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu` from stock where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.shiguang.stock.domain.StockDO">
-		select `id`,`goods_code`,`goods_name`,`goods_num`,`goods_type`,`mfrsid`,`retail_price`,`price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time` from stock
+    <select id="list" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`retail_price`,`price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`
+        from stock
         <where>
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
-		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
-		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
-		  		  <if test="goodsType != null and goodsType != ''"> and goods_type = #{goodsType} </if>
-		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
-		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
-		  		  <if test="priceSum != null and priceSum != ''"> and price_sum = #{priceSum} </if>
-		  		  <if test="costPrice != null and costPrice != ''"> and cost_price = #{costPrice} </if>
-		  		  <if test="costSum != null and costSum != ''"> and cost_sum = #{costSum} </if>
-		  		  <if test="wholePrice != null and wholePrice != ''"> and whole_price = #{wholePrice} </if>
-		  		  <if test="wholeSum != null and wholeSum != ''"> and whole_sum = #{wholeSum} </if>
-		  		  <if test="positionName != null and positionName != ''"> and position_name = #{positionName} </if>
-			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		</where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+            <if test="orderNumber != null and orderNumber != ''">and order_number = #{orderNumber}</if>
+            <if test="yundanNumber != null and yundanNumber != ''">and yundan_number = #{yundanNumber}</if>
+            <if test="zhidanPeople != null and zhidanPeople != ''">and zhidan_people = #{zhidanPeople}</if>
+            <if test="danjuDay != null and danjuDay != ''">and danju_day = #{danjuDay}</if>
+            <if test="tuihuoNumber != null and tuihuoNumber != ''">and tuihuo_number = #{tuihuoNumber}</if>
+            <if test="factoryNumber != null and factoryNumber != ''">and factory_number = #{factoryNumber}</if>
+            <if test="beizhu != null and beizhu != ''">and beizhu = #{beizhu}</if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by id desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
- 	<select id="count" resultType="int">
-		select count(*) from stock
-		 <where>
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
-		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
-		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
-		  		  <if test="goodsType != null and goodsType != ''"> and goods_type = #{goodsType} </if>
-		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
-		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
-		  		  <if test="priceSum != null and priceSum != ''"> and price_sum = #{priceSum} </if>
-		  		  <if test="costPrice != null and costPrice != ''"> and cost_price = #{costPrice} </if>
-		  		  <if test="costSum != null and costSum != ''"> and cost_sum = #{costSum} </if>
-		  		  <if test="wholePrice != null and wholePrice != ''"> and whole_price = #{wholePrice} </if>
-		  		  <if test="wholeSum != null and wholeSum != ''"> and whole_sum = #{wholeSum} </if>
-		  		  <if test="positionName != null and positionName != ''"> and position_name = #{positionName} </if>
-			      <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		</where>
-	</select>
+    <select id="count" resultType="int">
+        select count(*) from stock
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+            <if test="orderNumber != null and orderNumber != ''">and order_number = #{orderNumber}</if>
+            <if test="yundanNumber != null and yundanNumber != ''">and yundan_number = #{yundanNumber}</if>
+            <if test="zhidanPeople != null and zhidanPeople != ''">and zhidan_people = #{zhidanPeople}</if>
+            <if test="danjuDay != null and danjuDay != ''">and danju_day = #{danjuDay}</if>
+            <if test="tuihuoNumber != null and tuihuoNumber != ''">and tuihuo_number = #{tuihuoNumber}</if>
+            <if test="factoryNumber != null and factoryNumber != ''">and factory_number = #{factoryNumber}</if>
+            <if test="beizhu != null and beizhu != ''">and beizhu = #{beizhu}</if>
+        </where>
+    </select>
 
-	<insert id="save" parameterType="com.shiguang.stock.domain.StockDO" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="com.shiguang.stock.domain.StockDO" useGeneratedKeys="true" keyProperty="id">
 		insert into stock
 		(
+			`goods_num`,
 			`goods_code`,
 			`goods_name`,
-			`goods_num`,
+			`goods_count`,
 			`goods_type`,
 			`mfrsid`,
 			`retail_price`,
@@ -73,13 +98,22 @@
 			`whole_price`,
 			`whole_sum`,
 			`position_name`,
-			`create_time`
+			`create_time`,
+			`danju_number`,
+			`order_number`,
+			`yundan_number`,
+			`zhidan_people`,
+			`danju_day`,
+			`tuihuo_number`,
+			`factory_number`,
+			`beizhu`
 		)
 		values
 		(
+			#{goodsNum},
 			#{goodsCode},
 			#{goodsName},
-			#{goodsNum},
+			#{goodsCount},
 			#{goodsType},
 			#{mfrsid},
 			#{retailPrice},
@@ -89,698 +123,734 @@
 			#{wholePrice},
 			#{wholeSum},
 			#{positionName},
-			#{createTime}
+			#{createTime},
+			#{danjuNumber},
+			#{orderNumber},
+			#{yundanNumber},
+			#{zhidanPeople},
+			#{danjuDay},
+			#{tuihuoNumber},
+			#{factoryNumber},
+			#{beizhu}
 		)
 	</insert>
 
-	<update id="update" parameterType="com.shiguang.stock.domain.StockDO">
-		update stock
-		<set>
-			<if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
-			<if test="goodsType != null">`goods_type` = #{goodsType}, </if>
-			<if test="mfrsid != null">`mfrsid` = #{mfrsid}, </if>
-			<if test="retailPrice != null">`retail_price` = #{retailPrice}, </if>
-			<if test="priceSum != null">`price_sum` = #{priceSum}, </if>
-			<if test="costPrice != null">`cost_price` = #{costPrice}, </if>
-			<if test="costSum != null">`cost_sum` = #{costSum}, </if>
-			<if test="wholePrice != null">`whole_price` = #{wholePrice}, </if>
-			<if test="wholeSum != null">`whole_sum` = #{wholeSum}, </if>
-			<if test="positionName != null">`position_name` = #{positionName},</if>
-			<if test="createTime != null">`create_time` = #{createTime}</if>
-		</set>
-		where id = #{id}
-	</update>
+    <update id="update" parameterType="com.shiguang.stock.domain.StockDO">
+        update stock
+        <set>
+            <if test="goodsNum != null">`goods_num` = #{goodsNum},</if>
+            <if test="goodsCode != null">`goods_code` = #{goodsCode},</if>
+            <if test="goodsName != null">`goods_name` = #{goodsName},</if>
+            <if test="goodsCount != null">`goods_count` = #{goodsCount},</if>
+            <if test="goodsType != null">`goods_type` = #{goodsType},</if>
+            <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
+            <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
+            <if test="priceSum != null">`price_sum` = #{priceSum},</if>
+            <if test="costPrice != null">`cost_price` = #{costPrice},</if>
+            <if test="costSum != null">`cost_sum` = #{costSum},</if>
+            <if test="wholePrice != null">`whole_price` = #{wholePrice},</if>
+            <if test="wholeSum != null">`whole_sum` = #{wholeSum},</if>
+            <if test="positionName != null">`position_name` = #{positionName},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="danjuNumber != null">`danju_number` = #{danjuNumber},</if>
+            <if test="orderNumber != null">`order_number` = #{orderNumber},</if>
+            <if test="yundanNumber != null">`yundan_number` = #{yundanNumber},</if>
+            <if test="zhidanPeople != null">`zhidan_people` = #{zhidanPeople},</if>
+            <if test="danjuDay != null">`danju_day` = #{danjuDay},</if>
+            <if test="tuihuoNumber != null">`tuihuo_number` = #{tuihuoNumber},</if>
+            <if test="factoryNumber != null">`factory_number` = #{factoryNumber},</if>
+            <if test="beizhu != null">`beizhu` = #{beizhu}</if>
+        </set>
+        where id = #{id}
+    </update>
 
-	<delete id="remove">
+    <delete id="remove">
 		delete from stock where id = #{value}
 	</delete>
 
-	<delete id="batchRemove">
-		delete from stock where id in
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+    <delete id="batchRemove">
+        delete from stock where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
-	<!-- 镜架查询 -->
-	<select id="listJiajia" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`,pr.`produc_factory`,pr.`produc_color`,ac.`materialname`,pr.`size`
-		from stock st left join aa_produca pr on pr.produc_num = st.goods_num left join c_material ac on ac.materialid = pr.materialid
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
 
-	<select id="countJiajia" resultType="int">
-		select count(*) from stock st left join aa_produca pr on pr.produc_num = st.goods_num left join a_caizhi ac on ac.caizhi_id = pr.materialid
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-	</select>
+    <!-- 镜架查询 -->
+    <select id="listJiajia" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,pr.`produc_factory`,pr.`produc_color`,ac.`materialname`,pr.`size`
+        from stock st left join aa_produca pr on pr.produc_num = st.goods_num left join c_material ac on ac.materialid =
+        pr.materialid
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<!-- 镜片(成品)查询 -->
-	<select id="listJpcp" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`,s.`sph`,c.`cyl`,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`
-		from stock st left join aa_jpcp j on j.produc_num = st.goods_num
-		left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
-		left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid = j.refractivityid
-		left join p_light pl on pl.light_id = j.light_id left join p_lens le on le.lens_id = j.lens_id
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-			<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
-			<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
-			<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
-			<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+    <select id="countJiajia" resultType="int">
+        select count(*) from stock st left join aa_produca pr on pr.produc_num = st.goods_num left join a_caizhi ac on
+        ac.caizhi_id = pr.materialid
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+    </select>
 
-	<select id="countJpcp" resultType="int">
-		select count(*)
-		from stock st left join aa_jpcp j on j.produc_num = st.goods_num
-		left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
-		left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid = j.refractivityid
-		left join p_light pl on pl.light_id = j.light_id left join p_lens le on le.lens_id = j.lens_id
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-			<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
-			<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
-			<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
-			<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
-		</where>
-	</select>
+    <!-- 镜片(成品)查询 -->
+    <select id="listJpcp" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,s.`sph`,c.`cyl`,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`
+        from stock st left join aa_jpcp j on j.produc_num = st.goods_num
+        left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
+        left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
+        j.refractivityid
+        left join p_light pl on pl.light_id = j.light_id left join p_lens le on le.lens_id = j.lens_id
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph = #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<!-- 镜片(订做)查询 -->
-	<select id="listJpdz" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`,s.`sph`,c.`cyl`,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`,f.`function_name`,g.`gradual_name`,
-		j.`sph_up`,j.`sph_down`,j.`cyl_up`,j.`cyl_down`,j.`lightbelow_right`,j.`lightbelow_left`
-		from stock st left join aa_jpdz j on j.produc_num = st.goods_num
-		left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
-		left join c_refractivity r on r.refractivityid = j.refractivityid
-		left join p_light pl on pl.light_id = j.light_id
-		left join p_lens l on l.lens_id = j.lens_id
-		left join p_gradual g on g.gradual_id = j.gradual_id
-		left join  p_function f on f.function_id = j.function_id
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-			<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
-			<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
-			<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
-			<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
+    <select id="countJpcp" resultType="int">
+        select count(*)
+        from stock st left join aa_jpcp j on j.produc_num = st.goods_num
+        left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
+        left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
+        j.refractivityid
+        left join p_light pl on pl.light_id = j.light_id left join p_lens le on le.lens_id = j.lens_id
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph = #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+        </where>
+    </select>
 
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+    <!-- 镜片(订做)查询 -->
+    <select id="listJpdz" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,s.`sph`,c.`cyl`,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`,f.`function_name`,g.`gradual_name`,
+        j.`sph_up`,j.`sph_down`,j.`cyl_up`,j.`cyl_down`,j.`lightbelow_right`,j.`lightbelow_left`
+        from stock st left join aa_jpdz j on j.produc_num = st.goods_num
+        left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
+        left join c_refractivity r on r.refractivityid = j.refractivityid
+        left join p_light pl on pl.light_id = j.light_id
+        left join p_lens l on l.lens_id = j.lens_id
+        left join p_gradual g on g.gradual_id = j.gradual_id
+        left join p_function f on f.function_id = j.function_id
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph = #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
 
-	<select id="countJpdz" resultType="int">
-		select count(*)
-		from stock st left join aa_jpdz j on j.produc_num = st.goods_num
-		left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
-		left join c_refractivity r on r.refractivityid = j.refractivityid
-		left join p_light pl on pl.light_id = j.light_id
-		left join p_lens l on l.lens_id = j.lens_id
-		left join p_gradual g on g.gradual_id = j.gradual_id
-		left join  p_function f on f.function_id = j.function_id
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
-		</where>
-	</select>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<!-- 镜架配件查询 -->
-	<select id="listJiajiapj" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`,pr.`produc_factory`,pr.`parts_style`
-		from stock st left join aa_parts pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="partsStyle != null and partsStyle != ''"> and pr.parts_style = #{partsStyle} </if>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+    <select id="countJpdz" resultType="int">
+        select count(*)
+        from stock st left join aa_jpdz j on j.produc_num = st.goods_num
+        left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
+        left join c_refractivity r on r.refractivityid = j.refractivityid
+        left join p_light pl on pl.light_id = j.light_id
+        left join p_lens l on l.lens_id = j.lens_id
+        left join p_gradual g on g.gradual_id = j.gradual_id
+        left join p_function f on f.function_id = j.function_id
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph = #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+        </where>
+    </select>
 
-	<select id="countJiajiapj" resultType="int">
-		select count(*) from stock st left join aa_parts pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="partsStyle != null and partsStyle != ''"> and pr.parts_style = #{partsStyle} </if>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-	</select>
+    <!-- 镜架配件查询 -->
+    <select id="listJiajiapj" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,pr.`produc_factory`,pr.`parts_style`
+        from stock st left join aa_parts pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="partsStyle != null and partsStyle != ''">and pr.parts_style = #{partsStyle}</if>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<!-- 太阳镜查询 -->
-	<select id="listTaiyj" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`,pr.`produc_factory`,pr.`produc_color`,pr.`size`
-		from stock st left join aa_tyj pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+    <select id="countJiajiapj" resultType="int">
+        select count(*) from stock st left join aa_parts pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="partsStyle != null and partsStyle != ''">and pr.parts_style = #{partsStyle}</if>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+    </select>
 
-	<select id="countTaiyj" resultType="int">
-		select count(*) from stock st left join aa_tyj pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-	</select>
+    <!-- 太阳镜查询 -->
+    <select id="listTaiyj" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,pr.`produc_factory`,pr.`produc_color`,pr.`size`
+        from stock st left join aa_tyj pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<!-- 耗材查询 -->
-	<select id="listHaocai" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`
-		from stock st left join aa_hc pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+    <select id="countTaiyj" resultType="int">
+        select count(*) from stock st left join aa_tyj pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+    </select>
 
-	<select id="countHaocai" resultType="int">
-		select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-	</select>
+    <!-- 耗材查询 -->
+    <select id="listHaocai" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`
+        from stock st left join aa_hc pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<!-- 老花镜查询 -->
-	<select id="listLaohj" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`
-		from stock st left join aa_oldlens pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+    <select id="countHaocai" resultType="int">
+        select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+    </select>
 
-	<select id="countLaohj" resultType="int">
-		select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-	</select>
+    <!-- 老花镜查询 -->
+    <select id="listLaohj" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`
+        from stock st left join aa_oldlens pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<!-- 视光查询 -->
-	<select id="listShiguang" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`,pr.`produc_factory`
-		from stock st left join aa_shiguang pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+    <select id="countLaohj" resultType="int">
+        select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+    </select>
 
-	<select id="countShiguang" resultType="int">
-		select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-	</select>
+    <!-- 视光查询 -->
+    <select id="listShiguang" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,pr.`produc_factory`
+        from stock st left join aa_shiguang pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<!-- 护理液查询 -->
-	<select id="listHuly" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`,pr.`main_capacity`,pr.`second_capacity`
-		from stock st left join aa_hly pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+    <select id="countShiguang" resultType="int">
+        select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+    </select>
 
-	<select id="countHuly" resultType="int">
-		select count(*) from stock st left join aa_hly pr on pr.produc_num = st.goods_num
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-		</where>
-	</select>
+    <!-- 护理液查询 -->
+    <select id="listHuly" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,pr.`main_capacity`,pr.`second_capacity`
+        from stock st left join aa_hly pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<!-- 赠品查询 -->
-	<select id="listZengpin" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`,g.`gift_name`
-		from stock st left join giveaway pr on pr.give_number = st.goods_num left join gift g on g.gift_num = pr.give_type
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-			<if test="stores != null and stores != ''"> and FIND_IN_SET(#{stores},pr.stores) </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+    <select id="countHuly" resultType="int">
+        select count(*) from stock st left join aa_hly pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+        </where>
+    </select>
 
-	<select id="countZengpin" resultType="int">
-		select count(*) from stock st left join giveaway pr on pr.give_number = st.goods_num left join gift g on g.gift_num = pr.give_type
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-			<if test="stores != null and stores != ''"> and FIND_IN_SET(#{stores},pr.stores) </if>
-		</where>
-	</select>
+    <!-- 赠品查询 -->
+    <select id="listZengpin" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,g.`gift_name`
+        from stock st left join giveaway pr on pr.give_number = st.goods_num left join gift g on g.gift_num =
+        pr.give_type
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="stores != null and stores != ''">and FIND_IN_SET(#{stores},pr.stores)</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<!-- 隐形订做查询 -->
-	<select id="listYxdz" resultType="com.shiguang.stock.domain.StockDO">
-		select st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-		st.`whole_sum`,st.`position_name`,t.`type_name`,u.`usage_name`,y.`sph_up`,y.`sph_down`,y.`cyl_up`,y.`cyl_down`,
-		y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,y.`curvature_er`,s.`sph`,c.`cyl`
-		from stock st left join aa_yxdz y left join p_type t on t.type_id = y.type_id
+    <select id="countZengpin" resultType="int">
+        select count(*) from stock st left join giveaway pr on pr.give_number = st.goods_num left join gift g on
+        g.gift_num = pr.give_type
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="stores != null and stores != ''">and FIND_IN_SET(#{stores},pr.stores)</if>
+        </where>
+    </select>
+
+    <!-- 隐形订做查询 -->
+    <select id="listYxdz" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,t.`type_name`,u.`usage_name`,y.`sph_up`,y.`sph_down`,y.`cyl_up`,y.`cyl_down`,
+        y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,y.`curvature_er`,s.`sph`,c.`cyl`
+        from stock st left join aa_yxdz y left join p_type t on t.type_id = y.type_id
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
-		left join p_usage u on u.usage_id = y.usage_id
-		left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by st.id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+        left join p_usage u on u.usage_id = y.usage_id
+        left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph = #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<select id="countYxdz" resultType="int">
-		select count(*)
-		from stock st left join aa_yxdz y left join p_type t on t.type_id = y.type_id
-		left join p_usage u on u.usage_id = y.usage_id
-		left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
-		<where>
-			<if test="id != null and id != ''"> and st.id = #{id} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and st.goods_num = #{goodsNum} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and st.goods_code = #{goodsCode} </if>
-			<if test="goodsName != null and goodsName != ''"> and st.goods_name = #{goodsName} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and st.goods_count = #{goodsCount} </if>
-			<if test="goodsType != null and goodsType != ''"> and st.goods_type = #{goodsType} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and st.mfrsid = #{mfrsid} </if>
-			<if test="retailPrice != null and retailPrice != ''"> and st.retail_price = #{retailPrice} </if>
-			<if test="priceSum != null and priceSum != ''"> and st.price_sum = #{priceSum} </if>
-			<if test="costPrice != null and costPrice != ''"> and st.cost_price = #{costPrice} </if>
-			<if test="costSum != null and costSum != ''"> and st.cost_sum = #{costSum} </if>
-			<if test="wholePrice != null and wholePrice != ''"> and st.whole_price = #{wholePrice} </if>
-			<if test="wholeSum != null and wholeSum != ''"> and st.whole_sum = #{wholeSum} </if>
-			<if test="positionName != null and positionName != ''"> and st.position_name = #{positionName} </if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''"> and s.sph = #{rightYuanYongQJ} </if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''"> and c.cyl = #{rightYuanYongZJ} </if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''"> and s.sph = #{leftYuanYongQJ} </if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''"> and c.cyl = #{leftYuanYongZJ} </if>
-		</where>
-	</select>
+    <select id="countYxdz" resultType="int">
+        select count(*)
+        from stock st left join aa_yxdz y left join p_type t on t.type_id = y.type_id
+        left join p_usage u on u.usage_id = y.usage_id
+        left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph = #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+        </where>
+    </select>
 
-	<!-- 查询仓位 -->
-	<select id="findPosition" resultType="com.shiguang.mfrs.domain.PositionDO">
-		select `position_id`,`position_num`,`depart_number`,`depart_name`,`position_name` from c_position
-		<where>
-			<if test="departNumber != null and departNumber != ''">and depart_number = #{departNumber}</if>
-		</where>
-	</select>
+    <!-- 查询仓位 -->
+    <select id="findPosition" resultType="com.shiguang.mfrs.domain.PositionDO">
+        select `position_id`,`position_num`,`depart_number`,`depart_name`,`position_name` from c_position
+        <where>
+            <if test="departNumber != null and departNumber != ''">and depart_number = #{departNumber}</if>
+        </where>
+    </select>
+
+
 </mapper>

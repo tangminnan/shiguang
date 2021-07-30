@@ -126,6 +126,29 @@ function load() {
                     // 	field : 'transferPrice',
                     // 	title : '调货成本'
                     // },
+                    {
+                        field: 'status',
+                        title: '销售状态',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            var str = '';
+                            str += ' <div class="switch onoffswitch col-sm-1"> ';
+                            str += ' <div class="onoffswitch"> ';
+                            str += ' <input name="allowComment" ';
+                            //启用状态 0：启用；1：禁用
+                            if (row.status == 0)
+                                str += ' checked="" ';
+
+                            str += ' type="checkbox" onchange="updateEnable(' + row.id + ',this)" value="' + row.id + '" class="onoffswitch-checkbox" id="example1' + row.id + '">  ';
+                            str += ' <label class="onoffswitch-label" for="example1' + row.id + '">  ';
+                            str += ' <span class="onoffswitch-inner" ></span> ';
+                            str += ' <span class="onoffswitch-switch" ></span> ';
+                            str += ' </label> ';
+                            str += ' </div>';
+                            str += ' </div>';
+                            return str;
+                        }
+                    },
 
                     {
                         title: '操作',
@@ -138,10 +161,10 @@ function load() {
                             var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
                                 + row.id
                                 + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+                            var f = '<a class="btn btn-success btn-sm" href="#" title="详情"  mce_href="#" onclick="resetPwd(\''
                                 + row.id
-                                + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d;
+                                + '\')">详情</a> ';
+                            return e + d + f;
                         }
                     }
                 ]
@@ -178,6 +201,18 @@ function edit(id) {
     layer.full(toIndex);
 }
 
+//详情
+function resetPwd(id) {
+    layer.open({
+        type: 2,
+        title: '详情',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/detail/' + id // iframe的url
+    });
+}
+
 function remove(id) {
     layer.confirm('确定要删除选中的记录？', {
         btn: ['确定', '取消']
@@ -198,9 +233,6 @@ function remove(id) {
             }
         });
     })
-}
-
-function resetPwd(id) {
 }
 
 function batchRemove() {
@@ -235,5 +267,32 @@ function batchRemove() {
         });
     }, function () {
 
+    });
+}
+
+//修改启用状态
+function updateEnable(id, enable) {
+    var isEnable = 1;
+    if ($(enable).prop("checked")) {
+        isEnable = 0;
+    }
+
+    $.ajax({
+        url: prefix + "/updateEnable",
+        type: "post",
+        data: {
+            'id': id,
+            'enable': isEnable
+        },
+        dataType: 'JSON',
+        async: false,
+        success: function (r) {
+            if (r.code == 0) {
+                layer.msg(r.msg);
+                reLoad();
+            } else {
+                layer.msg(r.msg);
+            }
+        }
     });
 }

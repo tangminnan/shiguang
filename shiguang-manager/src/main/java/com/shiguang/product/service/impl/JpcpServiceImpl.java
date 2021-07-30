@@ -37,6 +37,7 @@ public class JpcpServiceImpl implements JpcpService {
         return jpcpDao.save(jpcp);
     }
 
+    //修改停用启用
     @Override
     public int update(JpcpDO jpcp) {
         return jpcpDao.update(jpcp);
@@ -64,5 +65,9 @@ public class JpcpServiceImpl implements JpcpService {
         return jpcpDao.choice(mfrsid);
     }
 
-
+    //删除修改状态
+    @Override
+    public int updateState(JpcpDO jpcp) {
+        return jpcpDao.updateState(jpcp);
+    }
 }

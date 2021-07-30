@@ -174,6 +174,55 @@ public class YxcpController {
     }
 
     /**
+     * 详情
+     */
+
+    @GetMapping("/detail/{id}")
+    @RequiresPermissions("product:yxcp:detail")
+    String detail(@PathVariable("id") Long id, Model model) {
+        YxcpDO yxcp = yxcpService.get(id);
+        model.addAttribute("yxcp", yxcp);
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MgDO> mfrsDOList = yxcpService.mglist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        //球镜
+        List<SphDO> sphDOList = sphService.list(map);
+        model.addAttribute("sphDOList", sphDOList);
+        //柱镜
+        List<CylDO> cylDOList = cylService.list(map);
+        model.addAttribute("cylDOList", cylDOList);
+        //跨度
+        List<SpanDO> spanDOList = spanService.list(map);
+        model.addAttribute("spanDOList", spanDOList);
+        //下加光
+        List<LightbelowDO> lightbelowDOList = lightbelowService.list(map);
+        model.addAttribute("lightbelowDOList", lightbelowDOList);
+        //材料分类
+        List<LensDO> lensDOList = lensService.list(map);
+        model.addAttribute("lensDOList", lensDOList);
+        //使用类型
+        List<UsageDO> usageDOList = usageService.list(map);
+        model.addAttribute("usageDOList", usageDOList);
+        //抛弃类型分类
+        List<TypeDO> typeDOList = typeService.list(map);
+        model.addAttribute("typeDOList", typeDOList);
+        //隐形类别
+        List<InvisibleDO> invisibleDOList = invisibleService.list(map);
+        model.addAttribute("invisibleDOList", invisibleDOList);
+        //材质
+        List<CaizhiDO> caizhiDOList = caizhiService.list(map);
+        model.addAttribute("caizhiDOList", caizhiDOList);
+        return "product/yxcp/detail";
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
@@ -197,21 +246,21 @@ public class YxcpController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:yxcp:remove")
-    public R remove(Long id) {
-        if (yxcpService.remove(id) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("product:yxcp:remove")
+//    public R remove(Long id) {
+//        if (yxcpService.remove(id) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -237,4 +286,34 @@ public class YxcpController {
         return "/mfrs/mfrs/findYxcpMfrs";
     }
 
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long id, Long enable) {
+        YxcpDO yxcpDO = new YxcpDO();
+        yxcpDO.setId(id);
+        yxcpDO.setStatus(enable);
+        yxcpService.update(yxcpDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Long id) {
+        YxcpDO yxcpDO = new YxcpDO();
+        yxcpDO.setState(0L);
+        yxcpDO.setId(id);
+        if (yxcpService.updateState(yxcpDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
 }
+
+

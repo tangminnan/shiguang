@@ -64,7 +64,7 @@ public class MfrsController {
     public PageUtils list(@RequestParam Map<String, Object> params, MfrsDO mfrs) {
         //查询列表数据
         Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.mglist(query);
+        List<MfrsDO> mfrsDOList = mfrsService.list(query);
         int total = mfrsService.mgcount(query);
         PageUtils pageUtils = new PageUtils(mfrsDOList, total);
         return pageUtils;
@@ -220,7 +220,7 @@ public class MfrsController {
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
         //制造商
-        List<MfrsDO> mfrsDOList = mfrsService.mglist(map);
+        List<MfrsDO> mfrsDOList = mfrsService.list(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
         //商品
         List<GoodsDO> goodsDOList = goodsService.list(map);
@@ -287,6 +287,21 @@ public class MfrsController {
         //开票
         List<InvoiceDO> invoiceDOList = invoiceService.list(map);
         model.addAttribute("invoiceDOList", invoiceDOList);
+        //------------修改时转换日期格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //统一社会信用代码效期
+        Date stime = mfrs.getCreditcodeday();
+        String str = sdf.format(stime);
+        mfrs.setCreditcodedays(str);
+        //医疗器械经营许可证有效期
+        Date stime2 = mfrs.getMedicinecodeday();
+        String str2 = sdf.format(stime2);
+        mfrs.setMedicinecodedays(str2);
+        //全国工业品生产许可证有效期
+        Date stime3 = mfrs.getProductscodeday();
+        String str3 = sdf.format(stime3);
+        mfrs.setProductscodedays(str3);
+
         return "mfrs/mfrs/detail";
     }
 
@@ -304,7 +319,7 @@ public class MfrsController {
         String mfrsnum = mfrs.getMfrsnum();
         Map<String, Object> map = new HashMap<>();
         map.put("mfrsnum", mfrsnum);
-        List<MfrsDO> list = mfrsService.mglist(map);
+        List<MfrsDO> list = mfrsService.haveNum(map);
         if (list.size() > 0) {
             return R.error("制造商代码已存在");
         }
@@ -377,7 +392,7 @@ public class MfrsController {
     }
 
     /**
-     * 修改状态
+     * 启用修改状态
      */
     @ResponseBody
     @RequestMapping(value = "/updateEnable")
