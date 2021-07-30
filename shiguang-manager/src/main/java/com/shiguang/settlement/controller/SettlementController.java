@@ -11,6 +11,8 @@ import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.jiancha.domain.ResultDO;
+import com.shiguang.jiancha.service.ResultService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.settlement.domain.SettlementDO;
@@ -48,6 +50,8 @@ public class SettlementController {
 	private CostService costService;
 	@Autowired
 	private SalesService salesService;
+	@Autowired
+	private ResultService resultService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:settlement:settlement")
@@ -209,6 +213,40 @@ public class SettlementController {
 		model.addAttribute("sumMoney",sumMoney);
 		model.addAttribute("jianchaTime",simpleDateFormat.format(new Date()));
 		return "settlement/jianchadan";
+	}
+
+	/**
+	 * 配镜单打印
+	 * @param saleNumber
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/peijingdan")
+	public String peijingdan(String saleNumber, Model model) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("saleNumber",saleNumber);
+//		List<CostDO> costDOList = costService.list(map);
+//		model.addAttribute("costDOList",costDOList);
+//		Double sumMoney =0.00;
+//		String jianchaDate="";
+//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//		for (CostDO costDO : costDOList){
+//			sumMoney =sumMoney+costDO.getCostMoney();
+//		}
+//		model.addAttribute("sumMoney",sumMoney);
+//		model.addAttribute("jianchaTime",simpleDateFormat.format(new Date()));
+		SalesDO settlementDO = salesService.getSaleNumber(saleNumber);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		settlementDO.setPeijingDate(simpleDateFormat.format(settlementDO.getPeijingTime()));
+		if (settlementDO.getSex() == 0){
+			settlementDO.setSexx("男");
+		} else if (settlementDO.getSex() == 1){
+			settlementDO.setSexx("女");
+		}
+		model.addAttribute("settlementDO",settlementDO);
+		String ptometryNumber = settlementDO.getPtometryNumber();
+		//ResultDO resultDO = resultService.
+		return "settlement/peijingdan";
 	}
 
 		/**

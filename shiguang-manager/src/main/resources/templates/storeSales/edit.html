@@ -83,11 +83,13 @@
 				<tr id="tab11" style="display:none;">
 					<td>验光师</td>
 					<td>
-						<select id="disaa" name="optometryName" style="width: 100px;">
+						<select id="disaa" name="optometrywlName" style="width: 100px;">
+							<option value="">--请选择--</option>
 							<option th:each="ls:${yanguangDOList}"
 									th:text="${ls.name}"
 									th:value="${ls.name}"></option>
 						</select>
+						<input name="optometryName" id="optometryName" type="hidden">
 						<em></em>
 					</td>
 				</tr>
@@ -109,7 +111,9 @@
 				<tr id="tab11111" style="display:none;">
 					<td>处方类型</td>
 					<td>
-						<select id="recipelType" name="recipelType" onchange="getType(this.value)">
+						<input name="recipelType" id="recipelTypes" type="hidden">
+						<select id="recipelwlType" name="recipelwlType" onchange="getType(this.value)">
+							<option value="" >--请选择--</option>
 							<option value="2" >远用</option>
 							<option value="1" >近用</option>
 							<option value="3" >渐进/双光</option>
@@ -944,7 +948,7 @@
 			<li>取镜日期：<input type="text" id="mirrorTime" name="mirrorTime"/></li>
 			<li>
 				取镜地点：
-				<input id="mirorAddress" name="mirorAddress" type="text" th:value="${storeName}" disabled>
+				<input id="mirorAddress" name="mirorAddress" type="text" th:value="${storeName}" readonly>
 				<em></em>
 			</li>
 			<li>
@@ -970,10 +974,11 @@
 		<div class="gray box1"><h4>条码扫描</h4><input type="text" /></div>
 		<div class="gray box2">
 			<h4>套餐</h4>
-			<input class="inp1" type="button" value="套餐选择" />
+			<input class="inp1" type="button" value="套餐选择" onclick="getTaocanXz()"/>
 			<input class="inp2" type="button" value="套餐查看" onclick="getTaocanDetail()"/>
-			<input type="button" value="还原" />
+			<input type="button" value="还原" onclick="getHYTc()"/>
 		</div>
+		<div class="gray box1"><h4>套餐名称</h4><input type="text" id="taocanName" name="taocanName"/></div>
 		<div class="box3" style="display: block;" id="boxkuangjing">
 			<ul class="ulUp">
 				<li><span onclick="getJingjia()">镜架</span></li>
@@ -1250,6 +1255,7 @@
             tab111111.style="display:''";
             tab2.style="display:none";
             tab22.style="display:none";
+            doucument.getElementById("disaa").value="";
 		} else if (value ==1){
             tab1.style="display:none";
             tab11.style="display:none";
@@ -1468,10 +1474,10 @@
 	}
 	function check(a){
 		if (a.checked == true){
-            document.getElementById('disaa').disabled = true;
+            document.getElementById('disaa').readOnly = true;
             outRecipel.style = "display:''";
 		} else if (a.checked == false){
-            document.getElementById('disaa').disabled = false;
+            document.getElementById('disaa').readOnly = false;
             outRecipel.style = "display:none;";
 		}
 	}
@@ -1482,6 +1488,7 @@
 	var arrayjp=0
     var html ="";
     var price=0.00;
+    var producaNum=[];
 	function getJingjia(){
         var toIndex = layer.open({
             type : 2,
@@ -1495,7 +1502,7 @@
                 // var rows = sessionStorage.getItem("row");
                 // alert(rows.length)
                 for (var i=0;i<rows.length;i++){
-                    html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                    html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getSelect()'/></td>";
                     html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].producName+"</td>";
                     html += "<input id='storeName' name='storeName' value="+rows[i].goodsName+" text='hidden'/>"
                     html += "<td>"+rows[i].retailPrice+"</td>";
@@ -1514,6 +1521,7 @@
                     html += "<input id='storeUnit' name='storeUnit' type='hidden' />"
                     html += "<input id='storeCount' name='storeCount' type='hidden' />"
                     html += "<input id='isJj' name='isJj' type='hidden' />"
+                    html += "<input id='producaNum' name='producaNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='storeDescribe'name='storeDescribe' value='镜架' type='hidden' />"
                     $("#goods").append(html);
                     price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
@@ -1521,11 +1529,13 @@
                     arraystore.push(rows[i].goodsName);
                     arrayunit.push(rows[i].retailPrice);
                     arraycount.push(1)
+                    //producaNum.push(rows[i].goodsNum);
 					$("#isJj").val("有")
 				}
                 $("#storeName").val(arraystore);
                 $("#storeUnit").val(arrayunit);
                 $("#storeCount").val(arraycount);
+                // $("#producaNum").val(producaNum);
                 $("#ula").empty();
                 var lis="";
                 lis =  "<li>原价金额："+price+"</li>";
@@ -1911,6 +1921,7 @@
                 html = "<tr onclick='getData("+data+")'><td style=\"width:25%;\">"+list[i].chufang+"</td>";
                 html += "<td style=\"width:25%;\">"+list[i].yangsName+"</td>";
                 html += "<td>"+list[i].yanguangTime+"</td></tr>";
+                html += "<input id='ptometryNumber' name='ptometryNumber' type='hidden' value='"+list[i].ptometryNum+"'>"
                 $("#tbodys").append(html);
             }
             var newli = "";
@@ -1925,25 +1936,9 @@
         var data = JSON.parse(ss);
         console.log(data);
         cfType = data.chufangType;
+        $("#optometryName").val(data.yangsName)
+        $("#recipelTypes").val(data.chufang);
         getType(data.chufangType);
-        //$("#rightJianJinsgQJ").val(data.rightsph);
-        //document.getElementById("rightJianJinsgQJ").readOnly=true;
-        // document.getElementsByName("rightQJ").value = data.rightsph;
-        // document.getElementsByName("rightZJ").value = data.rightcyl;
-        // document.getElementsByName("rightzhouxiang")[0].value = data.rightzx;
-        // document.getElementsByName("rightsanlingjing")[0].value = data.rightprism;
-        // document.getElementsByName("rightjidi")[0].value = data.rightjd;
-        // document.getElementsByName("rightyuanyongtj")[0].value = data.rightyytj;
-        // document.getElementsByName("righttonggao")[0].value = data.righttg;
-        // document.getElementsByName("rightyuanyongVA")[0].value = data.rightva;
-        // document.getElementsByName("leftQJ")[0].value = data.leftsph;
-        // document.getElementsByName("leftZJ")[0].value = data.leftcyl;
-        // document.getElementsByName("leftzhouxiang")[0].value = data.leftzx;
-        // document.getElementsByName("leftsanlingjing")[0].value = data.leftprism;
-        // document.getElementsByName("leftjidi")[0].value = data.leftjd;
-        // document.getElementsByName("leftyuanyongtj")[0].value = data.leftyytj;
-        // document.getElementsByName("lefttonggao")[0].value = data.lefttg;
-        // document.getElementsByName("leftyuanyongVA")[0].value = data.leftva;
         if (data.chufangType == 1){
             $("#rightFuLiaoQJ").val(data.rightsph);
             document.getElementById("rightFuLiaoQJ").readOnly=true;

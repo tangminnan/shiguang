@@ -75,6 +75,7 @@
 	<insert id="save" parameterType="com.shiguang.storeSales.domain.SalesDO" useGeneratedKeys="true" keyProperty="id">
 		insert into store_sales
 		(
+		    `ptometry_number`,
 			`member_number`, 
 			`sale_name`, 
 			`sale_number`, 
@@ -96,10 +97,15 @@
 			`remark`, 
 			`give_name`,
 			`peijing_time`,
-			`optometry_name`
+			`optometry_name`,
+			`out_recipel`,
+			`recipel_type`,
+			`optometrywl_name`,
+			`recipelwl_type`
 		)
 		values
 		(
+		    #{ptometryNumber},
 			#{memberNumber}, 
 			#{saleName}, 
 			#{saleNumber}, 
@@ -121,7 +127,11 @@
 			#{remark}, 
 			#{giveName},
 			#{peijingTime},
-			#{optometryName}
+			#{optometryName},
+			#{outRecipel},
+			#{recipelType},
+			#{optometrywlName},
+			#{recipelwlType}
 		)
 	</insert>
 	 
@@ -590,5 +600,14 @@
 			<if test="cardNumber != null and cardNumber != ''"> and cardNumber = #{cardNumber}</if>
 		</where>
 		ORDER BY createTime desc
+	</select>
+	<select id="getSaleNumber" resultType="com.shiguang.storeSales.domain.SalesDO">
+		select s.`id`,s.`ptometry_number`,s.`member_number`,m.`name` as memberName,m.`sex`,m.`age`,m.`phone_1` as phone1,s.`sale_name`,s.`sale_number`,s.`eye_type`,s.`amount_money`,s.`mirror_way`,s.`mirror_time`,
+		s.`miror_address`,s.`urgent_status`,s.`goods_rebate`,s.`fixed_price`,s.`moling_money`,s.`additional_cost`,s.`process_ask`,
+		s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`give_name`,s.`peijing_time`,s.`optometry_name`,s.`out_recipel`,
+		s.`recipel_type`,s.`optometrywl_name`,s.`recipelwl_type`
+		from store_sales s
+		join member m on s.member_number = m.card_number
+		where sale_number = #{value}
 	</select>
 </mapper>

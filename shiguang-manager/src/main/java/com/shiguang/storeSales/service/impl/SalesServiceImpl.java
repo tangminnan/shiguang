@@ -96,4 +96,9 @@ public class SalesServiceImpl implements SalesService {
 	public int peijingcount(Map<String, Object> map){
 		return salesDao.peijingcount(map);
 	}
+
+	@Override
+	public SalesDO getSaleNumber(String saleNumber){
+		return salesDao.getSaleNumber(saleNumber);
+	}
 }

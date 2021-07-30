@@ -1,10 +1,9 @@
 function getGoodsInfo(obj){
-    alert(obj)
-    // var str = obj;
-    // var str = str.split("")
-    // var targetStr = str[str.length-1]
-    // alert(targetStr);
-    var goodsType = $("#goodType"+obj+"").val();
+    var str = obj.id;
+    var str = str.split("")
+    var targetStr = str[str.length-1]
+    alert(targetStr);
+    var goodsType = $("#goodType"+targetStr+"").val();
     // var fenlei = $("#fenlei").val();
     // var caizhi = $("#caizhi").val();
      layer.open({
@@ -16,12 +15,11 @@ function getGoodsInfo(obj){
         content : "/information/package/goodsInfo/"+goodsType, // iframe的url
         cancel: function(index, layero){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-            alert(JSON.stringify(rows));
             for (var i=0;i<rows.length;i++){
-                $("#goodsName"+obj+"").val(rows[i].producName);
-                $("#goodsid"+obj+"").val(rows[i].producNum);
-                $("#goodsYJStart"+obj+"").val(rows[i].retailPrice);
-                $("#goodsYJEnd"+obj+"").val(rows[i].retailPrice)
+                $("#goodsName"+targetStr+"").val(rows[i].producName);
+                $("#goodsid"+targetStr+"").val(rows[i].producNum);
+                $("#goodsYJStart"+targetStr+"").val(rows[i].retailPrice);
+                $("#goodsYJEnd"+targetStr+"").val(rows[i].retailPrice)
             }
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
@@ -58,29 +56,30 @@ function getEndPrice(obj){
     $("#endPrice").val(taocanEnd)
 }
 var htmldy="";
-// $("#addDanyiGoods").click(function () {
-//     if ($("#packageType").val() == ''){
-//         return alert("请先选择套餐分类");
-//     }
-//     htmldy = "<tr>";
-//     htmldy += "<td><input type=\"checkbox\" id=\"allChecks\" /></td>";
-//     htmldy +="<td>";
-//     htmldy += " <select name='goodType' id='goodType' onchange='selectChange()'> <option value=''>--请选择--</option><option value='镜架'>镜架</option><option value='配件'>配件</option>" +
-//         "<option value='成品片'>成品片</option><option value='订做片'>订做片</option><option value='太阳镜'>太阳镜</option>" +
-//         "<option value='老花镜'>老花镜</option><option value='耗材'>耗材</option><option value='视光'>视光</option><option value='隐形护理液'>隐形护理液</option></select>";
-//     htmldy += "<select name='caizhi' id='caizhi' onchange='getCaizhi()' style='display: none'></select>";
-//     htmldy += "<select name='fenlei' id='fenlei' style='display: none'></select>";
-//     htmldy += "<input name='qoujingStart' type='text' id='qoujingStart' style='display: none;'/><input type='text' name='qoujingEnd' id='qoujingEnd' style='display: none;'/>";
-//     htmldy += "<input name='zhuingStart' type='text' id='zhujingStart' style='display: none;'/><input name='zhujingEnd' type='text' id='zhujingEnd' style='display: none;'/>";
-//     htmldy += "<input type='text' style='width: 20%;' name='goodsName' id='goodsName'/><input type='hidden' style='width: 20%;' name='goodsid' id='goodsid'/><input type='button' onclick='getGoodsInfo()' value='选择'/>";
-//     htmldy += "</td>";
-//     htmldy += "<td><input class=\"short\" type=\"text\" id='goodsYJStart' name='goodsYJStart' /> 至 <input class=\"short\" type=\"text\" id='goodsYJEnd' name='goodsYJEnd'></td>";
-//     htmldy += "<td><input class=\"short\" type=\"text\" id='taocanStart' name='taocanStart' onchange='getPrice()' /> 至 <input class=\"short\" type=\"text\" id='taocanEnd' name='taocanEnd' onchange='getPrice()'></td>";
-//     htmldy += "<td><input type=\"text\" id='goodsNums' name='goodsNums'/></td>";
-//     htmldy += "<td><input class=\"short\" type=\"text\" id='xiaofeiStart' name='xiaofeiStart'/> 至 <input class=\"short\" type=\"text\" id='xiaofeiEnd' name='xiaofeiEnd'></td>";
-//     htmldy += "</tr>";
-//     $("#trdy1").append(htmldy);
-// })
+var b = 0;
+$("#addDanyiGoods").click(function () {
+    if ($("#packageType").val() == ''){
+        return alert("请先选择套餐分类");
+    }
+    htmldy = "<tr>";
+    htmldy += "<td><input type=\"checkbox\" id=\"allChecks\" name='allChecks' class='cb'/></td>";
+    htmldy +="<td>";
+    htmldy += " <select name='goodsType' id='goodType"+b+"' onchange='selectChange(this)'> <option value=''>--请选择--</option><option value='镜架'>镜架</option><option value='配件'>配件</option>" +
+        "<option value='成品片'>成品片</option><option value='订做片'>订做片</option><option value='太阳镜'>太阳镜</option>" +
+        "<option value='老花镜'>老花镜</option><option value='耗材'>耗材</option><option value='视光'>视光</option><option value='隐形护理液'>隐形护理液</option></select>";
+    htmldy += "<select name='caizhi' id='caizhi"+b+"' onchange='getCaizhi(this)' style='display: none'></select>";
+    htmldy += "<select name='fenlei' id='fenlei"+b+"' style='display: none'></select>";
+    htmldy += "<input name='qoujingStart' type='text' id='qoujingStart"+b+"' style='display: none;'/><input type='text' name='qoujingEnd' id='qoujingEnd"+b+"' style='display: none;'/>";
+    htmldy += "<input name='zhuingStart' type='text' id='zhujingStart"+b+"' style='display: none;'/><input name='zhujingEnd' type='text' id='zhujingEnd"+b+"' style='display: none;'/>";
+    htmldy += "<input type='text' style='width: 20%;' name='goodsName' id='goodsName"+b+"'/><input type='hidden' style='width: 20%;' name='goodsid' id='goodsid"+b+"'/><input type='button' id='xuanze"+b+"' onclick='getGoodsInfo(this)' value='选择'/>";
+    htmldy += "</td>";
+    htmldy += "<td><input class=\"short\" type=\"text\" id='goodsYJStart"+b+"' name='goodsYJStart' /> 至 <input class=\"short\" type=\"text\" id='goodsYJEnd"+b+"' name='goodsYJEnd'></td>";
+    htmldy += "<td><input class=\"short\" type=\"text\" id='taocanStart"+b+"' name='packageStartPrice' onchange='getStartPrice(this)' /> 至 <input class=\"short\" type=\"text\" id='taocanEnd"+b+"' name='packageEndPrice' onchange='getEndPrice(this)'></td>";
+    htmldy += "<td><input type=\"text\" id='goodsNums"+b+"' name='goodsNums'/></td>";
+    htmldy += "<td><input class=\"short\" type=\"text\" id='xiaofeiStart"+b+"' name='fullStartPrice'/> 至 <input class=\"short\" type=\"text\" id='xiaofeiEnd"+b+"' name='fullEndPrice'></td>";
+    htmldy += "</tr>";
+    $("#trdy1").append(htmldy);
+})
 function deleteTr(obj){
     obj.parentNode.parentNode.remove();	//删除上上一级的元素
 }

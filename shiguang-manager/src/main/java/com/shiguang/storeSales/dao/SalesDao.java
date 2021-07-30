@@ -48,4 +48,6 @@ public interface SalesDao {
 
 	int peijingcount(Map<String,Object> map);
 
+	SalesDO getSaleNumber(String saleNumber);
+
 }

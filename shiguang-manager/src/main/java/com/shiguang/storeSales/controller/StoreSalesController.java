@@ -17,6 +17,8 @@ import com.shiguang.optometry.domain.ProcessAskDO;
 import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
 import com.shiguang.packageManager.domain.PackageDO;
+import com.shiguang.packageManager.domain.PackageInfoDO;
+import com.shiguang.packageManager.service.PackageInfoService;
 import com.shiguang.packageManager.service.PackageService;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
@@ -33,10 +35,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller("StoreSalesController")
 @RequestMapping("/information/store")
@@ -101,6 +100,8 @@ public class StoreSalesController {
     private RgpService rgpService;
     @Autowired
     private YaopinService yaopinService;
+    @Autowired
+    private PackageInfoService packageInfoService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -266,7 +267,7 @@ public class StoreSalesController {
         }
         //Model model=null;
         if ("2".equals(salesDO.getChufang())){
-            if (salesDO.getRecipelType() == 1){
+            if (salesDO.getRecipelwlType() == 1){
                 KjjyDO kjjyDO = new KjjyDO();
                 kjjyDO.setCardNumber(salesDO.getMemberNumber());
                 kjjyDO.setKjjyPrescriptionType(salesDO.getRecipelType().toString());
@@ -288,7 +289,7 @@ public class StoreSalesController {
                 kjjyDO.setKjjyVaod(salesDO.getRightyuanyongVA());
                 kjjyDO.setKjjyVaos(salesDO.getLeftyuanyongVA());
                 kjjyService.save(kjjyDO);
-            } else if (salesDO.getRecipelType() == 2){
+            } else if (salesDO.getRecipelwlType() == 2){
                 KjyyDO kjyyDO = new KjyyDO();
                 kjyyDO.setCardNumber(salesDO.getMemberNumber());
                 kjyyDO.setKjyyPrescriptionType(salesDO.getRecipelType().toString());
@@ -310,7 +311,7 @@ public class StoreSalesController {
                 kjyyDO.setKjyyVaod(salesDO.getRightyuanyongVA());
                 kjyyDO.setKjyyVaos(salesDO.getLeftyuanyongVA());
                 kjyyService.save(kjyyDO);
-            } else if (salesDO.getRecipelType() == 3){
+            } else if (salesDO.getRecipelwlType() == 3){
                 SgjjDO sgjjDO = new SgjjDO();
                 sgjjDO.setCardNumber(salesDO.getMemberNumber());
                 sgjjDO.setSgjjPrescriptionType(salesDO.getRecipelType().toString());
@@ -328,7 +329,7 @@ public class StoreSalesController {
                 sgjjDO.setSgjjYyvaod(salesDO.getRightyuanyongVA());
                 sgjjDO.setSgjjYyvaos(salesDO.getLeftyuanyongVA());
                 sgjjService.save(sgjjDO);
-            } else if (salesDO.getRecipelType() == 4){
+            } else if (salesDO.getRecipelwlType() == 4){
                 ZyDO zyDO = new ZyDO();
                 zyDO.setCardNumber(salesDO.getMemberNumber());
                 zyDO.setZyPrescriptionType(salesDO.getRecipelType().toString());
@@ -350,7 +351,7 @@ public class StoreSalesController {
                 zyDO.setZyVaod(salesDO.getRightyuanyongVA());
                 zyDO.setZyVaos(salesDO.getLeftyuanyongVA());
                 zyService.save(zyDO);
-            } else if (salesDO.getRecipelType() == 5){
+            } else if (salesDO.getRecipelwlType() == 5){
                 RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
                 rxjmjcjDO.setCardNumber(salesDO.getMemberNumber());
                 rxjmjcjDO.setRxPrescriptionType(salesDO.getRecipelType().toString());
@@ -366,7 +367,7 @@ public class StoreSalesController {
                 rxjmjcjDO.setRxVaod(salesDO.getRightyuanyongVA());
                 rxjmjcjDO.setRxVaos(salesDO.getLeftyuanyongVA());
                 rxjmjcjService.save(rxjmjcjDO);
-            } else if (salesDO.getRecipelType() == 7){
+            } else if (salesDO.getRecipelwlType() == 7){
                 SjxlDO sjxlDO = new SjxlDO();
                 sjxlDO.setCardNumber(salesDO.getMemberNumber());
                 sjxlDO.setSjxlPrescriptionType(salesDO.getRecipelType().toString());
@@ -384,7 +385,7 @@ public class StoreSalesController {
                 sjxlDO.setSjxlYyvaod(salesDO.getRightyuanyongVA());
                 sjxlDO.setSjxlYyvaos(salesDO.getLeftyuanyongVA());
                 sjxlService.save(sjxlDO);
-            } else if (salesDO.getRecipelType() == 10){
+            } else if (salesDO.getRecipelwlType() == 10){
                 RgpDO rgpDO = new RgpDO();
                 rgpDO.setCardNumber(salesDO.getMemberNumber());
                 rgpDO.setRgpPrescriptionType(salesDO.getRecipelType().toString());
@@ -404,7 +405,7 @@ public class StoreSalesController {
                 rgpDO.setRgpSyjpod(salesDO.getRightPinpai());
                 rgpDO.setRgpSyjpos(salesDO.getLeftPinpai());
                 rgpService.save(rgpDO);
-            } else if (salesDO.getRecipelType() == 11){
+            } else if (salesDO.getRecipelwlType() == 11){
                 YaopinDO yaopinDO = new YaopinDO();
                 yaopinDO.setCardNumber(salesDO.getMemberNumber());
                 yaopinDO.setYpPrescriptionType(salesDO.getRecipelType().toString());
@@ -488,6 +489,56 @@ public class StoreSalesController {
         }
         int total = packageService.count(query);
         PageUtils pageUtils = new PageUtils(packageDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 套餐选择
+     */
+    @GetMapping("/taocanxz/{check_val}")
+    @RequiresPermissions("information:store:taocanxz")
+    String taocanxz(@PathVariable("check_val") String checkVal,Model model) {
+        model.addAttribute("checkVal",checkVal);
+        return "storeSales/taocanxz";
+    }
+
+    /**
+     * 查询套餐选择
+     *
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/taocanxzlist")
+    @RequiresPermissions("information:store:taocanxz")
+    public PageUtils taocanxzlist(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        query.put("goodsCode",params.get("checkVal"));
+        List<PackageInfoDO> packageInfoDOList = packageInfoService.list(query);
+        int total = packageInfoService.count(query);
+        List<PackageInfoDO> packageInfoDOS = new ArrayList<>();
+        for (PackageInfoDO packageInfoDO: packageInfoDOList){
+            Map<String,Object> map = new HashMap<>();
+            String goodsType = packageInfoDO.getGoodsType();
+            String packStartPrice = packageInfoDO.getPackageStartPrice();
+            String[] packStartStr = packStartPrice.split(",");
+            String packEndPrice = packageInfoDO.getPackageEndPrice();
+            String[] packEndStr = packEndPrice.split(",");
+            String fullStartPrice = packageInfoDO.getFullStartPrice();
+            String[] fullStartStr = fullStartPrice.split(",");
+            String fullEndPrice = packageInfoDO.getFullEndPrice();
+            String[] fullEndStr = fullEndPrice.split(",");
+            String goodsName = packageInfoDO.getGoodsName();
+            String[] goodsNameStr = goodsName.split(",");
+//            for (int i=0;i<str.length;i++){
+//                map.put("goodsName",str[i]);
+//                for(int l = 0;l<){
+//
+//                }
+//            }
+        }
+        PageUtils pageUtils = new PageUtils(packageInfoDOList, total);
         return pageUtils;
     }
 

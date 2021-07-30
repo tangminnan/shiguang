@@ -133,12 +133,24 @@
 	<h3>多种优惠</h3>
 	<div class="Hbox">
 		<h4><b>商品信息</b></h4>
-		<input type="text" readonly style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrices" name="danyiPrices" th:value="${package.danyiPrice}"/>
-		<p>整单满：<input type="text" id="wholeStart" name="wholeStart" style="width: 10%;" th:value="${package.wholeStart}"/> 至 <input type="text" id="wholeEnd" name="wholeEnd" th:value="${package.wholeEnd}" style="width: 10%;"/>
-			<span id="zdyh" style="display: none;">优惠方式：<select id="danyiyh" name="danyiyh" ><option>--请选择--</option><option value="打折">打折</option><option value="返现">返现</option><option value="特价">特价</option></select><input type="hidden" readonly style="width: 5%;margin: 10px;background-color:#778899;" id="danyiyhs" name="danyiyhs" th:value="${package.danyiyh}"/></span>
-			<span id="zdPrice" style="display: none;"><input type="text" style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrice" readonly name="danyiPrice" /><input type="text" style="width: 5%;margin: 10px;background-color:#778899;" readonly id="danyiPrice2" name="danyiPrice" /><input type="text" readonly style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrice3" name="danyiPrice"/></span>
+		<!--<input type="hidden" readonly style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrices" name="danyiPrices" th:value="${package.danyiPrice}"/>-->
+		<p>整单满：
+			<input type="text" id="wholeStart" name="wholeStart" style="width: 10%;" th:value="${package.wholeStart}"/> 至 <input type="text" id="wholeEnd" name="wholeEnd" th:value="${package.wholeEnd}" style="width: 10%;"/>
+			<span id="zdyh" style="display: none;">优惠方式：
+				<select id="danyiyh" name="danyiyh" >
+					<option>--请选择--</option>
+					<option value="打折">打折</option>
+					<option value="返现">返现</option>
+					<option value="特价">特价</option>
+				</select>
+				<input type="hidden" readonly style="width: 5%;margin: 10px;background-color:#778899;" id="danyiyhs" name="danyiyhs" th:value="${package.danyiyh}"/>
+			</span>
+			<span id="zdPrice" style="display: none;">
+				<input type="text" style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrice" readonly name="dazhePrice" th:value="${package.dazhePrice}"/>
+				<input type="text" readonly style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrice2" name="fanxianPrice" th:value="${package.fanxianPrice}"/>
+				<input type="text" readonly style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrice3" name="tejiaPrice" th:value="${package.tejiaPrice}"/>
+			</span>
 		</p>
-		<!--<p>优惠方式：<select id="danyiyh" name="danyiyh"><option>打折</option><option>返现</option><option>特价</option></select></p>-->
 	</div>
 
 	<div class="Hbox" id="goumai" style="display: block">
@@ -355,15 +367,15 @@
             zdPrice.style="display:'';";
             var danyiyhs = $("input[name='danyiyhs']").val();
             $("#danyiyh").find("[value="+danyiyhs+"]").attr("selected",true);
-            var danyiPrices =$("#danyiPrices").val();
+            //var danyiPrices =$("#danyiPrices").val();
             if (danyiyhs == "打折"){
-                $("#danyiPrice").val(danyiPrices);
+                //$("#danyiPrice").val(danyiPrices);
                 danyiPrice.style="background-color:#FFFFFF;width: 5%;margin: 10px;";
 			} else if (danyiyhs == "返现"){
-                $("#danyiPrice2").val(danyiPrices);
+               // $("#danyiPrice2").val(danyiPrices);
                 danyiPrice2.style="background-color:#FFFFFF;width: 5%;margin: 10px;";
 			} else if (danyiyhs == "特价"){
-                $("#danyiPrice3").val(danyiPrices);
+               // $("#danyiPrice3").val(danyiPrices);
                 danyiPrice3.style="background-color:#FFFFFF;width: 5%;margin: 10px;";
 			}
 

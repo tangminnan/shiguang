@@ -17,10 +17,19 @@ public class SalesDO implements Serializable {
 	
 	//主键
 	private Long id;
+	//验光号
+	private String ptometryNumber;
 	//会员卡号
 	private String memberNumber;
 	private String memberName;
 	private String memberTel;
+	//顾客性别(1:男2:女)
+	private Long sex;
+	private String sexx;
+	//年龄
+	private Long age;
+	//联系电话1
+	private String phone1;
 	//销售人员
 	private String saleName;
 	//销售单号
@@ -65,12 +74,17 @@ public class SalesDO implements Serializable {
 	private Long isJp;
 	//配镜日期
 	private Date peijingTime;
+	private String peijingDate;
 	//验光师
 	private String optometryName;
 	//外来处方类型
 	private String outRecipel;
 	//处方类型
-	private Long recipelType;
+	private String recipelType;
+	//外来验光师
+	private String optometrywlName;
+	//处方类型(外来)
+	private Long recipelwlType;
 	//外来处方
 	private String chufang;
 	//手填处方的度数
@@ -172,6 +186,18 @@ public class SalesDO implements Serializable {
 		return id;
 	}
 	/**
+	 * 设置：验光号
+	 */
+	public void setPtometryNumber(String ptometryNumber) {
+		this.ptometryNumber = ptometryNumber;
+	}
+	/**
+	 * 获取：验光号
+	 */
+	public String getPtometryNumber() {
+		return ptometryNumber;
+	}
+	/**
 	 * 设置：会员卡号
 	 */
 	public void setMemberNumber(String memberNumber) {
@@ -187,6 +213,55 @@ public class SalesDO implements Serializable {
 	public String getMemberName() {return memberName;}
 	public void setMemberTel(String memberTel) {this.memberTel = memberTel;}
 	public String getMemberTel(){return memberTel;}
+	/**
+	 * 设置：顾客性别(0:男1:女)
+	 */
+	public void setSex(Long sex) {
+		this.sex = sex;
+	}
+	/**
+	 * 获取：顾客性别(0:男1:女)
+	 */
+	public Long getSex() {
+		return sex;
+	}
+
+	/**
+	 * 设置：顾客性别
+	 */
+	public void setSexx(String sexx) {
+		this.sexx = sexx;
+	}
+	/**
+	 * 获取：顾客性别
+	 */
+	public String getSexx() {
+		return sexx;
+	}
+	/**
+	 * 设置：年龄
+	 */
+	public void setAge(Long age) {
+		this.age = age;
+	}
+	/**
+	 * 获取：年龄
+	 */
+	public Long getAge() {
+		return age;
+	}
+	/**
+	 * 设置：联系电话1
+	 */
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	/**
+	 * 获取：联系电话1
+	 */
+	public String getPhone1() {
+		return phone1;
+	}
 	/**
 	 * 设置：销售人员
 	 */
@@ -434,6 +509,19 @@ public class SalesDO implements Serializable {
 	}
 
 	/**
+	 * 设置：配镜日期
+	 */
+	public void setPeijingDate(String peijingDate) {
+		this.peijingDate = peijingDate;
+	}
+	/**
+	 * 获取：配镜日期
+	 */
+	public String getPeijingDate() {
+		return peijingDate;
+	}
+
+	/**
 	 * 获取：验光师
 	 */
 	public String getOptometryName() {
@@ -462,15 +550,19 @@ public class SalesDO implements Serializable {
 	/**
 	 * 获取：处方类型
 	 */
-	public Long getRecipelType() {
+	public String getRecipelType() {
 		return recipelType;
 	}
 	/**
 	 * 设置：外来类型
 	 */
-	public void setRecipelType(Long recipelType) {
+	public void setRecipelType(String recipelType) {
 		this.recipelType = recipelType;
 	}
+	public void setOptometrywlName(String optometrywlName) {this.optometrywlName = optometrywlName;}
+	public String getOptometrywlName() {return optometrywlName;}
+	public void setRecipelwlType(Long recipelwlType) {this.recipelwlType = recipelwlType;}
+	public Long getRecipelwlType() {return recipelwlType;}
 	/**
 	 * 外来处方
 	 */

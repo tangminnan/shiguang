@@ -4,28 +4,37 @@
 <mapper namespace="com.shiguang.packageManager.dao.PackageDao">
 
 	<select id="get" resultType="com.shiguang.packageManager.domain.PackageDO">
-		select `id`,`package_name`,`package_time`,`package_form`,`effective_date`,`expiry_date`,`package_type`,`start_price`,`end_price`,`package_price`,`is_cumulative_points`,`is_add`,`fold_up`,`retail_price`,`store`,`remark`,`whole_start`,`whole_end`,`danyiyh`,`danyi_price` from package where id = #{value}
+		select `id`,`package_id`,`package_name`,`package_time`,`package_form`,`effective_date`,`expiry_date`,`package_type`,`start_price`,`end_price`,`package_price`,`is_cumulative_points`,`is_add`,`fold_up`,`retail_price`,`store`,`store_num`,`remark`,`whole_start`,`whole_end`,`danyiyh`,`dazhe_price`,`fanxian_price`,`tejia_price` from package where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.packageManager.domain.PackageDO">
-		select `id`,`package_name`,`package_time`,`package_form`,`effective_date`,`expiry_date`,`package_type`,`start_price`,`end_price`,`package_price`,`is_cumulative_points`,`is_add`,`fold_up`,`retail_price`,`store`,`remark`,`whole_start`,`whole_end`,`danyiyh`,`danyi_price` from package
+		select p.`id`,p.`package_id`,p.`package_name`,p.`package_time`,p.`package_form`,p.`effective_date`,p.`expiry_date`,
+		p.`package_type`,p.`start_price`,p.`end_price`,p.`package_price`,p.`is_cumulative_points`,p.`is_add`,p.`fold_up`,
+		p.`retail_price`,p.`store`,p.`store_num`,p.`remark`,p.`whole_start`,p.`whole_end`,p.`danyiyh`,p.`dazhe_price`,
+		p.`fanxian_price`,p.`tejia_price`,
+		pi.`goods_type`,pi.`goods_code`,pi.`goods_name`,pi.`buy_way`,pi.`package_start_price`,pi.`package_end_price`,
+		pi.`sale_number`,pi.`full_start_price`,pi.`full_end_price`,pi.`preferential_way`,pi.`unit_price`,pi.`special_price`,
+		pi.`preferential_price`,pi.`preferential_rebate`
+		from package p
+		left join package_info pi on pi.package_id = p.package_id
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="packageName != null and packageName != ''"> and package_name = #{packageName} </if>
-		  		  <if test="packageTime != null and packageTime != ''"> and package_time = #{packageTime} </if>
-		  		  <if test="packageForm != null and packageForm != ''"> and package_form = #{packageForm} </if>
-		  		  <if test="effectiveDate != null and effectiveDate != ''"> and effective_date = #{effectiveDate} </if>
-		  		  <if test="expiryDate != null and expiryDate != ''"> and expiry_date = #{expiryDate} </if>
-		  		  <if test="packageType != null and packageType != ''"> and package_type = #{packageType} </if>
-		  		  <if test="startPrice != null and startPrice != ''"> and start_price = #{startPrice} </if>
-		  		  <if test="endPrice != null and endPrice != ''"> and end_price = #{endPrice} </if>
-		  		  <if test="packagePrice != null and packagePrice != ''"> and package_price = #{packagePrice} </if>
-		  		  <if test="isCumulativePoints != null and isCumulativePoints != ''"> and is_cumulative_points = #{isCumulativePoints} </if>
-		  		  <if test="isAdd != null and isAdd != ''"> and is_add = #{isAdd} </if>
-		  		  <if test="foldUp != null and foldUp != ''"> and fold_up = #{foldUp} </if>
-		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
-		  		  <if test="store != null and store != ''"> and store = #{store} </if>
-		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="id != null and id != ''"> and p.id = #{id} </if>
+		  		  <if test="packageName != null and packageName != ''"> and p.package_name = #{packageName} </if>
+		  		  <if test="packageTime != null and packageTime != ''"> and p.package_time = #{packageTime} </if>
+		  		  <if test="packageForm != null and packageForm != ''"> and p.package_form = #{packageForm} </if>
+		  		  <if test="effectiveDate != null and effectiveDate != ''"> and p.effective_date = #{effectiveDate} </if>
+		  		  <if test="expiryDate != null and expiryDate != ''"> and p.expiry_date = #{expiryDate} </if>
+		  		  <if test="packageType != null and packageType != ''"> and p.package_type = #{packageType} </if>
+		  		  <if test="startPrice != null and startPrice != ''"> and p.start_price = #{startPrice} </if>
+		  		  <if test="endPrice != null and endPrice != ''"> and p.end_price = #{endPrice} </if>
+		  		  <if test="packagePrice != null and packagePrice != ''"> and p.package_price = #{packagePrice} </if>
+		  		  <if test="isCumulativePoints != null and isCumulativePoints != ''"> and p.is_cumulative_points = #{isCumulativePoints} </if>
+		  		  <if test="isAdd != null and isAdd != ''"> and p.is_add = #{isAdd} </if>
+		  		  <if test="foldUp != null and foldUp != ''"> and p.fold_up = #{foldUp} </if>
+		  		  <if test="retailPrice != null and retailPrice != ''"> and p.retail_price = #{retailPrice} </if>
+		  		  <if test="store != null and store != ''"> and p.store = #{store} </if>
+			      <if test="storeNum != null and storeNum != ''"> and FIND_IN_SET(#{storeNum},p.`store_num`) </if>
+		  		  <if test="remark != null and remark != ''"> and p.remark = #{remark} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -41,30 +50,34 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from package
-		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="packageName != null and packageName != ''"> and package_name = #{packageName} </if>
-		  		  <if test="packageTime != null and packageTime != ''"> and package_time = #{packageTime} </if>
-		  		  <if test="packageForm != null and packageForm != ''"> and package_form = #{packageForm} </if>
-		  		  <if test="effectiveDate != null and effectiveDate != ''"> and effective_date = #{effectiveDate} </if>
-		  		  <if test="expiryDate != null and expiryDate != ''"> and expiry_date = #{expiryDate} </if>
-		  		  <if test="packageType != null and packageType != ''"> and package_type = #{packageType} </if>
-		  		  <if test="startPrice != null and startPrice != ''"> and start_price = #{startPrice} </if>
-		  		  <if test="endPrice != null and endPrice != ''"> and end_price = #{endPrice} </if>
-		  		  <if test="packagePrice != null and packagePrice != ''"> and package_price = #{packagePrice} </if>
-		  		  <if test="isCumulativePoints != null and isCumulativePoints != ''"> and is_cumulative_points = #{isCumulativePoints} </if>
-		  		  <if test="isAdd != null and isAdd != ''"> and is_add = #{isAdd} </if>
-		  		  <if test="foldUp != null and foldUp != ''"> and fold_up = #{foldUp} </if>
-		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
-		  		  <if test="store != null and store != ''"> and store = #{store} </if>
-		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
-		  		</where>
+		select count(*)
+		from package p
+		left join package_info pi on pi.package_id = p.package_id
+		<where>
+			<if test="id != null and id != ''"> and p.id = #{id} </if>
+			<if test="packageName != null and packageName != ''"> and p.package_name = #{packageName} </if>
+			<if test="packageTime != null and packageTime != ''"> and p.package_time = #{packageTime} </if>
+			<if test="packageForm != null and packageForm != ''"> and p.package_form = #{packageForm} </if>
+			<if test="effectiveDate != null and effectiveDate != ''"> and p.effective_date = #{effectiveDate} </if>
+			<if test="expiryDate != null and expiryDate != ''"> and p.expiry_date = #{expiryDate} </if>
+			<if test="packageType != null and packageType != ''"> and p.package_type = #{packageType} </if>
+			<if test="startPrice != null and startPrice != ''"> and p.start_price = #{startPrice} </if>
+			<if test="endPrice != null and endPrice != ''"> and p.end_price = #{endPrice} </if>
+			<if test="packagePrice != null and packagePrice != ''"> and p.package_price = #{packagePrice} </if>
+			<if test="isCumulativePoints != null and isCumulativePoints != ''"> and p.is_cumulative_points = #{isCumulativePoints} </if>
+			<if test="isAdd != null and isAdd != ''"> and p.is_add = #{isAdd} </if>
+			<if test="foldUp != null and foldUp != ''"> and p.fold_up = #{foldUp} </if>
+			<if test="retailPrice != null and retailPrice != ''"> and p.retail_price = #{retailPrice} </if>
+			<if test="store != null and store != ''"> and p.store = #{store} </if>
+			<if test="storeNum != null and storeNum != ''"> and FIND_IN_SET(#{storeNum},p.`store_num`) </if>
+			<if test="remark != null and remark != ''"> and p.remark = #{remark} </if>
+		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.shiguang.packageManager.domain.PackageDO" useGeneratedKeys="true" keyProperty="id">
 		insert into package
 		(
+		    `package_id`,
 			`package_name`, 
 			`package_time`, 
 			`package_form`, 
@@ -78,15 +91,19 @@
 			`is_add`, 
 			`fold_up`, 
 			`retail_price`, 
-			`store`, 
+			`store`,
+			`store_num`,
 			`remark`,
 			`whole_start`,
 			`whole_end`,
 			`danyiyh`,
-			`danyi_price`
+			`dazhe_price`,
+			`fanxian_price`,
+			`tejia_price`
 		)
 		values
 		(
+		    #{packageId},
 			#{packageName}, 
 			#{packageTime}, 
 			#{packageForm}, 
@@ -100,12 +117,15 @@
 			#{isAdd}, 
 			#{foldUp}, 
 			#{retailPrice}, 
-			#{store}, 
+			#{store},
+			#{storeNum},
 			#{remark},
 			#{wholeStart},
 			#{wholeEnd},
 			#{danyiyh},
-			#{danyiPrice}
+			#{dazhePrice},
+			#{fanxianPrice},
+			#{tejiaPrice}
 		)
 	</insert>
 	 

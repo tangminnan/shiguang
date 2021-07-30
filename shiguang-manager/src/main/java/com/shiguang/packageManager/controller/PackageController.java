@@ -8,17 +8,12 @@ import java.util.Map;
 
 import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.baseinfomation.service.DepartmentService;
+import com.shiguang.common.utils.GuuidUtil;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
-import com.shiguang.mfrs.domain.FunctionDO;
-import com.shiguang.mfrs.domain.LightDO;
-import com.shiguang.mfrs.domain.MaterialDO;
-import com.shiguang.mfrs.domain.RefractivityDO;
-import com.shiguang.mfrs.service.FunctionService;
-import com.shiguang.mfrs.service.LightService;
-import com.shiguang.mfrs.service.MaterialService;
-import com.shiguang.mfrs.service.RefractivityService;
+import com.shiguang.mfrs.domain.*;
+import com.shiguang.mfrs.service.*;
 import com.shiguang.packageManager.domain.PackageDO;
 import com.shiguang.packageManager.domain.PackageInfoDO;
 import com.shiguang.packageManager.service.PackageInfoService;
@@ -81,6 +76,8 @@ public class PackageController {
 	private ShiguangService shiguangService;
 	@Autowired
 	private HlyService hlyService;
+	@Autowired
+	private TypeService typeService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:package:package")
@@ -121,6 +118,9 @@ public class PackageController {
 		//镜片功能
 		List<FunctionDO> functionDOList = functionService.list(map);
 		model.addAttribute("functionDOList",functionDOList);
+		//抛弃型分类
+		List<TypeDO> typeDOList = typeService.list(map);
+		model.addAttribute("typeDOList",typeDOList);
 	    return "packageInfo/add";
 	}
 
@@ -257,9 +257,11 @@ public class PackageController {
 	@PostMapping("/save")
 	@RequiresPermissions("information:package:add")
 	public R save(PackageDO packages){
+		Long packageId = GuuidUtil.getUUID();
+		packages.setPackageId(packageId);
 		int pack = packageService.save(packages);
 		PackageInfoDO packageInfoDO = new PackageInfoDO();
-		packageInfoDO.setPackageId(packages.getId());
+		packageInfoDO.setPackageId(packageId);
 		packageInfoDO.setGoodsType(packages.getGoodsType());
 		packageInfoDO.setGoodsCode(packages.getGoodsCode());
 		packageInfoDO.setGoodsName(packages.getGoodsName());

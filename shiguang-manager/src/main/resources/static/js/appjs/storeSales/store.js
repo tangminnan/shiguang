@@ -729,3 +729,31 @@ function getYouji(){
     });
     layer.full(toIndex)
 }
+function getTaocanXz(){
+    var toIndex = layer.open({
+        type : 2,
+        title : '套餐',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : "/information/store/taocanxz/"+check_val,// iframe的url
+        cancel: function(index, layero){
+            var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            // var rows = sessionStorage.getItem("row");
+            // alert(rows.length)
+            //son_msg就是子页面中的msg数据
+            //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+        }
+    });
+    layer.full(toIndex)
+}
+var check_val = [];
+function getSelect(){
+    var obj = document.getElementsByName("producaNum");
+    for(k in obj){
+        if(obj[k].checked)
+            check_val.push(obj[k].value);
+    }
+    alert(check_val);
+
+}

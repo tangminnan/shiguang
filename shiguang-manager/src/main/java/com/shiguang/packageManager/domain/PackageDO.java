@@ -19,6 +19,8 @@ public class PackageDO implements Serializable {
 	
 	//主键
 	private Long id;
+	//套餐id
+	private Long packageId;
 	//套餐名称
 	private String packageName;
 	//套餐日期
@@ -50,6 +52,8 @@ public class PackageDO implements Serializable {
 	private String retailPrice;
 	//活动门店
 	private String store;
+	//活动门店编码
+	private String storeNum;
 	//备注
 	private String remark;
 	//失效状态
@@ -60,8 +64,12 @@ public class PackageDO implements Serializable {
 	private String wholeEnd;
 	//单一优惠方式
 	private String danyiyh;
-	//优惠价格
-	private String danyiPrice;
+	//优惠价格（打折）
+	private String dazhePrice;
+	//优惠价格（返现）
+	private String fanxianPrice;
+	//优惠价格（特价）
+	private String tejiaPrice;
 
 	//商品类型
 	private String goodsType;
@@ -287,6 +295,8 @@ public class PackageDO implements Serializable {
 	public Long getId() {
 		return id;
 	}
+	public void setPackageId(Long packageId) {this.packageId = packageId;}
+	public Long getPackageId() {return packageId;}
 	/**
 	 * 设置：套餐名称
 	 */
@@ -461,6 +471,8 @@ public class PackageDO implements Serializable {
 	public String getStore() {
 		return store;
 	}
+	public void setStoreNum(String storeNum) {this.storeNum = storeNum;}
+	public String getStoreNum(){return storeNum;}
 	/**
 	 * 设置：备注
 	 */
@@ -488,6 +500,10 @@ public class PackageDO implements Serializable {
 	public String getWholeEnd(){return wholeEnd;}
 	public void setDanyiyh(String danyiyh) {this.danyiyh = danyiyh;}
 	public String getDanyiyh() {return danyiyh;}
-	public void setDanyiPrice(String danyiPrice) {this.danyiPrice = danyiPrice;}
-	public String getDanyiPrice() {return danyiPrice;}
+	public void setDazhePrice(String dazhePrice) {this.dazhePrice = dazhePrice;}
+	public String getDazhePrice() {return dazhePrice;}
+	public void setFanxianPrice(String fanxianPrice) {this.fanxianPrice = fanxianPrice;}
+	public String getFanxianPrice() {return fanxianPrice;}
+	public void setTejiaPrice(String tejiaPrice) {this.tejiaPrice = tejiaPrice;}
+	public String getTejiaPrice() {return tejiaPrice;}
 }

@@ -47,7 +47,7 @@
 			</td>
 			<td>
 				<span>套餐分类：</span>
-				<select name="packageType" id="packageType">
+				<select name="packageType" id="packageType" onchange="getTaoFL()">
 					<option value="">--请选择--</option>
 					<option value="框镜销售">框镜销售</option>
 					<option value="隐形销售">隐形销售</option>
@@ -96,6 +96,7 @@
 				<span>活动门店：</span>
 				<label for="MD"><input name="MD" type="checkbox" id="MD" checked> 所有门店</label> <br/>
 				<textarea rows="3" style="margin-left: 110px;" id="store" name="store"></textarea>
+				<input type="hidden" id="storeNum" name="storeNum" />
 				<div class="maxL" style="margin:15px 0 0;display: inline-block;vertical-align:top;">
 					<input type="button" onclick="getMendian()" value="选择" />
 					<input class="empty" type="button" onclick="getQingkong()" value="清空" />
@@ -132,8 +133,8 @@
 	<div class="Hbox">
 		<h4><b>商品信息</b></h4>
 		<p>整单满：<input type="text" id="wholeStart" name="wholeStart" value="0.00" style="width: 10%;"/> 至 <input type="text" id="wholeEnd" name="wholeEnd" value="0.00" style="width: 10%;"/>
-			<span id="zdyh" style="display: none;">优惠方式：<select id="danyiyh" name="danyiyh" onchange="getZdWay()"><option>--请选择--</option><option value="打折">打折</option><option value="返现">返现</option><option value="特价">特价</option></select></span>
-			<span id="zdPrice" style="display: none;"><input type="text" style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrice" readonly name="danyiPrice"/><input type="text" style="width: 5%;margin: 10px;background-color:#778899;" readonly id="danyiPrice2" name="danyiPrice"/><input type="text" readonly style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrice3" name="danyiPrice"/></span>
+			<span id="zdyh" style="display: none;">优惠方式：<select id="danyiyh" name="danyiyh" onchange="getZdWay()"><option value="">--请选择--</option><option value="打折">打折</option><option value="返现">返现</option><option value="特价">特价</option></select></span>
+			<span id="zdPrice" style="display: none;"><input type="text" style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrice" readonly name="dazhePrice" value=""/><input type="text" style="width: 5%;margin: 10px;background-color:#778899;" value="" readonly id="danyiPrice2" name="fanxianPrice"/><input type="text" readonly style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrice3" value="" name="tejiaPrice"/></span>
 		</p>
 		<!--<p>优惠方式：<select id="danyiyh" name="danyiyh"><option>打折</option><option>返现</option><option>特价</option></select></p>-->
 	</div>
@@ -362,16 +363,20 @@
 	var lightList = [[${lightDOList}]];
 	//镜片功能
     var functionList = [[${functionDOList}]];
+    //抛弃型分类
+	var typeDOList = [[${typeDOList}]];
 </script>
 <script type="text/javascript">
 	function getYouhui(obj){
 		if (obj == 0){
+            htmldy = ""
 	        goumai.style="display:block;"
             youhui.style="display:none;"
             danyi.style="display:none;"
             zdyh.style="display:none;";
             zdPrice.style="display:none;";
 		} else if (obj == 1){
+            html = ""
             goumai.style="display:none;"
             youhui.style="display:none;"
             danyi.style="display:block;"
@@ -414,6 +419,7 @@
 		}
 	}
 	var array=[];
+	var numarray=[];
     function getMendian(){
 		layer.open({
             type : 2,
@@ -426,8 +432,10 @@
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
 				for (var i=0;i<rows.length;i++){
                     array.push(rows[i].departName);
+                    numarray.push(rows[i].departNumber);
 				}
 				$("#store").val(array);
+				$("#storeNum").val(numarray);
                 //son_msg就是子页面中的msg数据
                 //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
             }
@@ -435,6 +443,12 @@
     }
     function getQingkong(){
         document.getElementById("store").value="";
+	}
+	function getTaoFL(){
+        //$("#tr1").reload(location.href + " #tr1");
+        //$("#trdy1").reload(location.href + " #trdy1");
+        //$("#tr1").load(location.href + " #tr1>*",  "");
+        //$("#trdy1").load(location.href + " #trdy1>*",  "");
 	}
     var html = "";
     var a=0;
@@ -446,14 +460,22 @@
 		html = "<tr class='item'>";
 		html += "<td><input type=\"checkbox\" id=\"allChecks\" name='allChecks' class='cb'/></td>";
 		html +="<td>";
-		html += "<select name='goodsType' id='goodType"+a+"' onchange='selectChange(this)'> <option value=''>--请选择--</option><option value='镜架'>镜架</option><option value='配件'>配件</option>" +
-			"<option value='成品片'>成品片</option><option value='订做片'>订做片</option><option value='太阳镜'>太阳镜</option>" +
-			"<option value='老花镜'>老花镜</option><option value='耗材'>耗材</option><option value='视光'>视光</option><option value='隐形护理液'>隐形护理液</option></select>";
+		if ($("#packageType").val() == "辅料销售"){
+            html += "<select name='goodsType' id='goodType"+a+"' onchange='selectChange(this)'> <option value=''>--请选择--</option><option value='配件'>配件</option>" +
+                "<option value='太阳镜'>太阳镜</option><option value='老花镜'>老花镜</option><option value='耗材'>耗材</option><option value='视光'>视光</option><option value='隐形护理液'>隐形护理液</option></select>";
+		} else if ($("#packageType").val() == "隐形销售"){
+            html += "<select name='goodsType' id='goodType"+a+"' onchange='selectChange(this)'> <option value=''>--请选择--</option><option value='隐形成品片'>隐形成品片</option><option value='隐形订做片'>隐形订做片</option><option value='配件'>配件</option>" +
+                "<option value='太阳镜'>太阳镜</option><option value='老花镜'>老花镜</option><option value='耗材'>耗材</option><option value='视光'>视光</option><option value='隐形护理液'>隐形护理液</option></select>";
+		} else if ($("#packageType").val() == "框镜销售"){
+            html += "<select name='goodsType' id='goodType"+a+"' onchange='selectChange(this)'> <option value=''>--请选择--</option><option value='镜架'>镜架</option><option value='配件'>配件</option>" +
+                "<option value='成品片'>成品片</option><option value='订做片'>订做片</option><option value='太阳镜'>太阳镜</option>" +
+                "<option value='老花镜'>老花镜</option><option value='耗材'>耗材</option><option value='视光'>视光</option><option value='隐形护理液'>隐形护理液</option></select>";
+		}
 		html += "<select name='caizhi' id='caizhi"+a+"' onchange='getCaizhi(this)' style='display: none'></select>";
 		html += "<select name='fenlei' id='fenlei"+a+"' style='display: none'></select>";
         html += "<input name='qoujingStart' type='text' id='qoujingStart"+a+"' style='display: none;'/><input type='text' name='qoujingEnd' id='qoujingEnd' style='display: none;'/>";
         html += "<input name='zhuingStart' type='text' id='zhujingStart"+a+"' style='display: none;'/><input name='zhujingEnd' type='text' id='zhujingEnd' style='display: none;'/>";
-		html += "<input type='text' style='width: 20%;' name='goodsName' id='goodsName"+a+"'/><input type='hidden' style='width: 20%;' name='goodsCode' id='goodsid"+a+"'/><input type='button' onclick='getGoodsInfo(a)' value='选择'/>";
+		html += "<input type='text' style='width: 20%;' name='goodsName' id='goodsName"+a+"'/><input type='hidden' style='width: 20%;' name='goodsCode' id='goodsid"+a+"'/><input type='button' id='xuanze"+a+"' onclick='getGoodsInfo(this)' value='选择'/>";
 		html += "</td>";
 		html += "<td><input class=\"short\" type=\"text\" id='goodsYJStart"+a+"' name='goodsYJStart' /> 至 <input class=\"short\" type=\"text\" id='goodsYJEnd"+a+"' name='goodsYJEnd'></td>";
 		html += "<td><input class=\"short\" type=\"text\" id='taocanStart"+a+"' name='packageStartPrice' onchange='getStartPrice(this)' /> 至 <input class=\"short\" type=\"text\" id='taocanEnd"+a+"' name='packageEndPrice' onchange='getEndPrice(this)'></td>";
@@ -463,10 +485,10 @@
 		html += "<select name='preferentialWay' id='youhuiway"+a+"' style=\"width:100%\" onchange='getYouWay(this)'>";
 		html += "<option value='原价'>原价</option><option value='打折'>打折</option><option value='返现'>返现</option><option value='特价'>特价</option></select>";
 		html += "</td>";
-		html += "<td><input type=\"text\" id='taocanDJ"+a+"' name='unitPrice' style='background-color: #778899;' readonly/></td>";
-		html += "<td><input type=\"text\" id='tejiaJE"+a+"' name='specialPrice' style='background-color: #778899 ;' readonly/></td>";
-		html += "<td><input type=\"text\" id='youhuiJE"+a+"' name='preferentialPrice' style='background-color: #778899 ;' readonly/></td>";
-		html += "<td><input type=\"text\" id='youhuiZK"+a+"' name='preferentialRebate' style='background-color: #778899 ;' readonly/></td>";
+		html += "<td><input type=\"text\" id='taocanDJ"+a+"' name='unitPrice' style='background-color: #778899;' value='' readonly/></td>";
+		html += "<td><input type=\"text\" id='tejiaJE"+a+"' name='specialPrice' style='background-color: #778899 ;' value='' readonly/></td>";
+		html += "<td><input type=\"text\" id='youhuiJE"+a+"' name='preferentialPrice' style='background-color: #778899 ;' value='' readonly/></td>";
+		html += "<td><input type=\"text\" id='youhuiZK"+a+"' name='preferentialRebate' style='background-color: #778899 ;' value='' readonly/></td>";
 		html += "</tr>";
 		$("#tr1").append(html);
     })
@@ -540,6 +562,17 @@
             // qoujingStart.style="display: none";
             // qoujingEnd.style="display: none";
             s1="<option value=''>--请选择--</option><option value='功能'>功能</option>";
+            $("#caizhi"+targetStr+"").append(s1);
+		} else if (goods == '隐形成品片' || goods == '隐形订做片'){
+            $("#zhujingStart"+targetStr+"").css('display','none');
+            $("#zhujingEnd"+targetStr+"").css('display','none');
+            $("#qoujingStart"+targetStr+"").css('display','none');
+            $("#qoujingEnd"+targetStr+"").css('display','none');
+            $("#caizhi"+targetStr+"").css('display','');
+            $("#fenlei"+targetStr+"").css('display','none');
+            var s1=""
+            s1="<option value=''>--请选择--</option><option value='使用类型'>使用类型</option><option value='抛弃型分类'>抛弃型分类</option>" +
+                "<option value='球镜区间'>球镜区间</option><option value='柱镜区间'>柱镜区间</option>";
             $("#caizhi"+targetStr+"").append(s1);
 		}
 	}
@@ -666,6 +699,27 @@
             gn = "<option value=''>--请选择--</option><option value='遮阳'>遮阳</option><option value='偏光'>偏光</option>";
             //fenlei.style="display: ''";
             $("#fenlei"+targetStr+"").css('display','');
+            $("#fenlei"+targetStr+"").append(gn);
+		} else if (cz == "使用类型"){
+            $("#zhujingStart"+targetStr+"").css('display','none');
+            $("#zhujingEnd"+targetStr+"").css('display','none');
+            $("#qoujingStart"+targetStr+"").css('display','none');
+            $("#qoujingEnd"+targetStr+"").css('display','none');
+            var gn = "";
+            gn = "<option value=''>--请选择--</option><option value='常戴型'>常戴型</option><option value='抛弃型'>抛弃型</option><option value='塑形镜'>塑形镜</option>";
+            $("#fenlei"+targetStr+"").css('display','');
+            $("#fenlei"+targetStr+"").append(gn);
+		} else if (cz == "抛弃型类型"){
+            var gn="<option value=''>--请选择--</option>";
+            for (var i=0;i<typeDOList.length;i++){
+                gn += "<option value='"+typeDOList[i].typeId+"'>"+typeDOList[i].typeName+"</option>"
+            }
+            $("#fenlei"+targetStr+"").css('display','');
+            $("#zhujingStart"+targetStr+"").css('display','none');
+            $("#zhujingEnd"+targetStr+"").css('display','none');
+            $("#qoujingStart"+targetStr+"").css('display','none');
+            $("#qoujingEnd"+targetStr+"").css('display','none');
+            $("#caizhi"+targetStr+"").css('display','none');
             $("#fenlei"+targetStr+"").append(gn);
 		}
 	}
