@@ -21,11 +21,22 @@
         where m.state= 1
         group by m.mfrsid order by m.status asc ,m.mfrsid asc
     </select>
+    <!--制造商查询-->
+    <select id="findMfrs" resultType="com.shiguang.mfrs.domain.MfrsDO">
+        select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
+        from c_mfrs m
+        <where>
+            <if test="goodsIds != null and goodsIds != ''">and m.goodsid LIKE concat('%', #{goodsIds},'%')</if>
+            <if test="goodsid != null and goodsid != ''">and m.goodsid = #{goodsid}</if>
+            and m.state= 1
+        </where>
+        group by m.mfrsid order by m.mfrsid asc
+    </select>
     <!--查询镜架制造商-->
     <select id="producaList" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=1
-		and m.state= 1
+        and m.state= 1
         group by m.mfrsid order by m.mfrsid asc
     </select>
     <!--查询配件制造商-->

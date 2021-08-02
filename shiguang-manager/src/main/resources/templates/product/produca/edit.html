@@ -140,6 +140,7 @@
                                 <select name="technologyId" id="technologyId" th:value="${produca.technologyId}"
                                         class="form-control"
                                         data-actions-box="false" data-size="5">
+                                    <option></option>
                                     <option th:each="ls:${technologyDOList}"
                                             th:text="${ls.technologyType}"
                                             th:value="${ls.technologyId}"></option>
@@ -155,6 +156,7 @@
                                 <select name="materialid" id="materialid" th:value="${produca.materialid}"
                                         class="form-control"
                                         data-actions-box="false" data-size="5">
+                                    <option></option>
                                     <option th:each="ls:${materialDOList}"
                                             th:text="${ls.materialname}"
                                             th:value="${ls.materialid}"></option>

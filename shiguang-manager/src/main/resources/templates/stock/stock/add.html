@@ -42,15 +42,12 @@
             <td>制造商：</td>
             <td>
                 <input id="mfrsid" name="mfrsid" type="hidden"/>
-                <input type="text" id="mfrsName" name="mfrsName"/>
+                <input id="mfrsName" name="mfrsName" type="text" onchange="chuanzhi()"/>
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
             </td>
             <td>供应商：</td>
             <td>
-                <select name="" id="">
-                    <option value="欧普康视1">欧普康视1</option>
-                    <option value="欧普康视2">欧普康视2</option>
-                </select>
+                <input id="mfrsNames" name="mfrsNames" type="text"/>
             </td>
             <td>收入仓位：</td>
             <td>
@@ -68,7 +65,8 @@
             <td><input id="zhidanPeople" name="zhidanPeople" th:value="${optometryName}" type="text"
                        style="background-color: #e4e4e4" readonly/></td>
             <td>单据日期：</td>
-            <td>2021-07-05</td>
+            <td><input id="danjuDay" name="danjuDay" th:value="${createTime}" type="text"
+                       style="background-color: #e4e4e4" readonly/></td>
         </tr>
         <tr>
             <td>退货单号：</td>
@@ -76,8 +74,10 @@
                 <input type="text"/>
                 <input type="button" class="XZ-btn" value="选择" onclick="tuihuiNum()"/>
             </td>
+            <td></td>
+            <td></td>
             <td>厂家订单号：</td>
-            <td colspan="3"><input type="text" value="允许"/></td>
+            <td><input type="text"/><em>*</em></td>
         </tr>
         <tr>
             <td>备注：</td>
@@ -421,27 +421,32 @@
 <script type="text/javascript"></script>
 <script type="text/javascript">
     function dingdanNum() {
-        var goodsval = document.getElementById('goodsid').value;
-        var mfrsidval = document.getElementById('mfrsid').value;
-        // alert(goodsval);
-        if (goodsval == "") {
+        var goodsid = document.getElementById('goodsid').value;
+        var mfrsid = document.getElementById('mfrsid').value;
+        // alert(goodsid);
+        if (goodsid == "") {
             alert("请选择采购类型！");
-        } else if (goodsval != "" && mfrsidval == "") {
+        } else if (goodsid != "" && mfrsid == "") {
             alert("请选择所属制造商！");
         }
         ;
     }
 
     function tuihuiNum() {
-        var goodsval = document.getElementById('goodsid').value;
-        var mfrsidval = document.getElementById('mfrsid').value;
-        // alert(goodsval);
-        if (goodsval == "") {
+        var goodsid = document.getElementById('goodsid').value;
+        var mfrsid = document.getElementById('mfrsid').value;
+        // alert(goodsid);
+        if (goodsid == "") {
             alert("请选择采购类型！");
-        } else if (goodsval != "" && mfrsidval == "") {
+        } else if (goodsid != "" && mfrsid == "") {
             alert("请选择所属制造商！");
         }
         ;
+    }
+
+    function chuanzhi() {
+        var temp = $("input[name='mfrsName']").val();
+        $("input[name='mfrsNames']").val(temp);
     }
 
     function goodsidstr(value) {
@@ -550,11 +555,11 @@
 
     <!--选择制造商-->
     function choiceMfrs() {
-        var goodsval = document.getElementById('goodsid').value;
-        // alert(goodsval);
-        if (goodsval == "") {
+        var goodsid = document.getElementById('goodsid').value;
+        // alert(goodsid);
+        if (goodsid == "") {
             alert("请选择采购类型！");
-        } else if (goodsval == '1') {
+        } else {
             //选择镜架
             var toIndex = layer.open({
                 type: 2,
@@ -562,159 +567,7 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/product/produca/findmfrs/",// iframe的url
-                cancel: function (index, layero) {
-                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                    for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        // choice(rows[i].mfrsid);
-                    }
-                }
-            });
-            layer.full(toIndex);
-        } else if (goodsval == '2') {
-            // 选择配件
-            var toIndex = layer.open({
-                type: 2,
-                title: '制造商',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
-                content: "/product/parts/findmfrs/",// iframe的url
-                cancel: function (index, layero) {
-                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                    for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        // choice(rows[i].mfrsid);
-                    }
-                }
-            });
-            layer.full(toIndex);
-        } else if (goodsval == '3') {
-            //选择镜片
-            var toIndex = layer.open({
-                type: 2,
-                title: '制造商',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
-                content: "/product/jpcp/findmfrs/",// iframe的url
-                cancel: function (index, layero) {
-                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                    for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        // choice(rows[i].mfrsid);
-                    }
-                }
-            });
-            layer.full(toIndex);
-        } else if (goodsval == '4') {
-            //选择隐形
-            var toIndex = layer.open({
-                type: 2,
-                title: '制造商',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
-                content: "/product/yxcp/findmfrs/",// iframe的url
-                cancel: function (index, layero) {
-                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                    for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        // choice(rows[i].mfrsid);
-                    }
-                }
-            });
-            layer.full(toIndex);
-        } else if (goodsval == '5') {
-            //  护理液
-            var toIndex = layer.open({
-                type: 2,
-                title: '制造商',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
-                content: "/product/hly/findmfrs/",// iframe的url
-                cancel: function (index, layero) {
-                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                    for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        // choice(rows[i].mfrsid);
-                    }
-                }
-            });
-            layer.full(toIndex);
-        } else if (goodsval == '6') {
-            //太阳镜
-            var toIndex = layer.open({
-                type: 2,
-                title: '制造商',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
-                content: "/product/tyj/findmfrs/",// iframe的url
-                cancel: function (index, layero) {
-                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                    for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        // choice(rows[i].mfrsid);
-                    }
-                }
-            });
-            layer.full(toIndex);
-        } else if (goodsval == '7') {
-            //老花镜
-            var toIndex = layer.open({
-                type: 2,
-                title: '制造商',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
-                content: "/product/oldlens/findmfrs/",// iframe的url
-                cancel: function (index, layero) {
-                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                    for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        // choice(rows[i].mfrsid);
-                    }
-                }
-            });
-            layer.full(toIndex);
-        } else if (goodsval == '8') {
-            //耗材
-            var toIndex = layer.open({
-                type: 2,
-                title: '制造商',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
-                content: "/product/hc/findmfrs/",// iframe的url
-                cancel: function (index, layero) {
-                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                    for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        // choice(rows[i].mfrsid);
-                    }
-                }
-            });
-            layer.full(toIndex);
-        } else if (goodsval == '9') {
-            //视光  shiguang
-            var toIndex = layer.open({
-                type: 2,
-                title: '制造商',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
-                content: "/product/shiguang/findmfrs/",// iframe的url
+                content: "/stock/stock/findmfrs/" + goodsid,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
@@ -730,28 +583,182 @@
 
     <!--单品添加商品-->
     function choiceGoods() {
-        var goodsval = document.getElementById('goodsid').value;
-        var mfrsidval = document.getElementById('mfrsid').value;
-        if (goodsval == '1') {
-            //选择镜架
+        var goodsid = document.getElementById('goodsid').value;
+        var mfrsid = document.getElementById('mfrsid').value;
+        var goodVal = $("#goodsid option:selected").text();
+        // alert(goodVal)
+        // alert(goodsid);
+        if (goodsid == "") {
+            alert("请选择采购类型！");
+            return this;
+        } else if (goodsid != "" && mfrsid == "") {
+            alert("请选择所属制造商！");
+            return this;
+        } else if (goodVal == "镜架") {
             var toIndex = layer.open({
                 type: 2,
-                title: '制造商',
+                title: '商品查询',
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/product/produca/findmfrs/",// iframe的url
+                content: "/stock/stock/ccc/",// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
                         $("#mfrsName").val(rows[i].mfrsname);
                         $("#mfrsid").val(rows[i].mfrsid);
-                        // choice(rows[i].mfrsid);
+                        caidan(rows[i].mfrsid);
                     }
                 }
             });
-            layer.full(toIndex);
+            layer.full(toIndex)
+        } else if (goodVal == "配件") {
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品查询',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/peijian/" + mfrsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        caidan(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex)
+        } else if (goodVal == "镜片") {
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品查询',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/jingpian/" + goodVal,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        caidan(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex)
+        } else if (goodVal == "隐形镜片") {
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品查询',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/yinxing/" + goodVal,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        caidan(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex)
+        } else if (goodVal == "隐形护理液") {
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品查询',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/hly/" + goodVal,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        caidan(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex)
+        } else if (goodVal == "太阳镜") {
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品查询',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/tyj/" + goodVal,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        caidan(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex)
+        } else if (goodVal == "老花镜") {
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品查询',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/lhj/" + goodVal,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        caidan(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex)
+        } else if (goodVal == "耗材") {
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品查询',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/hc/" + goodVal,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        caidan(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex)
+        } else if (goodVal == "视光") {
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品查询',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/sg/" + goodVal,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        caidan(rows[i].mfrsid);
+                    }
+                }
+            });
+            layer.full(toIndex)
         }
+
+
     }
 </script>
 </body>

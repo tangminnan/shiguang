@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shiguang.stock.dao.StockDao">
-    <!--&lt;!&ndash;菜单联动显示&ndash;&gt;-->
-    <!--<select id="choice" resultType="com.shiguang.stock.domain.StockDO">-->
-    <!--select b.brandid,b.brandname from c_brand b left join  cc_mg mg-->
-    <!--on b.goodsid = mg.goodsid  left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=8 and b.mfrsid = #{mfrsid} group by  b.brandid;-->
-    <!--</select>-->
+    <!--配件【商】【品】【查】【询】-->
+    <select id="selectPj">
+        select p.produc_num,p.produc_name,p.produc_factory,u.unitname,
+        p.factory,p.retail_price,p.tax_price,p.parts_style
+        from aa_parts p join c_unit u on p.unitid=u.unitid where p.mfrsid=87
+    </select>
     <select id="get" resultType="com.shiguang.stock.domain.StockDO">
 		select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`retail_price`,`price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit` from stock where id = #{value}
 	</select>

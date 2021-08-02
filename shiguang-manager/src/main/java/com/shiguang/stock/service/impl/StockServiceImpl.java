@@ -1,6 +1,7 @@
 package com.shiguang.stock.service.impl;
 
 import com.shiguang.mfrs.domain.PositionDO;
+import com.shiguang.product.domain.PartsDO;
 import com.shiguang.stock.dao.StockDao;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
@@ -16,11 +17,11 @@ public class StockServiceImpl implements StockService {
     @Autowired
     private StockDao stockDao;
 
-//    //菜单联动显示
-//    @Override
-//    public List<BrandDO> choice(Integer mfrsid) {
-//        return stockDao.choice(mfrsid);
-//    }
+    //<!--配件【商】【品】【查】【询】-->
+    @Override
+    public List<PartsDO> selectPj(Map<String, Object> map) {
+        return stockDao.selectPj(map);
+    }
 
     @Override
     public StockDO get(Long id) {

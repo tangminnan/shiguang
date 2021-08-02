@@ -203,8 +203,11 @@ public class ProducaController {
     //制造商——商品类别菜单下来选择
     @ResponseBody
     @RequestMapping(value = "/choice")
-    List<BrandDO> choice(Integer mfrsid, Model model) {
-        List<BrandDO> brandDOList = producaService.choice(mfrsid);
+    List<BrandDO> choice(Integer mfrsid, String goodsid, Model model) {
+        Map<String, Object> map = new HashMap();
+        map.put("mfrsid", mfrsid);
+        map.put("goodsid", goodsid);
+        List<BrandDO> brandDOList = producaService.choice(map);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
     }

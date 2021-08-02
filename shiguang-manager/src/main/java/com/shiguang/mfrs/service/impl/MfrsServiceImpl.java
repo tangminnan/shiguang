@@ -31,6 +31,13 @@ public class MfrsServiceImpl implements MfrsService {
     public List<MfrsDO> list(Map<String, Object> map) {
         return mfrsDao.list(map);
     }
+    //    <!--查询制造商-->
+
+
+    @Override
+    public List<MfrsDO> findMfrs(Map<String, Object> map) {
+        return mfrsDao.findMfrs(map);
+    }
 
     //    <!--查询镜架制造商-->
     @Override

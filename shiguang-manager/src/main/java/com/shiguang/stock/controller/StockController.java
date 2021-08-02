@@ -1,9 +1,6 @@
 package com.shiguang.stock.controller;
 
-import com.shiguang.common.utils.GuuidUtil;
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.*;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.GoodsService;
@@ -16,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +71,13 @@ public class StockController {
         //仓位
         List<PositionDO> positionDOList = positionService.list(map);
         model.addAttribute("positionDOList", positionDOList);
+        //———获取当前登录用户的名称————
+        model.addAttribute("optometryName", ShiroUtils.getUser().getName());
+//———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String newDate = sdf.format(date);
+        model.addAttribute("createTime", newDate);
         return "stock/stock/add";
     }
 
@@ -131,12 +137,69 @@ public class StockController {
         return R.ok();
     }
 
-//    //制造商——商品类别菜单下来选择
-//    @ResponseBody
-//    @RequestMapping(value = "/choice")
-//    List<BrandDO> choice(Integer mfrsid, Model model) {
-//        List<BrandDO> brandDOList = stockService.choice(mfrsid);
-//        model.addAttribute("brandDOList", brandDOList);
-//        return brandDOList;
-//    }
+    //跳转制造商
+    @GetMapping("/findmfrs/{goodsid}")
+    @RequiresPermissions("stock:stock:findmfrs")
+    String findmfrs(@PathVariable("goodsid") Integer goodsid, Model model) {
+        model.addAttribute("goodsid", goodsid);
+        return "/mfrs/mfrs/findMfrs";
+    }
+
+    //跳转镜架商品查询
+    @GetMapping("/jingjia")
+    @RequiresPermissions("stock:stock:jingjia")
+    String jingjia() {
+        return "stock/stock/jingjia";
+    }
+
+    //跳转配件商品查询
+    @GetMapping("/peijian/{mfrsid}")
+    @RequiresPermissions("stock:stock:peijian")
+    String peijian(@PathVariable("mfrsid") Integer mfrsid, Model model) {
+
+        return "/stock/stock/peijian";
+    }
+
+    //跳转镜片商品查询
+    @GetMapping("/jingpian")
+    @RequiresPermissions("stock:stock:jingpian")
+    String jingpian() {
+        return "/stock/stock/jingpian";
+    }
+
+    //跳转隐形镜片商品查询
+    @GetMapping("/yinxing")
+    @RequiresPermissions("stock:stock:yinxing")
+    String yinxing() {
+        return "/stock/stock/yinxing";
+    }
+
+    //跳转隐形护理液商品查询
+    @GetMapping("/hly")
+    @RequiresPermissions("stock:stock:hly")
+    String hly() {
+        return "/stock/stock/hly";
+    }
+
+    //跳转太阳镜商品查询
+    @GetMapping("/tyj")
+    @RequiresPermissions("stock:stock:tyj")
+    String tyj() {
+        return "/stock/stock/tyj";
+    }
+
+    //跳转耗材商品查询
+    @GetMapping("/hc")
+    @RequiresPermissions("stock:stock:hc")
+    String hc() {
+        return "/stock/stock/hc";
+    }
+
+    //跳转视光商品查询
+    @GetMapping("/sg")
+    @RequiresPermissions("stock:stock:sg")
+    String sg() {
+        return "/stock/stock/sg";
+    }
+
 }

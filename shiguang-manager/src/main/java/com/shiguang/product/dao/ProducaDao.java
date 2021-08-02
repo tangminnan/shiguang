@@ -4,7 +4,6 @@ import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.domain.ProducaDO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -37,7 +36,7 @@ public interface ProducaDao {
     int batchRemove(Long[] ids);
 
     //菜单联动显示
-    List<BrandDO> choice(@Param("mfrsid") Integer mfrsid);
+    List<BrandDO> choice(Map<String, Object> map);
 
     //删除修改状态
     int updateState(ProducaDO produca);

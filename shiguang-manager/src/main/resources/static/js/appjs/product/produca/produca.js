@@ -306,6 +306,7 @@ function batchRemove() {
 //选择制造商
 function batchSelect() {
     var rows = $("#exampleTable").bootstrapTable("getSelections");
+    alert(rows.length + "rows长度");
     return rows;
 };
 

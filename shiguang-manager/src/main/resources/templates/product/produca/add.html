@@ -1,259 +1,288 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-<div class="wrapper wrapper-content ">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                    <form class="form-horizontal m-t" id="signupForm">
-                        <div style="border:1px solid #000">
-                            <h1 style="position: absolute;top: 10px;width: 150px;left: 100px;z-index: 99;background-color: white;">
-                                必填项</h1>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">商品代码：</label>
-                                <div class="col-sm-8">
-                                    <input id="producNum" name="producNum" class="form-control" type="text"
-                                           value="1.00.00.000000000.0000">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">商品条码：</label>
-                                <div class="col-sm-8">
-                                    <input id="producCode" name="producCode" class="form-control" type="text"
-                                           value="1.00.00.000000000.0000">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">商品名称：</label>
-                                <div class="col-sm-8">
-                                    <input id="producName" name="producName" class="form-control" type="text">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <!--启用状态-->
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">销售状态：</label>
-                                <div class="col-sm-8">
-                                    <label class="radio-inline"> <input type="radio"
-                                                                        name="status" value="1"/> 禁用
-                                    </label>
-                                    <label class="radio-inline"> <input type="radio"
-                                                                        name="status" value="0"/> 启用
-                                    </label>
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">制造商简称：</label>
-                                <div class="col-sm-8">
-                                    <td><input type="text" id="mfrsName" name="mfrsName"/></td>
-                                    <input type="hidden" id="mfrsid" name="mfrsid"/>
-                                    <input type="button" value="选择*" onclick="getMfrsProduca()" style="color: red"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">商品品种：</label>
-                                <div class="col-sm-8">
-                                    <select id="brandid" name="brandid" class="form-control"></select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">厂家型号：</label>
-                                <div class="col-sm-8">
-                                    <input id="factory" name="factory"
-                                           onkeyup="liandong1()"
-                                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
-                                           class="form-control" type="text">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">型号：</label>
-                                <div class="col-sm-8">
-                                    <input id="producFactory" name="producFactory"
-                                           onkeyup="liandong2()"
-                                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
-                                           class="form-control" type="text">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">厂家色号：</label>
-                                <div class="col-sm-8">
-                                    <input id="producFactorycolor" name="producFactorycolor" class="form-control"
-                                           onkeyup="liandong3()"
-                                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
-                                           type="text">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">色号：</label>
-                                <div class="col-sm-8">
-                                    <input id="producColor" name="producColor" class="form-control" type="text"
-                                           onkeyup="liandong4()"
-                                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">计量单位：</label>
-                                <div class="col-sm-8">
-                                    <select id="unitid" name="unitid" class="form-control">
-                                        <option></option>
-                                        <option th:each="ls:${unitDOList}"
-                                                th:text="${ls.unitname}"
-                                                th:value="${ls.unitid}"
-                                        ></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">批号管理：</label>
-                                <div class="col-sm-8">
-                                    <label class="radio-inline"> <input type="radio"
-                                                                        name="batchid" value="1"/> 是
-                                    </label>
-                                    <label class="radio-inline"> <input type="radio"
-                                                                        name="batchid" value="2" checked/> 否
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>镜架新增</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
 
-                        <div style="border:1px solid #000">
-                            <h1 style="position: absolute;top: 690px;width: 150px;left: 100px;z-index: 99;background-color: white;">
-                                非必填项</h1>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">镜架尺寸：</label>
-                                <div class="col-sm-8">
-                                    <input id="size" name="size" class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">工艺类型：</label>
-                                <div class="col-sm-8">
-                                    <select id="technologyId" name="technologyId" class="form-control">
-                                        <option></option>
-                                        <option th:each="ls:${technologyDOList}"
-                                                th:text="${ls.technologyType}"
-                                                th:value="${ls.technologyId}"
-                                        ></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">镜架材质：</label>
-                                <div class="col-sm-8">
-                                    <select id="materialid" name="materialid" class="form-control">
-                                        <option></option>
-                                        <option th:each="ls:${materialDOList}"
-                                                th:text="${ls.materialname}"
-                                                th:value="${ls.materialid}"
-                                        ></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">颜色：</label>
-                                <div class="col-sm-8">
-                                    <select id="color" name="color" class="form-control">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">款式：</label>
-                                <div class="col-sm-8">
-                                    <select id="styleId" name="styleId" class="form-control">
-                                        <option></option>
-                                        <option th:each="ls:${styleDOList}"
-                                                th:text="${ls.style}"
-                                                th:value="${ls.styleId}"
-                                        ></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">采购年份：</label>
-                                <div class="col-sm-8">
-                                    <input id="year" name="year" class="form-control" type="text">
-                                    <span style="color: red">(年份后两位+两位月份)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="border:1px solid #000">
-                            <h1 style="position: absolute;top: 1010px;width: 150px;left: 100px;z-index: 99;background-color: white;">
-                                价格项</h1>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">税率(%)：</label>
-                                <div class="col-sm-8">
-                                    <input id="tax" name="tax" class="form-control" type="text" value="17">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">含税单价：</label>
-                                <div class="col-sm-8">
-                                    <input id="taxPrice" name="taxPrice" class="form-control" type="text">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">批发价格：</label>
-                                <div class="col-sm-8">
-                                    <input id="tradePrice" name="tradePrice" class="form-control" type="text">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">调货成本：</label>
-                                <div class="col-sm-8">
-                                    <input id="transferPrice" name="transferPrice" class="form-control" type="text">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">标准零售价格：</label>
-                                <div class="col-sm-8">
-                                    <input id="retailPrice" name="retailPrice" class="form-control" type="text">
-                                    <span style="color: red">*</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--未删除-->
-                        <input id="state" name="state" value="1" type="hidden">
-                        <div class="form-group">
-                            <div class="col-sm-8 col-sm-offset-3">
-                                <button type="submit" class="btn btn-primary">提交</button>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+    <div class="new_h3">镜架新增</div>
+    <!--必填项-->
+    <div class="m40 tabS PHGL">
+        <h3>必填项</h3>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>商品代码：</td>
+                <td>
+                    <input id="producNum" name="producNum" type="text" value="1.00.00.000000000.0000"/>
+                </td>
+                <td>商品条码：</td>
+                <td>
+                    <input id="producCode" name="producCode" type="text" value="100000000000000000"/>
+                    <em>*</em>
+                </td>
+                <td>商品名称：</td>
+                <td><input id="producName" name="producName" type="text"/>
+                    <em>*</em>
+                </td>
+            </tr>
+            <tr>
+                <td>制造商：</td>
+                <td>
+                    <input id="mfrsid" name="mfrsid" type="hidden"/>
+                    <input id="mfrsName" name="mfrsName" type="text" readonly/>
+                    <input type="button" class="XZ-btn" value="选择" onclick="getMfrsProduca()"/>
+                    <em>*</em>
+                </td>
+                <td>商品品种：</td>
+                <td style="width:20%;">
+                    <select id="brandid" name="brandid" onchange="change(this, 5, 7)">
+                        <option value="00">--请选择--</option>
+                    </select>
+                    <em>*</em>
+                </td>
+                <td>厂家型号：</td>
+                <td>
+                    <input id="factory" name="factory" onkeyup="liandong1(this)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" type="text"
+                           oninput="if(value.length>9)value=value.slice(0,9)">
+                    <em>*</em>
+                </td>
+            </tr>
+            <tr>
+                <td>型号：</td>
+                <td>
+                    <input id="producFactory" name="producFactory" onkeyup="liandong2(this)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" type="text"
+                           oninput="if(value.length>9)value=value.slice(0,9)">
+                    <em>*</em>
+                </td>
+                <td>厂家色号：</td>
+                <td>
+                    <input id="producFactorycolor" name="producFactorycolor" onkeyup="liandong3(this)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" type="text"
+                           oninput="if(value.length>4)value=value.slice(0,4)">
+                    <em>*</em>
+                </td>
+                <td>色号：</td>
+                <td>
+                    <input id="producColor" name="producColor" type="text" onkeyup="liandong4(this)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
+                           oninput="if(value.length>4)value=value.slice(0,4)">
+                    <em>*</em>
+                </td>
+            </tr>
+            <tr>
+                <td>计量单位：</td>
+                <td>
+                    <select id="unitid" name="unitid">
+                        <option></option>
+                        <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}">
+                        </option>
+                    </select>
+                    <em>*</em>
+                </td>
+                <td>批号管理：</td>
+                <td>
+                    <input name="batchid" value="1" type="radio" id="PH-S" checked> <label for="PH-S"
+                                                                                           style="margin-right: 5%">是</label>
+                    <input name="batchid" value="2" type="radio" id="PH-F"> <label for="PH-F">否</label>
+                    <em>*</em>
+                </td>
+                <td>销售状态：</td>
+                <td>
+                    <input name="status" value="1" type="radio"> <label for="PH-S"
+                                                                        style="margin-right: 5%">禁用</label>
+                    <input name="status" value="0" type="radio" checked> <label for="PH-F">启用</label>
+                    <em>*</em>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</div>
+    <!--必填项2-->
+    <div class="m40 tabS PHGL">
+        <h3>必填项</h3>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>镜架尺寸：</td>
+                <td><input type="text" value="1.06.19.00000000111.1113S"/></td>
+                <td>工艺类型：</td>
+                <td style="width:20%;">
+                    <select id="materialid" name="materialid" style="width:60%;">
+                        <option></option>
+                        <option th:each="ls:${materialDOList}" th:text="${ls.materialname}"
+                                th:value="${ls.materialid}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>颜色：</td>
+                <td>
+                    <select id="color" name="color" class="form-control">
+                    </select>
+                </td>
+                <td>款式：</td>
+                <td>
+                    <select id="styleId" name="styleId" class="form-control">
+                        <option></option>
+                        <option th:each="ls:${styleDOList}" th:text="${ls.style}" th:value="${ls.styleId}">
+                        </option>
+                    </select>
+                </td>
+                <td>采购年份：</td>
+                <td><input id="year" name="year" type="text" style="width:60%;"/><em>（年份后两位+两位月份）</em></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--价格项-->
+    <div class="m40 tabS PHGL">
+        <h3>价格项</h3>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>税率（%）：</td>
+                <td>
+                    <input id="tax" name="tax" type="text" value="17"
+                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                    <em>*</em>
+                </td>
+                <td>含税单价：</td>
+                <td>
+                    <input id="taxPrice" name="taxPrice" type="text"
+                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                    <em>*</em>
+                </td>
+                <td>批发价格：</td>
+                <td>
+                    <input id="tradePrice" name="tradePrice" type="text"
+                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                    <em>*</em>
+                </td>
+            </tr>
+            <tr>
+                <td>调货成本：</td>
+                <td>
+                    <input id="transferPrice" name="transferPrice" type="text"
+                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                    <em>*</em>
+                </td>
+                <td>标准零售价格：</td>
+                <td colspan="3">
+                    <input id="retailPrice" name="retailPrice" type="text" style="width: 30%"
+                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                    <em>*</em>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--保存/清空-->
+    <div class="BQ-btn">
+        <!--未删除-->
+        <input id="state" name="state" value="1" type="hidden">
+        <input type="button" value="保存" onclick="baocun()"/>
+        <input type="button" class="empty" value="清空"/>
+        <dl>
+            <dt>镜架：<br/>商品代码组成说明：</dt>
+            <dd><img src="/img/tmsm.png" alt=""/></dd>
+            <dd>商品条码会根据商品代码自动生成。<br/>商品名称默认为选择的品种的名称，可以自行调整。<br/>型号通常是写在镜腿上的规格。</dd>
+        </dl>
+    </div>
+</form>
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/product/produca/add.js"></script>
 <!--选择制造商-->
 <script type="text/javascript" src="/js/appjs/mfrs/brand/findmfrs.js"></script>
 <script type="text/javascript">
-    <!--//———制造商与品种联动—————-->
+    function baocun() {
+        //商品名称
+        var producName = document.getElementById('producName').value;
+        //制造商
+        var mfrsName = document.getElementById('mfrsName').value;
+        //商品品种
+        var brandid = document.getElementById('brandid').value;
+        //厂家型号
+        var factory = document.getElementById('factory').value;
+        //型号
+        var producFactory = document.getElementById('producFactory').value;
+        //厂家色号
+        var producFactorycolor = document.getElementById('producFactorycolor').value;
+        //色号
+        var producColor = document.getElementById('producColor').value;
+        //计量单位
+        var unitid = document.getElementById('unitid').value;
+        //税率
+        var tax = document.getElementById('tax').value;
+        //含税单价
+        var taxPrice = document.getElementById('taxPrice').value;
+        //批发价格
+        var tradePrice = document.getElementById('tradePrice').value;
+        //调货成本
+        var transferPrice = document.getElementById('transferPrice').value;
+        //标准零售价格
+        var retailPrice = document.getElementById('retailPrice').value;
+        if (producName == "") {
+            alert("请输入商品名称");
+        } else if (mfrsName == "") {
+            alert("请选择制造商");
+        } else if (brandid == "") {
+            alert("请选择商品品种");
+        } else if (factory == "") {
+            alert("请输入厂家型号");
+        } else if (producFactory == "") {
+            alert("请输入型号");
+        } else if (producFactorycolor == "") {
+            alert("请输入厂家色号");
+        } else if (producColor == "") {
+            alert("请输入色号");
+        } else if (unitid == "") {
+            alert("请选择计量单位");
+        } else if (tax == "") {
+            alert("请输入税率");
+        } else if (taxPrice == "") {
+            alert("请输入含税单价");
+        } else if (tradePrice == "") {
+            alert("请输入批发价格");
+        } else if (transferPrice == "") {
+            alert("请输入调货成本");
+        } else if (retailPrice == "") {
+            alert("请输入标准零售价格");
+        } else {
+            save();
+        }
+    }
+
+</script>
+<script type="text/javascript">
+    var a1 = document.getElementById("producNum")
+    var a2 = document.getElementById("producCode")
+    var sum;
+    var sum1;
+    var a1_val = "1.00.00.000000000.0000"
+
+    //———制造商与品种联动
     function choice(value) {
         // alert(value);
         $("#brandid").empty("");
-        $("#brandid").append("<option value=''></option>");
+        $("#brandid").append("<option value=\"00\">--请选择--</option>");
         $.ajax({
             url: "/product/produca/choice",
             type: "post",
             data: {
-                'mfrsid': value
+                'mfrsid': value,
+                'goodsid': 1
             },
             dataType: 'JSON',
             async: false,
@@ -261,42 +290,70 @@
                 // alert(datajson);
                 $(datajson).each(function (key) {
                     var id = datajson[key].brandid;
-                    // alert("id"+id);
+                    alert("商品品种id———" + id);
                     var roleName = datajson[key].brandname;
-                    // alert("roleName"+roleName);
+                    alert("商品品种名称————" + roleName);
                     $("#brandid").append("<option value='" + id + "'>" + roleName + "</option>")
                 });
             }
         });
     }
 
-    // <!--//———厂家型号与型号联动—————-->
-    function liandong1() {
+    function change(e, k, s) {
+        a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);
+        a1_val = a1.value.substring(0, 7) + a1_val.substring(7, 22);
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//黏贴
+    }
+
+    // <!--//———厂家型号与型号联动—————--
+    function liandong1(e) {//厂家型号
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
         // alert(val);
+        var producColor = document.getElementById("producColor");
         document.getElementById("producFactory").value = va1;
+        sum = 17 - e.value.length;
+        sum1 = 22 - producColor.value.length;
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase();
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
     }
 
-    function liandong2() {
+    function liandong2(e) {//型号
         var val2 = document.getElementById("producFactory").value;
         var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
+        var producColor = document.getElementById("producColor")
         document.getElementById("factory").value = va2;
+        sum = 17 - e.value.length
+        sum1 = 22 - producColor.value.length
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase()
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
 
     // <!--//———厂家色号与色号联动—————-->
-    function liandong3() {
+    function liandong3(e) {//厂家色号
         var val3 = document.getElementById("producFactorycolor").value;
         var va3 = val3.replace(/[^\w\/]/ig, '').toUpperCase();
+        var producFactory = document.getElementById("producFactory")
         document.getElementById("producColor").value = va3;
+        sum = 17 - producFactory.value.length
+        sum1 = 22 - e.value.length
+        a1.value = a1_val.substring(0, sum) + producFactory.value.toUpperCase() + a1_val.substring(17, sum1) + e.value.toUpperCase()
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
 
-    function liandong4() {
+    function liandong4(e) {//色号
         var val4 = document.getElementById("producColor").value;
         var va4 = val4.replace(/[^\w\/]/ig, '').toUpperCase();
+        var producFactory = document.getElementById("producFactory")
         document.getElementById("producFactorycolor").value = va4;
+        sum = 17 - producFactory.value.length
+        sum1 = 22 - e.value.length
+        a1.value = a1_val.substring(0, sum) + producFactory.value.toUpperCase() + a1_val.substring(17, sum1) + e.value.toUpperCase()
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
-</script>
 
+
+</script>
 </body>
+
 </html>

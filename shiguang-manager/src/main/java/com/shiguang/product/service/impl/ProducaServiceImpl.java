@@ -61,8 +61,8 @@ public class ProducaServiceImpl implements ProducaService {
 
     //菜单联动显示
     @Override
-    public List<BrandDO> choice(Integer mfrsid) {
-        return producaDao.choice(mfrsid);
+    public List<BrandDO> choice(Map<String, Object> map) {
+        return producaDao.choice(map);
     }
 
     //删除修改状态

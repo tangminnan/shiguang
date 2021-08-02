@@ -2,6 +2,7 @@ package com.shiguang.stock.dao;
 
 
 import com.shiguang.mfrs.domain.PositionDO;
+import com.shiguang.product.domain.PartsDO;
 import com.shiguang.stock.domain.StockDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,8 +18,8 @@ import java.util.Map;
  */
 @Mapper
 public interface StockDao {
-//    //菜单联动显示
-//    List<BrandDO> choice(@Param("mfrsid") Integer mfrsid);
+    //<!--配件【商】【品】【查】【询】-->
+    List<PartsDO> selectPj(Map<String, Object> map);
 
     StockDO get(Long id);
 
@@ -79,5 +80,6 @@ public interface StockDao {
     int countYxdz(Map<String, Object> map);
 
     PositionDO findPosition(Map<String, Object> map);
+
 
 }

@@ -70,6 +70,20 @@ public class MfrsController {
         return pageUtils;
     }
 
+    //查询制造商
+    @ResponseBody
+    @GetMapping("/mfrsList")
+    @RequiresPermissions("mfrs:mfrs:mfrs")
+    public PageUtils mfrsList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        query.put("goodsIds", Integer.parseInt(query.get("goodsids").toString()));
+        List<MfrsDO> mfrsDOList = mfrsService.findMfrs(query);
+        int total = mfrsService.mgcount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
+        return pageUtils;
+    }
+
     //查询镜架制造商
     @ResponseBody
     @GetMapping("/producaList")

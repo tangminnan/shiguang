@@ -22,6 +22,9 @@ public interface MfrsService {
     //-----商品查询-------
     List<MfrsDO> list(Map<String, Object> map);
 
+    //    <!--查询制造商-->
+    List<MfrsDO> findMfrs(Map<String, Object> map);
+
     //    <!--查询镜架制造商-->
     List<MfrsDO> producaList(Map<String, Object> map);
 
