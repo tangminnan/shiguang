@@ -60,6 +60,8 @@ public class StockDO implements Serializable {
     private String factoryNumber;
     //备注
     private String beizhu;
+    //单位
+    private String unit;
     //尺寸
     private String size;
     //型号
@@ -440,6 +442,10 @@ public class StockDO implements Serializable {
     public void setSize(String size) {
         this.size = size;
     }
+
+    public void setUnit(String unit) {this.unit = unit;}
+
+    public String getUnit() {return unit;}
 
     /**
      * 获取：尺寸

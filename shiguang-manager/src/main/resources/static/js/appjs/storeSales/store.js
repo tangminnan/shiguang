@@ -25,6 +25,7 @@ function getKjpeijian() {
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>框镜</td>";
                 html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' />"
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -34,11 +35,13 @@ function getKjpeijian() {
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
+                unitarray.push(rows[i].unit);s
                 arraycount.push(1)
             }
             $("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#unit").val(unitarray);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -83,6 +86,7 @@ function getTaiyangjing(){
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>太阳镜</td>";
                 html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+ rows[i].goodsName +"\",)'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' />"
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -92,11 +96,13 @@ function getTaiyangjing(){
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
+                unitarray.push(rows[i].unit);
                 arraycount.push(1)
             }
             $("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#unit").val(unitarray);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -140,6 +146,7 @@ function getHaocai() {
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>耗材</td>";
                 html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' />"
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -149,11 +156,13 @@ function getHaocai() {
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
+                unitarray.push(rows[i].unit);
                 arraycount.push(1)
             }
             $("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#unit").val(unitarray);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -256,6 +265,7 @@ function getShiguang(){
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>视光</td>";
                 html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' />"
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -265,11 +275,13 @@ function getShiguang(){
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
+                unitarray.push(rows[i].unit);
                 arraycount.push(1)
             }
             $("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#unit").val(unitarray);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -315,6 +327,7 @@ function getHuliye(){
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>护理液</td>";
                 html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' />"
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -324,11 +337,13 @@ function getHuliye(){
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
+                unitarray.push(rows[i].unit);
                 arraycount.push(1)
             }
             $("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#unit").val(unitarray);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -374,6 +389,7 @@ function getPeijian(){
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>配件</td>";
                 html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' />"
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -383,11 +399,13 @@ function getPeijian(){
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
+                unitarray.push(rows[i].unit);
                 arraycount.push(1)
             }
             $("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#unit").val(unitarray);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -472,6 +490,7 @@ function getYinxing(){
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>隐形</td>";
                 html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' />"
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -481,11 +500,13 @@ function getYinxing(){
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
+                unitarray.push(rows[i].unit);
                 arraycount.push(1)
             }
             $("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#unit").val(unitarray);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";
@@ -530,6 +551,7 @@ function getYinxingpj(){
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>隐形配件</td>";
                 html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' />"
                 html += "<input id='storeName'name='storeName' type='hidden' />"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -539,11 +561,13 @@ function getYinxingpj(){
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 arraystore.push(rows[i].goodsName);
                 arrayunit.push(rows[i].retailPrice);
+                unitarray.push(rows[i].unit);
                 arraycount.push(1)
             }
             $("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#unit").val(unitarray);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";

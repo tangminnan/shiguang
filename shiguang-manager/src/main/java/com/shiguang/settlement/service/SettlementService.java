@@ -32,4 +32,6 @@ public interface SettlementService {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	SettlementDO getSaleNumers(String saleNumber);
 }

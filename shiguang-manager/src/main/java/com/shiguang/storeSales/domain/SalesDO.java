@@ -44,6 +44,8 @@ public class SalesDO implements Serializable {
 	private Date mirrorTime;
 	//取镜地点
 	private String mirorAddress;
+	//取镜地点编码
+	private String storeNum;
 	//加急状态
 	private String urgentStatus;
 	//商品打折
@@ -54,6 +56,10 @@ public class SalesDO implements Serializable {
 	private Double molingMoney;
 	//附加费用
 	private String additionalCost;
+	//附加费用单价
+	private String additionalPrice;
+	//附加费用数量
+	private String additionalCount;
 	//加工要求
 	private String processAsk;
 	//商品名称
@@ -64,8 +70,11 @@ public class SalesDO implements Serializable {
 	private String storeUnit;
 	//数量
 	private String storeCount;
+	//单位
+	private String unit;
 	//销售备注
 	private String saleremark;
+	private String taocanName;
 	//赠品
 	private String giveName;
 	//是否有镜片
@@ -346,6 +355,11 @@ public class SalesDO implements Serializable {
 	public String getMirorAddress() {
 		return mirorAddress;
 	}
+
+	public void setStoreNum(String storeNum) {this.storeNum = storeNum;}
+
+	public String getStoreNum() {return storeNum;}
+
 	/**
 	 * 设置：加急状态
 	 */
@@ -406,6 +420,15 @@ public class SalesDO implements Serializable {
 	public String getAdditionalCost() {
 		return additionalCost;
 	}
+
+	public void setAdditionalPrice(String additionalPrice) {this.additionalPrice = additionalPrice;}
+
+	public String getAdditionalPrice() {return additionalPrice;}
+
+	public void setAdditionalCount(String additionalCount) {this.additionalCount = additionalCount;}
+
+	public String getAdditionalCount() {return additionalCount;}
+
 	/**
 	 * 设置：加工要求
 	 */
@@ -466,6 +489,11 @@ public class SalesDO implements Serializable {
 	public String getStoreCount() {
 		return storeCount;
 	}
+
+	public void setUnit(String unit) {this.unit = unit;}
+
+	public String getUnit() {return unit;}
+
 	/**
 	 * 设置：销售备注
 	 */
@@ -474,6 +502,11 @@ public class SalesDO implements Serializable {
 	 * 获取：销售备注
 	 */
 	public String getSaleremark() {return saleremark;}
+
+	public void setTaocanName(String taocanName) {this.taocanName = taocanName;}
+
+	public String getTaocanName() {return taocanName;}
+
 	/**
 	 * 设置：赠品
 	 */

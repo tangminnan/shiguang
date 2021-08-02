@@ -61,5 +61,9 @@ public class SettlementServiceImpl implements SettlementService {
 	public int batchRemove(Long[] ids){
 		return settlementDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public SettlementDO getSaleNumers(String saleNumber){
+		return settlementDao.getSaleNumers(saleNumber);
+	}
 }

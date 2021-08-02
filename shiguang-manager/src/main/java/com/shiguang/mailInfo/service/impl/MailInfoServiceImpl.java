@@ -48,4 +48,9 @@ public class MailInfoServiceImpl implements MailInfoService {
     public int batchRemove(Long[] ids){
         return mailInfoDao.batchRemove(ids);
     }
+
+    @Override
+    public MailInfoDO getMailAddress(String saleNumber){
+        return mailInfoDao.getMailAddress(saleNumber);
+    }
 }

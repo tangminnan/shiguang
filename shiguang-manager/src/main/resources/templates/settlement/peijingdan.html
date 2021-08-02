@@ -39,71 +39,72 @@
 		</tr>
 		<tr>
 			<td>R</td>
-			<td>+0.75</td>
-			<td>-0.75</td>
-			<td>187</td>
-			<td>187</td>
-			<td>30</td>
-			<td>20</td>
-			<td>+1.5</td>
-			<td>+1.5</td>
-			<td>0.36</td>
-			<td>渐进/双光</td>
+			<td><span th:text="${conclusion.rightsph}"></span></td>
+			<td><span th:text="${conclusion.rightcyl}"></span></td>
+			<td><span th:text="${conclusion.rightzx}"></span></td>
+			<td><span th:text="${conclusion.rightsph}"></span></td>
+			<td><span th:text="${conclusion.rightyytj}"></span></td>
+			<td><span th:text="${conclusion.righttg}"></span></td>
+			<td><span th:text="${conclusion.rightsph}"></span></td>
+			<td><span th:text="${conclusion.rightprism}"></span></td>
+			<td><span th:text="${conclusion.rightjd}"></span></td>
+			<td><span th:text="${settlementDO.recipelType}"></span></td>
 		</tr>
 		<tr>
 			<td>L</td>
-			<td>+0.75</td>
-			<td>-0.75</td>
-			<td>187</td>
-			<td>187</td>
-			<td>30</td>
-			<td>20</td>
-			<td>+1.5</td>
-			<td>+1.5</td>
-			<td></td>
+			<td><span th:text="${conclusion.leftsph}"></span></td>
+			<td><span th:text="${conclusion.leftcyl}"></span></td>
+			<td><span th:text="${conclusion.leftzx}"></span></td>
+			<td><span th:text="${conclusion.leftsph}"></span></td>
+			<td><span th:text="${conclusion.leftyytj}"></span></td>
+			<td><span th:text="${conclusion.lefttg}"></span></td>
+			<td><span th:text="${conclusion.leftsph}"></span></td>
+			<td><span th:text="${conclusion.leftprism}"></span></td>
+			<td><span th:text="${conclusion.leftjd}"></span></td>
 			<td></td>
 		</tr>
 	</table>
 	<table class="Htab2" cellpadding="0" cellspacing="0">
-		<tr class="thead">
+		<tr class="thead" id="">
 			<td>商品名称</td>
-			<td>规格</td>
+			<!--<td>规格</td>-->
 			<td>单位</td>
 			<td>数量</td>
 			<td>原价金额</td>
 		</tr>
-		<tr>
-			<td>李白光学架—3BKB</td>
-			<td>100</td>
-			<td>副</td>
-			<td>1</td>
-			<td>598.00</td>
-		</tr>
-		<tr>
-			<td>THEREFOPO蒸汽热敷眼罩（10片/盒） </td>
-			<td>100</td>
-			<td>盒</td>
-			<td>2</td>
-			<td>598.00</td>
-		</tr>
-		<tr>
-			<td>R—蔡司.5睐光D（标准通道/短通道）钻立方铂金膜渐进定制镜片</td>
-			<td>100</td>
-			<td>片</td>
-			<td>2</td>
-			<td>598.00</td>
-		</tr>
+		<!--<tr>-->
+			<!--<td>李白光学架—3BKB</td>-->
+			<!--<td>100</td>-->
+			<!--<td>副</td>-->
+			<!--<td>1</td>-->
+			<!--<td>598.00</td>-->
+		<!--</tr>-->
+		<!--<tr>-->
+			<!--<td>THEREFOPO蒸汽热敷眼罩（10片/盒） </td>-->
+			<!--<td>100</td>-->
+			<!--<td>盒</td>-->
+			<!--<td>2</td>-->
+			<!--<td>598.00</td>-->
+		<!--</tr>-->
+		<!--<tr>-->
+			<!--<td>R—蔡司.5睐光D（标准通道/短通道）钻立方铂金膜渐进定制镜片</td>-->
+			<!--<td>100</td>-->
+			<!--<td>片</td>-->
+			<!--<td>2</td>-->
+			<!--<td>598.00</td>-->
+		<!--</tr>-->
 	</table>
 	<table class="Htab3" cellpadding="0" cellspacing="0">
-		<tr class="tr1">
+		<tr class="tr1" id="fujia">
 			<td></td>
 			<td>数量</td>
 			<td>单价</td>
 			<td rowspan="4" class="td1">
-				<p>原价合计：<b>2626.00</b> &nbsp;&nbsp; 折扣金额：<b>408.00</b></p>
-				<p>付款方式：<b>储蓄卡 - 2268.00</b></p>
-				<p>套餐：套餐12</p>
-				<p>实收合计：<b>2268.00</b> </p>
+				<!--<p>原价合计：<b><span th:text="${settlementDO.optometryName}"></span></b> &nbsp;&nbsp; 折扣金额：<b>408.00</b></p>-->
+				<p>原价合计：<b><span th:text="${settlementDO.amountMoney}"></span></b> &nbsp;&nbsp; </p>
+				<p>付款方式：<b><span th:text="${paymodel}"></span></b></p>
+				<p>套餐：<span th:text="${settlementDO.taocanName}"></span></p>
+				<p>实收合计：<b><span th:text="${settlementDO.amountMoney}"></span></b> </p>
 			</td>
 		</tr>
 		<tr>
@@ -112,29 +113,38 @@
 			<td>10.00</td>
 		</tr>
 		<tr>
-			<td>加工要求：特殊膜片</td>
-			<td>2</td>
-			<td>15.00</td>
+			<td>加工要求：<span th:text="${processList}"></span></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
-			<td>销售备注：加急</td>
+			<td>销售备注：<span th:text="${settlementDO.saleremark}"></span></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr class="tr_last">
-			<td>视光师：刘三</td>
-			<td>验光师：张四</td>
-			<td colspan="2">收银员：赵武</td>
+			<td>视光师：<span th:text="${settlementDO.optometryName}"></span</td>
+			<td>验光师：<span th:text="${settlementDO.optometryName}"></span></td>
+			<td colspan="2">收银员：<span th:text="${settlementDO.saleName}"></span></td>
 		</tr>
 		<tr>
-			<td>取镜地点：济南市英雄山路48号</td>
-			<td>门店电话：0531-58859678</td>
-			<td colspan="2">邮寄地址：济南市历下区</td>
+			<td>取镜地点：<span th:text="${departmentDO.departAddress}"></span></td>
+			<td>门店电话：<span th:text="${departmentDO.departTel}"></span></td>
+			<td colspan="2">邮寄地址：<span th:text="${address}"></span></td>
 		</tr>
 	</table>
 
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript"></script>
+<script th:inline="javascript">
+	var jaigongList = [[${processList}]];
+	var html="";
+	for (var i=0;i<jaigongList.length;i++){
+        html = "<tr><td>附加费用：</td><td></td><td></td></tr>";
+        html += "<tr><td>加工要求："+jaigongList[i]+"</td><td></td><td></td></tr>";
+        //$("#fujia").append(html);
+	}
+</script>
 </body>
 </html>

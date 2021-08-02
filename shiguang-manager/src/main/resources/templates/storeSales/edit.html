@@ -949,6 +949,7 @@
 			<li>
 				取镜地点：
 				<input id="mirorAddress" name="mirorAddress" type="text" th:value="${storeName}" readonly>
+				<input type="hidden" id="storeNum" name="storeNum" th:value="${storeNum}"/>
 				<em></em>
 			</li>
 			<li>
@@ -1489,6 +1490,7 @@
     var html ="";
     var price=0.00;
     var producaNum=[];
+    var unitarray=[];
 	function getJingjia(){
         var toIndex = layer.open({
             type : 2,
@@ -1517,6 +1519,7 @@
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>镜架</td>";
                     html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
+                    html += "<input id='unit' name='unit' type='hidden' />"
                     html += "<input id='storeName' name='storeName' type='hidden' />"
                     html += "<input id='storeUnit' name='storeUnit' type='hidden' />"
                     html += "<input id='storeCount' name='storeCount' type='hidden' />"
@@ -1528,6 +1531,7 @@
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                     arraystore.push(rows[i].goodsName);
                     arrayunit.push(rows[i].retailPrice);
+                    unitarray.push(rows[i].unit);
                     arraycount.push(1)
                     //producaNum.push(rows[i].goodsNum);
 					$("#isJj").val("有")
@@ -1535,6 +1539,7 @@
                 $("#storeName").val(arraystore);
                 $("#storeUnit").val(arrayunit);
                 $("#storeCount").val(arraycount);
+                $("#unit").val(unitarray);
                 // $("#producaNum").val(producaNum);
                 $("#ula").empty();
                 var lis="";
@@ -1647,6 +1652,7 @@
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>镜片</td>";
                     html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                    html += "<input id='unit' name='unit' type='hidden' />"
                     html += "<input id='storeName'name='storeName' type='hidden' />"
                     html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                     html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -1657,12 +1663,14 @@
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                     arraystore.push(rows[i].goodsName);
                     arrayunit.push(rows[i].retailPrice);
+                    unitarray.push(rows[i].unit);
                     arraycount.push(1);
                 }
                 $("#isJp").val(arrayjp);
                 $("#storeName").val(arraystore);
                 $("#storeUnit").val(arrayunit);
                 $("#storeCount").val(arraycount);
+                $("#unit").val(unitarray);
                 $("#ula").empty();
                 var lis="";
                 lis =  "<li>原价金额："+price+"</li>";
@@ -1735,23 +1743,30 @@
         lis += "<li>实收金额："+price+"</li>";
         $("#ula").append(lis)
         $("#amountMoney").val(price)
+		alert(options.val());
 		addhtml = "<tr><td>"+options.text()+"</td>";
 		addhtml += "<td>"+options.val()+"</td>";
-		addhtml += "<td><input type=\"text\" id='prival' value='1' onkeyup=\"sum("+options.val()+")\"/></td>";
+		addhtml += "<td><input type=\"text\" id='prival' value='1' name='additionalCount' onkeyup=\"sum("+options.val()+")\"/></td>";
 		addhtml += "<td id='sumprice'>"+options.val()+"</td>";
 		addhtml += "<td><em onclick='delss(this,\"" + options.val() + "\",\"" + options.text() + "\")'></em></td>";
 		addhtml += "</tr>";
 		addhtml += "<input id='additionalCost' name='additionalCost' type='hidden'/>"
+        // addhtml += "<input id='additionalPrice' name='additionalPrice' type='hidden'/>";
+        addhtml += "<input id='additionalPrices' name='additionalPrice' type='hidden' value="+options.val()+" />";
+		//document.getElementById('additionalPrice').value = "";
 		$("#fujia").append(addhtml);
         addinal.push(options.text());
         $("#additionalCost").val(addinal);
 	}
     function sum(obj){
+        document.getElementById('additionalPrices').value = "";
         var privaul = $("#prival").val();
         prce = privaul;
-        var sumprices = (parseFloat(privaul) * parseFloat(obj)).toFixed(2)
+        var sumprices = (parseFloat(privaul) * parseFloat(obj)).toFixed(2);
+        alert(sumprices);
         sumprice.innerText = sumprices;
         //$("#sumprice").val(sumprices);
+		$("#additionalPrices").val(sumprices);
 		price = sumprices;
         //price =(parseFloat(price)+ parseFloat(sumprices)).toFixed(2);
         $("#ula").empty();

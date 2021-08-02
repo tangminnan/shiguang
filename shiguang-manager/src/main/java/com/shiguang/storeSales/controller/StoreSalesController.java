@@ -176,6 +176,8 @@ public class StoreSalesController {
         model.addAttribute("storeName", storeName);
         String saleName = ShiroUtils.getUser().getName();
         model.addAttribute("saleName", saleName);
+        String storeNum = userDO.getStoreNum();
+        model.addAttribute("storeNum",storeNum);
         String store = ShiroUtils.getUser().getStore();
         map.put("stores", store);
         List<GiveawayDO> giveawayDOList = giveawayService.list(map);

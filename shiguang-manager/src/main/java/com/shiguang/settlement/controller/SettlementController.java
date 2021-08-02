@@ -1,11 +1,10 @@
 package com.shiguang.settlement.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.shiguang.baseinfomation.domain.DepartmentDO;
+import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.checkout.domain.CostDO;
 import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.PageUtils;
@@ -13,10 +12,13 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.service.ResultService;
+import com.shiguang.mailInfo.domain.MailInfoDO;
+import com.shiguang.mailInfo.service.MailInfoService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
+import com.shiguang.storeSales.domain.Conclusion;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -52,6 +54,10 @@ public class SettlementController {
 	private SalesService salesService;
 	@Autowired
 	private ResultService resultService;
+	@Autowired
+	private DepartmentService departmentService;
+	@Autowired
+	private MailInfoService mailInfoService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:settlement:settlement")
@@ -244,8 +250,77 @@ public class SettlementController {
 			settlementDO.setSexx("女");
 		}
 		model.addAttribute("settlementDO",settlementDO);
-		String ptometryNumber = settlementDO.getPtometryNumber();
+		DepartmentDO departmentDO = departmentService.getDepartName(settlementDO.getStoreNum());
+		model.addAttribute("departmentDO",departmentDO);
+		MailInfoDO mailInfoDO = mailInfoService.getMailAddress(settlementDO.getSaleNumber());
+		if (null != mailInfoDO){
+			model.addAttribute("address",mailInfoDO.getAddress());
+		} else {
+			model.addAttribute("address","");
+		}
+		SettlementDO settlementDO1 = settlementService.getSaleNumers(saleNumber);
+		if (null != settlementDO1){
+			if (settlementDO1.getPayModel() == 0){
+				model.addAttribute("paymodel","微信");
+			} else if (settlementDO1.getPayModel() == 1){
+				model.addAttribute("paymodel","支付宝");
+			} else if (settlementDO1.getPayModel() == 2){
+				model.addAttribute("paymodel","医院收费处");
+			} else if (settlementDO1.getPayModel() == 3){
+				model.addAttribute("paymodel","一卡通");
+			}
+		}
+		model.addAttribute("settlementDO1",settlementDO1);
+		Map<String,Object> map2 = new HashMap<>();
+		map2.put("cardNumber",settlementDO.getMemberNumber());
+		List<Conclusion> conclusionList = salesService.conclusionList(map2);
+		Conclusion conclusion = new Conclusion();
+		if (null != conclusionList && conclusionList.size() > 0){
+			conclusion.setRightsph(conclusionList.get(0).getRightsph());
+			conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
+			conclusion.setRightzx(conclusionList.get(0).getRightzx());
+			if (null != conclusionList.get(0).getRightyytj()){
+				conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
+			} else {
+				conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
+			}
+			conclusion.setRighttg(conclusionList.get(0).getRighttg());
+			conclusion.setRightprism(conclusionList.get(0).getRightprism());
+			conclusion.setRightjd(conclusionList.get(0).getRightjd());
+			conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
+			conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
+			conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
+			if (null != conclusionList.get(0).getLeftyytj()){
+				conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
+			} else {
+				conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
+			}
+			conclusion.setLefttg(conclusionList.get(0).getLefttg());
+			conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
+			conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
+		}
+		model.addAttribute("conclusion",conclusion);
+//		String goodsName = settlementDO.getStoreName();
+//		String unit = settlementDO.getUnit();
+//		String storeCount = settlementDO.getStoreCount();
+//		String storeUnit = settlementDO.getStoreUnit();
+//		String[] unitastr = unit.split(",");
+//		String[] goods = goodsName.split(",");
+//		String[] countstr = storeCount.split(",");
+//		String[] storeUnitstr = storeUnit.split(",");
+//		List<String> goodsNameList = new ArrayList<>();
+//		for (int i=0;i<goods.length;i++){
+//			goodsNameList.add(goods[i]);
+//		}
+//		model.addAttribute("goodsNameList",goodsNameList);
 		//ResultDO resultDO = resultService.
+		String processAsk = settlementDO.getProcessAsk();
+		String[] processStr = processAsk.split(",");
+		List<String> processList = new ArrayList<>();
+		for (int i=0;i<processStr.length;i++){
+			processList.add(processStr[i]);
+		}
+		model.addAttribute("processList",processList);
 		return "settlement/peijingdan";
 	}
 

@@ -103,5 +103,7 @@
 			#{id}
 		</foreach>
 	</delete>
-
+	<select id="getSaleNumers" resultType="com.shiguang.settlement.domain.SettlementDO">
+		select `id`,`cost_id`,`sale_number`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement where sale_number = #{value}
+	</select>
 </mapper>

@@ -124,4 +124,8 @@
         </foreach>
     </delete>
 
+    <select id="getMailAddress" resultType="com.shiguang.mailInfo.domain.MailInfoDO">
+		select `id`,`sale_number`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info where sale_number = #{value}
+	</select>
+
 </mapper>
