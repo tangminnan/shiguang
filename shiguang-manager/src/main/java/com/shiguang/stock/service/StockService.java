@@ -79,4 +79,6 @@ public interface StockService {
 
     PositionDO findPosition(Map<String, Object> map);
 
+    StockDO getGoodsNum(String goodsNum);
+
 }

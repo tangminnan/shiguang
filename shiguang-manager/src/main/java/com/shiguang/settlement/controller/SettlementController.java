@@ -321,6 +321,29 @@ public class SettlementController {
 			processList.add(processStr[i]);
 		}
 		model.addAttribute("processList",processList);
+		List<String> additionalCostList = new ArrayList<>();
+		String additionalCost = settlementDO.getAdditionalCost();
+		String[] addCostStr = additionalCost.split(",");
+		for (int l=0;l<addCostStr.length;l++){
+			additionalCostList.add(addCostStr[l]);
+		}
+		model.addAttribute("additionalCostList",additionalCostList);
+		String addPrice = settlementDO.getAdditionalPrice();
+		String[] addPriceStr = addPrice.split(",");
+		Double priceSum = 0.00;
+		for (int d=0;d<addPriceStr.length;d++){
+			String price = addPriceStr[d];
+			priceSum = priceSum+Double.parseDouble(price);
+		}
+		model.addAttribute("priceSum",priceSum);
+		String addCount = settlementDO.getAdditionalCount();
+		String[] addCountStr = addCount.split(",");
+		Integer countSum=0;
+		for (int f=0;f<addCountStr.length;f++){
+			String count = addCountStr[f];
+			countSum = countSum + Integer.parseInt(count);
+		}
+		model.addAttribute("countSum",countSum);
 		return "settlement/peijingdan";
 	}
 

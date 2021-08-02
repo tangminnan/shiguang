@@ -429,6 +429,15 @@ public class StoreSalesController {
         costDO.setType("配镜单");
         costService.save(costDO);
         salesDO.setPeijingTime(new Date());
+        String goodsNum = salesDO.getGoodsNum();
+        String[] goodsStr = goodsNum.split(",");
+        for (int a=0;a<goodsStr.length;a++){
+            StockDO stockDO = stockService.getGoodsNum(goodsStr[a]);
+            Long countGoods = stockDO.getGoodsCount();
+            Long count = countGoods - 1;
+            stockDO.setGoodsCount(count);
+            stockService.update(stockDO);
+        }
         if (salesService.save(salesDO) > 0) {
             //this.editsetle(salesDO,model);
             return R.ok();

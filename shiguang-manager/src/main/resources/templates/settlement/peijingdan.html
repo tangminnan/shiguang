@@ -12,6 +12,11 @@
 <div class="Print">
 	<h3>配镜单</h3>
 	<ul class="ul3">
+		<input id="cost" th:value="${settlementDO.additionalCost}" type="hidden">
+		<input id="storeName" th:value="${settlementDO.storeName}" type="hidden">
+		<input id="unit" th:value="${settlementDO.unit}" type="hidden">
+		<input id="storeUnit" th:value="${settlementDO.storeUnit}" type="hidden">
+		<input id="storeCount" th:value="${settlementDO.storeCount}" type="hidden">
 		<li>配镜单号：<span th:text="${settlementDO.saleNumber}"></span></li>
 		<li>验配中心：<span th:text="${settlementDO.mirorAddress}"></span></li>
 		<li>配镜日期：<span th:text="${settlementDO.peijingDate}"></span></li>
@@ -65,20 +70,19 @@
 		</tr>
 	</table>
 	<table class="Htab2" cellpadding="0" cellspacing="0">
-		<tr class="thead" id="">
+		<tr class="thead" id="tbodys">
 			<td>商品名称</td>
 			<!--<td>规格</td>-->
 			<td>单位</td>
 			<td>数量</td>
 			<td>原价金额</td>
 		</tr>
-		<!--<tr>-->
-			<!--<td>李白光学架—3BKB</td>-->
-			<!--<td>100</td>-->
-			<!--<td>副</td>-->
-			<!--<td>1</td>-->
-			<!--<td>598.00</td>-->
-		<!--</tr>-->
+		<tr>
+			<td id="goodsName"></td>
+			<td><span id="unitName"></span></td>
+			<td><span id="count"></span></td>
+			<td><span id="price"></span></td>
+		</tr>
 		<!--<tr>-->
 			<!--<td>THEREFOPO蒸汽热敷眼罩（10片/盒） </td>-->
 			<!--<td>100</td>-->
@@ -108,9 +112,9 @@
 			</td>
 		</tr>
 		<tr>
-			<td>附加费用：加蓝光</td>
-			<td>1</td>
-			<td>10.00</td>
+			<td>附加费用：<span th:text="${additionalCostList}"></span></td>
+			<td><span th:text="${countSum}"></span></td>
+			<td><span th:text="${priceSum}"></span></td>
 		</tr>
 		<tr>
 			<td>加工要求：<span th:text="${processList}"></span></td>
@@ -123,7 +127,7 @@
 			<td></td>
 		</tr>
 		<tr class="tr_last">
-			<td>视光师：<span th:text="${settlementDO.optometryName}"></span</td>
+			<td>视光师：<span th:text="${settlementDO.optometryName}"></span></td>
 			<td>验光师：<span th:text="${settlementDO.optometryName}"></span></td>
 			<td colspan="2">收银员：<span th:text="${settlementDO.saleName}"></span></td>
 		</tr>
@@ -136,13 +140,33 @@
 
 </div>
 <div th:include="include :: footer"></div>
-<script type="text/javascript"></script>
+<script type="text/javascript">
+    $().ready(function(){
+        var cost = $("#cost").val();
+        var storeName = $("#storeName").val();
+        var unit = $("#unit").val();
+        var storeUnit = $("#storeUnit").val();
+        var storeCount = $("#storeCount").val();
+        var storeNamestr = storeName.replace(/,/g,'<br>');
+        var unitstr = unit.replace(/,/g,'<br/>');
+        var storeUnitstr = storeUnit.replace(/,/g,'<br>');
+        var storeCountstr = storeCount.replace(/,/g,'<br>');
+        // var costStr = cost.replace(/,/g,'<br>');
+        //$("#goodsName").append(costStr);
+        $("#goodsName").append(storeNamestr);
+        $("#unitName").append(unitstr);
+        $("#count").append(storeCountstr);
+        $("#price").append(storeUnitstr);
+    });
+</script>
 <script th:inline="javascript">
 	var jaigongList = [[${processList}]];
-	var html="";
+	//ar html="";
+    //var str2  = str1.replace(/,/g,'<br/>');//替换所有的换行符
 	for (var i=0;i<jaigongList.length;i++){
-        html = "<tr><td>附加费用：</td><td></td><td></td></tr>";
-        html += "<tr><td>加工要求："+jaigongList[i]+"</td><td></td><td></td></tr>";
+
+        // html = "<tr><td>"+jaigongList[i].name()+"</td><td></td><td></td></tr>";
+        // html += "<tr><td>加工要求："+jaigongList[i]+"</td><td></td><td></td></tr>";
         //$("#fujia").append(html);
 	}
 </script>

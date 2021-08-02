@@ -1491,6 +1491,7 @@
     var price=0.00;
     var producaNum=[];
     var unitarray=[];
+    var goodsNumArray=[];
 	function getJingjia(){
         var toIndex = layer.open({
             type : 2,
@@ -1521,6 +1522,7 @@
                     html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
                     html += "<input id='unit' name='unit' type='hidden' />"
                     html += "<input id='storeName' name='storeName' type='hidden' />"
+                    html += "<input id='goodsNum'name='goodsNum' type='hidden' />"
                     html += "<input id='storeUnit' name='storeUnit' type='hidden' />"
                     html += "<input id='storeCount' name='storeCount' type='hidden' />"
                     html += "<input id='isJj' name='isJj' type='hidden' />"
@@ -1532,6 +1534,7 @@
                     arraystore.push(rows[i].goodsName);
                     arrayunit.push(rows[i].retailPrice);
                     unitarray.push(rows[i].unit);
+                    goodsNumArray.push(rows[i].goodsNum);
                     arraycount.push(1)
                     //producaNum.push(rows[i].goodsNum);
 					$("#isJj").val("有")
@@ -1540,6 +1543,7 @@
                 $("#storeUnit").val(arrayunit);
                 $("#storeCount").val(arraycount);
                 $("#unit").val(unitarray);
+                $("#goodsNum").val(goodsNumArray);
                 // $("#producaNum").val(producaNum);
                 $("#ula").empty();
                 var lis="";
@@ -1654,6 +1658,7 @@
                     html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                     html += "<input id='unit' name='unit' type='hidden' />"
                     html += "<input id='storeName'name='storeName' type='hidden' />"
+                    html += "<input id='goodsNum'name='goodsNum' type='hidden' />"
                     html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                     html += "<input id='storeCount'name='storeCount' type='hidden' />"
                     html += "<input id='isJp'name='isJp' type='hidden' />"
@@ -1664,6 +1669,7 @@
                     arraystore.push(rows[i].goodsName);
                     arrayunit.push(rows[i].retailPrice);
                     unitarray.push(rows[i].unit);
+                    goodsNumArray.push(rows[i].goodsNum);
                     arraycount.push(1);
                 }
                 $("#isJp").val(arrayjp);
@@ -1671,6 +1677,7 @@
                 $("#storeUnit").val(arrayunit);
                 $("#storeCount").val(arraycount);
                 $("#unit").val(unitarray);
+                $("#goodsNum").val(goodsNumArray);
                 $("#ula").empty();
                 var lis="";
                 lis =  "<li>原价金额："+price+"</li>";

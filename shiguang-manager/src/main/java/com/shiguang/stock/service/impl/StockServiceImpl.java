@@ -173,4 +173,8 @@ public class StockServiceImpl implements StockService {
         return stockDao.findPosition(map);
     }
 
+    @Override
+    public StockDO getGoodsNum(String goodsNum) {
+        return stockDao.getGoodsNum(goodsNum);
+    }
 }
