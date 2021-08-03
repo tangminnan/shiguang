@@ -9,6 +9,8 @@ import com.shiguang.giveaway.domain.GiveawayDO;
 import com.shiguang.giveaway.service.GiveawayService;
 import com.shiguang.jiancha.domain.*;
 import com.shiguang.jiancha.service.*;
+import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.mfrs.domain.PositionDO;
@@ -102,6 +104,8 @@ public class StoreSalesController {
     private YaopinService yaopinService;
     @Autowired
     private PackageInfoService packageInfoService;
+    @Autowired
+    private LogStatusService logStatusService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -438,6 +442,10 @@ public class StoreSalesController {
             stockDO.setGoodsCount(count);
             stockService.update(stockDO);
         }
+        LogStatusDO logStatusDO = new LogStatusDO();
+        logStatusDO.setSaleNumber(salesDO.getSaleNumber());
+        logStatusDO.setLogisticStatus("销售完成");
+        logStatusService.save(logStatusDO);
         if (salesService.save(salesDO) > 0) {
             //this.editsetle(salesDO,model);
             return R.ok();

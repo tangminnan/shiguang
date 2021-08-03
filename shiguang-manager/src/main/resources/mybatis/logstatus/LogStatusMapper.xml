@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.logstatus.dao.LogStatusDao">
+
+    <select id="get" resultType="com.shiguang.logstatus.domain.LogStatusDO">
+		select `id`,`sale_number`,`logistic_status` from log_status where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.logstatus.domain.LogStatusDO">
+        select `id`,`sale_number`,`logistic_status` from log_status
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+            <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from log_status
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+            <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.logstatus.domain.LogStatusDO" useGeneratedKeys="true" keyProperty="id">
+		insert into log_status
+		(
+			`sale_number`,
+			`logistic_status`
+		)
+		values
+		(
+			#{saleNumber},
+			#{logisticStatus}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.logstatus.domain.LogStatusDO">
+        update log_status
+        <set>
+            <if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
+            <if test="logisticStatus != null">`logistic_status` = #{logisticStatus}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from log_status where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from log_status where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="findSaleAll" resultType="com.shiguang.storeSales.domain.SalesDO">
+        select sa.`id`,sa.`ptometry_number`,sa.`member_number`,m.`name` as memberName,m.`sex`,m.`age`,m.`phone_1` as phone1,sa.`sale_name`,sa.`sale_number`,sa.`eye_type`,sa.`amount_money`,sa.`mirror_way`,sa.`mirror_time`,
+		sa.`miror_address`,sa.`store_num`,sa.`urgent_status`,sa.`goods_rebate`,sa.`fixed_price`,sa.`moling_money`,sa.`additional_cost`,sa.`process_ask`,
+		sa.`store_name`,sa.`store_describe`,sa.`store_unit`,sa.`store_count`,sa.`remark`,sa.`saleremark`,sa.`give_name`,sa.`peijing_time`,sa.`optometry_name`,sa.`out_recipel`,
+		sa.`recipel_type`,sa.`optometrywl_name`,sa.`recipelwl_type`,sa.`taocan_name`,sa.`additional_price`,sa.`additional_count`,ls.`logistic_status` as logStatus
+        from store_sales sa
+        join log_status ls on ls.sale_number = sa.sale_number
+        join member m on m.card_number = sa.member_number
+    </select>
+
+    <select id="findSaleCount" resultType="com.shiguang.storeSales.domain.SalesDO">
+        select count(*)
+        from store_sales sa
+        join log_status ls on ls.sale_number = sa.sale_number
+        join member m on m.card_number = sa.member_number
+    </select>
+
+</mapper>

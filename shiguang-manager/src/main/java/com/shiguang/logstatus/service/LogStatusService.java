@@ -1,0 +1,27 @@
+package com.shiguang.logstatus.service;
+
+import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.storeSales.domain.SalesDO;
+
+import java.util.List;
+import java.util.Map;
+
+public interface LogStatusService {
+    LogStatusDO get(Long id);
+
+    List<LogStatusDO> list(Map<String, Object> map);
+
+    int count(Map<String, Object> map);
+
+    int save(LogStatusDO status);
+
+    int update(LogStatusDO status);
+
+    int remove(Long id);
+
+    int batchRemove(Long[] ids);
+
+    List<SalesDO> findSaleAll(Map<String,Object> map);
+
+    int findSaleCount(Map<String,Object> map);
+}

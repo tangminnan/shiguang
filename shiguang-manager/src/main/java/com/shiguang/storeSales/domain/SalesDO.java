@@ -44,6 +44,7 @@ public class SalesDO implements Serializable {
 	private String mirrorWay;
 	//取镜日期
 	private Date mirrorTime;
+	private String mirrorDate;
 	//取镜地点
 	private String mirorAddress;
 	//取镜地点编码
@@ -183,6 +184,8 @@ public class SalesDO implements Serializable {
 	private String content;
 	//药名
 	private String ypName;
+	//物流状态
+	private String logStatus;
 
 	/**
 	 * 设置：主键
@@ -347,6 +350,8 @@ public class SalesDO implements Serializable {
 	public Date getMirrorTime() {
 		return mirrorTime;
 	}
+	public void setMirrorDate(String mirrorDate){this.mirrorDate = mirrorDate;}
+	public String getMirrorDate() {return mirrorDate;}
 	/**
 	 * 设置：取镜地点
 	 */
@@ -942,5 +947,9 @@ public class SalesDO implements Serializable {
 	 * 药名
 	 */
 	public String getYpName() {return ypName;}
+
+	public void setLogStatus(String logStatus) {this.logStatus = logStatus;}
+
+	public String getLogStatus() {return logStatus;}
 
 }
