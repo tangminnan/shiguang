@@ -148,7 +148,7 @@
         </tr>
         <tr id="tab2" style="display:none">
             <td style="width: 100vw;">
-                <table>
+                <table id="peijian">
                     <tr class="thead">
                         <td>全选 <input type="checkbox"/></td>
                         <td>商品代码</td>
@@ -161,17 +161,17 @@
                     </tr>
                     <tr>
                         <td><input type="checkbox"/></td>
-                        <td>配件</td>
-                        <td>配件</td>
-                        <td>配件</td>
-                        <td>配件</td>
-                        <td>配件</td>
-                        <td>配件</td>
-                        <td>配件</td>
+                        <td id="pjNum"></td>
+                        <td id="pjName"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr style="font-weight:bold;font-size: 15px;">
                         <td colspan="12" style="text-align:right;">合计：</td>
-                        <td>156698</td>
+                        <td></td>
                     </tr>
                 </table>
             </td>
@@ -429,7 +429,6 @@
         } else if (goodsid != "" && mfrsid == "") {
             alert("请选择所属制造商！");
         }
-        ;
     }
 
     function tuihuiNum() {
@@ -441,7 +440,6 @@
         } else if (goodsid != "" && mfrsid == "") {
             alert("请选择所属制造商！");
         }
-        ;
     }
 
     function chuanzhi() {
@@ -586,8 +584,7 @@
         var goodsid = document.getElementById('goodsid').value;
         var mfrsid = document.getElementById('mfrsid').value;
         var goodVal = $("#goodsid option:selected").text();
-        // alert(goodVal)
-        // alert(goodsid);
+        var mfrsname = document.getElementById('mfrsName').value;
         if (goodsid == "") {
             alert("请选择采购类型！");
             return this;
@@ -601,13 +598,13 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/ccc/",// iframe的url
+                content: "/stock/stock/jingjia/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        caidan(rows[i].mfrsid);
+                        // $("#mfrsName").val(rows[i].mfrsname);
+                        // $("#mfrsid").val(rows[i].mfrsid);
+                        // caidan(rows[i].mfrsid);
                     }
                 }
             });
@@ -619,13 +616,18 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/peijian/" + mfrsid,// iframe的url
+                content: "/stock/stock/peijian/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        caidan(rows[i].mfrsid);
+                        $(".peijian").append("<tr> <td><input type=\"checkbox\"/></td>\n" +
+                            "            <td>" + $("#pjNum").val(rows[i].producNum) + "</td>\n" +
+                            "            <td>" + $("#pjName").val(rows[i].producName) + "</td>\n" +
+                            "            <td>" + rows[i].producFactory + "</td>\n" +
+                            "            <td>" + rows[i].partsStyle + "</td>\n" +
+                            "            <td>" + 入库时间 + "</td>\n" +
+                            "            <td>" + rows[i].producCode + "</td>\n" +
+                            "            <td>" + 数量 + "</td></tr>>");
                     }
                 }
             });
@@ -637,7 +639,7 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/jingpian/" + goodVal,// iframe的url
+                content: "/stock/stock/jingpian/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
@@ -655,7 +657,7 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/yinxing/" + goodVal,// iframe的url
+                content: "/stock/stock/yinxing/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
@@ -673,7 +675,7 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/hly/" + goodVal,// iframe的url
+                content: "/stock/stock/hly/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
@@ -691,7 +693,7 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/tyj/" + goodVal,// iframe的url
+                content: "/stock/stock/tyj/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
@@ -709,7 +711,7 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/lhj/" + goodVal,// iframe的url
+                content: "/stock/stock/lhj/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
@@ -727,7 +729,7 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/hc/" + goodVal,// iframe的url
+                content: "/stock/stock/hc/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
@@ -745,7 +747,7 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/sg/" + goodVal,// iframe的url
+                content: "/stock/stock/sg/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {

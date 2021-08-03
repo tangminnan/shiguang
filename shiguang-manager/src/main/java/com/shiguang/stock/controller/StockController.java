@@ -5,6 +5,7 @@ import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.mfrs.service.PositionService;
+import com.shiguang.product.domain.PartsDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -148,22 +149,50 @@ public class StockController {
     //跳转镜架商品查询
     @GetMapping("/jingjia")
     @RequiresPermissions("stock:stock:jingjia")
-    String jingjia() {
-        return "stock/stock/jingjia";
+    String jingjia(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+        model.addAttribute("mfrsid", mfrsid);
+        model.addAttribute("mfrsname", mfrsname);
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("mfrsid", mfrsid);
+//        List<PartsDO> list = stockService.selectPj(map);
+//        model.addAttribute("list", JSONArray.toJSONString(list));
+        return "/stock/stock/jingjia";
     }
+//    @ResponseBody
+//    @RequestMapping(value = "/selectjingjia")
+//    public List<PositionDO> selectjingjia(Integer mfrsid, Model model) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("mfrsid", mfrsid);
+//        List<PositionDO> positionDOList = stockService.list(map);
+//        model.addAttribute("positionDOList", positionDOList);
+//        return positionDOList;
+//    }
 
     //跳转配件商品查询
-    @GetMapping("/peijian/{mfrsid}")
+    @GetMapping("/peijian/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:peijian")
-    String peijian(@PathVariable("mfrsid") Integer mfrsid, Model model) {
-
+    String peijian(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+        model.addAttribute("mfrsid", mfrsid);
+        model.addAttribute("mfrsname", mfrsname);
         return "/stock/stock/peijian";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/selectpeijian")
+    public List<PartsDO> selectpeijian(Integer mfrsid, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("mfrsid", mfrsid);
+        List<PartsDO> partsDOList = stockService.selectPj(map);
+        model.addAttribute("partsDOList", partsDOList);
+        return partsDOList;
+    }
+
     //跳转镜片商品查询
-    @GetMapping("/jingpian")
+    @GetMapping("/jingpian/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:jingpian")
-    String jingpian() {
+    String jingpian(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+        model.addAttribute("mfrsid", mfrsid);
+        model.addAttribute("mfrsname", mfrsname);
         return "/stock/stock/jingpian";
     }
 

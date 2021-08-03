@@ -16,9 +16,6 @@ import java.util.Map;
  * @date 2021-07-09 11:08:27
  */
 public interface StockService {
-    //<!--配件【商】【品】【查】【询】-->
-    List<PartsDO> selectPj(Map<String, Object> map);
-
     StockDO get(Long id);
 
     List<StockDO> list(Map<String, Object> map);
@@ -81,4 +78,6 @@ public interface StockService {
 
     StockDO getGoodsNum(String goodsNum);
 
+    //<!--配件【商】【品】【查】【询】-->
+    List<PartsDO> selectPj(Map<String, Object> map);
 }

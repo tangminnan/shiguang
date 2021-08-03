@@ -18,8 +18,7 @@ import java.util.Map;
  */
 @Mapper
 public interface StockDao {
-    //<!--配件【商】【品】【查】【询】-->
-    List<PartsDO> selectPj(Map<String, Object> map);
+
 
     StockDO get(Long id);
 
@@ -83,4 +82,6 @@ public interface StockDao {
 
     StockDO getGoodsNum(String goodsNum);
 
+    //<!--配件【商】【品】【查】【询】-->
+    List<PartsDO> selectPj(Map<String, Object> map);
 }

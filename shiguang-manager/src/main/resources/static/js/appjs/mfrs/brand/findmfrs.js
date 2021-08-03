@@ -28,10 +28,9 @@ function getMfrsProduca() {
         content: "/product/produca/findmfrs/",// iframe的url
         cancel: function (index, layero) {
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-            // alert(rows + "镜架");
             for (var i = 0; i < rows.length; i++) {
-                alert(rows[i].mfrsid + "-----制造商id");
-                alert(rows[i].mfrsname + "------制造商名称");
+                // alert(rows[i].mfrsid + "-----制造商id");
+                // alert(rows[i].mfrsname + "------制造商名称");
                 $("#mfrsName").val(rows[i].mfrsname);
                 $("#mfrsid").val(rows[i].mfrsid);
                 a1.value = a1.value.substring(0, 2) + rows[i].mfrsid + a1.value.substring(4, 22)
@@ -78,8 +77,6 @@ function getMfrsJpcp() {
         cancel: function (index, layero) {
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             for (var i = 0; i < rows.length; i++) {
-                alert(rows[i].mfrsid + "-----制造商id");
-                alert(rows[i].mfrsname + "------制造商名称");
                 $("#mfrsName").val(rows[i].mfrsname);
                 $("#mfrsid").val(rows[i].mfrsid);
                 choice(rows[i].mfrsid);

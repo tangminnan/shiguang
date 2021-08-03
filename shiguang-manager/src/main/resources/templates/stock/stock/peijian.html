@@ -17,27 +17,29 @@
     <table border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>商品代码：</td>
-            <td><input type="text"></td>
+            <td>
+                <input id="producNum" name="producNum" type="text">
+            </td>
             <td>商品条码：</td>
             <td>
-                <input type="text"/>
+                <input id="producCode" name="producCode" type="text"/>
             </td>
             <td>商品名称：</td>
             <td>
-                <input type="text"/>
+                <input id="producName" name="producName" type="text"/>
             </td>
         </tr>
         <tr>
             <td>制造商：</td>
             <td>
-                <input type="text" th:value="${mfrsname}"/>
+                <input type="text" th:value="${mfrsname}" readonly/>
+                <input id="mfrsid" type="hidden" th:value="${mfrsid}"/>
             </td>
             <td>商品品种：</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
+                <input type="text"/>
                 <input type="button" class="XZ-btn" value="选择"/>
             </td>
-
         </tr>
         <tr>
             <td>商品类别：</td>
@@ -85,7 +87,7 @@
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input type="button" value="查询"/>
+        <input type="button" value="查询" onclick="reLoad()"/>
         <input type="button" class="empty" value="清空"/>
     </div>
 </div>
@@ -105,19 +107,46 @@
             <td>含税成本</td>
             <td>配件型</td>
         </tr>
-        <tr>
-            <td><input type="checkbox"/></td>
-            <td>2.32.000002300.068</td>
-            <td>聊城配件名称</td>
-            <td>型号</td>
-            <td>副</td>
-            <td>厂家型号</td>
-            <td>0.00</td>
-            <td>388.00</td>
-            <td>框镜</td>
+        <tr id="danpin">
+            <!--<td><input type="checkbox"/></td>-->
+            <!--<td></td>-->
+            <!--<td></td>-->
+            <!--<td></td>-->
+            <!--<td></td>-->
+            <!--<td></td>-->
+            <!--<td></td>-->
+            <!--<td></td>-->
+            <!--<td></td>-->
         </tr>
         </tbody>
     </table>
 </div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/stock/stock.js"></script>
+<script type="text/javascript">
+    var mfrsid = $("#mfrsid").val();
+    // alert(mfrsid)
+    $.ajax({
+        url: '/stock/stock/selectpeijian',
+        type: 'post',
+        dataType: "json",
+        data: {
+            'mfrsid': mfrsid
+        },
+        success: function (xml) {
+            for (var i = 0; i < xml.length; i++) {
+                $(".buyBtns").append("<tr> <td><input type=\"checkbox\"/></td>\n" +
+                    "            <td>" + xml[i].producNum + "</td>\n" +
+                    "            <td>" + xml[i].producName + "</td>\n" +
+                    "            <td>" + xml[i].producFactory + "</td>\n" +
+                    "            <td>" + xml[i].unitname + "</td>\n" +
+                    "            <td>" + xml[i].factory + "</td>\n" +
+                    "            <td>" + xml[i].retailPrice + "</td>\n" +
+                    "            <td>" + xml[i].taxPrice + "</td>\n" +
+                    "            <td>" + xml[i].partsStyle + "</td></tr>>");
+            }
+        }
+    })
+</script>
 </body>
 </html>

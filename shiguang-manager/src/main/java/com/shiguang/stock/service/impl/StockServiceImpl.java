@@ -17,12 +17,6 @@ public class StockServiceImpl implements StockService {
     @Autowired
     private StockDao stockDao;
 
-    //<!--配件【商】【品】【查】【询】-->
-    @Override
-    public List<PartsDO> selectPj(Map<String, Object> map) {
-        return stockDao.selectPj(map);
-    }
-
     @Override
     public StockDO get(Long id) {
         return stockDao.get(id);
@@ -177,4 +171,11 @@ public class StockServiceImpl implements StockService {
     public StockDO getGoodsNum(String goodsNum) {
         return stockDao.getGoodsNum(goodsNum);
     }
+
+    //<!--配件【商】【品】【查】【询】-->
+    @Override
+    public List<PartsDO> selectPj(Map<String, Object> map) {
+        return stockDao.selectPj(map);
+    }
+
 }
