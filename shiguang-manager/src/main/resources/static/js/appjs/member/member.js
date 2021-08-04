@@ -126,7 +126,10 @@ function load() {
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ row.id
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+                                        var g = '<a class="btn btn-primary btn-xs" href="#" title="二维码打印"  mce_href="#" onclick="erDayin(\''
+                                            + row.id
+                                            + '\')" style="text-decoration: none;">二维码打印</a>';
+										return e + g + d ;
 									}
 								} ]
 					});
@@ -203,6 +206,11 @@ function edit(id) {
 	});
     layer.full(toIndex);
 }
+
+function erDayin(id) {
+    window.open("/information/member/downLoadErWeiMaByMember?id="+id);
+}
+
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]

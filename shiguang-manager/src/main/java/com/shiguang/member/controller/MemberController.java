@@ -14,10 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.WebParam;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller("MemberController")
 @RequestMapping("/information/member")
@@ -183,6 +180,28 @@ public class MemberController {
             return R.ok();
         }
         return R.error();
+    }
+
+    /**
+     * 浏览器打印二维码
+     */
+    @GetMapping("/downLoadErWeiMaByMember")
+    public String downLoadErWeiMaByMember(Long id, Model model) {
+        MemberDO memberDO = Optional.ofNullable(memberService.get(id)).orElseGet(MemberDO::new);
+        model.addAttribute("cardMember",memberDO.getCardNumber());
+        model.addAttribute("memberName",memberDO.getName());
+        model.addAttribute("age",memberDO.getAge());
+        if (memberDO.getSex() == 0){
+            memberDO.setSexx("男");
+        } else if (memberDO.getSex() == 1){
+            memberDO.setSexx("女");
+        }
+        model.addAttribute("sexx",memberDO.getSexx());
+        model.addAttribute("memberTel",memberDO.getPhone1());
+        String telNumber = memberDO.getPhone1();
+        String code = QRCodeUtil.creatRrCode(memberDO.getName()+" "+memberDO.getPhone1(), 200,200);
+        model.addAttribute("QRCode","data:image/png;base64," + code);
+        return "member/二维码";
     }
 
 //    /**

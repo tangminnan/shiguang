@@ -979,7 +979,8 @@
 			<input class="inp2" type="button" value="套餐查看" onclick="getTaocanDetail()"/>
 			<input type="button" value="还原" onclick="getHYTc()"/>
 		</div>
-		<div class="gray box1"><h4>套餐名称</h4><input type="text" id="taocanName" name="taocanName"/></div>
+		<div class="gray box1"><h4>套餐名称</h4><input type="text" id="taocanName" name="taocanName"/>
+			<input type="text" id="taocanPrice" name="taocanPrice"/></div>
 		<div class="box3" style="display: block;" id="boxkuangjing">
 			<ul class="ulUp">
 				<li><span onclick="getJingjia()">镜架</span></li>
@@ -1492,6 +1493,9 @@
     var producaNum=[];
     var unitarray=[];
     var goodsNumArray=[];
+    var jjArray=[];
+    var jpArray=[];
+    var eyejpArray=[];
 	function getJingjia(){
         var toIndex = layer.open({
             type : 2,
@@ -1522,6 +1526,7 @@
                     html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
                     html += "<input id='unit' name='unit' type='hidden' />"
                     html += "<input id='storeName' name='storeName' type='hidden' />"
+                    html += "<input id='jjGoodsName' name='jjGoodsName' type='hidden' />"
                     html += "<input id='goodsNum'name='goodsNum' type='hidden' />"
                     html += "<input id='storeUnit' name='storeUnit' type='hidden' />"
                     html += "<input id='storeCount' name='storeCount' type='hidden' />"
@@ -1535,6 +1540,7 @@
                     arrayunit.push(rows[i].retailPrice);
                     unitarray.push(rows[i].unit);
                     goodsNumArray.push(rows[i].goodsNum);
+                    jjArray.push(rows[i].goodsName)
                     arraycount.push(1)
                     //producaNum.push(rows[i].goodsNum);
 					$("#isJj").val("有")
@@ -1544,6 +1550,7 @@
                 $("#storeCount").val(arraycount);
                 $("#unit").val(unitarray);
                 $("#goodsNum").val(goodsNumArray);
+                $("#jjGoodsName").val(jjArray);
                 // $("#producaNum").val(producaNum);
                 $("#ula").empty();
                 var lis="";
@@ -1658,6 +1665,7 @@
                     html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                     html += "<input id='unit' name='unit' type='hidden' />"
                     html += "<input id='storeName'name='storeName' type='hidden' />"
+                    html += "<input id='jpGoodsName'name='jpGoodsName' type='hidden' />"
                     html += "<input id='goodsNum'name='goodsNum' type='hidden' />"
                     html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                     html += "<input id='storeCount'name='storeCount' type='hidden' />"
@@ -1670,6 +1678,7 @@
                     arrayunit.push(rows[i].retailPrice);
                     unitarray.push(rows[i].unit);
                     goodsNumArray.push(rows[i].goodsNum);
+                    jpArray.push(rows[i].goodsName)
                     arraycount.push(1);
                 }
                 $("#isJp").val(arrayjp);
@@ -1678,6 +1687,7 @@
                 $("#storeCount").val(arraycount);
                 $("#unit").val(unitarray);
                 $("#goodsNum").val(goodsNumArray);
+                $("#jpGoodsName").val(jpArray);
                 $("#ula").empty();
                 var lis="";
                 lis =  "<li>原价金额："+price+"</li>";

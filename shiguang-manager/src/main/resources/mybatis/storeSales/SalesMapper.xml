@@ -108,7 +108,9 @@
 			`recipel_type`,
 			`optometrywl_name`,
 			`recipelwl_type`,
-			`taocan_name`
+			`taocan_name`,
+			`jp_goods_name`,
+			`jj_goods_name`
 		)
 		values
 		(
@@ -145,7 +147,9 @@
 			#{recipelType},
 			#{optometrywlName},
 			#{recipelwlType},
-			#{taocanName}
+			#{taocanName},
+			#{jpGoodsName},
+			#{jjGoodsName}
 		)
 	</insert>
 	 

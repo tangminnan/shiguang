@@ -3,6 +3,7 @@ package com.shiguang.logstatus.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.SalesDO;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +58,7 @@ public class LogStatusController {
     public PageUtils faliaolist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("logisticStatus","销售完成");
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){
@@ -109,9 +112,14 @@ public class LogStatusController {
      */
     @PostMapping( "/editFaliao")
     @ResponseBody
-    @RequiresPermissions("information:logstatus:editFaliao")
-    public R editFaliao(Long id){
-        if(statusService.remove(id)>0){
+    @RequiresPermissions("information:logstatus:edit")
+    public R editFaliao(String saleNumber){
+        LogStatusDO logStatusDO = new LogStatusDO();
+        logStatusDO.setSaleNumber(saleNumber);
+        logStatusDO.setLogisticStatus("发料");
+        logStatusDO.setFaliaoDate(new Date());
+        logStatusDO.setFaliaoName(ShiroUtils.getUser().getName());
+        if(statusService.editFaliao(logStatusDO)>0){
             return R.ok();
         }
         return R.error();

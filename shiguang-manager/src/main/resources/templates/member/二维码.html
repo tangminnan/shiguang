@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head></head>
+<body style="width: 224px;">
+
+	<div style="float: left;width:90%; margin-left: 8px; margin-top: 30px;position: relative;">
+		<img alt="" th:src="${QRCode}" style="width: 100% !important; height: auto !important;">
+		<table cellspacing="0" cellpadding="0" style=" width: 100%;">
+			<tbody>
+				<tr>
+					<td>卡号：<span th:text="${cardMember}" ></span></td>
+				</tr>
+				<tr>
+					<td>姓名：<span th:text="${memberName}" ></span></td>
+				</tr>
+				<tr>
+					<td>年龄：<span th:text="${age}" ></span></td>
+				</tr>
+				<tr>
+					<td>性别：<span th:text="${sexx}" ></span></td>
+				</tr>
+				<tr>
+					<td>联系电话：<span th:text="${memberTel}" ></span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

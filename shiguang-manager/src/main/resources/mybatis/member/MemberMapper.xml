@@ -213,7 +213,8 @@
 			`remark`,
 			`register_time`,
 			`status`,
-			`state`
+			`state`,
+			`open_id`
 		)
 		values
 		(
@@ -255,7 +256,8 @@
 			#{remark},
 			#{registerTime},
 			#{status},
-			#{state}
+			#{state},
+			#{openId}
 		)
 	</insert>
 

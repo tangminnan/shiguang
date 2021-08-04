@@ -108,6 +108,9 @@ function validateRule() {
             birthdayDay : {
                 required : icon + "请输入会员出生日期"
             },
+            phone1 : {
+                required : icon + "请输入手机号"
+            },
             provinceName : {
                 required : icon + "请选择省份"
             },

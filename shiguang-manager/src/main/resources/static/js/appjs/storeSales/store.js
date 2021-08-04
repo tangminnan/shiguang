@@ -780,7 +780,11 @@ function getYouji(){
     });
     layer.full(toIndex)
 }
+var ypuhuiPrice="";
 function getTaocanXz(){
+    if (check_val == ''){
+        return alert("请选择商品")
+    }
     var toIndex = layer.open({
         type : 2,
         title : '套餐',
@@ -790,6 +794,17 @@ function getTaocanXz(){
         content : "/information/store/taocanxz/"+check_val,// iframe的url
         cancel: function(index, layero){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            for (var i=0;i<rows.length;i++){
+                $("#taocanName").val(rows[i].packageName);
+                if ("" != rows[i].danyiyh){
+                    if (rows[i].danyiyh == '返现'){
+                        ypuhuiPrice = rows[i].fanxianPrice
+                    }
+                } else {
+                    ypuhuiPrice = rows[i].preferentialPrice
+                }
+            }
+            $("#amountMoney").val(ypuhuiPrice);
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
             //son_msg就是子页面中的msg数据

@@ -1,5 +1,5 @@
 
-var prefix = "/information/logstatus"
+var prefix = "/information/mirror"
 $(function() {
 	load();
 });
@@ -9,7 +9,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/faliaolist", // 服务器数据的加载地址
+						url : prefix + "/mirrorlist", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -44,17 +44,17 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-																{
-									field : 'saleNumber', 
+								{
+									field : 'saleNumber',
 									title : '配镜单号'
 								},
-																{
+								{
 									field : 'memberName',
 									title : '顾客姓名'
 								},
 								{
-									field : 'mirorAddress',
-									title : '销售门店'
+									field : 'memberTel',
+									title : '联系电话'
 								},
 								{
 									field : 'peijingDate',
@@ -64,10 +64,6 @@ function load() {
 									field : 'mirrorDate',
 									title : '取镜日期'
 								},
-								{
-									field : 'processAsk',
-									title : '加工要求'
-								},
 																{
 									title : '操作',
 									field : 'id',
@@ -76,13 +72,13 @@ function load() {
 										// var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
 										// 		+ row.id
 										// 		+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" title="发料"  mce_href="#" onclick="editFaliao(\''
+										var d = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" title="取镜"  mce_href="#" onclick="editQujing(\''
 												+ row.saleNumber
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ row.id
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return  d ;
+										return d ;
 									}
 								} ]
 					});
@@ -110,12 +106,12 @@ function edit(id) {
 		content : prefix + '/edit/' + id // iframe的url
 	});
 }
-function editFaliao(saleNumber) {
-	layer.confirm('确定要发料？', {
+function editQujing(saleNumber) {
+	layer.confirm('确定要取镜？', {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/editFaliao",
+			url : prefix+"/editQujing",
 			type : "post",
 			data : {
 				'saleNumber' : saleNumber

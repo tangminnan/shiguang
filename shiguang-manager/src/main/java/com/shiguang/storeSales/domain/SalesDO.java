@@ -186,6 +186,21 @@ public class SalesDO implements Serializable {
 	private String ypName;
 	//物流状态
 	private String logStatus;
+	//发料人
+	private String faliaoName;
+	//发料日期
+	private Date faliaoDate;
+	private String faliaoTime;
+	//邮寄地址
+	private String mailAddress;
+	//镜架名称
+	private String jjGoodsName;
+	//镜片名称
+	private String jpGoodsName;
+	//右眼镜片
+	private String rightjp;
+	//左眼镜片
+	private String leftjp;
 
 	/**
 	 * 设置：主键
@@ -952,4 +967,35 @@ public class SalesDO implements Serializable {
 
 	public String getLogStatus() {return logStatus;}
 
+	public void setFaliaoName(String faliaoName) {this.faliaoName = faliaoName;}
+
+	public String getFaliaoName() {return faliaoName;}
+
+	public void setFaliaoDate(Date faliaoDate) {this.faliaoDate = faliaoDate;}
+
+	public Date getFaliaoDate() {return faliaoDate;}
+
+	public void setFaliaoTime(String faliaoTime) {this.faliaoTime = faliaoTime;}
+
+	public String getFaliaoTime() {return faliaoTime;}
+
+	public void setMailAddress(String mailAddress) {this.mailAddress = mailAddress;}
+
+	public String getMailAddress() {return mailAddress;}
+
+	private void setJjGoodsName(String jjGoodsName) {this.jjGoodsName = jpGoodsName;}
+
+	public String getJjGoodsName() {return jjGoodsName;}
+
+	public void setJpGoodsName(String jpGoodsName) {this.jpGoodsName = jpGoodsName;}
+
+	public String getJpGoodsName() {return jpGoodsName;}
+
+	public void setRightjp(String rightjp) {this.rightjp = rightjp;}
+
+	public String getRightjp() {return rightjp;}
+
+	public void setLeftjp(String leftjp) {this.leftjp = leftjp;}
+
+	public String getLeftjp() {return leftjp;}
 }

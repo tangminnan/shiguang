@@ -1,5 +1,5 @@
 
-var prefix = "/information/logstatus"
+var prefix = "/information/examine"
 $(function() {
 	load();
 });
@@ -9,7 +9,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/faliaolist", // 服务器数据的加载地址
+						url : prefix + "/examinelist", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -53,10 +53,6 @@ function load() {
 									title : '顾客姓名'
 								},
 								{
-									field : 'mirorAddress',
-									title : '销售门店'
-								},
-								{
 									field : 'peijingDate',
 									title : '配镜日期'
 								},
@@ -65,24 +61,28 @@ function load() {
 									title : '取镜日期'
 								},
 								{
-									field : 'processAsk',
-									title : '加工要求'
+									field : 'faliaoName',
+									title : '发料人'
+								},
+								{
+									field : 'faliaoTime',
+									title : '发料日期'
 								},
 																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										// var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-										// 		+ row.id
-										// 		+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" title="发料"  mce_href="#" onclick="editFaliao(\''
+										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="检验" onclick="edit(\''
+												+ row.saleNumber
+												+ '\')"><i class="fa fa-edit"></i></a> ';
+										var d = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" title="删除"  mce_href="#" onclick="editFaliao(\''
 												+ row.saleNumber
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ row.id
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return  d ;
+										return  e ;
 									}
 								} ]
 					});
@@ -100,15 +100,16 @@ function add() {
 		content : prefix + '/add' // iframe的url
 	});
 }
-function edit(id) {
-	layer.open({
+function edit(saleNumber) {
+	var toIndex = layer.open({
 		type : 2,
-		title : '编辑',
+		title : '检验',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefix + '/edit/' + saleNumber // iframe的url
 	});
+	layer.full(toIndex)
 }
 function editFaliao(saleNumber) {
 	layer.confirm('确定要发料？', {

@@ -35,6 +35,7 @@
 		  		  <if test="store != null and store != ''"> and p.store = #{store} </if>
 			      <if test="storeNum != null and storeNum != ''"> and FIND_IN_SET(#{storeNum},p.`store_num`) </if>
 		  		  <if test="remark != null and remark != ''"> and p.remark = #{remark} </if>
+			     <if test="goodsCode != null and goodsCode != ''"> and pi.goods_code in (#{goodsCode}) </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -71,6 +72,7 @@
 			<if test="store != null and store != ''"> and p.store = #{store} </if>
 			<if test="storeNum != null and storeNum != ''"> and FIND_IN_SET(#{storeNum},p.`store_num`) </if>
 			<if test="remark != null and remark != ''"> and p.remark = #{remark} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and pi.goods_code in (#{goodsCode}) </if>
 		</where>
 	</select>
 	 

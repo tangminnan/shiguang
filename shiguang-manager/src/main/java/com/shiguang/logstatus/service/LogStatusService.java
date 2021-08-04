@@ -24,4 +24,10 @@ public interface LogStatusService {
     List<SalesDO> findSaleAll(Map<String,Object> map);
 
     int findSaleCount(Map<String,Object> map);
+
+    int editFaliao(LogStatusDO logStatusDO);
+
+    SalesDO getLogSaleNumber(String saleNumber);
+
+    int editJianyan(LogStatusDO logStatusDO);
 }

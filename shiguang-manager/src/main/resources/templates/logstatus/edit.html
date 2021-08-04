@@ -1,40 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-						<input id="id" name="id" th:value="${status.id}"  type="hidden">
-							<div class="form-group">	
-								<label class="col-sm-3 control-label">销售单号：</label>
-								<div class="col-sm-8">
-									<input id="saleNumber" name="saleNumber" th:value="${status.saleNumber}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">物流状态：</label>
-								<div class="col-sm-8">
-									<input id="logisticStatus" name="logisticStatus" th:value="${status.logisticStatus}" class="form-control" type="text">
-								</div>
-							</div>
-																					<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>加工检验新增</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+<div class="new_h3">加工检验新增</div>
+
+<!--检查条件-->
+<div class="m40 tabS term_JC">
+	<h3>检查条件</h3>
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tbody>
+		<tr>
+			<td>配镜单号：</td>
+			<td><span th:text="${status.saleNumber}"></span></td>
+			<td>所属门店：</td>
+			<td><span th:text="${status.mirorAddress}"></span></td>
+			<td>顾客姓名：</td>
+			<td><span th:text="${status.memberName}"></span></td>
+		</tr>
+		<tr>
+			<td>联系电话：</td>
+			<td><span th:text="${status.memberTel}"></span></td>
+			<td>加工师：</td>
+			<td><span th:text="${examineName}"></span></td>
+			<td>检验员：</td>
+			<td><span th:text="${examineName}"></span></td>
+		</tr>
+		<tr>
+			<td>配送地点：</td>
+			<td><span th:text="${status.mirorAddress}"></span></td>
+			<td>特殊加工要求：</td>
+			<td><span th:text="${status.processAsk}"></span></td>
+			<td>邮寄：</td>
+			<td><span th:text="${status.mailAddress}"></span></td>
+		</tr>
+		<tr>
+			<td>备注：</td>
+			<td colspan="5"><textarea rows="2" th:text="${status.remark}"></textarea></td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<!--查询条件-->
+<div class="m40 tabS term_CX">
+	<h3>查询条件</h3>
+	<form class="form-horizontal m-t" id="signupForm">
+		<input id="saleNumber" name="saleNumber" th:value="${status.saleNumber}"  type="hidden">
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tbody>
+		<tr class="thead">
+			<td width="8%">右眼(R)/左眼(L)</td>
+			<td width="8%">商品信息</td>
+			<td>球镜</td>
+			<td>柱镜</td>
+			<td>轴向</td>
+			<td width="14%">斜视</td>
+			<td>add</td>
+			<td>瞳距</td>
+			<td width="14%">商品名称</td>
+		</tr>
+		<tr>
+			<td rowspan="4">R</td>
+			<td>主子午面一</td>
+			<td><span th:text="${conclusion.rightsph}"></span></td>
+			<td><span th:text="${conclusion.rightcyl}"></span></td>
+			<td><span th:text="${conclusion.rightzx}"></span></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td><span th:text="${conclusion.rightyytj}"></span></td>
+			<td rowspan="4"><span th:text="${status.rightjp}"></span></td>
+		</tr>
+		<tr>
+			<td>焦度计</td>
+			<td><input type="text" name="jdjSphRight1"/></td>
+			<td><input type="text" name="jdjCylRight1"/></td>
+			<td><input type="text" name="jdjZxRight1"/></td>
+			<td rowspan="3">
+				<select name="xieshiRight" id="xieshiRight">
+					<option value="">--请选择--</option>
+					<option value="内">内</option>
+					<option value="外">外</option>
+					<option value="上">上</option>
+					<option value="下">下</option>
+				</select>
+			</td>
+			<td rowspan="3"><input type="text" name="addRight"/></td>
+			<td rowspan="3"><input type="text" name="tjRight"/></td>
+		</tr>
+		<tr>
+			<td>主子午面二</td>
+			<td>+0.75</td>
+			<td>-0.5</td>
+			<td>58</td>
+		</tr>
+		<tr>
+			<td>焦度计</td>
+			<td><input type="text" name="jdjSphRight12"/></td>
+			<td><input type="text" name="jdjCylRight2"/></td>
+			<td><input type="text" name="jdjZxRight2"/></td>
+		</tr>
+		<tr>
+			<td rowspan="4">L</td>
+			<td>主子午面一</td>
+			<td><span th:text="${conclusion.leftsph}"></span></td>
+			<td><span th:text="${conclusion.leftcyl}"></span></td>
+			<td><span th:text="${conclusion.leftzx}"></span></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td><span th:text="${conclusion.leftyytj}"></span></td>
+			<td rowspan="4"><span th:text="${status.leftjp}"></span></td>
+		</tr>
+		<tr>
+			<td>焦度计</td>
+			<td><input type="text" name="jdjSphLeft1"/></td>
+			<td><input type="text" name="jdjCylLeft1"/></td>
+			<td><input type="text" name="jdjZxLeft1"/></td>
+			<td rowspan="3">
+				<select name="xieshiLeft" id="xieshiLeft">
+					<option value="">--请选择--</option>
+					<option value="内">内</option>
+					<option value="外">外</option>
+					<option value="上">上</option>
+					<option value="下">下</option>
+				</select>
+			</td>
+			<td rowspan="3"><input type="text" name="addLeft"/></td>
+			<td rowspan="3"><input type="text" name="tjLeft"/></td>
+		</tr>
+		<tr>
+			<td>主子午面二</td>
+			<td>+0.75</td>
+			<td>-0.5</td>
+			<td>58</td>
+		</tr>
+		<tr>
+			<td>焦度计</td>
+			<td><input type="text" name="jdjSphLeft2"/></td>
+			<td><input type="text" name="jdjCylLeft2"/></td>
+			<td><input type="text" name="jdjZxLeft2"/></td>
+		</tr>
+		<tr>
+			<td>镜架</td>
+			<td colspan="8" class="jingjia"><span th:text="${status.jjGoodsName}"></span></td>
+		</tr>
+		<tr class="thead">
+			<td>光心垂差</td>
+			<td colspan="2">光心垂差(焦度计)</td>
+			<td colspan="2">光心高度</td>
+			<td>色泽互差</td>
+			<td colspan="2">装配质量</td>
+			<td>整形</td>
+		</tr>
+		<tr>
+			<td>1.2</td>
+			<td colspan="2"><input type="text" /></td>
+			<td colspan="2"><input type="text" /></td>
+			<td><input type="text" /></td>
+			<td colspan="2"><input type="text" /></td>
+			<td><input type="text" /></td>
+		</tr>
+		</tbody>
+	</table>
+
+	<!--保存-->
+	<div class="baoCun term_BC">
+		<!--<label for="JK1"><input name="cont" type="radio" id="JK1" checked> NIDEK</label>-->
+		<!--<label for="JK2"><input name="cont"  type="radio" id="JK2"> TOPCON</label>-->
+		<!--<input type="button" value="读取设备接口" />-->
+		<!--<input type="button" value="检验" />-->
+		<input type="submit" value="保存" />
 	</div>
-	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/logstatus/edit.js">
-	</script>
+	</form>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/logstatus/edit.js">
+</script>
 </body>
 </html>

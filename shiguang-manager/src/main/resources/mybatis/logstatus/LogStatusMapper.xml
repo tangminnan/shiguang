@@ -40,22 +40,25 @@
 		insert into log_status
 		(
 			`sale_number`,
-			`logistic_status`
+			`logistic_status`,
+			`faliao_name`,
+			`faliao_date`
 		)
 		values
 		(
 			#{saleNumber},
-			#{logisticStatus}
+			#{logisticStatus},
+			#{faliaoName},
+			#{faliaoDate}
 		)
 	</insert>
 
     <update id="update" parameterType="com.shiguang.logstatus.domain.LogStatusDO">
         update log_status
         <set>
-            <if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
             <if test="logisticStatus != null">`logistic_status` = #{logisticStatus}</if>
         </set>
-        where id = #{id}
+        where sale_number = #{saleNumber}
     </update>
 
     <delete id="remove">
@@ -73,17 +76,83 @@
         select sa.`id`,sa.`ptometry_number`,sa.`member_number`,m.`name` as memberName,m.`sex`,m.`age`,m.`phone_1` as phone1,sa.`sale_name`,sa.`sale_number`,sa.`eye_type`,sa.`amount_money`,sa.`mirror_way`,sa.`mirror_time`,
 		sa.`miror_address`,sa.`store_num`,sa.`urgent_status`,sa.`goods_rebate`,sa.`fixed_price`,sa.`moling_money`,sa.`additional_cost`,sa.`process_ask`,
 		sa.`store_name`,sa.`store_describe`,sa.`store_unit`,sa.`store_count`,sa.`remark`,sa.`saleremark`,sa.`give_name`,sa.`peijing_time`,sa.`optometry_name`,sa.`out_recipel`,
-		sa.`recipel_type`,sa.`optometrywl_name`,sa.`recipelwl_type`,sa.`taocan_name`,sa.`additional_price`,sa.`additional_count`,ls.`logistic_status` as logStatus
+		sa.`recipel_type`,sa.`optometrywl_name`,sa.`recipelwl_type`,sa.`taocan_name`,sa.`additional_price`,sa.`additional_count`,ls.`logistic_status` as logStatus,ls.`faliao_name` as faliaoName,ls.`faliao_date` as faliaoDate
         from store_sales sa
         join log_status ls on ls.sale_number = sa.sale_number
         join member m on m.card_number = sa.member_number
+        <where>
+            <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
-    <select id="findSaleCount" resultType="com.shiguang.storeSales.domain.SalesDO">
+    <select id="findSaleCount" resultType="int">
         select count(*)
         from store_sales sa
         join log_status ls on ls.sale_number = sa.sale_number
         join member m on m.card_number = sa.member_number
+        <where>
+            <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
+        </where>
     </select>
+
+    <update id="editFaliao" parameterType="com.shiguang.logstatus.domain.LogStatusDO">
+        update log_status
+        <set>
+            <if test="logisticStatus != null">`logistic_status` = #{logisticStatus},</if>
+            <if test="faliaoName != null"> `faliao_name` = #{faliaoName},</if>
+            <if test="faliaoDate != null"> `faliao_date` = #{faliaoDate}</if>
+        </set>
+        where sale_number = #{saleNumber}
+    </update>
+
+    <select id="getLogSaleNumber" resultType="com.shiguang.storeSales.domain.SalesDO">
+		select sa.`id`,sa.`ptometry_number`,sa.`member_number`,m.`name` as memberName,m.`sex`,m.`age`,m.`phone_1` as phone1,sa.`sale_name`,sa.`sale_number`,sa.`eye_type`,sa.`amount_money`,sa.`mirror_way`,sa.`mirror_time`,
+		sa.`miror_address`,sa.`store_num`,sa.`urgent_status`,sa.`goods_rebate`,sa.`fixed_price`,sa.`moling_money`,sa.`additional_cost`,sa.`process_ask`,
+		sa.`store_name`,sa.`store_describe`,sa.`store_unit`,sa.`store_count`,sa.`remark`,sa.`saleremark`,sa.`give_name`,sa.`peijing_time`,sa.`optometry_name`,sa.`out_recipel`,
+		sa.`recipel_type`,sa.`optometrywl_name`,sa.`recipelwl_type`,sa.`taocan_name`,sa.`additional_price`,sa.`additional_count`,sa.`jp_goods_name`,sa.`jj_goods_name`,
+		ls.`logistic_status` as logStatus,ls.`faliao_name` as faliaoName,ls.`faliao_date` as faliaoDate,mi.`address` as mailAddress
+        from store_sales sa
+        join log_status ls on ls.sale_number = sa.sale_number
+        join member m on m.card_number = sa.member_number
+        left join mail_info mi on mi.sale_number = sa.sale_number
+        where ls.sale_number = #{saleNumber}
+	</select>
+
+    <update id="editJianyan" parameterType="com.shiguang.logstatus.domain.LogStatusDO">
+        update log_status
+        <set>
+            <if test="logisticStatus != null">`logistic_status` = #{logisticStatus},</if>
+            <if test="jdjSphRight1 != null">`jdj_sph_right1` = #{jdjSphRight1}, </if>
+            <if test="jdjCylRight1 != null">`jdj_cyl_right1` = #{jdjCylRight1}, </if>
+            <if test="jdjZxRight1 != null">`jdj_zx_right1` = #{jdjZxRight1}, </if>
+            <if test="jdjSphRight2 != null">`jdj_sph_right2` = #{jdjSphRight2}, </if>
+            <if test="jdjCylRight2 != null">`jdj_cyl_right2` = #{jdjCylRight2}, </if>
+            <if test="jdjZxRight2 != null">`jdj_zx_right2` = #{jdjZxRight2}, </if>
+            <if test="xieshiRight != null">`xieshi_right` = #{xieshiRight}, </if>
+            <if test="addRight != null">`add_right` = #{addRight}, </if>
+            <if test="tjRight != null">`tj_right` = #{tjRight}, </if>
+            <if test="jdjSphLeft1 != null">`jdj_sph_left1` = #{jdjSphLeft1}, </if>
+            <if test="jdjCylLeft1 != null">`jdj_cyl_left1` = #{jdjCylLeft1}, </if>
+            <if test="jdjZxLeft1 != null">`jdj_zx_left1` = #{jdjZxLeft1}, </if>
+            <if test="jdjSphLeft2 != null">`jdj_sph_left2` = #{jdjSphLeft2}, </if>
+            <if test="jdjCylLeft2 != null">`jdj_cyl_left2` = #{jdjCylLeft2}, </if>
+            <if test="jdjZxLeft2 != null">`jdj_zx_left2` = #{jdjZxLeft2}, </if>
+            <if test="xieshiLeft != null">`xieshi_left` = #{xieshiLeft}, </if>
+            <if test="addLeft != null">`add_left` = #{addLeft}, </if>
+            <if test="tjLeft != null">`tj_left` = #{tjLeft}</if>
+        </set>
+        where sale_number = #{saleNumber}
+    </update>
 
 </mapper>

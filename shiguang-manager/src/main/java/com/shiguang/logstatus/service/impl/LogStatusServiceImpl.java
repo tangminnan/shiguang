@@ -59,4 +59,19 @@ public class LogStatusServiceImpl implements LogStatusService {
     public int findSaleCount(Map<String, Object> map){
         return statusDao.findSaleCount(map);
     }
+
+    @Override
+    public int editFaliao(LogStatusDO logStatusDO){
+        return statusDao.editFaliao(logStatusDO);
+    }
+
+    @Override
+    public SalesDO getLogSaleNumber(String saleNumber){
+        return statusDao.getLogSaleNumber(saleNumber);
+    }
+
+    @Override
+    public int editJianyan(LogStatusDO status){
+        return statusDao.editJianyan(status);
+    }
 }

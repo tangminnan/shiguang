@@ -433,14 +433,16 @@ public class StoreSalesController {
         costDO.setType("配镜单");
         costService.save(costDO);
         salesDO.setPeijingTime(new Date());
-        String goodsNum = salesDO.getGoodsNum();
-        String[] goodsStr = goodsNum.split(",");
-        for (int a=0;a<goodsStr.length;a++){
-            StockDO stockDO = stockService.getGoodsNum(goodsStr[a]);
-            Long countGoods = stockDO.getGoodsCount();
-            Long count = countGoods - 1;
-            stockDO.setGoodsCount(count);
-            stockService.update(stockDO);
+        if (null != salesDO.getGoodsNum()){
+            String goodsNum = salesDO.getGoodsNum();
+            String[] goodsStr = goodsNum.split(",");
+            for (int a=0;a<goodsStr.length;a++){
+                StockDO stockDO = stockService.getGoodsNum(goodsStr[a]);
+                Long countGoods = stockDO.getGoodsCount();
+                Long count = countGoods - 1;
+                stockDO.setGoodsCount(count);
+                stockService.update(stockDO);
+            }
         }
         LogStatusDO logStatusDO = new LogStatusDO();
         logStatusDO.setSaleNumber(salesDO.getSaleNumber());
@@ -492,6 +494,8 @@ public class StoreSalesController {
         Query query = new Query(params);
         Date currentTime = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String storeNum = ShiroUtils.getUser().getStoreNum();
+        query.put("storeNum",storeNum);
 //        query.put("packageType",params.get("packageType"));
         List<PackageDO> packageDOList = packageService.list(query);
         if (null != packageDOList && packageDOList.size() > 0) {
@@ -534,30 +538,13 @@ public class StoreSalesController {
         //查询列表数据
         Query query = new Query(params);
         query.put("goodsCode", params.get("checkVal"));
-        List<PackageInfoDO> packageInfoDOList = packageInfoService.list(query);
-        int total = packageInfoService.count(query);
-        List<PackageInfoDO> packageInfoDOS = new ArrayList<>();
-        for (PackageInfoDO packageInfoDO : packageInfoDOList) {
-            Map<String, Object> map = new HashMap<>();
-            String goodsType = packageInfoDO.getGoodsType();
-            String packStartPrice = packageInfoDO.getPackageStartPrice();
-            String[] packStartStr = packStartPrice.split(",");
-            String packEndPrice = packageInfoDO.getPackageEndPrice();
-            String[] packEndStr = packEndPrice.split(",");
-            String fullStartPrice = packageInfoDO.getFullStartPrice();
-            String[] fullStartStr = fullStartPrice.split(",");
-            String fullEndPrice = packageInfoDO.getFullEndPrice();
-            String[] fullEndStr = fullEndPrice.split(",");
-            String goodsName = packageInfoDO.getGoodsName();
-            String[] goodsNameStr = goodsName.split(",");
-//            for (int i=0;i<str.length;i++){
-//                map.put("goodsName",str[i]);
-//                for(int l = 0;l<){
-//
-//                }
-//            }
-        }
-        PageUtils pageUtils = new PageUtils(packageInfoDOList, total);
+//        List<PackageInfoDO> packageInfoDOList = packageInfoService.list(query);
+//        int total = packageInfoService.count(query);
+        String storeNum = ShiroUtils.getUser().getStoreNum();
+        query.put("storeNum",storeNum);
+        List<PackageDO> packageDOList = packageService.list(query);
+        int total = packageService.count(query);
+        PageUtils pageUtils = new PageUtils(packageDOList, total);
         return pageUtils;
     }
 
