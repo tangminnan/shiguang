@@ -24,7 +24,7 @@ public class PackageInfoDO implements Serializable {
     //套餐价格区间结束
     private String packageEndPrice;
     //销售数量
-    private Long saleNumber;
+    private String saleNumber;
     //消费满(开始价格)
     private String fullStartPrice;
     //消费满(结束价格)
@@ -151,13 +151,13 @@ public class PackageInfoDO implements Serializable {
     /**
      * 设置：销售数量
      */
-    public void setSaleNumber(Long saleNumber) {
+    public void setSaleNumber(String saleNumber) {
         this.saleNumber = saleNumber;
     }
     /**
      * 获取：销售数量
      */
-    public Long getSaleNumber() {
+    public String getSaleNumber() {
         return saleNumber;
     }
     /**
