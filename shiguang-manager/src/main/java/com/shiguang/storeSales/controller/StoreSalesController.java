@@ -438,9 +438,9 @@ public class StoreSalesController {
             String[] goodsStr = goodsNum.split(",");
             for (int a=0;a<goodsStr.length;a++){
                 StockDO stockDO = stockService.getGoodsNum(goodsStr[a]);
-                Long countGoods = stockDO.getGoodsCount();
+                Long countGoods = Long.parseLong(stockDO.getGoodsCount());
                 Long count = countGoods - 1;
-                stockDO.setGoodsCount(count);
+                stockDO.setGoodsCount(String.valueOf(count));
                 stockService.update(stockDO);
             }
         }
