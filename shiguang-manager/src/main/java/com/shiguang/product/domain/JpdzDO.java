@@ -46,35 +46,35 @@ public class JpdzDO implements Serializable {
     private Long cylId;
     private String cyl;
     //球镜上限
-    private Long sphUp;
+    private String sphUp;
     //球镜下限
-    private Long sphDown;
+    private String sphDown;
     //球镜区间
     private String sphqj;
     //球镜跨度
-    private Long sphSpan;
+    private String sphSpan;
     //柱镜上限
-    private Long cylUp;
+    private String cylUp;
     //柱镜下限
-    private Long cylDown;
+    private String cylDown;
     //柱镜区间
     private String cylqj;
     //柱镜跨度
-    private Long cylSpan;
+    private String cylSpan;
     //下加光id
     private Long lightbelowId;
     //下加光
     private String lightbelow;
     //下加光左
-    private Long lightbelowRight;
+    private String lightbelowRight;
     //下加光右
-    private Long lightbelowLeft;
+    private String lightbelowLeft;
     //下加光区间
     private String lightbelowqj;
     //材料分类id
     private Integer lensId;
     //材料分类
-    private String lens;
+    private String lensName;
     //定做周期（天）
     private Long cycle;
     //光度分类id
@@ -85,15 +85,15 @@ public class JpdzDO implements Serializable {
     //渐进片分类id
     private Integer gradualId;
     //渐进片分类名称
-    private String gradual;
+    private String gradualName;
     //折射率id
     private Integer refractivityid;
     //折射率
-    private String refractivity;
+    private String refractivityvalue;
     //镜片功能id
     private Integer functionId;
     //镜片功能名称
-    private String function;
+    private String functionName;
     //联合光度【格式：1.25】
     private String combinedPhotometry;
     //柱镜为-0.25度（-25散）（1能：2不能）
@@ -298,84 +298,84 @@ public class JpdzDO implements Serializable {
     /**
      * 设置：球镜上限
      */
-    public void setSphUp(Long sphUp) {
+    public void setSphUp(String sphUp) {
         this.sphUp = sphUp;
     }
 
     /**
      * 获取：球镜上限
      */
-    public Long getSphUp() {
+    public String getSphUp() {
         return sphUp;
     }
 
     /**
      * 设置：球镜下限
      */
-    public void setSphDown(Long sphDown) {
+    public void setSphDown(String sphDown) {
         this.sphDown = sphDown;
     }
 
     /**
      * 获取：球镜下限
      */
-    public Long getSphDown() {
+    public String getSphDown() {
         return sphDown;
     }
 
     /**
      * 设置：球镜跨度
      */
-    public void setSphSpan(Long sphSpan) {
+    public void setSphSpan(String sphSpan) {
         this.sphSpan = sphSpan;
     }
 
     /**
      * 获取：球镜跨度
      */
-    public Long getSphSpan() {
+    public String getSphSpan() {
         return sphSpan;
     }
 
     /**
      * 设置：柱镜上限
      */
-    public void setCylUp(Long cylUp) {
+    public void setCylUp(String cylUp) {
         this.cylUp = cylUp;
     }
 
     /**
      * 获取：柱镜上限
      */
-    public Long getCylUp() {
+    public String getCylUp() {
         return cylUp;
     }
 
     /**
      * 设置：柱镜下限
      */
-    public void setCylDown(Long cylDown) {
+    public void setCylDown(String cylDown) {
         this.cylDown = cylDown;
     }
 
     /**
      * 获取：柱镜下限
      */
-    public Long getCylDown() {
+    public String getCylDown() {
         return cylDown;
     }
 
     /**
      * 设置：柱镜跨度
      */
-    public void setCylSpan(Long cylSpan) {
+    public void setCylSpan(String cylSpan) {
         this.cylSpan = cylSpan;
     }
 
     /**
      * 获取：柱镜跨度
      */
-    public Long getCylSpan() {
+    public String getCylSpan() {
         return cylSpan;
     }
 
@@ -396,28 +396,28 @@ public class JpdzDO implements Serializable {
     /**
      * 设置：下加光左
      */
-    public void setLightbelowRight(Long lightbelowRight) {
+    public void setLightbelowRight(String lightbelowRight) {
         this.lightbelowRight = lightbelowRight;
     }
 
     /**
      * 获取：下加光左
      */
-    public Long getLightbelowRight() {
+    public String getLightbelowRight() {
         return lightbelowRight;
     }
 
     /**
      * 设置：下加光右
      */
-    public void setLightbelowLeft(Long lightbelowLeft) {
+    public void setLightbelowLeft(String lightbelowLeft) {
         this.lightbelowLeft = lightbelowLeft;
     }
 
     /**
      * 获取：下加光右
      */
-    public Long getLightbelowLeft() {
+    public String getLightbelowLeft() {
         return lightbelowLeft;
     }
 
@@ -627,9 +627,6 @@ public class JpdzDO implements Serializable {
     /**
      * 获取删除：//状态(0:删除1:未删除)
      */
-    public void setState(Long state) {
-        this.state = state;
-    }
 
     public void setMfrsname(String mfrsname) {
         this.mfrsname = mfrsname;
@@ -651,82 +648,6 @@ public class JpdzDO implements Serializable {
         this.unitname = unitname;
     }
 
-    public String getSphqj() {
-        return sphqj;
-    }
-
-    public void setSphqj(String sphqj) {
-        this.sphqj = sphqj;
-    }
-
-    public String getCylqj() {
-        return cylqj;
-    }
-
-    public void setCylqj(String cylqj) {
-        this.cylqj = cylqj;
-    }
-
-    public String getLightbelowqj() {
-        return lightbelowqj;
-    }
-
-    public void setLightbelowqj(String lightbelowqj) {
-        this.lightbelowqj = lightbelowqj;
-    }
-
-    public String getLens() {
-        return lens;
-    }
-
-    public void setLens(String lens) {
-        this.lens = lens;
-    }
-
-    public String getLight() {
-        return light;
-    }
-
-    public void setLight(String light) {
-        this.light = light;
-    }
-
-    public String getGradual() {
-        return gradual;
-    }
-
-    public void setGradual(String gradual) {
-        this.gradual = gradual;
-    }
-
-    public String getRefractivity() {
-        return refractivity;
-    }
-
-    public void setRefractivity(String refractivity) {
-        this.refractivity = refractivity;
-    }
-
-    public String getFunction() {
-        return function;
-    }
-
-    public void setFunction(String function) {
-        this.function = function;
-    }
-
-    public String getRetailPrice() {
-        return retailPrice;
-    }
-
-    public String getLightbelow() {
-        return lightbelow;
-    }
-
-    public void setLightbelow(String lightbelow) {
-        this.lightbelow = lightbelow;
-    }
-
     public String getSph() {
         return sph;
     }
@@ -743,11 +664,91 @@ public class JpdzDO implements Serializable {
         this.cyl = cyl;
     }
 
+    public String getSphqj() {
+        return sphqj;
+    }
+
+    public void setSphqj(String sphqj) {
+        this.sphqj = sphqj;
+    }
+
+    public String getCylqj() {
+        return cylqj;
+    }
+
+    public void setCylqj(String cylqj) {
+        this.cylqj = cylqj;
+    }
+
+    public String getLightbelow() {
+        return lightbelow;
+    }
+
+    public void setLightbelow(String lightbelow) {
+        this.lightbelow = lightbelow;
+    }
+
+    public String getLightbelowqj() {
+        return lightbelowqj;
+    }
+
+    public void setLightbelowqj(String lightbelowqj) {
+        this.lightbelowqj = lightbelowqj;
+    }
+
+    public String getLensName() {
+        return lensName;
+    }
+
+    public void setLensName(String lensName) {
+        this.lensName = lensName;
+    }
+
     public String getLightName() {
         return lightName;
     }
 
     public void setLightName(String lightName) {
         this.lightName = lightName;
+    }
+
+    public String getLight() {
+        return light;
+    }
+
+    public void setLight(String light) {
+        this.light = light;
+    }
+
+    public String getGradualName() {
+        return gradualName;
+    }
+
+    public void setGradualName(String gradualName) {
+        this.gradualName = gradualName;
+    }
+
+    public String getRefractivityvalue() {
+        return refractivityvalue;
+    }
+
+    public void setRefractivityvalue(String refractivityvalue) {
+        this.refractivityvalue = refractivityvalue;
+    }
+
+    public String getFunctionName() {
+        return functionName;
+    }
+
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
+    }
+
+    public String getRetailPrice() {
+        return retailPrice;
+    }
+
+    public void setState(Long state) {
+        this.state = state;
     }
 }

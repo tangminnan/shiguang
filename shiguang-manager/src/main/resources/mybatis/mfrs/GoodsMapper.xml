@@ -3,40 +3,41 @@
 
 <mapper namespace="com.shiguang.mfrs.dao.GoodsDao">
 
-	<select id="get" resultType="com.shiguang.mfrs.domain.GoodsDO">
+    <select id="get" resultType="com.shiguang.mfrs.domain.GoodsDO">
 		select `goodsid`,`goodsname`,`goodsnum` from c_goods where goodsid = #{value}
 	</select>
 
-	<select id="list" resultType="com.shiguang.mfrs.domain.GoodsDO">
-		select `goodsid`,`goodsname`,`goodsnum` from c_goods
-        <where>  
-		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
-		  		  <if test="goodsname != null and goodsname != ''"> and goodsname = #{goodsname} </if>
-		  		  <if test="goodsnum != null and goodsnum != ''"> and goodsnum = #{goodsnum} </if>
-		  		</where>
+    <select id="list" resultType="com.shiguang.mfrs.domain.GoodsDO">
+        select `goodsid`,`goodsname`,`goodsnum` from c_goods
+        <where>
+            <if test="goodsid != null and goodsid != ''">and goodsid = #{goodsid}</if>
+            <if test="goodsname != null and goodsname != ''">and goodsname = #{goodsname}</if>
+            <if test="goodsnum != null and goodsnum != ''">and goodsnum = #{goodsnum}</if>
+            <if test="goodstypeName != null and goodstypeName != ''">and goodsname != #{goodstypeName}</if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by goodsid
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from c_goods
-		 <where>  
-		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
-		  		  <if test="goodsname != null and goodsname != ''"> and goodsname = #{goodsname} </if>
-		  		  <if test="goodsnum != null and goodsnum != ''"> and goodsnum = #{goodsnum} </if>
-		  		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.shiguang.mfrs.domain.GoodsDO" useGeneratedKeys="true" keyProperty="goodsid">
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from c_goods
+        <where>
+            <if test="goodsid != null and goodsid != ''">and goodsid = #{goodsid}</if>
+            <if test="goodsname != null and goodsname != ''">and goodsname = #{goodsname}</if>
+            <if test="goodsnum != null and goodsnum != ''">and goodsnum = #{goodsnum}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.mfrs.domain.GoodsDO" useGeneratedKeys="true" keyProperty="goodsid">
 		insert into c_goods
 		(
 			`goodsname`, 
@@ -48,25 +49,25 @@
 			#{goodsnum}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="com.shiguang.mfrs.domain.GoodsDO">
-		update c_goods 
-		<set>
-			<if test="goodsname != null">`goodsname` = #{goodsname}, </if>
-			<if test="goodsnum != null">`goodsnum` = #{goodsnum}</if>
-		</set>
-		where goodsid = #{goodsid}
-	</update>
-	
-	<delete id="remove">
+
+    <update id="update" parameterType="com.shiguang.mfrs.domain.GoodsDO">
+        update c_goods
+        <set>
+            <if test="goodsname != null">`goodsname` = #{goodsname},</if>
+            <if test="goodsnum != null">`goodsnum` = #{goodsnum}</if>
+        </set>
+        where goodsid = #{goodsid}
+    </update>
+
+    <delete id="remove">
 		delete from c_goods where goodsid = #{value}
 	</delete>
-	
-	<delete id="batchRemove">
-		delete from c_goods where goodsid in 
-		<foreach item="goodsid" collection="array" open="(" separator="," close=")">
-			#{goodsid}
-		</foreach>
-	</delete>
+
+    <delete id="batchRemove">
+        delete from c_goods where goodsid in
+        <foreach item="goodsid" collection="array" open="(" separator="," close=")">
+            #{goodsid}
+        </foreach>
+    </delete>
 
 </mapper>

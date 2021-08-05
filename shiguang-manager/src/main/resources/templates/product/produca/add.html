@@ -44,7 +44,7 @@
                 <td>商品品种：</td>
                 <td style="width:20%;">
                     <select id="brandid" name="brandid" onchange="change(this, 5, 7)">
-                        <option value="00">--请选择--</option>
+                        <option value="">--请选择--</option>
                     </select>
                     <em>*</em>
                 </td>
@@ -114,8 +114,17 @@
             <tbody>
             <tr>
                 <td>镜架尺寸：</td>
-                <td><input type="text" value="1.06.19.00000000111.1113S"/></td>
+                <td><input type="text"/></td>
                 <td>工艺类型：</td>
+                <td style="width:20%;">
+                    <select id="technologyId" name="technologyId" style="width:60%;">
+                        <option></option>
+                        <option th:each="ls:${technologyDOList}"
+                                th:text="${ls.technologyType}"
+                                th:value="${ls.technologyId}"></option>
+                    </select>
+                </td>
+                <td>镜架材质：</td>
                 <td style="width:20%;">
                     <select id="materialid" name="materialid" style="width:60%;">
                         <option></option>
@@ -139,7 +148,7 @@
                     </select>
                 </td>
                 <td>采购年份：</td>
-                <td><input id="year" name="year" type="text" style="width:60%;"/><em>（年份后两位+两位月份）</em></td>
+                <td><input id="year" name="year" type="text"/><br><em>（年份后两位+两位月份</em></td>
             </tr>
             </tbody>
         </table>
@@ -276,7 +285,7 @@
     function choice(value) {
         // alert(value);
         $("#brandid").empty("");
-        $("#brandid").append("<option value=\"00\">--请选择--</option>");
+        $("#brandid").append("<option value=\"\">--请选择--</option>");
         $.ajax({
             url: "/product/produca/choice",
             type: "post",

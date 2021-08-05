@@ -73,7 +73,7 @@
                                 <label class="col-sm-3 control-label">计量单位：</label>
                                 <div class="col-sm-8">
                                     <select id="unitid" name="unitid" class="form-control">
-                                        <option></option>
+                                        <option value="">--请选择--</option>
                                         <option th:each="ls:${unitDOList}"
                                                 th:text="${ls.unitname}"
                                                 th:value="${ls.unitid}"

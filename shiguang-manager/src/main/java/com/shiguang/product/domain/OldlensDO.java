@@ -39,6 +39,7 @@ public class OldlensDO implements Serializable {
     private Integer unitid;
     //单位
     private String unitname;
+    //    老花镜度数
     private Long oldId;
     //批号管理(1是、2否)
     private Integer batchid;

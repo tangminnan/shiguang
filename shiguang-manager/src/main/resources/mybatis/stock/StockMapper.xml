@@ -4,8 +4,8 @@
 <mapper namespace="com.shiguang.stock.dao.StockDao">
 
     <select id="get" resultType="com.shiguang.stock.domain.StockDO">
-		select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`retail_price`,`price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit` from stock where id = #{value}
-	</select>
+    select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`retail_price`,`price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit` from stock where id = #{value}
+</select>
 
     <select id="list" resultType="com.shiguang.stock.domain.StockDO">
         select
@@ -79,59 +79,59 @@
     </select>
 
     <insert id="save" parameterType="com.shiguang.stock.domain.StockDO" useGeneratedKeys="true" keyProperty="id">
-		insert into stock
-		(
-			`goods_num`,
-			`goods_code`,
-			`goods_name`,
-			`goods_count`,
-			`goods_type`,
-			`mfrsid`,
-			`retail_price`,
-			`price_sum`,
-			`cost_price`,
-			`cost_sum`,
-			`whole_price`,
-			`whole_sum`,
-			`position_name`,
-			`create_time`,
-			`danju_number`,
-			`order_number`,
-			`yundan_number`,
-			`zhidan_people`,
-			`danju_day`,
-			`tuihuo_number`,
-			`factory_number`,
-			`beizhu`,
-			`unit`
-		)
-		values
-		(
-			#{goodsNum},
-			#{goodsCode},
-			#{goodsName},
-			#{goodsCount},
-			#{goodsType},
-			#{mfrsid},
-			#{retailPrice},
-			#{priceSum},
-			#{costPrice},
-			#{costSum},
-			#{wholePrice},
-			#{wholeSum},
-			#{positionName},
-			#{createTime},
-			#{danjuNumber},
-			#{orderNumber},
-			#{yundanNumber},
-			#{zhidanPeople},
-			#{danjuDay},
-			#{tuihuoNumber},
-			#{factoryNumber},
-			#{beizhu},
-			#{unit}
-		)
-	</insert>
+    insert into stock
+    (
+        `goods_num`,
+        `goods_code`,
+        `goods_name`,
+        `goods_count`,
+        `goods_type`,
+        `mfrsid`,
+        `retail_price`,
+        `price_sum`,
+        `cost_price`,
+        `cost_sum`,
+        `whole_price`,
+        `whole_sum`,
+        `position_name`,
+        `create_time`,
+        `danju_number`,
+        `order_number`,
+        `yundan_number`,
+        `zhidan_people`,
+        `danju_day`,
+        `tuihuo_number`,
+        `factory_number`,
+        `beizhu`,
+        `unit`
+    )
+    values
+    (
+        #{goodsNum},
+        #{goodsCode},
+        #{goodsName},
+        #{goodsCount},
+        #{goodsType},
+        #{mfrsid},
+        #{retailPrice},
+        #{priceSum},
+        #{costPrice},
+        #{costSum},
+        #{wholePrice},
+        #{wholeSum},
+        #{positionName},
+        #{createTime},
+        #{danjuNumber},
+        #{orderNumber},
+        #{yundanNumber},
+        #{zhidanPeople},
+        #{danjuDay},
+        #{tuihuoNumber},
+        #{factoryNumber},
+        #{beizhu},
+        #{unit}
+    )
+</insert>
 
     <update id="update" parameterType="com.shiguang.stock.domain.StockDO">
         update stock
@@ -163,8 +163,8 @@
     </update>
 
     <delete id="remove">
-		delete from stock where id = #{value}
-	</delete>
+    delete from stock where id = #{value}
+</delete>
 
     <delete id="batchRemove">
         delete from stock where id in
@@ -851,16 +851,164 @@
     </select>
 
     <select id="getGoodsNum" resultType="com.shiguang.stock.domain.StockDO">
-		select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`retail_price`,
-		`price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,
-		`order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,
-		`unit` from stock where goods_num = #{value}
-	</select>
-
-    <!--配件【商】【品】【查】【询】-->
-    <select id="selectPj" resultType="com.shiguang.product.domain.PartsDO">
+    select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`retail_price`,
+    `price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,
+    `order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,
+    `unit` from stock where goods_num = #{value}
+</select>
+    <!--镜架【商】【品】【查】【询】-->
+    <select id="selectJingjia" resultType="com.shiguang.product.domain.ProducaDO">
         select p.produc_num,p.produc_name,p.produc_factory,u.unitname,
-        p.factory,p.retail_price,p.tax_price,p.parts_style
-        from aa_parts p join c_unit u on p.unitid=u.unitid where p.mfrsid=#{mfrsid}
+        p.factory,p.retail_price,p.tax_price,p.produc_factorycolor,m.materialname,p.size,p.produc_code,
+        p.trade_price,p.transfer_price
+        from aa_produca p join c_unit u on p.unitid=u.unitid
+        join c_material m on p.materialid=m.materialid
+        join a_technology t on p.technology_id=t.technology_id
+        <where>
+            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and p.brandid = #{brandid}</if>
+            <if test="factory != null and factory != ''">and p.factory = #{factory}</if>
+            <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
+            <if test="producFactorycolor != null and producFactorycolor != ''">and p.produc_factorycolor =
+                #{producFactorycolor}
+            </if>
+            <if test="sizes != null and sizes != ''">and p.size = #{sizes}</if>
+            <if test="technologyId != null and technologyId != ''">and t.technology_id = #{technologyId}</if>
+            <if test="materialid != null and materialid != ''">and m.materialid = #{materialid}</if>
+        </where>
+    </select>
+    <!--配件【商】【品】【查】【询】-->
+    <select id="selectPeijian" resultType="com.shiguang.product.domain.PartsDO">
+        select p.produc_num,p.produc_name,p.produc_factory,u.unitname,
+        p.factory,p.retail_price,p.tax_price,p.parts_style,p.produc_code,
+        p.trade_price,p.transfer_price
+        from aa_parts p join c_unit u on p.unitid=u.unitid
+        <where>
+            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and p.brandid = #{brandid}</if>
+            <if test="partsStyle != null and partsStyle != ''">and p.parts_style = #{partsStyle}</if>
+            <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
+            <if test="factory != null and factory != ''">and p.factory = #{factory}</if>
+        </where>
+    </select>
+    <!--镜片定做【商】【品】【查】【询】-->
+    <select id="selectJpdz" resultType="com.shiguang.product.domain.JpdzDO">
+    select j.produc_num,j.produc_name,u.unitname,j.factory,j.retail_price,j.tax_price,j.sph_up,j.sph_down,j.cyl_up,
+    j.cyl_down,j.lightbelow_left,j.lightbelow_right,r.refractivityvalue,l.light_name,le.lens_name,g.gradual_name,f.function_name,
+    j.produc_code,j.trade_price,j.transfer_price
+    from aa_jpdz j join c_unit u on j.unitid=u.unitid
+    join c_refractivity r on j.refractivityid=r.refractivityid
+    join p_light l on j.light_id=l.light_id
+    join p_lens le on j.lens_id=le.lens_id
+    join p_gradual g on j.gradual_id=g.gradual_id
+    join p_function f on j.function_id=f.function_id
+    where j.mfrsid=#{mfrsid}
+</select>
+    <!--镜片成品【商】【品】【查】【询】-->
+    <select id="selectJpcp" resultType="com.shiguang.product.domain.JpdzDO">
+    select j.produc_num,j.produc_name,u.unitname,j.retail_price,j.tax_price,s.sph,c.cyl,
+        li.lightbelow,r.refractivityvalue,l.light_name,le.lens_name,g.gradual_name,f.function_name,
+        j.produc_code,j.trade_price,j.transfer_price
+        from aa_jpcp j join c_unit u on j.unitid=u.unitid join a_sph s on j.sph_id=s.sph_id
+        join a_cyl c on j.cyl_id=c.cyl_id join a_lightbelow li on j.lightbelow_id=li.lightbelow_id
+        join c_refractivity r on j.refractivityid=r.refractivityid
+        join p_light l on j.light_id=l.light_id
+        join p_lens le on j.lens_id=le.lens_id
+        join p_gradual g on j.gradual_id=g.gradual_id
+        join p_function f on j.function_id=f.function_id
+        where j.mfrsid=#{mfrsid}
+</select>
+    <!--护理液【商】【品】【查】【询】-->
+    <select id="selectHly" resultType="com.shiguang.product.domain.HlyDO">
+        select
+        h.produc_num,h.produc_name,h.produc_factory,h.factory,u.unitname,h.retail_price,h.tax_price,h.main_capacity,h.second_capacity,h.produc_code,
+        h.trade_price,h.transfer_price
+        from aa_hly h join c_unit u on h.unitid = u.unitid
+        <where>
+            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
+            <if test="mainCapacity != null and mainCapacity != ''">and h.main_capacity = #{mainCapacity}</if>
+            <if test="secondCapacity != null and secondCapacity != ''">and h.second_capacity = #{secondCapacity}</if>
+            <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
+            <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
+        </where>
+    </select>
+    <!--太阳镜【商】【品】【查】【询】-->
+    <select id="selectTyj" resultType="com.shiguang.product.domain.TyjDO">
+        select t.produc_num,t.produc_name,t.produc_code,t.produc_factory,t.factory,
+        t.retail_price,t.tax_price,t.produc_factorycolor,t.size,t.trade_price,t.transfer_price
+        from aa_tyj t join c_unit u on t.unitid=u.unitid
+        <where>
+            <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and t.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and t.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and t.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and t.brandid = #{brandid}</if>
+            <if test="producFactorycolor != null and producFactorycolor != ''">and t.produc_factorycolor =
+                #{producFactorycolor}
+            </if>
+            <if test="size != null and size != ''">and t.size = #{size}</if>
+            <if test="producFactory != null and producFactory != ''">and t.produc_factory = #{producFactory}</if>
+            <if test="factory != null and factory != ''">and t.factory = #{factory}</if>
+        </where>
+    </select>
+    <!--老花镜【商】【品】【查】【询】-->
+    <select id="selectLhj" resultType="com.shiguang.product.domain.OldlensDO">
+        select o.produc_num,o.produc_name,o.produc_code,o.produc_factory,o.factory,o.retail_price,o.tax_price,
+        old.degrees,o.size,o.produc_factorycolor,o.trade_price,o.transfer_price
+        from aa_oldlens o join c_unit u on o.unitid=u.unitid join a_olddegrees old on o.old_id=old.old_id
+        <where>
+            <if test="producNum != null and producNum != ''">and o.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and o.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and o.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and o.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and o.brandid = #{brandid}</if>
+            <if test="producFactorycolor != null and producFactorycolor != ''">and o.produc_factorycolor =
+                #{producFactorycolor}
+            </if>
+            <if test="size != null and size != ''">and o.size = #{size}</if>
+            <if test="producFactory != null and producFactory != ''">and o.produc_factory = #{producFactory}</if>
+            <if test="factory != null and factory != ''">and o.factory = #{factory}</if>
+        </where>
+    </select>
+    <!--耗材【商】【品】【查】【询】-->
+    <select id="selectHc" resultType="com.shiguang.product.domain.HcDO">
+        select h.produc_num,h.produc_name,h.produc_code,u.unitname,h.retail_price,h.tax_price,
+        h.trade_price,h.transfer_price from aa_hc h join c_unit u
+        on h.unitid=u.unitid
+        <where>
+            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
+            <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
+            <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
+        </where>
+    </select>
+    <!--视光【商】【品】【查】【询】-->
+    <select id="selectSg" resultType="com.shiguang.product.domain.ShiguangDO">
+        select
+        s.produc_num,s.produc_name,s.produc_code,s.factory,s.produc_factory,u.unitname,s.retail_price,s.tax_price,
+        s.trade_price,s.transfer_price
+        from aa_shiguang s join c_unit u on s.unitid=u.unitid
+        <where>
+            <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and s.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and s.brandid = #{brandid}</if>
+            <if test="producFactory != null and producFactory != ''">and s.produc_factory = #{producFactory}</if>
+            <if test="factory != null and factory != ''">and s.factory = #{factory}</if>
+        </where>
     </select>
 </mapper>

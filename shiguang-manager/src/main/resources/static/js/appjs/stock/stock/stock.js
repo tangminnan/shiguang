@@ -53,100 +53,18 @@ function load() {
                     // 	field : 'id',
                     // 	title : '主键'
                     // },
-
-                    // {
-                    //     field: 'goodsNum',
-                    //     title: '商品代码'
-                    // },
-                    // {
-                    //     field: 'goodsCode',
-                    //     title: '商品条码'
-                    // },
-                    // {
-                    //     field: 'goodsName',
-                    //     title: '商品名称'
-                    // },
-                    // {
-                    //     field: 'goodsCount',
-                    //     title: '数量'
-                    // },
-                    // 								{
-                    // 	field : 'goodsType',
-                    // 	title : '商品类别'
-                    // },
                     {
-                        field: 'orderNumber',
-                        title: '订单编号'
+                        field: 'producNum',
+                        title: '商品信息代码'
                     },
-                    // 								{
-                    // 	field : 'mfrsid',
-                    // 	title : '制造商id'
-                    // },
                     {
-                        field: 'mfrsname',
-                        title: '制造商'
+                        field: 'producCode',
+                        title: '商品条码'
                     },
-                    // 								{
-                    // 	field : 'retailPrice',
-                    // 	title : '标准零售价格'
-                    // },
-                    // 								{
-                    // 	field : 'priceSum',
-                    // 	title : '原价合计'
-                    // },
-                    // 								{
-                    // 	field : 'costPrice',
-                    // 	title : '成本价格'
-                    // },
-                    // 								{
-                    // 	field : 'costSum',
-                    // 	title : '成本合计'
-                    // },
-                    // 								{
-                    // 	field : 'wholePrice',
-                    // 	title : '批发价格'
-                    // },
-                    // 								{
-                    // 	field : 'wholeSum',
-                    // 	title : '批发合计'
-                    // },
-                    // 								{
-                    // 	field : 'positionName',
-                    // 	title : '仓位名称'
-                    // },
-                    // 								{
-                    // 	field : 'createTime',
-                    // 	title : '入库时间'
-                    // },
-                    // 								{
-                    // 	field : 'danjuNumber',
-                    // 	title : '单据编号'
-                    // },
-
-                    // 								{
-                    // 	field : 'yundanNumber',
-                    // 	title : '运单号'
-                    // },
                     {
-                        field: 'zhidanPeople',
-                        title: '制单人'
+                        field: 'producName',
+                        title: '商品名称'
                     },
-                    // {
-                    //     field: 'danjuDay',
-                    //     title: '单据日期'
-                    // },
-                    // {
-                    //     field: 'tuihuoNumber',
-                    //     title: '退货单号'
-                    // },
-                    // {
-                    //     field: 'factoryNumber',
-                    //     title: '厂家订单号'
-                    // },
-                    // {
-                    //     field: 'beizhu',
-                    //     title: '备注'
-                    // },
                     {
                         title: '操作',
                         field: 'id',
@@ -184,7 +102,7 @@ function add() {
 }
 
 function edit(id) {
-    var toIndex = layer.open({
+    layer.open({
         type: 2,
         title: '编辑',
         maxmin: true,
@@ -192,7 +110,6 @@ function edit(id) {
         area: ['800px', '520px'],
         content: prefix + '/edit/' + id // iframe的url
     });
-    layer.full(toIndex);
 }
 
 function remove(id) {
@@ -255,10 +172,111 @@ function batchRemove() {
     });
 }
 
-//选择制造商
+// 选择制造商
 function batchSelect() {
     var rows = $("#exampleTable").bootstrapTable("getSelections");
-    alert(JSON.stringify(rows))
-    alert(rows.producNum)
     return rows;
 };
+
+// 选择单品
+function showCol() {
+    var check = $("input[name='one']:checked");//选中的复选框
+    var objArray = [];
+    check.each(function () {
+        var obj = {};
+        var rowstr = $(this).parent("td").parent("tr");
+        var producNum = rowstr.find("[name='producNum']").html();//注意html()和val()
+        var producName = rowstr.find("[name='producName']").html();
+        var producFactory = rowstr.find("[name='producFactory']").html();
+        var unitname = rowstr.find("[name='unitname']").html();
+        var factory = rowstr.find("[name='factory']").html();
+        var retailPrice = rowstr.find("[name='retailPrice']").html();
+        var taxPrice = rowstr.find("[name='taxPrice']").html();
+        var producFactorycolor = rowstr.find("[name='producFactorycolor']").html();
+        var materialName = rowstr.find("[name='materialName']").html();
+        var size = rowstr.find("[name='size']").html();
+        var producCode = rowstr.find("[name='producCode']").html();
+        obj.producNum = producNum;
+        obj.producName = producName;
+        obj.producFactory = producFactory;
+        obj.unitname = unitname;
+        obj.factory = factory;
+        obj.retailPrice = retailPrice;
+        obj.taxPrice = taxPrice;
+        obj.producFactorycolor = producFactorycolor;
+        obj.materialName = materialName;
+        obj.size = size;
+        obj.producCode = producCode;
+        //———获取当前系统时间—————
+        var timeNow = new Date();
+        var year = timeNow.getFullYear();
+        var month = timeNow.getMonth() + 1 > 10 ? timeNow.getMonth() + 1 : '0' + (timeNow.getMonth() + 1);
+        var date = timeNow.getDate() > 10 ? timeNow.getDate() : "0" + timeNow.getDate();
+        obj.createTime = year + "-" + month + "-" + date;
+        var tradePrice = rowstr.find("[name='tradePrice']").html();
+        obj.tradePrice = tradePrice;
+        var transferPrice = rowstr.find("[name='transferPrice']").html();
+        obj.transferPrice = transferPrice;
+
+        //配件
+        var partsStyle = rowstr.find("[name='partsStyle']").html();
+        obj.partsStyle = partsStyle;
+        //镜片
+        var sph = rowstr.find("[name='sph']").html();
+        obj.sph = sph;
+        var cyl = rowstr.find("[name='cyl']").html();
+        obj.cyl = cyl;
+        var lightbelow = rowstr.find("[name='lightbelow']").html();
+        obj.lightbelow = lightbelow;
+        var refractivityvalue = rowstr.find("[name='refractivityvalue']").html();
+        obj.refractivityvalue = refractivityvalue;
+        var lightName = rowstr.find("[name='lightName']").html();
+        obj.lightName = lightName;
+        var lensName = rowstr.find("[name='lensName']").html();
+        obj.lensName = lensName;
+        var gradualName = rowstr.find("[name='gradualName']").html();
+        obj.gradualName = gradualName;
+        var functionName = rowstr.find("[name='functionName']").html();
+        obj.functionName = functionName;
+        //护理液
+        var mainCapacity = rowstr.find("[name='mainCapacity']").html();
+        obj.mainCapacity = mainCapacity;
+        var secondCapacity = rowstr.find("[name='secondCapacity']").html();
+        obj.secondCapacity = secondCapacity;
+        //太阳镜
+        //老花镜
+        var degrees = rowstr.find("[name='degrees']").html();
+        obj.degrees = degrees;
+        objArray.push(obj);
+    });
+    return objArray;
+}
+
+
+function save() {
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "/stock/stock/save",
+        data: $('#signupForm').serialize(),// 你的formid
+        async: false,
+        error: function (request) {
+            parent.layer.alert("Connection error");
+        },
+        success: function (data) {
+            if (data.code == 0) {
+                parent.layer.msg("操作成功");
+                parent.reLoad();
+                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                parent.layer.close(index);
+
+            } else {
+                parent.layer.alert(data.msg)
+            }
+
+        }
+    });
+
+}
+
+

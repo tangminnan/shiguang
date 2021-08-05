@@ -1,7 +1,7 @@
 package com.shiguang.stock.service.impl;
 
 import com.shiguang.mfrs.domain.PositionDO;
-import com.shiguang.product.domain.PartsDO;
+import com.shiguang.product.domain.*;
 import com.shiguang.stock.dao.StockDao;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
@@ -172,10 +172,58 @@ public class StockServiceImpl implements StockService {
         return stockDao.getGoodsNum(goodsNum);
     }
 
-    //<!--配件【商】【品】【查】【询】-->
+    //<!--镜架【商】【品】【查】【询】-->
     @Override
-    public List<PartsDO> selectPj(Map<String, Object> map) {
-        return stockDao.selectPj(map);
+    public List<ProducaDO> selectJingjia(Map<String, Object> map) {
+        return stockDao.selectJingjia(map);
     }
 
+    //<!--配件【商】【品】【查】【询】-->
+    @Override
+    public List<PartsDO> selectPeijian(Map<String, Object> map) {
+        return stockDao.selectPeijian(map);
+    }
+
+    //<!--镜片定做【商】【品】【查】【询】-->
+    @Override
+    public List<JpdzDO> selectJpdz(Map<String, Object> map) {
+        return stockDao.selectJpdz(map);
+    }
+
+    //<!--镜片成品【商】【品】【查】【询】-->
+    @Override
+    public List<JpcpDO> selectJpcp(Map<String, Object> map) {
+        return stockDao.selectJpcp(map);
+    }
+
+    //<!--护理液【商】【品】【查】【询】-->
+    @Override
+    public List<HlyDO> selectHly(Map<String, Object> map) {
+        return stockDao.selectHly(map);
+    }
+
+    //<!--太阳镜【商】【品】【查】【询】-->
+    @Override
+    public List<TyjDO> selectTyj(Map<String, Object> map) {
+        return stockDao.selectTyj(map);
+    }
+
+    //<!--老花镜【商】【品】【查】【询】-->
+    @Override
+    public List<OldlensDO> selectLhj(Map<String, Object> map) {
+        return stockDao.selectLhj(map);
+    }
+
+    //<!--耗材【商】【品】【查】【询】-->
+    @Override
+    public List<HcDO> selectHc(Map<String, Object> map) {
+        return stockDao.selectHc(map);
+    }
+
+    //<!--视光【商】【品】【查】【询】-->
+
+    @Override
+    public List<ShiguangDO> selectSg(Map<String, Object> map) {
+        return stockDao.selectSg(map);
+    }
 }

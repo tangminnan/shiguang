@@ -2,7 +2,7 @@ package com.shiguang.stock.service;
 
 
 import com.shiguang.mfrs.domain.PositionDO;
-import com.shiguang.product.domain.PartsDO;
+import com.shiguang.product.domain.*;
 import com.shiguang.stock.domain.StockDO;
 
 import java.util.List;
@@ -78,6 +78,30 @@ public interface StockService {
 
     StockDO getGoodsNum(String goodsNum);
 
+    //<!--镜架【商】【品】【查】【询】-->
+    List<ProducaDO> selectJingjia(Map<String, Object> map);
+
     //<!--配件【商】【品】【查】【询】-->
-    List<PartsDO> selectPj(Map<String, Object> map);
+    List<PartsDO> selectPeijian(Map<String, Object> map);
+
+    //<!--镜片定做【商】【品】【查】【询】-->
+    List<JpdzDO> selectJpdz(Map<String, Object> map);
+
+    //<!--镜片成品【商】【品】【查】【询】-->
+    List<JpcpDO> selectJpcp(Map<String, Object> map);
+
+    //<!--护理液【商】【品】【查】【询】-->
+    List<HlyDO> selectHly(Map<String, Object> map);
+
+    //<!--太阳镜【商】【品】【查】【询】-->
+    List<TyjDO> selectTyj(Map<String, Object> map);
+
+    //<!--老花镜【商】【品】【查】【询】-->
+    List<OldlensDO> selectLhj(Map<String, Object> map);
+
+    //<!--耗材【商】【品】【查】【询】-->
+    List<HcDO> selectHc(Map<String, Object> map);
+
+    //<!--视光【商】【品】【查】【询】-->
+    List<ShiguangDO> selectSg(Map<String, Object> map);
 }

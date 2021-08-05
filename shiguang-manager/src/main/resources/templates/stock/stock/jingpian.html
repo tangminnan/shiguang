@@ -17,14 +17,16 @@
     <table border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>商品代码：</td>
-            <td><input type="text" value="2.56.12.74.56.321"></td>
+            <td>
+                <input id="producNum" name="producNum" type="text">
+            </td>
             <td>商品条码：</td>
             <td>
-                <input type="text" value="256987456321"/>
+                <input id="producCode" name="producCode" type="text"/>
             </td>
             <td>商品名称：</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
+                <input id="producName" name="producName" type="text"/>
             </td>
         </tr>
         <tr>
@@ -35,10 +37,10 @@
             </td>
             <td>商品品种：</td>
             <td>
-                <input type="text"/>
+                <input type="text" th:value="${brandname}" readonly/>
+                <input id="brandid" type="hidden" th:value="${brandid}"/>
                 <input type="button" class="XZ-btn" value="选择"/>
             </td>
-
         </tr>
         <tr>
             <td>商品类别：</td>
@@ -62,11 +64,11 @@
             <td>
                 <input type="text"/>至<input type="text"/>
             </td>
-            <td>定做片类型：</td>
+            <td>定做类型：</td>
             <td>
-                <select>
-                    <option>成品片</option>
-                    <option>定做片</option>
+                <select id="dzlx" style="width: 80%">
+                    <option value="成品片">成品片</option>
+                    <option value="定做片">定做片</option>
                 </select>
             </td>
         </tr>
@@ -77,34 +79,54 @@
             </td>
             <td>材料分类：</td>
             <td>
-                <select>
-                    <option></option>
+                <select id="lensId" name="lensId">
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${lensDOList}"
+                            th:text="${ls.lensName}"
+                            th:value="${ls.lensId}"
+                    ></option>
                 </select>
             </td>
             <td>折射率：</td>
             <td>
-                <select>
-                    <option></option>
+                <select id="refractivityid" name="refractivityid" style="width: 80%">
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${refractivityDOList}"
+                            th:text="${ls.refractivityvalue}"
+                            th:value="${ls.refractivityid}"
+                    ></option>
                 </select>
             </td>
         </tr>
         <tr>
             <td>光度分类：</td>
             <td>
-                <select>
-                    <option></option>
+                <select id="lightId" name="lightId">
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${lightDOList}"
+                            th:text="${ls.lightName}"
+                            th:value="${ls.lightId}"
+                    ></option>
                 </select>
             </td>
             <td>镜片功能：</td>
             <td>
-                <select>
-                    <option></option>
+                <select id="functionId" name="functionId">
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${functionDOList}"
+                            th:text="${ls.functionName}"
+                            th:value="${ls.functionId}"
+                    ></option>
                 </select>
             </td>
             <td>渐进片分类：</td>
             <td>
-                <select>
-                    <option></option>
+                <select id="gradualId" name="gradualId" style="width: 80%">
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${gradualDOList}"
+                            th:text="${ls.gradualName}"
+                            th:value="${ls.gradualId}"
+                    ></option>
                 </select>
             </td>
         </tr>
@@ -127,14 +149,14 @@
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input type="button" value="查询"/>
+        <input type="button" value="查询" onclick="getJingpian()"/>
         <input type="button" class="empty" value="清空"/>
     </div>
 </div>
 
 <!--商品信息-->
 <div class="m40 tabS msgBoxDD">
-    <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+    <table border="0" cellspacing="0" cellpadding="0" class="buyBtns" id="buyBtns">
         <tbody>
         <tr class="thead">
             <td>全选 <input type="checkbox"/></td>
@@ -152,27 +174,121 @@
             <td>材料分类</td>
             <td>渐进片分类</td>
             <td>镜片功能</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox"/></td>
-            <td>2.32.000002300.068</td>
-            <td>聊城配件名称</td>
-            <td>副</td>
-            <td>厂家型号</td>
-            <td>0.00</td>
-            <td>388.00</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>批发价格</td>
+            <td>调货成本</td>
+            <td>商品条码</td>
         </tr>
         </tbody>
     </table>
 </div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/stock/stock.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var mfrsid = $("#mfrsid").val();
+        $.ajax({
+            url: '/stock/stock/selectJpcp',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'mfrsid': mfrsid
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    $(".buyBtns").append("<tr id='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
+                        "            <td name='producName'>" + xml[i].producName + "</td>\n" +
+                        "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
+                        "            <td name='factory'>" + "" + "</td>\n" +
+                        "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                        "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
+                        "            <td name='sph'>" + xml[i].sph + "</td>\n" +
+                        "            <td name='cyl'>" + xml[i].cyl + "</td>\n" +
+                        "            <td name='lightbelow'>" + xml[i].lightbelow + "</td>\n" +
+                        "            <td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
+                        "            <td name='lightName'>" + xml[i].lightName + "</td>\n" +
+                        "            <td name='lensName'>" + xml[i].lensName + "</td>\n" +
+                        "            <td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
+                        "            <td name='functionName'>" + xml[i].functionName + "</td>\n" +
+                        "            <td name='tradePrice'>" + xml[i].tradePrice + "</td>\n" +
+                        "            <td name='transferPrice'>" + xml[i].transferPrice + "</td>\n" +
+                        "            <td name='producCode'>" + xml[i].producCode + "</td></tr>>");
+                }
+            }
+        })
+    });
 
+    function getJingpian() {
+        $(" #val").remove();
+        var dzlx = $("#dzlx option:selected").val();
+        if (dzlx == "成品片") {
+            var mfrsid = $("#mfrsid").val();
+            $.ajax({
+                url: '/stock/stock/selectJpcp',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    'mfrsid': mfrsid
+                },
+                success: function (xml) {
+                    for (var i = 0; i < xml.length; i++) {
+                        $(".buyBtns").append("<tr id='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                            "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
+                            "            <td name='producName'>" + xml[i].producName + "</td>\n" +
+                            "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
+                            "            <td name='factory'>" + "" + "</td>\n" +
+                            "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
+                            "            <td name='sph'>" + xml[i].sph + "</td>\n" +
+                            "            <td name='cyl'>" + xml[i].cyl + "</td>\n" +
+                            "            <td name='lightbelow'>" + xml[i].lightbelow + "</td>\n" +
+                            "            <td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
+                            "            <td name='lightName'>" + xml[i].lightName + "</td>\n" +
+                            "            <td name='lensName'>" + xml[i].lensName + "</td>\n" +
+                            "            <td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
+                            "            <td name='functionName'>" + xml[i].functionName + "</td>\n" +
+                            "            <td name='tradePrice'>" + xml[i].tradePrice + "</td>\n" +
+                            "            <td name='transferPrice'>" + xml[i].transferPrice + "</td>\n" +
+                            "            <td name='producCode'>" + xml[i].producCode + "</td></tr>>");
+                    }
+                }
+            })
+        } else if (dzlx == "定做片") {
+            $("#val").remove();
+            var mfrsid = $("#mfrsid").val();
+            $.ajax({
+                url: '/stock/stock/selectJpdz',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    'mfrsid': mfrsid
+                },
+                success: function (xml) {
+                    for (var i = 0; i < xml.length; i++) {
+                        $(".buyBtns").append("<tr id='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                            "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
+                            "            <td name='producName'>" + xml[i].producName + "</td>\n" +
+                            "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
+                            "            <td name='factory'>" + xml[i].factory + "</td>\n" +
+                            "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
+                            "            <td name='sph'>" + xml[i].sphUp + "/" + xml[i].sphDown + "</td>\n" +
+                            "            <td name='cyl'>" + xml[i].cylUp + "/" + xml[i].cylDown + "</td>\n" +
+                            "            <td name='lightbelow'>" + xml[i].lightbelowRight + "/" + xml[i].lightbelowLeft + "</td>\n" +
+                            "            <td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
+                            "            <td name='lightName'>" + xml[i].lightName + "</td>\n" +
+                            "            <td name='lensName'>" + xml[i].lensName + "</td>\n" +
+                            "            <td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
+                            "            <td name='functionName'>" + xml[i].functionName + "</td>\n" +
+                            "            <td name='tradePrice'>" + xml[i].tradePrice + "</td>\n" +
+                            "            <td name='transferPrice'>" + xml[i].transferPrice + "</td>\n" +
+                            "            <td name='producCode'>" + xml[i].producCode + "</td></tr>>");
+                    }
+                }
+            })
+        }
+    }
+
+</script>
 </body>
 </html>

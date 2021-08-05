@@ -6,9 +6,9 @@
     <meta name="description" content=""/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>商品查询</title>
-    <link rel="stylesheet" href="css/css.css" type="text/css">
-    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 <body>
 <!--查询条件-->
@@ -37,7 +37,8 @@
             </td>
             <td>商品品种：</td>
             <td>
-                <input type="text"/>
+                <input type="text" th:value="${brandname}" readonly/>
+                <input id="brandid" type="hidden" th:value="${brandid}"/>
                 <input type="button" class="XZ-btn" value="选择"/>
             </td>
         </tr>
@@ -57,13 +58,13 @@
         <tr>
             <td>型号：</td>
             <td>
-                <input type="text"/>
+                <input id="producFactory" name="producFactory" type="text"/>
             </td>
         </tr>
         <tr>
             <td>厂家型号：</td>
             <td>
-                <input type="text"/>
+                <input id="factory" name="factory" type="text"/>
             </td>
         </tr>
         <tr>
@@ -79,7 +80,7 @@
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input type="button" value="查询"/>
+        <input type="button" value="查询" onclick="getSg()"/>
         <input type="button" class="empty" value="清空"/>
     </div>
 </div>
@@ -97,20 +98,81 @@
             <td>单位</td>
             <td>标准零售价格</td>
             <td>含税成本</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox"/></td>
-            <td>2.32.000002300.068</td>
-            <td>聊城配件名称</td>
-            <td></td>
-            <td></td>
-            <td>片</td>
-            <td>0.00</td>
-            <td>388.00</td>
+            <td>批发价格</td>
+            <td>调货成本</td>
+            <td>商品条码</td>
         </tr>
         </tbody>
     </table>
 </div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/stock/stock.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var mfrsid = $("#mfrsid").val();
+        $.ajax({
+            url: '/stock/stock/selectSg',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'mfrsid': mfrsid
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    $(".buyBtns").append("<tr id='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
+                        "            <td name='producName'>" + xml[i].producName + "</td>\n" +
+                        "            <td name='producFactory'>" + xml[i].producFactory + "</td>\n" +
+                        "            <td name='factory'>" + xml[i].factory + "</td>\n" +
+                        "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
+                        "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                        "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
+                        "            <td name='tradePrice'>" + xml[i].tradePrice + "</td>\n" +
+                        "            <td name='transferPrice'>" + xml[i].transferPrice + "</td>\n" +
+                        "            <td name='producCode'>" + xml[i].producCode + "</td></tr>>");
+                }
+            }
+        })
+    });
 
+    function getSg() {
+        var producNum = $("#producNum").val();
+        var producCode = $("#producCode").val();
+        var producName = $("#producName").val();
+        var mfrsid = $("#mfrsid").val();
+        var brandid = $("#brandid").val();
+        var producFactory = $("#producFactory").val();
+        var factory = $("#factory").val();
+        $.ajax({
+            url: '/stock/stock/selectSg',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'producNum': producNum,
+                'producCode': producCode,
+                'producName': producName,
+                'mfrsid': mfrsid,
+                'brandid': brandid,
+                'producFactory': producFactory,
+                'factory': factory
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    $(".buyBtns").append("<tr id='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
+                        "            <td name='producName'>" + xml[i].producName + "</td>\n" +
+                        "            <td name='producFactory'>" + xml[i].producFactory + "</td>\n" +
+                        "            <td name='factory'>" + xml[i].factory + "</td>\n" +
+                        "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
+                        "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                        "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
+                        "            <td name='tradePrice'>" + xml[i].tradePrice + "</td>\n" +
+                        "            <td name='transferPrice'>" + xml[i].transferPrice + "</td>\n" +
+                        "            <td name='producCode'>" + xml[i].producCode + "</td></tr>>");
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>

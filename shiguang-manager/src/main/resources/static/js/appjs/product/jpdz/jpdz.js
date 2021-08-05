@@ -94,55 +94,55 @@ function load() {
                     //     field: 'unitid',
                     //     title: '计量单位'
                     // },
-                    {
-                        field: 'sph',
-                        title: '球镜'
-                    },
+                    // {
+                    //     field: 'sph',
+                    //     title: '球镜'
+                    // },
                     // {
                     //     field: 'spanId',
                     //     title: '跨度id'
                     // },
                     // {
+                    // {
+                    //     field: 'cyl',
+                    //     title: '柱镜'
+                    // },
                     {
-                        field: 'cyl',
-                        title: '柱镜'
+                        field: 'sphUp',
+                        title: '球镜上限'
                     },
-                    // {
-                    //     field: 'sphUp',
-                    //     title: '球镜上限'
-                    // },
-                    // {
-                    //     field: 'sphDown',
-                    //     title: '球镜下限'
-                    // },
+                    {
+                        field: 'sphDown',
+                        title: '球镜下限'
+                    },
                     // {
                     //     field: 'sphSpan',
                     //     title: '球镜跨度'
                     // },
-                    // {
-                    //     field: 'cylUp',
-                    //     title: '柱镜上限'
-                    // },
-                    // {
-                    //     field: 'cylDown',
-                    //     title: '柱镜下限'
-                    // },
+                    {
+                        field: 'cylUp',
+                        title: '柱镜上限'
+                    },
+                    {
+                        field: 'cylDown',
+                        title: '柱镜下限'
+                    },
                     // {
                     //     field: 'cylSpan',
                     //     title: '柱镜跨度'
                     // },
+                    // {
+                    //     field: 'lightbelow',
+                    //     title: '下加光'
+                    // },
                     {
-                        field: 'lightbelow',
-                        title: '下加光'
+                        field: 'lightbelowRight',
+                        title: '下加光左'
                     },
-                    // {
-                    //     field: 'lightbelowRight',
-                    //     title: '下加光左'
-                    // },
-                    // {
-                    //     field: 'lightbelowLeft',
-                    //     title: '下加光右'
-                    // },
+                    {
+                        field: 'lightbelowLeft',
+                        title: '下加光右'
+                    },
                     // {
                     //     field: 'lensId',
                     //     title: '材料分类id'

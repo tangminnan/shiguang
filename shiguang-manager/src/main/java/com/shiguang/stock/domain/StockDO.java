@@ -23,23 +23,23 @@ public class StockDO implements Serializable {
     //商品名称
     private String goodsName;
     //数量
-    private Long goodsCount;
+    private String goodsCount;
     //商品类别
     private String goodsType;
     //制造商id
     private Integer mfrsid;
     //标准零售价格
-    private Double retailPrice;
+    private String retailPrice;
     //原价合计
-    private Double priceSum;
+    private String priceSum;
     //成本价格
-    private Double costPrice;
+    private String costPrice;
     //成本合计
-    private Double costSum;
+    private String costSum;
     //批发价格
-    private Double wholePrice;
+    private String wholePrice;
     //批发合计
-    private Double wholeSum;
+    private String wholeSum;
     //仓位名称
     private String positionName;
     //入库时间
@@ -62,6 +62,27 @@ public class StockDO implements Serializable {
     private String beizhu;
     //单位
     private String unit;
+    //调货成本
+    private String transferPrice;
+    //调货成本合计
+    private String transferPricecount;
+
+    public String getTransferPrice() {
+        return transferPrice;
+    }
+
+    public void setTransferPrice(String transferPrice) {
+        this.transferPrice = transferPrice;
+    }
+
+    public String getTransferPricecount() {
+        return transferPricecount;
+    }
+
+    public void setTransferPricecount(String transferPricecount) {
+        this.transferPricecount = transferPricecount;
+    }
+
     //尺寸
     private String size;
     //型号
@@ -187,14 +208,14 @@ public class StockDO implements Serializable {
     /**
      * 设置：数量
      */
-    public void setGoodsCount(Long goodsCount) {
+    public void setGoodsCount(String goodsCount) {
         this.goodsCount = goodsCount;
     }
 
     /**
      * 获取：数量
      */
-    public Long getGoodsCount() {
+    public String getGoodsCount() {
         return goodsCount;
     }
 
@@ -229,84 +250,84 @@ public class StockDO implements Serializable {
     /**
      * 设置：标准零售价格
      */
-    public void setRetailPrice(Double retailPrice) {
+    public void setRetailPrice(String retailPrice) {
         this.retailPrice = retailPrice;
     }
 
     /**
      * 获取：标准零售价格
      */
-    public Double getRetailPrice() {
+    public String getRetailPrice() {
         return retailPrice;
     }
 
     /**
      * 设置：原价合计
      */
-    public void setPriceSum(Double priceSum) {
+    public void setPriceSum(String priceSum) {
         this.priceSum = priceSum;
     }
 
     /**
      * 获取：原价合计
      */
-    public Double getPriceSum() {
+    public String getPriceSum() {
         return priceSum;
     }
 
     /**
      * 设置：成本价格
      */
-    public void setCostPrice(Double costPrice) {
+    public void setCostPrice(String costPrice) {
         this.costPrice = costPrice;
     }
 
     /**
      * 获取：成本价格
      */
-    public Double getCostPrice() {
+    public String getCostPrice() {
         return costPrice;
     }
 
     /**
      * 设置：成本合计
      */
-    public void setCostSum(Double costSum) {
+    public void setCostSum(String costSum) {
         this.costSum = costSum;
     }
 
     /**
      * 获取：成本合计
      */
-    public Double getCostSum() {
+    public String getCostSum() {
         return costSum;
     }
 
     /**
      * 设置：批发价格
      */
-    public void setWholePrice(Double wholePrice) {
+    public void setWholePrice(String wholePrice) {
         this.wholePrice = wholePrice;
     }
 
     /**
      * 获取：批发价格
      */
-    public Double getWholePrice() {
+    public String getWholePrice() {
         return wholePrice;
     }
 
     /**
      * 设置：批发合计
      */
-    public void setWholeSum(Double wholeSum) {
+    public void setWholeSum(String wholeSum) {
         this.wholeSum = wholeSum;
     }
 
     /**
      * 获取：批发合计
      */
-    public Double getWholeSum() {
+    public String getWholeSum() {
         return wholeSum;
     }
 
@@ -443,9 +464,13 @@ public class StockDO implements Serializable {
         this.size = size;
     }
 
-    public void setUnit(String unit) {this.unit = unit;}
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
-    public String getUnit() {return unit;}
+    public String getUnit() {
+        return unit;
+    }
 
     /**
      * 获取：尺寸

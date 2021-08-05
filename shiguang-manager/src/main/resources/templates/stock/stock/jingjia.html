@@ -37,7 +37,8 @@
             </td>
             <td>商品品种：</td>
             <td>
-                <input type="text"/>
+                <input type="text" th:value="${brandname}" readonly/>
+                <input id="brandid" type="hidden" th:value="${brandid}"/>
                 <input type="button" class="XZ-btn" value="选择"/>
             </td>
         </tr>
@@ -57,38 +58,43 @@
         <tr>
             <td>厂家色号：</td>
             <td>
-                <input type="text">
+                <input id="producFactorycolor" name="producFactorycolor" type="text">
             </td>
 
             <td>镜架尺寸：</td>
             <td>
-                <input type="text"/>
+                <input id="size" name="size" type="text"/>
             </td>
             <td>镜架材质：</td>
             <td>
-                <select>
-                    <option value="00">--请选择--</option>
+                <select id="materialid" name="materialid" style="width: 80%">
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${materialDOList}" th:text="${ls.materialname}"
+                            th:value="${ls.materialid}"></option>
                 </select>
             </td>
         </tr>
         <tr>
             <td>工艺类型：</td>
             <td>
-                <select>
-                    <option value="00">--请选择--</option>
+                <select id="technologyId" name="technologyId">
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${technologyDOList}"
+                            th:text="${ls.technologyType}"
+                            th:value="${ls.technologyId}"></option>
                 </select>
             </td>
         </tr>
         <tr>
             <td>型号：</td>
             <td>
-                <input type="text"/>
+                <input id="producFactory" name="producFactory" type="text"/>
             </td>
         </tr>
         <tr>
             <td>厂家型号：</td>
             <td>
-                <input type="text"/>
+                <input id="factory" name="factory" type="text"/>
             </td>
         </tr>
         <tr>
@@ -104,7 +110,7 @@
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input type="button" value="查询"/>
+        <input type="button" value="查询" onclick="getJIngjia()"/>
         <input type="button" class="empty" value="清空"/>
     </div>
 </div>
@@ -125,22 +131,96 @@
             <td>厂家色号</td>
             <td>镜架材质</td>
             <td>镜架尺寸</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox"/></td>
-            <td>2.32.000002300.068</td>
-            <td>聊城配件名称</td>
-            <td>型号</td>
-            <td>副</td>
-            <td>厂家型号</td>
-            <td>0.00</td>
-            <td>388.00</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>批发价格</td>
+            <td>调货成本</td>
+            <td>商品条码</td>
         </tr>
         </tbody>
     </table>
 </div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/stock/stock.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var mfrsid = $("#mfrsid").val();
+        $(".val").remove();
+        $.ajax({
+            url: '/stock/stock/selectjingjia',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'mfrsid': mfrsid
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    $(".buyBtns").append("<tr class='val'> <td><input name='one' type=\"checkbox\"/></td>\n" +
+                        "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
+                        "            <td name='producName'>" + xml[i].producName + "</td>\n" +
+                        "            <td name='producFactory'>" + xml[i].producFactory + "</td>\n" +
+                        "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
+                        "            <td name='factory'>" + xml[i].factory + "</td>\n" +
+                        "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                        "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
+                        "            <td name='producFactorycolor'>" + xml[i].producFactorycolor + "</td>\n" +
+                        "            <td name='materialName'>" + xml[i].materialName + "</td>\n" +
+                        "            <td name='size'>" + xml[i].size + "</td>\n" +
+                        "            <td name='tradePrice'>" + xml[i].tradePrice + "</td>\n" +
+                        "            <td name='transferPrice'>" + xml[i].transferPrice + "</td>\n" +
+                        "            <td name='producCode' >" + xml[i].producCode + "</td></tr>>");
+                }
+            }
+        })
+    });
+
+    function getJIngjia() {
+        var producNum = $("#producNum").val();
+        var producCode = $("#producCode").val();
+        var producName = $("#producName").val();
+        var mfrsid = $("#mfrsid").val();
+        var brandid = $("#brandid").val();
+        var producFactorycolor = $("#producFactorycolor").val();
+        var size = $("#size").val();
+        var materialid = $("#materialid option:selected").val();
+        var technologyId = $("#technologyId option:selected").val();
+        var producFactory = $("#producFactory").val();
+        var factory = $("#factory").val();
+        $(".val").remove();
+        $.ajax({
+            url: '/stock/stock/selectjingjia',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'producNum': producNum,
+                'producCode': producCode,
+                'producName': producName,
+                'mfrsid': mfrsid,
+                'brandid': brandid,
+                'producFactorycolor': producFactorycolor,
+                'size': size,
+                'materialid': materialid,
+                'technologyId': technologyId,
+                'producFactory': producFactory,
+                'factory': factory
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    $(".buyBtns").append("<tr class='val'> <td><input name='one' type=\"checkbox\"/></td>\n" +
+                        "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
+                        "            <td name='producName'>" + xml[i].producName + "</td>\n" +
+                        "            <td name='producFactory'>" + xml[i].producFactory + "</td>\n" +
+                        "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
+                        "            <td name='factory'>" + xml[i].factory + "</td>\n" +
+                        "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                        "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
+                        "            <td name='producFactorycolor'>" + xml[i].producFactorycolor + "</td>\n" +
+                        "            <td name='materialName'>" + xml[i].materialName + "</td>\n" +
+                        "            <td name='size'>" + xml[i].size + "</td>\n" +
+                        "            <td name='producCode' >" + xml[i].producCode + "</td></tr>>");
+                }
+            }
+        })
+    }
+
+</script>
 </body>
 </html>
