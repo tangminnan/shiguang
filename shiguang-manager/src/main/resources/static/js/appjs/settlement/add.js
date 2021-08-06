@@ -39,12 +39,24 @@ function validateRule() {
 		rules : {
 			name : {
 				required : true
-			}
+			},
+            payModel : {
+                required : true
+            },
+            payMoney : {
+                required : true
+            }
 		},
 		messages : {
 			name : {
 				required : icon + "请输入姓名"
-			}
+			},
+            payModel : {
+                required : icon + "请选择支付方式"
+            },
+            payMoney : {
+                required : icon + "请输入缴费金额"
+            }
 		}
 	})
 }

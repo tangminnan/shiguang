@@ -314,36 +314,56 @@ public class SettlementController {
 //		}
 //		model.addAttribute("goodsNameList",goodsNameList);
 		//ResultDO resultDO = resultService.
-		String processAsk = settlementDO.getProcessAsk();
-		String[] processStr = processAsk.split(",");
 		List<String> processList = new ArrayList<>();
-		for (int i=0;i<processStr.length;i++){
-			processList.add(processStr[i]);
+		String processAsk = settlementDO.getProcessAsk();
+		if (null != processAsk){
+			String[] processStr = processAsk.split(",");
+			for (int i=0;i<processStr.length;i++){
+				processList.add(processStr[i]);
+			}
+			model.addAttribute("processList",processList);
+		} else {
+			model.addAttribute("processList","");
 		}
-		model.addAttribute("processList",processList);
+
 		List<String> additionalCostList = new ArrayList<>();
 		String additionalCost = settlementDO.getAdditionalCost();
-		String[] addCostStr = additionalCost.split(",");
-		for (int l=0;l<addCostStr.length;l++){
-			additionalCostList.add(addCostStr[l]);
+		if (null != additionalCost){
+			String[] addCostStr = additionalCost.split(",");
+			for (int l=0;l<addCostStr.length;l++){
+				additionalCostList.add(addCostStr[l]);
+			}
+			model.addAttribute("additionalCostList",additionalCostList);
+		} else {
+			model.addAttribute("additionalCostList","");
 		}
-		model.addAttribute("additionalCostList",additionalCostList);
+
+
 		String addPrice = settlementDO.getAdditionalPrice();
-		String[] addPriceStr = addPrice.split(",");
 		Double priceSum = 0.00;
-		for (int d=0;d<addPriceStr.length;d++){
-			String price = addPriceStr[d];
-			priceSum = priceSum+Double.parseDouble(price);
+		if (null != addPrice){
+			String[] addPriceStr = addPrice.split(",");
+			for (int d=0;d<addPriceStr.length;d++){
+				String price = addPriceStr[d];
+				priceSum = priceSum+Double.parseDouble(price);
+			}
+			model.addAttribute("priceSum",priceSum);
+		} else {
+			model.addAttribute("priceSum","");
 		}
-		model.addAttribute("priceSum",priceSum);
 		String addCount = settlementDO.getAdditionalCount();
-		String[] addCountStr = addCount.split(",");
 		Integer countSum=0;
-		for (int f=0;f<addCountStr.length;f++){
-			String count = addCountStr[f];
-			countSum = countSum + Integer.parseInt(count);
+		if (null != addCount){
+			String[] addCountStr = addCount.split(",");
+			for (int f=0;f<addCountStr.length;f++){
+				String count = addCountStr[f];
+				countSum = countSum + Integer.parseInt(count);
+			}
+			model.addAttribute("countSum",countSum);
+		} else {
+			model.addAttribute("countSum","");
 		}
-		model.addAttribute("countSum",countSum);
+
 		return "settlement/peijingdan";
 	}
 
