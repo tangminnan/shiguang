@@ -226,4 +226,9 @@ public class StockServiceImpl implements StockService {
     public List<ShiguangDO> selectSg(Map<String, Object> map) {
         return stockDao.selectSg(map);
     }
+
+    @Override
+    public int updateGoodsCount(StockDO stock) {
+        return stockDao.updateGoodsCount(stock);
+    }
 }

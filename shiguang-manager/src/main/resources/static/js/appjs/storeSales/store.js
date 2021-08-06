@@ -25,26 +25,26 @@ function getKjpeijian() {
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>框镜</td>";
                 html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
-                html += "<input id='unit' name='unit' type='hidden' />"
-                html += "<input id='storeName'name='storeName' type='hidden' />"
-                html += "<input id='goodsNum'name='goodsNum' type='hidden' />"
-                html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='unit' name='unit' type='hidden' value='"+rows[i].unit+"'/>"
+                html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='镜架配件' type='hidden' />"
                 $("#goods").append(html);
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                arraystore.push(rows[i].goodsName);
-                arrayunit.push(rows[i].retailPrice);
-                unitarray.push(rows[i].unit);
-                goodsNumArray.push(rows[i].goodsNum);
+                //arraystore.push(rows[i].goodsName);
+                //arrayunit.push(rows[i].retailPrice);
+                //unitarray.push(rows[i].unit);
+                //goodsNumArray.push(rows[i].goodsNum);
                 arraycount.push(1)
             }
-            $("#storeName").val(arraystore);
-            $("#storeUnit").val(arrayunit);
+            //$("#storeName").val(arraystore);
+            //$("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
-            $("#unit").val(unitarray);
-            $("#goodsNum").val(goodsNumArray);
+            //$("#unit").val(unitarray);
+            //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
             lis =  "<li>原价金额："+price+"</li>";

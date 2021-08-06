@@ -13,7 +13,9 @@ import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
+import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.PositionDO;
+import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.domain.ProcessAskDO;
 import com.shiguang.optometry.service.OptometryService;
@@ -106,6 +108,8 @@ public class StoreSalesController {
     private PackageInfoService packageInfoService;
     @Autowired
     private LogStatusService logStatusService;
+    @Autowired
+    private GoodsService goodsService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -441,7 +445,7 @@ public class StoreSalesController {
                 Long countGoods = Long.parseLong(stockDO.getGoodsCount());
                 Long count = countGoods - 1;
                 stockDO.setGoodsCount(String.valueOf(count));
-                stockService.update(stockDO);
+                stockService.updateGoodsCount(stockDO);
             }
         }
         LogStatusDO logStatusDO = new LogStatusDO();
@@ -574,13 +578,24 @@ public class StoreSalesController {
         //query.put("goodsType","镜架");
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        map.put("departNumber", departNumber);
-        PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO) {
-            positionName = positionDO.getPositionName();
+        if (null != departNumber){
+            map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            if (null != positionDO) {
+                positionName = positionDO.getPositionName();
+            }
         }
         query.put("positionName", positionName);
+//        query.put("goodsType","1");
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("镜架".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
         List<StockDO> stockDOList = stockService.listJiajia(query);
         int total = stockService.countJiajia(query);
         PageUtils pageUtils = new PageUtils(stockDOList, total);
@@ -624,6 +639,14 @@ public class StoreSalesController {
             }
             query.put("positionName", positionName);
         }
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("镜片".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
         if (null != params.get("dzType")) {
             String dzType = params.get("dzType").toString();
             if ("0".equals(params.get("jingpianType").toString())) {
@@ -675,13 +698,23 @@ public class StoreSalesController {
         query.put("partsStyle", "框镜");
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        map.put("departNumber", departNumber);
-        PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO) {
-            positionName = positionDO.getPositionName();
+        if(null != departNumber){
+            map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            if (null != positionDO) {
+                positionName = positionDO.getPositionName();
+            }
         }
         query.put("positionName", positionName);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("配件".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
         List<StockDO> partsDOList = stockService.listJiajiapj(query);
         int total = stockService.countJiajiapj(query);
         PageUtils pageUtils = new PageUtils(partsDOList, total);
@@ -711,13 +744,23 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        map.put("departNumber", departNumber);
-        PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO) {
-            positionName = positionDO.getPositionName();
+        if (null != departNumber){
+            map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            if (null != positionDO) {
+                positionName = positionDO.getPositionName();
+            }
         }
         query.put("positionName", positionName);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("太阳镜".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
         List<StockDO> tyjDOList = stockService.listTaiyj(query);
         int total = stockService.countTaiyj(query);
         PageUtils pageUtils = new PageUtils(tyjDOList, total);
@@ -747,13 +790,23 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        map.put("departNumber", departNumber);
-        PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO) {
-            positionName = positionDO.getPositionName();
+        if (null != departNumber){
+            map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            if (null != positionDO) {
+                positionName = positionDO.getPositionName();
+            }
         }
         query.put("positionName", positionName);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("耗材".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
         List<StockDO> hcDOList = stockService.listHaocai(query);
         int total = stockService.countHaocai(query);
         PageUtils pageUtils = new PageUtils(hcDOList, total);
@@ -783,13 +836,24 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        map.put("departNumber", departNumber);
-        PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO) {
-            positionName = positionDO.getPositionName();
+        if (null != departNumber){
+            map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+
+            if (null != positionDO) {
+                positionName = positionDO.getPositionName();
+            }
         }
         query.put("positionName", positionName);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("老花镜".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
         List<StockDO> oldlensDOList = stockService.listLaohj(query);
         int total = stockService.countLaohj(query);
         PageUtils pageUtils = new PageUtils(oldlensDOList, total);
@@ -819,13 +883,23 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        map.put("departNumber", departNumber);
-        PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO) {
-            positionName = positionDO.getPositionName();
+        if (null != departNumber){
+            map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            if (null != positionDO) {
+                positionName = positionDO.getPositionName();
+            }
         }
         query.put("positionName", positionName);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("视光".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
         List<StockDO> shiguangDOList = stockService.listShiguang(query);
         int total = stockService.countShiguang(query);
         PageUtils pageUtils = new PageUtils(shiguangDOList, total);
@@ -855,13 +929,23 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        map.put("departNumber", departNumber);
-        PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO) {
-            positionName = positionDO.getPositionName();
+        if (null != departNumber){
+            map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            if (null != positionDO) {
+                positionName = positionDO.getPositionName();
+            }
         }
         query.put("positionName", positionName);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("护理液".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
         List<StockDO> hlyDOList = stockService.listHuly(query);
         int total = stockService.countHuly(query);
         PageUtils pageUtils = new PageUtils(hlyDOList, total);
@@ -891,13 +975,24 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        map.put("departNumber", departNumber);
-        PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO) {
-            positionName = positionDO.getPositionName();
+        if (null != departNumber) {
+            map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            if (null != positionDO) {
+                positionName = positionDO.getPositionName();
+            }
         }
+
         query.put("positionName", positionName);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("配件".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
         List<StockDO> partsDOList = stockService.listJiajiapj(query);
         int total = stockService.countJiajiapj(query);
         PageUtils pageUtils = new PageUtils(partsDOList, total);
@@ -930,6 +1025,15 @@ public class StoreSalesController {
         //查询列表数据
         Query query = new Query(params);
         PageUtils pageUtils = null;
+        Map<String,Object> mapstr = new HashMap<>();
+        List<GoodsDO> goodsDOList = goodsService.list(mapstr);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("隐形".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+
         if (null != params.get("yxType")) {
             if ("0".equals(params.get("jingpianType").toString())) {
                 query.put("rightYuanYongQJ", params.get("rightYuanYongQJ"));
@@ -944,14 +1048,17 @@ public class StoreSalesController {
                 pageUtils = new PageUtils(yxcpDOList, total);
             } else if ("1".equals(params.get("yxType"))) {
                 String departNumber = ShiroUtils.getUser().getStoreNum();
-                Map<String, Object> map = new HashMap<>();
-                map.put("departNumber", departNumber);
-                PositionDO positionDO = stockService.findPosition(map);
                 String positionName = "";
-                if (null != positionDO) {
-                    positionName = positionDO.getPositionName();
+                if (null != departNumber){
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("departNumber", departNumber);
+                    PositionDO positionDO = stockService.findPosition(map);
+                    if (null != positionDO) {
+                        positionName = positionDO.getPositionName();
+                    }
                 }
                 query.put("positionName", positionName);
+                query.put("goodsType",goodsId);
                 List<StockDO> yxdzDOList = stockService.listYxdz(query);
                 int total = yxdzService.count(query);
                 pageUtils = new PageUtils(yxdzDOList, total);
@@ -988,13 +1095,23 @@ public class StoreSalesController {
         query.put("partsStyle", "隐形");
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        map.put("departNumber", departNumber);
-        PositionDO positionDO = stockService.findPosition(map);
         String positionName = "";
-        if (null != positionDO) {
-            positionName = positionDO.getPositionName();
+        if (null != departNumber){
+            map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            if (null != positionDO) {
+                positionName = positionDO.getPositionName();
+            }
         }
         query.put("positionName", positionName);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("配件".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
         List<StockDO> partsDOList = stockService.listJiajiapj(query);
         int total = stockService.countJiajiapj(query);
         PageUtils pageUtils = new PageUtils(partsDOList, total);

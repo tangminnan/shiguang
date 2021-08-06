@@ -108,4 +108,7 @@ public interface StockDao {
 
     //<!--视光【商】【品】【查】【询】-->
     List<ShiguangDO> selectSg(Map<String, Object> map);
+
+    //修改库存数量
+    int updateGoodsCount(StockDO stockDO);
 }

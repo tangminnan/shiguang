@@ -162,6 +162,14 @@
         where id = #{id}
     </update>
 
+    <update id="updateGoodsCount" parameterType="com.shiguang.stock.domain.StockDO">
+        update stock
+        <set>
+        <if test="goodsCount != null">`goods_count` = #{goodsCount},</if>
+        </set>
+        where goods_num = #{goodsNum}
+    </update>
+
     <delete id="remove">
     delete from stock where id = #{value}
 </delete>
@@ -202,6 +210,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
+                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -256,16 +265,17 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph = #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%', #{rightYuanYongQJ},'%')</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%', #{rightYuanYongZJ},'%')</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%', #{leftYuanYongQJ},'%') </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%', #{leftYuanYongZJ},'%') </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
+                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -296,10 +306,10 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph = #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%', #{rightYuanYongQJ},'%')</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%', #{rightYuanYongZJ},'%')</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%', #{leftYuanYongQJ},'%') </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%', #{leftYuanYongZJ},'%') </if>
         </where>
     </select>
 
@@ -331,10 +341,10 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph = #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%', #{rightYuanYongQJ},'%')</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%', #{rightYuanYongZJ},'%')</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%', #{leftYuanYongQJ},'%') </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%', #{leftYuanYongZJ},'%') </if>
 
         </where>
         <choose>
@@ -342,6 +352,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
+                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -374,10 +385,10 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph = #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%', #{rightYuanYongQJ},'%')</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%', #{rightYuanYongZJ},'%')</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%', #{leftYuanYongQJ},'%') </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%', #{leftYuanYongZJ},'%') </if>
         </where>
     </select>
 
@@ -409,6 +420,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
+                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -418,7 +430,7 @@
     </select>
 
     <select id="countJiajiapj" resultType="int">
-        select count(*) from stock st left join aa_parts pr on pr.produc_num = st.goods_num
+        select count(*) from stock st left join aa_parts pr on pr.produc_num = st.goods_num and pr.parts_style = '框镜'
         <where>
             <if test="partsStyle != null and partsStyle != ''">and pr.parts_style = #{partsStyle}</if>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -465,6 +477,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
+                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -520,6 +533,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
+                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -575,6 +589,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
+                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -630,6 +645,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
+                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -685,6 +701,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
+                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -851,10 +868,7 @@
     </select>
 
     <select id="getGoodsNum" resultType="com.shiguang.stock.domain.StockDO">
-    select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`retail_price`,
-    `price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,
-    `order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,
-    `unit` from stock where goods_num = #{value}
+    select `id`,`goods_num`, count(goods_count) as goodsCount  from stock where goods_num = #{value} group by goods_num
 </select>
     <!--镜架【商】【品】【查】【询】-->
     <select id="selectJingjia" resultType="com.shiguang.product.domain.ProducaDO">

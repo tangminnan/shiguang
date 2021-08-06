@@ -1508,9 +1508,10 @@
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 // var rows = sessionStorage.getItem("row");
                 // alert(rows.length)
+				//alert(JSON.stringify(rows));
                 for (var i=0;i<rows.length;i++){
                     html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getSelect()'/></td>";
-                    html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].producName+"</td>";
+                    html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].goodsName+"</td>";
                     html += "<input id='storeName' name='storeName' value="+rows[i].goodsName+" text='hidden'/>"
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>"+rows[i].goodsCount+"</td>";
@@ -1523,12 +1524,12 @@
                     html += "<td>0.00</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>镜架</td>";
-                    html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].producName+"\")'></em></td>";
-                    html += "<input id='unit' name='unit' type='hidden' />"
-                    html += "<input id='storeName' name='storeName' type='hidden' />"
-                    html += "<input id='jjGoodsName' name='jjGoodsName' type='hidden' />"
-                    html += "<input id='goodsNum'name='goodsNum' type='hidden' />"
-                    html += "<input id='storeUnit' name='storeUnit' type='hidden' />"
+                    html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                    html += "<input id='unit' name='unit' type='hidden' value='"+rows[i].unit+"'/>"
+                    html += "<input id='storeName' name='storeName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                    html += "<input id='jjGoodsName' name='jjGoodsName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                    html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
+                    html += "<input id='storeUnit' name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"' />"
                     html += "<input id='storeCount' name='storeCount' type='hidden' />"
                     html += "<input id='isJj' name='isJj' type='hidden' />"
                     html += "<input id='producaNum' name='producaNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
@@ -1536,21 +1537,21 @@
                     $("#goods").append(html);
                     price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                    arraystore.push(rows[i].goodsName);
-                    arrayunit.push(rows[i].retailPrice);
-                    unitarray.push(rows[i].unit);
-                    goodsNumArray.push(rows[i].goodsNum);
-                    jjArray.push(rows[i].goodsName)
+                    //arraystore.push(rows[i].goodsName);
+                   // arrayunit.push(rows[i].retailPrice);
+                    //unitarray.push(rows[i].unit);
+                   // goodsNumArray.push(rows[i].goodsNum);
+                    //jjArray.push(rows[i].goodsName)
                     arraycount.push(1)
                     //producaNum.push(rows[i].goodsNum);
 					$("#isJj").val("有")
 				}
-                $("#storeName").val(arraystore);
-                $("#storeUnit").val(arrayunit);
-                $("#storeCount").val(arraycount);
-                $("#unit").val(unitarray);
-                $("#goodsNum").val(goodsNumArray);
-                $("#jjGoodsName").val(jjArray);
+                //$("#storeName").val(arraystore);
+                //$("#storeUnit").val(arrayunit);
+                //$("#storeCount").val(arraycount);
+                //$("#unit").val(unitarray);
+                //$("#goodsNum").val(goodsNumArray);
+                //$("#jjGoodsName").val(jjArray);
                 // $("#producaNum").val(producaNum);
                 $("#ula").empty();
                 var lis="";
@@ -1663,31 +1664,31 @@
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>镜片</td>";
                     html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
-                    html += "<input id='unit' name='unit' type='hidden' />"
-                    html += "<input id='storeName'name='storeName' type='hidden' />"
-                    html += "<input id='jpGoodsName'name='jpGoodsName' type='hidden' />"
-                    html += "<input id='goodsNum'name='goodsNum' type='hidden' />"
-                    html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                    html += "<input id='unit' name='unit' type='hidden' value='"+rows[i].unit+"'/>"
+                    html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                    html += "<input id='jpGoodsName'name='jpGoodsName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                    html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
+                    html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                     html += "<input id='storeCount'name='storeCount' type='hidden' />"
                     html += "<input id='isJp'name='isJp' type='hidden' />"
                     html += "<input id='storeDescribe'name='storeDescribe' value='镜片' type='hidden' />"
                     $("#goods").append(html);
                     price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
-                    arraystore.push(rows[i].goodsName);
-                    arrayunit.push(rows[i].retailPrice);
-                    unitarray.push(rows[i].unit);
-                    goodsNumArray.push(rows[i].goodsNum);
-                    jpArray.push(rows[i].goodsName)
+                    //arraystore.push(rows[i].goodsName);
+                    //arrayunit.push(rows[i].retailPrice);
+                    //unitarray.push(rows[i].unit);
+                   // goodsNumArray.push(rows[i].goodsNum);
+                    //jpArray.push(rows[i].goodsName)
                     arraycount.push(1);
                 }
                 $("#isJp").val(arrayjp);
-                $("#storeName").val(arraystore);
-                $("#storeUnit").val(arrayunit);
-                $("#storeCount").val(arraycount);
-                $("#unit").val(unitarray);
-                $("#goodsNum").val(goodsNumArray);
-                $("#jpGoodsName").val(jpArray);
+                //$("#storeName").val(arraystore);
+                //$("#storeUnit").val(arrayunit);
+                //$("#storeCount").val(arraycount);
+                //$("#unit").val(unitarray);
+                //$("#goodsNum").val(goodsNumArray);
+                //$("#jpGoodsName").val(jpArray);
                 $("#ula").empty();
                 var lis="";
                 lis =  "<li>原价金额："+price+"</li>";
