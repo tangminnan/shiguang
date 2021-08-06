@@ -110,9 +110,9 @@
             <td>含税成本</td>
             <td>主容量</td>
             <td>次容量</td>
-            <td>批发价格</td>
-            <td>调货成本</td>
-            <td>商品条码</td>
+            <td style="display: none">批发价格</td>
+            <td style="display: none">调货成本</td>
+            <td style="display: none">商品条码</td>
         </tr>
         </tbody>
     </table>
@@ -142,9 +142,9 @@
                         "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
                         "            <td name='mainCapacity'>" + xml[i].mainCapacity + "</td>\n" +
                         "            <td name='secondCapacity'>" + xml[i].secondCapacity + "</td>\n" +
-                        "            <td name='tradePrice'>" + xml[i].tradePrice + "</td>\n" +
-                        "            <td name='transferPrice'>" + xml[i].transferPrice + "</td>\n" +
-                        "            <td name='producCode' >" + xml[i].producCode + "</td></tr>>");
+                        "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
+                        "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
+                        "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td></tr>>");
                 }
             }
         })
@@ -188,7 +188,9 @@
                         "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
                         "            <td name='mainCapacity'>" + xml[i].mainCapacity + "</td>\n" +
                         "            <td name='secondCapacity'>" + xml[i].secondCapacity + "</td>\n" +
-                        "            <td name='producCode' >" + xml[i].producCode + "</td></tr>>");
+                        "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
+                        "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
+                        "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td></tr>>");
                 }
             }
         })

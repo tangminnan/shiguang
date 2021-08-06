@@ -27,6 +27,7 @@ public class StockServiceImpl implements StockService {
         return stockDao.list(map);
     }
 
+
     @Override
     public int count(Map<String, Object> map) {
         return stockDao.count(map);
@@ -230,5 +231,18 @@ public class StockServiceImpl implements StockService {
     @Override
     public int updateGoodsCount(StockDO stock) {
         return stockDao.updateGoodsCount(stock);
+    }
+    //判断是否存在商品信息
+
+
+    @Override
+    public StockDO haveNum(StockDO stockDO) {
+        return stockDao.haveNum(stockDO);
+    }
+
+    //    【库存查询】
+    @Override
+    public List<StockDO> kccxList(Map<String, Object> map) {
+        return stockDao.kccxList(map);
     }
 }

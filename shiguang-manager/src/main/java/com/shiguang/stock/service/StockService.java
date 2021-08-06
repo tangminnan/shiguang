@@ -107,4 +107,11 @@ public interface StockService {
 
     //修改库存数量
     int updateGoodsCount(StockDO stockDO);
+
+    //判断是否存在制造商代码
+    StockDO haveNum(StockDO stockDO);
+
+    //【库存查询】
+    List<StockDO> kccxList(Map<String, Object> map);
+
 }

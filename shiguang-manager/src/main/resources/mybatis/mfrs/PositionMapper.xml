@@ -11,28 +11,8 @@
         select
         po.`position_id`,po.`position_num`,de.`depart_number`,de.`depart_name`,po.`position_name`,po.`position_order`,po.`state_id`,po.`status`,po.`state`
         from c_position po left join department de on po.depart_number=de.depart_number
-        <where>
-            <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
-            <if test="positionNum != null and positionNum != ''">and po.position_num = #{positionNum}</if>
-            <if test="departNumber != null and departNumber != ''">and de.depart_number = #{departNumber}</if>
-            <if test="departName != null and departName != ''">and de.depart_name = #{departName}</if>
-            <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
-            <if test="positionOrder != null and positionOrder != ''">and po.position_order = #{positionOrder}</if>
-            <if test="stateId != null and stateId != ''">and po.state_id = #{stateId}</if>
-            <if test="status != null and status != ''">and po.status = #{status}</if>
-            <if test="state != null and state != ''">and po.state = #{state}</if>
-        </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-                order by position_id
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
+        where po.state=1
+        group by po.position_id order by po.status asc ,po.position_id asc
     </select>
 
     <select id="count" resultType="int">
@@ -75,17 +55,17 @@
 			#{state}
 		)
 	</insert>
-
+    <!--//修改停用启用-->
     <update id="update" parameterType="com.shiguang.mfrs.domain.PositionDO">
         update c_position
         <set>
             <if test="positionNum != null">`position_num` = #{positionNum},</if>
             <if test="departNumber != null">`depart_number` = #{departNumber},</if>
-            <if test="departName != null">`depart_name` = #{departName}, </if>
+            <if test="departName != null">`depart_name` = #{departName},</if>
             <if test="positionName != null">`position_name` = #{positionName},</if>
             <if test="positionOrder != null">`position_order` = #{positionOrder},</if>
             <if test="stateId != null">`state_id` = #{stateId},</if>
-            <if test="status != null">`status` = #{status},</if>
+            <if test="status != null">`status` = #{status}</if>
             <if test="state != null">`state` = #{state}</if>
         </set>
         where position_id = #{positionId}
@@ -101,5 +81,8 @@
             #{positionId}
         </foreach>
     </delete>
-
+    <!--删除状态修改-->
+    <update id="updateState" parameterType="com.shiguang.mfrs.domain.PositionDO">
+    update c_position set `state` = #{state} where position_id = #{positionId}
+    </update>
 </mapper>

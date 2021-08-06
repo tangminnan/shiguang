@@ -25,9 +25,29 @@ public class StockDO implements Serializable {
     //数量
     private String goodsCount;
     //商品类别
-    private String goodsType;
+    private Integer goodsType;
+    private String gdname;
+
+    public String getGdname() {
+        return gdname;
+    }
+
+    public void setGdname(String gdname) {
+        this.gdname = gdname;
+    }
+
     //制造商id
     private Integer mfrsid;
+    private String mfrsname;
+
+    public String getMfrsname() {
+        return mfrsname;
+    }
+
+    public void setMfrsname(String mfrsname) {
+        this.mfrsname = mfrsname;
+    }
+
     //标准零售价格
     private String retailPrice;
     //原价合计
@@ -222,14 +242,14 @@ public class StockDO implements Serializable {
     /**
      * 设置：商品类别
      */
-    public void setGoodsType(String goodsType) {
+    public void setGoodsType(Integer goodsType) {
         this.goodsType = goodsType;
     }
 
     /**
      * 获取：商品类别
      */
-    public String getGoodsType() {
+    public Integer getGoodsType() {
         return goodsType;
     }
 

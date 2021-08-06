@@ -116,9 +116,9 @@
             <td>老花镜度数</td>
             <td>厂家色号</td>
             <td>镜架尺寸</td>
-            <td>批发价格</td>
-            <td>调货成本</td>
-            <td>商品条码</td>
+            <td style="display: none">批发价格</td>
+            <td style="display: none">调货成本</td>
+            <td style="display: none">商品条码</td>
         </tr>
         </tbody>
     </table>
@@ -128,6 +128,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var mfrsid = $("#mfrsid").val();
+        $(".val").remove();
         $.ajax({
             url: '/stock/stock/selectLhj',
             type: 'post',
@@ -137,7 +138,7 @@
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
-                    $(".buyBtns").append("<tr id='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                    $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                         "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
                         "            <td name='producName'>" + xml[i].producName + "</td>\n" +
                         "            <td name='producFactory'>" + xml[i].producFactory + "</td>\n" +
@@ -148,9 +149,9 @@
                         "            <td name='degrees'>" + xml[i].degrees + "</td>\n" +
                         "            <td name='size'>" + xml[i].size + "</td>\n" +
                         "            <td name='producFactorycolor'>" + xml[i].producFactorycolor + "</td>\n" +
-                        "            <td name='tradePrice'>" + xml[i].tradePrice + "</td>\n" +
-                        "            <td name='transferPrice'>" + xml[i].transferPrice + "</td>\n" +
-                        "            <td name='producCode'>" + xml[i].producCode + "</td></tr>>");
+                        "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
+                        "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
+                        "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td></tr>>");
                 }
             }
         })
@@ -166,6 +167,7 @@
         var size = $("#size").val();
         var producFactory = $("#producFactory").val();
         var factory = $("#factory").val();
+        $(".val").remove();
         $.ajax({
             url: '/stock/stock/selectLhj',
             type: 'post',
@@ -183,7 +185,7 @@
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
-                    $(".buyBtns").append("<tr id='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                    $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                         "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
                         "            <td name='producName'>" + xml[i].producName + "</td>\n" +
                         "            <td name='producFactory'>" + xml[i].producFactory + "</td>\n" +
@@ -194,9 +196,9 @@
                         "            <td name='degrees'>" + xml[i].degrees + "</td>\n" +
                         "            <td name='size'>" + xml[i].size + "</td>\n" +
                         "            <td name='producFactorycolor'>" + xml[i].producFactorycolor + "</td>\n" +
-                        "            <td name='tradePrice'>" + xml[i].tradePrice + "</td>\n" +
-                        "            <td name='transferPrice'>" + xml[i].transferPrice + "</td>\n" +
-                        "            <td name='producCode'>" + xml[i].producCode + "</td></tr>>");
+                        "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
+                        "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
+                        "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td></tr>>");
                 }
             }
         })

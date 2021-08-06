@@ -84,7 +84,7 @@ public class StockController {
         model.addAttribute("positionDOList", positionDOList);
         //———获取当前登录用户的名称————
         model.addAttribute("optometryName", ShiroUtils.getUser().getName());
-//———获取当前系统时间—————
+        //———获取当前系统时间—————
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
         Date date = new Date();
         String newDate = sdf.format(date);
@@ -112,51 +112,71 @@ public class StockController {
         for (int i = 0; i < name.length; i++) {
             StockDO stockDO = new StockDO();
             String goodsNum = name[i];
-            stockDO.setGoodsNum(goodsNum);//代码
+            stockDO.setGoodsNum(goodsNum);
             String goodsCode = stock.getGoodsCode().split(",")[i];
-            stockDO.setGoodsCode(goodsCode);//条码
+            stockDO.setGoodsCode(goodsCode);
             String goodsName = stock.getGoodsName().split(",")[i];
-            stockDO.setGoodsName(goodsName);//名称
+            stockDO.setGoodsName(goodsName);
             String goodsCount = stock.getGoodsCount().toString().split(",")[i];
-            stockDO.setGoodsCount(goodsCount);//数量
-            stockDO.setGoodsType(stock.getGoodsType());//商品类别
-            stockDO.setMfrsid(stock.getMfrsid());//制造商id
 
-            String costPrice = stock.getCostPrice().split(",")[i];
-            stockDO.setRetailPrice(costPrice);//成本价格costPrice  含税单价
-            Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodsCount);
-            stockDO.setCostSum(Double.toString(costSum));////成本合计 含税单据*数量
+            //判断是否已存在商品
+            Map<String, Object> map = new HashMap<>();
+            map.put("goodsNum", goodsNum);
 
-            String wholePrice = stock.getWholePrice().split(",")[i];
-            stockDO.setWholePrice(wholePrice);//批发价格
-            Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodsCount);
-            stockDO.setCostSum(Double.toString(wholeSum));////批发合计 含税单据*数量
+            StockDO goodsNumList = stockService.haveNum(stockDO);
+            if (null != goodsNumList) {
+                String gdcount = goodsNumList.getGoodsCount();
+                Integer goodsCountNew = Integer.valueOf(goodsCount);
+                Integer gdcountNew = Integer.valueOf(gdcount);
+                Integer newGoodsCount = goodsCountNew + gdcountNew;
+                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+                stockService.updateGoodsCount(stockDO);
+            } else {
+                stockDO.setGoodsCount(goodsCount);//数量
+                stockDO.setGoodsType(stock.getGoodsType());
+                stockDO.setMfrsid(stock.getMfrsid());
+
+                String costPrice = stock.getCostPrice().split(",")[i];
+                stockDO.setCostPrice(costPrice);
+                Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodsCount);
+                stockDO.setCostSum(Double.toString(costSum));
+
+                String wholePrice = stock.getWholePrice().split(",")[i];
+                stockDO.setWholePrice(wholePrice);
+                Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodsCount);
+                stockDO.setWholeSum(Double.toString(wholeSum));
 
 //            String transferPrice = stock.getTransferPrice().split(",")[i];
 //            stockDO.setTransferPrice(transferPrice);
 //            Double transferPricecount = Double.parseDouble(transferPrice) * Double.parseDouble(goodsCount);
 //            stockDO.setCostSum(Double.toString(transferPricecount));
 
-            String retailPrice = stock.getRetailPrice().split(",")[i];
-            stockDO.setRetailPrice(retailPrice);//标准零售价格
-            Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
-            stockDO.setPriceSum(Double.toString(priceSum));//原价合计  标准*数量
+                String retailPrice = stock.getRetailPrice().split(",")[i];
+                stockDO.setRetailPrice(retailPrice);
+                Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
+                stockDO.setPriceSum(Double.toString(priceSum));
 
-            stockDO.setPositionName(stock.getPositionName());//仓位名称
-            stockDO.setCreateTime(stock.getCreateTime());//入库时间
-            stockDO.setDanjuNumber(stock.getDanjuNumber());//单据编号
-            stockDO.setOrderNumber(stock.getOrderNumber());//订单编号
-            stockDO.setYundanNumber(stock.getYundanNumber());//运单号
-            stockDO.setZhidanPeople(stock.getZhidanPeople());//制单人
-            stockDO.setDanjuDay(stock.getDanjuDay()); //单据日期
-            stockDO.setTuihuoNumber(stock.getTuihuoNumber());//退货单号
-            stockDO.setFactoryNumber(stock.getFactoryNumber());//厂家订单号
-            stockDO.setBeizhu(stock.getBeizhu());//备注
-            stockDO.setUnit(stock.getUnit()); //单位
+                stockDO.setPositionName(stock.getPositionName());
+                stockDO.setCreateTime(stock.getCreateTime());
+                stockDO.setDanjuNumber(stock.getDanjuNumber());
+                stockDO.setOrderNumber(stock.getOrderNumber());
+                stockDO.setYundanNumber(stock.getYundanNumber());
+                stockDO.setZhidanPeople(stock.getZhidanPeople());
+                stockDO.setDanjuDay(stock.getDanjuDay());
+                stockDO.setTuihuoNumber(stock.getTuihuoNumber());
+                stockDO.setFactoryNumber(stock.getFactoryNumber());
+                stockDO.setBeizhu(stock.getBeizhu());
+                String unit = stock.getUnit().split(",")[i];
+                stockDO.setUnit(unit);
 
-//            stockService.save(stockDO);
+
+                if (stockService.save(stockDO) < 0) {
+                    return R.error();
+                }
+            }
         }
-        return R.error();
+        return R.ok();
     }
 
     /**
@@ -199,7 +219,6 @@ public class StockController {
     @RequiresPermissions("stock:stock:findmfrs")
     String findmfrs(@PathVariable("goodsid") Integer goodsid, Model model) {
         model.addAttribute("goodsid", goodsid);
-
         return "/mfrs/mfrs/findMfrs";
     }
 
@@ -455,4 +474,5 @@ public class StockController {
         model.addAttribute("shiguangDOS", shiguangDOS);
         return shiguangDOS;
     }
+
 }

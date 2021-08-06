@@ -112,21 +112,21 @@ public class PositionController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("mfrs:position:remove")
-    public R remove(Long positionId) {
-        if (positionService.remove(positionId) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除
+//     */
+//    @PostMapping("/remove")
+//    @ResponseBody
+//    @RequiresPermissions("mfrs:position:remove")
+//    public R remove(Long positionId) {
+//        if (positionService.remove(positionId) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -134,6 +134,35 @@ public class PositionController {
     public R remove(@RequestParam("ids[]") Long[] positionIds) {
         positionService.batchRemove(positionIds);
         return R.ok();
+    }
+
+    /**
+     * 启用修改状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateEnable")
+    public R updateEnable(Long positionId, Long enable) {
+        PositionDO positionDO = new PositionDO();
+        positionDO.setPositionId(positionId);
+        positionDO.setStatus(enable);
+        positionService.update(positionDO);
+        return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("mfrs:position:remove")
+    public R updateStatus(Long positionId) {
+        PositionDO positionDO = new PositionDO();
+        positionDO.setState(0L);
+        positionDO.setPositionId(positionId);
+        if (positionService.updateState(positionDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
     }
 
 }

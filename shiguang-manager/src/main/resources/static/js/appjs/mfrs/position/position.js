@@ -88,6 +88,29 @@ function load() {
                     //     title: '状态(0:删除1:未删除)'
                     // },
                     {
+                        field: 'status',
+                        title: '启用状态',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            var str = '';
+                            str += ' <div class="switch onoffswitch col-sm-1"> ';
+                            str += ' <div class="onoffswitch"> ';
+                            str += ' <input name="allowComment" ';
+                            //启用状态 0：启用；1：禁用
+                            if (row.status == 0)
+                                str += ' checked="" ';
+
+                            str += ' type="checkbox" onchange="updateEnable(' + row.positionId + ',this)" value="' + row.positionId + '" class="onoffswitch-checkbox" id="example1' + row.positionId + '">  ';
+                            str += ' <label class="onoffswitch-label" for="example1' + row.positionId + '">  ';
+                            str += ' <span class="onoffswitch-inner" ></span> ';
+                            str += ' <span class="onoffswitch-switch" ></span> ';
+                            str += ' </label> ';
+                            str += ' </div>';
+                            str += ' </div>';
+                            return str;
+                        }
+                    },
+                    {
                         title: '操作',
                         field: 'id',
                         align: 'center',
@@ -190,5 +213,32 @@ function batchRemove() {
         });
     }, function () {
 
+    });
+}
+
+//修改启用状态
+function updateEnable(positionId, enable) {
+    var isEnable = 1;
+    if ($(enable).prop("checked")) {
+        isEnable = 0;
+    }
+
+    $.ajax({
+        url: prefix + "/updateEnable",
+        type: "post",
+        data: {
+            'positionId': positionId,
+            'enable': isEnable
+        },
+        dataType: 'JSON',
+        async: false,
+        success: function (r) {
+            if (r.code == 0) {
+                layer.msg(r.msg);
+                reLoad();
+            } else {
+                layer.msg(r.msg);
+            }
+        }
     });
 }

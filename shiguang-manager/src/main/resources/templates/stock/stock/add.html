@@ -12,6 +12,95 @@
 <form class="form-horizontal m-t" id="signupForm">
     <div class="new_h3">采购收货新增</div>
     <!--检查条件-->
+    <!--<div class="m40 tabS PHGL">-->
+    <!--<h3>检查条件</h3>-->
+    <!--<table border="0" cellspacing="0" cellpadding="0">-->
+    <!--<tbody>-->
+    <!--<tr>-->
+    <!--<td>单据编号：</td>-->
+    <!--<td>-->
+    <!--<input id="danjuNumber" name="danjuNumber" th:value="${uuidstr}" type="text"-->
+    <!--style="background-color: #e4e4e4" readonly/>-->
+    <!--</td>-->
+    <!--<td>订单单号：</td>-->
+    <!--<td>-->
+    <!--<input id="orderNumber" name="orderNumber" type="text"/>-->
+    <!--&lt;!&ndash;订单编号AAA&ndash;&gt;-->
+    <!--<input type="button" class="XZ-btn" value="选择" onclick="dingdanNum()"/>-->
+    <!--</td>-->
+    <!--<td>采购类型：</td>-->
+    <!--<td width="25%">-->
+    <!--<select id="goodsType" name="goodsType"-->
+    <!--onchange="goodsidstr()">-->
+    <!--<option></option>-->
+    <!--<option th:each="ls:${goodsDOList}"-->
+    <!--th:text="${ls.goodsname}"-->
+    <!--th:value="${ls.goodsid}"></option>-->
+    <!--</select>-->
+    <!--</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>制造商：</td>-->
+    <!--<td>-->
+    <!--<input id="mfrsid" name="mfrsid" type="hidden"/>-->
+    <!--<input id="mfrsName" name="mfrsName" type="text" readonly/>-->
+    <!--<input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>-->
+    <!--</td>-->
+    <!--<td>供应商：</td>-->
+    <!--<td>-->
+    <!--<input id="mfrsNames" name="mfrsNames" type="text" readonly/>-->
+    <!--</td>-->
+    <!--<td>收入仓位：</td>-->
+    <!--<td>-->
+    <!--<select id="positionName" name="positionName">-->
+    <!--<option th:each="ls:${positionDOList}"-->
+    <!--th:text="${ls.positionName}"-->
+    <!--th:value="${ls.positionName}"></option>-->
+    <!--</select>-->
+    <!--</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>运单号：</td>-->
+    <!--<td><input id="yundanNumber" name="yundanNumber" type="text"/></td>-->
+    <!--<td>入库人：</td>-->
+    <!--<td><input id="zhidanPeople" name="zhidanPeople" th:value="${optometryName}" type="text"-->
+    <!--style="background-color: #e4e4e4" readonly/></td>-->
+    <!--<td>单据日期：</td>-->
+    <!--<td><input id="danjuDay" name="danjuDay" th:value="${createTime}" type="text"-->
+    <!--style="background-color: #e4e4e4" readonly/></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>退货单号：</td>-->
+    <!--<td>-->
+    <!--<input id="tuihuoNumber" name="tuihuoNumber" type="text"/>-->
+    <!--<input type="button" class="XZ-btn" value="选择" onclick="tuihuiNum()"/>-->
+    <!--</td>-->
+    <!--<td></td>-->
+    <!--<td></td>-->
+    <!--<td>厂家订单号：</td>-->
+    <!--<td><input id="factoryNumber" name="factoryNumber" type="text"/><em>*</em></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--<td>备注：</td>-->
+    <!--<td colspan="5"><textarea id="beizhu" name="beizhu" rows="3"></textarea></td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
+
+    <!--<div class="HH_btns">-->
+    <!--<div class="Xbtn">-->
+    <!--<input type="button" value="单品添加商品" onclick="choiceGoods()"/>-->
+    <!--&lt;!&ndash;<input type="button" value="已核销订单添加商品"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<input type="button" value="二维表添加商品"/>&ndash;&gt;-->
+    <!--<input class="HgreenBG" type="button" value="打印条码"/>-->
+    <!--</div>-->
+    <!--<div class="Cbtn buyBtns">-->
+    <!--<input type="button" class="H_bc" value="保存" onclick="save()"/>-->
+    <!--&lt;!&ndash;<input type="checkbox" id="Hbc"/> <label for="Hbc">保存并审核</label>&ndash;&gt;-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
     <div class="m40 tabS PHGL">
         <h3>检查条件</h3>
         <table border="0" cellspacing="0" cellpadding="0">
@@ -21,18 +110,14 @@
                 <td>
                     <input id="danjuNumber" name="danjuNumber" th:value="${uuidstr}" type="text"
                            style="background-color: #e4e4e4" readonly/>
-                    <!--单据编号AAA-->
                 </td>
-                <td>订单单号：</td>
-                <td>
-                    <input id="orderNumber" name="orderNumber" type="text"/>
-                    <!--订单编号AAA-->
-                    <input type="button" class="XZ-btn" value="选择" onclick="dingdanNum()"/>
-                </td>
+                <td>入库人：</td>
+                <td><input id="zhidanPeople" name="zhidanPeople" th:value="${optometryName}" type="text"
+                           style="background-color: #e4e4e4" readonly/></td>
                 <td>采购类型：</td>
                 <td width="25%">
                     <select id="goodsType" name="goodsType"
-                            onchange="goodsidstr()"><!--商品类别AAA-->
+                            onchange="goodsidstr()">
                         <option></option>
                         <option th:each="ls:${goodsDOList}"
                                 th:text="${ls.goodsname}"
@@ -43,17 +128,17 @@
             <tr>
                 <td>制造商：</td>
                 <td>
-                    <input id="mfrsid" name="mfrsid" type="hidden"/><!--制造商AAA-->
-                    <input id="mfrsName" name="mfrsName" type="text" onchange="chuanzhi()"/>
+                    <input id="mfrsid" name="mfrsid" type="hidden"/>
+                    <input id="mfrsName" name="mfrsName" type="text" readonly/>
                     <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
                 </td>
                 <td>供应商：</td>
                 <td>
-                    <input id="mfrsNames" name="mfrsNames" type="text"/>
+                    <input id="mfrsNames" name="mfrsNames" type="text" readonly/>
                 </td>
                 <td>收入仓位：</td>
                 <td>
-                    <select id="positionName" name="positionName"><!--仓位名称AAA-->
+                    <select id="positionName" name="positionName">
                         <option th:each="ls:${positionDOList}"
                                 th:text="${ls.positionName}"
                                 th:value="${ls.positionName}"></option>
@@ -63,21 +148,10 @@
             <tr>
                 <td>运单号：</td>
                 <td><input id="yundanNumber" name="yundanNumber" type="text"/></td>
-                <td>制单人：</td>
-                <td><input id="zhidanPeople" name="zhidanPeople" th:value="${optometryName}" type="text"
-                           style="background-color: #e4e4e4" readonly/></td>
+
                 <td>单据日期：</td>
                 <td><input id="danjuDay" name="danjuDay" th:value="${createTime}" type="text"
                            style="background-color: #e4e4e4" readonly/></td>
-            </tr>
-            <tr>
-                <td>退货单号：</td>
-                <td>
-                    <input id="tuihuoNumber" name="tuihuoNumber" type="text"/>
-                    <input type="button" class="XZ-btn" value="选择" onclick="tuihuiNum()"/>
-                </td>
-                <td></td>
-                <td></td>
                 <td>厂家订单号：</td>
                 <td><input id="factoryNumber" name="factoryNumber" type="text"/><em>*</em></td>
             </tr>
@@ -91,13 +165,13 @@
         <div class="HH_btns">
             <div class="Xbtn">
                 <input type="button" value="单品添加商品" onclick="choiceGoods()"/>
-                <input type="button" value="已核销订单添加商品"/>
-                <input type="button" value="二维表添加商品"/>
-                <input class="HgreenBG" type="button" value="打印条码"/>
+                <!--<input type="button" value="已核销订单添加商品"/>-->
+                <!--<input type="button" value="二维表添加商品"/>-->
+                <!--<input class="HgreenBG" type="button" value="打印条码"/>-->
             </div>
             <div class="Cbtn buyBtns">
                 <input type="button" class="H_bc" value="保存" onclick="save()"/>
-                <input type="checkbox" id="Hbc"/> <label for="Hbc">保存并审核</label>
+                <!--<input type="checkbox" id="Hbc"/> <label for="Hbc">保存并审核</label>-->
             </div>
         </div>
 
@@ -112,7 +186,7 @@
                 <td style="width: 100vw;">
                     <table class="jingjia">
                         <tr class="thead">
-                            <td>全选 <input type="checkbox"/></td>
+                            <!--<td>全选 <input type="checkbox"/></td>-->
                             <td>商品代码</td>
                             <td>商品名称</td>
                             <td>型号</td>
@@ -121,18 +195,17 @@
                             <td>框架尺寸</td>
                             <td>入库时间</td>
                             <td>商品条码</td>
-                            <td>标准零售价</td>
-                            <td>含税单价</td>
-                            <td>批发价格</td>
-                            <td>调货成本</td>
-                            <td>单位</td>
+                            <td style="display: none">标准零售价</td>
+                            <td style="display: none">含税单价</td>
+                            <td style="display: none">批发价格</td>
+                            <td style="display: none">调货成本</td>
+                            <td style="display: none">单位</td>
                             <td>数量</td>
 
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji1">
                             <td colspan="10" style="text-align:right;">合计：</td>
-                            <td>111</td>
-                            <input name="goodsCount" type="hidden" value="111"/><!--//数量AAA-->
+                            <td></td>
                         </tr>
                     </table>
                 </td>
@@ -141,18 +214,18 @@
                 <td style="width: 100vw;">
                     <table id="peijian">
                         <tr class="thead">
-                            <td>全选 <input type="checkbox"/></td>
+                            <!--<td>全选 <input type="checkbox"/></td>-->
                             <td>商品代码</td>
                             <td>商品名称</td>
                             <td>型号</td>
                             <td>配件型</td>
                             <td>入库时间</td>
                             <td>商品条码</td>
-                            <td>标准零售价</td>
-                            <td>含税单价</td>
-                            <td>批发价格</td>
-                            <td>调货成本</td>
-                            <td>单位</td>
+                            <td style="display: none">标准零售价</td>
+                            <td style="display: none">含税单价</td>
+                            <td style="display: none">批发价格</td>
+                            <td style="display: none">调货成本</td>
+                            <td style="display: none">单位</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji2">
@@ -166,7 +239,7 @@
                 <td style="width: 100vw;">
                     <table>
                         <tr class="thead">
-                            <td>全选 <input type="checkbox"/></td>
+                            <!--<td>全选 <input type="checkbox"/></td>-->
                             <td>商品代码</td>
                             <td>商品名称</td>
                             <td>型号</td>
@@ -178,11 +251,11 @@
                             <td>材料分类</td>
                             <td>入库时间</td>
                             <td>商品条码</td>
-                            <td>标准零售价</td>
-                            <td>含税单价</td>
-                            <td>批发价格</td>
-                            <td>调货成本</td>
-                            <td>单位</td>
+                            <td style="display: none">标准零售价</td>
+                            <td style="display: none">含税单价</td>
+                            <td style="display: none">批发价格</td>
+                            <td style="display: none">调货成本</td>
+                            <td style="display: none">单位</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji3">
@@ -196,7 +269,7 @@
                 <td style="width: 100vw;">
                     <table>
                         <tr class="thead">
-                            <td>全选 <input type="checkbox"/></td>
+                            <!--<td>全选 <input type="checkbox"/></td>-->
                             <td>商品代码</td>
                             <td>商品名称</td>
                             <td>型号</td>
@@ -204,11 +277,11 @@
                             <td>次容量</td>
                             <td>入库时间</td>
                             <td>商品条码</td>
-                            <td>标准零售价</td>
-                            <td>含税单价</td>
-                            <td>批发价格</td>
-                            <td>调货成本</td>
-                            <td>单位</td>
+                            <td style="display: none">标准零售价</td>
+                            <td style="display: none">含税单价</td>
+                            <td style="display: none">批发价格</td>
+                            <td style="display: none">调货成本</td>
+                            <td style="display: none">单位</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji5">
@@ -222,7 +295,7 @@
                 <td style="width: 100vw;">
                     <table>
                         <tr class="thead">
-                            <td>全选 <input type="checkbox"/></td>
+                            <!--<td>全选 <input type="checkbox"/></td>-->
                             <td>商品代码</td>
                             <td>商品名称</td>
                             <td>型号</td>
@@ -230,11 +303,11 @@
                             <td>框架尺寸</td>
                             <td>入库时间</td>
                             <td>商品条码</td>
-                            <td>标准零售价</td>
-                            <td>含税单价</td>
-                            <td>批发价格</td>
-                            <td>调货成本</td>
-                            <td>单位</td>
+                            <td style="display: none">标准零售价</td>
+                            <td style="display: none">含税单价</td>
+                            <td style="display: none">批发价格</td>
+                            <td style="display: none">调货成本</td>
+                            <td style="display: none">单位</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji6">
@@ -248,7 +321,7 @@
                 <td style="width: 100vw;">
                     <table>
                         <tr class="thead">
-                            <td>全选 <input type="checkbox"/></td>
+                            <!--<td>全选 <input type="checkbox"/></td>-->
                             <td>商品代码</td>
                             <td>商品名称</td>
                             <td>型号</td>
@@ -257,11 +330,11 @@
                             <td>厂家色号</td>
                             <td>入库时间</td>
                             <td>商品条码</td>
-                            <td>标准零售价</td>
-                            <td>含税单价</td>
-                            <td>批发价格</td>
-                            <td>调货成本</td>
-                            <td>单位</td>
+                            <td style="display: none">标准零售价</td>
+                            <td style="display: none">含税单价</td>
+                            <td style="display: none">批发价格</td>
+                            <td style="display: none">调货成本</td>
+                            <td style="display: none">单位</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji7">
@@ -275,17 +348,17 @@
                 <td style="width: 100vw;">
                     <table>
                         <tr class="thead">
-                            <td>全选 <input type="checkbox"/></td>
+                            <!--<td>全选 <input type="checkbox"/></td>-->
                             <td>商品代码</td>
                             <td>商品名称</td>
                             <td>型号</td>
                             <td>入库时间</td>
                             <td>商品条码</td>
-                            <td>标准零售价</td>
-                            <td>含税单价</td>
-                            <td>批发价格</td>
-                            <td>调货成本</td>
-                            <td>单位</td>
+                            <td style="display: none">标准零售价</td>
+                            <td style="display: none">含税单价</td>
+                            <td style="display: none">批发价格</td>
+                            <td style="display: none">调货成本</td>
+                            <td style="display: none">单位</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji8">
@@ -299,17 +372,17 @@
                 <td style="width: 100vw;">
                     <table>
                         <tr class="thead">
-                            <td>全选 <input type="checkbox"/></td>
+                            <!--<td>全选 <input type="checkbox"/></td>-->
                             <td>商品代码</td>
                             <td>商品名称</td>
                             <td>型号</td>
                             <td>入库时间</td>
                             <td>商品条码</td>
-                            <td>标准零售价</td>
-                            <td>含税单价</td>
-                            <td>批发价格</td>
-                            <td>调货成本</td>
-                            <td>单位</td>
+                            <td style="display: none">标准零售价</td>
+                            <td style="display: none">含税单价</td>
+                            <td style="display: none">批发价格</td>
+                            <td style="display: none">调货成本</td>
+                            <td style="display: none">单位</td>
                             <td>数量</td>
                         </tr>
 
@@ -324,7 +397,7 @@
         </table>
         <div class="Cbtn buyBtns">
             <input type="button" class="H_bc" value="保存" onclick="save()"/>
-            <input type="checkbox" id="HHbc"/> <label for="HHbc">保存并审核</label>
+            <!--<input type="checkbox" id="HHbc"/> <label for="HHbc">保存并审核</label>-->
         </div>
     </div>
 </form>
@@ -333,7 +406,7 @@
 <script type="text/javascript"></script>
 <script type="text/javascript">
     function dingdanNum() {
-        var goodsid = document.getElementById('goodsid').value;
+        var goodsid = document.getElementById('goodsType').value;
         var mfrsid = document.getElementById('mfrsid').value;
         // alert(goodsid);
         if (goodsid == "") {
@@ -352,11 +425,6 @@
         } else if (goodsid != "" && mfrsid == "") {
             alert("请选择所属制造商！");
         }
-    }
-
-    function chuanzhi() {
-        var temp = $("input[name='mfrsName']").val();
-        $("input[name='mfrsNames']").val(temp);
     }
 
     function goodsidstr() {
@@ -529,6 +597,7 @@
                     for (var i = 0; i < rows.length; i++) {
                         $("#mfrsName").val(rows[i].mfrsname);
                         $("#mfrsid").val(rows[i].mfrsid);
+                        $("#mfrsNames").val(rows[i].mfrsname);
                     }
                 }
             });
@@ -561,7 +630,8 @@
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     // alert(JSON.stringify(rows))
                     for (var i = 0; i < rows.length; i++) {
-                        $(".heji1").before("<tr class='val1'><td><input type=\"checkbox\"/></td>\n" +
+                        $(".heji1").before("<tr class='val1'>" +
+                            // "<td><input type=\"checkbox\"/></td>\n" +
                             "<td >" + rows[i].producNum + "</td>\n" +
                             "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                             "<td>" + rows[i].producName + "</td>\n" +
@@ -574,18 +644,17 @@
                             "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
-                            "<td  >" + rows[i].retailPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
                             "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +//标准零售价---标准
-                            "<td  >" + rows[i].taxPrice + "</td>\n" +
+                            "<td style='display: none'>" + rows[i].taxPrice + "</td>\n" +
                             "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +//含税单价----成本
-                            "<td  >" + rows[i].tradePrice + "</td>\n" +
+                            "<td style='display: none'>" + rows[i].tradePrice + "</td>\n" +
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +//批发价格--批发
-                            "<td   >" + rows[i].transferPrice + "</td>\n" +
+                            "<td style='display: none'>" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +//调货成本
-                            "<td   >" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' type='text'/>" + "</td></tr>>");
-                        //        retailPrice--标准零售价  priceSum原价合计  costPrice成本价格   costSum--成本合计  wholePrice批发价格  wholeSum批发合计
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");
                     }
                 }
             });
@@ -602,7 +671,8 @@
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     for (var i = 0; i < rows.length; i++) {
-                        $(".heji2").before("<tr class='val2'><td><input type=\"checkbox\"/></td>\n" +
+                        $(".heji2").before("<tr class='val2'>" +
+                            // "<td><input type=\"checkbox\"/></td>\n" +
                             "<td >" + rows[i].producNum + "</td>\n" +
                             "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                             "<td>" + rows[i].producName + "</td>\n" +
@@ -613,17 +683,17 @@
                             "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
-                            "<td  >" + rows[i].retailPrice + "</td>\n" +
+                            "<td style='display:none;' >" + rows[i].retailPrice + "</td>\n" +
                             "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
-                            "<td  >" + rows[i].taxPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
                             "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
-                            "<td  >" + rows[i].tradePrice + "</td>\n" +
+                            "<td  style='display: none'>" + rows[i].tradePrice + "</td>\n" +
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
-                            "<td   >" + rows[i].transferPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td   >" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none'>" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' type='text'/>" + "</td></tr>>");
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");
                     }
                 }
             });
@@ -639,11 +709,10 @@
                 content: "/stock/stock/jingpian/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
-                    // alert(JSON.stringify(rows))
-                    // if(rows[i].factory==)
                     for (var i = 0; i < rows.length; i++) {
-                        $(".heji3").before("<tr class='val3'><td><input type=\"checkbox\"/></td>\n" +
-                            "<td>" + rows[i].producNum + "</td>\n" +
+                        $(".heji3").before("<tr class='val3'>" +
+                            // "<td><input type=\"checkbox\"/></td>\n" +
+                            "<td >" + rows[i].producNum + "</td>\n" +
                             "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                             "<td>" + rows[i].producName + "</td>\n" +
                             "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
@@ -658,17 +727,17 @@
                             "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
-                            "<td  >" + rows[i].retailPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
                             "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
-                            "<td  >" + rows[i].taxPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
                             "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
-                            "<td  >" + rows[i].tradePrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
-                            "<td   >" + rows[i].transferPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td   >" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none'>" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' type='text'/>" + "</td></tr>>");
+                            "<td >" + "<input id='goodsCount' name='goodsCount'oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");
                     }
                 }
             });
@@ -685,7 +754,8 @@
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     for (var i = 0; i < rows.length; i++) {
-                        $(".heji5").before("<tr class='val5'><td><input type=\"checkbox\"/></td>\n" +
+                        $(".heji5").before("<tr class='val5'>" +
+                            // "<td><input type=\"checkbox\"/></td>\n" +
                             "<td >" + rows[i].producNum + "</td>\n" +
                             "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                             "<td>" + rows[i].producName + "</td>\n" +
@@ -697,17 +767,17 @@
                             "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
-                            "<td  >" + rows[i].retailPrice + "</td>\n" +
+                            "<td style='display: none'>" + rows[i].retailPrice + "</td>\n" +
                             "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
-                            "<td  >" + rows[i].taxPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
                             "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
-                            "<td  >" + rows[i].tradePrice + "</td>\n" +
+                            "<td  style='display: none'>" + rows[i].tradePrice + "</td>\n" +
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
-                            "<td   >" + rows[i].transferPrice + "</td>\n" +
+                            "<td  style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td   >" + rows[i].unitname + "</td>\n" +
+                            "<td  style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' type='text'/>" + "</td></tr>>");
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");
                     }
                 }
             });
@@ -724,7 +794,8 @@
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     for (var i = 0; i < rows.length; i++) {
-                        $(".heji6").before("<tr class='val6'><td><input type=\"checkbox\"/></td>\n" +
+                        $(".heji6").before("<tr class='val6'>" +
+                            // "<td><input type=\"checkbox\"/></td>\n" +
                             "<td >" + rows[i].producNum + "</td>\n" +
                             "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                             "<td>" + rows[i].producName + "</td>\n" +
@@ -736,17 +807,17 @@
                             "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
-                            "<td  >" + rows[i].retailPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
                             "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
-                            "<td  >" + rows[i].taxPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
                             "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
-                            "<td  >" + rows[i].tradePrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
-                            "<td   >" + rows[i].transferPrice + "</td>\n" +
+                            "<td style='display: none'  >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td   >" + rows[i].unitname + "</td>\n" +
+                            "<td  style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' type='text'/>" + "</td></tr>>");
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\"type='text'/>" + "</td></tr>>");
                     }
                 }
             });
@@ -763,7 +834,8 @@
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     for (var i = 0; i < rows.length; i++) {
-                        $(".heji7").before("<tr class='val7'><td><input type=\"checkbox\"/></td>\n" +
+                        $(".heji7").before("<tr class='val7'>" +
+                            // "<td><input type=\"checkbox\"/></td>\n" +
                             "<td >" + rows[i].producNum + "</td>\n" +
                             "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                             "<td>" + rows[i].producName + "</td>\n" +
@@ -776,17 +848,17 @@
                             "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
-                            "<td  >" + rows[i].retailPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
                             "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
-                            "<td  >" + rows[i].taxPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
                             "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
-                            "<td  >" + rows[i].tradePrice + "</td>\n" +
+                            "<td  style='display: none'>" + rows[i].tradePrice + "</td>\n" +
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
-                            "<td   >" + rows[i].transferPrice + "</td>\n" +
+                            "<td  style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td   >" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none'  >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' type='text'/>" + "</td></tr>>");
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");
                     }
                 }
             });
@@ -803,7 +875,8 @@
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     for (var i = 0; i < rows.length; i++) {
-                        $(".heji8").before("<tr class='val8'><td><input type=\"checkbox\"/></td>\n" +
+                        $(".heji8").before("<tr class='val8'>" +
+                            // "<td><input type=\"checkbox\"/></td>\n" +
                             "<td >" + rows[i].producNum + "</td>\n" +
                             "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                             "<td>" + rows[i].producName + "</td>\n" +
@@ -813,17 +886,17 @@
                             "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
-                            "<td  >" + rows[i].retailPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
                             "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
-                            "<td  >" + rows[i].taxPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
                             "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
-                            "<td  >" + rows[i].tradePrice + "</td>\n" +
+                            "<td  style='display: none'>" + rows[i].tradePrice + "</td>\n" +
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
-                            "<td   >" + rows[i].transferPrice + "</td>\n" +
+                            "<td  style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td   >" + rows[i].unitname + "</td>\n" +
+                            "<td  style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' type='text'/>" + "</td></tr>>");
+                            "<td >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\"type='text'/>" + "</td></tr>>");
                     }
                 }
             });
@@ -840,7 +913,8 @@
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     for (var i = 0; i < rows.length; i++) {
-                        $(".heji9").before("<tr class='val9'><td><input type=\"checkbox\"/></td>\n" +
+                        $(".heji9").before("<tr class='val9'>" +
+                            // "<td><input type=\"checkbox\"/></td>\n" +
                             "<td >" + rows[i].producNum + "</td>\n" +
                             "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                             "<td>" + rows[i].producName + "</td>\n" +
@@ -850,17 +924,17 @@
                             "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
-                            "<td  >" + rows[i].retailPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
                             "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
-                            "<td  >" + rows[i].taxPrice + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
                             "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
-                            "<td  >" + rows[i].tradePrice + "</td>\n" +
+                            "<td  style='display: none'>" + rows[i].tradePrice + "</td>\n" +
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
-                            "<td   >" + rows[i].transferPrice + "</td>\n" +
+                            "<td  style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td   >" + rows[i].unitname + "</td>\n" +
+                            "<td  style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' type='text'/>" + "</td></tr>>");
+                            "<td >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\"type='text'/>" + "</td></tr>>");
                     }
                 }
             });

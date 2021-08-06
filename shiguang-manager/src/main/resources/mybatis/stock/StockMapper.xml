@@ -9,8 +9,11 @@
 
     <select id="list" resultType="com.shiguang.stock.domain.StockDO">
         select
-        `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`retail_price`,`price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`
-        from stock
+        s.`id`,s.`goods_num`,s.`goods_code`,s.`goods_name`,s.`goods_count`,s.`goods_type`,s.`mfrsid`,s.`retail_price`,
+        s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`, s.`position_name`, s.`create_time`,
+        s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
+        s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname
+        from stock s join c_mfrs m on s.mfrsid=m.mfrsid
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
@@ -165,7 +168,7 @@
     <update id="updateGoodsCount" parameterType="com.shiguang.stock.domain.StockDO">
         update stock
         <set>
-        <if test="goodsCount != null">`goods_count` = #{goodsCount},</if>
+            <if test="goodsCount != null">`goods_count` = #{goodsCount},</if>
         </set>
         where goods_num = #{goodsNum}
     </update>
@@ -265,10 +268,18 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%', #{rightYuanYongQJ},'%')</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%', #{rightYuanYongZJ},'%')</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%', #{leftYuanYongQJ},'%') </if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%', #{leftYuanYongZJ},'%') </if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%',
+                #{rightYuanYongQJ},'%')
+            </if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%',
+                #{rightYuanYongZJ},'%')
+            </if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%',
+                #{leftYuanYongQJ},'%')
+            </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%',
+                #{leftYuanYongZJ},'%')
+            </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -306,10 +317,18 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%', #{rightYuanYongQJ},'%')</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%', #{rightYuanYongZJ},'%')</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%', #{leftYuanYongQJ},'%') </if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%', #{leftYuanYongZJ},'%') </if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%',
+                #{rightYuanYongQJ},'%')
+            </if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%',
+                #{rightYuanYongZJ},'%')
+            </if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%',
+                #{leftYuanYongQJ},'%')
+            </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%',
+                #{leftYuanYongZJ},'%')
+            </if>
         </where>
     </select>
 
@@ -341,10 +360,18 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%', #{rightYuanYongQJ},'%')</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%', #{rightYuanYongZJ},'%')</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%', #{leftYuanYongQJ},'%') </if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%', #{leftYuanYongZJ},'%') </if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%',
+                #{rightYuanYongQJ},'%')
+            </if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%',
+                #{rightYuanYongZJ},'%')
+            </if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%',
+                #{leftYuanYongQJ},'%')
+            </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%',
+                #{leftYuanYongZJ},'%')
+            </if>
 
         </where>
         <choose>
@@ -385,10 +412,18 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%', #{rightYuanYongQJ},'%')</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%', #{rightYuanYongZJ},'%')</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%', #{leftYuanYongQJ},'%') </if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%', #{leftYuanYongZJ},'%') </if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%',
+                #{rightYuanYongQJ},'%')
+            </if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%',
+                #{rightYuanYongZJ},'%')
+            </if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%',
+                #{leftYuanYongQJ},'%')
+            </if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%',
+                #{leftYuanYongZJ},'%')
+            </if>
         </where>
     </select>
 
@@ -958,7 +993,7 @@
     </select>
     <!--太阳镜【商】【品】【查】【询】-->
     <select id="selectTyj" resultType="com.shiguang.product.domain.TyjDO">
-        select t.produc_num,t.produc_name,t.produc_code,t.produc_factory,t.factory,
+        select t.produc_num,t.produc_name,t.produc_code,t.produc_factory,t.factory,u.unitname,
         t.retail_price,t.tax_price,t.produc_factorycolor,t.size,t.trade_price,t.transfer_price
         from aa_tyj t join c_unit u on t.unitid=u.unitid
         <where>
@@ -977,7 +1012,8 @@
     </select>
     <!--老花镜【商】【品】【查】【询】-->
     <select id="selectLhj" resultType="com.shiguang.product.domain.OldlensDO">
-        select o.produc_num,o.produc_name,o.produc_code,o.produc_factory,o.factory,o.retail_price,o.tax_price,
+        select
+        o.produc_num,o.produc_name,o.produc_code,o.produc_factory,o.factory,o.retail_price,o.tax_price,u.unitname,
         old.degrees,o.size,o.produc_factorycolor,o.trade_price,o.transfer_price
         from aa_oldlens o join c_unit u on o.unitid=u.unitid join a_olddegrees old on o.old_id=old.old_id
         <where>
@@ -996,9 +1032,8 @@
     </select>
     <!--耗材【商】【品】【查】【询】-->
     <select id="selectHc" resultType="com.shiguang.product.domain.HcDO">
-        select h.produc_num,h.produc_name,h.produc_code,u.unitname,h.retail_price,h.tax_price,
-        h.trade_price,h.transfer_price from aa_hc h join c_unit u
-        on h.unitid=u.unitid
+        select h.produc_num,h.produc_name,h.produc_code,u.unitname,h.retail_price,h.tax_price,h.produc_factory,
+        h.trade_price,h.transfer_price from aa_hc h join c_unit u on h.unitid=u.unitid
         <where>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
@@ -1023,6 +1058,24 @@
             <if test="brandid != null and brandid != ''">and s.brandid = #{brandid}</if>
             <if test="producFactory != null and producFactory != ''">and s.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and s.factory = #{factory}</if>
+        </where>
+    </select>
+
+    <!--【是否已存在商品信息】-->
+    <select id="haveNum" resultType="com.shiguang.stock.domain.StockDO">
+        select  goods_count from stock where goods_num=#{goodsNum} order by id
+    </select>
+    <!--【库存查询】-->
+    <select id="kccxList" resultType="com.shiguang.stock.domain.StockDO">
+        select s.goods_num,s.goods_code,s.goods_name,s.goods_count,g.goodsname
+        'gdname',m.mfrsname,s.retail_price,s.price_sum,
+        s.cost_price,s.cost_sum,s.whole_price,s.whole_sum,s.position_name
+        from stock s join c_goods g on s.goods_type=g.goodsid join c_mfrs m on s.mfrsid=m.mfrsid
+        <where>
+            <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>
+            <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
         </where>
     </select>
 </mapper>

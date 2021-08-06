@@ -41,6 +41,16 @@ public class OldlensDO implements Serializable {
     private String unitname;
     //    老花镜度数
     private Long oldId;
+    private String degrees;
+
+    public String getDegrees() {
+        return degrees;
+    }
+
+    public void setDegrees(String degrees) {
+        this.degrees = degrees;
+    }
+
     //批号管理(1是、2否)
     private Integer batchid;
     //镜架尺寸
