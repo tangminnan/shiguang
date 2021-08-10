@@ -53,7 +53,7 @@ function load() {
 									title : '顾客姓名'
 								},
 								{
-									field : 'memberTel',
+									field : 'phone1',
 									title : '联系电话'
 								},
 								{

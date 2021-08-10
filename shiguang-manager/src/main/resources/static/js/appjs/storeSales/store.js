@@ -796,6 +796,9 @@ function getTaocanXz(){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             for (var i=0;i<rows.length;i++){
                 $("#taocanName").val(rows[i].packageName);
+                // alert(rows[i].danyiyh)
+                // alert(rows[i].fanxianPrice)
+                // alert(rows[i].preferentialPrice)
                 if ("" != rows[i].danyiyh){
                     if (rows[i].danyiyh == '返现'){
                         ypuhuiPrice = rows[i].fanxianPrice
@@ -804,6 +807,17 @@ function getTaocanXz(){
                     ypuhuiPrice = rows[i].preferentialPrice
                 }
             }
+
+            document.getElementById("amountMoney").value="";
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+ypuhuiPrice+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额：0.00</li>";
+            lis += "<li>应收金额："+ypuhuiPrice+"</li>";
+            lis += "<li>实收金额："+ypuhuiPrice+"</li>";
+            $("#ula").append(lis)
             $("#amountMoney").val(ypuhuiPrice);
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
@@ -813,13 +827,29 @@ function getTaocanXz(){
     });
     layer.full(toIndex)
 }
+
+function getHYTc(){
+    document.getElementById("taocanName").value = "";
+    $("#ula").empty();
+    var lis="";
+    lis =  "<li>原价金额："+price+"</li>";
+    lis += "<li>折扣金额：0.00</li>";
+    lis += "<li>优惠金额：0.00</li>";
+    lis += "<li>抹零金额：0.00</li>";
+    lis += "<li>应收金额："+price+"</li>";
+    lis += "<li>实收金额："+price+"</li>";
+    $("#ula").append(lis)
+    $("#amountMoney").val(price);
+}
+
 var check_val = [];
-function getSelect(){
-    var obj = document.getElementsByName("producaNum");
-    for(k in obj){
-        if(obj[k].checked)
-            check_val.push(obj[k].value);
-    }
-    alert(check_val);
+function getGoodsInfoSelect(obj){
+    //var obj = document.getElementsByName("producaNum");
+    check_val.push(obj);
+    // for(k in obj){
+    //     if(obj[k].checked)
+    //         check_val.push(obj[k].value);
+    // }
 
 }
+

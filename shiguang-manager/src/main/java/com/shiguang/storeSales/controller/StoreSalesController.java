@@ -546,7 +546,15 @@ public class StoreSalesController {
 //        int total = packageInfoService.count(query);
         String storeNum = ShiroUtils.getUser().getStoreNum();
         query.put("storeNum",storeNum);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         List<PackageDO> packageDOList = packageService.list(query);
+        if (null != packageDOList){
+            for (PackageDO packageDO : packageDOList){
+                packageDO.setPackageDate(simpleDateFormat.format(packageDO.getPackageTime()));
+                packageDO.setEffectiveTime(simpleDateFormat.format(packageDO.getEffectiveDate()));
+                packageDO.setExpiryTime(simpleDateFormat.format(packageDO.getExpiryDate()));
+            }
+        }
         int total = packageService.count(query);
         PageUtils pageUtils = new PageUtils(packageDOList, total);
         return pageUtils;

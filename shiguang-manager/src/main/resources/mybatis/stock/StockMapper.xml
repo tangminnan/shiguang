@@ -207,6 +207,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -240,6 +241,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
     </select>
 
@@ -280,6 +282,7 @@
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%',
                 #{leftYuanYongZJ},'%')
             </if>
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -329,6 +332,7 @@
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%',
                 #{leftYuanYongZJ},'%')
             </if>
+            and st.goods_count > 0
         </where>
     </select>
 
@@ -372,7 +376,7 @@
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%',
                 #{leftYuanYongZJ},'%')
             </if>
-
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -424,6 +428,7 @@
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%',
                 #{leftYuanYongZJ},'%')
             </if>
+            and st.goods_count > 0
         </where>
     </select>
 
@@ -449,6 +454,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -482,6 +488,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
     </select>
 
@@ -506,6 +513,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -538,6 +546,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
     </select>
 
@@ -562,6 +571,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -594,6 +604,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
     </select>
 
@@ -618,6 +629,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -650,6 +662,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
     </select>
 
@@ -674,6 +687,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -706,6 +720,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
     </select>
 
@@ -730,6 +745,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -762,6 +778,7 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            and st.goods_count > 0
         </where>
     </select>
 
@@ -788,6 +805,7 @@
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
             <if test="stores != null and stores != ''">and FIND_IN_SET(#{stores},pr.stores)</if>
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -821,6 +839,7 @@
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
             <if test="stores != null and stores != ''">and FIND_IN_SET(#{stores},pr.stores)</if>
+            and st.goods_count > 0
         </where>
     </select>
 
@@ -853,6 +872,7 @@
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
             <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -891,6 +911,7 @@
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
             <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            and st.goods_count > 0
         </where>
     </select>
 

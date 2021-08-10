@@ -59,7 +59,7 @@ public class TakeMirrorController {
     public R editQujing(String saleNumber){
         LogStatusDO logStatusDO = new LogStatusDO();
         logStatusDO.setSaleNumber(saleNumber);
-        logStatusDO.setLogisticStatus("取镜");
+        logStatusDO.setLogisticStatus("顾客取镜");
         if(statusService.editFaliao(logStatusDO)>0){
             return R.ok();
         }

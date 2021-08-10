@@ -1510,7 +1510,9 @@
                 // alert(rows.length)
 				//alert(JSON.stringify(rows));
                 for (var i=0;i<rows.length;i++){
-                    html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getSelect()'/></td>";
+                    var goodsNumStr = rows[i].goodsNum;
+                    //alert(goodsNumStr)
+                    html = "<tr><td><input id='grp1' name=\"cho\" onchange='getGoodsInfoSelect(\""+goodsNumStr+"\")' type=\"checkbox\" /></td>";
                     html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].goodsName+"</td>";
                     html += "<input id='storeName' name='storeName' value="+rows[i].goodsName+" text='hidden'/>"
                     html += "<td>"+rows[i].retailPrice+"</td>";
@@ -1570,6 +1572,11 @@
         });
         layer.full(toIndex)
 	}
+
+    // $("#grp1").change(function(){
+    //     alert(this.checked?"勾上了":"取消了勾选")
+    //     alert(this.value);
+    // });
 
 	function del(obj,prices,produName) {
         var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
@@ -1650,7 +1657,8 @@
                 // alert(rows.length)
                 arrayjp = rows.length;
                 for (var i=0;i<rows.length;i++){
-                    html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                    var goodsNumStr = rows[i].goodsNum;
+                    html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
                     html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].goodsName+"</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>"+rows[i].goodsCount+"</td>";
@@ -1761,7 +1769,6 @@
         lis += "<li>实收金额："+price+"</li>";
         $("#ula").append(lis)
         $("#amountMoney").val(price)
-		alert(options.val());
 		addhtml = "<tr><td>"+options.text()+"</td>";
 		addhtml += "<td>"+options.val()+"</td>";
 		addhtml += "<td><input type=\"text\" id='prival' value='1' name='additionalCount' onkeyup=\"sum("+options.val()+")\"/></td>";
@@ -1781,7 +1788,6 @@
         var privaul = $("#prival").val();
         prce = privaul;
         var sumprices = (parseFloat(privaul) * parseFloat(obj)).toFixed(2);
-        alert(sumprices);
         sumprice.innerText = sumprices;
         //$("#sumprice").val(sumprices);
 		$("#additionalPrices").val(sumprices);
