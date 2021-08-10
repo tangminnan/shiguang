@@ -1071,11 +1071,17 @@
         'gdname',m.mfrsname,s.retail_price,s.price_sum,
         s.cost_price,s.cost_sum,s.whole_price,s.whole_sum,s.position_name
         from stock s join c_goods g on s.goods_type=g.goodsid join c_mfrs m on s.mfrsid=m.mfrsid
+        join c_position po on s.position_name=po.position_name
         <where>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
             <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
             <if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and s.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">and po.status = #{status}</if>
+            <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
         </where>
     </select>
 </mapper>

@@ -50,10 +50,16 @@ public class PositionServiceImpl implements PositionService {
     public int batchRemove(Long[] positionIds) {
         return positionDao.batchRemove(positionIds);
     }
-    //删除修改状态
 
+    //删除修改状态
     @Override
     public int updateState(PositionDO position) {
         return positionDao.updateState(position);
+    }
+
+    //     <!--库存查询相对应的仓库-->
+    @Override
+    public List<PositionDO> stockList(Map<String, Object> map) {
+        return positionDao.stockList(map);
     }
 }

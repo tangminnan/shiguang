@@ -1,7 +1,9 @@
 package com.shiguang.stock.controller;
 
 import com.shiguang.mfrs.domain.GoodsDO;
+import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.GoodsService;
+import com.shiguang.mfrs.service.PositionService;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -32,6 +34,9 @@ public class KcController {
     //商品类别
     @Autowired
     private GoodsService goodsService;
+    //仓位
+    @Autowired
+    private PositionService positionService;
 
     @GetMapping()
     @RequiresPermissions("kucun:stock:stock")
@@ -41,19 +46,39 @@ public class KcController {
         map.put("goodstypeName", "隐形");
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
+        //仓位
+        map.put("status", 0);
+        List<PositionDO> positionList = positionService.stockList(map);
+        model.addAttribute("positionList", positionList);
         return "stock/stock/kccx";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/selectPosion")
+    public List<PositionDO> positionList(Long status, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //仓位
+        map.put("status", status);
+        List<PositionDO> positionList = positionService.stockList(map);
+        model.addAttribute("positionList", positionList);
+        return positionList;
     }
 
     //    库存查询
     @ResponseBody
     @RequestMapping(value = "/selectKc")
     public List<StockDO> selectSg(String goodsNum, String goodsCode, String goodsName,
-                                  Integer goodsType, Model model) {
+                                  Integer goodsType, String retailPrice, String retailPrice2,
+                                  Long status, String positionName, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("goodsNum", goodsNum);
         map.put("goodsCode", goodsCode);
         map.put("goodsName", goodsName);
         map.put("goodsType", goodsType);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
+        map.put("status", status);
+        map.put("positionName", positionName);
         List<StockDO> stockDOS = stockService.kccxList(map);
         model.addAttribute("stockDOS", stockDOS);
         return stockDOS;

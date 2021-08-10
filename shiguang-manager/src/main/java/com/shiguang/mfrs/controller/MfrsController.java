@@ -54,14 +54,14 @@ public class MfrsController {
         //开票状态
         List<InvoiceDO> invoiceDOList = invoiceService.list(map);
         model.addAttribute("invoiceDOList", invoiceDOList);
-
         return "mfrs/mfrs/mfrs";
     }
 
+    //【制造商页面List】
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils list(@RequestParam Map<String, Object> params, MfrsDO mfrs) {
+    public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         List<MfrsDO> mfrsDOList = mfrsService.list(query);
@@ -245,7 +245,11 @@ public class MfrsController {
         //开票
         List<InvoiceDO> invoiceDOList = invoiceService.list(map);
         model.addAttribute("invoiceDOList", invoiceDOList);
-
+//———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String newDate = sdf.format(date);
+        model.addAttribute("createTime", newDate);
 
         return "mfrs/mfrs/add";
     }
@@ -279,7 +283,6 @@ public class MfrsController {
         Date stime3 = mfrs.getProductscodeday();
         String str3 = sdf.format(stime3);
         mfrs.setProductscodedays(str3);
-
         return "mfrs/mfrs/edit";
     }
 
@@ -326,9 +329,6 @@ public class MfrsController {
     @PostMapping("/save")
     @RequiresPermissions("mfrs:mfrs:add")
     public R save(MfrsDO mfrs) {
-        if (null == mfrs.getGoodsid()) {
-            return R.error("商品类别不能为空");
-        }
         //判断是否已存在
         String mfrsnum = mfrs.getMfrsnum();
         Map<String, Object> map = new HashMap<>();
@@ -381,29 +381,6 @@ public class MfrsController {
         return R.ok();
     }
 
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("mfrs:mfrs:remove")
-//    public R remove(Integer mfrsid) {
-//        if (mfrsService.remove(mfrsid) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
-
-    /**
-     * 批量删除
-     */
-    @PostMapping("/batchRemove")
-    @ResponseBody
-    @RequiresPermissions("mfrs:mfrs:batchRemove")
-    public R remove(@RequestParam("ids[]") Integer[] mfrsids) {
-        mfrsService.batchRemove(mfrsids);
-        return R.ok();
-    }
 
     /**
      * 启用修改状态
