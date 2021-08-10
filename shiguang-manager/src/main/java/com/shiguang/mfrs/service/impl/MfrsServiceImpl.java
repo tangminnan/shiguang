@@ -26,7 +26,7 @@ public class MfrsServiceImpl implements MfrsService {
         return mfrsDao.haveNum(map);
     }
 
-    //	---商品查询----
+    //【制造商页面List】
     @Override
     public List<MfrsDO> list(Map<String, Object> map) {
         return mfrsDao.list(map);

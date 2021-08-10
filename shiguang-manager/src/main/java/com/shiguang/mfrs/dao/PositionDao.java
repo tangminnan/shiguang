@@ -20,6 +20,7 @@ public interface PositionDao {
 
     List<PositionDO> list(Map<String, Object> map);
 
+
     int count(Map<String, Object> map);
 
     int save(PositionDO position);
@@ -33,4 +34,7 @@ public interface PositionDao {
 
     //删除修改状态
     int updateState(PositionDO position);
+
+    //     <!--库存查询相对应的仓库-->
+    List<PositionDO> stockList(Map<String, Object> map);
 }

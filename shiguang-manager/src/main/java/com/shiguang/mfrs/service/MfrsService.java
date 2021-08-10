@@ -19,7 +19,7 @@ public interface MfrsService {
     //判断是否存在制造商代码
     List<MfrsDO> haveNum(Map<String, Object> map);
 
-    //-----商品查询-------
+    //【制造商页面List】
     List<MfrsDO> list(Map<String, Object> map);
 
     //    <!--查询制造商-->

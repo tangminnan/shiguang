@@ -59,7 +59,16 @@ public class MfrsDO implements Serializable {
     private Long status;
     //状态(0:删除1:未删除)
     private Long state;
+    //天
+    private String payday;
 
+    public String getPayday() {
+        return payday;
+    }
+
+    public void setPayday(String payday) {
+        this.payday = payday;
+    }
 
     /**
      * 设置：制造商id

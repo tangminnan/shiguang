@@ -11,11 +11,7 @@
                     <div class="columns pull-right">
                         <button shiro:hasPermission="mfrs:brand:add" type="button" class="btn  btn-primary"
                                 onclick="add()">
-                            <i class="fa fa-plus" aria-hidden="true"></i>添加
-                        </button>
-                        <button shiro:hasPermission="mfrs:brand:batchRemove" type="button" class="btn  btn-danger"
-                                onclick="batchRemove()">
-                            <i class="fa fa-trash" aria-hidden="true"></i>删除
+                            <i class="fa fa-plus" aria-hidden="true"></i>品种新增
                         </button>
                     </div>
                     <br>
@@ -31,35 +27,28 @@
                             </select>
                         </div>
                         <div class="columns pull-right col-md-2 nopadding">
-                            <select name="mfrsid" id="mfrsid" class="form-control" data-actions-box="false"
-                                    data-size="5">
-                                <option value="">制造商简称</option>
-                                <option th:each="ls:${mfrsDOList}"
-                                        th:text="${ls.mfrsname}"
-                                        th:value="${ls.mfrsid}"></option>
-
-                            </select>
+                            <input id="mfrsname" type="text" class="form-control"
+                                   placeholder="制造商">
+                            <span>
+                                <input type="button" class="XZ-btn" value="选择"/>
+                            </span>
                         </div>
                         <div class="columns pull-right col-md-2 nopadding">
                             <input id="brandnum" type="text" class="form-control"
                                    placeholder="品牌代码">
                         </div>
-
-
                         <div class="columns pull-right col-md-2 nopadding">
                             <input id="brandname" type="text" class="form-control"
                                    placeholder="品牌名称">
                         </div>
-                        <!--<div class="columns pull-right col-md-2 nopadding">-->
-                        <!--<select name="stateId" id="stateId" class="form-control" data-actions-box="false"-->
-                        <!--data-size="5">-->
-                        <!--<option value="">启用状态</option>-->
-                        <!--<option th:each="ls:${stateDOList}"-->
-                        <!--th:text="${ls.status}"-->
-                        <!--th:value="${ls.stateId}"-->
-                        <!--&gt;</option>-->
-                        <!--</select>-->
-                        <!--</div>-->
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <select name="status" id="status" class="form-control" data-actions-box="false"
+                                    data-size="5">
+                                <option value="">启用状态状态</option>
+                                <option value="0">启用</option>
+                                <option value="1">禁用</option>
+                            </select>
+                        </div>
                         <div class="columns pull-right col-md-2 nopadding">
                             <select name="payid" id="payid" class="form-control" data-actions-box="false"
                                     data-size="5">

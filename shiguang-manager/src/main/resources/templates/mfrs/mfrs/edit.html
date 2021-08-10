@@ -1,211 +1,239 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-<div class="wrapper wrapper-content ">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                    <form class="form-horizontal m-t" id="signupForm">
-                        <input id="mfrsid" name="mfrsid" th:value="${mfrs.mfrsid}" type="hidden">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商代码：</label>
-                            <div class="col-sm-8">
-                                <input id="mfrsnum" name="mfrsnum" th:value="${mfrs.mfrsnum}" readonly
-                                       class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商简称：</label>
-                            <div class="col-sm-8">
-                                <input id="mfrsname" name="mfrsname" th:value="${mfrs.mfrsname}" class="form-control"
-                                       type="text">
-                                <span style="color: red">*</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商联系人：</label>
-                            <div class="col-sm-8">
-                                <input id="mfrscontacts" name="mfrscontacts" th:value="${mfrs.mfrscontacts}"
-                                       class="form-control" type="text">
-                                <span style="color: red">*</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商全称：</label>
-                            <div class="col-sm-8">
-                                <input id="mfrsrealname" name="mfrsrealname" th:value="${mfrs.mfrsrealname}"
-                                       class="form-control" type="text">
-                                <span style="color: red">*</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商电话：</label>
-                            <div class="col-sm-8">
-                                <input id="mfrstelephone" name="mfrstelephone" th:value="${mfrs.mfrstelephone}"
-                                       class="form-control" type="text">
-                                <span style="color: red">*如：022-85123455</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">联系人电话：</label>
-                            <div class="col-sm-8">
-                                <input id="mfrsphone" name="mfrsphone" th:value="${mfrs.mfrsphone}" class="form-control"
-                                       type="text">
-                                <span style="color: red">*如：022-85123455</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">商品类别：</label>
-                            <div class="col-sm-8">
-                                <select name="goodsid" id="goodsid" multiple
-                                        class="selectpicker show-tick form-control">
-                                    <option th:each="ls:${goodsDOList}"
-                                            th:text="${ls.goodsname}"
-                                            th:value="${ls.goodsid}"></option>
-                                </select>
-                                <input id="goodsids" name="goodsids" th:value="${mfrs.goodsid}" class="form-control"
-                                       type="hidden">
-                                <span style="color: red">*</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商传真：</label>
-                            <div class="col-sm-8">
-                                <input id="mfrsfax" name="mfrsfax" th:value="${mfrs.mfrsfax}" class="form-control"
-                                       type="text">
-                                <span style="color: red">*如：022-85123455</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商地址：</label>
-                            <div class="col-sm-8">
-                                <input id="mfrsaddress" name="mfrsaddress" th:value="${mfrs.mfrsaddress}"
-                                       class="form-control" type="text">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">采购结算方式：</label>
-                            <div class="col-sm-8">
-                                <select name="payid" id="payid" th:value="${mfrs.payid}" class="form-control"
-                                        data-actions-box="false" data-size="5">
-                                    <option th:each="ls:${payDOList}"
-                                            th:text="${ls.paymethod}"
-                                            th:value="${ls.payid}"></option>
-                                </select>
-                                <input id="payids" name="payids" th:value="${mfrs.payid}" class="form-control"
-                                       type="hidden">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">开票状态：</label>
-                            <div class="col-sm-8">
-                                <label class="radio-inline"> <input type="radio" th:field="*{mfrs.invoiceid}"
-                                                                    name="invoiceid" value="1"/> 开票
-                                </label>
-                                <label class="radio-inline"> <input type="radio" th:field="*{mfrs.invoiceid}"
-                                                                    name="invoiceid" value="2"/> 不开票
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">统一社会信用代码：</label>
-                            <div class="col-sm-8">
-                                <input id="creditcode" name="creditcode" th:value="${mfrs.creditcode}"
-                                       class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">统一社会信用代码效期：</label>
-                            <div class="col-sm-8">
-                                <input id="creditcodeday" name="creditcodeday" th:value="${mfrs.creditcodedays}"
-                                       class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">医疗器械经营许可证号：</label>
-                            <div class="col-sm-8">
-                                <input id="medicinecode" name="medicinecode" th:value="${mfrs.medicinecode}"
-                                       class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">医疗器械经营许可证有效期：</label>
-                            <div class="col-sm-8">
-                                <input id="medicinecodeday" name="medicinecodeday" th:value="${mfrs.medicinecodedays}"
-                                       class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">全国工业品生产许可证号：</label>
-                            <div class="col-sm-8">
-                                <input id="productscode" name="productscode" th:value="${mfrs.productscode}"
-                                       class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">全国工业品生产许可证有效期：</label>
-                            <div class="col-sm-8">
-                                <input id="productscodeday" name="productscodeday" th:value="${mfrs.productscodedays}"
-                                       class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">备注：</label>
-                            <div class="col-sm-8">
-                                <input id="remarks" name="remarks" th:value="${mfrs.remarks}" class="form-control"
-                                       type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">启用状态：</label>
-                            <div class="col-sm-8">
-                                <label class="radio-inline"> <input type="radio"
-                                                                    th:field="*{mfrs.status}" name="status" value="1"/>
-                                    禁用
-                                </label>
-                                <label class="radio-inline"> <input type="radio"
-                                                                    th:field="*{mfrs.status}" name="status" value="0"/>
-                                    启用
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-8 col-sm-offset-3">
-                                <button type="submit" class="btn btn-primary">提交</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>制造商新增</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+    <style type="text/css">
+        em {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+    <!--详细信息-->
+    <div class="m40 tabS msgBox">
+        <h3>详细信息</h3>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <input id="mfrsid" name="mfrsid" th:value="${mfrs.mfrsid}" type="hidden">
+            <tr>
+                <td>制造商代码</td>
+                <td>
+                    <input id="mfrsnum" name="mfrsnum" th:value="${mfrs.mfrsnum}" readonly type="text"
+                           style="background-color: #e4e4e4">
+                    <br>
+                    <em>*制造商代码不能超过2位</em>
+                </td>
+                <td>制造商简称</td>
+                <td>
+                    <input id="mfrsname" name="mfrsname" th:value="${mfrs.mfrsname}" type="text"><em>*</em>
+                </td>
+                <td>制造商联系人</td>
+                <td>
+                    <input id="mfrscontacts" name="mfrscontacts" th:value="${mfrs.mfrscontacts}" type="text"><em>*</em>
+                </td>
+            </tr>
+            <tr>
+                <td>制造商全称</td>
+                <td>
+                    <input id="mfrsrealname" name="mfrsrealname" th:value="${mfrs.mfrsrealname}" type="text"><em>*</em>
+                </td>
+                <td>制造商电话</td>
+                <td>
+                    <input id="mfrstelephone" name="mfrstelephone" th:value="${mfrs.mfrstelephone}" type="text">
+                    <br>
+                    <em>*如：022-85123455</em>
+                </td>
+                <td>联系人电话</td>
+                <td>
+                    <input id="mfrsphone" name="mfrsphone" th:value="${mfrs.mfrsphone}" type="text">
+                    <br>
+                    <em>*如：022-85123455</em>
+                </td>
+            </tr>
+            <tr>
+                <td>商品类型</td>
+                <td colspan="2">
+                    <input name="goodsid" value="1" type="checkbox"/>镜架
+                    <input name="goodsid" value="2" type="checkbox"/>配件
+                    <input name="goodsid" value="3" type="checkbox"/>镜片
+                    <input name="goodsid" value="4" type="checkbox"/>隐形
+                    <input name="goodsid" value="5" type="checkbox"/>护理液
+                    <input name="goodsid" value="6" type="checkbox"/>太阳镜
+                    <input name="goodsid" value="7" type="checkbox"/>老花镜
+                    <input name="goodsid" value="8" type="checkbox"/>耗材
+                    <input name="goodsid" value="9" type="checkbox"/>视光
+                    <em>*</em>
+                    <input id="goodsids" name="goodsids" th:value="${mfrs.goodsid}" type="hidden">
+                </td>
+            </tr>
+            <tr>
+                <td>制造商地址</td>
+                <td>
+                    <input id="mfrsaddress" name="mfrsaddress" th:value="${mfrs.mfrsaddress}" type="text"
+                           style="width: 80%">
+                </td>
+                <td>制造商传真</td>
+                <td>
+                    <input id="mfrsfax" name="mfrsfax" th:value="${mfrs.mfrsfax}" type="text">
+                    <br>
+                    <em>*如：022-85123455</em>
+                </td>
+            </tr>
+            <tr>
+                <td>采购结算方式</td>
+                <td>
+                    <select name="payid" id="payid" th:value="${mfrs.payid}" onchange="payChange()">
+                        <option th:each="ls:${payDOList}"
+                                th:text="${ls.paymethod}"
+                                th:value="${ls.payid}"></option>
+                    </select>
+                    <input id="payids" name="payids" th:value="${mfrs.payid}" class="form-control"
+                           type="hidden">
+                    <input id="payday" name="payday" th:value="${mfrs.payday}" type="text" hidden placeholder="请输入天数"
+                           oninput="value=value.replace(/[^\d]/g,'')">
+                </td>
+                <td>开票状态</td>
+                <td>
+                    <div class="col-sm-8">
+                        <label class="radio-inline">
+                            <input type="radio" name="invoiceid" value="1" th:field="*{mfrs.invoiceid}"/> 开票
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="invoiceid" value="2" th:field="*{mfrs.invoiceid}"/> 不开票
+                        </label>
+                        <em>*</em>
+                    </div>
+                </td>
+                <td>启用状态:</td>
+                <td>
+                    <div class="col-sm-8">
+                        <label class="radio-inline">
+                            <input type="radio" name="status" value="1" th:field="*{mfrs.status}"/> 禁用
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="status" value="0" th:field="*{mfrs.status}"/> 启用
+                        </label>
+                        <em>*</em>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>统一社会信用代码:</td>
+                <td>
+                    <input id="creditcode" name="creditcode" th:value="${mfrs.creditcode}" type="text">
+                </td>
+                <td>统一社会信用代码效期:</td>
+                <td>
+                    <input id="creditcodeday" name="creditcodeday" th:value="${mfrs.creditcodedays}" type="text">
+                    <br>
+                    <em>如：XXXX-XX-XX</em>
+                </td>
+            </tr>
+            <tr>
+                <td>医疗器械经营许可证号:</td>
+                <td>
+                    <input id="medicinecode" name="medicinecode" th:value="${mfrs.medicinecode}" type="text">
+                </td>
+                <td>医疗器械经营许可证有效期:</td>
+                <td>
+                    <input id="medicinecodeday" name="medicinecodeday" th:value="${mfrs.medicinecodedays}" type="text">
+                    <br>
+                    <em>如：XXXX-XX-XX</em>
+                </td>
+            </tr>
+            <tr>
+                <td>全国工业品生产许可证号:</td>
+                <td>
+                    <input id="productscode" name="productscode" th:value="${mfrs.productscode}" type="text">
+                </td>
+                <td>全国工业品生产许可证有效期:</td>
+                <td>
+                    <input id="productscodeday" name="productscodeday" th:value="${mfrs.productscodedays}" type="text">
+                    <br>
+                    <em>如：XXXX-XX-XX</em>
+                </td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="5"><textarea id="remarks" name="remarks" rows="3" th:value="${mfrs.remarks}"></textarea>
+                </td>
+            </tr>
+        </table>
+        <!--保存/清空-->
+        <div class="BQ-btn">
+            <input type="button" value="保存" onclick="baocun()"/>
         </div>
     </div>
-</div>
-<div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/mfrs/mfrs/edit.js">
-</script>
-<script type="text/javascript">
-    $().ready(function () {
-        //商品类别
-        var goodsids = $("input[name='goodsids']").val();
-        //alert(goodsids);
-        var arr = goodsids.split(',');
-        $('#goodsid').selectpicker('val', arr);
-        $('#goodsid').selectpicker('refresh');
-        // $("#goodsid").find("[value="+goodsids+"]").attr("selected",true);
+    <div th:include="include::footer"></div>
+    <script type="text/javascript" src="/js/appjs/mfrs/mfrs/edit.js"></script>
+    <script type="text/javascript">
+        $().ready(function () {
+            //商品类别
+            var val = document.getElementById("goodsids").value.split(",");
+            var boxes = document.getElementsByName("goodsid");
+            for (i = 0; i < boxes.length; i++) {
+                for (j = 0; j < val.length; j++) {
+                    if (boxes[i].value == val[j]) {
+                        boxes[i].checked = true;
+                        break
+                    }
+                }
+            }
+            //支付方式
+            var payids = $("input[name='payids']").val();
+            $("#payid").find("[value=" + payids + "]").attr("selected", true);
+            payChange();
+        });
 
-        //支付方式
-        var payids = $("input[name='payids']").val();
-        $("#payid").find("[value=" + payids + "]").attr("selected", true);
+        function payChange() {
+            var payVal = $("#payid").find("option:selected").text();
+            if (payVal == "现金") {
+                document.getElementById("payday").hidden = true;
+            } else if (payVal == "数期") {
+                document.getElementById("payday").hidden = false;
+            } else if (payVal == "代销月结") {
+                document.getElementById("payday").hidden = true;
+            } else if (payVal == "信用额周转") {
+                document.getElementById("payday").hidden = true;
+            } else if (payVal == "--请选择--") {
+                document.getElementById("payday").hidden = true;
+            }
+        }
 
-    })
-</script>
+        function baocun() {
+            var mfrsnum = document.getElementById('mfrsnum').value;
+            var mfrsname = document.getElementById('mfrsname').value;
+            var mfrscontacts = document.getElementById('mfrscontacts').value;
+            var mfrsrealname = document.getElementById('mfrsrealname').value;
+            var goodsid = [];
+            $('input:checkbox').each(function () {
+                if ($(this).is(':checked') == true) {
+                    goodsid.push($(this).val());
+                }
+            });
+            if (mfrsnum == "") {
+                alert("请输入制造商代码！");
+            } else if (mfrsnum != "" && mfrsname == "") {
+                alert("请输入制造商简称！")
+            } else if (mfrsnum != "" && mfrsname != "" && mfrscontacts == "") {
+                alert("请输入制造商联系人！");
+            } else if (mfrsnum != "" && mfrsname != "" && mfrscontacts != "" && mfrsrealname == "") {
+                alert("请输入制造商全称！");
+            } else if (mfrsnum != "" && mfrsname != "" && mfrscontacts != "" && mfrsrealname == "" && goodsid == "" || goodsid.length == 0) {
+                alert("请选择商品类型！");
+            } else if (mfrsnum != "" && mfrsname != "" && mfrscontacts != "" && mfrsrealname != "" && goodsid != "" || goodsid.length != 0) {
+                update();
+            }
+        }
 
+    </script>
+</form>
 </body>
 </html>

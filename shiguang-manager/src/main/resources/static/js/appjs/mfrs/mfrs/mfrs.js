@@ -32,10 +32,10 @@ function load() {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
                         offset: params.offset,
-                        //mfrsnum:$("#mfrsnum").val()
                         mfrsnum: $('#mfrsnum').val(),
                         mfrsname: $('#mfrsname').val(),
                         goodsid: $('#goodsid').val(),
+                        status: $('#status').val(),
                         invoiceid: $('#invoiceid').val()
                         // username:$('#searchName').val()
                     };
@@ -50,10 +50,6 @@ function load() {
                     {
                         checkbox: true
                     },
-                    // 								{
-                    // 	field : 'mfrsid',
-                    // 	title : '制造商id'
-                    // },
                     {
                         field: 'mfrsnum',
                         title: '制造商代码'
@@ -66,22 +62,10 @@ function load() {
                         field: 'mfrscontacts',
                         title: '制造商联系人'
                     },
-                    // 								{
-                    // 	field : 'mfrsrealname',
-                    // 	title : '制造商全称'
-                    // },
-                    // 								{
-                    // 	field : 'mfrstelephone',
-                    // 	title : '制造商电话'
-                    // },
                     {
                         field: 'mfrsphone',
                         title: '联系人电话'
                     },
-                    // 								{
-                    // 	field : 'goodsid',
-                    // 	title : '商品类别'
-                    // },
                     {
                         field: 'mfrsfax',
                         title: '制造商传真'
@@ -90,42 +74,6 @@ function load() {
                         field: 'mfrsaddress',
                         title: '制造商地址'
                     },
-                    // 								{
-                    // 	field : 'payid',
-                    // 	title : '采购结算方式'
-                    // },
-                    // 								{
-                    // 	field : 'invoiceid',
-                    // 	title : '开票状态(1开票、2不开票)'
-                    // },
-                    // 								{
-                    // 	field : 'creditcode',
-                    // 	title : '统一社会信用代码'
-                    // },
-                    // 								{
-                    // 	field : 'creditcodeday',
-                    // 	title : '统一社会信用代码效期'
-                    // },
-                    // 								{
-                    // 	field : 'medicinecode',
-                    // 	title : '医疗器械经营许可证号'
-                    // },
-                    // 								{
-                    // 	field : 'medicinecodeday',
-                    // 	title : '医疗器械经营许可证有效期'
-                    // },
-                    // 								{
-                    // 	field : 'productscode',
-                    // 	title : '全国工业品生产许可证号'
-                    // },
-                    // 								{
-                    // 	field : 'productscodeday',
-                    // 	title : '全国工业品生产许可证有效期'
-                    // },
-                    // 	{
-                    // 		field : 'remarks',
-                    // 		title : '备注'
-                    // 	},
                     {
                         field: 'status',
                         title: '启用状态',
@@ -235,39 +183,31 @@ function resetPwd(id) {
     });
 }
 
-function batchRemove() {
-    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-    if (rows.length == 0) {
-        layer.msg("请选择要删除的数据");
-        return;
-    }
-    layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
-        btn: ['确定', '取消']
-        // 按钮
-    }, function () {
-        var ids = new Array();
-        // 遍历所有选择的行数据，取每条数据对应的ID
-        $.each(rows, function (i, row) {
-            ids[i] = row['mfrsid'];
-        });
-        $.ajax({
-            type: 'POST',
-            data: {
-                "ids": ids
-            },
-            url: prefix + '/batchRemove',
-            success: function (r) {
-                if (r.code == 0) {
-                    layer.msg(r.msg);
-                    reLoad();
-                } else {
-                    layer.msg(r.msg);
-                }
-            }
-        });
-    }, function () {
+//保存
+function save() {
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "/mfrs/mfrs/save",
+        data: $('#signupForm').serialize(),// 你的formid
+        async: false,
+        error: function (request) {
+            parent.layer.alert("Connection error");
+        },
+        success: function (data) {
+            if (data.code == 0) {
+                parent.layer.msg("操作成功");
+                parent.reLoad();
+                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                parent.layer.close(index);
 
+            } else {
+                parent.layer.alert(data.msg)
+            }
+
+        }
     });
+
 }
 
 //选择制造商

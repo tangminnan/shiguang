@@ -11,7 +11,7 @@
         select
         po.`position_id`,po.`position_num`,de.`depart_number`,de.`depart_name`,po.`position_name`,po.`position_order`,po.`state_id`,po.`status`,po.`state`
         from c_position po left join department de on po.depart_number=de.depart_number
-        where po.state=1
+        where  po.state=1
         group by po.position_id order by po.status asc ,po.position_id asc
     </select>
 
@@ -85,4 +85,10 @@
     <update id="updateState" parameterType="com.shiguang.mfrs.domain.PositionDO">
     update c_position set `state` = #{state} where position_id = #{positionId}
     </update>
+
+    <!--库存查询相对应的仓库-->
+    <select id="stockList" resultType="com.shiguang.mfrs.domain.PositionDO">
+        select position_name from c_position where status = #{status} and state=1
+        group by position_id order by status asc ,position_id asc
+    </select>
 </mapper>
