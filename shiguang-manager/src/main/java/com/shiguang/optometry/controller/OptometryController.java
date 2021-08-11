@@ -1,5 +1,7 @@
 package com.shiguang.optometry.controller;
 
+import com.shiguang.checkout.domain.CostDO;
+import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +30,8 @@ public class OptometryController {
     private ResultDiopterService resultDiopterService;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private CostService costService;
 
     @GetMapping()
     @RequiresPermissions("information:optometry:optometry")
@@ -43,8 +48,11 @@ public class OptometryController {
 //        List<OptometryDO> optometryList = optometryService.list(query);
 //        int total = optometryService.count(query);
         query.put("state", 1);
-        List<MemberDO> memberDOList = memberService.list(query);
-        int total = memberService.count(query);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateNow = simpleDateFormat.format(new Date());
+        query.put("dateNow",dateNow);
+        List<MemberDO> memberDOList = optometryService.findOptoList(query);
+        int total = optometryService.findOptoCount(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);
         return pageUtils;
     }
@@ -110,6 +118,30 @@ public class OptometryController {
     public R update(OptometryDO optometry) {
 
         optometryService.update(optometry);
+        return R.ok();
+    }
+
+    /**
+     * 查询会员是否开单或者缴费
+     */
+    @ResponseBody
+    @PostMapping("/getMember")
+    @RequiresPermissions("information:ocular:ocular")
+    public R getMember( String cardMember){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        List<CostDO> costDOList = costService.getMemberNum(cardMember);
+        if (null != costDOList && costDOList.size() > 0){
+            String createDate = simpleDateFormat.format(costDOList.get(0).getCreateTime());
+            String datenow = simpleDateFormat.format(new Date());
+            if (createDate != datenow){
+                return R.ok("该会员还未开检查单");
+            }
+            if (costDOList.get(0).getIsSale() == 0){
+                return R.ok("该会员还未缴费");
+            }
+        } else {
+            return R.ok("该会员还未开检查单");
+        }
         return R.ok();
     }
 

@@ -1,5 +1,6 @@
 package com.shiguang.optometry.dao;
 
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.domain.ProcessAskDO;
 import org.apache.ibatis.annotations.Mapper;
@@ -34,4 +35,8 @@ public interface OptometryDao {
     int batchRemove(Long[] ids);
 
     List<ProcessAskDO> processlist(Map<String, Object> map);
+
+    List<MemberDO> findOptoList(Map<String,Object> map);
+
+    int findOptoCount(Map<String,Object> map);
 }

@@ -199,7 +199,7 @@ public class MemberController {
         model.addAttribute("sexx",memberDO.getSexx());
         model.addAttribute("memberTel",memberDO.getPhone1());
         String telNumber = memberDO.getPhone1();
-        String code = QRCodeUtil.creatRrCode(memberDO.getName()+" "+memberDO.getPhone1(), 200,200);
+        String code = QRCodeUtil.creatRrCode(memberDO.getCardNumber(), 200,200);
         model.addAttribute("QRCode","data:image/png;base64," + code);
         return "member/二维码";
     }

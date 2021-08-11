@@ -94,7 +94,32 @@ function load() {
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
+    var cardMember = $("#cardNumber").val();
+    if ("" != cardMember){
+        $.ajax({
+            url : prefix+"/getMember",
+            type : "post",
+            data : {
+                'cardMember' : cardMember
+            },
+            success : function(r) {
+                if (r.code==0) {
+                    layer.msg(r.msg);
+                    //reLoad();
+                }else{
+                    layer.msg(r.msg);
+                }
+            }
+        });
+	}
+
 }
+
+document.onkeydown = function(e){
+    if((e||event).keyCode==13)
+        reLoad();
+};
+
 function add() {
     var toIndex = layer.open({
 		type : 2,

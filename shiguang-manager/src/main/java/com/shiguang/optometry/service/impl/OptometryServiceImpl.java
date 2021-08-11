@@ -1,5 +1,6 @@
 package com.shiguang.optometry.service.impl;
 
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.optometry.dao.OptometryDao;
 import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.domain.ProcessAskDO;
@@ -71,5 +72,13 @@ public class OptometryServiceImpl implements OptometryService {
     @Override
     public List<ProcessAskDO> processlist(Map<String, Object> map) {
         return optometryDao.processlist(map);
+    }
+
+    @Override
+    public List<MemberDO> findOptoList(Map<String, Object> map) {return optometryDao.findOptoList(map);}
+
+    @Override
+    public int findOptoCount(Map<String, Object> map) {
+        return optometryDao.findOptoCount(map);
     }
 }

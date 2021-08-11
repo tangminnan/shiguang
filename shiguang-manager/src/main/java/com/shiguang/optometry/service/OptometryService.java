@@ -1,5 +1,6 @@
 package com.shiguang.optometry.service;
 
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.domain.ProcessAskDO;
 
@@ -31,4 +32,8 @@ public interface OptometryService {
     List<OptometryDO> optoAfterList(String cardNumber);
 
     List<ProcessAskDO> processlist(Map<String, Object> map);
+
+    List<MemberDO> findOptoList(Map<String,Object> map);
+
+    int findOptoCount(Map<String,Object> map);
 }

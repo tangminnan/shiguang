@@ -1,5 +1,6 @@
 package com.shiguang.optometry.service.impl;
 
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.optometry.dao.OcularEyesDao;
 import com.shiguang.optometry.domain.OcularEyesDO;
 import com.shiguang.optometry.service.OcularEyesService;
@@ -47,5 +48,13 @@ public class OcularEyesServiceImpl implements OcularEyesService {
     @Override
     public int batchRemove(Long[] ids) {
         return eyesDao.batchRemove(ids);
+    }
+
+    @Override
+    public List<MemberDO> findOptoEyesList(Map<String, Object> map) {return eyesDao.findOptoEyesList(map);}
+
+    @Override
+    public int findOptoEyesCount(Map<String, Object> map) {
+        return eyesDao.findOptoEyesCount(map);
     }
 }

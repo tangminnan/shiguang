@@ -794,6 +794,11 @@ function getTaocanXz(){
         content : "/information/store/taocanxz/"+check_val,// iframe的url
         cancel: function(index, layero){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            var zhekouPrice=0.00;
+            var youhuiPrice=0.00;
+            var yingshouPricce=0.00;
+            var yingshouAPrice=0.00;
+            var zhekouAPrice=0.00;
             for (var i=0;i<rows.length;i++){
                 $("#taocanName").val(rows[i].packageName);
                 // alert(rows[i].danyiyh)
@@ -803,20 +808,65 @@ function getTaocanXz(){
                     if (rows[i].danyiyh == '返现'){
                         ypuhuiPrice = rows[i].fanxianPrice
                     }
-                } else {
-                    ypuhuiPrice = rows[i].preferentialPrice
+                } else{
+                    var preWay = rows[i].preferentialWay
+                    var prePrice = rows[i].preferentialPrice;
+                    preWay = preWay.split(",");
+                    prePrice = prePrice.split(",");
+                    for (var t=0;t<preWay.length;t++){
+                        if ("返现" == preWay[t]){
+                            $("#youhuiMoney"+t+"").append(prePrice[t]);
+                            var yingshou = $("#yingshou"+t+"").val();
+                            if (undefined != yingshou){
+                                yingshou = parseFloat(yingshou)-parseFloat(prePrice[t]);
+                                document.getElementById("yingshouMoney"+t+"").innerHTML=""
+                                $("#yingshouMoney"+t+"").append(yingshou);
+                                youhuiPrice = parseFloat(youhuiPrice) + parseFloat(prePrice[t]);
+                                yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
+                            }
+
+
+                        } else if ("折扣" == preWay[t]){
+                            $("#zhekou"+t+"").append(prePrice[t]);
+                            var yingshou = $("#yingshou"+t+"").val();
+                            if (undefined != yingshou){
+                                yingshou = parseFloat(yingshou) * parseFloat(prePrice[t]);
+                                document.getElementById("yingshouMoney"+t+"").innerHTML=""
+                                $("#yingshouMoney"+t+"").append(yingshou);
+                                $("#zhekouMoney"+t+"").append(yingshou);
+                                zhekouPrice = parseFloat(zhekouPrice) + parseFloat(prePrice[t]);
+                                zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
+                            }
+
+                        }
+                        else if ("特价" == preWay[t]){
+                            var yingshou = $("#yingshou"+t+"").val();
+                            if (undefined != yingshou){
+                                $("#yingshouMoney"+t+"").append(preWay[t]);
+                            }
+                        }
+                    }
+                    //ypuhuiPrice = rows[i].preferentialPrice
                 }
             }
 
             document.getElementById("amountMoney").value="";
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+ypuhuiPrice+"</li>";
-            lis += "<li>折扣金额：0.00</li>";
-            lis += "<li>优惠金额：0.00</li>";
+            var yuanjiaPrice=0.00;
+            var yjPrice = $("#storeUnit").val();
+            alert(yjPrice)
+            yjPrice = yjPrice.split(",");
+            for (var s=0;s<yjPrice.length;s++){
+                yuanjiaPrice = parseFloat(yuanjiaPrice)+ parseFloat(yjPrice)
+            }
+            yingshouPricce = parseFloat(yingshouAPrice) + parseFloat(zhekouAPrice);
+            lis =  "<li>原价金额："+yuanjiaPrice+"</li>";
+            lis += "<li>折扣金额："+zhekouPrice+"</li>";
+            lis += "<li>优惠金额："+youhuiPrice+"</li>";
             lis += "<li>抹零金额：0.00</li>";
-            lis += "<li>应收金额："+ypuhuiPrice+"</li>";
-            lis += "<li>实收金额："+ypuhuiPrice+"</li>";
+            lis += "<li>应收金额："+yingshouPricce+"</li>";
+            lis += "<li>实收金额："+yingshouPricce+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(ypuhuiPrice);
             // var rows = sessionStorage.getItem("row");

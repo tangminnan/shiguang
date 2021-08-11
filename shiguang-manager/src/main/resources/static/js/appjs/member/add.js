@@ -88,6 +88,9 @@ function validateRule() {
             areaName : {
                 required : true
             },
+            phone1 : {
+                required : true
+            }
 		},
 		messages : {
 			name : {
@@ -120,6 +123,9 @@ function validateRule() {
             areaName : {
                 required : icon + "请选择市区(县)"
             },
+            phone1 : {
+                required : icon + "请输入联系方式"
+            }
 		}
 	})
 }

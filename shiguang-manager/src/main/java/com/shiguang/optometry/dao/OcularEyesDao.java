@@ -1,5 +1,6 @@
 package com.shiguang.optometry.dao;
 
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.optometry.domain.OcularEyesDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -23,4 +24,8 @@ public interface OcularEyesDao {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    List<MemberDO> findOptoEyesList(Map<String,Object> map);
+
+    int findOptoEyesCount(Map<String,Object> map);
 }
