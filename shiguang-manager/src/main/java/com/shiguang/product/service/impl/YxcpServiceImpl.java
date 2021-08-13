@@ -1,7 +1,6 @@
 package com.shiguang.product.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.dao.YxcpDao;
 import com.shiguang.product.domain.YxcpDO;
 import com.shiguang.product.service.YxcpService;
@@ -51,12 +50,7 @@ public class YxcpServiceImpl implements YxcpService {
     public int batchRemove(Long[] ids) {
         return yxcpDao.batchRemove(ids);
     }
-    //查询镜片定做制造商
 
-    @Override
-    public List<MgDO> mglist(Map<String, Object> map) {
-        return yxcpDao.mglist(map);
-    }
 
     //菜单联动显示
     @Override

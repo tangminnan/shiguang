@@ -1,7 +1,6 @@
 package com.shiguang.product.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.dao.JpdzDao;
 import com.shiguang.product.domain.JpdzDO;
 import com.shiguang.product.service.JpdzService;
@@ -62,11 +61,6 @@ public class JpdzServiceImpl implements JpdzService {
         return jpdzDao.batchRemove(ids);
     }
 
-    //查询镜片定做制造商
-    @Override
-    public List<MgDO> mglist(Map<String, Object> map) {
-        return jpdzDao.mglist(map);
-    }
 
     //菜单联动显示
     @Override

@@ -1,7 +1,6 @@
 package com.shiguang.product.service;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.domain.HcDO;
 
 import java.util.List;
@@ -29,9 +28,6 @@ public interface HcService {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
-
-    //查询耗材制造商
-    List<MgDO> mglist(Map<String, Object> map);
 
     //菜单联动显示
     List<BrandDO> choice(Integer mfrsid);

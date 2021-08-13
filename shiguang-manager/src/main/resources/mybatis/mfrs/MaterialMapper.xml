@@ -3,72 +3,80 @@
 
 <mapper namespace="com.shiguang.mfrs.dao.MaterialDao">
 
-	<select id="get" resultType="com.shiguang.mfrs.domain.MaterialDO">
-		select `materialid`,`materialnum`,`materialname` from c_material where materialid = #{value}
+    <select id="get" resultType="com.shiguang.mfrs.domain.MaterialDO">
+		select `materialid`,`materialnum`,`materialname` ,`state`from c_material where materialid = #{value}
 	</select>
 
-	<select id="list" resultType="com.shiguang.mfrs.domain.MaterialDO">
-		select `materialid`,`materialnum`,`materialname` from c_material
-        <where>  
-		  		  <if test="materialid != null and materialid != ''"> and materialid = #{materialid} </if>
-		  		  <if test="materialnum != null and materialnum != ''"> and materialnum = #{materialnum} </if>
-		  		  <if test="materialname != null and materialname != ''"> and materialname = #{materialname} </if>
-		  		</where>
+    <select id="list" resultType="com.shiguang.mfrs.domain.MaterialDO">
+        select `materialid`,`materialnum`,`materialname`,`state` from c_material
+        <where>
+            <if test="materialid != null and materialid != ''">and materialid = #{materialid}</if>
+            <if test="materialnum != null and materialnum != ''">and materialnum = #{materialnum}</if>
+            <if test="materialname != null and materialname != ''">and materialname = #{materialname}</if>
+            and state=1
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by materialid
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from c_material
-		 <where>  
-		  		  <if test="materialid != null and materialid != ''"> and materialid = #{materialid} </if>
-		  		  <if test="materialnum != null and materialnum != ''"> and materialnum = #{materialnum} </if>
-		  		  <if test="materialname != null and materialname != ''"> and materialname = #{materialname} </if>
-		  		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.shiguang.mfrs.domain.MaterialDO">
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from c_material
+        <where>
+            <if test="materialid != null and materialid != ''">and materialid = #{materialid}</if>
+            <if test="materialnum != null and materialnum != ''">and materialnum = #{materialnum}</if>
+            <if test="materialname != null and materialname != ''">and materialname = #{materialname}</if>
+            <if test="state != null and state != ''">and state = #{state}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.mfrs.domain.MaterialDO">
 		insert into c_material
 		(
 			`materialid`, 
 			`materialnum`, 
-			`materialname`
+			`materialname`,
+			`state`
 		)
 		values
 		(
 			#{materialid}, 
 			#{materialnum}, 
-			#{materialname}
+			#{materialname},
+			#{state}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="com.shiguang.mfrs.domain.MaterialDO">
-		update c_material 
-		<set>
-			<if test="materialnum != null">`materialnum` = #{materialnum}, </if>
-			<if test="materialname != null">`materialname` = #{materialname}</if>
-		</set>
-		where materialid = #{materialid}
-	</update>
-	
-	<delete id="remove">
+
+    <update id="update" parameterType="com.shiguang.mfrs.domain.MaterialDO">
+        update c_material
+        <set>
+            <if test="materialnum != null">`materialnum` = #{materialnum},</if>
+            <if test="materialname != null">`materialname` = #{materialname},</if>
+            <if test="state != null">`state` = #{state}</if>
+        </set>
+        where materialid = #{materialid}
+    </update>
+
+    <delete id="remove">
 		delete from c_material where materialid = #{value}
 	</delete>
-	
-	<delete id="batchRemove">
-		delete from c_material where materialid in 
-		<foreach item="materialid" collection="array" open="(" separator="," close=")">
-			#{materialid}
-		</foreach>
-	</delete>
 
+    <delete id="batchRemove">
+        delete from c_material where materialid in
+        <foreach item="materialid" collection="array" open="(" separator="," close=")">
+            #{materialid}
+        </foreach>
+    </delete>
+    <!--删除状态修改-->
+    <update id="updateState" parameterType="com.shiguang.mfrs.domain.MaterialDO">
+    update c_material set `state` = #{state} where materialid = #{materialid}
+    </update>
 </mapper>

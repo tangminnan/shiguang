@@ -1,7 +1,6 @@
 package com.shiguang.product.service;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.domain.HlyDO;
 
 import java.util.List;
@@ -33,8 +32,6 @@ public interface HlyService {
 
     int batchRemove(Long[] ids);
 
-    //查询护理液制造商
-    List<MgDO> mglist(Map<String, Object> map);
 
     //菜单联动显示
     List<BrandDO> choice(Integer mfrsid);

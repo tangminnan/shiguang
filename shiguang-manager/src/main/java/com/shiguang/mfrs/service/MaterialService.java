@@ -7,24 +7,27 @@ import java.util.Map;
 
 /**
  * 镜架材质表
- * 
+ *
  * @author cln
  * @email bushuo@163.com
  * @date 2021-06-10 15:41:15
  */
 public interface MaterialService {
-	
-	MaterialDO get(Integer materialid);
-	
-	List<MaterialDO> list(Map<String, Object> map);
-	
-	int count(Map<String, Object> map);
-	
-	int save(MaterialDO material);
-	
-	int update(MaterialDO material);
-	
-	int remove(Integer materialid);
-	
-	int batchRemove(Integer[] materialids);
+
+    MaterialDO get(Integer materialid);
+
+    List<MaterialDO> list(Map<String, Object> map);
+
+    int count(Map<String, Object> map);
+
+    int save(MaterialDO material);
+
+    int update(MaterialDO material);
+
+    int remove(Integer materialid);
+
+    int batchRemove(Integer[] materialids);
+
+    //删除修改状态
+    int updateState(MaterialDO materialDO);
 }

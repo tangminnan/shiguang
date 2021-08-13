@@ -1,7 +1,6 @@
 package com.shiguang.product.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.dao.ProducaDao;
 import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.product.service.ProducaService;
@@ -20,11 +19,6 @@ public class ProducaServiceImpl implements ProducaService {
     @Override
     public ProducaDO get(Long id) {
         return producaDao.get(id);
-    }
-
-    @Override
-    public List<MgDO> mglist(Map<String, Object> map) {
-        return producaDao.mglist(map);
     }
 
     //修改时显示制造商和商品品种名称

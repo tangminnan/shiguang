@@ -13,6 +13,7 @@
 <body>
 <form class="form-horizontal m-t" id="signupForm">
     <div class="new_h3">镜架新增</div>
+
     <!--必填项-->
     <div class="m40 tabS PHGL">
         <h3>必填项</h3>
@@ -37,13 +38,15 @@
                 <td>制造商：</td>
                 <td>
                     <input id="mfrsid" name="mfrsid" type="hidden"/>
+                    <input id="mfrsnum" name="mfrsnum" type="hidden"/>
                     <input id="mfrsName" name="mfrsName" type="text" readonly/>
-                    <input type="button" class="XZ-btn" value="选择" onclick="getMfrsProduca()"/>
+                    <input id="goodsids" name="goodsids" value="1" type="hidden"/>
+                    <input type="button" class="XZ-btn" value="选择" onclick="getMfrs()"/>
                     <em>*</em>
                 </td>
                 <td>商品品种：</td>
                 <td style="width:20%;">
-                    <select id="brandid" name="brandid" onchange="change(this, 5, 7)">
+                    <select id="brandnum" name="brandnum" onchange="change(this, 5, 7)">
                         <option value="">--请选择--</option>
                     </select>
                     <em>*</em>
@@ -107,14 +110,16 @@
             </tbody>
         </table>
     </div>
-    <!--必填项2-->
+    <!--非必填项2-->
     <div class="m40 tabS PHGL">
-        <h3>必填项</h3>
+        <h3>非必填项</h3>
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
                 <td>镜架尺寸：</td>
-                <td><input type="text"/></td>
+                <td>
+                    <input id="size" name="size" type="text">
+                </td>
                 <td>工艺类型：</td>
                 <td style="width:20%;">
                     <select id="technologyId" name="technologyId" style="width:60%;">
@@ -141,14 +146,14 @@
                 </td>
                 <td>款式：</td>
                 <td>
-                    <select id="styleId" name="styleId" class="form-control">
+                    <select id="styleId" name="styleId" class="form-control" style="width: 60%">
                         <option></option>
                         <option th:each="ls:${styleDOList}" th:text="${ls.style}" th:value="${ls.styleId}">
                         </option>
                     </select>
                 </td>
                 <td>采购年份：</td>
-                <td><input id="year" name="year" type="text"/><br><em>（年份后两位+两位月份</em></td>
+                <td><input id="year" name="year" type="text" style="width: 60%"/><br><em>（年份后两位+两位月份</em></td>
             </tr>
             </tbody>
         </table>
@@ -169,13 +174,13 @@
                 <td>含税单价：</td>
                 <td>
                     <input id="taxPrice" name="taxPrice" type="text"
-                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                           oninput="getmoney(this,10)" autofocus/>
                     <em>*</em>
                 </td>
                 <td>批发价格：</td>
-                <td>
-                    <input id="tradePrice" name="tradePrice" type="text"
-                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                <td colspan="3">
+                    <input id="tradePrice" name="tradePrice" type="text" style="width: 60%"
+                           oninput="getmoney(this,10)" autofocus/>
                     <em>*</em>
                 </td>
             </tr>
@@ -183,13 +188,13 @@
                 <td>调货成本：</td>
                 <td>
                     <input id="transferPrice" name="transferPrice" type="text"
-                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                           oninput="getmoney(this,10)" autofocus/>
                     <em>*</em>
                 </td>
                 <td>标准零售价格：</td>
                 <td colspan="3">
-                    <input id="retailPrice" name="retailPrice" type="text" style="width: 30%"
-                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                    <input id="retailPrice" name="retailPrice" type="text" style="width: 29%"
+                           oninput="getmoney(this,10)" autofocus/>
                     <em>*</em>
                 </td>
             </tr>
@@ -221,7 +226,7 @@
         //制造商
         var mfrsName = document.getElementById('mfrsName').value;
         //商品品种
-        var brandid = document.getElementById('brandid').value;
+        var brandnum = document.getElementById('brandnum').value;
         //厂家型号
         var factory = document.getElementById('factory').value;
         //型号
@@ -242,11 +247,11 @@
         var transferPrice = document.getElementById('transferPrice').value;
         //标准零售价格
         var retailPrice = document.getElementById('retailPrice').value;
-        if (producName == "") {
-            alert("请输入商品名称");
-        } else if (mfrsName == "") {
+        if (mfrsName == "") {
             alert("请选择制造商");
-        } else if (brandid == "") {
+        } else if (producName == "") {
+            alert("请输入商品名称");
+        } else if (brandnum == "") {
             alert("请选择商品品种");
         } else if (factory == "") {
             alert("请输入厂家型号");
@@ -284,8 +289,8 @@
     //———制造商与品种联动
     function choice(value) {
         // alert(value);
-        $("#brandid").empty("");
-        $("#brandid").append("<option value=\"\">--请选择--</option>");
+        $("#brandnum").empty("");
+        $("#brandnum").append("<option value=\"\">--请选择--</option>");
         $.ajax({
             url: "/product/produca/choice",
             type: "post",
@@ -296,13 +301,11 @@
             dataType: 'JSON',
             async: false,
             success: function (datajson) {
-                // alert(datajson);
                 $(datajson).each(function (key) {
-                    var id = datajson[key].brandid;
-                    // alert("商品品种id———" + id);
+                    // var id = datajson[key].brandid;
+                    var num = datajson[key].brandnum;
                     var roleName = datajson[key].brandname;
-                    // alert("商品品种名称————" + roleName);
-                    $("#brandid").append("<option value='" + id + "'>" + roleName + "</option>")
+                    $("#brandnum").append("<option value='" + num + "'>" + roleName + "</option>")
                 });
             }
         });
@@ -361,6 +364,32 @@
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
 
+    /**
+     * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位
+     */
+    function getmoney(obj, maxLen) {
+        if (maxLen && obj.value.length > maxLen) {//判断长度
+            obj.value = obj.value.slice(0, 10);
+        }
+        //修复第一个字符是小数点 的情况.
+        if (obj.value !== '' && obj.value.substr(0, 1) === '.') {
+            obj.value = "";
+        }
+        //解决 粘贴不生效
+        obj.value = obj.value.replace(/^0*(0\.|[1-9])/, '$1');
+        //清除“数字”和“.”以外的字符
+        obj.value = obj.value.replace(/[^\d.]/g, "");
+        //只保留第一个小数点(.)清除多余的
+        obj.value = obj.value.replace(/\.{2,}/g, ".");
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        //只能输入两个小数
+        obj.value = obj.value.replace(/^(\d+)\.(\d\d).*$/, '$1.$2');
+        if (obj.value.indexOf(".") < 0 && obj.value !== "") {//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+            if (obj.value.substr(0, 1) === '0' && obj.value.length === 2) {
+                obj.value = obj.value.substr(1, obj.value.length);
+            }
+        }
+    }
 
 </script>
 </body>

@@ -275,7 +275,10 @@
                             <td>型号</td>
                             <td>主容量</td>
                             <td>次容量</td>
-                            <td>入库时间</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                             <td>商品条码</td>
                             <td style="display: none">标准零售价</td>
                             <td style="display: none">含税单价</td>
@@ -763,8 +766,10 @@
                             "<td  >" + rows[i].producFactory + "</td>\n" +
                             "<td  >" + rows[i].mainCapacity + "</td>\n" +
                             "<td  >" + rows[i].secondCapacity + "</td>\n" +
-                            "<td >" + rows[i].createTime + "</td>\n" +
-                            "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
+                            "<td  ></td>\n" +
+                            "<td  ></td>\n" +
+                            "<td  ></td>\n" +
+                            "<td  ></td>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
                             "<td style='display: none'>" + rows[i].retailPrice + "</td>\n" +

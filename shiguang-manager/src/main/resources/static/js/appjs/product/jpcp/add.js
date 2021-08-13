@@ -38,86 +38,14 @@ function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
     $("#signupForm").validate({
         rules: {
-            producName: {
-                required: true
-            },
-            mfrsid: {
-                required: true
-            },
-            brandid: {
-                required: true
-            },
-            factory: {
-                required: true
-            },
-
-            proid: {
-                required: true
-            },
-            unitid: {
-                required: true
-            },
-            sphId: {
-                required: true
-            },
-            cylId: {
-                required: true
-            },
-            lightbelowId: {
-                required: true
-            },
-            lensId: {
-                required: true
-            },
-            batchid: {
-                required: true
-            },
-            tax: {
-                required: true
-            },
-            taxPrice: {
-                required: true
-            },
-            tradePrice: {
-                required: true
-            },
-            transferPrice: {
-                required: true
-            },
-            retailPrice: {
+            name: {
                 required: true
             }
         },
         messages: {
-            producName: {
-                required: icon + "请输入商品名称"
-            },
-            mfrsid: {
-                required: icon + "请选择制造商"
-            },
-
-            proid: {
-                required: icon + "请输入商品编号"
-            },
-            unitid: {
-                required: icon + "请选择计量单位"
-            },
-            sphId: {
-                required: icon + "请选择球镜"
-            },
-            cylId: {
-                required: icon + "请选择柱镜"
-            },
-            lightbelowId: {
-                required: icon + "请选择下加光"
-            },
-            lensId: {
-                required: icon + "请选择材料分类"
-            },
-            batchid: {
-                required: icon + "请选择批号管理"
+            name: {
+                required: icon + "请输入姓名"
             }
-
         }
     })
 }

@@ -274,18 +274,6 @@ public class BrandController {
         return R.ok();
     }
 
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("mfrs:brand:remove")
-//    public R remove(Integer brandid) {
-//        if (brandService.remove(brandid) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
 
     /**
      * 批量删除
@@ -298,6 +286,21 @@ public class BrandController {
         return R.ok();
     }
 
+    //跳转制造商
+    @GetMapping("/findmfrs/{goodsids}")
+    @RequiresPermissions("mfrs:brand:findmfrs")
+    String findmfrs(@PathVariable("goodsids") Integer goodsids, Model model) {
+        model.addAttribute("goodsids", goodsids);
+        return "mfrs/brand/findmfrs";
+    }
+
+//    //跳转制造商
+//    @GetMapping("/findmfrs")
+//    @RequiresPermissions("mfrs:brand:findmfrs")
+//    String findmfrs() {
+//        return "mfrs/brand/findmfrs";
+//    }
+
     //制造商——商品类别菜单下来选择
     @ResponseBody
     @RequestMapping(value = "/caidan")
@@ -305,14 +308,6 @@ public class BrandController {
         List<GoodsDO> goodsDOList = brandService.caidan(mfrsid);
         model.addAttribute("goodsDOList", goodsDOList);
         return goodsDOList;
-    }
-
-
-    //跳转制造商
-    @GetMapping("/findmfrs")
-    @RequiresPermissions("mfrs:brand:findmfrs")
-    String findmfrs() {
-        return "mfrs/brand/findmfrs";
     }
 
     /**

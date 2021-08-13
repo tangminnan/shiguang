@@ -7,7 +7,6 @@ import com.shiguang.mfrs.domain.*;
 import com.shiguang.mfrs.service.*;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,14 +64,12 @@ public class JpdzController {
     private GradualService gradualService;
 
     @GetMapping()
-    @RequiresPermissions("product:jpdz:jpdz")
     String Jpdz() {
         return "product/jpdz/jpdz";
     }
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("product:jpdz:jpdz")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -83,12 +80,8 @@ public class JpdzController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("product:jpdz:add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = jpdzService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -123,7 +116,6 @@ public class JpdzController {
     }
 
     @GetMapping("/edit/{id}")
-    @RequiresPermissions("product:jpdz:edit")
     String edit(@PathVariable("id") Long id, Model model) {
         JpdzDO jpdz = jpdzService.get(id);
         model.addAttribute("jpdz", jpdz);
@@ -165,7 +157,6 @@ public class JpdzController {
      * 详情
      */
     @GetMapping("/detail/{id}")
-    @RequiresPermissions("product:jpdz:detail")
     String detail(@PathVariable("id") Long id, Model model) {
         JpdzDO jpdz = jpdzService.get(id);
         model.addAttribute("jpdz", jpdz);
@@ -208,7 +199,6 @@ public class JpdzController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("product:jpdz:add")
     public R save(JpdzDO jpdz) {
         if (jpdzService.save(jpdz) > 0) {
             return R.ok();
@@ -221,31 +211,17 @@ public class JpdzController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("product:jpdz:edit")
     public R update(JpdzDO jpdz) {
         jpdzService.update(jpdz);
         return R.ok();
     }
 
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("product:jpdz:remove")
-//    public R remove(Long id) {
-//        if (jpdzService.remove(id) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
 
     /**
      * 删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
-    @RequiresPermissions("product:jpdz:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] ids) {
         jpdzService.batchRemove(ids);
         return R.ok();
@@ -258,13 +234,6 @@ public class JpdzController {
         List<BrandDO> brandDOList = jpdzService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
-    }
-
-    //跳转制造商
-    @GetMapping("/findmfrs")
-    @RequiresPermissions("product:jpdz:findmfrs")
-    String findmfrs() {
-        return "/mfrs/mfrs/findJpcpMfrs";
     }
 
     /**
@@ -285,7 +254,6 @@ public class JpdzController {
      */
     @ResponseBody
     @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
     public R updateStatus(Long id) {
         JpdzDO jpdzDO = new JpdzDO();
         jpdzDO.setState(0L);

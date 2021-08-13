@@ -4,7 +4,10 @@ import com.shiguang.common.utils.*;
 import com.shiguang.jiancha.domain.PharmacyDO;
 import com.shiguang.jiancha.domain.TryresultsDO;
 import com.shiguang.jiancha.domain.YizhuDO;
-import com.shiguang.jiancha.service.*;
+import com.shiguang.jiancha.service.PharmacyService;
+import com.shiguang.jiancha.service.SubjectiveService;
+import com.shiguang.jiancha.service.TryresultsService;
+import com.shiguang.jiancha.service.YizhuService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.optometry.domain.OcularEyesDO;
@@ -38,9 +41,6 @@ public class OptometryNewController {
     private ResultDiopterService resultDiopterService;
     @Autowired
     private MemberService memberService;
-    //视力
-    @Autowired
-    private ShiliService shiliService;
     //眼生物
     @Autowired
     private OcularEyesService ocularEyesService;

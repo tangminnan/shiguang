@@ -65,14 +65,13 @@ public class JpcpController {
     private GradualService gradualService;
 
     @GetMapping()
-    @RequiresPermissions("product:jpcp:jpcp")
+    @RequiresPermissions("product:produca:produca")
     String Jpcp() {
         return "product/jpcp/jpcp";
     }
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("product:jpcp:jpcp")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -83,12 +82,9 @@ public class JpcpController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("product:jpcp:add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = jpcpService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
+
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -124,7 +120,6 @@ public class JpcpController {
     }
 
     @GetMapping("/edit/{id}")
-    @RequiresPermissions("product:jpcp:edit")
     String edit(@PathVariable("id") Long id, Model model) {
         JpcpDO jpcp = jpcpService.get(id);
         model.addAttribute("jpcp", jpcp);
@@ -166,7 +161,6 @@ public class JpcpController {
      * 详情
      */
     @GetMapping("/detail/{id}")
-    @RequiresPermissions("product:jpcp:detail")
     String detail(@PathVariable("id") Long id, Model model) {
         JpcpDO jpcp = jpcpService.get(id);
         model.addAttribute("jpcp", jpcp);
@@ -209,7 +203,6 @@ public class JpcpController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("product:jpcp:add")
     public R save(JpcpDO jpcp) {
         if (jpcpService.save(jpcp) > 0) {
             return R.ok();
@@ -222,7 +215,6 @@ public class JpcpController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("product:jpcp:edit")
     public R update(JpcpDO jpcp) {
         //判断是否已存在
         Integer value = jpcp.getLightId();
@@ -234,29 +226,17 @@ public class JpcpController {
         return R.ok();
     }
 
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("product:jpcp:remove")
-//    public R remove(Long id) {
-//        if (jpcpService.remove(id) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
 
     /**
      * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
-    @RequiresPermissions("product:jpcp:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] ids) {
         jpcpService.batchRemove(ids);
         return R.ok();
     }
+
 
     //制造商——商品类别菜单下来选择
     @ResponseBody
@@ -267,12 +247,6 @@ public class JpcpController {
         return brandDOList;
     }
 
-    //跳转制造商
-    @GetMapping("/findmfrs")
-    @RequiresPermissions("product:jpcp:findmfrs")
-    String findmfrs() {
-        return "/mfrs/mfrs/findJpcpMfrs";
-    }
 
     /**
      * 启用修改状态
@@ -292,7 +266,6 @@ public class JpcpController {
      */
     @ResponseBody
     @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
     public R updateStatus(Long id) {
         JpcpDO jpcpDO = new JpcpDO();
         jpcpDO.setState(0L);

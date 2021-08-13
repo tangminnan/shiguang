@@ -1,7 +1,6 @@
 package com.shiguang.product.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.dao.OldlensDao;
 import com.shiguang.product.domain.OldlensDO;
 import com.shiguang.product.service.OldlensService;
@@ -52,11 +51,6 @@ public class OldlensServiceImpl implements OldlensService {
         return oldlensDao.batchRemove(ids);
     }
 
-    //查询老花镜制造商
-    @Override
-    public List<MgDO> mglist(Map<String, Object> map) {
-        return oldlensDao.mglist(map);
-    }
 
     //菜单联动显示
     @Override

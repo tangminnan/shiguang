@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">采购结算方式 </label>
                             <div class="col-sm-8">
-                                <select name="payid" id="payid" th:value="${mfrs.payid}"
+                                <select name="payid" id="payid" th:value="${mfrs.payid}" onchange="payChange()"
                                         data-actions-box="false" data-size="5" disabled>
                                     <option th:each="ls:${payDOList}"
                                             th:text="${ls.paymethod}"
@@ -100,6 +100,9 @@
                                 </select>
                                 <input id="payids" name="payids" th:value="${mfrs.payid}"
                                        type="hidden">
+                                <input id="payday" name="payday" th:value="${mfrs.payday}" type="text" hidden
+                                       placeholder="请输入天数"
+                                       oninput="value=value.replace(/[^\d]/g,'')">
                             </div>
                         </div>
 
@@ -215,6 +218,20 @@
         var payids = $("input[name='payids']").val();
         $("#payid").find("[value=" + payids + "]").attr("selected", true);
 
+        function payChange() {
+            var payVal = $("#payid").find("option:selected").text();
+            if (payVal == "现金") {
+                document.getElementById("payday").hidden = true;
+            } else if (payVal == "数期") {
+                document.getElementById("payday").hidden = false;
+            } else if (payVal == "代销月结") {
+                document.getElementById("payday").hidden = true;
+            } else if (payVal == "信用额周转") {
+                document.getElementById("payday").hidden = true;
+            } else if (payVal == "--请选择--") {
+                document.getElementById("payday").hidden = true;
+            }
+        }
     })
 </script>
 

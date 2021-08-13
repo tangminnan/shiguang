@@ -1,7 +1,6 @@
 package com.shiguang.product.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.dao.YxdzDao;
 import com.shiguang.product.domain.YxdzDO;
 import com.shiguang.product.service.YxdzService;
@@ -52,11 +51,6 @@ public class YxdzServiceImpl implements YxdzService {
         return yxdzDao.batchRemove(ids);
     }
 
-    //查询隐形成品制造商
-    @Override
-    public List<MgDO> mglist(Map<String, Object> map) {
-        return yxdzDao.mglist(map);
-    }
 
     //菜单联动显示
     @Override

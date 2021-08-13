@@ -1,7 +1,6 @@
 package com.shiguang.product.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.dao.TyjDao;
 import com.shiguang.product.domain.TyjDO;
 import com.shiguang.product.service.TyjService;
@@ -52,11 +51,6 @@ public class TyjServiceImpl implements TyjService {
         return tyjDao.batchRemove(ids);
     }
 
-    //查询太阳镜制造商
-    @Override
-    public List<MgDO> mglist(Map<String, Object> map) {
-        return tyjDao.mglist(map);
-    }
 
     //菜单联动显示
     @Override

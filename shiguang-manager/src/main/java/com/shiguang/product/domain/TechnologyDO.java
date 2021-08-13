@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-30 09:53:22
+ * @date 2021-08-10 14:23:53
  */
 public class TechnologyDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +21,8 @@ public class TechnologyDO implements Serializable {
 	private String technologyNum;
 	//工艺类型
 	private String technologyType;
+	//状态(0:删除1:未删除)
+	private Long state;
 
 	/**
 	 * 设置：工艺类型id
@@ -57,5 +59,17 @@ public class TechnologyDO implements Serializable {
 	 */
 	public String getTechnologyType() {
 		return technologyType;
+	}
+	/**
+	 * 设置：状态(0:删除1:未删除)
+	 */
+	public void setState(Long state) {
+		this.state = state;
+	}
+	/**
+	 * 获取：状态(0:删除1:未删除)
+	 */
+	public Long getState() {
+		return state;
 	}
 }

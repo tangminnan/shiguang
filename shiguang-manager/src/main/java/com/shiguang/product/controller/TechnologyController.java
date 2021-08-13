@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author cln
  * @email bushuo@163.com
- * @date 2021-06-30 09:53:22
+ * @date 2021-08-10 14:23:53
  */
 
 @Controller
@@ -85,20 +85,7 @@ public class TechnologyController {
     }
 
     /**
-     * 删除
-     */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:technology:remove")
-    public R remove(Long technologyId) {
-        if (technologyService.remove(technologyId) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
-
-    /**
-     * 删除
+     * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
@@ -106,6 +93,22 @@ public class TechnologyController {
     public R remove(@RequestParam("ids[]") Long[] technologyIds) {
         technologyService.batchRemove(technologyIds);
         return R.ok();
+    }
+
+    /**
+     * 删除修改状态
+     */
+    @ResponseBody
+    @RequestMapping("/remove")
+    @RequiresPermissions("product:technology:remove")
+    public R updateStatus(Long technologyId) {
+        TechnologyDO technologyDO = new TechnologyDO();
+        technologyDO.setState(0L);
+        technologyDO.setTechnologyId(technologyId);
+        if (technologyService.updateState(technologyDO) > 0) {
+            return R.ok();
+        }
+        return R.error();
     }
 
 }

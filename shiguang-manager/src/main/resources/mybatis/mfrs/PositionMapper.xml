@@ -6,7 +6,11 @@
     <select id="get" resultType="com.shiguang.mfrs.domain.PositionDO">
 		select `position_id`,`position_num`,`depart_number`,`depart_name`,`position_name`,`position_order`,`state_id`,`status`,`state` from c_position where position_id = #{value}
 	</select>
-
+    <!--//判断是否存在制造商代码-->
+    <select id="haveNum" resultType="com.shiguang.mfrs.domain.PositionDO">
+        select `position_id`,`position_num`,`depart_number`,`depart_name`,`position_name`,`position_order`,`state_id`,`status`,`state`
+          from c_position WHERE position_num = #{positionNum} order by position_id
+    </select>
     <select id="list" resultType="com.shiguang.mfrs.domain.PositionDO">
         select
         po.`position_id`,po.`position_num`,de.`depart_number`,de.`depart_name`,po.`position_name`,po.`position_order`,po.`state_id`,po.`status`,po.`state`

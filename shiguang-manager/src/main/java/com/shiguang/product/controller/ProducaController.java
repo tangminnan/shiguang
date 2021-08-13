@@ -55,7 +55,6 @@ public class ProducaController {
     private MaterialService materialService;
 
     @GetMapping()
-    @RequiresPermissions("product:produca:produca")
     String Produca(Model model) {
         Map<String, Object> map = new HashMap<>();
         //计量单位
@@ -75,7 +74,6 @@ public class ProducaController {
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("product:produca:produca")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -176,19 +174,6 @@ public class ProducaController {
         return R.ok();
     }
 
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("product:produca:remove")
-//    public R remove(Long id) {
-//        if (producaService.remove(id) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
-
     /**
      * 批量删除
      */
@@ -212,12 +197,6 @@ public class ProducaController {
         return brandDOList;
     }
 
-    //跳转制造商
-    @GetMapping("/findmfrs")
-    @RequiresPermissions("product:produca:findmfrs")
-    String findmfrs() {
-        return "mfrs/mfrs/findProducaMfrs";
-    }
 
     /**
      * 启用修改状态
@@ -237,7 +216,7 @@ public class ProducaController {
      */
     @ResponseBody
     @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
+    @RequiresPermissions("product:produca:remove")
     public R updateStatus(Long id) {
         ProducaDO producaDO = new ProducaDO();
         producaDO.setState(0L);

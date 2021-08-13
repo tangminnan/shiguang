@@ -4,7 +4,6 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.UnitService;
@@ -14,7 +13,6 @@ import com.shiguang.product.domain.StyleDO;
 import com.shiguang.product.service.OlddegreesService;
 import com.shiguang.product.service.OldlensService;
 import com.shiguang.product.service.StyleService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,14 +50,12 @@ public class OldlensController {
     private OlddegreesService olddegreesService;
 
     @GetMapping()
-    @RequiresPermissions("product:oldlens:oldlens")
     String Oldlens() {
         return "product/oldlens/oldlens";
     }
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("product:oldlens:oldlens")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -70,12 +66,8 @@ public class OldlensController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("product:oldlens:add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = oldlensService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -89,14 +81,10 @@ public class OldlensController {
     }
 
     @GetMapping("/edit/{id}")
-    @RequiresPermissions("product:oldlens:edit")
     String edit(@PathVariable("id") Long id, Model model) {
         OldlensDO oldlens = oldlensService.get(id);
         model.addAttribute("oldlens", oldlens);
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = oldlensService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -113,14 +101,10 @@ public class OldlensController {
      * 详情
      */
     @GetMapping("/detail/{id}")
-    @RequiresPermissions("product:oldlens:detail")
     String detail(@PathVariable("id") Long id, Model model) {
         OldlensDO oldlens = oldlensService.get(id);
         model.addAttribute("oldlens", oldlens);
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = oldlensService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -138,7 +122,6 @@ public class OldlensController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("product:oldlens:add")
     public R save(OldlensDO oldlens) {
         if (oldlensService.save(oldlens) > 0) {
             return R.ok();
@@ -151,31 +134,17 @@ public class OldlensController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("product:oldlens:edit")
     public R update(OldlensDO oldlens) {
         oldlensService.update(oldlens);
         return R.ok();
     }
 
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("product:oldlens:remove")
-//    public R remove(Long id) {
-//        if (oldlensService.remove(id) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
 
     /**
      * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
-    @RequiresPermissions("product:oldlens:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] ids) {
         oldlensService.batchRemove(ids);
         return R.ok();
@@ -190,12 +159,6 @@ public class OldlensController {
         return brandDOList;
     }
 
-    //跳转制造商
-    @GetMapping("/findmfrs")
-    @RequiresPermissions("product:oldlens:findmfrs")
-    String findmfrs() {
-        return "/mfrs/mfrs/findOldlensMfrs";
-    }
 
     /**
      * 启用修改状态
@@ -215,7 +178,6 @@ public class OldlensController {
      */
     @ResponseBody
     @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
     public R updateStatus(Long id) {
         OldlensDO oldlensDO = new OldlensDO();
         oldlensDO.setState(0L);

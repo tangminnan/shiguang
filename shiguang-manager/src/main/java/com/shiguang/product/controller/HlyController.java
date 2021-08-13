@@ -4,13 +4,11 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.UnitService;
 import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.service.HlyService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,14 +39,12 @@ public class HlyController {
     private UnitService unitService;
 
     @GetMapping()
-    @RequiresPermissions("product:hly:hly")
     String Hly() {
         return "product/hly/hly";
     }
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("product:hly:hly")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -59,12 +55,8 @@ public class HlyController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("product:hly:add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = hlyService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -72,14 +64,10 @@ public class HlyController {
     }
 
     @GetMapping("/edit/{id}")
-    @RequiresPermissions("product:hly:edit")
     String edit(@PathVariable("id") Long id, Model model) {
         HlyDO hly = hlyService.get(id);
         model.addAttribute("hly", hly);
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = hlyService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -90,14 +78,10 @@ public class HlyController {
      * 详情
      */
     @GetMapping("/detail/{id}")
-    @RequiresPermissions("product:hly:detail")
     String detail(@PathVariable("id") Long id, Model model) {
         HlyDO hly = hlyService.get(id);
         model.addAttribute("hly", hly);
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = hlyService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -109,7 +93,6 @@ public class HlyController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("product:hly:add")
     public R save(HlyDO hly) {
         if (hlyService.save(hly) > 0) {
             return R.ok();
@@ -122,31 +105,17 @@ public class HlyController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("product:hly:edit")
     public R update(HlyDO hly) {
         hlyService.update(hly);
         return R.ok();
     }
 
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("product:hly:remove")
-//    public R remove(Long id) {
-//        if (hlyService.remove(id) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
 
     /**
      * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
-    @RequiresPermissions("product:hly:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] ids) {
         hlyService.batchRemove(ids);
         return R.ok();
@@ -161,12 +130,6 @@ public class HlyController {
         return brandDOList;
     }
 
-    //跳转制造商
-    @GetMapping("/findmfrs")
-    @RequiresPermissions("product:hly:findmfrs")
-    String findmfrs() {
-        return "/mfrs/mfrs/findHlyMfrs";
-    }
 
     /**
      * 启用修改状态
@@ -186,7 +149,6 @@ public class HlyController {
      */
     @ResponseBody
     @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
     public R updateStatus(Long id) {
         HlyDO hlyDO = new HlyDO();
         hlyDO.setState(0L);

@@ -3,7 +3,6 @@ package com.shiguang.product.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
-import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.mfrs.domain.RefractivityDO;
 import com.shiguang.mfrs.domain.UnitDO;
@@ -12,7 +11,6 @@ import com.shiguang.mfrs.service.RefractivityService;
 import com.shiguang.mfrs.service.UnitService;
 import com.shiguang.product.domain.PartsDO;
 import com.shiguang.product.service.PartsService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,14 +44,12 @@ public class PartsController {
     private RefractivityService refractivityService;
 
     @GetMapping()
-    @RequiresPermissions("product:parts:parts")
     String Parts() {
         return "product/parts/parts";
     }
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("product:parts:parts")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -64,7 +60,6 @@ public class PartsController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("product:parts:add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
         //制造商
@@ -80,7 +75,6 @@ public class PartsController {
     }
 
     @GetMapping("/edit/{id}")
-    @RequiresPermissions("product:parts:edit")
     String edit(@PathVariable("id") Long id, Model model) {
         PartsDO parts = partsService.get(id);
         model.addAttribute("parts", parts);
@@ -98,7 +92,6 @@ public class PartsController {
      * 详情
      */
     @GetMapping("/detail/{id}")
-    @RequiresPermissions("product:parts:detail")
     String detail(@PathVariable("id") Long id, Model model) {
         PartsDO parts = partsService.get(id);
         model.addAttribute("parts", parts);
@@ -117,7 +110,6 @@ public class PartsController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("product:parts:add")
     public R save(PartsDO parts) {
         if (partsService.save(parts) > 0) {
             return R.ok();
@@ -130,51 +122,33 @@ public class PartsController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("product:parts:edit")
     public R update(PartsDO parts) {
         partsService.update(parts);
         return R.ok();
     }
 
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("product:parts:remove")
-//    public R remove(Long id) {
-//        if (partsService.remove(id) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
 
     /**
      * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
-    @RequiresPermissions("product:parts:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] ids) {
         partsService.batchRemove(ids);
         return R.ok();
     }
-
-    //制造商——商品类别菜单下来选择
-    @ResponseBody
-    @RequestMapping(value = "/choice")
-    List<BrandDO> choice(Integer mfrsid, Model model) {
-        List<BrandDO> brandDOList = partsService.choice(mfrsid);
-        model.addAttribute("brandDOList", brandDOList);
-        return brandDOList;
-    }
-
-    //跳转制造商
-    @GetMapping("/findmfrs")
-    @RequiresPermissions("product:parts:findmfrs")
-    String findmfrs() {
-        return "/mfrs/mfrs/findPartsMfrs";
-    }
+//
+//    //制造商——商品类别菜单下来选择
+//    @ResponseBody
+//    @RequestMapping(value = "/choice")
+//    List<BrandDO> choice(Integer mfrsid,String goodsid, Model model) {
+//        Map<String, Object> map = new HashMap();
+//        map.put("mfrsid", mfrsid);
+//        map.put("goodsid", goodsid);
+//        List<BrandDO> brandDOList = producaService.choice(map);
+//        model.addAttribute("brandDOList", brandDOList);
+//        return brandDOList;
+//    }
 
     /**
      * 启用修改状态
@@ -194,7 +168,6 @@ public class PartsController {
      */
     @ResponseBody
     @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
     public R updateStatus(Long id) {
         PartsDO partsDO = new PartsDO();
         partsDO.setState(0L);

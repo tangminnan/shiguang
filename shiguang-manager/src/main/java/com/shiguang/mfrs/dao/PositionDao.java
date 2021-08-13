@@ -18,6 +18,9 @@ public interface PositionDao {
 
     PositionDO get(Long positionId);
 
+    //判断是否存在
+    List<PositionDO> haveNum(Map<String, Object> map);
+
     List<PositionDO> list(Map<String, Object> map);
 
 

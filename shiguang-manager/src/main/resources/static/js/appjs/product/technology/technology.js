@@ -43,9 +43,9 @@ function load() {
                 // sortOrder.
                 // 返回false将会终止请求
                 columns: [
-                    {
-                        checkbox: true
-                    },
+                    // {
+                    // 	checkbox : true
+                    // },
                     // 								{
                     // 	field : 'technologyId',
                     // 	title : '工艺类型id'
@@ -58,6 +58,10 @@ function load() {
                         field: 'technologyType',
                         title: '工艺类型'
                     },
+                    // 								{
+                    // 	field : 'state',
+                    // 	title : '状态(0:删除1:未删除)'
+                    // },
                     {
                         title: '操作',
                         field: 'id',

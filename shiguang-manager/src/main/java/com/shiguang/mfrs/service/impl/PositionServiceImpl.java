@@ -21,6 +21,11 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
+    public List<PositionDO> haveNum(Map<String, Object> map) {
+        return positionDao.haveNum(map);
+    }
+
+    @Override
     public List<PositionDO> list(Map<String, Object> map) {
         return positionDao.list(map);
     }

@@ -1,7 +1,6 @@
 package com.shiguang.product.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.dao.ShiguangDao;
 import com.shiguang.product.domain.ShiguangDO;
 import com.shiguang.product.service.ShiguangService;
@@ -57,11 +56,6 @@ public class ShiguangServiceImpl implements ShiguangService {
         return shiguangDao.batchRemove(ids);
     }
 
-    //查询视光制造商
-    @Override
-    public List<MgDO> mglist(Map<String, Object> map) {
-        return shiguangDao.mglist(map);
-    }
 
     //菜单联动显示
     @Override

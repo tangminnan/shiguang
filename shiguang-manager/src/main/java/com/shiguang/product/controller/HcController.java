@@ -4,7 +4,6 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.UnitService;
@@ -41,14 +40,12 @@ public class HcController {
     private UnitService unitService;
 
     @GetMapping()
-    @RequiresPermissions("product:hc:hc")
     String Hc() {
         return "product/hc/hc";
     }
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("product:hc:hc")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -59,12 +56,8 @@ public class HcController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("product:hc:add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = hcService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -72,15 +65,11 @@ public class HcController {
     }
 
     @GetMapping("/edit/{id}")
-    @RequiresPermissions("product:hc:edit")
     String edit(@PathVariable("id") Long id, Model model) {
         HcDO hc = hcService.get(id);
         model.addAttribute("hc", hc);
         String sm = hc.getSmall();
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = hcService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -91,14 +80,10 @@ public class HcController {
      * 详情
      */
     @GetMapping("/detail/{id}")
-    @RequiresPermissions("product:hc:detail")
     String detail(@PathVariable("id") Long id, Model model) {
         HcDO hc = hcService.get(id);
         model.addAttribute("hc", hc);
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = hcService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -110,7 +95,6 @@ public class HcController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("product:hc:add")
     public R save(HcDO hc) {
         if (hcService.save(hc) > 0) {
             return R.ok();
@@ -147,7 +131,6 @@ public class HcController {
      */
     @PostMapping("/batchRemove")
     @ResponseBody
-    @RequiresPermissions("product:hc:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] ids) {
         hcService.batchRemove(ids);
         return R.ok();
@@ -160,13 +143,6 @@ public class HcController {
         List<BrandDO> brandDOList = hcService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
-    }
-
-    //跳转制造商
-    @GetMapping("/findmfrs")
-    @RequiresPermissions("product:hc:findmfrs")
-    String findmfrs() {
-        return "/mfrs/mfrs/findHcMfrs";
     }
 
     /**
@@ -187,7 +163,6 @@ public class HcController {
      */
     @ResponseBody
     @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
     public R updateStatus(Long id) {
         HcDO hcDO = new HcDO();
         hcDO.setState(0L);

@@ -1,7 +1,6 @@
 package com.shiguang.product.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.dao.HcDao;
 import com.shiguang.product.domain.HcDO;
 import com.shiguang.product.service.HcService;
@@ -52,11 +51,6 @@ public class HcServiceImpl implements HcService {
         return hcDao.batchRemove(ids);
     }
 
-    //查询耗材制造商
-    @Override
-    public List<MgDO> mglist(Map<String, Object> map) {
-        return hcDao.mglist(map);
-    }
 
     //菜单联动显示
     @Override

@@ -7,7 +7,6 @@ import com.shiguang.mfrs.domain.*;
 import com.shiguang.mfrs.service.*;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,14 +67,12 @@ public class YxdzController {
     private CaizhiService caizhiService;
 
     @GetMapping()
-    @RequiresPermissions("product:yxdz:yxdz")
     String Yxdz() {
         return "product/yxdz/yxdz";
     }
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("product:yxdz:yxdz")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -86,12 +83,8 @@ public class YxdzController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("product:yxdz:add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = yxdzService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -129,14 +122,10 @@ public class YxdzController {
     }
 
     @GetMapping("/edit/{id}")
-    @RequiresPermissions("product:yxdz:edit")
     String edit(@PathVariable("id") Long id, Model model) {
         YxdzDO yxdz = yxdzService.get(id);
         model.addAttribute("yxdz", yxdz);
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = yxdzService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -177,14 +166,10 @@ public class YxdzController {
      * 详情
      */
     @GetMapping("/detail/{id}")
-    @RequiresPermissions("product:yxdz:detail")
     String detail(@PathVariable("id") Long id, Model model) {
         YxdzDO yxdz = yxdzService.get(id);
         model.addAttribute("yxdz", yxdz);
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = yxdzService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -226,7 +211,6 @@ public class YxdzController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("product:yxdz:add")
     public R save(YxdzDO yxdz) {
         if (yxdzService.save(yxdz) > 0) {
             return R.ok();
@@ -239,7 +223,6 @@ public class YxdzController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("product:yxdz:edit")
     public R update(YxdzDO yxdz) {
         yxdzService.update(yxdz);
         return R.ok();
@@ -248,22 +231,8 @@ public class YxdzController {
     /**
      * 删除
      */
-    @PostMapping("/remove")
-    @ResponseBody
-    @RequiresPermissions("product:yxdz:remove")
-    public R remove(Long id) {
-        if (yxdzService.remove(id) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
-
-    /**
-     * 删除
-     */
     @PostMapping("/batchRemove")
     @ResponseBody
-    @RequiresPermissions("product:yxdz:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] ids) {
         yxdzService.batchRemove(ids);
         return R.ok();
@@ -276,13 +245,6 @@ public class YxdzController {
         List<BrandDO> brandDOList = yxdzService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
-    }
-
-    //跳转制造商
-    @GetMapping("/findmfrs")
-    @RequiresPermissions("product:yxdz:findmfrs")
-    String findmfrs() {
-        return "/mfrs/mfrs/findYxdzMfrs";
     }
 
     /**
@@ -303,7 +265,6 @@ public class YxdzController {
      */
     @ResponseBody
     @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
     public R updateStatus(Long id) {
         YxdzDO yxdzDO = new YxdzDO();
         yxdzDO.setState(0L);

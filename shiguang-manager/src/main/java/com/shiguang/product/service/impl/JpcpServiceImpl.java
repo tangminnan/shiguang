@@ -1,7 +1,6 @@
 package com.shiguang.product.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.dao.JpcpDao;
 import com.shiguang.product.domain.JpcpDO;
 import com.shiguang.product.service.JpcpService;
@@ -53,11 +52,6 @@ public class JpcpServiceImpl implements JpcpService {
         return jpcpDao.batchRemove(ids);
     }
 
-    //查询镜片成品制造商
-    @Override
-    public List<MgDO> mglist(Map<String, Object> map) {
-        return jpcpDao.mglist(map);
-    }
 
     //菜单联动显示
     @Override

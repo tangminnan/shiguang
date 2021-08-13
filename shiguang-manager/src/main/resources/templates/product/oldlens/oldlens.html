@@ -1,61 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="col-sm-12">
-			<div class="ibox">
-				<div class="ibox-body">
-					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
-							<button shiro:hasPermission="product:oldlens:add" type="button" class="btn  btn-primary" onclick="add()">
-								<i class="fa fa-plus" aria-hidden="true"></i>添加
-							</button>
-							<button shiro:hasPermission="product:oldlens:batchRemove" type="button" class="btn  btn-danger"
-								onclick="batchRemove()">
-								<i class="fa fa-trash" aria-hidden="true"></i>删除
-							</button>
-						</div>
-						<div class="columns pull-right">
-							<button class="btn btn-success" onclick="reLoad()">查询</button>
-						</div>
-						<div class="columns pull-right col-md-2 nopadding">
-							<input id="searchName" type="text" class="form-control"
-								placeholder="">
-						</div>
-					</div>
-					<table id="exampleTable" data-mobile-responsive="true">
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-		<div>
-			<script type="text/javascript">
-				var s_edit_h = 'hidden';
-				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
-			</script>
-		</div>
-		<div shiro:hasPermission="product:oldlens:edit">
-			<script type="text/javascript">
-				s_edit_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="product:oldlens:remove">
-			<script type="text/javascript">
-				var s_remove_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="product:oldlens:resetPwd">
-			<script type="text/javascript">
-				var s_resetPwd_h = '';
-			</script>
-		</div>
-	</div>
-	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/product/oldlens/oldlens.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>老花镜</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+    <link rel="stylesheet" href="/css/font-awesome.css" type="text/css">
+    <style type="text/css">
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            background-color: #1ab394;
+            border-color: #1ab394;
+            color: #FFFFFF;
+        }
+
+        .btn-warning {
+            background-color: #f8ac59;
+            border-color: #f8ac59;
+            color: #FFFFFF;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+    </style>
+</head>
+<body>
+<div class="spxxwh">
+    <div class="new_h4 fl">商品信息维护</div>
+    <div class="Xbtn HspxxBtn fr">
+        <!--<input type="button" value="批量导入模板下载" />-->
+        <!--<input type="button" value="导出商品" />-->
+        <input onclick="add()" type="button" value="老花镜类新增"/>
+        <!--<input type="button" value="镜架类批量新增" />-->
+        <!--<input type="button" value="显隐查询条件" />-->
+    </div>
+</div>
+
+<div class="topTab m40">
+    <ul>
+        <li><a href="../product/produca">镜架</a></li>
+        <li><a href="../product/parts">配件</a></li>
+        <li><a href="../product/jpcp">镜片（成品片）</a></li>
+        <li><a href="../product/jpdz">镜片（订做片）</a></li>
+        <li><a href="../product/yxcp">隐形（成品片）</a></li>
+        <li><a href="../product/yxdz">隐形（订做片）</a></li>
+        <li><a href="../product/hly">护理液</a></li>
+        <li><a href="../product/tyj">太阳镜</a></li>
+        <li class="on"><a href="../product/oldlens">老花镜</a></li>
+        <li><a href="../product/hc">耗材</a></li>
+        <li><a href="../product/shiguang">视光</a></li>
+    </ul>
+</div>
+
+<!--查询条件-->
+<div class="m40 tabS msgBox">
+    <h3>查询条件</h3>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>商品代码</td>
+            <td><input type="text" value="256987456321"></td>
+            <td>商品名称</td>
+            <td>
+                <input type="text" value="诺瞳儿童眼镜架"/>
+                <input type="button" class="XZ-btn" value="选择"/>
+            </td>
+            <td>制造商</td>
+            <td>
+                <input type="text" value="诺瞳儿童眼镜架"/>
+                <input type="button" class="XZ-btn" value="选择"/>
+            </td>
+        </tr>
+        <tr>
+            <td>商品品种</td>
+            <td>
+                <input type="text" value="诺瞳儿童眼镜架"/>
+                <input type="button" class="XZ-btn" value="选择"/>
+            </td>
+            <td>标准零售价格</td>
+            <td>
+                <input type="text"/> ~ <input type="text"/>
+            </td>
+            <td>含税单位</td>
+            <td><input type="text"/> ~ <input type="text"/></td>
+        </tr>
+        <tr>
+            <td>老花镜球镜范围</td>
+            <td><input type="text"/> ~ <input type="text"/></td>
+            <td>型号</td>
+            <td>
+                <input type="text"/>
+            </td>
+            <td>色号</td>
+            <td>
+                <input type="text"/>
+            </td>
+
+        </tr>
+        <tr>
+            <td>启用状态</td>
+            <td>
+                <select name="" id="">
+                    <option value="">--请选择--</option>
+                    <option value="">黑色镶金边</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <!--保存/清空-->
+    <div class="BQ-btn">
+        <input type="button" value="保存"/>
+        <input type="button" class="empty" value="清空"/>
+    </div>
+</div>
+
+<!--商品信息-->
+<div class="m40 tabS msgBoxDD">
+    <div class="msgBoxDD_top">
+        <h3 class="fl">商品信息</h3>
+        <div class="Xbtn HspxxBtn PLbtns fr">
+            <!--<input type="button" value="批量销售启用" />-->
+            <!--<input type="button" value="批量销售停用" />-->
+            <!--<input type="button" value="批量批发启用" />-->
+            <!--<input type="button" value="批量批发停用" />-->
+            <!--<input type="button" value="批量删除"/>-->
+        </div>
+    </div>
+    <table id="exampleTable" data-mobile-responsive="true"></table>
+
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+    </script>
+</div>
+<div>
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div>
+    <script type="text/javascript">
+        var s_remove_h = '';
+    </script>
+</div>
+<div>
+    <script type="text/javascript">
+        var s_resetPwd_h = '';
+    </script>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/product/oldlens/oldlens.js"></script>
 </body>
 </html>

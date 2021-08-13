@@ -83,6 +83,15 @@ public class BrandDO implements Serializable {
     private Long status;
     //状态(0:删除1:未删除)
     private Long state;
+    private String payday;
+
+    public String getPayday() {
+        return payday;
+    }
+
+    public void setPayday(String payday) {
+        this.payday = payday;
+    }
 
     /**
      * 设置：品牌id

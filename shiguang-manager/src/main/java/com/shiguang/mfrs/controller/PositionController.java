@@ -90,7 +90,7 @@ public class PositionController {
         String positionNum = position.getPositionNum();
         Map<String, Object> map = new HashMap<>();
         map.put("positionNum", positionNum);
-        List<PositionDO> list = positionService.list(map);
+        List<PositionDO> list = positionService.haveNum(map);
         if (list.size() > 0) {
             return R.error("仓位代码已存在");
         }

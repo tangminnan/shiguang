@@ -9,13 +9,13 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <form class="form-horizontal m-t" id="signupForm">
-                        <input id="technology_id" name="technology_id" th:value="${technology.technologyId}"
+                        <input id="technologyId" name="technologyId" th:value="${technology.technologyId}"
                                type="hidden">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">编码：</label>
                             <div class="col-sm-8">
                                 <input id="technologyNum" name="technologyNum" th:value="${technology.technologyNum}"
-                                       class="form-control" type="text" readonly>
+                                       class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">

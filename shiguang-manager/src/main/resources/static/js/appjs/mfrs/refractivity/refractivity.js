@@ -43,9 +43,9 @@ function load() {
                 // sortOrder.
                 // 返回false将会终止请求
                 columns: [
-                    {
-                        checkbox: true
-                    },
+                    // {
+                    //     checkbox: true
+                    // },
                     // 								{
                     // 	field : 'refractivityid',
                     // 	title : '折射率id'

@@ -4,13 +4,11 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.UnitService;
 import com.shiguang.product.domain.ShiguangDO;
 import com.shiguang.product.service.ShiguangService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,14 +40,12 @@ public class ShiguangController {
 
 
     @GetMapping()
-    @RequiresPermissions("product:shiguang:shiguang")
     String Shiguang() {
         return "product/shiguang/shiguang";
     }
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("product:shiguang:shiguang")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -60,12 +56,8 @@ public class ShiguangController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("product:shiguang:add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = shiguangService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -73,14 +65,10 @@ public class ShiguangController {
     }
 
     @GetMapping("/edit/{id}")
-    @RequiresPermissions("product:shiguang:edit")
     String edit(@PathVariable("id") Long id, Model model) {
         ShiguangDO shiguang = shiguangService.get(id);
         model.addAttribute("shiguang", shiguang);
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = shiguangService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -91,14 +79,10 @@ public class ShiguangController {
      * 详情
      */
     @GetMapping("/detail/{id}")
-    @RequiresPermissions("product:shiguang:detail")
     String detail(@PathVariable("id") Long id, Model model) {
         ShiguangDO shiguang = shiguangService.get(id);
         model.addAttribute("shiguang", shiguang);
         Map<String, Object> map = new HashMap<>();
-        //制造商
-        List<MgDO> mfrsDOList = shiguangService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
@@ -110,7 +94,6 @@ public class ShiguangController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("product:shiguang:add")
     public R save(ShiguangDO shiguang) {
         if (shiguangService.save(shiguang) > 0) {
             return R.ok();
@@ -123,31 +106,16 @@ public class ShiguangController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("product:shiguang:edit")
     public R update(ShiguangDO shiguang) {
         shiguangService.update(shiguang);
         return R.ok();
     }
-
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("product:shiguang:remove")
-//    public R remove(Long id) {
-//        if (shiguangService.remove(id) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
 
     /**
      * 批量删除
      */
     @PostMapping("/batchRemove")
     @ResponseBody
-    @RequiresPermissions("product:shiguang:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] ids) {
         shiguangService.batchRemove(ids);
         return R.ok();
@@ -160,13 +128,6 @@ public class ShiguangController {
         List<BrandDO> brandDOList = shiguangService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
-    }
-
-    //跳转制造商
-    @GetMapping("/findmfrs")
-    @RequiresPermissions("product:shiguang:findmfrs")
-    String findmfrs() {
-        return "/mfrs/mfrs/findShiguangMfrs";
     }
 
     /**
@@ -187,7 +148,6 @@ public class ShiguangController {
      */
     @ResponseBody
     @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
     public R updateStatus(Long id) {
         ShiguangDO shiguangDO = new ShiguangDO();
         shiguangDO.setState(0L);

@@ -3,70 +3,83 @@
 
 <mapper namespace="com.shiguang.mfrs.dao.RefractivityDao">
 
-	<select id="get" resultType="com.shiguang.mfrs.domain.RefractivityDO">
-		select `refractivityid`,`refractivitynum`,`refractivityvalue` from c_refractivity where refractivityid = #{value}
+    <select id="get" resultType="com.shiguang.mfrs.domain.RefractivityDO">
+		select `refractivityid`,`refractivitynum`,`refractivityvalue`,`state` from c_refractivity where refractivityid = #{value}
 	</select>
 
-	<select id="list" resultType="com.shiguang.mfrs.domain.RefractivityDO">
-		select `refractivityid`,`refractivitynum`,`refractivityvalue` from c_refractivity
-        <where>  
-		  		  <if test="refractivityid != null and refractivityid != ''"> and refractivityid = #{refractivityid} </if>
-		  		  <if test="refractivitynum != null and refractivitynum != ''"> and refractivitynum = #{refractivitynum} </if>
-		  		  <if test="refractivityvalue != null and refractivityvalue != ''"> and refractivityvalue = #{refractivityvalue} </if>
-		  		</where>
+    <select id="list" resultType="com.shiguang.mfrs.domain.RefractivityDO">
+        select `refractivityid`,`refractivitynum`,`refractivityvalue`,`state` from c_refractivity
+        <where>
+            <if test="refractivityid != null and refractivityid != ''">and refractivityid = #{refractivityid}</if>
+            <if test="refractivitynum != null and refractivitynum != ''">and refractivitynum = #{refractivitynum}</if>
+            <if test="refractivityvalue != null and refractivityvalue != ''">and refractivityvalue =
+                #{refractivityvalue}
+            </if>
+            and state=1
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by refractivityid
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from c_refractivity
-		 <where>  
-		  		  <if test="refractivityid != null and refractivityid != ''"> and refractivityid = #{refractivityid} </if>
-		  		  <if test="refractivitynum != null and refractivitynum != ''"> and refractivitynum = #{refractivitynum} </if>
-		  		  <if test="refractivityvalue != null and refractivityvalue != ''"> and refractivityvalue = #{refractivityvalue} </if>
-		  		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.shiguang.mfrs.domain.RefractivityDO" useGeneratedKeys="true" keyProperty="refractivityid">
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from c_refractivity
+        <where>
+            <if test="refractivityid != null and refractivityid != ''">and refractivityid = #{refractivityid}</if>
+            <if test="refractivitynum != null and refractivitynum != ''">and refractivitynum = #{refractivitynum}</if>
+            <if test="refractivityvalue != null and refractivityvalue != ''">and refractivityvalue =
+                #{refractivityvalue}
+            </if>
+            <if test="state != null and state != ''">and state =#{state}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.mfrs.domain.RefractivityDO" useGeneratedKeys="true"
+            keyProperty="refractivityid">
 		insert into c_refractivity
 		(
 			`refractivitynum`, 
-			`refractivityvalue`
+			`refractivityvalue`,
+			`state`
 		)
 		values
 		(
 			#{refractivitynum}, 
-			#{refractivityvalue}
+			#{refractivityvalue},
+			#{state}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="com.shiguang.mfrs.domain.RefractivityDO">
-		update c_refractivity 
-		<set>
-			<if test="refractivitynum != null">`refractivitynum` = #{refractivitynum}, </if>
-			<if test="refractivityvalue != null">`refractivityvalue` = #{refractivityvalue}</if>
-		</set>
-		where refractivityid = #{refractivityid}
-	</update>
-	
-	<delete id="remove">
+
+    <update id="update" parameterType="com.shiguang.mfrs.domain.RefractivityDO">
+        update c_refractivity
+        <set>
+            <if test="refractivitynum != null">`refractivitynum` = #{refractivitynum},</if>
+            <if test="refractivityvalue != null">`refractivityvalue` = #{refractivityvalue},</if>
+            <if test="state != null">`state` = #{state}</if>
+        </set>
+        where refractivityid = #{refractivityid}
+    </update>
+
+    <delete id="remove">
 		delete from c_refractivity where refractivityid = #{value}
 	</delete>
-	
-	<delete id="batchRemove">
-		delete from c_refractivity where refractivityid in 
-		<foreach item="refractivityid" collection="array" open="(" separator="," close=")">
-			#{refractivityid}
-		</foreach>
-	</delete>
 
+    <delete id="batchRemove">
+        delete from c_refractivity where refractivityid in
+        <foreach item="refractivityid" collection="array" open="(" separator="," close=")">
+            #{refractivityid}
+        </foreach>
+    </delete>
+    <!--删除状态修改-->
+    <update id="updateState" parameterType="com.shiguang.mfrs.domain.RefractivityDO">
+    update c_refractivity set `state` = #{state} where refractivityid = #{refractivityid}
+    </update>
 </mapper>

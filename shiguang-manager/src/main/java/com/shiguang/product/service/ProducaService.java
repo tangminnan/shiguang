@@ -1,7 +1,6 @@
 package com.shiguang.product.service;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.domain.ProducaDO;
 
 import java.util.List;
@@ -16,8 +15,6 @@ import java.util.Map;
  */
 public interface ProducaService {
     ProducaDO get(Long id);
-
-    List<MgDO> mglist(Map<String, Object> map);
 
     //修改时显示制造商和商品品种名称
     List<ProducaDO> list(Map<String, Object> map);

@@ -1,7 +1,6 @@
 package com.shiguang.product.dao;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.domain.ProducaDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,7 +19,6 @@ public interface ProducaDao {
 
     ProducaDO get(Long id);
 
-    List<MgDO> mglist(Map<String, Object> map);
 
     //修改时显示制造商和商品品种名称
     List<ProducaDO> list(Map<String, Object> map);

@@ -230,13 +230,6 @@
             #{id}
         </foreach>
     </delete>
-    <!--查询隐形定做制造商-->
-    <select id="mglist" resultType="com.shiguang.product.domain.YxdzDO">
-		select m.mfrsid,m.mfrsname from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid
-		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=4
-		and m.state= 1
-    group by m.mfrsid order by m.mfrsid asc
-	</select>
     <!--菜单联动显示-->
     <select id="choice" resultType="com.shiguang.product.domain.YxdzDO">
 		select b.brandid,b.brandname from c_brand b left join  cc_mg mg on b.goodsid = mg.goodsid

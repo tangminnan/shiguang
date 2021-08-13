@@ -392,17 +392,9 @@
             #{id}
         </foreach>
     </delete>
-    <!--查询镜片定做制造商-->
-    <select id="mglist" resultType="com.shiguang.product.domain.JpdzDO">
-		select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
-        from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=4
-        and m.state= 1
-        group by m.mfrsid order by m.mfrsid asc
-	</select>
     <!--菜单联动显示-->
     <select id="choice" resultType="com.shiguang.product.domain.JpdzDO">
-		select b.brandid,b.brandname from c_brand b left join  cc_mg mg on b.goodsid = mg.goodsid
-		left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=3 and b.mfrsid = #{mfrsid} group by  b.brandid;
+		select  brandid,brandnum ,brandname  from c_brand  where mfrsid=#{mfrsid} and goodsid=#{goodsid} group by brandid
 	</select>
     <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.JpdzDO">

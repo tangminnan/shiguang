@@ -47,17 +47,17 @@ public class YxdzDO implements Serializable {
     //球镜
     private String sph;
     //球镜上限
-    private Long sphUp;
+    private String sphUp;
     //球镜下限
-    private Long sphDown;
+    private String sphDown;
     //球镜跨度
-    private Long sphSpan;
+    private String sphSpan;
     //柱镜上限
-    private Long cylUp;
+    private String cylUp;
     //柱镜下限
-    private Long cylDown;
+    private String cylDown;
     //柱镜跨度
-    private Long cylSpan;
+    private String cylSpan;
     //曲率1
     private String curvatureOne;
     //-曲率1
@@ -302,84 +302,84 @@ public class YxdzDO implements Serializable {
     /**
      * 设置：球镜上限
      */
-    public void setSphUp(Long sphUp) {
+    public void setSphUp(String sphUp) {
         this.sphUp = sphUp;
     }
 
     /**
      * 获取：球镜上限
      */
-    public Long getSphUp() {
+    public String getSphUp() {
         return sphUp;
     }
 
     /**
      * 设置：球镜下限
      */
-    public void setSphDown(Long sphDown) {
+    public void setSphDown(String sphDown) {
         this.sphDown = sphDown;
     }
 
     /**
      * 获取：球镜下限
      */
-    public Long getSphDown() {
+    public String getSphDown() {
         return sphDown;
     }
 
     /**
      * 设置：球镜跨度
      */
-    public void setSphSpan(Long sphSpan) {
+    public void setSphSpan(String sphSpan) {
         this.sphSpan = sphSpan;
     }
 
     /**
      * 获取：球镜跨度
      */
-    public Long getSphSpan() {
+    public String getSphSpan() {
         return sphSpan;
     }
 
     /**
      * 设置：柱镜上限
      */
-    public void setCylUp(Long cylUp) {
+    public void setCylUp(String cylUp) {
         this.cylUp = cylUp;
     }
 
     /**
      * 获取：柱镜上限
      */
-    public Long getCylUp() {
+    public String getCylUp() {
         return cylUp;
     }
 
     /**
      * 设置：柱镜下限
      */
-    public void setCylDown(Long cylDown) {
+    public void setCylDown(String cylDown) {
         this.cylDown = cylDown;
     }
 
     /**
      * 获取：柱镜下限
      */
-    public Long getCylDown() {
+    public String getCylDown() {
         return cylDown;
     }
 
     /**
      * 设置：柱镜跨度
      */
-    public void setCylSpan(Long cylSpan) {
+    public void setCylSpan(String cylSpan) {
         this.cylSpan = cylSpan;
     }
 
     /**
      * 获取：柱镜跨度
      */
-    public Long getCylSpan() {
+    public String getCylSpan() {
         return cylSpan;
     }
 

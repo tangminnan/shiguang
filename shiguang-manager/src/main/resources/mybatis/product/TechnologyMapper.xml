@@ -3,70 +3,79 @@
 
 <mapper namespace="com.shiguang.product.dao.TechnologyDao">
 
-	<select id="get" resultType="com.shiguang.product.domain.TechnologyDO">
-		select `technology_id`,`technology_num`,`technology_type` from a_technology where technology_id = #{value}
+    <select id="get" resultType="com.shiguang.product.domain.TechnologyDO">
+		select `technology_id`,`technology_num`,`technology_type`,`state` from a_technology where technology_id = #{value}
 	</select>
 
-	<select id="list" resultType="com.shiguang.product.domain.TechnologyDO">
-		select `technology_id`,`technology_num`,`technology_type` from a_technology
-        <where>  
-		  		  <if test="technologyId != null and technologyId != ''"> and technology_id = #{technologyId} </if>
-		  		  <if test="technologyNum != null and technologyNum != ''"> and technology_num = #{technologyNum} </if>
-		  		  <if test="technologyType != null and technologyType != ''"> and technology_type = #{technologyType} </if>
-		  		</where>
+    <select id="list" resultType="com.shiguang.product.domain.TechnologyDO">
+        select `technology_id`,`technology_num`,`technology_type`,`state` from a_technology
+        <where>
+            <if test="technologyId != null and technologyId != ''">and technology_id = #{technologyId}</if>
+            <if test="technologyNum != null and technologyNum != ''">and technology_num = #{technologyNum}</if>
+            <if test="technologyType != null and technologyType != ''">and technology_type = #{technologyType}</if>
+            and state =1
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by technology_id desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from a_technology
-		 <where>  
-		  		  <if test="technologyId != null and technologyId != ''"> and technology_id = #{technologyId} </if>
-		  		  <if test="technologyNum != null and technologyNum != ''"> and technology_num = #{technologyNum} </if>
-		  		  <if test="technologyType != null and technologyType != ''"> and technology_type = #{technologyType} </if>
-		  		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.shiguang.product.domain.TechnologyDO" useGeneratedKeys="true" keyProperty="technologyId">
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from a_technology
+        <where>
+            <if test="technologyId != null and technologyId != ''">and technology_id = #{technologyId}</if>
+            <if test="technologyNum != null and technologyNum != ''">and technology_num = #{technologyNum}</if>
+            <if test="technologyType != null and technologyType != ''">and technology_type = #{technologyType}</if>
+            <if test="state != null and state != ''">and state = #{state}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.product.domain.TechnologyDO" useGeneratedKeys="true"
+            keyProperty="technologyId">
 		insert into a_technology
 		(
 			`technology_num`, 
-			`technology_type`
+			`technology_type`, 
+			`state`
 		)
 		values
 		(
 			#{technologyNum}, 
-			#{technologyType}
+			#{technologyType}, 
+			#{state}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="com.shiguang.product.domain.TechnologyDO">
-		update a_technology 
-		<set>
-			<if test="technologyNum != null">`technology_num` = #{technologyNum}, </if>
-			<if test="technologyType != null">`technology_type` = #{technologyType}</if>
-		</set>
-		where technology_id = #{technologyId}
-	</update>
-	
-	<delete id="remove">
+
+    <update id="update" parameterType="com.shiguang.product.domain.TechnologyDO">
+        update a_technology
+        <set>
+            <if test="technologyNum != null">`technology_num` = #{technologyNum},</if>
+            <if test="technologyType != null">`technology_type` = #{technologyType},</if>
+            <if test="state != null">`state` = #{state}</if>
+        </set>
+        where technology_id = #{technologyId}
+    </update>
+
+    <delete id="remove">
 		delete from a_technology where technology_id = #{value}
 	</delete>
-	
-	<delete id="batchRemove">
-		delete from a_technology where technology_id in 
-		<foreach item="technologyId" collection="array" open="(" separator="," close=")">
-			#{technologyId}
-		</foreach>
-	</delete>
 
+    <delete id="batchRemove">
+        delete from a_technology where technology_id in
+        <foreach item="technologyId" collection="array" open="(" separator="," close=")">
+            #{technologyId}
+        </foreach>
+    </delete>
+    <!--删除状态修改-->
+    <update id="updateState" parameterType="com.shiguang.product.domain.TechnologyDO">
+    update a_technology  set `state` = #{state} where technology_id = #{technologyId}
+    </update>
 </mapper>

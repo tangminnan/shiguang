@@ -29,6 +29,16 @@ public class ProducaDO implements Serializable {
     private Integer brandid;
     //品牌
     private String brandname;
+    private String brandnum;
+
+    public String getBrandnum() {
+        return brandnum;
+    }
+
+    public void setBrandnum(String brandnum) {
+        this.brandnum = brandnum;
+    }
+
     //厂家型号（品牌维护中有）
     private String factory;
     //型号

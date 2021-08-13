@@ -3,8 +3,14 @@ package com.shiguang.mfrs.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
-import com.shiguang.mfrs.domain.*;
-import com.shiguang.mfrs.service.*;
+import com.shiguang.mfrs.domain.GoodsDO;
+import com.shiguang.mfrs.domain.MfrsDO;
+import com.shiguang.mfrs.domain.MgDO;
+import com.shiguang.mfrs.domain.PayDO;
+import com.shiguang.mfrs.service.GoodsService;
+import com.shiguang.mfrs.service.MfrsService;
+import com.shiguang.mfrs.service.MgService;
+import com.shiguang.mfrs.service.PayService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,9 +42,6 @@ public class MfrsController {
     //支付方式
     @Autowired
     private PayService payService;
-    //    //开票状态
-    @Autowired
-    private InvoiceService invoiceService;
     //制造商商品表
     @Autowired
     private MgService mgService;
@@ -51,9 +54,6 @@ public class MfrsController {
         //商品
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
-        //开票状态
-        List<InvoiceDO> invoiceDOList = invoiceService.list(map);
-        model.addAttribute("invoiceDOList", invoiceDOList);
         return "mfrs/mfrs/mfrs";
     }
 
@@ -77,157 +77,14 @@ public class MfrsController {
     public PageUtils mfrsList(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        query.put("goodsIds", Integer.parseInt(query.get("goodsids").toString()));
+        if (null != query.get("goodsids")) {
+            query.put("goodsIds", Integer.parseInt(query.get("goodsids").toString()));
+        }
         List<MfrsDO> mfrsDOList = mfrsService.findMfrs(query);
         int total = mfrsService.mgcount(query);
         PageUtils pageUtils = new PageUtils(mfrsDOList, total);
         return pageUtils;
     }
-
-    //查询镜架制造商
-    @ResponseBody
-    @GetMapping("/producaList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils producaList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.producaList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
-    //查询配件制造商
-    @ResponseBody
-    @GetMapping("/partsList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils partsList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.partsList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
-    //查询镜片成片制造商
-    @ResponseBody
-    @GetMapping("/JpcpList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils JpcpList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.jpcpList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
-    //查询镜片定做制造商
-    @ResponseBody
-    @GetMapping("/JpdzList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils JpdzList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.jpcpList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
-    //查询隐形成片制造商
-    @ResponseBody
-    @GetMapping("/YxcpList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils YxcpList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.yxcpList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
-    //查询隐形定做制造商
-    @ResponseBody
-    @GetMapping("/YxdzList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils YxdzList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.yxcpList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
-    //护理液制造商
-    @ResponseBody
-    @GetMapping("/HlyList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils HlyList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.hlyList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
-    //    <!--查询太阳镜制造商-->
-    @ResponseBody
-    @GetMapping("/tyjList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils tyjList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.tyjList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
-    //    <!--查询老花镜制造商-->
-    @ResponseBody
-    @GetMapping("/oldlensList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils oldlensList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.oldlensList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
-
-    //    <!--查询耗材制造商-->
-    @ResponseBody
-    @GetMapping("/hcList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils hcList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.hcList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
-    //    <!--查询视光制造商-->
-    @ResponseBody
-    @GetMapping("/shiguangList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
-    public PageUtils shiguangList(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<MfrsDO> mfrsDOList = mfrsService.shiguangList(query);
-        int total = mfrsService.mgcount(query);
-        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
-        return pageUtils;
-    }
-
 
     @GetMapping("/add")
     @RequiresPermissions("mfrs:mfrs:add")
@@ -242,9 +99,6 @@ public class MfrsController {
         //支付
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
-        //开票
-        List<InvoiceDO> invoiceDOList = invoiceService.list(map);
-        model.addAttribute("invoiceDOList", invoiceDOList);
 //———获取当前系统时间—————
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
         Date date = new Date();
@@ -266,9 +120,6 @@ public class MfrsController {
         //支付
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
-        //开票
-        List<InvoiceDO> invoiceDOList = invoiceService.list(map);
-        model.addAttribute("invoiceDOList", invoiceDOList);
 //------------修改时转换日期格式
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         //统一社会信用代码效期
@@ -301,9 +152,7 @@ public class MfrsController {
         //支付
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
-        //开票
-        List<InvoiceDO> invoiceDOList = invoiceService.list(map);
-        model.addAttribute("invoiceDOList", invoiceDOList);
+
         //------------修改时转换日期格式
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         //统一社会信用代码效期
