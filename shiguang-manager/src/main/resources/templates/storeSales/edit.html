@@ -58,6 +58,7 @@
 		<input id="memberNumber" name="memberNumber" th:value="${memberDO.cardNumber}"  type="hidden">
 		<!--<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">-->
 		<input class="xiangQ" type="button" value="详情" onclick="getMemberDetail()"/>
+        <input id="checkValue" name="checkValue"   type="hidden">
 	</div>
 </div>
 
@@ -1496,6 +1497,7 @@
     var jjArray=[];
     var jpArray=[];
     var eyejpArray=[];
+    var a=-1;
 	function getJingjia(){
         var toIndex = layer.open({
             type : 2,
@@ -1509,6 +1511,9 @@
                 // var rows = sessionStorage.getItem("row");
                 // alert(rows.length)
 				//alert(JSON.stringify(rows));
+                if (rows.length > 0){
+                    a=a+1;
+				}
                 for (var i=0;i<rows.length;i++){
                     var goodsNumStr = rows[i].goodsNum;
                     //alert(goodsNumStr)
@@ -1519,12 +1524,12 @@
                     html += "<td>"+rows[i].goodsCount+"</td>";
                     html += "<td>1</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
-                    html += "<td id='zhekoulv"+i+"'></td>";
-                    html += "<td id='zhekou"+i+"'></td>";
-                    html += "<td id='zhekouMoney"+i+"'></td>";
-                    html += "<td id='youhuiMoney"+i+"'></td>";
-                    html += "<td id='molingMoney"+i+"'></td>";
-                    html += "<td id='yingshouMoney"+i+"'></td>";
+                    html += "<td id='zhekoulv"+i+"'>0.00</td>";
+                    html += "<td id='zhekoujj"+a+"'>0.00</td>";
+                    html += "<td id='zhekouMoneyjj"+a+"'>0.00</td>";
+                    html += "<td id='youhuiMoneyjj"+a+"'>0.00</td>";
+                    html += "<td id='molingMoneyjj"+a+"'>0.00</td>";
+                    html += "<td id='yingshouMoneyjj"+a+"'>0.00</td>";
                     html += "<td>镜架</td>";
                     html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                     html += "<input id='unit' name='unit' type='hidden' value='"+rows[i].unit+"'/>"
@@ -1534,11 +1539,13 @@
                     html += "<input id='storeUnit' name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"' />"
                     html += "<input id='storeCount' name='storeCount' type='hidden' />"
                     html += "<input id='isJj' name='isJj' type='hidden' />"
-                    html += "<input id='yingshou"+i+"' value='"+rows[i].retailPrice+"' type='hidden' />"
+                    html += "<input id='yingshoujj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                     html += "<input id='producaNum' name='producaNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='storeDescribe'name='storeDescribe' value='镜架' type='hidden' />"
+                    //$("#yingshouMoneyjj"+i+"").text("454")
                     $("#goods").append(html);
-                    $("#yingshouMoney"+i+"").append(rows[i].retailPrice)
+                    //document.getElementById("yingshouMoney"+rows[i].goodsNum+"").text=rows[i].retailPrice
+                    $("#yingshouMoneyjj"+a+"").text(rows[i].retailPrice)
                     price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                     //arraystore.push(rows[i].goodsName);
@@ -1581,6 +1588,7 @@
     // });
 
 	function del(obj,prices,produName) {
+	    a=a-1;
         var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
         tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
         price = (parseFloat(price)- parseFloat(prices)).toFixed(2)
@@ -1658,6 +1666,9 @@
                 // var rows = sessionStorage.getItem("row");
                 // alert(rows.length)
                 arrayjp = rows.length;
+                if (rows.length > 0){
+                    a=a+1;
+                }
                 for (var i=0;i<rows.length;i++){
                     var goodsNumStr = rows[i].goodsNum;
                     html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
@@ -1666,12 +1677,12 @@
                     html += "<td>"+rows[i].goodsCount+"</td>";
                     html += "<td>1</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
-                    html += "<td id='zhekoulv"+i+"'>1.0000</td>";
-                    html += "<td id='zhekou"+i+"'>0.000</td>";
-                    html += "<td id='zhekouMoney"+i+"'>0.00</td>";
-                    html += "<td id='youhuiMoney"+i+"'>0.00</td>";
-                    html += "<td id='molingMoney"+i+"'>0.00</td>";
-                    html += "<td id='yingshouMoney"+i+"'>0.00</td>";
+                    html += "<td id='zhekoulv"+i+"'>0.00</td>";
+                    html += "<td id='zhekoujp"+a+"'>0.00</td>";
+                    html += "<td id='zhekouMoneyjp"+a+"'>0.00</td>";
+                    html += "<td id='youhuiMoneyjp"+a+"'>0.00</td>";
+                    html += "<td id='molingMoneyjp"+a+"'>0.00</td>";
+                    html += "<td id='yingshouMoneyjp"+a+"'>0.00</td>";
                     html += "<td>镜片</td>";
                     html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                     html += "<input id='unit' name='unit' type='hidden' value='"+rows[i].unit+"'/>"
@@ -1681,9 +1692,11 @@
                     html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                     html += "<input id='storeCount'name='storeCount' type='hidden' />"
                     html += "<input id='isJp'name='isJp' type='hidden' />"
+                    html += "<input id='yingshoujp"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                     html += "<input id='storeDescribe'name='storeDescribe' value='镜片' type='hidden' />"
                     $("#goods").append(html);
-                    $("#yingshouMoney"+i+"").append(rows[i].retailPrice);
+                    //$("#yingshouMoneyjp"+i+"").text("2342")
+                    $("#yingshouMoneyjp"+a+"").text(rows[i].retailPrice);
                     price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                     //arraystore.push(rows[i].goodsName);

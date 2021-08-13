@@ -522,10 +522,10 @@ public class StoreSalesController {
     /**
      * 套餐选择
      */
-    @GetMapping("/taocanxz/{check_val}")
+    @GetMapping("/taocanxz/{checkDate}/{check_val}")
     @RequiresPermissions("information:store:taocanxz")
-    String taocanxz(@PathVariable("check_val") String checkVal, Model model) {
-        model.addAttribute("checkVal", checkVal);
+    String taocanxz(@PathVariable("checkDate") String checkDate,@PathVariable("check_val") String check_val, Model model) {
+        model.addAttribute("checkVal", checkDate);
         return "storeSales/taocanxz";
     }
 
@@ -547,9 +547,15 @@ public class StoreSalesController {
         String storeNum = ShiroUtils.getUser().getStoreNum();
         query.put("storeNum",storeNum);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentTime = new Date();
         List<PackageDO> packageDOList = packageService.list(query);
         if (null != packageDOList){
             for (PackageDO packageDO : packageDOList){
+                if (currentTime.compareTo(packageDO.getExpiryDate()) > 0) {
+                    packageDO.setLose(0L);
+                } else {
+                    packageDO.setLose(1L);
+                }
                 packageDO.setPackageDate(simpleDateFormat.format(packageDO.getPackageTime()));
                 packageDO.setEffectiveTime(simpleDateFormat.format(packageDO.getEffectiveDate()));
                 packageDO.setExpiryTime(simpleDateFormat.format(packageDO.getExpiryDate()));

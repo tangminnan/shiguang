@@ -11,12 +11,15 @@ $.validator.setDefaults({
 });
 function update() {
 	$("#roleIds").val(getCheckedRoles());
+    var formData = new FormData(document.getElementById("signupForm"));
 	$.ajax({
 		cache : true,
 		type : "POST",
 		url : "/sys/user/update",
-		data : $('#signupForm').serialize(),// 你的formid
+		data : formData,// 你的formid
 		async : false,
+        processData:false,
+        contentType:false,
 		error : function(request) {
 			alert("Connection error");
 		},

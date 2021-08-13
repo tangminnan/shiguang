@@ -35,7 +35,7 @@
 		  		  <if test="store != null and store != ''"> and p.store = #{store} </if>
 			      <if test="storeNum != null and storeNum != ''"> and FIND_IN_SET(#{storeNum},p.`store_num`) </if>
 		  		  <if test="remark != null and remark != ''"> and p.remark = #{remark} </if>
-			     <if test="goodsCode != null and goodsCode != ''"> and pi.goods_code in (#{goodsCode}) </if>
+			     <if test="goodsCode != null and goodsCode != ''"> and (pi.goods_code in (#{goodsCode}) or pi.goods_code is NULL ) </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -72,8 +72,8 @@
 			<if test="store != null and store != ''"> and p.store = #{store} </if>
 			<if test="storeNum != null and storeNum != ''"> and FIND_IN_SET(#{storeNum},p.`store_num`) </if>
 			<if test="remark != null and remark != ''"> and p.remark = #{remark} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and pi.goods_code in (#{goodsCode}) </if>
-		</where>
+			<if test="goodsCode != null and goodsCode != ''"> and (pi.goods_code in(#{goodsCode}) or pi.goods_code is NULL ) </if>
+	</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.shiguang.packageManager.domain.PackageDO" useGeneratedKeys="true" keyProperty="id">

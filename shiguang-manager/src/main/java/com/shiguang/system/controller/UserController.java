@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.baseinfomation.service.DepartmentService;
+import com.shiguang.system.obs.MultipartFileToFile;
+import com.shiguang.system.obs.ObsService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import com.shiguang.system.service.RoleService;
 import com.shiguang.system.service.UserService;
 import com.shiguang.system.vo.UserVO;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +113,21 @@ public class UserController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
+		try {
+			MultipartFile file = user.getImgFile();
+			if(file!=null && file.getSize()>0){
+				File file1 = MultipartFileToFile.multipartFileToFile(file);
+				String fileName = FileUtil.renameToUUID(file.getOriginalFilename());
+				ObsService obsService = new ObsService();
+				String url = obsService.beginUpload(fileName,file1);
+				user.setHead(url);
+//				String fileName = FileUtil.renameToUUID(file.getOriginalFilename());
+//				FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath()+"userTX/", fileName);
+//				user.setHead("/files/userTX/"+fileName);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		DepartmentDO departmentDO = departmentService.getDepartName(user.getStoreNum());
 		user.setStore(departmentDO.getDepartName());
@@ -126,6 +144,20 @@ public class UserController extends BaseController {
 	R update(UserDO user) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+		}
+		try {
+			MultipartFile file = user.getImgFile();
+			if(file!=null && file.getSize()>0){
+				File file1 = MultipartFileToFile.multipartFileToFile(file);
+				String fileName = FileUtil.renameToUUID(file.getOriginalFilename());
+				ObsService obsService = new ObsService();
+				String url = obsService.beginUpload(fileName,file1);
+				user.setHead(url);
+//				FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath()+"userTX/", fileName);
+//				user.setHead("/files/userTX/"+fileName);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 		DepartmentDO departmentDO = departmentService.getDepartName(user.getStoreNum());
 		user.setStore(departmentDO.getDepartName());

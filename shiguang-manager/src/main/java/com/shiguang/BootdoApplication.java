@@ -18,10 +18,10 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableScheduling
 public class BootdoApplication extends SpringBootServletInitializer {
-	@Override
+	/*@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(BootdoApplication.class);
-    }
+    }*/
     public static void main(String[] args) {
         SpringApplication.run(BootdoApplication.class, args);
         System.out.println("ヾ(◍°∇°◍)ﾉﾞ    bootdo启动成功      ヾ(◍°∇°◍)ﾉﾞ\n" +

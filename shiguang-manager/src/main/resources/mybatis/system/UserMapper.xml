@@ -4,7 +4,8 @@
 <mapper namespace="com.shiguang.system.dao.UserDao">
 
 	<select id="get" resultType="com.shiguang.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`store_num`,`store`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user where user_id = #{value}
+		select `user_id`,`username`,`name`,`password`,`store_num`,`store`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,
+		biaoge_neirong,`technical_title`,`consultation_fee`,`synopsis`,`head` from sys_user where user_id = #{value}
 	</select>
 	<select id="getbyphone" resultType="com.shiguang.system.domain.UserDO">
 		select `user_id`,`username`,`name`,`password`,`store_num`,`store`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user where mobile = #{value}
@@ -18,7 +19,8 @@
 	</select>
 
 	<select id="list" resultType="com.shiguang.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`store_num`,`store`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user
+		select `user_id`,`username`,`name`,`password`,`store_num`,`store`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,
+		biaoge_biaoti,biaoge_neirong,`technical_title`,`consultation_fee`,`synopsis`,`head` from sys_user
         <where>  
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
@@ -110,7 +112,11 @@
 			zhongxin_phone,
 			zhongxin_img,
 			biaoge_biaoti,
-			biaoge_neirong
+			biaoge_neirong,
+			`technical_title`,
+			`consultation_fee`,
+			`synopsis`,
+			`head`
 		)
 		values
 		(
@@ -139,7 +145,11 @@
 			#{zhongxinPhone},
 			#{zhongxinImg},
 			#{biaogeBiaoti},
-			#{biaogeNeirong}
+			#{biaogeNeirong},
+			#{technicalTitle},
+			#{consultationFee},
+			#{synopsis},
+			#{head}
 		)
 	</insert>
 	 
@@ -171,7 +181,11 @@
 			<if test="zhongxinPhone != null">`zhongxin_phone` = #{zhongxinPhone}, </if>
 			<if test="zhongxinImg != null">`zhongxin_img` = #{zhongxinImg},</if>
 			<if test="biaogeBiaoti != null">`biaoge_biaoti` = #{biaogeBiaoti},</if>
-			<if test="biaogeNeirong != null">`biaoge_neirong` = #{biaogeNeirong}</if>
+			<if test="biaogeNeirong != null">`biaoge_neirong` = #{biaogeNeirong},</if>
+			<if test="technicalTitle != null"> `technical_title` = #{technicalTitle},</if>
+			<if test="consultationFee != null"> `consultation_fee` = #{consultationFee},</if>
+			<if test="synopsis != null"> `synopsis` = #{synopsis}, </if>
+			<if test="head != null"> `head` = #{head} </if>
 		</set>
 		where user_id = #{userId}
 	</update>

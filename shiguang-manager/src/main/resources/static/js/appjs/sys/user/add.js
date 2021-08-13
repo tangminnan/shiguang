@@ -20,12 +20,15 @@ function getCheckedRoles() {
 }
 function save() {
 	$("#roleIds").val(getCheckedRoles());
+    var formData = new FormData(document.getElementById("signupForm"));
 	$.ajax({
 		cache : true,
 		type : "POST",
 		url : "/sys/user/save",
-		data : $('#signupForm').serialize(),// 你的formid
+		data : formData,// 你的formid
 		async : false,
+        processData:false,
+        contentType:false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
 		},

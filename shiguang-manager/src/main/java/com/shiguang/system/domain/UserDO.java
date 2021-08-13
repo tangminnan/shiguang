@@ -65,11 +65,19 @@ public class UserDO implements Serializable {
     private String zhongxinPhone;
     //中心图片(公众号二维码)
     private String zhongxinImg;
-    private MultipartFile imgFile;
     //表格标题
     private String biaogeBiaoti;
     //表格内容
     private String biaogeNeirong;
+    //职称
+    private String technicalTitle;
+    //诊费
+    private String consultationFee;
+    //简介
+    private String synopsis;
+    //头像
+    private String head;
+    private MultipartFile imgFile;
    
     
     
@@ -315,6 +323,22 @@ public class UserDO implements Serializable {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
+
+	public void setTechnicalTitle(String technicalTitle) {this.technicalTitle = technicalTitle;}
+
+	public String getTechnicalTitle() {return technicalTitle;}
+
+	public void setConsultationFee(String consultationFee) {this.consultationFee  = consultationFee;}
+
+	public String getConsultationFee() {return consultationFee;}
+
+	public void setSynopsis(String synopsis) {this.synopsis = synopsis;}
+
+	public String getSynopsis() {return synopsis;}
+
+	public void setHead(String head) {this.head = head;}
+
+	public String getHead() {return head;}
 
 	@Override
     public String toString() {

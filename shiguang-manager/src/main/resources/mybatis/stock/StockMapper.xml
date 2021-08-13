@@ -340,7 +340,7 @@
     <select id="listJpdz" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,s.`sph`,c.`cyl`,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`,f.`function_name`,g.`gradual_name`,
+        st.`whole_sum`,st.`position_name`,st.`unit`,s.`sph`,c.`cyl`,r.`refractivityvalue`,pl.`light_name`,l.`lens_name`,f.`function_name`,g.`gradual_name`,
         j.`sph_up`,j.`sph_down`,j.`cyl_up`,j.`cyl_down`,j.`lightbelow_right`,j.`lightbelow_left`
         from stock st left join aa_jpdz j on j.produc_num = st.goods_num
         left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
