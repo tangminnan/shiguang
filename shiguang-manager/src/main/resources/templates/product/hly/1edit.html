@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${hly.id}" type="hidden">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品代码：</label>
+                            <div class="col-sm-8">
+                                <input id="producNum" name="producNum" th:value="${hly.producNum}" class="form-control"
+                                       type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品条码：</label>
+                            <div class="col-sm-8">
+                                <input id="producCode" name="producCode" th:value="${hly.producCode}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品名称：</label>
+                            <div class="col-sm-8">
+                                <input id="producName" name="producName" th:value="${hly.producName}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">销售状态：</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline"> <input type="radio"
+                                                                    th:field="*{hly.status}" name="status"
+                                                                    value="1"/>
+                                    禁用
+                                </label>
+                                <label class="radio-inline"> <input type="radio"
+                                                                    th:field="*{hly.status}" name="status"
+                                                                    value="0"/>
+                                    启用
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">制造商：</label>
+                            <div class="col-sm-8">
+                                <input th:value="${hly.mfrsname}"
+                                       class="form-control"
+                                       type="text" readonly>
+                                <input id="mfrsid" name="mfrsid" th:value="${hly.mfrsid}"
+                                       class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品品种：</label>
+                            <div class="col-sm-8">
+                                <input th:value="${hly.brandname}" class="form-control"
+                                       type="text" readonly>
+                                <input id="brandid" name="brandid" th:value="${hly.brandid}" class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">厂家型号：</label>
+                            <div class="col-sm-8">
+                                <input id="factory" name="factory" th:value="${hly.factory}" class="form-control"
+                                       type="text" onkeyup="liandong1()"
+                                       onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">型号：</label>
+                            <div class="col-sm-8">
+                                <input th:value="${hly.producFactory}"
+                                       class="form-control" type="text" readonly>
+                                <input id="producFactory" name="producFactory" th:value="${hly.producFactory}"
+                                       class="form-control" type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品编号：</label>
+                            <div class="col-sm-8">
+                                <input id="proid" name="proid" th:value="${hly.proid}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">计量单位：</label>
+                            <div class="col-sm-8">
+                                <select name="unitid" id="unitid" th:value="${hly.unitid}" class="form-control"
+                                        data-actions-box="false" data-size="5">
+                                    <option th:each="ls:${unitDOList}"
+                                            th:text="${ls.unitname}"
+                                            th:value="${ls.unitid}"></option>
+                                </select>
+                                <input id="unitids" name="unitids" th:value="${hly.unitid}" class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品类型：</label>
+                            <div class="col-sm-8">
+                                <select id="productType" name="productType" th:value="${hly.productType}"
+                                        class="form-control">
+                                    <option value="软水" th:field="*{hly.productType}">软水</option>
+                                    <option value="硬水" th:field="*{hly.productType}">硬水</option>
+                                </select>
+                                <input id="productTypes" name="productTypes" th:value="${hly.productType}"
+                                       class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">主容量：</label>
+                            <div class="col-sm-8">
+                                <input id="mainCapacity" name="mainCapacity" th:value="${hly.mainCapacity}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">次容量：</label>
+                            <div class="col-sm-8">
+                                <input id="secondCapacity" name="secondCapacity" th:value="${hly.secondCapacity}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">效期提醒上限：</label>
+                            <div class="col-sm-8">
+                                有效期前<input id="upday" name="upday" th:value="${hly.upday}" type="text">天提醒进入滞销状态
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">效期提醒下限：</label>
+                            <div class="col-sm-8">
+                                有效期前<input id="downday" name="downday" th:value="${hly.downday}"
+                                           type="text">天提醒进入即将失效状态
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">税率(%)：</label>
+                            <div class="col-sm-8">
+                                <input id="tax" name="tax" th:value="${hly.tax}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">含税单价：</label>
+                            <div class="col-sm-8">
+                                <input id="taxPrice" name="taxPrice" th:value="${hly.taxPrice}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">批发价格：</label>
+                            <div class="col-sm-8">
+                                <input id="tradePrice" name="tradePrice" th:value="${hly.tradePrice}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">调货成本：</label>
+                            <div class="col-sm-8">
+                                <input id="transferPrice" name="transferPrice" th:value="${hly.transferPrice}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标准零售价格：</label>
+                            <div class="col-sm-8">
+                                <input id="retailPrice" name="retailPrice" th:value="${hly.retailPrice}"
+                                       class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/product/hly/edit.js"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        //计量单位
+        var unitids = $("input[name='unitids']").val();
+        $("#unitid").find("[value='" + unitids + "']").attr("selected", true);
+        //产品类型
+        var productTypes = $("input[name='productTypes']").val();
+        $("#productType").find("[value='" + productTypes + "']").attr("selected", true);
+    });
+</script>
+</body>
+</html>

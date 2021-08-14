@@ -68,7 +68,7 @@ function load() {
                     // },
                     {
                         field: 'mfrsname',
-                        title: '制造商'
+                        title: '制造商简称'
                     },
                     // {
                     //     field: 'brandid',

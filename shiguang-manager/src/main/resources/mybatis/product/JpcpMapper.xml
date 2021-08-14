@@ -4,22 +4,22 @@
 <mapper namespace="com.shiguang.product.dao.JpcpDao">
 
     <select id="get" resultType="com.shiguang.product.domain.JpcpDO">
-        select j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
+        select j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
         j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
         j.`trade_price`,j.`transfer_price`,j.`retail_price` ,j.`status`,j.`state`,
         m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph
-        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsid left join c_brand b on j.brandid=b.brandid left join
+        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsid left join c_brand b on j.brandnum=b.brandnum left join
         c_unit u on j.unitid= u.unitid  left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
         where id = #{value}
     </select>
     <!--//修改时显示制造商和商品品种名称-->
     <select id="list" resultType="com.shiguang.product.domain.JpcpDO">
         select
-        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
+        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
         j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
         j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`status`,j.`state`,
         m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph
-        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsid left join c_brand b on j.brandid=b.brandid left join
+        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsid left join c_brand b on j.brandnum=b.brandnum left join
         c_unit u on j.unitid= u.unitid left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
         where j.state= 1
         group by j.id order by j.status asc ,j.id asc
@@ -33,6 +33,7 @@
             <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
             <if test="proid != null and proid != ''">and proid = #{proid}</if>
             <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
             <if test="sphId != null and sphId != ''">and sph_id = #{sphId}</if>
@@ -62,7 +63,8 @@
 			`produc_name`, 
 			`mfrsid`, 
 			`brandid`, 
-			`proid`, 
+			`brandnum`,
+			`proid`,
 			`unitid`, 
 			`sph_id`, 
 			`cyl_id`, 
@@ -88,7 +90,8 @@
 			#{producName}, 
 			#{mfrsid}, 
 			#{brandid}, 
-			#{proid}, 
+			#{brandnum},
+			#{proid},
 			#{unitid}, 
 			#{sphId}, 
 			#{cylId}, 
@@ -117,6 +120,7 @@
             <if test="producName != null">`produc_name` = #{producName},</if>
             <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
             <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
             <if test="proid != null">`proid` = #{proid},</if>
             <if test="unitid != null">`unitid` = #{unitid},</if>
             <if test="sphId != null">`sph_id` = #{sphId},</if>

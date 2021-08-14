@@ -88,75 +88,81 @@
     <table border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>商品代码</td>
-            <td><input type="text" value="256987456321"></td>
+            <td><input id="producNum" name="producNum" type="text"></td>
             <td>商品名称</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
-                <input type="button" class="XZ-btn" value="选择"/>
+                <input id="producName" name="producName" type="text"/>
             </td>
             <td>制造商</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
+                <input type="text"/>
                 <input type="button" class="XZ-btn" value="选择"/>
             </td>
         </tr>
         <tr>
             <td>商品品种</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
+                <input type="text"/>
                 <input type="button" class="XZ-btn" value="选择"/>
             </td>
             <td>标准零售价格</td>
             <td>
-                <input type="text"/> ~ <input type="text"/>
+                <input id="retailPrice" name="retailPrice" type="text"/> ~ <input name="retailPrice2" type="text"/>
             </td>
-            <td>含税单位</td>
-            <td><input type="text"/> ~ <input type="text"/></td>
+            <td>含税单价</td>
+            <td>
+                <input id="taxPrice" name="taxPrice" type="text"/> ~ <input name="taxPrice2" type="text"/>
+            </td>
         </tr>
         <tr>
             <td>型号</td>
-            <td><input type="text" value="运单号"/></td>
+            <td><input id="producFactory" name="producFactory" type="text"/></td>
             <td>色号</td>
-            <td><input type="text" value="021"/></td>
+            <td><input id="producColor" name="producColor" type="text"/></td>
             <td>尺寸</td>
-            <td><input type="text" value="30*60"/></td>
+            <td><input id="size" name="size" type="text"/></td>
         </tr>
         <tr>
             <td>工艺类型</td>
             <td>
-                <select name="" id="" style="width:100%;">
-                    <option value="">--请选择--</option>
-                    <option value="">黑色镶金边</option>
+                <select id="technologyId" name="technologyId" style="width:100%;">
+                    <option value="">请选择</option>
+                    <option th:each="ls:${technologyDOList}"
+                            th:text="${ls.technologyType}"
+                            th:value="${ls.technologyId}"></option>
                 </select>
             </td>
             <td>镜架材质</td>
             <td>
-                <select name="" id="">
-                    <option value="">--请选择--</option>
-                    <option value="">黑色镶金边</option>
+                <select id="materialid" name="materialid">
+                    <option value="">请选择</option>
+                    <option th:each="ls:${materialDOList}" th:text="${ls.materialname}"
+                            th:value="${ls.materialid}"></option>
                 </select>
             </td>
             <td>启用状态</td>
             <td>
-                <select name="" id="">
-                    <option value="">--请选择--</option>
-                    <option value="">黑色镶金边</option>
+                <select id="status" name="status">
+                    <option value="">请选择</option>
+                    <option value="0">启用</option>
+                    <option value="1">禁用</option>
                 </select>
             </td>
         </tr>
         <tr>
             <td>款式</td>
             <td colspan="5">
-                <select name="" id="" style="width:20%;">
-                    <option value="">--请选择--</option>
-                    <option value="">黑色镶金边</option>
+                <select id="styleId" name="styleId" style="width:20%;">
+                    <option value="">请选择</option>
+                    <option th:each="ls:${styleDOList}" th:text="${ls.style}" th:value="${ls.styleId}">
+                    </option>
                 </select>
             </td>
         </tr>
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input type="button" value="保存"/>
+        <input type="button" value="查询" onclick="load()"/>
         <input type="button" class="empty" value="清空"/>
     </div>
 </div>

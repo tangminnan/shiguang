@@ -13,7 +13,6 @@
 <body>
 <form class="form-horizontal m-t" id="signupForm">
     <div class="new_h3">镜架新增</div>
-
     <!--必填项-->
     <div class="m40 tabS PHGL">
         <h3>必填项</h3>
@@ -47,7 +46,7 @@
                 <td>商品品种：</td>
                 <td style="width:20%;">
                     <select id="brandnum" name="brandnum" onchange="change(this, 5, 7)">
-                        <option value="">--请选择--</option>
+                        <option value="">请选择</option>
                     </select>
                     <em>*</em>
                 </td>
@@ -86,7 +85,7 @@
                 <td>计量单位：</td>
                 <td>
                     <select id="unitid" name="unitid">
-                        <option></option>
+                        <option value="">请选择</option>
                         <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}">
                         </option>
                     </select>
@@ -123,7 +122,7 @@
                 <td>工艺类型：</td>
                 <td style="width:20%;">
                     <select id="technologyId" name="technologyId" style="width:60%;">
-                        <option></option>
+                        <option value="">请选择</option>
                         <option th:each="ls:${technologyDOList}"
                                 th:text="${ls.technologyType}"
                                 th:value="${ls.technologyId}"></option>
@@ -132,7 +131,7 @@
                 <td>镜架材质：</td>
                 <td style="width:20%;">
                     <select id="materialid" name="materialid" style="width:60%;">
-                        <option></option>
+                        <option value="">请选择</option>
                         <option th:each="ls:${materialDOList}" th:text="${ls.materialname}"
                                 th:value="${ls.materialid}"></option>
                     </select>
@@ -147,7 +146,7 @@
                 <td>款式：</td>
                 <td>
                     <select id="styleId" name="styleId" class="form-control" style="width: 60%">
-                        <option></option>
+                        <option value="">请选择</option>
                         <option th:each="ls:${styleDOList}" th:text="${ls.style}" th:value="${ls.styleId}">
                         </option>
                     </select>
@@ -210,7 +209,7 @@
         <input type="button" class="empty" value="清空"/>
         <dl>
             <dt>镜架：<br/>商品代码组成说明：</dt>
-            <dd><img src="/img/tmsm.png" alt=""/></dd>
+            <dd><img src="/img/jingjia.png" alt=""/></dd>
             <dd>商品条码会根据商品代码自动生成。<br/>商品名称默认为选择的品种的名称，可以自行调整。<br/>型号通常是写在镜腿上的规格。</dd>
         </dl>
     </div>
@@ -280,12 +279,6 @@
 
 </script>
 <script type="text/javascript">
-    var a1 = document.getElementById("producNum")
-    var a2 = document.getElementById("producCode")
-    var sum;
-    var sum1;
-    var a1_val = "1.00.00.000000000.0000"
-
     //———制造商与品种联动
     function choice(value) {
         // alert(value);
@@ -310,6 +303,12 @@
             }
         });
     }
+
+    var a1 = document.getElementById("producNum");
+    var a2 = document.getElementById("producCode");
+    var sum;
+    var sum1;
+    var a1_val = "1.00.00.000000000.0000";
 
     function change(e, k, s) {
         a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);

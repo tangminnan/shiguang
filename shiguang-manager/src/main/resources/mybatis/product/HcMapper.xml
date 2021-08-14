@@ -6,10 +6,10 @@
     <select id="get" resultType="com.shiguang.product.domain.HcDO">
 		select
 		m.mfrsname,b.brandname,u.unitname, 
-		h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`factory`,h.`produc_factory`,
+		h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`produc_factory`,
 		h.`proid`,h.`big`,h.`small`,h.`unitid`,h.`batchid`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,
-		h.`retail_price`,h.`status`,h.`state`
-		from aa_hc h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandid=b.brandid left join
+		h.`retail_price`,h.`status`,h.`state`,h.`smallstr`
+		from aa_hc h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum left join
         c_unit u on h.unitid= u.unitid
          where id = #{value}
 	</select>
@@ -17,10 +17,10 @@
     <select id="list" resultType="com.shiguang.product.domain.HcDO">
         select
         m.mfrsname,b.brandname,u.unitname,
-        h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`factory`,h.`produc_factory`,
+        h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`produc_factory`,
         h.`proid`,h.`big`,h.`small`,h.`unitid`,h.`batchid`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,
-        h.`retail_price`,h.`status`,h.`state`
-        from aa_hc h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandid=b.brandid left join
+        h.`retail_price`,h.`status`,h.`state`,h.`smallstr`
+        from aa_hc h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum left join
         c_unit u on h.unitid= u.unitid
         where h.state= 1
         group by h.id order by h.status asc ,h.id asc
@@ -35,11 +35,13 @@
             <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and factory = #{factory}</if>
             <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
             <if test="proid != null and proid != ''">and proid = #{proid}</if>
             <if test="big != null and big != ''">and big = #{big}</if>
             <if test="small != null and small != ''">and small = #{small}</if>
+            <if test="smallstr != null and smallstr != ''">and smallstr = #{smallstr}</if>
             <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
             <if test="batchid != null and batchid != ''">and batchid = #{batchid}</if>
             <if test="tax != null and tax != ''">and tax = #{tax}</if>
@@ -60,12 +62,14 @@
 			`produc_name`, 
 			`mfrsid`, 
 			`brandid`, 
-			`factory`, 
+			`brandnum`,
+			`factory`,
 			`produc_factory`, 
 			`proid`, 
 			`big`, 
 			`small`, 
-			`unitid`, 
+			`smallstr`,
+			`unitid`,
 			`batchid`, 
 			`tax`, 
 			`tax_price`, 
@@ -82,12 +86,14 @@
 			#{producName}, 
 			#{mfrsid}, 
 			#{brandid}, 
-			#{factory}, 
+			#{brandnum},
+			#{factory},
 			#{producFactory}, 
 			#{proid}, 
 			#{big}, 
 			#{small}, 
-			#{unitid}, 
+			#{smallstr},
+			#{unitid},
 			#{batchid}, 
 			#{tax}, 
 			#{taxPrice}, 
@@ -107,11 +113,13 @@
             <if test="producName != null">`produc_name` = #{producName},</if>
             <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
             <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
             <if test="factory != null">`factory` = #{factory},</if>
             <if test="producFactory != null">`produc_factory` = #{producFactory},</if>
             <if test="proid != null">`proid` = #{proid},</if>
             <if test="big != null">`big` = #{big},</if>
             <if test="small != null">`small` = #{small},</if>
+            <if test="smallstr != null">`smallstr` = #{smallstr},</if>
             <if test="unitid != null">`unitid` = #{unitid},</if>
             <if test="batchid != null">`batchid` = #{batchid},</if>
             <if test="tax != null">`tax` = #{tax},</if>

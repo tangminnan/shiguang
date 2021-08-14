@@ -108,25 +108,48 @@ function load() {
                     //     title: '柱镜'
                     // },
                     {
-                        field: 'sphUp',
-                        title: '球镜上限'
+                        title: '球镜',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.sphUp != null && row.sphDown != null) {
+                                return row.sphUp + "/" + row.sphDown
+                            } else {
+                                return ""
+                            }
+                        }
                     },
                     {
-                        field: 'sphDown',
-                        title: '球镜下限'
+                        title: '柱镜',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.cylUp != null && row.cylDown != null) {
+                                return row.cylUp + "/" + row.cylDown
+                            } else {
+                                return ""
+                            }
+                        }
+
                     },
+                    // {
+                    //     field: 'sphUp',
+                    //     title: '球镜上限'
+                    // },
+                    // {
+                    //     field: 'sphDown',
+                    //     title: '球镜下限'
+                    // },
                     // {
                     //     field: 'sphSpan',
                     //     title: '球镜跨度'
                     // },
-                    {
-                        field: 'cylUp',
-                        title: '柱镜上限'
-                    },
-                    {
-                        field: 'cylDown',
-                        title: '柱镜下限'
-                    },
+                    // {
+                    //     field: 'cylUp',
+                    //     title: '柱镜上限'
+                    // },
+                    // {
+                    //     field: 'cylDown',
+                    //     title: '柱镜下限'
+                    // },
                     // {
                     //     field: 'cylSpan',
                     //     title: '柱镜跨度'
@@ -136,13 +159,25 @@ function load() {
                     //     title: '下加光'
                     // },
                     {
-                        field: 'lightbelowRight',
-                        title: '下加光左'
+                        title: '下加光',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.lightbelowRight != null && row.lightbelowLeft != null) {
+                                return row.lightbelowRight + "/" + row.lightbelowLeft
+                            } else {
+                                return ""
+                            }
+                        }
+
                     },
-                    {
-                        field: 'lightbelowLeft',
-                        title: '下加光右'
-                    },
+                    // {
+                    //     field: 'lightbelowRight',
+                    //     title: '下加光左'
+                    // },
+                    // {
+                    //     field: 'lightbelowLeft',
+                    //     title: '下加光右'
+                    // },
                     // {
                     //     field: 'lensId',
                     //     title: '材料分类id'

@@ -9,25 +9,25 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <form class="form-horizontal m-t" id="signupForm">
-                        <input id="id" name="id" th:value="${produca.id}" type="hidden">
+                        <input id="id" name="id" th:value="${oldlens.id}" type="hidden">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">商品代码：</label>
                             <div class="col-sm-8">
-                                <input id="producNum" name="producNum" th:value="${produca.producNum}"
+                                <input id="producNum" name="producNum" th:value="${oldlens.producNum}"
                                        class="form-control" type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">商品条码：</label>
                             <div class="col-sm-8">
-                                <input id="producCode" name="producCode" th:value="${produca.producCode}"
+                                <input id="producCode" name="producCode" th:value="${oldlens.producCode}"
                                        class="form-control" type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">商品名称：</label>
                             <div class="col-sm-8">
-                                <input id="producName" name="producName" th:value="${produca.producName}"
+                                <input id="producName" name="producName" th:value="${oldlens.producName}"
                                        class="form-control" type="text">
                             </div>
                         </div>
@@ -35,12 +35,12 @@
                             <label class="col-sm-3 control-label">销售状态：</label>
                             <div class="col-sm-8">
                                 <label class="radio-inline"> <input type="radio"
-                                                                    th:field="*{produca.status}" name="status"
+                                                                    th:field="*{oldlens.status}" name="status"
                                                                     value="1"/>
                                     禁用
                                 </label>
                                 <label class="radio-inline"> <input type="radio"
-                                                                    th:field="*{produca.status}" name="status"
+                                                                    th:field="*{oldlens.status}" name="status"
                                                                     value="0"/>
                                     启用
                                 </label>
@@ -49,10 +49,10 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商：</label>
                             <div class="col-sm-8">
-                                <input th:value="${produca.mfrsname}"
+                                <input th:value="${oldlens.mfrsname}"
                                        class="form-control"
                                        type="text" readonly>
-                                <input id="mfrsid" name="mfrsid" th:value="${produca.mfrsid}"
+                                <input id="mfrsid" name="mfrsid" th:value="${oldlens.mfrsid}"
                                        class="form-control"
                                        type="hidden">
                             </div>
@@ -60,16 +60,16 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">商品品种：</label>
                             <div class="col-sm-8">
-                                <input th:value="${produca.brandname}" class="form-control"
+                                <input th:value="${oldlens.brandname}" class="form-control"
                                        type="text" readonly>
-                                <input id="brandid" name="brandid" th:value="${produca.brandid}" class="form-control"
+                                <input id="brandid" name="brandid" th:value="${oldlens.brandid}" class="form-control"
                                        type="hidden">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">厂家型号：</label>
                             <div class="col-sm-8">
-                                <input id="factory" name="factory" th:value="${produca.factory}" class="form-control"
+                                <input id="factory" name="factory" th:value="${oldlens.factory}" class="form-control"
                                        type="text" onkeyup="liandong1()"
                                        onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
                             </div>
@@ -77,9 +77,9 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">型号：</label>
                             <div class="col-sm-8">
-                                <input th:value="${produca.producFactory}"
+                                <input th:value="${oldlens.producFactory}"
                                        class="form-control" type="text" readonly>
-                                <input id="producFactory" name="producFactory" th:value="${produca.producFactory}"
+                                <input id="producFactory" name="producFactory" th:value="${oldlens.producFactory}"
                                        class="form-control" type="hidden">
                             </div>
                         </div>
@@ -87,30 +87,34 @@
                             <label class="col-sm-3 control-label">厂家色号：</label>
                             <div class="col-sm-8">
                                 <input id="producFactorycolor" name="producFactorycolor"
-                                       th:value="${produca.producFactorycolor}" class="form-control" type="text"
-                                       onkeyup="liandong3()"
-                                       onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">色号：</label>
-                            <div class="col-sm-8">
-                                <input th:value="${produca.producColor}"
-                                       class="form-control" type="text" readonly>
-                                <input id="producColor" name="producColor" th:value="${produca.producColor}"
-                                       class="form-control" type="hidden">
+                                       th:value="${oldlens.producFactorycolor}" class="form-control" type="text"
+                                       onkeyup="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">计量单位：</label>
                             <div class="col-sm-8">
-                                <select name="unitid" id="unitid" th:value="${produca.unitid}" class="form-control"
+                                <select name="unitid" id="unitid" th:value="${oldlens.unitid}" class="form-control"
                                         data-actions-box="false" data-size="5">
                                     <option th:each="ls:${unitDOList}"
                                             th:text="${ls.unitname}"
                                             th:value="${ls.unitid}"></option>
                                 </select>
-                                <input id="unitids" name="unitids" th:value="${produca.unitid}" class="form-control"
+                                <input id="unitids" name="unitids" th:value="${oldlens.unitid}" class="form-control"
+                                       type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">老花镜度数：</label>
+                            <div class="col-sm-8">
+                                <select id="oldId" name="oldId" th:value="${oldlens.oldId}" class="form-control"
+                                        data-actions-box="false" data-size="5">
+                                    <option th:each="ls:${olddegreesDOList}"
+                                            th:text="${ls.degrees}"
+                                            th:value="${ls.oldId}"
+                                    ></option>
+                                </select>
+                                <input id="oldIds" name="oldIds" th:value="${oldlens.oldId}" class="form-control"
                                        type="hidden">
                             </div>
                         </div>
@@ -118,10 +122,10 @@
                             <label class="col-sm-3 control-label">批号管理：</label>
                             <div class="col-sm-8">
                                 <div class="col-sm-8">
-                                    <label class="radio-inline"> <input type="radio" th:field="*{produca.batchid}"
+                                    <label class="radio-inline"> <input type="radio" th:field="*{oldlens.batchid}"
                                                                         name="batchid" value="1"/> 是
                                     </label>
-                                    <label class="radio-inline"> <input type="radio" th:field="*{produca.batchid}"
+                                    <label class="radio-inline"> <input type="radio" th:field="*{oldlens.batchid}"
                                                                         name="batchid" value="2"/> 否
                                     </label>
                                 </div>
@@ -130,46 +134,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">镜架尺寸：</label>
                             <div class="col-sm-8">
-                                <input id="size" name="size" th:value="${produca.size}" class="form-control"
+                                <input id="size" name="size" th:value="${oldlens.size}" class="form-control"
                                        type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">工艺类型：</label>
-                            <div class="col-sm-8">
-                                <select name="technologyId" id="technologyId" th:value="${produca.technologyId}"
-                                        class="form-control"
-                                        data-actions-box="false" data-size="5">
-                                    <option></option>
-                                    <option th:each="ls:${technologyDOList}"
-                                            th:text="${ls.technologyType}"
-                                            th:value="${ls.technologyId}"></option>
-                                </select>
-                                <input id="technologyIds" name="technologyIds" th:value="${produca.technologyId}"
-                                       class="form-control"
-                                       type="hidden">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">镜架材质：</label>
-                            <div class="col-sm-8">
-                                <select name="materialid" id="materialid" th:value="${produca.materialid}"
-                                        class="form-control"
-                                        data-actions-box="false" data-size="5">
-                                    <option></option>
-                                    <option th:each="ls:${materialDOList}"
-                                            th:text="${ls.materialname}"
-                                            th:value="${ls.materialid}"></option>
-                                </select>
-                                <input id="materialids" name="materialids" th:value="${produca.materialid}"
-                                       class="form-control"
-                                       type="hidden">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">颜色：</label>
                             <div class="col-sm-8">
-                                <select id="color" name="color" th:value="${produca.color}" class="form-control"
+                                <select id="color" name="color" th:value="${oldlens.color}" class="form-control"
                                         data-actions-box="false" data-size="5">
                                 </select>
                             </div>
@@ -177,57 +149,49 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">款式：</label>
                             <div class="col-sm-8">
-                                <select id="styleId" name="styleId" th:value="${produca.styleId}"
+                                <select id="styleId" name="styleId" th:value="${oldlens.styleId}"
                                         class="form-control"
                                         data-actions-box="false" data-size="5">
                                     <option th:each="ls:${styleDOList}"
                                             th:text="${ls.style}"
                                             th:value="${ls.styleId}"></option>
                                 </select>
-                                <input id="styleIds" name="styleIds" th:value="${produca.styleId}"
+                                <input id="styleIds" name="styleIds" th:value="${oldlens.styleId}"
                                        class="form-control"
                                        type="hidden">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">采购年份：</label>
-                            <div class="col-sm-8">
-                                <input id="year" name="year" th:value="${produca.year}" class="form-control"
-                                       type="text">
-                                <span style="color: red">(年份后两位+两位月份)</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-3 control-label">税率(%)：</label>
                             <div class="col-sm-8">
-                                <input id="tax" name="tax" th:value="${produca.tax}" class="form-control" type="text">
+                                <input id="tax" name="tax" th:value="${oldlens.tax}" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">含税单价：</label>
                             <div class="col-sm-8">
-                                <input id="taxPrice" name="taxPrice" th:value="${produca.taxPrice}" class="form-control"
+                                <input id="taxPrice" name="taxPrice" th:value="${oldlens.taxPrice}" class="form-control"
                                        type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">批发价格：</label>
                             <div class="col-sm-8">
-                                <input id="tradePrice" name="tradePrice" th:value="${produca.tradePrice}"
+                                <input id="tradePrice" name="tradePrice" th:value="${oldlens.tradePrice}"
                                        class="form-control" type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">调货成本：</label>
                             <div class="col-sm-8">
-                                <input id="transferPrice" name="transferPrice" th:value="${produca.transferPrice}"
+                                <input id="transferPrice" name="transferPrice" th:value="${oldlens.transferPrice}"
                                        class="form-control" type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">标准零售价格：</label>
                             <div class="col-sm-8">
-                                <input id="retailPrice" name="retailPrice" th:value="${produca.retailPrice}"
+                                <input id="retailPrice" name="retailPrice" th:value="${oldlens.retailPrice}"
                                        class="form-control" type="text" readonly>
                             </div>
                         </div>
@@ -243,18 +207,15 @@
     </div>
 </div>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/product/produca/edit.js"></script>
+<script type="text/javascript" src="/js/appjs/product/oldlens/edit.js"></script>
 <script type="text/javascript">
     $().ready(function () {
         //计量单位
         var unitids = $("input[name='unitids']").val();
         $("#unitid").find("[value='" + unitids + "']").attr("selected", true);
-        //工艺类型
-        var technologyIds = $("input[name='technologyIds']").val();
-        $("#technologyId").find("[value='" + technologyIds + "']").attr("selected", true);
-        //镜架材质
-        var materialids = $("input[name='materialids']").val();
-        $("#materialid").find("[value='" + materialids + "']").attr("selected", true);
+        //老花镜度数
+        var oldIds = $("input[name='oldIds']").val();
+        $("#oldId").find("[value='" + oldIds + "']").attr("selected", true);
         //款式
         var styleIds = $("input[name='styleIds']").val();
         $("#styleId").find("[value='" + styleIds + "']").attr("selected", true);
@@ -268,12 +229,7 @@
         document.getElementById("producFactory").value = va1;
     }
 
-    // <!--//———厂家色号与色号联动—————-->
-    function liandong3() {
-        var val3 = document.getElementById("producFactorycolor").value;
-        var va3 = val3.replace(/[^\w\/]/ig, '').toUpperCase();
-        document.getElementById("producColor").value = va3;
-    }
+
 </script>
 </body>
 </html>

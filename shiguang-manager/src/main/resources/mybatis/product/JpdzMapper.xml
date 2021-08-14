@@ -12,7 +12,7 @@
       lt.lightbelow,
       ltb.lightbelow,
        m.mfrsname,b.brandname,u.unitnum,
-      j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`factory`,j.`produc_factory`,
+      j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`factory`,j.`produc_factory`,
       j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
       j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
       j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
@@ -24,7 +24,7 @@
       left join p_gradual g on g.gradual_id = j.gradual_id
       left join  p_function f on f.function_id = j.function_id
       left join c_mfrs m on j.mfrsid=m.mfrsid
-      left join c_brand b on j.brandid=b.brandid
+      left join c_brand b on j.brandnum=b.brandnum
       left join c_unit u on u.unitid=j.unitid
       left join a_cyl yl on yl.cyl_id=j.cyl_up
       left join a_cyl cyl on cyl.cyl_id=j.cyl_down
@@ -45,7 +45,7 @@
         lt.lightbelow,
         ltb.lightbelow,
         m.mfrsname,b.brandname,u.unitnum,
-        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`factory`,j.`produc_factory`,
+        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`factory`,j.`produc_factory`,
         j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
         j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
         j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
@@ -57,7 +57,7 @@
         left join p_gradual g on g.gradual_id = j.gradual_id
         left join p_function f on f.function_id = j.function_id
         left join c_mfrs m on j.mfrsid=m.mfrsid
-        left join c_brand b on j.brandid=b.brandid
+        left join c_brand b on j.brandnum=b.brandnum
         left join c_unit u on u.unitid=j.unitid
         left join a_cyl yl on yl.cyl_id=j.cyl_up
         left join a_cyl cyl on cyl.cyl_id=j.cyl_down
@@ -84,6 +84,7 @@
             <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and j.brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             <if test="proid != null and proid != ''">and j.proid = #{proid}</if>
@@ -131,7 +132,7 @@
         lt.lightbelow,
         ltb.lightbelow,
         m.mfrsname,b.brandname,u.unitnum,
-        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`factory`,j.`produc_factory`,
+        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`factory`,j.`produc_factory`,
         j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
         j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
         j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
@@ -143,7 +144,7 @@
         left join p_gradual g on g.gradual_id = j.gradual_id
         left join p_function f on f.function_id = j.function_id
         left join c_mfrs m on j.mfrsid=m.mfrsid
-        left join c_brand b on j.brandid=b.brandid
+        left join c_brand b on j.brandnum=b.brandnum
         left join c_unit u on u.unitid=j.unitid
         left join a_cyl yl on yl.cyl_id=j.cyl_up
         left join a_cyl cyl on cyl.cyl_id=j.cyl_down
@@ -159,6 +160,7 @@
             <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and j.brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             <if test="proid != null and proid != ''">and j.proid = #{proid}</if>
@@ -223,6 +225,7 @@
             <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and j.brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             <if test="proid != null and proid != ''">and j.proid = #{proid}</if>
@@ -266,7 +269,8 @@
 			`produc_name`, 
 			`mfrsid`, 
 			`brandid`, 
-			`factory`, 
+			`brandnum`,
+			`factory`,
 			`produc_factory`, 
 			`proid`, 
 			`unitid`, 
@@ -305,7 +309,8 @@
 			#{producName}, 
 			#{mfrsid}, 
 			#{brandid}, 
-			#{factory}, 
+			#{brandnum},
+			#{factory},
 			#{producFactory}, 
 			#{proid}, 
 			#{unitid}, 
@@ -347,6 +352,7 @@
             <if test="producName != null">`produc_name` = #{producName},</if>
             <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
             <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
             <if test="factory != null">`factory` = #{factory},</if>
             <if test="producFactory != null">`produc_factory` = #{producFactory},</if>
             <if test="proid != null">`proid` = #{proid},</if>

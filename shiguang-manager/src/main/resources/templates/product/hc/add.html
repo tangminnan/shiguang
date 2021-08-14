@@ -69,13 +69,14 @@
                 </td>
                 <td>商品编号：</td>
                 <td>
-                    <input id="proid" name="proid" class="form-control" type="text">
+                    <input id="proid" name="proid" class="form-control" type="text"
+                           oninput="if(value.length>4)value=value.slice(0,4)">
                     <em>*</em>
                 </td>
                 <td>其他商品大类：</td>
                 <td>
-                    <select id="big" name="big">
-                        <option></option>
+                    <select id="big" name="big" onchange="leixing()">
+                        <option value="">请选择</option>
                         <option value="其他材料">其他材料</option>
                         <option value="低值易耗品">低值易耗品</option>
                     </select>
@@ -83,10 +84,28 @@
                 </td>
             </tr>
             <tr>
+                <!--<td>其他商品小类：</td>-->
+                <!--<td>-->
+                <!--<select id="small" name="small" class="form-control"></select>-->
+                <!--</td>-->
+
 
                 <td>其他商品小类：</td>
                 <td>
-                    <select id="small" name="small" class="form-control">
+                    <select id="choicesmall" name="choicesmall" class="form-control" style="display: block">
+                        <option value="">请选择</option>
+                    </select>
+                    <select id="small" name="small" class="form-control" style="display: none">
+                        <option value="办公用品">办公用品</option>
+                        <option value="印刷品">印刷品</option>
+                        <option value="眼镜用具">眼镜用具</option>
+                        <option value="其他" selected="selected">其他</option>
+                    </select>
+                    <select id="smallstr" name="smallstr" class="form-control" style="display: none">
+                        <option value="加工工具">加工工具</option>
+                        <option value="办公工具">办公工具</option>
+                        <option value="验配工具">验配工具</option>
+                        <option value="其他" selected="selected">其他</option>
                     </select>
                     <em>*</em>
                 </td>
@@ -94,8 +113,7 @@
                 <td>
                     <select id="unitid" name="unitid">
                         <option></option>
-                        <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}">
-                        </option>
+                        <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}"></option>
                     </select>
                     <em>*</em>
                 </td>
@@ -169,8 +187,8 @@
         <input type="button" value="保存" onclick="baocun()"/>
         <input type="button" class="empty" value="清空"/>
         <dl>
-            <dt>镜架：<br/>商品代码组成说明：</dt>
-            <dd><img src="/img/tmsm.png" alt=""/></dd>
+            <dt>耗材：<br/>商品代码组成说明：</dt>
+            <dd><img src="/img/hc.png" alt=""/></dd>
             <dd>商品条码会根据商品代码自动生成。<br/>商品名称默认为选择的品种的名称，可以自行调整。<br/>型号通常是写在镜腿上的规格。</dd>
         </dl>
     </div>
@@ -333,32 +351,47 @@
         }
     }
 
-    var big = $("#big")
-    var small = $("#small")
-    var html = '<option></option>\n' +
-        '    <option value="办公用品">办公用品</option>\n' +
-        '    <option value="印刷品">印刷品</option>\n' +
-        '    <option value="眼镜用具">眼镜用具</option>\n' +
-        '    <option value="其他" selected = "selected">其他</option>'
+    // var big = $("#big")
+    // var small = $("#small")
+    // var html = '<option></option>\n' +
+    //     '    <option name="small"value="办公用品">办公用品</option>\n' +
+    //     '    <option name="small"value="印刷品">印刷品</option>\n' +
+    //     '    <option name="small"value="眼镜用具">眼镜用具</option>\n' +
+    //     '    <option name="small"value="其他" selected = "selected">其他</option>'
+    //
+    //
+    // var html1 = '<option></option>\n' +
+    //     '    <option name="smallstr"value="加工工具">加工工具</option>\n' +
+    //     '    <option name="smallstr"value="办公工具">办公工具</option>\n' +
+    //     '    <option name="smallstr"value="验配工具">验配工具</option>\n' +
+    //     '    <option name="smallstr"value="其他" selected = "selected">其他</option>'
+    // fun();
+    // big.change(function () {
+    //     fun(big.val())
+    // });
+    //
+    // function fun(text) {
+    //     if (text == "其他材料") {
+    //         small.html(html)
+    //     } else if (text == "低值易耗品") {
+    //         small.html(html1)
+    //     } else {
+    //         small.html("")
+    //     }
+    // }
 
-
-    var html1 = '<option></option>\n' +
-        '    <option value="加工工具">加工工具</option>\n' +
-        '    <option value="办公工具">办公工具</option>\n' +
-        '    <option value="验配工具">验配工具</option>\n' +
-        '    <option value="其他" selected = "selected">其他</option>'
-    fun();
-    big.change(function () {
-        fun(big.val())
-    })
-
-    function fun(text) {
-        if (text == "其他材料") {
-            small.html(html)
-        } else if (text == "低值易耗品") {
-            small.html(html1)
-        } else {
-            small.html("")
+    function leixing() {
+        var val = document.getElementById('big').value;
+        alert(val)
+        if (val == "其他材料") {
+            choicesmall.style = "display: none";
+            small.style = "display: block";
+            smallstr.style = "display: none";
+        }
+        else if (val == "低值易耗品") {
+            choicesmall.style = "display: none";
+            small.style = "display: none";
+            smallstr.style = "display: block";
         }
     }
 </script>

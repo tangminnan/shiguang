@@ -1,343 +1,371 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-<div class="wrapper wrapper-content ">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                    <form class="form-horizontal m-t" id="signupForm">
-                        <input id="id" name="id" th:value="${jpdz.id}" type="hidden">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">商品代码：</label>
-                            <div class="col-sm-8">
-                                <input id="producNum" name="producNum" th:value="${jpdz.producNum}" class="form-control"
-                                       type="text" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">商品条码：</label>
-                            <div class="col-sm-8">
-                                <input id="producCode" name="producCode" th:value="${jpdz.producCode}"
-                                       class="form-control" type="text" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">商品名称：</label>
-                            <div class="col-sm-8">
-                                <input id="producName" name="producName" th:value="${jpdz.producName}"
-                                       class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">销售状态：</label>
-                            <div class="col-sm-8">
-                                <label class="radio-inline"> <input type="radio"
-                                                                    th:field="*{jpdz.status}" name="status"
-                                                                    value="1"/>
-                                    禁用
-                                </label>
-                                <label class="radio-inline"> <input type="radio"
-                                                                    th:field="*{jpdz.status}" name="status"
-                                                                    value="0"/>
-                                    启用
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商：</label>
-                            <div class="col-sm-8">
-                                <input th:value="${jpdz.mfrsname}"
-                                       class="form-control"
-                                       type="text" readonly>
-                                <input id="mfrsid" name="mfrsid" th:value="${jpdz.mfrsid}"
-                                       class="form-control"
-                                       type="hidden">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">商品品种：</label>
-                            <div class="col-sm-8">
-                                <input th:value="${jpdz.brandname}" class="form-control"
-                                       type="text" readonly>
-                                <input id="brandid" name="brandid" th:value="${jpdz.brandid}" class="form-control"
-                                       type="hidden">
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">型号：</label>
-                            <div class="col-sm-8">
-                                <input th:value="${jpdz.producFactory}"
-                                       class="form-control" type="text" readonly>
-                                <input id="producFactory" name="producFactory" th:value="${jpdz.producFactory}"
-                                       class="form-control" type="hidden">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">商品编号：</label>
-                            <div class="col-sm-8">
-                                <input id="proid" name="proid" th:value="${jpdz.proid}" class="form-control"
-                                       type="text" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">计量单位：</label>
-                            <div class="col-sm-8">
-                                <select name="unitid" id="unitid" th:value="${jpdz.unitid}" class="form-control"
-                                        data-actions-box="false" data-size="5">
-                                    <option th:each="ls:${unitDOList}"
-                                            th:text="${ls.unitname}"
-                                            th:value="${ls.unitid}"></option>
-                                </select>
-                                <input id="unitids" name="unitids" th:value="${jpdz.unitid}" class="form-control"
-                                       type="hidden">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">球镜：</label>
-                            <div class="col-sm-8">
-                                上限：<select id="sphUp" name="sphUp" th:value="${jpdz.sphUp}"
-                                           data-actions-box="false" data-size="5">
-                                <option th:each="ls:${sphDOList}"
-                                        th:text="${ls.sph}"
-                                        th:value="${ls.sph}"
-                                ></option>
-                                <input id="sphUps" name="sphUps" th:value="${jpdz.sphUp}" class="form-control"
-                                       type="hidden">
-                            </select>
-                                -下限：<select id="sphDown" name="sphDown" th:value="${jpdz.sphDown}" c
-                                            data-actions-box="false" data-size="5">
-                                <option th:each="ls:${sphDOList}"
-                                        th:text="${ls.sph}"
-                                        th:value="${ls.sph}"
-                                ></option>
-                                <input id="sphDowns" name="sphDowns" th:value="${jpdz.sphDown}" class="form-control"
-                                       type="hidden">
-                            </select>
-                                跨度 <select id="sphSpan" name="sphSpan" th:value="${jpdz.sphSpan}"
-                                           data-actions-box="false" data-size="5">
-                                <option th:each="ls:${spanDOList}"
-                                        th:text="${ls.span}"
-                                        th:value="${ls.span}"
-                                ></option>
-                                <input id="sphSpans" name="sphSpans" th:value="${jpdz.sphSpan}" class="form-control"
-                                       type="hidden">
-                            </select>
-                            </div>
-                        </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>镜片订做修改</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">柱镜：</label>
-                            <div class="col-sm-8">
-                                上限：<select id="cylUp" name="cylUp" th:value="${jpdz.cylUp}" data-actions-box="false"
-                                           data-size="5">
-                                <option th:each="ls:${cylDOList}"
-                                        th:text="${ls.cyl}"
-                                        th:value="${ls.cyl}"
-                                ></option>
-                                <input id="cylUps" name="cylUps" th:value="${jpdz.cylUp}" class="form-control"
-                                       type="hidden">
-                            </select>
-                                -下限：<select id="cylDown" name="cylDown" th:value="${jpdz.cylDown}"
-                                            data-actions-box="false" data-size="5">
-                                <option th:each="ls:${cylDOList}"
-                                        th:text="${ls.cyl}"
-                                        th:value="${ls.cyl}"
-                                ></option>
-                                <input id="cylDowns" name="cylDowns" th:value="${jpdz.cylDown}" class="form-control"
-                                       type="hidden">
-                            </select>
-                                跨度 <select id="cylSpan" name="cylSpan" th:value="${jpdz.cylSpan}"
-                                           data-actions-box="false" data-size="5">
-                                <option th:each="ls:${spanDOList}"
-                                        th:text="${ls.span}"
-                                        th:value="${ls.span}"
-                                ></option>
-                                <input id="cylSpans" name="cylSpans" th:value="${jpdz.cylSpan}" class="form-control"
-                                       type="hidden">
-                            </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">下加光：</label>
-                            <div class="col-sm-8">
-                                <select id="lightbelowRight" name="lightbelowRight" th:value="${jpdz.cylSpan}"
-                                        data-actions-box="false" data-size="5">
-                                    <option th:each="ls:${lightbelowDOList}"
-                                            th:text="${ls.lightbelow}"
-                                            th:value="${ls.lightbelow}"
-                                    ></option>
-                                    <input id="lightbelowRights" name="lightbelowRights"
-                                           th:value="${jpdz.lightbelowRight}" class="form-control"
-                                           type="hidden">
-                                </select>
-                                -<select id="lightbelowLeft" name="lightbelowLeft" th:value="${jpdz.cylSpan}"
-                                         data-actions-box="false" data-size="5">
-                                <option th:each="ls:${lightbelowDOList}"
-                                        th:text="${ls.lightbelow}"
-                                        th:value="${ls.lightbelow}"
-                                ></option>
-                                <input id="lightbelowLefts" name="lightbelowLefts" th:value="${jpdz.lightbelowLeft}"
-                                       class="form-control"
-                                       type="hidden">
-                            </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">材料分类：</label>
-                            <div class="col-sm-8">
-                                <select id="lensId" name="lensId" th:value="${jpdz.lensId}" class="form-control"
-                                        data-actions-box="false" data-size="5">
-                                    <option th:each="ls:${lensDOList}"
-                                            th:text="${ls.lensName}"
-                                            th:value="${ls.lensId}"
-                                    ></option>
-                                    <input id="lensIds" name="lensIds" th:value="${jpdz.lensId}" class="form-control"
-                                           type="hidden">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">定做周期（天）：</label>
-                            <div class="col-sm-8">
-                                <input id="cycle" name="cycle" th:value="${jpdz.cycle}" class="form-control"
-                                       type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">光度分类：</label>
-                            <div class="col-sm-8">
-                                <select id="lightId" name="lightId" th:value="${jpdz.lightId}" class="form-control"
-                                        data-actions-box="false" data-size="5"
-                                        onchange="lightIdstr(this.options[this.options.selectedIndex].value)">
-                                    <option th:each="ls:${lightDOList}"
-                                            th:text="${ls.lightName}"
-                                            th:value="${ls.lightId}"
-                                    ></option>
-                                    <input id="lightIds" name="lightIds" th:value="${jpdz.lightId}" class="form-control"
-                                           type="hidden">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">渐进片分类：</label>
-                            <div class="col-sm-8" id="jfl" style="display: none;">
-                                <select id="gradualId" name="gradualId" th:value="${jpdz.gradualId}"
-                                        class="form-control"
-                                        data-actions-box="false" data-size="5">
-                                    <option th:each="ls:${gradualDOList}"
-                                            th:text="${ls.gradualName}"
-                                            th:value="${ls.gradualId}"
-                                    ></option>
-                                    <input id="gradualIds" name="gradualIds" th:value="${jpdz.gradualId}"
-                                           class="form-control"
-                                           type="hidden">
-                                </select>
-                            </div>
-                        </div>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+    <div class="new_h3">镜片订做修改</div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">折射率：</label>
-                            <div class="col-sm-8">
-                                <select id="refractivityid" name="refractivityid" th:value="${jpdz.refractivityid}"
-                                        class="form-control"
-                                        data-actions-box="false" data-size="5">
-                                    <option th:each="ls:${refractivityDOList}"
-                                            th:text="${ls.refractivityvalue}"
-                                            th:value="${ls.refractivityid}"
-                                    ></option>
-                                </select>
-                                <input id="refractivityids" name="refractivityids" th:value="${jpdz.refractivityid}"
-                                       class="form-control"
-                                       type="hidden">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">镜片功能：</label>
-                            <div class="col-sm-8">
-                                <select id="functionId" name="functionId" th:value="${jpdz.functionId}"
-                                        class="form-control"
-                                        data-actions-box="false" data-size="5">
-                                    <option th:each="ls:${functionDOList}"
-                                            th:text="${ls.functionName}"
-                                            th:value="${ls.functionId}"
-                                    ></option>
-                                </select>
-                                <input id="functionIds" name="functionIds" th:value="${jpdz.functionId}"
-                                       class="form-control"
-                                       type="hidden">
-                            </div>
-                        </div>
+    <!--必填项-->
+    <div class="m40 tabS PHGL">
+        <h3>必填项</h3>
+        <input id="id" name="id" th:value="${jpdz.id}" type="hidden">
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>商品代码：</td>
+                <td>
+                    <input id="producNum" name="producNum" th:value="${jpdz.producNum}"
+                           type="text" readonly style="background-color: #e4e4e4">
+                </td>
+                <td>商品条码：</td>
+                <td>
+                    <input id="producCode" name="producCode" th:value="${jpdz.producCode}"
+                           type="text" readonly style="background-color: #e4e4e4">
+                    <em>*</em>
+                </td>
+                <td>商品名称：</td>
+                <td>
+                    <input id="producName" name="producName" th:value="${jpdz.producName}"
+                           type="text">
+                    <em>*</em>
+                </td>
+            </tr>
+            <tr>
+                <td>制造商：</td>
+                <td>
+                    <input th:value="${jpdz.mfrsname}"
+                           style="background-color: #e4e4e4"
+                           type="text" readonly>
+                    <input id="mfrsid" name="mfrsid" th:value="${jpdz.mfrsid}"
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">联合光度：</label>
-                            <div class="col-sm-8">
-                                <input id="combinedPhotometry" name="combinedPhotometry"
-                                       th:value="${jpdz.combinedPhotometry}" type="text">【格式：1.25】
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">柱镜为-0.25度（-25散）：</label>
-                            <div class="col-sm-8">
-                                <select id="can" name="can" class="form-control">
-                                    <option></option>
-                                    <option value="1" th:field="*{jpdz.can}">能</option>
-                                    <option value="2" th:field="*{jpdz.can}">不能</option>
-                                </select>
-                                <input id="cans" name="cans" th:value="${jpdz.can}"
-                                       class="form-control"
-                                       type="hidden">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">税率(%)：</label>
-                            <div class="col-sm-8">
-                                <input id="tax" name="tax" th:value="${jpdz.tax}" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">含税单价：</label>
-                            <div class="col-sm-8">
-                                <input id="taxPrice" name="taxPrice" th:value="${jpdz.taxPrice}" class="form-control"
-                                       type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">批发价格：</label>
-                            <div class="col-sm-8">
-                                <input id="tradePrice" name="tradePrice" th:value="${jpdz.tradePrice}"
-                                       class="form-control" type="text" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">调货成本：</label>
-                            <div class="col-sm-8">
-                                <input id="transferPrice" name="transferPrice" th:value="${jpdz.transferPrice}"
-                                       class="form-control" type="text" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">标准零售价格：</label>
-                            <div class="col-sm-8">
-                                <input id="retailPrice" name="retailPrice" th:value="${jpdz.retailPrice}"
-                                       class="form-control" type="text" readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-8 col-sm-offset-3">
-                                <button type="submit" class="btn btn-primary">提交</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+                           type="hidden">
+                    <em>*</em>
+                </td>
+                <td>商品品种：</td>
+                <td style="width:20%;">
+                    <input th:value="${jpdz.brandname}" style="background-color: #e4e4e4"
+                           type="text" readonly>
+                    <input id="brandid" name="brandid" th:value="${jpdz.brandid}"
+                           type="hidden">
+                    <em>*</em>
+                </td>
+                <td>厂家型号：</td>
+                <td>
+                    <input id="factory" name="factory" th:value="${jpdz.factory}"
+                           type="text" onkeyup="liandong1(this)" oninput="if(value.length>9)value=value.slice(0,9)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
+                    <em>*</em>
+                </td>
+            </tr>
+            <tr>
+                <td>型号：</td>
+                <td>
+                    <input th:value="${jpdz.producFactory}" style="background-color: #e4e4e4"
+                           oninput="if(value.length>9)value=value.slice(0,9)"
+                           type="text" readonly>
+                    <input id="producFactory" name="producFactory" th:value="${jpdz.producFactory}"
+                           type="hidden">
+                    <em>*</em>
+                </td>
+                <td>商品编号</td>
+                <td>
+                    <input id="proid" name="proid" th:value="${jpdz.proid}" class="form-control"
+                           style="background-color: #e4e4e4"
+                           type="text" readonly>
+                    <em>*</em>
+                </td>
+                <td>计量单位</td>
+                <td>
+                    <select name="unitid" id="unitid" th:value="${jpdz.unitid}" class="form-control"
+                            data-actions-box="false" data-size="5">
+                        <option th:each="ls:${unitDOList}"
+                                th:text="${ls.unitname}"
+                                th:value="${ls.unitid}"></option>
+                    </select>
+                    <input id="unitids" name="unitids" th:value="${jpdz.unitid}" class="form-control"
+                           type="hidden">
+                    <em>*</em>
+                </td>
+            </tr>
+            <tr>
+                <td>球镜</td>
+                <td>
+                    上限
+                    <select id="sphUp" name="sphUp" th:value="${jpdz.sphUp}"
+                            data-actions-box="false" data-size="5" style="width:15%">
+                        <option th:each="ls:${sphDOList}"
+                                th:text="${ls.sph}"
+                                th:value="${ls.sph}"
+                        ></option>
+                    </select>
+                    <input id="sphUps" name="sphUps" th:value="${jpdz.sphUp}" class="form-control"
+                           type="hidden">
+                    下限
+                    <select id="sphDown" name="sphDown" th:value="${jpdz.sphDown}" style="width: 15%"
+                            data-actions-box="false" data-size="5">
+                        <option th:each="ls:${sphDOList}"
+                                th:text="${ls.sph}"
+                                th:value="${ls.sph}"
+                        ></option>
+                        <input id="sphDowns" name="sphDowns" th:value="${jpdz.sphDown}" class="form-control"
+                               type="hidden">
+                    </select>
+                    跨度
+                    <select id="sphSpan" name="sphSpan" th:value="${jpdz.sphSpan}" style="width: 15%"
+                            data-actions-box="false" data-size="5">
+                        <option th:each="ls:${spanDOList}"
+                                th:text="${ls.span}"
+                                th:value="${ls.span}"
+                        ></option>
+                        <input id="sphSpans" name="sphSpans" th:value="${jpdz.sphSpan}" class="form-control"
+                               type="hidden">
+                    </select>
+                    <em>*</em>
+                </td>
+                <td>柱镜</td>
+                <td>
+                    上限
+                    <select id="cylUp" name="cylUp" th:value="${jpdz.cylUp}" data-actions-box="false" style="width:55%"
+                            data-size="5">
+                        <option th:each="ls:${cylDOList}"
+                                th:text="${ls.cyl}"
+                                th:value="${ls.cyl}"
+                        ></option>
+                        <input id="cylUps" name="cylUps" th:value="${jpdz.cylUp}" class="form-control"
+                               type="hidden">
+                    </select>
+                    <em>*</em>
+                    <br>
+                    下限
+                    <select id="cylDown" name="cylDown" th:value="${jpdz.cylDown}" style="width:55%"
+                            data-actions-box="false" data-size="5">
+                        <option th:each="ls:${cylDOList}"
+                                th:text="${ls.cyl}"
+                                th:value="${ls.cyl}"
+                        ></option>
+                        <input id="cylDowns" name="cylDowns" th:value="${jpdz.cylDown}" class="form-control"
+                               type="hidden">
+                    </select>
+                    <em>*</em>
+                    <br>
+                    跨度
+                    <select id="cylSpan" name="cylSpan" th:value="${jpdz.cylSpan}" style="width:55%"
+                            data-actions-box="false" data-size="5">
+                        <option th:each="ls:${spanDOList}"
+                                th:text="${ls.span}"
+                                th:value="${ls.span}"
+                        ></option>
+                        <input id="cylSpans" name="cylSpans" th:value="${jpdz.cylSpan}" class="form-control"
+                               type="hidden">
+                    </select>
+                    <em>*</em>
+                </td>
+                <td>下加光</td>
+                <td>
+                    <select id="lightbelowRight" name="lightbelowRight" th:value="${jpdz.cylSpan}" style="width: 25%"
+                            data-actions-box="false" data-size="5">
+                        <option th:each="ls:${lightbelowDOList}"
+                                th:text="${ls.lightbelow}"
+                                th:value="${ls.lightbelow}"
+                        ></option>
+                        <input id="lightbelowRights" name="lightbelowRights"
+                               th:value="${jpdz.lightbelowRight}" class="form-control"
+                               type="hidden">
+                    </select>
+                    -<select id="lightbelowLeft" name="lightbelowLeft" th:value="${jpdz.cylSpan}" style="width: 25%"
+                             data-actions-box="false" data-size="5">
+                    <option th:each="ls:${lightbelowDOList}"
+                            th:text="${ls.lightbelow}"
+                            th:value="${ls.lightbelow}"
+                    ></option>
+                    <input id="lightbelowLefts" name="lightbelowLefts" th:value="${jpdz.lightbelowLeft}"
+                           class="form-control"
+                           type="hidden">
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td>材料分类</td>
+                <td>
+                    <select id="lensId" name="lensId" th:value="${jpdz.lensId}" class="form-control"
+                            data-actions-box="false" data-size="5">
+                        <option th:each="ls:${lensDOList}"
+                                th:text="${ls.lensName}"
+                                th:value="${ls.lensId}"
+                        ></option>
+                        <input id="lensIds" name="lensIds" th:value="${jpdz.lensId}" class="form-control"
+                               type="hidden">
+                    </select>
+                </td>
+                <td>订做周期</td>
+                <td>
+                    <input id="cycle" name="cycle" th:value="${jpdz.cycle}" class="form-control"
+                           type="text">天
+                </td>
+                <em>*</em>
+                <td>销售状态</td>
+                <td>
+                    <input th:field="*{jpdz.status}" name="status" value="1" type="radio" id="PH-S"> <label
+                        for="PH-S"
+                        style="margin-right: 5%">禁用</label>
+                    <input th:field="*{jpdz.status}" name="status" value="0" type="radio" id="PH-F"> <label
+                        for="PH-F">启用</label>
+                    <em>*</em>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</div>
+    <!--非必填项2-->
+    <div class="m40 tabS PHGL">
+        <h3>非必填项</h3>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>光度分类</td>
+                <td>
+                    <select id="lightId" name="lightId" th:value="${jpdz.lightId}" class="form-control"
+                            data-actions-box="false" data-size="5"
+                            onchange="lightIdstr()">
+                        <option th:each="ls:${lightDOList}"
+                                th:text="${ls.lightName}"
+                                th:value="${ls.lightId}"
+                        ></option>
+                        <input id="lightIds" name="lightIds" th:value="${jpdz.lightId}" class="form-control"
+                               type="hidden">
+                    </select>
+                </td>
+                <td>渐进片分类</td>
+                <td style="width:20%;">
+                    <select id="gradualId" name="gradualId" th:value="${jpdz.gradualId}"
+                            class="form-control" style="display: none;"
+                            data-actions-box="false" data-size="5">
+                        <option th:each="ls:${gradualDOList}"
+                                th:text="${ls.gradualName}"
+                                th:value="${ls.gradualId}"
+                        ></option>
+                        <input id="gradualIds" name="gradualIds" th:value="${jpdz.gradualId}"
+                               class="form-control"
+                               type="hidden">
+                    </select>
+                </td>
+                <td>折射率</td>
+                <td style="width:20%;">
+                    <select id="refractivityid" name="refractivityid" th:value="${jpdz.refractivityid}"
+                            class="form-control"
+                            data-actions-box="false" data-size="5">
+                        <option th:each="ls:${refractivityDOList}"
+                                th:text="${ls.refractivityvalue}"
+                                th:value="${ls.refractivityid}"
+                        ></option>
+                    </select>
+                    <input id="refractivityids" name="refractivityids" th:value="${jpdz.refractivityid}"
+                           class="form-control"
+                           type="hidden">
+                </td>
+            </tr>
+            <tr>
+                <td>镜片功能</td>
+                <td>
+                    <select id="functionId" name="functionId" th:value="${jpdz.functionId}"
+                            class="form-control"
+                            data-actions-box="false" data-size="5">
+                        <option th:each="ls:${functionDOList}"
+                                th:text="${ls.functionName}"
+                                th:value="${ls.functionId}"
+                        ></option>
+                    </select>
+                    <input id="functionIds" name="functionIds" th:value="${jpdz.functionId}"
+                           class="form-control"
+                           type="hidden">
+                </td>
+                <td>联合光度</td>
+                <td>
+                    <input id="combinedPhotometry" name="combinedPhotometry"
+                           th:value="${jpdz.combinedPhotometry}" type="text">
+                    <br>【格式：1.25】
+                </td>
+                <td>柱镜为-0.25度（-25散）</td>
+                <td>
+                    <select id="can" name="can" class="form-control">
+                        <option></option>
+                        <option value="1" th:field="*{jpdz.can}">能</option>
+                        <option value="2" th:field="*{jpdz.can}">不能</option>
+                    </select>
+                    <input id="cans" name="cans" th:value="${jpdz.can}"
+                           class="form-control"
+                           type="hidden">
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--价格项-->
+    <div class="m40 tabS PHGL">
+        <h3>价格项</h3>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>税率（%）：</td>
+                <td>
+                    <input id="tax" name="tax" th:value="${jpdz.tax}" type="text"
+                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                    <em>*</em>
+                </td>
+                <td>含税单价：</td>
+                <td>
+                    <input id="taxPrice" name="taxPrice" th:value="${jpdz.taxPrice}" type="text"
+                           oninput="getmoney(this,10)" autofocus/>
+                    <em>*</em>
+                </td>
+                <td>批发价格：</td>
+                <td colspan="3">
+                    <input id="tradePrice" name="tradePrice" th:value="${jpdz.tradePrice}" type="text"
+                           style="width: 60%"
+                           oninput="getmoney(this,10)" autofocus/>
+                    <em>*</em>
+                </td>
+            </tr>
+            <tr>
+                <td>调货成本：</td>
+                <td>
+                    <input id="transferPrice" name="transferPrice" th:value="${jpdz.transferPrice}" type="text"
+                           oninput="getmoney(this,10)" autofocus/>
+                    <em>*</em>
+                </td>
+                <td>标准零售价格：</td>
+                <td colspan="3">
+                    <input id="retailPrice" name="retailPrice" th:value="${jpdz.retailPrice}" type="text"
+                           style="width: 29%"
+                           oninput="getmoney(this,10)" autofocus/>
+                    <em>*</em>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--保存/清空-->
+    <div class="BQ-btn">
+        <input type="button" value="保存" onclick="update()"/>
+        <dl>
+            <dt>镜片（订做）<br/>商品代码组成说明</dt>
+            <dd><img src="/img/jpdz.png" alt=""/></dd>
+            <dd>商品条码会根据商品代码自动生成。<br/>商品名称默认为选择的品种的名称，可以自行调整。<br/>型号通常是写在镜腿上的规格。</dd>
+        </dl>
+    </div>
+</form>
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/product/jpdz/edit.js"></script>
 <script type="text/javascript">
@@ -390,20 +418,72 @@
         lightIdstr(lightIds);
     });
 
-    //根据光度分类选择控制渐进片分类显隐
-    function lightIdstr(value) {
-        if (value == '1') {
-            jfl.style = "display: none";
-        } else if (value == 2) {
-            jfl.style = "display: none";
-        } else if (value == 3) {
-            jfl.style = "display: none";
-        } else if (value == 4) {
-            jfl.style = "display: none";
-        } else if (value == 5) {
-            jfl.style = "display: block";
+    // <!--//——— //根据光度分类选择控制渐进片分类显隐—————-->
+
+    function lightIdstr() {
+        var lightId = $("#lightId option:selected").text();
+        if (lightId == '单光') {
+            gradualId.style = "display: none";
+        } else if (lightId == '抗疲劳') {
+            gradualId.style = "display: none";
+        } else if (lightId == '多光') {
+            gradualId.style = "display: none";
+        } else if (lightId == '其他') {
+            gradualId.style = "display: none";
+        } else if (lightId == '渐进') {
+            gradualId.style = "display: block";
+        }
+    }
+
+    var a1 = document.getElementById("producNum")
+    var a2 = document.getElementById("producCode")
+    var sum;
+    var sum1;
+    var a1_val = a1.value.substring(0, 7) + ".000000000.0000";
+    // alert(a1_val);
+
+    // <!--//———厂家型号与型号联动—————--
+    function liandong1(e) {//厂家型号
+        var val1 = document.getElementById("factory").value;
+        var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
+        // alert(val);
+        // var proid = document.getElementById("proid");
+        document.getElementById("producFactory").value = va1;
+        sum = 17 - e.value.length;
+        sum1 = 22 - proid.value.length;
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + "0000";
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
+    }
+
+
+    /**
+     * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位
+     */
+    function getmoney(obj, maxLen) {
+        if (maxLen && obj.value.length > maxLen) {//判断长度
+            obj.value = obj.value.slice(0, 10);
+        }
+        //修复第一个字符是小数点 的情况.
+        if (obj.value !== '' && obj.value.substr(0, 1) === '.') {
+            obj.value = "";
+        }
+        //解决 粘贴不生效
+        obj.value = obj.value.replace(/^0*(0\.|[1-9])/, '$1');
+        //清除“数字”和“.”以外的字符
+        obj.value = obj.value.replace(/[^\d.]/g, "");
+        //只保留第一个小数点(.)清除多余的
+        obj.value = obj.value.replace(/\.{2,}/g, ".");
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        //只能输入两个小数
+        obj.value = obj.value.replace(/^(\d+)\.(\d\d).*$/, '$1.$2');
+        if (obj.value.indexOf(".") < 0 && obj.value !== "") {//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+            if (obj.value.substr(0, 1) === '0' && obj.value.length === 2) {
+                obj.value = obj.value.substr(1, obj.value.length);
+            }
         }
     }
 </script>
+
 </body>
+
 </html>

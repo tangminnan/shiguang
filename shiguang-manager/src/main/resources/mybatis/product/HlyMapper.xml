@@ -5,27 +5,27 @@
 
     <select id="get" resultType="com.shiguang.product.domain.HlyDO">
 		select m.`mfrsname`,b.`brandname`,u.`unitname`,
-		h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
+		h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
 		h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
 		h.`status`,h.`state`
-		from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandid=b.brandid
+		from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum
         left join  c_unit u on h.unitid= u.unitid
 		where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.product.domain.HlyDO">
         select m.`mfrsname`,b.`brandname`,u.`unitname`,
-        h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
+        h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
         h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
         h.`status`,h.`state`
-        from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandid=b.brandid
+        from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum
         left join c_unit u on h.unitid= u.unitid
         where h.state= 1
         group by h.id order by h.status asc ,h.id asc
     </select>
     <select id="gethly" resultType="com.shiguang.product.domain.HlyDO">
         select
-        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`factory`,`proid`,`unitid`,`product_type`,
+        `id`,`produc_num`,`produc_code`,`produc_name`,`mfrsid`,`brandid`,`brandnum`,`factory`,`proid`,`unitid`,`product_type`,
         `main_capacity`,`second_capacity`,`produc_factory`,`upday`,`downday`,`tax`,`tax_price`,`trade_price`,
         `transfer_price`,`retail_price`,`status`,`state`
         from aa_hly
@@ -36,6 +36,7 @@
             <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and factory = #{factory}</if>
             <if test="proid != null and proid != ''">and proid = #{proid}</if>
             <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
@@ -75,6 +76,7 @@
             <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and factory = #{factory}</if>
             <if test="proid != null and proid != ''">and proid = #{proid}</if>
             <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
@@ -102,7 +104,8 @@
 			`produc_name`, 
 			`mfrsid`, 
 			`brandid`, 
-			`factory`, 
+			`brandnum`,
+			`factory`,
 			`proid`, 
 			`unitid`, 
 			`product_type`, 
@@ -126,7 +129,8 @@
 			#{producName}, 
 			#{mfrsid}, 
 			#{brandid}, 
-			#{factory}, 
+			#{brandnum},
+			#{factory},
 			#{proid}, 
 			#{unitid}, 
 			#{productType}, 
@@ -153,6 +157,7 @@
             <if test="producName != null">`produc_name` = #{producName},</if>
             <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
             <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
             <if test="factory != null">`factory` = #{factory},</if>
             <if test="proid != null">`proid` = #{proid},</if>
             <if test="unitid != null">`unitid` = #{unitid},</if>

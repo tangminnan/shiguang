@@ -5,22 +5,22 @@
 
     <select id="get" resultType="com.shiguang.product.domain.YxdzDO">
 		select m.`mfrsname`,b.`brandname`,u.`unitname`,
-		y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`factory`,y.`produc_factory`,y.`proid`,y.`unitid`,y.`sph_id`,
+		y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`factory`,y.`produc_factory`,y.`proid`,y.`unitid`,y.`sph_id`,
 		y.`span_id`,y.`cyl_id`,y.`sph_up`,y.`sph_down`,y.`sph_span`,y.`cyl_up`,y.`cyl_down`,y.`cyl_span`,y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,
 		y.`curvature_er`,y.`diameter_one`,y.`diameter_yi`,y.`contact_lens`,y.`cycle`,y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,
 		y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,y.`retail_price`,y.`status`,y.`state`
-		from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
+		from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
         left join  c_unit u on y.unitid= u.unitid
 		where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.product.domain.YxdzDO">
         select m.`mfrsname`,b.`brandname`,u.`unitname`,
-        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`factory`,y.`produc_factory`,y.`proid`,y.`unitid`,y.`sph_id`,
+        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`factory`,y.`produc_factory`,y.`proid`,y.`unitid`,y.`sph_id`,
         y.`span_id`,y.`cyl_id`,y.`sph_up`,y.`sph_down`,y.`sph_span`,y.`cyl_up`,y.`cyl_down`,y.`cyl_span`,y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,
         y.`curvature_er`,y.`diameter_one`,y.`diameter_yi`,y.`contact_lens`,y.`cycle`,y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,
         y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,y.`retail_price`,y.`status`,y.`state`
-        from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
+        from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
         left join c_unit u on y.unitid= u.unitid
         where y.state= 1
         group by y.id order by y.status asc ,y.id asc
@@ -36,6 +36,7 @@
             <if test="producName != null and producName != ''">and y.produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and y.brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and y.brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and y.factory = #{factory}</if>
             <if test="producFactory != null and producFactory != ''">and y.produc_factory = #{producFactory}</if>
             <if test="proid != null and proid != ''">and y.proid = #{proid}</if>
@@ -86,6 +87,7 @@
 			`produc_name`,
 			`mfrsid`,
 			`brandid`,
+			`brandnum`,
 			`factory`,
 			`produc_factory`,
 			`proid`,
@@ -131,6 +133,7 @@
 			#{producName},
 			#{mfrsid},
 			#{brandid},
+			#{brandnum},
 			#{factory},
 			#{producFactory},
 			#{proid},
@@ -179,6 +182,7 @@
             <if test="producName != null">`produc_name` = #{producName},</if>
             <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
             <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
             <if test="factory != null">`factory` = #{factory},</if>
             <if test="producFactory != null">`produc_factory` = #{producFactory},</if>
             <if test="proid != null">`proid` = #{proid},</if>

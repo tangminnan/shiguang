@@ -4,20 +4,20 @@
 <mapper namespace="com.shiguang.product.dao.TyjDao">
 
     <select id="get" resultType="com.shiguang.product.domain.TyjDO">
-		select t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
+		select t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`brandnum`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
 		t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
 		t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`status`,t.`state`
-		from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandid=b.brandid
+		from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandnum=b.brandnum
         left join  c_unit u on t.unitid= u.unitid
 		where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.product.domain.TyjDO">
         select
-        t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
+        t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`brandnum`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
         t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
         t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`status`,t.`state`
-        from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandid=b.brandid
+        from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandnum=b.brandnum
         left join c_unit u on t.unitid= u.unitid
          where t.state= 1
         group by t.id order by t.status asc ,t.id asc
@@ -32,6 +32,7 @@
             <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and factory = #{factory}</if>
             <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
             <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
@@ -63,7 +64,8 @@
 			`produc_name`, 
 			`mfrsid`, 
 			`brandid`, 
-			`factory`, 
+			`brandnum`,
+			`factory`,
 			`produc_factory`, 
 			`unitid`, 
 			`produc_factorycolor`, 
@@ -89,7 +91,8 @@
 			#{producName}, 
 			#{mfrsid}, 
 			#{brandid}, 
-			#{factory}, 
+			#{brandnum},
+			#{factory},
 			#{producFactory}, 
 			#{unitid}, 
 			#{producFactorycolor}, 
@@ -118,6 +121,7 @@
             <if test="producName != null">`produc_name` = #{producName},</if>
             <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
             <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
             <if test="factory != null">`factory` = #{factory},</if>
             <if test="producFactory != null">`produc_factory` = #{producFactory},</if>
             <if test="unitid != null">`unitid` = #{unitid},</if>

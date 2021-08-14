@@ -27,6 +27,16 @@ public class JpcpDO implements Serializable {
     //商品品种（品牌id
     private Integer brandid;
     private String brandname;
+    private String brandnum;
+
+    public String getBrandnum() {
+        return brandnum;
+    }
+
+    public void setBrandnum(String brandnum) {
+        this.brandnum = brandnum;
+    }
+
     //商品编号
     private String proid;
     //计量单位

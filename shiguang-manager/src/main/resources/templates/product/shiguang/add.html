@@ -69,7 +69,7 @@
                 </td>
                 <td>商品编号：</td>
                 <td>
-                    <input id="proid" name="proid" type="text">
+                    <input id="proid" name="proid" type="text" oninput="if(value.length>4)value=value.slice(0,4)">
                     <em>*</em>
                 </td>
                 <td>计量单位：</td>
@@ -160,8 +160,8 @@
         <input type="button" value="保存" onclick="baocun()"/>
         <input type="button" class="empty" value="清空"/>
         <dl>
-            <dt>镜架：<br/>商品代码组成说明：</dt>
-            <dd><img src="/img/tmsm.png" alt=""/></dd>
+            <dt>视光：<br/>商品代码组成说明：</dt>
+            <dd><img src="/img/sg.png" alt=""/></dd>
             <dd>商品条码会根据商品代码自动生成。<br/>商品名称默认为选择的品种的名称，可以自行调整。<br/>型号通常是写在镜腿上的规格。</dd>
         </dl>
     </div>

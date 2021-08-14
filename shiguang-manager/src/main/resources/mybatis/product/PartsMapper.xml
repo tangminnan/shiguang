@@ -4,22 +4,34 @@
 <mapper namespace="com.shiguang.product.dao.PartsDao">
 
     <select id="get" resultType="com.shiguang.product.domain.PartsDO">
-        select p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`factory`,p.`produc_factory`,p.`proid`,p.`parts_style`,
+        select p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`proid`,p.`parts_style`,
           p.`unitid`,p.`batchid`,p.`refractivityid`,p.`tax`,p.`tax_price`,p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`status`,p.`state`,
           m.mfrsname,b.brandname,u.unitname
-          from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandid=b.brandid left join
+          from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
           c_unit u on p.unitid= u.unitid
           where id = #{value}
     </select>
 
     <select id="list" resultType="com.shiguang.product.domain.PartsDO">
         select
-        p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`factory`,p.`produc_factory`,p.`proid`,p.`parts_style`,
+        p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`proid`,p.`parts_style`,
         p.`unitid`,p.`batchid`,p.`refractivityid`,p.`tax`,p.`tax_price`,p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`status`,p.`state`,
         m.mfrsname,b.brandname,u.unitname
-        from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandid=b.brandid left join
+        from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
         c_unit u on p.unitid= u.unitid
-        where p.state= 1
+        <where>
+            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
+            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and p.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                and p.tax_price between #{taxPrice,jdbcType=VARCHAR} and #{taxPrice2,jdbcType=VARCHAR}
+            </if>
+            <if test="partsStyle != null and partsStyle != ''">and p.parts_style = #{partsStyle}</if>
+            <if test="status != null and status != ''">and p.status = #{status}</if>
+        </where>
+        and p.state= 1
         group by p.id order by p.status asc ,p.id asc
     </select>
 
@@ -32,6 +44,7 @@
             <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and factory = #{factory}</if>
             <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
             <if test="proid != null and proid != ''">and proid = #{proid}</if>
@@ -57,6 +70,7 @@
 			`produc_name`,
 			`mfrsid`,
 			`brandid`,
+			`brandnum`,
 			`factory`,
 			`produc_factory`,
 			`proid`,
@@ -79,6 +93,7 @@
 			#{producName},
 			#{mfrsid},
 			#{brandid},
+			#{brandnum},
 			#{factory},
 			#{producFactory},
 			#{proid},
@@ -104,6 +119,7 @@
             <if test="producName != null">`produc_name` = #{producName},</if>
             <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
             <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
             <if test="factory != null">`factory` = #{factory},</if>
             <if test="producFactory != null">`produc_factory` = #{producFactory},</if>
             <if test="proid != null">`proid` = #{proid},</if>

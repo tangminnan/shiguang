@@ -9,7 +9,9 @@ import com.shiguang.mfrs.service.MaterialService;
 import com.shiguang.mfrs.service.PositionService;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.TechnologyService;
+import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.OrderService;
 import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,9 @@ public class StockController {
     //镜架材质
     @Autowired
     private MaterialService materialService;
+    //采购订单
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping()
     @RequiresPermissions("stock:stock:stock")
@@ -60,10 +65,10 @@ public class StockController {
     @RequiresPermissions("stock:stock:stock")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
-        Query query = new Query(params);
-        List<StockDO> stockList = stockService.list(query);
-        int total = stockService.count(query);
-        PageUtils pageUtils = new PageUtils(stockList, total);
+        Query queryOrder = new Query(params);
+        List<OrderDO> orderDOList = orderService.list(queryOrder);
+        int total = orderService.count(queryOrder);
+        PageUtils pageUtils = new PageUtils(orderDOList, total);
         return pageUtils;
     }
 
@@ -106,7 +111,7 @@ public class StockController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("stock:stock:add")
-    public R save(StockDO stock) {
+    public R save(StockDO stock, OrderDO orderDO) {
         String str = stock.getGoodsNum();
         String[] name = str.split(",");
         for (int i = 0; i < name.length; i++) {
@@ -131,7 +136,7 @@ public class StockController {
                 Integer newGoodsCount = goodsCountNew + gdcountNew;
                 stockDO.setGoodsCount(String.valueOf(newGoodsCount));
 
-                stockService.updateGoodsCount(stockDO);
+                stockService.updateGoodsCount(stockDO);//修改数量
             } else {
                 stockDO.setGoodsCount(goodsCount);//数量
                 stockDO.setGoodsType(stock.getGoodsType());
@@ -139,6 +144,7 @@ public class StockController {
 
                 String costPrice = stock.getCostPrice().split(",")[i];
                 stockDO.setCostPrice(costPrice);
+
                 Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodsCount);
                 stockDO.setCostSum(Double.toString(costSum));
 
@@ -157,6 +163,7 @@ public class StockController {
                 Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
                 stockDO.setPriceSum(Double.toString(priceSum));
 
+
                 stockDO.setPositionName(stock.getPositionName());
                 stockDO.setCreateTime(stock.getCreateTime());
                 stockDO.setDanjuNumber(stock.getDanjuNumber());
@@ -169,12 +176,60 @@ public class StockController {
                 stockDO.setBeizhu(stock.getBeizhu());
                 String unit = stock.getUnit().split(",")[i];
                 stockDO.setUnit(unit);
-
-
                 if (stockService.save(stockDO) < 0) {
                     return R.error();
                 }
             }
+
+        }
+        String strOrder = stock.getGoodsNum();
+        String[] namesOrder = strOrder.split(",");
+        for (int i = 0; i < namesOrder.length; i++) {
+            OrderDO orderDO1 = new OrderDO();
+            String goodsNum = name[i];
+            orderDO1.setGoodsNum(goodsNum);//代码
+            String goodsCode = orderDO.getGoodsCode().split(",")[i];
+            orderDO1.setGoodsCode(goodsCode);//条码
+            String goodsName = orderDO.getGoodsName().split(",")[i];
+            orderDO1.setGoodsName(goodsName);//名称
+            String goodsCount = orderDO.getGoodsCount().toString().split(",")[i];
+            orderDO1.setGoodsCount(goodsCount);//数量
+            orderDO1.setGoodsType(orderDO.getGoodsType());//商品类别
+            orderDO1.setMfrsid(orderDO.getMfrsid());//制造商
+            String costPrice = stock.getCostPrice().split(",")[i];
+            orderDO1.setCostPrice(costPrice); //成本价格
+
+            Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodsCount);
+            orderDO1.setCostSum(Double.toString(costSum)); //成本合计
+
+            String wholePrice = stock.getWholePrice().split(",")[i];
+            orderDO1.setWholePrice(wholePrice);    //批发价格
+            Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodsCount);
+            orderDO1.setWholeSum(Double.toString(wholeSum));    //批发合计
+
+//            String transferPrice = stock.getTransferPrice().split(",")[i];
+//            stockDO.setTransferPrice(transferPrice);
+//            Double transferPricecount = Double.parseDouble(transferPrice) * Double.parseDouble(goodsCount);
+//            stockDO.setCostSum(Double.toString(transferPricecount));
+
+            String retailPrice = stock.getRetailPrice().split(",")[i];
+            orderDO1.setRetailPrice(retailPrice);  //标准零售价格
+            Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
+            orderDO1.setPriceSum(Double.toString(priceSum));  //原价合计
+
+            orderDO1.setPositionName(orderDO.getPositionName());
+            orderDO1.setCreateTime(orderDO.getCreateTime());
+            orderDO1.setDanjuNumber(orderDO.getDanjuNumber());
+            orderDO1.setOrderNumber(orderDO.getOrderNumber());
+            orderDO1.setYundanNumber(orderDO.getYundanNumber());
+            orderDO1.setZhidanPeople(orderDO.getZhidanPeople());
+            orderDO1.setDanjuDay(orderDO.getDanjuDay());
+            orderDO1.setTuihuoNumber(orderDO.getTuihuoNumber());
+            orderDO1.setFactoryNumber(orderDO.getFactoryNumber());
+            orderDO1.setBeizhu(orderDO.getBeizhu());
+            String unit = orderDO.getUnit().split(",")[i];
+            orderDO1.setUnit(unit);
+            orderService.save(orderDO1);
         }
         return R.ok();
     }
@@ -219,7 +274,7 @@ public class StockController {
     @RequiresPermissions("stock:stock:findmfrs")
     String findmfrs(@PathVariable("goodsid") Integer goodsid, Model model) {
         model.addAttribute("goodsid", goodsid);
-        return "/mfrs/mfrs/findMfrs";
+        return "/mfrs/mfrs/stockGetMfrs";
     }
 
     //跳转镜架商品查询

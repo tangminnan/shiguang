@@ -29,6 +29,16 @@ public class HcDO implements Serializable {
     private Integer brandid;
     //品牌代码
     private String brandname;
+    private String brandnum;
+
+    public String getBrandnum() {
+        return brandnum;
+    }
+
+    public void setBrandnum(String brandnum) {
+        this.brandnum = brandnum;
+    }
+
     //厂家型号
     private String factory;
     //型号
@@ -39,6 +49,16 @@ public class HcDO implements Serializable {
     private String big;
     //其他商品小类
     private String small;
+    private String smallstr;
+
+    public String getSmallstr() {
+        return smallstr;
+    }
+
+    public void setSmallstr(String smallstr) {
+        this.smallstr = smallstr;
+    }
+
     //计量单位id
     private Integer unitid;
     //单位

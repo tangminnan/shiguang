@@ -35,7 +35,8 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/product/produca")
-public class ProducaController {
+public class
+ProducaController {
     @Autowired
     private ProducaService producaService;
     //制造商

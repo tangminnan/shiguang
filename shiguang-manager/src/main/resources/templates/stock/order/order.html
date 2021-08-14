@@ -9,22 +9,21 @@
             <div class="ibox-body">
                 <div class="fixed-table-toolbar">
                     <div class="columns pull-left">
-                        <!--<button shiro:hasPermission="information:optometry:add" type="button" class="btn  btn-primary"-->
-                        <!--onclick="add()">-->
-                        <!--<i class="fa fa-plus" aria-hidden="true"></i>初检-->
-                        <!--</button>-->
-                        <!--<button shiro:hasPermission="information:optometry:batchRemove" type="button"-->
-                        <!--class="btn  btn-danger"-->
-                        <!--onclick="batchRemove()">-->
-                        <!--<i class="fa fa-trash" aria-hidden="true"></i>删除-->
-                        <!--</button>-->
+                        <button shiro:hasPermission="stock:order:add" type="button" class="btn  btn-primary"
+                                onclick="add()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>添加
+                        </button>
+                        <button shiro:hasPermission="stock:order:batchRemove" type="button" class="btn  btn-danger"
+                                onclick="batchRemove()">
+                            <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
                     </div>
                     <div class="columns pull-right">
                         <button class="btn btn-success" onclick="reLoad()">查询</button>
                     </div>
                     <div class="columns pull-right col-md-2 nopadding">
-                        <input id="cardNumber" type="text" class="form-control"
-                               placeholder="会员卡号">
+                        <input id="searchName" type="text" class="form-control"
+                               placeholder="">
                     </div>
                 </div>
                 <table id="exampleTable" data-mobile-responsive="true">
@@ -41,23 +40,23 @@
         var s_resetPwd_h = 'hidden';
     </script>
 </div>
-<div shiro:hasPermission="information:optometry:edit">
+<div shiro:hasPermission="stock:order:edit">
     <script type="text/javascript">
         s_edit_h = '';
     </script>
 </div>
-<div shiro:hasPermission="information:optometry:remove">
+<div shiro:hasPermission="stock:order:remove">
     <script type="text/javascript">
         var s_remove_h = '';
     </script>
 </div>
-<div shiro:hasPermission="information:optometry:resetPwd">
+<div shiro:hasPermission="stock:order:resetPwd">
     <script type="text/javascript">
         var s_resetPwd_h = '';
     </script>
 </div>
 </div>
 <div th:include="include :: footer"></div>
-<script type="text/javascript" src="/js/appjs/optometryNew/optometryNew.js"></script>
+<script type="text/javascript" src="/js/appjs/stock/order/order.js"></script>
 </body>
 </html>
