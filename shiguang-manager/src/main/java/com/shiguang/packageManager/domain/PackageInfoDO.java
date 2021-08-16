@@ -17,8 +17,10 @@ public class PackageInfoDO implements Serializable {
     private String goodsName;
     //购买方式
     private Long buyWay;
-    //商品原价区间
-    private String originalPriceRange;
+    //商品原价区间开始
+    private String originalStartPrice;
+    //商品原价区间结束
+    private String originalEndPrice;
     //套餐价格区间开始
     private String packageStartPrice;
     //套餐价格区间结束
@@ -113,16 +115,28 @@ public class PackageInfoDO implements Serializable {
         return buyWay;
     }
     /**
-     * 设置：商品原价区间
+     * 设置：商品原价区间开始
      */
-    public void setOriginalPriceRange(String originalPriceRange) {
-        this.originalPriceRange = originalPriceRange;
+    public void setOriginalStartPrice(String originalStartPrice) {
+        this.originalStartPrice = originalStartPrice;
     }
     /**
-     * 获取：商品原价区间
+     * 获取：商品原价区间开始
      */
-    public String getOriginalPriceRange() {
-        return originalPriceRange;
+    public String getOriginalStartPrice() {
+        return originalStartPrice;
+    }
+    /**
+     * 设置：商品原价区间结束
+     */
+    public void setOriginalEndPrice(String originalEndPrice) {
+        this.originalEndPrice = originalEndPrice;
+    }
+    /**
+     * 获取：商品原价区间结束
+     */
+    public String getOriginalEndPrice() {
+        return originalEndPrice;
     }
     /**
      * 设置：套餐价格区间开始

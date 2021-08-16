@@ -251,7 +251,14 @@ public class SettlementController {
 		}
 		model.addAttribute("settlementDO",settlementDO);
 		DepartmentDO departmentDO = departmentService.getDepartName(settlementDO.getStoreNum());
-		model.addAttribute("departmentDO",departmentDO);
+		if (null != departmentDO){
+			model.addAttribute("departmentDO",departmentDO);
+		} else {
+			DepartmentDO departmentDO1 = new DepartmentDO();
+			departmentDO1.setDepartAddress("");
+			departmentDO1.setDepartTel("");
+			model.addAttribute("departmentDO",departmentDO1);
+		}
 		MailInfoDO mailInfoDO = mailInfoService.getMailAddress(settlementDO.getSaleNumber());
 		if (null != mailInfoDO){
 			model.addAttribute("address",mailInfoDO.getAddress());

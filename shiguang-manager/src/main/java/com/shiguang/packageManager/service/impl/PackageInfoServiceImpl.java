@@ -49,4 +49,9 @@ public class PackageInfoServiceImpl implements PackageInfoService {
     public int batchRemove(Long[] ids){
         return infoDao.batchRemove(ids);
     }
+
+    @Override
+    public PackageInfoDO findSelectPackId(Long packageId){
+        return infoDao.findSelectPackId(packageId);
+    }
 }

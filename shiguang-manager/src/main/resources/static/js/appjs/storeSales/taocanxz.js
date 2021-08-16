@@ -98,10 +98,33 @@ function load() {
 
                                     }
                                 }
-                            }
+                            },
+							{
+                                title : '操作',
+                                field : 'packageId',
+                                align : 'center',
+                                formatter : function(value, row, index) {
+                                    var e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" ' +
+                                        'onclick="detail(\'' + value + '\')" style="text-decoration: none;">详情</a>';
+                                    return e;
+                                }
+							}
 						]
 					});
 }
+
+function detail(packageId) {
+    var toIndex = layer.open({
+        type : 2,
+        title : '详情',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '1500px', '520px' ],
+        content : prefix + '/taocanxzdetail/' + packageId // iframe的url
+    });
+    layer.full(toIndex)
+}
+
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }

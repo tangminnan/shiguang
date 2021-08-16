@@ -29,4 +29,6 @@ public interface PackageDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	PackageDO getPackageInfoId(Long packageId);
 }

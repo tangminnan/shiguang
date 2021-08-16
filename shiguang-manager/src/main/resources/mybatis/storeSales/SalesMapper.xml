@@ -620,7 +620,7 @@
 		ORDER BY createTime desc
 	</select>
 	<select id="getSaleNumber" resultType="com.shiguang.storeSales.domain.SalesDO">
-		select s.`id`,s.`ptometry_number`,s.`member_number`,m.`name` as memberName,m.`sex`,m.`age`,m.`phone_1` as phone1,s.`sale_name`,s.`sale_number`,s.`eye_type`,s.`amount_money`,s.`mirror_way`,s.`mirror_time`,
+		select s.`id`,s.`ptometry_number`,s.`member_number`,m.`name` as memberName,m.`sex`,m.`age`,m.`phone_1` as phone1,s.`sale_name`,s.`sale_number`,s.`goods_num`,s.`eye_type`,s.`amount_money`,s.`mirror_way`,s.`mirror_time`,
 		s.`miror_address`,s.`store_num`,s.`urgent_status`,s.`goods_rebate`,s.`fixed_price`,s.`moling_money`,s.`additional_cost`,s.`process_ask`,
 		s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`saleremark`,s.`give_name`,s.`peijing_time`,s.`optometry_name`,s.`out_recipel`,
 		s.`recipel_type`,s.`optometrywl_name`,s.`recipelwl_type`,s.`taocan_name`,s.`additional_price`,s.`additional_count`,s.`unit`

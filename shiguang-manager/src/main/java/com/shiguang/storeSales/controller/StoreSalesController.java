@@ -439,13 +439,17 @@ public class StoreSalesController {
         salesDO.setPeijingTime(new Date());
         if (null != salesDO.getGoodsNum()){
             String goodsNum = salesDO.getGoodsNum();
+            String storeDesc = salesDO.getStoreDescribe();
             String[] goodsStr = goodsNum.split(",");
-            for (int a=0;a<goodsStr.length;a++){
-                StockDO stockDO = stockService.getGoodsNum(goodsStr[a]);
-                Long countGoods = Long.parseLong(stockDO.getGoodsCount());
-                Long count = countGoods - 1;
-                stockDO.setGoodsCount(String.valueOf(count));
-                stockService.updateGoodsCount(stockDO);
+            String[] goodsDescribe = storeDesc.split(",");
+            for (int e=0;e<goodsDescribe.length;e++){
+                if ("镜架".equals(goodsDescribe[e])){
+                    StockDO stockDO = stockService.getGoodsNum(goodsStr[e]);
+                    Long countGoods = Long.parseLong(stockDO.getGoodsCount());
+                    Long count = countGoods - 1;
+                    stockDO.setGoodsCount(String.valueOf(count));
+                    stockService.updateGoodsCount(stockDO);
+                }
             }
         }
         LogStatusDO logStatusDO = new LogStatusDO();
@@ -565,6 +569,73 @@ public class StoreSalesController {
         PageUtils pageUtils = new PageUtils(packageDOList, total);
         return pageUtils;
     }
+
+    @GetMapping("/taocanxzdetail/{packageId}")
+    @RequiresPermissions("information:store:taocanxzdetail")
+    String detail(@PathVariable("packageId") Long packageId,Model model){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        PackageDO packageDO = packageService.getPackageInfoId(packageId);
+        packageDO.setPackageDate(simpleDateFormat.format(packageDO.getPackageTime()));
+        packageDO.setEffectiveTime(simpleDateFormat.format(packageDO.getEffectiveDate()));
+        packageDO.setExpiryTime(simpleDateFormat.format(packageDO.getExpiryDate()));
+        model.addAttribute("package",packageDO);
+        PackageInfoDO packageInfoDO = packageInfoService.findSelectPackId(packageDO.getPackageId());
+        List<Map<String,Object>> packList = new ArrayList<>();
+        if (null != packageInfoDO.getGoodsType()){
+            String[] goodsType = packageInfoDO.getGoodsType().split(",");
+            for (int i=0;i<goodsType.length;i++){
+                Map<String,Object> map = new HashMap<>();
+                map.put("goodsType",goodsType[i]);
+                String[] orginalStart = packageInfoDO.getOriginalStartPrice().split(",");
+                String[] orginalEnd = packageInfoDO.getOriginalEndPrice().split(",");
+                map.put("originalStartPrice",orginalStart[i]);
+                map.put("originalEndPrice",orginalEnd[i]);
+                String[] packageStart = packageInfoDO.getPackageStartPrice().split(",");
+                String[] packageEnd = packageInfoDO.getPackageEndPrice().split(",");
+                map.put("packageStartPrice",packageStart[i]);
+                map.put("packageEndPrice",packageEnd[i]);
+                String[] saleNumberStr = packageInfoDO.getSaleNumber().split(",");
+                map.put("saleNumber",saleNumberStr[i]);
+                String[] fullStart = packageInfoDO.getFullStartPrice().split(",");
+                String[] fullEnd = packageInfoDO.getFullEndPrice().split(",");
+                map.put("fullStartPrice",fullStart[i]);
+                map.put("fullEndPrice",fullEnd[i]);
+                String[] preferWay = packageInfoDO.getPreferentialWay().split(",");
+                map.put("preferentialWay",preferWay[i]);
+                String[] unitPriceStr = packageInfoDO.getUnitPrice().split(",");
+                if (unitPriceStr.length > 0){
+                    map.put("unitPrice",unitPriceStr[i]);
+                } else {
+                    map.put("unitPrice","");
+                }
+                String[] specialPriceStr = packageInfoDO.getSpecialPrice().split(",");
+                if (specialPriceStr.length > 0){
+                    map.put("specialPrice",specialPriceStr[i]);
+                } else {
+                    map.put("specialPrice","");
+                }
+                String[] preferentialPriceStr = packageInfoDO.getPreferentialPrice().split(",");
+                if (preferentialPriceStr.length > 0){
+                    map.put("preferentialPrice",preferentialPriceStr[i]);
+                } else {
+                    map.put("preferentialPrice","");
+                }
+                String[] preferentialRebateStr = packageInfoDO.getPreferentialRebate().split(",");
+                if (preferentialRebateStr.length > 0){
+                    map.put("preferentialRebate",preferentialRebateStr[i]);
+                } else {
+                    map.put("preferentialRebate","");
+                }
+                packList.add(map);
+            }
+            model.addAttribute("packList",packList);
+        } else {
+            model.addAttribute("packageInfoDO","");
+        }
+
+        return "storeSales/detail";
+    }
+
 
     /**
      * 镜架

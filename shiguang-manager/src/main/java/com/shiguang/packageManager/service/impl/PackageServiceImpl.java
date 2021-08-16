@@ -51,5 +51,10 @@ public class PackageServiceImpl implements PackageService {
 	public int batchRemove(Long[] ids){
 		return packageDao.batchRemove(ids);
 	}
+
+	@Override
+	public PackageDO getPackageInfoId(Long packageId){
+		return packageDao.getPackageInfoId(packageId);
+	}
 	
 }

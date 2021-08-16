@@ -154,7 +154,7 @@
 			<tr class="thead" >
 				<td width="5%"><label for="ALL">全选 </label><input name="ALL" type="checkbox" id="ALL" /></td>
 				<td width="28%">商品信息</td>
-				<td>商品原件区间</td>
+				<td>商品原价区间</td>
 				<td>套餐价格区间</td>
 				<td>销售数量</td>
 				<td>消费满</td>
@@ -477,7 +477,7 @@
         html += "<input name='zhuingStart' type='text' id='zhujingStart"+a+"' style='display: none;'/><input name='zhujingEnd' type='text' id='zhujingEnd' style='display: none;'/>";
 		html += "<input type='text' style='width: 20%;' name='goodsName' id='goodsName"+a+"'/><input type='hidden' style='width: 20%;' name='goodsCode' id='goodsid"+a+"'/><input type='button' id='xuanze"+a+"' onclick='getGoodsInfo(this)' value='选择'/>";
 		html += "</td>";
-		html += "<td><input class=\"short\" type=\"text\" id='goodsYJStart"+a+"' name='goodsYJStart' /> 至 <input class=\"short\" type=\"text\" id='goodsYJEnd"+a+"' name='goodsYJEnd'></td>";
+		html += "<td><input class=\"short\" type=\"text\" id='goodsYJStart"+a+"' name='originalStartPrice' /> 至 <input class=\"short\" type=\"text\" id='originalEndPrice"+a+"' name='goodsYJEnd'></td>";
 		html += "<td><input class=\"short\" type=\"text\" id='taocanStart"+a+"' name='packageStartPrice' onchange='getStartPrice(this)' /> 至 <input class=\"short\" type=\"text\" id='taocanEnd"+a+"' name='packageEndPrice' onchange='getEndPrice(this)'></td>";
 		html += "<td><input type=\"text\" id='goodsNums"+a+"' name='saleNumber' value=''/></td>";
 		html += "<td><input class=\"short\" type=\"text\" id='xiaofeiStart"+a+"' name='fullStartPrice'/> 至 <input class=\"short\" type=\"text\" id='xiaofeiEnd"+a+"' name='fullEndPrice'></td>";

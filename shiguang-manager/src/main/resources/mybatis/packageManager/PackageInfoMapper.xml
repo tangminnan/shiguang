@@ -72,7 +72,8 @@
 			`goods_code`, 
 			`goods_name`, 
 			`buy_way`, 
-			`original_price_range`, 
+			`original_start_price`,
+			`original_end_price`,
 			`package_start_price`, 
 			`package_end_price`, 
 			`sale_number`, 
@@ -91,7 +92,8 @@
 			#{goodsCode}, 
 			#{goodsName}, 
 			#{buyWay}, 
-			#{originalPriceRange}, 
+			#{originalStartPrice},
+			#{originalEndPrice},
 			#{packageStartPrice}, 
 			#{packageEndPrice}, 
 			#{saleNumber}, 
@@ -138,5 +140,9 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="findSelectPackId" resultType="com.shiguang.packageManager.domain.PackageInfoDO">
+select `id`,`package_id`,`goods_type`,`goods_code`,`goods_name`,`buy_way`,`original_start_price`,`original_end_price`,`package_start_price`,`package_end_price`,`sale_number`,`full_start_price`,`full_end_price`,`preferential_way`,`unit_price`,`special_price`,`preferential_price`,`preferential_rebate` from package_info where package_id = #{value}
+	</select>
 
 </mapper>

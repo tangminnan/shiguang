@@ -164,4 +164,8 @@
 		</foreach>
 	</delete>
 
+	<select id="getPackageInfoId" resultType="com.shiguang.packageManager.domain.PackageDO">
+		select `id`,`package_id`,`package_name`,`package_time`,`package_form`,`effective_date`,`expiry_date`,`package_type`,`start_price`,`end_price`,`package_price`,`is_cumulative_points`,`is_add`,`fold_up`,`retail_price`,`store`,`store_num`,`remark`,`whole_start`,`whole_end`,`danyiyh`,`dazhe_price`,`fanxian_price`,`tejia_price` from package where package_id = #{value}
+	</select>
+
 </mapper>

@@ -100,37 +100,46 @@ function add() {
 		content : prefix + '/add' // iframe的url
 	});
 }
-function edit(id) {
-	layer.open({
+function editFaliao(saleNumber) {
+	var toIndex = layer.open({
 		type : 2,
-		title : '编辑',
+		title : '发料',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefix + '/edit/' + saleNumber // iframe的url
 	});
+	layer.full(toIndex);
 }
-function editFaliao(saleNumber) {
-	layer.confirm('确定要发料？', {
-		btn : [ '确定', '取消' ]
-	}, function() {
-		$.ajax({
-			url : prefix+"/editFaliao",
-			type : "post",
-			data : {
-				'saleNumber' : saleNumber
-			},
-			success : function(r) {
-				if (r.code==0) {
-					layer.msg(r.msg);
-					reLoad();
-				}else{
-					layer.msg(r.msg);
-				}
-			}
-		});
-	})
-}
+// function editFaliao(saleNumber) {
+//     layer.open({
+//         type : 2,
+//         title : '发料',
+//         maxmin : true,
+//         shadeClose : false, // 点击遮罩关闭层
+//         area : [ '800px', '520px' ],
+//         content : prefix + '/editFaliao/' + saleNumber // iframe的url
+//     });
+	// layer.confirm('确定要发料？', {
+	// 	btn : [ '确定', '取消' ]
+	// }, function() {
+	// 	$.ajax({
+	// 		url : prefix+"/editFaliao",
+	// 		type : "post",
+	// 		data : {
+	// 			'saleNumber' : saleNumber
+	// 		},
+	// 		success : function(r) {
+	// 			if (r.code==0) {
+	// 				layer.msg(r.msg);
+	// 				reLoad();
+	// 			}else{
+	// 				layer.msg(r.msg);
+	// 			}
+	// 		}
+	// 	});
+	// })
+// }
 
 function resetPwd(id) {
 }
