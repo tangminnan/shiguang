@@ -46,10 +46,10 @@ function load() {
                     {
                         // checkbox: true
                     },
-                    {
-                        field: 'id',
-                        title: '主键'
-                    },
+                    // {
+                    //     field: 'id',
+                    //     title: '主键'
+                    // },
                     {
                         field: 'danjuNumber',
                         title: '单据编号'

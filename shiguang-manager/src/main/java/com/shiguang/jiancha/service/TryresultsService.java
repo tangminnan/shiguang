@@ -30,4 +30,6 @@ public interface TryresultsService {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+    //查询医生
+    List<TryresultsDO> listDoctor(Map<String, Object> map);
 }

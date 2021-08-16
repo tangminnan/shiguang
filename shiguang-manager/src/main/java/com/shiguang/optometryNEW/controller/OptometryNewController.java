@@ -294,6 +294,8 @@ public class OptometryNewController {
         }
 
         model.addAttribute("tryresultsDO", tryresultsDO);
+        //医生
+
         return "optometryNew/jianchajielun";
     }
 

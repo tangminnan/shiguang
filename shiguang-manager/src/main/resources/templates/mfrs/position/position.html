@@ -13,10 +13,10 @@
                                 onclick="add()">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
                         </button>
-                        <button shiro:hasPermission="mfrs:position:batchRemove" type="button" class="btn  btn-danger"
-                                onclick="batchRemove()">
-                            <i class="fa fa-trash" aria-hidden="true"></i>删除
-                        </button>
+                        <!--<button shiro:hasPermission="mfrs:position:batchRemove" type="button" class="btn  btn-danger"-->
+                                <!--onclick="batchRemove()">-->
+                            <!--<i class="fa fa-trash" aria-hidden="true"></i>删除-->
+                        <!--</button>-->
                     </div>
                     <br>
                     <div class="columns pull-left" style="display:flex;  margin-top:20px">
@@ -38,12 +38,11 @@
                             </select>
                         </div>
                         <div class="columns pull-right col-md-2 nopadding">
-                            <select id="stateId" name="stateId" class="form-control">
-                                <option value="">启用状态</option>
-                                <option th:each="ls:${stateDOList}"
-                                        th:text="${ls.status}"
-                                        th:value="${ls.stateId}"
-                                ></option>
+                            <select name="status" id="status" class="form-control" data-actions-box="false"
+                                    data-size="5">
+                                <option value="">启用状态状态</option>
+                                <option value="0">启用</option>
+                                <option value="1">禁用</option>
                             </select>
                         </div>
                         <div class="columns pull-right">

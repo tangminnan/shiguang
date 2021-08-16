@@ -701,5 +701,9 @@
             #{id}
         </foreach>
     </delete>
-
+    <!--<select id="listDoctor" resultType="">-->
+        <!--select suser.name ,srole.role_name from sys_user suser join sys_user_role sur on suser.user_id=sur.user_id-->
+          <!--join sys_role srole on sur.role_id=srole.role_id-->
+          <!--where srole.role_name=#{roleName}-->
+    <!--</select>-->
 </mapper>

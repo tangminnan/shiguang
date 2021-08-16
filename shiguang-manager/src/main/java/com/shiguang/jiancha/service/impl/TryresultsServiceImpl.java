@@ -55,5 +55,11 @@ public class TryresultsServiceImpl implements TryresultsService {
     public int batchRemove(Long[] ids) {
         return tryresultsDao.batchRemove(ids);
     }
+//    医生
 
+
+    @Override
+    public List<TryresultsDO> listDoctor(Map<String, Object> map) {
+        return tryresultsDao.listDoctor(map);
+    }
 }

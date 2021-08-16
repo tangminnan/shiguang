@@ -33,11 +33,13 @@ function load() {
                         limit: params.limit,
                         offset: params.offset,
                         goodsid: $('#goodsid').val(),
+                        mfrsname: $('#mfrsname').val(),
                         mfrsid: $('#mfrsid').val(),
                         brandnum: $('#brandnum').val(),
                         stateId: $('#stateId').val(),
                         payid: $('#payid').val(),
-                        brandname: $('#brandname').val()
+                        brandname: $('#brandname').val(),
+                        status: $('#status').val()
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };
