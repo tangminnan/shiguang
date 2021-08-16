@@ -19,69 +19,69 @@ public class Conclusion implements Serializable {
     //验光师
     private String yangsName;
     //球镜OD
-    private Double rightsph;
+    private String rightsph;
     //球镜OS
-    private Double leftsph;
+    private String leftsph;
     //柱镜OD
-    private Double rightcyl;
+    private String rightcyl;
     //柱镜OS
-    private Double leftcyl;
+    private String leftcyl;
     //轴向OD
-    private Double rightzx;
+    private String rightzx;
     //轴向OS
-    private Double leftzx;
+    private String leftzx;
     //三棱镜(OD)
-    private Double rightprism;
+    private String rightprism;
     //三棱镜(OS)
-    private Double leftprism;
+    private String leftprism;
     //基地OD
     private String rightjd;
     //基地OS
     private String leftjd;
     //远/中用瞳距OD
-    private Double rightyytj;
+    private String rightyytj;
     //远/中用瞳距OS
-    private Double leftyytj;
+    private String leftyytj;
     //瞳高OD
-    private Double righttg;
+    private String righttg;
     //瞳高OS
-    private Double lefttg;
+    private String lefttg;
     //远用VA(OD)
-    private Double rightva;
+    private String rightva;
     //远用VA(OS)
-    private Double leftva;
+    private String leftva;
     //适用镜片OD
-    private Double rightsyjp;
+    private String rightsyjp;
     //适用镜片OS
-    private Double leftsyjp;
+    private String leftsyjp;
     //片/盒OD
-    private Double rightunit;
+    private String rightunit;
     //片/盒OS
-    private Double leftunit;
+    private String leftunit;
     //近用瞳距OD
-    private Double rightjytj;
+    private String rightjytj;
     //近用瞳距OS
-    private Double leftjytj;
+    private String leftjytj;
     //近用VA(OD)
-    private Double rightjyva;
+    private String rightjyva;
     //近用VA(OS)
-    private Double leftjyva;
+    private String leftjyva;
     //屈光度OD
-    private Double rightqgd;
+    private String rightqgd;
     //屈光度OS
-    private Double leftqgd;
+    private String leftqgd;
     //BC(OD)
-    private Double rightbc;
+    private String rightbc;
     //BC(OS)
-    private Double leftbc;
+    private String leftbc;
     //DIA(OD)
-    private Double rightdia;
+    private String rightdia;
     //DIA(OS)
-    private Double leftdia;
+    private String leftdia;
     //散光(OD)
-    private Double rightsg;
+    private String rightsg;
     //散光(OS)
-    private Double leftsg;
+    private String leftsg;
     //特殊设计OD
     private String righttssj;
     //特殊设计OS
@@ -115,37 +115,37 @@ public class Conclusion implements Serializable {
 
     public String getYangsName() {return yangsName;}
 
-    public void setRightsph(Double rightsph) {this.rightsph = rightsph;}
+    public void setRightsph(String rightsph) {this.rightsph = rightsph;}
 
-    public Double getRightsph() {return rightsph;}
+    public String getRightsph() {return rightsph;}
 
-    public void setLeftsph(Double leftsph) {this.leftsph = leftsph;}
+    public void setLeftsph(String leftsph) {this.leftsph = leftsph;}
 
-    public Double getLeftsph() {return leftsph;}
+    public String getLeftsph() {return leftsph;}
 
-    public void setRightcyl(Double rightcyl) {this.rightcyl = rightcyl;}
+    public void setRightcyl(String rightcyl) {this.rightcyl = rightcyl;}
 
-    public Double getRightcyl() {return rightcyl;}
+    public String getRightcyl() {return rightcyl;}
 
-    public void setLeftcyl(Double leftcyl) {this.leftcyl = leftcyl;}
+    public void setLeftcyl(String leftcyl) {this.leftcyl = leftcyl;}
 
-    public Double getLeftcyl() {return leftcyl;}
+    public String getLeftcyl() {return leftcyl;}
 
-    public void setRightzx(Double rightzx) {this.rightzx = rightzx;}
+    public void setRightzx(String rightzx) {this.rightzx = rightzx;}
 
-    public Double getRightzx() {return rightzx;}
+    public String getRightzx() {return rightzx;}
 
-    public void setLeftzx(Double leftzx) {this.leftzx = leftzx;}
+    public void setLeftzx(String leftzx) {this.leftzx = leftzx;}
 
-    public Double getLeftzx() {return leftzx;}
+    public String getLeftzx() {return leftzx;}
 
-    public void setRightprism(Double rightprism) {this.rightprism = rightprism;}
+    public void setRightprism(String rightprism) {this.rightprism = rightprism;}
 
-    public Double getRightprism() {return rightprism;}
+    public String getRightprism() {return rightprism;}
 
-    public void setLeftprism(Double leftprism) {this.leftprism = leftprism;}
+    public void setLeftprism(String leftprism) {this.leftprism = leftprism;}
 
-    public Double getLeftprism() {return leftprism;}
+    public String getLeftprism() {return leftprism;}
 
     public void setRightjd(String rightjd) {this.rightjd = rightjd;}
 
@@ -155,93 +155,93 @@ public class Conclusion implements Serializable {
 
     public String getLeftjd(){return leftjd;}
 
-    public void setRightyytj(Double rightyytj) {this.rightyytj = rightyytj;}
+    public void setRightyytj(String rightyytj) {this.rightyytj = rightyytj;}
 
-    public Double getRightyytj() {return rightyytj;}
+    public String getRightyytj() {return rightyytj;}
 
-    public void setLeftyytj(Double leftyytj) {this.leftyytj = leftyytj;}
+    public void setLeftyytj(String leftyytj) {this.leftyytj = leftyytj;}
 
-    public Double getLeftyytj(){return leftyytj;}
+    public String getLeftyytj(){return leftyytj;}
 
-    public void setRighttg(Double righttg) {this.righttg = righttg;}
+    public void setRighttg(String righttg) {this.righttg = righttg;}
 
-    public Double getRighttg() {return righttg;}
+    public String getRighttg() {return righttg;}
 
-    public void setLefttg(Double lefttg) {this.lefttg = lefttg;}
+    public void setLefttg(String lefttg) {this.lefttg = lefttg;}
 
-    public Double getLefttg() {return lefttg;}
+    public String getLefttg() {return lefttg;}
 
-    public void setRightva(Double rightva) {this.rightva = rightva;}
+    public void setRightva(String rightva) {this.rightva = rightva;}
 
-    public Double getRightva(){return rightva;}
+    public String getRightva(){return rightva;}
 
-    public void setLeftva(Double leftva) {this.leftva = leftva;}
+    public void setLeftva(String leftva) {this.leftva = leftva;}
 
-    public Double getLeftva(){return leftva;}
+    public String getLeftva(){return leftva;}
 
-    public void setRightsyjp(Double rightsyjp) {this.rightsyjp = rightsyjp;}
+    public void setRightsyjp(String rightsyjp) {this.rightsyjp = rightsyjp;}
 
-    public Double getRightsyjp(){return rightsyjp;}
+    public String getRightsyjp(){return rightsyjp;}
 
-    public void setLeftsyjp(Double leftsyjp) {this.leftsyjp = leftsyjp;}
+    public void setLeftsyjp(String leftsyjp) {this.leftsyjp = leftsyjp;}
 
-    public Double getLeftsyjp() {return leftsyjp;}
+    public String getLeftsyjp() {return leftsyjp;}
 
-    public void setRightunit(Double rightunit) {this.rightunit = rightunit;}
+    public void setRightunit(String rightunit) {this.rightunit = rightunit;}
 
-    public Double getRightunit() {return rightunit;}
+    public String getRightunit() {return rightunit;}
 
-    public void setLeftunit(Double leftunit) {this.leftunit = leftunit;}
+    public void setLeftunit(String leftunit) {this.leftunit = leftunit;}
 
-    public Double getLeftunit(){return leftunit;}
+    public String getLeftunit(){return leftunit;}
 
-    public void setRightjytj(Double rightjytj) {this.rightjytj = rightjytj;}
+    public void setRightjytj(String rightjytj) {this.rightjytj = rightjytj;}
 
-    public Double getRightjytj() {return rightjytj;}
+    public String getRightjytj() {return rightjytj;}
 
-    public void setLeftjytj(Double leftjytj) {this.leftjytj = leftjytj;}
+    public void setLeftjytj(String leftjytj) {this.leftjytj = leftjytj;}
 
-    public Double getLeftjytj(){return leftjytj;}
+    public String getLeftjytj(){return leftjytj;}
 
-    public void setRightjyva(Double rightjyva) {this.rightjyva = rightjyva;}
+    public void setRightjyva(String rightjyva) {this.rightjyva = rightjyva;}
 
-    public Double getRightjyva() {return rightjyva;}
+    public String getRightjyva() {return rightjyva;}
 
-    public void setLeftjyva(Double leftjyva) {this.leftjyva = leftjyva;}
+    public void setLeftjyva(String leftjyva) {this.leftjyva = leftjyva;}
 
-    public Double getLeftjyva(){return leftjyva;}
+    public String getLeftjyva(){return leftjyva;}
 
-    public void setRightqgd(Double rightqgd){this.rightqgd = rightqgd;}
+    public void setRightqgd(String rightqgd){this.rightqgd = rightqgd;}
 
-    public Double getRightqgd(){return  rightqgd;}
+    public String getRightqgd(){return  rightqgd;}
 
-    public void setLeftqgd(Double leftqgd){this.leftqgd = leftqgd;}
+    public void setLeftqgd(String leftqgd){this.leftqgd = leftqgd;}
 
-    public Double getLeftqgd(){return leftqgd;}
+    public String getLeftqgd(){return leftqgd;}
 
-    public void setRightbc(Double rightbc) {this.rightbc = rightbc;}
+    public void setRightbc(String rightbc) {this.rightbc = rightbc;}
 
-    public Double getRightbc(){return rightbc;}
+    public String getRightbc(){return rightbc;}
 
-    public void setLeftbc(Double leftbc) {this.leftbc = leftbc;}
+    public void setLeftbc(String leftbc) {this.leftbc = leftbc;}
 
-    public Double getLeftbc(){return leftbc;}
+    public String getLeftbc(){return leftbc;}
 
-    public void setRightdia(Double rightdia) {this.rightdia = rightdia;}
+    public void setRightdia(String rightdia) {this.rightdia = rightdia;}
 
-    public Double getRightdia() {return rightdia;}
+    public String getRightdia() {return rightdia;}
 
-    public void setLeftdia(Double leftdia) {this.leftdia = leftdia;}
+    public void setLeftdia(String leftdia) {this.leftdia = leftdia;}
 
-    public Double getLeftdia(){return leftdia;}
+    public String getLeftdia(){return leftdia;}
 
-    public void setRightsg(Double rightsg) {this.rightsg = rightsg;}
+    public void setRightsg(String rightsg) {this.rightsg = rightsg;}
 
-    public Double getRightsg() {return rightsg;}
+    public String getRightsg() {return rightsg;}
 
-    public void setLeftsg(Double leftsg) {this.leftsg = leftsg;}
+    public void setLeftsg(String leftsg) {this.leftsg = leftsg;}
 
-    public Double getLeftsg(){return leftsg;}
+    public String getLeftsg(){return leftsg;}
 
     public void setRighttssj(String righttssj) {this.righttssj = righttssj;}
 

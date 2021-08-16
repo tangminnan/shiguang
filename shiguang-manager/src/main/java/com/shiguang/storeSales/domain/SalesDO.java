@@ -101,72 +101,72 @@ public class SalesDO implements Serializable {
 	private String chufang;
 	//手填处方的度数
 	//球镜OD
-	private Double rightQJ;
+	private String rightQJ;
 	//柱镜OD
-	private Double rightZJ;
+	private String rightZJ;
 	//轴向OD
-	private Double rightzhouxiang;
+	private String rightzhouxiang;
 	//三棱镜OD
-	private Double rightsanlingjing;
+	private String rightsanlingjing;
 	//基地OD
 	private String rightjidi;
 	//远用瞳距OD
-	private Double rightyuanyongtj;
+	private String rightyuanyongtj;
 	//瞳高OD
-	private Double righttonggao;
+	private String righttonggao;
 	//远用VA(OD)
-	private Double rightyuanyongVA;
+	private String rightyuanyongVA;
 	//球镜OS
-	private Double leftQJ;
+	private String leftQJ;
 	//柱镜OS
-	private Double leftZJ;
+	private String leftZJ;
 	//轴向OS
-	private Double leftzhouxiang;
+	private String leftzhouxiang;
 	//三棱镜OS
-	private Double leftsanlingjing;
+	private String leftsanlingjing;
 	//基地OS
 	private String leftjidi;
 	//远用瞳距OD
-	private Double leftyuanyongtj;
+	private String leftyuanyongtj;
 	//瞳高OS
-	private Double lefttonggao;
+	private String lefttonggao;
 	//远用VA(OS)
-	private Double leftyuanyongVA;
+	private String leftyuanyongVA;
 	//备注
 	private String remark;
 	//旧瞳距
-	private Double oldtongju;
+	private String oldtongju;
 	//片高
-	private Double piangao;
+	private String piangao;
 	//片宽
-	private Double piankuan;
+	private String piankuan;
 	//中梁
-	private Double zhongliang;
+	private String zhongliang;
 	//镜片通道
-	private Double jingpiantongdao;
+	private String jingpiantongdao;
 	//对角线
-	private Double duijiaoxian;
+	private String duijiaoxian;
 	//框型
 	private String kuangxing;
 	//直径
-	private Double zhijing;
+	private String zhijing;
 	//RGP
 	//屈光度(OD)
-	private Double rightRgpgd;
+	private String rightRgpgd;
 	//屈光度OS
-	private Double leftRgpgd;
+	private String leftRgpgd;
 	//BC(OD)
-	private Double rightBC;
+	private String rightBC;
 	//BC(OS)
-	private Double leftBC;
+	private String leftBC;
 	//DIA(OD)
-	private Double rightDIA;
+	private String rightDIA;
 	//DIA(OS)
-	private Double leftDIA;
+	private String leftDIA;
 	//散光OD
-	private Double rightsg;
+	private String rightsg;
 	//散光OS
-	private Double leftsg;
+	private String leftsg;
 	//镜片颜色OD
 	private String rightJPColor;
 	//镜片颜色OS
@@ -631,35 +631,35 @@ public class SalesDO implements Serializable {
 	/**
 	 * 球镜OD
 	 */
-	public void setRightQJ(Double rightQJ) {this.rightQJ = rightQJ;}
+	public void setRightQJ(String rightQJ) {this.rightQJ = rightQJ;}
 	/**
 	 * 球镜OD
 	 */
-	public Double getRightQJ(){return rightQJ;}
+	public String getRightQJ(){return rightQJ;}
 	/**
 	 * 柱镜OD
 	 */
-	public void setRightZJ(Double rightZJ) {this.rightZJ = rightZJ;}
+	public void setRightZJ(String rightZJ) {this.rightZJ = rightZJ;}
 	/**
 	 * 柱镜OD
 	 */
-	public Double getRightZJ() {return rightZJ;}
+	public String getRightZJ() {return rightZJ;}
 	/**
 	 * 轴向OD
 	 */
-	public void setRightzhouxiang(Double rightzhouxiang) {this.rightzhouxiang = rightzhouxiang;}
+	public void setRightzhouxiang(String rightzhouxiang) {this.rightzhouxiang = rightzhouxiang;}
 	/**
 	 * 轴向OD
 	 */
-	public Double getRightzhouxiang(){return rightzhouxiang;}
+	public String getRightzhouxiang(){return rightzhouxiang;}
 	/**
 	 * 三棱镜OD
 	 */
-	public void setRightsanlingjing(Double rightsanlingjing) {this.rightsanlingjing = rightsanlingjing;}
+	public void setRightsanlingjing(String rightsanlingjing) {this.rightsanlingjing = rightsanlingjing;}
 	/**
 	 * 三棱镜OD
 	 */
-	public Double getRightsanlingjing() {return rightsanlingjing;}
+	public String getRightsanlingjing() {return rightsanlingjing;}
 	/**
 	 * 基地OD
 	 */
@@ -671,59 +671,59 @@ public class SalesDO implements Serializable {
 	/**
 	 * 远用瞳距OD
 	 */
-	public void setRightyuanyongtj(Double rightyuanyongtj) {this.rightyuanyongtj = rightyuanyongtj;}
+	public void setRightyuanyongtj(String rightyuanyongtj) {this.rightyuanyongtj = rightyuanyongtj;}
 	/**
 	 * 远用瞳距OD
 	 */
-	public Double getRightyuanyongtj() {return rightyuanyongtj;}
+	public String getRightyuanyongtj() {return rightyuanyongtj;}
 	/**
 	 * 瞳高OD
 	 */
-	public void setRighttonggao(Double righttonggao) {this.righttonggao = righttonggao;}
+	public void setRighttonggao(String righttonggao) {this.righttonggao = righttonggao;}
 	/**
 	 * 瞳高OD
 	 */
-	public Double getRighttonggao() {return righttonggao;}
+	public String getRighttonggao() {return righttonggao;}
 	/**
 	 * 远用VA(OD)
 	 */
-	public void setRightyuanyongVA(Double rightyuanyongVA) {this.rightyuanyongVA = rightyuanyongVA;}
+	public void setRightyuanyongVA(String rightyuanyongVA) {this.rightyuanyongVA = rightyuanyongVA;}
 	/**
 	 * 远用VA(OD)
 	 */
-	public Double getRightyuanyongVA() {return rightyuanyongVA;}
+	public String getRightyuanyongVA() {return rightyuanyongVA;}
 	/**
 	 * 球镜OS
 	 */
-	public void setLeftQJ(Double leftQJ){this.leftQJ = leftQJ;}
+	public void setLeftQJ(String leftQJ){this.leftQJ = leftQJ;}
 	/**
 	 * 球镜OS
 	 */
-	public Double getLeftQJ() {return leftQJ;}
+	public String getLeftQJ() {return leftQJ;}
 	/**
 	 * 柱镜OS
 	 */
-	public void setLeftZJ(Double leftZJ) {this.leftZJ = leftZJ;}
+	public void setLeftZJ(String leftZJ) {this.leftZJ = leftZJ;}
 	/**
 	 * 柱镜OS
 	 */
-	public Double getLeftZJ() {return leftZJ;}
+	public String getLeftZJ() {return leftZJ;}
 	/**
 	 * 轴向OS
 	 */
-	public void setLeftzhouxiang(Double leftzhouxiang) {this.leftzhouxiang = leftzhouxiang;}
+	public void setLeftzhouxiang(String leftzhouxiang) {this.leftzhouxiang = leftzhouxiang;}
 	/**
 	 * 轴向OS
 	 */
-	public Double getLeftzhouxiang() {return leftzhouxiang;}
+	public String getLeftzhouxiang() {return leftzhouxiang;}
 	/**
 	 * 三棱镜OS
 	 */
-	public void setLeftsanlingjing(Double leftsanlingjing) {this.leftsanlingjing = leftsanlingjing;}
+	public void setLeftsanlingjing(String leftsanlingjing) {this.leftsanlingjing = leftsanlingjing;}
 	/**
 	 * 三棱镜OS
 	 */
-	public Double getLeftsanlingjing(){return leftsanlingjing;}
+	public String getLeftsanlingjing(){return leftsanlingjing;}
 	/**
 	 * 基地OS
 	 */
@@ -735,27 +735,27 @@ public class SalesDO implements Serializable {
 	/**
 	 * 远用瞳距OS
 	 */
-	public void setLeftyuanyongtj(Double leftyuanyongtj) {this.leftyuanyongtj = leftyuanyongtj;}
+	public void setLeftyuanyongtj(String leftyuanyongtj) {this.leftyuanyongtj = leftyuanyongtj;}
 	/**
 	 * 远用瞳距OS
 	 */
-	public Double getLeftyuanyongtj(){return leftyuanyongtj;}
+	public String getLeftyuanyongtj(){return leftyuanyongtj;}
 	/**
 	 * 瞳高OS
 	 */
-	public void setLefttonggao(Double lefttonggao){this.lefttonggao = lefttonggao;}
+	public void setLefttonggao(String lefttonggao){this.lefttonggao = lefttonggao;}
 	/**
 	 * 瞳高OS
 	 */
-	public Double getLefttonggao(){return lefttonggao;}
+	public String getLefttonggao(){return lefttonggao;}
 	/**
 	 * 远用VA(OS)
 	 */
-	public void setLeftyuanyongVA(Double leftyuanyongVA) {this.leftyuanyongVA = leftyuanyongVA;}
+	public void setLeftyuanyongVA(String leftyuanyongVA) {this.leftyuanyongVA = leftyuanyongVA;}
 	/**
 	 * 远用VA(OS)
 	 */
-	public Double getLeftyuanyongVA() {return leftyuanyongVA;}
+	public String getLeftyuanyongVA() {return leftyuanyongVA;}
 	/**
 	 * 获取：备注
 	 */
@@ -771,51 +771,51 @@ public class SalesDO implements Serializable {
 	/**
 	 * 旧瞳距
 	 */
-	public void setOldtongju(Double oldtongju) {this.oldtongju = oldtongju;}
+	public void setOldtongju(String oldtongju) {this.oldtongju = oldtongju;}
 	/**
 	 * 旧瞳距
 	 */
-	public Double getOldtongju(){return oldtongju;}
+	public String getOldtongju(){return oldtongju;}
 	/**
 	 * 片高
 	 */
-	public void setPiangao(Double piangao) {this.piangao = piangao;}
+	public void setPiangao(String piangao) {this.piangao = piangao;}
 	/**
 	 * 片高
 	 */
-	public Double getPiangao() {return piangao;}
+	public String getPiangao() {return piangao;}
 	/**
 	 * 片宽
 	 */
-	public void setPiankuan(Double piankuan) {this.piankuan = piankuan;}
+	public void setPiankuan(String piankuan) {this.piankuan = piankuan;}
 	/**
 	 * 片宽
 	 */
-	public Double getPiankuan() {return piankuan;}
+	public String getPiankuan() {return piankuan;}
 	/**
 	 * 中梁
 	 */
-	public void setZhongliang(Double zhongliang) {this.zhongliang = zhongliang;}
+	public void setZhongliang(String zhongliang) {this.zhongliang = zhongliang;}
 	/**
 	 * 中梁
 	 */
-	public Double getZhongliang() {return zhongliang;}
+	public String getZhongliang() {return zhongliang;}
 	/**
 	 * 镜片通道
 	 */
-	public void setJingpiantongdao(Double jingpiantongdao) {this.jingpiantongdao = jingpiantongdao;}
+	public void setJingpiantongdao(String jingpiantongdao) {this.jingpiantongdao = jingpiantongdao;}
 	/**
 	 * 镜片通道
 	 */
-	public Double getJingpiantongdao(){return jingpiantongdao;}
+	public String getJingpiantongdao(){return jingpiantongdao;}
 	/**
 	 * 对角线
 	 */
-	public void setDuijiaoxian(Double duijiaoxian) {this.duijiaoxian = duijiaoxian;}
+	public void setDuijiaoxian(String duijiaoxian) {this.duijiaoxian = duijiaoxian;}
 	/**
 	 * 对角线
 	 */
-	public Double getDuijiaoxian() {return duijiaoxian;}
+	public String getDuijiaoxian() {return duijiaoxian;}
 	/**
 	 * 框型
 	 */
@@ -827,76 +827,76 @@ public class SalesDO implements Serializable {
 	/**
 	 * 直径
 	 */
-	public void setZhijing(Double zhijing) {this.zhijing = zhijing;}
+	public void setZhijing(String zhijing) {this.zhijing = zhijing;}
 	/**
 	 * 直径
 	 */
-	public Double getZhijing(){return zhijing;}
+	public String getZhijing(){return zhijing;}
 
 	/**
 	 * 屈光度OD
 	 */
-	public void setRightRgpgd(Double rightRgpgd) {this.rightRgpgd = rightRgpgd;}
+	public void setRightRgpgd(String rightRgpgd) {this.rightRgpgd = rightRgpgd;}
 	/**
 	 * 屈光度OD
 	 */
-	public Double getRightRgpgd() {return rightRgpgd;}
+	public String getRightRgpgd() {return rightRgpgd;}
 	/**
 	 * 屈光度OS
 	 */
-	public void setLeftRgpgd(Double leftRgpgd) {this.leftRgpgd = leftRgpgd;}
+	public void setLeftRgpgd(String leftRgpgd) {this.leftRgpgd = leftRgpgd;}
 	/**
 	 * 屈光度OS
 	 */
-	public Double getLeftRgpgd() {return leftRgpgd;}
+	public String getLeftRgpgd() {return leftRgpgd;}
 	/**
 	 * BC(OD)
 	 */
-	public void setRightBC(Double rightBC) {this.rightBC = rightBC;}
+	public void setRightBC(String rightBC) {this.rightBC = rightBC;}
 	/**
 	 * BC(OD)
 	 */
-	public Double getRightBC(){return rightBC;}
+	public String getRightBC(){return rightBC;}
 	/**
 	 * BC(OS)
 	 */
-	public void setLeftBC(Double leftBC) {this.leftBC = leftBC;}
+	public void setLeftBC(String leftBC) {this.leftBC = leftBC;}
 	/**
 	 * BC(OS)
 	 */
-	public Double getLeftBC() {return leftBC;}
+	public String getLeftBC() {return leftBC;}
 	/**
 	 * DIA(OD)
 	 */
-	public void setRightDIA(Double rightDIA) {this.rightDIA = rightDIA;}
+	public void setRightDIA(String rightDIA) {this.rightDIA = rightDIA;}
 	/**
 	 * DIA(OD)
 	 */
-	public Double getRightDIA() {return rightDIA;}
+	public String getRightDIA() {return rightDIA;}
 	/**
 	 * DIA(OS)
 	 */
-	public void setLeftDIA(Double leftDIA) {this.leftDIA = leftDIA;}
+	public void setLeftDIA(String leftDIA) {this.leftDIA = leftDIA;}
 	/**
 	 * DIA(OS)
 	 */
-	public Double getLeftDIA() {return leftDIA;}
+	public String getLeftDIA() {return leftDIA;}
 	/**
 	 * 散光(OD)
 	 */
-	public void setRightsg(Double rightsg) {this.rightsg = rightsg;}
+	public void setRightsg(String rightsg) {this.rightsg = rightsg;}
 	/**
 	 * 散光(OD)
 	 */
-	public Double getRightsg() {return rightsg;}
+	public String getRightsg() {return rightsg;}
 	/**
 	 * 散光(OS)
 	 */
-	public void setLeftsg(Double leftsg) {this.leftsg = leftsg;}
+	public void setLeftsg(String leftsg) {this.leftsg = leftsg;}
 	/**
 	 * 散光(OS)
 	 */
-	public Double getLeftsg() {return leftsg;}
+	public String getLeftsg() {return leftsg;}
 	/**
 	 * 镜片颜色OD
 	 */

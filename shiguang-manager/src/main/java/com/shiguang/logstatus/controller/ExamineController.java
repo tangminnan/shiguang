@@ -99,19 +99,19 @@ public class ExamineController {
             conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
             conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
         } else {
-            conclusion.setRightsph(0.00);
-            conclusion.setRightcyl(0.00);
-            conclusion.setRightzx(0.00);
-            conclusion.setRightyytj(0.00);
-            conclusion.setRighttg(0.00);
-            conclusion.setRightprism(0.00);
+            conclusion.setRightsph("");
+            conclusion.setRightcyl("");
+            conclusion.setRightzx("");
+            conclusion.setRightyytj("");
+            conclusion.setRighttg("");
+            conclusion.setRightprism("");
             conclusion.setRightjd("");
-            conclusion.setLeftsph(0.00);
-            conclusion.setLeftcyl(0.00);
-            conclusion.setLeftzx(0.00);
-            conclusion.setLeftyytj(0.00);
-            conclusion.setLefttg(0.00);
-            conclusion.setLeftprism(0.00);
+            conclusion.setLeftsph("");
+            conclusion.setLeftcyl("");
+            conclusion.setLeftzx("");
+            conclusion.setLeftyytj("");
+            conclusion.setLefttg("");
+            conclusion.setLeftprism("");
             conclusion.setLeftjd("");
         }
         model.addAttribute("conclusion",conclusion);
