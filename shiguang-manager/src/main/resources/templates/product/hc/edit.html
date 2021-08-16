@@ -58,7 +58,7 @@
                 <td>厂家型号：</td>
                 <td>
                     <input id="factory" name="factory" th:value="${hc.factory}"
-                           type="text" onkeyup=""
+                           type="text" onkeyup="liandong1(this)" oninput="if(value.length>9)value=value.slice(0,9)"
                            onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
                     <em>*</em>
                 </td>
@@ -66,14 +66,16 @@
             <tr>
                 <td>型号：</td>
                 <td>
-                    <input th:value="${hc.producFactory}" type="text" readonly style="background-color: #e4e4e4">
+                    <input th:value="${hc.producFactory}" style="background-color: #e4e4e4"
+                           oninput="if(value.length>9)value=value.slice(0,9)"
+                           type="text" readonly>
                     <input id="producFactory" name="producFactory" th:value="${hc.producFactory}"
                            type="hidden">
                     <em>*</em>
                 </td>
-                <td>商品编号：</td>
+                <td>商品编号</td>
                 <td>
-                    <input id="proid" name="proid" th:value="${hc.proid}" type="text"
+                    <input id="proid" name="proid" th:value="${hc.proid}" type="text" onkeyup="choiceProid(this)"
                            oninput="if(value.length>4)value=value.slice(0,4)">
                     <em>*</em>
                 </td>
@@ -307,17 +309,32 @@
         }
     }
 
+    var a1 = document.getElementById("producNum")
+    var a2 = document.getElementById("producCode")
+    var sum;
+    var sum1;
+    var a1_val = a1.value.substring(0, 7) + ".000000000.0000";
+    // alert(a1_val);
+
     // <!--//———厂家型号与型号联动—————--
     function liandong1(e) {//厂家型号
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
         // alert(val);
-        var producColor = document.getElementById("producColor");
+        var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        sum1 = 22 - producColor.value.length;
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase();
+        sum1 = 22 - proid.value.length;
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + proid.value.toUpperCase();
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
+    }
+
+    function choiceProid(e) {//商品编号
+        var producFactory = document.getElementById("producFactory")
+        sum = 17 - producFactory.value.length;
+        sum1 = 22 - e.value.length;
+        a1.value = a1_val.substring(0, sum) + producFactory.value.toUpperCase() + a1_val.substring(17, sum1) + e.value.toUpperCase();
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
 
 

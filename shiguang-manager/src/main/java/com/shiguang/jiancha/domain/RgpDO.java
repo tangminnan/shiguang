@@ -24,21 +24,21 @@ public class RgpDO implements Serializable {
     //验光师
     private String rgpOptometryName;
     //屈光度OD
-    private Double rgpQgdod;
+    private String rgpQgdod;
     //屈光度OS
-    private Double rgpQgdos;
+    private String rgpQgdos;
     //BC(OD)
-    private Double rgpBcod;
+    private String rgpBcod;
     //BC(OS)
-    private Double rgpBcos;
+    private String rgpBcos;
     //DIA(OD)
-    private Double rgpDiaod;
+    private String rgpDiaod;
     //DIA(OS)
-    private Double rgpDiaos;
+    private String rgpDiaos;
     //散光(OD)
-    private Double rgpSgod;
+    private String rgpSgod;
     //散光(OS)
-    private Double rgpSgos;
+    private String rgpSgos;
     //镜片颜色OD
     private String rgpJpysod;
     //镜片颜色OS
@@ -127,112 +127,112 @@ public class RgpDO implements Serializable {
     /**
      * 设置：屈光度OD
      */
-    public void setRgpQgdod(Double rgpQgdod) {
+    public void setRgpQgdod(String rgpQgdod) {
         this.rgpQgdod = rgpQgdod;
     }
 
     /**
      * 获取：屈光度OD
      */
-    public Double getRgpQgdod() {
+    public String getRgpQgdod() {
         return rgpQgdod;
     }
 
     /**
      * 设置：屈光度OS
      */
-    public void setRgpQgdos(Double rgpQgdos) {
+    public void setRgpQgdos(String rgpQgdos) {
         this.rgpQgdos = rgpQgdos;
     }
 
     /**
      * 获取：屈光度OS
      */
-    public Double getRgpQgdos() {
+    public String getRgpQgdos() {
         return rgpQgdos;
     }
 
     /**
      * 设置：BC(OD)
      */
-    public void setRgpBcod(Double rgpBcod) {
+    public void setRgpBcod(String rgpBcod) {
         this.rgpBcod = rgpBcod;
     }
 
     /**
      * 获取：BC(OD)
      */
-    public Double getRgpBcod() {
+    public String getRgpBcod() {
         return rgpBcod;
     }
 
     /**
      * 设置：BC(OS)
      */
-    public void setRgpBcos(Double rgpBcos) {
+    public void setRgpBcos(String rgpBcos) {
         this.rgpBcos = rgpBcos;
     }
 
     /**
      * 获取：BC(OS)
      */
-    public Double getRgpBcos() {
+    public String getRgpBcos() {
         return rgpBcos;
     }
 
     /**
      * 设置：DIA(OD)
      */
-    public void setRgpDiaod(Double rgpDiaod) {
+    public void setRgpDiaod(String rgpDiaod) {
         this.rgpDiaod = rgpDiaod;
     }
 
     /**
      * 获取：DIA(OD)
      */
-    public Double getRgpDiaod() {
+    public String getRgpDiaod() {
         return rgpDiaod;
     }
 
     /**
      * 设置：DIA(OS)
      */
-    public void setRgpDiaos(Double rgpDiaos) {
+    public void setRgpDiaos(String rgpDiaos) {
         this.rgpDiaos = rgpDiaos;
     }
 
     /**
      * 获取：DIA(OS)
      */
-    public Double getRgpDiaos() {
+    public String getRgpDiaos() {
         return rgpDiaos;
     }
 
     /**
      * 设置：散光(OD)
      */
-    public void setRgpSgod(Double rgpSgod) {
+    public void setRgpSgod(String rgpSgod) {
         this.rgpSgod = rgpSgod;
     }
 
     /**
      * 获取：散光(OD)
      */
-    public Double getRgpSgod() {
+    public String getRgpSgod() {
         return rgpSgod;
     }
 
     /**
      * 设置：散光(OS)
      */
-    public void setRgpSgos(Double rgpSgos) {
+    public void setRgpSgos(String rgpSgos) {
         this.rgpSgos = rgpSgos;
     }
 
     /**
      * 获取：散光(OS)
      */
-    public Double getRgpSgos() {
+    public String getRgpSgos() {
         return rgpSgos;
     }
 

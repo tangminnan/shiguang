@@ -76,11 +76,10 @@
                            type="hidden">
                     <em>*</em>
                 </td>
-                <td>商品编号：</td>
+                <td>商品编号</td>
                 <td>
-                    <input id="proid" name="proid" th:value="${shiguang.proid}" class="form-control"
-                           oninput="if(value.length>4)value=value.slice(0,4)"
-                           type="text">
+                    <input id="proid" name="proid" th:value="${shiguang.proid}" type="text" onkeyup="choiceProid(this)"
+                           oninput="if(value.length>4)value=value.slice(0,4)">
                     <em>*</em>
                 </td>
                 <td>计量单位：</td>
@@ -196,6 +195,7 @@
         var leixings = $("input[name='leixings']").val();
         $("#leixing").find("[value='" + leixings + "']").attr("selected", true);
     });
+
     var a1 = document.getElementById("producNum")
     var a2 = document.getElementById("producCode")
     var sum;
@@ -208,12 +208,20 @@
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
         // alert(val);
-        var producColor = document.getElementById("producColor");
+        var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        sum1 = 22 - producColor.value.length;
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase();
+        sum1 = 22 - proid.value.length;
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + proid.value.toUpperCase();
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
+    }
+
+    function choiceProid(e) {//商品编号
+        var producFactory = document.getElementById("producFactory")
+        sum = 17 - producFactory.value.length;
+        sum1 = 22 - e.value.length;
+        a1.value = a1_val.substring(0, sum) + producFactory.value.toUpperCase() + a1_val.substring(17, sum1) + e.value.toUpperCase();
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
 
 

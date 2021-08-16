@@ -435,8 +435,8 @@
         }
     }
 
-    var a1 = document.getElementById("producNum")
-    var a2 = document.getElementById("producCode")
+    var a1 = document.getElementById("producNum");
+    var a2 = document.getElementById("producCode");
     var sum;
     var sum1;
     var a1_val = a1.value.substring(0, 7) + ".000000000.0000";
@@ -451,7 +451,8 @@
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
         sum1 = 22 - proid.value.length;
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + "0000";
+        // a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + "0000";------【可以用】
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + ".0000";
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
     }
 

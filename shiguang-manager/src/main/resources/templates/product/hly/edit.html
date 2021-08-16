@@ -70,6 +70,7 @@
                 <td>型号：</td>
                 <td>
                     <input th:value="${hly.producFactory}" style="background-color: #e4e4e4"
+                           oninput="if(value.length>9)value=value.slice(0,9)"
                            type="text" readonly>
                     <input id="producFactory" name="producFactory" th:value="${hly.producFactory}"
                            type="hidden">
@@ -77,7 +78,9 @@
                 </td>
                 <td>商品编号</td>
                 <td>
-                    <input id="proid" name="proid" th:value="${hly.proid}" class="form-control" type="text">
+                    <input id="proid" name="proid" th:value="${hly.proid}" class="form-control"
+                           style="background-color: #e4e4e4"
+                           type="text" readonly>
                     <em>*</em>
                 </td>
                 <td>计量单位</td>
@@ -218,13 +221,26 @@
         $("#productType").find("[value='" + productTypes + "']").attr("selected", true);
     });
 
-    // <!--//———厂家型号与型号联动—————-->
-    function liandong1() {
+    var a1 = document.getElementById("producNum");
+    var a2 = document.getElementById("producCode");
+    var sum;
+    var sum1;
+    var a1_val = a1.value.substring(0, 7) + ".000000000.0000";
+    // alert(a1_val);
+
+    // <!--//———厂家型号与型号联动—————--
+    function liandong1(e) {//厂家型号
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
         // alert(val);
+        // var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
+        sum = 17 - e.value.length;
+        sum1 = 22 - proid.value.length;
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + ".0000";
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
     }
+
 
     /**
      * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位

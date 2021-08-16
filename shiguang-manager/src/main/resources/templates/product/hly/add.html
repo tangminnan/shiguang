@@ -254,11 +254,6 @@
 
 </script>
 <script type="text/javascript">
-    var a1 = document.getElementById("producNum")
-    var a2 = document.getElementById("producCode")
-    var sum;
-    var sum1;
-    var a1_val = "3.00.00.000000000.0000"
 
     //———制造商与品种联动
     function choice(value) {
@@ -285,6 +280,12 @@
         });
     }
 
+    var a1 = document.getElementById("producNum");
+    var a2 = document.getElementById("producCode");
+    var sum;
+    var sum1;
+    var a1_val = "5.00.00.000000000.0000";
+
     function change(e, k, s) {
         a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);
         a1_val = a1.value.substring(0, 7) + a1_val.substring(7, 22);
@@ -296,25 +297,24 @@
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
         // alert(val);
-        var producColor = document.getElementById("producColor");
+        // var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        sum1 = 22 - producColor.value.length;
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase();
+        sum1 = 22 - proid.value.length;
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
     }
 
     function liandong2(e) {//型号
         var val2 = document.getElementById("producFactory").value;
         var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
-        var producColor = document.getElementById("producColor")
+        // var proid = document.getElementById("proid");
         document.getElementById("factory").value = va2;
         sum = 17 - e.value.length
-        sum1 = 22 - producColor.value.length
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase()
+        sum1 = 22 - proid.value.length
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
-
 
     /**
      * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位

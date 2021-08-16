@@ -67,10 +67,10 @@
                            oninput="if(value.length>9)value=value.slice(0,9)">
                     <em>*</em>
                 </td>
-                <td>商品编号：</td>
+                <td>商品编号</td>
                 <td>
-                    <input id="proid" name="proid" class="form-control" type="text"
-                           oninput="if(value.length>4)value=value.slice(0,4)">
+                    <input id="proid" name="proid" type="text" onkeyup="choiceProid(this)"
+                           oninput="if(value.length>4)value=value.slice(0,4)"/>
                     <em>*</em>
                 </td>
                 <td>其他商品大类：</td>
@@ -262,12 +262,6 @@
 
 </script>
 <script type="text/javascript">
-    var a1 = document.getElementById("producNum")
-    var a2 = document.getElementById("producCode")
-    var sum;
-    var sum1;
-    var a1_val = "1.00.00.000000000.0000"
-
     //———制造商与品种联动
     function choice(value) {
         // alert(value);
@@ -293,6 +287,12 @@
         });
     }
 
+    var a1 = document.getElementById("producNum");
+    var a2 = document.getElementById("producCode");
+    var sum;
+    var sum1;
+    var a1_val = "8.00.00.000000000.0000";
+
     function change(e, k, s) {
         a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);
         a1_val = a1.value.substring(0, 7) + a1_val.substring(7, 22);
@@ -304,22 +304,32 @@
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
         // alert(val);
-        var producColor = document.getElementById("producColor");
+        var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        sum1 = 22 - producColor.value.length;
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase();
+        sum1 = 22 - proid.value.length;
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + proid.value.toUpperCase();
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
     }
 
     function liandong2(e) {//型号
         var val2 = document.getElementById("producFactory").value;
         var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
-        var producColor = document.getElementById("producColor")
+        var proid = document.getElementById("proid")
         document.getElementById("factory").value = va2;
         sum = 17 - e.value.length
-        sum1 = 22 - producColor.value.length
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase()
+        sum1 = 22 - proid.value.length
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + proid.value.toUpperCase()
+        // a1.value = "4547784654654"
+        // alert(a1.value)
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
+    }
+
+    function choiceProid(e) {//商品编号
+        var producFactory = document.getElementById("producFactory")
+        sum = 17 - producFactory.value.length
+        sum1 = 22 - e.value.length
+        a1.value = a1_val.substring(0, sum) + producFactory.value.toUpperCase() + a1_val.substring(17, sum1) + e.value.toUpperCase()
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
 

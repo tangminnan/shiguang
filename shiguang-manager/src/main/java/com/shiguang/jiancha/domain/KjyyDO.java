@@ -24,37 +24,37 @@ public class KjyyDO implements Serializable {
     //验光师
     private String kjyyOptometryName;
     //球镜OD
-    private Double kjyySphod;
+    private String kjyySphod;
     //球镜OS
-    private Double kjyySphos;
+    private String kjyySphos;
     //柱镜OD
-    private Double kjyyCylod;
+    private String kjyyCylod;
     //柱镜OS
-    private Double kjyyCylos;
+    private String kjyyCylos;
     //轴向OD
-    private Double kjyyAxialod;
+    private String kjyyAxialod;
     //轴向OS
-    private Double kjyyAxialos;
+    private String kjyyAxialos;
     //三棱镜(OD)
-    private Double kjyyPrismod;
+    private String kjyyPrismod;
     //三棱镜(OS)
-    private Double kjyyPrismos;
+    private String kjyyPrismos;
     //基底(OD)
     private String kjyyJdod;
     //基底(OS)
     private String kjyyJdos;
     //远用瞳距(mm)(OD)
-    private Double kjyyYytjod;
+    private String kjyyYytjod;
     //远用瞳距(mm)(OS)
-    private Double kjyyYytjos;
+    private String kjyyYytjos;
     //瞳高(mm)(OD)
-    private Double kjyyTgod;
+    private String kjyyTgod;
     //瞳高(mm)(OS)
-    private Double kjyyTgos;
+    private String kjyyTgos;
     //远用va(OD)
-    private Double kjyyVaod;
+    private String kjyyVaod;
     //远用va(OS)
-    private Double kjyyVaos;
+    private String kjyyVaos;
     //建议镜片材质
     private String kjyyJpcz;
     //处理方式
@@ -141,112 +141,112 @@ public class KjyyDO implements Serializable {
     /**
      * 设置：球镜OD
      */
-    public void setKjyySphod(Double kjyySphod) {
+    public void setKjyySphod(String kjyySphod) {
         this.kjyySphod = kjyySphod;
     }
 
     /**
      * 获取：球镜OD
      */
-    public Double getKjyySphod() {
+    public String getKjyySphod() {
         return kjyySphod;
     }
 
     /**
      * 设置：球镜OS
      */
-    public void setKjyySphos(Double kjyySphos) {
+    public void setKjyySphos(String kjyySphos) {
         this.kjyySphos = kjyySphos;
     }
 
     /**
      * 获取：球镜OS
      */
-    public Double getKjyySphos() {
+    public String getKjyySphos() {
         return kjyySphos;
     }
 
     /**
      * 设置：柱镜OD
      */
-    public void setKjyyCylod(Double kjyyCylod) {
+    public void setKjyyCylod(String kjyyCylod) {
         this.kjyyCylod = kjyyCylod;
     }
 
     /**
      * 获取：柱镜OD
      */
-    public Double getKjyyCylod() {
+    public String getKjyyCylod() {
         return kjyyCylod;
     }
 
     /**
      * 设置：柱镜OS
      */
-    public void setKjyyCylos(Double kjyyCylos) {
+    public void setKjyyCylos(String kjyyCylos) {
         this.kjyyCylos = kjyyCylos;
     }
 
     /**
      * 获取：柱镜OS
      */
-    public Double getKjyyCylos() {
+    public String getKjyyCylos() {
         return kjyyCylos;
     }
 
     /**
      * 设置：轴向OD
      */
-    public void setKjyyAxialod(Double kjyyAxialod) {
+    public void setKjyyAxialod(String kjyyAxialod) {
         this.kjyyAxialod = kjyyAxialod;
     }
 
     /**
      * 获取：轴向OD
      */
-    public Double getKjyyAxialod() {
+    public String getKjyyAxialod() {
         return kjyyAxialod;
     }
 
     /**
      * 设置：轴向OS
      */
-    public void setKjyyAxialos(Double kjyyAxialos) {
+    public void setKjyyAxialos(String kjyyAxialos) {
         this.kjyyAxialos = kjyyAxialos;
     }
 
     /**
      * 获取：轴向OS
      */
-    public Double getKjyyAxialos() {
+    public String getKjyyAxialos() {
         return kjyyAxialos;
     }
 
     /**
      * 设置：三棱镜(OD)
      */
-    public void setKjyyPrismod(Double kjyyPrismod) {
+    public void setKjyyPrismod(String kjyyPrismod) {
         this.kjyyPrismod = kjyyPrismod;
     }
 
     /**
      * 获取：三棱镜(OD)
      */
-    public Double getKjyyPrismod() {
+    public String getKjyyPrismod() {
         return kjyyPrismod;
     }
 
     /**
      * 设置：三棱镜(OS)
      */
-    public void setKjyyPrismos(Double kjyyPrismos) {
+    public void setKjyyPrismos(String kjyyPrismos) {
         this.kjyyPrismos = kjyyPrismos;
     }
 
     /**
      * 获取：三棱镜(OS)
      */
-    public Double getKjyyPrismos() {
+    public String getKjyyPrismos() {
         return kjyyPrismos;
     }
 
@@ -281,84 +281,84 @@ public class KjyyDO implements Serializable {
     /**
      * 设置：远用瞳距(mm)(OD)
      */
-    public void setKjyyYytjod(Double kjyyYytjod) {
+    public void setKjyyYytjod(String kjyyYytjod) {
         this.kjyyYytjod = kjyyYytjod;
     }
 
     /**
      * 获取：远用瞳距(mm)(OD)
      */
-    public Double getKjyyYytjod() {
+    public String getKjyyYytjod() {
         return kjyyYytjod;
     }
 
     /**
      * 设置：远用瞳距(mm)(OS)
      */
-    public void setKjyyYytjos(Double kjyyYytjos) {
+    public void setKjyyYytjos(String kjyyYytjos) {
         this.kjyyYytjos = kjyyYytjos;
     }
 
     /**
      * 获取：远用瞳距(mm)(OS)
      */
-    public Double getKjyyYytjos() {
+    public String getKjyyYytjos() {
         return kjyyYytjos;
     }
 
     /**
      * 设置：瞳高(mm)(OD)
      */
-    public void setKjyyTgod(Double kjyyTgod) {
+    public void setKjyyTgod(String kjyyTgod) {
         this.kjyyTgod = kjyyTgod;
     }
 
     /**
      * 获取：瞳高(mm)(OD)
      */
-    public Double getKjyyTgod() {
+    public String getKjyyTgod() {
         return kjyyTgod;
     }
 
     /**
      * 设置：瞳高(mm)(OS)
      */
-    public void setKjyyTgos(Double kjyyTgos) {
+    public void setKjyyTgos(String kjyyTgos) {
         this.kjyyTgos = kjyyTgos;
     }
 
     /**
      * 获取：瞳高(mm)(OS)
      */
-    public Double getKjyyTgos() {
+    public String getKjyyTgos() {
         return kjyyTgos;
     }
 
     /**
      * 设置：远用va(OD)
      */
-    public void setKjyyVaod(Double kjyyVaod) {
+    public void setKjyyVaod(String kjyyVaod) {
         this.kjyyVaod = kjyyVaod;
     }
 
     /**
      * 获取：远用va(OD)
      */
-    public Double getKjyyVaod() {
+    public String getKjyyVaod() {
         return kjyyVaod;
     }
 
     /**
      * 设置：远用va(OS)
      */
-    public void setKjyyVaos(Double kjyyVaos) {
+    public void setKjyyVaos(String kjyyVaos) {
         this.kjyyVaos = kjyyVaos;
     }
 
     /**
      * 获取：远用va(OS)
      */
-    public Double getKjyyVaos() {
+    public String getKjyyVaos() {
         return kjyyVaos;
     }
 
