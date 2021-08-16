@@ -25,14 +25,22 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+            <if test="brandnum != null and brandnum != ''">and p.brandnum = #{brandnum}</if>
+            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+
+
+
 
 
             <if test="retailPrice != null and retailPrice != ''">
                 and p.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
             </if>
-            <if test="retailPrice != null and retailPrice != ''">
+            <if test="taxPrice != null and taxPrice != ''">
                 and p.tax_price between #{taxPrice,jdbcType=VARCHAR} and #{taxPrice2,jdbcType=VARCHAR}
             </if>
+
+
             <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
             <if test="producColor != null and producColor != ''">and p.produc_color = #{producColor}</if>
             <if test="size != null and size != ''">and p.size = #{size}</if>
@@ -53,6 +61,7 @@
             <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+
             <if test="brandnum != null and brandid != ''">and brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and factory = #{factory}</if>
             <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
@@ -187,5 +196,6 @@
     <update id="updateState" parameterType="com.shiguang.product.domain.ProducaDO">
     update aa_produca set `state` = #{state} where id = #{id}
     </update>
+    <!--根据制造商查询商品品种-->
 
 </mapper>

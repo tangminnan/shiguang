@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -226,24 +227,75 @@ public class OptometryNewController {
         String newDate = sdf.format(date);
         model.addAttribute("createTime", newDate);
 
+        return "optometryNew/edit";
+    }
 
-//————试戴镜结论————
+    //检查结论
+    @GetMapping("/jianchajielun/{cardNumber}")
+    String jianchajielun(@PathVariable("cardNumber") String cardNumber, Model model,HttpServletRequest request) {
+         request.getParameter("cardNumber");
+
+        //————会员信息——————
+        MemberDO memberDO = memberService.getCardNumber(cardNumber);
+        if (memberDO.getSex() == 0) {
+            memberDO.setSexx("男");
+        } else {
+            memberDO.setSexx("女");
+        }
+        model.addAttribute("memberDO", memberDO);
+        //————试戴镜结论————
         //根据人查相对应的验光号医生时间等信息
         List<TryresultsDO> trylist = tryresultsService.listUser(cardNumber);
         TryresultsDO tryresultsDO = new TryresultsDO();
         if (trylist.size() > 0) {
-            //验光信息
-            tryresultsDO.setPtometryNumber(trylist.get(0).getPtometryNumber());
-            tryresultsDO.setOptometryName(trylist.get(0).getOptometryName());
-            SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date time = trylist.get(0).getCreateTime();
-            String newtime = sdftime.format(time);
-            model.addAttribute("newtime", newtime);
-        }
-        model.addAttribute("tryresultsDO", tryresultsDO);
-        return "optometryNew/edit";
-    }
+            for (int i = 0; i < trylist.size(); i++) {
+                //验光信息
+                tryresultsDO.setPtometryNumber(trylist.get(0).getPtometryNumber());
+                tryresultsDO.setOptometryName(trylist.get(0).getOptometryName());
+                SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date time = trylist.get(0).getCreateTime();
+                String newtime = sdftime.format(time);
+                model.addAttribute("newtime", newtime);
+                tryresultsDO.setSphereRighttry(trylist.get(0).getSphereRighttry());
+                tryresultsDO.setSphereLefttry(trylist.get(0).getSphereLefttry());
 
+                tryresultsDO.setCylinderRighttry(trylist.get(0).getCylinderRighttry());
+                tryresultsDO.setCylinderLefttry(trylist.get(0).getCylinderLefttry());
+
+                tryresultsDO.setAxialRighttry(trylist.get(0).getAxialRighttry());
+                tryresultsDO.setAxialLefttry(trylist.get(0).getAxialLefttry());
+
+                tryresultsDO.setDvaRighttry(trylist.get(0).getDvaRighttry());
+                tryresultsDO.setDvaLefttry(trylist.get(0).getDvaLefttry());
+
+                tryresultsDO.setNvaRighttry(trylist.get(0).getNvaRighttry());
+                tryresultsDO.setNvaLefttry(trylist.get(0).getNvaLefttry());
+
+                tryresultsDO.setPrismRighttry(trylist.get(0).getPrismRighttry());
+                tryresultsDO.setPrismLefttry(trylist.get(0).getPrismLefttry());
+
+                tryresultsDO.setJdrTry(trylist.get(0).getJdrTry());
+                tryresultsDO.setJdlTry(trylist.get(0).getJdlTry());
+
+                tryresultsDO.setHeightRighttry(trylist.get(0).getHeightRighttry());
+                tryresultsDO.setHeightLefttry(trylist.get(0).getHeightLefttry());
+
+                tryresultsDO.setAddRighttry(trylist.get(0).getAddRighttry());
+                tryresultsDO.setAddLefttry(trylist.get(0).getAddLefttry());
+
+                tryresultsDO.setYuanRrty(trylist.get(0).getYuanRrty());
+                tryresultsDO.setYuanLrty(trylist.get(0).getYuanLrty());
+
+                tryresultsDO.setNearRighttry(trylist.get(0).getNearRighttry());
+                tryresultsDO.setNearLefttry(trylist.get(0).getNearLefttry());
+
+
+            }
+        }
+
+        model.addAttribute("tryresultsDO", tryresultsDO);
+        return "optometryNew/jianchajielun";
+    }
 
     /**
      * 保存

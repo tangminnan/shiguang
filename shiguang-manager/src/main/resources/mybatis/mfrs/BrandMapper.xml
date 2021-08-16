@@ -32,9 +32,29 @@
         b.`usage_name`,b.`type_id`,b.`type_name`,b.`registration`,b.`mfrsid`,m.`mfrsname`,b.`unitid`,b.`address`,b.`payid`,b.`batchid`,b.`factory`,
         b.`money`,b.`shorthandcode`,b.`productionkey`,b.`payday`
         from c_brand b left join c_mfrs m on b.mfrsid=m.mfrsid left join c_goods good on b.goodsid=good.goodsid
-		where b.state= 1
+       where and  b.state= 1
         group by b.brandid order by b.status asc ,b.brandid asc
     </select>
+     <select id="finfBrand" resultType="com.shiguang.mfrs.domain.BrandDO">
+       select b.`status`,b.`state`,
+        b.`brandid`,b.`brandnum`,b.`brandname`,b.`goodsid`,good.`goodsname`,b.`materialid`,b.`materialname`,b.`lens_id`,b.`lens_name`,b.`light_id`,
+        b.`light_name`,b.`refractivityid`,b.`refractivityvalue`,b.`function_id`,b.`function_name`,b.`gradual_id`,b.`gradual_name`,b.`usage_id`,
+        b.`usage_name`,b.`type_id`,b.`type_name`,b.`registration`,b.`mfrsid`,m.`mfrsname`,b.`unitid`,b.`address`,b.`payid`,b.`batchid`,b.`factory`,
+        b.`money`,b.`shorthandcode`,b.`productionkey`,b.`payday`
+        from c_brand b left join c_mfrs m on b.mfrsid=m.mfrsid left join c_goods good on b.goodsid=good.goodsid
+        <where>
+            <if test="mfrsid != null and mfrsid != ''">and b.mfrsid = #{mfrsid}</if>
+            <if test="goodsid != null and goodsid != ''">and b.goodsid = #{goodsid}</if>
+            <if test="mfrsids != null and mfrsids != ''">and b.mfrsid LIKE concat('%', #{mfrsids},'%')</if>
+            <if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat('%', #{goodsids},'%')</if>
+            and  b.state= 1
+        </where>
+        group by b.brandid order by b.status asc ,b.brandid asc
+    </select>
+
+
+
+
     <select id="haveNum" resultType="com.shiguang.mfrs.domain.BrandDO">
         select `brandid`,`brandnum`,`brandname`,`goodsid`,`goodsname`,`materialid`,`materialname`,`lens_id`,`lens_name`,`light_id`,
         `light_name`,`refractivityid`,`refractivityvalue`,`function_id`,`function_name`,`gradual_id`,`gradual_name`,`usage_id`,`usage_name`,

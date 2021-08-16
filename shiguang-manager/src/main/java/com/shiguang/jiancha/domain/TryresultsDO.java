@@ -212,6 +212,8 @@ public class TryresultsDO implements Serializable {
     private String distanceOd;
     //插片测量距离(OS)
     private String distanceOs;
+
+
     //球镜(右眼OD)
     private String sphereRightz;
     //球镜(左眼OS)

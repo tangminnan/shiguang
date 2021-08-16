@@ -1,14 +1,15 @@
+var prefix = "/information/optometryNew";
 $().ready(function () {
     validateRule();
 });
 
 $.validator.setDefaults({
     submitHandler: function () {
-        save1();
+        save();
     }
 });
 
-function save1() {
+function save() {
     $.ajax({
         cache: true,
         type: "POST",
@@ -19,18 +20,35 @@ function save1() {
             parent.layer.alert("Connection error");
         },
         success: function (data) {
-            if (data.code == 0) {
-                parent.layer.msg("操作成功");
-                parent.reLoad();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
-
-            } else {
-                parent.layer.alert(data.msg)
-            }
+            // if (data.code == 0) {
+            //     parent.layer.msg("操作成功");
+            //     parent.reLoad();
+            //     var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+            //     parent.layer.close(index);
+            //
+            // } else {
+            //     parent.layer.alert(data.msg)
+            // }
+            var cardNumber = document.getElementById('cardNumber').value;
+            // alert(cardNumber);
+            var toIndex = layer.open({
+                type: 2,
+                title: '检查结论',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['1000px', '520px'],
+                content: prefix + '/jianchajielun/' + cardNumber  // iframe的url
+            });
+            layer.full(toIndex);
 
         }
     });
+
+    // $('.click_light').on('', function () {
+    //     var type = $(this).attr("data_type");
+    //     window.location.hash = '#' + type;
+    //     // window.location.href = '#' + type;
+    // });
 
 }
 

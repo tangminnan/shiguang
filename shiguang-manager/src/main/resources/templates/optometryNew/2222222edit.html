@@ -26,9 +26,9 @@
     <div id="quguangjiancha" style="text-decoration: none;">
         <div class="topTab">
             <ul>
-                <!--<li class="on click1"><a href="edit.html?data=X111111">屈光检查</a></li>-->
-                <!--<li class="click"><a href="jianchajielun.html?data=X111111">检查结论</a></li>-->
-                <li class="on click1"><a href="#">屈光检查</a></li>
+                <li class="on click1"><a href="edit.html?data=${memberDO.cardNumber}">屈光检查</a></li>
+                <li class="click"><a href="jianchajielun.html?data=${memberDO.cardNumber}">检查结论</a></li>
+                <!--<li class="on click1"><a href="#">屈光检查</a></li>-->
                 <!--<li class="click"><a href="jianchajielun.html">检查结论</a></li>-->
             </ul>
         </div>
@@ -655,11 +655,11 @@
         </div>
         <!--保存-->
         <div class="baoCun">
-            <!--<div class="fl">-->
-            <!--<label for="JK1"><input name="cont" type="radio" id="JK1" checked> NIDEK</label>-->
-            <!--<label for="JK2"><input name="cont" type="radio" id="JK2"> TOPCON</label>-->
-            <!--<input type="button" value="读取设备接口"/>-->
-            <!--</div>-->
+            <div class="fl">
+                <label for="JK1"><input name="cont" type="radio" id="JK1" checked> NIDEK</label>
+                <label for="JK2"><input name="cont" type="radio" id="JK2"> TOPCON</label>
+                <input type="button" value="读取设备接口"/>
+            </div>
             <div class="Keep"><input type="button" value="保存" onclick="save()"/></div>
         </div>
     </div>

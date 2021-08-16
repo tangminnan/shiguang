@@ -71,12 +71,31 @@ public class ProducaDO implements Serializable {
     private String tax;
     //含税单价
     private String taxPrice;
+    private String taxPrice2;
     //批发价格
     private String tradePrice;
     //调货成本
     private String transferPrice;
     //标准零售价格
     private String retailPrice;
+    private String retailPrice2;
+
+    public String getTaxPrice2() {
+        return taxPrice2;
+    }
+
+    public void setTaxPrice2(String taxPrice2) {
+        this.taxPrice2 = taxPrice2;
+    }
+
+    public String getRetailPrice2() {
+        return retailPrice2;
+    }
+
+    public void setRetailPrice2(String retailPrice2) {
+        this.retailPrice2 = retailPrice2;
+    }
+
     //状态（0：启用1：停用）
     private Long status;
     //状态(0:删除1:未删除)

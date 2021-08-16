@@ -3,6 +3,7 @@ package com.shiguang.mfrs.service.impl;
 import com.shiguang.mfrs.dao.BrandDao;
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.GoodsDO;
+import com.shiguang.mfrs.domain.MfrsDO;
 import com.shiguang.mfrs.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,11 @@ public class BrandServiceImpl implements BrandService {
     public List<BrandDO> list(Map<String, Object> map) {
         return brandDao.list(map);
     }
-
+    //    <!--查询商品品种-->
+    @Override
+    public List<BrandDO> finfBrand(Map<String, Object> map) {
+        return brandDao.finfBrand(map);
+    }
     //    <!--//判断是否存在制造商代码-->
     @Override
     public List<BrandDO> haveNum(Map<String, Object> map) {

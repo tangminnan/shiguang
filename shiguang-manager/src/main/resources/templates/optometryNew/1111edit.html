@@ -437,14 +437,18 @@
                 </tr>
                 <tr>
                     <td>OD</td>
-                    <td><input class="input_text" id="sphereRightz" name="sphereRightz" type="text"/></td>
-                    <td><input class="input_text" id="cylinderRightz" name="cylinderRightz" type="text"/></td>
+                    <td><input class="input_text" id="sphereRightz" name="sphereRightz" type="text"
+                               onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/></td>
+                    <td><input class="input_text" id="cylinderRightz" name="cylinderRightz" type="text"
+                               onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/></td>
                     <td><input class="input_text" id="axialRightz" name="axialRightz" onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
-                    <td><input class="input_text" id="dvaRightz" name="dvaRightz" type="text"/></td>
-                    <td><input class="input_text" id="nvaRightz" name="nvaRightz" type="text"/></td>
+                    <td><input class="input_text" id="dvaRightz" name="dvaRightz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/></td>
+                    <td><input class="input_text" id="nvaRightz" name="nvaRightz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/></td>
                     <td><input id="prismRightz" name="prismRightz" class="short input_text"
-                               type="text"/> △
+                               type="text" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/> △
                     </td>
                     <td>
                         <select class="input_text" id="jdrZ" name="jdrZ">
@@ -455,20 +459,41 @@
                             <option value="下">下</option>
                         </select>
                     </td>
-                    <td><input class="input_text" id="addRightz" name="addRightz" type="text"/></td>
-                    <td><input class="input_text" id="yuanRz" name="yuanRz" type="text"/></td>
-                    <td><input id="nearRightz" name="nearRightz" type="text"/></td>
+                    <td><input class="input_text" id="addRightz" name="addRightz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/></td>
+                    <td><input class="input_text" id="yuanRz" name="yuanRz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/></td>
+                    <td><input id="nearRightz" name="nearRightz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>OS</td>
-                    <td><input class="input_text" id="sphereLeftz" name="sphereLeftz" type="text"/></td>
-                    <td><input class="input_text" id="cylinderLeftz" name="cylinderLeftz" type="text"/></td>
-                    <td><input class="input_text" id="axialLeftz" name="axialLeftz" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
-                    <td><input class="input_text" id="dvaLeftz" name="dvaLeftz" type="text"/></td>
-                    <td><input class="input_text" id="nvaLeftz" name="nvaLeftz" type="text"/></td>
-                    <td><input id="prismLeftz" name="prismLeftz" class="short input_text" type="text"/>
+                    <td>
+                        <input class="input_text" id="sphereLeftz" name="sphereLeftz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="cylinderLeftz" name="cylinderLeftz" type="text"
+                               onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                        />
+                    </td>
+                    <td>
+                        <input class="input_text" id="axialLeftz" name="axialLeftz" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="dvaLeftz" name="dvaLeftz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="nvaLeftz" name="nvaLeftz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td>
+                        <input id="prismLeftz" name="prismLeftz" class="short input_text" type="text"
+                               onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                        />
                         △
                     </td>
                     <td>
@@ -480,9 +505,15 @@
                             <option value="下">下</option>
                         </select>
                     </td>
-                    <td><input class="input_text" id="addLeftz" name="addLeftz" type="text"/></td>
-                    <td><input class="input_text" id="yuanLz" name="yuanLz" type="text"/></td>
-                    <td><input id="nearLeftz" name="nearLeftz" type="text"/></td>
+                    <td><input class="input_text" id="addLeftz" name="addLeftz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td><input class="input_text" id="yuanLz" name="yuanLz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td><input id="nearLeftz" name="nearLeftz" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
                     <td></td>
                 </tr>
                 </tbody>
@@ -510,15 +541,31 @@
                 </tr>
                 <tr>
                     <td>OD</td>
-                    <td><input class="input_text" id="sphereRighttry" name="sphereRighttry" type="text"/></td>
-                    <td><input class="input_text" id="cylinderRighttry" name="cylinderRighttry" type="text"/>
+                    <td>
+                        <input class="input_text" id="sphereRighttry" name="sphereRighttry" type="text"
+                               onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                        />
                     </td>
-                    <td><input class="input_text" id="axialRighttry" name="axialRighttry" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
-                    <td><input class="input_text" id="dvaRighttry" name="dvaRighttry" type="text"/></td>
-                    <td><input class="input_text" id="nvaRighttry" name="nvaRighttry" type="text"/></td>
-                    <td><input id="prismRighttry" name="prismRighttry" class="short input_text"
-                               type="text"/> △
+                    <td><input class="input_text" id="cylinderRighttry" name="cylinderRighttry" type="text"
+                               onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                    />
+                    </td>
+                    <td>
+                        <input class="input_text" id="axialRighttry" name="axialRighttry" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="dvaRighttry" name="dvaRighttry" type="text" onblur="zhengfu(this)"
+                        />
+                    </td>
+                    <td>
+                        <input class="input_text" id="nvaRighttry" name="nvaRighttry" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td>
+                        <input id="prismRighttry" name="prismRighttry" class="short input_text"
+                               type="text" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                        /> △
                     </td>
                     <td>
                         <select class="input_text" id="jdrTry" name="jdrTry">
@@ -529,22 +576,44 @@
                             <option value="下">下</option>
                         </select>
                     </td>
-                    <td><input id="heightRighttry" name="heightRighttry" type="text"/></td>
-                    <td><input class="input_text" id="addRighttry" name="addRighttry" type="text"/></td>
-                    <td><input class="input_text" id="yuanRrty" name="yuanRrty" type="text"/></td>
+                    <td><input id="heightRighttry" name="heightRighttry" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="addRighttry" name="addRighttry" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="yuanRrty" name="yuanRrty" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>OS</td>
-                    <td><input class="input_text" id="sphereLefttry" name="sphereLefttry" type="text"/></td>
-                    <td><input class="input_text" id="cylinderLefttry" name="cylinderLefttry" type="text"/>
+                    <td>
+                        <input class="input_text" id="sphereLefttry" name="sphereLefttry" type="text"
+                               onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                        />
                     </td>
-                    <td><input class="input_text" id="axialLefttry" name="axialLefttry" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
-                    <td><input class="input_text" id="dvaLefttry" name="dvaLefttry" type="text"/></td>
-                    <td><input class="input_text" id="nvaLefttry" name="nvaLefttry" type="text"/></td>
+                    <td>
+                        <input class="input_text" id="cylinderLefttry" name="cylinderLefttry" type="text"
+                               onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                        />
+                    </td>
+                    <td>
+                        <input class="input_text" id="axialLefttry" name="axialLefttry" onblur="zhouxiang(this)"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="dvaLefttry" name="dvaLefttry" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="nvaLefttry" name="nvaLefttry" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/></td>
                     <td><input id="prismLefttry" name="prismLefttry" class="short input_text"
-                               type="text"/> △
+                               type="text" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/> △
                     </td>
                     <td>
                         <select class="input_text" id="jdlTry" name="jdlTry">
@@ -555,9 +624,18 @@
                             <option value="下">下</option>
                         </select>
                     </td>
-                    <td><input id="heightLefttry" name="heightLefttry" type="text"/></td>
-                    <td><input class="input_text" id="addLefttry" name="addLefttry" type="text"/></td>
-                    <td><input class="input_text" id="yuanLrty" name="yuanLrty" type="text"/></td>
+                    <td>
+                        <input id="heightLefttry" name="heightLefttry" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="addLefttry" name="addLefttry" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="yuanLrty" name="yuanLrty" type="text" onblur="zhengfu(this)"
+                               onkeydown="xiaoshu(this)"/>
+                    </td>
                     <td></td>
                 </tr>
                 </tbody>
@@ -826,10 +904,12 @@
                 </tr>
                 <tr>
                     <td>OD</td>
-                    <td><input name="kjyySphod" type="text"/></td>
-                    <td><input name="kjyyCylod" type="text"/></td>
-                    <td><input name="kjyyAxialod" type="text"/></td>
-                    <td><input name="kjyyPrismod" class="short" type="text"/> △</td>
+                    <td><input th:value="${tryresultsDO.optometryName}" name="kjyySphod" type="text"/></td>
+                    <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjyyCylod" type="text"/></td>
+                    <td><input th:value="${tryresultsDO.axialRighttry}" name="kjyyAxialod" type="text"/></td>
+                    <td><input th:value="${tryresultsDO.prismRighttry}" name="kjyyPrismod" class="short" type="text"/>
+                        △
+                    </td>
                     <td>
                         <select name="kjyyJdod">
                             <option></option>
@@ -845,10 +925,11 @@
                 </tr>
                 <tr>
                     <td>OS</td>
-                    <td><input name="kjyySphos" type="text"/></td>
-                    <td><input name="kjyyCylos" type="text"/></td>
-                    <td><input name="kjyyAxialos" type="text"/></td>
-                    <td><input name="kjyyPrismos" class="short" type="text"/> △</td>
+                    <td><input th:value="${tryresultsDO.sphereLefttry}" name="kjyySphos" type="text"/></td>
+                    <td><input th:value="${tryresultsDO.cylinderLefttry}" name="kjyyCylos" type="text"/></td>
+                    <td><input th:value="${tryresultsDO.axialLefttry}" name="kjyyAxialos" type="text"/></td>
+                    <td><input th:value="${tryresultsDO.prismLefttry}" name="kjyyPrismos" class="short" type="text"/> △
+                    </td>
                     <td>
                         <select name="kjyyJdos">
                             <option></option>
@@ -1792,7 +1873,6 @@
             area: ['1200px', '520px'],
             content: "/information/highmember/detail/" + id // iframe的url
         });
-
     }
 
     //处方显隐增加

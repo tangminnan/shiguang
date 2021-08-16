@@ -4,8 +4,7 @@ $(function () {
 });
 
 function load() {
-    // alert($('#technologyId').val());
-    // alert(prefix)
+    // alert($('#mfrsid').val());
     $('#exampleTable')
         .bootstrapTable(
             {
@@ -38,9 +37,13 @@ function load() {
                         producNum: $('#producNum').val(),
                         producName: $('#producName').val(),
                         mfrsid: $('#mfrsid').val(),
-                        brandid: $('#brandid').val(),
+                        // mfrsName: $('#mfrsName').val(),
+
+                        brandnum: $('#brandnum').val(),
                         retailPrice: $('#retailPrice').val(),
+                        retailPrice2: $('#retailPrice2').val(),
                         taxPrice: $('#taxPrice').val(),
+                        taxPrice2: $('#taxPrice2').val(),
                         producFactory: $('#producFactory').val(),
                         producColor: $('#producColor').val(),
                         size: $('#size').val(),

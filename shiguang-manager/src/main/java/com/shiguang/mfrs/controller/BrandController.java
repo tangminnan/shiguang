@@ -97,7 +97,18 @@ public class BrandController {
         PageUtils pageUtils = new PageUtils(brandList, total);
         return pageUtils;
     }
-
+    //查询商品品种
+    @ResponseBody
+    @GetMapping("/brandList")
+    @RequiresPermissions("mfrs:brand:brand")
+    public PageUtils brandList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<BrandDO> brandDOList = brandService.finfBrand(query);
+        int total = brandService.count(query);
+        PageUtils pageUtils = new PageUtils(brandDOList, total);
+        return pageUtils;
+    }
     @GetMapping("/add")
     @RequiresPermissions("mfrs:brand:add")
     String add(Model model, BrandDO brand, HttpServletResponse resp) {

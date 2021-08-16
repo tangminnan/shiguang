@@ -227,5 +227,20 @@ ProducaController {
         }
         return R.error();
     }
+    /**
+     * 选择商品品种
+     */
+    @GetMapping("/findbrand/{mfrsid}/{goodsid}")
+    @RequiresPermissions("product:produca:findbrand")
+    String findbrand(@PathVariable("mfrsid") Integer mfrsid,@PathVariable("goodsid") Integer goodsid, Model model) {
+        model.addAttribute("mfrsid", mfrsid);
+        model.addAttribute("goodsid", goodsid);
+        return "/product/produca/findBrand";
+
+    }
+    /**
+     * 根据制造商查询商品品种
+     */
+
 
 }

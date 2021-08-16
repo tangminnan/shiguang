@@ -36,6 +36,7 @@ function load() {
                         // username:$('#searchName').val()
                         producNum: $('#producNum').val(),
                         producName: $('#producName').val(),
+                        mfrsid: $('#mfrsid').val(),
                         retailPrice: $('#retailPrice').val(),
                         retailPrice2: $('#retailPrice2').val(),
                         taxPrice: $('#taxPrice').val(),
