@@ -204,8 +204,8 @@
 
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji1">
-                            <td colspan="10" style="text-align:right;">合计：</td>
-                            <td></td>
+                            <td colspan="10" style="text-align:right;">合计</td>
+                            <td>0</td>
                         </tr>
                     </table>
                 </td>
@@ -230,7 +230,7 @@
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji2">
                             <td colspan="12" style="text-align:right;">合计：</td>
-                            <td></td>
+                            <td>0</td>
                         </tr>
                     </table>
                 </td>
@@ -260,7 +260,7 @@
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji3">
                             <td colspan="12" style="text-align:right;">合计：</td>
-                            <td>156698</td>
+                            <td>0</td>
                         </tr>
                     </table>
                 </td>
@@ -275,10 +275,10 @@
                             <td>型号</td>
                             <td>主容量</td>
                             <td>次容量</td>
-                            <td>效期</td>
-                            <td>批号</td>
-                            <td>注册证号</td>
-                            <td>生产日期</td>
+                            <!--<td>效期</td>-->
+                            <!--<td>批号</td>-->
+                            <!--<td>注册证号</td>-->
+                            <!--<td>生产日期</td>-->
                             <td>商品条码</td>
                             <td style="display: none">标准零售价</td>
                             <td style="display: none">含税单价</td>
@@ -289,7 +289,7 @@
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji5">
                             <td colspan="12" style="text-align:right;">合计：</td>
-                            <td></td>
+                            <td>0</td>
                         </tr>
                     </table>
                 </td>
@@ -315,7 +315,7 @@
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji6">
                             <td colspan="12" style="text-align:right;">合计：</td>
-                            <td>156698</td>
+                            <td>0</td>
                         </tr>
                     </table>
                 </td>
@@ -342,7 +342,7 @@
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji7">
                             <td colspan="12" style="text-align:right;">合计：</td>
-                            <td></td>
+                            <td>0</td>
                         </tr>
                     </table>
                 </td>
@@ -366,7 +366,7 @@
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji8">
                             <td colspan="12" style="text-align:right;">合计：</td>
-                            <td></td>
+                            <td>0</td>
                         </tr>
                     </table>
                 </td>
@@ -391,7 +391,7 @@
 
                         <tr style="font-weight:bold;font-size: 15px;" class="heji9">
                             <td colspan="12" style="text-align:right;">合计：</td>
-                            <td></td>
+                            <td>0</td>
                         </tr>
                     </table>
                 </td>
@@ -657,7 +657,7 @@
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +//调货成本
                             "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
             });
@@ -766,10 +766,10 @@
                             "<td  >" + rows[i].producFactory + "</td>\n" +
                             "<td  >" + rows[i].mainCapacity + "</td>\n" +
                             "<td  >" + rows[i].secondCapacity + "</td>\n" +
-                            "<td  ></td>\n" +
-                            "<td  ></td>\n" +
-                            "<td  ></td>\n" +
-                            "<td  ></td>\n" +
+                            // "<td  ></td>\n" +
+                            // "<td  ></td>\n" +
+                            // "<td  ></td>\n" +
+                            // "<td  ></td>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
                             "<td style='display: none'>" + rows[i].retailPrice + "</td>\n" +

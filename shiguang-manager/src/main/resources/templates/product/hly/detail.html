@@ -133,7 +133,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">效期提醒上限：</label>
                             <div class="col-sm-8">
-                                有效期前<input id="upday" name="upday" th:value="${hly.upday}" type="text" readonly>天提醒进入滞销状态
+                                有效期前<input id="upday" name="upday" th:value="${hly.upday}"
+                                           style="background-color: #e4e4e4" type="text" readonly>天提醒进入滞销状态
 
                             </div>
                         </div>
@@ -141,6 +142,7 @@
                             <label class="col-sm-3 control-label">效期提醒下限：</label>
                             <div class="col-sm-8">
                                 有效期前<input id="downday" name="downday" th:value="${hly.downday}"
+                                           style="background-color: #e4e4e4"
                                            type="text" readonly>天提醒进入即将失效状态
                             </div>
                         </div>

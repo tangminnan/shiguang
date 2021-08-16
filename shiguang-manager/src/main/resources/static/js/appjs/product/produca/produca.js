@@ -4,6 +4,8 @@ $(function () {
 });
 
 function load() {
+    // alert($('#technologyId').val());
+    // alert(prefix)
     $('#exampleTable')
         .bootstrapTable(
             {
@@ -33,7 +35,7 @@ function load() {
                         limit: params.limit,
                         offset: params.offset,
                         // name:$('#searchName').val(),
-                        producCode: $('#producCode').val(),
+                        producNum: $('#producNum').val(),
                         producName: $('#producName').val(),
                         mfrsid: $('#mfrsid').val(),
                         brandid: $('#brandid').val(),
@@ -44,6 +46,7 @@ function load() {
                         size: $('#size').val(),
                         technologyId: $('#technologyId').val(),
                         materialid: $('#materialid').val(),
+                        status: $('#status').val(),
                         styleId: $('#styleId').val()
                     };
                 },
@@ -77,10 +80,10 @@ function load() {
                     //     field: 'mfrsid',
                     //     title: '制造商id'
                     // },
-                    // {
-                    //     field: 'mfrsname',
-                    //     title: '制造商简称'
-                    // },
+                    {
+                        field: 'mfrsname',
+                        title: '制造商简称'
+                    },
                     // {
                     //     field: 'brandid',
                     //     title: '商品品种'

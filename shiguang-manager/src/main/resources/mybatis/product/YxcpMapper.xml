@@ -6,10 +6,10 @@
     <select id="get" resultType="com.shiguang.product.domain.YxcpDO">
 		select l.cyl,s.sph,
         m.`mfrsname`,b.`brandname`,u.`unitname`,
-        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
+        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
         y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,y.`caizhi_id`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,
         y.`retail_price`,y.`status`,y.`state`
-        from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
+        from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
         left join c_unit u on y.unitid= u.unitid left join a_cyl l on l.cyl_id=y.cyl_id left join a_sph s on
         s.sph_id=y.sph_id
 		where id = #{value}
@@ -18,10 +18,10 @@
     <select id="list" resultType="com.shiguang.product.domain.YxcpDO">
         select l.cyl,s.sph,
         m.`mfrsname`,b.`brandname`,u.`unitname`,
-        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
+        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
         y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,y.`caizhi_id`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,
         y.`retail_price`,y.`status`,y.`state`
-        from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandid=b.brandid
+        from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
         left join c_unit u on y.unitid= u.unitid left join a_cyl l on l.cyl_id=y.cyl_id left join a_sph s on
         s.sph_id=y.sph_id
         where y.state= 1
@@ -37,6 +37,7 @@
             <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
             <if test="proid != null and proid != ''">and proid = #{proid}</if>
             <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
             <if test="sphId != null and sphId != ''">and sph_id = #{sphId}</if>
@@ -70,7 +71,8 @@
 			`produc_name`, 
 			`mfrsid`, 
 			`brandid`, 
-			`proid`, 
+			`brandnum`,
+			`proid`,
 			`unitid`, 
 			`sph_id`, 
 			`cyl_id`, 
@@ -100,7 +102,8 @@
 			#{producName}, 
 			#{mfrsid}, 
 			#{brandid}, 
-			#{proid}, 
+			#{brandnum},
+			#{proid},
 			#{unitid}, 
 			#{sphId}, 
 			#{cylId}, 
@@ -133,6 +136,7 @@
             <if test="producName != null">`produc_name` = #{producName},</if>
             <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
             <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
             <if test="proid != null">`proid` = #{proid},</if>
             <if test="unitid != null">`unitid` = #{unitid},</if>
             <if test="sphId != null">`sph_id` = #{sphId},</if>

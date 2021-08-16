@@ -31,12 +31,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 公司维护表
- * 
+ *
  * @author cln
  * @email bushuo@163.com
  * @date 2021-06-10 15:09:26
  */
- 
+
 @Controller
 @RequestMapping("/mfrs/company")
 public class CompanyController {
@@ -47,7 +47,7 @@ public class CompanyController {
 	//省
 	@Autowired
 	private ProvincesService provincesService;
-	
+
 	@GetMapping()
 	@RequiresPermissions("mfrs:company:company")
 	String Company(Model model ){
@@ -57,7 +57,7 @@ public class CompanyController {
 		model.addAttribute("provincesDOList", provincesDOList);
 	    return "mfrs/company/company";
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("mfrs:company:company")
@@ -69,7 +69,7 @@ public class CompanyController {
 		PageUtils pageUtils = new PageUtils(companyList, total);
 		return pageUtils;
 	}
-	
+
 	@GetMapping("/add")
 	@RequiresPermissions("mfrs:company:add")
 	String add(Model model){
@@ -91,7 +91,7 @@ public class CompanyController {
 		model.addAttribute("provincesDOList", provincesDOList);
 	    return "mfrs/company/edit";
 	}
-	
+
 	/**
 	 * 保存
 	 */
@@ -196,7 +196,7 @@ public class CompanyController {
 		companyService.update(company);
 		return R.ok();
 	}
-	
+
 	/**
 	 * 删除
 	 */
@@ -209,7 +209,7 @@ public class CompanyController {
 		}
 		return R.error();
 	}
-	
+
 	/**
 	 * 删除
 	 */
@@ -220,5 +220,5 @@ public class CompanyController {
 		companyService.batchRemove(ids);
 		return R.ok();
 	}
-	
+
 }

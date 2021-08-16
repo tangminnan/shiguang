@@ -68,7 +68,7 @@ function load() {
                     // },
                     {
                         field: 'mfrsname',
-                        title: '制造商'
+                        title: '制造商简称'
                     },
                     // {
                     //     field: 'brandid',
@@ -99,16 +99,31 @@ function load() {
                     //     title: '单位'
                     // },
                     {
-                        field: 'sphUp' + '/' + 'sphDown',
-                        title: '球镜'
+                        title: '球镜',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.sphUp != null && row.sphDown != null) {
+                                return row.sphUp + "/" + row.sphDown
+                            } else {
+                                return ""
+                            }
+                        }
                     },
                     // {
                     //     field: 'spanId',
                     //     title: '跨度id'
                     // },
                     {
-                        field: 'cylUp' + '/' + 'cylDown',
-                        title: '柱镜'
+                        title: '柱镜',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.cylUp != null && row.cylDown != null) {
+                                return row.cylUp + "/" + row.cylDown
+                            } else {
+                                return ""
+                            }
+                        }
+
                     },
                     // {
                     //     field: 'sphUp',
@@ -135,8 +150,15 @@ function load() {
                     //     title: '柱镜跨度'
                     // },
                     {
-                        field: 'curvatureOne' + '/' + 'curvatureYi',
-                        title: '曲率1'
+                        title: '曲率1',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.curvatureOne != null && row.curvatureYi != null) {
+                                return row.curvatureOne + "/" + row.curvatureYi
+                            } else {
+                                return ""
+                            }
+                        }
                     },
                     // {
                     //     field: 'curvatureOne',
@@ -147,8 +169,15 @@ function load() {
                     //     title: '-曲率1'
                     // },
                     {
-                        field: 'curvatureTwo' + '/' + 'curvatureEr',
-                        title: '曲率2'
+                        title: '曲率2',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.curvatureTwo != null && row.curvatureEr != null) {
+                                return row.curvatureTwo + "/" + row.curvatureEr
+                            } else {
+                                return ""
+                            }
+                        }
                     },
                     // {
                     //     field: 'curvatureTwo',
@@ -159,8 +188,15 @@ function load() {
                     //     title: '-曲率2'
                     // },
                     {
-                        field: 'diameterOne' + '/' + 'diameterYi',
-                        title: '直径'
+                        title: '直径',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.diameterOne != null && row.diameterYi != null) {
+                                return row.diameterOne + "/" + row.diameterYi
+                            } else {
+                                return ""
+                            }
+                        }
                     },
                     // {
                     //     field: 'diameterOne',

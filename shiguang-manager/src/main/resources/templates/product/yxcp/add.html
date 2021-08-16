@@ -124,7 +124,7 @@
             <tr>
                 <td>使用类型</td>
                 <td>
-                    <select id="usageId" name="usageId">
+                    <select id="usageId" name="usageId" style="width:60%">
                         <option value="">请选择</option>
                         <option th:each="ls:${usageDOList}"
                                 th:text="${ls.usageName}"
@@ -166,7 +166,7 @@
             <tr>
                 <td>隐形类别</td>
                 <td>
-                    <select id="invisibleId" name="invisibleId">
+                    <select id="invisibleId" name="invisibleId" style="width:60%">
                         <option value="">请选择</option>
                         <option th:each="ls:${invisibleDOList}"
                                 th:text="${ls.invisible}"
@@ -239,8 +239,8 @@
         <input type="button" value="保存" onclick="baocun()"/>
         <input type="button" class="empty" value="清空"/>
         <dl>
-            <dt>镜架<br/>商品代码组成说明</dt>
-            <dd><img src="/img/tmsm.png" alt=""/></dd>
+            <dt>隐形（成品）<br/>商品代码组成说明</dt>
+            <dd><img src="/img/yxcp.png" alt=""/></dd>
             <dd>商品条码会根据商品代码自动生成。<br/>商品名称默认为选择的品种的名称，可以自行调整。<br/>型号通常是写在镜腿上的规格。</dd>
         </dl>
     </div>

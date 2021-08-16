@@ -67,15 +67,6 @@
                            oninput="if(value.length>9)value=value.slice(0,9)">
                     <em>*</em>
                 </td>
-                <td>计量单位：</td>
-                <td>
-                    <select id="unitid" name="unitid">
-                        <option></option>
-                        <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}">
-                        </option>
-                    </select>
-                    <em>*</em>
-                </td>
                 <td>厂家色号：</td>
                 <td>
                     <input id="producFactorycolor" name="producFactorycolor" onkeyup="liandong3(this)"
@@ -83,14 +74,22 @@
                            oninput="if(value.length>4)value=value.slice(0,4)">
                     <em>*</em>
                 </td>
-
-            </tr>
-            <tr>
                 <td>色号：</td>
                 <td>
                     <input id="producColor" name="producColor" type="text" onkeyup="liandong4(this)"
                            onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
                            oninput="if(value.length>4)value=value.slice(0,4)">
+                    <em>*</em>
+                </td>
+            </tr>
+            <tr>
+                <td>计量单位：</td>
+                <td>
+                    <select id="unitid" name="unitid">
+                        <option></option>
+                        <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}">
+                        </option>
+                    </select>
                     <em>*</em>
                 </td>
                 <td>批号管理：</td>
@@ -119,7 +118,7 @@
             <tr>
                 <td>镜架尺寸：</td>
                 <td>
-                    <input id="size" name="size" type="text">
+                    <input id="size" name="size" type="text" style="width:60%">
                 </td>
                 <td>功能：</td>
                 <td style="width:20%;">
@@ -202,8 +201,8 @@
         <input type="button" value="保存" onclick="baocun()"/>
         <input type="button" class="empty" value="清空"/>
         <dl>
-            <dt>镜架：<br/>商品代码组成说明：</dt>
-            <dd><img src="/img/tmsm.png" alt=""/></dd>
+            <dt>太阳镜：<br/>商品代码组成说明：</dt>
+            <dd><img src="/img/tyj.png" alt=""/></dd>
             <dd>商品条码会根据商品代码自动生成。<br/>商品名称默认为选择的品种的名称，可以自行调整。<br/>型号通常是写在镜腿上的规格。</dd>
         </dl>
     </div>
@@ -277,7 +276,7 @@
     var a2 = document.getElementById("producCode")
     var sum;
     var sum1;
-    var a1_val = "1.00.00.000000000.0000"
+    var a1_val = "6.00.00.000000000.0000";
 
     //———制造商与品种联动
     function choice(value) {

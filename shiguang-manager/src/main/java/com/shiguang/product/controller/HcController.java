@@ -9,7 +9,6 @@ import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.UnitService;
 import com.shiguang.product.domain.HcDO;
 import com.shiguang.product.service.HcService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -107,24 +106,11 @@ public class HcController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("product:hc:edit")
     public R update(HcDO hc) {
         hcService.update(hc);
         return R.ok();
     }
 
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("product:hc:remove")
-//    public R remove(Long id) {
-//        if (hcService.remove(id) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
 
     /**
      * 批量删除

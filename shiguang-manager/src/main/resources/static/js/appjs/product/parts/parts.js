@@ -31,9 +31,17 @@ function load() {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
-                        offset: params.offset
+                        offset: params.offset,
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
+                        producNum: $('#producNum').val(),
+                        producName: $('#producName').val(),
+                        retailPrice: $('#retailPrice').val(),
+                        retailPrice2: $('#retailPrice2').val(),
+                        taxPrice: $('#taxPrice').val(),
+                        taxPrice2: $('#taxPrice2').val(),
+                        partsStyle: $('#partsStyle').val(),
+                        status: $('#status').val()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -66,6 +74,10 @@ function load() {
                     // 	field : 'mfrsid',
                     // 	title : '制造商id'
                     // },
+                    {
+                        field: 'mfrsname',
+                        title: '制造商简称'
+                    },
                     // {
                     //     field: 'brandid',
                     //     title: '商品品种id'

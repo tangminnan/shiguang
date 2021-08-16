@@ -172,27 +172,27 @@
                             <label class="col-sm-3 control-label">曲率1：</label>
                             <div class="col-sm-8">
                                 <input id="curvatureOne" name="curvatureOne" th:value="${yxdz.curvatureOne}"
-                                       type="text" readonly>
+                                       type="text" readonly style="background-color: #e4e4e4">
                                 - <input id="curvatureYi" name="curvatureYi" th:value="${yxdz.curvatureYi}" type="text"
-                                         readonly>
+                                         readonly style="background-color: #e4e4e4">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">曲率2：</label>
                             <div class="col-sm-8">
                                 <input id="curvatureTwo" name="curvatureTwo" th:value="${yxdz.curvatureTwo}"
-                                       type="text" readonly>
+                                       type="text" readonly style="background-color: #e4e4e4">
                                 -<input id="diameterOne" name="diameterOne" th:value="${yxdz.curvatureEr}" type="text"
-                                        readonly>
+                                        readonly style="background-color: #e4e4e4">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">直径：</label>
                             <div class="col-sm-8">
                                 <input id="diameterYi" name="diameterYi" th:value="${yxdz.curvatureTwo}" type="text"
-                                       readonly>
+                                       readonly style="background-color: #e4e4e4">
                                 -<input id="curvatureEr" name="curvatureEr" th:value="${yxdz.curvatureEr}" type="text"
-                                        readonly>
+                                        readonly style="background-color: #e4e4e4">
                             </div>
                         </div>
                         <div class="form-group">
@@ -255,6 +255,7 @@
                             <label class="col-sm-3 control-label">效期提醒上限：</label>
                             <div class="col-sm-8">
                                 有效期前<input id="upday" name="upday" th:value="${yxdz.upday}"
+                                           style="background-color: #e4e4e4"
                                            type="text" readonly>天提醒进入滞销状态
 
                             </div>
@@ -262,7 +263,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">效期提醒下限：</label>
                             <div class="col-sm-8">
-                                有效期前<input id="downday" name="downday" th:value="${yxdz.downday}" type="text" readonly>天提醒进入即将失效状态
+                                有效期前<input id="downday" name="downday" th:value="${yxdz.downday}"
+                                           style="background-color: #e4e4e4" type="text" readonly>天提醒进入即将失效状态
 
                             </div>
                         </div>
@@ -309,8 +311,8 @@
                             <label class="col-sm-3 control-label">联合光度：</label>
                             <div class="col-sm-8">
                                 <input id="combinedPhotometry" name="combinedPhotometry"
+                                       style="background-color: #e4e4e4"
                                        th:value="${yxdz.combinedPhotometry}" type="text" readonly>
-                                <span style="color: red">【格式：1.25】</span>
                             </div>
                         </div>
                         <div class="form-group">

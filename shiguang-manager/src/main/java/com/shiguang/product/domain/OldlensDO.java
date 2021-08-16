@@ -29,6 +29,16 @@ public class OldlensDO implements Serializable {
     private Integer brandid;
     //品牌代码
     private String brandname;
+    private String brandnum;
+
+    public String getBrandnum() {
+        return brandnum;
+    }
+
+    public void setBrandnum(String brandnum) {
+        this.brandnum = brandnum;
+    }
+
     //厂家型号
     private String factory;
     //型号

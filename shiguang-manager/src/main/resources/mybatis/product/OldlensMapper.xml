@@ -4,20 +4,20 @@
 <mapper namespace="com.shiguang.product.dao.OldlensDao">
 
     <select id="get" resultType="com.shiguang.product.domain.OldlensDO">
-select m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandid`,o.`factory`,o.`produc_factory`,
+select m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandid`,o.`brandnum`,o.`factory`,o.`produc_factory`,
 o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
 o.`transfer_price`,o.`retail_price` ,o.`status`,o.`state`
-from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandid=b.brandid
+from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandnum=b.brandnum
 left join  c_unit u on o.unitid= u.unitid
 where id = #{value}
 </select>
 
     <select id="list" resultType="com.shiguang.product.domain.OldlensDO">
 select
-m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandid`,o.`factory`,o.`produc_factory`,
+m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandnum`,o.`brandid`,o.`factory`,o.`produc_factory`,
 o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
 o.`transfer_price`,o.`retail_price`,o.`status`,o.`state`
-from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandid=b.brandid
+from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandnum=b.brandnum
 left join c_unit u on o.unitid= u.unitid
 where o.state= 1
 group by o.id order by o.status asc ,o.id asc
@@ -32,6 +32,7 @@ group by o.id order by o.status asc ,o.id asc
             <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
             <if test="factory != null and factory != ''">and factory = #{factory}</if>
             <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
             <if test="producFactorycolor != null and producFactorycolor != ''">and produc_factorycolor =
@@ -61,6 +62,7 @@ insert into aa_oldlens
 `produc_name`,
 `mfrsid`,
 `brandid`,
+`brandnum`,
 `factory`,
 `produc_factory`,
 `produc_factorycolor`,
@@ -85,6 +87,7 @@ values
 #{producName},
 #{mfrsid},
 #{brandid},
+#{brandnum},
 #{factory},
 #{producFactory},
 #{producFactorycolor},
@@ -112,6 +115,7 @@ values
             <if test="producName != null">`produc_name` = #{producName},</if>
             <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
             <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
             <if test="factory != null">`factory` = #{factory},</if>
             <if test="producFactory != null">`produc_factory` = #{producFactory},</if>
             <if test="producFactorycolor != null">`produc_factorycolor` = #{producFactorycolor},</if>
@@ -125,7 +129,7 @@ values
             <if test="taxPrice != null">`tax_price` = #{taxPrice},</if>
             <if test="tradePrice != null">`trade_price` = #{tradePrice},</if>
             <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
-            <if test="retailPrice != null">`retail_price` = #{retailPrice}</if>
+            <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
             <if test="status != null">`status` = #{status},</if>
             <if test="state != null">`state` = #{state}</if>
         </set>

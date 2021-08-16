@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
@@ -25,26 +24,24 @@
                         <!--</div>-->
                         <!--</div>-->
                         <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">所属区域：</label>-->
-                            <!--<div class="col-sm-8 form-inline" data-toggle="distpicker">-->
-                                <!--<select id="province" name="province" class="form-control chosen-select"></select>-->
-                                <!--<span style="color: red">*</span>-->
-                            <!--</div>-->
+                        <!--<label class="col-sm-3 control-label">所属区域：</label>-->
+                        <!--<div class="col-sm-8 form-inline" data-toggle="distpicker">-->
+                        <!--<select id="province" name="province" class="form-control chosen-select"></select>-->
+                        <!--<span style="color: red">*</span>-->
                         <!--</div>-->
-
-
+                        <!--</div>-->
 
 
                         <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">所属区域：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<input id="province" name="province" class="form-control" type="text">-->
-                            <!--</div>-->
+                        <!--<label class="col-sm-3 control-label">所属区域：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="province" name="province" class="form-control" type="text">-->
                         <!--</div>-->
-                        <div class="form-group" >
+                        <!--</div>-->
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">所属区域：</label>
                             <div class="col-sm-8">
-                                <select id="province" name="province" class="form-control" >
+                                <select id="province" name="province" class="form-control">
                                     <option></option>
                                     <option th:each="ls:${provincesDOList}"
                                             th:text="${ls.province}"
@@ -124,10 +121,12 @@
                             <div class="col-sm-8">
                                 <!--<input id="approvedamount" name="approvedamount" class="form-control" type="text">-->
                                 <label class="radio-inline">
-                                    <input type="radio" name="approvedamount" value="1" onchange="setChange(this.value)"/> 向本公司批调时，默认填写成本价
+                                    <input type="radio" name="approvedamount" value="1"
+                                           onchange="setChange(this.value)"/> 向本公司批调时，默认填写成本价
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="approvedamount" value="2" onchange="setChange(this.value)"/> 向本公司批调时，需要手工填写批发价
+                                    <input type="radio" name="approvedamount" value="2"
+                                           onchange="setChange(this.value)"/> 向本公司批调时，需要手工填写批发价
                                 </label>
                             </div>
                         </div>
@@ -145,14 +144,15 @@
                         <!--<input id="logo" name="logo" class="form-control" type="text">-->
                         <!--</div>-->
                         <!--</div>-->
+
+
                         <div class="form-group">
                             <label class="col-sm-3 control-label">系统logo：</label>
                             <div class="col-sm-8">
-                                <input class="form-control" id="imgFile" style="display: none;"
-                                       type="file" name="imgFile" onchange="udpateFileUrl(this)"/>
-                                <label for="imgFile"><img width="100" height="100"
-                                                          id="fileImgimgFile" alt="点击上传图片"
-                                                          src="/img/tousu-pic1.jpg"></label>
+                                <input class="form-control" id="imgFile" style="display: none;" type="file"
+                                       name="imgFile" onchange="udpateFileUrl(this)"/>
+                                <label for="imgFile"><img width="100" height="100" id="fileImgimgFile"
+                                                          alt="点击上传图片"></label>
                                 <span style="color: red">尺寸：700*70</span>
                             </div>
                         </div>
@@ -161,24 +161,58 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">背景图：</label>
                             <div class="col-sm-8">
-                                <input class="form-control" id="imgFile1" style="display: none;"
-                                       type="file" name="imgFile" onchange="udpateFileUrl1(this)"/>
-                                <label for="imgFile"><img width="100" height="100"
-                                                          id="fileImgimgFile1" alt="点击上传图片"
-                                                          src="/img/tousu-pic1.jpg"></label>
+                                <input class="form-control" id="imgFile1" style="display: none;" type="file"
+                                       name="imgFile1" onchange="udpateFileUrl1(this)"/>
+                                <label for="imgFile1"><img width="100" height="100" id="fileImgimgFile1"
+                                                           alt="点击上传图片"></label>
                                 <span style="color: red">尺寸：1*70</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">部门选择背景图：</label>
                             <div class="col-sm-8">
-                                <input class="form-control" id="imgFile2" style="display: none;"
-                                       type="file" name="imgFile" onchange="udpateFileUrl2(this)"/>
-                                <label for="imgFile"><img width="100" height="100"
-                                                          id="fileImgimgFile2" alt="点击上传图片"
-                                                          src="/img/tousu-pic1.jpg"></label>
+                                <input class="form-control" id="imgFile2" style="display: none;" type="file"
+                                       name="imgFile2" onchange="udpateFileUrl2(this)"/>
+                                <label for="imgFile2"><img width="100" height="100" id="fileImgimgFile2"
+                                                           alt="点击上传图片"></label>
                             </div>
                         </div>
+
+
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">系统logo：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input class="form-control" id="imgFile" style="display: none;"-->
+                        <!--type="file" name="imgFile" onchange="udpateFileUrl(this)"/>-->
+                        <!--<label for="imgFile"><img width="100" height="100"-->
+                        <!--id="fileImgimgFile" alt="点击上传图片"-->
+                        <!--src="/img/tousu-pic1.jpg"></label>-->
+                        <!--<span style="color: red">尺寸：700*70</span>-->
+                        <!--</div>-->
+                        <!--</div>-->
+
+
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">背景图：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input class="form-control" id="imgFile1" style="display: none;"-->
+                        <!--type="file" name="imgFile" onchange="udpateFileUrl1(this)"/>-->
+                        <!--<label for="imgFile"><img width="100" height="100"-->
+                        <!--id="fileImgimgFile1" alt="点击上传图片"-->
+                        <!--src="/img/tousu-pic1.jpg"></label>-->
+                        <!--<span style="color: red">尺寸：1*70</span>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">部门选择背景图：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input class="form-control" id="imgFile2" style="display: none;"-->
+                        <!--type="file" name="imgFile" onchange="udpateFileUrl2(this)"/>-->
+                        <!--<label for="imgFile"><img width="100" height="100"-->
+                        <!--id="fileImgimgFile2" alt="点击上传图片"-->
+                        <!--src="/img/tousu-pic1.jpg"></label>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <button type="submit" class="btn btn-primary">提交</button>
@@ -201,12 +235,14 @@
             $("#fileImgimgFile").attr("src", fileURL);
         }
     }
+
     function udpateFileUrl1(obj) {
         var fileURL = getObjectURL(obj.files[0]);
         if (fileURL) {
             $("#fileImgimgFile1").attr("src", fileURL);
         }
     }
+
     function udpateFileUrl2(obj) {
         var fileURL = getObjectURL(obj.files[0]);
         if (fileURL) {
@@ -228,13 +264,13 @@
     }
 </script>
 <script type="text/javascript">
-    function setChange(value){
-        if (value == '2'){
-            tab.style="display: block";
+    function setChange(value) {
+        if (value == '2') {
+            tab.style = "display: block";
         } else if (value == '1') {
-            tab.style="display: none";
-        }else {
-            tab.style="display: none";
+            tab.style = "display: none";
+        } else {
+            tab.style = "display: none";
         }
     }
 </script>

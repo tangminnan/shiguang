@@ -85,54 +85,57 @@
     <h3>查询条件</h3>
     <table border="0" cellspacing="0" cellpadding="0">
         <tr>
-            <td>商品代码：</td>
-            <td><input type="text" value="256987456321"></td>
-            <td>商品名称：</td>
+            <td>商品代码</td>
+            <td><input id="producNum" name="producNum" type="text"></td>
+            <td>商品名称</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
-                <input type="button" class="XZ-btn" value="选择"/>
+                <input id="producName" name="producName" type="text"/>
             </td>
-            <td>制造商：</td>
+            <td>制造商</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
+                <input type="text"/>
                 <input type="button" class="XZ-btn" value="选择"/>
             </td>
         </tr>
         <tr>
-            <td>商品品种：</td>
+            <td>商品品种</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
+                <input type="text"/>
                 <input type="button" class="XZ-btn" value="选择"/>
             </td>
-            <td>标准零售价格：</td>
+            <td>标准零售价格</td>
             <td>
-                <input type="text"/> ~ <input type="text"/>
+                <input id="retailPrice" name="retailPrice" type="text"/> ~ <input id="retailPrice2" name="retailPrice2"
+                                                                                  type="text"/>
             </td>
-            <td>含税单位：</td>
-            <td><input type="text"/> ~ <input type="text"/></td>
+            <td>含税单价</td>
+            <td>
+                <input id="taxPrice" name="taxPrice" type="text"/> ~ <input id="taxPrice2" name="taxPrice2"
+                                                                            type="text"/>
+            </td>
         </tr>
         <tr>
             <td>配件型：</td>
             <td>
-                <select>
+                <select id="partsStyle" name="partsStyle">
                     <option value="">--请选择--</option>
-                    <option value="1">镜框</option>
-                    <option value="2">隐形</option>
+                    <option value="框镜">框镜</option>
+                    <option value="隐形">隐形</option>
                 </select>
             </td>
             <td>启用状态：</td>
             <td>
-                <select name="" id="">
-                    <option value="">--请选择--</option>
-                    <option value="">启用</option>
-                    <option value="">停用</option>
+                <select id="status" name="status">
+                    <option value="">请选择</option>
+                    <option value="0">启用</option>
+                    <option value="1">禁用</option>
                 </select>
             </td>
         </tr>
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input type="button" value="保存"/>
+        <input type="button" value="查询" onclick="load()"/>
         <input type="button" class="empty" value="清空"/>
     </div>
 </div>

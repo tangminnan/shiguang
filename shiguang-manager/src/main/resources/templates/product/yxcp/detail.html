@@ -132,7 +132,7 @@
                             <label class="col-sm-3 control-label">厂家型号：</label>
                             <div class="col-sm-8">
                                 <input id="factory" name="factory" th:value="${yxcp.factory}" class="form-control"
-                                       type="text">
+                                       type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
@@ -175,6 +175,7 @@
                             <label class="col-sm-3 control-label">效期提醒上限：</label>
                             <div class="col-sm-8">
                                 有效期前<input id="upday" name="upday" th:value="${yxcp.upday}"
+                                           style="background-color: #e4e4e4"
                                            type="text" readonly>天提醒进入滞销状态
 
                             </div>
@@ -182,7 +183,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">效期提醒下限：</label>
                             <div class="col-sm-8">
-                                有效期前<input id="downday" name="downday" th:value="${yxcp.downday}" type="text" readonly>天提醒进入即将失效状态
+                                有效期前<input id="downday" name="downday" th:value="${yxcp.downday}"
+                                           style="background-color: #e4e4e4" type="text" readonly>天提醒进入即将失效状态
 
                             </div>
                         </div>
