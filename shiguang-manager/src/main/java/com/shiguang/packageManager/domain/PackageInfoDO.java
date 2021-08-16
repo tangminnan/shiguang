@@ -8,7 +8,7 @@ public class PackageInfoDO implements Serializable {
     //主键
     private Long id;
     //套餐id
-    private Long packageId;
+    private String packageId;
     //商品类型
     private String goodsType;
     //商品代码
@@ -57,13 +57,13 @@ public class PackageInfoDO implements Serializable {
     /**
      * 设置：套餐id
      */
-    public void setPackageId(Long packageId) {
+    public void setPackageId(String packageId) {
         this.packageId = packageId;
     }
     /**
      * 获取：套餐id
      */
-    public Long getPackageId() {
+    public String getPackageId() {
         return packageId;
     }
     /**

@@ -825,7 +825,8 @@ function getYouji(){
     });
     layer.full(toIndex)
 }
-var ypuhuiPrice="";
+var zhekouPrice=0.00;
+var youhuiPrice=0.00;
 function getTaocanXz(){
     var checkDate="";
     if (check_val == '' && check_val != undefined){
@@ -846,8 +847,6 @@ function getTaocanXz(){
         content : "/information/store/taocanxz/"+checkDate+"/"+check_val,// iframe的url
         cancel: function(index, layero){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-            var zhekouPrice=0.00;
-            var youhuiPrice=0.00;
             var yingshouPricce=0.00;
             var yingshouAPrice=0.00;
             var zhekouAPrice=0.00;

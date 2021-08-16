@@ -20,5 +20,5 @@ public interface PackageInfoService {
 
     int batchRemove(Long[] ids);
 
-    PackageInfoDO findSelectPackId(Long packageId);
+    PackageInfoDO findSelectPackId(String packageId);
 }

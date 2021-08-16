@@ -47,6 +47,16 @@ function load() {
                             {
                                 checkbox : true
                             },
+                            {
+                                field : 'id',
+                                title : '主键',
+                                align : 'center'
+                            },
+                            {
+                                field : 'packageId',
+                                title : '套餐id',
+                                align : 'center'
+                            },
 								{
 									field : 'packageName',
 									title : '套餐标题',
@@ -105,7 +115,7 @@ function load() {
                                 align : 'center',
                                 formatter : function(value, row, index) {
                                     var e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" ' +
-                                        'onclick="detail(\'' + value + '\')" style="text-decoration: none;">详情</a>';
+                                        'onclick="detail(\''+value+'\',\''+row.packageId+'\')" style="text-decoration: none;">详情</a>';
                                     return e;
                                 }
 							}
@@ -113,14 +123,16 @@ function load() {
 					});
 }
 
-function detail(packageId) {
+function detail(packId,packageId) {
+    alert(packageId)
+    alert(packId)
     var toIndex = layer.open({
         type : 2,
         title : '详情',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '1500px', '520px' ],
-        content : prefix + '/taocanxzdetail/' + packageId // iframe的url
+        content : prefix + '/taocanxzdetail/' +packId + '/' + packageId // iframe的url
     });
     layer.full(toIndex)
 }

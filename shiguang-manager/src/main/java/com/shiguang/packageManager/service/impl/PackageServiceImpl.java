@@ -53,7 +53,7 @@ public class PackageServiceImpl implements PackageService {
 	}
 
 	@Override
-	public PackageDO getPackageInfoId(Long packageId){
+	public PackageDO getPackageInfoId(String packageId){
 		return packageDao.getPackageInfoId(packageId);
 	}
 	

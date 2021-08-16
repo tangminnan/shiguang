@@ -30,5 +30,5 @@ public interface PackageDao {
 	
 	int batchRemove(Long[] ids);
 
-	PackageDO getPackageInfoId(Long packageId);
+	PackageDO getPackageInfoId(String packageId);
 }

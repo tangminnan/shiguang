@@ -109,7 +109,7 @@
         <set>
             <if test="isSale != null">`is_sale` = #{isSale}</if>
         </set>
-        where id = #{id}
+        where sale_number = #{saleNumber}
     </update>
 
     <delete id="remove">

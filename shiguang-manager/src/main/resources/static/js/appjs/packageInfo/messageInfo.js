@@ -2,7 +2,6 @@ function getGoodsInfo(obj){
     var str = obj.id;
     var str = str.split("")
     var targetStr = str[str.length-1]
-    alert(targetStr);
     var goodsType = $("#goodType"+targetStr+"").val();
     // var fenlei = $("#fenlei").val();
     // var caizhi = $("#caizhi").val();
@@ -31,7 +30,6 @@ var pricestart=0;
 var priceEnd=0;
 function getStartPrice(obj) {
     pricestart = $("#startPrice").val();
-    alert(pricestart);
     if (pricestart == ''){
         pricestart=0;
     }

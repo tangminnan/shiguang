@@ -190,7 +190,8 @@ public class SettlementController {
 		CostDO costDO = new CostDO();
 		//costDO.setMemberNumber(settlement.getMemberNumber());
 		costDO.setIsSale(1L);
-		costDO.setId(settlement.getCostId());
+		costDO.setSaleNumber(settlement.getSaleNumber());
+		//costDO.setId(settlement.getCostId());
 		costService.updateMember(costDO);
 		if(settlementService.save(settlement)>0){
 			return R.ok();

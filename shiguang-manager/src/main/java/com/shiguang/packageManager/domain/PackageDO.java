@@ -20,7 +20,7 @@ public class PackageDO implements Serializable {
 	//主键
 	private Long id;
 	//套餐id
-	private Long packageId;
+	private String packageId;
 	//套餐名称
 	private String packageName;
 	//套餐日期
@@ -309,8 +309,8 @@ public class PackageDO implements Serializable {
 	public Long getId() {
 		return id;
 	}
-	public void setPackageId(Long packageId) {this.packageId = packageId;}
-	public Long getPackageId() {return packageId;}
+	public void setPackageId(String packageId) {this.packageId = packageId;}
+	public String getPackageId() {return packageId;}
 	/**
 	 * 设置：套餐名称
 	 */

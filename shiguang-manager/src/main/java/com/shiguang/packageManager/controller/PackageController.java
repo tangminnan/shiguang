@@ -302,10 +302,10 @@ public class PackageController {
     @RequiresPermissions("information:package:add")
     public R save(PackageDO packages){
         Long packageId = GuuidUtil.getUUID();
-        packages.setPackageId(packageId);
+        packages.setPackageId(String.valueOf(packageId));
         int pack = packageService.save(packages);
         PackageInfoDO packageInfoDO = new PackageInfoDO();
-        packageInfoDO.setPackageId(packageId);
+        packageInfoDO.setPackageId(String.valueOf(packageId));
         packageInfoDO.setGoodsType(packages.getGoodsType());
         packageInfoDO.setGoodsCode(packages.getGoodsCode());
         packageInfoDO.setGoodsName(packages.getGoodsName());

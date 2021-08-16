@@ -22,5 +22,5 @@ public interface PackageInfoDao {
 
     int batchRemove(Long[] ids);
 
-    PackageInfoDO findSelectPackId(Long packageId);
+    PackageInfoDO findSelectPackId(String packageId);
 }

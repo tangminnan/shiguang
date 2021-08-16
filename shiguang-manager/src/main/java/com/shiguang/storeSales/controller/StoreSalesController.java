@@ -570,9 +570,15 @@ public class StoreSalesController {
         return pageUtils;
     }
 
+    /**
+     * 套餐详情
+     * @param packageId
+     * @param model
+     * @return
+     */
     @GetMapping("/taocanxzdetail/{packageId}")
     @RequiresPermissions("information:store:taocanxzdetail")
-    String detail(@PathVariable("packageId") Long packageId,Model model){
+    String detail(@PathVariable("packageId") String packageId,Model model){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         PackageDO packageDO = packageService.getPackageInfoId(packageId);
         packageDO.setPackageDate(simpleDateFormat.format(packageDO.getPackageTime()));
@@ -692,7 +698,7 @@ public class StoreSalesController {
      */
     @GetMapping("/jingpian/{rightYuanYongZJ}/{rightYuanYongQJ}/{leftYuanYongQJ}/{leftYuanYongZJ}/{str}")
     @RequiresPermissions("information:store:jingpian")
-    String jingpian(@PathVariable("rightYuanYongZJ") Double rightYuanYongZJ, @PathVariable("rightYuanYongQJ") Double rightYuanYongQJ, @PathVariable("leftYuanYongQJ") Double leftYuanYongQJ, @PathVariable("leftYuanYongZJ") Double leftYuanYongZJ, @PathVariable("str") String str, Model model) {
+    String jingpian(@PathVariable("rightYuanYongZJ") String rightYuanYongZJ, @PathVariable("rightYuanYongQJ") String rightYuanYongQJ, @PathVariable("leftYuanYongQJ") String leftYuanYongQJ, @PathVariable("leftYuanYongZJ") String leftYuanYongZJ, @PathVariable("str") String str, Model model) {
         model.addAttribute("rightYuanYongQJ", rightYuanYongQJ);
         model.addAttribute("rightYuanYongZJ", rightYuanYongZJ);
         model.addAttribute("leftYuanYongQJ", leftYuanYongQJ);
@@ -712,6 +718,7 @@ public class StoreSalesController {
     public PageUtils jingpianlist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        Map<String,Object> maps = new HashMap<>();
         PageUtils pageUtils = null;
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
@@ -731,27 +738,27 @@ public class StoreSalesController {
                 goodsId = goodsDO.getGoodsid();
             }
         }
-        query.put("goodsType",goodsId);
+        maps.put("goodsType",goodsId);
         if (null != params.get("dzType")) {
             String dzType = params.get("dzType").toString();
             if ("0".equals(params.get("jingpianType").toString())) {
-                query.put("rightYuanYongQJ", params.get("rightYuanYongQJ"));
-                query.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
+                maps.put("rightYuanYongQJ", params.get("rightYuanYongQJ"));
+                maps.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
             } else if ("1".equals(params.get("jingpianType").toString())) {
-                query.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
-                query.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
+                maps.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
+                maps.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
             }
             if ("0".equals(dzType)) {
-                List<StockDO> jpcpDOList = stockService.listJpcp(query);
+                List<StockDO> jpcpDOList = stockService.listJpcp(maps);
                 int total = stockService.countJpcp(query);
                 pageUtils = new PageUtils(jpcpDOList, total);
             } else if ("1".equals(dzType)) {
-                List<StockDO> jpdzDOList = stockService.listJpdz(query);
+                List<StockDO> jpdzDOList = stockService.listJpdz(maps);
                 int total = stockService.countJpdz(query);
                 pageUtils = new PageUtils(jpdzDOList, total);
             }
         } else {
-            List<StockDO> jpcpDOList = stockService.listJpcp(query);
+            List<StockDO> jpcpDOList = stockService.listJpcp(maps);
             int total = stockService.countJpcp(query);
             pageUtils = new PageUtils(jpcpDOList, total);
         }

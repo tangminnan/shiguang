@@ -51,7 +51,7 @@ public class PackageInfoServiceImpl implements PackageInfoService {
     }
 
     @Override
-    public PackageInfoDO findSelectPackId(Long packageId){
+    public PackageInfoDO findSelectPackId(String packageId){
         return infoDao.findSelectPackId(packageId);
     }
 }
