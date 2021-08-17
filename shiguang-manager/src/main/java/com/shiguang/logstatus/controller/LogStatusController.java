@@ -127,11 +127,21 @@ public class LogStatusController {
             departmentDO1.setDepartTel("");
             model.addAttribute("departmentDO",departmentDO1);
         }
+        Map<String,Object> mailMap = new HashMap<>();
+        String dateNow = simpleDateFormat.format(new Date());
+        mailMap.put("cardNumber",settlementDO.getMemberNumber());
+        mailMap.put("dateNow",dateNow);
+        mailMap.put("state",0);
         MailInfoDO mailInfoDO = mailInfoService.getMailAddress(settlementDO.getSaleNumber());
         if (null != mailInfoDO){
             model.addAttribute("address",mailInfoDO.getAddress());
         } else {
-            model.addAttribute("address","");
+            List<MailInfoDO> mailInfoDOS = mailInfoService.getMailAddressByMember(mailMap);
+            if (null != mailInfoDOS && mailInfoDOS.size() > 0){
+                model.addAttribute("address",mailInfoDOS.get(0).getAddress());
+            }else {
+                model.addAttribute("address","");
+            }
         }
         SettlementDO settlementDO1 = settlementService.getSaleNumers(saleNumber);
         if (null != settlementDO1){

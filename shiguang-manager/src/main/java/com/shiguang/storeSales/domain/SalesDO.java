@@ -40,6 +40,8 @@ public class SalesDO implements Serializable {
 	private String eyeType;
 	//结算金额
 	private Double amountMoney;
+	//原价金额
+	private Double primeMoney;
 	//取镜方式
 	private String mirrorWay;
 	//取镜日期
@@ -341,6 +343,14 @@ public class SalesDO implements Serializable {
 	public Double getAmountMoney() {
 		return amountMoney;
 	}
+	/**
+	 * 原价金额
+	 */
+	public void setPrimeMoney(Double primeMoney) {this.primeMoney = primeMoney;}
+	/**
+	 * 原价金额
+	 */
+	public Double getPrimeMoney() {return primeMoney;}
 	/**
 	 * 设置：取镜方式
 	 */

@@ -22,5 +22,7 @@ public interface MailInfoDao {
 
     int batchRemove(Long[] ids);
 
+    List<MailInfoDO> getMailAddressByMember(Map<String,Object> map);
+
     MailInfoDO getMailAddress(String saleNumber);
 }

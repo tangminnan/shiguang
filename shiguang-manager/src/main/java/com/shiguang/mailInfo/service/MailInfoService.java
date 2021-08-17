@@ -20,5 +20,7 @@ public interface MailInfoService {
 
     int batchRemove(Long[] ids);
 
+    List<MailInfoDO> getMailAddressByMember(Map<String,Object> map);
+
     MailInfoDO getMailAddress(String saleNumber);
 }

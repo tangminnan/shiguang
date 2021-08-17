@@ -124,8 +124,16 @@
         </foreach>
     </delete>
 
-    <select id="getMailAddress" resultType="com.shiguang.mailInfo.domain.MailInfoDO">
-		select `id`,`sale_number`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info where sale_number = #{value}
+    <select id="getMailAddressByMember" resultType="com.shiguang.mailInfo.domain.MailInfoDO">
+		select `id`,`sale_number`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info
+		<where>
+            <if test="cardNumber != null and cardNumber != ''"> and card_member = #{cardNumber} </if>
+            <if test="state != null and state != ''"> and status = #{state} </if>
+            <if test="dateNow != null and dateNow != ''"> and DATE_FORMAT(enter_timr,'%Y-%m-%d') = #{dateNow} </if>
+        </where>
 	</select>
-
+    <select id="getMailAddress" resultType="com.shiguang.mailInfo.domain.MailInfoDO">
+        select `id`,`sale_number`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info
+        where sale_number = #{value}
+    </select>
 </mapper>

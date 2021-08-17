@@ -50,6 +50,11 @@ public class MailInfoServiceImpl implements MailInfoService {
     }
 
     @Override
+    public List<MailInfoDO> getMailAddressByMember(Map<String,Object> map){
+        return mailInfoDao.getMailAddressByMember(map);
+    }
+
+    @Override
     public MailInfoDO getMailAddress(String saleNumber){
         return mailInfoDao.getMailAddress(saleNumber);
     }
