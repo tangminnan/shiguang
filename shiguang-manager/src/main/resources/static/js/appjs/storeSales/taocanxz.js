@@ -123,16 +123,14 @@ function load() {
 					});
 }
 
-function detail(packId,packageId) {
-    alert(packageId)
-    alert(packId)
+function detail(packageId) {
     var toIndex = layer.open({
         type : 2,
         title : '详情',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '1500px', '520px' ],
-        content : prefix + '/taocanxzdetail/' +packId + '/' + packageId // iframe的url
+        content : prefix + '/taocanxzdetail/' + packageId // iframe的url
     });
     layer.full(toIndex)
 }

@@ -138,12 +138,13 @@
 		</tr>
 	</table>
 	<form class="form-horizontal m-t" id="signupForm">
-		<input id="saleNumber" name="saleNumber" th:value="${settlementDO.saleNumber}">
+		<input id="saleNumber" name="saleNumber" type="hidden" th:value="${settlementDO.saleNumber}">
 		<div class="form-group">
 			<div class="col-sm-8 col-sm-offset-3">
 				<button type="submit" >发料</button>
 			</div>
 		</div>
+		<!--<button type="submit" >发料</button>-->
 	</form>
 </div>
 <div th:include="include :: footer"></div>

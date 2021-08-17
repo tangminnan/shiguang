@@ -130,7 +130,7 @@
 
 <!--多种优惠-->
 <div class="m40 TC_yhNew">
-	<h3>多种优惠</h3>
+	<!--<h3>多种优惠</h3>-->
 	<div class="Hbox">
 		<h4><b>商品信息</b></h4>
 		<!--<input type="hidden" readonly style="width: 5%;margin: 10px;background-color:#778899;" id="danyiPrices" name="danyiPrices" th:value="${package.danyiPrice}"/>-->
@@ -402,37 +402,44 @@
 </script>
 <script type="text/javascript">
 	var html="";
-	for (var i=0;i<packList.length;i++){
-        html = "<tr class='item'>";
-        html += "<td><input type=\"checkbox\" id=\"allChecks\" name='allChecks' class='cb'/></td>";
-        html +="<td>";
-        html += "<input value='"+packList[i].goodsType+"'/></td>";
-        html +="<td><input style='width:40%;' value='"+packList[i].originalStartPrice+"'/> 至 <input style='width:40%;' value='"+packList[i].originalEndPrice+"'/></td>";
-        html += "<td><input style='width:40%;' value='"+packList[i].packageStartPrice+"' />至 <input style='width:40%;' value='"+packList[i].packageEndPrice+"' /></td>";
-        html += "<td><input style='width:40%;' value='"+packList[i].saleNumber+"' /></td>";
-        html += "<td><input style='width:40%;' value='"+packList[i].fullStartPrice+"' />至 <input style='width:40%;' value='"+packList[i].fullEndPrice+"' /></td>";
-        html += "<td><input style='width:40%;' value='"+packList[i].preferentialWay+"' /></td>";
-        html += "<td><input style='width:40%;' value='"+packList[i].unitPrice+"' /></td>";
-        html += "<td><input style='width:40%;' value='"+packList[i].specialPrice+"' /></td>";
-        html += "<td><input style='width:40%;' value='"+packList[i].preferentialPrice+"' /></td>";
-        html += "<td><input style='width:40%;' value='"+packList[i].preferentialRebate+"' /></td>";
-        html += "</tr>";
-        $("#tr1").append(html);
+    var packageForm = $("#packageForm").val();
+	if (packageForm == 0){
+        for (var i=0;i<packList.length;i++){
+            html = "<tr class='item'>";
+            html += "<td><input type=\"checkbox\" id=\"allChecks\" name='allChecks' class='cb'/></td>";
+            html +="<td>";
+            html += "<input value='"+packList[i].goodsName+"'/></td>";
+            html +="<td><input style='width:40%;' value='"+packList[i].originalStartPrice+"'/> 至 <input style='width:40%;' value='"+packList[i].originalEndPrice+"'/></td>";
+            html += "<td><input style='width:40%;' value='"+packList[i].packageStartPrice+"' />至 <input style='width:40%;' value='"+packList[i].packageEndPrice+"' /></td>";
+            html += "<td><input style='width:40%;' value='"+packList[i].saleNumber+"' /></td>";
+            html += "<td><input style='width:40%;' value='"+packList[i].fullStartPrice+"' />至 <input style='width:40%;' value='"+packList[i].fullEndPrice+"' /></td>";
+            html += "<td><input style='width:40%;' value='"+packList[i].preferentialWay+"' /></td>";
+            html += "<td><input style='width:40%;' value='"+packList[i].unitPrice+"' /></td>";
+            html += "<td><input style='width:40%;' value='"+packList[i].specialPrice+"' /></td>";
+            html += "<td><input style='width:40%;' value='"+packList[i].preferentialPrice+"' /></td>";
+            html += "<td><input style='width:40%;' value='"+packList[i].preferentialRebate+"' /></td>";
+            html += "</tr>";
+            $("#tr1").append(html);
+        }
 	}
 
+
     var htmldy="";
-    for (var i=0;i<packList.length;i++){
-        htmldy = "<tr class='item'>";
-        htmldy += "<td><input type=\"checkbox\" id=\"allChecks\" name='allChecks' class='cb'/></td>";
-        htmldy +="<td>";
-        htmldy += "<input value='"+packList[i].goodsType+"'/></td>";
-        htmldy +="<td><input style='width:40%;' value='"+packList[i].originalStartPrice+"'/> 至 <input style='width:40%;' value='"+packList[i].originalEndPrice+"'/></td>";
-        htmldy += "<td><input style='width:40%;' value='"+packList[i].packageStartPrice+"' />至 <input style='width:40%;' value='"+packList[i].packageEndPrice+"' /></td>";
-        htmldy += "<td><input style='width:40%;' value='"+packList[i].saleNumber+"' /></td>";
-        htmldy += "<td><input style='width:40%;' value='"+packList[i].fullStartPrice+"' />至 <input style='width:40%;' value='"+packList[i].fullEndPrice+"' /></td>";
-        htmldy += "</tr>";
-        $("#trdy1").append(html);
+    if (packageForm == 1){
+        for (var i=0;i<packList.length;i++){
+            htmldy = "<tr class='item'>";
+            htmldy += "<td><input type=\"checkbox\" id=\"allChecks\" name='allChecks' class='cb'/></td>";
+            htmldy +="<td>";
+            htmldy += "<input value='"+packList[i].goodsName+"'/></td>";
+            htmldy +="<td><input style='width:40%;' value='"+packList[i].originalStartPrice+"'/> 至 <input style='width:40%;' value='"+packList[i].originalEndPrice+"'/></td>";
+            htmldy += "<td><input style='width:40%;' value='"+packList[i].packageStartPrice+"' />至 <input style='width:40%;' value='"+packList[i].packageEndPrice+"' /></td>";
+            htmldy += "<td><input style='width:40%;' value='"+packList[i].saleNumber+"' /></td>";
+            htmldy += "<td><input style='width:40%;' value='"+packList[i].fullStartPrice+"' />至 <input style='width:40%;' value='"+packList[i].fullEndPrice+"' /></td>";
+            htmldy += "</tr>";
+            $("#trdy1").append(htmldy);
+        }
     }
+
 
 </script>
 </body>

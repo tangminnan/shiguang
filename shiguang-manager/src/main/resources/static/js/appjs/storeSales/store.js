@@ -14,7 +14,8 @@ function getKjpeijian() {
                 a=a+1;
             }
             for (var i=0;i<rows.length;i++){
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                var goodsNumStr = rows[i].goodsNum;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -83,7 +84,8 @@ function getTaiyangjing(){
                 a=a+1;
             }
             for (var i=0;i<rows.length;i++){
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                var goodsNumStr = rows[i].goodsNum;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -151,7 +153,8 @@ function getHaocai() {
                 a=a+1;
             }
             for (var i=0;i<rows.length;i++){
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                var goodsNumStr = rows[i].goodsNum;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -220,7 +223,8 @@ function getLaohuajing() {
                 a=a+1;
             }
             for (var i=0;i<rows.length;i++){
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                var goodsNumStr = rows[i].goodsNum;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -286,7 +290,8 @@ function getShiguang(){
                 a=a+1;
             }
             for (var i=0;i<rows.length;i++){
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                var goodsNumStr = rows[i].goodsNum;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -356,7 +361,8 @@ function getHuliye(){
                 a=a+1;
             }
             for (var i=0;i<rows.length;i++){
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                var goodsNumStr = rows[i].goodsNum;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -426,7 +432,8 @@ function getPeijian(){
                 a=a+1;
             }
             for (var i=0;i<rows.length;i++){
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                var goodsNumStr = rows[i].goodsNum;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -535,7 +542,8 @@ function getYinxing(){
                 a=a+1;
             }
             for (var i=0;i<rows.length;i++){
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                var goodsNumStr = rows[i].goodsNum;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -604,7 +612,8 @@ function getYinxingpj(){
                 a=a+1;
             }
             for (var i=0;i<rows.length;i++){
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
+                var goodsNumStr = rows[i].goodsNum;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -827,6 +836,7 @@ function getYouji(){
 }
 var zhekouPrice=0.00;
 var youhuiPrice=0.00;
+var dazhePrice=0.00;
 function getTaocanXz(){
     var checkDate="";
     if (check_val == '' && check_val != undefined){
@@ -837,6 +847,7 @@ function getTaocanXz(){
     }
     var amount = $("#amountMoney").val();
     var amountYj = $("#amountMoney").val();
+    var shihsouPrice = 0.00;
     //var check_val = "232";
     var toIndex = layer.open({
         type : 2,
@@ -861,18 +872,26 @@ function getTaocanXz(){
                             youhuiPrice = rows[i].fanxianPrice
                             //var ys = $("#amountMoney").val();
                             //alert(ys);
-                            amount = parseFloat(amount) - parseFloat(youhuiPrice);
+                            amount = (parseFloat(amount) - parseFloat(youhuiPrice)).toFixed(2);
                             //alert(yingshouPricce);
+                        } else if (rows[i].danyiyh == '打折'){
+                            dazhePrice = (parseFloat(amount) * parseFloat(rows[i].dazhePrice)).toFixed(2);
+                            shihsouPrice = (parseFloat(amount) - parseFloat(dazhePrice)).toFixed(2);
+                        } else if (rows[i].danyiyh == '特价'){
+                            shihsouPrice = rows[i].tejiaPrice;
                         }
                     } else{
                         var goosNum = rows[i].goodsCode;
                         var goosType = rows[i].goodsType;
                         var preWay = rows[i].preferentialWay
                         var prePrice = rows[i].preferentialPrice;
+                        var rebat = rows[i].preferentialRebate;
+                        var tjPrice = rows[i].specialPrice;
                         preWay = preWay.split(",");
                         prePrice = prePrice.split(",");
                         goosNum = goosNum.split(",");
                         goosType = goosType.split(",");
+                        rebat = rebat.split(",");
                         for (var t=0;t<goosType.length;t++){
 
                             if ("镜架" == goosType[t]){
@@ -880,11 +899,13 @@ function getTaocanXz(){
                                     $("#youhuiMoneyjj"+t+"").text(prePrice[t]);
                                     var yingshou = $("#yingshoujj"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou)-parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneyjj"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou)-parseFloat(prePrice[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneyjj"+t+"").innerHTML=""
+                                        $("#yingshouMoneyjj"+t+"").text();
                                         $("#yingshouMoneyjj"+t+"").append(yingshou);
-                                        youhuiPrice = parseFloat(youhuiPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        youhuiPrice = (parseFloat(youhuiPrice) + parseFloat(prePrice[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(prePrice[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
                                     }
                                     // $("#youhuiMoneyjj").text(prePrice[t]);
@@ -897,16 +918,19 @@ function getTaocanXz(){
                                     //     yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
                                     // }
 
-                                } else if ("折扣" == preWay[t]){
-                                    $("#zhekoujj"+t+"").text(prePrice[t]);
+                                } else if ("打折" == preWay[t]){
+                                    $("#zhekoujj"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshoujj"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou) * parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneyjj"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneyjj"+t+"").innerHTML=""
+                                        $("#yingshouMoneyjj"+t+"").text();
                                         $("#yingshouMoneyjj"+t+"").text(yingshou);
                                         $("#zhekouMoneyjj"+t+"").text(yingshou);
-                                        zhekouPrice = parseFloat(zhekouPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
+                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(dazhePrice)).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
                                     }
 
@@ -914,7 +938,8 @@ function getTaocanXz(){
                                 else if ("特价" == preWay[t]){
                                     var yingshou = $("#yingshoujj"+t+"").val();
                                     if (undefined != yingshou){
-                                        $("#yingshouMoneyjj"+t+"").text(preWay[t]);
+                                        $("#yingshouMoneyjj"+t+"").text(tjPrice[t]);
+                                        shihsouPrice = tjPrice[t];
                                     }
                                 }
                             } else if ("订做片" == goosType[t]){
@@ -922,11 +947,13 @@ function getTaocanXz(){
                                     $("#youhuiMoneyjp"+t+"").text(prePrice[t]);
                                     var yingshou = $("#yingshoujp"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou)-parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneyjp"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou)-parseFloat(prePrice[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneyjp"+t+"").innerHTML=""
+                                        $("#yingshouMoneyjp"+t+"").text();
                                         $("#yingshouMoneyjp"+t+"").text(yingshou);
-                                        youhuiPrice = parseFloat(youhuiPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        youhuiPrice = (parseFloat(youhuiPrice) + parseFloat(prePrice[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(prePrice[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         // yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
                                     }
                                     // $("#youhuiMoneyjp").text(prePrice[t]);
@@ -943,16 +970,20 @@ function getTaocanXz(){
                                     //     alert(yingshouAPrice)
                                     // }
 
-                                } else if ("折扣" == preWay[t]){
-                                    $("#zhekoujp"+t+"").text(prePrice[t]);
+                                }
+                                else if ("打折" == preWay[t]){
+                                    $("#zhekoujp"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshoujp"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou) * parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneyjp"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneyjp"+t+"").innerHTML=""
+                                        $("#yingshouMoneyjp"+t+"").text();
                                         $("#yingshouMoneyjp"+t+"").text(yingshou);
                                         $("#zhekouMoneyjp"+t+"").text(yingshou);
-                                        zhekouPrice = parseFloat(zhekouPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
+                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(dazhePrice)).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
                                     }
 
@@ -960,39 +991,125 @@ function getTaocanXz(){
                                 else if ("特价" == preWay[t]){
                                     var yingshou = $("#yingshoujp"+t+"").val();
                                     if (undefined != yingshou){
-                                        $("#yingshouMoneyjp"+t+"").text(preWay[t]);
+                                        $("#yingshouMoneyjp"+t+"").text(tjPrice[t]);
+                                        shihsouPrice = tjPrice[t];
                                     }
                                 }
-                            } else if ("配件" == goosType[t]) {
+                            } else if ("成品片" == goosType[t]){
+                                if ("返现" == preWay[t]){
+                                    $("#youhuiMoneyjp"+t+"").text(prePrice[t]);
+                                    var yingshou = $("#yingshoujp"+t+"").val();
+                                    if (undefined != yingshou){
+                                        yingshou = (parseFloat(yingshou)-parseFloat(prePrice[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneyjp"+t+"").innerHTML=""
+                                        $("#yingshouMoneyjp"+t+"").text();
+                                        $("#yingshouMoneyjp"+t+"").text(yingshou);
+                                        youhuiPrice = (parseFloat(youhuiPrice) + parseFloat(prePrice[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(prePrice[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
+                                        // yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
+                                    }
+                                    // $("#youhuiMoneyjp").text(prePrice[t]);
+                                    // var yingshou = $("#yingshoujp").val();
+                                    // alert(yingshou)
+                                    // if (undefined != yingshou){
+                                    //     yingshou = parseFloat(yingshou)-parseFloat(prePrice[t]);
+                                    //     document.getElementById("yingshouMoneyjp").innerHTML=""
+                                    //     alert(yingshou)
+                                    //     $("#yingshouMoneyjp").text(yingshou);
+                                    //     youhuiPrice = parseFloat(youhuiPrice) + parseFloat(prePrice[t]);
+                                    //     alert(youhuiPrice)
+                                    //     yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
+                                    //     alert(yingshouAPrice)
+                                    // }
+
+                                }
+                                else if ("打折" == preWay[t]){
+                                    $("#zhekoujp"+t+"").text(rebat[t]);
+                                    var yingshou = $("#yingshoujp"+t+"").val();
+                                    if (undefined != yingshou){
+                                        yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneyjp"+t+"").innerHTML=""
+                                        $("#yingshouMoneyjp"+t+"").text();
+                                        $("#yingshouMoneyjp"+t+"").text(yingshou);
+                                        $("#zhekouMoneyjp"+t+"").text(yingshou);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
+                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(dazhePrice)).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
+                                        //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
+                                    }
+
+                                }
+                                else if ("特价" == preWay[t]){
+                                    var yingshou = $("#yingshoujp"+t+"").val();
+                                    if (undefined != yingshou){
+                                        $("#yingshouMoneyjp"+t+"").text(tjPrice[t]);
+                                        shihsouPrice = tjPrice[t];
+                                    }
+                                }
+                            }
+
+                            else if ("配件" == goosType[t]) {
                                 if ("返现" == preWay[t]){
                                     $("#youhuiMoneypj"+t+"").text(prePrice[t]);
+                                    $("#youhuiMoneyjjpj"+t+"").text(prePrice[t]);
+                                    $("#youhuiMoneyyxpj"+t+"").text(prePrice[t]);
                                     var yingshou = $("#yingshoupj"+t+"").val();
+                                    yingshou = $("#yingshoujjpj"+t+"").val();
+                                    yingshou = $("#yingshouyxpj"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou)-parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneypj"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou)-parseFloat(prePrice[t])).toFixed(2);
+                                        $("#yingshouMoneypj"+t+"").text();
+                                        $("#yingshouMoneyjjpj"+t+"").text();
+                                        $("#yingshouMoneyyxpj"+t+"").text();
+                                        //document.getElementById("yingshouMoneypj"+t+"").innerHTML=""
+                                        //document.getElementById("yingshouMoneyjjpj"+t+"").innerHTML=""
                                         $("#yingshouMoneypj"+t+"").text(yingshou);
-                                        youhuiPrice = parseFloat(youhuiPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        $("#yingshouMoneyjjpj"+t+"").text(yingshou);
+                                        $("#yingshouMoneyyxpj"+t+"").text(yingshou);
+                                        youhuiPrice = (parseFloat(youhuiPrice) + parseFloat(prePrice[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(prePrice[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
                                     }
-                                } else if ("折扣" == preWay[t]){
-                                    $("#zhekoupj"+t+"").text(prePrice[t]);
+                                } else if ("打折" == preWay[t]){
+                                    $("#zhekoupj"+t+"").text(rebat[t]);
+                                    $("#zhekoujjpj"+t+"").text(rebat[t]);
+                                    $("#zhekouyxpj"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshoupj"+t+"").val();
+                                    yingshou = $("#yingshoujjpj"+t+"").val();
+                                    yingshou = $("#yingshouyxpj"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou) * parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneypj"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
+                                        $("#yingshouMoneypj"+t+"").text();
+                                        $("#yingshouMoneyjjpj"+t+"").text();
+                                        $("#yingshouMoneyyxpj"+t+"").text();
+                                        //document.getElementById("yingshouMoneypj"+t+"").innerHTML=""
+                                        //document.getElementById("yingshouMoneyjjpj"+t+"").innerHTML=""
                                         $("#yingshouMoneypj"+t+"").text(yingshou);
+                                        $("#yingshouMoneyjjpj"+t+"").text(yingshou);
+                                        $("#yingshouMoneyyxpj"+t+"").text(yingshou);
                                         $("#zhekouMoneypj"+t+"").text(yingshou);
-                                        zhekouPrice = parseFloat(zhekouPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        $("#zhekouMoneyjjpj"+t+"").text(yingshou);
+                                        $("#zhekouMoneyyxpj"+t+"").text(yingshou);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
+                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
                                     }
 
                                 }
                                 else if ("特价" == preWay[t]){
                                     var yingshou = $("#yingshoupj"+t+"").val();
+                                    yingshou = $("#yingshoujjpj"+t+"").val();
+                                    yingshou = $("#yingshouyxpj"+t+"").val();
                                     if (undefined != yingshou){
-                                        $("#yingshouMoneypj"+t+"").text(preWay[t]);
+                                        $("#yingshouMoneypj"+t+"").text(tjPrice[t]);
+                                        $("#yingshouMoneyjjpj"+t+"").text(tjPrice[t]);
+                                        $("#yingshouMoneyyxpj"+t+"").text(tjPrice[t]);
+                                        shihsouPrice = tjPrice[t];
                                     }
                                 }
                             } else if ("太阳镜" == goosType[t]) {
@@ -1000,23 +1117,28 @@ function getTaocanXz(){
                                     $("#youhuiMoneytyj"+t+"").text(prePrice[t]);
                                     var yingshou = $("#yingshoutyj"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou)-parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneytyj"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou)-parseFloat(prePrice[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneytyj"+t+"").innerHTML=""
+                                        $("#yingshouMoneytyj"+t+"").text();
                                         $("#yingshouMoneytyj"+t+"").text(yingshou);
-                                        youhuiPrice = parseFloat(youhuiPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        youhuiPrice = (parseFloat(youhuiPrice) + parseFloat(prePrice[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(prePrice[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
                                     }
-                                } else if ("折扣" == preWay[t]){
-                                    $("#zhekoutyj"+t+"").text(prePrice[t]);
+                                } else if ("打折" == preWay[t]){
+                                    $("#zhekoutyj"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshoutyj"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou) * parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneytyj"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneytyj"+t+"").innerHTML=""
+                                        $("#yingshouMoneytyj"+t+"").text();
                                         $("#yingshouMoneytyj"+t+"").text(yingshou);
                                         $("#zhekouMoneytyj"+t+"").text(yingshou);
-                                        zhekouPrice = parseFloat(zhekouPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
+                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
                                     }
 
@@ -1024,7 +1146,8 @@ function getTaocanXz(){
                                 else if ("特价" == preWay[t]){
                                     var yingshou = $("#yingshoutyj"+t+"").val();
                                     if (undefined != yingshou){
-                                        $("#yingshouMoneytyj"+t+"").text(preWay[t]);
+                                        $("#yingshouMoneytyj"+t+"").text(tjPrice[t]);
+                                        shihsouPrice = tjPrice[t];
                                     }
                                 }
                             } else if ("老花镜" == goosType[t]) {
@@ -1032,23 +1155,28 @@ function getTaocanXz(){
                                     $("#youhuiMoneylhj"+t+"").text(prePrice[t]);
                                     var yingshou = $("#yingshoulhj"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou)-parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneylhj"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou)-parseFloat(prePrice[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneylhj"+t+"").innerHTML=""
+                                        $("#yingshouMoneylhj"+t+"").text();
                                         $("#yingshouMoneylhj"+t+"").text(yingshou);
-                                        youhuiPrice = parseFloat(youhuiPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        youhuiPrice = (parseFloat(youhuiPrice) + parseFloat(prePrice[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(prePrice[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
                                     }
-                                } else if ("折扣" == preWay[t]){
-                                    $("#zhekoulhj"+t+"").text(prePrice[t]);
+                                } else if ("打折" == preWay[t]){
+                                    $("#zhekoulhj"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshoulhj"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou) * parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneylhj"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneylhj"+t+"").innerHTML=""
+                                        $("#yingshouMoneylhj"+t+"").text();
                                         $("#yingshouMoneylhj"+t+"").text(yingshou);
                                         $("#zhekouMoneylhj"+t+"").text(yingshou);
-                                        zhekouPrice = parseFloat(zhekouPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
+                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
                                     }
 
@@ -1056,7 +1184,8 @@ function getTaocanXz(){
                                 else if ("特价" == preWay[t]){
                                     var yingshou = $("#yingshoulhj"+t+"").val();
                                     if (undefined != yingshou){
-                                        $("#yingshouMoneylhj"+t+"").text(preWay[t]);
+                                        $("#yingshouMoneylhj"+t+"").text(tjPrice[t]);
+                                        shihsouPrice = tjPrice[t];
                                     }
                                 }
                             } else if ("耗材" == goosType[t]) {
@@ -1064,23 +1193,28 @@ function getTaocanXz(){
                                     $("#youhuiMoneyhc"+t+"").text(prePrice[t]);
                                     var yingshou = $("#yingshouhc"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou)-parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneyhc"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou)-parseFloat(prePrice[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneyhc"+t+"").innerHTML=""
+                                        $("#yingshouMoneyhc"+t+"").text();
                                         $("#yingshouMoneyhc"+t+"").text(yingshou);
-                                        youhuiPrice = parseFloat(youhuiPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        youhuiPrice = (parseFloat(youhuiPrice) + parseFloat(prePrice[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(prePrice[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
                                     }
-                                } else if ("折扣" == preWay[t]){
-                                    $("#zhekouhc"+t+"").text(prePrice[t]);
+                                } else if ("打折" == preWay[t]){
+                                    $("#zhekouhc"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshouhc"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou) * parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneyhc"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneyhc"+t+"").innerHTML=""
+                                        $("#yingshouMoneyhc"+t+"").text();
                                         $("#yingshouMoneyhc"+t+"").text(yingshou);
                                         $("#zhekouMoneyhc"+t+"").text(yingshou);
-                                        zhekouPrice = parseFloat(zhekouPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
+                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
                                     }
 
@@ -1088,7 +1222,8 @@ function getTaocanXz(){
                                 else if ("特价" == preWay[t]){
                                     var yingshou = $("#yingshouhc"+t+"").val();
                                     if (undefined != yingshou){
-                                        $("#yingshouMoneyhc"+t+"").text(preWay[t]);
+                                        $("#yingshouMoneyhc"+t+"").text(tjPrice[t]);
+                                        shihsouPrice = tjPrice[t];
                                     }
                                 }
                             } else if ("视光" == goosType[t]) {
@@ -1096,23 +1231,28 @@ function getTaocanXz(){
                                     $("#youhuiMoneysg"+t+"").text(prePrice[t]);
                                     var yingshou = $("#yingshousg"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou)-parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneysg"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou)-parseFloat(prePrice[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneysg"+t+"").innerHTML=""
+                                        $("#yingshouMoneysg"+t+"").text();
                                         $("#yingshouMoneysg"+t+"").text(yingshou);
-                                        youhuiPrice = parseFloat(youhuiPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        youhuiPrice = (parseFloat(youhuiPrice) + parseFloat(prePrice[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(prePrice[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
                                     }
-                                } else if ("折扣" == preWay[t]){
-                                    $("#zhekousg"+t+"").text(prePrice[t]);
+                                } else if ("打折" == preWay[t]){
+                                    $("#zhekousg"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshousg"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou) * parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneysg"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneysg"+t+"").innerHTML=""
+                                        $("#yingshouMoneysg"+t+"").text();
                                         $("#yingshouMoneysg"+t+"").text(yingshou);
                                         $("#zhekouMoneysg"+t+"").text(yingshou);
-                                        zhekouPrice = parseFloat(zhekouPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
+                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
                                     }
 
@@ -1120,7 +1260,8 @@ function getTaocanXz(){
                                 else if ("特价" == preWay[t]){
                                     var yingshou = $("#yingshousg"+t+"").val();
                                     if (undefined != yingshou){
-                                        $("#yingshouMoneysg"+t+"").text(preWay[t]);
+                                        $("#yingshouMoneysg"+t+"").text(tjPrice[t]);
+                                        shihsouPrice = tjPrice[t];
                                     }
                                 }
                             } else if ("隐形护理液" == goosType[t]) {
@@ -1128,23 +1269,28 @@ function getTaocanXz(){
                                     $("#youhuiMoneyhly"+t+"").text(prePrice[t]);
                                     var yingshou = $("#yingshouhly"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou)-parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneyhly"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou)-parseFloat(prePrice[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneyhly"+t+"").innerHTML=""
+                                        $("#yingshouMoneyhly"+t+"").text();
                                         $("#yingshouMoneyhly"+t+"").text(yingshou);
-                                        youhuiPrice = parseFloat(youhuiPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        youhuiPrice = (parseFloat(youhuiPrice) + parseFloat(prePrice[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(prePrice[t]));
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //yingshouAPrice = parseFloat(yingshouAPrice) + parseFloat(yingshou);
                                     }
-                                } else if ("折扣" == preWay[t]){
-                                    $("#zhekouhly"+t+"").text(prePrice[t]);
+                                } else if ("打折" == preWay[t]){
+                                    $("#zhekouhly"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshouhly"+t+"").val();
                                     if (undefined != yingshou){
-                                        yingshou = parseFloat(yingshou) * parseFloat(prePrice[t]);
-                                        document.getElementById("yingshouMoneyhly"+t+"").innerHTML=""
+                                        yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
+                                        //document.getElementById("yingshouMoneyhly"+t+"").innerHTML=""
+                                        $("#yingshouMoneyhly"+t+"").text();
                                         $("#yingshouMoneyhly"+t+"").text(yingshou);
                                         $("#zhekouMoneyhly"+t+"").text(yingshou);
-                                        zhekouPrice = parseFloat(zhekouPrice) + parseFloat(prePrice[t]);
-                                        amount = parseFloat(amount) - parseFloat(prePrice[t]);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
+                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
+                                        shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
                                     }
 
@@ -1152,7 +1298,8 @@ function getTaocanXz(){
                                 else if ("特价" == preWay[t]){
                                     var yingshou = $("#yingshouhly"+t+"").val();
                                     if (undefined != yingshou){
-                                        $("#yingshouMoneyhly"+t+"").text(preWay[t]);
+                                        $("#yingshouMoneyhly"+t+"").text(tjPrice[t]);
+                                        shihsouPrice = tjPrice[t];
                                     }
                                 }
                             }
@@ -1176,13 +1323,13 @@ function getTaocanXz(){
                 //     yingshouPricce = parseFloat(yingshouAPrice) + parseFloat(zhekouAPrice);
                 // }
                 lis =  "<li>原价金额："+amountYj+"</li>";
-                lis += "<li>折扣金额："+zhekouPrice+"</li>";
+                lis += "<li>折扣金额："+dazhePrice+"</li>";
                 lis += "<li>优惠金额："+youhuiPrice+"</li>";
                 lis += "<li>抹零金额：0.00</li>";
-                lis += "<li>应收金额："+amount+"</li>";
-                lis += "<li>实收金额："+amount+"</li>";
+                lis += "<li>应收金额："+shihsouPrice+"</li>";
+                lis += "<li>实收金额："+shihsouPrice+"</li>";
                 $("#ula").append(lis)
-                $("#amountMoney").val(amount);
+                $("#amountMoney").val(shihsouPrice);
             }
 
             // var rows = sessionStorage.getItem("row");

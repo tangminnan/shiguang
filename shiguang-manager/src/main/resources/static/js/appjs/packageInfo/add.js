@@ -36,14 +36,38 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+            packageName : {
 				required : true
+			},
+            packageTime : {
+                required : true
+			},
+            effectiveDate : {
+                required : true
+			},
+            expiryDate : {
+                required : true
+			},
+            store : {
+                required : true
 			}
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
+            packageName : {
+				required : icon + "请输入套餐标题"
+			},
+            packageTime : {
+                required : icon + "请输入套餐日期"
+            },
+            effectiveDate : {
+                required : icon + "请输入生效日期"
+            },
+            expiryDate : {
+                required : icon + "请输入截至日期"
+            },
+            store : {
+                required : icon + "请选择活动门店"
+            }
 		}
 	})
 }

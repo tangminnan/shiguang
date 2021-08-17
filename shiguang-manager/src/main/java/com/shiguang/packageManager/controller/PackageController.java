@@ -244,6 +244,8 @@ public class PackageController {
             for (int i=0;i<goodsType.length;i++){
                 Map<String,Object> map = new HashMap<>();
                 map.put("goodsType",goodsType[i]);
+                String[] goosName = packageInfoDO.getGoodsName().split(",");
+                map.put("goodsName",goosName[i]);
                 String[] orginalStart = packageInfoDO.getOriginalStartPrice().split(",");
                 String[] orginalEnd = packageInfoDO.getOriginalEndPrice().split(",");
                 map.put("originalStartPrice",orginalStart[i]);
@@ -258,31 +260,58 @@ public class PackageController {
                 String[] fullEnd = packageInfoDO.getFullEndPrice().split(",");
                 map.put("fullStartPrice",fullStart[i]);
                 map.put("fullEndPrice",fullEnd[i]);
-                String[] preferWay = packageInfoDO.getPreferentialWay().split(",");
-                map.put("preferentialWay",preferWay[i]);
-                String[] unitPriceStr = packageInfoDO.getUnitPrice().split(",");
-                if (unitPriceStr.length > 0){
-                    map.put("unitPrice",unitPriceStr[i]);
-                } else {
-                    map.put("unitPrice","");
+                if (null != packageInfoDO.getPreferentialWay()){
+                    String[] preferWay = packageInfoDO.getPreferentialWay().split(",");
+                    map.put("preferentialWay",preferWay[i]);
                 }
-                String[] specialPriceStr = packageInfoDO.getSpecialPrice().split(",");
-                if (specialPriceStr.length > 0){
-                    map.put("specialPrice",specialPriceStr[i]);
-                } else {
-                    map.put("specialPrice","");
+                if (null != packageInfoDO.getUnitPrice()){
+                    String[] unitPriceStr = packageInfoDO.getUnitPrice().split(",");
+                    if (unitPriceStr.length > 0){
+                        map.put("unitPrice",unitPriceStr[i]);
+                    } else {
+                        map.put("unitPrice","");
+                    }
                 }
-                String[] preferentialPriceStr = packageInfoDO.getPreferentialPrice().split(",");
-                if (preferentialPriceStr.length > 0){
-                    map.put("preferentialPrice",preferentialPriceStr[i]);
-                } else {
-                    map.put("preferentialPrice","");
+                if (null != packageInfoDO.getSpecialPrice()){
+                    try {
+                        String[] specialPriceStr = packageInfoDO.getSpecialPrice().split(",");
+                        if (specialPriceStr.length > 0){
+                            map.put("specialPrice",specialPriceStr[i]);
+                        } else {
+                            map.put("specialPrice","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("specialPrice","");
+                    }
                 }
-                String[] preferentialRebateStr = packageInfoDO.getPreferentialRebate().split(",");
-                if (preferentialRebateStr.length > 0){
-                    map.put("preferentialRebate",preferentialRebateStr[i]);
-                } else {
-                    map.put("preferentialRebate","");
+                if (null != packageInfoDO.getPreferentialPrice()){
+                    try {
+                        String[] preferentialPriceStr = packageInfoDO.getPreferentialPrice().split(",");
+                        if (preferentialPriceStr.length >0){
+                            if (null != preferentialPriceStr[i]){
+                                map.put("preferentialPrice",preferentialPriceStr[i]);
+                            } else {
+                                map.put("preferentialPrice","");
+                            }
+                        }
+                        else{
+                            map.put("preferentialPrice","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("preferentialPrice","");
+                    }
+                }
+                if (null != packageInfoDO.getPreferentialRebate()){
+                    try {
+                        String[] preferentialRebateStr = packageInfoDO.getPreferentialRebate().split(",");
+                        if (preferentialRebateStr.length > 0){
+                            map.put("preferentialRebate",preferentialRebateStr[i]);
+                        } else {
+                            map.put("preferentialRebate","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("preferentialRebate","");
+                    }
                 }
                 packList.add(map);
             }
