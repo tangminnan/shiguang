@@ -20,7 +20,10 @@
         s.`status`,s.`state`
         from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsid left join c_brand b on s.brandnum=b.brandnum left join
         c_unit u on s.unitid= u.unitid
-         where s.state= 1
+        <where>
+            <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
+            and s.state= 1
+        </where>
         group by s.id order by s.status asc ,s.id asc
     </select>
     <select id="getshiguang" resultType="com.shiguang.product.domain.ShiguangDO">
@@ -30,7 +33,10 @@
         s.`status`,s.`state`
         from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsid left join c_brand b on s.brandnum=b.brandnum left join
         c_unit u on s.unitid= u.unitid
-        where s.state= 1
+        <where>
+            <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
+            and s.state= 1
+        </where>
         group by s.id order by s.status asc ,s.id asc
     </select>
 

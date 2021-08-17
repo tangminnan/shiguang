@@ -40,6 +40,7 @@ function load() {
                         stateId: $('#stateId').val(),
                         payid: $('#payid').val(),
                         brandname: $('#brandname').val()
+
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };

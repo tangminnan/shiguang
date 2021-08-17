@@ -256,14 +256,15 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input th:value="${tryresultsDO.sphereRighttry}" name="kjyySphod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="kjyySphod" type="text"/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjyyCylod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}" name="kjyyAxialod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.prismRighttry}" name="kjyyPrismod" class="short" type="text"/>
+                <td><input th:value="${tryresultsDO.axialRighttry}"     name="kjyyAxialod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.prismRighttry}"   name="kjyyPrismod" class="short" type="text"/>
                     △
                 </td>
                 <td>
                     <select id="kjyyJdod" name="kjyyJdod" th:value="${tryresultsDO.jdrTry}">
+                        <option value=""></option>
                         <option value="内">内</option>
                         <option value="外">外</option>
                         <option value="上">上</option>
@@ -278,13 +279,14 @@
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input th:value="${tryresultsDO.sphereLefttry}" name="kjyySphos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereLefttry}"    name="kjyySphos" type="text"/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}" name="kjyyCylos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialLefttry}" name="kjyyAxialos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.prismLefttry}" name="kjyyPrismos" class="short" type="text"/> △
+                <td><input th:value="${tryresultsDO.axialLefttry}"    name="kjyyAxialos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.prismLefttry}"    name="kjyyPrismos" class="short" type="text"/> △
                 </td>
                 <td>
                     <select name="kjyyJdos" th:value="${tryresultsDO.jdlTry}">
+                        <option value=""></option>
                         <option value="内">内</option>
                         <option value="外">外</option>
                         <option value="上">上</option>
@@ -293,7 +295,7 @@
                     <input id="kjyyJdoss" name="kjyyJdoss" th:value="${tryresultsDO.jdlTry}"
                            type="hidden">
                 </td>
-                <td><input th:value="${tryresultsDO.yuanLrty}" name="kjyyYytjos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.yuanLrty}"      name="kjyyYytjos" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightLefttry}" name="kjyyTgos" type="text"/></td>
                 <td><input name="kjyyVaos" type="text"/></td>
             </tr>
@@ -397,35 +399,39 @@
                 <td><input th:value="${tryresultsDO.prismRighttry}" name="kjjyPrismod" class="short" type="text"/> △
                 </td>
                 <td>
-                    <select name="kjjyJdod">
-                        <option></option>
+                    <select name="kjjyJdod" th:value="${tryresultsDO.jdrTry}">
+                        <option value=""></option>
                         <option value="内">内</option>
                         <option value="外">外</option>
                         <option value="上">上</option>
                         <option value="下">下</option>
                     </select>
+                    <input id="kjjyJdods" name="kjjyJdods" th:value="${tryresultsDO.jdrTry}"
+                           type="hidden">
                 </td>
-                <td><input name="kjjyYytjod" type="text"/></td>
-                <td><input name="kjjyTgod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.yuanRrty}"name="kjjyYytjod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightRighttry}"name="kjjyTgod" type="text"/></td>
                 <td><input name="kjjyVaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input name="kjjySphos" type="text"/></td>
-                <td><input name="kjjyCylos" type="text"/></td>
-                <td><input name="kjjyAxialos" type="text"/></td>
-                <td><input name="kjjyPrismos" class="short" type="text"/> △</td>
+                <td><input th:value="${tryresultsDO.sphereLefttry}"  name="kjjySphos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.cylinderLefttry}"name="kjjyCylos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"   name="kjjyAxialos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.prismLefttry}"   name="kjjyPrismos" class="short" type="text"/> △</td>
                 <td>
-                    <select name="kjjyJdos">
-                        <option></option>
+                    <select name="kjjyJdos" th:value="${tryresultsDO.jdlTry}" >
+                        <option value=""> </option>
                         <option value="内">内</option>
                         <option value="外">外</option>
                         <option value="上">上</option>
                         <option value="下">下</option>
                     </select>
+                    <input id="kjjyJdoss" name="kjjyJdoss" th:value="${tryresultsDO.jdlTry}"
+                           type="hidden">
                 </td>
-                <td><input name="kjjyYytjos" type="text"/></td>
-                <td><input name="kjjyTgos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.yuanLrty}"       name="kjjyYytjos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.heightLefttry}"  name="kjjyTgos" type="text"/></td>
                 <td><input name="kjjyVaos" type="text"/></td>
             </tr>
             <tr>
@@ -519,27 +525,27 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input name="sgjjSphod" type="text"/></td>
-                <td><input name="sgjjCylod" type="text"/></td>
-                <td><input name="sgjjAxialod" type="text"/></td>
-                <td><input name="sgjjAddod" type="text"/></td>
-                <td><input name="sgjjYytjod" type="text"/></td>
-                <td><input name="sgjjJytjod" type="text"/></td>
-                <td><input name="sgjjTgod" type="text"/></td>
-                <td><input name="sgjjYyvaod" type="text"/></td>
-                <td><input name="sgjjJyvaod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"  name="sgjjSphod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}"name="sgjjCylod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"   name="sgjjAxialod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.addRighttry}"     name="sgjjAddod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.yuanRrty}"        name="sgjjYytjod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.nearRighttry}"   name="sgjjJytjod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.heightLefttry}"   name="sgjjTgod" type="text"/></td>
+                <td><input  name="sgjjYyvaod" type="text"/></td>
+                <td><input  name="sgjjJyvaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input name="sgjjSphos" type="text"/></td>
-                <td><input name="sgjjCylos" type="text"/></td>
-                <td><input name="sgjjAxialos" type="text"/></td>
-                <td><input name="sgjjAddos" type="text"/></td>
-                <td><input name="sgjjYytjos" type="text"/></td>
-                <td><input name="sgjjJytjos" type="text"/></td>
-                <td><input name="sgjjTgos" type="text"/></td>
-                <td><input name="sgjjYyvaos" type="text"/></td>
-                <td><input name="sgjjJyvaos" type="text"/></td>
+                <td><input   th:value="${tryresultsDO.sphereLefttry}"  name="sgjjSphos" type="text"/></td>
+                <td><input   th:value="${tryresultsDO.cylinderLefttry}"name="sgjjCylos" type="text"/></td>
+                <td><input   th:value="${tryresultsDO.axialLefttry}"   name="sgjjAxialos" type="text"/></td>
+                <td><input    th:value="${tryresultsDO.addLefttry}"    name="sgjjAddos" type="text"/></td>
+                <td><input    th:value="${tryresultsDO.yuanLrty}"       name="sgjjYytjos" type="text"/></td>
+                <td><input    th:value="${tryresultsDO.nearLefttry}"   name="sgjjJytjos" type="text"/></td>
+                <td><input    th:value="${tryresultsDO.heightLefttry}"  name="sgjjTgos" type="text"/></td>
+                <td><input  name="sgjjYyvaos" type="text"/></td>
+                <td><input  name="sgjjJyvaos" type="text"/></td>
             </tr>
             <tr>
                 <td rowspan="2" colspan="1">建议镜片材质:</td>
@@ -632,9 +638,9 @@
             <tr>
                 <td>OD</td>
                 <td><input name="rxBcod" type="text"/></td>
-                <td><input name="rxSphod" type="text"/></td>
-                <td><input name="rxCylod" type="text"/></td>
-                <td><input name="rxAxialod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"  name="rxSphod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}"name="rxCylod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"   name="rxAxialod" type="text"/></td>
                 <td><input name="rxZjod" type="text"/></td>
                 <td><input name="rxVaod" type="text"/></td>
                 <td>适用镜片：<input name="rxSyjpod" style="width:60%" type="text"/></td>
@@ -650,9 +656,9 @@
             <tr>
                 <td>OS</td>
                 <td><input name="rxBcos" type="text"/></td>
-                <td><input name="rxSphos" type="text"/></td>
-                <td><input name="rxCylos" type="text"/></td>
-                <td><input name="rxAxialos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereLefttry}"  name="rxSphos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.cylinderLefttry}"name="rxCylos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"   name="rxAxialos" type="text"/></td>
                 <td><input name="rxZjos" type="text"/></td>
                 <td><input name="rxVaos" type="text"/></td>
                 <td>适用镜片：<input name="rxSyjpos" style="width:60%" type="text"/></td>
@@ -709,40 +715,44 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input name="zySphod" type="text"/></td>
-                <td><input name="zyCylod" type="text"/></td>
-                <td><input name="zyAxialod" type="text"/></td>
-                <td><input name="zyPrismod" class="short" type="text"/> △</td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="zySphod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="zyCylod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"    name="zyAxialod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.prismRighttry}"    name="zyPrismod" class="short" type="text"/> △</td>
                 <td>
-                    <select name="zyJdod">
-                        <option></option>
+                    <select name="zyJdod" th:value="${tryresultsDO.jdrTry}">
+                        <option value=""></option>
                         <option value="内">内</option>
                         <option value="外">外</option>
                         <option value="上">上</option>
                         <option value="下">下</option>
                     </select>
+                    <input id="zyJdods" name="zyJdods" th:value="${tryresultsDO.jdrTry}"
+                           type="hidden">
                 </td>
                 <td><input name="zyZytjod" type="text"/></td>
-                <td><input name="zyTgod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightRighttry}" name="zyTgod" type="text"/></td>
                 <td><input name="zyVaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input name="zySphos" type="text"/></td>
-                <td><input name="zyCylos" type="text"/></td>
-                <td><input name="zyAxialos" type="text"/></td>
-                <td><input name="zyPrismos" class="short" type="text"/> △</td>
+                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="zySphos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="zyCylos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}"   name="zyAxialos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.prismLefttry}"   name="zyPrismos" class="short" type="text"/> △</td>
                 <td>
-                    <select name="zyJdos">
-                        <option></option>
+                    <select name="zyJdos" th:value="${tryresultsDO.jdlTry}">
+                        <option value=""> </option>
                         <option value="内">内</option>
                         <option value="外">外</option>
                         <option value="上">上</option>
                         <option value="下">下</option>
                     </select>
+                    <input id="zyJdoss" name="zyJdoss" th:value="${tryresultsDO.jdlTry}"
+                           type="hidden">
                 </td>
                 <td><input name="zyZytjos" type="text"/></td>
-                <td><input name="zyTgos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightLefttry}" name="zyTgos" type="text"/></td>
                 <td><input name="zyVaos" type="text"/></td>
             </tr>
             <tr>
@@ -835,41 +845,45 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input name="sjxlSphod" type="text"/></td>
-                <td><input name="sjxlCylod" type="text"/></td>
-                <td><input name="sjxlAxialod" type="text"/></td>
-                <td><input name="sjxlSljod" class="short" type="text"/> △</td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="sjxlSphod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="sjxlCylod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"    name="sjxlAxialod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.prismRighttry}"   name="sjxlSljod" class="short" type="text"/> △</td>
                 <td>
-                    <select name="sjxlJdod">
-                        <option></option>
+                    <select name="sjxlJdod" th:value="${tryresultsDO.jdrTry}">
+                        <option value=""> </option>
                         <option value="内">内</option>
                         <option value="外">外</option>
                         <option value="上">上</option>
                         <option value="下">下</option>
                     </select>
+                    <input id="sjxlJdods" name="sjxlJdods" th:value="${tryresultsDO.jdrTry}"
+                           type="hidden">
                 </td>
                 <td><input name="sjxlYytjod" type="text"/></td>
-                <td><input name="sjxlJytjod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.heightRighttry}"name="sjxlJytjod" type="text"/></td>
                 <td><input name="sjxlYyvaod" type="text"/></td>
                 <td><input name="sjxlJyvaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input name="sjxlSphos" type="text"/></td>
-                <td><input name="sjxlCylos" type="text"/></td>
-                <td><input name="sjxlAxialos" type="text"/></td>
-                <td><input name="sjxlSljos" class="short" type="text"/> △</td>
+                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="sjxlSphos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="sjxlCylos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}"   name="sjxlAxialos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.prismLefttry}"   name="sjxlSljos" class="short" type="text"/> △</td>
                 <td>
-                    <select name="sjxlJdos">
-                        <option></option>
+                    <select name="sjxlJdos"th:value="${tryresultsDO.jdlTry}">
+                        <option value=""> </option>
                         <option value="内">内</option>
                         <option value="外">外</option>
                         <option value="上">上</option>
                         <option value="下">下</option>
                     </select>
+                    <input id="sjxlJdoss" name="sjxlJdoss" th:value="${tryresultsDO.jdlTry}"
+                           type="hidden">
                 </td>
                 <td><input name="sjxlYytjos" type="text"/></td>
-                <td><input name="sjxlJytjos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightLefttry}"  name="sjxlJytjos" type="text"/></td>
                 <td><input name="sjxlYyvaos" type="text"/></td>
                 <td><input name="sjxlJyvaos" type="text"/></td>
             </tr>
@@ -1143,7 +1157,7 @@
                         <textarea id="ypYms" rows="2" name="ypYm"></textarea>
                     </label>
                     <div class="maxL" style="margin:5px 10px;">
-                        <input type="button" value="选择"/>
+                        <!--<input type="button" value="选择"/>-->
                         <input class="empty" type="button" value="清空" onclick="cleanypYms()"/>
                     </div>
                 </td>

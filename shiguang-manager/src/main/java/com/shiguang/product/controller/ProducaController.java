@@ -3,12 +3,8 @@ package com.shiguang.product.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
-import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MaterialDO;
-import com.shiguang.mfrs.domain.UnitDO;
-import com.shiguang.mfrs.service.MaterialService;
-import com.shiguang.mfrs.service.MfrsService;
-import com.shiguang.mfrs.service.UnitService;
+import com.shiguang.mfrs.domain.*;
+import com.shiguang.mfrs.service.*;
 import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.product.domain.StyleDO;
 import com.shiguang.product.domain.TechnologyDO;
@@ -54,6 +50,14 @@ ProducaController {
     //镜架材质
     @Autowired
     private MaterialService materialService;
+    //商品类别
+    @Autowired
+    private GoodsService goodsService;
+    //支付方式
+    @Autowired
+    private PayService payService;
+    @Autowired
+    private  BrandService brandService;
 
     @GetMapping()
     String Produca(Model model) {
@@ -235,6 +239,19 @@ ProducaController {
     String findbrand(@PathVariable("mfrsid") Integer mfrsid,@PathVariable("goodsid") Integer goodsid, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("goodsid", goodsid);
+        Map<String, Object> map = new HashMap<>();
+        //品牌
+        List<BrandDO> brandDOList = brandService.list(map);
+        model.addAttribute("brandDOList", brandDOList);
+        //商品类别
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
+        //制造商
+        List<MfrsDO> mfrsDOList = mfrsService.list(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //支付
+        List<PayDO> payDOList = payService.list(map);
+        model.addAttribute("payDOList", payDOList);
         return "/product/produca/findBrand";
 
     }

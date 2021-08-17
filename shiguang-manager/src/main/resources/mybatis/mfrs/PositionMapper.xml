@@ -20,8 +20,8 @@
             <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
             <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
             <if test="status != null and status != ''">and po.status = #{status}</if>
+            and  po.state=1
         </where>
-        where  po.state=1
         group by po.position_id order by po.status asc ,po.position_id asc
     </select>
 

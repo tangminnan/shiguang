@@ -65,6 +65,7 @@
 </div>
 
 <div class="topTab m40">
+    <input id="goodsid" name="goodsid" value="4" type="hidden"/>
     <ul>
         <li><a href="../product/produca">镜架</a></li>
         <li><a href="../product/parts">配件</a></li>
@@ -92,17 +93,19 @@
                 <input type="text" value="诺瞳儿童眼镜架"/>
                 <input type="button" class="XZ-btn" value="选择"/>
             </td>
-            <td>制造商</td>
+            <td>制造商：</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
-                <input type="button" class="XZ-btn" value="选择"/>
+                <input id="mfrsid" name="mfrsid" type="hidden"/>
+                <input id="mfrsName" name="mfrsName" type="text" readonly style="background-color: #e4e4e4" />
+                <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
             </td>
         </tr>
         <tr>
             <td>商品品种</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
-                <input type="button" class="XZ-btn" value="选择"/>
+                <input id="brandnum" name="brandnum" type="hidden"/>
+                <input id="brandName" name="brandName" type="text" readonly style="background-color: #e4e4e4" />
+                <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
             <td>标准零售价格</td>
             <td>
@@ -179,5 +182,72 @@
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/product/yxdz/yxdz.js"></script>
+<script type="text/javascript">
+    <!--选择制造商-->
+    function choiceMfrs() {
+        var goodsid = document.getElementById('goodsid').value;
+        // alert(goodsid);
+        if (goodsid == "") {
+            alert("请选择采购类型！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/findmfrs/" + goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // $("#mfrsNames").val(rows[i].mfrsname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    function choiceBrand() {
+        var goodsid = document.getElementById('goodsid').value;
+        var mfrsid = document.getElementById('mfrsid').value;
+        // alert(goodsid);
+        if (mfrsid == "") {
+            alert("请选择制造商！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findbrand/" + mfrsid+"/"+goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandName").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                        // $("#brandNames").val(rows[i].brandname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+
+
+    //清空
+    function clearText() {
+        var controls = document.getElementsByTagName('input');
+        for (var i = 0; i < controls.length; i++) {
+            if (controls[i].type == 'text') {
+                controls[i].value = '';
+            }
+        }
+    }
+</script>
 </body>
 </html>
