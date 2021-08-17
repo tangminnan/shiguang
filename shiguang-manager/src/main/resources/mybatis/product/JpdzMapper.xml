@@ -66,7 +66,25 @@
         left join a_lightbelow lt on lt.lightbelow_id=j.lightbelow_left
         left join a_lightbelow ltb on ltb.lightbelow_id=j.lightbelow_right
         left join p_light lig on lig.light_id=j.light_id
-        where j.state= 1
+        <where>
+            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
+            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and j.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and j.tax_price between #{taxPrice,jdbcType=VARCHAR} and #{taxPrice2,jdbcType=VARCHAR}
+            </if>
+
+
+            <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
+            <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
+            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
+            <if test="status != null and status != ''">and j.status = #{status}</if>
+            and j.state= 1
+        </where>
         group by j.id order by j.status asc ,j.id asc
     </select>
 

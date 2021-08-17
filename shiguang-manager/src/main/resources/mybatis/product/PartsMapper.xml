@@ -22,7 +22,8 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and p.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
             </if>

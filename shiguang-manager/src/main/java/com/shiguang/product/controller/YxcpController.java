@@ -67,13 +67,21 @@ public class YxcpController {
     private CaizhiService caizhiService;
 
     @GetMapping()
-    String Yxcp() {
+    String Yxcp(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //使用类型
+        List<UsageDO> usageDOList = usageService.list(map);
+        model.addAttribute("usageDOList", usageDOList);
+        //抛弃类型分类
+        List<TypeDO> typeDOList = typeService.list(map);
+        model.addAttribute("typeDOList", typeDOList);
         return "product/yxcp/yxcp";
     }
 
     @ResponseBody
     @GetMapping("/list")
     public PageUtils list(@RequestParam Map<String, Object> params) {
+
         //查询列表数据
         Query query = new Query(params);
         List<YxcpDO> yxcpList = yxcpService.list(query);

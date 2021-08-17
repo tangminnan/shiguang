@@ -31,13 +31,13 @@ public class MfrsServiceImpl implements MfrsService {
     public List<MfrsDO> list(Map<String, Object> map) {
         return mfrsDao.list(map);
     }
+
     //    <!--查询制造商-->
-
-
     @Override
     public List<MfrsDO> findMfrs(Map<String, Object> map) {
         return mfrsDao.findMfrs(map);
     }
+
 
     @Override
     public int mgcount(Map<String, Object> map) {

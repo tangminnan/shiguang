@@ -4,24 +4,40 @@
 <mapper namespace="com.shiguang.product.dao.OldlensDao">
 
     <select id="get" resultType="com.shiguang.product.domain.OldlensDO">
-select m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandid`,o.`brandnum`,o.`factory`,o.`produc_factory`,
-o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
-o.`transfer_price`,o.`retail_price` ,o.`status`,o.`state`
-from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandnum=b.brandnum
-left join  c_unit u on o.unitid= u.unitid
-where id = #{value}
-</select>
+        select m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandid`,o.`brandnum`,o.`factory`,o.`produc_factory`,
+        o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
+        o.`transfer_price`,o.`retail_price` ,o.`status`,o.`state`
+        from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandnum=b.brandnum
+        left join  c_unit u on o.unitid= u.unitid
+        where id = #{value}
+    </select>
 
     <select id="list" resultType="com.shiguang.product.domain.OldlensDO">
-select
-m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandnum`,o.`brandid`,o.`factory`,o.`produc_factory`,
-o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
-o.`transfer_price`,o.`retail_price`,o.`status`,o.`state`
-from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandnum=b.brandnum
-left join c_unit u on o.unitid= u.unitid
-where o.state= 1
-group by o.id order by o.status asc ,o.id asc
-</select>
+        select
+        m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandnum`,o.`brandid`,o.`factory`,o.`produc_factory`,
+        o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
+        o.`transfer_price`,o.`retail_price`,o.`status`,o.`state`
+        from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsid left join c_brand b on o.brandnum=b.brandnum
+        left join c_unit u on o.unitid= u.unitid
+        <where>
+            <if test="producNum != null and producNum != ''">and o.produc_num = #{producNum}</if>
+            <if test="producName != null and producName != ''">and o.produc_name = #{producName}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and o.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and o.tax_price between #{taxPrice,jdbcType=VARCHAR} and #{taxPrice2,jdbcType=VARCHAR}
+            </if>
+
+            <if test="producFactory != null and producFactory != ''">and o.produc_factory = #{producFactory}</if>
+            <if test="producColor != null and producColor != ''">and o.produc_color = #{producColor}</if>
+            <if test="status != null and status != ''">and o.status = #{status}</if>
+            and  o.state= 1
+        </where>
+        group by o.id order by o.status asc ,o.id asc
+    </select>
 
     <select id="count" resultType="int">
         select count(*) from aa_oldlens

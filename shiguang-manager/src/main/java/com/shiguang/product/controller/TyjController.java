@@ -44,7 +44,11 @@ public class TyjController {
     private StyleService styleService;
 
     @GetMapping()
-    String Tyj() {
+    String Tyj(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //款式
+        List<StyleDO> styleDOList = styleService.list(map);
+        model.addAttribute("styleDOList", styleDOList);
         return "product/tyj/tyj";
     }
 

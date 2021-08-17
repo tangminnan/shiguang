@@ -402,6 +402,22 @@
         var contactLenss = $("input[name='contactLenss']").val();
         $("#contactLens").find("[value='" + contactLenss + "']").attr("selected", true);
 
+        //使用类型
+        var usageIds = $("input[name='usageIds']").val();
+        $("#usageId").find("[value='" + usageIds + "']").attr("selected", true);
+
+        //抛弃类型
+        var typeIds = $("input[name='typeIds']").val();
+        $("#typeId").find("[value='" + typeIds + "']").attr("selected", true);
+
+        //隐形类别
+        var invisibleIds = $("input[name='invisibleIds']").val();
+        $("#invisibleId").find("[value='" + invisibleIds + "']").attr("selected", true);
+
+        //材质
+        var caizhiIds = $("input[name='caizhiIds']").val();
+        $("#caizhiId").find("[value='" + caizhiIds + "']").attr("selected", true);
+
     });
 
     var a1 = document.getElementById("producNum");

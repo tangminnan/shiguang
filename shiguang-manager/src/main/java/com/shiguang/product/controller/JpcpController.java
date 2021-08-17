@@ -66,13 +66,24 @@ public class JpcpController {
 
     @GetMapping()
     @RequiresPermissions("product:produca:produca")
-    String Jpcp() {
+    String Jpcp(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //材料分类
+        List<LensDO> lensDOList = lensService.list(map);
+        model.addAttribute("lensDOList", lensDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        //光度分类
+        List<LightDO> lightDOList = lightService.list(map);
+        model.addAttribute("lightDOList", lightDOList);
         return "product/jpcp/jpcp";
     }
 
     @ResponseBody
     @GetMapping("/list")
     public PageUtils list(@RequestParam Map<String, Object> params) {
+
         //查询列表数据
         Query query = new Query(params);
         List<JpcpDO> jpcpList = jpcpService.list(query);

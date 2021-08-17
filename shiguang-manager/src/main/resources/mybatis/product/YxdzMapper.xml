@@ -22,7 +22,22 @@
         y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,y.`retail_price`,y.`status`,y.`state`
         from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
         left join c_unit u on y.unitid= u.unitid
-        where y.state= 1
+        <where>
+            <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
+            <if test="producName != null and producName != ''">and y.produc_name = #{producName}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and y.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and y.tax_price between #{taxPrice,jdbcType=VARCHAR} and #{taxPrice2,jdbcType=VARCHAR}
+            </if>
+            <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
+            <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
+            <if test="status != null and status != ''">and y.status = #{status}</if>
+            and y.state=1
+        </where>
         group by y.id order by y.status asc ,y.id asc
     </select>
 

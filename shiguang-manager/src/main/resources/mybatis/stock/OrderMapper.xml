@@ -15,7 +15,7 @@
         s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`, s.`position_name`, s.`create_time`,
         s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
         s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname
-        from stock_order s join c_mfrs m on s.mfrsid=m.mfrsid
+        from stock_order s left join c_mfrs m on s.mfrsid=m.mfrsid
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>

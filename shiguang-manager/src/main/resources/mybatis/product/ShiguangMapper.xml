@@ -21,8 +21,18 @@
         from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsid left join c_brand b on s.brandnum=b.brandnum left join
         c_unit u on s.unitid= u.unitid
         <where>
+            <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
             <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
-            and s.state= 1
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and s.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and s.tax_price between #{taxPrice,jdbcType=VARCHAR} and #{taxPrice2,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">and s.status = #{status}</if>
+            and  s.state= 1
         </where>
         group by s.id order by s.status asc ,s.id asc
     </select>

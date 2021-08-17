@@ -87,54 +87,56 @@
     <table border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>商品代码</td>
-            <td><input type="text" value="256987456321"></td>
+            <td><input id="producNum" name="producNum" type="text"></td>
             <td>商品名称</td>
             <td>
-                <input type="text" value="诺瞳儿童眼镜架"/>
-                <input type="button" class="XZ-btn" value="选择"/>
+                <input id="producName" name="producName" type="text"/>
             </td>
             <td>制造商：</td>
             <td>
-                <input id="mfrsid" name="mfrsid" type="hidden"/>
-                <input id="mfrsName" name="mfrsName" type="text" readonly style="background-color: #e4e4e4" />
+                <input id="mfrsid" name="mfrsid" type="hidden" value=""/>
+                <input id="mfrsname" name="mfrsname" type="text" readonly style="background-color: #e4e4e4" />
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
             </td>
         </tr>
         <tr>
             <td>商品品种</td>
             <td>
-                <input id="brandnum" name="brandnum" type="hidden"/>
-                <input id="brandName" name="brandName" type="text" readonly style="background-color: #e4e4e4" />
+                <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
             <td>标准零售价格</td>
             <td>
-                <input type="text"/> ~ <input type="text"/>
+                <input id="retailPrice" name="retailPrice" type="text"/> ~ <input id="retailPrice2" name="retailPrice2" type="text"/>
             </td>
-            <td>含税单位</td>
-            <td><input type="text"/> ~ <input type="text"/></td>
+            <td>含税单价</td>
+            <td>
+                <input id="taxPrice" name="taxPrice" type="text"/> ~ <input id="taxPrice2" name="taxPrice2" type="text"/>
+            </td>
         </tr>
         <tr>
             <td>其他商品大类</td>
             <td>
-                <select name="" id="">
-                    <option value="">--请选择--</option>
-                    <option value="">黑色镶金边</option>
+                <select id="big" name="big" >
+                    <option value="">请选择</option>
+                    <option value="其他材料">其他材料</option>
+                    <option value="低值易耗品">低值易耗品</option>
                 </select>
             </td>
             <td>启用状态</td>
             <td>
-                <select name="" id="">
-                    <option value="">--请选择--</option>
-                    <option value="">黑色镶金边</option>
+                <select id="status" name="status">
+                    <option value="">请选择</option>
+                    <option value="0">启用</option>
+                    <option value="1">禁用</option>
                 </select>
             </td>
         </tr>
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input type="button" value="保存"/>
-        <input type="button" class="empty" value="清空"/>
+        <input type="button" value="查询" onclick="reLoad()"/>
+        <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
 
@@ -192,11 +194,11 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/findmfrs/" + goodsid,// iframe的url
+                content: "/product/produca/findmfrs/" + goodsid,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsname").val(rows[i].mfrsname);
                         $("#mfrsid").val(rows[i].mfrsid);
                         // $("#mfrsNames").val(rows[i].mfrsname);
                     }
@@ -223,7 +225,7 @@
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
-                        $("#brandName").val(rows[i].brandname);
+                        $("#brandname").val(rows[i].brandname);
                         $("#brandnum").val(rows[i].brandnum);
                         // $("#brandNames").val(rows[i].brandname);
                     }

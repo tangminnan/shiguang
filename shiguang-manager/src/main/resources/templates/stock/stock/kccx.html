@@ -42,14 +42,15 @@
             </td>
             <td>制造商：</td>
             <td>
-                <input id="mfrsid" name="mfrsid" type="hidden"/>
-                <input id="mfrsName" name="mfrsName" type="text" readonly/>
+                <input id="mfrsid" name="mfrsid" type="hidden" value=""/>
+                <input id="mfrsname" name="mfrsname" type="text" readonly/>
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
             </td>
-            <td>商品品种：</td>
+            <td>商品品种</td>
             <td>
-                <input type="text"/>
-                <input type="button" class="XZ-btn" value="选择"/>
+                <!--<input id="brandnum" name="brandnum" type="hidden" value=""/>-->
+                <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
+                <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
         </tr>
         <tr>
@@ -115,7 +116,7 @@
             <td>批发合计</td>
             <td>仓位</td>
         </tr>
-        <tr>
+        <!--<tr>-->
             <!--<td colspan="3">页内合计：</td>-->
             <!--<td>45684</td>-->
             <!--<td colspan="5"></td>-->
@@ -123,7 +124,7 @@
             <!--<td></td>-->
             <!--<td>55555555</td>-->
             <!--<td></td>-->
-        </tr>
+        <!--</tr>-->
         </tbody>
     </table>
 </div>
@@ -136,7 +137,6 @@
         if (positionName == "--请选择--") {
             positionName = positionNames;
         }
-        ;
         $(".cw").remove();
         $.ajax({
             url: '/kucun/stock/selectPosion',
@@ -182,13 +182,69 @@
         })
     });
 
+
+    <!--选择制造商-->
+    function choiceMfrs() {
+        var goodsid = document.getElementById('goodsType').value;
+        // alert(goodsid);
+        if (goodsid == "") {
+            alert("请选择商品类型！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findmfrs/" + goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsname").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        // $("#mfrsNames").val(rows[i].mfrsname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    function choiceBrand() {
+        var goodsid = document.getElementById('goodsType').value;
+        var mfrsid = document.getElementById('mfrsid').value;
+        // alert(goodsid);
+        if (mfrsid == "") {
+            alert("请选择制造商！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findbrand/" + mfrsid+"/"+goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandname").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                        // $("#brandNames").val(rows[i].brandname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+
     function getall() {
         var goodsNum = $("#goodsNum").val();
         var goodsCode = $("#goodsCode").val();
         var goodsName = $("#goodsName").val();
         var goodsType = $("#goodsType option:selected").val();
-        var mfrsid = $("#mfrsid").val();
-        var brandid = $("#brandid").val();
+        var mfrsname = $("#mfrsname").val();
+        var brandname = $("#brandname").val();
         var retailPrice = $("*[name='retailPrice']").val();
         var retailPrice2 = $("*[name='retailPrice2']").val();
         var status = $('input:radio:checked').val();
@@ -208,8 +264,8 @@
                 'goodsCode': goodsCode,
                 'goodsName': goodsName,
                 'goodsType': goodsType,
-                'mfrsid': mfrsid,
-                'brandid': brandid,
+                'mfrsname': mfrsname,
+                'brandname': brandname,
                 'retailPrice': retailPrice,
                 'retailPrice2': retailPrice2,
                 'status': status,
@@ -256,7 +312,6 @@
         });
     }
 
-
     //清空
     function clearText() {
         var controls = document.getElementsByTagName('input');
@@ -267,6 +322,12 @@
         }
     }
 
+    // $("input[name=productNeedNum]").each(function(){
+    //     var NumTotal='';
+    //     var productNeedNum=document.getElementById("productNeedNum").value;
+    //      NumTotal += productNeedNum;
+    //     document.getElementById("NumTotal").value=NumTotal;
+    // });
 </script>
 
 </body>

@@ -21,7 +21,7 @@
         m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsrealname`,m.`mfrstelephone`,m.`mfrsphone`,m.`goodsid`,m.`mfrsfax`,m.`mfrsaddress`,
         m.`payid`,m.`invoiceid`,m.`creditcode`,m.`creditcodeday`,m.`medicinecode`,m.`medicinecodeday`,m.`productscode`,m.`productscodeday`,m.`remarks`,
         m.`status`,m.`state`,m.`payday`
-        from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid join c_goods g on m.goodsid=g.goodsid
+        from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on m.goodsid=g.goodsid
         <where>
             <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>

@@ -256,9 +256,12 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="kjyySphod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjyyCylod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"     name="kjyyAxialod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="kjyySphod" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjyyCylod" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"     name="kjyyAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"   name="kjyyPrismod" class="short" type="text"/>
                     △
                 </td>
@@ -279,9 +282,12 @@
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input th:value="${tryresultsDO.sphereLefttry}"    name="kjyySphos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.cylinderLefttry}" name="kjyyCylos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialLefttry}"    name="kjyyAxialos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereLefttry}"    name="kjyySphos" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderLefttry}" name="kjyyCylos" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"    name="kjyyAxialos" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input th:value="${tryresultsDO.prismLefttry}"    name="kjyyPrismos" class="short" type="text"/> △
                 </td>
                 <td>
@@ -393,9 +399,12 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input th:value="${tryresultsDO.sphereRighttry}" name="kjjySphod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjjyCylod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}" name="kjjyAxialod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}" name="kjjySphod" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjjyCylod" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}" name="kjjyAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}" name="kjjyPrismod" class="short" type="text"/> △
                 </td>
                 <td>
@@ -415,9 +424,12 @@
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input th:value="${tryresultsDO.sphereLefttry}"  name="kjjySphos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.cylinderLefttry}"name="kjjyCylos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialLefttry}"   name="kjjyAxialos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereLefttry}"  name="kjjySphos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderLefttry}"name="kjjyCylos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"   name="kjjyAxialos" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input th:value="${tryresultsDO.prismLefttry}"   name="kjjyPrismos" class="short" type="text"/> △</td>
                 <td>
                     <select name="kjjyJdos" th:value="${tryresultsDO.jdlTry}" >
@@ -525,9 +537,12 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input th:value="${tryresultsDO.sphereRighttry}"  name="sgjjSphod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.cylinderRighttry}"name="sgjjCylod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"   name="sgjjAxialod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"  name="sgjjSphod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}"name="sgjjCylod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"   name="sgjjAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input  th:value="${tryresultsDO.addRighttry}"     name="sgjjAddod" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.yuanRrty}"        name="sgjjYytjod" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.nearRighttry}"   name="sgjjJytjod" type="text"/></td>
@@ -537,9 +552,12 @@
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input   th:value="${tryresultsDO.sphereLefttry}"  name="sgjjSphos" type="text"/></td>
-                <td><input   th:value="${tryresultsDO.cylinderLefttry}"name="sgjjCylos" type="text"/></td>
-                <td><input   th:value="${tryresultsDO.axialLefttry}"   name="sgjjAxialos" type="text"/></td>
+                <td><input   th:value="${tryresultsDO.sphereLefttry}"  name="sgjjSphos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input   th:value="${tryresultsDO.cylinderLefttry}"name="sgjjCylos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input   th:value="${tryresultsDO.axialLefttry}"   name="sgjjAxialos" type="text"onblur="zhouxiang(this)"
+                             onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input    th:value="${tryresultsDO.addLefttry}"    name="sgjjAddos" type="text"/></td>
                 <td><input    th:value="${tryresultsDO.yuanLrty}"       name="sgjjYytjos" type="text"/></td>
                 <td><input    th:value="${tryresultsDO.nearLefttry}"   name="sgjjJytjos" type="text"/></td>
@@ -638,9 +656,12 @@
             <tr>
                 <td>OD</td>
                 <td><input name="rxBcod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.sphereRighttry}"  name="rxSphod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.cylinderRighttry}"name="rxCylod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"   name="rxAxialod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"  name="rxSphod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}"name="rxCylod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"   name="rxAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input name="rxZjod" type="text"/></td>
                 <td><input name="rxVaod" type="text"/></td>
                 <td>适用镜片：<input name="rxSyjpod" style="width:60%" type="text"/></td>
@@ -656,9 +677,12 @@
             <tr>
                 <td>OS</td>
                 <td><input name="rxBcos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.sphereLefttry}"  name="rxSphos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.cylinderLefttry}"name="rxCylos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialLefttry}"   name="rxAxialos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereLefttry}"  name="rxSphos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderLefttry}"name="rxCylos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"   name="rxAxialos" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input name="rxZjos" type="text"/></td>
                 <td><input name="rxVaos" type="text"/></td>
                 <td>适用镜片：<input name="rxSyjpos" style="width:60%" type="text"/></td>
@@ -715,9 +739,12 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="zySphod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="zyCylod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"    name="zyAxialod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="zySphod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="zyCylod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"    name="zyAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"    name="zyPrismod" class="short" type="text"/> △</td>
                 <td>
                     <select name="zyJdod" th:value="${tryresultsDO.jdrTry}">
@@ -736,9 +763,12 @@
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="zySphos" type="text"/></td>
-                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="zyCylos" type="text"/></td>
-                <td><input  th:value="${tryresultsDO.axialLefttry}"   name="zyAxialos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="zySphos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="zyCylos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}"   name="zyAxialos" type="text"onblur="zhouxiang(this)"
+                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input  th:value="${tryresultsDO.prismLefttry}"   name="zyPrismos" class="short" type="text"/> △</td>
                 <td>
                     <select name="zyJdos" th:value="${tryresultsDO.jdlTry}">
@@ -845,9 +875,12 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="sjxlSphod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="sjxlCylod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"    name="sjxlAxialod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="sjxlSphod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="sjxlCylod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"    name="sjxlAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"   name="sjxlSljod" class="short" type="text"/> △</td>
                 <td>
                     <select name="sjxlJdod" th:value="${tryresultsDO.jdrTry}">
@@ -867,9 +900,12 @@
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="sjxlSphos" type="text"/></td>
-                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="sjxlCylos" type="text"/></td>
-                <td><input  th:value="${tryresultsDO.axialLefttry}"   name="sjxlAxialos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="sjxlSphos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="sjxlCylos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}"   name="sjxlAxialos" type="text"onblur="zhouxiang(this)"
+                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input  th:value="${tryresultsDO.prismLefttry}"   name="sjxlSljos" class="short" type="text"/> △</td>
                 <td>
                     <select name="sjxlJdos"th:value="${tryresultsDO.jdlTry}">

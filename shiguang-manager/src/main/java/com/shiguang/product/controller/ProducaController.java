@@ -231,6 +231,13 @@ ProducaController {
         }
         return R.error();
     }
+    //跳转制造商
+    @GetMapping("/findmfrs/{goodsid}")
+    @RequiresPermissions("product:produca:findmfrs")
+    String findmfrs(@PathVariable("goodsid") Integer goodsid, Model model) {
+        model.addAttribute("goodsid", goodsid);
+        return "/mfrs/mfrs/findMfrs";
+    }
     /**
      * 选择商品品种
      */
@@ -255,9 +262,6 @@ ProducaController {
         return "/product/produca/findBrand";
 
     }
-    /**
-     * 根据制造商查询商品品种
-     */
 
 
 }

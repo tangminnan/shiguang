@@ -26,7 +26,6 @@ public interface MfrsDao {
 
     //    <!--查询制造商-->
     List<MfrsDO> findMfrs(Map<String, Object> map);
-
     int mgcount(Map<String, Object> map);
 
     int save(MfrsDO mfrs);

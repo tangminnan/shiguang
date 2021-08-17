@@ -68,13 +68,15 @@ public class KcController {
     @ResponseBody
     @RequestMapping(value = "/selectKc")
     public List<StockDO> selectSg(String goodsNum, String goodsCode, String goodsName,
-                                  Integer goodsType, String retailPrice, String retailPrice2,
+                                  Integer goodsType, String mfrsname,String brandname,String retailPrice, String retailPrice2,
                                   Long status, String positionName, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("goodsNum", goodsNum);
         map.put("goodsCode", goodsCode);
         map.put("goodsName", goodsName);
         map.put("goodsType", goodsType);
+        map.put("mfrsname", mfrsname);
+        map.put("brandname", brandname);
         map.put("retailPrice", retailPrice);
         map.put("retailPrice2", retailPrice2);
         map.put("status", status);

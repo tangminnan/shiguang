@@ -36,10 +36,8 @@ function load() {
                         // name:$('#searchName').val(),
                         producNum: $('#producNum').val(),
                         producName: $('#producName').val(),
-                        mfrsid: $('#mfrsid').val(),
-                        // mfrsName: $('#mfrsName').val(),
-
-                        brandnum: $('#brandnum').val(),
+                        mfrsname: $('#mfrsname').val(),
+                        brandname: $('#brandname').val(),
                         retailPrice: $('#retailPrice').val(),
                         retailPrice2: $('#retailPrice2').val(),
                         taxPrice: $('#taxPrice').val(),

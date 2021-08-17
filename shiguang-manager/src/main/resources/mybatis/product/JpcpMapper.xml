@@ -21,7 +21,32 @@
         m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph
         from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsid left join c_brand b on j.brandnum=b.brandnum left join
         c_unit u on j.unitid= u.unitid left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
-        where j.state= 1
+        <where>
+            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
+            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and j.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and j.tax_price between #{taxPrice,jdbcType=VARCHAR} and #{taxPrice2,jdbcType=VARCHAR}
+            </if>
+
+
+            <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
+            <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
+            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
+
+            <if test="sph != null and sph != ''">
+            and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+        </if>
+            <if test="cyl != null and cyl != ''">
+                and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">and j.status = #{status}</if>
+            and j.state= 1
+        </where>
         group by j.id order by j.status asc ,j.id asc
     </select>
     <select id="count" resultType="int">

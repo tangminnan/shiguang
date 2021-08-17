@@ -96,16 +96,15 @@
             </td>
             <td>制造商：</td>
             <td>
-                <input id="mfrsid" name="mfrsid" type="hidden"/>
-                <input id="mfrsName" name="mfrsName" type="text" readonly style="background-color: #e4e4e4" />
+                <input id="mfrsid" name="mfrsid" type="hidden" value=""/>
+                <input id="mfrsname" name="mfrsname" type="text" readonly style="background-color: #e4e4e4" />
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
             </td>
         </tr>
         <tr>
             <td>商品品种</td>
             <td>
-                <input id="brandnum" name="brandnum" type="hidden"/>
-                <input id="brandName" name="brandName" type="text" readonly style="background-color: #e4e4e4" />
+                <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
             <td>标准零售价格</td>
@@ -225,13 +224,13 @@
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/stock/findmfrs/" + goodsid,// iframe的url
+                content: "/product/produca/findmfrs/" + goodsid,// iframe的url
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
-                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsname").val(rows[i].mfrsname);
                         $("#mfrsid").val(rows[i].mfrsid);
-                        // $("#mfrsNames").val(rows[i].mfrsname);
+                        // $("#mfrsnames").val(rows[i].mfrsname);
                     }
                 }
             });
@@ -256,7 +255,7 @@ function choiceBrand() {
                 cancel: function (index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
-                        $("#brandName").val(rows[i].brandname);
+                        $("#brandname").val(rows[i].brandname);
                         $("#brandnum").val(rows[i].brandnum);
                         // $("#brandNames").val(rows[i].brandname);
                     }
