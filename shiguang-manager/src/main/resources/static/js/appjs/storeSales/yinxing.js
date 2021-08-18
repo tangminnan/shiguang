@@ -185,8 +185,8 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
     if(yxType == 1){
         $('#exampleTable').bootstrapTable('showColumn', 'checkid');
-        $('#exampleTable').bootstrapTable('showColumn', 'producNum');
-        $('#exampleTable').bootstrapTable('showColumn', 'producName');
+        $('#exampleTable').bootstrapTable('showColumn', 'goodsNum');
+        $('#exampleTable').bootstrapTable('showColumn', 'goodsName');
         $('#exampleTable').bootstrapTable('showColumn', 'retailPrice');
         $('#exampleTable').bootstrapTable('showColumn', 'cylqj');
         $('#exampleTable').bootstrapTable('showColumn', 'sphqj');
@@ -200,8 +200,8 @@ function reLoad() {
         $('#exampleTable').bootstrapTable('showColumn', 'goodsCount');
     } else {
         $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
-        $('#exampleTable').bootstrapTable('hideColumn', 'producNum');
-        $('#exampleTable').bootstrapTable('hideColumn', 'producName');
+        $('#exampleTable').bootstrapTable('hideColumn', 'goodsNum');
+        $('#exampleTable').bootstrapTable('hideColumn', 'goodsName');
         $('#exampleTable').bootstrapTable('hideColumn', 'retailPrice');
         $('#exampleTable').bootstrapTable('hideColumn', 'cylqj');
         $('#exampleTable').bootstrapTable('hideColumn', 'sphqj');

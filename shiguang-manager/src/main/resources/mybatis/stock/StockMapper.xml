@@ -861,10 +861,9 @@
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,t.`type_name`,u.`usage_name`,y.`sph_up`,y.`sph_down`,y.`cyl_up`,y.`cyl_down`,
         y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,y.`curvature_er`,s.`sph`,c.`cyl`
-        from stock st left join aa_yxdz y left join p_type t on t.type_id = y.type_id
+        from stock st left join aa_yxdz y on y.produc_num = st.goods_num left join p_type t on t.type_id = y.type_id
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
         left join p_usage u on u.usage_id = y.usage_id
-        left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -905,9 +904,9 @@
 
     <select id="countYxdz" resultType="int">
         select count(*)
-        from stock st left join aa_yxdz y left join p_type t on t.type_id = y.type_id
-        left join p_usage u on u.usage_id = y.usage_id
+        from stock st left join aa_yxdz y on y.produc_num = st.goods_num left join p_type t on t.type_id = y.type_id
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
+        left join p_usage u on u.usage_id = y.usage_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>

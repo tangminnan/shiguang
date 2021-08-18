@@ -1145,6 +1145,7 @@ public class StoreSalesController {
     public PageUtils yinxinglist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        Map<String,Object> maps = new HashMap<>();
         PageUtils pageUtils = null;
         Map<String,Object> mapstr = new HashMap<>();
         List<GoodsDO> goodsDOList = goodsService.list(mapstr);
@@ -1154,14 +1155,13 @@ public class StoreSalesController {
                 goodsId = goodsDO.getGoodsid();
             }
         }
-
         if (null != params.get("yxType")) {
             if ("0".equals(params.get("jingpianType").toString())) {
-                query.put("rightYuanYongQJ", params.get("rightYuanYongQJ"));
-                query.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
+                maps.put("rightYuanYongQJ", params.get("rightYuanYongQJ"));
+                maps.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
             } else if ("1".equals(params.get("jingpianType").toString())) {
-                query.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
-                query.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
+                maps.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
+                maps.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
             }
             if ("0".equals(params.get("yxType"))) {
                 List<YxcpDO> yxcpDOList = yxcpService.list(query);
@@ -1178,10 +1178,10 @@ public class StoreSalesController {
                         positionName = positionDO.getPositionName();
                     }
                 }
-                query.put("positionName", positionName);
-                query.put("goodsType",goodsId);
-                List<StockDO> yxdzDOList = stockService.listYxdz(query);
-                int total = yxdzService.count(query);
+                maps.put("positionName", positionName);
+                maps.put("goodsType",goodsId);
+                List<StockDO> yxdzDOList = stockService.listYxdz(maps);
+                int total = stockService.countYxdz(maps);
                 pageUtils = new PageUtils(yxdzDOList, total);
             }
         } else {
