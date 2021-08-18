@@ -36,6 +36,8 @@
 			      <if test="storeNum != null and storeNum != ''"> and FIND_IN_SET(#{storeNum},p.`store_num`) </if>
 		  		  <if test="remark != null and remark != ''"> and p.remark = #{remark} </if>
 			     <if test="goodsCode != null and goodsCode != ''"> and (pi.goods_code in (#{goodsCode}) or pi.goods_code is NULL ) </if>
+		         <!--<if test="retailCountPrice != null and retailCountPrice != ''"> and p.start_price &lt;= #{retailCountPrice} </if>-->
+			     <!--<if test="retailCountPrice != null and retailCountPrice != ''"> and p.end_price >= #{retailCountPrice} </if>-->
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

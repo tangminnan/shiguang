@@ -250,16 +250,24 @@ public class PackageController {
                 String[] orginalEnd = packageInfoDO.getOriginalEndPrice().split(",");
                 map.put("originalStartPrice",orginalStart[i]);
                 map.put("originalEndPrice",orginalEnd[i]);
-                String[] packageStart = packageInfoDO.getPackageStartPrice().split(",");
-                String[] packageEnd = packageInfoDO.getPackageEndPrice().split(",");
-                map.put("packageStartPrice",packageStart[i]);
-                map.put("packageEndPrice",packageEnd[i]);
+                if (null != packageInfoDO.getPackageStartPrice()){
+                    String[] packageStart = packageInfoDO.getPackageStartPrice().split(",");
+                    map.put("packageStartPrice",packageStart[i]);
+                }
+                if (null != packageInfoDO.getPackageEndPrice()){
+                    String[] packageEnd = packageInfoDO.getPackageEndPrice().split(",");
+                    map.put("packageEndPrice",packageEnd[i]);
+                }
                 String[] saleNumberStr = packageInfoDO.getSaleNumber().split(",");
                 map.put("saleNumber",saleNumberStr[i]);
-                String[] fullStart = packageInfoDO.getFullStartPrice().split(",");
-                String[] fullEnd = packageInfoDO.getFullEndPrice().split(",");
-                map.put("fullStartPrice",fullStart[i]);
-                map.put("fullEndPrice",fullEnd[i]);
+                if (null != packageInfoDO.getFullStartPrice()){
+                    String[] fullStart = packageInfoDO.getFullStartPrice().split(",");
+                    map.put("fullStartPrice",fullStart[i]);
+                }
+                if (null != packageInfoDO.getFullEndPrice()){
+                    String[] fullEnd = packageInfoDO.getFullEndPrice().split(",");
+                    map.put("fullEndPrice",fullEnd[i]);
+                }
                 if (null != packageInfoDO.getPreferentialWay()){
                     String[] preferWay = packageInfoDO.getPreferentialWay().split(",");
                     map.put("preferentialWay",preferWay[i]);

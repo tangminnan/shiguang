@@ -34,7 +34,8 @@ function load() {
 								offset:params.offset,
                                 packageName:$('#packageName').val(),
                                 packageType:$('#packageType').val(),
-                                checkVal: $('#check_val').val()
+                                checkVal: $('#check_val').val(),
+                                retailCountPrice: $("#retailCountPrice").val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

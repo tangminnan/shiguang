@@ -526,10 +526,11 @@ public class StoreSalesController {
     /**
      * 套餐选择
      */
-    @GetMapping("/taocanxz/{checkDate}/{check_val}")
+    @GetMapping("/taocanxz/{checkDate}/{retailCountPrice}/{check_val}")
     @RequiresPermissions("information:store:taocanxz")
-    String taocanxz(@PathVariable("checkDate") String checkDate,@PathVariable("check_val") String check_val, Model model) {
+    String taocanxz(@PathVariable("checkDate") String checkDate,@PathVariable("retailCountPrice") String retailCountPrice,@PathVariable("check_val") String check_val, Model model) {
         model.addAttribute("checkVal", checkDate);
+        model.addAttribute("retailCountPrice",retailCountPrice);
         return "storeSales/taocanxz";
     }
 
@@ -546,6 +547,7 @@ public class StoreSalesController {
         //查询列表数据
         Query query = new Query(params);
         query.put("goodsCode", params.get("checkVal"));
+        params.put("retailCountPrice",params.get("retailCountPrice"));
 //        List<PackageInfoDO> packageInfoDOList = packageInfoService.list(query);
 //        int total = packageInfoService.count(query);
         String storeNum = ShiroUtils.getUser().getStoreNum();
@@ -598,16 +600,25 @@ public class StoreSalesController {
                 String[] orginalEnd = packageInfoDO.getOriginalEndPrice().split(",");
                 map.put("originalStartPrice",orginalStart[i]);
                 map.put("originalEndPrice",orginalEnd[i]);
-                String[] packageStart = packageInfoDO.getPackageStartPrice().split(",");
-                String[] packageEnd = packageInfoDO.getPackageEndPrice().split(",");
-                map.put("packageStartPrice",packageStart[i]);
-                map.put("packageEndPrice",packageEnd[i]);
+                if (null != packageInfoDO.getPackageStartPrice()){
+                    String[] packageStart = packageInfoDO.getPackageStartPrice().split(",");
+                    map.put("packageStartPrice",packageStart[i]);
+                }
+                if (null != packageInfoDO.getPackageEndPrice()){
+                    String[] packageEnd = packageInfoDO.getPackageEndPrice().split(",");
+                    map.put("packageEndPrice",packageEnd[i]);
+                }
+
                 String[] saleNumberStr = packageInfoDO.getSaleNumber().split(",");
                 map.put("saleNumber",saleNumberStr[i]);
-                String[] fullStart = packageInfoDO.getFullStartPrice().split(",");
-                String[] fullEnd = packageInfoDO.getFullEndPrice().split(",");
-                map.put("fullStartPrice",fullStart[i]);
-                map.put("fullEndPrice",fullEnd[i]);
+                if (null != packageInfoDO.getFullStartPrice()){
+                    String[] fullStart = packageInfoDO.getFullStartPrice().split(",");
+                    map.put("fullStartPrice",fullStart[i]);
+                }
+                if (null != packageInfoDO.getFullEndPrice()){
+                    String[] fullEnd = packageInfoDO.getFullEndPrice().split(",");
+                    map.put("fullEndPrice",fullEnd[i]);
+                }
                 if (null != packageInfoDO.getPreferentialWay()){
                     String[] preferWay = packageInfoDO.getPreferentialWay().split(",");
                     map.put("preferentialWay",preferWay[i]);

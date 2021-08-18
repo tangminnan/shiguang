@@ -15,7 +15,8 @@ function getKjpeijian() {
             }
             for (var i=0;i<rows.length;i++){
                 var goodsNumStr = rows[i].goodsNum;
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
+                var retailPrice = rows[i].retailPrice;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -85,7 +86,8 @@ function getTaiyangjing(){
             }
             for (var i=0;i<rows.length;i++){
                 var goodsNumStr = rows[i].goodsNum;
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
+                var retailPrice = rows[i].retailPrice;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -155,7 +157,8 @@ function getHaocai() {
             }
             for (var i=0;i<rows.length;i++){
                 var goodsNumStr = rows[i].goodsNum;
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
+                var retailPrice = rows[i].retailPrice;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -225,7 +228,8 @@ function getLaohuajing() {
             }
             for (var i=0;i<rows.length;i++){
                 var goodsNumStr = rows[i].goodsNum;
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
+                var retailPrice = rows[i].retailPrice;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -292,7 +296,8 @@ function getShiguang(){
             }
             for (var i=0;i<rows.length;i++){
                 var goodsNumStr = rows[i].goodsNum;
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
+                var retailPrice = rows[i].retailPrice;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -363,7 +368,8 @@ function getHuliye(){
             }
             for (var i=0;i<rows.length;i++){
                 var goodsNumStr = rows[i].goodsNum;
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
+                var retailPrice = rows[i].retailPrice;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -434,7 +440,8 @@ function getPeijian(){
             }
             for (var i=0;i<rows.length;i++){
                 var goodsNumStr = rows[i].goodsNum;
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
+                var retailPrice = rows[i].retailPrice;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -544,7 +551,8 @@ function getYinxing(){
             }
             for (var i=0;i<rows.length;i++){
                 var goodsNumStr = rows[i].goodsNum;
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
+                var retailPrice = rows[i].retailPrice;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -614,7 +622,8 @@ function getYinxingpj(){
             }
             for (var i=0;i<rows.length;i++){
                 var goodsNumStr = rows[i].goodsNum;
-                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\")'/></td>";
+                var retailPrice = rows[i].retailPrice;
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
@@ -856,7 +865,7 @@ function getTaocanXz(){
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '520px' ],
-        content : "/information/store/taocanxz/"+checkDate+"/"+check_val,// iframe的url
+        content : "/information/store/taocanxz/"+checkDate+"/"+retailCountPrice +"/"+check_val,// iframe的url
         cancel: function(index, layero){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             var yingshouPricce=0.00;
@@ -1360,10 +1369,11 @@ function getHYTc(){
 }
 
 var check_val = [];
-function getGoodsInfoSelect(obj){
+var retailCountPrice=0.00;
+function getGoodsInfoSelect(obj,countPrice){
     //var obj = document.getElementsByName("producaNum");
     check_val.push(obj);
-
+    retailCountPrice = (parseFloat(retailCountPrice) + parseFloat(countPrice)).toFixed(2);
     // for(k in obj){
     //     if(obj[k].checked)
     //         check_val.push(obj[k].value);
