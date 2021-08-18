@@ -60,12 +60,18 @@ public class StockController {
         return "stock/stock/stock";
     }
 
+    /**
+     * 采购列表
+     */
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("stock:stock:stock")
     public PageUtils list(@RequestParam Map<String, Object> params) {
+        //———获取当前登录所在部门编码————
+        String storeNum =  ShiroUtils.getUser().getStoreNum();
         //查询列表数据
         Query queryOrder = new Query(params);
+        queryOrder.put("storeNum",storeNum);
         List<OrderDO> orderDOList = orderService.list(queryOrder);
         int total = orderService.count(queryOrder);
         PageUtils pageUtils = new PageUtils(orderDOList, total);
@@ -85,6 +91,9 @@ public class StockController {
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         //仓位
+        //———获取当前登录所在部门编码————
+        String storeNum =  ShiroUtils.getUser().getStoreNum();
+        map.put("storeNum", storeNum);
         List<PositionDO> positionDOList = positionService.list(map);
         model.addAttribute("positionDOList", positionDOList);
         //———获取当前登录用户的名称————

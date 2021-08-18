@@ -1110,9 +1110,9 @@
     <select id="kccxList" resultType="com.shiguang.stock.domain.StockDO">
         select s.goods_num,s.goods_code,s.goods_name,s.goods_count,g.goodsname
         'gdname',m.mfrsname,s.retail_price,s.price_sum,
-        s.cost_price,s.cost_sum,s.whole_price,s.whole_sum,s.position_name,b.brandname
+        s.cost_price,s.cost_sum,s.whole_price,s.whole_sum,s.position_name
         from stock s left join c_goods g on s.goods_type=g.goodsid left join c_mfrs m on s.mfrsid=m.mfrsid
-        left join c_position po on s.position_name=po.position_name left join c_brand b on s.mfrsid=b.mfrsid
+        left join c_position po on s.position_name=po.position_name
         <where>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
             <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
@@ -1125,6 +1125,7 @@
             </if>
             <if test="status != null and status != ''">and po.status = #{status}</if>
             <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
+            <if test="storeNum != null and storeNum != ''">and po.depart_number = #{storeNum}</if>
         </where>
     </select>
 </mapper>

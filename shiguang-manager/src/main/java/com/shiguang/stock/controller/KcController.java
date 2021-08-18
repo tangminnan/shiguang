@@ -1,5 +1,6 @@
 package com.shiguang.stock.controller;
 
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.GoodsService;
@@ -71,6 +72,10 @@ public class KcController {
                                   Integer goodsType, String mfrsname,String brandname,String retailPrice, String retailPrice2,
                                   Long status, String positionName, Model model) {
         Map<String, Object> map = new HashMap<>();
+
+        //———获取当前登录所在部门编码————
+        String storeNum =  ShiroUtils.getUser().getStoreNum();
+        map.put("storeNum", storeNum);
         map.put("goodsNum", goodsNum);
         map.put("goodsCode", goodsCode);
         map.put("goodsName", goodsName);

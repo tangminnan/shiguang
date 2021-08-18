@@ -16,31 +16,33 @@
         s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
         s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname
         from stock_order s left join c_mfrs m on s.mfrsid=m.mfrsid
+        left join c_position po on s.position_name=po.position_name
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and goods_name = #{goodsName}</if>
-            <if test="goodsCount != null and goodsCount != ''">and goods_count = #{goodsCount}</if>
-            <if test="goodsType != null and goodsType != ''">and goods_type = #{goodsType}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
-            <if test="priceSum != null and priceSum != ''">and price_sum = #{priceSum}</if>
-            <if test="costPrice != null and costPrice != ''">and cost_price = #{costPrice}</if>
-            <if test="costSum != null and costSum != ''">and cost_sum = #{costSum}</if>
-            <if test="wholePrice != null and wholePrice != ''">and whole_price = #{wholePrice}</if>
-            <if test="wholeSum != null and wholeSum != ''">and whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
-            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
-            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
-            <if test="orderNumber != null and orderNumber != ''">and order_number = #{orderNumber}</if>
-            <if test="yundanNumber != null and yundanNumber != ''">and yundan_number = #{yundanNumber}</if>
-            <if test="zhidanPeople != null and zhidanPeople != ''">and zhidan_people = #{zhidanPeople}</if>
-            <if test="danjuDay != null and danjuDay != ''">and danju_day = #{danjuDay}</if>
-            <if test="tuihuoNumber != null and tuihuoNumber != ''">and tuihuo_number = #{tuihuoNumber}</if>
-            <if test="factoryNumber != null and factoryNumber != ''">and factory_number = #{factoryNumber}</if>
-            <if test="beizhu != null and beizhu != ''">and beizhu = #{beizhu}</if>
-            <if test="unit != null and unit != ''">and unit = #{unit}</if>
+            <if test="id != null and id != ''">and s.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and s.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and s.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and s.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and s.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and s.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and s.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and s.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and s.position_name = #{positionName}</if>
+            <if test="createTime != null and createTime != ''">and s.create_time = #{createTime}</if>
+            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number = #{danjuNumber}</if>
+            <if test="orderNumber != null and orderNumber != ''">and s.order_number = #{orderNumber}</if>
+            <if test="yundanNumber != null and yundanNumber != ''">and s.yundan_number = #{yundanNumber}</if>
+            <if test="zhidanPeople != null and zhidanPeople != ''">and s.zhidan_people = #{zhidanPeople}</if>
+            <if test="danjuDay != null and danjuDay != ''">and s.danju_day = #{danjuDay}</if>
+            <if test="tuihuoNumber != null and tuihuoNumber != ''">and s.tuihuo_number = #{tuihuoNumber}</if>
+            <if test="factoryNumber != null and factoryNumber != ''">and s.factory_number = #{factoryNumber}</if>
+            <if test="beizhu != null and beizhu != ''">and s.beizhu = #{beizhu}</if>
+            <if test="unit != null and unit != ''">and s.unit = #{unit}</if>
+            <if test="storeNum != null and storeNum != ''">and po.depart_number = #{storeNum}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
