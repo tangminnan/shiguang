@@ -37,6 +37,10 @@
             <li>性别：<input name="sexx" th:value="${memberDO.sexx}" class="short" type="text"/></li>
             <li>年龄：<input name="age" th:value="${memberDO.age}" class="short" type="text"/></li>
             <li>电话：<input name="phone1" th:value="${memberDO.phone1}" type="text"/></li>
+            <input id="memberId" name="memberId" th:value="${memberDO.id}" type="hidden">
+            <input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}" type="hidden">
+            <input id="memname" name="memname" th:value="${memberDO.name}" type="hidden">
+            <input id="memberNumber" name="memberNumber" th:value="${memberDO.cardNumber}" type="hidden">
             <li><span onclick="getMemberDetail()">详情</span></li>
         </ul>
     </div>

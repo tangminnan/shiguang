@@ -38,7 +38,11 @@
         from c_mfrs m
         <where>
             <if test="goodsIds != null and goodsIds != ''">and m.goodsid LIKE concat('%', #{goodsIds},'%')</if>
-            <if test="goodsid != null and goodsid != ''">and m.goodsid = #{goodsid}</if>
+            <if test="goodsid != null and goodsid != ''">and m.goodsid LIKE concat('%', #{goodsid},'%')</if>
+            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="status != null and status != ''">and m.status = #{status}</if>
+            <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state= 1
         </where>
         group by m.mfrsid order by m.mfrsid asc

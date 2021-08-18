@@ -13,6 +13,19 @@
         c_unit u on p.unitid= u.unitid
         where id = #{value}
 	</select>
+    <!--是否存在商品代码-->
+    <select id="haveNum" resultType="com.shiguang.product.domain.ProducaDO">
+        select
+        p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,
+        p.`produc_color`,p.`unitid`,p.`batchid`,p.`size`,p.`technology_id`,p.`materialid`,p.`color`,p.`style_id`,p.`year`,p.`tax`,p.`tax_price`,
+        p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`status`,p.`state`,
+        m.mfrsname,b.brandname,u.unitname
+        from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
+        c_unit u on p.unitid= u.unitid
+        where p.`produc_num` = #{producNum} order by p.`id`
+	</select>
+
+
     <!--//修改时显示制造商和商品品种名称-->
     <select id="list" resultType="com.shiguang.product.domain.ProducaDO">
         select

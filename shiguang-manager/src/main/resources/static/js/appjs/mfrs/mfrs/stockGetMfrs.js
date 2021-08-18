@@ -35,6 +35,7 @@ function load() {
                         mfrsnum: $('#mfrsnum').val(),
                         mfrsname: $('#mfrsname').val(),
                         goodsids: $('#goodsids').val(),
+                        goodsid:$('#goodsid').val(),
                         status: $('#status').val(),
                         invoiceid: $('#invoiceid').val()
                         // username:$('#searchName').val()

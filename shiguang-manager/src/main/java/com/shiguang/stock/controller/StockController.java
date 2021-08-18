@@ -282,6 +282,11 @@ public class StockController {
     @GetMapping("/findmfrs/{goodsid}")
     @RequiresPermissions("stock:stock:findmfrs")
     String findmfrs(@PathVariable("goodsid") Integer goodsid, Model model) {
+
+        //商品类别
+        Map<String, Object> map = new HashMap<>();
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
         model.addAttribute("goodsid", goodsid);
         return "/mfrs/mfrs/stockGetMfrs";
     }

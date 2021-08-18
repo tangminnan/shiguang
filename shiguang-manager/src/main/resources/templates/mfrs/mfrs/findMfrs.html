@@ -39,9 +39,9 @@
                             <select name="invoiceid" id="invoiceid" class="form-control" data-actions-box="false"
                                     data-size="5">
                                 <option value="">开票状态</option>
-                                <option th:each="ls:${invoiceDOList}"
-                                        th:text="${ls.invoicestate}"
-                                        th:value="${ls.invoiceid}"></option>
+                                <option value="1">开票</option>
+                                <option value="2">不开票</option>
+
                             </select>
                         </div>
 

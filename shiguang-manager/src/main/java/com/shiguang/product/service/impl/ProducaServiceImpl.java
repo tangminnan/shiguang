@@ -20,6 +20,12 @@ public class ProducaServiceImpl implements ProducaService {
     public ProducaDO get(Long id) {
         return producaDao.get(id);
     }
+    //判断是否存在制造商代码
+
+    @Override
+    public List<ProducaDO> haveNum(Map<String, Object> map) {
+        return producaDao.haveNum(map);
+    }
 
     //修改时显示制造商和商品品种名称
     @Override

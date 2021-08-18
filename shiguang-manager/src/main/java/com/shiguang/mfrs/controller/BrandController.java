@@ -301,6 +301,10 @@ public class BrandController {
     @GetMapping("/findmfrs/{goodsids}")
     @RequiresPermissions("mfrs:brand:findmfrs")
     String findmfrs(@PathVariable("goodsids") Integer goodsids, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //商品
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
         model.addAttribute("goodsids", goodsids);
         return "mfrs/brand/findmfrs";
     }

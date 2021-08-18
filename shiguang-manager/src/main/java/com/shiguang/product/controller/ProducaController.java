@@ -162,6 +162,14 @@ ProducaController {
     @PostMapping("/save")
     @RequiresPermissions("product:produca:add")
     public R save(ProducaDO produca) {
+//        //判断是否已存在商品代码
+//        String productNum = produca.getProducNum();
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("productNum",productNum);
+//        List<ProducaDO> haveNum=producaService.haveNum(map);
+//        if (haveNum.size() > 0) {
+//            return R.error("制造商代码已存在");
+//        }
         if (producaService.save(produca) > 0) {
             return R.ok();
         }

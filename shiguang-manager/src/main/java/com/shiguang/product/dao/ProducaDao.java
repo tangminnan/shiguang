@@ -19,6 +19,9 @@ public interface ProducaDao {
 
     ProducaDO get(Long id);
 
+    //判断是否存在商品代码
+    List<ProducaDO> haveNum(Map<String, Object> map);
+
 
     //修改时显示制造商和商品品种名称
     List<ProducaDO> list(Map<String, Object> map);
