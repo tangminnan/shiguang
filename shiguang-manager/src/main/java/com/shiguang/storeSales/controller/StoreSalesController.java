@@ -758,7 +758,7 @@ public class StoreSalesController {
             if (null != positionDO) {
                 positionName = positionDO.getPositionName();
             }
-            query.put("positionName", positionName);
+            maps.put("positionName", positionName);
         }
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
@@ -779,16 +779,16 @@ public class StoreSalesController {
             }
             if ("0".equals(dzType)) {
                 List<StockDO> jpcpDOList = stockService.listJpcp(maps);
-                int total = stockService.countJpcp(query);
+                int total = stockService.countJpcp(maps);
                 pageUtils = new PageUtils(jpcpDOList, total);
             } else if ("1".equals(dzType)) {
                 List<StockDO> jpdzDOList = stockService.listJpdz(maps);
-                int total = stockService.countJpdz(query);
+                int total = stockService.countJpdz(maps);
                 pageUtils = new PageUtils(jpdzDOList, total);
             }
         } else {
             List<StockDO> jpcpDOList = stockService.listJpcp(maps);
-            int total = stockService.countJpcp(query);
+            int total = stockService.countJpcp(maps);
             pageUtils = new PageUtils(jpcpDOList, total);
         }
         return pageUtils;

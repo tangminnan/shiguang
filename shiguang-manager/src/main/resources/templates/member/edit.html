@@ -271,9 +271,6 @@
             var provincename = $("input[name='provincename']").val();
             var cityname = $("input[name='cityname']").val();
             var areaname = $("input[name='areaname']").val();
-            alert(provincename)
-			alert(cityname)
-			alert(areaname)
             $("#eprovinceName").find("[value="+provincename+"]").attr("selected",true);
             $("#eprovinceName").trigger("change");
             $("#ecityName").find("[value="+cityname+"]").attr("selected",true);

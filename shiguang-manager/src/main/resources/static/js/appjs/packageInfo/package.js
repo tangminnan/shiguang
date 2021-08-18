@@ -60,10 +60,10 @@ function load() {
 									field : 'packageType', 
 									title : '套餐分类' 
 								},
-																{
-									field : 'packagePrice', 
-									title : '套餐金额' 
-								},
+								// 								{
+								// 	field : 'packagePrice',
+								// 	title : '套餐金额'
+								// },
 																{
 									title : '操作',
 									field : 'id',

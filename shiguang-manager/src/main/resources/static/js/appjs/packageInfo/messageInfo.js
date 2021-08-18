@@ -81,7 +81,7 @@ $("#addDanyiGoods").click(function () {
     htmldy += "<select name='fenlei' id='fenlei"+b+"' style='display: none'></select>";
     htmldy += "<input name='qoujingStart' type='text' id='qoujingStart"+b+"' style='display: none;'/><input type='text' name='qoujingEnd' id='qoujingEnd"+b+"' style='display: none;'/>";
     htmldy += "<input name='zhuingStart' type='text' id='zhujingStart"+b+"' style='display: none;'/><input name='zhujingEnd' type='text' id='zhujingEnd"+b+"' style='display: none;'/>";
-    htmldy += "<input type='text' style='width: 20%;' name='goodsName' id='goodsName"+b+"'/><input type='hidden' style='width: 20%;' name='goodsid' id='goodsid"+b+"'/><input type='button' id='xuanze"+b+"' onclick='getGoodsInfo(this)' value='选择'/>";
+    htmldy += "<input type='text' style='width: 20%;' name='goodsName' id='goodsName"+b+"'/><input type='hidden' style='width: 20%;' name='goodsCode' id='goodsid"+b+"'/><input type='button' id='xuanze"+b+"' onclick='getGoodsInfo(this)' value='选择'/>";
     htmldy += "</td>";
     htmldy += "<td><input class=\"short\" type=\"text\" id='goodsYJStart"+b+"' name='originalStartPrice' /> 至 <input class=\"short\" type=\"text\" id='goodsYJEnd"+b+"' name='originalEndPrice'></td>";
     htmldy += "<td><input class=\"short\" type=\"text\" id='taocanStart"+b+"' name='packageStartPrice' onchange='getStartPrice(this)' /> 至 <input class=\"short\" type=\"text\" id='taocanEnd"+b+"' name='packageEndPrice' onchange='getEndPrice(this)'></td>";

@@ -873,7 +873,8 @@ function getTaocanXz(){
                             youhuiPrice = rows[i].fanxianPrice
                             //var ys = $("#amountMoney").val();
                             //alert(ys);
-                            amount = (parseFloat(amount) - parseFloat(youhuiPrice)).toFixed(2);
+                            //amount = (parseFloat(amount) - parseFloat(youhuiPrice)).toFixed(2);
+                            shihsouPrice = (parseFloat(amount) - parseFloat(youhuiPrice)).toFixed(2);
                             //alert(yingshouPricce);
                         } else if (rows[i].danyiyh == '打折'){
                             dazhePrice = (parseFloat(amount) * parseFloat(rows[i].dazhePrice)).toFixed(2);
