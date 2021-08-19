@@ -1,5 +1,6 @@
 package com.shiguang.mfrs.service;
 
+import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.CompanyDO;
 
 import java.util.List;
@@ -21,10 +22,13 @@ public interface CompanyService {
 	int count(Map<String, Object> map);
 	
 	int save(CompanyDO company);
-	
+	//修改启用状态
 	int update(CompanyDO company);
 	
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	//删除修改状态
+	int updateState(CompanyDO companyDO);
 }

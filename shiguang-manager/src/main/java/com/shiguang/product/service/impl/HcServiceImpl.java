@@ -3,6 +3,7 @@ package com.shiguang.product.service.impl;
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.product.dao.HcDao;
 import com.shiguang.product.domain.HcDO;
+import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.product.service.HcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,10 +58,17 @@ public class HcServiceImpl implements HcService {
     public List<BrandDO> choice(Integer mfrsid) {
         return hcDao.choice(mfrsid);
     }
-    //删除修改状态
 
+    //删除修改状态
     @Override
     public int updateState(HcDO hc) {
         return hcDao.updateState(hc);
+    }
+
+
+    //判断是否存在商品代码
+    @Override
+    public List<HcDO> haveNum(Map<String, Object> map) {
+        return hcDao.haveNum(map);
     }
 }

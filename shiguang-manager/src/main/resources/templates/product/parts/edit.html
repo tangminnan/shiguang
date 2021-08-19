@@ -75,13 +75,13 @@
                            type="hidden">
                     <em>*</em>
                 </td>
-                <td>商品编号</td>
+                <td>商品编号：</td>
                 <td>
                     <input id="proid" name="proid" th:value="${parts.proid}" type="text" onkeyup="choiceProid(this)"
                            oninput="if(value.length>4)value=value.slice(0,4)">
                     <em>*</em>
                 </td>
-                <td>配件型</td>
+                <td>配件型：</td>
                 <td>
                     <select id="partsStyle" name="partsStyle">
                         <option></option>
@@ -92,7 +92,7 @@
                 </td>
             </tr>
             <tr>
-                <td>计量单位</td>
+                <td>计量单位：</td>
                 <td>
                     <select name="unitid" id="unitid" th:value="${parts.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -115,9 +115,9 @@
                 </td>
                 <td>销售状态：</td>
                 <td>
-                    <input th:field="*{parts.status}" name="status" value="1" type="radio">
+                    <input th:field="*{parts.xsstate}" name="xsstate" value="1" type="radio">
                     <label for="PH-S" style="margin-right: 5%">禁用</label>
-                    <input th:field="*{parts.status}" name="status" value="0" type="radio">
+                    <input th:field="*{parts.xsstate}" name="xsstate" value="0" type="radio">
                     <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>
@@ -131,7 +131,7 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td style="width: 80%">折射率</td>
+                <td style="width: 80%">折射率：</td>
                 <td style="width: 80%">
                     <select id="refractivityid" name="refractivityid" th:value="${parts.refractivityid}"
                             class="form-control"

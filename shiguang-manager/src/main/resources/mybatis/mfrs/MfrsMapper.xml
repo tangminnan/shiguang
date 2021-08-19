@@ -5,14 +5,14 @@
 
     <select id="get" resultType="com.shiguang.mfrs.domain.MfrsDO">
 		select `mfrsid`,`mfrsnum`,`mfrsname`,`mfrscontacts`,`mfrsrealname`,`mfrstelephone`,`mfrsphone`,`goodsid`,`mfrsfax`,`mfrsaddress`,
-		`payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday`,`remarks`,`status`,
+		`payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday`,`remarks`,`xsstate`,
 		`state`,`payday` from c_mfrs where mfrsid = #{value}
 	</select>
     <!--//判断是否存在制造商代码-->
     <select id="haveNum" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select `mfrsid`,`mfrsnum`,`mfrsname`,`mfrscontacts`,`mfrsrealname`,`mfrstelephone`,`mfrsphone`,`goodsid`,`mfrsfax`,`mfrsaddress`,
         `payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday`,
-        `remarks`,`status`,`state`,`payday`
+        `remarks`,`xsstate`,`state`,`payday`
          from c_mfrs WHERE mfrsnum = #{mfrsnum} order by mfrsid
     </select>
     <!--//【制造商页面List】-->
@@ -20,18 +20,31 @@
         select
         m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsrealname`,m.`mfrstelephone`,m.`mfrsphone`,m.`goodsid`,m.`mfrsfax`,m.`mfrsaddress`,
         m.`payid`,m.`invoiceid`,m.`creditcode`,m.`creditcodeday`,m.`medicinecode`,m.`medicinecodeday`,m.`productscode`,m.`productscodeday`,m.`remarks`,
-        m.`status`,m.`state`,m.`payday`
+        m.`xsstate`,m.`state`,m.`payday`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on m.goodsid=g.goodsid
         <where>
             <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid}</if>
-            <if test="status != null and status != ''">and m.status = #{status}</if>
+            <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state =1
         </where>
-        group by m.mfrsid order by m.status asc ,m.mfrsid asc
+        group by m.mfrsid order by m.xsstate asc ,m.mfrsid asc
     </select>
+
+    <select id="count" resultType="int">
+    select count(*) from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on m.goodsid=g.goodsid
+        <where>
+            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid}</if>
+            <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
+            <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
+            and m.state =1
+        </where>
+    </select>
+
     <!--制造商查询-->
     <select id="findMfrs" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
@@ -41,37 +54,22 @@
             <if test="goodsid != null and goodsid != ''">and m.goodsid LIKE concat('%', #{goodsid},'%')</if>
             <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="status != null and status != ''">and m.status = #{status}</if>
+            <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state= 1
         </where>
         group by m.mfrsid order by m.mfrsid asc
     </select>
-    <select id="mgcount" resultType="int">
-        select count(*) from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid
+    <select id="findMfrscount" resultType="int">
+        select count(*) from c_mfrs m
         <where>
-            <if test="mfrsid != null and mfrsid != ''">and m.mfrsid = #{mfrsid}</if>
+            <if test="goodsIds != null and goodsIds != ''">and m.goodsid LIKE concat('%', #{goodsIds},'%')</if>
+            <if test="goodsid != null and goodsid != ''">and m.goodsid LIKE concat('%', #{goodsid},'%')</if>
             <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="mfrscontacts != null and mfrscontacts != ''">and m.mfrscontacts = #{mfrscontacts}</if>
-            <if test="mfrsrealname != null and mfrsrealname != ''">and m.mfrsrealname = #{mfrsrealname}</if>
-            <if test="mfrstelephone != null and mfrstelephone != ''">and m.mfrstelephone = #{mfrstelephone}</if>
-            <if test="mfrsphone != null and mfrsphone != ''">and m.mfrsphone = #{mfrsphone}</if>
-            <if test="goodsid != null and goodsid != ''">and mg.goodsid = #{goodsid}</if>
-            <if test="mfrsfax != null and mfrsfax != ''">and m.mfrsfax = #{mfrsfax}</if>
-            <if test="mfrsaddress != null and mfrsaddress != ''">and m.mfrsaddress = #{mfrsaddress}</if>
-            <if test="payid != null and payid != ''">and m.payid = #{payid}</if>
+            <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
-            <if test="creditcode != null and creditcode != ''">and m.creditcode = #{creditcode}</if>
-            <if test="creditcodeday != null and creditcodeday != ''">and m.creditcodeday = #{creditcodeday}</if>
-            <if test="medicinecode != null and medicinecode != ''">and m.medicinecode = #{medicinecode}</if>
-            <if test="medicinecodeday != null and medicinecodeday != ''">and m.medicinecodeday = #{medicinecodeday}</if>
-            <if test="productscode != null and productscode != ''">and m.productscode = #{productscode}</if>
-            <if test="productscodeday != null and productscodeday != ''">and m.productscodeday = #{productscodeday}</if>
-            <if test="remarks != null and remarks != ''">and m.remarks = #{remarks}</if>
-            <if test="status != null and status != ''">and m.status = #{status}</if>
-            <if test="state != null and state != ''">and m.state = #{state}</if>
-            <if test="payday != null and payday != ''">and m.payday = #{payday}</if>
+            and m.state= 1
         </where>
     </select>
 
@@ -97,7 +95,7 @@
 			`productscode`,
 			`productscodeday`,
 			`remarks`,
-			`status`,
+			`xsstate`,
 			`state`,
 			`payday`
 		)
@@ -121,7 +119,7 @@
 			#{productscode},
 			#{productscodeday},
 			#{remarks},
-			#{status},
+			#{xsstate},
 			#{state},
 			#{payday}
 		)
@@ -148,7 +146,7 @@
             <if test="productscode != null">`productscode` = #{productscode},</if>
             <if test="productscodeday != null">`productscodeday` = #{productscodeday},</if>
             <if test="remarks != null">`remarks` = #{remarks},</if>
-            <if test="status != null">`status` = #{status},</if>
+            <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state},</if>
             <if test="payday != null">`payday` = #{payday}</if>
         </set>

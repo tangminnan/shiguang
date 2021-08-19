@@ -8,6 +8,7 @@ import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.UnitService;
 import com.shiguang.product.domain.HlyDO;
+import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.product.service.HlyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -94,6 +95,14 @@ public class HlyController {
     @ResponseBody
     @PostMapping("/save")
     public R save(HlyDO hly) {
+        //判断是否已存在商品代码
+        String producNum = hly.getProducNum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("producNum",producNum);
+        List<HlyDO> haveNum=hlyService.haveNum(map);
+        if (haveNum.size() > 0) {
+            return R.error("商品代码已存在");
+        }
         if (hlyService.save(hly) > 0) {
             return R.ok();
         }
@@ -139,7 +148,7 @@ public class HlyController {
     public R updateEnable(Long id, Long enable) {
         HlyDO hlyDO = new HlyDO();
         hlyDO.setId(id);
-        hlyDO.setStatus(enable);
+        hlyDO.setXsstate(enable);
         hlyService.update(hlyDO);
         return R.ok();
     }

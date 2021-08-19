@@ -27,8 +27,8 @@ public class YizhuServiceImpl implements YizhuService {
     }
 
     @Override
-    public int countYizhu(Map<String, Object> map) {
-        return yizhuDao.countYizhu(map);
+    public int findYizhucount(Map<String, Object> map) {
+        return yizhuDao.findYizhucount(map);
     }
 
     @Override

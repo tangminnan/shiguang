@@ -7,6 +7,7 @@ import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.UnitService;
+import com.shiguang.product.domain.HcDO;
 import com.shiguang.product.domain.StyleDO;
 import com.shiguang.product.domain.TyjDO;
 import com.shiguang.product.service.StyleService;
@@ -33,9 +34,7 @@ import java.util.Map;
 public class TyjController {
     @Autowired
     private TyjService tyjService;
-    //制造商
-    @Autowired
-    private MfrsService mfrsService;
+
     //计量单位
     @Autowired
     private UnitService unitService;
@@ -112,6 +111,14 @@ public class TyjController {
     @ResponseBody
     @PostMapping("/save")
     public R save(TyjDO tyj) {
+        //判断是否已存在商品代码
+        String producNum = tyj.getProducNum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("producNum",producNum);
+        List<TyjDO> haveNum=tyjService.haveNum(map);
+        if (haveNum.size() > 0) {
+            return R.error("商品代码已存在");
+        }
         if (tyjService.save(tyj) > 0) {
             return R.ok();
         }
@@ -156,7 +163,7 @@ public class TyjController {
     public R updateEnable(Long id, Long enable) {
         TyjDO tyjDO = new TyjDO();
         tyjDO.setId(id);
-        tyjDO.setStatus(enable);
+        tyjDO.setXsstate(enable);
         tyjService.update(tyjDO);
         return R.ok();
     }

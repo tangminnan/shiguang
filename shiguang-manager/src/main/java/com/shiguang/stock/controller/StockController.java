@@ -87,7 +87,7 @@ public class StockController {
         model.addAttribute("uuidstr", uuidstr);
         Map<String, Object> map = new HashMap<>();
         //商品
-        map.put("goodstypeName", "隐形");
+//        map.put("goodstypeName", "隐形");
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         //仓位
@@ -131,6 +131,8 @@ public class StockController {
             stockDO.setGoodsCode(goodsCode);
             String goodsName = stock.getGoodsName().split(",")[i];
             stockDO.setGoodsName(goodsName);
+            String brandname = stock.getBrandname().split(",")[i];
+            stockDO.setBrandname(brandname);
             String goodsCount = stock.getGoodsCount().toString().split(",")[i];
 
             //判断是否已存在商品
@@ -201,6 +203,8 @@ public class StockController {
             orderDO1.setGoodsCode(goodsCode);//条码
             String goodsName = orderDO.getGoodsName().split(",")[i];
             orderDO1.setGoodsName(goodsName);//名称
+            String brandname = orderDO.getBrandname().split(",")[i];
+            orderDO1.setBrandname(brandname);
             String goodsCount = orderDO.getGoodsCount().toString().split(",")[i];
             orderDO1.setGoodsCount(goodsCount);//数量
             orderDO1.setGoodsType(orderDO.getGoodsType());//商品类别
@@ -392,6 +396,36 @@ public class StockController {
         model.addAttribute("jpdzDOList", jpdzDOList);
         return jpdzDOList;
     }
+////跳转隐形商品查询
+//    @GetMapping("/yinxing/{mfrsid}/{mfrsname}")
+//    @RequiresPermissions("stock:stock:yinxing")
+//    String yinxing(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+//        model.addAttribute("mfrsid", mfrsid);
+//        model.addAttribute("mfrsname", mfrsname);
+//        return "/stock/stock/yinxing";
+//    }
+//
+//    //隐形List-----------成品
+//    @ResponseBody
+//    @RequestMapping(value = "/selectYxcp")
+//    public List<YxcpDO> selectYxcp(Integer mfrsid, Model model) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("mfrsid", mfrsid);
+//        List<YxcpDO> yxcpDOList = stockService.selectYxcp(map);
+//        model.addAttribute("yxcpDOList", yxcpDOList);
+//        return yxcpDOList;
+//    }
+//
+//    //隐形List-----------定做
+//    @ResponseBody
+//    @RequestMapping(value = "/selectJpdz")
+//    public List<YxdzDO> selectYxdz(Integer mfrsid, Model model) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("mfrsid", mfrsid);
+//        List<YxdzDO> yxdzDOList = stockService.selectYxdz(map);
+//        model.addAttribute("yxdzDOList", yxdzDOList);
+//        return yxdzDOList;
+//    }
 
     //跳转护理液商品查询
     @GetMapping("/hly/{mfrsid}/{mfrsname}")

@@ -45,7 +45,7 @@ function load() {
                         lensId:$('#lensId').val(),
                         refractivityid:$('#refractivityid').val(),
                         lightId:$('#lightId').val(),
-                        status:$('#status').val()
+                        xsstate:$('#xsstate').val()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -243,7 +243,7 @@ function load() {
                     //     title: '调货成本'
                     // },
                     {
-                        field: 'status',
+                        field: 'xsstate',
                         title: '销售状态',
                         align: 'center',
                         formatter: function (value, row, index) {
@@ -252,7 +252,7 @@ function load() {
                             str += ' <div class="onoffswitch"> ';
                             str += ' <input name="allowComment" ';
                             //启用状态 0：启用；1：禁用
-                            if (row.status == 0)
+                            if (row.xsstate == 0)
                                 str += ' checked="" ';
 
                             str += ' type="checkbox" onchange="updateEnable(' + row.id + ',this)" value="' + row.id + '" class="onoffswitch-checkbox" id="example1' + row.id + '">  ';

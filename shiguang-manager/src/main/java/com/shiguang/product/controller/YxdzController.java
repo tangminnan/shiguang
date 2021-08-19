@@ -29,9 +29,6 @@ import java.util.Map;
 public class YxdzController {
     @Autowired
     private YxdzService yxdzService;
-    //制造商
-    @Autowired
-    private MfrsService mfrsService;
     //计量单位
     @Autowired
     private UnitService unitService;
@@ -220,6 +217,14 @@ public class YxdzController {
     @ResponseBody
     @PostMapping("/save")
     public R save(YxdzDO yxdz) {
+        //判断是否已存在商品代码
+        String producNum = yxdz.getProducNum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("producNum",producNum);
+        List<YxdzDO> haveNum=yxdzService.haveNum(map);
+        if (haveNum.size() > 0) {
+            return R.error("商品代码已存在");
+        }
         if (yxdzService.save(yxdz) > 0) {
             return R.ok();
         }
@@ -263,7 +268,7 @@ public class YxdzController {
     public R updateEnable(Long id, Long enable) {
         YxdzDO yxdzDO = new YxdzDO();
         yxdzDO.setId(id);
-        yxdzDO.setStatus(enable);
+        yxdzDO.setXsstate(enable);
         yxdzService.update(yxdzDO);
         return R.ok();
     }

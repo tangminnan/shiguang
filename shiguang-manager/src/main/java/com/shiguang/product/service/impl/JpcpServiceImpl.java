@@ -64,4 +64,11 @@ public class JpcpServiceImpl implements JpcpService {
     public int updateState(JpcpDO jpcp) {
         return jpcpDao.updateState(jpcp);
     }
+
+    //判断是否存在商品代码
+
+    @Override
+    public List<JpcpDO> haveNum(Map<String, Object> map) {
+        return jpcpDao.haveNum(map);
+    }
 }

@@ -162,14 +162,14 @@ ProducaController {
     @PostMapping("/save")
     @RequiresPermissions("product:produca:add")
     public R save(ProducaDO produca) {
-//        //判断是否已存在商品代码
-//        String productNum = produca.getProducNum();
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("productNum",productNum);
-//        List<ProducaDO> haveNum=producaService.haveNum(map);
-//        if (haveNum.size() > 0) {
-//            return R.error("制造商代码已存在");
-//        }
+        //判断是否已存在商品代码
+        String producNum = produca.getProducNum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("producNum",producNum);
+        List<ProducaDO> haveNum=producaService.haveNum(map);
+        if (haveNum.size() > 0) {
+            return R.error("商品代码已存在");
+        }
         if (producaService.save(produca) > 0) {
             return R.ok();
         }
@@ -205,6 +205,7 @@ ProducaController {
         Map<String, Object> map = new HashMap();
         map.put("mfrsid", mfrsid);
         map.put("goodsid", goodsid);
+        map.put("xsstate","0");
         List<BrandDO> brandDOList = producaService.choice(map);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
@@ -219,7 +220,7 @@ ProducaController {
     public R updateEnable(Long id, Long enable) {
         ProducaDO producaDO = new ProducaDO();
         producaDO.setId(id);
-        producaDO.setStatus(enable);
+        producaDO.setXsstate(enable);
         producaService.update(producaDO);
         return R.ok();
     }

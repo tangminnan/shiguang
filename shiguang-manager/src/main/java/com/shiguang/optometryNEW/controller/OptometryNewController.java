@@ -365,7 +365,7 @@ public class OptometryNewController {
         //查询列表数据
         Query query = new Query(params);
         List<YizhuDO> yizhulist = yizhuService.findYizhu(query);
-        int total = yizhuService.countYizhu(query);
+        int total = yizhuService.findYizhucount(query);
         PageUtils pageUtils = new PageUtils(yizhulist, total);
         return pageUtils;
     }
@@ -384,8 +384,9 @@ public class OptometryNewController {
     public PageUtils hlylist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        query.put("xsstate",0);
         List<HlyDO> hlylist = hlyService.gethly(query);
-        int total = hlyService.count(query);
+        int total = hlyService.gethlycount(query);
         PageUtils pageUtils = new PageUtils(hlylist, total);
         return pageUtils;
     }
@@ -400,12 +401,13 @@ public class OptometryNewController {
     //选择视光---视觉训练
     @ResponseBody
     @GetMapping("/shiguanglist")
-    @RequiresPermissions("information:optometryNew:hly")
+    @RequiresPermissions("information:optometryNew:shiguang")
     public PageUtils shiguanglist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        query.put("xsstate",0);
         List<ShiguangDO> shiguanglist = shiguangService.getshiguang(query);
-        int total = shiguangService.count(query);
+        int total = shiguangService.getshiguangcount(query);
         PageUtils pageUtils = new PageUtils(shiguanglist, total);
         return pageUtils;
     }

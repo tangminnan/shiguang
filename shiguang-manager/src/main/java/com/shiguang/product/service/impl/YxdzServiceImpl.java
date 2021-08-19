@@ -60,9 +60,14 @@ public class YxdzServiceImpl implements YxdzService {
     }
 
     //删除修改状态
-
     @Override
     public int updateState(YxdzDO yxdz) {
         return yxdzDao.updateState(yxdz);
+    }
+
+    //判断是否存在商品代码
+    @Override
+    public List<YxdzDO> haveNum(Map<String, Object> map) {
+        return yxdzDao.haveNum(map);
     }
 }

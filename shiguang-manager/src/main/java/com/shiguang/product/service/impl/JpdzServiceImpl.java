@@ -67,10 +67,16 @@ public class JpdzServiceImpl implements JpdzService {
     public List<BrandDO> choice(Integer mfrsid) {
         return jpdzDao.choice(mfrsid);
     }
-    //删除修改状态
 
+    //删除修改状态
     @Override
     public int updateState(JpdzDO jpdz) {
         return jpdzDao.updateState(jpdz);
+    }
+
+    //判断是否存在商品代码
+    @Override
+    public List<JpdzDO> haveNum(Map<String, Object> map) {
+        return jpdzDao.haveNum(map);
     }
 }

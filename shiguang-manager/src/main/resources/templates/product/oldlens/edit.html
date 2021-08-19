@@ -98,7 +98,7 @@
                 </td>
             </tr>
             <tr>
-                <td>老花镜度数</td>
+                <td>老花镜度数：</td>
                 <td>
                     <select id="oldId" name="oldId" th:value="${oldlens.oldId}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -122,9 +122,9 @@
                 </td>
                 <td>销售状态：</td>
                 <td>
-                    <input th:field="*{oldlens.status}" name="status" value="1" type="radio">
+                    <input th:field="*{oldlens.xsstate}" name="xsstate" value="1" type="radio">
                     <label for="PH-S" style="margin-right: 5%">禁用</label>
-                    <input th:field="*{oldlens.status}" name="status" value="0" type="radio">
+                    <input th:field="*{oldlens.xsstate}" name="xsstate" value="0" type="radio">
                     <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>

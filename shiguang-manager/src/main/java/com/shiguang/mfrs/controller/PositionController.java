@@ -63,6 +63,7 @@ public class PositionController {
     String add(Model model) {
         //部门
         Map<String, Object> map = new HashMap<>();
+        map.put("status","0");
         List<DepartmentDO> departmentDOList = departmentService.list(map);
         model.addAttribute("departmentDOList", departmentDOList);
         return "mfrs/position/add";
@@ -144,7 +145,7 @@ public class PositionController {
     public R updateEnable(Long positionId, Long enable) {
         PositionDO positionDO = new PositionDO();
         positionDO.setPositionId(positionId);
-        positionDO.setStatus(enable);
+        positionDO.setXsstate(enable);
         positionService.update(positionDO);
         return R.ok();
     }

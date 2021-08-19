@@ -9,6 +9,7 @@ import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.RefractivityService;
 import com.shiguang.mfrs.service.UnitService;
+import com.shiguang.product.domain.HcDO;
 import com.shiguang.product.domain.PartsDO;
 import com.shiguang.product.service.PartsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,7 @@ import java.util.Map;
 public class PartsController {
     @Autowired
     private PartsService partsService;
-    //制造商
-    @Autowired
-    private MfrsService mfrsService;
+
     //计量单位
     @Autowired
     private UnitService unitService;
@@ -111,6 +110,14 @@ public class PartsController {
     @ResponseBody
     @PostMapping("/save")
     public R save(PartsDO parts) {
+        //判断是否已存在商品代码
+        String producNum = parts.getProducNum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("producNum",producNum);
+        List<PartsDO> haveNum=partsService.haveNum(map);
+        if (haveNum.size() > 0) {
+            return R.error("商品代码已存在");
+        }
         if (partsService.save(parts) > 0) {
             return R.ok();
         }
@@ -158,7 +165,7 @@ public class PartsController {
     public R updateEnable(Long id, Long enable) {
         PartsDO partsDO = new PartsDO();
         partsDO.setId(id);
-        partsDO.setStatus(enable);
+        partsDO.setXsstate(enable);
         partsService.update(partsDO);
         return R.ok();
     }

@@ -44,11 +44,11 @@ public class KcController {
     String Stock(Model model) {
         Map<String, Object> map = new HashMap<>();
         //商品
-        map.put("goodstypeName", "隐形");
+//        map.put("goodstypeName", "隐形");
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         //仓位
-        map.put("status", 0);
+        map.put("xsstate", 0);
         List<PositionDO> positionList = positionService.stockList(map);
         model.addAttribute("positionList", positionList);
         return "stock/stock/kccx";
@@ -56,10 +56,10 @@ public class KcController {
 
     @ResponseBody
     @RequestMapping(value = "/selectPosion")
-    public List<PositionDO> positionList(Long status, Model model) {
+    public List<PositionDO> positionList(Long xsstate, Model model) {
         Map<String, Object> map = new HashMap<>();
         //仓位
-        map.put("status", status);
+        map.put("xsstate", xsstate);
         List<PositionDO> positionList = positionService.stockList(map);
         model.addAttribute("positionList", positionList);
         return positionList;
@@ -70,7 +70,7 @@ public class KcController {
     @RequestMapping(value = "/selectKc")
     public List<StockDO> selectSg(String goodsNum, String goodsCode, String goodsName,
                                   Integer goodsType, String mfrsname,String brandname,String retailPrice, String retailPrice2,
-                                  Long status, String positionName, Model model) {
+                                  Long xsstate, String positionName, Model model) {
         Map<String, Object> map = new HashMap<>();
 
         //———获取当前登录所在部门编码————
@@ -84,7 +84,7 @@ public class KcController {
         map.put("brandname", brandname);
         map.put("retailPrice", retailPrice);
         map.put("retailPrice2", retailPrice2);
-        map.put("status", status);
+        map.put("xsstate", xsstate);
         map.put("positionName", positionName);
         List<StockDO> stockDOS = stockService.kccxList(map);
         model.addAttribute("stockDOS", stockDOS);

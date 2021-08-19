@@ -29,9 +29,6 @@ import java.util.Map;
 public class JpdzController {
     @Autowired
     private JpdzService jpdzService;
-    //制造商
-    @Autowired
-    private MfrsService mfrsService;
     //计量单位
     @Autowired
     private UnitService unitService;
@@ -211,6 +208,14 @@ public class JpdzController {
     @ResponseBody
     @PostMapping("/save")
     public R save(JpdzDO jpdz) {
+        //判断是否已存在商品代码
+        String producNum = jpdz.getProducNum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("producNum",producNum);
+        List<JpdzDO> haveNum=jpdzService.haveNum(map);
+        if (haveNum.size() > 0) {
+            return R.error("商品代码已存在");
+        }
         if (jpdzService.save(jpdz) > 0) {
             return R.ok();
         }
@@ -255,7 +260,7 @@ public class JpdzController {
     public R updateEnable(Long id, Long enable) {
         JpdzDO jpdzDO = new JpdzDO();
         jpdzDO.setId(id);
-        jpdzDO.setStatus(enable);
+        jpdzDO.setXsstate(enable);
         jpdzService.update(jpdzDO);
         return R.ok();
     }

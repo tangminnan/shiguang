@@ -7,6 +7,7 @@ import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.UnitService;
+import com.shiguang.product.domain.HcDO;
 import com.shiguang.product.domain.ShiguangDO;
 import com.shiguang.product.service.ShiguangService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +96,14 @@ public class ShiguangController {
     @ResponseBody
     @PostMapping("/save")
     public R save(ShiguangDO shiguang) {
+        //判断是否已存在商品代码
+        String producNum = shiguang.getProducNum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("producNum",producNum);
+        List<ShiguangDO> haveNum=shiguangService.haveNum(map);
+        if (haveNum.size() > 0) {
+            return R.error("商品代码已存在");
+        }
         if (shiguangService.save(shiguang) > 0) {
             return R.ok();
         }
@@ -138,7 +147,7 @@ public class ShiguangController {
     public R updateEnable(Long id, Long enable) {
         ShiguangDO shiguangDO = new ShiguangDO();
         shiguangDO.setId(id);
-        shiguangDO.setStatus(enable);
+        shiguangDO.setXsstate(enable);
         shiguangService.update(shiguangDO);
         return R.ok();
     }

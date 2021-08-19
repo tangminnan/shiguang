@@ -23,4 +23,5 @@ public interface DepartmentService {
     int updateStatus(DepartmentDO departmentDO);
 
     DepartmentDO getDepartName(String departmentNumber);
+
 }

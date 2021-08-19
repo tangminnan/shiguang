@@ -7,7 +7,7 @@
 		select m.`mfrsname`,b.`brandname`,u.`unitname`,
 		h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
 		h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
-		h.`status`,h.`state`
+		h.`xsstate`,h.`state`
 		from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum
         left join  c_unit u on h.unitid= u.unitid
 		where id = #{value}
@@ -17,7 +17,7 @@
         select m.`mfrsname`,b.`brandname`,u.`unitname`,
         h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
         h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
-        h.`status`,h.`state`
+        h.`xsstate`,h.`state`
         from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum
         left join c_unit u on h.unitid= u.unitid
         <where>
@@ -26,47 +26,42 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and h.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
+                and   #{retailPrice} &lt;=  h.retail_price and h.retail_price &lt;=  #{retailPrice2}
             </if>
             <if test="taxPrice != null and taxPrice != ''">
-                and h.tax_price between #{taxPrice,jdbcType=VARCHAR} and #{taxPrice2,jdbcType=VARCHAR}
+                and   #{taxPrice} &lt;=  h.tax_price and h.retail_price &lt;=  #{taxPrice2}
             </if>
-            <if test="status != null and status != ''">and h.status = #{status}</if>
+            <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
             and  h.state= 1
         </where>
-        group by h.id order by h.status asc ,h.id asc
+        group by h.id order by h.xsstate asc ,h.id asc
     </select>
+    <select id="count" resultType="int">
+        select count(*) from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum
+        left join c_unit u on h.unitid= u.unitid
+        <where>
+            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
+            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and   #{retailPrice} &lt;=  h.retail_price and h.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  h.tax_price and h.retail_price &lt;=  #{taxPrice2}
+            </if>
+            <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
+            and  h.state= 1
+        </where>
+    </select>
+
+
     <select id="gethly" resultType="com.shiguang.product.domain.HlyDO">
-        SELECT
-        h.`id`,
-        h.`produc_num`,
-        h.`produc_code`,
-        h.`produc_name`,
-        h.`mfrsid`,
-        h.`brandid`,
-        h.`brandnum`,
-        b.`brandname`,
-        h.`factory`,
-        h.`proid`,
-        h.`unitid`,
-        u.unitname,
-        h.`product_type`,
-        h.`main_capacity`,
-        h.`second_capacity`,
-        h.`produc_factory`,
-        h.`upday`,
-        h.`downday`,
-        h.`tax`,
-        h.`tax_price`,
-        h.`trade_price`,
-        h.`transfer_price`,
-        h.`retail_price`,
-        h.`status`,
-        h.`state`
-        FROM
-        aa_hly h
-        LEFT JOIN c_brand b ON h.brandnum = b.brandnum
-        LEFT JOIN c_unit u ON h.unitid = u.unitid
+        select
+        h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,b.`brandname`,
+        h.`factory`,h.`proid`,h.`unitid`,u.unitname,h.`product_type`,h.`main_capacity`,h.`second_capacity`,h.`produc_factory`,
+        h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,h.`xsstate`,h.`state`
+        FROM aa_hly h LEFT JOIN c_brand b ON h.brandnum = b.brandnum LEFT JOIN c_unit u ON h.unitid = u.unitid
         <where>
             <if test="id != null and id != ''">and h.id = #{id}</if>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
@@ -89,7 +84,8 @@
             <if test="tradePrice != null and tradePrice != ''">and h.trade_price = #{tradePrice}</if>
             <if test="transferPrice != null and transferPrice != ''">and h.transfer_price = #{transferPrice}</if>
             <if test="retailPrice != null and retailPrice != ''">and h.retail_price = #{retailPrice}</if>
-          and h.status = 0 and h.state = 1
+            <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
+           and h.state = 1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -104,32 +100,32 @@
         </if>
     </select>
 
-    <select id="count" resultType="int">
-        select count(*) from aa_hly
+    <select id="gethlycount" resultType="int">
+        select count(*)  FROM aa_hly h LEFT JOIN c_brand b ON h.brandnum = b.brandnum LEFT JOIN c_unit u ON h.unitid = u.unitid
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
-            <if test="factory != null and factory != ''">and factory = #{factory}</if>
-            <if test="proid != null and proid != ''">and proid = #{proid}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="productType != null and productType != ''">and product_type = #{productType}</if>
-            <if test="mainCapacity != null and mainCapacity != ''">and main_capacity = #{mainCapacity}</if>
-            <if test="secondCapacity != null and secondCapacity != ''">and second_capacity = #{secondCapacity}</if>
-            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
-            <if test="upday != null and upday != ''">and upday = #{upday}</if>
-            <if test="downday != null and downday != ''">and downday = #{downday}</if>
-            <if test="tax != null and tax != ''">and tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
-            <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="state != null and state != ''">and state = #{state}</if>
+            <if test="id != null and id != ''">and h.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and h.brandnum = #{brandnum}</if>
+            <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
+            <if test="proid != null and proid != ''">and h.proid = #{proid}</if>
+            <if test="unitid != null and unitid != ''">and h.unitid = #{unitid}</if>
+            <if test="productType != null and productType != ''">and h.product_type = #{productType}</if>
+            <if test="mainCapacity != null and mainCapacity != ''">and h.main_capacity = #{mainCapacity}</if>
+            <if test="secondCapacity != null and secondCapacity != ''">and h.second_capacity = #{secondCapacity}</if>
+            <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
+            <if test="upday != null and upday != ''">and h.upday = #{upday}</if>
+            <if test="downday != null and downday != ''">and h.downday = #{downday}</if>
+            <if test="tax != null and tax != ''">and h.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and h.tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and h.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and h.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and h.retail_price = #{retailPrice}</if>
+            <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
+            and h.state = 1
         </where>
     </select>
 
@@ -156,7 +152,7 @@
 			`trade_price`, 
 			`transfer_price`, 
 			`retail_price`,
-			`status`,
+			`xsstate`,
 			`state`
 		)
 		values
@@ -181,7 +177,7 @@
 			#{tradePrice}, 
 			#{transferPrice}, 
 			#{retailPrice},
-			#{status},
+			#{xsstate},
 			#{state}
 		)
 	</insert>
@@ -209,7 +205,7 @@
             <if test="tradePrice != null">`trade_price` = #{tradePrice},</if>
             <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
             <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
-            <if test="status != null">`status` = #{status},</if>
+            <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state}</if>
         </set>
         where id = #{id}
@@ -234,4 +230,8 @@
     <update id="updateState" parameterType="com.shiguang.product.domain.HlyDO">
     update aa_hly set `state` = #{state} where id = #{id}
     </update>
+    <!--是否存在商品代码-->
+    <select id="haveNum" resultType="com.shiguang.product.domain.HlyDO">
+        select produc_num from aa_hly where produc_num=#{producNum} order by id
+	</select>
 </mapper>

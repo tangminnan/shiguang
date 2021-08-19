@@ -65,7 +65,7 @@ public class MfrsController {
         //查询列表数据
         Query query = new Query(params);
         List<MfrsDO> mfrsDOList = mfrsService.list(query);
-        int total = mfrsService.mgcount(query);
+        int total = mfrsService.count(query);
         PageUtils pageUtils = new PageUtils(mfrsDOList, total);
         return pageUtils;
     }
@@ -80,8 +80,9 @@ public class MfrsController {
         if (null != query.get("goodsids")) {
             query.put("goodsIds", Integer.parseInt(query.get("goodsids").toString()));
         }
+        query.put("xsstate","0");
         List<MfrsDO> mfrsDOList = mfrsService.findMfrs(query);
-        int total = mfrsService.mgcount(query);
+        int total = mfrsService.findMfrscount(query);
         PageUtils pageUtils = new PageUtils(mfrsDOList, total);
         return pageUtils;
     }
@@ -239,7 +240,7 @@ public class MfrsController {
     public R updateEnable(Integer mfrsid, Long enable) {
         MfrsDO mfrsDO = new MfrsDO();
         mfrsDO.setMfrsid(mfrsid);
-        mfrsDO.setStatus(enable);
+        mfrsDO.setXsstate(enable);
         mfrsService.update(mfrsDO);
         return R.ok();
     }

@@ -76,14 +76,14 @@
                            type="hidden">
                     <em>*</em>
                 </td>
-                <td>商品编号</td>
+                <td>商品编号：</td>
                 <td>
                     <input id="proid" name="proid" th:value="${yxdz.proid}" class="form-control"
                            style="background-color: #e4e4e4"
                            type="text" readonly>
                     <em>*</em>
                 </td>
-                <td>计量单位</td>
+                <td>计量单位：</td>
                 <td>
                     <select name="unitid" id="unitid" th:value="${yxdz.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -97,14 +97,14 @@
                 </td>
             </tr>
             <tr>
-                <td>球镜</td>
+                <td>球镜：</td>
                 <td>
                     上限
                     <select id="sphUp" name="sphUp" th:value="${yxdz.sphUp}" style="width:15%"
                             data-actions-box="false" data-size="5">
                         <option th:each="ls:${sphDOList}"
                                 th:text="${ls.sph}"
-                                th:value="${ls.sphId}"
+                                th:value="${ls.sph}"
                         ></option>
                         <input id="sphUps" name="sphUps" th:value="${yxdz.sphUp}" class="form-control"
                                type="hidden">
@@ -114,7 +114,7 @@
                             data-actions-box="false" data-size="5">
                         <option th:each="ls:${sphDOList}"
                                 th:text="${ls.sph}"
-                                th:value="${ls.sphId}"
+                                th:value="${ls.sph}"
                         ></option>
                         <input id="sphDowns" name="sphDowns" th:value="${yxdz.sphDown}" class="form-control"
                                type="hidden">
@@ -124,21 +124,21 @@
                             data-actions-box="false" data-size="5">
                         <option th:each="ls:${spanDOList}"
                                 th:text="${ls.span}"
-                                th:value="${ls.spanId}"
+                                th:value="${ls.span}"
                         ></option>
                         <input id="sphSpans" name="sphSpans" th:value="${yxdz.sphSpan}" class="form-control"
                                type="hidden">
                     </select>
                     <em>*</em>
                 </td>
-                <td>柱镜</td>
+                <td>柱镜：</td>
                 <td>
                     上限
                     <select id="cylUp" name="cylUp" th:value="${yxdz.cylUp}" data-actions-box="false" style="width:55%"
                             data-size="5">
                         <option th:each="ls:${cylDOList}"
                                 th:text="${ls.cyl}"
-                                th:value="${ls.cylId}"
+                                th:value="${ls.cyl}"
                         ></option>
                         <input id="cylUps" name="cylUps" th:value="${yxdz.cylUp}" class="form-control"
                                type="hidden">
@@ -149,7 +149,7 @@
                             data-actions-box="false" data-size="5">
                         <option th:each="ls:${cylDOList}"
                                 th:text="${ls.cyl}"
-                                th:value="${ls.cylId}"
+                                th:value="${ls.cyl}"
                         ></option>
                         <input id="cylDowns" name="cylDowns" th:value="${yxdz.cylDown}" class="form-control"
                                type="hidden">
@@ -160,14 +160,14 @@
                             data-actions-box="false" data-size="5">
                         <option th:each="ls:${spanDOList}"
                                 th:text="${ls.span}"
-                                th:value="${ls.spanId}"
+                                th:value="${ls.span}"
                         ></option>
                         <input id="cylSpans" name="cylSpans" th:value="${yxdz.cylSpan}" class="form-control"
                                type="hidden">
                     </select>
                     <em>*</em>
                 </td>
-                <td>曲率1</td>
+                <td>曲率1：</td>
                 <td>
                     <input id="curvatureOne" name="curvatureOne" th:value="${yxdz.curvatureOne}" style="width:30%"
                            type="text">
@@ -177,14 +177,14 @@
                 </td>
             </tr>
             <tr>
-                <td>曲率2</td>
+                <td>曲率2：</td>
                 <td>
                     <input id="curvatureTwo" name="curvatureTwo" th:value="${yxdz.curvatureTwo}" style="width:30%"
                            type="text">
                     -<input id="curvatureEr" name="curvatureEr" th:value="${yxdz.curvatureEr}" style="width:30%"
                             type="text">
                 </td>
-                <td>直径</td>
+                <td>直径：</td>
                 <td>
                     <input id="diameterOne" name="diameterOne" th:value="${yxdz.diameterOne}" style="width:30%"
                            type="text">
@@ -194,7 +194,7 @@
                 </td>
             </tr>
             <tr>
-                <td>接触镜类别</td>
+                <td>接触镜类别：</td>
                 <td>
                     <select id="contactLens" name="contactLens" class="form-control">
                         <option></option>
@@ -205,17 +205,17 @@
                            class="form-control"
                            type="hidden">
                 </td>
-                <td>订做周期</td>
+                <td>订做周期：</td>
                 <td>
                     <input id="cycle" name="cycle" th:value="${yxdz.cycle}" class="form-control"
                            type="text">天
                 </td>
                 <em>*</em>
-                <td>销售状态</td>
+                <td>销售状态：</td>
                 <td>
-                    <input th:field="*{yxdz.status}" name="status" value="1" type="radio" id="PH-S"> <label for="PH-S"
+                    <input th:field="*{yxdz.xsstate}" name="xsstate" value="1" type="radio" id="PH-S"> <label for="PH-S"
                                                                                                             style="margin-right: 5%">禁用</label>
-                    <input th:field="*{yxdz.status}" name="status" value="0" type="radio" id="PH-F" checked> <label
+                    <input th:field="*{yxdz.xsstate}" name="xsstate" value="0" type="radio" id="PH-F" checked> <label
                         for="PH-F">启用</label>
                     <em>*</em>
                 </td>
@@ -229,7 +229,7 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>使用类型</td>
+                <td>使用类型：</td>
                 <td>
                     <select id="usageId" name="usageId" th:value="${yxdz.usageId}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -241,7 +241,7 @@
                                type="hidden">
                     </select>
                 </td>
-                <td>抛弃型分类</td>
+                <td>抛弃型分类：</td>
                 <td style="width:20%;">
                     <select id="typeId" name="typeId" th:value="${yxdz.typeId}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -253,24 +253,24 @@
                                type="hidden">
                     </select>
                 </td>
-                <td>产品可使用天数</td>
+                <td>产品可使用天数：</td>
                 <td style="width:20%;">
                     <input id="useDays" name="useDays" th:value="${yxdz.useDays}" class="form-control"
                            type="text">
                 </td>
             </tr>
             <tr>
-                <td>效期提醒上限</td>
+                <td>效期提醒上限：</td>
                 <td>
                     有效期前<input id="upday" name="upday" th:value="${yxdz.upday}" style="width: 20%"
                                type="text">天提醒进入滞销状态
                 </td>
-                <td>效期提醒下限</td>
+                <td>效期提醒下限：</td>
                 <td>
                     有效期前<input id="downday" name="downday" th:value="${yxdz.downday}" style="width: 20%" type="text">天提醒进入即将失效状态
 
                 </td>
-                <td>颜色</td>
+                <td>颜色：</td>
                 <td>
                     <select id="color" name="color" th:value="${yxdz.color}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -278,7 +278,7 @@
                 </td>
             </tr>
             <tr>
-                <td>隐形类别</td>
+                <td>隐形类别：</td>
                 <td>
                     <select id="invisibleId" name="invisibleId" th:value="${yxdz.invisibleId}"
                             class="form-control"
@@ -292,7 +292,7 @@
                                type="hidden">
                     </select>
                 </td>
-                <td>材质</td>
+                <td>材质：</td>
                 <td>
                     <select id="caizhiId" name="caizhiId" th:value="${yxdz.caizhiId}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -305,7 +305,7 @@
                                type="hidden">
                     </select>
                 </td>
-                <td>联合光度</td>
+                <td>联合光度：</td>
                 <td>
                     <input id="combinedPhotometry" name="combinedPhotometry"
                            th:value="${yxdz.combinedPhotometry}" type="text">
@@ -435,7 +435,7 @@
         // var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        sum1 = 22 - proid.value.length;
+        sum1 = 22 ;
         a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + ".0000";
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
     }

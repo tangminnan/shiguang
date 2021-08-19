@@ -11,7 +11,7 @@
         b.`gradual_id`,gr.`gradual_name`,
         b.`usage_id`,us.`usage_name`,b.`type_id`,ty.`type_name`,b.`registration`,
         b.`mfrsid`,mfrs.`mfrsname`,b.`unitid`,b.`address`,b.`payid`,b.`batchid`,b.`factory`,b.`money`,b.`shorthandcode`,b.`productionkey`,
-        b.`status`,b.`state`,b.`payday`
+        b.`xsstate`,b.`state`,b.`payday`
         from c_brand b
             left join c_goods good on b.goodsid=good.goodsid
             left join c_material ma on b.materialid=ma.materialid
@@ -26,7 +26,7 @@
             where brandid = #{value}
 	</select>
     <select id="list" resultType="com.shiguang.mfrs.domain.BrandDO">
-       select b.`status`,b.`state`,
+       select b.`xsstate`,b.`state`,
         b.`brandid`,b.`brandnum`,b.`brandname`,b.`goodsid`,good.`goodsname`,b.`materialid`,b.`materialname`,b.`lens_id`,b.`lens_name`,b.`light_id`,
         b.`light_name`,b.`refractivityid`,b.`refractivityvalue`,b.`function_id`,b.`function_name`,b.`gradual_id`,b.`gradual_name`,b.`usage_id`,
         b.`usage_name`,b.`type_id`,b.`type_name`,b.`registration`,b.`mfrsid`,m.`mfrsname`,b.`unitid`,b.`address`,b.`payid`,b.`batchid`,b.`factory`,
@@ -37,16 +37,32 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandnum != null and brandnum != ''">and b.brandnum = #{brandnum}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-            <if test="status != null and status != ''">and b.status = #{status}</if>
+            <if test="xsstate != null and xsstate != ''">and b.xsstate = #{xsstate}</if>
             <if test="payid != null and payid != ''">and b.payid = #{payid}</if>
             <if test="mfrsids != null and mfrsids != ''">and b.mfrsid LIKE concat('%', #{mfrsids},'%')</if>
             <if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat('%', #{goodsids},'%')</if>
             and  b.state= 1
         </where>
-        group by b.brandid order by b.status asc ,b.brandid asc
+        group by b.brandid order by b.xsstate asc ,b.brandid asc
     </select>
+
+    <select id="count" resultType="int">
+        select count(*)  from c_brand b left join c_mfrs m on b.mfrsid=m.mfrsid left join c_goods good on b.goodsid=good.goodsid
+        <where>
+            <if test="goodsid != null and goodsid != ''">and b.goodsid = #{goodsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandnum != null and brandnum != ''">and b.brandnum = #{brandnum}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="xsstate != null and xsstate != ''">and b.xsstate = #{xsstate}</if>
+            <if test="payid != null and payid != ''">and b.payid = #{payid}</if>
+            <if test="mfrsids != null and mfrsids != ''">and b.mfrsid LIKE concat('%', #{mfrsids},'%')</if>
+            <if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat('%', #{goodsids},'%')</if>
+            and  b.state= 1
+        </where>
+    </select>
+
      <select id="finfBrand" resultType="com.shiguang.mfrs.domain.BrandDO">
-       select b.`status`,b.`state`,
+       select b.`xsstate`,b.`state`,
         b.`brandid`,b.`brandnum`,b.`brandname`,b.`goodsid`,good.`goodsname`,b.`materialid`,b.`materialname`,b.`lens_id`,b.`lens_name`,b.`light_id`,
         b.`light_name`,b.`refractivityid`,b.`refractivityvalue`,b.`function_id`,b.`function_name`,b.`gradual_id`,b.`gradual_name`,b.`usage_id`,
         b.`usage_name`,b.`type_id`,b.`type_name`,b.`registration`,b.`mfrsid`,m.`mfrsname`,b.`unitid`,b.`address`,b.`payid`,b.`batchid`,b.`factory`,
@@ -57,15 +73,28 @@
              <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
              <if test="brandnum != null and brandnum != ''">and b.brandnum = #{brandnum}</if>
              <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-             <if test="status != null and status != ''">and b.status = #{status}</if>
+             <if test="xsstate != null and xsstate != ''">and b.xsstate = #{xsstate}</if>
              <if test="payid != null and payid != ''">and b.payid = #{payid}</if>
              <if test="mfrsids != null and mfrsids != ''">and b.mfrsid LIKE concat('%', #{mfrsids},'%')</if>
              <if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat('%', #{goodsids},'%')</if>
              and  b.state= 1
          </where>
-        group by b.brandid order by b.status asc ,b.brandid asc
+        group by b.brandid order by b.xsstate asc ,b.brandid asc
     </select>
-
+    <select id="finfBrandcount" resultType="int">
+    select count(*) from c_brand b left join c_mfrs m on b.mfrsid=m.mfrsid left join c_goods good on b.goodsid=good.goodsid
+        <where>
+            <if test="goodsid != null and goodsid != ''">and b.goodsid = #{goodsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandnum != null and brandnum != ''">and b.brandnum = #{brandnum}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="xsstate != null and xsstate != ''">and b.xsstate = #{xsstate}</if>
+            <if test="payid != null and payid != ''">and b.payid = #{payid}</if>
+            <if test="mfrsids != null and mfrsids != ''">and b.mfrsid LIKE concat('%', #{mfrsids},'%')</if>
+            <if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat('%', #{goodsids},'%')</if>
+            and  b.state= 1
+        </where>
+    </select>
 
 
 
@@ -73,54 +102,13 @@
         select `brandid`,`brandnum`,`brandname`,`goodsid`,`goodsname`,`materialid`,`materialname`,`lens_id`,`lens_name`,`light_id`,
         `light_name`,`refractivityid`,`refractivityvalue`,`function_id`,`function_name`,`gradual_id`,`gradual_name`,`usage_id`,`usage_name`,
         `type_id`,`type_name`,`registration`,`mfrsid`,`mfrsname`,`unitid`,`unitname`,`address`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,
-        `productionkey`,`status`,`state`,`payday`
+        `productionkey`,`xsstate`,`state`,`payday`
         from c_brand
         where brandnum = #{brandnum} order by brandid
     </select>
 
 
-    <select id="count" resultType="int">
-        select count(*) from c_brand
-        <where>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
-            <if test="brandname != null and brandname != ''">and brandname = #{brandname}</if>
-            <if test="goodsid != null and goodsid != ''">and goodsid = #{goodsid}</if>
-            <if test="goodsname != null and goodsname != ''">and goodsid = #{goodsname}</if>
-            <if test="materialid != null and materialid != ''">and materialid = #{materialid}</if>
-            <if test="materialname != null and materialname != ''">and materialname = #{materialname}</if>
-            <if test="lensId != null and lensId != ''">and lens_id = #{lensId}</if>
-            <if test="lensName != null and lensName != ''">and lens_name = #{lensName}</if>
-            <if test="lightId != null and lightId != ''">and light_id = #{lightId}</if>
-            <if test="lightName != null and lightName != ''">and light_name = #{lightName}</if>
-            <if test="refractivityid != null and refractivityid != ''">and refractivityid = #{refractivityid}</if>
-            <if test="refractivityvalue != null and refractivityvalue != ''">and refractivityvalue =
-                #{refractivityvalue}
-            </if>
-            <if test="functionId != null and functionId != ''">and function_id = #{functionId}</if>
-            <if test="functionName != null and functionName != ''">and function_name = #{functionName}</if>
-            <if test="gradualId != null and gradualId != ''">and gradual_id = #{gradualId}</if>
-            <if test="gradualName != null and gradualName != ''">and gradual_name = #{gradualName}</if>
-            <if test="usageId != null and usageId != ''">and usage_id = #{usageId}</if>
-            <if test="usageName != null and usageName != ''">and usage_name = #{usageName}</if>
-            <if test="typeId != null and typeId != ''">and type_id = #{typeId}</if>
-            <if test="typeName != null and typeName != ''">and type_name = #{typeName}</if>
-            <if test="registration != null and registration != ''">and registration = #{registration}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="mfrsname != null and mfrsname != ''">and mfrsname = #{mfrsname}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="address != null and address != ''">and address = #{address}</if>
-            <if test="payid != null and payid != ''">and payid = #{payid}</if>
-            <if test="batchid != null and batchid != ''">and batchid = #{batchid}</if>
-            <if test="factory != null and factory != ''">and factory = #{factory}</if>
-            <if test="money != null and money != ''">and money = #{money}</if>
-            <if test="shorthandcode != null and shorthandcode != ''">and shorthandcode = #{shorthandcode}</if>
-            <if test="productionkey != null and productionkey != ''">and productionkey = #{productionkey}</if>
-            <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="state != null and state != ''">and state = #{state}</if>
-            <if test="payday != null and payday != ''">and payday = #{payday}</if>
-        </where>
-    </select>
+
     <insert id="save" parameterType="com.shiguang.mfrs.domain.BrandDO" useGeneratedKeys="true" keyProperty="brandid">
 		insert into c_brand
 		(
@@ -155,7 +143,7 @@
 			`money`,
 			`shorthandcode`,
 			`productionkey`,
-			`status`,
+			`xsstate`,
 			`state`,
 			`payday`
 		)
@@ -192,7 +180,7 @@
 			#{money},
 			#{shorthandcode},
 			#{productionkey},
-			#{status},
+			#{xsstate},
 			#{state},
 			#{payday}
 		)
@@ -232,7 +220,7 @@
             <if test="money != null">`money` = #{money},</if>
             <if test="shorthandcode != null">`shorthandcode` = #{shorthandcode},</if>
             <if test="productionkey != null">`productionkey` = #{productionkey},</if>
-            <if test="status != null">`status` = #{status},</if>
+            <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state},</if>
             <if test="payday != null">`payday` = #{payday}</if>
         </set>

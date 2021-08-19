@@ -17,7 +17,7 @@ public interface YizhuService {
     //医嘱
     List<YizhuDO> findYizhu(Map<String, Object> map);
 
-    int countYizhu(Map<String, Object> map);
+    int findYizhucount(Map<String, Object> map);
 
     int save(YizhuDO yizhu);
 

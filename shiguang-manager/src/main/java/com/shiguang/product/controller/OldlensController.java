@@ -7,6 +7,7 @@ import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.UnitService;
+import com.shiguang.product.domain.HcDO;
 import com.shiguang.product.domain.OlddegreesDO;
 import com.shiguang.product.domain.OldlensDO;
 import com.shiguang.product.domain.StyleDO;
@@ -35,9 +36,6 @@ import java.util.Map;
 public class OldlensController {
     @Autowired
     private OldlensService oldlensService;
-    //制造商
-    @Autowired
-    private MfrsService mfrsService;
     //计量单位
     @Autowired
     private UnitService unitService;
@@ -123,6 +121,14 @@ public class OldlensController {
     @ResponseBody
     @PostMapping("/save")
     public R save(OldlensDO oldlens) {
+        //判断是否已存在商品代码
+        String producNum = oldlens.getProducNum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("producNum",producNum);
+        List<OldlensDO> haveNum=oldlensService.haveNum(map);
+        if (haveNum.size() > 0) {
+            return R.error("商品代码已存在");
+        }
         if (oldlensService.save(oldlens) > 0) {
             return R.ok();
         }
@@ -168,7 +174,7 @@ public class OldlensController {
     public R updateEnable(Long id, Long enable) {
         OldlensDO oldlensDO = new OldlensDO();
         oldlensDO.setId(id);
-        oldlensDO.setStatus(enable);
+        oldlensDO.setXsstate(enable);
         oldlensService.update(oldlensDO);
         return R.ok();
     }

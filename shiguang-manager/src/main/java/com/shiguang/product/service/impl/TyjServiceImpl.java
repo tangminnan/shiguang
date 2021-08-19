@@ -57,10 +57,16 @@ public class TyjServiceImpl implements TyjService {
     public List<BrandDO> choice(Integer mfrsid) {
         return tyjDao.choice(mfrsid);
     }
-    //删除修改状态
 
+    //删除修改状态
     @Override
     public int updateState(TyjDO tyj) {
         return tyjDao.updateState(tyj);
+    }
+
+    //判断是否存在商品代码
+    @Override
+    public List<TyjDO> haveNum(Map<String, Object> map) {
+        return tyjDao.haveNum(map);
     }
 }

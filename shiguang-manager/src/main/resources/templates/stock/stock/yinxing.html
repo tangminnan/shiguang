@@ -46,7 +46,7 @@
             <td>商品类别：</td>
             <td>
                 <select disabled>
-                    <option>镜片</option>
+                    <option>隐形</option>
                 </select>
             </td>
             <td>新增时间：</td>
@@ -64,7 +64,31 @@
             <td>
                 <input type="text"/>至<input type="text"/>
             </td>
-            <td>定做类型：</td>
+            <td>曲率：</td>
+            <td>
+                <input type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>直径：</td>
+            <td>
+                <input type="text"/>
+            </td>
+            <td>使用类型：</td>
+            <td>
+                <select>
+                    <option value="">请选择</option>
+                </select>
+            </td>
+            <td>抛弃型分类：</td>
+            <td>
+                <select>
+                    <option value="">请选择</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>订做类型：</td>
             <td>
                 <select id="dzlx" style="width: 80%">
                     <option value="成品片">成品片</option>
@@ -73,64 +97,10 @@
             </td>
         </tr>
         <tr>
-            <td>下加光：</td>
+            <td>型号：</td>
             <td>
-                <input type="text"/>至<input type="text"/>
+                <input type="text"/>
             </td>
-            <td>材料分类：</td>
-            <td>
-                <select id="lensId" name="lensId">
-                    <option value="">--请选择--</option>
-                    <option th:each="ls:${lensDOList}"
-                            th:text="${ls.lensName}"
-                            th:value="${ls.lensId}"
-                    ></option>
-                </select>
-            </td>
-            <td>折射率：</td>
-            <td>
-                <select id="refractivityid" name="refractivityid" style="width: 80%">
-                    <option value="">--请选择--</option>
-                    <option th:each="ls:${refractivityDOList}"
-                            th:text="${ls.refractivityvalue}"
-                            th:value="${ls.refractivityid}"
-                    ></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>光度分类：</td>
-            <td>
-                <select id="lightId" name="lightId">
-                    <option value="">--请选择--</option>
-                    <option th:each="ls:${lightDOList}"
-                            th:text="${ls.lightName}"
-                            th:value="${ls.lightId}"
-                    ></option>
-                </select>
-            </td>
-            <td>镜片功能：</td>
-            <td>
-                <select id="functionId" name="functionId">
-                    <option value="">--请选择--</option>
-                    <option th:each="ls:${functionDOList}"
-                            th:text="${ls.functionName}"
-                            th:value="${ls.functionId}"
-                    ></option>
-                </select>
-            </td>
-            <td>渐进片分类：</td>
-            <td>
-                <select id="gradualId" name="gradualId" style="width: 80%">
-                    <option value="">--请选择--</option>
-                    <option th:each="ls:${gradualDOList}"
-                            th:text="${ls.gradualName}"
-                            th:value="${ls.gradualId}"
-                    ></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
             <td>厂家型号：</td>
             <td>
                 <input type="text"/>
@@ -139,17 +109,13 @@
         <tr>
             <td>标准零售价格：</td>
             <td>
-                <select name="" id="">
-                    <option value="">已设置零售价</option>
-                    <option value="">未设置零售价</option>
-                </select>
                 <input type="text"/> ~ <input type="text"/>
             </td>
         </tr>
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input type="button" value="查询" onclick="getJingpian()"/>
+        <input type="button" value="查询" onclick="getYinxing()"/>
         <input type="button" class="empty" value="清空"/>
     </div>
 </div>
@@ -189,7 +155,7 @@
         var mfrsid = $("#mfrsid").val();
         $(".val").remove();
         $.ajax({
-            url: '/stock/stock/selectJpcp',
+            url: '/stock/stock/selectYxcp',
             type: 'post',
             dataType: "json",
             data: {
@@ -221,7 +187,7 @@
         })
     });
 
-    function getJingpian() {
+    function getYinxing() {
         $(" .val").remove();
         var dzlx = $("#dzlx option:selected").val();
         if (dzlx == "成品片") {

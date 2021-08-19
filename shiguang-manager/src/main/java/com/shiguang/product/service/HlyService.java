@@ -18,11 +18,10 @@ public interface HlyService {
     HlyDO get(Long id);
 
     List<HlyDO> list(Map<String, Object> map);
-
+    int count(Map<String, Object> map);
     //选择护理液
     List<HlyDO> gethly(Map<String, Object> map);
-
-    int count(Map<String, Object> map);
+    int gethlycount(Map<String, Object> map);
 
     int save(HlyDO hly);
 
@@ -38,4 +37,7 @@ public interface HlyService {
 
     //删除修改状态
     int updateState(HlyDO hly);
+
+    //判断是否存在商品代码
+    List<HlyDO> haveNum(Map<String, Object> map);
 }

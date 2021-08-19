@@ -7,7 +7,7 @@
         select
         p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,
         p.`produc_color`,p.`unitid`,p.`batchid`,p.`size`,p.`technology_id`,p.`materialid`,p.`color`,p.`style_id`,p.`year`,p.`tax`,p.`tax_price`,
-        p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`status`,p.`state`,
+        p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`xsstate`,p.`state`,
         m.mfrsname,b.brandname,u.unitname
         from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
         c_unit u on p.unitid= u.unitid
@@ -15,14 +15,7 @@
 	</select>
     <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.ProducaDO">
-        select
-        p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,
-        p.`produc_color`,p.`unitid`,p.`batchid`,p.`size`,p.`technology_id`,p.`materialid`,p.`color`,p.`style_id`,p.`year`,p.`tax`,p.`tax_price`,
-        p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`status`,p.`state`,
-        m.mfrsname,b.brandname,u.unitname
-        from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
-        c_unit u on p.unitid= u.unitid
-        where p.`produc_num` = #{producNum} order by p.`id`
+        select produc_num from aa_produca where produc_num=#{producNum} order by id
 	</select>
 
 
@@ -31,7 +24,7 @@
         select
         p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,p.`produc_color`,
         p.`unitid`,p.`batchid`,p.`size`,p.`technology_id`,p.`materialid`,p.`color`,p.`style_id`,p.`year`,p.`tax`,p.`tax_price`,p.`trade_price`,
-        p.`transfer_price`,p.`retail_price`,p.`status`,p.`state`,
+        p.`transfer_price`,p.`retail_price`,p.`xsstate`,p.`state`,
         m.mfrsname,b.brandname,u.unitname
         from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
         c_unit u on p.unitid= u.unitid
@@ -41,10 +34,10 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and p.retail_price between #{retailPrice,jdbcType=VARCHAR} and #{retailPrice2,jdbcType=VARCHAR}
+                and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
             </if>
             <if test="taxPrice != null and taxPrice != ''">
-                and p.tax_price between #{taxPrice,jdbcType=VARCHAR} and #{taxPrice2,jdbcType=VARCHAR}
+                and   #{taxPrice} &lt;=  p.tax_price and p.retail_price &lt;=  #{taxPrice2}
             </if>
 
 
@@ -53,44 +46,37 @@
             <if test="size != null and size != ''">and p.size = #{size}</if>
             <if test="technologyId != null and technologyId != ''">and p.technology_id = #{technologyId}</if>
             <if test="materialid != null and materialid != ''">and p.materialid = #{materialid}</if>
-            <if test="status != null and status != ''">and p.status = #{status}</if>
+            <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
             <if test="styleId != null and styleId != ''">and p.style_id = #{styleId}</if>
+            and p.state= 1
         </where>
-        and p.state= 1
-        group by p.id order by p.status asc ,p.id asc
+
+        group by p.id order by p.xsstate asc ,p.id asc
     </select>
     <select id="count" resultType="int">
-        select count(*) from aa_produca
+        select count(*) from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
+        c_unit u on p.unitid= u.unitid
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and produc_name = #{producName}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandid != null and brandid != ''">and brandid = #{brandid}</if>
-
-            <if test="brandnum != null and brandid != ''">and brandnum = #{brandnum}</if>
-            <if test="factory != null and factory != ''">and factory = #{factory}</if>
-            <if test="producFactory != null and producFactory != ''">and produc_factory = #{producFactory}</if>
-            <if test="producFactorycolor != null and producFactorycolor != ''">and produc_factorycolor =
-                #{producFactorycolor}
+            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
+            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
             </if>
-            <if test="producColor != null and producColor != ''">and produc_color = #{producColor}</if>
-            <if test="unitid != null and unitid != ''">and unitid = #{unitid}</if>
-            <if test="batchid != null and batchid != ''">and batchid = #{batchid}</if>
-            <if test="size != null and size != ''">and size = #{size}</if>
-            <if test="technologyId != null and technologyId != ''">and technology_id = #{technologyId}</if>
-            <if test="materialid != null and materialid != ''">and materialid = #{materialid}</if>
-            <if test="color != null and color != ''">and color = #{color}</if>
-            <if test="styleId != null and styleId != ''">and style_id = #{styleId}</if>
-            <if test="year != null and year != ''">and year = #{year}</if>
-            <if test="tax != null and tax != ''">and tax = #{tax}</if>
-            <if test="taxPrice != null and taxPrice != ''">and tax_price = #{taxPrice}</if>
-            <if test="tradePrice != null and tradePrice != ''">and trade_price = #{tradePrice}</if>
-            <if test="transferPrice != null and transferPrice != ''">and transfer_price = #{transferPrice}</if>
-            <if test="retailPrice != null and retailPrice != ''">and retail_price = #{retailPrice}</if>
-            <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="state != null and state != ''">and state = #{state}</if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  p.tax_price and p.retail_price &lt;=  #{taxPrice2}
+            </if>
+
+
+            <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
+            <if test="producColor != null and producColor != ''">and p.produc_color = #{producColor}</if>
+            <if test="size != null and size != ''">and p.size = #{size}</if>
+            <if test="technologyId != null and technologyId != ''">and p.technology_id = #{technologyId}</if>
+            <if test="materialid != null and materialid != ''">and p.materialid = #{materialid}</if>
+            <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
+            <if test="styleId != null and styleId != ''">and p.style_id = #{styleId}</if>
+            and p.state= 1
         </where>
     </select>
 
@@ -120,7 +106,7 @@
 			`trade_price`, 
 			`transfer_price`, 
 			`retail_price`,
-			`status`,
+			`xsstate`,
 			`state`
 		)
 		values
@@ -148,7 +134,7 @@
 			#{tradePrice}, 
 			#{transferPrice}, 
 			#{retailPrice},
-			#{status},
+			#{xsstate},
 			#{state}
 		)
 	</insert>
@@ -179,7 +165,7 @@
             <if test="tradePrice != null">`trade_price` = #{tradePrice},</if>
             <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
             <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
-            <if test="status != null">`status` = #{status},</if>
+            <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state}</if>
         </set>
         where id = #{id}
@@ -197,7 +183,13 @@
     </delete>
     <!--菜单联动显示-->
     <select id="choice" resultType="com.shiguang.product.domain.ProducaDO">
-		select  brandid,brandnum ,brandname  from c_brand  where mfrsid=#{mfrsid} and goodsid=#{goodsid} group by brandid
+		select  brandid,brandnum ,brandname  from c_brand
+		<where>
+            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
+            <if test="goodsid != null and goodsid != ''">and goodsid = #{goodsid}</if>
+            <if test="xsstate != null and xsstate != ''">and xsstate = #{xsstate}</if>
+        </where>
+		 group by brandid
 	</select>
     <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.ProducaDO">

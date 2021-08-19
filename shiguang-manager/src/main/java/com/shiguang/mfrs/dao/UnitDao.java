@@ -5,6 +5,7 @@ import com.shiguang.mfrs.domain.UnitDO;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.product.domain.HlyDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

@@ -24,7 +24,7 @@ public interface BrandService {
 
     //    <!--查询商品品种-->
     List<BrandDO> finfBrand(Map<String, Object> map);
-
+    int finfBrandcount(Map<String, Object> map);
     //    <!--//判断是否存在制造商代码-->
     List<BrandDO> haveNum(Map<String, Object> map);
 

@@ -59,9 +59,14 @@ public class YxcpServiceImpl implements YxcpService {
     }
 
     //删除修改状态
-
     @Override
     public int updateState(YxcpDO yxcp) {
         return yxcpDao.updateState(yxcp);
+    }
+
+    //判断是否存在商品代码
+    @Override
+    public List<YxcpDO> haveNum(Map<String, Object> map) {
+        return yxcpDao.haveNum(map);
     }
 }

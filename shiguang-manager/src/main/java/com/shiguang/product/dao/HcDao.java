@@ -2,6 +2,7 @@ package com.shiguang.product.dao;
 
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.product.domain.HcDO;
+import com.shiguang.product.domain.ProducaDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -37,4 +38,6 @@ public interface HcDao {
 
     //删除修改状态
     int updateState(HcDO hc);
+    //判断是否存在商品代码
+    List<HcDO> haveNum(Map<String, Object> map);
 }

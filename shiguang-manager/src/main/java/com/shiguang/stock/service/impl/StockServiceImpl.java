@@ -197,6 +197,18 @@ public class StockServiceImpl implements StockService {
         return stockDao.selectJpcp(map);
     }
 
+    //<!--隐形定做【商】【品】【查】【询】-->
+    @Override
+    public List<YxdzDO> selectYxdz(Map<String, Object> map) {
+        return stockDao.selectYxdz(map);
+    }
+
+    //<!--隐形成品【商】【品】【查】【询】-->
+    @Override
+    public List<YxcpDO> selectYxcp(Map<String, Object> map) {
+        return stockDao.selectYxcp(map);
+    }
+
     //<!--护理液【商】【品】【查】【询】-->
     @Override
     public List<HlyDO> selectHly(Map<String, Object> map) {

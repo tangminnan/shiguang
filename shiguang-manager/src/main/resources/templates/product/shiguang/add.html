@@ -67,7 +67,7 @@
                            oninput="if(value.length>9)value=value.slice(0,9)">
                     <em>*</em>
                 </td>
-                <td>商品编号</td>
+                <td>商品编号：</td>
                 <td>
                     <input id="proid" name="proid" type="text" onkeyup="choiceProid(this)"
                            oninput="if(value.length>4)value=value.slice(0,4)"/>
@@ -93,9 +93,9 @@
                 </td>
                 <td>销售状态：</td>
                 <td>
-                    <input name="status" value="1" type="radio"> <label for="PH-S"
+                    <input name="xsstate" value="1" type="radio"> <label for="PH-S"
                                                                         style="margin-right: 5%">禁用</label>
-                    <input name="status" value="0" type="radio" checked> <label for="PH-F">启用</label>
+                    <input name="xsstate" value="0" type="radio" checked> <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>
                 <td>类型</td>
@@ -159,7 +159,7 @@
         <!--未删除-->
         <input id="state" name="state" value="1" type="hidden">
         <input type="button" value="保存" onclick="baocun()"/>
-        <input type="button" class="empty" value="清空"/>
+        <!--<input type="button" class="empty" value="清空"/>-->
         <dl>
             <dt>视光：<br/>商品代码组成说明：</dt>
             <dd><img src="/img/sg.png" alt=""/></dd>

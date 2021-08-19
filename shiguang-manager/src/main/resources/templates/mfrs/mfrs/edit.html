@@ -23,34 +23,34 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <input id="mfrsid" name="mfrsid" th:value="${mfrs.mfrsid}" type="hidden">
             <tr>
-                <td>制造商代码</td>
+                <td>制造商代码：</td>
                 <td>
                     <input id="mfrsnum" name="mfrsnum" th:value="${mfrs.mfrsnum}" readonly type="text"
                            style="background-color: #e4e4e4">
                     <br>
                     <em>*制造商代码不能超过2位</em>
                 </td>
-                <td>制造商简称</td>
+                <td>制造商简称：</td>
                 <td>
                     <input id="mfrsname" name="mfrsname" th:value="${mfrs.mfrsname}" type="text"><em>*</em>
                 </td>
-                <td>制造商联系人</td>
+                <td>制造商联系人：</td>
                 <td>
                     <input id="mfrscontacts" name="mfrscontacts" th:value="${mfrs.mfrscontacts}" type="text"><em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>制造商全称</td>
+                <td>制造商全称：</td>
                 <td>
                     <input id="mfrsrealname" name="mfrsrealname" th:value="${mfrs.mfrsrealname}" type="text"><em>*</em>
                 </td>
-                <td>制造商电话</td>
+                <td>制造商电话：</td>
                 <td>
                     <input id="mfrstelephone" name="mfrstelephone" th:value="${mfrs.mfrstelephone}" type="text">
                     <br>
                     <em>*如：022-85123455</em>
                 </td>
-                <td>联系人电话</td>
+                <td>联系人电话：</td>
                 <td>
                     <input id="mfrsphone" name="mfrsphone" th:value="${mfrs.mfrsphone}" type="text">
                     <br>
@@ -58,7 +58,7 @@
                 </td>
             </tr>
             <tr>
-                <td>商品类型</td>
+                <td>商品类型：</td>
                 <td colspan="2">
                     <input name="goodsid" value="1" type="checkbox"/>镜架
                     <input name="goodsid" value="2" type="checkbox"/>配件
@@ -74,12 +74,12 @@
                 </td>
             </tr>
             <tr>
-                <td>制造商地址</td>
+                <td>制造商地址：</td>
                 <td>
                     <input id="mfrsaddress" name="mfrsaddress" th:value="${mfrs.mfrsaddress}" type="text"
                            style="width: 80%">
                 </td>
-                <td>制造商传真</td>
+                <td>制造商传真：</td>
                 <td>
                     <input id="mfrsfax" name="mfrsfax" th:value="${mfrs.mfrsfax}" type="text">
                     <br>
@@ -87,7 +87,7 @@
                 </td>
             </tr>
             <tr>
-                <td>采购结算方式</td>
+                <td>采购结算方式：</td>
                 <td>
                     <select name="payid" id="payid" th:value="${mfrs.payid}" onchange="payChange()">
                         <option th:each="ls:${payDOList}"
@@ -99,7 +99,7 @@
                     <input id="payday" name="payday" th:value="${mfrs.payday}" type="text" hidden placeholder="请输入天数"
                            oninput="value=value.replace(/[^\d]/g,'')">
                 </td>
-                <td>开票状态</td>
+                <td>开票状态：</td>
                 <td>
                     <div class="col-sm-8">
                         <label class="radio-inline">
@@ -115,10 +115,10 @@
                 <td>
                     <div class="col-sm-8">
                         <label class="radio-inline">
-                            <input type="radio" name="status" value="1" th:field="*{mfrs.status}"/> 禁用
+                            <input type="radio" name="xsstate" value="1" th:field="*{mfrs.xsstate}"/> 禁用
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="status" value="0" th:field="*{mfrs.status}"/> 启用
+                            <input type="radio" name="xsstate" value="0" th:field="*{mfrs.xsstate}"/> 启用
                         </label>
                         <em>*</em>
                     </div>
@@ -161,7 +161,7 @@
                 </td>
             </tr>
             <tr>
-                <td>备注</td>
+                <td>备注：</td>
                 <td colspan="5"><textarea id="remarks" name="remarks" rows="3" th:value="${mfrs.remarks}"></textarea>
                 </td>
             </tr>

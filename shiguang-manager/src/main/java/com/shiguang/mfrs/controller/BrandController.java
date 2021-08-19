@@ -99,13 +99,14 @@ public class BrandController {
     }
     //查询商品品种
     @ResponseBody
-    @GetMapping("/brandList")
+    @GetMapping("/findbrandList")
     @RequiresPermissions("mfrs:brand:brand")
-    public PageUtils brandList(@RequestParam Map<String, Object> params) {
+    public PageUtils findbrandList(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        query.put("xsstate","0");
         List<BrandDO> brandDOList = brandService.finfBrand(query);
-        int total = brandService.count(query);
+        int total = brandService.finfBrandcount(query);
         PageUtils pageUtils = new PageUtils(brandDOList, total);
         return pageUtils;
     }
@@ -309,12 +310,7 @@ public class BrandController {
         return "mfrs/brand/findmfrs";
     }
 
-//    //跳转制造商
-//    @GetMapping("/findmfrs")
-//    @RequiresPermissions("mfrs:brand:findmfrs")
-//    String findmfrs() {
-//        return "mfrs/brand/findmfrs";
-//    }
+
 
     //制造商——商品类别菜单下来选择
     @ResponseBody
@@ -333,7 +329,7 @@ public class BrandController {
     public R updateEnable(Integer brandid, Long enable) {
         BrandDO brandDO = new BrandDO();
         brandDO.setBrandid(brandid);
-        brandDO.setStatus(enable);
+        brandDO.setXsstate(enable);
         brandService.update(brandDO);
         return R.ok();
     }

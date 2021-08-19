@@ -9,14 +9,34 @@ import java.util.Date;
 
 /**
  * 公司维护表
- * 
+ *
  * @author cln
  * @email bushuo@163.com
  * @date 2021-06-16 09:59:28
  */
 public class CompanyDO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+	//状态(0:停用1:启用)
+	private Long xsstate;
+	//状态(0:删除1:未删除)
+	private Long state;
+
+	public Long getXsstate() {
+		return xsstate;
+	}
+
+	public void setXsstate(Long xsstate) {
+		this.xsstate = xsstate;
+	}
+
+	public Long getState() {
+		return state;
+	}
+
+	public void setState(Long state) {
+		this.state = state;
+	}
+
 	//公司id
 	private Integer id;
 	//公司名称

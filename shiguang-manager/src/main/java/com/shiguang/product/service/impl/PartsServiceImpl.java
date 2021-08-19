@@ -63,10 +63,16 @@ public class PartsServiceImpl implements PartsService {
     public List<BrandDO> choice(Integer mfrsid) {
         return partsDao.choice(mfrsid);
     }
-    //删除修改状态
 
+    //删除修改状态
     @Override
     public int updateState(PartsDO parts) {
         return partsDao.updateState(parts);
+    }
+
+    //判断是否存在商品代码
+    @Override
+    public List<PartsDO> haveNum(Map<String, Object> map) {
+        return partsDao.haveNum(map);
     }
 }

@@ -76,7 +76,7 @@ public class HcDO implements Serializable {
     //标准零售价格
     private String retailPrice;
     //状态（0：启用1：停用）
-    private Long status;
+    private Long xsstate;
     //状态(0:删除1:未删除)
     private Long state;
 
@@ -335,15 +335,16 @@ public class HcDO implements Serializable {
     /**
      * 设置：状态(0：启用1：停用)
      */
-    public Long getStatus() {
-        return status;
+
+    public Long getXsstate() {
+        return xsstate;
     }
 
     /**
      * 获取：状态(0：启用1：停用)
      */
-    public void setStatus(Long status) {
-        this.status = status;
+    public void setXsstate(Long xsstate) {
+        this.xsstate = xsstate;
     }
 
     /**

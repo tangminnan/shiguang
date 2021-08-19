@@ -31,21 +31,7 @@
                                        class="form-control" type="text" readonly>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">销售状态：</label>
-                            <div class="col-sm-8">
-                                <label class="radio-inline"> <input type="radio"
-                                                                    th:field="*{oldlens.status}" name="status"
-                                                                    value="1" disabled/>
-                                    禁用
-                                </label>
-                                <label class="radio-inline"> <input type="radio"
-                                                                    th:field="*{oldlens.status}" name="status"
-                                                                    value="0" disabled/>
-                                    启用
-                                </label>
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商：</label>
                             <div class="col-sm-8">
@@ -121,14 +107,27 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">批号管理：</label>
                             <div class="col-sm-8">
-                                <div class="col-sm-8">
                                     <label class="radio-inline"> <input type="radio" th:field="*{oldlens.batchid}"
                                                                         name="batchid" value="1" disabled/> 是
                                     </label>
                                     <label class="radio-inline"> <input type="radio" th:field="*{oldlens.batchid}"
                                                                         name="batchid" value="2" disabled/> 否
                                     </label>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">销售状态：</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline"> <input type="radio"
+                                                                    th:field="*{oldlens.xsstate}" name="xsstate"
+                                                                    value="1" disabled/>
+                                    禁用
+                                </label>
+                                <label class="radio-inline"> <input type="radio"
+                                                                    th:field="*{oldlens.xsstate}" name="xsstate"
+                                                                    value="0" disabled/>
+                                    启用
+                                </label>
                             </div>
                         </div>
                         <div class="form-group">

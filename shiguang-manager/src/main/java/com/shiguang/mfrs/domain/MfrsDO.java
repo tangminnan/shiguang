@@ -56,7 +56,7 @@ public class MfrsDO implements Serializable {
     //备注
     private String remarks;
     //状态（0：启用1：停用）
-    private Long status;
+    private Long xsstate;
     //状态(0:删除1:未删除)
     private Long state;
     //天
@@ -340,15 +340,17 @@ public class MfrsDO implements Serializable {
     /**
      * 设置：状态(0：启用1：停用)
      */
-    public void setStatus(Long status) {
-        this.status = status;
+    public Long getXsstate() {
+        return xsstate;
     }
+
+
 
     /**
      * 获取：状态(0：启用1：停用)
      */
-    public Long getStatus() {
-        return status;
+    public void setXsstate(Long xsstate) {
+        this.xsstate = xsstate;
     }
 
     /**

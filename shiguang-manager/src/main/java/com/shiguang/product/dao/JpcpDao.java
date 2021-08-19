@@ -1,6 +1,7 @@
 package com.shiguang.product.dao;
 
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.JpcpDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -38,4 +39,6 @@ public interface JpcpDao {
 
     //删除修改状态
     int updateState(JpcpDO jpcp);
+    //判断是否存在商品代码
+    List<JpcpDO> haveNum(Map<String, Object> map);
 }

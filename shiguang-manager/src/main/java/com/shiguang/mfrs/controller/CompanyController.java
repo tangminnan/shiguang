@@ -6,9 +6,7 @@ import java.util.Map;
 
 import com.shiguang.common.config.BootdoConfig;
 import com.shiguang.common.utils.FileUtil;
-import com.shiguang.mfrs.domain.GoodsDO;
-import com.shiguang.mfrs.domain.MfrsDO;
-import com.shiguang.mfrs.domain.ProvincesDO;
+import com.shiguang.mfrs.domain.*;
 import com.shiguang.mfrs.service.ProvincesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shiguang.mfrs.domain.CompanyDO;
 import com.shiguang.mfrs.service.CompanyService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
@@ -64,6 +61,7 @@ public class CompanyController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
+		query.put("state",1);
 		List<CompanyDO> companyList = companyService.list(query);
 		int total = companyService.count(query);
 		PageUtils pageUtils = new PageUtils(companyList, total);
@@ -197,28 +195,55 @@ public class CompanyController {
 		return R.ok();
 	}
 
+//	/**
+//	 * 删除
+//	 */
+//	@PostMapping( "/remove")
+//	@ResponseBody
+//	@RequiresPermissions("mfrs:company:remove")
+//	public R remove( Integer id){
+//		if(companyService.remove(id)>0){
+//		return R.ok();
+//		}
+//		return R.error();
+//	}
+//
+//	/**
+//	 * 删除
+//	 */
+//	@PostMapping( "/batchRemove")
+//	@ResponseBody
+//	@RequiresPermissions("mfrs:company:batchRemove")
+//	public R remove(@RequestParam("ids[]") Integer[] ids){
+//		companyService.batchRemove(ids);
+//		return R.ok();
+//	}
 	/**
-	 * 删除
+	 * 启用修改状态
 	 */
-	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("mfrs:company:remove")
-	public R remove( Integer id){
-		if(companyService.remove(id)>0){
+	@RequestMapping(value = "/updateEnable")
+	public R updateEnable(Integer id, Long enable) {
+		CompanyDO companyDO = new CompanyDO();
+		companyDO.setId(id);
+		companyDO.setXsstate(enable);
+		companyService.update(companyDO);
 		return R.ok();
+	}
+
+	/**
+	 * 删除修改状态
+	 */
+	@ResponseBody
+	@RequestMapping("/remove")
+	@RequiresPermissions("mfrs:mfrs:remove")
+	public R updateStatus(Integer id) {
+		CompanyDO companyDO = new CompanyDO();
+		companyDO.setState(0L);
+		companyDO.setId(id);
+		if (companyService.update(companyDO) > 0) {
+			return R.ok();
 		}
 		return R.error();
 	}
-
-	/**
-	 * 删除
-	 */
-	@PostMapping( "/batchRemove")
-	@ResponseBody
-	@RequiresPermissions("mfrs:company:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] ids){
-		companyService.batchRemove(ids);
-		return R.ok();
-	}
-
 }

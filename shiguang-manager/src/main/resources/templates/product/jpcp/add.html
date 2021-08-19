@@ -20,22 +20,22 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>商品代码</td>
+                <td>商品代码：</td>
                 <td>
                     <input id="producNum" name="producNum" type="text" value="3.00.00.000000000.0000"/>
                 </td>
-                <td>商品条码</td>
+                <td>商品条码：</td>
                 <td>
                     <input id="producCode" name="producCode" type="text" value="300000000000000000"/>
                     <em>*</em>
                 </td>
-                <td>商品名称</td>
+                <td>商品名称：</td>
                 <td><input id="producName" name="producName" type="text"/>
                     <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>制造商</td>
+                <td>制造商：</td>
                 <td>
                     <input id="mfrsid" name="mfrsid" type="hidden"/>
                     <input id="mfrsnum" name="mfrsnum" type="hidden"/>
@@ -44,21 +44,28 @@
                     <input type="button" class="XZ-btn" value="选择" onclick="getMfrs()"/>
                     <em>*</em>
                 </td>
-                <td>商品品种</td>
+                <td>商品品种：</td>
                 <td style="width:20%;">
                     <select id="brandnum" name="brandnum" onchange="change(this, 5, 7)">
                         <option value="">--请选择--</option>
                     </select>
                     <em>*</em>
                 </td>
-                <td>商品编号</td>
+                <!--<td>商品编号</td>-->
+                <!--<td>-->
+                    <!--<input id="proid" name="proid" type="text"/>-->
+                    <!--<em>*</em>-->
+                <!--</td>-->
+                <td>商品编号：</td>
                 <td>
-                    <input id="proid" name="proid" type="text"/>
+                    <input id="proid" name="proid" onkeyup="liandong2(this)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" type="text"
+                           oninput="if(value.length>9)value=value.slice(0,9)">
                     <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>计量单位</td>
+                <td>计量单位：</td>
                 <td>
                     <select id="unitid" name="unitid">
                         <option></option>
@@ -67,7 +74,7 @@
                     </select>
                     <em>*</em>
                 </td>
-                <td>球镜</td>
+                <td>球镜：</td>
                 <td>
                     <select id="sphId" name="sphId">
                         <option value="">--请选择--</option>
@@ -78,7 +85,7 @@
                     </select>
                     <em>*</em>
                 </td>
-                <td>柱镜</td>
+                <td>柱镜：</td>
                 <td>
                     <select id="cylId" name="cylId" class="form-control">
                         <option value="">--请选择--</option>
@@ -91,7 +98,7 @@
                 </td>
             </tr>
             <tr>
-                <td>下加光</td>
+                <td>下加光：</td>
                 <td>
                     <select id="lightbelowId" name="lightbelowId">
                         <option value="">--请选择--</option>
@@ -101,7 +108,7 @@
                         ></option>
                     </select>
                 </td>
-                <td>材料分类</td>
+                <td>材料分类：</td>
                 <td>
                     <select id="lensId" name="lensId">
                         <option value="">--请选择--</option>
@@ -113,18 +120,18 @@
                 </td>
             </tr>
             <tr>
-                <td>批号管理</td>
+                <td>批号管理：</td>
                 <td>
                     <input name="batchid" value="1" type="radio" id="PH-S" checked> <label for="PH-S"
                                                                                            style="margin-right: 5%">是</label>
                     <input name="batchid" value="2" type="radio" id="PH-F"> <label for="PH-F">否</label>
                     <em>*</em>
                 </td>
-                <td>销售状态</td>
+                <td>销售状态：</td>
                 <td>
-                    <input name="status" value="1" type="radio"> <label for="PH-S"
+                    <input name="xsstate" value="1" type="radio"> <label for="PH-S"
                                                                         style="margin-right: 5%">禁用</label>
-                    <input name="status" value="0" type="radio" checked> <label for="PH-F">启用</label>
+                    <input name="xsstate" value="0" type="radio" checked> <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>
             </tr>
@@ -137,7 +144,7 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>光度分类</td>
+                <td>光度分类：</td>
                 <td>
                     <select id="lightId" name="lightId"
                             onchange="lightIdstr()">
@@ -148,7 +155,7 @@
                         ></option>
                     </select>
                 </td>
-                <td>渐进片分类</td>
+                <td>渐进片分类：</td>
                 <td style="width:20%;">
                     <select id="gradualId" name="gradualId" class="form-control" style="display: none">
                         <option th:each="ls:${gradualDOList}"
@@ -157,7 +164,7 @@
                         ></option>
                     </select>
                 </td>
-                <td>折射率</td>
+                <td>折射率：</td>
                 <td style="width:20%;">
                     <select id="refractivityid" name="refractivityid" class="form-control">
                         <option></option>
@@ -169,7 +176,7 @@
                 </td>
             </tr>
             <tr>
-                <td>镜片功能</td>
+                <td>镜片功能：</td>
                 <td>
                     <select id="functionId" name="functionId" class="form-control">
                         <option></option>
@@ -190,19 +197,19 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>税率（%）</td>
+                <td>税率（%）：</td>
                 <td>
                     <input id="tax" name="tax" type="text" value="17"
                            oninput="value=value.replace(/[^\d]/g,'')"/>
                     <em>*</em>
                 </td>
-                <td>含税单价</td>
+                <td>含税单价：</td>
                 <td>
                     <input id="taxPrice" name="taxPrice" type="text"
                            oninput="getmoney(this,10)" autofocus/>
                     <em>*</em>
                 </td>
-                <td>批发价格</td>
+                <td>批发价格：</td>
                 <td colspan="3">
                     <input id="tradePrice" name="tradePrice" type="text" style="width: 60%"
                            oninput="getmoney(this,10)" autofocus/>
@@ -210,13 +217,13 @@
                 </td>
             </tr>
             <tr>
-                <td>调货成本</td>
+                <td>调货成本：</td>
                 <td>
                     <input id="transferPrice" name="transferPrice" type="text"
                            oninput="getmoney(this,10)" autofocus/>
                     <em>*</em>
                 </td>
-                <td>标准零售价格</td>
+                <td>标准零售价格：</td>
                 <td colspan="3">
                     <input id="retailPrice" name="retailPrice" type="text" style="width: 29%"
                            oninput="getmoney(this,10)" autofocus/>
@@ -232,7 +239,7 @@
         <!--未删除-->
         <input id="state" name="state" value="1" type="hidden">
         <input type="button" value="保存" onclick="baocun()"/>
-        <input type="button" class="empty" value="清空"/>
+        <!--<input type="button" class="empty" value="清空"/>-->
         <dl>
             <dt>镜片（成品）<br/>商品代码组成说明</dt>
             <dd><img src="/img/jpcp.png" alt=""/></dd>
@@ -333,8 +340,18 @@
 
     function change(e, k, s) {
         a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);
-        a1_val = a1.value.substring(0, 7) + a1_val.substring(7, 22);
+        a1_val = a1.proidng(0, 7) + a1_val.substring(7, 22);
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//黏贴
+    }
+    function liandong2(e) {//型号
+        var val2 = document.getElementById("proid").value;
+        var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
+        // var proid = document.getElementById("proid");
+        document.getElementById("proid").value = va2;
+        sum = 17 - e.value.length;
+        sum1 = 22 - unitid.value.length;
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
 
     /**

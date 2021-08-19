@@ -58,7 +58,7 @@
                            type="hidden">
                     <em>*</em>
                 </td>
-                <td>商品编号</td>
+                <td>商品编号：</td>
                 <td>
                     <input id="proid" name="proid" th:value="${yxcp.proid}" class="form-control"
                            type="text">
@@ -66,7 +66,7 @@
                 </td>
             </tr>
             <tr>
-                <td>计量单位</td>
+                <td>计量单位：</td>
                 <td>
                     <select name="unitid" id="unitid" th:value="${yxcp.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -78,7 +78,7 @@
                            type="hidden">
                     <em>*</em>
                 </td>
-                <td>球镜</td>
+                <td>球镜：</td>
                 <td>
                     <select id="sphId" name="sphId" th:value="${yxcp.sphId}" class="form-control"
                             data-actions-box="false" data-size="5" disabled>
@@ -91,7 +91,7 @@
                     </select>
                     <em>*</em>
                 </td>
-                <td>柱镜</td>
+                <td>柱镜：</td>
                 <td>
                     <select id="cylId" name="cylId" th:value="${yxcp.cylId}" class="form-control"
                             data-actions-box="false" data-size="5" disabled>
@@ -106,28 +106,30 @@
                 </td>
             </tr>
             <tr>
-                <td>曲率</td>
+                <td>曲率：</td>
                 <td>
                     <input id="curvature" name="curvature" th:value="${yxcp.curvature}" class="form-control"
                            type="text">
+                    <em>*</em>
                 </td>
-                <td>直径</td>
+                <td>直径：</td>
                 <td>
                     <input id="diameter" name="diameter" th:value="${yxcp.diameter}" class="form-control"
                            type="text">
+                    <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>厂家型号</td>
+                <td>厂家型号：</td>
                 <td>
                     <input id="factory" name="factory" th:value="${yxcp.factory}" class="form-control"
                            type="text">
                 </td>
-                <td>销售状态</td>
+                <td>销售状态：</td>
                 <td>
-                    <input th:field="*{yxcp.status}" name="status" value="1" type="radio" id="PH-S"> <label for="PH-S"
+                    <input th:field="*{yxcp.xsstate}" name="xsstate" value="1" type="radio" id="PH-S"> <label for="PH-S"
                                                                                                             style="margin-right: 5%">禁用</label>
-                    <input th:field="*{yxcp.status}" name="status" value="0" type="radio" id="PH-F"> <label for="PH-F">启用</label>
+                    <input th:field="*{yxcp.xsstate}" name="xsstate" value="0" type="radio" id="PH-F"> <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>
             </tr>
@@ -140,7 +142,7 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>使用类型</td>
+                <td>使用类型：</td>
                 <td>
                     <select id="usageId" name="usageId" th:value="${yxcp.usageId}" class="form-control"
                             style="width:60%"
@@ -153,7 +155,7 @@
                                type="hidden">
                     </select>
                 </td>
-                <td>抛弃型分类</td>
+                <td>抛弃型分类：</td>
                 <td style="width:20%;">
                     <select id="typeId" name="typeId" th:value="${yxcp.typeId}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -165,23 +167,23 @@
                                type="hidden">
                     </select>
                 </td>
-                <td>产品可使用天数</td>
+                <td>产品可使用天数：</td>
                 <td style="width:20%;">
                     <input id="useDays" name="useDays" th:value="${yxcp.useDays}" class="form-control"
                            type="text">
                 </td>
             </tr>
             <tr>
-                <td>效期提醒上限</td>
+                <td>效期提醒上限：</td>
                 <td>
                     有效期前<input id="upday" name="upday" th:value="${yxcp.upday}" style="width: 20%"
                                type="text">天提醒进入滞销状态
                 </td>
-                <td>效期提醒下限</td>
+                <td>效期提醒下限：</td>
                 <td>
                     有效期前<input id="downday" name="downday" th:value="${yxcp.downday}" type="text" style="width: 20%">天提醒进入即将失效状态
                 </td>
-                <td>颜色</td>
+                <td>颜色：</td>
                 <td>
                     <select id="color" name="color" th:value="${yxcp.color}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -189,7 +191,7 @@
                 </td>
             </tr>
             <tr>
-                <td>隐形类别</td>
+                <td>隐形类别：</td>
                 <td>
                     <select id="invisibleId" name="invisibleId" th:value="${yxcp.invisibleId}" style="width:60%"
                             class="form-control"
@@ -203,7 +205,7 @@
                                type="hidden">
                     </select>
                 </td>
-                <td>材质</td>
+                <td>材质：</td>
                 <td>
                     <select id="caizhiId" name="caizhiId" th:value="${yxcp.caizhiId}" class="form-control"
                             data-actions-box="false" data-size="5">

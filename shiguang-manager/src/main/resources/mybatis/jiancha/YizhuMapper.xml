@@ -27,7 +27,7 @@
         </if>
     </select>
 
-    <select id="countYizhu" resultType="int">
+    <select id="findYizhucount" resultType="int">
         select count(*) from yizhu
         <where>
             <if test="yizhuId != null and yizhuId != ''">and yizhu_id = #{yizhuId}</if>

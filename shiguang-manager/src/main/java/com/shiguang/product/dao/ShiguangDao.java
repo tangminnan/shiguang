@@ -1,6 +1,7 @@
 package com.shiguang.product.dao;
 
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.ShiguangDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -26,7 +27,7 @@ public interface ShiguangDao {
 
     //选择视觉训练-视光
     List<ShiguangDO> getshiguang(Map<String, Object> map);
-
+    int getshiguangcount(Map<String, Object> map);
     int save(ShiguangDO shiguang);
 
     int update(ShiguangDO shiguang);
@@ -40,4 +41,7 @@ public interface ShiguangDao {
 
     //删除修改状态
     int updateState(ShiguangDO shiguang);
+
+    //判断是否存在商品代码
+    List<ShiguangDO> haveNum(Map<String, Object> map);
 }

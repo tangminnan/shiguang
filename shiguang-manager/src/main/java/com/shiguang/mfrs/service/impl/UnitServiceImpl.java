@@ -1,5 +1,6 @@
 package com.shiguang.mfrs.service.impl;
 
+import com.shiguang.product.domain.HlyDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,5 @@ public class UnitServiceImpl implements UnitService {
 	public int batchRemove(Integer[] unitids){
 		return unitDao.batchRemove(unitids);
 	}
-	
+
 }

@@ -8,7 +8,7 @@ function load() {
         .bootstrapTable(
             {
                 method: 'get', // 服务器数据的请求方式 get or post
-                url: prefix + "/brandList", // 服务器数据的加载地址
+                url: prefix + "/findbrandList", // 服务器数据的加载地址
                 //	showRefresh : true,
                 //	showToggle : true,
                 //	showColumns : true,
@@ -188,11 +188,11 @@ function load() {
                     //     title : '状态(1:停用2:启用)'
                     // },
                     // {
-                    //     field : 'status',
+                    //     field : 'xsstate',
                     //     title : '状态（1：停用2：启用）'
                     // },
                     // {
-                    //     field: 'status',
+                    //     field: 'xsstate',
                     //     title: '启用状态',
                     //     align: 'center',
                     //     formatter: function (value, row, index) {
@@ -201,7 +201,7 @@ function load() {
                     //         str += ' <div class="onoffswitch"> ';
                     //         str += ' <input name="allowComment" ';
                     //         //启用状态 0：启用；1：禁用
-                    //         if (row.status == 0)
+                    //         if (row.xsstate == 0)
                     //             str += ' checked="" ';
                     //
                     //         str += ' type="checkbox" onchange="updateEnable(' + row.brandid + ',this)" value="' + row.brandid + '" class="onoffswitch-checkbox" id="example1' + row.brandid + '">  ';

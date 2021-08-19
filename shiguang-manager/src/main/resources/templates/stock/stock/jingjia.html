@@ -32,27 +32,36 @@
         <tr>
             <td>制造商：</td>
             <td>
-                <input type="text" th:value="${mfrsname}" readonly/>
+                <input type="text" th:value="${mfrsname}" readonly style="background-color: #e4e4e4"/>
                 <input id="mfrsid" type="hidden" th:value="${mfrsid}"/>
             </td>
             <td>商品品种：</td>
             <td>
-                <input type="text" th:value="${brandname}" readonly/>
-                <input id="brandid" type="hidden" th:value="${brandid}"/>
-                <input type="button" class="XZ-btn" value="选择"/>
+                <!--<input id="brandnum" name="brandnum" type="hidden" value=""/>-->
+                <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
+                <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
         </tr>
         <tr>
             <td>商品类别：</td>
             <td>
-                <select disabled>
-                    <option>镜架</option>
+                <select id="goodsid" name="goodsid" disabled>
+                    <option value="1" >镜架</option>
                 </select>
             </td>
-            <td>新增时间：</td>
+            <!--<td>新增时间：</td>-->
+            <!--<td>-->
+                <!--<input type="text" value="2021"/>至-->
+                <!--<input type="text" value="2021"/>-->
+            <!--</td>-->
+            <td>工艺类型：</td>
             <td>
-                <input type="text" value="2021"/>至
-                <input type="text" value="2021"/>
+                <select id="technologyId" name="technologyId" style="width: 30%">
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${technologyDOList}"
+                            th:text="${ls.technologyType}"
+                            th:value="${ls.technologyId}"></option>
+                </select>
             </td>
         </tr>
         <tr>
@@ -71,17 +80,6 @@
                     <option value="">--请选择--</option>
                     <option th:each="ls:${materialDOList}" th:text="${ls.materialname}"
                             th:value="${ls.materialid}"></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>工艺类型：</td>
-            <td>
-                <select id="technologyId" name="technologyId">
-                    <option value="">--请选择--</option>
-                    <option th:each="ls:${technologyDOList}"
-                            th:text="${ls.technologyType}"
-                            th:value="${ls.technologyId}"></option>
                 </select>
             </td>
         </tr>
@@ -134,6 +132,7 @@
             <td style="display: none">批发价格</td>
             <td style="display: none">调货成本</td>
             <td style="display: none">商品条码</td>
+            <td style="display: none">商品品种</td>
         </tr>
         </tbody>
     </table>
@@ -166,7 +165,8 @@
                         "            <td name='size'>" + xml[i].size + "</td>\n" +
                         "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
                         "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
-                        "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td></tr>>");
+                        "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
+                        "            <td name='brandname' style='display: none'>" + xml[i].brandname + "</td></tr>>");
                 }
             }
         })
@@ -217,12 +217,39 @@
                         "            <td name='size'>" + xml[i].size + "</td>\n" +
                         "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
                         "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
-                        "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td></tr>>");
+                        "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
+                        "            <td name='brandname' style='display: none'>" + xml[i].brandname + "</td></tr>>");
                 }
             }
         })
     }
-
+    function choiceBrand() {
+        var goodsid = document.getElementById('goodsid').value;
+        var mfrsid = document.getElementById('mfrsid').value;
+        // alert(goodsid);
+        if (mfrsid == "") {
+            alert("请选择制造商！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findbrand/" + mfrsid+"/"+goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandname").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                        // $("#brandNames").val(rows[i].brandname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
 </script>
 </body>
 </html>

@@ -11,21 +11,21 @@
                     <form class="form-horizontal m-t" id="signupForm">
                         <input id="mfrsid" name="mfrsid" th:value="${mfrs.mfrsid}" type="hidden">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商代码 </label>
+                            <label class="col-sm-3 control-label">制造商代码：</label>
                             <div class="col-sm-8">
                                 <input id="mfrsnum" name="mfrsnum" th:value="${mfrs.mfrsnum}" readonly
                                        type="text">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商简称 </label>
+                            <label class="col-sm-3 control-label">制造商简称： </label>
                             <div class="col-sm-8">
                                 <input id="mfrsname" name="mfrsname" th:value="${mfrs.mfrsname}"
                                        type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商联系人 </label>
+                            <label class="col-sm-3 control-label">制造商联系人： </label>
                             <div class="col-sm-8">
                                 <input id="mfrscontacts" name="mfrscontacts" th:value="${mfrs.mfrscontacts}"
                                        type="text" readonly>
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商全称 </label>
+                            <label class="col-sm-3 control-label">制造商全称： </label>
                             <div class="col-sm-8">
                                 <input id="mfrsrealname" name="mfrsrealname" th:value="${mfrs.mfrsrealname}"
                                        type="text" readonly>
@@ -41,14 +41,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商电话 </label>
+                            <label class="col-sm-3 control-label">制造商电话：</label>
                             <div class="col-sm-8">
                                 <input id="mfrstelephone" name="mfrstelephone" th:value="${mfrs.mfrstelephone}"
                                        type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">联系人电话 </label>
+                            <label class="col-sm-3 control-label">联系人电话：</label>
                             <div class="col-sm-8">
                                 <input id="mfrsphone" name="mfrsphone" th:value="${mfrs.mfrsphone}"
                                        type="text" readonly>
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">商品类别 </label>
+                            <label class="col-sm-3 control-label">商品类别： </label>
                             <div class="col-sm-8">
                                 <td colspan="2">
                                     <input name="goodsid" value="1" type="checkbox" onclick="return false"/>镜架
@@ -75,14 +75,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商传真 </label>
+                            <label class="col-sm-3 control-label">制造商传真：</label>
                             <div class="col-sm-8">
                                 <input id="mfrsfax" name="mfrsfax" th:value="${mfrs.mfrsfax}"
                                        type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">制造商地址 </label>
+                            <label class="col-sm-3 control-label">制造商地址：</label>
                             <div class="col-sm-8">
                                 <input id="mfrsaddress" name="mfrsaddress" th:value="${mfrs.mfrsaddress}"
                                        type="text" readonly>
@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">采购结算方式 </label>
+                            <label class="col-sm-3 control-label">采购结算方式：</label>
                             <div class="col-sm-8">
                                 <select name="payid" id="payid" th:value="${mfrs.payid}" onchange="payChange()"
                                         data-actions-box="false" data-size="5" disabled>
@@ -107,7 +107,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">开票状态 </label>
+                            <label class="col-sm-3 control-label">开票状态：</label>
                             <div class="col-sm-8">
                                 <label class="radio-inline">
                                     <input type="radio" th:field="*{mfrs.invoiceid}" name="invoiceid" value="1"
@@ -120,63 +120,63 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">统一社会信用代码 </label>
+                            <label class="col-sm-3 control-label">统一社会信用代码：</label>
                             <div class="col-sm-8">
                                 <input id="creditcode" name="creditcode" th:value="${mfrs.creditcode}"
                                        type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">统一社会信用代码效期 </label>
+                            <label class="col-sm-3 control-label">统一社会信用代码效期：</label>
                             <div class="col-sm-8">
                                 <input id="creditcodeday" name="creditcodeday" th:value="${mfrs.creditcodedays}"
                                        type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">医疗器械经营许可证号 </label>
+                            <label class="col-sm-3 control-label">医疗器械经营许可证号：</label>
                             <div class="col-sm-8">
                                 <input id="medicinecode" name="medicinecode" th:value="${mfrs.medicinecode}"
                                        type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">医疗器械经营许可证有效期 </label>
+                            <label class="col-sm-3 control-label">医疗器械经营许可证有效期： </label>
                             <div class="col-sm-8">
                                 <input id="medicinecodeday" name="medicinecodeday" th:value="${mfrs.medicinecodedays}"
                                        type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">全国工业品生产许可证号 </label>
+                            <label class="col-sm-3 control-label">全国工业品生产许可证号： </label>
                             <div class="col-sm-8">
                                 <input id="productscode" name="productscode" th:value="${mfrs.productscode}"
                                        type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">全国工业品生产许可证有效期 </label>
+                            <label class="col-sm-3 control-label">全国工业品生产许可证有效期： </label>
                             <div class="col-sm-8">
                                 <input id="productscodeday" name="productscodeday" th:value="${mfrs.productscodedays}"
                                        type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">备注 </label>
+                            <label class="col-sm-3 control-label">备注： </label>
                             <div class="col-sm-8">
                                 <input id="remarks" name="remarks" th:value="${mfrs.remarks}" type="text" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">启用状态 </label>
+                            <label class="col-sm-3 control-label">启用状态： </label>
                             <div class="col-sm-8">
                                 <label class="radio-inline">
-                                    <input type="radio" th:field="*{mfrs.status}" name="status" value="1"
+                                    <input type="radio" th:field="*{mfrs.xsstate}" name="xsstate" value="1"
                                            onclick="return false"/>
                                     禁用
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" th:field="*{mfrs.status}" name="status" value="0"
+                                    <input type="radio" th:field="*{mfrs.xsstate}" name="xsstate" value="0"
                                            onclick="return false"/>
                                     启用
                                 </label>

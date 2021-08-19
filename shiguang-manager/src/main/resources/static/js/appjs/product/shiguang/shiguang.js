@@ -42,7 +42,7 @@ function load() {
                         retailPrice2:$('#retailPrice2').val(),
                         taxPrice:$('#taxPrice').val(),
                         taxPrice2:$('#taxPrice2').val(),
-                        status:$('#status').val(),
+                        xsstate:$('#xsstate').val(),
 
                     };
                 },
@@ -137,7 +137,7 @@ function load() {
                     // 	title : '调货成本'
                     // },
                     {
-                        field: 'status',
+                        field: 'xsstate',
                         title: '销售状态',
                         align: 'center',
                         formatter: function (value, row, index) {
@@ -146,7 +146,7 @@ function load() {
                             str += ' <div class="onoffswitch"> ';
                             str += ' <input name="allowComment" ';
                             //启用状态 0：启用；1：禁用
-                            if (row.status == 0)
+                            if (row.xsstate == 0)
                                 str += ' checked="" ';
 
                             str += ' type="checkbox" onchange="updateEnable(' + row.id + ',this)" value="' + row.id + '" class="onoffswitch-checkbox" id="example1' + row.id + '">  ';

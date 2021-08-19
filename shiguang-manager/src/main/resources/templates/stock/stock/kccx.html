@@ -46,7 +46,7 @@
                 <input id="mfrsname" name="mfrsname" type="text" readonly/>
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
             </td>
-            <td>商品品种</td>
+            <td>商品品种：</td>
             <td>
                 <!--<input id="brandnum" name="brandnum" type="hidden" value=""/>-->
                 <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
@@ -58,10 +58,10 @@
             <td>
                 <div class="col-sm-8">
                     <label class="radio-inline">
-                        <input type="radio" name="status" value="0" checked onchange="positionChange()"/> 启用仓
+                        <input type="radio" name="xsstate" value="0" checked onchange="positionChange()"/> 启用仓
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="status" value="1" onchange="positionChange()"/> 停用仓
+                        <input type="radio" name="xsstate" value="1" onchange="positionChange()"/> 停用仓
                     </label>
                 </div>
                 <span>
@@ -131,7 +131,7 @@
 <div th:include="include :: footer"></div>
 <script type="text/javascript">
     $(document).ready(function () {
-        var status = $('input:radio:checked').val();
+        var xsstate = $('input:radio:checked').val();
         var positionName = $('#positionName option:selected').text();
         var positionNames = ""
         if (positionName == "--请选择--") {
@@ -143,7 +143,7 @@
             type: 'post',
             dataType: "json",
             data: {
-                'status': status,
+                'xsstate': xsstate,
             },
             success: function (position) {
                 for (var i = 0; i < position.length; i++) {
@@ -158,7 +158,7 @@
             type: 'post',
             dataType: "json",
             data: {
-                'status': status,
+                'xsstate': xsstate,
                 'positionName': positionName
             },
             success: function (xml) {
@@ -247,7 +247,7 @@
         var brandname = $("#brandname").val();
         var retailPrice = $("*[name='retailPrice']").val();
         var retailPrice2 = $("*[name='retailPrice2']").val();
-        var status = $('input:radio:checked').val();
+        var xsstate = $('input:radio:checked').val();
         var positionName = $('#positionName option:selected').text();
         var positionNames = ""
         if (positionName == "--请选择--") {
@@ -268,7 +268,7 @@
                 'brandname': brandname,
                 'retailPrice': retailPrice,
                 'retailPrice2': retailPrice2,
-                'status': status,
+                'xsstate': xsstate,
                 'positionName': positionName
             },
             success: function (xml) {
@@ -293,14 +293,14 @@
     }
 
     function positionChange() {
-        var status = $('input:radio:checked').val();
+        var xsstate = $('input:radio:checked').val();
         $(".cw").remove();
         $.ajax({
             url: '/kucun/stock/selectPosion',
             type: 'post',
             dataType: "json",
             data: {
-                'status': status
+                'xsstate': xsstate
             },
             success: function (position) {
                 for (var i = 0; i < position.length; i++) {

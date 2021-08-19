@@ -23,10 +23,10 @@ public interface MfrsDao {
 
     //【制造商页面List】
     List<MfrsDO> list(Map<String, Object> map);
-
+    int count(Map<String, Object> map);
     //    <!--查询制造商-->
     List<MfrsDO> findMfrs(Map<String, Object> map);
-    int mgcount(Map<String, Object> map);
+    int findMfrscount(Map<String, Object> map);
 
     int save(MfrsDO mfrs);
 

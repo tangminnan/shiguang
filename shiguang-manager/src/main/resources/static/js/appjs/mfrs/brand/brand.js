@@ -39,7 +39,7 @@ function load() {
                         stateId: $('#stateId').val(),
                         payid: $('#payid').val(),
                         brandname: $('#brandname').val(),
-                        status: $('#status').val()
+                        xsstate: $('#xsstate').val()
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };
@@ -187,11 +187,11 @@ function load() {
                     //     title : '状态(1:停用2:启用)'
                     // },
                     // {
-                    //     field : 'status',
+                    //     field : 'xsstate',
                     //     title : '状态（1：停用2：启用）'
                     // },
                     {
-                        field: 'status',
+                        field: 'xsstate',
                         title: '启用状态',
                         align: 'center',
                         formatter: function (value, row, index) {
@@ -200,7 +200,7 @@ function load() {
                             str += ' <div class="onoffswitch"> ';
                             str += ' <input name="allowComment" ';
                             //启用状态 0：启用；1：禁用
-                            if (row.status == 0)
+                            if (row.xsstate == 0)
                                 str += ' checked="" ';
 
                             str += ' type="checkbox" onchange="updateEnable(' + row.brandid + ',this)" value="' + row.brandid + '" class="onoffswitch-checkbox" id="example1' + row.brandid + '">  ';

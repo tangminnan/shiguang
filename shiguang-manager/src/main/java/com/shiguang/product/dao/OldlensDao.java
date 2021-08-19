@@ -1,6 +1,7 @@
 package com.shiguang.product.dao;
 
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.OldlensDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -37,4 +38,6 @@ public interface OldlensDao {
 
     //删除修改状态
     int updateState(OldlensDO oldlens);
+    //判断是否存在商品代码
+    List<OldlensDO> haveNum(Map<String, Object> map);
 }

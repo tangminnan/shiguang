@@ -32,6 +32,11 @@ public class MfrsServiceImpl implements MfrsService {
         return mfrsDao.list(map);
     }
 
+    @Override
+    public int count(Map<String, Object> map) {
+        return mfrsDao.count(map);
+    }
+
     //    <!--查询制造商-->
     @Override
     public List<MfrsDO> findMfrs(Map<String, Object> map) {
@@ -40,8 +45,8 @@ public class MfrsServiceImpl implements MfrsService {
 
 
     @Override
-    public int mgcount(Map<String, Object> map) {
-        return mfrsDao.mgcount(map);
+    public int findMfrscount(Map<String, Object> map) {
+        return mfrsDao.findMfrscount(map);
     }
 
     @Override

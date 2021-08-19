@@ -32,6 +32,12 @@ public class BrandServiceImpl implements BrandService {
     public List<BrandDO> finfBrand(Map<String, Object> map) {
         return brandDao.finfBrand(map);
     }
+
+    @Override
+    public int finfBrandcount(Map<String, Object> map) {
+        return brandDao.finfBrandcount(map);
+    }
+
     //    <!--//判断是否存在制造商代码-->
     @Override
     public List<BrandDO> haveNum(Map<String, Object> map) {
@@ -70,8 +76,8 @@ public class BrandServiceImpl implements BrandService {
     public List<GoodsDO> caidan(Integer mfrsid) {
         return brandDao.caidan(mfrsid);
     }
-    //删除修改状态
 
+    //删除修改状态
     @Override
     public int updateState(BrandDO brand) {
         return brandDao.updateState(brand);

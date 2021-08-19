@@ -1,5 +1,6 @@
 package com.shiguang.mfrs.dao;
 
+import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.CompanyDO;
 
 import java.util.List;
@@ -29,4 +30,7 @@ public interface CompanyDao {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+	//删除修改状态
+	int updateState(CompanyDO companyDO);
 }

@@ -20,22 +20,22 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>商品代码</td>
+                <td>商品代码：</td>
                 <td>
                     <input id="producNum" name="producNum" type="text" value="4.00.00.000000000.0000"/>
                 </td>
-                <td>商品条码</td>
+                <td>商品条码：</td>
                 <td>
                     <input id="producCode" name="producCode" type="text" value="400000000000000000"/>
                     <em>*</em>
                 </td>
-                <td>商品名称</td>
+                <td>商品名称：</td>
                 <td><input id="producName" name="producName" type="text"/>
                     <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>制造商</td>
+                <td>制造商：</td>
                 <td>
                     <input id="mfrsid" name="mfrsid" type="hidden"/>
                     <input id="mfrsnum" name="mfrsnum" type="hidden"/>
@@ -44,7 +44,7 @@
                     <input type="button" class="XZ-btn" value="选择" onclick="getMfrs()"/>
                     <em>*</em>
                 </td>
-                <td>商品品种</td>
+                <td>商品品种：</td>
                 <td style="width:20%;">
                     <select id="brandnum" name="brandnum" onchange="change(this, 5, 7)">
                         <option value="">--请选择--</option>
@@ -67,12 +67,12 @@
                            oninput="if(value.length>9)value=value.slice(0,9)">
                     <em>*</em>
                 </td>
-                <td>商品编号</td>
+                <td>商品编号：</td>
                 <td>
                     <input id="proid" name="proid" type="text"/>
                     <em>*</em>
                 </td>
-                <td>计量单位</td>
+                <td>计量单位：</td>
                 <td>
                     <select id="unitid" name="unitid">
                         <option></option>
@@ -83,7 +83,7 @@
                 </td>
             </tr>
             <tr>
-                <td>球镜</td>
+                <td>球镜：</td>
                 <td>
                     上限<select id="sphUp" name="sphUp" style="width:15%">
                     <option value="">请选择</option>
@@ -108,7 +108,7 @@
                 </select>
                     <em>*</em>
                 </td>
-                <td>柱镜</td>
+                <td>柱镜：</td>
                 <td>
                     上限<select id="cylUp" name="cylUp" style="width:55%">
                     <option value="">请选择</option>
@@ -137,15 +137,16 @@
                 </select>
                     <em>*</em>
                 </td>
-                <td>曲率1</td>
+                <td>曲率1：</td>
                 <td>
                     <input id="curvatureOne" name="curvatureOne" type="text" style="width:30%">
                     -
                     <input id="curvatureYi" name="curvatureYi" type="text" style="width:30%">
+                    <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>曲率2</td>
+                <td>曲率2：</td>
                 <td>
                     <input id="curvatureTwo" name="curvatureTwo" type="text" style="width:30%">
                     -
@@ -156,10 +157,11 @@
                     <input id="diameterOne" name="diameterOne" type="text" style="width:30%">
                     -
                     <input id="diameterYi" name="diameterYi" type="text" style="width:30%">
+                    <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>接触镜类别</td>
+                <td>接触镜类别：</td>
                 <td>
                     <select id="contactLens" name="contactLens">
                         <option></option>
@@ -167,16 +169,16 @@
                         <option value="角膜塑形镜">角膜塑形镜</option>
                     </select>
                 </td>
-                <td>订做周期</td>
+                <td>订做周期：</td>
                 <td>
                     <input id="cycle" name="cycle" type="text">天
                 </td>
                 <em>*</em>
-                <td>销售状态</td>
+                <td>销售状态：</td>
                 <td>
-                    <input name="status" value="1" type="radio" id="PH-S"> <label for="PH-S"
+                    <input name="xsstate" value="1" type="radio" id="PH-S"> <label for="PH-S"
                                                                                   style="margin-right: 5%">禁用</label>
-                    <input name="status" value="0" type="radio" id="PH-F" checked> <label for="PH-F">启用</label>
+                    <input name="xsstate" value="0" type="radio" id="PH-F" checked> <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>
             </tr>
@@ -189,7 +191,7 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>使用类型</td>
+                <td>使用类型：</td>
                 <td>
                     <select id="usageId" name="usageId">
                         <option value="">请选择</option>
@@ -199,7 +201,7 @@
                         ></option>
                     </select>
                 </td>
-                <td>抛弃型分类</td>
+                <td>抛弃型分类：</td>
                 <td style="width:20%;">
                     <select id="typeId" name="typeId">
                         <option value="">请选择</option>
@@ -209,21 +211,21 @@
                         ></option>
                     </select>
                 </td>
-                <td>产品可使用天数</td>
+                <td>产品可使用天数：</td>
                 <td style="width:20%;">
                     <input id="useDays" name="useDays" type="text">
                 </td>
             </tr>
             <tr>
-                <td>效期提醒上限</td>
+                <td>效期提醒上限：</td>
                 <td>
                     有效期前<input id="upday" name="upday" type="text" style="width: 20%">天提醒进入滞销状态
                 </td>
-                <td>效期提醒下限</td>
+                <td>效期提醒下限：</td>
                 <td>
                     有效期前<input id="downday" name="downday" type="text" style="width: 20%">天提醒进入即将失效状态
                 </td>
-                <td>颜色</td>
+                <td>颜色：</td>
                 <td>
                     <select id="color" name="color">
                         <option></option>
@@ -231,7 +233,7 @@
                 </td>
             </tr>
             <tr>
-                <td>隐形类别</td>
+                <td>隐形类别：</td>
                 <td>
                     <select id="invisibleId" name="invisibleId">
                         <option value="">请选择</option>
@@ -241,7 +243,7 @@
                         ></option>
                     </select>
                 </td>
-                <td>材质</td>
+                <td>材质：</td>
                 <td>
                     <select id="caizhiId" name="caizhiId">
                         <option></option>
@@ -251,7 +253,7 @@
                         ></option>
                     </select>
                 </td>
-                <td>联合光度</td>
+                <td>联合光度：</td>
                 <td>
                     <input id="combinedPhotometry" name="combinedPhotometry"
                            type="text">
@@ -267,19 +269,19 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>税率（%）</td>
+                <td>税率（%）：</td>
                 <td>
                     <input id="tax" name="tax" type="text" value="17"
                            oninput="value=value.replace(/[^\d]/g,'')"/>
                     <em>*</em>
                 </td>
-                <td>含税单价</td>
+                <td>含税单价：</td>
                 <td>
                     <input id="taxPrice" name="taxPrice" type="text"
                            oninput="getmoney(this,10)" autofocus/>
                     <em>*</em>
                 </td>
-                <td>批发价格</td>
+                <td>批发价格：</td>
                 <td colspan="3">
                     <input id="tradePrice" name="tradePrice" type="text" style="width: 60%"
                            oninput="getmoney(this,10)" autofocus/>
@@ -287,13 +289,13 @@
                 </td>
             </tr>
             <tr>
-                <td>调货成本</td>
+                <td>调货成本：</td>
                 <td>
                     <input id="transferPrice" name="transferPrice" type="text"
                            oninput="getmoney(this,10)" autofocus/>
                     <em>*</em>
                 </td>
-                <td>标准零售价格</td>
+                <td>标准零售价格：</td>
                 <td colspan="3">
                     <input id="retailPrice" name="retailPrice" type="text" style="width: 29%"
                            oninput="getmoney(this,10)" autofocus/>
@@ -309,7 +311,7 @@
         <!--未删除-->
         <input id="state" name="state" value="1" type="hidden">
         <input type="button" value="保存" onclick="baocun()"/>
-        <input type="button" class="empty" value="清空"/>
+        <!--<input type="button" class="empty" value="清空"/>-->
         <dl>
             <dt>隐形（订做）<br/>商品代码组成说明</dt>
             <dd><img src="/img/yxdz.png" alt=""/></dd>
@@ -349,10 +351,6 @@
         //曲率1
         var curvatureOne = document.getElementById('curvatureOne').value;
         var curvatureYi = document.getElementById('curvatureYi').value;
-
-        //曲率2
-        var curvatureTwo = document.getElementById('curvatureTwo').value;
-        var curvatureEr = document.getElementById('curvatureEr').value;
         //直径
         var diameterOne = document.getElementById('diameterOne').value;
         var diameterYi = document.getElementById('diameterYi').value;
@@ -401,10 +399,6 @@
             alert("请输入曲率1");
         } else if (curvatureYi == "") {
             alert("请输入曲率1");
-        } else if (curvatureTwo == "") {
-            alert("请输入曲率2");
-        } else if (curvatureEr == "") {
-            alert("请输入曲率2");
         } else if (diameterOne == "") {
             alert("请输入直径");
         } else if (diameterYi == "") {
@@ -479,7 +473,7 @@
         // var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        sum1 = 22 - proid.value.length;
+        sum1 = 22 ;
         a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
     }
@@ -490,7 +484,7 @@
         // var proid = document.getElementById("proid");
         document.getElementById("factory").value = va2;
         sum = 17 - e.value.length
-        sum1 = 22 - proid.value.length
+        sum1 = 22;
         a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }

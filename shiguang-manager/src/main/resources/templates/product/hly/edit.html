@@ -76,14 +76,14 @@
                            type="hidden">
                     <em>*</em>
                 </td>
-                <td>商品编号</td>
+                <td>商品编号：</td>
                 <td>
                     <input id="proid" name="proid" th:value="${hly.proid}" class="form-control"
                            style="background-color: #e4e4e4"
                            type="text" readonly>
                     <em>*</em>
                 </td>
-                <td>计量单位</td>
+                <td>计量单位：</td>
                 <td>
                     <select name="unitid" id="unitid" th:value="${hly.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -98,11 +98,11 @@
             </tr>
             <tr>
 
-                <td>销售状态</td>
+                <td>销售状态：</td>
                 <td>
-                    <input th:field="*{hly.status}" name="status" value="1" type="radio" id="PH-S"> <label for="PH-S"
+                    <input th:field="*{hly.xsstate}" name="xsstate" value="1" type="radio" id="PH-S"> <label for="PH-S"
                                                                                                            style="margin-right: 5%">禁用</label>
-                    <input th:field="*{hly.status}" name="status" value="0" type="radio" id="PH-F" checked> <label
+                    <input th:field="*{hly.xsstate}" name="xsstate" value="0" type="radio" id="PH-F" checked> <label
                         for="PH-F">启用</label>
                     <em>*</em>
                 </td>
@@ -116,7 +116,7 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>产品类型</td>
+                <td>产品类型：</td>
                 <td>
                     <select id="productType" name="productType" th:value="${hly.productType}" style="width: 50%"
                             class="form-control">
@@ -127,24 +127,24 @@
                            class="form-control"
                            type="hidden">
                 </td>
-                <td>主容量</td>
+                <td>主容量：</td>
                 <td style="width:20%;">
                     <input id="mainCapacity" name="mainCapacity" th:value="${hly.mainCapacity}"
                            class="form-control" type="text">
                 </td>
-                <td>次容量</td>
+                <td>次容量：</td>
                 <td style="width:20%;">
                     <input id="secondCapacity" name="secondCapacity" th:value="${hly.secondCapacity}"
                            class="form-control" type="text">
                 </td>
             </tr>
             <tr>
-                <td>效期提醒上限</td>
+                <td>效期提醒上限：</td>
                 <td>
                     有效期前<input id="upday" name="upday" th:value="${hly.upday}" style="width: 20%" type="text">天提醒进入滞销状态
 
                 </td>
-                <td>效期提醒下限</td>
+                <td>效期提醒下限：</td>
                 <td>
                     有效期前<input id="downday" name="downday" th:value="${hly.downday}" style="width: 20%"
                                type="text">天提醒进入即将失效状态
@@ -236,7 +236,7 @@
         // var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        sum1 = 22 - proid.value.length;
+        sum1 = 22;
         a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + ".0000";
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
     }

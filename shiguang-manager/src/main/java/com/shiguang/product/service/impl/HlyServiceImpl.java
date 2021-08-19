@@ -33,6 +33,11 @@ public class HlyServiceImpl implements HlyService {
     }
 
     @Override
+    public int gethlycount(Map<String, Object> map) {
+        return hlyDao.gethlycount(map);
+    }
+
+    @Override
     public int count(Map<String, Object> map) {
         return hlyDao.count(map);
     }
@@ -63,10 +68,17 @@ public class HlyServiceImpl implements HlyService {
     public List<BrandDO> choice(Integer mfrsid) {
         return hlyDao.choice(mfrsid);
     }
-    //删除修改状态
 
+
+    //删除修改状态
     @Override
     public int updateState(HlyDO hly) {
         return hlyDao.updateState(hly);
+    }
+
+    //判断是否存在商品代码
+    @Override
+    public List<HlyDO> haveNum(Map<String, Object> map) {
+        return hlyDao.haveNum(map);
     }
 }

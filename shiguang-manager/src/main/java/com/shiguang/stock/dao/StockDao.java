@@ -94,7 +94,13 @@ public interface StockDao {
     //<!--镜片成品【商】【品】【查】【询】-->
     List<JpcpDO> selectJpcp(Map<String, Object> map);
 
-    //<!--镜片成品【商】【品】【查】【询】-->
+    //<!--隐形定做【商】【品】【查】【询】-->
+    List<YxdzDO> selectYxdz(Map<String, Object> map);
+
+    //<!--隐形成品【商】【品】【查】【询】-->
+    List<YxcpDO> selectYxcp(Map<String, Object> map);
+
+    //<!--护理液【商】【品】【查】【询】-->
     List<HlyDO> selectHly(Map<String, Object> map);
 
     //<!--太阳镜【商】【品】【查】【询】-->

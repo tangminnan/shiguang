@@ -30,9 +30,6 @@ import java.util.Map;
 public class JpcpController {
     @Autowired
     private JpcpService jpcpService;
-    //制造商
-    @Autowired
-    private MfrsService mfrsService;
     //计量单位
     @Autowired
     private UnitService unitService;
@@ -215,6 +212,14 @@ public class JpcpController {
     @ResponseBody
     @PostMapping("/save")
     public R save(JpcpDO jpcp) {
+        //判断是否已存在商品代码
+        String producNum = jpcp.getProducNum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("producNum",producNum);
+        List<JpcpDO> haveNum=jpcpService.haveNum(map);
+        if (haveNum.size() > 0) {
+            return R.error("商品代码已存在");
+        }
         if (jpcpService.save(jpcp) > 0) {
             return R.ok();
         }
@@ -267,7 +272,7 @@ public class JpcpController {
     public R updateEnable(Long id, Long enable) {
         JpcpDO jpcpDO = new JpcpDO();
         jpcpDO.setId(id);
-        jpcpDO.setStatus(enable);
+        jpcpDO.setXsstate(enable);
         jpcpService.update(jpcpDO);
         return R.ok();
     }

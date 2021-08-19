@@ -1,6 +1,7 @@
 package com.shiguang.product.dao;
 
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.TyjDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -38,4 +39,7 @@ public interface TyjDao {
 
     //删除修改状态
     int updateState(TyjDO tyj);
+
+    //判断是否存在商品代码
+    List<TyjDO> haveNum(Map<String, Object> map);
 }

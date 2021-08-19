@@ -90,6 +90,12 @@ public interface StockService {
     //<!--镜片成品【商】【品】【查】【询】-->
     List<JpcpDO> selectJpcp(Map<String, Object> map);
 
+    //<!--隐形定做【商】【品】【查】【询】-->
+    List<YxdzDO> selectYxdz(Map<String, Object> map);
+
+    //<!--隐形成品【商】【品】【查】【询】-->
+    List<YxcpDO> selectYxcp(Map<String, Object> map);
+
     //<!--护理液【商】【品】【查】【询】-->
     List<HlyDO> selectHly(Map<String, Object> map);
 

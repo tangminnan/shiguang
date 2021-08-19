@@ -200,7 +200,9 @@
                             <td style="display: none">批发价格</td>
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
+                            <td style="display: none">商品品种</td>
                             <td>数量</td>
+
 
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji1">
@@ -226,6 +228,7 @@
                             <td style="display: none">批发价格</td>
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
+                            <td style="display: none">商品品种</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji2">
@@ -256,6 +259,7 @@
                             <td style="display: none">批发价格</td>
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
+                            <td style="display: none">商品品种</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji3">
@@ -265,6 +269,38 @@
                     </table>
                 </td>
             </tr>
+            <tr id="tab4" style="display:none">
+                <td style="width: 100vw;">
+                    <table>
+                        <tr class="thead">
+                            <!--<td>全选 <input type="checkbox"/></td>-->
+                            <td>商品代码</td>
+                            <td>商品名称</td>
+                            <td>厂家型号</td>
+                            <td>球镜</td>
+                            <td>柱镜</td>
+                            <td>曲率</td>
+                            <td>直径</td>
+                            <td>使用类型</td>
+                            <td>抛弃型分类</td>
+                            <td>入库时间</td>
+                            <td>商品条码</td>
+                            <td style="display: none">标准零售价</td>
+                            <td style="display: none">含税单价</td>
+                            <td style="display: none">批发价格</td>
+                            <td style="display: none">调货成本</td>
+                            <td style="display: none">单位</td>
+                            <td style="display: none">商品品种</td>
+                            <td>数量</td>
+                        </tr>
+                        <tr style="font-weight:bold;font-size: 15px;" class="heji4">
+                            <!--<td colspan="12" style="text-align:right;">合计：</td>-->
+                            <!--<td>0</td>-->
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
             <tr id="tab5" style="display:none">
                 <td style="width: 100vw;">
                     <table>
@@ -285,6 +321,7 @@
                             <td style="display: none">批发价格</td>
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
+                            <td style="display: none">商品品种</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji5">
@@ -311,6 +348,7 @@
                             <td style="display: none">批发价格</td>
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
+                            <td style="display: none">商品品种</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji6">
@@ -338,6 +376,7 @@
                             <td style="display: none">批发价格</td>
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
+                            <td style="display: none">商品品种</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji7">
@@ -362,6 +401,7 @@
                             <td style="display: none">批发价格</td>
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
+                            <td style="display: none">商品品种</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji8">
@@ -386,6 +426,7 @@
                             <td style="display: none">批发价格</td>
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
+                            <td style="display: none">商品品种</td>
                             <td>数量</td>
                         </tr>
 
@@ -435,6 +476,7 @@
         if (value == '镜架') {
             $(".val2").remove();
             $(".val3").remove();
+            $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
             $(".val7").remove();
@@ -443,6 +485,7 @@
             tab1.style = "display: block";
             tab2.style = "display: none";
             tab3.style = "display: none";
+            tab4.style = "display: none";
             tab5.style = "display: none";
             tab6.style = "display: none";
             tab7.style = "display: none";
@@ -451,6 +494,7 @@
         } else if (value == '配件') {
             $(".val1").remove();
             $(".val3").remove();
+            $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
             $(".val7").remove();
@@ -459,6 +503,7 @@
             tab1.style = "display: none";
             tab2.style = "display: block";
             tab3.style = "display: none";
+            tab4.style = "display: none";
             tab5.style = "display: none";
             tab6.style = "display: none";
             tab7.style = "display: none";
@@ -467,6 +512,7 @@
         } else if (value == '镜片') {
             $(".val1").remove();
             $(".val2").remove();
+            $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
             $(".val7").remove();
@@ -475,6 +521,25 @@
             tab1.style = "display: none";
             tab2.style = "display: none";
             tab3.style = "display: block";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        }else if (value == '隐形') {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: block";
             tab5.style = "display: none";
             tab6.style = "display: none";
             tab7.style = "display: none";
@@ -484,6 +549,7 @@
             $(".val1").remove();
             $(".val2").remove();
             $(".val3").remove();
+            $(".val4").remove();
             $(".val6").remove();
             $(".val7").remove();
             $(".val8").remove();
@@ -491,6 +557,7 @@
             tab1.style = "display: none";
             tab2.style = "display: none";
             tab3.style = "display: none";
+            tab4.style = "display: none";
             tab5.style = "display: block";
             tab6.style = "display: none";
             tab7.style = "display: none";
@@ -500,6 +567,7 @@
             $(".val1").remove();
             $(".val2").remove();
             $(".val3").remove();
+            $(".val4").remove();
             $(".val5").remove();
             $(".val7").remove();
             $(".val8").remove();
@@ -507,6 +575,7 @@
             tab1.style = "display: none";
             tab2.style = "display: none";
             tab3.style = "display: none";
+            tab4.style = "display: none";
             tab5.style = "display: none";
             tab6.style = "display: block";
             tab7.style = "display: none";
@@ -516,6 +585,7 @@
             $(".val1").remove();
             $(".val2").remove();
             $(".val3").remove();
+            $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
             $(".val8").remove();
@@ -523,6 +593,7 @@
             tab1.style = "display: none";
             tab2.style = "display: none";
             tab3.style = "display: none";
+            tab4.style = "display: none";
             tab5.style = "display: none";
             tab6.style = "display: none";
             tab7.style = "display: block";
@@ -532,6 +603,7 @@
             $(".val1").remove();
             $(".val2").remove();
             $(".val3").remove();
+            $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
             $(".val7").remove();
@@ -539,6 +611,7 @@
             tab1.style = "display: none";
             tab2.style = "display: none";
             tab3.style = "display: none";
+            tab4.style = "display: none";
             tab5.style = "display: none";
             tab6.style = "display: none";
             tab7.style = "display: none";
@@ -548,6 +621,7 @@
             $(".val1").remove();
             $(".val2").remove();
             $(".val3").remove();
+            $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
             $(".val7").remove();
@@ -555,6 +629,7 @@
             tab1.style = "display: none";
             tab2.style = "display: none";
             tab3.style = "display: none";
+            tab4.style = "display: none";
             tab5.style = "display: none";
             tab6.style = "display: none";
             tab7.style = "display: none";
@@ -564,6 +639,7 @@
             $(".val1").remove();
             $(".val2").remove();
             $(".val3").remove();
+            $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
             $(".val7").remove();
@@ -572,6 +648,7 @@
             tab1.style = "display: none";
             tab2.style = "display: none";
             tab3.style = "display: none";
+            tab4.style = "display: none";
             tab5.style = "display: none";
             tab6.style = "display: none";
             tab7.style = "display: none";
@@ -655,8 +732,12 @@
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +//批发价格--批发
                             "<td style='display: none'>" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +//调货成本
+
                             "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
+                            "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
                             "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
@@ -694,9 +775,12 @@
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
                             "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td style='display: none'>" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");
+                            "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
             });
@@ -738,9 +822,59 @@
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
                             "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td style='display: none'>" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td >" + "<input id='goodsCount' name='goodsCount'oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");
+                            "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
+                    }
+                }
+            });
+            layer.full(toIndex)
+        }  else if (goodVal == "隐形") {
+            $(".val4").remove();
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品查询',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/yinxing/" + mfrsid + "/" + mfrsname,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    for (var i = 0; i < rows.length; i++) {
+                        $(".heji3").before("<tr class='val4'>" +
+                            // "<td><input type=\"checkbox\"/></td>\n" +
+                            "<td >" + rows[i].producNum + "</td>\n" +
+                            "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
+                            "<td>" + rows[i].producName + "</td>\n" +
+                            "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
+                            "<td name='='>" + rows[i].factory + "</td>\n" +
+                            "<td name='='>" + rows[i].sph + "</td>\n" +
+                            "<td name='='>" + rows[i].cyl + "</td>\n" +
+                            "<td name='='>" + rows[i].lightbelow + "</td>\n" +
+                            "<td name='='>" + rows[i].refractivityvalue + "</td>\n" +
+                            "<td name='='>" + rows[i].lightName + "</td>\n" +
+                            "<td name='='>" + rows[i].lensName + "</td>\n" +
+                            "<td >" + rows[i].createTime + "</td>\n" +
+                            "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
+                            "<td  >" + rows[i].producCode + "</td>\n" +
+                            "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
+                            "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
+                            "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+                            "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
+                            "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
+                            "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
+                            "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
+                            "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
+                            "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
+                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
+                            "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
+                            "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
             });
@@ -780,9 +914,12 @@
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
                             "<td  style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td  style='display: none' >" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");
+                            "<td style='display: none' >" + rows[i].brandname + "</td>\n" +
+                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
             });
@@ -820,9 +957,12 @@
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
                             "<td style='display: none'  >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td  style='display: none' >" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\"type='text'/>" + "</td></tr>>");
+                            "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
             });
@@ -861,9 +1001,12 @@
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
                             "<td  style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td style='display: none'  >" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");
+                            "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
             });
@@ -899,9 +1042,12 @@
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
                             "<td  style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td  style='display: none' >" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\"type='text'/>" + "</td></tr>>");
+                            "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
             });
@@ -937,9 +1083,12 @@
                             "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
                             "<td  style='display: none' >" + rows[i].transferPrice + "</td>\n" +
                             "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td  style='display: none' >" + rows[i].unitname + "</td>\n" +
+                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\"type='text'/>" + "</td></tr>>");
+                            "<td style='display: none' >" + rows[i].brandname + "</td>\n" +
+                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
             });

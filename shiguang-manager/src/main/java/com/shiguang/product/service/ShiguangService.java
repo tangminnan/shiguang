@@ -1,6 +1,7 @@
 package com.shiguang.product.service;
 
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.ShiguangDO;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface ShiguangService {
 
     //选择视觉训练-视光
     List<ShiguangDO> getshiguang(Map<String, Object> map);
-
+    int getshiguangcount(Map<String, Object> map);
 
     int save(ShiguangDO shiguang);
 
@@ -39,4 +40,7 @@ public interface ShiguangService {
 
     //删除修改状态
     int updateState(ShiguangDO shiguang);
+
+    //判断是否存在商品代码
+    List<ShiguangDO> haveNum(Map<String, Object> map);
 }

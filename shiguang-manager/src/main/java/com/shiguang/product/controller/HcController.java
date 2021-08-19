@@ -8,6 +8,7 @@ import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.UnitService;
 import com.shiguang.product.domain.HcDO;
+import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.product.service.HcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,9 +32,6 @@ import java.util.Map;
 public class HcController {
     @Autowired
     private HcService hcService;
-    //制造商
-    @Autowired
-    private MfrsService mfrsService;
     //计量单位
     @Autowired
     private UnitService unitService;
@@ -95,6 +93,14 @@ public class HcController {
     @ResponseBody
     @PostMapping("/save")
     public R save(HcDO hc) {
+        //判断是否已存在商品代码
+        String producNum = hc.getProducNum();
+        Map<String, Object> map = new HashMap<>();
+        map.put("producNum",producNum);
+        List<HcDO> haveNum=hcService.haveNum(map);
+        if (haveNum.size() > 0) {
+            return R.error("商品代码已存在");
+        }
         if (hcService.save(hc) > 0) {
             return R.ok();
         }
@@ -139,7 +145,7 @@ public class HcController {
     public R updateEnable(Long id, Long enable) {
         HcDO hcDO = new HcDO();
         hcDO.setId(id);
-        hcDO.setStatus(enable);
+        hcDO.setXsstate(enable);
         hcService.update(hcDO);
         return R.ok();
     }

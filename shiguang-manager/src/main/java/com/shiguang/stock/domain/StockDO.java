@@ -47,6 +47,15 @@ public class StockDO implements Serializable {
     public void setMfrsname(String mfrsname) {
         this.mfrsname = mfrsname;
     }
+    private  String brandname;
+
+    public String getBrandname() {
+        return brandname;
+    }
+
+    public void setBrandname(String brandname) {
+        this.brandname = brandname;
+    }
 
     //标准零售价格
     private String retailPrice;

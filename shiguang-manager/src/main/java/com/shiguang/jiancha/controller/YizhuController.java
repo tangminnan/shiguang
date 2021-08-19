@@ -39,7 +39,7 @@ public class YizhuController {
         //查询列表数据
         Query query = new Query(params);
         List<YizhuDO> yizhuList = yizhuService.findYizhu(query);
-        int total = yizhuService.countYizhu(query);
+        int total = yizhuService.findYizhucount(query);
         PageUtils pageUtils = new PageUtils(yizhuList, total);
         return pageUtils;
     }

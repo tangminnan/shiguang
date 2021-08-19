@@ -37,6 +37,11 @@ public class ShiguangServiceImpl implements ShiguangService {
     }
 
     @Override
+    public int getshiguangcount(Map<String, Object> map) {
+        return shiguangDao.getshiguangcount(map);
+    }
+
+    @Override
     public int save(ShiguangDO shiguang) {
         return shiguangDao.save(shiguang);
     }
@@ -62,10 +67,16 @@ public class ShiguangServiceImpl implements ShiguangService {
     public List<BrandDO> choice(Integer mfrsid) {
         return shiguangDao.choice(mfrsid);
     }
-    //删除修改状态
 
+    //删除修改状态
     @Override
     public int updateState(ShiguangDO shiguang) {
         return shiguangDao.updateState(shiguang);
+    }
+
+    //判断是否存在商品代码
+    @Override
+    public List<ShiguangDO> haveNum(Map<String, Object> map) {
+        return shiguangDao.haveNum(map);
     }
 }

@@ -1,6 +1,7 @@
 package com.shiguang.product.service;
 
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.OldlensDO;
 
 import java.util.List;
@@ -35,4 +36,7 @@ public interface OldlensService {
 
     //删除修改状态
     int updateState(OldlensDO oldlens);
+
+    //判断是否存在商品代码
+    List<OldlensDO> haveNum(Map<String, Object> map);
 }

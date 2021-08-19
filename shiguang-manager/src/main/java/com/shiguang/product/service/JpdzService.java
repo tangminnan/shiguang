@@ -1,6 +1,7 @@
 package com.shiguang.product.service;
 
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.JpdzDO;
 
 import java.util.List;
@@ -39,4 +40,7 @@ public interface JpdzService {
 
     //删除修改状态
     int updateState(JpdzDO jpdz);
+
+    //判断是否存在商品代码
+    List<JpdzDO> haveNum(Map<String, Object> map);
 }

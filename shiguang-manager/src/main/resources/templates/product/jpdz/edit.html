@@ -76,14 +76,14 @@
                            type="hidden">
                     <em>*</em>
                 </td>
-                <td>商品编号</td>
+                <td>商品编号：</td>
                 <td>
                     <input id="proid" name="proid" th:value="${jpdz.proid}" class="form-control"
                            style="background-color: #e4e4e4"
                            type="text" readonly>
                     <em>*</em>
                 </td>
-                <td>计量单位</td>
+                <td>计量单位：</td>
                 <td>
                     <select name="unitid" id="unitid" th:value="${jpdz.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -97,7 +97,7 @@
                 </td>
             </tr>
             <tr>
-                <td>球镜</td>
+                <td>球镜：</td>
                 <td>
                     上限
                     <select id="sphUp" name="sphUp" th:value="${jpdz.sphUp}"
@@ -131,7 +131,7 @@
                     </select>
                     <em>*</em>
                 </td>
-                <td>柱镜</td>
+                <td>柱镜：</td>
                 <td>
                     上限
                     <select id="cylUp" name="cylUp" th:value="${jpdz.cylUp}" data-actions-box="false" style="width:55%"
@@ -169,7 +169,7 @@
                     </select>
                     <em>*</em>
                 </td>
-                <td>下加光</td>
+                <td>下加光：</td>
                 <td>
                     <select id="lightbelowRight" name="lightbelowRight" th:value="${jpdz.cylSpan}" style="width: 25%"
                             data-actions-box="false" data-size="5">
@@ -190,11 +190,12 @@
                     <input id="lightbelowLefts" name="lightbelowLefts" th:value="${jpdz.lightbelowLeft}"
                            class="form-control"
                            type="hidden">
-                </select>
+                    </select>
+                    <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>材料分类</td>
+                <td>材料分类：</td>
                 <td>
                     <select id="lensId" name="lensId" th:value="${jpdz.lensId}" class="form-control"
                             data-actions-box="false" data-size="5">
@@ -206,18 +207,18 @@
                                type="hidden">
                     </select>
                 </td>
-                <td>订做周期</td>
+                <td>订做周期：</td>
                 <td>
                     <input id="cycle" name="cycle" th:value="${jpdz.cycle}" class="form-control"
                            type="text">天
                 </td>
                 <em>*</em>
-                <td>销售状态</td>
+                <td>销售状态：</td>
                 <td>
-                    <input th:field="*{jpdz.status}" name="status" value="1" type="radio" id="PH-S"> <label
+                    <input th:field="*{jpdz.xsstate}" name="xsstate" value="1" type="radio" id="PH-S"> <label
                         for="PH-S"
                         style="margin-right: 5%">禁用</label>
-                    <input th:field="*{jpdz.status}" name="status" value="0" type="radio" id="PH-F"> <label
+                    <input th:field="*{jpdz.xsstate}" name="xsstate" value="0" type="radio" id="PH-F"> <label
                         for="PH-F">启用</label>
                     <em>*</em>
                 </td>
@@ -231,7 +232,7 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>光度分类</td>
+                <td>光度分类：</td>
                 <td>
                     <select id="lightId" name="lightId" th:value="${jpdz.lightId}" class="form-control"
                             data-actions-box="false" data-size="5"
@@ -244,7 +245,7 @@
                                type="hidden">
                     </select>
                 </td>
-                <td>渐进片分类</td>
+                <td>渐进片分类：</td>
                 <td style="width:20%;">
                     <select id="gradualId" name="gradualId" th:value="${jpdz.gradualId}"
                             class="form-control" style="display: none;"
@@ -258,7 +259,7 @@
                                type="hidden">
                     </select>
                 </td>
-                <td>折射率</td>
+                <td>折射率：</td>
                 <td style="width:20%;">
                     <select id="refractivityid" name="refractivityid" th:value="${jpdz.refractivityid}"
                             class="form-control"
@@ -274,7 +275,7 @@
                 </td>
             </tr>
             <tr>
-                <td>镜片功能</td>
+                <td>镜片功能：</td>
                 <td>
                     <select id="functionId" name="functionId" th:value="${jpdz.functionId}"
                             class="form-control"
@@ -288,13 +289,13 @@
                            class="form-control"
                            type="hidden">
                 </td>
-                <td>联合光度</td>
+                <td>联合光度：</td>
                 <td>
                     <input id="combinedPhotometry" name="combinedPhotometry"
                            th:value="${jpdz.combinedPhotometry}" type="text">
                     <br>【格式：1.25】
                 </td>
-                <td>柱镜为-0.25度（-25散）</td>
+                <td>柱镜为-0.25度（-25散）：</td>
                 <td>
                     <select id="can" name="can" class="form-control">
                         <option></option>
@@ -450,7 +451,7 @@
         // var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        sum1 = 22 - proid.value.length;
+        sum1 = 22;
         // a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + "0000";------【可以用】
         a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + ".0000";
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制

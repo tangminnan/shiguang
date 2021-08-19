@@ -1,5 +1,6 @@
 package com.shiguang.mfrs.service.impl;
 
+import com.shiguang.mfrs.domain.BrandDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,11 @@ public class CompanyServiceImpl implements CompanyService {
 	public int batchRemove(Integer[] ids){
 		return companyDao.batchRemove(ids);
 	}
-	
+
+	//删除修改状态
+
+	@Override
+	public int updateState(CompanyDO companyDO) {
+		return companyDao.updateState(companyDO);
+	}
 }

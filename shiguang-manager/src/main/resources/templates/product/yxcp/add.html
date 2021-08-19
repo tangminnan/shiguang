@@ -20,22 +20,22 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>商品代码</td>
+                <td>商品代码：</td>
                 <td>
                     <input id="producNum" name="producNum" type="text" value="4.00.00.000000000.0000"/>
                 </td>
-                <td>商品条码</td>
+                <td>商品条码：</td>
                 <td>
                     <input id="producCode" name="producCode" type="text" value="400000000000000000"/>
                     <em>*</em>
                 </td>
-                <td>商品名称</td>
+                <td>商品名称：</td>
                 <td><input id="producName" name="producName" type="text"/>
                     <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>制造商</td>
+                <td>制造商：</td>
                 <td>
                     <input id="mfrsid" name="mfrsid" type="hidden"/>
                     <input id="mfrsnum" name="mfrsnum" type="hidden"/>
@@ -51,14 +51,14 @@
                     </select>
                     <em>*</em>
                 </td>
-                <td>商品编号</td>
+                <td>商品编号：</td>
                 <td>
                     <input id="proid" name="proid" type="text"/>
                     <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>计量单位</td>
+                <td>计量单位：</td>
                 <td>
                     <select id="unitid" name="unitid">
                         <option></option>
@@ -67,7 +67,7 @@
                     </select>
                     <em>*</em>
                 </td>
-                <td>球镜</td>
+                <td>球镜：</td>
                 <td>
                     <select id="sphId" name="sphId">
                         <option value="">--请选择--</option>
@@ -78,7 +78,7 @@
                     </select>
                     <em>*</em>
                 </td>
-                <td>柱镜</td>
+                <td>柱镜：</td>
                 <td>
                     <select id="cylId" name="cylId">
                         <option value="">--请选择--</option>
@@ -91,25 +91,27 @@
                 </td>
             </tr>
             <tr>
-                <td>曲率</td>
+                <td>曲率：</td>
                 <td>
                     <input id="curvature" name="curvature" type="text">
+                    <em>*</em>
                 </td>
-                <td>直径</td>
+                <td>直径：</td>
                 <td>
                     <input id="diameter" name="diameter" type="text">
+                    <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>厂家型号</td>
+                <td>厂家型号：</td>
                 <td>
                     <input id="factory" name="factory" type="text">
                 </td>
-                <td>销售状态</td>
+                <td>销售状态：</td>
                 <td>
-                    <input name="status" value="1" type="radio" id="PH-S"> <label for="PH-S"
+                    <input name="xsstate" value="1" type="radio" id="PH-S"> <label for="PH-S"
                                                                                   style="margin-right: 5%">禁用</label>
-                    <input name="status" value="0" type="radio" id="PH-F" checked> <label for="PH-F">启用</label>
+                    <input name="xsstate" value="0" type="radio" id="PH-F" checked> <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>
             </tr>
@@ -122,7 +124,7 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>使用类型</td>
+                <td>使用类型：</td>
                 <td>
                     <select id="usageId" name="usageId" style="width:60%">
                         <option value="">请选择</option>
@@ -132,7 +134,7 @@
                         ></option>
                     </select>
                 </td>
-                <td>抛弃型分类</td>
+                <td>抛弃型分类：</td>
                 <td style="width:20%;">
                     <select id="typeId" name="typeId">
                         <option value="">请选择</option>
@@ -142,21 +144,21 @@
                         ></option>
                     </select>
                 </td>
-                <td>产品可使用天数</td>
+                <td>产品可使用天数：</td>
                 <td style="width:20%;">
                     <input id="useDays" name="useDays" type="text">
                 </td>
             </tr>
             <tr>
-                <td>效期提醒上限</td>
+                <td>效期提醒上限：</td>
                 <td>
                     有效期前<input id="upday" name="upday" type="text" style="width: 20%">天提醒进入滞销状态
                 </td>
-                <td>效期提醒下限</td>
+                <td>效期提醒下限：</td>
                 <td>
                     有效期前<input id="downday" name="downday" type="text" style="width: 20%">天提醒进入即将失效状态
                 </td>
-                <td>颜色</td>
+                <td>颜色：</td>
                 <td>
                     <select id="color" name="color">
                         <option></option>
@@ -164,7 +166,7 @@
                 </td>
             </tr>
             <tr>
-                <td>隐形类别</td>
+                <td>隐形类别：</td>
                 <td>
                     <select id="invisibleId" name="invisibleId" style="width:60%">
                         <option value="">请选择</option>
@@ -174,7 +176,7 @@
                         ></option>
                     </select>
                 </td>
-                <td>材质</td>
+                <td>材质：</td>
                 <td>
                     <select id="caizhiId" name="caizhiId">
                         <option></option>
@@ -195,19 +197,19 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>税率（%）</td>
+                <td>税率（%）：</td>
                 <td>
                     <input id="tax" name="tax" type="text" value="17"
                            oninput="value=value.replace(/[^\d]/g,'')"/>
                     <em>*</em>
                 </td>
-                <td>含税单价</td>
+                <td>含税单价：</td>
                 <td>
                     <input id="taxPrice" name="taxPrice" type="text"
                            oninput="getmoney(this,10)" autofocus/>
                     <em>*</em>
                 </td>
-                <td>批发价格</td>
+                <td>批发价格：</td>
                 <td colspan="3">
                     <input id="tradePrice" name="tradePrice" type="text" style="width: 60%"
                            oninput="getmoney(this,10)" autofocus/>
@@ -215,13 +217,13 @@
                 </td>
             </tr>
             <tr>
-                <td>调货成本</td>
+                <td>调货成本：</td>
                 <td>
                     <input id="transferPrice" name="transferPrice" type="text"
                            oninput="getmoney(this,10)" autofocus/>
                     <em>*</em>
                 </td>
-                <td>标准零售价格</td>
+                <td>标准零售价格：</td>
                 <td colspan="3">
                     <input id="retailPrice" name="retailPrice" type="text" style="width: 29%"
                            oninput="getmoney(this,10)" autofocus/>
@@ -237,7 +239,7 @@
         <!--未删除-->
         <input id="state" name="state" value="1" type="hidden">
         <input type="button" value="保存" onclick="baocun()"/>
-        <input type="button" class="empty" value="清空"/>
+        <!--<input type="button" class="empty" value="清空"/>-->
         <dl>
             <dt>隐形（成品）<br/>商品代码组成说明</dt>
             <dd><img src="/img/yxcp.png" alt=""/></dd>
