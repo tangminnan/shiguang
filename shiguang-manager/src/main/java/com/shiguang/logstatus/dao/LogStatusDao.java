@@ -30,4 +30,8 @@ public interface LogStatusDao {
     SalesDO getLogSaleNumber(String saleNumber);
 
     int editJianyan(LogStatusDO logStatusDO);
+
+    List<SalesDO> findSalePeijingAll(Map<String,Object> map);
+
+    int findSalePeijingCount(Map<String,Object> map);
 }

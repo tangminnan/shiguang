@@ -257,13 +257,13 @@ public class StoreSalesController {
         salesDO.setSaleNumber("X" + saleNumber);
         if (null != salesDO) {
             if (null != salesDO.getAdditionalCost()) {
-                salesDO.setAdditionalCost(salesDO.getAdditionalCost().substring(0, salesDO.getAdditionalCost().length() - 1));
+                salesDO.setAdditionalCost(salesDO.getAdditionalCost());
             }
             if (null != salesDO.getGiveName()) {
                 salesDO.setGiveName(salesDO.getGiveName().substring(0, salesDO.getGiveName().length() - 1));
             }
             if (null != salesDO.getProcessAsk()) {
-                salesDO.setProcessAsk(salesDO.getProcessAsk().substring(0, salesDO.getProcessAsk().length() - 1));
+                salesDO.setProcessAsk(salesDO.getProcessAsk());
             }
 //            if (null != salesDO.getStoreName()){
 //                salesDO.setStoreName(salesDO.getStoreName().substring(0,salesDO.getStoreName().length()-3));

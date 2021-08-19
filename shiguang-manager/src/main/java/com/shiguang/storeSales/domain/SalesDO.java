@@ -993,7 +993,7 @@ public class SalesDO implements Serializable {
 
 	public String getMailAddress() {return mailAddress;}
 
-	private void setJjGoodsName(String jjGoodsName) {this.jjGoodsName = jpGoodsName;}
+	public void setJjGoodsName(String jjGoodsName) {this.jjGoodsName = jjGoodsName;}
 
 	public String getJjGoodsName() {return jjGoodsName;}
 

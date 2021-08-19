@@ -209,7 +209,7 @@
 			</tr>
 			<tr>
 				<td class="Light_green">备注：</td>
-				<td colspan="8"><input class="aling_left" type="text" id="yuanyongRemark" name="remark" value=" " /></td>
+				<td colspan="8"><input class="aling_left" type="text" id="yuanyongRemark" name="remark" /></td>
 			</tr>
 			<tr class="Light_green">
 				<td> </td>
@@ -283,7 +283,7 @@
 			</tr>
 			<tr>
 				<td class="Light_pink">备注：</td>
-				<td colspan="9"><input class="aling_left" type="text" id="yinxingRemark" name="remark" value=" " /></td>
+				<td colspan="9"><input class="aling_left" type="text" id="yinxingRemark" name="remark" /></td>
 			</tr>
 			</tbody>
 		</table>
@@ -349,7 +349,7 @@
 			</tr>
 			<tr>
 				<td class="Light_blue">备注：</td>
-				<td colspan="8"><input class="aling_left" id="fuliaoRemark" name="remark" type="text" value=" " /></td>
+				<td colspan="8"><input class="aling_left" id="fuliaoRemark" name="remark" type="text" /></td>
 			</tr>
 			<tr class="Light_blue">
 				<td> </td>
@@ -437,7 +437,7 @@
 			</tr>
 			<tr>
 				<td class="Light_yellow">备注：</td>
-				<td colspan="8"><input class="aling_left" id="shuangguangRemark" name="remark" type="text" value=" " /></td>
+				<td colspan="8"><input class="aling_left" id="shuangguangRemark" name="remark" type="text" /></td>
 			</tr>
 			<tr class="Light_yellow">
 				<td> </td>
@@ -525,7 +525,7 @@
 			</tr>
 			<tr>
 				<td class="Light_darkBlue">备注：</td>
-				<td colspan="8"><input class="aling_left" type="text" id="zhongyongRemark" name="remark" value=" " /></td>
+				<td colspan="8"><input class="aling_left" type="text" id="zhongyongRemark" name="remark"  /></td>
 			</tr>
 			<tr class="Light_darkBlue">
 				<td> </td>
@@ -686,7 +686,7 @@
 			</tr>
 			<tr>
 				<td class="Light_green">备注：</td>
-				<td colspan="9"><input class="aling_left" name="remark" type="text" value=" " /></td>
+				<td colspan="9"><input class="aling_left" name="remark" type="text" /></td>
 			</tr>
 			</tbody>
 		</table>
@@ -890,7 +890,7 @@
 			</tr>
 			<tr>
 				<td class="Light_pink">备注：</td>
-				<td colspan="11"><input class="aling_left" name="remark" type="text" value=" " /></td>
+				<td colspan="11"><input class="aling_left" name="remark" type="text" /></td>
 			</tr>
 			</tbody>
 		</table>
@@ -1534,6 +1534,7 @@
                     html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
                     html += "<input id='unit' name='unit' type='hidden' value='"+rows[i].unit+"'/>"
                     html += "<input id='storeName' name='storeName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                    //html += "<input id='jjGoodsName' name='jjGoodsName' type='hidden' value='"+rows[i].goodsName+"'/>"
                     html += "<input id='jjGoodsName' name='jjGoodsName' type='hidden' value='"+rows[i].goodsName+"'/>"
                     html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='storeUnit' name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"' />"
@@ -1791,7 +1792,7 @@
          //    price = (parseFloat(price) * parseFloat(zhekouPrice)).toFixed(2);
 		// }
         // alert(price)
-		if (yjyhPrice != price){
+		if ( '' != yjyhPrice && yjyhPrice != price){
             yjyhPrice = (parseFloat(yjyhPrice)+ parseFloat(options.val())).toFixed(2);
             $("#ula").empty();
             var lis="";
@@ -1820,7 +1821,7 @@
 
 		addhtml = "<tr><td>"+options.text()+"</td>";
 		addhtml += "<td>"+options.val()+"</td>";
-		addhtml += "<td><input type=\"text\" id='prival' value='1' name='additionalCount' onkeyup=\"sum("+options.val()+")\"/></td>";
+		addhtml += "<td><input type=\"text\" id='prival' value='1' name='additionalCount' disabled onkeyup=\"sum("+options.val()+")\"/></td>";
 		addhtml += "<td id='sumprice'>"+options.val()+"</td>";
 		addhtml += "<td><em onclick='delss(this,\"" + options.val() + "\",\"" + options.text() + "\")'></em></td>";
 		addhtml += "</tr>";
@@ -1832,43 +1833,47 @@
         addinal.push(options.text());
         $("#additionalCost").val(addinal);
 	}
+	var priceNum=0.00;
     function sum(obj){
+	    alert(obj)
         var yjyhPrice = $("#amountMoney").val();
         document.getElementById('additionalPrices').value = "";
         var privaul = $("#prival").val();
+        alert(privaul);
         prce = privaul;
         var sumprices = (parseFloat(privaul) * parseFloat(obj)).toFixed(2);
         sumprice.innerText = sumprices;
+        alert(sumprices)
         //$("#sumprice").val(sumprices);
 		$("#additionalPrices").val(sumprices);
-		//price = sumprices;
-        price =(parseFloat(price)+ parseFloat(sumprices)).toFixed(2);
-        if (yjyhPrice != price){
-            yjyhPrice = (parseFloat(yjyhPrice)+ parseFloat(sumprices)).toFixed(2);
-            $("#ula").empty();
-            var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
-            lis += "<li>折扣金额："+dazhePrice+"</li>";
-            lis += "<li>优惠金额："+youhuiPrice+"</li>";
-            lis += "<li>抹零金额：0.00</li>";
-            lis += "<li>应收金额："+yjyhPrice+"</li>";
-            lis += "<li>实收金额："+yjyhPrice+"</li>";
-            $("#ula").append(lis)
-            $("#amountMoney").val(yjyhPrice)
-            $("#primeMoney").val(price)
-        } else {
-            $("#ula").empty();
-            var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
-            lis += "<li>折扣金额："+dazhePrice+"</li>";
-            lis += "<li>优惠金额："+youhuiPrice+"</li>";
-            lis += "<li>抹零金额：0.00</li>";
-            lis += "<li>应收金额："+price+"</li>";
-            lis += "<li>实收金额："+price+"</li>";
-            $("#ula").append(lis)
-            $("#amountMoney").val(price)
-            $("#primeMoney").val(price)
-        }
+        priceNum = sumprices;
+        //price =(parseFloat(price)+ parseFloat(sumprices)).toFixed(2);
+        // if ("" != yjyhPrice && yjyhPrice != price){
+        //     yjyhPrice = (parseFloat(yjyhPrice)+ parseFloat(sumprices)).toFixed(2);
+        //     $("#ula").empty();
+        //     var lis="";
+        //     lis =  "<li>原价金额："+price+"</li>";
+        //     lis += "<li>折扣金额："+dazhePrice+"</li>";
+        //     lis += "<li>优惠金额："+youhuiPrice+"</li>";
+        //     lis += "<li>抹零金额：0.00</li>";
+        //     lis += "<li>应收金额："+yjyhPrice+"</li>";
+        //     lis += "<li>实收金额："+yjyhPrice+"</li>";
+        //     $("#ula").append(lis)
+        //     $("#amountMoney").val(yjyhPrice)
+        //     $("#primeMoney").val(price)
+        // } else {
+        //     $("#ula").empty();
+        //     var lis="";
+        //     lis =  "<li>原价金额："+price+"</li>";
+        //     lis += "<li>折扣金额："+dazhePrice+"</li>";
+        //     lis += "<li>优惠金额："+youhuiPrice+"</li>";
+        //     lis += "<li>抹零金额：0.00</li>";
+        //     lis += "<li>应收金额："+price+"</li>";
+        //     lis += "<li>实收金额："+price+"</li>";
+        //     $("#ula").append(lis)
+        //     $("#amountMoney").val(price)
+        //     $("#primeMoney").val(price)
+        // }
         // $("#ula").empty();
         // var lis="";
         // lis =  "<li>原价金额："+price+"</li>";
@@ -1888,7 +1893,7 @@
 		//alert(prce);
 		var dsf = (parseFloat(prce) * parseFloat(privals)).toFixed(2);
         price = (parseFloat(price) - parseFloat(dsf)).toFixed(2);
-		if (yjyhPrice != price){
+		if ("" != yjyhPrice && yjyhPrice != price){
             yjyhPrice = (parseFloat(yjyhPrice) - parseFloat(dsf)).toFixed(2);
             $("#ula").empty();
             var lis="";
@@ -1927,10 +1932,10 @@
         jiagonghtml += "<td><input type=\"text\" value="+options.text()+"></td>";
         jiagonghtml += "<td><em onclick='getDeljia(this,\"" + jianame + "\")'></em></td>";
         jiagonghtml += "</tr>";
-        jiagonghtml += "<input name=\"processAsk\"id=\"processAsk\" type=\"hidden\" />"
+        jiagonghtml += "<input name=\"processAsk\"id=\"processAsk\" type=\"hidden\" value='"+options.text()+"'/>"
         $("#jiagong").append(jiagonghtml);
-        ask.push(options.text())
-        $("#processAsk").val(ask);
+        //ask.push(options.text())
+        //$("#processAsk").val(ask);
     }
     Array.prototype.remove = function(val) {
         var index = this.indexOf(val);

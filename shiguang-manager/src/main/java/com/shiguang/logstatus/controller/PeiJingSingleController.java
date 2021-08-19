@@ -38,13 +38,13 @@ public class PeiJingSingleController {
     public PageUtils peijinglist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        List<SalesDO> salesDOList = statusService.findSaleAll(query);
+        List<SalesDO> salesDOList = statusService.findSalePeijingAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){
             salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
             salesDO.setPeijingDate(simpleDateFormat.format(salesDO.getPeijingTime()));
         }
-        int total = statusService.findSaleCount(query);
+        int total = statusService.findSalePeijingCount(query);
         PageUtils pageUtils = new PageUtils(salesDOList, total);
         return pageUtils;
     }

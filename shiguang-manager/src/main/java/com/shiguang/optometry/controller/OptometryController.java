@@ -133,7 +133,7 @@ public class OptometryController {
         if (null != costDOList && costDOList.size() > 0){
             String createDate = simpleDateFormat.format(costDOList.get(0).getCreateTime());
             String datenow = simpleDateFormat.format(new Date());
-            if (createDate != datenow){
+            if (!createDate.equals(datenow)){
                 return R.ok("该会员还未开检查单");
             }
             if (costDOList.get(0).getIsSale() == 0){

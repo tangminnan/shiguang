@@ -74,4 +74,14 @@ public class LogStatusServiceImpl implements LogStatusService {
     public int editJianyan(LogStatusDO status){
         return statusDao.editJianyan(status);
     }
+
+    @Override
+    public List<SalesDO> findSalePeijingAll(Map<String, Object> map){
+        return statusDao.findSalePeijingAll(map);
+    }
+
+    @Override
+    public int findSalePeijingCount(Map<String, Object> map){
+        return statusDao.findSalePeijingCount(map);
+    }
 }
