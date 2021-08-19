@@ -803,13 +803,13 @@
                             "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                             "<td>" + rows[i].producName + "</td>\n" +
                             "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
-                            "<td name='='>" + rows[i].factory + "</td>\n" +
-                            "<td name='='>" + rows[i].sph + "</td>\n" +
-                            "<td name='='>" + rows[i].cyl + "</td>\n" +
-                            "<td name='='>" + rows[i].lightbelow + "</td>\n" +
-                            "<td name='='>" + rows[i].refractivityvalue + "</td>\n" +
-                            "<td name='='>" + rows[i].lightName + "</td>\n" +
-                            "<td name='='>" + rows[i].lensName + "</td>\n" +
+                            "<td>" + rows[i].factory + "</td>\n" +
+                            "<td>" + rows[i].sph + "</td>\n" +
+                            "<td>" + rows[i].cyl + "</td>\n" +
+                            "<td>" + rows[i].lightbelow + "</td>\n" +
+                            "<td>" + rows[i].refractivityvalue + "</td>\n" +
+                            "<td>" + rows[i].lightName + "</td>\n" +
+                            "<td>" + rows[i].lensName + "</td>\n" +
                             "<td >" + rows[i].createTime + "</td>\n" +
                             "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
@@ -844,19 +844,19 @@
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     for (var i = 0; i < rows.length; i++) {
-                        $(".heji3").before("<tr class='val4'>" +
+                        $(".heji4").before("<tr class='val4'>" +
                             // "<td><input type=\"checkbox\"/></td>\n" +
                             "<td >" + rows[i].producNum + "</td>\n" +
                             "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                             "<td>" + rows[i].producName + "</td>\n" +
                             "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
-                            "<td name='='>" + rows[i].factory + "</td>\n" +
-                            "<td name='='>" + rows[i].sph + "</td>\n" +
-                            "<td name='='>" + rows[i].cyl + "</td>\n" +
-                            "<td name='='>" + rows[i].lightbelow + "</td>\n" +
-                            "<td name='='>" + rows[i].refractivityvalue + "</td>\n" +
-                            "<td name='='>" + rows[i].lightName + "</td>\n" +
-                            "<td name='='>" + rows[i].lensName + "</td>\n" +
+                            "<td>" + rows[i].factory + "</td>\n" +
+                            "<td>" + rows[i].sph + "</td>\n" +
+                            "<td>" + rows[i].cyl + "</td>\n" +
+                            "<td>" + rows[i].curvature + "</td>\n" +
+                            "<td>" + rows[i].diameter + "</td>\n" +
+                            "<td>" + rows[i].usageName + "</td>\n" +
+                            "<td>" + rows[i].typeName + "</td>\n" +
                             "<td >" + rows[i].createTime + "</td>\n" +
                             "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +

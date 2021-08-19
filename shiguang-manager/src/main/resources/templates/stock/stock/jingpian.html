@@ -222,7 +222,9 @@
     });
 
     function getJingpian() {
-        $(" .val").remove();
+        $(".val").remove();
+        $(" .valJpcp").remove();
+        $(" .valJpdz").remove();
         var dzlx = $("#dzlx option:selected").val();
         if (dzlx == "成品片") {
             var mfrsid = $("#mfrsid").val();
@@ -235,7 +237,7 @@
                 },
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
-                        $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        $(".buyBtns").append("<tr class='valJpcp'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
                             "            <td name='producName'>" + xml[i].producName + "</td>\n" +
                             "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
@@ -258,7 +260,9 @@
                 }
             })
         } else if (dzlx == "定做片") {
-            $("#val").remove();
+            $(".val").remove();
+            $(" .valJpcp").remove();
+            $(" .valJpdz").remove();
             var mfrsid = $("#mfrsid").val();
             $.ajax({
                 url: '/stock/stock/selectJpdz',
@@ -269,7 +273,7 @@
                 },
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
-                        $(".buyBtns").append("<tr id='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        $(".buyBtns").append("<tr class='valJpdz'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
                             "            <td name='producName'>" + xml[i].producName + "</td>\n" +
                             "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +

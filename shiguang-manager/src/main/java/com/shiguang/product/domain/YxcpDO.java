@@ -61,8 +61,10 @@ public class YxcpDO implements Serializable {
     private String factory;
     //使用类型id
     private Integer usageId;
+    private String usageName;
     //抛弃型分类id
     private Integer typeId;
+    private String typeName;
     //产品可使用天数
     private Integer useDays;
     //效期提醒上限（有效期前【】天提醒进入滞销状态）
@@ -518,5 +520,21 @@ public class YxcpDO implements Serializable {
 
     public void setSph(String sph) {
         this.sph = sph;
+    }
+
+    public String getUsageName() {
+        return usageName;
+    }
+
+    public void setUsageName(String usageName) {
+        this.usageName = usageName;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

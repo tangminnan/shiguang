@@ -150,6 +150,20 @@ function showCol() {
         obj.gradualName = gradualName;
         var functionName = rowstr.find("[name='functionName']").html();
         obj.functionName = functionName;
+
+        //隐形
+        var curvature = rowstr.find("[name='curvature']").html();
+        obj.curvature = curvature;
+        var diameter = rowstr.find("[name='diameter']").html();
+        obj.diameter = diameter;
+        var usageName = rowstr.find("[name='usageName']").html();
+        obj.usageName = usageName;
+        var typeName = rowstr.find("[name='typeName']").html();
+        obj.typeName = typeName;
+
+
+
+
         //护理液
         var mainCapacity = rowstr.find("[name='mainCapacity']").html();
         obj.mainCapacity = mainCapacity;

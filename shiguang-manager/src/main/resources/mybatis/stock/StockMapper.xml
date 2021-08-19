@@ -1024,24 +1024,32 @@
         left join c_brand b on j.brandnum=b.brandnum
         where j.mfrsid=#{mfrsid}
     </select>
-    <!--&lt;!&ndash;隐形订做【商】【品】【查】【询】&ndash;&gt;-->
-    <!--<select id="selectYxdz" resultType="com.shiguang.product.domain.YxdzDO">-->
+    <!--隐形订做【商】【品】【查】【询】-->
+    <select id="selectYxdz" resultType="com.shiguang.product.domain.YxdzDO">
+        select
+        y.produc_num,y.produc_name,y.produc_code,u.unitname,y.factory,y.retail_price,y.tax_price,y.sph_up,y.sph_down,y.cyl_up,y.cyl_down,
+        y.curvature_one,y.curvature_yi,y.diameter_one,y.diameter_yi,pu.usage_name,pt.type_name,y.trade_price,y.transfer_price,b.brandname
+        	from aa_yxdz y left join c_unit u on y.unitid=u.unitid
+        	left join a_cyl c on y.cyl_id=c.cyl_id
+        	left join p_usage pu  on y.usage_id=pu.usage_id
+        	left join p_type pt  on y.type_id=pt.type_id
+        	left join c_brand b on y.brandnum=b.brandnum
+        	where y.mfrsid=#{mfrsid}
+    </select>
 
-    <!--</select>-->
-
-    <!--&lt;!&ndash;隐形成品【商】【品】【查】【询】&ndash;&gt;-->
-    <!--<select id="selectYxcp" resultType="com.shiguang.product.domain.YxcpDO">-->
-        <!--select-->
-	    <!--y.produc_num,y.produc_name,y.produc_code,u.unitname,y.factory,y.retail_price,y.tax_price,s.sph,c.cyl,-->
-	    <!--y.curvature,y.diameter,pu.usage_name,pt.type_name,y.trade_price,y.transfer_price,b.brandname-->
-		<!--from aa_yxcp y left join c_unit u on y.unitid=u.unitid-->
-		<!--left join a_sph s on y.sph_id=s.sph_id-->
-		<!--left join a_cyl c on y.cyl_id=c.cyl_id-->
-		<!--left join p_usage pu  on y.usage_id=pu.usage_id-->
-		<!--left join p_type pt  on y.type_id=pt.type_id-->
-		<!--left join c_brand b on y.brandnum=b.brandnum-->
-		<!--where y.mfrsid=#{mfrsid}-->
-    <!--</select>-->
+    <!--隐形成品【商】【品】【查】【询】-->
+    <select id="selectYxcp" resultType="com.shiguang.product.domain.YxcpDO">
+        select
+	    y.produc_num,y.produc_name,y.produc_code,u.unitname,y.factory,y.retail_price,y.tax_price,s.sph,c.cyl,
+	    y.curvature,y.diameter,pu.usage_name,pt.type_name,y.trade_price,y.transfer_price,b.brandname
+		from aa_yxcp y left join c_unit u on y.unitid=u.unitid
+		left join a_sph s on y.sph_id=s.sph_id
+		left join a_cyl c on y.cyl_id=c.cyl_id
+		left join p_usage pu  on y.usage_id=pu.usage_id
+		left join p_type pt  on y.type_id=pt.type_id
+		left join c_brand b on y.brandnum=b.brandnum
+		where y.mfrsid=#{mfrsid}
+    </select>
 
 
 

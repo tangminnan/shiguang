@@ -125,7 +125,7 @@
     <table border="0" cellspacing="0" cellpadding="0" class="buyBtns" id="buyBtns">
         <tbody>
         <tr class="thead">
-            <td>全选 <input type="checkbox"/></td>
+            <td>多选</td>
             <td>商品代码</td>
             <td>商品名称</td>
             <td>单位</td>
@@ -134,12 +134,10 @@
             <td>含税成本</td>
             <td>球镜</td>
             <td>柱镜</td>
-            <td>下加光</td>
-            <td>折射率</td>
-            <td>光度分类</td>
-            <td>材料分类</td>
-            <td>渐进片分类</td>
-            <td>镜片功能</td>
+            <td>曲率</td>
+            <td>直径</td>
+            <td>使用类型</td>
+            <td>抛弃型分类</td>
             <td style="display: none">批发价格</td>
             <td style="display: none">调货成本</td>
             <td style="display: none">商品条码</td>
@@ -167,17 +165,15 @@
                         "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
                         "            <td name='producName'>" + xml[i].producName + "</td>\n" +
                         "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
-                        "            <td name='factory'>" + "" + "</td>\n" +
+                        "            <td name='factory'>" + xml[i].factory + "</td>\n" +
                         "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
                         "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
                         "            <td name='sph'>" + xml[i].sph + "</td>\n" +
                         "            <td name='cyl'>" + xml[i].cyl + "</td>\n" +
-                        "            <td name='lightbelow'>" + xml[i].lightbelow + "</td>\n" +
-                        "            <td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
-                        "            <td name='lightName'>" + xml[i].lightName + "</td>\n" +
-                        "            <td name='lensName'>" + xml[i].lensName + "</td>\n" +
-                        "            <td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
-                        "            <td name='functionName'>" + xml[i].functionName + "</td>\n" +
+                        "            <td name='curvature'>" + xml[i].curvature + "</td>\n" +
+                        "            <td name='diameter'>" + xml[i].diameter + "</td>\n" +
+                        "            <td name='usageName'>" + xml[i].usageName + "</td>\n" +
+                        "            <td name='typeName'>" + xml[i].typeName + "</td>\n" +
                         "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
                         "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
                         "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
@@ -188,12 +184,14 @@
     });
 
     function getYinxing() {
-        $(" .val").remove();
+        $(".val").remove();
+        $(" .valYxcp").remove();
+        $(" .valYxdz").remove();
         var dzlx = $("#dzlx option:selected").val();
         if (dzlx == "成品片") {
             var mfrsid = $("#mfrsid").val();
             $.ajax({
-                url: '/stock/stock/selectJpcp',
+                url: '/stock/stock/selectYxcp',
                 type: 'post',
                 dataType: "json",
                 data: {
@@ -201,21 +199,19 @@
                 },
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
-                        $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        $(".buyBtns").append("<tr class='valYxcp'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
                             "            <td name='producName'>" + xml[i].producName + "</td>\n" +
                             "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
-                            "            <td name='factory'>" + "" + "</td>\n" +
+                            "            <td name='factory'>" + xml[i].factory + "</td>\n" +
                             "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
                             "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
                             "            <td name='sph'>" + xml[i].sph + "</td>\n" +
                             "            <td name='cyl'>" + xml[i].cyl + "</td>\n" +
-                            "            <td name='lightbelow'>" + xml[i].lightbelow + "</td>\n" +
-                            "            <td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
-                            "            <td name='lightName'>" + xml[i].lightName + "</td>\n" +
-                            "            <td name='lensName'>" + xml[i].lensName + "</td>\n" +
-                            "            <td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
-                            "            <td name='functionName'>" + xml[i].functionName + "</td>\n" +
+                            "            <td name='curvature'>" + xml[i].curvature + "</td>\n" +
+                            "            <td name='diameter'>" + xml[i].diameter + "</td>\n" +
+                            "            <td name='usageName'>" + xml[i].usageName + "</td>\n" +
+                            "            <td name='typeName'>" + xml[i].typeName + "</td>\n" +
                             "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
                             "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
                             "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
@@ -224,10 +220,12 @@
                 }
             })
         } else if (dzlx == "定做片") {
-            $("#val").remove();
+            $(".val").remove();
+            $(" .valYxcp").remove();
+            $(" .valYxdz").remove();
             var mfrsid = $("#mfrsid").val();
             $.ajax({
-                url: '/stock/stock/selectJpdz',
+                url: '/stock/stock/selectYxdz',
                 type: 'post',
                 dataType: "json",
                 data: {
@@ -235,7 +233,7 @@
                 },
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
-                        $(".buyBtns").append("<tr id='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        $(".buyBtns").append("<tr class='valYxdz'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
                             "            <td name='producName'>" + xml[i].producName + "</td>\n" +
                             "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
@@ -244,12 +242,10 @@
                             "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
                             "            <td name='sph'>" + xml[i].sphUp + "/" + xml[i].sphDown + "</td>\n" +
                             "            <td name='cyl'>" + xml[i].cylUp + "/" + xml[i].cylDown + "</td>\n" +
-                            "            <td name='lightbelow'>" + xml[i].lightbelowRight + "/" + xml[i].lightbelowLeft + "</td>\n" +
-                            "            <td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
-                            "            <td name='lightName'>" + xml[i].lightName + "</td>\n" +
-                            "            <td name='lensName'>" + xml[i].lensName + "</td>\n" +
-                            "            <td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
-                            "            <td name='functionName'>" + xml[i].functionName + "</td>\n" +
+                            "            <td name='curvature'>" + xml[i].curvatureOne + "/" + xml[i].curvatureYi + "</td>\n" +
+                            "            <td name='diameter'>" + xml[i].diameterOne + "/" + xml[i].diameterYi + "</td>\n" +
+                            "            <td name='usageName'>" + xml[i].usageName + "</td>\n" +
+                            "            <td name='typeName'>" + xml[i].typeName + "</td>\n" +
                             "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
                             "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
                             "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +

@@ -58,21 +58,25 @@ public class JpcpDO implements Serializable {
     //材料分类id
     private Integer lensId;
     //材料分类
-    private String lens;
+    private String lensName;
     //批号管理(1是、2否)
     private String batchid;
     //光度分类id
     private Integer lightId;
     //光度分类
-    private String light;
+    private String lightName;
     //渐进片分类id
     private Integer gradualId;
+    //渐进片分类名称
+    private String gradualName;
     //折射率id
     private Integer refractivityid;
     //折射率
-    private String refractivity;
+    private String refractivityvalue;
     //镜片功能id
     private Integer functionId;
+    //镜片功能名称
+    private String functionName;
     //税率(%)
     private String tax;
     //含税单价
@@ -433,6 +437,7 @@ public class JpcpDO implements Serializable {
         this.state = state;
     }
 
+
     public String getMfrsname() {
         return mfrsname;
     }
@@ -465,14 +470,6 @@ public class JpcpDO implements Serializable {
         this.cyl = cyl;
     }
 
-    public String getLens() {
-        return lens;
-    }
-
-    public void setLens(String lens) {
-        this.lens = lens;
-    }
-
     public String getLightbelow() {
         return lightbelow;
     }
@@ -481,19 +478,43 @@ public class JpcpDO implements Serializable {
         this.lightbelow = lightbelow;
     }
 
-    public String getLight() {
-        return light;
+    public String getLensName() {
+        return lensName;
     }
 
-    public void setLight(String light) {
-        this.light = light;
+    public void setLensName(String lensName) {
+        this.lensName = lensName;
     }
 
-    public String getRefractivity() {
-        return refractivity;
+    public String getLightName() {
+        return lightName;
     }
 
-    public void setRefractivity(String refractivity) {
-        this.refractivity = refractivity;
+    public void setLightName(String lightName) {
+        this.lightName = lightName;
+    }
+
+    public String getGradualName() {
+        return gradualName;
+    }
+
+    public void setGradualName(String gradualName) {
+        this.gradualName = gradualName;
+    }
+
+    public String getRefractivityvalue() {
+        return refractivityvalue;
+    }
+
+    public void setRefractivityvalue(String refractivityvalue) {
+        this.refractivityvalue = refractivityvalue;
+    }
+
+    public String getFunctionName() {
+        return functionName;
+    }
+
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
     }
 }
