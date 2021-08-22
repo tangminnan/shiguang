@@ -53,6 +53,11 @@ public class UserManagerController extends BaseController {
         return prefix + "/userManager";
     }
 
+    /**
+     * 管理员管理
+     * @param params
+     * @return
+     */
     @GetMapping("/list")
     @ResponseBody
     PageUtils list(@RequestParam Map<String, Object> params) {
@@ -60,7 +65,7 @@ public class UserManagerController extends BaseController {
         Query query = new Query(params);
         String rname = "";
         query.put("roleTypes",5);
-        List<UserDO> sysUserList = userService.listManage(query);
+        List<UserDO> sysUserList = userService.findListManages(query);
 //        Map<String,Object> map = new HashMap<>();
 //        map.put("roleType",5);
 //        for(UserDO udo:sysUserList){
@@ -74,7 +79,7 @@ public class UserManagerController extends BaseController {
 //            udo.setRoleName(rname);
 //            rname = "";
 //        }
-        int total = userService.countManage(query);
+        int total = userService.findCountManages(query);
         PageUtils pageUtil = new PageUtils(sysUserList, total);
         return pageUtil;
     }

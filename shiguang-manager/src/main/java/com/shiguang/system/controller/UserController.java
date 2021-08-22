@@ -30,6 +30,7 @@ import com.shiguang.system.service.UserService;
 import com.shiguang.system.vo.UserVO;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,22 +65,34 @@ public class UserController extends BaseController {
 		// 查询列表数据
 		Query query = new Query(params);
 		String rname = "";
-		query.put("roleType",5);
-		List<UserDO> sysUserList = userService.listManage(query);
-		//Map<String,Object> map = new HashMap<>();
-		//map.put("roleType",5);
-//		for(UserDO udo:sysUserList){
-//			List<RoleDO> rdol =roleService.listbyid(udo.getUserId(),map);
-//			for(int i=0;i<rdol.size();i++){
-//				rname =rname+ rdol.get(i).getRoleName();
-//				if(i<rdol.size()-1){
-//					rname =rname+",";
-//				}
-//			}
-//			udo.setRoleName(rname);
-//			rname = "";
-//		}
-		int total = userService.countManage(query);
+		List<UserDO> sysUserList = new ArrayList<>();
+		int total = 0;
+		if (null != ShiroUtils.getUser().getCompanyId()){
+			query.put("roleType",5);
+			String companyIds = ShiroUtils.getUser().getCompanyId();
+			query.put("companyId",companyIds);
+			sysUserList = userService.listManage(query);
+			total = userService.countManage(query);
+		} else {
+			sysUserList = userService.list(query);
+			Map<String,Object> map = new HashMap<>();
+//			map.put("roleType",5);
+			for(UserDO udo:sysUserList){
+				List<RoleDO> rdol =roleService.listbyid(udo.getUserId(),map);
+				for(int i=0;i<rdol.size();i++){
+					rname =rname+ rdol.get(i).getRoleName();
+					if(i<rdol.size()-1){
+						rname =rname+",";
+					}
+				}
+				udo.setRoleName(rname);
+				rname = "";
+			}
+			total = userService.count(query);
+		}
+
+
+
 		PageUtils pageUtil = new PageUtils(sysUserList, total);
 		return pageUtil;
 	}

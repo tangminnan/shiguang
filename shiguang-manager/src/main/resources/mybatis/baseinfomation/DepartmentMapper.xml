@@ -45,25 +45,26 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from department
+        select count(*) from department d
+        left join c_company c on c.id = d.company_id
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="departNumber != null and departNumber != ''">and depart_number = #{departNumber}</if>
-            <if test="departName != null and departName != ''">and depart_name = #{departName}</if>
-            <if test="departFullName != null and departFullName != ''">and depart_full_name = #{departFullName}</if>
-            <if test="departTel != null and departTel != ''">and depart_tel = #{departTel}</if>
-            <if test="departAddress != null and departAddress != ''">and depart_address = #{departAddress}</if>
-            <if test="departType != null and departType != ''">and depart_type = #{departType}</if>
-            <if test="companyId != null and companyId != ''">and company_id in (#{companyId})</if>
-            <if test="personCharge != null and personCharge != ''">and person_charge = #{personCharge}</if>
-            <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="fanuc != null and fanuc != ''">and fanuc = #{fanuc}</if>
-            <if test="mirror != null and mirror != ''">and mirror = #{mirror}</if>
-            <if test="sellWays != null and sellWays != ''">and sell_ways = #{sellWays}</if>
-            <if test="sameSell != null and sameSell != ''">and same_sell = #{sameSell}</if>
-            <if test="readCard != null and readCard != ''">and read_card = #{readCard}</if>
-            <if test="companyName != null and companyName != ''">and company_name = #{companyName}</if>
-            <if test="state != null and state != ''">and state = #{state}</if>
+            <if test="id != null and id != ''">and d.id = #{id}</if>
+            <if test="departNumber != null and departNumber != ''">and d.depart_number = #{departNumber}</if>
+            <if test="departName != null and departName != ''">and d.depart_name = #{departName}</if>
+            <if test="departFullName != null and departFullName != ''">and d.depart_full_name = #{departFullName}</if>
+            <if test="departTel != null and departTel != ''">and d.depart_tel = #{departTel}</if>
+            <if test="departAddress != null and departAddress != ''">and d.depart_address = #{departAddress}</if>
+            <if test="departType != null and departType != ''">and d.depart_type = #{departType}</if>
+            <if test="companyId != null and companyId != ''">and d.company_id in (#{companyId})</if>
+            <if test="personCharge != null and personCharge != ''">and d.person_charge = #{personCharge}</if>
+            <if test="status != null and status != ''">and d.status = #{status}</if>
+            <if test="fanuc != null and fanuc != ''">and d.fanuc = #{fanuc}</if>
+            <if test="mirror != null and mirror != ''">and d.mirror = #{mirror}</if>
+            <if test="sellWays != null and sellWays != ''">and d.sell_ways = #{sellWays}</if>
+            <if test="sameSell != null and sameSell != ''">and d.same_sell = #{sameSell}</if>
+            <if test="readCard != null and readCard != ''">and d.read_card = #{readCard}</if>
+            <if test="companyName != null and companyName != ''">and d.company_name = #{companyName}</if>
+            <if test="state != null and state != ''">and d.state = #{state}</if>
         </where>
     </select>
 

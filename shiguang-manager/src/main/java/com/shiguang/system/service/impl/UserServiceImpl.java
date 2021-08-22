@@ -256,4 +256,8 @@ public class UserServiceImpl implements UserService {
 
 	public int countManage(Map<String,Object> map){return userMapper.countManage(map);}
 
+	public List<UserDO> findListManages(Map<String,Object> map){return userMapper.findListManages(map);}
+
+	public int findCountManages(Map<String,Object> map){return userMapper.findCountManages(map);}
+
 }

@@ -40,4 +40,8 @@ public interface UserDao {
 
 	int countManage(Map<String,Object> map);
 
+	List<UserDO> findListManages(Map<String,Object> map);
+
+	int findCountManages(Map<String,Object> map);
+
 }

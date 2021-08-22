@@ -56,7 +56,7 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
+
  	<select id="count" resultType="int">
 		select count(*) from sys_user
 		 <where>  
@@ -86,58 +86,64 @@
 
 
 	<select id="listManage" resultType="com.shiguang.system.domain.UserDO">
-		select su.`user_id`,su.`username`,su.`name`,su.`password`,su.`store_num`,su.`store`,su.`company_id`,su.`company`,su.`dept_id`,sy.`role_name` as roleName, su.`email`,su.`mobile`,
-		su.`status`,su.`user_id_create`,su.`gmt_create`,su.`gmt_modified`,su.`sex`,su.`birth`,su.`pic_id`,su.`live_address`,
-		su.`hobby`,su.`province`,su.`city`,su.`district`,su.zhongxin_name ,su.zhongxin_address ,su.zhongxin_phone,su.zhongxin_img,
-		su.biaoge_biaoti,su.biaoge_neirong,su.`technical_title`,su.`consultation_fee`,su.`synopsis`,su.`head`
-		from sys_user su join sys_user_role ur on ur.user_id = su.user_id
-		join sys_role sy on sy.role_id = ur.role_id
-		<where>
-			<if test="userId != null and userId != ''"> and su.user_id = #{userId} </if>
-			<if test="username != null and username != ''"> and su.username = #{username} </if>
-			<if test="name != null and name != ''"> and su.name = #{name} </if>
-			<if test="password != null and password != ''"> and su.password = #{password} </if>
-			<if test="storeNum != null and storeNum != ''"> and su.storeNum = #{storeNum} </if>
-			<if test="store != null and store != ''"> and su.store = #{store} </if>
-			<if test="deptId != null and deptId != ''"> and su.dept_id = #{deptId} </if>
-			<if test="email != null and email != ''"> and su.email = #{email} </if>
-			<if test="mobile != null and mobile != ''"> and su.mobile = #{mobile} </if>
-			<if test="status != null and status != ''"> and su.status = #{status} </if>
-			<if test="userIdCreate != null and userIdCreate != ''"> and su.user_id_create = #{userIdCreate} </if>
-			<if test="gmtCreate != null and gmtCreate != ''"> and su.gmt_create = #{gmtCreate} </if>
-			<if test="gmtModified != null and gmtModified != ''"> and su.gmt_modified = #{gmtModified} </if>
-			<if test="sex != null and sex != ''"> and su.sex = #{sex} </if>
-			<if test="birth != null and birth != ''"> and su.birth = #{birth} </if>
-			<if test="picId != null and picId != ''"> and su.pic_id = #{picId} </if>
-			<if test="liveAddress != null and liveAddress != ''"> and su.live_address = #{liveAddress} </if>
-			<if test="hobby != null and hobby != ''"> and su.hobby = #{hobby} </if>
-			<if test="province != null and province != ''"> and su.province = #{province} </if>
-			<if test="city != null and city != ''"> and su.city = #{city} </if>
-			<if test="district != null and district != ''"> and su.district = #{district} </if>
-			<if test="roleTypes != null and roleTypes != ''">and sy.role_type = #{roleTypes}</if>
-			<if test="roleType != null and roleType != ''">and sy.role_type != #{roleType}</if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by user_id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+	select su.`user_id`,su.`username`,su.`name`,su.`password`,su.`store_num`,su.`store`,su.`company_id`,su.`company`,su.`dept_id`,sy.`role_name` as roleName, su.`email`,su.`mobile`,
+	su.`status`,su.`user_id_create`,su.`gmt_create`,su.`gmt_modified`,su.`sex`,su.`birth`,su.`pic_id`,su.`live_address`,
+	su.`hobby`,su.`province`,su.`city`,su.`district`,su.zhongxin_name ,su.zhongxin_address ,su.zhongxin_phone,su.zhongxin_img,
+	su.biaoge_biaoti,su.biaoge_neirong,su.`technical_title`,su.`consultation_fee`,su.`synopsis`,su.`head`
+	from sys_user su join sys_user_role ur on ur.user_id = su.user_id
+	join sys_role sy on sy.role_id = ur.role_id
+	join department d on d.depart_number = su.store_num
+	join c_company c on c.id =d.company_id
+	<where>
+		<if test="userId != null and userId != ''"> and su.user_id = #{userId} </if>
+		<if test="username != null and username != ''"> and su.username = #{username} </if>
+		<if test="companyId != null and companyId != ''">and d.company_id in (#{companyId})</if>
+		<if test="name != null and name != ''"> and su.name = #{name} </if>
+		<if test="password != null and password != ''"> and su.password = #{password} </if>
+		<if test="storeNum != null and storeNum != ''"> and su.storeNum = #{storeNum} </if>
+		<if test="store != null and store != ''"> and su.store = #{store} </if>
+		<if test="deptId != null and deptId != ''"> and su.dept_id = #{deptId} </if>
+		<if test="email != null and email != ''"> and su.email = #{email} </if>
+		<if test="mobile != null and mobile != ''"> and su.mobile = #{mobile} </if>
+		<if test="status != null and status != ''"> and su.status = #{status} </if>
+		<if test="userIdCreate != null and userIdCreate != ''"> and su.user_id_create = #{userIdCreate} </if>
+		<if test="gmtCreate != null and gmtCreate != ''"> and su.gmt_create = #{gmtCreate} </if>
+		<if test="gmtModified != null and gmtModified != ''"> and su.gmt_modified = #{gmtModified} </if>
+		<if test="sex != null and sex != ''"> and su.sex = #{sex} </if>
+		<if test="birth != null and birth != ''"> and su.birth = #{birth} </if>
+		<if test="picId != null and picId != ''"> and su.pic_id = #{picId} </if>
+		<if test="liveAddress != null and liveAddress != ''"> and su.live_address = #{liveAddress} </if>
+		<if test="hobby != null and hobby != ''"> and su.hobby = #{hobby} </if>
+		<if test="province != null and province != ''"> and su.province = #{province} </if>
+		<if test="city != null and city != ''"> and su.city = #{city} </if>
+		<if test="district != null and district != ''"> and su.district = #{district} </if>
+		<if test="roleTypes != null and roleTypes != ''">and sy.role_type = #{roleTypes}</if>
+		<if test="roleType != null and roleType != ''">and sy.role_type != #{roleType}</if>
+	</where>
+	<choose>
+		<when test="sort != null and sort.trim() != ''">
+			order by ${sort} ${order}
+		</when>
+		<otherwise>
+			order by user_id desc
+		</otherwise>
+	</choose>
+	<if test="offset != null and limit != null">
+		limit #{offset}, #{limit}
+	</if>
+</select>
 
 	<select id="countManage" resultType="int">
 		select count(*)
 		from sys_user su join sys_user_role ur on ur.user_id = su.user_id
 		join sys_role sy on sy.role_id = ur.role_id
+		join department d on d.depart_number = su.store_num
+		join c_company c on c.id =d.company_id
 		<where>
 			<if test="userId != null and userId != ''"> and su.user_id = #{userId} </if>
 			<if test="username != null and username != ''"> and su.username = #{username} </if>
 			<if test="name != null and name != ''"> and su.name = #{name} </if>
+            <if test="companyId != null and companyId != ''">and d.company_id in (#{companyId})</if>
 			<if test="password != null and password != ''"> and su.password = #{password} </if>
 			<if test="storeNum != null and storeNum != ''"> and su.storeNum = #{storeNum} </if>
 			<if test="store != null and store != ''"> and su.store = #{store} </if>
@@ -159,7 +165,82 @@
 			<if test="roleTypes != null and roleTypes != ''">and sy.role_type = #{roleTypes}</if>
 		</where>
 	</select>
-	 
+
+    <select id="findListManages" resultType="com.shiguang.system.domain.UserDO">
+        select su.`user_id`,su.`username`,su.`name`,su.`password`,su.`store_num`,su.`store`,su.`company_id`,su.`company`,su.`dept_id`,sy.`role_name` as roleName, su.`email`,su.`mobile`,
+        su.`status`,su.`user_id_create`,su.`gmt_create`,su.`gmt_modified`,su.`sex`,su.`birth`,su.`pic_id`,su.`live_address`,
+        su.`hobby`,su.`province`,su.`city`,su.`district`,su.zhongxin_name ,su.zhongxin_address ,su.zhongxin_phone,su.zhongxin_img,
+        su.biaoge_biaoti,su.biaoge_neirong,su.`technical_title`,su.`consultation_fee`,su.`synopsis`,su.`head`
+        from sys_user su join sys_user_role ur on ur.user_id = su.user_id
+        join sys_role sy on sy.role_id = ur.role_id
+        <where>
+            <if test="userId != null and userId != ''"> and su.user_id = #{userId} </if>
+            <if test="username != null and username != ''"> and su.username = #{username} </if>
+            <if test="name != null and name != ''"> and su.name = #{name} </if>
+            <if test="password != null and password != ''"> and su.password = #{password} </if>
+            <if test="storeNum != null and storeNum != ''"> and su.storeNum = #{storeNum} </if>
+            <if test="store != null and store != ''"> and su.store = #{store} </if>
+            <if test="deptId != null and deptId != ''"> and su.dept_id = #{deptId} </if>
+            <if test="email != null and email != ''"> and su.email = #{email} </if>
+            <if test="mobile != null and mobile != ''"> and su.mobile = #{mobile} </if>
+            <if test="status != null and status != ''"> and su.status = #{status} </if>
+            <if test="userIdCreate != null and userIdCreate != ''"> and su.user_id_create = #{userIdCreate} </if>
+            <if test="gmtCreate != null and gmtCreate != ''"> and su.gmt_create = #{gmtCreate} </if>
+            <if test="gmtModified != null and gmtModified != ''"> and su.gmt_modified = #{gmtModified} </if>
+            <if test="sex != null and sex != ''"> and su.sex = #{sex} </if>
+            <if test="birth != null and birth != ''"> and su.birth = #{birth} </if>
+            <if test="picId != null and picId != ''"> and su.pic_id = #{picId} </if>
+            <if test="liveAddress != null and liveAddress != ''"> and su.live_address = #{liveAddress} </if>
+            <if test="hobby != null and hobby != ''"> and su.hobby = #{hobby} </if>
+            <if test="province != null and province != ''"> and su.province = #{province} </if>
+            <if test="city != null and city != ''"> and su.city = #{city} </if>
+            <if test="district != null and district != ''"> and su.district = #{district} </if>
+            <if test="roleTypes != null and roleTypes != ''">and sy.role_type = #{roleTypes}</if>
+            <if test="roleType != null and roleType != ''">and sy.role_type != #{roleType}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by user_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="findCountManages" resultType="int">
+        select count(*)
+        from sys_user su join sys_user_role ur on ur.user_id = su.user_id
+        join sys_role sy on sy.role_id = ur.role_id
+        <where>
+            <if test="userId != null and userId != ''"> and su.user_id = #{userId} </if>
+            <if test="username != null and username != ''"> and su.username = #{username} </if>
+            <if test="name != null and name != ''"> and su.name = #{name} </if>
+            <if test="password != null and password != ''"> and su.password = #{password} </if>
+            <if test="storeNum != null and storeNum != ''"> and su.storeNum = #{storeNum} </if>
+            <if test="store != null and store != ''"> and su.store = #{store} </if>
+            <if test="deptId != null and deptId != ''"> and su.dept_id = #{deptId} </if>
+            <if test="email != null and email != ''"> and su.email = #{email} </if>
+            <if test="mobile != null and mobile != ''"> and su.mobile = #{mobile} </if>
+            <if test="status != null and status != ''"> and su.status = #{status} </if>
+            <if test="userIdCreate != null and userIdCreate != ''"> and su.user_id_create = #{userIdCreate} </if>
+            <if test="gmtCreate != null and gmtCreate != ''"> and su.gmt_create = #{gmtCreate} </if>
+            <if test="gmtModified != null and gmtModified != ''"> and su.gmt_modified = #{gmtModified} </if>
+            <if test="sex != null and sex != ''"> and su.sex = #{sex} </if>
+            <if test="birth != null and birth != ''"> and su.birth = #{birth} </if>
+            <if test="picId != null and picId != ''"> and su.pic_id = #{picId} </if>
+            <if test="liveAddress != null and liveAddress != ''"> and su.live_address = #{liveAddress} </if>
+            <if test="hobby != null and hobby != ''"> and su.hobby = #{hobby} </if>
+            <if test="province != null and province != ''"> and su.province = #{province} </if>
+            <if test="city != null and city != ''"> and su.city = #{city} </if>
+            <if test="district != null and district != ''"> and su.district = #{district} </if>
+            <if test="roleTypes != null and roleTypes != ''">and sy.role_type = #{roleTypes}</if>
+        </where>
+    </select>
+
 	<insert id="save" parameterType="com.shiguang.system.domain.UserDO" useGeneratedKeys="true" keyProperty="userId">
 		insert into sys_user
 		(
