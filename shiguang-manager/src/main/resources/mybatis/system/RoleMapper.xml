@@ -23,6 +23,7 @@
 			<if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
 			<if test="gmtModified != null and gmtModified != ''"> and gmt_modified = #{gmtModified} </if>
 			<if test="status != null and status != ''"> and status = #{status} </if>
+			<if test="roleTypes != null and roleTypes != ''"> and role_type != #{roleTypes} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -48,6 +49,7 @@
 			<if test="userIdCreate != null and userIdCreate != ''"> and user_id_create = #{userIdCreate} </if>
 			<if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
 			<if test="gmtModified != null and gmtModified != ''"> and gmt_modified = #{gmtModified} </if>
+			<if test="roleTypes != null and roleTypes != ''"> and role_type != #{roleTypes} </if>
 		</where>
 	</select>
 

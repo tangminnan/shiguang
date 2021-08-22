@@ -37,6 +37,10 @@ public interface UserService {
 
 	Set<String> listRoles(Long userId);
 
+	List<UserDO> listManage(Map<String,Object> map);
+
+	int countManage(Map<String,Object> map);
+
 	int resetPwd(UserVO userVO,UserDO userDO) throws Exception;
 	int adminResetPwd(UserVO userVO) throws Exception;
 	Tree<DeptDO> getTree();

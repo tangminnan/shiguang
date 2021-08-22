@@ -1,11 +1,7 @@
 package com.shiguang.system.service.impl;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -39,16 +35,16 @@ public class RoleServiceImpl implements RoleService {
     UserRoleDao userRoleMapper;
 
     @Override
-    public List<RoleDO> list() {
-        List<RoleDO> roles = roleMapper.list(new HashMap<>(16));
+    public List<RoleDO> list(Map<String,Object> maps) {
+        List<RoleDO> roles = roleMapper.list(maps);
         return roles;
     }
 
 
     @Override
-    public List<RoleDO> list(Long userId) {
+    public List<RoleDO> list(Long userId,Map<String,Object> map) {
         List<Long> rolesIds = userRoleMapper.listRoleId(userId);
-        List<RoleDO> roles = roleMapper.list(new HashMap<>(16));
+        List<RoleDO> roles = roleMapper.list(map);
         for (RoleDO roleDO : roles) {
             roleDO.setRoleSign("false");
             for (Long roleId : rolesIds) {
@@ -61,9 +57,9 @@ public class RoleServiceImpl implements RoleService {
         return roles;
     }
     @Override
-    public List<RoleDO> listbyid(Long userId) {
+    public List<RoleDO> listbyid(Long userId,Map<String,Object> map) {
     	List<Long> rolesIds = userRoleMapper.listRoleId(userId);
-    	List<RoleDO> roles = roleMapper.list(new HashMap<>(16));
+    	List<RoleDO> roles = roleMapper.list(map);
     	List<RoleDO> roleL = new ArrayList<>();
     	for (RoleDO roleDO : roles) {
     		for (Long roleId : rolesIds) {

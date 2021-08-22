@@ -81,8 +81,10 @@ function load() {
                                         var e;
                                         var t;
 										if (row.isSale == 0) {
-											   e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" ' +
-												   'onclick="edit(\''+value+'\',\''+row.saleNumber+'\')"><i class="fa fa-edit"></i></a> ';
+                                             e = '<a class="btn btn-primary btn-xs" href="#" title="缴费"  mce_href="#" ' +
+												 'onclick="edit(\''+ value+ '\',\''+row.saleNumber+'\')" style="text-decoration: none;">缴费</a>';
+											   // e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" ' +
+												//    'onclick="edit(\''+value+'\',\''+row.saleNumber+'\')"><i class="fa fa-edit"></i></a> ';
 											   t='';
 										} else if (row.isSale == 1) {
                                                e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" ' +

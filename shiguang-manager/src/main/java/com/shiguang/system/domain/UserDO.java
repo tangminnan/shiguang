@@ -21,6 +21,10 @@ public class UserDO implements Serializable {
     private String storeNum;
     //门店
     private String store;
+    //公司id
+    private String companyId;
+    //公司
+    private String company;
     // 部门
     private Long deptId;
     private String deptName;
@@ -179,6 +183,14 @@ public class UserDO implements Serializable {
     public void setStore(String store) {
         this.store = store;
     }
+
+    public void setCompanyId(String companyId){this.companyId = companyId;}
+
+    public String getCompanyId() {return companyId;}
+
+    public void setCompany(String company) {this.company = company;}
+
+    public String getCompany() {return company;}
 
     public Long getDeptId() {
         return deptId;

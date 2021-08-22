@@ -50,6 +50,12 @@ public class MemberController {
         //查询列表数据
         Query query = new Query(params);
         query.put("state",1);
+        if (null != params.get("ageStart") && !"".equals(params.get("ageStart"))){
+            query.put("agestart",Long.parseLong(params.get("ageStart").toString()));
+        }
+        if (null != params.get("ageEnd")&& !"".equals(params.get("ageEnd"))){
+            query.put("ageend",Long.parseLong(params.get("ageEnd").toString()));
+        }
         List<MemberDO> memberList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberList, total);

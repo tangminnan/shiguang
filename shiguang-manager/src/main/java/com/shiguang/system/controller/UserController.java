@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.baseinfomation.service.DepartmentService;
+import com.shiguang.mfrs.domain.CompanyDO;
+import com.shiguang.mfrs.service.CompanyService;
 import com.shiguang.system.obs.MultipartFileToFile;
 import com.shiguang.system.obs.ObsService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -46,6 +48,8 @@ public class UserController extends BaseController {
 	private BootdoConfig bootdoConfig;
 	@Autowired
 	private DepartmentService departmentService;
+	@Autowired
+	private CompanyService companyService;
 	
 	
 	@RequiresPermissions("sys:user:user")
@@ -60,19 +64,22 @@ public class UserController extends BaseController {
 		// 查询列表数据
 		Query query = new Query(params);
 		String rname = "";
-		List<UserDO> sysUserList = userService.list(query);
-		for(UserDO udo:sysUserList){
-			List<RoleDO> rdol =roleService.listbyid(udo.getUserId());
-			for(int i=0;i<rdol.size();i++){
-				rname =rname+ rdol.get(i).getRoleName();
-				if(i<rdol.size()-1){
-					rname =rname+",";
-				}
-			}
-			udo.setRoleName(rname);
-			rname = "";
-		}
-		int total = userService.count(query);
+		query.put("roleType",5);
+		List<UserDO> sysUserList = userService.listManage(query);
+		//Map<String,Object> map = new HashMap<>();
+		//map.put("roleType",5);
+//		for(UserDO udo:sysUserList){
+//			List<RoleDO> rdol =roleService.listbyid(udo.getUserId(),map);
+//			for(int i=0;i<rdol.size();i++){
+//				rname =rname+ rdol.get(i).getRoleName();
+//				if(i<rdol.size()-1){
+//					rname =rname+",";
+//				}
+//			}
+//			udo.setRoleName(rname);
+//			rname = "";
+//		}
+		int total = userService.countManage(query);
 		PageUtils pageUtil = new PageUtils(sysUserList, total);
 		return pageUtil;
 	}
@@ -81,13 +88,36 @@ public class UserController extends BaseController {
 	@Log("添加用户")
 	@GetMapping("/add")
 	String add(Model model) {
-		List<RoleDO> roles = roleService.list();
+		Map<String,Object> maps = new HashMap<>();
+		maps.put("roleTypes",5);
+		List<RoleDO> roles = roleService.list(maps);
 		model.addAttribute("roles", roles);
 		Map<String,Object> map = new HashMap<>();
 		map.put("departType","销售门店");
+		//UserDO userDO = ShiroUtils.getUser();
+		if (null != ShiroUtils.getUser().getCompanyId()){
+			String companyIds = ShiroUtils.getUser().getCompanyId();
+			map.put("companyId",companyIds);
+		}
 		List<DepartmentDO> storeList = departmentService.list(map);
 		model.addAttribute("storeList",storeList);
 		return prefix + "/add";
+	}
+
+	@RequiresPermissions("sys:user:addManager")
+	@Log("添加管理员")
+	@GetMapping("/addManager")
+	String addManager(Model model) {
+		Map<String,Object> maps = new HashMap<>();
+		maps.put("roleType",5);
+		List<RoleDO> roles = roleService.list(maps);
+		model.addAttribute("roles", roles);
+		Map<String,Object> map = new HashMap<>();
+		//map.put("departType","销售门店");
+		//List<DepartmentDO> storeList = departmentService.list(map);
+		List<CompanyDO> companyDOList =companyService.list(map);
+		model.addAttribute("companyDOList",companyDOList);
+		return prefix + "/addManager";
 	}
 
 	@RequiresPermissions("sys:user:edit")
@@ -96,7 +126,9 @@ public class UserController extends BaseController {
 	String edit(Model model, @PathVariable("id") Long id) {
 		UserDO userDO = userService.get(id);
 		model.addAttribute("user", userDO);
-		List<RoleDO> roles = roleService.list(id);
+        Map<String,Object> maps = new HashMap<>();
+        maps.put("roleType",5);
+		List<RoleDO> roles = roleService.list(id,maps);
 		model.addAttribute("roles", roles);
 		Map<String,Object> map = new HashMap<>();
 		map.put("departType","销售门店");

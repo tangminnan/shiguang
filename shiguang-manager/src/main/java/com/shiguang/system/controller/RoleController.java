@@ -39,7 +39,8 @@ public class RoleController extends BaseController {
 	@GetMapping("/list")
 	@ResponseBody()
 	List<RoleDO> list() {
-		List<RoleDO> roles = roleService.list();
+		Map<String,Object> map = new HashMap<>();
+		List<RoleDO> roles = roleService.list(map);
 		return roles;
 	}
 

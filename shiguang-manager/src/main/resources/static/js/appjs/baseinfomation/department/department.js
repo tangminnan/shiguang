@@ -70,22 +70,22 @@ function load() {
 									title : '所属公司',
                                     align : 'center'
 								},
-																{
-									field : 'sameSell',
-									title : '隐形和护理液同单销售',
-                                    align : 'center',
-									formatter : function(value, row, index) {
-										if(value == '0'){
-											return '<span class="label">可以同单销售</span>';
-										}else if(value == '1'){
-                                            return '<span class="label">不可以同单销售</span>';
-
-                                        }else if(value == '2'){
-                                            return '<span class="label">未设置</span>';
-
-                                        }
-									}
-								},
+								// 								{
+								// 	field : 'sameSell',
+								// 	title : '隐形和护理液同单销售',
+                                 //    align : 'center',
+								// 	formatter : function(value, row, index) {
+								// 		if(value == '0'){
+								// 			return '<span class="label">可以同单销售</span>';
+								// 		}else if(value == '1'){
+                                 //            return '<span class="label">不可以同单销售</span>';
+                                //
+                                 //        }else if(value == '2'){
+                                 //            return '<span class="label">未设置</span>';
+                                //
+                                 //        }
+								// 	}
+								// },
 																{
 									field : 'status', 
 									title : '部门状态',

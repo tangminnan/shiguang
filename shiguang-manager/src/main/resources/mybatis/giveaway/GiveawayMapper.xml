@@ -91,6 +91,7 @@
          from aa_produca p left join c_unit u on u.unitid = p.unitid
         <where>
             <if test="num != null and num != ''">and 1=#{num}</if>
+            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -98,6 +99,7 @@
         from aa_jpcp jc LEFT JOIN c_unit u on u.unitid = jc.unitid
         <where>
             <if test="num != null and num != ''">and 2=#{num}</if>
+            <if test="producNum != null and producNum != ''">and jc.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -105,6 +107,7 @@
         from aa_jpdz jd LEFT JOIN c_unit u on u.unitid = jd.unitid
         <where>
             <if test="num != null and num != ''">and 2=#{num}</if>
+            <if test="producNum != null and producNum != ''">and jd.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -112,6 +115,7 @@
         from aa_parts pa LEFT JOIN c_unit u on u.unitid = pa.unitid
         <where>
             <if test="num != null and num != ''">and 3=#{num}</if>
+            <if test="producNum != null and producNum != ''">and pa.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -119,6 +123,7 @@
         from aa_yxcp yc LEFT JOIN c_unit u on u.unitid = yc.unitid
         <where>
             <if test="num != null and num != ''">and 4=#{num}</if>
+            <if test="producNum != null and producNum != ''">and yc.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -126,6 +131,7 @@
         from aa_yxdz yd LEFT JOIN c_unit u on u.unitid = yd.unitid
         <where>
             <if test="num != null and num != ''">and 4=#{num}</if>
+            <if test="producNum != null and producNum != ''">and yd.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -133,6 +139,7 @@
         from aa_hly h LEFT JOIN c_unit u on u.unitid = h.unitid
         <where>
             <if test="num != null and num != ''">and 5=#{num}</if>
+            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -140,6 +147,7 @@
         from aa_tyj t LEFT JOIN c_unit u on u.unitid = t.unitid
         <where>
             <if test="num != null and num != ''">and 6=#{num}</if>
+            <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -147,6 +155,7 @@
         from aa_oldlens ol LEFT JOIN c_unit u on u.unitid = ol.unitid
         <where>
             <if test="num != null and num != ''">and 7=#{num}</if>
+            <if test="producNum != null and producNum != ''">and ol.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -154,6 +163,7 @@
         from aa_hc hc LEFT JOIN c_unit u on u.unitid = hc.unitid
         <where>
             <if test="num != null and num != ''">and 8=#{num}</if>
+            <if test="producNum != null and producNum != ''">and hc.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -161,6 +171,7 @@
         from aa_shiguang sh LEFT JOIN c_unit u on u.unitid = sh.unitid
         <where>
             <if test="num != null and num != ''">and 9=#{num}</if>
+            <if test="producNum != null and producNum != ''">and sh.produc_num = #{producNum}</if>
         </where>
     </select>
     <select id="coungGoods" resultType="int">
@@ -169,6 +180,7 @@
         from aa_produca p left join c_unit u on u.unitid = p.unitid
         <where>
             <if test="num != null and num != ''">and 1=#{num}</if>
+            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -176,6 +188,7 @@
         from aa_jpcp jc LEFT JOIN c_unit u on u.unitid = jc.unitid
         <where>
             <if test="num != null and num != ''">and 2=#{num}</if>
+            <if test="producNum != null and producNum != ''">and jc.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -183,6 +196,7 @@
         from aa_jpdz jd LEFT JOIN c_unit u on u.unitid = jd.unitid
         <where>
             <if test="num != null and num != ''">and 2=#{num}</if>
+            <if test="producNum != null and producNum != ''">and jd.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -190,6 +204,7 @@
         from aa_parts pa LEFT JOIN c_unit u on u.unitid = pa.unitid
         <where>
             <if test="num != null and num != ''">and 3=#{num}</if>
+            <if test="producNum != null and producNum != ''">and pa.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -197,6 +212,7 @@
         from aa_yxcp yc LEFT JOIN c_unit u on u.unitid = yc.unitid
         <where>
             <if test="num != null and num != ''">and 4=#{num}</if>
+            <if test="producNum != null and producNum != ''">and yc.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -204,6 +220,7 @@
         from aa_yxdz yd LEFT JOIN c_unit u on u.unitid = yd.unitid
         <where>
             <if test="num != null and num != ''">and 4=#{num}</if>
+            <if test="producNum != null and producNum != ''">and yd.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -211,6 +228,7 @@
         from aa_hly h LEFT JOIN c_unit u on u.unitid = h.unitid
         <where>
             <if test="num != null and num != ''">and 5=#{num}</if>
+            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -218,6 +236,7 @@
         from aa_tyj t LEFT JOIN c_unit u on u.unitid = t.unitid
         <where>
             <if test="num != null and num != ''">and 6=#{num}</if>
+            <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -225,6 +244,7 @@
         from aa_oldlens ol LEFT JOIN c_unit u on u.unitid = ol.unitid
         <where>
             <if test="num != null and num != ''">and 7=#{num}</if>
+            <if test="producNum != null and producNum != ''">and ol.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -232,6 +252,7 @@
         from aa_hc hc LEFT JOIN c_unit u on u.unitid = hc.unitid
         <where>
             <if test="num != null and num != ''">and 8=#{num}</if>
+            <if test="producNum != null and producNum != ''">and hc.produc_num = #{producNum}</if>
         </where>
         UNION
 
@@ -239,6 +260,7 @@
         from aa_shiguang sh LEFT JOIN c_unit u on u.unitid = sh.unitid
         <where>
             <if test="num != null and num != ''">and 9=#{num}</if>
+            <if test="producNum != null and producNum != ''">and sh.produc_num = #{producNum}</if>
         </where>
         )a
     </select>

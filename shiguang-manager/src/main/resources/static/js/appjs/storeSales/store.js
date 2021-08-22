@@ -54,15 +54,15 @@ function getKjpeijian() {
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
-            lis += "<li>抹零金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -125,15 +125,15 @@ function getTaiyangjing(){
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
-            lis += "<li>抹零金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -196,15 +196,15 @@ function getHaocai() {
            // $("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
-            lis += "<li>抹零金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -264,15 +264,15 @@ function getLaohuajing() {
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
-            lis += "<li>抹零金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -335,15 +335,15 @@ function getShiguang(){
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
-            lis += "<li>抹零金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -407,15 +407,15 @@ function getHuliye(){
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
-            lis += "<li>抹零金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -479,15 +479,15 @@ function getPeijian(){
            // $("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
-            lis += "<li>抹零金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -590,15 +590,15 @@ function getYinxing(){
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
-            lis += "<li>抹零金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -661,10 +661,10 @@ function getYinxingpj(){
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+price+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
-            lis += "<li>抹零金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
             lis += "<li>应收金额："+price+"</li>";
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
@@ -847,6 +847,8 @@ function getYouji(){
 var zhekouPrice=0.00;
 var youhuiPrice=0.00;
 var dazhePrice=0.00;
+var zhekouYHPrice = 0.00;
+var shishouqj=0.00;
 function getTaocanXz(){
     var checkDate="";
     if (check_val == '' && check_val != undefined){
@@ -886,8 +888,9 @@ function getTaocanXz(){
                             shihsouPrice = (parseFloat(amount) - parseFloat(youhuiPrice)).toFixed(2);
                             //alert(yingshouPricce);
                         } else if (rows[i].danyiyh == '打折'){
-                            dazhePrice = (parseFloat(amount) * parseFloat(rows[i].dazhePrice)).toFixed(2);
-                            shihsouPrice = dazhePrice;
+                            dazhePrice = (parseFloat(amount) - (parseFloat(amount) * parseFloat(rows[i].dazhePrice))).toFixed(2);
+                            zhekouYHPrice = (parseFloat(amount) * parseFloat(rows[i].dazhePrice)).toFixed(2);
+                            shihsouPrice = zhekouYHPrice;
                         } else if (rows[i].danyiyh == '特价'){
                             shihsouPrice = rows[i].tejiaPrice;
                         }
@@ -933,13 +936,14 @@ function getTaocanXz(){
                                     $("#zhekoujj"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshoujj"+t+"").val();
                                     if (undefined != yingshou){
+                                        zhekouPrice = (parseFloat(yingshou) * (parseFloat(1)-parseFloat(rebat[t]))).toFixed(2);
                                         yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
                                         //document.getElementById("yingshouMoneyjj"+t+"").innerHTML=""
                                         $("#yingshouMoneyjj"+t+"").text();
                                         $("#yingshouMoneyjj"+t+"").text(yingshou);
-                                        $("#zhekouMoneyjj"+t+"").text(yingshou);
-                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
-                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        $("#zhekouMoneyjj"+t+"").text(zhekouPrice);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(zhekouPrice)
+                                        //zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
                                         amount = (parseFloat(amount) - parseFloat(dazhePrice)).toFixed(2);
                                         shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
@@ -986,13 +990,14 @@ function getTaocanXz(){
                                     $("#zhekoujp"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshoujp"+t+"").val();
                                     if (undefined != yingshou){
+                                        zhekouPrice = (parseFloat(yingshou) * (parseFloat(1)-parseFloat(rebat[t]))).toFixed(2);
                                         yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
                                         //document.getElementById("yingshouMoneyjp"+t+"").innerHTML=""
                                         $("#yingshouMoneyjp"+t+"").text();
                                         $("#yingshouMoneyjp"+t+"").text(yingshou);
-                                        $("#zhekouMoneyjp"+t+"").text(yingshou);
-                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
-                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        $("#zhekouMoneyjp"+t+"").text(zhekouPrice);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(zhekouPrice)
+                                        //zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
                                         amount = (parseFloat(amount) - parseFloat(dazhePrice)).toFixed(2);
                                         shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
@@ -1039,13 +1044,14 @@ function getTaocanXz(){
                                     $("#zhekoujp"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshoujp"+t+"").val();
                                     if (undefined != yingshou){
+                                        zhekouPrice = (parseFloat(yingshou) * (parseFloat(1)-parseFloat(rebat[t]))).toFixed(2);
                                         yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
                                         //document.getElementById("yingshouMoneyjp"+t+"").innerHTML=""
                                         $("#yingshouMoneyjp"+t+"").text();
                                         $("#yingshouMoneyjp"+t+"").text(yingshou);
-                                        $("#zhekouMoneyjp"+t+"").text(yingshou);
-                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
-                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        $("#zhekouMoneyjp"+t+"").text(zhekouPrice);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(zhekouPrice)
+                                        //zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
                                         amount = (parseFloat(amount) - parseFloat(dazhePrice)).toFixed(2);
                                         shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
@@ -1092,6 +1098,7 @@ function getTaocanXz(){
                                     yingshou = $("#yingshoujjpj"+t+"").val();
                                     yingshou = $("#yingshouyxpj"+t+"").val();
                                     if (undefined != yingshou){
+                                        zhekouPrice = (parseFloat(yingshou) * (parseFloat(1)-parseFloat(rebat[t]))).toFixed(2);
                                         yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
                                         $("#yingshouMoneypj"+t+"").text();
                                         $("#yingshouMoneyjjpj"+t+"").text();
@@ -1101,11 +1108,11 @@ function getTaocanXz(){
                                         $("#yingshouMoneypj"+t+"").text(yingshou);
                                         $("#yingshouMoneyjjpj"+t+"").text(yingshou);
                                         $("#yingshouMoneyyxpj"+t+"").text(yingshou);
-                                        $("#zhekouMoneypj"+t+"").text(yingshou);
-                                        $("#zhekouMoneyjjpj"+t+"").text(yingshou);
-                                        $("#zhekouMoneyyxpj"+t+"").text(yingshou);
-                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
-                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        $("#zhekouMoneypj"+t+"").text(zhekouPrice);
+                                        $("#zhekouMoneyjjpj"+t+"").text(zhekouPrice);
+                                        $("#zhekouMoneyyxpj"+t+"").text(zhekouPrice);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(zhekouPrice)
+                                        //zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
                                         amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
                                         shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
@@ -1141,13 +1148,14 @@ function getTaocanXz(){
                                     $("#zhekoutyj"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshoutyj"+t+"").val();
                                     if (undefined != yingshou){
+                                        zhekouPrice = (parseFloat(yingshou) * (parseFloat(1)-parseFloat(rebat[t]))).toFixed(2);
                                         yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
                                         //document.getElementById("yingshouMoneytyj"+t+"").innerHTML=""
                                         $("#yingshouMoneytyj"+t+"").text();
                                         $("#yingshouMoneytyj"+t+"").text(yingshou);
-                                        $("#zhekouMoneytyj"+t+"").text(yingshou);
-                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
-                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        $("#zhekouMoneytyj"+t+"").text(zhekouPrice);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(zhekouPrice)
+                                        //zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
                                         amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
                                         shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
@@ -1179,13 +1187,14 @@ function getTaocanXz(){
                                     $("#zhekoulhj"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshoulhj"+t+"").val();
                                     if (undefined != yingshou){
+                                        zhekouPrice = (parseFloat(yingshou) * (parseFloat(1)-parseFloat(rebat[t]))).toFixed(2);
                                         yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
                                         //document.getElementById("yingshouMoneylhj"+t+"").innerHTML=""
                                         $("#yingshouMoneylhj"+t+"").text();
                                         $("#yingshouMoneylhj"+t+"").text(yingshou);
-                                        $("#zhekouMoneylhj"+t+"").text(yingshou);
-                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
-                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        $("#zhekouMoneylhj"+t+"").text(zhekouPrice);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(zhekouPrice)
+                                        //zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
                                         amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
                                         shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
@@ -1217,13 +1226,14 @@ function getTaocanXz(){
                                     $("#zhekouhc"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshouhc"+t+"").val();
                                     if (undefined != yingshou){
+                                        zhekouPrice = (parseFloat(yingshou) * (parseFloat(1)-parseFloat(rebat[t]))).toFixed(2);
                                         yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
                                         //document.getElementById("yingshouMoneyhc"+t+"").innerHTML=""
                                         $("#yingshouMoneyhc"+t+"").text();
                                         $("#yingshouMoneyhc"+t+"").text(yingshou);
-                                        $("#zhekouMoneyhc"+t+"").text(yingshou);
-                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
-                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        $("#zhekouMoneyhc"+t+"").text(zhekouPrice);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(zhekouPrice)
+                                        //zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
                                         amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
                                         shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
@@ -1255,13 +1265,14 @@ function getTaocanXz(){
                                     $("#zhekousg"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshousg"+t+"").val();
                                     if (undefined != yingshou){
+                                        zhekouPrice = (parseFloat(yingshou) * (parseFloat(1)-parseFloat(rebat[t]))).toFixed(2);
                                         yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
                                         //document.getElementById("yingshouMoneysg"+t+"").innerHTML=""
                                         $("#yingshouMoneysg"+t+"").text();
                                         $("#yingshouMoneysg"+t+"").text(yingshou);
-                                        $("#zhekouMoneysg"+t+"").text(yingshou);
-                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
-                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        $("#zhekouMoneysg"+t+"").text(zhekouPrice);
+                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(zhekouPrice)
+                                        //zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
                                         amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
                                         shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
@@ -1293,13 +1304,14 @@ function getTaocanXz(){
                                     $("#zhekouhly"+t+"").text(rebat[t]);
                                     var yingshou = $("#yingshouhly"+t+"").val();
                                     if (undefined != yingshou){
+                                        zhekouPrice = (parseFloat(yingshou) * (parseFloat(1)-parseFloat(rebat[t]))).toFixed(2);
                                         yingshou = (parseFloat(yingshou) * parseFloat(rebat[t])).toFixed(2);
                                         //document.getElementById("yingshouMoneyhly"+t+"").innerHTML=""
                                         $("#yingshouMoneyhly"+t+"").text();
                                         $("#yingshouMoneyhly"+t+"").text(yingshou);
-                                        $("#zhekouMoneyhly"+t+"").text(yingshou);
-                                        dazhePrice = parseFloat(dazhePrice) + parseFloat(yingshou)
-                                        zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
+                                        $("#zhekouMoneyhly"+t+"").text(zhekouPrice);
+                                        dazhePrice = parseFloat(dazhePrice) +  parseFloat(zhekouPrice)
+                                        //zhekouPrice = (parseFloat(zhekouPrice) + parseFloat(rebat[t])).toFixed(2);
                                         amount = (parseFloat(amount) - parseFloat(rebat[t])).toFixed(2);
                                         shihsouPrice = (parseFloat(shihsouPrice) + parseFloat(yingshou)).toFixed(2);
                                         //zhekouAPrice = parseFloat(zhekouAPrice) + parseFloat(yingshou);
@@ -1333,10 +1345,11 @@ function getTaocanXz(){
                 // if (yingshouAPrice != 0.00 || zhekouAPrice != 0.00){
                 //     yingshouPricce = parseFloat(yingshouAPrice) + parseFloat(zhekouAPrice);
                 // }
-                lis =  "<li>原价金额："+amountYj+"</li>";
+                shishouqj = shihsouPrice;
+                lis =  "<li>原价金额："+(parseFloat(amountYj)+parseFloat(molingPrice)).toFixed(2)+"</li>";
                 lis += "<li>折扣金额："+dazhePrice+"</li>";
                 lis += "<li>优惠金额："+youhuiPrice+"</li>";
-                lis += "<li>抹零金额：0.00</li>";
+                lis += "<li>抹零金额："+molingPrice+"</li>";
                 lis += "<li>应收金额："+shihsouPrice+"</li>";
                 lis += "<li>实收金额："+shihsouPrice+"</li>";
                 $("#ula").append(lis)
@@ -1357,10 +1370,10 @@ function getHYTc(){
     document.getElementById("taocanName").value = "";
     $("#ula").empty();
     var lis="";
-    lis =  "<li>原价金额："+price+"</li>";
+    lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
     lis += "<li>折扣金额：0.00</li>";
     lis += "<li>优惠金额：0.00</li>";
-    lis += "<li>抹零金额：0.00</li>";
+    lis += "<li>抹零金额："+molingPrice+"</li>";
     lis += "<li>应收金额："+price+"</li>";
     lis += "<li>实收金额："+price+"</li>";
     $("#ula").append(lis)
@@ -1371,8 +1384,11 @@ function getHYTc(){
 var check_val = [];
 var retailCountPrice=0.00;
 function getGoodsInfoSelect(obj,countPrice){
-    //var obj = document.getElementsByName("producaNum");
-    check_val.push(obj);
+    if (check_val.indexOf(obj) > -1){
+        check_val.remove(obj);
+    } else {
+        check_val.push(obj);
+    }
     retailCountPrice = (parseFloat(retailCountPrice) + parseFloat(countPrice)).toFixed(2);
     // for(k in obj){
     //     if(obj[k].checked)

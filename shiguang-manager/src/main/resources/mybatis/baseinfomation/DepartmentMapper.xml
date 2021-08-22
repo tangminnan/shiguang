@@ -20,7 +20,7 @@
             <if test="departTel != null and departTel != ''">and d.depart_tel = #{departTel}</if>
             <if test="departAddress != null and departAddress != ''">and d.depart_address = #{departAddress}</if>
             <if test="departType != null and departType != ''">and d.depart_type = #{departType}</if>
-            <if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
+            <if test="companyId != null and companyId != ''">and d.company_id in (#{companyId})</if>
             <if test="personCharge != null and personCharge != ''">and d.person_charge = #{personCharge}</if>
             <if test="status != null and status != ''">and d.status = #{status}</if>
             <if test="fanuc != null and fanuc != ''">and d.fanuc = #{fanuc}</if>
@@ -54,7 +54,7 @@
             <if test="departTel != null and departTel != ''">and depart_tel = #{departTel}</if>
             <if test="departAddress != null and departAddress != ''">and depart_address = #{departAddress}</if>
             <if test="departType != null and departType != ''">and depart_type = #{departType}</if>
-            <if test="companyId != null and companyId != ''">and company_id = #{companyId}</if>
+            <if test="companyId != null and companyId != ''">and company_id in (#{companyId})</if>
             <if test="personCharge != null and personCharge != ''">and person_charge = #{personCharge}</if>
             <if test="status != null and status != ''">and status = #{status}</if>
             <if test="fanuc != null and fanuc != ''">and fanuc = #{fanuc}</if>

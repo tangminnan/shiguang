@@ -27,7 +27,7 @@ function load() {
 						pagination : true, // 设置为true会在底部显示分页条
 						// queryParamsType : "limit",
 						// //设置为limit则会发送符合RESTFull格式的参数
-						singleSelect : false, // 设置为true将禁止多选
+						singleSelect : true, // 设置为true将禁止多选
 						// contentType : "application/x-www-form-urlencoded",
 						// //发送到服务器的数据编码类型
 						pageSize : 10, // 如果设置了分页，每页数据条数

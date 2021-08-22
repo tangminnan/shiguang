@@ -252,4 +252,8 @@ public class UserServiceImpl implements UserService {
 		return userMapper.update(user);
 	}
 
+	public List<UserDO> listManage(Map<String,Object> map){return userMapper.listManage(map);}
+
+	public int countManage(Map<String,Object> map){return userMapper.countManage(map);}
+
 }

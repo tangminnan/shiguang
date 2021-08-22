@@ -253,6 +253,9 @@ public class StoreSalesController {
                 return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
             }
         }
+        if (salesDO.getIsJp() < 2 ) {
+            return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
+        }
         Long saleNumber = GuuidUtil.getUUID();
         salesDO.setSaleNumber("X" + saleNumber);
         if (null != salesDO) {

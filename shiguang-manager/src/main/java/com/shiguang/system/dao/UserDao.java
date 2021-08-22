@@ -36,4 +36,8 @@ public interface UserDao {
 	
 	Long[] listAllDept();
 
+	List<UserDO> listManage(Map<String,Object> map);
+
+	int countManage(Map<String,Object> map);
+
 }

@@ -67,18 +67,18 @@
 									<input id="fanucs" name="fanucs" th:value="${department.fanuc}" class="form-control" type="hidden">
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">销售方式：</label>
-								<div class="col-sm-8">
-									<label class="radio-inline"> <input type="radio"
-																		th:field="*{department.sellWays}" name="sellWays"  value="0" /> 验光+销售+收银
-									</label>
-									<label class="radio-inline"> <input type="radio"
-																		th:field="*{department.sellWays}" name="sellWays" value="1" /> 验光+销售
-									</label>
-									<span style="color: red">*</span>
-								</div>
-							</div>
+							<!--<div class="form-group">-->
+								<!--<label class="col-sm-3 control-label">销售方式：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<label class="radio-inline"> <input type="radio"-->
+																		<!--th:field="*{department.sellWays}" name="sellWays"  value="0" /> 验光+销售+收银-->
+									<!--</label>-->
+									<!--<label class="radio-inline"> <input type="radio"-->
+																		<!--th:field="*{department.sellWays}" name="sellWays" value="1" /> 验光+销售-->
+									<!--</label>-->
+									<!--<span style="color: red">*</span>-->
+								<!--</div>-->
+							<!--</div>-->
 							<div class="form-group" id="tab1" style="display: none">
 								<label class="col-sm-3 control-label">默认成品取镜时间：</label>
 								<div class="col-sm-8">
@@ -87,17 +87,17 @@
 								</div>
 							</div>
 
-							<div class="form-group" id="tab2" style="display: none">
-								<label class="col-sm-3 control-label">隐形和护理液同单销售：</label>
-								<div class="col-sm-8">
-									<select class="form-control" name="sameSell" id="sameSell" >
-										<option value="">请选择</option>
-										<option value="0">可以同单销售</option>
-										<option value="1">不可以同单销售</option>
-									</select>
-									<input id="sameSells" name="sameSells" th:value="${department.sameSell}" class="form-control" type="hidden"
-								</div>
-							</div>
+							<!--<div class="form-group" id="tab2" style="display: none">-->
+								<!--<label class="col-sm-3 control-label">隐形和护理液同单销售：</label>-->
+								<!--<div class="col-sm-8">-->
+									<!--<select class="form-control" name="sameSell" id="sameSell" >-->
+										<!--<option value="">请选择</option>-->
+										<!--<option value="0">可以同单销售</option>-->
+										<!--<option value="1">不可以同单销售</option>-->
+									<!--</select>-->
+									<!--<input id="sameSells" name="sameSells" th:value="${department.sameSell}" class="form-control" type="hidden"-->
+								<!--</div>-->
+							<!--</div>-->
 							<div class="form-group">
 								<label class="col-sm-3 control-label">所属公司：</label>
 								<div class="col-sm-8">
@@ -163,8 +163,8 @@
         $().ready(function(){
             var departTypes = $("input[name='departTypes']").val();
             $("#departType").find("[value='"+departTypes+"']").attr("selected",true);
-            var sameSells = $("input[name='sameSells']").val();
-            $("#sameSell").find("[value='"+sameSells+"']").attr("selected",true);
+            // var sameSells = $("input[name='sameSells']").val();
+            // $("#sameSell").find("[value='"+sameSells+"']").attr("selected",true);
             var fanucs = $("input[name='fanucs']").val();
             $("#fanuc").find("[value='"+fanucs+"']").attr("selected",true);
             var companyIds = $("input[name='companyIds']").val();
@@ -184,6 +184,7 @@
                 tab1.style="display: none";
                 tab2.style="display: none";
                 tab3.style="display: none";
+                tab4.style="display: none";
             }
 		}
 	</script>

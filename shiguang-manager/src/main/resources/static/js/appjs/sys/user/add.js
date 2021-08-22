@@ -80,6 +80,9 @@ function validateRule() {
 			mobile : {
 				required : true
 			},
+            role : {
+                required : true
+			},
 			topic : {
 				required : "#newsletter:checked",
 				minlength : 2
@@ -108,6 +111,9 @@ function validateRule() {
 			 mobile : {
 				required : icon + "请输入手机号码"
 			},
+            role : {
+                required : icon + "请选择角色"
+            },
 		}
 	})
 }
