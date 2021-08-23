@@ -131,9 +131,8 @@
                 </td>
                 <td>统一社会信用代码效期:</td>
                 <td>
-                    <input id="creditcodeday" name="creditcodeday" th:value="${mfrs.creditcodedays}" type="text">
-                    <br>
-                    <em>如：XXXX-XX-XX</em>
+                    <input id="creditcodeday" name="creditcodeday" th:value="${mfrs.creditcodeday}" type="text">
+
                 </td>
             </tr>
             <tr>
@@ -143,9 +142,7 @@
                 </td>
                 <td>医疗器械经营许可证有效期:</td>
                 <td>
-                    <input id="medicinecodeday" name="medicinecodeday" th:value="${mfrs.medicinecodedays}" type="text">
-                    <br>
-                    <em>如：XXXX-XX-XX</em>
+                    <input id="medicinecodeday" name="medicinecodeday" th:value="${mfrs.medicinecodeday}" type="text">
                 </td>
             </tr>
             <tr>
@@ -155,9 +152,7 @@
                 </td>
                 <td>全国工业品生产许可证有效期:</td>
                 <td>
-                    <input id="productscodeday" name="productscodeday" th:value="${mfrs.productscodedays}" type="text">
-                    <br>
-                    <em>如：XXXX-XX-XX</em>
+                    <input id="productscodeday" name="productscodeday" th:value="${mfrs.productscodeday}" type="text">
                 </td>
             </tr>
             <tr>
@@ -191,7 +186,19 @@
             $("#payid").find("[value=" + payids + "]").attr("selected", true);
             payChange();
         });
-
+        //日期
+        laydate.render({
+            elem: '#creditcodeday',
+            type: 'date'
+        });
+        laydate.render({
+            elem: '#medicinecodeday',
+            type: 'date'
+        });
+        laydate.render({
+            elem: '#productscodeday',
+            type: 'date'
+        });
         function payChange() {
             var payVal = $("#payid").find("option:selected").text();
             if (payVal == "现金") {

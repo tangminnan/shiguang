@@ -318,12 +318,6 @@
 
 </script>
 <script type="text/javascript">
-    var a1 = document.getElementById("producNum")
-    var a2 = document.getElementById("producCode")
-    var sum;
-    var sum1;
-    var a1_val = "3.00.00.000000000.0000"
-
     //———制造商与品种联动
     function choice(value) {
         // alert(value);
@@ -348,7 +342,11 @@
             }
         });
     }
-
+    var a1 = document.getElementById("producNum");
+    var a2 = document.getElementById("producCode");
+    var sum;
+    var sum1;
+    var a1_val = "4.00.00.000000000.0000";
     function change(e, k, s) {
         a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);
         a1_val = a1.value.substring(0, 7) + a1_val.substring(7, 22);

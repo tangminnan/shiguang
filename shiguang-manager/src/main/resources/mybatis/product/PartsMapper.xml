@@ -35,7 +35,7 @@
             and p.state= 1
         </where>
 
-        group by p.id order by p.xsstate asc ,p.id asc
+        group by p.id order by  p.id desc
     </select>
 
     <select id="count" resultType="int">
@@ -149,7 +149,7 @@
 		select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=2
         and m.state= 1
-        group by m.mfrsid order by m.mfrsid asc
+        group by m.mfrsid order by m.mfrsid desc
 	</select>
     <!--菜单联动显示-->
     <select id="choice" resultType="com.shiguang.product.domain.PartsDO">

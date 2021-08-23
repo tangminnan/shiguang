@@ -34,7 +34,7 @@
             <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
             and  h.state= 1
         </where>
-        group by h.id order by h.xsstate asc ,h.id asc
+        group by h.id order by  h.id desc
     </select>
     <select id="count" resultType="int">
         select count(*) from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum

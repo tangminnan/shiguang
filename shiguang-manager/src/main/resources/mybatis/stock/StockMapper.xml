@@ -967,6 +967,7 @@
             <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and p.brandid = #{brandid}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="factory != null and factory != ''">and p.factory = #{factory}</if>
             <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
             <if test="producFactorycolor != null and producFactorycolor != ''">and p.produc_factorycolor =
@@ -1148,7 +1149,12 @@
 
     <!--【是否已存在商品信息】-->
     <select id="haveNum" resultType="com.shiguang.stock.domain.StockDO">
-        select  goods_count from stock where goods_num=#{goodsNum} order by id
+        select  goods_count from stock
+         <where>
+             <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
+             <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
+         </where>
+        order by id
     </select>
     <!--【库存查询】-->
     <select id="kccxList" resultType="com.shiguang.stock.domain.StockDO">

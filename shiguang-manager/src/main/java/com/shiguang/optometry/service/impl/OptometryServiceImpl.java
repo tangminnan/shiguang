@@ -81,4 +81,16 @@ public class OptometryServiceImpl implements OptometryService {
     public int findOptoCount(Map<String, Object> map) {
         return optometryDao.findOptoCount(map);
     }
+
+    //开检查单的
+    @Override
+    public List<OptometryDO> moenyList(Map<String, Object> map) {
+        return optometryDao.moenyList(map);
+    }
+    //开检查单数量
+
+    @Override
+    public int moenyListcount(Map<String, Object> map) {
+        return optometryDao.moenyListcount(map);
+    }
 }

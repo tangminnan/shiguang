@@ -64,6 +64,18 @@ function load() {
                         title : '所属区域'
                     },
                     {
+                        title: '所属区域',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.provinceName != null && row.cityName != null) {
+                                return row.provinceName + "" + row.cityName
+                            } else {
+                                return ""
+                            }
+                        }
+
+                    },
+                    {
                         field : 'type',
                         title : '公司类型'
                     },
@@ -107,39 +119,39 @@ function load() {
                     //     field : 'proportion',
                     //     title : '批发价比例'
                     // },
-                    {
-                        field : 'logo',
-                        title : '系统logo',
-                        formatter : function(value, row, index) {
-                            if(value!=null){
-                                var e = '<div class="image"><img width="90" height="100" alt="image" class="img-responsive" src="' + value + '"></div>'
-                                return e;
-                            }else
-                                return "";
-                        }
-                    },
-                    {
-                        field : 'backgroundimage',
-                        title : '背景图',
-                        formatter : function(value, row, index) {
-                            if(value!=null){
-                                var e = '<div class="image"><img width="90" height="100" alt="image" class="img-responsive" src="' + value + '"></div>'
-                                return e;
-                            }else
-                                return "";
-                        }
-                    },
-                    {
-                        field : 'departmentimage',
-                        title : '部门选择背景图',
-                        formatter : function(value, row, index) {
-                            if(value!=null){
-                                var e = '<div class="image"><img width="90" height="100" alt="image" class="img-responsive" src="' + value + '"></div>'
-                                return e;
-                            }else
-                                return "";
-                        }
-                    },
+                    // {
+                    //     field : 'logo',
+                    //     title : '系统logo',
+                    //     formatter : function(value, row, index) {
+                    //         if(value!=null){
+                    //             var e = '<div class="image"><img width="90" height="100" alt="image" class="img-responsive" src="' + value + '"></div>'
+                    //             return e;
+                    //         }else
+                    //             return "";
+                    //     }
+                    // },
+                    // {
+                    //     field : 'backgroundimage',
+                    //     title : '背景图',
+                    //     formatter : function(value, row, index) {
+                    //         if(value!=null){
+                    //             var e = '<div class="image"><img width="90" height="100" alt="image" class="img-responsive" src="' + value + '"></div>'
+                    //             return e;
+                    //         }else
+                    //             return "";
+                    //     }
+                    // },
+                    // {
+                    //     field : 'departmentimage',
+                    //     title : '部门选择背景图',
+                    //     formatter : function(value, row, index) {
+                    //         if(value!=null){
+                    //             var e = '<div class="image"><img width="90" height="100" alt="image" class="img-responsive" src="' + value + '"></div>'
+                    //             return e;
+                    //         }else
+                    //             return "";
+                    //     }
+                    // },
                     {
                         field: 'xsstate',
                         title: '启用状态',

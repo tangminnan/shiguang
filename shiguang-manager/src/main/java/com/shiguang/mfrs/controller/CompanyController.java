@@ -7,7 +7,9 @@ import java.util.Map;
 import com.shiguang.common.config.BootdoConfig;
 import com.shiguang.common.utils.FileUtil;
 import com.shiguang.mfrs.domain.*;
+import com.shiguang.mfrs.service.CitiesService;
 import com.shiguang.mfrs.service.ProvincesService;
+import com.shiguang.stock.domain.StockDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -44,6 +46,9 @@ public class CompanyController {
 	//省
 	@Autowired
 	private ProvincesService provincesService;
+//	市
+	@Autowired
+	private CitiesService citiesService;
 
 	@GetMapping()
 	@RequiresPermissions("mfrs:company:company")
@@ -75,6 +80,9 @@ public class CompanyController {
 		//省
 		List<ProvincesDO> provincesDOList = provincesService.list(map);
 		model.addAttribute("provincesDOList", provincesDOList);
+//		市
+		List<CitiesDO> citiesDOList = citiesService.list(map);
+		model.addAttribute("citiesDOList", citiesDOList);
 	    return "mfrs/company/add";
 	}
 
@@ -87,6 +95,9 @@ public class CompanyController {
 		//省
 		List<ProvincesDO> provincesDOList = provincesService.list(map);
 		model.addAttribute("provincesDOList", provincesDOList);
+		//		市
+		List<CitiesDO> citiesDOList = citiesService.list(map);
+		model.addAttribute("citiesDOList", citiesDOList);
 	    return "mfrs/company/edit";
 	}
 
@@ -97,37 +108,37 @@ public class CompanyController {
 	@PostMapping("/save")
 	@RequiresPermissions("mfrs:company:add")
 	public R save( CompanyDO company){
-		try{
-			MultipartFile file = company.getImgFile();
-			if(file!=null && file.getSize()>0){
-				String fileName = FileUtil.renameToUUID(file.getOriginalFilename());
-				FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath()+"company/", fileName);
-				company.setLogo("/files/company/"+fileName);
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		try{
-			MultipartFile file1 = company.getImgFile1();
-			if(file1!=null && file1.getSize()>0){
-				String fileName = FileUtil.renameToUUID(file1.getOriginalFilename());
-				FileUtil.uploadFile(file1.getBytes(), bootdoConfig.getUploadPath()+"company/", fileName);
-				company.setBackgroundimage("/files/company/"+fileName);
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try{
-			MultipartFile file2= company.getImgFile2();
-			if(file2!=null && file2.getSize()>0){
-				String fileName = FileUtil.renameToUUID(file2.getOriginalFilename());
-				FileUtil.uploadFile(file2.getBytes(), bootdoConfig.getUploadPath()+"company/", fileName);
-				company.setDepartmentimage("/files/company/"+fileName);
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try{
+//			MultipartFile file = company.getImgFile();
+//			if(file!=null && file.getSize()>0){
+//				String fileName = FileUtil.renameToUUID(file.getOriginalFilename());
+//				FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath()+"company/", fileName);
+//				company.setLogo("/files/company/"+fileName);
+//			}
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		try{
+//			MultipartFile file1 = company.getImgFile1();
+//			if(file1!=null && file1.getSize()>0){
+//				String fileName = FileUtil.renameToUUID(file1.getOriginalFilename());
+//				FileUtil.uploadFile(file1.getBytes(), bootdoConfig.getUploadPath()+"company/", fileName);
+//				company.setBackgroundimage("/files/company/"+fileName);
+//			}
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		try{
+//			MultipartFile file2= company.getImgFile2();
+//			if(file2!=null && file2.getSize()>0){
+//				String fileName = FileUtil.renameToUUID(file2.getOriginalFilename());
+//				FileUtil.uploadFile(file2.getBytes(), bootdoConfig.getUploadPath()+"company/", fileName);
+//				company.setDepartmentimage("/files/company/"+fileName);
+//			}
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 		//判断是否已存在
 		String name = company.getName();
@@ -137,9 +148,6 @@ public class CompanyController {
 		if (list.size() > 0){
 			return R.error("公司名称已存在");
 		}
-
-
-
 
 		if(companyService.save(company)>0){
 			return R.ok();

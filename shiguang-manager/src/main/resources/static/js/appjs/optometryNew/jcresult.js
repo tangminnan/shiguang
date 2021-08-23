@@ -4,11 +4,11 @@ $().ready(function () {
 
 $.validator.setDefaults({
     submitHandler: function () {
-        save();
+        saveCF();
     }
 });
 
-function save() {
+function saveCF() {
     $.ajax({
         cache: true,
         type: "POST",
@@ -21,10 +21,14 @@ function save() {
         success: function (data) {
             if (data.code == 0) {
                 parent.layer.msg("操作成功");
-                parent.reLoad();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
+                var index1 = window.parent.parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                // 获取窗口索引
+                window.parent.parent.layer.close(index1);
 
+
+
+               window.parent.parent.location.reload();
+               // window.location.href="/information/optometryNew";
             } else {
                 parent.layer.alert(data.msg)
             }

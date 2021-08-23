@@ -182,16 +182,17 @@ function showCol() {
 function save() {
     var goodsid = document.getElementById('goodsType').value;
     var mfrsid = document.getElementById('mfrsid').value;
-    // var heji = document.getElementsByName("heji").value;
+    var heji = document.getElementById('heji').value;
+    alert(heji);
     if (goodsid == "") {
         alert("请选择采购类型！");
     } else if (goodsid != "" && mfrsid == "") {
         alert("请选择所属制造商！");
     }
-    // else if (goodsid != "" && mfrsid == "" && heji == "") {
-    //     alert("请添加单品商品!");
-    // }
-    else if (goodsid != "" && mfrsid != "") {//&& heji != ""
+    else if (goodsid != "" && mfrsid != "" && heji == 0) {
+        alert("请添加单品商品!");
+    }
+    else if (goodsid != "" && mfrsid != "" && heji !=0) {//&& heji != ""
         $.ajax({
             cache: true,
             type: "POST",

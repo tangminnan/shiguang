@@ -32,9 +32,11 @@ function load() {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
                         offset: params.offset,
-                        cardNumber: $("#cardNumber").val()
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
+                        cardNumber: $('#cardNumber').val(),
+                        saleNumber: $('#saleNumber').val(),
+                        name: $('#name').val()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -47,6 +49,11 @@ function load() {
                     {
                         field: 'cardNumber',
                         title: '会员卡号',
+                        align: 'center'
+                    },
+                    {
+                        field: 'saleNumber',
+                        title: '缴费单号',
                         align: 'center'
                     },
                     {
@@ -77,9 +84,9 @@ function load() {
                         field: 'cardNumber',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="读取" onclick="edit(\''
+                            var e = '<span class="btn btn-success btn-sm ' + s_edit_h + '" href="#" title="综合验光"  mce_href="#" onclick="edit(\''
                                 + value
-                                + '\')"><i class="fa fa-edit"></i></a> ';
+                                + '\')">综合验光</span> ';
                             // var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
                             // 		+ row.id
                             // 		+ '\')"><i class="fa fa-remove"></i></a> ';

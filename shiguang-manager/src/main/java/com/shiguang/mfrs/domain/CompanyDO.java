@@ -36,6 +36,66 @@ public class CompanyDO implements Serializable {
 	public void setState(Long state) {
 		this.state = state;
 	}
+	//省编号
+	private String provinceCode;
+	//省名称
+	private String provinceName;
+	//市编号
+	private String cityCode;
+	//市名称
+	private String cityName;
+	//区编号
+	private String areaCode;
+	//区名称
+	private String areaName;
+
+	public String getProvinceCode() {
+		return provinceCode;
+	}
+
+	public void setProvinceCode(String provinceCode) {
+		this.provinceCode = provinceCode;
+	}
+
+	public String getProvinceName() {
+		return provinceName;
+	}
+
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
+	}
+
+	public String getCityCode() {
+		return cityCode;
+	}
+
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
 
 	//公司id
 	private Integer id;
@@ -43,6 +103,16 @@ public class CompanyDO implements Serializable {
 	private String name;
 	//所属区域
 	private String province;
+	private String citys;
+
+	public String getCitys() {
+		return citys;
+	}
+
+	public void setCitys(String citys) {
+		this.citys = citys;
+	}
+
 	//公司类型
 	private String type;
 	//公司电话

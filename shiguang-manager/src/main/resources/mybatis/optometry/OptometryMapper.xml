@@ -357,4 +357,28 @@
             <if test="processName != null and processName != ''">and process_name = #{processName}</if>
         </where>
     </select>
+
+    <!--//开检查单的-->
+    <select id="moenyList" resultType="com.shiguang.optometry.domain.OptometryDO">
+      select me.card_number,co.sale_number,me.name,me.sex,me.age, co.type
+      from cost co left join member me on co.member_number = me.card_number
+      <where>
+          <if test="isSale != null and isSale != ''"> and co.is_sale = #{isSale} </if>
+          <if test="type != null and type != ''"> and co.type = #{type} </if>
+          <if test="state != null and state != ''"> and me.state = #{state} </if>
+          <if test="cardNumber != null and cardNumber != ''"> and me.card_number = #{cardNumber} </if>
+          <if test="saleNumber != null and saleNumber != ''"> and co.sale_number = #{saleNumber} </if>
+          <if test="name != null and name != ''"> and me.name = #{name} </if>
+      </where>
+      group by  co.sale_number
+      order by co.id desc
+    </select>
+    <select id="moenyListcount" resultType="int">
+    select count(*)  from cost co left join member me on co.member_number = me.card_number
+        <where>
+            <if test="isSale != null and isSale != ''"> and co.is_sale = #{isSale} </if>
+            <if test="type != null and type != ''"> and co.type = #{type} </if>
+            <if test="state != null and state != ''"> and me.state = #{state} </if>
+        </where>
+    </select>
 </mapper>

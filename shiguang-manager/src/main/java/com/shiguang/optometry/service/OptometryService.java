@@ -36,4 +36,11 @@ public interface OptometryService {
     List<MemberDO> findOptoList(Map<String,Object> map);
 
     int findOptoCount(Map<String,Object> map);
+
+
+    //开检查单的
+    List<OptometryDO> moenyList(Map<String, Object> map);
+    //开检查单数量
+    int moenyListcount(Map<String, Object> map);
+
 }

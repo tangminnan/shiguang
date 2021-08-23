@@ -121,6 +121,7 @@ public class StockController {
     @PostMapping("/save")
     @RequiresPermissions("stock:stock:add")
     public R save(StockDO stock, OrderDO orderDO) {
+        String positionName=stock.getPositionName();
         String str = stock.getGoodsNum();
         String[] name = str.split(",");
         for (int i = 0; i < name.length; i++) {
@@ -136,9 +137,8 @@ public class StockController {
             String goodsCount = stock.getGoodsCount().toString().split(",")[i];
 
             //判断是否已存在商品
-            Map<String, Object> map = new HashMap<>();
-            map.put("goodsNum", goodsNum);
-
+            stockDO.setGoodsNum(goodsNum);
+            stockDO.setPositionName(positionName);
             StockDO goodsNumList = stockService.haveNum(stockDO);
             if (null != goodsNumList) {
                 String gdcount = goodsNumList.getGoodsCount();
@@ -198,17 +198,17 @@ public class StockController {
         for (int i = 0; i < namesOrder.length; i++) {
             OrderDO orderDO1 = new OrderDO();
             String goodsNum = name[i];
-            orderDO1.setGoodsNum(goodsNum);//代码
+            orderDO1.setGoodsNum(goodsNum);
             String goodsCode = orderDO.getGoodsCode().split(",")[i];
-            orderDO1.setGoodsCode(goodsCode);//条码
+            orderDO1.setGoodsCode(goodsCode);
             String goodsName = orderDO.getGoodsName().split(",")[i];
-            orderDO1.setGoodsName(goodsName);//名称
+            orderDO1.setGoodsName(goodsName);
             String brandname = orderDO.getBrandname().split(",")[i];
             orderDO1.setBrandname(brandname);
             String goodsCount = orderDO.getGoodsCount().toString().split(",")[i];
-            orderDO1.setGoodsCount(goodsCount);//数量
-            orderDO1.setGoodsType(orderDO.getGoodsType());//商品类别
-            orderDO1.setMfrsid(orderDO.getMfrsid());//制造商
+            orderDO1.setGoodsCount(goodsCount);
+            orderDO1.setGoodsType(orderDO.getGoodsType());
+            orderDO1.setMfrsid(orderDO.getMfrsid());
             String costPrice = stock.getCostPrice().split(",")[i];
             orderDO1.setCostPrice(costPrice); //成本价格
 
@@ -216,7 +216,7 @@ public class StockController {
             orderDO1.setCostSum(Double.toString(costSum)); //成本合计
 
             String wholePrice = stock.getWholePrice().split(",")[i];
-            orderDO1.setWholePrice(wholePrice);    //批发价格
+            orderDO1.setWholePrice(wholePrice);
             Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodsCount);
             orderDO1.setWholeSum(Double.toString(wholeSum));    //批发合计
 
@@ -226,7 +226,7 @@ public class StockController {
 //            stockDO.setCostSum(Double.toString(transferPricecount));
 
             String retailPrice = stock.getRetailPrice().split(",")[i];
-            orderDO1.setRetailPrice(retailPrice);  //标准零售价格
+            orderDO1.setRetailPrice(retailPrice);
             Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
             orderDO1.setPriceSum(Double.toString(priceSum));  //原价合计
 
@@ -315,7 +315,7 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectjingjia")
     public List<ProducaDO> selectjingjia(String producNum, String producCode, String producName,
-                                         Integer mfrsid, Integer brandid,
+                                         Integer mfrsid, Integer brandid,String brandname,
                                          String producFactorycolor, String size, Integer materialid,
                                          Integer technologyId, String producFactory, String factory,
                                          Model model) {
@@ -325,6 +325,7 @@ public class StockController {
         map.put("producName", producName);
         map.put("mfrsid", mfrsid);
         map.put("brandid", brandid);
+        map.put("brandname", brandname);
         map.put("producFactorycolor", producFactorycolor);
         map.put("sizes", size);
         map.put("materialid", materialid);

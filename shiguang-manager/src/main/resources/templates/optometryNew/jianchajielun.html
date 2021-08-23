@@ -230,7 +230,7 @@
             <tbody id="kuangjiayy">
             <tr>
                 <td class="PL30" colspan="2">1 框架--远用
-                    <input type="button" class="input_del" value="删 除"/>
+                    <input type="button" class="input_del" id="remove1" value="删 除"/>
                 </td>
                 <td style="text-align: right" colspan="7">
                     医生：
@@ -374,7 +374,7 @@
             <tbody id="kuangjiajy">
             <tr>
                 <td class="PL30" colspan="2">2 框架--近用
-                    <input type="button" class="input_del" value="删 除"/></td>
+                    <input type="button" class="input_del" id="remove2" value="删 除"/></td>
                 <td style="text-align: right" colspan="7">
                     医生：
                     <select name="kjjyDoctor">
@@ -510,7 +510,7 @@
             <tbody id="jianjsg">
             <tr>
                 <td class="PL30" colspan="2">3
-                    框架--双光/渐进 <input type="button" class="input_del" value="删 除"/>
+                    框架--双光/渐进 <input type="button" class="input_del" id="remove3" value="删 除"/>
                 </td>
                 <td style="text-align: right" colspan="8">
                     医生：
@@ -628,7 +628,7 @@
         <table id="tab4" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="ruanxjmjcj">
             <tr>
-                <td class="PL30" colspan="2">4 软性角膜接触镜 <input type="button" class="input_del" value="删 除"/>
+                <td class="PL30" colspan="2">4 软性角膜接触镜 <input type="button" class="input_del" id="remove4" value="删 除"/>
                 </td>
                 <td style="text-align: right" colspan="8">
                     医生：
@@ -714,7 +714,7 @@
         <table id="tab5" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="kuangjiazy">
             <tr>
-                <td class="PL30" colspan="2">5 框架--中用 <input type="button" class="input_del" value="删 除"/></td>
+                <td class="PL30" colspan="2">5 框架--中用 <input type="button" class="input_del" id="remove5" value="删 除"/></td>
                 <td style="text-align: right" colspan="7">
                     医生：
                     <select name="zyDoctor">
@@ -849,7 +849,7 @@
             <tbody id="shijxl">
             <tr>
                 <td class="PL30" colspan="2">6 视觉训练
-                    <input type="button" class="input_del" value="删 除"/></td>
+                    <input type="button" class="input_del" id="remove6" value="删 除"/></td>
                 <td style="text-align: right" colspan="8">
                     医生：
                     <select name="sjxlDoctor">
@@ -959,7 +959,7 @@
         <table id="tab7" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="jmvst">
             <tr>
-                <td class="PL30" colspan="2">7 角膜接触镜VST <input type="button" class="input_del" value="删 除"/>
+                <td class="PL30" colspan="2">7 角膜接触镜VST <input type="button" class="input_del" id="remove7" value="删 除"/>
                 </td>
                 <td style="text-align: right" colspan="11">
                     医生：
@@ -1035,7 +1035,7 @@
         <table id="tab8" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="jmcrt">
             <tr>
-                <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="button" class="input_del" value="删 除"/>
+                <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="button" class="input_del" id="remove8" value="删 除"/>
                 </td>
                 <td style="text-align: right" colspan="10">
                     医生：
@@ -1109,7 +1109,7 @@
             <tbody id="jcrgp">
             <tr>
                 <td class="PL30" colspan="2">9 RGP
-                    <input type="button" class="input_del" value="删 除"/></td>
+                    <input type="button" class="input_del" id="remove9" value="删 除"/></td>
                 <td style="text-align: right" colspan="6">
                     医生：
                     <select name="rgpDoctor">
@@ -1170,7 +1170,7 @@
             <tbody id="jcyp">
             <tr>
                 <td class="PL30" colspan="2">10 药品
-                    <input type="button" class="input_del" value="删 除"/></td>
+                    <input type="button" class="input_del" id="remove10" value="删 除"/></td>
                 <td style="text-align: right">
                     医生：
                     <select name="ypDoctor">
@@ -1226,7 +1226,7 @@
         </div>
     </div>
     <!--保存-->
-    <div class="Keep"><input type="button" value="保存" onclick="save()"/></div>
+    <div class="Keep"><input type="button" value="保存" onclick="saveCF()"/></div>
 </form>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/optometryNew/jcresult.js"></script>
@@ -1238,33 +1238,6 @@
 
     $().ready(function () {
         //远用基底
-
-        // $("select").val("4444")
-
-        // var jdval1=document.getElementById('kjyyJdods').value;
-        // $('#kjyyJdod option[value="上"]').porp("selected", "selected");
-        // //
-        //
-        // var kjyyJdods=document.getElementById('kjyyJdods').value;
-        // var kjyyJdod = $("#kjyyJdod").find("option"); //获取select下拉框的所有值
-        // for (var j = 0; j < kjyyJdod.length; j++) {
-        //     if ($(kjyyJdod[j]).val() == kjyyJdods) {
-        //         $(kjyyJdod[j]).porp("selected", "selected");
-        //     }
-        // }
-        //
-        // $("#kjyyJdod option").each(function () {
-        //     var jdval1=$(this).val();
-        //     alert(1111)
-        //     if (jdval1 == kjyyJdods) {
-        //         alert(222)
-        //         $(kjyyJdod[j]).porp("selected", "selected");
-        //         alert(3333)
-        //     }
-        //     alert(444)
-        // })
-
-
 
             //远用基底
         var kjyyJdoss = $("input[name='kjyyJdoss']").val();
@@ -1352,8 +1325,21 @@
     });
     $(".input_del").click(function () {
         $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+        // $('table tbody').empty();
+        $(this).parentsUntil('table').value="";
+
     });
 
+    //清空
+    function clearText() {
+
+        var controls = document.getElementsByTagName('input');
+        for (var i = 0; i < controls.length; i++) {
+            if (controls[i].type == 'text') {
+                controls[i].value = '';
+            }
+        }
+    }
     //清空护理液
     function cleanhlys() {
         $("#hlys").val("");

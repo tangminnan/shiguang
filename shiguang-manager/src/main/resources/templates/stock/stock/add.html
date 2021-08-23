@@ -184,7 +184,7 @@
             <tbody>
             <tr id="tab1" style="display:none">
                 <td style="width: 100vw;">
-                    <table class="jingjia">
+                    <table>
                         <tr class="thead">
                             <!--<td>全选 <input type="checkbox"/></td>-->
                             <td>商品代码</td>
@@ -206,15 +206,16 @@
 
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji1">
-                            <!--<td colspan="10" style="text-align:right;">合计</td>-->
-                            <!--<td>0</td>-->
+                            <td colspan="10" style="text-align:right;">合计</td>
+                            <td value="0"></td>
+                            <input id="heji" name="heji" value="0" type="text"/>
                         </tr>
                     </table>
                 </td>
             </tr>
             <tr id="tab2" style="display:none">
                 <td style="width: 100vw;">
-                    <table id="peijian">
+                    <table>
                         <tr class="thead">
                             <!--<td>全选 <input type="checkbox"/></td>-->
                             <td>商品代码</td>
@@ -1095,6 +1096,7 @@
             layer.full(toIndex)
         }
     }
+
 </script>
 </body>
 </html>

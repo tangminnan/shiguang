@@ -30,7 +30,7 @@
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state =1
         </where>
-        group by m.mfrsid order by m.xsstate asc ,m.mfrsid asc
+        group by m.mfrsid order by m.mfrsid desc
     </select>
 
     <select id="count" resultType="int">
@@ -58,7 +58,7 @@
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state= 1
         </where>
-        group by m.mfrsid order by m.mfrsid asc
+        group by m.mfrsid order by m.mfrsid desc
     </select>
     <select id="findMfrscount" resultType="int">
         select count(*) from c_mfrs m

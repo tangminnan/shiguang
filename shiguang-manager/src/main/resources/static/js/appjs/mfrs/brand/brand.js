@@ -225,9 +225,9 @@ function load() {
                             var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
                                 + row.brandid
                                 + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a class="btn btn-success btn-sm" href="#" title="详情"  mce_href="#" onclick="resetPwd(\''
+                            var f = '<span class="btn btn-success btn-sm" href="#" title="详情"  mce_href="#" onclick="resetPwd(\''
                                 + row.brandid
-                                + '\')">详情</a> ';
+                                + '\')">详情</span> ';
                             return e + d + f;
                         }
                     }]

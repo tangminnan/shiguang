@@ -98,11 +98,7 @@
         <tr>
             <td>标准零售价格：</td>
             <td>
-                <select name="" id="">
-                    <option value="">已设置零售价</option>
-                    <option value="">未设置零售价</option>
-                </select>
-                <input type="text"/> ~ <input type="text"/>
+                <input id="retailPrice" name="retailPrice" type="text"/> ~ <input id="retailPrice2" name="retailPrice2" type="text"/>
             </td>
         </tr>
     </table>
@@ -178,6 +174,7 @@
         var producName = $("#producName").val();
         var mfrsid = $("#mfrsid").val();
         var brandid = $("#brandid").val();
+        var brandname = $("#brandname").val();
         var producFactorycolor = $("#producFactorycolor").val();
         var size = $("#size").val();
         var materialid = $("#materialid option:selected").val();
@@ -195,6 +192,7 @@
                 'producName': producName,
                 'mfrsid': mfrsid,
                 'brandid': brandid,
+                'brandname': brandname,
                 'producFactorycolor': producFactorycolor,
                 'size': size,
                 'materialid': materialid,

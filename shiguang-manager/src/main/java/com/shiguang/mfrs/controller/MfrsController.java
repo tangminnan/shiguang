@@ -100,11 +100,11 @@ public class MfrsController {
         //支付
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
-//———获取当前系统时间—————
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-        Date date = new Date();
-        String newDate = sdf.format(date);
-        model.addAttribute("createTime", newDate);
+////———获取当前系统时间—————
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+//        Date date = new Date();
+//        String newDate = sdf.format(date);
+//        model.addAttribute("createTime", newDate);
 
         return "mfrs/mfrs/add";
     }
@@ -122,19 +122,19 @@ public class MfrsController {
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
 //------------修改时转换日期格式
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //统一社会信用代码效期
-        Date stime = mfrs.getCreditcodeday();
-        String str = sdf.format(stime);
-        mfrs.setCreditcodedays(str);
-        //医疗器械经营许可证有效期
-        Date stime2 = mfrs.getMedicinecodeday();
-        String str2 = sdf.format(stime2);
-        mfrs.setMedicinecodedays(str2);
-        //全国工业品生产许可证有效期
-        Date stime3 = mfrs.getProductscodeday();
-        String str3 = sdf.format(stime3);
-        mfrs.setProductscodedays(str3);
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        //统一社会信用代码效期
+//        Date stime = mfrs.getCreditcodeday();
+//        String str = sdf.format(stime);
+//        mfrs.setCreditcodedays(str);
+//        //医疗器械经营许可证有效期
+//        Date stime2 = mfrs.getMedicinecodeday();
+//        String str2 = sdf.format(stime2);
+//        mfrs.setMedicinecodedays(str2);
+//        //全国工业品生产许可证有效期
+//        Date stime3 = mfrs.getProductscodeday();
+//        String str3 = sdf.format(stime3);
+//        mfrs.setProductscodedays(str3);
         return "mfrs/mfrs/edit";
     }
 
@@ -154,20 +154,20 @@ public class MfrsController {
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
 
-        //------------修改时转换日期格式
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //统一社会信用代码效期
-        Date stime = mfrs.getCreditcodeday();
-        String str = sdf.format(stime);
-        mfrs.setCreditcodedays(str);
-        //医疗器械经营许可证有效期
-        Date stime2 = mfrs.getMedicinecodeday();
-        String str2 = sdf.format(stime2);
-        mfrs.setMedicinecodedays(str2);
-        //全国工业品生产许可证有效期
-        Date stime3 = mfrs.getProductscodeday();
-        String str3 = sdf.format(stime3);
-        mfrs.setProductscodedays(str3);
+//        //------------修改时转换日期格式
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        //统一社会信用代码效期
+//        Date stime = mfrs.getCreditcodeday();
+//        String str = sdf.format(stime);
+//        mfrs.setCreditcodedays(str);
+//        //医疗器械经营许可证有效期
+//        Date stime2 = mfrs.getMedicinecodeday();
+//        String str2 = sdf.format(stime2);
+//        mfrs.setMedicinecodedays(str2);
+//        //全国工业品生产许可证有效期
+//        Date stime3 = mfrs.getProductscodeday();
+//        String str3 = sdf.format(stime3);
+//        mfrs.setProductscodedays(str3);
 
         return "mfrs/mfrs/detail";
     }

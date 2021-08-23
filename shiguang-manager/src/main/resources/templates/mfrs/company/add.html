@@ -12,68 +12,46 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公司名称：</label>
                             <div class="col-sm-8">
-                                <input id="name" name="name" class="form-control" type="text">
-                                <span style="color: red">*(公司名称涉及登录页面、部门选择、主页、报表4部分的更换。)</span>
+                                <input id="name" name="name" style="width:28%"    type="text">
+                                <!--<span style="color: red">*(公司名称涉及登录页面、部门选择、主页、报表4部分的更换。)</span>-->
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">所属区域：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="region" name="region" class="form-control" type="text">-->
-                        <!--<span style="color: red">*</span>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">所属区域：</label>-->
-                        <!--<div class="col-sm-8 form-inline" data-toggle="distpicker">-->
-                        <!--<select id="province" name="province" class="form-control chosen-select"></select>-->
-                        <!--<span style="color: red">*</span>-->
-                        <!--</div>-->
-                        <!--</div>-->
-
-
-                        <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label">所属区域：</label>-->
-                        <!--<div class="col-sm-8">-->
-                        <!--<input id="province" name="province" class="form-control" type="text">-->
-                        <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所属区域：</label>
-                            <div class="col-sm-8">
-                                <select id="province" name="province" class="form-control">
-                                    <option></option>
-                                    <option th:each="ls:${provincesDOList}"
-                                            th:text="${ls.province}"
-                                            th:value="${ls.province}"></option>
-                                </select>
+                            <div class="col-sm-8 form-inline" data-toggle="distpicker">
+                                <select id="eprovinceName" name="provinceName" class="form-control chosen-select" ></select>
+                                <select id="ecityName"  name="cityName" class="form-control chosen-select" ></select>
+                                <!--<select id="eareaName" name="areaName" class="form-control chosen-select" ></select>-->
                                 <span style="color: red">*</span>
                             </div>
                         </div>
+                        <input id="provinceCode" name="provinceCode" class="form-control" type="hidden">
+                        <input id="cityCode" name="cityCode" class="form-control" type="hidden">
+
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公司类型：</label>
                             <div class="col-sm-8">
-                                <input id="type" name="type" class="form-control" type="text">
+                                <input id="type" name="type"  style="width:28%"   type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公司电话：</label>
                             <div class="col-sm-8">
-                                <input id="telephone" name="telephone" class="form-control" type="text">
+                                <input id="telephone" name="telephone"  style="width:28%"   type="text">
                                 <span style="color: red">*</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">法人：</label>
                             <div class="col-sm-8">
-                                <input id="legalperson" name="legalperson" class="form-control" type="text">
+                                <input id="legalperson" name="legalperson"   style="width:28%"  type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">手机号：</label>
                             <div class="col-sm-8">
-                                <input id="phone" name="phone" class="form-control" type="text">
+                                <input id="phone" name="phone"  style="width:28%"   type="text">
                             </div>
                         </div>
                         <div class="form-group">
@@ -88,52 +66,52 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">默认采购收货地址：</label>
+                            <label class="col-sm-3 control-label"> 采购收货地址：</label>
                             <div class="col-sm-8">
-                                <input id="purchaseaddress" name="purchaseaddress" class="form-control" type="text">
-                                <span style="color: red">（此项将打印在采购订单地址栏中。）</span>
+                                <input id="purchaseaddress" name="purchaseaddress"   style="width:28%"  type="text">
+                                <!--<span style="color: red">（此项将打印在采购订单地址栏中。）</span>-->
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">默认采购收货人：</label>
+                            <label class="col-sm-3 control-label"> 采购收货人：</label>
                             <div class="col-sm-8">
-                                <input id="purchasepeople" name="purchasepeople" class="form-control" type="text">
-                                <span style="color: red">（此项将打印在采购订单地址栏中。）</span>
+                                <input id="purchasepeople" name="purchasepeople"  style="width:28%"   type="text">
+                                <!--<span style="color: red">（此项将打印在采购订单地址栏中。）</span>-->
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">默认采购收货电话：</label>
+                            <label class="col-sm-3 control-label"> 采购收货电话：</label>
                             <div class="col-sm-8">
-                                <input id="purchasephone" name="purchasephone" class="form-control" type="text">
-                                <span style="color: red">（此项将打印在采购订单联系电话中。）</span>
+                                <input id="purchasephone" name="purchasephone"  style="width:28%"   type="text">
+                                <!--<span style="color: red">（此项将打印在采购订单联系电话中。）</span>-->
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">默认采购收货传真：</label>
+                            <label class="col-sm-3 control-label"> 采购收货传真：</label>
                             <div class="col-sm-8">
-                                <input id="purchasefax" name="purchasefax" class="form-control" type="text">
-                                <span style="color: red">（此项将打印在采购订单收货传真中。）</span>
+                                <input id="purchasefax" name="purchasefax"  style="width:28%"   type="text">
+                                <!--<span style="color: red">（此项将打印在采购订单收货传真中。）</span>-->
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">报表表头显示名称：</label>
                             <div class="col-sm-8">
-                                <input id="headername" name="headername" class="form-control" type="text">
+                                <input id="headername" name="headername"   style="width:28%"  type="text">
                             </div>
                         </div>
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">批调金额：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input id="approvedamount" name="approvedamount" class="form-control" type="text">-->
+                        <!--<input id="approvedamount" name="approvedamount"     type="text">-->
                         <!--</div>-->
                         <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">批调金额：</label>
                             <div class="col-sm-8">
-                                <!--<input id="approvedamount" name="approvedamount" class="form-control" type="text">-->
+                                <!--<input id="approvedamount" name="approvedamount"     type="text">-->
                                 <label class="radio-inline">
                                     <input type="radio" name="approvedamount" value="1"
-                                           onchange="setChange(this.value)"/> 向本公司批调时，默认填写成本价
+                                           onchange="setChange(this.value)" checked/> 向本公司批调时， 填写成本价
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="approvedamount" value="2"
@@ -145,55 +123,55 @@
                         <div class="form-group" id="tab" style="display: none">
                             <label class="col-sm-3 control-label">批发价比例：</label>
                             <div class="col-sm-8">
-                                <input id="proportion" name="proportion" class="form-control" type="text">
+                                <input id="proportion" name="proportion"  style="width:28%"   type="text">
                                 <span style="color: red">用于设置向加盟商的门店调货时的批发金额，计算公式：批发金额=基础信息中的批发价格*批发价比例</span>
                             </div>
                         </div>
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">系统logo：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input id="logo" name="logo" class="form-control" type="text">-->
+                        <!--<input id="logo" name="logo"     type="text">-->
                         <!--</div>-->
                         <!--</div>-->
 
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">系统logo：</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" id="imgFile" style="display: none;" type="file"
-                                       name="imgFile" onchange="udpateFileUrl(this)"/>
-                                <label for="imgFile"><img width="100" height="100" id="fileImgimgFile"
-                                                          alt="点击上传图片"></label>
-                                <span style="color: red">尺寸：700*70</span>
-                            </div>
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">系统logo：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input     id="imgFile" style="display: none;" type="file"-->
+                                       <!--name="imgFile" onchange="udpateFileUrl(this)"/>-->
+                                <!--<label for="imgFile"><img width="100" height="100" id="fileImgimgFile"-->
+                                                          <!--alt="点击上传图片"></label>-->
+                                <!--<span style="color: red">尺寸：700*70</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
 
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">背景图：</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" id="imgFile1" style="display: none;" type="file"
-                                       name="imgFile1" onchange="udpateFileUrl1(this)"/>
-                                <label for="imgFile1"><img width="100" height="100" id="fileImgimgFile1"
-                                                           alt="点击上传图片"></label>
-                                <span style="color: red">尺寸：1*70</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">部门选择背景图：</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" id="imgFile2" style="display: none;" type="file"
-                                       name="imgFile2" onchange="udpateFileUrl2(this)"/>
-                                <label for="imgFile2"><img width="100" height="100" id="fileImgimgFile2"
-                                                           alt="点击上传图片"></label>
-                            </div>
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">背景图：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input     id="imgFile1" style="display: none;" type="file"-->
+                                       <!--name="imgFile1" onchange="udpateFileUrl1(this)"/>-->
+                                <!--<label for="imgFile1"><img width="100" height="100" id="fileImgimgFile1"-->
+                                                           <!--alt="点击上传图片"></label>-->
+                                <!--<span style="color: red">尺寸：1*70</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">部门选择背景图：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input     id="imgFile2" style="display: none;" type="file"-->
+                                       <!--name="imgFile2" onchange="udpateFileUrl2(this)"/>-->
+                                <!--<label for="imgFile2"><img width="100" height="100" id="fileImgimgFile2"-->
+                                                           <!--alt="点击上传图片"></label>-->
+                            <!--</div>-->
+                        <!--</div>-->
 
 
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">系统logo：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input class="form-control" id="imgFile" style="display: none;"-->
+                        <!--<input     id="imgFile" style="display: none;"-->
                         <!--type="file" name="imgFile" onchange="udpateFileUrl(this)"/>-->
                         <!--<label for="imgFile"><img width="100" height="100"-->
                         <!--id="fileImgimgFile" alt="点击上传图片"-->
@@ -206,7 +184,7 @@
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">背景图：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input class="form-control" id="imgFile1" style="display: none;"-->
+                        <!--<input     id="imgFile1" style="display: none;"-->
                         <!--type="file" name="imgFile" onchange="udpateFileUrl1(this)"/>-->
                         <!--<label for="imgFile"><img width="100" height="100"-->
                         <!--id="fileImgimgFile1" alt="点击上传图片"-->
@@ -217,7 +195,7 @@
                         <!--<div class="form-group">-->
                         <!--<label class="col-sm-3 control-label">部门选择背景图：</label>-->
                         <!--<div class="col-sm-8">-->
-                        <!--<input class="form-control" id="imgFile2" style="display: none;"-->
+                        <!--<input     id="imgFile2" style="display: none;"-->
                         <!--type="file" name="imgFile" onchange="udpateFileUrl2(this)"/>-->
                         <!--<label for="imgFile"><img width="100" height="100"-->
                         <!--id="fileImgimgFile2" alt="点击上传图片"-->

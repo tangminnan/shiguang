@@ -5,11 +5,11 @@ $().ready(function () {
 
 $.validator.setDefaults({
     submitHandler: function () {
-        save();
+        saveTry();
     }
 });
 
-function save() {
+function saveTry() {
     $.ajax({
         cache: true,
         type: "POST",

@@ -38,7 +38,7 @@
             <if test="xsstate != null and xsstate != ''">and y.xsstate = #{xsstate}</if>
             and y.state=1
         </where>
-        group by y.id order by y.xsstate asc ,y.id asc
+        group by y.id order by  y.id desc
     </select>
 
     <select id="count" resultType="int">

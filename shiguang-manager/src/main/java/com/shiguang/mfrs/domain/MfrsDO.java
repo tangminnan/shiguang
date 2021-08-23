@@ -41,17 +41,17 @@ public class MfrsDO implements Serializable {
     //统一社会信用代码
     private String creditcode;
     //统一社会信用代码效期
-    private Date creditcodeday;
+    private String creditcodeday;
     private String creditcodedays;
     //医疗器械经营许可证号
     private String medicinecode;
     //医疗器械经营许可证有效期
-    private Date medicinecodeday;
+    private String medicinecodeday;
     private String medicinecodedays;
     //全国工业品生产许可证号
     private String productscode;
     //全国工业品生产许可证有效期
-    private Date productscodeday;
+    private String productscodeday;
     private String productscodedays;
     //备注
     private String remarks;
@@ -255,14 +255,14 @@ public class MfrsDO implements Serializable {
     /**
      * 设置：统一社会信用代码效期
      */
-    public void setCreditcodeday(Date creditcodeday) {
+    public void setCreditcodeday(String creditcodeday) {
         this.creditcodeday = creditcodeday;
     }
 
     /**
      * 获取：统一社会信用代码效期
      */
-    public Date getCreditcodeday() {
+    public String getCreditcodeday() {
         return creditcodeday;
     }
 
@@ -283,14 +283,14 @@ public class MfrsDO implements Serializable {
     /**
      * 设置：医疗器械经营许可证有效期
      */
-    public void setMedicinecodeday(Date medicinecodeday) {
+    public void setMedicinecodeday(String medicinecodeday) {
         this.medicinecodeday = medicinecodeday;
     }
 
     /**
      * 获取：医疗器械经营许可证有效期
      */
-    public Date getMedicinecodeday() {
+    public String getMedicinecodeday() {
         return medicinecodeday;
     }
 
@@ -311,14 +311,14 @@ public class MfrsDO implements Serializable {
     /**
      * 设置：全国工业品生产许可证有效期
      */
-    public void setProductscodeday(Date productscodeday) {
+    public void setProductscodeday(String productscodeday) {
         this.productscodeday = productscodeday;
     }
 
     /**
      * 获取：全国工业品生产许可证有效期
      */
-    public Date getProductscodeday() {
+    public String getProductscodeday() {
         return productscodeday;
     }
 

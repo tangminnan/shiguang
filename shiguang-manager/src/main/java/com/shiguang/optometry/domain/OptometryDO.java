@@ -87,6 +87,89 @@ public class OptometryDO implements Serializable {
     //创建时间
     private Date createTime;
 
+
+
+
+
+    //会员卡号
+    private String cardNumber;
+    //是否缴费
+    private Long isSale;
+    //顾客性别(1:男2:女)
+    private Long sex;
+    private String sexx;
+    private String name;
+    //年龄
+    private Long age;
+    //销售单号
+    private String saleNumber;
+    //类型
+    private String type;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getSaleNumber() {
+        return saleNumber;
+    }
+
+    public void setSaleNumber(String saleNumber) {
+        this.saleNumber = saleNumber;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public Long getIsSale() {
+        return isSale;
+    }
+
+    public void setIsSale(Long isSale) {
+        this.isSale = isSale;
+    }
+
+    public Long getSex() {
+        return sex;
+    }
+
+    public void setSex(Long sex) {
+        this.sex = sex;
+    }
+
+    public String getSexx() {
+        return sexx;
+    }
+
+    public void setSexx(String sexx) {
+        this.sexx = sexx;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
     /**
      * 设置：主键
      */

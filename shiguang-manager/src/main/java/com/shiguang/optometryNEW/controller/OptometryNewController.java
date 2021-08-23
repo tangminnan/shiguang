@@ -75,14 +75,20 @@ public class OptometryNewController {
     @GetMapping("/list")
     @RequiresPermissions("information:optometryNew:optometryNew")
     public PageUtils list(@RequestParam Map<String, Object> params) {
-        //查询列表数据
+//        //查询列表数据
+//        Query query = new Query(params);
+//        query.put("state", 1);
+//        List<MemberDO> memberDOList = memberService.list(query);
+//        int total = memberService.count(query);
+//        PageUtils pageUtils = new PageUtils(memberDOList, total);
+//        return pageUtils;
+        //检查单列表
         Query query = new Query(params);
-//        List<OptometryDO> optometryList = optometryService.list(query);
-//        int total = optometryService.count(query);
-        query.put("state", 1);
-        List<MemberDO> memberDOList = memberService.list(query);
-        int total = memberService.count(query);
-        PageUtils pageUtils = new PageUtils(memberDOList, total);
+        query.put("isSale",1);
+        query.put("type","检查单");
+        List<OptometryDO> optometryDOList= optometryService.moenyList(query);
+        int total =optometryService.moenyListcount(query);
+        PageUtils pageUtils = new PageUtils(optometryDOList, total);
         return pageUtils;
     }
 

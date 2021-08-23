@@ -4,20 +4,31 @@
 <mapper namespace="com.shiguang.mfrs.dao.CompanyDao">
 
     <select id="get" resultType="com.shiguang.mfrs.domain.CompanyDO">
-		select `id`,`name`,`province`,`type`,`telephone`,`legalperson`,`phone`,`purchaseaddress`,
+		select `id`,`name`,`province`,`citys`,
+		`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,
+		`type`,`telephone`,`legalperson`,`phone`,`purchaseaddress`,
 		`purchasepeople`,`purchasephone`,`purchasefax`,`headername`,`approvedamount`,`proportion`,`logo`,
 		`backgroundimage`,`departmentimage`,`xsstate`,`state` from c_company where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.mfrs.domain.CompanyDO">
         select
-        `id`,`name`,`province`,`type`,`telephone`,`legalperson`,`phone`,`purchaseaddress`,`purchasepeople`,`purchasephone`,
+        `id`,`name`,`province`,`citys`,
+        `province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,
+        `type`,`telephone`,`legalperson`,`phone`,`purchaseaddress`,`purchasepeople`,`purchasephone`,
         `purchasefax`,`headername`,`approvedamount`,`proportion`,`logo`,`backgroundimage`,`departmentimage`,`xsstate`,`state`
         from c_company
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
             <if test="name != null and name != ''">and name = #{name}</if>
             <if test="province != null and province != ''">and province = #{province}</if>
+            <if test="citys != null and citys != ''">and citys = #{citys}</if>
+            <if test="provinceCode != null and provinceCode != ''"> and province_code = #{provinceCode} </if>
+            <if test="provinceName != null and provinceName != ''"> and province_name = #{provinceName} </if>
+            <if test="cityCode != null and cityCode != ''"> and city_code = #{cityCode} </if>
+            <if test="cityName != null and cityName != ''"> and city_name = #{cityName} </if>
+            <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
+            <if test="areaName != null and areaName != ''"> and area_name = #{areaName} </if>
             <if test="type != null and type != ''">and type = #{type}</if>
             <if test="telephone != null and telephone != ''">and telephone = #{telephone}</if>
             <if test="legalperson != null and legalperson != ''">and legalperson = #{legalperson}</if>
@@ -35,7 +46,7 @@
             <if test="xsstate != null and xsstate != ''">and xsstate = #{xsstate}</if>
             <if test="state != null and state != ''">and state = #{state}</if>
         </where>
-        group by id order by xsstate asc ,id asc
+        group by id order by id desc
     </select>
 
     <select id="count" resultType="int">
@@ -44,6 +55,13 @@
             <if test="id != null and id != ''">and id = #{id}</if>
             <if test="name != null and name != ''">and name = #{name}</if>
             <if test="province != null and province != ''">and province = #{province}</if>
+            <if test="citys != null and citys != ''">and citys = #{citys}</if>
+            <if test="provinceCode != null and provinceCode != ''"> and province_code = #{provinceCode} </if>
+            <if test="provinceName != null and provinceName != ''"> and province_name = #{provinceName} </if>
+            <if test="cityCode != null and cityCode != ''"> and city_code = #{cityCode} </if>
+            <if test="cityName != null and cityName != ''"> and city_name = #{cityName} </if>
+            <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
+            <if test="areaName != null and areaName != ''"> and area_name = #{areaName} </if>
             <if test="type != null and type != ''">and type = #{type}</if>
             <if test="telephone != null and telephone != ''">and telephone = #{telephone}</if>
             <if test="legalperson != null and legalperson != ''">and legalperson = #{legalperson}</if>
@@ -68,6 +86,13 @@
 		(
 			`name`, 
 			`province`,
+			`citys`,
+			`province_code`,
+			`province_name`,
+			`city_code`,
+			`city_name`,
+			`area_code`,
+			`area_name`,
             `type`,
 			`telephone`, 
 			`legalperson`, 
@@ -89,6 +114,13 @@
 		(
 			#{name}, 
 			#{province},
+			#{citys},
+			#{provinceCode},
+			#{provinceName},
+			#{cityCode},
+			#{cityName},
+			#{areaCode},
+			#{areaName},
             #{type},
 			#{telephone}, 
 			#{legalperson}, 
@@ -113,6 +145,13 @@
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="province != null">`province` = #{province},</if>
+            <if test="citys != null">`citys` = #{citys},</if>
+            <if test="provinceCode != null">`province_code` = #{provinceCode}, </if>
+            <if test="provinceName != null">`province_name` = #{provinceName}, </if>
+            <if test="cityCode != null">`city_code` = #{cityCode}, </if>
+            <if test="cityName != null">`city_name` = #{cityName}, </if>
+            <if test="areaCode != null">`area_code` = #{areaCode}, </if>
+            <if test="areaName != null">`area_name` = #{areaName}, </if>
             <if test="type != null">`type` = #{type},</if>
             <if test="telephone != null">`telephone` = #{telephone},</if>
             <if test="legalperson != null">`legalperson` = #{legalperson},</if>

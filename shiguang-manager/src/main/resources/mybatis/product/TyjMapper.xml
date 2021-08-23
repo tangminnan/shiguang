@@ -38,7 +38,7 @@
             <if test="styleId != null and styleId != ''">and t.style_id = #{styleId}</if>
             and  t.state= 1
         </where>
-        group by t.id order by t.xsstate asc ,t.id asc
+        group by t.id order by t.id desc
     </select>
 
     <select id="count" resultType="int">
