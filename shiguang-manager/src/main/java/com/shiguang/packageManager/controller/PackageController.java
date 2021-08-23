@@ -8,10 +8,7 @@ import java.util.Map;
 
 import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.baseinfomation.service.DepartmentService;
-import com.shiguang.common.utils.GuuidUtil;
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.*;
 import com.shiguang.mfrs.domain.*;
 import com.shiguang.mfrs.service.*;
 import com.shiguang.packageManager.domain.PackageDO;
@@ -139,6 +136,10 @@ public class PackageController {
     public PageUtils storelist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        if (null != ShiroUtils.getUser().getStoreNum()){
+            String storeNum = ShiroUtils.getUser().getStoreNum();
+            query.put("departNumber",storeNum);
+        }
         query.put("departType","销售门店");
         query.put("state",1);
         List<DepartmentDO> departmentDOList = departmentService.list(query);

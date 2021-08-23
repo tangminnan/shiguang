@@ -10,6 +10,8 @@ import com.shiguang.member.service.MemberService;
 import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
+import com.shiguang.settlement.domain.SettlementDO;
+import com.shiguang.settlement.service.SettlementService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,8 @@ public class OptometryController {
     private MemberService memberService;
     @Autowired
     private CostService costService;
+    @Autowired
+    private SettlementService settlementService;
 
     @GetMapping()
     @RequiresPermissions("information:optometry:optometry")
@@ -63,9 +67,9 @@ public class OptometryController {
         return "optometry/add";
     }
 
-    @GetMapping("/edit/{cardNumber}")
+    @GetMapping("/edit/{cardNumber}/{saleNumber}")
     @RequiresPermissions("information:optometry:edit")
-    String edit(@PathVariable("cardNumber") String cardNumber, Model model) {
+    String edit(@PathVariable("cardNumber") String cardNumber,@PathVariable("saleNumber") String saleNumber, Model model) {
 //        OptometryDO optometry = optometryService.get(id);
 //        model.addAttribute("optometry", optometry);
         //ResultDiopterDO resultDiopterDO = resultDiopterService.
@@ -76,6 +80,10 @@ public class OptometryController {
             memberDO.setSexx("女");
         }
         model.addAttribute("memberDO", memberDO);
+        model.addAttribute("saleNumber",saleNumber);
+//        CostDO costDO = costService.getSaleNumByMemNum(cardNumber);
+//        SettlementDO settlement = settlementService.getCostId(costDO.getId());
+//        model.addAttribute("settlement",settlement);
 //        Map<String, Object> map = new HashMap<>();
 //        List<OptometryDO> list = optometryService.optoList(map);
 //        OptometryDO optometryDO = new OptometryDO();

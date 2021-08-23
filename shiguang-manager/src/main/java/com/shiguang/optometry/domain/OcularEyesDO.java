@@ -9,6 +9,8 @@ public class OcularEyesDO implements Serializable {
     private Long id;
     //会员卡号
     private String memberNumber;
+    //销售单号
+    private String saleNumber;
     //眼轴
     private Double axis;
     //中央角膜厚度(右眼)
@@ -104,6 +106,10 @@ public class OcularEyesDO implements Serializable {
     public String getMemberNumber() {
         return memberNumber;
     }
+
+    public void setSaleNumber(String saleNumber) {this.saleNumber = saleNumber;}
+
+    public String getSaleNumber() {return saleNumber;}
 
     /**
      * 设置：眼轴

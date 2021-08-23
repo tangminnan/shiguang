@@ -1384,11 +1384,12 @@ function getHYTc(){
 var check_val = [];
 var retailCountPrice=0.00;
 function getGoodsInfoSelect(obj,countPrice){
-    if (check_val.indexOf(obj) > -1){
-        check_val.remove(obj);
-    } else {
-        check_val.push(obj);
-    }
+    // if (check_val.indexOf(obj) > -1){
+    //     check_val.remove(obj);
+    // } else {
+    //
+    // }
+    check_val.push(obj);
     retailCountPrice = (parseFloat(retailCountPrice) + parseFloat(countPrice)).toFixed(2);
     // for(k in obj){
     //     if(obj[k].checked)

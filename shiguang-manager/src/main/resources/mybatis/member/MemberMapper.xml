@@ -18,7 +18,7 @@
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="memberOption != null and memberOption != ''"> and member_option = #{memberOption} </if>
             <if test="departNumber != null and departNumber != ''">
-             and depart_number in (${departNumber})
+             and depart_number = ${departNumber}
             </if>
             <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>

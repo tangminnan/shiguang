@@ -62,9 +62,9 @@ public class OcularEyesController {
         return "ocular/add";
     }
 
-    @GetMapping("/edit/{cardNumber}")
+    @GetMapping("/edit/{cardNumber}/{saleNumber}")
     @RequiresPermissions("information:ocular:edit")
-    String edit(@PathVariable("cardNumber") String cardNumber,Model model){
+    String edit(@PathVariable("cardNumber") String cardNumber,@PathVariable("saleNumber") String saleNumber,Model model){
 //        OcularEyesDO eyes = eyesService.get(id);
 //        model.addAttribute("eyes", eyes);
         MemberDO memberDO = memberService.getCardNumber(cardNumber);
@@ -74,6 +74,7 @@ public class OcularEyesController {
             memberDO.setSexx("女");
         }
         model.addAttribute("memberDO",memberDO);
+        model.addAttribute("saleNumber",saleNumber);
         return "ocular/edit";
     }
 

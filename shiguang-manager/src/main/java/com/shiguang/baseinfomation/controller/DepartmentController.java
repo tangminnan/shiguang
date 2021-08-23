@@ -5,6 +5,7 @@ import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.mfrs.domain.CompanyDO;
 import com.shiguang.mfrs.service.CompanyService;
@@ -39,6 +40,11 @@ public class DepartmentController {
         //查询列表数据
         Query query = new Query(params);
         query.put("state",1);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        } else if (null != ShiroUtils.getUser().getStoreNum()){
+            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+        }
         List<DepartmentDO> departmentList = departmentService.list(query);
         int total = departmentService.count(query);
         PageUtils pageUtils = new PageUtils(departmentList, total);
@@ -49,6 +55,11 @@ public class DepartmentController {
     @RequiresPermissions("information:department:add")
     String add(Model model){
         Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("ids",ShiroUtils.getUser().getCompanyId());
+        } else if (null != ShiroUtils.getUser().getStoreNum()){
+            map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+        }
         List<CompanyDO> list = companyService.list(map);
         model.addAttribute("companyList",list);
         map.put("departType","加工中心");

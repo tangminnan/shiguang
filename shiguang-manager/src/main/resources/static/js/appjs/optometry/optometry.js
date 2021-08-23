@@ -78,9 +78,8 @@ function load() {
 									field : 'cardNumber',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="读取" onclick="edit(\''
-												+ value
-												+ '\')"><i class="fa fa-edit"></i></a> ';
+										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="读取" ' +
+											'onclick="edit(\''+ value + '\',\''+row.saleNumber+'\')"><i class="fa fa-edit"></i></a> ';
 										// var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 										// 		+ row.id
 										// 		+ '\')"><i class="fa fa-remove"></i></a> ';
@@ -131,14 +130,14 @@ function add() {
 	});
     layer.full(toIndex);
 }
-function edit(cardNumber) {
+function edit(cardNumber,saleNumber) {
     var toIndex = layer.open({
 		type : 2,
 		title : '电脑验光',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '1000px', '520px' ],
-		content : prefix + '/edit/' + cardNumber // iframe的url
+		content : prefix + '/edit/' + cardNumber + '/'+saleNumber // iframe的url
 	});
     layer.full(toIndex);
 }

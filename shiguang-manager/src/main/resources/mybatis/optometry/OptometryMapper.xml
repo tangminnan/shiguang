@@ -118,25 +118,27 @@
     m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,
     m.`city_name`,m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,
     m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,`address`,
-    m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status`,m.`state`
-    from member m join cost c on c.member_number = m.card_number and (c.cost_name = '电脑验光' or c.cost_name = '隐形检查费')
+    m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status`,m.`state`,c.sale_number as saleNumber
+    from member m join cost c on c.member_number = m.card_number and c.cost_name = '电脑验光'
     <where>
         <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
         <if test="state != null and state != ''"> and m.state = #{state} </if>
         <if test="dateNow != null and dateNow != ''"> and DATE_FORMAT(c.create_time,'%Y-%m-%d') = #{dateNow} </if>
         and c.is_sale = 1
+        and m.`status` = 0
         and m.state = 1
     </where>
 </select>
 
     <select id="findOptoCount" resultType="int">
         select count(*)
-        from member m join cost c on c.member_number = m.card_number and (c.cost_name = '电脑验光' or c.cost_name = '隐形检查费')
+        from member m join cost c on c.member_number = m.card_number and c.cost_name = '电脑验光'
         <where>
             <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
             <if test="state != null and state != ''"> and state = #{state} </if>
             <if test="dateNow != null and dateNow != ''"> and DATE_FORMAT(c.create_time,'%Y-%m-%d') = #{dateNow} </if>
             and c.is_sale = 1
+            and m.`status` = 0
             and m.state = 1
         </where>
     </select>
@@ -146,6 +148,7 @@
 		insert into optometry
 		(
 			`member_inumber`,
+			`sale_number`,
 			`mydriasis`,
 			`pharmacy_id`,
 			`pharmacy`,
@@ -185,6 +188,7 @@
 		values
 		(
 			#{memberInumber},
+			#{saleNumber},
 			#{mydriasis},
 			#{pharmacyId},
 			#{pharmacy},

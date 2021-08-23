@@ -61,5 +61,10 @@ public class CostServiceImpl implements CostService {
 	public int batchRemove(Long[] ids){
 		return costDao.batchRemove(ids);
 	}
+
+	@Override
+	public CostDO getSaleNumByMemNum(String cardMember){
+		return costDao.getSaleNumByMemNum(cardMember);
+	}
 	
 }

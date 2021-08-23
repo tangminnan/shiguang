@@ -12,6 +12,11 @@
 		where member_number = #{value} order by create_time desc
 	</select>
 
+    <select id="getSaleNumByMemNum" resultType="com.shiguang.checkout.domain.CostDO">
+       select `id`,`member_number`,`sale_number`,`create_time` from cost
+		where member_number = #{value} group by sale_number order by create_time desc
+    </select>
+
     <select id="list" resultType="com.shiguang.checkout.domain.CostDO">
         select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`create_time`,`type` from cost
         <where>

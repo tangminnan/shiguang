@@ -8,6 +8,29 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+    var ideentityType = $("input[name='ideentityType']:checked").val();
+    var identityCard = $("input[name='identityCard']").val();
+    if(ideentityType=="身份证"){
+        var date = new Date();
+        var nowyear = date.getFullYear();
+        var year = identityCard.substring(6, 10);
+        var month = identityCard.substring(10, 12);
+        var day = identityCard.substring(12, 14);
+        if(year>=nowyear){
+            alert("出生年份应当小于当前年份！！！");
+            return false;
+        }
+        if(month>=13){
+            alert("出生月份应当小于13！！！");
+            return false;
+        }
+        if(day>=32){
+            alert("出生天数应当小于32！！！");
+            return false;
+        }
+        //var birthday = year+"-"+month+"-"+day
+        //$("input[name='birthday']").val(birthday);
+    }
 	$.ajax({
 		cache : true,
 		type : "POST",

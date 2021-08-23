@@ -32,4 +32,6 @@ public interface CostService {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	CostDO getSaleNumByMemNum(String cardMember);
 }
