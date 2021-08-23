@@ -206,9 +206,9 @@
 
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji1">
-                            <td colspan="10" style="text-align:right;">合计</td>
-                            <td value="0"></td>
-                            <input id="heji" name="heji" value="0" type="text"/>
+                            <!--<td colspan="10" style="text-align:right;">合计</td>-->
+                            <!--<td value="0"></td>-->
+                            <!--<input id="heji" name="heji" value="0" type="text"/>-->
                         </tr>
                     </table>
                 </td>
@@ -464,11 +464,11 @@
     function tuihuiNum() {
         var goodsid = document.getElementById('goodsType').value;
         var mfrsid = document.getElementById('mfrsid').value;
-        // alert(goodsid);
+        // layer.alert(goodsid);
         if (goodsid == "") {
-            alert("请选择采购类型！");
+            layer.alert("请选择采购类型！");
         } else if (goodsid != "" && mfrsid == "") {
-            alert("请选择所属制造商！");
+            layer.alert("请选择所属制造商！");
         }
     }
 
@@ -661,9 +661,9 @@
     <!--选择制造商-->
     function choiceMfrs() {
         var goodsid = document.getElementById('goodsType').value;
-        // alert(goodsid);
+        // layer.alert(goodsid);
         if (goodsid == "") {
-            alert("请选择采购类型！");
+            layer.alert("请选择采购类型！");
         } else {
             //选择镜架
             var toIndex = layer.open({
@@ -693,10 +693,10 @@
         var goodVal = $("#goodsType option:selected").text();
         var mfrsname = document.getElementById('mfrsName').value;
         if (goodsid == "") {
-            alert("请选择采购类型！");
+            layer.alert("请选择采购类型！");
             return this;
         } else if (goodsid != "" && mfrsid == "") {
-            alert("请选择所属制造商！");
+            layer.alert("请选择所属制造商！");
             return this;
         } else if (goodVal == "镜架") {
             $(".val1").remove();
@@ -709,7 +709,7 @@
                 content: "/stock/stock/jingjia/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
-                    // alert(JSON.stringify(rows))
+                    // layer.alert(JSON.stringify(rows))
                     for (var i = 0; i < rows.length; i++) {
                         $(".heji1").before("<tr class='val1'>" +
                             // "<td><input type=\"checkbox\"/></td>\n" +

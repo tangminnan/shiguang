@@ -59,10 +59,10 @@ function load() {
                         field : 'name',
                         title : '公司名称'
                     },
-                    {
-                        field : 'province',
-                        title : '所属区域'
-                    },
+                    // {
+                    //     field : 'province',
+                    //     title : '所属区域'
+                    // },
                     {
                         title: '所属区域',
                         align: 'center',

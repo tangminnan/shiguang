@@ -179,17 +179,17 @@ function load() {
                     //     field: 'curvatureYi',
                     //     title: '-曲率1'
                     // },
-                    {
-                        title: '曲率2',
-                        align: 'center',
-                        formatter: function (value, row, index) {
-                            if (row.curvatureTwo != null && row.curvatureEr != null) {
-                                return row.curvatureTwo + "/" + row.curvatureEr
-                            } else {
-                                return ""
-                            }
-                        }
-                    },
+                    // {
+                    //     title: '曲率2',
+                    //     align: 'center',
+                    //     formatter: function (value, row, index) {
+                    //         if (row.curvatureTwo != null && row.curvatureEr != null) {
+                    //             return row.curvatureTwo + "/" + row.curvatureEr
+                    //         } else {
+                    //             return ""
+                    //         }
+                    //     }
+                    // },
                     // {
                     //     field: 'curvatureTwo',
                     //     title: '曲率2'

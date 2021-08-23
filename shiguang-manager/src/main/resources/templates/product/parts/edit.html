@@ -78,6 +78,7 @@
                 <td>商品编号：</td>
                 <td>
                     <input id="proid" name="proid" th:value="${parts.proid}" type="text" onkeyup="choiceProid(this)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
                            oninput="if(value.length>4)value=value.slice(0,4)">
                     <em>*</em>
                 </td>
@@ -131,10 +132,10 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td style="width: 80%">折射率：</td>
-                <td style="width: 80%">
+                <td style="width:200px">折射率：</td>
+                <td>
                     <select id="refractivityid" name="refractivityid" th:value="${parts.refractivityid}"
-                            class="form-control"
+                            class="form-control" style="width:200px"
                             data-actions-box="false" data-size="5">
                         <option th:each="ls:${refractivityDOList}"
                                 th:text="${ls.refractivityvalue}"

@@ -97,6 +97,6 @@
     <!--库存查询相对应的仓库-->
     <select id="stockList" resultType="com.shiguang.mfrs.domain.PositionDO">
         select position_name from c_position where xsstate = #{xsstate} and state=1
-        group by position_id order by xsstate position_id desc
+        group by position_id order by  position_id desc
     </select>
 </mapper>
