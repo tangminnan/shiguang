@@ -1,6 +1,7 @@
 package com.shiguang.logstatus.dao;
 
 import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
@@ -34,4 +35,6 @@ public interface LogStatusDao {
     List<SalesDO> findSalePeijingAll(Map<String,Object> map);
 
     int findSalePeijingCount(Map<String,Object> map);
+
+    int saveRecord(WorkRecoedDO workRecoedDO);
 }

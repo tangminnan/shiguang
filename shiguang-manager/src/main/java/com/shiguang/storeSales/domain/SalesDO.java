@@ -36,6 +36,8 @@ public class SalesDO implements Serializable {
 	private String saleNumber;
 	//商品代码
 	private String goodsNum;
+	//商品条码
+	private String goodsCode;
 	//眼镜类型
 	private String eyeType;
 	//结算金额
@@ -319,6 +321,10 @@ public class SalesDO implements Serializable {
 	}
 	public void setGoodsNum(String goodsNum) {this.goodsNum = goodsNum;}
 	public String getGoodsNum() {return goodsNum;}
+
+	public void setGoodsCode(String goodsCode) {this.goodsCode = goodsCode;}
+
+	public String getGoodsCode() {return goodsCode;}
 	/**
 	 * 设置：眼镜类型
 	 */

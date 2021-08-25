@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.shiguang.settlement.domain.SettlementDO;
+import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -37,4 +38,14 @@ public interface SettlementDao {
 	int batchRemove(Long[] ids);
 
 	SettlementDO getSaleNumers(String saleNumber);
+
+	List<SettlementDO> findArrearsData(Map<String,Object> map);
+
+	int findArrearsDataCount(Map<String,Object> map);
+
+	SettlementDO getSaleNumersByNum(String saleNumber);
+
+	List<SettlementDO> findGlassesData(Map<String,Object> map);
+
+	int findGlassesDataCount(Map<String,Object> map);
 }

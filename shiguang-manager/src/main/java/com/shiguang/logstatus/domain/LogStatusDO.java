@@ -16,6 +16,14 @@ public class LogStatusDO implements Serializable {
     private String faliaoName;
     //发料日期
     private Date faliaoDate;
+    //初检人员
+    private String initialName;
+    //初检日期
+    private Date initialDate;
+    //加工师
+    private String processName;
+    //加工日期
+    private Date processDate;
     //焦度计球镜(OD)
     private Double jdjSphRight1;
     //焦度计柱镜(OD)
@@ -52,6 +60,11 @@ public class LogStatusDO implements Serializable {
     private Double addLeft;
     //
     private Double tjLeft;
+
+    private String goodsNum;
+
+    private String initial;
+
 
     /**
      * 设置：主键
@@ -97,6 +110,23 @@ public class LogStatusDO implements Serializable {
     public void setFaliaoDate(Date faliaoDate) {this.faliaoDate = faliaoDate;}
 
     public Date getFaliaoDate() {return faliaoDate;}
+
+    public void setInitialName(String initialName) {this.initialName = initialName;}
+
+    public String getInitialName() {return initialName;}
+
+    public void setInitialDate(Date processDate) {this.processDate = processDate;}
+
+    public Date getInitialDate() {return initialDate;}
+
+    public void setProcessName(String processName) {this.processName = processName;}
+
+    public String getProcessName() {return processName;}
+
+    public void setProcessDate(Date processDate) {this.processDate = processDate;}
+
+    public Date getProcessDate() {return processDate;}
+
     /**
      * 设置：焦度计球镜(OD)
      */
@@ -313,4 +343,13 @@ public class LogStatusDO implements Serializable {
     public Double getTjLeft() {
         return tjLeft;
     }
+
+    public void setGoodsNum(String goodsNum) {this.goodsNum = goodsNum;}
+
+    public String getGoodsNum() {return goodsNum;}
+
+    public void setInitial(String initial) {this.initial = initial;}
+
+    public String getInitial() {return initial;}
+
 }

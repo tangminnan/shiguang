@@ -97,6 +97,8 @@ public class MemberDO implements Serializable {
     private String type;
     //销售单号
     private String saleNumber;
+    //付款方式
+    private String payWay;
     //公众号
     private String openId;
 
@@ -633,6 +635,10 @@ public class MemberDO implements Serializable {
     public void setSaleNumber(String saleNumber) {this.saleNumber = saleNumber;}
 
     public String getSaleNumber() {return saleNumber;}
+
+    public void setPayWay(String payWay) {this.payWay=payWay;}
+
+    public String getPayWay() {return payWay;}
 
     public void setOpenId(String openId) {this.openId = openId;}
 

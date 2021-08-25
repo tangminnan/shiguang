@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>收据</title>
+<style type="text/css">
+*{padding: 0;margin: 0;box-sizing: border-box;}
+.fl{float: left;}
+.fr{float: right;}
+.tal{text-align: left;}
+.container {width:900px;margin:50px auto;}
+.container h3{text-align: center;font-size: 24px;letter-spacing:2px;margin-bottom: 25px;}
+.container h3 span{margin-left: 30px;}
+.container li{list-style:none;margin:0 50px;margin-bottom: 15px;}
+.container 	table{width: 100%;border-left:1px solid #000;border-top:1px solid #000;text-align: center;margin-bottom: 25px;}
+.container 	table td{border-right:1px solid #000;border-bottom:1px solid #000;line-height: 35px;padding:0 15px;}
+.container 	table td:nth-child(odd){font-weight: bold;}
+.container 	table tr:nth-child(2) td{font-weight: bold;}
+.container 	table tr:nth-child(3) td{font-weight:normal;}
+.container 	table tr:nth-child(4) td{font-weight: normal;}
+.container dl dd{letter-spacing:1px;padding-left:44px;line-height:26px;}
+.container dl span{margin-right:10px;}
+.container dl dd:nth-child(1){padding-left:0;}
+.container p.qianzi{float: right;margin-top: 40px;margin-right: 50px;}
+.container p.qianzi span{border-bottom:1px solid #000;width: 140px;display: inline-block;}
+</style>
+
+</head>
+<body>
+<div class="container"> 
+	<h3>山东省青少年视力低下防治中心<span>预交定金收据</span></h3>
+	<ul>
+		<li class="fl"><b>销售门店：</b><span th:text="${settlementDO.mirorAddress}"></span></li>
+		<li class="fr"><b>配镜单号：</b><span th:text="${settlementDO.saleNumber}"></span></li>
+	</ul>
+	<table border="0" cellspacing="0" cellpadding="0">
+	  <tbody>
+		<tr>
+		  <td colspan="2">电话</td>
+		  <td colspan="2"><span th:text="${settlementDO.phone1}"></span></td>
+		  <td colspan="2">顾客姓名</td>
+		  <td colspan="3" class="tal"><span th:text="${settlementDO.memberName}"></span></td>
+		</tr>
+		<tr>
+		  <td colspan="2">&nbsp;</td>
+		  <td>球镜</td>
+		  <td>柱镜</td>
+		  <td>轴向</td>
+		  <td>瞳距</td>
+		  <td>瞳高</td>
+		  <td>种类</td>
+		  <td>金额（元）</td>
+		</tr>
+		<tr>
+		  <td rowspan="2"><b><span th:text="${settlementDO.recipelType}"></span></b></td>
+		  <td><b>右</b></td>
+		  <td><span th:text="${conclusion.rightsph}"></span></td>
+		  <td><span th:text="${conclusion.rightcyl}"></span></td>
+		  <td><span th:text="${conclusion.rightzx}"></span></td>
+		  <td><span th:text="${conclusion.rightyytj}"></span></td>
+		  <td><span th:text="${conclusion.righttg}"></span></td>
+		  <td></td>
+		  <td></td>
+		</tr>
+		<tr>
+	      <td><b>左</b></td>
+		  <td><span th:text="${conclusion.leftsph}"></span></td>
+		  <td><span th:text="${conclusion.leftcyl}"></span></td>
+		  <td><span th:text="${conclusion.leftzx}"></span></td>
+		  <td><span th:text="${conclusion.leftyytj}"></span></td>
+		  <td><span th:text="${conclusion.lefttg}"></span></td>
+		  <td></td>
+		  <td></td>
+		</tr>
+		<tr>
+		  <td colspan="2">金属架/胶架</td>
+		  <td colspan="7">&nbsp;</td>
+		</tr>
+		<tr>
+		  <td colspan="2">配镜顾问</td>
+		  <td colspan="2"><span th:text="${settlementDO.saleName}"></span></td>
+		  <td>原价合计</td>
+		  <td colspan="2"><span th:text="${settlementDO.primeMoney}"></span></td>
+		  <td>应收金额</td>
+		  <td><span th:text="${settlementDO.amountMoney}"></span></td>
+		</tr>
+		<tr>
+		  <td colspan="2">收银员</td>
+		  <td colspan="2"><span th:text="${settlementDO.saleName}"></span></td>
+		  <td>验光师</td>
+		  <td colspan="2"><span th:text="${settlementDO.optometryName}"></span></td>
+		  <td>预收金额</td>
+		  <td><span th:text="${settlementDO1.payMoney}"></span></td>
+		</tr>
+		<tr>
+		  <td colspan="2">配镜时间</td>
+		  <td colspan="2"><span th:text="${settlementDO.peijingDate}"></span></td>
+		  <td>取镜时间</td>
+		  <td colspan="2"><span th:text="${settlementDO.mirrorDate}"></span></td>
+		  <td>欠款金额</td>
+		  <td><span th:text="${settlementDO1.arrearsMoney}"></span></td>
+		</tr>
+		<tr>
+		  <td colspan="2">门店电话</td>
+		  <td colspan="2"><span th:text="${departmentDO.departTel}"></span></td>
+		  <td>门店地址</td>
+		  <td colspan="4" class="tal"><span th:text="${departmentDO.departAddress}"></span></td>
+		</tr>
+	  </tbody>
+	</table>
+	<dl>
+		<dd><span>注：</span>1）预收定金金额不得低于所配眼镜全部镜片的50%。</dd>
+		<dd>2）顾客在补交齐所欠金额后，需凭此收据换取取镜单取镜。双方需妥善保管本收据。</dd>
+		<dd>3）根据国家有关法律规定，超过取镜日期90天，顾客仍未交纳商品全款余额，我中心将不再向顾客交付镜架镜片（自带镜架或镜片除外），定金不予退还。</dd>
+		<dd>如您同意并遵守本协议，请您签字认可。 </dd>
+	</dl>
+	<p class="qianzi">顾客签字：<span></span></p>
+</div>
+</body>
+</html>

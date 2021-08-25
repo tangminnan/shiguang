@@ -5,6 +5,7 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.Conclusion;
 import com.shiguang.storeSales.domain.SalesDO;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +46,12 @@ public class ExamineController {
     public PageUtils examinelist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        query.put("logisticStatus","发料");
+        query.put("logisticStatus","加工师加工");
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        } else {
+            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+        }
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){
@@ -128,6 +135,11 @@ public class ExamineController {
     public R update(LogStatusDO status){
         status.setLogisticStatus("加工师检验");
         statusService.update(status);
+        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
+        workRecoedDO.setType("检验");
+        workRecoedDO.setDateTime(new Date());
+        statusService.saveRecord(workRecoedDO);
         return R.ok();
     }
 

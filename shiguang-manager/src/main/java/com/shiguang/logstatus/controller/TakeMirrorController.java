@@ -3,6 +3,7 @@ package com.shiguang.logstatus.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.SalesDO;
@@ -38,6 +39,11 @@ public class TakeMirrorController {
         //查询列表数据
         Query query = new Query(params);
         query.put("logisticStatus","收货");
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        } else {
+            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+        }
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){

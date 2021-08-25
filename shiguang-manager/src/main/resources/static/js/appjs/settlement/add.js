@@ -45,7 +45,10 @@ function validateRule() {
             },
             payMoney : {
                 required : true
-            }
+            },
+            payWay : {
+                required : true
+			}
 		},
 		messages : {
 			name : {
@@ -56,6 +59,9 @@ function validateRule() {
             },
             payMoney : {
                 required : icon + "请输入缴费金额"
+            },
+            payWay : {
+                required : icon + "请选择付款方式"
             }
 		}
 	})

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.settlement.dao.DrawbackDao">
+
+	<select id="get" resultType="com.shiguang.settlement.domain.DrawbackDO">
+		select `id`,`drawback_number`,`drawback_name`,`drawback_money`,`creater_name`,`create_time` from drawback where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.settlement.domain.DrawbackDO">
+		select `id`,`drawback_number`,`drawback_name`,`drawback_money`,`creater_name`,`create_time` from drawback
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="drawbackNumber != null and drawbackNumber != ''"> and drawback_number = #{drawbackNumber} </if>
+		  		  <if test="drawbackName != null and drawbackName != ''"> and drawback_name = #{drawbackName} </if>
+		  		  <if test="drawbackMoney != null and drawbackMoney != ''"> and drawback_money = #{drawbackMoney} </if>
+		  		  <if test="createrName != null and createrName != ''"> and creater_name = #{createrName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from drawback
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="drawbackNumber != null and drawbackNumber != ''"> and drawback_number = #{drawbackNumber} </if>
+		  		  <if test="drawbackName != null and drawbackName != ''"> and drawback_name = #{drawbackName} </if>
+		  		  <if test="drawbackMoney != null and drawbackMoney != ''"> and drawback_money = #{drawbackMoney} </if>
+		  		  <if test="createrName != null and createrName != ''"> and creater_name = #{createrName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.settlement.domain.DrawbackDO" useGeneratedKeys="true" keyProperty="id">
+		insert into drawback
+		(
+			`drawback_number`, 
+			`drawback_name`, 
+			`drawback_money`, 
+			`creater_name`, 
+			`create_time`
+		)
+		values
+		(
+			#{drawbackNumber}, 
+			#{drawbackName}, 
+			#{drawbackMoney}, 
+			#{createrName}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.settlement.domain.DrawbackDO">
+		update drawback 
+		<set>
+			<if test="drawbackNumber != null">`drawback_number` = #{drawbackNumber}, </if>
+			<if test="drawbackName != null">`drawback_name` = #{drawbackName}, </if>
+			<if test="drawbackMoney != null">`drawback_money` = #{drawbackMoney}, </if>
+			<if test="createrName != null">`creater_name` = #{createrName}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from drawback where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from drawback where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

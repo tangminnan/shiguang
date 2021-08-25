@@ -48,4 +48,5 @@ public interface SalesService {
 	int peijingcount(Map<String,Object> map);
 
 	SalesDO getSaleNumber(String saleNumber);
+
 }

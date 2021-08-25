@@ -2,6 +2,7 @@ package com.shiguang.logstatus.controller;
 
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -38,6 +39,11 @@ public class PeiJingSingleController {
     public PageUtils peijinglist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        } else {
+            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+        }
         List<SalesDO> salesDOList = statusService.findSalePeijingAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){

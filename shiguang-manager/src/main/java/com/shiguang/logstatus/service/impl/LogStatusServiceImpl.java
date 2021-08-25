@@ -3,6 +3,7 @@ package com.shiguang.logstatus.service.impl;
 import com.shiguang.common.service.LogService;
 import com.shiguang.logstatus.dao.LogStatusDao;
 import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,5 +84,10 @@ public class LogStatusServiceImpl implements LogStatusService {
     @Override
     public int findSalePeijingCount(Map<String, Object> map){
         return statusDao.findSalePeijingCount(map);
+    }
+
+    @Override
+    public int saveRecord(WorkRecoedDO workRecoedDO){
+        return statusDao.saveRecord(workRecoedDO);
     }
 }

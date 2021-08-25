@@ -64,7 +64,10 @@
 			`payment_money`, 
 			`change_money`, 
 			`pay_model`, 
-			`pay_money`
+			`pay_money`,
+			`pay_way`,
+			`front_money`,
+			`settle_date`
 		)
 		values
 		(
@@ -75,7 +78,10 @@
 			#{paymentMoney}, 
 			#{changeMoney}, 
 			#{payModel}, 
-			#{payMoney}
+			#{payMoney},
+			#{payWay},
+			#{frontMoney},
+			#{settleDate}
 		)
 	</insert>
 	 
@@ -88,7 +94,8 @@
 			<if test="paymentMoney != null">`payment_money` = #{paymentMoney}, </if>
 			<if test="changeMoney != null">`change_money` = #{changeMoney}, </if>
 			<if test="payModel != null">`pay_model` = #{payModel}, </if>
-			<if test="payMoney != null">`pay_money` = #{payMoney}</if>
+			<if test="payMoney != null">`pay_money` = #{payMoney},</if>
+			<if test="frontMoney != null">`front_money` = #{frontMoney}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -104,6 +111,87 @@
 		</foreach>
 	</delete>
 	<select id="getSaleNumers" resultType="com.shiguang.settlement.domain.SettlementDO">
-		select `id`,`cost_id`,`sale_number`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement where sale_number = #{value}
+		select `id`,`cost_id`,`sale_number`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money`,`pay_way` from settlement where sale_number = #{value}
 	</select>
+	<select id="findArrearsData" resultType="com.shiguang.settlement.domain.SettlementDO">
+		select sl.`id`,sl.`sale_number`,sl.`member_number`,m.`name` as memberName,sl.`actual_money`,sl.`pay_money`,sl.`pay_way`,sl.`front_money`,sl.`settle_date`,c.`original_price` from settlement sl
+		join cost c on c.id = sl.cost_id
+		join member m on sl.member_number = m.card_number
+		join department d on d.depart_number = m.depart_number
+		<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
+		<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
+		<if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number = #{saleNumber} </if>
+		<if test="payWay != null and payWay != ''"> and sl.pay_way = #{payWay}</if>
+		<if test="state != null and state != ''"> and m.state = #{state} </if>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by sl.`settle_date` desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="findArrearsDataCount" resultType="int">
+		select count(*) from settlement sl
+		join member m on sl.member_number = m.card_number
+		join department d on d.depart_number = m.depart_number
+		<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
+		<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
+		<if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number = #{saleNumber} </if>
+		<if test="payWay != null and payWay != ''"> and sl.pay_way = #{payWay}</if>
+		<if test="state != null and state != ''"> and m.state = #{state} </if>
+	</select>
+
+	<select id="getSaleNumersByNum" resultType="com.shiguang.settlement.domain.SettlementDO">
+		select sl.`id`,sl.`sale_number`,sl.`member_number`,m.`name` as memberName,sl.`actual_money`,sl.`pay_money`,sl.`pay_way`,sl.`front_money`,sl.`settle_date` from settlement sl
+		join member m on sl.member_number = m.card_number
+		 where sl.sale_number = #{value}
+	</select>
+
+	<select id="findGlassesData" resultType="com.shiguang.settlement.domain.SettlementDO">
+		select sl.`id`,sl.`sale_number`,sl.`member_number`,m.`name` as memberName,m.`sex` as sex,m.`age` as age,sl.`actual_money`,sl.`pay_money`,sl.`pay_way`,
+		sl.`front_money`,sl.`settle_date`,c.`original_price`
+		 from settlement sl
+		 join member m on sl.member_number = m.card_number
+		 join cost c on c.id = sl.cost_id
+		<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
+		<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
+		<if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number = #{saleNumber} </if>
+		<if test="payWay != null and payWay != ''"> and sl.pay_way = #{payWay}</if>
+		<if test="type != null and type != ''"> and c.type != #{type}</if>
+		<if test="state != null and state != ''"> and m.state = #{state} </if>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by sl.`settle_date` desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="findGlassesDataCount" resultType="int">
+		select count(*)
+		from settlement sl
+		join member m on sl.member_number = m.card_number
+		join cost c on c.id = sl.cost_id
+		<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
+		<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
+		<if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number = #{saleNumber} </if>
+		<if test="payWay != null and payWay != ''"> and sl.pay_way = #{payWay}</if>
+		<if test="type != null and type != ''"> and c.type != #{type}</if>
+		<if test="state != null and state != ''"> and m.state = #{state} </if>
+	</select>
+
 </mapper>

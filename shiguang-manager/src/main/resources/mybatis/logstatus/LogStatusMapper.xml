@@ -53,6 +53,21 @@
 		)
 	</insert>
 
+    <insert id="saveRecord" parameterType="com.shiguang.logstatus.domain.WorkRecoedDO" useGeneratedKeys="true" keyProperty="id">
+		insert into work_record
+		(
+			`user_name`,
+			`type`,
+			`date_time`
+		)
+		values
+		(
+			#{userName},
+			#{type},
+			#{dateTime}
+		)
+	</insert>
+
     <update id="update" parameterType="com.shiguang.logstatus.domain.LogStatusDO">
         update log_status
         <set>
@@ -81,9 +96,12 @@
         join cost c on c.sale_number = sa.sale_number and c.is_sale = 1
         join log_status ls on ls.sale_number = sa.sale_number
         join member m on m.card_number = sa.member_number and m.state = 1 and m.`status` = 0
+        join department d on d.depart_number = m.depart_number
         <where>
             <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
             <if test="saleNumber !=null and saleNumber != ''">and sa.sale_number = #{saleNumber}</if>
+            <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
+            <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -104,9 +122,12 @@
         join cost c on c.sale_number = sa.sale_number and c.is_sale = 1
         join log_status ls on ls.sale_number = sa.sale_number
         join member m on m.card_number = sa.member_number and m.state = 1 and m.`status` = 0
+        join department d on d.depart_number = m.depart_number
         <where>
             <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
             <if test="saleNumber !=null and saleNumber != ''">and sa.sale_number = #{saleNumber}</if>
+            <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
+            <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
         </where>
     </select>
 
@@ -168,9 +189,12 @@
         from store_sales sa
         join log_status ls on ls.sale_number = sa.sale_number
         join member m on m.card_number = sa.member_number and m.state = 1 and m.`status` = 0
+        join department d on d.depart_number = m.depart_number
         <where>
             <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
             <if test="saleNumber !=null and saleNumber != ''">and sa.sale_number = #{saleNumber}</if>
+            <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
+            <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -190,9 +214,12 @@
         from store_sales sa
         join log_status ls on ls.sale_number = sa.sale_number
         join member m on m.card_number = sa.member_number and m.state = 1 and m.`status` = 0
+        join department d on d.depart_number = m.depart_number
         <where>
             <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
             <if test="saleNumber !=null and saleNumber != ''">and sa.sale_number = #{saleNumber}</if>
+            <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
+            <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
         </where>
     </select>
 </mapper>

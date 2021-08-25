@@ -963,7 +963,7 @@
 			<li><input class="youji" type="button" onclick="getYouji()"  value="填写邮寄信息" /></li>
 		</ul>
 		<ul class="ulC">
-			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney"/><input type="hidden" id="primeMoney" name="primeMoney"/></li>
+			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney" onchange="getShishou()"/><input type="hidden" id="primeMoney" name="primeMoney"/></li>
 			<li>商品打折：<input type="text" id="saleDiscount" onchange="getDiscount()"/><input type="button" value="还原" /></li>
 			<li>一口价：<input type="text" id="fisPrice" onchange="getFixedPrice()" /><input type="button" class="qianpi" value="签批" /><input type="button" onclick="getfidHy()" value="还原" /></li>
 			<li>抹零金额：<input type="text" value="0.00" id="molingMoney" onfocus="if (value =='0.00'){value =''}" onblur="if (value ==''){value='0.00'}" name="molingMoney" onchange="getChangeValue()"/></li>
@@ -1197,6 +1197,21 @@
         elem: '#mirrorTime',
         type: 'date'
     });
+
+    function getShishou(){
+        var shishou = $("#amountMoney").val();
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额："+molingPrice+"</li>";
+        lis += "<li>应收金额："+price+"</li>";
+        lis += "<li>实收金额："+shishou+"</li>";
+        $("#ula").append(lis)
+        $("#amountMoney").val(shishou)
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+	}
 
     function getDiscount(){
         var saleCount = $("#saleDisCount").val();
@@ -1592,6 +1607,7 @@
                     html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='storeUnit' name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"' />"
                     html += "<input id='storeCount' name='storeCount' type='hidden' />"
+					html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                     html += "<input id='isJj' name='isJj' type='hidden' />"
                     html += "<input id='yingshoujj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                     html += "<input id='producaNum' name='producaNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
@@ -1747,6 +1763,7 @@
                     html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                     html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                    html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                     html += "<input id='isJp'name='isJp' type='hidden' />"
                     html += "<input id='yingshoujp"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                     html += "<input id='storeDescribe'name='storeDescribe' value='镜片' type='hidden' />"

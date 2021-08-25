@@ -4,21 +4,21 @@
 <mapper namespace="com.shiguang.checkout.dao.CostDao">
 
     <select id="get" resultType="com.shiguang.checkout.domain.CostDO">
-		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`type` from cost where id = #{value}
+		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`type`,`original_price` from cost where id = #{value}
 	</select>
 
     <select id="getMemberNum" resultType="com.shiguang.checkout.domain.CostDO">
-		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`type`,`create_time` from cost
+		select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`type`,`create_time`,`original_price` from cost
 		where member_number = #{value} order by create_time desc
 	</select>
 
     <select id="getSaleNumByMemNum" resultType="com.shiguang.checkout.domain.CostDO">
-       select `id`,`member_number`,`sale_number`,`create_time` from cost
+       select `id`,`member_number`,`sale_number`,`create_time`,`original_price` from cost
 		where member_number = #{value} group by sale_number order by create_time desc
     </select>
 
     <select id="list" resultType="com.shiguang.checkout.domain.CostDO">
-        select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`create_time`,`type` from cost
+        select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`create_time`,`type`,`original_price` from cost
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
@@ -74,7 +74,8 @@
 			`sale_name`,
 			`is_sale`,
 			`create_time`,
-			`type`
+			`type`,
+			`original_price`
 		)
 		values
 		(
@@ -89,7 +90,8 @@
 			#{saleName},
 			#{isSale},
 			#{createTime},
-			#{type}
+			#{type},
+			#{originalPrice}
 		)
 	</insert>
 
@@ -112,7 +114,8 @@
     <update id="updateMember" parameterType="com.shiguang.checkout.domain.CostDO">
         update cost
         <set>
-            <if test="isSale != null">`is_sale` = #{isSale}</if>
+            <if test="isSale != null">`is_sale` = #{isSale},</if>
+            <if test="type != null">`type` = #{type}</if>
         </set>
         where sale_number = #{saleNumber}
     </update>

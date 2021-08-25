@@ -91,6 +91,9 @@ function load() {
 												   'onclick="detail(\''+value+'\',\''+row.saleNumber+'\',\''+row.costId+'\')" style="text-decoration: none;">详情</a>';
                                                t = '<a class="btn btn-primary btn-xs" href="#" title="打印"  mce_href="#" ' +
                                                 'onclick="dayin(\''+row.type+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印</a>';
+										} else if (row.isSale == 2){
+                                            e = '<a class="btn btn-primary btn-xs" href="#" title="已退款"  mce_href="#"  style="text-decoration: none;">已退款</a>';
+                                            t = '';
 										}
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
@@ -146,6 +149,8 @@ function dayin(type,saleNumber){
         window.open("/information/settlement/jianchadayin?saleNumber="+saleNumber);
 	} else if (type == "配镜单") {
         window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
+	} else if (type == "定金单"){
+        window.open("/information/settlement/dingjindan?saleNumber="+saleNumber);
 	}
 }
 

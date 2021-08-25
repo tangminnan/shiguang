@@ -45,6 +45,8 @@ public interface UserService {
 
 	int findCountManages(Map<String,Object> map);
 
+	UserDO getUserName(String userName);
+
 	int resetPwd(UserVO userVO,UserDO userDO) throws Exception;
 	int adminResetPwd(UserVO userVO) throws Exception;
 	Tree<DeptDO> getTree();

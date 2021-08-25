@@ -33,6 +33,24 @@ public class SettlementDO implements Serializable {
 	private Double payMoney;
 	//销售单号
 	private String saleNumber;
+	//付款方式
+	private String payWay;
+	//预收金额
+	private Double frontMoney;
+	//会员姓名
+	private String memberName;
+	//性别
+	private Long sex;
+	//年龄
+	private Long age;
+	//欠费金额
+	private Double arrearsMoney;
+	//销售日期
+	private Date settleDate;
+	private String settleTime;
+	//原价合计
+	private Double originalPrice;
+
 
 	/**
 	 * 设置：主键
@@ -127,4 +145,49 @@ public class SettlementDO implements Serializable {
 	public void setSaleNumber(String saleNumber){this.saleNumber = saleNumber;}
 
 	public String getSaleNumber() {return saleNumber;}
+
+	public void setPayWay(String payWay) {this.payWay = payWay;}
+
+	public String getPayWay() {return payWay;}
+
+	public void setFrontMoney(Double frontMoney) {this.frontMoney = frontMoney;}
+
+	public Double getFrontMoney() {return frontMoney;}
+
+	public void setMemberName(String memberName) {this.memberName =memberName;}
+
+	public String getMemberName(){return memberName;}
+
+	public void setArrearsMoney(Double arrearsMoney) {this.arrearsMoney = arrearsMoney;}
+
+	public Double getArrearsMoney() {return arrearsMoney;}
+
+	public void setSettleDate(Date settleDate) {this.settleDate = settleDate;}
+
+	public Date getSettleDate() {return settleDate;}
+
+	public void setSettleTime(String settleTime) {this.settleTime = settleTime;}
+
+	public String getSettleTime() {return settleTime;}
+
+	public void setOriginalPrice(Double originalPrice) {this.originalPrice = originalPrice;}
+
+	public Double getOriginalPrice() {return originalPrice;}
+
+	public void setSex(Long sex) {this.sex = sex;}
+
+	public Long getSex() {return sex;}
+
+	/**
+	 * 设置：年龄
+	 */
+	public void setAge(Long age) {
+		this.age = age;
+	}
+	/**
+	 * 获取：年龄
+	 */
+	public Long getAge() {
+		return age;
+	}
 }

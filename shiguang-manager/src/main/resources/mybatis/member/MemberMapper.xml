@@ -12,52 +12,59 @@
 	</select>
 
     <select id="list" resultType="com.shiguang.member.domain.MemberDO">
-        select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member
+        select m.`id`,m.`name`,m.`member_option`,m.`card_number`,m.`sex`,m.`depart_number`,m.`birthday_year`,m.`birthday_month`,
+        m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,
+        m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,
+        m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,
+        m.`address`,m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status`,m.`state`
+        from member m
+        join department d on d.depart_number = m.depart_number
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
-            <if test="memberOption != null and memberOption != ''"> and member_option = #{memberOption} </if>
+            <if test="id != null and id != ''"> and m.id = #{id} </if>
+            <if test="name != null and name != ''"> and m.`name` = #{name} </if>
+            <if test="memberOption != null and memberOption != ''"> and m.member_option = #{memberOption} </if>
             <if test="departNumber != null and departNumber != ''">
-             and depart_number = ${departNumber}
+             and m.depart_number = ${departNumber}
             </if>
-            <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
-            <if test="birthdayYear != null and birthdayYear != ''"> and birthday_year = #{birthdayYear} </if>
-            <if test="birthdayMonth != null and birthdayMonth != ''"> and birthday_month = #{birthdayMonth} </if>
-            <if test="birthdayDay != null and birthdayDay != ''"> and birthday_day = #{birthdayDay} </if>
-            <if test="age != null and age != ''"> and age = #{age} </if>
-            <if test="phone1 != null and phone1 != ''"> and phone_1 = #{phone1} </if>
-            <if test="phone2 != null and phone2 != ''"> and phone_2 = #{phone2} </if>
-            <if test="phone3 != null and phone3 != ''"> and phone_3 = #{phone3} </if>
-            <if test="provinceCode != null and provinceCode != ''"> and province_code = #{provinceCode} </if>
-            <if test="provinceName != null and provinceName != ''"> and province_name = #{provinceName} </if>
-            <if test="cityCode != null and cityCode != ''"> and city_code = #{cityCode} </if>
-            <if test="cityName != null and cityName != ''"> and city_name = #{cityName} </if>
-            <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
-            <if test="areaName != null and areaName != ''"> and area_name = #{areaName} </if>
-            <if test="cardType != null and cardType != ''"> and card_type = #{cardType} </if>
-            <if test="masterCard != null and masterCard != ''"> and master_card = #{masterCard} </if>
-            <if test="minorName != null and minorName != ''"> and minor_name = #{minorName} </if>
-            <if test="crowdType != null and crowdType != ''"> and crowd_type = #{crowdType} </if>
-            <if test="exclusiveCustomer != null and exclusiveCustomer != ''"> and exclusive_customer = #{exclusiveCustomer} </if>
-            <if test="exclusiveCustomerId != null and exclusiveCustomerId != ''"> and exclusive_customer_id = #{exclusiveCustomerId} </if>
-            <if test="identityType != null and identityType != ''"> and identity_type = #{identityType} </if>
-            <if test="identityId != null and identityId != ''"> and identity_id = #{identityId} </if>
-            <if test="vocation != null and vocation != ''"> and vocation = #{vocation} </if>
-            <if test="school != null and school != ''"> and school = #{school} </if>
-            <if test="qqNumber != null and qqNumber != ''"> and qq_number = #{qqNumber} </if>
-            <if test="email != null and email != ''"> and email = #{mail} </if>
-            <if test="address != null and address != ''"> and address = #{address} </if>
-            <if test="postalCode != null and postalCode != ''"> and postal_code = #{postalCode} </if>
-            <if test="interest != null and interest != ''"> and interest = #{interest} </if>
-            <if test="source != null and source != ''"> and source = #{source} </if>
-            <if test="integralPasd != null and integralPasd != ''"> and integral_pasd = #{integralPasd} </if>
-            <if test="remark != null and remark != ''"> and remark = #{remark} </if>
-            <if test="registerTime != null and registerTime != ''"> and register_time = #{registerTime} </if>
-            <if test="status != null and status != ''"> and status = #{status} </if>
-            <if test="state != null and state != ''"> and state = #{state} </if>
-            <if test="agestart != null and agestart !=''"> and age >= #{agestart} </if>
-            <if test="ageend != null and ageend != ''"> and age &lt;= #{ageend} </if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+            <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
+            <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
+            <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
+            <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
+            <if test="age != null and age != ''"> and m.age = #{age} </if>
+            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+            <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
+            <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+            <if test="provinceCode != null and provinceCode != ''"> and m.province_code = #{provinceCode} </if>
+            <if test="provinceName != null and provinceName != ''"> and m.province_name = #{provinceName} </if>
+            <if test="cityCode != null and cityCode != ''"> and m.city_code = #{cityCode} </if>
+            <if test="cityName != null and cityName != ''"> and m.city_name = #{cityName} </if>
+            <if test="areaCode != null and areaCode != ''"> and m.area_code = #{areaCode} </if>
+            <if test="areaName != null and areaName != ''"> and m.area_name = #{areaName} </if>
+            <if test="cardType != null and cardType != ''"> and m.card_type = #{cardType} </if>
+            <if test="masterCard != null and masterCard != ''"> and m.master_card = #{masterCard} </if>
+            <if test="minorName != null and minorName != ''"> and m.minor_name = #{minorName} </if>
+            <if test="crowdType != null and crowdType != ''"> and m.crowd_type = #{crowdType} </if>
+            <if test="exclusiveCustomer != null and exclusiveCustomer != ''"> and m.exclusive_customer = #{exclusiveCustomer} </if>
+            <if test="exclusiveCustomerId != null and exclusiveCustomerId != ''"> and m.exclusive_customer_id = #{exclusiveCustomerId} </if>
+            <if test="identityType != null and identityType != ''"> and m.identity_type = #{identityType} </if>
+            <if test="identityId != null and identityId != ''"> and m.identity_id = #{identityId} </if>
+            <if test="vocation != null and vocation != ''"> and m.vocation = #{vocation} </if>
+            <if test="school != null and school != ''"> and m.school = #{school} </if>
+            <if test="qqNumber != null and qqNumber != ''"> and m.qq_number = #{qqNumber} </if>
+            <if test="email != null and email != ''"> and m.email = #{mail} </if>
+            <if test="address != null and address != ''"> and m.address = #{address} </if>
+            <if test="postalCode != null and postalCode != ''"> and m.postal_code = #{postalCode} </if>
+            <if test="interest != null and interest != ''"> and m.interest = #{interest} </if>
+            <if test="source != null and source != ''"> and m.source = #{source} </if>
+            <if test="integralPasd != null and integralPasd != ''"> and m.integral_pasd = #{integralPasd} </if>
+            <if test="remark != null and remark != ''"> and m.remark = #{remark} </if>
+            <if test="registerTime != null and registerTime != ''"> and m.register_time = #{registerTime} </if>
+            <if test="status != null and status != ''"> and m.status = #{status} </if>
+            <if test="state != null and state != ''"> and m.state = #{state} </if>
+            <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
+            <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -75,10 +82,12 @@
     <select id="payList" resultType="com.shiguang.member.domain.MemberDO">
     select m.`id`,m.`name`,m.`card_number`,c.`id` as costId,c.`is_sale`,c.`type`,c.`sale_number`,m.`sex`,m.`depart_number`,m.`birthday_year`,m.`birthday_month`,m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,m.`address`,m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status` from member m
     join cost c on c.member_number = m.card_number
+        join department d on d.depart_number = m.depart_number
     <where>
         <if test="id != null and id != ''"> and m.id = #{id} </if>
         <if test="name != null and name != ''"> and m.name = #{name} </if>
         <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
+        <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
         <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
         <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
         <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
@@ -89,6 +98,7 @@
         <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
         <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
         <if test="state != null and state != ''"> and m.state = #{state} </if>
+        <if test="isSale != null and isSale != ''"> and c.is_sale = #{isSale} </if>
     </where>
     <choose>
         <when test="sort != null and sort.trim() != ''">
@@ -110,10 +120,12 @@
         count(*) from (
         select count(m.id) from member m
         join cost c on c.member_number = m.card_number
+        join department d on d.depart_number = m.depart_number
         <where>
             <if test="id != null and id != ''"> and m.id = #{id} </if>
             <if test="name != null and name != ''"> and m.name = #{name} </if>
             <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
+            <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
             <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
@@ -129,52 +141,54 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from member
+        select count(*) from member m
+        join department d on d.depart_number = m.depart_number
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
-            <if test="memberOption != null and memberOption != ''"> and member_option = #{memberOption} </if>
+            <if test="id != null and id != ''"> and m.id = #{id} </if>
+            <if test="name != null and name != ''"> and m.`name` = #{name} </if>
+            <if test="memberOption != null and memberOption != ''"> and m.member_option = #{memberOption} </if>
             <if test="departNumber != null and departNumber != ''">
-                and depart_number in (${departNumber})
+                and m.depart_number = ${departNumber}
             </if>
-            <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
-            <if test="birthdayYear != null and birthdayYear != ''"> and birthday_year = #{birthdayYear} </if>
-            <if test="birthdayMonth != null and birthdayMonth != ''"> and birthday_month = #{birthdayMonth} </if>
-            <if test="birthdayDay != null and birthdayDay != ''"> and birthday_day = #{birthdayDay} </if>
-            <if test="age != null and age != ''"> and age = #{age} </if>
-            <if test="phone1 != null and phone1 != ''"> and phone_1 = #{phone1} </if>
-            <if test="phone2 != null and phone2 != ''"> and phone_2 = #{phone2} </if>
-            <if test="phone3 != null and phone3 != ''"> and phone_3 = #{phone3} </if>
-            <if test="provinceCode != null and provinceCode != ''"> and province_code = #{provinceCode} </if>
-            <if test="provinceName != null and provinceName != ''"> and province_name = #{provinceName} </if>
-            <if test="cityCode != null and cityCode != ''"> and city_code = #{cityCode} </if>
-            <if test="cityName != null and cityName != ''"> and city_name = #{cityName} </if>
-            <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
-            <if test="areaName != null and areaName != ''"> and area_name = #{areaName} </if>
-            <if test="cardType != null and cardType != ''"> and card_type = #{cardType} </if>
-            <if test="masterCard != null and masterCard != ''"> and master_card = #{masterCard} </if>
-            <if test="minorName != null and minorName != ''"> and minor_name = #{minorName} </if>
-            <if test="crowdType != null and crowdType != ''"> and crowd_type = #{crowdType} </if>
-            <if test="exclusiveCustomer != null and exclusiveCustomer != ''"> and exclusive_customer = #{exclusiveCustomer} </if>
-            <if test="exclusiveCustomerId != null and exclusiveCustomerId != ''"> and exclusive_customer_id = #{exclusiveCustomerId} </if>
-            <if test="identityType != null and identityType != ''"> and identity_type = #{identityType} </if>
-            <if test="identityId != null and identityId != ''"> and identity_id = #{identityId} </if>
-            <if test="vocation != null and vocation != ''"> and vocation = #{vocation} </if>
-            <if test="school != null and school != ''"> and school = #{school} </if>
-            <if test="qqNumber != null and qqNumber != ''"> and qq_number = #{qqNumber} </if>
-            <if test="email != null and email != ''"> and email = #{email} </if>
-            <if test="address != null and address != ''"> and address = #{address} </if>
-            <if test="postalCode != null and postalCode != ''"> and postal_code = #{postalCode} </if>
-            <if test="interest != null and interest != ''"> and interest = #{interest} </if>
-            <if test="source != null and source != ''"> and source = #{source} </if>
-            <if test="integralPasd != null and integralPasd != ''"> and integral_pasd = #{integralPasd} </if>
-            <if test="remark != null and remark != ''"> and remark = #{remark} </if>
-            <if test="registerTime != null and registerTime != ''"> and register_time = #{registerTime} </if>
-            <if test="status != null and status != ''"> and status = #{status} </if>
-            <if test="state != null and state != ''"> and state = #{state} </if>
-            <if test="agestart != null and agestart !=''"> and age >= #{agestart} </if>
-            <if test="ageend != null and ageend != ''"> and age &lt;= #{ageend} </if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+            <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
+            <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
+            <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
+            <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
+            <if test="age != null and age != ''"> and m.age = #{age} </if>
+            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+            <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
+            <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+            <if test="provinceCode != null and provinceCode != ''"> and m.province_code = #{provinceCode} </if>
+            <if test="provinceName != null and provinceName != ''"> and m.province_name = #{provinceName} </if>
+            <if test="cityCode != null and cityCode != ''"> and m.city_code = #{cityCode} </if>
+            <if test="cityName != null and cityName != ''"> and m.city_name = #{cityName} </if>
+            <if test="areaCode != null and areaCode != ''"> and m.area_code = #{areaCode} </if>
+            <if test="areaName != null and areaName != ''"> and m.area_name = #{areaName} </if>
+            <if test="cardType != null and cardType != ''"> and m.card_type = #{cardType} </if>
+            <if test="masterCard != null and masterCard != ''"> and m.master_card = #{masterCard} </if>
+            <if test="minorName != null and minorName != ''"> and m.minor_name = #{minorName} </if>
+            <if test="crowdType != null and crowdType != ''"> and m.crowd_type = #{crowdType} </if>
+            <if test="exclusiveCustomer != null and exclusiveCustomer != ''"> and m.exclusive_customer = #{exclusiveCustomer} </if>
+            <if test="exclusiveCustomerId != null and exclusiveCustomerId != ''"> and m.exclusive_customer_id = #{exclusiveCustomerId} </if>
+            <if test="identityType != null and identityType != ''"> and m.identity_type = #{identityType} </if>
+            <if test="identityId != null and identityId != ''"> and m.identity_id = #{identityId} </if>
+            <if test="vocation != null and vocation != ''"> and m.vocation = #{vocation} </if>
+            <if test="school != null and school != ''"> and m.school = #{school} </if>
+            <if test="qqNumber != null and qqNumber != ''"> and m.qq_number = #{qqNumber} </if>
+            <if test="email != null and email != ''"> and m.email = #{mail} </if>
+            <if test="address != null and address != ''"> and m.address = #{address} </if>
+            <if test="postalCode != null and postalCode != ''"> and m.postal_code = #{postalCode} </if>
+            <if test="interest != null and interest != ''"> and m.interest = #{interest} </if>
+            <if test="source != null and source != ''"> and m.source = #{source} </if>
+            <if test="integralPasd != null and integralPasd != ''"> and m.integral_pasd = #{integralPasd} </if>
+            <if test="remark != null and remark != ''"> and m.remark = #{remark} </if>
+            <if test="registerTime != null and registerTime != ''"> and m.register_time = #{registerTime} </if>
+            <if test="status != null and status != ''"> and m.status = #{status} </if>
+            <if test="state != null and state != ''"> and m.state = #{state} </if>
+            <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
+            <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
         </where>
     </select>
 

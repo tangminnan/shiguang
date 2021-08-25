@@ -34,4 +34,15 @@ public interface SettlementService {
 	int batchRemove(Long[] ids);
 
 	SettlementDO getSaleNumers(String saleNumber);
+
+	List<SettlementDO> findArrearsData(Map<String,Object> map);
+
+	int findArrearsDataCount(Map<String,Object> map);
+
+	SettlementDO getSaleNumersByNum(String saleNumber);
+
+	List<SettlementDO> findGlassesData(Map<String,Object> map);
+
+	int findGlassesDataCount(Map<String,Object> map);
+
 }

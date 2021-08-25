@@ -7,6 +7,7 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mailInfo.domain.MailInfoDO;
 import com.shiguang.mailInfo.service.MailInfoService;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.ObjectView;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -77,6 +79,11 @@ public class LogStatusController {
         //查询列表数据
         Query query = new Query(params);
         query.put("logisticStatus","销售完成");
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        } else {
+            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+        }
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){
@@ -271,6 +278,13 @@ public class LogStatusController {
     @RequiresPermissions("information:logstatus:edit")
     public R update( LogStatusDO status){
         LogStatusDO logStatusDO = new LogStatusDO();
+        Map<String,Object> map = new HashMap<>();
+        map.put("saleNumber",status.getSaleNumber());
+        map.put("goodsNum",status.getGoodsNum());
+        List<SalesDO> salesDOList = salesService.list(map);
+        if (salesDOList.size() == 0){
+            return R.error("检验有误");
+        }
         logStatusDO.setSaleNumber(status.getSaleNumber());
         logStatusDO.setLogisticStatus("发料");
         logStatusDO.setFaliaoDate(new Date());
@@ -288,6 +302,11 @@ public class LogStatusController {
                 stockService.updateGoodsCount(stockDO);
             }
         }
+        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
+        workRecoedDO.setType("发料");
+        workRecoedDO.setDateTime(new Date());
+        statusService.saveRecord(workRecoedDO);
         if(statusService.editFaliao(logStatusDO)>0){
             return R.ok();
         }

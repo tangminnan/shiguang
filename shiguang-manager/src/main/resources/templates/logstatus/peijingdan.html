@@ -14,6 +14,7 @@
 	<ul class="ul3">
 		<input id="cost" th:value="${settlementDO.additionalCost}" type="hidden">
 		<input id="storeName" th:value="${settlementDO.storeName}" type="hidden">
+		<input id="goodsNum" th:value="${settlementDO.goodsNum}" type="hidden">
 		<input id="unit" th:value="${settlementDO.unit}" type="hidden">
 		<input id="storeUnit" th:value="${settlementDO.storeUnit}" type="hidden">
 		<input id="storeCount" th:value="${settlementDO.storeCount}" type="hidden">
@@ -139,6 +140,7 @@
 	</table>
 	<form class="form-horizontal m-t" id="signupForm">
 		<input id="saleNumber" name="saleNumber" type="hidden" th:value="${settlementDO.saleNumber}">
+		<table id="inputid"></table>
 		<div class="form-group">
 			<div class="col-sm-8 col-sm-offset-3">
 				<button style="font-size: 20px;margin-left: 45%;margin-top:20px;background-color: #358afd;width: 10%;color:white;" type="submit" >发料</button>
@@ -166,6 +168,13 @@
         $("#unitName").append(unitstr);
         $("#count").append(storeCountstr);
         $("#price").append(storeUnitstr);
+        var goodsNumArray = $("#goodsNum").val();
+        goodsNumArray = goodsNumArray.split(",");
+        var html = "";
+        for (var i=0;i<goodsNumArray.length;i++){
+            html += "<input name='goodsNum' type='text'>";
+		}
+        $("#inputid").append(html);
     });
 </script>
 <script th:inline="javascript">

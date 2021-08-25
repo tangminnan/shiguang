@@ -101,4 +101,5 @@ public class SalesServiceImpl implements SalesService {
 	public SalesDO getSaleNumber(String saleNumber){
 		return salesDao.getSaleNumber(saleNumber);
 	}
+
 }

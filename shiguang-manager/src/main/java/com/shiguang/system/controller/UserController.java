@@ -140,7 +140,7 @@ public class UserController extends BaseController {
 		UserDO userDO = userService.get(id);
 		model.addAttribute("user", userDO);
         Map<String,Object> maps = new HashMap<>();
-        maps.put("roleType",5);
+        maps.put("roleTypes",5);
 		List<RoleDO> roles = roleService.list(id,maps);
 		model.addAttribute("roles", roles);
 		Map<String,Object> map = new HashMap<>();
@@ -157,6 +157,11 @@ public class UserController extends BaseController {
 	R save(UserDO user) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+		}
+		String userName = user.getUsername();
+		UserDO userDO = userService.getUserName(userName);
+		if (null != userDO){
+			return R.error("该用户已存在");
 		}
 		try {
 			MultipartFile file = user.getImgFile();

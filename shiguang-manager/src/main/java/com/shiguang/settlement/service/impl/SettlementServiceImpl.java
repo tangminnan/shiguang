@@ -3,6 +3,7 @@ package com.shiguang.settlement.service.impl;
 import com.shiguang.settlement.dao.SettlementDao;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
+import com.shiguang.storeSales.domain.SalesDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,5 +66,30 @@ public class SettlementServiceImpl implements SettlementService {
 	@Override
 	public SettlementDO getSaleNumers(String saleNumber){
 		return settlementDao.getSaleNumers(saleNumber);
+	}
+
+	@Override
+	public List<SettlementDO> findArrearsData(Map<String, Object> map){
+		return settlementDao.findArrearsData(map);
+	}
+
+	@Override
+	public int findArrearsDataCount(Map<String, Object> map){
+		return settlementDao.findArrearsDataCount(map);
+	}
+
+	@Override
+	public SettlementDO getSaleNumersByNum(String saleNumber){
+		return settlementDao.getSaleNumersByNum(saleNumber);
+	}
+
+	@Override
+	public List<SettlementDO> findGlassesData(Map<String, Object> map){
+		return settlementDao.findGlassesData(map);
+	}
+
+	@Override
+	public int findGlassesDataCount(Map<String, Object> map){
+		return settlementDao.findGlassesDataCount(map);
 	}
 }

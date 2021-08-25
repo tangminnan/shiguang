@@ -44,4 +44,6 @@ public interface UserDao {
 
 	int findCountManages(Map<String,Object> map);
 
+	UserDO getUserName(String userName);
+
 }

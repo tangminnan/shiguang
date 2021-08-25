@@ -5,6 +5,7 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
@@ -43,6 +44,11 @@ public class ReceiveController {
         //查询列表数据
         Query query = new Query(params);
         query.put("logisticStatus","加工师检验");
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        } else {
+            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+        }
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){
@@ -65,6 +71,11 @@ public class ReceiveController {
         LogStatusDO logStatusDO = new LogStatusDO();
         logStatusDO.setSaleNumber(saleNumber);
         logStatusDO.setLogisticStatus("收货");
+        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
+        workRecoedDO.setType("取镜");
+        workRecoedDO.setDateTime(new Date());
+        statusService.saveRecord(workRecoedDO);
         if(statusService.editFaliao(logStatusDO)>0){
             return R.ok();
         }

@@ -41,6 +41,8 @@ public class CostDO implements Serializable {
 	private Date createTime;
 	//类型
 	private String type;
+	//原价合计
+	private Double originalPrice;
 
 	/**
 	 * 设置：主键
@@ -182,4 +184,8 @@ public class CostDO implements Serializable {
 	public void setType(String type) {this.type = type;}
 
 	public String getType() {return type;}
+
+	public void setOriginalPrice(Double originalPrice) {this.originalPrice = originalPrice;}
+
+	public Double getOriginalPrice() {return originalPrice;}
 }

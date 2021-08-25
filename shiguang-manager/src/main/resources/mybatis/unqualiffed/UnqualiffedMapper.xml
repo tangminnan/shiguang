@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.unqualiffed.dao.UnqualiffedDao">
+
+	<select id="get" resultType="com.shiguang.unqualiffed.domain.UnqualiffedDO">
+		select `id`,`sale_number`,`prepared_name`,`responsible_name`,`bill_number`,`cause`,`phenomenon`,`handle`,`bill_date` from unqualiffed where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.unqualiffed.domain.UnqualiffedDO">
+		select `id`,`sale_number`,`prepared_name`,`responsible_name`,`bill_number`,`cause`,`phenomenon`,`handle`,`bill_date` from unqualiffed
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+		  		  <if test="preparedName != null and preparedName != ''"> and prepared_name = #{preparedName} </if>
+		  		  <if test="responsibleName != null and responsibleName != ''"> and responsible_name = #{responsibleName} </if>
+		  		  <if test="billNumber != null and billNumber != ''"> and bill_number = #{billNumber} </if>
+		  		  <if test="cause != null and cause != ''"> and cause = #{cause} </if>
+		  		  <if test="phenomenon != null and phenomenon != ''"> and phenomenon = #{phenomenon} </if>
+		  		  <if test="handle != null and handle != ''"> and handle = #{handle} </if>
+		  		  <if test="billDate != null and billDate != ''"> and bill_date = #{billDate} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from unqualiffed
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+		  		  <if test="preparedName != null and preparedName != ''"> and prepared_name = #{preparedName} </if>
+		  		  <if test="responsibleName != null and responsibleName != ''"> and responsible_name = #{responsibleName} </if>
+		  		  <if test="billNumber != null and billNumber != ''"> and bill_number = #{billNumber} </if>
+		  		  <if test="cause != null and cause != ''"> and cause = #{cause} </if>
+		  		  <if test="phenomenon != null and phenomenon != ''"> and phenomenon = #{phenomenon} </if>
+		  		  <if test="handle != null and handle != ''"> and handle = #{handle} </if>
+		  		  <if test="billDate != null and billDate != ''"> and bill_date = #{billDate} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.unqualiffed.domain.UnqualiffedDO" useGeneratedKeys="true" keyProperty="id">
+		insert into unqualiffed
+		(
+			`sale_number`, 
+			`prepared_name`, 
+			`responsible_name`, 
+			`bill_number`, 
+			`cause`, 
+			`phenomenon`, 
+			`handle`, 
+			`bill_date`
+		)
+		values
+		(
+			#{saleNumber}, 
+			#{preparedName}, 
+			#{responsibleName}, 
+			#{billNumber}, 
+			#{cause}, 
+			#{phenomenon}, 
+			#{handle}, 
+			#{billDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.unqualiffed.domain.UnqualiffedDO">
+		update unqualiffed 
+		<set>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
+			<if test="preparedName != null">`prepared_name` = #{preparedName}, </if>
+			<if test="responsibleName != null">`responsible_name` = #{responsibleName}, </if>
+			<if test="billNumber != null">`bill_number` = #{billNumber}, </if>
+			<if test="cause != null">`cause` = #{cause}, </if>
+			<if test="phenomenon != null">`phenomenon` = #{phenomenon}, </if>
+			<if test="handle != null">`handle` = #{handle}, </if>
+			<if test="billDate != null">`bill_date` = #{billDate}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from unqualiffed where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from unqualiffed where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

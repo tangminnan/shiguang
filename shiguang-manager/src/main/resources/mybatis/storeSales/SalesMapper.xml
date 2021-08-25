@@ -14,6 +14,7 @@
 		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
 		  		  <if test="saleName != null and saleName != ''"> and sale_name = #{saleName} </if>
 		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+			      <if test="goodsNum != null and goodsNum !=''">and goods_num = (#{goodsNum})</if>
 		  		  <if test="eyeType != null and eyeType != ''"> and eye_type = #{eyeType} </if>
 		  		  <if test="amountMoney != null and amountMoney != ''"> and amount_money = #{amountMoney} </if>
 		  		  <if test="mirrorWay != null and mirrorWay != ''"> and mirror_way = #{mirrorWay} </if>
@@ -80,6 +81,7 @@
 			`sale_name`, 
 			`sale_number`,
 			`goods_num`,
+			`goods_code`,
 			`eye_type`, 
 			`amount_money`,
 			`prime_money`,
@@ -120,6 +122,7 @@
 			#{saleName}, 
 			#{saleNumber},
 			#{goodsNum},
+			#{goodsCode},
 			#{eyeType}, 
 			#{amountMoney},
 			#{primeMoney},

@@ -10,6 +10,7 @@ import com.shiguang.giveaway.service.GiveawayService;
 import com.shiguang.jiancha.domain.*;
 import com.shiguang.jiancha.service.*;
 import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
@@ -434,6 +435,7 @@ public class StoreSalesController {
         costDO.setSaleNumber(salesDO.getSaleNumber());
         costDO.setCostType(0L);
         costDO.setCostMoney(salesDO.getAmountMoney());
+        costDO.setOriginalPrice(salesDO.getPrimeMoney());
         costDO.setSaleName(salesDO.getSaleName());
         costDO.setIsSale(0L);
         costDO.setCreateTime(new Date());
@@ -459,6 +461,11 @@ public class StoreSalesController {
         logStatusDO.setSaleNumber(salesDO.getSaleNumber());
         logStatusDO.setLogisticStatus("销售完成");
         logStatusService.save(logStatusDO);
+        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
+        workRecoedDO.setType("销售");
+        workRecoedDO.setDateTime(new Date());
+        logStatusService.saveRecord(workRecoedDO);
         if (salesService.save(salesDO) > 0) {
             //this.editsetle(salesDO,model);
             return R.ok();

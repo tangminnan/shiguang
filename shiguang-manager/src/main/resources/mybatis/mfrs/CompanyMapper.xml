@@ -20,7 +20,7 @@
         from c_company
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="ids != null and ids != ''">and id in (#{ids}) </if>
+            <if test="ids != null and ids != ''">and FIND_IN_SET(id,#{ids}) </if>
             <if test="name != null and name != ''">and name = #{name}</if>
             <if test="province != null and province != ''">and province = #{province}</if>
             <if test="citys != null and citys != ''">and citys = #{citys}</if>
@@ -54,6 +54,7 @@
         select count(*) from c_company
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="ids != null and ids != ''">and FIND_IN_SET(id,#{ids}) </if>
             <if test="name != null and name != ''">and name = #{name}</if>
             <if test="province != null and province != ''">and province = #{province}</if>
             <if test="citys != null and citys != ''">and citys = #{citys}</if>

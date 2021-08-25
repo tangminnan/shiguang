@@ -93,24 +93,24 @@ function load() {
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
-	var cardMember = $("#cardNumber").val();
-	if ("" != cardMember){
-        $.ajax({
-            url : prefix+"/getMember",
-            type : "post",
-            data : {
-                'cardMember' : cardMember
-            },
-            success : function(r) {
-                if (r.code==0) {
-                    layer.msg(r.msg);
-                    //reLoad();
-                }else{
-                    layer.msg(r.msg);
-                }
-            }
-        });
-	}
+	// var cardMember = $("#cardNumber").val();
+	// if ("" != cardMember){
+     //    $.ajax({
+     //        url : prefix+"/getMember",
+     //        type : "post",
+     //        data : {
+     //            'cardMember' : cardMember
+     //        },
+     //        success : function(r) {
+     //            if (r.code==0) {
+     //                layer.msg(r.msg);
+     //                //reLoad();
+     //            }else{
+     //                layer.msg(r.msg);
+     //            }
+     //        }
+     //    });
+	// }
 
 }
 
