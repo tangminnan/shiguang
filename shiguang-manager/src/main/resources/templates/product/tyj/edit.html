@@ -107,20 +107,20 @@
                            type="hidden">
                     <em>*</em>
                 </td>
-                <td>批号管理：</td>
-                <td>
-                    <input th:field="*{tyj.batchid}" name="batchid" value="1" type="radio" id="PH-S"> <label
-                        for="PH-S"
-                        style="margin-right: 5%">是</label>
-                    <input th:field="*{tyj.batchid}" name="batchid" value="2" type="radio" id="PH-F"> <label
-                        for="PH-F">否</label>
-                    <em>*</em>
-                </td>
+                <!--<td>批号管理：</td>-->
+                <!--<td>-->
+                    <!--<input th:field="*{tyj.batchid}" name="batchid" value="1" type="radio" id="PH-S"> <label-->
+                        <!--for="PH-S"-->
+                        <!--style="margin-right: 5%">是</label>-->
+                    <!--<input th:field="*{tyj.batchid}" name="batchid" value="2" type="radio" id="PH-F"> <label-->
+                        <!--for="PH-F">否</label>-->
+                    <!--<em>*</em>-->
+                <!--</td>-->
                 <td>销售状态：</td>
                 <td>
-                    <input th:field="*{tyj.xsstate}" name="xsstate" value="1" type="radio">
+                    <input id="PH-S" th:field="*{tyj.xsstate}" name="xsstate" value="1" type="radio">
                     <label for="PH-S" style="margin-right: 5%">禁用</label>
-                    <input th:field="*{tyj.xsstate}" name="xsstate" value="0" type="radio">
+                    <input id="PH-F" th:field="*{tyj.xsstate}" name="xsstate" value="0" type="radio">
                     <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>

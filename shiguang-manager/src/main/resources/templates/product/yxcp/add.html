@@ -71,7 +71,7 @@
                 </td>
                 <td>球镜：</td>
                 <td>
-                    <select id="sphId" name="sphId">
+                    <select id="sphId" name="sphId" onchange="change1(this,cylId)">
                         <option value="">--请选择--</option>
                         <option th:each="ls:${sphDOList}"
                                 th:text="${ls.sph}"
@@ -82,7 +82,7 @@
                 </td>
                 <td>柱镜：</td>
                 <td>
-                    <select id="cylId" name="cylId">
+                    <select id="cylId" name="cylId" onchange="change1(sphId,this)">
                         <option value="">--请选择--</option>
                         <option th:each="ls:${cylDOList}"
                                 th:text="${ls.cyl}"
@@ -347,53 +347,48 @@
             }
         });
     }
-    var a1 = document.getElementById("producNum");
-    var a2 = document.getElementById("producCode");
-    var sum;
-    var sum1;
-    var a1_val = "4.00.00.000000000.0000";
-
-    function change(e, k, s) {
-        a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);
-        a1_val = a1.value.substring(0, 7) + a1_val.substring(7, 22);
-        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//黏贴
-    }
-
-    // <!--//———厂家型号与型号联动—————--
-    function liandong1(e) {//厂家型号
-        var val1 = document.getElementById("factory").value;
-        var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
-        // alert(val);
-        var proid = document.getElementById("proid");
-        document.getElementById("producFactory").value = va1;
-        sum = 17 - e.value.length;
-        sum1 = 22 - proid.value.length;
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + proid.value.toUpperCase();
-        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
-    }
-
-    function liandong2(e) {//型号
-        var val2 = document.getElementById("producFactory").value;
-        var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
-        var proid = document.getElementById("proid")
-        document.getElementById("factory").value = va2;
-        sum = 17 - e.value.length
-        sum1 = 22 - proid.value.length
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + proid.value.toUpperCase()
-        // a1.value = "4547784654654"
-        // alert(a1.value)
-        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
-    }
-
-    function choiceProid(e) {//商品编号
-        var producFactory = document.getElementById("producFactory")
-        sum = 17 - producFactory.value.length;
-        sum1 = 22 - e.value.length;
-        a1.value = a1_val.substring(0, sum) + producFactory.value.toUpperCase() + a1_val.substring(17, sum1) + e.value.toUpperCase()
-        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
-    }
-
-
+        var a1 = document.getElementById("producNum");
+        var a2 = document.getElementById("producCode");
+        var cylId = document.getElementById("cylId");
+        var sphId = document.getElementById("sphId");
+        // console.log(cylId);
+        // console.log(sphId);
+        var sum;
+        var a1_val = "3.00.00.000000000.0000";
+        function change(e, k, s) {
+            a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);
+            a1_val = a1.value.substring(0, 7) + a1_val.substring(7, 22);
+            a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//黏贴
+        }
+        function change1(e, err) {
+            var select1_val = e.options[e.options.selectedIndex].innerText
+            var select2_val = err.options[err.options.selectedIndex].innerText
+            // alert(e.value,err.value)
+            if (e.value == "") {
+                select1_val = 0
+                //    alert(select1_val)
+            } else if (err.value == "") {
+                select2_val = 0
+                // alert(select2_val)
+            }
+            // console.log(select1_val,select2_val);
+            select1_val = ZF(select1_val)
+            select2_val = ZF(select2_val)
+            sum = select1_val.replace(".", "").replace("+", "").replace("-", "")
+                + select2_val.replace(".", "").replace("+", "").replace("-", "")
+            a1.value = a1.value.substring(0, 8) + sum.padEnd("9", "000000000") + a1.value.substring(17, 22);
+            a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");
+            console.log(a1.value.substring(18, 22));
+        }
+        function ZF(e) {
+            // alert(e.indexOf("+"))
+            if (e.indexOf("+") == 0) {
+                e = "Z" + e
+            } else {
+                e = "F" + e
+            }
+            return e
+        }
     /**
      * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位
      */

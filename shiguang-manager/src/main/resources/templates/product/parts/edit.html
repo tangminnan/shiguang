@@ -85,7 +85,6 @@
                 <td>配件型：</td>
                 <td>
                     <select id="partsStyle" name="partsStyle">
-                        <option></option>
                         <option value="框镜" th:field="*{parts.partsStyle}">框镜</option>
                         <option value="隐形" th:field="*{parts.partsStyle}">隐形</option>
                     </select>
@@ -105,20 +104,20 @@
                            type="hidden">
                     <em>*</em>
                 </td>
-                <td>批号管理：</td>
-                <td>
-                    <input th:field="*{parts.batchid}" name="batchid" value="1" type="radio" id="PH-S"> <label
-                        for="PH-S"
-                        style="margin-right: 5%">是</label>
-                    <input th:field="*{parts.batchid}" name="batchid" value="2" type="radio" id="PH-F"> <label
-                        for="PH-F">否</label>
-                    <em>*</em>
-                </td>
+                <!--<td>批号管理：</td>-->
+                <!--<td>-->
+                    <!--<input th:field="*{parts.batchid}" name="batchid" value="1" type="radio" id="PH-S"> <label-->
+                        <!--for="PH-S"-->
+                        <!--style="margin-right: 5%">是</label>-->
+                    <!--<input th:field="*{parts.batchid}" name="batchid" value="2" type="radio" id="PH-F"> <label-->
+                        <!--for="PH-F">否</label>-->
+                    <!--<em>*</em>-->
+                <!--</td>-->
                 <td>销售状态：</td>
                 <td>
-                    <input th:field="*{parts.xsstate}" name="xsstate" value="1" type="radio">
+                    <input id="PH-S" th:field="*{parts.xsstate}" name="xsstate" value="1" type="radio">
                     <label for="PH-S" style="margin-right: 5%">禁用</label>
-                    <input th:field="*{parts.xsstate}" name="xsstate" value="0" type="radio">
+                    <input id="PH-F" th:field="*{parts.xsstate}" name="xsstate" value="0" type="radio">
                     <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>

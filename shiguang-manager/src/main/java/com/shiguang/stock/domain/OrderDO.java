@@ -112,6 +112,14 @@ private String brandname;
     public void setTransferPricecount(String transferPricecount) {
         this.transferPricecount = transferPricecount;
     }
+    //批号
+    private String batch;
+    //注册证号
+    private String zhuceNumber;
+    //生产日期
+    private String produceDay;
+    //效期
+    private String useday;
 
     //尺寸
     private String size;
@@ -178,6 +186,16 @@ private String brandname;
     private String curvatureEr;
     //定做周期（天）
     private Long cycle;
+
+    private  String QRCode;
+
+    public String getQRCode() {
+        return QRCode;
+    }
+
+    public void setQRCode(String QRCode) {
+        this.QRCode = QRCode;
+    }
 
     /**
      * 设置：主键
@@ -485,6 +503,54 @@ private String brandname;
      */
     public String getBeizhu() {
         return beizhu;
+    }
+    /**
+     * 设置：批号
+     */
+    public void setBatch(String batch) {
+        this.batch = batch;
+    }
+    /**
+     * 获取：批号
+     */
+    public String getBatch() {
+        return batch;
+    }
+    /**
+     * 设置：注册证号
+     */
+    public void setZhuceNumber(String zhuceNumber) {
+        this.zhuceNumber = zhuceNumber;
+    }
+    /**
+     * 获取：注册证号
+     */
+    public String getZhuceNumber() {
+        return zhuceNumber;
+    }
+    /**
+     * 设置：生产日期
+     */
+    public void setProduceDay(String produceDay) {
+        this.produceDay = produceDay;
+    }
+    /**
+     * 获取：生产日期
+     */
+    public String getProduceDay() {
+        return produceDay;
+    }
+    /**
+     * 设置：效期
+     */
+    public void setUseday(String useday) {
+        this.useday = useday;
+    }
+    /**
+     * 获取：效期
+     */
+    public String getUseday() {
+        return useday;
     }
 
     /**

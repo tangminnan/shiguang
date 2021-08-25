@@ -69,7 +69,7 @@
             <tr>
                 <td>型号：</td>
                 <td>
-                    <input th:value="${oldlens.producFactory}" style="background-color: #e4e4e4"
+                    <input th:value="${oldlens .producFactory}" style="background-color: #e4e4e4"
                            oninput="if(value.length>9)value=value.slice(0,9)"
                            type="text" readonly>
                     <input id="producFactory" name="producFactory" th:value="${oldlens.producFactory}"
@@ -111,15 +111,15 @@
                            type="hidden">
                 </td>
 
-                <td>批号管理：</td>
-                <td>
-                    <input th:field="*{oldlens.batchid}" name="batchid" value="1" type="radio" id="PH-S"> <label
-                        for="PH-S"
-                        style="margin-right: 5%">是</label>
-                    <input th:field="*{oldlens.batchid}" name="batchid" value="2" type="radio" id="PH-F"> <label
-                        for="PH-F">否</label>
-                    <em>*</em>
-                </td>
+                <!--<td>批号管理：</td>-->
+                <!--<td>-->
+                    <!--<input th:field="*{oldlens.batchid}" name="batchid" value="1" type="radio" id="PH-S"> <label-->
+                        <!--for="PH-S"-->
+                        <!--style="margin-right: 5%">是</label>-->
+                    <!--<input th:field="*{oldlens.batchid}" name="batchid" value="2" type="radio" id="PH-F"> <label-->
+                        <!--for="PH-F">否</label>-->
+                    <!--<em>*</em>-->
+                <!--</td>-->
                 <td>销售状态：</td>
                 <td>
                     <input th:field="*{oldlens.xsstate}" name="xsstate" value="1" type="radio">
@@ -138,19 +138,19 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>镜架尺寸：</td>
-                <td>
+                <td style="width:200px">镜架尺寸：</td>
+                <td style="width:200px">
                     <input id="size" name="size" th:value="${oldlens.size}" class="form-control"
                            type="text">
                 </td>
-                <td>颜色：</td>
-                <td>
+                <td style="width:200px">颜色：</td>
+                <td style="width:200px">
                     <select id="color" name="color" th:value="${oldlens.color}" class="form-control"
                             data-actions-box="false" data-size="5">
                     </select>
                 </td>
-                <td>款式：</td>
-                <td>
+                <td style="width:200px">款式：</td>
+                <td style="width:200px">
                     <select id="styleId" name="styleId" th:value="${oldlens.styleId}"
                             class="form-control"
                             data-actions-box="false" data-size="5">
@@ -236,24 +236,28 @@
         var styleIds = $("input[name='styleIds']").val();
         $("#styleId").find("[value='" + styleIds + "']").attr("selected", true);
     });
-    var a1 = document.getElementById("producNum")
-    var a2 = document.getElementById("producCode")
+    var a1 = document.getElementById("producNum");
+    var a2 = document.getElementById("producCode");
     var sum;
     var sum1;
     var a1_val = a1.value.substring(0, 7) + ".000000000.0000";
+    // alert(a1_val);
 
     // <!--//———厂家型号与型号联动—————--
     function liandong1(e) {//厂家型号
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
         // alert(val);
-        var producColor = document.getElementById("producColor");
+        // var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        sum1 = 22 - producColor.value.length;
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase();
+        sum1 = 22;
+        // a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + "0000";------【可以用】
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + ".0000";
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
     }
+
+
 
     /**
      * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位

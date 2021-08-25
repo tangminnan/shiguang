@@ -37,25 +37,19 @@
             </td>
             <td>商品品种：</td>
             <td>
-                <input type="text" th:value="${brandname}" readonly/>
-                <input id="brandid" type="hidden" th:value="${brandid}"/>
-                <input type="button" class="XZ-btn" value="选择"/>
+                <!--<input id="brandnum" name="brandnum" type="hidden" value=""/>-->
+                <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
+                <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
         </tr>
         <tr>
             <td>商品类别：</td>
             <td>
-                <select disabled>
-                    <option>配件</option>
+                <select id="goodsid" name="goodsid" disabled>
+                    <option value="2" >镜架</option>
                 </select>
             </td>
-            <td>新增时间：</td>
-            <td>
-                <input type="text" value="2021"/>至
-                <input type="text" value="2021"/>
-            </td>
-        </tr>
-        <tr>
+
             <td>配件类型：</td>
             <td>
                 <select id="partsStyle" name="partsStyle">
@@ -65,13 +59,18 @@
                 </select>
             </td>
         </tr>
+        <!--<tr>-->
+        <!--<td>新增时间：</td>-->
+        <!--<td>-->
+        <!--<input type="text" value="2021"/>至-->
+        <!--<input type="text" value="2021"/>-->
+        <!--</td>-->
+        <!--</tr>-->
         <tr>
             <td>型号：</td>
             <td>
                 <input id="producFactory" name="producFactory" type="text"/>
             </td>
-        </tr>
-        <tr>
             <td>厂家型号：</td>
             <td>
                 <input id="factory" name="factory" type="text"/>
@@ -80,18 +79,14 @@
         <tr>
             <td>标准零售价格：</td>
             <td>
-                <select name="" id="">
-                    <option value="">已设置零售价</option>
-                    <option value="">未设置零售价</option>
-                </select>
-                <input type="text"/> ~ <input type="text"/>
+                <input id="retailPrice" name="retailPrice" type="text"/> ~ <input id="retailPrice2" name="retailPrice2" type="text"/>
             </td>
         </tr>
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
         <input type="button" value="查询" onclick="getPeijian()"/>
-        <input type="button" class="empty" value="清空"/>
+        <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
 
@@ -162,6 +157,9 @@
         var partsStyle = $("#partsStyle option:selected").val();
         var producFactory = $("#producFactory").val();
         var factory = $("#factory").val();
+        var retailPrice = $("#retailPrice").val();
+        var retailPrice2 = $("#retailPrice2").val();
+
         $(".val").remove();
         $.ajax({
             url: '/stock/stock/selectpeijian',
@@ -175,7 +173,9 @@
                 'brandid': brandid,
                 'partsStyle': partsStyle,
                 'producFactory': producFactory,
-                'factory': factory
+                'factory': factory,
+                'retailPrice': retailPrice,
+                'retailPrice2': retailPrice2
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
@@ -195,6 +195,42 @@
                 }
             }
         })
+    }
+    function choiceBrand() {
+        var goodsid = document.getElementById('goodsid').value;
+        var mfrsid = document.getElementById('mfrsid').value;
+        // alert(goodsid);
+        if (mfrsid == "") {
+            alert("请选择制造商！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findbrand/" + mfrsid+"/"+goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandname").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                        // $("#brandNames").val(rows[i].brandname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    //清空
+    function clearText() {
+        var controls = document.getElementsByTagName('input');
+        for (var i = 0; i < controls.length; i++) {
+            if (controls[i].type == 'text') {
+                controls[i].value = '';
+            }
+        }
     }
 </script>
 </body>

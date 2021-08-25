@@ -1324,10 +1324,12 @@
         goodsidstr($(".select_value").val());
     });
     $(".input_del").click(function () {
-        $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+        // console.log($(this).parentsUntil('table').eq(2).parent());
         // $('table tbody').empty();
-        $(this).parentsUntil('table').value="";
-
+        // $(this).parentsUntil('table').value="";
+        $(this).parentsUntil('table').eq(2).parent().find("input").not(".input_del").val("")
+        $(this).parentsUntil('table').eq(2).parent().find("select").val("")
+        $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
     });
 
     //清空

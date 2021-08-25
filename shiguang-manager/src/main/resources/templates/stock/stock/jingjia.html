@@ -32,7 +32,7 @@
         <tr>
             <td>制造商：</td>
             <td>
-                <input type="text" th:value="${mfrsname}" readonly style="background-color: #e4e4e4"/>
+                <input type="text" th:value="${mfrsname}" readonly style="background-color: #e4e4e4" />
                 <input id="mfrsid" type="hidden" th:value="${mfrsid}"/>
             </td>
             <td>商品品种：</td>
@@ -84,15 +84,13 @@
             </td>
         </tr>
         <tr>
-            <td>型号：</td>
-            <td>
-                <input id="producFactory" name="producFactory" type="text"/>
-            </td>
-        </tr>
-        <tr>
             <td>厂家型号：</td>
             <td>
                 <input id="factory" name="factory" type="text"/>
+            </td>
+            <td>型号：</td>
+            <td>
+                <input id="producFactory" name="producFactory" type="text"/>
             </td>
         </tr>
         <tr>
@@ -105,7 +103,7 @@
     <!--保存/清空-->
     <div class="BQ-btn">
         <input type="button" value="查询" onclick="getJIngjia()"/>
-        <input type="button" class="empty" value="清空"/>
+        <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
 
@@ -184,6 +182,10 @@
         var technologyId = $("#technologyId option:selected").val();
         var producFactory = $("#producFactory").val();
         var factory = $("#factory").val();
+        var retailPrice = $("#retailPrice").val();
+        var retailPrice2 = $("#retailPrice2").val();
+
+
         $(".val").remove();
         $.ajax({
             url: '/stock/stock/selectjingjia',
@@ -201,7 +203,9 @@
                 'materialid': materialid,
                 'technologyId': technologyId,
                 'producFactory': producFactory,
-                'factory': factory
+                'factory': factory,
+                'retailPrice': retailPrice,
+                'retailPrice2': retailPrice2
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
@@ -249,6 +253,42 @@
                 }
             });
             layer.full(toIndex);
+        }
+    }
+    function choiceBrand() {
+        var goodsid = document.getElementById('goodsid').value;
+        var mfrsid = document.getElementById('mfrsid').value;
+        // alert(goodsid);
+        if (mfrsid == "") {
+            alert("请选择制造商！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findbrand/" + mfrsid+"/"+goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandname").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                        // $("#brandNames").val(rows[i].brandname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    //清空
+    function clearText() {
+        var controls = document.getElementsByTagName('input');
+        for (var i = 0; i < controls.length; i++) {
+            if (controls[i].type == 'text') {
+                controls[i].value = '';
+            }
         }
     }
 </script>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.stock.dao.PidiaoDao">
+
+	<select id="get" resultType="com.shiguang.stock.domain.PidiaoDO">
+		select `id`,`pidiao_number`,`guanlian_number`,`out_department`,`in_position`,`in_company`,`in_department`,`zhidan_people`,`danju_day`,
+		`outsourcing_number`,`beizhu`,`goods_num`,`goods_name`,`produc_factory`,`need_count`,`goods_count`,`use_count`,`goods_code`,
+		`batch`,`zhuce_number`,`produce_day`,`useday`,`all_count` from stock_pidiao where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.stock.domain.PidiaoDO">
+		select `id`,`pidiao_number`,`guanlian_number`,`out_department`,`in_position`,`in_company`,`in_department`,`zhidan_people`,`danju_day`,
+		`outsourcing_number`,`beizhu`,`goods_num`,`goods_name`,`produc_factory`,`need_count`,`goods_count`,`use_count`,`goods_code`,
+		`batch`,`zhuce_number`,`produce_day`,`useday`,`all_count` from stock_pidiao
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="pidiaoNumber != null and pidiaoNumber != ''"> and pidiao_number = #{pidiaoNumber} </if>
+		  		  <if test="guanlianNumber != null and guanlianNumber != ''"> and guanlian_number = #{guanlianNumber} </if>
+		  		  <if test="outDepartment != null and outDepartment != ''"> and out_department = #{outDepartment} </if>
+		  		  <if test="inPosition != null and inPosition != ''"> and in_position = #{inPosition} </if>
+		  		  <if test="inCompany != null and inCompany != ''"> and in_company = #{inCompany} </if>
+		  		  <if test="inDepartment != null and inDepartment != ''"> and in_department = #{inDepartment} </if>
+		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
+		  		  <if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
+		  		  <if test="outsourcingNumber != null and outsourcingNumber != ''"> and outsourcing_number = #{outsourcingNumber} </if>
+		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
+		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+		  		  <if test="producFactory != null and producFactory != ''"> and produc_factory = #{producFactory} </if>
+		  		  <if test="needCount != null and needCount != ''"> and need_count = #{needCount} </if>
+		  		  <if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
+		  		  <if test="useCount != null and useCount != ''"> and use_count = #{useCount} </if>
+		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+		  		  <if test="batch != null and batch != ''"> and batch = #{batch} </if>
+		  		  <if test="zhuceNumber != null and zhuceNumber != ''"> and zhuce_number = #{zhuceNumber} </if>
+		  		  <if test="produceDay != null and produceDay != ''"> and produce_day = #{produceDay} </if>
+		  		  <if test="useday != null and useday != ''"> and useday = #{useday} </if>
+		  		  <if test="allCount != null and allCount != ''"> and all_count = #{allCount} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from stock_pidiao
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="pidiaoNumber != null and pidiaoNumber != ''"> and pidiao_number = #{pidiaoNumber} </if>
+		  		  <if test="guanlianNumber != null and guanlianNumber != ''"> and guanlian_number = #{guanlianNumber} </if>
+		  		  <if test="outDepartment != null and outDepartment != ''"> and out_department = #{outDepartment} </if>
+		  		  <if test="inPosition != null and inPosition != ''"> and in_position = #{inPosition} </if>
+		  		  <if test="inCompany != null and inCompany != ''"> and in_company = #{inCompany} </if>
+		  		  <if test="inDepartment != null and inDepartment != ''"> and in_department = #{inDepartment} </if>
+		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
+		  		  <if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
+		  		  <if test="outsourcingNumber != null and outsourcingNumber != ''"> and outsourcing_number = #{outsourcingNumber} </if>
+		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
+		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+		  		  <if test="producFactory != null and producFactory != ''"> and produc_factory = #{producFactory} </if>
+		  		  <if test="needCount != null and needCount != ''"> and need_count = #{needCount} </if>
+		  		  <if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
+		  		  <if test="useCount != null and useCount != ''"> and use_count = #{useCount} </if>
+		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+		  		  <if test="batch != null and batch != ''"> and batch = #{batch} </if>
+		  		  <if test="zhuceNumber != null and zhuceNumber != ''"> and zhuce_number = #{zhuceNumber} </if>
+		  		  <if test="produceDay != null and produceDay != ''"> and produce_day = #{produceDay} </if>
+		  		  <if test="useday != null and useday != ''"> and useday = #{useday} </if>
+		  		  <if test="allCount != null and allCount != ''"> and all_count = #{allCount} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.stock.domain.PidiaoDO">
+		insert into stock_pidiao
+		(
+			`id`, 
+			`pidiao_number`, 
+			`guanlian_number`, 
+			`out_department`, 
+			`in_position`, 
+			`in_company`, 
+			`in_department`, 
+			`zhidan_people`, 
+			`danju_day`, 
+			`outsourcing_number`, 
+			`beizhu`, 
+			`goods_num`, 
+			`goods_name`, 
+			`produc_factory`, 
+			`need_count`, 
+			`goods_count`, 
+			`use_count`, 
+			`goods_code`, 
+			`batch`, 
+			`zhuce_number`, 
+			`produce_day`, 
+			`useday`, 
+			`all_count`
+		)
+		values
+		(
+			#{id}, 
+			#{pidiaoNumber}, 
+			#{guanlianNumber}, 
+			#{outDepartment}, 
+			#{inPosition}, 
+			#{inCompany}, 
+			#{inDepartment}, 
+			#{zhidanPeople}, 
+			#{danjuDay}, 
+			#{outsourcingNumber}, 
+			#{beizhu}, 
+			#{goodsNum}, 
+			#{goodsName}, 
+			#{producFactory}, 
+			#{needCount}, 
+			#{goodsCount}, 
+			#{useCount}, 
+			#{goodsCode}, 
+			#{batch}, 
+			#{zhuceNumber}, 
+			#{produceDay}, 
+			#{useday}, 
+			#{allCount}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.stock.domain.PidiaoDO">
+		update stock_pidiao 
+		<set>
+			<if test="pidiaoNumber != null">`pidiao_number` = #{pidiaoNumber}, </if>
+			<if test="guanlianNumber != null">`guanlian_number` = #{guanlianNumber}, </if>
+			<if test="outDepartment != null">`out_department` = #{outDepartment}, </if>
+			<if test="inPosition != null">`in_position` = #{inPosition}, </if>
+			<if test="inCompany != null">`in_company` = #{inCompany}, </if>
+			<if test="inDepartment != null">`in_department` = #{inDepartment}, </if>
+			<if test="zhidanPeople != null">`zhidan_people` = #{zhidanPeople}, </if>
+			<if test="danjuDay != null">`danju_day` = #{danjuDay}, </if>
+			<if test="outsourcingNumber != null">`outsourcing_number` = #{outsourcingNumber}, </if>
+			<if test="beizhu != null">`beizhu` = #{beizhu}, </if>
+			<if test="goodsNum != null">`goods_num` = #{goodsNum}, </if>
+			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+			<if test="producFactory != null">`produc_factory` = #{producFactory}, </if>
+			<if test="needCount != null">`need_count` = #{needCount}, </if>
+			<if test="goodsCount != null">`goods_count` = #{goodsCount}, </if>
+			<if test="useCount != null">`use_count` = #{useCount}, </if>
+			<if test="goodsCode != null">`goods_code` = #{goodsCode}, </if>
+			<if test="batch != null">`batch` = #{batch}, </if>
+			<if test="zhuceNumber != null">`zhuce_number` = #{zhuceNumber}, </if>
+			<if test="produceDay != null">`produce_day` = #{produceDay}, </if>
+			<if test="useday != null">`useday` = #{useday}, </if>
+			<if test="allCount != null">`all_count` = #{allCount}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from stock_pidiao where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from stock_pidiao where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

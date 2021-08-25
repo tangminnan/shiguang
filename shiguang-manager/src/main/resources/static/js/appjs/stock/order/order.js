@@ -73,27 +73,34 @@ function load() {
                     //     field: '',
                     //     title: '审核日期'
                     // },
-                    // {
-                    //     title: '操作',
-                    //     field: 'id',
-                    //     align: 'center',
-                    //     formatter: function (value, row, index) {
-                    //         var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                    //             + row.id
-                    //             + '\')"><i class="fa fa-edit"></i></a> ';
-                    //         var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                    //             + row.id
-                    //             + '\')"><i class="fa fa-remove"></i></a> ';
-                    //         var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-                    //             + row.id
-                    //             + '\')"><i class="fa fa-key"></i></a> ';
-                    //         return e + d;
-                    //     }
-                    // }
+                    {
+                        title: '操作',
+                        field: 'danjuNumber',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            // var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+                            //     + row.id
+                            //     + '\')"><i class="fa fa-edit"></i></a> ';
+                            // var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                            //     + row.id
+                            //     + '\')"><i class="fa fa-remove"></i></a> ';
+                            // var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+                            //     + row.id
+                            //     + '\')"><i class="fa fa-key"></i></a> ';
+                            var n = '<a class="btn btn-primary btn-xs" href="#" title="条形码打印"  mce_href="#" onclick="code(\''
+                                + row.danjuNumber
+                                + '\')" style="text-decoration: none;">条形码打印</a>';
+                            return n ;
+                        }
+                    }
                 ]
             });
 }
 
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
+}
+function code(danjuNumber){
+    alert(danjuNumber);
+    window.open("/stock/stock/code?danjuNumber="+danjuNumber);
 }

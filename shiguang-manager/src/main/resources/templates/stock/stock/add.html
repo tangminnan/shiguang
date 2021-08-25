@@ -201,6 +201,10 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                             <td>数量</td>
 
 
@@ -230,6 +234,10 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji2">
@@ -261,6 +269,10 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji3">
@@ -292,6 +304,10 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji4">
@@ -312,10 +328,6 @@
                             <td>型号</td>
                             <td>主容量</td>
                             <td>次容量</td>
-                            <!--<td>效期</td>-->
-                            <!--<td>批号</td>-->
-                            <!--<td>注册证号</td>-->
-                            <!--<td>生产日期</td>-->
                             <td>商品条码</td>
                             <td style="display: none">标准零售价</td>
                             <td style="display: none">含税单价</td>
@@ -323,6 +335,10 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji5">
@@ -350,6 +366,10 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji6">
@@ -378,6 +398,10 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji7">
@@ -403,6 +427,10 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                             <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji8">
@@ -428,6 +456,10 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                             <td>数量</td>
                         </tr>
 
@@ -738,7 +770,10 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-
+                            "<td >" + "效期" + "</td>\n" +
+                            "<td >" +"批号 "+ "</td>\n" +
+                            "<td >" +"注册证号" + "</td>\n" +
+                            "<td >" + "生产日期" + "</td>\n" +
                             "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
@@ -780,7 +815,10 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-
+                            "<td >" + "效期" + "</td>\n" +
+                            "<td >" +"批号 "+ "</td>\n" +
+                            "<td >" +"注册证号" + "</td>\n" +
+                            "<td >" + "生产日期" + "</td>\n" +
                             "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
@@ -827,7 +865,10 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-
+                            "<td >" + "效期" + "</td>\n" +
+                            "<td >" +"批号 "+ "</td>\n" +
+                            "<td >" +"注册证号" + "</td>\n" +
+                            "<td >" + "生产日期" + "</td>\n" +
                             "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
@@ -874,7 +915,10 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-
+                            "<td >" + "效期" + "</td>\n" +
+                            "<td >" +"批号 "+ "</td>\n" +
+                            "<td >" +"注册证号" + "</td>\n" +
+                            "<td >" + "生产日期" + "</td>\n" +
                             "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
@@ -901,10 +945,6 @@
                             "<td  >" + rows[i].producFactory + "</td>\n" +
                             "<td  >" + rows[i].mainCapacity + "</td>\n" +
                             "<td  >" + rows[i].secondCapacity + "</td>\n" +
-                            // "<td  ></td>\n" +
-                            // "<td  ></td>\n" +
-                            // "<td  ></td>\n" +
-                            // "<td  ></td>\n" +
                             "<td  >" + rows[i].producCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
                             "<td style='display: none'>" + rows[i].retailPrice + "</td>\n" +
@@ -919,7 +959,10 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td style='display: none' >" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-
+                            "<td >" + "效期" + "</td>\n" +
+                            "<td >" +"批号 "+ "</td>\n" +
+                            "<td >" +"注册证号" + "</td>\n" +
+                            "<td >" + "生产日期" + "</td>\n" +
                             "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
@@ -962,7 +1005,10 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-
+                            "<td >" + "效期" + "</td>\n" +
+                            "<td >" +"批号 "+ "</td>\n" +
+                            "<td >" +"注册证号" + "</td>\n" +
+                            "<td >" + "生产日期" + "</td>\n" +
                             "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
@@ -1006,7 +1052,10 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-
+                            "<td >" + "效期" + "</td>\n" +
+                            "<td >" +"批号 "+ "</td>\n" +
+                            "<td >" +"注册证号" + "</td>\n" +
+                            "<td >" + "生产日期" + "</td>\n" +
                             "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
@@ -1047,7 +1096,10 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-
+                            "<td >" + "效期" + "</td>\n" +
+                            "<td >" +"批号 "+ "</td>\n" +
+                            "<td >" +"注册证号" + "</td>\n" +
+                            "<td >" + "生产日期" + "</td>\n" +
                             "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }
@@ -1088,7 +1140,10 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td style='display: none' >" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-
+                            "<td >" + "效期" + "</td>\n" +
+                            "<td >" +"批号 "+ "</td>\n" +
+                            "<td >" +"注册证号" + "</td>\n" +
+                            "<td >" + "生产日期" + "</td>\n" +
                             "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
                     }
                 }

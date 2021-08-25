@@ -30,4 +30,5 @@ public interface OrderDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+	List<OrderDO> getCode(Map<String, Object> map);
 }

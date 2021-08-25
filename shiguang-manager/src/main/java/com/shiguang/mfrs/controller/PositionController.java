@@ -5,6 +5,7 @@ import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.PositionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -49,9 +50,18 @@ public class PositionController {
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("mfrs:position:position")
-    public PageUtils list(@RequestParam Map<String, Object> params) {
+    public PageUtils list(@RequestParam Map<String, Object> params,Model model) {
         //查询列表数据
         Query query = new Query(params);
+        //———获取当前登录用户的公司id————
+        String companyid=ShiroUtils.getUser().getCompanyId();
+        if(companyid == null){
+            String departNumber=ShiroUtils.getUser().getStoreNum();
+            query.put("departNumber",departNumber);
+        }else if (companyid != null){
+            query.put("companyid",companyid);
+
+        }
         List<PositionDO> positionList = positionService.list(query);
         int total = positionService.count(query);
         PageUtils pageUtils = new PageUtils(positionList, total);
@@ -63,6 +73,15 @@ public class PositionController {
     String add(Model model) {
         //部门
         Map<String, Object> map = new HashMap<>();
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if(companyId == null){
+            String departNumber=ShiroUtils.getUser().getStoreNum();
+            map.put("departNumber",departNumber);
+        }else if (companyId != null){
+            map.put("companyId",companyId);
+
+        }
         map.put("status","0");
         List<DepartmentDO> departmentDOList = departmentService.list(map);
         model.addAttribute("departmentDOList", departmentDOList);

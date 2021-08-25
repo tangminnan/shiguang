@@ -1,13 +1,11 @@
 package com.shiguang.stock.controller;
 
 import com.shiguang.common.utils.*;
-import com.shiguang.mfrs.domain.GoodsDO;
-import com.shiguang.mfrs.domain.MaterialDO;
-import com.shiguang.mfrs.domain.PositionDO;
-import com.shiguang.mfrs.service.GoodsService;
-import com.shiguang.mfrs.service.MaterialService;
-import com.shiguang.mfrs.service.PositionService;
+import com.shiguang.mfrs.domain.*;
+import com.shiguang.mfrs.service.*;
 import com.shiguang.product.domain.*;
+import com.shiguang.product.service.OlddegreesService;
+import com.shiguang.product.service.ProducaService;
 import com.shiguang.product.service.TechnologyService;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
@@ -20,10 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 库存表
@@ -36,6 +31,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/stock/stock")
 public class StockController {
+    private ProducaService producaService;
     @Autowired
     private StockService stockService;
     //商品类别
@@ -53,6 +49,34 @@ public class StockController {
     //采购订单
     @Autowired
     private OrderService orderService;
+
+
+    //材料分类
+    @Autowired
+    private LensService lensService;
+    //折射率
+    @Autowired
+    private RefractivityService refractivityService;
+    //光度分类
+    @Autowired
+    private LightService lightService;
+    //镜片功能
+    @Autowired
+    private FunctionService functionService;
+    //渐进片分类
+    @Autowired
+    private GradualService gradualService;
+
+    //使用类型
+    @Autowired
+    private UsageService usageService;
+    //抛弃类型分类
+    @Autowired
+    private TypeService typeService;
+    //老花镜度数
+    @Autowired
+    private OlddegreesService olddegreesService;
+
 
     @GetMapping()
     @RequiresPermissions("stock:stock:stock")
@@ -94,6 +118,7 @@ public class StockController {
         //———获取当前登录所在部门编码————
         String storeNum =  ShiroUtils.getUser().getStoreNum();
         map.put("storeNum", storeNum);
+        map.put("positionOrder","2");
         List<PositionDO> positionDOList = positionService.list(map);
         model.addAttribute("positionDOList", positionDOList);
         //———获取当前登录用户的名称————
@@ -318,6 +343,7 @@ public class StockController {
                                          Integer mfrsid, Integer brandid,String brandname,
                                          String producFactorycolor, String size, Integer materialid,
                                          Integer technologyId, String producFactory, String factory,
+                                         String retailPrice, String retailPrice2,
                                          Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum", producNum);
@@ -332,6 +358,8 @@ public class StockController {
         map.put("technologyId", technologyId);
         map.put("producFactory", producFactory);
         map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
         List<ProducaDO> producaDOList = stockService.selectJingjia(map);
         model.addAttribute("producaDOList", producaDOList);
         return producaDOList;
@@ -350,8 +378,9 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectpeijian")
     public List<PartsDO> selectpeijian(String producNum, String producCode, String producName,
-                                       Integer mfrsid, Integer brandid,
+                                       Integer mfrsid, Integer brandid,String brandname,
                                        String partsStyle, String producFactory, String factory,
+                                       String retailPrice, String retailPrice2,
                                        Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum", producNum);
@@ -359,9 +388,12 @@ public class StockController {
         map.put("producName", producName);
         map.put("mfrsid", mfrsid);
         map.put("brandid", brandid);
+        map.put("brandname", brandname);
         map.put("partsStyle", partsStyle);
         map.put("producFactory", producFactory);
         map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
         List<PartsDO> partsDOList = stockService.selectPeijian(map);
         model.addAttribute("partsDOList", partsDOList);
         return partsDOList;
@@ -373,15 +405,49 @@ public class StockController {
     String jingpian(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
+        Map<String, Object> map = new HashMap<>();
+        //材料分类
+        List<LensDO> lensDOList = lensService.list(map);
+        model.addAttribute("lensDOList", lensDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
+        //光度分类
+        List<LightDO> lightDOList = lightService.list(map);
+        model.addAttribute("lightDOList", lightDOList);
+        //渐进片分类
+        List<GradualDO> gradualDOList = gradualService.list(map);
+        model.addAttribute("gradualDOList", gradualDOList);
+        //镜片功能
+        List<FunctionDO> functionDOList = functionService.list(map);
+        model.addAttribute("functionDOList", functionDOList);
+
+
         return "/stock/stock/jingpian";
     }
 
     //镜片List-----------成品
     @ResponseBody
     @RequestMapping(value = "/selectJpcp")
-    public List<JpcpDO> selectJpcp(Integer mfrsid, Model model) {
+    public List<JpcpDO> selectJpcp(Integer mfrsid,String producNum, String producCode, String producName,
+                                   Integer brandid,String brandname, Integer lensId,Integer refractivityid,Integer gradualId,
+                                   Integer lightId,Integer functionId, String factory,String retailPrice,String retailPrice2,
+                                   Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("mfrsid", mfrsid);
+        map.put("producNum", producNum);
+        map.put("producCode", producCode);
+        map.put("producName", producName);
+        map.put("brandid", brandid);
+        map.put("brandname", brandname);
+        map.put("lensId", lensId);
+        map.put("refractivityid", refractivityid);
+        map.put("lightId", lightId);
+        map.put("functionId", functionId);
+        map.put("gradualId", gradualId);
+        map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
         List<JpcpDO> jpcpDOList = stockService.selectJpcp(map);
         model.addAttribute("jpcpDOList", jpcpDOList);
         return jpcpDOList;
@@ -390,28 +456,65 @@ public class StockController {
     //镜片List-----------定做
     @ResponseBody
     @RequestMapping(value = "/selectJpdz")
-    public List<JpdzDO> selectJpdz(Integer mfrsid, Model model) {
+    public List<JpdzDO> selectJpdz(Integer mfrsid,String producNum, String producCode, String producName,
+                                   Integer brandid,String brandname, Integer lensId,Integer refractivityid,Integer gradualId,
+                                   Integer lightId,Integer functionId, String factory,String retailPrice,String retailPrice2,
+                                   Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("mfrsid", mfrsid);
+        map.put("producNum", producNum);
+        map.put("producCode", producCode);
+        map.put("producName", producName);
+        map.put("brandid", brandid);
+        map.put("brandname", brandname);
+        map.put("lensId", lensId);
+        map.put("refractivityid", refractivityid);
+        map.put("lightId", lightId);
+        map.put("functionId", functionId);
+        map.put("gradualId", gradualId);
+        map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
         List<JpdzDO> jpdzDOList = stockService.selectJpdz(map);
         model.addAttribute("jpdzDOList", jpdzDOList);
         return jpdzDOList;
     }
-//跳转隐形商品查询
+    //跳转隐形商品查询
     @GetMapping("/yinxing/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:yinxing")
     String yinxing(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
+        Map<String, Object> map = new HashMap<>();
+        //使用类型
+        List<UsageDO> usageDOList = usageService.list(map);
+        model.addAttribute("usageDOList", usageDOList);
+        //抛弃类型分类
+        List<TypeDO> typeDOList = typeService.list(map);
+        model.addAttribute("typeDOList", typeDOList);
         return "/stock/stock/yinxing";
     }
 
     //隐形List-----------成品
     @ResponseBody
     @RequestMapping(value = "/selectYxcp")
-    public List<YxcpDO> selectYxcp(Integer mfrsid, Model model) {
+    public List<YxcpDO> selectYxcp(Integer mfrsid,String producNum, String producCode, String producName,
+                                   Integer brandid,String brandname,String producFactory,String factory,
+                                   String retailPrice,String retailPrice2,Integer usageId,Integer typeId,
+                                   Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("mfrsid", mfrsid);
+        map.put("producNum", producNum);
+        map.put("producCode", producCode);
+        map.put("producName", producName);
+        map.put("brandid", brandid);
+        map.put("brandname", brandname);
+        map.put("producFactory", producFactory);
+        map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
+        map.put("usageId", usageId);
+        map.put("typeId", typeId);
         List<YxcpDO> yxcpDOList = stockService.selectYxcp(map);
         model.addAttribute("yxcpDOList", yxcpDOList);
         return yxcpDOList;
@@ -420,9 +523,23 @@ public class StockController {
     //隐形List-----------定做
     @ResponseBody
     @RequestMapping(value = "/selectYxdz")
-    public List<YxdzDO> selectYxdz(Integer mfrsid, Model model) {
+    public List<YxdzDO> selectYxdz(Integer mfrsid,String producNum, String producCode, String producName,
+                                   Integer brandid,String brandname,String producFactory,String factory,
+                                   String retailPrice,String retailPrice2,Integer usageId,Integer typeId,
+                                   Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("mfrsid", mfrsid);
+        map.put("producNum", producNum);
+        map.put("producCode", producCode);
+        map.put("producName", producName);
+        map.put("brandid", brandid);
+        map.put("brandname", brandname);
+        map.put("producFactory", producFactory);
+        map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
+        map.put("usageId", usageId);
+        map.put("typeId", typeId);
         List<YxdzDO> yxdzDOList = stockService.selectYxdz(map);
         model.addAttribute("yxdzDOList", yxdzDOList);
         return yxdzDOList;
@@ -440,10 +557,9 @@ public class StockController {
     //护理液
     @ResponseBody
     @RequestMapping(value = "/selectHly")
-    public List<HlyDO> selectHly(String producNum, String producCode, String producName,
-                                 Integer mfrsid, Integer brandid,
-                                 String mainCapacity, String secondCapacity,
-                                 String producFactory, String factory,
+    public List<HlyDO> selectHly(String producNum, String producCode, String producName,String brandname,
+                                 Integer mfrsid, Integer brandid, String mainCapacity, String secondCapacity,
+                                 String producFactory, String factory,String retailPrice,String retailPrice2,
                                  Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum", producNum);
@@ -451,10 +567,13 @@ public class StockController {
         map.put("producName", producName);
         map.put("mfrsid", mfrsid);
         map.put("brandid", brandid);
+        map.put("brandname", brandname);
         map.put("mainCapacity", mainCapacity);
         map.put("secondCapacity", secondCapacity);
         map.put("producFactory", producFactory);
         map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
         List<HlyDO> hlyDOList = stockService.selectHly(map);
         model.addAttribute("hlyDOList", hlyDOList);
         return hlyDOList;
@@ -473,9 +592,8 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectTyj")
     public List<TyjDO> selectTyj(String producNum, String producCode, String producName,
-                                 Integer mfrsid, Integer brandid,
-                                 String mainCapacity, String secondCapacity,
-                                 String producFactory, String factory,
+                                 String brandname, Integer mfrsid, Integer brandid, String producFactorycolor, String size,
+                                 String producFactory, String factory,String retailPrice,String retailPrice2,
                                  Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum", producNum);
@@ -483,10 +601,13 @@ public class StockController {
         map.put("producName", producName);
         map.put("mfrsid", mfrsid);
         map.put("brandid", brandid);
-        map.put("mainCapacity", mainCapacity);
-        map.put("secondCapacity", secondCapacity);
+        map.put("brandname", brandname);
+        map.put("producFactorycolor", producFactorycolor);
+        map.put("size", size);
         map.put("producFactory", producFactory);
         map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
         List<TyjDO> tyjDOList = stockService.selectTyj(map);
         model.addAttribute("tyjDOList", tyjDOList);
         return tyjDOList;
@@ -499,6 +620,10 @@ public class StockController {
     String lhj(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
+        //老花镜度数
+        Map<String, Object> map = new HashMap<>();
+        List<OlddegreesDO> olddegreesDOList = olddegreesService.list(map);
+        model.addAttribute("olddegreesDOList", olddegreesDOList);
         return "/stock/stock/lhj";
     }
 
@@ -506,9 +631,9 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectLhj")
     public List<OldlensDO> selectLhj(String producNum, String producCode, String producName,
-                                     Integer mfrsid, Integer brandid,
-                                     String producFactorycolor, String size,
-                                     String producFactory, String factory,
+                                     Integer mfrsid, Integer brandid,String brandname,
+                                     String producFactorycolor, String size,Integer oldId,
+                                     String producFactory, String factory,String retailPrice,String retailPrice2,
                                      Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum", producNum);
@@ -516,10 +641,14 @@ public class StockController {
         map.put("producName", producName);
         map.put("mfrsid", mfrsid);
         map.put("brandid", brandid);
+        map.put("brandname", brandname);
         map.put("producFactorycolor", producFactorycolor);
         map.put("size", size);
+        map.put("oldId", oldId);
         map.put("producFactory", producFactory);
         map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
         List<OldlensDO> oldlensDOS = stockService.selectLhj(map);
         model.addAttribute("oldlensDOS", oldlensDOS);
         return oldlensDOS;
@@ -537,7 +666,8 @@ public class StockController {
     //耗材
     @ResponseBody
     @RequestMapping(value = "/selectHc")
-    public List<HcDO> selectHc(String producNum, String producCode, String producName, Integer mfrsid, Integer brandid,
+    public List<HcDO> selectHc(String producNum, String producCode, String producName,
+                               Integer mfrsid, Integer brandid,String brandname,String retailPrice,String retailPrice2,
                                String producFactory, String factory, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum", producNum);
@@ -545,8 +675,11 @@ public class StockController {
         map.put("producName", producName);
         map.put("mfrsid", mfrsid);
         map.put("brandid", brandid);
+        map.put("brandname", brandname);
         map.put("producFactory", producFactory);
         map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
         List<HcDO> hcDOList = stockService.selectHc(map);
         model.addAttribute("hcDOList", hcDOList);
         return hcDOList;
@@ -564,7 +697,8 @@ public class StockController {
     //视光
     @ResponseBody
     @RequestMapping(value = "/selectSg")
-    public List<ShiguangDO> selectSg(String producNum, String producCode, String producName, Integer mfrsid, Integer brandid,
+    public List<ShiguangDO> selectSg(String producNum, String producCode, String producName,
+                                     Integer mfrsid, Integer brandid,String brandname,String retailPrice,String retailPrice2,
                                      String producFactory, String factory, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum", producNum);
@@ -572,11 +706,34 @@ public class StockController {
         map.put("producName", producName);
         map.put("mfrsid", mfrsid);
         map.put("brandid", brandid);
+        map.put("brandname", brandname);
         map.put("producFactory", producFactory);
         map.put("factory", factory);
+        map.put("retailPrice", retailPrice);
+        map.put("retailPrice2", retailPrice2);
         List<ShiguangDO> shiguangDOS = stockService.selectSg(map);
         model.addAttribute("shiguangDOS", shiguangDOS);
         return shiguangDOS;
+    }
+
+
+    /**
+     * 浏览器打印二维码
+     */
+    @GetMapping("/code")
+    public String code(String danjuNumber, Model model) {
+//        OrderDO  orderDO = Optional.ofNullable(orderService.getCode(danjuNumber)).orElseGet(OrderDO::new);
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber",danjuNumber);
+        List<OrderDO> orderDOS = orderService.getCode(map);
+        model.addAttribute("orderDOS", orderDOS);
+        for (OrderDO orderDO1 : orderDOS){
+            String code = BarCodeUtils.generateBarCode128(orderDO1.getGoodsCode(), 10.0, 0.3, true, true);//条形码
+            code = "data:image/png;base64," + code;
+            orderDO1.setQRCode(code);
+        }
+        // model.addAttribute("QRCode", "data:image/png;base64," + code);
+        return "/stock/stock/code";
     }
 
 }

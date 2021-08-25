@@ -32,51 +32,54 @@
         <tr>
             <td>制造商：</td>
             <td>
-                <input type="text" th:value="${mfrsname}" readonly/>
+                <input type="text" th:value="${mfrsname}" readonly style="background-color: #e4e4e4" />
                 <input id="mfrsid" type="hidden" th:value="${mfrsid}"/>
             </td>
             <td>商品品种：</td>
             <td>
-                <input type="text" th:value="${brandname}" readonly/>
-                <input id="brandid" type="hidden" th:value="${brandid}"/>
-                <input type="button" class="XZ-btn" value="选择"/>
+                <!--<input id="brandnum" name="brandnum" type="hidden" value=""/>-->
+                <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
+                <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
         </tr>
         <tr>
             <td>商品类别：</td>
             <td>
-                <select disabled>
-                    <option>老花镜</option>
+                <select id="goodsid" name="goodsid" disabled>
+                    <option value="7" >老花镜</option>
                 </select>
             </td>
-            <td>新增时间：</td>
-            <td>
-                <input type="text" value="2021"/>至
-                <input type="text" value="2021"/>
-            </td>
-        </tr>
-        <tr>
+            <!--<td>新增时间：</td>-->
+            <!--<td>-->
+                <!--<input type="text" value="2021"/>至-->
+                <!--<input type="text" value="2021"/>-->
+            <!--</td>-->
             <td>老花镜度数：</td>
             <td>
-                <input id="oldId" name="oldId" type="text"/>至
-                <input type="text"/>
+                <select id="oldId" name="oldId">
+                    <option value="">请选择</option>
+                    <option th:each="ls:${olddegreesDOList}"
+                            th:text="${ls.degrees}"
+                            th:value="${ls.oldId}"
+                    ></option>
+                </select>
             </td>
             <td>厂家色号：</td>
             <td>
                 <input id="producFactorycolor" name="producFactorycolor" type="text"/>
             </td>
+
+        </tr>
+        <tr>
+
             <td>镜架尺寸：</td>
             <td>
                 <input id="size" name="size" type="text"/>
             </td>
-        </tr>
-        <tr>
             <td>型号：</td>
             <td>
                 <input id="producFactory" name="producFactory" type="text"/>
             </td>
-        </tr>
-        <tr>
             <td>厂家型号：</td>
             <td>
                 <input id="factory" name="factory" type="text"/>
@@ -85,18 +88,14 @@
         <tr>
             <td>标准零售价格：</td>
             <td>
-                <select name="" id="">
-                    <option value="">已设置零售价</option>
-                    <option value="">未设置零售价</option>
-                </select>
-                <input type="text"/> ~ <input type="text"/>
+                <input id="retailPrice" name="retailPrice" type="text"/> ~ <input id="retailPrice2" name="retailPrice2" type="text"/>
             </td>
         </tr>
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
         <input type="button" value="查询" onclick="getLhj()"/>
-        <input type="button" class="empty" value="清空"/>
+        <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
 
@@ -117,8 +116,8 @@
             <td>标准零售价格</td>
             <td>含税成本</td>
             <td>老花镜度数</td>
-            <td>厂家色号</td>
             <td>镜架尺寸</td>
+            <td>厂家色号</td>
             <td style="display: none">批发价格</td>
             <td style="display: none">调货成本</td>
             <td style="display: none">商品条码</td>
@@ -168,10 +167,14 @@
         var producName = $("#producName").val();
         var mfrsid = $("#mfrsid").val();
         var brandid = $("#brandid").val();
+        var brandname = $("#brandname").val();
         var producFactorycolor = $("#producFactorycolor").val();
         var size = $("#size").val();
+        var oldId = $("#oldId").val();
         var producFactory = $("#producFactory").val();
         var factory = $("#factory").val();
+        var retailPrice = $("#retailPrice").val();
+        var retailPrice2 = $("#retailPrice2").val();
         $(".val").remove();
         $.ajax({
             url: '/stock/stock/selectLhj',
@@ -183,10 +186,14 @@
                 'producName': producName,
                 'mfrsid': mfrsid,
                 'brandid': brandid,
+                'brandname': brandname,
                 'producFactorycolor': producFactorycolor,
                 'size': size,
+                'oldId': oldId,
                 'producFactory': producFactory,
-                'factory': factory
+                'factory': factory,
+                'retailPrice': retailPrice,
+                'retailPrice2': retailPrice2
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
@@ -208,6 +215,15 @@
                 }
             }
         })
+    }
+    //清空
+    function clearText() {
+        var controls = document.getElementsByTagName('input');
+        for (var i = 0; i < controls.length; i++) {
+            if (controls[i].type == 'text') {
+                controls[i].value = '';
+            }
+        }
     }
 </script>
 </body>

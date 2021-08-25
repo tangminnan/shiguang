@@ -69,10 +69,10 @@ function load() {
                         title: '所属部门'
                     },
 
-                    {
-                        field: 'positionOrder',
-                        title: '排列序号'
-                    },
+                    // {
+                    //     field: 'positionOrder',
+                    //     title: '仓位类型'
+                    // },
                     // {
                     //     field: 'stateId',
                     //     title: '状态id'

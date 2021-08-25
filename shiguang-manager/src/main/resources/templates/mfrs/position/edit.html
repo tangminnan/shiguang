@@ -27,8 +27,6 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所属部门：</label>
                             <div class="col-sm-8">
-                                <!--<input id="departName" name="departName" th:value="${position.departName}"-->
-                                       <!--class="form-control" type="text">-->
                                 <select name="departNumber" id="departNumber" th:value="${position.departNumber}"
                                         class="form-control"
                                        disabled data-actions-box="false" data-size="5" >
@@ -51,20 +49,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">排列序号：</label>
+                            <label class="col-sm-3 control-label">仓位类型：</label>
                             <div class="col-sm-8">
-                                <input id="positionOrder" name="positionOrder" th:value="${position.positionOrder}"
-                                       class="form-control" type="text">
-                                <span style="color: red">*</span>
+                                <select id="positionOrder" name="positionOrder" class="form-control">
+                                    <option value="1"th:field="*{position.positionOrder}">销售仓</option>
+                                    <option value="2"th:field="*{position.positionOrder}">合格仓</option>
+                                    <option value="3"th:field="*{position.positionOrder}">不合格仓</option>
+                                </select>
+                                <input id="positionOrders" name="positionOrders" th:value="${position.positionOrder}" type="hidden">
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">状态id：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<input id="stateId" name="stateId" th:value="${position.stateId}" class="form-control"-->
-                                       <!--type="text">-->
-                            <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">启用状态：</label>
                             <div class="col-sm-8">
@@ -77,13 +71,6 @@
                                 <span style="color: red">*</span>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">状态(0:删除1:未删除)：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<input id="state" name="state" th:value="${position.state}" class="form-control"-->
-                                       <!--type="text">-->
-                            <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <button type="submit" class="btn btn-primary">提交</button>
@@ -96,7 +83,16 @@
     </div>
 </div>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/mfrs/position/edit.js">
+<script type="text/javascript" src="/js/appjs/mfrs/position/edit.js"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        //部门
+        var departNumbers = $("input[name='departNumbers']").val();
+        $("#departNumber").find("[value='" + departNumbers + "']").attr("selected", true);
+        //仓位类型
+        var positionOrders = $("input[name='positionOrders']").val();
+        $("#positionOrder").find("[value='" + positionOrders + "']").attr("selected", true);
+    });
 </script>
 </body>
 </html>

@@ -93,40 +93,40 @@
                                 <!--<span style="color: red">（此项将打印在采购订单收货传真中。）</span>-->
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">报表表头显示名称：</label>
-                            <div class="col-sm-8">
-                                <input id="headername" name="headername" th:value="${company.headername}"
-                                       style="width:28%" type="text">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">批调金额：</label>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">报表表头显示名称：</label>-->
                             <!--<div class="col-sm-8">-->
-                            <!--<input id="approvedamount" name="approvedamount" th:value="${company.approvedamount}"-->
-                            <!--style="width:28%" type="text">-->
+                                <!--<input id="headername" name="headername" th:value="${company.headername}"-->
+                                       <!--style="width:28%" type="text">-->
                             <!--</div>-->
-                            <div class="col-sm-8" id="colors">
-                                <label class="radio-inline"> <input type="radio" th:field="*{company.approvedamount}"
-                                                                    name="approvedamount" value="1"
-                                                                    onchange="setChange(this.value)"/> 向本公司批调时，  填写成本价
-                                </label>
-                                <label class="radio-inline"> <input type="radio" th:field="*{company.approvedamount}"
-                                                                    name="approvedamount" value="2"
-                                                                    onchange="setChange(this.value)"/> 向本公司批调时，需要手工填写批发价
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group" id="tab" style="display: none">
-                            <label class="col-sm-3 control-label">批发价比例：</label>
-                            <div class="col-sm-8">
-                                <input id="proportion" name="proportion" th:value="${company.proportion}"
-                                       style="width:28%" type="text">
-                                <span style="color: red">用于设置向加盟商的门店调货时的批发金额，计算公式：批发金额=基础信息中的批发价格*批发价比例</span>
-                            </div>
-                        </div>
+                        <!--</div>-->
+
+
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">批调金额：</label>-->
+                            <!--&lt;!&ndash;<div class="col-sm-8">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input id="approvedamount" name="approvedamount" th:value="${company.approvedamount}"&ndash;&gt;-->
+                            <!--&lt;!&ndash;style="width:28%" type="text">&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--<div class="col-sm-8" id="colors">-->
+                                <!--<label class="radio-inline"> <input type="radio" th:field="*{company.approvedamount}"-->
+                                                                    <!--name="approvedamount" value="1"-->
+                                                                    <!--onchange="setChange(this.value)"/> 向本公司批调时，  填写成本价-->
+                                <!--</label>-->
+                                <!--<label class="radio-inline"> <input type="radio" th:field="*{company.approvedamount}"-->
+                                                                    <!--name="approvedamount" value="2"-->
+                                                                    <!--onchange="setChange(this.value)"/> 向本公司批调时，需要手工填写批发价-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group" id="tab" style="display: none">-->
+                            <!--<label class="col-sm-3 control-label">批发价比例：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input id="proportion" name="proportion" th:value="${company.proportion}"-->
+                                       <!--style="width:28%" type="text">-->
+                                <!--<span style="color: red">用于设置向加盟商的门店调货时的批发金额，计算公式：批发金额=基础信息中的批发价格*批发价比例</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <!--<div class="form-group">-->
                             <!--<label class="col-sm-3 control-label">系统logo：</label>-->
                             <!--<div class="col-sm-8">-->

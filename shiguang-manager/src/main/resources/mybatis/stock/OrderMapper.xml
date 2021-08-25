@@ -6,7 +6,8 @@
     <select id="get" resultType="com.shiguang.stock.domain.OrderDO">
 		select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,`price_sum`,
 		`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,
-		`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit` from stock_order where id = #{value}
+		`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,`batch`,`zhuce_number`,`produce_day`,`useday`
+		 from stock_order where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.stock.domain.OrderDO">
@@ -14,7 +15,7 @@
         s.`id`,s.`goods_num`,s.`goods_code`,s.`goods_name`,s.`goods_count`,s.`goods_type`,s.`mfrsid`,s.`brandname`,s.`retail_price`,
         s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`, s.`position_name`, s.`create_time`,
         s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
-        s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname
+        s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`
         from stock_order s left join c_mfrs m on s.mfrsid=m.mfrsid
         left join c_position po on s.position_name=po.position_name
         <where>
@@ -44,6 +45,10 @@
             <if test="beizhu != null and beizhu != ''">and s.beizhu = #{beizhu}</if>
             <if test="unit != null and unit != ''">and s.unit = #{unit}</if>
             <if test="storeNum != null and storeNum != ''">and po.depart_number = #{storeNum}</if>
+            <if test="batch != null and batch != ''"> and s.batch = #{batch} </if>
+            <if test="zhuceNumber != null and zhuceNumber != ''"> and s.zhuce_number = #{zhuceNumber} </if>
+            <if test="produceDay != null and produceDay != ''"> and s.produce_day = #{produceDay} </if>
+            <if test="useday != null and useday != ''"> and s.useday = #{useday} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -89,6 +94,10 @@
             <if test="beizhu != null and beizhu != ''">and s.beizhu = #{beizhu}</if>
             <if test="unit != null and unit != ''">and s.unit = #{unit}</if>
             <if test="storeNum != null and storeNum != ''">and po.depart_number = #{storeNum}</if>
+            <if test="batch != null and batch != ''"> and s.batch = #{batch} </if>
+            <if test="zhuceNumber != null and zhuceNumber != ''"> and s.zhuce_number = #{zhuceNumber} </if>
+            <if test="produceDay != null and produceDay != ''"> and s.produce_day = #{produceDay} </if>
+            <if test="useday != null and useday != ''"> and s.useday = #{useday} </if>
         </where>
     </select>
 
@@ -118,7 +127,11 @@
 			`tuihuo_number`, 
 			`factory_number`, 
 			`beizhu`, 
-			`unit`
+			`unit`,
+			`batch`,
+			`zhuce_number`,
+			`produce_day`,
+			`useday`
 		)
 		values
 		(
@@ -145,7 +158,11 @@
 			#{tuihuoNumber}, 
 			#{factoryNumber}, 
 			#{beizhu}, 
-			#{unit}
+			#{unit},
+			#{batch},
+			#{zhuceNumber},
+			#{produceDay},
+			#{useday}
 		)
 	</insert>
 
@@ -175,7 +192,11 @@
             <if test="tuihuoNumber != null">`tuihuo_number` = #{tuihuoNumber},</if>
             <if test="factoryNumber != null">`factory_number` = #{factoryNumber},</if>
             <if test="beizhu != null">`beizhu` = #{beizhu},</if>
-            <if test="unit != null">`unit` = #{unit}</if>
+            <if test="unit != null">`unit` = #{unit},</if>
+            <if test="batch != null">`batch` = #{batch}, </if>
+            <if test="zhuceNumber != null">`zhuce_number` = #{zhuceNumber}, </if>
+            <if test="produceDay != null">`produce_day` = #{produceDay}, </if>
+            <if test="useday != null">`useday` = #{useday} </if>
         </set>
         where id = #{id}
     </update>
@@ -190,5 +211,7 @@
             #{id}
         </foreach>
     </delete>
-
+    <select id="getCode" resultType="com.shiguang.stock.domain.OrderDO">
+		select goods_name,goods_code,goods_count from stock_order where danju_number = #{danjuNumber}
+	</select>
 </mapper>

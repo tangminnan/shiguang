@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${pidiao.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">批调单号：</label>
+								<div class="col-sm-8">
+									<input id="pidiaoNumber" name="pidiaoNumber" th:value="${pidiao.pidiaoNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">关联单号：</label>
+								<div class="col-sm-8">
+									<input id="guanlianNumber" name="guanlianNumber" th:value="${pidiao.guanlianNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">发出部门：</label>
+								<div class="col-sm-8">
+									<input id="outDepartment" name="outDepartment" th:value="${pidiao.outDepartment}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">接收仓位：</label>
+								<div class="col-sm-8">
+									<input id="inPosition" name="inPosition" th:value="${pidiao.inPosition}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">接收公司：</label>
+								<div class="col-sm-8">
+									<input id="inCompany" name="inCompany" th:value="${pidiao.inCompany}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">接收部门：</label>
+								<div class="col-sm-8">
+									<input id="inDepartment" name="inDepartment" th:value="${pidiao.inDepartment}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">制单人：</label>
+								<div class="col-sm-8">
+									<input id="zhidanPeople" name="zhidanPeople" th:value="${pidiao.zhidanPeople}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">单据日期：</label>
+								<div class="col-sm-8">
+									<input id="danjuDay" name="danjuDay" th:value="${pidiao.danjuDay}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">委外收货单：</label>
+								<div class="col-sm-8">
+									<input id="outsourcingNumber" name="outsourcingNumber" th:value="${pidiao.outsourcingNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="beizhu" name="beizhu" th:value="${pidiao.beizhu}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">商品代码：</label>
+								<div class="col-sm-8">
+									<input id="goodsNum" name="goodsNum" th:value="${pidiao.goodsNum}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">商品名称：</label>
+								<div class="col-sm-8">
+									<input id="goodsName" name="goodsName" th:value="${pidiao.goodsName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">型号：</label>
+								<div class="col-sm-8">
+									<input id="producFactory" name="producFactory" th:value="${pidiao.producFactory}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">需求数量：</label>
+								<div class="col-sm-8">
+									<input id="needCount" name="needCount" th:value="${pidiao.needCount}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">可调用数量：</label>
+								<div class="col-sm-8">
+									<input id="goodsCount" name="goodsCount" th:value="${pidiao.goodsCount}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">批调数量：</label>
+								<div class="col-sm-8">
+									<input id="useCount" name="useCount" th:value="${pidiao.useCount}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">商品条码：</label>
+								<div class="col-sm-8">
+									<input id="goodsCode" name="goodsCode" th:value="${pidiao.goodsCode}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">批号：</label>
+								<div class="col-sm-8">
+									<input id="batch" name="batch" th:value="${pidiao.batch}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">注册证号：</label>
+								<div class="col-sm-8">
+									<input id="zhuceNumber" name="zhuceNumber" th:value="${pidiao.zhuceNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">生产日期：</label>
+								<div class="col-sm-8">
+									<input id="produceDay" name="produceDay" th:value="${pidiao.produceDay}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">效期：</label>
+								<div class="col-sm-8">
+									<input id="useday" name="useday" th:value="${pidiao.useday}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">合计：</label>
+								<div class="col-sm-8">
+									<input id="allCount" name="allCount" th:value="${pidiao.allCount}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/stock/pidiao/edit.js">
+	</script>
+</body>
+</html>

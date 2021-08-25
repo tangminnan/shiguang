@@ -96,17 +96,18 @@
                     </select>
                 </td>
 
-                <td>批号管理：</td>
-                <td>
-                    <input name="batchid" value="1" type="radio" id="PH-S" checked> <label for="PH-S"
-                                                                                           style="margin-right: 5%">是</label>
-                    <input name="batchid" value="2" type="radio" id="PH-F"> <label for="PH-F">否</label>
-                    <em>*</em>
-                </td>
+                <!--<td>批号管理：</td>-->
+                <!--<td>-->
+                    <!--<input name="batchid" value="1" type="radio" id="PH-S" >-->
+                    <!--<label for="PH-S"style="margin-right: 5%">是</label>-->
+                    <!--<input name="batchid" value="2" type="radio" id="PH-F" checked>-->
+                    <!--<label for="PH-F">否</label>-->
+                    <!--<em>*</em>-->
+                <!--</td>-->
                 <td>销售状态：</td>
                 <td>
                     <input name="xsstate" value="1" type="radio"> <label for="PH-S"
-                                                                        style="margin-right: 5%">禁用</label>
+                                                                         style="margin-right: 5%">禁用</label>
                     <input name="xsstate" value="0" type="radio" checked> <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>
@@ -120,17 +121,17 @@
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
-                <td>镜架尺寸：</td>
-                <td>
+                <td style="width:200px">镜架尺寸：</td>
+                <td style="width:200px">
                     <input id="size" name="size" type="text">
                 </td>
-                <td>颜色：</td>
-                <td>
+                <td style="width:200px">颜色：</td>
+                <td style="width:200px">
                     <select id="color" name="color">
                     </select>
                 </td>
-                <td>款式：</td>
-                <td>
+                <td style="width:200px">款式：</td>
+                <td style="width:200px">
                     <select id="styleId" name="styleId" style="width: 60%">
                         <option></option>
                         <option th:each="ls:${styleDOList}" th:text="${ls.style}" th:value="${ls.styleId}">
@@ -263,11 +264,6 @@
 
 </script>
 <script type="text/javascript">
-    var a1 = document.getElementById("producNum")
-    var a2 = document.getElementById("producCode")
-    var sum;
-    var sum1;
-    var a1_val = "1.00.00.000000000.0000"
 
     //———制造商与品种联动
     function choice(value) {
@@ -294,6 +290,12 @@
         });
     }
 
+    var a1 = document.getElementById("producNum");
+    var a2 = document.getElementById("producCode");
+    var sum;
+    var sum1;
+    var a1_val = "7.00.00.000000000.0000";
+
     function change(e, k, s) {
         a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);
         a1_val = a1.value.substring(0, 7) + a1_val.substring(7, 22);
@@ -305,45 +307,23 @@
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
         // alert(val);
-        var producColor = document.getElementById("producColor");
+        // var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        sum1 = 22 - producColor.value.length;
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase();
+        // sum1 = 22 - proid.value.length;
+        sum1 = 22;
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
     }
 
     function liandong2(e) {//型号
         var val2 = document.getElementById("producFactory").value;
         var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
-        var producColor = document.getElementById("producColor")
+        // var proid = document.getElementById("proid");
         document.getElementById("factory").value = va2;
         sum = 17 - e.value.length
-        sum1 = 22 - producColor.value.length
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + producColor.value.toUpperCase()
-        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
-    }
-
-    // <!--//———厂家色号与色号联动—————-->
-    function liandong3(e) {//厂家色号
-        var val3 = document.getElementById("producFactorycolor").value;
-        var va3 = val3.replace(/[^\w\/]/ig, '').toUpperCase();
-        var producFactory = document.getElementById("producFactory")
-        document.getElementById("producColor").value = va3;
-        sum = 17 - producFactory.value.length
-        sum1 = 22 - e.value.length
-        a1.value = a1_val.substring(0, sum) + producFactory.value.toUpperCase() + a1_val.substring(17, sum1) + e.value.toUpperCase()
-        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
-    }
-
-    function liandong4(e) {//色号
-        var val4 = document.getElementById("producColor").value;
-        var va4 = val4.replace(/[^\w\/]/ig, '').toUpperCase();
-        var producFactory = document.getElementById("producFactory")
-        document.getElementById("producFactorycolor").value = va4;
-        sum = 17 - producFactory.value.length
-        sum1 = 22 - e.value.length
-        a1.value = a1_val.substring(0, sum) + producFactory.value.toUpperCase() + a1_val.substring(17, sum1) + e.value.toUpperCase()
+        sum1 = 22 ;
+        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
 
