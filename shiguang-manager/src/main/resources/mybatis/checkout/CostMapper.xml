@@ -106,7 +106,8 @@
             <if test="costMoney != null">`cost_money` = #{costMoney}, </if>
             <if test="arrearMoney != null">`arrear_money` = #{arrearMoney}, </if>
             <if test="saleName != null">`sale_name` = #{saleName}, </if>
-            <if test="isSale != null">`is_sale` = #{isSale}</if>
+            <if test="isSale != null">`is_sale` = #{isSale},</if>
+            <if test="type != null">`type` = #{type}</if>
         </set>
         where id = #{id}
     </update>

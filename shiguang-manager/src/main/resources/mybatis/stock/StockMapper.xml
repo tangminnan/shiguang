@@ -883,6 +883,78 @@
         </where>
     </select>
 
+    <!-- 隐形成品查询 -->
+    <select id="listYxcp" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,st.`unit`,t.`type_name`,u.`usage_name`,
+        y.`curvature`,s.`sph`,c.`cyl`
+        from stock st left join aa_yxcp y on y.produc_num = st.goods_num left join p_type t on t.type_id = y.type_id
+        left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
+        left join p_usage u on u.usage_id = y.usage_id
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph =  #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            and st.goods_count > 0
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="countYxcp" resultType="int">
+        select count(*)
+        from stock st left join aa_yxcp y on y.produc_num = st.goods_num left join p_type t on t.type_id = y.type_id
+        left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
+        left join p_usage u on u.usage_id = y.usage_id
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph =  #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            and st.goods_count > 0
+        </where>
+    </select>
+
+
     <!-- 隐形订做查询 -->
     <select id="listYxdz" resultType="com.shiguang.stock.domain.StockDO">
         select
@@ -967,6 +1039,7 @@
         select `position_id`,`position_num`,`depart_number`,`depart_name`,`position_name` from c_position
         <where>
             <if test="departNumber != null and departNumber != ''">and depart_number = #{departNumber}</if>
+            and position_order = '1'
         </where>
     </select>
 

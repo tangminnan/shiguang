@@ -154,6 +154,16 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public List<StockDO> listYxcp(Map<String, Object> map) {
+        return stockDao.listYxcp(map);
+    }
+
+    @Override
+    public int countYxcp(Map<String, Object> map) {
+        return stockDao.countYxcp(map);
+    }
+
+    @Override
     public List<StockDO> listYxdz(Map<String, Object> map) {
         return stockDao.listYxdz(map);
     }

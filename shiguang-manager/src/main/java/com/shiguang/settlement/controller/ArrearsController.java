@@ -99,7 +99,14 @@ public class ArrearsController {
     @RequiresPermissions("information:arrears:edit")
     public R update(SettlementDO settlement){
         settlement.setPayWay("全款");
+        SettlementDO settlementDO = settlementService.get(settlement.getId());
+        settlement.setPayMoney(settlementDO.getPayMoney() + settlement.getPayMoney());
         settlementService.update(settlement);
+        CostDO costDO = costService.get(settlementDO.getCostId());
+        if ("定金单".equals(costDO.getType())){
+            costDO.setType("配镜单");
+            costService.update(costDO);
+        }
         return R.ok();
     }
 

@@ -13,9 +13,9 @@ $(function() {
     $('#exampleTable').bootstrapTable('hideColumn', 'usageName');
     $('#exampleTable').bootstrapTable('hideColumn', 'typeName');
     $('#exampleTable').bootstrapTable('hideColumn', 'cycle');
-    $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
-    $('#exampleTable').bootstrapTable('hideColumn', 'positionName');
-    $('#exampleTable').bootstrapTable('hideColumn', 'goodsCount');
+    // $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
+    $('#exampleTable').bootstrapTable('showColumn', 'positionName');
+    $('#exampleTable').bootstrapTable('showColumn', 'goodsCount');
 });
 function load() {
 	$('#exampleTable')
@@ -184,7 +184,7 @@ function reLoad() {
     var yxType = $("#yxType").val();
 	$('#exampleTable').bootstrapTable('refresh');
     if(yxType == 1){
-        $('#exampleTable').bootstrapTable('showColumn', 'checkid');
+        // $('#exampleTable').bootstrapTable('showColumn', 'checkid');
         $('#exampleTable').bootstrapTable('showColumn', 'goodsNum');
         $('#exampleTable').bootstrapTable('showColumn', 'goodsName');
         $('#exampleTable').bootstrapTable('showColumn', 'retailPrice');
@@ -199,7 +199,7 @@ function reLoad() {
         $('#exampleTable').bootstrapTable('showColumn', 'positionName');
         $('#exampleTable').bootstrapTable('showColumn', 'goodsCount');
     } else {
-        $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
+        // $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
         $('#exampleTable').bootstrapTable('hideColumn', 'goodsNum');
         $('#exampleTable').bootstrapTable('hideColumn', 'goodsName');
         $('#exampleTable').bootstrapTable('hideColumn', 'retailPrice');

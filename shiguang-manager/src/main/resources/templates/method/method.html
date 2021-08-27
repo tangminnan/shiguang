@@ -8,21 +8,24 @@
 			<div class="ibox">
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
-							<button shiro:hasPermission="information:logstatus:batchFaliao" type="button" class="btn  btn-primary" onclick="batchFaliao()">
-								<i class="fa fa-plus" aria-hidden="true"></i>批量委外发料
-							</button>
-							<!--<button shiro:hasPermission="information:logstatus:batchRemove" type="button" class="btn  btn-danger"-->
-								<!--onclick="batchRemove()">-->
-								<!--<i class="fa fa-trash" aria-hidden="true"></i>删除-->
+						<div class="columns pull-right">
+							<!--<button shiro:hasPermission="information:settlement:add" type="button" class="btn  btn-primary" onclick="add()">-->
+								<!--<i class="fa fa-plus" aria-hidden="true"></i>添加-->
 							<!--</button>-->
+							<button shiro:hasPermission="information:method:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
 						</div>
+						<br>
+						<div class="columns pull-left" style="display:flex; margin-top:20px;">
 						<div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
-						<div class="columns pull-right col-md-2 nopadding">
-							<input id="saleNumber" type="text" class="form-control"
-								placeholder="配镜单号">
+						<div class="columns pull-right nopadding">
+							<input id="cardNumber" type="text" class="form-control"
+								placeholder="会员卡号">
+						</div>
 						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
@@ -39,23 +42,23 @@
 				var s_resetPwd_h = 'hidden';
 			</script>
 		</div>
-		<div shiro:hasPermission="information:logstatus:edit">
+		<div shiro:hasPermission="information:method:edit">
 			<script type="text/javascript">
 				s_edit_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="information:logstatus:remove">
+		<div shiro:hasPermission="information:method:remove">
 			<script type="text/javascript">
 				var s_remove_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="information:logstatus:resetPwd">
+		<div shiro:hasPermission="information:method:resetPwd">
 			<script type="text/javascript">
 				var s_resetPwd_h = '';
 			</script>
 		</div>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/logstatus/faliao.js"></script>
+	<script type="text/javascript" src="/js/appjs/method/method.js"></script>
 </body>
 </html>

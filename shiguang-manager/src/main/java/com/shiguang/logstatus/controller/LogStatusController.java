@@ -366,4 +366,15 @@ public class LogStatusController {
         statusService.batchRemove(ids);
         return R.ok();
     }
+
+    /**
+     * 批量发料
+     */
+    @PostMapping( "/batchFaliao")
+    @ResponseBody
+    @RequiresPermissions("information:logstatus:batchFaliao")
+    public R batchFaliao(@RequestParam("ids[]") Long[] ids){
+        statusService.batchRemove(ids);
+        return R.ok();
+    }
 }

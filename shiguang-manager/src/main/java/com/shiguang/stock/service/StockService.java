@@ -70,6 +70,10 @@ public interface StockService {
 
     int countZengpin(Map<String, Object> map);
 
+    List<StockDO> listYxcp(Map<String, Object> map);
+
+    int countYxcp(Map<String, Object> map);
+
     List<StockDO> listYxdz(Map<String, Object> map);
 
     int countYxdz(Map<String, Object> map);

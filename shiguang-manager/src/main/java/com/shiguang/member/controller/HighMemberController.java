@@ -5,6 +5,7 @@ import com.shiguang.baseinfomation.service.*;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -67,6 +68,13 @@ public class HighMemberController {
         //查询列表数据
         Query query = new Query(params);
         query.put("state",1);
+//        if (null != ShiroUtils.getUser().getCompanyId()){
+//            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+//        } else {
+//            if (null != ShiroUtils.getUser().getStoreNum()){
+//                query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+//            }
+//        }
         List<MemberDO> memberList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberList, total);

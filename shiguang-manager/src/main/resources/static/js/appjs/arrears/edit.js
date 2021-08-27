@@ -65,12 +65,18 @@ function validateRule() {
 		rules : {
 			name : {
 				required : true
-			}
+			},
+            payModel : {
+                required : true
+            }
 		},
 		messages : {
 			name : {
 				required : icon + "请输入名字"
-			}
+			},
+            payModel : {
+                required : icon + "请选择缴费方式"
+            }
 		}
 	})
 }

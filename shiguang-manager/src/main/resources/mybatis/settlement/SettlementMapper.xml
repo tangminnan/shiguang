@@ -95,9 +95,18 @@
 			<if test="changeMoney != null">`change_money` = #{changeMoney}, </if>
 			<if test="payModel != null">`pay_model` = #{payModel}, </if>
 			<if test="payMoney != null">`pay_money` = #{payMoney},</if>
+			<if test="payWay != null">`pay_way` = #{payWay},</if>
 			<if test="frontMoney != null">`front_money` = #{frontMoney}</if>
 		</set>
 		where id = #{id}
+	</update>
+
+	<update id="updateMethod" parameterType="com.shiguang.settlement.domain.SettlementDO">
+		update settlement
+		<set>
+			<if test="payModel != null">`pay_model` = #{payModel} </if>
+		</set>
+		where sale_number = #{saleNumber}
 	</update>
 	
 	<delete id="remove">
@@ -164,7 +173,6 @@
 		<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
 		<if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
 		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number = #{saleNumber} </if>
-		<if test="payWay != null and payWay != ''"> and sl.pay_way = #{payWay}</if>
 		<if test="type != null and type != ''"> and c.type != #{type}</if>
 		<if test="state != null and state != ''"> and m.state = #{state} </if>
 		<choose>

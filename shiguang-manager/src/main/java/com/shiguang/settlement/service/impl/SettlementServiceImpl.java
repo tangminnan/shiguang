@@ -92,4 +92,9 @@ public class SettlementServiceImpl implements SettlementService {
 	public int findGlassesDataCount(Map<String, Object> map){
 		return settlementDao.findGlassesDataCount(map);
 	}
+
+	@Override
+	public int updateMethod(SettlementDO settlement){
+		return settlementDao.updateMethod(settlement);
+	}
 }

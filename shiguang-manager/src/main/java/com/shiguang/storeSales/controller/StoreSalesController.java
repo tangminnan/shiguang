@@ -127,6 +127,13 @@ public class StoreSalesController {
 //        List<OptometryDO> optometryList = optometryService.list(query);
 //        int total = optometryService.count(query);
         query.put("state", 1);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        } else {
+            if (null != ShiroUtils.getUser().getStoreNum()){
+                query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+            }
+        }
         List<MemberDO> memberDOList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);
@@ -564,6 +571,7 @@ public class StoreSalesController {
         query.put("storeNum",storeNum);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date currentTime = new Date();
+        String departNumber = ShiroUtils.getUser().getStoreNum();
         List<PackageDO> packageDOList = packageService.list(query);
         if (null != packageDOList){
             for (PackageDO packageDO : packageDOList){
@@ -1146,7 +1154,7 @@ public class StoreSalesController {
      */
     @GetMapping("/yinxing/{rightYuanYongZJ}/{rightYuanYongQJ}/{leftYuanYongQJ}/{leftYuanYongZJ}/{str}")
     @RequiresPermissions("information:store:yinxing")
-    String yinxing(@PathVariable("rightYuanYongZJ") Double rightYuanYongZJ, @PathVariable("rightYuanYongQJ") Double rightYuanYongQJ, @PathVariable("leftYuanYongQJ") Double leftYuanYongQJ, @PathVariable("leftYuanYongZJ") Double leftYuanYongZJ, @PathVariable("str") String str, Model model) {
+    String yinxing(@PathVariable("rightYuanYongZJ") String rightYuanYongZJ, @PathVariable("rightYuanYongQJ") String rightYuanYongQJ, @PathVariable("leftYuanYongQJ") String leftYuanYongQJ, @PathVariable("leftYuanYongZJ") String leftYuanYongZJ, @PathVariable("str") String str, Model model) {
         model.addAttribute("rightYuanYongQJ", rightYuanYongQJ);
         model.addAttribute("rightYuanYongZJ", rightYuanYongZJ);
         model.addAttribute("leftYuanYongQJ", leftYuanYongQJ);
@@ -1185,8 +1193,20 @@ public class StoreSalesController {
                 maps.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
             }
             if ("0".equals(params.get("yxType"))) {
-                List<YxcpDO> yxcpDOList = yxcpService.list(query);
-                int total = yxcpService.count(query);
+                String departNumber = ShiroUtils.getUser().getStoreNum();
+                String positionName = "";
+                if (null != departNumber){
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("departNumber", departNumber);
+                    PositionDO positionDO = stockService.findPosition(map);
+                    if (null != positionDO) {
+                        positionName = positionDO.getPositionName();
+                    }
+                }
+                query.put("positionName", positionName);
+                query.put("goodsType",goodsId);
+                List<StockDO> yxcpDOList = stockService.listYxcp(query);
+                int total = stockService.countYxcp(query);
                 pageUtils = new PageUtils(yxcpDOList, total);
             } else if ("1".equals(params.get("yxType"))) {
                 String departNumber = ShiroUtils.getUser().getStoreNum();

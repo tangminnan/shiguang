@@ -5,6 +5,7 @@ import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.optometry.domain.OptometryDO;
@@ -53,8 +54,15 @@ public class OptometryController {
 //        int total = optometryService.count(query);
         query.put("state", 1);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String dateNow = simpleDateFormat.format(new Date());
-        query.put("dateNow",dateNow);
+//        String dateNow = simpleDateFormat.format(new Date());
+//        query.put("dateNow",dateNow);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        } else {
+            if (null != ShiroUtils.getUser().getStoreNum()){
+                query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+            }
+        }
         List<MemberDO> memberDOList = optometryService.findOptoList(query);
         int total = optometryService.findOptoCount(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);

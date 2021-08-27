@@ -113,6 +113,12 @@ function validateRule() {
             },
             phone1 : {
                 required : true
+            },
+            identityType : {
+                required : true
+            },
+            identityId : {
+                required : true
             }
 		},
 		messages : {
@@ -148,6 +154,12 @@ function validateRule() {
             },
             phone1 : {
                 required : icon + "请输入联系方式"
+            },
+            identityType : {
+                required : icon + "请选择证件"
+            },
+            identityId : {
+                required : icon + "请输入证件号码"
             }
 		}
 	})

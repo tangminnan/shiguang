@@ -45,4 +45,6 @@ public interface SettlementService {
 
 	int findGlassesDataCount(Map<String,Object> map);
 
+	int updateMethod(SettlementDO settlementDO);
+
 }

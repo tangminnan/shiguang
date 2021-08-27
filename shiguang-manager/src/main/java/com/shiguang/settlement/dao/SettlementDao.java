@@ -48,4 +48,6 @@ public interface SettlementDao {
 	List<SettlementDO> findGlassesData(Map<String,Object> map);
 
 	int findGlassesDataCount(Map<String,Object> map);
+
+	int updateMethod(SettlementDO settlementDO);
 }
