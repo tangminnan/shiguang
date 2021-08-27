@@ -206,6 +206,7 @@
                             <td>注册证号</td>
                             <td>生产日期</td>
                             <td>数量</td>
+                            <td>型号</td>
 
 
                         </tr>
@@ -239,6 +240,7 @@
                             <td>注册证号</td>
                             <td>生产日期</td>
                             <td>数量</td>
+                            <td>型号</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji2">
                             <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -269,11 +271,13 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td style="display: block">镜片类型</td>
                             <td>效期</td>
                             <td>批号</td>
                             <td>注册证号</td>
                             <td>生产日期</td>
                             <td>数量</td>
+                            <td>型号</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji3">
                             <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -304,11 +308,13 @@
                             <td style="display: none">调货成本</td>
                             <td style="display: none">单位</td>
                             <td style="display: none">商品品种</td>
+                            <td style="display: block">镜片类型</td>
                             <td>效期</td>
                             <td>批号</td>
                             <td>注册证号</td>
                             <td>生产日期</td>
                             <td>数量</td>
+                            <td>型号</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji4">
                             <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -340,6 +346,7 @@
                             <td>注册证号</td>
                             <td>生产日期</td>
                             <td>数量</td>
+                            <td>型号</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji5">
                             <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -371,6 +378,7 @@
                             <td>注册证号</td>
                             <td>生产日期</td>
                             <td>数量</td>
+                            <td>型号</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji6">
                             <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -403,6 +411,7 @@
                             <td>注册证号</td>
                             <td>生产日期</td>
                             <td>数量</td>
+                            <td>型号</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji7">
                             <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -432,6 +441,7 @@
                             <td>注册证号</td>
                             <td>生产日期</td>
                             <td>数量</td>
+                            <td>型号</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji8">
                             <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -461,6 +471,7 @@
                             <td>注册证号</td>
                             <td>生产日期</td>
                             <td>数量</td>
+                            <td>型号</td>
                         </tr>
 
                         <tr style="font-weight:bold;font-size: 15px;" class="heji9">
@@ -487,9 +498,9 @@
         var mfrsid = document.getElementById('mfrsid').value;
         // alert(goodsid);
         if (goodsid == "") {
-            alert("请选择采购类型！");
+            layer.alert("请选择采购类型！");
         } else if (goodsid != "" && mfrsid == "") {
-            alert("请选择所属制造商！");
+            layer.alert("请选择所属制造商！");
         }
     }
 
@@ -726,10 +737,8 @@
         var mfrsname = document.getElementById('mfrsName').value;
         if (goodsid == "") {
             layer.alert("请选择采购类型！");
-            return this;
         } else if (goodsid != "" && mfrsid == "") {
             layer.alert("请选择所属制造商！");
-            return this;
         } else if (goodVal == "镜架") {
             $(".val1").remove();
             var toIndex = layer.open({
@@ -770,11 +779,14 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >" + "效期" + "</td>\n" +
-                            "<td >" +"批号 "+ "</td>\n" +
-                            "<td >" +"注册证号" + "</td>\n" +
-                            "<td >" + "生产日期" + "</td>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
+                            "<td >" + "<input id='useday' name='useday' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='batch' name='batch' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='zhuceNumber' name='zhuceNumber' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='produceDay' name='produceDay' type='text'/>" + "</td>\n" +
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                            "<td  style='display: block'>" + rows[i].producFactory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
+                            "</tr>");//页面每个数量
                     }
                 }
             });
@@ -815,11 +827,14 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >" + "效期" + "</td>\n" +
-                            "<td >" +"批号 "+ "</td>\n" +
-                            "<td >" +"注册证号" + "</td>\n" +
-                            "<td >" + "生产日期" + "</td>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
+                            "<td >" + "<input id='useday' name='useday' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='batch' name='batch' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='zhuceNumber' name='zhuceNumber' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='produceDay' name='produceDay' type='text'/>" + "</td>\n" +
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                            "<td  style='display: block'>" + rows[i].producFactory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
+                            "</tr>");//页面每个数量
                     }
                 }
             });
@@ -836,6 +851,7 @@
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     for (var i = 0; i < rows.length; i++) {
+                        // alert(rows[i].classtype)
                         $(".heji3").before("<tr class='val3'>" +
                             // "<td><input type=\"checkbox\"/></td>\n" +
                             "<td >" + rows[i].producNum + "</td>\n" +
@@ -865,11 +881,16 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >" + "效期" + "</td>\n" +
-                            "<td >" +"批号 "+ "</td>\n" +
-                            "<td >" +"注册证号" + "</td>\n" +
-                            "<td >" + "生产日期" + "</td>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
+                            "<td  style='display: block'>" + rows[i].classtype + "</td>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+                            "<td >" + "<input id='useday' name='useday' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='batch' name='batch' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='zhuceNumber' name='zhuceNumber' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='produceDay' name='produceDay' type='text'/>" + "</td>\n" +
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                            "<td  style='display: block'>" + rows[i].producFactory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
+                            "</tr>");//页面每个数量
                     }
                 }
             });
@@ -915,11 +936,16 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >" + "效期" + "</td>\n" +
-                            "<td >" +"批号 "+ "</td>\n" +
-                            "<td >" +"注册证号" + "</td>\n" +
-                            "<td >" + "生产日期" + "</td>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
+                            "<td  style='display: block'>" + rows[i].classtype + "</td>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+                            "<td >" + "<input id='useday' name='useday' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='batch' name='batch' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='zhuceNumber' name='zhuceNumber' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='produceDay' name='produceDay' type='text'/>" + "</td>\n" +
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                            "<td  style='display: block'>" + rows[i].producFactory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
+                            "</tr>");//页面每个数量
                     }
                 }
             });
@@ -959,11 +985,14 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td style='display: none' >" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >" + "效期" + "</td>\n" +
-                            "<td >" +"批号 "+ "</td>\n" +
-                            "<td >" +"注册证号" + "</td>\n" +
-                            "<td >" + "生产日期" + "</td>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
+                            "<td >" + "<input id='useday' name='useday' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='batch' name='batch' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='zhuceNumber' name='zhuceNumber' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='produceDay' name='produceDay' type='text'/>" + "</td>\n" +
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                            "<td  style='display: block'>" + rows[i].producFactory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
+                            "</tr>");//页面每个数量
                     }
                 }
             });
@@ -1005,11 +1034,14 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >" + "效期" + "</td>\n" +
-                            "<td >" +"批号 "+ "</td>\n" +
-                            "<td >" +"注册证号" + "</td>\n" +
-                            "<td >" + "生产日期" + "</td>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
+                            "<td >" + "<input id='useday' name='useday' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='batch' name='batch' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='zhuceNumber' name='zhuceNumber' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='produceDay' name='produceDay' type='text'/>" + "</td>\n" +
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                            "<td  style='display: block'>" + rows[i].producFactory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
+                            "</tr>");//页面每个数量
                     }
                 }
             });
@@ -1052,11 +1084,14 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >" + "效期" + "</td>\n" +
-                            "<td >" +"批号 "+ "</td>\n" +
-                            "<td >" +"注册证号" + "</td>\n" +
-                            "<td >" + "生产日期" + "</td>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
+                            "<td >" + "<input id='useday' name='useday' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='batch' name='batch' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='zhuceNumber' name='zhuceNumber' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='produceDay' name='produceDay' type='text'/>" + "</td>\n" +
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                            "<td  style='display: block'>" + rows[i].producFactory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
+                            "</tr>");//页面每个数量
                     }
                 }
             });
@@ -1096,11 +1131,14 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >" + "效期" + "</td>\n" +
-                            "<td >" +"批号 "+ "</td>\n" +
-                            "<td >" +"注册证号" + "</td>\n" +
-                            "<td >" + "生产日期" + "</td>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
+                            "<td >" + "<input id='useday' name='useday' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='batch' name='batch' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='zhuceNumber' name='zhuceNumber' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='produceDay' name='produceDay' type='text'/>" + "</td>\n" +
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                            "<td  style='display: block'>" + rows[i].producFactory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
+                            "</tr>");//页面每个数量
                     }
                 }
             });
@@ -1140,11 +1178,14 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td style='display: none' >" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >" + "效期" + "</td>\n" +
-                            "<td >" +"批号 "+ "</td>\n" +
-                            "<td >" +"注册证号" + "</td>\n" +
-                            "<td >" + "生产日期" + "</td>\n" +
-                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td></tr>>");//页面每个数量
+                            "<td >" + "<input id='useday' name='useday' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='batch' name='batch' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='zhuceNumber' name='zhuceNumber' type='text'/>" + "</td>\n" +
+                            "<td >" + "<input id='produceDay' name='produceDay' type='text'/>" + "</td>\n" +
+                            "<td  >" + "<input id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                            "<td  style='display: block'>" + rows[i].producFactory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
+                            "</tr>");//页面每个数量
                     }
                 }
             });

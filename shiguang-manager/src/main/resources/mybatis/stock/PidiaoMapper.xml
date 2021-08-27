@@ -4,20 +4,21 @@
 <mapper namespace="com.shiguang.stock.dao.PidiaoDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.PidiaoDO">
-		select `id`,`pidiao_number`,`guanlian_number`,`out_department`,`in_position`,`in_company`,`in_department`,`zhidan_people`,`danju_day`,
-		`outsourcing_number`,`beizhu`,`goods_num`,`goods_name`,`produc_factory`,`need_count`,`goods_count`,`use_count`,`goods_code`,
-		`batch`,`zhuce_number`,`produce_day`,`useday`,`all_count` from stock_pidiao where id = #{value}
+		select `id`,`pidiao_number`,`guanlian_number`,`out_department`,`out_position`,`in_position`,`in_company`,`in_department`,
+		`zhidan_people`,`danju_day`,`outsourcing_number`,`beizhu`,`goods_num`,`goods_name`,`produc_factory`,`need_count`,`goods_count`,
+		`use_count`,`goods_code`,`batch`,`zhuce_number`,`produce_day`,`useday`,`all_count`,`classtype` ,`factory` from stock_pidiao where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.PidiaoDO">
-		select `id`,`pidiao_number`,`guanlian_number`,`out_department`,`in_position`,`in_company`,`in_department`,`zhidan_people`,`danju_day`,
-		`outsourcing_number`,`beizhu`,`goods_num`,`goods_name`,`produc_factory`,`need_count`,`goods_count`,`use_count`,`goods_code`,
-		`batch`,`zhuce_number`,`produce_day`,`useday`,`all_count` from stock_pidiao
+		select `id`,`pidiao_number`,`guanlian_number`,`out_department`,`out_position`,`in_position`,`in_company`,`in_department`,`zhidan_people`,
+		`danju_day`,`outsourcing_number`,`beizhu`,`goods_num`,`goods_name`,`produc_factory`,`need_count`,`goods_count`,`use_count`,`goods_code`,
+		`batch`,`zhuce_number`,`produce_day`,`useday`,`all_count`,`classtype`,`factory` from stock_pidiao
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="pidiaoNumber != null and pidiaoNumber != ''"> and pidiao_number = #{pidiaoNumber} </if>
 		  		  <if test="guanlianNumber != null and guanlianNumber != ''"> and guanlian_number = #{guanlianNumber} </if>
 		  		  <if test="outDepartment != null and outDepartment != ''"> and out_department = #{outDepartment} </if>
+		  		  <if test="outPosition != null and outPosition != ''"> and out_position = #{outPosition} </if>
 		  		  <if test="inPosition != null and inPosition != ''"> and in_position = #{inPosition} </if>
 		  		  <if test="inCompany != null and inCompany != ''"> and in_company = #{inCompany} </if>
 		  		  <if test="inDepartment != null and inDepartment != ''"> and in_department = #{inDepartment} </if>
@@ -37,6 +38,8 @@
 		  		  <if test="produceDay != null and produceDay != ''"> and produce_day = #{produceDay} </if>
 		  		  <if test="useday != null and useday != ''"> and useday = #{useday} </if>
 		  		  <if test="allCount != null and allCount != ''"> and all_count = #{allCount} </if>
+		  		  <if test="classtype != null and classtype != ''"> and classtype = #{classtype} </if>
+		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -58,6 +61,7 @@
 		  		  <if test="pidiaoNumber != null and pidiaoNumber != ''"> and pidiao_number = #{pidiaoNumber} </if>
 		  		  <if test="guanlianNumber != null and guanlianNumber != ''"> and guanlian_number = #{guanlianNumber} </if>
 		  		  <if test="outDepartment != null and outDepartment != ''"> and out_department = #{outDepartment} </if>
+		  		  <if test="outPosition != null and outPosition != ''"> and out_position = #{outPosition} </if>
 		  		  <if test="inPosition != null and inPosition != ''"> and in_position = #{inPosition} </if>
 		  		  <if test="inCompany != null and inCompany != ''"> and in_company = #{inCompany} </if>
 		  		  <if test="inDepartment != null and inDepartment != ''"> and in_department = #{inDepartment} </if>
@@ -77,16 +81,18 @@
 		  		  <if test="produceDay != null and produceDay != ''"> and produce_day = #{produceDay} </if>
 		  		  <if test="useday != null and useday != ''"> and useday = #{useday} </if>
 		  		  <if test="allCount != null and allCount != ''"> and all_count = #{allCount} </if>
+		  		  <if test="classtype != null and classtype != ''"> and classtype = #{classtype} </if>
+		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.shiguang.stock.domain.PidiaoDO">
+	<insert id="save" parameterType="com.shiguang.stock.domain.PidiaoDO" useGeneratedKeys="true" keyProperty="id">
 		insert into stock_pidiao
 		(
-			`id`, 
 			`pidiao_number`, 
 			`guanlian_number`, 
 			`out_department`, 
+			`out_position`, 
 			`in_position`, 
 			`in_company`, 
 			`in_department`, 
@@ -105,14 +111,16 @@
 			`zhuce_number`, 
 			`produce_day`, 
 			`useday`, 
-			`all_count`
+			`all_count`,
+			`classtype`,
+			`factory`
 		)
 		values
 		(
-			#{id}, 
 			#{pidiaoNumber}, 
 			#{guanlianNumber}, 
 			#{outDepartment}, 
+			#{outPosition}, 
 			#{inPosition}, 
 			#{inCompany}, 
 			#{inDepartment}, 
@@ -131,7 +139,9 @@
 			#{zhuceNumber}, 
 			#{produceDay}, 
 			#{useday}, 
-			#{allCount}
+			#{allCount},
+			#{classtype},
+			#{factory}
 		)
 	</insert>
 	 
@@ -141,6 +151,7 @@
 			<if test="pidiaoNumber != null">`pidiao_number` = #{pidiaoNumber}, </if>
 			<if test="guanlianNumber != null">`guanlian_number` = #{guanlianNumber}, </if>
 			<if test="outDepartment != null">`out_department` = #{outDepartment}, </if>
+			<if test="outPosition != null">`out_position` = #{outPosition}, </if>
 			<if test="inPosition != null">`in_position` = #{inPosition}, </if>
 			<if test="inCompany != null">`in_company` = #{inCompany}, </if>
 			<if test="inDepartment != null">`in_department` = #{inDepartment}, </if>
@@ -159,7 +170,9 @@
 			<if test="zhuceNumber != null">`zhuce_number` = #{zhuceNumber}, </if>
 			<if test="produceDay != null">`produce_day` = #{produceDay}, </if>
 			<if test="useday != null">`useday` = #{useday}, </if>
-			<if test="allCount != null">`all_count` = #{allCount}</if>
+			<if test="allCount != null">`all_count` = #{allCount},</if>
+			<if test="classtype != null">`classtype` = #{classtype}</if>
+			<if test="factory != null">`factory` = #{factory}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -175,4 +188,22 @@
 		</foreach>
 	</delete>
 
+
+	<select id="outPosition" resultType="com.shiguang.stock.domain.PidiaoDO">
+		select po.position_id,po.`position_name`,d.`depart_name`from c_position po  left join department d on po.depart_number=d.depart_number
+		<where>
+			<if test="outDepartment != null and outDepartment != ''">and d.depart_name = #{outDepartment}</if>
+			<if test="inDepartment != null and inDepartment != ''">and d.depart_name = #{inDepartment}</if>
+			and po.xsstate=0 and  po.state=1
+		</where>
+		group by po.position_id order by  po.position_id desc
+	</select>
+	<select id="indepartment" resultType="com.shiguang.stock.domain.PidiaoDO">
+		select  d.id,d.depart_name,c.name from department d left join c_company c on d.company_id=c.id
+		<where>
+			<if test="inCompany != null and inCompany != ''">and c.name = #{inCompany}</if>
+			and   d.status=0 and d.state=1
+		</where>
+		group by d.id order by  d.id desc
+	</select>
 </mapper>

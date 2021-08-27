@@ -91,13 +91,18 @@ public class StockController {
     @GetMapping("/list")
     @RequiresPermissions("stock:stock:stock")
     public PageUtils list(@RequestParam Map<String, Object> params) {
-        //———获取当前登录所在部门编码————
-        String storeNum =  ShiroUtils.getUser().getStoreNum();
         //查询列表数据
-        Query queryOrder = new Query(params);
-        queryOrder.put("storeNum",storeNum);
-        List<OrderDO> orderDOList = orderService.list(queryOrder);
-        int total = orderService.count(queryOrder);
+        Query query = new Query(params);
+        //———获取当前登录用户的公司id————
+        String companyid=ShiroUtils.getUser().getCompanyId();
+        if(companyid == null){
+            String departNumber=ShiroUtils.getUser().getStoreNum();
+            query.put("departNumber",departNumber);
+        }else if (companyid != null){
+            query.put("companyid",companyid);
+        }
+        List<OrderDO> orderDOList = orderService.list(query);
+        int total = orderService.count(query);
         PageUtils pageUtils = new PageUtils(orderDOList, total);
         return pageUtils;
     }
@@ -115,9 +120,14 @@ public class StockController {
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         //仓位
-        //———获取当前登录所在部门编码————
-        String storeNum =  ShiroUtils.getUser().getStoreNum();
-        map.put("storeNum", storeNum);
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if(companyId == null){
+            String departNumber=ShiroUtils.getUser().getStoreNum();
+            map.put("departNumber",departNumber);
+        }else if (companyId != null){
+            map.put("companyId",companyId);
+        }
         map.put("positionOrder","2");
         List<PositionDO> positionDOList = positionService.list(map);
         model.addAttribute("positionDOList", positionDOList);
@@ -212,6 +222,29 @@ public class StockController {
                 stockDO.setBeizhu(stock.getBeizhu());
                 String unit = stock.getUnit().split(",")[i];
                 stockDO.setUnit(unit);
+                String useday = stock.getUseday().split(",")[i];
+                stockDO.setUseday(useday);
+                String batch = stock.getBatch().split(",")[i];
+                stockDO.setBatch(batch);
+                String zhuceNumber = stock.getZhuceNumber().split(",")[i];
+                stockDO.setZhuceNumber(zhuceNumber);
+                String produceDay = stock.getProduceDay().split(",")[i];
+                stockDO.setProduceDay(produceDay);
+
+                if(null != stock.getClasstype()){
+                    String classtype = stock.getClasstype().split(",")[i];
+                    stock.setClasstype(classtype);
+                }else{
+                    stock.setClasstype("");
+                }
+                if(null != stock.getFactory()) {
+                    String factory = stock.getFactory().split(",")[i];
+                    stock.setFactory(factory);
+                }else {
+                    stock.setFactory("");
+                }
+
+
                 if (stockService.save(stockDO) < 0) {
                     return R.error();
                 }
@@ -267,6 +300,27 @@ public class StockController {
             orderDO1.setBeizhu(orderDO.getBeizhu());
             String unit = orderDO.getUnit().split(",")[i];
             orderDO1.setUnit(unit);
+            String useday = orderDO.getUseday().split(",")[i];
+            orderDO1.setUseday(useday);
+            String batch = orderDO.getBatch().split(",")[i];
+            orderDO1.setBatch(batch);
+            String zhuceNumber = orderDO.getZhuceNumber().split(",")[i];
+            orderDO1.setZhuceNumber(zhuceNumber);
+            String produceDay = orderDO.getProduceDay().split(",")[i];
+            orderDO1.setProduceDay(produceDay);
+            if(null != orderDO.getClasstype()){
+                String classtype = orderDO.getClasstype().split(",")[i];
+                orderDO1.setClasstype(classtype);
+            }else{
+                orderDO1.setClasstype("");
+            }
+           if(null != orderDO.getFactory()) {
+               String factory = orderDO.getFactory().split(",")[i];
+               orderDO1.setFactory(factory);
+           }else {
+               orderDO1.setFactory("");
+           }
+
             orderService.save(orderDO1);
         }
         return R.ok();

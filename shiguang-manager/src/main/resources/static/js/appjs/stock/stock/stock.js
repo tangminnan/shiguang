@@ -173,6 +173,14 @@ function showCol() {
         //老花镜
         var degrees = rowstr.find("[name='degrees']").html();
         obj.degrees = degrees;
+
+        var classtype = rowstr.find("[name='classtype']").html();
+        obj.classtype = classtype;
+
+        var producFactory = rowstr.find("[name='producFactory']").html();
+        obj.producFactory = producFactory;
+
+
         objArray.push(obj);
     });
     return objArray;

@@ -36,6 +36,6 @@ public interface PositionService {
     //删除修改状态
     int updateState(PositionDO position);
 
-    //     <!--库存查询相对应的仓库-->
+    // <!--库存查询相对应的仓库-->
     List<PositionDO> stockList(Map<String, Object> map);
 }

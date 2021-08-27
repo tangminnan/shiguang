@@ -20,7 +20,7 @@
                             <label class="col-sm-3 control-label">所属部门：</label>
                             <div class="col-sm-8">
                                 <select id="departNumber" name="departNumber" class="form-control">
-                                    <option></option>
+                                    <option value="">请选择</option>
                                     <option th:each="ls:${departmentDOList}"
                                             th:text="${ls.departName}"
                                             th:value="${ls.departNumber}"

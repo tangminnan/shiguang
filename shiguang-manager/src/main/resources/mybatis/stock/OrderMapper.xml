@@ -6,7 +6,7 @@
     <select id="get" resultType="com.shiguang.stock.domain.OrderDO">
 		select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,`price_sum`,
 		`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,
-		`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,`batch`,`zhuce_number`,`produce_day`,`useday`
+		`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,`batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,`factory`
 		 from stock_order where id = #{value}
 	</select>
 
@@ -15,9 +15,10 @@
         s.`id`,s.`goods_num`,s.`goods_code`,s.`goods_name`,s.`goods_count`,s.`goods_type`,s.`mfrsid`,s.`brandname`,s.`retail_price`,
         s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`, s.`position_name`, s.`create_time`,
         s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
-        s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`
+        s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`,s.`classtype`,s.`factory`
         from stock_order s left join c_mfrs m on s.mfrsid=m.mfrsid
         left join c_position po on s.position_name=po.position_name
+        left join department d on po.depart_number= d.depart_number
         <where>
             <if test="id != null and id != ''">and s.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
@@ -44,11 +45,14 @@
             <if test="factoryNumber != null and factoryNumber != ''">and s.factory_number = #{factoryNumber}</if>
             <if test="beizhu != null and beizhu != ''">and s.beizhu = #{beizhu}</if>
             <if test="unit != null and unit != ''">and s.unit = #{unit}</if>
-            <if test="storeNum != null and storeNum != ''">and po.depart_number = #{storeNum}</if>
             <if test="batch != null and batch != ''"> and s.batch = #{batch} </if>
             <if test="zhuceNumber != null and zhuceNumber != ''"> and s.zhuce_number = #{zhuceNumber} </if>
             <if test="produceDay != null and produceDay != ''"> and s.produce_day = #{produceDay} </if>
             <if test="useday != null and useday != ''"> and s.useday = #{useday} </if>
+            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
+            <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
+            <if test="classtype != null and classtype != ''">and s.classtype = #{classtype} </if>
+            <if test="factory != null and factory != ''">and s.factory = #{factory} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -66,7 +70,7 @@
 
     <select id="count" resultType="int">
         select count(*) from stock_order s left join c_mfrs m on s.mfrsid=m.mfrsid
-        left join c_position po on s.position_name=po.position_name
+        left join c_position po on s.position_name=po.position_name left join department d on po.depart_number= d.depart_number
         <where>
             <if test="id != null and id != ''">and s.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
@@ -93,11 +97,14 @@
             <if test="factoryNumber != null and factoryNumber != ''">and s.factory_number = #{factoryNumber}</if>
             <if test="beizhu != null and beizhu != ''">and s.beizhu = #{beizhu}</if>
             <if test="unit != null and unit != ''">and s.unit = #{unit}</if>
-            <if test="storeNum != null and storeNum != ''">and po.depart_number = #{storeNum}</if>
             <if test="batch != null and batch != ''"> and s.batch = #{batch} </if>
             <if test="zhuceNumber != null and zhuceNumber != ''"> and s.zhuce_number = #{zhuceNumber} </if>
             <if test="produceDay != null and produceDay != ''"> and s.produce_day = #{produceDay} </if>
             <if test="useday != null and useday != ''"> and s.useday = #{useday} </if>
+            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
+            <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
+            <if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+            <if test="factory != null and factory != ''"> and s.factory = #{factory} </if>
         </where>
     </select>
 
@@ -131,7 +138,9 @@
 			`batch`,
 			`zhuce_number`,
 			`produce_day`,
-			`useday`
+			`useday`,
+			`classtype`,
+			`factory`
 		)
 		values
 		(
@@ -162,7 +171,9 @@
 			#{batch},
 			#{zhuceNumber},
 			#{produceDay},
-			#{useday}
+			#{useday},
+			#{classtype},
+			#{factory}
 		)
 	</insert>
 
@@ -196,7 +207,9 @@
             <if test="batch != null">`batch` = #{batch}, </if>
             <if test="zhuceNumber != null">`zhuce_number` = #{zhuceNumber}, </if>
             <if test="produceDay != null">`produce_day` = #{produceDay}, </if>
-            <if test="useday != null">`useday` = #{useday} </if>
+            <if test="useday != null">`useday` = #{useday} ,</if>
+            <if test="classtype != null">`classtype` = #{classtype}, </if>
+            <if test="factory != null">`factory` = #{factory} </if>
         </set>
         where id = #{id}
     </update>

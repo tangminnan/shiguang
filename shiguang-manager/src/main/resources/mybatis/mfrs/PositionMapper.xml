@@ -13,28 +13,27 @@
     </select>
     <select id="list" resultType="com.shiguang.mfrs.domain.PositionDO">
         select po.`position_id`,po.`position_num`,po.`position_name`,d.`depart_name`,po.`position_order`,po.`state_id`,po.`xsstate`,po.`state`
-        from c_position po left join sys_user u on po.depart_number=u.store_num left join department d on po.depart_number=d.depart_number
+        from c_position po  left join department d on po.depart_number=d.depart_number
         <where>
             <if test="positionNum != null and positionNum != ''">and po.position_num = #{positionNum}</if>
             <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
             <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
             <if test="positionOrder != null and positionOrder != ''">and po.position_order = #{positionOrder}</if>
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
-            <if test="storeNum != null and storeNum != ''">and po.depart_number = #{storeNum}</if>
-            <if test="companyid != null and companyid != ''">and d.company_id in (#{companyid})</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
             and  po.state=1
         </where>
         group by po.position_id order by  po.position_id desc
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from c_position po left join department de on po.depart_number=de.depart_number
+        select count(*) from c_position po  left join department d on po.depart_number=d.depart_number
         <where>
             <if test="positionNum != null and positionNum != ''">and po.position_num = #{positionNum}</if>
             <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
             <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
-            <if test="storeNum != null and storeNum != ''">and po.depart_number = #{storeNum}</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
             and  po.state=1
         </where>
     </select>
@@ -97,7 +96,16 @@
 
     <!--库存查询相对应的仓库-->
     <select id="stockList" resultType="com.shiguang.mfrs.domain.PositionDO">
-        select position_name from c_position where xsstate = #{xsstate} and state=1
+        select position_name  from c_position po  left join department d on po.depart_number=d.depart_number
+        <where>
+            <if test="positionNum != null and positionNum != ''">and po.position_num = #{positionNum}</if>
+            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
+            <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
+            <if test="positionOrder != null and positionOrder != ''">and po.position_order = #{positionOrder}</if>
+            <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+            and  po.state=1
+        </where>
         group by position_id order by  position_id desc
     </select>
 </mapper>

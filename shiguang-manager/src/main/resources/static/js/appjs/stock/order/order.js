@@ -63,6 +63,10 @@ function load() {
                         title: '入库人'
                     },
                     {
+                        field: 'positionName',
+                        title: '入库仓位'
+                    },
+                    {
                         field: 'danjuDay',
                         title: '制单日期'
                     },

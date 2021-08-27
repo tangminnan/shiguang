@@ -6,7 +6,7 @@ import java.util.Date;
 public class DepartmentDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    //
+    //部门id
     private Long id;
     //部门编码
     private String departNumber;

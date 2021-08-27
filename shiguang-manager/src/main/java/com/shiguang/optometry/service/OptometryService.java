@@ -43,4 +43,8 @@ public interface OptometryService {
     //开检查单数量
     int moenyListcount(Map<String, Object> map);
 
+    //检查用户
+    List<OptometryDO> userList(Map<String, Object> map);
+    //检查用户数量
+    int userListcount(Map<String, Object> map);
 }

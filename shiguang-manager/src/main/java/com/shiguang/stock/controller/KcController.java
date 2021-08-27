@@ -60,6 +60,14 @@ public class KcController {
         Map<String, Object> map = new HashMap<>();
         //仓位
         map.put("xsstate", xsstate);
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if(companyId != null){
+            map.put("companyId",companyId);
+        }else if (companyId == null){
+            String departNumber=ShiroUtils.getUser().getStoreNum();
+            map.put("departNumber",departNumber);
+        }
         List<PositionDO> positionList = positionService.stockList(map);
         model.addAttribute("positionList", positionList);
         return positionList;
@@ -70,12 +78,17 @@ public class KcController {
     @RequestMapping(value = "/selectKc")
     public List<StockDO> selectSg(String goodsNum, String goodsCode, String goodsName,
                                   Integer goodsType, String mfrsname,String brandname,String retailPrice, String retailPrice2,
-                                  Long xsstate, String positionName, Model model) {
+                                  Long xsstate, String positionName,String classtype, Model model) {
         Map<String, Object> map = new HashMap<>();
 
-        //———获取当前登录所在部门编码————
-        String storeNum =  ShiroUtils.getUser().getStoreNum();
-        map.put("storeNum", storeNum);
+        //———获取当前登录用户的公司id————
+        String companyid=ShiroUtils.getUser().getCompanyId();
+        if(companyid != null){
+            map.put("companyid",companyid);
+        }else if (companyid == null){
+            String departNumber=ShiroUtils.getUser().getStoreNum();
+            map.put("departNumber",departNumber);
+        }
         map.put("goodsNum", goodsNum);
         map.put("goodsCode", goodsCode);
         map.put("goodsName", goodsName);
@@ -86,6 +99,7 @@ public class KcController {
         map.put("retailPrice2", retailPrice2);
         map.put("xsstate", xsstate);
         map.put("positionName", positionName);
+        map.put("classtype", classtype);
         List<StockDO> stockDOS = stockService.kccxList(map);
         model.addAttribute("stockDOS", stockDOS);
         return stockDOS;

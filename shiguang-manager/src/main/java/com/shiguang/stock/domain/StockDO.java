@@ -185,6 +185,15 @@ public class StockDO implements Serializable {
     private String curvatureEr;
     //定做周期（天）
     private Long cycle;
+    private  String classtype;
+
+    public String getClasstype() {
+        return classtype;
+    }
+
+    public void setClasstype(String classtype) {
+        this.classtype = classtype;
+    }
 
     /**
      * 设置：主键
@@ -951,5 +960,13 @@ public class StockDO implements Serializable {
     public Long getCycle() {
         return cycle;
     }
+    private String factory;
 
+    public String getFactory() {
+        return factory;
+    }
+
+    public void setFactory(String factory) {
+        this.factory = factory;
+    }
 }

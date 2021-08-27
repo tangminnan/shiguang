@@ -181,6 +181,8 @@
             <td style="display: none">调货成本</td>
             <td style="display: none">商品条码</td>
             <td style="display: none">商品品种</td>
+            <td style="display: block">镜片类型</td>
+            <td style="display: block">型号</td>
         </tr>
         </tbody>
     </table>
@@ -200,25 +202,28 @@
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
+                    // alert(xml[i].classtype+"镜片类型")
                     $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                        "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
-                        "            <td name='producName'>" + xml[i].producName + "</td>\n" +
-                        "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
-                        "            <td name='factory'>" + "" + "</td>\n" +
-                        "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                        "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
-                        "            <td name='sph'>" + xml[i].sph + "</td>\n" +
-                        "            <td name='cyl'>" + xml[i].cyl + "</td>\n" +
-                        "            <td name='lightbelow'>" + xml[i].lightbelow + "</td>\n" +
-                        "            <td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
-                        "            <td name='lightName'>" + xml[i].lightName + "</td>\n" +
-                        "            <td name='lensName'>" + xml[i].lensName + "</td>\n" +
-                        "            <td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
-                        "            <td name='functionName'>" + xml[i].functionName + "</td>\n" +
-                        "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
-                        "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
-                        "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
-                        "            <td name='brandname' style='display: none'>" + xml[i].brandname + "</td></tr>>");
+                        "<td name='producNum'>" + xml[i].producNum + "</td>\n" +
+                        "<td name='producName'>" + xml[i].producName + "</td>\n" +
+                        "<td name='unitname'>" + xml[i].unitname + "</td>\n" +
+                        "<td name='factory'>" + "" + "</td>\n" +
+                        "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                        "<td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
+                        "<td name='sph'>" + xml[i].sph + "</td>\n" +
+                        "<td name='cyl'>" + xml[i].cyl + "</td>\n" +
+                        "<td name='lightbelow'>" + xml[i].lightbelow + "</td>\n" +
+                        "<td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
+                        "<td name='lightName'>" + xml[i].lightName + "</td>\n" +
+                        "<td name='lensName'>" + xml[i].lensName + "</td>\n" +
+                        "<td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
+                        "<td name='functionName'>" + xml[i].functionName + "</td>\n" +
+                        "<td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
+                        "<td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
+                        "<td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
+                        "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>\n" +
+                        "<td name='classtype' style='display: block'>" + xml[i].classtype + "</td>" +
+                        "</tr>");
                 }
             }
         })
@@ -267,24 +272,26 @@
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
                         $(".buyBtns").append("<tr class='valJpcp'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
-                            "            <td name='producName'>" + xml[i].producName + "</td>\n" +
-                            "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
-                            "            <td name='factory'>" + "" + "</td>\n" +
-                            "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                            "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
-                            "            <td name='sph'>" + xml[i].sph + "</td>\n" +
-                            "            <td name='cyl'>" + xml[i].cyl + "</td>\n" +
-                            "            <td name='lightbelow'>" + xml[i].lightbelow + "</td>\n" +
-                            "            <td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
-                            "            <td name='lightName'>" + xml[i].lightName + "</td>\n" +
-                            "            <td name='lensName'>" + xml[i].lensName + "</td>\n" +
-                            "            <td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
-                            "            <td name='functionName'>" + xml[i].functionName + "</td>\n" +
-                            "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
-                            "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
-                            "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
-                            "            <td name='brandname' style='display: none'>" + xml[i].brandname + "</td></tr>>");
+                            "<td name='producNum'>" + xml[i].producNum + "</td>\n" +
+                            "<td name='producName'>" + xml[i].producName + "</td>\n" +
+                            "<td name='unitname'>" + xml[i].unitname + "</td>\n" +
+                            "<td name='factory'>" + "" + "</td>\n" +
+                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "<td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
+                            "<td name='sph'>" + xml[i].sph + "</td>\n" +
+                            "<td name='cyl'>" + xml[i].cyl + "</td>\n" +
+                            "<td name='lightbelow'>" + xml[i].lightbelow + "</td>\n" +
+                            "<td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
+                            "<td name='lightName'>" + xml[i].lightName + "</td>\n" +
+                            "<td name='lensName'>" + xml[i].lensName + "</td>\n" +
+                            "<td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
+                            "<td name='functionName'>" + xml[i].functionName + "</td>\n" +
+                            "<td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
+                            "<td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
+                            "<td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
+                            "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>\n" +
+                            "<td name='classtype' style='display: block'>" + xml[i].classtype + "</td>" +
+                            "</tr>");
                     }
                 }
             })
@@ -329,24 +336,27 @@
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
                         $(".buyBtns").append("<tr class='valJpdz'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "            <td name='producNum'>" + xml[i].producNum + "</td>\n" +
-                            "            <td name='producName'>" + xml[i].producName + "</td>\n" +
-                            "            <td name='unitname'>" + xml[i].unitname + "</td>\n" +
-                            "            <td name='factory'>" + xml[i].factory + "</td>\n" +
-                            "            <td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                            "            <td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
-                            "            <td name='sph'>" + xml[i].sphUp + "/" + xml[i].sphDown + "</td>\n" +
-                            "            <td name='cyl'>" + xml[i].cylUp + "/" + xml[i].cylDown + "</td>\n" +
-                            "            <td name='lightbelow'>" + xml[i].lightbelowRight + "/" + xml[i].lightbelowLeft + "</td>\n" +
-                            "            <td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
-                            "            <td name='lightName'>" + xml[i].lightName + "</td>\n" +
-                            "            <td name='lensName'>" + xml[i].lensName + "</td>\n" +
-                            "            <td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
-                            "            <td name='functionName'>" + xml[i].functionName + "</td>\n" +
-                            "            <td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
-                            "            <td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
-                            "            <td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
-                            "            <td name='brandname' style='display: none'>" + xml[i].brandname + "</td></tr>>");
+                            "<td name='producNum'>" + xml[i].producNum + "</td>\n" +
+                            "<td name='producName'>" + xml[i].producName + "</td>\n" +
+                            "<td name='unitname'>" + xml[i].unitname + "</td>\n" +
+                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
+                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "<td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
+                            "<td name='sph'>" + xml[i].sphUp + "/" + xml[i].sphDown + "</td>\n" +
+                            "<td name='cyl'>" + xml[i].cylUp + "/" + xml[i].cylDown + "</td>\n" +
+                            "<td name='lightbelow'>" + xml[i].lightbelowRight + "/" + xml[i].lightbelowLeft + "</td>\n" +
+                            "<td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
+                            "<td name='lightName'>" + xml[i].lightName + "</td>\n" +
+                            "<td name='lensName'>" + xml[i].lensName + "</td>\n" +
+                            "<td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
+                            "<td name='functionName'>" + xml[i].functionName + "</td>\n" +
+                            "<td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
+                            "<td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
+                            "<td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
+                            "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>" +
+                            "<td name='classtype' style='display: block'>" + xml[i].classtype + "</td>" +
+                            "<td name='producFactory' style='display: block'>" + xml[i].producFactory + "</td>" +
+                            "</tr>>");
                     }
                 }
             })
@@ -357,7 +367,7 @@
         var mfrsid = document.getElementById('mfrsid').value;
         // alert(goodsid);
         if (mfrsid == "") {
-            alert("请选择制造商！");
+            layer.alert("请选择制造商！");
         } else {
             //选择镜架
             var toIndex = layer.open({

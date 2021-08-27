@@ -120,6 +120,15 @@ public class YxdzDO implements Serializable {
     private Long xsstate;
     //状态(0:删除1:未删除)
     private Long state;
+    private  String classtype;
+
+    public String getClasstype() {
+        return classtype;
+    }
+
+    public void setClasstype(String classtype) {
+        this.classtype = classtype;
+    }
 
     /**
      * 设置：隐形定做id

@@ -389,4 +389,23 @@
             <if test="state != null and state != ''"> and me.state = #{state} </if>
         </where>
     </select>
+    <!--//检查用户-->
+    <select id="userList" resultType="com.shiguang.optometry.domain.OptometryDO">
+        select m.card_number,m.name,m.sex,m.age from member m left join department d  on m.depart_number=d.depart_number
+        left join c_company c on c.id = d.company_id
+      <where>
+          <if test="departNumber != null and departNumber != ''">and d.depart_number = #{departNumber}</if>
+          <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+      </where>
+      order by m.id desc
+    </select>
+    <!--//检查用户数量-->
+    <select id="userListcount" resultType="int">
+    select count(*)  from  member m left join department d  on m.depart_number=d.depart_number
+        left join c_company c on c.id = d.company_id
+        <where>
+            <if test="departNumber != null and departNumber != ''">and d.depart_number = #{departNumber}</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+        </where>
+    </select>
 </mapper>

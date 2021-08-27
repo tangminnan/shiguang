@@ -1,5 +1,6 @@
 package com.shiguang.stock.dao;
 
+import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.stock.domain.PidiaoDO;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 批调表
  * @author cln
  * @email bushuo@163.com
- * @date 2021-08-25 10:27:20
+ * @date 2021-08-26 14:50:55
  */
 @Mapper
 public interface PidiaoDao {
@@ -29,4 +30,7 @@ public interface PidiaoDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	List<PidiaoDO> outPosition(Map<String, Object> map);
+	List<PidiaoDO> indepartment(Map<String, Object> map);
 }

@@ -45,7 +45,7 @@
             <if test="backgroundimage != null and backgroundimage != ''">and backgroundimage = #{backgroundimage}</if>
             <if test="departmentimage != null and departmentimage != ''">and departmentimage = #{departmentimage}</if>
             <if test="xsstate != null and xsstate != ''">and xsstate = #{xsstate}</if>
-            <if test="state != null and state != ''">and state = #{state}</if>
+            and state=1
         </where>
         group by id order by id desc
     </select>
@@ -79,7 +79,7 @@
             <if test="backgroundimage != null and backgroundimage != ''">and backgroundimage = #{backgroundimage}</if>
             <if test="departmentimage != null and departmentimage != ''">and departmentimage = #{departmentimage}</if>
             <if test="xsstate != null and xsstate != ''">and xsstate = #{xsstate}</if>
-            <if test="state != null and state != ''">and state = #{state}</if>
+            and state=1
         </where>
     </select>
 

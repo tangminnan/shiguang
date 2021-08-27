@@ -16,7 +16,7 @@
       j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
       j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
       j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
-      j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`
+      j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`,j.`classtype`
       from aa_jpdz j
       left join c_refractivity r on r.refractivityid = j.refractivityid
       left join p_light pl on pl.light_id = j.light_id
@@ -49,7 +49,7 @@
         j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
         j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
         j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
-        j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`
+        j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`,j.`classtype`
         from aa_jpdz j
         left join c_refractivity r on r.refractivityid = j.refractivityid
         left join p_light pl on pl.light_id = j.light_id
@@ -83,6 +83,7 @@
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
             <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
+            <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             and j.state= 1
         </where>
         group by j.id order by  j.id desc
@@ -122,6 +123,7 @@
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
             <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
+            <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             and j.state= 1
         </where>
     </select>
@@ -304,7 +306,8 @@
 			`transfer_price`, 
 			`retail_price`,
 			`xsstate`,
-			`state`
+			`state`,
+			`classtype`
 		)
 		values
 		(
@@ -344,7 +347,8 @@
 			#{transferPrice}, 
 			#{retailPrice},
 			#{xsstate},
-			#{state}
+			#{state},
+			#{classtype}
 		)
 	</insert>
 
@@ -387,7 +391,8 @@
             <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
             <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
             <if test="xsstate != null">`xsstate` = #{xsstate},</if>
-            <if test="state != null">`state` = #{state}</if>
+            <if test="state != null">`state` = #{state},</if>
+            <if test="classtype != null">`classtype` = #{classtype}</if>
         </set>
         where id = #{id}
     </update>

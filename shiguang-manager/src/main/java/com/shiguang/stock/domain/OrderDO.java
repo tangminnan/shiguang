@@ -196,6 +196,15 @@ private String brandname;
     public void setQRCode(String QRCode) {
         this.QRCode = QRCode;
     }
+    private  String classtype;
+
+    public String getClasstype() {
+        return classtype;
+    }
+
+    public void setClasstype(String classtype) {
+        this.classtype = classtype;
+    }
 
     /**
      * 设置：主键
@@ -962,5 +971,13 @@ private String brandname;
     public Long getCycle() {
         return cycle;
     }
+private String factory;
 
+    public String getFactory() {
+        return factory;
+    }
+
+    public void setFactory(String factory) {
+        this.factory = factory;
+    }
 }

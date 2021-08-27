@@ -1,5 +1,6 @@
 package com.shiguang.stock.service.impl;
 
+import com.shiguang.mfrs.domain.PositionDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,14 @@ public class PidiaoServiceImpl implements PidiaoService {
 	public int batchRemove(Long[] ids){
 		return pidiaoDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public List<PidiaoDO> outPosition(Map<String, Object> map) {
+		return pidiaoDao.outPosition(map);
+	}
+
+	@Override
+	public List<PidiaoDO> indepartment(Map<String, Object> map) {
+		return  pidiaoDao.indepartment(map);
+	}
 }

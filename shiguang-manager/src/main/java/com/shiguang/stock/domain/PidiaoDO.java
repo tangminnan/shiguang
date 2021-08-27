@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-08-25 10:27:20
+ * @date 2021-08-26 14:50:55
  */
 public class PidiaoDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,12 +23,14 @@ public class PidiaoDO implements Serializable {
 	private String guanlianNumber;
 	//发出部门
 	private String outDepartment;
-	//接收仓位
-	private String inPosition;
+	//发出仓位
+	private String outPosition;
 	//接收公司
 	private String inCompany;
 	//接收部门
 	private String inDepartment;
+	//接收仓位
+	private String inPosition;
 	//制单人
 	private String zhidanPeople;
 	//单据日期
@@ -61,6 +63,15 @@ public class PidiaoDO implements Serializable {
 	private String useday;
 	//合计
 	private String allCount;
+	private  String classtype;
+
+	public String getClasstype() {
+		return classtype;
+	}
+
+	public void setClasstype(String classtype) {
+		this.classtype = classtype;
+	}
 
 	/**
 	 * 设置：批调id
@@ -109,6 +120,18 @@ public class PidiaoDO implements Serializable {
 	 */
 	public String getOutDepartment() {
 		return outDepartment;
+	}
+	/**
+	 * 设置：发出仓位
+	 */
+	public void setOutPosition(String outPosition) {
+		this.outPosition = outPosition;
+	}
+	/**
+	 * 获取：发出仓位
+	 */
+	public String getOutPosition() {
+		return outPosition;
 	}
 	/**
 	 * 设置：接收仓位
@@ -337,5 +360,64 @@ public class PidiaoDO implements Serializable {
 	 */
 	public String getAllCount() {
 		return allCount;
+	}
+	//仓位id
+	private Long positionId;
+	//仓位代码
+	private String positionNum;
+	//部门编码
+	private String departNumber;
+	//部门名称
+	private String departName;
+	//仓位名称
+	private String positionName;
+
+	public Long getPositionId() {
+		return positionId;
+	}
+
+	public void setPositionId(Long positionId) {
+		this.positionId = positionId;
+	}
+
+	public String getPositionNum() {
+		return positionNum;
+	}
+
+	public void setPositionNum(String positionNum) {
+		this.positionNum = positionNum;
+	}
+
+	public String getDepartNumber() {
+		return departNumber;
+	}
+
+	public void setDepartNumber(String departNumber) {
+		this.departNumber = departNumber;
+	}
+
+	public String getDepartName() {
+		return departName;
+	}
+
+	public void setDepartName(String departName) {
+		this.departName = departName;
+	}
+
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+	private String factory;
+
+	public String getFactory() {
+		return factory;
+	}
+
+	public void setFactory(String factory) {
+		this.factory = factory;
 	}
 }

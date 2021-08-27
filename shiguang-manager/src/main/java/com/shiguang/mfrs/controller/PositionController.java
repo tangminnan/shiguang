@@ -54,13 +54,12 @@ public class PositionController {
         //查询列表数据
         Query query = new Query(params);
         //———获取当前登录用户的公司id————
-        String companyid=ShiroUtils.getUser().getCompanyId();
-        if(companyid == null){
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if(companyId != null){
+            query.put("companyId",companyId);
+        }else if (companyId == null){
             String departNumber=ShiroUtils.getUser().getStoreNum();
             query.put("departNumber",departNumber);
-        }else if (companyid != null){
-            query.put("companyid",companyid);
-
         }
         List<PositionDO> positionList = positionService.list(query);
         int total = positionService.count(query);
@@ -80,7 +79,6 @@ public class PositionController {
             map.put("departNumber",departNumber);
         }else if (companyId != null){
             map.put("companyId",companyId);
-
         }
         map.put("status","0");
         List<DepartmentDO> departmentDOList = departmentService.list(map);

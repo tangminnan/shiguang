@@ -66,7 +66,6 @@ public class CompanyController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		query.put("state",1);
 		List<CompanyDO> companyList = companyService.list(query);
 		int total = companyService.count(query);
 		PageUtils pageUtils = new PageUtils(companyList, total);

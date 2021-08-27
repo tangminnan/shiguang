@@ -82,12 +82,27 @@ public class OptometryNewController {
 //        int total = memberService.count(query);
 //        PageUtils pageUtils = new PageUtils(memberDOList, total);
 //        return pageUtils;
-        //检查单列表
+//        //检查单列表
+//        Query query = new Query(params);
+//        query.put("isSale",1);
+//        query.put("type","检查单");
+//        List<OptometryDO> optometryDOList= optometryService.moenyList(query);
+//        int total =optometryService.moenyListcount(query);
+//        PageUtils pageUtils = new PageUtils(optometryDOList, total);
+//        return pageUtils;
+        //查询列表数据
         Query query = new Query(params);
-        query.put("isSale",1);
-        query.put("type","检查单");
-        List<OptometryDO> optometryDOList= optometryService.moenyList(query);
-        int total =optometryService.moenyListcount(query);
+        query.put("state", 1);
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if(companyId == null){
+            String departNumber=ShiroUtils.getUser().getStoreNum();
+            query.put("departNumber",departNumber);
+        }else if (companyId != null){
+            query.put("companyId",companyId);
+        }
+        List<OptometryDO> optometryDOList = optometryService.userList(query);
+        int total = optometryService.userListcount(query);
         PageUtils pageUtils = new PageUtils(optometryDOList, total);
         return pageUtils;
     }

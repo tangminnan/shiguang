@@ -112,9 +112,16 @@
                         <!--</td>-->
                         <td>销售状态：</td>
                         <td>
-                            <input name="xsstate" value="1" type="radio"> <label for="PH-S"
+                            <input name="xsstate" value="1" id="PH-S" type="radio"> <label for="PH-S"
                                 style="margin-right: 5%">禁用</label>
-                            <input name="xsstate" value="0" type="radio" checked> <label for="PH-F">启用</label>
+                            <input name="xsstate" value="0" id="PH-F" type="radio" checked> <label for="PH-F">启用</label>
+                            <em>*</em>
+                        </td>
+                        <td>镜片类型：</td>
+                        <td>
+                            <input name="classtype" value="1"  type="radio" checked  onclick="return false"> <label for="PH-S"
+                                                                                  style="margin-right: 5%">成品片</label>
+                            <input name="classtype" value="2"  type="radio"  onclick="return false"> <label for="PH-F">定做片</label>
                             <em>*</em>
                         </td>
                     </tr>
@@ -224,6 +231,16 @@
     <script type="text/javascript" src="/js/appjs/product/jpcp/add.js"></script>
     <script type="text/javascript" src="/js/appjs/mfrs/brand/findmfrs.js"></script>
     <script type="text/javascript">
+        $(function () {
+            $("input[type='checkbox']").click(function () {
+                this.checked = !this.checked;
+            });
+        });
+        $(function () {
+            $("input[type='radio']").click(function () {
+                this.checked = !this.checked;
+            });
+        });
         function baocun() {
             //商品名称
             var producName = document.getElementById('producName').value;

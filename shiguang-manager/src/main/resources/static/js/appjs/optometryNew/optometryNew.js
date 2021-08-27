@@ -51,11 +51,11 @@ function load() {
                         title: '会员卡号',
                         align: 'center'
                     },
-                    {
-                        field: 'saleNumber',
-                        title: '缴费单号',
-                        align: 'center'
-                    },
+                    // {
+                    //     field: 'saleNumber',
+                    //     title: '缴费单号',
+                    //     align: 'center'
+                    // },
                     {
                         field: 'name',
                         title: '姓名',

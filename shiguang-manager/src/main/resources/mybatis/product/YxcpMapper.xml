@@ -8,7 +8,7 @@
         m.`mfrsname`,b.`brandname`,u.`unitname`,
         y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
         y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,y.`caizhi_id`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,
-        y.`retail_price`,y.`xsstate`,y.`state`
+        y.`retail_price`,y.`xsstate`,y.`state`,y.`classtype`
         from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
         left join c_unit u on y.unitid= u.unitid left join a_cyl l on l.cyl_id=y.cyl_id left join a_sph s on
         s.sph_id=y.sph_id
@@ -20,7 +20,7 @@
         m.`mfrsname`,b.`brandname`,u.`unitname`,
         y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`proid`,y.`unitid`,y.`sph_id`,y.`cyl_id`,y.`curvature`,y.`diameter`,y.`factory`,
         y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,y.`caizhi_id`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,
-        y.`retail_price`,y.`xsstate`,y.`state`
+        y.`retail_price`,y.`xsstate`,y.`state`,y.`classtype`
         from aa_yxcp y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
         left join c_unit u on y.unitid= u.unitid left join a_cyl l on l.cyl_id=y.cyl_id left join a_sph s on
         s.sph_id=y.sph_id
@@ -38,6 +38,7 @@
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="xsstate != null and xsstate != ''">and y.xsstate = #{xsstate}</if>
+            <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
 
             <if test="sph != null and sph != ''">
                 and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
@@ -68,6 +69,7 @@
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="xsstate != null and xsstate != ''">and y.xsstate = #{xsstate}</if>
+            <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
 
             <if test="sph != null and sph != ''">
                 and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
@@ -109,7 +111,8 @@
 			`transfer_price`, 
 	        `retail_price`,
 			`xsstate`,
-			`state`
+			`state`,
+			`classtype`
 		)
 		values
 		(
@@ -140,7 +143,8 @@
 			#{transferPrice}, 
 			#{retailPrice},
 			#{xsstate},
-			#{state}
+			#{state},
+			#{classtype}
 		)
 	</insert>
 
@@ -174,7 +178,8 @@
             <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
             <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
             <if test="xsstate != null">`xsstate` = #{xsstate},</if>
-            <if test="state != null">`state` = #{state}</if>
+            <if test="state != null">`state` = #{state},</if>
+            <if test="classtype != null">`classtype` = #{classtype}</if>
         </set>
         where id = #{id}
     </update>

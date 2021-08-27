@@ -47,12 +47,12 @@
                     </label>
                 </div>
                 <!--<div id="yx" style="display: none">-->
-                    <!--<label class="radio-inline">-->
-                        <!--<input type="radio" name="classtype"  value="3" /> 成品片-->
-                    <!--</label>-->
-                    <!--<label class="radio-inline">-->
-                        <!--<input type="radio" name="classtype" value="4" /> 订做片-->
-                    <!--</label>-->
+                <!--<label class="radio-inline">-->
+                <!--<input type="radio" name="classtype"  value="3" /> 成品片-->
+                <!--</label>-->
+                <!--<label class="radio-inline">-->
+                <!--<input type="radio" name="classtype" value="4" /> 订做片-->
+                <!--</label>-->
                 <!--</div>-->
             </td>
             <td>制造商：</td>
@@ -117,6 +117,10 @@
     <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
         <tbody>
         <tr class="thead">
+            <td>
+                多选
+                <!--<input type="checkbox"/>-->
+            </td>
             <td>商品代码</td>
             <td>商品条码</td>
             <td>商品名称</td>
@@ -130,20 +134,25 @@
             <td>批发价格</td>
             <td>批发合计</td>
             <td>仓位</td>
+            <td>批号</td>
+            <td>注册证号</td>
+            <td>生产日期</td>
+            <td>效期</td>
         </tr>
         <!--<tr>-->
-            <!--<td colspan="3">页内合计：</td>-->
-            <!--<td>45684</td>-->
-            <!--<td colspan="5"></td>-->
-            <!--<td>0.00</td>-->
-            <!--<td></td>-->
-            <!--<td>55555555</td>-->
-            <!--<td></td>-->
+        <!--<td colspan="3">页内合计：</td>-->
+        <!--<td>45684</td>-->
+        <!--<td colspan="5"></td>-->
+        <!--<td>0.00</td>-->
+        <!--<td></td>-->
+        <!--<td>55555555</td>-->
+        <!--<td></td>-->
         <!--</tr>-->
         </tbody>
     </table>
 </div>
 <div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var xsstate=$("input[name='xsstate']:checked").val();
@@ -177,20 +186,26 @@
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
-                    $(".buyBtns").append("<tr class='val'>" +
-                        "            <td>" + xml[i].goodsNum + "</td>\n" +
-                        "            <td>" + xml[i].goodsCode + "</td>\n" +
-                        "            <td>" + xml[i].goodsName + "</td>\n" +
-                        "            <td>" + xml[i].goodsCount + "</td>\n" +
-                        "            <td>" + xml[i].gdname + "</td>\n" +
-                        "            <td>" + xml[i].mfrsname + "</td>\n" +
-                        "            <td>" + xml[i].retailPrice + "</td>\n" +
-                        "            <td>" + xml[i].priceSum + "</td>\n" +
-                        "            <td>" + xml[i].costPrice + "</td>\n" +
-                        "            <td>" + xml[i].costSum + "</td>\n" +
-                        "            <td>" + xml[i].wholePrice + "</td>\n" +
-                        "            <td>" + xml[i].wholeSum + "</td>\n" +
-                        "            <td>" + xml[i].positionName + "</td></tr>>");
+                    $(".buyBtns").append("<tr class='val'> " +
+                        "<td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                        "<td name='goodsCode'>" + xml[i].goodsCode + "</td>\n" +
+                        "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                        "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                        "<td name='gdname'>" + xml[i].gdname + "</td>\n" +
+                        "<td name='mfrsname'>" + xml[i].mfrsname + "</td>\n" +
+                        "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                        "<td name='priceSum'>" + xml[i].priceSum + "</td>\n" +
+                        "<td name='costPrice'>" + xml[i].costPrice + "</td>\n" +
+                        "<td name='costSum'>" + xml[i].costSum + "</td>\n" +
+                        "<td name='wholePrice'>" + xml[i].wholePrice + "</td>\n" +
+                        "<td name='wholeSum'>" + xml[i].wholeSum + "</td>\n" +
+                        "<td name='positionName'>" + xml[i].positionName + "</td>" +
+                        "<td name='batch'>" + xml[i].batch + "</td>" +
+                        "<td name='zhuceNumber'>" + xml[i].zhuceNumber + "</td>" +
+                        "<td name='produceDay'>" + xml[i].produceDay + "</td>" +
+                        "<td name='useday'>" + xml[i].useday + "</td>" +
+                        "</tr>");
                 }
             }
         })
@@ -277,7 +292,7 @@
         var goodsName = $("#goodsName").val();
         var goodsType = $("#goodsType option:selected").val();
         if (goodsType == 1){
-         var  classtype ="";
+            var  classtype ="";
         } else if (goodsType == 2){
             var  classtype ="";
         } else if (goodsType == 3){
@@ -328,19 +343,25 @@
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
                     $(".buyBtns").append("<tr class='val'>" +
-                        "            <td>" + xml[i].goodsNum + "</td>\n" +
-                        "            <td>" + xml[i].goodsCode + "</td>\n" +
-                        "            <td>" + xml[i].goodsName + "</td>\n" +
-                        "            <td>" + xml[i].goodsCount + "</td>\n" +
-                        "            <td>" + xml[i].gdname + "</td>\n" +
-                        "            <td>" + xml[i].mfrsname + "</td>\n" +
-                        "            <td>" + xml[i].retailPrice + "</td>\n" +
-                        "            <td>" + xml[i].priceSum + "</td>\n" +
-                        "            <td>" + xml[i].costPrice + "</td>\n" +
-                        "            <td>" + xml[i].costSum + "</td>\n" +
-                        "            <td>" + xml[i].wholePrice + "</td>\n" +
-                        "            <td>" + xml[i].wholeSum + "</td>\n" +
-                        "            <td>" + xml[i].positionName + "</td></tr>>");
+                        "<td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                        "<td name='goodsCode'>" + xml[i].goodsCode + "</td>\n" +
+                        "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                        "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                        "<td name='gdname'>" + xml[i].gdname + "</td>\n" +
+                        "<td name='mfrsname'>" + xml[i].mfrsname + "</td>\n" +
+                        "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                        "<td name='priceSum'>" + xml[i].priceSum + "</td>\n" +
+                        "<td name='costPrice'>" + xml[i].costPrice + "</td>\n" +
+                        "<td name='costSum'>" + xml[i].costSum + "</td>\n" +
+                        "<td name='wholePrice'>" + xml[i].wholePrice + "</td>\n" +
+                        "<td name='wholeSum'>" + xml[i].wholeSum + "</td>\n" +
+                        "<td name='positionName'>" + xml[i].positionName + "</td>" +
+                        "<td name='batch'>" + xml[i].batch + "</td>" +
+                        "<td name='zhuceNumber'>" + xml[i].zhuceNumber + "</td>" +
+                        "<td name='produceDay'>" + xml[i].produceDay + "</td>" +
+                        "<td name='useday'>" + xml[i].useday + "</td>" +
+                        "</tr>");
                 }
             }
         })
