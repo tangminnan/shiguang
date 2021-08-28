@@ -187,7 +187,8 @@
 			`add_cpod`,
 			`add_cpos`,
 			`distance_od`,
-			`distance_os`
+			`distance_os`,
+			`create_time`
 		)
 		values
 		(
@@ -227,7 +228,8 @@
 			#{addCpod},
 			#{addCpos},
 			#{distanceOd},
-			#{distanceOs}
+			#{distanceOs},
+			#{createTime}
 		)
 	</insert>
 

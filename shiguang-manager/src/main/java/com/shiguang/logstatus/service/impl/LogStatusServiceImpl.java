@@ -90,4 +90,5 @@ public class LogStatusServiceImpl implements LogStatusService {
     public int saveRecord(WorkRecoedDO workRecoedDO){
         return statusDao.saveRecord(workRecoedDO);
     }
+
 }

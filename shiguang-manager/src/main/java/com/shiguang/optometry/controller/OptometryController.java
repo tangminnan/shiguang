@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,20 +93,19 @@ public class OptometryController {
 //        CostDO costDO = costService.getSaleNumByMemNum(cardNumber);
 //        SettlementDO settlement = settlementService.getCostId(costDO.getId());
 //        model.addAttribute("settlement",settlement);
-//        Map<String, Object> map = new HashMap<>();
-//        List<OptometryDO> list = optometryService.optoList(map);
-//        OptometryDO optometryDO = new OptometryDO();
-//        if (list.size() > 0) {
-//            optometryDO.setCylinderRight(list.get(0).getCylinderRight());
-//            optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
-//            optometryDO.setAxialRight(list.get(0).getAxialRight());
-//            optometryDO.setAxialLeft(list.get(0).getAxialLeft());
-//            optometryDO.setSphereRight(list.get(0).getSphereRight());
-//            optometryDO.setSphereLeft(list.get(0).getSphereLeft());
-//
-//        }
-//        model.addAttribute("optometryDO", optometryDO);
-        //OptometryDO optometryDO = optometryService.
+        Map<String, Object> map = new HashMap<>();
+        List<OptometryDO> list = optometryService.optoList(map);
+        OptometryDO optometryDO = new OptometryDO();
+        if (null != list && list.size() > 0) {
+            optometryDO.setCylinderRight(list.get(0).getCylinderRight());
+            optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
+            optometryDO.setAxialRight(list.get(0).getAxialRight());
+            optometryDO.setAxialLeft(list.get(0).getAxialLeft());
+            optometryDO.setSphereRight(list.get(0).getSphereRight());
+            optometryDO.setSphereLeft(list.get(0).getSphereLeft());
+
+        }
+        model.addAttribute("optometryDO", optometryDO);
         return "optometry/edit";
     }
 

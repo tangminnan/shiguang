@@ -1680,7 +1680,7 @@
         $("#storeUnit").val(arrayunit);
         $("#storeCount").val(arraycount);
     }
-
+var classArray=[];
     function getJingpian(){
 	    var  rightYuanYongQJ = '';
 	    var rightYuanYongZJ = '';
@@ -1764,6 +1764,7 @@
                     html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                     html += "<input id='storeCount'name='storeCount' type='hidden' />"
                     html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                    html += "<input id='classtype' name='classtype' type='hidden' />"
                     html += "<input id='isJp'name='isJp' type='hidden' />"
                     html += "<input id='yingshoujp"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                     html += "<input id='storeDescribe'name='storeDescribe' value='镜片' type='hidden' />"
@@ -1777,10 +1778,12 @@
                     //unitarray.push(rows[i].unit);
                    // goodsNumArray.push(rows[i].goodsNum);
                     //jpArray.push(rows[i].goodsName)
+                    classArray.push(rows[i].classtype);
                     arraycount.push(1);
                     arrayjp.push(1);
                 }
                 $("#isJp").val(arrayjp.length);
+                $("#classtype").val(classArray);
                 //$("#storeName").val(arraystore);
                 //$("#storeUnit").val(arrayunit);
                 $("#storeCount").val(arraycount);

@@ -84,11 +84,20 @@ public class LogStatusController {
         } else {
             query.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
+        query.put("classtype",2);
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){
             salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
             salesDO.setPeijingDate(simpleDateFormat.format(salesDO.getPeijingTime()));
+            if (null != salesDO.getClasstype()){
+                String[] classArray = salesDO.getClasstype().split(",");
+                boolean result = false;
+                result = Arrays.asList(classArray).contains("2");
+                if (result = true){
+                    salesDO.setClassTypeFL("2");
+                }
+            }
         }
         int total = statusService.findSaleCount(query);
         PageUtils pageUtils = new PageUtils(salesDOList, total);
@@ -374,7 +383,20 @@ public class LogStatusController {
     @ResponseBody
     @RequiresPermissions("information:logstatus:batchFaliao")
     public R batchFaliao(@RequestParam("ids[]") Long[] ids){
-        statusService.batchRemove(ids);
+        for (int i=0;i<ids.length;i++){
+            SalesDO salesDO =salesService.get(ids[i]);
+            LogStatusDO logStatusDO = new LogStatusDO();
+            logStatusDO.setSaleNumber(salesDO.getSaleNumber());
+            logStatusDO.setLogisticStatus("发料");
+            logStatusDO.setFaliaoDate(new Date());
+            logStatusDO.setFaliaoName(ShiroUtils.getUser().getName());
+            statusService.editFaliao(logStatusDO);
+        }
+//        Map<String,Object> map = new HashMap<>();
+//        map.put("logisticStatus","发料");
+//        map.put("faliaoDate",new Date());
+//        map.put("faliaoName",ShiroUtils.getUser().getName());
+//        statusService.batchFaliao(ids,map);
         return R.ok();
     }
 }

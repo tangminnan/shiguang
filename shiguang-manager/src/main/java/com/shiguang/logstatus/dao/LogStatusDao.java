@@ -37,4 +37,5 @@ public interface LogStatusDao {
     int findSalePeijingCount(Map<String,Object> map);
 
     int saveRecord(WorkRecoedDO workRecoedDO);
+
 }

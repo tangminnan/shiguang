@@ -91,7 +91,7 @@
         select sa.`id`,sa.`ptometry_number`,sa.`member_number`,m.`name` as memberName,m.`sex`,m.`age`,m.`phone_1` as phone1,sa.`sale_name`,sa.`sale_number`,sa.`eye_type`,sa.`amount_money`,sa.`mirror_way`,sa.`mirror_time`,
 		sa.`miror_address`,sa.`store_num`,sa.`urgent_status`,sa.`goods_rebate`,sa.`fixed_price`,sa.`moling_money`,sa.`additional_cost`,sa.`process_ask`,
 		sa.`store_name`,sa.`store_describe`,sa.`store_unit`,sa.`store_count`,sa.`remark`,sa.`saleremark`,sa.`give_name`,sa.`peijing_time`,sa.`optometry_name`,sa.`out_recipel`,
-		sa.`recipel_type`,sa.`optometrywl_name`,sa.`recipelwl_type`,sa.`taocan_name`,sa.`additional_price`,sa.`additional_count`,ls.`logistic_status` as logStatus,ls.`faliao_name` as faliaoName,ls.`faliao_date` as faliaoDate
+		sa.`recipel_type`,sa.`optometrywl_name`,sa.`recipelwl_type`,sa.`taocan_name`,sa.`additional_price`,sa.`additional_count`,sa.`classtype`,ls.`logistic_status` as logStatus,ls.`faliao_name` as faliaoName,ls.`faliao_date` as faliaoDate
         from store_sales sa
         join cost c on c.sale_number = sa.sale_number and c.is_sale = 1
         join log_status ls on ls.sale_number = sa.sale_number
@@ -102,6 +102,7 @@
             <if test="saleNumber !=null and saleNumber != ''">and sa.sale_number = #{saleNumber}</if>
             <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
             <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
+            <if test="classtype != null and classtype != ''">or sa.`classtype` in (#{classtype})</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -222,4 +223,5 @@
             <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
         </where>
     </select>
+
 </mapper>

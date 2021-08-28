@@ -113,7 +113,8 @@
 			`recipelwl_type`,
 			`taocan_name`,
 			`jp_goods_name`,
-			`jj_goods_name`
+			`jj_goods_name`,
+			`classtype`
 		)
 		values
 		(
@@ -154,7 +155,8 @@
 			#{recipelwlType},
 			#{taocanName},
 			#{jpGoodsName},
-			#{jjGoodsName}
+			#{jjGoodsName},
+			#{classtype}
 		)
 	</insert>
 	 

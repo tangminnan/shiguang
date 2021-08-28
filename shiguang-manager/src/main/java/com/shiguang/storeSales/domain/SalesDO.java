@@ -205,6 +205,10 @@ public class SalesDO implements Serializable {
 	private String rightjp;
 	//左眼镜片
 	private String leftjp;
+	//是否订做(1:成品2:订做)
+	private String classtype;
+	//配镜发料用(是否订做)
+	private String classTypeFL;
 
 	/**
 	 * 设置：主键
@@ -1014,4 +1018,13 @@ public class SalesDO implements Serializable {
 	public void setLeftjp(String leftjp) {this.leftjp = leftjp;}
 
 	public String getLeftjp() {return leftjp;}
+
+	public void setClasstype(String classtype) {this.classtype = classtype;}
+
+	public String getClasstype(){return classtype;}
+
+	public void setClassTypeFL(String classTypeFL) {this.classTypeFL = classTypeFL;}
+
+	public String getClassTypeFL() {return  classTypeFL;}
+
 }

@@ -80,12 +80,17 @@ function load() {
 										// var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
 										// 		+ row.id
 										// 		+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-primary btn-xs" href="#" title="发料"  mce_href="#" onclick="editFaliao(\''
-												+ row.saleNumber
-												+ '\')"  style="text-decoration: none;">发料</a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
+                                        var d;
+                                        alert(row.classTypeFL);
+										if (row.classTypeFL == '2'){
+                                            d = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" onclick="detail(\''
+                                                + row.saleNumber
+                                                + '\')"  style="text-decoration: none;">详情</a> ';
+										} else {
+                                            d = '<a class="btn btn-primary btn-xs" href="#" title="发料"  mce_href="#" onclick="editFaliao(\''
+                                                + row.saleNumber
+                                                + '\')"  style="text-decoration: none;">发料</a> ';
+										}
 										return  d ;
 									}
 								} ]
@@ -104,6 +109,11 @@ function add() {
 		content : prefix + '/add' // iframe的url
 	});
 }
+
+function detail(saleNumber){
+	window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
+}
+
 function editFaliao(saleNumber) {
 	var toIndex = layer.open({
 		type : 2,

@@ -578,6 +578,7 @@ function getYinxing(){
                 html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshouyx"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='隐形' type='hidden' />"
@@ -589,11 +590,13 @@ function getYinxing(){
                 //arrayunit.push(rows[i].retailPrice);
                // unitarray.push(rows[i].unit);
                 //goodsNumArray.push(rows[i].goodsNum);
+                classArray.push(rows[i].classtype);
                 arraycount.push(1)
             }
             //$("#storeName").val(arraystore);
            // $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
            // $("#unit").val(unitarray);
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
