@@ -173,6 +173,7 @@ public class StockController {
 
             //判断是否已存在商品
             stockDO.setGoodsNum(goodsNum);
+            stockDO.setPositionId(stock.getPositionId());
             stockDO.setPositionName(positionName);
             StockDO goodsNumList = stockService.haveNum(stockDO);
             if (null != goodsNumList) {
@@ -233,15 +234,15 @@ public class StockController {
 
                 if(null != stock.getClasstype()){
                     String classtype = stock.getClasstype().split(",")[i];
-                    stock.setClasstype(classtype);
+                    stockDO.setClasstype(classtype);
                 }else{
-                    stock.setClasstype("");
+                    stockDO.setClasstype("");
                 }
                 if(null != stock.getFactory()) {
                     String factory = stock.getFactory().split(",")[i];
-                    stock.setFactory(factory);
+                    stockDO.setFactory(factory);
                 }else {
-                    stock.setFactory("");
+                    stockDO.setFactory("");
                 }
 
 
@@ -288,6 +289,7 @@ public class StockController {
             Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
             orderDO1.setPriceSum(Double.toString(priceSum));  //原价合计
 
+            orderDO1.setPositionId(orderDO.getPositionId());
             orderDO1.setPositionName(orderDO.getPositionName());
             orderDO1.setCreateTime(orderDO.getCreateTime());
             orderDO1.setDanjuNumber(orderDO.getDanjuNumber());

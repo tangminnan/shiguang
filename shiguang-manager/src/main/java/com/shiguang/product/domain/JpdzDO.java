@@ -767,4 +767,14 @@ public class JpdzDO implements Serializable {
     public void setState(Long state) {
         this.state = state;
     }
+    //医疗器械经营许可证号
+    private String medicinecode;
+
+    public String getMedicinecode() {
+        return medicinecode;
+    }
+
+    public void setMedicinecode(String medicinecode) {
+        this.medicinecode = medicinecode;
+    }
 }

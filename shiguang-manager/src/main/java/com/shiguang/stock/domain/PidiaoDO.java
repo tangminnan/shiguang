@@ -22,15 +22,61 @@ public class PidiaoDO implements Serializable {
 	//关联单号
 	private String guanlianNumber;
 	//发出部门
+	private Long outDepartmentid;
 	private String outDepartment;
 	//发出仓位
+	private Long outPositionid;
 	private String outPosition;
 	//接收公司
+	private String inCompanyid;
 	private String inCompany;
 	//接收部门
+	private String inDepartmentid;
 	private String inDepartment;
 	//接收仓位
+	private String inPositionid;
 	private String inPosition;
+
+	public Long getOutDepartmentid() {
+		return outDepartmentid;
+	}
+
+	public void setOutDepartmentid(Long outDepartmentid) {
+		this.outDepartmentid = outDepartmentid;
+	}
+
+	public Long getOutPositionid() {
+		return outPositionid;
+	}
+
+	public void setOutPositionid(Long outPositionid) {
+		this.outPositionid = outPositionid;
+	}
+
+	public String getInCompanyid() {
+		return inCompanyid;
+	}
+
+	public void setInCompanyid(String inCompanyid) {
+		this.inCompanyid = inCompanyid;
+	}
+
+	public String getInDepartmentid() {
+		return inDepartmentid;
+	}
+
+	public void setInDepartmentid(String inDepartmentid) {
+		this.inDepartmentid = inDepartmentid;
+	}
+
+	public String getInPositionid() {
+		return inPositionid;
+	}
+
+	public void setInPositionid(String inPositionid) {
+		this.inPositionid = inPositionid;
+	}
+
 	//制单人
 	private String zhidanPeople;
 	//单据日期
@@ -43,8 +89,6 @@ public class PidiaoDO implements Serializable {
 	private String goodsNum;
 	//商品名称
 	private String goodsName;
-	//型号
-	private String producFactory;
 	//需求数量
 	private String needCount;
 	//可调用数量
@@ -240,18 +284,6 @@ public class PidiaoDO implements Serializable {
 	 */
 	public String getGoodsName() {
 		return goodsName;
-	}
-	/**
-	 * 设置：型号
-	 */
-	public void setProducFactory(String producFactory) {
-		this.producFactory = producFactory;
-	}
-	/**
-	 * 获取：型号
-	 */
-	public String getProducFactory() {
-		return producFactory;
 	}
 	/**
 	 * 设置：需求数量

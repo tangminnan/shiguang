@@ -39,6 +39,9 @@ public class ResultController {
     //软性角膜接触镜
     @Autowired
     private RxjmjcjService rxjmjcjService;
+    //中用
+    @Autowired
+    private  ZyService zyService;
     //视觉训练
     @Autowired
     private SjxlService sjxlService;
@@ -95,31 +98,35 @@ public class ResultController {
     @RequiresPermissions("jiancha:result:add")
     public R save(ResultDO result) {
 //        处方类型所有数据保存
-        if (result.getKjyyPrescriptionType() != null) {
+        if (result.getKjyyPrescriptionType() != null && result.getKjyyPrescriptionType() != "") {
             kjyyServce.savekjyy(result);
         }
-        if (result.getKjjyPrescriptionType() != null) {
+        if (result.getKjjyPrescriptionType() != null && result.getKjjyPrescriptionType() != "") {
             kjjyService.savekjjy(result);
         }
-        if (result.getSgjjPrescriptionType() != null) {
+        if (result.getSgjjPrescriptionType() != null && result.getSgjjPrescriptionType() != "") {
             sgjjService.savesgjj(result);
         }
-        if (result.getRxPrescriptionType() != null) {
+        if (result.getRxPrescriptionType() != null && result.getRxPrescriptionType() != "") {
             rxjmjcjService.saveRxjmjcj(result);
         }
-        if (result.getSjxlPrescriptionType() != null) {
+        if (result.getZyPrescriptionType() != null && result.getZyPrescriptionType() != ""){
+            zyService.saveZY(result);
+        }
+
+        if (result.getSjxlPrescriptionType() != null && result.getSjxlPrescriptionType() != "") {
             sjxlService.saveSjxl(result);
         }
-        if (result.getVstPrescriptionType() != null) {
+        if (result.getVstPrescriptionType() != null  && result.getVstPrescriptionType() != "") {
             vstService.saveVst(result);
         }
-        if (result.getCrtPrescriptionType() != null) {
+        if (result.getCrtPrescriptionType() != null  && result.getCrtPrescriptionType() != "") {
             crtService.saveCrt(result);
         }
-        if (result.getRgpPrescriptionType() != null) {
+        if (result.getRgpPrescriptionType() != null  && result.getRgpPrescriptionType() != "") {
             rgpService.saveRgp(result);
         }
-        if (result.getYpPrescriptionType() != null) {
+        if (result.getYpPrescriptionType() != null  && result.getYpPrescriptionType() != "") {
             yaopinService.saveYaopin(result);
         }
         if (resultService.save(result) > 0) {

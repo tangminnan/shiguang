@@ -69,6 +69,17 @@ public class StockDO implements Serializable {
     private String wholePrice;
     //批发合计
     private String wholeSum;
+    //仓位id
+    private  String positionId;
+
+    public String getPositionId() {
+        return positionId;
+    }
+
+    public void setPositionId(String positionId) {
+        this.positionId = positionId;
+    }
+
     //仓位名称
     private String positionName;
     //入库时间

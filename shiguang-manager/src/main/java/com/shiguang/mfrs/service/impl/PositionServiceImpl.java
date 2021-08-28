@@ -64,7 +64,7 @@ public class PositionServiceImpl implements PositionService {
 
     //     <!--库存查询相对应的仓库-->
     @Override
-    public List<PositionDO> stockList(Map<String, Object> map) {
-        return positionDao.stockList(map);
+    public List<PositionDO> positionList(Map<String, Object> map) {
+        return positionDao.positionList(map);
     }
 }

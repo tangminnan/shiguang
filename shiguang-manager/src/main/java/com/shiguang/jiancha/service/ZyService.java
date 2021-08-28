@@ -1,5 +1,6 @@
 package com.shiguang.jiancha.service;
 
+import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.ZyDO;
 
 import java.util.List;
@@ -21,7 +22,9 @@ public interface ZyService {
 	int count(Map<String, Object> map);
 	
 	int save(ZyDO zy);
-	
+
+	int saveZY(ResultDO result);
+
 	int update(ZyDO zy);
 	
 	int remove(Long zyId);

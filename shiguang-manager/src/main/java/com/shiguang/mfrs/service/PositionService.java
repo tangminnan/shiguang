@@ -37,5 +37,5 @@ public interface PositionService {
     int updateState(PositionDO position);
 
     // <!--库存查询相对应的仓库-->
-    List<PositionDO> stockList(Map<String, Object> map);
+    List<PositionDO> positionList(Map<String, Object> map);
 }

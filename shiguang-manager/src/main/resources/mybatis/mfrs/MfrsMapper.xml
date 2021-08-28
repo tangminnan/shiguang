@@ -30,7 +30,7 @@
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state =1
         </where>
-        group by m.mfrsid order by m.mfrsid desc
+        group by m.mfrsid order by  m.xsstate asc ,m.mfrsid asc
     </select>
 
     <select id="count" resultType="int">

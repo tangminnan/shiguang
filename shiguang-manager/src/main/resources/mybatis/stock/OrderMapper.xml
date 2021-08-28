@@ -5,7 +5,7 @@
 
     <select id="get" resultType="com.shiguang.stock.domain.OrderDO">
 		select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,`price_sum`,
-		`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,
+		`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_id`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,
 		`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,`batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,`factory`
 		 from stock_order where id = #{value}
 	</select>
@@ -13,11 +13,11 @@
     <select id="list" resultType="com.shiguang.stock.domain.OrderDO">
         select
         s.`id`,s.`goods_num`,s.`goods_code`,s.`goods_name`,s.`goods_count`,s.`goods_type`,s.`mfrsid`,s.`brandname`,s.`retail_price`,
-        s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`, s.`position_name`, s.`create_time`,
+        s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`,s.`position_id`, s.`position_name`, s.`create_time`,
         s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
         s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`,s.`classtype`,s.`factory`
         from stock_order s left join c_mfrs m on s.mfrsid=m.mfrsid
-        left join c_position po on s.position_name=po.position_name
+        left join c_position po on s.position_id=po.position_id
         left join department d on po.depart_number= d.depart_number
         <where>
             <if test="id != null and id != ''">and s.id = #{id}</if>
@@ -34,6 +34,7 @@
             <if test="costSum != null and costSum != ''">and s.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and s.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and s.whole_sum = #{wholeSum}</if>
+            <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
             <if test="positionName != null and positionName != ''">and s.position_name = #{positionName}</if>
             <if test="createTime != null and createTime != ''">and s.create_time = #{createTime}</if>
             <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number = #{danjuNumber}</if>
@@ -86,6 +87,7 @@
             <if test="costSum != null and costSum != ''">and s.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and s.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and s.whole_sum = #{wholeSum}</if>
+            <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
             <if test="positionName != null and positionName != ''">and s.position_name = #{positionName}</if>
             <if test="createTime != null and createTime != ''">and s.create_time = #{createTime}</if>
             <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number = #{danjuNumber}</if>
@@ -124,7 +126,8 @@
 			`cost_sum`, 
 			`whole_price`, 
 			`whole_sum`, 
-			`position_name`, 
+			`position_id`,
+			`position_name`,
 			`create_time`, 
 			`danju_number`, 
 			`order_number`, 
@@ -157,8 +160,9 @@
 			#{costSum}, 
 			#{wholePrice}, 
 			#{wholeSum}, 
-			#{positionName}, 
-			#{createTime}, 
+			#{positionId},
+			#{positionName},
+			#{createTime},
 			#{danjuNumber}, 
 			#{orderNumber}, 
 			#{yundanNumber}, 
@@ -193,6 +197,7 @@
             <if test="costSum != null">`cost_sum` = #{costSum},</if>
             <if test="wholePrice != null">`whole_price` = #{wholePrice},</if>
             <if test="wholeSum != null">`whole_sum` = #{wholeSum},</if>
+            <if test="positionId != null">`position_id` = #{positionId},</if>
             <if test="positionName != null">`position_name` = #{positionName},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
             <if test="danjuNumber != null">`danju_number` = #{danjuNumber},</if>

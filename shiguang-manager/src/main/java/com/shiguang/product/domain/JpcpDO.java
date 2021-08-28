@@ -100,6 +100,16 @@ public class JpcpDO implements Serializable {
     public void setClasstype(String classtype) {
         this.classtype = classtype;
     }
+    //型号
+    private String producFactory;
+
+    public String getProducFactory() {
+        return producFactory;
+    }
+
+    public void setProducFactory(String producFactory) {
+        this.producFactory = producFactory;
+    }
 
     /**
      * 设置：镜片成品id
@@ -525,5 +535,15 @@ public class JpcpDO implements Serializable {
 
     public void setFunctionName(String functionName) {
         this.functionName = functionName;
+    }
+    //医疗器械经营许可证号
+    private String medicinecode;
+
+    public String getMedicinecode() {
+        return medicinecode;
+    }
+
+    public void setMedicinecode(String medicinecode) {
+        this.medicinecode = medicinecode;
     }
 }

@@ -185,6 +185,7 @@
                 'positionName': positionName
             },
             success: function (xml) {
+                // alert(JSON.stringify(xml))
                 for (var i = 0; i < xml.length; i++) {
                     $(".buyBtns").append("<tr class='val'> " +
                         "<td><input name='one'  type=\"checkbox\"/></td>\n" +

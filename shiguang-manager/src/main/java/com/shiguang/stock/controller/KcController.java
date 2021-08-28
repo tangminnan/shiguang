@@ -47,19 +47,14 @@ public class KcController {
 //        map.put("goodstypeName", "隐形");
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
-        //仓位
-        map.put("xsstate", 0);
-        List<PositionDO> positionList = positionService.stockList(map);
-        model.addAttribute("positionList", positionList);
         return "stock/stock/kccx";
     }
 
     @ResponseBody
     @RequestMapping(value = "/selectPosion")
-    public List<PositionDO> positionList(Long xsstate, Model model) {
+    public List<PositionDO> positionList(String xsstate, Model model) {
         Map<String, Object> map = new HashMap<>();
         //仓位
-        map.put("xsstate", xsstate);
         //———获取当前登录用户的公司id————
         String companyId=ShiroUtils.getUser().getCompanyId();
         if(companyId != null){
@@ -68,7 +63,8 @@ public class KcController {
             String departNumber=ShiroUtils.getUser().getStoreNum();
             map.put("departNumber",departNumber);
         }
-        List<PositionDO> positionList = positionService.stockList(map);
+        map.put("xsstate", xsstate);
+        List<PositionDO> positionList = positionService.positionList(map);
         model.addAttribute("positionList", positionList);
         return positionList;
     }
@@ -78,7 +74,7 @@ public class KcController {
     @RequestMapping(value = "/selectKc")
     public List<StockDO> selectSg(String goodsNum, String goodsCode, String goodsName,
                                   Integer goodsType, String mfrsname,String brandname,String retailPrice, String retailPrice2,
-                                  Long xsstate, String positionName,String classtype, Model model) {
+                                  Long xsstate, String positionId,String classtype, Model model) {
         Map<String, Object> map = new HashMap<>();
 
         //———获取当前登录用户的公司id————
@@ -98,7 +94,8 @@ public class KcController {
         map.put("retailPrice", retailPrice);
         map.put("retailPrice2", retailPrice2);
         map.put("xsstate", xsstate);
-        map.put("positionName", positionName);
+        map.put("positionId", positionId);
+//        map.put("positionName", positionName);
         map.put("classtype", classtype);
         List<StockDO> stockDOS = stockService.kccxList(map);
         model.addAttribute("stockDOS", stockDOS);

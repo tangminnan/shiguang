@@ -80,9 +80,9 @@
                     </label>
                 </div>
                 <span>
-					<select id="positionName" name="positionName">
-						<option value="">--请选择--</option>
-					</select>
+					<select id="positionId" name="positionId">
+                        <option></option>
+                    </select>
 				</span>
             </td>
             <!--<td>经销方式：</td>-->
@@ -147,11 +147,17 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var xsstate=$("input[name='xsstate']:checked").val();
+        // alert(xsstate)
         var positionName = $('#positionName option:selected').text();
-        var positionNames = ""
-        if (positionName == "--请选择--") {
-            positionName = positionNames;
-        }
+        var positionId = $('#positionId option:selected').text();
+        // var positionNames = ""
+        // if (positionName == "--请选择--") {
+        //     positionName = positionNames;
+        // }
+        // var positionIds = ""
+        // if (positionId == "--请选择--") {
+        //     positionName = positionIds;
+        // }
         $(".cw").remove();
         $.ajax({
             url: '/kucun/stock/selectPosion',
@@ -161,9 +167,10 @@
                 'xsstate': xsstate,
             },
             success: function (position) {
+                // alert(position)
                 for (var i = 0; i < position.length; i++) {
-                    $("#positionName").append("" +
-                        "<option class='cw'>" + position[i].positionName + "</option>");
+                    $("#positionId").append("" +
+                        "<option class='cw' value='position[i].positionId'>" + position[i].positionName + "</option>");
                 }
             }
         });
@@ -173,7 +180,8 @@
             dataType: "json",
             data: {
                 'xsstate': xsstate,
-                'positionName': positionName
+                // 'positionName': positionName,
+                'positionId': positionId
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
@@ -301,12 +309,17 @@
         var retailPrice = $("*[name='retailPrice']").val();
         var retailPrice2 = $("*[name='retailPrice2']").val();
         var xsstate=$("input[name='xsstate']:checked").val();
-        alert(xsstate +"仓位");
+        // alert(xsstate +"仓位");
         var positionName = $('#positionName option:selected').text();
-        var positionNames = ""
-        if (positionName == "--请选择--") {
-            positionName = positionNames;
-        }
+        // var positionNames = ""
+        // if (positionName == "--请选择--") {
+        //     positionName = positionNames;
+        // }
+        var positionId = $('#positionId option:selected').text();
+        // var positionIds = ""
+        // if (positionId == "--请选择--") {
+        //     positionId = positionIds;
+        // }
         $(".val").remove();
         $.ajax({
             url: '/kucun/stock/selectKc',
@@ -322,7 +335,8 @@
                 'retailPrice': retailPrice,
                 'retailPrice2': retailPrice2,
                 'xsstate': xsstate,
-                'positionName': positionName,
+                'positionId': positionId,
+                // 'positionName': positionName,
                 'classtype': classtype
             },
             success: function (xml) {
@@ -348,6 +362,7 @@
 
     function positionChange() {
         var xsstate=$("input[name='xsstate']:checked").val();
+        alert(xsstate)
         $(".cw").remove();
         $.ajax({
             url: '/kucun/stock/selectPosion',
@@ -356,12 +371,12 @@
             data: {
                 'xsstate': xsstate
             },
-            success: function (position) {
-                for (var i = 0; i < position.length; i++) {
-                    $("#positionName").append("" +
-                        "<option class='cw'>" + position[i].positionName + "</option>" +
-                        "\n");
-                }
+            success: function (datajson) {
+                $(datajson).each(function (key) {  //循环读取后台传来的Json数据
+                    var id = datajson[key].positionId;   //角色id
+                    var roleName = datajson[key].positionName; //角色名称
+                    $("#positionId").append("<option class='cw' value='" + id + "'>" + roleName + "</option>");
+                });
             }
         });
     }

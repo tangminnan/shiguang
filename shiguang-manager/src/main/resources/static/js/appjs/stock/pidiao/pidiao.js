@@ -278,7 +278,7 @@ function showCol() {
         var batch = rowstr.find("[name='batch']").html();
         var zhuceNumber = rowstr.find("[name='zhuceNumber']").html();
         var produceDay = rowstr.find("[name='produceDay']").html();
-        var positionName = rowstr.find("[name='positionName']").html();
+        var useday = rowstr.find("[name='useday']").html();
         obj.goodsNum = goodsNum;
         obj.goodsCode = goodsCode;
         obj.goodsName = goodsName;

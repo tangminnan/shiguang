@@ -770,4 +770,14 @@ public class YxdzDO implements Serializable {
     public void setSph(String sph) {
         this.sph = sph;
     }
+    //医疗器械经营许可证号
+    private String medicinecode;
+
+    public String getMedicinecode() {
+        return medicinecode;
+    }
+
+    public void setMedicinecode(String medicinecode) {
+        this.medicinecode = medicinecode;
+    }
 }

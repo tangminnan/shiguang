@@ -445,4 +445,14 @@ public class KjyyDO implements Serializable {
     public String getKjyyBeizhu() {
         return kjyyBeizhu;
     }
+    //验光号
+    private String ptometryNumber;
+
+    public String getPtometryNumber() {
+        return ptometryNumber;
+    }
+
+    public void setPtometryNumber(String ptometryNumber) {
+        this.ptometryNumber = ptometryNumber;
+    }
 }

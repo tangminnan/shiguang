@@ -187,7 +187,8 @@
 			`crt_jpysos`,
 			`crt_syjpod`,
 			`crt_syjpos`,
-			`crt_beizhu`
+			`crt_beizhu`,
+			`ptometry_number`
 		)
 		values
 		(
@@ -217,7 +218,8 @@
 			#{crtJpysos},
 			#{crtSyjpod},
 			#{crtSyjpos},
-			#{crtBeizhu}
+			#{crtBeizhu},
+			#{ptometryNumber}
 		)
 	</insert>
 

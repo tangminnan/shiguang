@@ -6,7 +6,7 @@
     <select id="get" resultType="com.shiguang.product.domain.JpcpDO">
         select j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
         j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
-        j.`trade_price`,j.`transfer_price`,j.`retail_price` ,j.`xsstate`,j.`state`,j.`classtype`,
+        j.`trade_price`,j.`transfer_price`,j.`retail_price` ,j.`xsstate`,j.`state`,j.`classtype`,j.`produc_factory`,
         m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph
         from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsid left join c_brand b on j.brandnum=b.brandnum left join
         c_unit u on j.unitid= u.unitid  left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
@@ -17,7 +17,7 @@
         select
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
         j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
-        j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`,j.`classtype`,
+        j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`,j.`classtype`,j.`produc_factory`,
         m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph
         from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsid left join c_brand b on j.brandnum=b.brandnum left join
         c_unit u on j.unitid= u.unitid left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
@@ -46,6 +46,7 @@
             </if>
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
+            <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             and j.state= 1
         </where>
         group by j.id order by  j.id desc
@@ -78,6 +79,7 @@
             </if>
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
+            <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             and j.state= 1
         </where>
     </select>
@@ -109,7 +111,8 @@
 			`retail_price`,
 			`xsstate`,
 			`state`,
-			`classtype`
+			`classtype`,
+			`produc_factory`
 		)
 		values
 		(
@@ -137,7 +140,8 @@
 			#{retailPrice},
 			#{xsstate},
 			#{state},
-			#{classtype}
+			#{classtype},
+			#{producFactory}
 		)
 	</insert>
     <!--//修改停用启用-->
@@ -169,6 +173,7 @@
             <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state},</if>
             <if test="classtype != null">`classtype` = #{classtype}</if>
+            <if test="producFactory != null">`produc_factory` = #{producFactory}</if>
         </set>
         where id = #{id}
     </update>

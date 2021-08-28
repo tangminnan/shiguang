@@ -164,7 +164,8 @@
 			`rx_unitos`,
 			`rx_clfs`,
 			`rx_hlypz`,
-			`rx_beizhu`
+			`rx_beizhu`,
+			`ptometry_number`
 		)
 		values
 		(
@@ -190,7 +191,8 @@
 			#{rxUnitos},
 			#{rxClfs},
 			#{rxHlypz},
-			#{rxBeizhu}
+			#{rxBeizhu},
+			#{ptometryNumber}
 		)
 	</insert>
 

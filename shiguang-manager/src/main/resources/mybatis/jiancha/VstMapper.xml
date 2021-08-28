@@ -188,7 +188,9 @@
 			`vst_jpysos`,
 			`vst_syjpod`,
 			`vst_syjpos`,
-			`vst_beizhu`
+			`vst_beizhu`,
+			`vst_beizhu`,
+			`ptometry_number`
 		)
 		values
 		(
@@ -219,7 +221,8 @@
 			#{vstJpysos},
 			#{vstSyjpod},
 			#{vstSyjpos},
-			#{vstBeizhu}
+			#{vstBeizhu},
+			#{ptometryNumber}
 		)
 	</insert>
 

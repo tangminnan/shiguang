@@ -95,10 +95,10 @@
     </update>
 
     <!--库存查询相对应的仓库-->
-    <select id="stockList" resultType="com.shiguang.mfrs.domain.PositionDO">
-        select position_name  from c_position po  left join department d on po.depart_number=d.depart_number
+    <select id="positionList" resultType="com.shiguang.mfrs.domain.PositionDO">
+        select po.position_id, po.position_name  from c_position po  left join department d on po.depart_number=d.depart_number
         <where>
-            <if test="positionNum != null and positionNum != ''">and po.position_num = #{positionNum}</if>
+            <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
             <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
             <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
             <if test="positionOrder != null and positionOrder != ''">and po.position_order = #{positionOrder}</if>
