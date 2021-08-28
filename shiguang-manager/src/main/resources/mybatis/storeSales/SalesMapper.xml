@@ -343,7 +343,7 @@
 		'' as leftrgpsyjp
 		FROM
 		jc_kjjy k
-		LEFT JOIN jc_result r ON k.card_number = r.card_number
+		LEFT JOIN jc_result r ON k.card_number = r.card_number and r.ptometry_number = k.ptometry_number
 		UNION
 		SELECT
 		r.card_number as cardNumber,
@@ -389,7 +389,7 @@
 		'' as leftrgpsyjp
 		FROM
 		jc_kjyy ky
-		LEFT JOIN  jc_result r ON ky.card_number = r.card_number
+		LEFT JOIN  jc_result r ON ky.card_number = r.card_number and ky.ptometry_number = r.ptometry_number
 		UNION
 		SELECT
 		r.card_number as cardNumber,
@@ -435,7 +435,7 @@
 		'' as leftrgpsyjp
 		FROM
 		jc_sgjj sg
-		LEFT JOIN jc_result r ON sg.card_number = r.card_number
+		LEFT JOIN jc_result r ON sg.card_number = r.card_number and r.ptometry_number = sg.ptometry_number
 		UNION
 		SELECT
 		r.card_number as cardNumber,
@@ -481,7 +481,7 @@
 		'' as leftrgpsyjp
 		FROM
 		jc_zy z
-		LEFT JOIN jc_result r ON z.card_number = r.card_number
+		LEFT JOIN jc_result r ON z.card_number = r.card_number and r.ptometry_number = z.ptometry_number
 		UNION
 		SELECT
 		r.card_number as cardNumber,
@@ -527,7 +527,7 @@
 		'' as leftrgpsyjp
 		FROM
 		jc_rxjmjcj x
-		LEFT JOIN jc_result r ON x.card_number = r.card_number
+		LEFT JOIN jc_result r ON x.card_number = r.card_number and r.ptometry_number = x.ptometry_number
 		UNION
 		SELECT
 		r.card_number as cardNumber,
@@ -573,7 +573,7 @@
 		'' as leftrgpsyjp
 		FROM
 		jc_sjxl sx
-		LEFT JOIN jc_result r ON sx.card_number = r.card_number
+		LEFT JOIN jc_result r ON sx.card_number = r.card_number and r.ptometry_number = sx.ptometry_number
 		UNION
 		SELECT
 		r.card_number as cardNumber,
@@ -619,7 +619,7 @@
 		rg.rgp_syjpos as leftrgpsyjp
 		FROM
 		jc_rgp rg
-		LEFT JOIN jc_result r ON rg.card_number = r.card_number
+		LEFT JOIN jc_result r ON rg.card_number = r.card_number and r.ptometry_number = rg.ptometry_number
 		) aia
 		<where>
 			<if test="cardNumber != null and cardNumber != ''"> and cardNumber = #{cardNumber}</if>
