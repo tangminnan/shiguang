@@ -5,30 +5,39 @@
 
 	<select id="get" resultType="com.shiguang.stock.domain.PidiaoDO">
 		select `id`,`pidiao_number`,`guanlian_number`,`out_department`,`out_position`,`in_position`,`in_company`,`in_department`,
-		`zhidan_people`,`danju_day`,`outsourcing_number`,`beizhu`,`goods_num`,`goods_name`,`produc_factory`,`need_count`,`goods_count`,
+		`out_departmentid`,`out_positionid`,`in_positionid`,`in_companyid`,`in_departmentid`,
+		`zhidan_people`,`danju_day`,`outsourcing_number`,`beizhu`,`goods_num`,`goods_name`,`need_count`,`goods_count`,
 		`use_count`,`goods_code`,`batch`,`zhuce_number`,`produce_day`,`useday`,`all_count`,`classtype` ,`factory` from stock_pidiao where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.PidiaoDO">
-		select `id`,`pidiao_number`,`guanlian_number`,`out_department`,`out_position`,`in_position`,`in_company`,`in_department`,`zhidan_people`,
-		`danju_day`,`outsourcing_number`,`beizhu`,`goods_num`,`goods_name`,`produc_factory`,`need_count`,`goods_count`,`use_count`,`goods_code`,
+		select `id`,`pidiao_number`,`guanlian_number`,`out_department`,`out_position`,`in_position`,`in_company`,`in_department`,
+		`out_departmentid`,`out_positionid`,`in_positionid`,`in_companyid`,`in_departmentid`,
+		`zhidan_people`,`danju_day`,`outsourcing_number`,`beizhu`,`goods_num`,`goods_name`,`need_count`,`goods_count`,`use_count`,`goods_code`,
 		`batch`,`zhuce_number`,`produce_day`,`useday`,`all_count`,`classtype`,`factory` from stock_pidiao
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="pidiaoNumber != null and pidiaoNumber != ''"> and pidiao_number = #{pidiaoNumber} </if>
 		  		  <if test="guanlianNumber != null and guanlianNumber != ''"> and guanlian_number = #{guanlianNumber} </if>
-		  		  <if test="outDepartment != null and outDepartment != ''"> and out_department = #{outDepartment} </if>
+
+		  		  <if test="outDepartmentid != null and outDepartmentid != ''"> and out_departmentid = #{outDepartmentid} </if>
+		  		  <if test="outPositionid != null and outPositionid != ''"> and out_positionid = #{outPositionid} </if>
+		  		  <if test="inPositionid != null and inPositionid != ''"> and in_positionid = #{inPositionid} </if>
+		  		  <if test="inCompanyid != null and inCompanyid != ''"> and in_companyid = #{inCompanyid} </if>
+		  		  <if test="inDepartmentid != null and inDepartmentid != ''"> and in_departmentid = #{inDepartmentid} </if>
+
+			      <if test="outDepartment != null and outDepartment != ''"> and out_department = #{outDepartment} </if>
 		  		  <if test="outPosition != null and outPosition != ''"> and out_position = #{outPosition} </if>
 		  		  <if test="inPosition != null and inPosition != ''"> and in_position = #{inPosition} </if>
 		  		  <if test="inCompany != null and inCompany != ''"> and in_company = #{inCompany} </if>
 		  		  <if test="inDepartment != null and inDepartment != ''"> and in_department = #{inDepartment} </if>
+
 		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
 		  		  <if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
 		  		  <if test="outsourcingNumber != null and outsourcingNumber != ''"> and outsourcing_number = #{outsourcingNumber} </if>
 		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
 		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
-		  		  <if test="producFactory != null and producFactory != ''"> and produc_factory = #{producFactory} </if>
 		  		  <if test="needCount != null and needCount != ''"> and need_count = #{needCount} </if>
 		  		  <if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
 		  		  <if test="useCount != null and useCount != ''"> and use_count = #{useCount} </if>
@@ -60,7 +69,14 @@
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="pidiaoNumber != null and pidiaoNumber != ''"> and pidiao_number = #{pidiaoNumber} </if>
 		  		  <if test="guanlianNumber != null and guanlianNumber != ''"> and guanlian_number = #{guanlianNumber} </if>
-		  		  <if test="outDepartment != null and outDepartment != ''"> and out_department = #{outDepartment} </if>
+
+			 <if test="outDepartmentid != null and outDepartmentid != ''"> and out_departmentid = #{outDepartmentid} </if>
+			 <if test="outPositionid != null and outPositionid != ''"> and out_positionid = #{outPositionid} </if>
+			 <if test="inPositionid != null and inPositionid != ''"> and in_positionid = #{inPositionid} </if>
+			 <if test="inCompanyid != null and inCompanyid != ''"> and in_companyid = #{inCompanyid} </if>
+			 <if test="inDepartmentid != null and inDepartmentid != ''"> and in_departmentid = #{inDepartmentid} </if>
+
+			 <if test="outDepartment != null and outDepartment != ''"> and out_department = #{outDepartment} </if>
 		  		  <if test="outPosition != null and outPosition != ''"> and out_position = #{outPosition} </if>
 		  		  <if test="inPosition != null and inPosition != ''"> and in_position = #{inPosition} </if>
 		  		  <if test="inCompany != null and inCompany != ''"> and in_company = #{inCompany} </if>
@@ -71,7 +87,6 @@
 		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
 		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
-		  		  <if test="producFactory != null and producFactory != ''"> and produc_factory = #{producFactory} </if>
 		  		  <if test="needCount != null and needCount != ''"> and need_count = #{needCount} </if>
 		  		  <if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
 		  		  <if test="useCount != null and useCount != ''"> and use_count = #{useCount} </if>
@@ -91,19 +106,24 @@
 		(
 			`pidiao_number`, 
 			`guanlian_number`, 
-			`out_department`, 
-			`out_position`, 
-			`in_position`, 
-			`in_company`, 
-			`in_department`, 
+			`out_departmentid`,
+			`out_positionid`,
+			`in_positionid`,
+			`in_companyid`,
+			`in_departmentid`,
+
+			`out_department`,
+			`out_position`,
+			`in_position`,
+			`in_company`,
+			`in_department`,
 			`zhidan_people`, 
 			`danju_day`, 
 			`outsourcing_number`, 
 			`beizhu`, 
 			`goods_num`, 
 			`goods_name`, 
-			`produc_factory`, 
-			`need_count`, 
+			`need_count`,
 			`goods_count`, 
 			`use_count`, 
 			`goods_code`, 
@@ -118,20 +138,27 @@
 		values
 		(
 			#{pidiaoNumber}, 
-			#{guanlianNumber}, 
-			#{outDepartment}, 
-			#{outPosition}, 
-			#{inPosition}, 
-			#{inCompany}, 
-			#{inDepartment}, 
+			#{guanlianNumber},
+
+			#{outDepartmentid},
+			#{outPositionid},
+			#{inPositionid},
+			#{inCompanyid},
+			#{inDepartmentid},
+
+			#{outDepartment},
+			#{outPosition},
+			#{inPosition},
+			#{inCompany},
+			#{inDepartment},
+
 			#{zhidanPeople}, 
 			#{danjuDay}, 
 			#{outsourcingNumber}, 
 			#{beizhu}, 
 			#{goodsNum}, 
 			#{goodsName}, 
-			#{producFactory}, 
-			#{needCount}, 
+			#{needCount},
 			#{goodsCount}, 
 			#{useCount}, 
 			#{goodsCode}, 
@@ -150,6 +177,12 @@
 		<set>
 			<if test="pidiaoNumber != null">`pidiao_number` = #{pidiaoNumber}, </if>
 			<if test="guanlianNumber != null">`guanlian_number` = #{guanlianNumber}, </if>
+			<if test="outDepartmentid != null">`out_departmentid` = #{outDepartmentid}, </if>
+			<if test="outPositionid != null">`out_positionid` = #{outPositionid}, </if>
+			<if test="inPositionid != null">`in_positionid` = #{inPositionid}, </if>
+			<if test="inCompanyid != null">`in_companyid` = #{inCompanyid}, </if>
+			<if test="inDepartmentid != null">`in_departmentid` = #{inDepartmentid}, </if>
+
 			<if test="outDepartment != null">`out_department` = #{outDepartment}, </if>
 			<if test="outPosition != null">`out_position` = #{outPosition}, </if>
 			<if test="inPosition != null">`in_position` = #{inPosition}, </if>
@@ -161,7 +194,6 @@
 			<if test="beizhu != null">`beizhu` = #{beizhu}, </if>
 			<if test="goodsNum != null">`goods_num` = #{goodsNum}, </if>
 			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
-			<if test="producFactory != null">`produc_factory` = #{producFactory}, </if>
 			<if test="needCount != null">`need_count` = #{needCount}, </if>
 			<if test="goodsCount != null">`goods_count` = #{goodsCount}, </if>
 			<if test="useCount != null">`use_count` = #{useCount}, </if>

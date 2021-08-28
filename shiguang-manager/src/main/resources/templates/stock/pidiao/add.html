@@ -116,20 +116,20 @@
 			<td>合计：</td>
 			<td>45684</td>
 		</tr>
-		<tr>
-			<td><input type="checkbox" /></td>
-			<td>123569875425</td>
-			<td>名称名称每次</td>
-			<td>SD90</td>
-			<td>148</td>
-			<td>148</td>
-			<td>148</td>
-			<td>148</td>
-			<td>148</td>
-			<td>148</td>
-			<td>2020-12-25</td>
-			<td>569999</td>
-		</tr>
+		<!--<tr>-->
+			<!--<td><input type="checkbox" /></td>-->
+			<!--<td>123569875425</td>-->
+			<!--<td>名称名称每次</td>-->
+			<!--<td>SD90</td>-->
+			<!--<td>148</td>-->
+			<!--<td>148</td>-->
+			<!--<td>148</td>-->
+			<!--<td>148</td>-->
+			<!--<td>148</td>-->
+			<!--<td>148</td>-->
+			<!--<td>2020-12-25</td>-->
+			<!--<td>569999</td>-->
+		<!--</tr>-->
 		</tbody>
 	</table>
 	<div class="Cbtn buyBtns">
@@ -178,7 +178,7 @@ function indepartment() {
             $(datajson).each(function (key) {  //循环读取后台传来的Json数据
                 var id = datajson[key].id;   //角色id
                 var roleName = datajson[key].departName; //角色名称
-				alert(id+roleName);
+				// alert(id+roleName);
                 //调用自定义方法
                 $(".ings").append("<option value='" + id + "'>" + roleName + "</option>");
             });
@@ -238,16 +238,16 @@ function inposion() {
                     for (var i = 0; i < rows.length; i++) {
                         $(".liebiao").after("<tr class='val'> " +
 							// "<td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                            "<td name='producFactory'>" + xml[i].producFactory + "</td>\n" +
-                            "<td name='unitname'>" + xml[i].unitname + "</td>\n" +
-                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                            "<td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
-                            "<td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
-                            "<td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
-                            "<td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
-                            "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td></tr>>");//页面每个数量
+                            "<td name='goodsNum'>" + rows[i].goodsNum + "</td>\n" +
+                            "<td name='goodsName'>" + rows[i].goodsName + "</td>\n" +
+                            "<td name='producFactory'>" + rows[i].producFactory + "</td>\n" +
+                            "<td name='unitname'>" + rows[i].unitname + "</td>\n" +
+                            "<td name='retailPrice'>" + rows[i].retailPrice + "</td>\n" +
+                            "<td name='taxPrice'>" + rows[i].taxPrice + "</td>\n" +
+                            "<td name='tradePrice'style='display: none'>" + rows[i].tradePrice + "</td>\n" +
+                            "<td name='transferPrice'style='display: none'>" + rows[i].transferPrice + "</td>\n" +
+                            "<td name='producCode'style='display: none'>" + rows[i].producCode + "</td>\n" +
+                            "<td name='brandname' style='display: none'>" + rows[i].brandname + "</td></tr>>");//页面每个数量
                     }
                 }
             });

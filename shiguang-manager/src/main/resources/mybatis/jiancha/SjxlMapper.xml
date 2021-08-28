@@ -178,7 +178,8 @@
 			`sjxl_jyvaos`,
 			`sjxl_jtxl`,
 			`sjxl_xlsxl`,
-			`sjxl_beizhu`
+			`sjxl_beizhu`,
+			`ptometry_number`
 		)
 		values
 		(
@@ -206,7 +207,8 @@
 			#{sjxlJyvaos},
 			#{sjxlJtxl},
 			#{sjxlXlsxl},
-			#{sjxlBeizhu}
+			#{sjxlBeizhu},
+			#{ptometryNumber}
 		)
 	</insert>
 

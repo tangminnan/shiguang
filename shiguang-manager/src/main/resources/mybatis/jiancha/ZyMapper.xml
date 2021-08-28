@@ -144,6 +144,68 @@
 			#{zyBeizhu}
 		)
 	</insert>
+	<insert id="saveZY" parameterType="com.shiguang.jiancha.domain.ZyDO" useGeneratedKeys="true" keyProperty="zyId">
+		insert into jc_zy
+		(
+			`card_number`,
+			`zy_prescription_type`,
+			`zy_doctor`,
+			`zy_optometry_name`,
+			`zy_sphod`,
+			`zy_sphos`,
+			`zy_cylod`,
+			`zy_cylos`,
+			`zy_axialod`,
+			`zy_axialos`,
+			`zy_prismod`,
+			`zy_prismos`,
+			`zy_jdod`,
+			`zy_jdos`,
+			`zy_zytjod`,
+			`zy_zytjos`,
+			`zy_tgod`,
+			`zy_tgos`,
+			`zy_vaod`,
+			`zy_vaos`,
+			`zy_jpcz`,
+			`zy_clfs`,
+			`zy_jyjk`,
+			`zy_jklx`,
+			`zy_text`,
+			`zy_beizhu`,
+			`ptometry_number`
+		)
+		values
+		(
+			#{cardNumber},
+			#{zyPrescriptionType},
+			#{zyDoctor},
+			#{zyOptometryName},
+			#{zySphod},
+			#{zySphos},
+			#{zyCylod},
+			#{zyCylos},
+			#{zyAxialod},
+			#{zyAxialos},
+			#{zyPrismod},
+			#{zyPrismos},
+			#{zyJdod},
+			#{zyJdos},
+			#{zyZytjod},
+			#{zyZytjos},
+			#{zyTgod},
+			#{zyTgos},
+			#{zyVaod},
+			#{zyVaos},
+			#{zyJpcz},
+			#{zyClfs},
+			#{zyJyjk},
+			#{zyJklx},
+			#{zyText},
+			#{zyBeizhu},
+			#{ptometryNumber}
+		)
+	</insert>
 	 
 	<update id="update" parameterType="com.shiguang.jiancha.domain.ZyDO">
 		update jc_zy 

@@ -193,7 +193,8 @@
 			`sgjj_jykj`,
 			`sgjj_kjlx`,
 			`sgjj_text`,
-			`sgjj_beizhu`
+			`sgjj_beizhu`,
+			`ptometry_number`
 		)
 		values
 		(
@@ -224,7 +225,8 @@
 			#{sgjjJykj},
 			#{sgjjKjlx},
 			#{sgjjText},
-			#{sgjjBeizhu}
+			#{sgjjBeizhu},
+			#{ptometryNumber}
 		)
 	</insert>
 

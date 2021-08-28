@@ -138,7 +138,7 @@ public class PidiaoController {
 		model.addAttribute("goodsDOList", goodsDOList);
 		//仓位
 		map.put("xsstate", 0);
-		List<PositionDO> positionList = positionService.stockList(map);
+		List<PositionDO> positionList = positionService.positionList(map);
 		model.addAttribute("positionList", positionList);
 		return "/stock/pidiao/selectGoods";
 	}

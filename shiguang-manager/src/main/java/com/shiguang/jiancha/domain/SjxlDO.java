@@ -429,4 +429,14 @@ public class SjxlDO implements Serializable {
     public String getSjxlBeizhu() {
         return sjxlBeizhu;
     }
+    //验光号
+    private String ptometryNumber;
+
+    public String getPtometryNumber() {
+        return ptometryNumber;
+    }
+
+    public void setPtometryNumber(String ptometryNumber) {
+        this.ptometryNumber = ptometryNumber;
+    }
 }

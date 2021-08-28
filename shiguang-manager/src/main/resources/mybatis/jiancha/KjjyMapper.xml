@@ -183,7 +183,8 @@
 			`kjjy_jykj`,
 			`kjjy_kjlx`,
 			`kjjy_text`,
-			`kjjy_beizhu`
+			`kjjy_beizhu`,
+			`ptometry_number`
 		)
 		values
 		(
@@ -212,7 +213,8 @@
 			#{kjjyJykj},
 			#{kjjyKjlx},
 			#{kjjyText},
-			#{kjjyBeizhu}
+			#{kjjyBeizhu},
+			#{ptometryNumber}
 		)
 	</insert>
 

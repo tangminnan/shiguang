@@ -180,6 +180,9 @@ function showCol() {
         var producFactory = rowstr.find("[name='producFactory']").html();
         obj.producFactory = producFactory;
 
+        var medicinecode = rowstr.find("[name='medicinecode']").html();
+        obj.medicinecode = medicinecode;
+
 
         objArray.push(obj);
     });

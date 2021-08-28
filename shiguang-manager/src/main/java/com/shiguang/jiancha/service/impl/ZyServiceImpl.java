@@ -1,5 +1,6 @@
 package com.shiguang.jiancha.service.impl;
 
+import com.shiguang.jiancha.domain.ResultDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,12 @@ public class ZyServiceImpl implements ZyService {
 	public int save(ZyDO zy){
 		return zyDao.save(zy);
 	}
-	
+
+	@Override
+	public int saveZY(ResultDO result) {
+		return zyDao.saveZY(result);
+	}
+
 	@Override
 	public int update(ZyDO zy){
 		return zyDao.update(zy);

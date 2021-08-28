@@ -147,7 +147,8 @@
 			`rgp_tssjos`,
 			`rgp_syjpod`,
 			`rgp_syjpos`,
-			`rgp_beizhu`
+			`rgp_beizhu`,
+			`ptometry_number`
 		)
 		values
 		(
@@ -169,7 +170,8 @@
 			#{rgpTssjos},
 			#{rgpSyjpod},
 			#{rgpSyjpos},
-			#{rgpBeizhu}
+			#{rgpBeizhu},
+			#{ptometryNumber}
 		)
 	</insert>
 

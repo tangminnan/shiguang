@@ -397,4 +397,14 @@ public class RxjmjcjDO implements Serializable {
     public String getRxBeizhu() {
         return rxBeizhu;
     }
+    //验光号
+    private String ptometryNumber;
+
+    public String getPtometryNumber() {
+        return ptometryNumber;
+    }
+
+    public void setPtometryNumber(String ptometryNumber) {
+        this.ptometryNumber = ptometryNumber;
+    }
 }

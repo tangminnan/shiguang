@@ -78,7 +78,8 @@
 			`yp_doctor`,
 			`yp_optometry_name`,
 			`yp_nr`,
-			`yp_ym`
+			`yp_ym`,
+			`ptometry_number`
 		)
 		values
 		(
@@ -87,7 +88,8 @@
 			#{ypDoctor},
 			#{ypOptometryName},
 			#{ypNr},
-			#{ypYm}
+			#{ypYm},
+			#{ptometryNumber}
 		)
 	</insert>
 

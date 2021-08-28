@@ -2,10 +2,8 @@
 <html>
 <meta charset="utf-8">
 <head></head>
-<body style="width: 224px; border:1px solid #000000;">
-<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-</table>
-	<div style="float: left;width:90%; margin-left: 8px; margin-top: 30px;position: relative;border:2px solid #000000;" id="devid">
+<body >
+	<div id="devid">
 		<!--<img alt="" th:src="${QRCode}" style="width: 100% !important; height: auto !important;">-->
 		<!--<table cellspacing="0" cellpadding="0" style=" width: 100%;border-top: 1px solid #000000;">-->
 			<!--<tbody>-->
@@ -23,8 +21,8 @@
 		for (var i=0;i<list.length;i++){
 		    alert(list[i].goodsCount);
 		    for (var a=0;a<list[i].goodsCount;a++){
-		        html +="<img alt='' src='"+list[i].QRCode+"' style=\"width: 100% !important; height: auto !important;\">";
-		        html +="<table cellspacing=\"0\" cellpadding=\"0\" style=\" width: 100%;border-top: 1px solid #000000;\">";
+		        html +="<img alt='' src='"+list[i].QRCode+"' style='width: 400px'>";
+		        html +="<table cellspacing=\"0\" cellpadding=\"0\" >";
 		        html +="<tbody>";
 		        html += "<tr>";
 		        html += "<td>商品信息："+list[i].goodsName+"</td>";

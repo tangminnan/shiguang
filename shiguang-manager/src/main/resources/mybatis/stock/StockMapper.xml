@@ -5,7 +5,7 @@
 
     <select id="get" resultType="com.shiguang.stock.domain.StockDO">
     select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,
-    `price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_name`,`create_time`,`danju_number`,
+    `price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_id`,`position_name`,`create_time`,`danju_number`,
     `order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,
      `batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,`factory` from stock where id = #{value}
 </select>
@@ -13,7 +13,7 @@
     <select id="list" resultType="com.shiguang.stock.domain.StockDO">
         select
         s.`id`,s.`goods_num`,s.`goods_code`,s.`goods_name`,s.`goods_count`,s.`goods_type`,s.`mfrsid`,s.`brandname`,s.`retail_price`,
-        s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`, s.`position_name`, s.`create_time`,
+        s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`,s.`position_id`, s.`position_name`, s.`create_time`,
         s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
         s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`,s.`classtype`,s.`factory`
         from stock s left join c_mfrs m on s.mfrsid=m.mfrsid
@@ -32,6 +32,7 @@
             <if test="costSum != null and costSum != ''">and s.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and s.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and s.whole_sum = #{wholeSum}</if>
+            <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
             <if test="positionName != null and positionName != ''">and s.position_name = #{positionName}</if>
             <if test="createTime != null and createTime != ''">and s.create_time = #{createTime}</if>
             <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number = #{danjuNumber}</if>
@@ -79,6 +80,7 @@
             <if test="costSum != null and costSum != ''">and cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and whole_sum = #{wholeSum}</if>
+            <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
             <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
             <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
             <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
@@ -114,6 +116,7 @@
         `cost_sum`,
         `whole_price`,
         `whole_sum`,
+        `position_id`,
         `position_name`,
         `create_time`,
         `danju_number`,
@@ -147,6 +150,7 @@
         #{costSum},
         #{wholePrice},
         #{wholeSum},
+        #{positionId},
         #{positionName},
         #{createTime},
         #{danjuNumber},
@@ -183,6 +187,7 @@
             <if test="costSum != null">`cost_sum` = #{costSum},</if>
             <if test="wholePrice != null">`whole_price` = #{wholePrice},</if>
             <if test="wholeSum != null">`whole_sum` = #{wholeSum},</if>
+            <if test="positionId != null">`position_id` = #{positionId},</if>
             <if test="positionName != null">`position_name` = #{positionName},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
             <if test="danjuNumber != null">`danju_number` = #{danjuNumber},</if>
@@ -1060,7 +1065,7 @@
     <select id="selectJingjia" resultType="com.shiguang.product.domain.ProducaDO">
         select  p.produc_num,p.produc_name,b.brandname,p.produc_factory,u.unitname,
         p.factory,p.retail_price,p.tax_price,p.produc_factorycolor,m.materialname,p.size,p.produc_code,
-        p.trade_price,p.transfer_price,mfrs.medicinecode,p.produc_factory
+        p.trade_price,p.transfer_price,mfrs.medicinecode
         from aa_produca p left join c_unit u on p.unitid=u.unitid
         left join c_material m on p.materialid=m.materialid
         left join a_technology t on p.technology_id=t.technology_id
@@ -1090,7 +1095,7 @@
     <select id="selectPeijian" resultType="com.shiguang.product.domain.PartsDO">
         select p.produc_num,p.produc_name,b.brandname,p.produc_factory,u.unitname,
         p.factory,p.retail_price,p.tax_price,p.parts_style,p.produc_code,
-        p.trade_price,p.transfer_price,mfrs.medicinecode,p.produc_factory
+        p.trade_price,p.transfer_price,mfrs.medicinecode
         from aa_parts p left join c_unit u on p.unitid=u.unitid
         left join c_brand b on p.brandnum=b.brandnum
         left join c_mfrs mfrs on p.mfrsid=mfrs.mfrsid
@@ -1146,7 +1151,7 @@
     <select id="selectJpcp" resultType="com.shiguang.product.domain.JpcpDO">
         select j.produc_num,j.produc_name,u.unitname,b.brandname,j.retail_price,j.tax_price,s.sph,c.cyl,
         li.lightbelow,r.refractivityvalue,l.light_name,le.lens_name,g.gradual_name,f.function_name,
-        j.produc_code,j.trade_price,j.transfer_price,mfrs.medicinecode,j.classtype
+        j.produc_code,j.trade_price,j.transfer_price,mfrs.medicinecode,j.classtype,j.produc_factory
         from aa_jpcp j join c_unit u on j.unitid=u.unitid left join a_sph s on j.sph_id=s.sph_id
         left join a_cyl c on j.cyl_id=c.cyl_id left join a_lightbelow li on j.lightbelow_id=li.lightbelow_id
         left join c_refractivity r on j.refractivityid=r.refractivityid
@@ -1241,7 +1246,7 @@
     <select id="selectHly" resultType="com.shiguang.product.domain.HlyDO">
         select
         h.produc_num,h.produc_name,b.brandname,h.produc_factory,h.factory,u.unitname,h.retail_price,h.tax_price,h.main_capacity,h.second_capacity,h.produc_code,
-        h.trade_price,h.transfer_price,mfrs.medicinecode,h.produc_factory
+        h.trade_price,h.transfer_price,mfrs.medicinecode
         from aa_hly h left join c_unit u on h.unitid = u.unitid
         left join c_brand b on h.brandnum=b.brandnum
         left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsid
@@ -1264,8 +1269,7 @@
     <!--太阳镜【商】【品】【查】【询】-->
     <select id="selectTyj" resultType="com.shiguang.product.domain.TyjDO">
         select t.produc_num,t.produc_name,t.produc_code,b.brandname, t.produc_factory,t.factory,u.unitname,
-        t.retail_price,t.tax_price,t.produc_factorycolor,t.size,t.trade_price,t.transfer_price,mfrs.medicinecode,
-        t.produc_factory
+        t.retail_price,t.tax_price,t.produc_factorycolor,t.size,t.trade_price,t.transfer_price,mfrs.medicinecode
         from aa_tyj t left join c_unit u on t.unitid=u.unitid
         left join c_brand b on t.brandnum=b.brandnum
         left join c_mfrs mfrs on t.mfrsid=mfrs.mfrsid
@@ -1292,7 +1296,7 @@
     <select id="selectLhj" resultType="com.shiguang.product.domain.OldlensDO">
         select
         o.produc_num,o.produc_name,o.produc_code,o.produc_factory,o.factory,o.retail_price,o.tax_price,u.unitname,
-        old.degrees,o.size,o.produc_factorycolor,o.trade_price,o.transfer_price,mfrs.medicinecode,o.produc_factory
+        old.degrees,o.size,o.produc_factorycolor,o.trade_price,o.transfer_price,mfrs.medicinecode
         from aa_oldlens o left join c_unit u on o.unitid=u.unitid left join a_olddegrees old on o.old_id=old.old_id
         left join c_brand b on o.brandnum=b.brandnum  left join c_mfrs mfrs on o.mfrsid=mfrs.mfrsid
         <where>
@@ -1339,12 +1343,13 @@
         s.produc_num,s.produc_name,s.produc_code,b.brandname,s.factory,s.produc_factory,u.unitname,s.retail_price,s.tax_price,
         s.trade_price,s.transfer_price,mfrs.medicinecode
         from aa_shiguang s left join c_unit u on s.unitid=u.unitid
-        left join c_brand b on s.brandnum=b.brandnum  left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsid
+        left join c_brand b on s.brandnum=b.brandnum  left join c_mfrs mfrs on s.mfrsid=mfrs.mfrsid
         <where>
             <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and s.produc_code = #{producCode}</if>
             <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and mfrs.mfrsname = #{mfrsname}</if>
             <if test="brandid != null and brandid != ''">and s.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producFactory != null and producFactory != ''">and s.produc_factory = #{producFactory}</if>
@@ -1361,6 +1366,7 @@
          <where>
              <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
              <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
+             <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
          </where>
         order by id
     </select>
@@ -1371,7 +1377,8 @@
         s.cost_price,s.cost_sum,s.whole_price,s.whole_sum,s.position_name,
         s.batch,s.zhuce_number,s.produce_day,s.useday
         from stock s left join c_goods g on s.goods_type=g.goodsid left join c_mfrs m on s.mfrsid=m.mfrsid
-        left join c_position po on s.position_name=po.position_name left join c_brand b on s.brandname=b.brandname
+        left join c_position po on s.position_id=po.position_id
+        left join c_brand b on s.brandname=b.brandname
         left join department d on po.depart_number=d.depart_number
         <where>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
@@ -1384,6 +1391,7 @@
                 and   #{retailPrice} &lt;=  j.retail_price and j.retail_price &lt;=  #{retailPrice2}
             </if>
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
+            <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
             <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
             <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
             <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>

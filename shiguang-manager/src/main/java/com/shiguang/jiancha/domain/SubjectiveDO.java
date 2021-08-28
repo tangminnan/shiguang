@@ -365,4 +365,14 @@ public class SubjectiveDO implements Serializable {
     public String getNearLeftz() {
         return nearLeftz;
     }
+    //验光号
+    private String ptometryNumber;
+
+    public String getPtometryNumber() {
+        return ptometryNumber;
+    }
+
+    public void setPtometryNumber(String ptometryNumber) {
+        this.ptometryNumber = ptometryNumber;
+    }
 }
