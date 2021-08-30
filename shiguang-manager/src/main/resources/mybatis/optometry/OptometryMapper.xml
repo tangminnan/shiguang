@@ -291,7 +291,7 @@
         `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,
         `corneal_astigmatism_os`,`corneal_astigmatism_od`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,
         `axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,
-        `dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`
+        `dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`,`create_time`
         from optometry
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>

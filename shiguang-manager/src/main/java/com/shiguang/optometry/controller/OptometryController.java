@@ -94,15 +94,31 @@ public class OptometryController {
 //        SettlementDO settlement = settlementService.getCostId(costDO.getId());
 //        model.addAttribute("settlement",settlement);
         Map<String, Object> map = new HashMap<>();
+        map.put("memberInumber",cardNumber);
         List<OptometryDO> list = optometryService.optoList(map);
         OptometryDO optometryDO = new OptometryDO();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if (null != list && list.size() > 0) {
-            optometryDO.setCylinderRight(list.get(0).getCylinderRight());
-            optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
-            optometryDO.setAxialRight(list.get(0).getAxialRight());
-            optometryDO.setAxialLeft(list.get(0).getAxialLeft());
-            optometryDO.setSphereRight(list.get(0).getSphereRight());
-            optometryDO.setSphereLeft(list.get(0).getSphereLeft());
+            Date creaTime = list.get(0).getCreateTime();
+            Date newDate = new Date();
+            String creaTimes = simpleDateFormat.format(creaTime);
+            String newDates = simpleDateFormat.format(newDate);
+            if (creaTimes == newDates){
+                optometryDO.setCylinderRight(list.get(0).getCylinderRight());
+                optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
+                optometryDO.setAxialRight(list.get(0).getAxialRight());
+                optometryDO.setAxialLeft(list.get(0).getAxialLeft());
+                optometryDO.setSphereRight(list.get(0).getSphereRight());
+                optometryDO.setSphereLeft(list.get(0).getSphereLeft());
+            } else {
+                optometryDO.setCylinderRight(null);
+                optometryDO.setCylinderLeft(null);
+                optometryDO.setAxialRight(null);
+                optometryDO.setAxialLeft(null);
+                optometryDO.setSphereRight(null);
+                optometryDO.setSphereLeft(null);
+            }
+
 
         }
         model.addAttribute("optometryDO", optometryDO);
