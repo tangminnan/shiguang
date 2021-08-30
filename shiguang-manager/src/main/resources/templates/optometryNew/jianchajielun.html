@@ -1405,7 +1405,7 @@
     function zhouxiang(e) {//用onblur事件触发
         var val = parseFloat(e.value);
         if (val < 0 || val > 180) {
-            alert("轴向在0-180之间");
+            layer.alert("轴向在0-180之间");
         } else {
             e.value = val.toFixed(0)
         }

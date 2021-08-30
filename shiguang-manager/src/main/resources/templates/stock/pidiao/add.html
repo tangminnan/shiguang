@@ -156,7 +156,7 @@ function outposion() {
             $(datajson).each(function (key) {  //循环读取后台传来的Json数据
                 var id = datajson[key].positionId;   //角色id
                 var roleName = datajson[key].positionName; //角色名称
-				// alert(id+roleName);
+				// layer.alert(id+roleName);
                 //调用自定义方法
                 $(".outcw").append("<option value='" + id + "'>" + roleName + "</option>");
             });
@@ -178,7 +178,7 @@ function indepartment() {
             $(datajson).each(function (key) {  //循环读取后台传来的Json数据
                 var id = datajson[key].id;   //角色id
                 var roleName = datajson[key].departName; //角色名称
-				// alert(id+roleName);
+				// layer.alert(id+roleName);
                 //调用自定义方法
                 $(".ings").append("<option value='" + id + "'>" + roleName + "</option>");
             });
@@ -200,7 +200,7 @@ function inposion() {
             $(datajson).each(function (key) {  //循环读取后台传来的Json数据
                 var id = datajson[key].positionId;   //角色id
                 var roleName = datajson[key].positionName; //角色名称
-                // alert(id+roleName);
+                // layer.alert(id+roleName);
                 //调用自定义方法
                 $(".incw").append("<option value='" + id + "'>" + roleName + "</option>");
             });
@@ -222,7 +222,7 @@ function inposion() {
         }else if (inCompany == ""){
             layer.alert("请选择接收公司！");
 		} else if (inDepartment == ""){
-            layer.alert("请选择接收部门！");
+          	layer.alert("请选择接收部门！");
 		} else {
             $(".val").remove();
             var toIndex = layer.open({
@@ -234,7 +234,7 @@ function inposion() {
                 content: "/stock/pidiao/selextkc/",// iframe的url
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
-                    // layer.alert(JSON.stringify(rows))
+                    // layer.layer.alert(JSON.stringify(rows))
                     for (var i = 0; i < rows.length; i++) {
                         $(".liebiao").after("<tr class='val'> " +
 							// "<td><input name='one'  type=\"checkbox\"/></td>\n" +

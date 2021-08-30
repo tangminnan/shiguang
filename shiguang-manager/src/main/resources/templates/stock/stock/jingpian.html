@@ -202,7 +202,7 @@
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
-                    // alert(xml[i].classtype+"镜片类型")
+                    // layer.alert(xml[i].classtype+"镜片类型")
                     $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                         "<td name='producNum'>" + xml[i].producNum + "</td>\n" +
                         "<td name='producName'>" + xml[i].producName + "</td>\n" +
@@ -367,7 +367,7 @@
     function choiceBrand() {
         var goodsid = document.getElementById('goodsid').value;
         var mfrsid = document.getElementById('mfrsid').value;
-        // alert(goodsid);
+        // layer.alert(goodsid);
         if (mfrsid == "") {
             layer.alert("请选择制造商！");
         } else {

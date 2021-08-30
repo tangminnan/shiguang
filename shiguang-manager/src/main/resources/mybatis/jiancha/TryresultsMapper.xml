@@ -2,165 +2,215 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shiguang.jiancha.dao.TryresultsDao">
-
     <select id="get" resultType="com.shiguang.jiancha.domain.TryresultsDO">
-		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,`sphere_righttry`,`sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,`dva_lefttry`,`nva_righttry`,`nva_lefttry`,`prism_righttry`,`prism_lefttry`,`jdr_try`,`jdl_try`,`height_righttry`,`height_lefttry`,`add_righttry`,`add_lefttry`,`yuan_rrty`,`yuan_lrty`,`near_righttry`,`near_lefttry`,`remarks`,`far_lyou`,`far_lyod`,`far_lyos`,`near_lyou`,`near_lyod`,`near_lyos`,`far_yjou`,`far_yjod`,`far_yjos`,`near_yjou`,`near_yjod`,`near_yjos`,`far_xkou`,`far_xkod`,`far_xkos`,`near_xkou`,`near_xkod`,`near_xkos`,`dominant_eye`,`axis`,`axis_left`,`corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,`corneal_first_K2_left`,`corneal_last_K2_left`,`pjk_od2`,`pjk_os2`,`intraocular_od`,`intraocular_os`,`mydriasis`,`pharmacy_id`,`pharmacy`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`corneal_astigmatism_od`,`corneal_astigmatism_os`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,`axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,`dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`,`sphere_rightz`,`sphere_leftz`,`cylinder_rightz`,`cylinder_leftz`,`axial_rightz`,`axial_leftz`,`dva_rightz`,`dva_leftz`,`nva_rightz`,`nva_leftz`,`prism_rightz`,`prism_leftz`,`jdr_z`,`jdl_z`,`add_rightz`,`add_leftz`,`yuan_rz`,`yuan_lz`,`near_rightz`,`near_leftz` from jc_tryresults where id = #{value}
+		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,
+		`chief_complaint`,`sphere_righttry`,`sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,
+		`axial_lefttry`,`dva_righttry`,`dva_lefttry`,`nva_righttry`,`nva_lefttry`,`prism_righttry`,`prism_lefttry`,
+		`jdr_try`,`jdl_try`,`height_righttry`,`height_lefttry`,`add_righttry`,`add_lefttry`,`yuan_rrty`,`yuan_lrty`,
+		`near_righttry`,`near_lefttry`,`remarks`,`far_lyou`,`far_lyod`,`far_lyos`,`near_lyou`,`near_lyod`,`near_lyos`,`far_yjou`,`far_yjod`,`far_yjos`,
+		`near_yjou`,`near_yjod`,`near_yjos`,`far_xkou`,`far_xkod`,`far_xkos`,`near_xkou`,`near_xkod`,`near_xkos`,`dominant_eye`,`axis`,`axis_left`,
+		`corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,
+		`corneal_first_K2_left`,`corneal_last_K2_left`,`pkod`,`pkos`,`pk1od`,`pk1os`,`dkod`,`dkos`,`dk1os`,`dk1od`,`pjk_od`,`pjk_os`,`pjk_od2`,`pjk_os2`,
+		`intraocular_od`,`intraocular_os`,`mydriasis`,`pharmacy_id`,`pharmacy`,
+		`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`corneal_astigmatism_od`,
+		`corneal_astigmatism_os`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,`axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,
+		`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,`dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,
+		`distance_os`,`sphere_rightz`,`sphere_leftz`,`cylinder_rightz`,`cylinder_leftz`,`axial_rightz`,`axial_leftz`,`dva_rightz`,`dva_leftz`,`nva_rightz`,
+		`nva_leftz`,`prism_rightz`,`prism_leftz`,`jdr_z`,`jdl_z`,`add_rightz`,`add_leftz`,`yuan_rz`,`yuan_lz`,`near_rightz`,`near_leftz`,
+		`sgn_sf`,`sgn_reason`,`sgn_ciss`,`sgn_fardot`,`sgn_neardot`,`sgn_farsp1`,`sgn_farsp2`,`sgn_farcz1`,
+		`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,`sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,
+		`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,`sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,
+		`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf` ,`sphere_right2`,`sphere_left2`,`cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`
+		from jc_tryresults where id = #{value}
 	</select>
-    <!--//根据人查相对应的验光号医生时间等信息-->
-    <select id="listUser" resultType="com.shiguang.jiancha.domain.TryresultsDO">
-        select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,
-        `sphere_righttry`,`sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,
-        `dva_lefttry`,`nva_righttry`,`nva_lefttry`,`prism_righttry`,`prism_lefttry`,`jdr_try`,`jdl_try`,`height_righttry`,`height_lefttry`,
-        `add_righttry`,`add_lefttry`,`yuan_rrty`,`yuan_lrty`,`near_righttry`,`near_lefttry`,`remarks`
-        from jc_tryresults where card_number = #{cardNumber}
-        order by id desc
 
-    </select>
     <select id="list" resultType="com.shiguang.jiancha.domain.TryresultsDO">
-        select
-        `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,`sphere_righttry`,`sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,`dva_lefttry`,`nva_righttry`,`nva_lefttry`,`prism_righttry`,`prism_lefttry`,`jdr_try`,`jdl_try`,`height_righttry`,`height_lefttry`,`add_righttry`,`add_lefttry`,`yuan_rrty`,`yuan_lrty`,`near_righttry`,`near_lefttry`,`remarks`,`far_lyou`,`far_lyod`,`far_lyos`,`near_lyou`,`near_lyod`,`near_lyos`,`far_yjou`,`far_yjod`,`far_yjos`,`near_yjou`,`near_yjod`,`near_yjos`,`far_xkou`,`far_xkod`,`far_xkos`,`near_xkou`,`near_xkod`,`near_xkos`,`dominant_eye`,`axis`,`axis_left`,`corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,`corneal_first_K2_left`,`corneal_last_K2_left`,`pjk_od2`,`pjk_os2`,`intraocular_od`,`intraocular_os`,`mydriasis`,`pharmacy_id`,`pharmacy`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`corneal_astigmatism_od`,`corneal_astigmatism_os`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,`axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,`dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`,`sphere_rightz`,`sphere_leftz`,`cylinder_rightz`,`cylinder_leftz`,`axial_rightz`,`axial_leftz`,`dva_rightz`,`dva_leftz`,`nva_rightz`,`nva_leftz`,`prism_rightz`,`prism_leftz`,`jdr_z`,`jdl_z`,`add_rightz`,`add_leftz`,`yuan_rz`,`yuan_lz`,`near_rightz`,`near_leftz`
+        select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,`sphere_righttry`,
+        `sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,`dva_lefttry`,`nva_righttry`,`nva_lefttry`,
+        `prism_righttry`,`prism_lefttry`,`jdr_try`,`jdl_try`,`height_righttry`,`height_lefttry`,`add_righttry`,`add_lefttry`,`yuan_rrty`,`yuan_lrty`,
+        `near_righttry`,`near_lefttry`,`remarks`,`far_lyou`,`far_lyod`,`far_lyos`,`near_lyou`,`near_lyod`,`near_lyos`,`far_yjou`,`far_yjod`,`far_yjos`,
+        `near_yjou`,`near_yjod`,`near_yjos`,`far_xkou`,`far_xkod`,`far_xkos`,`near_xkou`,`near_xkod`,`near_xkos`,`dominant_eye`,`axis`,`axis_left`,
+        `corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,
+        `corneal_first_K2_left`,`corneal_last_K2_left`,`pkod`,`pkos`,`pk1od`,`pk1os`,`dkod`,`dkos`,`dk1os`,`dk1od`,`pjk_od`,`pjk_os`,`pjk_od2`,`pjk_os2`,
+        `intraocular_od`,`intraocular_os`,`mydriasis`,`pharmacy_id`,`pharmacy`,`sphere_right`,
+        `sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`corneal_astigmatism_od`,`corneal_astigmatism_os`,`sph_jyod`,`sph_jyos`,
+        `cyl_jyod`,`cyl_jyos`,`axial_jyod`,`axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,
+        `axial_cpos`,`dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`,
+        `sphere_rightz`,`sphere_leftz`,`cylinder_rightz`,`cylinder_leftz`,`axial_rightz`,`axial_leftz`,`dva_rightz`,`dva_leftz`,`nva_rightz`,
+        `nva_leftz`,`prism_rightz`,`prism_leftz`,`jdr_z`,`jdl_z`,`add_rightz`,`add_leftz`,`yuan_rz`,`yuan_lz`,`near_rightz`,`near_leftz`,`sgn_sf`,`sgn_reason`,
+        `sgn_ciss`,`sgn_fardot`,`sgn_neardot`,`sgn_farsp1`,`sgn_farsp2`,`sgn_farcz1`,`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,
+        `sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,
+        `sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf`,`sphere_right2`,`sphere_left2`,
+        `cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`
         from jc_tryresults
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
-            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
-            <if test="optometryName != null and optometryName != ''">and optometry_name = #{optometryName}</if>
-            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
-            <if test="referralDoctor != null and referralDoctor != ''">and referral_doctor = #{referralDoctor}</if>
-            <if test="referral != null and referral != ''">and referral = #{referral}</if>
-            <if test="chiefComplaint != null and chiefComplaint != ''">and chief_complaint = #{chiefComplaint}</if>
-            <if test="sphereRighttry != null and sphereRighttry != ''">and sphere_righttry = #{sphereRighttry}</if>
-            <if test="sphereLefttry != null and sphereLefttry != ''">and sphere_lefttry = #{sphereLefttry}</if>
-            <if test="cylinderRighttry != null and cylinderRighttry != ''">and cylinder_righttry = #{cylinderRighttry}
-            </if>
-            <if test="cylinderLefttry != null and cylinderLefttry != ''">and cylinder_lefttry = #{cylinderLefttry}</if>
-            <if test="axialRighttry != null and axialRighttry != ''">and axial_righttry = #{axialRighttry}</if>
-            <if test="axialLefttry != null and axialLefttry != ''">and axial_lefttry = #{axialLefttry}</if>
-            <if test="dvaRighttry != null and dvaRighttry != ''">and dva_righttry = #{dvaRighttry}</if>
-            <if test="dvaLefttry != null and dvaLefttry != ''">and dva_lefttry = #{dvaLefttry}</if>
-            <if test="nvaRighttry != null and nvaRighttry != ''">and nva_righttry = #{nvaRighttry}</if>
-            <if test="nvaLefttry != null and nvaLefttry != ''">and nva_lefttry = #{nvaLefttry}</if>
-            <if test="prismRighttry != null and prismRighttry != ''">and prism_righttry = #{prismRighttry}</if>
-            <if test="prismLefttry != null and prismLefttry != ''">and prism_lefttry = #{prismLefttry}</if>
-            <if test="jdrTry != null and jdrTry != ''">and jdr_try = #{jdrTry}</if>
-            <if test="jdlTry != null and jdlTry != ''">and jdl_try = #{jdlTry}</if>
-            <if test="heightRighttry != null and heightRighttry != ''">and height_righttry = #{heightRighttry}</if>
-            <if test="heightLefttry != null and heightLefttry != ''">and height_lefttry = #{heightLefttry}</if>
-            <if test="addRighttry != null and addRighttry != ''">and add_righttry = #{addRighttry}</if>
-            <if test="addLefttry != null and addLefttry != ''">and add_lefttry = #{addLefttry}</if>
-            <if test="yuanRrty != null and yuanRrty != ''">and yuan_rrty = #{yuanRrty}</if>
-            <if test="yuanLrty != null and yuanLrty != ''">and yuan_lrty = #{yuanLrty}</if>
-            <if test="nearRighttry != null and nearRighttry != ''">and near_righttry = #{nearRighttry}</if>
-            <if test="nearLefttry != null and nearLefttry != ''">and near_lefttry = #{nearLefttry}</if>
-            <if test="remarks != null and remarks != ''">and remarks = #{remarks}</if>
-            <if test="farLyou != null and farLyou != ''">and far_lyou = #{farLyou}</if>
-            <if test="farLyod != null and farLyod != ''">and far_lyod = #{farLyod}</if>
-            <if test="farLyos != null and farLyos != ''">and far_lyos = #{farLyos}</if>
-            <if test="nearLyou != null and nearLyou != ''">and near_lyou = #{nearLyou}</if>
-            <if test="nearLyod != null and nearLyod != ''">and near_lyod = #{nearLyod}</if>
-            <if test="nearLyos != null and nearLyos != ''">and near_lyos = #{nearLyos}</if>
-            <if test="farYjou != null and farYjou != ''">and far_yjou = #{farYjou}</if>
-            <if test="farYjod != null and farYjod != ''">and far_yjod = #{farYjod}</if>
-            <if test="farYjos != null and farYjos != ''">and far_yjos = #{farYjos}</if>
-            <if test="nearYjou != null and nearYjou != ''">and near_yjou = #{nearYjou}</if>
-            <if test="nearYjod != null and nearYjod != ''">and near_yjod = #{nearYjod}</if>
-            <if test="nearYjos != null and nearYjos != ''">and near_yjos = #{nearYjos}</if>
-            <if test="farXkou != null and farXkou != ''">and far_xkou = #{farXkou}</if>
-            <if test="farXkod != null and farXkod != ''">and far_xkod = #{farXkod}</if>
-            <if test="farXkos != null and farXkos != ''">and far_xkos = #{farXkos}</if>
-            <if test="nearXkou != null and nearXkou != ''">and near_xkou = #{nearXkou}</if>
-            <if test="nearXkod != null and nearXkod != ''">and near_xkod = #{nearXkod}</if>
-            <if test="nearXkos != null and nearXkos != ''">and near_xkos = #{nearXkos}</if>
-            <if test="dominantEye != null and dominantEye != ''">and dominant_eye = #{dominantEye}</if>
-            <if test="axis != null and axis != ''">and axis = #{axis}</if>
-            <if test="axisLeft != null and axisLeft != ''">and axis_left = #{axisLeft}</if>
-            <if test="cornealFirstK1Right != null and cornealFirstK1Right != ''">and corneal_first_K1_right =
-                #{cornealFirstK1Right}
-            </if>
-            <if test="cornealLastK1Right != null and cornealLastK1Right != ''">and corneal_last_K1_right =
-                #{cornealLastK1Right}
-            </if>
-            <if test="cornealFirstK1Left != null and cornealFirstK1Left != ''">and corneal_first_K1_left =
-                #{cornealFirstK1Left}
-            </if>
-            <if test="cornealLastK1Left != null and cornealLastK1Left != ''">and corneal_last_K1_left =
-                #{cornealLastK1Left}
-            </if>
-            <if test="cornealFirstK2Right != null and cornealFirstK2Right != ''">and corneal_first_K2_right =
-                #{cornealFirstK2Right}
-            </if>
-            <if test="cornealLastK2Right != null and cornealLastK2Right != ''">and corneal_last_K2_right =
-                #{cornealLastK2Right}
-            </if>
-            <if test="cornealFirstK2Left != null and cornealFirstK2Left != ''">and corneal_first_K2_left =
-                #{cornealFirstK2Left}
-            </if>
-            <if test="cornealLastK2Left != null and cornealLastK2Left != ''">and corneal_last_K2_left =
-                #{cornealLastK2Left}
-            </if>
-            <if test="pjkOd2 != null and pjkOd2 != ''">and pjk_od2 = #{pjkOd2}</if>
-            <if test="pjkOs2 != null and pjkOs2 != ''">and pjk_os2 = #{pjkOs2}</if>
-            <if test="intraocularOd != null and intraocularOd != ''">and intraocular_od = #{intraocularOd}</if>
-            <if test="intraocularOs != null and intraocularOs != ''">and intraocular_os = #{intraocularOs}</if>
-            <if test="mydriasis != null and mydriasis != ''">and mydriasis = #{mydriasis}</if>
-            <if test="pharmacyId != null and pharmacyId != ''">and pharmacy_id = #{pharmacyId}</if>
-            <if test="pharmacy != null and pharmacy != ''">and pharmacy = #{pharmacy}</if>
-            <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
-            <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
-            <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
-            <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
-            <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
-            <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
-            <if test="cornealAstigmatismOd != null and cornealAstigmatismOd != ''">and corneal_astigmatism_od =
-                #{cornealAstigmatismOd}
-            </if>
-            <if test="cornealAstigmatismOs != null and cornealAstigmatismOs != ''">and corneal_astigmatism_os =
-                #{cornealAstigmatismOs}
-            </if>
-            <if test="sphJyod != null and sphJyod != ''">and sph_jyod = #{sphJyod}</if>
-            <if test="sphJyos != null and sphJyos != ''">and sph_jyos = #{sphJyos}</if>
-            <if test="cylJyod != null and cylJyod != ''">and cyl_jyod = #{cylJyod}</if>
-            <if test="cylJyos != null and cylJyos != ''">and cyl_jyos = #{cylJyos}</if>
-            <if test="axialJyod != null and axialJyod != ''">and axial_jyod = #{axialJyod}</if>
-            <if test="axialJyos != null and axialJyos != ''">and axial_jyos = #{axialJyos}</if>
-            <if test="vaJyod != null and vaJyod != ''">and va_jyod = #{vaJyod}</if>
-            <if test="vaJyos != null and vaJyos != ''">and va_jyos = #{vaJyos}</if>
-            <if test="pdJyod != null and pdJyod != ''">and pd_jyod = #{pdJyod}</if>
-            <if test="pdJyos != null and pdJyos != ''">and pd_jyos = #{pdJyos}</if>
-            <if test="sphCpod != null and sphCpod != ''">and sph_cpod = #{sphCpod}</if>
-            <if test="sphCpos != null and sphCpos != ''">and sph_cpos = #{sphCpos}</if>
-            <if test="cylCpod != null and cylCpod != ''">and cyl_cpod = #{cylCpod}</if>
-            <if test="cylCpos != null and cylCpos != ''">and cyl_cpos = #{cylCpos}</if>
-            <if test="axialCpod != null and axialCpod != ''">and axial_cpod = #{axialCpod}</if>
-            <if test="axialCpos != null and axialCpos != ''">and axial_cpos = #{axialCpos}</if>
-            <if test="dvaCpod != null and dvaCpod != ''">and dva_cpod = #{dvaCpod}</if>
-            <if test="dvaCpos != null and dvaCpos != ''">and dva_cpos = #{dvaCpos}</if>
-            <if test="nvaCpod != null and nvaCpod != ''">and nva_cpod = #{nvaCpod}</if>
-            <if test="nvaCpos != null and nvaCpos != ''">and nva_cpos = #{nvaCpos}</if>
-            <if test="addCpod != null and addCpod != ''">and add_cpod = #{addCpod}</if>
-            <if test="addCpos != null and addCpos != ''">and add_cpos = #{addCpos}</if>
-            <if test="distanceOd != null and distanceOd != ''">and distance_od = #{distanceOd}</if>
-            <if test="distanceOs != null and distanceOs != ''">and distance_os = #{distanceOs}</if>
-            <if test="sphereRightz != null and sphereRightz != ''">and sphere_rightz = #{sphereRightz}</if>
-            <if test="sphereLeftz != null and sphereLeftz != ''">and sphere_leftz = #{sphereLeftz}</if>
-            <if test="cylinderRightz != null and cylinderRightz != ''">and cylinder_rightz = #{cylinderRightz}</if>
-            <if test="cylinderLeftz != null and cylinderLeftz != ''">and cylinder_leftz = #{cylinderLeftz}</if>
-            <if test="axialRightz != null and axialRightz != ''">and axial_rightz = #{axialRightz}</if>
-            <if test="axialLeftz != null and axialLeftz != ''">and axial_leftz = #{axialLeftz}</if>
-            <if test="dvaRightz != null and dvaRightz != ''">and dva_rightz = #{dvaRightz}</if>
-            <if test="dvaLeftz != null and dvaLeftz != ''">and dva_leftz = #{dvaLeftz}</if>
-            <if test="nvaRightz != null and nvaRightz != ''">and nva_rightz = #{nvaRightz}</if>
-            <if test="nvaLeftz != null and nvaLeftz != ''">and nva_leftz = #{nvaLeftz}</if>
-            <if test="prismRightz != null and prismRightz != ''">and prism_rightz = #{prismRightz}</if>
-            <if test="prismLeftz != null and prismLeftz != ''">and prism_leftz = #{prismLeftz}</if>
-            <if test="jdrZ != null and jdrZ != ''">and jdr_z = #{jdrZ}</if>
-            <if test="jdlZ != null and jdlZ != ''">and jdl_z = #{jdlZ}</if>
-            <if test="addRightz != null and addRightz != ''">and add_rightz = #{addRightz}</if>
-            <if test="addLeftz != null and addLeftz != ''">and add_leftz = #{addLeftz}</if>
-            <if test="yuanRz != null and yuanRz != ''">and yuan_rz = #{yuanRz}</if>
-            <if test="yuanLz != null and yuanLz != ''">and yuan_lz = #{yuanLz}</if>
-            <if test="nearRightz != null and nearRightz != ''">and near_rightz = #{nearRightz}</if>
-            <if test="nearLeftz != null and nearLeftz != ''">and near_leftz = #{nearLeftz}</if>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+            <if test="optometryName != null and optometryName != ''"> and optometry_name = #{optometryName} </if>
+            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+            <if test="referralDoctor != null and referralDoctor != ''"> and referral_doctor = #{referralDoctor} </if>
+            <if test="referral != null and referral != ''"> and referral = #{referral} </if>
+            <if test="chiefComplaint != null and chiefComplaint != ''"> and chief_complaint = #{chiefComplaint} </if>
+            <if test="sphereRighttry != null and sphereRighttry != ''"> and sphere_righttry = #{sphereRighttry} </if>
+            <if test="sphereLefttry != null and sphereLefttry != ''"> and sphere_lefttry = #{sphereLefttry} </if>
+            <if test="cylinderRighttry != null and cylinderRighttry != ''"> and cylinder_righttry = #{cylinderRighttry} </if>
+            <if test="cylinderLefttry != null and cylinderLefttry != ''"> and cylinder_lefttry = #{cylinderLefttry} </if>
+            <if test="axialRighttry != null and axialRighttry != ''"> and axial_righttry = #{axialRighttry} </if>
+            <if test="axialLefttry != null and axialLefttry != ''"> and axial_lefttry = #{axialLefttry} </if>
+            <if test="dvaRighttry != null and dvaRighttry != ''"> and dva_righttry = #{dvaRighttry} </if>
+            <if test="dvaLefttry != null and dvaLefttry != ''"> and dva_lefttry = #{dvaLefttry} </if>
+            <if test="nvaRighttry != null and nvaRighttry != ''"> and nva_righttry = #{nvaRighttry} </if>
+            <if test="nvaLefttry != null and nvaLefttry != ''"> and nva_lefttry = #{nvaLefttry} </if>
+            <if test="prismRighttry != null and prismRighttry != ''"> and prism_righttry = #{prismRighttry} </if>
+            <if test="prismLefttry != null and prismLefttry != ''"> and prism_lefttry = #{prismLefttry} </if>
+            <if test="jdrTry != null and jdrTry != ''"> and jdr_try = #{jdrTry} </if>
+            <if test="jdlTry != null and jdlTry != ''"> and jdl_try = #{jdlTry} </if>
+            <if test="heightRighttry != null and heightRighttry != ''"> and height_righttry = #{heightRighttry} </if>
+            <if test="heightLefttry != null and heightLefttry != ''"> and height_lefttry = #{heightLefttry} </if>
+            <if test="addRighttry != null and addRighttry != ''"> and add_righttry = #{addRighttry} </if>
+            <if test="addLefttry != null and addLefttry != ''"> and add_lefttry = #{addLefttry} </if>
+            <if test="yuanRrty != null and yuanRrty != ''"> and yuan_rrty = #{yuanRrty} </if>
+            <if test="yuanLrty != null and yuanLrty != ''"> and yuan_lrty = #{yuanLrty} </if>
+            <if test="nearRighttry != null and nearRighttry != ''"> and near_righttry = #{nearRighttry} </if>
+            <if test="nearLefttry != null and nearLefttry != ''"> and near_lefttry = #{nearLefttry} </if>
+            <if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
+            <if test="farLyou != null and farLyou != ''"> and far_lyou = #{farLyou} </if>
+            <if test="farLyod != null and farLyod != ''"> and far_lyod = #{farLyod} </if>
+            <if test="farLyos != null and farLyos != ''"> and far_lyos = #{farLyos} </if>
+            <if test="nearLyou != null and nearLyou != ''"> and near_lyou = #{nearLyou} </if>
+            <if test="nearLyod != null and nearLyod != ''"> and near_lyod = #{nearLyod} </if>
+            <if test="nearLyos != null and nearLyos != ''"> and near_lyos = #{nearLyos} </if>
+            <if test="farYjou != null and farYjou != ''"> and far_yjou = #{farYjou} </if>
+            <if test="farYjod != null and farYjod != ''"> and far_yjod = #{farYjod} </if>
+            <if test="farYjos != null and farYjos != ''"> and far_yjos = #{farYjos} </if>
+            <if test="nearYjou != null and nearYjou != ''"> and near_yjou = #{nearYjou} </if>
+            <if test="nearYjod != null and nearYjod != ''"> and near_yjod = #{nearYjod} </if>
+            <if test="nearYjos != null and nearYjos != ''"> and near_yjos = #{nearYjos} </if>
+            <if test="farXkou != null and farXkou != ''"> and far_xkou = #{farXkou} </if>
+            <if test="farXkod != null and farXkod != ''"> and far_xkod = #{farXkod} </if>
+            <if test="farXkos != null and farXkos != ''"> and far_xkos = #{farXkos} </if>
+            <if test="nearXkou != null and nearXkou != ''"> and near_xkou = #{nearXkou} </if>
+            <if test="nearXkod != null and nearXkod != ''"> and near_xkod = #{nearXkod} </if>
+            <if test="nearXkos != null and nearXkos != ''"> and near_xkos = #{nearXkos} </if>
+            <if test="dominantEye != null and dominantEye != ''"> and dominant_eye = #{dominantEye} </if>
+            <if test="axis != null and axis != ''"> and axis = #{axis} </if>
+            <if test="axisLeft != null and axisLeft != ''"> and axis_left = #{axisLeft} </if>
+            <if test="cornealFirstK1Right != null and cornealFirstK1Right != ''"> and corneal_first_K1_right = #{cornealFirstK1Right} </if>
+            <if test="cornealLastK1Right != null and cornealLastK1Right != ''"> and corneal_last_K1_right = #{cornealLastK1Right} </if>
+            <if test="cornealFirstK1Left != null and cornealFirstK1Left != ''"> and corneal_first_K1_left = #{cornealFirstK1Left} </if>
+            <if test="cornealLastK1Left != null and cornealLastK1Left != ''"> and corneal_last_K1_left = #{cornealLastK1Left} </if>
+            <if test="cornealFirstK2Right != null and cornealFirstK2Right != ''"> and corneal_first_K2_right = #{cornealFirstK2Right} </if>
+            <if test="cornealLastK2Right != null and cornealLastK2Right != ''"> and corneal_last_K2_right = #{cornealLastK2Right} </if>
+            <if test="cornealFirstK2Left != null and cornealFirstK2Left != ''"> and corneal_first_K2_left = #{cornealFirstK2Left} </if>
+            <if test="cornealLastK2Left != null and cornealLastK2Left != ''"> and corneal_last_K2_left = #{cornealLastK2Left} </if>
+            <if test="pkod != null and pkod != ''"> and pkod = #{pkod} </if>
+            <if test="pkos != null and pkos != ''"> and pkos = #{pkos} </if>
+            <if test="pk1od != null and pk1od != ''"> and pk1od = #{pk1od} </if>
+            <if test="pk1os != null and pk1os != ''"> and pk1os = #{pk1os} </if>
+            <if test="dkod != null and dkod != ''"> and dkod = #{dkod} </if>
+            <if test="dkos != null and dkos != ''"> and dkos = #{dkos} </if>
+            <if test="dk1os != null and dk1os != ''"> and dk1os = #{dk1os} </if>
+            <if test="dk1od != null and dk1od != ''"> and dk1od = #{dk1od} </if>
+            <if test="pjkOd != null and pjkOd != ''"> and pjk_od = #{pjkOd} </if>
+            <if test="pjkOs != null and pjkOs != ''"> and pjk_os = #{pjkOs} </if>
+            <if test="pjkOd2 != null and pjkOd2 != ''"> and pjk_od2 = #{pjkOd2} </if>
+            <if test="pjkOs2 != null and pjkOs2 != ''"> and pjk_os2 = #{pjkOs2} </if>
+            <if test="intraocularOd != null and intraocularOd != ''"> and intraocular_od = #{intraocularOd} </if>
+            <if test="intraocularOs != null and intraocularOs != ''"> and intraocular_os = #{intraocularOs} </if>
+            <if test="mydriasis != null and mydriasis != ''"> and mydriasis = #{mydriasis} </if>
+            <if test="pharmacyId != null and pharmacyId != ''"> and pharmacy_id = #{pharmacyId} </if>
+            <if test="pharmacy != null and pharmacy != ''"> and pharmacy = #{pharmacy} </if>
+            <if test="sphereRight != null and sphereRight != ''"> and sphere_right = #{sphereRight} </if>
+            <if test="sphereLeft != null and sphereLeft != ''"> and sphere_left = #{sphereLeft} </if>
+            <if test="cylinderRight != null and cylinderRight != ''"> and cylinder_right = #{cylinderRight} </if>
+            <if test="cylinderLeft != null and cylinderLeft != ''"> and cylinder_left = #{cylinderLeft} </if>
+            <if test="axialRight != null and axialRight != ''"> and axial_right = #{axialRight} </if>
+            <if test="axialLeft != null and axialLeft != ''"> and axial_left = #{axialLeft} </if>
+            <if test="cornealAstigmatismOd != null and cornealAstigmatismOd != ''"> and corneal_astigmatism_od = #{cornealAstigmatismOd} </if>
+            <if test="cornealAstigmatismOs != null and cornealAstigmatismOs != ''"> and corneal_astigmatism_os = #{cornealAstigmatismOs} </if>
+            <if test="sphJyod != null and sphJyod != ''"> and sph_jyod = #{sphJyod} </if>
+            <if test="sphJyos != null and sphJyos != ''"> and sph_jyos = #{sphJyos} </if>
+            <if test="cylJyod != null and cylJyod != ''"> and cyl_jyod = #{cylJyod} </if>
+            <if test="cylJyos != null and cylJyos != ''"> and cyl_jyos = #{cylJyos} </if>
+            <if test="axialJyod != null and axialJyod != ''"> and axial_jyod = #{axialJyod} </if>
+            <if test="axialJyos != null and axialJyos != ''"> and axial_jyos = #{axialJyos} </if>
+            <if test="vaJyod != null and vaJyod != ''"> and va_jyod = #{vaJyod} </if>
+            <if test="vaJyos != null and vaJyos != ''"> and va_jyos = #{vaJyos} </if>
+            <if test="pdJyod != null and pdJyod != ''"> and pd_jyod = #{pdJyod} </if>
+            <if test="pdJyos != null and pdJyos != ''"> and pd_jyos = #{pdJyos} </if>
+            <if test="sphCpod != null and sphCpod != ''"> and sph_cpod = #{sphCpod} </if>
+            <if test="sphCpos != null and sphCpos != ''"> and sph_cpos = #{sphCpos} </if>
+            <if test="cylCpod != null and cylCpod != ''"> and cyl_cpod = #{cylCpod} </if>
+            <if test="cylCpos != null and cylCpos != ''"> and cyl_cpos = #{cylCpos} </if>
+            <if test="axialCpod != null and axialCpod != ''"> and axial_cpod = #{axialCpod} </if>
+            <if test="axialCpos != null and axialCpos != ''"> and axial_cpos = #{axialCpos} </if>
+            <if test="dvaCpod != null and dvaCpod != ''"> and dva_cpod = #{dvaCpod} </if>
+            <if test="dvaCpos != null and dvaCpos != ''"> and dva_cpos = #{dvaCpos} </if>
+            <if test="nvaCpod != null and nvaCpod != ''"> and nva_cpod = #{nvaCpod} </if>
+            <if test="nvaCpos != null and nvaCpos != ''"> and nva_cpos = #{nvaCpos} </if>
+            <if test="addCpod != null and addCpod != ''"> and add_cpod = #{addCpod} </if>
+            <if test="addCpos != null and addCpos != ''"> and add_cpos = #{addCpos} </if>
+            <if test="distanceOd != null and distanceOd != ''"> and distance_od = #{distanceOd} </if>
+            <if test="distanceOs != null and distanceOs != ''"> and distance_os = #{distanceOs} </if>
+            <if test="sphereRightz != null and sphereRightz != ''"> and sphere_rightz = #{sphereRightz} </if>
+            <if test="sphereLeftz != null and sphereLeftz != ''"> and sphere_leftz = #{sphereLeftz} </if>
+            <if test="cylinderRightz != null and cylinderRightz != ''"> and cylinder_rightz = #{cylinderRightz} </if>
+            <if test="cylinderLeftz != null and cylinderLeftz != ''"> and cylinder_leftz = #{cylinderLeftz} </if>
+            <if test="axialRightz != null and axialRightz != ''"> and axial_rightz = #{axialRightz} </if>
+            <if test="axialLeftz != null and axialLeftz != ''"> and axial_leftz = #{axialLeftz} </if>
+            <if test="dvaRightz != null and dvaRightz != ''"> and dva_rightz = #{dvaRightz} </if>
+            <if test="dvaLeftz != null and dvaLeftz != ''"> and dva_leftz = #{dvaLeftz} </if>
+            <if test="nvaRightz != null and nvaRightz != ''"> and nva_rightz = #{nvaRightz} </if>
+            <if test="nvaLeftz != null and nvaLeftz != ''"> and nva_leftz = #{nvaLeftz} </if>
+            <if test="prismRightz != null and prismRightz != ''"> and prism_rightz = #{prismRightz} </if>
+            <if test="prismLeftz != null and prismLeftz != ''"> and prism_leftz = #{prismLeftz} </if>
+            <if test="jdrZ != null and jdrZ != ''"> and jdr_z = #{jdrZ} </if>
+            <if test="jdlZ != null and jdlZ != ''"> and jdl_z = #{jdlZ} </if>
+            <if test="addRightz != null and addRightz != ''"> and add_rightz = #{addRightz} </if>
+            <if test="addLeftz != null and addLeftz != ''"> and add_leftz = #{addLeftz} </if>
+            <if test="yuanRz != null and yuanRz != ''"> and yuan_rz = #{yuanRz} </if>
+            <if test="yuanLz != null and yuanLz != ''"> and yuan_lz = #{yuanLz} </if>
+            <if test="nearRightz != null and nearRightz != ''"> and near_rightz = #{nearRightz} </if>
+            <if test="nearLeftz != null and nearLeftz != ''"> and near_leftz = #{nearLeftz} </if>
+            <if test="sgnSf != null and sgnSf != ''"> and sgn_sf = #{sgnSf} </if>
+            <if test="sgnReason != null and sgnReason != ''"> and sgn_reason = #{sgnReason} </if>
+            <if test="sgnCiss != null and sgnCiss != ''"> and sgn_ciss = #{sgnCiss} </if>
+            <if test="sgnFardot != null and sgnFardot != ''"> and sgn_fardot = #{sgnFardot} </if>
+            <if test="sgnNeardot != null and sgnNeardot != ''"> and sgn_neardot = #{sgnNeardot} </if>
+            <if test="sgnFarsp1 != null and sgnFarsp1 != ''"> and sgn_farsp1 = #{sgnFarsp1} </if>
+            <if test="sgnFarsp2 != null and sgnFarsp2 != ''"> and sgn_farsp2 = #{sgnFarsp2} </if>
+            <if test="sgnFarcz1 != null and sgnFarcz1 != ''"> and sgn_farcz1 = #{sgnFarcz1} </if>
+            <if test="sgnFarcz2 != null and sgnFarcz2 != ''"> and sgn_farcz2 = #{sgnFarcz2} </if>
+            <if test="sgnNearsp1 != null and sgnNearsp1 != ''"> and sgn_nearsp1 = #{sgnNearsp1} </if>
+            <if test="sgnNearsp2 != null and sgnNearsp2 != ''"> and sgn_nearsp2 = #{sgnNearsp2} </if>
+            <if test="sgnNearcz1 != null and sgnNearcz1 != ''"> and sgn_nearcz1 = #{sgnNearcz1} </if>
+            <if test="sgnNearcz2 != null and sgnNearcz2 != ''"> and sgn_nearcz2 = #{sgnNearcz2} </if>
+            <if test="sgnVgfarsp1 != null and sgnVgfarsp1 != ''"> and sgn_vgfarsp1 = #{sgnVgfarsp1} </if>
+            <if test="sgnVgfarsp2 != null and sgnVgfarsp2 != ''"> and sgn_vgfarsp2 = #{sgnVgfarsp2} </if>
+            <if test="sgnVgnearsp1 != null and sgnVgnearsp1 != ''"> and sgn_vgnearsp1 = #{sgnVgnearsp1} </if>
+            <if test="sgnVgnearsp2 != null and sgnVgnearsp2 != ''"> and sgn_vgnearsp2 = #{sgnVgnearsp2} </if>
+            <if test="sgnVgfarcz1 != null and sgnVgfarcz1 != ''"> and sgn_vgfarcz1 = #{sgnVgfarcz1} </if>
+            <if test="sgnVgfarcz2 != null and sgnVgfarcz2 != ''"> and sgn_vgfarcz2 = #{sgnVgfarcz2} </if>
+            <if test="sgnVgnearcz1 != null and sgnVgnearcz1 != ''"> and sgn_vgnearcz1 = #{sgnVgnearcz1} </if>
+            <if test="sgnVgnearcz2 != null and sgnVgnearcz2 != ''"> and sgn_vgnearcz2 = #{sgnVgnearcz2} </if>
+            <if test="sgnAllygytj1 != null and sgnAllygytj1 != ''"> and sgn_allygytj1 = #{sgnAllygytj1} </if>
+            <if test="sgnAllygytj2 != null and sgnAllygytj2 != ''"> and sgn_allygytj2 = #{sgnAllygytj2} </if>
+            <if test="sgnAc != null and sgnAc != ''"> and sgn_ac = #{sgnAc} </if>
+            <if test="sgnAcway != null and sgnAcway != ''"> and sgn_acway = #{sgnAcway} </if>
+            <if test="sgnTjfy != null and sgnTjfy != ''"> and sgn_tjfy = #{sgnTjfy} </if>
+            <if test="sgnTjfyou != null and sgnTjfyou != ''"> and sgn_tjfyou = #{sgnTjfyou} </if>
+            <if test="sgnTjfyod != null and sgnTjfyod != ''"> and sgn_tjfyod = #{sgnTjfyod} </if>
+            <if test="sgnTjfyos != null and sgnTjfyos != ''"> and sgn_tjfyos = #{sgnTjfyos} </if>
+            <if test="sgnPra != null and sgnPra != ''"> and sgn_pra = #{sgnPra} </if>
+            <if test="sgnNra != null and sgnNra != ''"> and sgn_nra = #{sgnNra} </if>
+            <if test="sgnZfsf != null and sgnZfsf != ''"> and sgn_zfsf = #{sgnZfsf} </if>
+            <if test="sphereRight2 != null and sphereRight2 != ''"> and sphere_right2 = #{sphereRight2} </if>
+            <if test="sphereLeft2 != null and sphereLeft2 != ''"> and sphere_left2 = #{sphereLeft2} </if>
+            <if test="cylinderRight2 != null and cylinderRight2 != ''"> and cylinder_right2 = #{cylinderRight2} </if>
+            <if test="cylinderLeft2 != null and cylinderLeft2 != ''"> and cylinder_left2 = #{cylinderLeft2} </if>
+            <if test="axialRight2 != null and axialRight2 != ''"> and axial_right2 = #{axialRight2} </if>
+            <if test="axialLeft2 != null and axialLeft2 != ''"> and axial_left2 = #{axialLeft2} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -178,146 +228,173 @@
     <select id="count" resultType="int">
         select count(*) from jc_tryresults
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
-            <if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
-            <if test="optometryName != null and optometryName != ''">and optometry_name = #{optometryName}</if>
-            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
-            <if test="referralDoctor != null and referralDoctor != ''">and referral_doctor = #{referralDoctor}</if>
-            <if test="referral != null and referral != ''">and referral = #{referral}</if>
-            <if test="chiefComplaint != null and chiefComplaint != ''">and chief_complaint = #{chiefComplaint}</if>
-            <if test="sphereRighttry != null and sphereRighttry != ''">and sphere_righttry = #{sphereRighttry}</if>
-            <if test="sphereLefttry != null and sphereLefttry != ''">and sphere_lefttry = #{sphereLefttry}</if>
-            <if test="cylinderRighttry != null and cylinderRighttry != ''">and cylinder_righttry = #{cylinderRighttry}
-            </if>
-            <if test="cylinderLefttry != null and cylinderLefttry != ''">and cylinder_lefttry = #{cylinderLefttry}</if>
-            <if test="axialRighttry != null and axialRighttry != ''">and axial_righttry = #{axialRighttry}</if>
-            <if test="axialLefttry != null and axialLefttry != ''">and axial_lefttry = #{axialLefttry}</if>
-            <if test="dvaRighttry != null and dvaRighttry != ''">and dva_righttry = #{dvaRighttry}</if>
-            <if test="dvaLefttry != null and dvaLefttry != ''">and dva_lefttry = #{dvaLefttry}</if>
-            <if test="nvaRighttry != null and nvaRighttry != ''">and nva_righttry = #{nvaRighttry}</if>
-            <if test="nvaLefttry != null and nvaLefttry != ''">and nva_lefttry = #{nvaLefttry}</if>
-            <if test="prismRighttry != null and prismRighttry != ''">and prism_righttry = #{prismRighttry}</if>
-            <if test="prismLefttry != null and prismLefttry != ''">and prism_lefttry = #{prismLefttry}</if>
-            <if test="jdrTry != null and jdrTry != ''">and jdr_try = #{jdrTry}</if>
-            <if test="jdlTry != null and jdlTry != ''">and jdl_try = #{jdlTry}</if>
-            <if test="heightRighttry != null and heightRighttry != ''">and height_righttry = #{heightRighttry}</if>
-            <if test="heightLefttry != null and heightLefttry != ''">and height_lefttry = #{heightLefttry}</if>
-            <if test="addRighttry != null and addRighttry != ''">and add_righttry = #{addRighttry}</if>
-            <if test="addLefttry != null and addLefttry != ''">and add_lefttry = #{addLefttry}</if>
-            <if test="yuanRrty != null and yuanRrty != ''">and yuan_rrty = #{yuanRrty}</if>
-            <if test="yuanLrty != null and yuanLrty != ''">and yuan_lrty = #{yuanLrty}</if>
-            <if test="nearRighttry != null and nearRighttry != ''">and near_righttry = #{nearRighttry}</if>
-            <if test="nearLefttry != null and nearLefttry != ''">and near_lefttry = #{nearLefttry}</if>
-            <if test="remarks != null and remarks != ''">and remarks = #{remarks}</if>
-            <if test="farLyou != null and farLyou != ''">and far_lyou = #{farLyou}</if>
-            <if test="farLyod != null and farLyod != ''">and far_lyod = #{farLyod}</if>
-            <if test="farLyos != null and farLyos != ''">and far_lyos = #{farLyos}</if>
-            <if test="nearLyou != null and nearLyou != ''">and near_lyou = #{nearLyou}</if>
-            <if test="nearLyod != null and nearLyod != ''">and near_lyod = #{nearLyod}</if>
-            <if test="nearLyos != null and nearLyos != ''">and near_lyos = #{nearLyos}</if>
-            <if test="farYjou != null and farYjou != ''">and far_yjou = #{farYjou}</if>
-            <if test="farYjod != null and farYjod != ''">and far_yjod = #{farYjod}</if>
-            <if test="farYjos != null and farYjos != ''">and far_yjos = #{farYjos}</if>
-            <if test="nearYjou != null and nearYjou != ''">and near_yjou = #{nearYjou}</if>
-            <if test="nearYjod != null and nearYjod != ''">and near_yjod = #{nearYjod}</if>
-            <if test="nearYjos != null and nearYjos != ''">and near_yjos = #{nearYjos}</if>
-            <if test="farXkou != null and farXkou != ''">and far_xkou = #{farXkou}</if>
-            <if test="farXkod != null and farXkod != ''">and far_xkod = #{farXkod}</if>
-            <if test="farXkos != null and farXkos != ''">and far_xkos = #{farXkos}</if>
-            <if test="nearXkou != null and nearXkou != ''">and near_xkou = #{nearXkou}</if>
-            <if test="nearXkod != null and nearXkod != ''">and near_xkod = #{nearXkod}</if>
-            <if test="nearXkos != null and nearXkos != ''">and near_xkos = #{nearXkos}</if>
-            <if test="dominantEye != null and dominantEye != ''">and dominant_eye = #{dominantEye}</if>
-            <if test="axis != null and axis != ''">and axis = #{axis}</if>
-            <if test="axisLeft != null and axisLeft != ''">and axis_left = #{axisLeft}</if>
-            <if test="cornealFirstK1Right != null and cornealFirstK1Right != ''">and corneal_first_K1_right =
-                #{cornealFirstK1Right}
-            </if>
-            <if test="cornealLastK1Right != null and cornealLastK1Right != ''">and corneal_last_K1_right =
-                #{cornealLastK1Right}
-            </if>
-            <if test="cornealFirstK1Left != null and cornealFirstK1Left != ''">and corneal_first_K1_left =
-                #{cornealFirstK1Left}
-            </if>
-            <if test="cornealLastK1Left != null and cornealLastK1Left != ''">and corneal_last_K1_left =
-                #{cornealLastK1Left}
-            </if>
-            <if test="cornealFirstK2Right != null and cornealFirstK2Right != ''">and corneal_first_K2_right =
-                #{cornealFirstK2Right}
-            </if>
-            <if test="cornealLastK2Right != null and cornealLastK2Right != ''">and corneal_last_K2_right =
-                #{cornealLastK2Right}
-            </if>
-            <if test="cornealFirstK2Left != null and cornealFirstK2Left != ''">and corneal_first_K2_left =
-                #{cornealFirstK2Left}
-            </if>
-            <if test="cornealLastK2Left != null and cornealLastK2Left != ''">and corneal_last_K2_left =
-                #{cornealLastK2Left}
-            </if>
-            <if test="pjkOd2 != null and pjkOd2 != ''">and pjk_od2 = #{pjkOd2}</if>
-            <if test="pjkOs2 != null and pjkOs2 != ''">and pjk_os2 = #{pjkOs2}</if>
-            <if test="intraocularOd != null and intraocularOd != ''">and intraocular_od = #{intraocularOd}</if>
-            <if test="intraocularOs != null and intraocularOs != ''">and intraocular_os = #{intraocularOs}</if>
-            <if test="mydriasis != null and mydriasis != ''">and mydriasis = #{mydriasis}</if>
-            <if test="pharmacyId != null and pharmacyId != ''">and pharmacy_id = #{pharmacyId}</if>
-            <if test="pharmacy != null and pharmacy != ''">and pharmacy = #{pharmacy}</if>
-            <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
-            <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>
-            <if test="cylinderRight != null and cylinderRight != ''">and cylinder_right = #{cylinderRight}</if>
-            <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
-            <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
-            <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
-            <if test="cornealAstigmatismOd != null and cornealAstigmatismOd != ''">and corneal_astigmatism_od =
-                #{cornealAstigmatismOd}
-            </if>
-            <if test="cornealAstigmatismOs != null and cornealAstigmatismOs != ''">and corneal_astigmatism_os =
-                #{cornealAstigmatismOs}
-            </if>
-            <if test="sphJyod != null and sphJyod != ''">and sph_jyod = #{sphJyod}</if>
-            <if test="sphJyos != null and sphJyos != ''">and sph_jyos = #{sphJyos}</if>
-            <if test="cylJyod != null and cylJyod != ''">and cyl_jyod = #{cylJyod}</if>
-            <if test="cylJyos != null and cylJyos != ''">and cyl_jyos = #{cylJyos}</if>
-            <if test="axialJyod != null and axialJyod != ''">and axial_jyod = #{axialJyod}</if>
-            <if test="axialJyos != null and axialJyos != ''">and axial_jyos = #{axialJyos}</if>
-            <if test="vaJyod != null and vaJyod != ''">and va_jyod = #{vaJyod}</if>
-            <if test="vaJyos != null and vaJyos != ''">and va_jyos = #{vaJyos}</if>
-            <if test="pdJyod != null and pdJyod != ''">and pd_jyod = #{pdJyod}</if>
-            <if test="pdJyos != null and pdJyos != ''">and pd_jyos = #{pdJyos}</if>
-            <if test="sphCpod != null and sphCpod != ''">and sph_cpod = #{sphCpod}</if>
-            <if test="sphCpos != null and sphCpos != ''">and sph_cpos = #{sphCpos}</if>
-            <if test="cylCpod != null and cylCpod != ''">and cyl_cpod = #{cylCpod}</if>
-            <if test="cylCpos != null and cylCpos != ''">and cyl_cpos = #{cylCpos}</if>
-            <if test="axialCpod != null and axialCpod != ''">and axial_cpod = #{axialCpod}</if>
-            <if test="axialCpos != null and axialCpos != ''">and axial_cpos = #{axialCpos}</if>
-            <if test="dvaCpod != null and dvaCpod != ''">and dva_cpod = #{dvaCpod}</if>
-            <if test="dvaCpos != null and dvaCpos != ''">and dva_cpos = #{dvaCpos}</if>
-            <if test="nvaCpod != null and nvaCpod != ''">and nva_cpod = #{nvaCpod}</if>
-            <if test="nvaCpos != null and nvaCpos != ''">and nva_cpos = #{nvaCpos}</if>
-            <if test="addCpod != null and addCpod != ''">and add_cpod = #{addCpod}</if>
-            <if test="addCpos != null and addCpos != ''">and add_cpos = #{addCpos}</if>
-            <if test="distanceOd != null and distanceOd != ''">and distance_od = #{distanceOd}</if>
-            <if test="distanceOs != null and distanceOs != ''">and distance_os = #{distanceOs}</if>
-            <if test="sphereRightz != null and sphereRightz != ''">and sphere_rightz = #{sphereRightz}</if>
-            <if test="sphereLeftz != null and sphereLeftz != ''">and sphere_leftz = #{sphereLeftz}</if>
-            <if test="cylinderRightz != null and cylinderRightz != ''">and cylinder_rightz = #{cylinderRightz}</if>
-            <if test="cylinderLeftz != null and cylinderLeftz != ''">and cylinder_leftz = #{cylinderLeftz}</if>
-            <if test="axialRightz != null and axialRightz != ''">and axial_rightz = #{axialRightz}</if>
-            <if test="axialLeftz != null and axialLeftz != ''">and axial_leftz = #{axialLeftz}</if>
-            <if test="dvaRightz != null and dvaRightz != ''">and dva_rightz = #{dvaRightz}</if>
-            <if test="dvaLeftz != null and dvaLeftz != ''">and dva_leftz = #{dvaLeftz}</if>
-            <if test="nvaRightz != null and nvaRightz != ''">and nva_rightz = #{nvaRightz}</if>
-            <if test="nvaLeftz != null and nvaLeftz != ''">and nva_leftz = #{nvaLeftz}</if>
-            <if test="prismRightz != null and prismRightz != ''">and prism_rightz = #{prismRightz}</if>
-            <if test="prismLeftz != null and prismLeftz != ''">and prism_leftz = #{prismLeftz}</if>
-            <if test="jdrZ != null and jdrZ != ''">and jdr_z = #{jdrZ}</if>
-            <if test="jdlZ != null and jdlZ != ''">and jdl_z = #{jdlZ}</if>
-            <if test="addRightz != null and addRightz != ''">and add_rightz = #{addRightz}</if>
-            <if test="addLeftz != null and addLeftz != ''">and add_leftz = #{addLeftz}</if>
-            <if test="yuanRz != null and yuanRz != ''">and yuan_rz = #{yuanRz}</if>
-            <if test="yuanLz != null and yuanLz != ''">and yuan_lz = #{yuanLz}</if>
-            <if test="nearRightz != null and nearRightz != ''">and near_rightz = #{nearRightz}</if>
-            <if test="nearLeftz != null and nearLeftz != ''">and near_leftz = #{nearLeftz}</if>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+            <if test="optometryName != null and optometryName != ''"> and optometry_name = #{optometryName} </if>
+            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+            <if test="referralDoctor != null and referralDoctor != ''"> and referral_doctor = #{referralDoctor} </if>
+            <if test="referral != null and referral != ''"> and referral = #{referral} </if>
+            <if test="chiefComplaint != null and chiefComplaint != ''"> and chief_complaint = #{chiefComplaint} </if>
+            <if test="sphereRighttry != null and sphereRighttry != ''"> and sphere_righttry = #{sphereRighttry} </if>
+            <if test="sphereLefttry != null and sphereLefttry != ''"> and sphere_lefttry = #{sphereLefttry} </if>
+            <if test="cylinderRighttry != null and cylinderRighttry != ''"> and cylinder_righttry = #{cylinderRighttry} </if>
+            <if test="cylinderLefttry != null and cylinderLefttry != ''"> and cylinder_lefttry = #{cylinderLefttry} </if>
+            <if test="axialRighttry != null and axialRighttry != ''"> and axial_righttry = #{axialRighttry} </if>
+            <if test="axialLefttry != null and axialLefttry != ''"> and axial_lefttry = #{axialLefttry} </if>
+            <if test="dvaRighttry != null and dvaRighttry != ''"> and dva_righttry = #{dvaRighttry} </if>
+            <if test="dvaLefttry != null and dvaLefttry != ''"> and dva_lefttry = #{dvaLefttry} </if>
+            <if test="nvaRighttry != null and nvaRighttry != ''"> and nva_righttry = #{nvaRighttry} </if>
+            <if test="nvaLefttry != null and nvaLefttry != ''"> and nva_lefttry = #{nvaLefttry} </if>
+            <if test="prismRighttry != null and prismRighttry != ''"> and prism_righttry = #{prismRighttry} </if>
+            <if test="prismLefttry != null and prismLefttry != ''"> and prism_lefttry = #{prismLefttry} </if>
+            <if test="jdrTry != null and jdrTry != ''"> and jdr_try = #{jdrTry} </if>
+            <if test="jdlTry != null and jdlTry != ''"> and jdl_try = #{jdlTry} </if>
+            <if test="heightRighttry != null and heightRighttry != ''"> and height_righttry = #{heightRighttry} </if>
+            <if test="heightLefttry != null and heightLefttry != ''"> and height_lefttry = #{heightLefttry} </if>
+            <if test="addRighttry != null and addRighttry != ''"> and add_righttry = #{addRighttry} </if>
+            <if test="addLefttry != null and addLefttry != ''"> and add_lefttry = #{addLefttry} </if>
+            <if test="yuanRrty != null and yuanRrty != ''"> and yuan_rrty = #{yuanRrty} </if>
+            <if test="yuanLrty != null and yuanLrty != ''"> and yuan_lrty = #{yuanLrty} </if>
+            <if test="nearRighttry != null and nearRighttry != ''"> and near_righttry = #{nearRighttry} </if>
+            <if test="nearLefttry != null and nearLefttry != ''"> and near_lefttry = #{nearLefttry} </if>
+            <if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
+            <if test="farLyou != null and farLyou != ''"> and far_lyou = #{farLyou} </if>
+            <if test="farLyod != null and farLyod != ''"> and far_lyod = #{farLyod} </if>
+            <if test="farLyos != null and farLyos != ''"> and far_lyos = #{farLyos} </if>
+            <if test="nearLyou != null and nearLyou != ''"> and near_lyou = #{nearLyou} </if>
+            <if test="nearLyod != null and nearLyod != ''"> and near_lyod = #{nearLyod} </if>
+            <if test="nearLyos != null and nearLyos != ''"> and near_lyos = #{nearLyos} </if>
+            <if test="farYjou != null and farYjou != ''"> and far_yjou = #{farYjou} </if>
+            <if test="farYjod != null and farYjod != ''"> and far_yjod = #{farYjod} </if>
+            <if test="farYjos != null and farYjos != ''"> and far_yjos = #{farYjos} </if>
+            <if test="nearYjou != null and nearYjou != ''"> and near_yjou = #{nearYjou} </if>
+            <if test="nearYjod != null and nearYjod != ''"> and near_yjod = #{nearYjod} </if>
+            <if test="nearYjos != null and nearYjos != ''"> and near_yjos = #{nearYjos} </if>
+            <if test="farXkou != null and farXkou != ''"> and far_xkou = #{farXkou} </if>
+            <if test="farXkod != null and farXkod != ''"> and far_xkod = #{farXkod} </if>
+            <if test="farXkos != null and farXkos != ''"> and far_xkos = #{farXkos} </if>
+            <if test="nearXkou != null and nearXkou != ''"> and near_xkou = #{nearXkou} </if>
+            <if test="nearXkod != null and nearXkod != ''"> and near_xkod = #{nearXkod} </if>
+            <if test="nearXkos != null and nearXkos != ''"> and near_xkos = #{nearXkos} </if>
+            <if test="dominantEye != null and dominantEye != ''"> and dominant_eye = #{dominantEye} </if>
+            <if test="axis != null and axis != ''"> and axis = #{axis} </if>
+            <if test="axisLeft != null and axisLeft != ''"> and axis_left = #{axisLeft} </if>
+            <if test="cornealFirstK1Right != null and cornealFirstK1Right != ''"> and corneal_first_K1_right = #{cornealFirstK1Right} </if>
+            <if test="cornealLastK1Right != null and cornealLastK1Right != ''"> and corneal_last_K1_right = #{cornealLastK1Right} </if>
+            <if test="cornealFirstK1Left != null and cornealFirstK1Left != ''"> and corneal_first_K1_left = #{cornealFirstK1Left} </if>
+            <if test="cornealLastK1Left != null and cornealLastK1Left != ''"> and corneal_last_K1_left = #{cornealLastK1Left} </if>
+            <if test="cornealFirstK2Right != null and cornealFirstK2Right != ''"> and corneal_first_K2_right = #{cornealFirstK2Right} </if>
+            <if test="cornealLastK2Right != null and cornealLastK2Right != ''"> and corneal_last_K2_right = #{cornealLastK2Right} </if>
+            <if test="cornealFirstK2Left != null and cornealFirstK2Left != ''"> and corneal_first_K2_left = #{cornealFirstK2Left} </if>
+            <if test="cornealLastK2Left != null and cornealLastK2Left != ''"> and corneal_last_K2_left = #{cornealLastK2Left} </if>
+            <if test="pkod != null and pkod != ''"> and pkod = #{pkod} </if>
+            <if test="pkos != null and pkos != ''"> and pkos = #{pkos} </if>
+            <if test="pk1od != null and pk1od != ''"> and pk1od = #{pk1od} </if>
+            <if test="pk1os != null and pk1os != ''"> and pk1os = #{pk1os} </if>
+            <if test="dkod != null and dkod != ''"> and dkod = #{dkod} </if>
+            <if test="dkos != null and dkos != ''"> and dkos = #{dkos} </if>
+            <if test="dk1os != null and dk1os != ''"> and dk1os = #{dk1os} </if>
+            <if test="dk1od != null and dk1od != ''"> and dk1od = #{dk1od} </if>
+            <if test="pjkOd != null and pjkOd != ''"> and pjk_od = #{pjkOd} </if>
+            <if test="pjkOs != null and pjkOs != ''"> and pjk_os = #{pjkOs} </if>
+            <if test="pjkOd2 != null and pjkOd2 != ''"> and pjk_od2 = #{pjkOd2} </if>
+            <if test="pjkOs2 != null and pjkOs2 != ''"> and pjk_os2 = #{pjkOs2} </if>
+            <if test="intraocularOd != null and intraocularOd != ''"> and intraocular_od = #{intraocularOd} </if>
+            <if test="intraocularOs != null and intraocularOs != ''"> and intraocular_os = #{intraocularOs} </if>
+            <if test="mydriasis != null and mydriasis != ''"> and mydriasis = #{mydriasis} </if>
+            <if test="pharmacyId != null and pharmacyId != ''"> and pharmacy_id = #{pharmacyId} </if>
+            <if test="pharmacy != null and pharmacy != ''"> and pharmacy = #{pharmacy} </if>
+            <if test="sphereRight != null and sphereRight != ''"> and sphere_right = #{sphereRight} </if>
+            <if test="sphereLeft != null and sphereLeft != ''"> and sphere_left = #{sphereLeft} </if>
+            <if test="cylinderRight != null and cylinderRight != ''"> and cylinder_right = #{cylinderRight} </if>
+            <if test="cylinderLeft != null and cylinderLeft != ''"> and cylinder_left = #{cylinderLeft} </if>
+            <if test="axialRight != null and axialRight != ''"> and axial_right = #{axialRight} </if>
+            <if test="axialLeft != null and axialLeft != ''"> and axial_left = #{axialLeft} </if>
+            <if test="cornealAstigmatismOd != null and cornealAstigmatismOd != ''"> and corneal_astigmatism_od = #{cornealAstigmatismOd} </if>
+            <if test="cornealAstigmatismOs != null and cornealAstigmatismOs != ''"> and corneal_astigmatism_os = #{cornealAstigmatismOs} </if>
+            <if test="sphJyod != null and sphJyod != ''"> and sph_jyod = #{sphJyod} </if>
+            <if test="sphJyos != null and sphJyos != ''"> and sph_jyos = #{sphJyos} </if>
+            <if test="cylJyod != null and cylJyod != ''"> and cyl_jyod = #{cylJyod} </if>
+            <if test="cylJyos != null and cylJyos != ''"> and cyl_jyos = #{cylJyos} </if>
+            <if test="axialJyod != null and axialJyod != ''"> and axial_jyod = #{axialJyod} </if>
+            <if test="axialJyos != null and axialJyos != ''"> and axial_jyos = #{axialJyos} </if>
+            <if test="vaJyod != null and vaJyod != ''"> and va_jyod = #{vaJyod} </if>
+            <if test="vaJyos != null and vaJyos != ''"> and va_jyos = #{vaJyos} </if>
+            <if test="pdJyod != null and pdJyod != ''"> and pd_jyod = #{pdJyod} </if>
+            <if test="pdJyos != null and pdJyos != ''"> and pd_jyos = #{pdJyos} </if>
+            <if test="sphCpod != null and sphCpod != ''"> and sph_cpod = #{sphCpod} </if>
+            <if test="sphCpos != null and sphCpos != ''"> and sph_cpos = #{sphCpos} </if>
+            <if test="cylCpod != null and cylCpod != ''"> and cyl_cpod = #{cylCpod} </if>
+            <if test="cylCpos != null and cylCpos != ''"> and cyl_cpos = #{cylCpos} </if>
+            <if test="axialCpod != null and axialCpod != ''"> and axial_cpod = #{axialCpod} </if>
+            <if test="axialCpos != null and axialCpos != ''"> and axial_cpos = #{axialCpos} </if>
+            <if test="dvaCpod != null and dvaCpod != ''"> and dva_cpod = #{dvaCpod} </if>
+            <if test="dvaCpos != null and dvaCpos != ''"> and dva_cpos = #{dvaCpos} </if>
+            <if test="nvaCpod != null and nvaCpod != ''"> and nva_cpod = #{nvaCpod} </if>
+            <if test="nvaCpos != null and nvaCpos != ''"> and nva_cpos = #{nvaCpos} </if>
+            <if test="addCpod != null and addCpod != ''"> and add_cpod = #{addCpod} </if>
+            <if test="addCpos != null and addCpos != ''"> and add_cpos = #{addCpos} </if>
+            <if test="distanceOd != null and distanceOd != ''"> and distance_od = #{distanceOd} </if>
+            <if test="distanceOs != null and distanceOs != ''"> and distance_os = #{distanceOs} </if>
+            <if test="sphereRightz != null and sphereRightz != ''"> and sphere_rightz = #{sphereRightz} </if>
+            <if test="sphereLeftz != null and sphereLeftz != ''"> and sphere_leftz = #{sphereLeftz} </if>
+            <if test="cylinderRightz != null and cylinderRightz != ''"> and cylinder_rightz = #{cylinderRightz} </if>
+            <if test="cylinderLeftz != null and cylinderLeftz != ''"> and cylinder_leftz = #{cylinderLeftz} </if>
+            <if test="axialRightz != null and axialRightz != ''"> and axial_rightz = #{axialRightz} </if>
+            <if test="axialLeftz != null and axialLeftz != ''"> and axial_leftz = #{axialLeftz} </if>
+            <if test="dvaRightz != null and dvaRightz != ''"> and dva_rightz = #{dvaRightz} </if>
+            <if test="dvaLeftz != null and dvaLeftz != ''"> and dva_leftz = #{dvaLeftz} </if>
+            <if test="nvaRightz != null and nvaRightz != ''"> and nva_rightz = #{nvaRightz} </if>
+            <if test="nvaLeftz != null and nvaLeftz != ''"> and nva_leftz = #{nvaLeftz} </if>
+            <if test="prismRightz != null and prismRightz != ''"> and prism_rightz = #{prismRightz} </if>
+            <if test="prismLeftz != null and prismLeftz != ''"> and prism_leftz = #{prismLeftz} </if>
+            <if test="jdrZ != null and jdrZ != ''"> and jdr_z = #{jdrZ} </if>
+            <if test="jdlZ != null and jdlZ != ''"> and jdl_z = #{jdlZ} </if>
+            <if test="addRightz != null and addRightz != ''"> and add_rightz = #{addRightz} </if>
+            <if test="addLeftz != null and addLeftz != ''"> and add_leftz = #{addLeftz} </if>
+            <if test="yuanRz != null and yuanRz != ''"> and yuan_rz = #{yuanRz} </if>
+            <if test="yuanLz != null and yuanLz != ''"> and yuan_lz = #{yuanLz} </if>
+            <if test="nearRightz != null and nearRightz != ''"> and near_rightz = #{nearRightz} </if>
+            <if test="nearLeftz != null and nearLeftz != ''"> and near_leftz = #{nearLeftz} </if>
+            <if test="sgnSf != null and sgnSf != ''"> and sgn_sf = #{sgnSf} </if>
+            <if test="sgnReason != null and sgnReason != ''"> and sgn_reason = #{sgnReason} </if>
+            <if test="sgnCiss != null and sgnCiss != ''"> and sgn_ciss = #{sgnCiss} </if>
+            <if test="sgnFardot != null and sgnFardot != ''"> and sgn_fardot = #{sgnFardot} </if>
+            <if test="sgnNeardot != null and sgnNeardot != ''"> and sgn_neardot = #{sgnNeardot} </if>
+            <if test="sgnFarsp1 != null and sgnFarsp1 != ''"> and sgn_farsp1 = #{sgnFarsp1} </if>
+            <if test="sgnFarsp2 != null and sgnFarsp2 != ''"> and sgn_farsp2 = #{sgnFarsp2} </if>
+            <if test="sgnFarcz1 != null and sgnFarcz1 != ''"> and sgn_farcz1 = #{sgnFarcz1} </if>
+            <if test="sgnFarcz2 != null and sgnFarcz2 != ''"> and sgn_farcz2 = #{sgnFarcz2} </if>
+            <if test="sgnNearsp1 != null and sgnNearsp1 != ''"> and sgn_nearsp1 = #{sgnNearsp1} </if>
+            <if test="sgnNearsp2 != null and sgnNearsp2 != ''"> and sgn_nearsp2 = #{sgnNearsp2} </if>
+            <if test="sgnNearcz1 != null and sgnNearcz1 != ''"> and sgn_nearcz1 = #{sgnNearcz1} </if>
+            <if test="sgnNearcz2 != null and sgnNearcz2 != ''"> and sgn_nearcz2 = #{sgnNearcz2} </if>
+            <if test="sgnVgfarsp1 != null and sgnVgfarsp1 != ''"> and sgn_vgfarsp1 = #{sgnVgfarsp1} </if>
+            <if test="sgnVgfarsp2 != null and sgnVgfarsp2 != ''"> and sgn_vgfarsp2 = #{sgnVgfarsp2} </if>
+            <if test="sgnVgnearsp1 != null and sgnVgnearsp1 != ''"> and sgn_vgnearsp1 = #{sgnVgnearsp1} </if>
+            <if test="sgnVgnearsp2 != null and sgnVgnearsp2 != ''"> and sgn_vgnearsp2 = #{sgnVgnearsp2} </if>
+            <if test="sgnVgfarcz1 != null and sgnVgfarcz1 != ''"> and sgn_vgfarcz1 = #{sgnVgfarcz1} </if>
+            <if test="sgnVgfarcz2 != null and sgnVgfarcz2 != ''"> and sgn_vgfarcz2 = #{sgnVgfarcz2} </if>
+            <if test="sgnVgnearcz1 != null and sgnVgnearcz1 != ''"> and sgn_vgnearcz1 = #{sgnVgnearcz1} </if>
+            <if test="sgnVgnearcz2 != null and sgnVgnearcz2 != ''"> and sgn_vgnearcz2 = #{sgnVgnearcz2} </if>
+            <if test="sgnAllygytj1 != null and sgnAllygytj1 != ''"> and sgn_allygytj1 = #{sgnAllygytj1} </if>
+            <if test="sgnAllygytj2 != null and sgnAllygytj2 != ''"> and sgn_allygytj2 = #{sgnAllygytj2} </if>
+            <if test="sgnAc != null and sgnAc != ''"> and sgn_ac = #{sgnAc} </if>
+            <if test="sgnAcway != null and sgnAcway != ''"> and sgn_acway = #{sgnAcway} </if>
+            <if test="sgnTjfy != null and sgnTjfy != ''"> and sgn_tjfy = #{sgnTjfy} </if>
+            <if test="sgnTjfyou != null and sgnTjfyou != ''"> and sgn_tjfyou = #{sgnTjfyou} </if>
+            <if test="sgnTjfyod != null and sgnTjfyod != ''"> and sgn_tjfyod = #{sgnTjfyod} </if>
+            <if test="sgnTjfyos != null and sgnTjfyos != ''"> and sgn_tjfyos = #{sgnTjfyos} </if>
+            <if test="sgnPra != null and sgnPra != ''"> and sgn_pra = #{sgnPra} </if>
+            <if test="sgnNra != null and sgnNra != ''"> and sgn_nra = #{sgnNra} </if>
+            <if test="sgnZfsf != null and sgnZfsf != ''"> and sgn_zfsf = #{sgnZfsf} </if>
+            <if test="sphereRight2 != null and sphereRight2 != ''"> and sphere_right2 = #{sphereRight2} </if>
+            <if test="sphereLeft2 != null and sphereLeft2 != ''"> and sphere_left2 = #{sphereLeft2} </if>
+            <if test="cylinderRight2 != null and cylinderRight2 != ''"> and cylinder_right2 = #{cylinderRight2} </if>
+            <if test="cylinderLeft2 != null and cylinderLeft2 != ''"> and cylinder_left2 = #{cylinderLeft2} </if>
+            <if test="axialRight2 != null and axialRight2 != ''"> and axial_right2 = #{axialRight2} </if>
+            <if test="axialLeft2 != null and axialLeft2 != ''"> and axial_left2 = #{axialLeft2} </if>
         </where>
     </select>
 
@@ -383,6 +460,16 @@
 			`corneal_last_K2_right`,
 			`corneal_first_K2_left`,
 			`corneal_last_K2_left`,
+			`pkod`,
+			`pkos`,
+			`pk1od`,
+			`pk1os`,
+			`dkod`,
+			`dkos`,
+			`dk1os`,
+			`dk1od`,
+			`pjk_od`,
+			`pjk_os`,
 			`pjk_od2`,
 			`pjk_os2`,
 			`intraocular_od`,
@@ -441,7 +528,45 @@
 			`yuan_rz`,
 			`yuan_lz`,
 			`near_rightz`,
-			`near_leftz`
+			`near_leftz`,
+			`sgn_sf`,
+			`sgn_reason`,
+			`sgn_ciss`,
+			`sgn_fardot`,
+			`sgn_neardot`,
+			`sgn_farsp1`,
+			`sgn_farsp2`,
+			`sgn_farcz1`,
+			`sgn_farcz2`,
+			`sgn_nearsp1`,
+			`sgn_nearsp2`,
+			`sgn_nearcz1`,
+			`sgn_nearcz2`,
+			`sgn_vgfarsp1`,
+			`sgn_vgfarsp2`,
+			`sgn_vgnearsp1`,
+			`sgn_vgnearsp2`,
+			`sgn_vgfarcz1`,
+			`sgn_vgfarcz2`,
+			`sgn_vgnearcz1`,
+			`sgn_vgnearcz2`,
+			`sgn_allygytj1`,
+			`sgn_allygytj2`,
+			`sgn_ac`,
+			`sgn_acway`,
+			`sgn_tjfy`,
+			`sgn_tjfyou`,
+			`sgn_tjfyod`,
+			`sgn_tjfyos`,
+			`sgn_pra`,
+			`sgn_nra`,
+			`sgn_zfsf`,
+			`sphere_right2`,
+			`sphere_left2`,
+			`cylinder_right2`,
+			`cylinder_left2`,
+			`axial_right2`,
+			`axial_left2`
 		)
 		values
 		(
@@ -504,6 +629,16 @@
 			#{cornealLastK2Right},
 			#{cornealFirstK2Left},
 			#{cornealLastK2Left},
+			#{pkod},
+			#{pkos},
+			#{pk1od},
+			#{pk1os},
+			#{dkod},
+			#{dkos},
+			#{dk1os},
+			#{dk1od},
+			#{pjkOd},
+			#{pjkOs},
 			#{pjkOd2},
 			#{pjkOs2},
 			#{intraocularOd},
@@ -562,131 +697,217 @@
 			#{yuanRz},
 			#{yuanLz},
 			#{nearRightz},
-			#{nearLeftz}
+			#{nearLeftz},
+			#{sgnSf},
+			#{sgnReason},
+			#{sgnCiss},
+			#{sgnFardot},
+			#{sgnNeardot},
+			#{sgnFarsp1},
+			#{sgnFarsp2},
+			#{sgnFarcz1},
+			#{sgnFarcz2},
+			#{sgnNearsp1},
+			#{sgnNearsp2},
+			#{sgnNearcz1},
+			#{sgnNearcz2},
+			#{sgnVgfarsp1},
+			#{sgnVgfarsp2},
+			#{sgnVgnearsp1},
+			#{sgnVgnearsp2},
+			#{sgnVgfarcz1},
+			#{sgnVgfarcz2},
+			#{sgnVgnearcz1},
+			#{sgnVgnearcz2},
+			#{sgnAllygytj1},
+			#{sgnAllygytj2},
+			#{sgnAc},
+			#{sgnAcway},
+			#{sgnTjfy},
+			#{sgnTjfyou},
+			#{sgnTjfyod},
+			#{sgnTjfyos},
+			#{sgnPra},
+			#{sgnNra},
+			#{sgnZfsf},
+			#{sphereRight2},
+			#{sphereLeft2},
+			#{cylinderRight2},
+			#{cylinderLeft2},
+			#{axialRight2},
+			#{axialLeft2}
 		)
 	</insert>
 
     <update id="update" parameterType="com.shiguang.jiancha.domain.TryresultsDO">
         update jc_tryresults
         <set>
-            <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
-            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber},</if>
-            <if test="optometryName != null">`optometry_name` = #{optometryName},</if>
-            <if test="createTime != null">`create_time` = #{createTime},</if>
-            <if test="referralDoctor != null">`referral_doctor` = #{referralDoctor},</if>
-            <if test="referral != null">`referral` = #{referral},</if>
-            <if test="chiefComplaint != null">`chief_complaint` = #{chiefComplaint},</if>
-            <if test="sphereRighttry != null">`sphere_righttry` = #{sphereRighttry},</if>
-            <if test="sphereLefttry != null">`sphere_lefttry` = #{sphereLefttry},</if>
-            <if test="cylinderRighttry != null">`cylinder_righttry` = #{cylinderRighttry},</if>
-            <if test="cylinderLefttry != null">`cylinder_lefttry` = #{cylinderLefttry},</if>
-            <if test="axialRighttry != null">`axial_righttry` = #{axialRighttry},</if>
-            <if test="axialLefttry != null">`axial_lefttry` = #{axialLefttry},</if>
-            <if test="dvaRighttry != null">`dva_righttry` = #{dvaRighttry},</if>
-            <if test="dvaLefttry != null">`dva_lefttry` = #{dvaLefttry},</if>
-            <if test="nvaRighttry != null">`nva_righttry` = #{nvaRighttry},</if>
-            <if test="nvaLefttry != null">`nva_lefttry` = #{nvaLefttry},</if>
-            <if test="prismRighttry != null">`prism_righttry` = #{prismRighttry},</if>
-            <if test="prismLefttry != null">`prism_lefttry` = #{prismLefttry},</if>
-            <if test="jdrTry != null">`jdr_try` = #{jdrTry},</if>
-            <if test="jdlTry != null">`jdl_try` = #{jdlTry},</if>
-            <if test="heightRighttry != null">`height_righttry` = #{heightRighttry},</if>
-            <if test="heightLefttry != null">`height_lefttry` = #{heightLefttry},</if>
-            <if test="addRighttry != null">`add_righttry` = #{addRighttry},</if>
-            <if test="addLefttry != null">`add_lefttry` = #{addLefttry},</if>
-            <if test="yuanRrty != null">`yuan_rrty` = #{yuanRrty},</if>
-            <if test="yuanLrty != null">`yuan_lrty` = #{yuanLrty},</if>
-            <if test="nearRighttry != null">`near_righttry` = #{nearRighttry},</if>
-            <if test="nearLefttry != null">`near_lefttry` = #{nearLefttry},</if>
-            <if test="remarks != null">`remarks` = #{remarks},</if>
-            <if test="farLyou != null">`far_lyou` = #{farLyou},</if>
-            <if test="farLyod != null">`far_lyod` = #{farLyod},</if>
-            <if test="farLyos != null">`far_lyos` = #{farLyos},</if>
-            <if test="nearLyou != null">`near_lyou` = #{nearLyou},</if>
-            <if test="nearLyod != null">`near_lyod` = #{nearLyod},</if>
-            <if test="nearLyos != null">`near_lyos` = #{nearLyos},</if>
-            <if test="farYjou != null">`far_yjou` = #{farYjou},</if>
-            <if test="farYjod != null">`far_yjod` = #{farYjod},</if>
-            <if test="farYjos != null">`far_yjos` = #{farYjos},</if>
-            <if test="nearYjou != null">`near_yjou` = #{nearYjou},</if>
-            <if test="nearYjod != null">`near_yjod` = #{nearYjod},</if>
-            <if test="nearYjos != null">`near_yjos` = #{nearYjos},</if>
-            <if test="farXkou != null">`far_xkou` = #{farXkou},</if>
-            <if test="farXkod != null">`far_xkod` = #{farXkod},</if>
-            <if test="farXkos != null">`far_xkos` = #{farXkos},</if>
-            <if test="nearXkou != null">`near_xkou` = #{nearXkou},</if>
-            <if test="nearXkod != null">`near_xkod` = #{nearXkod},</if>
-            <if test="nearXkos != null">`near_xkos` = #{nearXkos},</if>
-            <if test="dominantEye != null">`dominant_eye` = #{dominantEye},</if>
-            <if test="axis != null">`axis` = #{axis},</if>
-            <if test="axisLeft != null">`axis_left` = #{axisLeft},</if>
-            <if test="cornealFirstK1Right != null">`corneal_first_K1_right` = #{cornealFirstK1Right},</if>
-            <if test="cornealLastK1Right != null">`corneal_last_K1_right` = #{cornealLastK1Right},</if>
-            <if test="cornealFirstK1Left != null">`corneal_first_K1_left` = #{cornealFirstK1Left},</if>
-            <if test="cornealLastK1Left != null">`corneal_last_K1_left` = #{cornealLastK1Left},</if>
-            <if test="cornealFirstK2Right != null">`corneal_first_K2_right` = #{cornealFirstK2Right},</if>
-            <if test="cornealLastK2Right != null">`corneal_last_K2_right` = #{cornealLastK2Right},</if>
-            <if test="cornealFirstK2Left != null">`corneal_first_K2_left` = #{cornealFirstK2Left},</if>
-            <if test="cornealLastK2Left != null">`corneal_last_K2_left` = #{cornealLastK2Left},</if>
-            <if test="pjkOd2 != null">`pjk_od2` = #{pjkOd2},</if>
+            <if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber}, </if>
+            <if test="optometryName != null">`optometry_name` = #{optometryName}, </if>
+            <if test="createTime != null">`create_time` = #{createTime}, </if>
+            <if test="referralDoctor != null">`referral_doctor` = #{referralDoctor}, </if>
+            <if test="referral != null">`referral` = #{referral}, </if>
+            <if test="chiefComplaint != null">`chief_complaint` = #{chiefComplaint}, </if>
+            <if test="sphereRighttry != null">`sphere_righttry` = #{sphereRighttry}, </if>
+            <if test="sphereLefttry != null">`sphere_lefttry` = #{sphereLefttry}, </if>
+            <if test="cylinderRighttry != null">`cylinder_righttry` = #{cylinderRighttry}, </if>
+            <if test="cylinderLefttry != null">`cylinder_lefttry` = #{cylinderLefttry}, </if>
+            <if test="axialRighttry != null">`axial_righttry` = #{axialRighttry}, </if>
+            <if test="axialLefttry != null">`axial_lefttry` = #{axialLefttry}, </if>
+            <if test="dvaRighttry != null">`dva_righttry` = #{dvaRighttry}, </if>
+            <if test="dvaLefttry != null">`dva_lefttry` = #{dvaLefttry}, </if>
+            <if test="nvaRighttry != null">`nva_righttry` = #{nvaRighttry}, </if>
+            <if test="nvaLefttry != null">`nva_lefttry` = #{nvaLefttry}, </if>
+            <if test="prismRighttry != null">`prism_righttry` = #{prismRighttry}, </if>
+            <if test="prismLefttry != null">`prism_lefttry` = #{prismLefttry}, </if>
+            <if test="jdrTry != null">`jdr_try` = #{jdrTry}, </if>
+            <if test="jdlTry != null">`jdl_try` = #{jdlTry}, </if>
+            <if test="heightRighttry != null">`height_righttry` = #{heightRighttry}, </if>
+            <if test="heightLefttry != null">`height_lefttry` = #{heightLefttry}, </if>
+            <if test="addRighttry != null">`add_righttry` = #{addRighttry}, </if>
+            <if test="addLefttry != null">`add_lefttry` = #{addLefttry}, </if>
+            <if test="yuanRrty != null">`yuan_rrty` = #{yuanRrty}, </if>
+            <if test="yuanLrty != null">`yuan_lrty` = #{yuanLrty}, </if>
+            <if test="nearRighttry != null">`near_righttry` = #{nearRighttry}, </if>
+            <if test="nearLefttry != null">`near_lefttry` = #{nearLefttry}, </if>
+            <if test="remarks != null">`remarks` = #{remarks}, </if>
+            <if test="farLyou != null">`far_lyou` = #{farLyou}, </if>
+            <if test="farLyod != null">`far_lyod` = #{farLyod}, </if>
+            <if test="farLyos != null">`far_lyos` = #{farLyos}, </if>
+            <if test="nearLyou != null">`near_lyou` = #{nearLyou}, </if>
+            <if test="nearLyod != null">`near_lyod` = #{nearLyod}, </if>
+            <if test="nearLyos != null">`near_lyos` = #{nearLyos}, </if>
+            <if test="farYjou != null">`far_yjou` = #{farYjou}, </if>
+            <if test="farYjod != null">`far_yjod` = #{farYjod}, </if>
+            <if test="farYjos != null">`far_yjos` = #{farYjos}, </if>
+            <if test="nearYjou != null">`near_yjou` = #{nearYjou}, </if>
+            <if test="nearYjod != null">`near_yjod` = #{nearYjod}, </if>
+            <if test="nearYjos != null">`near_yjos` = #{nearYjos}, </if>
+            <if test="farXkou != null">`far_xkou` = #{farXkou}, </if>
+            <if test="farXkod != null">`far_xkod` = #{farXkod}, </if>
+            <if test="farXkos != null">`far_xkos` = #{farXkos}, </if>
+            <if test="nearXkou != null">`near_xkou` = #{nearXkou}, </if>
+            <if test="nearXkod != null">`near_xkod` = #{nearXkod}, </if>
+            <if test="nearXkos != null">`near_xkos` = #{nearXkos}, </if>
+            <if test="dominantEye != null">`dominant_eye` = #{dominantEye}, </if>
+            <if test="axis != null">`axis` = #{axis}, </if>
+            <if test="axisLeft != null">`axis_left` = #{axisLeft}, </if>
+            <if test="cornealFirstK1Right != null">`corneal_first_K1_right` = #{cornealFirstK1Right}, </if>
+            <if test="cornealLastK1Right != null">`corneal_last_K1_right` = #{cornealLastK1Right}, </if>
+            <if test="cornealFirstK1Left != null">`corneal_first_K1_left` = #{cornealFirstK1Left}, </if>
+            <if test="cornealLastK1Left != null">`corneal_last_K1_left` = #{cornealLastK1Left}, </if>
+            <if test="cornealFirstK2Right != null">`corneal_first_K2_right` = #{cornealFirstK2Right}, </if>
+            <if test="cornealLastK2Right != null">`corneal_last_K2_right` = #{cornealLastK2Right}, </if>
+            <if test="cornealFirstK2Left != null">`corneal_first_K2_left` = #{cornealFirstK2Left}, </if>
+            <if test="cornealLastK2Left != null">`corneal_last_K2_left` = #{cornealLastK2Left}, </if>
+            <if test="pkod != null">`pkod` = #{pkod}, </if>
+            <if test="pkos != null">`pkos` = #{pkos}, </if>
+            <if test="pk1od != null">`pk1od` = #{pk1od}, </if>
+            <if test="pk1os != null">`pk1os` = #{pk1os}, </if>
+            <if test="dkod != null">`dkod` = #{dkod}, </if>
+            <if test="dkos != null">`dkos` = #{dkos}, </if>
+            <if test="dk1os != null">`dk1os` = #{dk1os}, </if>
+            <if test="dk1od != null">`dk1od` = #{dk1od}, </if>
+            <if test="pjkOd != null">`pjk_od` = #{pjkOd}, </if>
+            <if test="pjkOs != null">`pjk_os` = #{pjkOs}, </if>
+            <if test="pjkOd2 != null">`pjk_od2` = #{pjkOd2}, </if>
             <if test="pjkOs2 != null">`pjk_os2` = #{pjkOs2},</if>
-            <if test="intraocularOd != null">`intraocular_od` = #{intraocularOd},</if>
-            <if test="intraocularOs != null">`intraocular_os` = #{intraocularOs},</if>
-            <if test="mydriasis != null">`mydriasis` = #{mydriasis},</if>
-            <if test="pharmacyId != null">`pharmacy_id` = #{pharmacyId},</if>
-            <if test="pharmacy != null">`pharmacy` = #{pharmacy},</if>
-            <if test="sphereRight != null">`sphere_right` = #{sphereRight},</if>
-            <if test="sphereLeft != null">`sphere_left` = #{sphereLeft},</if>
-            <if test="cylinderRight != null">`cylinder_right` = #{cylinderRight},</if>
-            <if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft},</if>
-            <if test="axialRight != null">`axial_right` = #{axialRight},</if>
-            <if test="axialLeft != null">`axial_left` = #{axialLeft},</if>
-            <if test="cornealAstigmatismOd != null">`corneal_astigmatism_od` = #{cornealAstigmatismOd},</if>
-            <if test="cornealAstigmatismOs != null">`corneal_astigmatism_os` = #{cornealAstigmatismOs},</if>
-            <if test="sphJyod != null">`sph_jyod` = #{sphJyod},</if>
-            <if test="sphJyos != null">`sph_jyos` = #{sphJyos},</if>
-            <if test="cylJyod != null">`cyl_jyod` = #{cylJyod},</if>
-            <if test="cylJyos != null">`cyl_jyos` = #{cylJyos},</if>
-            <if test="axialJyod != null">`axial_jyod` = #{axialJyod},</if>
-            <if test="axialJyos != null">`axial_jyos` = #{axialJyos},</if>
-            <if test="vaJyod != null">`va_jyod` = #{vaJyod},</if>
-            <if test="vaJyos != null">`va_jyos` = #{vaJyos},</if>
-            <if test="pdJyod != null">`pd_jyod` = #{pdJyod},</if>
-            <if test="pdJyos != null">`pd_jyos` = #{pdJyos},</if>
-            <if test="sphCpod != null">`sph_cpod` = #{sphCpod},</if>
-            <if test="sphCpos != null">`sph_cpos` = #{sphCpos},</if>
-            <if test="cylCpod != null">`cyl_cpod` = #{cylCpod},</if>
-            <if test="cylCpos != null">`cyl_cpos` = #{cylCpos},</if>
-            <if test="axialCpod != null">`axial_cpod` = #{axialCpod},</if>
-            <if test="axialCpos != null">`axial_cpos` = #{axialCpos},</if>
-            <if test="dvaCpod != null">`dva_cpod` = #{dvaCpod},</if>
-            <if test="dvaCpos != null">`dva_cpos` = #{dvaCpos},</if>
-            <if test="nvaCpod != null">`nva_cpod` = #{nvaCpod},</if>
-            <if test="nvaCpos != null">`nva_cpos` = #{nvaCpos},</if>
-            <if test="addCpod != null">`add_cpod` = #{addCpod},</if>
-            <if test="addCpos != null">`add_cpos` = #{addCpos},</if>
-            <if test="distanceOd != null">`distance_od` = #{distanceOd},</if>
-            <if test="distanceOs != null">`distance_os` = #{distanceOs},</if>
-            <if test="sphereRightz != null">`sphere_rightz` = #{sphereRightz},</if>
-            <if test="sphereLeftz != null">`sphere_leftz` = #{sphereLeftz},</if>
-            <if test="cylinderRightz != null">`cylinder_rightz` = #{cylinderRightz},</if>
-            <if test="cylinderLeftz != null">`cylinder_leftz` = #{cylinderLeftz},</if>
-            <if test="axialRightz != null">`axial_rightz` = #{axialRightz},</if>
-            <if test="axialLeftz != null">`axial_leftz` = #{axialLeftz},</if>
-            <if test="dvaRightz != null">`dva_rightz` = #{dvaRightz},</if>
-            <if test="dvaLeftz != null">`dva_leftz` = #{dvaLeftz},</if>
-            <if test="nvaRightz != null">`nva_rightz` = #{nvaRightz},</if>
-            <if test="nvaLeftz != null">`nva_leftz` = #{nvaLeftz},</if>
-            <if test="prismRightz != null">`prism_rightz` = #{prismRightz},</if>
-            <if test="prismLeftz != null">`prism_leftz` = #{prismLeftz},</if>
-            <if test="jdrZ != null">`jdr_z` = #{jdrZ},</if>
-            <if test="jdlZ != null">`jdl_z` = #{jdlZ},</if>
-            <if test="addRightz != null">`add_rightz` = #{addRightz},</if>
-            <if test="addLeftz != null">`add_leftz` = #{addLeftz},</if>
-            <if test="yuanRz != null">`yuan_rz` = #{yuanRz},</if>
-            <if test="yuanLz != null">`yuan_lz` = #{yuanLz},</if>
-            <if test="nearRightz != null">`near_rightz` = #{nearRightz},</if>
-            <if test="nearLeftz != null">`near_leftz` = #{nearLeftz}</if>
+            <if test="intraocularOd != null">`intraocular_od` = #{intraocularOd}, </if>
+            <if test="intraocularOs != null">`intraocular_os` = #{intraocularOs}, </if>
+            <if test="mydriasis != null">`mydriasis` = #{mydriasis}, </if>
+            <if test="pharmacyId != null">`pharmacy_id` = #{pharmacyId}, </if>
+            <if test="pharmacy != null">`pharmacy` = #{pharmacy}, </if>
+            <if test="sphereRight != null">`sphere_right` = #{sphereRight}, </if>
+            <if test="sphereLeft != null">`sphere_left` = #{sphereLeft}, </if>
+            <if test="cylinderRight != null">`cylinder_right` = #{cylinderRight}, </if>
+            <if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft}, </if>
+            <if test="axialRight != null">`axial_right` = #{axialRight}, </if>
+            <if test="axialLeft != null">`axial_left` = #{axialLeft}, </if>
+            <if test="cornealAstigmatismOd != null">`corneal_astigmatism_od` = #{cornealAstigmatismOd}, </if>
+            <if test="cornealAstigmatismOs != null">`corneal_astigmatism_os` = #{cornealAstigmatismOs}, </if>
+            <if test="sphJyod != null">`sph_jyod` = #{sphJyod}, </if>
+            <if test="sphJyos != null">`sph_jyos` = #{sphJyos}, </if>
+            <if test="cylJyod != null">`cyl_jyod` = #{cylJyod}, </if>
+            <if test="cylJyos != null">`cyl_jyos` = #{cylJyos}, </if>
+            <if test="axialJyod != null">`axial_jyod` = #{axialJyod}, </if>
+            <if test="axialJyos != null">`axial_jyos` = #{axialJyos}, </if>
+            <if test="vaJyod != null">`va_jyod` = #{vaJyod}, </if>
+            <if test="vaJyos != null">`va_jyos` = #{vaJyos}, </if>
+            <if test="pdJyod != null">`pd_jyod` = #{pdJyod}, </if>
+            <if test="pdJyos != null">`pd_jyos` = #{pdJyos}, </if>
+            <if test="sphCpod != null">`sph_cpod` = #{sphCpod}, </if>
+            <if test="sphCpos != null">`sph_cpos` = #{sphCpos}, </if>
+            <if test="cylCpod != null">`cyl_cpod` = #{cylCpod}, </if>
+            <if test="cylCpos != null">`cyl_cpos` = #{cylCpos}, </if>
+            <if test="axialCpod != null">`axial_cpod` = #{axialCpod}, </if>
+            <if test="axialCpos != null">`axial_cpos` = #{axialCpos}, </if>
+            <if test="dvaCpod != null">`dva_cpod` = #{dvaCpod}, </if>
+            <if test="dvaCpos != null">`dva_cpos` = #{dvaCpos}, </if>
+            <if test="nvaCpod != null">`nva_cpod` = #{nvaCpod}, </if>
+            <if test="nvaCpos != null">`nva_cpos` = #{nvaCpos}, </if>
+            <if test="addCpod != null">`add_cpod` = #{addCpod}, </if>
+            <if test="addCpos != null">`add_cpos` = #{addCpos}, </if>
+            <if test="distanceOd != null">`distance_od` = #{distanceOd}, </if>
+            <if test="distanceOs != null">`distance_os` = #{distanceOs}, </if>
+            <if test="sphereRightz != null">`sphere_rightz` = #{sphereRightz}, </if>
+            <if test="sphereLeftz != null">`sphere_leftz` = #{sphereLeftz}, </if>
+            <if test="cylinderRightz != null">`cylinder_rightz` = #{cylinderRightz}, </if>
+            <if test="cylinderLeftz != null">`cylinder_leftz` = #{cylinderLeftz}, </if>
+            <if test="axialRightz != null">`axial_rightz` = #{axialRightz}, </if>
+            <if test="axialLeftz != null">`axial_leftz` = #{axialLeftz}, </if>
+            <if test="dvaRightz != null">`dva_rightz` = #{dvaRightz}, </if>
+            <if test="dvaLeftz != null">`dva_leftz` = #{dvaLeftz}, </if>
+            <if test="nvaRightz != null">`nva_rightz` = #{nvaRightz}, </if>
+            <if test="nvaLeftz != null">`nva_leftz` = #{nvaLeftz}, </if>
+            <if test="prismRightz != null">`prism_rightz` = #{prismRightz}, </if>
+            <if test="prismLeftz != null">`prism_leftz` = #{prismLeftz}, </if>
+            <if test="jdrZ != null">`jdr_z` = #{jdrZ}, </if>
+            <if test="jdlZ != null">`jdl_z` = #{jdlZ}, </if>
+            <if test="addRightz != null">`add_rightz` = #{addRightz}, </if>
+            <if test="addLeftz != null">`add_leftz` = #{addLeftz}, </if>
+            <if test="yuanRz != null">`yuan_rz` = #{yuanRz}, </if>
+            <if test="yuanLz != null">`yuan_lz` = #{yuanLz}, </if>
+            <if test="nearRightz != null">`near_rightz` = #{nearRightz}, </if>
+            <if test="nearLeftz != null">`near_leftz` = #{nearLeftz}, </if>
+            <if test="sgnSf != null">`sgn_sf` = #{sgnSf}, </if>
+            <if test="sgnReason != null">`sgn_reason` = #{sgnReason}, </if>
+            <if test="sgnCiss != null">`sgn_ciss` = #{sgnCiss}, </if>
+            <if test="sgnFardot != null">`sgn_fardot` = #{sgnFardot}, </if>
+            <if test="sgnNeardot != null">`sgn_neardot` = #{sgnNeardot}, </if>
+            <if test="sgnFarsp1 != null">`sgn_farsp1` = #{sgnFarsp1}, </if>
+            <if test="sgnFarsp2 != null">`sgn_farsp2` = #{sgnFarsp2}, </if>
+            <if test="sgnFarcz1 != null">`sgn_farcz1` = #{sgnFarcz1}, </if>
+            <if test="sgnFarcz2 != null">`sgn_farcz2` = #{sgnFarcz2}, </if>
+            <if test="sgnNearsp1 != null">`sgn_nearsp1` = #{sgnNearsp1}, </if>
+            <if test="sgnNearsp2 != null">`sgn_nearsp2` = #{sgnNearsp2}, </if>
+            <if test="sgnNearcz1 != null">`sgn_nearcz1` = #{sgnNearcz1}, </if>
+            <if test="sgnNearcz2 != null">`sgn_nearcz2` = #{sgnNearcz2}, </if>
+            <if test="sgnVgfarsp1 != null">`sgn_vgfarsp1` = #{sgnVgfarsp1}, </if>
+            <if test="sgnVgfarsp2 != null">`sgn_vgfarsp2` = #{sgnVgfarsp2}, </if>
+            <if test="sgnVgnearsp1 != null">`sgn_vgnearsp1` = #{sgnVgnearsp1}, </if>
+            <if test="sgnVgnearsp2 != null">`sgn_vgnearsp2` = #{sgnVgnearsp2}, </if>
+            <if test="sgnVgfarcz1 != null">`sgn_vgfarcz1` = #{sgnVgfarcz1}, </if>
+            <if test="sgnVgfarcz2 != null">`sgn_vgfarcz2` = #{sgnVgfarcz2}, </if>
+            <if test="sgnVgnearcz1 != null">`sgn_vgnearcz1` = #{sgnVgnearcz1}, </if>
+            <if test="sgnVgnearcz2 != null">`sgn_vgnearcz2` = #{sgnVgnearcz2}, </if>
+            <if test="sgnAllygytj1 != null">`sgn_allygytj1` = #{sgnAllygytj1}, </if>
+            <if test="sgnAllygytj2 != null">`sgn_allygytj2` = #{sgnAllygytj2}, </if>
+            <if test="sgnAc != null">`sgn_ac` = #{sgnAc}, </if>
+            <if test="sgnAcway != null">`sgn_acway` = #{sgnAcway}, </if>
+            <if test="sgnTjfy != null">`sgn_tjfy` = #{sgnTjfy}, </if>
+            <if test="sgnTjfyou != null">`sgn_tjfyou` = #{sgnTjfyou}, </if>
+            <if test="sgnTjfyod != null">`sgn_tjfyod` = #{sgnTjfyod}, </if>
+            <if test="sgnTjfyos != null">`sgn_tjfyos` = #{sgnTjfyos}, </if>
+            <if test="sgnPra != null">`sgn_pra` = #{sgnPra}, </if>
+            <if test="sgnNra != null">`sgn_nra` = #{sgnNra}, </if>
+            <if test="sgnZfsf != null">`sgn_zfsf` = #{sgnZfsf},</if>
+            <if test="sphereRight2 != null">`sphere_right2` = #{sphereRight2}, </if>
+            <if test="sphereLeft2 != null">`sphere_left2` = #{sphereLeft2}, </if>
+            <if test="cylinderRight2 != null">`cylinder_right2` = #{cylinderRight2}, </if>
+            <if test="cylinderLeft2 != null">`cylinder_left2` = #{cylinderLeft2}, </if>
+            <if test="axialRight2 != null">`axial_right2` = #{axialRight2}, </if>
+            <if test="axialLeft2 != null">`axial_left2` = #{axialLeft2}</if>
         </set>
         where id = #{id}
     </update>
@@ -701,9 +922,19 @@
             #{id}
         </foreach>
     </delete>
+    <!--//根据人查相对应的验光号医生时间等信息-->
+    <select id="listUser" resultType="com.shiguang.jiancha.domain.TryresultsDO">
+    select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,
+    `sphere_righttry`,`sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,
+    `dva_lefttry`,`nva_righttry`,`nva_lefttry`,`prism_righttry`,`prism_lefttry`,`jdr_try`,`jdl_try`,`height_righttry`,`height_lefttry`,
+    `add_righttry`,`add_lefttry`,`yuan_rrty`,`yuan_lrty`,`near_righttry`,`near_lefttry`,`remarks`
+    from jc_tryresults where card_number = #{cardNumber}
+    order by id desc
+
+</select>
     <!--<select id="listDoctor" resultType="">-->
-        <!--select suser.name ,srole.role_name from sys_user suser join sys_user_role sur on suser.user_id=sur.user_id-->
-          <!--join sys_role srole on sur.role_id=srole.role_id-->
-          <!--where srole.role_name=#{roleName}-->
+    <!--select suser.name ,srole.role_name from sys_user suser join sys_user_role sur on suser.user_id=sur.user_id-->
+    <!--join sys_role srole on sur.role_id=srole.role_id-->
+    <!--where srole.role_name=#{roleName}-->
     <!--</select>-->
 </mapper>

@@ -221,6 +221,33 @@
             }
         })
     }
+    function choiceBrand() {
+        var goodsid = document.getElementById('goodsid').value;
+        var mfrsid = document.getElementById('mfrsid').value;
+        // alert(goodsid);
+        if (mfrsid == "") {
+            alert("请选择制造商！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findbrand/" + mfrsid+"/"+goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandname").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                        // $("#brandNames").val(rows[i].brandname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
     //清空
     function clearText() {
         var controls = document.getElementsByTagName('input');

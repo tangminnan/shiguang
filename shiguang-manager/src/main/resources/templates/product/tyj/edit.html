@@ -257,13 +257,13 @@
     var sum;
     var sum1;
     var a1_val = a1.value.substring(0, 7) + ".000000000.0000";
-    // alert(a1_val);
+    // layer.alert(a1_val);
 
     // <!--//———厂家型号与型号联动—————--
     function liandong1(e) {//厂家型号
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
-        // alert(val);
+        // layer.alert(val);
         var producColor = document.getElementById("producColor");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;

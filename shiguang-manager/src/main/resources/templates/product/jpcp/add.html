@@ -268,29 +268,29 @@
             //标准零售价格
             var retailPrice = document.getElementById('retailPrice').value;
             if (mfrsName == "") {
-                alert("请选择制造商");
+                layer.alert("请选择制造商");
             } else if (producName == "") {
-                alert("请输入商品名称");
+                layer.alert("请输入商品名称");
             } else if (brandnum == "") {
-                alert("请选择商品品种");
+                layer.alert("请选择商品品种");
             } else if (proid == "") {
-                alert("请输入商品编号");
+                layer.alert("请输入商品编号");
             } else if (unitid == "") {
-                alert("请选择计量单位");
+                layer.alert("请选择计量单位");
             } else if (sphId == "") {
-                alert("请选择球镜");
+                layer.alert("请选择球镜");
             } else if (cylId == "") {
-                alert("请选择柱镜");
+                layer.alert("请选择柱镜");
             } else if (tax == "") {
-                alert("请输入税率");
+                layer.alert("请输入税率");
             } else if (taxPrice == "") {
-                alert("请输入含税单价");
+                layer.alert("请输入含税单价");
             } else if (tradePrice == "") {
-                alert("请输入批发价格");
+                layer.alert("请输入批发价格");
             } else if (transferPrice == "") {
-                alert("请输入调货成本");
+                layer.alert("请输入调货成本");
             } else if (retailPrice == "") {
-                alert("请输入标准零售价格");
+                layer.alert("请输入标准零售价格");
             } else {
                 save();
             }
@@ -300,7 +300,7 @@
     <script type="text/javascript">
         //———制造商与品种联动
         function choice(value) {
-            // alert(value);
+            // layer.alert(value);
             $("#brandnum").empty("");
             $("#brandnum").append("<option value=\"\">--请选择--</option>");
             $.ajax({
@@ -339,13 +339,13 @@
         function change1(e, err) {
             var select1_val = e.options[e.options.selectedIndex].innerText
             var select2_val = err.options[err.options.selectedIndex].innerText
-            // alert(e.value,err.value)
+            // layer.alert(e.value,err.value)
             if (e.value == "") {
                 select1_val = 0
-                //    alert(select1_val)
+                //    layer.alert(select1_val)
             } else if (err.value == "") {
                 select2_val = 0
-                // alert(select2_val)
+                // layer.alert(select2_val)
             }
             // console.log(select1_val,select2_val);
             select1_val = ZF(select1_val)
@@ -357,7 +357,7 @@
             console.log(a1.value.substring(18, 22));
         }
         function ZF(e) {
-            // alert(e.indexOf("+"))
+            // layer.alert(e.indexOf("+"))
             if (e.indexOf("+") == 0) {
                 e = "Z" + e
             } else {

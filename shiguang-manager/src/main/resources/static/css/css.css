@@ -11,11 +11,11 @@ input[type="text"]{border:1px solid #dad9d9;padding:0 10px;line-height: 28px;tex
 textarea{width: 100%;resize: none;font-family:"微软雅黑";border:1px solid #dad9d9;padding:5px;}
 /* 图片自适应 */
 img {
-max-width: 100%;
-height: auto;
-width:auto\9; /* ie8 */
-border: none;
--ms-interpolation-mode:bicubic;/*为了照顾ie图片缩放失真*/
+    max-width: 100%;
+    height: auto;
+    width:auto\9; /* ie8 */
+    border: none;
+    -ms-interpolation-mode:bicubic;/*为了照顾ie图片缩放失真*/
 }
 /* 初始化 */
 *{margin:0; padding:0; border:none;box-sizing:border-box;}
@@ -66,7 +66,7 @@ h1, h2, h3, h4, h5, h6{ font-size:100%;font-weight: normal;}
 .tabE input.short{width: 80%;}
 .tabE select{width:80px;}
 .zgQG{background: #37a6fc;color:#fff;padding:7px 15px;border-radius:5px;float: right;margin-right:12px;margin-top:-5px;cursor: pointer;}
- 
+
 .baoCun{overflow: hidden;margin:40px 40px 80px;padding:0 40px;}
 .baoCun label{margin:0 20px;cursor: pointer;}
 .baoCun input[type="radio"]{background:url(../img/check_no.png);width: 14px;height: 14px;vertical-align:middle;margin-top: -3px;margin-right:3px;}
@@ -139,7 +139,7 @@ h1, h2, h3, h4, h5, h6{ font-size:100%;font-weight: normal;}
 /*提交处方-框镜*/
 .greenRight{width: 73%;float: right;}
 .greenTab{border-right:3px solid #bcedb2;border-top:3px solid #bcedb2;}
-.greenTab td{border-left:3px solid #bcedb2;border-bottom:3px solid #bcedb2;} 
+.greenTab td{border-left:3px solid #bcedb2;border-bottom:3px solid #bcedb2;}
 .greenTab tr td:nth-child(1){width: 120px;}
 .greenTab input{width: 100%;border: none;}
 .greenTab select{width: 100%;}
@@ -450,4 +450,13 @@ input.HbcBtn_QK,
 .Print .Htab3 .td1 p{margin-bottom:5px;padding-left:5px;}
 .Print .Htab3 .tr_last td{border-top:1px solid #666;}
 
-
+/*0828新增*/
+.H_jc{padding:0 30px;margin-bottom:10px;}
+.H_newst input[type="radio"]{background:url(../img/check_no.png);width: 14px;height: 14px;vertical-align:middle;margin-top: -3px;margin-right:3px;margin-left: 10px;}
+.H_newst input[type="radio"]:checked{background-image:url(../img/check_yes.png);}
+.H_jc span{display: inline-block;width: 105px;text-align:right;}
+.H_red{color:red;}
+.H_newst table .bg-d7{background:#d7d7d7;font-size: 16px;}
+.H_must{border:1px solid #bcbaba;padding:20px 0 10px;position: relative;}
+.H_must p{position: absolute;left: 20px;top:-10px;background: #fff;padding:0 10px;color:red;}
+.H_must p b{vertical-align: middle;}

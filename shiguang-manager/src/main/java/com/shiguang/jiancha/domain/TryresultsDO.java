@@ -134,6 +134,26 @@ public class TryresultsDO implements Serializable {
     private String cornealFirstK2Left;
     //角膜K2值@A(左眼)
     private String cornealLastK2Left;
+    //平Kos
+    private String pkod;
+    //平Kos
+    private String pkos;
+    //平K1od
+    private String pk1od;
+    //平K1os
+    private String pk1os;
+    //陡K1
+    private String dkod;
+    //陡K1
+    private String dkos;
+    //陡K1
+    private String dk1os;
+    //陡K1
+    private String dk1od;
+    //平均k2OD
+    private String pjkOd;
+    //平均k2OS
+    private String pjkOs;
     //平均k2OD
     private String pjkOd2;
     //平均k2OS
@@ -254,6 +274,18 @@ public class TryresultsDO implements Serializable {
     private String nearRightz;
     //近用瞳孔距(mm)(OS)
     private String nearLeftz;
+    //球镜(右眼OD)后
+    private String sphereRight2;
+    //球镜(左眼OS)后
+    private String sphereLeft2;
+    //柱镜(右眼OD)后
+    private String cylinderRight2;
+    //柱镜(左眼OS)后
+    private String cylinderLeft2;
+    //轴向(右眼-OD)后
+    private String axialRight2;
+    //轴向(左眼OS)后
+    private String axialLeft2;
 
     /**
      * 设置：试戴镜结果id
@@ -1096,33 +1128,149 @@ public class TryresultsDO implements Serializable {
     }
 
     /**
+     * 设置：平Kos
+     */
+    public void setPkod(String pkod) {
+        this.pkod = pkod;
+    }
+    /**
+     * 获取：平Kos
+     */
+    public String getPkod() {
+        return pkod;
+    }
+    /**
+     * 设置：平Kos
+     */
+    public void setPkos(String pkos) {
+        this.pkos = pkos;
+    }
+    /**
+     * 获取：平Kos
+     */
+    public String getPkos() {
+        return pkos;
+    }
+    /**
+     * 设置：平K1od
+     */
+    public void setPk1od(String pk1od) {
+        this.pk1od = pk1od;
+    }
+    /**
+     * 获取：平K1od
+     */
+    public String getPk1od() {
+        return pk1od;
+    }
+    /**
+     * 设置：平K1os
+     */
+    public void setPk1os(String pk1os) {
+        this.pk1os = pk1os;
+    }
+    /**
+     * 获取：平K1os
+     */
+    public String getPk1os() {
+        return pk1os;
+    }
+    /**
+     * 设置：陡K1
+     */
+    public void setDkod(String dkod) {
+        this.dkod = dkod;
+    }
+    /**
+     * 获取：陡K1
+     */
+    public String getDkod() {
+        return dkod;
+    }
+    /**
+     * 设置：陡K1
+     */
+    public void setDkos(String dkos) {
+        this.dkos = dkos;
+    }
+    /**
+     * 获取：陡K1
+     */
+    public String getDkos() {
+        return dkos;
+    }
+    /**
+     * 设置：陡K1
+     */
+    public void setDk1os(String dk1os) {
+        this.dk1os = dk1os;
+    }
+    /**
+     * 获取：陡K1
+     */
+    public String getDk1os() {
+        return dk1os;
+    }
+    /**
+     * 设置：陡K1
+     */
+    public void setDk1od(String dk1od) {
+        this.dk1od = dk1od;
+    }
+    /**
+     * 获取：陡K1
+     */
+    public String getDk1od() {
+        return dk1od;
+    }
+    /**
+     * 设置：平均k2OD
+     */
+    public void setPjkOd(String pjkOd) {
+        this.pjkOd = pjkOd;
+    }
+    /**
+     * 获取：平均k2OD
+     */
+    public String getPjkOd() {
+        return pjkOd;
+    }
+    /**
+     * 设置：平均k2OS
+     */
+    public void setPjkOs(String pjkOs) {
+        this.pjkOs = pjkOs;
+    }
+    /**
+     * 获取：平均k2OS
+     */
+    public String getPjkOs() {
+        return pjkOs;
+    }
+    /**
      * 设置：平均k2OD
      */
     public void setPjkOd2(String pjkOd2) {
         this.pjkOd2 = pjkOd2;
     }
-
     /**
      * 获取：平均k2OD
      */
     public String getPjkOd2() {
         return pjkOd2;
     }
-
     /**
      * 设置：平均k2OS
      */
     public void setPjkOs2(String pjkOs2) {
         this.pjkOs2 = pjkOs2;
     }
-
     /**
      * 获取：平均k2OS
      */
     public String getPjkOs2() {
         return pjkOs2;
     }
-
     /**
      * 设置：眼压(OD)
      */
@@ -1920,4 +2068,529 @@ public class TryresultsDO implements Serializable {
     public String getNearLeftz() {
         return nearLeftz;
     }
+
+
+    //双眼视功能检查（是否）
+    private String sgnSf;
+    //原因
+    private String sgnReason;
+    //CISS得分
+    private String sgnCiss;
+    //WORTH 4 DOT 远
+    private String sgnFardot;
+    //WORTH 4 DOT 近
+    private String sgnNeardot;
+    //眼位远：水平1
+    private String sgnFarsp1;
+    //眼位远：水平下拉框2
+    private String sgnFarsp2;
+    //眼位远：垂直1
+    private String sgnFarcz1;
+    //眼位远：垂直下拉2
+    private String sgnFarcz2;
+    //眼位近：水平1
+    private String sgnNearsp1;
+    //眼位近：水平下拉框2
+    private String sgnNearsp2;
+    //眼位近：垂直1
+    private String sgnNearcz1;
+    //眼位近：垂直下拉2
+    private String sgnNearcz2;
+    //远距水平隐斜视1
+    private String sgnVgfarsp1;
+    //远距水平隐斜视2
+    private String sgnVgfarsp2;
+    //近距水平隐斜视1
+    private String sgnVgnearsp1;
+    //近距水平隐斜视2
+    private String sgnVgnearsp2;
+    //远距垂直隐斜视1
+    private String sgnVgfarcz1;
+    //远距垂直隐斜视2
+    private String sgnVgfarcz2;
+    //近距垂直隐斜视1
+    private String sgnVgnearcz1;
+    //近距垂直隐斜视2
+    private String sgnVgnearcz2;
+    //综合验光仪瞳距1
+    private String sgnAllygytj1;
+    //综合验光仪瞳距2
+    private String sgnAllygytj2;
+    //AC/A
+    private String sgnAc;
+    //梯度法/计算法
+    private String sgnAcway;
+    //调节反应BBC/MEM
+    private String sgnTjfy;
+    //调节反应OU
+    private String sgnTjfyou;
+    //调节反应OD
+    private String sgnTjfyod;
+    //调节反应OS
+    private String sgnTjfyos;
+    //正/负相对调节PRA
+    private String sgnPra;
+    //正/负相对调节NRA
+    private String sgnNra;
+    //遮盖单眼是否变清晰是否
+    private String sgnZfsf;
+
+    /**
+     * 设置：双眼视功能检查（是否）
+     */
+    public void setSgnSf(String sgnSf) {
+        this.sgnSf = sgnSf;
+    }
+    /**
+     * 获取：双眼视功能检查（是否）
+     */
+    public String getSgnSf() {
+        return sgnSf;
+    }
+    /**
+     * 设置：原因
+     */
+    public void setSgnReason(String sgnReason) {
+        this.sgnReason = sgnReason;
+    }
+    /**
+     * 获取：原因
+     */
+    public String getSgnReason() {
+        return sgnReason;
+    }
+    /**
+     * 设置：CISS得分
+     */
+    public void setSgnCiss(String sgnCiss) {
+        this.sgnCiss = sgnCiss;
+    }
+    /**
+     * 获取：CISS得分
+     */
+    public String getSgnCiss() {
+        return sgnCiss;
+    }
+    /**
+     * 设置：WORTH 4 DOT 远
+     */
+    public void setSgnFardot(String sgnFardot) {
+        this.sgnFardot = sgnFardot;
+    }
+    /**
+     * 获取：WORTH 4 DOT 远
+     */
+    public String getSgnFardot() {
+        return sgnFardot;
+    }
+    /**
+     * 设置：WORTH 4 DOT 近
+     */
+    public void setSgnNeardot(String sgnNeardot) {
+        this.sgnNeardot = sgnNeardot;
+    }
+    /**
+     * 获取：WORTH 4 DOT 近
+     */
+    public String getSgnNeardot() {
+        return sgnNeardot;
+    }
+    /**
+     * 设置：眼位远：水平1
+     */
+    public void setSgnFarsp1(String sgnFarsp1) {
+        this.sgnFarsp1 = sgnFarsp1;
+    }
+    /**
+     * 获取：眼位远：水平1
+     */
+    public String getSgnFarsp1() {
+        return sgnFarsp1;
+    }
+    /**
+     * 设置：眼位远：水平下拉框2
+     */
+    public void setSgnFarsp2(String sgnFarsp2) {
+        this.sgnFarsp2 = sgnFarsp2;
+    }
+    /**
+     * 获取：眼位远：水平下拉框2
+     */
+    public String getSgnFarsp2() {
+        return sgnFarsp2;
+    }
+    /**
+     * 设置：眼位远：垂直1
+     */
+    public void setSgnFarcz1(String sgnFarcz1) {
+        this.sgnFarcz1 = sgnFarcz1;
+    }
+    /**
+     * 获取：眼位远：垂直1
+     */
+    public String getSgnFarcz1() {
+        return sgnFarcz1;
+    }
+    /**
+     * 设置：眼位远：垂直下拉2
+     */
+    public void setSgnFarcz2(String sgnFarcz2) {
+        this.sgnFarcz2 = sgnFarcz2;
+    }
+    /**
+     * 获取：眼位远：垂直下拉2
+     */
+    public String getSgnFarcz2() {
+        return sgnFarcz2;
+    }
+    /**
+     * 设置：眼位近：水平1
+     */
+    public void setSgnNearsp1(String sgnNearsp1) {
+        this.sgnNearsp1 = sgnNearsp1;
+    }
+    /**
+     * 获取：眼位近：水平1
+     */
+    public String getSgnNearsp1() {
+        return sgnNearsp1;
+    }
+    /**
+     * 设置：眼位近：水平下拉框2
+     */
+    public void setSgnNearsp2(String sgnNearsp2) {
+        this.sgnNearsp2 = sgnNearsp2;
+    }
+    /**
+     * 获取：眼位近：水平下拉框2
+     */
+    public String getSgnNearsp2() {
+        return sgnNearsp2;
+    }
+    /**
+     * 设置：眼位近：垂直1
+     */
+    public void setSgnNearcz1(String sgnNearcz1) {
+        this.sgnNearcz1 = sgnNearcz1;
+    }
+    /**
+     * 获取：眼位近：垂直1
+     */
+    public String getSgnNearcz1() {
+        return sgnNearcz1;
+    }
+    /**
+     * 设置：眼位近：垂直下拉2
+     */
+    public void setSgnNearcz2(String sgnNearcz2) {
+        this.sgnNearcz2 = sgnNearcz2;
+    }
+    /**
+     * 获取：眼位近：垂直下拉2
+     */
+    public String getSgnNearcz2() {
+        return sgnNearcz2;
+    }
+    /**
+     * 设置：远距水平隐斜视1
+     */
+    public void setSgnVgfarsp1(String sgnVgfarsp1) {
+        this.sgnVgfarsp1 = sgnVgfarsp1;
+    }
+    /**
+     * 获取：远距水平隐斜视1
+     */
+    public String getSgnVgfarsp1() {
+        return sgnVgfarsp1;
+    }
+    /**
+     * 设置：远距水平隐斜视2
+     */
+    public void setSgnVgfarsp2(String sgnVgfarsp2) {
+        this.sgnVgfarsp2 = sgnVgfarsp2;
+    }
+    /**
+     * 获取：远距水平隐斜视2
+     */
+    public String getSgnVgfarsp2() {
+        return sgnVgfarsp2;
+    }
+    /**
+     * 设置：近距水平隐斜视1
+     */
+    public void setSgnVgnearsp1(String sgnVgnearsp1) {
+        this.sgnVgnearsp1 = sgnVgnearsp1;
+    }
+    /**
+     * 获取：近距水平隐斜视1
+     */
+    public String getSgnVgnearsp1() {
+        return sgnVgnearsp1;
+    }
+    /**
+     * 设置：近距水平隐斜视2
+     */
+    public void setSgnVgnearsp2(String sgnVgnearsp2) {
+        this.sgnVgnearsp2 = sgnVgnearsp2;
+    }
+    /**
+     * 获取：近距水平隐斜视2
+     */
+    public String getSgnVgnearsp2() {
+        return sgnVgnearsp2;
+    }
+    /**
+     * 设置：远距垂直隐斜视1
+     */
+    public void setSgnVgfarcz1(String sgnVgfarcz1) {
+        this.sgnVgfarcz1 = sgnVgfarcz1;
+    }
+    /**
+     * 获取：远距垂直隐斜视1
+     */
+    public String getSgnVgfarcz1() {
+        return sgnVgfarcz1;
+    }
+    /**
+     * 设置：远距垂直隐斜视2
+     */
+    public void setSgnVgfarcz2(String sgnVgfarcz2) {
+        this.sgnVgfarcz2 = sgnVgfarcz2;
+    }
+    /**
+     * 获取：远距垂直隐斜视2
+     */
+    public String getSgnVgfarcz2() {
+        return sgnVgfarcz2;
+    }
+    /**
+     * 设置：近距垂直隐斜视1
+     */
+    public void setSgnVgnearcz1(String sgnVgnearcz1) {
+        this.sgnVgnearcz1 = sgnVgnearcz1;
+    }
+    /**
+     * 获取：近距垂直隐斜视1
+     */
+    public String getSgnVgnearcz1() {
+        return sgnVgnearcz1;
+    }
+    /**
+     * 设置：近距垂直隐斜视2
+     */
+    public void setSgnVgnearcz2(String sgnVgnearcz2) {
+        this.sgnVgnearcz2 = sgnVgnearcz2;
+    }
+    /**
+     * 获取：近距垂直隐斜视2
+     */
+    public String getSgnVgnearcz2() {
+        return sgnVgnearcz2;
+    }
+    /**
+     * 设置：综合验光仪瞳距1
+     */
+    public void setSgnAllygytj1(String sgnAllygytj1) {
+        this.sgnAllygytj1 = sgnAllygytj1;
+    }
+    /**
+     * 获取：综合验光仪瞳距1
+     */
+    public String getSgnAllygytj1() {
+        return sgnAllygytj1;
+    }
+    /**
+     * 设置：综合验光仪瞳距2
+     */
+    public void setSgnAllygytj2(String sgnAllygytj2) {
+        this.sgnAllygytj2 = sgnAllygytj2;
+    }
+    /**
+     * 获取：综合验光仪瞳距2
+     */
+    public String getSgnAllygytj2() {
+        return sgnAllygytj2;
+    }
+    /**
+     * 设置：AC/A
+     */
+    public void setSgnAc(String sgnAc) {
+        this.sgnAc = sgnAc;
+    }
+    /**
+     * 获取：AC/A
+     */
+    public String getSgnAc() {
+        return sgnAc;
+    }
+    /**
+     * 设置：梯度法/计算法
+     */
+    public void setSgnAcway(String sgnAcway) {
+        this.sgnAcway = sgnAcway;
+    }
+    /**
+     * 获取：梯度法/计算法
+     */
+    public String getSgnAcway() {
+        return sgnAcway;
+    }
+    /**
+     * 设置：调节反应BBC/MEM
+     */
+    public void setSgnTjfy(String sgnTjfy) {
+        this.sgnTjfy = sgnTjfy;
+    }
+    /**
+     * 获取：调节反应BBC/MEM
+     */
+    public String getSgnTjfy() {
+        return sgnTjfy;
+    }
+    /**
+     * 设置：调节反应OU
+     */
+    public void setSgnTjfyou(String sgnTjfyou) {
+        this.sgnTjfyou = sgnTjfyou;
+    }
+    /**
+     * 获取：调节反应OU
+     */
+    public String getSgnTjfyou() {
+        return sgnTjfyou;
+    }
+    /**
+     * 设置：调节反应OD
+     */
+    public void setSgnTjfyod(String sgnTjfyod) {
+        this.sgnTjfyod = sgnTjfyod;
+    }
+    /**
+     * 获取：调节反应OD
+     */
+    public String getSgnTjfyod() {
+        return sgnTjfyod;
+    }
+    /**
+     * 设置：调节反应OS
+     */
+    public void setSgnTjfyos(String sgnTjfyos) {
+        this.sgnTjfyos = sgnTjfyos;
+    }
+    /**
+     * 获取：调节反应OS
+     */
+    public String getSgnTjfyos() {
+        return sgnTjfyos;
+    }
+    /**
+     * 设置：正/负相对调节PRA
+     */
+    public void setSgnPra(String sgnPra) {
+        this.sgnPra = sgnPra;
+    }
+    /**
+     * 获取：正/负相对调节PRA
+     */
+    public String getSgnPra() {
+        return sgnPra;
+    }
+    /**
+     * 设置：正/负相对调节NRA
+     */
+    public void setSgnNra(String sgnNra) {
+        this.sgnNra = sgnNra;
+    }
+    /**
+     * 获取：正/负相对调节NRA
+     */
+    public String getSgnNra() {
+        return sgnNra;
+    }
+    /**
+     * 设置：遮盖单眼是否变清晰是否
+     */
+    public void setSgnZfsf(String sgnZfsf) {
+        this.sgnZfsf = sgnZfsf;
+    }
+    /**
+     * 获取：遮盖单眼是否变清晰是否
+     */
+    public String getSgnZfsf() {
+        return sgnZfsf;
+    }
+    /**
+     * 设置：球镜(右眼OD)后
+     */
+    public void setSphereRight2(String sphereRight2) {
+        this.sphereRight2 = sphereRight2;
+    }
+    /**
+     * 获取：球镜(右眼OD)后
+     */
+    public String getSphereRight2() {
+        return sphereRight2;
+    }
+    /**
+     * 设置：球镜(左眼OS)后
+     */
+    public void setSphereLeft2(String sphereLeft2) {
+        this.sphereLeft2 = sphereLeft2;
+    }
+    /**
+     * 获取：球镜(左眼OS)后
+     */
+    public String getSphereLeft2() {
+        return sphereLeft2;
+    }
+    /**
+     * 设置：柱镜(右眼OD)后
+     */
+    public void setCylinderRight2(String cylinderRight2) {
+        this.cylinderRight2 = cylinderRight2;
+    }
+    /**
+     * 获取：柱镜(右眼OD)后
+     */
+    public String getCylinderRight2() {
+        return cylinderRight2;
+    }
+    /**
+     * 设置：柱镜(左眼OS)后
+     */
+    public void setCylinderLeft2(String cylinderLeft2) {
+        this.cylinderLeft2 = cylinderLeft2;
+    }
+    /**
+     * 获取：柱镜(左眼OS)后
+     */
+    public String getCylinderLeft2() {
+        return cylinderLeft2;
+    }
+    /**
+     * 设置：轴向(右眼-OD)后
+     */
+    public void setAxialRight2(String axialRight2) {
+        this.axialRight2 = axialRight2;
+    }
+    /**
+     * 获取：轴向(右眼-OD)后
+     */
+    public String getAxialRight2() {
+        return axialRight2;
+    }
+    /**
+     * 设置：轴向(左眼OS)后
+     */
+    public void setAxialLeft2(String axialLeft2) {
+        this.axialLeft2 = axialLeft2;
+    }
+    /**
+     * 获取：轴向(左眼OS)后
+     */
+    public String getAxialLeft2() {
+        return axialLeft2;
+    }
+
 }
+

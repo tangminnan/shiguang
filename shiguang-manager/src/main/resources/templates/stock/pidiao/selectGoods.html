@@ -185,7 +185,7 @@
                 'positionName': positionName
             },
             success: function (xml) {
-                // alert(JSON.stringify(xml))
+                // layer.alert(JSON.stringify(xml))
                 for (var i = 0; i < xml.length; i++) {
                     $(".buyBtns").append("<tr class='val'> " +
                         "<td><input name='one'  type=\"checkbox\"/></td>\n" +
@@ -214,9 +214,9 @@
     <!--选择制造商-->
     function choiceMfrs() {
         var goodsid = document.getElementById('goodsType').value;
-        // alert(goodsid);
+        // layer.alert(goodsid);
         if (goodsid == "") {
-            layer.alert("请选择商品类型！");
+            layer.layer.alert("请选择商品类型！");
         } else {
             //选择镜架
             var toIndex = layer.open({
@@ -241,9 +241,9 @@
     function choiceBrand() {
         var goodsid = document.getElementById('goodsType').value;
         var mfrsid = document.getElementById('mfrsid').value;
-        // alert(goodsid);
+        // layer.alert(goodsid);
         if (mfrsid == "") {
-            layer.alert("请选择制造商！");
+            layer.layer.alert("请选择制造商！");
         } else {
             //选择镜架
             var toIndex = layer.open({
@@ -311,13 +311,13 @@
         } else if (goodsType == 9){
             var  classtype ="";
         }
-        alert(classtype +"类型");
+        layer.alert(classtype +"类型");
         var mfrsname = $("#mfrsname").val();
         var brandname = $("#brandname").val();
         var retailPrice = $("*[name='retailPrice']").val();
         var retailPrice2 = $("*[name='retailPrice2']").val();
         var xsstate=$("input[name='xsstate']:checked").val();
-        alert(xsstate +"仓位");
+        layer.alert(xsstate +"仓位");
         var positionName = $('#positionName option:selected').text();
         var positionNames = ""
         if (positionName == "--请选择--") {

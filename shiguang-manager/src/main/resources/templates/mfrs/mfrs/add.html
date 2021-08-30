@@ -203,13 +203,6 @@
                     goodsid.push($(this).val());
                 }
             });
-
-            // var creditcodeday= document.getElementById('creditcodeday').value;
-            // alert(creditcodeday+"第一个日期");
-            // var medicinecodeday= document.getElementById('medicinecodeday').value;
-            // alert(medicinecodeday+"第2个日期");
-            // var productscodeday= document.getElementById('productscodeday').value;
-            // alert(productscodeday+"第3个日期");
             if (mfrsnum == "") {
                 layer.alert("请输入制造商代码！");
             } else if (mfrsnum != "" && mfrsname == "") {
@@ -223,16 +216,6 @@
             } else if (mfrsnum != "" && mfrsname != "" && mfrscontacts != "" && mfrsrealname != "" && goodsid != "" || goodsid.length != 0 ) {
                 save();
             }
-
-
-
-            // else if (creditcodeday != "" && medicinecodeday == "" && mfrsnum != "" && mfrsname != "" && mfrscontacts != "" && mfrsrealname != "" && goodsid != "" || goodsid.length != 0 ) {
-            //     layer.alert("请选择医疗器械经营许可证有效期")
-            // }else if (creditcodeday != "" && medicinecodeday != "" && productscodeday == "" && mfrsnum != "" && mfrsname != "" && mfrscontacts != "" && mfrsrealname != "" && goodsid != "" || goodsid.length != 0 ) {
-            //     layer.alert("请选择全国工业品生产许可证有效期")
-            // }else if (creditcodeday != "" && medicinecodeday != "" && productscodeday != "" && mfrsnum != "" && mfrsname != "" && mfrscontacts != "" && mfrsrealname != "" && goodsid != "" || goodsid.length != 0) {
-            //
-            // }
         }
 
     </script>

@@ -4106,6 +4106,7 @@ public class ResultDO implements Serializable {
     }
     //中用id
     private Long zyId;
+
     //处方类型
     private String zyPrescriptionType;
     //医生
@@ -4165,7 +4166,6 @@ public class ResultDO implements Serializable {
     public void setZyId(Long zyId) {
         this.zyId = zyId;
     }
-
 
 
     public String getZyPrescriptionType() {
