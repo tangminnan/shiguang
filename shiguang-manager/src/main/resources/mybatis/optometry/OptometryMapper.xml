@@ -398,6 +398,8 @@
       <where>
           <if test="departNumber != null and departNumber != ''">and d.depart_number = #{departNumber}</if>
           <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+          <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+          <if test="name != null and name != ''"> and m.name = #{name} </if>
       </where>
       order by m.id desc
     </select>
@@ -408,6 +410,8 @@
         <where>
             <if test="departNumber != null and departNumber != ''">and d.depart_number = #{departNumber}</if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+            <if test="name != null and name != ''"> and m.name = #{name} </if>
         </where>
     </select>
 </mapper>

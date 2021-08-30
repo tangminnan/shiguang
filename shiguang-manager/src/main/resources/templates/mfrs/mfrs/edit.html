@@ -226,15 +226,15 @@
                 }
             });
             if (mfrsnum == "") {
-                alert("请输入制造商代码！");
+                layer.alert("请输入制造商代码！");
             } else if (mfrsnum != "" && mfrsname == "") {
-                alert("请输入制造商简称！")
+                layer.alert("请输入制造商简称！")
             } else if (mfrsnum != "" && mfrsname != "" && mfrscontacts == "") {
-                alert("请输入制造商联系人！");
+                layer.alert("请输入制造商联系人！");
             } else if (mfrsnum != "" && mfrsname != "" && mfrscontacts != "" && mfrsrealname == "") {
-                alert("请输入制造商全称！");
+                layer.alert("请输入制造商全称！");
             } else if (mfrsnum != "" && mfrsname != "" && mfrscontacts != "" && mfrsrealname == "" && goodsid == "" || goodsid.length == 0) {
-                alert("请选择商品类型！");
+                layer.alert("请选择商品类型！");
             } else if (mfrsnum != "" && mfrsname != "" && mfrscontacts != "" && mfrsrealname != "" && goodsid != "" || goodsid.length != 0) {
                 update();
             }

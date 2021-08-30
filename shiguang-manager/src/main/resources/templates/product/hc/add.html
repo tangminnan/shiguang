@@ -228,33 +228,33 @@
         //标准零售价格
         var retailPrice = document.getElementById('retailPrice').value;
         if (mfrsName == "") {
-            alert("请选择制造商");
+            layer.alert("请选择制造商");
         } else if (producName == "") {
-            alert("请输入商品名称");
+            layer.alert("请输入商品名称");
         } else if (brandnum == "") {
-            alert("请选择商品品种");
+            layer.alert("请选择商品品种");
         } else if (factory == "") {
-            alert("请输入厂家型号");
+            layer.alert("请输入厂家型号");
         } else if (producFactory == "") {
-            alert("请输入型号");
+            layer.alert("请输入型号");
         } else if (proid == "") {
-            alert("请输入商品编号");
+            layer.alert("请输入商品编号");
         } else if (big == "") {
-            alert("请选择其他商品大类");
+            layer.alert("请选择其他商品大类");
         } else if (unitid == "") {
-            alert("请选择计量单位");
+            layer.alert("请选择计量单位");
         } else if (small == "") {
-            alert("请选择其他商品小类");
+            layer.alert("请选择其他商品小类");
         } else if (tax == "") {
-            alert("请输入税率");
+            layer.alert("请输入税率");
         } else if (taxPrice == "") {
-            alert("请输入含税单价");
+            layer.alert("请输入含税单价");
         } else if (tradePrice == "") {
-            alert("请输入批发价格");
+            layer.alert("请输入批发价格");
         } else if (transferPrice == "") {
-            alert("请输入调货成本");
+            layer.alert("请输入调货成本");
         } else if (retailPrice == "") {
-            alert("请输入标准零售价格");
+            layer.alert("请输入标准零售价格");
         } else {
             save();
         }
@@ -264,7 +264,7 @@
 <script type="text/javascript">
     //———制造商与品种联动
     function choice(value) {
-        // alert(value);
+        // layer.alert(value);
         $("#brandnum").empty("");
         $("#brandnum").append("<option value=\"\">--请选择--</option>");
         $.ajax({
@@ -303,7 +303,7 @@
     function liandong1(e) {//厂家型号
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
-        // alert(val);
+        // layer.alert(val);
         var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
@@ -321,7 +321,7 @@
         sum1 = 22 - proid.value.length
         a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1) + proid.value.toUpperCase()
         // a1.value = "4547784654654"
-        // alert(a1.value)
+        // layer.alert(a1.value)
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
 
@@ -392,7 +392,7 @@
 
     function leixing() {
         var val = document.getElementById('big').value;
-        // alert(val)
+        // layer.alert(val)
         if (val == "其他材料") {
             choicesmall.style = "display: none";
             small.style = "display: block";

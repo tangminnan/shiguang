@@ -378,57 +378,57 @@
         //标准零售价格
         var retailPrice = document.getElementById('retailPrice').value;
         if (mfrsName == "") {
-            alert("请选择制造商");
+            layer.alert("请选择制造商");
         } else if (producName == "") {
-            alert("请输入商品名称");
+            layer.alert("请输入商品名称");
         } else if (brandnum == "") {
-            alert("请选择商品品种");
+            layer.alert("请选择商品品种");
         } else if (factory == "") {
-            alert("请输入厂家型号");
+            layer.alert("请输入厂家型号");
         } else if (producFactory == "") {
-            alert("请输入型号");
+            layer.alert("请输入型号");
         } else if (proid == "") {
-            alert("请输入商品编号");
+            layer.alert("请输入商品编号");
         } else if (unitid == "") {
-            alert("请选择计量单位");
+            layer.alert("请选择计量单位");
         } else if (sphUp == "") {
-            alert("请选择球镜上限");
+            layer.alert("请选择球镜上限");
         } else if (sphDown == "") {
-            alert("请选择球镜下限");
+            layer.alert("请选择球镜下限");
         } else if (sphSpan == "") {
-            alert("请选择球镜跨度");
+            layer.alert("请选择球镜跨度");
         } else if (cylUp == "") {
-            alert("请选择柱镜上限");
+            layer.alert("请选择柱镜上限");
         } else if (cylDown == "") {
-            alert("请选择柱镜下限");
+            layer.alert("请选择柱镜下限");
         } else if (cylSpan == "") {
-            alert("请选择柱镜跨度");
+            layer.alert("请选择柱镜跨度");
         }
         else if (curvatureOne == "") {
-            alert("请输入曲率1");
+            layer.alert("请输入曲率1");
         } else if (curvatureYi == "") {
-            alert("请输入曲率1");
+            layer.alert("请输入曲率1");
         } else if (diameterOne == "") {
-            alert("请输入直径");
+            layer.alert("请输入直径");
         } else if (diameterYi == "") {
-            alert("请输入直径");
+            layer.alert("请输入直径");
         }
 
         else if (cycle == "") {
-            alert("请输入订做周期");
+            layer.alert("请输入订做周期");
         }
 
 
         else if (tax == "") {
-            alert("请输入税率");
+            layer.alert("请输入税率");
         } else if (taxPrice == "") {
-            alert("请输入含税单价");
+            layer.alert("请输入含税单价");
         } else if (tradePrice == "") {
-            alert("请输入批发价格");
+            layer.alert("请输入批发价格");
         } else if (transferPrice == "") {
-            alert("请输入调货成本");
+            layer.alert("请输入调货成本");
         } else if (retailPrice == "") {
-            alert("请输入标准零售价格");
+            layer.alert("请输入标准零售价格");
         } else {
             save();
         }
@@ -448,7 +448,7 @@
     });
     //———制造商与品种联动
     function choice(value) {
-        // alert(value);
+        // layer.alert(value);
         $("#brandnum").empty("");
         $("#brandnum").append("<option value=\"\">--请选择--</option>");
         $.ajax({
@@ -487,7 +487,7 @@
     function liandong1(e) {//厂家型号
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
-        // alert(val);
+        // layer.alert(val);
         // var proid = document.getElementById("proid");
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;

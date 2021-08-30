@@ -20,9 +20,6 @@ public interface TryresultsDao {
 
     List<TryresultsDO> list(Map<String, Object> map);
 
-    //根据人查相对应的验光号医生时间等信息
-    List<TryresultsDO> listUser(String cardNumber);
-
     int count(Map<String, Object> map);
 
     int save(TryresultsDO tryresults);
@@ -32,6 +29,9 @@ public interface TryresultsDao {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+    //根据人查相对应的验光号医生时间等信息
+    List<TryresultsDO> listUser(String cardNumber);
+
     //    查询医生
     List<TryresultsDO> listDoctor(Map<String, Object> map);
 }

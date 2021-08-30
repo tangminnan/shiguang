@@ -233,7 +233,7 @@
     function choiceBrand() {
         var goodsid = document.getElementById('goodsType').value;
         var mfrsid = document.getElementById('mfrsid').value;
-        // alert(goodsid);
+        // layer.alert(goodsid);
         if (mfrsid == "") {
             layer.alert("请选择制造商！");
         } else {
@@ -303,7 +303,7 @@
         } else if (goodsType == 9){
             var  classtype ="";
         }
-        alert(classtype +"类型");
+        // alert(classtype +"类型");
         var mfrsname = $("#mfrsname").val();
         var brandname = $("#brandname").val();
         var retailPrice = $("*[name='retailPrice']").val();
@@ -362,7 +362,7 @@
 
     function positionChange() {
         var xsstate=$("input[name='xsstate']:checked").val();
-        alert(xsstate)
+        // alert(xsstate)
         $(".cw").remove();
         $.ajax({
             url: '/kucun/stock/selectPosion',

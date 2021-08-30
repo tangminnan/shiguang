@@ -136,6 +136,169 @@
             </table>
         </div>
 
+        <!--双眼视功能检查-->
+        <div class="m40 tabS H_newst">
+            <h3>双眼视功能检查</h3>
+            <div class="H_jc">
+                <span>双眼视功能检查:</span>
+                    <input id="PH-S" name="sgnSf" value="1" type="radio">
+                        <label for="PH-S" style="margin-right: 5%" checked>是</label>
+                    <input id="PH-F" name="sgnSf" value="2" type="radio" >
+                        <label for="PH-F">否</label>
+                <span>原因：</span>
+                <select id="sgnReason" name="sgnReason">
+                    <option value=""></option>
+                    <option value="年龄过小">年龄过小</option>
+                    <option value="配合不好">配合不好</option>
+                    <option value="斜视">斜视</option>
+                    <option value="弱视">弱视</option>
+                    <option value="低视力">低视力</option>
+                    <option value="其他">其他</option>
+                </select>
+                <span>CISS得分：</span>
+                <input id="sgnCiss" name="sgnCiss" type="text" />
+            </div>
+            <div class="H_must">
+                <p><b>*</b>必录项</p>
+                <table class="tabC" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="bg-d7">WORTH 4 DOT</td>
+                        <td colspan="2">
+                            远：
+                            <select id="sgnFardot" name="sgnFardot">
+                                <option value=""></option>
+                                <option value="2dots">2dots</option>
+                                <option value="3dots">3dots</option>
+                                <option value="4dots">4dots</option>
+                                <option value="5dots">5dots</option>
+                            </select>
+                            &nbsp; &nbsp; 近：
+                            <select id="sgnNeardot" name="sgnNeardot">
+                                <option value=""></option>
+                                <option value="2dots">2dots</option>
+                                <option value="3dots">3dots</option>
+                                <option value="4dots">4dots</option>
+                                <option value="5dots">5dots</option>
+                            </select>
+                        </td>
+                        <td colspan="7" class="H_red">3个绿灯（右眼抑制），2个红灯（左眼抑制），5个灯2红3绿（复视），4个灯1红2绿1混合（正常）</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="bg-d7">眼位：远</td>
+                        <td>水平</td>
+                        <td><input id="sgnFarsp1" name="sgnFarsp1" type="text"  /> △ </td>
+                        <td>
+                            <select id="sgnFarsp2" name="sgnFarsp2">
+                                <option value=""></option>
+                                <option value="BI">BI</option>
+                                <option value="BO">BO</option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                        </td>
+                        <td rowspan="2" class="H_red">远距隐斜</td>
+                        <td rowspan="2" class="bg-d7">眼位：近</td>
+                        <td>水平</td>
+                        <td><input id="sgnNearsp1" name="sgnNearsp1" type="text" /> △ </td>
+                        <td>
+                            <select id="sgnNearsp2" name="sgnNearsp2">
+                                <option value=""></option>
+                                <option value="BI">BI</option>
+                                <option value="BO">BO</option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                        </td>
+                        <td rowspan="2" class="H_red">近距隐斜</td>
+                    </tr>
+                    <tr>
+                        <td>垂直</td>
+                        <td><input id="sgnFarcz1" name="sgnFarcz1" type="text" /> △ </td>
+                        <td>
+                            <select id="sgnFarcz2" name="sgnFarcz2">
+                                <option value=""></option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                        </td>
+                        <td>垂直</td>
+                        <td><input id="sgnNearcz1" name="sgnNearcz1" type="text"  /> △ </td>
+                        <td>
+                            <select id="sgnNearcz2" name="sgnNearcz2">
+                                <option value=""></option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3" class="bg-d7">Von Graefe法</td>
+                        <td>远距水平隐斜视：</td>
+                        <td colspan="3">
+                            <input id="sgnVgfarsp1" name="sgnVgfarsp1" type="text"  /> △ <input id="sgnVgfarsp2" name="sgnVgfarsp2" type="text" />
+                        </td>
+                        <td>远距垂直隐斜视：</td>
+                        <td colspan="4">
+                            <input id="sgnVgfarcz1" name="sgnVgfarcz1" type="text"  /> △ <input id="sgnVgfarcz2"  name="sgnVgfarcz2" type="text" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>近距水平隐斜视：</td>
+                        <td colspan="3">
+                            <input id="sgnVgnearsp1" name="sgnVgnearsp1" type="text"  /> △ <input id="sgnVgnearsp2" name="sgnVgnearsp2" type="text" />
+                        </td>
+                        <td>近距垂直隐斜视：</td>
+                        <td colspan="4">
+                            <input id="sgnVgnearcz1" name="sgnVgnearcz1" type="text"/> △ <input id="sgnVgnearcz2" name="sgnVgnearcz2" type="text" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>综合验光仪瞳距：</td>
+                        <td colspan="3"><input id="sgnAllygytj1" name="sgnAllygytj1" type="text"  /> △ <input id="sgnAllygytj2" name="sgnAllygytj2" type="text"   /></td>
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr>
+                        <td class="bg-d7">AC/A</td>
+                        <td colspan="9" style="text-align:left;">
+                            <input id="sgnAc" name="sgnAc" type="text" style="width:10%" />
+                            <label for="H_AC_a"><input name="sgnAcway" value="1" type="radio" id="H_AC_a" checked> 梯度法</label>
+                            <label for="H_AC_b"><input name="sgnAcway"  value="2" type="radio" id="H_AC_b"> 计算法</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3" class="bg-d7">调节反应</td>
+                        <td rowspan="3">
+                            <label for="H_BCC"><input name="sgnTjfy" value="1" type="radio" id="H_BCC" checked> BCC</label>
+                            <label for="H_MEM"><input name="sgnTjfy"  value="2" type="radio" id="H_MEM"> MEM</label>
+                        </td>
+                        <td colspan="2">OU <input id="sgnTjfyou" name="sgnTjfyou" type="text" /> D</td>
+                        <td rowspan="3" class="H_red">+0.25~+0.75D<br/>调节超前 <+0.25D<br/>调节滞后 >+0.75D</td>
+                        <td rowspan="3" class="bg-d7">正负相对调节</td>
+                        <td colspan="2">PRA：<input id="sgnPra" name="sgnPra" type="text" /> D</td>
+                        <td colspan="2" class="H_red">-2.50D±1.00D（近视力表）</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">OD <input id="sgnTjfyod" name="sgnTjfyod" type="text" /> D</td>
+                        <td colspan="2">NRA：<input id="sgnNra" name="sgnNra" type="text" /> D</td>
+                        <td colspan="2" class="H_red">-2.00D±0.50D（近视力表）</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">OS <input id="sgnTjfyos" name="sgnTjfyos" type="text" /> D</td>
+                        <td colspan="4">
+                            遮盖单眼是否变清晰
+                            <label for="H_SS"><input name="sgnZfsf" value="1" type="radio" id="H_SS" checked> 是</label>
+                            <label for="H_FF"><input name="sgnZfsf" value="2" type="radio" id="H_FF"> 否</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+
         <!--眼生物学参数-->
         <div class="m40 tabS">
             <h3>眼生物学参数</h3>
@@ -176,7 +339,7 @@
                         <input name="axisLeft" th:value="${ocularEyesDO.axisLeft}" type="text"/> mm
                     </td>
                     <td>
-                        <input name="cornealFirstK2Left" th:value="${ocularEyesDO.cornealFirstK1Left}"
+                        <input name="cornealFirstK1Left" th:value="${ocularEyesDO.cornealFirstK1Left}"
                                type="text"/>@
                         <input name="cornealLastK1Left" th:value="${ocularEyesDO.cornealLastK1Left}"
                                type="text"/>
@@ -246,18 +409,18 @@
                         <input name="cylinderRight" th:value="${optometryFrontDO.cylinderRight}" type="text"/>
                     </td>
                     <td>
-                        <input name="axialRight" th:value="${optometryFrontDO.axialRight}" onblur="zhouxiang(this)"
+                        <input id="axialRight" name="axialRight" th:value="${optometryFrontDO.axialRight}" onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
                     </td>
                     <td rowspan="2">散瞳后</td>
                     <td>
-                        <input name="sphereRight" th:value="${optometryAfterDO.sphereRight}" type="text"/>
+                        <input name="sphereRight2" th:value="${optometryAfterDO.sphereRight}" type="text"/>
                     </td>
                     <td>
-                        <input name="cylinderRight" th:value="${optometryAfterDO.cylinderRight}" type="text"/>
+                        <input name="cylinderRight2" th:value="${optometryAfterDO.cylinderRight}" type="text"/>
                     </td>
                     <td>
-                        <input name="axialRight" th:value="${optometryAfterDO.axialRight}" onblur="zhouxiang(this)"
+                        <input id="axialRight2" name="axialRight2" th:value="${optometryAfterDO.axialRight}" onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
                     </td>
                 </tr>
@@ -270,18 +433,18 @@
                         <input name="cylinderLeft" th:value="${optometryFrontDO.cylinderLeft}" type="text"/>
                     </td>
                     <td>
-                        <input name="axialLeft" th:value="${optometryFrontDO.axialLeft}" type="text"
+                        <input id="axialLeft" name="axialLeft" th:value="${optometryFrontDO.axialLeft}" type="text"
                                onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
                     </td>
                     <td>
-                        <input name="sphereLeft" th:value="${optometryAfterDO.sphereLeft}" type="text"/>
+                        <input name="sphereLeft2" th:value="${optometryAfterDO.sphereLeft}" type="text"/>
                     </td>
                     <td>
-                        <input name="cylinderLeft" th:value="${optometryAfterDO.cylinderLeft}" type="text"/>
+                        <input name="cylinderLeft2" th:value="${optometryAfterDO.cylinderLeft}" type="text"/>
                     </td>
                     <td>
-                        <input name="axialLeft" th:value="${optometryAfterDO.axialLeft}" type="text"
+                        <input id="axialLeft2" name="axialLeft2" th:value="${optometryAfterDO.axialLeft}" type="text"
                                onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
                     </td>
@@ -298,19 +461,19 @@
                 <tr>
                     <td>OD</td>
                     <td>
-                        <input class="short" name="cornealFirstK1Right"
+                        <input class="short" name="pkod"
                                th:value="${ocularEyesDO.cornealFirstK1Right}" type="text"/> @
-                        <input class="short" name="cornealLastK1Right"
+                        <input class="short" name="pk1od"
                                th:value="${ocularEyesDO.cornealLastK1Right}" type="text"/>
                     </td>
-                    <td><input class="short" name="cornealFirstK2Right"
+                    <td><input class="short" name="dkod"
                                th:value="${ocularEyesDO.cornealFirstK2Right}" type="text"/> @
-                        <input class="short" name="cornealLastK2Right"
+                        <input class="short" name="dk1od"
                                th:value="${ocularEyesDO.cornealLastK2Right}" type="text"/>
                     </td>
                     <td>
-                        <input class="short" name="pjkOd" th:value="${ocularEyesDO.pjkOd}" type="text"/> @
-                        <input class="short" name="pjkOs" th:value="${ocularEyesDO.pjkOs}" type="text"/>
+                        <input class="short" name="pjkOd" type="text"/> @
+                        <input class="short" name="pjkOd2" type="text"/>
                     </td>
                     <td><input name="cornealAstigmatismOd" th:value="${optometryFrontDO.cornealAstigmatismOd}"
                                type="text"/>
@@ -322,19 +485,19 @@
                 <tr>
                     <td>OS</td>
                     <td>
-                        <input class="short" name="cornealFirstK1Left"
+                        <input class="short" name="pkos"
                                th:value="${ocularEyesDO.cornealFirstK1Left}" type="text"/> @
-                        <input class="short" name="cornealLastK1Left"
+                        <input class="short" name="pk1os"
                                th:value="${ocularEyesDO.cornealLastK1Left}" type="text"/>
                     </td>
-                    <td><input class="short" name="cornealFirstK2Left"
+                    <td><input class="short" name="dkos"
                                th:value="${ocularEyesDO.cornealFirstK2Left}" type="text"/> @
-                        <input class="short" name="cornealLastK2Left"
+                        <input class="short" name="dk1os"
                                th:value="${ocularEyesDO.cornealLastK2Left}" type="text"/>
                     </td>
                     <td>
-                        <input class="short" name="pjkOd2" th:value="${ocularEyesDO.pjkOd2}" type="text"/> @
-                        <input class="short" name="pjkOs2" th:value="${ocularEyesDO.pjkOs2}" type="text"/>
+                        <input class="short" name="pjkOs"  type="text"/> @
+                        <input class="short" name="pjkOs2"  type="text"/>
                     </td>
                     <td><input name="cornealAstigmatismOs" th:value="${optometryFrontDO.cornealAstigmatismOs}"
                                type="text"/>
@@ -361,7 +524,7 @@
                     <td>OD</td>
                     <td><input name="sphJyod" th:value="${optometryDO.sphJyod}" type="text"/></td>
                     <td><input name="cylJyod" th:value="${optometryDO.cylJyod}" type="text"/></td>
-                    <td><input name="axialJyod" th:value="${optometryDO.axialJyod}" type="text"
+                    <td><input id="axialJyod" name="axialJyod" th:value="${optometryDO.axialJyod}" type="text"
                                onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                     <td><input name="vaJyod" th:value="${optometryDO.vaJyod}" type="text"/></td>
                     <td><input name="pdJyod" th:value="${optometryDO.pdJyod}" type="text"/></td>
@@ -371,10 +534,10 @@
                     <td>OS</td>
                     <td><input name="sphJyos" th:value="${optometryDO.sphJyos}" type="text"/></td>
                     <td><input name="cylJyos" th:value="${optometryDO.cylJyos}" type="text"/></td>
-                    <td><input name="axialJyos" th:value="${optometryDO.axialJyos}" onblur="zhouxiang(this)"
+                    <td><input id="axialJyos" name="axialJyos" th:value="${optometryDO.axialJyos}" onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
                     <td><input name="vaJyos" th:value="${optometryDO.vaJyos}" type="text"/></td>
-                    <td><input name="pdJyod" th:value="${optometryDO.pdJyos}" type="text"/></td>
+                    <td><input name="pdJyos" th:value="${optometryDO.pdJyos}" type="text"/></td>
                     <td colspan="2"></td>
                 </tr>
                 <tr class="tabS_bg">
@@ -395,7 +558,7 @@
                     <td>OD</td>
                     <td><input name="sphCpod" th:value="${optometryDO.sphCpod}" type="text"/></td>
                     <td><input name="cylCpod" th:value="${optometryDO.cylCpod}" type="text"/></td>
-                    <td><input name="axialCpod" th:value="${optometryDO.axialCpod}" onblur="zhouxiang(this)"
+                    <td><input id="axialCpod" name="axialCpod" th:value="${optometryDO.axialCpod}" onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
                     <td><input name="dvaCpod" th:value="${optometryDO.dvaCpod}" type="text"/></td>
                     <td><input name="nvaCpod" th:value="${optometryDO.nvaCpod}" type="text"/></td>
@@ -406,7 +569,7 @@
                     <td>OS</td>
                     <td><input name="sphCpos" th:value="${optometryDO.sphCpos}" type="text"/></td>
                     <td><input name="cylCpos" th:value="${optometryDO.cylCpos}" type="text"/></td>
-                    <td><input name="axialCpos" th:value="${optometryDO.axialCpos}" onblur="zhouxiang(this)"
+                    <td><input id="axialCpos" name="axialCpos" th:value="${optometryDO.axialCpos}" onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
                     <td><input name="dvaCpos" th:value="${optometryDO.dvaCpos}" type="text"/></td>
                     <td><input name="nvaCpos" th:value="${optometryDO.nvaCpos}" type="text"/></td>
@@ -690,11 +853,11 @@
     } else {
         document.getElementById("xz2").checked = "checked";
     }
-    $(function () {
-        $("input[type='radio']").click(function () {
-            this.checked = !this.checked;
-        });
-    });
+    // $(function () {
+    //     $("input[type='radio']").click(function () {
+    //         this.checked = !this.checked;
+    //     });
+    // });
 
     //主观验光和试戴镜联动
     $(".zgQG").click(function () {
@@ -714,14 +877,14 @@
     };
 
     function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用
-        var val = parseFloat(e.value)
-        var val1 = e.value
+        var val = parseFloat(e.value);
+        var val1 = e.value;
         // console.log(val);
-        var num = val1.indexOf(".") + 2
+        var num = val1.indexOf(".") + 2;
         console.log(num);
         if (val1.length > num) {
             console.log(123);
-            var val2 = 0 | val * 100
+            var val2 = 0 | val * 100;
             e.value = val2 / 100
         }
     }
@@ -737,13 +900,63 @@
     };
 
     //轴向正确表示规则
-    function zhouxiang(e) {//用onblur事件触发
+    function zhouxiang(e) {
+        //用onblur事件触发
         var val = parseFloat(e.value);
         if (val < 0 || val > 180) {
-            alert("轴向在0-180之间");
+            layer.alert("轴向在0-180之间");
         } else {
             e.value = val.toFixed(0)
         }
+        var axialRight=document.getElementById('axialRight').value;
+        if (axialRight == "NaN"){
+            $("#axialRight").val("");
+        }
+        var axialRight2=document.getElementById('axialRight2').value;
+        if (axialRight2 == "NaN"){
+            $("#axialRight2").val("");
+        }
+        var axialLeft=document.getElementById('axialLeft').value;
+        if (axialLeft == "NaN"){
+            $("#axialLeft").val("");
+        }
+        var axialLeft2=document.getElementById('axialLeft2').value;
+        if (axialLeft2 == "NaN"){
+            $("#axialLeft2").val("");
+        }
+        var axialJyod=document.getElementById('axialJyod').value;
+        if (axialJyod == "NaN"){
+            $("#axialJyod").val("");
+        }
+        var axialJyos=document.getElementById('axialJyos').value;
+        if (axialJyos == "NaN"){
+            $("#axialJyos").val("");
+        }
+        var axialCpod=document.getElementById('axialCpod').value;
+        if (axialCpod == "NaN"){
+            $("#axialCpod").val("");
+        }
+        var axialCpos=document.getElementById('axialCpos').value;
+        if (axialCpos == "NaN"){
+            $("#axialCpos").val("");
+        }
+        var axialRightz=document.getElementById('axialRightz').value;
+        if (axialRightz == "NaN"){
+            $("#axialRightz").val("");
+        }
+        var axialLeftz=document.getElementById('axialLeftz').value;
+        if (axialLeftz == "NaN"){
+            $("#axialLeftz").val("");
+        }
+        var axialRighttry=document.getElementById('axialRighttry').value;
+        if (axialRighttry == "NaN"){
+            $("#axialRighttry").val("");
+        }
+        var axialLefttry=document.getElementById('axialLefttry').value;
+        if (axialLefttry == "NaN"){
+            $("#axialLefttry").val("");
+        }
+
     }
 </script>
 
