@@ -8,7 +8,7 @@
 	</select>
 
 	<select id="list" resultType="com.shiguang.unqualiffed.domain.UnqualiffedDO">
-		select `id`,`sale_number`,`prepared_name`,`responsible_name`,`bill_number`,`cause`,`phenomenon`,`handle`,`bill_date` from unqualiffed
+		select `id`,`document_number`,`department_appli`,`position_appli`,`sale_number`,`prepared_name`,`responsible_name`,`bill_number`,`cause`,`phenomenon`,`handle`,`bill_date` from unqualiffed
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
@@ -51,6 +51,9 @@
 	<insert id="save" parameterType="com.shiguang.unqualiffed.domain.UnqualiffedDO" useGeneratedKeys="true" keyProperty="id">
 		insert into unqualiffed
 		(
+		   `document_number`,
+		   `department_appli`,
+		   `position_appli`,
 			`sale_number`, 
 			`prepared_name`, 
 			`responsible_name`, 
@@ -58,10 +61,18 @@
 			`cause`, 
 			`phenomenon`, 
 			`handle`, 
-			`bill_date`
+			`bill_date`,
+			`remark`,
+			`count`,
+			`goods_num`,
+			`goods_name`,
+			`goods_code`
 		)
 		values
 		(
+		    #{documentNumber},
+		    #{departmentAppli},
+		    #{positionAppli},
 			#{saleNumber}, 
 			#{preparedName}, 
 			#{responsibleName}, 
@@ -69,13 +80,20 @@
 			#{cause}, 
 			#{phenomenon}, 
 			#{handle}, 
-			#{billDate}
+			#{billDate},
+			#{remark},
+			#{count},
+			#{goodsNum},
+			#{goodsName},
+			#{goodsCode}
 		)
 	</insert>
 	 
 	<update id="update" parameterType="com.shiguang.unqualiffed.domain.UnqualiffedDO">
 		update unqualiffed 
 		<set>
+			<if test="documentNumber != null">`document_number` = #{documentNumber}, </if>
+			<if test="departmentAppli != null">`department_appli` = #{departmentAppli}, </if>
 			<if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
 			<if test="preparedName != null">`prepared_name` = #{preparedName}, </if>
 			<if test="responsibleName != null">`responsible_name` = #{responsibleName}, </if>

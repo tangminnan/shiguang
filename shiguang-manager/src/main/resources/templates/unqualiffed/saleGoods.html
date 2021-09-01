@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>配镜单查询</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+<form>
+<div class="new_h3">配镜单查询</div>
+
+<!--检查条件-->
+<div class="m40 tabS PHGL">
+    <h3>检查条件</h3>
+      配镜单号：<input type="text" id="saleNumber" > <input type="button" onclick="getSaleGoods()" value="查询">
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td>顾客姓名：</td>
+            <td id="memberName"></td>
+            <td>顾客电话：</td>
+            <td id="memberTel"></td>
+            <td>顾客地址：</td>
+            <td id="address"></td>
+        </tr>
+        <tr>
+            <td>销售门店：</td>
+            <td id="storeName"></td>
+            <td>销售人员：</td>
+            <td id="saleName"></td>
+            <td>应收金额：</td>
+            <td id="amountMoney"></td>
+        </tr>
+        <tr>
+            <td>取镜日期：</td>
+            <td id="mirrorDate"></td>
+            <td>销售日期：</td>
+            <td id="saleDate"></td>
+            <td></td>
+            <td ></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--商品信息-->
+<div class="m40 tabS SPmsg">
+    <h3>查询信息</h3>
+    <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tbody id="tbodyid">
+        <tr class="thead">
+            <td>全选 <input type="checkbox" /></td>
+            <td>商品代码</td>
+            <td>商品条码</td>
+            <td>商品名称</td>
+            <td>商品标识</td>
+            <td>销售数量</td>
+        </tr>
+        <!--<tr>-->
+            <!--<td><input type="checkbox" /></td>-->
+            <!--<td>123569875425</td>-->
+            <!--<td>名称名称每次</td>-->
+            <!--<td></td>-->
+            <!--<td></td>-->
+            <!--<td></td>-->
+        <!--</tr>-->
+        </tbody>
+    </table>
+</div>
+
+</form>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/unqualiffed/saleGoods.js"></script>
+<script type="text/javascript">
+    var html ="";
+    function getSaleGoods (){
+        var toIndex = layer.open({
+            type : 2,
+            title : '配镜单',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/unqualiffed/goods/",// iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                for (var i=0;i<rows.length;i++){
+                     $("#memberName").append(rows[i].memberName);
+                     $("#memberTel").append(rows[i].memberTel);
+                     $("#address").append(rows[i].address);
+                     $("#storeName").append(rows[i].mirorAddress);
+                     $("#saleName").append(rows[i].saleName);
+                     $("#amountMoney").append(rows[i].amountMoney);
+                     $("#mirrorDate").append(rows[i].mirrorDate);
+                     $("#saleDate").append(rows[i].peijingDate);
+                    var godist = rows[i].list;
+                    for (var a=0;a<godist.length;a++){
+                        var goodsNumStr = godist[a].goodsNum;
+                        var goodsNameStr = godist[a].goodsName;
+                        var goodsCodeStr = godist[a].goodsCode;
+                        html = "<tr><td><input type=\"checkbox\" onchange='getData(\""+goodsNumStr+"\",\""+goodsNameStr+"\",\""+goodsCodeStr+"\")'/></td>";
+                        html += "<td>"+godist[a].goodsNum+"</td>";
+                        html += "<td>"+godist[a].goodsCode+"</td>";
+                        html += "<td>"+godist[a].goodsName+"</td>";
+                        html += "<td></td>";
+                        html += "<td>"+godist[a].saleCount+"</td>";
+                        html += "</tr>";
+                        $("#tbodyid").append(html);
+                    }
+                }
+            }
+        });
+        layer.full(toIndex)
+    }
+
+</script>
+</body>
+</html>

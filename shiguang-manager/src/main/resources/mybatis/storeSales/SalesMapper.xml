@@ -8,7 +8,7 @@
 	</select>
 
 	<select id="list" resultType="com.shiguang.storeSales.domain.SalesDO">
-		select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`prime_money`,`mirror_way`,`mirror_time`,`miror_address`,`store_num`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name` from store_sales
+		select `id`,`member_number`,`sale_name`,`sale_number`,`goods_num`,`goods_code`,`eye_type`,`amount_money`,`prime_money`,`mirror_way`,`mirror_time`,`miror_address`,`store_num`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name`,`peijing_time` from store_sales
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
@@ -199,9 +199,9 @@
 	</delete>
 
 	<select id="peijinglist" resultType="com.shiguang.storeSales.domain.SalesDO">
-		select s.`id`,s.`member_number`,m.`name` as memberName,m.`phone_1` as memberTel,s.`sale_name`,s.`sale_number`,s.`eye_type`,s.`amount_money`,s.`prime_money`,s.`mirror_way`,
+		select s.`id`,s.`member_number`,m.`name` as memberName,m.`phone_1` as memberTel,m.`address` as address,s.`sale_name`,s.`sale_number`,s.`goods_num`,s.`goods_code`,s.`eye_type`,s.`amount_money`,s.`prime_money`,s.`mirror_way`,
 		s.`mirror_time`,s.`miror_address`,s.`urgent_status`,s.`goods_rebate`,s.`fixed_price`,s.`moling_money`,s.`additional_cost`,
-		s.`process_ask`,s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`give_name`
+		s.`process_ask`,s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`give_name`,s.`peijing_time`
 		from store_sales s join member m on m.card_number = s.member_number and m.state = 1 and m.`status` = 0
 		<where>
 			<if test="id != null and id != ''"> and s.id = #{id} </if>

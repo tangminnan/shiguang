@@ -38,6 +38,7 @@ function getKjpeijian() {
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshoujjpj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='镜架配件' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneyjjpj"+a+"").text(rows[i].retailPrice)
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
@@ -110,6 +111,7 @@ function getTaiyangjing(){
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshoutyj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='太阳镜' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneytyj"+a+"").text(rows[i].retailPrice)
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
@@ -182,6 +184,7 @@ function getHaocai() {
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshouhc"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='耗材' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneyhc"+a+"").text(rows[i].retailPrice)
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
@@ -253,6 +256,7 @@ function getLaohuajing() {
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshoulhj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='老花镜' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneylhj"+a+"").text(rows[i].retailPrice)
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
@@ -323,6 +327,7 @@ function getShiguang(){
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshousg"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='视光' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneysg"+a+"").text(rows[i].retailPrice)
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
@@ -396,6 +401,7 @@ function getHuliye(){
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshouhly"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='护理液' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneyhly"+a+"").text(rows[i].retailPrice)
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
@@ -469,6 +475,7 @@ function getPeijian(){
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshoupj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='配件' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneypj"+a+"").text(rows[i].retailPrice)
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
@@ -582,6 +589,7 @@ function getYinxing(){
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshouyx"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='隐形' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneyyx"+a+"").text(rows[i].retailPrice)
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
@@ -656,6 +664,7 @@ function getYinxingpj(){
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshouyxpj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='隐形配件' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneyyxpj"+a+"").text(rows[i].retailPrice)
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
@@ -720,6 +729,7 @@ function getZengpin(){
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='赠品' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 //price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
@@ -767,6 +777,7 @@ function getZijia(){
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='自架' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 //price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
@@ -814,6 +825,7 @@ function getZipian(){
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='自片' type='hidden' />"
+                html += "</tr>";
                 $("#goods").append(html);
                 //price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});

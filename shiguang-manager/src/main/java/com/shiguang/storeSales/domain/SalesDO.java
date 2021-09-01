@@ -1,8 +1,10 @@
 package com.shiguang.storeSales.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -23,6 +25,7 @@ public class SalesDO implements Serializable {
 	private String memberNumber;
 	private String memberName;
 	private String memberTel;
+	private String address;
 	//顾客性别(1:男2:女)
 	private Long sex;
 	private String sexx;
@@ -209,6 +212,7 @@ public class SalesDO implements Serializable {
 	private String classtype;
 	//配镜发料用(是否订做)
 	private String classTypeFL;
+	List<SaleGoodsDO> list = new ArrayList<>();
 
 	/**
 	 * 设置：主键
@@ -250,6 +254,8 @@ public class SalesDO implements Serializable {
 	public String getMemberName() {return memberName;}
 	public void setMemberTel(String memberTel) {this.memberTel = memberTel;}
 	public String getMemberTel(){return memberTel;}
+	public void setAddress(String address) {this.address = address;}
+	public String getAddress() {return address;}
 	/**
 	 * 设置：顾客性别(0:男1:女)
 	 */
@@ -1027,4 +1033,7 @@ public class SalesDO implements Serializable {
 
 	public String getClassTypeFL() {return  classTypeFL;}
 
+	public void setList(List<SaleGoodsDO> list) {this.list = list;}
+
+	public List<SaleGoodsDO> getList() {return list;}
 }

@@ -12,6 +12,7 @@ import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -20,30 +21,30 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/information/receive")
-public class ReceiveController {
+@RequestMapping("/information/distribution")
+public class DistributionController {
     @Autowired
     private LogStatusService statusService;
     @Autowired
     private SalesService salesService;
 
     /**
-     * 取镜处收货
+     * 加工配送
      * @return
      */
     @GetMapping()
-    @RequiresPermissions("information:receive:receive")
+    @RequiresPermissions("information:distribution:distribution")
     String examine(){
-        return "logstatus/receive";
+        return "logstatus/distribution";
     }
 
     @ResponseBody
-    @GetMapping("/receivelist")
-    @RequiresPermissions("information:receive:receive")
-    public PageUtils receivelist(@RequestParam Map<String, Object> params){
+    @GetMapping("/distributionlist")
+    @RequiresPermissions("information:distribution:distribution")
+    public PageUtils distributionlist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        query.put("logisticStatus","加工配送");
+        query.put("logisticStatus","加工师检验");
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyid",ShiroUtils.getUser().getCompanyId());
         } else {
@@ -61,25 +62,28 @@ public class ReceiveController {
         return pageUtils;
     }
 
+    @GetMapping("/edit/{saleNumber}")
+    @RequiresPermissions("information:distribution:edit")
+    String edit(@PathVariable("saleNumber") String saleNumber, Model model){
+        model.addAttribute("saleNumber",saleNumber);
+        return "logstatus/distributionedit";
+    }
+
     /**
-     * 取镜处收货
+     * 修改
      */
-    @PostMapping( "/editShouhuo")
     @ResponseBody
-    @RequiresPermissions("information:receive:edit")
-    public R editShouhuo(String saleNumber){
-        LogStatusDO logStatusDO = new LogStatusDO();
-        logStatusDO.setSaleNumber(saleNumber);
-        logStatusDO.setLogisticStatus("收货");
+    @RequestMapping("/update")
+    @RequiresPermissions("information:distribution:edit")
+    public R update(LogStatusDO status){
+        status.setLogisticStatus("加工配送");
+        statusService.update(status);
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
-        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
-        workRecoedDO.setType("取镜");
+        workRecoedDO.setUserName(status.getProcessName());
+        workRecoedDO.setType("加工配送");
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
-        if(statusService.editFaliao(logStatusDO)>0){
-            return R.ok();
-        }
-        return R.error();
+        return R.ok();
     }
 
 }

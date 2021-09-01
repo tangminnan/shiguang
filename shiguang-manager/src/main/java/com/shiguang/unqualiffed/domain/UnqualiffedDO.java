@@ -17,6 +17,12 @@ public class UnqualiffedDO implements Serializable {
 	
 	//主键
 	private Long id;
+	//单据编号
+	private String documentNumber;
+	//申请部门
+	private String departmentAppli;
+	//申报仓位
+	private String positionAppli;
 	//销售单号
 	private String saleNumber;
 	//制单人
@@ -29,6 +35,16 @@ public class UnqualiffedDO implements Serializable {
 	private String cause;
 	//所属现象
 	private String phenomenon;
+	//备注
+	private String remark;
+	//数量
+	private String count;
+	//商品代码
+	private String goodsNum;
+	//商品名称
+	private String goodsName;
+	//商品条码
+	private String goodsCode;
 	//处理
 	private String handle;
 	//单据日期
@@ -46,6 +62,30 @@ public class UnqualiffedDO implements Serializable {
 	public Long getId() {
 		return id;
 	}
+	/**
+	 * 单据编号
+	 */
+	public void setDocumentNumber(String documentNumber) {this.documentNumber = documentNumber;}
+	/**
+	 * 单据编号
+	 */
+	public String getDocumentNumber() {return documentNumber;}
+	/**
+	 * 申请部门
+	 */
+	public void setDepartmentAppli(String departmentAppli) {this.departmentAppli = departmentAppli;}
+	/**
+	 * 申请部门
+	 */
+	public String getDepartmentAppli(){return departmentAppli;}
+	/**
+	 * 申报仓位
+	 */
+	public void setPositionAppli(String positionAppli) {this.positionAppli = positionAppli;}
+	/**
+	 * 申报仓位
+	 */
+	public String getPositionAppli() {return positionAppli;}
 	/**
 	 * 设置：销售单号
 	 */
@@ -142,4 +182,24 @@ public class UnqualiffedDO implements Serializable {
 	public Date getBillDate() {
 		return billDate;
 	}
+
+	public void setRemark(String remark){this.remark = remark;}
+
+	public String getRemark() {return remark;}
+
+	public void setCount(String count){this.count = count;}
+
+	public String getCount() {return count;}
+
+	public void setGoodsNum(String goodsNum) {this.goodsNum = goodsNum;}
+
+	public String getGoodsNum() {return goodsNum;}
+
+	public void setGoodsName(String goodsName) {this.goodsName = goodsName;}
+
+	public String getGoodsName() {return goodsName;}
+
+	public void setGoodsCode(String goodsCode) {this.goodsCode = goodsCode;}
+
+	public String getGoodsCode() {return goodsCode;}
 }

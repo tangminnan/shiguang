@@ -103,6 +103,7 @@
             <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
             <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
             <if test="classtype != null and classtype != ''">or sa.`classtype` in (#{classtype})</if>
+            <if test="storeDescribe != null and storeDescribe != ''">or sa.`store_describe` in (#{storeDescribe})</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

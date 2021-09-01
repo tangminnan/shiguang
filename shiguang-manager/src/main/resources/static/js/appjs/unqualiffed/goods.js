@@ -1,5 +1,5 @@
 
-var prefix = "/information/logstatus"
+var prefix = "/information/unqualiffed"
 $(function() {
 	load();
 });
@@ -9,7 +9,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/faliaolist", // 服务器数据的加载地址
+						url : prefix + "/goodslist", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -20,7 +20,7 @@ function load() {
 						pagination : true, // 设置为true会在底部显示分页条
 						// queryParamsType : "limit",
 						// //设置为limit则会发送符合RESTFull格式的参数
-						singleSelect : false, // 设置为true将禁止多选
+						singleSelect : true, // 设置为true将禁止多选
 						// contentType : "application/x-www-form-urlencoded",
 						// //发送到服务器的数据编码类型
 						pageSize : 10, // 如果设置了分页，每页数据条数
@@ -33,7 +33,7 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                saleNumber: $("#saleNumber").val()
+                                cardNumber:$("#cardNumber").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -48,121 +48,123 @@ function load() {
                             {
                                 checkbox : true
                             },
-																{
-									field : 'saleNumber', 
-									title : '配镜单号'
-								},
-																{
-									field : 'memberName',
-									title : '顾客姓名'
-								},
 								{
-									field : 'mirorAddress',
-									title : '销售门店'
+									field : 'saleNumber',
+									title : '配镜单号',
+									align : 'center'
 								},
 								{
 									field : 'peijingDate',
-									title : '配镜日期'
+									title : '销售日期',
+									align : 'center'
 								},
 								{
 									field : 'mirrorDate',
-									title : '取镜日期'
+									title : '取镜日期',
+									align : 'center'
 								},
 								{
-									field : 'processAsk',
-									title : '加工要求'
+									field : 'mirorAddress',
+									title : '销售门店',
+									align : 'center'
 								},
-																{
-									title : '操作',
-									field : 'id',
-									align : 'center',
-									formatter : function(value, row, index) {
-										// var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-										// 		+ row.id
-										// 		+ '\')"><i class="fa fa-edit"></i></a> ';
-                                        var d;
-										if (row.classTypeFL == '2'){
-                                            d = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" onclick="detail(\''
-                                                + row.saleNumber
-                                                + '\')"  style="text-decoration: none;">详情</a> ';
-										} else {
-                                            d = '<a class="btn btn-primary btn-xs" href="#" title="发料"  mce_href="#" onclick="editFaliao(\''
-                                                + row.saleNumber
-                                                + '\')"  style="text-decoration: none;">发料</a> ';
-										}
-										return  d ;
-									}
-								} ]
+								{
+									field : 'saleName',
+									title : '销售人员',
+									align : 'center'
+								},
+								{
+									field : 'amountMoney',
+									title : '销售金额',
+									align : 'center'
+								},
+								{
+									field : 'memberName',
+									title : '顾客姓名',
+									align : 'center'
+								}
+								]
 					});
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
+document.onkeydown = function(e){
+    if((e||event).keyCode==13)
+        reLoad();
+};
 function add() {
-	layer.open({
+	var toIndex = layer.open({
 		type : 2,
-		title : '增加',
+		title : '门店销售',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
+    layer.full(toIndex)
 }
-
-function detail(saleNumber){
-	window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
-}
-
-function editFaliao(saleNumber) {
-	var toIndex = layer.open({
+function edit(cardNumber) {
+    var toIndex = layer.open({
 		type : 2,
-		title : '发料',
+		title : '门店销售',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + saleNumber // iframe的url
+		area : [ '1500px', '520px' ],
+		content : prefix + '/edit/' + cardNumber // iframe的url
 	});
-	layer.full(toIndex);
+    layer.full(toIndex)
 }
-// function editFaliao(saleNumber) {
-//     layer.open({
-//         type : 2,
-//         title : '发料',
-//         maxmin : true,
-//         shadeClose : false, // 点击遮罩关闭层
-//         area : [ '800px', '520px' ],
-//         content : prefix + '/editFaliao/' + saleNumber // iframe的url
-//     });
-	// layer.confirm('确定要发料？', {
-	// 	btn : [ '确定', '取消' ]
-	// }, function() {
-	// 	$.ajax({
-	// 		url : prefix+"/editFaliao",
-	// 		type : "post",
-	// 		data : {
-	// 			'saleNumber' : saleNumber
-	// 		},
-	// 		success : function(r) {
-	// 			if (r.code==0) {
-	// 				layer.msg(r.msg);
-	// 				reLoad();
-	// 			}else{
-	// 				layer.msg(r.msg);
-	// 			}
-	// 		}
-	// 	});
-	// })
-// }
+
+function detail(cardNumber) {
+    var toIndex = layer.open({
+        type : 2,
+        title : '详情',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '1500px', '520px' ],
+        content : prefix + '/detail/' + cardNumber // iframe的url
+    });
+    layer.full(toIndex)
+}
+
+function remove(id) {
+	layer.confirm('确定要删除选中的记录？', {
+		btn : [ '确定', '取消' ]
+	}, function() {
+		$.ajax({
+			url : prefix+"/remove",
+			type : "post",
+			data : {
+				'id' : id
+			},
+			success : function(r) {
+				if (r.code==0) {
+					layer.msg(r.msg);
+					reLoad();
+				}else{
+					layer.msg(r.msg);
+				}
+			}
+		});
+	})
+}
 
 function resetPwd(id) {
 }
-function batchFaliao() {
+
+function batchSelect(){
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	return rows;
+}
+
+function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
-		layer.msg("请选择要发料的数据");
+		layer.msg("请选择要删除的数据");
 		return;
 	}
-	layer.confirm("确认要发料选中的'" + rows.length + "'条数据吗?", {
+	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
 		btn : [ '确定', '取消' ]
 	// 按钮
 	}, function() {
@@ -176,7 +178,7 @@ function batchFaliao() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchFaliao',
+			url : prefix + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);

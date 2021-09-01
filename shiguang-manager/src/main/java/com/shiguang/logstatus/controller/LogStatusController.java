@@ -85,6 +85,7 @@ public class LogStatusController {
             query.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
         query.put("classtype",2);
+        query.put("storeDescribe","镜片");
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){
