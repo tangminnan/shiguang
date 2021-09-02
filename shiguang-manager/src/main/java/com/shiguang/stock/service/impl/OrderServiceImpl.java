@@ -56,4 +56,9 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderDO> getCode(Map<String, Object> map) {
 		return orderDao.getCode(map);
 	}
+
+	@Override
+	public int updateStatus(OrderDO order) {
+		return orderDao.updateStatus(order);
+	}
 }

@@ -20,8 +20,9 @@
 		`sgn_sf`,`sgn_reason`,`sgn_ciss`,`sgn_fardot`,`sgn_neardot`,`sgn_farsp1`,`sgn_farsp2`,`sgn_farcz1`,
 		`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,`sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,
 		`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,`sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,
-		`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf` ,`sphere_right2`,`sphere_left2`,`cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`
-		from jc_tryresults where id = #{value}
+		`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf` ,`sphere_right2`,`sphere_left2`,`cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,
+		`tjod`,`tjos`
+        from jc_tryresults where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.jiancha.domain.TryresultsDO">
@@ -41,7 +42,7 @@
         `sgn_ciss`,`sgn_fardot`,`sgn_neardot`,`sgn_farsp1`,`sgn_farsp2`,`sgn_farcz1`,`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,
         `sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,
         `sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf`,`sphere_right2`,`sphere_left2`,
-        `cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`
+        `cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,`tjod`,`tjos`
         from jc_tryresults
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
@@ -211,6 +212,8 @@
             <if test="cylinderLeft2 != null and cylinderLeft2 != ''"> and cylinder_left2 = #{cylinderLeft2} </if>
             <if test="axialRight2 != null and axialRight2 != ''"> and axial_right2 = #{axialRight2} </if>
             <if test="axialLeft2 != null and axialLeft2 != ''"> and axial_left2 = #{axialLeft2} </if>
+            <if test="tjod != null and tjod != ''"> and tjod = #{tjod} </if>
+            <if test="tjos != null and tjos != ''"> and tjos = #{tjos} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -395,6 +398,8 @@
             <if test="cylinderLeft2 != null and cylinderLeft2 != ''"> and cylinder_left2 = #{cylinderLeft2} </if>
             <if test="axialRight2 != null and axialRight2 != ''"> and axial_right2 = #{axialRight2} </if>
             <if test="axialLeft2 != null and axialLeft2 != ''"> and axial_left2 = #{axialLeft2} </if>
+            <if test="tjod != null and tjod != ''"> and tjod = #{tjod} </if>
+            <if test="tjos != null and tjos != ''"> and tjos = #{tjos} </if>
         </where>
     </select>
 
@@ -566,7 +571,9 @@
 			`cylinder_right2`,
 			`cylinder_left2`,
 			`axial_right2`,
-			`axial_left2`
+			`axial_left2`,
+			`tjod`,
+			`tjos`
 		)
 		values
 		(
@@ -735,7 +742,9 @@
 			#{cylinderRight2},
 			#{cylinderLeft2},
 			#{axialRight2},
-			#{axialLeft2}
+			#{axialLeft2},
+			#{tjod},
+			#{tjos}
 		)
 	</insert>
 
@@ -907,7 +916,9 @@
             <if test="cylinderRight2 != null">`cylinder_right2` = #{cylinderRight2}, </if>
             <if test="cylinderLeft2 != null">`cylinder_left2` = #{cylinderLeft2}, </if>
             <if test="axialRight2 != null">`axial_right2` = #{axialRight2}, </if>
-            <if test="axialLeft2 != null">`axial_left2` = #{axialLeft2}</if>
+            <if test="axialLeft2 != null">`axial_left2` = #{axialLeft2},</if>
+            <if test="tjod != null">`tjod` = #{tjod},</if>
+            <if test="tjos != null">`tjos` = #{tjos}</if>
         </set>
         where id = #{id}
     </update>
@@ -937,4 +948,28 @@
     <!--join sys_role srole on sur.role_id=srole.role_id-->
     <!--where srole.role_name=#{roleName}-->
     <!--</select>-->
+
+    <select id="getTryresult" resultType="com.shiguang.jiancha.domain.TryresultsDO">
+		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,
+		`chief_complaint`,`sphere_righttry`,`sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,
+		`axial_lefttry`,`dva_righttry`,`dva_lefttry`,`nva_righttry`,`nva_lefttry`,`prism_righttry`,`prism_lefttry`,
+		`jdr_try`,`jdl_try`,`height_righttry`,`height_lefttry`,`add_righttry`,`add_lefttry`,`yuan_rrty`,`yuan_lrty`,
+		`near_righttry`,`near_lefttry`,`remarks`,`far_lyou`,`far_lyod`,`far_lyos`,`near_lyou`,`near_lyod`,`near_lyos`,`far_yjou`,`far_yjod`,`far_yjos`,
+		`near_yjou`,`near_yjod`,`near_yjos`,`far_xkou`,`far_xkod`,`far_xkos`,`near_xkou`,`near_xkod`,`near_xkos`,`dominant_eye`,`axis`,`axis_left`,
+		`corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,
+		`corneal_first_K2_left`,`corneal_last_K2_left`,`pkod`,`pkos`,`pk1od`,`pk1os`,`dkod`,`dkos`,`dk1os`,`dk1od`,`pjk_od`,`pjk_os`,`pjk_od2`,`pjk_os2`,
+		`intraocular_od`,`intraocular_os`,`mydriasis`,`pharmacy_id`,`pharmacy`,
+		`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`corneal_astigmatism_od`,
+		`corneal_astigmatism_os`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,`axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,
+		`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,`dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,
+		`distance_os`,`sphere_rightz`,`sphere_leftz`,`cylinder_rightz`,`cylinder_leftz`,`axial_rightz`,`axial_leftz`,`dva_rightz`,`dva_leftz`,`nva_rightz`,
+		`nva_leftz`,`prism_rightz`,`prism_leftz`,`jdr_z`,`jdl_z`,`add_rightz`,`add_leftz`,`yuan_rz`,`yuan_lz`,`near_rightz`,`near_leftz`,
+		`sgn_sf`,`sgn_reason`,`sgn_ciss`,`sgn_fardot`,`sgn_neardot`,`sgn_farsp1`,`sgn_farsp2`,`sgn_farcz1`,
+		`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,`sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,
+		`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,`sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,
+		`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf` ,`sphere_right2`,`sphere_left2`,`cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,
+		`tjod`,`tjos`
+		from jc_tryresults where card_number = #{value}
+		order by id desc
+	</select>
 </mapper>

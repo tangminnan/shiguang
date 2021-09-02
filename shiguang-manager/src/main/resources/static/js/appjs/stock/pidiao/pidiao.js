@@ -268,6 +268,7 @@ function showCol() {
         var goodsCount = rowstr.find("[name='goodsCount']").html();
         var gdname = rowstr.find("[name='gdname']").html();
         var mfrsname = rowstr.find("[name='mfrsname']").html();
+        var factory = rowstr.find("[name='factory']").html();
         var retailPrice = rowstr.find("[name='retailPrice']").html();
         var priceSum = rowstr.find("[name='priceSum']").html();
         var costPrice = rowstr.find("[name='costPrice']").html();
@@ -279,26 +280,79 @@ function showCol() {
         var zhuceNumber = rowstr.find("[name='zhuceNumber']").html();
         var produceDay = rowstr.find("[name='produceDay']").html();
         var useday = rowstr.find("[name='useday']").html();
+        var classtype = rowstr.find("[name='classtype']").html();
+        var gdname = rowstr.find("[name='gdname']").html();
         obj.goodsNum = goodsNum;
         obj.goodsCode = goodsCode;
         obj.goodsName = goodsName;
         obj.goodsCount = goodsCount;
         obj.gdname = gdname;
+        obj.factory = factory;
         obj.mfrsname = mfrsname;
+
         obj.retailPrice = retailPrice;
         obj.priceSum = priceSum;
         obj.costPrice = costPrice;
         obj.costSum = costSum;
         obj.wholePrice = wholePrice;
         obj.wholeSum = wholeSum;
+
         obj.positionName = positionName;
         obj.batch = batch;
         obj.zhuceNumber = zhuceNumber;
         obj.produceDay = produceDay;
         obj.useday = useday;
+        obj.classtype = classtype;
+        obj.gdname = gdname;
 
-
+        var mfrsid = rowstr.find("[name='mfrsid']").html();
+        obj.mfrsid = mfrsid;
+        var brandname = rowstr.find("[name='brandname']").html();
+        obj.brandname = brandname;
         objArray.push(obj);
     });
     return objArray;
+}
+
+
+
+function save() {
+    var outDepartment = $("#outDepartment option:selected").text();
+    var outPosition = $("#outPosition option:selected").text();
+    var inCompany = $("#inCompany option:selected").text();
+    var inDepartment = $("#inDepartment option:selected").text();
+    if (outDepartment == "") {
+        layer.alert("请选择发出部门！");
+    } else if (outPosition == "") {
+        layer.alert("请选择发出仓位！");
+    }else if (inCompany == ""){
+        layer.alert("请选择接收公司！");
+    } else if (inDepartment == ""){
+        layer.alert("请选择接收部门！");
+    }
+    else if (outDepartment != "" && outPosition != "" && inCompany != "" && inDepartment != "") {
+    	// alert("成功")
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/stock/pidiao/save",
+            data: $('#signupForm').serialize(),// 你的formid
+            async: false,
+            error: function (request) {
+                parent.layer.alert("Connection error");
+            },
+            success: function (data) {
+                if (data.code == 0) {
+                    parent.layer.msg("操作成功");
+                    parent.reLoad();
+                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    parent.layer.close(index);
+
+                } else {
+                    parent.layer.alert(data.msg)
+                }
+
+            }
+        });
+    }
 }

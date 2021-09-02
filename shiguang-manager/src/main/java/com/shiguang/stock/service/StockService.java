@@ -3,6 +3,7 @@ package com.shiguang.stock.service;
 
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.*;
+import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.StockDO;
 
 import java.util.List;
@@ -123,5 +124,8 @@ public interface StockService {
 
     //【库存查询】
     List<StockDO> kccxList(Map<String, Object> map);
-
+    //确认收货
+    int updateStatus(StockDO stock);
+    //发出仓位库存减数量
+    int outPosionJ(StockDO stockDO);
 }

@@ -1,5 +1,7 @@
 package com.shiguang.stock.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,9 @@ import com.shiguang.mfrs.service.CompanyService;
 import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.mfrs.service.PositionService;
 import com.shiguang.product.domain.HcDO;
+import com.shiguang.stock.domain.OrderDO;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -55,6 +60,9 @@ public class PidiaoController {
 	//仓位
 	@Autowired
 	private PositionService positionService;
+	//库存
+	@Autowired
+	private StockService stockService;
 	@GetMapping()
 	@RequiresPermissions("stock:pidiao:pidiao")
 	String Pidiao(){
@@ -97,6 +105,13 @@ public class PidiaoController {
 		map.put("xsstate",0);
 		List<CompanyDO> companyList = companyService.list(map);
 		model.addAttribute("companyList", companyList);
+		//———获取当前登录用户的名称————
+		model.addAttribute("zhidanPeople", ShiroUtils.getUser().getName());
+		//———获取当前系统时间—————
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+		Date date = new Date();
+		String newDate = sdf.format(date);
+		model.addAttribute("danjuDay", newDate);
 		return "stock/pidiao/add";
 	}
 	//发出仓位
@@ -130,8 +145,8 @@ public class PidiaoController {
 		return outPositiion;
 	}
 	//跳转库存查询
-	@GetMapping("/selextkc")
-	String selextkc(Model model) {
+	@GetMapping("/selextkc/{outPosition}")
+	String selextkc(@PathVariable("outPosition") String outPosition,Model model) {
 		Map<String, Object> map = new HashMap<>();
 		//商品
 		List<GoodsDO> goodsDOList = goodsService.list(map);
@@ -140,6 +155,7 @@ public class PidiaoController {
 		map.put("xsstate", 0);
 		List<PositionDO> positionList = positionService.positionList(map);
 		model.addAttribute("positionList", positionList);
+		model.addAttribute("outPosition", outPosition);
 		return "/stock/pidiao/selectGoods";
 	}
 
@@ -158,11 +174,138 @@ public class PidiaoController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("stock:pidiao:add")
-	public R save( PidiaoDO pidiao){
-		if(pidiaoService.save(pidiao)>0){
-			return R.ok();
+	public R save( PidiaoDO pidiao,StockDO stockDO){
+		String pidiaoNumber=pidiao.getPidiaoNumber();
+		String zhidanPeople=pidiao.getZhidanPeople();
+		Date danjuDay=pidiao.getDanjuDay();
+		String outDepartment=pidiao.getOutDepartment();
+		String outPosition=pidiao.getOutPosition();
+		String inCompany=pidiao.getInCompany();
+		String inDepartment=pidiao.getInDepartment();
+		String inPosition=pidiao.getInPosition();
+		String beizhu=pidiao.getBeizhu();
+
+
+		String str = pidiao.getGoodsNum();
+		String[] name = str.split(",");
+		for (int i = 0; i < name.length; i++) {
+			PidiaoDO pidiaoDO = new PidiaoDO();
+			pidiaoDO.setPidiaoNumber(pidiaoNumber);
+			pidiaoDO.setZhidanPeople(zhidanPeople);
+			pidiaoDO.setDanjuDay(danjuDay);
+			pidiaoDO.setOutDepartmentid(outDepartment);
+			pidiaoDO.setOutPositionid(outPosition);
+			pidiaoDO.setInCompanyid(inCompany);
+			pidiaoDO.setInDepartmentid(inDepartment);
+			pidiaoDO.setInPositionid(inPosition);
+			pidiaoDO.setBeizhu(beizhu);
+
+
+			String goodsNum = name[i];
+			pidiaoDO.setGoodsNum(goodsNum);
+			String goodsName =pidiao.getGoodsName().split(",")[i];
+			pidiaoDO.setGoodsName(goodsName);
+			String factory =pidiao.getFactory().split(",")[i];
+			pidiaoDO.setFactory(factory);
+			String goodsCount =pidiao.getGoodsCount().split(",")[i];
+			pidiaoDO.setGoodsCount(goodsCount);
+			String useCount =pidiao.getUseCount().split(",")[i];
+			pidiaoDO.setUseCount(useCount);
+
+			String goodsCode =pidiao.getGoodsCode().split(",")[i];
+			pidiaoDO.setGoodsCode(goodsCode);
+			String useday =pidiao.getUseday().split(",")[i];
+			pidiaoDO.setUseday(useday);
+			String batch =pidiao.getBatch().split(",")[i];
+			pidiaoDO.setBatch(batch);
+			String zhuceNumber =pidiao.getZhuceNumber().split(",")[i];
+			pidiaoDO.setZhuceNumber(zhuceNumber);
+			String produceDay =pidiao.getProduceDay().split(",")[i];
+			pidiaoDO.setProduceDay(produceDay);
+			if(null != pidiao.getClasstype()){
+				String classtype =pidiao.getClasstype().split(",")[i];
+				pidiaoDO.setClasstype(classtype);
+			}else{
+				pidiaoDO.setClasstype("");
+			}
+			String goods =pidiao.getGoods().split(",")[i];
+			pidiaoDO.setGoods(goods);
+			String mfrsid =pidiao.getMfrsid().split(",")[i];
+			pidiaoDO.setMfrsid(mfrsid);
+			String brandname =pidiao.getBrandname().split(",")[i];
+			pidiaoDO.setBrandname(brandname);
+
+			//减库存
+			stockDO.setPositionId(pidiao.getOutPosition());
+			StockDO goodsNumList = stockService.haveNum(stockDO);
+			if (null != goodsNumList) {
+				String gdcount = goodsNumList.getGoodsCount();
+				Integer goodsCountNew = Integer.valueOf(useCount);
+				Integer gdcountNew = Integer.valueOf(gdcount);
+				Integer newGoodsCount = gdcountNew - goodsCountNew;
+				stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+				stockService.updateGoodsCount(stockDO);//修改数量
+			}
+
+			//加库存
+			String st = stockDO.getGoodsNum();
+			String[] name1 = st.split(",");
+			for (int i1 = 0; i1 < name1.length; i1++) {
+				stockDO.setPositionId(pidiao.getInPosition());
+				StockDO goodsList = stockService.haveNum(stockDO);
+				if (null != goodsList) {
+					String kuCountG = goodsList.getGoodsCount();
+					Integer kuNewCount = Integer.valueOf(useCount);
+					Integer kuCount = Integer.valueOf(kuCountG);
+					Integer kuNew = kuNewCount + kuCount;
+					stockDO.setGoodsCount(String.valueOf(kuNew));
+					stockService.updateGoodsCount(stockDO);//修改数量
+				} else {
+					String goodsNum1 = pidiao.getGoodsNum().split(",")[i];
+					stockDO.setGoodsNum(goodsNum1);
+					String goodsCode1 = pidiao.getGoodsCode().split(",")[i];
+					stockDO.setGoodsCode(goodsCode1);
+					String goodsName1 = pidiao.getGoodsName().split(",")[i];
+					stockDO.setGoodsName(goodsName1);
+					String goodsCount1 = pidiao.getUseCount().split(",")[i];
+					stockDO.setGoodsCount(goodsCount1);
+					String goodsType = pidiao.getGoods().split(",")[i];
+					stockDO.setGoodsType(Integer.valueOf(goodsType));
+					String mfrsid1 = pidiao.getMfrsid().split(",")[i];
+
+
+				}
+
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			pidiaoService.save(pidiaoDO);
+
 		}
-		return R.error();
+		return R.ok();
 	}
 	/**
 	 * 修改

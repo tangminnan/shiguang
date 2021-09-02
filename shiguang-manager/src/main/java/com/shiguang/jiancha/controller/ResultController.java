@@ -5,12 +5,15 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.service.*;
+import com.sun.mail.imap.protocol.ID;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,17 +67,17 @@ public class ResultController {
         return "jiancha/result/result";
     }
 
-    @ResponseBody
-    @GetMapping("/list")
-    @RequiresPermissions("jiancha:result:result")
-    public PageUtils list(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<ResultDO> resultList = resultService.list(query);
-        int total = resultService.count(query);
-        PageUtils pageUtils = new PageUtils(resultList, total);
-        return pageUtils;
-    }
+//    @ResponseBody
+//    @GetMapping("/list")
+//    @RequiresPermissions("jiancha:result:result")
+//    public PageUtils list(@RequestParam Map<String, Object> params) {
+//        //查询列表数据
+//        Query query = new Query(params);
+//        List<ResultDO> resultList = resultService.list(query);
+//        int total = resultService.count(query);
+//        PageUtils pageUtils = new PageUtils(resultList, total);
+//        return pageUtils;
+//    }
 
     @GetMapping("/add")
     @RequiresPermissions("jiancha:result:add")
@@ -168,6 +171,31 @@ public class ResultController {
     public R remove(@RequestParam("ids[]") Long[] ids) {
         resultService.batchRemove(ids);
         return R.ok();
+    }
+
+    /**
+     * 所有验光信息
+     */
+    @ResponseBody
+    @GetMapping("/shujulist")
+    public List<ResultDO> shujulist(String cardNumber,Model model) {
+        //查询列表数据
+        Map<String, Object> map = new HashMap<>();
+        map.put("cardNumber",cardNumber);
+        List<ResultDO> resultList = resultService.shujulist(map);
+        model.addAttribute("resultList",resultList);
+
+        return resultList;
+    }
+ /**
+     * 所有验光信息
+     */
+    @ResponseBody
+    @GetMapping("/chufangall/{ptometryNumber}")
+    @RequiresPermissions("jiancha:result:chufangall")
+    String  chufangall(@PathVariable("ptometryNumber") String ptometryNumber,Model model) {
+        model.addAttribute("ptometryNumber",ptometryNumber);
+        return "optometryNew/chufangall";
     }
 
 }

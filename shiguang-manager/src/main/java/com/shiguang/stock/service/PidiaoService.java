@@ -28,7 +28,9 @@ public interface PidiaoService {
 	int remove(Long id);
 
 	int batchRemove(Long[] ids);
-
+	//发出接收仓位
 	List<PidiaoDO> outPosition(Map<String, Object> map);
+	//发出接收部门
 	List<PidiaoDO> indepartment(Map<String, Object> map);
+
 }

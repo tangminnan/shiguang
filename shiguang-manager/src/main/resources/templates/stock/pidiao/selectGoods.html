@@ -46,14 +46,6 @@
                         <input type="radio" name="classtype" value="2" /> 订做片
                     </label>
                 </div>
-                <!--<div id="yx" style="display: none">-->
-                <!--<label class="radio-inline">-->
-                <!--<input type="radio" name="classtype"  value="3" /> 成品片-->
-                <!--</label>-->
-                <!--<label class="radio-inline">-->
-                <!--<input type="radio" name="classtype" value="4" /> 订做片-->
-                <!--</label>-->
-                <!--</div>-->
             </td>
             <td>制造商：</td>
             <td>
@@ -68,37 +60,26 @@
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
         </tr>
-        <tr>
-            <td>仓位名称：</td>
-            <td>
-                <div class="col-sm-8">
-                    <label class="radio-inline">
-                        <input type="radio" name="xsstate" value="0" checked onchange="positionChange()"/> 启用仓
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="xsstate" value="1" onchange="positionChange()"/> 停用仓
-                    </label>
-                </div>
-                <span>
-					<select id="positionName" name="positionName">
-						<option value="">--请选择--</option>
-					</select>
-				</span>
-            </td>
-            <!--<td>经销方式：</td>-->
+        <!--<tr>-->
+            <!--<td>仓位名称：</td>-->
             <!--<td>-->
-            <!--<select>-->
-            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-            <!--</select>-->
+                <!--<div class="col-sm-8">-->
+                    <!--<label class="radio-inline">-->
+                        <!--<input type="radio" name="xsstate" value="0" checked onchange="positionChange()"/> 启用仓-->
+                    <!--</label>-->
+                    <!--<label class="radio-inline">-->
+                        <!--<input type="radio" name="xsstate" value="1" onchange="positionChange()"/> 停用仓-->
+                    <!--</label>-->
+                <!--</div>-->
+                <!--<span>-->
+					<!--<select id="positionName" name="positionName">-->
+						<!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+					<!--</select>-->
+				<!--</span>-->
             <!--</td>-->
-            <!--<td>商品状态</td>-->
-            <!--<td>-->
-            <!--<select>-->
-            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-            <!--</select>-->
-            <!--</td>-->
-        </tr>
+        <!--</tr>-->
         <tr>
+            <input id="outPosition" type="text" th:value="${outPosition}"/>
             <td>标准零售价格：</td>
             <td>
                 <input id="retailPrice" name="retailPrice" type="text"/> ~ <input name="retailPrice2" type="text"/>
@@ -126,18 +107,22 @@
             <td>商品名称</td>
             <td>数量</td>
             <td>商品类别</td>
+            <td>型号</td>
             <td>制造商</td>
             <td>标准零售价</td>
-            <td>原价合计</td>
-            <td>成本价格</td>
-            <td>成本合计</td>
-            <td>批发价格</td>
-            <td>批发合计</td>
+            <!--<td>原价合计</td>-->
+            <!--<td>成本价格</td>-->
+            <!--<td>成本合计</td>-->
+            <!--<td>批发价格</td>-->
+            <!--<td>批发合计</td>-->
             <td>仓位</td>
             <td>批号</td>
             <td>注册证号</td>
             <td>生产日期</td>
             <td>效期</td>
+            <td style="display: none">镜片类型</td>
+            <td style="display: block">制造商</td>
+            <td style="display: block">品牌</td>
         </tr>
         <!--<tr>-->
         <!--<td colspan="3">页内合计：</td>-->
@@ -157,17 +142,19 @@
     $(document).ready(function () {
         var xsstate=$("input[name='xsstate']:checked").val();
         var positionName = $('#positionName option:selected').text();
-        var positionNames = ""
+        var positionNames = "";
         if (positionName == "--请选择--") {
             positionName = positionNames;
         }
+        var outPosition = document.getElementById('outPosition').value;
         $(".cw").remove();
         $.ajax({
             url: '/kucun/stock/selectPosion',
             type: 'post',
             dataType: "json",
             data: {
-                'xsstate': xsstate,
+                'xsstate': xsstate
+
             },
             success: function (position) {
                 for (var i = 0; i < position.length; i++) {
@@ -182,10 +169,10 @@
             dataType: "json",
             data: {
                 'xsstate': xsstate,
-                'positionName': positionName
+                'positionName': positionName,
+                'outPosition': outPosition,
             },
             success: function (xml) {
-                // layer.alert(JSON.stringify(xml))
                 for (var i = 0; i < xml.length; i++) {
                     $(".buyBtns").append("<tr class='val'> " +
                         "<td><input name='one'  type=\"checkbox\"/></td>\n" +
@@ -194,18 +181,22 @@
                         "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
                         "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
                         "<td name='gdname'>" + xml[i].gdname + "</td>\n" +
+                        "<td name='factory'>" + xml[i].factory + "</td>\n" +
                         "<td name='mfrsname'>" + xml[i].mfrsname + "</td>\n" +
                         "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                        "<td name='priceSum'>" + xml[i].priceSum + "</td>\n" +
-                        "<td name='costPrice'>" + xml[i].costPrice + "</td>\n" +
-                        "<td name='costSum'>" + xml[i].costSum + "</td>\n" +
-                        "<td name='wholePrice'>" + xml[i].wholePrice + "</td>\n" +
-                        "<td name='wholeSum'>" + xml[i].wholeSum + "</td>\n" +
+                        "<td style='display: none' name='priceSum'>" + xml[i].priceSum + "</td>\n" +
+                        "<td style='display: none' name='costPrice'>" + xml[i].costPrice + "</td>\n" +
+                        "<td style='display: none' name='costSum'>" + xml[i].costSum + "</td>\n" +
+                        "<td style='display: none' name='wholePrice'>" + xml[i].wholePrice + "</td>\n" +
+                        "<td style='display: none' name='wholeSum'>" + xml[i].wholeSum + "</td>\n" +
                         "<td name='positionName'>" + xml[i].positionName + "</td>" +
                         "<td name='batch'>" + xml[i].batch + "</td>" +
                         "<td name='zhuceNumber'>" + xml[i].zhuceNumber + "</td>" +
                         "<td name='produceDay'>" + xml[i].produceDay + "</td>" +
                         "<td name='useday'>" + xml[i].useday + "</td>" +
+                        "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
+                        "<td name='mfrsid' style='display: block'>" + xml[i].mfrsid + "</td>" +
+                        "<td name='brandname' style='display: block'>" + xml[i].brandname + "</td>" +
                         "</tr>");
                 }
             }
@@ -214,9 +205,8 @@
     <!--选择制造商-->
     function choiceMfrs() {
         var goodsid = document.getElementById('goodsType').value;
-        // layer.alert(goodsid);
         if (goodsid == "") {
-            layer.layer.alert("请选择商品类型！");
+            layer.alert("请选择商品类型！");
         } else {
             //选择镜架
             var toIndex = layer.open({
@@ -241,9 +231,8 @@
     function choiceBrand() {
         var goodsid = document.getElementById('goodsType').value;
         var mfrsid = document.getElementById('mfrsid').value;
-        // layer.alert(goodsid);
         if (mfrsid == "") {
-            layer.layer.alert("请选择制造商！");
+            layer.alert("请选择制造商！");
         } else {
             //选择镜架
             var toIndex = layer.open({
@@ -311,18 +300,18 @@
         } else if (goodsType == 9){
             var  classtype ="";
         }
-        layer.alert(classtype +"类型");
+        // layer.alert(classtype +"类型");
         var mfrsname = $("#mfrsname").val();
         var brandname = $("#brandname").val();
         var retailPrice = $("*[name='retailPrice']").val();
         var retailPrice2 = $("*[name='retailPrice2']").val();
         var xsstate=$("input[name='xsstate']:checked").val();
-        layer.alert(xsstate +"仓位");
         var positionName = $('#positionName option:selected').text();
         var positionNames = ""
         if (positionName == "--请选择--") {
             positionName = positionNames;
         }
+        var outPosition = document.getElementById('outPosition').value;
         $(".val").remove();
         $.ajax({
             url: '/kucun/stock/selectKc',
@@ -339,7 +328,8 @@
                 'retailPrice2': retailPrice2,
                 'xsstate': xsstate,
                 'positionName': positionName,
-                'classtype': classtype
+                'classtype': classtype,
+                'outPosition': outPosition
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
@@ -352,16 +342,20 @@
                         "<td name='gdname'>" + xml[i].gdname + "</td>\n" +
                         "<td name='mfrsname'>" + xml[i].mfrsname + "</td>\n" +
                         "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                        "<td name='priceSum'>" + xml[i].priceSum + "</td>\n" +
-                        "<td name='costPrice'>" + xml[i].costPrice + "</td>\n" +
-                        "<td name='costSum'>" + xml[i].costSum + "</td>\n" +
-                        "<td name='wholePrice'>" + xml[i].wholePrice + "</td>\n" +
-                        "<td name='wholeSum'>" + xml[i].wholeSum + "</td>\n" +
+                        "<td style='display: none' name='priceSum'>" + xml[i].priceSum + "</td>\n" +
+                        "<td style='display: none' name='costPrice'>" + xml[i].costPrice + "</td>\n" +
+                        "<td style='display: none' name='costSum'>" + xml[i].costSum + "</td>\n" +
+                        "<td style='display: none' name='wholePrice'>" + xml[i].wholePrice + "</td>\n" +
+                        "<td style='display: none' name='wholeSum'>" + xml[i].wholeSum + "</td>\n" +
                         "<td name='positionName'>" + xml[i].positionName + "</td>" +
                         "<td name='batch'>" + xml[i].batch + "</td>" +
                         "<td name='zhuceNumber'>" + xml[i].zhuceNumber + "</td>" +
                         "<td name='produceDay'>" + xml[i].produceDay + "</td>" +
                         "<td name='useday'>" + xml[i].useday + "</td>" +
+                        "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
+                        "<td name='mfrsid' style='display: block'>" + xml[i].mfrsid + "</td>" +
+                        "<td name='brandname' style='display: block'>" + xml[i].brandname + "</td>" +
+
                         "</tr>");
                 }
             }

@@ -29,4 +29,6 @@ public interface ResultDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	List<ResultDO> shujulist(Map<String, Object> map);
 }

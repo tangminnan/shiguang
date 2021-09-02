@@ -18,19 +18,22 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PidiaoDao {
 
 	PidiaoDO get(Long id);
-	
-	List<PidiaoDO> list(Map<String,Object> map);
-	
-	int count(Map<String,Object> map);
-	
+
+	List<PidiaoDO> list(Map<String, Object> map);
+
+	int count(Map<String, Object> map);
+
 	int save(PidiaoDO pidiao);
-	
+
 	int update(PidiaoDO pidiao);
-	
+
 	int remove(Long id);
-	
+
 	int batchRemove(Long[] ids);
 
+	//发出接收仓位
 	List<PidiaoDO> outPosition(Map<String, Object> map);
+
+	//发出接收部门
 	List<PidiaoDO> indepartment(Map<String, Object> map);
 }

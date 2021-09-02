@@ -1,6 +1,7 @@
 package com.shiguang.jiancha.service;
 
 import com.shiguang.jiancha.domain.TryresultsDO;
+import com.shiguang.member.domain.MemberDO;
 
 import java.util.List;
 import java.util.Map;
@@ -32,4 +33,6 @@ public interface TryresultsService {
     int batchRemove(Long[] ids);
     //查询医生
     List<TryresultsDO> listDoctor(Map<String, Object> map);
+
+    List<TryresultsDO>  getTryresult(String cardNumber);
 }

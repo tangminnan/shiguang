@@ -51,5 +51,9 @@ public class ResultServiceImpl implements ResultService {
 	public int batchRemove(Long[] ids){
 		return resultDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public List<ResultDO> shujulist(Map<String, Object> map) {
+		return resultDao.shujulist(map);
+	}
 }

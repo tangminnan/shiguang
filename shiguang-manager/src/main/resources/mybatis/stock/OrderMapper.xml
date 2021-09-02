@@ -6,16 +6,18 @@
     <select id="get" resultType="com.shiguang.stock.domain.OrderDO">
 		select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,`price_sum`,
 		`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_id`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,
-		`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,`batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,`factory`
+		`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,`batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,
+		`factory`,`status`,`username`
 		 from stock_order where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.stock.domain.OrderDO">
         select
         s.`id`,s.`goods_num`,s.`goods_code`,s.`goods_name`,s.`goods_count`,s.`goods_type`,s.`mfrsid`,s.`brandname`,s.`retail_price`,
-        s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`,s.`position_id`, s.`position_name`, s.`create_time`,
+        s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`,s.`position_id`, po.`position_name`, s.`create_time`,
         s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
-        s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`,s.`classtype`,s.`factory`
+        s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`,s.`classtype`,
+        s.`factory`,s.`status`,s.`username`
         from stock_order s left join c_mfrs m on s.mfrsid=m.mfrsid
         left join c_position po on s.position_id=po.position_id
         left join department d on po.depart_number= d.depart_number
@@ -54,6 +56,8 @@
             <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
             <if test="classtype != null and classtype != ''">and s.classtype = #{classtype} </if>
             <if test="factory != null and factory != ''">and s.factory = #{factory} </if>
+            <if test="status != null and status != ''">and s.status = #{status} </if>
+            <if test="username != null and username != ''">and s.username = #{username} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -107,6 +111,8 @@
             <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
             <if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
             <if test="factory != null and factory != ''"> and s.factory = #{factory} </if>
+            <if test="status != null and status != ''"> and s.status = #{status} </if>
+            <if test="username != null and username != ''"> and s.username = #{username} </if>
         </where>
     </select>
 
@@ -143,7 +149,9 @@
 			`produce_day`,
 			`useday`,
 			`classtype`,
-			`factory`
+			`factory`,
+			`status`,
+			`username`
 		)
 		values
 		(
@@ -177,7 +185,9 @@
 			#{produceDay},
 			#{useday},
 			#{classtype},
-			#{factory}
+			#{factory},
+			#{status},
+			#{username}
 		)
 	</insert>
 
@@ -214,7 +224,9 @@
             <if test="produceDay != null">`produce_day` = #{produceDay}, </if>
             <if test="useday != null">`useday` = #{useday} ,</if>
             <if test="classtype != null">`classtype` = #{classtype}, </if>
-            <if test="factory != null">`factory` = #{factory} </if>
+            <if test="factory != null">`factory` = #{factory} ,</if>
+            <if test="status != null">`status` = #{status} </if>
+            <if test="username != null">`username` = #{username} </if>
         </set>
         where id = #{id}
     </update>
@@ -232,4 +244,42 @@
     <select id="getCode" resultType="com.shiguang.stock.domain.OrderDO">
 		select goods_name,goods_code,goods_count from stock_order where danju_number = #{danjuNumber}
 	</select>
+    <update id="updateStatus" parameterType="com.shiguang.stock.domain.OrderDO">
+        update stock_order
+        <set>
+            <if test="goodsNum != null">`goods_num` = #{goodsNum},</if>
+            <if test="goodsCode != null">`goods_code` = #{goodsCode},</if>
+            <if test="goodsName != null">`goods_name` = #{goodsName},</if>
+            <if test="goodsCount != null">`goods_count` = #{goodsCount},</if>
+            <if test="goodsType != null">`goods_type` = #{goodsType},</if>
+            <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
+            <if test="brandname != null">`brandname` = #{brandname},</if>
+            <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
+            <if test="priceSum != null">`price_sum` = #{priceSum},</if>
+            <if test="costPrice != null">`cost_price` = #{costPrice},</if>
+            <if test="costSum != null">`cost_sum` = #{costSum},</if>
+            <if test="wholePrice != null">`whole_price` = #{wholePrice},</if>
+            <if test="wholeSum != null">`whole_sum` = #{wholeSum},</if>
+            <if test="positionId != null">`position_id` = #{positionId},</if>
+            <if test="positionName != null">`position_name` = #{positionName},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="orderNumber != null">`order_number` = #{orderNumber},</if>
+            <if test="yundanNumber != null">`yundan_number` = #{yundanNumber},</if>
+            <if test="zhidanPeople != null">`zhidan_people` = #{zhidanPeople},</if>
+            <if test="danjuDay != null">`danju_day` = #{danjuDay},</if>
+            <if test="tuihuoNumber != null">`tuihuo_number` = #{tuihuoNumber},</if>
+            <if test="factoryNumber != null">`factory_number` = #{factoryNumber},</if>
+            <if test="beizhu != null">`beizhu` = #{beizhu},</if>
+            <if test="unit != null">`unit` = #{unit},</if>
+            <if test="batch != null">`batch` = #{batch}, </if>
+            <if test="zhuceNumber != null">`zhuce_number` = #{zhuceNumber}, </if>
+            <if test="produceDay != null">`produce_day` = #{produceDay}, </if>
+            <if test="useday != null">`useday` = #{useday} ,</if>
+            <if test="classtype != null">`classtype` = #{classtype}, </if>
+            <if test="factory != null">`factory` = #{factory} ,</if>
+            <if test="status != null">`status` = #{status}, </if>
+            <if test="username != null">`username` = #{username} </if>
+        </set>
+        where danju_number = #{danjuNumber}
+    </update>
 </mapper>

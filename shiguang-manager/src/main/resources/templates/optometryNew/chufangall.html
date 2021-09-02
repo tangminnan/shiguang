@@ -1,0 +1,1268 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>检查结论</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body>
+<form class="form-horizontal m-t" id="jielun">
+
+    <div class="topTab">
+        <ul>
+            <!--<li><a href="quguangjiancha.html">屈光检查</a></li>-->
+            <li class="on"><a href="#">检查结论</a></li>
+        </ul>
+    </div>
+
+    <!--验光信息-->
+    <div class="m40 msgBox">
+        <h3>验光信息</h3>
+        <ul>
+            <li>验光号：<input name="ptometryNumber" th:value="${ptometryNumber}" type="text"/></li>
+            <li>验光师/医生：<input name="optometryName" th:value="${tryresultsDO.optometryName}" type="text"/></li>
+            <li>日期：<input input name="createTime" th:value="${newtime}" type="text"/></li>
+        </ul>
+    </div>
+    <!--顾客资料-->
+    <div class="m40 msgBox">
+        <h3>顾客资料</h3>
+        <ul>
+            <li>卡号：<input name="cardNumber" th:value="${memberDO.cardNumber}" type="text"/></li>
+            <li>姓名：<input name="name" th:value="${memberDO.name}" type="text"/></li>
+            <li>性别：<input name="sexx" th:value="${memberDO.sexx}" class="short" type="text"/></li>
+            <li>年龄：<input name="age" th:value="${memberDO.age}" class="short" type="text"/></li>
+            <li>电话：<input name="phone1" th:value="${memberDO.phone1}" type="text"/></li>
+            <input id="memberId" name="memberId" th:value="${memberDO.id}" type="hidden">
+            <input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}" type="hidden">
+            <input id="memname" name="memname" th:value="${memberDO.name}" type="hidden">
+            <input id="memberNumber" name="memberNumber" th:value="${memberDO.cardNumber}" type="hidden">
+            <li><span onclick="getMemberDetail()">详情</span></li>
+        </ul>
+    </div>
+    <!--处方-->
+    <div class="m40 tabS">
+        <h3>处方</h3>
+        <table class="tabI tabMB20" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="w170">处方类型：</td>
+                <td>
+                    <select class="select_value">
+                        <option></option>
+                        <option value="2">远用</option>
+                        <option value="1">近用</option>
+                        <option value="3">渐进/双光</option>
+                        <option value="5">软性角膜接触镜</option>
+                        <option value="4">中用</option>
+                        <option value="7">视觉训练</option>
+                        <option value="8">角膜接触镜VST</option>
+                        <option value="9">角膜接触镜CRT</option>
+                        <option value="10">RGP</option>
+                        <option value="11">药品</option>
+                    </select>
+                    <span class="maxL" style="margin: 10px" id="xuanze">
+                                <input class="button_true" type="button" value="选择"/>
+                            </span>
+
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <table id="tab1" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="kuangjiayy">
+            <tr>
+                <td class="PL30" colspan="2">1 框架--远用
+                    <input type="button" class="input_del" id="remove1" value="删 除"/>
+                </td>
+                <td style="text-align: right" colspan="7">
+                    医生：
+                    <select name="kjyyDoctor">
+                        <option></option>
+                        <option value="孙伟">孙伟</option>
+                        <option value="维护二">维护二</option>
+                    </select>
+                    验光师：
+                    <select name="kjyyOptometryName">
+                        <option value="张三">张三</option>
+                        <option value="周五">周五</option>
+                        <option value="陈静">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>三棱镜</td>
+                <td>基底</td>
+                <td>远用瞳距(mm)</td>
+                <td>瞳高(mm)</td>
+                <td>远用VA</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="kjyySphod" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjyyCylod" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"     name="kjyyAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.prismRighttry}"   name="kjyyPrismod" class="short" type="text"/>
+                    △
+                </td>
+                <td>
+                    <select id="kjyyJdod" name="kjyyJdod" th:value="${tryresultsDO.jdrTry}">
+                        <option value=""></option>
+                        <option value="内">内</option>
+                        <option value="外">外</option>
+                        <option value="上">上</option>
+                        <option value="下">下</option>
+                    </select>
+                    <input id="kjyyJdods" name="kjyyJdods" th:value="${tryresultsDO.jdrTry}"
+                           type="hidden">
+                </td>
+                <td><input th:value="${tryresultsDO.yuanRrty}" name="kjyyYytjod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightRighttry}" name="kjyyTgod" type="text"/></td>
+                <td><input name="kjyyVaod" type="text"/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input th:value="${tryresultsDO.sphereLefttry}"    name="kjyySphos" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderLefttry}" name="kjyyCylos" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"    name="kjyyAxialos" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.prismLefttry}"    name="kjyyPrismos" class="short" type="text"/> △
+                </td>
+                <td>
+                    <select name="kjyyJdos" th:value="${tryresultsDO.jdlTry}">
+                        <option value=""></option>
+                        <option value="内">内</option>
+                        <option value="外">外</option>
+                        <option value="上">上</option>
+                        <option value="下">下</option>
+                    </select>
+                    <input id="kjyyJdoss" name="kjyyJdoss" th:value="${tryresultsDO.jdlTry}"
+                           type="hidden">
+                </td>
+                <td><input th:value="${tryresultsDO.yuanLrty}"      name="kjyyYytjos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightLefttry}" name="kjyyTgos" type="text"/></td>
+                <td><input name="kjyyVaos" type="text"/></td>
+            </tr>
+            <tr>
+                <td rowspan="2" colspan="1">建议镜片材质:</td>
+                <td rowspan="1" colspan="2" class="daK">
+                    <select id="kjyyJpcz" name="kjyyJpcz">
+                        <option></option>
+                        <option value="老花渐进">老花渐进</option>
+                        <option value="青少年渐进">青少年渐进</option>
+                        <option value="非球面树脂">老非球面树脂花渐进</option>
+                        <option value="抗辐射镜片">抗辐射镜片</option>
+                        <option value="染色镜片">染色镜片</option>
+                        <option value="变色镜片">变色镜片</option>
+                        <option value="普通树脂">普通树脂</option>
+                        <option value="高折玻璃">高折玻璃</option>
+                        <option value="玻璃片">玻璃片</option>
+                        <option value="树脂抗疲劳镜片">树脂抗疲劳镜片</option>
+                        <option value="树脂偏光镜片（茶/灰）">树脂偏光镜片（茶/灰）</option>
+                    </select>
+                </td>
+                <td rowspan="1" colspan="1">处理方式:</td>
+                <td rowspan="1" colspan="2" class="daK">
+                    <select id="kjyyClfs" name="kjyyClfs">
+                        <option></option>
+                        <option value="足矫">足矫</option>
+                        <option value="欠矫">欠矫</option>
+                        <option value="过矫">过矫</option>
+                        <option value="附加棱镜">附加棱镜</option>
+                        <option value="调整">调整</option>
+                        <option value="平衡">平衡</option>
+                        <option value="医嘱">医嘱</option>
+                        <option value="全矫">全矫</option>
+                        <option value="患者要求减度">患者要求减度</option>
+                    </select>
+                </td>
+                <td colspan="3"></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td rowspan="1" colspan="1">中距离：</td>
+                <td rowspan="1" colspan="2" class="daK">
+                    <label><input name="kjyyJykj" value="建议镜框" type="checkbox"/> 建议镜框：</label>
+                    <select style="width: 30%;" id="kjyyKjlx" name="kjyyKjlx">
+                        <option></option>
+                        <option value="打孔">打孔</option>
+                        <option value="拉丝">拉丝</option>
+                        <option value="板材">板材</option>
+                        <option value="框高">框高</option>
+                    </select>
+                    <input name="kjyyText" style="width: 40%;" type="text"/>
+                </td>
+                <td rowspan="1" colspan="1">备注</td>
+                <td rowspan="1" colspan="2"><textarea name="kjyyBeizhu" rows="3"></textarea></td>
+                <td colspan="3"></td>
+            </tr>
+            <!--<tr>-->
+            <!--<td rowspan="1" colspan="1">备注</td>-->
+            <!--<td rowspan="1" colspan="2"><textarea rows="3"></textarea></td>-->
+            <!--</tr>-->
+
+            </tbody>
+        </table>
+
+        <table id="tab2" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="kuangjiajy">
+            <tr>
+                <td class="PL30" colspan="2">2 框架--近用
+                    <input type="button" class="input_del" id="remove2" value="删 除"/></td>
+                <td style="text-align: right" colspan="7">
+                    医生：
+                    <select name="kjjyDoctor">
+                        <option></option>
+                        <option value="孙伟">孙伟</option>
+                        <option value="维护二">维护二</option>
+                    </select>
+                    验光师：
+                    <select name="kjjyOptometryName">
+                        <option value="张三">张三</option>
+                        <option value="周五">周五</option>
+                        <option value="陈静">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>三棱镜</td>
+                <td>基底</td>
+                <td>远用瞳距(mm)</td>
+                <td>瞳高(mm)</td>
+                <td>远用VA</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}" name="kjjySphod" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjjyCylod" type="text"onblur="zhengfu(this)"
+                           onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}" name="kjjyAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.prismRighttry}" name="kjjyPrismod" class="short" type="text"/> △
+                </td>
+                <td>
+                    <select name="kjjyJdod" th:value="${tryresultsDO.jdrTry}">
+                        <option value=""></option>
+                        <option value="内">内</option>
+                        <option value="外">外</option>
+                        <option value="上">上</option>
+                        <option value="下">下</option>
+                    </select>
+                    <input id="kjjyJdods" name="kjjyJdods" th:value="${tryresultsDO.jdrTry}"
+                           type="hidden">
+                </td>
+                <td><input th:value="${tryresultsDO.yuanRrty}"name="kjjyYytjod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightRighttry}"name="kjjyTgod" type="text"/></td>
+                <td><input name="kjjyVaod" type="text"/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input th:value="${tryresultsDO.sphereLefttry}"  name="kjjySphos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderLefttry}"name="kjjyCylos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"   name="kjjyAxialos" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.prismLefttry}"   name="kjjyPrismos" class="short" type="text"/> △</td>
+                <td>
+                    <select name="kjjyJdos" th:value="${tryresultsDO.jdlTry}" >
+                        <option value=""> </option>
+                        <option value="内">内</option>
+                        <option value="外">外</option>
+                        <option value="上">上</option>
+                        <option value="下">下</option>
+                    </select>
+                    <input id="kjjyJdoss" name="kjjyJdoss" th:value="${tryresultsDO.jdlTry}"
+                           type="hidden">
+                </td>
+                <td><input  th:value="${tryresultsDO.yuanLrty}"       name="kjjyYytjos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.heightLefttry}"  name="kjjyTgos" type="text"/></td>
+                <td><input name="kjjyVaos" type="text"/></td>
+            </tr>
+            <tr>
+                <td rowspan="2" colspan="1">建议镜片材质:</td>
+                <td rowspan="1" colspan="2" class="daK">
+                    <select id="kjjyJpcz" name="kjjyJpcz">
+                        <option></option>
+                        <option value="老花渐进">老花渐进</option>
+                        <option value="青少年渐进">青少年渐进</option>
+                        <option value="非球面树脂">老非球面树脂花渐进</option>
+                        <option value="抗辐射镜片">抗辐射镜片</option>
+                        <option value="染色镜片">染色镜片</option>
+                        <option value="变色镜片">变色镜片</option>
+                        <option value="普通树脂">普通树脂</option>
+                        <option value="高折玻璃">高折玻璃</option>
+                        <option value="玻璃片">玻璃片</option>
+                        <option value="树脂抗疲劳镜片">树脂抗疲劳镜片</option>
+                        <option value="树脂偏光镜片（茶/灰）">树脂偏光镜片（茶/灰）</option>
+                    </select>
+                </td>
+                <td rowspan="1" colspan="1">处理方式:</td>
+                <td rowspan="1" colspan="2" class="daK">
+                    <select id="kjjyClfs" name="kjjyClfs">
+                        <option></option>
+                        <option value="足矫">足矫</option>
+                        <option value="欠矫">欠矫</option>
+                        <option value="过矫">过矫</option>
+                        <option value="附加棱镜">附加棱镜</option>
+                        <option value="调整">调整</option>
+                        <option value="平衡">平衡</option>
+                        <option value="医嘱">医嘱</option>
+                        <option value="全矫">全矫</option>
+                        <option value="患者要求减度">患者要求减度</option>
+                    </select>
+                </td>
+                <td colspan="3"></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td rowspan="1" colspan="1">中距离：</td>
+                <td rowspan="1" colspan="2" class="daK">
+                    <label><input name="kjjyJykj" value="建议镜框" type="checkbox"/> 建议镜框：</label>
+                    <select style="width: 30%;" id="kjjyKjlx" name="kjjyKjlx">
+                        <option></option>
+                        <option value="打孔">打孔</option>
+                        <option value="拉丝">拉丝</option>
+                        <option value="板材">板材</option>
+                        <option value="框高">框高</option>
+                    </select>
+                    <input name="kjjyText" style="width: 40%;" type="text"/>
+                </td>
+                <td rowspan="1" colspan="1">备注</td>
+                <td rowspan="1" colspan="2"><textarea name="kjjyBeizhu" rows="3"></textarea></td>
+                <td colspan="3"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table id="tab3" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="jianjsg">
+            <tr>
+                <td class="PL30" colspan="2">3
+                    框架--双光/渐进 <input type="button" class="input_del" id="remove3" value="删 除"/>
+                </td>
+                <td style="text-align: right" colspan="8">
+                    医生：
+                    <select name="sgjjDoctor">
+                        <option></option>
+                        <option value="孙伟">孙伟</option>
+                        <option value="维护二">维护二</option>
+                    </select>
+                    验光师：
+                    <select name="sgjjOptometryName">
+                        <option value="张三">张三</option>
+                        <option value="周五">周五</option>
+                        <option value="陈静">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>Add</td>
+                <td>远用瞳距(mm)</td>
+                <td>近用瞳距(mm)</td>
+                <td>瞳高(mm)</td>
+                <td>远用VA</td>
+                <td>近用VA</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"  name="sgjjSphod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}"name="sgjjCylod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"   name="sgjjAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input  th:value="${tryresultsDO.addRighttry}"     name="sgjjAddod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.yuanRrty}"        name="sgjjYytjod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.nearRighttry}"   name="sgjjJytjod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.heightLefttry}"   name="sgjjTgod" type="text"/></td>
+                <td><input  name="sgjjYyvaod" type="text"/></td>
+                <td><input  name="sgjjJyvaod" type="text"/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input   th:value="${tryresultsDO.sphereLefttry}"  name="sgjjSphos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input   th:value="${tryresultsDO.cylinderLefttry}"name="sgjjCylos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input   th:value="${tryresultsDO.axialLefttry}"   name="sgjjAxialos" type="text"onblur="zhouxiang(this)"
+                             onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input    th:value="${tryresultsDO.addLefttry}"    name="sgjjAddos" type="text"/></td>
+                <td><input    th:value="${tryresultsDO.yuanLrty}"       name="sgjjYytjos" type="text"/></td>
+                <td><input    th:value="${tryresultsDO.nearLefttry}"   name="sgjjJytjos" type="text"/></td>
+                <td><input    th:value="${tryresultsDO.heightLefttry}"  name="sgjjTgos" type="text"/></td>
+                <td><input  name="sgjjYyvaos" type="text"/></td>
+                <td><input  name="sgjjJyvaos" type="text"/></td>
+            </tr>
+            <tr>
+                <td rowspan="2" colspan="1">建议镜片材质:</td>
+                <td rowspan="1" colspan="3" class="daK">
+                    <select name="sgjjJpcz">
+                        <option></option>
+                        <option value="老花渐进">老花渐进</option>
+                        <option value="青少年渐进">青少年渐进</option>
+                        <option value="非球面树脂">老非球面树脂花渐进</option>
+                        <option value="抗辐射镜片">抗辐射镜片</option>
+                        <option value="染色镜片">染色镜片</option>
+                        <option value="变色镜片">变色镜片</option>
+                        <option value="普通树脂">普通树脂</option>
+                        <option value="高折玻璃">高折玻璃</option>
+                        <option value="玻璃片">玻璃片</option>
+                        <option value="树脂抗疲劳镜片">树脂抗疲劳镜片</option>
+                        <option value="树脂偏光镜片（茶/灰）">树脂偏光镜片（茶/灰）</option>
+                    </select>
+                </td>
+                <td rowspan="1" colspan="1">处理方式:</td>
+                <td rowspan="1" colspan="3" class="daK">
+                    <select name="sgjjClfs">
+                        <option></option>
+                        <option value="足矫">足矫</option>
+                        <option value="欠矫">欠矫</option>
+                        <option value="过矫">过矫</option>
+                        <option value="附加棱镜">附加棱镜</option>
+                        <option value="调整">调整</option>
+                        <option value="平衡">平衡</option>
+                        <option value="医嘱">医嘱</option>
+                        <option value="全矫">全矫</option>
+                        <option value="患者要求减度">患者要求减度</option>
+                    </select>
+                </td>
+                <td colspan="3"></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td rowspan="1" colspan="1">中距离：</td>
+                <td rowspan="1" colspan="3" class="daK">
+                    <label><input name="sgjjJykj" value="建议镜框" type="checkbox"/> 建议镜框：</label>
+                    <select style="width: 30%;" name="sgjjKjlx">
+                        <option></option>
+                        <option value="打孔">打孔</option>
+                        <option value="拉丝">拉丝</option>
+                        <option value="板材">板材</option>
+                        <option value="框高">框高</option>
+                    </select>
+                    <input name="sgjjText" style="width: 40%;" type="text"/>
+                </td>
+                <td rowspan="1" colspan="1">备注</td>
+                <td rowspan="1" colspan="2"><textarea name="sgjjBeizhu" rows="3"></textarea></td>
+                <td colspan="3"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table id="tab4" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="ruanxjmjcj">
+            <tr>
+                <td class="PL30" colspan="2">4 软性角膜接触镜 <input type="button" class="input_del" id="remove4" value="删 除"/>
+                </td>
+                <td style="text-align: right" colspan="8">
+                    医生：
+                    <select name="rxDoctor">
+                        <option></option>
+                        <option value="孙伟">孙伟</option>
+                        <option value="维护二">维护二</option>
+                    </select>
+                    验光师：
+                    <select name="rxOptometryName">
+                        <option value="张三">张三</option>
+                        <option value="周五">周五</option>
+                        <option value="陈静">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>BC</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>直径</td>
+                <td>软性角膜接触镜VA</td>
+                <td>软性角膜接触镜镜片</td>
+                <td>片/盒数</td>
+                <td width="220">软性角膜接触镜处理方式</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input name="rxBcod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"  name="rxSphod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}"name="rxCylod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"   name="rxAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input name="rxZjod" type="text"/></td>
+                <td><input name="rxVaod" type="text"/></td>
+                <td>适用镜片：<input name="rxSyjpod" style="width:60%" type="text"/></td>
+                <td><input name="rxUnitod" type="text"/></td>
+                <td rowspan="2">
+                    <select name="rxClfs" style="width: 70%;">
+                        <option value="足矫">足矫</option>
+                        <option value="欠矫">欠矫</option>
+                        <option value="过矫">过矫</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input name="rxBcos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.sphereLefttry}"  name="rxSphos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderLefttry}"name="rxCylos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"   name="rxAxialos" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input name="rxZjos" type="text"/></td>
+                <td><input name="rxVaos" type="text"/></td>
+                <td>适用镜片：<input name="rxSyjpos" style="width:60%" type="text"/></td>
+                <td><input name="rxUnitos" type="text"/></td>
+            </tr>
+            <tr>
+                <td>护理液品种：</td>
+                <td colspan="9">
+                    <label class="text">
+                        <textarea id="hlys" name="rxHlypz" rows="3"></textarea>
+                    </label>
+                    <div class="maxL" style="margin:5px 10px;">
+                        <input type="button" value="选择" onclick="gethlys()"/>
+                        <input class="empty" type="button" value="清空" onclick="cleanhlys()"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="9"><textarea name="rxBeizhu" rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table id="tab5" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="kuangjiazy">
+            <tr>
+                <td class="PL30" colspan="2">5 框架--中用 <input type="button" class="input_del" id="remove5" value="删 除"/></td>
+                <td style="text-align: right" colspan="7">
+                    医生：
+                    <select name="zyDoctor">
+                        <option></option>
+                        <option value="孙伟">孙伟</option>
+                        <option value="维护二">维护二</option>
+                    </select>
+                    验光师：
+                    <select name="zyOptometryName">
+                        <option value="张三">张三</option>
+                        <option value="周五">周五</option>
+                        <option value="陈静">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>三棱镜</td>
+                <td>基底</td>
+                <td>中用瞳距(mm)</td>
+                <td>瞳高(mm)</td>
+                <td>近用VA</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="zySphod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="zyCylod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"    name="zyAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.prismRighttry}"    name="zyPrismod" class="short" type="text"/> △</td>
+                <td>
+                    <select name="zyJdod" th:value="${tryresultsDO.jdrTry}">
+                        <option value=""></option>
+                        <option value="内">内</option>
+                        <option value="外">外</option>
+                        <option value="上">上</option>
+                        <option value="下">下</option>
+                    </select>
+                    <input id="zyJdods" name="zyJdods" th:value="${tryresultsDO.jdrTry}"
+                           type="hidden">
+                </td>
+                <td><input name="zyZytjod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightRighttry}" name="zyTgod" type="text"/></td>
+                <td><input name="zyVaod" type="text"/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="zySphos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="zyCylos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}"   name="zyAxialos" type="text"onblur="zhouxiang(this)"
+                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input  th:value="${tryresultsDO.prismLefttry}"   name="zyPrismos" class="short" type="text"/> △</td>
+                <td>
+                    <select name="zyJdos" th:value="${tryresultsDO.jdlTry}">
+                        <option value=""> </option>
+                        <option value="内">内</option>
+                        <option value="外">外</option>
+                        <option value="上">上</option>
+                        <option value="下">下</option>
+                    </select>
+                    <input id="zyJdoss" name="zyJdoss" th:value="${tryresultsDO.jdlTry}"
+                           type="hidden">
+                </td>
+                <td><input name="zyZytjos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightLefttry}" name="zyTgos" type="text"/></td>
+                <td><input name="zyVaos" type="text"/></td>
+            </tr>
+            <tr>
+                <td rowspan="2" colspan="1">建议镜片材质:</td>
+                <td rowspan="1" colspan="3" class="daK">
+                    <select name="zyJpcz">
+                        <option></option>
+                        <option value="老花渐进">老花渐进</option>
+                        <option value="青少年渐进">青少年渐进</option>
+                        <option value="非球面树脂">老非球面树脂花渐进</option>
+                        <option value="抗辐射镜片">抗辐射镜片</option>
+                        <option value="染色镜片">染色镜片</option>
+                        <option value="变色镜片">变色镜片</option>
+                        <option value="普通树脂">普通树脂</option>
+                        <option value="高折玻璃">高折玻璃</option>
+                        <option value="玻璃片">玻璃片</option>
+                        <option value="树脂抗疲劳镜片">树脂抗疲劳镜片</option>
+                        <option value="树脂偏光镜片（茶/灰）">树脂偏光镜片（茶/灰）</option>
+                    </select>
+                </td>
+                <td rowspan="1" colspan="1">处理方式:</td>
+                <td rowspan="1" colspan="3" class="daK">
+                    <select name="zyClfs">
+                        <option></option>
+                        <option value="足矫">足矫</option>
+                        <option value="欠矫">欠矫</option>
+                        <option value="过矫">过矫</option>
+                        <option value="附加棱镜">附加棱镜</option>
+                        <option value="调整">调整</option>
+                        <option value="平衡">平衡</option>
+                        <option value="医嘱">医嘱</option>
+                        <option value="全矫">全矫</option>
+                        <option value="患者要求减度">患者要求减度</option>
+                    </select>
+                </td>
+                <td colspan="3"></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td rowspan="1" colspan="1">中距离：</td>
+                <td rowspan="1" colspan="3" class="daK">
+                    <label><input name="zyJyjk" value="建议镜框" type="checkbox"/> 建议镜框：</label>
+                    <select style="width: 30%;" name="zyJklx">
+                        <option></option>
+                        <option value="打孔">打孔</option>
+                        <option value="拉丝">拉丝</option>
+                        <option value="板材">板材</option>
+                        <option value="框高">框高</option>
+                    </select>
+                    <input name="zyText" style="width: 40%;" type="text"/>
+                </td>
+                <td rowspan="1" colspan="1">备注</td>
+                <td rowspan="1" colspan="2"><textarea name="zyBeizhu" rows="3"></textarea></td>
+                <td colspan="3"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table id="tab6" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="shijxl">
+            <tr>
+                <td class="PL30" colspan="2">6 视觉训练
+                    <input type="button" class="input_del" id="remove6" value="删 除"/></td>
+                <td style="text-align: right" colspan="8">
+                    医生：
+                    <select name="sjxlDoctor">
+                        <option></option>
+                        <option value="孙伟">孙伟</option>
+                        <option value="维护二">维护二</option>
+                    </select>
+                    验光师：
+                    <select name="sjxlOptometryName">
+                        <option value="张三">张三</option>
+                        <option value="周五">周五</option>
+                        <option value="陈静">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>三棱镜</td>
+                <td>基底</td>
+                <td>中用瞳距(mm)</td>
+                <td>瞳高(mm)</td>
+                <td>近用VA</td>
+                <td>近用VA</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="sjxlSphod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="sjxlCylod" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"    name="sjxlAxialod" type="text"onblur="zhouxiang(this)"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.prismRighttry}"   name="sjxlSljod" class="short" type="text"/> △</td>
+                <td>
+                    <select name="sjxlJdod" th:value="${tryresultsDO.jdrTry}">
+                        <option value=""> </option>
+                        <option value="内">内</option>
+                        <option value="外">外</option>
+                        <option value="上">上</option>
+                        <option value="下">下</option>
+                    </select>
+                    <input id="sjxlJdods" name="sjxlJdods" th:value="${tryresultsDO.jdrTry}"
+                           type="hidden">
+                </td>
+                <td><input name="sjxlYytjod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.heightRighttry}"name="sjxlJytjod" type="text"/></td>
+                <td><input name="sjxlYyvaod" type="text"/></td>
+                <td><input name="sjxlJyvaod" type="text"/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="sjxlSphos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="sjxlCylos" type="text"onblur="zhengfu(this)"
+                             onkeydown="xiaoshu(this)"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}"   name="sjxlAxialos" type="text"onblur="zhouxiang(this)"
+                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input  th:value="${tryresultsDO.prismLefttry}"   name="sjxlSljos" class="short" type="text"/> △</td>
+                <td>
+                    <select name="sjxlJdos"th:value="${tryresultsDO.jdlTry}">
+                        <option value=""> </option>
+                        <option value="内">内</option>
+                        <option value="外">外</option>
+                        <option value="上">上</option>
+                        <option value="下">下</option>
+                    </select>
+                    <input id="sjxlJdoss" name="sjxlJdoss" th:value="${tryresultsDO.jdlTry}"
+                           type="hidden">
+                </td>
+                <td><input name="sjxlYytjos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightLefttry}"  name="sjxlJytjos" type="text"/></td>
+                <td><input name="sjxlYyvaos" type="text"/></td>
+                <td><input name="sjxlJyvaos" type="text"/></td>
+            </tr>
+            <tr>
+                <td>家庭训练：</td>
+                <td colspan="4">
+                    <label class="text">
+                        <textarea id="jtxlsg" name="sjxlJtxl" rows="3"></textarea>
+                    </label>
+                    <div class="maxL" style="margin:5px 10px;">
+                        <input type="button" value="选择" onclick="getjtxlsg()"/>
+                        <input class="empty" type="button" value="清空" onclick="cleanjtxlsg()"/>
+                    </div>
+                </td>
+                <td>训练室训练：</td>
+                <td colspan="4">
+                    <label class="text">
+                        <textarea id="xlsxlsg" name="sjxlXlsxl" rows="3"></textarea>
+                    </label>
+                    <div class="maxL" style="margin:5px 10px;">
+                        <input type="button" value="选择" onclick="getxlsxlsg()"/>
+                        <input class="empty" type="button" value="清空" onclick="cleanxlsxlsg()"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="9"><textarea name="sjxlBeizhu" rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table id="tab7" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="jmvst">
+            <tr>
+                <td class="PL30" colspan="2">7 角膜接触镜VST <input type="button" class="input_del" id="remove7" value="删 除"/>
+                </td>
+                <td style="text-align: right" colspan="11">
+                    医生：
+                    <select name="vstDoctor">
+                        <option></option>
+                        <option value="孙伟">孙伟</option>
+                        <option value="维护二">维护二</option>
+                    </select>
+                    验光师：
+                    <select name="vstDoctor">
+                        <option value="32">张三</option>
+                        <option value="42">周五</option>
+                        <option value="112">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>试戴片编号</td>
+                <td>FK</td>
+                <td>曲率半径</td>
+                <td>AC</td>
+                <td>降幅</td>
+                <td>DIA</td>
+                <td>BC</td>
+                <td>CP/CLY</td>
+                <td>E值</td>
+                <td>VA</td>
+                <td>镜片颜色</td>
+                <td width="300">品牌</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input name="vstSdbhod" type="text"/></td>
+                <td><input name="vstFkod" type="text"/></td>
+                <td><input name="vstQlbjod" type="text"/></td>
+                <td><input name="vstAcod" type="text"/></td>
+                <td><input name="vstJfod" type="text"/></td>
+                <td><input name="vstDiaod" type="text"/></td>
+                <td><input name="vstBcod" type="text"/></td>
+                <td><input name="vstCpclyod" type="text"/></td>
+                <td><input name="vstEod" type="text"/></td>
+                <td><input name="vstVaod" type="text"/></td>
+                <td>
+                    <select name="vstJpysod"></select>
+                </td>
+                <td>适用镜片： <input name="vstSyjpod" style="width: 60%;text-align: left;" type="text"/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input name="vstSdbhos" type="text"/></td>
+                <td><input name="vstFkos" type="text"/></td>
+                <td><input name="vstQlbjos" type="text"/></td>
+                <td><input name="vstAcos" type="text"/></td>
+                <td><input name="vstJfos" type="text"/></td>
+                <td><input name="vstDiaos" type="text"/></td>
+                <td><input name="vstBcos" type="text"/></td>
+                <td><input name="vstCpclyos" type="text"/></td>
+                <td><input name="vstEos" type="text"/></td>
+                <td><input name="vstVaos" type="text"/></td>
+                <td>
+                    <select name="vstJpysos"></select>
+                </td>
+                <td>适用镜片： <input name="vstSyjpos" style="width: 60%;text-align: left;" type="text"/></td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="12"><textarea name="vstBeizhu" rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table id="tab8" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="jmcrt">
+            <tr>
+                <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="button" class="input_del" id="remove8" value="删 除"/>
+                </td>
+                <td style="text-align: right" colspan="10">
+                    医生：
+                    <select name="crtDoctor">
+                        <option></option>
+                        <option value="孙伟">孙伟</option>
+                        <option value="维护二">维护二</option>
+                    </select>
+                    验光师：
+                    <select name="crtOptometryName">
+                        <option value="2edw1">张三</option>
+                        <option value="2edw2">周五</option>
+                        <option value="2ew">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>试戴片编号</td>
+                <td>BC</td>
+                <td>RZD</td>
+                <td>LZA</td>
+                <td>RZD2</td>
+                <td>LZA2</td>
+                <td>降幅</td>
+                <td>DIA</td>
+                <td>VA</td>
+                <td>镜片颜色</td>
+                <td width="300">品牌</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input name="crtSdbhod" type="text"/></td>
+                <td><input name="ctrBcod" type="text"/></td>
+                <td><input name="crtRzdod" type="text"/></td>
+                <td><input name="crtLzaod" type="text"/></td>
+                <td><input name="crtRzd2od" type="text"/></td>
+                <td><input name="crtLza2od" type="text"/></td>
+                <td><input name="crtJfod" type="text"/></td>
+                <td><input name="crtDiaod" type="text"/></td>
+                <td><input name="crtVaod" type="text"/></td>
+                <td>
+                    <select name="crtJpysod"></select>
+                </td>
+                <td>适用镜片： <input name="crtSyjpod" style="width: 60%;text-align: left;" type="text"/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input name="crtSdbhos" type="text"/></td>
+                <td><input name="ctrBcos" type="text"/></td>
+                <td><input name="crtRzdos" type="text"/></td>
+                <td><input name="crtLzaos" type="text"/></td>
+                <td><input name="crtRzd2os" type="text"/></td>
+                <td><input name="crtLza2os" type="text"/></td>
+                <td><input name="crtJfos" type="text"/></td>
+                <td><input name="crtDiaos" type="text"/></td>
+                <td><input name="crtVaos" type="text"/></td>
+                <td>
+                    <select name="crtJpysos"></select>
+                </td>
+                <td>适用镜片： <input name="crtSyjpos" style="width: 60%;text-align: left;" type="text"/></td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="11"><textarea name="crtBeizhu" rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table id="tab9" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="jcrgp">
+            <tr>
+                <td class="PL30" colspan="2">9 RGP
+                    <input type="button" class="input_del" id="remove9" value="删 除"/></td>
+                <td style="text-align: right" colspan="6">
+                    医生：
+                    <select name="rgpDoctor">
+                        <option></option>
+                        <option value="孙伟">孙伟</option>
+                        <option value="维护二">维护二</option>
+                    </select>
+                    验光师：
+                    <select name="rgpOptometryName">
+                        <option value="12ws">张三</option>
+                        <option value="1s2w">周五</option>
+                        <option value="1sd2">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tabS_bg">
+                <td class="w170">&nbsp;</td>
+                <td>屈光度</td>
+                <td>BC</td>
+                <td>DIA</td>
+                <td>散光</td>
+                <td>镜片颜色</td>
+                <td>特殊设计</td>
+                <td width="300">品牌</td>
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input name="rgpQgdod" type="text"/></td>
+                <td><input name="rgpBcod" type="text"/></td>
+                <td><input name="rgpDiaod" type="text"/></td>
+                <td><input name="rgpSgod" type="text"/></td>
+                <td>
+                    <select name="rgpJpysod"></select>
+                </td>
+                <td><input name="rgpTssjod" type="text"/></td>
+                <td>适用镜片： <input name="rgpSyjpod" style="width: 60%;text-align: left;" type="text"/></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input name="rgpQgdos" type="text"/></td>
+                <td><input name="rgpBcos" type="text"/></td>
+                <td><input name="rgpDiaos" type="text"/></td>
+                <td><input name="rgpSgos" type="text"/></td>
+                <td>
+                    <select name="rgpJpysos"></select>
+                </td>
+                <td><input name="rgpTssjos" type="text"/></td>
+                <td>适用镜片： <input name="rgpSyjpos" style="width: 60%;text-align: left;" type="text"/></td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="7"><textarea name="rgpBeizhu" rows="3"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table id="tab10" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="jcyp">
+            <tr>
+                <td class="PL30" colspan="2">10 药品
+                    <input type="button" class="input_del" id="remove10" value="删 除"/></td>
+                <td style="text-align: right">
+                    医生：
+                    <select name="ypDoctor">
+                        <option></option>
+                        <option value="孙伟">孙伟</option>
+                        <option value="维护二">维护二</option>
+                    </select>
+                    验光师：
+                    <select name="ypOptometryName">
+                        <option value="s">张三</option>
+                        <option value="qWD">周五</option>
+                        <option value="DQx">陈静</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="w170">内容：</td>
+                <td colspan="2"><textarea name="ypNr" rows="2"></textarea></td>
+            </tr>
+            <tr>
+                <td>药名：</td>
+                <td colspan="2">
+                    <label class="text">
+                        <textarea id="ypYms" rows="2" name="ypYm"></textarea>
+                    </label>
+                    <div class="maxL" style="margin:5px 10px;">
+                        <!--<input type="button" value="选择"/>-->
+                        <input class="empty" type="button" value="清空" onclick="cleanypYms()"/>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="daijingFS">
+            <span>戴镜方式：</span>
+            <select name="way">
+                <option></option>
+                <option value="日戴">日戴</option>
+                <option value="夜戴">夜戴</option>
+                <option value="连续戴">连续戴</option>
+            </select>
+            <span>复诊时间: </span>
+            <input id="followTime" name="followTime" type="text"/>
+            <span>复诊类型：</span>
+            <select name="visitType">
+                <option></option>
+                <option value="硬镜复诊">硬镜复诊</option>
+                <option value="软镜复诊">软镜复诊</option>
+                <option value="框镜复诊">框镜复诊</option>
+                <option value="视觉训练">视觉训练</option>
+            </select>
+        </div>
+    </div>
+    <!--保存-->
+    <div class="Keep"><input type="button" value="保存" onclick="saveCF()"/></div>
+</form>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/optometryNew/jcresult.js"></script>
+<!--第二个页面-->
+<script type="text/javascript" src="/js/appjs/optometryNew/jcyizhu.js"></script>
+<script type="text/javascript" src="/js/appjs/product/hly/jchuliye.js"></script>
+<script type="text/javascript" src="/js/appjs/product/shiguang/jcshiguang.js"></script>
+<script type="text/javascript">
+
+    $().ready(function () {
+        //远用基底
+
+            //远用基底
+        var kjyyJdoss = $("input[name='kjyyJdoss']").val();
+        $("#kjyyJdos").find("[value='" + kjyyJdoss + "']").attr("selected", true);
+        //工艺类型
+        var technologyIds = $("input[name='technologyIds']").val();
+        $("#technologyId").find("[value='" + technologyIds + "']").attr("selected", true);
+        //镜架材质
+        var materialids = $("input[name='materialids']").val();
+        $("#materialid").find("[value='" + materialids + "']").attr("selected", true);
+        //款式
+        var styleIds = $("input[name='styleIds']").val();
+        $("#styleId").find("[value='" + styleIds + "']").attr("selected", true);
+    });
+
+
+    function getMemberDetail() {
+        var id = $("#memberId").val();
+        layer.open({
+            type: 2,
+            title: '详情',
+            maxmin: true,
+            shadeClose: false, // 点击遮罩关闭层
+            area: ['1200px', '520px'],
+            content: "/information/highmember/detail/" + id // iframe的url
+        });
+    }
+
+    //处方显隐增加
+    function goodsidstr(value) {
+        if (value == '2') {
+            tab1.style = "display: block";
+            var html1 = "";
+            html1 = "<input type=\"text\" name=\"kjyyPrescriptionType\" value=\"2\" hidden/>";
+            $("#kuangjiayy").append(html1);
+        } else if (value == '1') {
+            tab2.style = "display: block";
+            var html2 = "";
+            html2 = "<input type=\"text\" name=\"kjjyPrescriptionType\" value=\"1\" hidden/>";
+            $("#kuangjiajy").append(html2);
+        } else if (value == '3') {
+            tab3.style = "display: block";
+            var html3 = "";
+            html3 = "<input type=\"text\" name=\"sgjjPrescriptionType\" value=\"3\" hidden/>";
+            $("#jianjsg").append(html3);
+        } else if (value == '5') {
+            tab4.style = "display: block";
+            var html4 = "";
+            html4 = "<input type=\"text\" name=\"rxPrescriptionType\" value=\"5\" hidden/>";
+            $("#ruanxjmjcj").append(html4);
+        } else if (value == '4') {
+            tab5.style = "display: block";
+            var html5 = "";
+            html5 = "<input type=\"text\" name=\"zyPrescriptionType\" value=\"4\" hidden/>";
+            $("#kuangjiazy").append(html5);
+        } else if (value == '7') {
+            tab6.style = "display: block";
+            var html6 = "";
+            html6 = "<input type=\"text\" name=\"sjxlPrescriptionType\" value=\"7\" hidden/>";
+            $("#shijxl").append(html6);
+        } else if (value == '8') {
+            tab7.style = "display: block";
+            var html7 = "";
+            html7 = "<input type=\"text\" name=\"vstPrescriptionType\" value=\"8\" hidden/>";
+            $("#jmvst").append(html7);
+        } else if (value == '9') {
+            tab8.style = "display: block";
+            var html8 = "";
+            html8 = "<input type=\"text\" name=\"crtPrescriptionType\" value=\"9\" hidden/>";
+            $("#jmcrt").append(html8);
+        } else if (value == '10') {
+            tab9.style = "display: block";
+            var html9 = "";
+            html9 = "<input type=\"text\" name=\"rgpPrescriptionType\" value=\"10\" hidden/>";
+            $("#jcrgp").append(html9);
+        } else if (value == '11') {
+            tab10.style = "display: block";
+            var html10 = "";
+            html10 = "<input type=\"text\" name=\"ypPrescriptionType\" value=\"11\" hidden/>";
+            $("#jcyp").append(html10);
+        }
+    };
+    $(".button_true").click(function () {
+        goodsidstr($(".select_value").val());
+    });
+    $(".input_del").click(function () {
+        // console.log($(this).parentsUntil('table').eq(2).parent());
+        // $('table tbody').empty();
+        // $(this).parentsUntil('table').value="";
+        $(this).parentsUntil('table').eq(2).parent().find("input").not(".input_del").val("")
+        $(this).parentsUntil('table').eq(2).parent().find("select").val("")
+        $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+    });
+
+    //清空
+    function clearText() {
+
+        var controls = document.getElementsByTagName('input');
+        for (var i = 0; i < controls.length; i++) {
+            if (controls[i].type == 'text') {
+                controls[i].value = '';
+            }
+        }
+    }
+    //清空护理液
+    function cleanhlys() {
+        $("#hlys").val("");
+    }
+
+    //清空家庭训练
+    function cleanjtxlsg() {
+        $("#jtxlsg").val("");
+    }
+
+    //清空训练室训练
+    function cleanxlsxlsg() {
+        $("#xlsxlsg").val("");
+    }
+
+    //清空药名
+    function cleanypYms() {
+        $("#ypYms").val("");
+    }
+
+    //日期
+    laydate.render({
+        elem: '#followTime',
+        type: 'date'
+    });
+
+    //正负+—
+    function zhengfu(e) {//正负用onblur事件触发
+        var val = parseFloat(e.value)
+        if (val > 0) {
+            e.value = "+" + val.toFixed(2)
+        } else if (val <= 0) {
+            e.value = val.toFixed(2)
+        }
+    };
+
+    function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用
+        var val = parseFloat(e.value)
+        var val1 = e.value
+        // console.log(val);
+        var num = val1.indexOf(".") + 2
+        console.log(num);
+        if (val1.length > num) {
+            console.log(123);
+            var val2 = 0 | val * 100
+            e.value = val2 / 100
+        }
+    }
+
+    //自动补0，四舍五入
+    function shuzi(e) {
+        var val = parseFloat(e.value);
+        if (val > 0) {
+            e.value = val.toFixed(2);
+        } else if (val <= 0) {
+            e.value = val.toFixed(2);
+        }
+    };
+
+    //轴向正确表示规则
+    function zhouxiang(e) {//用onblur事件触发
+        var val = parseFloat(e.value);
+        if (val < 0 || val > 180) {
+            layer.alert("轴向在0-180之间");
+        } else {
+            e.value = val.toFixed(0)
+        }
+    }
+
+    alert(1111111111)
+</script>
+
+</body>
+</html>

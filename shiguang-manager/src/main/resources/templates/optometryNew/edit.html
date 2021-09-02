@@ -30,6 +30,7 @@
                 <!--<li class="click"><a href="jianchajielun.html?data=X111111">检查结论</a></li>-->
                 <li class="on click1"><a href="#">屈光检查</a></li>
                 <!--<li class="click"><a href="jianchajielun.html">检查结论</a></li>-->
+                <!--<li><a href="../product/hly">护理液</a></li>-->
             </ul>
         </div>
         <!--验光信息-->
@@ -124,7 +125,7 @@
                             <option value="左">左</option>
                         </select>
                     </td>
-                    <td rowspan="2" colspan="3"><input class="btnCK" type="button" value="查看眼底像"/></td>
+                    <!--<td rowspan="2" colspan="3"><input class="btnCK" type="button" value="查看眼底像"/></td>-->
                 </tr>
                 <tr>
                     <td>近</td>
@@ -146,7 +147,7 @@
                     <input id="PH-F" name="sgnSf" value="2" type="radio" >
                         <label for="PH-F">否</label>
                 <span>原因：</span>
-                <select id="sgnReason" name="sgnReason">
+                <select id="sgnReason" name="sgnReason" style="width:10%">
                     <option value=""></option>
                     <option value="年龄过小">年龄过小</option>
                     <option value="配合不好">配合不好</option>
@@ -478,7 +479,7 @@
                     <td><input name="cornealAstigmatismOd" th:value="${optometryFrontDO.cornealAstigmatismOd}"
                                type="text"/>
                     </td>
-                    <td><input name="pupilSizeRight" th:value="${ocularEyesDO.pupilSizeRight}" type="text"/>
+                    <td><input name="tjod" th:value="${ocularEyesDO.pupilSizeRight}" type="text"/>
                     </td>
                     <td colspan="2"></td>
                 </tr>
@@ -502,7 +503,7 @@
                     <td><input name="cornealAstigmatismOs" th:value="${optometryFrontDO.cornealAstigmatismOs}"
                                type="text"/>
                     </td>
-                    <td><input name="pupilSizeRight" th:value="${ocularEyesDO.pupilSizeRight}" type="text"/>
+                    <td><input name="tjos" th:value="${ocularEyesDO.pupilSizeLeft}" type="text"/>
                     </td>
                     <td colspan="2"></td>
                 </tr>

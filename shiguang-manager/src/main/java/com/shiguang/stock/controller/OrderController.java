@@ -5,6 +5,9 @@ import java.util.Map;
 
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.R;
+import com.shiguang.product.domain.HcDO;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -37,6 +40,8 @@ import com.shiguang.common.utils.R;
 public class OrderController {
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private StockService stockService;
 
     @GetMapping()
     @RequiresPermissions("stock:order:order")
@@ -105,5 +110,30 @@ public class OrderController {
         orderService.batchRemove(ids);
         return R.ok();
     }
-
+    /**
+     * 工号
+     */
+    @GetMapping("/userNum/{danjuNumber}")
+    String userNum(@PathVariable("danjuNumber") String danjuNumber ,Model model) {
+        model.addAttribute("danjuNumber",danjuNumber);
+        return "/stock/stock/userNum";
+    }
+    /**
+     * 启用状态
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateStatus")
+    public R updateEnable(String danjuNumber, String status ,String username) {
+        OrderDO orderDO = new OrderDO();
+        StockDO stockDO = new StockDO();
+        orderDO.setDanjuNumber(danjuNumber);
+        orderDO.setStatus(status);
+        orderDO.setUsername(username);
+        stockDO.setDanjuNumber(danjuNumber);
+        stockDO.setStatus(status);
+        stockDO.setUsername(username);
+        orderService.updateStatus(orderDO);
+        stockService.updateStatus(stockDO);
+        return R.ok();
+    }
 }

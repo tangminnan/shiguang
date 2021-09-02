@@ -62,4 +62,5 @@ public class PidiaoServiceImpl implements PidiaoService {
 	public List<PidiaoDO> indepartment(Map<String, Object> map) {
 		return  pidiaoDao.indepartment(map);
 	}
+
 }

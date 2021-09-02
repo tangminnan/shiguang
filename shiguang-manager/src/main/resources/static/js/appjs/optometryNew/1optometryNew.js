@@ -1,7 +1,7 @@
 var prefix = "/information/optometryNew"
-// $(function () {
-//     load();
-// });
+$(function () {
+    load();
+});
 
 function load() {
     $('#exampleTable')
@@ -90,78 +90,17 @@ function load() {
                             // var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
                             // 		+ row.id
                             // 		+ '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<span class="btn btn-primary btn-sm" href="#" title="验光数据"  mce_href="#" onclick="resetPwd(\''
-                                + value
-                                + '\')">验光数据</span> ';
-                            var d =  "<a href='javascript:' class='detail-icon btn btn-warning btn-sm' >更多</a> ";
-                            return e + f + d;
+                            // var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+                            // 		+ row.id
+                            // 		+ '\')"><i class="fa fa-key"></i></a> ';
+                            return e;
                         }
-                    }],
-                onExpandRow: function (index, row, $detail) {
-                    var last = JSON.stringify(row);
-                    // alert(row)
-                    // alert(last)
-                    onclick = row.cardNumber;
-                    var cardNumber = row.cardNumber;
-                    var prjLogBookProblemTable = $detail.html('<table></table>').find('table');
-                    $(prjLogBookProblemTable).bootstrapTable({
-                        columns: [
-                            {
-                                field : 'ptometryNumber',
-                                title : '验光号'
-                            },
-
-                            {
-                                field : 'optometryName',
-                                title : '验光师'
-                            },
-
-                            {
-                                field:'createTime',
-                                title:'验光时间'
-                            },
-                            {
-                                field:'followTime',
-                                title:'复诊时间'
-                            },
-                            // {
-                            //     title: '操作',
-                            //     field: 'ptometryNumber',
-                            //     align: 'center',
-                            //     formatter: function (value, row, index) {
-                            //         var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
-                            //             + value
-                            //             + '\')">详情</span> ';
-                            //         return f;
-                            //     }
-                            // }
-
-                        ],
-                        url: "/jiancha/result/shujulist",
-                        method: 'get',
-                        queryParams:{cardNumber:cardNumber},
-                        ajaxOptions:{cardNumber:cardNumber},
-                        /*queryParams : function(params) {
-                            return {
-                                //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-
-                                id: parentId
-
-                            };
-                        },*/
-                        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                        onLoadError: function () {  //加载失败时执行
-                            alert('失败')
-                        },
-                    })
-                }
-
+                    }]
             });
 }
 
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
-    load();
 }
 
 function add() {
@@ -190,33 +129,6 @@ function edit(cardNumber) {
 
 }
 
-//详情
-function resetPwd(cardNumber) {
-    // alert("详情")
-    var toIndex = layer.open({
-        type: 2,
-        title: '详情',
-        maxmin: true,
-        shadeClose: false, // 点击遮罩关闭层
-        area: ['800px', '520px'],
-        content: prefix + '/detail/' + cardNumber // iframe的url
-    });
-    layer.full(toIndex);
-}
-//详情
-function selectShuju(ptometryNumber) {
-    // alert("详情")
-    var toIndex = layer.open({
-        type: 2,
-        title: '详情',
-        maxmin: true,
-        shadeClose: false, // 点击遮罩关闭层
-        area: ['800px', '520px'],
-        content: '/jiancha/result/chufangall/' + ptometryNumber // iframe的url
-
-    });
-    layer.full(toIndex);
-}
 function remove(id) {
     layer.confirm('确定要删除选中的记录？', {
         btn: ['确定', '取消']
@@ -239,6 +151,8 @@ function remove(id) {
     })
 }
 
+function resetPwd(id) {
+}
 
 function batchRemove() {
     var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组

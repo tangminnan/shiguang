@@ -184,6 +184,25 @@ public class TryresultsDO implements Serializable {
     private String cornealAstigmatismOd;
     //角膜散光(OS)
     private String cornealAstigmatismOs;
+    private String  tjod;
+    private String  tjos;
+
+    public String getTjod() {
+        return tjod;
+    }
+
+    public void setTjod(String tjod) {
+        this.tjod = tjod;
+    }
+
+    public String getTjos() {
+        return tjos;
+    }
+
+    public void setTjos(String tjos) {
+        this.tjos = tjos;
+    }
+
     //检影球镜(OD)
     private String sphJyod;
     //检影球镜(OS)

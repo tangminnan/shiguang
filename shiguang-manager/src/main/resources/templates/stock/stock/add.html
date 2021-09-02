@@ -170,7 +170,9 @@
                 <!--<input class="HgreenBG" type="button" value="打印条码"/>-->
             </div>
             <div class="Cbtn buyBtns">
-                <input type="button" class="H_bc" value="保存" onclick="save()"/>
+                <input id="status" name="status" value="1" type="hidden"/>
+                <input id="username" name="username" value="未收货" type="hidden"/>
+                <input type="button" class="H_bc" value="保存并审核" onclick="save()"/>
                 <!--<input type="checkbox" id="Hbc"/> <label for="Hbc">保存并审核</label>-->
             </div>
         </div>
@@ -341,6 +343,7 @@
                             <td>批号</td>
                             <td>注册证号</td>
                             <td>生产日期</td>
+                            <td>数量</td>
                         </tr>
                         <tr style="font-weight:bold;font-size: 15px;" class="heji5">
                             <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -474,7 +477,7 @@
             </tbody>
         </table>
         <div class="Cbtn buyBtns">
-            <input type="button" class="H_bc" value="保存" onclick="save()"/>
+            <input type="button" class="H_bc" value="保存并审核" onclick="save()"/>
             <!--<input type="checkbox" id="HHbc"/> <label for="HHbc">保存并审核</label>-->
         </div>
     </div>

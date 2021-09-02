@@ -146,31 +146,21 @@
 <div th:include="include :: footer"></div>
 <script type="text/javascript">
     $(document).ready(function () {
-        var xsstate=$("input[name='xsstate']:checked").val();
-        // alert(xsstate)
-        var positionName = $('#positionName option:selected').text();
-        var positionId = $('#positionId option:selected').text();
-        // var positionNames = ""
-        // if (positionName == "--请选择--") {
-        //     positionName = positionNames;
-        // }
-        // var positionIds = ""
-        // if (positionId == "--请选择--") {
-        //     positionName = positionIds;
-        // }
+        //var xsstate=$("input[name='xsstate']:checked").val();
+        var positionId = $('#positionId option:selected').val();
+        var xsstate = 0;
         $(".cw").remove();
         $.ajax({
             url: '/kucun/stock/selectPosion',
             type: 'post',
             dataType: "json",
             data: {
-                'xsstate': xsstate,
+                'xsstate': xsstate
             },
             success: function (position) {
-                // alert(position)
                 for (var i = 0; i < position.length; i++) {
                     $("#positionId").append("" +
-                        "<option class='cw' value='position[i].positionId'>" + position[i].positionName + "</option>");
+                        "<option class='cw' value='"+ position[i].positionId +"'>" + position[i].positionName + "</option>");
                 }
             }
         });
@@ -206,7 +196,6 @@
     <!--选择制造商-->
     function choiceMfrs() {
         var goodsid = document.getElementById('goodsType').value;
-        // alert(goodsid);
         if (goodsid == "") {
             layer.alert("请选择商品类型！");
         } else {
@@ -233,7 +222,6 @@
     function choiceBrand() {
         var goodsid = document.getElementById('goodsType').value;
         var mfrsid = document.getElementById('mfrsid').value;
-        // layer.alert(goodsid);
         if (mfrsid == "") {
             layer.alert("请选择制造商！");
         } else {
@@ -303,23 +291,12 @@
         } else if (goodsType == 9){
             var  classtype ="";
         }
-        // alert(classtype +"类型");
         var mfrsname = $("#mfrsname").val();
         var brandname = $("#brandname").val();
         var retailPrice = $("*[name='retailPrice']").val();
         var retailPrice2 = $("*[name='retailPrice2']").val();
         var xsstate=$("input[name='xsstate']:checked").val();
-        // alert(xsstate +"仓位");
-        var positionName = $('#positionName option:selected').text();
-        // var positionNames = ""
-        // if (positionName == "--请选择--") {
-        //     positionName = positionNames;
-        // }
-        var positionId = $('#positionId option:selected').text();
-        // var positionIds = ""
-        // if (positionId == "--请选择--") {
-        //     positionId = positionIds;
-        // }
+        var positionId = $('#positionId option:selected').val();
         $(".val").remove();
         $.ajax({
             url: '/kucun/stock/selectKc',
@@ -362,7 +339,6 @@
 
     function positionChange() {
         var xsstate=$("input[name='xsstate']:checked").val();
-        // alert(xsstate)
         $(".cw").remove();
         $.ajax({
             url: '/kucun/stock/selectPosion',

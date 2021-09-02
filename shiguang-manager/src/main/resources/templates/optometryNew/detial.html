@@ -1,0 +1,851 @@
+<!doctype html>
+<html>
+<style>
+    .none {
+        display: none;
+    }
+
+    input:disabled {
+        color: red;
+        opacity: 1;
+        -webkit-text-fill-color: red;
+    }
+</style>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>屈光检查</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+    <div id="quguangjiancha" style="text-decoration: none;">
+        <!--验光信息-->
+        <div class="m40 msgBox">
+            <h3>验光信息</h3>
+            <ul>
+                <li>验光号：<input id="ptometryNumber" name="ptometryNumber" th:value="${tryresultsDO.ptometryNumber}" type="text"/></li>
+                <li>验光师/医生：<input id="optometryName" name="optometryName" th:value="${tryresultsDO.optometryName}" type="text"/>
+                </li>
+                <li>日期：<input input id="createTime" name="createTime"  th:value="${newtime}" type="text"/></li>
+            </ul>
+        </div>
+
+        <!--顾客资料-->
+        <div class="m40 msgBox">
+            <h3>顾客资料</h3>
+            <ul>
+                <li>卡号：<input id="cardNumber" name="cardNumber" th:value="${memberDO.cardNumber}" readonly type="text"/>
+                </li>
+                <li>姓名：<input id="name" name="name" th:value="${memberDO.name}" readonly type="text"/></li>
+                <li>性别：<input id="sexx" name="sexx" th:value="${memberDO.sexx}" readonly class="short" type="text"/></li>
+                <li>年龄：<input id="age" name="age" th:value="${memberDO.age}" readonly class="short" type="text"/></li>
+                <li>电话：<input type="text" name="phone1" th:value="${memberDO.phone1}" readonly/></li>
+                <input id="memberId" name="memberId" th:value="${memberDO.id}" type="hidden">
+                <input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}" type="hidden">
+                <input id="memname" name="memname" th:value="${memberDO.name}" type="hidden">
+                <input id="memberNumber" name="memberNumber" th:value="${memberDO.cardNumber}" type="hidden">
+                <!--<li><span onclick="getMemberDetail()">详情</span></li>-->
+            </ul>
+        </div>
+
+        <!--主诉-->
+        <div class="m40 tabS">
+            <h3>主诉</h3>
+            <table class="tabA" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+                    <td class="w170">转诊医生</td>
+                    <td><input name="referralDoctor" th:value="${tryresultsDO.referralDoctor}" readonly type="text"/></td>
+                </tr>
+                <tr>
+                    <td>转诊</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>主诉</td>
+                    <td>
+                        <textarea rows="3" id="chiefComplaint" name="chiefComplaint"  th:text="${tryresultsDO.chiefComplaint}" type="text" readonly></textarea>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <!--视力-->
+        <div class="m40 tabS">
+            <h3>视力</h3>
+            <table class="tabB" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+                    <td rowspan="2" class="w170">裸眼视力</td>
+                    <td width="120">远</td>
+                    <td>OU <input name="farLyou" th:value="${tryresultsDO.farLyou}" readonly type="text"/></td>
+                    <td>OD <input name="farLyod" th:value="${tryresultsDO.farLyod}" readonly type="text"/></td>
+                    <td>OS <input name="farLyos" th:value="${tryresultsDO.farLyos}" readonly type="text"/></td>
+                    <td rowspan="2" style="width:8%;">原镜视力</td>
+                    <td width="120">远</td>
+                    <td>OU <input name="farYjou" th:value="${tryresultsDO.farYjou}"readonly type="text"/></td>
+                    <td>OD <input name="farYjod" th:value="${tryresultsDO.farYjod}"readonly type="text"/></td>
+                    <td>OS <input name="farYjos" th:value="${tryresultsDO.farYjos}"readonly type="text"/></td>
+                </tr>
+                <tr>
+                    <td>近</td>
+                    <td>OU <input name="nearLyou" th:value="${tryresultsDO.nearLyou}" readonly type="text"></td>
+                    <td>OD <input name="nearLyod" th:value="${tryresultsDO.nearLyod}" readonly type="text"/></td>
+                    <td>OS <input name="nearLyos" th:value="${tryresultsDO.nearLyos}" readonly type="text"/></td>
+                    <td>近</td>
+                    <td>OU <input name="nearYjou" th:value="${tryresultsDO.nearYjou}" readonly type="text"/></td>
+                    <td>OD <input name="nearYjod" th:value="${tryresultsDO.nearYjod}" readonly type="text"/></td>
+                    <td>OS <input name="nearYjos" th:value="${tryresultsDO.nearYjos}" readonly type="text"/></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">小孔视力</td>
+                    <td>远</td>
+                    <td>OU <input name="farXkou" th:value="${tryresultsDO.farXkou}" readonly  type="text"/></td>
+                    <td>OD <input name="farXkod" th:value="${tryresultsDO.farXkod}" readonly  type="text"/></td>
+                    <td>OS <input name="farXkos" th:value="${tryresultsDO.farXkos}" readonly  type="text"/></td>
+                    <td rowspan="2">主导眼</td>
+                    <td rowspan="2">
+                        <select id="dominantEye" name="dominantEye" disabled="disabled" >
+                            <option></option>
+                            <option value="右" th:field="*{tryresultsDO.dominantEye}">右</option>
+                            <option value="交替" th:field="*{tryresultsDO.dominantEye}">交替</option>
+                            <option value="左" th:field="*{tryresultsDO.dominantEye}">左</option>
+                        </select>
+                        <input id="dominantEyes" name="dominantEyes" th:value="${tryresultsDO.dominantEye}"
+                               type="hidden">
+                    </td>
+                    <!--<td rowspan="2" colspan="3"><input class="btnCK" type="button" value="查看眼底像"/></td>-->
+                </tr>
+                <tr>
+                    <td>近</td>
+                    <td>OU <input name="nearXkou" th:value="${tryresultsDO.nearXkou}" readonly type="text"/></td>
+                    <td>OD <input name="nearXkod" th:value="${tryresultsDO.nearXkod}" readonly type="text"/></td>
+                    <td>OS <input name="nearXkos" th:value="${tryresultsDO.nearXkos}" readonly type="text"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--双眼视功能检查-->
+        <div class="m40 tabS H_newst">
+            <h3>双眼视功能检查</h3>
+            <div class="H_jc">
+                <span>双眼视功能检查:</span>
+                <label><input id="a" name="sgnSf" th:field="*{tryresultsDO.sgnSf}" value="1"
+                              type="radio" onclick="return false">
+                    是</label>
+                <label><input id="a1" name="sgnSf" th:field="*{tryresultsDO.sgnSf}" value="2"
+                              type="radio" onclick="return false">
+                    否</label>
+                <span>原因：</span>
+                <select id="sgnReason" name="sgnReason" th:value="${tryresultsDO.sgnReason}" style="width:10%">
+                    <option></option>
+                    <option value="年龄过小">年龄过小</option>
+                    <option value="配合不好">配合不好</option>
+                    <option value="斜视">斜视</option>
+                    <option value="弱视">弱视</option>
+                    <option value="低视力">低视力</option>
+                    <option value="其他">其他</option>
+                </select>
+                <input id="sgnReasons" name="sgnReasons" th:value="${tryresultsDO.sgnReason}"
+                       type="hidden">
+                <span>CISS得分：</span>
+                <input id="sgnCiss" name="sgnCiss" th:value="${tryresultsDO.sgnCiss}" readonly type="text" />
+            </div>
+            <div class="H_must">
+                <p><b>*</b>必录项</p>
+                <table class="tabC" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="bg-d7">WORTH 4 DOT</td>
+                        <td colspan="2">
+                            远：
+                            <select id="sgnFardot" name="sgnFardot" th:value="${tryresultsDO.sgnFardot}">
+                                <option></option>
+                                <option value="2dots">2dots</option>
+                                <option value="3dots">3dots</option>
+                                <option value="4dots">4dots</option>
+                                <option value="5dots">5dots</option>
+                            </select>
+                            <input id="sgnFardots" name="sgnFardots" th:value="${tryresultsDO.sgnFardot}"
+                                   type="hidden">
+                            &nbsp; &nbsp; 近：
+                            <select id="sgnNeardot" name="sgnNeardot" th:value="${tryresultsDO.sgnNeardot}">
+                                <option></option>
+                                <option value="2dots">2dots</option>
+                                <option value="3dots">3dots</option>
+                                <option value="4dots">4dots</option>
+                                <option value="5dots">5dots</option>
+                            </select>
+                            <input id="sgnNeardots" name="sgnNeardots" th:value="${tryresultsDO.sgnNeardot}"
+                                   type="hidden">
+                        </td>
+                        <td colspan="7" class="H_red">3个绿灯（右眼抑制），2个红灯（左眼抑制），5个灯2红3绿（复视），4个灯1红2绿1混合（正常）</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="bg-d7">眼位：远</td>
+                        <td>水平</td>
+                        <td><input id="sgnFarsp1" name="sgnFarsp1" th:value="${tryresultsDO.sgnFarsp1}" readonly  type="text"  /> △ </td>
+                        <td>
+                            <select id="sgnFarsp2" name="sgnFarsp2" th:value="${tryresultsDO.sgnFarsp2}">
+                                <option></option>
+                                <option value="BI">BI</option>
+                                <option value="BO">BO</option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                            <input id="sgnFarsp2s" name="sgnFarsp2s" th:value="${tryresultsDO.sgnFarsp2}" type="hidden">
+                        </td>
+                        <td rowspan="2" class="H_red">远距隐斜</td>
+                        <td rowspan="2" class="bg-d7">眼位：近</td>
+                        <td>水平</td>
+                        <td><input id="sgnNearsp1" name="sgnNearsp1" th:value="${tryresultsDO.sgnNearsp1}" readonly  type="text" /> △ </td>
+                        <td>
+                            <select id="sgnNearsp2" name="sgnNearsp2" th:value="${tryresultsDO.sgnNearsp2}">
+                                <option></option>
+                                <option value="BI">BI</option>
+                                <option value="BO">BO</option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                            <input id="sgnNearsp2s" name="sgnNearsp2s"  th:value="${tryresultsDO.sgnNearsp2}" type="hidden">
+                        </td>
+                        <td rowspan="2" class="H_red">近距隐斜</td>
+                    </tr>
+                    <tr>
+                        <td>垂直</td>
+                        <td><input id="sgnFarcz1" name="sgnFarcz1" th:value="${tryresultsDO.sgnFarcz1}" readonly type="text" /> △ </td>
+                        <td>
+                            <select id="sgnFarcz2" name="sgnFarcz2"  th:value="${tryresultsDO.sgnFarcz2}">
+                                <option></option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                            <input id="sgnFarcz2s" name="sgnFarcz2s"  th:value="${tryresultsDO.sgnFarcz2}" type="hidden">
+                        </td>
+                        <td>垂直</td>
+                        <td><input id="sgnNearcz1" name="sgnNearcz1" th:value="${tryresultsDO.sgnNearcz1}" readonly  type="text"  /> △ </td>
+                        <td>
+                            <select id="sgnNearcz2" name="sgnNearcz2"  th:value="${tryresultsDO.sgnNearcz2}">
+                                <option></option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                            <input id="sgnNearcz2s" name="sgnNearcz2s"  th:value="${tryresultsDO.sgnNearcz2}"
+                                   type="hidden">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3" class="bg-d7">Von Graefe法</td>
+                        <td>远距水平隐斜视：</td>
+                        <td colspan="3">
+                            <input id="sgnVgfarsp1" name="sgnVgfarsp1" th:value="${tryresultsDO.sgnVgfarsp1}" readonly type="text"  /> △
+                            <input id="sgnVgfarsp2" name="sgnVgfarsp2" th:value="${tryresultsDO.sgnVgfarsp2}" readonly  type="text" />
+                        </td>
+                        <td>远距垂直隐斜视：</td>
+                        <td colspan="4">
+                            <input id="sgnVgfarcz1" name="sgnVgfarcz1" th:value="${tryresultsDO.sgnVgfarcz1}" readonly type="text"  /> △
+                            <input id="sgnVgfarcz2"  name="sgnVgfarcz2" th:value="${tryresultsDO.sgnVgfarcz2}" readonly type="text" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>近距水平隐斜视：</td>
+                        <td colspan="3">
+                            <input id="sgnVgnearsp1" name="sgnVgnearsp1" th:value="${tryresultsDO.sgnVgnearsp1}" readonly  type="text"  /> △
+                            <input id="sgnVgnearsp2" name="sgnVgnearsp2" th:value="${tryresultsDO.sgnVgnearsp2}" readonly  type="text" />
+                        </td>
+                        <td>近距垂直隐斜视：</td>
+                        <td colspan="4">
+                            <input id="sgnVgnearcz1" name="sgnVgnearcz1" th:value="${tryresultsDO.sgnVgnearcz1}" readonly   type="text"/> △
+                            <input id="sgnVgnearcz2" name="sgnVgnearcz2" th:value="${tryresultsDO.sgnVgnearcz2}" readonly   type="text" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>综合验光仪瞳距：</td>
+                        <td colspan="3">
+                            <input id="sgnAllygytj1" name="sgnAllygytj1" th:value="${tryresultsDO.sgnAllygytj1}" readonly   type="text"  /> △
+                            <input id="sgnAllygytj2" name="sgnAllygytj2" th:value="${tryresultsDO.sgnAllygytj2}" readonly   type="text"   /></td>
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr>
+                        <td class="bg-d7">AC/A</td>
+                        <td colspan="9" style="text-align:left;">
+                            <input id="sgnAc" name="sgnAc" th:value="${tryresultsDO.sgnAc}"  type="text" style="width:10%" />
+                            <label><input id="b" name="sgnAcway" th:field="*{tryresultsDO.sgnAcway}" value="1"
+                                          type="radio" onclick="return false">
+                                梯度法</label>
+                            <label><input id="b1" name="sgnAcway" th:field="*{tryresultsDO.sgnAcway}" value="2"
+                                          type="radio" onclick="return false">
+                                计算法</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3" class="bg-d7">调节反应</td>
+                        <td rowspan="3">
+                            <label>
+                                <input name="sgnTjfy" value="1" th:field="*{tryresultsDO.sgnTjfy}" onclick="return false" type="radio" id="c" > BCC</label>
+                            <label>
+                                <input name="sgnTjfy" value="2" th:field="*{tryresultsDO.sgnTjfy}" onclick="return false" type="radio" id="c1"> MEM</label>
+                        </td>
+                        <td colspan="2">OU <input id="sgnTjfyou" name="sgnTjfyou" th:value="${tryresultsDO.sgnTjfyou}" readonly type="text" /> D</td>
+                        <td rowspan="3" class="H_red">+0.25~+0.75D<br/>调节超前 <+0.25D<br/>调节滞后 >+0.75D</td>
+                        <td rowspan="3" class="bg-d7">正负相对调节</td>
+                        <td colspan="2">PRA：<input id="sgnPra" name="sgnPra" th:value="${tryresultsDO.sgnPra}" readonly type="text" /> D</td>
+                        <td colspan="2" class="H_red">-2.50D±1.00D（近视力表）</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">OD <input id="sgnTjfyod" name="sgnTjfyod" th:value="${tryresultsDO.sgnTjfyod}" readonly type="text" /> D</td>
+                        <td colspan="2">NRA：<input id="sgnNra" name="sgnNra"  th:value="${tryresultsDO.sgnNra}" readonly  type="text" /> D</td>
+                        <td colspan="2" class="H_red">-2.00D±0.50D（近视力表）</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">OS <input id="sgnTjfyos" name="sgnTjfyos"  th:value="${tryresultsDO.sgnTjfyos}" readonly  type="text" /> D</td>
+                        <td colspan="4">
+                            遮盖单眼是否变清晰
+                            <label ><input name="sgnZfsf" value="1" th:field="*{tryresultsDO.sgnZfsf}" onclick="return false" type="radio" id="d" checked> 是</label>
+                            <label ><input name="sgnZfsf" value="2" th:field="*{tryresultsDO.sgnZfsf}" onclick="return false" type="radio" id="d1"> 否</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!--眼生物学参数-->
+        <div class="m40 tabS">
+            <h3>眼生物学参数</h3>
+            <table class="tabC" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr class="tabS_bg">
+                    <td class="w170"></td>
+                    <td>眼轴</td>
+                    <td>角膜曲率K1</td>
+                    <td>角膜曲率K2</td>
+                    <td>眼压</td>
+                </tr>
+                <tr>
+                    <td>OD</td>
+                    <td>
+                        <input name="axis" type="text"  th:value="${tryresultsDO.axis}" readonly />
+                        mm
+                    </td>
+                    <td>
+                        <input name="cornealFirstK1Right" type="text" th:value="${tryresultsDO.cornealFirstK1Right}" readonly/>@
+                        <input name="cornealLastK1Right" type="text"  th:value="${tryresultsDO.cornealLastK1Right}" readonly/>
+                    </td>
+                    <td>
+                        <input name="cornealFirstK2Right" type="text" th:value="${tryresultsDO.cornealFirstK2Right}" readonly/>@
+                        <input name="cornealLastK2Right" type="text" th:value="${tryresultsDO.cornealLastK2Right}" readonly/>
+                    </td>
+                    <td>
+                        <input name="intraocularOd"  type="text" th:value="${tryresultsDO.intraocularOd}" readonly/> mmHg
+                    </td>
+                </tr>
+                <tr>
+                    <td>OS</td>
+                    <td>
+                        <input name="axisLeft" type="text" th:value="${tryresultsDO.axisLeft}" readonly/> mm
+                    </td>
+                    <td>
+                        <input name="cornealFirstK1Left" type="text" th:value="${tryresultsDO.cornealFirstK1Left}" readonly/>@
+                        <input name="cornealLastK1Left" type="text" th:value="${tryresultsDO.cornealLastK1Left}" readonly/>
+                    </td>
+                    <td>
+                        <input name="cornealFirstK2Left" type="text"  th:value="${tryresultsDO.cornealFirstK2Left}" readonly/>@
+                        <input name="cornealLastK2Left" type="text"  th:value="${tryresultsDO.cornealLastK2Left}" readonly/>
+                    </td>
+                    <td>
+                        <input name="intraocularOs"  type="text"  th:value="${tryresultsDO.intraocularOs}" readonly/> mmHg
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--客观验光-->
+        <div class="m40 tabS">
+            <h3>客观验光</h3>
+            <table class="tabD" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr class="tabS_bg tabD_1">
+                    <td class="w170">&nbsp;</td>
+                    <td>是否散瞳</td>
+                    <td colspan="2">
+                        <label><input id="xz1" name="mydriasis"  type="radio" th:field="*{tryresultsDO.mydriasis}" onclick="return false"  value="1">
+                            是</label>
+                        <label><input id="xz2" name="mydriasis"  type="radio" th:field="*{tryresultsDO.mydriasis}" onclick="return false"value="2">
+                            否</label>
+                    </td>
+                    <td>散瞳用药</td>
+                    <td colspan="3">
+                        <select id="pharmacy" name="pharmacy"  th:value="${tryresultsDO.pharmacy}">
+                            <option></option>
+                            <option th:each="ls:${pharmacyDOList}"
+                                    th:text="${ls.pharmacy}"
+                                    th:value="${ls.pharmacy}"
+                            ></option>
+                        </select>
+                        <input id="pharmacys" name="pharmacys"  th:value="${tryresultsDO.pharmacy}"
+                               type="hidden">
+                    </td>
+                </tr>
+
+                <tr class="tabS_bg">
+                    <td>电脑验光</td>
+                    <td colspan="7"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>球镜</td>
+                    <td>柱镜</td>
+                    <td>轴向</td>
+                    <td></td>
+                    <td>球镜</td>
+                    <td>柱镜</td>
+                    <td>轴向</td>
+                </tr>
+                <tr>
+                    <td>OD</td>
+                    <td>
+                        <input name="sphereRight" type="text" th:value="${tryresultsDO.sphereRight}" readonly/>
+                    </td>
+                    <td>
+                        <input name="cylinderRight" type="text"  th:value="${tryresultsDO.cylinderRight}" readonly/>
+                    </td>
+                    <td>
+                        <input id="axialRight" name="axialRight" type="text" th:value="${tryresultsDO.axialRight}" readonly/>
+                    </td>
+                    <td rowspan="2">散瞳后</td>
+                    <td>
+                        <input name="sphereRight2"  type="text" th:value="${tryresultsDO.sphereRight2}" readonly/>
+                    </td>
+                    <td>
+                        <input name="cylinderRight2" type="text"  th:value="${tryresultsDO.cylinderRight2}" readonly/>
+                    </td>
+                    <td>
+                        <input id="axialRight2" name="axialRight2"  type="text" th:value="${tryresultsDO.axialRight2}" readonly/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>OS</td>
+                    <td>
+                        <input name="sphereLeft" type="text" th:value="${tryresultsDO.sphereLeft}" readonly/>
+                    </td>
+                    <td>
+                        <input name="cylinderLeft" type="text" th:value="${tryresultsDO.cylinderLeft}" readonly/>
+                    </td>
+                    <td>
+                        <input id="axialLeft" name="axialLeft"  type="text" th:value="${tryresultsDO.axialLeft}" readonly/>
+                    </td>
+                    <td>
+                        <input name="sphereLeft2" type="text" th:value="${tryresultsDO.sphereLeft2}" readonly/>
+                    </td>
+                    <td>
+                        <input name="cylinderLeft2"  type="text" th:value="${tryresultsDO.cylinderLeft2}" readonly/>
+                    </td>
+                    <td>
+                        <input id="axialLeft2" name="axialLeft2" type="text" th:value="${tryresultsDO.axialLeft2}" readonly/>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>平K</td>
+                    <td>陡K</td>
+                    <td>平均K</td>
+                    <td>角膜散光</td>
+                    <td>瞳距（mm）</td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td>OD</td>
+                    <td>
+                        <input class="short" name="pkod" th:value="${tryresultsDO.pkod}" readonly
+                               type="text"/> @
+                        <input class="short" name="pk1od" th:value="${tryresultsDO.pk1od}" readonly
+                              type="text"/>
+                    </td>
+                    <td><input class="short" name="dkod" th:value="${tryresultsDO.dkod}" readonly
+                             type="text"/> @
+                        <input class="short" name="dk1od" th:value="${tryresultsDO.dk1od}" readonly
+                            type="text"/>
+                    </td>
+                    <td>
+                        <input class="short" name="pjkOd" type="text" th:value="${tryresultsDO.pjkOd}" readonly/> @
+                        <input class="short" name="pjkOd2" type="text" th:value="${tryresultsDO.pjkOd2}" readonly/>
+                    </td>
+                    <td><input name="cornealAstigmatismOd" th:value="${tryresultsDO.cornealAstigmatismOd}" readonly
+                               type="text"/>
+                    </td>
+                    <td><input name="tjod" type="text"  th:value="${tryresultsDO.tjod}" readonly/>
+                    </td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td>OS</td>
+                    <td>
+                        <input class="short" name="pkos"  th:value="${tryresultsDO.pkos}" readonly
+                                type="text"/> @
+                        <input class="short" name="pk1os" th:value="${tryresultsDO.pk1os}" readonly
+                              type="text"/>
+                    </td>
+                    <td><input class="short" name="dkos"  th:value="${tryresultsDO.dkos}" readonly
+                               type="text"/> @
+                        <input class="short" name="dk1os" th:value="${tryresultsDO.dk1os}" readonly
+                               type="text"/>
+                    </td>
+                    <td>
+                        <input class="short" name="pjkOs" th:value="${tryresultsDO.pjkOs}" readonly type="text"/> @
+                        <input class="short" name="pjkOs2" th:value="${tryresultsDO.pjkOs2}" readonly type="text"/>
+                    </td>
+                    <td><input name="cornealAstigmatismOs"  th:value="${tryresultsDO.cornealAstigmatismOs}" readonly
+                               type="text"/>
+                    </td>
+                    <td><input name="tjos" type="text"  th:value="${tryresultsDO.tjos}" readonly />
+                    </td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr class="tabS_bg">
+                    <td>检影验光</td>
+                    <td colspan="7"><input type="button" value="检影"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>球镜</td>
+                    <td>柱镜</td>
+                    <td>轴向</td>
+                    <td>VA</td>
+                    <td>瞳距（mm）</td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+
+                    <td>OD</td>
+                    <td><input name="sphJyod" th:value="${tryresultsDO.sphJyod}" readonly type="text"/></td>
+                    <td><input name="cylJyod" th:value="${tryresultsDO.cylJyod}" readonly type="text"/></td>
+                    <td><input id="axialJyod" name="axialJyod"  th:value="${tryresultsDO.axialJyod}" readonly type="text"/></td>
+                    <td><input name="vaJyod"  th:value="${tryresultsDO.vaJyod}" readonly type="text"/></td>
+                    <td><input name="pdJyod"  th:value="${tryresultsDO.pdJyod}" readonly type="text"/></td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td>OS</td>
+                    <td><input name="sphJyos" th:value="${tryresultsDO.sphJyos}" readonly  type="text"/></td>
+                    <td><input name="cylJyos" th:value="${tryresultsDO.cylJyos}" readonly  type="text"/></td>
+                    <td><input id="axialJyos" name="axialJyos"   th:value="${tryresultsDO.axialJyos}" readonly type="text"/></td>
+                    <td><input name="vaJyos" th:value="${tryresultsDO.vaJyos}" readonly type="text"/></td>
+                    <td><input name="pdJyos" th:value="${tryresultsDO.pdJyos}" readonly type="text"/></td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr class="tabS_bg">
+                    <td>插片验光</td>
+                    <td colspan="7"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>球镜</td>
+                    <td>柱镜</td>
+                    <td>轴向</td>
+                    <td>DVA</td>
+                    <td>NVA</td>
+                    <td>Add</td>
+                    <td>测量距离（cm）</td>
+                </tr>
+                <tr>
+                    <td>OD</td>
+                    <td><input name="sphCpod" th:value="${tryresultsDO.sphCpod}" readonly  type="text"/></td>
+                    <td><input name="cylCpod" th:value="${tryresultsDO.cylCpod}" readonly  type="text"/></td>
+                    <td><input id="axialCpod" name="axialCpod" th:value="${tryresultsDO.axialCpod}" readonly   type="text"/></td>
+                    <td><input name="dvaCpod" th:value="${tryresultsDO.dvaCpod}" readonly  type="text"/></td>
+                    <td><input name="nvaCpod" th:value="${tryresultsDO.nvaCpod}" readonly  type="text"/></td>
+                    <td><input name="addCpod" th:value="${tryresultsDO.addCpod}" readonly  type="text"/></td>
+                    <td><input name="distanceOd" th:value="${tryresultsDO.distanceOd}" readonly  type="text"/></td>
+                </tr>
+                <tr>
+                    <td>OS</td>
+                    <td><input name="sphCpos"th:value="${tryresultsDO.sphCpos}" readonly  type="text"/></td>
+                    <td><input name="cylCpos"th:value="${tryresultsDO.cylCpos}" readonly  type="text"/></td>
+                    <td><input id="axialCpos" name="axialCpos" th:value="${tryresultsDO.axialCpos}" readonly  type="text"/></td>
+                    <td><input name="dvaCpos" th:value="${tryresultsDO.dvaCpos}" readonly  type="text"/></td>
+                    <td><input name="nvaCpos" th:value="${tryresultsDO.nvaCpos}" readonly  type="text"/></td>
+                    <td><input name="addCpos" th:value="${tryresultsDO.addCpos}" readonly  type="text"/></td>
+                    <td><input name="distanceOs" th:value="${tryresultsDO.distanceOs}" readonly  type="text"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--主观验光-->
+        <div class="m40 tabS zhuguan">
+            <h3>主观验光</h3>
+            <table class="tabE" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr class="tabS_bg">
+                    <td class="w170">&nbsp;</td>
+                    <td>球镜</td>
+                    <td>柱镜</td>
+                    <td>轴向</td>
+                    <td>DVA</td>
+                    <td>NVA</td>
+                    <td>三棱镜</td>
+                    <td>基底</td>
+                    <td>Add</td>
+                    <td>远用瞳距(mm)</td>
+                    <td>近用瞳距(mm)</td>
+                    <td style="width: 150px;"></td>
+                </tr>
+                <tr>
+                    <td>OD</td>
+                    <td>
+                        <input class="input_text" id="sphereRightz" name="sphereRightz" type="text" th:value="${tryresultsDO.sphereRightz}" readonly/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="cylinderRightz" name="cylinderRightz" type="text" th:value="${tryresultsDO.cylinderRightz}" readonly/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="axialRightz" name="axialRightz" th:value="${tryresultsDO.axialRightz}" readonly type="text"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="dvaRightz" name="dvaRightz" type="text" th:value="${tryresultsDO.dvaRightz}" readonly/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="nvaRightz" name="nvaRightz" type="text" th:value="${tryresultsDO.nvaRightz}" readonly/>
+                    </td>
+                    <td>
+                        <input id="prismRightz" name="prismRightz" class="short input_text" th:value="${tryresultsDO.prismRightz}" readonly type="text"  /> △
+                    </td>
+                    <td>
+                        <select class="input_text" id="jdrZ" name="jdrZ" th:value="${tryresultsDO.jdrZ}" >
+                            <option></option>
+                            <option value="内">内</option>
+                            <option value="外">外</option>
+                            <option value="上">上</option>
+                            <option value="下">下</option>
+                        </select>
+                        <input id="jdrZs" name="jdrZs" th:value="${tryresultsDO.jdrZ}"
+                               type="hidden">
+                    </td>
+                    <td><input class="input_text" id="addRightz" name="addRightz" th:value="${tryresultsDO.addRightz}" readonly type="text"  /></td>
+                    <td><input class="input_text" id="yuanRz" name="yuanRz" th:value="${tryresultsDO.yuanRz}" readonly type="text" /></td>
+                    <td><input id="nearRightz" name="nearRightz" th:value="${tryresultsDO.nearRightz}" readonly  type="text"/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>OS</td>
+                    <td>
+                        <input class="input_text" id="sphereLeftz" name="sphereLeftz" th:value="${tryresultsDO.sphereLeftz}" readonly   type="text"  />
+                    </td>
+                    <td>
+                        <input class="input_text" id="cylinderLeftz" name="cylinderLeftz" th:value="${tryresultsDO.cylinderLeftz}" readonly   type="text"
+
+                        />
+                    </td>
+                    <td>
+                        <input class="input_text" id="axialLeftz" name="axialLeftz" th:value="${tryresultsDO.axialLeftz}" readonly   type="text"/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="dvaLeftz" name="dvaLeftz" th:value="${tryresultsDO.dvaLeftz}" readonly   type="text"  />
+                    </td>
+                    <td>
+                        <input class="input_text" id="nvaLeftz" name="nvaLeftz" th:value="${tryresultsDO.nvaLeftz}" readonly   type="text"  />
+                    </td>
+                    <td>
+                        <input id="prismLeftz" name="prismLeftz" class="short input_text" th:value="${tryresultsDO.prismLeftz}" readonly   type="text"
+                        />
+                        △
+                    </td>
+                    <td>
+                        <select class="input_text" id="jdlZ" name="jdlZ" th:value="${tryresultsDO.jdlZ}">
+                            <option></option>
+                            <option value="内">内</option>
+                            <option value="外">外</option>
+                            <option value="上">上</option>
+                            <option value="下">下</option>
+                        </select>
+                        <input id="jdlZs" name="jdlZs" th:value="${tryresultsDO.jdlZ}"
+                               type="hidden">
+                    </td>
+                    <td><input class="input_text" id="addLeftz" name="addLeftz"  th:value="${tryresultsDO.addLeftz}" readonly  type="text"  />
+                    </td>
+                    <td><input class="input_text" id="yuanLz" name="yuanLz"  th:value="${tryresultsDO.yuanLz}" readonly  type="text"/>
+                    </td>
+                    <td><input id="nearLeftz" name="nearLeftz"  th:value="${tryresultsDO.nearLeftz}" readonly  type="text"/>
+                    </td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--试戴镜结果-->
+        <div class="m40 tabS zhuguan2">
+            <h3>试戴镜结果<input class="zgQG" type="button" value="主观屈光"/></h3>
+            <table class="tabE" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr class="tabS_bg">
+                    <td class="w170">&nbsp;</td>
+                    <td>球镜</td>
+                    <td>柱镜</td>
+                    <td>轴向</td>
+                    <td>DVA</td>
+                    <td>NVA</td>
+                    <td>三棱镜</td>
+                    <td>基底</td>
+                    <td>瞳高(mm)</td>
+                    <td>Add</td>
+                    <td>远用瞳距(mm)</td>
+                    <td style="width: 150px;">近用瞳距(mm)</td>
+                </tr>
+                <tr>
+                    <td>OD</td>
+                    <td>
+                        <input class="input_text" id="sphereRighttry" name="sphereRighttry" type="text" th:value="${tryresultsDO.sphereRighttry}" readonly/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="cylinderRighttry" name="cylinderRighttry" type="text" th:value="${tryresultsDO.cylinderRighttry}" readonly />
+                    </td>
+                    <td>
+                        <input class="input_text" id="axialRighttry" name="axialRighttry"  type="text" th:value="${tryresultsDO.axialRighttry}" readonly />
+                    </td>
+                    <td>
+                        <input class="input_text" id="dvaRighttry" name="dvaRighttry" type="text" th:value="${tryresultsDO.dvaRighttry}" readonly/>
+                    </td>
+                    <td>
+                        <input class="input_text" id="nvaRighttry" name="nvaRighttry" type="text" th:value="${tryresultsDO.nvaRighttry}" readonly />
+                    </td>
+                    <td>
+                        <input id="prismRighttry" name="prismRighttry" class="short input_text" th:value="${tryresultsDO.prismRighttry}" readonly type="text"/> △
+                    </td>
+                    <td>
+                        <select class="input_text" id="jdrTry" name="jdrTry" th:value="${tryresultsDO.jdrTry}">
+                            <option></option>
+                            <option value="内">内</option>
+                            <option value="外">外</option>
+                            <option value="上">上</option>
+                            <option value="下">下</option>
+                        </select>
+                        <input id="jdrTrys" name="jdrTrys" th:value="${tryresultsDO.jdrTry}"
+                               type="hidden">
+                    </td>
+                    <td>
+                        <input id="heightRighttry" name="heightRighttry" type="text" th:value="${tryresultsDO.heightRighttry}" readonly />
+                    </td>
+                    <td>
+                        <input class="input_text" id="addRighttry" name="addRighttry" type="text" th:value="${tryresultsDO.addRighttry}" readonly />
+                    </td>
+                    <td>
+                        <input class="input_text" id="yuanRrty" name="yuanRrty" type="text" th:value="${tryresultsDO.yuanRrty}" readonly/>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>OS</td>
+                    <td>
+                        <input class="input_text" id="sphereLefttry" name="sphereLefttry" type="text"
+                               th:value="${tryresultsDO.sphereLefttry}" readonly
+                        />
+                    </td>
+                    <td>
+                        <input class="input_text" id="cylinderLefttry" name="cylinderLefttry" type="text"
+                               th:value="${tryresultsDO.cylinderLefttry}" readonly
+                        />
+                    </td>
+                    <td>
+                        <input class="input_text" id="axialLefttry" name="axialLefttry"   type="text"
+                               th:value="${tryresultsDO.axialLefttry}" readonly
+                        />
+                    </td>
+                    <td>
+                        <input class="input_text" id="dvaLefttry" name="dvaLefttry" type="text"   th:value="${tryresultsDO.dvaLefttry}" readonly />
+                    </td>
+                    <td>
+                        <input class="input_text" id="nvaLefttry" name="nvaLefttry" type="text"   th:value="${tryresultsDO.nvaLefttry}" readonly /></td>
+                    <td><input id="prismLefttry" name="prismLefttry" class="short input_text" th:value="${tryresultsDO.prismLefttry}" readonly
+                               type="text"  /> △
+                    </td>
+                    <td>
+                        <select class="input_text" id="jdlTry" name="jdlTry" th:value="${tryresultsDO.jdlTry}">
+                            <option></option>
+                            <option value="内">内</option>
+                            <option value="外">外</option>
+                            <option value="上">上</option>
+                            <option value="下">下</option>
+                        </select>
+                        <input id="jdlTrys" name="jdlTrys" th:value="${tryresultsDO.jdlTry}"
+                               type="hidden">
+                    </td>
+                    <td>
+                        <input id="heightLefttry" name="heightLefttry" th:value="${tryresultsDO.heightLefttry}" readonly type="text" />
+                    </td>
+                    <td>
+                        <input class="input_text" id="addLefttry" name="addLefttry"  th:value="${tryresultsDO.addLefttry}" readonly   type="text"  />
+                    </td>
+                    <td>
+                        <input class="input_text" id="yuanLrty" name="yuanLrty"  th:value="${tryresultsDO.yuanLrty}" readonly  type="text" />
+                    </td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--备注-->
+        <div class="m40 tabS">
+            <table class="tabF" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+                    <td class="w170">备注</td>
+                    <td><textarea rows="3" id="remarks" name="remarks" th:value="${tryresultsDO.remarks}" readonly> </textarea></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/optometryNew/jctryresults.js"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        var dominantEyes = $("input[name='dominantEyes']").val();
+        $("#dominantEye").find("[value='" + dominantEyes + "']").attr("selected", true);
+        var sgnReasons = $("input[name='sgnReasons']").val();
+        $("#sgnReason").find("[value='" + sgnReasons + "']").attr("selected", true);
+        var sgnFardots = $("input[name='sgnFardots']").val();
+        $("#sgnFardot").find("[value='" + sgnFardots + "']").attr("selected", true);
+        var sgnNeardots = $("input[name='sgnNeardots']").val();
+        $("#sgnNeardot").find("[value='" + sgnNeardots + "']").attr("selected", true);
+        var sgnNearsp2s = $("input[name='sgnNearsp2s']").val();
+        $("#sgnNearsp2").find("[value='" + sgnNearsp2s + "']").attr("selected", true);
+        var sgnFarcz2s = $("input[name='sgnFarcz2s']").val();
+        $("#sgnFarcz2").find("[value='" + sgnFarcz2s + "']").attr("selected", true);
+        var sgnNearcz2s = $("input[name='sgnNearcz2s']").val();
+        $("#sgnNearcz2").find("[value='" + sgnNearcz2s + "']").attr("selected", true);
+        var pharmacys = $("input[name='pharmacys']").val();
+        $("#pharmacy").find("[value='" + pharmacys + "']").attr("selected", true);
+        var jdrZs = $("input[name='jdrZs']").val();
+        $("#jdrZ").find("[value='" + jdrZs + "']").attr("selected", true);
+        var jdlZs = $("input[name='jdlZs']").val();
+        $("#jdlZ").find("[value='" + jdlZs + "']").attr("selected", true);
+        var jdrTrys = $("input[name='jdrTrys']").val();
+        $("#jdrTry").find("[value='" + jdrTrys + "']").attr("selected", true);
+        var jdlTrys = $("input[name='jdlTrys']").val();
+        $("#jdlTry").find("[value='" + jdlTrys + "']").attr("selected", true);
+
+        $(function () {
+            $("input[type='radio']").click(function () {
+                this.checked = !this.checked;
+            });
+        });
+    });
+
+</script>
+
+</body>
+</html>

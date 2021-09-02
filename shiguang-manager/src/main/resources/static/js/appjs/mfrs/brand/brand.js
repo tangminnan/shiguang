@@ -339,7 +339,6 @@ function updateEnable(brandid, enable) {
     if ($(enable).prop("checked")) {
         isEnable = 0;
     }
-
     $.ajax({
         url: prefix + "/updateEnable",
         type: "post",

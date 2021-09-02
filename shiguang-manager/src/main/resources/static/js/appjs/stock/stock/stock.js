@@ -182,6 +182,12 @@ function showCol() {
 
         var medicinecode = rowstr.find("[name='medicinecode']").html();
         obj.medicinecode = medicinecode;
+        var factory = rowstr.find("[name='factory']").html();
+        obj.factory = factory;
+        var classtype = rowstr.find("[name='classtype']").html();
+        obj.classtype = classtype;
+        var gdname = rowstr.find("[name='gdname']").html();
+        obj.gdname = gdname;
 
 
         objArray.push(obj);

@@ -231,6 +231,10 @@ public class StockController {
                 stockDO.setZhuceNumber(zhuceNumber);
                 String produceDay = stock.getProduceDay().split(",")[i];
                 stockDO.setProduceDay(produceDay);
+                String status = stock.getStatus().split(",")[i];
+                stockDO.setStatus(status);
+                String username = stock.getUsername().split(",")[i];
+                stockDO.setUsername(username);
 
                 if(null != stock.getClasstype()){
                     String classtype = stock.getClasstype().split(",")[i];
@@ -310,6 +314,10 @@ public class StockController {
             orderDO1.setZhuceNumber(zhuceNumber);
             String produceDay = orderDO.getProduceDay().split(",")[i];
             orderDO1.setProduceDay(produceDay);
+            String status = orderDO.getStatus().split(",")[i];
+            orderDO1.setStatus(status);
+            String username = orderDO.getUsername().split(",")[i];
+            orderDO1.setUsername(username);
             if(null != orderDO.getClasstype()){
                 String classtype = orderDO.getClasstype().split(",")[i];
                 orderDO1.setClasstype(classtype);
@@ -784,7 +792,8 @@ public class StockController {
         List<OrderDO> orderDOS = orderService.getCode(map);
         model.addAttribute("orderDOS", orderDOS);
         for (OrderDO orderDO1 : orderDOS){
-            String code = BarCodeUtils.generateBarCode128(orderDO1.getGoodsCode(), 10.0, 0.3, true, true);//条形码
+//            String code = BarCodeUtils.generateBarCode128(orderDO1.getGoodsCode(), 10.0, 0.3, true, true);//条形码
+            String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
             code = "data:image/png;base64," + code;
             orderDO1.setQRCode(code);
         }

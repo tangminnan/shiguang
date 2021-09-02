@@ -56,10 +56,13 @@ public class TryresultsServiceImpl implements TryresultsService {
         return tryresultsDao.batchRemove(ids);
     }
 //    医生
-
-
     @Override
     public List<TryresultsDO> listDoctor(Map<String, Object> map) {
         return tryresultsDao.listDoctor(map);
+    }
+
+    @Override
+    public List<TryresultsDO>  getTryresult(String cardNumber) {
+        return tryresultsDao.getTryresult(cardNumber);
     }
 }

@@ -17,6 +17,11 @@ public class OrderDO implements Serializable {
 
     //主键
     private Long id;
+    //状态
+    private String status;
+    //工号
+    private String  username;
+
     //商品代码
     private String goodsNum;
     //商品条码
@@ -72,6 +77,15 @@ private String brandname;
     private String wholeSum;
     //仓位id
     private  String positionId;
+    private  String departNumber;
+
+    public String getDepartNumber() {
+        return departNumber;
+    }
+
+    public void setDepartNumber(String departNumber) {
+        this.departNumber = departNumber;
+    }
 
     public String getPositionId() {
         return positionId;
@@ -228,6 +242,22 @@ private String brandname;
      */
     public Long getId() {
         return id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**

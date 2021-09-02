@@ -289,4 +289,7 @@
 		</foreach>
 	</delete>
 
+	<select id="shujulist" resultType="com.shiguang.jiancha.domain.ResultDO">
+		select ptometry_number ,optometry_name,create_time,follow_time from jc_result where card_number=#{cardNumber}   order by id desc
+	</select>
 </mapper>

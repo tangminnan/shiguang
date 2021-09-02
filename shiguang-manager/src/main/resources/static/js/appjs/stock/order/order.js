@@ -43,9 +43,9 @@ function load() {
                 // sortOrder.
                 // 返回false将会终止请求
                 columns: [
-                    {
-                        // checkbox: true
-                    },
+                    // {
+                    //     // checkbox: true
+                    // },
                     // {
                     //     field: 'id',
                     //     title: '主键'
@@ -88,13 +88,17 @@ function load() {
                             // var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
                             //     + row.id
                             //     + '\')"><i class="fa fa-remove"></i></a> ';
-                            // var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-                            //     + row.id
-                            //     + '\')"><i class="fa fa-key"></i></a> ';
-                            var n = '<a class="btn btn-primary btn-xs" href="#" title="条形码打印"  mce_href="#" onclick="code(\''
-                                + row.danjuNumber
-                                + '\')" style="text-decoration: none;">条形码打印</a>';
-                            return n ;
+                            // alert(row.status)
+                            if (row.status == "1") {
+                                var f = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#" onclick="userNum(\''
+                                    + row.danjuNumber + '\')">确认收货</span> ';
+                                var n = '';
+                            } else if (row.status == "0") {
+                                var f = '';
+                                var n = '<span class="btn btn-primary btn-sm"  href="#" title="条形码打印"  mce_href="#" onclick="code(\''
+                                    + row.danjuNumber + '\')">条形码打印</span> ';
+                            }
+                            return f + n ;
                         }
                     }
                 ]
@@ -104,7 +108,59 @@ function load() {
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
 }
+//打印条码
 function code(danjuNumber){
-    alert(danjuNumber);
     window.open("/stock/stock/code?danjuNumber="+danjuNumber);
+}
+function userNum(danjuNumber) {
+    var staus="1";
+    if (staus == "1"){
+        // alert("输入工号")
+        layer.open({
+            type : 2,
+            title : '输入工号',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content :"/stock/order/userNum/"+ danjuNumber
+        });
+
+    }
+}
+//修改启用状态
+function updateEnable() {
+    var danjuNumber = document.getElementById('danjuNumber').value;
+    var username = document.getElementById('username').value;
+    // alert(username)
+    var status = "0";
+    if (username !=""){
+        $.ajax({
+            url: "/stock/order/updateStatus",
+            type: "post",
+            data: {
+                'danjuNumber': danjuNumber,
+                'status': status,
+                'username':username
+            },
+            dataType: 'JSON',
+            async: false,
+            success: function (data) {
+                if (data.code == 0) {
+                    parent.layer.msg("操作成功");
+                    parent.reLoad();
+                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    parent.layer.close(index);
+
+                } else {
+                    parent.layer.alert(data.msg)
+                }
+
+            }
+        });
+    } else {
+        layer.alert("请输入工号！");
+        // return this;
+    }
+
+
 }

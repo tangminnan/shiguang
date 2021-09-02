@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 <body>
+<form class="form-horizontal m-t" id="signupForm">
 <!--单据信息-->
 <div class="m40 tabS msgBox">
 	<h3>单据信息</h3>
@@ -20,33 +21,40 @@
 			<td>
 				<input id="pidiaoNumber" name="pidiaoNumber" th:value="${pidiaoNum}" style="background-color: #e4e4e4" readonly type="text">
 			</td>
-			<td>关联单号：</td>
+			<td>制单人：</td>
 			<td>
-				<input id="guanlianNumber" name="guanlianNumber" type="text"/>
+				<input id="zhidanPeople" name="zhidanPeople" th:value="${zhidanPeople}" type="text" />
 			</td>
+			<td>单据日期：</td>
+			<td>
+				<input id="danjuDay" name="danjuDay" th:value="${danjuDay}"  type="text"/>
+			</td>
+		</tr>
+		<tr>
 			<td>发出部门：</td>
 			<td>
 				<select id="outDepartment" name="outDepartment" style="width:50%" onchange="outposion()">
 					<option></option>
 					<option th:each="ls:${departmentDOList}"
 							th:text="${ls.departName}"
-							th:value="${ls.departName}"
+							th:value="${ls.id}"
 					></option>
 				</select>
 			</td>
-		</tr>
-		<tr>
 			<td>发出仓位：</td>
 			<td>
 				<select  id="outPosition" name="outPosition" style="width:50%" class="outcw"></select>
 			</td>
+
+		</tr>
+		<tr>
 			<td>接收公司：</td>
 			<td>
-				<select id="inCompany" name="inCompany" style="width:50%" onchange="indepartment()">
+				<select id="inCompany" name="inCompany" style="width:48%" onchange="indepartment()">
 					<option></option>
 					<option th:each="ls:${companyList}"
 							th:text="${ls.name}"
-							th:value="${ls.name}"
+							th:value="${ls.id}"
 					></option>
 				</select>
 			</td>
@@ -55,20 +63,11 @@
 				<select id="inDepartment" name="inDepartment" style="width:50%" class="ings" onchange="inposion()"></select>
 			</td>
 
-		</tr>
-		<tr>
 			<td>接收仓位：</td>
 			<td>
 				<select id="inPosition" name="inPosition" style="width:50%" class="incw"></select>
 			</td>
-			<td>制单人：</td>
-			<td>
-				<input id="zhidanPeople" name="zhidanPeople" type="text" />
-			</td>
-			<td>单据日期：</td>
-			<td>
-				<input id="danjuDay" name="danjuDay" type="text"/>
-			</td>
+
 		</tr>
 		<tr>
 			<td>备注：</td>
@@ -85,7 +84,7 @@
 			<!--<input class="HgreenBG" type="button" value="打印条码" />-->
 		</div>
 		<div class="Cbtn buyBtns">
-			<input type="button" class="H_bc" value="保存" onclick="baocun()" />
+			<input type="button" class="H_bc" value="保存" onclick="save()" />
 			<!--<input type="checkbox" id="Hbc" /> <label for="Hbc">保存并审核</label>-->
 		</div>
 	</div>
@@ -102,7 +101,7 @@
 			<td>商品代码</td>
 			<td>商品名称</td>
 			<td>型号</td>
-			<td>需求数量</td>
+			<!--<td>需求数量</td>-->
 			<td>可调用数量</td>
 			<td>批调数量</td>
 			<td>商品条码</td>
@@ -110,41 +109,29 @@
 			<td>批号</td>
 			<td>注册证号</td>
 			<td>生产日期</td>
+			<td style="display: none">镜片类型</td>
+			<td style="display: block">制造商</td>
+			<td style="display: block">品牌</td>
 		</tr>
 		<tr class="liebiao">
-			<td colspan="5"></td>
-			<td>合计：</td>
-			<td>45684</td>
+			<!--<td colspan="5"></td>-->
+			<!--<td>合计：</td>-->
+			<!--<td>45684</td>-->
 		</tr>
-		<!--<tr>-->
-			<!--<td><input type="checkbox" /></td>-->
-			<!--<td>123569875425</td>-->
-			<!--<td>名称名称每次</td>-->
-			<!--<td>SD90</td>-->
-			<!--<td>148</td>-->
-			<!--<td>148</td>-->
-			<!--<td>148</td>-->
-			<!--<td>148</td>-->
-			<!--<td>148</td>-->
-			<!--<td>148</td>-->
-			<!--<td>2020-12-25</td>-->
-			<!--<td>569999</td>-->
-		<!--</tr>-->
 		</tbody>
 	</table>
 	<div class="Cbtn buyBtns">
-		<input type="button" class="H_bc" value="保存" />
-		<!--<input type="checkbox" id="HHbc" /> <label for="HHbc">保存并审核</label>-->
+		<input type="button" class="H_bc" value="保存并审核"  onclick="save()"/>
 	</div>
 </div>
+</form>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/stock/pidiao/add.js"></script>
 <script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
 <script type="text/javascript">
 function outposion() {
     var outDepartment = $("#outDepartment option:selected").text();
     $(".outcw").empty("");
-    // $(".outcw").append("<option value=''></option>");
+    $(".outcw").append("<option value=''></option>");
     $.ajax({
         url: '/stock/pidiao/outposion',
         type: 'post',
@@ -215,10 +202,8 @@ function inposion() {
         var inDepartment = $("#inDepartment option:selected").text();
         if (outDepartment == "") {
             layer.alert("请选择发出部门！");
-            // return this;
         } else if (outPosition == "") {
             layer.alert("请选择发出仓位！");
-            // return this;
         }else if (inCompany == ""){
             layer.alert("请选择接收公司！");
 		} else if (inDepartment == ""){
@@ -231,23 +216,38 @@ function inposion() {
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
-                content: "/stock/pidiao/selextkc/",// iframe的url
+                content: "/stock/pidiao/selextkc/"+ outPosition,// iframe的url
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
-                    // layer.layer.alert(JSON.stringify(rows))
                     for (var i = 0; i < rows.length; i++) {
+                        alert(rows[i].mfrsid )
                         $(".liebiao").after("<tr class='val'> " +
 							// "<td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "<td name='goodsNum'>" + rows[i].goodsNum + "</td>\n" +
+                            "<input name='goodsNum' type='hidden' value='" + rows[i].goodsNum + "'>\n" +
                             "<td name='goodsName'>" + rows[i].goodsName + "</td>\n" +
-                            "<td name='producFactory'>" + rows[i].producFactory + "</td>\n" +
-                            "<td name='unitname'>" + rows[i].unitname + "</td>\n" +
-                            "<td name='retailPrice'>" + rows[i].retailPrice + "</td>\n" +
-                            "<td name='taxPrice'>" + rows[i].taxPrice + "</td>\n" +
-                            "<td name='tradePrice'style='display: none'>" + rows[i].tradePrice + "</td>\n" +
-                            "<td name='transferPrice'style='display: none'>" + rows[i].transferPrice + "</td>\n" +
-                            "<td name='producCode'style='display: none'>" + rows[i].producCode + "</td>\n" +
-                            "<td name='brandname' style='display: none'>" + rows[i].brandname + "</td></tr>>");//页面每个数量
+                            "<input name='goodsName' type='hidden' value='" + rows[i].goodsName + "'>\n" +
+                            "<td name='factory'>" + rows[i].factory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
+                            // "<td name='needCount'>" + rows[i].needCount + "</td>\n" +
+                            "<td name='goodsCount'>" + rows[i].goodsCount + "</td>\n" +
+                            "<input name='goodsCount' type='hidden' value='" + rows[i].goodsCount + "'>\n" +
+                            "<td >" + "<input name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                            "<td name='goodsCode'>" + rows[i].goodsCode + "</td>\n" +
+                            "<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>\n" +
+                            "<td name='useday'>" + rows[i].useday + "</td>\n" +
+                            "<input name='useday' type='hidden' value='" + rows[i].useday + "'>\n" +
+                            "<td name='batch'>" + rows[i].batch + "</td>\n" +
+                            "<input name='batch' type='hidden' value='" + rows[i].batch + "'>\n" +
+                            "<td name='zhuceNumber'>" + rows[i].zhuceNumber + "</td>\n" +
+                            "<input name='zhuceNumber' type='hidden' value='" + rows[i].zhuceNumber + "'>\n" +
+                            "<td name='produceDay'>" + rows[i].produceDay + "</td>\n" +
+                            "<input name='produceDay' type='hidden' value='" + rows[i].produceDay + "'>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+                            "<input name='goods' type='hidden' value='" + rows[i].gdname + "'>\n" +
+                            "<input name='mfrsid' type='text' value='" + rows[i].mfrsid + "'>\n" +
+                            "<input name='brandname' type='text' value='" + rows[i].brandname + "'>\n" +
+                            "</tr>");
                     }
                 }
             });

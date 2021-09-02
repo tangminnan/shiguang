@@ -74,7 +74,7 @@ public class KcController {
     @RequestMapping(value = "/selectKc")
     public List<StockDO> selectSg(String goodsNum, String goodsCode, String goodsName,
                                   Integer goodsType, String mfrsname,String brandname,String retailPrice, String retailPrice2,
-                                  Long xsstate, String positionId,String classtype, Model model) {
+                                  String xsstate, String positionId,String classtype,String outPosition, Model model) {
         Map<String, Object> map = new HashMap<>();
 
         //———获取当前登录用户的公司id————
@@ -95,8 +95,9 @@ public class KcController {
         map.put("retailPrice2", retailPrice2);
         map.put("xsstate", xsstate);
         map.put("positionId", positionId);
-//        map.put("positionName", positionName);
         map.put("classtype", classtype);
+        map.put("status","0");
+        map.put("outPosition",outPosition);
         List<StockDO> stockDOS = stockService.kccxList(map);
         model.addAttribute("stockDOS", stockDOS);
         return stockDOS;

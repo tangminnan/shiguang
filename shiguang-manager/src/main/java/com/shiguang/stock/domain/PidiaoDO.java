@@ -17,15 +17,19 @@ public class PidiaoDO implements Serializable {
 	
 	//批调id
 	private Long id;
+	//状态
+	private String status;
+	//工号
+	private String  username;
 	//批调单号
-	private Integer pidiaoNumber;
+	private String pidiaoNumber;
 	//关联单号
 	private String guanlianNumber;
 	//发出部门
-	private Long outDepartmentid;
+	private String outDepartmentid;
 	private String outDepartment;
 	//发出仓位
-	private Long outPositionid;
+	private String outPositionid;
 	private String outPosition;
 	//接收公司
 	private String inCompanyid;
@@ -36,47 +40,6 @@ public class PidiaoDO implements Serializable {
 	//接收仓位
 	private String inPositionid;
 	private String inPosition;
-
-	public Long getOutDepartmentid() {
-		return outDepartmentid;
-	}
-
-	public void setOutDepartmentid(Long outDepartmentid) {
-		this.outDepartmentid = outDepartmentid;
-	}
-
-	public Long getOutPositionid() {
-		return outPositionid;
-	}
-
-	public void setOutPositionid(Long outPositionid) {
-		this.outPositionid = outPositionid;
-	}
-
-	public String getInCompanyid() {
-		return inCompanyid;
-	}
-
-	public void setInCompanyid(String inCompanyid) {
-		this.inCompanyid = inCompanyid;
-	}
-
-	public String getInDepartmentid() {
-		return inDepartmentid;
-	}
-
-	public void setInDepartmentid(String inDepartmentid) {
-		this.inDepartmentid = inDepartmentid;
-	}
-
-	public String getInPositionid() {
-		return inPositionid;
-	}
-
-	public void setInPositionid(String inPositionid) {
-		this.inPositionid = inPositionid;
-	}
-
 	//制单人
 	private String zhidanPeople;
 	//单据日期
@@ -107,15 +70,11 @@ public class PidiaoDO implements Serializable {
 	private String useday;
 	//合计
 	private String allCount;
+	//镜片类型
 	private  String classtype;
+	//商品类型
+	private  String goods;
 
-	public String getClasstype() {
-		return classtype;
-	}
-
-	public void setClasstype(String classtype) {
-		this.classtype = classtype;
-	}
 
 	/**
 	 * 设置：批调id
@@ -129,16 +88,33 @@ public class PidiaoDO implements Serializable {
 	public Long getId() {
 		return id;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	/**
 	 * 设置：批调单号
 	 */
-	public void setPidiaoNumber(Integer pidiaoNumber) {
+	public void setPidiaoNumber(String pidiaoNumber) {
 		this.pidiaoNumber = pidiaoNumber;
 	}
 	/**
 	 * 获取：批调单号
 	 */
-	public Integer getPidiaoNumber() {
+	public String getPidiaoNumber() {
 		return pidiaoNumber;
 	}
 	/**
@@ -451,5 +427,347 @@ public class PidiaoDO implements Serializable {
 
 	public void setFactory(String factory) {
 		this.factory = factory;
+	}
+
+	public String getOutDepartmentid() {
+		return outDepartmentid;
+	}
+
+	public void setOutDepartmentid(String outDepartmentid) {
+		this.outDepartmentid = outDepartmentid;
+	}
+
+	public String getOutPositionid() {
+		return outPositionid;
+	}
+
+	public void setOutPositionid(String outPositionid) {
+		this.outPositionid = outPositionid;
+	}
+
+	public String getInCompanyid() {
+		return inCompanyid;
+	}
+
+	public void setInCompanyid(String inCompanyid) {
+		this.inCompanyid = inCompanyid;
+	}
+
+	public String getInDepartmentid() {
+		return inDepartmentid;
+	}
+
+	public void setInDepartmentid(String inDepartmentid) {
+		this.inDepartmentid = inDepartmentid;
+	}
+
+	public String getInPositionid() {
+		return inPositionid;
+	}
+
+	public void setInPositionid(String inPositionid) {
+		this.inPositionid = inPositionid;
+	}
+
+	public String getClasstype() {
+		return classtype;
+	}
+
+	public void setClasstype(String classtype) {
+		this.classtype = classtype;
+	}
+
+	public String getGoods() {
+		return goods;
+	}
+
+	public void setGoods(String goods) {
+		this.goods = goods;
+	}
+
+
+
+	//商品类别
+	private String goodsType;
+	private String gdname;
+	//制造商id
+	private String mfrsid;
+	private String mfrsname;
+	private String brandname;
+
+	public String getBrandname() {
+		return brandname;
+	}
+
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
+	}
+
+	//标准零售价格
+	private String retailPrice;
+	//原价合计
+	private String priceSum;
+	//成本价格
+	private String costPrice;
+	//成本合计
+	private String costSum;
+	//批发价格
+	private String wholePrice;
+	//批发合计
+	private String wholeSum;
+
+	//入库时间
+	private Date createTime;
+	//单据编号
+	private String danjuNumber;
+	//订单编号
+	private String orderNumber;
+	//运单号
+	private String yundanNumber;
+
+	//退货单号
+	private String tuihuoNumber;
+	//厂家订单号
+	private String factoryNumber;
+
+	//单位
+	private String unit;
+	//调货成本
+	private String transferPrice;
+	//调货成本合计
+	private String transferPricecount;
+
+
+	//尺寸
+	private String size;
+	//型号
+	private String producFactory;
+	//球镜
+	private String sph;
+	//柱镜
+	private String cyl;
+	//下加光
+	private String lightbelow;
+	//折射率
+	private String refractivityvalue;
+	//光度分类
+	private String lightName;
+	//材料分类
+	private String lensName;
+
+	public String getGoodsType() {
+		return goodsType;
+	}
+
+	public void setGoodsType(String goodsType) {
+		this.goodsType = goodsType;
+	}
+
+	public String getGdname() {
+		return gdname;
+	}
+
+	public void setGdname(String gdname) {
+		this.gdname = gdname;
+	}
+
+	public String getMfrsid() {
+		return mfrsid;
+	}
+
+	public void setMfrsid(String mfrsid) {
+		this.mfrsid = mfrsid;
+	}
+
+	public String getMfrsname() {
+		return mfrsname;
+	}
+
+	public void setMfrsname(String mfrsname) {
+		this.mfrsname = mfrsname;
+	}
+
+	public String getRetailPrice() {
+		return retailPrice;
+	}
+
+	public void setRetailPrice(String retailPrice) {
+		this.retailPrice = retailPrice;
+	}
+
+	public String getPriceSum() {
+		return priceSum;
+	}
+
+	public void setPriceSum(String priceSum) {
+		this.priceSum = priceSum;
+	}
+
+	public String getCostPrice() {
+		return costPrice;
+	}
+
+	public void setCostPrice(String costPrice) {
+		this.costPrice = costPrice;
+	}
+
+	public String getCostSum() {
+		return costSum;
+	}
+
+	public void setCostSum(String costSum) {
+		this.costSum = costSum;
+	}
+
+	public String getWholePrice() {
+		return wholePrice;
+	}
+
+	public void setWholePrice(String wholePrice) {
+		this.wholePrice = wholePrice;
+	}
+
+	public String getWholeSum() {
+		return wholeSum;
+	}
+
+	public void setWholeSum(String wholeSum) {
+		this.wholeSum = wholeSum;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getDanjuNumber() {
+		return danjuNumber;
+	}
+
+	public void setDanjuNumber(String danjuNumber) {
+		this.danjuNumber = danjuNumber;
+	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	public String getYundanNumber() {
+		return yundanNumber;
+	}
+
+	public void setYundanNumber(String yundanNumber) {
+		this.yundanNumber = yundanNumber;
+	}
+
+	public String getTuihuoNumber() {
+		return tuihuoNumber;
+	}
+
+	public void setTuihuoNumber(String tuihuoNumber) {
+		this.tuihuoNumber = tuihuoNumber;
+	}
+
+	public String getFactoryNumber() {
+		return factoryNumber;
+	}
+
+	public void setFactoryNumber(String factoryNumber) {
+		this.factoryNumber = factoryNumber;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public String getTransferPrice() {
+		return transferPrice;
+	}
+
+	public void setTransferPrice(String transferPrice) {
+		this.transferPrice = transferPrice;
+	}
+
+	public String getTransferPricecount() {
+		return transferPricecount;
+	}
+
+	public void setTransferPricecount(String transferPricecount) {
+		this.transferPricecount = transferPricecount;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public String getProducFactory() {
+		return producFactory;
+	}
+
+	public void setProducFactory(String producFactory) {
+		this.producFactory = producFactory;
+	}
+
+	public String getSph() {
+		return sph;
+	}
+
+	public void setSph(String sph) {
+		this.sph = sph;
+	}
+
+	public String getCyl() {
+		return cyl;
+	}
+
+	public void setCyl(String cyl) {
+		this.cyl = cyl;
+	}
+
+	public String getLightbelow() {
+		return lightbelow;
+	}
+
+	public void setLightbelow(String lightbelow) {
+		this.lightbelow = lightbelow;
+	}
+
+	public String getRefractivityvalue() {
+		return refractivityvalue;
+	}
+
+	public void setRefractivityvalue(String refractivityvalue) {
+		this.refractivityvalue = refractivityvalue;
+	}
+
+	public String getLightName() {
+		return lightName;
+	}
+
+	public void setLightName(String lightName) {
+		this.lightName = lightName;
+	}
+
+	public String getLensName() {
+		return lensName;
+	}
+
+	public void setLensName(String lensName) {
+		this.lensName = lensName;
 	}
 }

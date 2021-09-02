@@ -267,4 +267,14 @@ public class StockServiceImpl implements StockService {
     public List<StockDO> kccxList(Map<String, Object> map) {
         return stockDao.kccxList(map);
     }
+
+    @Override
+    public int updateStatus(StockDO stock) {
+        return stockDao.updateStatus(stock);
+    }
+
+    @Override
+    public int outPosionJ(StockDO stockDO) {
+        return stockDao.outPosionJ(stockDO);
+    }
 }
