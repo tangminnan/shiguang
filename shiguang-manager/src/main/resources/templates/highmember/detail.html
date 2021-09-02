@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
+<head th:include="include :: header">
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content ">
 	<div class="col-sm-12">
@@ -19,7 +24,8 @@
 <div>
 	<ul class="nav nav-tabs" id="myTab">
 		<li class="active"><a class="btn btn-primary btn-xs" href="#huiyuandetail" mce_href="#" style="text-decoration: none;">会员详细</a></li>
-		<!--<li><a class="btn btn-primary btn-xs" href="#binglidetail" mce_href="#" style="text-decoration: none;">病历信息</a></li>-->
+		<li><a class="btn btn-primary btn-xs" href="#binglidetail" mce_href="#" style="text-decoration: none;">病历信息</a></li>
+		<li><a class="btn btn-primary btn-xs" href="#xiaoshoudetail" mce_href="#" style="text-decoration: none;">销售信息</a></li>
 		<!-- <li><a class="btn btn-primary btn-xs" href="#yanguangdetail" mce_href="#" style="text-decoration: none;">验光详情</a></li> -->
 	</ul>
 
@@ -31,7 +37,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">顾客姓名：&nbsp;&nbsp;</label>
 						<div class="col-sm-6">
-							<input id="name" name="name" th:value="${member.name}"  type="text" disabled>
+							<input name="name" th:value="${member.name}"  type="text" disabled>
 						</div>
 					</div>
 					<div class="form-group">
@@ -43,7 +49,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">出生日期：</label>
 						<div class="col-sm-6">
-							<input id="birthdayYear" name="birthdayYear" th:value="${member.birthdayYear}+'-'+${member.birthdayMonth}+'-'+${member.birthdayDay}" type="text" disabled>
+							<input  name="birthdayYear" th:value="${member.birthdayYear}+'-'+${member.birthdayMonth}+'-'+${member.birthdayDay}" type="text" disabled>
 						</div>
 					</div>
 				</div>
@@ -51,7 +57,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄：</label>
 						<div class="col-sm-6">
-							<input id="age" name="age" th:value="${member.age}" type="text" disabled>
+							<input name="age" th:value="${member.age}" type="text" disabled>
 						</div>
 					</div>
 					<div class="form-group" >
@@ -70,7 +76,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">关联顾客：</label>
 						<div class="col-sm-6">
-							<input id="masterCard" name="masterCard" th:value="${member.masterCard}" type="text" disabled>
+							<input name="masterCard" th:value="${member.masterCard}" type="text" disabled>
 						</div>
 					</div>
 				</div>
@@ -78,7 +84,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">联系电话1：</label>
 						<div class="col-sm-6">
-							<input id="phone1" name="phone1" th:value="${member.phone1}" type="text" disabled>
+							<input name="phone1" th:value="${member.phone1}" type="text" disabled>
 						</div>
 					</div>
 					<div class="form-group">
@@ -90,7 +96,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">联系电话3：</label>
 						<div class="col-sm-6">
-							<input id="phone3" name="phone3" th:value="${member.phone3}" type="text" disabled>
+							<input name="phone3" th:value="${member.phone3}" type="text" disabled>
 						</div>
 					</div>
 				</div>
@@ -99,31 +105,31 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">会员卡号：</label>
 						<div class="col-sm-6">
-							<input id="cardNumber" name="cardNumber" th:value="${member.cardNumber}"  type="text" disabled>
+							<input name="cardNumber" th:value="${member.cardNumber}"  type="text" disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-4 control-label">会员卡名：</label>
 						<div class="col-sm-6">
-							<input id="cardType" name="cardType" th:value="${member.cardType}"  type="text" disabled>
+							<input name="cardType" th:value="${member.cardType}"  type="text" disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-4 control-label">积分：</label>
 						<div class="col-sm-6">
-							<input id="inteNum" name="inteNum" th:value="0"  type="text" disabled>
+							<input name="inteNum" th:value="0"  type="text" disabled>
 						</div>
 					</div>
 				</div>
 			</table>
 		</div>
 
-		<div class="tab-pane" id="binglidetail">
+		<div class="tab-pane" id="binglidetail" style="margin-left: 5%">
 			<table id="exampleTable2" data-mobile-responsive="true">
 				<h1 style="text-align: center;font-size: 15px">--基本信息--</h1>
 				<div class="form-inline">
 					<div class="form-group">
-						<label class="col-sm-4 control-label">顾客姓名：</label>
+						<label class="col-sm-4 control-label">顾客姓名：&nbsp;&nbsp;</label>
 						<div class="col-sm-6">
 							<input name="name" th:value="${member.name}"  type="text" disabled>
 						</div>
@@ -131,7 +137,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">顾客性别：</label>
 						<div class="col-sm-6">
-							<input type="text" th:value="${member.sex}" name="sexx"  disabled/>
+							<input type="text" th:value="${member.sexx}" name="sexx"  disabled/>
 						</div>
 					</div>
 					<div class="form-group">
@@ -141,38 +147,191 @@
 						</div>
 					</div>
 				</div>
+				<div class="form-inline" style="padding-top: 20px;">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄：</label>
+						<div class="col-sm-6">
+							<input name="age" th:value="${member.age}" type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group" >
+						<label class="col-sm-4 control-label">地区(3级)：</label>
+						<div class="col-sm-6" >
+							<input id="div3" name="provinceName" style="display: none" value="" type="text" disabled>
+							<input id="div4" name="provinceName" style="display: none" th:value="${member.provinceName}+','+${member.cityName}+','+${member.areaName}" type="text" disabled>
+						</div>
+					</div>
+					<!--<div class="form-group" id="div2" style="display: none">-->
+					<!--<label class="col-sm-4 control-label">地区(3级)：</label>-->
+					<!--<div class="col-sm-6" >-->
+					<!--<input  name="provinceName" th:value="${member.provinceName}+','+${member.cityName}+','+${member.areaName}" type="text" disabled>-->
+					<!--</div>-->
+					<!--</div>-->
+					<div class="form-group">
+						<label class="col-sm-4 control-label">关联顾客：</label>
+						<div class="col-sm-6">
+							<input name="masterCard" th:value="${member.masterCard}" type="text" disabled>
+						</div>
+					</div>
+				</div>
+				<div class="form-inline" style="padding-top: 20px;">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">联系电话1：</label>
+						<div class="col-sm-6">
+							<input name="phone1" th:value="${member.phone1}" type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">联系电话2：</label>
+						<div class="col-sm-6">
+							<input name="phone2" th:value="${member.phone2}" type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">联系电话3：</label>
+						<div class="col-sm-6">
+							<input name="phone3" th:value="${member.phone3}" type="text" disabled>
+						</div>
+					</div>
+				</div>
+				<h1 style="text-align: center;font-size: 15px">--会员卡信息--</h1>
+				<div class="form-inline">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">会员卡号：</label>
+						<div class="col-sm-6">
+							<input name="cardNumber" th:value="${member.cardNumber}"  type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">会员卡名：</label>
+						<div class="col-sm-6">
+							<input name="cardType" th:value="${member.cardType}"  type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">积分：</label>
+						<div class="col-sm-6">
+							<input name="inteNum" th:value="0"  type="text" disabled>
+						</div>
+					</div>
+				</div>
 			</table>
 		</div>
-
+		<div class="tab-pane" id="xiaoshoudetail" style="margin-left: 5%">
+			<table id="exampleTable3" data-mobile-responsive="true">
+				<h1 style="text-align: center;font-size: 15px">--基本信息--</h1>
+				<div class="form-inline">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">顾客姓名：&nbsp;&nbsp;</label>
+						<div class="col-sm-6">
+							<input name="name" th:value="${member.name}"  type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">顾客性别：</label>
+						<div class="col-sm-6">
+							<input type="text" th:value="${member.sexx}" name="sexx"  disabled/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">出生日期：</label>
+						<div class="col-sm-6">
+							<input name="birthdayYear" th:value="${member.birthdayYear}+'-'+${member.birthdayMonth}+'-'+${member.birthdayDay}" type="text" disabled>
+						</div>
+					</div>
+				</div>
+				<div class="form-inline" style="padding-top: 20px;">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄：</label>
+						<div class="col-sm-6">
+							<input name="age" th:value="${member.age}" type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group" >
+						<label class="col-sm-4 control-label">地区(3级)：</label>
+						<div class="col-sm-6" >
+							<input id="div5" name="provinceName" style="display: none" value="" type="text" disabled>
+							<input id="div6" name="provinceName" style="display: none" th:value="${member.provinceName}+','+${member.cityName}+','+${member.areaName}" type="text" disabled>
+						</div>
+					</div>
+					<!--<div class="form-group" id="div2" style="display: none">-->
+					<!--<label class="col-sm-4 control-label">地区(3级)：</label>-->
+					<!--<div class="col-sm-6" >-->
+					<!--<input  name="provinceName" th:value="${member.provinceName}+','+${member.cityName}+','+${member.areaName}" type="text" disabled>-->
+					<!--</div>-->
+					<!--</div>-->
+					<div class="form-group">
+						<label class="col-sm-4 control-label">关联顾客：</label>
+						<div class="col-sm-6">
+							<input name="masterCard" th:value="${member.masterCard}" type="text" disabled>
+						</div>
+					</div>
+				</div>
+				<div class="form-inline" style="padding-top: 20px;">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">联系电话1：</label>
+						<div class="col-sm-6">
+							<input name="phone1" th:value="${member.phone1}" type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">联系电话2：</label>
+						<div class="col-sm-6">
+							<input  name="phone2" th:value="${member.phone2}" type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">联系电话3：</label>
+						<div class="col-sm-6">
+							<input  name="phone3" th:value="${member.phone3}" type="text" disabled>
+						</div>
+					</div>
+				</div>
+				<h1 style="text-align: center;font-size: 15px">--会员卡信息--</h1>
+				<div class="form-inline">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">会员卡号：</label>
+						<div class="col-sm-6">
+							<input name="cardNumber" th:value="${member.cardNumber}"  type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">会员卡名：</label>
+						<div class="col-sm-6">
+							<input  name="cardType" th:value="${member.cardType}"  type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">积分：</label>
+						<div class="col-sm-6">
+							<input  name="inteNum" th:value="0"  type="text" disabled>
+						</div>
+					</div>
+				</div>
+				<!--<div class="m40 tabS SPmsg">-->
+					<!--<h3>商品信息</h3>-->
+					<!--<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">-->
+						<!--<tbody id="unqualId">-->
+						<!--<tr class="thead">-->
+							<!--<td>全选 <input type="checkbox" /></td>-->
+							<!--<td>商品代码</td>-->
+							<!--<td>商品名称</td>-->
+							<!--<td>不合格原因</td>-->
+							<!--<td>备注</td>-->
+							<!--<td>数量</td>-->
+							<!--<td>商品条码</td>-->
+							<!--<td>处理</td>-->
+						<!--</tr>-->
+						<!--</tbody>-->
+					<!--</table>-->
+				<!--</div>-->
+			</table>
+		</div>
 		<!-- <div class="tab-pane" id="yanguangdetail">
             <table id="exampleTable6" data-mobile-responsive="true"></table>
         </div> -->
 	</div>
 
-</div>
-
-<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-<div>
-	<script type="text/javascript">
-        var s_edit_h = 'hidden';
-        var s_remove_h = 'hidden';
-        var s_resetPwd_h = 'hidden';
-	</script>
-</div>
-<div shiro:hasPermission="information:highmember:edit">
-	<script type="text/javascript">
-        s_edit_h = '';
-	</script>
-</div>
-<div shiro:hasPermission="information:highmember:remove">
-	<script type="text/javascript">
-        var s_remove_h = '';
-	</script>
-</div>
-<div shiro:hasPermission="information:highmember:resetPwd">
-	<script type="text/javascript">
-        var s_resetPwd_h = '';
-	</script>
 </div>
 </div>
 <div th:include="include :: footer"></div>
@@ -182,8 +341,12 @@
         var proviceName = $("#provinceName").val();
         if (proviceName == 0){
             div1.style="display: block";
+            div3.style="display: block";
+            div5.style="display: block";
 		} else {
             div2.style="display: block";
+            div4.style="display: block";
+            div6.style="display: block";
 		}
     });
     $('#myTab a').click(function (e) {
@@ -193,6 +356,7 @@
     function reLoad() {
         $('#exampleTable1').bootstrapTable('refresh');
         $('#exampleTable2').bootstrapTable('refresh');
+        $('#exampleTable3').bootstrapTable('refresh');
     }
 </script>
 </body>

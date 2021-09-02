@@ -102,7 +102,7 @@
         m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status`,m.`state`
         from member m join department d on d.depart_number = m.depart_number
         <where>
-            <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
             <if test="dateNow != null and dateNow != ''"> and DATE_FORMAT(c.create_time,'%Y-%m-%d') = #{dateNow} </if>
             <if test="departNumber != null and departNumber != ''">
                 and m.depart_number = ${departNumber}
@@ -117,7 +117,7 @@
         select count(*)
         from member m join department d on d.depart_number = m.depart_number
         <where>
-            <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
             <if test="dateNow != null and dateNow != ''"> and DATE_FORMAT(c.create_time,'%Y-%m-%d') = #{dateNow} </if>
             <if test="departNumber != null and departNumber != ''">
                 and m.depart_number = ${departNumber}

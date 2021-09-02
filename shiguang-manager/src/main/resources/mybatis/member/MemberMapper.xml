@@ -21,13 +21,13 @@
         join department d on d.depart_number = m.depart_number
         <where>
             <if test="id != null and id != ''"> and m.id = #{id} </if>
-            <if test="name != null and name != ''"> and m.`name` = #{name} </if>
+            <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
             <if test="memberOption != null and memberOption != ''"> and m.member_option = #{memberOption} </if>
             <if test="departNumber != null and departNumber != ''">
              and m.depart_number = ${departNumber}
             </if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
-            <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
             <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
@@ -88,7 +88,7 @@
         <if test="name != null and name != ''"> and m.name = #{name} </if>
         <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
         <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
-        <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+        <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
         <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
         <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
         <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
@@ -126,7 +126,7 @@
             <if test="name != null and name != ''"> and m.name = #{name} </if>
             <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
             <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
-            <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
             <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
@@ -145,13 +145,13 @@
         join department d on d.depart_number = m.depart_number
         <where>
             <if test="id != null and id != ''"> and m.id = #{id} </if>
-            <if test="name != null and name != ''"> and m.`name` = #{name} </if>
+            <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
             <if test="memberOption != null and memberOption != ''"> and m.member_option = #{memberOption} </if>
             <if test="departNumber != null and departNumber != ''">
                 and m.depart_number = ${departNumber}
             </if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
-            <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
             <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>

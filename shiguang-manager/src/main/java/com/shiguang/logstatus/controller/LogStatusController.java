@@ -290,7 +290,7 @@ public class LogStatusController {
         LogStatusDO logStatusDO = new LogStatusDO();
         Map<String,Object> map = new HashMap<>();
         map.put("saleNumber",status.getSaleNumber());
-        map.put("goodsNum",status.getGoodsNum());
+        map.put("goodsCode",status.getGoodsNum());
         List<SalesDO> salesDOList = salesService.list(map);
         if (salesDOList.size() == 0){
             return R.error("检验有误");
@@ -302,14 +302,16 @@ public class LogStatusController {
         SalesDO salesDO = salesService.getSaleNumber(status.getSaleNumber());
         String storeDesc = salesDO.getStoreDescribe();
         String[] storeDescribe = storeDesc.split(",");
-        String[] goodsNum = salesDO.getGoodsNum().split(",");
+        String[] goodsCode = salesDO.getGoodsCode().split(",");
         for (int a=0;a<storeDescribe.length;a++){
             if (!"镜架".equals(storeDescribe[a])){
-                StockDO stockDO = stockService.getGoodsNum(goodsNum[a]);
-                Long countGoods = Long.parseLong(stockDO.getGoodsCount());
-                Long count = countGoods - 1;
-                stockDO.setGoodsCount(String.valueOf(count));
-                stockService.updateGoodsCount(stockDO);
+                StockDO stockDO = stockService.getGoodsNum(goodsCode[a]);
+                if (null != stockDO){
+                    Long countGoods = Long.parseLong(stockDO.getGoodsCount());
+                    Long count = countGoods - 1;
+                    stockDO.setGoodsCount(String.valueOf(count));
+                    stockService.updateGoodsCount(stockDO);
+                }
             }
         }
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();

@@ -21,8 +21,8 @@
         select `id`,`member_number`,`sale_number`,`cost_type`,`shorthand_code`,`cost_name`,`cost_money`,`arrear_money`,`sale_name`,`is_sale`,`create_time`,`type`,`original_price` from cost
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
-            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number like concat('%', #{memberNumber},'%') </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
             <if test="costType != null and costType != ''"> and cost_type = #{costType} </if>
             <if test="shorthandCode != null and shorthandCode != ''"> and shorthand_code = #{shorthandCode} </if>
             <if test="costName != null and costName != ''"> and cost_name = #{costName} </if>
@@ -48,8 +48,8 @@
         select count(*) from cost
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
-            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number like concat('%', #{memberNumber},'%') </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
             <if test="costType != null and costType != ''"> and cost_type = #{costType} </if>
             <if test="shorthandCode != null and shorthandCode != ''"> and shorthand_code = #{shorthandCode} </if>
             <if test="costName != null and costName != ''"> and cost_name = #{costName} </if>

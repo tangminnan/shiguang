@@ -4,16 +4,16 @@
 <mapper namespace="com.shiguang.mailInfo.dao.MailInfoDao">
 
     <select id="get" resultType="com.shiguang.mailInfo.domain.MailInfoDO">
-		select `id`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info where id = #{value}
+		select `id`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`track_number`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.mailInfo.domain.MailInfoDO">
-        select `id`,`sale_number`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info
+        select `id`,`sale_number`,`card_member`,`member_name`,`member_tel`,`member_areacode`,`consignee`,`mail_form`,`track_number`,`enter_name`,`enter_timr`,`address`,`insured`,`insured_money` from mail_info
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
-            <if test="cardMember != null and cardMember != ''"> and card_member = #{cardMember} </if>
-            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
+            <if test="cardMember != null and cardMember != ''"> and card_member like concat('%', #{cardMember},'%') </if>
+            <if test="memberName != null and memberName != ''"> and member_name like concat('%', #{memberName},'%') </if>
             <if test="memberTel != null and memberTel != ''"> and member_tel = #{memberTel} </if>
             <if test="memberAreacode != null and memberAreacode != ''"> and member_areacode = #{memberAreacode} </if>
             <if test="consignee != null and consignee != ''"> and consignee = #{consignee} </if>
@@ -42,9 +42,9 @@
         select count(*) from mail_info
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
-            <if test="cardMember != null and cardMember != ''"> and card_member = #{cardMember} </if>
-            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
+            <if test="cardMember != null and cardMember != ''"> and card_member like concat('%', #{cardMember},'%') </if>
+            <if test="memberName != null and memberName != ''"> and member_name like concat('%', #{memberName},'%') </if>
             <if test="memberTel != null and memberTel != ''"> and member_tel = #{memberTel} </if>
             <if test="memberAreacode != null and memberAreacode != ''"> and member_areacode = #{memberAreacode} </if>
             <if test="consignee != null and consignee != ''"> and consignee = #{consignee} </if>
@@ -103,6 +103,7 @@
             <if test="memberAreacode != null">`member_areacode` = #{memberAreacode}, </if>
             <if test="consignee != null">`consignee` = #{consignee}, </if>
             <if test="mailForm != null">`mail_form` = #{mailForm}, </if>
+            <if test="trackNumber != null">`track_number` = #{trackNumber},</if>
             <if test="enterName != null">`enter_name` = #{enterName}, </if>
             <if test="enterTimr != null">`enter_timr` = #{enterTimr}, </if>
             <if test="address != null">`address` = #{address}, </if>

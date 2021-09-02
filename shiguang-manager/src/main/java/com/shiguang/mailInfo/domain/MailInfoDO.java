@@ -22,6 +22,8 @@ public class MailInfoDO implements Serializable {
     private String consignee;
     //邮寄单
     private String mailForm;
+    //快递单号
+    private String trackNumber;
     //录入人
     private String enterName;
     //邮寄日期
@@ -131,6 +133,19 @@ public class MailInfoDO implements Serializable {
     public String getMailForm() {
         return mailForm;
     }
+
+    /**
+     * 快递单号
+     * @param trackNumber
+     */
+    public void setTrackNumber(String trackNumber) {this.trackNumber = trackNumber;}
+
+    /**
+     * 快递单号
+     * @return
+     */
+    public String getTrackNumber() {return trackNumber;}
+
     /**
      * 设置：录入人
      */

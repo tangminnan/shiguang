@@ -12,8 +12,8 @@
         left join gift gi on gi.gift_num = gw.give_type
         <where>
             <if test="id != null and id != ''"> and gw.id = #{id} </if>
-            <if test="giveNumber != null and giveNumber != ''"> and gw.give_number = #{giveNumber} </if>
-            <if test="giveName != null and giveName != ''"> and gw.give_name = #{giveName} </if>
+            <if test="giveNumber != null and giveNumber != ''"> and gw.give_number like concat('%', #{giveNumber},'%') </if>
+            <if test="giveName != null and giveName != ''"> and gw.give_name like concat('%', #{giveName},'%') </if>
             <if test="giveJc != null and giveJc != ''"> and gw.give_jc = #{giveJc} </if>
             <if test="stores != null and stores != ''"> and FIND_IN_SET(#{stores},gw.stores) </if>
             <if test="giveType != null and giveType != ''"> and gw.give_type = #{giveType} </if>
@@ -35,8 +35,8 @@
         select count(*) from giveaway
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="giveNumber != null and giveNumber != ''"> and give_number = #{giveNumber} </if>
-            <if test="giveName != null and giveName != ''"> and give_name = #{giveName} </if>
+            <if test="giveNumber != null and giveNumber != ''"> and gw.give_number like concat('%', #{giveNumber},'%') </if>
+            <if test="giveName != null and giveName != ''"> and gw.give_name like concat('%', #{giveName},'%') </if>
             <if test="giveJc != null and giveJc != ''"> and give_jc = #{giveJc} </if>
             <if test="stores != null and stores != ''"> and stores = #{stores} </if>
             <if test="giveType != null and giveType != ''"> and give_type = #{giveType} </if>

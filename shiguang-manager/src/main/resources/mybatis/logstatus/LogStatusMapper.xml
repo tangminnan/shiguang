@@ -11,7 +11,7 @@
         select `id`,`sale_number`,`logistic_status` from log_status
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
             <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
         </where>
         <choose>
@@ -31,7 +31,7 @@
         select count(*) from log_status
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
             <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
         </where>
     </select>

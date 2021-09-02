@@ -19,8 +19,8 @@
 		select `id`,`cost_id`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`pay_money` from settlement
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-			      <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
-		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+			      <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
+		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number like concat('%', #{memberNumber},'%') </if>
 		  		  <if test="actualMoney != null and actualMoney != ''"> and actual_money = #{actualMoney} </if>
 		  		  <if test="paymentMoney != null and paymentMoney != ''"> and payment_money = #{paymentMoney} </if>
 		  		  <if test="changeMoney != null and changeMoney != ''"> and change_money = #{changeMoney} </if>
@@ -44,8 +44,8 @@
 		select count(*) from settlement
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-			      <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
-		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+			      <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
+			      <if test="memberNumber != null and memberNumber != ''"> and member_number like concat('%', #{memberNumber},'%') </if>
 		  		  <if test="actualMoney != null and actualMoney != ''"> and actual_money = #{actualMoney} </if>
 		  		  <if test="paymentMoney != null and paymentMoney != ''"> and payment_money = #{paymentMoney} </if>
 		  		  <if test="changeMoney != null and changeMoney != ''"> and change_money = #{changeMoney} </if>
@@ -129,8 +129,8 @@
 		join department d on d.depart_number = m.depart_number
 		<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
 		<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
-		<if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
-		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number = #{saleNumber} </if>
+		<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number like concat('%', #{saleNumber},'%') </if>
 		<if test="payWay != null and payWay != ''"> and sl.pay_way = #{payWay}</if>
 		<if test="state != null and state != ''"> and m.state = #{state} </if>
 		<choose>
@@ -151,8 +151,8 @@
 		join department d on d.depart_number = m.depart_number
 		<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
 		<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
-		<if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
-		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number = #{saleNumber} </if>
+		<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number like concat('%', #{saleNumber},'%') </if>
 		<if test="payWay != null and payWay != ''"> and sl.pay_way = #{payWay}</if>
 		<if test="state != null and state != ''"> and m.state = #{state} </if>
 	</select>
@@ -171,8 +171,8 @@
 		 join cost c on c.id = sl.cost_id
 		<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
 		<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
-		<if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
-		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number = #{saleNumber} </if>
+		<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number like concat('%', #{saleNumber},'%') </if>
 		<if test="type != null and type != ''"> and c.type != #{type}</if>
 		<if test="state != null and state != ''"> and m.state = #{state} </if>
 		<choose>
@@ -195,8 +195,8 @@
 		join cost c on c.id = sl.cost_id
 		<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
 		<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
-		<if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
-		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number = #{saleNumber} </if>
+		<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number like concat('%', #{saleNumber},'%') </if>
 		<if test="payWay != null and payWay != ''"> and sl.pay_way = #{payWay}</if>
 		<if test="type != null and type != ''"> and c.type != #{type}</if>
 		<if test="state != null and state != ''"> and m.state = #{state} </if>

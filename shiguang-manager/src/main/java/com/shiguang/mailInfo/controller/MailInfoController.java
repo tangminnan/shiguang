@@ -56,6 +56,7 @@ public class MailInfoController {
     public PageUtils peijinglist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        query.put("logisticStatus","顾客取镜");
         List<SalesDO> infoList = salesService.peijinglist(query);
         int total = salesService.peijingcount(query);
         PageUtils pageUtils = new PageUtils(infoList, total);

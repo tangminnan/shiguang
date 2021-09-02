@@ -11,7 +11,7 @@
 		select `id`,`document_number`,`department_appli`,`position_appli`,`sale_number`,`prepared_name`,`responsible_name`,`bill_number`,`cause`,`phenomenon`,`handle`,`bill_date` from unqualiffed
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
 		  		  <if test="preparedName != null and preparedName != ''"> and prepared_name = #{preparedName} </if>
 		  		  <if test="responsibleName != null and responsibleName != ''"> and responsible_name = #{responsibleName} </if>
 		  		  <if test="billNumber != null and billNumber != ''"> and bill_number = #{billNumber} </if>
@@ -37,7 +37,7 @@
 		select count(*) from unqualiffed
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+			 <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
 		  		  <if test="preparedName != null and preparedName != ''"> and prepared_name = #{preparedName} </if>
 		  		  <if test="responsibleName != null and responsibleName != ''"> and responsible_name = #{responsibleName} </if>
 		  		  <if test="billNumber != null and billNumber != ''"> and bill_number = #{billNumber} </if>

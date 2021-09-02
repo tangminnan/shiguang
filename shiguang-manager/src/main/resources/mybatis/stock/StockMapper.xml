@@ -1059,7 +1059,7 @@
     </select>
 
     <select id="getGoodsNum" resultType="com.shiguang.stock.domain.StockDO">
-    select `id`,`goods_num`, goods_count as goodsCount  from stock where goods_num = #{value} group by goods_num
+    select `id`,`goods_code`, goods_count as goodsCount  from stock where goods_code = #{value} group by goods_code
 </select>
     <!--镜架【商】【品】【查】【询】-->
     <select id="selectJingjia" resultType="com.shiguang.product.domain.ProducaDO">
