@@ -62,7 +62,7 @@ public class TryresultsServiceImpl implements TryresultsService {
     }
 
     @Override
-    public List<TryresultsDO>  getTryresult(String cardNumber) {
-        return tryresultsDao.getTryresult(cardNumber);
+    public TryresultsDO  getTryresult(Map<String, Object> map) {
+        return tryresultsDao.getTryresult(map);
     }
 }

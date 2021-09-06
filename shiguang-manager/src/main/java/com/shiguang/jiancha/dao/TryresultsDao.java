@@ -34,5 +34,5 @@ public interface TryresultsDao {
 
     //    查询医生
     List<TryresultsDO> listDoctor(Map<String, Object> map);
-    List<TryresultsDO>  getTryresult(String cardNumber);
+    TryresultsDO  getTryresult(Map<String, Object> map);
 }

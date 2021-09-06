@@ -3,8 +3,11 @@ package com.shiguang.jiancha.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.jiancha.domain.PharmacyDO;
 import com.shiguang.jiancha.domain.ResultDO;
+import com.shiguang.jiancha.domain.TryresultsDO;
 import com.shiguang.jiancha.service.*;
+import com.shiguang.member.domain.MemberDO;
 import com.sun.mail.imap.protocol.ID;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 检查结论表
@@ -60,6 +61,13 @@ public class ResultController {
     //药品
     @Autowired
     private YaopinService yaopinService;
+
+    //试戴镜
+    @Autowired
+    private TryresultsService tryresultsService;
+    //散瞳用药
+    @Autowired
+    private PharmacyService pharmacyService;
 
     @GetMapping()
     @RequiresPermissions("jiancha:result:result")
@@ -190,12 +198,34 @@ public class ResultController {
  /**
      * 所有验光信息
      */
-    @ResponseBody
     @GetMapping("/chufangall/{ptometryNumber}")
     @RequiresPermissions("jiancha:result:chufangall")
     String  chufangall(@PathVariable("ptometryNumber") String ptometryNumber,Model model) {
-        model.addAttribute("ptometryNumber",ptometryNumber);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("ptometryNumber",ptometryNumber);
+        //验光数据
+        TryresultsDO tryresultsDO =tryresultsService.getTryresult(map);
+        //所有处方
+        ResultDO resultDO= resultService.getChufangAll(map);
+        model.addAttribute("resultDO",resultDO);
+        if (tryresultsDO.getSex() == 0) {
+                tryresultsDO.setSexx("男");
+            } else {
+                tryresultsDO.setSexx("女");
+            }
+        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date time = tryresultsDO.getCreateTime();
+        String newtime = sdftime.format(time);
+        model.addAttribute("newtime", newtime);
+        //————————————————散瞳用药————————————————————————————————
+        List<PharmacyDO> pharmacyDOList = pharmacyService.list(map);
+        model.addAttribute("pharmacyDOList", pharmacyDOList);
+        model.addAttribute("tryresultsDO",tryresultsDO);
+
         return "optometryNew/chufangall";
     }
+
+
 
 }

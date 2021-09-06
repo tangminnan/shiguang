@@ -292,4 +292,25 @@
 	<select id="shujulist" resultType="com.shiguang.jiancha.domain.ResultDO">
 		select ptometry_number ,optometry_name,create_time,follow_time from jc_result where card_number=#{cardNumber}   order by id desc
 	</select>
+	<select id="getChufangAll" resultType="com.shiguang.jiancha.domain.ResultDO">
+		select
+			crt.*,kjjy.*,kjyy.*,rgp.*,rxjmjcj.*,sgjj.*,sjxl.*,vst.*,yaopin.*,zy.*
+			from jc_result r
+			left join jc_crt crt on r.ptometry_number=crt.ptometry_number
+			left join  jc_kjjy kjjy on r.ptometry_number=kjjy.ptometry_number
+			left join jc_kjyy kjyy on r.ptometry_number=kjyy.ptometry_number
+			left join jc_rgp rgp on r.ptometry_number=rgp.ptometry_number
+			left join jc_rxjmjcj rxjmjcj on r.ptometry_number=rxjmjcj.ptometry_number
+			left join jc_sgjj sgjj on r.ptometry_number=sgjj.ptometry_number
+			left join jc_sjxl sjxl on r.ptometry_number=sjxl.ptometry_number
+			left join jc_vst vst on r.ptometry_number=vst.ptometry_number
+			left join jc_yaopin yaopin on r.ptometry_number=yaopin.ptometry_number
+			left join jc_zy zy on r.ptometry_number=zy.ptometry_number
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and r.card_number = #{value} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and r.ptometry_number = #{ptometryNumber} </if>
+		</where>
+			group by r.ptometry_number
+	</select>
+
 </mapper>

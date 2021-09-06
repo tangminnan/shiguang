@@ -158,7 +158,7 @@
 			#{crtBeizhu}
 		)
 	</insert>
-    <insert id="saveCrt" parameterType="com.shiguang.jiancha.dao.ResultDao" useGeneratedKeys="true" keyProperty="crtId">
+    <insert id="saveCrt" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="crtId">
 		insert into jc_crt
 		(
 			`card_number`,

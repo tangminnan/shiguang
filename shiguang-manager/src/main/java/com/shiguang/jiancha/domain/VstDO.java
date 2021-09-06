@@ -21,6 +21,8 @@ public class VstDO implements Serializable {
     private String vstPrescriptionType;
     //医生
     private String vstDoctor;
+    //验光师
+    private String vstOptometryName;
     //试戴片编号OD
     private String vstSdbhod;
     //试戴片编号OS
@@ -126,6 +128,14 @@ public class VstDO implements Serializable {
      */
     public String getVstDoctor() {
         return vstDoctor;
+    }
+
+    public String getVstOptometryName() {
+        return vstOptometryName;
+    }
+
+    public void setVstOptometryName(String vstOptometryName) {
+        this.vstOptometryName = vstOptometryName;
     }
 
     /**

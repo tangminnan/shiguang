@@ -69,7 +69,7 @@
 			#{ypYm}
 		)
 	</insert>
-    <insert id="saveYaopin" parameterType="com.shiguang.jiancha.dao.ResultDao" useGeneratedKeys="true"
+    <insert id="saveYaopin" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true"
             keyProperty="ypId">
 		insert into jc_yaopin
 		(

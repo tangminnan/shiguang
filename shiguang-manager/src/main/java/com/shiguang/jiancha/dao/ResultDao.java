@@ -31,4 +31,6 @@ public interface ResultDao {
 	int batchRemove(Long[] ids);
 
 	List<ResultDO> shujulist(Map<String, Object> map);
+	//所有处方
+	ResultDO getChufangAll(Map<String, Object> map);
 }

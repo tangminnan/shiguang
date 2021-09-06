@@ -16,6 +16,17 @@ public class TryresultsDO implements Serializable {
 
     //试戴镜结果id
     private Long id;
+
+    //姓名
+    private String name;
+    //性别
+    private Long sex;
+    private String sexx;
+    //年龄
+    private Long age;
+    //联系电话1
+    private String phone1;
+
     //卡号
     private String cardNumber;
     //验光号
@@ -2611,5 +2622,44 @@ public class TryresultsDO implements Serializable {
         return axialLeft2;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getSex() {
+        return sex;
+    }
+
+    public void setSex(Long sex) {
+        this.sex = sex;
+    }
+
+    public String getSexx() {
+        return sexx;
+    }
+
+    public void setSexx(String sexx) {
+        this.sexx = sexx;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public String getPhone1() {
+        return phone1;
+    }
+
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
+    }
 }
 

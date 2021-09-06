@@ -11,96 +11,6 @@
 <body>
 <form class="form-horizontal m-t" id="signupForm">
     <div class="new_h3">采购收货新增</div>
-    <!--检查条件-->
-    <!--<div class="m40 tabS PHGL">-->
-    <!--<h3>检查条件</h3>-->
-    <!--<table border="0" cellspacing="0" cellpadding="0">-->
-    <!--<tbody>-->
-    <!--<tr>-->
-    <!--<td>单据编号：</td>-->
-    <!--<td>-->
-    <!--<input id="danjuNumber" name="danjuNumber" th:value="${uuidstr}" type="text"-->
-    <!--style="background-color: #e4e4e4" readonly/>-->
-    <!--</td>-->
-    <!--<td>订单单号：</td>-->
-    <!--<td>-->
-    <!--<input id="orderNumber" name="orderNumber" type="text"/>-->
-    <!--&lt;!&ndash;订单编号AAA&ndash;&gt;-->
-    <!--<input type="button" class="XZ-btn" value="选择" onclick="dingdanNum()"/>-->
-    <!--</td>-->
-    <!--<td>采购类型：</td>-->
-    <!--<td width="25%">-->
-    <!--<select id="goodsType" name="goodsType"-->
-    <!--onchange="goodsidstr()">-->
-    <!--<option></option>-->
-    <!--<option th:each="ls:${goodsDOList}"-->
-    <!--th:text="${ls.goodsname}"-->
-    <!--th:value="${ls.goodsid}"></option>-->
-    <!--</select>-->
-    <!--</td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td>制造商：</td>-->
-    <!--<td>-->
-    <!--<input id="mfrsid" name="mfrsid" type="hidden"/>-->
-    <!--<input id="mfrsName" name="mfrsName" type="text" readonly/>-->
-    <!--<input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>-->
-    <!--</td>-->
-    <!--<td>供应商：</td>-->
-    <!--<td>-->
-    <!--<input id="mfrsNames" name="mfrsNames" type="text" readonly/>-->
-    <!--</td>-->
-    <!--<td>收入仓位：</td>-->
-    <!--<td>-->
-    <!--<select id="positionName" name="positionName">-->
-    <!--<option th:each="ls:${positionDOList}"-->
-    <!--th:text="${ls.positionName}"-->
-    <!--th:value="${ls.positionName}"></option>-->
-    <!--</select>-->
-    <!--</td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td>运单号：</td>-->
-    <!--<td><input id="yundanNumber" name="yundanNumber" type="text"/></td>-->
-    <!--<td>入库人：</td>-->
-    <!--<td><input id="zhidanPeople" name="zhidanPeople" th:value="${optometryName}" type="text"-->
-    <!--style="background-color: #e4e4e4" readonly/></td>-->
-    <!--<td>单据日期：</td>-->
-    <!--<td><input id="danjuDay" name="danjuDay" th:value="${createTime}" type="text"-->
-    <!--style="background-color: #e4e4e4" readonly/></td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td>退货单号：</td>-->
-    <!--<td>-->
-    <!--<input id="tuihuoNumber" name="tuihuoNumber" type="text"/>-->
-    <!--<input type="button" class="XZ-btn" value="选择" onclick="tuihuiNum()"/>-->
-    <!--</td>-->
-    <!--<td></td>-->
-    <!--<td></td>-->
-    <!--<td>厂家订单号：</td>-->
-    <!--<td><input id="factoryNumber" name="factoryNumber" type="text"/><em>*</em></td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--<td>备注：</td>-->
-    <!--<td colspan="5"><textarea id="beizhu" name="beizhu" rows="3"></textarea></td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
-    <!--</table>-->
-
-    <!--<div class="HH_btns">-->
-    <!--<div class="Xbtn">-->
-    <!--<input type="button" value="单品添加商品" onclick="choiceGoods()"/>-->
-    <!--&lt;!&ndash;<input type="button" value="已核销订单添加商品"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;<input type="button" value="二维表添加商品"/>&ndash;&gt;-->
-    <!--<input class="HgreenBG" type="button" value="打印条码"/>-->
-    <!--</div>-->
-    <!--<div class="Cbtn buyBtns">-->
-    <!--<input type="button" class="H_bc" value="保存" onclick="save()"/>-->
-    <!--&lt;!&ndash;<input type="checkbox" id="Hbc"/> <label for="Hbc">保存并审核</label>&ndash;&gt;-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--</div>-->
     <div class="m40 tabS PHGL">
         <h3>检查条件</h3>
         <table border="0" cellspacing="0" cellpadding="0">
@@ -735,7 +645,7 @@
         } else if (goodsid != "" && mfrsid == "") {
             layer.alert("请选择所属制造商！");
         } else if (goodVal == "镜架") {
-            $(".val1").remove();
+            // $(".val1").remove();
             var toIndex = layer.open({
                 type: 2,
                 title: '商品查询',
@@ -789,7 +699,7 @@
             });
             layer.full(toIndex);
         } else if (goodVal == "配件") {
-            $(".val2").remove();
+            // $(".val2").remove();
             var toIndex = layer.open({
                 type: 2,
                 title: '商品查询',
@@ -840,7 +750,7 @@
             });
             layer.full(toIndex)
         } else if (goodVal == "镜片") {
-            $(".val3").remove();
+            // $(".val3").remove();
             var toIndex = layer.open({
                 type: 2,
                 title: '商品查询',
@@ -897,7 +807,7 @@
             });
             layer.full(toIndex)
         }  else if (goodVal == "隐形") {
-            $(".val4").remove();
+            // $(".val4").remove();
             var toIndex = layer.open({
                 type: 2,
                 title: '商品查询',
@@ -954,7 +864,7 @@
             });
             layer.full(toIndex)
         } else if (goodVal == "护理液") {
-            $(".val5").remove();
+            // $(".val5").remove();
             var toIndex = layer.open({
                 type: 2,
                 title: '商品查询',
@@ -1003,7 +913,7 @@
             });
             layer.full(toIndex)
         } else if (goodVal == "太阳镜") {
-            $(".val6").remove();
+            // $(".val6").remove();
             var toIndex = layer.open({
                 type: 2,
                 title: '商品查询',
@@ -1054,7 +964,7 @@
             });
             layer.full(toIndex)
         } else if (goodVal == "老花镜") {
-            $(".val7").remove();
+            // $(".val7").remove();
             var toIndex = layer.open({
                 type: 2,
                 title: '商品查询',
@@ -1106,7 +1016,7 @@
             });
             layer.full(toIndex)
         } else if (goodVal == "耗材") {
-            $(".val8").remove();
+            // $(".val8").remove();
             var toIndex = layer.open({
                 type: 2,
                 title: '商品查询',
@@ -1155,7 +1065,7 @@
             });
             layer.full(toIndex)
         } else if (goodVal == "视光") {
-            $(".val9").remove();
+            // $(".val9").remove();
             var toIndex = layer.open({
                 type: 2,
                 title: '商品查询',

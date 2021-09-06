@@ -90,11 +90,11 @@ function load() {
                             // var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
                             // 		+ row.id
                             // 		+ '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<span class="btn btn-primary btn-sm" href="#" title="验光数据"  mce_href="#" onclick="resetPwd(\''
-                                + value
-                                + '\')">验光数据</span> ';
+                            // var f = '<span class="btn btn-primary btn-sm" href="#" title="验光数据"  mce_href="#" onclick="resetPwd(\''
+                            //     + value
+                            //     + '\')">验光数据</span> ';
                             var d =  "<a href='javascript:' class='detail-icon btn btn-warning btn-sm' >更多</a> ";
-                            return e + f + d;
+                            return e  + d;
                         }
                     }],
                 onExpandRow: function (index, row, $detail) {
@@ -124,17 +124,20 @@ function load() {
                                 field:'followTime',
                                 title:'复诊时间'
                             },
-                            // {
-                            //     title: '操作',
-                            //     field: 'ptometryNumber',
-                            //     align: 'center',
-                            //     formatter: function (value, row, index) {
-                            //         var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
-                            //             + value
-                            //             + '\')">详情</span> ';
-                            //         return f;
-                            //     }
-                            // }
+                            {
+                                title: '操作',
+                                field: 'ptometryNumber',
+                                align: 'center',
+                                formatter: function (value, row, index) {
+                                    var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
+                                        + value
+                                        + '\')">详情</span> ';
+                                    var h = '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#" onclick="selectShuju(\''
+                                        + value
+                                        + '\')">删除</span> ';
+                                    return f + h;
+                                }
+                            }
 
                         ],
                         url: "/jiancha/result/shujulist",

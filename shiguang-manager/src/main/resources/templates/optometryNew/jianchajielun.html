@@ -295,7 +295,7 @@
                 <td><input th:value="${tryresultsDO.prismLefttry}"    name="kjyyPrismos" class="short" type="text"/> △
                 </td>
                 <td>
-                    <select name="kjyyJdos" th:value="${tryresultsDO.jdlTry}">
+                    <select id="kjyyJdos" name="kjyyJdos" th:value="${tryresultsDO.jdlTry}">
                         <option value=""></option>
                         <option value="内">内</option>
                         <option value="外">外</option>
@@ -314,32 +314,32 @@
                 <td rowspan="1" colspan="2" class="daK">
                     <select id="kjyyJpcz" name="kjyyJpcz">
                         <option></option>
-                        <option value="老花渐进">老花渐进</option>
-                        <option value="青少年渐进">青少年渐进</option>
-                        <option value="非球面树脂">老非球面树脂花渐进</option>
-                        <option value="抗辐射镜片">抗辐射镜片</option>
-                        <option value="染色镜片">染色镜片</option>
-                        <option value="变色镜片">变色镜片</option>
-                        <option value="普通树脂">普通树脂</option>
-                        <option value="高折玻璃">高折玻璃</option>
-                        <option value="玻璃片">玻璃片</option>
-                        <option value="树脂抗疲劳镜片">树脂抗疲劳镜片</option>
-                        <option value="树脂偏光镜片（茶/灰）">树脂偏光镜片（茶/灰）</option>
+                        <option value="1">老花渐进</option>
+                        <option value="2">青少年渐进</option>
+                        <option value="3">老非球面树脂花渐进</option>
+                        <option value="4">抗辐射镜片</option>
+                        <option value="5">染色镜片</option>
+                        <option value="6">变色镜片</option>
+                        <option value="7">普通树脂</option>
+                        <option value="8">高折玻璃</option>
+                        <option value="9">玻璃片</option>
+                        <option value="10">树脂抗疲劳镜片</option>
+                        <option value="11">树脂偏光镜片（茶/灰）</option>
                     </select>
                 </td>
                 <td rowspan="1" colspan="1">处理方式:</td>
                 <td rowspan="1" colspan="2" class="daK">
                     <select id="kjyyClfs" name="kjyyClfs">
                         <option></option>
-                        <option value="足矫">足矫</option>
-                        <option value="欠矫">欠矫</option>
-                        <option value="过矫">过矫</option>
-                        <option value="附加棱镜">附加棱镜</option>
-                        <option value="调整">调整</option>
-                        <option value="平衡">平衡</option>
-                        <option value="医嘱">医嘱</option>
-                        <option value="全矫">全矫</option>
-                        <option value="患者要求减度">患者要求减度</option>
+                        <option value="1">足矫</option>
+                        <option value="2">欠矫</option>
+                        <option value="3">过矫</option>
+                        <option value="4">附加棱镜</option>
+                        <option value="5">调整</option>
+                        <option value="6">平衡</option>
+                        <option value="7">医嘱</option>
+                        <option value="8">全矫</option>
+                        <option value="9">患者要求减度</option>
                     </select>
                 </td>
                 <td colspan="3"></td>
@@ -351,10 +351,10 @@
                     <label><input name="kjyyJykj" value="建议镜框" type="checkbox"/> 建议镜框：</label>
                     <select style="width: 30%;" id="kjyyKjlx" name="kjyyKjlx">
                         <option></option>
-                        <option value="打孔">打孔</option>
-                        <option value="拉丝">拉丝</option>
-                        <option value="板材">板材</option>
-                        <option value="框高">框高</option>
+                        <option value="1">打孔</option>
+                        <option value="2">拉丝</option>
+                        <option value="3">板材</option>
+                        <option value="4">框高</option>
                     </select>
                     <input name="kjyyText" style="width: 40%;" type="text"/>
                 </td>
@@ -362,11 +362,6 @@
                 <td rowspan="1" colspan="2"><textarea name="kjyyBeizhu" rows="3"></textarea></td>
                 <td colspan="3"></td>
             </tr>
-            <!--<tr>-->
-            <!--<td rowspan="1" colspan="1">备注</td>-->
-            <!--<td rowspan="1" colspan="2"><textarea rows="3"></textarea></td>-->
-            <!--</tr>-->
-
             </tbody>
         </table>
 
@@ -412,7 +407,7 @@
                 <td><input th:value="${tryresultsDO.prismRighttry}" name="kjjyPrismod" class="short" type="text"/> △
                 </td>
                 <td>
-                    <select name="kjjyJdod" th:value="${tryresultsDO.jdrTry}">
+                    <select id="kjjyJdod" name="kjjyJdod" th:value="${tryresultsDO.jdrTry}">
                         <option value=""></option>
                         <option value="内">内</option>
                         <option value="外">外</option>
@@ -436,7 +431,7 @@
                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input th:value="${tryresultsDO.prismLefttry}"   name="kjjyPrismos" class="short" type="text"/> △</td>
                 <td>
-                    <select name="kjjyJdos" th:value="${tryresultsDO.jdlTry}" >
+                    <select id="kjjyJdos" name="kjjyJdos" th:value="${tryresultsDO.jdlTry}" >
                         <option value=""> </option>
                         <option value="内">内</option>
                         <option value="外">外</option>
@@ -455,32 +450,32 @@
                 <td rowspan="1" colspan="2" class="daK">
                     <select id="kjjyJpcz" name="kjjyJpcz">
                         <option></option>
-                        <option value="老花渐进">老花渐进</option>
-                        <option value="青少年渐进">青少年渐进</option>
-                        <option value="非球面树脂">老非球面树脂花渐进</option>
-                        <option value="抗辐射镜片">抗辐射镜片</option>
-                        <option value="染色镜片">染色镜片</option>
-                        <option value="变色镜片">变色镜片</option>
-                        <option value="普通树脂">普通树脂</option>
-                        <option value="高折玻璃">高折玻璃</option>
-                        <option value="玻璃片">玻璃片</option>
-                        <option value="树脂抗疲劳镜片">树脂抗疲劳镜片</option>
-                        <option value="树脂偏光镜片（茶/灰）">树脂偏光镜片（茶/灰）</option>
+                        <option value="1">老花渐进</option>
+                        <option value="2">青少年渐进</option>
+                        <option value="3">老非球面树脂花渐进</option>
+                        <option value="4">抗辐射镜片</option>
+                        <option value="5">染色镜片</option>
+                        <option value="6">变色镜片</option>
+                        <option value="7">普通树脂</option>
+                        <option value="8">高折玻璃</option>
+                        <option value="9">玻璃片</option>
+                        <option value="10">树脂抗疲劳镜片</option>
+                        <option value="11">树脂偏光镜片（茶/灰）</option>
                     </select>
                 </td>
                 <td rowspan="1" colspan="1">处理方式:</td>
                 <td rowspan="1" colspan="2" class="daK">
                     <select id="kjjyClfs" name="kjjyClfs">
                         <option></option>
-                        <option value="足矫">足矫</option>
-                        <option value="欠矫">欠矫</option>
-                        <option value="过矫">过矫</option>
-                        <option value="附加棱镜">附加棱镜</option>
-                        <option value="调整">调整</option>
-                        <option value="平衡">平衡</option>
-                        <option value="医嘱">医嘱</option>
-                        <option value="全矫">全矫</option>
-                        <option value="患者要求减度">患者要求减度</option>
+                        <option value="1">足矫</option>
+                        <option value="2">欠矫</option>
+                        <option value="3">过矫</option>
+                        <option value="4">附加棱镜</option>
+                        <option value="5">调整</option>
+                        <option value="6">平衡</option>
+                        <option value="7">医嘱</option>
+                        <option value="8">全矫</option>
+                        <option value="9">患者要求减度</option>
                     </select>
                 </td>
                 <td colspan="3"></td>
@@ -492,10 +487,10 @@
                     <label><input name="kjjyJykj" value="建议镜框" type="checkbox"/> 建议镜框：</label>
                     <select style="width: 30%;" id="kjjyKjlx" name="kjjyKjlx">
                         <option></option>
-                        <option value="打孔">打孔</option>
-                        <option value="拉丝">拉丝</option>
-                        <option value="板材">板材</option>
-                        <option value="框高">框高</option>
+                        <option value="1">打孔</option>
+                        <option value="2">拉丝</option>
+                        <option value="3">板材</option>
+                        <option value="4">框高</option>
                     </select>
                     <input name="kjjyText" style="width: 40%;" type="text"/>
                 </td>
@@ -574,32 +569,32 @@
                 <td rowspan="1" colspan="3" class="daK">
                     <select name="sgjjJpcz">
                         <option></option>
-                        <option value="老花渐进">老花渐进</option>
-                        <option value="青少年渐进">青少年渐进</option>
-                        <option value="非球面树脂">老非球面树脂花渐进</option>
-                        <option value="抗辐射镜片">抗辐射镜片</option>
-                        <option value="染色镜片">染色镜片</option>
-                        <option value="变色镜片">变色镜片</option>
-                        <option value="普通树脂">普通树脂</option>
-                        <option value="高折玻璃">高折玻璃</option>
-                        <option value="玻璃片">玻璃片</option>
-                        <option value="树脂抗疲劳镜片">树脂抗疲劳镜片</option>
-                        <option value="树脂偏光镜片（茶/灰）">树脂偏光镜片（茶/灰）</option>
+                        <option value="1">老花渐进</option>
+                        <option value="2">青少年渐进</option>
+                        <option value="3">老非球面树脂花渐进</option>
+                        <option value="4">抗辐射镜片</option>
+                        <option value="5">染色镜片</option>
+                        <option value="6">变色镜片</option>
+                        <option value="7">普通树脂</option>
+                        <option value="8">高折玻璃</option>
+                        <option value="9">玻璃片</option>
+                        <option value="10">树脂抗疲劳镜片</option>
+                        <option value="11">树脂偏光镜片（茶/灰）</option>
                     </select>
                 </td>
                 <td rowspan="1" colspan="1">处理方式:</td>
                 <td rowspan="1" colspan="3" class="daK">
                     <select name="sgjjClfs">
                         <option></option>
-                        <option value="足矫">足矫</option>
-                        <option value="欠矫">欠矫</option>
-                        <option value="过矫">过矫</option>
-                        <option value="附加棱镜">附加棱镜</option>
-                        <option value="调整">调整</option>
-                        <option value="平衡">平衡</option>
-                        <option value="医嘱">医嘱</option>
-                        <option value="全矫">全矫</option>
-                        <option value="患者要求减度">患者要求减度</option>
+                        <option value="1">足矫</option>
+                        <option value="2">欠矫</option>
+                        <option value="3">过矫</option>
+                        <option value="4">附加棱镜</option>
+                        <option value="5">调整</option>
+                        <option value="6">平衡</option>
+                        <option value="7">医嘱</option>
+                        <option value="8">全矫</option>
+                        <option value="9">患者要求减度</option>
                     </select>
                 </td>
                 <td colspan="3"></td>
@@ -611,10 +606,10 @@
                     <label><input name="sgjjJykj" value="建议镜框" type="checkbox"/> 建议镜框：</label>
                     <select style="width: 30%;" name="sgjjKjlx">
                         <option></option>
-                        <option value="打孔">打孔</option>
-                        <option value="拉丝">拉丝</option>
-                        <option value="板材">板材</option>
-                        <option value="框高">框高</option>
+                        <option value="1">打孔</option>
+                        <option value="2">拉丝</option>
+                        <option value="3">板材</option>
+                        <option value="4">框高</option>
                     </select>
                     <input name="sgjjText" style="width: 40%;" type="text"/>
                 </td>
@@ -672,9 +667,9 @@
                 <td><input name="rxUnitod" type="text"/></td>
                 <td rowspan="2">
                     <select name="rxClfs" style="width: 70%;">
-                        <option value="足矫">足矫</option>
-                        <option value="欠矫">欠矫</option>
-                        <option value="过矫">过矫</option>
+                        <option value="1">足矫</option>
+                        <option value="2">欠矫</option>
+                        <option value="3">过矫</option>
                     </select>
                 </td>
             </tr>
@@ -751,7 +746,7 @@
                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"    name="zyPrismod" class="short" type="text"/> △</td>
                 <td>
-                    <select name="zyJdod" th:value="${tryresultsDO.jdrTry}">
+                    <select id="zyJdod" name="zyJdod" th:value="${tryresultsDO.jdrTry}">
                         <option value=""></option>
                         <option value="内">内</option>
                         <option value="外">外</option>
@@ -775,7 +770,7 @@
                             onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input  th:value="${tryresultsDO.prismLefttry}"   name="zyPrismos" class="short" type="text"/> △</td>
                 <td>
-                    <select name="zyJdos" th:value="${tryresultsDO.jdlTry}">
+                    <select id="zyJdos" name="zyJdos" th:value="${tryresultsDO.jdlTry}">
                         <option value=""> </option>
                         <option value="内">内</option>
                         <option value="外">外</option>
@@ -794,32 +789,32 @@
                 <td rowspan="1" colspan="3" class="daK">
                     <select name="zyJpcz">
                         <option></option>
-                        <option value="老花渐进">老花渐进</option>
-                        <option value="青少年渐进">青少年渐进</option>
-                        <option value="非球面树脂">老非球面树脂花渐进</option>
-                        <option value="抗辐射镜片">抗辐射镜片</option>
-                        <option value="染色镜片">染色镜片</option>
-                        <option value="变色镜片">变色镜片</option>
-                        <option value="普通树脂">普通树脂</option>
-                        <option value="高折玻璃">高折玻璃</option>
-                        <option value="玻璃片">玻璃片</option>
-                        <option value="树脂抗疲劳镜片">树脂抗疲劳镜片</option>
-                        <option value="树脂偏光镜片（茶/灰）">树脂偏光镜片（茶/灰）</option>
+                        <option value="1">老花渐进</option>
+                        <option value="2">青少年渐进</option>
+                        <option value="3">老非球面树脂花渐进</option>
+                        <option value="4">抗辐射镜片</option>
+                        <option value="5">染色镜片</option>
+                        <option value="6">变色镜片</option>
+                        <option value="7">普通树脂</option>
+                        <option value="8">高折玻璃</option>
+                        <option value="9">玻璃片</option>
+                        <option value="10">树脂抗疲劳镜片</option>
+                        <option value="11">树脂偏光镜片（茶/灰）</option>
                     </select>
                 </td>
                 <td rowspan="1" colspan="1">处理方式:</td>
                 <td rowspan="1" colspan="3" class="daK">
                     <select name="zyClfs">
                         <option></option>
-                        <option value="足矫">足矫</option>
-                        <option value="欠矫">欠矫</option>
-                        <option value="过矫">过矫</option>
-                        <option value="附加棱镜">附加棱镜</option>
-                        <option value="调整">调整</option>
-                        <option value="平衡">平衡</option>
-                        <option value="医嘱">医嘱</option>
-                        <option value="全矫">全矫</option>
-                        <option value="患者要求减度">患者要求减度</option>
+                        <option value="1">足矫</option>
+                        <option value="2">欠矫</option>
+                        <option value="3">过矫</option>
+                        <option value="4">附加棱镜</option>
+                        <option value="5">调整</option>
+                        <option value="6">平衡</option>
+                        <option value="7">医嘱</option>
+                        <option value="8">全矫</option>
+                        <option value="9">患者要求减度</option>
                     </select>
                 </td>
                 <td colspan="3"></td>
@@ -831,10 +826,10 @@
                     <label><input name="zyJyjk" value="建议镜框" type="checkbox"/> 建议镜框：</label>
                     <select style="width: 30%;" name="zyJklx">
                         <option></option>
-                        <option value="打孔">打孔</option>
-                        <option value="拉丝">拉丝</option>
-                        <option value="板材">板材</option>
-                        <option value="框高">框高</option>
+                        <option value="1">打孔</option>
+                        <option value="2">拉丝</option>
+                        <option value="3">板材</option>
+                        <option value="4">框高</option>
                     </select>
                     <input name="zyText" style="width: 40%;" type="text"/>
                 </td>
@@ -859,6 +854,7 @@
                     </select>
                     验光师：
                     <select name="sjxlOptometryName">
+                        <option></option>
                         <option value="张三">张三</option>
                         <option value="周五">周五</option>
                         <option value="陈静">陈静</option>
@@ -887,7 +883,7 @@
                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"   name="sjxlSljod" class="short" type="text"/> △</td>
                 <td>
-                    <select name="sjxlJdod" th:value="${tryresultsDO.jdrTry}">
+                    <select id="sjxlJdod" name="sjxlJdod" th:value="${tryresultsDO.jdrTry}">
                         <option value=""> </option>
                         <option value="内">内</option>
                         <option value="外">外</option>
@@ -912,7 +908,7 @@
                             onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input  th:value="${tryresultsDO.prismLefttry}"   name="sjxlSljos" class="short" type="text"/> △</td>
                 <td>
-                    <select name="sjxlJdos"th:value="${tryresultsDO.jdlTry}">
+                    <select id="sjxlJdos" name="sjxlJdos"th:value="${tryresultsDO.jdlTry}">
                         <option value=""> </option>
                         <option value="内">内</option>
                         <option value="外">外</option>
@@ -969,10 +965,11 @@
                         <option value="维护二">维护二</option>
                     </select>
                     验光师：
-                    <select name="vstDoctor">
-                        <option value="32">张三</option>
-                        <option value="42">周五</option>
-                        <option value="112">陈静</option>
+                    <select name="vstOptometryName">
+                        <option></option>
+                        <option value="张三">张三</option>
+                        <option value="周五">周五</option>
+                        <option value="陈静">陈静</option>
                     </select>
                 </td>
             </tr>
@@ -1046,9 +1043,10 @@
                     </select>
                     验光师：
                     <select name="crtOptometryName">
-                        <option value="2edw1">张三</option>
-                        <option value="2edw2">周五</option>
-                        <option value="2ew">陈静</option>
+                        <option></option>
+                        <option value="张三">张三</option>
+                        <option value="周五">周五</option>
+                        <option value="陈静">陈静</option>
                     </select>
                 </td>
             </tr>
@@ -1085,7 +1083,7 @@
             <tr>
                 <td>OS</td>
                 <td><input name="crtSdbhos" type="text"/></td>
-                <td><input name="ctrBcos" type="text"/></td>
+                <td><input name="crtBcos" type="text"/></td>
                 <td><input name="crtRzdos" type="text"/></td>
                 <td><input name="crtLzaos" type="text"/></td>
                 <td><input name="crtRzd2os" type="text"/></td>
@@ -1119,9 +1117,10 @@
                     </select>
                     验光师：
                     <select name="rgpOptometryName">
-                        <option value="12ws">张三</option>
-                        <option value="1s2w">周五</option>
-                        <option value="1sd2">陈静</option>
+                        <option></option>
+                        <option value="张三">张三</option>
+                        <option value="周五">周五</option>
+                        <option value="陈静">陈静</option>
                     </select>
                 </td>
             </tr>
@@ -1180,9 +1179,10 @@
                     </select>
                     验光师：
                     <select name="ypOptometryName">
-                        <option value="s">张三</option>
-                        <option value="qWD">周五</option>
-                        <option value="DQx">陈静</option>
+                        <option></option>
+                        <option value="张三">张三</option>
+                        <option value="周五">周五</option>
+                        <option value="陈静">陈静</option>
                     </select>
                 </td>
             </tr>
@@ -1237,20 +1237,22 @@
 <script type="text/javascript">
 
     $().ready(function () {
-        //远用基底
-
-            //远用基底
+        var kjyyJdods = $("input[name='kjyyJdods']").val();
+        $("#kjyyJdod").find("[value=" + kjyyJdods + "]").attr("selected", true);
         var kjyyJdoss = $("input[name='kjyyJdoss']").val();
-        $("#kjyyJdos").find("[value='" + kjyyJdoss + "']").attr("selected", true);
-        //工艺类型
-        var technologyIds = $("input[name='technologyIds']").val();
-        $("#technologyId").find("[value='" + technologyIds + "']").attr("selected", true);
-        //镜架材质
-        var materialids = $("input[name='materialids']").val();
-        $("#materialid").find("[value='" + materialids + "']").attr("selected", true);
-        //款式
-        var styleIds = $("input[name='styleIds']").val();
-        $("#styleId").find("[value='" + styleIds + "']").attr("selected", true);
+        $("#kjyyJdos").find("[value=" + kjyyJdoss + "]").attr("selected", true);
+        var kjjyJdods = $("input[name='kjjyJdods']").val();
+        $("#kjjyJdod").find("[value=" + kjjyJdods + "]").attr("selected", true);
+        var kjjyJdoss = $("input[name='kjjyJdoss']").val();
+        $("#kjjyJdos").find("[value=" + kjjyJdoss + "]").attr("selected", true);
+        var zyJdods = $("input[name='zyJdods']").val();
+        $("#zyJdod").find("[value=" + zyJdods + "]").attr("selected", true);
+        var zyJdoss = $("input[name='zyJdoss']").val();
+        $("#zyJdos").find("[value=" + zyJdoss + "]").attr("selected", true);
+        var sjxlJdods = $("input[name='sjxlJdods']").val();
+        $("#sjxlJdod").find("[value=" + sjxlJdods + "]").attr("selected", true);
+        var sjxlJdoss = $("input[name='sjxlJdoss']").val();
+        $("#sjxlJdos").find("[value=" + sjxlJdoss + "]").attr("selected", true);
     });
 
 

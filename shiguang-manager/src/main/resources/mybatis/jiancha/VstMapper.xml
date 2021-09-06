@@ -4,12 +4,12 @@
 <mapper namespace="com.shiguang.jiancha.dao.VstDao">
 
     <select id="get" resultType="com.shiguang.jiancha.domain.VstDO">
-		select `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu` from jc_vst where vst_id = #{value}
+		select `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_optometry_name`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu` from jc_vst where vst_id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.jiancha.domain.VstDO">
         select
-        `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu`
+        `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_optometry_name`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu`
         from jc_vst
         <where>
             <if test="vstId != null and vstId != ''">and vst_id = #{vstId}</if>
@@ -43,6 +43,7 @@
             <if test="vstSyjpod != null and vstSyjpod != ''">and vst_syjpod = #{vstSyjpod}</if>
             <if test="vstSyjpos != null and vstSyjpos != ''">and vst_syjpos = #{vstSyjpos}</if>
             <if test="vstBeizhu != null and vstBeizhu != ''">and vst_beizhu = #{vstBeizhu}</if>
+            <if test="vstOptometryName != null and vstOptometryName != ''">and vst_optometry_name = #{vstOptometryName}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -91,6 +92,7 @@
             <if test="vstSyjpod != null and vstSyjpod != ''">and vst_syjpod = #{vstSyjpod}</if>
             <if test="vstSyjpos != null and vstSyjpos != ''">and vst_syjpos = #{vstSyjpos}</if>
             <if test="vstBeizhu != null and vstBeizhu != ''">and vst_beizhu = #{vstBeizhu}</if>
+			<if test="vstOptometryName != null and vstOptometryName != ''">and vst_optometry_name = #{vstOptometryName}</if>
         </where>
     </select>
 
@@ -124,7 +126,9 @@
 			`vst_jpysos`, 
 			`vst_syjpod`, 
 			`vst_syjpos`, 
-			`vst_beizhu`
+			`vst_beizhu`,
+			`ptometry_number`,
+			`vst_optometry_name`
 		)
 		values
 		(
@@ -155,15 +159,18 @@
 			#{vstJpysos}, 
 			#{vstSyjpod}, 
 			#{vstSyjpos}, 
-			#{vstBeizhu}
+			#{vstBeizhu},
+			#{ptometryNumber},
+			#{vstOptometryName}
 		)
 	</insert>
-    <insert id="saveVst" parameterType="com.shiguang.jiancha.dao.ResultDao" useGeneratedKeys="true" keyProperty="vstId">
+    <insert id="saveVst" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="vstId">
 		insert into jc_vst
 		(
 			`card_number`,
 			`vst_prescription_type`,
 			`vst_doctor`,
+			`vst_optometry_name`,
 			`vst_sdbhod`,
 			`vst_sdbhos`,
 			`vst_fkod`,
@@ -189,7 +196,6 @@
 			`vst_syjpod`,
 			`vst_syjpos`,
 			`vst_beizhu`,
-			`vst_beizhu`,
 			`ptometry_number`
 		)
 		values
@@ -197,6 +203,7 @@
 			#{cardNumber},
 			#{vstPrescriptionType},
 			#{vstDoctor},
+			#{vstOptometryName},
 			#{vstSdbhod},
 			#{vstSdbhos},
 			#{vstFkod},
@@ -257,6 +264,7 @@
             <if test="vstSyjpod != null">`vst_syjpod` = #{vstSyjpod},</if>
             <if test="vstSyjpos != null">`vst_syjpos` = #{vstSyjpos},</if>
             <if test="vstBeizhu != null">`vst_beizhu` = #{vstBeizhu}</if>
+            <if test="vstOptometryName != null">`vst_optometry_name` = #{vstOptometryName}</if>
         </set>
         where vst_id = #{vstId}
     </update>

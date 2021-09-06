@@ -1,6 +1,7 @@
 package com.shiguang.jiancha.service;
 
 import com.shiguang.jiancha.domain.ResultDO;
+import com.shiguang.jiancha.domain.TryresultsDO;
 
 import java.util.List;
 import java.util.Map;
@@ -29,4 +30,7 @@ public interface ResultService {
 	int batchRemove(Long[] ids);
 
 	List<ResultDO> shujulist(Map<String, Object> map);
+	//所有处方
+	ResultDO getChufangAll(Map<String, Object> map);
+
 }

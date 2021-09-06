@@ -824,17 +824,6 @@
 <script type="text/javascript" src="/js/appjs/optometryNew/jctryresults.js"></script>
 <!--第一个页面-->
 <script type="text/javascript">
-    // var data = window.location.href.split("?")[1].split("=")[1];
-    // var click = $(".click");
-    // var click1 = $(".click1");
-    // click.click(function () {
-    //     $("#quguangjiancha").addClass("none")
-    //     $("#jianchajielun").removeClass("none")
-    // });
-    // click1.click(function () {
-    //     $("#jianchajielun").addClass("none")
-    //     $("#quguangjiancha").removeClass("none")
-    // });
     function getMemberDetail() {
         var id = $("#memberId").val();
         layer.open({
@@ -849,16 +838,12 @@
 
     //————是否散瞳判读选中
     var choices = $("#xz1").val();
+    // alert(choices)
     if (choices == "1") {
         document.getElementById("xz1").checked = "checked";
     } else {
         document.getElementById("xz2").checked = "checked";
     }
-    // $(function () {
-    //     $("input[type='radio']").click(function () {
-    //         this.checked = !this.checked;
-    //     });
-    // });
 
     //主观验光和试戴镜联动
     $(".zgQG").click(function () {

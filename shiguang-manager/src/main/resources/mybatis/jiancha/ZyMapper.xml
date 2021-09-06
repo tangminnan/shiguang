@@ -144,7 +144,7 @@
 			#{zyBeizhu}
 		)
 	</insert>
-	<insert id="saveZY" parameterType="com.shiguang.jiancha.domain.ZyDO" useGeneratedKeys="true" keyProperty="zyId">
+	<insert id="saveZY" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="zyId">
 		insert into jc_zy
 		(
 			`card_number`,

@@ -150,7 +150,7 @@
 			#{sjxlBeizhu}
 		)
 	</insert>
-    <insert id="saveSjxl" parameterType="com.shiguang.jiancha.dao.ResultDao" useGeneratedKeys="true"
+    <insert id="saveSjxl" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true"
             keyProperty="sjxlId">
 		insert into jc_sjxl
 		(

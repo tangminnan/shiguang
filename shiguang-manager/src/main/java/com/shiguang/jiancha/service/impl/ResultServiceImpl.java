@@ -56,4 +56,9 @@ public class ResultServiceImpl implements ResultService {
 	public List<ResultDO> shujulist(Map<String, Object> map) {
 		return resultDao.shujulist(map);
 	}
+
+	@Override
+	public ResultDO getChufangAll(Map<String, Object> map) {
+		return resultDao.getChufangAll(map);
+	}
 }

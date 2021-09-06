@@ -767,426 +767,443 @@ public class ResultDO implements Serializable {
         return visitType;
     }
 
-
-    //框架远用id
-    private Long kjyyId;
+    //角膜接触镜CRTid
+    private Long crtId;
     //处方类型
-    private String kjyyPrescriptionType;
+    private String crtPrescriptionType;
     //医生
-    private String kjyyDoctor;
+    private String crtDoctor;
     //验光师
-    private String kjyyOptometryName;
-    //球镜OD
-    private String kjyySphod;
-    //球镜OS
-    private String kjyySphos;
-    //柱镜OD
-    private String kjyyCylod;
-    //柱镜OS
-    private String kjyyCylos;
-    //轴向OD
-    private String kjyyAxialod;
-    //轴向OS
-    private String kjyyAxialos;
-    //三棱镜(OD)
-    private String kjyyPrismod;
-    //三棱镜(OS)
-    private String kjyyPrismos;
-    //基底(OD)
-    private String kjyyJdod;
-    //基底(OS)
-    private String kjyyJdos;
-    //远用瞳距(mm)(OD)
-    private String kjyyYytjod;
-    //远用瞳距(mm)(OS)
-    private String kjyyYytjos;
-    //瞳高(mm)(OD)
-    private String kjyyTgod;
-    //瞳高(mm)(OS)
-    private String kjyyTgos;
-    //远用va(OD)
-    private String kjyyVaod;
-    //远用va(OS)
-    private String kjyyVaos;
-    //建议镜片材质
-    private String kjyyJpcz;
-    //处理方式
-    private String kjyyClfs;
-    //建议框架
-    private String kjyyJykj;
-    //框架类型
-    private String kjyyKjlx;
-    //文本
-    private String kjyyText;
+    private String crtOptometryName;
+    //试戴片编号OD
+    private String crtSdbhod;
+    //试戴片编号OS
+    private String crtSdbhos;
+    //BC(OD)
+    private String ctrBcod;
+    //BC(OS)
+    private String crtBcos;
+    //RZD(OD)
+    private String crtRzdod;
+    //RZD(OS)
+    private String crtRzdos;
+    //LZA(OD)
+    private String crtLzaod;
+    //LZA(OS)
+    private String crtLzaos;
+    //RZD2OD
+    private String crtRzd2od;
+    //RZD2OS
+    private String crtRzd2os;
+    //LZA2(OD)
+    private String crtLza2od;
+    //LZA2(OS)
+    private String crtLza2os;
+    //降幅(OD)
+    private String crtJfod;
+    //降幅(OS)
+    private String crtJfos;
+    //DIA(OD)
+    private String crtDiaod;
+    //DIA(OS)
+    private String crtDiaos;
+    //VA(OD)
+    private String crtVaod;
+    //VA(OS)
+    private String crtVaos;
+    //镜片颜色OD
+    private String crtJpysod;
+    //镜片颜色OS
+    private String crtJpysos;
+    //适用镜片OD
+    private String crtSyjpod;
+    //适用镜片OS
+    private String crtSyjpos;
     //备注
-    private String kjyyBeizhu;
+    private String crtBeizhu;
 
     /**
-     * 设置：框架远用id
+     * 设置：角膜接触镜CRTid
      */
-    public void setKjyyId(Long kjyyId) {
-        this.kjyyId = kjyyId;
+    public void setCrtId(Long crtId) {
+        this.crtId = crtId;
     }
 
     /**
-     * 获取：框架远用id
+     * 获取：角膜接触镜CRTid
      */
-    public Long getKjyyId() {
-        return kjyyId;
+    public Long getCrtId() {
+        return crtId;
     }
+
 
     /**
      * 设置：处方类型
      */
-    public void setKjyyPrescriptionType(String kjyyPrescriptionType) {
-        this.kjyyPrescriptionType = kjyyPrescriptionType;
+    public void setCrtPrescriptionType(String crtPrescriptionType) {
+        this.crtPrescriptionType = crtPrescriptionType;
     }
 
     /**
      * 获取：处方类型
      */
-    public String getKjyyPrescriptionType() {
-        return kjyyPrescriptionType;
+    public String getCrtPrescriptionType() {
+        return crtPrescriptionType;
     }
 
     /**
      * 设置：医生
      */
-    public void setKjyyDoctor(String kjyyDoctor) {
-        this.kjyyDoctor = kjyyDoctor;
+    public void setCrtDoctor(String crtDoctor) {
+        this.crtDoctor = crtDoctor;
     }
 
     /**
      * 获取：医生
      */
-    public String getKjyyDoctor() {
-        return kjyyDoctor;
+    public String getCrtDoctor() {
+        return crtDoctor;
     }
 
     /**
      * 设置：验光师
      */
-    public void setKjyyOptometryName(String kjyyOptometryName) {
-        this.kjyyOptometryName = kjyyOptometryName;
+    public void setCrtOptometryName(String crtOptometryName) {
+        this.crtOptometryName = crtOptometryName;
     }
 
     /**
      * 获取：验光师
      */
-    public String getKjyyOptometryName() {
-        return kjyyOptometryName;
+    public String getCrtOptometryName() {
+        return crtOptometryName;
     }
 
     /**
-     * 设置：球镜OD
+     * 设置：试戴片编号OD
      */
-    public void setKjyySphod(String kjyySphod) {
-        this.kjyySphod = kjyySphod;
+    public void setCrtSdbhod(String crtSdbhod) {
+        this.crtSdbhod = crtSdbhod;
     }
 
     /**
-     * 获取：球镜OD
+     * 获取：试戴片编号OD
      */
-    public String getKjyySphod() {
-        return kjyySphod;
+    public String getCrtSdbhod() {
+        return crtSdbhod;
     }
 
     /**
-     * 设置：球镜OS
+     * 设置：试戴片编号OS
      */
-    public void setKjyySphos(String kjyySphos) {
-        this.kjyySphos = kjyySphos;
+    public void setCrtSdbhos(String crtSdbhos) {
+        this.crtSdbhos = crtSdbhos;
     }
 
     /**
-     * 获取：球镜OS
+     * 获取：试戴片编号OS
      */
-    public String getKjyySphos() {
-        return kjyySphos;
+    public String getCrtSdbhos() {
+        return crtSdbhos;
     }
 
     /**
-     * 设置：柱镜OD
+     * 设置：BC(OD)
      */
-    public void setKjyyCylod(String kjyyCylod) {
-        this.kjyyCylod = kjyyCylod;
+    public void setCtrBcod(String ctrBcod) {
+        this.ctrBcod = ctrBcod;
     }
 
     /**
-     * 获取：柱镜OD
+     * 获取：BC(OD)
      */
-    public String getKjyyCylod() {
-        return kjyyCylod;
+    public String getCtrBcod() {
+        return ctrBcod;
     }
 
     /**
-     * 设置：柱镜OS
+     * 设置：BC(OS)
      */
-    public void setKjyyCylos(String kjyyCylos) {
-        this.kjyyCylos = kjyyCylos;
+    public void setCrtBcos(String crtBcos) {
+        this.crtBcos = crtBcos;
     }
 
     /**
-     * 获取：柱镜OS
+     * 获取：BC(OS)
      */
-    public String getKjyyCylos() {
-        return kjyyCylos;
+    public String getCrtBcos() {
+        return crtBcos;
     }
 
     /**
-     * 设置：轴向OD
+     * 设置：RZD(OD)
      */
-    public void setKjyyAxialod(String kjyyAxialod) {
-        this.kjyyAxialod = kjyyAxialod;
+    public void setCrtRzdod(String crtRzdod) {
+        this.crtRzdod = crtRzdod;
     }
 
     /**
-     * 获取：轴向OD
+     * 获取：RZD(OD)
      */
-    public String getKjyyAxialod() {
-        return kjyyAxialod;
+    public String getCrtRzdod() {
+        return crtRzdod;
     }
 
     /**
-     * 设置：轴向OS
+     * 设置：RZD(OS)
      */
-    public void setKjyyAxialos(String kjyyAxialos) {
-        this.kjyyAxialos = kjyyAxialos;
+    public void setCrtRzdos(String crtRzdos) {
+        this.crtRzdos = crtRzdos;
     }
 
     /**
-     * 获取：轴向OS
+     * 获取：RZD(OS)
      */
-    public String getKjyyAxialos() {
-        return kjyyAxialos;
+    public String getCrtRzdos() {
+        return crtRzdos;
     }
 
     /**
-     * 设置：三棱镜(OD)
+     * 设置：LZA(OD)
      */
-    public void setKjyyPrismod(String kjyyPrismod) {
-        this.kjyyPrismod = kjyyPrismod;
+    public void setCrtLzaod(String crtLzaod) {
+        this.crtLzaod = crtLzaod;
     }
 
     /**
-     * 获取：三棱镜(OD)
+     * 获取：LZA(OD)
      */
-    public String getKjyyPrismod() {
-        return kjyyPrismod;
+    public String getCrtLzaod() {
+        return crtLzaod;
     }
 
     /**
-     * 设置：三棱镜(OS)
+     * 设置：LZA(OS)
      */
-    public void setKjyyPrismos(String kjyyPrismos) {
-        this.kjyyPrismos = kjyyPrismos;
+    public void setCrtLzaos(String crtLzaos) {
+        this.crtLzaos = crtLzaos;
     }
 
     /**
-     * 获取：三棱镜(OS)
+     * 获取：LZA(OS)
      */
-    public String getKjyyPrismos() {
-        return kjyyPrismos;
+    public String getCrtLzaos() {
+        return crtLzaos;
     }
 
     /**
-     * 设置：基底(OD)
+     * 设置：RZD2OD
      */
-    public void setKjyyJdod(String kjyyJdod) {
-        this.kjyyJdod = kjyyJdod;
+    public void setCrtRzd2od(String crtRzd2od) {
+        this.crtRzd2od = crtRzd2od;
     }
 
     /**
-     * 获取：基底(OD)
+     * 获取：RZD2OD
      */
-    public String getKjyyJdod() {
-        return kjyyJdod;
+    public String getCrtRzd2od() {
+        return crtRzd2od;
     }
 
     /**
-     * 设置：基底(OS)
+     * 设置：RZD2OS
      */
-    public void setKjyyJdos(String kjyyJdos) {
-        this.kjyyJdos = kjyyJdos;
+    public void setCrtRzd2os(String crtRzd2os) {
+        this.crtRzd2os = crtRzd2os;
     }
 
     /**
-     * 获取：基底(OS)
+     * 获取：RZD2OS
      */
-    public String getKjyyJdos() {
-        return kjyyJdos;
+    public String getCrtRzd2os() {
+        return crtRzd2os;
     }
 
     /**
-     * 设置：远用瞳距(mm)(OD)
+     * 设置：LZA2(OD)
      */
-    public void setKjyyYytjod(String kjyyYytjod) {
-        this.kjyyYytjod = kjyyYytjod;
+    public void setCrtLza2od(String crtLza2od) {
+        this.crtLza2od = crtLza2od;
     }
 
     /**
-     * 获取：远用瞳距(mm)(OD)
+     * 获取：LZA2(OD)
      */
-    public String getKjyyYytjod() {
-        return kjyyYytjod;
+    public String getCrtLza2od() {
+        return crtLza2od;
     }
 
     /**
-     * 设置：远用瞳距(mm)(OS)
+     * 设置：LZA2(OS)
      */
-    public void setKjyyYytjos(String kjyyYytjos) {
-        this.kjyyYytjos = kjyyYytjos;
+    public void setCrtLza2os(String crtLza2os) {
+        this.crtLza2os = crtLza2os;
     }
 
     /**
-     * 获取：远用瞳距(mm)(OS)
+     * 获取：LZA2(OS)
      */
-    public String getKjyyYytjos() {
-        return kjyyYytjos;
+    public String getCrtLza2os() {
+        return crtLza2os;
     }
 
     /**
-     * 设置：瞳高(mm)(OD)
+     * 设置：降幅(OD)
      */
-    public void setKjyyTgod(String kjyyTgod) {
-        this.kjyyTgod = kjyyTgod;
+    public void setCrtJfod(String crtJfod) {
+        this.crtJfod = crtJfod;
     }
 
     /**
-     * 获取：瞳高(mm)(OD)
+     * 获取：降幅(OD)
      */
-    public String getKjyyTgod() {
-        return kjyyTgod;
+    public String getCrtJfod() {
+        return crtJfod;
     }
 
     /**
-     * 设置：瞳高(mm)(OS)
+     * 设置：降幅(OS)
      */
-    public void setKjyyTgos(String kjyyTgos) {
-        this.kjyyTgos = kjyyTgos;
+    public void setCrtJfos(String crtJfos) {
+        this.crtJfos = crtJfos;
     }
 
     /**
-     * 获取：瞳高(mm)(OS)
+     * 获取：降幅(OS)
      */
-    public String getKjyyTgos() {
-        return kjyyTgos;
+    public String getCrtJfos() {
+        return crtJfos;
     }
 
     /**
-     * 设置：远用va(OD)
+     * 设置：DIA(OD)
      */
-    public void setKjyyVaod(String kjyyVaod) {
-        this.kjyyVaod = kjyyVaod;
+    public void setCrtDiaod(String crtDiaod) {
+        this.crtDiaod = crtDiaod;
     }
 
     /**
-     * 获取：远用va(OD)
+     * 获取：DIA(OD)
      */
-    public String getKjyyVaod() {
-        return kjyyVaod;
+    public String getCrtDiaod() {
+        return crtDiaod;
     }
 
     /**
-     * 设置：远用va(OS)
+     * 设置：DIA(OS)
      */
-    public void setKjyyVaos(String kjyyVaos) {
-        this.kjyyVaos = kjyyVaos;
+    public void setCrtDiaos(String crtDiaos) {
+        this.crtDiaos = crtDiaos;
     }
 
     /**
-     * 获取：远用va(OS)
+     * 获取：DIA(OS)
      */
-    public String getKjyyVaos() {
-        return kjyyVaos;
+    public String getCrtDiaos() {
+        return crtDiaos;
     }
 
     /**
-     * 设置：建议镜片材质
+     * 设置：VA(OD)
      */
-    public void setKjyyJpcz(String kjyyJpcz) {
-        this.kjyyJpcz = kjyyJpcz;
+    public void setCrtVaod(String crtVaod) {
+        this.crtVaod = crtVaod;
     }
 
     /**
-     * 获取：建议镜片材质
+     * 获取：VA(OD)
      */
-    public String getKjyyJpcz() {
-        return kjyyJpcz;
+    public String getCrtVaod() {
+        return crtVaod;
     }
 
     /**
-     * 设置：处理方式
+     * 设置：VA(OS)
      */
-    public void setKjyyClfs(String kjyyClfs) {
-        this.kjyyClfs = kjyyClfs;
+    public void setCrtVaos(String crtVaos) {
+        this.crtVaos = crtVaos;
     }
 
     /**
-     * 获取：处理方式
+     * 获取：VA(OS)
      */
-    public String getKjyyClfs() {
-        return kjyyClfs;
+    public String getCrtVaos() {
+        return crtVaos;
     }
 
     /**
-     * 设置：建议框架
+     * 设置：镜片颜色OD
      */
-    public void setKjyyJykj(String kjyyJykj) {
-        this.kjyyJykj = kjyyJykj;
+    public void setCrtJpysod(String crtJpysod) {
+        this.crtJpysod = crtJpysod;
     }
 
     /**
-     * 获取：建议框架
+     * 获取：镜片颜色OD
      */
-    public String getKjyyJykj() {
-        return kjyyJykj;
+    public String getCrtJpysod() {
+        return crtJpysod;
     }
 
     /**
-     * 设置：框架类型
+     * 设置：镜片颜色OS
      */
-    public void setKjyyKjlx(String kjyyKjlx) {
-        this.kjyyKjlx = kjyyKjlx;
+    public void setCrtJpysos(String crtJpysos) {
+        this.crtJpysos = crtJpysos;
     }
 
     /**
-     * 获取：框架类型
+     * 获取：镜片颜色OS
      */
-    public String getKjyyKjlx() {
-        return kjyyKjlx;
+    public String getCrtJpysos() {
+        return crtJpysos;
     }
 
     /**
-     * 设置：文本
+     * 设置：适用镜片OD
      */
-    public void setKjyyText(String kjyyText) {
-        this.kjyyText = kjyyText;
+    public void setCrtSyjpod(String crtSyjpod) {
+        this.crtSyjpod = crtSyjpod;
     }
 
     /**
-     * 获取：文本
+     * 获取：适用镜片OD
      */
-    public String getKjyyText() {
-        return kjyyText;
+    public String getCrtSyjpod() {
+        return crtSyjpod;
+    }
+
+    /**
+     * 设置：适用镜片OS
+     */
+    public void setCrtSyjpos(String crtSyjpos) {
+        this.crtSyjpos = crtSyjpos;
+    }
+
+    /**
+     * 获取：适用镜片OS
+     */
+    public String getCrtSyjpos() {
+        return crtSyjpos;
     }
 
     /**
      * 设置：备注
      */
-    public void setKjyyBeizhu(String kjyyBeizhu) {
-        this.kjyyBeizhu = kjyyBeizhu;
+    public void setCrtBeizhu(String crtBeizhu) {
+        this.crtBeizhu = crtBeizhu;
     }
 
     /**
      * 获取：备注
      */
-    public String getKjyyBeizhu() {
-        return kjyyBeizhu;
+    public String getCrtBeizhu() {
+        return crtBeizhu;
     }
 
     //框架近用id
     private Long kjjyId;
+
     //处方类型
     private String kjjyPrescriptionType;
     //医生
@@ -1601,7 +1618,1099 @@ public class ResultDO implements Serializable {
     public String getKjjyBeizhu() {
         return kjjyBeizhu;
     }
+    //框架远用id
+    private Long kjyyId;
+    //处方类型
+    private String kjyyPrescriptionType;
+    //医生
+    private String kjyyDoctor;
+    //验光师
+    private String kjyyOptometryName;
+    //球镜OD
+    private String kjyySphod;
+    //球镜OS
+    private String kjyySphos;
+    //柱镜OD
+    private String kjyyCylod;
+    //柱镜OS
+    private String kjyyCylos;
+    //轴向OD
+    private String kjyyAxialod;
+    //轴向OS
+    private String kjyyAxialos;
+    //三棱镜(OD)
+    private String kjyyPrismod;
+    //三棱镜(OS)
+    private String kjyyPrismos;
+    //基底(OD)
+    private String kjyyJdod;
+    //基底(OS)
+    private String kjyyJdos;
+    //远用瞳距(mm)(OD)
+    private String kjyyYytjod;
+    //远用瞳距(mm)(OS)
+    private String kjyyYytjos;
+    //瞳高(mm)(OD)
+    private String kjyyTgod;
+    //瞳高(mm)(OS)
+    private String kjyyTgos;
+    //远用va(OD)
+    private String kjyyVaod;
+    //远用va(OS)
+    private String kjyyVaos;
+    //建议镜片材质
+    private String kjyyJpcz;
+    //处理方式
+    private String kjyyClfs;
+    //建议框架
+    private String kjyyJykj;
+    //框架类型
+    private String kjyyKjlx;
+    //文本
+    private String kjyyText;
+    //备注
+    private String kjyyBeizhu;
 
+    /**
+     * 设置：框架远用id
+     */
+    public void setKjyyId(Long kjyyId) {
+        this.kjyyId = kjyyId;
+    }
+
+    /**
+     * 获取：框架远用id
+     */
+    public Long getKjyyId() {
+        return kjyyId;
+    }
+
+
+    /**
+     * 设置：处方类型
+     */
+    public void setKjyyPrescriptionType(String kjyyPrescriptionType) {
+        this.kjyyPrescriptionType = kjyyPrescriptionType;
+    }
+
+    /**
+     * 获取：处方类型
+     */
+    public String getKjyyPrescriptionType() {
+        return kjyyPrescriptionType;
+    }
+
+    /**
+     * 设置：医生
+     */
+    public void setKjyyDoctor(String kjyyDoctor) {
+        this.kjyyDoctor = kjyyDoctor;
+    }
+
+    /**
+     * 获取：医生
+     */
+    public String getKjyyDoctor() {
+        return kjyyDoctor;
+    }
+
+    /**
+     * 设置：验光师
+     */
+    public void setKjyyOptometryName(String kjyyOptometryName) {
+        this.kjyyOptometryName = kjyyOptometryName;
+    }
+
+    /**
+     * 获取：验光师
+     */
+    public String getKjyyOptometryName() {
+        return kjyyOptometryName;
+    }
+
+    /**
+     * 设置：球镜OD
+     */
+    public void setKjyySphod(String kjyySphod) {
+        this.kjyySphod = kjyySphod;
+    }
+
+    /**
+     * 获取：球镜OD
+     */
+    public String getKjyySphod() {
+        return kjyySphod;
+    }
+
+    /**
+     * 设置：球镜OS
+     */
+    public void setKjyySphos(String kjyySphos) {
+        this.kjyySphos = kjyySphos;
+    }
+
+    /**
+     * 获取：球镜OS
+     */
+    public String getKjyySphos() {
+        return kjyySphos;
+    }
+
+    /**
+     * 设置：柱镜OD
+     */
+    public void setKjyyCylod(String kjyyCylod) {
+        this.kjyyCylod = kjyyCylod;
+    }
+
+    /**
+     * 获取：柱镜OD
+     */
+    public String getKjyyCylod() {
+        return kjyyCylod;
+    }
+
+    /**
+     * 设置：柱镜OS
+     */
+    public void setKjyyCylos(String kjyyCylos) {
+        this.kjyyCylos = kjyyCylos;
+    }
+
+    /**
+     * 获取：柱镜OS
+     */
+    public String getKjyyCylos() {
+        return kjyyCylos;
+    }
+
+    /**
+     * 设置：轴向OD
+     */
+    public void setKjyyAxialod(String kjyyAxialod) {
+        this.kjyyAxialod = kjyyAxialod;
+    }
+
+    /**
+     * 获取：轴向OD
+     */
+    public String getKjyyAxialod() {
+        return kjyyAxialod;
+    }
+
+    /**
+     * 设置：轴向OS
+     */
+    public void setKjyyAxialos(String kjyyAxialos) {
+        this.kjyyAxialos = kjyyAxialos;
+    }
+
+    /**
+     * 获取：轴向OS
+     */
+    public String getKjyyAxialos() {
+        return kjyyAxialos;
+    }
+
+    /**
+     * 设置：三棱镜(OD)
+     */
+    public void setKjyyPrismod(String kjyyPrismod) {
+        this.kjyyPrismod = kjyyPrismod;
+    }
+
+    /**
+     * 获取：三棱镜(OD)
+     */
+    public String getKjyyPrismod() {
+        return kjyyPrismod;
+    }
+
+    /**
+     * 设置：三棱镜(OS)
+     */
+    public void setKjyyPrismos(String kjyyPrismos) {
+        this.kjyyPrismos = kjyyPrismos;
+    }
+
+    /**
+     * 获取：三棱镜(OS)
+     */
+    public String getKjyyPrismos() {
+        return kjyyPrismos;
+    }
+
+    /**
+     * 设置：基底(OD)
+     */
+    public void setKjyyJdod(String kjyyJdod) {
+        this.kjyyJdod = kjyyJdod;
+    }
+
+    /**
+     * 获取：基底(OD)
+     */
+    public String getKjyyJdod() {
+        return kjyyJdod;
+    }
+
+    /**
+     * 设置：基底(OS)
+     */
+    public void setKjyyJdos(String kjyyJdos) {
+        this.kjyyJdos = kjyyJdos;
+    }
+
+    /**
+     * 获取：基底(OS)
+     */
+    public String getKjyyJdos() {
+        return kjyyJdos;
+    }
+
+    /**
+     * 设置：远用瞳距(mm)(OD)
+     */
+    public void setKjyyYytjod(String kjyyYytjod) {
+        this.kjyyYytjod = kjyyYytjod;
+    }
+
+    /**
+     * 获取：远用瞳距(mm)(OD)
+     */
+    public String getKjyyYytjod() {
+        return kjyyYytjod;
+    }
+
+    /**
+     * 设置：远用瞳距(mm)(OS)
+     */
+    public void setKjyyYytjos(String kjyyYytjos) {
+        this.kjyyYytjos = kjyyYytjos;
+    }
+
+    /**
+     * 获取：远用瞳距(mm)(OS)
+     */
+    public String getKjyyYytjos() {
+        return kjyyYytjos;
+    }
+
+    /**
+     * 设置：瞳高(mm)(OD)
+     */
+    public void setKjyyTgod(String kjyyTgod) {
+        this.kjyyTgod = kjyyTgod;
+    }
+
+    /**
+     * 获取：瞳高(mm)(OD)
+     */
+    public String getKjyyTgod() {
+        return kjyyTgod;
+    }
+
+    /**
+     * 设置：瞳高(mm)(OS)
+     */
+    public void setKjyyTgos(String kjyyTgos) {
+        this.kjyyTgos = kjyyTgos;
+    }
+
+    /**
+     * 获取：瞳高(mm)(OS)
+     */
+    public String getKjyyTgos() {
+        return kjyyTgos;
+    }
+
+    /**
+     * 设置：远用va(OD)
+     */
+    public void setKjyyVaod(String kjyyVaod) {
+        this.kjyyVaod = kjyyVaod;
+    }
+
+    /**
+     * 获取：远用va(OD)
+     */
+    public String getKjyyVaod() {
+        return kjyyVaod;
+    }
+
+    /**
+     * 设置：远用va(OS)
+     */
+    public void setKjyyVaos(String kjyyVaos) {
+        this.kjyyVaos = kjyyVaos;
+    }
+
+    /**
+     * 获取：远用va(OS)
+     */
+    public String getKjyyVaos() {
+        return kjyyVaos;
+    }
+
+    /**
+     * 设置：建议镜片材质
+     */
+    public void setKjyyJpcz(String kjyyJpcz) {
+        this.kjyyJpcz = kjyyJpcz;
+    }
+
+    /**
+     * 获取：建议镜片材质
+     */
+    public String getKjyyJpcz() {
+        return kjyyJpcz;
+    }
+
+    /**
+     * 设置：处理方式
+     */
+    public void setKjyyClfs(String kjyyClfs) {
+        this.kjyyClfs = kjyyClfs;
+    }
+
+    /**
+     * 获取：处理方式
+     */
+    public String getKjyyClfs() {
+        return kjyyClfs;
+    }
+
+    /**
+     * 设置：建议框架
+     */
+    public void setKjyyJykj(String kjyyJykj) {
+        this.kjyyJykj = kjyyJykj;
+    }
+
+    /**
+     * 获取：建议框架
+     */
+    public String getKjyyJykj() {
+        return kjyyJykj;
+    }
+
+    /**
+     * 设置：框架类型
+     */
+    public void setKjyyKjlx(String kjyyKjlx) {
+        this.kjyyKjlx = kjyyKjlx;
+    }
+
+    /**
+     * 获取：框架类型
+     */
+    public String getKjyyKjlx() {
+        return kjyyKjlx;
+    }
+
+    /**
+     * 设置：文本
+     */
+    public void setKjyyText(String kjyyText) {
+        this.kjyyText = kjyyText;
+    }
+
+    /**
+     * 获取：文本
+     */
+    public String getKjyyText() {
+        return kjyyText;
+    }
+
+    /**
+     * 设置：备注
+     */
+    public void setKjyyBeizhu(String kjyyBeizhu) {
+        this.kjyyBeizhu = kjyyBeizhu;
+    }
+
+    /**
+     * 获取：备注
+     */
+    public String getKjyyBeizhu() {
+        return kjyyBeizhu;
+    }
+
+    private Long rgpId;
+
+    //处方类型
+    private String rgpPrescriptionType;
+    //医生
+    private String rgpDoctor;
+    //验光师
+    private String rgpOptometryName;
+    //屈光度OD
+    private String rgpQgdod;
+    //屈光度OS
+    private String rgpQgdos;
+    //BC(OD)
+    private String rgpBcod;
+    //BC(OS)
+    private String rgpBcos;
+    //DIA(OD)
+    private String rgpDiaod;
+    //DIA(OS)
+    private String rgpDiaos;
+    //散光(OD)
+    private String rgpSgod;
+    //散光(OS)
+    private String rgpSgos;
+    //镜片颜色OD
+    private String rgpJpysod;
+    //镜片颜色OS
+    private String rgpJpysos;
+    //特殊设计OD
+    private String rgpTssjod;
+    //特殊设计OS
+    private String rgpTssjos;
+    //适用镜片OD
+    private String rgpSyjpod;
+    //适用镜片OS
+    private String rgpSyjpos;
+    //备注
+    private String rgpBeizhu;
+
+    /**
+     * 设置：角膜接触镜CRTid
+     */
+    public void setRgpId(Long rgpId) {
+        this.rgpId = rgpId;
+    }
+
+    /**
+     * 获取：角膜接触镜CRTid
+     */
+    public Long getRgpId() {
+        return rgpId;
+    }
+
+
+    /**
+     * 设置：处方类型
+     */
+    public void setRgpPrescriptionType(String rgpPrescriptionType) {
+        this.rgpPrescriptionType = rgpPrescriptionType;
+    }
+
+    /**
+     * 获取：处方类型
+     */
+    public String getRgpPrescriptionType() {
+        return rgpPrescriptionType;
+    }
+
+    /**
+     * 设置：医生
+     */
+    public void setRgpDoctor(String rgpDoctor) {
+        this.rgpDoctor = rgpDoctor;
+    }
+
+    /**
+     * 获取：医生
+     */
+    public String getRgpDoctor() {
+        return rgpDoctor;
+    }
+
+    /**
+     * 设置：验光师
+     */
+    public void setRgpOptometryName(String rgpOptometryName) {
+        this.rgpOptometryName = rgpOptometryName;
+    }
+
+    /**
+     * 获取：验光师
+     */
+    public String getRgpOptometryName() {
+        return rgpOptometryName;
+    }
+
+    /**
+     * 设置：屈光度OD
+     */
+    public void setRgpQgdod(String rgpQgdod) {
+        this.rgpQgdod = rgpQgdod;
+    }
+
+    /**
+     * 获取：屈光度OD
+     */
+    public String getRgpQgdod() {
+        return rgpQgdod;
+    }
+
+    /**
+     * 设置：屈光度OS
+     */
+    public void setRgpQgdos(String rgpQgdos) {
+        this.rgpQgdos = rgpQgdos;
+    }
+
+    /**
+     * 获取：屈光度OS
+     */
+    public String getRgpQgdos() {
+        return rgpQgdos;
+    }
+
+    /**
+     * 设置：BC(OD)
+     */
+    public void setRgpBcod(String rgpBcod) {
+        this.rgpBcod = rgpBcod;
+    }
+
+    /**
+     * 获取：BC(OD)
+     */
+    public String getRgpBcod() {
+        return rgpBcod;
+    }
+
+    /**
+     * 设置：BC(OS)
+     */
+    public void setRgpBcos(String rgpBcos) {
+        this.rgpBcos = rgpBcos;
+    }
+
+    /**
+     * 获取：BC(OS)
+     */
+    public String getRgpBcos() {
+        return rgpBcos;
+    }
+
+    /**
+     * 设置：DIA(OD)
+     */
+    public void setRgpDiaod(String rgpDiaod) {
+        this.rgpDiaod = rgpDiaod;
+    }
+
+    /**
+     * 获取：DIA(OD)
+     */
+    public String getRgpDiaod() {
+        return rgpDiaod;
+    }
+
+    /**
+     * 设置：DIA(OS)
+     */
+    public void setRgpDiaos(String rgpDiaos) {
+        this.rgpDiaos = rgpDiaos;
+    }
+
+    /**
+     * 获取：DIA(OS)
+     */
+    public String getRgpDiaos() {
+        return rgpDiaos;
+    }
+
+    /**
+     * 设置：散光(OD)
+     */
+    public void setRgpSgod(String rgpSgod) {
+        this.rgpSgod = rgpSgod;
+    }
+
+    /**
+     * 获取：散光(OD)
+     */
+    public String getRgpSgod() {
+        return rgpSgod;
+    }
+
+    /**
+     * 设置：散光(OS)
+     */
+    public void setRgpSgos(String rgpSgos) {
+        this.rgpSgos = rgpSgos;
+    }
+
+    /**
+     * 获取：散光(OS)
+     */
+    public String getRgpSgos() {
+        return rgpSgos;
+    }
+
+    /**
+     * 设置：镜片颜色OD
+     */
+    public void setRgpJpysod(String rgpJpysod) {
+        this.rgpJpysod = rgpJpysod;
+    }
+
+    /**
+     * 获取：镜片颜色OD
+     */
+    public String getRgpJpysod() {
+        return rgpJpysod;
+    }
+
+    /**
+     * 设置：镜片颜色OS
+     */
+    public void setRgpJpysos(String rgpJpysos) {
+        this.rgpJpysos = rgpJpysos;
+    }
+
+    /**
+     * 获取：镜片颜色OS
+     */
+    public String getRgpJpysos() {
+        return rgpJpysos;
+    }
+
+    /**
+     * 设置：特殊设计OD
+     */
+    public void setRgpTssjod(String rgpTssjod) {
+        this.rgpTssjod = rgpTssjod;
+    }
+
+    /**
+     * 获取：特殊设计OD
+     */
+    public String getRgpTssjod() {
+        return rgpTssjod;
+    }
+
+    /**
+     * 设置：特殊设计OS
+     */
+    public void setRgpTssjos(String rgpTssjos) {
+        this.rgpTssjos = rgpTssjos;
+    }
+
+    /**
+     * 获取：特殊设计OS
+     */
+    public String getRgpTssjos() {
+        return rgpTssjos;
+    }
+
+    /**
+     * 设置：适用镜片OD
+     */
+    public void setRgpSyjpod(String rgpSyjpod) {
+        this.rgpSyjpod = rgpSyjpod;
+    }
+
+    /**
+     * 获取：适用镜片OD
+     */
+    public String getRgpSyjpod() {
+        return rgpSyjpod;
+    }
+
+    /**
+     * 设置：适用镜片OS
+     */
+    public void setRgpSyjpos(String rgpSyjpos) {
+        this.rgpSyjpos = rgpSyjpos;
+    }
+
+    /**
+     * 获取：适用镜片OS
+     */
+    public String getRgpSyjpos() {
+        return rgpSyjpos;
+    }
+
+    /**
+     * 设置：备注
+     */
+    public void setRgpBeizhu(String rgpBeizhu) {
+        this.rgpBeizhu = rgpBeizhu;
+    }
+
+    /**
+     * 获取：备注
+     */
+    public String getRgpBeizhu() {
+        return rgpBeizhu;
+    }
+    //软性角膜接触镜id
+    private Long rxId;
+
+    //处方类型
+    private String rxPrescriptionType;
+    //医生
+    private String rxDoctor;
+    //验光师
+    private String rxOptometryName;
+    //BC(OD)
+    private String rxBcod;
+    //BC(OS)
+    private String rxBcos;
+    //球镜OD
+    private String rxSphod;
+    //球镜OS
+    private String rxSphos;
+    //柱镜OD
+    private String rxCylod;
+    //柱镜OS
+    private String rxCylos;
+    //轴向OD
+    private String rxAxialod;
+    //轴向OS
+    private String rxAxialos;
+    //直径(OD)
+    private String rxZjod;
+    //直径(OS)
+    private String rxZjos;
+    //va(OD)
+    private String rxVaod;
+    //va(OS)
+    private String rxVaos;
+    //适用镜片OD
+    private String rxSyjpod;
+    //适用镜片OS
+    private String rxSyjpos;
+    //片/盒OD
+    private String rxUnitod;
+    //片/盒OS
+    private String rxUnitos;
+    //软性角膜接触镜处理方式
+    private String rxClfs;
+    //护理液品种
+    private String rxHlypz;
+    //备注
+    private String rxBeizhu;
+
+    /**
+     * 设置：软性角膜接触镜id
+     */
+    public void setRxId(Long rxId) {
+        this.rxId = rxId;
+    }
+
+    /**
+     * 获取：软性角膜接触镜id
+     */
+    public Long getRxId() {
+        return rxId;
+    }
+
+
+    /**
+     * 设置：处方类型
+     */
+    public void setRxPrescriptionType(String rxPrescriptionType) {
+        this.rxPrescriptionType = rxPrescriptionType;
+    }
+
+    /**
+     * 获取：处方类型
+     */
+    public String getRxPrescriptionType() {
+        return rxPrescriptionType;
+    }
+
+    /**
+     * 设置：医生
+     */
+    public void setRxDoctor(String rxDoctor) {
+        this.rxDoctor = rxDoctor;
+    }
+
+    /**
+     * 获取：医生
+     */
+    public String getRxDoctor() {
+        return rxDoctor;
+    }
+
+    /**
+     * 设置：验光师
+     */
+    public void setRxOptometryName(String rxOptometryName) {
+        this.rxOptometryName = rxOptometryName;
+    }
+
+    /**
+     * 获取：验光师
+     */
+    public String getRxOptometryName() {
+        return rxOptometryName;
+    }
+
+    /**
+     * 设置：BC(OD)
+     */
+    public void setRxBcod(String rxBcod) {
+        this.rxBcod = rxBcod;
+    }
+
+    /**
+     * 获取：BC(OD)
+     */
+    public String getRxBcod() {
+        return rxBcod;
+    }
+
+    /**
+     * 设置：BC(OS)
+     */
+    public void setRxBcos(String rxBcos) {
+        this.rxBcos = rxBcos;
+    }
+
+    /**
+     * 获取：BC(OS)
+     */
+    public String getRxBcos() {
+        return rxBcos;
+    }
+
+    /**
+     * 设置：球镜OD
+     */
+    public void setRxSphod(String rxSphod) {
+        this.rxSphod = rxSphod;
+    }
+
+    /**
+     * 获取：球镜OD
+     */
+    public String getRxSphod() {
+        return rxSphod;
+    }
+
+    /**
+     * 设置：球镜OS
+     */
+    public void setRxSphos(String rxSphos) {
+        this.rxSphos = rxSphos;
+    }
+
+    /**
+     * 获取：球镜OS
+     */
+    public String getRxSphos() {
+        return rxSphos;
+    }
+
+    /**
+     * 设置：柱镜OD
+     */
+    public void setRxCylod(String rxCylod) {
+        this.rxCylod = rxCylod;
+    }
+
+    /**
+     * 获取：柱镜OD
+     */
+    public String getRxCylod() {
+        return rxCylod;
+    }
+
+    /**
+     * 设置：柱镜OS
+     */
+    public void setRxCylos(String rxCylos) {
+        this.rxCylos = rxCylos;
+    }
+
+    /**
+     * 获取：柱镜OS
+     */
+    public String getRxCylos() {
+        return rxCylos;
+    }
+
+    /**
+     * 设置：轴向OD
+     */
+    public void setRxAxialod(String rxAxialod) {
+        this.rxAxialod = rxAxialod;
+    }
+
+    /**
+     * 获取：轴向OD
+     */
+    public String getRxAxialod() {
+        return rxAxialod;
+    }
+
+    /**
+     * 设置：轴向OS
+     */
+    public void setRxAxialos(String rxAxialos) {
+        this.rxAxialos = rxAxialos;
+    }
+
+    /**
+     * 获取：轴向OS
+     */
+    public String getRxAxialos() {
+        return rxAxialos;
+    }
+
+    /**
+     * 设置：直径(OD)
+     */
+    public void setRxZjod(String rxZjod) {
+        this.rxZjod = rxZjod;
+    }
+
+    /**
+     * 获取：直径(OD)
+     */
+    public String getRxZjod() {
+        return rxZjod;
+    }
+
+    /**
+     * 设置：直径(OS)
+     */
+    public void setRxZjos(String rxZjos) {
+        this.rxZjos = rxZjos;
+    }
+
+    /**
+     * 获取：直径(OS)
+     */
+    public String getRxZjos() {
+        return rxZjos;
+    }
+
+    /**
+     * 设置：va(OD)
+     */
+    public void setRxVaod(String rxVaod) {
+        this.rxVaod = rxVaod;
+    }
+
+    /**
+     * 获取：va(OD)
+     */
+    public String getRxVaod() {
+        return rxVaod;
+    }
+
+    /**
+     * 设置：va(OS)
+     */
+    public void setRxVaos(String rxVaos) {
+        this.rxVaos = rxVaos;
+    }
+
+    /**
+     * 获取：va(OS)
+     */
+    public String getRxVaos() {
+        return rxVaos;
+    }
+
+    /**
+     * 设置：适用镜片OD
+     */
+    public void setRxSyjpod(String rxSyjpod) {
+        this.rxSyjpod = rxSyjpod;
+    }
+
+    /**
+     * 获取：适用镜片OD
+     */
+    public String getRxSyjpod() {
+        return rxSyjpod;
+    }
+
+    /**
+     * 设置：适用镜片OS
+     */
+    public void setRxSyjpos(String rxSyjpos) {
+        this.rxSyjpos = rxSyjpos;
+    }
+
+    /**
+     * 获取：适用镜片OS
+     */
+    public String getRxSyjpos() {
+        return rxSyjpos;
+    }
+
+    /**
+     * 设置：片/盒OD
+     */
+    public void setRxUnitod(String rxUnitod) {
+        this.rxUnitod = rxUnitod;
+    }
+
+    /**
+     * 获取：片/盒OD
+     */
+    public String getRxUnitod() {
+        return rxUnitod;
+    }
+
+    /**
+     * 设置：片/盒OS
+     */
+    public void setRxUnitos(String rxUnitos) {
+        this.rxUnitos = rxUnitos;
+    }
+
+    /**
+     * 获取：片/盒OS
+     */
+    public String getRxUnitos() {
+        return rxUnitos;
+    }
+
+    /**
+     * 设置：软性角膜接触镜处理方式
+     */
+    public void setRxClfs(String rxClfs) {
+        this.rxClfs = rxClfs;
+    }
+
+    /**
+     * 获取：软性角膜接触镜处理方式
+     */
+    public String getRxClfs() {
+        return rxClfs;
+    }
+
+    /**
+     * 设置：护理液品种
+     */
+    public void setRxHlypz(String rxHlypz) {
+        this.rxHlypz = rxHlypz;
+    }
+
+    /**
+     * 获取：护理液品种
+     */
+    public String getRxHlypz() {
+        return rxHlypz;
+    }
+
+    /**
+     * 设置：备注
+     */
+    public void setRxBeizhu(String rxBeizhu) {
+        this.rxBeizhu = rxBeizhu;
+    }
+
+    /**
+     * 获取：备注
+     */
+    public String getRxBeizhu() {
+        return rxBeizhu;
+    }
     //双光渐进id
     private Long sgjjId;
 
@@ -1673,6 +2782,8 @@ public class ResultDO implements Serializable {
     public Long getSgjjId() {
         return sgjjId;
     }
+
+
 
     /**
      * 设置：处方类型
@@ -2052,376 +3163,311 @@ public class ResultDO implements Serializable {
         return sgjjBeizhu;
     }
 
-    //软性角膜接触镜id
-    private Long rxId;
-    //处方类型
-    private String rxPrescriptionType;
-    //医生
-    private String rxDoctor;
-    //验光师
-    private String rxOptometryName;
-    //BC(OD)
-    private String rxBcod;
-    //BC(OS)
-    private String rxBcos;
-    //球镜OD
-    private String rxSphod;
-    //球镜OS
-    private String rxSphos;
-    //柱镜OD
-    private String rxCylod;
-    //柱镜OS
-    private String rxCylos;
-    //轴向OD
-    private String rxAxialod;
-    //轴向OS
-    private String rxAxialos;
-    //直径(OD)
-    private String rxZjod;
-    //直径(OS)
-    private String rxZjos;
-    //va(OD)
-    private String rxVaod;
-    //va(OS)
-    private String rxVaos;
-    //适用镜片OD
-    private String rxSyjpod;
-    //适用镜片OS
-    private String rxSyjpos;
-    //片/盒OD
-    private String rxUnitod;
-    //片/盒OS
-    private String rxUnitos;
-    //软性角膜接触镜处理方式
-    private String rxClfs;
-    //护理液品种
-    private String rxHlypz;
-    //备注
-    private String rxBeizhu;
+    //裸眼视力远OU
+    private String farLyou;
+    //裸眼视力远OD
+    private String farLyod;
+    //裸眼视力远OS
+    private String farLyos;
+    //裸眼视力近OU
+    private String nearLyou;
+    //裸眼视力近OD
+    private String nearLyod;
+    //裸眼视力近OS
+    private String nearLyos;
+    //原镜视力远OU
+    private String farYjou;
+    //原镜视力远OD
+    private String farYjod;
+    //原镜视力远OS
+    private String farYjos;
+    //原镜视力近OU
+    private String nearYjou;
+    //原镜视力近OD
+    private String nearYjod;
+    //原镜视力近OS
+    private String nearYjos;
+    //小孔视力远OU
+    private String farXkou;
+    //小孔视力远OD
+    private String farXkod;
+    //小孔视力远OS
+    private String farXkos;
+    //小孔视力近OU
+    private String nearXkou;
+    //小孔视力近OD
+    private String nearXkod;
+    //小孔视力近OS
+    private String nearXkos;
+    //主导眼
+    private String dominantEye;
+
 
     /**
-     * 设置：软性角膜接触镜id
+     * 设置：裸眼视力远OU
      */
-    public void setRxId(Long rxId) {
-        this.rxId = rxId;
+    public void setFarLyou(String farLyou) {
+        this.farLyou = farLyou;
     }
 
     /**
-     * 获取：软性角膜接触镜id
+     * 获取：裸眼视力远OU
      */
-    public Long getRxId() {
-        return rxId;
+    public String getFarLyou() {
+        return farLyou;
     }
 
     /**
-     * 设置：处方类型
+     * 设置：裸眼视力远OD
      */
-    public void setRxPrescriptionType(String rxPrescriptionType) {
-        this.rxPrescriptionType = rxPrescriptionType;
+    public void setFarLyod(String farLyod) {
+        this.farLyod = farLyod;
     }
 
     /**
-     * 获取：处方类型
+     * 获取：裸眼视力远OD
      */
-    public String getRxPrescriptionType() {
-        return rxPrescriptionType;
+    public String getFarLyod() {
+        return farLyod;
     }
 
     /**
-     * 设置：医生
+     * 设置：裸眼视力远OS
      */
-    public void setRxDoctor(String rxDoctor) {
-        this.rxDoctor = rxDoctor;
+    public void setFarLyos(String farLyos) {
+        this.farLyos = farLyos;
     }
 
     /**
-     * 获取：医生
+     * 获取：裸眼视力远OS
      */
-    public String getRxDoctor() {
-        return rxDoctor;
+    public String getFarLyos() {
+        return farLyos;
     }
 
     /**
-     * 设置：验光师
+     * 设置：裸眼视力近OU
      */
-    public void setRxOptometryName(String rxOptometryName) {
-        this.rxOptometryName = rxOptometryName;
+    public void setNearLyou(String nearLyou) {
+        this.nearLyou = nearLyou;
     }
 
     /**
-     * 获取：验光师
+     * 获取：裸眼视力近OU
      */
-    public String getRxOptometryName() {
-        return rxOptometryName;
+    public String getNearLyou() {
+        return nearLyou;
     }
 
     /**
-     * 设置：BC(OD)
+     * 设置：裸眼视力近OD
      */
-    public void setRxBcod(String rxBcod) {
-        this.rxBcod = rxBcod;
+    public void setNearLyod(String nearLyod) {
+        this.nearLyod = nearLyod;
     }
 
     /**
-     * 获取：BC(OD)
+     * 获取：裸眼视力近OD
      */
-    public String getRxBcod() {
-        return rxBcod;
+    public String getNearLyod() {
+        return nearLyod;
     }
 
     /**
-     * 设置：BC(OS)
+     * 设置：裸眼视力近OS
      */
-    public void setRxBcos(String rxBcos) {
-        this.rxBcos = rxBcos;
+    public void setNearLyos(String nearLyos) {
+        this.nearLyos = nearLyos;
     }
 
     /**
-     * 获取：BC(OS)
+     * 获取：裸眼视力近OS
      */
-    public String getRxBcos() {
-        return rxBcos;
+    public String getNearLyos() {
+        return nearLyos;
     }
 
     /**
-     * 设置：球镜OD
+     * 设置：原镜视力远OU
      */
-    public void setRxSphod(String rxSphod) {
-        this.rxSphod = rxSphod;
+    public void setFarYjou(String farYjou) {
+        this.farYjou = farYjou;
     }
 
     /**
-     * 获取：球镜OD
+     * 获取：原镜视力远OU
      */
-    public String getRxSphod() {
-        return rxSphod;
+    public String getFarYjou() {
+        return farYjou;
     }
 
     /**
-     * 设置：球镜OS
+     * 设置：原镜视力远OD
      */
-    public void setRxSphos(String rxSphos) {
-        this.rxSphos = rxSphos;
+    public void setFarYjod(String farYjod) {
+        this.farYjod = farYjod;
     }
 
     /**
-     * 获取：球镜OS
+     * 获取：原镜视力远OD
      */
-    public String getRxSphos() {
-        return rxSphos;
+    public String getFarYjod() {
+        return farYjod;
     }
 
     /**
-     * 设置：柱镜OD
+     * 设置：原镜视力远OS
      */
-    public void setRxCylod(String rxCylod) {
-        this.rxCylod = rxCylod;
+    public void setFarYjos(String farYjos) {
+        this.farYjos = farYjos;
     }
 
     /**
-     * 获取：柱镜OD
+     * 获取：原镜视力远OS
      */
-    public String getRxCylod() {
-        return rxCylod;
+    public String getFarYjos() {
+        return farYjos;
     }
 
     /**
-     * 设置：柱镜OS
+     * 设置：原镜视力近OU
      */
-    public void setRxCylos(String rxCylos) {
-        this.rxCylos = rxCylos;
+    public void setNearYjou(String nearYjou) {
+        this.nearYjou = nearYjou;
     }
 
     /**
-     * 获取：柱镜OS
+     * 获取：原镜视力近OU
      */
-    public String getRxCylos() {
-        return rxCylos;
+    public String getNearYjou() {
+        return nearYjou;
     }
 
     /**
-     * 设置：轴向OD
+     * 设置：原镜视力近OD
      */
-    public void setRxAxialod(String rxAxialod) {
-        this.rxAxialod = rxAxialod;
+    public void setNearYjod(String nearYjod) {
+        this.nearYjod = nearYjod;
     }
 
     /**
-     * 获取：轴向OD
+     * 获取：原镜视力近OD
      */
-    public String getRxAxialod() {
-        return rxAxialod;
+    public String getNearYjod() {
+        return nearYjod;
     }
 
     /**
-     * 设置：轴向OS
+     * 设置：原镜视力近OS
      */
-    public void setRxAxialos(String rxAxialos) {
-        this.rxAxialos = rxAxialos;
+    public void setNearYjos(String nearYjos) {
+        this.nearYjos = nearYjos;
     }
 
     /**
-     * 获取：轴向OS
+     * 获取：原镜视力近OS
      */
-    public String getRxAxialos() {
-        return rxAxialos;
+    public String getNearYjos() {
+        return nearYjos;
     }
 
     /**
-     * 设置：直径(OD)
+     * 设置：小孔视力远OU
      */
-    public void setRxZjod(String rxZjod) {
-        this.rxZjod = rxZjod;
+    public void setFarXkou(String farXkou) {
+        this.farXkou = farXkou;
     }
 
     /**
-     * 获取：直径(OD)
+     * 获取：小孔视力远OU
      */
-    public String getRxZjod() {
-        return rxZjod;
+    public String getFarXkou() {
+        return farXkou;
     }
 
     /**
-     * 设置：直径(OS)
+     * 设置：小孔视力远OD
      */
-    public void setRxZjos(String rxZjos) {
-        this.rxZjos = rxZjos;
+    public void setFarXkod(String farXkod) {
+        this.farXkod = farXkod;
     }
 
     /**
-     * 获取：直径(OS)
+     * 获取：小孔视力远OD
      */
-    public String getRxZjos() {
-        return rxZjos;
+    public String getFarXkod() {
+        return farXkod;
     }
 
     /**
-     * 设置：va(OD)
+     * 设置：小孔视力远OS
      */
-    public void setRxVaod(String rxVaod) {
-        this.rxVaod = rxVaod;
+    public void setFarXkos(String farXkos) {
+        this.farXkos = farXkos;
     }
 
     /**
-     * 获取：va(OD)
+     * 获取：小孔视力远OS
      */
-    public String getRxVaod() {
-        return rxVaod;
+    public String getFarXkos() {
+        return farXkos;
     }
 
     /**
-     * 设置：va(OS)
+     * 设置：小孔视力近OU
      */
-    public void setRxVaos(String rxVaos) {
-        this.rxVaos = rxVaos;
+    public void setNearXkou(String nearXkou) {
+        this.nearXkou = nearXkou;
     }
 
     /**
-     * 获取：va(OS)
+     * 获取：小孔视力近OU
      */
-    public String getRxVaos() {
-        return rxVaos;
+    public String getNearXkou() {
+        return nearXkou;
     }
 
     /**
-     * 设置：适用镜片OD
+     * 设置：小孔视力近OD
      */
-    public void setRxSyjpod(String rxSyjpod) {
-        this.rxSyjpod = rxSyjpod;
+    public void setNearXkod(String nearXkod) {
+        this.nearXkod = nearXkod;
     }
 
     /**
-     * 获取：适用镜片OD
+     * 获取：小孔视力近OD
      */
-    public String getRxSyjpod() {
-        return rxSyjpod;
+    public String getNearXkod() {
+        return nearXkod;
     }
 
     /**
-     * 设置：适用镜片OS
+     * 设置：小孔视力近OS
      */
-    public void setRxSyjpos(String rxSyjpos) {
-        this.rxSyjpos = rxSyjpos;
+    public void setNearXkos(String nearXkos) {
+        this.nearXkos = nearXkos;
     }
 
     /**
-     * 获取：适用镜片OS
+     * 获取：小孔视力近OS
      */
-    public String getRxSyjpos() {
-        return rxSyjpos;
+    public String getNearXkos() {
+        return nearXkos;
     }
 
     /**
-     * 设置：片/盒OD
+     * 设置：主导眼
      */
-    public void setRxUnitod(String rxUnitod) {
-        this.rxUnitod = rxUnitod;
+    public void setDominantEye(String dominantEye) {
+        this.dominantEye = dominantEye;
     }
 
     /**
-     * 获取：片/盒OD
+     * 获取：主导眼
      */
-    public String getRxUnitod() {
-        return rxUnitod;
+    public String getDominantEye() {
+        return dominantEye;
     }
-
-    /**
-     * 设置：片/盒OS
-     */
-    public void setRxUnitos(String rxUnitos) {
-        this.rxUnitos = rxUnitos;
-    }
-
-    /**
-     * 获取：片/盒OS
-     */
-    public String getRxUnitos() {
-        return rxUnitos;
-    }
-
-    /**
-     * 设置：软性角膜接触镜处理方式
-     */
-    public void setRxClfs(String rxClfs) {
-        this.rxClfs = rxClfs;
-    }
-
-    /**
-     * 获取：软性角膜接触镜处理方式
-     */
-    public String getRxClfs() {
-        return rxClfs;
-    }
-
-    /**
-     * 设置：护理液品种
-     */
-    public void setRxHlypz(String rxHlypz) {
-        this.rxHlypz = rxHlypz;
-    }
-
-    /**
-     * 获取：护理液品种
-     */
-    public String getRxHlypz() {
-        return rxHlypz;
-    }
-
-    /**
-     * 设置：备注
-     */
-    public void setRxBeizhu(String rxBeizhu) {
-        this.rxBeizhu = rxBeizhu;
-    }
-
-    /**
-     * 获取：备注
-     */
-    public String getRxBeizhu() {
-        return rxBeizhu;
-    }
-
-
     //视觉训练id
     private Long sjxlId;
     //处方类型
@@ -2822,13 +3868,334 @@ public class ResultDO implements Serializable {
     public String getSjxlBeizhu() {
         return sjxlBeizhu;
     }
+    //球镜(右眼OD)
+    private String sphereRightz;
+    //球镜(左眼OS)
+    private String sphereLeftz;
+    //柱镜(右眼OD)
+    private String cylinderRightz;
+    //柱镜(左眼OS)
+    private String cylinderLeftz;
+    //轴向(右眼-OD)
+    private String axialRightz;
+    //轴向(左眼OS)
+    private String axialLeftz;
+    //DVA(右眼OD)
+    private String dvaRightz;
+    //DVA(左眼OS)
+    private String dvaLeftz;
+    //NVA(OD)
+    private String nvaRightz;
+    //NVA(OS)
+    private String nvaLeftz;
+    //三棱镜(OD)
+    private String prismRightz;
+    //三棱镜(OS)
+    private String prismLeftz;
+    //基底(OD)
+    private String jdrZ;
+    //基底(OS)
+    private String jdlZ;
+    //Add(OD)
+    private String addRightz;
+    //Add(OS)
+    private String addLeftz;
+    //远用瞳孔距(mm)(OD)
+    private String yuanRz;
+    //远用瞳孔距(mm)(OS)
+    private String yuanLz;
+    //近用瞳孔距(mm)(OD)
+    private String nearRightz;
+    //近用瞳孔距(mm)(OS)
+    private String nearLeftz;
 
+    /**
+     * 设置：球镜(右眼OD)
+     */
+    public void setSphereRightz(String sphereRightz) {
+        this.sphereRightz = sphereRightz;
+    }
+
+    /**
+     * 获取：球镜(右眼OD)
+     */
+    public String getSphereRightz() {
+        return sphereRightz;
+    }
+
+    /**
+     * 设置：球镜(左眼OS)
+     */
+    public void setSphereLeftz(String sphereLeftz) {
+        this.sphereLeftz = sphereLeftz;
+    }
+
+    /**
+     * 获取：球镜(左眼OS)
+     */
+    public String getSphereLeftz() {
+        return sphereLeftz;
+    }
+
+    /**
+     * 设置：柱镜(右眼OD)
+     */
+    public void setCylinderRightz(String cylinderRightz) {
+        this.cylinderRightz = cylinderRightz;
+    }
+
+    /**
+     * 获取：柱镜(右眼OD)
+     */
+    public String getCylinderRightz() {
+        return cylinderRightz;
+    }
+
+    /**
+     * 设置：柱镜(左眼OS)
+     */
+    public void setCylinderLeftz(String cylinderLeftz) {
+        this.cylinderLeftz = cylinderLeftz;
+    }
+
+    /**
+     * 获取：柱镜(左眼OS)
+     */
+    public String getCylinderLeftz() {
+        return cylinderLeftz;
+    }
+
+    /**
+     * 设置：轴向(右眼-OD)
+     */
+    public void setAxialRightz(String axialRightz) {
+        this.axialRightz = axialRightz;
+    }
+
+    /**
+     * 获取：轴向(右眼-OD)
+     */
+    public String getAxialRightz() {
+        return axialRightz;
+    }
+
+    /**
+     * 设置：轴向(左眼OS)
+     */
+    public void setAxialLeftz(String axialLeftz) {
+        this.axialLeftz = axialLeftz;
+    }
+
+    /**
+     * 获取：轴向(左眼OS)
+     */
+    public String getAxialLeftz() {
+        return axialLeftz;
+    }
+
+    /**
+     * 设置：DVA(右眼OD)
+     */
+    public void setDvaRightz(String dvaRightz) {
+        this.dvaRightz = dvaRightz;
+    }
+
+    /**
+     * 获取：DVA(右眼OD)
+     */
+    public String getDvaRightz() {
+        return dvaRightz;
+    }
+
+    /**
+     * 设置：DVA(左眼OS)
+     */
+    public void setDvaLeftz(String dvaLeftz) {
+        this.dvaLeftz = dvaLeftz;
+    }
+
+    /**
+     * 获取：DVA(左眼OS)
+     */
+    public String getDvaLeftz() {
+        return dvaLeftz;
+    }
+
+    /**
+     * 设置：NVA(OD)
+     */
+    public void setNvaRightz(String nvaRightz) {
+        this.nvaRightz = nvaRightz;
+    }
+
+    /**
+     * 获取：NVA(OD)
+     */
+    public String getNvaRightz() {
+        return nvaRightz;
+    }
+
+    /**
+     * 设置：NVA(OS)
+     */
+    public void setNvaLeftz(String nvaLeftz) {
+        this.nvaLeftz = nvaLeftz;
+    }
+
+    /**
+     * 获取：NVA(OS)
+     */
+    public String getNvaLeftz() {
+        return nvaLeftz;
+    }
+
+    /**
+     * 设置：三棱镜(OD)
+     */
+    public void setPrismRightz(String prismRightz) {
+        this.prismRightz = prismRightz;
+    }
+
+    /**
+     * 获取：三棱镜(OD)
+     */
+    public String getPrismRightz() {
+        return prismRightz;
+    }
+
+    /**
+     * 设置：三棱镜(OS)
+     */
+    public void setPrismLeftz(String prismLeftz) {
+        this.prismLeftz = prismLeftz;
+    }
+
+    /**
+     * 获取：三棱镜(OS)
+     */
+    public String getPrismLeftz() {
+        return prismLeftz;
+    }
+
+    /**
+     * 设置：基底(OD)
+     */
+    public void setJdrZ(String jdrZ) {
+        this.jdrZ = jdrZ;
+    }
+
+    /**
+     * 获取：基底(OD)
+     */
+    public String getJdrZ() {
+        return jdrZ;
+    }
+
+    /**
+     * 设置：基底(OS)
+     */
+    public void setJdlZ(String jdlZ) {
+        this.jdlZ = jdlZ;
+    }
+
+    /**
+     * 获取：基底(OS)
+     */
+    public String getJdlZ() {
+        return jdlZ;
+    }
+
+    /**
+     * 设置：Add(OD)
+     */
+    public void setAddRightz(String addRightz) {
+        this.addRightz = addRightz;
+    }
+
+    /**
+     * 获取：Add(OD)
+     */
+    public String getAddRightz() {
+        return addRightz;
+    }
+
+    /**
+     * 设置：Add(OS)
+     */
+    public void setAddLeftz(String addLeftz) {
+        this.addLeftz = addLeftz;
+    }
+
+    /**
+     * 获取：Add(OS)
+     */
+    public String getAddLeftz() {
+        return addLeftz;
+    }
+
+    /**
+     * 设置：远用瞳孔距(mm)(OD)
+     */
+    public void setYuanRz(String yuanRz) {
+        this.yuanRz = yuanRz;
+    }
+
+    /**
+     * 获取：远用瞳孔距(mm)(OD)
+     */
+    public String getYuanRz() {
+        return yuanRz;
+    }
+
+    /**
+     * 设置：远用瞳孔距(mm)(OS)
+     */
+    public void setYuanLz(String yuanLz) {
+        this.yuanLz = yuanLz;
+    }
+
+    /**
+     * 获取：远用瞳孔距(mm)(OS)
+     */
+    public String getYuanLz() {
+        return yuanLz;
+    }
+
+    /**
+     * 设置：近用瞳孔距(mm)(OD)
+     */
+    public void setNearRightz(String nearRightz) {
+        this.nearRightz = nearRightz;
+    }
+
+    /**
+     * 获取：近用瞳孔距(mm)(OD)
+     */
+    public String getNearRightz() {
+        return nearRightz;
+    }
+
+    /**
+     * 设置：近用瞳孔距(mm)(OS)
+     */
+    public void setNearLeftz(String nearLeftz) {
+        this.nearLeftz = nearLeftz;
+    }
+
+    /**
+     * 获取：近用瞳孔距(mm)(OS)
+     */
+    public String getNearLeftz() {
+        return nearLeftz;
+    }
     //角膜接触镜VSTid
     private Long vstId;
     //处方类型
     private String vstPrescriptionType;
     //医生
     private String vstDoctor;
+    //验光师
+    private String vstOptometryName;
     //试戴片编号OD
     private String vstSdbhod;
     //试戴片编号OS
@@ -2894,6 +4261,7 @@ public class ResultDO implements Serializable {
         return vstId;
     }
 
+
     /**
      * 设置：处方类型
      */
@@ -2920,6 +4288,14 @@ public class ResultDO implements Serializable {
      */
     public String getVstDoctor() {
         return vstDoctor;
+    }
+
+    public String getVstOptometryName() {
+        return vstOptometryName;
+    }
+
+    public void setVstOptometryName(String vstOptometryName) {
+        this.vstOptometryName = vstOptometryName;
     }
 
     /**
@@ -3272,743 +4648,6 @@ public class ResultDO implements Serializable {
         return vstBeizhu;
     }
 
-    //角膜接触镜CRTid
-    private Long crtId;
-    //处方类型
-    private String crtPrescriptionType;
-    //医生
-    private String crtDoctor;
-    //验光师
-    private String crtOptometryName;
-    //试戴片编号OD
-    private String crtSdbhod;
-    //试戴片编号OS
-    private String crtSdbhos;
-    //BC(OD)
-    private String ctrBcod;
-    //BC(OS)
-    private String crtBcos;
-    //RZD(OD)
-    private String crtRzdod;
-    //RZD(OS)
-    private String crtRzdos;
-    //LZA(OD)
-    private String crtLzaod;
-    //LZA(OS)
-    private String crtLzaos;
-    //RZD2OD
-    private String crtRzd2od;
-    //RZD2OS
-    private String crtRzd2os;
-    //LZA2(OD)
-    private String crtLza2od;
-    //LZA2(OS)
-    private String crtLza2os;
-    //降幅(OD)
-    private String crtJfod;
-    //降幅(OS)
-    private String crtJfos;
-    //DIA(OD)
-    private String crtDiaod;
-    //DIA(OS)
-    private String crtDiaos;
-    //VA(OD)
-    private String crtVaod;
-    //VA(OS)
-    private String crtVaos;
-    //镜片颜色OD
-    private String crtJpysod;
-    //镜片颜色OS
-    private String crtJpysos;
-    //适用镜片OD
-    private String crtSyjpod;
-    //适用镜片OS
-    private String crtSyjpos;
-    //备注
-    private String crtBeizhu;
-
-    /**
-     * 设置：角膜接触镜CRTid
-     */
-    public void setCrtId(Long crtId) {
-        this.crtId = crtId;
-    }
-
-    /**
-     * 获取：角膜接触镜CRTid
-     */
-    public Long getCrtId() {
-        return crtId;
-    }
-
-    /**
-     * 设置：处方类型
-     */
-    public void setCrtPrescriptionType(String crtPrescriptionType) {
-        this.crtPrescriptionType = crtPrescriptionType;
-    }
-
-    /**
-     * 获取：处方类型
-     */
-    public String getCrtPrescriptionType() {
-        return crtPrescriptionType;
-    }
-
-    /**
-     * 设置：医生
-     */
-    public void setCrtDoctor(String crtDoctor) {
-        this.crtDoctor = crtDoctor;
-    }
-
-    /**
-     * 获取：医生
-     */
-    public String getCrtDoctor() {
-        return crtDoctor;
-    }
-
-    /**
-     * 设置：验光师
-     */
-    public void setCrtOptometryName(String crtOptometryName) {
-        this.crtOptometryName = crtOptometryName;
-    }
-
-    /**
-     * 获取：验光师
-     */
-    public String getCrtOptometryName() {
-        return crtOptometryName;
-    }
-
-    /**
-     * 设置：试戴片编号OD
-     */
-    public void setCrtSdbhod(String crtSdbhod) {
-        this.crtSdbhod = crtSdbhod;
-    }
-
-    /**
-     * 获取：试戴片编号OD
-     */
-    public String getCrtSdbhod() {
-        return crtSdbhod;
-    }
-
-    /**
-     * 设置：试戴片编号OS
-     */
-    public void setCrtSdbhos(String crtSdbhos) {
-        this.crtSdbhos = crtSdbhos;
-    }
-
-    /**
-     * 获取：试戴片编号OS
-     */
-    public String getCrtSdbhos() {
-        return crtSdbhos;
-    }
-
-    /**
-     * 设置：BC(OD)
-     */
-    public void setCtrBcod(String ctrBcod) {
-        this.ctrBcod = ctrBcod;
-    }
-
-    /**
-     * 获取：BC(OD)
-     */
-    public String getCtrBcod() {
-        return ctrBcod;
-    }
-
-    /**
-     * 设置：BC(OS)
-     */
-    public void setCrtBcos(String crtBcos) {
-        this.crtBcos = crtBcos;
-    }
-
-    /**
-     * 获取：BC(OS)
-     */
-    public String getCrtBcos() {
-        return crtBcos;
-    }
-
-    /**
-     * 设置：RZD(OD)
-     */
-    public void setCrtRzdod(String crtRzdod) {
-        this.crtRzdod = crtRzdod;
-    }
-
-    /**
-     * 获取：RZD(OD)
-     */
-    public String getCrtRzdod() {
-        return crtRzdod;
-    }
-
-    /**
-     * 设置：RZD(OS)
-     */
-    public void setCrtRzdos(String crtRzdos) {
-        this.crtRzdos = crtRzdos;
-    }
-
-    /**
-     * 获取：RZD(OS)
-     */
-    public String getCrtRzdos() {
-        return crtRzdos;
-    }
-
-    /**
-     * 设置：LZA(OD)
-     */
-    public void setCrtLzaod(String crtLzaod) {
-        this.crtLzaod = crtLzaod;
-    }
-
-    /**
-     * 获取：LZA(OD)
-     */
-    public String getCrtLzaod() {
-        return crtLzaod;
-    }
-
-    /**
-     * 设置：LZA(OS)
-     */
-    public void setCrtLzaos(String crtLzaos) {
-        this.crtLzaos = crtLzaos;
-    }
-
-    /**
-     * 获取：LZA(OS)
-     */
-    public String getCrtLzaos() {
-        return crtLzaos;
-    }
-
-    /**
-     * 设置：RZD2OD
-     */
-    public void setCrtRzd2od(String crtRzd2od) {
-        this.crtRzd2od = crtRzd2od;
-    }
-
-    /**
-     * 获取：RZD2OD
-     */
-    public String getCrtRzd2od() {
-        return crtRzd2od;
-    }
-
-    /**
-     * 设置：RZD2OS
-     */
-    public void setCrtRzd2os(String crtRzd2os) {
-        this.crtRzd2os = crtRzd2os;
-    }
-
-    /**
-     * 获取：RZD2OS
-     */
-    public String getCrtRzd2os() {
-        return crtRzd2os;
-    }
-
-    /**
-     * 设置：LZA2(OD)
-     */
-    public void setCrtLza2od(String crtLza2od) {
-        this.crtLza2od = crtLza2od;
-    }
-
-    /**
-     * 获取：LZA2(OD)
-     */
-    public String getCrtLza2od() {
-        return crtLza2od;
-    }
-
-    /**
-     * 设置：LZA2(OS)
-     */
-    public void setCrtLza2os(String crtLza2os) {
-        this.crtLza2os = crtLza2os;
-    }
-
-    /**
-     * 获取：LZA2(OS)
-     */
-    public String getCrtLza2os() {
-        return crtLza2os;
-    }
-
-    /**
-     * 设置：降幅(OD)
-     */
-    public void setCrtJfod(String crtJfod) {
-        this.crtJfod = crtJfod;
-    }
-
-    /**
-     * 获取：降幅(OD)
-     */
-    public String getCrtJfod() {
-        return crtJfod;
-    }
-
-    /**
-     * 设置：降幅(OS)
-     */
-    public void setCrtJfos(String crtJfos) {
-        this.crtJfos = crtJfos;
-    }
-
-    /**
-     * 获取：降幅(OS)
-     */
-    public String getCrtJfos() {
-        return crtJfos;
-    }
-
-    /**
-     * 设置：DIA(OD)
-     */
-    public void setCrtDiaod(String crtDiaod) {
-        this.crtDiaod = crtDiaod;
-    }
-
-    /**
-     * 获取：DIA(OD)
-     */
-    public String getCrtDiaod() {
-        return crtDiaod;
-    }
-
-    /**
-     * 设置：DIA(OS)
-     */
-    public void setCrtDiaos(String crtDiaos) {
-        this.crtDiaos = crtDiaos;
-    }
-
-    /**
-     * 获取：DIA(OS)
-     */
-    public String getCrtDiaos() {
-        return crtDiaos;
-    }
-
-    /**
-     * 设置：VA(OD)
-     */
-    public void setCrtVaod(String crtVaod) {
-        this.crtVaod = crtVaod;
-    }
-
-    /**
-     * 获取：VA(OD)
-     */
-    public String getCrtVaod() {
-        return crtVaod;
-    }
-
-    /**
-     * 设置：VA(OS)
-     */
-    public void setCrtVaos(String crtVaos) {
-        this.crtVaos = crtVaos;
-    }
-
-    /**
-     * 获取：VA(OS)
-     */
-    public String getCrtVaos() {
-        return crtVaos;
-    }
-
-    /**
-     * 设置：镜片颜色OD
-     */
-    public void setCrtJpysod(String crtJpysod) {
-        this.crtJpysod = crtJpysod;
-    }
-
-    /**
-     * 获取：镜片颜色OD
-     */
-    public String getCrtJpysod() {
-        return crtJpysod;
-    }
-
-    /**
-     * 设置：镜片颜色OS
-     */
-    public void setCrtJpysos(String crtJpysos) {
-        this.crtJpysos = crtJpysos;
-    }
-
-    /**
-     * 获取：镜片颜色OS
-     */
-    public String getCrtJpysos() {
-        return crtJpysos;
-    }
-
-    /**
-     * 设置：适用镜片OD
-     */
-    public void setCrtSyjpod(String crtSyjpod) {
-        this.crtSyjpod = crtSyjpod;
-    }
-
-    /**
-     * 获取：适用镜片OD
-     */
-    public String getCrtSyjpod() {
-        return crtSyjpod;
-    }
-
-    /**
-     * 设置：适用镜片OS
-     */
-    public void setCrtSyjpos(String crtSyjpos) {
-        this.crtSyjpos = crtSyjpos;
-    }
-
-    /**
-     * 获取：适用镜片OS
-     */
-    public String getCrtSyjpos() {
-        return crtSyjpos;
-    }
-
-    /**
-     * 设置：备注
-     */
-    public void setCrtBeizhu(String crtBeizhu) {
-        this.crtBeizhu = crtBeizhu;
-    }
-
-    /**
-     * 获取：备注
-     */
-    public String getCrtBeizhu() {
-        return crtBeizhu;
-    }
-
-    private Long rgpId;
-    //处方类型
-    private String rgpPrescriptionType;
-    //医生
-    private String rgpDoctor;
-    //验光师
-    private String rgpOptometryName;
-    //屈光度OD
-    private String rgpQgdod;
-    //屈光度OS
-    private String rgpQgdos;
-    //BC(OD)
-    private String rgpBcod;
-    //BC(OS)
-    private String rgpBcos;
-    //DIA(OD)
-    private String rgpDiaod;
-    //DIA(OS)
-    private String rgpDiaos;
-    //散光(OD)
-    private String rgpSgod;
-    //散光(OS)
-    private String rgpSgos;
-    //镜片颜色OD
-    private String rgpJpysod;
-    //镜片颜色OS
-    private String rgpJpysos;
-    //特殊设计OD
-    private String rgpTssjod;
-    //特殊设计OS
-    private String rgpTssjos;
-    //适用镜片OD
-    private String rgpSyjpod;
-    //适用镜片OS
-    private String rgpSyjpos;
-    //备注
-    private String rgpBeizhu;
-
-    /**
-     * 设置：角膜接触镜CRTid
-     */
-    public void setRgpId(Long rgpId) {
-        this.rgpId = rgpId;
-    }
-
-    /**
-     * 获取：角膜接触镜CRTid
-     */
-    public Long getRgpId() {
-        return rgpId;
-    }
-
-    /**
-     * 设置：处方类型
-     */
-    public void setRgpPrescriptionType(String rgpPrescriptionType) {
-        this.rgpPrescriptionType = rgpPrescriptionType;
-    }
-
-    /**
-     * 获取：处方类型
-     */
-    public String getRgpPrescriptionType() {
-        return rgpPrescriptionType;
-    }
-
-    /**
-     * 设置：医生
-     */
-    public void setRgpDoctor(String rgpDoctor) {
-        this.rgpDoctor = rgpDoctor;
-    }
-
-    /**
-     * 获取：医生
-     */
-    public String getRgpDoctor() {
-        return rgpDoctor;
-    }
-
-    /**
-     * 设置：验光师
-     */
-    public void setRgpOptometryName(String rgpOptometryName) {
-        this.rgpOptometryName = rgpOptometryName;
-    }
-
-    /**
-     * 获取：验光师
-     */
-    public String getRgpOptometryName() {
-        return rgpOptometryName;
-    }
-
-    /**
-     * 设置：屈光度OD
-     */
-    public void setRgpQgdod(String rgpQgdod) {
-        this.rgpQgdod = rgpQgdod;
-    }
-
-    /**
-     * 获取：屈光度OD
-     */
-    public String getRgpQgdod() {
-        return rgpQgdod;
-    }
-
-    /**
-     * 设置：屈光度OS
-     */
-    public void setRgpQgdos(String rgpQgdos) {
-        this.rgpQgdos = rgpQgdos;
-    }
-
-    /**
-     * 获取：屈光度OS
-     */
-    public String getRgpQgdos() {
-        return rgpQgdos;
-    }
-
-    /**
-     * 设置：BC(OD)
-     */
-    public void setRgpBcod(String rgpBcod) {
-        this.rgpBcod = rgpBcod;
-    }
-
-    /**
-     * 获取：BC(OD)
-     */
-    public String getRgpBcod() {
-        return rgpBcod;
-    }
-
-    /**
-     * 设置：BC(OS)
-     */
-    public void setRgpBcos(String rgpBcos) {
-        this.rgpBcos = rgpBcos;
-    }
-
-    /**
-     * 获取：BC(OS)
-     */
-    public String getRgpBcos() {
-        return rgpBcos;
-    }
-
-    /**
-     * 设置：DIA(OD)
-     */
-    public void setRgpDiaod(String rgpDiaod) {
-        this.rgpDiaod = rgpDiaod;
-    }
-
-    /**
-     * 获取：DIA(OD)
-     */
-    public String getRgpDiaod() {
-        return rgpDiaod;
-    }
-
-    /**
-     * 设置：DIA(OS)
-     */
-    public void setRgpDiaos(String rgpDiaos) {
-        this.rgpDiaos = rgpDiaos;
-    }
-
-    /**
-     * 获取：DIA(OS)
-     */
-    public String getRgpDiaos() {
-        return rgpDiaos;
-    }
-
-    /**
-     * 设置：散光(OD)
-     */
-    public void setRgpSgod(String rgpSgod) {
-        this.rgpSgod = rgpSgod;
-    }
-
-    /**
-     * 获取：散光(OD)
-     */
-    public String getRgpSgod() {
-        return rgpSgod;
-    }
-
-    /**
-     * 设置：散光(OS)
-     */
-    public void setRgpSgos(String rgpSgos) {
-        this.rgpSgos = rgpSgos;
-    }
-
-    /**
-     * 获取：散光(OS)
-     */
-    public String getRgpSgos() {
-        return rgpSgos;
-    }
-
-    /**
-     * 设置：镜片颜色OD
-     */
-    public void setRgpJpysod(String rgpJpysod) {
-        this.rgpJpysod = rgpJpysod;
-    }
-
-    /**
-     * 获取：镜片颜色OD
-     */
-    public String getRgpJpysod() {
-        return rgpJpysod;
-    }
-
-    /**
-     * 设置：镜片颜色OS
-     */
-    public void setRgpJpysos(String rgpJpysos) {
-        this.rgpJpysos = rgpJpysos;
-    }
-
-    /**
-     * 获取：镜片颜色OS
-     */
-    public String getRgpJpysos() {
-        return rgpJpysos;
-    }
-
-    /**
-     * 设置：特殊设计OD
-     */
-    public void setRgpTssjod(String rgpTssjod) {
-        this.rgpTssjod = rgpTssjod;
-    }
-
-    /**
-     * 获取：特殊设计OD
-     */
-    public String getRgpTssjod() {
-        return rgpTssjod;
-    }
-
-    /**
-     * 设置：特殊设计OS
-     */
-    public void setRgpTssjos(String rgpTssjos) {
-        this.rgpTssjos = rgpTssjos;
-    }
-
-    /**
-     * 获取：特殊设计OS
-     */
-    public String getRgpTssjos() {
-        return rgpTssjos;
-    }
-
-    /**
-     * 设置：适用镜片OD
-     */
-    public void setRgpSyjpod(String rgpSyjpod) {
-        this.rgpSyjpod = rgpSyjpod;
-    }
-
-    /**
-     * 获取：适用镜片OD
-     */
-    public String getRgpSyjpod() {
-        return rgpSyjpod;
-    }
-
-    /**
-     * 设置：适用镜片OS
-     */
-    public void setRgpSyjpos(String rgpSyjpos) {
-        this.rgpSyjpos = rgpSyjpos;
-    }
-
-    /**
-     * 获取：适用镜片OS
-     */
-    public String getRgpSyjpos() {
-        return rgpSyjpos;
-    }
-
-    /**
-     * 设置：备注
-     */
-    public void setRgpBeizhu(String rgpBeizhu) {
-        this.rgpBeizhu = rgpBeizhu;
-    }
-
-    /**
-     * 获取：备注
-     */
-    public String getRgpBeizhu() {
-        return rgpBeizhu;
-    }
-
     private Long ypId;
     //处方类型
     private String ypPrescriptionType;
@@ -4034,7 +4673,6 @@ public class ResultDO implements Serializable {
     public Long getYpId() {
         return ypId;
     }
-
     /**
      * 设置：处方类型
      */
@@ -4104,9 +4742,38 @@ public class ResultDO implements Serializable {
     public String getYpYm() {
         return ypYm;
     }
+    //医嘱id
+    private Long yizhuId;
+    //类型
+    private String yizhuType;
+
+    /**
+     * 设置：医嘱id
+     */
+    public void setYizhuId(Long yizhuId) {
+        this.yizhuId = yizhuId;
+    }
+    /**
+     * 获取：医嘱id
+     */
+    public Long getYizhuId() {
+        return yizhuId;
+    }
+    /**
+     * 设置：类型
+     */
+    public void setYizhuType(String yizhuType) {
+        this.yizhuType = yizhuType;
+    }
+    /**
+     * 获取：类型
+     */
+    public String getYizhuType() {
+        return yizhuType;
+    }
+
     //中用id
     private Long zyId;
-
     //处方类型
     private String zyPrescriptionType;
     //医生
@@ -4158,7 +4825,6 @@ public class ResultDO implements Serializable {
     //备注
     private String zyBeizhu;
 
-
     public Long getZyId() {
         return zyId;
     }
@@ -4166,7 +4832,6 @@ public class ResultDO implements Serializable {
     public void setZyId(Long zyId) {
         this.zyId = zyId;
     }
-
 
     public String getZyPrescriptionType() {
         return zyPrescriptionType;

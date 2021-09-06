@@ -295,209 +295,210 @@ public class OptometryNewController {
     /**
      * 详情
      */
-        @GetMapping("/detail/{cardNumber}")
-        @RequiresPermissions("information:optometryNew:detail")
-        String detail(@PathVariable("cardNumber") String cardNumber, Model model) {
-            Map<String, Object> map = new HashMap<>();
-            List<PharmacyDO> pharmacyDOList = pharmacyService.list(map);
-            model.addAttribute("pharmacyDOList", pharmacyDOList);
-
-            //————会员信息——————
-            MemberDO memberDO = memberService.getCardNumber(cardNumber);
-            if (memberDO.getSex() == 0) {
-                memberDO.setSexx("男");
-            } else {
-                memberDO.setSexx("女");
-            }
-            model.addAttribute("memberDO", memberDO);
-            List<TryresultsDO>  tryall =tryresultsService.getTryresult(cardNumber);
-            TryresultsDO tryresultsDO = new TryresultsDO();
-            if (tryall.size() > 0) {
-                tryresultsDO.setPtometryNumber(tryall.get(0).getPtometryNumber());
-                tryresultsDO.setOptometryName(tryall.get(0).getOptometryName());
-                SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date time = tryall.get(0).getCreateTime();
-                String newtime = sdftime.format(time);
-                model.addAttribute("newtime", newtime);
-                tryresultsDO.setReferralDoctor(tryall.get(0).getReferralDoctor());
-                tryresultsDO.setChiefComplaint(tryall.get(0).getChiefComplaint());
-                tryresultsDO.setFarLyou(tryall.get(0).getFarLyou());
-                tryresultsDO.setFarLyod(tryall.get(0).getFarLyod());
-                tryresultsDO.setFarLyos(tryall.get(0).getFarLyos());
-
-                tryresultsDO.setFarYjou(tryall.get(0).getFarYjou());
-                tryresultsDO.setFarYjod(tryall.get(0).getFarYjod());
-                tryresultsDO.setFarYjos(tryall.get(0).getFarYjos());
-
-                tryresultsDO.setNearLyou(tryall.get(0).getNearLyou());
-                tryresultsDO.setNearLyod(tryall.get(0).getNearLyod());
-                tryresultsDO.setNearLyos(tryall.get(0).getNearLyos());
-
-                tryresultsDO.setNearYjou(tryall.get(0).getNearYjou());
-                tryresultsDO.setNearYjod(tryall.get(0).getNearYjod());
-                tryresultsDO.setNearYjos(tryall.get(0).getNearYjos());
-
-                tryresultsDO.setFarXkou(tryall.get(0).getFarXkou());
-                tryresultsDO.setFarXkod(tryall.get(0).getFarXkod());
-                tryresultsDO.setFarXkos(tryall.get(0).getFarXkos());
-
-                tryresultsDO.setNearXkou(tryall.get(0).getNearXkou());
-                tryresultsDO.setNearXkod(tryall.get(0).getNearXkod());
-                tryresultsDO.setNearXkos(tryall.get(0).getNearXkos());
-
-                tryresultsDO.setSgnCiss(tryall.get(0).getSgnCiss());
-                tryresultsDO.setSgnAc(tryall.get(0).getSgnAc());
-                tryresultsDO.setSgnFarsp1(tryall.get(0).getSgnFarsp1());
-                tryresultsDO.setSgnNearsp1(tryall.get(0).getSgnNearsp1());
-                tryresultsDO.setSgnFarcz1(tryall.get(0).getSgnFarcz1());
-                tryresultsDO.setSgnVgfarsp1(tryall.get(0).getSgnVgfarsp1());
-                tryresultsDO.setSgnVgfarsp2(tryall.get(0).getSgnVgfarsp2());
-                tryresultsDO.setSgnVgfarcz1(tryall.get(0).getSgnVgfarcz1());
-                tryresultsDO.setSgnVgfarcz2(tryall.get(0).getSgnVgfarcz2());
-                tryresultsDO.setSgnVgnearsp1(tryall.get(0).getSgnVgnearsp1());
-                tryresultsDO.setSgnVgnearsp2(tryall.get(0).getSgnVgnearsp2());
-                tryresultsDO.setSgnVgnearcz1(tryall.get(0).getSgnVgnearcz1());
-                tryresultsDO.setSgnVgnearcz2(tryall.get(0).getSgnVgnearcz2());
-                tryresultsDO.setSgnAllygytj1(tryall.get(0).getSgnAllygytj1());
-                tryresultsDO.setSgnAllygytj2(tryall.get(0).getSgnAllygytj2());
-                tryresultsDO.setSgnTjfyou(tryall.get(0).getSgnTjfyou());
-                tryresultsDO.setSgnTjfyod(tryall.get(0).getSgnTjfyod());
-                tryresultsDO.setSgnTjfyos(tryall.get(0).getSgnTjfyos());
-                tryresultsDO.setSgnPra(tryall.get(0).getSgnPra());
-                tryresultsDO.setSgnNra(tryall.get(0).getSgnNra());
-                tryresultsDO.setSgnNra(tryall.get(0).getSgnNra());
-
-
-                tryresultsDO.setAxis(tryall.get(0).getAxis());
-                tryresultsDO.setCornealFirstK1Right(tryall.get(0).getCornealFirstK1Right());
-                tryresultsDO.setCornealLastK1Right(tryall.get(0).getCornealLastK1Right());
-                tryresultsDO.setCornealFirstK2Right(tryall.get(0).getCornealFirstK2Right());
-                tryresultsDO.setCornealLastK2Right(tryall.get(0).getCornealLastK2Right());
-                tryresultsDO.setIntraocularOd(tryall.get(0).getIntraocularOd());
-                tryresultsDO.setAxisLeft(tryall.get(0).getAxisLeft());
-                tryresultsDO.setCornealFirstK1Left(tryall.get(0).getCornealFirstK1Left());
-                tryresultsDO.setCornealLastK1Left(tryall.get(0).getCornealLastK1Left());
-                tryresultsDO.setCornealFirstK2Left(tryall.get(0).getCornealFirstK2Left());
-                tryresultsDO.setCornealLastK2Left(tryall.get(0).getCornealLastK2Left());
-                tryresultsDO.setIntraocularOs(tryall.get(0).getIntraocularOs());
-
-                tryresultsDO.setSphereRight(tryall.get(0).getSphereRight());
-                tryresultsDO.setCylinderRight(tryall.get(0).getCylinderRight());
-                tryresultsDO.setAxialRight(tryall.get(0).getAxialRight());
-                tryresultsDO.setSphereRight2(tryall.get(0).getSphereRight2());
-                tryresultsDO.setCylinderRight2(tryall.get(0).getCylinderRight2());
-                tryresultsDO.setAxialRight2(tryall.get(0).getAxialRight2());
-                tryresultsDO.setSphereLeft(tryall.get(0).getSphereLeft());
-                tryresultsDO.setCylinderLeft(tryall.get(0).getCylinderLeft());
-                tryresultsDO.setAxialLeft(tryall.get(0).getAxialLeft());
-                tryresultsDO.setSphereLeft2(tryall.get(0).getSphereLeft2());
-                tryresultsDO.setCylinderLeft2(tryall.get(0).getCylinderLeft2());
-                tryresultsDO.setAxialLeft2(tryall.get(0).getAxialLeft2());
-                tryresultsDO.setPkod(tryall.get(0).getPkod());
-                tryresultsDO.setPk1od(tryall.get(0).getPk1od());
-                tryresultsDO.setDkod(tryall.get(0).getDkod());
-                tryresultsDO.setDk1od(tryall.get(0).getDk1od());
-                tryresultsDO.setPjkOd(tryall.get(0).getPjkOd());
-                tryresultsDO.setPjkOd2(tryall.get(0).getPjkOd2());
-                tryresultsDO.setCornealAstigmatismOd(tryall.get(0).getCornealAstigmatismOd());
-                tryresultsDO.setTjod(tryall.get(0).getTjod());
-                tryresultsDO.setTjos(tryall.get(0).getTjos());
-
-                tryresultsDO.setPkos(tryall.get(0).getPkos());
-                tryresultsDO.setPk1os(tryall.get(0).getPk1os());
-                tryresultsDO.setDkos(tryall.get(0).getDkos());
-                tryresultsDO.setDk1os(tryall.get(0).getDk1os());
-                tryresultsDO.setPjkOs(tryall.get(0).getPjkOs());
-                tryresultsDO.setPjkOs2(tryall.get(0).getPjkOs2());
-                tryresultsDO.setCornealAstigmatismOs(tryall.get(0).getCornealAstigmatismOs());
-                tryresultsDO.setTjos(tryall.get(0).getTjos());
-                tryresultsDO.setSphJyod(tryall.get(0).getSphJyod());
-                tryresultsDO.setCylJyod(tryall.get(0).getCylJyod());
-                tryresultsDO.setAxialJyod(tryall.get(0).getAxialJyod());
-                tryresultsDO.setVaJyod(tryall.get(0).getVaJyod());
-                tryresultsDO.setPdJyod(tryall.get(0).getPdJyod());
-                tryresultsDO.setSphJyos(tryall.get(0).getSphJyos());
-                tryresultsDO.setCylJyos(tryall.get(0).getCylJyos());
-                tryresultsDO.setAxialJyos(tryall.get(0).getAxialJyos());
-                tryresultsDO.setVaJyos(tryall.get(0).getVaJyos());
-                tryresultsDO.setPdJyos(tryall.get(0).getPdJyos());
-                tryresultsDO.setSphCpod(tryall.get(0).getSphCpod());
-                tryresultsDO.setCylCpod(tryall.get(0).getCylCpod());
-                tryresultsDO.setAxialCpod(tryall.get(0).getAxialCpod());
-                tryresultsDO.setDvaCpod(tryall.get(0).getDvaCpod());
-                tryresultsDO.setNvaCpod(tryall.get(0).getNvaCpod());
-                tryresultsDO.setAddCpod(tryall.get(0).getAddCpod());
-                tryresultsDO.setDistanceOd(tryall.get(0).getDistanceOd());
-                tryresultsDO.setSphCpos(tryall.get(0).getSphCpos());
-                tryresultsDO.setCylCpos(tryall.get(0).getCylCpos());
-                tryresultsDO.setAxialCpos(tryall.get(0).getAxialCpos());
-                tryresultsDO.setDvaCpos(tryall.get(0).getDvaCpos());
-                tryresultsDO.setNvaCpos(tryall.get(0).getNvaCpos());
-                tryresultsDO.setAddCpos(tryall.get(0).getAddCpos());
-                tryresultsDO.setDistanceOs(tryall.get(0).getDistanceOs());
-                tryresultsDO.setSphereRightz(tryall.get(0).getSphereRightz());
-                tryresultsDO.setCylinderRightz(tryall.get(0).getCylinderRightz());
-                tryresultsDO.setAxialRightz(tryall.get(0).getAxialRightz());
-                tryresultsDO.setDvaRightz(tryall.get(0).getDvaRightz());
-                tryresultsDO.setNvaRightz(tryall.get(0).getNvaRightz());
-                tryresultsDO.setPrismRightz(tryall.get(0).getPrismRightz());
-                tryresultsDO.setAddRightz(tryall.get(0).getAddRightz());
-                tryresultsDO.setYuanRz(tryall.get(0).getYuanRz());
-                tryresultsDO.setNearRightz(tryall.get(0).getNearRightz());
-                tryresultsDO.setSphereLeftz(tryall.get(0).getSphereLeftz());
-                tryresultsDO.setCylinderLeftz(tryall.get(0).getCylinderLeftz());
-                tryresultsDO.setAxialLeftz(tryall.get(0).getAxialLeftz());
-                tryresultsDO.setDvaLeftz(tryall.get(0).getDvaLeftz());
-                tryresultsDO.setNvaLeftz(tryall.get(0).getNvaLeftz());
-                tryresultsDO.setPrismLeftz(tryall.get(0).getPrismLeftz());
-                tryresultsDO.setAddLeftz(tryall.get(0).getAddLeftz());
-                tryresultsDO.setYuanLz(tryall.get(0).getYuanLz());
-                tryresultsDO.setNearLeftz(tryall.get(0).getNearLeftz());
-                tryresultsDO.setSphereRighttry(tryall.get(0).getSphereRighttry());
-                tryresultsDO.setCylinderRighttry(tryall.get(0).getCylinderRighttry());
-                tryresultsDO.setAxialRighttry(tryall.get(0).getAxialRighttry());
-                tryresultsDO.setDvaRighttry(tryall.get(0).getDvaRighttry());
-                tryresultsDO.setNvaRighttry(tryall.get(0).getNvaRighttry());
-                tryresultsDO.setPrismRighttry(tryall.get(0).getPrismRighttry());
-                tryresultsDO.setHeightRighttry(tryall.get(0).getHeightRighttry());
-                tryresultsDO.setAddRighttry(tryall.get(0).getAddRighttry());
-                tryresultsDO.setYuanRrty(tryall.get(0).getYuanRrty());
-                tryresultsDO.setSphereLefttry(tryall.get(0).getSphereLefttry());
-                tryresultsDO.setCylinderLefttry(tryall.get(0).getCylinderLefttry());
-                tryresultsDO.setAxialLefttry(tryall.get(0).getAxialLefttry());
-                tryresultsDO.setDvaLefttry(tryall.get(0).getDvaLefttry());
-                tryresultsDO.setNvaLefttry(tryall.get(0).getNvaLefttry());
-                tryresultsDO.setPrismLefttry(tryall.get(0).getPrismLefttry());
-                tryresultsDO.setHeightLefttry(tryall.get(0).getHeightLefttry());
-                tryresultsDO.setAddLefttry(tryall.get(0).getAddLefttry());
-                tryresultsDO.setYuanLrty(tryall.get(0).getYuanLrty());
-                tryresultsDO.setRemarks(tryall.get(0).getRemarks());
-
-
-
-                tryresultsDO.setDominantEye(tryall.get(0).getDominantEye());
-                tryresultsDO.setSgnReason(tryall.get(0).getSgnReason());
-                tryresultsDO.setSgnFardot(tryall.get(0).getSgnFardot());
-                tryresultsDO.setSgnNeardot(tryall.get(0).getSgnNeardot());
-                tryresultsDO.setSgnNearsp2(tryall.get(0).getSgnNearsp2());
-                tryresultsDO.setSgnFarcz2(tryall.get(0).getSgnFarcz2());
-                tryresultsDO.setSgnNearcz2(tryall.get(0).getSgnNearcz2());
-                tryresultsDO.setPharmacy(tryall.get(0).getPharmacy());
-                tryresultsDO.setJdrZ(tryall.get(0).getJdrZ());
-                tryresultsDO.setJdlZ(tryall.get(0).getJdlZ());
-                tryresultsDO.setJdrTry(tryall.get(0).getJdrTry());
-                tryresultsDO.setJdlTry(tryall.get(0).getJdlTry());
-
-                tryresultsDO.setPharmacy(tryall.get(0).getPharmacy());
-                tryresultsDO.setSgnSf(tryall.get(0).getSgnSf());
-                tryresultsDO.setSgnAcway(tryall.get(0).getSgnAcway());
-                tryresultsDO.setSgnTjfy(tryall.get(0).getSgnTjfy());
-                tryresultsDO.setSgnZfsf(tryall.get(0).getSgnZfsf());
-                tryresultsDO.setMydriasis(tryall.get(0).getMydriasis());
-            }
-            model.addAttribute("tryresultsDO",tryresultsDO);
-        return "optometryNew/detial";
-    }
+//        @GetMapping("/detail/{cardNumber}")
+//        @RequiresPermissions("information:optometryNew:detail")
+//        String detail(@PathVariable("cardNumber") String cardNumber, Model model) {
+//            Map<String, Object> map = new HashMap<>();
+//            List<PharmacyDO> pharmacyDOList = pharmacyService.list(map);
+//            model.addAttribute("pharmacyDOList", pharmacyDOList);
+//
+//            //————会员信息——————
+//            MemberDO memberDO = memberService.getCardNumber(cardNumber);
+//            if (memberDO.getSex() == 0) {
+//                memberDO.setSexx("男");
+//            } else {
+//                memberDO.setSexx("女");
+//            }
+//            model.addAttribute("memberDO", memberDO);
+//            map.put("cardNumber",cardNumber);
+//            List<TryresultsDO>  tryall =tryresultsService.getTryresult(map);
+//            TryresultsDO tryresultsDO = new TryresultsDO();
+//            if (tryall.size() > 0) {
+//                tryresultsDO.setPtometryNumber(tryall.get(0).getPtometryNumber());
+//                tryresultsDO.setOptometryName(tryall.get(0).getOptometryName());
+//                SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                Date time = tryall.get(0).getCreateTime();
+//                String newtime = sdftime.format(time);
+//                model.addAttribute("newtime", newtime);
+//                tryresultsDO.setReferralDoctor(tryall.get(0).getReferralDoctor());
+//                tryresultsDO.setChiefComplaint(tryall.get(0).getChiefComplaint());
+//                tryresultsDO.setFarLyou(tryall.get(0).getFarLyou());
+//                tryresultsDO.setFarLyod(tryall.get(0).getFarLyod());
+//                tryresultsDO.setFarLyos(tryall.get(0).getFarLyos());
+//
+//                tryresultsDO.setFarYjou(tryall.get(0).getFarYjou());
+//                tryresultsDO.setFarYjod(tryall.get(0).getFarYjod());
+//                tryresultsDO.setFarYjos(tryall.get(0).getFarYjos());
+//
+//                tryresultsDO.setNearLyou(tryall.get(0).getNearLyou());
+//                tryresultsDO.setNearLyod(tryall.get(0).getNearLyod());
+//                tryresultsDO.setNearLyos(tryall.get(0).getNearLyos());
+//
+//                tryresultsDO.setNearYjou(tryall.get(0).getNearYjou());
+//                tryresultsDO.setNearYjod(tryall.get(0).getNearYjod());
+//                tryresultsDO.setNearYjos(tryall.get(0).getNearYjos());
+//
+//                tryresultsDO.setFarXkou(tryall.get(0).getFarXkou());
+//                tryresultsDO.setFarXkod(tryall.get(0).getFarXkod());
+//                tryresultsDO.setFarXkos(tryall.get(0).getFarXkos());
+//
+//                tryresultsDO.setNearXkou(tryall.get(0).getNearXkou());
+//                tryresultsDO.setNearXkod(tryall.get(0).getNearXkod());
+//                tryresultsDO.setNearXkos(tryall.get(0).getNearXkos());
+//
+//                tryresultsDO.setSgnCiss(tryall.get(0).getSgnCiss());
+//                tryresultsDO.setSgnAc(tryall.get(0).getSgnAc());
+//                tryresultsDO.setSgnFarsp1(tryall.get(0).getSgnFarsp1());
+//                tryresultsDO.setSgnNearsp1(tryall.get(0).getSgnNearsp1());
+//                tryresultsDO.setSgnFarcz1(tryall.get(0).getSgnFarcz1());
+//                tryresultsDO.setSgnVgfarsp1(tryall.get(0).getSgnVgfarsp1());
+//                tryresultsDO.setSgnVgfarsp2(tryall.get(0).getSgnVgfarsp2());
+//                tryresultsDO.setSgnVgfarcz1(tryall.get(0).getSgnVgfarcz1());
+//                tryresultsDO.setSgnVgfarcz2(tryall.get(0).getSgnVgfarcz2());
+//                tryresultsDO.setSgnVgnearsp1(tryall.get(0).getSgnVgnearsp1());
+//                tryresultsDO.setSgnVgnearsp2(tryall.get(0).getSgnVgnearsp2());
+//                tryresultsDO.setSgnVgnearcz1(tryall.get(0).getSgnVgnearcz1());
+//                tryresultsDO.setSgnVgnearcz2(tryall.get(0).getSgnVgnearcz2());
+//                tryresultsDO.setSgnAllygytj1(tryall.get(0).getSgnAllygytj1());
+//                tryresultsDO.setSgnAllygytj2(tryall.get(0).getSgnAllygytj2());
+//                tryresultsDO.setSgnTjfyou(tryall.get(0).getSgnTjfyou());
+//                tryresultsDO.setSgnTjfyod(tryall.get(0).getSgnTjfyod());
+//                tryresultsDO.setSgnTjfyos(tryall.get(0).getSgnTjfyos());
+//                tryresultsDO.setSgnPra(tryall.get(0).getSgnPra());
+//                tryresultsDO.setSgnNra(tryall.get(0).getSgnNra());
+//                tryresultsDO.setSgnNra(tryall.get(0).getSgnNra());
+//
+//
+//                tryresultsDO.setAxis(tryall.get(0).getAxis());
+//                tryresultsDO.setCornealFirstK1Right(tryall.get(0).getCornealFirstK1Right());
+//                tryresultsDO.setCornealLastK1Right(tryall.get(0).getCornealLastK1Right());
+//                tryresultsDO.setCornealFirstK2Right(tryall.get(0).getCornealFirstK2Right());
+//                tryresultsDO.setCornealLastK2Right(tryall.get(0).getCornealLastK2Right());
+//                tryresultsDO.setIntraocularOd(tryall.get(0).getIntraocularOd());
+//                tryresultsDO.setAxisLeft(tryall.get(0).getAxisLeft());
+//                tryresultsDO.setCornealFirstK1Left(tryall.get(0).getCornealFirstK1Left());
+//                tryresultsDO.setCornealLastK1Left(tryall.get(0).getCornealLastK1Left());
+//                tryresultsDO.setCornealFirstK2Left(tryall.get(0).getCornealFirstK2Left());
+//                tryresultsDO.setCornealLastK2Left(tryall.get(0).getCornealLastK2Left());
+//                tryresultsDO.setIntraocularOs(tryall.get(0).getIntraocularOs());
+//
+//                tryresultsDO.setSphereRight(tryall.get(0).getSphereRight());
+//                tryresultsDO.setCylinderRight(tryall.get(0).getCylinderRight());
+//                tryresultsDO.setAxialRight(tryall.get(0).getAxialRight());
+//                tryresultsDO.setSphereRight2(tryall.get(0).getSphereRight2());
+//                tryresultsDO.setCylinderRight2(tryall.get(0).getCylinderRight2());
+//                tryresultsDO.setAxialRight2(tryall.get(0).getAxialRight2());
+//                tryresultsDO.setSphereLeft(tryall.get(0).getSphereLeft());
+//                tryresultsDO.setCylinderLeft(tryall.get(0).getCylinderLeft());
+//                tryresultsDO.setAxialLeft(tryall.get(0).getAxialLeft());
+//                tryresultsDO.setSphereLeft2(tryall.get(0).getSphereLeft2());
+//                tryresultsDO.setCylinderLeft2(tryall.get(0).getCylinderLeft2());
+//                tryresultsDO.setAxialLeft2(tryall.get(0).getAxialLeft2());
+//                tryresultsDO.setPkod(tryall.get(0).getPkod());
+//                tryresultsDO.setPk1od(tryall.get(0).getPk1od());
+//                tryresultsDO.setDkod(tryall.get(0).getDkod());
+//                tryresultsDO.setDk1od(tryall.get(0).getDk1od());
+//                tryresultsDO.setPjkOd(tryall.get(0).getPjkOd());
+//                tryresultsDO.setPjkOd2(tryall.get(0).getPjkOd2());
+//                tryresultsDO.setCornealAstigmatismOd(tryall.get(0).getCornealAstigmatismOd());
+//                tryresultsDO.setTjod(tryall.get(0).getTjod());
+//                tryresultsDO.setTjos(tryall.get(0).getTjos());
+//
+//                tryresultsDO.setPkos(tryall.get(0).getPkos());
+//                tryresultsDO.setPk1os(tryall.get(0).getPk1os());
+//                tryresultsDO.setDkos(tryall.get(0).getDkos());
+//                tryresultsDO.setDk1os(tryall.get(0).getDk1os());
+//                tryresultsDO.setPjkOs(tryall.get(0).getPjkOs());
+//                tryresultsDO.setPjkOs2(tryall.get(0).getPjkOs2());
+//                tryresultsDO.setCornealAstigmatismOs(tryall.get(0).getCornealAstigmatismOs());
+//                tryresultsDO.setTjos(tryall.get(0).getTjos());
+//                tryresultsDO.setSphJyod(tryall.get(0).getSphJyod());
+//                tryresultsDO.setCylJyod(tryall.get(0).getCylJyod());
+//                tryresultsDO.setAxialJyod(tryall.get(0).getAxialJyod());
+//                tryresultsDO.setVaJyod(tryall.get(0).getVaJyod());
+//                tryresultsDO.setPdJyod(tryall.get(0).getPdJyod());
+//                tryresultsDO.setSphJyos(tryall.get(0).getSphJyos());
+//                tryresultsDO.setCylJyos(tryall.get(0).getCylJyos());
+//                tryresultsDO.setAxialJyos(tryall.get(0).getAxialJyos());
+//                tryresultsDO.setVaJyos(tryall.get(0).getVaJyos());
+//                tryresultsDO.setPdJyos(tryall.get(0).getPdJyos());
+//                tryresultsDO.setSphCpod(tryall.get(0).getSphCpod());
+//                tryresultsDO.setCylCpod(tryall.get(0).getCylCpod());
+//                tryresultsDO.setAxialCpod(tryall.get(0).getAxialCpod());
+//                tryresultsDO.setDvaCpod(tryall.get(0).getDvaCpod());
+//                tryresultsDO.setNvaCpod(tryall.get(0).getNvaCpod());
+//                tryresultsDO.setAddCpod(tryall.get(0).getAddCpod());
+//                tryresultsDO.setDistanceOd(tryall.get(0).getDistanceOd());
+//                tryresultsDO.setSphCpos(tryall.get(0).getSphCpos());
+//                tryresultsDO.setCylCpos(tryall.get(0).getCylCpos());
+//                tryresultsDO.setAxialCpos(tryall.get(0).getAxialCpos());
+//                tryresultsDO.setDvaCpos(tryall.get(0).getDvaCpos());
+//                tryresultsDO.setNvaCpos(tryall.get(0).getNvaCpos());
+//                tryresultsDO.setAddCpos(tryall.get(0).getAddCpos());
+//                tryresultsDO.setDistanceOs(tryall.get(0).getDistanceOs());
+//                tryresultsDO.setSphereRightz(tryall.get(0).getSphereRightz());
+//                tryresultsDO.setCylinderRightz(tryall.get(0).getCylinderRightz());
+//                tryresultsDO.setAxialRightz(tryall.get(0).getAxialRightz());
+//                tryresultsDO.setDvaRightz(tryall.get(0).getDvaRightz());
+//                tryresultsDO.setNvaRightz(tryall.get(0).getNvaRightz());
+//                tryresultsDO.setPrismRightz(tryall.get(0).getPrismRightz());
+//                tryresultsDO.setAddRightz(tryall.get(0).getAddRightz());
+//                tryresultsDO.setYuanRz(tryall.get(0).getYuanRz());
+//                tryresultsDO.setNearRightz(tryall.get(0).getNearRightz());
+//                tryresultsDO.setSphereLeftz(tryall.get(0).getSphereLeftz());
+//                tryresultsDO.setCylinderLeftz(tryall.get(0).getCylinderLeftz());
+//                tryresultsDO.setAxialLeftz(tryall.get(0).getAxialLeftz());
+//                tryresultsDO.setDvaLeftz(tryall.get(0).getDvaLeftz());
+//                tryresultsDO.setNvaLeftz(tryall.get(0).getNvaLeftz());
+//                tryresultsDO.setPrismLeftz(tryall.get(0).getPrismLeftz());
+//                tryresultsDO.setAddLeftz(tryall.get(0).getAddLeftz());
+//                tryresultsDO.setYuanLz(tryall.get(0).getYuanLz());
+//                tryresultsDO.setNearLeftz(tryall.get(0).getNearLeftz());
+//                tryresultsDO.setSphereRighttry(tryall.get(0).getSphereRighttry());
+//                tryresultsDO.setCylinderRighttry(tryall.get(0).getCylinderRighttry());
+//                tryresultsDO.setAxialRighttry(tryall.get(0).getAxialRighttry());
+//                tryresultsDO.setDvaRighttry(tryall.get(0).getDvaRighttry());
+//                tryresultsDO.setNvaRighttry(tryall.get(0).getNvaRighttry());
+//                tryresultsDO.setPrismRighttry(tryall.get(0).getPrismRighttry());
+//                tryresultsDO.setHeightRighttry(tryall.get(0).getHeightRighttry());
+//                tryresultsDO.setAddRighttry(tryall.get(0).getAddRighttry());
+//                tryresultsDO.setYuanRrty(tryall.get(0).getYuanRrty());
+//                tryresultsDO.setSphereLefttry(tryall.get(0).getSphereLefttry());
+//                tryresultsDO.setCylinderLefttry(tryall.get(0).getCylinderLefttry());
+//                tryresultsDO.setAxialLefttry(tryall.get(0).getAxialLefttry());
+//                tryresultsDO.setDvaLefttry(tryall.get(0).getDvaLefttry());
+//                tryresultsDO.setNvaLefttry(tryall.get(0).getNvaLefttry());
+//                tryresultsDO.setPrismLefttry(tryall.get(0).getPrismLefttry());
+//                tryresultsDO.setHeightLefttry(tryall.get(0).getHeightLefttry());
+//                tryresultsDO.setAddLefttry(tryall.get(0).getAddLefttry());
+//                tryresultsDO.setYuanLrty(tryall.get(0).getYuanLrty());
+//                tryresultsDO.setRemarks(tryall.get(0).getRemarks());
+//
+//
+//
+//                tryresultsDO.setDominantEye(tryall.get(0).getDominantEye());
+//                tryresultsDO.setSgnReason(tryall.get(0).getSgnReason());
+//                tryresultsDO.setSgnFardot(tryall.get(0).getSgnFardot());
+//                tryresultsDO.setSgnNeardot(tryall.get(0).getSgnNeardot());
+//                tryresultsDO.setSgnNearsp2(tryall.get(0).getSgnNearsp2());
+//                tryresultsDO.setSgnFarcz2(tryall.get(0).getSgnFarcz2());
+//                tryresultsDO.setSgnNearcz2(tryall.get(0).getSgnNearcz2());
+//                tryresultsDO.setPharmacy(tryall.get(0).getPharmacy());
+//                tryresultsDO.setJdrZ(tryall.get(0).getJdrZ());
+//                tryresultsDO.setJdlZ(tryall.get(0).getJdlZ());
+//                tryresultsDO.setJdrTry(tryall.get(0).getJdrTry());
+//                tryresultsDO.setJdlTry(tryall.get(0).getJdlTry());
+//
+//                tryresultsDO.setPharmacy(tryall.get(0).getPharmacy());
+//                tryresultsDO.setSgnSf(tryall.get(0).getSgnSf());
+//                tryresultsDO.setSgnAcway(tryall.get(0).getSgnAcway());
+//                tryresultsDO.setSgnTjfy(tryall.get(0).getSgnTjfy());
+//                tryresultsDO.setSgnZfsf(tryall.get(0).getSgnZfsf());
+//                tryresultsDO.setMydriasis(tryall.get(0).getMydriasis());
+//            }
+//            model.addAttribute("tryresultsDO",tryresultsDO);
+//        return "optometryNew/detial";
+//    }
     /**
      * 保存
      */

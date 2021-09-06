@@ -162,7 +162,7 @@
 			#{sgjjBeizhu}
 		)
 	</insert>
-    <insert id="savesgjj" parameterType="com.shiguang.jiancha.dao.ResultDao" useGeneratedKeys="true"
+    <insert id="savesgjj" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true"
             keyProperty="sgjjId">
 		insert into jc_sgjj
 		(

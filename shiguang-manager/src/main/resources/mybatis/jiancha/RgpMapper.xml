@@ -126,7 +126,7 @@
 			#{rgpBeizhu}
 		)
 	</insert>
-    <insert id="saveRgp" parameterType="com.shiguang.jiancha.dao.ResultDao" useGeneratedKeys="true" keyProperty="rgpId">
+    <insert id="saveRgp" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="rgpId">
 		insert into jc_rgp
 		(
 			`card_number`,
