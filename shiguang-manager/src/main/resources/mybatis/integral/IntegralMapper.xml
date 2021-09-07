@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.integral.dao.IntegralDao">
+    <select id="get" resultType="com.shiguang.integral.domain.IntegralDO">
+		select `id`,`goods_type`,`store_num`,`store_name`,`card_type`,`redeem_points`,`create_time` from integral where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.integral.domain.IntegralDO">
+        select `id`,`goods_type`,`store_num`,`store_name`,`card_type`,`redeem_points`,`create_time` from integral
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="goodsType != null and goodsType != ''"> and goods_type = #{goodsType} </if>
+            <if test="storeNum != null and storeNum != ''"> and store_num = #{storeNum} </if>
+            <if test="storeName != null and storeName != ''"> and store_name = #{storeName} </if>
+            <if test="cardType != null and cardType != ''"> and card_type = #{cardType} </if>
+            <if test="redeemPoints != null and redeemPoints != ''"> and redeem_points = #{redeemPoints} </if>
+            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from integral
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="goodsType != null and goodsType != ''"> and goods_type = #{goodsType} </if>
+            <if test="storeNum != null and storeNum != ''"> and store_num = #{storeNum} </if>
+            <if test="storeName != null and storeName != ''"> and store_name = #{storeName} </if>
+            <if test="cardType != null and cardType != ''"> and card_type = #{cardType} </if>
+            <if test="redeemPoints != null and redeemPoints != ''"> and redeem_points = #{redeemPoints} </if>
+            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.integral.domain.IntegralDO" useGeneratedKeys="true" keyProperty="id">
+		insert into integral
+		(
+			`goods_type`,
+			`store_num`,
+			`store_name`,
+			`card_type`,
+			`redeem_points`,
+			`create_time`
+		)
+		values
+		(
+			#{goodsType},
+			#{storeNum},
+			#{storeName},
+			#{cardType},
+			#{redeemPoints},
+			#{createTime}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.integral.domain.IntegralDO">
+        update integral
+        <set>
+            <if test="goodsType != null">`goods_type` = #{goodsType}, </if>
+            <if test="storeNum != null">`store_num` = #{storeNum}, </if>
+            <if test="storeName != null">`store_name` = #{storeName}, </if>
+            <if test="cardType != null">`card_type` = #{cardType}, </if>
+            <if test="redeemPoints != null">`redeem_points` = #{redeemPoints}, </if>
+            <if test="createTime != null">`create_time` = #{createTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from integral where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from integral where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

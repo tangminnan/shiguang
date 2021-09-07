@@ -545,6 +545,39 @@ function getYinxing(){
         leftYuanYongQJ = $("#leftShiJuexlQJ").val();
         leftYuanYongZJ = $("#leftShiJuexlZJ").val();
     }
+    if (cfType == '' && shoutian == 2){
+        if (shoutianCFType == 1){
+            rightYuanYongQJ = $("#rightFuLiaoQJ").val();
+            rightYuanYongZJ = $("#rightFuLiaoZJ").val();
+            leftYuanYongQJ = $("#leftFuLiaoQJ").val();
+            leftYuanYongZJ = $("#leftFuLiaoZJ").val();
+        } else if (shoutianCFType == 2){
+            rightYuanYongQJ = $("#rightYuanYongQJ").val();
+            rightYuanYongZJ = $("#rightYuanYongZJ").val();
+            leftYuanYongQJ = $("#leftYuanYongQJ").val();
+            leftYuanYongZJ = $("#leftYuanYongZJ").val();
+        } else if (shoutianCFType == 3){
+            rightYuanYongQJ = $("#rightJianJinsgQJ").val();
+            rightYuanYongZJ = $("#rightJianJinsgZJ").val();
+            leftYuanYongQJ = $("#leftJianJinsgQJ").val();
+            leftYuanYongZJ = $("#leftJianJinsgZJ").val();
+        } else if (shoutianCFType == 4){
+            rightYuanYongQJ = $("#rightZhongYongQJ").val();
+            rightYuanYongZJ = $("#rightZhongYongZJ").val();
+            leftYuanYongQJ = $("#leftZhongYongQJ").val();
+            leftYuanYongZJ = $("#leftZhongYongZJ").val();
+        } else if (shoutianCFType == 5){
+            rightYuanYongQJ = $("#rightYinxingQJ").val();
+            rightYuanYongZJ = $("#rightYinxingZJ").val();
+            leftYuanYongQJ = $("#leftYinxingQJ").val();
+            leftYuanYongZJ = $("#leftYinxingZJ").val();
+        } else if (shoutianCFType == 7){
+            rightYuanYongQJ = $("#rightShiJuexlQJ").val();
+            rightYuanYongZJ = $("#rightShiJuexlZJ").val();
+            leftYuanYongQJ = $("#leftShiJuexlQJ").val();
+            leftYuanYongZJ = $("#leftShiJuexlZJ").val();
+        }
+    }
     if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
         return alert("请选择球镜度数");
     }

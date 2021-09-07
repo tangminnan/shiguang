@@ -35,6 +35,12 @@ public class SalesDO implements Serializable {
 	private String phone1;
 	//销售人员
 	private String saleName;
+	//用户名
+	private String saleNum;
+	//是否缴费
+	private Long isSale;
+	//实付金额
+	private Double payMoney;
 	//销售单号
 	private String saleNumber;
 	//商品代码
@@ -107,38 +113,38 @@ public class SalesDO implements Serializable {
 	//外来处方
 	private String chufang;
 	//手填处方的度数
-	//球镜OD
-	private String rightQJ;
-	//柱镜OD
-	private String rightZJ;
-	//轴向OD
-	private String rightzhouxiang;
-	//三棱镜OD
-	private String rightsanlingjing;
-	//基地OD
-	private String rightjidi;
-	//远用瞳距OD
-	private String rightyuanyongtj;
-	//瞳高OD
-	private String righttonggao;
+	//远用球镜OD
+	private String rightQJyy;
+	//远用柱镜OD
+	private String rightZJyy;
+	//远用轴向OD
+	private String rightzhouxiangyy;
+	//远用三棱镜OD
+	private String rightsanlingjingyy;
+	//远用基地OD
+	private String rightjidiyy;
+	//远用远用瞳距OD
+	private String rightyuanyongtjyy;
+	//远用瞳高OD
+	private String righttonggaoyy;
 	//远用VA(OD)
-	private String rightyuanyongVA;
-	//球镜OS
-	private String leftQJ;
-	//柱镜OS
-	private String leftZJ;
-	//轴向OS
-	private String leftzhouxiang;
-	//三棱镜OS
-	private String leftsanlingjing;
-	//基地OS
-	private String leftjidi;
+	private String rightyuanyongVAyy;
+	//远用球镜OS
+	private String leftQJyy;
+	//远用柱镜OS
+	private String leftZJyy;
+	//远用轴向OS
+	private String leftzhouxiangyy;
+	//远用三棱镜OS
+	private String leftsanlingjingyy;
+	//远用基地OS
+	private String leftjidiyy;
 	//远用瞳距OD
-	private String leftyuanyongtj;
-	//瞳高OS
-	private String lefttonggao;
+	private String leftyuanyongtjyy;
+	//远用瞳高OS
+	private String lefttonggaoyy;
 	//远用VA(OS)
-	private String leftyuanyongVA;
+	private String leftyuanyongVAyy;
 	//备注
 	private String remark;
 	//旧瞳距
@@ -213,6 +219,179 @@ public class SalesDO implements Serializable {
 	//配镜发料用(是否订做)
 	private String classTypeFL;
 	List<SaleGoodsDO> list = new ArrayList<>();
+
+	//近用球镜OD
+	private String rightQJjy;
+	//近用柱镜OD
+	private String rightZJjy;
+	//近用轴向OD
+	private String rightzhouxiangjy;
+	//近用三棱镜OD
+	private String rightsanlingjingjy;
+	//近用基地OD
+	private String rightjidijy;
+	//近用远用瞳距OD
+	private String rightyuanyongtjjy;
+	//近用瞳高OD
+	private String righttonggaojy;
+	//近用VA(OD)
+	private String rightyuanyongVAjy;
+	//近用球镜OS
+	private String leftQJjy;
+	//近用柱镜OS
+	private String leftZJjy;
+	//近用轴向OS
+	private String leftzhouxiangjy;
+	//近用三棱镜OS
+	private String leftsanlingjingjy;
+	//近用基地OS
+	private String leftjidijy;
+	//近用瞳距OD
+	private String leftyuanyongtjjy;
+	//近用瞳高OS
+	private String lefttonggaojy;
+	//近用VA(OS)
+	private String leftyuanyongVAjy;
+
+	//渐近/双光球镜OD
+	private String rightQJsg;
+	//渐近/双光柱镜OD
+	private String rightZJsg;
+	//渐近/双光轴向OD
+	private String rightzhouxiangsg;
+	//渐近/双光三棱镜OD
+	private String rightsanlingjingsg;
+	//渐近/双光基地OD
+	private String rightjidisg;
+	//渐近/双光远用瞳距OD
+	private String rightyuanyongtjsg;
+	//渐近/双光瞳高OD
+	private String righttonggaosg;
+	//渐近/双光VA(OD)
+	private String rightyuanyongVAsg;
+	//渐近/双光球镜OS
+	private String leftQJsg;
+	//渐近/双光柱镜OS
+	private String leftZJsg;
+	//渐近/双光轴向OS
+	private String leftzhouxiangsg;
+	//渐近/双光三棱镜OS
+	private String leftsanlingjingsg;
+	//渐近/双光基地OS
+	private String leftjidisg;
+	//渐近/双光瞳距OD
+	private String leftyuanyongtjsg;
+	//渐近/双光瞳高OS
+	private String lefttonggaosg;
+	//渐近/双光VA(OS)
+	private String leftyuanyongVAsg;
+
+
+	//中用球镜OD
+	private String rightQJzy;
+	//中用柱镜OD
+	private String rightZJzy;
+	//中用轴向OD
+	private String rightzhouxiangzy;
+	//中用三棱镜OD
+	private String rightsanlingjingzy;
+	//中用基地OD
+	private String rightjidizy;
+	//中用瞳距OD
+	private String rightyuanyongtjzy;
+	//中用瞳高OD
+	private String righttonggaozy;
+	//中用VA(OD)
+	private String rightyuanyongVAzy;
+	//中用球镜OS
+	private String leftQJzy;
+	//中用柱镜OS
+	private String leftZJzy;
+	//中用轴向OS
+	private String leftzhouxiangzy;
+	//中用三棱镜OS
+	private String leftsanlingjingzy;
+	//中用基地OS
+	private String leftjidizy;
+	//中用瞳距OD
+	private String leftyuanyongtjzy;
+	//中用瞳高OS
+	private String lefttonggaozy;
+	//中用VA(OS)
+	private String leftyuanyongVAzy;
+
+
+	//隐形球镜OD
+	private String rightQJyx;
+	//隐形柱镜OD
+	private String rightZJyx;
+	//隐形轴向OD
+	private String rightzhouxiangyx;
+	//隐形曲率
+	private String rightqulvyx;
+	//隐形直径
+	private String rightzhijingyx;
+	//隐形VA
+	private String rightYingXingVAyx;
+	//隐形使用镜片
+	private String rightSYjingpianyx;
+	//隐形片/盒数
+	private String rightPianyx;
+	//隐形球镜OD
+	private String leftQJyx;
+	//隐形柱镜OD
+	private String leftZJyx;
+	//隐形轴向OD
+	private String leftzhouxiangyx;
+	//隐形曲率
+	private String leftqulvyx;
+	//隐形直径
+	private String leftzhijingyx;
+	//隐形VA
+	private String leftYingXingVAyx;
+	//隐形使用镜片
+	private String leftSYjingpianyx;
+	//隐形片/盒数
+	private String leftPianyx;
+
+	//视觉训练球镜OD
+	private String rightQJxl;
+	//视觉训练柱镜OD
+	private String rightZJxl;
+	//视觉训练轴向OD
+	private String rightzhouxiangxl;
+	//视觉训练三棱镜OD
+	private String rightsanlingjingxl;
+	//视觉训练基地OD
+	private String rightjidixl;
+	//视觉训练远用瞳距
+	private String rightSJXLyytj;
+	//视觉训练近用瞳距
+	private String rightSJXLjytj;
+	//视觉训练远用va
+	private String rightSJXLyyva;
+	//视觉训练近用va
+	private String rightSJXLjyva;
+	//视觉训练球镜OS
+	private String leftQJxl;
+	//视觉训练柱镜OS
+	private String leftZJxl;
+	//视觉训练轴向OS
+	private String leftzhouxiangxl;
+	//视觉训练三棱镜OS
+	private String leftsanlingjingxl;
+	//视觉训练基地OS
+	private String leftjidixl;
+	//视觉训练远用瞳距
+	private String leftSJXLyytj;
+	//视觉训练近用瞳距
+	private String leftSJXLjytj;
+	//视觉训练远用va
+	private String leftSJXLyyva;
+	//视觉训练近用va
+	private String leftSJXLjyva;
+
+
 
 	/**
 	 * 设置：主键
@@ -317,6 +496,30 @@ public class SalesDO implements Serializable {
 	public String getSaleName() {
 		return saleName;
 	}
+	/**
+	 * 用户名
+	 */
+	public void setSaleNum(String saleNum) {this.saleNum = saleNum;}
+	/**
+	 * 用户名
+	 */
+	public String getSaleNum() {return saleNum;}
+	/**
+	 * 是否缴费
+	 */
+	public void setIsSale(Long isSale){this.isSale = isSale;}
+	/**
+	 * 是否缴费
+	 */
+	public Long getIsSale() {return isSale;}
+	/**
+	 * 实付金额
+	 */
+	public void setPayMoney(Double payMoney){this.payMoney = payMoney;}
+	/**
+	 * 实付金额
+	 */
+	public Double getPayMoney() {return payMoney;}
 	/**
 	 * 设置：销售单号
 	 */
@@ -657,131 +860,131 @@ public class SalesDO implements Serializable {
 	/**
 	 * 球镜OD
 	 */
-	public void setRightQJ(String rightQJ) {this.rightQJ = rightQJ;}
+	public void setRightQJyy(String rightQJyy) {this.rightQJyy = rightQJyy;}
 	/**
 	 * 球镜OD
 	 */
-	public String getRightQJ(){return rightQJ;}
+	public String getRightQJyy(){return rightQJyy;}
 	/**
 	 * 柱镜OD
 	 */
-	public void setRightZJ(String rightZJ) {this.rightZJ = rightZJ;}
+	public void setRightZJyy(String rightZJyy) {this.rightZJyy = rightZJyy;}
 	/**
 	 * 柱镜OD
 	 */
-	public String getRightZJ() {return rightZJ;}
+	public String getRightZJyy() {return rightZJyy;}
 	/**
 	 * 轴向OD
 	 */
-	public void setRightzhouxiang(String rightzhouxiang) {this.rightzhouxiang = rightzhouxiang;}
+	public void setRightzhouxiangyy(String rightzhouxiangyy) {this.rightzhouxiangyy = rightzhouxiangyy;}
 	/**
 	 * 轴向OD
 	 */
-	public String getRightzhouxiang(){return rightzhouxiang;}
+	public String getRightzhouxiangyy(){return rightzhouxiangyy;}
 	/**
 	 * 三棱镜OD
 	 */
-	public void setRightsanlingjing(String rightsanlingjing) {this.rightsanlingjing = rightsanlingjing;}
+	public void setRightsanlingjingyy(String rightsanlingjingyy) {this.rightsanlingjingyy = rightsanlingjingyy;}
 	/**
 	 * 三棱镜OD
 	 */
-	public String getRightsanlingjing() {return rightsanlingjing;}
+	public String getRightsanlingjingyy() {return rightsanlingjingyy;}
 	/**
 	 * 基地OD
 	 */
-	public void setRightjidi(String rightjidi) {this.rightjidi = rightjidi;}
+	public void setRightjidiyy(String rightjidiyy) {this.rightjidiyy = rightjidiyy;}
 	/**
 	 * 基地OD
 	 */
-	public String getRightjidi() {return rightjidi;}
+	public String getRightjidiyy() {return rightjidiyy;}
 	/**
 	 * 远用瞳距OD
 	 */
-	public void setRightyuanyongtj(String rightyuanyongtj) {this.rightyuanyongtj = rightyuanyongtj;}
+	public void setRightyuanyongtjyy(String rightyuanyongtjyy) {this.rightyuanyongtjyy = rightyuanyongtjyy;}
 	/**
 	 * 远用瞳距OD
 	 */
-	public String getRightyuanyongtj() {return rightyuanyongtj;}
+	public String getRightyuanyongtjyy() {return rightyuanyongtjyy;}
 	/**
 	 * 瞳高OD
 	 */
-	public void setRighttonggao(String righttonggao) {this.righttonggao = righttonggao;}
+	public void setRighttonggaoyy(String righttonggaoyy) {this.righttonggaoyy = righttonggaoyy;}
 	/**
 	 * 瞳高OD
 	 */
-	public String getRighttonggao() {return righttonggao;}
+	public String getRighttonggaoyy() {return righttonggaoyy;}
 	/**
 	 * 远用VA(OD)
 	 */
-	public void setRightyuanyongVA(String rightyuanyongVA) {this.rightyuanyongVA = rightyuanyongVA;}
+	public void setRightyuanyongVAyy(String rightyuanyongVAyy) {this.rightyuanyongVAyy = rightyuanyongVAyy;}
 	/**
 	 * 远用VA(OD)
 	 */
-	public String getRightyuanyongVA() {return rightyuanyongVA;}
+	public String getRightyuanyongVAyy() {return rightyuanyongVAyy;}
 	/**
 	 * 球镜OS
 	 */
-	public void setLeftQJ(String leftQJ){this.leftQJ = leftQJ;}
+	public void setLeftQJyy(String leftQJyy){this.leftQJyy = leftQJyy;}
 	/**
 	 * 球镜OS
 	 */
-	public String getLeftQJ() {return leftQJ;}
+	public String getLeftQJyy() {return leftQJyy;}
 	/**
 	 * 柱镜OS
 	 */
-	public void setLeftZJ(String leftZJ) {this.leftZJ = leftZJ;}
+	public void setLeftZJyy(String leftZJyy) {this.leftZJyy = leftZJyy;}
 	/**
 	 * 柱镜OS
 	 */
-	public String getLeftZJ() {return leftZJ;}
+	public String getLeftZJyy() {return leftZJyy;}
 	/**
 	 * 轴向OS
 	 */
-	public void setLeftzhouxiang(String leftzhouxiang) {this.leftzhouxiang = leftzhouxiang;}
+	public void setLeftzhouxiangyy(String leftzhouxiangyy) {this.leftzhouxiangyy = leftzhouxiangyy;}
 	/**
 	 * 轴向OS
 	 */
-	public String getLeftzhouxiang() {return leftzhouxiang;}
+	public String getLeftzhouxiangyy() {return leftzhouxiangyy;}
 	/**
 	 * 三棱镜OS
 	 */
-	public void setLeftsanlingjing(String leftsanlingjing) {this.leftsanlingjing = leftsanlingjing;}
+	public void setLeftsanlingjingyy(String leftsanlingjingyy) {this.leftsanlingjingyy = leftsanlingjingyy;}
 	/**
 	 * 三棱镜OS
 	 */
-	public String getLeftsanlingjing(){return leftsanlingjing;}
+	public String getLeftsanlingjingyy(){return leftsanlingjingyy;}
 	/**
 	 * 基地OS
 	 */
-	public void setLeftjidi(String leftjidi) {this.leftjidi = leftjidi;}
+	public void setLeftjidiyy(String leftjidiyy) {this.leftjidiyy = leftjidiyy;}
 	/**
 	 * 基地OS
 	 */
-	public String getLeftjidi() {return leftjidi;}
+	public String getLeftjidiyy() {return leftjidiyy;}
 	/**
 	 * 远用瞳距OS
 	 */
-	public void setLeftyuanyongtj(String leftyuanyongtj) {this.leftyuanyongtj = leftyuanyongtj;}
+	public void setLeftyuanyongtjyy(String leftyuanyongtjyy) {this.leftyuanyongtjyy = leftyuanyongtjyy;}
 	/**
 	 * 远用瞳距OS
 	 */
-	public String getLeftyuanyongtj(){return leftyuanyongtj;}
+	public String getLeftyuanyongtjyy(){return leftyuanyongtjyy;}
 	/**
 	 * 瞳高OS
 	 */
-	public void setLefttonggao(String lefttonggao){this.lefttonggao = lefttonggao;}
+	public void setLefttonggaoyy(String lefttonggaoyy){this.lefttonggaoyy = lefttonggaoyy;}
 	/**
 	 * 瞳高OS
 	 */
-	public String getLefttonggao(){return lefttonggao;}
+	public String getLefttonggaoyy(){return lefttonggaoyy;}
 	/**
 	 * 远用VA(OS)
 	 */
-	public void setLeftyuanyongVA(String leftyuanyongVA) {this.leftyuanyongVA = leftyuanyongVA;}
+	public void setLeftyuanyongVAyy(String leftyuanyongVAyy) {this.leftyuanyongVAyy = leftyuanyongVAyy;}
 	/**
 	 * 远用VA(OS)
 	 */
-	public String getLeftyuanyongVA() {return leftyuanyongVA;}
+	public String getLeftyuanyongVAyy() {return leftyuanyongVAyy;}
 	/**
 	 * 获取：备注
 	 */
@@ -1036,4 +1239,666 @@ public class SalesDO implements Serializable {
 	public void setList(List<SaleGoodsDO> list) {this.list = list;}
 
 	public List<SaleGoodsDO> getList() {return list;}
+
+	/**
+	 * 球镜OD
+	 */
+	public void setRightQJjy(String rightQJjy) {this.rightQJjy = rightQJjy;}
+	/**
+	 * 球镜OD
+	 */
+	public String getRightQJjy(){return rightQJjy;}
+	/**
+	 * 柱镜OD
+	 */
+	public void setRightZJjy(String rightZJjy) {this.rightZJjy = rightZJjy;}
+	/**
+	 * 柱镜OD
+	 */
+	public String getRightZJjy() {return rightZJjy;}
+	/**
+	 * 轴向OD
+	 */
+	public void setRightzhouxiangjy(String rightzhouxiangjy) {this.rightzhouxiangjy = rightzhouxiangjy;}
+	/**
+	 * 轴向OD
+	 */
+	public String getRightzhouxiangjy(){return rightzhouxiangjy;}
+	/**
+	 * 三棱镜OD
+	 */
+	public void setRightsanlingjingjy(String rightsanlingjingjy) {this.rightsanlingjingjy = rightsanlingjingjy;}
+	/**
+	 * 三棱镜OD
+	 */
+	public String getRightsanlingjingjy() {return rightsanlingjingjy;}
+	/**
+	 * 基地OD
+	 */
+	public void setRightjidijy(String rightjidijy) {this.rightjidijy = rightjidijy;}
+	/**
+	 * 基地OD
+	 */
+	public String getRightjidijy() {return rightjidijy;}
+	/**
+	 * 近用瞳距OD
+	 */
+	public void setRightyuanyongtjjy(String rightyuanyongtjjy) {this.rightyuanyongtjjy = rightyuanyongtjjy;}
+	/**
+	 * 近用瞳距OD
+	 */
+	public String getRightyuanyongtjjy() {return rightyuanyongtjjy;}
+	/**
+	 * 瞳高OD
+	 */
+	public void setRighttonggaojy(String righttonggaojy) {this.righttonggaojy = righttonggaojy;}
+	/**
+	 * 瞳高OD
+	 */
+	public String getRighttonggaojy() {return righttonggaojy;}
+	/**
+	 * 近用VA(OD)
+	 */
+	public void setRightyuanyongVAjy(String rightyuanyongVAjy) {this.rightyuanyongVAjy = rightyuanyongVAjy;}
+	/**
+	 * 近用VA(OD)
+	 */
+	public String getRightyuanyongVAjy() {return rightyuanyongVAjy;}
+	/**
+	 * 球镜OS
+	 */
+	public void setLeftQJjy(String leftQJjy){this.leftQJjy = leftQJjy;}
+	/**
+	 * 球镜OS
+	 */
+	public String getLeftQJjy() {return leftQJjy;}
+	/**
+	 * 柱镜OS
+	 */
+	public void setLeftZJjy(String leftZJjy) {this.leftZJjy = leftZJjy;}
+	/**
+	 * 柱镜OS
+	 */
+	public String getLeftZJjy() {return leftZJjy;}
+	/**
+	 * 轴向OS
+	 */
+	public void setLeftzhouxiangjy(String leftzhouxiangjy) {this.leftzhouxiangjy = leftzhouxiangjy;}
+	/**
+	 * 轴向OS
+	 */
+	public String getLeftzhouxiangjy() {return leftzhouxiangjy;}
+	/**
+	 * 三棱镜OS
+	 */
+	public void setLeftsanlingjingjy(String leftsanlingjingjy) {this.leftsanlingjingjy = leftsanlingjingjy;}
+	/**
+	 * 三棱镜OS
+	 */
+	public String getLeftsanlingjingjy(){return leftsanlingjingjy;}
+	/**
+	 * 基地OS
+	 */
+	public void setLeftjidijy(String leftjidijy) {this.leftjidijy = leftjidijy;}
+	/**
+	 * 基地OS
+	 */
+	public String getLeftjidijy() {return leftjidijy;}
+	/**
+	 * 近用瞳距OS
+	 */
+	public void setLeftyuanyongtjjy(String leftyuanyongtjjy) {this.leftyuanyongtjjy = leftyuanyongtjjy;}
+	/**
+	 * 近用瞳距OS
+	 */
+	public String getLeftyuanyongtjjy(){return leftyuanyongtjjy;}
+	/**
+	 * 瞳高OS
+	 */
+	public void setLefttonggaojy(String lefttonggaojy){this.lefttonggaojy = lefttonggaojy;}
+	/**
+	 * 瞳高OS
+	 */
+	public String getLefttonggaojy(){return lefttonggaojy;}
+	/**
+	 * 近用VA(OS)
+	 */
+	public void setLeftyuanyongVAjy(String leftyuanyongVAjy) {this.leftyuanyongVAjy = leftyuanyongVAjy;}
+	/**
+	 * 近用VA(OS)
+	 */
+	public String getLeftyuanyongVAjy() {return leftyuanyongVAjy;}
+
+
+	/**
+	 * 球镜OD
+	 */
+	public void setRightQJsg(String rightQJsg) {this.rightQJsg = rightQJsg;}
+	/**
+	 * 球镜OD
+	 */
+	public String getRightQJsg(){return rightQJsg;}
+	/**
+	 * 柱镜OD
+	 */
+	public void setRightZJsg(String rightZJsg) {this.rightZJsg = rightZJsg;}
+	/**
+	 * 柱镜OD
+	 */
+	public String getRightZJsg() {return rightZJsg;}
+	/**
+	 * 轴向OD
+	 */
+	public void setRightzhouxiangsg(String rightzhouxiangsg) {this.rightzhouxiangsg = rightzhouxiangsg;}
+	/**
+	 * 轴向OD
+	 */
+	public String getRightzhouxiangsg(){return rightzhouxiangsg;}
+	/**
+	 * 三棱镜OD
+	 */
+	public void setRightsanlingjingsg(String rightsanlingjingsg) {this.rightsanlingjingsg = rightsanlingjingsg;}
+	/**
+	 * 三棱镜OD
+	 */
+	public String getRightsanlingjingsg() {return rightsanlingjingsg;}
+	/**
+	 * 基地OD
+	 */
+	public void setRightjidisg(String rightjidisg) {this.rightjidisg = rightjidisg;}
+	/**
+	 * 基地OD
+	 */
+	public String getRightjidisg() {return rightjidisg;}
+	/**
+	 * 渐近/双光瞳距OD
+	 */
+	public void setRightyuanyongtjsg(String rightyuanyongtjsg) {this.rightyuanyongtjsg = rightyuanyongtjsg;}
+	/**
+	 * 渐近/双光瞳距OD
+	 */
+	public String getRightyuanyongtjsg() {return rightyuanyongtjsg;}
+	/**
+	 * 瞳高OD
+	 */
+	public void setRighttonggaosg(String righttonggaosg) {this.righttonggaosg = righttonggaosg;}
+	/**
+	 * 瞳高OD
+	 */
+	public String getRighttonggaosg() {return righttonggaosg;}
+	/**
+	 * 渐近/双光VA(OD)
+	 */
+	public void setRightyuanyongVAsg(String rightyuanyongVAsg) {this.rightyuanyongVAsg = rightyuanyongVAsg;}
+	/**
+	 * 渐近/双光VA(OD)
+	 */
+	public String getRightyuanyongVAsg() {return rightyuanyongVAsg;}
+	/**
+	 * 球镜OS
+	 */
+	public void setLeftQJsg(String leftQJsg){this.leftQJsg = leftQJsg;}
+	/**
+	 * 球镜OS
+	 */
+	public String getLeftQJsg() {return leftQJsg;}
+	/**
+	 * 柱镜OS
+	 */
+	public void setLeftZJsg(String leftZJsg) {this.leftZJsg = leftZJsg;}
+	/**
+	 * 柱镜OS
+	 */
+	public String getLeftZJsg() {return leftZJsg;}
+	/**
+	 * 轴向OS
+	 */
+	public void setLeftzhouxiangsg(String leftzhouxiangsg) {this.leftzhouxiangsg = leftzhouxiangsg;}
+	/**
+	 * 轴向OS
+	 */
+	public String getLeftzhouxiangsg() {return leftzhouxiangsg;}
+	/**
+	 * 三棱镜OS
+	 */
+	public void setLeftsanlingjingsg(String leftsanlingjingsg) {this.leftsanlingjingsg = leftsanlingjingsg;}
+	/**
+	 * 三棱镜OS
+	 */
+	public String getLeftsanlingjingsg(){return leftsanlingjingsg;}
+	/**
+	 * 基地OS
+	 */
+	public void setLeftjidisg(String leftjidisg) {this.leftjidisg = leftjidisg;}
+	/**
+	 * 基地OS
+	 */
+	public String getLeftjidisg() {return leftjidisg;}
+	/**
+	 * 渐近/双光瞳距OS
+	 */
+	public void setLeftyuanyongtjsg(String leftyuanyongtjsg) {this.leftyuanyongtjsg = leftyuanyongtjsg;}
+	/**
+	 * 渐近/双光瞳距OS
+	 */
+	public String getLeftyuanyongtjsg(){return leftyuanyongtjsg;}
+	/**
+	 * 瞳高OS
+	 */
+	public void setLefttonggaosg(String lefttonggaosg){this.lefttonggaosg = lefttonggaosg;}
+	/**
+	 * 瞳高OS
+	 */
+	public String getLefttonggaosg(){return lefttonggaosg;}
+	/**
+	 * 渐近/双光VA(OS)
+	 */
+	public void setLeftyuanyongVAsg(String leftyuanyongVAsg) {this.leftyuanyongVAsg = leftyuanyongVAsg;}
+	/**
+	 * 渐近/双光VA(OS)
+	 */
+	public String getLeftyuanyongVAsg() {return leftyuanyongVAsg;}
+
+
+	/**
+	 * 球镜OD
+	 */
+	public void setRightQJzy(String rightQJzy) {this.rightQJzy= rightQJzy;}
+	/**
+	 * 球镜OD
+	 */
+	public String getRightQJzy(){return rightQJzy;}
+	/**
+	 * 柱镜OD
+	 */
+	public void setRightZJzy(String rightZJzy) {this.rightZJzy = rightZJzy;}
+	/**
+	 * 柱镜OD
+	 */
+	public String getRightZJzy() {return rightZJzy;}
+	/**
+	 * 轴向OD
+	 */
+	public void setRightzhouxiangzy(String rightzhouxiangzy) {this.rightzhouxiangzy = rightzhouxiangzy;}
+	/**
+	 * 轴向OD
+	 */
+	public String getRightzhouxiangzy(){return rightzhouxiangzy;}
+	/**
+	 * 三棱镜OD
+	 */
+	public void setRightsanlingjingzy(String rightsanlingjingzy) {this.rightsanlingjingzy = rightsanlingjingzy;}
+	/**
+	 * 三棱镜OD
+	 */
+	public String getRightsanlingjingzy() {return rightsanlingjingzy;}
+	/**
+	 * 基地OD
+	 */
+	public void setRightjidizy(String rightjidizy) {this.rightjidizy = rightjidizy;}
+	/**
+	 * 基地OD
+	 */
+	public String getRightjidizy() {return rightjidizy;}
+	/**
+	 * 中用瞳距OD
+	 */
+	public void setRightyuanyongtjzy(String rightyuanyongtjzy) {this.rightyuanyongtjzy = rightyuanyongtjzy;}
+	/**
+	 * 中用瞳距OD
+	 */
+	public String getRightyuanyongtjzy() {return rightyuanyongtjzy;}
+	/**
+	 * 瞳高OD
+	 */
+	public void setRighttonggaozy(String righttonggaozy) {this.righttonggaozy = righttonggaozy;}
+	/**
+	 * 瞳高OD
+	 */
+	public String getRighttonggaozy() {return righttonggaozy;}
+	/**
+	 * 中用VA(OD)
+	 */
+	public void setRightyuanyongVAzy(String rightyuanyongVAzy) {this.rightyuanyongVAzy = rightyuanyongVAzy;}
+	/**
+	 * 中用VA(OD)
+	 */
+	public String getRightyuanyongVAzy() {return rightyuanyongVAzy;}
+	/**
+	 * 球镜OS
+	 */
+	public void setLeftQJzy(String leftQJzy){this.leftQJzy = leftQJzy;}
+	/**
+	 * 球镜OS
+	 */
+	public String getLeftQJzy() {return leftQJzy;}
+	/**
+	 * 柱镜OS
+	 */
+	public void setLeftZJzy(String leftZJzy) {this.leftZJzy = leftZJzy;}
+	/**
+	 * 柱镜OS
+	 */
+	public String getLeftZJzy() {return leftZJzy;}
+	/**
+	 * 轴向OS
+	 */
+	public void setLeftzhouxiangzy(String leftzhouxiangzy) {this.leftzhouxiangzy = leftzhouxiangzy;}
+	/**
+	 * 轴向OS
+	 */
+	public String getLeftzhouxiangzy() {return leftzhouxiangzy;}
+	/**
+	 * 三棱镜OS
+	 */
+	public void setLeftsanlingjingzy(String leftsanlingjingzy) {this.leftsanlingjingzy = leftsanlingjingzy;}
+	/**
+	 * 三棱镜OS
+	 */
+	public String getLeftsanlingjingzy(){return leftsanlingjingzy;}
+	/**
+	 * 基地OS
+	 */
+	public void setLeftjidizy(String leftjidizy) {this.leftjidizy = leftjidizy;}
+	/**
+	 * 基地OS
+	 */
+	public String getLeftjidizy() {return leftjidizy;}
+	/**
+	 * 中用瞳距OS
+	 */
+	public void setLeftyuanyongtjzy(String leftyuanyongtjzy) {this.leftyuanyongtjzy = leftyuanyongtjzy;}
+	/**
+	 * 中用瞳距OS
+	 */
+	public String getLeftyuanyongtjzy(){return leftyuanyongtjzy;}
+	/**
+	 * 瞳高OS
+	 */
+	public void setLefttonggaozy(String lefttonggaozy){this.lefttonggaozy = lefttonggaozy;}
+	/**
+	 * 瞳高OS
+	 */
+	public String getLefttonggaozy(){return lefttonggaozy;}
+	/**
+	 * 中用VA(OS)
+	 */
+	public void setLeftyuanyongVAzy(String leftyuanyongVAzy) {this.leftyuanyongVAzy = leftyuanyongVAzy;}
+	/**
+	 * 中用VA(OS)
+	 */
+	public String getLeftyuanyongVAzy() {return leftyuanyongVAzy;}
+
+	public String getRightQJyx() {
+		return rightQJyx;
+	}
+
+	public void setRightQJyx(String rightQJyx) {
+		this.rightQJyx = rightQJyx;
+	}
+
+	public String getRightZJyx() {
+		return rightZJyx;
+	}
+
+	public void setRightZJyx(String rightZJyx) {
+		this.rightZJyx = rightZJyx;
+	}
+
+	public String getRightzhouxiangyx() {
+		return rightzhouxiangyx;
+	}
+
+	public void setRightzhouxiangyx(String rightzhouxiangyx) {
+		this.rightzhouxiangyx = rightzhouxiangyx;
+	}
+
+	public String getRightqulvyx() {
+		return rightqulvyx;
+	}
+
+	public void setRightqulvyx(String rightqulvyx) {
+		this.rightqulvyx = rightqulvyx;
+	}
+
+	public String getRightzhijingyx() {
+		return rightzhijingyx;
+	}
+
+	public void setRightzhijingyx(String rightzhijingyx) {
+		this.rightzhijingyx = rightzhijingyx;
+	}
+
+	public String getRightYingXingVAyx() {
+		return rightYingXingVAyx;
+	}
+
+	public void setRightYingXingVAyx(String rightYingXingVAyx) {
+		this.rightYingXingVAyx = rightYingXingVAyx;
+	}
+
+	public String getRightSYjingpianyx() {
+		return rightSYjingpianyx;
+	}
+
+	public void setRightSYjingpianyx(String rightSYjingpianyx) {
+		this.rightSYjingpianyx = rightSYjingpianyx;
+	}
+
+	public String getRightPianyx() {
+		return rightPianyx;
+	}
+
+	public void setRightPianyx(String rightPianyx) {
+		this.rightPianyx = rightPianyx;
+	}
+
+	public String getLeftQJyx() {
+		return leftQJyx;
+	}
+
+	public void setLeftQJyx(String leftQJyx) {
+		this.leftQJyx = leftQJyx;
+	}
+
+	public String getLeftZJyx() {
+		return leftZJyx;
+	}
+
+	public void setLeftZJyx(String leftZJyx) {
+		this.leftZJyx = leftZJyx;
+	}
+
+	public String getLeftzhouxiangyx() {
+		return leftzhouxiangyx;
+	}
+
+	public void setLeftzhouxiangyx(String leftzhouxiangyx) {
+		this.leftzhouxiangyx = leftzhouxiangyx;
+	}
+
+	public String getLeftqulvyx() {
+		return leftqulvyx;
+	}
+
+	public void setLeftqulvyx(String leftqulvyx) {
+		this.leftqulvyx = leftqulvyx;
+	}
+
+	public String getLeftzhijingyx() {
+		return leftzhijingyx;
+	}
+
+	public void setLeftzhijingyx(String leftzhijingyx) {
+		this.leftzhijingyx = leftzhijingyx;
+	}
+
+	public String getLeftYingXingVAyx() {
+		return leftYingXingVAyx;
+	}
+
+	public void setLeftYingXingVAyx(String leftYingXingVAyx) {
+		this.leftYingXingVAyx = leftYingXingVAyx;
+	}
+
+	public String getLeftSYjingpianyx() {
+		return leftSYjingpianyx;
+	}
+
+	public void setLeftSYjingpianyx(String leftSYjingpianyx) {
+		this.leftSYjingpianyx = leftSYjingpianyx;
+	}
+
+	public String getLeftPianyx() {
+		return leftPianyx;
+	}
+
+	public void setLeftPianyx(String leftPianyx) {
+		this.leftPianyx = leftPianyx;
+	}
+
+	public String getRightQJxl() {
+		return rightQJxl;
+	}
+
+	public void setRightQJxl(String rightQJxl) {
+		this.rightQJxl = rightQJxl;
+	}
+
+	public String getRightZJxl() {
+		return rightZJxl;
+	}
+
+	public void setRightZJxl(String rightZJxl) {
+		this.rightZJxl = rightZJxl;
+	}
+
+	public String getRightzhouxiangxl() {
+		return rightzhouxiangxl;
+	}
+
+	public void setRightzhouxiangxl(String rightzhouxiangxl) {
+		this.rightzhouxiangxl = rightzhouxiangxl;
+	}
+
+	public String getRightsanlingjingxl() {
+		return rightsanlingjingxl;
+	}
+
+	public void setRightsanlingjingxl(String rightsanlingjingxl) {
+		this.rightsanlingjingxl = rightsanlingjingxl;
+	}
+
+	public String getRightjidixl() {
+		return rightjidixl;
+	}
+
+	public void setRightjidixl(String rightjidixl) {
+		this.rightjidixl = rightjidixl;
+	}
+
+	public String getRightSJXLyytj() {
+		return rightSJXLyytj;
+	}
+
+	public void setRightSJXLyytj(String rightSJXLyytj) {
+		this.rightSJXLyytj = rightSJXLyytj;
+	}
+
+	public String getRightSJXLjytj() {
+		return rightSJXLjytj;
+	}
+
+	public void setRightSJXLjytj(String rightSJXLjytj) {
+		this.rightSJXLjytj = rightSJXLjytj;
+	}
+
+	public String getRightSJXLyyva() {
+		return rightSJXLyyva;
+	}
+
+	public void setRightSJXLyyva(String rightSJXLyyva) {
+		this.rightSJXLyyva = rightSJXLyyva;
+	}
+
+	public String getRightSJXLjyva() {
+		return rightSJXLjyva;
+	}
+
+	public void setRightSJXLjyva(String rightSJXLjyva) {
+		this.rightSJXLjyva = rightSJXLjyva;
+	}
+
+	public String getLeftQJxl() {
+		return leftQJxl;
+	}
+
+	public void setLeftQJxl(String leftQJxl) {
+		this.leftQJxl = leftQJxl;
+	}
+
+	public String getLeftZJxl() {
+		return leftZJxl;
+	}
+
+	public void setLeftZJxl(String leftZJxl) {
+		this.leftZJxl = leftZJxl;
+	}
+
+	public String getLeftzhouxiangxl() {
+		return leftzhouxiangxl;
+	}
+
+	public void setLeftzhouxiangxl(String leftzhouxiangxl) {
+		this.leftzhouxiangxl = leftzhouxiangxl;
+	}
+
+	public String getLeftsanlingjingxl() {
+		return leftsanlingjingxl;
+	}
+
+	public void setLeftsanlingjingxl(String leftsanlingjingxl) {
+		this.leftsanlingjingxl = leftsanlingjingxl;
+	}
+
+	public String getLeftjidixl() {
+		return leftjidixl;
+	}
+
+	public void setLeftjidixl(String leftjidixl) {
+		this.leftjidixl = leftjidixl;
+	}
+
+	public String getLeftSJXLyytj() {
+		return leftSJXLyytj;
+	}
+
+	public void setLeftSJXLyytj(String leftSJXLyytj) {
+		this.leftSJXLyytj = leftSJXLyytj;
+	}
+
+	public String getLeftSJXLjytj() {
+		return leftSJXLjytj;
+	}
+
+	public void setLeftSJXLjytj(String leftSJXLjytj) {
+		this.leftSJXLjytj = leftSJXLjytj;
+	}
+
+	public String getLeftSJXLyyva() {
+		return leftSJXLyyva;
+	}
+
+	public void setLeftSJXLyyva(String leftSJXLyyva) {
+		this.leftSJXLyyva = leftSJXLyyva;
+	}
+
+	public String getLeftSJXLjyva() {
+		return leftSJXLjyva;
+	}
+
+	public void setLeftSJXLjyva(String leftSJXLjyva) {
+		this.leftSJXLjyva = leftSJXLjyva;
+	}
+
 }

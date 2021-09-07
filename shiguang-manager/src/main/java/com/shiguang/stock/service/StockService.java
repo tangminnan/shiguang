@@ -31,6 +31,8 @@ public interface StockService {
 
     int batchRemove(Long[] ids);
 
+    int updateStockCCount(StockDO stockDO);
+
     List<StockDO> listJiajia(Map<String, Object> map);
 
     int countJiajia(Map<String, Object> map);

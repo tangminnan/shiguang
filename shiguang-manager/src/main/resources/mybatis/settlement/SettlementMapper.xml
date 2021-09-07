@@ -59,7 +59,8 @@
 		(
 		    `cost_id`,
 		    `sale_number`,
-			`member_number`, 
+			`member_number`,
+			`sale_name`,
 			`actual_money`, 
 			`payment_money`, 
 			`change_money`, 
@@ -73,7 +74,8 @@
 		(
 		    #{costId},
 		    #{saleNumber},
-			#{memberNumber}, 
+			#{memberNumber},
+			#{saleName},
 			#{actualMoney}, 
 			#{paymentMoney}, 
 			#{changeMoney}, 

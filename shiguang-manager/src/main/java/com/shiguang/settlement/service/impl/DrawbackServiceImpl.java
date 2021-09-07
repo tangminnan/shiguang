@@ -1,5 +1,6 @@
 package com.shiguang.settlement.service.impl;
 
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.settlement.dao.DrawbackDao;
 import com.shiguang.settlement.domain.DrawbackDO;
 import com.shiguang.settlement.service.DrawbackService;
@@ -49,6 +50,16 @@ public class DrawbackServiceImpl implements DrawbackService {
 	@Override
 	public int batchRemove(Long[] ids){
 		return drawbackDao.batchRemove(ids);
+	}
+
+	@Override
+	public List<MemberDO> memberList(Map<String, Object> map){
+		return drawbackDao.memberList(map);
+	}
+
+	@Override
+	public int memberCount(Map<String, Object> map){
+		return drawbackDao.memberCount(map);
 	}
 	
 }

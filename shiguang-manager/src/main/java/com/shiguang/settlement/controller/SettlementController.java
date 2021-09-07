@@ -207,6 +207,7 @@ public class SettlementController {
 			costDO.setType("定金单");
 		}
 		costService.updateMember(costDO);
+		settlement.setSaleName(ShiroUtils.getUser().getName());
 		settlement.setSettleDate(new Date());
 		if(settlementService.save(settlement)>0){
 			return R.ok();
@@ -301,6 +302,8 @@ public class SettlementController {
 				model.addAttribute("paymodel","医院收费处");
 			} else if (settlementDO1.getPayModel() == 3){
 				model.addAttribute("paymodel","一卡通");
+			} else if (settlementDO1.getPayModel() == 4){
+				model.addAttribute("paymodel","现金");
 			}
 		}
 		model.addAttribute("settlementDO1",settlementDO1);
@@ -454,8 +457,10 @@ public class SettlementController {
             } else if (settlementDO1.getPayModel() == 2){
                 model.addAttribute("paymodel","医院收费处");
             } else if (settlementDO1.getPayModel() == 3){
-                model.addAttribute("paymodel","一卡通");
-            }
+				model.addAttribute("paymodel","一卡通");
+			} else if (settlementDO1.getPayModel() == 4){
+				model.addAttribute("paymodel","现金");
+			}
         }
         if ("定金".equals(settlementDO1.getPayWay())){
             Double arrearMoney = settlementDO1.getActualMoney() - settlementDO1.getPayMoney();

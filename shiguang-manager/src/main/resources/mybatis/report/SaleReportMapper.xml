@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.report.dao.SaleReportDao">
+	<!-- 收银员工作量统计表 -->
+	<select id="findSaleReport" resultType="com.shiguang.storeSales.domain.SalesDO">
+		SELECT
+		goodsNum,
+		amountMoney,
+		primeMoney,
+		additionalCost,
+		additionalPrice,
+		additionalCount,
+		storeDescribe,
+		storeUnit,
+		storeCount,
+		saleNum,
+		isSale,
+		payMoney,
+		departNumber,
+		companyId,
+		settleDate,
+		saleName,
+		saleNumber,
+		type
+		from
+		(
+		SELECT
+		ss.`goods_num` as goodsNum,
+		ss.`amount_money` as amountMoney,
+		ss.`prime_money` as primeMoney,
+		ss.`additional_cost` as additionalCost,
+		ss.`additional_price` as additionalPrice,
+		ss.`additional_count` as additionalCount,
+		ss.`store_describe` as storeDescribe,
+		ss.`store_unit` as storeUnit,
+		ss.`store_count` as storeCount,
+		su.`username` AS saleNum,
+		c.is_sale AS isSale,
+		s.`pay_money` AS payMoney,
+		d.depart_number as departNumber,
+		d.company_id as companyId,
+		s.settle_date as settleDate,
+		s.sale_name as saleName,
+		s.sale_number as saleNumber,
+		c.type
+		FROM
+		store_sales ss
+		JOIN settlement s ON s.sale_number = ss.sale_number
+		JOIN department d ON d.depart_number = ss.store_num
+		JOIN sys_user su ON su. NAME = s.sale_name
+		join cost c on c.sale_number = s.sale_number
+		union
+		SELECT
+		'' as goodsNum,
+		'' as amountMoney,
+		'' as primeMoney,
+		'' as additionalCost,
+		'' as additionalPrice,
+		'' as additionalCount,
+		'' as storeDescribe,
+		'' as storeUnit,
+		'' as storeCount,
+		su.`username` AS saleNum,
+		c.is_sale AS isSale,
+		s.`pay_money` AS payMoney,
+		m.depart_number as departNumber,
+		d.company_id as companyId,
+		s.settle_date as settleDate,
+		s.sale_name as saleName,
+		s.sale_number as saleNumber,
+		c.type
+		from cost c
+		JOIN settlement s ON s.sale_number = c.sale_number
+		join member m on m.card_number = s.member_number
+		JOIN sys_user su ON su. NAME = s.sale_name
+		join department d on d.depart_number = m.depart_number) a
+		<where>
+		<if test="departNumber != null and departNumber != ''"> and departNumber = #{departNumber} </if>
+		<if test="companyid !=null and companyid != ''">and companyId in (#{companyid})</if>
+		<if test="settleDate !=null and settleDate != ''">and date_format(settleDate ,'%Y-%m-%d' ) = #{settleDate}</if>
+		and (`type`='配镜单' or `type`='定金单' OR `type` = '检查单')
+		and isSale != 0
+		</where>
+		GROUP BY saleNumber
+
+
+		<!--select ss.`sale_name`,ss.`sale_number`,ss.`goods_num`,ss.`amount_money`,ss.`prime_money`,ss.`additional_cost`,ss.`additional_price`,-->
+		<!--ss.`additional_count`,ss.`store_describe`,ss.`store_unit`,ss.`store_count`,su.`username` as saleNum,c.`is_sale` as isSale,s.`pay_money` as payMoney-->
+		 <!--from store_sales ss-->
+		 <!--join settlement s on s.sale_number = ss.sale_number-->
+		 <!--join department d on d.depart_number = ss.store_num-->
+		<!--join sys_user su on su.name = ss.sale_name-->
+		<!--join cost c on c.sale_number = ss.sale_number-->
+		<!--<where>-->
+			<!--<if test="departNumber != null and departNumber != ''"> and d.depart_number = #{departNumber} </if>-->
+			<!--<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>-->
+			<!--<if test="settleDate !=null and settleDate != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) = (#{settleDate})</if>-->
+			<!--and (c.`type`='配镜单' or c.`type`='定金单')-->
+			<!--and c.is_sale != 0-->
+		<!--</where>-->
+		<!--<choose>-->
+			<!--<when test="sort != null and sort.trim() != ''">-->
+				<!--order by ${sort} ${order}-->
+			<!--</when>-->
+			<!--<otherwise>-->
+				<!--order by s.`settle_date` desc-->
+			<!--</otherwise>-->
+		<!--</choose>-->
+		<!--<if test="offset != null and limit != null">-->
+			<!--limit #{offset}, #{limit}-->
+		<!--</if>-->
+	</select>
+	<select id="findSaleReportCount" resultType="int">
+		select count(*)
+		from store_sales ss
+		join settlement s on s.sale_number = ss.sale_number
+		join department d on d.depart_number = ss.store_num
+		join sys_user su on su.name = ss.sale_name
+		<where>
+			<if test="departNumber != null and departNumber != ''"> and d.depart_number = #{departNumber} </if>
+			<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
+			<if test="settleDate !=null and settleDate != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) = (#{settleDate})</if>
+		</where>
+	</select>
+    <!--查询报表中的检查数和检查费 -->
+    <select id="findCostList" resultType="com.shiguang.report.domain.SaleReportDO">
+        select count(sale_number) as checkCount ,SUM(cost_money) as checkMoney,is_sale as isSale
+        from cost
+        <where>
+            <if test="saleNumber != null and saleNumber !=''">sale_number = #{saleNumber}</if>
+            and `type`='检查单'
+			and is_sale != 0
+        </where>
+        group by sale_number
+    </select>
+</mapper>

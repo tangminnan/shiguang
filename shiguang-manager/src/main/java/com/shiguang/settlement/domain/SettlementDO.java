@@ -21,6 +21,8 @@ public class SettlementDO implements Serializable {
 	private Long costId;
 	//会员卡号
 	private String memberNumber;
+	//收银员
+	private String saleName;
 	//实际金额
 	private Double actualMoney;
 	//缴费金额
@@ -81,6 +83,8 @@ public class SettlementDO implements Serializable {
 	public String getMemberNumber() {
 		return memberNumber;
 	}
+	public void setSaleName(String saleName){this.saleName = saleName;}
+	public String getSaleName() {return saleName;}
 	/**
 	 * 设置：实际金额
 	 */

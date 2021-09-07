@@ -4,6 +4,7 @@ package com.shiguang.settlement.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.settlement.domain.DrawbackDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -29,4 +30,8 @@ public interface DrawbackDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	List<MemberDO> memberList(Map<String,Object> map);
+
+	int memberCount(Map<String,Object> map);
 }

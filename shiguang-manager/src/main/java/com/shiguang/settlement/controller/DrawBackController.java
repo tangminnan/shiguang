@@ -5,16 +5,22 @@ import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.*;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
+import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.settlement.domain.DrawbackDO;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.DrawbackService;
 import com.shiguang.settlement.service.SettlementService;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
+import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +35,10 @@ public class DrawBackController {
     private DrawbackService drawbackService;
     @Autowired
     private CostService costService;
+    @Autowired
+    private SalesService salesService;
+    @Autowired
+    private StockService stockService;
 
     @GetMapping()
     @RequiresPermissions("information:drawback:drawback")
@@ -46,14 +56,13 @@ public class DrawBackController {
 //		int total = settlementService.count(query);
 //		PageUtils pageUtils = new PageUtils(settlementList, total);
         query.put("state",1);
-        query.put("isSale",1);
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyid",ShiroUtils.getUser().getCompanyId());
         } else {
             query.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
-        List<MemberDO> memberDOList = memberService.payList(query);
-        int total = memberService.payCount(query);
+        List<MemberDO> memberDOList = drawbackService.memberList(query);
+        int total = drawbackService.memberCount(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);
         return pageUtils;
     }
@@ -81,6 +90,20 @@ public class DrawBackController {
         costDO.setId(settlementDO.getCostId());
         costDO.setIsSale(2L);
         costService.update(costDO);
+        SalesDO salesDO = salesService.getSaleNumber(saleNumber);
+        String storeNum = salesDO.getStoreNum();
+        String[] count = salesDO.getStoreCount().split(",");
+        String[] goodsCode = salesDO.getGoodsCode().split(",");
+        Map<String,Object> map = new HashMap<>();
+        map.put("departNumber",storeNum);
+        PositionDO positionDO = stockService.findPosition(map);
+        for (int i=0;i<goodsCode.length;i++){
+            StockDO stockDO = new StockDO();
+            stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+            stockDO.setGoodsCode(goodsCode[i]);
+            stockDO.setGoodsCount(count[i]);
+            stockService.updateGoodsCount(stockDO);
+        }
         if(drawbackService.save(drawbackDO)>0){
             return R.ok();
         }

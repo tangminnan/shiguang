@@ -4,15 +4,15 @@
 <mapper namespace="com.shiguang.system.dao.UserDao">
 
 	<select id="get" resultType="com.shiguang.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,
+		select `user_id`,`username`,`name`,`password`,`discount`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,
 		biaoge_neirong,`technical_title`,`consultation_fee`,`synopsis`,`head` from sys_user where user_id = #{value}
 	</select>
 	<select id="getbyphone" resultType="com.shiguang.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user where mobile = #{value}
+		select `user_id`,`username`,`name`,`password`,`discount`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,biaoge_neirong from sys_user where mobile = #{value}
 	</select>
 
 	<select id="getUserName" resultType="com.shiguang.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,
+		select `user_id`,`username`,`name`,`password`,`discount`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,
 		biaoge_neirong,`technical_title`,`consultation_fee`,`synopsis`,`head` from sys_user where username = #{value}
 	</select>
 
@@ -24,7 +24,7 @@
 	</select>
 
 	<select id="list" resultType="com.shiguang.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,
+		select `user_id`,`username`,`name`,`password`,`discount`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,
 		biaoge_biaoti,biaoge_neirong,`technical_title`,`consultation_fee`,`synopsis`,`head` from sys_user
         <where>  
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
@@ -91,7 +91,7 @@
 
 
 	<select id="listManage" resultType="com.shiguang.system.domain.UserDO">
-	select su.`user_id`,su.`username`,su.`name`,su.`password`,su.`store_num`,su.`store`,su.`company_id`,su.`company`,su.`dept_id`,sy.`role_name` as roleName, su.`email`,su.`mobile`,
+	select su.`user_id`,su.`username`,su.`name`,su.`password`,su.`discount`,su.`store_num`,su.`store`,su.`company_id`,su.`company`,su.`dept_id`,sy.`role_name` as roleName, su.`email`,su.`mobile`,
 	su.`status`,su.`user_id_create`,su.`gmt_create`,su.`gmt_modified`,su.`sex`,su.`birth`,su.`pic_id`,su.`live_address`,
 	su.`hobby`,su.`province`,su.`city`,su.`district`,su.zhongxin_name ,su.zhongxin_address ,su.zhongxin_phone,su.zhongxin_img,
 	su.biaoge_biaoti,su.biaoge_neirong,su.`technical_title`,su.`consultation_fee`,su.`synopsis`,su.`head`
@@ -172,7 +172,7 @@
 	</select>
 
     <select id="findListManages" resultType="com.shiguang.system.domain.UserDO">
-        select su.`user_id`,su.`username`,su.`name`,su.`password`,su.`store_num`,su.`store`,su.`company_id`,su.`company`,su.`dept_id`,sy.`role_name` as roleName, su.`email`,su.`mobile`,
+        select su.`user_id`,su.`username`,su.`name`,su.`password`,su.`discount`,su.`store_num`,su.`store`,su.`company_id`,su.`company`,su.`dept_id`,sy.`role_name` as roleName, su.`email`,su.`mobile`,
         su.`status`,su.`user_id_create`,su.`gmt_create`,su.`gmt_modified`,su.`sex`,su.`birth`,su.`pic_id`,su.`live_address`,
         su.`hobby`,su.`province`,su.`city`,su.`district`,su.zhongxin_name ,su.zhongxin_address ,su.zhongxin_phone,su.zhongxin_img,
         su.biaoge_biaoti,su.biaoge_neirong,su.`technical_title`,su.`consultation_fee`,su.`synopsis`,su.`head`
@@ -252,6 +252,7 @@
 			`username`, 
 			`name`, 
 			`password`,
+			`discount`,
 			`store_num`,
 			`store`,
 			`company_id`,
@@ -287,6 +288,7 @@
 			#{username}, 
 			#{name}, 
 			#{password},
+			#{discount},
 			#{storeNum},
 			#{store},
 			#{companyId},

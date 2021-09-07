@@ -1,6 +1,7 @@
 package com.shiguang.settlement.service;
 
 
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.settlement.domain.DrawbackDO;
 
 import java.util.List;
@@ -28,4 +29,8 @@ public interface DrawbackService {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	List<MemberDO> memberList(Map<String,Object> map);
+
+	int memberCount(Map<String,Object> map);
 }

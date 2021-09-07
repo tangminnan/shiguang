@@ -19,6 +19,8 @@ public class UserDO implements Serializable {
     private String password;
     //销售门店编码
     private String storeNum;
+    //折扣
+    private Double discount;
     //门店
     private String store;
     //公司id
@@ -351,6 +353,10 @@ public class UserDO implements Serializable {
 	public void setHead(String head) {this.head = head;}
 
 	public String getHead() {return head;}
+
+	public void setDiscount(Double discount) {this.discount = discount;}
+
+	public Double getDiscount() {return discount;}
 
 	@Override
     public String toString() {

@@ -78,8 +78,13 @@ function load() {
 									field : 'cardNumber',
 									align : 'center',
 									formatter : function(value, row, index) {
-                                        var e = '<a class="btn btn-primary btn-xs" href="#" title="退款"  mce_href="#" ' +
-												 'onclick="tuikuan(\''+ value+ '\',\''+row.saleNumber+'\')" style="text-decoration: none;">退款</a>';
+                                        var e;
+                                        if (row.isSale == 1){
+                                            e = '<a class="btn btn-primary btn-xs" href="#" title="退款"  mce_href="#" ' +
+                                                'onclick="tuikuan(\''+ value+ '\',\''+row.saleNumber+'\')" style="text-decoration: none;">退款</a>';
+										} else if (row.isSale == 2){
+                                            e = '<a class="btn btn-primary btn-xs" href="#" title="已退款"  mce_href="#" style="text-decoration: none;">已退款</a>';
+										}
 											   // e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" ' +
 												//    'onclick="edit(\''+value+'\',\''+row.saleNumber+'\')"><i class="fa fa-edit"></i></a> ';
 										// else if (row.isSale == 1) {

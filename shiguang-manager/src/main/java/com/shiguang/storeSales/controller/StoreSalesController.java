@@ -293,118 +293,118 @@ public class StoreSalesController {
                 kjjyDO.setCardNumber(salesDO.getMemberNumber());
                 kjjyDO.setKjjyPrescriptionType(salesDO.getRecipelType().toString());
                 kjjyDO.setKjjyOptometryName(salesDO.getSaleName());
-                kjjyDO.setKjjySphod(salesDO.getRightQJ());
-                kjjyDO.setKjjySphos(salesDO.getLeftQJ());
-                kjjyDO.setKjjyCylod(salesDO.getRightZJ());
-                kjjyDO.setKjjyCylos(salesDO.getLeftZJ());
-                kjjyDO.setKjjyAxialod(salesDO.getRightzhouxiang());
-                kjjyDO.setKjjyAxialos(salesDO.getLeftzhouxiang());
-                kjjyDO.setKjjyPrismod(salesDO.getRightsanlingjing());
-                kjjyDO.setKjjyPrismos(salesDO.getLeftsanlingjing());
-                kjjyDO.setKjjyJdod(salesDO.getRightjidi());
-                kjjyDO.setKjjyJdos(salesDO.getLeftjidi());
-                kjjyDO.setKjjyYytjod(salesDO.getRightyuanyongtj());
-                kjjyDO.setKjjyYytjos(salesDO.getLeftyuanyongtj());
-                kjjyDO.setKjjyTgod(salesDO.getRighttonggao());
-                kjjyDO.setKjjyTgos(salesDO.getLefttonggao());
-                kjjyDO.setKjjyVaod(salesDO.getRightyuanyongVA());
-                kjjyDO.setKjjyVaos(salesDO.getLeftyuanyongVA());
+                kjjyDO.setKjjySphod(salesDO.getRightQJjy());
+                kjjyDO.setKjjySphos(salesDO.getLeftQJjy());
+                kjjyDO.setKjjyCylod(salesDO.getRightZJjy());
+                kjjyDO.setKjjyCylos(salesDO.getLeftZJjy());
+                kjjyDO.setKjjyAxialod(salesDO.getRightzhouxiangjy());
+                kjjyDO.setKjjyAxialos(salesDO.getLeftzhouxiangjy());
+                kjjyDO.setKjjyPrismod(salesDO.getRightsanlingjingjy());
+                kjjyDO.setKjjyPrismos(salesDO.getLeftsanlingjingjy());
+                kjjyDO.setKjjyJdod(salesDO.getRightjidijy());
+                kjjyDO.setKjjyJdos(salesDO.getLeftjidijy());
+                kjjyDO.setKjjyYytjod(salesDO.getRightyuanyongtjjy());
+                kjjyDO.setKjjyYytjos(salesDO.getLeftyuanyongtjjy());
+                kjjyDO.setKjjyTgod(salesDO.getRighttonggaojy());
+                kjjyDO.setKjjyTgos(salesDO.getLefttonggaojy());
+                kjjyDO.setKjjyVaod(salesDO.getRightyuanyongVAjy());
+                kjjyDO.setKjjyVaos(salesDO.getLeftyuanyongVAjy());
                 kjjyService.save(kjjyDO);
             } else if (salesDO.getRecipelwlType() == 2) {
                 KjyyDO kjyyDO = new KjyyDO();
                 kjyyDO.setCardNumber(salesDO.getMemberNumber());
                 kjyyDO.setKjyyPrescriptionType(salesDO.getRecipelType().toString());
                 kjyyDO.setKjyyOptometryName(salesDO.getSaleName());
-                kjyyDO.setKjyySphod(salesDO.getRightQJ());
-                kjyyDO.setKjyySphos(salesDO.getLeftQJ());
-                kjyyDO.setKjyyCylod(salesDO.getRightZJ());
-                kjyyDO.setKjyyCylos(salesDO.getLeftZJ());
-                kjyyDO.setKjyyAxialod(salesDO.getRightzhouxiang());
-                kjyyDO.setKjyyAxialos(salesDO.getLeftzhouxiang());
-                kjyyDO.setKjyyPrismod(salesDO.getRightsanlingjing());
-                kjyyDO.setKjyyPrismos(salesDO.getLeftsanlingjing());
-                kjyyDO.setKjyyJdod(salesDO.getRightjidi());
-                kjyyDO.setKjyyJdos(salesDO.getLeftjidi());
-                kjyyDO.setKjyyYytjod(salesDO.getRightyuanyongtj());
-                kjyyDO.setKjyyYytjos(salesDO.getLeftyuanyongtj());
-                kjyyDO.setKjyyTgod(salesDO.getRighttonggao());
-                kjyyDO.setKjyyTgos(salesDO.getLefttonggao());
-                kjyyDO.setKjyyVaod(salesDO.getRightyuanyongVA());
-                kjyyDO.setKjyyVaos(salesDO.getLeftyuanyongVA());
+                kjyyDO.setKjyySphod(salesDO.getRightQJyy());
+                kjyyDO.setKjyySphos(salesDO.getLeftQJyy());
+                kjyyDO.setKjyyCylod(salesDO.getRightZJyy());
+                kjyyDO.setKjyyCylos(salesDO.getLeftZJyy());
+                kjyyDO.setKjyyAxialod(salesDO.getRightzhouxiangyy());
+                kjyyDO.setKjyyAxialos(salesDO.getLeftzhouxiangyy());
+                kjyyDO.setKjyyPrismod(salesDO.getRightsanlingjingyy());
+                kjyyDO.setKjyyPrismos(salesDO.getLeftsanlingjingyy());
+                kjyyDO.setKjyyJdod(salesDO.getRightjidiyy());
+                kjyyDO.setKjyyJdos(salesDO.getLeftjidiyy());
+                kjyyDO.setKjyyYytjod(salesDO.getRightyuanyongtjyy());
+                kjyyDO.setKjyyYytjos(salesDO.getLeftyuanyongtjyy());
+                kjyyDO.setKjyyTgod(salesDO.getRighttonggaoyy());
+                kjyyDO.setKjyyTgos(salesDO.getLefttonggaoyy());
+                kjyyDO.setKjyyVaod(salesDO.getRightyuanyongVAyy());
+                kjyyDO.setKjyyVaos(salesDO.getLeftyuanyongVAyy());
                 kjyyService.save(kjyyDO);
             } else if (salesDO.getRecipelwlType() == 3) {
                 SgjjDO sgjjDO = new SgjjDO();
                 sgjjDO.setCardNumber(salesDO.getMemberNumber());
                 sgjjDO.setSgjjPrescriptionType(salesDO.getRecipelType().toString());
                 sgjjDO.setSgjjOptometryName(salesDO.getSaleName());
-                sgjjDO.setSgjjSphod(salesDO.getRightQJ());
-                sgjjDO.setSgjjSphos(salesDO.getLeftQJ());
-                sgjjDO.setSgjjCylod(salesDO.getRightZJ());
-                sgjjDO.setSgjjCylos(salesDO.getLeftZJ());
-                sgjjDO.setSgjjAxialod(salesDO.getRightzhouxiang());
-                sgjjDO.setSgjjAxialos(salesDO.getLeftzhouxiang());
-                sgjjDO.setSgjjYytjod(salesDO.getRightyuanyongtj());
-                sgjjDO.setSgjjYytjos(salesDO.getLeftyuanyongtj());
-                sgjjDO.setSgjjTgod(salesDO.getRighttonggao());
-                sgjjDO.setSgjjTgos(salesDO.getLefttonggao());
-                sgjjDO.setSgjjYyvaod(salesDO.getRightyuanyongVA());
-                sgjjDO.setSgjjYyvaos(salesDO.getLeftyuanyongVA());
+                sgjjDO.setSgjjSphod(salesDO.getRightQJsg());
+                sgjjDO.setSgjjSphos(salesDO.getLeftQJsg());
+                sgjjDO.setSgjjCylod(salesDO.getRightZJsg());
+                sgjjDO.setSgjjCylos(salesDO.getLeftZJsg());
+                sgjjDO.setSgjjAxialod(salesDO.getRightzhouxiangsg());
+                sgjjDO.setSgjjAxialos(salesDO.getLeftzhouxiangsg());
+                sgjjDO.setSgjjYytjod(salesDO.getRightyuanyongtjsg());
+                sgjjDO.setSgjjYytjos(salesDO.getLeftyuanyongtjsg());
+                sgjjDO.setSgjjTgod(salesDO.getRighttonggaosg());
+                sgjjDO.setSgjjTgos(salesDO.getLefttonggaosg());
+                sgjjDO.setSgjjYyvaod(salesDO.getRightyuanyongVAsg());
+                sgjjDO.setSgjjYyvaos(salesDO.getLeftyuanyongVAsg());
                 sgjjService.save(sgjjDO);
             } else if (salesDO.getRecipelwlType() == 4) {
                 ZyDO zyDO = new ZyDO();
                 zyDO.setCardNumber(salesDO.getMemberNumber());
                 zyDO.setZyPrescriptionType(salesDO.getRecipelType().toString());
                 zyDO.setZyOptometryName(salesDO.getSaleName());
-                zyDO.setZySphod(salesDO.getRightQJ());
-                zyDO.setZySphos(salesDO.getLeftQJ());
-                zyDO.setZyCylod(salesDO.getRightZJ());
-                zyDO.setZyCylos(salesDO.getLeftZJ());
-                zyDO.setZyAxialod(salesDO.getRightzhouxiang());
-                zyDO.setZyAxialos(salesDO.getLeftzhouxiang());
-                zyDO.setZyPrismod(salesDO.getRightsanlingjing());
-                zyDO.setZyPrismos(salesDO.getLeftsanlingjing());
-                zyDO.setZyJdod(salesDO.getRightjidi());
-                zyDO.setZyJdos(salesDO.getLeftjidi());
-                zyDO.setZyZytjod(salesDO.getRightyuanyongtj());
-                zyDO.setZyZytjos(salesDO.getLeftyuanyongtj());
-                zyDO.setZyTgod(salesDO.getRighttonggao());
-                zyDO.setZyTgos(salesDO.getLefttonggao());
-                zyDO.setZyVaod(salesDO.getRightyuanyongVA());
-                zyDO.setZyVaos(salesDO.getLeftyuanyongVA());
+                zyDO.setZySphod(salesDO.getRightQJzy());
+                zyDO.setZySphos(salesDO.getLeftQJzy());
+                zyDO.setZyCylod(salesDO.getRightZJzy());
+                zyDO.setZyCylos(salesDO.getLeftZJzy());
+                zyDO.setZyAxialod(salesDO.getRightzhouxiangzy());
+                zyDO.setZyAxialos(salesDO.getLeftzhouxiangzy());
+                zyDO.setZyPrismod(salesDO.getRightsanlingjingzy());
+                zyDO.setZyPrismos(salesDO.getLeftsanlingjingzy());
+                zyDO.setZyJdod(salesDO.getRightjidizy());
+                zyDO.setZyJdos(salesDO.getLeftjidizy());
+                zyDO.setZyZytjod(salesDO.getRightyuanyongtjzy());
+                zyDO.setZyZytjos(salesDO.getLeftyuanyongtjzy());
+                zyDO.setZyTgod(salesDO.getRighttonggaozy());
+                zyDO.setZyTgos(salesDO.getLefttonggaozy());
+                zyDO.setZyVaod(salesDO.getRightyuanyongVAzy());
+                zyDO.setZyVaos(salesDO.getLeftyuanyongVAzy());
                 zyService.save(zyDO);
             } else if (salesDO.getRecipelwlType() == 5) {
                 RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
                 rxjmjcjDO.setCardNumber(salesDO.getMemberNumber());
                 rxjmjcjDO.setRxPrescriptionType(salesDO.getRecipelType().toString());
                 rxjmjcjDO.setRxOptometryName(salesDO.getSaleName());
-                rxjmjcjDO.setRxSphod(salesDO.getRightQJ());
-                rxjmjcjDO.setRxSphos(salesDO.getLeftQJ());
-                rxjmjcjDO.setRxCylod(salesDO.getRightZJ());
-                rxjmjcjDO.setRxCylos(salesDO.getLeftZJ());
-                rxjmjcjDO.setRxAxialod(salesDO.getRightzhouxiang());
-                rxjmjcjDO.setRxAxialos(salesDO.getLeftzhouxiang());
-                rxjmjcjDO.setRxZjod(salesDO.getRightZJ());
-                rxjmjcjDO.setRxZjos(salesDO.getLeftZJ());
-                rxjmjcjDO.setRxVaod(salesDO.getRightyuanyongVA());
-                rxjmjcjDO.setRxVaos(salesDO.getLeftyuanyongVA());
+                rxjmjcjDO.setRxSphod(salesDO.getRightQJyx());
+                rxjmjcjDO.setRxSphos(salesDO.getLeftQJyx());
+                rxjmjcjDO.setRxCylod(salesDO.getRightZJyx());
+                rxjmjcjDO.setRxCylos(salesDO.getLeftZJyx());
+                rxjmjcjDO.setRxAxialod(salesDO.getRightzhouxiangyx());
+                rxjmjcjDO.setRxAxialos(salesDO.getLeftzhouxiangyx());
+                rxjmjcjDO.setRxZjod(salesDO.getRightzhijingyx());
+                rxjmjcjDO.setRxZjos(salesDO.getLeftzhijingyx());
+                rxjmjcjDO.setRxVaod(salesDO.getRightYingXingVAyx());
+                rxjmjcjDO.setRxVaos(salesDO.getLeftYingXingVAyx());
                 rxjmjcjService.save(rxjmjcjDO);
             } else if (salesDO.getRecipelwlType() == 7) {
                 SjxlDO sjxlDO = new SjxlDO();
                 sjxlDO.setCardNumber(salesDO.getMemberNumber());
                 sjxlDO.setSjxlPrescriptionType(salesDO.getRecipelType().toString());
                 sjxlDO.setSjxlOptometryName(salesDO.getSaleName());
-                sjxlDO.setSjxlSphod(salesDO.getRightQJ());
-                sjxlDO.setSjxlSphos(salesDO.getLeftQJ());
-                sjxlDO.setSjxlCylod(salesDO.getRightZJ());
-                sjxlDO.setSjxlCylos(salesDO.getLeftZJ());
-                sjxlDO.setSjxlAxialod(salesDO.getRightzhouxiang());
-                sjxlDO.setSjxlAxialos(salesDO.getLeftzhouxiang());
-                sjxlDO.setSjxlJdod(salesDO.getRightjidi());
-                sjxlDO.setSjxlJdos(salesDO.getLeftjidi());
-                sjxlDO.setSjxlYytjod(salesDO.getRightyuanyongtj());
-                sjxlDO.setSjxlYytjos(salesDO.getLeftyuanyongtj());
-                sjxlDO.setSjxlYyvaod(salesDO.getRightyuanyongVA());
-                sjxlDO.setSjxlYyvaos(salesDO.getLeftyuanyongVA());
+                sjxlDO.setSjxlSphod(salesDO.getRightQJxl());
+                sjxlDO.setSjxlSphos(salesDO.getLeftQJxl());
+                sjxlDO.setSjxlCylod(salesDO.getRightZJxl());
+                sjxlDO.setSjxlCylos(salesDO.getLeftZJxl());
+                sjxlDO.setSjxlAxialod(salesDO.getRightzhouxiangxl());
+                sjxlDO.setSjxlAxialos(salesDO.getLeftzhouxiangxl());
+                sjxlDO.setSjxlJdod(salesDO.getRightjidixl());
+                sjxlDO.setSjxlJdos(salesDO.getLeftjidixl());
+                sjxlDO.setSjxlYytjod(salesDO.getRightSJXLyytj());
+                sjxlDO.setSjxlYytjos(salesDO.getLeftSJXLyytj());
+                sjxlDO.setSjxlYyvaod(salesDO.getRightSJXLyyva());
+                sjxlDO.setSjxlYyvaos(salesDO.getLeftSJXLyyva());
                 sjxlService.save(sjxlDO);
             } else if (salesDO.getRecipelwlType() == 10) {
                 RgpDO rgpDO = new RgpDO();
@@ -450,9 +450,9 @@ public class StoreSalesController {
         costService.save(costDO);
         salesDO.setPeijingTime(new Date());
         if (null != salesDO.getGoodsNum()){
-            String goodsNum = salesDO.getGoodsNum();
+            String goodsCode = salesDO.getGoodsCode();
             String storeDesc = salesDO.getStoreDescribe();
-            String[] goodsStr = goodsNum.split(",");
+            String[] goodsStr = goodsCode.split(",");
             String[] goodsDescribe = storeDesc.split(",");
             for (int e=0;e<goodsDescribe.length;e++){
                 if ("镜架".equals(goodsDescribe[e])){
@@ -727,15 +727,15 @@ public class StoreSalesController {
         //query.put("goodsType","镜架");
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        String positionName = "";
+        Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
-                positionName = positionDO.getPositionName();
+                positionId = positionDO.getPositionId();
             }
         }
-        query.put("positionName", positionName);
+        query.put("positionId", positionId);
 //        query.put("goodsType","1");
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
@@ -783,11 +783,11 @@ public class StoreSalesController {
         if (null != departNumber) {
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
-            String positionName = "";
+            Long positionId = null;
             if (null != positionDO) {
-                positionName = positionDO.getPositionName();
+                positionId = positionDO.getPositionId();
             }
-            maps.put("positionName", positionName);
+            maps.put("positionId", positionId);
         }
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
@@ -848,15 +848,15 @@ public class StoreSalesController {
         query.put("partsStyle", "框镜");
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        String positionName = "";
+        Long positionId = null;
         if(null != departNumber){
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
-                positionName = positionDO.getPositionName();
+                positionId = positionDO.getPositionId();
             }
         }
-        query.put("positionName", positionName);
+        query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
         for (GoodsDO goodsDO : goodsDOList){
@@ -894,15 +894,15 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        String positionName = "";
+        Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
-                positionName = positionDO.getPositionName();
+                positionId = positionDO.getPositionId();
             }
         }
-        query.put("positionName", positionName);
+        query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
         for (GoodsDO goodsDO : goodsDOList){
@@ -940,15 +940,15 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        String positionName = "";
+        Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
-                positionName = positionDO.getPositionName();
+                positionId = positionDO.getPositionId();
             }
         }
-        query.put("positionName", positionName);
+        query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
         for (GoodsDO goodsDO : goodsDOList){
@@ -986,16 +986,16 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        String positionName = "";
+        Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
 
             if (null != positionDO) {
-                positionName = positionDO.getPositionName();
+                positionId = positionDO.getPositionId();
             }
         }
-        query.put("positionName", positionName);
+        query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
         for (GoodsDO goodsDO : goodsDOList){
@@ -1033,15 +1033,15 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        String positionName = "";
+        Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
-                positionName = positionDO.getPositionName();
+                positionId = positionDO.getPositionId();
             }
         }
-        query.put("positionName", positionName);
+        query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
         for (GoodsDO goodsDO : goodsDOList){
@@ -1079,15 +1079,15 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        String positionName = "";
+        Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
-                positionName = positionDO.getPositionName();
+                positionId = positionDO.getPositionId();
             }
         }
-        query.put("positionName", positionName);
+        query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
         for (GoodsDO goodsDO : goodsDOList){
@@ -1125,16 +1125,16 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        String positionName = "";
+        Long positionId = null;
         if (null != departNumber) {
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
-                positionName = positionDO.getPositionName();
+                positionId = positionDO.getPositionId();
             }
         }
 
-        query.put("positionName", positionName);
+        query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
         for (GoodsDO goodsDO : goodsDOList){
@@ -1194,32 +1194,20 @@ public class StoreSalesController {
             }
             if ("0".equals(params.get("yxType"))) {
                 String departNumber = ShiroUtils.getUser().getStoreNum();
-                String positionName = "";
                 if (null != departNumber){
                     Map<String, Object> map = new HashMap<>();
                     map.put("departNumber", departNumber);
-                    PositionDO positionDO = stockService.findPosition(map);
-                    if (null != positionDO) {
-                        positionName = positionDO.getPositionName();
-                    }
                 }
-                query.put("positionName", positionName);
                 query.put("goodsType",goodsId);
                 List<StockDO> yxcpDOList = stockService.listYxcp(query);
                 int total = stockService.countYxcp(query);
                 pageUtils = new PageUtils(yxcpDOList, total);
             } else if ("1".equals(params.get("yxType"))) {
                 String departNumber = ShiroUtils.getUser().getStoreNum();
-                String positionName = "";
                 if (null != departNumber){
                     Map<String, Object> map = new HashMap<>();
                     map.put("departNumber", departNumber);
-                    PositionDO positionDO = stockService.findPosition(map);
-                    if (null != positionDO) {
-                        positionName = positionDO.getPositionName();
-                    }
                 }
-                maps.put("positionName", positionName);
                 maps.put("goodsType",goodsId);
                 List<StockDO> yxdzDOList = stockService.listYxdz(maps);
                 int total = stockService.countYxdz(maps);
@@ -1257,15 +1245,15 @@ public class StoreSalesController {
         query.put("partsStyle", "隐形");
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
-        String positionName = "";
+        Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
-                positionName = positionDO.getPositionName();
+                positionId = positionDO.getPositionId();
             }
         }
-        query.put("positionName", positionName);
+        query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         Integer goodsId=null;
         for (GoodsDO goodsDO : goodsDOList){
@@ -1307,11 +1295,11 @@ public class StoreSalesController {
         Map<String, Object> map = new HashMap<>();
         map.put("departNumber", departNumber);
         PositionDO positionDO = stockService.findPosition(map);
-        String positionName = "";
+        Long positionId = null;
         if (null != positionDO) {
-            positionName = positionDO.getPositionName();
+            positionId = positionDO.getPositionId();
         }
-        query.put("positionName", positionName);
+        query.put("positionId", positionId);
         List<StockDO> giveawayDOList = stockService.listZengpin(query);
         int total = stockService.countZengpin(query);
         PageUtils pageUtils = new PageUtils(giveawayDOList, total);

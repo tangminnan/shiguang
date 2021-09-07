@@ -263,7 +263,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
         <choose>
@@ -297,7 +297,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
     </select>
@@ -326,7 +326,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph =  #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
             <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
@@ -380,7 +380,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph =  #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
             <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
@@ -392,11 +392,12 @@
     <!-- 镜片(订做)查询 -->
     <select id="listJpdz" resultType="com.shiguang.stock.domain.StockDO">
         select
-        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,st.`classtype`,s.`sph`,c.`cyl`,r.`refractivityvalue`,pl.`light_name`,l.`lens_name`,f.`function_name`,g.`gradual_name`,
+        j.`id`,j.`produc_num` as goodsNum,j.`produc_code` as goodsCode,j.`produc_name` as goodsName,1 as goodsCount,2 as classtype,j.`mfrsid`,j.`retail_price`,
+        u.`unitname` as unit,s.`sph`,c.`cyl`,r.`refractivityvalue`,pl.`light_name`,l.`lens_name`,f.`function_name`,g.`gradual_name`,
         j.`sph_up`,j.`sph_down`,j.`cyl_up`,j.`cyl_down`,j.`lightbelow_right`,j.`lightbelow_left`
-        from stock st left join aa_jpdz j on j.produc_num = st.goods_num
+        from aa_jpdz j
         left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
+        left join c_unit u on u.unitid = j.unitid
         left join c_refractivity r on r.refractivityid = j.refractivityid
         left join p_light pl on pl.light_id = j.light_id
         left join p_lens l on l.lens_id = j.lens_id
@@ -404,19 +405,11 @@
         left join p_function f on f.function_id = j.function_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
-            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
-            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
-            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
-            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
-            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
-            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
-            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
-            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="goodsNum != null and goodsNum != ''">and j.`produc_num` = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.`produc_code` = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and j.`produc_name` = #{goodsName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &gt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &lt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_up &gt;= #{rightYuanYongZJ}</if>
@@ -437,15 +430,13 @@
             <!--<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%',-->
                 <!--#{leftYuanYongZJ},'%')-->
             <!--</if>-->
-            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                GROUP BY st.goods_name
-                order by st.id desc
+                order by j.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -455,8 +446,9 @@
 
     <select id="countJpdz" resultType="int">
         select count(*)
-        from stock st left join aa_jpdz j on j.produc_num = st.goods_num
+        from aa_jpdz j
         left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
+        left join c_unit u on u.unitid = j.unitid
         left join c_refractivity r on r.refractivityid = j.refractivityid
         left join p_light pl on pl.light_id = j.light_id
         left join p_lens l on l.lens_id = j.lens_id
@@ -464,19 +456,11 @@
         left join p_function f on f.function_id = j.function_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
-            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
-            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
-            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
-            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
-            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
-            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
-            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
-            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="goodsNum != null and goodsNum != ''">and j.`produc_num` = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.`produc_code` = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and j.`produc_name` = #{goodsName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &gt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &lt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_up &gt;= #{rightYuanYongZJ}</if>
@@ -486,18 +470,17 @@
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_up &gt;= #{leftYuanYongZJ}</if>
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_down &lt;= #{leftYuanYongZJ}</if>
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%',-->
-                <!--#{rightYuanYongQJ},'%')-->
+            <!--#{rightYuanYongQJ},'%')-->
             <!--</if>-->
             <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl like concat('%',-->
-                <!--#{rightYuanYongZJ},'%')-->
+            <!--#{rightYuanYongZJ},'%')-->
             <!--</if>-->
             <!--<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph like concat('%',-->
-                <!--#{leftYuanYongQJ},'%')-->
+            <!--#{leftYuanYongQJ},'%')-->
             <!--</if>-->
             <!--<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl like concat('%',-->
-                <!--#{leftYuanYongZJ},'%')-->
+            <!--#{leftYuanYongZJ},'%')-->
             <!--</if>-->
-            and st.goods_count > 0
         </where>
     </select>
 
@@ -522,7 +505,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
         <choose>
@@ -556,7 +539,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
     </select>
@@ -581,7 +564,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
         <choose>
@@ -614,7 +597,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
     </select>
@@ -639,7 +622,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
         <choose>
@@ -672,7 +655,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
     </select>
@@ -697,7 +680,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
         <choose>
@@ -730,7 +713,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
     </select>
@@ -755,7 +738,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
         <choose>
@@ -788,7 +771,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
     </select>
@@ -813,7 +796,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
         <choose>
@@ -846,7 +829,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             and st.goods_count > 0
         </where>
     </select>
@@ -872,7 +855,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             <if test="stores != null and stores != ''">and FIND_IN_SET(#{stores},pr.stores)</if>
             and st.goods_count > 0
         </where>
@@ -906,7 +889,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             <if test="stores != null and stores != ''">and FIND_IN_SET(#{stores},pr.stores)</if>
             and st.goods_count > 0
         </where>
@@ -935,7 +918,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph =  #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
             <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
@@ -974,7 +957,7 @@
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph =  #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
             <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
@@ -987,27 +970,19 @@
     <!-- 隐形订做查询 -->
     <select id="listYxdz" resultType="com.shiguang.stock.domain.StockDO">
         select
-        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,st.`classtype`,t.`type_name`,u.`usage_name`,y.`sph_up`,y.`sph_down`,y.`cyl_up`,y.`cyl_down`,
+        y.`id`,y.`produc_num` as goodsNum,y.`produc_code` as goodsCode,y.`produc_name` as goodsName,1 as goodsCount,2 as classtype,y.`mfrsid`,y.`retail_price`,
+        t.`type_name`,u.`usage_name`,y.`sph_up`,y.`sph_down`,y.`cyl_up`,y.`cyl_down`,
         y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,y.`curvature_er`,s.`sph`,c.`cyl`
-        from stock st left join aa_yxdz y on y.produc_num = st.goods_num left join p_type t on t.type_id = y.type_id
+        from aa_yxdz y  left join p_type t on t.type_id = y.type_id
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
         left join p_usage u on u.usage_id = y.usage_id
         <where>
-            <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
-            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
-            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
-            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
-            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
-            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
-            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
-            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
-            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="id != null and id != ''">and y.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and y.`produc_num` = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and y.`produc_code` = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and y.`produc_name` = #{goodsName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and y.retail_price = #{retailPrice}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &gt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &lt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_up &gt;= #{rightYuanYongZJ}</if>
@@ -1016,14 +991,13 @@
             <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_down &lt;= #{leftYuanYongQJ}</if>
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_up &gt;= #{leftYuanYongZJ}</if>
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_down &lt;= #{leftYuanYongZJ}</if>
-            and st.goods_count > 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by st.id desc
+                order by y.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1033,24 +1007,16 @@
 
     <select id="countYxdz" resultType="int">
         select count(*)
-        from stock st left join aa_yxdz y on y.produc_num = st.goods_num left join p_type t on t.type_id = y.type_id
+        from aa_yxdz y  left join p_type t on t.type_id = y.type_id
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
         left join p_usage u on u.usage_id = y.usage_id
         <where>
-            <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
-            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
-            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
-            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
-            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
-            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
-            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
-            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
-            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
-            <if test="positionName != null and positionName != ''">and st.position_name = #{positionName}</if>
+            <if test="id != null and id != ''">and y.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and y.`produc_num` = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and y.`produc_code` = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and y.`produc_name` = #{goodsName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
+            <if test="retailPrice != null and retailPrice != ''">and y.retail_price = #{retailPrice}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &gt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &lt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_up &gt;= #{rightYuanYongZJ}</if>
@@ -1059,7 +1025,6 @@
             <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_down &lt;= #{leftYuanYongQJ}</if>
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_up &gt;= #{leftYuanYongZJ}</if>
             <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_down &lt;= #{leftYuanYongZJ}</if>
-            and st.goods_count > 0
         </where>
     </select>
 
@@ -1071,6 +1036,16 @@
             and position_order = '1'
         </where>
     </select>
+
+    <!--更新库存  -->
+    <update id="updateStockCCount" parameterType="com.shiguang.stock.domain.StockDO">
+        update stock
+        <set>
+            <if test="goodsCount != null">`goods_count` = #{goodsCount}, </if>
+        </set>
+        where position_id = #{positionId} and goods_code = #{goodsCode}
+    </update>
+
 
     <select id="getGoodsNum" resultType="com.shiguang.stock.domain.StockDO">
     select `id`,`goods_code`, goods_count as goodsCount  from stock where goods_code = #{value} group by goods_code

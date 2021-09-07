@@ -141,6 +141,8 @@ public class GlassessController {
                 model.addAttribute("paymodel","医院收费处");
             } else if (settlementDO1.getPayModel() == 3){
                 model.addAttribute("paymodel","一卡通");
+            } else if (settlementDO1.getPayModel() == 4){
+                model.addAttribute("paymodel","现金");
             }
         }
         model.addAttribute("settlementDO1",settlementDO1);
