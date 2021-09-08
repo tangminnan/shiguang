@@ -101,6 +101,11 @@ public class YxcpDO implements Serializable {
         this.classtype = classtype;
     }
 
+    //盘盈盘亏的商品数量
+    private String inventoryCount;
+    public void setInventoryCount(String inventoryCount){this.inventoryCount = inventoryCount;}
+    public String getInventoryCount() {return inventoryCount;}
+
     /**
      * 设置：隐形成品id
      */

@@ -87,9 +87,6 @@ function validateRule() {
 			name : {
 				required : true
 			},
-            cardNumber : {
-                required : true
-			},
             sex : {
                 required : true
 			},
@@ -125,9 +122,6 @@ function validateRule() {
 			name : {
 				required : icon + "请输入姓名"
 			},
-            cardNumber : {
-                required : icon + "请输入会员卡号"
-            },
             sex : {
                 required : icon + "请选择会员性别"
             },

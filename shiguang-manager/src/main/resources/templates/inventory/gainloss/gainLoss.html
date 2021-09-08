@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-right">
+							<button shiro:hasPermission="information:gainLoss:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>盘盈盘亏新增
+							</button>
+							<button shiro:hasPermission="information:gainLoss:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
+						</div>
+						<br>
+						<div class="columns pull-left" style="display:flex; margin-top:20px;">
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						<div class="columns pull-right nopadding">
+							<input id="documentNo" type="text" class="form-control"
+								placeholder="单据编号">
+						</div>
+						<div class="columns pull-right nopadding">
+							<input id="inventoryNumber" type="text" class="form-control"
+								   placeholder="盘点单号">
+						</div>
+						<div class="columns pull-right nopadding">
+							<select class="form-control" id="documentType">
+								<option value="">请选择</option>
+								<option value="盘盈">盘盈</option>
+								<option value="盘亏">盘亏</option>
+							</select>
+						</div>
+					</div>
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:gainLoss:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:gainLoss:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:gainLoss:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/inventory/gainLoss/gainLoss.js"></script>
+</body>
+</html>

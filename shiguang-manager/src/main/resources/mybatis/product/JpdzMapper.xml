@@ -140,7 +140,7 @@
         m.mfrsname,b.brandname,u.unitnum,
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`factory`,j.`produc_factory`,
         j.`proid`,j.`unitid`,j.`sph_id`,j.`span_id`,j.`cyl_id`,j.`sph_up`,j.`sph_down`,j.`sph_span`,j.`cyl_up`,j.`cyl_down`,
-        j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name`,
+        j.`cyl_span`,j.`lightbelow_id`,j.`lightbelow_right`,j.`lightbelow_left`,j.`lens_id`,l.`lens_name`,j.`cycle`,j.`light_id`,pl.`light_name` as lightName,
         j.`gradual_id`,g.`gradual_name`,j.`refractivityid`,r.`refractivityvalue`,j.`function_id`,f.`function_name`,j.`combined_photometry`,j.`can`,j.`tax`,j.`tax_price`,
         j.`trade_price`,j.`transfer_price`,j.`retail_price`
         from aa_jpdz j
@@ -156,9 +156,8 @@
         left join a_cyl cyl on cyl.cyl_id=j.cyl_down
         left join a_sph ph on ph.sph_id=j.sph_up
         left join a_sph sph on sph.sph_id=j.sph_down
-        left join a_lightbelow lt on lt.lightbelow_id=j.lightbelow_left
+        left join a_lightbelow lt on lt.lightbelow_id=j.lightbelow_id
         left join a_lightbelow ltb on ltb.lightbelow_id=j.lightbelow_right
-        left join p_light lig on lig.light_id=j.light_id
         <where>
             <if test="id != null and id != ''">and j.id = #{id}</if>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>

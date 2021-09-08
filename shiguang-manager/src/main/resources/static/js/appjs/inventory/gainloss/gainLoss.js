@@ -1,5 +1,5 @@
 
-var prefix = "/information/saleReport"
+var prefix = "/information/gainLoss"
 $(function() {
 	load();
 });
@@ -33,7 +33,9 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                cardNumber:$("#cardNumber").val()
+                                documentNo:$("#documentNo").val(),
+                                inventoryNumber: $("#inventoryNumber").val(),
+                                documentType: $("#documentType").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -45,62 +47,56 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-								{
-									field : 'cardNumber',
-									title : '会员卡号',
-									align : 'center'
+																{
+									field : 'documentNo', 
+									title : '单据编号' 
 								},
-								{
-									field : 'name',
-									title : '姓名',
-									align : 'center'
+																{
+									field : 'inventoryNumber', 
+									title : '盘点单号' 
 								},
-								{
-									field : 'sex',
-									title : '性别',
-									align : 'center',
-									formatter : function(value, row, index) {
-										if(value == '0'){
-											return '<span class="label">男</span>';
-										}else if(value == '1'){
-											return '<span class="label">女</span>';
-
-										}
-									}
+																{
+									field : 'inventoryType', 
+									title : '盘点类型' 
 								},
-								{
-									field : 'age',
-									title : '年龄',
-									align : 'center'
+																{
+									field : 'documentType', 
+									title : '单据类型' 
+								},
+																{
+									field : 'documentDate', 
+									title : '单据日期' 
+								},
+																{
+									field : 'recenuePosition', 
+									title : '收入/发出仓位' 
+								},
+																{
+									field : 'singleName', 
+									title : '制单人' 
 								},
 																{
 									title : '操作',
-									field : 'cardNumber',
+									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-                                        var e;
-                                        if (row.isSale == 1){
-                                            e = '<a class="btn btn-primary btn-xs" href="#" title="退款"  mce_href="#" ' +
-                                                'onclick="tuikuan(\''+ value+ '\',\''+row.saleNumber+'\')" style="text-decoration: none;">退款</a>';
-										} else if (row.isSale == 2){
-                                            e = '<a class="btn btn-primary btn-xs" href="#" title="已退款"  mce_href="#" style="text-decoration: none;">已退款</a>';
-										}
-											   // e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" ' +
-												//    'onclick="edit(\''+value+'\',\''+row.saleNumber+'\')"><i class="fa fa-edit"></i></a> ';
-										// else if (row.isSale == 1) {
-                                         //       e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" ' +
-										// 		   'onclick="detail(\''+value+'\',\''+row.saleNumber+'\',\''+row.costId+'\')" style="text-decoration: none;">详情</a>';
-                                         //       t = '<a class="btn btn-primary btn-xs" href="#" title="打印"  mce_href="#" ' +
-                                         //        'onclick="dayin(\''+row.type+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印</a>';
-										// }
-										return e;
+										var e = '<a class="btn btn-primary btn-xs" href="#" mce_href="#" title="详情" onclick="detail(\''
+												+ row.id
+												+ '\')" style="text-decoration: none;">详情</a> ';
+										// var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+										// 		+ row.id
+										// 		+ '\')"><i class="fa fa-remove"></i></a> ';
+										// var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+										// 		+ row.id
+										// 		+ '\')"><i class="fa fa-key"></i></a> ';
+										return e ;
 									}
-								} ]
+								}
+								]
 					});
 }
 function reLoad() {
-	// $('#exampleTable').bootstrapTable('refresh');
-    window.open("/information/saleReport/reportList");
+	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
 	var toIndex = layer.open({
@@ -111,62 +107,29 @@ function add() {
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
-    layer.full(toIndex)
+	layer.full(toIndex);
 }
-function edit(cardNumber,saleNumber) {
-    var toIndex = layer.open({
+function edit(id) {
+	layer.open({
 		type : 2,
-		title : '退款',
+		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '1500px', '520px' ],
-		content : prefix + '/edit/'+cardNumber+'/'+ saleNumber // iframe的url
+		area : [ '800px', '520px' ],
+		content : prefix + '/edit/' + id // iframe的url
 	});
-    layer.full(toIndex)
 }
 
-function tuikuan(cardNumber,saleNumber) {
-    layer.confirm('确定要退款？', {
-        btn : [ '确定', '取消' ]
-    }, function() {
-        $.ajax({
-            url : prefix+"/tuikuan",
-            type : "post",
-            data : {
-                'cardNumber' : cardNumber,
-				'saleNumber' : saleNumber
-            },
-            success : function(r) {
-                if (r.code==0) {
-                    layer.msg(r.msg);
-                    reLoad();
-                }else{
-                    layer.msg(r.msg);
-                }
-            }
-        });
-    })
-}
-
-
-function detail(cardNumber,saleNumber,costId) {
+function detail(id) {
     var toIndex = layer.open({
         type : 2,
         title : '详情',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
-        area : [ '1500px', '520px' ],
-        content : prefix + '/detail/' + cardNumber+'/'+ saleNumber+'/'+costId // iframe的url
+        area : [ '800px', '520px' ],
+        content : prefix + '/detail/' + id // iframe的url
     });
-    layer.full(toIndex)
-}
-
-function dayin(type,saleNumber){
-	if (type == "检查单"){
-        window.open("/information/settlement/jianchadayin?saleNumber="+saleNumber);
-	} else if (type == "配镜单") {
-        window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
-	}
+    layer.full(toIndex);
 }
 
 function remove(id) {

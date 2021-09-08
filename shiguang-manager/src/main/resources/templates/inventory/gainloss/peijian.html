@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+	<div class="col-sm-12">
+		<div class="ibox">
+			<div class="ibox-body">
+				<div class="fixed-table-toolbar">
+					<div class="columns pull-left">
+						<!--<button shiro:hasPermission="information:store:add" type="button" class="btn  btn-primary" onclick="add()">-->
+							<!--<i class="fa fa-plus" aria-hidden="true"></i>添加-->
+						<!--</button>-->
+						<button shiro:hasPermission="information:gainLoss:batchSelect" type="button" class="btn  btn-primary"
+								onclick="batchSelect()">
+							<i class="fa fa-plus" aria-hidden="true"></i>确定
+						</button>
+					</div>
+					<div class="columns pull-right">
+						<button class="btn btn-success" onclick="reLoad()">查询</button>
+					</div>
+					<div class="columns pull-right col-md-2 nopadding">
+						<input id="goodsNum" type="text" class="form-control"
+							   placeholder="商品代码">
+						<input id="goodsType" th:value="${goodsType}" type="hidden" >
+					</div>
+					<div class="columns pull-right col-md-2 nopadding">
+						<input id="goodsName" type="text" class="form-control"
+							   placeholder="商品名称">
+					</div>
+				</div>
+				<table id="exampleTable" data-mobile-responsive="true">
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+	<script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+	</script>
+</div>
+<div shiro:hasPermission="information:store:edit">
+	<script type="text/javascript">
+        s_edit_h = '';
+	</script>
+</div>
+<div shiro:hasPermission="information:store:remove">
+	<script type="text/javascript">
+        var s_remove_h = '';
+	</script>
+</div>
+<div shiro:hasPermission="information:store:resetPwd">
+	<script type="text/javascript">
+        var s_resetPwd_h = '';
+	</script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/inventory/gainLoss/peijian.js"></script>
+</body>
+</html>

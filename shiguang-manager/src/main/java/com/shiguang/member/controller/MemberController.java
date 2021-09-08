@@ -177,10 +177,15 @@ public class MemberController {
             if (list.size() > 0){
                 return R.error("会员卡号已存在");
             }
-        }
-        if (member.getMemberOption() == 1){
+        } else {
             member.setCardNumber("H"+GuuidUtil.getUUID());
         }
+        if ("".equals(member.getCardType())){
+            member.setCardType("普通卡");
+        }
+//        if (member.getMemberOption() == 1){
+//            member.setCardNumber("H"+GuuidUtil.getUUID());
+//        }
         member.setStatus(0L);
         member.setState(1L);
         if (null != ShiroUtils.getUser().getStoreNum()){

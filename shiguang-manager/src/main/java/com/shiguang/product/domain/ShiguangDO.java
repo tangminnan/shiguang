@@ -67,6 +67,10 @@ public class ShiguangDO implements Serializable {
     private Long xsstate;
     //状态(0:删除1:未删除)
     private Long state;
+    //盘盈盘亏的商品数量
+    private String inventoryCount;
+    public void setInventoryCount(String inventoryCount){this.inventoryCount = inventoryCount;}
+    public String getInventoryCount() {return inventoryCount;}
 
     /**
      * 设置：视光id

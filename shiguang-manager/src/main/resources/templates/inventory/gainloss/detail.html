@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>盘盈盘亏新增</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+	<div class="new_h3">盘盈盘亏新增</div>
+
+	<!--检查条件-->
+	<div class="m40 tabS PHGL">
+		<h3>检查条件</h3>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr>
+				<td>单据编号：</td>
+				<td><span th:text="${gainLoss.documentNo}"></span></td>
+				<td>盘点单号：</td>
+				<td><span th:text="${gainLoss.inventoryNumber}"></span></td>
+				<td>单据类型：</td>
+				<td><span th:text="${gainLoss.documentType}"></span></td>
+			</tr>
+			<tr>
+				<td>所属部门：</td>
+				<td><span th:text="${gainLoss.departmentName}"></span></td>
+				<td>发出仓位：</td>
+				<td><span th:text="${gainLoss.recenuePosition}"></span></td>
+				<td>盘点类型：</td>
+				<td><span th:text="${gainLoss.inventoryType}"></span></td>
+			</tr>
+			<tr>
+				<td>制单人</td>
+				<td><span th:text="${gainLoss.singleName}"></span></td>
+				<td>单据日期</td>
+				<td><span th:text="${gainLoss.documentTime}"></span></td>
+			</tr>
+			<tr>
+				<td>备注：</td>
+				<td><span th:text="${gainLoss.remark}"></span></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--商品信息-->
+	<div class="m40 tabS SPmsg">
+		<h3>商品信息</h3>
+		<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+			<tbody id="inventoryId">
+			<tr class="thead">
+				<td><input type="checkbox" /></td>
+				<td>商品代码</td>
+				<td>商品条码</td>
+				<td>商品名称</td>
+				<td>型号</td>
+				<td>数量</td>
+			</tr>
+			<!--<tr>-->
+			<!--<td><input type="checkbox" /></td>-->
+			<!--<td>123569875425</td>-->
+			<!--<td>名称名称每次</td>-->
+			<!--<td style="width: 25%;">-->
+			<!--<select>-->
+			<!--<option value="张三">张三</option>-->
+			<!--<option value="李四">李四</option>-->
+			<!--</select>-->
+			<!--<select>-->
+			<!--<option value="张三">张三</option>-->
+			<!--<option value="李四">李四</option>-->
+			<!--</select>-->
+			<!--</td>-->
+			<!--<td><input type="text" name="remark"></td>-->
+			<!--<td><input type="text"></td>-->
+			<!--<td><input type="text"></td>-->
+			<!--<td>-->
+			<!--<select>-->
+			<!--<option value="报残">报残</option>-->
+			<!--<option value="退回">退回</option>-->
+			<!--</select>-->
+			<!--</td>-->
+			<!--</tr>-->
+			<!--<tr style="font-weight:bold;font-size: 15px;">-->
+			<!--<td colspan="12" style="text-align:right;">合计：</td>-->
+			<!--<td>156698</td>-->
+			<!--</tr>-->
+			</tbody>
+		</table>
+		<div class="Cbtn buyBtns">
+			<input type="submit" class="H_bc" value="保存" />
+			<!--<input type="checkbox" id="HHbc" /> <label for="HHbc">保存并审核</label>-->
+		</div>
+	</div>
+
+</form>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/inventory/gainLoss/add.js"></script>
+<script type="text/javascript" src="/js/appjs/inventory/gainLoss/barcode.js"></script>
+<script th:inline="javascript">
+    //商品信息
+    var goodsList = [[${goodsList}]];
+</script>
+<script type="text/javascript">
+    var html = "";
+	for (var i=0;i<goodsList.length;i++){
+		html = "<tr><td><input type='checkbox' /></td>";
+		html += "<td>"+goodsList[i].producNum+"</td>";
+		html += "<td>"+goodsList[i].producCode+"</td>";
+		html += "<td>"+goodsList[i].producName+"</td>";
+		html += "<td>"+goodsList[i].producFactory+"</td>";
+		html += "<td>"+goodsList[i].inventoryCount+"</td></tr>";
+		$("#inventoryId").append(html);
+	}
+
+</script>
+</body>
+</html>
