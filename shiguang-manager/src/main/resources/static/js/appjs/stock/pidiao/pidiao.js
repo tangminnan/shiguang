@@ -44,25 +44,25 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-								{
-									checkbox : true
-								},
+								// {
+								// 	checkbox : true
+								// },
 								// 								{
 								// 	field : 'id',
 								// 	title : '批调id'
 								// },
-								// 								{
-								// 	field : 'pidiaoNumber',
-								// 	title : '批调单号'
-								// },
+																{
+									field : 'pidiaoNumber',
+									title : '批调单号'
+								},
 								// 								{
 								// 	field : 'guanlianNumber',
 								// 	title : '关联单号'
 								// },
-								// 								{
-								// 	field : 'outDepartment',
-								// 	title : '发出部门'
-								// },
+																{
+									field : 'outcw',
+									title : '发出仓位'
+								},
 								// 								{
 								// 	field : 'outPosition',
 								// 	title : '发出仓位'
@@ -75,10 +75,10 @@ function load() {
 								// 	field : 'inCompany',
 								// 	title : '接收公司'
 								// },
-								// 								{
-								// 	field : 'inDepartment',
-								// 	title : '接收部门'
-								// },
+																{
+									field : 'incw',
+									title : '接收仓位'
+								},
 																{
 									field : 'zhidanPeople', 
 									title : '制单人' 
@@ -87,42 +87,39 @@ function load() {
 									field : 'danjuDay', 
 									title : '单据日期' 
 								},
+								// 								{
+								// 	field : 'outsourcingNumber',
+								// 	title : '委外收货单'
+								// },
+
+								// 								{
+								// 	field : 'goodsNum',
+								// 	title : '商品代码'
+								// },
+								// 								{
+								// 	field : 'goodsName',
+								// 	title : '商品名称'
+								// },
+								// 								{
+								// 	field : 'producFactory',
+								// 	title : '型号'
+								// },
+								// 								{
+								// 	field : 'needCount',
+								// 	title : '需求数量'
+								// },
+								// 								{
+								// 	field : 'goodsCount',
+								// 	title : '可调用数量'
+								// },
 																{
-									field : 'outsourcingNumber', 
-									title : '委外收货单' 
+									field : 'useCount',
+									title : '批调数量'
 								},
-																{
-									field : 'beizhu', 
-									title : '备注' 
-								},
-																{
-									field : 'goodsNum', 
-									title : '商品代码' 
-								},
-																{
-									field : 'goodsName', 
-									title : '商品名称' 
-								},
-																{
-									field : 'producFactory', 
-									title : '型号' 
-								},
-																{
-									field : 'needCount', 
-									title : '需求数量' 
-								},
-																{
-									field : 'goodsCount', 
-									title : '可调用数量' 
-								},
-																{
-									field : 'useCount', 
-									title : '批调数量' 
-								},
-																{
-									field : 'goodsCode', 
-									title : '商品条码' 
-								},
+								// 								{
+								// 	field : 'goodsCode',
+								// 	title : '商品条码'
+								// },
 								// 								{
 								// 	field : 'batch',
 								// 	title : '批号'
@@ -143,21 +140,68 @@ function load() {
 								// 	field : 'allCount',
 								// 	title : '合计'
 								// },
+                            {
+                                field : 'status',
+                                title : '收货状态',
+                                align : 'center',
+                                formatter : function(value, row, index) {
+                                    if(value == '1' && row.returnzt == "0"){
+                                        alert(row.returnzt);
+                                        return '<span class="label">已退回</span>';
+
+                                    }else if(value == '1'){
+                                        return '<span class="label">未收货</span>';
+
+                                    } if (value == '0') {
+                                        return '<span class="label">已收货</span>';
+                                    }
+                                }
+                            },
+
+															{
+									field : 'shTime',
+									title : '收货时间'
+								},
+
+                            								{
+                            	field : 'beizhu',
+                            	title : '备注'
+                            },
 																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.id
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.id
-												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+                                        // alert(row.returnzt)
+                                        if(row.status =="0" || row.returnzt=="0" ){
+                                            var e = '<span class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="详情" onclick="edit(\''
+                                                + row.id
+                                                + '\')">详情</span> ';
+                                            var a='';
+                                            var d ='';
+                                        }else if (row.status == "1" || row.returnzt=="1") {
+                                            if (row.flags == "1") {
+                                                var e = '<span class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="详情" onclick="edit(\''
+                                                    + row.id
+                                                    + '\')">详情</span> ';
+                                                var a = '';
+                                                var d = '';
+                                            } else if (row.flags == "0") {
+                                                var e = '<span class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="详情" onclick="edit(\''
+                                                    + row.id
+                                                    + '\')">详情</span> ';
+                                                var a = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#" onclick="userNum(\''
+                                                    + row.pidiaoNumber + '\')">确认收货</span> ';
+                                                var d = '<span class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="退回"  mce_href="#" onclick="remove(\''
+                                                    + row.pidiaoNumber
+                                                    + '\')">退回</span> ';
+                                            }
+
+                                        }else if (row.returnzt == "0"){
+
+                                        }
+
+										return e + a + d;
 									}
 								} ]
 					});
@@ -187,15 +231,71 @@ function edit(id) {
 	});
     layer.full(toIndex);
 }
-function remove(id) {
-	layer.confirm('确定要删除选中的记录？', {
+function userNum(pidiaoNumber) {
+    var status="0";
+    if (status == "0"){
+        // alert("输入工号")
+        layer.open({
+            type : 2,
+            title : '输入工号',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content :"/stock/pidiao/userNum/"+ pidiaoNumber
+        });
+
+    }
+}
+//修改启用状态
+function upshTime() {
+	// alert("修改启用状态")
+    var pidiaoNumber = document.getElementById('pidiaoNumber').value;
+    var username = document.getElementById('username').value;
+    // alert(username);
+    var status = "0";
+    if (username !=""){
+        $.ajax({
+            url: "/stock/pidiao/updateStatus",
+            type: "post",
+            data: {
+                'pidiaoNumber': pidiaoNumber,
+                'status': status,
+                'username':username
+            },
+            dataType: 'JSON',
+            async: false,
+            success: function (data) {
+                if (data.code == 0) {
+                    parent.layer.msg("操作成功");
+                    parent.reLoad();
+                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    parent.layer.close(index);
+
+                } else {
+                    parent.layer.alert(data.msg)
+                }
+
+            }
+        });
+    } else {
+        layer.alert("请输入工号！");
+        // return this;
+    }
+
+
+}
+
+function remove(pidiaoNumber,useCount) {
+	layer.confirm('确定要退回选中的记录？', {
 		btn : [ '确定', '取消' ]
 	}, function() {
+
 		$.ajax({
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'id' : id
+				'pidiaoNumber' : pidiaoNumber,
+                'useCount' : useCount
 			},
 			success : function(r) {
 				if (r.code==0) {
@@ -206,6 +306,7 @@ function remove(id) {
 				}
 			}
 		});
+
 	})
 }
 
@@ -307,8 +408,16 @@ function showCol() {
 
         var mfrsid = rowstr.find("[name='mfrsid']").html();
         obj.mfrsid = mfrsid;
+
         var brandname = rowstr.find("[name='brandname']").html();
         obj.brandname = brandname;
+
+        var unit = rowstr.find("[name='unit']").html();
+        obj.unit = unit;
+        var goodsid = rowstr.find("[name='goodsid']").html();
+        obj.goodsid = goodsid;
+
+
         objArray.push(obj);
     });
     return objArray;
@@ -331,7 +440,6 @@ function save() {
         layer.alert("请选择接收部门！");
     }
     else if (outDepartment != "" && outPosition != "" && inCompany != "" && inDepartment != "") {
-    	// alert("成功")
         $.ajax({
             cache: true,
             type: "POST",

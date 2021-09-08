@@ -1,5 +1,7 @@
 package com.shiguang.stock.domain;
 
+import io.swagger.models.auth.In;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -73,8 +75,94 @@ public class PidiaoDO implements Serializable {
 	//镜片类型
 	private  String classtype;
 	//商品类型
-	private  String goods;
+	private Integer goods;
 
+	private String outbm;
+	private String outcw;
+	private String ings;
+	private String inbm;
+	private String incw;
+	//标准零售价
+	private String money;
+	//收货时间
+	private String shTime;
+	//判断接收发出部门
+	private  String flags;
+	
+	//退回状态
+	private String returnzt;
+
+	public String getReturnzt() {
+		return returnzt;
+	}
+
+	public void setReturnzt(String returnzt) {
+		this.returnzt = returnzt;
+	}
+
+	public String getFlags() {
+		return flags;
+	}
+
+	public void setFlags(String flags) {
+		this.flags = flags;
+	}
+
+	public String getShTime() {
+		return shTime;
+	}
+
+	public void setShTime(String shTime) {
+		this.shTime = shTime;
+	}
+
+	public String getMoney() {
+		return money;
+	}
+
+	public void setMoney(String money) {
+		this.money = money;
+	}
+
+	public String getOutbm() {
+		return outbm;
+	}
+
+	public void setOutbm(String outbm) {
+		this.outbm = outbm;
+	}
+
+	public String getOutcw() {
+		return outcw;
+	}
+
+	public void setOutcw(String outcw) {
+		this.outcw = outcw;
+	}
+
+	public String getIngs() {
+		return ings;
+	}
+
+	public void setIngs(String ings) {
+		this.ings = ings;
+	}
+
+	public String getInbm() {
+		return inbm;
+	}
+
+	public void setInbm(String inbm) {
+		this.inbm = inbm;
+	}
+
+	public String getIncw() {
+		return incw;
+	}
+
+	public void setIncw(String incw) {
+		this.incw = incw;
+	}
 
 	/**
 	 * 设置：批调id
@@ -477,11 +565,11 @@ public class PidiaoDO implements Serializable {
 		this.classtype = classtype;
 	}
 
-	public String getGoods() {
+	public Integer getGoods() {
 		return goods;
 	}
 
-	public void setGoods(String goods) {
+	public void setGoods(Integer goods) {
 		this.goods = goods;
 	}
 

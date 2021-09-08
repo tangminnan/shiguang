@@ -175,6 +175,7 @@
     <!--保存/清空-->
     <div class="BQ-btn">
         <!--未删除-->
+        <input id="classtype" name="classtype" value="0" type="hidden">
         <input id="state" name="state" value="1" type="hidden">
         <input type="button" value="保存" onclick="baocun()"/>
         <!--<input type="button" class="empty" value="清空"/>-->
@@ -200,6 +201,8 @@
         var factory = document.getElementById('factory').value;
         //型号
         var producFactory = document.getElementById('producFactory').value;
+        //商品编号
+        var proid = document.getElementById('proid').value;
         //计量单位
         var unitid = document.getElementById('unitid').value;
         //税率
@@ -222,6 +225,8 @@
             layer.alert("请输入厂家型号");
         } else if (producFactory == "") {
             layer.alert("请输入型号");
+        } else if (proid == "") {
+            layer.alert("请输入商品编号");
         } else if (unitid == "") {
             layer.alert("请选择计量单位");
         } else if (tax == "") {

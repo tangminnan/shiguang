@@ -1,166 +1,152 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-						<input id="id" name="id" th:value="${pidiao.id}"  type="hidden">
-							<div class="form-group">	
-								<label class="col-sm-3 control-label">批调单号：</label>
-								<div class="col-sm-8">
-									<input id="pidiaoNumber" name="pidiaoNumber" th:value="${pidiao.pidiaoNumber}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">关联单号：</label>
-								<div class="col-sm-8">
-									<input id="guanlianNumber" name="guanlianNumber" th:value="${pidiao.guanlianNumber}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">发出部门：</label>
-								<div class="col-sm-8">
-									<input id="outDepartment" name="outDepartment" th:value="${pidiao.outDepartment}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">发出仓位：</label>
-								<div class="col-sm-8">
-									<input id="outPosition" name="outPosition" th:value="${pidiao.outPosition}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">接收仓位：</label>
-								<div class="col-sm-8">
-									<input id="inPosition" name="inPosition" th:value="${pidiao.inPosition}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">接收公司：</label>
-								<div class="col-sm-8">
-									<input id="inCompany" name="inCompany" th:value="${pidiao.inCompany}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">接收部门：</label>
-								<div class="col-sm-8">
-									<input id="inDepartment" name="inDepartment" th:value="${pidiao.inDepartment}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">制单人：</label>
-								<div class="col-sm-8">
-									<input id="zhidanPeople" name="zhidanPeople" th:value="${pidiao.zhidanPeople}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">单据日期：</label>
-								<div class="col-sm-8">
-									<input id="danjuDay" name="danjuDay" th:value="${pidiao.danjuDay}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">委外收货单：</label>
-								<div class="col-sm-8">
-									<input id="outsourcingNumber" name="outsourcingNumber" th:value="${pidiao.outsourcingNumber}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">备注：</label>
-								<div class="col-sm-8">
-									<input id="beizhu" name="beizhu" th:value="${pidiao.beizhu}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品代码：</label>
-								<div class="col-sm-8">
-									<input id="goodsNum" name="goodsNum" th:value="${pidiao.goodsNum}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品名称：</label>
-								<div class="col-sm-8">
-									<input id="goodsName" name="goodsName" th:value="${pidiao.goodsName}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">型号：</label>
-								<div class="col-sm-8">
-									<input id="producFactory" name="producFactory" th:value="${pidiao.producFactory}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">需求数量：</label>
-								<div class="col-sm-8">
-									<input id="needCount" name="needCount" th:value="${pidiao.needCount}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">可调用数量：</label>
-								<div class="col-sm-8">
-									<input id="goodsCount" name="goodsCount" th:value="${pidiao.goodsCount}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">批调数量：</label>
-								<div class="col-sm-8">
-									<input id="useCount" name="useCount" th:value="${pidiao.useCount}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品条码：</label>
-								<div class="col-sm-8">
-									<input id="goodsCode" name="goodsCode" th:value="${pidiao.goodsCode}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">批号：</label>
-								<div class="col-sm-8">
-									<input id="batch" name="batch" th:value="${pidiao.batch}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">注册证号：</label>
-								<div class="col-sm-8">
-									<input id="zhuceNumber" name="zhuceNumber" th:value="${pidiao.zhuceNumber}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">生产日期：</label>
-								<div class="col-sm-8">
-									<input id="produceDay" name="produceDay" th:value="${pidiao.produceDay}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">效期：</label>
-								<div class="col-sm-8">
-									<input id="useday" name="useday" th:value="${pidiao.useday}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">合计：</label>
-								<div class="col-sm-8">
-									<input id="allCount" name="allCount" th:value="${pidiao.allCount}" class="form-control" type="text">
-								</div>
-							</div>
-																					<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>商品批调管理</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+	<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+	<!--单据信息-->
+	<div class="m40 tabS msgBox">
+		<h3>单据信息</h3>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>批调单号：</td>
+				<td>
+					<input id="pidiaoNumber" name="pidiaoNumber" th:value="${pidiao.pidiaoNumber}"  readonly type="text">
+				</td>
+				<td>制单人：</td>
+				<td>
+					<input id="zhidanPeople" name="zhidanPeople" th:value="${pidiao.zhidanPeople}" readonly type="text" />
+				</td>
+				<td>单据日期：</td>
+				<td>
+					<input id="danjuDay" name="danjuDay" th:value="${danjuDay}"  readonly type="text"/>
+				</td>
+			</tr>
+			<tr>
+				<td>发出部门：</td>
+				<td>
+					<input th:value="${pidiao.outbm}" readonly type="text"/>
+				</td>
+				<td>发出仓位：</td>
+				<td>
+					<input th:value="${pidiao.outcw}" readonly type="text"/>
+				</td>
+
+			</tr>
+			<tr>
+				<td>接收公司：</td>
+				<td>
+					<input th:value="${pidiao.ings}" readonly type="text"/>
+				</td>
+				<td>接收部门：</td>
+				<td>
+					<input th:value="${pidiao.inbm}" readonly type="text"/>
+				</td>
+
+				<td>接收仓位：</td>
+				<td>
+					<input th:value="${pidiao.incw}" readonly type="text"/>
+				</td>
+
+			</tr>
+			<tr>
+				<td>备注：</td>
+				<td colspan="5">
+					<textarea id="beizhu" name="beizhu" rows="3" th:text="${pidiao.beizhu}" readonly></textarea>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="HH_btns">
+			<div class="Cbtn buyBtns">
+				<input type="button" class="H_bc" value="打印单据" onclick="dayin()" style="margin-left:90%"/>
 			</div>
+		</div>
 	</div>
+
+	<!--商品信息-->
+	<div class="m40 tabS SPmsg">
+		<h3>商品信息</h3>
+		<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+			<tbody>
+			<tr class="thead">
+				<!--<td>全选 <input type="checkbox" /></td>-->
+				<!--<td></td>-->
+				<td>商品代码</td>
+				<td>商品名称</td>
+				<td>型号</td>
+				<!--<td>需求数量</td>-->
+				<td>可调用数量</td>
+				<td>批调数量</td>
+				<td>商品条码</td>
+				<td>效期</td>
+				<td>批号</td>
+				<td>注册证号</td>
+				<td>生产日期</td>
+				<td style="display: none">镜片类型</td>
+				<td style="display: none">类别</td>
+				<td style="display: none">制造商</td>
+				<td style="display: none">品牌</td>
+			</tr>
+			<tr class="liebiao">
+
+			</tr>
+			</tbody>
+		</table>
 	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/stock/pidiao/edit.js">
-	</script>
+</form>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        var pidiaoNumber = $("#pidiaoNumber").val();
+        $(".val").remove();
+        $.ajax({
+            url: '/stock/pidiao/selectPidiao',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'pidiaoNumber': pidiaoNumber
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    $(".liebiao").after("<tr class='val'> " +
+                        // "<td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                        "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                        "<td name='factory'>" + xml[i].factory + "</td>\n" +
+                        // "<td name='needCount'>" + xml[i].needCount + "</td>\n" +
+                        "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                        "<td name='useCount'>" + xml[i].useCount + "</td>\n" +
+                        "<td name='goodsCode'>" + xml[i].goodsCode + "</td>\n" +
+                        "<td name='useday'>" + xml[i].useday + "</td>\n" +
+                        "<td name='batch'>" + xml[i].batch + "</td>\n" +
+                        "<td name='zhuceNumber'>" + xml[i].zhuceNumber + "</td>\n" +
+                        "<td name='produceDay'>" + xml[i].produceDay + "</td>\n" +
+
+
+                        "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>\n" +
+                        "<td name='gdname' style='display: none'>" + xml[i].gdname + "</td>\n" +
+                        "<td name='mfrsid' style='display: none'>" + xml[i].mfrsid + "</td>\n" +
+                        "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>\n" +
+                        "</tr>");
+                }
+            }
+        })
+    });
+	
+	function dayin() {
+		var pidiaoNumber = $('#pidiaoNumber').val();
+        window.open("/stock/pidiao/pidiaodan?pidiaoNumber="+ pidiaoNumber);
+    }
+</script>
 </body>
 </html>

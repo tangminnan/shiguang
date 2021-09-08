@@ -7,7 +7,7 @@
 		select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,`price_sum`,
 		`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_id`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,
 		`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,`batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,
-		`factory`,`status`,`username`
+		`factory`,`status`,`username`,`returnzt`
 		 from stock_order where id = #{value}
 	</select>
 
@@ -17,7 +17,7 @@
         s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`,s.`position_id`, po.`position_name`, s.`create_time`,
         s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
         s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`,s.`classtype`,
-        s.`factory`,s.`status`,s.`username`
+        s.`factory`,s.`status`,s.`username`,s.`returnzt`
         from stock_order s left join c_mfrs m on s.mfrsid=m.mfrsid
         left join c_position po on s.position_id=po.position_id
         left join department d on po.depart_number= d.depart_number
@@ -58,6 +58,7 @@
             <if test="factory != null and factory != ''">and s.factory = #{factory} </if>
             <if test="status != null and status != ''">and s.status = #{status} </if>
             <if test="username != null and username != ''">and s.username = #{username} </if>
+            <if test="returnzt != null and returnzt != ''">and s.returnzt = #{returnzt} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -113,6 +114,7 @@
             <if test="factory != null and factory != ''"> and s.factory = #{factory} </if>
             <if test="status != null and status != ''"> and s.status = #{status} </if>
             <if test="username != null and username != ''"> and s.username = #{username} </if>
+            <if test="returnzt != null and returnzt != ''"> and s.returnzt = #{returnzt} </if>
         </where>
     </select>
 
@@ -151,7 +153,8 @@
 			`classtype`,
 			`factory`,
 			`status`,
-			`username`
+			`username`,
+			`returnzt`
 		)
 		values
 		(
@@ -187,7 +190,8 @@
 			#{classtype},
 			#{factory},
 			#{status},
-			#{username}
+			#{username},
+			#{returnzt}
 		)
 	</insert>
 
@@ -225,8 +229,9 @@
             <if test="useday != null">`useday` = #{useday} ,</if>
             <if test="classtype != null">`classtype` = #{classtype}, </if>
             <if test="factory != null">`factory` = #{factory} ,</if>
-            <if test="status != null">`status` = #{status} </if>
-            <if test="username != null">`username` = #{username} </if>
+            <if test="status != null">`status` = #{status} ,</if>
+            <if test="username != null">`username` = #{username},</if>
+            <if test="returnzt != null">`returnzt` = #{returnzt}</if>
         </set>
         where id = #{id}
     </update>
@@ -278,7 +283,8 @@
             <if test="classtype != null">`classtype` = #{classtype}, </if>
             <if test="factory != null">`factory` = #{factory} ,</if>
             <if test="status != null">`status` = #{status}, </if>
-            <if test="username != null">`username` = #{username} </if>
+            <if test="username != null">`username` = #{username}, </if>
+            <if test="returnzt != null">`returnzt` = #{returnzt} </if>
         </set>
         where danju_number = #{danjuNumber}
     </update>

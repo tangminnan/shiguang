@@ -31,6 +31,15 @@ public class StockDO implements Serializable {
     //商品类别
     private Integer goodsType;
     private String gdname;
+    private Integer goodsid;
+
+    public Integer getGoodsid() {
+        return goodsid;
+    }
+
+    public void setGoodsid(Integer goodsid) {
+        this.goodsid = goodsid;
+    }
 
     public String getGdname() {
         return gdname;
@@ -38,6 +47,16 @@ public class StockDO implements Serializable {
 
     public void setGdname(String gdname) {
         this.gdname = gdname;
+    }
+    //退回状态
+    private String returnzt;
+
+    public String getReturnzt() {
+        return returnzt;
+    }
+
+    public void setReturnzt(String returnzt) {
+        this.returnzt = returnzt;
     }
 
     //制造商id

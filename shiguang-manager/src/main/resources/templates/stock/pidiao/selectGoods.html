@@ -79,7 +79,7 @@
             <!--</td>-->
         <!--</tr>-->
         <tr>
-            <input id="outPosition" type="text" th:value="${outPosition}"/>
+            <input id="outPosition" type="hidden" th:value="${outPosition}"/>
             <td>标准零售价格：</td>
             <td>
                 <input id="retailPrice" name="retailPrice" type="text"/> ~ <input name="retailPrice2" type="text"/>
@@ -121,8 +121,10 @@
             <td>生产日期</td>
             <td>效期</td>
             <td style="display: none">镜片类型</td>
-            <td style="display: block">制造商</td>
-            <td style="display: block">品牌</td>
+            <td style="display: none">制造商</td>
+            <td style="display: none">品牌</td>
+            <td style="display: none">单位</td>
+            <td style="display: none">类别</td>
         </tr>
         <!--<tr>-->
         <!--<td colspan="3">页内合计：</td>-->
@@ -195,8 +197,10 @@
                         "<td name='produceDay'>" + xml[i].produceDay + "</td>" +
                         "<td name='useday'>" + xml[i].useday + "</td>" +
                         "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
-                        "<td name='mfrsid' style='display: block'>" + xml[i].mfrsid + "</td>" +
-                        "<td name='brandname' style='display: block'>" + xml[i].brandname + "</td>" +
+                        "<td name='mfrsid' style='display: none'>" + xml[i].mfrsid + "</td>" +
+                        "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>" +
+                        "<td name='unit' style='display: none'>" + xml[i].unit + "</td>" +
+                        "<td name='goodsid' style='display: none'>" + xml[i].goodsid + "</td>" +
                         "</tr>");
                 }
             }
@@ -353,8 +357,10 @@
                         "<td name='produceDay'>" + xml[i].produceDay + "</td>" +
                         "<td name='useday'>" + xml[i].useday + "</td>" +
                         "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
-                        "<td name='mfrsid' style='display: block'>" + xml[i].mfrsid + "</td>" +
-                        "<td name='brandname' style='display: block'>" + xml[i].brandname + "</td>" +
+                        "<td name='mfrsid' style='display: none'>" + xml[i].mfrsid + "</td>" +
+                        "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>" +
+                        "<td name='unit' style='display: none'>" + xml[i].unit + "</td>" +
+                        "<td name='goodsid' style='display: none'>" + xml[i].goodsid + "</td>" +
 
                         "</tr>");
                 }

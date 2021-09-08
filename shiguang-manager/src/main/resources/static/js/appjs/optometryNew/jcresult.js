@@ -9,6 +9,21 @@ $.validator.setDefaults({
 });
 
 function saveCF() {
+    // var kjyyDoctor =$('#kjyyDoctor').val();
+    // var kjyyOptometryName =$('#kjyyOptometryName').val();
+    //
+    // var kjjyDoctor =$('#kjjyDoctor').val();
+    // var kjjyOptometryName =$('#kjjyOptometryName').val();
+    //
+    // var sgjjDoctor =$('#sgjjDoctor').val();
+    // var sgjjOptometryName =$('#sgjjOptometryName').val();
+    //
+    // var rxDoctor =$('#rxDoctor').val();
+    // var rxOptometryName =$('#rxOptometryName').val();
+    //
+    // var zyDoctor =$('#zyDoctor').val();
+    // var zyOptometryName =$('#zyOptometryName').val();
+
     $.ajax({
         cache: true,
         type: "POST",

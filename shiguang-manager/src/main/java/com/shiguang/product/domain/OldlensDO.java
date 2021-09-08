@@ -87,7 +87,16 @@ public class OldlensDO implements Serializable {
     private String inventoryCount;
     public void setInventoryCount(String inventoryCount){this.inventoryCount = inventoryCount;}
     public String getInventoryCount() {return inventoryCount;}
+    //镜片类型
+    private String classtype;
 
+    public String getClasstype() {
+        return classtype;
+    }
+
+    public void setClasstype(String classtype) {
+        this.classtype = classtype;
+    }
     /**
      * 设置：老花镜id
      */

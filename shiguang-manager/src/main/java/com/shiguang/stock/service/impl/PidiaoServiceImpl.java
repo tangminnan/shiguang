@@ -63,4 +63,33 @@ public class PidiaoServiceImpl implements PidiaoService {
 		return  pidiaoDao.indepartment(map);
 	}
 
+	@Override
+	public List<PidiaoDO> selectPidiao(Map<String, Object> map) {
+		return pidiaoDao.selectPidiao(map);
+	}
+
+	@Override
+	public PidiaoDO getpidiao(String pidiaoNumber) {
+		return pidiaoDao.getpidiao(pidiaoNumber);
+	}
+
+	@Override
+	public List<PidiaoDO> getpidiaoList(Map<String, Object> map) {
+		return pidiaoDao.getpidiaoList(map);
+	}
+
+	@Override
+	public int updateStatus(PidiaoDO pidiaoDO) {
+		return pidiaoDao.updateStatus(pidiaoDO);
+	}
+
+	@Override
+	public List<PidiaoDO> returnList(Map<String, Object> map) {
+		return pidiaoDao.returnList(map);
+	}
+
+	@Override
+	public int updatereturnzt(PidiaoDO pidiaoDO) {
+		return pidiaoDao.updatereturnzt(pidiaoDO);
+	}
 }

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>采购收货新增</title>
     <link rel="stylesheet" href="/css/css.css" type="text/css">
+    <!--<link rel="stylesheet" href="/css/date.css" type="text/css">-->
 </head>
 <body>
 <form class="form-horizontal m-t" id="signupForm">
@@ -62,8 +63,8 @@
                 <td>单据日期：</td>
                 <td><input id="danjuDay" name="danjuDay" th:value="${createTime}" type="text"
                            style="background-color: #e4e4e4" readonly/></td>
-                <td>厂家订单号：</td>
-                <td><input id="factoryNumber" name="factoryNumber" type="text"/><em>*</em></td>
+                <!--<td>厂家订单号：</td>-->
+                <!--<td><input id="factoryNumber" name="factoryNumber" type="text"/><em>*</em></td>-->
             </tr>
             <tr>
                 <td>备注：</td>
@@ -81,6 +82,7 @@
             </div>
             <div class="Cbtn buyBtns">
                 <input id="status" name="status" value="1" type="hidden"/>
+                <input id="returnzt" name="returnzt" value="1" type="hidden"/>
                 <input id="username" name="username" value="未收货" type="hidden"/>
                 <input type="button" class="H_bc" value="保存并审核" onclick="save()"/>
                 <!--<input type="checkbox" id="Hbc"/> <label for="Hbc">保存并审核</label>-->
@@ -395,6 +397,7 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/stock/stock.js"></script>
 <script type="text/javascript" src="/js/appjs/stock/stock/showdate.js"></script>
+<!--<script type="text/javascript" src="/js/appjs/stock/stock/date.js"></script>-->
 <script type="text/javascript">
     function dingdanNum() {
         var goodsid = document.getElementById('goodsType').value;
@@ -687,14 +690,31 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+
+                            "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+
+                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='useday"+ a +"' name='useday'  type=\"text\"/>"+ "</td>\n"+
                             "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                             "<td >" + rows[i].medicinecode +"</td>\n" +
                             "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay'  type=\"text\"/>"+ "</td>\n"+
                             "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                             "</tr>");//页面每个数量
+                        //日期
+                        laydate.render({
+                            elem: '#useday'+ a,
+                            type: 'date'
+                        });
+                        //日期
+                        laydate.render({
+                            elem: '#produceDay'+ b,
+                            type: 'date'
+                        });
                     }
+
                 }
             });
             layer.full(toIndex);
@@ -738,17 +758,33 @@
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
 
-                            "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+
+                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='useday"+ a +"' name='useday'  type=\"text\"/>"+ "</td>\n"+
                             "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                             "<td >" + rows[i].medicinecode +"</td>\n" +
                             "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay'  type=\"text\"/>"+ "</td>\n"+
                             "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                             "</tr>");//页面每个数量
+                        //日期
+                        laydate.render({
+                            elem: '#useday'+ a,
+                            type: 'date'
+                        });
+                        //日期
+                        laydate.render({
+                            elem: '#produceDay'+ b,
+                            type: 'date'
+                        });
                     }
+
                 }
             });
-            layer.full(toIndex)
+            layer.full(toIndex);
         } else if (goodVal == "镜片") {
             // $(".val3").remove();
             var toIndex = layer.open({
@@ -793,19 +829,34 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
                             "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
                             "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
-                            "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+
+                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='useday"+ a +"' name='useday'  type=\"text\"/>"+ "</td>\n"+
                             "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                             "<td >" + rows[i].medicinecode +"</td>\n" +
                             "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay'  type=\"text\"/>"+ "</td>\n"+
                             "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                             "</tr>");//页面每个数量
+                        //日期
+                        laydate.render({
+                            elem: '#useday'+ a,
+                            type: 'date'
+                        });
+                        //日期
+                        laydate.render({
+                            elem: '#produceDay'+ b,
+                            type: 'date'
+                        });
                     }
+
                 }
             });
-            layer.full(toIndex)
+            layer.full(toIndex);
         }  else if (goodVal == "隐形") {
             // $(".val4").remove();
             var toIndex = layer.open({
@@ -850,19 +901,34 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
                             "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
                             "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
-                            "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+
+                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='useday"+ a +"' name='useday'  type=\"text\"/>"+ "</td>\n"+
                             "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                             "<td >" + rows[i].medicinecode +"</td>\n" +
                             "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay'  type=\"text\"/>"+ "</td>\n"+
                             "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                             "</tr>");//页面每个数量
+                        //日期
+                        laydate.render({
+                            elem: '#useday'+ a,
+                            type: 'date'
+                        });
+                        //日期
+                        laydate.render({
+                            elem: '#produceDay'+ b,
+                            type: 'date'
+                        });
                     }
+
                 }
             });
-            layer.full(toIndex)
+            layer.full(toIndex);
         } else if (goodVal == "护理液") {
             // $(".val5").remove();
             var toIndex = layer.open({
@@ -901,17 +967,34 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td style='display: none' >" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+
+                            "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+
+                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='useday"+ a +"' name='useday'  type=\"text\"/>"+ "</td>\n"+
                             "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                             "<td >" + rows[i].medicinecode +"</td>\n" +
                             "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay'  type=\"text\"/>"+ "</td>\n"+
                             "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                             "</tr>");//页面每个数量
+                        //日期
+                        laydate.render({
+                            elem: '#useday'+ a,
+                            type: 'date'
+                        });
+                        //日期
+                        laydate.render({
+                            elem: '#produceDay'+ b,
+                            type: 'date'
+                        });
                     }
+
                 }
             });
-            layer.full(toIndex)
+            layer.full(toIndex);
         } else if (goodVal == "太阳镜") {
             // $(".val6").remove();
             var toIndex = layer.open({
@@ -952,17 +1035,34 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+
+                            "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+
+                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='useday"+ a +"' name='useday'  type=\"text\"/>"+ "</td>\n"+
                             "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                             "<td >" + rows[i].medicinecode +"</td>\n" +
                             "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay'  type=\"text\"/>"+ "</td>\n"+
                             "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                             "</tr>");//页面每个数量
+                        //日期
+                        laydate.render({
+                            elem: '#useday'+ a,
+                            type: 'date'
+                        });
+                        //日期
+                        laydate.render({
+                            elem: '#produceDay'+ b,
+                            type: 'date'
+                        });
                     }
+
                 }
             });
-            layer.full(toIndex)
+            layer.full(toIndex);
         } else if (goodVal == "老花镜") {
             // $(".val7").remove();
             var toIndex = layer.open({
@@ -1004,17 +1104,34 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+
+                            "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+
+                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='useday"+ a +"' name='useday'  type=\"text\"/>"+ "</td>\n"+
                             "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                             "<td >" + rows[i].medicinecode +"</td>\n" +
                             "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay'  type=\"text\"/>"+ "</td>\n"+
                             "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                             "</tr>");//页面每个数量
+                        //日期
+                        laydate.render({
+                            elem: '#useday'+ a,
+                            type: 'date'
+                        });
+                        //日期
+                        laydate.render({
+                            elem: '#produceDay'+ b,
+                            type: 'date'
+                        });
                     }
+
                 }
             });
-            layer.full(toIndex)
+            layer.full(toIndex);
         } else if (goodVal == "耗材") {
             // $(".val8").remove();
             var toIndex = layer.open({
@@ -1053,17 +1170,34 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+
+                            "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+
+                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='useday"+ a +"' name='useday'  type=\"text\"/>"+ "</td>\n"+
                             "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                             "<td >" + rows[i].medicinecode +"</td>\n" +
                             "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay'  type=\"text\"/>"+ "</td>\n"+
                             "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                             "</tr>");//页面每个数量
+                        //日期
+                        laydate.render({
+                            elem: '#useday'+ a,
+                            type: 'date'
+                        });
+                        //日期
+                        laydate.render({
+                            elem: '#produceDay'+ b,
+                            type: 'date'
+                        });
                     }
+
                 }
             });
-            layer.full(toIndex)
+            layer.full(toIndex);
         } else if (goodVal == "视光") {
             // $(".val9").remove();
             var toIndex = layer.open({
@@ -1102,17 +1236,34 @@
                             "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
                             "<td style='display: none' >" + rows[i].brandname + "</td>\n" +
                             "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-                            "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+
+                            "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+
+                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='useday"+ a +"' name='useday'  type=\"text\"/>"+ "</td>\n"+
                             "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                             "<td >" + rows[i].medicinecode +"</td>\n" +
                             "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                            "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay'  type=\"text\"/>"+ "</td>\n"+
                             "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                             "</tr>");//页面每个数量
+                        //日期
+                        laydate.render({
+                            elem: '#useday'+ a,
+                            type: 'date'
+                        });
+                        //日期
+                        laydate.render({
+                            elem: '#produceDay'+ b,
+                            type: 'date'
+                        });
                     }
+
                 }
             });
-            layer.full(toIndex)
+            layer.full(toIndex);
         }
     }
 

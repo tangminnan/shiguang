@@ -159,17 +159,34 @@ public class StockController {
         String positionName=stock.getPositionName();
         String str = stock.getGoodsNum();
         String[] name = str.split(",");
+        String[] goodsCode1=stock.getGoodsCode().split(",");
+        String[] goodsName1= stock.getGoodsName().split(",");
+        String[] brandname1= stock.getBrandname().split(",");
+        String[] goodCount1= stock.getGoodsCount().toString().split(",");
+        String[] costPrice1 =stock.getCostPrice().split(",");
+        String[] wholePrice1=stock.getWholePrice().split(",");
+        String[] retailPrice1= stock.getRetailPrice().split(",");
+        String[] unit1=stock.getUnit().split(",");
+        String[] useday1=stock.getUseday().split(",");
+        String[] batch1=stock.getBatch().split(",");
+        String[] zhuceNumber1=stock.getZhuceNumber().split(",");
+        String[] produceDay1=stock.getProduceDay().split(",");
+        String[] status1=stock.getStatus().split(",");
+        String[] username1=stock.getUsername().split(",");
+        String[] classtype1=stock.getClasstype().split(",");
+        String[] factory1=stock.getFactory().split(",");
+
         for (int i = 0; i < name.length; i++) {
             StockDO stockDO = new StockDO();
             String goodsNum = name[i];
             stockDO.setGoodsNum(goodsNum);
-            String goodsCode = stock.getGoodsCode().split(",")[i];
+            String goodsCode = goodsCode1[i];
             stockDO.setGoodsCode(goodsCode);
-            String goodsName = stock.getGoodsName().split(",")[i];
+            String goodsName = goodsName1[i];
             stockDO.setGoodsName(goodsName);
-            String brandname = stock.getBrandname().split(",")[i];
+            String brandname = brandname1[i];
             stockDO.setBrandname(brandname);
-            String goodsCount = stock.getGoodsCount().toString().split(",")[i];
+            String goodsCount = goodCount1[i];
 
             //判断是否已存在商品
             stockDO.setGoodsNum(goodsNum);
@@ -189,13 +206,13 @@ public class StockController {
                 stockDO.setGoodsType(stock.getGoodsType());
                 stockDO.setMfrsid(stock.getMfrsid());
 
-                String costPrice = stock.getCostPrice().split(",")[i];
+                String costPrice = costPrice1[i];
                 stockDO.setCostPrice(costPrice);
 
                 Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodsCount);
                 stockDO.setCostSum(Double.toString(costSum));
 
-                String wholePrice = stock.getWholePrice().split(",")[i];
+                String wholePrice = wholePrice1[i];
                 stockDO.setWholePrice(wholePrice);
                 Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodsCount);
                 stockDO.setWholeSum(Double.toString(wholeSum));
@@ -205,7 +222,7 @@ public class StockController {
 //            Double transferPricecount = Double.parseDouble(transferPrice) * Double.parseDouble(goodsCount);
 //            stockDO.setCostSum(Double.toString(transferPricecount));
 
-                String retailPrice = stock.getRetailPrice().split(",")[i];
+                String retailPrice =retailPrice1 [i];
                 stockDO.setRetailPrice(retailPrice);
                 Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
                 stockDO.setPriceSum(Double.toString(priceSum));
@@ -221,29 +238,30 @@ public class StockController {
                 stockDO.setTuihuoNumber(stock.getTuihuoNumber());
                 stockDO.setFactoryNumber(stock.getFactoryNumber());
                 stockDO.setBeizhu(stock.getBeizhu());
-                String unit = stock.getUnit().split(",")[i];
+                stockDO.setReturnzt(stock.getReturnzt());
+                String unit = unit1[i];
                 stockDO.setUnit(unit);
-                String useday = stock.getUseday().split(",")[i];
+                String useday = useday1[i];
                 stockDO.setUseday(useday);
-                String batch = stock.getBatch().split(",")[i];
+                String batch = batch1[i];
                 stockDO.setBatch(batch);
-                String zhuceNumber = stock.getZhuceNumber().split(",")[i];
+                String zhuceNumber =zhuceNumber1 [i];
                 stockDO.setZhuceNumber(zhuceNumber);
-                String produceDay = stock.getProduceDay().split(",")[i];
+                String produceDay = produceDay1[i];
                 stockDO.setProduceDay(produceDay);
-                String status = stock.getStatus().split(",")[i];
+                String status = status1[i];
                 stockDO.setStatus(status);
-                String username = stock.getUsername().split(",")[i];
+                String username =username1 [i];
                 stockDO.setUsername(username);
 
                 if(null != stock.getClasstype()){
-                    String classtype = stock.getClasstype().split(",")[i];
+                    String classtype = classtype1[i];
                     stockDO.setClasstype(classtype);
                 }else{
                     stockDO.setClasstype("");
                 }
                 if(null != stock.getFactory()) {
-                    String factory = stock.getFactory().split(",")[i];
+                    String factory = factory1[i];
                     stockDO.setFactory(factory);
                 }else {
                     stockDO.setFactory("");
@@ -257,28 +275,46 @@ public class StockController {
 
         }
         String strOrder = stock.getGoodsNum();
-        String[] namesOrder = strOrder.split(",");
-        for (int i = 0; i < namesOrder.length; i++) {
+        String[] namesOrder2 = strOrder.split(",");
+        String[] goodsCode2=orderDO.getGoodsCode().split(",");
+        String[] goodsName2=orderDO.getGoodsName().split(",");
+        String[] brandname2=orderDO.getBrandname().split(",");
+        String[] goodsCount2=orderDO.getGoodsCount().split(",");
+        String[] costPrice2=orderDO.getGoodsCount().split(",");
+        String[] wholePrice2=stock.getWholePrice().split(",");
+        String[] retailPrice2=stock.getRetailPrice().split(",");
+        String[] unit2=orderDO.getUnit().split(",");
+        String[] useday2=orderDO.getUseday().split(",");
+        String[] batch2=orderDO.getBatch().split(",");
+        String[] zhuceNumber2=orderDO.getZhuceNumber().split(",");
+        String[] produceDay2=orderDO.getProduceDay().split(",");
+        String[] status2=orderDO.getStatus().split(",");
+        String[] username2=orderDO.getUsername().split(",");
+        String[] classtype2=orderDO.getClasstype().split(",");
+        String[] factory2=orderDO.getFactory().split(",");
+
+
+        for (int i = 0; i < namesOrder2.length; i++) {
             OrderDO orderDO1 = new OrderDO();
             String goodsNum = name[i];
             orderDO1.setGoodsNum(goodsNum);
-            String goodsCode = orderDO.getGoodsCode().split(",")[i];
+            String goodsCode = goodsCode2[i];
             orderDO1.setGoodsCode(goodsCode);
-            String goodsName = orderDO.getGoodsName().split(",")[i];
+            String goodsName = goodsName2[i];
             orderDO1.setGoodsName(goodsName);
-            String brandname = orderDO.getBrandname().split(",")[i];
+            String brandname = brandname2[i];
             orderDO1.setBrandname(brandname);
-            String goodsCount = orderDO.getGoodsCount().toString().split(",")[i];
+            String goodsCount = goodsCount2[i];
             orderDO1.setGoodsCount(goodsCount);
             orderDO1.setGoodsType(orderDO.getGoodsType());
             orderDO1.setMfrsid(orderDO.getMfrsid());
-            String costPrice = stock.getCostPrice().split(",")[i];
+            String costPrice = costPrice2[i];
             orderDO1.setCostPrice(costPrice); //成本价格
 
             Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodsCount);
             orderDO1.setCostSum(Double.toString(costSum)); //成本合计
 
-            String wholePrice = stock.getWholePrice().split(",")[i];
+            String wholePrice = wholePrice2[i];
             orderDO1.setWholePrice(wholePrice);
             Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodsCount);
             orderDO1.setWholeSum(Double.toString(wholeSum));    //批发合计
@@ -288,7 +324,7 @@ public class StockController {
 //            Double transferPricecount = Double.parseDouble(transferPrice) * Double.parseDouble(goodsCount);
 //            stockDO.setCostSum(Double.toString(transferPricecount));
 
-            String retailPrice = stock.getRetailPrice().split(",")[i];
+            String retailPrice = retailPrice2[i];
             orderDO1.setRetailPrice(retailPrice);
             Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
             orderDO1.setPriceSum(Double.toString(priceSum));  //原价合计
@@ -304,28 +340,29 @@ public class StockController {
             orderDO1.setTuihuoNumber(orderDO.getTuihuoNumber());
             orderDO1.setFactoryNumber(orderDO.getFactoryNumber());
             orderDO1.setBeizhu(orderDO.getBeizhu());
-            String unit = orderDO.getUnit().split(",")[i];
+            orderDO1.setReturnzt(orderDO.getReturnzt());
+            String unit = unit2[i];
             orderDO1.setUnit(unit);
-            String useday = orderDO.getUseday().split(",")[i];
+            String useday = useday2[i];
             orderDO1.setUseday(useday);
-            String batch = orderDO.getBatch().split(",")[i];
+            String batch = batch2[i];
             orderDO1.setBatch(batch);
-            String zhuceNumber = orderDO.getZhuceNumber().split(",")[i];
+            String zhuceNumber = zhuceNumber2[i];
             orderDO1.setZhuceNumber(zhuceNumber);
-            String produceDay = orderDO.getProduceDay().split(",")[i];
+            String produceDay = produceDay2[i];
             orderDO1.setProduceDay(produceDay);
-            String status = orderDO.getStatus().split(",")[i];
+            String status = status2[i];
             orderDO1.setStatus(status);
-            String username = orderDO.getUsername().split(",")[i];
+            String username =username2 [i];
             orderDO1.setUsername(username);
             if(null != orderDO.getClasstype()){
-                String classtype = orderDO.getClasstype().split(",")[i];
+                String classtype = classtype2[i];
                 orderDO1.setClasstype(classtype);
             }else{
                 orderDO1.setClasstype("");
             }
            if(null != orderDO.getFactory()) {
-               String factory = orderDO.getFactory().split(",")[i];
+               String factory = factory2 [i];
                orderDO1.setFactory(factory);
            }else {
                orderDO1.setFactory("");

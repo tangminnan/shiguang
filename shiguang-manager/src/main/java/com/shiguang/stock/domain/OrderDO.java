@@ -21,7 +21,16 @@ public class OrderDO implements Serializable {
     private String status;
     //工号
     private String  username;
+    //退回状态
+    private String returnzt;
 
+    public String getReturnzt() {
+        return returnzt;
+    }
+
+    public void setReturnzt(String returnzt) {
+        this.returnzt = returnzt;
+    }
     //商品代码
     private String goodsNum;
     //商品条码

@@ -2,6 +2,7 @@ package com.shiguang.stock.service;
 
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.stock.domain.PidiaoDO;
+import com.shiguang.stock.domain.StockDO;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.Map;
 public interface PidiaoService {
 	
 	PidiaoDO get(Long id);
-	
+
 	List<PidiaoDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
@@ -33,4 +34,17 @@ public interface PidiaoService {
 	//发出接收部门
 	List<PidiaoDO> indepartment(Map<String, Object> map);
 
+	List<PidiaoDO> selectPidiao(Map<String, Object> map);
+
+	PidiaoDO getpidiao(String pidiaoNumber);
+
+	List<PidiaoDO> getpidiaoList(Map<String, Object> map);
+
+	//确认收货
+	int updateStatus(PidiaoDO pidiaoDO);
+
+	//退回查询
+	List<PidiaoDO> returnList(Map<String, Object> map);
+	//退回修改状态
+	int updatereturnzt(PidiaoDO pidiaoDO);
 }

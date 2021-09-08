@@ -8,7 +8,7 @@
         p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,
         p.`produc_color`,p.`unitid`,p.`batchid`,p.`size`,p.`technology_id`,p.`materialid`,p.`color`,p.`style_id`,p.`year`,p.`tax`,p.`tax_price`,
         p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`xsstate`,p.`state`,
-        m.mfrsname,b.brandname,u.unitname
+        m.mfrsname,b.brandname,u.unitname,p.`classtype`
         from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
         c_unit u on p.unitid= u.unitid
         where id = #{value}
@@ -25,7 +25,7 @@
         p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,p.`produc_color`,
         p.`unitid`,p.`batchid`,p.`size`,p.`technology_id`,p.`materialid`,p.`color`,p.`style_id`,p.`year`,p.`tax`,p.`tax_price`,p.`trade_price`,
         p.`transfer_price`,p.`retail_price`,p.`xsstate`,p.`state`,
-        m.mfrsname,b.brandname,u.unitname
+        m.mfrsname,b.brandname,u.unitname,p.`classtype`
         from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
         c_unit u on p.unitid= u.unitid
         <where>
@@ -107,7 +107,8 @@
 			`transfer_price`, 
 			`retail_price`,
 			`xsstate`,
-			`state`
+			`state`,
+			`classtype`
 		)
 		values
 		(
@@ -135,7 +136,8 @@
 			#{transferPrice}, 
 			#{retailPrice},
 			#{xsstate},
-			#{state}
+			#{state},
+			#{classtype}
 		)
 	</insert>
 
@@ -166,7 +168,8 @@
             <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
             <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
             <if test="xsstate != null">`xsstate` = #{xsstate},</if>
-            <if test="state != null">`state` = #{state}</if>
+            <if test="state != null">`state` = #{state},</if>
+            <if test="classtype != null">`classtype` = #{classtype}</if>
         </set>
         where id = #{id}
     </update>

@@ -130,4 +130,6 @@ public interface StockService {
     int updateStatus(StockDO stock);
     //发出仓位库存减数量
     int outPosionJ(StockDO stockDO);
+
+
 }

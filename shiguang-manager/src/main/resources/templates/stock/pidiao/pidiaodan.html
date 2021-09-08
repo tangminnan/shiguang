@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>商品批调单</title>
+<style type="text/css">
+*{padding: 0;margin: 0;box-sizing: border-box;}
+.tal{text-align: left;}
+.container {width:1000px;margin:50px auto;}
+	h4{font-size: 20px;margin-bottom: 15px;}
+	h3{text-align: center;font-size: 24px;letter-spacing:2px;margin-bottom: 25px;}
+	table{width: 100%;table-layout:fixed;word-break:break-all;word-wrap:break-word;border-collapse:collapse;}
+	table td,table th{padding:5px 3px;}
+	.tabB{border-left:1px solid #000;border-top:1px solid #000;text-align: center;margin:10px 0;}
+	.tabB td,.tabB th{border-right:1px solid #000;border-bottom:1px solid #000;}
+	.tabC b{width:100px;display: inline-block;text-align:right;margin-right:10px;}
+	.tabC em{width:60px;display: inline-block;border-bottom:1px solid #000;vertical-align: bottom;font-style:normal;text-align: center;}
+	p{float: right;margin-top: 50px;}
+</style>
+
+</head>
+<body>
+<div class="container"> 
+	<h3>商品批调单表</h3>
+	<table class="tabA" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<input id="pidiaoNumber"  th:value="${getpidiao.pidiaoNumber}" type="hidden"/>
+			<td><b>批调单号：</b><span th:text="${getpidiao.pidiaoNumber}"></span></td>
+			<td><b>批调日期：</b><span th:text="${danjuDay}"></span></td>
+			<td><b>制单人：</b><span th:text="${getpidiao.zhidanPeople}"></span></td>
+		</tr>
+		<tr>
+			<td><b>调出仓位：</b><span th:text="${getpidiao.outcw}"></span></td>
+			<td><b>调入仓位：</b><span th:text="${getpidiao.incw}"></span></td>
+			<td><b>审核人：</b><span th:text="${getpidiao.zhidanPeople}"></span></td>
+		</tr>
+		<tr>
+			<td><b>备注：</b><span th:text="${getpidiao.beizhu}"></span></td>
+		</tr>
+	</table>
+	<table class="tabB" border="0" cellspacing="0" cellpadding="0">
+		<thead>
+			<tr>
+				<th>商品代码</th>
+				<th>商品名称</th>
+				<th>单位</th>
+				<th>数量</th>
+				<th>标准零售价</th>
+				<th>发出仓位</th>
+				<th>效期</th>
+				<th>批号</th>
+				<th>注册证号</th>
+			</tr>
+		</thead>
+		<tbody class="liebiao">
+			<!--<tr>-->
+				<!--<td colspan="3" align="right"><b>合计：</b></td>-->
+				<!--<td>3</td>-->
+				<!--<td colspan="5"></td>-->
+			<!--</tr>-->
+		</tbody>
+	</table>
+	<table class="tabC" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td colspan="3"><b>配送人：</b></td>
+			<td colspan="3"><b>收货人：</b></td>
+		</tr>
+	</table>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    $().ready(function () {
+        var pidiaoNumber = $("#pidiaoNumber").val();
+        $(".val").remove();
+        $.ajax({
+            url: '/stock/pidiao/getpidiaoList',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'pidiaoNumber': pidiaoNumber
+            },
+            success: function (xml) {
+                // alert(JSON.stringify(xml))
+                for (var i = 0; i < xml.length; i++) {
+                    $(".liebiao").after("<tr class='val'> " +
+                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                        "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                        "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                        "<td name='useCount'>" + xml[i].useCount + "</td>\n" +
+                        "<td name='money'>" + xml[i].money + "</td>\n" +
+                        "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                        "<td name='useday'>" + xml[i].useday + "</td>\n" +
+                        "<td name='batch'>" + xml[i].batch + "</td>\n" +
+                        "<td name='zhuceNumber'>" + xml[i].zhuceNumber + "</td>\n" +
+                        "</tr>"+
+						"<tr>"+
+						"<td colspan=\"3\" align=\"right\"><b>品种：</b>"+xml[i].brandname+"</td>"+
+						"<td colspan=\"3\"><b>小计：</b>"+xml[i].useCount+"</td>"+
+						"<td colspan=\"3\"></td>"+
+						"</tr>"
+					);
+                }
+            }
+        })
+    });
+</script>
+</body>
+</html>
