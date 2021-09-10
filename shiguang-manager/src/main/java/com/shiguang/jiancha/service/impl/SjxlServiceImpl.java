@@ -52,8 +52,12 @@ public class SjxlServiceImpl implements SjxlService {
     }
 
     @Override
+    public int upremove(SjxlDO sjxlDO) {
+        return sjxlDao.upremove(sjxlDO);
+    }
+
+    @Override
     public int batchRemove(Long[] sjxlIds) {
         return sjxlDao.batchRemove(sjxlIds);
     }
-
 }

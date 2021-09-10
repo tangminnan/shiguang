@@ -220,6 +220,7 @@ function inposion() {
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     for (var i = 0; i < rows.length; i++) {
+                        // alert( rows[i].goodsid);
 
                         $(".liebiao").after("<tr class='val'> " +
 							// "<td><input name='one'  type=\"checkbox\"/></td>\n" +

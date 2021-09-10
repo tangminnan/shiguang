@@ -52,8 +52,12 @@ public class RgpServiceImpl implements RgpService {
     }
 
     @Override
+    public int upremove(RgpDO rgpDO) {
+        return rgpDao.upremove(rgpDO);
+    }
+
+    @Override
     public int batchRemove(Long[] rgpIds) {
         return rgpDao.batchRemove(rgpIds);
     }
-
 }

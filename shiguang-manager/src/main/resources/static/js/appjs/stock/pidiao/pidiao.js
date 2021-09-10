@@ -146,7 +146,7 @@ function load() {
                                 align : 'center',
                                 formatter : function(value, row, index) {
                                     if(value == '1' && row.returnzt == "0"){
-                                        alert(row.returnzt);
+                                        // alert(row.returnzt);
                                         return '<span class="label">已退回</span>';
 
                                     }else if(value == '1'){

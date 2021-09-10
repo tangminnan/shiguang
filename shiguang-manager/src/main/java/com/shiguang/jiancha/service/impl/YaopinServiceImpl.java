@@ -52,8 +52,12 @@ public class YaopinServiceImpl implements YaopinService {
     }
 
     @Override
+    public int upremove(YaopinDO yaopinDO) {
+        return yaopinDao.upremove(yaopinDO);
+    }
+
+    @Override
     public int batchRemove(Long[] ypIds) {
         return yaopinDao.batchRemove(ypIds);
     }
-
 }

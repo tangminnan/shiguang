@@ -184,7 +184,8 @@
 			`kjyy_kjlx`,
 			`kjyy_text`,
 			`kjyy_beizhu`,
-			`ptometry_number`
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -214,7 +215,8 @@
 			#{kjyyKjlx},
 			#{kjyyText},
 			#{kjyyBeizhu},
-			#{ptometryNumber}
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
 
@@ -254,7 +256,13 @@
     <delete id="remove">
 		delete from jc_kjyy where kjyy_id = #{value}
 	</delete>
-
+    <update id="upremove" parameterType="com.shiguang.jiancha.domain.KjyyDO">
+        update jc_kjyy
+        <set>
+            <if test="status != null">`status` = #{status}</if>
+        </set>
+        where ptometry_number = #{ptometryNumber}
+    </update>
     <delete id="batchRemove">
         delete from jc_kjyy where kjyy_id in
         <foreach item="kjyyId" collection="array" open="(" separator="," close=")">

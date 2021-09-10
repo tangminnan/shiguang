@@ -173,7 +173,8 @@
 			`zy_jklx`,
 			`zy_text`,
 			`zy_beizhu`,
-			`ptometry_number`
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -203,7 +204,8 @@
 			#{zyJklx},
 			#{zyText},
 			#{zyBeizhu},
-			#{ptometryNumber}
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
 	 
@@ -243,7 +245,13 @@
 	<delete id="remove">
 		delete from jc_zy where zy_id = #{value}
 	</delete>
-	
+	<update id="upremove" parameterType="com.shiguang.jiancha.domain.ZyDO">
+		update jc_zy
+		<set>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where ptometry_number = #{ptometryNumber}
+	</update>
 	<delete id="batchRemove">
 		delete from jc_zy where zy_id in 
 		<foreach item="zyId" collection="array" open="(" separator="," close=")">

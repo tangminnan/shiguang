@@ -26,8 +26,8 @@ public interface SgjjService {
     int savesgjj(ResultDO result);
 
     int update(SgjjDO sgjj);
-
     int remove(Long sgjjId);
+    int upremove(SgjjDO sgjjDO);
 
     int batchRemove(Long[] sgjjIds);
 }

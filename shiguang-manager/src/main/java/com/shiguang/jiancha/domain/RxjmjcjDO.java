@@ -61,7 +61,16 @@ public class RxjmjcjDO implements Serializable {
     private String rxHlypz;
     //备注
     private String rxBeizhu;
+    //删除状态
+    private String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     /**
      * 设置：软性角膜接触镜id
      */

@@ -26,8 +26,8 @@ public interface CrtService {
     int saveCrt(ResultDO result);
 
     int update(CrtDO crt);
-
     int remove(Long crtId);
+    int upremove(CrtDO crtDO );
 
     int batchRemove(Long[] crtIds);
 }

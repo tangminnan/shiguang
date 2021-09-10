@@ -108,7 +108,26 @@ public class ResultDO implements Serializable {
     private String followTime;
     //复诊类型
     private String visitType;
+    //删除状态
+    private String status;
+    //是否结算
+    private String haveid;
 
+    public String getHaveid() {
+        return haveid;
+    }
+
+    public void setHaveid(String haveid) {
+        this.haveid = haveid;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     /**
      * 设置：检查结论id
      */

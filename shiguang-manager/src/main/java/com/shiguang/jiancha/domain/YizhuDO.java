@@ -21,7 +21,16 @@ public class YizhuDO implements Serializable {
 	private String yizhuType;
 	//医嘱
 	private String yizhu;
+	//删除状态
+	private String status;
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	/**
 	 * 设置：医嘱id
 	 */

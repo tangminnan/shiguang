@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class PidiaoDO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	//批调id
 	private Long id;
 	//状态
@@ -75,7 +75,7 @@ public class PidiaoDO implements Serializable {
 	//镜片类型
 	private  String classtype;
 	//商品类型
-	private Integer goods;
+	private String goods;
 
 	private String outbm;
 	private String outcw;
@@ -565,11 +565,11 @@ public class PidiaoDO implements Serializable {
 		this.classtype = classtype;
 	}
 
-	public Integer getGoods() {
+	public String getGoods() {
 		return goods;
 	}
 
-	public void setGoods(Integer goods) {
+	public void setGoods(String goods) {
 		this.goods = goods;
 	}
 

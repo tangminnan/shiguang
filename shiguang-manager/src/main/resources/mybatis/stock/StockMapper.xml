@@ -228,7 +228,8 @@
         update stock
         <set>
             <if test="goodsCount != null">`goods_count` = #{goodsCount},</if>
-            <if test="returnzt != null">`returnzt` = #{returnzt}</if>
+            <if test="returnzt != null">`returnzt` = #{returnzt},</if>
+            <if test="tuihuoNumber != null">`tuihuo_number` = #{tuihuoNumber}</if>
         </set>
         <where>
             <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>

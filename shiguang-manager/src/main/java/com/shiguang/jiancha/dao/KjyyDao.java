@@ -30,6 +30,8 @@ public interface KjyyDao {
     int update(KjyyDO kjyy);
 
     int remove(Long kjyy_id);
+    int upremove(KjyyDO kjyyDO);
+
 
     int batchRemove(Long[] kjyyIds);
 }

@@ -148,7 +148,8 @@
 			`rgp_syjpod`,
 			`rgp_syjpos`,
 			`rgp_beizhu`,
-			`ptometry_number`
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -171,7 +172,8 @@
 			#{rgpSyjpod},
 			#{rgpSyjpos},
 			#{rgpBeizhu},
-			#{ptometryNumber}
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
 
@@ -204,6 +206,13 @@
     <delete id="remove">
 		delete from jc_rgp where rgp_id = #{value}
 	</delete>
+    <update id="upremove" parameterType="com.shiguang.jiancha.domain.RgpDO">
+        update jc_rgp
+        <set>
+            <if test="status != null">`status` = #{status}</if>
+        </set>
+        where ptometry_number = #{ptometryNumber}
+    </update>
 
     <delete id="batchRemove">
         delete from jc_rgp where rgp_id in

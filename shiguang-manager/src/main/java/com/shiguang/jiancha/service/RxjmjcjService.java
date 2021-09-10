@@ -26,8 +26,8 @@ public interface RxjmjcjService {
     int saveRxjmjcj(ResultDO result);
 
     int update(RxjmjcjDO rxjmjcj);
-
     int remove(Long rxId);
+    int upremove(RxjmjcjDO rxjmjcjDO);
 
     int batchRemove(Long[] rxIds);
 }

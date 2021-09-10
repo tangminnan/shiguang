@@ -48,9 +48,7 @@ public class OptometryNewController {
     //试戴镜
     @Autowired
     private TryresultsService tryresultsService;
-    //处方
-    @Autowired
-    private ResultService resultService;
+
     //医嘱
     @Autowired
     private YizhuService yizhuService;

@@ -69,6 +69,16 @@ public class ZyDO implements Serializable {
     private String zyBeizhu;
     //验光号
     private String ptometryNumber;
+    //删除状态
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Long getZyId() {
         return zyId;

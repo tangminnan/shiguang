@@ -26,8 +26,8 @@ public interface SjxlService {
     int saveSjxl(ResultDO result);
 
     int update(SjxlDO sjxl);
-
     int remove(Long sjxlId);
+    int upremove(SjxlDO sjxlDO);
 
     int batchRemove(Long[] sjxlIds);
 }

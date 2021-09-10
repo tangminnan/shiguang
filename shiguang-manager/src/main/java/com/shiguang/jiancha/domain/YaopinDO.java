@@ -26,7 +26,16 @@ public class YaopinDO implements Serializable {
     private String ypNr;
     //药名
     private String ypYm;
+    //删除状态
+    private String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     /**
      * 设置：角膜接触镜CRTid
      */

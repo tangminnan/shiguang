@@ -29,7 +29,10 @@ public interface RgpDao {
 
     int update(RgpDO rgp);
 
+
     int remove(Long rgp_id);
+    int upremove(RgpDO rgpDO);
+
 
     int batchRemove(Long[] rgpIds);
 }
