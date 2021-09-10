@@ -2182,7 +2182,7 @@ var classArray=[];
                 html = "<tr onclick='getData("+data+")'><td style=\"width:25%;\">"+list[i].chufang+"</td>";
                 html += "<td style=\"width:25%;\">"+list[i].yangsName+"</td>";
                 html += "<td>"+list[i].yanguangTime+"</td></tr>";
-                html += "<input id='ptometryNumber' name='ptometryNumber' type='hidden' value='"+list[i].ptometryNum+"'>"
+                html += "<input id='ptometryNumber' name='ptometryNumber' type='hidden'>"
                 $("#tbodys").append(html);
             }
             var newli = "";
@@ -2195,9 +2195,11 @@ var classArray=[];
     function getData(obj){
         var ss = JSON.stringify(obj);
         var data = JSON.parse(ss);
+        console.log(data);
         cfType = data.chufangType;
         $("#optometryName").val(data.yangsName)
         $("#recipelTypes").val(data.chufang);
+        $("#ptometryNumber").val(data.ptometryNum);
         // alert(data.chufangType)
         getType(data.chufangType);
         if (data.chufangType == 1){

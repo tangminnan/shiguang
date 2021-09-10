@@ -44,6 +44,8 @@ public class GainLossDO implements Serializable {
 	private String departmentName;
 	//所属门店编码
 	private String departmentNumber;
+	//商品条码
+	private String producCode;
 
 	/**
 	 * 设置：主键
@@ -191,4 +193,12 @@ public class GainLossDO implements Serializable {
 	 * 所属门店编码
 	 */
 	public String getDepartmentNumber() {return departmentNumber;}
+	/**
+	 * 商品条码
+	 */
+	public void setProducCode(String producCode){this.producCode = producCode;}
+	/**
+	 * 商品条码
+	 */
+	public String getProducCode() {return producCode;}
 }

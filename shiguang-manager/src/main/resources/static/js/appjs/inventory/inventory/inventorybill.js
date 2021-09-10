@@ -1,5 +1,5 @@
 
-var prefix = "/information/unqualiffed"
+var prefix = "/information/inventory"
 $(function() {
 	load();
 });
@@ -9,7 +9,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefix + "/billlist", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -33,7 +33,7 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                documentNumber:$("#documentNumber").val()
+                                inventoryId:$("#inventoryId").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -45,39 +45,46 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-								{
-									field : 'documentNumber',
-									title : '单据编号',
-									align : 'center'
+																{
+									field : 'goodsNum',
+									title : '商品代码'
 								},
-								{
-									field : 'departmentAppli',
-									title : '申请部门',
-									align : 'center'
+																{
+									field : 'goodsCode',
+									title : '商品条码'
 								},
-								{
-									field : 'preparedName',
-									title : '制单人',
-									align : 'center'
+																{
+									field : 'goodsName',
+									title : '商品名称'
 								},
-								{
-									field : 'responsibleName',
-									title : '责任人',
-									align : 'center'
-								}
-								// 								{
-								// 	title : '操作',
-								// 	field : 'cardNumber',
-								// 	align : 'center',
-								// 	formatter : function(value, row, index) {
-                                 //        var e = '<a class="btn btn-primary btn-xs" href="#" title="编辑"  mce_href="#" ' +
-								// 				 'onclick="edit(\''+ value+ '\',\''+row.saleNumber+'\',\''+row.costId+'\')" style="text-decoration: none;">更改结款方式</a>';
-								// 			   // e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" ' +
-								// 				//    'onclick="edit(\''+value+'\',\''+row.saleNumber+'\')"><i class="fa fa-edit"></i></a> ';
-								// 		return e;
-								// 	}
-								// }
-								]
+																{
+									field : 'goodsTime',
+									title : '商品效期'
+								},
+																{
+									field : 'goodsBatch',
+									title : '商品批号'
+								},
+																{
+									field : 'factory',
+									title : '规格型号'
+								},
+																{
+									field : 'unitname',
+									title : '单位'
+								},
+																{
+									field : 'bookNum',
+									title : '帐存数量'
+								},
+                            {
+                                field : 'actualNum',
+                                title : '实盘数量'
+                            },
+                            {
+                                field : 'surplus',
+                                title : '盈余数量'
+                            }]
 					});
 }
 function reLoad() {
@@ -92,40 +99,28 @@ function add() {
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
-    layer.full(toIndex)
+	layer.full(toIndex);
 }
-function edit(cardNumber,saleNumber,costId) {
-    var toIndex = layer.open({
+function edit(id) {
+	layer.open({
 		type : 2,
-		title : '结款',
+		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '1500px', '520px' ],
-		content : prefix + '/edit/'+cardNumber+'/'+ saleNumber +'/'+costId // iframe的url
+		area : [ '800px', '520px' ],
+		content : prefix + '/edit/' + id // iframe的url
 	});
-    layer.full(toIndex)
 }
 
-function detail(cardNumber,saleNumber,costId) {
-    var toIndex = layer.open({
+function detail(id) {
+    layer.open({
         type : 2,
         title : '详情',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
-        area : [ '1500px', '520px' ],
-        content : prefix + '/detail/' + cardNumber+'/'+ saleNumber+'/'+costId // iframe的url
+        area : [ '800px', '520px' ],
+        content : prefix + '/detail/' + id // iframe的url
     });
-    layer.full(toIndex)
-}
-
-function dayin(type,saleNumber){
-	if (type == "检查单"){
-        window.open("/information/settlement/jianchadayin?saleNumber="+saleNumber);
-	} else if (type == "配镜单") {
-        window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
-	} else if (type == "定金单"){
-        window.open("/information/settlement/dingjindan?saleNumber="+saleNumber);
-	}
 }
 
 function remove(id) {

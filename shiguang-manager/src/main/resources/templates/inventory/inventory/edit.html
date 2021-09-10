@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${inventory.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">盘盈单：</label>
+								<div class="col-sm-8">
+									<input id="gain" name="gain" th:value="${inventory.gain}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">盘亏单：</label>
+								<div class="col-sm-8">
+									<input id="loss" name="loss" th:value="${inventory.loss}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">盘点单编号：</label>
+								<div class="col-sm-8">
+									<input id="inventoryNumber" name="inventoryNumber" th:value="${inventory.inventoryNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">盘点单名称：</label>
+								<div class="col-sm-8">
+									<input id="inventoryName" name="inventoryName" th:value="${inventory.inventoryName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">盘点类型：</label>
+								<div class="col-sm-8">
+									<input id="inventoryType" name="inventoryType" th:value="${inventory.inventoryType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">盘点日期：</label>
+								<div class="col-sm-8">
+									<input id="inventoryDate" name="inventoryDate" th:value="${inventory.inventoryDate}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">盘点仓位：</label>
+								<div class="col-sm-8">
+									<input id="inventoryPosition" name="inventoryPosition" th:value="${inventory.inventoryPosition}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">盘点人：</label>
+								<div class="col-sm-8">
+									<input id="inventoryUser" name="inventoryUser" th:value="${inventory.inventoryUser}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">部门：</label>
+								<div class="col-sm-8">
+									<input id="departmentName" name="departmentName" th:value="${inventory.departmentName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">部门编号：</label>
+								<div class="col-sm-8">
+									<input id="departmentNumber" name="departmentNumber" th:value="${inventory.departmentNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">商品条码：</label>
+								<div class="col-sm-8">
+									<input id="goodsCode" name="goodsCode" th:value="${inventory.goodsCode}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/inventory/inventory/edit.js">
+	</script>
+</body>
+</html>

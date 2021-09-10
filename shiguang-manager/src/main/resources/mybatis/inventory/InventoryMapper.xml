@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.inventory.dao.InventoryDao">
+
+	<select id="get" resultType="com.shiguang.inventory.domain.InventoryDO">
+		select `id`,`inventory_id`,`gain`,`loss`,`inventory_number`,`inventory_name`,`inventory_type`,`inventory_date`,`inventory_position`,`inventory_user`,`department_name`,`department_number`,`goods_code`,`document_no`,`document_date` from inventory where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.inventory.domain.InventoryDO">
+		select t.`id`,t.`inventory_id`,t.`gain`,t.`loss`,t.`inventory_number`,t.`inventory_name`,t.`inventory_type`,
+		t.`inventory_date`,t.`inventory_position`,t.`inventory_user`,t.`department_name`,t.`department_number`,
+		t.`goods_code`,t.`document_no`,t.`document_date`,c.`position_name` as positionName
+		from inventory t
+		join c_position c on c.position_id = t.inventory_position
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="gain != null and gain != ''"> and gain = #{gain} </if>
+		  		  <if test="loss != null and loss != ''"> and loss = #{loss} </if>
+		  		  <if test="inventoryNumber != null and inventoryNumber != ''"> and inventory_number = #{inventoryNumber} </if>
+		  		  <if test="inventoryName != null and inventoryName != ''"> and inventory_name = #{inventoryName} </if>
+		  		  <if test="inventoryType != null and inventoryType != ''"> and inventory_type = #{inventoryType} </if>
+		  		  <if test="inventoryDate != null and inventoryDate != ''"> and inventory_date = #{inventoryDate} </if>
+		  		  <if test="inventoryPosition != null and inventoryPosition != ''"> and inventory_position = #{inventoryPosition} </if>
+		  		  <if test="inventoryUser != null and inventoryUser != ''"> and inventory_user = #{inventoryUser} </if>
+		  		  <if test="departmentName != null and departmentName != ''"> and department_name = #{departmentName} </if>
+		  		  <if test="departmentNumber != null and departmentNumber != ''"> and department_number = #{departmentNumber} </if>
+		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from inventory
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="gain != null and gain != ''"> and gain = #{gain} </if>
+		  		  <if test="loss != null and loss != ''"> and loss = #{loss} </if>
+		  		  <if test="inventoryNumber != null and inventoryNumber != ''"> and inventory_number = #{inventoryNumber} </if>
+		  		  <if test="inventoryName != null and inventoryName != ''"> and inventory_name = #{inventoryName} </if>
+		  		  <if test="inventoryType != null and inventoryType != ''"> and inventory_type = #{inventoryType} </if>
+		  		  <if test="inventoryDate != null and inventoryDate != ''"> and inventory_date = #{inventoryDate} </if>
+		  		  <if test="inventoryPosition != null and inventoryPosition != ''"> and inventory_position = #{inventoryPosition} </if>
+		  		  <if test="inventoryUser != null and inventoryUser != ''"> and inventory_user = #{inventoryUser} </if>
+		  		  <if test="departmentName != null and departmentName != ''"> and department_name = #{departmentName} </if>
+		  		  <if test="departmentNumber != null and departmentNumber != ''"> and department_number = #{departmentNumber} </if>
+		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.inventory.domain.InventoryDO" useGeneratedKeys="true" keyProperty="id">
+		insert into inventory
+		(
+		    `inventory_id`,
+			`gain`, 
+			`loss`, 
+			`inventory_number`, 
+			`inventory_name`, 
+			`inventory_type`, 
+			`inventory_date`, 
+			`inventory_position`, 
+			`inventory_user`, 
+			`department_name`, 
+			`department_number`, 
+			`goods_code`,
+			`document_no`,
+			`document_date`
+		)
+		values
+		(
+		    #{inventoryId},
+			#{gain}, 
+			#{loss}, 
+			#{inventoryNumber}, 
+			#{inventoryName}, 
+			#{inventoryType}, 
+			#{inventoryDate}, 
+			#{inventoryPosition}, 
+			#{inventoryUser}, 
+			#{departmentName}, 
+			#{departmentNumber}, 
+			#{goodsCode},
+			#{documentNo},
+			#{documentDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.inventory.domain.InventoryDO">
+		update inventory 
+		<set>
+			<if test="gain != null">`gain` = #{gain}, </if>
+			<if test="loss != null">`loss` = #{loss}, </if>
+			<if test="inventoryNumber != null">`inventory_number` = #{inventoryNumber}, </if>
+			<if test="inventoryName != null">`inventory_name` = #{inventoryName}, </if>
+			<if test="inventoryType != null">`inventory_type` = #{inventoryType}, </if>
+			<if test="inventoryDate != null">`inventory_date` = #{inventoryDate}, </if>
+			<if test="inventoryPosition != null">`inventory_position` = #{inventoryPosition}, </if>
+			<if test="inventoryUser != null">`inventory_user` = #{inventoryUser}, </if>
+			<if test="departmentName != null">`department_name` = #{departmentName}, </if>
+			<if test="departmentNumber != null">`department_number` = #{departmentNumber}, </if>
+			<if test="goodsCode != null">`goods_code` = #{goodsCode}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from inventory where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from inventory where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

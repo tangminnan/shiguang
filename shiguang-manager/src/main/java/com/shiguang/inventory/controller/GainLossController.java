@@ -11,6 +11,7 @@ import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.PositionService;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
+import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
 import org.apache.poi.ss.formula.functions.T;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -338,6 +339,32 @@ public class GainLossController {
 		} else if ("护理液".equals(goodsType)){
 			List<HlyDO> hlyDOList = hlyService.list(map);
 			return hlyDOList;
+		} else if ("镜架".equals(goodsType)){
+			List<ProducaDO> producaDOList = producaService.list(map);
+			return producaDOList;
+		} else if ("配件".equals(goodsType)){
+			List<PartsDO> partsDOList = partsService.list(map);
+			return partsDOList;
+		} else if ("镜片".equals(goodsType)){
+			List<JpcpDO> jpcpDOList = jpcpService.list(map);
+			if (null != jpcpDOList && jpcpDOList.size() > 0){
+				return jpcpDOList;
+			} else {
+				List<JpdzDO> jpdzDOList = jpdzService.listDz(map);
+				return jpdzDOList;
+			}
+		} else if ("太阳镜".equals(goodsType)){
+			List<TyjDO> tyjDOList = tyjService.list(map);
+			return tyjDOList;
+		} else if ("老花镜".equals(goodsType)){
+			List<OldlensDO> oldlensDOList = oldlensService.list(map);
+			return oldlensDOList;
+		} else if ("耗材".equals(goodsType)){
+			List<HcDO> hcDOList = hcService.list(map);
+			return hcDOList;
+		} else if ("视光".equals(goodsType)){
+			List<ShiguangDO> shiguangDOList = shiguangService.list(map);
+			return shiguangDOList;
 		}
 		return list;
 	}
@@ -354,10 +381,31 @@ public class GainLossController {
 		gainLoss.setDocumentDate(new Date());
 		gainLoss.setDepartmentName(ShiroUtils.getUser().getStore());
 		gainLoss.setDepartmentNumber(ShiroUtils.getUser().getStoreNum());
-		if (null != gainLoss.getGoodsId()){
-			String[] goodsId = gainLoss.getGoodsId().split(",");
-			for (int i=0;i<goodsId.length;i++){
+		if (null != gainLoss.getProducCode()){
+			String[] produceCode = gainLoss.getProducCode().split(",");
+			String[] inventoryCount = gainLoss.getInventoryCount().split(",");
+			for (int i=0;i<produceCode.length;i++){
 				//更新库存
+				StockDO stockDOs = new StockDO();
+				stockDOs.setGoodsCode(produceCode[i]);
+				stockDOs.setPositionId(String.valueOf(gainLoss.getPositionId()));
+				StockDO stockDO = stockService.getProduceCode(stockDOs);
+				String stockCount = stockDO.getGoodsCount();
+				if ("盘盈".equals(gainLoss.getDocumentType())){
+					int goodsCount = Integer.parseInt(stockCount) + Integer.parseInt(inventoryCount[i]);
+					StockDO stockDO1 = new StockDO();
+					stockDO1.setGoodsCount(goodsCount+"");
+					stockDO1.setGoodsCode(produceCode[i]);
+					stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
+					stockService.updateGoodsCount(stockDO1);
+				}else if ("盘亏".equals(gainLoss.getDocumentType())){
+					int goodsCount = Integer.parseInt(stockCount) - Integer.parseInt(inventoryCount[i]);
+					StockDO stockDO1 = new StockDO();
+					stockDO1.setGoodsCount(goodsCount+"");
+					stockDO1.setGoodsCode(produceCode[i]);
+					stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
+					stockService.updateGoodsCount(stockDO1);
+				}
 			}
 		}
 		if(gainLossService.save(gainLoss)>0){

@@ -233,6 +233,7 @@
         <where>
             <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
             <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
+            <if test="goodsCode != null and goodsCode != ''">and goods_code = #{goodsCode}</if>
         </where>
     </update>
 
@@ -247,6 +248,16 @@
         </foreach>
     </delete>
 
+    <!-- 查询该条码的库存数量 -->
+    <select id="getProduceCode" resultType="com.shiguang.stock.domain.StockDO">
+    select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,
+    `price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_id`,`position_name`,`create_time`,`danju_number`,
+    `order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,
+     `batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,`factory` ,`status`,`username`,`returnzt` from stock
+     <where>
+         goods_code = #{goodsCode} and position_id = #{positionId} and `status` = '0'
+     </where>
+</select>
 
     <!-- 镜架查询 -->
     <select id="listJiajia" resultType="com.shiguang.stock.domain.StockDO">

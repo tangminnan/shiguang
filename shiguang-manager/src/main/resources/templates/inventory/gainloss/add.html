@@ -66,8 +66,8 @@
 
 		<div class="HH_btns">
 			<div class="Xbtn">
-				<input id="addGood" type="button" style="display: block;" onclick="addGoods()" value="单品添加商品" />
-				<input id="barcode" type="button" style="display: none" onclick="getBarcode()" value="条码扫描" />
+				<input id="addGood" type="button" style="display: '';" onclick="addGoods()" value="单品添加商品" />
+				<input id="barcode" type="button" onclick="getBarcode()" value="条码扫描" />
 				<!--<input type="button" value="已核销订单添加商品" />-->
 				<!--<input type="button" value="二维表添加商品" />-->
 				<!--<input class="HgreenBG" type="button" value="打印条码" />-->
@@ -139,10 +139,8 @@
 	    var identoryType = $("#inventoryType").val();
 	    if (identoryType == "隐形" || identoryType == "护理液"){
             addGood.style="display:none";
-            barcode.style="display:block";
 		} else {
-            addGood.style="display:block";
-            barcode.style="display:none";
+            addGood.style="display:''";
 		}
 	}
 	var html = "";
@@ -160,11 +158,10 @@
                 content : "/information/gainLoss/goods/"+goodsType, // iframe的url
                 cancel: function(index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                    alert($("#inventoryId").val())
 					for (var i=0;i<rows.length;i++){
 					    html = "<tr><td><input type='checkbox' /></td>";
                         html += "<td>"+rows[i].producNum+"</td>";
-                        html += "<td>"+rows[i].producCode+"</td>";
+                        html += "<td><input id='producCode' name='producCode' value='"+rows[i].producCode+"'/></td>";
                         html += "<td>"+rows[i].producName+"</td>";
                         html += "<td>"+rows[i].producFactory+"</td>";
                         html += "<td><input id='inventoryCount' name='inventoryCount'/></td></tr>";

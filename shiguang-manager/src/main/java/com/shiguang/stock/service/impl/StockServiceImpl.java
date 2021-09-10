@@ -261,6 +261,10 @@ public class StockServiceImpl implements StockService {
     }
     //判断是否存在商品信息
 
+    @Override
+    public StockDO getProduceCode(StockDO stockDO) {
+        return stockDao.getProduceCode(stockDO);
+    }
 
     @Override
     public StockDO haveNum(StockDO stockDO) {

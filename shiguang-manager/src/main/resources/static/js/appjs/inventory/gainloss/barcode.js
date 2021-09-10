@@ -21,7 +21,7 @@ function findGoods(){
             $(datajson).each(function (key) {  //循环读取后台传来的Json数据
                 barHtml = "<tr><td><input type='checkbox' /></td>";
                 barHtml += "<td>"+datajson[key].producNum+"</td>";
-                barHtml += "<td>"+datajson[key].producCode+"</td>";
+                barHtml += "<td><input id='producCode' name='producCode' value='"+datajson[key].producCode+"'/></td>";
                 barHtml += "<td>"+datajson[key].producName+"</td>";
                 barHtml += "<td>"+datajson[key].factory+"</td>";
                 barHtml += "<td><input id='inventoryCount' name='inventoryCount'/></td></tr>";

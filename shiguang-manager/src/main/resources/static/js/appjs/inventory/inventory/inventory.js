@@ -1,5 +1,5 @@
 
-var prefix = "/information/unqualiffed"
+var prefix = "/information/inventory"
 $(function() {
 	load();
 });
@@ -32,8 +32,7 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset,
-                                documentNumber:$("#documentNumber").val()
+								offset:params.offset
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -45,39 +44,49 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-								{
-									field : 'documentNumber',
-									title : '单据编号',
-									align : 'center'
+																{
+									field : 'gain', 
+									title : '盘盈单' 
 								},
-								{
-									field : 'departmentAppli',
-									title : '申请部门',
-									align : 'center'
+																{
+									field : 'loss', 
+									title : '盘亏单' 
 								},
-								{
-									field : 'preparedName',
-									title : '制单人',
-									align : 'center'
+																{
+									field : 'inventoryNumber', 
+									title : '盘点单编号' 
 								},
-								{
-									field : 'responsibleName',
-									title : '责任人',
-									align : 'center'
-								}
-								// 								{
-								// 	title : '操作',
-								// 	field : 'cardNumber',
-								// 	align : 'center',
-								// 	formatter : function(value, row, index) {
-                                 //        var e = '<a class="btn btn-primary btn-xs" href="#" title="编辑"  mce_href="#" ' +
-								// 				 'onclick="edit(\''+ value+ '\',\''+row.saleNumber+'\',\''+row.costId+'\')" style="text-decoration: none;">更改结款方式</a>';
-								// 			   // e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" ' +
-								// 				//    'onclick="edit(\''+value+'\',\''+row.saleNumber+'\')"><i class="fa fa-edit"></i></a> ';
-								// 		return e;
-								// 	}
-								// }
-								]
+																{
+									field : 'inventoryName', 
+									title : '盘点单名称' 
+								},
+																{
+									field : 'inventoryType', 
+									title : '盘点类型' 
+								},
+																{
+									field : 'inventoryDate', 
+									title : '盘点日期' 
+								},
+																{
+									field : 'positionName',
+									title : '盘点仓位' 
+								},
+																{
+									field : 'inventoryUser', 
+									title : '盘点人' 
+								},
+																{
+									title : '操作',
+									field : 'id',
+									align : 'center',
+									formatter : function(value, row, index) {
+                                        var e = '<a class="btn btn-primary btn-xs" href="#" mce_href="#" title="详情" onclick="detail(\''
+                                            + row.id
+                                            + '\')" style="text-decoration: none;">详情</a> ';
+										return e ;
+									}
+								} ]
 					});
 }
 function reLoad() {
@@ -92,40 +101,29 @@ function add() {
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
-    layer.full(toIndex)
+	layer.full(toIndex);
 }
-function edit(cardNumber,saleNumber,costId) {
-    var toIndex = layer.open({
+function edit(id) {
+	layer.open({
 		type : 2,
-		title : '结款',
+		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '1500px', '520px' ],
-		content : prefix + '/edit/'+cardNumber+'/'+ saleNumber +'/'+costId // iframe的url
+		area : [ '800px', '520px' ],
+		content : prefix + '/edit/' + id // iframe的url
 	});
-    layer.full(toIndex)
 }
 
-function detail(cardNumber,saleNumber,costId) {
+function detail(id) {
     var toIndex = layer.open({
         type : 2,
         title : '详情',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
-        area : [ '1500px', '520px' ],
-        content : prefix + '/detail/' + cardNumber+'/'+ saleNumber+'/'+costId // iframe的url
+        area : [ '800px', '520px' ],
+        content : prefix + '/detail/' + id // iframe的url
     });
-    layer.full(toIndex)
-}
-
-function dayin(type,saleNumber){
-	if (type == "检查单"){
-        window.open("/information/settlement/jianchadayin?saleNumber="+saleNumber);
-	} else if (type == "配镜单") {
-        window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
-	} else if (type == "定金单"){
-        window.open("/information/settlement/dingjindan?saleNumber="+saleNumber);
-	}
+    layer.full(toIndex);
 }
 
 function remove(id) {

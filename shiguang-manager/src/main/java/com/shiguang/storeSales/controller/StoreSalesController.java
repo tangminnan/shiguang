@@ -454,9 +454,19 @@ public class StoreSalesController {
             String storeDesc = salesDO.getStoreDescribe();
             String[] goodsStr = goodsCode.split(",");
             String[] goodsDescribe = storeDesc.split(",");
+            String storeNum = "";
+            if (null != ShiroUtils.getUser().getStoreNum()) {
+                storeNum = ShiroUtils.getUser().getStoreNum();
+            }
+            Map<String,Object> map = new HashMap<>();
+            map.put("departNumber", storeNum);
+            PositionDO positionDO = stockService.findPosition(map);
             for (int e=0;e<goodsDescribe.length;e++){
                 if ("镜架".equals(goodsDescribe[e])){
-                    StockDO stockDO = stockService.getGoodsNum(goodsStr[e]);
+                    StockDO stockDOs = new StockDO();
+                    stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
+                    stockDOs.setGoodsCode(goodsStr[e]);
+                    StockDO stockDO = stockService.getProduceCode(stockDOs);
                     Long countGoods = Long.parseLong(stockDO.getGoodsCount());
                     Long count = countGoods - 1;
                     stockDO.setGoodsCount(String.valueOf(count));

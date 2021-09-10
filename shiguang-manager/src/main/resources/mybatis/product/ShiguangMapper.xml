@@ -23,6 +23,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
             <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.produc_code = #{goodsCode}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">

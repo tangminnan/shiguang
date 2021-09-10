@@ -69,6 +69,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
@@ -162,6 +163,7 @@
             <if test="id != null and id != ''">and j.id = #{id}</if>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
             <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>

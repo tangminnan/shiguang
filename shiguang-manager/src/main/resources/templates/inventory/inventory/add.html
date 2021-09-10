@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>不合格管理新增</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+	<div class="new_h3">不合格管理新增</div>
+
+	<!--检查条件-->
+	<div class="m40 tabS PHGL">
+		<h3>检查条件</h3>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr>
+				<td>单据编号：</td>
+				<td><input style="border: 0px;" readonly type="text" id="documentNo" name="documentNo" th:value="${documentNo}"></td>
+				<td>单据日期：</td>
+				<td><input style="border: 0px;" readonly type="text" id="documentTime" name="documentTime" th:value="${documentTime}"></td>
+				<td>盘点名称：</td>
+				<td><input style="border: 0px;"  type="text" id="inventoryName" name="inventoryName" ></td>
+			</tr>
+			<tr>
+				<td>盘点仓位：</td>
+				<td width="25%">
+					<select name="inventoryPosition" id="inventoryPosition">
+						<option></option>
+						<option th:each="ls:${positionDOList}"
+								th:text="${ls.positionName}"
+								th:value="${ls.positionId}"></option>
+					</select>
+				</td>
+				<td>盘点人：</td>
+				<td><input style="border: 0px;" readonly type="text" id="inventoryUser" name="inventoryUser" th:value="${inventoryUser}"></td>
+				<td>盘点类型：</td>
+				<td width="25%">
+					<select name="inventoryType" id="inventoryType" onchange="getGoodsType()">
+						<option></option>
+						<option value="镜架">镜架</option>
+						<option value="配件">配件</option>
+						<option value="镜片">镜片</option>
+						<option value="隐形">隐形</option>
+						<option value="护理液">护理液</option>
+						<option value="太阳镜">太阳镜</option>
+						<option value="老花镜">老花镜</option>
+						<option value="耗材">耗材</option>
+						<option value="视光">视光</option>
+					</select>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="col-sm-8">
+			<input id="fileName" name="file" class="form-control" type="file">
+		</div>
+		<div class="HH_btns">
+			<div class="Xbtn">
+				<input type="submit" class="H_bc" style="width: 10%;" value="导入盘点文件" />
+				<!--<input type="button" value="已核销订单添加商品" />-->
+				<!--<input type="button" value="二维表添加商品" />-->
+				<!--<input class="HgreenBG" type="button" value="打印条码" />-->
+			</div>
+			<!--<div class="Cbtn buyBtns">-->
+			<!--<input type="button" class="H_bc" value="保存" />-->
+			<!--<input type="checkbox" id="Hbc" /> <label for="Hbc">保存并审核</label>-->
+			<!--</div>-->
+		</div>
+
+	</div>
+
+	<!--&lt;!&ndash;商品信息&ndash;&gt;-->
+	<!--<div class="m40 tabS SPmsg">-->
+		<!--<div class="Cbtn buyBtns">-->
+			<!--<input type="submit" class="H_bc" value="导入盘点文件" />-->
+			<!--&lt;!&ndash;<input type="checkbox" id="HHbc" /> <label for="HHbc">保存并审核</label>&ndash;&gt;-->
+		<!--</div>-->
+	<!--</div>-->
+
+</form>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/inventory/inventory/add.js"></script>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

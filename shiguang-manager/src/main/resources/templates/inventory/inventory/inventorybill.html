@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<!--<div class="columns pull-left">-->
+							<!--<button shiro:hasPermission="information:inventory:add" type="button" class="btn  btn-primary" onclick="add()">-->
+								<!--<i class="fa fa-plus" aria-hidden="true"></i>添加-->
+							<!--</button>-->
+							<!--<button shiro:hasPermission="information:inventory:batchRemove" type="button" class="btn  btn-danger"-->
+								<!--onclick="batchRemove()">-->
+								<!--<i class="fa fa-trash" aria-hidden="true"></i>删除-->
+							<!--</button>-->
+						<!--</div>-->
+						<!--<div class="columns pull-right">-->
+							<!--<button class="btn btn-success" onclick="reLoad()">查询</button>-->
+						<!--</div>-->
+						<!--<div class="columns pull-right col-md-2 nopadding">-->
+						<tr>
+							<td>单据编号</td>
+							<td><input id="documentNo" type="text"
+									   th:value="${inventory.documentNo}"></td>
+							<td>单据日期</td>
+							<td><input id="documentTime" type="text"
+									   th:value="${inventory.documentTime}"></td>
+							<td>盘点单名称</td>
+							<td>
+								<input id="inventoryName" type="text"
+									   th:value="${inventory.inventoryName}">
+								<input id="inventoryId" type="hidden"
+									   th:value="${inventory.inventoryId}">
+							</td>
+						</tr>
+						<tr>
+							<td>盘点仓位</td>
+							<td><input id="inventoryPosition" type="text"
+									   th:value="${inventory.inventoryPosition}"></td>
+							<td>盘点人</td>
+							<td><input id="inventoryUser" type="text"
+									   th:value="${inventory.inventoryUser}"></td>
+							<td>盘点类型</td>
+							<td>
+								<input id="inventoryType" type="text"
+									   th:value="${inventory.inventoryType}">
+							</td>
+						</tr>
+
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:inventory:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:inventory:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:inventory:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/inventory/inventory/inventorybill.js"></script>
+</body>
+</html>

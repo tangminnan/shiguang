@@ -11,6 +11,7 @@ import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mailInfo.domain.MailInfoDO;
 import com.shiguang.mailInfo.service.MailInfoService;
+import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
 import com.shiguang.stock.domain.StockDO;
@@ -303,9 +304,19 @@ public class LogStatusController {
         String storeDesc = salesDO.getStoreDescribe();
         String[] storeDescribe = storeDesc.split(",");
         String[] goodsCode = salesDO.getGoodsCode().split(",");
+        String storeNum = "";
+        if (null != ShiroUtils.getUser().getStoreNum()) {
+            storeNum = ShiroUtils.getUser().getStoreNum();
+        }
+        Map<String,Object> maps = new HashMap<>();
+        maps.put("departNumber", storeNum);
+        PositionDO positionDO = stockService.findPosition(maps);
         for (int a=0;a<storeDescribe.length;a++){
             if (!"镜架".equals(storeDescribe[a])){
-                StockDO stockDO = stockService.getGoodsNum(goodsCode[a]);
+                StockDO stockDOs = new StockDO();
+                stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
+                stockDOs.setGoodsCode(goodsCode[a]);
+                StockDO stockDO = stockService.getProduceCode(stockDOs);
                 if (null != stockDO){
                     Long countGoods = Long.parseLong(stockDO.getGoodsCount());
                     Long count = countGoods - 1;
