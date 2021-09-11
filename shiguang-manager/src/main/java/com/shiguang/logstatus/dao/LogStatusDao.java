@@ -38,4 +38,6 @@ public interface LogStatusDao {
 
     int saveRecord(WorkRecoedDO workRecoedDO);
 
+    LogStatusDO getLogStatusBySaleNum(String saleNumber);
+
 }

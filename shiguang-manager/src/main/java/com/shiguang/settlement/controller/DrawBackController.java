@@ -3,6 +3,8 @@ package com.shiguang.settlement.controller;
 import com.shiguang.checkout.domain.CostDO;
 import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.*;
+import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.mfrs.domain.PositionDO;
@@ -39,6 +41,8 @@ public class DrawBackController {
     private SalesService salesService;
     @Autowired
     private StockService stockService;
+    @Autowired
+    private LogStatusService logStatusService;
 
     @GetMapping()
     @RequiresPermissions("information:drawback:drawback")
@@ -91,9 +95,11 @@ public class DrawBackController {
         costDO.setIsSale(2L);
         costService.update(costDO);
         SalesDO salesDO = salesService.getSaleNumber(saleNumber);
+        LogStatusDO logStatusDO = logStatusService.getLogStatusBySaleNum(saleNumber);
         String storeNum = salesDO.getStoreNum();
         String[] count = salesDO.getStoreCount().split(",");
         String[] goodsCode = salesDO.getGoodsCode().split(",");
+        String[] storeDescribe = salesDO.getStoreDescribe().split(",");
         Map<String,Object> map = new HashMap<>();
         map.put("departNumber",storeNum);
         PositionDO positionDO = stockService.findPosition(map);
@@ -101,8 +107,20 @@ public class DrawBackController {
             StockDO stockDO = new StockDO();
             stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
             stockDO.setGoodsCode(goodsCode[i]);
-            stockDO.setGoodsCount(count[i]);
-            stockService.updateGoodsCount(stockDO);
+            StockDO stockDO1 = stockService.getProduceCode(stockDO);
+            if (!"销售完成".equals(logStatusDO.getLogisticStatus())){
+                    int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+                    stockDO.setGoodsCount(godsCount + "");
+                    stockService.updateGoodsCount(stockDO);
+            } else if (null != logStatusDO){
+                if (!"镜片".equals(storeDescribe[i])){
+                    int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+                    stockDO.setGoodsCount(godsCount + "");
+                    stockService.updateGoodsCount(stockDO);
+                }
+            }
+
+
         }
         if(drawbackService.save(drawbackDO)>0){
             return R.ok();

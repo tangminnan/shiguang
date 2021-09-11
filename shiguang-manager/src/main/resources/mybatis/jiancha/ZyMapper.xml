@@ -8,10 +8,11 @@
 	</select>
 
 	<select id="list" resultType="com.shiguang.jiancha.domain.ZyDO">
-		select `zy_id`,`card_number`,`zy_prescription_type`,`zy_doctor`,`zy_optometry_name`,`zy_sphod`,`zy_sphos`,`zy_cylod`,`zy_cylos`,`zy_axialod`,`zy_axialos`,`zy_prismod`,`zy_prismos`,`zy_jdod`,`zy_jdos`,`zy_zytjod`,`zy_zytjos`,`zy_tgod`,`zy_tgos`,`zy_vaod`,`zy_vaos`,`zy_jpcz`,`zy_clfs`,`zy_jyjk`,`zy_jklx`,`zy_text`,`zy_beizhu` from jc_zy
+		select `zy_id`,`card_number`,`sale_number`,`zy_prescription_type`,`zy_doctor`,`zy_optometry_name`,`zy_sphod`,`zy_sphos`,`zy_cylod`,`zy_cylos`,`zy_axialod`,`zy_axialos`,`zy_prismod`,`zy_prismos`,`zy_jdod`,`zy_jdos`,`zy_zytjod`,`zy_zytjos`,`zy_tgod`,`zy_tgos`,`zy_vaod`,`zy_vaos`,`zy_jpcz`,`zy_clfs`,`zy_jyjk`,`zy_jklx`,`zy_text`,`zy_beizhu` from jc_zy
         <where>  
 		  		  <if test="zyId != null and zyId != ''"> and zy_id = #{zyId} </if>
 		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			      <if test="saleNumber != null and saleNumber != ''"> and sale_number=#{saleNumber}</if>
 		  		  <if test="zyPrescriptionType != null and zyPrescriptionType != ''"> and zy_prescription_type = #{zyPrescriptionType} </if>
 		  		  <if test="zyDoctor != null and zyDoctor != ''"> and zy_doctor = #{zyDoctor} </if>
 		  		  <if test="zyOptometryName != null and zyOptometryName != ''"> and zy_optometry_name = #{zyOptometryName} </if>
@@ -56,6 +57,7 @@
 		 <where>  
 		  		  <if test="zyId != null and zyId != ''"> and zy_id = #{zyId} </if>
 		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			      <if test="saleNumber != null and saleNumber != ''"> and sale_number=#{saleNumber}</if>
 		  		  <if test="zyPrescriptionType != null and zyPrescriptionType != ''"> and zy_prescription_type = #{zyPrescriptionType} </if>
 		  		  <if test="zyDoctor != null and zyDoctor != ''"> and zy_doctor = #{zyDoctor} </if>
 		  		  <if test="zyOptometryName != null and zyOptometryName != ''"> and zy_optometry_name = #{zyOptometryName} </if>
@@ -87,7 +89,8 @@
 	<insert id="save" parameterType="com.shiguang.jiancha.domain.ZyDO" useGeneratedKeys="true" keyProperty="zyId">
 		insert into jc_zy
 		(
-			`card_number`, 
+			`card_number`,
+			`sale_number`,
 			`zy_prescription_type`, 
 			`zy_doctor`, 
 			`zy_optometry_name`, 
@@ -116,7 +119,8 @@
 		)
 		values
 		(
-			#{cardNumber}, 
+			#{cardNumber},
+			#{saleNumber},
 			#{zyPrescriptionType}, 
 			#{zyDoctor}, 
 			#{zyOptometryName}, 

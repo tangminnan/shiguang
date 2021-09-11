@@ -291,6 +291,7 @@ public class StoreSalesController {
             if (salesDO.getRecipelwlType() == 1) {
                 KjjyDO kjjyDO = new KjjyDO();
                 kjjyDO.setCardNumber(salesDO.getMemberNumber());
+                kjjyDO.setSaleNumber(salesDO.getSaleNumber());
                 kjjyDO.setKjjyPrescriptionType(salesDO.getRecipelType().toString());
                 kjjyDO.setKjjyOptometryName(salesDO.getSaleName());
                 kjjyDO.setKjjySphod(salesDO.getRightQJjy());
@@ -313,6 +314,7 @@ public class StoreSalesController {
             } else if (salesDO.getRecipelwlType() == 2) {
                 KjyyDO kjyyDO = new KjyyDO();
                 kjyyDO.setCardNumber(salesDO.getMemberNumber());
+                kjyyDO.setSaleNumber(salesDO.getSaleNumber());
                 kjyyDO.setKjyyPrescriptionType(salesDO.getRecipelType().toString());
                 kjyyDO.setKjyyOptometryName(salesDO.getSaleName());
                 kjyyDO.setKjyySphod(salesDO.getRightQJyy());
@@ -335,6 +337,7 @@ public class StoreSalesController {
             } else if (salesDO.getRecipelwlType() == 3) {
                 SgjjDO sgjjDO = new SgjjDO();
                 sgjjDO.setCardNumber(salesDO.getMemberNumber());
+                sgjjDO.setSaleNumber(salesDO.getSaleNumber());
                 sgjjDO.setSgjjPrescriptionType(salesDO.getRecipelType().toString());
                 sgjjDO.setSgjjOptometryName(salesDO.getSaleName());
                 sgjjDO.setSgjjSphod(salesDO.getRightQJsg());
@@ -353,6 +356,7 @@ public class StoreSalesController {
             } else if (salesDO.getRecipelwlType() == 4) {
                 ZyDO zyDO = new ZyDO();
                 zyDO.setCardNumber(salesDO.getMemberNumber());
+                zyDO.setSaleNumber(salesDO.getSaleNumber());
                 zyDO.setZyPrescriptionType(salesDO.getRecipelType().toString());
                 zyDO.setZyOptometryName(salesDO.getSaleName());
                 zyDO.setZySphod(salesDO.getRightQJzy());
@@ -375,6 +379,7 @@ public class StoreSalesController {
             } else if (salesDO.getRecipelwlType() == 5) {
                 RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
                 rxjmjcjDO.setCardNumber(salesDO.getMemberNumber());
+                rxjmjcjDO.setSaleNumber(salesDO.getSaleNumber());
                 rxjmjcjDO.setRxPrescriptionType(salesDO.getRecipelType().toString());
                 rxjmjcjDO.setRxOptometryName(salesDO.getSaleName());
                 rxjmjcjDO.setRxSphod(salesDO.getRightQJyx());
@@ -391,6 +396,7 @@ public class StoreSalesController {
             } else if (salesDO.getRecipelwlType() == 7) {
                 SjxlDO sjxlDO = new SjxlDO();
                 sjxlDO.setCardNumber(salesDO.getMemberNumber());
+                sjxlDO.setSaleNumber(salesDO.getSaleNumber());
                 sjxlDO.setSjxlPrescriptionType(salesDO.getRecipelType().toString());
                 sjxlDO.setSjxlOptometryName(salesDO.getSaleName());
                 sjxlDO.setSjxlSphod(salesDO.getRightQJxl());

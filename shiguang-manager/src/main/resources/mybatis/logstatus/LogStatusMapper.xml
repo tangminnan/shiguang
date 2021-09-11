@@ -225,4 +225,8 @@
         </where>
     </select>
 
+    <select id="getLogStatusBySaleNum" resultType="com.shiguang.logstatus.domain.LogStatusDO">
+        select `id`,`sale_number`,`logistic_status` from log_status where sale_number = #{value}
+    </select>
+
 </mapper>

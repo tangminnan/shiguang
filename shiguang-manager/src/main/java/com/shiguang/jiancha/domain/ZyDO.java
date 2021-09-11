@@ -17,6 +17,8 @@ public class ZyDO implements Serializable {
     private Long zyId;
     //卡号
     private String cardNumber;
+    //销售单号
+    private String saleNumber;
     //处方类型
     private String zyPrescriptionType;
     //医生
@@ -85,6 +87,16 @@ public class ZyDO implements Serializable {
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
+
+    /**
+     * 销售单号
+     */
+    public void setSaleNumber(String saleNumber){this.saleNumber = saleNumber;}
+
+    /**
+     * 销售单号
+     */
+    public String getSaleNumber() {return saleNumber;}
 
     public String getZyPrescriptionType() {
         return zyPrescriptionType;

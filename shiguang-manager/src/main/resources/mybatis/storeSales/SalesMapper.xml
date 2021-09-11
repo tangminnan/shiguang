@@ -626,6 +626,7 @@
 		) aia
 		<where>
 			<if test="cardNumber != null and cardNumber != ''"> and cardNumber = #{cardNumber}</if>
+			<if test="ptometryNumber != null and ptometryNumber != ''">and ptometry_number = #{ptometryNumber}</if>
 		</where>
 		ORDER BY createTime desc
 	</select>

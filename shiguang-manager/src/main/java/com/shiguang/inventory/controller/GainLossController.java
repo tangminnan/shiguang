@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.shiguang.common.utils.*;
+import com.shiguang.inventory.dao.GainLossDao;
 import com.shiguang.inventory.domain.GainLossDO;
 import com.shiguang.inventory.service.GainLossService;
 import com.shiguang.mfrs.domain.GoodsDO;
@@ -86,7 +87,13 @@ public class GainLossController {
 				query.put("departNumber",ShiroUtils.getUser().getStoreNum());
 			}
 		}
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		List<GainLossDO> gainLossList = gainLossService.list(query);
+		if (null != gainLossList && gainLossList.size() > 0){
+			for (GainLossDO gainLossDO : gainLossList){
+				gainLossDO.setExamineTime(simpleDateFormat.format(gainLossDO.getExamineDate()));
+			}
+		}
 		int total = gainLossService.count(query);
 		PageUtils pageUtils = new PageUtils(gainLossList, total);
 		return pageUtils;
@@ -381,33 +388,7 @@ public class GainLossController {
 		gainLoss.setDocumentDate(new Date());
 		gainLoss.setDepartmentName(ShiroUtils.getUser().getStore());
 		gainLoss.setDepartmentNumber(ShiroUtils.getUser().getStoreNum());
-		if (null != gainLoss.getProducCode()){
-			String[] produceCode = gainLoss.getProducCode().split(",");
-			String[] inventoryCount = gainLoss.getInventoryCount().split(",");
-			for (int i=0;i<produceCode.length;i++){
-				//更新库存
-				StockDO stockDOs = new StockDO();
-				stockDOs.setGoodsCode(produceCode[i]);
-				stockDOs.setPositionId(String.valueOf(gainLoss.getPositionId()));
-				StockDO stockDO = stockService.getProduceCode(stockDOs);
-				String stockCount = stockDO.getGoodsCount();
-				if ("盘盈".equals(gainLoss.getDocumentType())){
-					int goodsCount = Integer.parseInt(stockCount) + Integer.parseInt(inventoryCount[i]);
-					StockDO stockDO1 = new StockDO();
-					stockDO1.setGoodsCount(goodsCount+"");
-					stockDO1.setGoodsCode(produceCode[i]);
-					stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
-					stockService.updateGoodsCount(stockDO1);
-				}else if ("盘亏".equals(gainLoss.getDocumentType())){
-					int goodsCount = Integer.parseInt(stockCount) - Integer.parseInt(inventoryCount[i]);
-					StockDO stockDO1 = new StockDO();
-					stockDO1.setGoodsCount(goodsCount+"");
-					stockDO1.setGoodsCode(produceCode[i]);
-					stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
-					stockService.updateGoodsCount(stockDO1);
-				}
-			}
-		}
+		gainLoss.setExamineStatus("0");
 		if(gainLossService.save(gainLoss)>0){
 			return R.ok();
 		}
@@ -422,6 +403,97 @@ public class GainLossController {
 	public R update( GainLossDO gainLoss){
 		gainLossService.update(gainLoss);
 		return R.ok();
+	}
+
+	/**
+	 * 审核
+	 */
+	@PostMapping( "/examine")
+	@ResponseBody
+	@RequiresPermissions("information:gainLoss:examine")
+	public R examine( Long id){
+		GainLossDO gainLoss = gainLossService.get(id);
+		Integer goodsType = null;
+		if ("镜架".equals(gainLoss.getInventoryType())){
+			goodsType = 1;
+		} else if ("配件".equals(gainLoss.getInventoryType())){
+			goodsType = 2;
+		} else if ("镜片".equals(gainLoss.getInventoryType())){
+			goodsType = 3;
+		} else if ("隐形".equals(gainLoss.getInventoryType())){
+			goodsType = 4;
+		} else if ("护理液".equals(gainLoss.getInventoryType())){
+			goodsType = 5;
+		} else if ("太阳镜".equals(gainLoss.getInventoryType())){
+			goodsType = 6;
+		} else if ("老花镜".equals(gainLoss.getInventoryType())){
+			goodsType = 7;
+		} else if ("耗材".equals(gainLoss.getInventoryType())){
+			goodsType = 8;
+		} else if ("视光".equals(gainLoss.getInventoryType())){
+			goodsType = 9;
+		}
+		if (null != gainLoss.getProducCode()){
+			String[] produceCode = gainLoss.getProducCode().split(",");
+			String[] inventoryCount = gainLoss.getInventoryCount().split(",");
+			String[] goodsNum = gainLoss.getGoodsNum().split(",");
+			String[] goodsName = gainLoss.getGoodsName().split(",");
+			String[] classType = gainLoss.getClassType().split(",");
+			for (int i=0;i<produceCode.length;i++){
+				//更新库存
+				StockDO stockDOs = new StockDO();
+				stockDOs.setGoodsCode(produceCode[i]);
+				stockDOs.setPositionId(String.valueOf(gainLoss.getPositionId()));
+				String stockCount = "";
+				StockDO stockDO = stockService.getProduceCode(stockDOs);
+				if (null != stockDO){
+					stockCount = stockDO.getGoodsCount();
+					if ("盘盈".equals(gainLoss.getDocumentType())){
+						int goodsCount = Integer.parseInt(stockCount) + Integer.parseInt(inventoryCount[i]);
+						StockDO stockDO1 = new StockDO();
+						stockDO1.setGoodsCount(goodsCount+"");
+						stockDO1.setGoodsCode(produceCode[i]);
+						stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
+						stockService.updateGoodsCount(stockDO1);
+					}else if ("盘亏".equals(gainLoss.getDocumentType())){
+						int goodsCount = Integer.parseInt(stockCount) - Integer.parseInt(inventoryCount[i]);
+						StockDO stockDO1 = new StockDO();
+						stockDO1.setGoodsCount(goodsCount+"");
+						stockDO1.setGoodsCode(produceCode[i]);
+						stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
+						stockService.updateGoodsCount(stockDO1);
+					}
+				} else {
+					if ("盘盈".equals(gainLoss.getDocumentType())){
+						StockDO stockDO1 = new StockDO();
+						stockDO1.setGoodsCode(produceCode[i]);
+						stockDO1.setUsername(ShiroUtils.getUser().getUsername());
+						stockDO1.setStatus("0");
+						stockDO1.setGoodsNum(goodsNum[i]);
+						stockDO1.setGoodsName(goodsName[i]);
+						stockDO1.setGoodsCount(inventoryCount[i]);
+						stockDO1.setGoodsType(goodsType);
+						stockDO1.setUnit(gainLoss.getUnitname());
+						stockDO1.setMfrsid(gainLoss.getMfrsid());
+						stockDO1.setBrandname(gainLoss.getBrandname());
+						stockDO1.setReturnzt(gainLoss.getRetailPrice());
+						stockDO1.setClasstype(classType[i]);
+						stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
+						stockService.save(stockDO1);
+					}
+				}
+
+			}
+		}
+		GainLossDO gainLossDO = new GainLossDO();
+		gainLossDO.setId(id);
+		gainLossDO.setExamineName(ShiroUtils.getUser().getName());
+		gainLossDO.setExamineDate(new Date());
+		gainLossDO.setExamineStatus("1");
+		if(gainLossService.update(gainLossDO)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**

@@ -9,11 +9,12 @@
 
     <select id="list" resultType="com.shiguang.jiancha.domain.SgjjDO">
         select
-        `sgjj_id`,`card_number`,`sgjj_prescription_type`,`sgjj_doctor`,`sgjj_optometry_name`,`sgjj_sphod`,`sgjj_sphos`,`sgjj_cylod`,`sgjj_cylos`,`sgjj_axialod`,`sgjj_axialos`,`sgjj_addod`,`sgjj_addos`,`sgjj_yytjod`,`sgjj_yytjos`,`sgjj_jytjod`,`sgjj_jytjos`,`sgjj_tgod`,`sgjj_tgos`,`sgjj_yyvaod`,`sgjj_yyvaos`,`sgjj_jyvaod`,`sgjj_jyvaos`,`sgjj_jpcz`,`sgjj_clfs`,`sgjj_jykj`,`sgjj_kjlx`,`sgjj_text`,`sgjj_beizhu`
+        `sgjj_id`,`card_number`,`sale_number`,`sgjj_prescription_type`,`sgjj_doctor`,`sgjj_optometry_name`,`sgjj_sphod`,`sgjj_sphos`,`sgjj_cylod`,`sgjj_cylos`,`sgjj_axialod`,`sgjj_axialos`,`sgjj_addod`,`sgjj_addos`,`sgjj_yytjod`,`sgjj_yytjos`,`sgjj_jytjod`,`sgjj_jytjos`,`sgjj_tgod`,`sgjj_tgos`,`sgjj_yyvaod`,`sgjj_yyvaos`,`sgjj_jyvaod`,`sgjj_jyvaos`,`sgjj_jpcz`,`sgjj_clfs`,`sgjj_jykj`,`sgjj_kjlx`,`sgjj_text`,`sgjj_beizhu`
         from jc_sgjj
         <where>
             <if test="sgjjId != null and sgjjId != ''">and sgjj_id = #{sgjjId}</if>
             <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number=#{saleNumber}</if>
             <if test="sgjjPrescriptionType != null and sgjjPrescriptionType != ''">and sgjj_prescription_type =
                 #{sgjjPrescriptionType}
             </if>
@@ -64,6 +65,7 @@
         <where>
             <if test="sgjjId != null and sgjjId != ''">and sgjj_id = #{sgjjId}</if>
             <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number=#{saleNumber}</if>
             <if test="sgjjPrescriptionType != null and sgjjPrescriptionType != ''">and sgjj_prescription_type =
                 #{sgjjPrescriptionType}
             </if>
@@ -101,7 +103,8 @@
     <insert id="save" parameterType="com.shiguang.jiancha.domain.SgjjDO" useGeneratedKeys="true" keyProperty="sgjjId">
 		insert into jc_sgjj
 		(
-			`card_number`, 
+			`card_number`,
+			`sale_number`,
 			`sgjj_prescription_type`, 
 			`sgjj_doctor`, 
 			`sgjj_optometry_name`, 
@@ -132,7 +135,8 @@
 		)
 		values
 		(
-			#{cardNumber}, 
+			#{cardNumber},
+			#{saleNumber},
 			#{sgjjPrescriptionType}, 
 			#{sgjjDoctor}, 
 			#{sgjjOptometryName}, 

@@ -46,6 +46,27 @@ public class GainLossDO implements Serializable {
 	private String departmentNumber;
 	//商品条码
 	private String producCode;
+	//商品代码
+	private String goodsNum;
+	//商品名称
+	private String goodsName;
+	//单位
+	private String unitname;
+	//制造商id
+	private Integer mfrsid;
+	//商品品种
+	private String brandname;
+	//标准价格
+	private String retailPrice;
+	//是否订做
+	private String classType;
+	//审核人
+	private String examineName;
+	//审核日期
+	private Date examineDate;
+	private String examineTime;
+	//审核状态
+	private String examineStatus;
 
 	/**
 	 * 设置：主键
@@ -201,4 +222,48 @@ public class GainLossDO implements Serializable {
 	 * 商品条码
 	 */
 	public String getProducCode() {return producCode;}
+
+	public void setGoodsNum(String goodsNum){this.goodsNum = goodsNum;}
+
+	public String getGoodsNum() {return goodsNum;}
+
+	public void setGoodsName(String goodsName){this.goodsName = goodsName;}
+
+	public String getGoodsName() {return goodsName;}
+
+	public void setUnitname(String unitname){this.unitname = unitname;}
+
+	public String getUnitname() {return unitname;}
+
+	public void setMfrsid(Integer mfrsid){this.mfrsid = mfrsid;}
+
+	public Integer getMfrsid() {return mfrsid;}
+
+	public void setBrandname(String brandname){this.brandname = brandname;}
+
+	public String getBrandname() {return brandname;}
+
+	public void setRetailPrice(String retailPrice){this.retailPrice=retailPrice;}
+
+	public String getRetailPrice() {return retailPrice;}
+
+	public void setClassType(String classType){this.classType = classType;}
+
+	public String getClassType() {return classType;}
+
+	public void setExamineName(String examineName){this.examineName = examineName;}
+
+	public String getExamineName() {return examineName;}
+
+	public void setExamineDate(Date examineDate){this.examineDate = examineDate;}
+
+	public Date getExamineDate(){return examineDate;}
+
+	public void setExamineTime(String examineTime){this.examineTime = examineTime;}
+
+	public String getExamineTime() {return examineTime;}
+
+	public void setExamineStatus(String examineStatus) {this.examineStatus = examineStatus;}
+
+	public String getExamineStatus() {return examineStatus;}
 }

@@ -91,4 +91,9 @@ public class LogStatusServiceImpl implements LogStatusService {
         return statusDao.saveRecord(workRecoedDO);
     }
 
+    @Override
+    public LogStatusDO getLogStatusBySaleNum(String saleNumber){
+        return statusDao.getLogStatusBySaleNum(saleNumber);
+    }
+
 }

@@ -4,21 +4,23 @@
 <mapper namespace="com.shiguang.inventory.dao.GainLossDao">
     <select id="get" resultType="com.shiguang.inventory.domain.GainLossDO">
 		select gl.`id`,gl.`document_no`,gl.`inventory_number`,gl.`inventory_type`,gl.`document_type`,gl.`document_date`,
-        gl.`recenue_position`,gl.`position_id`,c.`position_name` as recenuePosition,gl.`single_name`,gl.`remark`,gl.`inventory_count`,gl.`goods_id`,gl.`department_name`,gl.`department_number`
-         from gain_loss gl join c_position c on c.position_id = gl.position_id where id = #{value}
+        gl.`recenue_position`,gl.`position_id`,c.`position_name` as recenuePosition,gl.`single_name`,gl.`remark`,gl.`inventory_count`,gl.`goods_id`,gl.`department_name`,gl.`department_number`,
+        gl.`produc_code`,gl.`goods_num`,gl.`goods_name`,gl.`unitname`,gl.`mfrsid`,gl.`brandname`,`retail_price`,gl.`class_type`,gl.`examine_name`,gl.`examine_date`,gl.`examine_status`
+         from gain_loss gl join c_position c on c.position_id = gl.position_id where gl.id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.inventory.domain.GainLossDO">
         select gl.`id`,gl.`document_no`,gl.`inventory_number`,gl.`inventory_type`,gl.`document_type`,gl.`document_date`,
         gl.`recenue_position`,gl.`position_id`,c.`position_name` as recenuePosition,gl.`single_name`,gl.`remark`,gl.`inventory_count`,
-        gl.`goods_id`,gl.`department_name`,gl.`department_number`
+        gl.`goods_id`,gl.`department_name`,gl.`department_number`,gl.`produc_code`,gl.`goods_num`,gl.`goods_name`,gl.`unitname`,
+        gl.`mfrsid`,gl.`brandname`,`retail_price`,gl.`class_type`,gl.`examine_name`,gl.`examine_date`,gl.`examine_status`
         from gain_loss gl
         join c_position c on c.position_id = gl.position_id
         join department d on d.depart_number = gl.department_number
         <where>
             <if test="id != null and id != ''"> and gl.id = #{id} </if>
-            <if test="documentNo != null and documentNo != ''"> and gl.document_no = #{documentNo} </if>
-            <if test="inventoryNumber != null and inventoryNumber != ''"> and gl.inventory_number = #{inventoryNumber} </if>
+            <if test="documentNo != null and documentNo != ''"> and gl.document_no like concat('%', #{documentNo},'%') </if>
+            <if test="inventoryNumber != null and inventoryNumber != ''"> and gl.inventory_number like concat('%', #{inventoryNumber},'%') </if>
             <if test="inventoryType != null and inventoryType != ''"> and gl.inventory_type = #{inventoryType} </if>
             <if test="documentType != null and documentType != ''"> and gl.document_type = #{documentType} </if>
             <if test="documentDate != null and documentDate != ''"> and gl.document_date = #{documentDate} </if>
@@ -49,8 +51,8 @@
         join department d on d.depart_number = gl.department_number
         <where>
             <if test="id != null and id != ''"> and gl.id = #{id} </if>
-            <if test="documentNo != null and documentNo != ''"> and gl.document_no = #{documentNo} </if>
-            <if test="inventoryNumber != null and inventoryNumber != ''"> and gl.inventory_number = #{inventoryNumber} </if>
+            <if test="documentNo != null and documentNo != ''"> and gl.document_no like concat('%', #{documentNo},'%') </if>
+            <if test="inventoryNumber != null and inventoryNumber != ''"> and gl.inventory_number like concat('%', #{inventoryNumber},'%') </if>
             <if test="inventoryType != null and inventoryType != ''"> and gl.inventory_type = #{inventoryType} </if>
             <if test="documentType != null and documentType != ''"> and gl.document_type = #{documentType} </if>
             <if test="documentDate != null and documentDate != ''"> and gl.document_date = #{documentDate} </if>
@@ -78,7 +80,16 @@
 			`inventory_count`,
 			`goods_id`,
 			`department_name`,
-			`department_number`
+			`department_number`,
+			`examine_status`,
+			`produc_code`,
+			`goods_num`,
+			`goods_name`,
+			`unitname`,
+			`mfrsid`,
+			`brandname`,
+			`retail_price`,
+			`class_type`
 		)
 		values
 		(
@@ -94,7 +105,16 @@
 			#{inventoryCount},
 			#{goodsId},
 			#{departmentName},
-			#{departmentNumber}
+			#{departmentNumber},
+			#{examineStatus},
+			#{producCode},
+			#{goodsNum},
+			#{goodsName},
+			#{unitname},
+			#{mfrsid},
+			#{brandname},
+			#{retailPrice},
+			#{classType}
 		)
 	</insert>
 
@@ -107,7 +127,10 @@
             <if test="documentType != null">`document_type` = #{documentType}, </if>
             <if test="documentDate != null">`document_date` = #{documentDate}, </if>
             <if test="recenuePosition != null">`recenue_position` = #{recenuePosition}, </if>
-            <if test="singleName != null">`single_name` = #{singleName}</if>
+            <if test="singleName != null">`single_name` = #{singleName},</if>
+            <if test="examineName != null">`examine_name` = #{examineName},</if>
+            <if test="examineDate != null">`examine_date` = #{examineDate},</if>
+            <if test="examineStatus != null">`examine_status` = #{examineStatus},</if>
         </set>
         where id = #{id}
     </update>

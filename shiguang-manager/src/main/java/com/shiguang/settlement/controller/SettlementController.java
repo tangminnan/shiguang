@@ -11,8 +11,8 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
-import com.shiguang.jiancha.domain.ResultDO;
-import com.shiguang.jiancha.service.ResultService;
+import com.shiguang.jiancha.domain.*;
+import com.shiguang.jiancha.service.*;
 import com.shiguang.mailInfo.domain.MailInfoDO;
 import com.shiguang.mailInfo.service.MailInfoService;
 import com.shiguang.member.domain.MemberDO;
@@ -59,6 +59,18 @@ public class SettlementController {
 	private DepartmentService departmentService;
 	@Autowired
 	private MailInfoService mailInfoService;
+	@Autowired
+	private KjyyService kjyyService;
+	@Autowired
+	private KjjyService kjjyService;
+	@Autowired
+	private RxjmjcjService rxjmjcjService;
+	@Autowired
+	private SgjjService sgjjService;
+	@Autowired
+	private SjxlService sjxlService;
+	@Autowired
+	private ZyService zyService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:settlement:settlement")
@@ -308,32 +320,201 @@ public class SettlementController {
 		}
 		model.addAttribute("settlementDO1",settlementDO1);
 		Map<String,Object> map2 = new HashMap<>();
-		map2.put("cardNumber",settlementDO.getMemberNumber());
-		List<Conclusion> conclusionList = salesService.conclusionList(map2);
 		Conclusion conclusion = new Conclusion();
-		if (null != conclusionList && conclusionList.size() > 0){
-			conclusion.setRightsph(conclusionList.get(0).getRightsph());
-			conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
-			conclusion.setRightzx(conclusionList.get(0).getRightzx());
-			if (null != conclusionList.get(0).getRightyytj()){
-				conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
-			} else {
-				conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
+		map2.put("cardNumber",settlementDO.getMemberNumber());
+		map2.put("saleNumber",settlementDO.getSaleNumber());
+
+		if (null != settlementDO.getOptometrywlName()){
+			model.addAttribute("optometryName",settlementDO.getOptometrywlName());
+			if (1 == settlementDO.getRecipelwlType()){
+				List<KjjyDO> kjjyDOList = kjjyService.list(map2);
+				if (null != kjjyDOList && kjjyDOList.size() > 0){
+					conclusion.setRightsph(kjjyDOList.get(0).getKjjySphod());
+					conclusion.setRightcyl(kjjyDOList.get(0).getKjjyCylod());
+					conclusion.setRightzx(kjjyDOList.get(0).getKjjyAxialod());
+					if (null != kjjyDOList.get(0).getKjjyYytjod()){
+						conclusion.setRightyytj(kjjyDOList.get(0).getKjjyYytjod());
+					} else {
+						conclusion.setRightyytj("");
+					}
+					conclusion.setRighttg(kjjyDOList.get(0).getKjjyTgod());
+					conclusion.setRightprism(kjjyDOList.get(0).getKjjyPrismod());
+					conclusion.setRightjd(kjjyDOList.get(0).getKjjyJdod());
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(kjjyDOList.get(0).getKjjySphos());
+					conclusion.setLeftcyl(kjjyDOList.get(0).getKjjyCylos());
+					conclusion.setLeftzx(kjjyDOList.get(0).getKjjyAxialos());
+					if (null != kjjyDOList.get(0).getKjjyYytjos()){
+						conclusion.setLeftyytj(kjjyDOList.get(0).getKjjyYytjos());
+					} else {
+						conclusion.setLeftyytj("");
+					}
+					conclusion.setLefttg(kjjyDOList.get(0).getKjjyTgos());
+					conclusion.setLeftprism(kjjyDOList.get(0).getKjjyPrismos());
+					conclusion.setLeftjd(kjjyDOList.get(0).getKjjyJdos());
+					conclusion.setLeftAdd("");
+				}
+			} else if (2 == settlementDO.getRecipelwlType()){
+				List<KjyyDO> kjyyDOList = kjyyService.list(map2);
+				if (null != kjyyDOList && kjyyDOList.size() > 0){
+					conclusion.setRightsph(kjyyDOList.get(0).getKjyySphod());
+					conclusion.setRightcyl(kjyyDOList.get(0).getKjyyCylod());
+					conclusion.setRightzx(kjyyDOList.get(0).getKjyyAxialod());
+					if (null != kjyyDOList.get(0).getKjyyYytjod()){
+						conclusion.setRightyytj(kjyyDOList.get(0).getKjyyYytjod());
+					} else {
+						conclusion.setRightyytj("");
+					}
+					conclusion.setRighttg(kjyyDOList.get(0).getKjyyTgod());
+					conclusion.setRightprism(kjyyDOList.get(0).getKjyyPrismod());
+					conclusion.setRightjd(kjyyDOList.get(0).getKjyyJdod());
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(kjyyDOList.get(0).getKjyySphos());
+					conclusion.setLeftcyl(kjyyDOList.get(0).getKjyyCylos());
+					conclusion.setLeftzx(kjyyDOList.get(0).getKjyyAxialos());
+					if (null != kjyyDOList.get(0).getKjyyYytjos()){
+						conclusion.setLeftyytj(kjyyDOList.get(0).getKjyyYytjos());
+					} else {
+						conclusion.setLeftyytj("");
+					}
+					conclusion.setLefttg(kjyyDOList.get(0).getKjyyTgos());
+					conclusion.setLeftprism(kjyyDOList.get(0).getKjyyPrismos());
+					conclusion.setLeftjd(kjyyDOList.get(0).getKjyyJdos());
+					conclusion.setLeftAdd("");
+				}
+			} else if (3 == settlementDO.getRecipelwlType()){
+				List<SgjjDO> sgjjDOList = sgjjService.list(map2);
+				if (null != sgjjDOList && sgjjDOList.size() > 0){
+					conclusion.setRightsph(sgjjDOList.get(0).getSgjjSphod());
+					conclusion.setRightcyl(sgjjDOList.get(0).getSgjjCylod());
+					conclusion.setRightzx(sgjjDOList.get(0).getSgjjAxialod());
+					if (null != sgjjDOList.get(0).getSgjjYytjod()){
+						conclusion.setRightyytj(sgjjDOList.get(0).getSgjjYytjod());
+					} else {
+						conclusion.setRightyytj("");
+					}
+					conclusion.setRighttg(sgjjDOList.get(0).getSgjjTgod());
+					conclusion.setRightprism("");
+					conclusion.setRightjd("");
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(sgjjDOList.get(0).getSgjjSphos());
+					conclusion.setLeftcyl(sgjjDOList.get(0).getSgjjCylos());
+					conclusion.setLeftzx(sgjjDOList.get(0).getSgjjAxialos());
+					if (null != sgjjDOList.get(0).getSgjjYytjos()){
+						conclusion.setLeftyytj(sgjjDOList.get(0).getSgjjYytjos());
+					} else {
+						conclusion.setLeftyytj("");
+					}
+					conclusion.setLefttg(sgjjDOList.get(0).getSgjjTgos());
+					conclusion.setLeftprism("");
+					conclusion.setLeftjd("");
+					conclusion.setLeftAdd("");
+				}
+			} else if (4 == settlementDO.getRecipelwlType()){
+				List<ZyDO> zyDOList = zyService.list(map2);
+				if (null != zyDOList && zyDOList.size() > 0){
+					conclusion.setRightsph(zyDOList.get(0).getZySphod());
+					conclusion.setRightcyl(zyDOList.get(0).getZyCylod());
+					conclusion.setRightzx(zyDOList.get(0).getZyAxialod());
+					if (null != zyDOList.get(0).getZyZytjod()){
+						conclusion.setRightyytj(zyDOList.get(0).getZyZytjod());
+					} else {
+						conclusion.setRightyytj("");
+					}
+					conclusion.setRighttg(zyDOList.get(0).getZyTgod());
+					conclusion.setRightprism(zyDOList.get(0).getZyPrismod());
+					conclusion.setRightjd(zyDOList.get(0).getZyJdod());
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(zyDOList.get(0).getZySphos());
+					conclusion.setLeftcyl(zyDOList.get(0).getZyCylos());
+					conclusion.setLeftzx(zyDOList.get(0).getZyAxialos());
+					if (null != zyDOList.get(0).getZyZytjos()){
+						conclusion.setLeftyytj(zyDOList.get(0).getZyZytjos());
+					} else {
+						conclusion.setLeftyytj("");
+					}
+					conclusion.setLefttg(zyDOList.get(0).getZyTgos());
+					conclusion.setLeftprism(zyDOList.get(0).getZyPrismos());
+					conclusion.setLeftjd(zyDOList.get(0).getZyJdos());
+					conclusion.setLeftAdd("");
+				}
+			} else if (5 == settlementDO.getRecipelwlType()){
+				List<RxjmjcjDO> rxjmjcjDOList = rxjmjcjService.list(map2);
+				if (null != rxjmjcjDOList && rxjmjcjDOList.size() > 0){
+					conclusion.setRightsph(rxjmjcjDOList.get(0).getRxSphod());
+					conclusion.setRightcyl(rxjmjcjDOList.get(0).getRxCylod());
+					conclusion.setRightzx(rxjmjcjDOList.get(0).getRxAxialod());
+					conclusion.setRightyytj("");
+					conclusion.setRighttg("");
+					conclusion.setRightprism("");
+					conclusion.setRightjd("");
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(rxjmjcjDOList.get(0).getRxSphos());
+					conclusion.setLeftcyl(rxjmjcjDOList.get(0).getRxCylos());
+					conclusion.setLeftzx(rxjmjcjDOList.get(0).getRxAxialos());
+					conclusion.setLeftyytj("");
+					conclusion.setLefttg("");
+					conclusion.setLeftprism("");
+					conclusion.setLeftjd("");
+					conclusion.setLeftAdd("");
+				}
+			} else if (7 == settlementDO.getRecipelwlType()){
+				List<SjxlDO> sjxlDOList = sjxlService.list(map2);
+				if (null != sjxlDOList && sjxlDOList.size() > 0){
+					conclusion.setRightsph(sjxlDOList.get(0).getSjxlSphod());
+					conclusion.setRightcyl(sjxlDOList.get(0).getSjxlCylod());
+					conclusion.setRightzx(sjxlDOList.get(0).getSjxlAxialod());
+					if (null != sjxlDOList.get(0).getSjxlYytjod()){
+						conclusion.setRightyytj(sjxlDOList.get(0).getSjxlYytjod());
+					} else {
+						conclusion.setRightyytj("");
+					}
+					conclusion.setRighttg("");
+					conclusion.setRightprism(sjxlDOList.get(0).getSjxlSljod());
+					conclusion.setRightjd(sjxlDOList.get(0).getSjxlJdod());
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(sjxlDOList.get(0).getSjxlSphos());
+					conclusion.setLeftcyl(sjxlDOList.get(0).getSjxlCylos());
+					conclusion.setLeftzx(sjxlDOList.get(0).getSjxlAxialos());
+					if (null != sjxlDOList.get(0).getSjxlYytjos()){
+						conclusion.setLeftyytj(sjxlDOList.get(0).getSjxlYytjos());
+					} else {
+						conclusion.setLeftyytj("");
+					}
+					conclusion.setLefttg("");
+					conclusion.setLeftprism(sjxlDOList.get(0).getSjxlSljos());
+					conclusion.setLeftjd(sjxlDOList.get(0).getSjxlJdos());
+					conclusion.setLeftAdd("");
+				}
 			}
-			conclusion.setRighttg(conclusionList.get(0).getRighttg());
-			conclusion.setRightprism(conclusionList.get(0).getRightprism());
-			conclusion.setRightjd(conclusionList.get(0).getRightjd());
-			conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
-			conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
-			conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
-			if (null != conclusionList.get(0).getLeftyytj()){
-				conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
-			} else {
-				conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
+		} else {
+			model.addAttribute("optometryName",settlementDO.getOptometryName());
+			List<Conclusion> conclusionList = salesService.conclusionList(map2);
+			if (null != conclusionList && conclusionList.size() > 0){
+				conclusion.setRightsph(conclusionList.get(0).getRightsph());
+				conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
+				conclusion.setRightzx(conclusionList.get(0).getRightzx());
+				if (null != conclusionList.get(0).getRightyytj()){
+					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
+				} else {
+					conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
+				}
+				conclusion.setRighttg(conclusionList.get(0).getRighttg());
+				conclusion.setRightprism(conclusionList.get(0).getRightprism());
+				conclusion.setRightjd(conclusionList.get(0).getRightjd());
+				conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
+				conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
+				conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
+				if (null != conclusionList.get(0).getLeftyytj()){
+					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
+				} else {
+					conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
+				}
+				conclusion.setLefttg(conclusionList.get(0).getLefttg());
+				conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
+				conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
 			}
-			conclusion.setLefttg(conclusionList.get(0).getLefttg());
-			conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
-			conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
+
 		}
 		model.addAttribute("conclusion",conclusion);
 //		String goodsName = settlementDO.getStoreName();
@@ -468,33 +649,202 @@ public class SettlementController {
         }
         model.addAttribute("settlementDO1",settlementDO1);
         Map<String,Object> map2 = new HashMap<>();
-        map2.put("cardNumber",settlementDO.getMemberNumber());
-        List<Conclusion> conclusionList = salesService.conclusionList(map2);
-        Conclusion conclusion = new Conclusion();
-        if (null != conclusionList && conclusionList.size() > 0){
-            conclusion.setRightsph(conclusionList.get(0).getRightsph());
-            conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
-            conclusion.setRightzx(conclusionList.get(0).getRightzx());
-            if (null != conclusionList.get(0).getRightyytj()){
-                conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
-            } else {
-                conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
-            }
-            conclusion.setRighttg(conclusionList.get(0).getRighttg());
-            conclusion.setRightprism(conclusionList.get(0).getRightprism());
-            conclusion.setRightjd(conclusionList.get(0).getRightjd());
-            conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
-            conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
-            conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
-            if (null != conclusionList.get(0).getLeftyytj()){
-                conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
-            } else {
-                conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
-            }
-            conclusion.setLefttg(conclusionList.get(0).getLefttg());
-            conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
-            conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
-        }
+		Conclusion conclusion = new Conclusion();
+		map2.put("cardNumber",settlementDO.getMemberNumber());
+		map2.put("saleNumber",settlementDO.getSaleNumber());
+
+		if (null != settlementDO.getOptometrywlName()){
+			model.addAttribute("optometryName",settlementDO.getOptometrywlName());
+			if (1 == settlementDO.getRecipelwlType()){
+				List<KjjyDO> kjjyDOList = kjjyService.list(map2);
+				if (null != kjjyDOList && kjjyDOList.size() > 0){
+					conclusion.setRightsph(kjjyDOList.get(0).getKjjySphod());
+					conclusion.setRightcyl(kjjyDOList.get(0).getKjjyCylod());
+					conclusion.setRightzx(kjjyDOList.get(0).getKjjyAxialod());
+					if (null != kjjyDOList.get(0).getKjjyYytjod()){
+						conclusion.setRightyytj(kjjyDOList.get(0).getKjjyYytjod());
+					} else {
+						conclusion.setRightyytj("");
+					}
+					conclusion.setRighttg(kjjyDOList.get(0).getKjjyTgod());
+					conclusion.setRightprism(kjjyDOList.get(0).getKjjyPrismod());
+					conclusion.setRightjd(kjjyDOList.get(0).getKjjyJdod());
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(kjjyDOList.get(0).getKjjySphos());
+					conclusion.setLeftcyl(kjjyDOList.get(0).getKjjyCylos());
+					conclusion.setLeftzx(kjjyDOList.get(0).getKjjyAxialos());
+					if (null != kjjyDOList.get(0).getKjjyYytjos()){
+						conclusion.setLeftyytj(kjjyDOList.get(0).getKjjyYytjos());
+					} else {
+						conclusion.setLeftyytj("");
+					}
+					conclusion.setLefttg(kjjyDOList.get(0).getKjjyTgos());
+					conclusion.setLeftprism(kjjyDOList.get(0).getKjjyPrismos());
+					conclusion.setLeftjd(kjjyDOList.get(0).getKjjyJdos());
+					conclusion.setLeftAdd("");
+				}
+			} else if (2 == settlementDO.getRecipelwlType()){
+				List<KjyyDO> kjyyDOList = kjyyService.list(map2);
+				if (null != kjyyDOList && kjyyDOList.size() > 0){
+					conclusion.setRightsph(kjyyDOList.get(0).getKjyySphod());
+					conclusion.setRightcyl(kjyyDOList.get(0).getKjyyCylod());
+					conclusion.setRightzx(kjyyDOList.get(0).getKjyyAxialod());
+					if (null != kjyyDOList.get(0).getKjyyYytjod()){
+						conclusion.setRightyytj(kjyyDOList.get(0).getKjyyYytjod());
+					} else {
+						conclusion.setRightyytj("");
+					}
+					conclusion.setRighttg(kjyyDOList.get(0).getKjyyTgod());
+					conclusion.setRightprism(kjyyDOList.get(0).getKjyyPrismod());
+					conclusion.setRightjd(kjyyDOList.get(0).getKjyyJdod());
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(kjyyDOList.get(0).getKjyySphos());
+					conclusion.setLeftcyl(kjyyDOList.get(0).getKjyyCylos());
+					conclusion.setLeftzx(kjyyDOList.get(0).getKjyyAxialos());
+					if (null != kjyyDOList.get(0).getKjyyYytjos()){
+						conclusion.setLeftyytj(kjyyDOList.get(0).getKjyyYytjos());
+					} else {
+						conclusion.setLeftyytj("");
+					}
+					conclusion.setLefttg(kjyyDOList.get(0).getKjyyTgos());
+					conclusion.setLeftprism(kjyyDOList.get(0).getKjyyPrismos());
+					conclusion.setLeftjd(kjyyDOList.get(0).getKjyyJdos());
+					conclusion.setLeftAdd("");
+				}
+			} else if (3 == settlementDO.getRecipelwlType()){
+				List<SgjjDO> sgjjDOList = sgjjService.list(map2);
+				if (null != sgjjDOList && sgjjDOList.size() > 0){
+					conclusion.setRightsph(sgjjDOList.get(0).getSgjjSphod());
+					conclusion.setRightcyl(sgjjDOList.get(0).getSgjjCylod());
+					conclusion.setRightzx(sgjjDOList.get(0).getSgjjAxialod());
+					if (null != sgjjDOList.get(0).getSgjjYytjod()){
+						conclusion.setRightyytj(sgjjDOList.get(0).getSgjjYytjod());
+					} else {
+						conclusion.setRightyytj("");
+					}
+					conclusion.setRighttg(sgjjDOList.get(0).getSgjjTgod());
+					conclusion.setRightprism("");
+					conclusion.setRightjd("");
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(sgjjDOList.get(0).getSgjjSphos());
+					conclusion.setLeftcyl(sgjjDOList.get(0).getSgjjCylos());
+					conclusion.setLeftzx(sgjjDOList.get(0).getSgjjAxialos());
+					if (null != sgjjDOList.get(0).getSgjjYytjos()){
+						conclusion.setLeftyytj(sgjjDOList.get(0).getSgjjYytjos());
+					} else {
+						conclusion.setLeftyytj("");
+					}
+					conclusion.setLefttg(sgjjDOList.get(0).getSgjjTgos());
+					conclusion.setLeftprism("");
+					conclusion.setLeftjd("");
+					conclusion.setLeftAdd("");
+				}
+			} else if (4 == settlementDO.getRecipelwlType()){
+				List<ZyDO> zyDOList = zyService.list(map2);
+				if (null != zyDOList && zyDOList.size() > 0){
+					conclusion.setRightsph(zyDOList.get(0).getZySphod());
+					conclusion.setRightcyl(zyDOList.get(0).getZyCylod());
+					conclusion.setRightzx(zyDOList.get(0).getZyAxialod());
+					if (null != zyDOList.get(0).getZyZytjod()){
+						conclusion.setRightyytj(zyDOList.get(0).getZyZytjod());
+					} else {
+						conclusion.setRightyytj("");
+					}
+					conclusion.setRighttg(zyDOList.get(0).getZyTgod());
+					conclusion.setRightprism(zyDOList.get(0).getZyPrismod());
+					conclusion.setRightjd(zyDOList.get(0).getZyJdod());
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(zyDOList.get(0).getZySphos());
+					conclusion.setLeftcyl(zyDOList.get(0).getZyCylos());
+					conclusion.setLeftzx(zyDOList.get(0).getZyAxialos());
+					if (null != zyDOList.get(0).getZyZytjos()){
+						conclusion.setLeftyytj(zyDOList.get(0).getZyZytjos());
+					} else {
+						conclusion.setLeftyytj("");
+					}
+					conclusion.setLefttg(zyDOList.get(0).getZyTgos());
+					conclusion.setLeftprism(zyDOList.get(0).getZyPrismos());
+					conclusion.setLeftjd(zyDOList.get(0).getZyJdos());
+					conclusion.setLeftAdd("");
+				}
+			} else if (5 == settlementDO.getRecipelwlType()){
+				List<RxjmjcjDO> rxjmjcjDOList = rxjmjcjService.list(map2);
+				if (null != rxjmjcjDOList && rxjmjcjDOList.size() > 0){
+					conclusion.setRightsph(rxjmjcjDOList.get(0).getRxSphod());
+					conclusion.setRightcyl(rxjmjcjDOList.get(0).getRxCylod());
+					conclusion.setRightzx(rxjmjcjDOList.get(0).getRxAxialod());
+					conclusion.setRightyytj("");
+					conclusion.setRighttg("");
+					conclusion.setRightprism("");
+					conclusion.setRightjd("");
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(rxjmjcjDOList.get(0).getRxSphos());
+					conclusion.setLeftcyl(rxjmjcjDOList.get(0).getRxCylos());
+					conclusion.setLeftzx(rxjmjcjDOList.get(0).getRxAxialos());
+					conclusion.setLeftyytj("");
+					conclusion.setLefttg("");
+					conclusion.setLeftprism("");
+					conclusion.setLeftjd("");
+					conclusion.setLeftAdd("");
+				}
+			} else if (7 == settlementDO.getRecipelwlType()){
+				List<SjxlDO> sjxlDOList = sjxlService.list(map2);
+				if (null != sjxlDOList && sjxlDOList.size() > 0){
+					conclusion.setRightsph(sjxlDOList.get(0).getSjxlSphod());
+					conclusion.setRightcyl(sjxlDOList.get(0).getSjxlCylod());
+					conclusion.setRightzx(sjxlDOList.get(0).getSjxlAxialod());
+					if (null != sjxlDOList.get(0).getSjxlYytjod()){
+						conclusion.setRightyytj(sjxlDOList.get(0).getSjxlYytjod());
+					} else {
+						conclusion.setRightyytj("");
+					}
+					conclusion.setRighttg("");
+					conclusion.setRightprism(sjxlDOList.get(0).getSjxlSljod());
+					conclusion.setRightjd(sjxlDOList.get(0).getSjxlJdod());
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(sjxlDOList.get(0).getSjxlSphos());
+					conclusion.setLeftcyl(sjxlDOList.get(0).getSjxlCylos());
+					conclusion.setLeftzx(sjxlDOList.get(0).getSjxlAxialos());
+					if (null != sjxlDOList.get(0).getSjxlYytjos()){
+						conclusion.setLeftyytj(sjxlDOList.get(0).getSjxlYytjos());
+					} else {
+						conclusion.setLeftyytj("");
+					}
+					conclusion.setLefttg("");
+					conclusion.setLeftprism(sjxlDOList.get(0).getSjxlSljos());
+					conclusion.setLeftjd(sjxlDOList.get(0).getSjxlJdos());
+					conclusion.setLeftAdd("");
+				}
+			}
+		} else {
+			model.addAttribute("optometryName",settlementDO.getOptometryName());
+			List<Conclusion> conclusionList = salesService.conclusionList(map2);
+			if (null != conclusionList && conclusionList.size() > 0){
+				conclusion.setRightsph(conclusionList.get(0).getRightsph());
+				conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
+				conclusion.setRightzx(conclusionList.get(0).getRightzx());
+				if (null != conclusionList.get(0).getRightyytj()){
+					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
+				} else {
+					conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
+				}
+				conclusion.setRighttg(conclusionList.get(0).getRighttg());
+				conclusion.setRightprism(conclusionList.get(0).getRightprism());
+				conclusion.setRightjd(conclusionList.get(0).getRightjd());
+				conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
+				conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
+				conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
+				if (null != conclusionList.get(0).getLeftyytj()){
+					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
+				} else {
+					conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
+				}
+				conclusion.setLefttg(conclusionList.get(0).getLefttg());
+				conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
+				conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
+			}
+
+		}
         model.addAttribute("conclusion",conclusion);
 //		String goodsName = settlementDO.getStoreName();
 //		String unit = settlementDO.getUnit();

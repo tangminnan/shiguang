@@ -9,11 +9,12 @@
 
     <select id="list" resultType="com.shiguang.jiancha.domain.KjyyDO">
         select
-        `kjyy_id`,`card_number`,`kjyy_prescription_type`,`kjyy_doctor`,`kjyy_optometry_name`,`kjyy_sphod`,`kjyy_sphos`,`kjyy_cylod`,`kjyy_cylos`,`kjyy_axialod`,`kjyy_axialos`,`kjyy_prismod`,`kjyy_prismos`,`kjyy_jdod`,`kjyy_jdos`,`kjyy_yytjod`,`kjyy_yytjos`,`kjyy_tgod`,`kjyy_tgos`,`kjyy_vaod`,`kjyy_vaos`,`kjyy_jpcz`,`kjyy_clfs`,`kjyy_jykj`,`kjyy_kjlx`,`kjyy_text`,`kjyy_beizhu`
+        `kjyy_id`,`card_number`,`sale_number`,`kjyy_prescription_type`,`kjyy_doctor`,`kjyy_optometry_name`,`kjyy_sphod`,`kjyy_sphos`,`kjyy_cylod`,`kjyy_cylos`,`kjyy_axialod`,`kjyy_axialos`,`kjyy_prismod`,`kjyy_prismos`,`kjyy_jdod`,`kjyy_jdos`,`kjyy_yytjod`,`kjyy_yytjos`,`kjyy_tgod`,`kjyy_tgos`,`kjyy_vaod`,`kjyy_vaos`,`kjyy_jpcz`,`kjyy_clfs`,`kjyy_jykj`,`kjyy_kjlx`,`kjyy_text`,`kjyy_beizhu`
         from jc_kjyy
         <where>
             <if test="kjyyId != null and kjyyId != ''">and kjyy_id = #{kjyyId}</if>
             <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number=#{saleNumber}</if>
             <if test="kjyyPrescriptionType != null and kjyyPrescriptionType != ''">and kjyy_prescription_type =
                 #{kjyyPrescriptionType}
             </if>
@@ -62,6 +63,7 @@
         <where>
             <if test="kjyyId != null and kjyyId != ''">and kjyy_id = #{kjyyId}</if>
             <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number=#{saleNumber}</if>
             <if test="kjyyPrescriptionType != null and kjyyPrescriptionType != ''">and kjyy_prescription_type =
                 #{kjyyPrescriptionType}
             </if>
@@ -98,6 +100,7 @@
 		insert into jc_kjyy
 		(
 			`card_number`,
+			`sale_number`,
 			`kjyy_prescription_type`,
 			`kjyy_doctor`,
 			`kjyy_optometry_name`,
@@ -127,6 +130,7 @@
 		values
 		(
 			#{cardNumber},
+			#{saleNumber},
 			#{kjyyPrescriptionType},
 			#{kjyyDoctor},
 			#{kjyyOptometryName},

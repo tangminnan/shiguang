@@ -46,11 +46,33 @@ function load() {
 						columns : [
 																{
 									field : 'gain', 
-									title : '盘盈单' 
+									title : '盘盈单',
+									formatter : function(value, row, index) {
+										if (value == 0){
+                                            var e = '<a class="btn btn-primary btn-xs" href="#" mce_href="#" title="生成盘盈单" onclick="isGainSure(\''
+                                                + row.id
+                                                + '\')" style="text-decoration: none;">生成盘盈单</a> ';
+                                            return e ;
+										} else {
+											return value;
+										}
+
+									}
 								},
 																{
 									field : 'loss', 
-									title : '盘亏单' 
+									title : '盘亏单',
+									formatter : function(value, row, index) {
+										if (value == 0){
+                                            var e = '<a class="btn btn-primary btn-xs" href="#" mce_href="#" title="生成盘亏单" onclick="isLossSure(\''
+                                                + row.id
+                                                + '\')" style="text-decoration: none;">生成盘亏单</a> ';
+                                            return e ;
+										} else {
+											return value;
+										}
+
+									}
 								},
 																{
 									field : 'inventoryNumber', 
@@ -112,6 +134,30 @@ function edit(id) {
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
+}
+
+function isGainSure(id){
+    var toIndex = layer.open({
+        type : 2,
+        title : '生成盘盈单',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : prefix + '/isGainSure/' + id // iframe的url
+    });
+    layer.full(toIndex);
+}
+
+function isLossSure(id){
+    var toIndex = layer.open({
+        type : 2,
+        title : '生成盘亏单',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : prefix + '/isLossSure/' + id // iframe的url
+    });
+    layer.full(toIndex);
 }
 
 function detail(id) {

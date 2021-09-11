@@ -166,6 +166,13 @@
                         html += "<td>"+rows[i].producFactory+"</td>";
                         html += "<td><input id='inventoryCount' name='inventoryCount'/></td></tr>";
                         html += "<input id='goodsId' name='goodsId' type='hidden' value='"+rows[i].id+"'>";
+                        html += "<input id='goodsNum' name='goodsNum' type='hidden' value='"+rows[i].producNum+"'>";
+                        html += "<input id='goodsName' name='goodsName' type='hidden' value='"+rows[i].producName+"'>";
+                        html += "<input id='unitname' name='unitname' type='hidden' value='"+rows[i].unitname+"'>";
+                        html += "<input id='retailPrice' name='retailPrice' type='hidden' value='"+rows[i].retailPrice+"'>";
+                        html += "<input id='mfrsid' name='mfrsid' type='hidden' value='"+rows[i].mfrsid+"'>";
+                        html += "<input id='brandname' name='brandname' type='hidden' value='"+rows[i].brandname+"'>";
+                        html += "<input id='classType' name='classType' type='hidden' value='"+rows[i].classtype+"'>";
                         $("#inventoryId").append(html);
 					}
                 }

@@ -34,6 +34,10 @@ public class Conclusion implements Serializable {
     private String rightprism;
     //三棱镜(OS)
     private String leftprism;
+    //ADD
+    private String rightAdd;
+    //ADD
+    private String leftAdd;
     //基地OD
     private String rightjd;
     //基地OS
@@ -258,5 +262,13 @@ public class Conclusion implements Serializable {
     public void setLeftrgpsyjp(String leftrgpsyjp) {this.leftrgpsyjp = leftrgpsyjp;}
 
     public String getLeftrgpsyjp() {return leftrgpsyjp;}
+
+    public void setRightAdd(String rightAdd) {this.rightAdd = rightAdd;}
+
+    public String getRightAdd() {return rightAdd;}
+
+    public void setLeftAdd(String leftAdd) {this.leftAdd = leftAdd;}
+
+    public String getLeftAdd() {return leftAdd;}
 
 }

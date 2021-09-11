@@ -103,6 +103,7 @@ public class InventoryServiceImpl implements InventoryService {
 					BillDO billDO = new BillDO();
 					billDO.setGoodsNum(stockDO.getGoodsNum());
 					billDO.setGoodsCode(stockDO.getGoodsCode());
+					//billDO.setGoodsId();
 					billDO.setGoodsName(stockDO.getGoodsName());
 					if (null != stockDO.getUseday()){
 						billDO.setGoodsTime(stockDO.getUseday());
@@ -121,15 +122,19 @@ public class InventoryServiceImpl implements InventoryService {
 					billDO.setInventoryId(inventoryId);
 					if (count == Integer.parseInt(stockDO.getGoodsCount())){
 						billDO.setSurplus("0");
+						gain = "无盘盈";
+						loss = "无盘亏";
 					} else {
 						int surplus = count - Integer.parseInt(stockDO.getGoodsCount());
 						if (surplus > 0){
 							billDO.setSurplus(String.valueOf(surplus));
-							gain = "已生成盘盈单";
+							billDO.setInventoryType("0");
+							gain = "0";
 						} else if (surplus < 0){
 							surplus = Integer.parseInt(stockDO.getGoodsCount()) - count;
 							billDO.setSurplus("-"+surplus);
-							loss = "已生成盘亏单";
+							billDO.setInventoryType("1");
+							loss = "0";
 						}
 					}
 					billDao.save(billDO);
@@ -162,15 +167,19 @@ public class InventoryServiceImpl implements InventoryService {
 					billDO.setInventoryId(inventoryId);
 					if (count == Integer.parseInt(stockDOstr.getGoodsCount())){
 						billDO.setSurplus("0");
+						gain = "无盘盈";
+						loss = "无盘亏";
 					} else {
 						int surplus = count - Integer.parseInt(stockDOstr.getGoodsCount());
 						if (surplus > 0){
 							billDO.setSurplus(String.valueOf(surplus));
-							gain = "已生成盘盈单";
+							billDO.setInventoryType("0");
+							gain = "0";
 						} else if (surplus < 0){
 							surplus = Integer.parseInt(stockDOstr.getGoodsCount()) - count;
 							billDO.setSurplus("-"+surplus);
-							loss = "已生成盘亏单";
+							billDO.setInventoryType("1");
+							loss = "0";
 						}
 					}
 					billDao.save(billDO);

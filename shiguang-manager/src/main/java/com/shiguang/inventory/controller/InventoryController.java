@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.shiguang.common.utils.*;
 import com.shiguang.inventory.domain.BillDO;
+import com.shiguang.inventory.domain.GainLossDO;
 import com.shiguang.inventory.domain.InventoryDO;
 import com.shiguang.inventory.service.BillService;
 import com.shiguang.inventory.service.InventoryService;
@@ -94,6 +95,70 @@ public class InventoryController {
 	    return "inventory/inventory/edit";
 	}
 
+	/**
+	 * 生成盘盈单
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/isGainSure/{id}")
+	@RequiresPermissions("information:inventory:isGainSure")
+	String isGainSure(@PathVariable("id") Long id,Model model){
+		InventoryDO inventory = inventoryService.get(id);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		inventory.setDocumentTime(simpleDateFormat.format(inventory.getDocumentDate()));
+		model.addAttribute("gainlossType","盘盈");
+		model.addAttribute("inventory", inventory);
+		Map<String,Object> map = new HashMap<>();
+		map.put("inventoryId",inventory.getInventoryId());
+		List<BillDO> billDOList = billService.list(map);
+		GainLossDO gainLossDO = new GainLossDO();
+		gainLossDO.setDocumentNo("SC"+GuuidUtil.getUUID());
+		gainLossDO.setDocumentDate(new Date());
+		gainLossDO.setInventoryNumber("MAI"+GuuidUtil.getUUID());
+		gainLossDO.setInventoryType(inventory.getInventoryType());
+		gainLossDO.setDocumentType("盘盈");
+		gainLossDO.setPositionId(Long.valueOf(inventory.getInventoryPosition()));
+		gainLossDO.setSingleName(inventory.getInventoryUser());
+		StringBuffer countsb = new StringBuffer();
+		StringBuffer goodsidsb = new StringBuffer();
+		StringBuffer goodsNumsb = new StringBuffer();
+		StringBuffer goodsCodesb = new StringBuffer();
+		for(int i=0;i<billDOList.size();i++){
+			if (i<billDOList.size()-1){
+				countsb.append(billDOList.get(i).getSurplus()+",");
+				goodsidsb.append(billDOList.get(i).getGoodsId()+",");
+				goodsNumsb.append(billDOList.get(i).getGoodsNum()+",");
+				goodsCodesb.append(billDOList.get(i).getGoodsCode()+",");
+			} else {
+				countsb.append(billDOList.get(i).getSurplus());
+				goodsidsb.append(billDOList.get(i).getGoodsId());
+				goodsNumsb.append(billDOList.get(i).getGoodsNum());
+				goodsCodesb.append(billDOList.get(i).getGoodsCode());
+			}
+		}
+		gainLossDO.setInventoryCount(countsb.toString());
+
+		return "inventory/inventory/inventorybill";
+	}
+
+	/**
+	 * 生成盘亏单
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/isLossSure/{id}")
+	@RequiresPermissions("information:inventory:isLossSure")
+	String isLossSure(@PathVariable("id") Long id,Model model){
+		InventoryDO inventory = inventoryService.get(id);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		inventory.setDocumentTime(simpleDateFormat.format(inventory.getDocumentDate()));
+		model.addAttribute("gainlossType","盘亏");
+		model.addAttribute("inventory", inventory);
+		return "inventory/inventory/inventorybill";
+	}
+
 	@GetMapping("/detail/{id}")
 	@RequiresPermissions("information:inventory:detail")
 	String detail(@PathVariable("id") Long id,Model model){
@@ -110,10 +175,13 @@ public class InventoryController {
 	public PageUtils billlist(@RequestParam Map<String, Object> params){
 		//查询列表数据
 		Query query = new Query(params);
+		if ("盘盈".equals(query.get("gainlossType"))){
+			query.put("inventoryType","0");
+		} else if ("盘亏".equals(query.get("gainlossType"))){
+			query.put("inventoryType","1");
+		}
 		List<BillDO> billDOList = billService.list(query);
 		int total = inventoryService.count(query);
-//		List<InventoryDO> inventoryList = inventoryService.list(query);
-//		int total = inventoryService.count(query);
 		PageUtils pageUtils = new PageUtils(billDOList, total);
 		return pageUtils;
 	}
@@ -131,6 +199,7 @@ public class InventoryController {
 //		}
 //		return R.error();
 	}
+
 	/**
 	 * 修改
 	 */

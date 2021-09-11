@@ -19,6 +19,10 @@ public class BillDO implements Serializable {
 	private Long id;
 	//盘点id
 	private Long inventoryId;
+	//盘点类型(0:盘盈单1:盘亏单)
+	private String inventoryType;
+	//商品id
+	private String goodsId;
 	//商品代码
 	private String goodsNum;
 	//商品条码
@@ -60,6 +64,22 @@ public class BillDO implements Serializable {
 	 * 盘点id
 	 */
 	public Long getInventoryId() {return inventoryId;}
+	/**
+	 * 盘点类型(0:盘盈单1:盘亏单)
+	 */
+	public void setInventoryType(String inventoryType){this.inventoryType = inventoryType;}
+	/**
+	 * 盘点类型(0:盘盈单1:盘亏单)
+	 */
+	public String getInventoryType(){return inventoryType;}
+	/**
+	 * 商品id
+	 */
+	public void setGoodsId(String goodsId){this.goodsId = goodsId;}
+	/**
+	 * 商品id
+	 */
+	public String getGoodsId() {return goodsId;}
 	/**
 	 * 设置：商品代码
 	 */

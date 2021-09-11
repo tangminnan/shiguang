@@ -17,6 +17,8 @@ public class SgjjDO implements Serializable {
     private Long sgjjId;
     //卡号
     private String cardNumber;
+    //销售单号
+    private String saleNumber;
     //处方类型
     private String sgjjPrescriptionType;
     //医生
@@ -99,6 +101,16 @@ public class SgjjDO implements Serializable {
     public String getCardNumber() {
         return cardNumber;
     }
+
+    /**
+     * 销售单号
+     */
+    public void setSaleNumber(String saleNumber){this.saleNumber = saleNumber;}
+
+    /**
+     * 销售单号
+     */
+    public String getSaleNumber() {return saleNumber;}
 
     /**
      * 设置：处方类型

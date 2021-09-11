@@ -96,7 +96,7 @@ public class LogStatusController {
                 String[] classArray = salesDO.getClasstype().split(",");
                 boolean result = false;
                 result = Arrays.asList(classArray).contains("2");
-                if (result = true){
+                if (result == true){
                     salesDO.setClassTypeFL("2");
                 }
             }

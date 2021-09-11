@@ -71,25 +71,58 @@ function load() {
 									field : 'recenuePosition', 
 									title : '收入/发出仓位' 
 								},
+								{
+									field : 'examineStatus',
+									title : '审核状态',
+                                    align : 'center',
+                                    formatter : function(value, row, index) {
+                                        if(value == 0){
+                                            return '<span class="label">未审核</span>';
+                                        }else if(value == 1){
+                                            return '<span class="label">已审核</span>';
+
+                                        }
+                                    }
+								},
 																{
 									field : 'singleName', 
 									title : '制单人' 
+								},
+								{
+									field : 'examineTime',
+									title : '审核日期'
+								},
+								{
+									field : 'examineName',
+									title : '审核人'
 								},
 																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
+										var t='';
+                                        var d='';
 										var e = '<a class="btn btn-primary btn-xs" href="#" mce_href="#" title="详情" onclick="detail(\''
 												+ row.id
 												+ '\')" style="text-decoration: none;">详情</a> ';
-										// var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-										// 		+ row.id
-										// 		+ '\')"><i class="fa fa-remove"></i></a> ';
+										if (row.examineStatus == 0){
+                                            t = '<a class="btn btn-primary btn-xs" href="#" mce_href="#" title="待审核" onclick="examine(\''
+                                                + row.id
+                                                + '\')" style="text-decoration: none;">待审核</a> ';
+                                            d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                                                + row.id
+                                                + '\')"><i class="fa fa-remove"></i></a> ';
+										} else if (row.examineStatus == 1){
+                                            t = '<a class="btn btn-primary btn-xs" href="#" mce_href="#" title="已审核" onclick="examine(\''
+                                                + row.id
+                                                + '\')" style="text-decoration: none;">已审核</a> ';
+										}
+
 										// var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 										// 		+ row.id
 										// 		+ '\')"><i class="fa fa-key"></i></a> ';
-										return e ;
+										return e + t + d;
 									}
 								}
 								]
@@ -130,6 +163,28 @@ function detail(id) {
         content : prefix + '/detail/' + id // iframe的url
     });
     layer.full(toIndex);
+}
+
+function examine(id){
+    layer.confirm('确定要审核此盘点？', {
+        btn : [ '确定', '取消' ]
+    }, function() {
+        $.ajax({
+            url : prefix+"/examine",
+            type : "post",
+            data : {
+                'id' : id
+            },
+            success : function(r) {
+                if (r.code==0) {
+                    layer.msg(r.msg);
+                    reLoad();
+                }else{
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    })
 }
 
 function remove(id) {

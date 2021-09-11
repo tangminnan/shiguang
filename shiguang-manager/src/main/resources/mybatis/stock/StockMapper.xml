@@ -264,7 +264,7 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,pr.`produc_factory`,pr.`produc_color`,ac.`materialname`,pr.`size`
-        from stock st left join aa_produca pr on pr.produc_num = st.goods_num left join c_material ac on ac.materialid =
+        from stock st left join aa_produca pr on pr.id = st.goodsxinxiid left join c_material ac on ac.materialid =
         pr.materialid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -298,7 +298,7 @@
     </select>
 
     <select id="countJiajia" resultType="int">
-        select count(*) from stock st left join aa_produca pr on pr.produc_num = st.goods_num left join a_caizhi ac on
+        select count(*) from stock st left join aa_produca pr on pr.id = st.goodsxinxiid left join a_caizhi ac on
         ac.caizhi_id = pr.materialid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -324,7 +324,7 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`classtype`,s.`sph`,c.`cyl`,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`
-        from stock st left join aa_jpcp j on j.produc_num = st.goods_num
+        from stock st left join aa_jpcp j on j.id = st.goodsxinxiid
         left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
         left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
         j.refractivityid
@@ -378,7 +378,7 @@
 
     <select id="countJpcp" resultType="int">
         select count(*)
-        from stock st left join aa_jpcp j on j.produc_num = st.goods_num
+        from stock st left join aa_jpcp j on j.id = st.goodsxinxiid
         left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
         left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
         j.refractivityid
@@ -506,7 +506,7 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,pr.`produc_factory`,pr.`parts_style`
-        from stock st left join aa_parts pr on pr.produc_num = st.goods_num
+        from stock st left join aa_parts pr on pr.id = st.goodsxinxiid
         <where>
             <if test="partsStyle != null and partsStyle != ''">and pr.parts_style = #{partsStyle}</if>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -540,7 +540,7 @@
     </select>
 
     <select id="countJiajiapj" resultType="int">
-        select count(*) from stock st left join aa_parts pr on pr.produc_num = st.goods_num and pr.parts_style = '框镜'
+        select count(*) from stock st left join aa_parts pr on pr.id = st.goodsxinxiid and pr.parts_style = '框镜'
         <where>
             <if test="partsStyle != null and partsStyle != ''">and pr.parts_style = #{partsStyle}</if>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -566,7 +566,7 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,pr.`produc_factory`,pr.`produc_color`,pr.`size`
-        from stock st left join aa_tyj pr on pr.produc_num = st.goods_num
+        from stock st left join aa_tyj pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -599,7 +599,7 @@
     </select>
 
     <select id="countTaiyj" resultType="int">
-        select count(*) from stock st left join aa_tyj pr on pr.produc_num = st.goods_num
+        select count(*) from stock st left join aa_tyj pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -624,7 +624,7 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`
-        from stock st left join aa_hc pr on pr.produc_num = st.goods_num
+        from stock st left join aa_hc pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -657,7 +657,7 @@
     </select>
 
     <select id="countHaocai" resultType="int">
-        select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
+        select count(*) from stock st left join aa_hc pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -682,7 +682,7 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`
-        from stock st left join aa_oldlens pr on pr.produc_num = st.goods_num
+        from stock st left join aa_oldlens pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -715,7 +715,7 @@
     </select>
 
     <select id="countLaohj" resultType="int">
-        select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
+        select count(*) from stock st left join aa_hc pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -740,7 +740,7 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,pr.`produc_factory`
-        from stock st left join aa_shiguang pr on pr.produc_num = st.goods_num
+        from stock st left join aa_shiguang pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -773,7 +773,7 @@
     </select>
 
     <select id="countShiguang" resultType="int">
-        select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
+        select count(*) from stock st left join aa_hc pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -798,7 +798,7 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,pr.`main_capacity`,pr.`second_capacity`
-        from stock st left join aa_hly pr on pr.produc_num = st.goods_num
+        from stock st left join aa_hly pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -831,7 +831,7 @@
     </select>
 
     <select id="countHuly" resultType="int">
-        select count(*) from stock st left join aa_hly pr on pr.produc_num = st.goods_num
+        select count(*) from stock st left join aa_hly pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
@@ -918,7 +918,7 @@
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`classtype`,t.`type_name`,u.`usage_name`,
         y.`curvature`,s.`sph`,c.`cyl`
-        from stock st left join aa_yxcp y on y.produc_num = st.goods_num left join p_type t on t.type_id = y.type_id
+        from stock st left join aa_yxcp y on y.id = st.goodsxinxiid left join p_type t on t.type_id = y.type_id
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
         left join p_usage u on u.usage_id = y.usage_id
         <where>
@@ -957,7 +957,7 @@
 
     <select id="countYxcp" resultType="int">
         select count(*)
-        from stock st left join aa_yxcp y on y.produc_num = st.goods_num left join p_type t on t.type_id = y.type_id
+        from stock st left join aa_yxcp y on y.id = st.goodsxinxiid left join p_type t on t.type_id = y.type_id
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
         left join p_usage u on u.usage_id = y.usage_id
         <where>

@@ -17,6 +17,8 @@ public class RxjmjcjDO implements Serializable {
     private Long rxId;
     //卡号
     private String cardNumber;
+    //销售单号
+    private String saleNumber;
     //处方类型
     private String rxPrescriptionType;
     //医生
@@ -89,6 +91,16 @@ public class RxjmjcjDO implements Serializable {
     public String getCardNumber() {
         return cardNumber;
     }
+
+    /**
+     * 销售单号
+     */
+    public void setSaleNumber(String saleNumber){this.saleNumber = saleNumber;}
+
+    /**
+     * 销售单号
+     */
+    public String getSaleNumber() {return saleNumber;}
 
     /**
      * 设置：处方类型
