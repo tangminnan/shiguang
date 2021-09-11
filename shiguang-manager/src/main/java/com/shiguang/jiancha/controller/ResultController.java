@@ -280,6 +280,7 @@ public class ResultController {
         //查询列表数据
         Map<String, Object> map = new HashMap<>();
         map.put("cardNumber",cardNumber);
+        map.put("status","1");
         List<ResultDO> resultList = resultService.shujulist(map);
         model.addAttribute("resultList",resultList);
         if (null != resultList){

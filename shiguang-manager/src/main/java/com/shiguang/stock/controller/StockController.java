@@ -175,6 +175,7 @@ public class StockController {
         String[] username1=stock.getUsername().split(",");
         String[] classtype1=stock.getClasstype().split(",");
         String[] factory1=stock.getFactory().split(",");
+        String[] goodsxinxiid1=stock.getGoodsxinxiid().toString().split(",");
 
         for (int i = 0; i < name.length; i++) {
             StockDO stockDO = new StockDO();
@@ -253,6 +254,8 @@ public class StockController {
                 stockDO.setStatus(status);
                 String username =username1 [i];
                 stockDO.setUsername(username);
+                String goodsxinxiid =goodsxinxiid1 [i];
+                stockDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
 
                 if(null != stock.getClasstype()){
                     String classtype = classtype1[i];
@@ -292,7 +295,7 @@ public class StockController {
         String[] username2=orderDO.getUsername().split(",");
         String[] classtype2=orderDO.getClasstype().split(",");
         String[] factory2=orderDO.getFactory().split(",");
-
+        String[] goodsxinxiid2=orderDO.getGoodsxinxiid().toString().split(",");
 
         for (int i = 0; i < namesOrder2.length; i++) {
             OrderDO orderDO1 = new OrderDO();
@@ -355,6 +358,8 @@ public class StockController {
             orderDO1.setStatus(status);
             String username =username2 [i];
             orderDO1.setUsername(username);
+            String goodsxinxiid11 =goodsxinxiid1 [i];
+            orderDO1.setGoodsxinxiid(Long.valueOf(goodsxinxiid11));
             if(null != orderDO.getClasstype()){
                 String classtype = classtype2[i];
                 orderDO1.setClasstype(classtype);

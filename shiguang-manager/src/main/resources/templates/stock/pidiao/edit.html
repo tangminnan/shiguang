@@ -65,10 +65,12 @@
 			</tr>
 			</tbody>
 		</table>
-		<div class="HH_btns">
-			<div class="Cbtn buyBtns">
-				<input type="button" class="H_bc" value="打印单据" onclick="dayin()" style="margin-left:90%"/>
-			</div>
+		<!--保存/清空-->
+		<div class="BQ-btn" style="margin-left:80%
+
+">
+			<input type="button" class="empty" value="打印条码" onclick="dayinCode()"  />
+			<input type="button" class="empty" value="打印单据" onclick="dayin()"/>
 		</div>
 	</div>
 
@@ -147,6 +149,10 @@
 		var pidiaoNumber = $('#pidiaoNumber').val();
         window.open("/stock/pidiao/pidiaodan?pidiaoNumber="+ pidiaoNumber);
     }
+    // function dayinCode() {
+	// 	var pidiaoNumber = $('#pidiaoNumber').val();
+    //     window.open("/stock/pidiao/pidiaodan?pidiaoNumber="+ pidiaoNumber);
+    // }
 </script>
 </body>
 </html>

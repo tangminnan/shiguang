@@ -416,6 +416,8 @@ function showCol() {
         obj.unit = unit;
         var goodsid = rowstr.find("[name='goodsid']").html();
         obj.goodsid = goodsid;
+        var goodsxinxiid = rowstr.find("[name='goodsxinxiid']").html();
+        obj.goodsxinxiid = goodsxinxiid;
 
 
         objArray.push(obj);

@@ -252,6 +252,7 @@ public class PidiaoController {
 		String[] brandname1=pidiao.getBrandname().split(",");
 		String[] unit1=pidiao.getUnit().split(",");
 		String[] money1=pidiao.getMoney().split(",");
+		String[] goodsxinxiid1=pidiao.getGoodsxinxiid().toString().split(",");
 
 		for (int i = 0; i < name.length; i++) {
 			PidiaoDO pidiaoDO = new PidiaoDO();
@@ -339,6 +340,9 @@ public class PidiaoController {
 			pidiaoDO.setUnit(unit);
 			String money = money1[i];
 			pidiaoDO.setMoney(money);
+
+			String goodsxinxiid= goodsxinxiid1[i];
+			pidiaoDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
 
 			pidiaoService.save(pidiaoDO);
 
@@ -429,6 +433,8 @@ public class PidiaoController {
 				}catch (ArrayIndexOutOfBoundsException e){
 					stockDO.setFactory("");
 				}
+				stockDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
+
 				if (stockService.save(stockDO) < 0) {
 					return R.error();
 				}

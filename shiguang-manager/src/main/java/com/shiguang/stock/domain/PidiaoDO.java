@@ -19,6 +19,17 @@ public class PidiaoDO implements Serializable {
 
 	//批调id
 	private Long id;
+	//商品信息id
+	private Long goodsxinxiid;
+
+	public Long getGoodsxinxiid() {
+		return goodsxinxiid;
+	}
+
+	public void setGoodsxinxiid(Long goodsxinxiid) {
+		this.goodsxinxiid = goodsxinxiid;
+	}
+
 	//状态
 	private String status;
 	//工号

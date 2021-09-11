@@ -206,7 +206,8 @@
 			`unit`,
 			`money`,
 			`sh_time`,
-			`returnzt`
+			`returnzt`,
+			`goodsxinxiid`
 		)
 		values
 		(
@@ -250,7 +251,8 @@
 			#{unit},
 			#{money},
 			#{shTime},
-			#{returnzt}
+			#{returnzt},
+			#{goodsxinxiid}
 		)
 	</insert>
 	 

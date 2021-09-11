@@ -20,6 +20,17 @@ public class StockDO implements Serializable {
     private String status;
     //工号
     private String  username;
+    //商品信息id
+    private Long goodsxinxiid;
+
+    public Long getGoodsxinxiid() {
+        return goodsxinxiid;
+    }
+
+    public void setGoodsxinxiid(Long goodsxinxiid) {
+        this.goodsxinxiid = goodsxinxiid;
+    }
+
     //商品代码
     private String goodsNum;
     //商品条码

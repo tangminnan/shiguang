@@ -1,0 +1,340 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>商品查询</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body>
+<!--查询条件-->
+<div class="m40 tabS msgBox">
+    <h3>查询条件</h3>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>商品代码：</td>
+            <td>
+                <input id="goodsNum" name="goodsNum" type="text">
+            </td>
+            <td>商品条码：</td>
+            <td>
+                <input id="goodsCode" name="goodsCode" type="text"/>
+            </td>
+            <td>商品名称：</td>
+            <td>
+                <input id="goodsName" name="goodsName" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>制造商：</td>
+            <td>
+                <input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="hidden" value=""/>
+                <input id="mfrsname" name="mfrsname" th:value="${mfrsName}" type="text" readonly/>
+            </td>
+            <td>商品品种：</td>
+            <td>
+                <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
+                <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
+            </td>
+        </tr>
+        <tr>
+            <td>商品类型：</td>
+            <td>
+                <select id="goodsType" name="goodsType" onchange="selectgoods()">
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${goodsDOList}"
+                            th:text="${ls.goodsname}"
+                            th:value="${ls.goodsid}"></option>
+                </select>
+                <div id="jp" style="display: none">
+                    <label class="radio-inline">
+                        <input type="radio" name="classtype"  value="1" /> 成品片
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="classtype" value="2" /> 订做片
+                    </label>
+                </div>
+            </td>
+            <td>仓位名称：</td>
+            <td >
+                <input id="positionId" name="positionId" th:value="${positionId}"  readonly type="hidden"/>
+                <input id="positionName" name="positionName" th:value="${positionName}" readonly type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <input id="outPosition" type="hidden" th:value="${outPosition}"/>
+            <td>标准零售价格：</td>
+            <td>
+                <input id="retailPrice" name="retailPrice" type="text"/>
+                <!--~ <input name="retailPrice2" type="text"/>-->
+            </td>
+        </tr>
+    </table>
+    <!--保存/清空-->
+    <div class="BQ-btn">
+        <input type="button" value="查询" onclick="getall()"/>
+    </div>
+</div>
+
+<!--商品信息-->
+<div class="m40 tabS msgBoxDD">
+    <table id="tab1" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tr class="thead">
+            <td>多选</td>
+            <td>商品代码</td>
+            <td>商品名称</td>
+            <td>型号</td>
+            <td>单位</td>
+            <td>厂家色号</td>
+            <td>镜架材质</td>
+            <td>镜架尺寸</td>
+            <td>标准零售价</td>
+            <td>仓位</td>
+            <td>库存数量</td>
+        </tr>
+    </table>
+    <table id="tab2" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tr class="thead">
+            <td>多选</td>
+            <td>商品代码</td>
+            <td>商品名称</td>
+            <td>型号</td>
+            <td>单位</td>
+            <td>配件型</td>
+            <td>标准零售价</td>
+            <td>仓位</td>
+            <td>库存数量</td>
+        </tr>
+    </table>
+    <table id="tab3" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tr class="thead">
+            <td>多选</td>
+            <td>商品代码</td>
+            <td>商品名称</td>
+            <td>单位</td>
+            <td>球镜</td>
+            <td>柱镜</td>
+            <td>下加光</td>
+            <td>折射率</td>
+            <td>光度分类</td>
+            <td>渐进片分类</td>
+            <td>镜片功能</td>
+            <td>标准零售价</td>
+            <td>仓位</td>
+            <td>库存数量</td>
+        </tr>
+    </table>
+    <table id="tab4" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tr class="thead">
+            <td>多选</td>
+            <td>商品代码</td>
+            <td>商品名称</td>
+            <td>单位</td>
+            <td>球镜</td>
+            <td>柱镜</td>
+            <td>曲率</td>
+            <td>直径</td>
+            <td>使用类型</td>
+            <td>抛弃型分类</td>
+            <td>标准零售价</td>
+            <td>仓位</td>
+            <td>库存数量</td>
+        </tr>
+    </table>
+    <table id="tab5" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tr class="thead">
+            <td>多选</td>
+            <td>商品代码</td>
+            <td>商品名称</td>
+            <td>型号</td>
+            <td>单位</td>
+            <td>主容量</td>
+            <td>次容量</td>
+            <td>标准零售价</td>
+            <td>仓位</td>
+            <td>库存数量</td>
+        </tr>
+    </table>
+    <table id="tab6" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tr class="thead">
+            <td>多选</td>
+            <td>商品代码</td>
+            <td>商品名称</td>
+            <td>型号</td>
+            <td>单位</td>
+            <td>厂家色号</td>
+            <td>镜架尺寸</td>
+            <td>标准零售价</td>
+            <td>仓位</td>
+            <td>库存数量</td>
+        </tr>
+    </table>
+    <table id="tab7" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tr class="thead">
+            <td>多选</td>
+            <td>商品代码</td>
+            <td>商品名称</td>
+            <td>型号</td>
+            <td>单位</td>
+            <td>老花镜度数</td>
+            <td>镜架尺寸</td>
+            <td>厂家色号</td>
+            <td>标准零售价</td>
+            <td>仓位</td>
+            <td>库存数量</td>
+        </tr>
+    </table>
+    <table id="tab8" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tr class="thead">
+            <td>多选</td>
+            <td>商品代码</td>
+            <td>商品名称</td>
+            <td>型号</td>
+            <td>单位</td>
+            <td>标准零售价</td>
+            <td>仓位</td>
+            <td>库存数量</td>
+        </tr>
+    </table>
+    <table id="tab9" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tr class="thead">
+            <td>多选</td>
+            <td>商品代码</td>
+            <td>商品名称</td>
+            <td>型号</td>
+            <td>单位</td>
+            <td>标准零售价</td>
+            <td>仓位</td>
+            <td>库存数量</td>
+        </tr>
+    </table>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
+<script type="text/javascript">
+    function choiceBrand() {
+        var goodsid = document.getElementById('goodsType').value;
+        var mfrsid = document.getElementById('mfrsid').value;
+        if (goodsid == "") {
+            layer.alert("请选择商品类别！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findbrand/" + mfrsid+"/"+goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandname").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    function selectgoods() {
+        var goodsType = $("#goodsType option:selected").val();
+        if (goodsType == 1){
+            jp.style = "display: none";
+        }else if (goodsType == 2){
+            jp.style = "display: none";
+        }else if (goodsType == 3){
+            jp.style = "display: block";
+        }else if (goodsType == 4){
+            jp.style = "display: block";
+        }else if (goodsType == 5){
+            jp.style = "display: none";
+        }else if (goodsType == 6){
+            jp.style = "display: none";
+        }else if (goodsType == 7){
+            jp.style = "display: none";
+        }else if (goodsType == 8){
+            jp.style = "display: none";
+        }else if (goodsType == 9){
+            jp.style = "display: none";
+        }
+    }
+    function getall() {
+        var goodsNum = $("#goodsNum").val();
+        var goodsCode = $("#goodsCode").val();
+        var goodsName = $("#goodsName").val();
+        var goodsType = $("#goodsType option:selected").val();
+        alert(goodsType)
+        if (goodsType == "--请选择--"){
+            layer.alert("请选择商品类型！")
+        } else if (goodsType == 1){
+            var  classtype ="";
+        } else if (goodsType == 2){
+            var  classtype ="";
+        } else if (goodsType == 3){
+            var classtype=$("input[name='classtype']:checked").val();
+        } else if (goodsType == 4){
+            var classtype=$("input[name='classtype']:checked").val();
+        } else if (goodsType == 5){
+            var  classtype ="";
+        } else if (goodsType == 6){
+            var  classtype ="";
+        } else if (goodsType == 7){
+            var  classtype ="";
+        } else if (goodsType == 8){
+            var  classtype ="";
+        } else if (goodsType == 9){
+            var  classtype ="";
+        }
+        var mfrsname = $("#mfrsname").val();
+        var brandname = $("#brandname").val();
+        var retailPrice = $("*[name='retailPrice']").val();
+        var retailPrice2 = $("*[name='retailPrice2']").val();
+        var xsstate=$("input[name='xsstate']:checked").val();
+        var positionName = $('#positionName option:selected').text();
+        var positionNames = ""
+        if (positionName == "--请选择--") {
+            positionName = positionNames;
+        }
+        var outPosition = document.getElementById('outPosition').value;
+        $(".val").remove();
+        $.ajax({
+            url: '/kucun/stock/selectKc',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'goodsNum': goodsNum,
+                'goodsCode': goodsCode,
+                'goodsName': goodsName,
+                'goodsType': goodsType,
+                'mfrsname': mfrsname,
+                'brandname': brandname,
+                'retailPrice': retailPrice,
+                'retailPrice2': retailPrice2,
+                'xsstate': xsstate,
+                'positionName': positionName,
+                'classtype': classtype,
+                'outPosition': outPosition
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    $(".buyBtns" +
+                        "" +
+                        "" +
+                        "").append("<tr class='val'>" +
+                        "<td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                        "</tr>");
+                }
+            }
+        })
+    }
+
+</script>
+
+</body>
+</html>
