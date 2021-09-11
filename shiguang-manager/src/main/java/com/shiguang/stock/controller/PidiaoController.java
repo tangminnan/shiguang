@@ -90,9 +90,11 @@ public class PidiaoController {
 		List<PidiaoDO> pidiaoList = pidiaoService.list(query);
 		for (PidiaoDO pidiaoDO:pidiaoList){
 			if(companyId != ""){
-				pidiaoDO.setFlags("1");
-			}else if(companyId == ""){
-				pidiaoDO.setFlags("0");
+				if (companyId.equals(pidiaoDO.getInCompanyid())){
+					pidiaoDO.setFlags("0");
+				} else {
+					pidiaoDO.setFlags("1");
+				}
 			}
 			if (departNumber .equals(pidiaoDO.getOutDepartmentid())){
 				pidiaoDO.setFlags("1");//发出部门
@@ -242,11 +244,15 @@ public class PidiaoController {
 		String[] zhuceNumber1= pidiao.getZhuceNumber().split(",");
 		String[] produceDay1=pidiao.getProduceDay().split(",");
 		String[] classtype1=pidiao.getClasstype().split(",");
-		String[] goods1=pidiao.getGoods().toString().split(",");
+
+		String[] goods1=pidiao.getGoods().split(",");
+
+
 		String[] mfrsid1=pidiao.getMfrsid().split(",");
 		String[] brandname1=pidiao.getBrandname().split(",");
 		String[] unit1=pidiao.getUnit().split(",");
 		String[] money1=pidiao.getMoney().split(",");
+		String[] goodsxinxiid1=pidiao.getGoodsxinxiid().toString().split(",");
 
 		for (int i = 0; i < name.length; i++) {
 			PidiaoDO pidiaoDO = new PidiaoDO();
@@ -284,22 +290,48 @@ public class PidiaoController {
 
 			String goodsCode =goodsCode1[i];
 			pidiaoDO.setGoodsCode(goodsCode);
-			String useday =useday1[i];
-			pidiaoDO.setUseday(useday);
-			String batch = batch1[i];
-			pidiaoDO.setBatch(batch);
-			String zhuceNumber =zhuceNumber1[i];
-			pidiaoDO.setZhuceNumber(zhuceNumber);
-			String produceDay = produceDay1 [i];
-			pidiaoDO.setProduceDay(produceDay);
+			try {
+				String useday =useday1[i];
+				pidiaoDO.setUseday(useday);
+			}catch (ArrayIndexOutOfBoundsException e){
+				pidiaoDO.setUseday("");
+			}
+			try {
+				String batch = batch1[i];
+				pidiaoDO.setBatch(batch);
+			}catch (ArrayIndexOutOfBoundsException e){
+				pidiaoDO.setBatch("");
+			}
+			try {
+				String zhuceNumber =zhuceNumber1[i];
+				pidiaoDO.setZhuceNumber(zhuceNumber);
+			}catch (ArrayIndexOutOfBoundsException e){
+				pidiaoDO.setZhuceNumber("");
+			}
+			try {
+				String produceDay = produceDay1 [i];
+				pidiaoDO.setProduceDay(produceDay);
+			}catch (ArrayIndexOutOfBoundsException e){
+				pidiaoDO.setProduceDay("");
+			}
+
+
+
+
+
 			if(null != pidiao.getClasstype()){
 				String classtype = classtype1[i];
 				pidiaoDO.setClasstype(classtype);
 			}else{
 				pidiaoDO.setClasstype("");
 			}
+
+
+
 			String goods =goods1[i];
-			pidiaoDO.setGoods(Integer.valueOf(goods));
+			pidiaoDO.setGoods(goods);
+
+
 			String mfrsid =mfrsid1[i];
 			pidiaoDO.setMfrsid(mfrsid);
 			String brandname = brandname1[i];
@@ -308,6 +340,9 @@ public class PidiaoController {
 			pidiaoDO.setUnit(unit);
 			String money = money1[i];
 			pidiaoDO.setMoney(money);
+
+			String goodsxinxiid= goodsxinxiid1[i];
+			pidiaoDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
 
 			pidiaoService.save(pidiaoDO);
 
@@ -341,7 +376,12 @@ public class PidiaoController {
 				stockDO.setGoodsCode(goodsCode);
 				stockDO.setGoodsName(goodsName);
 				stockDO.setGoodsCount(useCount);
+
+
+
 				stockDO.setGoodsType(Integer.valueOf(goods));
+
+
 				stockDO.setMfrsid(Integer.valueOf(mfrsid));
 				stockDO.setBrandname(brandname);
 				stockDO.setUnit(unit);
@@ -351,6 +391,50 @@ public class PidiaoController {
 				stockDO.setDanjuNumber(pidiaoNumber);
 				stockDO.setCreateTime(danjuDay);
 				stockDO.setDanjuDay(danjuDay);
+
+				try {
+					String useday =useday1[i];
+					stockDO.setUseday(useday);
+				}catch (ArrayIndexOutOfBoundsException e){
+					stockDO.setUseday("");
+				}
+				try {
+					String batch = batch1[i];
+					stockDO.setBatch(batch);
+				}catch (ArrayIndexOutOfBoundsException e){
+					stockDO.setBatch("");
+				}
+				try {
+					String zhuceNumber =zhuceNumber1[i];
+					stockDO.setZhuceNumber(zhuceNumber);
+				}catch (ArrayIndexOutOfBoundsException e){
+					stockDO.setZhuceNumber("");
+				}
+				try {
+					String produceDay = produceDay1 [i];
+					stockDO.setProduceDay(produceDay);
+				}catch (ArrayIndexOutOfBoundsException e){
+					stockDO.setProduceDay("");
+				}
+
+
+
+
+				if(null != pidiao.getClasstype()){
+					String classtype = classtype1[i];
+					stockDO.setClasstype(classtype);
+				}else{
+					stockDO.setClasstype("");
+				}
+				try {
+					String factory = factory1[i];
+
+					stockDO.setFactory(factory);
+				}catch (ArrayIndexOutOfBoundsException e){
+					stockDO.setFactory("");
+				}
+				stockDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
+
 				if (stockService.save(stockDO) < 0) {
 					return R.error();
 				}
@@ -399,6 +483,9 @@ public class PidiaoController {
 				Integer newCount = kccountall + returnCount;
 				stockDO.setGoodsCount(String.valueOf(newCount));
 				stockDO.setReturnzt("0");
+				//———退货号————
+				String tuihuoNumber = pidiaoDO.getPidiaoNumber();
+				stockDO.setTuihuoNumber(tuihuoNumber);
 				stockService.updateGoodsCount(stockDO);//修改数量
 				pidiaoDO.setReturnzt("0");
 				pidiaoService.updatereturnzt(pidiaoDO);
@@ -435,6 +522,9 @@ public class PidiaoController {
 				stockDO.setFactory(factory);
 				stockDO.setStatus("0");
 				stockDO.setReturnzt("0");
+				//———退货号————
+				String tuihuoNumber = pidiaoDO.getPidiaoNumber();
+				stockDO.setTuihuoNumber(tuihuoNumber);
 				String username= pidiaoDO.getUsername();
 				stockDO.setUsername(username);
 				if (stockService.save(stockDO) < 0) {

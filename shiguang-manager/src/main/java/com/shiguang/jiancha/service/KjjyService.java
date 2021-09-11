@@ -28,6 +28,7 @@ public interface KjjyService {
     int update(KjjyDO kjjy);
 
     int remove(Long kjjyId);
+    int upremove(KjjyDO kjjyDO);
 
     int batchRemove(Long[] kjjyIds);
 }

@@ -67,7 +67,16 @@ public class SjxlDO implements Serializable {
     private String sjxlXlsxl;
     //备注
     private String sjxlBeizhu;
+    //删除状态
+    private String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     /**
      * 设置：视觉训练id
      */

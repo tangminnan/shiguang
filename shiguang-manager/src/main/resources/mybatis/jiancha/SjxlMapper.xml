@@ -183,7 +183,8 @@
 			`sjxl_jtxl`,
 			`sjxl_xlsxl`,
 			`sjxl_beizhu`,
-			`ptometry_number`
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -212,7 +213,8 @@
 			#{sjxlJtxl},
 			#{sjxlXlsxl},
 			#{sjxlBeizhu},
-			#{ptometryNumber}
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
 
@@ -251,7 +253,13 @@
     <delete id="remove">
 		delete from jc_sjxl where sjxl_id = #{value}
 	</delete>
-
+    <update id="upremove" parameterType="com.shiguang.jiancha.domain.SjxlDO">
+        update jc_sjxl
+        <set>
+            <if test="status != null">`status` = #{status}</if>
+        </set>
+        where ptometry_number = #{ptometryNumber}
+    </update>
     <delete id="batchRemove">
         delete from jc_sjxl where sjxl_id in
         <foreach item="sjxlId" collection="array" open="(" separator="," close=")">

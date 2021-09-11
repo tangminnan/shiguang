@@ -316,7 +316,16 @@ public class TryresultsDO implements Serializable {
     private String axialRight2;
     //轴向(左眼OS)后
     private String axialLeft2;
+    //删除状态
+    private String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     /**
      * 设置：试戴镜结果id
      */

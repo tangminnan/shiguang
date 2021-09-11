@@ -232,6 +232,7 @@
                 <td class="PL30" colspan="2">1 框架--远用
                     <input type="button" class="input_del" id="remove1" value="删 除"/>
                 </td>
+
                 <td style="text-align: right" colspan="7">
                     医生：
                     <select id="kjyyDoctor" name="kjyyDoctor">
@@ -1231,7 +1232,10 @@
         </div>
     </div>
     <!--保存-->
-    <div class="Keep"><input type="button" value="保存" onclick="saveCF()"/></div>
+    <div class="Keep">
+        <input id="status" name="status" value="1" type="hidden" />
+        <input type="button" value="保存" onclick="saveCF()"/>
+    </div>
 </form>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/optometryNew/jcresult.js"></script>

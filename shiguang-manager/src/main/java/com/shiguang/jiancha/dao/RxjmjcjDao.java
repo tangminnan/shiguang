@@ -28,8 +28,8 @@ public interface RxjmjcjDao {
     int saveRxjmjcj(ResultDO result);
 
     int update(RxjmjcjDO rxjmjcj);
-
     int remove(Long rx_id);
+    int upremove(RxjmjcjDO rxjmjcjDO);
 
     int batchRemove(Long[] rxIds);
 }

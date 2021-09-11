@@ -16,39 +16,44 @@ import com.shiguang.jiancha.service.ResultService;
 public class ResultServiceImpl implements ResultService {
 	@Autowired
 	private ResultDao resultDao;
-	
+
 	@Override
-	public ResultDO get(Long id){
+	public ResultDO get(Long id) {
 		return resultDao.get(id);
 	}
-	
+
 	@Override
-	public List<ResultDO> list(Map<String, Object> map){
+	public List<ResultDO> list(Map<String, Object> map) {
 		return resultDao.list(map);
 	}
-	
+
 	@Override
-	public int count(Map<String, Object> map){
+	public int count(Map<String, Object> map) {
 		return resultDao.count(map);
 	}
-	
+
 	@Override
-	public int save(ResultDO result){
+	public int save(ResultDO result) {
 		return resultDao.save(result);
 	}
-	
+
 	@Override
-	public int update(ResultDO result){
+	public int update(ResultDO result) {
 		return resultDao.update(result);
 	}
-	
+
 	@Override
-	public int remove(Long id){
+	public int remove(Long id) {
 		return resultDao.remove(id);
 	}
-	
+
 	@Override
-	public int batchRemove(Long[] ids){
+	public int upremove(ResultDO resultDO) {
+		return resultDao.upremove(resultDO);
+	}
+
+	@Override
+	public int batchRemove(Long[] ids) {
 		return resultDao.batchRemove(ids);
 	}
 

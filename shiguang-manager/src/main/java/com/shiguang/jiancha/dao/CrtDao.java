@@ -30,6 +30,7 @@ public interface CrtDao {
     int update(CrtDO crt);
 
     int remove(Long crt_id);
+    int upremove(CrtDO crtDO);
 
     int batchRemove(Long[] crtIds);
 }

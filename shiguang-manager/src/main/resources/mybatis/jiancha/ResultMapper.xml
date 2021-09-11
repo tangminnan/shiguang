@@ -172,7 +172,8 @@
 			`yizhu`, 
 			`way`, 
 			`follow_time`, 
-			`visit_type`
+			`visit_type`,
+			`status`
 		)
 		values
 		(
@@ -221,7 +222,8 @@
 			#{yizhu}, 
 			#{way}, 
 			#{followTime}, 
-			#{visitType}
+			#{visitType},
+			#{status}
 		)
 	</insert>
 	 
@@ -281,6 +283,13 @@
 	<delete id="remove">
 		delete from jc_result where id = #{value}
 	</delete>
+	<update id="upremove" parameterType="com.shiguang.jiancha.domain.ResultDO">
+		update jc_result
+		<set>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where ptometry_number = #{ptometryNumber}
+	</update>
 	
 	<delete id="batchRemove">
 		delete from jc_result where id in 
@@ -290,7 +299,9 @@
 	</delete>
 
 	<select id="shujulist" resultType="com.shiguang.jiancha.domain.ResultDO">
-		select ptometry_number ,optometry_name,create_time,follow_time from jc_result where card_number=#{cardNumber}   order by id desc
+		select r.ptometry_number ,r.optometry_name,r.create_time,r.follow_time ,r.status,s.id as haveid from jc_result r
+		left join store_sales s on r.ptometry_number = s.ptometry_number
+		where r.card_number=#{cardNumber} and r.status=#{status}   order by r.id desc
 	</select>
 	<select id="getChufangAll" resultType="com.shiguang.jiancha.domain.ResultDO">
 		select

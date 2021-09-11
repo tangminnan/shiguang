@@ -52,8 +52,12 @@ public class KjyyServiceImpl implements KjyyService {
     }
 
     @Override
+    public int upremove(KjyyDO kjyyDO) {
+        return kjyyDao.upremove(kjyyDO);
+    }
+
+    @Override
     public int batchRemove(Long[] kjyyIds) {
         return kjyyDao.batchRemove(kjyyIds);
     }
-
 }

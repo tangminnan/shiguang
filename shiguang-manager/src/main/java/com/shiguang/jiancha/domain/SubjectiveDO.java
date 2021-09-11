@@ -57,7 +57,16 @@ public class SubjectiveDO implements Serializable {
     private String nearRightz;
     //近用瞳孔距(mm)(OS)
     private String nearLeftz;
+    //删除状态
+    private String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     /**
      * 设置：主观验光id
      */

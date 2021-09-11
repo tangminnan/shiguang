@@ -26,8 +26,8 @@ public interface YaopinService {
     int saveYaopin(ResultDO result);
 
     int update(YaopinDO yaopin);
-
     int remove(Long ypId);
+    int upremove(YaopinDO yaopinDO);
 
     int batchRemove(Long[] ypIds);
 }

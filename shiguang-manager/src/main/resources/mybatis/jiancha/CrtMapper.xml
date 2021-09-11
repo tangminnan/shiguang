@@ -188,7 +188,8 @@
 			`crt_syjpod`,
 			`crt_syjpos`,
 			`crt_beizhu`,
-			`ptometry_number`
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -219,7 +220,8 @@
 			#{crtSyjpod},
 			#{crtSyjpos},
 			#{crtBeizhu},
-			#{ptometryNumber}
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
 
@@ -260,7 +262,13 @@
     <delete id="remove">
 		delete from jc_crt where crt_id = #{value}
 	</delete>
-
+    <update id="upremove" parameterType="com.shiguang.jiancha.domain.CrtDO">
+        update jc_crt
+        <set>
+            <if test="status != null">`status` = #{status}</if>
+        </set>
+        where ptometry_number = #{ptometryNumber}
+    </update>
     <delete id="batchRemove">
         delete from jc_crt where crt_id in
         <foreach item="crtId" collection="array" open="(" separator="," close=")">

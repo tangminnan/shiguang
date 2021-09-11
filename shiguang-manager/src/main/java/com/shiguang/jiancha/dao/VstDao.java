@@ -28,8 +28,8 @@ public interface VstDao {
     int saveVst(ResultDO result);
 
     int update(VstDO vst);
-
     int remove(Long vst_id);
+    int upremove(VstDO vstDO);
 
     int batchRemove(Long[] vstIds);
 }

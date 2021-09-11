@@ -38,7 +38,7 @@ public class CrtServiceImpl implements CrtService {
 
     @Override
     public int saveCrt(ResultDO result) {
-        return crtDao.saveCrt(result);
+        return saveCrt(result);
     }
 
     @Override
@@ -52,8 +52,12 @@ public class CrtServiceImpl implements CrtService {
     }
 
     @Override
+    public int upremove(CrtDO crtDO) {
+        return crtDao.upremove(crtDO);
+    }
+
+    @Override
     public int batchRemove(Long[] crtIds) {
         return crtDao.batchRemove(crtIds);
     }
-
 }

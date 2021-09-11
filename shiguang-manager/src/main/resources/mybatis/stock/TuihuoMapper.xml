@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.stock.dao.TuihuoDao">
+
+	<select id="get" resultType="com.shiguang.stock.domain.TuihuoDO">
+		select `id`,`tuihuo_num`,`zhidan_people`,`danju_day`,`mfrsid`,`mfrsname`,`position_id`,`beizhu`,`goodsxinxiid`,`goods_num`,`goods_name`,`factory`,`unit`,`goods_count`,`count`,`goods_code` from stock_tuihuo where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.stock.domain.TuihuoDO">
+		select `id`,`tuihuo_num`,`zhidan_people`,`danju_day`,`mfrsid`,`mfrsname`,`position_id`,`beizhu`,`goodsxinxiid`,`goods_num`,`goods_name`,`factory`,`unit`,`goods_count`,`count`,`goods_code` from stock_tuihuo
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
+		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
+		  		  <if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
+		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+		  		  <if test="goodsxinxiid != null and goodsxinxiid != ''"> and goodsxinxiid = #{goodsxinxiid} </if>
+		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
+		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
+		  		  <if test="unit != null and unit != ''"> and unit = #{unit} </if>
+		  		  <if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
+		  		  <if test="count != null and count != ''"> and count = #{count} </if>
+		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from stock_tuihuo
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
+		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
+		  		  <if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
+		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+		  		  <if test="goodsxinxiid != null and goodsxinxiid != ''"> and goodsxinxiid = #{goodsxinxiid} </if>
+		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
+		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
+		  		  <if test="unit != null and unit != ''"> and unit = #{unit} </if>
+		  		  <if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
+		  		  <if test="count != null and count != ''"> and count = #{count} </if>
+		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.stock.domain.TuihuoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into stock_tuihuo
+		(
+			`tuihuo_num`, 
+			`zhidan_people`, 
+			`danju_day`, 
+			`mfrsid`, 
+			`mfrsname`, 
+			`position_id`, 
+			`beizhu`, 
+			`goodsxinxiid`, 
+			`goods_num`, 
+			`goods_name`, 
+			`factory`, 
+			`unit`, 
+			`goods_count`, 
+			`count`, 
+			`goods_code`
+		)
+		values
+		(
+			#{tuihuoNum}, 
+			#{zhidanPeople}, 
+			#{danjuDay}, 
+			#{mfrsid}, 
+			#{mfrsname}, 
+			#{positionId}, 
+			#{beizhu}, 
+			#{goodsxinxiid}, 
+			#{goodsNum}, 
+			#{goodsName}, 
+			#{factory}, 
+			#{unit}, 
+			#{goodsCount}, 
+			#{count}, 
+			#{goodsCode}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.stock.domain.TuihuoDO">
+		update stock_tuihuo 
+		<set>
+			<if test="tuihuoNum != null">`tuihuo_num` = #{tuihuoNum}, </if>
+			<if test="zhidanPeople != null">`zhidan_people` = #{zhidanPeople}, </if>
+			<if test="danjuDay != null">`danju_day` = #{danjuDay}, </if>
+			<if test="mfrsid != null">`mfrsid` = #{mfrsid}, </if>
+			<if test="mfrsname != null">`mfrsname` = #{mfrsname}, </if>
+			<if test="positionId != null">`position_id` = #{positionId}, </if>
+			<if test="beizhu != null">`beizhu` = #{beizhu}, </if>
+			<if test="goodsxinxiid != null">`goodsxinxiid` = #{goodsxinxiid}, </if>
+			<if test="goodsNum != null">`goods_num` = #{goodsNum}, </if>
+			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+			<if test="factory != null">`factory` = #{factory}, </if>
+			<if test="unit != null">`unit` = #{unit}, </if>
+			<if test="goodsCount != null">`goods_count` = #{goodsCount}, </if>
+			<if test="count != null">`count` = #{count}, </if>
+			<if test="goodsCode != null">`goods_code` = #{goodsCode}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from stock_tuihuo where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from stock_tuihuo where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -377,11 +377,11 @@
                     </td>
                     <td>散瞳用药</td>
                     <td colspan="3">
-                        <select id="pharmacy" name="pharmacy">
+                        <select id="pharmacyId" name="pharmacyId">
                             <option></option>
                             <option th:each="ls:${pharmacyDOList}"
                                     th:text="${ls.pharmacy}"
-                                    th:value="${ls.pharmacy}"
+                                    th:value="${ls.pharmacyId}"
                             ></option>
                         </select>
                     </td>

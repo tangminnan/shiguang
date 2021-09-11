@@ -28,8 +28,8 @@ public interface SjxlDao {
     int saveSjxl(ResultDO result);
 
     int update(SjxlDO sjxl);
-
     int remove(Long sjxl_id);
+    int upremove(SjxlDO sjxlDO);
 
     int batchRemove(Long[] sjxlIds);
 }

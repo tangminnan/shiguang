@@ -17,6 +17,17 @@ public class OrderDO implements Serializable {
 
     //主键
     private Long id;
+    //商品信息id
+    private Long goodsxinxiid;
+
+    public Long getGoodsxinxiid() {
+        return goodsxinxiid;
+    }
+
+    public void setGoodsxinxiid(Long goodsxinxiid) {
+        this.goodsxinxiid = goodsxinxiid;
+    }
+
     //状态
     private String status;
     //工号

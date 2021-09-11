@@ -52,8 +52,12 @@ public class SgjjServiceImpl implements SgjjService {
     }
 
     @Override
+    public int upremove(SgjjDO sgjjDO) {
+        return sgjjDao.upremove(sgjjDO);
+    }
+
+    @Override
     public int batchRemove(Long[] sgjjIds) {
         return sgjjDao.batchRemove(sgjjIds);
     }
-
 }

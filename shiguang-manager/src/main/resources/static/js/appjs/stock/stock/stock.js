@@ -189,6 +189,9 @@ function showCol() {
         var gdname = rowstr.find("[name='gdname']").html();
         obj.gdname = gdname;
 
+        var goodsxinxiid = rowstr.find("[name='goodsxinxiid']").html();
+        obj.goodsxinxiid = goodsxinxiid;
+
 
         objArray.push(obj);
     });

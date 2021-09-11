@@ -79,7 +79,8 @@
 			`yp_optometry_name`,
 			`yp_nr`,
 			`yp_ym`,
-			`ptometry_number`
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -89,7 +90,8 @@
 			#{ypOptometryName},
 			#{ypNr},
 			#{ypYm},
-			#{ptometryNumber}
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
 
@@ -109,7 +111,13 @@
     <delete id="remove">
 		delete from jc_yaopin where yp_id = #{value}
 	</delete>
-
+    <update id="upremove" parameterType="com.shiguang.jiancha.domain.YaopinDO">
+        update jc_yaopin
+        <set>
+            <if test="status != null">`status` = #{status}</if>
+        </set>
+        where ptometry_number = #{ptometryNumber}
+    </update>
     <delete id="batchRemove">
         delete from jc_yaopin where yp_id in
         <foreach item="ypId" collection="array" open="(" separator="," close=")">

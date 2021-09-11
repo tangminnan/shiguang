@@ -15,6 +15,16 @@ public class OldlensDO implements Serializable {
 
     //老花镜id
     private Long id;
+    //商品信息id
+    private Long goodsxinxiid;
+
+    public Long getGoodsxinxiid() {
+        return goodsxinxiid;
+    }
+
+    public void setGoodsxinxiid(Long goodsxinxiid) {
+        this.goodsxinxiid = goodsxinxiid;
+    }
     //商品信息代码
     private String producNum;
     //商品条码

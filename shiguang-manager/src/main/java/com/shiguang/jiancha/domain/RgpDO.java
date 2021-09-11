@@ -53,7 +53,16 @@ public class RgpDO implements Serializable {
     private String rgpSyjpos;
     //备注
     private String rgpBeizhu;
+    //删除状态
+    private String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     /**
      * 设置：角膜接触镜CRTid
      */

@@ -28,8 +28,8 @@ public interface YaopinDao {
     int saveYaopin(ResultDO result);
 
     int update(YaopinDO yaopin);
-
     int remove(Long yp_id);
+    int upremove(YaopinDO yaopinDO);
 
     int batchRemove(Long[] ypIds);
 }

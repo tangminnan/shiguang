@@ -34,7 +34,6 @@
 			<td>发出部门：</td>
 			<td>
 				<select id="outDepartment" name="outDepartment" style="width:48%" onchange="outposion()">
-					<option></option>
 					<option th:each="ls:${departmentDOList}"
 							th:text="${ls.departName}"
 							th:value="${ls.departNumber}"
@@ -117,6 +116,7 @@
 			<td style="display: none">制造商</td>
 			<td style="display: none">品牌</td>
 			<td style="display: none">标准价格</td>
+			<td style="display: none">商品id</td>
 		</tr>
 		<tr class="liebiao">
 			<!--<td colspan="5"></td>-->
@@ -133,26 +133,29 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
 <script type="text/javascript">
-function outposion() {
-    var outDepartment = $("#outDepartment").val();
-    $(".outcw").empty("");
-    $(".outcw").append("<option value=''></option>");
-    $.ajax({
-        url: '/stock/pidiao/outposion',
-        type: 'post',
-        dataType: "json",
-        data: {
-            'outDepartment': outDepartment
-        },
-        success: function (datajson) {
-            $(datajson).each(function (key) {  //循环读取后台传来的Json数据
-                var id = datajson[key].positionId;   //角色id
-                var roleName = datajson[key].positionName; //角色名称
-                $(".outcw").append("<option value='" + id + "'>" + roleName + "</option>");
-            });
-        }
-	})
-}
+    $(document).ready(function () {
+        // function outposion() {
+            var outDepartment = $("#outDepartment").val();
+            $(".outcw").empty("");
+            // $(".outcw").append("<option value=''></option>");
+            $.ajax({
+                url: '/stock/pidiao/outposion',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    'outDepartment': outDepartment
+                },
+                success: function (datajson) {
+                    $(datajson).each(function (key) {  //循环读取后台传来的Json数据
+                        var id = datajson[key].positionId;   //角色id
+                        var roleName = datajson[key].positionName; //角色名称
+                        $(".outcw").append("<option value='" + id + "'>" + roleName + "</option>");
+                    });
+                }
+            })
+        // }
+    });
+
 function indepartment() {
 	var inCompany = $('#inCompany').val();
     $(".ings").empty("");
@@ -220,6 +223,7 @@ function inposion() {
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();
                     for (var i = 0; i < rows.length; i++) {
+                        // alert( rows[i].goodsid);
 
                         $(".liebiao").after("<tr class='val'> " +
 							// "<td><input name='one'  type=\"checkbox\"/></td>\n" +
@@ -259,6 +263,9 @@ function inposion() {
 
 							"<td name='money' style='display: none'>" + rows[i].retailPrice + "</td>\n" +
                             "<input name='money' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+
+							"<td name='goodsxinxiid' style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
+                            "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
 
 
                             "</tr>");

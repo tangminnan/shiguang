@@ -196,7 +196,8 @@
 			`vst_syjpod`,
 			`vst_syjpos`,
 			`vst_beizhu`,
-			`ptometry_number`
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -229,7 +230,8 @@
 			#{vstSyjpod},
 			#{vstSyjpos},
 			#{vstBeizhu},
-			#{ptometryNumber}
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
 
@@ -272,7 +274,13 @@
     <delete id="remove">
 		delete from jc_vst where vst_id = #{value}
 	</delete>
-
+	<update id="upremove" parameterType="com.shiguang.jiancha.domain.VstDO">
+		update jc_vst
+		<set>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where ptometry_number = #{ptometryNumber}
+	</update>
     <delete id="batchRemove">
         delete from jc_vst where vst_id in
         <foreach item="vstId" collection="array" open="(" separator="," close=")">

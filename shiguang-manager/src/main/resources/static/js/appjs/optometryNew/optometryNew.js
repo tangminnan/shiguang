@@ -129,12 +129,28 @@ function load() {
                                 field: 'ptometryNumber',
                                 align: 'center',
                                 formatter: function (value, row, index) {
+                                    // alert(row.haveid);
+                                    if (row.haveid == "1"){
+                                        if (row.status=="1"){
+                                            var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
+                                                + value
+                                                + '\')">详情</span> ';
+                                            var h = '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#" onclick="upremove(\''
+                                                + value
+                                                + '\')">删除</span> ';
+                                        }else if (row.status =="0") {
+                                            var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
+                                                + value
+                                                + '\')">详情</span> ';
+                                            var h = '';
+                                        }
+                                    } else if (row.haveid == "0") {
                                     var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
                                         + value
                                         + '\')">详情</span> ';
-                                    var h = '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#" onclick="selectShuju(\''
-                                        + value
-                                        + '\')">删除</span> ';
+                                    var h='';
+
+                                }
                                     return f + h;
                                 }
                             }
@@ -154,7 +170,7 @@ function load() {
                         },*/
                         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                         onLoadError: function () {  //加载失败时执行
-                            alert('失败')
+                            Layer.alert("失败");
                         },
                     })
                 }
@@ -220,6 +236,7 @@ function selectShuju(ptometryNumber) {
     });
     layer.full(toIndex);
 }
+
 function remove(id) {
     layer.confirm('确定要删除选中的记录？', {
         btn: ['确定', '取消']
@@ -241,7 +258,27 @@ function remove(id) {
         });
     })
 }
-
+function upremove(ptometryNumber) {
+    layer.confirm('确定要删除选中的记录？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.ajax({
+            url: '/jiancha/result/upremove' ,
+            type: "post",
+            data: {
+                'ptometryNumber': ptometryNumber
+            },
+            success: function (r) {
+                if (r.code == 0) {
+                    layer.msg(r.msg);
+                    reLoad();
+                } else {
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    })
+}
 
 function batchRemove() {
     var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组

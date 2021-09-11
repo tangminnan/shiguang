@@ -69,6 +69,16 @@ public class CrtDO implements Serializable {
     private String crtSyjpos;
     //备注
     private String crtBeizhu;
+    //删除状态
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     /**
      * 设置：角膜接触镜CRTid

@@ -69,7 +69,16 @@ public class KjjyDO implements Serializable {
     private String kjjyText;
     //备注
     private String kjjyBeizhu;
+    //删除状态
+    private String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     /**
      * 设置：框架近用id
      */

@@ -24,8 +24,8 @@ public interface ResultService {
 	int save(ResultDO result);
 	
 	int update(ResultDO result);
-	
 	int remove(Long id);
+	int upremove(ResultDO resultDO );
 	
 	int batchRemove(Long[] ids);
 

@@ -26,8 +26,8 @@ public interface RgpService {
     int saveRgp(ResultDO result);
 
     int update(RgpDO rgp);
-
     int remove(Long rgpId);
+    int upremove(RgpDO rgpDO);
 
     int batchRemove(Long[] rgpIds);
 }

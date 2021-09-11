@@ -26,8 +26,8 @@ public interface ZyDao {
 	int save(ZyDO zy);
 	int saveZY(ResultDO result);
 	int update(ZyDO zy);
-	
 	int remove(Long zy_id);
+	int upremove(ZyDO zyDO);
 	
 	int batchRemove(Long[] zyIds);
 }

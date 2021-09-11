@@ -17,24 +17,24 @@ import com.shiguang.jiancha.service.ZyService;
 public class ZyServiceImpl implements ZyService {
 	@Autowired
 	private ZyDao zyDao;
-	
+
 	@Override
-	public ZyDO get(Long zyId){
+	public ZyDO get(Long zyId) {
 		return zyDao.get(zyId);
 	}
-	
+
 	@Override
-	public List<ZyDO> list(Map<String, Object> map){
+	public List<ZyDO> list(Map<String, Object> map) {
 		return zyDao.list(map);
 	}
-	
+
 	@Override
-	public int count(Map<String, Object> map){
+	public int count(Map<String, Object> map) {
 		return zyDao.count(map);
 	}
-	
+
 	@Override
-	public int save(ZyDO zy){
+	public int save(ZyDO zy) {
 		return zyDao.save(zy);
 	}
 
@@ -44,18 +44,22 @@ public class ZyServiceImpl implements ZyService {
 	}
 
 	@Override
-	public int update(ZyDO zy){
+	public int update(ZyDO zy) {
 		return zyDao.update(zy);
 	}
-	
+
 	@Override
-	public int remove(Long zyId){
+	public int remove(Long zyId) {
 		return zyDao.remove(zyId);
 	}
-	
+
 	@Override
-	public int batchRemove(Long[] zyIds){
+	public int upremove(ZyDO zyDO) {
+		return zyDao.upremove(zyDO);
+	}
+
+	@Override
+	public int batchRemove(Long[] zyIds) {
 		return zyDao.batchRemove(zyIds);
 	}
-	
 }
