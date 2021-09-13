@@ -17,6 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface InventoryDao {
 
 	InventoryDO get(Long id);
+
+	InventoryDO getInventory(Long inventoryId);
 	
 	List<InventoryDO> list(Map<String, Object> map);
 	

@@ -18,6 +18,8 @@ import java.util.Map;
 public interface InventoryService {
 	
 	InventoryDO get(Long id);
+
+	InventoryDO getInventory(Long inventoryId);
 	
 	List<InventoryDO> list(Map<String, Object> map);
 	

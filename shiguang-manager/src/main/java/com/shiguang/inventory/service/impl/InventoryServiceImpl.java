@@ -35,7 +35,12 @@ public class InventoryServiceImpl implements InventoryService {
 	public InventoryDO get(Long id){
 		return inventoryDao.get(id);
 	}
-	
+
+	@Override
+	public InventoryDO getInventory(Long id){
+		return inventoryDao.getInventory(id);
+	}
+
 	@Override
 	public List<InventoryDO> list(Map<String, Object> map){
 		return inventoryDao.list(map);
@@ -103,7 +108,7 @@ public class InventoryServiceImpl implements InventoryService {
 					BillDO billDO = new BillDO();
 					billDO.setGoodsNum(stockDO.getGoodsNum());
 					billDO.setGoodsCode(stockDO.getGoodsCode());
-					//billDO.setGoodsId();
+					billDO.setGoodsId(String.valueOf(stockDO.getGoodsxinxiid()));
 					billDO.setGoodsName(stockDO.getGoodsName());
 					if (null != stockDO.getUseday()){
 						billDO.setGoodsTime(stockDO.getUseday());
@@ -150,6 +155,7 @@ public class InventoryServiceImpl implements InventoryService {
 					billDO.setGoodsNum(stockDOstr.getGoodsNum());
 					billDO.setGoodsCode(stockDOstr.getGoodsCode());
 					billDO.setGoodsName(stockDOstr.getGoodsName());
+					billDO.setGoodsId(String.valueOf(stockDOstr.getGoodsxinxiid()));
 					if (null != stockDOstr.getUseday()){
 						billDO.setGoodsTime(stockDOstr.getUseday());
 					} else {

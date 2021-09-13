@@ -7,6 +7,10 @@
 		select `id`,`inventory_id`,`gain`,`loss`,`inventory_number`,`inventory_name`,`inventory_type`,`inventory_date`,`inventory_position`,`inventory_user`,`department_name`,`department_number`,`goods_code`,`document_no`,`document_date` from inventory where id = #{value}
 	</select>
 
+	<select id="getInventory" resultType="com.shiguang.inventory.domain.InventoryDO">
+		select `id`,`inventory_id`,`gain`,`loss`,`inventory_number`,`inventory_name`,`inventory_type`,`inventory_date`,`inventory_position`,`inventory_user`,`department_name`,`department_number`,`goods_code`,`document_no`,`document_date` from inventory where inventory_id = #{value}
+	</select>
+
 	<select id="list" resultType="com.shiguang.inventory.domain.InventoryDO">
 		select t.`id`,t.`inventory_id`,t.`gain`,t.`loss`,t.`inventory_number`,t.`inventory_name`,t.`inventory_type`,
 		t.`inventory_date`,t.`inventory_position`,t.`inventory_user`,t.`department_name`,t.`department_number`,

@@ -91,7 +91,10 @@ public class GainLossController {
 		List<GainLossDO> gainLossList = gainLossService.list(query);
 		if (null != gainLossList && gainLossList.size() > 0){
 			for (GainLossDO gainLossDO : gainLossList){
-				gainLossDO.setExamineTime(simpleDateFormat.format(gainLossDO.getExamineDate()));
+				if (null != gainLossDO.getExamineDate()){
+					gainLossDO.setExamineTime(simpleDateFormat.format(gainLossDO.getExamineDate()));
+				}
+
 			}
 		}
 		int total = gainLossService.count(query);

@@ -11,9 +11,12 @@ import com.shiguang.inventory.domain.BillDO;
 import com.shiguang.inventory.domain.GainLossDO;
 import com.shiguang.inventory.domain.InventoryDO;
 import com.shiguang.inventory.service.BillService;
+import com.shiguang.inventory.service.GainLossService;
 import com.shiguang.inventory.service.InventoryService;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.PositionService;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -45,6 +48,10 @@ public class InventoryController {
 	private PositionService positionService;
 	@Autowired
 	private BillService billService;
+	@Autowired
+	private GainLossService gainLossService;
+	@Autowired
+	private StockService stockService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:inventory:inventory")
@@ -109,37 +116,7 @@ public class InventoryController {
 		inventory.setDocumentTime(simpleDateFormat.format(inventory.getDocumentDate()));
 		model.addAttribute("gainlossType","盘盈");
 		model.addAttribute("inventory", inventory);
-		Map<String,Object> map = new HashMap<>();
-		map.put("inventoryId",inventory.getInventoryId());
-		List<BillDO> billDOList = billService.list(map);
-		GainLossDO gainLossDO = new GainLossDO();
-		gainLossDO.setDocumentNo("SC"+GuuidUtil.getUUID());
-		gainLossDO.setDocumentDate(new Date());
-		gainLossDO.setInventoryNumber("MAI"+GuuidUtil.getUUID());
-		gainLossDO.setInventoryType(inventory.getInventoryType());
-		gainLossDO.setDocumentType("盘盈");
-		gainLossDO.setPositionId(Long.valueOf(inventory.getInventoryPosition()));
-		gainLossDO.setSingleName(inventory.getInventoryUser());
-		StringBuffer countsb = new StringBuffer();
-		StringBuffer goodsidsb = new StringBuffer();
-		StringBuffer goodsNumsb = new StringBuffer();
-		StringBuffer goodsCodesb = new StringBuffer();
-		for(int i=0;i<billDOList.size();i++){
-			if (i<billDOList.size()-1){
-				countsb.append(billDOList.get(i).getSurplus()+",");
-				goodsidsb.append(billDOList.get(i).getGoodsId()+",");
-				goodsNumsb.append(billDOList.get(i).getGoodsNum()+",");
-				goodsCodesb.append(billDOList.get(i).getGoodsCode()+",");
-			} else {
-				countsb.append(billDOList.get(i).getSurplus());
-				goodsidsb.append(billDOList.get(i).getGoodsId());
-				goodsNumsb.append(billDOList.get(i).getGoodsNum());
-				goodsCodesb.append(billDOList.get(i).getGoodsCode());
-			}
-		}
-		gainLossDO.setInventoryCount(countsb.toString());
-
-		return "inventory/inventory/inventorybill";
+		return "inventory/inventory/inventorySingle";
 	}
 
 	/**
@@ -156,8 +133,126 @@ public class InventoryController {
 		inventory.setDocumentTime(simpleDateFormat.format(inventory.getDocumentDate()));
 		model.addAttribute("gainlossType","盘亏");
 		model.addAttribute("inventory", inventory);
-		return "inventory/inventory/inventorybill";
+		return "inventory/inventory/inventorySingle";
 	}
+
+
+	/**
+	 * 生成盘盈盘亏单
+	 */
+	@PostMapping( "/saveSingle")
+	@ResponseBody
+	@RequiresPermissions("information:inventory:saveSingle")
+	public R saveSingle(Long inventoryId,String gainlossType){
+		InventoryDO inventory = inventoryService.getInventory(inventoryId);
+		Map<String,Object> map = new HashMap<>();
+		map.put("inventoryId",inventory.getInventoryId());
+		List<BillDO> billDOList = billService.list(map);
+		//增加盘盈盘亏单
+		GainLossDO gainLossDO = new GainLossDO();
+		gainLossDO.setDocumentNo("SC"+GuuidUtil.getUUID());
+		gainLossDO.setDocumentDate(new Date());
+		gainLossDO.setInventoryNumber("MAI"+GuuidUtil.getUUID());
+		gainLossDO.setInventoryType(inventory.getInventoryType());
+		gainLossDO.setDocumentType(gainlossType);
+		gainLossDO.setDepartmentNumber(inventory.getDepartmentNumber());
+		gainLossDO.setDepartmentName(inventory.getDepartmentName());
+		gainLossDO.setPositionId(Long.valueOf(inventory.getInventoryPosition()));
+		gainLossDO.setSingleName(inventory.getInventoryUser());
+		StringBuffer countsb = new StringBuffer();
+		StringBuffer goodsidsb = new StringBuffer();
+		StringBuffer goodsNumsb = new StringBuffer();
+		StringBuffer goodsCodesb = new StringBuffer();
+		StringBuffer goodsNamesb = new StringBuffer();
+		for(int i=0;i<billDOList.size();i++){
+			if (i<billDOList.size()-1){
+				if ("盘盈".equals(gainlossType)){
+					if ("0".equals(billDOList.get(i).getInventoryType())){
+						countsb.append(billDOList.get(i).getSurplus()+",");
+						goodsidsb.append(billDOList.get(i).getGoodsId()+",");
+						goodsNumsb.append(billDOList.get(i).getGoodsNum()+",");
+						goodsCodesb.append(billDOList.get(i).getGoodsCode()+",");
+						goodsNamesb.append(billDOList.get(i).getGoodsName()+",");
+					}
+				} else if ("盘亏".equals(gainlossType)){
+					if ("1".equals(billDOList.get(i).getInventoryType())){
+						countsb.append(billDOList.get(i).getSurplus().substring(1)+",");
+						goodsidsb.append(billDOList.get(i).getGoodsId()+",");
+						goodsNumsb.append(billDOList.get(i).getGoodsNum()+",");
+						goodsCodesb.append(billDOList.get(i).getGoodsCode()+",");
+						goodsNamesb.append(billDOList.get(i).getGoodsName()+",");
+					}
+				}
+			} else {
+				if ("盘盈".equals(gainlossType)){
+					if ("0".equals(billDOList.get(i).getInventoryType())){
+						countsb.append(billDOList.get(i).getSurplus());
+						goodsidsb.append(billDOList.get(i).getGoodsId());
+						goodsNumsb.append(billDOList.get(i).getGoodsNum());
+						goodsCodesb.append(billDOList.get(i).getGoodsCode());
+						goodsNamesb.append(billDOList.get(i).getGoodsName());
+					}
+				} else if ("盘亏".equals(gainlossType)){
+					if ("1".equals(billDOList.get(i).getInventoryType())){
+						countsb.append(billDOList.get(i).getSurplus().substring(1));
+						goodsidsb.append(billDOList.get(i).getGoodsId());
+						goodsNumsb.append(billDOList.get(i).getGoodsNum());
+						goodsCodesb.append(billDOList.get(i).getGoodsCode());
+						goodsNamesb.append(billDOList.get(i).getGoodsName());
+					}
+				}
+			}
+		}
+		gainLossDO.setInventoryCount(countsb.toString());
+		gainLossDO.setGoodsId(goodsidsb.toString());
+		gainLossDO.setGoodsNum(goodsNumsb.toString());
+		gainLossDO.setProducCode(goodsCodesb.toString());
+		gainLossDO.setGoodsName(goodsNamesb.toString());
+		//对库存进行操作
+		if (null != gainLossDO.getProducCode()){
+			String[] goodsCode = gainLossDO.getProducCode().split(",");
+			String[] goodsCount = gainLossDO.getInventoryCount().split(",");
+			for (int i=0;i<goodsCode.length;i++){
+				StockDO stockDO = new StockDO();
+				stockDO.setPositionId(String.valueOf(gainLossDO.getPositionId()));
+				stockDO.setGoodsCode(goodsCode[i]);
+				StockDO stockDO1 = stockService.getProduceCode(stockDO);
+				StockDO stockDO2 = new StockDO();
+				if (null != stockDO1){
+					if ("盘盈".equals(gainLossDO.getDocumentType())){
+						int count = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(goodsCount[i]);
+						stockDO2.setGoodsCount(String.valueOf(count));
+					} else if ("盘亏".equals(gainLossDO.getDocumentType())){
+						int count = Integer.parseInt(stockDO1.getGoodsCount()) - Integer.parseInt(goodsCount[i]);
+						if (count < 0){
+							stockDO2.setGoodsCount("0");
+						} else {
+							stockDO2.setGoodsCount(String.valueOf(count));
+						}
+
+					}
+					stockDO2.setGoodsCode(goodsCode[i]);
+					stockDO2.setPositionId(String.valueOf(gainLossDO.getPositionId()));
+					stockService.updateStockCCount(stockDO2);
+				}
+
+			}
+		}
+		if ("盘盈".equals(gainLossDO.getDocumentType())){
+			inventory.setGain("已生成盘盈单");
+		} else if ("盘亏".equals(gainLossDO.getDocumentType())){
+			inventory.setLoss("已生成盘亏单");
+		}
+		inventoryService.update(inventory);
+		gainLossDO.setExamineName(ShiroUtils.getUser().getName());
+		gainLossDO.setExamineDate(new Date());
+		gainLossDO.setExamineStatus("1");
+		if(gainLossService.save(gainLossDO)>0){
+			return R.ok();
+		}
+		return R.error();
+	}
+
 
 	@GetMapping("/detail/{id}")
 	@RequiresPermissions("information:inventory:detail")

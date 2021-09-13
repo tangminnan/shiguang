@@ -253,7 +253,7 @@
 
     <!-- 查询该条码的库存数量 -->
     <select id="getProduceCode" resultType="com.shiguang.stock.domain.StockDO">
-    select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,
+    select `id`,`goodsxinxiid`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,
     `price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_id`,`position_name`,`create_time`,`danju_number`,
     `order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,
      `batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,`factory` ,`status`,`username`,`returnzt` from stock
