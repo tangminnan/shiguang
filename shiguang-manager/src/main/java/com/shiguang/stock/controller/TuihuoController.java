@@ -11,7 +11,9 @@ import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.BrandService;
 import com.shiguang.mfrs.service.GoodsService;
+import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.stock.domain.PidiaoDO;
+import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.PidiaoService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -176,6 +178,19 @@ public class TuihuoController {
 		model.addAttribute("mfrsid", mfrsid);
 		model.addAttribute("mfrsName", mfrsName);
 		return "/stock/tuihuo/getGood";
+	}
+	//镜架List
+	@ResponseBody
+	@RequestMapping(value = "/selectjingjia")
+	public List<StockDO> selectjingjia(Integer mfrsid,String positionId,
+									   Model model) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("mfrsid", mfrsid);
+		map.put("positionId", positionId);
+
+		List<StockDO> goods = tuihuoService.selectJingjia(map);
+		model.addAttribute("goods", goods);
+		return goods;
 	}
 
 }

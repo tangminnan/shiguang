@@ -1,5 +1,6 @@
 package com.shiguang.stock.service.impl;
 
+import com.shiguang.stock.domain.StockDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,59 @@ public class TuihuoServiceImpl implements TuihuoService {
 	public int batchRemove(Long[] ids){
 		return tuihuoDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public List<StockDO> selectJingjia(Map<String, Object> map) {
+		return tuihuoDao.selectJingjia(map);
+	}
+
+	@Override
+	public List<StockDO> selectPeijian(Map<String, Object> map) {
+		return tuihuoDao.selectPeijian(map);
+	}
+
+	@Override
+	public List<StockDO> selectJpdz(Map<String, Object> map) {
+		return tuihuoDao.selectJpdz(map);
+	}
+
+	@Override
+	public List<StockDO> selectJpcp(Map<String, Object> map) {
+		return tuihuoDao.selectJpcp(map);
+	}
+
+	@Override
+	public List<StockDO> selectYxdz(Map<String, Object> map) {
+		return tuihuoDao.selectYxdz(map);
+	}
+
+	@Override
+	public List<StockDO> selectYxcp(Map<String, Object> map) {
+		return tuihuoDao.selectYxdz(map);
+	}
+
+	@Override
+	public List<StockDO> selectHly(Map<String, Object> map) {
+		return tuihuoDao.selectHly(map);
+	}
+
+	@Override
+	public List<StockDO> selectTyj(Map<String, Object> map) {
+		return tuihuoDao.selectTyj(map);
+	}
+
+	@Override
+	public List<StockDO> selectLhj(Map<String, Object> map) {
+		return tuihuoDao.selectLhj(map);
+	}
+
+	@Override
+	public List<StockDO> selectHc(Map<String, Object> map) {
+		return tuihuoDao.selectHc(map);
+	}
+
+	@Override
+	public List<StockDO> selectSg(Map<String, Object> map) {
+		return tuihuoDao.selectSg(map);
+	}
 }

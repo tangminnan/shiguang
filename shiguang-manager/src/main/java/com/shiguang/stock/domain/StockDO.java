@@ -21,13 +21,13 @@ public class StockDO implements Serializable {
     //工号
     private String  username;
     //商品信息id
-    private Long goodsxinxiid;
+    private String goodsxinxiid;
 
-    public Long getGoodsxinxiid() {
+    public String getGoodsxinxiid() {
         return goodsxinxiid;
     }
 
-    public void setGoodsxinxiid(Long goodsxinxiid) {
+    public void setGoodsxinxiid(String goodsxinxiid) {
         this.goodsxinxiid = goodsxinxiid;
     }
 
@@ -1039,5 +1039,24 @@ public class StockDO implements Serializable {
 
     public void setFactory(String factory) {
         this.factory = factory;
+    }
+
+    private String producFactorycolor;
+    private String materialname;
+
+    public String getProducFactorycolor() {
+        return producFactorycolor;
+    }
+
+    public void setProducFactorycolor(String producFactorycolor) {
+        this.producFactorycolor = producFactorycolor;
+    }
+
+    public String getMaterialname() {
+        return materialname;
+    }
+
+    public void setMaterialname(String materialname) {
+        this.materialname = materialname;
     }
 }

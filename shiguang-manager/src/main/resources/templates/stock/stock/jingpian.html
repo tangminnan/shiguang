@@ -183,7 +183,7 @@
             <td style="display: none">商品品种</td>
             <td style="display: none">镜片类型</td>
             <td style="display: none">医疗器械经营许可证</td>
-            <td style="display: block">id</td>
+            <td style="display: none">id</td>
         </tr>
         </tbody>
     </table>
@@ -203,7 +203,43 @@
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
-                    // layer.alert(xml[i].classtype+"镜片类型")
+                    if(null == xml[i].unitname){
+                        xml[i].unitname="";
+                    }
+                    if(null == xml[i].factory){
+                        xml[i].factory="";
+                    }
+                    if(null == xml[i].sph){
+                        xml[i].sph="";
+                    }
+                    if(null == xml[i].cyl){
+                        xml[i].cyl="";
+                    }
+                    if(null == xml[i].lightbelow){
+                        xml[i].lightbelow="";
+                    }
+                    if(null == xml[i].refractivityvalue){
+                        xml[i].refractivityvalue="";
+                    }
+                    if(null == xml[i].lightName){
+                        xml[i].lightName="";
+                    }
+                     if(null == xml[i].lensName){
+                        xml[i].lensName="";
+                    }
+                    if(null == xml[i].gradualName){
+                        xml[i].gradualName="";
+                    }
+                     if(null == xml[i].functionName){
+                        xml[i].functionName="";
+                    }
+                     if(null == xml[i].classtype){
+                        xml[i].classtype="";
+                    }
+                    if(null == xml[i].medicinecode){
+                        xml[i].medicinecode="";
+                    }
+
                     $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                         "<td name='producNum'>" + xml[i].producNum + "</td>\n" +
                         "<td name='producName'>" + xml[i].producName + "</td>\n" +
@@ -225,7 +261,7 @@
                         "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>\n" +
                         "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
                         "<td name='medicinecode' style='display: none'>" + xml[i].medicinecode + "</td>" +
-                        "<td name='goodsxinxiid' style='display: block'>" + xml[i].goodsxinxiid + "</td>" +
+                        "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>" +
                         "</tr>");
                 }
             }
@@ -274,6 +310,43 @@
                 },
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
+                        if(null == xml[i].unitname){
+                            xml[i].unitname="";
+                        }
+                        if(null == xml[i].factory){
+                            xml[i].factory="";
+                        }
+                        if(null == xml[i].sph){
+                            xml[i].sph="";
+                        }
+                        if(null == xml[i].cyl){
+                            xml[i].cyl="";
+                        }
+                        if(null == xml[i].lightbelow){
+                            xml[i].lightbelow="";
+                        }
+                        if(null == xml[i].refractivityvalue){
+                            xml[i].refractivityvalue="";
+                        }
+                        if(null == xml[i].lightName){
+                            xml[i].lightName="";
+                        }
+                        if(null == xml[i].lensName){
+                            xml[i].lensName="";
+                        }
+                        if(null == xml[i].gradualName){
+                            xml[i].gradualName="";
+                        }
+                        if(null == xml[i].functionName){
+                            xml[i].functionName="";
+                        }
+                        if(null == xml[i].classtype){
+                            xml[i].classtype="";
+                        }
+                        if(null == xml[i].medicinecode){
+                            xml[i].medicinecode="";
+                        }
+
                         $(".buyBtns").append("<tr class='valJpcp'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "<td name='producNum'>" + xml[i].producNum + "</td>\n" +
                             "<td name='producName'>" + xml[i].producName + "</td>\n" +
@@ -295,7 +368,7 @@
                             "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>\n" +
                             "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
                             "<td name='medicinecode' style='display: none'>" + xml[i].medicinecode + "</td>" +
-                            "<td name='goodsxinxiid' style='display: block'>" + xml[i].goodsxinxiid + "</td>" +
+                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>" +
                             "</tr>");
                     }
                 }
@@ -340,6 +413,43 @@
                 },
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
+                        if(null == xml[i].unitname){
+                            xml[i].unitname="";
+                        }
+                        if(null == xml[i].factory){
+                            xml[i].factory="";
+                        }
+                        if(null == xml[i].sph){
+                            xml[i].sph="";
+                        }
+                        if(null == xml[i].cyl){
+                            xml[i].cyl="";
+                        }
+                        if(null == xml[i].lightbelow){
+                            xml[i].lightbelow="";
+                        }
+                        if(null == xml[i].refractivityvalue){
+                            xml[i].refractivityvalue="";
+                        }
+                        if(null == xml[i].lightName){
+                            xml[i].lightName="";
+                        }
+                        if(null == xml[i].lensName){
+                            xml[i].lensName="";
+                        }
+                        if(null == xml[i].gradualName){
+                            xml[i].gradualName="";
+                        }
+                        if(null == xml[i].functionName){
+                            xml[i].functionName="";
+                        }
+                        if(null == xml[i].classtype){
+                            xml[i].classtype="";
+                        }
+                        if(null == xml[i].medicinecode){
+                            xml[i].medicinecode="";
+                        }
+
                         $(".buyBtns").append("<tr class='valJpdz'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "<td name='producNum'>" + xml[i].producNum + "</td>\n" +
                             "<td name='producName'>" + xml[i].producName + "</td>\n" +
@@ -361,7 +471,7 @@
                             "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>" +
                             "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
                             "<td name='medicinecode' style='display: none'>" + xml[i].medicinecode + "</td>" +
-                            "<td name='goodsxinxiid' style='display: block'>" + xml[i].goodsxinxiid + "</td>" +
+                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>" +
                             "</tr>>");
                     }
                 }

@@ -134,4 +134,146 @@
 		</foreach>
 	</delete>
 
+	<select id="selectJingjia" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,p.produc_factorycolor,m.materialname,p.size,s.retail_price,po.position_name,s.goods_count
+		from  stock s
+		left join aa_produca p on s.goodsxinxiid= p.id
+		left join c_material m on p.materialid=m.materialid
+		left join c_position po on  s.position_id=po.position_id
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+		</where>
+		group by s.goods_code
+	</select>
+	<select id="selectPeijian" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,p.parts_style,s.retail_price,s.goods_count,po.position_name
+		from  stock s
+		left join aa_parts p on s.goodsxinxiid= p.id
+		left join c_position po on  s.position_id=po.position_id
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+		</where>
+		group by s.goods_code
+	</select>
+	<select id="selectJpdz" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num, s.goods_code, s.goods_name,s.unit,
+		j.sph_up,j.sph_down,j.cyl_up,j.cyl_down,j.lightbelow_right,j.lightbelow_left,re.refractivityvalue,l.light_name,g.gradual_name,f.function_name,
+		s.retail_price,s.goods_count,po.position_name
+		from  stock s
+		left join aa_jpdz j on s.goodsxinxiid= j.id
+		left join c_position po on  s.position_id=po.position_id
+		left join c_refractivity re on j.refractivityid=re.refractivityid
+		left join p_light l on j.light_id= l.light_id
+		left join p_gradual g on j.gradual_id= g.gradual_id
+		left join p_function f on j.function_id=f.function_id
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+		</where>
+		group by s.goods_code
+	</select>
+	<select id="selectJpcp" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num,s.goods_code,s.goods_name,s.unit,sp.sph,cy.cyl,l.lightbelow,r.refractivityvalue,li.light_name,g.gradual_name,
+		f.function_name,s.retail_price,po.position_name,s.goods_count
+		from  stock s
+		left join aa_jpcp j on s.goodsxinxiid= j.id
+		left join a_sph sp on j.sph_id=sp.sph_id
+		left join a_cyl cy on j.cyl_id=cy.cyl_id
+		left join a_lightbelow l on j.lightbelow_id=l.lightbelow_id
+		left join c_refractivity r on j.refractivityid=r.refractivityid
+		left join p_light li on j.light_id=li.light_id
+		left join p_gradual g on j.gradual_id = g.gradual_id
+		left join p_function f on j.function_id=f.function_id
+		left join c_position po on s.position_id=po.position_id
+			<where>
+				<if test="id != null and id != ''"> and id = #{id} </if>
+			</where>
+			group by s.goods_code
+	</select>
+	<select id="selectYxdz" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num,s.goods_code,s.goods_name,s.unit,y.sph_up,y.sph_down,y.cyl_up,y.cyl_down,y.curvature_one,y.curvature_yi,
+		y.diameter_one,y.diameter_yi,u.usage_name,t.type_name,s.retail_price,po.position_name,s.goods_count
+		from stock s
+		left join aa_yxdz y on s.goodsxinxiid=y.id
+		left join p_usage u on y.usage_id=u.usage_id
+		left join p_type t on y.type_id=t.type_id
+		left join c_position po on s.position_id=po.position_id
+			<where>
+				<if test="id != null and id != ''"> and id = #{id} </if>
+			</where>
+			group by s.goods_code
+	</select>
+	<select id="selectYxcp" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num,s.goods_code,s.goods_name,s.unit,sp.sph,cy.cyl,y.curvature,y.diameter,u.usage_name,t.type_name,s.retail_price,po.position_name,s.goods_count
+		from stock s
+		left join aa_yxcp y on s.goodsxinxiid=y.id
+		left join a_sph sp on y.sph_id =sp.sph_id
+		left join a_cyl cy on y.cyl_id =cy.cyl_id
+		left join p_usage u on y.usage_id=u.usage_id
+		left join p_type t on y.type_id=t.type_id
+		left join c_position po on s.position_id=po.position_id
+				<where>
+					<if test="id != null and id != ''"> and id = #{id} </if>
+				</where>
+				group by s.goods_code
+	</select>
+	<select id="selectHly" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
+		h.main_capacity,h.second_capacity,s.retail_price,po.position_name,s.goods_count
+		from stock s
+		left join aa_hly h on s.goodsxinxiid=h.id
+		left join c_position po on s.position_id=po.position_id
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+		</where>
+		group by s.goods_code
+	</select>
+	<select id="selectTyj" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
+		t.produc_factorycolor,t.size,
+		s.retail_price,po.position_name,s.goods_count
+		from stock s
+		left join aa_tyj t on s.goodsxinxiid=t.id
+		left join c_position po on s.position_id=po.position_id
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+		</where>
+		group by s.goods_code
+	</select>
+	<select id="selectLhj" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
+		ol.degrees,o.size,o.produc_factorycolor,
+		s.retail_price,po.position_name,s.goods_count
+		from stock s
+		left join aa_oldlens o on s.goodsxinxiid=o.id
+		left join a_olddegrees ol on o.old_id= o.old_id
+		left join c_position po on s.position_id=po.position_id
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+		</where>
+		group by s.goods_code
+	</select>
+	<select id="selectHc" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
+		s.retail_price,po.position_name,s.goods_count
+		from stock s
+		left join aa_hc h on s.goodsxinxiid=h.id
+		left join c_position po on s.position_id=po.position_id
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+		</where>
+		group by s.goods_code
+	</select>
+	<select id="selectSg" resultType="com.shiguang.stock.domain.StockDO">
+		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
+		s.retail_price,po.position_name,s.goods_count
+		from stock s
+		left join aa_hc h on s.goodsxinxiid=h.id
+		left join c_position po on s.position_id=po.position_id
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+		</where>
+		group by s.goods_code
+	</select>
+
 </mapper>

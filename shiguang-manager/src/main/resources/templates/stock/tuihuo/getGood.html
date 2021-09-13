@@ -32,7 +32,7 @@
         <tr>
             <td>制造商：</td>
             <td>
-                <input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="hidden" value=""/>
+                <input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="hidden"/>
                 <input id="mfrsname" name="mfrsname" th:value="${mfrsName}" type="text" readonly/>
             </td>
             <td>商品品种：</td>
@@ -52,7 +52,7 @@
                 </select>
                 <div id="jp" style="display: none">
                     <label class="radio-inline">
-                        <input type="radio" name="classtype"  value="1" /> 成品片
+                        <input type="radio" name="classtype"  value="1" checked /> 成品片
                     </label>
                     <label class="radio-inline">
                         <input type="radio" name="classtype" value="2" /> 订做片
@@ -82,135 +82,187 @@
 
 <!--商品信息-->
 <div class="m40 tabS msgBoxDD">
-    <table id="tab1" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tr class="thead">
-            <td>多选</td>
-            <td>商品代码</td>
-            <td>商品名称</td>
-            <td>型号</td>
-            <td>单位</td>
-            <td>厂家色号</td>
-            <td>镜架材质</td>
-            <td>镜架尺寸</td>
-            <td>标准零售价</td>
-            <td>仓位</td>
-            <td>库存数量</td>
+    <!--<h3>商品信息</h3>-->
+    <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+        <tbody>
+        <tr id="tab1" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>多选</td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>单位</td>
+                        <td>厂家色号</td>
+                        <td>镜架材质</td>
+                        <td>镜架尺寸</td>
+                        <td>标准零售价</td>
+                        <td>仓位</td>
+                        <td>库存数量</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;" class="heji1"></tr>
+                </table>
+            </td>
         </tr>
-    </table>
-    <table id="tab2" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tr class="thead">
-            <td>多选</td>
-            <td>商品代码</td>
-            <td>商品名称</td>
-            <td>型号</td>
-            <td>单位</td>
-            <td>配件型</td>
-            <td>标准零售价</td>
-            <td>仓位</td>
-            <td>库存数量</td>
+        <tr id="tab2" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>多选</td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>单位</td>
+                        <td>配件型</td>
+                        <td>标准零售价</td>
+                        <td>仓位</td>
+                        <td>库存数量</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;" class="heji2"></tr>
+                </table>
+            </td>
         </tr>
-    </table>
-    <table id="tab3" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tr class="thead">
-            <td>多选</td>
-            <td>商品代码</td>
-            <td>商品名称</td>
-            <td>单位</td>
-            <td>球镜</td>
-            <td>柱镜</td>
-            <td>下加光</td>
-            <td>折射率</td>
-            <td>光度分类</td>
-            <td>渐进片分类</td>
-            <td>镜片功能</td>
-            <td>标准零售价</td>
-            <td>仓位</td>
-            <td>库存数量</td>
+        <tr id="tab3" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>多选</td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>单位</td>
+                        <td>球镜</td>
+                        <td>柱镜</td>
+                        <td>下加光</td>
+                        <td>折射率</td>
+                        <td>光度分类</td>
+                        <td>渐进片分类</td>
+                        <td>镜片功能</td>
+                        <td>标准零售价</td>
+                        <td>仓位</td>
+                        <td>库存数量</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;" class="heji3"></tr>
+                </table>
+            </td>
         </tr>
-    </table>
-    <table id="tab4" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tr class="thead">
-            <td>多选</td>
-            <td>商品代码</td>
-            <td>商品名称</td>
-            <td>单位</td>
-            <td>球镜</td>
-            <td>柱镜</td>
-            <td>曲率</td>
-            <td>直径</td>
-            <td>使用类型</td>
-            <td>抛弃型分类</td>
-            <td>标准零售价</td>
-            <td>仓位</td>
-            <td>库存数量</td>
+        <tr id="tab4" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>多选</td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>单位</td>
+                        <td>球镜</td>
+                        <td>柱镜</td>
+                        <td>曲率</td>
+                        <td>直径</td>
+                        <td>使用类型</td>
+                        <td>抛弃型分类</td>
+                        <td>标准零售价</td>
+                        <td>仓位</td>
+                        <td>库存数量</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;" class="heji4"></tr>
+                </table>
+            </td>
         </tr>
-    </table>
-    <table id="tab5" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tr class="thead">
-            <td>多选</td>
-            <td>商品代码</td>
-            <td>商品名称</td>
-            <td>型号</td>
-            <td>单位</td>
-            <td>主容量</td>
-            <td>次容量</td>
-            <td>标准零售价</td>
-            <td>仓位</td>
-            <td>库存数量</td>
+
+        <tr id="tab5" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>多选</td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>单位</td>
+                        <td>主容量</td>
+                        <td>次容量</td>
+                        <td>标准零售价</td>
+                        <td>仓位</td>
+                        <td>库存数量</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;" class="heji5"></tr>
+                </table>
+            </td>
         </tr>
-    </table>
-    <table id="tab6" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tr class="thead">
-            <td>多选</td>
-            <td>商品代码</td>
-            <td>商品名称</td>
-            <td>型号</td>
-            <td>单位</td>
-            <td>厂家色号</td>
-            <td>镜架尺寸</td>
-            <td>标准零售价</td>
-            <td>仓位</td>
-            <td>库存数量</td>
+        <tr id="tab6" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>多选</td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>单位</td>
+                        <td>厂家色号</td>
+                        <td>镜架尺寸</td>
+                        <td>标准零售价</td>
+                        <td>仓位</td>
+                        <td>库存数量</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;" class="heji6"></tr>
+                </table>
+            </td>
         </tr>
-    </table>
-    <table id="tab7" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tr class="thead">
-            <td>多选</td>
-            <td>商品代码</td>
-            <td>商品名称</td>
-            <td>型号</td>
-            <td>单位</td>
-            <td>老花镜度数</td>
-            <td>镜架尺寸</td>
-            <td>厂家色号</td>
-            <td>标准零售价</td>
-            <td>仓位</td>
-            <td>库存数量</td>
+        <tr id="tab7" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>多选</td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>单位</td>
+                        <td>老花镜度数</td>
+                        <td>镜架尺寸</td>
+                        <td>厂家色号</td>
+                        <td>标准零售价</td>
+                        <td>仓位</td>
+                        <td>库存数量</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;" class="heji7"></tr>
+                </table>
+            </td>
         </tr>
-    </table>
-    <table id="tab8" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tr class="thead">
-            <td>多选</td>
-            <td>商品代码</td>
-            <td>商品名称</td>
-            <td>型号</td>
-            <td>单位</td>
-            <td>标准零售价</td>
-            <td>仓位</td>
-            <td>库存数量</td>
+        <tr id="tab8" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>多选</td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>单位</td>
+                        <td>标准零售价</td>
+                        <td>仓位</td>
+                        <td>库存数量</td>
+                    </tr>
+                    <tr style="font-weight:bold;font-size: 15px;" class="heji8"></tr>
+                </table>
+            </td>
         </tr>
-    </table>
-    <table id="tab9" border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tr class="thead">
-            <td>多选</td>
-            <td>商品代码</td>
-            <td>商品名称</td>
-            <td>型号</td>
-            <td>单位</td>
-            <td>标准零售价</td>
-            <td>仓位</td>
-            <td>库存数量</td>
+        <tr id="tab9" style="display:none">
+            <td style="width: 100vw;">
+                <table>
+                    <tr class="thead">
+                        <td>多选</td>
+                        <td>商品代码</td>
+                        <td>商品名称</td>
+                        <td>型号</td>
+                        <td>单位</td>
+                        <td>标准零售价</td>
+                        <td>仓位</td>
+                        <td>库存数量</td>
+                    </tr>
+
+                    <tr style="font-weight:bold;font-size: 15px;" class="heji9"></tr>
+                </table>
+            </td>
         </tr>
+        </tbody>
     </table>
 </div>
 <div th:include="include :: footer"></div>
@@ -264,74 +316,221 @@
         }
     }
     function getall() {
-        var goodsNum = $("#goodsNum").val();
-        var goodsCode = $("#goodsCode").val();
-        var goodsName = $("#goodsName").val();
-        var goodsType = $("#goodsType option:selected").val();
-        alert(goodsType)
-        if (goodsType == "--请选择--"){
+        var goodsType = $('#goodsType').val();
+        var mfrsid = $('#mfrsid').val();
+        var positionId = $('#positionId').val();
+        alert(mfrsid)
+        if (goodsType == ""){
             layer.alert("请选择商品类型！")
-        } else if (goodsType == 1){
-            var  classtype ="";
-        } else if (goodsType == 2){
-            var  classtype ="";
-        } else if (goodsType == 3){
-            var classtype=$("input[name='classtype']:checked").val();
-        } else if (goodsType == 4){
-            var classtype=$("input[name='classtype']:checked").val();
-        } else if (goodsType == 5){
-            var  classtype ="";
-        } else if (goodsType == 6){
-            var  classtype ="";
-        } else if (goodsType == 7){
-            var  classtype ="";
-        } else if (goodsType == 8){
-            var  classtype ="";
-        } else if (goodsType == 9){
-            var  classtype ="";
-        }
-        var mfrsname = $("#mfrsname").val();
-        var brandname = $("#brandname").val();
-        var retailPrice = $("*[name='retailPrice']").val();
-        var retailPrice2 = $("*[name='retailPrice2']").val();
-        var xsstate=$("input[name='xsstate']:checked").val();
-        var positionName = $('#positionName option:selected').text();
-        var positionNames = ""
-        if (positionName == "--请选择--") {
-            positionName = positionNames;
-        }
-        var outPosition = document.getElementById('outPosition').value;
-        $(".val").remove();
-        $.ajax({
-            url: '/kucun/stock/selectKc',
-            type: 'post',
-            dataType: "json",
-            data: {
-                'goodsNum': goodsNum,
-                'goodsCode': goodsCode,
-                'goodsName': goodsName,
-                'goodsType': goodsType,
-                'mfrsname': mfrsname,
-                'brandname': brandname,
-                'retailPrice': retailPrice,
-                'retailPrice2': retailPrice2,
-                'xsstate': xsstate,
-                'positionName': positionName,
-                'classtype': classtype,
-                'outPosition': outPosition
-            },
-            success: function (xml) {
-                for (var i = 0; i < xml.length; i++) {
-                    $(".buyBtns" +
-                        "" +
-                        "" +
-                        "").append("<tr class='val'>" +
-                        "<td><input name='one'  type=\"checkbox\"/></td>\n" +
-                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                        "</tr>");
+        } if (goodsType == 1) {
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: block";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+            $.ajax({
+                url: '/stock/tuihuo/selectjingjia',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    'mfrsid': mfrsid,
+                    'positionId': positionId
+                },
+                success: function (xml) {
+                    for (var i = 0; i < xml.length; i++) {
+                        alert(xml[i].producFactorycolor)
+                        if ()
+                        $(".heji1").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
+                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                            "<td name='producFactorycolor'>" + xml[i].producFactorycolor + "</td>\n" +
+                            "<td name='materialname'>" + xml[i].materialname + "</td>\n" +
+                            "<td name='size'>" + xml[i].size + "</td>\n" +
+                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                            "</tr>");
+                    }
                 }
-            }
-        })
+            })
+        } else if (goodsType == 2) {
+            $(".val1").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: block";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (goodsType == 3) {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: block";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (goodsType == 4) {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: block";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (goodsType == 5) {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: block";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (goodsType == 6) {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: block";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (goodsType == 7) {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: block";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (goodsType == 8) {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: block";
+            tab9.style = "display: none";
+        } else if (goodsType == 9) {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: block";
+        } else {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        }
     }
 
 </script>
