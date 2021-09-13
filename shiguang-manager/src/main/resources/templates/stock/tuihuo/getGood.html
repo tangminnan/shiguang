@@ -346,12 +346,13 @@
                 dataType: "json",
                 data: {
                     'mfrsid': mfrsid,
-                    'positionId': positionId
+                    'positionId': positionId,
+
                 },
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
                         alert(xml[i].producFactorycolor)
-                        if ()
+                        // if ()
                         $(".heji1").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
                             "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
