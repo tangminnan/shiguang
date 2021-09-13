@@ -277,7 +277,6 @@ public class PidiaoController {
 
 			try {
 				String factory = factory1[i];
-
 				pidiaoDO.setFactory(factory);
 			}catch (ArrayIndexOutOfBoundsException e){
 				pidiaoDO.setFactory("");
@@ -342,7 +341,7 @@ public class PidiaoController {
 			pidiaoDO.setMoney(money);
 
 			String goodsxinxiid= goodsxinxiid1[i];
-			pidiaoDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
+			pidiaoDO.setGoodsxinxiid(goodsxinxiid);
 
 			pidiaoService.save(pidiaoDO);
 
@@ -433,7 +432,7 @@ public class PidiaoController {
 				}catch (ArrayIndexOutOfBoundsException e){
 					stockDO.setFactory("");
 				}
-				stockDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
+				stockDO.setGoodsxinxiid(goodsxinxiid);
 
 				if (stockService.save(stockDO) < 0) {
 					return R.error();

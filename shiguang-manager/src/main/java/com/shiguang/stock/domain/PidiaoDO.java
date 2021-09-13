@@ -20,13 +20,13 @@ public class PidiaoDO implements Serializable {
 	//批调id
 	private Long id;
 	//商品信息id
-	private Long goodsxinxiid;
+	private String goodsxinxiid;
 
-	public Long getGoodsxinxiid() {
+	public String getGoodsxinxiid() {
 		return goodsxinxiid;
 	}
 
-	public void setGoodsxinxiid(Long goodsxinxiid) {
+	public void setGoodsxinxiid(String goodsxinxiid) {
 		this.goodsxinxiid = goodsxinxiid;
 	}
 
