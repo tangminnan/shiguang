@@ -335,14 +335,24 @@ public class StockController {
 
 
                 if(null != stock.getClasstype()){
-                    String classtype = classtype1[i];
-                    stockDO.setClasstype(classtype);
+                    try {
+                        String classtype = classtype1[i];
+                        stockDO.setClasstype(classtype);
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        stockDO.setClasstype("");
+                    }
                 }else{
                     stockDO.setClasstype("");
                 }
+
+
                 if(null != stock.getFactory()) {
-                    String factory = factory1[i];
-                    stockDO.setFactory(factory);
+                    try {
+                        String factory = factory1[i];
+                        stockDO.setFactory(factory);
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        stockDO.setFactory("");
+                    }
                 }else {
                     stockDO.setFactory("");
                 }
@@ -501,15 +511,26 @@ public class StockController {
             }catch (ArrayIndexOutOfBoundsException e){
                 orderDO1.setGoodsxinxiid("");
             }
+
             if(null != orderDO.getClasstype()){
-                String classtype = classtype2[i];
-                orderDO1.setClasstype(classtype);
+                try {
+                    String classtype = classtype2[i];
+                    orderDO1.setClasstype(classtype);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    orderDO1.setClasstype("");
+                }
             }else{
                 orderDO1.setClasstype("");
             }
+
            if(null != orderDO.getFactory()) {
-               String factory = factory2 [i];
-               orderDO1.setFactory(factory);
+               try {
+                   String factory = factory2 [i];
+                   orderDO1.setFactory(factory);
+               }catch (ArrayIndexOutOfBoundsException e){
+                   orderDO1.setFactory("");
+               }
+
            }else {
                orderDO1.setFactory("");
            }

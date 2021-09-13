@@ -319,8 +319,12 @@ public class PidiaoController {
 
 
 			if(null != pidiao.getClasstype()){
-				String classtype = classtype1[i];
-				pidiaoDO.setClasstype(classtype);
+				try {
+					String classtype = classtype1[i];
+					pidiaoDO.setClasstype(classtype);
+				}catch (ArrayIndexOutOfBoundsException e){
+					pidiaoDO.setClasstype("");
+				}
 			}else{
 				pidiaoDO.setClasstype("");
 			}
@@ -349,6 +353,7 @@ public class PidiaoController {
 			//减库存
 			stockDO.setPositionId(pidiao.getOutPosition());
 			stockDO.setGoodsNum(goodsNum);
+			stockDO.setGoodsCode(goodsCode);
 			StockDO jianJJGoodsList = stockService.haveNum(stockDO);
 			if (null != jianJJGoodsList) {
 				String gdcount = jianJJGoodsList.getGoodsCount();
