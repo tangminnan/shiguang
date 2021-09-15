@@ -143,6 +143,7 @@
 		<where>
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
 			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
 		</where>
 		group by s.goods_code
 	</select>

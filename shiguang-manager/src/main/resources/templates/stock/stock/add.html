@@ -58,7 +58,6 @@
                     <tr>
                         <td>运单号：</td>
                         <td><input id="yundanNumber" name="yundanNumber" type="text" /></td>
-
                         <td>单据日期：</td>
                         <td><input id="danjuDay" name="danjuDay" th:value="${createTime}" type="text"
                                 style="background-color: #e4e4e4" readonly /></td>
@@ -114,7 +113,7 @@
                                     <td style="display: none">调货成本</td>
                                     <td style="display: none">单位</td>
                                     <td style="display: none">商品品种</td>
-                                    <td style="display: block">商品id</td>·
+                                    <td style="display: none">商品id</td>
                                     <td>效期</td>
                                     <td>批号</td>
                                     <td>注册证号</td>
@@ -247,6 +246,7 @@
                                     <td>型号</td>
                                     <td>主容量</td>
                                     <td>次容量</td>
+                                    <td>入库时间</td>
                                     <td>商品条码</td>
                                     <td style="display: none">标准零售价</td>
                                     <td style="display: none">含税单价</td>
@@ -700,16 +700,16 @@
                                 "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
                                 "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
 
-                                "<td  style='display: block'>" + rows[i].goodsxinxiid + "</td>\n" +
+                                "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
                                 "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
 
                                 // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input class = 'useday_time'  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly class = 'useday_time'  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
                                 "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                                 "<td >" + rows[i].medicinecode + "</td>\n" +
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
@@ -718,17 +718,20 @@
                                 type: 'date',
                                 trigger: 'click',	  // 事件类型
                                 done: function (value, date, endDate) {
-                                    console.log($(this).parent());
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[11].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[11].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[12].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[12]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[11].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[12].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[12]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
                                     $(this).focus();
-                                    // var d2= $(this).focus();
-                                    // // alert(d+"A");
-                                    // var b2 = $(this).parent();
-                                    // // alert(b2+"b");
-                                    // var timi = $("#goodsCode").val();
-                                    // var sa="1111111111111111111111111111";
-                                    // alert(timi);
-                                    // $("#goodsCode").val(timi+sa);
-                                    // $("#goodsCode").val("kkkkkkkkkk");
 
                                 }
                             });
@@ -787,12 +790,12 @@
                                 "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
 
                                 // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
                                 "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                                 "<td >" + rows[i].medicinecode + "</td>\n" +
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input  readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
@@ -860,12 +863,12 @@
                                 "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
                                 "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
                                 // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
                                 "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                                 "<td >" + rows[i].medicinecode + "</td>\n" +
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
@@ -934,12 +937,12 @@
                                 "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
 
                                 // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
                                 "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                                 "<td >" + rows[i].medicinecode + "</td>\n" +
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
@@ -981,6 +984,8 @@
                                 "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
                                 "<td  >" + rows[i].mainCapacity + "</td>\n" +
                                 "<td  >" + rows[i].secondCapacity + "</td>\n" +
+                                "<td >" + rows[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
                                 "<td  >" + rows[i].producCode + "</td>\n" +
                                 "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
                                 "<td style='display: none'>" + rows[i].retailPrice + "</td>\n" +
@@ -1002,12 +1007,12 @@
                                 "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
 
                                 // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
                                 "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                                 "<td >" + rows[i].medicinecode + "</td>\n" +
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
@@ -1071,12 +1076,12 @@
                                 "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
                                 "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
                                 // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
                                 "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                                 "<td >" + rows[i].medicinecode + "</td>\n" +
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
@@ -1142,12 +1147,12 @@
                                 "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
 
                                 // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
                                 "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                                 "<td >" + rows[i].medicinecode + "</td>\n" +
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
@@ -1210,12 +1215,12 @@
                                 "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
 
                                 // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
                                 "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                                 "<td >" + rows[i].medicinecode + "</td>\n" +
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
@@ -1278,12 +1283,12 @@
                                 "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
 
                                 // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly  id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
                                 "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
                                 "<td >" + rows[i].medicinecode + "</td>\n" +
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                "<td >" + "<input  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期

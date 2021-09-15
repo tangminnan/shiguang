@@ -37,6 +37,7 @@
             </td>
             <td>商品品种：</td>
             <td>
+                <input id="brandnum" name="brandnum" th:value="${brandnum}" type="hidden"/>
                 <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
@@ -266,7 +267,7 @@
     </table>
 </div>
 <div th:include="include :: footer"></div>
-<script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
+<script type="text/javascript" src="/js/appjs/stock/tuihuo/tuihuo.js"></script>
 <script type="text/javascript">
     function choiceBrand() {
         var goodsid = document.getElementById('goodsType').value;
@@ -319,10 +320,13 @@
         var goodsType = $('#goodsType').val();
         var mfrsid = $('#mfrsid').val();
         var positionId = $('#positionId').val();
-        alert(mfrsid)
+
+        alert(goodsType)
         if (goodsType == ""){
             layer.alert("请选择商品类型！")
-        } if (goodsType == 1) {
+        }
+        if (goodsType == 1) {
+            $(".val").remove();
             $(".val2").remove();
             $(".val3").remove();
             $(".val4").remove();
@@ -347,11 +351,12 @@
                 data: {
                     'mfrsid': mfrsid,
                     'positionId': positionId,
+                    'goodsType': goodsType
 
                 },
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
-                        alert(xml[i].producFactorycolor)
+                        // alert(xml[i].producFactorycolor)
                         // if ()
                         $(".heji1").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +

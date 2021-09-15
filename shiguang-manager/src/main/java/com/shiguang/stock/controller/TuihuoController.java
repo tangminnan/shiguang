@@ -182,11 +182,12 @@ public class TuihuoController {
 	//镜架List
 	@ResponseBody
 	@RequestMapping(value = "/selectjingjia")
-	public List<StockDO> selectjingjia(Integer mfrsid,String positionId,
+	public List<StockDO> selectjingjia(Integer mfrsid,String positionId,Integer goodsType,
 									   Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
 		map.put("positionId", positionId);
+		map.put("goodsType", goodsType);
 
 		List<StockDO> goods = tuihuoService.selectJingjia(map);
 		model.addAttribute("goods", goods);

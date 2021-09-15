@@ -3,6 +3,7 @@ package com.shiguang.stock.service.impl;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.*;
 import com.shiguang.stock.dao.StockDao;
+import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -285,5 +286,25 @@ public class StockServiceImpl implements StockService {
     @Override
     public int outPosionJ(StockDO stockDO) {
         return stockDao.outPosionJ(stockDO);
+    }
+
+    @Override
+    public OrderDO getOeder(String danjuNumber) {
+        return stockDao.getOeder(danjuNumber);
+    }
+
+    @Override
+    public List<OrderDO> getOederList(Map<String, Object> map) {
+        return stockDao.getOederList(map);
+    }
+
+    @Override
+    public OrderDO getShouhuo(String danjuNumber) {
+        return stockDao.getShouhuo(danjuNumber);
+    }
+
+    @Override
+    public List<OrderDO> getShouhuoList(Map<String, Object> map) {
+        return stockDao.getShouhuoList(map);
     }
 }

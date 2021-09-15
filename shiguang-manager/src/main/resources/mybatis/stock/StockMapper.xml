@@ -1375,6 +1375,7 @@
         select  goods_count from stock
          <where>
              <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
+             <if test="goodsCode != null and goodsCode != ''">and goods_code = #{goodsCode}</if>
              <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
              <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
          </where>
@@ -1427,6 +1428,57 @@
             <if test="status != null">`status` = #{status}, </if>
             <if test="username != null">`username` = #{username} </if>
         </set>
-
     </update>
+    <select id="getOeder" resultType="com.shiguang.stock.domain.OrderDO">
+          select m.mfrsname,o.danju_number,d.depart_name,o.danju_day,d.depart_tel,d.depart_address,o.zhidan_people,o.goods_type
+          from stock_order o
+          left join c_mfrs m on o.mfrsid=m.mfrsid
+          left join c_position p on o.position_id=p.position_id
+          left join  department d on p.depart_number=d.depart_number
+          where o.danju_number = #{value}
+		  group by o.danju_number
+    </select>
+    <select id="getOederList" resultType="com.shiguang.stock.domain.OrderDO">
+        select
+        g.goodsname as gdname,o.goods_name,o.factory,produca.produc_factorycolor,o.retail_price,
+        o.goods_count,o.beizhu,o.unit,
+        s.sph as jscpsph,c.cyl as jpcpcyl,
+        sp.sph as yxcpsph,cy.cyl as yxcpcyl,
+        tyj.produc_factorycolor as tyjproducfactorycolor,
+        old.produc_factorycolor as oldproducfactorycolor
+        from
+        stock_order o
+        left join c_goods g on o.goods_type=g.goodsid
+        left join aa_produca produca on o.goodsxinxiid=produca.id
+        left join aa_parts parts  on o.goodsxinxiid=parts.id
+        left join aa_jpcp jpcp  on o.goodsxinxiid=jpcp.id
+        left join a_sph s  on jpcp.sph_id=s.sph_id
+        left join a_cyl c  on jpcp.cyl_id=c.cyl_id
+        left join aa_yxcp yxcp  on o.goodsxinxiid=yxcp.id
+        left join a_sph sp  on yxcp.sph_id=sp.sph_id
+        left join a_cyl cy  on yxcp.cyl_id=cy.cyl_id
+        left join aa_hly h on o.goodsxinxiid=h.id
+        left join aa_tyj tyj on o.goodsxinxiid=tyj.id
+        left join aa_oldlens old on o.goodsxinxiid=old.id
+        <where>
+            <if test="danjuNumber != null and danjuNumber != ''">and o.danju_number = #{danjuNumber}</if>
+            <if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>
+        </where>
+    </select><select id="getShouhuo" resultType="com.shiguang.stock.domain.OrderDO">
+          select m.mfrsname,o.danju_number,d.depart_name,o.danju_day,d.depart_tel,d.depart_address,o.zhidan_people,o.goods_type,o.beizhu
+          from stock_order o
+          left join c_mfrs m on o.mfrsid=m.mfrsid
+          left join c_position p on o.position_id=p.position_id
+          left join  department d on p.depart_number=d.depart_number
+          where o.danju_number = #{value}
+		  group by o.danju_number
+    </select>
+    <select id="getShouhuoList" resultType="com.shiguang.stock.domain.OrderDO">
+        select o.goods_num ,o.goods_code,o.goods_name,o.goods_count,p.position_name
+        from stock_order o left join c_position p on o.position_id=p.position_id
+        <where>
+            <if test="danjuNumber != null and danjuNumber != ''">and o.danju_number = #{danjuNumber}</if>
+            <if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>
+        </where>
+    </select>
 </mapper>

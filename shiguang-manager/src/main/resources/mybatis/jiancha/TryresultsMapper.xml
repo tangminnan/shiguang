@@ -943,11 +943,18 @@
     order by id desc
 
 </select>
-    <!--<select id="listDoctor" resultType="">-->
-    <!--select suser.name ,srole.role_name from sys_user suser join sys_user_role sur on suser.user_id=sur.user_id-->
-    <!--join sys_role srole on sur.role_id=srole.role_id-->
-    <!--where srole.role_name=#{roleName}-->
-    <!--</select>-->
+    <select id="listDoctor" resultType="com.shiguang.jiancha.domain.TryresultsDO">
+    select u.name from sys_user u
+    left join sys_user_role ur on u.user_id=ur.user_id
+    left join  sys_role r on r.role_id=ur.role_id
+    where r.role_name= #{roleName}
+    </select>
+<select id="listYanguang" resultType="com.shiguang.jiancha.domain.TryresultsDO">
+    select u.name from sys_user u
+    left join sys_user_role ur on u.user_id=ur.user_id
+    left join  sys_role r on r.role_id=ur.role_id
+    where r.role_name= #{YangguangName}
+</select>
 
     <select id="getTryresult" resultType="com.shiguang.jiancha.domain.TryresultsDO">
 -- 		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,

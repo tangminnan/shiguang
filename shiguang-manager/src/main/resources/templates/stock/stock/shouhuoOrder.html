@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>采购收货单</title>
+<style type="text/css">
+*{padding: 0;margin: 0;box-sizing: border-box;}
+.tal{text-align: left;}
+.container {width:900px;margin:50px auto;}
+.container h3{text-align: center;font-size: 24px;letter-spacing:2px;margin-bottom: 25px;}
+	table{width: 100%;}
+	table td,table th{padding:5px 0;}
+	.tabA b,.tabC b{width:85px;display: inline-block;text-align:right;margin-right:10px;}
+	/*.tabA td{width: 35%;}*/
+	.tabB{border-left:1px solid #000;border-top:1px solid #000;text-align: center;margin:10px 0;}
+	.tabB td,.tabB th{border-right:1px solid #000;border-bottom:1px solid #000;}
+	.tabC b{width:100px;}
+	.tabC em{width:60px;display: inline-block;border-bottom:1px solid #000;vertical-align: bottom;font-style:normal;text-align: center;}
+	p{float: right;margin-top: 50px;}
+</style>
+
+</head>
+<body>
+<div class="container"> 
+	<h3>采购收货单</h3>
+	<input id="danjuNumber" name="danjuNumber" th:value="${getShouhuo.danjuNumber}" type="hidden"/>
+	<input id="goodsType" name="goodsType" th:value="${getShouhuo.goodsType}" type="hidden"/>
+	<table class="tabA" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td><b>制造商：</b><span th:text="${getShouhuo.mfrsname}"></span></td>
+			<td style="margin-left: 300px"><b>收货日期：</b>上海轩杨</td>
+			<td><b>收货单号：</b><span th:text="${getShouhuo.danjuNumber}"></span></td>
+		</tr>
+		<tr >
+			<td><b>订单号：</b><span th:text="${getShouhuo.danjuNumber}"></span></td>
+			<td><b>订单时间：</b><span th:text="${danjuDay}"></span></td>
+		</tr>
+	</table>
+	<table class="tabB" border="0" cellspacing="0" cellpadding="0">
+		<thead>
+			<tr>
+				<th>商品代码</th>
+				<th>商品条码</th>
+				<th>商品名称</th>
+				<th>数量</th>
+				<th>收入仓位</th>
+			</tr>
+		</thead>
+		<tbody class="liebiao"></tbody>
+	</table>
+	<table class="tabC" border="0" cellspacing="0" cellpadding="0">
+
+
+		<tr>
+			<td colspan="2"><b>备注：</b><span th:text="${getShouhuo.beizhu}"></span></td>
+		</tr>
+		<tr>
+			<td colspan="3"><b>制单人：</b><span th:text="${getShouhuo.zhidanPeople}"></span></td>
+			<td colspan="3"><b>审核人：</b><span th:text="${getShouhuo.zhidanPeople}"></span></td>
+			<td colspan="3"><b>审核日期：</b><span th:text="${danjuDay}"></span></td>
+		</tr>
+	</table>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    $().ready(function () {
+        var danjuNumber = $("#danjuNumber").val();
+        var goodsType = $("#goodsType").val();
+        $(".val").remove();
+        $.ajax({
+            url: '/stock/stock/getShouhuoList',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'danjuNumber': danjuNumber,
+                'goodsType': goodsType
+
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                        $(".liebiao").after("<tr class='val'> " +
+                            "<td>" + xml[i].goodsNum + "</td>\n" +
+                            "<td>" + xml[i].goodsCode + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].goodsCount + "</td>\n" +
+                            "<td>" + xml[i].positionName + "</td>\n" +
+                            "</tr>"
+                        );
+                }
+            }
+        })
+    });
+</script>
+</body>
+</html>

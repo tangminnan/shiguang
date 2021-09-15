@@ -70,6 +70,10 @@ function load() {
                         field: 'danjuDay',
                         title: '制单日期'
                     },
+                    {
+                        field: 'goodsType',
+                        title: '类型'
+                    },
                     // {
                     //     field: '',
                     //     title: '审核人'
@@ -90,15 +94,19 @@ function load() {
                             //     + '\')"><i class="fa fa-remove"></i></a> ';
                             // alert(row.status)
                             if (row.status == "1") {
-                                var f = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#" onclick="userNum(\''
+                                var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
+                                    + row.id + '\')">详情</span> ';
+                                var f = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#" style="width:26%" onclick="userNum(\''
                                     + row.danjuNumber + '\')">确认收货</span> ';
                                 var n = '';
                             } else if (row.status == "0") {
+                                var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
+                                    + row.id + '\')">详情</span> ';
                                 var f = '';
-                                var n = '<span class="btn btn-primary btn-sm"  href="#" title="条形码打印"  mce_href="#" onclick="code(\''
-                                    + row.danjuNumber + '\')">条形码打印</span> ';
+                                var n = '<span class="btn btn-warning btn-sm"  href="#" title="条形码打印"  mce_href="#" onclick="code(\''
+                                    + row.goodsType+" ','"+ row.danjuNumber + '\')">条形码打印</span> ';
                             }
-                            return f + n ;
+                            return a + f + n ;
                         }
                     }
                 ]
@@ -108,10 +116,19 @@ function load() {
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
 }
+
+
+
 //打印条码
-function code(danjuNumber){
-    window.open("/stock/stock/code?danjuNumber="+danjuNumber);
+function code(goodsType,danjuNumber){
+    if (goodsType==1){
+        window.open("/stock/stock/codeJingjia?danjuNumber="+danjuNumber);
+    } else {
+        window.open("/stock/stock/code?danjuNumber="+danjuNumber);
+    }
+
 }
+
 function userNum(danjuNumber) {
     var staus="1";
     if (staus == "1"){

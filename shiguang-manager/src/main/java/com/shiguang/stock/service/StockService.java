@@ -3,6 +3,7 @@ package com.shiguang.stock.service;
 
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.*;
+import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.StockDO;
 
@@ -134,5 +135,10 @@ public interface StockService {
     //发出仓位库存减数量
     int outPosionJ(StockDO stockDO);
 
+    OrderDO getOeder(String danjuNumber);
+    List<OrderDO> getOederList(Map<String, Object> map);
+
+    OrderDO getShouhuo(String danjuNumber);
+    List<OrderDO> getShouhuoList(Map<String, Object> map);
 
 }

@@ -31,7 +31,7 @@ public class OrderDO implements Serializable {
     //状态
     private String status;
     //工号
-    private String  username;
+    private String username;
     //退回状态
     private String returnzt;
 
@@ -42,6 +42,7 @@ public class OrderDO implements Serializable {
     public void setReturnzt(String returnzt) {
         this.returnzt = returnzt;
     }
+
     //商品代码
     private String goodsNum;
     //商品条码
@@ -73,7 +74,8 @@ public class OrderDO implements Serializable {
     public void setMfrsname(String mfrsname) {
         this.mfrsname = mfrsname;
     }
-private String brandname;
+
+    private String brandname;
 
     public String getBrandname() {
         return brandname;
@@ -96,8 +98,18 @@ private String brandname;
     //批发合计
     private String wholeSum;
     //仓位id
-    private  String positionId;
-    private  String departNumber;
+    private String positionId;
+    private String departNumber;
+    private String departName;
+
+
+    public String getDepartName() {
+        return departName;
+    }
+
+    public void setDepartName(String departName) {
+        this.departName = departName;
+    }
 
     public String getDepartNumber() {
         return departNumber;
@@ -114,6 +126,7 @@ private String brandname;
     public void setPositionId(String positionId) {
         this.positionId = positionId;
     }
+
     //仓位名称
     private String positionName;
     //入库时间
@@ -156,6 +169,7 @@ private String brandname;
     public void setTransferPricecount(String transferPricecount) {
         this.transferPricecount = transferPricecount;
     }
+
     //批号
     private String batch;
     //注册证号
@@ -231,7 +245,7 @@ private String brandname;
     //定做周期（天）
     private Long cycle;
 
-    private  String QRCode;
+    private String QRCode;
 
     public String getQRCode() {
         return QRCode;
@@ -240,7 +254,8 @@ private String brandname;
     public void setQRCode(String QRCode) {
         this.QRCode = QRCode;
     }
-    private  String classtype;
+
+    private String classtype;
 
     public String getClasstype() {
         return classtype;
@@ -573,48 +588,56 @@ private String brandname;
     public String getBeizhu() {
         return beizhu;
     }
+
     /**
      * 设置：批号
      */
     public void setBatch(String batch) {
         this.batch = batch;
     }
+
     /**
      * 获取：批号
      */
     public String getBatch() {
         return batch;
     }
+
     /**
      * 设置：注册证号
      */
     public void setZhuceNumber(String zhuceNumber) {
         this.zhuceNumber = zhuceNumber;
     }
+
     /**
      * 获取：注册证号
      */
     public String getZhuceNumber() {
         return zhuceNumber;
     }
+
     /**
      * 设置：生产日期
      */
     public void setProduceDay(String produceDay) {
         this.produceDay = produceDay;
     }
+
     /**
      * 获取：生产日期
      */
     public String getProduceDay() {
         return produceDay;
     }
+
     /**
      * 设置：效期
      */
     public void setUseday(String useday) {
         this.useday = useday;
     }
+
     /**
      * 获取：效期
      */
@@ -1031,7 +1054,8 @@ private String brandname;
     public Long getCycle() {
         return cycle;
     }
-private String factory;
+
+    private String factory;
 
     public String getFactory() {
         return factory;
@@ -1039,5 +1063,197 @@ private String factory;
 
     public void setFactory(String factory) {
         this.factory = factory;
+    }
+
+
+    private String producFactorycolor;
+    private String materialname;
+    private String jscpsph;
+    private String jpcpcyl;
+    private String jpcplightbelow;
+    private String jpcprefractivityvalue;
+    private String jpcplightname;
+    private String jpcplensname;
+    private String yxcpsph;
+    private String yxcpcyl;
+    private String yxcpcurvature;
+    private String yxcpdiameter;
+    private String yxcpusagename;
+    private String yxcptypename;
+    private String tyjsize;
+    private String tyjproducfactorycolor;
+    private String oldsize;
+    private String degrees;
+    private String oldproducfactorycolor;
+
+    public String getProducFactorycolor() {
+        return producFactorycolor;
+    }
+
+    public void setProducFactorycolor(String producFactorycolor) {
+        this.producFactorycolor = producFactorycolor;
+    }
+
+    public String getMaterialname() {
+        return materialname;
+    }
+
+    public void setMaterialname(String materialname) {
+        this.materialname = materialname;
+    }
+
+    public String getJscpsph() {
+        return jscpsph;
+    }
+
+    public void setJscpsph(String jscpsph) {
+        this.jscpsph = jscpsph;
+    }
+
+    public String getJpcpcyl() {
+        return jpcpcyl;
+    }
+
+    public void setJpcpcyl(String jpcpcyl) {
+        this.jpcpcyl = jpcpcyl;
+    }
+
+    public String getJpcplightbelow() {
+        return jpcplightbelow;
+    }
+
+    public void setJpcplightbelow(String jpcplightbelow) {
+        this.jpcplightbelow = jpcplightbelow;
+    }
+
+    public String getJpcprefractivityvalue() {
+        return jpcprefractivityvalue;
+    }
+
+    public void setJpcprefractivityvalue(String jpcprefractivityvalue) {
+        this.jpcprefractivityvalue = jpcprefractivityvalue;
+    }
+
+    public String getJpcplightname() {
+        return jpcplightname;
+    }
+
+    public void setJpcplightname(String jpcplightname) {
+        this.jpcplightname = jpcplightname;
+    }
+
+    public String getJpcplensname() {
+        return jpcplensname;
+    }
+
+    public void setJpcplensname(String jpcplensname) {
+        this.jpcplensname = jpcplensname;
+    }
+
+    public String getYxcpsph() {
+        return yxcpsph;
+    }
+
+    public void setYxcpsph(String yxcpsph) {
+        this.yxcpsph = yxcpsph;
+    }
+
+    public String getYxcpcyl() {
+        return yxcpcyl;
+    }
+
+    public void setYxcpcyl(String yxcpcyl) {
+        this.yxcpcyl = yxcpcyl;
+    }
+
+    public String getYxcpcurvature() {
+        return yxcpcurvature;
+    }
+
+    public void setYxcpcurvature(String yxcpcurvature) {
+        this.yxcpcurvature = yxcpcurvature;
+    }
+
+    public String getYxcpdiameter() {
+        return yxcpdiameter;
+    }
+
+    public void setYxcpdiameter(String yxcpdiameter) {
+        this.yxcpdiameter = yxcpdiameter;
+    }
+
+    public String getYxcpusagename() {
+        return yxcpusagename;
+    }
+
+    public void setYxcpusagename(String yxcpusagename) {
+        this.yxcpusagename = yxcpusagename;
+    }
+
+    public String getYxcptypename() {
+        return yxcptypename;
+    }
+
+    public void setYxcptypename(String yxcptypename) {
+        this.yxcptypename = yxcptypename;
+    }
+
+    public String getTyjsize() {
+        return tyjsize;
+    }
+
+    public void setTyjsize(String tyjsize) {
+        this.tyjsize = tyjsize;
+    }
+
+    public String getTyjproducfactorycolor() {
+        return tyjproducfactorycolor;
+    }
+
+    public void setTyjproducfactorycolor(String tyjproducfactorycolor) {
+        this.tyjproducfactorycolor = tyjproducfactorycolor;
+    }
+
+    public String getOldsize() {
+        return oldsize;
+    }
+
+    public void setOldsize(String oldsize) {
+        this.oldsize = oldsize;
+    }
+
+    public String getDegrees() {
+        return degrees;
+    }
+
+    public void setDegrees(String degrees) {
+        this.degrees = degrees;
+    }
+
+    public String getOldproducfactorycolor() {
+        return oldproducfactorycolor;
+    }
+
+    public void setOldproducfactorycolor(String oldproducfactorycolor) {
+        this.oldproducfactorycolor = oldproducfactorycolor;
+    }
+
+    private  String departTel;
+    private  String departAddress;
+
+    public String getDepartTel() {
+        return departTel;
+    }
+
+    public void setDepartTel(String departTel) {
+        this.departTel = departTel;
+    }
+
+    public String getDepartAddress() {
+        return departAddress;
+    }
+
+    public void setDepartAddress(String departAddress) {
+        this.departAddress = departAddress;
     }
 }
