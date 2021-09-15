@@ -122,6 +122,8 @@
     from member m join department d on d.depart_number = m.depart_number
     <where>
         <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+        <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
+        <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
         <if test="dateNow != null and dateNow != ''"> and DATE_FORMAT(c.create_time,'%Y-%m-%d') = #{dateNow} </if>
         <if test="departNumber != null and departNumber != ''">
             and m.depart_number = ${departNumber}
@@ -137,6 +139,8 @@
         from member m join department d on d.depart_number = m.depart_number
         <where>
             <if test="cardNumber != null and cardNumber != ''"> and card_number like concat('%', #{cardNumber},'%') </if>
+            <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
+            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
             <if test="dateNow != null and dateNow != ''"> and DATE_FORMAT(c.create_time,'%Y-%m-%d') = #{dateNow} </if>
             <if test="departNumber != null and departNumber != ''">
                 and m.depart_number = ${departNumber}

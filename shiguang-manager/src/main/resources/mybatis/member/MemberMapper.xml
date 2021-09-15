@@ -85,7 +85,7 @@
         join department d on d.depart_number = m.depart_number
     <where>
         <if test="id != null and id != ''"> and m.id = #{id} </if>
-        <if test="name != null and name != ''"> and m.name = #{name} </if>
+        <if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
         <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
         <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
         <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
@@ -123,7 +123,7 @@
         join department d on d.depart_number = m.depart_number
         <where>
             <if test="id != null and id != ''"> and m.id = #{id} </if>
-            <if test="name != null and name != ''"> and m.name = #{name} </if>
+            <if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
             <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
             <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
             <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>

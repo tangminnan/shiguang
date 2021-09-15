@@ -35,6 +35,8 @@ public class SalesDO implements Serializable {
 	private String phone1;
 	//销售人员
 	private String saleName;
+	//销售员工工号
+	private String saleAccount;
 	//用户名
 	private String saleNum;
 	//是否缴费
@@ -100,6 +102,9 @@ public class SalesDO implements Serializable {
 	//配镜日期
 	private Date peijingTime;
 	private String peijingDate;
+	//收款日期
+	private Date settleDate;
+	private String settleTime;
 	//验光师
 	private String optometryName;
 	//外来处方类型
@@ -218,6 +223,8 @@ public class SalesDO implements Serializable {
 	private String classtype;
 	//配镜发料用(是否订做)
 	private String classTypeFL;
+	//批号
+	private String batch;
 	List<SaleGoodsDO> list = new ArrayList<>();
 
 	//近用球镜OD
@@ -496,6 +503,14 @@ public class SalesDO implements Serializable {
 	public String getSaleName() {
 		return saleName;
 	}
+	/**
+	 * 销售员工工号
+	 */
+	public void setSaleAccount(String saleAccount) {this.saleAccount = saleAccount;}
+	/**
+	 * 销售员工工号
+	 */
+	public String getSaleAccount() {return saleAccount;}
 	/**
 	 * 用户名
 	 */
@@ -806,6 +821,14 @@ public class SalesDO implements Serializable {
 	public String getPeijingDate() {
 		return peijingDate;
 	}
+
+	public void setSettleDate(Date settleDate){this.settleDate = settleDate;}
+
+	public Date getSettleDate(){return settleDate;}
+
+	public void setSettleTime(String settleTime) {this.settleTime = settleTime;}
+
+	public String getSettleTime(){return settleTime;}
 
 	/**
 	 * 获取：验光师
@@ -1235,6 +1258,10 @@ public class SalesDO implements Serializable {
 	public void setClassTypeFL(String classTypeFL) {this.classTypeFL = classTypeFL;}
 
 	public String getClassTypeFL() {return  classTypeFL;}
+
+	public void setBatch(String batch){this.batch = batch;}
+
+	public String getBatch(){return batch;}
 
 	public void setList(List<SaleGoodsDO> list) {this.list = list;}
 

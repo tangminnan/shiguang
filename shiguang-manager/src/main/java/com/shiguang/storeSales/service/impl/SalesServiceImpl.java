@@ -102,4 +102,14 @@ public class SalesServiceImpl implements SalesService {
 		return salesDao.getSaleNumber(saleNumber);
 	}
 
+	@Override
+	public List<SalesDO> salelist(Map<String, Object> map){
+		return salesDao.salelist(map);
+	}
+
+	@Override
+	public int salecount(Map<String, Object> map){
+		return salesDao.salecount(map);
+	}
+
 }

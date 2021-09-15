@@ -964,7 +964,7 @@
 		</ul>
 		<ul class="ulC">
 			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney" onchange="getShishou()"/><input type="hidden" id="primeMoney" name="primeMoney"/></li>
-			<li>商品打折：<input type="text" id="saleDiscount" onchange="getDiscount()"/><input type="button" value="还原" /></li>
+			<li>商品打折：<input type="text" id="saleDiscounts" name="saleDiscounts" onchange="getDiscount()"/><input type="hidden" id="saleAccount" name="saleAccount"/><input type="button" value="还原" /></li>
 			<li>一口价：<input type="text" id="fisPrice" onchange="getFixedPrice()" /><input type="button" class="qianpi" value="签批" /><input type="button" onclick="getfidHy()" value="还原" /></li>
 			<li>抹零金额：<input type="text" value="0.00" id="molingMoney" onfocus="if (value =='0.00'){value =''}" onblur="if (value ==''){value='0.00'}" name="molingMoney" onchange="getChangeValue()"/></li>
 		</ul>
@@ -1214,8 +1214,22 @@
 	}
 
     function getDiscount(){
-        var saleCount = $("#saleDisCount").val();
-        alert(saleCount);
+        var saleCount = $("#saleDiscounts").val();
+            layer.open({
+                type : 2,
+                title : '编辑',
+                maxmin : true,
+                shadeClose : false, // 点击遮罩关闭层
+                area : [ '500px', '220px' ],
+                content : '/information/store/getDiscount/', // iframe的url
+                btn: ['确定', '取消'],
+                yes: function(index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.sure();
+                    alert(rows);
+                    $("#saleAccount").val(rows);
+                    layer.close(index);//需要手动关闭窗口
+                }
+            });
         var saleDz = (parseFloat(price) * parseFloat(saleCount)).toFixed(2);
         $("#ula").empty();
         var lis="";
@@ -1615,6 +1629,7 @@
                     html += "<input id='isJj' name='isJj' type='hidden' />"
                     html += "<input id='yingshoujj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                     html += "<input id='producaNum' name='producaNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
+                    html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                     html += "<input id='storeDescribe'name='storeDescribe' value='镜架' type='hidden' />"
                     //$("#yingshouMoneyjj"+i+"").text("454")
                     $("#goods").append(html);
@@ -1805,6 +1820,7 @@ var classArray=[];
                     html += "<input id='classtype' name='classtype' type='hidden' />"
                     html += "<input id='isJp'name='isJp' type='hidden' />"
                     html += "<input id='yingshoujp"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
+                    html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                     html += "<input id='storeDescribe'name='storeDescribe' value='镜片' type='hidden' />"
                     $("#goods").append(html);
                     //$("#yingshouMoneyjp"+i+"").text("2342")

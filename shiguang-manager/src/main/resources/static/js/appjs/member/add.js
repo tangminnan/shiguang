@@ -8,29 +8,35 @@ $.validator.setDefaults({
 	}
 });
 function save() {
-    var ideentityType = $("input[name='ideentityType']:checked").val();
-    var identityCard = $("input[name='identityCard']").val();
-    if(ideentityType=="身份证"){
-        var date = new Date();
-        var nowyear = date.getFullYear();
-        var year = identityCard.substring(6, 10);
-        var month = identityCard.substring(10, 12);
-        var day = identityCard.substring(12, 14);
-        if(year>=nowyear){
-            alert("出生年份应当小于当前年份！！！");
-            return false;
+    var ideentityType = $("#identityType").val();
+    //var ideentityType = $("input[name='identityType']:checked").val();
+    var identityCard = $("input[name='identityId']").val();
+        if(ideentityType=="居民身份证"){
+            var date = new Date();
+            var nowyear = date.getFullYear();
+            if (identityCard.length < 18){
+                alert("身份证号码输入错误！！！");
+                return false;
+            }
+            var year = identityCard.substring(6, 10);
+            var month = identityCard.substring(10, 12);
+            var day = identityCard.substring(12, 14);
+            if(year>=nowyear){
+                alert("出生年份应当小于当前年份！！！");
+                return false;
+            }
+            if(month>=13){
+                alert("出生月份应当小于13！！！");
+                return false;
+            }
+            if(day>=32){
+                alert("出生天数应当小于32！！！");
+                return false;
+            }
+            //var birthday = year+"-"+month+"-"+day
+            //$("input[name='birthday']").val(birthday);
         }
-        if(month>=13){
-            alert("出生月份应当小于13！！！");
-            return false;
-        }
-        if(day>=32){
-            alert("出生天数应当小于32！！！");
-            return false;
-        }
-        //var birthday = year+"-"+month+"-"+day
-        //$("input[name='birthday']").val(birthday);
-    }
+
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -110,12 +116,6 @@ function validateRule() {
             },
             phone1 : {
                 required : true
-            },
-            identityType : {
-                required : true
-            },
-            identityId : {
-                required : true
             }
 		},
 		messages : {
@@ -148,12 +148,6 @@ function validateRule() {
             },
             phone1 : {
                 required : icon + "请输入联系方式"
-            },
-            identityType : {
-                required : icon + "请选择证件"
-            },
-            identityId : {
-                required : icon + "请输入证件号码"
             }
 		}
 	})

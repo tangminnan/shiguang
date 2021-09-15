@@ -12,29 +12,30 @@ function update() {
     // alert($("#identityId").val());
     var idtentype = $("#identityType").val();
     var idetityId = $("#identityId").val();
-    if (idtentype == "居民身份证"){
-        var date = new Date();
-        var nowyear = date.getFullYear();
-        var year = idetityId.substring(6, 10);
-        var month = idetityId.substring(10, 12);
-        var day = idetityId.substring(12, 14);
-        if(year>=nowyear){
-            alert("出生年份应当小于当前年份！！！");
-            return false;
+        if (idtentype == "居民身份证"){
+            var date = new Date();
+            var nowyear = date.getFullYear();
+            var year = idetityId.substring(6, 10);
+            var month = idetityId.substring(10, 12);
+            var day = idetityId.substring(12, 14);
+            if(year>=nowyear){
+                alert("出生年份应当小于当前年份！！！");
+                return false;
+            }
+            if(month>=13){
+                alert("出生月份应当小于13！！！");
+                return false;
+            }
+            if(day>=32){
+                alert("出生天数应当小于32！！！");
+                return false;
+            }
+            if (idetityId.length<18 || idetityId.length>18){
+                alert("身份证位数不正确！！！");
+                return false;
+            }
         }
-        if(month>=13){
-            alert("出生月份应当小于13！！！");
-            return false;
-        }
-        if(day>=32){
-            alert("出生天数应当小于32！！！");
-            return false;
-        }
-        if (idetityId.length<18 || idetityId.length>18){
-            alert("身份证位数不正确！！！");
-            return false;
-        }
-    }
+
     $.ajax({
         cache : true,
         type : "POST",
@@ -92,24 +93,12 @@ function validateRule() {
 		rules : {
 			name : {
 				required : true
-			},
-            identityType : {
-                required : true
-            },
-            identityId : {
-                required : true
-            }
+			}
 		},
 		messages : {
 			name : {
 				required : icon + "请输入名字"
-			},
-            identityType : {
-                required : icon + "请选择证件"
-            },
-            identityId : {
-                required : icon + "请输入证件号码"
-            }
+			}
 		}
 	})
 }

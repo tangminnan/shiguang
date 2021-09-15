@@ -37,6 +37,7 @@ function getKjpeijian() {
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshoujjpj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='镜架配件' type='hidden' />"
                 html += "</tr>";
                 $("#goods").append(html);
@@ -109,6 +110,7 @@ function getTaiyangjing(){
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshoutyj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='太阳镜' type='hidden' />"
                 html += "</tr>";
@@ -182,6 +184,7 @@ function getHaocai() {
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshouhc"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='耗材' type='hidden' />"
                 html += "</tr>";
@@ -254,6 +257,7 @@ function getLaohuajing() {
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshoulhj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='老花镜' type='hidden' />"
                 html += "</tr>";
@@ -325,6 +329,7 @@ function getShiguang(){
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshousg"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='视光' type='hidden' />"
                 html += "</tr>";
@@ -399,6 +404,7 @@ function getHuliye(){
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshouhly"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='护理液' type='hidden' />"
                 html += "</tr>";
@@ -473,6 +479,7 @@ function getPeijian(){
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshoupj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='配件' type='hidden' />"
                 html += "</tr>";
@@ -620,6 +627,7 @@ function getYinxing(){
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshouyx"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='隐形' type='hidden' />"
                 html += "</tr>";
@@ -695,6 +703,7 @@ function getYinxingpj(){
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshouyxpj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='隐形配件' type='hidden' />"
                 html += "</tr>";
@@ -761,6 +770,7 @@ function getZengpin(){
                 html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].goodsName+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='赠品' type='hidden' />"
                 html += "</tr>";
                 $("#goods").append(html);

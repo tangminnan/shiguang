@@ -266,7 +266,7 @@
     <select id="listJiajia" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,pr.`produc_factory`,pr.`produc_color`,ac.`materialname`,pr.`size`
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`produc_factory`,pr.`produc_color`,ac.`materialname`,pr.`size`
         from stock st left join aa_produca pr on pr.id = st.goodsxinxiid left join c_material ac on ac.materialid =
         pr.materialid
         <where>
@@ -326,7 +326,7 @@
     <select id="listJpcp" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,st.`classtype`,s.`sph`,c.`cyl`,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,st.`classtype`,s.`sph`,c.`cyl`,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`
         from stock st left join aa_jpcp j on j.id = st.goodsxinxiid
         left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
         left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
@@ -508,7 +508,7 @@
     <select id="listJiajiapj" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,pr.`produc_factory`,pr.`parts_style`
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`produc_factory`,pr.`parts_style`
         from stock st left join aa_parts pr on pr.id = st.goodsxinxiid
         <where>
             <if test="partsStyle != null and partsStyle != ''">and pr.parts_style = #{partsStyle}</if>
@@ -568,7 +568,7 @@
     <select id="listTaiyj" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,pr.`produc_factory`,pr.`produc_color`,pr.`size`
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`produc_factory`,pr.`produc_color`,pr.`size`
         from stock st left join aa_tyj pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -626,7 +626,7 @@
     <select id="listHaocai" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`
         from stock st left join aa_hc pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -684,7 +684,7 @@
     <select id="listLaohj" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`
         from stock st left join aa_oldlens pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -742,7 +742,7 @@
     <select id="listShiguang" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,pr.`produc_factory`
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`produc_factory`
         from stock st left join aa_shiguang pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -800,7 +800,7 @@
     <select id="listHuly" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,pr.`main_capacity`,pr.`second_capacity`
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`main_capacity`,pr.`second_capacity`
         from stock st left join aa_hly pr on pr.id = st.goodsxinxiid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -858,7 +858,7 @@
     <select id="listZengpin" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,g.`gift_name`
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,g.`gift_name`
         from stock st left join giveaway pr on pr.give_number = st.goods_num left join gift g on g.gift_num =
         pr.give_type
         <where>
@@ -919,7 +919,7 @@
     <select id="listYxcp" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,st.`classtype`,t.`type_name`,u.`usage_name`,
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,st.`classtype`,t.`type_name`,u.`usage_name`,
         y.`curvature`,s.`sph`,c.`cyl`
         from stock st left join aa_yxcp y on y.id = st.goodsxinxiid left join p_type t on t.type_id = y.type_id
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id

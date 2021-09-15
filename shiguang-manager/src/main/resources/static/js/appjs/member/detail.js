@@ -1,5 +1,5 @@
 
-var prefix = "/information/highmember"
+var prefix = "/information/member"
 $(function() {
 	load();
 });

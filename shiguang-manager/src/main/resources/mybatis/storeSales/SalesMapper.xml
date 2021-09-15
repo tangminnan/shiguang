@@ -4,11 +4,11 @@
 <mapper namespace="com.shiguang.storeSales.dao.SalesDao">
 
 	<select id="get" resultType="com.shiguang.storeSales.domain.SalesDO">
-		select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name` from store_sales where id = #{value}
+		select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name`,`batch` from store_sales where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.storeSales.domain.SalesDO">
-		select `id`,`member_number`,`sale_name`,`sale_number`,`goods_num`,`goods_code`,`eye_type`,`amount_money`,`prime_money`,`mirror_way`,`mirror_time`,`miror_address`,`store_num`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name`,`peijing_time` from store_sales
+		select `id`,`member_number`,`sale_name`,`sale_number`,`goods_num`,`goods_code`,`eye_type`,`amount_money`,`prime_money`,`mirror_way`,`mirror_time`,`miror_address`,`store_num`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name`,`peijing_time`,`batch` from store_sales
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
@@ -73,13 +73,62 @@
 		  		  <if test="giveName != null and giveName != ''"> and give_name = #{giveName} </if>
 		  		</where>
 	</select>
-	 
+
+	<select id="salelist" resultType="com.shiguang.storeSales.domain.SalesDO">
+		select ss.`id`,ss.`member_number`,ss.`sale_name`,ss.`sale_number`,ss.`goods_num`,ss.`goods_code`,ss.`eye_type`,ss.`amount_money`,
+		ss.`prime_money`,ss.`mirror_way`,ss.`mirror_time`,ss.`miror_address`,ss.`store_num`,ss.`urgent_status`,ss.`goods_rebate`,
+		ss.`fixed_price`,ss.`moling_money`,ss.`additional_cost`,ss.`process_ask`,ss.`store_name`,ss.`store_describe`,
+		ss.`store_unit`,ss.`store_count`,ss.`remark`,ss.`give_name`,ss.`peijing_time`,ss.`batch`,ss.`recipelwl_type`,ss.`recipel_type`,
+		sl.`settle_date` as settleDate
+		from store_sales ss join settlement sl on sl.sale_number = ss.sale_number
+		join member m on m.card_number = ss.member_number
+		join department d on d.depart_number = m.depart_number
+		<where>
+			<if test="id != null and id != ''"> and ss.id = #{id} </if>
+			<if test="memberNumber != null and memberNumber != ''"> and ss.member_number = #{memberNumber} </if>
+			<if test="saleName != null and saleName != ''"> and ss.sale_name = #{saleName} </if>
+			<if test="saleNumber != null and saleNumber != ''"> and ss.sale_number = #{saleNumber} </if>
+			<if test="departNumber != null and departNumber != ''">
+				and m.depart_number = ${departNumber}
+			</if>
+			<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by ss.id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="salecount" resultType="int">
+		select count(*) from store_sales ss join settlement sl on sl.sale_number = ss.sale_number
+		join member m on m.card_number = ss.member_number
+		join department d on d.depart_number = m.depart_number
+		<where>
+			<if test="id != null and id != ''"> and ss.id = #{id} </if>
+			<if test="memberNumber != null and memberNumber != ''"> and ss.member_number = #{memberNumber} </if>
+			<if test="saleName != null and saleName != ''"> and ss.sale_name = #{saleName} </if>
+			<if test="saleNumber != null and saleNumber != ''"> and ss.sale_number = #{saleNumber} </if>
+			<if test="departNumber != null and departNumber != ''">
+				and m.depart_number = ${departNumber}
+			</if>
+			<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+		</where>
+	</select>
+
 	<insert id="save" parameterType="com.shiguang.storeSales.domain.SalesDO" useGeneratedKeys="true" keyProperty="id">
 		insert into store_sales
 		(
 		    `ptometry_number`,
 			`member_number`, 
-			`sale_name`, 
+			`sale_name`,
+			`sale_account`,
 			`sale_number`,
 			`goods_num`,
 			`goods_code`,
@@ -115,13 +164,15 @@
 			`taocan_name`,
 			`jp_goods_name`,
 			`jj_goods_name`,
-			`classtype`
+			`classtype`,
+			`batch`
 		)
 		values
 		(
 		    #{ptometryNumber},
 			#{memberNumber}, 
-			#{saleName}, 
+			#{saleName},
+			#{saleAccount},
 			#{saleNumber},
 			#{goodsNum},
 			#{goodsCode},
@@ -157,7 +208,8 @@
 			#{taocanName},
 			#{jpGoodsName},
 			#{jjGoodsName},
-			#{classtype}
+			#{classtype},
+			#{batch}
 		)
 	</insert>
 	 
@@ -202,7 +254,7 @@
 	<select id="peijinglist" resultType="com.shiguang.storeSales.domain.SalesDO">
 		select s.`id`,s.`member_number`,m.`name` as memberName,m.`phone_1` as memberTel,m.`address` as address,s.`sale_name`,s.`sale_number`,s.`goods_num`,s.`goods_code`,s.`eye_type`,s.`amount_money`,s.`prime_money`,s.`mirror_way`,
 		s.`mirror_time`,s.`miror_address`,s.`urgent_status`,s.`goods_rebate`,s.`fixed_price`,s.`moling_money`,s.`additional_cost`,
-		s.`process_ask`,s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`give_name`,s.`peijing_time`
+		s.`process_ask`,s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`give_name`,s.`peijing_time`,s.`batch`
 		from store_sales s join member m on m.card_number = s.member_number and m.state = 1 and m.`status` = 0
 		left join log_status ls on ls.sale_number = s.sale_number
 		<where>
@@ -271,7 +323,7 @@
 
 	<!-- 根据会员卡号查询数据 -->
 	<select id="findDataByNumber" resultType="com.shiguang.storeSales.domain.SalesDO">
-				select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name`
+				select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name`,`batch`
 				from store_sales
 				<where>
 					<if test="cardNumber != null and cardNumber != ''">and member_number = #{cardNumber}</if>
@@ -634,7 +686,7 @@
 		select s.`id`,s.`ptometry_number`,s.`member_number`,m.`name` as memberName,m.`sex`,m.`age`,m.`phone_1` as phone1,s.`sale_name`,s.`sale_number`,s.`goods_num`,s.`goods_code`,s.`eye_type`,s.`amount_money`,s.`prime_money`,s.`mirror_way`,s.`mirror_time`,
 		s.`miror_address`,s.`store_num`,s.`urgent_status`,s.`goods_rebate`,s.`fixed_price`,s.`moling_money`,s.`additional_cost`,s.`process_ask`,
 		s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`saleremark`,s.`give_name`,s.`peijing_time`,s.`optometry_name`,s.`out_recipel`,
-		s.`recipel_type`,s.`optometrywl_name`,s.`recipelwl_type`,s.`taocan_name`,s.`additional_price`,s.`additional_count`,s.`unit`
+		s.`recipel_type`,s.`optometrywl_name`,s.`recipelwl_type`,s.`taocan_name`,s.`additional_price`,s.`additional_count`,s.`unit`,s.`batch`
 		from store_sales s
 		join member m on s.member_number = m.card_number and m.state = 1 and m.`status` = 0
 		where sale_number = #{value}

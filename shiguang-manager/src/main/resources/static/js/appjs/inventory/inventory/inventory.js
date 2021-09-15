@@ -54,7 +54,7 @@ function load() {
                                                 + '\')" style="text-decoration: none;">生成盘盈单</a> ';
                                             return e ;
 										} else {
-											return value;
+                                            return value;
 										}
 
 									}

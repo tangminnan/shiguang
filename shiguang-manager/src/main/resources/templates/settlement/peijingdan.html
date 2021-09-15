@@ -15,6 +15,7 @@
 		<input id="cost" th:value="${settlementDO.additionalCost}" type="hidden">
 		<input id="storeName" th:value="${settlementDO.storeName}" type="hidden">
 		<input id="unit" th:value="${settlementDO.unit}" type="hidden">
+		<input id="batch" th:value="${settlementDO.batch}" type="hidden">
 		<input id="storeUnit" th:value="${settlementDO.storeUnit}" type="hidden">
 		<input id="storeCount" th:value="${settlementDO.storeCount}" type="hidden">
 		<li>配镜单号：<span th:text="${settlementDO.saleNumber}"></span></li>
@@ -72,13 +73,14 @@
 	<table class="Htab2" cellpadding="0" cellspacing="0">
 		<tr class="thead" id="tbodys">
 			<td>商品名称</td>
-			<!--<td>规格</td>-->
+			<td>批号</td>
 			<td>单位</td>
 			<td>数量</td>
 			<td>原价金额</td>
 		</tr>
 		<tr>
 			<td id="goodsName"></td>
+			<td><span id="batch"></span></td>
 			<td><span id="unitName"></span></td>
 			<td><span id="count"></span></td>
 			<td><span id="price"></span></td>
@@ -145,16 +147,19 @@
         var cost = $("#cost").val();
         var storeName = $("#storeName").val();
         var unit = $("#unit").val();
+        var batch = $("#batch").val();
         var storeUnit = $("#storeUnit").val();
         var storeCount = $("#storeCount").val();
         var storeNamestr = storeName.replace(/,/g,'<br>');
         var unitstr = unit.replace(/,/g,'<br/>');
+        var batchstr =batch.replace(/,/g,'<br/>');
         var storeUnitstr = storeUnit.replace(/,/g,'<br>');
         var storeCountstr = storeCount.replace(/,/g,'<br>');
         // var costStr = cost.replace(/,/g,'<br>');
         //$("#goodsName").append(costStr);
         $("#goodsName").append(storeNamestr);
         $("#unitName").append(unitstr);
+        $("#batch").append(batchstr);
         $("#count").append(storeCountstr);
         $("#price").append(storeUnitstr);
     });

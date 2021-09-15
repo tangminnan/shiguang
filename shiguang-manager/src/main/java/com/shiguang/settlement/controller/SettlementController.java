@@ -13,6 +13,8 @@ import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.jiancha.domain.*;
 import com.shiguang.jiancha.service.*;
+import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mailInfo.domain.MailInfoDO;
 import com.shiguang.mailInfo.service.MailInfoService;
 import com.shiguang.member.domain.MemberDO;
@@ -71,6 +73,8 @@ public class SettlementController {
 	private SjxlService sjxlService;
 	@Autowired
 	private ZyService zyService;
+	@Autowired
+	private LogStatusService logStatusService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:settlement:settlement")
@@ -221,6 +225,10 @@ public class SettlementController {
 		costService.updateMember(costDO);
 		settlement.setSaleName(ShiroUtils.getUser().getName());
 		settlement.setSettleDate(new Date());
+		LogStatusDO logStatusDO = new LogStatusDO();
+		logStatusDO.setSaleNumber(settlement.getSaleNumber());
+		logStatusDO.setLogisticStatus("销售完成");
+		logStatusService.save(logStatusDO);
 		if(settlementService.save(settlement)>0){
 			return R.ok();
 		}
@@ -272,7 +280,11 @@ public class SettlementController {
 //		model.addAttribute("jianchaTime",simpleDateFormat.format(new Date()));
 		SalesDO settlementDO = salesService.getSaleNumber(saleNumber);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		settlementDO.setPeijingDate(simpleDateFormat.format(settlementDO.getPeijingTime()));
+		if (null != settlementDO.getPeijingTime()){
+			settlementDO.setPeijingDate(simpleDateFormat.format(settlementDO.getPeijingTime()));
+		}else {
+			settlementDO.setPeijingDate("");
+		}
 		if (settlementDO.getSex() == 0){
 			settlementDO.setSexx("男");
 		} else if (settlementDO.getSex() == 1){
@@ -324,7 +336,7 @@ public class SettlementController {
 		map2.put("cardNumber",settlementDO.getMemberNumber());
 		map2.put("saleNumber",settlementDO.getSaleNumber());
 
-		if (null != settlementDO.getOptometrywlName()){
+		if (!"".equals(settlementDO.getOptometrywlName()) && null != settlementDO.getOptometrywlName()){
 			model.addAttribute("optometryName",settlementDO.getOptometrywlName());
 			if (1 == settlementDO.getRecipelwlType()){
 				List<KjjyDO> kjjyDOList = kjjyService.list(map2);

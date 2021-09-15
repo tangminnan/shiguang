@@ -49,4 +49,8 @@ public interface SalesService {
 
 	SalesDO getSaleNumber(String saleNumber);
 
+	List<SalesDO> salelist(Map<String, Object> map);
+
+	int salecount(Map<String, Object> map);
+
 }

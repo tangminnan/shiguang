@@ -121,6 +121,9 @@ function load() {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
 												+ row.id
 												+ '\')"><i class="fa fa-edit"></i></a> ';
+                                        var h = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" onclick="detail(\''
+                                            + row.id
+                                            + '\')" style="text-decoration: none;">详情</a>';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
@@ -130,7 +133,7 @@ function load() {
                                         var g = '<a class="btn btn-primary btn-xs" href="#" title="二维码打印"  mce_href="#" onclick="erDayin(\''
                                             + row.id
                                             + '\')" style="text-decoration: none;">二维码打印</a>';
-										return e + g + d ;
+										return e + h + g + d ;
 									}
 								} ]
 					});
@@ -147,6 +150,20 @@ document.onkeydown = function(e){
     if((e||event).keyCode==13)
         reLoad();
 };
+
+function detail(id) {
+    var toIndex = layer.open({
+        type: 2,
+        title: '详情',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['1100px', '620px'],
+
+        content: prefix + '/detail/' + id // iframe的url
+    });
+    layer.full(toIndex);
+}
+
 function add() {
 	var toIndex = layer.open({
 		type : 2,

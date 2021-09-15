@@ -63,6 +63,11 @@ public class ResultServiceImpl implements ResultService {
 	}
 
 	@Override
+	public int shujulistcount(Map<String, Object> map) {
+		return resultDao.shujulistcount(map);
+	}
+
+	@Override
 	public ResultDO getChufangAll(Map<String, Object> map) {
 		return resultDao.getChufangAll(map);
 	}

@@ -254,16 +254,18 @@ public class StoreSalesController {
             salesDO.setIsJp(0L);
             salesDO.setIsJj("无");
         }
-        if ("镜架".equals(salesDO.getStoreDescribe())
-                || "镜片".equals(salesDO.getStoreDescribe())
-                || "太阳镜".equals(salesDO.getStoreDescribe())) {
-            if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
+        if (!"隐形".equals(salesDO.getStoreDescribe())){
+            if ("镜架".equals(salesDO.getStoreDescribe())
+                    || "镜片".equals(salesDO.getStoreDescribe())) {
+                if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
+                    return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
+                }
+            }
+            if (salesDO.getIsJp() < 2 ) {
                 return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
             }
         }
-        if (salesDO.getIsJp() < 2 ) {
-            return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
-        }
+
         Long saleNumber = GuuidUtil.getUUID();
         salesDO.setSaleNumber("X" + saleNumber);
         if (null != salesDO) {
@@ -480,10 +482,6 @@ public class StoreSalesController {
                 }
             }
         }
-        LogStatusDO logStatusDO = new LogStatusDO();
-        logStatusDO.setSaleNumber(salesDO.getSaleNumber());
-        logStatusDO.setLogisticStatus("销售完成");
-        logStatusService.save(logStatusDO);
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
         workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
         workRecoedDO.setType("销售");
@@ -716,6 +714,14 @@ public class StoreSalesController {
         return "storeSales/detail";
     }
 
+    /**
+     * 员工打折权限
+     */
+    @GetMapping("/getDiscount")
+    @RequiresPermissions("information:store:getDiscount")
+    String getDiscount(Model model) {
+        return "storeSales/discount";
+    }
 
     /**
      * 镜架

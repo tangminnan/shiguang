@@ -6,8 +6,12 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.jiancha.domain.ResultDO;
+import com.shiguang.jiancha.service.ResultService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
+import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +42,10 @@ public class HighMemberController {
     private InterestService interestService;
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private ResultService resultService;
+    @Autowired
+    private SalesService salesService;
 
     @GetMapping()
     @RequiresPermissions("information:highmember:highmember")
@@ -129,6 +138,71 @@ public class HighMemberController {
         List<InterestDO> interestDOList = interestService.list(map);
         model.addAttribute("interestDOList",interestDOList);
         return "highmember/detail";
+    }
+
+    @ResponseBody
+    @GetMapping("/binglilist")
+    @RequiresPermissions("information:highmember:highmember")
+    public PageUtils binglilist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        query.put("status","1");
+        List<ResultDO> resultList = resultService.shujulist(query);
+        int total = resultService.shujulistcount(query);
+        PageUtils pageUtils = new PageUtils(resultList, total);
+        return pageUtils;
+    }
+
+    @ResponseBody
+    @GetMapping("/salelist")
+    @RequiresPermissions("information:highmember:highmember")
+    public PageUtils salelist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        query.put("status","1");
+        query.put("memberNumber",query.get("cardNumber"));
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        } else {
+            if (null != ShiroUtils.getUser().getStoreNum()){
+                query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+            }
+        }
+        List<SalesDO> salesDOList = salesService.salelist(query);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if (null != salesDOList){
+            for (SalesDO salesDO : salesDOList){
+                if (!"".equals(salesDO.getOptometrywlName())){
+                    if ("1".equals(salesDO.getRecipelwlType())){
+                        salesDO.setRecipelType("近用");
+                    }else if ("2".equals(salesDO.getRecipelwlType())){
+                        salesDO.setRecipelType("远用");
+                    } else if ("3".equals(salesDO.getRecipelwlType())){
+                        salesDO.setRecipelType("渐进/双光");
+                    } else if ("4".equals(salesDO.getRecipelwlType())){
+                        salesDO.setRecipelType("中用");
+                    } else if ("5".equals(salesDO.getRecipelwlType())){
+                        salesDO.setRecipelType("隐形");
+                    } else if ("6".equals(salesDO.getRecipelwlType())){
+                        salesDO.setRecipelType("角膜塑形镜");
+                    } else if ("7".equals(salesDO.getRecipelwlType())){
+                        salesDO.setRecipelType("视觉训练");
+                    } else if ("8".equals(salesDO.getRecipelwlType())){
+                        salesDO.setRecipelType("膜塑形镜VST");
+                    } else if ("9".equals(salesDO.getRecipelwlType())){
+                        salesDO.setRecipelType("角膜塑形镜CRT");
+                    } else if ("10".equals(salesDO.getRecipelwlType())){
+                        salesDO.setRecipelType("RGP");
+                    }
+                }
+                if (null != salesDO.getSettleDate()){
+                    salesDO.setSettleTime(simpleDateFormat.format(salesDO.getSettleDate()));
+                }
+            }
+        }
+        int total = salesService.salecount(query);
+        PageUtils pageUtils = new PageUtils(salesDOList, total);
+        return pageUtils;
     }
 
     /**

@@ -33,7 +33,9 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                saleNumber: $("#saleNumber").val()
+                                saleNumber: $("#saleNumber").val(),
+                                name:$("#name").val(),
+                                phone1:$("#phone1").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -85,13 +87,28 @@ function load() {
 								{
 									field : 'urgentStatus',
 									title : '加急状态'
-								}
+								},
+							{
+                                title : '操作',
+                                field : 'saleNumber',
+                                align : 'center',
+                                formatter : function(value, row, index) {
+                                    var t = '<a class="btn btn-primary btn-xs" href="#" title="打印"  mce_href="#" ' +
+                                            'onclick="peijingdan(\''+value+'\')" style="text-decoration: none;">打印</a>';
+                                    return t;
+                                }
+							}
 						]
 					});
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
+
+function peijingdan(saleNumber){
+    window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
+}
+
 function add() {
 	layer.open({
 		type : 2,

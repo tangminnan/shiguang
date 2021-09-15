@@ -303,6 +303,11 @@
 		left join store_sales s on r.ptometry_number = s.ptometry_number
 		where r.card_number=#{cardNumber} and r.status=#{status}   order by r.id desc
 	</select>
+	<select id="shujulistcount" resultType="int">
+		select count(*) from jc_result r
+		left join store_sales s on r.ptometry_number = s.ptometry_number
+		where r.card_number=#{cardNumber} and r.status=#{status}
+	</select>
 	<select id="getChufangAll" resultType="com.shiguang.jiancha.domain.ResultDO">
 		select
 			crt.*,kjjy.*,kjyy.*,rgp.*,rxjmjcj.*,sgjj.*,sjxl.*,vst.*,yaopin.*,zy.*

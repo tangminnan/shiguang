@@ -287,7 +287,7 @@ public class InventoryController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("information:inventory:add")
-	public R save(String documentNo,String inventoryName,String inventoryPosition,String inventoryType,MultipartFile file){
+	public R save(String documentNo,String inventoryName,String inventoryPosition,String inventoryType,List<MultipartFile> file){
 		return inventoryService.importInventory(documentNo,inventoryName,inventoryPosition,inventoryType,file);
 //		if(inventoryService.save(inventory)>0){
 //			return R.ok();
