@@ -34,5 +34,6 @@ public interface TryresultsDao {
 
     //    查询医生
     List<TryresultsDO> listDoctor(Map<String, Object> map);
+    List<TryresultsDO> listYanguang(Map<String, Object> map);
     TryresultsDO  getTryresult(Map<String, Object> map);
 }

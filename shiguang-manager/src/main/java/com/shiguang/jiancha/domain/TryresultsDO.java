@@ -17,6 +17,7 @@ public class TryresultsDO implements Serializable {
     //试戴镜结果id
     private Long id;
 
+
     //姓名
     private String name;
     //性别

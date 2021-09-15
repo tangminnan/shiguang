@@ -1,5 +1,5 @@
 
-var prefix = "/stock/tuihuo"
+var prefix = "/stock/weiwai"
 $(function() {
 	load();
 });
@@ -44,68 +44,97 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-								{
-									checkbox : true
-								},
+								// {
+								// 	checkbox : true
+								// },
 								// 								{
 								// 	field : 'id',
-								// 	title : '退货id'
+								// 	title : '委外收货id'
 								// },
 																{
-									field : 'tuihuoNum', 
-									title : '单据编号'
+									field : 'saleNumber',
+									title : '配镜单号' 
 								},
-																{
-									field : 'zhidanPeople', 
-									title : '制单人' 
-								},
-																{
-									field : 'danjuDay', 
-									title : '单据日期' 
-								},
+								// 								{
+								// 	field : 'shouhuoNumber',
+								// 	title : '收货单号'
+								// },
+								// 								{
+								// 	field : 'positionId',
+								// 	title : '收入仓位id'
+								// },
 								// 								{
 								// 	field : 'mfrsid',
 								// 	title : '制造商id'
 								// },
 																{
-									field : 'mfrsname', 
-									title : '制造商'
-								},
-								// 								{
-								// 	field : 'positionId',
-								// 	title : '发出仓位id'
-								// },
-								{
-									field : 'positionName',
-									title : '发出仓位'
+									field : 'name', 
+									title : '顾客姓名' 
 								},
 																{
-									field : 'beizhu', 
-									title : '备注' 
+									field : 'phone1',
+									title : '联系电话' 
 								},
-																// {
-								// 	field : 'goodsxinxiid',
-								// 	title : '商品信息id'
+								// 								{
+								// 	field : 'dzStype',
+								// 	title : '订做类型'
 								// },
 								// 								{
-								// 	field : 'goodsNum',
-								// 	title : '商品代码'
+								// 	field : 'mirrorTime',
+								// 	title : '取镜日期'
+								// },
+								// 								{
+								// 	field : 'eyeRight',
+								// 	title : '右眼加工要求'
+								// },
+								// 								{
+								// 	field : 'eyeLeft',
+								// 	title : '左眼加工要求'
+								// },
+																{
+									field : 'departNumber', 
+									title : '销售门店'
+								},
+								{
+									field : 'mfrsname',
+									title : '制造商'
+								},
+								{
+									field : 'eyeType',
+									title : '镜片类型'
+								},
+								{
+									field : 'peijingTime',
+									title : '配镜时间'
+								},
+							{
+									field : 'mirrorTime',
+									title : '取镜时间'
+								},
+
+								// 								{
+								// 	field : 'sph',
+								// 	title : '球镜'
+								// },
+								// 								{
+								// 	field : 'cyl',
+								// 	title : '柱镜'
 								// },
 								// 								{
 								// 	field : 'goodsName',
 								// 	title : '商品名称'
 								// },
 								// 								{
+								// 	field : 'rl',
+								// 	title : 'R/L'
+								// },
+								// 								{
+								// 	field : 'goodsNum',
+								// 	title : '商品代码'
+								// },
+								// 								{
 								// 	field : 'factory',
-								// 	title : '型号'
-								// },
-								// 								{
-								// 	field : 'unit',
-								// 	title : '单位'
-								// },
-								// 								{
-								// 	field : 'goodsCount',
-								// 	title : '可用库存'
+								// 	title : '厂家型号'
 								// },
 								// 								{
 								// 	field : 'count',
@@ -138,7 +167,7 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-    var toIndex = layer.open({
+	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
@@ -146,10 +175,9 @@ function add() {
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
-    layer.full(toIndex);
 }
 function edit(id) {
-    var toIndex = layer.open({
+	layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
@@ -157,7 +185,6 @@ function edit(id) {
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
-    layer.full(toIndex);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
@@ -216,80 +243,4 @@ function batchRemove() {
 	}, function() {
 
 	});
-}
-
-//携带商品
-function showCol() {
-    var check = $("input[name='one']:checked");//选中的复选框
-    var objArray = [];
-    check.each(function () {
-        var obj = {};
-        var rowstr = $(this).parent("td").parent("tr");
-        //———获取当前系统时间—————
-        var timeNow = new Date();
-        var year = timeNow.getFullYear();
-        var month = timeNow.getMonth() + 1 > 10 ? timeNow.getMonth() + 1 : '0' + (timeNow.getMonth() + 1);
-        var date = timeNow.getDate() > 10 ? timeNow.getDate() : "0" + timeNow.getDate();
-        obj.createTime = year + "-" + month + "-" + date;
-
-        var goodsNum = rowstr.find("[name='goodsNum']").html();//注意html()和val()
-        var goodsCode = rowstr.find("[name='goodsCode']").html();
-        var goodsName = rowstr.find("[name='goodsName']").html();
-        var goodsCount = rowstr.find("[name='goodsCount']").html();
-        var gdname = rowstr.find("[name='gdname']").html();
-        var mfrsname = rowstr.find("[name='mfrsname']").html();
-        var factory = rowstr.find("[name='factory']").html();
-        var retailPrice = rowstr.find("[name='retailPrice']").html();
-        var priceSum = rowstr.find("[name='priceSum']").html();
-        var costPrice = rowstr.find("[name='costPrice']").html();
-        var costSum = rowstr.find("[name='costSum']").html();
-        var wholePrice = rowstr.find("[name='wholePrice']").html();
-        var wholeSum = rowstr.find("[name='wholeSum']").html();
-        var positionName = rowstr.find("[name='positionName']").html();
-        var batch = rowstr.find("[name='batch']").html();
-        var zhuceNumber = rowstr.find("[name='zhuceNumber']").html();
-        var produceDay = rowstr.find("[name='produceDay']").html();
-        var useday = rowstr.find("[name='useday']").html();
-        var classtype = rowstr.find("[name='classtype']").html();
-        var gdname = rowstr.find("[name='gdname']").html();
-        obj.goodsNum = goodsNum;
-        obj.goodsCode = goodsCode;
-        obj.goodsName = goodsName;
-        obj.goodsCount = goodsCount;
-        obj.gdname = gdname;
-        obj.factory = factory;
-        obj.mfrsname = mfrsname;
-
-        obj.retailPrice = retailPrice;
-        obj.priceSum = priceSum;
-        obj.costPrice = costPrice;
-        obj.costSum = costSum;
-        obj.wholePrice = wholePrice;
-        obj.wholeSum = wholeSum;
-
-        obj.positionName = positionName;
-        obj.batch = batch;
-        obj.zhuceNumber = zhuceNumber;
-        obj.produceDay = produceDay;
-        obj.useday = useday;
-        obj.classtype = classtype;
-        obj.gdname = gdname;
-
-        var mfrsid = rowstr.find("[name='mfrsid']").html();
-        obj.mfrsid = mfrsid;
-
-        var brandname = rowstr.find("[name='brandname']").html();
-        obj.brandname = brandname;
-
-        var unit = rowstr.find("[name='unit']").html();
-        obj.unit = unit;
-        var goodsid = rowstr.find("[name='goodsid']").html();
-        obj.goodsid = goodsid;
-        var goodsxinxiid = rowstr.find("[name='goodsxinxiid']").html();
-        obj.goodsxinxiid = goodsxinxiid;
-
-
-        objArray.push(obj);
-    });
-    return objArray;
 }

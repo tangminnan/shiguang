@@ -235,17 +235,21 @@
 
                 <td style="text-align: right" colspan="7">
                     医生：
+
                     <select id="kjyyDoctor" name="kjyyDoctor">
                         <option></option>
-                        <option value="孙伟">孙伟</option>
-                        <option value="维护二">维护二</option>
+                        <option th:each="ls:${listDoctor}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                     验光师：
                     <select  id="kjyyOptometryName" name="kjyyOptometryName">
                         <option></option>
-                        <option value="张三">张三</option>
-                        <option value="周五">周五</option>
-                        <option value="陈静">陈静</option>
+                        <option th:each="ls:${listYanguang}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                 </td>
             </tr>
@@ -376,15 +380,18 @@
                     医生：
                     <select id="kjjyDoctor" name="kjjyDoctor">
                         <option></option>
-                        <option value="孙伟">孙伟</option>
-                        <option value="维护二">维护二</option>
+                        <option th:each="ls:${listDoctor}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                     验光师：
                     <select id="kjjyOptometryName" name="kjjyOptometryName">
                         <option></option>
-                        <option value="张三">张三</option>
-                        <option value="周五">周五</option>
-                        <option value="陈静">陈静</option>
+                        <option th:each="ls:${listYanguang}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                 </td>
             </tr>
@@ -514,15 +521,18 @@
                     医生：
                     <select id="sgjjDoctor" name="sgjjDoctor">
                         <option></option>
-                        <option value="孙伟">孙伟</option>
-                        <option value="维护二">维护二</option>
+                        <option th:each="ls:${listDoctor}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                     验光师：
                     <select id="sgjjOptometryName" name="sgjjOptometryName">
                         <option></option>
-                        <option value="张三">张三</option>
-                        <option value="周五">周五</option>
-                        <option value="陈静">陈静</option>
+                        <option th:each="ls:${listYanguang}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                 </td>
             </tr>
@@ -633,15 +643,18 @@
                     医生：
                     <select id="rxDoctor" name="rxDoctor">
                         <option></option>
-                        <option value="孙伟">孙伟</option>
-                        <option value="维护二">维护二</option>
+                        <option th:each="ls:${listDoctor}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                     验光师：
                     <select id="rxOptometryName" name="rxOptometryName">
                         <option></option>
-                        <option value="张三">张三</option>
-                        <option value="周五">周五</option>
-                        <option value="陈静">陈静</option>
+                        <option th:each="ls:${listYanguang}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                 </td>
             </tr>
@@ -719,15 +732,18 @@
                     医生：
                     <select id="zyDoctor" name="zyDoctor">
                         <option></option>
-                        <option value="孙伟">孙伟</option>
-                        <option value="维护二">维护二</option>
+                        <option th:each="ls:${listDoctor}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                     验光师：
                     <select id="zyOptometryName" name="zyOptometryName">
                         <option></option>
-                        <option value="张三">张三</option>
-                        <option value="周五">周五</option>
-                        <option value="陈静">陈静</option>
+                        <option th:each="ls:${listYanguang}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                 </td>
             </tr>
@@ -855,15 +871,18 @@
                     医生：
                     <select name="sjxlDoctor">
                         <option></option>
-                        <option value="孙伟">孙伟</option>
-                        <option value="维护二">维护二</option>
+                        <option th:each="ls:${listDoctor}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                     验光师：
                     <select name="sjxlOptometryName">
                         <option></option>
-                        <option value="张三">张三</option>
-                        <option value="周五">周五</option>
-                        <option value="陈静">陈静</option>
+                        <option th:each="ls:${listYanguang}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                 </td>
             </tr>
@@ -967,15 +986,18 @@
                     医生：
                     <select name="vstDoctor">
                         <option></option>
-                        <option value="孙伟">孙伟</option>
-                        <option value="维护二">维护二</option>
+                        <option th:each="ls:${listDoctor}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                     验光师：
                     <select name="vstOptometryName">
                         <option></option>
-                        <option value="张三">张三</option>
-                        <option value="周五">周五</option>
-                        <option value="陈静">陈静</option>
+                        <option th:each="ls:${listYanguang}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                 </td>
             </tr>
@@ -1044,15 +1066,18 @@
                     医生：
                     <select name="crtDoctor">
                         <option></option>
-                        <option value="孙伟">孙伟</option>
-                        <option value="维护二">维护二</option>
+                        <option th:each="ls:${listDoctor}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                     验光师：
                     <select name="crtOptometryName">
                         <option></option>
-                        <option value="张三">张三</option>
-                        <option value="周五">周五</option>
-                        <option value="陈静">陈静</option>
+                        <option th:each="ls:${listYanguang}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                 </td>
             </tr>
@@ -1118,15 +1143,18 @@
                     医生：
                     <select name="rgpDoctor">
                         <option></option>
-                        <option value="孙伟">孙伟</option>
-                        <option value="维护二">维护二</option>
+                        <option th:each="ls:${listDoctor}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                     验光师：
                     <select name="rgpOptometryName">
                         <option></option>
-                        <option value="张三">张三</option>
-                        <option value="周五">周五</option>
-                        <option value="陈静">陈静</option>
+                        <option th:each="ls:${listYanguang}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                 </td>
             </tr>
@@ -1180,15 +1208,18 @@
                     医生：
                     <select name="ypDoctor">
                         <option></option>
-                        <option value="孙伟">孙伟</option>
-                        <option value="维护二">维护二</option>
+                        <option th:each="ls:${listDoctor}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                     验光师：
                     <select name="ypOptometryName">
                         <option></option>
-                        <option value="张三">张三</option>
-                        <option value="周五">周五</option>
-                        <option value="陈静">陈静</option>
+                        <option th:each="ls:${listYanguang}"
+                                th:text="${ls.name}"
+                                th:value="${ls.name}"
+                        ></option>
                     </select>
                 </td>
             </tr>

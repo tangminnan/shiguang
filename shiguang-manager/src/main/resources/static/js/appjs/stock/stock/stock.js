@@ -12,14 +12,15 @@ function add() {
 }
 
 function edit(id) {
-    layer.open({
+    var toIndex = layer.open({
         type: 2,
-        title: '编辑',
+        title: '详情',
         maxmin: true,
         shadeClose: false, // 点击遮罩关闭层
         area: ['800px', '520px'],
         content: prefix + '/edit/' + id // iframe的url
     });
+    layer.full(toIndex);
 }
 
 function remove(id) {
@@ -117,14 +118,16 @@ function showCol() {
         obj.producFactorycolor = producFactorycolor;
         obj.materialName = materialName;
         obj.size = size;
-        obj.producCode = producCode;
+        obj.producCode = producCode +"00000000";
         obj.brandname = brandname;
-        //———获取当前系统时间—————
-        var timeNow = new Date();
-        var year = timeNow.getFullYear();
-        var month = timeNow.getMonth() + 1 > 10 ? timeNow.getMonth() + 1 : '0' + (timeNow.getMonth() + 1);
-        var date = timeNow.getDate() > 10 ? timeNow.getDate() : "0" + timeNow.getDate();
-        obj.createTime = year + "-" + month + "-" + date;
+        // //———获取当前系统时间—————
+        // var timeNow = new Date();
+        // var year = timeNow.getFullYear();
+        // var month = timeNow.getMonth() + 1 > 10 ? timeNow.getMonth() + 1 : '0' + (timeNow.getMonth() + 1);
+        // var date = timeNow.getDate() > 10 ? timeNow.getDate() : "0" + timeNow.getDate();
+        // obj.createTime = year + "-" + month + "-" + date;
+        var createTime=new Date( +new Date() + 8 * 3600 * 1000 ).toJSON().substr(0,19).replace("T"," ");
+        obj.createTime=createTime;
         var tradePrice = rowstr.find("[name='tradePrice']").html();
         obj.tradePrice = tradePrice;
         var transferPrice = rowstr.find("[name='transferPrice']").html();

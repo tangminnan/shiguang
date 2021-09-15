@@ -287,6 +287,13 @@ public class OptometryNewController {
 
         model.addAttribute("tryresultsDO", tryresultsDO);
         //医生
+        Map<String,Object> map=new HashMap<>();
+        map.put("roleName","医生");
+        List<TryresultsDO> listDoctor = tryresultsService.listDoctor(map);
+        model.addAttribute("listDoctor",listDoctor);
+        map.put("YangguangName","验光师");
+        List<TryresultsDO> listYanguang = tryresultsService.listYanguang(map);
+        model.addAttribute("listYanguang",listYanguang);
 
         return "optometryNew/jianchajielun";
     }

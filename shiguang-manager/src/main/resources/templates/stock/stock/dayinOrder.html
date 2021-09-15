@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>采购订单</title>
+<style type="text/css">
+*{padding: 0;margin: 0;box-sizing: border-box;}
+.tal{text-align: left;}
+.container {width:900px;margin:50px auto;}
+.container h3{text-align: center;font-size: 24px;letter-spacing:2px;margin-bottom: 25px;}
+	table{width: 100%;}
+	table td,table th{padding:5px 0;}
+	.tabA b,.tabC b{width:85px;display: inline-block;text-align:right;margin-right:10px;}
+	.tabA td{width: 50%;}
+	.tabB{border-left:1px solid #000;border-top:1px solid #000;text-align: center;margin:10px 0;}
+	.tabB td,.tabB th{border-right:1px solid #000;border-bottom:1px solid #000;}
+	.tabC b{width:100px;}
+	.tabC em{width:60px;display: inline-block;border-bottom:1px solid #000;vertical-align: bottom;font-style:normal;text-align: center;}
+	p{float: right;margin-top: 50px;}
+</style>
+
+</head>
+<body>
+<div class="container"> 
+	<h3>采购订单</h3>
+	<input id="danjuNumber" name="danjuNumber" th:value="${getOeder.danjuNumber}" type="hidden"/>
+	<input id="goodsType" name="goodsType" th:value="${getOeder.goodsType}" type="hidden"/>
+	<table class="tabA" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td><b>制造商：</b><span th:text="${getOeder.mfrsname}"></span></td>
+			<td style="padding-left:17%"><b>订单编号：</b><span th:text="${getOeder.danjuNumber}"></span></td>
+		</tr>
+		<tr>
+			<td><b>申请部门：</b><span th:text="${getOeder.departName}"></span></td>
+			<td style="padding-left:17%"><b>订单时间：</b><span th:text="${danjuDay}"></span></td>
+		</tr>
+	</table>
+	<table class="tabB" border="0" cellspacing="0" cellpadding="0">
+		<thead>
+			<tr>
+				<th>商品类别</th>
+				<th>商品名称</th>
+				<th>型号</th>
+				<th>厂家色号</th>
+				<th>球镜</th>
+				<th>柱镜</th>
+				<th>单位</th>
+				<th>标准零售价</th>
+				<th>数量</th>
+				<th>备注</th>
+			</tr>
+		</thead>
+		<tbody class="liebiao"></tbody>
+	</table>
+	<table class="tabC" border="0" cellspacing="0" cellpadding="0">
+
+
+		<tr>
+			<td colspan="2"><b>备注：</b>此批订货请于<em></em>月<em></em>日前送达。</td>
+			<td><b>实际收货日：</b></td>
+		</tr>
+		<tr>
+			<td colspan="3"><b>所需材料：</b></td>
+		</tr>
+		<tr>
+			<td><b>联系人：</b><span th:text="${getOeder.zhidanPeople}"></span></td>
+			<td><b>联系电话：</b><span th:text="${getOeder.departTel}"></span></td>
+			<td><b>收货地址：</b><span th:text="${getOeder.departAddress}"></span></td>
+		</tr>
+		<tr>
+			<td><b>制单日期：</b><span th:text="${danjuDay}"></span> </td>
+			<td><b>制单人：</b><span th:text="${getOeder.zhidanPeople}"></span></td>
+			<td><b>审核人：</b><span th:text="${getOeder.zhidanPeople}"></span></td>
+		</tr>
+	</table>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    $().ready(function () {
+        var danjuNumber = $("#danjuNumber").val();
+        var goodsType = $("#goodsType").val();
+        $(".val").remove();
+        $.ajax({
+            url: '/stock/stock/getOederList',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'danjuNumber': danjuNumber,
+                'goodsType': goodsType
+
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    if (goodsType==1){
+                        $(".liebiao").after("<tr class='val'> " +
+                            "<td>" + xml[i].gdname + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+                            "<td>" + xml[i].producFactorycolor + "</td>\n" +
+                            "<td>" + "</td>\n" +
+                            "<td>" + "</td>\n" +
+                            "<td>" + xml[i].unit + "</td>\n" +
+                            "<td>" + xml[i].retailPrice + "</td>\n" +
+                            "<td>" + xml[i].goodsCount + "</td>\n" +
+                            "<td>" + xml[i].beizhu + "</td>\n" +
+                            "</tr>"
+                        );
+					}else if(goodsType==2){
+                        $(".liebiao").after("<tr class='val'> " +
+                            "<td>" + xml[i].gdname + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+                            "<td>" + "</td>\n" +
+                            "<td>" + "</td>\n" +
+                            "<td>" + "</td>\n" +
+                            "<td>" + xml[i].unit + "</td>\n" +
+                            "<td>" + xml[i].retailPrice + "</td>\n" +
+                            "<td>" + xml[i].goodsCount + "</td>\n" +
+                            "<td>" + xml[i].beizhu + "</td>\n" +
+                            "</tr>"
+                        );
+					}else if(goodsType==3){
+                        $(".liebiao").after("<tr class='val'> " +
+                            "<td>" + xml[i].gdname + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+							"<td>" + "</td>\n" +
+                            "<td>" + xml[i].jscpsph + "</td>\n" +
+                            "<td>" + xml[i].jpcpcyl + "</td>\n" +
+
+                            "<td>" + xml[i].unit + "</td>\n" +
+                            "<td>" + xml[i].retailPrice + "</td>\n" +
+                            "<td>" + xml[i].goodsCount + "</td>\n" +
+                            "<td>" + xml[i].beizhu + "</td>\n" +
+                            "</tr>"
+                        );
+					}else if(goodsType==4){
+                        $(".liebiao").after("<tr class='val'> " +
+                            "<td>" + xml[i].gdname + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + "</td>\n" +
+                            "<td>" + xml[i].yxcpsph + "</td>\n" +
+                            "<td>" + xml[i].yxcpcyl + "</td>\n" +
+
+                            "<td>" + xml[i].unit + "</td>\n" +
+                            "<td>" + xml[i].retailPrice + "</td>\n" +
+                            "<td>" + xml[i].goodsCount + "</td>\n" +
+                            "<td>" + xml[i].beizhu + "</td>\n" +
+                            "</tr>"
+                        );
+					}else if(goodsType==5){
+                        $(".liebiao").after("<tr class='val'> " +
+                            "<td>" + xml[i].gdname + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + "</td>\n" +
+                            "<td>" + "</td>\n" +
+                            "<td>" + "</td>\n" +
+
+                            "<td>" + xml[i].unit + "</td>\n" +
+                            "<td>" + xml[i].retailPrice + "</td>\n" +
+                            "<td>" + xml[i].goodsCount + "</td>\n" +
+                            "<td>" + xml[i].beizhu + "</td>\n" +
+                            "</tr>"
+                        );
+					}else if(goodsType==6){
+                        $(".liebiao").after("<tr class='val'> " +
+                            "<td>" + xml[i].gdname + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + xml[i].tyjproducfactorycolor +  "</td>\n" +
+                            "<td>" + "</td>\n" +
+                            "<td>" + "</td>\n" +
+
+                            "<td>" + xml[i].unit + "</td>\n" +
+                            "<td>" + xml[i].retailPrice + "</td>\n" +
+                            "<td>" + xml[i].goodsCount + "</td>\n" +
+                            "<td>" + xml[i].beizhu + "</td>\n" +
+                            "</tr>"
+                        );
+					}else if(goodsType==7){
+                        $(".liebiao").after("<tr class='val'> " +
+                            "<td>" + xml[i].gdname + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + xml[i].oldproducfactorycolor +  "</td>\n" +
+                            "<td>" + "</td>\n" +
+                            "<td>" + "</td>\n" +
+
+                            "<td>" + xml[i].unit + "</td>\n" +
+                            "<td>" + xml[i].retailPrice + "</td>\n" +
+                            "<td>" + xml[i].goodsCount + "</td>\n" +
+                            "<td>" + xml[i].beizhu + "</td>\n" +
+                            "</tr>"
+                        );
+					}else if(goodsType==8){
+                        $(".liebiao").after("<tr class='val'> " +
+                            "<td>" + xml[i].gdname + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" +  "</td>\n" +
+                            "<td>" + "</td>\n" +
+                            "<td>" + "</td>\n" +
+
+                            "<td>" + xml[i].unit + "</td>\n" +
+                            "<td>" + xml[i].retailPrice + "</td>\n" +
+                            "<td>" + xml[i].goodsCount + "</td>\n" +
+                            "<td>" + xml[i].beizhu + "</td>\n" +
+                            "</tr>"
+                        );
+					}else if(goodsType==9){
+                        $(".liebiao").after("<tr class='val'> " +
+                            "<td>" + xml[i].gdname + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + "</td>\n" +
+                            "<td>" + "</td>\n" +
+                            "<td>" + "</td>\n" +
+
+                            "<td>" + xml[i].unit + "</td>\n" +
+                            "<td>" + xml[i].retailPrice + "</td>\n" +
+                            "<td>" + xml[i].goodsCount + "</td>\n" +
+                            "<td>" + xml[i].beizhu + "</td>\n" +
+                            "</tr>"
+                        );
+					}
+
+
+                }
+            }
+        })
+    });
+</script>
+</body>
+</html>

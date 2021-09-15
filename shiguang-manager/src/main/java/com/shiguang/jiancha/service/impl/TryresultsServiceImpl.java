@@ -62,6 +62,11 @@ public class TryresultsServiceImpl implements TryresultsService {
     }
 
     @Override
+    public List<TryresultsDO> listYanguang(Map<String, Object> map) {
+        return tryresultsDao.listYanguang(map);
+    }
+
+    @Override
     public TryresultsDO  getTryresult(Map<String, Object> map) {
         return tryresultsDao.getTryresult(map);
     }

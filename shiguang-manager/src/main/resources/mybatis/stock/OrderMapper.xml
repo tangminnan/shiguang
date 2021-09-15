@@ -4,11 +4,15 @@
 <mapper namespace="com.shiguang.stock.dao.OrderDao">
 
     <select id="get" resultType="com.shiguang.stock.domain.OrderDO">
-		select `id`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,`price_sum`,
-		`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_id`,`position_name`,`create_time`,`danju_number`,`order_number`,`yundan_number`,
-		`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,`batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,
-		`factory`,`status`,`username`,`returnzt`
-		 from stock_order where id = #{value}
+		select o.`id`,o.`goods_num`,o.`goods_code`,o.`goods_name`,o.`goods_count`,o.`goods_type`,o.`mfrsid`,o.`brandname`,o.`retail_price`,o.`price_sum`,
+		o.`cost_price`,o.`cost_sum`,o.`whole_price`,o.`whole_sum`,o.`position_id`,o.`create_time`,o.`danju_number`,o.`order_number`,o.`yundan_number`,
+		o.`zhidan_people`,o.`danju_day`,o.`tuihuo_number`,o.`factory_number`,o.`beizhu`,o.`unit`,o.`batch`,o.`zhuce_number`,o.`produce_day`,o.`useday`,o.`classtype`,
+		o.`factory`,o.`status`,o.`username`,o.`returnzt`,m.`mfrsname`,p.`position_name`,g.`goodsname` as gdname
+		 from stock_order o
+		 left join c_mfrs m on o.mfrsid=m.mfrsid
+		 left join c_position p on  o.position_id=p.position_id
+		 left join c_goods g on o.goods_type=g.goodsid
+		 where o.id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.stock.domain.OrderDO">
@@ -249,7 +253,10 @@
         </foreach>
     </delete>
     <select id="getCode" resultType="com.shiguang.stock.domain.OrderDO">
-		select goods_name,goods_code,goods_count from stock_order where danju_number = #{danjuNumber}
+		select o.goods_name,o.goods_code,o.goods_count,o.factory,o.retail_price,p.produc_factorycolor
+        from stock_order o
+        left join  aa_produca p on o.goodsxinxiid=p.id
+        where danju_number = #{danjuNumber}
 	</select>
     <update id="updateStatus" parameterType="com.shiguang.stock.domain.OrderDO">
         update stock_order
@@ -290,4 +297,47 @@
         </set>
         where danju_number = #{danjuNumber}
     </update>
+
+    <select id="selectOrder" resultType="com.shiguang.stock.domain.OrderDO">
+        select
+        o.goods_num,o.goods_name,o.factory,produca.produc_factorycolor,m.materialname,produca.size,
+        o.create_time,o.goods_code,o.useday,o.batch,o.zhuce_number,o.produce_day,o.goods_count,
+        parts.parts_style,s.sph as jscpsph,c.cyl as jpcpcyl,l.lightbelow as jpcplightbelow,r.refractivityvalue as jpcprefractivityvalue,light.light_name as jpcplightname,lens.lens_name as jpcplensname,
+        sp.sph as yxcpsph,cy.cyl as yxcpcyl,yxcp.curvature as yxcpcurvature,yxcp.diameter as yxcpdiameter,u.usage_name as yxcpusagename,t.type_name as yxcptypename,
+        h.main_capacity,h.second_capacity,
+        tyj.size as tyjsize,tyj.produc_factorycolor as tyjproducfactorycolor,
+        old.size as oldsize,ol.degrees,old.produc_factorycolor as oldproducfactorycolor
+        from
+        stock_order o
+        left join aa_produca produca on o.goodsxinxiid=produca.id
+        left join c_material m on produca.materialid=m.materialid
+
+        left join aa_parts parts  on o.goodsxinxiid=parts.id
+
+        left join aa_jpcp jpcp  on o.goodsxinxiid=jpcp.id
+        left join a_sph s  on jpcp.sph_id=s.sph_id
+        left join a_cyl c  on jpcp.cyl_id=c.cyl_id
+        left join a_lightbelow l  on jpcp.lightbelow_id=l.lightbelow_id
+        left join c_refractivity r  on jpcp.refractivityid=r.refractivityid
+        left join p_light light  on jpcp.light_id=light.light_id
+        left join p_lens lens  on jpcp.lens_id=lens.lens_id
+
+        left join aa_yxcp yxcp  on o.goodsxinxiid=yxcp.id
+        left join a_sph sp  on yxcp.sph_id=sp.sph_id
+        left join a_cyl cy  on yxcp.cyl_id=cy.cyl_id
+        left join p_usage u on yxcp.usage_id=u.usage_id
+        left join p_type t on yxcp.type_id=t.type_id
+
+        left join aa_hly h on o.goodsxinxiid=h.id
+
+        left join aa_tyj tyj on o.goodsxinxiid=tyj.id
+
+        left join aa_oldlens old on o.goodsxinxiid=old.id
+        left join a_olddegrees ol on old.old_id=ol.old_id
+
+        <where>
+            <if test="danjuNumber != null and danjuNumber != ''">and o.danju_number = #{danjuNumber}</if>
+            <if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>
+        </where>
+    </select>
 </mapper>

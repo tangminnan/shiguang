@@ -32,4 +32,7 @@ public interface OrderDao {
 	int batchRemove(Long[] ids);
 	List<OrderDO> getCode(Map<String, Object> map);
 	int updateStatus(OrderDO order);
+
+	List<OrderDO> selectOrder(Map<String, Object> map);
+
 }

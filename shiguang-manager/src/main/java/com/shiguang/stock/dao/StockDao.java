@@ -3,6 +3,7 @@ package com.shiguang.stock.dao;
 
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.*;
+import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -137,4 +138,10 @@ public interface StockDao {
 
     //发出仓位库存减数量
     int outPosionJ(StockDO stockDO);
+
+    OrderDO getOeder(String danjuNumber);
+    List<OrderDO> getOederList(Map<String, Object> map);
+
+    OrderDO getShouhuo(String danjuNumber);
+    List<OrderDO> getShouhuoList(Map<String, Object> map);
 }

@@ -8,6 +8,7 @@ import com.shiguang.product.service.OlddegreesService;
 import com.shiguang.product.service.ProducaService;
 import com.shiguang.product.service.TechnologyService;
 import com.shiguang.stock.domain.OrderDO;
+import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.OrderService;
 import com.shiguang.stock.service.StockService;
@@ -144,10 +145,25 @@ public class StockController {
     @GetMapping("/edit/{id}")
     @RequiresPermissions("stock:stock:edit")
     String edit(@PathVariable("id") Long id, Model model) {
-        StockDO stock = stockService.get(id);
-        model.addAttribute("stock", stock);
+        OrderDO orderDO = orderService.get(id);
+        model.addAttribute("orderDO", orderDO);
+        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date time = orderDO.getDanjuDay();
+        String danjuDay = sdftime.format(time);
+        model.addAttribute("danjuDay", danjuDay);
         return "stock/stock/edit";
     }
+    @ResponseBody
+    @RequestMapping(value = "/selectOrder")
+    public List<OrderDO> selectOrder(String danjuNumber, Integer goodsType,Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber", danjuNumber);
+        map.put("goodsType", goodsType);
+        List<OrderDO> orderDOList = orderService.selectOrder(map);
+        model.addAttribute("orderDOList", orderDOList);
+        return orderDOList;
+    }
+
 
     /**
      * 保存
@@ -180,9 +196,14 @@ public class StockController {
         for (int i = 0; i < name.length; i++) {
             StockDO stockDO = new StockDO();
 
-            String goodsNum = name[i];
-            stockDO.setGoodsNum(goodsNum);
 
+
+            try {
+                String goodsNum = name[i];
+                stockDO.setGoodsNum(goodsNum);
+            }catch (ArrayIndexOutOfBoundsException e){
+                stockDO.setGoodsNum("");
+            }
             try {
                 String goodsCode = goodsCode1[i];
                 stockDO.setGoodsCode(goodsCode);
@@ -210,7 +231,10 @@ public class StockController {
             String goodsCount = goodCount1[i];
 
             //判断是否已存在商品
+            String goodsNum = name[i];
+            String goodsCode = goodsCode1[i];
             stockDO.setGoodsNum(goodsNum);
+            stockDO.setGoodsCode(goodsCode);
             stockDO.setPositionId(stock.getPositionId());
             stockDO.setPositionName(positionName);
             StockDO goodsNumList = stockService.haveNum(stockDO);
@@ -988,21 +1012,77 @@ public class StockController {
     /**
      * 浏览器打印二维码
      */
-    @GetMapping("/code")
-    public String code(String danjuNumber, Model model) {
-//        OrderDO  orderDO = Optional.ofNullable(orderService.getCode(danjuNumber)).orElseGet(OrderDO::new);
+    @GetMapping("/codeJingjia")
+    public String codeJingjia(String danjuNumber, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("danjuNumber",danjuNumber);
         List<OrderDO> orderDOS = orderService.getCode(map);
         model.addAttribute("orderDOS", orderDOS);
         for (OrderDO orderDO1 : orderDOS){
-//            String code = BarCodeUtils.generateBarCode128(orderDO1.getGoodsCode(), 10.0, 0.3, true, true);//条形码
             String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
             code = "data:image/png;base64," + code;
             orderDO1.setQRCode(code);
         }
-        // model.addAttribute("QRCode", "data:image/png;base64," + code);
+        return "/stock/stock/codeJingjia";
+    }
+    /**
+     * 浏览器打印二维码
+     */
+    @GetMapping("/code")
+    public String code(String danjuNumber, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber",danjuNumber);
+        List<OrderDO> orderDOS = orderService.getCode(map);
+        model.addAttribute("orderDOS", orderDOS);
+        for (OrderDO orderDO1 : orderDOS){
+            String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
+            code = "data:image/png;base64," + code;
+            orderDO1.setQRCode(code);
+        }
         return "/stock/stock/code";
     }
 
+    //打印
+    @GetMapping("/dayinOrder")
+    String dayinOrder(String danjuNumber, Model model) {
+        OrderDO getOeder = stockService.getOeder(danjuNumber);
+        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date time = getOeder.getDanjuDay();
+        String danjuDay = sdftime.format(time);
+        model.addAttribute("danjuDay", danjuDay);
+        model.addAttribute("getOeder", getOeder);
+        return "/stock/stock/dayinOrder";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getOederList")
+    public List<OrderDO> getOederList(String danjuNumber, Integer goodsType,Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber", danjuNumber);
+        map.put("goodsType", goodsType);
+        List<OrderDO> orderDOList = stockService.getOederList(map);
+        model.addAttribute("orderDOList", orderDOList);
+        return orderDOList;
+    } //打印
+    @GetMapping("/shouhuoOrder")
+    String shouhuoOrder(String danjuNumber, Model model) {
+        OrderDO getShouhuo = stockService.getShouhuo(danjuNumber);
+        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date time = getShouhuo.getDanjuDay();
+        String danjuDay = sdftime.format(time);
+        model.addAttribute("danjuDay", danjuDay);
+        model.addAttribute("getShouhuo", getShouhuo);
+        return "/stock/stock/shouhuoOrder";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getShouhuoList")
+    public List<OrderDO> getShouhuoList(String danjuNumber, Integer goodsType,Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber", danjuNumber);
+        map.put("goodsType", goodsType);
+        List<OrderDO> shouhuoList = stockService.getShouhuoList(map);
+        model.addAttribute("shouhuoList", shouhuoList);
+        return shouhuoList;
+    }
 }
