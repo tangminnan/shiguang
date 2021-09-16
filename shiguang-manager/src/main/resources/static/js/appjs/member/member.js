@@ -124,6 +124,9 @@ function load() {
                                         var h = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" onclick="detail(\''
                                             + row.id
                                             + '\')" style="text-decoration: none;">详情</a>';
+                                        var l = '<a class="btn btn-primary btn-xs" href="#" title="排队"  mce_href="#" onclick="line(\''
+                                            + row.id
+                                            + '\')" style="text-decoration: none;">排队</a>';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
@@ -133,7 +136,7 @@ function load() {
                                         var g = '<a class="btn btn-primary btn-xs" href="#" title="二维码打印"  mce_href="#" onclick="erDayin(\''
                                             + row.id
                                             + '\')" style="text-decoration: none;">二维码打印</a>';
-										return e + h + g + d ;
+										return e + h + l + g + d ;
 									}
 								} ]
 					});
@@ -231,6 +234,28 @@ function edit(id) {
 
 function erDayin(id) {
     window.open("/information/member/downLoadErWeiMaByMember?id="+id);
+}
+
+function line(id) {
+    layer.confirm('确定要排队？', {
+        btn : [ '确定', '取消' ]
+    }, function() {
+        $.ajax({
+            url : prefix+"/line",
+            type : "post",
+            data : {
+                'id' : id
+            },
+            success : function(r) {
+                if (r.code==0) {
+                    layer.msg(r.msg);
+                    reLoad();
+                }else{
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    })
 }
 
 function remove(id) {

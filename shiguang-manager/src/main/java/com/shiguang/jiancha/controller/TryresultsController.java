@@ -5,12 +5,16 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.jiancha.domain.TryresultsDO;
 import com.shiguang.jiancha.service.TryresultsService;
+import com.shiguang.line.domain.LineDO;
+import com.shiguang.line.service.LineService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +31,8 @@ import java.util.Map;
 public class TryresultsController {
     @Autowired
     private TryresultsService tryresultsService;
+    @Autowired
+    private LineService lineService;
 
     @GetMapping()
     @RequiresPermissions("jiancha:tryresults:tryresults")
@@ -67,6 +73,12 @@ public class TryresultsController {
     @PostMapping("/save")
     @RequiresPermissions("jiancha:tryresults:add")
     public R save(TryresultsDO tryresults) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        LineDO lineDO = new LineDO();
+        lineDO.setMemberNumber(tryresults.getCardNumber());
+        lineDO.setLineDate(simpleDateFormat.format(new Date()));
+        lineDO.setCallStatus("4");
+        lineService.updateByMember(lineDO);
         if (tryresultsService.save(tryresults) > 0) {
             return R.ok();
         }

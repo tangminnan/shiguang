@@ -1225,7 +1225,6 @@
                 btn: ['确定', '取消'],
                 yes: function(index, layero) {
                     var rows = $(layero).find("iframe")[0].contentWindow.sure();
-                    alert(rows);
                     $("#saleAccount").val(rows);
                     layer.close(index);//需要手动关闭窗口
                 }

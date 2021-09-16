@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.line.dao.LineDao">
+
+    <select id="get" resultType="com.shiguang.line.domain.LineDO">
+		select `id`,`member_number`,`sex`,`name`,`call_type`,`call_status`,`consult_room`,`line_time` from line where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.line.domain.LineDO">
+        select `id`,`member_number`,`sex`,`name`,`call_type`,`call_status`,`consult_room`,`line_time` from line
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="callType != null and callType != ''"> and call_type = #{callType} </if>
+            <if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>
+            and call_status in ('1','2','3') or call_status = '0'
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by line_time ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from line
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="callType != null and callType != ''"> and call_type = #{callType} </if>
+            <if test="callStatus != null and callStatus != ''"> and call_status = #{callStatus} </if>
+            <if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>
+            and call_status in ('1','2','3') or call_status = '0'
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.line.domain.LineDO">
+		insert into line
+		(
+			`id`,
+			`member_number`,
+			`sex`,
+			`name`,
+			`call_type`,
+			`call_status`,
+			`consult_room`,
+			`line_time`
+		)
+		values
+		(
+			#{id},
+			#{memberNumber},
+			#{sex},
+			#{name},
+			#{callType},
+			#{callStatus},
+			#{consultRoom},
+			#{lineTime}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.line.domain.LineDO">
+        update line
+        <set>
+            <if test="memberNumber != null">`member_number` = #{memberNumber}, </if>
+            <if test="sex != null">`sex` = #{sex}, </if>
+            <if test="name != null">`name` = #{name}, </if>
+            <if test="callType != null">`call_type` = #{callType}, </if>
+            <if test="callStatus != null">`call_status` = #{callStatus}, </if>
+            <if test="consultRoom != null">`consult_room` = #{consultRoom}, </if>
+            <if test="lineTime != null">`line_time` = #{lineTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateByMember" parameterType="com.shiguang.line.domain.LineDO">
+        update line
+        <set>
+            <if test="callStatus != null">`call_status` = #{callStatus}, </if>
+        </set>
+        where member_number = #{memberNumber} and date_format(line_time ,'%Y-%m-%d') = #{lineDate}
+    </update>
+
+    <delete id="remove">
+		delete from line where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from line where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

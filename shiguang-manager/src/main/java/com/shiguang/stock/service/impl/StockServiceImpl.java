@@ -185,6 +185,11 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public PositionDO findHegePosition(Map<String, Object> map) {
+        return stockDao.findHegePosition(map);
+    }
+
+    @Override
     public StockDO getGoodsNum(String goodsNum) {
         return stockDao.getGoodsNum(goodsNum);
     }

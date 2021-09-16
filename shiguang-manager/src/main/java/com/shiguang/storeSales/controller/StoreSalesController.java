@@ -254,7 +254,7 @@ public class StoreSalesController {
             salesDO.setIsJp(0L);
             salesDO.setIsJj("无");
         }
-        if (!"隐形".equals(salesDO.getStoreDescribe())){
+        if (!salesDO.getStoreDescribe().contains("隐形")){
             if ("镜架".equals(salesDO.getStoreDescribe())
                     || "镜片".equals(salesDO.getStoreDescribe())) {
                 if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
@@ -804,7 +804,7 @@ public class StoreSalesController {
         Map<String, Object> map = new HashMap<>();
         if (null != departNumber) {
             map.put("departNumber", departNumber);
-            PositionDO positionDO = stockService.findPosition(map);
+            PositionDO positionDO = stockService.findHegePosition(map);
             Long positionId = null;
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();
@@ -1216,10 +1216,16 @@ public class StoreSalesController {
             }
             if ("0".equals(params.get("yxType"))) {
                 String departNumber = ShiroUtils.getUser().getStoreNum();
+                Long positionId = null;
                 if (null != departNumber){
                     Map<String, Object> map = new HashMap<>();
                     map.put("departNumber", departNumber);
+                    PositionDO positionDO = stockService.findPosition(map);
+                    if (null != positionDO) {
+                        positionId = positionDO.getPositionId();
+                    }
                 }
+                query.put("positionId",positionId);
                 query.put("goodsType",goodsId);
                 List<StockDO> yxcpDOList = stockService.listYxcp(query);
                 int total = stockService.countYxcp(query);

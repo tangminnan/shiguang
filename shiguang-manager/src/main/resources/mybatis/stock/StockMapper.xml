@@ -919,9 +919,10 @@
     <select id="listYxcp" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,st.`classtype`,t.`type_name`,u.`usage_name`,
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,st.`classtype`,t.`type_name`,u.`usage_name`,cu.`unitname` as unit,
         y.`curvature`,s.`sph`,c.`cyl`
         from stock st left join aa_yxcp y on y.id = st.goodsxinxiid left join p_type t on t.type_id = y.type_id
+        left join c_unit cu on cu.unitid = y.unitid
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
         left join p_usage u on u.usage_id = y.usage_id
         <where>
@@ -961,6 +962,7 @@
     <select id="countYxcp" resultType="int">
         select count(*)
         from stock st left join aa_yxcp y on y.id = st.goodsxinxiid left join p_type t on t.type_id = y.type_id
+        left join c_unit cu on cu.unitid = y.unitid
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
         left join p_usage u on u.usage_id = y.usage_id
         <where>
@@ -991,10 +993,11 @@
     <select id="listYxdz" resultType="com.shiguang.stock.domain.StockDO">
         select
         y.`id`,y.`produc_num` as goodsNum,y.`produc_code` as goodsCode,y.`produc_name` as goodsName,1 as goodsCount,2 as classtype,y.`mfrsid`,y.`retail_price`,
-        t.`type_name`,u.`usage_name`,y.`sph_up`,y.`sph_down`,y.`cyl_up`,y.`cyl_down`,
+        t.`type_name`,u.`usage_name`,y.`sph_up`,y.`sph_down`,y.`cyl_up`,y.`cyl_down`,cu.`unitname` as unit,
         y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,y.`curvature_er`,s.`sph`,c.`cyl`
         from aa_yxdz y  left join p_type t on t.type_id = y.type_id
         left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
+        left join c_unit cu on cu.unitid = y.unitid
         left join p_usage u on u.usage_id = y.usage_id
         <where>
             <if test="id != null and id != ''">and y.id = #{id}</if>
@@ -1054,6 +1057,15 @@
         <where>
             <if test="departNumber != null and departNumber != ''">and depart_number = #{departNumber}</if>
             and position_order = '1'
+        </where>
+    </select>
+
+    <!-- 查询仓位 -->
+    <select id="findHegePosition" resultType="com.shiguang.mfrs.domain.PositionDO">
+        select `position_id`,`position_num`,`depart_number`,`depart_name`,`position_name` from c_position
+        <where>
+            <if test="departNumber != null and departNumber != ''">and depart_number = #{departNumber}</if>
+            and position_order = '2'
         </where>
     </select>
 

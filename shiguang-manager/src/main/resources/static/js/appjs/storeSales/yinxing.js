@@ -165,17 +165,6 @@ function load() {
                                 field : 'goodsCount',
                                 title : '数量',
                                 align : 'center'
-                            },
-                            {
-                                field : 'positionName',
-                                title : '仓位',
-                                align : 'center'
-                            }
-                            ,
-                            {
-                                field : 'goodsCount',
-                                title : '数量',
-                                align : 'center'
                             }
 						]
 					});

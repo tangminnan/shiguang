@@ -5,6 +5,8 @@ import com.shiguang.baseinfomation.service.*;
 import com.shiguang.common.utils.*;
 import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.service.ResultService;
+import com.shiguang.line.domain.LineDO;
+import com.shiguang.line.service.LineService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.storeSales.domain.SalesDO;
@@ -41,6 +43,8 @@ public class MemberController {
     private ResultService resultService;
     @Autowired
     private SalesService salesService;
+    @Autowired
+    private LineService lineService;
 
     @GetMapping()
     @RequiresPermissions("information:member:member")
@@ -307,6 +311,26 @@ public class MemberController {
     public R update( MemberDO member){
         memberService.update(member);
         return R.ok();
+    }
+
+    /**
+     * 排队
+     */
+    @PostMapping( "/line")
+    @ResponseBody
+    @RequiresPermissions("information:member:line")
+    public R line(Long id){
+        MemberDO memberDO = memberService.get(id);
+        LineDO lineDO = new LineDO();
+        lineDO.setMemberNumber(memberDO.getCardNumber());
+        lineDO.setName(memberDO.getName());
+        lineDO.setSex(memberDO.getSex());
+        lineDO.setCallStatus("0");
+        lineDO.setLineTime(new Date());
+        if(lineService.save(lineDO)>0){
+            return R.ok();
+        }
+        return R.error();
     }
 
     /**

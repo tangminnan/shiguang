@@ -6,6 +6,8 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.line.domain.LineDO;
+import com.shiguang.line.service.LineService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.optometry.domain.OptometryDO;
@@ -38,6 +40,8 @@ public class OptometryController {
     private CostService costService;
     @Autowired
     private SettlementService settlementService;
+    @Autowired
+    private LineService lineService;
 
     @GetMapping()
     @RequiresPermissions("information:optometry:optometry")
@@ -132,8 +136,14 @@ public class OptometryController {
     @PostMapping("/save")
     @RequiresPermissions("information:optometry:add")
     public R save(OptometryDO optometry) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //保存创建时间
         optometry.setCreateTime(new Date());
+        LineDO lineDO = new LineDO();
+        lineDO.setMemberNumber(optometry.getCardNumber());
+        lineDO.setLineDate(simpleDateFormat.format(new Date()));
+        lineDO.setCallStatus("4");
+        lineService.updateByMember(lineDO);
         if (optometryService.save(optometry) > 0) {
             return R.ok();
         }

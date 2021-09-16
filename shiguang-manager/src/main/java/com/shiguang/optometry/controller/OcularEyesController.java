@@ -6,6 +6,8 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.line.domain.LineDO;
+import com.shiguang.line.service.LineService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.optometry.domain.OcularEyesDO;
@@ -31,6 +33,8 @@ public class OcularEyesController {
     private MemberService memberService;
     @Autowired
     private CostService costService;
+    @Autowired
+    private LineService lineService;
 
     @GetMapping()
     @RequiresPermissions("information:ocular:ocular")
@@ -93,6 +97,12 @@ public class OcularEyesController {
     @PostMapping("/save")
     @RequiresPermissions("information:ocular:add")
     public R save( OcularEyesDO eyes){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        LineDO lineDO = new LineDO();
+        lineDO.setMemberNumber(eyes.getMemberNumber());
+        lineDO.setLineDate(simpleDateFormat.format(new Date()));
+        lineDO.setCallStatus("4");
+        lineService.updateByMember(lineDO);
         if(eyesService.save(eyes)>0){
             return R.ok();
         }
