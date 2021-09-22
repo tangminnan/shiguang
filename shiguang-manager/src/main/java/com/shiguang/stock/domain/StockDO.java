@@ -1043,6 +1043,24 @@ public class StockDO implements Serializable {
 
     private String producFactorycolor;
     private String materialname;
+    private String count;
+    private String style;
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
 
     public String getProducFactorycolor() {
         return producFactorycolor;

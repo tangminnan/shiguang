@@ -1316,7 +1316,7 @@
     <!--老花镜【商】【品】【查】【询】-->
     <select id="selectLhj" resultType="com.shiguang.product.domain.OldlensDO">
         select o.id as goodsxinxiid,
-        o.produc_num,o.produc_name,o.produc_code,o.produc_factory,o.factory,o.retail_price,o.tax_price,u.unitname,
+        o.produc_num,o.produc_name,o.produc_code,b.brandname,o.produc_factory,o.factory,o.retail_price,o.tax_price,u.unitname,
         old.degrees,o.size,o.produc_factorycolor,o.trade_price,o.transfer_price,mfrs.medicinecode,o.classtype
         from aa_oldlens o left join c_unit u on o.unitid=u.unitid left join a_olddegrees old on o.old_id=old.old_id
         left join c_brand b on o.brandnum=b.brandnum  left join c_mfrs mfrs on o.mfrsid=mfrs.mfrsid
@@ -1390,6 +1390,9 @@
              <if test="goodsCode != null and goodsCode != ''">and goods_code = #{goodsCode}</if>
              <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
              <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
+             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
+             <if test="brandname != null and brandname != ''">and brandname = #{brandname}</if>
+             <if test="goodsxinxiid != null and goodsxinxiid != ''">and goodsxinxiid = #{goodsxinxiid}</if>
          </where>
         order by id
     </select>

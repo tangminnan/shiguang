@@ -70,10 +70,10 @@ function load() {
                         field: 'danjuDay',
                         title: '制单日期'
                     },
-                    {
-                        field: 'goodsType',
-                        title: '类型'
-                    },
+                    // {
+                    //     field: 'goodsType',
+                    //     title: '类型'
+                    // },
                     // {
                     //     field: '',
                     //     title: '审核人'

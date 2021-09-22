@@ -31,7 +31,7 @@
 	<table class="tabA" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td><b>制造商：</b><span th:text="${getShouhuo.mfrsname}"></span></td>
-			<td style="margin-left: 300px"><b>收货日期：</b>上海轩杨</td>
+			<td style="margin-left: 300px"><b>收货日期：</b><span th:text="${newDate}"></span></td>
 			<td><b>收货单号：</b><span th:text="${getShouhuo.danjuNumber}"></span></td>
 		</tr>
 		<tr >
@@ -58,9 +58,9 @@
 			<td colspan="2"><b>备注：</b><span th:text="${getShouhuo.beizhu}"></span></td>
 		</tr>
 		<tr>
-			<td colspan="3"><b>制单人：</b><span th:text="${getShouhuo.zhidanPeople}"></span></td>
-			<td colspan="3"><b>审核人：</b><span th:text="${getShouhuo.zhidanPeople}"></span></td>
-			<td colspan="3"><b>审核日期：</b><span th:text="${danjuDay}"></span></td>
+			<td ><b>制单人：</b><span th:text="${getShouhuo.zhidanPeople}"></span></td>
+			<td ><b>审核人：</b><span th:text="${getShouhuo.zhidanPeople}"></span></td>
+			<td ><b>审核日期：</b><span th:text="${danjuDay}"></span></td>
 		</tr>
 	</table>
 </div>

@@ -215,6 +215,16 @@ public class SalesDO implements Serializable {
 	private String jjGoodsName;
 	//镜片名称
 	private String jpGoodsName;
+	private String jpGoodsNum;
+
+	public String getJpGoodsNum() {
+		return jpGoodsNum;
+	}
+
+	public void setJpGoodsNum(String jpGoodsNum) {
+		this.jpGoodsNum = jpGoodsNum;
+	}
+
 	//右眼镜片
 	private String rightjp;
 	//左眼镜片
@@ -1927,5 +1937,168 @@ public class SalesDO implements Serializable {
 	public void setLeftSJXLjyva(String leftSJXLjyva) {
 		this.leftSJXLjyva = leftSJXLjyva;
 	}
+	private String name;
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	private String rightsph;
+	private String leftsph;
+	private String rightcyl;
+	private String leftcyl;
+	private String rightzx;
+	private String leftzx;
+	private String rightAdd;
+	private String leftAdd;
+	private String rightSlj;
+	private String leftSlj;
+	private String rightJd;
+	private String leftJd;
+	private String rightFartj;
+	private String leftFartj;
+	private String rightNeartj;
+	private String leftNeartj;
+
+	public String getRightsph() {
+		return rightsph;
+	}
+
+	public void setRightsph(String rightsph) {
+		this.rightsph = rightsph;
+	}
+
+	public String getLeftsph() {
+		return leftsph;
+	}
+
+	public void setLeftsph(String leftsph) {
+		this.leftsph = leftsph;
+	}
+
+	public String getRightcyl() {
+		return rightcyl;
+	}
+
+	public void setRightcyl(String rightcyl) {
+		this.rightcyl = rightcyl;
+	}
+
+	public String getLeftcyl() {
+		return leftcyl;
+	}
+
+	public void setLeftcyl(String leftcyl) {
+		this.leftcyl = leftcyl;
+	}
+
+	public String getRightzx() {
+		return rightzx;
+	}
+
+	public void setRightzx(String rightzx) {
+		this.rightzx = rightzx;
+	}
+
+	public String getLeftzx() {
+		return leftzx;
+	}
+
+	public void setLeftzx(String leftzx) {
+		this.leftzx = leftzx;
+	}
+
+	public String getRightAdd() {
+		return rightAdd;
+	}
+
+	public void setRightAdd(String rightAdd) {
+		this.rightAdd = rightAdd;
+	}
+
+	public String getLeftAdd() {
+		return leftAdd;
+	}
+
+	public void setLeftAdd(String leftAdd) {
+		this.leftAdd = leftAdd;
+	}
+
+	public String getRightSlj() {
+		return rightSlj;
+	}
+
+	public void setRightSlj(String rightSlj) {
+		this.rightSlj = rightSlj;
+	}
+
+	public String getLeftSlj() {
+		return leftSlj;
+	}
+
+	public void setLeftSlj(String leftSlj) {
+		this.leftSlj = leftSlj;
+	}
+
+	public String getRightJd() {
+		return rightJd;
+	}
+
+	public void setRightJd(String rightJd) {
+		this.rightJd = rightJd;
+	}
+
+	public String getLeftJd() {
+		return leftJd;
+	}
+
+	public void setLeftJd(String leftJd) {
+		this.leftJd = leftJd;
+	}
+
+	public String getRightFartj() {
+		return rightFartj;
+	}
+
+	public void setRightFartj(String rightFartj) {
+		this.rightFartj = rightFartj;
+	}
+
+	public String getLeftFartj() {
+		return leftFartj;
+	}
+
+	public void setLeftFartj(String leftFartj) {
+		this.leftFartj = leftFartj;
+	}
+
+	public String getRightNeartj() {
+		return rightNeartj;
+	}
+
+	public void setRightNeartj(String rightNeartj) {
+		this.rightNeartj = rightNeartj;
+	}
+
+	public String getLeftNeartj() {
+		return leftNeartj;
+	}
+
+	public void setLeftNeartj(String leftNeartj) {
+		this.leftNeartj = leftNeartj;
+	}
+
+	private String leftRight;
+
+	public String getLeftRight() {
+		return leftRight;
+	}
+
+	public void setLeftRight(String leftRight) {
+		this.leftRight = leftRight;
+	}
 }

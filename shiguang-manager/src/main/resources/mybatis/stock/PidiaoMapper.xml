@@ -341,7 +341,6 @@
 		</where>
 		group by id
 	</select>
-
 	<select id="getpidiao" resultType="com.shiguang.stock.domain.PidiaoDO">
 		select
 		c.name as ings, d.depart_name as inbm, de.depart_name as outbm,
@@ -360,6 +359,7 @@
 		where p.pidiao_number = #{value}
 		group by p.pidiao_number
 	</select>
+
 	<select id="getpidiaoList" resultType="com.shiguang.stock.domain.PidiaoDO">
 		select p.goods_num,p.goods_name,p.unit,p.use_count,p.money,position_name,p.useday,p.batch,p.zhuce_number,p.brandname
 		from  stock_pidiao p

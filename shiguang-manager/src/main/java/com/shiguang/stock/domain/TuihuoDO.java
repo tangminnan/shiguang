@@ -29,6 +29,7 @@ public class TuihuoDO implements Serializable {
 	private String mfrsname;
 	//发出仓位id
 	private Long positionId;
+	private String positionName;
 	//备注
 	private String beizhu;
 	//商品信息id
@@ -47,6 +48,25 @@ public class TuihuoDO implements Serializable {
 	private String count;
 	//商品条码
 	private String goodsCode;
+	//三种方式
+	private String style;
+	private String retailPrice;
+
+	public String getRetailPrice() {
+		return retailPrice;
+	}
+
+	public void setRetailPrice(String retailPrice) {
+		this.retailPrice = retailPrice;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
 
 	/**
 	 * 设置：退货id
@@ -132,6 +152,15 @@ public class TuihuoDO implements Serializable {
 	public Long getPositionId() {
 		return positionId;
 	}
+
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
 	/**
 	 * 设置：备注
 	 */

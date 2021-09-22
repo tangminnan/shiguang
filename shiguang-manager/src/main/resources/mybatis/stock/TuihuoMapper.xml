@@ -4,11 +4,18 @@
 <mapper namespace="com.shiguang.stock.dao.TuihuoDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.TuihuoDO">
-		select `id`,`tuihuo_num`,`zhidan_people`,`danju_day`,`mfrsid`,`mfrsname`,`position_id`,`beizhu`,`goodsxinxiid`,`goods_num`,`goods_name`,`factory`,`unit`,`goods_count`,`count`,`goods_code` from stock_tuihuo where id = #{value}
+		select t.`id`,t.`tuihuo_num`,t.`zhidan_people`,t.`danju_day`,t.`mfrsid`,m.`mfrsname`,t.`position_id`,p.`position_name`,t.`beizhu`,t.`goodsxinxiid`,t.`goods_num`,
+		t.`goods_name`,t.`factory`,t.`unit`,t.`goods_count`,t.`count`,t.`goods_code`,t.`style`,t.`retail_price`
+		from stock_tuihuo t
+		left join c_mfrs m on t.mfrsid=m.mfrsid
+		left join c_position p on t.position_id=t.position_id
+		where t.id = #{value}
+		group by t.id
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.TuihuoDO">
-		select `id`,`tuihuo_num`,`zhidan_people`,`danju_day`,`mfrsid`,`mfrsname`,`position_id`,`beizhu`,`goodsxinxiid`,`goods_num`,`goods_name`,`factory`,`unit`,`goods_count`,`count`,`goods_code` from stock_tuihuo
+		select `id`,`tuihuo_num`,`zhidan_people`,`danju_day`,`mfrsid`,`mfrsname`,`position_id`,`beizhu`,`goodsxinxiid`,`goods_num`,
+		`goods_name`,`factory`,`unit`,`goods_count`,`count`,`goods_code`,`style` ,`retail_price`from stock_tuihuo
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
@@ -26,6 +33,8 @@
 		  		  <if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
 		  		  <if test="count != null and count != ''"> and count = #{count} </if>
 		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+		  		  <if test="style != null and style != ''"> and style = #{style} </if>
+		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -59,6 +68,8 @@
 		  		  <if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
 		  		  <if test="count != null and count != ''"> and count = #{count} </if>
 		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+		  		  <if test="style != null and style != ''"> and style = #{style} </if>
+		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
 		  		</where>
 	</select>
 	 
@@ -79,7 +90,9 @@
 			`unit`, 
 			`goods_count`, 
 			`count`, 
-			`goods_code`
+			`goods_code`,
+			`style`,
+			`retail_price`
 		)
 		values
 		(
@@ -97,7 +110,9 @@
 			#{unit}, 
 			#{goodsCount}, 
 			#{count}, 
-			#{goodsCode}
+			#{goodsCode},
+			#{style},
+			#{retailPrice}
 		)
 	</insert>
 	 
@@ -118,7 +133,9 @@
 			<if test="unit != null">`unit` = #{unit}, </if>
 			<if test="goodsCount != null">`goods_count` = #{goodsCount}, </if>
 			<if test="count != null">`count` = #{count}, </if>
-			<if test="goodsCode != null">`goods_code` = #{goodsCode}</if>
+			<if test="goodsCode != null">`goods_code` = #{goodsCode},</if>
+			<if test="style != null">`style` = #{style},</if>
+			<if test="retailPrice != null">`retail_price` = #{retailPrice}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -135,7 +152,8 @@
 	</delete>
 
 	<select id="selectJingjia" resultType="com.shiguang.stock.domain.StockDO">
-		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,p.produc_factorycolor,m.materialname,p.size,s.retail_price,po.position_name,s.goods_count
+		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,p.produc_factorycolor,m.materialname,p.size,s.retail_price,po.position_name,
+		s.goods_count,s.goodsxinxiid
 		from  stock s
 		left join aa_produca p on s.goodsxinxiid= p.id
 		left join c_material m on p.materialid=m.materialid
@@ -144,21 +162,31 @@
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
 			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
 			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
 	</select>
 	<select id="selectPeijian" resultType="com.shiguang.stock.domain.StockDO">
-		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,p.parts_style,s.retail_price,s.goods_count,po.position_name
+		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,p.parts_style,s.retail_price,s.goods_count,po.position_name,s.goodsxinxiid
 		from  stock s
 		left join aa_parts p on s.goodsxinxiid= p.id
 		left join c_position po on  s.position_id=po.position_id
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
 	</select>
 	<select id="selectJpdz" resultType="com.shiguang.stock.domain.StockDO">
-		select s.goods_num, s.goods_code, s.goods_name,s.unit,
+		select s.goods_num, s.goods_code, s.goods_name,s.unit,s.goodsxinxiid,
 		j.sph_up,j.sph_down,j.cyl_up,j.cyl_down,j.lightbelow_right,j.lightbelow_left,re.refractivityvalue,l.light_name,g.gradual_name,f.function_name,
 		s.retail_price,s.goods_count,po.position_name
 		from  stock s
@@ -169,13 +197,20 @@
 		left join p_gradual g on j.gradual_id= g.gradual_id
 		left join p_function f on j.function_id=f.function_id
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
 	</select>
 	<select id="selectJpcp" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.unit,sp.sph,cy.cyl,l.lightbelow,r.refractivityvalue,li.light_name,g.gradual_name,
-		f.function_name,s.retail_price,po.position_name,s.goods_count
+		f.function_name,s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from  stock s
 		left join aa_jpcp j on s.goodsxinxiid= j.id
 		left join a_sph sp on j.sph_id=sp.sph_id
@@ -186,26 +221,40 @@
 		left join p_gradual g on j.gradual_id = g.gradual_id
 		left join p_function f on j.function_id=f.function_id
 		left join c_position po on s.position_id=po.position_id
-			<where>
-				<if test="id != null and id != ''"> and id = #{id} </if>
-			</where>
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 			group by s.goods_code
 	</select>
 	<select id="selectYxdz" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.unit,y.sph_up,y.sph_down,y.cyl_up,y.cyl_down,y.curvature_one,y.curvature_yi,
-		y.diameter_one,y.diameter_yi,u.usage_name,t.type_name,s.retail_price,po.position_name,s.goods_count
+		y.diameter_one,y.diameter_yi,u.usage_name,t.type_name,s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
 		left join aa_yxdz y on s.goodsxinxiid=y.id
 		left join p_usage u on y.usage_id=u.usage_id
 		left join p_type t on y.type_id=t.type_id
 		left join c_position po on s.position_id=po.position_id
-			<where>
-				<if test="id != null and id != ''"> and id = #{id} </if>
-			</where>
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 			group by s.goods_code
 	</select>
 	<select id="selectYxcp" resultType="com.shiguang.stock.domain.StockDO">
-		select s.goods_num,s.goods_code,s.goods_name,s.unit,sp.sph,cy.cyl,y.curvature,y.diameter,u.usage_name,t.type_name,s.retail_price,po.position_name,s.goods_count
+		select s.goods_num,s.goods_code,s.goods_name,s.unit,sp.sph,cy.cyl,y.curvature,y.diameter,u.usage_name,t.type_name,s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
 		left join aa_yxcp y on s.goodsxinxiid=y.id
 		left join a_sph sp on y.sph_id =sp.sph_id
@@ -213,68 +262,183 @@
 		left join p_usage u on y.usage_id=u.usage_id
 		left join p_type t on y.type_id=t.type_id
 		left join c_position po on s.position_id=po.position_id
-				<where>
-					<if test="id != null and id != ''"> and id = #{id} </if>
-				</where>
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 				group by s.goods_code
 	</select>
 	<select id="selectHly" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
-		h.main_capacity,h.second_capacity,s.retail_price,po.position_name,s.goods_count
+		h.main_capacity,h.second_capacity,s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
 		left join aa_hly h on s.goodsxinxiid=h.id
 		left join c_position po on s.position_id=po.position_id
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
 	</select>
 	<select id="selectTyj" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
 		t.produc_factorycolor,t.size,
-		s.retail_price,po.position_name,s.goods_count
+		s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
 		left join aa_tyj t on s.goodsxinxiid=t.id
 		left join c_position po on s.position_id=po.position_id
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
 	</select>
 	<select id="selectLhj" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
 		ol.degrees,o.size,o.produc_factorycolor,
-		s.retail_price,po.position_name,s.goods_count
+		s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
 		left join aa_oldlens o on s.goodsxinxiid=o.id
 		left join a_olddegrees ol on o.old_id= o.old_id
 		left join c_position po on s.position_id=po.position_id
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
 	</select>
 	<select id="selectHc" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
-		s.retail_price,po.position_name,s.goods_count
+		s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
 		left join aa_hc h on s.goodsxinxiid=h.id
 		left join c_position po on s.position_id=po.position_id
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
 	</select>
 	<select id="selectSg" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
-		s.retail_price,po.position_name,s.goods_count
+		s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
 		left join aa_hc h on s.goodsxinxiid=h.id
 		left join c_position po on s.position_id=po.position_id
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and s.goods_num = #{goodsNum} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
+			<if test="goodsName != null and goodsName != ''"> and s.goods_name = #{goodsName} </if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
+	</select>
+
+	<select id="orderList" resultType="com.shiguang.stock.domain.TuihuoDO">
+		select t.`id`,t.`tuihuo_num`,t.`zhidan_people`,t.`danju_day`,t.`mfrsid`,m.`mfrsname`,t.`position_id`,p.position_name,t.`beizhu`,t.`style`
+		from stock_tuihuo t
+		left join c_mfrs m on t.mfrsid=m.mfrsid
+		left join c_position p on t.position_id=t.position_id
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
+			<if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
+			<if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+			<if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+			<if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+			<if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+			<if test="goodsxinxiid != null and goodsxinxiid != ''"> and goodsxinxiid = #{goodsxinxiid} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
+			<if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+			<if test="factory != null and factory != ''"> and factory = #{factory} </if>
+			<if test="unit != null and unit != ''"> and unit = #{unit} </if>
+			<if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
+			<if test="count != null and count != ''"> and count = #{count} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+			<if test="style != null and style != ''"> and style = #{style} </if>
+		</where>
+		group by tuihuo_num  order by id desc
+	</select>
+	<select id="orderCount" resultType="int">
+		select count(*)
+		from stock_tuihuo t
+		left join c_mfrs m on t.mfrsid=m.mfrsid
+		left join c_position p on t.position_id=t.position_id
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
+			<if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
+			<if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+			<if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+			<if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+			<if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+			<if test="goodsxinxiid != null and goodsxinxiid != ''"> and goodsxinxiid = #{goodsxinxiid} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
+			<if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+			<if test="factory != null and factory != ''"> and factory = #{factory} </if>
+			<if test="unit != null and unit != ''"> and unit = #{unit} </if>
+			<if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
+			<if test="count != null and count != ''"> and count = #{count} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+			<if test="style != null and style != ''"> and style = #{style} </if>
+		</where>
+	</select>
+
+	<select id="selectOrder"  resultType="com.shiguang.stock.domain.TuihuoDO">
+		select goods_num ,goods_name,factory,unit,goods_count,count,goods_code
+		from  stock_tuihuo
+		<where>
+			<if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
+		</where>
+		group by id
+	</select>
+
+	<select id="getDanju" resultType="com.shiguang.stock.domain.TuihuoDO">
+		select t.tuihuo_num,t.danju_day,m.mfrsname,p.position_name,t.beizhu,t.zhidan_people,t.style
+		from stock_tuihuo t
+		left join c_mfrs m on t.mfrsid
+		left join c_position p on t.position_id=p.position_id
+		where t.tuihuo_num = #{value}
+		group by  t.tuihuo_num
+	</select>
+	<select id="getDanjuList" resultType="com.shiguang.stock.domain.TuihuoDO">
+		select goods_num,goods_name,unit,count,retail_price,goods_code
+		from stock_tuihuo
+		<where>
+			<if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
+		</where>
+		group by id
 	</select>
 
 </mapper>

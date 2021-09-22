@@ -53,10 +53,10 @@
                 </select>
                 <div id="jp" style="display: none">
                     <label class="radio-inline">
-                        <input type="radio" name="classtype"  value="1" checked /> 成品片
+                        <input id="xz1" type="radio" name="classtype"  value="1" checked /> 成品片
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="classtype" value="2" /> 订做片
+                        <input id="xz2" type="radio" name="classtype" value="2" /> 订做片
                     </label>
                 </div>
             </td>
@@ -66,14 +66,14 @@
                 <input id="positionName" name="positionName" th:value="${positionName}" readonly type="text"/>
             </td>
         </tr>
-        <tr>
-            <input id="outPosition" type="hidden" th:value="${outPosition}"/>
-            <td>标准零售价格：</td>
-            <td>
-                <input id="retailPrice" name="retailPrice" type="text"/>
+        <!--<tr>-->
+            <!--<input id="outPosition" type="hidden" th:value="${outPosition}"/>-->
+            <!--<td>标准零售价格：</td>-->
+            <!--<td>-->
+                <!--<input id="retailPrice" name="retailPrice" type="text"/>-->
                 <!--~ <input name="retailPrice2" type="text"/>-->
-            </td>
-        </tr>
+            <!--</td>-->
+        <!--</tr>-->
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
@@ -101,6 +101,8 @@
                         <td>标准零售价</td>
                         <td>仓位</td>
                         <td>库存数量</td>
+                        <td style="display: none">商品条码</td>
+                        <td style="display: none">goodsxinxiid</td>
                     </tr>
                     <tr style="font-weight:bold;font-size: 15px;" class="heji1"></tr>
                 </table>
@@ -119,6 +121,7 @@
                         <td>标准零售价</td>
                         <td>仓位</td>
                         <td>库存数量</td>
+                        <td style="display: none">商品条码</td>
                     </tr>
                     <tr style="font-weight:bold;font-size: 15px;" class="heji2"></tr>
                 </table>
@@ -142,6 +145,7 @@
                         <td>标准零售价</td>
                         <td>仓位</td>
                         <td>库存数量</td>
+                        <td style="display: none">商品条码</td>
                     </tr>
                     <tr style="font-weight:bold;font-size: 15px;" class="heji3"></tr>
                 </table>
@@ -164,6 +168,7 @@
                         <td>标准零售价</td>
                         <td>仓位</td>
                         <td>库存数量</td>
+                        <td style="display: none">商品条码</td>
                     </tr>
                     <tr style="font-weight:bold;font-size: 15px;" class="heji4"></tr>
                 </table>
@@ -184,6 +189,7 @@
                         <td>标准零售价</td>
                         <td>仓位</td>
                         <td>库存数量</td>
+                        <td style="display: none">商品条码</td>
                     </tr>
                     <tr style="font-weight:bold;font-size: 15px;" class="heji5"></tr>
                 </table>
@@ -203,6 +209,7 @@
                         <td>标准零售价</td>
                         <td>仓位</td>
                         <td>库存数量</td>
+                        <td style="display: none">商品条码</td>
                     </tr>
                     <tr style="font-weight:bold;font-size: 15px;" class="heji6"></tr>
                 </table>
@@ -223,6 +230,7 @@
                         <td>标准零售价</td>
                         <td>仓位</td>
                         <td>库存数量</td>
+                        <td style="display: none">商品条码</td>
                     </tr>
                     <tr style="font-weight:bold;font-size: 15px;" class="heji7"></tr>
                 </table>
@@ -240,6 +248,7 @@
                         <td>标准零售价</td>
                         <td>仓位</td>
                         <td>库存数量</td>
+                        <td style="display: none">商品条码</td>
                     </tr>
                     <tr style="font-weight:bold;font-size: 15px;" class="heji8"></tr>
                 </table>
@@ -257,6 +266,7 @@
                         <td>标准零售价</td>
                         <td>仓位</td>
                         <td>库存数量</td>
+                        <td style="display: none">商品条码</td>
                     </tr>
 
                     <tr style="font-weight:bold;font-size: 15px;" class="heji9"></tr>
@@ -321,7 +331,11 @@
         var mfrsid = $('#mfrsid').val();
         var positionId = $('#positionId').val();
 
-        alert(goodsType)
+
+        var  goodsNum=$('#goodsNum').val();
+        var  goodsCode=$('#goodsCode').val();
+        var  goodsName=$('#goodsName').val();
+        var  brandname=$('#brandname').val();
         if (goodsType == ""){
             layer.alert("请选择商品类型！")
         }
@@ -351,13 +365,53 @@
                 data: {
                     'mfrsid': mfrsid,
                     'positionId': positionId,
-                    'goodsType': goodsType
+                    'goodsType': goodsType,
+                    'goodsNum': goodsNum,
+                    'goodsCode': goodsCode,
+                    'goodsName': goodsName,
+                    'brandname': brandname
+
 
                 },
                 success: function (xml) {
                     for (var i = 0; i < xml.length; i++) {
-                        // alert(xml[i].producFactorycolor)
-                        // if ()
+                        if(null == xml[i].goodsNum){
+                            xml[i].goodsNum="";
+                        }
+                        if(null == xml[i].goodsName){
+                            xml[i].goodsName="";
+                        }
+                         if(null == xml[i].factory){
+                            xml[i].factory="";
+                        }
+                         if(null == xml[i].unit){
+                            xml[i].unit="";
+                        }
+                         if(null == xml[i].producFactorycolor){
+                            xml[i].producFactorycolor="";
+                        }
+                        if(null == xml[i].materialname){
+                            xml[i].materialname="";
+                        }
+                        if(null == xml[i].size){
+                            xml[i].size="";
+                        }
+                        if(null == xml[i].retailPrice){
+                            xml[i].retailPrice="";
+                        }
+                        if(null == xml[i].positionName){
+                            xml[i].positionName="";
+                        }
+                        if(null == xml[i].goodsCount){
+                            xml[i].goodsCount="";
+                        }
+                        if(null == xml[i].goodsCode){
+                            xml[i].goodsCode="";
+                        }
+                        if(null == xml[i].goodsxinxiid){
+                            xml[i].goodsxinxiid="";
+                        }
+
                         $(".heji1").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
                             "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
@@ -369,12 +423,15 @@
                             "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
                             "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
                             "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
                             "</tr>");
                     }
                 }
             })
         } else if (goodsType == 2) {
-            $(".val1").remove();
+            $(".val").remove();
+            $(".val2").remove();
             $(".val3").remove();
             $(".val4").remove();
             $(".val5").remove();
@@ -391,9 +448,69 @@
             tab7.style = "display: none";
             tab8.style = "display: none";
             tab9.style = "display: none";
+            $.ajax({
+                url: '/stock/tuihuo/selectpeijian',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    'mfrsid': mfrsid,
+                    'positionId': positionId,
+                    'goodsType': goodsType
+
+                },
+                success: function (xml) {
+                    for (var i = 0; i < xml.length; i++) {
+                        if(null == xml[i].goodsNum){
+                            xml[i].goodsNum="";
+                        }
+                        if(null == xml[i].goodsName){
+                            xml[i].goodsName="";
+                        }
+                        if(null == xml[i].factory){
+                            xml[i].factory="";
+                        }
+                        if(null == xml[i].unit){
+                            xml[i].unit="";
+                        }
+                        if(null == xml[i].partsStyle){
+                            xml[i].partsStyle="";
+                        }
+                        if(null == xml[i].retailPrice){
+                            xml[i].retailPrice="";
+                        }
+                        if(null == xml[i].positionName){
+                            xml[i].positionName="";
+                        }
+                        if(null == xml[i].goodsCount){
+                            xml[i].goodsCount="";
+                        }
+                        if(null == xml[i].goodsCode){
+                            xml[i].goodsCode="";
+                        }
+                        if(null == xml[i].goodsxinxiid){
+                            xml[i].goodsxinxiid="";
+                        }
+
+                        $(".heji2").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
+                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                            "<td name='partsStyle'>" + xml[i].partsStyle + "</td>\n" +
+                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                            "</tr>");
+                    }
+                }
+            })
         } else if (goodsType == 3) {
-            $(".val1").remove();
+
+            $(".val").remove();
             $(".val2").remove();
+            $(".val3").remove();
             $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
@@ -409,10 +526,208 @@
             tab7.style = "display: none";
             tab8.style = "display: none";
             tab9.style = "display: none";
+            var classtype =$('input:radio:checked').val();
+            if (classtype == 1){
+                $.ajax({
+                    url: '/stock/tuihuo/selectJpcp',
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        'mfrsid': mfrsid,
+                        'positionId': positionId,
+                        'goodsType': goodsType,
+                        'classtype':classtype,
+                        'goodsNum': goodsNum,
+                        'goodsCode': goodsCode,
+                        'goodsName': goodsName,
+                        'brandname': brandname
+
+                    },
+                    success: function (xml) {
+                        for (var i = 0; i < xml.length; i++) {
+                            if(null == xml[i].goodsNum){
+                                xml[i].goodsNum="";
+                            }
+                            if(null == xml[i].goodsName){
+                                xml[i].goodsName="";
+                            }
+                            if(null == xml[i].factory){
+                                xml[i].factory="";
+                            }
+                            if(null == xml[i].unit){
+                                xml[i].unit="";
+                            }
+                            if(null == xml[i].sph){
+                                xml[i].sph="";
+                            }
+                            if(null == xml[i].cyl){
+                                xml[i].cyl="";
+                            }
+                            if(null == xml[i].lightbelow){
+                                xml[i].lightbelow="";
+                            }
+                            if(null == xml[i].refractivityvalue){
+                                xml[i].refractivityvalue="";
+                            }
+                            if(null == xml[i].lightName){
+                                xml[i].lightName="";
+                            }
+                            if(null == xml[i].gradualName){
+                                xml[i].gradualName="";
+                            }
+                            if(null == xml[i].functionName){
+                                xml[i].functionName="";
+                            }
+
+
+                            if(null == xml[i].retailPrice){
+                                xml[i].retailPrice="";
+                            }
+                            if(null == xml[i].positionName){
+                                xml[i].positionName="";
+                            }
+                            if(null == xml[i].goodsCount){
+                                xml[i].goodsCount="";
+                            }
+                            if(null == xml[i].goodsCode){
+                                xml[i].goodsCode="";
+                            }
+                            if(null == xml[i].goodsxinxiid){
+                                xml[i].goodsxinxiid="";
+                            }
+
+                            $(".heji3").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                                "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                                "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                                "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                                "<td name='factory' style='display: none'>"+ "</td>\n" +
+                                "<td name='sph'>" + xml[i].sph + "</td>\n" +
+                                "<td name='cyl'>" + xml[i].cyl + "</td>\n" +
+                                "<td name='lightbelow'>" + xml[i].lightbelow + "</td>\n" +
+                                "<td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
+                                "<td name='lightName'>" + xml[i].lightName + "</td>\n" +
+                                "<td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
+                                "<td name='functionName'>" + xml[i].functionName + "</td>\n" +
+
+                                "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                                "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                                "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                                "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                                "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                                "</tr>");
+                        }
+                    }
+                })
+            } else if (classtype ==2){
+                $.ajax({
+                    url: '/stock/tuihuo/selectJpdz',
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        'mfrsid': mfrsid,
+                        'positionId': positionId,
+                        'goodsType': goodsType,
+                        'classtype':classtype,
+                        'goodsNum': goodsNum,
+                        'goodsCode': goodsCode,
+                        'goodsName': goodsName,
+                        'brandname': brandname
+
+                    },
+                    success: function (xml) {
+                        for (var i = 0; i < xml.length; i++) {
+                            if(null == xml[i].goodsNum){
+                                xml[i].goodsNum="";
+                            }
+                            if(null == xml[i].goodsName){
+                                xml[i].goodsName="";
+                            }
+                            if(null == xml[i].factory){
+                                xml[i].factory="";
+                            }
+                            if(null == xml[i].unit){
+                                xml[i].unit="";
+                            }
+                            if(null == xml[i].sphUp){
+                                xml[i].sphUp="";
+                            }
+                             if(null == xml[i].sphDown){
+                                xml[i].sphDown="";
+                            }
+
+                            if(null == xml[i].cylUp){
+                                xml[i].cylUp="";
+                            }
+                            if(null == xml[i].cylDown){
+                                xml[i].cylDown="";
+                            }
+
+                            if(null == xml[i].lightbelowRight){
+                                xml[i].lightbelowRight="";
+                            }
+                            if(null == xml[i].lightbelowLeft){
+                                xml[i].lightbelowLeft="";
+                            }
+
+                            if(null == xml[i].refractivityvalue){
+                                xml[i].refractivityvalue="";
+                            }
+                            if(null == xml[i].lightName){
+                                xml[i].lightName="";
+                            }
+                            if(null == xml[i].gradualName){
+                                xml[i].gradualName="";
+                            }
+                            if(null == xml[i].functionName){
+                                xml[i].functionName="";
+                            }
+
+
+                            if(null == xml[i].retailPrice){
+                                xml[i].retailPrice="";
+                            }
+                            if(null == xml[i].positionName){
+                                xml[i].positionName="";
+                            }
+                            if(null == xml[i].goodsCount){
+                                xml[i].goodsCount="";
+                            }
+                            if(null == xml[i].goodsCode){
+                                xml[i].goodsCode="";
+                            }
+                            if(null == xml[i].goodsxinxiid){
+                                xml[i].goodsxinxiid="";
+                            }
+
+                            $(".heji3").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                                "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                                "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                                "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                                "<td name='factory' style='display: none'>"+ "</td>\n" +
+                                "<td name='sph'>" + xml[i].sphUp+ xml[i].sphDown + "</td>\n" +
+                                "<td name='cyl'>" + xml[i].cylUp+ xml[i].cylDown+ "</td>\n" +
+                                "<td name='lightbelow'>" + xml[i].lightbelowRight+ xml[i].lightbelowLeft + "</td>\n" +
+                                "<td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
+                                "<td name='lightName'>" + xml[i].lightName + "</td>\n" +
+                                "<td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
+                                "<td name='functionName'>" + xml[i].functionName + "</td>\n" +
+
+                                "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                                "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                                "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                                "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                                "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                                "</tr>");
+                        }
+                    }
+                })
+            }
+
         } else if (goodsType == 4) {
-            $(".val1").remove();
+            $(".val").remove();
             $(".val2").remove();
             $(".val3").remove();
+            $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
             $(".val7").remove();
@@ -427,11 +742,210 @@
             tab7.style = "display: none";
             tab8.style = "display: none";
             tab9.style = "display: none";
+            var classtype =$('input:radio:checked').val();
+            if (classtype == 1){
+                $.ajax({
+                    url: '/stock/tuihuo/selectYxcp',
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        'mfrsid': mfrsid,
+                        'positionId': positionId,
+                        'goodsType': goodsType,
+                        'classtype':classtype,
+                        'goodsNum': goodsNum,
+                        'goodsCode': goodsCode,
+                        'goodsName': goodsName,
+                        'brandname': brandname
+                    },
+                    success: function (xml) {
+                        for (var i = 0; i < xml.length; i++) {
+                            if(null == xml[i].goodsNum){
+                                xml[i].goodsNum="";
+                            }
+                            if(null == xml[i].goodsName){
+                                xml[i].goodsName="";
+                            }
+                            if(null == xml[i].factory){
+                                xml[i].factory="";
+                            }
+                            if(null == xml[i].unit){
+                                xml[i].unit="";
+                            }
+                            if(null == xml[i].sph){
+                                xml[i].sph="";
+                            }
+                            if(null == xml[i].cyl){
+                                xml[i].cyl="";
+                            }
+
+
+                            if(null == xml[i].curvature){
+                                xml[i].curvature="";
+                            }
+                            if(null == xml[i].diameter){
+                                xml[i].diameter="";
+                            }
+
+                            if(null == xml[i].usageName){
+                                xml[i].usageName="";
+                            }
+
+                            if(null == xml[i].typeName){
+                                xml[i].typeName="";
+                            }
+
+                            if(null == xml[i].retailPrice){
+                                xml[i].retailPrice="";
+                            }
+                            if(null == xml[i].positionName){
+                                xml[i].positionName="";
+                            }
+                            if(null == xml[i].goodsCount){
+                                xml[i].goodsCount="";
+                            }
+                            if(null == xml[i].goodsCode){
+                                xml[i].goodsCode="";
+                            }
+                            if(null == xml[i].goodsxinxiid){
+                                xml[i].goodsxinxiid="";
+                            }
+
+                            $(".heji4").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                                "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                                "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                                "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                                "<td name='factory' style='display: none'>"+ "</td>\n" +
+                                "<td name='sph'>" + xml[i].sph + "</td>\n" +
+                                "<td name='cyl'>" + xml[i].cyl + "</td>\n" +
+                                "<td name='curvature'>" + xml[i].curvature + "</td>\n" +
+
+                                "<td name='diameter'>" + xml[i].diameter + "</td>\n" +
+                                "<td name='usageName'>" + xml[i].usageName + "</td>\n" +
+
+                                "<td name='typeName'>" + xml[i].typeName + "</td>\n" +
+
+                                "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                                "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                                "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                                "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                                "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                                "</tr>");
+                        }
+                    }
+                })
+            } else if (classtype ==2){
+                $.ajax({
+                    url: '/stock/tuihuo/selectYxdz',
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        'mfrsid': mfrsid,
+                        'positionId': positionId,
+                        'goodsType': goodsType,
+                        'classtype':classtype,
+                        'goodsNum': goodsNum,
+                        'goodsCode': goodsCode,
+                        'goodsName': goodsName,
+                        'brandname': brandname
+
+
+                    },
+                    success: function (xml) {
+                        for (var i = 0; i < xml.length; i++) {
+                            if(null == xml[i].goodsNum){
+                                xml[i].goodsNum="";
+                            }
+                            if(null == xml[i].goodsName){
+                                xml[i].goodsName="";
+                            }
+                            if(null == xml[i].factory){
+                                xml[i].factory="";
+                            }
+                            if(null == xml[i].unit){
+                                xml[i].unit="";
+                            }
+                            if(null == xml[i].sphUp){
+                                xml[i].sphUp="";
+                            }
+                            if(null == xml[i].sphDown){
+                                xml[i].sphDown="";
+                            }
+
+                            if(null == xml[i].cylUp){
+                                xml[i].cylUp="";
+                            }
+                            if(null == xml[i].cylDown){
+                                xml[i].cylDown="";
+                            }
+
+
+                            if(null == xml[i].curvatureOne){
+                                xml[i].curvatureOne="";
+                            }
+                            if(null == xml[i].curvatureYi){
+                                xml[i].curvatureYi="";
+                            }
+                            if(null == xml[i].diameterOne){
+                                xml[i].diameterOne="";
+                            }
+                            if(null == xml[i].diameterYi){
+                                xml[i].diameterYi="";
+                            }
+
+                            if(null == xml[i].usageName){
+                                xml[i].usageName="";
+                            }
+
+                            if(null == xml[i].typeName){
+                                xml[i].typeName="";
+                            }
+
+                            if(null == xml[i].retailPrice){
+                                xml[i].retailPrice="";
+                            }
+                            if(null == xml[i].positionName){
+                                xml[i].positionName="";
+                            }
+                            if(null == xml[i].goodsCount){
+                                xml[i].goodsCount="";
+                            }
+                            if(null == xml[i].goodsCode){
+                                xml[i].goodsCode="";
+                            }
+                            if(null == xml[i].goodsxinxiid){
+                                xml[i].goodsxinxiid="";
+                            }
+                            $(".heji4").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                                "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                                "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                                "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                                "<td name='factory' style='display: none'>"+ "</td>\n" +
+                                "<td name='sph'>" + xml[i].sphUp +xml[i].sphDown+ "</td>\n" +
+                                "<td name='cyl'>" + xml[i].cylUp + xml[i].cylDown+"</td>\n" +
+                                "<td name='curvature'>" + xml[i].curvatureOne + xml[i].curvatureYi+"</td>\n" +
+
+                                "<td name='diameter'>" + xml[i].diameterOne +xml[i].diameterYi+ "</td>\n" +
+                                "<td name='usageName'>" + xml[i].usageName + "</td>\n" +
+
+                                "<td name='typeName'>" + xml[i].typeName + "</td>\n" +
+
+                                "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                                "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                                "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                                "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                                "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                                "</tr>");
+                        }
+                    }
+                })
+            }
         } else if (goodsType == 5) {
-            $(".val1").remove();
+            $(".val").remove();
             $(".val2").remove();
             $(".val3").remove();
             $(".val4").remove();
+            $(".val5").remove();
             $(".val6").remove();
             $(".val7").remove();
             $(".val8").remove();
@@ -445,12 +959,81 @@
             tab7.style = "display: none";
             tab8.style = "display: none";
             tab9.style = "display: none";
+            $.ajax({
+                url: '/stock/tuihuo/selectHly',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    'mfrsid': mfrsid,
+                    'positionId': positionId,
+                    'goodsType': goodsType,
+                    'goodsNum': goodsNum,
+                    'goodsCode': goodsCode,
+                    'goodsName': goodsName,
+                    'brandname': brandname
+
+                },
+                success: function (xml) {
+                    for (var i = 0; i < xml.length; i++) {
+                        if(null == xml[i].goodsNum){
+                            xml[i].goodsNum="";
+                        }
+                        if(null == xml[i].goodsName){
+                            xml[i].goodsName="";
+                        }
+                        if(null == xml[i].factory){
+                            xml[i].factory="";
+                        }
+                        if(null == xml[i].unit){
+                            xml[i].unit="";
+                        }
+                        if(null == xml[i].mainCapacity){
+                            xml[i].mainCapacity="";
+                        }
+                        if(null == xml[i].secondCapacity){
+                            xml[i].secondCapacity="";
+                        }
+                        if(null == xml[i].retailPrice){
+                            xml[i].retailPrice="";
+                        }
+                        if(null == xml[i].positionName){
+                            xml[i].positionName="";
+                        }
+                        if(null == xml[i].goodsCount){
+                            xml[i].goodsCount="";
+                        }
+                        if(null == xml[i].goodsCode){
+                            xml[i].goodsCode="";
+                        }
+                        if(null == xml[i].goodsxinxiid){
+                            xml[i].goodsxinxiid="";
+                        }
+
+                        $(".heji5").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
+                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
+
+                            "<td name='mainCapacity'>" + xml[i].mainCapacity + "</td>\n" +
+                            "<td name='secondCapacity'>" + xml[i].secondCapacity + "</td>\n" +
+
+                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                            "</tr>");
+                    }
+                }
+            })
         } else if (goodsType == 6) {
-            $(".val1").remove();
+            $(".val").remove();
             $(".val2").remove();
             $(".val3").remove();
             $(".val4").remove();
             $(".val5").remove();
+            $(".val6").remove();
             $(".val7").remove();
             $(".val8").remove();
             $(".val9").remove();
@@ -463,13 +1046,80 @@
             tab7.style = "display: none";
             tab8.style = "display: none";
             tab9.style = "display: none";
+            $.ajax({
+                url: '/stock/tuihuo/selectTyj',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    'mfrsid': mfrsid,
+                    'positionId': positionId,
+                    'goodsType': goodsType,
+                    'goodsNum': goodsNum,
+                    'goodsCode': goodsCode,
+                    'goodsName': goodsName,
+                    'brandname': brandname
+
+                },
+                success: function (xml) {
+                    for (var i = 0; i < xml.length; i++) {
+                        if(null == xml[i].goodsNum){
+                            xml[i].goodsNum="";
+                        }
+                        if(null == xml[i].goodsName){
+                            xml[i].goodsName="";
+                        }
+                        if(null == xml[i].factory){
+                            xml[i].factory="";
+                        }
+                        if(null == xml[i].unit){
+                            xml[i].unit="";
+                        }
+                        if(null == xml[i].producFactorycolor){
+                            xml[i].producFactorycolor="";
+                        }
+                        if(null == xml[i].size){
+                            xml[i].size="";
+                        }
+                        if(null == xml[i].retailPrice){
+                            xml[i].retailPrice="";
+                        }
+                        if(null == xml[i].positionName){
+                            xml[i].positionName="";
+                        }
+                        if(null == xml[i].goodsCount){
+                            xml[i].goodsCount="";
+                        }
+                        if(null == xml[i].goodsCode){
+                            xml[i].goodsCode="";
+                        }
+                        if(null == xml[i].goodsxinxiid){
+                            xml[i].goodsxinxiid="";
+                        }
+
+                        $(".heji6").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
+                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                            "<td name='producFactorycolor'>" + xml[i].producFactorycolor + "</td>\n" +
+                            "<td name='size'>" + xml[i].size + "</td>\n" +
+                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                            "</tr>");
+                    }
+                }
+            })
         } else if (goodsType == 7) {
-            $(".val1").remove();
+            $(".val").remove();
             $(".val2").remove();
             $(".val3").remove();
             $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
+            $(".val7").remove();
             $(".val8").remove();
             $(".val9").remove();
             tab1.style = "display: none";
@@ -481,14 +1131,88 @@
             tab7.style = "display: block";
             tab8.style = "display: none";
             tab9.style = "display: none";
+            $.ajax({
+                url: '/stock/tuihuo/selectLhj',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    'mfrsid': mfrsid,
+                    'positionId': positionId,
+                    'goodsType': goodsType,
+                    'goodsNum': goodsNum,
+                    'goodsCode': goodsCode,
+                    'goodsName': goodsName,
+                    'brandname': brandname
+
+                },
+                success: function (xml) {
+                    for (var i = 0; i < xml.length; i++) {
+                        if(null == xml[i].goodsNum){
+                            xml[i].goodsNum="";
+                        }
+                        if(null == xml[i].goodsName){
+                            xml[i].goodsName="";
+                        }
+                        if(null == xml[i].factory){
+                            xml[i].factory="";
+                        }
+                        if(null == xml[i].unit){
+                            xml[i].unit="";
+                        }
+                        if(null == xml[i].degrees){
+                            xml[i].degrees="";
+                        }
+
+                        if(null == xml[i].size){
+                            xml[i].size="";
+                        }
+                        if(null == xml[i].producFactorycolor){
+                            xml[i].producFactorycolor="";
+                        }
+
+                        if(null == xml[i].retailPrice){
+                            xml[i].retailPrice="";
+                        }
+                        if(null == xml[i].positionName){
+                            xml[i].positionName="";
+                        }
+                        if(null == xml[i].goodsCount){
+                            xml[i].goodsCount="";
+                        }
+                        if(null == xml[i].goodsCode){
+                            xml[i].goodsCode="";
+                        }
+                        if(null == xml[i].goodsxinxiid){
+                            xml[i].goodsxinxiid="";
+                        }
+
+                        $(".heji7").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
+                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                            "<td name='degrees'>" + xml[i].degrees + "</td>\n" +
+
+                            "<td name='size'>" + xml[i].size + "</td>\n" +
+                            "<td name='producFactorycolor'>" + xml[i].producFactorycolor + "</td>\n" +
+                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                            "</tr>");
+                    }
+                }
+            })
         } else if (goodsType == 8) {
-            $(".val1").remove();
+            $(".val").remove();
             $(".val2").remove();
             $(".val3").remove();
             $(".val4").remove();
             $(".val5").remove();
             $(".val6").remove();
             $(".val7").remove();
+            $(".val8").remove();
             $(".val9").remove();
             tab1.style = "display: none";
             tab2.style = "display: none";
@@ -499,8 +1223,66 @@
             tab7.style = "display: none";
             tab8.style = "display: block";
             tab9.style = "display: none";
+            $.ajax({
+                url: '/stock/tuihuo/selectHc',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    'mfrsid': mfrsid,
+                    'positionId': positionId,
+                    'goodsType': goodsType,
+                    'goodsNum': goodsNum,
+                    'goodsCode': goodsCode,
+                    'goodsName': goodsName,
+                    'brandname': brandname
+
+                },
+                success: function (xml) {
+                    for (var i = 0; i < xml.length; i++) {
+                        if(null == xml[i].goodsNum){
+                            xml[i].goodsNum="";
+                        }
+                        if(null == xml[i].goodsName){
+                            xml[i].goodsName="";
+                        }
+                        if(null == xml[i].factory){
+                            xml[i].factory="";
+                        }
+                        if(null == xml[i].unit){
+                            xml[i].unit="";
+                        }
+                        if(null == xml[i].retailPrice){
+                            xml[i].retailPrice="";
+                        }
+                        if(null == xml[i].positionName){
+                            xml[i].positionName="";
+                        }
+                        if(null == xml[i].goodsCount){
+                            xml[i].goodsCount="";
+                        }
+                        if(null == xml[i].goodsCode){
+                            xml[i].goodsCode="";
+                        }
+                        if(null == xml[i].goodsxinxiid){
+                            xml[i].goodsxinxiid="";
+                        }
+
+                        $(".heji8").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
+                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                            "</tr>");
+                    }
+                }
+            })
         } else if (goodsType == 9) {
-            $(".val1").remove();
+            $(".val").remove();
             $(".val2").remove();
             $(".val3").remove();
             $(".val4").remove();
@@ -508,6 +1290,7 @@
             $(".val6").remove();
             $(".val7").remove();
             $(".val8").remove();
+            $(".val9").remove();
             tab1.style = "display: none";
             tab2.style = "display: none";
             tab3.style = "display: none";
@@ -517,6 +1300,64 @@
             tab7.style = "display: none";
             tab8.style = "display: none";
             tab9.style = "display: block";
+            $.ajax({
+                url: '/stock/tuihuo/selectSg',
+                type: 'post',
+                dataType: "json",
+                data: {
+                    'mfrsid': mfrsid,
+                    'positionId': positionId,
+                    'goodsType': goodsType,
+                    'goodsNum': goodsNum,
+                    'goodsCode': goodsCode,
+                    'goodsName': goodsName,
+                    'brandname': brandname
+
+                },
+                success: function (xml) {
+                    for (var i = 0; i < xml.length; i++) {
+                        if(null == xml[i].goodsNum){
+                            xml[i].goodsNum="";
+                        }
+                        if(null == xml[i].goodsName){
+                            xml[i].goodsName="";
+                        }
+                        if(null == xml[i].factory){
+                            xml[i].factory="";
+                        }
+                        if(null == xml[i].unit){
+                            xml[i].unit="";
+                        }
+                        if(null == xml[i].retailPrice){
+                            xml[i].retailPrice="";
+                        }
+                        if(null == xml[i].positionName){
+                            xml[i].positionName="";
+                        }
+                        if(null == xml[i].goodsCount){
+                            xml[i].goodsCount="";
+                        }
+                        if(null == xml[i].goodsCode){
+                            xml[i].goodsCode="";
+                        }
+                        if(null == xml[i].goodsxinxiid){
+                            xml[i].goodsxinxiid="";
+                        }
+
+                        $(".heji9").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
+                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
+                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
+                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
+                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                            "</tr>");
+                    }
+                }
+            })
         } else {
             $(".val1").remove();
             $(".val2").remove();

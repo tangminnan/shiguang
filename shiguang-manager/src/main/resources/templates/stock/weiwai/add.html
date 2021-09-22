@@ -1,141 +1,212 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-																																			<div class="form-group">	
-								<label class="col-sm-3 control-label">配镜单号：</label>
-								<div class="col-sm-8">
-									<input id="saleNumber" name="saleNumber" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">收货单号：</label>
-								<div class="col-sm-8">
-									<input id="shouhuoNumber" name="shouhuoNumber" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">收入仓位id：</label>
-								<div class="col-sm-8">
-									<input id="positionId" name="positionId" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">制造商id：</label>
-								<div class="col-sm-8">
-									<input id="mfrsid" name="mfrsid" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">顾客姓名：</label>
-								<div class="col-sm-8">
-									<input id="name" name="name" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">联系电话：</label>
-								<div class="col-sm-8">
-									<input id="phone" name="phone" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">订做类型：</label>
-								<div class="col-sm-8">
-									<input id="dzStype" name="dzStype" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">取镜日期：</label>
-								<div class="col-sm-8">
-									<input id="mirrorTime" name="mirrorTime" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">右眼加工要求：</label>
-								<div class="col-sm-8">
-									<input id="eyeRight" name="eyeRight" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">左眼加工要求：</label>
-								<div class="col-sm-8">
-									<input id="eyeLeft" name="eyeLeft" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">部门编码：</label>
-								<div class="col-sm-8">
-									<input id="departNumber" name="departNumber" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">球镜：</label>
-								<div class="col-sm-8">
-									<input id="sph" name="sph" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">柱镜：</label>
-								<div class="col-sm-8">
-									<input id="cyl" name="cyl" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">商品名称：</label>
-								<div class="col-sm-8">
-									<input id="goodsName" name="goodsName" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">R/L：</label>
-								<div class="col-sm-8">
-									<input id="rl" name="rl" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">商品代码：</label>
-								<div class="col-sm-8">
-									<input id="goodsNum" name="goodsNum" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">厂家型号：</label>
-								<div class="col-sm-8">
-									<input id="factory" name="factory" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">数量：</label>
-								<div class="col-sm-8">
-									<input id="count" name="count" class="form-control" type="text">
-								</div>
-							</div>
-																												<div class="form-group">	
-								<label class="col-sm-3 control-label">商品条码：</label>
-								<div class="col-sm-8">
-									<input id="goodsCode" name="goodsCode" class="form-control" type="text">
-								</div>
-							</div>
-																					<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>委外订单新增</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+	<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body>
+<!--查询条件-->
+<div class="m40 tabS msgBox">
+	<h3>单据信息</h3>
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td>单据编号：</td>
+			<td><input id="danjuNumber" name="danjuNumber" th:value="${danjuNumber}" type="text"></td>
+			<td>单据日期：</td>
+			<td><input id="danjuDay" name="danjuDay" th:value="${danjuDay}" type="text" ></td>
+			<td>订单类型：</td>
+			<td>
+				<select id="eyeStyle" name="eyeStyle" style="width:48%" onchange="show()">
+					<option></option>
+					<option value="3">框镜订做</option>
+					<option value="4">隐形订做</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>制单人：</td>
+			<td>
+				<input id="zhidanPeople" name="zhidanPeople" th:value="${zhidanPeople}" type="text" />
+			</td>
+			<td>制造商：</td>
+			<td>
+				<input id="mfrsid" name="mfrsid" type="hidden" />
+				<input id="mfrsName" name="mfrsName" type="text" readonly />
+				<input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()" />
+			</td>
+
+		</tr>
+		<tr>
+			<td>收货联系人：</td>
+			<td>
+				<input id="shouhuoPeople" name="shouhuoPeople"  th:value="${zhidanPeople}" type="text"  />
+			</td>
+			<td>收货联系电话：</td>
+			<td>
+				<input id="shouhuoPhone" name="shouhuoPhone" th:value="${departTel}" type="text"  />
+			</td>
+			<td>收货地址：</td>
+			<td>
+				<input id="shouhuoAddress" name="shouhuoAddress"  th:value="${departAddress}" type="text" />
+			</td>
+		</tr>
+		<tr>
+			<td>备注：</td>
+			<td colspan="5"><textarea id="beizhu" name="beizhu" rows="3"></textarea></td>
+		</tr>
+
+	</table>
+	<!--保存/清空-->
+	<div class="BQ-btn">
+		<!--<input type="button" value="内部配镜单" />-->
+		<input type="button" class="empty" value="外部配镜单" onclick="waibu()" />
+		<input id="status" name="status" value="1" type="hidden" />
+		<input id="username" name="username" value="未收货" type="hidden" />
+		<input type="button" class="H_bc" value="保存并审核" onclick="" />
 	</div>
-	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/stock/weiwai/add.js">
-	</script>
+</div>
+<!--商品信息-->
+<div class="m40 tabS msgBoxDD">
+	<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+		<tbody>
+		<tr id="tab1" style="display:none">
+			<td style="width: 100vw;">
+				<table>
+					<tr class="thead">
+						<!--<td>多选</td>-->
+						<td>配镜单号</td>
+						<td>取镜时间</td>
+						<td>商品名称</td>
+						<td>委外方式</td>
+						<td>镜片类型</td>
+						<td>数量</td>
+						<td>球镜</td>
+						<td>柱镜</td>
+						<td>轴向</td>
+						<td>下加</td>
+						<td>棱镜</td>
+						<td>直径</td>
+						<td>加工要求</td>
+					</tr>
+					<tr style="font-weight:bold;font-size: 15px;" class="heji1" id="heji1"></tr>
+				</table>
+			</td>
+		</tr>
+		<tr id="tab2" style="display:none;">
+			<td style="width: 100vw;">
+				<table>
+					<tr class="thead">
+						<!--<td>多选</td>-->
+						<td>配镜单号</td>
+						<td>取镜时间</td>
+						<td>商品名称</td>
+						<td>委外方式</td>
+						<td>镜片类型</td>
+						<td>数量</td>
+						<td>球镜</td>
+						<td>柱镜</td>
+						<td>轴向</td>
+						<td>基底</td>
+						<td>曲率</td>
+						<td>直径</td>
+						<td>加工要求</td>
+					</tr>
+					<tr style="font-weight:bold;font-size: 15px;" class="heji2"></tr>
+				</table>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    //显示
+    function show() {
+        var eyeStyle = $('#eyeStyle').val();
+        if (eyeStyle == '3') {
+            $(".val2").remove();
+            tab1.style = "display: block";
+            tab2.style = "display: none";
+        } else if (eyeStyle == '4') {
+            $(".val1").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: block";
+        }
+    }
+    // <!--选择制造商-->
+    function choiceMfrs() {
+        var goodsid = document.getElementById('eyeStyle').value;
+        // layer.alert(goodsid);
+        if (goodsid == "") {
+            layer.alert("请选择订单类型！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/stock/stock/findmfrs/" + goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsName").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsid);
+                        $("#mfrsNames").val(rows[i].mfrsname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+
+
+        //点击外部配镜
+	var htmlheji=""
+	function waibu() {
+        var eyeStyle = $('#eyeStyle').val();
+        var mfrsid = $('#mfrsid').val();
+        var zhidanPeople = $('#zhidanPeople').val();
+        if (eyeStyle == ""){
+            layer.alert("请选择订单类型！");
+		}else if (eyeStyle != "" && mfrsid == ""){
+            layer.alert("请选择制造商！");
+		}else{
+                var toIndex = layer.open({
+                    type: 2,
+                    title: '外部配镜单查询',
+                    maxmin: true,
+                    shadeClose: false, // 点击遮罩关闭层
+                    area: ['800px', '520px'],
+                    content: "/stock/weiwai/getGoods/" + eyeStyle+'/'+mfrsid+'/'+zhidanPeople,// iframe的url
+                    // btn: ['确定', '取消'],
+                    // yes: function(index, layero) {
+                    //     var rows = $(layero).find("iframe")[0].contentWindow.addshang();
+                    //     alert(JSON.stringify(rows))
+                    //         $(".heji1").before("<tr class='val1'>" +
+                    //         "<td name='rightNum'>" + rows[0] + "</td>\n" +
+                    //         "<td name='rightName'>" + rows[1] + "</td>\n" +
+                    //         "<td name='rightrl'>" + rows[2] + "</td>\n" +
+					// 		"</tr>"+
+					// 		"<tr>"+
+                    //         "<td name='leftNum'>" + rows[3] + "</td>\n" +
+                    //         "<td name='leftName'>" + rows[4] + "</td>\n" +
+                    //         "<td name='leftrl'>" + rows[5] + "</td>\n" +
+					// 		"</tr>")
+                    //     layer.close(index);//需要手动关闭窗口
+                    // }
+
+                });
+                layer.full(toIndex);
+			}
+    }
+</script>
 </body>
 </html>

@@ -1,8 +1,17 @@
 package com.shiguang.stock.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.baseinfomation.domain.DepartmentDO;
+import com.shiguang.baseinfomation.service.DepartmentService;
+import com.shiguang.common.utils.*;
+import com.shiguang.mfrs.domain.GoodsDO;
+import com.shiguang.product.domain.HcDO;
+import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -17,16 +26,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shiguang.stock.domain.WeiwaiDO;
 import com.shiguang.stock.service.WeiwaiService;
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
 
 /**
  * 委外表
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-09-14 16:17:31
+ * @date 2021-09-15 11:26:24
  */
  
 @Controller
@@ -34,11 +40,9 @@ import com.shiguang.common.utils.R;
 public class WeiwaiController {
 	@Autowired
 	private WeiwaiService weiwaiService;
+	@Autowired
+	private DepartmentService departmentService;
 
-//	select s.sale_number,s.member_number,m.name,m.phone_1,sa.eye_type,sa.peijing_time,sa.mirror_time
-//from settlement s
-//left join member m on s.member_number=m.card_number
-//left join store_sales sa on s.sale_number=sa.sale_number
 	@GetMapping()
 	@RequiresPermissions("stock:weiwai:weiwai")
 	String Weiwai(){
@@ -51,16 +55,41 @@ public class WeiwaiController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		List<WeiwaiDO> weiwaiList = weiwaiService.weiwailist(query);
-		int total = weiwaiService.countList(query);
+		List<WeiwaiDO> weiwaiList = weiwaiService.list(query);
+		int total = weiwaiService.count(query);
 		PageUtils pageUtils = new PageUtils(weiwaiList, total);
 		return pageUtils;
 	}
 	
 	@GetMapping("/add")
 	@RequiresPermissions("stock:weiwai:add")
-	String add(){
-	    return "stock/weiwai/add";
+	String add(Model model){
+		//———生成单据编号————
+		Long uuid = GuuidUtil.getUUID();
+		String danjuNumber = "OUT" + uuid.toString();
+		model.addAttribute("danjuNumber", danjuNumber);
+		//———获取当前系统时间—————
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+		Date date = new Date();
+		String danjuDay = sdf.format(date);
+		model.addAttribute("danjuDay", danjuDay);
+		//———获取当前登录用户的名称————
+		model.addAttribute("zhidanPeople", ShiroUtils.getUser().getName());
+		//———获取当前登录用户的公司id————
+		String companyId=ShiroUtils.getUser().getCompanyId();
+		if(companyId == null){
+			String departNumber=ShiroUtils.getUser().getStoreNum();
+			DepartmentDO departmentDO= weiwaiService.phoneOrAddres(departNumber);
+			String departTel=departmentDO.getDepartTel();
+			String departAddress=departmentDO.getDepartAddress();
+			model.addAttribute("departTel",departTel);
+			model.addAttribute("departAddress",departAddress);
+		}else if (companyId != null){
+			model.addAttribute("departTel","");
+			model.addAttribute("departAddress","");
+		}
+
+		return "stock/weiwai/add";
 	}
 
 	@GetMapping("/edit/{id}")
@@ -78,6 +107,13 @@ public class WeiwaiController {
 	@PostMapping("/save")
 	@RequiresPermissions("stock:weiwai:add")
 	public R save( WeiwaiDO weiwai){
+
+
+
+
+
+
+
 		if(weiwaiService.save(weiwai)>0){
 			return R.ok();
 		}
@@ -117,5 +153,75 @@ public class WeiwaiController {
 		weiwaiService.batchRemove(ids);
 		return R.ok();
 	}
+
+//外部配镜单查询
+@GetMapping("/getGoods/{eyeStyle}/{mfrsid}/{zhidanPeople}")
+String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid") Integer mfrsid,@PathVariable("zhidanPeople") String zhidanPeople, Model model) {
+	//商品类别
+	if (eyeStyle == 3){
+		model.addAttribute("eyeStyles", "框镜订做");
+		model.addAttribute("eyeStyle", eyeStyle);
+	}else if (eyeStyle == 4){
+		model.addAttribute("eyeStyles", "隐形订做");
+		model.addAttribute("eyeStyle", eyeStyle);
+	}
+	model.addAttribute("mfrsid",mfrsid);
+	model.addAttribute("zhidanPeople",zhidanPeople);
+	//———生成单据编号————
+	Long uuid = GuuidUtil.getUUID();
+	String danjunum = "W" + uuid.toString();
+	model.addAttribute("danjunum", danjunum);
+
+	//———获取当前系统时间—————
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+	Date date = new Date();
+	String newDate = sdf.format(date);
+	model.addAttribute("danjuDay", newDate);
+	//部门
+	Map<String, Object> map = new HashMap<>();
+	//———获取当前登录用户的公司id————
+	//String departNumber=ShiroUtils.getUser().getStoreNum();
+	if(null != ShiroUtils.getUser().getStoreNum()){
+		map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+	}else {
+		map.put("departNumber","");
+	}
+	model.addAttribute("departmentName",ShiroUtils.getUser().getStore());
+//	return "/stock/weiwai/getGoods";
+	return "/stock/weiwaishuju/add";
+}
+
+
+
+	@GetMapping("/PeiJing/{eyeStyle}")
+	String PeiJing(@PathVariable("eyeStyle") Integer eyeStyle, Model model) {
+		model.addAttribute("eyeStyle",eyeStyle);
+		return "/stock/weiwai/yuanPeiJing";
+	}
+	//销售单
+	@ResponseBody
+	@RequestMapping(value = "/selectOrder")
+	public List<SalesDO> orderList(Integer eyeStyle, Model model) {
+		Map<String, Object> map = new HashMap<>();
+		if (eyeStyle == 3){
+			map.put("classtype", "2");
+			map.put("eyeStyles", "框镜");
+		}else if (eyeStyle == 4){
+			map.put("classtype", "2");
+			map.put("eyeStyles", "隐形");
+		}
+		//———获取当前登录用户的公司id————
+		String companyId=ShiroUtils.getUser().getCompanyId();
+		if(companyId == null){
+			String departNumber=ShiroUtils.getUser().getStoreNum();
+			map.put("departNumber",departNumber);
+		}else if (companyId != null){
+			map.put("departNumber","");
+		}
+		List<SalesDO> selectOrder = weiwaiService.selectOrder(map);
+		model.addAttribute("selectOrder", selectOrder);
+		return selectOrder;
+	}
+
 	
 }

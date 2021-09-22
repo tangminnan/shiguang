@@ -107,4 +107,29 @@ public class TuihuoServiceImpl implements TuihuoService {
 	public List<StockDO> selectSg(Map<String, Object> map) {
 		return tuihuoDao.selectSg(map);
 	}
+
+	@Override
+	public List<TuihuoDO> orderList(Map<String, Object> map) {
+		return tuihuoDao.orderList(map);
+	}
+
+	@Override
+	public int orderCount(Map<String, Object> map) {
+		return tuihuoDao.orderCount(map);
+	}
+
+	@Override
+	public List<TuihuoDO> selectOrder(Map<String, Object> map) {
+		return tuihuoDao.selectOrder(map);
+	}
+
+	@Override
+	public TuihuoDO getDanju(String tuihuoNum) {
+		return tuihuoDao.getDanju(tuihuoNum);
+	}
+
+	@Override
+	public List<TuihuoDO> getDanjuList(Map<String, Object> map) {
+		return tuihuoDao.getDanjuList(map);
+	}
 }

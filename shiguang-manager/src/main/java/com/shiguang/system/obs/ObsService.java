@@ -1,12 +1,13 @@
 package com.shiguang.system.obs;
 
 
-import com.studentImport.common.utils.OBSContant;
 import com.obs.services.LogConfigurator;
 import com.obs.services.ObsClient;
 import com.obs.services.exception.ObsException;
 import com.obs.services.model.CompleteMultipartUploadResult;
 import com.obs.services.model.UploadFileRequest;
+
+
 
 import java.io.File;
 
@@ -27,7 +28,7 @@ public class ObsService {
 //        config.setConnectionTimeout(10000);
 //        config.setEndPoint(OBSContance.INSTANCE.getEndPoint());
         // 创建ObsClient实例
-        obsClient = new ObsClient(OBSContant.INSTANCE.getAk(), OBSContant.INSTANCE.getSk(), OBSContant.INSTANCE.getEndPoint());
+        obsClient = new ObsClient("AHTXMQV0QBGQZH6SPK7H", "mwF0OH51ojCEPuthmGz3B15sSeLj7eoAhliPbboS", "obs.cn-north-4.myhuaweicloud.com");
     }
 
     public void upLoadToOBS(final String objectName, final String path) {
@@ -53,7 +54,7 @@ public class ObsService {
 
     public String beginUpload(String objectName, File file) {
         //通过填写文件名形成objectname,通过这个名字指定上传和下载的文件
-        UploadFileRequest request = new UploadFileRequest(OBSContant.INSTANCE.getBucketName(), "xl-img/"+objectName);
+        UploadFileRequest request = new UploadFileRequest("dm-em03", "xl-img/"+objectName);
 // 设置待上传的本地文件，其中localfile为待上传的本地文件路径，需要指定到具体的文件名
         request.setUploadFile(file.getAbsolutePath());
 // 设置分段上传时的最大并发数

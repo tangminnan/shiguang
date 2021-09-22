@@ -1,6 +1,7 @@
 package com.shiguang.stock.service;
 
 import com.shiguang.product.domain.*;
+import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.domain.TuihuoDO;
 
@@ -19,9 +20,9 @@ public interface TuihuoService {
 	TuihuoDO get(Long id);
 	
 	List<TuihuoDO> list(Map<String, Object> map);
-	
+
 	int count(Map<String, Object> map);
-	
+
 	int save(TuihuoDO tuihuo);
 	
 	int update(TuihuoDO tuihuo);
@@ -51,5 +52,15 @@ public interface TuihuoService {
 	List<StockDO> selectHc(Map<String, Object> map);
 
 	List<StockDO> selectSg(Map<String, Object> map);
+
+	List<TuihuoDO> orderList(Map<String, Object> map);
+	int orderCount(Map<String, Object> map);
+	//查订单
+	List<TuihuoDO> selectOrder(Map<String, Object> map);
+
+	//打印
+	TuihuoDO getDanju(String tuihuoNum);
+	List<TuihuoDO> getDanjuList(Map<String, Object> map);
+
 
 }

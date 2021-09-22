@@ -11,21 +11,27 @@
 						<form class="form-horizontal m-t" id="signupForm">
 						<input id="id" name="id" th:value="${weiwai.id}"  type="hidden">
 							<div class="form-group">	
-								<label class="col-sm-3 control-label">配镜单号：</label>
+								<label class="col-sm-3 control-label">单据编号：</label>
 								<div class="col-sm-8">
-									<input id="saleNumber" name="saleNumber" th:value="${weiwai.saleNumber}" class="form-control" type="text">
+									<input id="danjuNumber" name="danjuNumber" th:value="${weiwai.danjuNumber}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">收货单号：</label>
+								<label class="col-sm-3 control-label">单据日期：</label>
 								<div class="col-sm-8">
-									<input id="shouhuoNumber" name="shouhuoNumber" th:value="${weiwai.shouhuoNumber}" class="form-control" type="text">
+									<input id="danjuDay" name="danjuDay" th:value="${weiwai.danjuDay}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">收入仓位id：</label>
+								<label class="col-sm-3 control-label">订单类型：</label>
 								<div class="col-sm-8">
-									<input id="positionId" name="positionId" th:value="${weiwai.positionId}" class="form-control" type="text">
+									<input id="eyeStyle" name="eyeStyle" th:value="${weiwai.eyeStyle}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">制单人：</label>
+								<div class="col-sm-8">
+									<input id="zhidanPeople" name="zhidanPeople" th:value="${weiwai.zhidanPeople}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
@@ -35,45 +41,69 @@
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">顾客姓名：</label>
+								<label class="col-sm-3 control-label">厂家订单号：</label>
 								<div class="col-sm-8">
-									<input id="name" name="name" th:value="${weiwai.name}" class="form-control" type="text">
+									<input id="changjiaNumber" name="changjiaNumber" th:value="${weiwai.changjiaNumber}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">联系电话：</label>
+								<label class="col-sm-3 control-label">收货联系人：</label>
 								<div class="col-sm-8">
-									<input id="phone" name="phone" th:value="${weiwai.phone}" class="form-control" type="text">
+									<input id="shouhuoPeople" name="shouhuoPeople" th:value="${weiwai.shouhuoPeople}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">订做类型：</label>
+								<label class="col-sm-3 control-label">收货联系电话：</label>
 								<div class="col-sm-8">
-									<input id="dzStype" name="dzStype" th:value="${weiwai.dzStype}" class="form-control" type="text">
+									<input id="shouhuoPhone" name="shouhuoPhone" th:value="${weiwai.shouhuoPhone}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">取镜日期：</label>
+								<label class="col-sm-3 control-label">收货地址：</label>
+								<div class="col-sm-8">
+									<input id="shouhuoAddress" name="shouhuoAddress" th:value="${weiwai.shouhuoAddress}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="beizhu" name="beizhu" th:value="${weiwai.beizhu}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">配镜单号：</label>
+								<div class="col-sm-8">
+									<input id="saleNumber" name="saleNumber" th:value="${weiwai.saleNumber}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">取镜时间：</label>
 								<div class="col-sm-8">
 									<input id="mirrorTime" name="mirrorTime" th:value="${weiwai.mirrorTime}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">右眼加工要求：</label>
+								<label class="col-sm-3 control-label">商品名称：</label>
 								<div class="col-sm-8">
-									<input id="eyeRight" name="eyeRight" th:value="${weiwai.eyeRight}" class="form-control" type="text">
+									<input id="goodsName" name="goodsName" th:value="${weiwai.goodsName}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">左眼加工要求：</label>
+								<label class="col-sm-3 control-label">委外方式：</label>
 								<div class="col-sm-8">
-									<input id="eyeLeft" name="eyeLeft" th:value="${weiwai.eyeLeft}" class="form-control" type="text">
+									<input id="style" name="style" th:value="${weiwai.style}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">部门编码：</label>
+								<label class="col-sm-3 control-label">镜片类型r/l：</label>
 								<div class="col-sm-8">
-									<input id="departNumber" name="departNumber" th:value="${weiwai.departNumber}" class="form-control" type="text">
+									<input id="rl" name="rl" th:value="${weiwai.rl}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">数量：</label>
+								<div class="col-sm-8">
+									<input id="count" name="count" th:value="${weiwai.count}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
@@ -89,39 +119,45 @@
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品名称：</label>
+								<label class="col-sm-3 control-label">轴向：</label>
 								<div class="col-sm-8">
-									<input id="goodsName" name="goodsName" th:value="${weiwai.goodsName}" class="form-control" type="text">
+									<input id="axial" name="axial" th:value="${weiwai.axial}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">R/L：</label>
+								<label class="col-sm-3 control-label">下加：</label>
 								<div class="col-sm-8">
-									<input id="rl" name="rl" th:value="${weiwai.rl}" class="form-control" type="text">
+									<input id="lightbelow" name="lightbelow" th:value="${weiwai.lightbelow}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品代码：</label>
+								<label class="col-sm-3 control-label">棱镜：</label>
 								<div class="col-sm-8">
-									<input id="goodsNum" name="goodsNum" th:value="${weiwai.goodsNum}" class="form-control" type="text">
+									<input id="lengjing" name="lengjing" th:value="${weiwai.lengjing}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">厂家型号：</label>
+								<label class="col-sm-3 control-label">直径：</label>
 								<div class="col-sm-8">
-									<input id="factory" name="factory" th:value="${weiwai.factory}" class="form-control" type="text">
+									<input id="diameter" name="diameter" th:value="${weiwai.diameter}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">数量：</label>
+								<label class="col-sm-3 control-label">加工要求：</label>
 								<div class="col-sm-8">
-									<input id="count" name="count" th:value="${weiwai.count}" class="form-control" type="text">
+									<input id="yaoqiu" name="yaoqiu" th:value="${weiwai.yaoqiu}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品条码：</label>
+								<label class="col-sm-3 control-label">基底：</label>
 								<div class="col-sm-8">
-									<input id="goodsCode" name="goodsCode" th:value="${weiwai.goodsCode}" class="form-control" type="text">
+									<input id="jd" name="jd" th:value="${weiwai.jd}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">曲率：</label>
+								<div class="col-sm-8">
+									<input id="curvature" name="curvature" th:value="${weiwai.curvature}" class="form-control" type="text">
 								</div>
 							</div>
 																					<div class="form-group">

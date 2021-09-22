@@ -4,32 +4,47 @@
 <mapper namespace="com.shiguang.stock.dao.WeiwaiDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select `id`,`sale_number`,`shouhuo_number`,`position_id`,`mfrsid`,`name`,`phone`,`dz_stype`,`mirror_time`,`eye_right`,`eye_left`,`depart_number`,`sph`,`cyl`,`goods_name`,`rl`,`goods_num`,`factory`,`count`,`goods_code` from stock_weiwai where id = #{value}
+		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`changjia_number`,`shouhuo_people`,
+		`shouhuo_phone`,`shouhuo_address`,`beizhu`,`sale_number`,`mirror_time`,`goods_name`,`style`,`rl`,`count`,`sph`,`cyl`,
+		`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,`status`,`username`
+		from stock_weiwai where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select `id`,`sale_number`,`shouhuo_number`,`position_id`,`mfrsid`,`name`,`phone`,`dz_stype`,`mirror_time`,`eye_right`,`eye_left`,`depart_number`,`sph`,`cyl`,`goods_name`,`rl`,`goods_num`,`factory`,`count`,`goods_code` from stock_weiwai
+		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`changjia_number`,
+		`shouhuo_people`,`shouhuo_phone`,`shouhuo_address`,`beizhu`,`sale_number`,`mirror_time`,`goods_name`,
+		`style`,`rl`,`count`,`sph`,`cyl`,`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,
+		`status`,`username`
+		from stock_weiwai
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
-		  		  <if test="shouhuoNumber != null and shouhuoNumber != ''"> and shouhuo_number = #{shouhuoNumber} </if>
-		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+		  		  <if test="danjuNumber != null and danjuNumber != ''"> and danju_number = #{danjuNumber} </if>
+		  		  <if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
+		  		  <if test="eyeStyle != null and eyeStyle != ''"> and eye_style = #{eyeStyle} </if>
+		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
 		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
-		  		  <if test="dzStype != null and dzStype != ''"> and dz_stype = #{dzStype} </if>
+		  		  <if test="changjiaNumber != null and changjiaNumber != ''"> and changjia_number = #{changjiaNumber} </if>
+		  		  <if test="shouhuoPeople != null and shouhuoPeople != ''"> and shouhuo_people = #{shouhuoPeople} </if>
+		  		  <if test="shouhuoPhone != null and shouhuoPhone != ''"> and shouhuo_phone = #{shouhuoPhone} </if>
+		  		  <if test="shouhuoAddress != null and shouhuoAddress != ''"> and shouhuo_address = #{shouhuoAddress} </if>
+		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
-		  		  <if test="eyeRight != null and eyeRight != ''"> and eye_right = #{eyeRight} </if>
-		  		  <if test="eyeLeft != null and eyeLeft != ''"> and eye_left = #{eyeLeft} </if>
-		  		  <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
+		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+		  		  <if test="style != null and style != ''"> and style = #{style} </if>
+		  		  <if test="rl != null and rl != ''"> and rl = #{rl} </if>
+		  		  <if test="count != null and count != ''"> and count = #{count} </if>
 		  		  <if test="sph != null and sph != ''"> and sph = #{sph} </if>
 		  		  <if test="cyl != null and cyl != ''"> and cyl = #{cyl} </if>
-		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
-		  		  <if test="rl != null and rl != ''"> and rl = #{rl} </if>
-		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
-		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
-		  		  <if test="count != null and count != ''"> and count = #{count} </if>
-		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+		  		  <if test="axial != null and axial != ''"> and axial = #{axial} </if>
+		  		  <if test="lightbelow != null and lightbelow != ''"> and lightbelow = #{lightbelow} </if>
+		  		  <if test="lengjing != null and lengjing != ''"> and lengjing = #{lengjing} </if>
+		  		  <if test="diameter != null and diameter != ''"> and diameter = #{diameter} </if>
+		  		  <if test="yaoqiu != null and yaoqiu != ''"> and yaoqiu = #{yaoqiu} </if>
+		  		  <if test="jd != null and jd != ''"> and jd = #{jd} </if>
+		  		  <if test="curvature != null and curvature != ''"> and curvature = #{curvature} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="username != null and username != ''"> and username = #{username} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -48,25 +63,33 @@
 		select count(*) from stock_weiwai
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
-		  		  <if test="shouhuoNumber != null and shouhuoNumber != ''"> and shouhuo_number = #{shouhuoNumber} </if>
-		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+		  		  <if test="danjuNumber != null and danjuNumber != ''"> and danju_number = #{danjuNumber} </if>
+		  		  <if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
+		  		  <if test="eyeStyle != null and eyeStyle != ''"> and eye_style = #{eyeStyle} </if>
+		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
 		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
-		  		  <if test="dzStype != null and dzStype != ''"> and dz_stype = #{dzStype} </if>
+		  		  <if test="changjiaNumber != null and changjiaNumber != ''"> and changjia_number = #{changjiaNumber} </if>
+		  		  <if test="shouhuoPeople != null and shouhuoPeople != ''"> and shouhuo_people = #{shouhuoPeople} </if>
+		  		  <if test="shouhuoPhone != null and shouhuoPhone != ''"> and shouhuo_phone = #{shouhuoPhone} </if>
+		  		  <if test="shouhuoAddress != null and shouhuoAddress != ''"> and shouhuo_address = #{shouhuoAddress} </if>
+		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
-		  		  <if test="eyeRight != null and eyeRight != ''"> and eye_right = #{eyeRight} </if>
-		  		  <if test="eyeLeft != null and eyeLeft != ''"> and eye_left = #{eyeLeft} </if>
-		  		  <if test="departNumber != null and departNumber != ''"> and depart_number = #{departNumber} </if>
+		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+		  		  <if test="style != null and style != ''"> and style = #{style} </if>
+		  		  <if test="rl != null and rl != ''"> and rl = #{rl} </if>
+		  		  <if test="count != null and count != ''"> and count = #{count} </if>
 		  		  <if test="sph != null and sph != ''"> and sph = #{sph} </if>
 		  		  <if test="cyl != null and cyl != ''"> and cyl = #{cyl} </if>
-		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
-		  		  <if test="rl != null and rl != ''"> and rl = #{rl} </if>
-		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
-		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
-		  		  <if test="count != null and count != ''"> and count = #{count} </if>
-		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+		  		  <if test="axial != null and axial != ''"> and axial = #{axial} </if>
+		  		  <if test="lightbelow != null and lightbelow != ''"> and lightbelow = #{lightbelow} </if>
+		  		  <if test="lengjing != null and lengjing != ''"> and lengjing = #{lengjing} </if>
+		  		  <if test="diameter != null and diameter != ''"> and diameter = #{diameter} </if>
+		  		  <if test="yaoqiu != null and yaoqiu != ''"> and yaoqiu = #{yaoqiu} </if>
+		  		  <if test="jd != null and jd != ''"> and jd = #{jd} </if>
+		  		  <if test="curvature != null and curvature != ''"> and curvature = #{curvature} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="username != null and username != ''"> and username = #{username} </if>
 		  		</where>
 	</select>
 	 
@@ -74,73 +97,97 @@
 		insert into stock_weiwai
 		(
 			`id`, 
-			`sale_number`, 
-			`shouhuo_number`, 
-			`position_id`, 
+			`danju_number`, 
+			`danju_day`, 
+			`eye_style`, 
+			`zhidan_people`, 
 			`mfrsid`, 
-			`name`, 
-			`phone`, 
-			`dz_stype`, 
+			`changjia_number`, 
+			`shouhuo_people`, 
+			`shouhuo_phone`, 
+			`shouhuo_address`, 
+			`beizhu`, 
+			`sale_number`, 
 			`mirror_time`, 
-			`eye_right`, 
-			`eye_left`, 
-			`depart_number`, 
+			`goods_name`, 
+			`style`, 
+			`rl`, 
+			`count`, 
 			`sph`, 
 			`cyl`, 
-			`goods_name`, 
-			`rl`, 
-			`goods_num`, 
-			`factory`, 
-			`count`, 
-			`goods_code`
+			`axial`, 
+			`lightbelow`, 
+			`lengjing`, 
+			`diameter`, 
+			`yaoqiu`, 
+			`jd`, 
+			`curvature`,
+			`status`,
+			`username`
 		)
 		values
 		(
 			#{id}, 
-			#{saleNumber}, 
-			#{shouhuoNumber}, 
-			#{positionId}, 
+			#{danjuNumber}, 
+			#{danjuDay}, 
+			#{eyeStyle}, 
+			#{zhidanPeople}, 
 			#{mfrsid}, 
-			#{name}, 
-			#{phone}, 
-			#{dzStype}, 
+			#{changjiaNumber}, 
+			#{shouhuoPeople}, 
+			#{shouhuoPhone}, 
+			#{shouhuoAddress}, 
+			#{beizhu}, 
+			#{saleNumber}, 
 			#{mirrorTime}, 
-			#{eyeRight}, 
-			#{eyeLeft}, 
-			#{departNumber}, 
+			#{goodsName}, 
+			#{style}, 
+			#{rl}, 
+			#{count}, 
 			#{sph}, 
 			#{cyl}, 
-			#{goodsName}, 
-			#{rl}, 
-			#{goodsNum}, 
-			#{factory}, 
-			#{count}, 
-			#{goodsCode}
+			#{axial}, 
+			#{lightbelow}, 
+			#{lengjing}, 
+			#{diameter}, 
+			#{yaoqiu}, 
+			#{jd}, 
+			#{curvature},
+			#{status},
+			#{username}
 		)
 	</insert>
 	 
 	<update id="update" parameterType="com.shiguang.stock.domain.WeiwaiDO">
 		update stock_weiwai 
 		<set>
-			<if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
-			<if test="shouhuoNumber != null">`shouhuo_number` = #{shouhuoNumber}, </if>
-			<if test="positionId != null">`position_id` = #{positionId}, </if>
+			<if test="danjuNumber != null">`danju_number` = #{danjuNumber}, </if>
+			<if test="danjuDay != null">`danju_day` = #{danjuDay}, </if>
+			<if test="eyeStyle != null">`eye_style` = #{eyeStyle}, </if>
+			<if test="zhidanPeople != null">`zhidan_people` = #{zhidanPeople}, </if>
 			<if test="mfrsid != null">`mfrsid` = #{mfrsid}, </if>
-			<if test="name != null">`name` = #{name}, </if>
-			<if test="phone != null">`phone` = #{phone}, </if>
-			<if test="dzStype != null">`dz_stype` = #{dzStype}, </if>
+			<if test="changjiaNumber != null">`changjia_number` = #{changjiaNumber}, </if>
+			<if test="shouhuoPeople != null">`shouhuo_people` = #{shouhuoPeople}, </if>
+			<if test="shouhuoPhone != null">`shouhuo_phone` = #{shouhuoPhone}, </if>
+			<if test="shouhuoAddress != null">`shouhuo_address` = #{shouhuoAddress}, </if>
+			<if test="beizhu != null">`beizhu` = #{beizhu}, </if>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
 			<if test="mirrorTime != null">`mirror_time` = #{mirrorTime}, </if>
-			<if test="eyeRight != null">`eye_right` = #{eyeRight}, </if>
-			<if test="eyeLeft != null">`eye_left` = #{eyeLeft}, </if>
-			<if test="departNumber != null">`depart_number` = #{departNumber}, </if>
+			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+			<if test="style != null">`style` = #{style}, </if>
+			<if test="rl != null">`rl` = #{rl}, </if>
+			<if test="count != null">`count` = #{count}, </if>
 			<if test="sph != null">`sph` = #{sph}, </if>
 			<if test="cyl != null">`cyl` = #{cyl}, </if>
-			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
-			<if test="rl != null">`rl` = #{rl}, </if>
-			<if test="goodsNum != null">`goods_num` = #{goodsNum}, </if>
-			<if test="factory != null">`factory` = #{factory}, </if>
-			<if test="count != null">`count` = #{count}, </if>
-			<if test="goodsCode != null">`goods_code` = #{goodsCode}</if>
+			<if test="axial != null">`axial` = #{axial}, </if>
+			<if test="lightbelow != null">`lightbelow` = #{lightbelow}, </if>
+			<if test="lengjing != null">`lengjing` = #{lengjing}, </if>
+			<if test="diameter != null">`diameter` = #{diameter}, </if>
+			<if test="yaoqiu != null">`yaoqiu` = #{yaoqiu}, </if>
+			<if test="jd != null">`jd` = #{jd}, </if>
+			<if test="curvature != null">`curvature` = #{curvature},</if>
+			<if test="status != null">`status` = #{status},</if>
+			<if test="username != null">`username` = #{username}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -155,15 +202,15 @@
 			#{id}
 		</foreach>
 	</delete>
-
 	<select id="weiwailist" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select s.sale_number,s.member_number,m.name,m.phone_1,sa.eye_type,sa.peijing_time,sa.mirror_time
+		select s.sale_number,s.member_number,m.name,m.phone_1,sa.eye_type,s.settle_date,sa.sale_name
 		from settlement s
 		left join member m on s.member_number=m.card_number
 		left join store_sales sa on s.sale_number=sa.sale_number
 	</select>
 	<select id="countList" resultType="int">
-		select count(*) from settlement s
+		select count(*)
+		from settlement s
 		left join member m on s.member_number=m.card_number
 		left join store_sales sa on s.sale_number=sa.sale_number
 		<where>
@@ -189,6 +236,353 @@
 			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
 		</where>
 	</select>
+	<select id="phoneOrAddres"  resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
+		select depart_tel,depart_address from department
+		where depart_number = #{departNumber}
+	</select>
+	<select id="selectDepartment"  resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
+	select id,depart_name from department
+	</select>
 
+	<select id="selectOrder" resultType="com.shiguang.storeSales.domain.SalesDO">
+		SELECT
+		store_num,
+		left_right,
+		process_ask,
+		goods_num,
+		jp_goods_name,
+		jp_goods_num,
+		depart_name AS  mirorAddress,
+		sale_number,
+		member_number,
+		NAME,
+		phone_1,
+		eye_type,
+		settle_date,
+		sale_name,
+		amount_money,
+		recipel_type,
+		classtype,
+		rightsph,
+		leftsph,
+		rightcyl,
+		leftcyl,
+		rightzx,
+		leftzx,
+		rightAdd,
+		leftAdd,
+		rightSlj,
+		leftSlj,
+		rightJd,
+		leftJd,
+		rightFartj,
+		leftFartj,
+		rightNeartj,
+		leftNeartj
+		FROM
+		(
+		SELECT
+		sa.store_num,
+		sa.left_right,
+		sa.process_ask,
+		sa.goods_num,
+		sa.jp_goods_name,
+		sa.jp_goods_num,
+		de.depart_name,
+		s.sale_number,
+		s.member_number,
+		m.NAME,
+		m.phone_1,
+		sa.eye_type,
+		s.settle_date,
+		sa.sale_name,
+		sa.amount_money,
+		sa.recipel_type,
+		sa.classtype,
+		k.kjjy_prescription_type AS chufangType,
+		k.kjjy_optometry_name AS yangsName,
+		k.kjjy_sphod AS rightsph,
+		k.kjjy_sphos AS leftsph,
+		k.kjjy_cylod AS rightcyl,
+		k.kjjy_cylos AS leftcyl,
+		k.kjjy_axialod AS rightzx,
+		k.kjjy_axialos AS leftzx,
+		'' AS rightAdd,
+		'' AS leftAdd,
+		k.kjjy_prismod AS rightSlj,
+		k.kjjy_prismos AS leftSlj,
+		k.kjjy_jdod AS rightJd,
+		k.kjjy_jdos AS leftJd,
+		k.kjjy_yytjod AS rightFartj,
+		k.kjjy_yytjos AS leftFartj,
+		'' AS rightNeartj,
+		'' AS leftNeartj
+		FROM
+		jc_kjjy k
+		LEFT JOIN store_sales sa ON sa.ptometry_number = k.ptometry_number
+		JOIN settlement s ON s.sale_number = sa.sale_number
+		LEFT JOIN member m ON s.member_number = m.card_number
+		LEFT JOIN department de ON sa.store_num = de.id UNION
+		SELECT
+		sa.store_num,
+		sa.left_right,
+		sa.process_ask,
+		sa.goods_num,
+		sa.jp_goods_name,
+		sa.jp_goods_num,
+		de.depart_name,
+		s.sale_number,
+		s.member_number,
+		m.NAME,
+		m.phone_1,
+		sa.eye_type,
+		s.settle_date,
+		sa.sale_name,
+		sa.amount_money,
+		sa.recipel_type,
+		sa.classtype,
+		ky.kjyy_prescription_type AS chufangType,
+		ky.kjyy_optometry_name AS yangsName,
+		ky.kjyy_sphod AS rightsph,
+		ky.kjyy_sphos AS leftsph,
+		ky.kjyy_cylod AS rightcyl,
+		ky.kjyy_cylos AS leftcyl,
+		ky.kjyy_axialod AS rightzx,
+		ky.kjyy_axialos AS leftzx,
+		'' AS rightAdd,
+		'' AS leftAdd,
+		ky.kjyy_prismod AS rightSlj,
+		ky.kjyy_prismos AS leftSlj,
+		ky.kjyy_jdod AS rightJd,
+		ky.kjyy_jdos AS leftJd,
+		ky.kjyy_yytjod AS rightFartj,
+		ky.kjyy_yytjos AS leftFartj,
+		'' AS rightNeartj,
+		'' AS leftNeartj
+		FROM
+		jc_kjyy ky
+		LEFT JOIN store_sales sa ON sa.ptometry_number = ky.ptometry_number
+		JOIN settlement s ON s.sale_number = sa.sale_number
+		LEFT JOIN member m ON s.member_number = m.card_number
+		LEFT JOIN department de ON sa.store_num = de.id UNION
+		SELECT
+		sa.store_num,
+		sa.left_right,
+		sa.process_ask,
+		sa.goods_num,
+		sa.jp_goods_name,
+		sa.jp_goods_num,
+		de.depart_name,
+		s.sale_number,
+		s.member_number,
+		m.NAME,
+		m.phone_1,
+		sa.eye_type,
+		s.settle_date,
+		sa.sale_name,
+		sa.amount_money,
+		sa.recipel_type,
+		sa.classtype,
+		sg.sgjj_prescription_type AS chufangType,
+		sg.sgjj_optometry_name AS yangsName,
+		sg.sgjj_sphod AS rightsph,
+		sg.sgjj_sphos AS leftsph,
+		sg.sgjj_cylod AS rightcyl,
+		sg.sgjj_cylos AS leftcyl,
+		sg.sgjj_axialod AS rightzx,
+		sg.sgjj_axialos AS leftzx,
+		sg.sgjj_addod AS rightAdd,
+		sg.sgjj_addos AS leftAdd,
+		'' AS rightSlj,
+		'' AS leftSlj,
+		'' AS rightJd,
+		'' AS leftJd,
+		sg.sgjj_yytjod AS rightFartj,
+		sg.sgjj_yytjos AS leftFartj,
+		sg.sgjj_jytjod AS rightNeartj,
+		sg.sgjj_jytjos AS leftNeartj
+		FROM
+		jc_sgjj sg
+		LEFT JOIN store_sales sa ON sa.ptometry_number = sg.ptometry_number
+		JOIN settlement s ON s.sale_number = sa.sale_number
+		LEFT JOIN member m ON s.member_number = m.card_number
+		LEFT JOIN department de ON sa.store_num = de.id UNION
+		SELECT
+		sa.store_num,
+		sa.left_right,
+		sa.process_ask,
+		sa.goods_num,
+		sa.jp_goods_name,
+		sa.jp_goods_num,
+		de.depart_name,
+		s.sale_number,
+		s.member_number,
+		m.NAME,
+		m.phone_1,
+		sa.eye_type,
+		s.settle_date,
+		sa.sale_name,
+		sa.amount_money,
+		sa.recipel_type,
+		sa.classtype,
+		z.zy_prescription_type AS chufangType,
+		z.zy_optometry_name AS yangsName,
+		z.zy_sphod AS rightsph,
+		z.zy_sphos AS leftsph,
+		z.zy_cylod AS rightcyl,
+		z.zy_cylos AS leftcyl,
+		z.zy_axialod AS rightzx,
+		z.zy_axialos AS leftzx,
+		'' AS rightAdd,
+		'' AS leftAdd,
+		z.zy_prismod AS rightSlj,
+		z.zy_prismos AS leftSlj,
+		z.zy_jdod AS rightJd,
+		z.zy_jdos AS leftJd,
+		'' AS rightFartj,
+		'' AS leftFartj,
+		'' AS rightNeartj,
+		'' AS leftNeartj
+		FROM
+		jc_zy z
+		LEFT JOIN store_sales sa ON sa.ptometry_number = z.ptometry_number
+		JOIN settlement s ON s.sale_number = sa.sale_number
+		LEFT JOIN member m ON s.member_number = m.card_number
+		LEFT JOIN department de ON sa.store_num = de.id UNION
+		SELECT
+		sa.store_num,
+		sa.left_right,
+		sa.process_ask,
+		sa.goods_num,
+		sa.jp_goods_name,
+		sa.jp_goods_num,
+		de.depart_name,
+		s.sale_number,
+		s.member_number,
+		m.NAME,
+		m.phone_1,
+		sa.eye_type,
+		s.settle_date,
+		sa.sale_name,
+		sa.amount_money,
+		sa.recipel_type,
+		sa.classtype,
+		x.rx_prescription_type AS chufangType,
+		x.rx_optometry_name AS yangsName,
+		x.rx_sphod AS rightsph,
+		x.rx_sphos AS leftsph,
+		x.rx_cylod AS rightcyl,
+		x.rx_cylos AS leftcyl,
+		x.rx_axialod AS rightzx,
+		x.rx_axialos AS leftzx,
+		'' AS rightAdd,
+		'' AS leftAdd,
+		'' AS rightSlj,
+		'' AS leftSlj,
+		'' AS rightJd,
+		'' AS leftJd,
+		'' AS rightFartj,
+		'' AS leftFartj,
+		'' AS rightNeartj,
+		'' AS leftNeartj
+		FROM
+		jc_rxjmjcj x
+		LEFT JOIN store_sales sa ON sa.ptometry_number = x.ptometry_number
+		JOIN settlement s ON s.sale_number = sa.sale_number
+		LEFT JOIN member m ON s.member_number = m.card_number
+		LEFT JOIN department de ON sa.store_num = de.id UNION
+		SELECT
+		sa.store_num,
+		sa.left_right,
+		sa.process_ask,
+		sa.goods_num,
+		sa.jp_goods_name,
+		sa.jp_goods_num,
+		de.depart_name,
+		s.sale_number,
+		s.member_number,
+		m.NAME,
+		m.phone_1,
+		sa.eye_type,
+		s.settle_date,
+		sa.sale_name,
+		sa.amount_money,
+		sa.recipel_type,
+		sa.classtype,
+		sx.sjxl_prescription_type AS chufangType,
+		sx.sjxl_optometry_name AS yangsName,
+		sx.sjxl_sphod AS rightsph,
+		sx.sjxl_sphos AS leftsph,
+		sx.sjxl_cylod AS rightcyl,
+		sx.sjxl_cylos AS leftcyl,
+		sx.sjxl_axialod AS rightzx,
+		sx.sjxl_axialos AS leftzx,
+		'' AS rightAdd,
+		'' AS leftAdd,
+		sx.sjxl_sljod AS rightSlj,
+		sx.sjxl_sljos AS leftSlj,
+		sx.sjxl_jdod AS rightJd,
+		sx.sjxl_jdos AS leftJd,
+		sx.sjxl_yytjod AS rightFartj,
+		sx.sjxl_yytjos AS leftFartj,
+		sx.sjxl_jytjod AS rightNeartj,
+		sx.sjxl_jytjos AS leftNeartj
+		FROM
+		jc_sjxl sx
+		LEFT JOIN store_sales sa ON sa.ptometry_number = sx.ptometry_number
+		JOIN settlement s ON s.sale_number = sa.sale_number
+		LEFT JOIN member m ON s.member_number = m.card_number
+		LEFT JOIN department de ON sa.store_num = de.id UNION
+		SELECT
+		sa.store_num,
+		sa.left_right,
+		sa.process_ask,
+		sa.goods_num,
+		sa.jp_goods_name,
+		sa.jp_goods_num,
+		de.depart_name,
+		s.sale_number,
+		s.member_number,
+		m.NAME,
+		m.phone_1,
+		sa.eye_type,
+		s.settle_date,
+		sa.sale_name,
+		sa.amount_money,
+		sa.recipel_type,
+		sa.classtype,
+		'' chufangType,
+		'' AS yangsName,
+		'' AS rightsph,
+		'' AS leftsph,
+		'' AS rightcyl,
+		'' AS leftcyl,
+		'' AS rightzx,
+		'' AS leftzx,
+		'' AS rightAdd,
+		'' AS leftAdd,
+		'' AS rightSlj,
+		'' AS leftSlj,
+		'' AS rightJd,
+		'' AS leftJd,
+		'' AS rightFartj,
+		'' AS leftFartj,
+		'' AS rightNeartj,
+		'' AS leftNeartj
+		FROM
+		jc_rgp rg
+		LEFT JOIN store_sales sa ON sa.ptometry_number = rg.ptometry_number
+		JOIN settlement s ON s.sale_number = sa.sale_number
+		LEFT JOIN member m ON s.member_number = m.card_number
+		LEFT JOIN department de ON sa.store_num = de.id
+		) aia
+
+		<where>
+			<if test="classtype != null and classtype != ''">and  FIND_IN_SET(#{classtype},classtype)</if>
+			<if test="eyeStyles != null and eyeStyles != ''">and  FIND_IN_SET(eye_type,#{eyeStyles})</if>
+			<if test="departNumber != null and departNumber != ''">and store_num = #{departNumber}</if>
+		</where>
+		group by sale_number
+	</select>
 
 </mapper>
