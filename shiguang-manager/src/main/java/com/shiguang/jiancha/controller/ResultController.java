@@ -1,20 +1,15 @@
 package com.shiguang.jiancha.controller;
 
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.jiancha.domain.*;
 import com.shiguang.jiancha.service.*;
-import com.shiguang.member.domain.MemberDO;
-import com.shiguang.mfrs.domain.BrandDO;
-import com.sun.mail.imap.protocol.ID;
-import javafx.scene.control.Alert;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sun.plugin.javascript.navig4.Layer;
+
 
 import java.text.SimpleDateFormat;
 import java.util.*;

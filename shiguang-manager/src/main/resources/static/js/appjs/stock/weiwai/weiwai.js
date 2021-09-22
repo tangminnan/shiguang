@@ -49,125 +49,75 @@ function load() {
 								// },
 								// 								{
 								// 	field : 'id',
-								// 	title : '委外收货id'
+								// 	title : 'id'
 								// },
-																{
-									field : 'saleNumber',
-									title : '配镜单号' 
+								{
+									field : 'danjuNumber',
+									title : '单据编号'
 								},
-								// 								{
-								// 	field : 'shouhuoNumber',
-								// 	title : '收货单号'
-								// },
-								// 								{
-								// 	field : 'positionId',
-								// 	title : '收入仓位id'
-								// },
-								// 								{
-								// 	field : 'mfrsid',
-								// 	title : '制造商id'
-								// },
-																{
-									field : 'name', 
-									title : '顾客姓名' 
+								{
+									field : 'name',
+									title : '会员姓名'
 								},
-																{
+								{
+									field : 'memberNumber',
+									title : '会员卡号'
+								},
+								{
 									field : 'phone1',
-									title : '联系电话' 
+									title : '电话'
 								},
-								// 								{
-								// 	field : 'dzStype',
-								// 	title : '订做类型'
-								// },
-								// 								{
-								// 	field : 'mirrorTime',
-								// 	title : '取镜日期'
-								// },
-								// 								{
-								// 	field : 'eyeRight',
-								// 	title : '右眼加工要求'
-								// },
-								// 								{
-								// 	field : 'eyeLeft',
-								// 	title : '左眼加工要求'
-								// },
-																{
-									field : 'departNumber', 
+							{
+									field : '',
 									title : '销售门店'
 								},
+                            {
+                                field : 'eyeType',
+                                title : '订做类型'
+                            },
 								{
 									field : 'mfrsname',
 									title : '制造商'
 								},
-								{
-									field : 'eyeType',
-									title : '镜片类型'
-								},
-								{
-									field : 'peijingTime',
-									title : '配镜时间'
+
+							{
+									field : 'saleName',
+									title : '制单人'
 								},
 							{
-									field : 'mirrorTime',
-									title : '取镜时间'
+									field : 'settleDate',
+									title : '单据日期'
 								},
 
-								// 								{
-								// 	field : 'sph',
-								// 	title : '球镜'
-								// },
-								// 								{
-								// 	field : 'cyl',
-								// 	title : '柱镜'
-								// },
-								// 								{
-								// 	field : 'goodsName',
-								// 	title : '商品名称'
-								// },
-								// 								{
-								// 	field : 'rl',
-								// 	title : 'R/L'
-								// },
-								// 								{
-								// 	field : 'goodsNum',
-								// 	title : '商品代码'
-								// },
-								// 								{
-								// 	field : 'factory',
-								// 	title : '厂家型号'
-								// },
-								// 								{
-								// 	field : 'count',
-								// 	title : '数量'
-								// },
-								// 								{
-								// 	field : 'goodsCode',
-								// 	title : '商品条码'
-								// },
-																{
-									title : '操作',
-									field : 'id',
-									align : 'center',
-									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.id
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.id
-												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
-									}
-								} ]
+                            {
+                                title: '操作',
+                                field: 'danjuNumber',
+                                align: 'center',
+                                formatter: function (value, row, index) {
+                                    if (row.status == "1") {
+                                        var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
+                                            + row.id + '\')">详情</span> ';
+                                        var f = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#" style="width:26%" onclick="userNum(\''
+                                            + row.danjuNumber + '\')">确认收货</span> ';
+                                        var n = '';
+                                    } else if (row.status == "0") {
+                                        var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
+                                            + row.id + '\')">详情</span> ';
+                                        var f = '';
+                                        var n = '<span class="btn btn-warning btn-sm"  href="#" title="条形码打印"  mce_href="#" onclick="code(\''
+                                            + row.goodsType+" ','"+ row.danjuNumber + '\')">条形码打印</span> ';
+                                    }
+                                    return a + f + n ;
+                                }
+                            }
+								]
 					});
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	layer.open({
+    var toIndex = layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
@@ -175,9 +125,10 @@ function add() {
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
+    layer.full(toIndex)
 }
 function edit(id) {
-	layer.open({
+    var toIndex = layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
@@ -185,6 +136,7 @@ function edit(id) {
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
+    layer.full(toIndex)
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

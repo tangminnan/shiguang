@@ -44,9 +44,9 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-								{
-									checkbox : true
-								},
+								// {
+								// 	checkbox : true
+								// },
 								// 								{
 								// 	field : 'id',
 								// 	title : '退货id'
@@ -62,6 +62,10 @@ function load() {
 																{
 									field : 'danjuDay', 
 									title : '单据日期' 
+								},
+							{
+									field : 'style',
+									title : '出库方式'
 								},
 								// 								{
 								// 	field : 'mfrsid',
@@ -120,16 +124,16 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+										var e = '<span class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="详情" onclick="edit(\''
 												+ row.id
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.id
-												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+												+ '\')">详情</span>';
+										// var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+										// 		+ row.id
+										// 		+ '\')"><i class="fa fa-remove"></i></a> ';
+										// var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+										// 		+ row.id
+										// 		+ '\')"><i class="fa fa-key"></i></a> ';
+										return e  ;
 									}
 								} ]
 					});
@@ -151,7 +155,7 @@ function add() {
 function edit(id) {
     var toIndex = layer.open({
 		type : 2,
-		title : '编辑',
+		title : '详情',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
@@ -225,70 +229,24 @@ function showCol() {
     check.each(function () {
         var obj = {};
         var rowstr = $(this).parent("td").parent("tr");
-        //———获取当前系统时间—————
-        var timeNow = new Date();
-        var year = timeNow.getFullYear();
-        var month = timeNow.getMonth() + 1 > 10 ? timeNow.getMonth() + 1 : '0' + (timeNow.getMonth() + 1);
-        var date = timeNow.getDate() > 10 ? timeNow.getDate() : "0" + timeNow.getDate();
-        obj.createTime = year + "-" + month + "-" + date;
+
 
         var goodsNum = rowstr.find("[name='goodsNum']").html();//注意html()和val()
-        var goodsCode = rowstr.find("[name='goodsCode']").html();
-        var goodsName = rowstr.find("[name='goodsName']").html();
-        var goodsCount = rowstr.find("[name='goodsCount']").html();
-        var gdname = rowstr.find("[name='gdname']").html();
-        var mfrsname = rowstr.find("[name='mfrsname']").html();
-        var factory = rowstr.find("[name='factory']").html();
-        var retailPrice = rowstr.find("[name='retailPrice']").html();
-        var priceSum = rowstr.find("[name='priceSum']").html();
-        var costPrice = rowstr.find("[name='costPrice']").html();
-        var costSum = rowstr.find("[name='costSum']").html();
-        var wholePrice = rowstr.find("[name='wholePrice']").html();
-        var wholeSum = rowstr.find("[name='wholeSum']").html();
-        var positionName = rowstr.find("[name='positionName']").html();
-        var batch = rowstr.find("[name='batch']").html();
-        var zhuceNumber = rowstr.find("[name='zhuceNumber']").html();
-        var produceDay = rowstr.find("[name='produceDay']").html();
-        var useday = rowstr.find("[name='useday']").html();
-        var classtype = rowstr.find("[name='classtype']").html();
-        var gdname = rowstr.find("[name='gdname']").html();
+        var goodsName = rowstr.find("[name='goodsName']").html();//注意html()和val()
+        var factory = rowstr.find("[name='factory']").html();//注意html()和val()
+        var unit = rowstr.find("[name='unit']").html();//注意html()和val()
+        var goodsCount = rowstr.find("[name='goodsCount']").html();//注意html()和val()
+        var goodsCode = rowstr.find("[name='goodsCode']").html();//注意html()和val()
+        var goodsxinxiid = rowstr.find("[name='goodsxinxiid']").html();//注意html()和val()
+        var retailPrice = rowstr.find("[name='retailPrice']").html();//注意html()和val()
         obj.goodsNum = goodsNum;
-        obj.goodsCode = goodsCode;
         obj.goodsName = goodsName;
-        obj.goodsCount = goodsCount;
-        obj.gdname = gdname;
         obj.factory = factory;
-        obj.mfrsname = mfrsname;
-
-        obj.retailPrice = retailPrice;
-        obj.priceSum = priceSum;
-        obj.costPrice = costPrice;
-        obj.costSum = costSum;
-        obj.wholePrice = wholePrice;
-        obj.wholeSum = wholeSum;
-
-        obj.positionName = positionName;
-        obj.batch = batch;
-        obj.zhuceNumber = zhuceNumber;
-        obj.produceDay = produceDay;
-        obj.useday = useday;
-        obj.classtype = classtype;
-        obj.gdname = gdname;
-
-        var mfrsid = rowstr.find("[name='mfrsid']").html();
-        obj.mfrsid = mfrsid;
-
-        var brandname = rowstr.find("[name='brandname']").html();
-        obj.brandname = brandname;
-
-        var unit = rowstr.find("[name='unit']").html();
         obj.unit = unit;
-        var goodsid = rowstr.find("[name='goodsid']").html();
-        obj.goodsid = goodsid;
-        var goodsxinxiid = rowstr.find("[name='goodsxinxiid']").html();
+        obj.goodsCount = goodsCount;
+        obj.goodsCode = goodsCode;
         obj.goodsxinxiid = goodsxinxiid;
-
-
+        obj.retailPrice = retailPrice;
         objArray.push(obj);
     });
     return objArray;

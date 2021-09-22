@@ -184,6 +184,10 @@ public class StockController {
         String[] retailPrice1= stock.getRetailPrice().split(",");
         String[] unit1=stock.getUnit().split(",");
         String[] useday1=stock.getUseday().split(",");
+
+
+
+
         String[] batch1=stock.getBatch().split(",");
         String[] zhuceNumber1=stock.getZhuceNumber().split(",");
         String[] produceDay1=stock.getProduceDay().split(",");
@@ -1051,6 +1055,11 @@ public class StockController {
         String danjuDay = sdftime.format(time);
         model.addAttribute("danjuDay", danjuDay);
         model.addAttribute("getOeder", getOeder);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String newDate = sdf.format(date);
+        model.addAttribute("newDate", newDate);
         return "/stock/stock/dayinOrder";
     }
 
@@ -1072,6 +1081,11 @@ public class StockController {
         String danjuDay = sdftime.format(time);
         model.addAttribute("danjuDay", danjuDay);
         model.addAttribute("getShouhuo", getShouhuo);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String newDate = sdf.format(date);
+        model.addAttribute("newDate", newDate);
         return "/stock/stock/shouhuoOrder";
     }
 

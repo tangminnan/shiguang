@@ -270,8 +270,7 @@
                            onkeydown="xiaoshu(this)"/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjyyCylod" type="text"onblur="zhengfu(this)"
                            onkeydown="xiaoshu(this)"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"     name="kjyyAxialod" type="text"onblur="zhouxiang(this)"
-                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"   id="kjyyAxialod"  name="kjyyAxialod" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"   name="kjyyPrismod" class="short" type="text"/>
                     △
                 </td>
@@ -296,8 +295,7 @@
                            onkeydown="xiaoshu(this)"/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}" name="kjyyCylos" type="text"onblur="zhengfu(this)"
                            onkeydown="xiaoshu(this)"/></td>
-                <td><input th:value="${tryresultsDO.axialLefttry}"    name="kjyyAxialos" type="text"onblur="zhouxiang(this)"
-                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"    id="kjyyAxialos" name="kjyyAxialos" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input th:value="${tryresultsDO.prismLefttry}"    name="kjyyPrismos" class="short" type="text"/> △
                 </td>
                 <td>
@@ -412,8 +410,7 @@
                            onkeydown="xiaoshu(this)"/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjjyCylod" type="text"onblur="zhengfu(this)"
                            onkeydown="xiaoshu(this)"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}" name="kjjyAxialod" type="text"onblur="zhouxiang(this)"
-                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}" id="kjjyAxialod" name="kjjyAxialod" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}" name="kjjyPrismod" class="short" type="text"/> △
                 </td>
                 <td>
@@ -437,8 +434,7 @@
                              onkeydown="xiaoshu(this)"/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}"name="kjjyCylos" type="text"onblur="zhengfu(this)"
                              onkeydown="xiaoshu(this)"/></td>
-                <td><input th:value="${tryresultsDO.axialLefttry}"   name="kjjyAxialos" type="text"onblur="zhouxiang(this)"
-                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"  id="kjjyAxialos" name="kjjyAxialos" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input th:value="${tryresultsDO.prismLefttry}"   name="kjjyPrismos" class="short" type="text"/> △</td>
                 <td>
                     <select id="kjjyJdos" name="kjjyJdos" th:value="${tryresultsDO.jdlTry}" >
@@ -554,8 +550,7 @@
                              onkeydown="xiaoshu(this)"/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}"name="sgjjCylod" type="text"onblur="zhengfu(this)"
                              onkeydown="xiaoshu(this)"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"   name="sgjjAxialod" type="text"onblur="zhouxiang(this)"
-                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}" id="sgjjAxialod"  name="sgjjAxialod" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input  th:value="${tryresultsDO.addRighttry}"     name="sgjjAddod" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.yuanRrty}"        name="sgjjYytjod" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.nearRighttry}"   name="sgjjJytjod" type="text"/></td>
@@ -569,8 +564,7 @@
                              onkeydown="xiaoshu(this)"/></td>
                 <td><input   th:value="${tryresultsDO.cylinderLefttry}"name="sgjjCylos" type="text"onblur="zhengfu(this)"
                              onkeydown="xiaoshu(this)"/></td>
-                <td><input   th:value="${tryresultsDO.axialLefttry}"   name="sgjjAxialos" type="text"onblur="zhouxiang(this)"
-                             onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input   th:value="${tryresultsDO.axialLefttry}"  id="sgjjAxialos" name="sgjjAxialos" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input    th:value="${tryresultsDO.addLefttry}"    name="sgjjAddos" type="text"/></td>
                 <td><input    th:value="${tryresultsDO.yuanLrty}"       name="sgjjYytjos" type="text"/></td>
                 <td><input    th:value="${tryresultsDO.nearLefttry}"   name="sgjjJytjos" type="text"/></td>
@@ -677,8 +671,7 @@
                              onkeydown="xiaoshu(this)"/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}"name="rxCylod" type="text"onblur="zhengfu(this)"
                              onkeydown="xiaoshu(this)"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"   name="rxAxialod" type="text"onblur="zhouxiang(this)"
-                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="rxAxialod" name="rxAxialod" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input name="rxZjod" type="text"/></td>
                 <td><input name="rxVaod" type="text"/></td>
                 <td>适用镜片：<input name="rxSyjpod" style="width:60%" type="text"/></td>
@@ -698,8 +691,7 @@
                              onkeydown="xiaoshu(this)"/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}"name="rxCylos" type="text"onblur="zhengfu(this)"
                              onkeydown="xiaoshu(this)"/></td>
-                <td><input th:value="${tryresultsDO.axialLefttry}"   name="rxAxialos" type="text"onblur="zhouxiang(this)"
-                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}" id="rxAxialos"  name="rxAxialos" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input name="rxZjos" type="text"/></td>
                 <td><input name="rxVaos" type="text"/></td>
                 <td>适用镜片：<input name="rxSyjpos" style="width:60%" type="text"/></td>
@@ -764,8 +756,7 @@
                              onkeydown="xiaoshu(this)"/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="zyCylod" type="text"onblur="zhengfu(this)"
                              onkeydown="xiaoshu(this)"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"    name="zyAxialod" type="text"onblur="zhouxiang(this)"
-                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="zyAxialod"  name="zyAxialod" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"    name="zyPrismod" class="short" type="text"/> △</td>
                 <td>
                     <select id="zyJdod" name="zyJdod" th:value="${tryresultsDO.jdrTry}">
@@ -788,8 +779,7 @@
                              onkeydown="xiaoshu(this)"/></td>
                 <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="zyCylos" type="text"onblur="zhengfu(this)"
                              onkeydown="xiaoshu(this)"/></td>
-                <td><input  th:value="${tryresultsDO.axialLefttry}"   name="zyAxialos" type="text"onblur="zhouxiang(this)"
-                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="zyAxialos"  name="zyAxialos" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input  th:value="${tryresultsDO.prismLefttry}"   name="zyPrismos" class="short" type="text"/> △</td>
                 <td>
                     <select id="zyJdos" name="zyJdos" th:value="${tryresultsDO.jdlTry}">
@@ -904,8 +894,7 @@
                              onkeydown="xiaoshu(this)"/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="sjxlCylod" type="text"onblur="zhengfu(this)"
                              onkeydown="xiaoshu(this)"/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"    name="sjxlAxialod" type="text"onblur="zhouxiang(this)"
-                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="sjxlAxialod"  name="sjxlAxialod" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"   name="sjxlSljod" class="short" type="text"/> △</td>
                 <td>
                     <select id="sjxlJdod" name="sjxlJdod" th:value="${tryresultsDO.jdrTry}">
@@ -929,8 +918,7 @@
                              onkeydown="xiaoshu(this)"/></td>
                 <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="sjxlCylos" type="text"onblur="zhengfu(this)"
                              onkeydown="xiaoshu(this)"/></td>
-                <td><input  th:value="${tryresultsDO.axialLefttry}"   name="sjxlAxialos" type="text"onblur="zhouxiang(this)"
-                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="sjxlAxialos"  name="sjxlAxialos" type="text"onblur="zhouxiang(this)"/></td>
                 <td><input  th:value="${tryresultsDO.prismLefttry}"   name="sjxlSljos" class="short" type="text"/> △</td>
                 <td>
                     <select id="sjxlJdos" name="sjxlJdos"th:value="${tryresultsDO.jdlTry}">
@@ -1449,8 +1437,58 @@
         if (val < 0 || val > 180) {
             layer.alert("轴向在0-180之间");
         } else {
-            e.value = val.toFixed(0)
+            e.value = val.toFixed(2)
         }
+        var kjyyAxialod=document.getElementById('kjyyAxialod').value;
+        if (kjyyAxialod == "NaN"){
+            $("#kjyyAxialod").val("");
+        }
+        var kjyyAxialos=document.getElementById('kjyyAxialos').value;
+        if (kjyyAxialos == "NaN"){
+            $("#kjyyAxialos").val("");
+        }
+         var kjjyAxialod=document.getElementById('kjjyAxialod').value;
+        if (kjjyAxialod == "NaN"){
+            $("#kjjyAxialod").val("");
+        }
+         var kjjyAxialos=document.getElementById('kjjyAxialos').value;
+        if (kjjyAxialos == "NaN"){
+            $("#kjjyAxialos").val("");
+        }
+        var sgjjAxialod=document.getElementById('sgjjAxialod').value;
+        if (sgjjAxialod == "NaN"){
+            $("#sgjjAxialod").val("");
+        }
+        var sgjjAxialos=document.getElementById('sgjjAxialos').value;
+        if (sgjjAxialos == "NaN"){
+            $("#sgjjAxialos").val("");
+        }
+        var rxAxialod=document.getElementById('rxAxialod').value;
+        if (rxAxialod == "NaN"){
+            $("#rxAxialod").val("");
+        }
+        var rxAxialos=document.getElementById('rxAxialos').value;
+        if (rxAxialos == "NaN"){
+            $("#rxAxialos").val("");
+        }
+        var zyAxialod=document.getElementById('zyAxialod').value;
+        if (zyAxialod == "NaN"){
+            $("#zyAxialod").val("");
+        }
+        var zyAxialos=document.getElementById('zyAxialos').value;
+        if (zyAxialos == "NaN"){
+            $("#zyAxialos").val("");
+        }
+        var sjxlAxialod=document.getElementById('sjxlAxialod').value;
+        if (sjxlAxialod == "NaN"){
+            $("#sjxlAxialod").val("");
+        }
+        var sjxlAxialos=document.getElementById('sjxlAxialos').value;
+        if (sjxlAxialos == "NaN"){
+            $("#sjxlAxialos").val("");
+        }
+
+
     }
 
 

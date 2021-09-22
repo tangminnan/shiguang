@@ -671,18 +671,18 @@
                             b = b + 1;
                             $(".heji1").before("<tr class='val1'>" +
                                 // "<td><input type=\"checkbox\"/></td>\n" +
-                                "<td >" + rows[i].producNum + "</td>\n" +
-                                "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
-                                "<td>" + rows[i].producName + "</td>\n" +
-                                "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
-                                "<td>" + rows[i].producFactory + "</td>\n" +
-                                "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +
-                                "<td>" + rows[i].producFactorycolor + "</td>\n" +
-                                "<td>" + rows[i].materialName + "</td>\n" +
-                                "<td>" + rows[i].size + "</td>\n" +
-                                "<td >" + rows[i].createTime + "</td>\n" +
-                                "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
-                                "<td  >" + rows[i].producCode + "</td>\n" +
+                                "<td >" + rows[i].producNum + "</td>\n" +//0
+                                "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +//1
+                                "<td>" + rows[i].producName + "</td>\n" +//2
+                                "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +//3
+                                "<td>" + rows[i].producFactory + "</td>\n" +//4
+                                "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>\n" +//5
+                                "<td>" + rows[i].producFactorycolor + "</td>\n" +//6
+                                "<td>" + rows[i].materialName + "</td>\n" +//7
+                                "<td>" + rows[i].size + "</td>\n" +//8
+                                "<td >" + rows[i].createTime + "</td>\n" +//9
+                                "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +//10
+                                "<td >" + rows[i].producCode + "</td>\n" +
                                 "<input id='goodsCode' name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
                                 "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
                                 "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +//标准零售价---标准
@@ -801,7 +801,25 @@
                             //日期
                             laydate.render({
                                 elem: '#useday' + a,
-                                type: 'date'
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[9].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[9].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[10].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[10]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[9].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[10].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[10]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
                             });
                             //日期
                             laydate.render({
@@ -874,7 +892,25 @@
                             //日期
                             laydate.render({
                                 elem: '#useday' + a,
-                                type: 'date'
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
                             });
                             //日期
                             laydate.render({
@@ -948,7 +984,25 @@
                             //日期
                             laydate.render({
                                 elem: '#useday' + a,
-                                type: 'date'
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
                             });
                             //日期
                             laydate.render({
@@ -1018,7 +1072,25 @@
                             //日期
                             laydate.render({
                                 elem: '#useday' + a,
-                                type: 'date'
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[10].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[10].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[11].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[11]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[10].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[11].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[11]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
                             });
                             //日期
                             laydate.render({
@@ -1087,7 +1159,25 @@
                             //日期
                             laydate.render({
                                 elem: '#useday' + a,
-                                type: 'date'
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[10].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[10].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[11].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[11]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[10].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[11].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[11]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
                             });
                             //日期
                             laydate.render({
@@ -1158,7 +1248,25 @@
                             //日期
                             laydate.render({
                                 elem: '#useday' + a,
-                                type: 'date'
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[11].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[11].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[12].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[12]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[11].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[12].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[12]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
                             });
                             //日期
                             laydate.render({
@@ -1226,7 +1334,25 @@
                             //日期
                             laydate.render({
                                 elem: '#useday' + a,
-                                type: 'date'
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[8].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[8].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[9].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[9]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[8].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[9].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[9]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
                             });
                             //日期
                             laydate.render({
@@ -1294,7 +1420,25 @@
                             //日期
                             laydate.render({
                                 elem: '#useday' + a,
-                                type: 'date'
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[8].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[8].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[9].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[9]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[8].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[9].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[9]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
                             });
                             //日期
                             laydate.render({

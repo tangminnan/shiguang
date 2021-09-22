@@ -38,7 +38,7 @@ public class CrtServiceImpl implements CrtService {
 
     @Override
     public int saveCrt(ResultDO result) {
-        return saveCrt(result);
+        return crtDao.saveCrt(result);
     }
 
     @Override

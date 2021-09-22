@@ -818,17 +818,20 @@
                     <td style="text-align: right" colspan="7">
                         医生：
                         <select id="kjyyDoctor" name="kjyyDoctor" th:value="${resultDO.kjyyDoctor}" disabled>
-                            <option></option>
-                            <option value="孙伟">孙伟</option>
-                            <option value="维护二">维护二</option>
+                                <option></option>
+                                <option th:each="ls:${listDoctor}"
+                                        th:text="${ls.name}"
+                                        th:value="${ls.name}"
+                                ></option>
                         </select>
                         <input id="kjyyDoctors" name="kjyyDoctors" th:value="${resultDO.kjyyDoctor}" type="hidden" readonly>
                         验光师：
                         <select id="kjyyOptometryName" name="kjyyOptometryName" th:value="${resultDO.kjyyOptometryName}" disabled>
                             <option></option>
-                            <option value="张三">张三</option>
-                            <option value="周五">周五</option>
-                            <option value="陈静">陈静</option>
+                            <option th:each="ls:${listYanguang}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="kjyyOptometryNames" name="kjyyOptometryNames" th:value="${resultDO.kjyyOptometryName}" type="hidden" readonly>
                     </td>
@@ -971,17 +974,19 @@
                     <td style="text-align: right" colspan="7">
                         医生：
                         <select id="kjjyDoctor" name="kjjyDoctor" th:value="${resultDO.kjjyDoctor}" disabled>
-                            <option></option>
-                            <option value="孙伟">孙伟</option>
-                            <option value="维护二">维护二</option>
+                            <option th:each="ls:${listDoctor}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="kjjyDoctors" name="kjjyDoctors" th:value="${resultDO.kjjyDoctor}"  readonly type="hidden">
                         验光师：
                         <select id="kjjyOptometryName" name="kjjyOptometryName"th:value="${resultDO.kjjyOptometryName}" disabled>
                             <option></option>
-                            <option value="张三">张三</option>
-                            <option value="周五">周五</option>
-                            <option value="陈静">陈静</option>
+                            <option th:each="ls:${listYanguang}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="kjjyOptometryNames" name="kjjyOptometryNames" th:value="${resultDO.kjjyOptometryName}" readonly type="hidden">
                     </td>
@@ -1109,16 +1114,19 @@
                         医生：
                         <select id="sgjjDoctor" name="sgjjDoctor"  th:value="${resultDO.sgjjDoctor}" disabled>
                             <option></option>
-                            <option value="孙伟">孙伟</option>
-                            <option value="维护二">维护二</option>
+                            <option th:each="ls:${listDoctor}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="sgjjDoctors" name="sgjjDoctors" th:value="${resultDO.sgjjDoctor}" readonly type="hidden">
                         验光师：
                         <select id="sgjjOptometryName" name="sgjjOptometryName"  th:value="${resultDO.sgjjOptometryName}" disabled>
                             <option></option>
-                            <option value="张三">张三</option>
-                            <option value="周五">周五</option>
-                            <option value="陈静">陈静</option>
+                            <option th:each="ls:${listYanguang}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="sgjjOptometryNames" name="sgjjOptometryNames" th:value="${resultDO.sgjjOptometryName}" readonly type="hidden">
                     </td>
@@ -1229,16 +1237,19 @@
                         医生：
                         <select id="rxDoctor" name="rxDoctor" th:value="${resultDO.rxDoctor}" disabled>
                             <option></option>
-                            <option value="孙伟">孙伟</option>
-                            <option value="维护二">维护二</option>
+                            <option th:each="ls:${listDoctor}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="rxDoctors" name="rxDoctors" th:value="${resultDO.rxDoctor}" readonly type="hidden">
                         验光师：
                         <select id="rxOptometryName" name="rxOptometryName" th:value="${resultDO.rxOptometryName}" disabled >
                             <option></option>
-                            <option value="张三">张三</option>
-                            <option value="周五">周五</option>
-                            <option value="陈静">陈静</option>
+                            <option th:each="ls:${listYanguang}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="rxOptometryNames" name="rxOptometryNames" th:value="${resultDO.rxOptometryName}" readonly type="hidden">
                     </td>
@@ -1312,16 +1323,19 @@
                         医生：
                         <select id="zyDoctor" name="zyDoctor" th:value="${resultDO.zyDoctor}" disabled>
                             <option></option>
-                            <option value="孙伟">孙伟</option>
-                            <option value="维护二">维护二</option>
+                            <option th:each="ls:${listDoctor}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="zyDoctors" name="zyDoctors" th:value="${resultDO.zyDoctor}" readonly type="hidden">
                         验光师：
                         <select id="zyOptometryName" name="zyOptometryName" th:value="${resultDO.zyOptometryName}" disabled>
                             <option></option>
-                            <option value="张三">张三</option>
-                            <option value="周五">周五</option>
-                            <option value="陈静">陈静</option>
+                            <option th:each="ls:${listYanguang}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="zyOptometryNames" name="zyOptometryNames" th:value="${resultDO.zyOptometryName}" readonly type="hidden">
                     </td>
@@ -1453,17 +1467,20 @@
                         医生：
                         <select id="sjxlDoctor" name="sjxlDoctor"  th:value="${resultDO.sjxlDoctor}" disabled>
                             <option></option>
-                            <option value="孙伟">孙伟</option>
-                            <option value="维护二">维护二</option>
+                            <option th:each="ls:${listDoctor}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="sjxlDoctors" name="sjxlDoctors" th:value="${resultDO.sjxlDoctor}" readonly type="hidden">
 
                         验光师：
                         <select id="sjxlOptometryName" name="sjxlOptometryName"  th:value="${resultDO.sjxlOptometryName}" disabled>
                             <option></option>
-                            <option value="张三">张三</option>
-                            <option value="周五">周五</option>
-                            <option value="陈静">陈静</option>
+                            <option th:each="ls:${listYanguang}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="sjxlOptometryNames" name="sjxlOptometryNames" th:value="${resultDO.sjxlOptometryName}" readonly type="hidden">
 
@@ -1556,17 +1573,20 @@
                         医生：
                         <select id="vstDoctor" name="vstDoctor" th:value="${resultDO.vstDoctor}" disabled>
                             <option></option>
-                            <option value="孙伟">孙伟</option>
-                            <option value="维护二">维护二</option>
+                            <option th:each="ls:${listDoctor}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="vstDoctors" name="vstDoctors" th:value="${resultDO.vstDoctor}" readonly type="hidden">
 
                         验光师：
                         <select id="vstOptometryName" name="vstOptometryName" th:value="${resultDO.vstOptometryName}" disabled>
                             <option></option>
-                            <option value="张三">张三</option>
-                            <option value="周五">周五</option>
-                            <option value="陈静">陈静</option>
+                            <option th:each="ls:${listYanguang}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="vstOptometryNames" name="vstOptometryNames" th:value="${resultDO.vstOptometryName}" readonly type="hidden">
 
@@ -1639,17 +1659,20 @@
                         医生：
                         <select id="crtDoctor" name="crtDoctor" th:value="${resultDO.crtDoctor}" disabled>
                             <option></option>
-                            <option value="孙伟">孙伟</option>
-                            <option value="维护二">维护二</option>
+                            <option th:each="ls:${listDoctor}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="crtDoctors" name="crtDoctors" th:value="${resultDO.crtDoctor}" readonly  type="hidden">
 
                         验光师：
                         <select id="crtOptometryName" name="crtOptometryName" th:value="${resultDO.crtOptometryName}" disabled>
                             <option></option>
-                            <option value="张三">张三</option>
-                            <option value="周五">周五</option>
-                            <option value="陈静">陈静</option>
+                            <option th:each="ls:${listYanguang}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="crtOptometryNames" name="crtOptometryNames" th:value="${resultDO.crtOptometryName}" readonly type="hidden">
 
@@ -1725,9 +1748,10 @@
                         验光师：
                         <select id="rgpOptometryName" name="rgpOptometryName"  th:value="${resultDO.rgpOptometryName}" disabled>
                             <option></option>
-                            <option value="张三">张三</option>
-                            <option value="周五">周五</option>
-                            <option value="陈静">陈静</option>
+                            <option th:each="ls:${listYanguang}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="rgpOptometryNames" name="rgpOptometryNames" readonly th:value="${resultDO.rgpOptometryName}" type="hidden">
 
@@ -1784,17 +1808,20 @@
                         医生：
                         <select id="ypDoctor" name="ypDoctor"  th:value="${resultDO.ypDoctor}" disabled>
                             <option></option>
-                            <option value="孙伟">孙伟</option>
-                            <option value="维护二">维护二</option>
+                            <option th:each="ls:${listDoctor}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="ypDoctors" name="ypDoctors" th:value="${resultDO.ypDoctor}" readonly type="hidden">
 
                         验光师：
                         <select id="ypOptometryName" name="ypOptometryName"  th:value="${resultDO.ypOptometryName}" disabled>
                             <option></option>
-                            <option value="张三">张三</option>
-                            <option value="周五">周五</option>
-                            <option value="陈静">陈静</option>
+                            <option th:each="ls:${listYanguang}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="ypOptometryNames" name="ypOptometryNames" readonly th:value="${resultDO.ypOptometryName}" type="hidden">
 
@@ -1880,6 +1907,7 @@
         if (remove1 == '2'){
             tab1.style = "display: block";
             var kjyyDoctors = $("input[name='kjyyDoctors']").val();
+            // alert(kjyyDoctors)
             $("#kjyyDoctor").find("[value=" + kjyyDoctors + "]").attr("selected", true);
             var kjyyOptometryNames = $("input[name='kjyyOptometryNames']").val();
             $("#kjyyOptometryName").find("[value=" + kjyyOptometryNames + "]").attr("selected", true);
@@ -1961,6 +1989,7 @@
             var sjxlOptometryNames = $("input[name='sjxlOptometryNames']").val();
             $("#sjxlOptometryName").find("[value=" + sjxlOptometryNames + "]").attr("selected", true);
             var sjxlJdods = $("input[name='sjxlJdods']").val();
+            alert(sjxlJdods)
             $("#sjxlJdod").find("[value=" + sjxlJdods + "]").attr("selected", true);
             var sjxlJdoss = $("input[name='sjxlJdoss']").val();
             $("#sjxlJdos").find("[value=" + sjxlJdoss + "]").attr("selected", true);

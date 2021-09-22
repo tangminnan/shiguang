@@ -1,4 +1,4 @@
-package com.studentImport.common.utils
+package com.shiguang.system.obs;
 
 object OBSContant {
     var endPoint = "obs.cn-north-4.myhuaweicloud.com"

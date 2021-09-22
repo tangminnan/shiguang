@@ -1,118 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-						<input id="id" name="id" th:value="${tuihuo.id}"  type="hidden">
-							<div class="form-group">	
-								<label class="col-sm-3 control-label">单据编号（退货号）：</label>
-								<div class="col-sm-8">
-									<input id="tuihuoNum" name="tuihuoNum" th:value="${tuihuo.tuihuoNum}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">制单人：</label>
-								<div class="col-sm-8">
-									<input id="zhidanPeople" name="zhidanPeople" th:value="${tuihuo.zhidanPeople}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">单据日期：</label>
-								<div class="col-sm-8">
-									<input id="danjuDay" name="danjuDay" th:value="${tuihuo.danjuDay}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">制造商id：</label>
-								<div class="col-sm-8">
-									<input id="mfrsid" name="mfrsid" th:value="${tuihuo.mfrsid}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">制造商（供应商）：</label>
-								<div class="col-sm-8">
-									<input id="mfrsname" name="mfrsname" th:value="${tuihuo.mfrsname}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">发出仓位id：</label>
-								<div class="col-sm-8">
-									<input id="positionId" name="positionId" th:value="${tuihuo.positionId}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">备注：</label>
-								<div class="col-sm-8">
-									<input id="beizhu" name="beizhu" th:value="${tuihuo.beizhu}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品信息id：</label>
-								<div class="col-sm-8">
-									<input id="goodsxinxiid" name="goodsxinxiid" th:value="${tuihuo.goodsxinxiid}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品代码：</label>
-								<div class="col-sm-8">
-									<input id="goodsNum" name="goodsNum" th:value="${tuihuo.goodsNum}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品名称：</label>
-								<div class="col-sm-8">
-									<input id="goodsName" name="goodsName" th:value="${tuihuo.goodsName}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">型号：</label>
-								<div class="col-sm-8">
-									<input id="factory" name="factory" th:value="${tuihuo.factory}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">单位：</label>
-								<div class="col-sm-8">
-									<input id="unit" name="unit" th:value="${tuihuo.unit}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">可用库存：</label>
-								<div class="col-sm-8">
-									<input id="goodsCount" name="goodsCount" th:value="${tuihuo.goodsCount}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">数量：</label>
-								<div class="col-sm-8">
-									<input id="count" name="count" th:value="${tuihuo.count}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品条码：</label>
-								<div class="col-sm-8">
-									<input id="goodsCode" name="goodsCode" th:value="${tuihuo.goodsCode}" class="form-control" type="text">
-								</div>
-							</div>
-																					<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>商品退货单详情</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+<!--检查条件-->
+<div class="m40 tabS PHGL">
+	<input id="id" name="id" th:value="${tuihuo.id}"  type="hidden">
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td>单据编号：</td>
+			<td><input id="tuihuoNum" name="tuihuoNum" th:value="${tuihuo.tuihuoNum}" type="text" readonly style="width: 49%"></td>
+			<td>制单人：</td>
+			<td>
+				<input id="zhidanPeople" name="zhidanPeople" th:value="${tuihuo.zhidanPeople}" readonly type="text" style="width: 49%"/>
+			</td>
+			<td>单据日期：</td>
+			<td>
+				<input id="danjuDay" name="danjuDay" th:value="${tuihuo.danjuDay}" type="text" readonly style="width: 49%"/>
+			</td>
+		</tr>
+		<tr>
+			<td>制造商：</td>
+			<td>
+				<input id="mfrsid" name="mfrsid" type="hidden" style="width: 49%"/>
+				<input id="mfrsName" name="mfrsName" th:value="${tuihuo.mfrsname}" type="text" readonly style="width:49%"/>
+			</td>
+			<td>供应商：</td>
+			<td>
+				<input id="msname" name="mfrsname" th:value="${tuihuo.mfrsname}" type="text" readonly style="width: 49%"/>
+
+			</td>
+			<td>发出仓位：</td>
+			<td>
+				<input id="positionId" name="positionId" th:value="${tuihuo.positionName}" type="text" readonly style="width: 49%"/>
+			</td>
+
+		</tr>
+		<tr>
+			<td>出库方式：</td>
+			<td>
+				<input id="style" name="style" th:value="${tuihuo.style}" type="text" readonly style="width: 49%"/>
+			</td>
+		</tr>
+		<tr>
+			<td>备注：</td>
+			<td colspan="5"><textarea id="beizhu" name="beizhu" xml="3"  th:text="${tuihuo.beizhu}" readonly></textarea></td>
+		</tr>
+		</tbody>
+	</table>
+	<div class="BQ-btn" style="margin-left:80%
+
+">
+		<!--<input type="button" class="empty" value="打印条码" onclick="dayinCode()"  />-->
+		<input type="button" class="empty" value="打印单据" onclick="dayin()"/>
 	</div>
-	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/stock/tuihuo/edit.js">
-	</script>
+</div>
+
+<!--商品信息-->
+<div class="m40 tabS SPmsg">
+	<h3>商品信息</h3>
+	<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+		<tbody>
+		<tr class="thead">
+			<!--<td>多选</td>-->
+			<td>商品代码</td>
+			<td>商品名称</td>
+			<td>型号</td>
+			<td>计量单位</td>
+			<td>可用库存</td>
+			<td>数量</td>
+			<td>商品条码</td>
+			<td style="display: none">goodsxinxiid</td>
+		</tr>
+		<tr style="font-weight:bold;font-size: 15px;" class="goods"></tr>
+		</tbody>
+	</table>
+</div>
+
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/tuihuo/edit.js"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        var tuihuoNum = $("#tuihuoNum").val();
+        $(".val").remove();
+        $.ajax({
+            url: '/stock/tuihuo/selectOrder',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'tuihuoNum': tuihuoNum
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    $(".goods").before("<tr class='val'> " +
+                        // "<td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                        "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                        "<td name='factory'>" + xml[i].factory + "</td>\n" +
+
+                        "<td name='unit'>" + xml[i].unit + "</td>\n" +
+                        "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                        "<td name='count'>" + xml[i].count + "</td>\n" +
+                        "<td name='goodsCode'>" + xml[i].goodsCode + "</td>\n" +
+
+                        "</tr>");
+                }
+            }
+        })
+    });
+
+    function dayin() {
+        var tuihuoNum = $('#tuihuoNum').val();
+        window.open("/stock/tuihuo/danju?tuihuoNum="+ tuihuoNum);
+    }
+</script>
 </body>
 </html>

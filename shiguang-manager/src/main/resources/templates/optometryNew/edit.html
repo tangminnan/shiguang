@@ -410,8 +410,7 @@
                         <input name="cylinderRight" th:value="${optometryFrontDO.cylinderRight}" type="text"/>
                     </td>
                     <td>
-                        <input id="axialRight" name="axialRight" th:value="${optometryFrontDO.axialRight}" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                        <input id="axialRight" name="axialRight" th:value="${optometryFrontDO.axialRight}" onblur="zhouxiang(this)" type="text"/>
                     </td>
                     <td rowspan="2">散瞳后</td>
                     <td>
@@ -421,8 +420,7 @@
                         <input name="cylinderRight2" th:value="${optometryAfterDO.cylinderRight}" type="text"/>
                     </td>
                     <td>
-                        <input id="axialRight2" name="axialRight2" th:value="${optometryAfterDO.axialRight}" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                        <input id="axialRight2" name="axialRight2" th:value="${optometryAfterDO.axialRight}" onblur="zhouxiang(this)" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -435,8 +433,7 @@
                     </td>
                     <td>
                         <input id="axialLeft" name="axialLeft" th:value="${optometryFrontDO.axialLeft}" type="text"
-                               onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
+                               onblur="zhouxiang(this)"/>
                     </td>
                     <td>
                         <input name="sphereLeft2" th:value="${optometryAfterDO.sphereLeft}" type="text"/>
@@ -446,8 +443,7 @@
                     </td>
                     <td>
                         <input id="axialLeft2" name="axialLeft2" th:value="${optometryAfterDO.axialLeft}" type="text"
-                               onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
+                               onblur="zhouxiang(this)"/>
                     </td>
                 </tr>
                 <tr>
@@ -526,7 +522,7 @@
                     <td><input name="sphJyod" th:value="${optometryDO.sphJyod}" type="text"/></td>
                     <td><input name="cylJyod" th:value="${optometryDO.cylJyod}" type="text"/></td>
                     <td><input id="axialJyod" name="axialJyod" th:value="${optometryDO.axialJyod}" type="text"
-                               onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                               onblur="zhouxiang(this)" /></td>
                     <td><input name="vaJyod" th:value="${optometryDO.vaJyod}" type="text"/></td>
                     <td><input name="pdJyod" th:value="${optometryDO.pdJyod}" type="text"/></td>
                     <td colspan="2"></td>
@@ -536,7 +532,7 @@
                     <td><input name="sphJyos" th:value="${optometryDO.sphJyos}" type="text"/></td>
                     <td><input name="cylJyos" th:value="${optometryDO.cylJyos}" type="text"/></td>
                     <td><input id="axialJyos" name="axialJyos" th:value="${optometryDO.axialJyos}" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
+                              type="text"/></td>
                     <td><input name="vaJyos" th:value="${optometryDO.vaJyos}" type="text"/></td>
                     <td><input name="pdJyos" th:value="${optometryDO.pdJyos}" type="text"/></td>
                     <td colspan="2"></td>
@@ -560,7 +556,7 @@
                     <td><input name="sphCpod" th:value="${optometryDO.sphCpod}" type="text"/></td>
                     <td><input name="cylCpod" th:value="${optometryDO.cylCpod}" type="text"/></td>
                     <td><input id="axialCpod" name="axialCpod" th:value="${optometryDO.axialCpod}" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
+                               type="text"/></td>
                     <td><input name="dvaCpod" th:value="${optometryDO.dvaCpod}" type="text"/></td>
                     <td><input name="nvaCpod" th:value="${optometryDO.nvaCpod}" type="text"/></td>
                     <td><input name="addCpod" th:value="${optometryDO.addCpod}" type="text"/></td>
@@ -571,7 +567,7 @@
                     <td><input name="sphCpos" th:value="${optometryDO.sphCpos}" type="text"/></td>
                     <td><input name="cylCpos" th:value="${optometryDO.cylCpos}" type="text"/></td>
                     <td><input id="axialCpos" name="axialCpos" th:value="${optometryDO.axialCpos}" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
+                              type="text"/></td>
                     <td><input name="dvaCpos" th:value="${optometryDO.dvaCpos}" type="text"/></td>
                     <td><input name="nvaCpos" th:value="${optometryDO.nvaCpos}" type="text"/></td>
                     <td><input name="addCpos" th:value="${optometryDO.addCpos}" type="text"/></td>
@@ -606,7 +602,7 @@
                     <td><input class="input_text" id="cylinderRightz" name="cylinderRightz" type="text"
                                onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/></td>
                     <td><input class="input_text" id="axialRightz" name="axialRightz" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
+                               type="text"/></td>
                     <td><input class="input_text" id="dvaRightz" name="dvaRightz" type="text" onblur="zhengfu(this)"
                                onkeydown="xiaoshu(this)"/></td>
                     <td><input class="input_text" id="nvaRightz" name="nvaRightz" type="text" onblur="zhengfu(this)"
@@ -642,7 +638,7 @@
                     </td>
                     <td>
                         <input class="input_text" id="axialLeftz" name="axialLeftz" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                             type="text"/>
                     </td>
                     <td>
                         <input class="input_text" id="dvaLeftz" name="dvaLeftz" type="text" onblur="zhengfu(this)"
@@ -711,8 +707,7 @@
                     />
                     </td>
                     <td>
-                        <input class="input_text" id="axialRighttry" name="axialRighttry" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                        <input class="input_text" id="axialRighttry" name="axialRighttry" onblur="zhouxiang(this)" type="text"/>
                     </td>
                     <td>
                         <input class="input_text" id="dvaRighttry" name="dvaRighttry" type="text" onblur="zhengfu(this)"
@@ -760,8 +755,7 @@
                         />
                     </td>
                     <td>
-                        <input class="input_text" id="axialLefttry" name="axialLefttry" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                        <input class="input_text" id="axialLefttry" name="axialLefttry" onblur="zhouxiang(this)" type="text"/>
                     </td>
                     <td>
                         <input class="input_text" id="dvaLefttry" name="dvaLefttry" type="text" onblur="zhengfu(this)"
@@ -892,7 +886,7 @@
         if (val < 0 || val > 180) {
             layer.alert("轴向在0-180之间");
         } else {
-            e.value = val.toFixed(0)
+            e.value = val.toFixed(2);
         }
         var axialRight=document.getElementById('axialRight').value;
         if (axialRight == "NaN"){

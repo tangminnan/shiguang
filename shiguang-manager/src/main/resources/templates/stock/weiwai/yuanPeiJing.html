@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>原配镜单查询</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+	<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body>
+<!--查询条件-->
+<div class="m40 tabS msgBox">
+	<h3>查询条件</h3>
+	<input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="hidden"/>
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td>配镜单号：</td>
+			<td>
+				<input id="saleNumber" name="saleNumber" type="text">
+			</td>
+			<td>所属部门：</td>
+			<td width="25%">
+				<select id="departmentId" name="departmentId">
+					<option></option>
+					<option th:each="ls:${departmentDOList}"
+							th:text="${ls.departName}"
+							th:value="${ls.id}"></option>
+				</select>
+			</td>
+			<td>配镜时间：</td>
+			<td>
+				<input id="optometryName" name="optometryName" type="text" >至<input id="optometryName2" name="optometryName2" type="text" >
+			</td>
+		</tr>
+		<tr>
+			<td>取镜时间：</td>
+			<td>
+				<input id="mirrorTime" name="mirrorTime" type="text" >至<input id="mirrorTime2" name="mirrorTime2" type="text" >
+			</td>
+		</tr>
+	</table>
+	<!--保存/清空-->
+	<div class="BQ-btn">
+		<input type="button" value="查询" onclick="getOrder()"/>
+	</div>
+</div>
+<!--商品信息-->
+<div class="m40 tabS msgBoxDD">
+	<table  border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+		<tbody>
+		<tr class="thead">
+			<td>单选</td>
+			<td>配镜单号</td>
+			<td>顾客姓名</td>
+			<td>会员卡号</td>
+			<td>顾客电话</td>
+			<td>配镜时间</td>
+			<td>应收金额</td>
+			<td style="display: none">处方</td>
+			<td style="display: none">球镜OD</td>
+			<td style="display: none">柱镜OD</td>
+			<td style="display: none">轴向OD</td>
+			<td style="display: none">ADDOD</td>
+			<td style="display: none">三棱镜OD</td>
+			<td style="display: none">基底OD</td>
+			<td style="display: none">瞳距（远）OD</td>
+			<td style="display: none">瞳距（近）OD</td>
+			<td style="display: none">球镜OS</td>
+			<td style="display: none">柱镜OS</td>
+			<td style="display: none">轴向OS</td>
+			<td style="display: none">ADDOS</td>
+			<td style="display: none">三棱镜OS</td>
+			<td style="display: none">基底OS</td>
+			<td style="display: none">瞳距（远）OS</td>
+			<td style="display: none">瞳距（近）OS</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/weiwai/getGoods.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var eyeStyle = $("#eyeStyle").val();
+        $(".val").remove();
+        $.ajax({
+            url: '/stock/weiwai/selectOrder',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'eyeStyle': eyeStyle
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "<td name='saleNumber'>" + xml[i].saleNumber + "</td>\n" +
+                        "<td name='name'>" + xml[i].name + "</td>\n" +
+                        "<td name='memberNumber'>" + xml[i].memberNumber + "</td>\n" +
+                        "<td name='phone1'>" + xml[i].phone1 + "</td>\n" +
+                        "<td name='settleDate'>" + xml[i].settleDate + "</td>\n" +
+                        "<td name='amountMoney'>" + xml[i].amountMoney + "</td>\n" +
+                        "<td name='recipelType'>" + xml[i].recipelType + "</td>\n" +
+
+                        "<td style='display: none' name='rightsph'>" + xml[i].rightsph + "</td>\n" +
+                        "<td style='display: none' name='rightcyl'>" + xml[i].rightcyl + "</td>\n" +
+                        "<td style='display: none' name='rightzx'>" + xml[i].rightzx + "</td>\n" +
+                        "<td style='display: none' name='rightAdd'>" + xml[i].rightAdd + "</td>\n" +
+                        "<td style='display: none' name='rightSlj'>" + xml[i].rightSlj + "</td>\n" +
+                        "<td style='display: none' name='rightJd'>" + xml[i].rightJd + "</td>\n" +
+                        "<td style='display: none' name='rightFartj'>" + xml[i].rightFartj + "</td>\n" +
+                        "<td style='display: none' name='rightNeartj'>" + xml[i].rightNeartj + "</td>\n" +
+						"<td style='display: none' name='leftsph'>" + xml[i].leftsph + "</td>\n" +
+                        "<td style='display: none' name='leftcyl'>" + xml[i].leftcyl + "</td>\n" +
+                        "<td style='display: none' name='leftzx'>" + xml[i].leftzx + "</td>\n" +
+                        "<td style='display: none' name='leftAdd'>" + xml[i].leftAdd + "</td>\n" +
+                        "<td style='display: none' name='leftSlj'>" + xml[i].leftSlj + "</td>\n" +
+                        "<td style='display: none' name='leftJd'>" + xml[i].leftJd + "</td>\n" +
+                        "<td style='display: none' name='leftFartj'>" + xml[i].leftFartj + "</td>\n" +
+                        "<td style='display: none' name='leftNeartj'>" + xml[i].leftNeartj + "</td>\n" +
+                        "<td style='display: none' name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                        "<td style='display: none' name='jpGoodsName'>" + xml[i].jpGoodsName + "</td>\n" +
+                        "<td style='display: none' name='jpGoodsNum'>" + xml[i].jpGoodsNum + "</td>\n" +
+                        "<td style='display: none' name='leftRight'>" + xml[i].leftRight + "</td>\n" +
+                        "</tr>");
+                }
+            }
+        })
+    });
+    function getHc() {
+        var producNum = $("#producNum").val();
+        var producCode = $("#producCode").val();
+        var producName = $("#producName").val();
+        var mfrsid = $("#mfrsid").val();
+        var brandid = $("#brandid").val();
+        var brandname = $("#brandname").val();
+        var producFactory = $("#producFactory").val();
+        var factory = $("#factory").val();
+        var retailPrice = $("#retailPrice").val();
+        var retailPrice2 = $("#retailPrice2").val();
+
+        $(".val").remove();
+        $.ajax({
+            url: '/stock/stock/selectHc',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'producNum': producNum,
+                'producCode': producCode,
+                'producName': producName,
+                'mfrsid': mfrsid,
+                'brandid': brandid,
+                'brandname': brandname,
+                'producFactory': producFactory,
+                'factory': factory,
+                'retailPrice': retailPrice,
+                'retailPrice2': retailPrice2
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    // if(null == xml[i].producFactory){
+                    //     xml[i].producFactory="";
+                    // }
+                    $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "<td name='saleNumber'>" + xml[i].saleNumber + "</td>\n" +
+                        "<td name='name'>" + xml[i].name + "</td>\n" +
+                        "<td name='memberNumber'>" + xml[i].memberNumber + "</td>\n" +
+                        "<td name='phone1'>" + xml[i].phone1 + "</td>\n" +
+                        "<td name='settleDate'>" + xml[i].settleDate + "</td>\n" +
+                        "<td name='amountMoney'>" + xml[i].amountMoney + "</td>\n" +
+                        "<td name='amountMoney'>" + xml[i].amountMoney + "</td>\n" +
+                        "<td name='recipelType'>" + xml[i].recipelType + "</td>\n" +
+                        "</tr>");
+                }
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

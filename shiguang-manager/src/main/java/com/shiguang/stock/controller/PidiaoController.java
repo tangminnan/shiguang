@@ -551,6 +551,11 @@ public class PidiaoController {
 		String danjuDay = sdftime.format(time);
 		model.addAttribute("danjuDay", danjuDay);
 		model.addAttribute("getpidiao", getpidiao);
+		//———获取当前系统时间—————
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+		Date date = new Date();
+		String newday = sdf.format(date);
+		model.addAttribute("newday", newday);
 		return "/stock/pidiao/pidiaodan";
 	}
 	//打印List
