@@ -29,9 +29,9 @@
 			<input type="button" value="会员修改" onclick="getMemberEdit()"/>
 		</span>
 		<span class="s4">
-			<label><input name="eyeType" type="radio" value="框镜" checked onchange="getCheck(this.value)"> 框镜</label>
-			<label><input name="eyeType" type="radio" value="隐形" onchange="getCheck(this.value)"> 隐形</label>
-			<label><input name="eyeType" type="radio" value="辅料" onchange="getCheck(this.value)"> 辅料</label>
+			<label><input name="eyeType" id="eyeType1" type="radio" value="框镜" checked onchange="getCheck(this.value)"> 框镜</label>
+			<label><input name="eyeType" id="eyeType2" type="radio" value="隐形" onchange="getCheck(this.value)"> 隐形</label>
+			<label><input name="eyeType" id="eyeType3" type="radio" value="辅料" onchange="getCheck(this.value)"> 辅料</label>
 		</span>
 		<span class="s5">
 			<input type="button" onclick="updatePerson()" value="更换销售人员" />
@@ -1812,10 +1812,12 @@ var classArray=[];
                     html += "<input id='unit' name='unit' type='hidden' value='"+rows[i].unit+"'/>"
                     html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].goodsName+"'/>"
                     html += "<input id='jpGoodsName'name='jpGoodsName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                    html += "<input id='jpGoodsNum'name='jpGoodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                     html += "<input id='storeCount'name='storeCount' type='hidden' />"
                     html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                    html += "<input id='leftRight' name='leftRight' type='hidden' value='"+rows[i].leftRight+"'/>"
                     html += "<input id='classtype' name='classtype' type='hidden' />"
                     html += "<input id='isJp'name='isJp' type='hidden' />"
                     html += "<input id='yingshoujp"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
@@ -1898,6 +1900,7 @@ var classArray=[];
     var addhtml = "";
 	var prce=0;
 	var addinal=[];
+	var addinalPrice=[];
 	function getFujia(){
         var options=$("#additionalName option:selected")
 		if (options.val() == ''){
@@ -1954,11 +1957,13 @@ var classArray=[];
 		addhtml += "</tr>";
 		addhtml += "<input id='additionalCost' name='additionalCost' type='hidden'/>"
         // addhtml += "<input id='additionalPrice' name='additionalPrice' type='hidden'/>";
-        addhtml += "<input id='additionalPrices' name='additionalPrice' type='hidden' value="+options.val()+" />";
+        addhtml += "<input id='additionalPrices' name='additionalPrice' type='hidden' />";
 		//document.getElementById('additionalPrice').value = "";
 		$("#fujia").append(addhtml);
         addinal.push(options.text());
+        addinalPrice.push(options.val());
         $("#additionalCost").val(addinal);
+        $("#additionalPrices").val()
 	}
 	var priceNum=0.00;
     function sum(obj){
@@ -2047,7 +2052,9 @@ var classArray=[];
             $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
 		}
         addinal.remove(addinalname);
+        addinalPrice.remove(privals);
         $("#additionalCost").val(addinal);
+        $("#additionalPrices").val(addinalPrice);
     }
     //加工要求
 	var jiagonghtml="";
@@ -2217,6 +2224,13 @@ var classArray=[];
         $("#ptometryNumber").val(data.ptometryNum);
         // alert(data.chufangType)
         getType(data.chufangType);
+        if (data.chufangType == 5){
+            $("#eyeType1").removeAttr("checked");
+            $("#eyeType2").attr("checked","checked");
+        } else {
+            $("#eyeType2").removeAttr("checked");
+            $("#eyeType1").attr("checked","checked");
+		}
         if (data.chufangType == 1){
             $("#rightFuLiaoQJ").val(data.rightsph);
             document.getElementById("rightFuLiaoQJ").readOnly=true;

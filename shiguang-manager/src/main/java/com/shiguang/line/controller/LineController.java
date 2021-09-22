@@ -1,10 +1,7 @@
 package com.shiguang.line.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
@@ -103,8 +100,10 @@ public class LineController {
 	@ResponseBody
 	@RequiresPermissions("information:line:addCall")
 	public R addCall(String consultRoom){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Map<String,Object> map = new HashMap<>();
 		map.put("consultRoom",consultRoom);
+		map.put("lineTime",simpleDateFormat.format(new Date()));
 		List<LineDO> lineDOList = lineService.list(map);
 		if (null != lineDOList && lineDOList.size() > 0){
 			Long lineId = lineDOList.get(0).getId();
@@ -131,6 +130,72 @@ public class LineController {
 		}
 		return R.error();
 	}
+
+	/**
+	 * 排队级叫号列表
+	 * @return
+	 */
+	@PostMapping( "/callList")
+	@ResponseBody
+	public List<Map<String,Object>> callList(){
+		List<Map<String,Object>> list = new ArrayList<>();
+		Map<String,Object> map = new HashMap<>();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		map.put("lineTime",simpleDateFormat.format(new Date()));
+		List<LineDO> lineDOList = lineService.lineList(map);
+		Map<String,Object> linemap = new HashMap<>();
+		linemap.put("lineDOList",lineDOList);
+		List<LineMemberDO> lineMemberDOS = lineMemberService.list(map);
+		Map<String,Object> memberMap = new HashMap<>();
+		memberMap.put("lineMemberDOS",lineMemberDOS);
+		List<String> roomList = new ArrayList<>();
+		if (null != lineMemberDOS && lineMemberDOS.size() > 0){
+			for (LineMemberDO lineMemberDO : lineMemberDOS){
+				if (!"".equals(lineMemberDO.getConsultRoom())){
+					roomList.add(lineMemberDO.getConsultRoom());
+				}
+			}
+		}
+		Map<String,Object> objectMap = new HashMap<>();
+		objectMap.put("roomList",roomList);
+		list.add(linemap);
+		list.add(memberMap);
+		list.add(objectMap);
+		if (null != lineMemberDOS && lineMemberDOS.size() > 0){
+			for (LineMemberDO lineMemberDO : lineMemberDOS){
+				lineMemberService.remove(lineMemberDO.getId());
+			}
+		}
+		return list;
+	}
+
+	@PostMapping( "/randomCall")
+	@ResponseBody
+	@RequiresPermissions("information:line:randomCall")
+	public R randomCall(Long id,String consultRoom){
+		LineDO lineDOs = lineService.get(id);
+		int callStatus = 0;
+		if (Integer.parseInt(lineDOs.getCallStatus())<4){
+			callStatus = Integer.parseInt(lineDOs.getCallStatus()) + 1;
+		} else {
+			callStatus = 4;
+		}
+		LineDO lineDO = new LineDO();
+		lineDO.setId(id);
+		lineDO.setConsultRoom(consultRoom);
+		lineDO.setCallStatus(String.valueOf(callStatus));
+		lineService.update(lineDO);
+		LineMemberDO lineMemberDO = new LineMemberDO();
+		lineMemberDO.setMemberNumber(lineDOs.getMemberNumber());
+		lineMemberDO.setConsultRoom(consultRoom);
+		lineMemberDO.setName(lineDOs.getName());
+		lineMemberDO.setSex(lineDOs.getSex());
+		if(lineMemberService.save(lineMemberDO)>0){
+			return R.ok();
+		}
+		return R.error();
+	}
+
 
 	/**
 	 * 保存

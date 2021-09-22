@@ -52,9 +52,9 @@ public class SaleReportController {
             query.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
+        //Date date = new Date();
         //query.put("settleDate",simpleDateFormat.format(date));
-        query.put("settleDate","2021-08-25");
+        query.put("settleDate",simpleDateFormat.format(query.get("saleDate")));
         List<SalesDO> list = saleReportService.findSaleReport(query);
         List<Map<String,Object>> saleReportList = new ArrayList<>();
         if (null != list && list.size() > 0){
@@ -180,7 +180,7 @@ public class SaleReportController {
      * @return
      */
     @GetMapping("/reportList")
-    public String reportList(Model model) {
+    public String reportList(String saleNum,String settleDate,Model model) {
 //		List<SettlementDO> settlementList = settlementService.list(query);
 //		int total = settlementService.count(query);
 //		PageUtils pageUtils = new PageUtils(settlementList, total);
@@ -193,7 +193,14 @@ public class SaleReportController {
         }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        query.put("settleDate",simpleDateFormat.format(date));
+        if (!"".equals(settleDate)){
+            query.put("settleDate",settleDate);
+        } else {
+            query.put("settleDate",simpleDateFormat.format(date));
+        }
+        if (!"".equals(saleNum)){
+            query.put("saleNum",saleNum);
+        }
         //query.put("settleDate","2021-08-25");
         List<SalesDO> list = saleReportService.findSaleReport(query);
         List<Map<String,Object>> saleReportList = new ArrayList<>();
@@ -209,7 +216,7 @@ public class SaleReportController {
                     price = salesDO.getStoreUnit().split(",");
                 }
                 String[] addPrice = null;
-                if (null != salesDO.getAdditionalPrice()){
+                if (null != salesDO.getAdditionalPrice() && !"".equals(salesDO.getAdditionalPrice())){
                     addPrice = salesDO.getAdditionalPrice().split(",");
                 }
                 double addMoney=0.00;
@@ -321,8 +328,12 @@ public class SaleReportController {
                             hcPrice = hcPrice + Double.valueOf(price[i]);
                             map.put("hcPrice",hcPrice);
                         }
-                        if (null != addPrice && !"".equals(addPrice[i])){
-                            addMoney = addMoney + Double.valueOf(addPrice[i]);
+                        try {
+                            if (null != addPrice && !"".equals(addPrice[i])) {
+                                addMoney = addMoney + Double.valueOf(addPrice[i]);
+                            }
+                        }catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("");
                         }
 
                     }

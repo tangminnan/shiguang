@@ -225,6 +225,10 @@ public class SalesDO implements Serializable {
 	private String classTypeFL;
 	//批号
 	private String batch;
+	//左右眼
+	private String leftRight;
+	//镜片代码
+	private String jpGoodsNum;
 	List<SaleGoodsDO> list = new ArrayList<>();
 
 	//近用球镜OD
@@ -1262,6 +1266,14 @@ public class SalesDO implements Serializable {
 	public void setBatch(String batch){this.batch = batch;}
 
 	public String getBatch(){return batch;}
+
+	public void setLeftRight(String leftRight){this.leftRight = leftRight;}
+
+	public String getLeftRight(){return leftRight;}
+
+	public void setJpGoodsNum(String jpGoodsNum){this.jpGoodsNum = jpGoodsNum;}
+
+	public String getJpGoodsNum(){return jpGoodsNum;}
 
 	public void setList(List<SaleGoodsDO> list) {this.list = list;}
 

@@ -31,4 +31,6 @@ public interface LineDao {
 	int batchRemove(Long[] ids);
 
 	int updateByMember(LineDO lineDO);
+
+	List<LineDO> lineList(Map<String,Object> map);
 }

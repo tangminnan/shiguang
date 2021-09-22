@@ -75,7 +75,9 @@
 			`is_sale`,
 			`create_time`,
 			`type`,
-			`original_price`
+			`original_price`,
+			`store_num`,
+			`stroe_name`
 		)
 		values
 		(
@@ -91,7 +93,9 @@
 			#{isSale},
 			#{createTime},
 			#{type},
-			#{originalPrice}
+			#{originalPrice},
+			#{storeNum},
+			#{storeName}
 		)
 	</insert>
 

@@ -15,8 +15,16 @@
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="callType != null and callType != ''"> and call_type = #{callType} </if>
-            <if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>
-            and call_status in ('1','2','3') or call_status = '0'
+            <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
+            <!--and call_status in ('1','2','3') or call_status = '0'-->
+            <choose>
+                <when test="consultRoom != null and consultRoom != ''">
+                    and (consult_room = #{consultRoom} and call_status in ('1','2','3') or call_status = '0')
+                </when>
+                <otherwise>
+                    and (call_status in ('1','2','3') or call_status = '0')
+                </otherwise>
+            </choose>
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
         </where>
         <choose>
@@ -41,10 +49,43 @@
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="callType != null and callType != ''"> and call_type = #{callType} </if>
             <if test="callStatus != null and callStatus != ''"> and call_status = #{callStatus} </if>
-            <if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>
-            and call_status in ('1','2','3') or call_status = '0'
+            <choose>
+                <when test="consultRoom != null and consultRoom != ''">
+                    and (consult_room = #{consultRoom} and call_status in ('1','2','3') or call_status = '0')
+                </when>
+                <otherwise>
+                    call_status = '0'
+                </otherwise>
+            </choose>
+
+            <!--<if test="consultRoom != null and consultRoom != ''">and (consult_room = #{consultRoom} and call_status in ('1','2','3'))</if>-->
+             <!--or call_status = '0'-->
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
         </where>
+    </select>
+
+    <select id="lineList" resultType="com.shiguang.line.domain.LineDO">
+        select `id`,`member_number`,`sex`,`name`,`call_type`,`call_status`,`consult_room`,`line_time` from line
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="callType != null and callType != ''"> and call_type = #{callType} </if>
+            <if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by line_time ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <insert id="save" parameterType="com.shiguang.line.domain.LineDO">

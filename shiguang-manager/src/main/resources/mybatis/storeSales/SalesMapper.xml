@@ -165,7 +165,9 @@
 			`jp_goods_name`,
 			`jj_goods_name`,
 			`classtype`,
-			`batch`
+			`batch`,
+			`left_right`,
+			`jp_goods_num`
 		)
 		values
 		(
@@ -209,7 +211,9 @@
 			#{jpGoodsName},
 			#{jjGoodsName},
 			#{classtype},
-			#{batch}
+			#{batch},
+			#{leftRight},
+			#{jpGoodsNum}
 		)
 	</insert>
 	 

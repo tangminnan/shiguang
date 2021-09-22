@@ -56,5 +56,10 @@ public class LineServiceImpl implements LineService {
 	public int updateByMember(LineDO line){
 		return lineDao.updateByMember(line);
 	}
+
+	@Override
+	public List<LineDO> lineList(Map<String, Object> map){
+		return lineDao.lineList(map);
+	}
 	
 }

@@ -9,7 +9,7 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="information:line:addCall" type="button" class="btn  btn-primary" onclick="add()">
+							<button shiro:hasPermission="information:line:addCall" id="call" type="button" class="btn  btn-primary" onclick="add()" value="叫号">
 								<i class="fa fa-plus" aria-hidden="true"></i>叫号
 								<input id="consultRoom" type="hidden" />
 							</button>
@@ -75,6 +75,7 @@
             }
         });
     });
+
 </script>
 </body>
 </html>

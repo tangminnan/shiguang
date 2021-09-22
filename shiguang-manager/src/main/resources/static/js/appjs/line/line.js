@@ -65,7 +65,7 @@ function load() {
 										// var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
 										// 		+ row.id
 										// 		+ '\')"><i class="fa fa-edit"></i></a> ';
-                                        var e = '<a class="btn btn-primary btn-xs" href="#" title="随机叫号"  mce_href="#" onclick="edit(\''
+                                        var e = '<a class="btn btn-primary btn-xs" href="#" title="随机叫号"  mce_href="#" onclick="randomCall(\''
                                             + row.id
                                             + '\')" style="text-decoration: none;">随机叫号</a>';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
@@ -84,12 +84,27 @@ function reLoad() {
 }
 function add() {
 	var consultRoom = $("#consultRoom").val();
+    var counter = 10;
+    setInterval(function() {
+        counter--;
+        if (counter >= 0) {
+           var call = document.getElementById("call");
+            call.innerHTML = counter+"秒";
+            document.getElementById("call").disabled=true;
+        }
+        if (counter === 0) {
+            var call = document.getElementById("call");
+            call.innerHTML = "叫号"
+            document.getElementById("bt1").disabled=false;
+            clearInterval(counter);
+        }
+    }, 1000);
     $.ajax({
         url : prefix+"/addCall",
         type : "post",
         data : {
             'consultRoom' : consultRoom
-		},
+        },
         success : function(r) {
             if (r.code==0) {
                 layer.msg(r.msg);
@@ -108,15 +123,32 @@ function add() {
 	// 	content : prefix + '/add' // iframe的url
 	// });
 }
-function edit(id) {
-	layer.open({
-		type : 2,
-		title : '编辑',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
-	});
+function randomCall(id) {
+    var consultRoom = $("#consultRoom").val();
+    $.ajax({
+        url : prefix+"/randomCall",
+        type : "post",
+        data : {
+        	'id':id,
+			'consultRoom':consultRoom
+		},
+        success : function(r) {
+            if (r.code==0) {
+                layer.msg(r.msg);
+                reLoad();
+            }else{
+                layer.msg(r.msg);
+            }
+        }
+    });
+	// layer.open({
+	// 	type : 2,
+	// 	title : '编辑',
+	// 	maxmin : true,
+	// 	shadeClose : false, // 点击遮罩关闭层
+	// 	area : [ '800px', '520px' ],
+	// 	content : prefix + '/edit/' + id // iframe的url
+	// });
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

@@ -78,6 +78,7 @@
 		<where>
 		<if test="departNumber != null and departNumber != ''"> and departNumber = #{departNumber} </if>
 		<if test="companyid !=null and companyid != ''">and companyId in (#{companyid})</if>
+			<if test="saleNum != null and saleNum !=''">and saleNum = #{saleNum}</if>
 		<if test="settleDate !=null and settleDate != ''">and date_format(settleDate ,'%Y-%m-%d' ) = #{settleDate}</if>
 		and (`type`='配镜单' or `type`='定金单' OR `type` = '检查单')
 		and isSale != 0

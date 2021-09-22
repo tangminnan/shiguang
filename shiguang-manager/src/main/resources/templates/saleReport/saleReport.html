@@ -20,9 +20,16 @@
 						<br>
 						<div class="columns pull-left" style="display:flex; margin-top:20px;">
 						<div class="columns pull-right">
-							<button class="btn btn-success" onclick="reLoad()">销售报表打印</button>
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
-
+							<div class="columns pull-right  nopadding">
+								<input id="saleNum" type="text" class="form-control"
+									   placeholder="人员工号">
+							</div>
+							<div class="columns pull-right  nopadding">
+								<input id="settleDate" type="text" class="form-control"
+									   placeholder="查询日期">
+							</div>
 						</div>
 					</div>
 					<!--<table id="exampleTable" data-mobile-responsive="true">-->
@@ -34,5 +41,12 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/saleReport/saleReport.js"></script>
+<script type="text/javascript">
+    laydate.render({
+        elem: '#settleDate',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+</script>
 </body>
 </html>
