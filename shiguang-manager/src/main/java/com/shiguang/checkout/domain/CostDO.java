@@ -43,6 +43,10 @@ public class CostDO implements Serializable {
 	private String type;
 	//原价合计
 	private Double originalPrice;
+	//门店编码
+	private String storeNum;
+	//门店名称
+	private String storeName;
 
 	/**
 	 * 设置：主键
@@ -188,4 +192,9 @@ public class CostDO implements Serializable {
 	public void setOriginalPrice(Double originalPrice) {this.originalPrice = originalPrice;}
 
 	public Double getOriginalPrice() {return originalPrice;}
+
+	public void setStoreNum(String storeNum){this.storeNum = storeNum;}
+	public String getStoreNum(){return storeNum;}
+	public void setStoreName(String storeName){this.storeName = storeName;}
+	public String getStoreName(){return storeName;}
 }

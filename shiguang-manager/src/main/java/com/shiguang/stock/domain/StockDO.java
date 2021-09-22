@@ -241,6 +241,8 @@ public class StockDO implements Serializable {
     //定做周期（天）
     private Long cycle;
     private  String classtype;
+    //左右眼
+    private String leftRight;
 
     public String getClasstype() {
         return classtype;
@@ -249,6 +251,10 @@ public class StockDO implements Serializable {
     public void setClasstype(String classtype) {
         this.classtype = classtype;
     }
+
+    public void setLeftRight(String leftRight){this.leftRight = leftRight;}
+
+    public String getLeftRight(){return leftRight;}
 
     /**
      * 设置：主键

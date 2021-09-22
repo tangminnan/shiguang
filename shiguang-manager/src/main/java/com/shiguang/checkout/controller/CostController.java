@@ -101,6 +101,8 @@ public class CostController {
                 cost.setSaleName(username);
                 cost.setCreateTime(new Date());
                 cost.setType("检查单");
+                cost.setStoreNum(ShiroUtils.getUser().getStoreNum());
+                cost.setStoreName(ShiroUtils.getUser().getStore());
                 costService.save(cost);
                 String number = cost.getSaleNumber();
                 cost = new CostDO();

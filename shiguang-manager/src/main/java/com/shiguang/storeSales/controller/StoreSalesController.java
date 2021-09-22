@@ -176,6 +176,9 @@ public class StoreSalesController {
         model.addAttribute("optometryDO", optometryDO);
         Map<String, Object> map = new HashMap<>();
         map.put("roleType", 1);
+        if (null != ShiroUtils.getUser().getStoreNum()){
+            map.put("storeNum",ShiroUtils.getUser().getStoreNum());
+        }
         List<UserDO> userDOList = userService.getRoleList(map);
         model.addAttribute("userDOList", userDOList);
         map.put("roleType", 2);
@@ -277,6 +280,10 @@ public class StoreSalesController {
             }
             if (null != salesDO.getProcessAsk()) {
                 salesDO.setProcessAsk(salesDO.getProcessAsk());
+            }
+            if (null != salesDO.getPtometryNumber()){
+                String[] pto = salesDO.getPtometryNumber().split(",");
+                salesDO.setPtometryNumber(pto[0]);
             }
 //            if (null != salesDO.getStoreName()){
 //                salesDO.setStoreName(salesDO.getStoreName().substring(0,salesDO.getStoreName().length()-3));
@@ -455,6 +462,8 @@ public class StoreSalesController {
         costDO.setIsSale(0L);
         costDO.setCreateTime(new Date());
         costDO.setType("配镜单");
+        costDO.setStoreName(ShiroUtils.getUser().getStore());
+        costDO.setStoreNum(ShiroUtils.getUser().getStore());
         costService.save(costDO);
         salesDO.setPeijingTime(new Date());
         if (null != salesDO.getGoodsNum()){
@@ -830,10 +839,28 @@ public class StoreSalesController {
             }
             if ("0".equals(dzType)) {
                 List<StockDO> jpcpDOList = stockService.listJpcp(maps);
+                if (null != jpcpDOList && jpcpDOList.size() > 0){
+                    for (StockDO stockDO : jpcpDOList){
+                        if ("0".equals(params.get("jingpianType").toString())) {
+                            stockDO.setLeftRight("右");
+                        } else if ("1".equals(params.get("jingpianType").toString())){
+                            stockDO.setLeftRight("左");
+                        }
+                    }
+                }
                 int total = stockService.countJpcp(maps);
                 pageUtils = new PageUtils(jpcpDOList, total);
             } else if ("1".equals(dzType)) {
                 List<StockDO> jpdzDOList = stockService.listJpdz(maps);
+                if (null != jpdzDOList && jpdzDOList.size() > 0){
+                    for (StockDO stockDO : jpdzDOList){
+                        if ("0".equals(params.get("jingpianType").toString())) {
+                            stockDO.setLeftRight("右");
+                        } else if ("1".equals(params.get("jingpianType").toString())){
+                            stockDO.setLeftRight("左");
+                        }
+                    }
+                }
                 int total = stockService.countJpdz(maps);
                 pageUtils = new PageUtils(jpdzDOList, total);
             }
@@ -1228,6 +1255,15 @@ public class StoreSalesController {
                 query.put("positionId",positionId);
                 query.put("goodsType",goodsId);
                 List<StockDO> yxcpDOList = stockService.listYxcp(query);
+                if (null != yxcpDOList && yxcpDOList.size() > 0){
+                    for (StockDO stockDO : yxcpDOList){
+                        if ("0".equals(params.get("jingpianType").toString())){
+                            stockDO.setLeftRight("右");
+                        } else if ("1".equals(params.get("jingpianType").toString())){
+                            stockDO.setLeftRight("左");
+                        }
+                    }
+                }
                 int total = stockService.countYxcp(query);
                 pageUtils = new PageUtils(yxcpDOList, total);
             } else if ("1".equals(params.get("yxType"))) {
@@ -1238,11 +1274,29 @@ public class StoreSalesController {
                 }
                 maps.put("goodsType",goodsId);
                 List<StockDO> yxdzDOList = stockService.listYxdz(maps);
+                if (null != yxdzDOList && yxdzDOList.size() > 0){
+                    for (StockDO stockDO : yxdzDOList){
+                        if ("0".equals(params.get("jingpianType").toString())){
+                            stockDO.setLeftRight("右");
+                        } else if ("1".equals(params.get("jingpianType").toString())){
+                            stockDO.setLeftRight("左");
+                        }
+                    }
+                }
                 int total = stockService.countYxdz(maps);
                 pageUtils = new PageUtils(yxdzDOList, total);
             }
         } else {
-            List<YxcpDO> yxcpDOList = yxcpService.list(query);
+            List<StockDO> yxcpDOList = stockService.listYxcp(query);
+            if (null != yxcpDOList && yxcpDOList.size() > 0){
+                for (StockDO stockDO : yxcpDOList){
+                    if ("0".equals(params.get("jingpianType").toString())){
+                        stockDO.setLeftRight("右");
+                    } else if ("1".equals(params.get("jingpianType").toString())){
+                        stockDO.setLeftRight("左");
+                    }
+                }
+            }
             int total = yxcpService.count(query);
             pageUtils = new PageUtils(yxcpDOList, total);
         }
