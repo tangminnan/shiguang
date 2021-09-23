@@ -322,7 +322,8 @@
 		LEFT JOIN store_sales sa ON sa.ptometry_number = k.ptometry_number
 		JOIN settlement s ON s.sale_number = sa.sale_number
 		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id UNION
+		LEFT JOIN department de ON sa.store_num = de.id
+		UNION
 		SELECT
 		sa.store_num,
 		sa.left_right,
@@ -364,7 +365,8 @@
 		LEFT JOIN store_sales sa ON sa.ptometry_number = ky.ptometry_number
 		JOIN settlement s ON s.sale_number = sa.sale_number
 		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id UNION
+		LEFT JOIN department de ON sa.store_num = de.id
+		UNION
 		SELECT
 		sa.store_num,
 		sa.left_right,
@@ -406,7 +408,8 @@
 		LEFT JOIN store_sales sa ON sa.ptometry_number = sg.ptometry_number
 		JOIN settlement s ON s.sale_number = sa.sale_number
 		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id UNION
+		LEFT JOIN department de ON sa.store_num = de.id
+		UNION
 		SELECT
 		sa.store_num,
 		sa.left_right,

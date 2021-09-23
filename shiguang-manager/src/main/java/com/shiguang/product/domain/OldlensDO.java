@@ -32,7 +32,7 @@ public class OldlensDO implements Serializable {
     //商品名称
     private String producName;
     //制造商id
-    private Integer mfrsid;
+    private String mfrsid;
     //制造商代码
     private String mfrsname;
     //品牌id
@@ -60,7 +60,7 @@ public class OldlensDO implements Serializable {
     //单位
     private String unitname;
     //    老花镜度数
-    private Long oldId;
+    private String oldId;
     private String degrees;
 
     public String getDegrees() {
@@ -166,14 +166,14 @@ public class OldlensDO implements Serializable {
     /**
      * 设置：制造商id
      */
-    public void setMfrsid(Integer mfrsid) {
+    public void setMfrsid(String mfrsid) {
         this.mfrsid = mfrsid;
     }
 
     /**
      * 获取：制造商id
      */
-    public Integer getMfrsid() {
+    public String getMfrsid() {
         return mfrsid;
     }
 
@@ -250,14 +250,14 @@ public class OldlensDO implements Serializable {
     /**
      * 设置：老花镜度数id
      */
-    public void setOldId(Long oldId) {
+    public void setOldId(String  oldId) {
         this.oldId = oldId;
     }
 
     /**
      * 获取：老花镜度数id
      */
-    public Long getOldId() {
+    public String getOldId() {
         return oldId;
     }
 

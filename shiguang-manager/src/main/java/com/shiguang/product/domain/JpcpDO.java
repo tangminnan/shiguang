@@ -32,7 +32,7 @@ public class JpcpDO implements Serializable {
     //商品名称
     private String producName;
     //制造商id
-    private Integer mfrsid;
+    private String mfrsid;
     private String mfrsname;
     //商品品种（品牌id
     private Integer brandid;
@@ -184,14 +184,14 @@ public class JpcpDO implements Serializable {
     /**
      * 设置：制造商id
      */
-    public void setMfrsid(Integer mfrsid) {
+    public void setMfrsid(String mfrsid) {
         this.mfrsid = mfrsid;
     }
 
     /**
      * 获取：制造商id
      */
-    public Integer getMfrsid() {
+    public String getMfrsid() {
         return mfrsid;
     }
 

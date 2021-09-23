@@ -15,10 +15,17 @@
         select po.`position_id`,po.`position_num`,po.`position_name`,d.`depart_name`,po.`position_order`,po.`state_id`,po.`xsstate`,po.`state`
         from c_position po  left join department d on po.depart_number=d.depart_number
         <where>
-            <if test="positionNum != null and positionNum != ''">and po.position_num = #{positionNum}</if>
-            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
-            <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
-            <if test="positionOrder != null and positionOrder != ''">and po.position_order = #{positionOrder}</if>
+            <!--<if test="positionNum != null and positionNum != ''">and po.position_num = #{positionNum}</if>-->
+            <!--<if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>-->
+            <!--<if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>-->
+            <!--<if test="positionOrder != null and positionOrder != ''">and po.position_order = #{positionOrder}</if>-->
+            <!--<if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>-->
+            <!--<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>-->
+
+            <if test="positionNum != null and positionNum != ''">and po.position_num LIKE concat(concat('%', #{positionNum}),'%')</if>
+            <if test="departNumber != null and departNumber != ''">and po.depart_number LIKE concat(concat('%', #{departNumber}),'%')</if>
+            <if test="positionName != null and positionName != ''">and po.position_name LIKE concat(concat('%', #{positionName}),'%')</if>
+            <if test="positionOrder != null and positionOrder != ''">and po.position_order LIKE concat(concat('%', #{positionOrder}),'%')</if>
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
             and  po.state=1
@@ -29,9 +36,10 @@
     <select id="count" resultType="int">
         select count(*) from c_position po  left join department d on po.depart_number=d.depart_number
         <where>
-            <if test="positionNum != null and positionNum != ''">and po.position_num = #{positionNum}</if>
-            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
-            <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
+            <if test="positionNum != null and positionNum != ''">and po.position_num LIKE concat(concat('%', #{positionNum}),'%')</if>
+            <if test="departNumber != null and departNumber != ''">and po.depart_number LIKE concat(concat('%', #{departNumber}),'%')</if>
+            <if test="positionName != null and positionName != ''">and po.position_name LIKE concat(concat('%', #{positionName}),'%')</if>
+            <if test="positionOrder != null and positionOrder != ''">and po.position_order LIKE concat(concat('%', #{positionOrder}),'%')</if>
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
             and  po.state=1

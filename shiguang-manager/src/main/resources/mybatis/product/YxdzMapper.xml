@@ -23,11 +23,11 @@
         from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
         left join c_unit u on y.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
-            <if test="producName != null and producName != ''">and y.produc_name = #{producName}</if>
-            <if test="goodsCode != null and goodsCode != ''">and y.produc_code = #{goodsCode}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="producNum != null and producNum != ''">and y.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and y.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and y.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  y.retail_price and y.retail_price &lt;=  #{retailPrice2}
             </if>
@@ -46,10 +46,11 @@
         select count(*) from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
         left join c_unit u on y.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
-            <if test="producName != null and producName != ''">and y.produc_name = #{producName}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="producNum != null and producNum != ''">and y.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and y.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and y.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  y.retail_price and y.retail_price &lt;=  #{retailPrice2}
             </if>

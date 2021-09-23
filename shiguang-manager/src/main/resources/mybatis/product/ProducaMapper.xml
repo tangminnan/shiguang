@@ -29,11 +29,11 @@
         from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
         c_unit u on p.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
-            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
-            <if test="goodsCode != null and goodsCode != ''">and p.produc_code = #{goodsCode}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="producNum != null and producNum != ''">and h.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and h.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and h.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
             </if>
@@ -53,15 +53,19 @@
         </where>
 
         group by p.id order by  p.id desc
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
     <select id="count" resultType="int">
         select count(*) from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
         c_unit u on p.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
-            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="producNum != null and producNum != ''">and p.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and p.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
             </if>

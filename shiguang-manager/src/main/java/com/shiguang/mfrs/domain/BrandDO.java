@@ -58,7 +58,7 @@ public class BrandDO implements Serializable {
     //注册证号
     private String registration;
     //制造商id
-    private Integer mfrsid;
+    private String mfrsid;
     //制造商简称
     private String mfrsname;
     //计量单位id
@@ -405,14 +405,14 @@ public class BrandDO implements Serializable {
     /**
      * 设置：制造商id
      */
-    public void setMfrsid(Integer mfrsid) {
+    public void setMfrsid(String mfrsid) {
         this.mfrsid = mfrsid;
     }
 
     /**
      * 获取：制造商id
      */
-    public Integer getMfrsid() {
+    public String getMfrsid() {
         return mfrsid;
     }
 

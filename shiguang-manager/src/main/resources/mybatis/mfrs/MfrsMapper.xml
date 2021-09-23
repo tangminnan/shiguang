@@ -21,23 +21,47 @@
         m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsrealname`,m.`mfrstelephone`,m.`mfrsphone`,m.`goodsid`,m.`mfrsfax`,m.`mfrsaddress`,
         m.`payid`,m.`invoiceid`,m.`creditcode`,m.`creditcodeday`,m.`medicinecode`,m.`medicinecodeday`,m.`productscode`,m.`productscodeday`,m.`remarks`,
         m.`xsstate`,m.`state`,m.`payday`
-        from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on m.goodsid=g.goodsid
+        from c_mfrs m
+
+        left join c_goods g on m.goodsid=g.goodsid
         <where>
-            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid}</if>
+            <!-- left join cc_mg mg on m.mfrsid=mg.mfrsid-->
+
+            <!--<if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>-->
+            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>-->
+            <!--<if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid}</if>-->
+            <!--<if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>-->
+            <!--<if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>-->
+
+
+            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum LIKE concat(concat('%', #{mfrsnum}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="goodsid != null and goodsid != ''">and g.goodsid in (#{goodsid})</if>
             <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state =1
         </where>
-        group by m.mfrsid order by  m.xsstate asc ,m.mfrsid desc
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                group by m.mfrsid order by  m.xsstate asc ,m.mfrsid desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <select id="count" resultType="int">
-    select count(*) from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on m.goodsid=g.goodsid
+
+
+        
+        left join c_goods g on m.goodsid=g.goodsid
         <where>
-            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum LIKE concat(concat('%', #{mfrsnum}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
             <if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid}</if>
             <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
@@ -52,21 +76,32 @@
         <where>
             <if test="goodsIds != null and goodsIds != ''">and m.goodsid LIKE concat('%', #{goodsIds},'%')</if>
             <if test="goodsid != null and goodsid != ''">and m.goodsid LIKE concat('%', #{goodsid},'%')</if>
-            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum  LIKE concat('%', #{mfrsnum},'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname  LIKE concat('%', #{mfrsname},'%')</if>
             <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state= 1
         </where>
-        group by m.mfrsid order by m.mfrsid desc
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                group by m.mfrsid order by m.mfrsid desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+
     </select>
     <select id="findMfrscount" resultType="int">
         select count(*) from c_mfrs m
         <where>
             <if test="goodsIds != null and goodsIds != ''">and m.goodsid LIKE concat('%', #{goodsIds},'%')</if>
             <if test="goodsid != null and goodsid != ''">and m.goodsid LIKE concat('%', #{goodsid},'%')</if>
-            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum = #{mfrsnum}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum  LIKE concat('%', #{mfrsnum},'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname  LIKE concat('%', #{mfrsname},'%')</if>
             <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state= 1

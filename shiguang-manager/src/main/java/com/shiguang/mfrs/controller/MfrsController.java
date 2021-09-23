@@ -189,13 +189,13 @@ public class MfrsController {
         }
         if (mfrsService.save(mfrs) > 0) {
             //获取制造商中的商品id,依次循环遍历，保存到关系表中，走两个保存方法
-            String[] str = mfrs.getGoodsid().split(",");
-            for (int i = 0; i < str.length; i++) {
-                MgDO mgDO = new MgDO();
-                mgDO.setMfrsid(mfrs.getMfrsid());
-                mgDO.setGoodsid(Integer.parseInt(str[i]));
-                mgService.save(mgDO);
-            }
+//            String[] str = mfrs.getGoodsid().split(",");
+//            for (int i = 0; i < str.length; i++) {
+//                MgDO mgDO = new MgDO();
+//                mgDO.setMfrsid(mfrs.getMfrsid());
+//                mgDO.setGoodsid(Integer.parseInt(str[i]));
+//                mgService.save(mgDO);
+//            }
 
             return R.ok();
         }

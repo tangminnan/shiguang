@@ -8,7 +8,7 @@
 		h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
 		h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
 		h.`xsstate`,h.`state`,h.`classtype`
-		from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum
+		from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum
         left join  c_unit u on h.unitid= u.unitid
 		where id = #{value}
 	</select>
@@ -18,14 +18,19 @@
         h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
         h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
         h.`xsstate`,h.`state`,h.`classtype`
-        from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum
+        from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum
         left join c_unit u on h.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
-            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
-            <if test="goodsCode != null and goodsCode != ''">and h.produc_code = #{goodsCode}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <!--<if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>-->
+            <!--<if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>-->
+            <!--<if test="goodsCode != null and goodsCode != ''">and h.produc_code = #{goodsCode}</if>-->
+            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>-->
+            <!--<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>-->
+            <if test="producNum != null and producNum != ''">and h.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and h.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and h.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  h.retail_price and h.retail_price &lt;=  #{retailPrice2}
             </if>
@@ -38,13 +43,18 @@
         group by h.id order by  h.id desc
     </select>
     <select id="count" resultType="int">
-        select count(*) from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsid left join c_brand b on h.brandnum=b.brandnum
+        select count(*) from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum
         left join c_unit u on h.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
-            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <!--<if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>-->
+            <!--<if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>-->
+            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>-->
+            <!--<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>-->
+            <if test="producNum != null and producNum != ''">and h.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and h.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and h.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  h.retail_price and h.retail_price &lt;=  #{retailPrice2}
             </if>

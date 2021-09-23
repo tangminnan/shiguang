@@ -90,6 +90,7 @@
                 <td>采购结算方式：</td>
                 <td>
                     <select name="payid" id="payid" th:value="${mfrs.payid}" onchange="payChange()">
+                        <option></option>
                         <option th:each="ls:${payDOList}"
                                 th:text="${ls.paymethod}"
                                 th:value="${ls.payid}"></option>
@@ -157,7 +158,7 @@
             </tr>
             <tr>
                 <td>备注：</td>
-                <td colspan="5"><textarea id="remarks" name="remarks" rows="3" th:value="${mfrs.remarks}"></textarea>
+                <td colspan="5"><textarea id="remarks" name="remarks" rows="3" th:text="${mfrs.remarks}"></textarea>
                 </td>
             </tr>
         </table>

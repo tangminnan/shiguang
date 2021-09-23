@@ -7,7 +7,7 @@
         select p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`proid`,p.`parts_style`,
           p.`unitid`,p.`batchid`,p.`refractivityid`,p.`tax`,p.`tax_price`,p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`xsstate`,p.`state`,
           m.mfrsname,b.brandname,u.unitname,p.`classtype`
-          from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
+          from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum left join
           c_unit u on p.unitid= u.unitid
           where id = #{value}
     </select>
@@ -17,14 +17,14 @@
         p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`proid`,p.`parts_style`,
         p.`unitid`,p.`batchid`,p.`refractivityid`,p.`tax`,p.`tax_price`,p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`xsstate`,p.`state`,
         m.mfrsname,b.brandname,u.unitname,p.`classtype`
-        from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
+        from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum left join
         c_unit u on p.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
-            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
-            <if test="goodsCode != null and goodsCode != ''">and p.produc_code = #{goodsCode}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="producNum != null and producNum != ''">and p.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and p.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
             </if>
@@ -40,13 +40,14 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsid left join c_brand b on p.brandnum=b.brandnum left join
+        select count(*) from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum left join
         c_unit u on p.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
-            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="producNum != null and producNum != ''">and p.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and p.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
             </if>
@@ -151,8 +152,8 @@
     <!--查询配件制造商-->
     <select id="mglist" resultType="com.shiguang.product.domain.PartsDO">
 		select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
-        from c_mfrs m left join cc_mg mg on m.mfrsid=mg.mfrsid left join c_goods g on g.goodsid=mg.goodsid where g.goodsid=2
-        and m.state= 1
+        from c_mfrs m left join c_goods g on g.goodsid=mg.goodsid
+        where g.goodsid=2 and m.state= 1
         group by m.mfrsid order by m.mfrsid desc
 	</select>
     <!--菜单联动显示-->
