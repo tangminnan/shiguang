@@ -65,7 +65,7 @@
 														<div class="form-group">
 								<label class="col-sm-3 control-label">缴费方式：</label>
 								<div class="col-sm-8">
-									<select  name="payModel" id="payModel" style="width: 30%">
+									<select  name="payModel" style="width: 30%">
 										<option value="">请选择</option>
 										<option value="0">微信</option>
 										<option value="1">支付宝</option>
@@ -73,9 +73,11 @@
 										<option value="3">一卡通</option>
 										<option value="4">现金</option>
 									</select>
-									&nbsp;&nbsp;&nbsp;&nbsp;<input id="payMoney" name="payMoney" onchange="cop()" style="width: 20%" type="text">
+									&nbsp;&nbsp;&nbsp;&nbsp;<input id="modelMoney" name="modelMoney" onchange="cop()" style="width: 20%" type="text">
 								</div>
+								<img src="/img/add.png" width="20" height="20" onclick="addMoney(this)">
 							</div>
+							<input id="payMoney" name="payMoney" onchange="cop()" style="width: 20%" type="text">
 														<!--<div class="form-group">-->
 								<!--<label class="col-sm-3 control-label">找零金额：</label>-->
 								<!--<div class="col-sm-8">-->
@@ -94,6 +96,21 @@
 									<!--<input id="payMoney" name="payMoney" th:value="${settlement.payMoney}" class="form-control" type="text">-->
 								<!--</div>-->
 							<!--</div>-->
+							<div class="form-group" style="display: none" id="jffs">
+								<label class="col-sm-3 control-label">缴费方式：</label>
+								<div class="col-sm-8">
+									<select  name="payModel" id="payModel" style="width: 30%">
+										<option value="">请选择</option>
+										<option value="0">微信</option>
+										<option value="1">支付宝</option>
+										<option value="2">医院收费处</option>
+										<option value="3">一卡通</option>
+										<option value="4">现金</option>
+									</select>
+									&nbsp;&nbsp;&nbsp;&nbsp;<input id="modelMoneys" name="modelMoney" onchange="cop()" style="width: 20%" type="text">
+								</div>
+								<img src="/img/dec.jpg" width="20" height="20" onclick="desc(this)">
+							</div>
 																					<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
 									<button type="submit" class="btn btn-primary">提交</button>
@@ -105,6 +122,7 @@
 			</div>
 	</div>
 	</div>
+
 	<div th:include="include::footer"></div>
 	<script type="text/javascript" src="/js/appjs/settlement/add.js">
 	</script>
@@ -122,19 +140,40 @@
     });
 
     function cop(){
-        var str=document.getElementById("payMoney").value;
+        var str=document.getElementById("modelMoney").value;
+        var strs = document.getElementById("modelMoneys").value;
         var actualMoney = $("#actualMoney").val();
         var payWay = $("#payWay").val();
-        if ("全款" == payWay){
-            if ( parseFloat(str) < parseFloat(actualMoney)){
-                return alert("缴费金额不能小于实际缴费金额")
-            }
+        // if ("全款" == payWay){
+         //    if ( parseFloat(str) < parseFloat(actualMoney)){
+         //        return alert("缴费金额不能小于实际缴费金额")
+         //    }
+		// }
+		alert(strs);
+		if (strs == ''){
+            strs = 0;
 		}
-
-        var change = str - actualMoney;
+		alert(str);
+		alert(strs);
+		var js = parseFloat(str) + parseFloat(strs);
+		alert(js);
+        var change = js - actualMoney;
         var dd = change.toFixed(2);
         $("#changeMoney").val(dd)
+        $("#payMoney").val(js);
 	}
+
+	function addMoney(obj){
+        let dom = $("#jffs").clone();
+        $(dom).show();
+        $(obj).parents(".form-group").after(dom);
+	}
+    /**
+     *  删除行
+     */
+    function desc(obj) {
+        $(obj).parents(".form-group").remove();
+    }
 
 </script>
 </body>

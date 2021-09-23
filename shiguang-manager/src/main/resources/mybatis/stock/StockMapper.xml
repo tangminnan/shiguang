@@ -258,7 +258,9 @@
     `order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,
      `batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,`factory` ,`status`,`username`,`returnzt` from stock
      <where>
-         goods_code = #{goodsCode} and position_id = #{positionId} and `status` = '0'
+         goods_code = #{goodsCode}
+         <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
+         and `status` = '0'
      </where>
 </select>
 

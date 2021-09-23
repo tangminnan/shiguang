@@ -61,5 +61,10 @@ public class LineServiceImpl implements LineService {
 	public List<LineDO> lineList(Map<String, Object> map){
 		return lineDao.lineList(map);
 	}
+
+	@Override
+	public int removeMember(LineDO lineDO){
+		return lineDao.removeMember(lineDO);
+	}
 	
 }

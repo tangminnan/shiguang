@@ -92,10 +92,10 @@ function add() {
             call.innerHTML = counter+"秒";
             document.getElementById("call").disabled=true;
         }
-        if (counter === 0) {
+        if (counter == 0) {
             var call = document.getElementById("call");
             call.innerHTML = "叫号"
-            document.getElementById("bt1").disabled=false;
+            document.getElementById("call").disabled=false;
             clearInterval(counter);
         }
     }, 1000);

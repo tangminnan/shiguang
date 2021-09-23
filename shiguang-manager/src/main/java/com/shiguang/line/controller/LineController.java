@@ -135,38 +135,51 @@ public class LineController {
 	 * 排队级叫号列表
 	 * @return
 	 */
-	@PostMapping( "/callList")
+	@GetMapping( "/callList")
 	@ResponseBody
-	public List<Map<String,Object>> callList(){
-		List<Map<String,Object>> list = new ArrayList<>();
+	public Map<String,Object> callList(){
+		Map<String,Object> resultMap = new HashMap<>();
 		Map<String,Object> map = new HashMap<>();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		map.put("lineTime",simpleDateFormat.format(new Date()));
 		List<LineDO> lineDOList = lineService.lineList(map);
-		Map<String,Object> linemap = new HashMap<>();
-		linemap.put("lineDOList",lineDOList);
+		resultMap.put("lineDOList",lineDOList);
+		List<LineMemberDO> lineMemberDOList = new ArrayList<>();
 		List<LineMemberDO> lineMemberDOS = lineMemberService.list(map);
-		Map<String,Object> memberMap = new HashMap<>();
-		memberMap.put("lineMemberDOS",lineMemberDOS);
-		List<String> roomList = new ArrayList<>();
+		LineMemberDO lineMemberDO = new LineMemberDO();
 		if (null != lineMemberDOS && lineMemberDOS.size() > 0){
-			for (LineMemberDO lineMemberDO : lineMemberDOS){
-				if (!"".equals(lineMemberDO.getConsultRoom())){
-					roomList.add(lineMemberDO.getConsultRoom());
+			lineMemberDO.setName(lineMemberDOS.get(0).getName());
+			lineMemberDO.setSex(lineMemberDOS.get(0).getSex());
+			lineMemberDO.setConsultRoom(lineMemberDOS.get(0).getConsultRoom());
+			lineMemberDO.setMemberNumber(lineMemberDOS.get(0).getConsultRoom());
+			lineMemberDO.setId(lineMemberDOS.get(0).getId());
+			lineMemberDOList.add(lineMemberDO);
+		}
+		resultMap.put("lineMemberDOS",lineMemberDOList);
+		List<Map<String,Object>> roomList = new ArrayList<>();
+		List<LineDO> lineMemberDOList1 = lineMemberService.listMember(map);
+		if (null != lineMemberDOList1 && lineMemberDOList1.size() > 0){
+			for (LineDO lineMemberDOstr : lineMemberDOList1){
+				if (!"".equals(lineMemberDOstr.getConsultRoom())){
+					Map<String,Object> roomMap = new HashMap<>();
+					roomMap.put("id",lineMemberDOstr.getId());
+					roomMap.put("memberNumber",lineMemberDOstr.getMemberNumber());
+					roomMap.put("name",lineMemberDOstr.getName());
+					roomMap.put("sex",lineMemberDOstr.getSex());
+					roomMap.put("consultRoom",lineMemberDOstr.getConsultRoom());
+					roomList.add(roomMap);
 				}
 			}
 		}
-		Map<String,Object> objectMap = new HashMap<>();
-		objectMap.put("roomList",roomList);
-		list.add(linemap);
-		list.add(memberMap);
-		list.add(objectMap);
+		resultMap.put("roomList",roomList);
 		if (null != lineMemberDOS && lineMemberDOS.size() > 0){
-			for (LineMemberDO lineMemberDO : lineMemberDOS){
-				lineMemberService.remove(lineMemberDO.getId());
-			}
+//				LineDO lineDO = new LineDO();
+//				lineDO.setMemberNumber(lineMemberDO.getMemberNumber());
+//				lineDO.setLineDate(simpleDateFormat.format(new Date()));
+//				lineService.removeMember(lineDO);
+				lineMemberService.remove(lineMemberDOS.get(0).getId());
 		}
-		return list;
+		return resultMap;
 	}
 
 	@PostMapping( "/randomCall")
@@ -195,7 +208,6 @@ public class LineController {
 		}
 		return R.error();
 	}
-
 
 	/**
 	 * 保存

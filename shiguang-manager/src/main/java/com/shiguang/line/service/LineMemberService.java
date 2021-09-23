@@ -1,5 +1,6 @@
 package com.shiguang.line.service;
 
+import com.shiguang.line.domain.LineDO;
 import com.shiguang.line.domain.LineMemberDO;
 import java.util.List;
 import java.util.Map;
@@ -18,5 +19,7 @@ public interface LineMemberService {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    List<LineDO> listMember(Map<String,Object> map);
 
 }

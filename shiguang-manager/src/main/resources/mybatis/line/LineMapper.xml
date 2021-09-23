@@ -72,8 +72,9 @@
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="callType != null and callType != ''"> and call_type = #{callType} </if>
-            <if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>
+            <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+            and (consult_room is null or consult_room ='') and call_status != '4'
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -137,6 +138,10 @@
 
     <delete id="remove">
 		delete from line where id = #{value}
+	</delete>
+
+    <delete id="removeMember" parameterType="com.shiguang.line.domain.LineDO">
+		delete from line where member_number = #{memberNumber} and date_format(line_time ,'%Y-%m-%d') = #{lineDate}
 	</delete>
 
     <delete id="batchRemove">

@@ -318,17 +318,28 @@ public class SettlementController {
 		}
 		SettlementDO settlementDO1 = settlementService.getSaleNumers(saleNumber);
 		if (null != settlementDO1){
-			if (settlementDO1.getPayModel() == 0){
-				model.addAttribute("paymodel","微信");
-			} else if (settlementDO1.getPayModel() == 1){
-				model.addAttribute("paymodel","支付宝");
-			} else if (settlementDO1.getPayModel() == 2){
-				model.addAttribute("paymodel","医院收费处");
-			} else if (settlementDO1.getPayModel() == 3){
-				model.addAttribute("paymodel","一卡通");
-			} else if (settlementDO1.getPayModel() == 4){
-				model.addAttribute("paymodel","现金");
+			String [] payModels = new String[100];
+			String[] paymodel = settlementDO1.getPayModel().split(",");
+			for (int i=0;i<paymodel.length;i++){
+				if (paymodel[i] == "0"){
+					model.addAttribute("paymodel","微信");
+					payModels[i]="微信";
+				} else if (paymodel[i] == "1"){
+					model.addAttribute("paymodel","支付宝");
+					payModels[i]="支付宝";
+				} else if (paymodel[i] == "2"){
+					model.addAttribute("paymodel","医院收费处");
+					payModels[i]="医院收费处";
+				} else if (paymodel[i] == "3"){
+					model.addAttribute("paymodel","一卡通");
+					payModels[i]="一卡通";
+				} else if (paymodel[i] == "4"){
+					model.addAttribute("paymodel","现金");
+					payModels[i]="现金";
+				}
+
 			}
+			model.addAttribute("payModels",payModels);
 		}
 		model.addAttribute("settlementDO1",settlementDO1);
 		Map<String,Object> map2 = new HashMap<>();
@@ -643,16 +654,17 @@ public class SettlementController {
         }
         SettlementDO settlementDO1 = settlementService.getSaleNumers(saleNumber);
         if (null != settlementDO1){
-            if (settlementDO1.getPayModel() == 0){
-                model.addAttribute("paymodel","微信");
-            } else if (settlementDO1.getPayModel() == 1){
-                model.addAttribute("paymodel","支付宝");
-            } else if (settlementDO1.getPayModel() == 2){
-                model.addAttribute("paymodel","医院收费处");
-            } else if (settlementDO1.getPayModel() == 3){
-				model.addAttribute("paymodel","一卡通");
-			} else if (settlementDO1.getPayModel() == 4){
-				model.addAttribute("paymodel","现金");
+			String[] paymodel = settlementDO1.getPayModel().split(",");
+			for (int i=0;i<paymodel.length;i++){
+				if (paymodel[i] == "0"){
+					model.addAttribute("paymodel","微信");
+				} else if (paymodel[i] == "1"){
+					model.addAttribute("paymodel","支付宝");
+				} else if (paymodel[i] == "2"){
+					model.addAttribute("paymodel","医院收费处");
+				} else if (paymodel[i] == "3"){
+					model.addAttribute("paymodel","一卡通");
+				}
 			}
         }
         if ("定金".equals(settlementDO1.getPayWay())){

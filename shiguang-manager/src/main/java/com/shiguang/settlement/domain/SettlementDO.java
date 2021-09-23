@@ -30,7 +30,9 @@ public class SettlementDO implements Serializable {
 	//找零金额
 	private Double changeMoney;
 	//支付方式
-	private Long payModel;
+	private String payModel;
+	//缴费金额(根据支付方式)
+	private String modelMoney;
 	//缴费金额
 	private Double payMoney;
 	//销售单号
@@ -124,15 +126,23 @@ public class SettlementDO implements Serializable {
 	/**
 	 * 设置：支付方式
 	 */
-	public void setPayModel(Long payModel) {
+	public void setPayModel(String payModel) {
 		this.payModel = payModel;
 	}
 	/**
 	 * 获取：支付方式
 	 */
-	public Long getPayModel() {
+	public String getPayModel() {
 		return payModel;
 	}
+	/**
+	 * 缴费金额(根据支付方式)
+	 */
+	public void setModelMoney(String modelMoney) {this.modelMoney = modelMoney;}
+	/**
+	 * 缴费金额(根据缴费方式)
+	 */
+	public String getModelMoney(){return modelMoney;}
 	/**
 	 * 设置：缴费金额
 	 */

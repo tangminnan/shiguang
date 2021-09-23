@@ -32,4 +32,6 @@ public interface LineService {
 	int updateByMember(LineDO lineDO);
 
 	List<LineDO> lineList(Map<String,Object> map);
+
+	int removeMember(LineDO lineDO);
 }

@@ -55,9 +55,8 @@
     </select>
 
     <select id="count" resultType="int">
-
-
-        
+        select count(*)
+        from c_mfrs m
         left join c_goods g on m.goodsid=g.goodsid
         <where>
             <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum LIKE concat(concat('%', #{mfrsnum}),'%')</if>

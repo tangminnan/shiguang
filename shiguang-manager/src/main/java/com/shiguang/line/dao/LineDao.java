@@ -33,4 +33,6 @@ public interface LineDao {
 	int updateByMember(LineDO lineDO);
 
 	List<LineDO> lineList(Map<String,Object> map);
+
+	int removeMember(LineDO lineDO);
 }

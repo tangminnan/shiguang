@@ -1,6 +1,7 @@
 package com.shiguang.line.service.impl;
 
 import com.shiguang.line.dao.LineMemberDao;
+import com.shiguang.line.domain.LineDO;
 import com.shiguang.line.domain.LineMemberDO;
 import com.shiguang.line.service.LineMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +49,10 @@ public class LineMemberServiceImpl implements LineMemberService {
     public int batchRemove(Long[] ids){
         return lineMemberDao.batchRemove(ids);
     }
+
+    @Override
+    public List<LineDO> listMember(Map<String, Object> map){
+        return lineMemberDao.listMember(map);
+    }
+
 }

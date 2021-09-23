@@ -1,5 +1,6 @@
 package com.shiguang.line.dao;
 
+import com.shiguang.line.domain.LineDO;
 import com.shiguang.line.domain.LineMemberDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,4 +22,6 @@ public interface LineMemberDao {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    List<LineDO> listMember(Map<String,Object> map);
 }

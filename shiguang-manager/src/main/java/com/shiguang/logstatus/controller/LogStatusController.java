@@ -162,15 +162,19 @@ public class LogStatusController {
         }
         SettlementDO settlementDO1 = settlementService.getSaleNumers(saleNumber);
         if (null != settlementDO1){
-            if (settlementDO1.getPayModel() == 0){
-                model.addAttribute("paymodel","微信");
-            } else if (settlementDO1.getPayModel() == 1){
-                model.addAttribute("paymodel","支付宝");
-            } else if (settlementDO1.getPayModel() == 2){
-                model.addAttribute("paymodel","医院收费处");
-            } else if (settlementDO1.getPayModel() == 3){
-                model.addAttribute("paymodel","一卡通");
+            String[] paymodel = settlementDO1.getPayModel().split(",");
+            for (int i=0;i<paymodel.length;i++){
+                if (paymodel[i] == "0"){
+                    model.addAttribute("paymodel","微信");
+                } else if (paymodel[i] == "1"){
+                    model.addAttribute("paymodel","支付宝");
+                } else if (paymodel[i] == "2"){
+                    model.addAttribute("paymodel","医院收费处");
+                } else if (paymodel[i] == "3"){
+                    model.addAttribute("paymodel","一卡通");
+                }
             }
+
         }
         model.addAttribute("settlementDO1",settlementDO1);
         Map<String,Object> map2 = new HashMap<>();

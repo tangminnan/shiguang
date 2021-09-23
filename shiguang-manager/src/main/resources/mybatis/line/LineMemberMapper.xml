@@ -20,7 +20,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by id desc
+                order by id ASC
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -37,6 +37,25 @@
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="consultRoom != null and consultRoom != ''"> and consult_room = #{consultRoom} </if>
         </where>
+    </select>
+
+    <select id="listMember" resultType="com.shiguang.line.domain.LineDO">
+        select `id`,`member_number`,`name`,`sex`,`consult_room` from line
+        <where>
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+            and consult_room is not null and call_status != '4'
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <insert id="save" parameterType="com.shiguang.line.domain.LineMemberDO" useGeneratedKeys="true" keyProperty="id">
