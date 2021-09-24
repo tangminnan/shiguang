@@ -149,14 +149,10 @@
          //        return alert("缴费金额不能小于实际缴费金额")
          //    }
 		// }
-		alert(strs);
 		if (strs == ''){
             strs = 0;
 		}
-		alert(str);
-		alert(strs);
 		var js = parseFloat(str) + parseFloat(strs);
-		alert(js);
         var change = js - actualMoney;
         var dd = change.toFixed(2);
         $("#changeMoney").val(dd)

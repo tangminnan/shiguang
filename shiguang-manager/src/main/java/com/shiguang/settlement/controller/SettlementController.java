@@ -202,7 +202,17 @@ public class SettlementController {
 		model.addAttribute("costDO",costDO);
 		SettlementDO settlement = settlementService.getCostId(costId);
 		//List<SettlementDO> settlement = settlementService.list(map);
-
+//		if ("0".equals(settlement.getPayModel())){
+//			settlement.setPayModel("微信");
+//		} else if ("1".equals(settlement.getPayModel())){
+//			settlement.setPayModel("支付宝");
+//		} else if ("2".equals(settlement.getPayModel())){
+//			settlement.setPayModel("医院收费处");
+//		} else if ("3".equals(settlement.getPayModel())){
+//			settlement.setPayModel("一卡通");
+//		} else if ("4".equals(settlement.getPayModel())){
+//			settlement.setPayModel("现金");
+//		}
 		model.addAttribute("settlement", settlement);
 		return "settlement/detail";
 	}
@@ -318,28 +328,29 @@ public class SettlementController {
 		}
 		SettlementDO settlementDO1 = settlementService.getSaleNumers(saleNumber);
 		if (null != settlementDO1){
-			String [] payModels = new String[100];
+			StringBuffer payModels = new StringBuffer();
 			String[] paymodel = settlementDO1.getPayModel().split(",");
+			String[] moneyPay = settlementDO1.getModelMoney().split(",");
 			for (int i=0;i<paymodel.length;i++){
-				if (paymodel[i] == "0"){
+				if ("0".equals(paymodel[i])){
 					model.addAttribute("paymodel","微信");
-					payModels[i]="微信";
-				} else if (paymodel[i] == "1"){
+					payModels.append("微信:"+moneyPay[i]+",");
+					//payModels[i]="微信";
+				} else if ("1".equals(paymodel[i])){
 					model.addAttribute("paymodel","支付宝");
-					payModels[i]="支付宝";
-				} else if (paymodel[i] == "2"){
+					payModels.append("支付宝:"+moneyPay[i]+",");
+				} else if ("2".equals(paymodel[i])){
 					model.addAttribute("paymodel","医院收费处");
-					payModels[i]="医院收费处";
-				} else if (paymodel[i] == "3"){
+					payModels.append("医院收费处:"+moneyPay[i]+",");
+				} else if ("3".equals(paymodel[i])){
 					model.addAttribute("paymodel","一卡通");
-					payModels[i]="一卡通";
-				} else if (paymodel[i] == "4"){
+					payModels.append("一卡通:"+moneyPay[i]+",");
+				} else if ("4".equals(paymodel[i])){
 					model.addAttribute("paymodel","现金");
-					payModels[i]="现金";
+					payModels.append("现金:"+moneyPay[i]+",");
 				}
-
 			}
-			model.addAttribute("payModels",payModels);
+			model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));
 		}
 		model.addAttribute("settlementDO1",settlementDO1);
 		Map<String,Object> map2 = new HashMap<>();
