@@ -135,6 +135,8 @@ public interface StockDao {
 
     //    【库存查询】
     List<StockDO> kccxList(Map<String, Object> map);
+    int kccxListCount(Map<String, Object> map);
+
     //确认收货
     int updateStatus(StockDO stock);
 

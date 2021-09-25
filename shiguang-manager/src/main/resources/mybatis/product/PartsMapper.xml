@@ -17,8 +17,8 @@
         p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`proid`,p.`parts_style`,
         p.`unitid`,p.`batchid`,p.`refractivityid`,p.`tax`,p.`tax_price`,p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`xsstate`,p.`state`,
         m.mfrsname,b.brandname,u.unitname,p.`classtype`
-        from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum left join
-        c_unit u on p.unitid= u.unitid
+        from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum AND p.`mfrsid`=b.`mfrsid`
+        left join c_unit u on p.unitid= u.unitid
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -36,28 +36,21 @@
             and p.state= 1
         </where>
 
-        group by p.id order by  p.id desc
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by  p.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum left join
-        c_unit u on p.unitid= u.unitid
-        <where>
-            <if test="producNum != null and producNum != ''">and p.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
-            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="goodsCode != null and goodsCode != ''">and p.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
-            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  p.tax_price and p.retail_price &lt;=  #{taxPrice2}
-            </if>
-            <if test="partsStyle != null and partsStyle != ''">and p.parts_style = #{partsStyle}</if>
-            <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
-            and p.state= 1
-        </where>
+        select count(*) from aa_parts
     </select>
 
     <insert id="save" parameterType="com.shiguang.product.domain.PartsDO" useGeneratedKeys="true" keyProperty="id">

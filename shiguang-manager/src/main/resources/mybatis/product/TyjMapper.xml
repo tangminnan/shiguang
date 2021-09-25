@@ -7,7 +7,7 @@
 		select t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`brandnum`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
 		t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
 		t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`xsstate`,t.`state`,t.`classtype`
-		from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandnum=b.brandnum
+		from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsnum left join c_brand b on t.brandnum=b.brandnum
         left join  c_unit u on t.unitid= u.unitid
 		where id = #{value}
 	</select>
@@ -17,7 +17,7 @@
         t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`brandnum`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
         t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
         t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`xsstate`,t.`state`,t.`classtype`
-        from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandnum=b.brandnum
+        from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsnum left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
         left join c_unit u on t.unitid= u.unitid
         <where>
             <if test="producNum != null and producNum != ''">and t.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
@@ -39,32 +39,22 @@
             <if test="styleId != null and styleId != ''">and t.style_id = #{styleId}</if>
             and  t.state= 1
         </where>
-        group by t.id order by t.id desc
+
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                group by t.id order by t.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <select id="count" resultType="int">
-        select count(*)  from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsid left join c_brand b on t.brandnum=b.brandnum
-        left join c_unit u on t.unitid= u.unitid
-        <where>
-            <if test="producNum != null and producNum != ''">and t.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
-            <if test="producName != null and producName != ''">and t.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="goodsCode != null and goodsCode != ''">and t.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
-            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  t.retail_price and t.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  t.tax_price and t.retail_price &lt;=  #{taxPrice2}
-            </if>
-
-            <if test="producFactory != null and producFactory != ''">and t.produc_factory = #{producFactory}</if>
-            <if test="producColor != null and producColor != ''">and t.produc_color = #{producColor}</if>
-            <if test="size != null and size != ''">and t.size = #{size}</if>
-            <if test="xsstate != null and xsstate != ''">and t.xsstate = #{xsstate}</if>
-            <if test="styleId != null and styleId != ''">and t.style_id = #{styleId}</if>
-            and  t.state= 1
-        </where>
+        select count(*)  from aa_tyj
     </select>
 
     <insert id="save" parameterType="com.shiguang.product.domain.TyjDO" useGeneratedKeys="true" keyProperty="id">

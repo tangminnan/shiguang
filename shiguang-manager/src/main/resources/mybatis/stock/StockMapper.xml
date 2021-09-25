@@ -1427,7 +1427,20 @@
             <if test="status != null and status != ''">and s.status = #{status}</if>
             <if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>
         </where>
-        group by s.id
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                group by s.id
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="kccxListCount" resultType="int">
+        select count(*)  from stock
     </select>
 
     <update id="updateStatus" parameterType="com.shiguang.stock.domain.StockDO">

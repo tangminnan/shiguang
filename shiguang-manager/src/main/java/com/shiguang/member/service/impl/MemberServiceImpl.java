@@ -240,4 +240,15 @@ public class MemberServiceImpl implements MemberService {
         }
         return true;
     }
+
+
+    @Override
+    public List<MemberDO> yanguangList(Map<String, Object> map) {
+        return memberDao.yanguangList(map);
+    }
+
+    @Override
+    public int yanguangCount(Map<String, Object> map) {
+        return memberDao.yanguangCount(map);
+    }
 }

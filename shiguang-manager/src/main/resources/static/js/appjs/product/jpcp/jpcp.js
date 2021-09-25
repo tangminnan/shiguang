@@ -107,11 +107,11 @@ function load() {
                         title: '单位'
                     },
                     {
-                        field: 'sph',
+                        field: 'sphId',
                         title: '球镜'
                     },
                     {
-                        field: 'cyl',
+                        field: 'cylId',
                         title: '柱镜'
                     },
                     // {

@@ -11,7 +11,7 @@ function getZhizaoshang() {
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             for (var i = 0; i < rows.length; i++) {
                 $("#mfrsName").val(rows[i].mfrsname);
-                $("#mfrsid").val(rows[i].mfrsid);
+                $("#mfrsid").val(rows[i].mfrsnum);
                 caidan(rows[i].mfrsid);
             }
         }

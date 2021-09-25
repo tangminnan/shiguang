@@ -9,7 +9,7 @@
 		y.`span_id`,y.`cyl_id`,y.`sph_up`,y.`sph_down`,y.`sph_span`,y.`cyl_up`,y.`cyl_down`,y.`cyl_span`,y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,
 		y.`curvature_er`,y.`diameter_one`,y.`diameter_yi`,y.`contact_lens`,y.`cycle`,y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,
 		y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,y.`retail_price`,y.`xsstate`,y.`state`,y.`classtype`
-		from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
+		from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsnum left join c_brand b on y.brandnum=b.brandnum
         left join  c_unit u on y.unitid= u.unitid
 		where id = #{value}
 	</select>
@@ -20,7 +20,7 @@
         y.`span_id`,y.`cyl_id`,y.`sph_up`,y.`sph_down`,y.`sph_span`,y.`cyl_up`,y.`cyl_down`,y.`cyl_span`,y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,
         y.`curvature_er`,y.`diameter_one`,y.`diameter_yi`,y.`contact_lens`,y.`cycle`,y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,
         y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,y.`retail_price`,y.`xsstate`,y.`state`,y.`classtype`
-        from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
+        from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsnum left join c_brand b on y.brandnum=b.brandnum AND m.`mfrsid`=b.`mfrsid`
         left join c_unit u on y.unitid= u.unitid
         <where>
             <if test="producNum != null and producNum != ''">and y.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
@@ -39,30 +39,22 @@
             <if test="xsstate != null and xsstate != ''">and y.xsstate = #{xsstate}</if>
             and y.state=1
         </where>
-        group by y.id order by  y.id desc
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				group by y.id order by  y.id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsid left join c_brand b on y.brandnum=b.brandnum
-        left join c_unit u on y.unitid= u.unitid
-        <where>
-            <if test="producNum != null and producNum != ''">and y.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
-            <if test="producName != null and producName != ''">and y.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="goodsCode != null and goodsCode != ''">and y.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
-            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  y.retail_price and y.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  y.tax_price and y.retail_price &lt;=  #{taxPrice2}
-            </if>
-            <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
-            <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
-            <if test="xsstate != null and xsstate != ''">and y.xsstate = #{xsstate}</if>
-            <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
-            and y.state=1
-        </where>
+        select count(*) from aa_yxdz
     </select>
 
     <insert id="save" parameterType="com.shiguang.product.domain.YxdzDO" useGeneratedKeys="true" keyProperty="id">

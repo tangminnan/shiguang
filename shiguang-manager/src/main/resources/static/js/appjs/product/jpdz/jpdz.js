@@ -198,10 +198,10 @@ function load() {
                     //     field: 'cycle',
                     //     title: '定做周期（天）'
                     // },
-                    {
-                        field: 'lightName',
-                        title: '镜片种类'
-                    },
+                    // {
+                    //     field: 'lightName',
+                    //     title: '镜片种类'
+                    // },
                     // {
                     //     field: 'gradualId',
                     //     title: '渐进片分类id'

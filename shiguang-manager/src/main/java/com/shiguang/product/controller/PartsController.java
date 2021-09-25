@@ -61,9 +61,9 @@ public class PartsController {
     @GetMapping("/add")
     String add(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
+        /*//制造商
         List<MgDO> mfrsDOList = partsService.mglist(map);
-        model.addAttribute("mfrsDOList", mfrsDOList);
+        model.addAttribute("mfrsDOList", mfrsDOList);*/
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);

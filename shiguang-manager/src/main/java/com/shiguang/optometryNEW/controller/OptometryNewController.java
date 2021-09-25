@@ -73,8 +73,8 @@ public class OptometryNewController {
         //查询列表数据
         Query query = new Query(params);
         query.put("state", 1);
-        List<MemberDO> memberDOList = memberService.list(query);
-        int total = memberService.count(query);
+        List<MemberDO> memberDOList = memberService.yanguangList(query);
+        int total = memberService.yanguangCount(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);
         return pageUtils;
     }

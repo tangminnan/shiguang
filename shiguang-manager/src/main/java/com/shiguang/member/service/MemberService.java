@@ -30,4 +30,8 @@ public interface MemberService {
     int updateStatus(MemberDO memberDO);
 
     R importMember(String departNumber, String checkType, MultipartFile file);
+
+    //视光检查用户List
+    List<MemberDO> yanguangList(Map<String, Object> map);
+    int yanguangCount(Map<String, Object> map);
 }

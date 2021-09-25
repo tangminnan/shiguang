@@ -32,4 +32,9 @@ public interface MemberDao {
     int batchRemove(@Param("id") Long[] ids, @Param("status") Long status);
 
     int updateStatus(MemberDO memberDO);
+
+
+    //视光检查用户List
+    List<MemberDO> yanguangList(Map<String, Object> map);
+    int yanguangCount(Map<String, Object> map);
 }
