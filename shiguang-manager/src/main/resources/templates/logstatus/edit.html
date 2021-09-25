@@ -69,6 +69,9 @@
 		<tr>
 			<td rowspan="4">R</td>
 			<td>主子午面一</td>
+			<input id="rightsph" th:value="${conclusion.rightsph}" type="hidden"/>
+			<input id="rightcyl" th:value="${conclusion.rightcyl}" type="hidden"/>
+			<input id="rightzx" th:value="${conclusion.rightzx}" type="hidden"/>
 			<td><span th:text="${conclusion.rightsph}"></span></td>
 			<td><span th:text="${conclusion.rightcyl}"></span></td>
 			<td><span th:text="${conclusion.rightzx}"></span></td>
@@ -79,9 +82,9 @@
 		</tr>
 		<tr>
 			<td>焦度计</td>
-			<td><input type="text" name="jdjSphRight1"/></td>
-			<td><input type="text" name="jdjCylRight1"/></td>
-			<td><input type="text" name="jdjZxRight1"/></td>
+			<td><input type="text" id="jdjSphRight1" name="jdjSphRight1"/></td>
+			<td><input type="text" id="jdjCylRight1" name="jdjCylRight1"/></td>
+			<td><input type="text" id="jdjZxRight1" name="jdjZxRight1"/></td>
 			<td rowspan="3">
 				<select name="xieshiRight" id="xieshiRight">
 					<option value="">--请选择--</option>
@@ -96,19 +99,22 @@
 		</tr>
 		<tr>
 			<td>主子午面二</td>
-			<td>+0.75</td>
-			<td>-0.5</td>
-			<td>58</td>
+			<td id="rightsph2"></td>
+			<td id="rightcyl2"></td>
+			<td id="rightzx2"></td>
 		</tr>
 		<tr>
 			<td>焦度计</td>
-			<td><input type="text" name="jdjSphRight12"/></td>
-			<td><input type="text" name="jdjCylRight2"/></td>
-			<td><input type="text" name="jdjZxRight2"/></td>
+			<td><input type="text" id="jdjSphRight2" name="jdjSphRight2"/></td>
+			<td><input type="text" id="jdjCylRight2" name="jdjCylRight2"/></td>
+			<td><input type="text" id="jdjZxRight2" name="jdjZxRight2"/></td>
 		</tr>
 		<tr>
 			<td rowspan="4">L</td>
 			<td>主子午面一</td>
+			<input id="leftsph" th:value="${conclusion.leftsph}" type="hidden"/>
+			<input id="leftcyl" th:value="${conclusion.leftcyl}" type="hidden"/>
+			<input id="leftzx" th:value="${conclusion.leftzx}" type="hidden"/>
 			<td><span th:text="${conclusion.leftsph}"></span></td>
 			<td><span th:text="${conclusion.leftcyl}"></span></td>
 			<td><span th:text="${conclusion.leftzx}"></span></td>
@@ -119,9 +125,9 @@
 		</tr>
 		<tr>
 			<td>焦度计</td>
-			<td><input type="text" name="jdjSphLeft1"/></td>
-			<td><input type="text" name="jdjCylLeft1"/></td>
-			<td><input type="text" name="jdjZxLeft1"/></td>
+			<td><input type="text" id="jdjSphLeft1" name="jdjSphLeft1"/></td>
+			<td><input type="text" id="jdjCylLeft1" name="jdjCylLeft1"/></td>
+			<td><input type="text" id="jdjZxLeft1" name="jdjZxLeft1"/></td>
 			<td rowspan="3">
 				<select name="xieshiLeft" id="xieshiLeft">
 					<option value="">--请选择--</option>
@@ -136,15 +142,15 @@
 		</tr>
 		<tr>
 			<td>主子午面二</td>
-			<td>+0.75</td>
-			<td>-0.5</td>
-			<td>58</td>
+			<td id="leftsph2"></td>
+			<td id="leftcyl2"></td>
+			<td id="leftzx2"></td>
 		</tr>
 		<tr>
 			<td>焦度计</td>
-			<td><input type="text" name="jdjSphLeft2"/></td>
-			<td><input type="text" name="jdjCylLeft2"/></td>
-			<td><input type="text" name="jdjZxLeft2"/></td>
+			<td><input type="text" id="jdjSphLeft2" name="jdjSphLeft2"/></td>
+			<td><input type="text" id="jdjCylLeft2" name="jdjCylLeft2"/></td>
+			<td><input type="text" id="jdjZxLeft2" name="jdjZxLeft2"/></td>
 		</tr>
 		<tr>
 			<td>镜架</td>
@@ -160,11 +166,11 @@
 		</tr>
 		<tr>
 			<td>1.2</td>
-			<td colspan="2"><input type="text" /></td>
-			<td colspan="2"><input type="text" /></td>
-			<td><input type="text" /></td>
-			<td colspan="2"><input type="text" /></td>
-			<td><input type="text" /></td>
+			<td colspan="2"><input type="text" id="chuichajdj" /></td>
+			<td colspan="2"><input type="text" value="√"/></td>
+			<td><input type="text" value="√"/></td>
+			<td colspan="2"><input type="text" value="√"/></td>
+			<td><input type="text" value="√"/></td>
 		</tr>
 		</tbody>
 	</table>
@@ -175,6 +181,7 @@
 		<!--<label for="JK2"><input name="cont"  type="radio" id="JK2"> TOPCON</label>-->
 		<input type="button" value="读取设备接口" onclick="getFetch()"/>
 		<input type="button" value="检验" onclick="getCheckOut()"/>
+		<!--<input type="submit" style="font-size: 20px;background-color: #358afd;width: 5%;color:white;" value="保存" />-->
 		<input type="submit" style="font-size: 20px;background-color: #358afd;width: 5%;color:white;" value="保存" />
 	</div>
 	</form>
@@ -183,7 +190,262 @@
 <script type="text/javascript" src="/js/appjs/logstatus/edit.js">
 </script>
 <script type="text/javascript">
-
+    $().ready(function(){
+        var rightsph = $("#rightsph").val();
+        var rightcyl = $("#rightcyl").val();
+        var rightzx = $("#rightzx").val();
+        var leftsph = $("#leftsph").val();
+        var leftcyl = $("#leftcyl").val();
+        var leftzx = $("#leftzx").val();
+        // alert(Number(rightsph)>0);
+		// alert(Number(aa) >0);
+		if (Number(rightsph) > 0){
+           var rightsph2 =  Number(rightsph) + Number(rightcyl);
+           $("#rightsph2").text("+"+rightsph2);
+		} else {
+            var rightsph2 = Number(rightsph) + Number(rightcyl);
+            $("#rightsph2").text(rightsph2);
+		}
+		rightcyl -= rightcyl*2;
+		$("#rightcyl2").text("+"+rightcyl);
+		if (Number(rightzx) > 90){
+		    var rightzx2 = Number(rightzx)-Number(90);
+		    $("#rightzx2").text(rightzx2);
+		} else {
+            var rightzx2 = Number(rightzx)+Number(90);
+            $("#rightzx2").text(rightzx2);
+		}
+        if (Number(leftsph) > 0){
+            var leftsph2 =  Number(leftsph) + Number(leftcyl);
+            $("#leftsph2").text("+"+leftsph2);
+        } else {
+            var leftsph2 = Number(leftsph) + Number(leftcyl);
+            $("#leftsph2").text(leftsph2);
+        }
+        leftcyl -= leftcyl*2;
+        $("#leftcyl2").text("+"+leftcyl);
+        if (Number(leftzx) > 90){
+            var leftzx2 = Number(leftzx)-Number(90);
+            $("#leftzx2").text(leftzx2);
+        } else {
+            var leftzx2 = Number(leftzx)+Number(90);
+            $("#leftzx2").text(leftzx2);
+        }
+    });
+    function getFetch(){
+        $.ajax({
+            type : 'POST',
+            data : {},
+            url : '/information/examine/jiaoduji',
+            success : function(data) {
+				$("#jdjSphRight1").val(data.rightSph);
+                $("#jdjCylRight1").val(data.rightCyl);
+                $("#jdjZxRight1").val(data.rightZx);
+                $("#jdjSphLeft1").val(data.leftSph);
+                $("#jdjCylLeft1").val(data.leftCyl);
+                $("#jdjZxLeft1").val(data.leftZx);
+                var rightcyl = data.rightCyl;
+                var leftcyl = data.rightCyl;
+                if (Number(data.rightSph) > 0){
+                    var rightsph2 =  Number(data.rightSph) + Number(data.rightCyl);
+                    $("#jdjSphRight2").val("+"+rightsph2);
+                } else {
+                    var rightsph2 = Number(data.rightSph) + Number(data.rightCyl);
+                    $("#jdjSphRight2").val(rightsph2);
+                }
+                rightcyl -= rightcyl*2;
+                $("#jdjCylRight2").val("+"+rightcyl);
+                if (Number(data.rightZx) > 90){
+                    var rightzx2 = Number(data.rightZx)-Number(90);
+                    $("#jdjZxRight2").val(rightzx2);
+                } else {
+                    var rightzx2 = Number(data.rightZx)+Number(90);
+                    $("#jdjZxRight2").val(rightzx2);
+                }
+                if (Number(data.leftSph) > 0){
+                    var leftsph2 =  Number(data.leftSph) + Number(data.leftCyl);
+                    $("#jdjSphLeft2").val("+"+leftsph2);
+                } else {
+                    var leftsph2 = Number(data.leftSph) + Number(data.leftCyl);
+                    $("#jdjSphLeft2").val(leftsph2);
+                }
+                leftcyl -= leftcyl*2;
+                $("#jdjCylLeft2").val("+"+leftcyl);
+                if (Number(data.leftZx) > 90){
+                    var leftzx2 = Number(data.leftZx)-Number(90);
+                    $("#jdjZxLeft2").val(leftzx2);
+                } else {
+                    var leftzx2 = Number(data.leftZx)+Number(90);
+                    $("#jdjZxLeft2").val(leftzx2);
+                }
+                $("#chuichajdj").val(0);
+            }
+        });
+	}
+	function getCheckOut(){
+        //var jdjCylRight1 = $("#jdjCylRight1").val();
+        var rightsph = $("#rightsph").val();
+        var rightsph2 = $("#rightsph2").val();
+        var rightcyl = $("#rightcyl").val();
+        var rightcyl2 = $("#rightcyl2").val();
+        var rightzx = $("#rightzx").val();
+        var rightzx2 = $("#rightzx2").val();
+        var leftsph = $("#leftsph").val();
+        var leftsph2 = $("#leftsph2").val();
+        var leftcyl = $("#leftcyl").val();
+        var leftcyl2 = $("#leftcyl2").val();
+        var leftzx = $("#leftzx").val();
+        var leftzx2 = $("#leftzx2").val();
+        if ( Math.abs(rightsph) >= 0.00 && Math.abs(rightsph) <= 9.00){
+            var rightsph1 = Number(rightsph) + Number(+0.12);
+            var rightsph2 = Number(rightsph) + Number(-0.12);
+            var jdjSphRight11 = $("#jdjSphRight1").val();
+            if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                jdjSphRight1.style = "background-color:#008000;";
+			} else {
+                jdjSphRight1.style = "background-color:#ff0000;";
+			}
+		} else if (Math.abs(rightsph) > 9.00 && Math.abs(rightsph) <= 12.00){
+            var rightsph1 = Number(rightsph) + Number(+0.18);
+            var rightsph2 = Number(rightsph) + Number(-0.18);
+            var jdjSphRight11 = $("#jdjSphRight1").val();
+            if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                jdjSphRight1.style = "background-color:#008000;";
+            } else {
+                jdjSphRight1.style = "background-color:#ff0000;";
+            }
+		} else if (Math.abs(rightsph) > 12.00 && Math.abs(rightsph) <= 20.00){
+            var rightsph1 = Number(rightsph) + Number(+0.25);
+            var rightsph2 = Number(rightsph) + Number(-0.25);
+            var jdjSphRight11 = $("#jdjSphRight1").val();
+            if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                jdjSphRight1.style = "background-color:#008000;";
+            } else {
+                jdjSphRight1.style = "background-color:#ff0000;";
+            }
+		} else if (Math.abs(rightsph) > 20.00){
+            var rightsph1 = Number(rightsph) + Number(+0.37);
+            var rightsph2 = Number(rightsph) + Number(-0.37);
+            var jdjSphRight11 = $("#jdjSphRight1").val();
+            if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                jdjSphRight1.style = "background-color:#008000;";
+            } else {
+                jdjSphRight1.style = "background-color:#ff0000;";
+            }
+		}
+        if (Math.abs(rightsph2) >= 0.00 && Math.abs(rightsph2) <= 9.00){
+            var rightsph1 = Number(rightsph2) + Number(+0.12);
+            var rightsph2 = Number(rightsph2) + Number(-0.12);
+            var jdjSphRight12 = $("#jdjSphRight2").val();
+            if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                jdjSphRight2.style = "background-color:#008000;";
+            } else {
+                jdjSphRight2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(rightsph2) > 9.00 && Math.abs(rightsph2) <= 12.00){
+            var rightsph1 = Number(rightsph2) + Number(+0.18);
+            var rightsph2 = Number(rightsph2) + Number(-0.18);
+            var jdjSphRight12 = $("#jdjSphRight2").val();
+            if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                jdjSphRight2.style = "background-color:#008000;";
+            } else {
+                jdjSphRight2.style = "background-color:#ff0000;";
+            }
+		} else if (Math.abs(rightsph2) > 12.00 && Math.abs(rightsph2) <= 20.00){
+            var rightsph1 = Number(rightsph2) + Number(+0.25);
+            var rightsph2 = Number(rightsph2) + Number(-0.25);
+            var jdjSphRight12 = $("#jdjSphRight2").val();
+            if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                jdjSphRight2.style = "background-color:#008000;";
+            } else {
+                jdjSphRight2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(rightsph2) > 20.00){
+            var rightsph1 = Number(rightsph2) + Number(+0.37);
+            var rightsph2 = Number(rightsph2) + Number(-0.37);
+            var jdjSphRight12 = $("#jdjSphRight2").val();
+            if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                jdjSphRight2.style = "background-color:#008000;";
+            } else {
+                jdjSphRight2.style = "background-color:#ff0000;";
+            }
+        }
+        if (Math.abs(leftsph) >= 0.00 && Math.abs(leftsph) <= 9.00){
+            var leftsph1 = Number(leftsph) + Number(+0.12);
+            var leftsph2 = Number(leftsph) + Number(-0.12);
+            var jdjSphLeft11 = $("#jdjSphLeft1").val();
+            if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                jdjSphLeft1.style = "background-color:#008000;";
+            } else {
+                jdjSphLeft1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftsph) > 9.00 && Math.abs(leftsph) <= 12.00){
+            var leftsph1 = Number(leftsph) + Number(+0.18);
+            var leftsph2 = Number(leftsph) + Number(-0.18);
+            var jdjSphLeft11 = $("#jdjSphLeft1").val();
+            if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                jdjSphLeft1.style = "background-color:#008000;";
+            } else {
+                jdjSphLeft1.style = "background-color:#ff0000;";
+            }
+		} else if (Math.abs(leftsph) > 12.00 && Math.abs(leftsph) <= 20.00){
+            var leftsph1 = Number(leftsph) + Number(+0.25);
+            var leftsph2 = Number(leftsph) + Number(-0.25);
+            var jdjSphLeft11 = $("#jdjSphLeft1").val();
+            if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                jdjSphLeft1.style = "background-color:#008000;";
+            } else {
+                jdjSphLeft1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftsph) > 20.00){
+            var leftsph1 = Number(leftsph) + Number(+0.37);
+            var leftsph2 = Number(leftsph) + Number(-0.37);
+            var jdjSphLeft11 = $("#jdjSphLeft1").val();
+            if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                jdjSphLeft1.style = "background-color:#008000;";
+            } else {
+                jdjSphLeft1.style = "background-color:#ff0000;";
+            }
+        }
+        if (Math.abs(leftsph2) >= 0.00 && Math.abs(leftsph2) <= 9.00){
+            var leftsph1 = Number(leftsph2) + Number(+0.12);
+            var leftsph2 = Number(leftsph2) + Number(-0.12);
+            var jdjSphLeft12 = $("#jdjSphLeft2").val();
+            if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                jdjSphLeft2.style = "background-color:#008000;";
+            } else {
+                jdjSphLeft2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftsph2) > 9.00 && Math.abs(leftsph2) <= 12.00){
+            var leftsph1 = Number(leftsph2) + Number(+0.18);
+            var leftsph2 = Number(leftsph2) + Number(-0.18);
+            var jdjSphLeft12 = $("#jdjSphLeft2").val();
+            if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                jdjSphLeft2.style = "background-color:#008000;";
+            } else {
+                jdjSphLeft2.style = "background-color:#ff0000;";
+            }
+		} else if (Math.abs(leftsph2) > 12.00 && Math.abs(leftsph2) <= 20.00){
+            var leftsph1 = Number(leftsph2) + Number(+0.25);
+            var leftsph2 = Number(leftsph2) + Number(-0.25);
+            var jdjSphLeft12 = $("#jdjSphLeft2").val();
+            if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                jdjSphLeft2.style = "background-color:#008000;";
+            } else {
+                jdjSphLeft2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftsph2) > 20.00){
+            var leftsph1 = Number(leftsph2) + Number(+0.37);
+            var leftsph2 = Number(leftsph2) + Number(-0.37);
+            var jdjSphLeft12 = $("#jdjSphLeft2").val();
+            if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                jdjSphLeft2.style = "background-color:#008000;";
+            } else {
+                jdjSphLeft2.style = "background-color:#ff0000;";
+            }
+        }
+        chuichajdj.style = "background-color:#008000;";
+	}
 </script>
 </body>
 </html>

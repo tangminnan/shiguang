@@ -40,6 +40,7 @@ public class SerialPortUtils implements SerialPortEventListener {
     private String data;
     // 保存串口返回信息十六进制
     private String dataHex;
+    private SerialDataUtils serialDataUtils = SerialDataUtils.getSerialPortUtils();
 
     /**
      * 初始化串口
@@ -138,24 +139,25 @@ public class SerialPortUtils implements SerialPortEventListener {
                 inputStream = null;
                 break;
             }
-            BleDataBean bleDataBean = SerialDataUtils.toOptometry(builder.toString());
-            List<ResultDiopterDO> list = bleDataBean.getSca();
-            OptometryDO optometryDO = new OptometryDO();
-            for (int i = 0; i < list.size(); i++) {
-                if ("AVG".equals(list.get(i).getType())) {
-                    if ("L".equals(list.get(i).getIfrl())) {
-                        optometryDO.setSphereLeft(list.get(i).getDiopterS());
-                        optometryDO.setAxialLeft(list.get(i).getDiopterA());
-                        optometryDO.setCylinderLeft(list.get(i).getDiopterC());
-                    } else if ("R".equals(list.get(i).getIfrl())) {
-                        optometryDO.setSphereRight(list.get(i).getDiopterS());
-                        optometryDO.setAxialRight(list.get(i).getDiopterA());
-                        optometryDO.setCylinderRight(list.get(i).getDiopterC());
-                    }
-                }
-            }
-            optometryDO.setCreateTime(new Date());
-            optometryService.save(optometryDO);
+            serialDataUtils.toData(builder.toString());
+//            BleDataBean bleDataBean = SerialDataUtils.toOptometry(builder.toString());
+//            List<ResultDiopterDO> list = bleDataBean.getSca();
+//            OptometryDO optometryDO = new OptometryDO();
+//            for (int i = 0; i < list.size(); i++) {
+//                if ("AVG".equals(list.get(i).getType())) {
+//                    if ("L".equals(list.get(i).getIfrl())) {
+//                        optometryDO.setSphereLeft(list.get(i).getDiopterS());
+//                        optometryDO.setAxialLeft(list.get(i).getDiopterA());
+//                        optometryDO.setCylinderLeft(list.get(i).getDiopterC());
+//                    } else if ("R".equals(list.get(i).getIfrl())) {
+//                        optometryDO.setSphereRight(list.get(i).getDiopterS());
+//                        optometryDO.setAxialRight(list.get(i).getDiopterA());
+//                        optometryDO.setCylinderRight(list.get(i).getDiopterC());
+//                    }
+//                }
+//            }
+//            optometryDO.setCreateTime(new Date());
+//            optometryService.save(optometryDO);
         } catch (IOException e) {
             System.out.println("读取串口数据时发生IO异常");
         }
@@ -294,4 +296,34 @@ public class SerialPortUtils implements SerialPortEventListener {
         }
         return sb.toString();
     }
+
+    public static void main(String[] args) {
+        String string = "\u0001DLM\u0002IDNIDEK/LM-600P\u0017 R-06.50-01.50010\u0017PR00.00I\u0017PR00.00U\u0017 L-05.75-01.50179\u0017PL00.00O\u0017PL00.00U\u0017\u00041372";
+        //System.out.println(string);
+        System.out.println(string.substring(22, 23));
+        System.out.println(string.substring(25, 29));
+        System.out.println(string.substring(31, 35));
+        System.out.println(string.substring(36, 38));
+        System.out.println(string.substring(58, 59));
+        System.out.println(string.substring(61, 65));
+        System.out.println(string.substring(67, 71));
+        System.out.println(string.substring(71, 75));
+    }
+        //BleDataBean bleDataBean = SerialDataUtils.toOptometry(string);
+        //System.out.println(bleDataBean.toString());
+
+//        String str ="吉林省,山东省,北京市";
+//        String str1=str.substring(0, str.indexOf(","));
+////        //获得第一个点的位置
+////        int index=str.indexOf(",");
+////        System.out.println(index);
+//////        //根据第一个点的位置 获得第二个点的位置
+//////        index=str.indexOf(".", index+1);
+////        //根据第二个点的位置，截取 字符串。得到结果 result
+////        String result=str.substring(index);
+//        //输出结果
+//        System.out.println(str1);
+
+//    }
+
 }

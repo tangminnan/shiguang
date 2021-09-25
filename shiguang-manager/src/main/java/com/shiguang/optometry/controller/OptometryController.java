@@ -2,10 +2,7 @@ package com.shiguang.optometry.controller;
 
 import com.shiguang.checkout.domain.CostDO;
 import com.shiguang.checkout.service.CostService;
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
-import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.common.utils.*;
 import com.shiguang.line.domain.LineDO;
 import com.shiguang.line.service.LineService;
 import com.shiguang.member.domain.MemberDO;
@@ -21,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -86,6 +84,21 @@ public class OptometryController {
 //        OptometryDO optometry = optometryService.get(id);
 //        model.addAttribute("optometry", optometry);
         //ResultDiopterDO resultDiopterDO = resultDiopterService.
+        try {
+            Method method = Chuank.class.getMethod("main",
+                    String[].class);
+            method.invoke(null,
+                    (Object) new String[2]);
+        } catch (Exception e) {
+            Throwable cause = e.getCause();
+            if (cause.getLocalizedMessage().contains("被占用")) {
+                return "被占用";
+            } else if (cause.getLocalizedMessage().contains("成功")) {
+                return "";
+            }
+            return "";
+        }
+
         MemberDO memberDO = memberService.getCardNumber(cardNumber);
         if (memberDO.getSex() == 0) {
             memberDO.setSexx("男");

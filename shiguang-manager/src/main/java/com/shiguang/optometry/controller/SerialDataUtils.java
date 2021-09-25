@@ -5,10 +5,16 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.shiguang.common.utils.ByteUtils;
+import com.shiguang.common.utils.CodeUtil;
 import com.shiguang.common.utils.Intrinsics;
 import com.shiguang.common.utils.SpringUtil;
+import com.shiguang.logstatus.domain.LensMeterDO;
+import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.optometry.domain.*;
+import com.shiguang.optometry.service.OptometryService;
 import org.apache.commons.io.Charsets;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class SerialDataUtils {
@@ -19,6 +25,10 @@ public class SerialDataUtils {
 //    private HeightweightDao heightweightDao = (HeightweightDao) SpringUtil.getBean("heightweightDao");
 //
 //    private EyePressureDao eyePressureDao = (EyePressureDao) SpringUtil.getBean("eyePressureDao");
+
+    private OptometryService optometryService = (OptometryService) SpringUtil.getBean("optometryServiceImpl");
+
+    private LensMeterService lensMeterService = (LensMeterService) SpringUtil.getBean("lensMeterServiceImpl");
 
     public static SerialDataUtils serialDataUtils = null;
 
@@ -79,44 +89,44 @@ public class SerialDataUtils {
      * @param data
      * @return
      */
-//    public void toData(String data) {
-//        if (!isBT) {
-//            if (data.contains("53204E6F3D303030303020")) {
-//                isBT = true;
-//                type = "isOptometry";
-//                return;
-//            }
+    public void toData(String data) {
+        if (!isBT) {
+            if (data.contains("53204E6F3D303030303020")) {
+                isBT = true;
+                type = "isOptometry";
+                return;
+            }
 //            if (data.length() == 9) {
 //                String isHW = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
 //                GetCheckBean.HeightAndWeight tohw = tohw(isHW);
 //                heightweightDao.lsSave(tohw);
 //                return;
 //            }
-//            String s = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
-//            if (s.contains("bp")) {
-//                isBT = true;
-//                type = "isBlood";
-//                return;
-//            }
-//            byte[] bytes = data.getBytes();//获得byte数组
-////        byte[] bytes = ByteUtils.hexStr2Byte(data);//获得byte数组
-//            for (int i = 0; i < bytes.length; i++) {
-//                if (i < bytes.length - 3) {
-//                    byte[] btByte = new byte[]{bytes[i], bytes[i + 1], bytes[i + 2]};
-//                    if (Arrays.equals(btByte, DNT)) {
-//                        isBT = true;
-//                        type = "isPressure";
-//                        return;
-//                    }
-//                    if (Arrays.equals(btByte, Drm) || Arrays.equals(btByte, drm) || Arrays.equals(btByte, DRM) || Arrays.equals(btByte, DKM)) {
-//                        isBT = true;
-//                        type = "isOptometry";
-//                        return;
-//                    }
-//                }
-//            }
-//        } else {
-//            switch (type) {
+            String s = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+            if (s.contains("bp")) {
+                isBT = true;
+                type = "isBlood";
+                return;
+            }
+            byte[] bytes = data.getBytes();//获得byte数组
+//        byte[] bytes = ByteUtils.hexStr2Byte(data);//获得byte数组
+            for (int i = 0; i < bytes.length; i++) {
+                if (i < bytes.length - 3) {
+                    byte[] btByte = new byte[]{bytes[i], bytes[i + 1], bytes[i + 2]};
+                    if (Arrays.equals(btByte, DNT)) {
+                        isBT = true;
+                        type = "isLensMeter";
+                        return;
+                    }
+                    if (Arrays.equals(btByte, Drm) || Arrays.equals(btByte, drm) || Arrays.equals(btByte, DRM) || Arrays.equals(btByte, DKM)) {
+                        isBT = true;
+                        type = "isOptometry";
+                        return;
+                    }
+                }
+            }
+        } else {
+            switch (type) {
 //                case "isBlood":
 //                    String isBlood = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
 //                    GetCheckBean.BloodPressure toBlood = toBlood(isBlood);
@@ -124,27 +134,60 @@ public class SerialDataUtils {
 //                    isBT = false;
 //                    type = "";
 //                    break;
-//                case "isPressure":
+                case "isLensMeter":
 //                    String isPressure = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
 //                    GetCheckBean.ResultEyepressureDOBean eyepressureDOBean = toIOP(isPressure);
 //                    eyePressureDao.lsSave(eyepressureDOBean);
-//                    isBT = false;
-//                    type = "";
-//                    break;
-//                case "isOptometry":
-//                    String isOptometry = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+                    String isLensMeter = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+                    String rightsph = isLensMeter.substring(25, 29);
+                    String rightcyl = isLensMeter.substring(31, 35);
+                    String rightzx = isLensMeter.substring(36, 38);
+                    String leftsph = isLensMeter.substring(61, 65);
+                    String leftcyl = isLensMeter.substring(67, 71);
+                    String leftzx = isLensMeter.substring(71, 75);
+                    LensMeterDO lensMeterDO = new LensMeterDO();
+                    lensMeterDO.setRightSph(rightsph);
+                    lensMeterDO.setRightCyl(rightcyl);
+                    lensMeterDO.setRightZx(rightzx);
+                    lensMeterDO.setLeftSph(leftsph);
+                    lensMeterDO.setLeftCyl(leftcyl);
+                    lensMeterDO.setLeftZx(leftzx);
+                    lensMeterService.save(lensMeterDO);
+                    isBT = false;
+                    type = "";
+                    break;
+                case "isOptometry":
+                    String isOptometry = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+                    BleDataBean bleDataBean = SerialDataUtils.toOptometry(isOptometry);
+                    List<ResultDiopterDO> list = bleDataBean.getSca();
+                    OptometryDO optometryDO = new OptometryDO();
+                    for (int i = 0; i < list.size(); i++) {
+                        if ("AVG".equals(list.get(i).getType())) {
+                            if ("L".equals(list.get(i).getIfrl())) {
+                                optometryDO.setSphereLeft(list.get(i).getDiopterS());
+                                optometryDO.setAxialLeft(list.get(i).getDiopterA());
+                                optometryDO.setCylinderLeft(list.get(i).getDiopterC());
+                            } else if ("R".equals(list.get(i).getIfrl())) {
+                                optometryDO.setSphereRight(list.get(i).getDiopterS());
+                                optometryDO.setAxialRight(list.get(i).getDiopterA());
+                                optometryDO.setCylinderRight(list.get(i).getDiopterC());
+                            }
+                        }
+                    }
+                    optometryDO.setCreateTime(new Date());
+                    optometryService.save(optometryDO);
 //                    linShiData linShiData = new linShiData();
 //                    linShiData.setData(isOptometry);
 //                    linShiData.setAddDate(new Date());
 //                    heightweightDao.dataSave(linShiData);
-//                    isBT = false;
-//                    type = "";
-//                    break;
-//            }
-//        }
-//
-//
-//    }
+                    isBT = false;
+                    type = "";
+                    break;
+            }
+        }
+
+
+    }
 
     /**
      * 验光

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.logstatus.dao.LensMeterDao">
+    <select id="get" resultType="com.shiguang.logstatus.domain.LensMeterDO">
+		select `id`,`right_sph`,`right_cyl`,`right_zx`,`left_sph`,`left_cyl`,`left_zx` from lens_meter where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.logstatus.domain.LensMeterDO">
+        select `id`,`right_sph`,`right_cyl`,`right_zx`,`left_sph`,`left_cyl`,`left_zx` from lens_meter
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="rightSph != null and rightSph != ''"> and right_sph = #{rightSph} </if>
+            <if test="rightCyl != null and rightCyl != ''"> and right_cyl = #{rightCyl} </if>
+            <if test="rightZx != null and rightZx != ''"> and right_zx = #{rightZx} </if>
+            <if test="leftSph != null and leftSph != ''"> and left_sph = #{leftSph} </if>
+            <if test="leftCyl != null and leftCyl != ''"> and left_cyl = #{leftCyl} </if>
+            <if test="leftZx != null and leftZx != ''"> and left_zx = #{leftZx} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from lens_meter
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="rightSph != null and rightSph != ''"> and right_sph = #{rightSph} </if>
+            <if test="rightCyl != null and rightCyl != ''"> and right_cyl = #{rightCyl} </if>
+            <if test="rightZx != null and rightZx != ''"> and right_zx = #{rightZx} </if>
+            <if test="leftSph != null and leftSph != ''"> and left_sph = #{leftSph} </if>
+            <if test="leftCyl != null and leftCyl != ''"> and left_cyl = #{leftCyl} </if>
+            <if test="leftZx != null and leftZx != ''"> and left_zx = #{leftZx} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.logstatus.domain.LensMeterDO" useGeneratedKeys="true" keyProperty="id">
+		insert into lens_meter
+		(
+			`right_sph`,
+			`right_cyl`,
+			`right_zx`,
+			`left_sph`,
+			`left_cyl`,
+			`left_zx`
+		)
+		values
+		(
+			#{rightSph},
+			#{rightCyl},
+			#{rightZx},
+			#{leftSph},
+			#{leftCyl},
+			#{leftZx}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.logstatus.domain.LensMeterDO">
+        update lens_meter
+        <set>
+            <if test="rightSph != null">`right_sph` = #{rightSph}, </if>
+            <if test="rightCyl != null">`right_cyl` = #{rightCyl}, </if>
+            <if test="rightZx != null">`right_zx` = #{rightZx}, </if>
+            <if test="leftSph != null">`left_sph` = #{leftSph}, </if>
+            <if test="leftCyl != null">`left_cyl` = #{leftCyl}, </if>
+            <if test="leftZx != null">`left_zx` = #{leftZx}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from lens_meter where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from lens_meter where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
