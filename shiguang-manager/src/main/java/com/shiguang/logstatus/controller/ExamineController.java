@@ -1,11 +1,10 @@
 package com.shiguang.logstatus.controller;
 
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
-import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.common.utils.*;
+import com.shiguang.logstatus.domain.LensMeterDO;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
+import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.storeSales.domain.Conclusion;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +30,8 @@ public class ExamineController {
     private LogStatusService statusService;
     @Autowired
     private SalesService salesService;
+    @Autowired
+    private LensMeterService lensMeterService;
 
     /**
      * 加工师检验
@@ -146,9 +148,28 @@ public class ExamineController {
 
     @ResponseBody
     @RequestMapping(value = "/jiaoduji")
-    Map<String,Object> jiaoduji(Model model) {
+    LensMeterDO jiaoduji(Model model) {
         Map<String,Object> map = new HashMap<>();
-        return map;
+        LensMeterDO lensMeterDO = new LensMeterDO();
+        try {
+            Method method = Chuank.class.getMethod("main",
+                    String[].class);
+            method.invoke(null,
+                    (Object) new String[2]);
+            List<LensMeterDO> lensMeterDOList = lensMeterService.list(map);
+            if (null != lensMeterDOList && lensMeterDOList.size() > 0){
+                lensMeterDO.setRightSph(lensMeterDOList.get(0).getRightSph());
+                lensMeterDO.setRightCyl(lensMeterDOList.get(0).getRightCyl());
+                lensMeterDO.setRightZx(lensMeterDOList.get(0).getRightZx());
+                lensMeterDO.setLeftSph(lensMeterDOList.get(0).getLeftSph());
+                lensMeterDO.setLeftCyl(lensMeterDOList.get(0).getLeftCyl());
+                lensMeterDO.setLeftZx(lensMeterDOList.get(0).getLeftZx());
+            }
+            model.addAttribute("lensMeterDO",lensMeterDO);
+        } catch (Exception e) {
+            Throwable cause = e.getCause();
+        }
+        return lensMeterDO;
     }
 
 }

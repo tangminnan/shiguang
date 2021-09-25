@@ -9,6 +9,8 @@ import com.shiguang.common.utils.ByteUtils;
 import com.shiguang.common.utils.CodeUtil;
 import com.shiguang.common.utils.Intrinsics;
 import com.shiguang.common.utils.SpringUtil;
+import com.shiguang.logstatus.domain.LensMeterDO;
+import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.optometry.domain.*;
 import com.shiguang.optometry.service.OptometryService;
 import org.apache.commons.io.Charsets;
@@ -25,6 +27,8 @@ public class SerialDataUtils {
 //    private EyePressureDao eyePressureDao = (EyePressureDao) SpringUtil.getBean("eyePressureDao");
 
     private OptometryService optometryService = (OptometryService) SpringUtil.getBean("optometryServiceImpl");
+
+    private LensMeterService lensMeterService = (LensMeterService) SpringUtil.getBean("lensMeterServiceImpl");
 
     public static SerialDataUtils serialDataUtils = null;
 
@@ -111,7 +115,7 @@ public class SerialDataUtils {
                     byte[] btByte = new byte[]{bytes[i], bytes[i + 1], bytes[i + 2]};
                     if (Arrays.equals(btByte, DNT)) {
                         isBT = true;
-                        type = "isPressure";
+                        type = "isLensMeter";
                         return;
                     }
                     if (Arrays.equals(btByte, Drm) || Arrays.equals(btByte, drm) || Arrays.equals(btByte, DRM) || Arrays.equals(btByte, DKM)) {
@@ -130,13 +134,28 @@ public class SerialDataUtils {
 //                    isBT = false;
 //                    type = "";
 //                    break;
-//                case "isPressure":
+                case "isLensMeter":
 //                    String isPressure = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
 //                    GetCheckBean.ResultEyepressureDOBean eyepressureDOBean = toIOP(isPressure);
 //                    eyePressureDao.lsSave(eyepressureDOBean);
-//                    isBT = false;
-//                    type = "";
-//                    break;
+                    String isLensMeter = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+                    String rightsph = isLensMeter.substring(25, 29);
+                    String rightcyl = isLensMeter.substring(31, 35);
+                    String rightzx = isLensMeter.substring(36, 38);
+                    String leftsph = isLensMeter.substring(61, 65);
+                    String leftcyl = isLensMeter.substring(67, 71);
+                    String leftzx = isLensMeter.substring(71, 75);
+                    LensMeterDO lensMeterDO = new LensMeterDO();
+                    lensMeterDO.setRightSph(rightsph);
+                    lensMeterDO.setRightCyl(rightcyl);
+                    lensMeterDO.setRightZx(rightzx);
+                    lensMeterDO.setLeftSph(leftsph);
+                    lensMeterDO.setLeftCyl(leftcyl);
+                    lensMeterDO.setLeftZx(leftzx);
+                    lensMeterService.save(lensMeterDO);
+                    isBT = false;
+                    type = "";
+                    break;
                 case "isOptometry":
                     String isOptometry = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
                     BleDataBean bleDataBean = SerialDataUtils.toOptometry(isOptometry);

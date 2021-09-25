@@ -1,8 +1,9 @@
 package com.shiguang.logstatus.domain;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import java.io.Serializable;
 import java.util.Date;
-
 public class LogStatusDO implements Serializable {
     private static final long serialVersionUID = 1L;
 

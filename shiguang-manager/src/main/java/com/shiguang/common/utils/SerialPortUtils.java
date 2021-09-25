@@ -297,17 +297,18 @@ public class SerialPortUtils implements SerialPortEventListener {
         return sb.toString();
     }
 
-//    public static void main(String[] args) {
-//        String string = "\u0001DLM\u0002IDNIDEK/LM-600P\u0017 R-06.50-01.50010\u0017PR00.00I\u0017PR00.00U\u0017 L-05.75-01.50179\u0017PL00.00O\u0017PL00.00U\u0017\u00041372";
-//        //System.out.println(string);
-//        System.out.println(string.substring(22,23));
-//        System.out.println(string.substring(25,29));
-//        System.out.println(string.substring(31,35));
-//        System.out.println(string.substring(36,38));
-//        System.out.println(string.substring(58,59));
-//        System.out.println(string.substring(61,65));
-//        System.out.println(string.substring(67,71));
-//        System.out.println(string.substring(71,75));
+    public static void main(String[] args) {
+        String string = "\u0001DLM\u0002IDNIDEK/LM-600P\u0017 R-06.50-01.50010\u0017PR00.00I\u0017PR00.00U\u0017 L-05.75-01.50179\u0017PL00.00O\u0017PL00.00U\u0017\u00041372";
+        //System.out.println(string);
+        System.out.println(string.substring(22, 23));
+        System.out.println(string.substring(25, 29));
+        System.out.println(string.substring(31, 35));
+        System.out.println(string.substring(36, 38));
+        System.out.println(string.substring(58, 59));
+        System.out.println(string.substring(61, 65));
+        System.out.println(string.substring(67, 71));
+        System.out.println(string.substring(71, 75));
+    }
         //BleDataBean bleDataBean = SerialDataUtils.toOptometry(string);
         //System.out.println(bleDataBean.toString());
 
