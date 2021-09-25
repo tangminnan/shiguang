@@ -7,6 +7,7 @@ import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
+import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.storeSales.domain.Conclusion;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
@@ -141,6 +142,13 @@ public class ExamineController {
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
         return R.ok();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/jiaoduji")
+    Map<String,Object> jiaoduji(Model model) {
+        Map<String,Object> map = new HashMap<>();
+        return map;
     }
 
 }

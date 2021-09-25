@@ -2,6 +2,7 @@ package com.shiguang.common.utils;
 
 public class Chuank {
     public static void main(String[] args) {
+        System.out.println("启动了！！！");
         // 实例化串口操作类对象
         SerialPortUtils serialPort = new SerialPortUtils();
         // 创建串口必要参数接收类并赋值，赋值串口号，波特率，校验位，数据位，停止位
