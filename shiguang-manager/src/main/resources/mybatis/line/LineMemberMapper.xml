@@ -3,17 +3,18 @@
 
 <mapper namespace="com.shiguang.line.dao.LineMemberDao">
     <select id="get" resultType="com.shiguang.line.domain.LineMemberDO">
-		select `id`,`member_number`,`name`,`sex`,`consult_room` from line_member where id = #{value}
+		select `id`,`member_number`,`name`,`sex`,`consult_room`,`line_time` from line_member where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.line.domain.LineMemberDO">
-        select `id`,`member_number`,`name`,`sex`,`consult_room` from line_member
+        select `id`,`member_number`,`name`,`sex`,`consult_room`,`line_time` from line_member
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="consultRoom != null and consultRoom != ''"> and consult_room = #{consultRoom} </if>
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -36,11 +37,12 @@
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="consultRoom != null and consultRoom != ''"> and consult_room = #{consultRoom} </if>
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
         </where>
     </select>
 
     <select id="listMember" resultType="com.shiguang.line.domain.LineDO">
-        select `id`,`member_number`,`name`,`sex`,`consult_room` from line
+        select `id`,`member_number`,`name`,`sex`,`consult_room`,`line_time` from line
         <where>
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
             and consult_room is not null and call_status != '4'
@@ -64,14 +66,16 @@
 			`member_number`,
 			`name`,
 			`sex`,
-			`consult_room`
+			`consult_room`,
+			`line_time`
 		)
 		values
 		(
 			#{memberNumber},
 			#{name},
 			#{sex},
-			#{consultRoom}
+			#{consultRoom},
+			#{lineTime}
 		)
 	</insert>
 

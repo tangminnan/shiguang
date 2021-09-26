@@ -124,6 +124,7 @@ public class LineController {
 			lineMemberDO.setConsultRoom(consultRoom);
 			lineMemberDO.setName(lineDOs.getName());
 			lineMemberDO.setSex(lineDOs.getSex());
+			lineMemberDO.setLineTime(lineDOs.getLineTime());
 			if(lineMemberService.save(lineMemberDO)>0){
 				return R.ok();
 			}

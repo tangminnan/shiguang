@@ -328,9 +328,9 @@
     <select id="listJpcp" resultType="com.shiguang.stock.domain.StockDO">
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
-        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,st.`classtype`,s.`sph`,c.`cyl`,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,st.`classtype`,	j.sph_id as sph,
+        j.cyl_id as cyl,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`
         from stock st left join aa_jpcp j on j.id = st.goodsxinxiid
-        left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
         left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
         j.refractivityid
         left join p_light pl on pl.light_id = j.light_id left join p_lens le on le.lens_id = j.lens_id
@@ -349,10 +349,10 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph =  #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_id =  #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_id = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_id = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_id = #{leftYuanYongZJ}</if>
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%',-->
                 <!--#{rightYuanYongQJ},'%')-->
             <!--</if>-->
@@ -384,7 +384,6 @@
     <select id="countJpcp" resultType="int">
         select count(*)
         from stock st left join aa_jpcp j on j.id = st.goodsxinxiid
-        left join a_sph s on s.sph_id = j.sph_id left join a_cyl c on c.cyl_id = j.cyl_id
         left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
         j.refractivityid
         left join p_light pl on pl.light_id = j.light_id left join p_lens le on le.lens_id = j.lens_id
@@ -403,10 +402,10 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph =  #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_id =  #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_id = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_id = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_id = #{leftYuanYongZJ}</if>
             and st.goods_count > 0
         </where>
     </select>
@@ -922,10 +921,9 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,st.`classtype`,t.`type_name`,u.`usage_name`,cu.`unitname` as unit,
-        y.`curvature`,s.`sph`,c.`cyl`
+        y.`curvature`,y.sph_id as sph,y.cyl_id as cyl
         from stock st left join aa_yxcp y on y.id = st.goodsxinxiid left join p_type t on t.type_id = y.type_id
         left join c_unit cu on cu.unitid = y.unitid
-        left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
         left join p_usage u on u.usage_id = y.usage_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -942,10 +940,10 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph =  #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_id =  #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_id = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_id = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_id = #{leftYuanYongZJ}</if>
             and st.goods_count > 0
         </where>
         <choose>
@@ -965,7 +963,6 @@
         select count(*)
         from stock st left join aa_yxcp y on y.id = st.goodsxinxiid left join p_type t on t.type_id = y.type_id
         left join c_unit cu on cu.unitid = y.unitid
-        left join a_sph s on s.sph_id = y.sph_id left join a_cyl c on c.cyl_id = y.cyl_id
         left join p_usage u on u.usage_id = y.usage_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
@@ -982,10 +979,10 @@
             <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
             <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
             <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph =  #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and c.cyl = #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and s.sph = #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and c.cyl = #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_id =  #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_id = #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_id = #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_id = #{leftYuanYongZJ}</if>
             and st.goods_count > 0
         </where>
     </select>

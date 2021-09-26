@@ -1,6 +1,7 @@
 package com.shiguang.line.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class LineMemberDO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -15,6 +16,9 @@ public class LineMemberDO implements Serializable {
     private Long sex;
     //诊室
     private String consultRoom;
+    //创建时间
+    private Date lineTime;
+    private String lineDate;
 
     /**
      * 设置：主键
@@ -76,5 +80,13 @@ public class LineMemberDO implements Serializable {
     public String getConsultRoom() {
         return consultRoom;
     }
+
+    public void setLineTime(Date lineTime){this.lineTime = lineTime;}
+
+    public Date getLineTime(){return lineTime;}
+
+    public void setLineDate(String lineDate){this.lineDate = lineDate;}
+
+    public String getLineDate(){return lineDate;}
 
 }
