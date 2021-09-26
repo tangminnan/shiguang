@@ -84,61 +84,60 @@ public class OptometryController {
 //        OptometryDO optometry = optometryService.get(id);
 //        model.addAttribute("optometry", optometry);
         //ResultDiopterDO resultDiopterDO = resultDiopterService.
-        try {
-            Method method = Chuank.class.getMethod("main",
-                    String[].class);
-            method.invoke(null,
-                    (Object) new String[2]);
-        } catch (Exception e) {
-            Throwable cause = e.getCause();
-            if (cause.getLocalizedMessage().contains("被占用")) {
-                return "被占用";
-            } else if (cause.getLocalizedMessage().contains("成功")) {
-                return "";
+//        try {
+//            Method method = Chuank.class.getMethod("main",
+//                    String[].class);
+//            method.invoke(null,
+//                    (Object) new String[2]);
+            MemberDO memberDO = memberService.getCardNumber(cardNumber);
+            if (memberDO.getSex() == 0) {
+                memberDO.setSexx("男");
+            } else {
+                memberDO.setSexx("女");
             }
-            return "";
-        }
-
-        MemberDO memberDO = memberService.getCardNumber(cardNumber);
-        if (memberDO.getSex() == 0) {
-            memberDO.setSexx("男");
-        } else {
-            memberDO.setSexx("女");
-        }
-        model.addAttribute("memberDO", memberDO);
-        model.addAttribute("saleNumber",saleNumber);
+            model.addAttribute("memberDO", memberDO);
+            model.addAttribute("saleNumber",saleNumber);
 //        CostDO costDO = costService.getSaleNumByMemNum(cardNumber);
 //        SettlementDO settlement = settlementService.getCostId(costDO.getId());
 //        model.addAttribute("settlement",settlement);
-        Map<String, Object> map = new HashMap<>();
-        map.put("memberInumber",cardNumber);
-        List<OptometryDO> list = optometryService.optoList(map);
-        OptometryDO optometryDO = new OptometryDO();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        if (null != list && list.size() > 0) {
-            Date creaTime = list.get(0).getCreateTime();
-            Date newDate = new Date();
-            String creaTimes = simpleDateFormat.format(creaTime);
-            String newDates = simpleDateFormat.format(newDate);
-            if (creaTimes == newDates){
-                optometryDO.setCylinderRight(list.get(0).getCylinderRight());
-                optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
-                optometryDO.setAxialRight(list.get(0).getAxialRight());
-                optometryDO.setAxialLeft(list.get(0).getAxialLeft());
-                optometryDO.setSphereRight(list.get(0).getSphereRight());
-                optometryDO.setSphereLeft(list.get(0).getSphereLeft());
-            } else {
-                optometryDO.setCylinderRight(null);
-                optometryDO.setCylinderLeft(null);
-                optometryDO.setAxialRight(null);
-                optometryDO.setAxialLeft(null);
-                optometryDO.setSphereRight(null);
-                optometryDO.setSphereLeft(null);
+            Map<String, Object> map = new HashMap<>();
+            map.put("memberInumber",cardNumber);
+            List<OptometryDO> list = optometryService.optoList(map);
+            OptometryDO optometryDO = new OptometryDO();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            if (null != list && list.size() > 0) {
+                Date creaTime = list.get(0).getCreateTime();
+                Date newDate = new Date();
+                String creaTimes = simpleDateFormat.format(creaTime);
+                String newDates = simpleDateFormat.format(newDate);
+                if (creaTimes == newDates){
+                    optometryDO.setCylinderRight(list.get(0).getCylinderRight());
+                    optometryDO.setCylinderLeft(list.get(0).getCylinderLeft());
+                    optometryDO.setAxialRight(list.get(0).getAxialRight());
+                    optometryDO.setAxialLeft(list.get(0).getAxialLeft());
+                    optometryDO.setSphereRight(list.get(0).getSphereRight());
+                    optometryDO.setSphereLeft(list.get(0).getSphereLeft());
+                } else {
+                    optometryDO.setCylinderRight(null);
+                    optometryDO.setCylinderLeft(null);
+                    optometryDO.setAxialRight(null);
+                    optometryDO.setAxialLeft(null);
+                    optometryDO.setSphereRight(null);
+                    optometryDO.setSphereLeft(null);
+                }
+
+
             }
-
-
-        }
-        model.addAttribute("optometryDO", optometryDO);
+            model.addAttribute("optometryDO", optometryDO);
+//        } catch (Exception e) {
+//            Throwable cause = e.getCause();
+//            if (cause.getLocalizedMessage().contains("被占用")) {
+//                return "被占用";
+//            } else if (cause.getLocalizedMessage().contains("成功")) {
+//                return "";
+//            }
+//            return "";
+//        }
         return "optometry/edit";
     }
 

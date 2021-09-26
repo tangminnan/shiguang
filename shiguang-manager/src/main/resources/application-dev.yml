@@ -13,6 +13,7 @@ spring:
     #username: root
     #password: Tmn521hjj
     url: jdbc:mysql://119.3.238.84:3306/shiguangzhongxin?useUnicode=true&characterEncoding=utf8
+    #url: jdbc:mysql://119.3.238.84:3306/ceshi_shiguangzhongxin?useUnicode=true&characterEncoding=utf8
     username: root
     password: Dm202003
     initialSize: 1

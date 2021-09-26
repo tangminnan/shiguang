@@ -32,6 +32,7 @@ public class ExamineController {
     private SalesService salesService;
     @Autowired
     private LensMeterService lensMeterService;
+    SerialPortUtils serialPort = new SerialPortUtils();
 
     /**
      * 加工师检验
@@ -70,6 +71,14 @@ public class ExamineController {
     @GetMapping("/edit/{saleNumber}")
     @RequiresPermissions("information:examine:edit")
     String edit(@PathVariable("saleNumber") String saleNumber, Model model){
+        try {
+            Method method = Chuank.class.getMethod("main",
+                    String[].class);
+            method.invoke(null,
+                    (Object) new String[2]);
+        } catch (Exception e) {
+            Throwable cause = e.getCause();
+        }
         SalesDO status = statusService.getLogSaleNumber(saleNumber);
         if (null != status.getJpGoodsName()){
             String jpName = status.getJpGoodsName();
@@ -143,6 +152,7 @@ public class ExamineController {
         workRecoedDO.setType("检验");
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
+        lensMeterService.remove(status.getLensMeterId());
         return R.ok();
     }
 
@@ -151,24 +161,18 @@ public class ExamineController {
     LensMeterDO jiaoduji(Model model) {
         Map<String,Object> map = new HashMap<>();
         LensMeterDO lensMeterDO = new LensMeterDO();
-        try {
-            Method method = Chuank.class.getMethod("main",
-                    String[].class);
-            method.invoke(null,
-                    (Object) new String[2]);
-            List<LensMeterDO> lensMeterDOList = lensMeterService.list(map);
-            if (null != lensMeterDOList && lensMeterDOList.size() > 0){
-                lensMeterDO.setRightSph(lensMeterDOList.get(0).getRightSph());
-                lensMeterDO.setRightCyl(lensMeterDOList.get(0).getRightCyl());
-                lensMeterDO.setRightZx(lensMeterDOList.get(0).getRightZx());
-                lensMeterDO.setLeftSph(lensMeterDOList.get(0).getLeftSph());
-                lensMeterDO.setLeftCyl(lensMeterDOList.get(0).getLeftCyl());
-                lensMeterDO.setLeftZx(lensMeterDOList.get(0).getLeftZx());
-            }
-            model.addAttribute("lensMeterDO",lensMeterDO);
-        } catch (Exception e) {
-            Throwable cause = e.getCause();
+        serialPort.sendToData();
+        List<LensMeterDO> lensMeterDOList = lensMeterService.list(map);
+        if (null != lensMeterDOList && lensMeterDOList.size() > 0){
+            lensMeterDO.setId(lensMeterDOList.get(0).getId());
+            lensMeterDO.setRightSph(lensMeterDOList.get(0).getRightSph());
+            lensMeterDO.setRightCyl(lensMeterDOList.get(0).getRightCyl());
+            lensMeterDO.setRightZx(lensMeterDOList.get(0).getRightZx());
+            lensMeterDO.setLeftSph(lensMeterDOList.get(0).getLeftSph());
+            lensMeterDO.setLeftCyl(lensMeterDOList.get(0).getLeftCyl());
+            lensMeterDO.setLeftZx(lensMeterDOList.get(0).getLeftZx());
         }
+        model.addAttribute("lensMeterDO",lensMeterDO);
         return lensMeterDO;
     }
 

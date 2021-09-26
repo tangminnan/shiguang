@@ -5,10 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import com.shiguang.common.utils.ByteUtils;
-import com.shiguang.common.utils.CodeUtil;
-import com.shiguang.common.utils.Intrinsics;
-import com.shiguang.common.utils.SpringUtil;
+import com.shiguang.common.utils.*;
 import com.shiguang.logstatus.domain.LensMeterDO;
 import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.optometry.domain.*;
@@ -187,6 +184,27 @@ public class SerialDataUtils {
         }
 
 
+    }
+
+    /**
+     * 焦度计解析
+     */
+    public void todataJdj(String isLensMeter){
+        //String isLensMeter = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+        String rightsph = isLensMeter.substring(25, 29);
+        String rightcyl = isLensMeter.substring(31, 35);
+        String rightzx = isLensMeter.substring(36, 38);
+        String leftsph = isLensMeter.substring(61, 65);
+        String leftcyl = isLensMeter.substring(67, 71);
+        String leftzx = isLensMeter.substring(71, 75);
+        LensMeterDO lensMeterDO = new LensMeterDO();
+        lensMeterDO.setRightSph(rightsph);
+        lensMeterDO.setRightCyl(rightcyl);
+        lensMeterDO.setRightZx(rightzx);
+        lensMeterDO.setLeftSph(leftsph);
+        lensMeterDO.setLeftCyl(leftcyl);
+        lensMeterDO.setLeftZx(leftzx);
+        lensMeterService.save(lensMeterDO);
     }
 
     /**
@@ -738,6 +756,46 @@ public class SerialDataUtils {
         public void setDegcyl(Integer degcyl) {
             this.degcyl = degcyl;
         }
+    }
+    public static void main(String[] args) {
+        String aa = "01444C4D0249444E49";
+        String bb = "44454B2F4C4D2D3630";
+        String cc = "30501720522D30322E";
+        String dd = "32352B30302E303030303017505230302E";
+        String ee = "30304917505230302E";
+        String ff = "30305517204C2D3031";
+        String gg = "2E37352B30302E3030";
+        String hh = "30303017504C30302E";
+        String ii = "30304F17504C3030";
+        String kk = "2E303055170431333441";
+        StringBuffer ss = new StringBuffer();
+//        for (int i = 0; i < 2; i++) {
+            ss.append(aa);
+            ss.append(bb);
+            ss.append(cc);
+            ss.append(dd);
+            ss.append(ee);
+            ss.append(ff);
+            ss.append(gg);
+            ss.append(hh);
+            ss.append(ii);
+            ss.append(kk);
+//            SerialPortUtils.dataBuffer.append(aa);
+//            SerialPortUtils.dataBuffer.append(bb);
+//            SerialPortUtils.dataBuffer.append(cc);
+//            SerialPortUtils.dataBuffer.append(dd);
+//            SerialPortUtils.dataBuffer.append(ee);
+//            SerialPortUtils.dataBuffer.append(ff);
+//            SerialPortUtils.dataBuffer.append(gg);
+//            SerialPortUtils.dataBuffer.append(hh);
+//            SerialPortUtils.dataBuffer.append(ii);
+//            SerialPortUtils.dataBuffer.append(kk);
+//        }
+        String lizi=  aa +bb +cc+dd +ee +ff+gg+hh+ii+kk;
+        System.out.println(lizi);
+        //System.out.println(SerialPortUtils.dataBuffer);
+       String strings =  SerialPortUtils.hexStringToString(lizi);
+       System.out.println(strings);
     }
 
 }

@@ -53,6 +53,7 @@
 	<h3>查询条件</h3>
 	<form class="form-horizontal m-t" id="signupForm">
 		<input id="saleNumber" name="saleNumber" th:value="${status.saleNumber}"  type="hidden">
+		<input id="lensMeterId" name="lensMeterId"  type="hidden">
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tbody>
 		<tr class="thead">
@@ -77,7 +78,7 @@
 			<td><span th:text="${conclusion.rightzx}"></span></td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
-			<td><span th:text="${conclusion.rightyytj}"></span></td>
+			<td><span id="rightyytj" th:text="${conclusion.rightyytj}"></span></td>
 			<td rowspan="4"><span th:text="${status.rightjp}"></span></td>
 		</tr>
 		<tr>
@@ -95,7 +96,7 @@
 				</select>
 			</td>
 			<td rowspan="3"><input type="text" name="addRight"/></td>
-			<td rowspan="3"><input type="text" name="tjRight"/></td>
+			<td rowspan="3"><input type="text" id="tjRight" name="tjRight"/></td>
 		</tr>
 		<tr>
 			<td>主子午面二</td>
@@ -120,7 +121,7 @@
 			<td><span th:text="${conclusion.leftzx}"></span></td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
-			<td><span th:text="${conclusion.leftyytj}"></span></td>
+			<td><span id="leftyytj" th:text="${conclusion.leftyytj}"></span></td>
 			<td rowspan="4"><span th:text="${status.leftjp}"></span></td>
 		</tr>
 		<tr>
@@ -138,7 +139,7 @@
 				</select>
 			</td>
 			<td rowspan="3"><input type="text" name="addLeft"/></td>
-			<td rowspan="3"><input type="text" name="tjLeft"/></td>
+			<td rowspan="3"><input type="text" id="tjLeft" name="tjLeft"/></td>
 		</tr>
 		<tr>
 			<td>主子午面二</td>
@@ -238,6 +239,7 @@
             data : {},
             url : '/information/examine/jiaoduji',
             success : function(data) {
+                $("#lensMeterId").val(data.id);
 				$("#jdjSphRight1").val(data.rightSph);
                 $("#jdjCylRight1").val(data.rightCyl);
                 $("#jdjZxRight1").val(data.rightZx);
@@ -296,154 +298,627 @@
         var leftcyl2 = $("#leftcyl2").val();
         var leftzx = $("#leftzx").val();
         var leftzx2 = $("#leftzx2").val();
-        if ( Math.abs(rightsph) >= 0.00 && Math.abs(rightsph) <= 9.00){
-            var rightsph1 = Number(rightsph) + Number(+0.12);
-            var rightsph2 = Number(rightsph) + Number(-0.12);
-            var jdjSphRight11 = $("#jdjSphRight1").val();
-            if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
-                jdjSphRight1.style = "background-color:#008000;";
-			} else {
-                jdjSphRight1.style = "background-color:#ff0000;";
-			}
-		} else if (Math.abs(rightsph) > 9.00 && Math.abs(rightsph) <= 12.00){
-            var rightsph1 = Number(rightsph) + Number(+0.18);
-            var rightsph2 = Number(rightsph) + Number(-0.18);
-            var jdjSphRight11 = $("#jdjSphRight1").val();
-            if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
-                jdjSphRight1.style = "background-color:#008000;";
-            } else {
-                jdjSphRight1.style = "background-color:#ff0000;";
+        if (Math.abs(rightsph) > Math.abs(rightsph2)){
+            if ( Math.abs(rightsph) >= 0.00 && Math.abs(rightsph) <= 9.00){
+                var rightsph1 = Number(rightsph) + Number(+0.12);
+                var rightsph2 = Number(rightsph) + Number(-0.12);
+                var jdjSphRight11 = $("#jdjSphRight1").val();
+                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                    jdjSphRight1.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight1.style = "background-color:#ff0000;";
+                }
+                var jdjSphRight12 = $("#jdjSphRight2").val();
+                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                    jdjSphRight2.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight2.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(rightsph) > 9.00 && Math.abs(rightsph) <= 12.00){
+                var rightsph1 = Number(rightsph) + Number(+0.18);
+                var rightsph2 = Number(rightsph) + Number(-0.18);
+                var jdjSphRight11 = $("#jdjSphRight1").val();
+                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                    jdjSphRight1.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight1.style = "background-color:#ff0000;";
+                }
+                var jdjSphRight12 = $("#jdjSphRight2").val();
+                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                    jdjSphRight2.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight2.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(rightsph) > 12.00 && Math.abs(rightsph) <= 20.00){
+                var rightsph1 = Number(rightsph) + Number(+0.25);
+                var rightsph2 = Number(rightsph) + Number(-0.25);
+                var jdjSphRight11 = $("#jdjSphRight1").val();
+                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                    jdjSphRight1.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight1.style = "background-color:#ff0000;";
+                }
+                var jdjSphRight12 = $("#jdjSphRight2").val();
+                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                    jdjSphRight2.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight2.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(rightsph) > 20.00){
+                var rightsph1 = Number(rightsph) + Number(+0.37);
+                var rightsph2 = Number(rightsph) + Number(-0.37);
+                var jdjSphRight11 = $("#jdjSphRight1").val();
+                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                    jdjSphRight1.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight1.style = "background-color:#ff0000;";
+                }
+                var jdjSphRight12 = $("#jdjSphRight2").val();
+                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                    jdjSphRight2.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight2.style = "background-color:#ff0000;";
+                }
             }
-		} else if (Math.abs(rightsph) > 12.00 && Math.abs(rightsph) <= 20.00){
-            var rightsph1 = Number(rightsph) + Number(+0.25);
-            var rightsph2 = Number(rightsph) + Number(-0.25);
-            var jdjSphRight11 = $("#jdjSphRight1").val();
-            if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
-                jdjSphRight1.style = "background-color:#008000;";
-            } else {
-                jdjSphRight1.style = "background-color:#ff0000;";
-            }
-		} else if (Math.abs(rightsph) > 20.00){
-            var rightsph1 = Number(rightsph) + Number(+0.37);
-            var rightsph2 = Number(rightsph) + Number(-0.37);
-            var jdjSphRight11 = $("#jdjSphRight1").val();
-            if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
-                jdjSphRight1.style = "background-color:#008000;";
-            } else {
-                jdjSphRight1.style = "background-color:#ff0000;";
+		} else {
+            if (Math.abs(rightsph2) >= 0.00 && Math.abs(rightsph2) <= 9.00){
+                var rightsph1 = Number(rightsph2) + Number(+0.12);
+                var rightsph2 = Number(rightsph2) + Number(-0.12);
+                var jdjSphRight12 = $("#jdjSphRight2").val();
+                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                    jdjSphRight2.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight2.style = "background-color:#ff0000;";
+                }
+                var jdjSphRight11 = $("#jdjSphRight1").val();
+                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                    jdjSphRight1.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight1.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(rightsph2) > 9.00 && Math.abs(rightsph2) <= 12.00){
+                var rightsph1 = Number(rightsph2) + Number(+0.18);
+                var rightsph2 = Number(rightsph2) + Number(-0.18);
+                var jdjSphRight12 = $("#jdjSphRight2").val();
+                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                    jdjSphRight2.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight2.style = "background-color:#ff0000;";
+                }
+                var jdjSphRight11 = $("#jdjSphRight1").val();
+                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                    jdjSphRight1.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight1.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(rightsph2) > 12.00 && Math.abs(rightsph2) <= 20.00){
+                var rightsph1 = Number(rightsph2) + Number(+0.25);
+                var rightsph2 = Number(rightsph2) + Number(-0.25);
+                var jdjSphRight12 = $("#jdjSphRight2").val();
+                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                    jdjSphRight2.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight2.style = "background-color:#ff0000;";
+                }
+                var jdjSphRight11 = $("#jdjSphRight1").val();
+                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                    jdjSphRight1.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight1.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(rightsph2) > 20.00){
+                var rightsph1 = Number(rightsph2) + Number(+0.37);
+                var rightsph2 = Number(rightsph2) + Number(-0.37);
+                var jdjSphRight12 = $("#jdjSphRight2").val();
+                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                    jdjSphRight2.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight2.style = "background-color:#ff0000;";
+                }
+                var jdjSphRight11 = $("#jdjSphRight1").val();
+                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                    jdjSphRight1.style = "background-color:#008000;";
+                } else {
+                    jdjSphRight1.style = "background-color:#ff0000;";
+                }
             }
 		}
-        if (Math.abs(rightsph2) >= 0.00 && Math.abs(rightsph2) <= 9.00){
-            var rightsph1 = Number(rightsph2) + Number(+0.12);
-            var rightsph2 = Number(rightsph2) + Number(-0.12);
-            var jdjSphRight12 = $("#jdjSphRight2").val();
-            if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
-                jdjSphRight2.style = "background-color:#008000;";
-            } else {
-                jdjSphRight2.style = "background-color:#ff0000;";
+		if (Math.abs(leftsph) > Math.abs(leftsph2)){
+            if (Math.abs(leftsph) >= 0.00 && Math.abs(leftsph) <= 9.00){
+                var leftsph1 = Number(leftsph) + Number(+0.12);
+                var leftsph2 = Number(leftsph) + Number(-0.12);
+                var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft1.style = "background-color:#ff0000;";
+                }
+                var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft2.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(leftsph) > 9.00 && Math.abs(leftsph) <= 12.00){
+                var leftsph1 = Number(leftsph) + Number(+0.18);
+                var leftsph2 = Number(leftsph) + Number(-0.18);
+                var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft1.style = "background-color:#ff0000;";
+                }
+                var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft2.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(leftsph) > 12.00 && Math.abs(leftsph) <= 20.00){
+                var leftsph1 = Number(leftsph) + Number(+0.25);
+                var leftsph2 = Number(leftsph) + Number(-0.25);
+                var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft1.style = "background-color:#ff0000;";
+                }
+                var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft2.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(leftsph) > 20.00){
+                var leftsph1 = Number(leftsph) + Number(+0.37);
+                var leftsph2 = Number(leftsph) + Number(-0.37);
+                var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft1.style = "background-color:#ff0000;";
+                }
+                var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft2.style = "background-color:#ff0000;";
+                }
             }
-        } else if (Math.abs(rightsph2) > 9.00 && Math.abs(rightsph2) <= 12.00){
-            var rightsph1 = Number(rightsph2) + Number(+0.18);
-            var rightsph2 = Number(rightsph2) + Number(-0.18);
-            var jdjSphRight12 = $("#jdjSphRight2").val();
-            if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
-                jdjSphRight2.style = "background-color:#008000;";
-            } else {
-                jdjSphRight2.style = "background-color:#ff0000;";
+		} else {
+            if (Math.abs(leftsph2) >= 0.00 && Math.abs(leftsph2) <= 9.00){
+                var leftsph1 = Number(leftsph2) + Number(+0.12);
+                var leftsph2 = Number(leftsph2) + Number(-0.12);
+                var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft2.style = "background-color:#ff0000;";
+                }
+                var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft1.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(leftsph2) > 9.00 && Math.abs(leftsph2) <= 12.00){
+                var leftsph1 = Number(leftsph2) + Number(+0.18);
+                var leftsph2 = Number(leftsph2) + Number(-0.18);
+                var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft2.style = "background-color:#ff0000;";
+                }
+                var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft1.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(leftsph2) > 12.00 && Math.abs(leftsph2) <= 20.00){
+                var leftsph1 = Number(leftsph2) + Number(+0.25);
+                var leftsph2 = Number(leftsph2) + Number(-0.25);
+                var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft2.style = "background-color:#ff0000;";
+                }
+                var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft1.style = "background-color:#ff0000;";
+                }
+            } else if (Math.abs(leftsph2) > 20.00){
+                var leftsph1 = Number(leftsph2) + Number(+0.37);
+                var leftsph2 = Number(leftsph2) + Number(-0.37);
+                var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft2.style = "background-color:#ff0000;";
+                }
+                var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+                } else {
+                    jdjSphLeft1.style = "background-color:#ff0000;";
+                }
             }
-		} else if (Math.abs(rightsph2) > 12.00 && Math.abs(rightsph2) <= 20.00){
-            var rightsph1 = Number(rightsph2) + Number(+0.25);
-            var rightsph2 = Number(rightsph2) + Number(-0.25);
-            var jdjSphRight12 = $("#jdjSphRight2").val();
-            if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
-                jdjSphRight2.style = "background-color:#008000;";
+		}
+		if (Math.abs(rightcyl) >=0.00 && Math.abs(rightcyl) <= 0.75){
+            var rightcyl1 = Number(rightcyl) + Number(+0.09);
+            var rightcyl2 = Number(rightcyl) + Number(-0.09);
+            var jdjCylRight11 = $("#jdjCylRight1").val();
+            if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl1)){
+                jdjCylRight1.style = "background-color:#008000;";
             } else {
-                jdjSphRight2.style = "background-color:#ff0000;";
+                jdjCylRight1.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(rightsph2) > 20.00){
-            var rightsph1 = Number(rightsph2) + Number(+0.37);
-            var rightsph2 = Number(rightsph2) + Number(-0.37);
-            var jdjSphRight12 = $("#jdjSphRight2").val();
-            if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
-                jdjSphRight2.style = "background-color:#008000;";
+		} else if (Math.abs(rightcyl) >=0.75 && Math.abs(rightcyl) <= 4.00){
+            var rightcyl1 = Number(rightcyl) + Number(+0.12);
+            var rightcyl2 = Number(rightcyl) + Number(-0.12);
+            var jdjCylRight11 = $("#jdjCylRight1").val();
+            if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl1)){
+                jdjCylRight1.style = "background-color:#008000;";
             } else {
-                jdjSphRight2.style = "background-color:#ff0000;";
+                jdjCylRight1.style = "background-color:#ff0000;";
+            }
+		} else if (Math.abs(rightcyl) >4.00 && Math.abs(rightcyl) <= 6.00){
+            var rightcyl1 = Number(rightcyl) + Number(+0.18);
+            var rightcyl2 = Number(rightcyl) + Number(-0.18);
+            var jdjCylRight11 = $("#jdjCylRight1").val();
+            if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl1)){
+                jdjCylRight1.style = "background-color:#008000;";
+            } else {
+                jdjCylRight1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(rightcyl) >6.00 ){
+            var rightcyl1 = Number(rightcyl) + Number(+0.25);
+            var rightcyl2 = Number(rightcyl) + Number(-0.25);
+            var jdjCylRight11 = $("#jdjCylRight1").val();
+            if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl1)){
+                jdjCylRight1.style = "background-color:#008000;";
+            } else {
+                jdjCylRight1.style = "background-color:#ff0000;";
             }
         }
-        if (Math.abs(leftsph) >= 0.00 && Math.abs(leftsph) <= 9.00){
-            var leftsph1 = Number(leftsph) + Number(+0.12);
-            var leftsph2 = Number(leftsph) + Number(-0.12);
-            var jdjSphLeft11 = $("#jdjSphLeft1").val();
-            if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
-                jdjSphLeft1.style = "background-color:#008000;";
+        if (Math.abs(rightcyl2) >=0.00 && Math.abs(rightcyl2) <= 0.75){
+            var rightcyl1 = Number(rightcyl2) + Number(+0.09);
+            var rightcyl2 = Number(rightcyl2) + Number(-0.09);
+            var jdjCylRight12 = $("#jdjCylRight2").val();
+            if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl1)){
+                jdjCylRight2.style = "background-color:#008000;";
             } else {
-                jdjSphLeft1.style = "background-color:#ff0000;";
+                jdjCylRight2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(leftsph) > 9.00 && Math.abs(leftsph) <= 12.00){
-            var leftsph1 = Number(leftsph) + Number(+0.18);
-            var leftsph2 = Number(leftsph) + Number(-0.18);
-            var jdjSphLeft11 = $("#jdjSphLeft1").val();
-            if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
-                jdjSphLeft1.style = "background-color:#008000;";
+        } else if (Math.abs(rightcyl2) >=0.75 && Math.abs(rightcyl2) <= 4.00){
+            var rightcyl1 = Number(rightcyl2) + Number(+0.12);
+            var rightcyl2 = Number(rightcyl2) + Number(-0.12);
+            var jdjCylRight12 = $("#jdjCylRight2").val();
+            if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl1)){
+                jdjCylRight2.style = "background-color:#008000;";
             } else {
-                jdjSphLeft1.style = "background-color:#ff0000;";
+                jdjCylRight2.style = "background-color:#ff0000;";
             }
-		} else if (Math.abs(leftsph) > 12.00 && Math.abs(leftsph) <= 20.00){
-            var leftsph1 = Number(leftsph) + Number(+0.25);
-            var leftsph2 = Number(leftsph) + Number(-0.25);
-            var jdjSphLeft11 = $("#jdjSphLeft1").val();
-            if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
-                jdjSphLeft1.style = "background-color:#008000;";
+        } else if (Math.abs(rightcyl2) >4.00 && Math.abs(rightcyl2) <= 6.00){
+            var rightcyl1 = Number(rightcyl2) + Number(+0.18);
+            var rightcyl2 = Number(rightcyl2) + Number(-0.18);
+            var jdjCylRight12 = $("#jdjCylRight2").val();
+            if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl1)){
+                jdjCylRight2.style = "background-color:#008000;";
             } else {
-                jdjSphLeft1.style = "background-color:#ff0000;";
+                jdjCylRight2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(leftsph) > 20.00){
-            var leftsph1 = Number(leftsph) + Number(+0.37);
-            var leftsph2 = Number(leftsph) + Number(-0.37);
-            var jdjSphLeft11 = $("#jdjSphLeft1").val();
-            if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
-                jdjSphLeft1.style = "background-color:#008000;";
+        } else if (Math.abs(rightcyl2) >6.00 ){
+            var rightcyl1 = Number(rightcyl2) + Number(+0.25);
+            var rightcyl2 = Number(rightcyl2) + Number(-0.25);
+            var jdjCylRight12 = $("#jdjCylRight2").val();
+            if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl1)){
+                jdjCylRight2.style = "background-color:#008000;";
             } else {
-                jdjSphLeft1.style = "background-color:#ff0000;";
-            }
-        }
-        if (Math.abs(leftsph2) >= 0.00 && Math.abs(leftsph2) <= 9.00){
-            var leftsph1 = Number(leftsph2) + Number(+0.12);
-            var leftsph2 = Number(leftsph2) + Number(-0.12);
-            var jdjSphLeft12 = $("#jdjSphLeft2").val();
-            if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
-                jdjSphLeft2.style = "background-color:#008000;";
-            } else {
-                jdjSphLeft2.style = "background-color:#ff0000;";
-            }
-        } else if (Math.abs(leftsph2) > 9.00 && Math.abs(leftsph2) <= 12.00){
-            var leftsph1 = Number(leftsph2) + Number(+0.18);
-            var leftsph2 = Number(leftsph2) + Number(-0.18);
-            var jdjSphLeft12 = $("#jdjSphLeft2").val();
-            if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
-                jdjSphLeft2.style = "background-color:#008000;";
-            } else {
-                jdjSphLeft2.style = "background-color:#ff0000;";
-            }
-		} else if (Math.abs(leftsph2) > 12.00 && Math.abs(leftsph2) <= 20.00){
-            var leftsph1 = Number(leftsph2) + Number(+0.25);
-            var leftsph2 = Number(leftsph2) + Number(-0.25);
-            var jdjSphLeft12 = $("#jdjSphLeft2").val();
-            if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
-                jdjSphLeft2.style = "background-color:#008000;";
-            } else {
-                jdjSphLeft2.style = "background-color:#ff0000;";
-            }
-        } else if (Math.abs(leftsph2) > 20.00){
-            var leftsph1 = Number(leftsph2) + Number(+0.37);
-            var leftsph2 = Number(leftsph2) + Number(-0.37);
-            var jdjSphLeft12 = $("#jdjSphLeft2").val();
-            if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
-                jdjSphLeft2.style = "background-color:#008000;";
-            } else {
-                jdjSphLeft2.style = "background-color:#ff0000;";
+                jdjCylRight2.style = "background-color:#ff0000;";
             }
         }
+
+        if (Math.abs(leftcyl) >=0.00 && Math.abs(leftcyl) <= 0.75){
+            var leftcyl1 = Number(leftcyl) + Number(+0.09);
+            var leftcyl2 = Number(leftcyl) + Number(-0.09);
+            var jdjCylLeft11 = $("#jdjCylLeft1").val();
+            if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl1)){
+                jdjCylLeft1.style = "background-color:#008000;";
+            } else {
+                jdjCylLeft1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl) >=0.75 && Math.abs(leftcyl) <= 4.00){
+            var leftcyl1 = Number(leftcyl) + Number(+0.12);
+            var leftcyl2 = Number(leftcyl) + Number(-0.12);
+            var jdjCylLeft11 = $("#jdjCylLeft1").val();
+            if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl1)){
+                jdjCylLeft1.style = "background-color:#008000;";
+            } else {
+                jdjCylLeft1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl) >4.00 && Math.abs(leftcyl) <= 6.00){
+            var leftcyl1 = Number(leftcyl) + Number(+0.18);
+            var leftcyl2 = Number(leftcyl) + Number(-0.18);
+            var jdjCylLeft11 = $("#jdjCylLeft1").val();
+            if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl1)){
+                jdjCylLeft1.style = "background-color:#008000;";
+            } else {
+                jdjCylLeft1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl) >6.00 ){
+            var leftcyl1 = Number(leftcyl) + Number(+0.25);
+            var leftcyl2 = Number(leftcyl) + Number(-0.25);
+            var jdjCylLeft11 = $("#jdjCylLeft1").val();
+            if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl1)){
+                jdjCylLeft1.style = "background-color:#008000;";
+            } else {
+                jdjCylLeft1.style = "background-color:#ff0000;";
+            }
+        }
+        if (Math.abs(leftcyl2) >=0.00 && Math.abs(leftcyl2) <= 0.75){
+            var leftcyl1 = Number(leftcyl2) + Number(+0.09);
+            var leftcyl2 = Number(leftcyl2) + Number(-0.09);
+            var jdjCylLeft12 = $("#jdjCylLeft2").val();
+            if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl1)){
+                jdjCylLeft2.style = "background-color:#008000;";
+            } else {
+                jdjCylLeft2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl2) >=0.75 && Math.abs(leftcyl2) <= 4.00){
+            var leftcyl1 = Number(leftcyl2) + Number(+0.12);
+            var leftcyl2 = Number(leftcyl2) + Number(-0.12);
+            var jdjCylLeft12 = $("#jdjCylLeft2").val();
+            if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl1)){
+                jdjCylLeft2.style = "background-color:#008000;";
+            } else {
+                jdjCylLeft2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl2) >4.00 && Math.abs(leftcyl2) <= 6.00){
+            var leftcyl1 = Number(leftcyl2) + Number(+0.18);
+            var leftcyl2 = Number(leftcyl2) + Number(-0.18);
+            var jdjCylLeft12 = $("#jdjCylLeft2").val();
+            if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl1)){
+                jdjCylLeft2.style = "background-color:#008000;";
+            } else {
+                jdjCylLeft2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl2) >6.00 ){
+            var leftcyl1 = Number(leftcyl2) + Number(+0.25);
+            var leftcyl2 = Number(leftcyl2) + Number(-0.25);
+            var jdjCylLeft12 = $("#jdjCylLeft2").val();
+            if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl1)){
+                jdjCylLeft2.style = "background-color:#008000;";
+            } else {
+                jdjCylLeft2.style = "background-color:#ff0000;";
+            }
+        }
+        if (Math.abs(rightcyl) >=0.125 && Math.abs(rightcyl) <= 0.25){
+            var rightzx1 = Number(rightzx) + Number(16);
+            var rightzx2 = Number(rightzx) - Number(16);
+            var jdjZxRight11 = $("#jdjZxRight1").val();
+            if (Math.abs(jdjZxRight11) >= rightzx2 && Math.abs(jdjZxRight11) <= Math.abs(rightzx1)){
+                jdjZxRight1.style = "background-color:#008000;";
+			} else {
+                jdjZxRight1.style = "background-color:#ff0000;";
+			}
+		} else if (Math.abs(rightcyl) > 0.25 && Math.abs(rightcyl) <= 0.50){
+            var rightzx1 = Number(rightzx) + Number(9);
+            var rightzx2 = Number(rightzx) - Number(9);
+            var jdjZxRight11 = $("#jdjZxRight1").val();
+            if (Math.abs(jdjZxRight11) >= rightzx2 && Math.abs(jdjZxRight11) <= Math.abs(rightzx1)){
+                jdjZxRight1.style = "background-color:#008000;";
+            } else {
+                jdjZxRight1.style = "background-color:#ff0000;";
+            }
+		} else if (Math.abs(rightcyl) > 0.50 && Math.abs(rightcyl) <= 0.75){
+            var rightzx1 = Number(rightzx) + Number(6);
+            var rightzx2 = Number(rightzx) - Number(6);
+            var jdjZxRight11 = $("#jdjZxRight1").val();
+            if (Math.abs(jdjZxRight11) >= rightzx2 && Math.abs(jdjZxRight11) <= Math.abs(rightzx1)){
+                jdjZxRight1.style = "background-color:#008000;";
+            } else {
+                jdjZxRight1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(rightcyl) > 0.75 && Math.abs(rightcyl) <= 1.50){
+            var rightzx1 = Number(rightzx) + Number(4);
+            var rightzx2 = Number(rightzx) - Number(4);
+            var jdjZxRight11 = $("#jdjZxRight1").val();
+            if (Math.abs(jdjZxRight11) >= rightzx2 && Math.abs(jdjZxRight11) <= Math.abs(rightzx1)){
+                jdjZxRight1.style = "background-color:#008000;";
+            } else {
+                jdjZxRight1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(rightcyl) > 1.50 && Math.abs(rightcyl) <= 2.50){
+            var rightzx1 = Number(rightzx) + Number(3);
+            var rightzx2 = Number(rightzx) - Number(3);
+            var jdjZxRight11 = $("#jdjZxRight1").val();
+            if (Math.abs(jdjZxRight11) >= rightzx2 && Math.abs(jdjZxRight11) <= Math.abs(rightzx1)){
+                jdjZxRight1.style = "background-color:#008000;";
+            } else {
+                jdjZxRight1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(rightcyl) > 2.50 ){
+            var rightzx1 = Number(rightzx) + Number(2);
+            var rightzx2 = Number(rightzx) - Number(2);
+            var jdjZxRight11 = $("#jdjZxRight1").val();
+            if (Math.abs(jdjZxRight11) >= rightzx2 && Math.abs(jdjZxRight11) <= Math.abs(rightzx1)){
+                jdjZxRight1.style = "background-color:#008000;";
+            } else {
+                jdjZxRight1.style = "background-color:#ff0000;";
+            }
+        }
+        if (Math.abs(rightcyl2) >= 0.125 && Math.abs(rightcyl2) <= 0.25){
+            var rightzx1 = Number(rightzx2) + Number(2);
+            var rightzx2 = Number(rightzx2) - Number(2);
+            var jdjZxRight12 = $("#jdjZxRight2").val();
+            if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
+                jdjZxRight2.style = "background-color:#008000;";
+            } else {
+                jdjZxRight2.style = "background-color:#ff0000;";
+            }
+		} else if (Math.abs(rightcyl2) > 0.25 && Math.abs(rightcyl2) <= 0.50){
+            var rightzx1 = Number(rightzx2) + Number(9);
+            var rightzx2 = Number(rightzx2) - Number(9);
+            var jdjZxRight12 = $("#jdjZxRight2").val();
+            if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
+                jdjZxRight2.style = "background-color:#008000;";
+            } else {
+                jdjZxRight2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(rightcyl2) > 0.50 && Math.abs(rightcyl2) <= 0.75){
+            var rightzx1 = Number(rightzx2) + Number(6);
+            var rightzx2 = Number(rightzx2) - Number(6);
+            var jdjZxRight12 = $("#jdjZxRight2").val();
+            if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
+                jdjZxRight2.style = "background-color:#008000;";
+            } else {
+                jdjZxRight2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(rightcyl2) > 0.75 && Math.abs(rightcyl2) <= 1.50){
+            var rightzx1 = Number(rightzx2) + Number(4);
+            var rightzx2 = Number(rightzx2) - Number(4);
+            var jdjZxRight12 = $("#jdjZxRight2").val();
+            if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
+                jdjZxRight2.style = "background-color:#008000;";
+            } else {
+                jdjZxRight2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(rightcyl2) > 1.50 && Math.abs(rightcyl2) <= 2.50){
+            var rightzx1 = Number(rightzx2) + Number(3);
+            var rightzx2 = Number(rightzx2) - Number(3);
+            var jdjZxRight12 = $("#jdjZxRight2").val();
+            if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
+                jdjZxRight2.style = "background-color:#008000;";
+            } else {
+                jdjZxRight2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(rightcyl2) > 2.50 ){
+            var rightzx1 = Number(rightzx2) + Number(2);
+            var rightzx2 = Number(rightzx2) - Number(2);
+            var jdjZxRight12 = $("#jdjZxRight2").val();
+            if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
+                jdjZxRight2.style = "background-color:#008000;";
+            } else {
+                jdjZxRight2.style = "background-color:#ff0000;";
+            }
+        }
+
+        if (Math.abs(leftcyl) >=0.125 && Math.abs(leftcyl) <= 0.25){
+            var leftzx1 = Number(leftzx) + Number(16);
+            var leftzx2 = Number(leftzx) - Number(16);
+            var jdjZxLeft11 = $("#jdjZxLeft1").val();
+            if (Math.abs(jdjZxLeft11) >= leftzx2 && Math.abs(jdjZxLeft11) <= Math.abs(leftzx1)){
+                jdjZxLeft1.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl) > 0.25 && Math.abs(leftcyl) <= 0.50){
+            var leftzx1 = Number(leftzx) + Number(9);
+            var leftzx2 = Number(leftzx) - Number(9);
+            var jdjZxLeft11 = $("#jdjZxLeft1").val();
+            if (Math.abs(jdjZxLeft11) >= leftzx2 && Math.abs(jdjZxLeft11) <= Math.abs(leftzx1)){
+                jdjZxLeft1.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl) > 0.50 && Math.abs(leftcyl) <= 0.75){
+            var leftzx1 = Number(leftzx) + Number(6);
+            var leftzx2 = Number(leftzx) - Number(6);
+            var jdjZxLeft11 = $("#jdjZxLeft1").val();
+            if (Math.abs(jdjZxLeft11) >= leftzx2 && Math.abs(jdjZxLeft11) <= Math.abs(leftzx1)){
+                jdjZxLeft1.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl) > 0.75 && Math.abs(leftcyl) <= 1.50){
+            var leftzx1 = Number(leftzx) + Number(4);
+            var leftzx2 = Number(leftzx) - Number(4);
+            var jdjZxLeft11 = $("#jdjZxLeft1").val();
+            if (Math.abs(jdjZxLeft11) >= leftzx2 && Math.abs(jdjZxLeft11) <= Math.abs(leftzx1)){
+                jdjZxLeft1.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl) > 1.50 && Math.abs(leftcyl) <= 2.50){
+            var leftzx1 = Number(leftzx) + Number(3);
+            var leftzx2 = Number(leftzx) - Number(3);
+            var jdjZxLeft11 = $("#jdjZxLeft1").val();
+            if (Math.abs(jdjZxLeft11) >= leftzx2 && Math.abs(jdjZxLeft11) <= Math.abs(leftzx1)){
+                jdjZxLeft1.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft1.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl) > 2.50 ){
+            var leftzx1 = Number(leftzx) + Number(2);
+            var leftzx2 = Number(leftzx) - Number(2);
+            var jdjZxLeft11 = $("#jdjZxLeft1").val();
+            if (Math.abs(jdjZxLeft11) >= leftzx2 && Math.abs(jdjZxLeft11) <= Math.abs(leftzx1)){
+                jdjZxLeft1.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft1.style = "background-color:#ff0000;";
+            }
+        }
+        if (Math.abs(leftcyl2) >= 0.125 && Math.abs(leftcyl2) <= 0.25){
+            var leftzx1 = Number(leftzx2) + Number(2);
+            var leftzx2 = Number(leftzx2) - Number(2);
+            var jdjZxLeft12 = $("#jdjZxLeft2").val();
+            if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
+                jdjZxLeft2.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl2) > 0.25 && Math.abs(leftcyl2) <= 0.50){
+            var leftzx1 = Number(leftzx2) + Number(9);
+            var leftzx2 = Number(leftzx2) - Number(9);
+            var jdjZxLeft12 = $("#jdjZxLeft2").val();
+            if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
+                jdjZxLeft2.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl2) > 0.50 && Math.abs(leftcyl2) <= 0.75){
+            var leftzx1 = Number(leftzx2) + Number(6);
+            var leftzx2 = Number(leftzx2) - Number(6);
+            var jdjZxLeft12 = $("#jdjZxLeft2").val();
+            if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
+                jdjZxLeft2.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl2) > 0.75 && Math.abs(leftcyl2) <= 1.50){
+            var leftzx1 = Number(leftzx2) + Number(4);
+            var leftzx2 = Number(leftzx2) - Number(4);
+            var jdjZxLeft12 = $("#jdjZxLeft2").val();
+            if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
+                jdjZxLeft2.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl2) > 1.50 && Math.abs(leftcyl2) <= 2.50){
+            var leftzx1 = Number(leftzx2) + Number(3);
+            var leftzx2 = Number(leftzx2) - Number(3);
+            var jdjZxLeft12 = $("#jdjZxLeft2").val();
+            if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
+                jdjZxLeft2.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft2.style = "background-color:#ff0000;";
+            }
+        } else if (Math.abs(leftcyl2) > 2.50 ){
+            var leftzx1 = Number(leftzx2) + Number(2);
+            var leftzx2 = Number(leftzx2) - Number(2);
+            var jdjZxLeft12 = $("#jdjZxLeft2").val();
+            if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
+                jdjZxLeft2.style = "background-color:#008000;";
+            } else {
+                jdjZxLeft2.style = "background-color:#ff0000;";
+            }
+        }
+
         chuichajdj.style = "background-color:#008000;";
 	}
 </script>

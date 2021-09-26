@@ -40,6 +40,8 @@ public class SerialPortUtils implements SerialPortEventListener {
     private String data;
     // 保存串口返回信息十六进制
     private String dataHex;
+    //拼接读取设备的十六进制
+    private String dataSerial="";
     private SerialDataUtils serialDataUtils = SerialDataUtils.getSerialPortUtils();
 
     /**
@@ -139,7 +141,9 @@ public class SerialPortUtils implements SerialPortEventListener {
                 inputStream = null;
                 break;
             }
-            serialDataUtils.toData(builder.toString());
+            dataSerial = dataSerial + dataHex.toString();
+            System.out.println(dataSerial);
+            //serialDataUtils.toData(builder.toString());
 //            BleDataBean bleDataBean = SerialDataUtils.toOptometry(builder.toString());
 //            List<ResultDiopterDO> list = bleDataBean.getSca();
 //            OptometryDO optometryDO = new OptometryDO();
@@ -161,6 +165,63 @@ public class SerialPortUtils implements SerialPortEventListener {
         } catch (IOException e) {
             System.out.println("读取串口数据时发生IO异常");
         }
+    }
+
+
+    public void readComms(String aa) {
+//        try {
+//            StringBuilder builder = new StringBuilder();
+//            inputStream = serialPort.getInputStream();
+//            // 通过输入流对象的available方法获取数组字节长度
+//            byte[] readBuffer = new byte[inputStream.available()];
+//            // 从线路上读取数据流
+//            int len = 0;
+//            while ((len = inputStream.read(readBuffer)) != -1) {
+//                // 直接获取到的数据
+//                // data = new String(readBuffer, 0, len).trim();
+//                // 转为十六进制数据
+//                dataHex = bytesToHexString(readBuffer);
+//                builder.append(dataHex);
+//                //System.out.println("data:" + data);
+//                System.out.println("dataHex:" + dataHex);// 读取后置空流对象
+//                inputStream.close();
+//                inputStream = null;
+//                break;
+//            }
+            dataSerial = dataSerial + aa;
+            System.out.println(dataSerial);
+            //serialDataUtils.toData(builder.toString());
+//            BleDataBean bleDataBean = SerialDataUtils.toOptometry(builder.toString());
+//            List<ResultDiopterDO> list = bleDataBean.getSca();
+//            OptometryDO optometryDO = new OptometryDO();
+//            for (int i = 0; i < list.size(); i++) {
+//                if ("AVG".equals(list.get(i).getType())) {
+//                    if ("L".equals(list.get(i).getIfrl())) {
+//                        optometryDO.setSphereLeft(list.get(i).getDiopterS());
+//                        optometryDO.setAxialLeft(list.get(i).getDiopterA());
+//                        optometryDO.setCylinderLeft(list.get(i).getDiopterC());
+//                    } else if ("R".equals(list.get(i).getIfrl())) {
+//                        optometryDO.setSphereRight(list.get(i).getDiopterS());
+//                        optometryDO.setAxialRight(list.get(i).getDiopterA());
+//                        optometryDO.setCylinderRight(list.get(i).getDiopterC());
+//                    }
+//                }
+//            }
+//            optometryDO.setCreateTime(new Date());
+//            optometryService.save(optometryDO);
+//        } catch (IOException e) {
+//            System.out.println("读取串口数据时发生IO异常");
+//        }
+    }
+
+    /**
+     * 读取串口返回的信息
+     */
+    public void sendToData(){
+        //String lizi = "01444C4D0249444E4944454B2F4C4D2D363030501720522D30322E32352B30302E303030303017505230302E30304917505230302E30305517204C2D30312E37352B30302E303030303017504C30302E30304F17504C30302E303055170431333441";
+        dataSerial = hexStringToString(dataSerial);
+        serialDataUtils.todataJdj(dataSerial);
+        //serialDataUtils.todataJdj(lizi);
     }
 
     /**
@@ -297,18 +358,99 @@ public class SerialPortUtils implements SerialPortEventListener {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
-        String string = "\u0001DLM\u0002IDNIDEK/LM-600P\u0017 R-06.50-01.50010\u0017PR00.00I\u0017PR00.00U\u0017 L-05.75-01.50179\u0017PL00.00O\u0017PL00.00U\u0017\u00041372";
-        //System.out.println(string);
-        System.out.println(string.substring(22, 23));
-        System.out.println(string.substring(25, 29));
-        System.out.println(string.substring(31, 35));
-        System.out.println(string.substring(36, 38));
-        System.out.println(string.substring(58, 59));
-        System.out.println(string.substring(61, 65));
-        System.out.println(string.substring(67, 71));
-        System.out.println(string.substring(71, 75));
+    /**
+     * 16进制转换成为string类型字符串
+     * @param s
+     * @return
+     */
+    public static String hexStringToString(String s) {
+        if (s == null || s.equals("")) {
+            return null;
+        }
+        s = s.replace(" ", "");
+        byte[] baKeyword = new byte[s.length() / 2];
+        for (int i = 0; i < baKeyword.length; i++) {
+            try {
+                baKeyword[i] = (byte) (0xff & Integer.parseInt(s.substring(i * 2, i * 2 + 2), 16));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            s = new String(baKeyword, "UTF-8");
+            new String();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return s;
     }
+
+    public static void main(String[] args) {
+        String aa = "01444C4D0249444E49";
+        String bb = "44454B2F4C4D2D3630";
+        String cc = "30501720522D30322E";
+        String dd = "32352B30302E303030303017505230302E";
+        String ee = "30304917505230302E";
+        String ff = "30305517204C2D3031";
+        String gg = "2E37352B30302E3030";
+        String hh = "30303017504C30302E";
+        String ii = "30304F17504C3030";
+        String kk = "2E303055170431333441";
+        StringBuffer ss = new StringBuffer();
+            ss.append(aa);
+            ss.append(bb);
+            ss.append(cc);
+            ss.append(dd);
+            ss.append(ee);
+            ss.append(ff);
+            ss.append(gg);
+            ss.append(hh);
+            ss.append(ii);
+            ss.append(kk);
+//        lizi=  aa +bb +cc+dd +ee +ff+gg+hh+ii+kk;
+//        System.out.println(SerialPortUtils.lizi);
+        //this.readComms(SerialPortUtils.lizi);
+        //System.out.println(SerialPortUtils.dataBuffer);
+    }
+
+//    public static void main(String[] args) {
+//        String aa = "01444C4D0249444E49";
+//        String bb = "44454B2F4C4D2D3630";
+//        String cc = "30501720522D30322E";
+//        String dd = "32352B30302E303030303017505230302E";
+//        String ee = "30304917505230302E";
+//        String ff = "30305517204C2D3031";
+//        String gg = "2E37352B30302E3030";
+//        String hh = "30303017504C30302E";
+//        String ii = "30304F17504C3030";
+//        String kk = "2E303055170431333441";
+//        StringBuffer ss = new StringBuffer();
+//        for (int i=0;i<2;i++){
+//            ss.append(aa);
+//            ss.append(bb);
+//            ss.append(cc);
+//            ss.append(dd);
+//            ss.append(ee);
+//            ss.append(ff);
+//            ss.append(gg);
+//            ss.append(hh);
+//            ss.append(ii);
+//            ss.append(kk);
+//            dataBuffer.append(aa);
+//        }
+//        System.out.println(dataBuffer);
+//        System.out.println(ss);
+//        String string = "\u0001DLM\u0002IDNIDEK/LM-600P\u0017 R-06.50-01.50010\u0017PR00.00I\u0017PR00.00U\u0017 L-05.75-01.50179\u0017PL00.00O\u0017PL00.00U\u0017\u00041372";
+//        //System.out.println(string);
+//        System.out.println(string.substring(22, 23));
+//        System.out.println(string.substring(25, 29));
+//        System.out.println(string.substring(31, 35));
+//        System.out.println(string.substring(36, 38));
+//        System.out.println(string.substring(58, 59));
+//        System.out.println(string.substring(61, 65));
+//        System.out.println(string.substring(67, 71));
+//        System.out.println(string.substring(71, 75));
+//    }
         //BleDataBean bleDataBean = SerialDataUtils.toOptometry(string);
         //System.out.println(bleDataBean.toString());
 

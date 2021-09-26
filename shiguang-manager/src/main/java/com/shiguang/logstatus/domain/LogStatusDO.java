@@ -65,6 +65,8 @@ public class LogStatusDO implements Serializable {
     private String goodsNum;
 
     private String initial;
+    //焦度计读取设备id
+    private Long lensMeterId;
 
 
     /**
@@ -352,5 +354,9 @@ public class LogStatusDO implements Serializable {
     public void setInitial(String initial) {this.initial = initial;}
 
     public String getInitial() {return initial;}
+
+    public void setLensMeterId(Long lensMeterId){this.lensMeterId = lensMeterId;}
+
+    public Long getLensMeterId(){return lensMeterId;}
 
 }

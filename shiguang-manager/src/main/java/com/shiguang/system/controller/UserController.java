@@ -106,7 +106,7 @@ public class UserController extends BaseController {
 		List<RoleDO> roles = roleService.list(maps);
 		model.addAttribute("roles", roles);
 		Map<String,Object> map = new HashMap<>();
-		map.put("departType","销售门店");
+		//map.put("departType","销售门店");
 		//UserDO userDO = ShiroUtils.getUser();
 		if (null != ShiroUtils.getUser().getCompanyId()){
 			String companyIds = ShiroUtils.getUser().getCompanyId();
@@ -144,7 +144,7 @@ public class UserController extends BaseController {
 		List<RoleDO> roles = roleService.list(id,maps);
 		model.addAttribute("roles", roles);
 		Map<String,Object> map = new HashMap<>();
-		map.put("departType","销售门店");
+		//map.put("departType","销售门店");
 		List<DepartmentDO> storeList = departmentService.list(map);
 		model.addAttribute("storeList",storeList);
 		return prefix+"/edit";
