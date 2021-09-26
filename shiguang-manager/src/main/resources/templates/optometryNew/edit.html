@@ -355,7 +355,7 @@
                         <input name="intraocularOs" th:value="${ocularEyesDO.intraocularOs}" type="text"/> mmHg
                     </td>
                 </tr>
-                </tbody>
+                </tbody>f
             </table>
         </div>
 
@@ -469,8 +469,8 @@
                                th:value="${ocularEyesDO.cornealLastK2Right}" type="text"/>
                     </td>
                     <td>
-                        <input class="short" name="pjkOd" type="text"/> @
-                        <input class="short" name="pjkOd2" type="text"/>
+                        <input class="short" id="pjkOd" name="pjkOd" th:value="${ocularEyesDO.pjkOd}" type="text"/> @
+                        <input class="short" id="pjkOd2" name="pjkOd2" th:value="${ocularEyesDO.pjkOd2}" type="text"/>
                     </td>
                     <td><input name="cornealAstigmatismOd" th:value="${optometryFrontDO.cornealAstigmatismOd}"
                                type="text"/>
@@ -493,8 +493,8 @@
                                th:value="${ocularEyesDO.cornealLastK2Left}" type="text"/>
                     </td>
                     <td>
-                        <input class="short" name="pjkOs"  type="text"/> @
-                        <input class="short" name="pjkOs2"  type="text"/>
+                        <input class="short" id="pjkOs" name="pjkOs" th:value="${ocularEyesDO.pjkOs}"  type="text"/> @
+                        <input class="short" id="pjkOs2" name="pjkOs2" th:value="${ocularEyesDO.pjkOs2}"  type="text"/>
                     </td>
                     <td><input name="cornealAstigmatismOs" th:value="${optometryFrontDO.cornealAstigmatismOs}"
                                type="text"/>
@@ -505,7 +505,7 @@
                 </tr>
                 <tr class="tabS_bg">
                     <td>检影验光</td>
-                    <td colspan="7"><input type="button" value="检影"/></td>
+<!--                    <td colspan="7"><input type="button" value="检影"/></td>-->
                 </tr>
                 <tr>
                     <td></td>

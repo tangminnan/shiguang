@@ -106,21 +106,44 @@ public class OptometryNewController {
             ocularEyesDO.setAxis(list.get(0).getAxis());
             ocularEyesDO.setAxisLeft(list.get(0).getAxisLeft());
             //k1
-            ocularEyesDO.setCornealFirstK1Right(list.get(0).getCornealFirstK1Right());
-            ocularEyesDO.setCornealLastK1Right(list.get(0).getCornealLastK1Right());
-            ocularEyesDO.setCornealFirstK1Left(list.get(0).getCornealFirstK1Left());
-            ocularEyesDO.setCornealLastK1Left(list.get(0).getCornealLastK1Left());
+            Double k1OD1=list.get(0).getCornealFirstK1Right();//角膜曲率K1OD1
+            ocularEyesDO.setCornealFirstK1Right(k1OD1);
+
+            Double k1OD2=list.get(0).getCornealLastK1Right();//角膜曲率K1OD2
+            ocularEyesDO.setCornealLastK1Right(k1OD2);
+
+            Double k1OS1 =list.get(0).getCornealFirstK1Left();//角膜曲率K1OS1
+            ocularEyesDO.setCornealFirstK1Left(k1OS1);
+
+            Double k1OS2=list.get(0).getCornealLastK1Left();//角膜曲率K1OS2
+            ocularEyesDO.setCornealLastK1Left(k1OS2);
             //k2
-            ocularEyesDO.setCornealFirstK2Right(list.get(0).getCornealFirstK2Right());
-            ocularEyesDO.setCornealLastK2Right(list.get(0).getCornealLastK2Right());
-            ocularEyesDO.setCornealFirstK2Left(list.get(0).getCornealFirstK2Left());
-            ocularEyesDO.setCornealLastK2Left(list.get(0).getCornealLastK2Left());
+            Double k2OD1=list.get(0).getCornealFirstK2Right(); //角膜曲率K2OD1
+            ocularEyesDO.setCornealFirstK2Right(k2OD1);
+
+            Double k2OD2 = list.get(0).getCornealLastK2Right(); //角膜曲率K2OD2
+            ocularEyesDO.setCornealLastK2Right(k2OD2);
+
+            Double k2OS1 = list.get(0).getCornealFirstK2Left();//角膜曲率K2OS1
+            ocularEyesDO.setCornealFirstK2Left(k2OS1);
+
+            Double k2OS2 = list.get(0).getCornealLastK2Left(); //角膜曲率K2OS2
+            ocularEyesDO.setCornealLastK2Left(k2OS2);
             //眼压
             ocularEyesDO.setIntraocularOd(list.get(0).getIntraocularOd());
             ocularEyesDO.setIntraocularOs(list.get(0).getIntraocularOs());
             //平均K
-            ocularEyesDO.setPjkOd(list.get(0).getPjkOd());
-            ocularEyesDO.setPjkOs(list.get(0).getPjkOs());
+//            ocularEyesDO.setPjkOd(list.get(0).getPjkOd());
+//            ocularEyesDO.setPjkOs(list.get(0).getPjkOs());
+            Double pjkOD = (k1OD1+k2OD1)/2;
+            ocularEyesDO.setPjkOd(pjkOD);
+            Double pjkOS = (k1OD2+k2OD2)/2;
+            ocularEyesDO.setPjkOd2(pjkOS);
+
+            Double pjkod2= (k1OS1+k2OS1)/2;
+            ocularEyesDO.setPjkOs(pjkod2);
+            Double pjkos2 = (k1OS2+k2OS2)/2;
+            ocularEyesDO.setPjkOs2(pjkos2);
             //瞳距
             ocularEyesDO.setPupilSizeRight(list.get(0).getPupilSizeRight());
             ocularEyesDO.setPupilSizeLeft(list.get(0).getPupilSizeLeft());

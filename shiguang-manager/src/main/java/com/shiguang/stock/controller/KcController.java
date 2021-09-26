@@ -107,6 +107,7 @@ public class KcController {
 //        model.addAttribute("stockDOS", stockDOS);
 //        return stockDOS;
 //    }
+    //库存查询
     @ResponseBody
     @GetMapping("/selectKc")
     public PageUtils list(@RequestParam Map<String, Object> params) {
