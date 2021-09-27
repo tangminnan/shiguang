@@ -38,12 +38,18 @@ function validateRule() {
 		rules : {
 			name : {
 				required : true
+			},
+            mydriasis : {
+                required : true
 			}
 		},
 		messages : {
 			name : {
 				required : icon + "请输入姓名"
-			}
+			},
+            mydriasis : {
+                required : icon + "请选择是否散瞳"
+            }
 		}
 	})
 }

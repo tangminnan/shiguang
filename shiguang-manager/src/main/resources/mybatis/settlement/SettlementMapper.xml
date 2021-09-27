@@ -100,7 +100,8 @@
 			<if test="payModel != null">`pay_model` = #{payModel}, </if>
 			<if test="payMoney != null">`pay_money` = #{payMoney},</if>
 			<if test="payWay != null">`pay_way` = #{payWay},</if>
-			<if test="frontMoney != null">`front_money` = #{frontMoney}</if>
+			<if test="frontMoney != null">`front_money` = #{frontMoney},</if>
+			<if test="modelMoney != null">`model_money` = #{modelMoney}</if>
 		</set>
 		where id = #{id}
 	</update>

@@ -100,7 +100,13 @@ public class ArrearsController {
     public R update(SettlementDO settlement){
         settlement.setPayWay("全款");
         SettlementDO settlementDO = settlementService.get(settlement.getId());
+        Double paymoneys = settlement.getPayMoney();
         settlement.setPayMoney(settlementDO.getPayMoney() + settlement.getPayMoney());
+        String paymodel = settlementDO.getPayModel();
+        paymodel = paymodel + settlement.getPayModel();
+        settlement.setPayModel(paymodel);
+        String modelmoney = settlementDO.getModelMoney() + paymoneys;
+        settlement.setModelMoney(modelmoney);
         settlementService.update(settlement);
         CostDO costDO = costService.get(settlementDO.getCostId());
         if ("定金单".equals(costDO.getType())){

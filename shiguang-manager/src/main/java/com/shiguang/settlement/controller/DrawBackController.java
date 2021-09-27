@@ -109,21 +109,31 @@ public class DrawBackController {
             stockDO.setGoodsCode(goodsCode[i]);
             StockDO stockDO1 = stockService.getProduceCode(stockDO);
             if (!"销售完成".equals(logStatusDO.getLogisticStatus())){
+                if (null != stockDO1){
                     int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
                     stockDO.setGoodsCount(godsCount + "");
                     stockService.updateGoodsCount(stockDO);
+                } else {
+                    return R.error("库存中不存在该商品");
+                }
+
             } else if (null != logStatusDO){
                 if (!"镜片".equals(storeDescribe[i])){
-                    int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
-                    stockDO.setGoodsCount(godsCount + "");
-                    stockService.updateGoodsCount(stockDO);
+                    if (null != stockDO1){
+                        int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+                        stockDO.setGoodsCount(godsCount + "");
+                        stockService.updateGoodsCount(stockDO);
+                    } else {
+                        return R.error("库存中不存在该商品");
+                    }
+
                 }
             }
 
 
         }
         if(drawbackService.save(drawbackDO)>0){
-            return R.ok();
+            return R.ok("退款成功");
         }
         return R.error();
     }

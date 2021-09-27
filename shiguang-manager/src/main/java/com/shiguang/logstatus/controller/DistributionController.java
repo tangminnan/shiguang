@@ -34,7 +34,7 @@ public class DistributionController {
      */
     @GetMapping()
     @RequiresPermissions("information:distribution:distribution")
-    String examine(){
+    String distribution(){
         return "logstatus/distribution";
     }
 

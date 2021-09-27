@@ -140,7 +140,8 @@ function load() {
                                 title : '下加光区间',
                                 align : 'center',
                                 formatter : function(value, row, index) {
-                                    if (row.lightbelowLeft != null && row.lightbelowRight != null){
+                                    if (row.lightbelowLeft != null && row.lightbelowRight != null
+                                        && row.lightbelowLeft != "NULL" && row.lightbelowRight != "NULL"){
                                         return row.lightbelowLeft +"～"+ row.lightbelowRight
                                     } else {
                                         return ""

@@ -431,14 +431,14 @@
             <if test="goodsName != null and goodsName != ''">and j.`produc_name` = #{goodsName}</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &gt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &lt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_up &gt;= #{rightYuanYongZJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_down &lt;= #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_up &gt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_down &lt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_up &gt;= #{leftYuanYongZJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_down &lt;= #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &lt;= #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &gt;= #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_up &lt;= #{rightYuanYongZJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_down &gt;= #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_up &lt;= #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_down &gt;= #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_up &lt;= #{leftYuanYongZJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_down &gt;= #{leftYuanYongZJ}</if>
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%',-->
                 <!--#{rightYuanYongQJ},'%')-->
             <!--</if>-->
@@ -482,14 +482,14 @@
             <if test="goodsName != null and goodsName != ''">and j.`produc_name` = #{goodsName}</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &gt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &lt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_up &gt;= #{rightYuanYongZJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_down &lt;= #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_up &gt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_down &lt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_up &gt;= #{leftYuanYongZJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_down &lt;= #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &lt;= #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &gt;= #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_up &lt;= #{rightYuanYongZJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and j.cyl_down &gt;= #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_up &lt;= #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_down &gt;= #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_up &lt;= #{leftYuanYongZJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and j.cyl_down &gt;= #{leftYuanYongZJ}</if>
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%',-->
             <!--#{rightYuanYongQJ},'%')-->
             <!--</if>-->
@@ -1005,14 +1005,14 @@
             <if test="goodsName != null and goodsName != ''">and y.`produc_name` = #{goodsName}</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
             <if test="retailPrice != null and retailPrice != ''">and y.retail_price = #{retailPrice}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &gt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &lt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_up &gt;= #{rightYuanYongZJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_down &lt;= #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_up &gt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_down &lt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_up &gt;= #{leftYuanYongZJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_down &lt;= #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &lt;= #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &gt;= #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_up &lt;= #{rightYuanYongZJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_down &gt;= #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_up &lt;= #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_down &gt;= #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_up &lt;= #{leftYuanYongZJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_down &gt;= #{leftYuanYongZJ}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1039,14 +1039,14 @@
             <if test="goodsName != null and goodsName != ''">and y.`produc_name` = #{goodsName}</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
             <if test="retailPrice != null and retailPrice != ''">and y.retail_price = #{retailPrice}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &gt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &lt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_up &gt;= #{rightYuanYongZJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_down &lt;= #{rightYuanYongZJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_up &gt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_down &lt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_up &gt;= #{leftYuanYongZJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_down &lt;= #{leftYuanYongZJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &lt;= #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &gt;= #{rightYuanYongQJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_up &lt;= #{rightYuanYongZJ}</if>
+            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and y.cyl_down &gt;= #{rightYuanYongZJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_up &lt;= #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_down &gt;= #{leftYuanYongQJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_up &lt;= #{leftYuanYongZJ}</if>
+            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and y.cyl_down &gt;= #{leftYuanYongZJ}</if>
         </where>
     </select>
 

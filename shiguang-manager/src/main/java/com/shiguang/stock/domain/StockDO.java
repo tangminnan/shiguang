@@ -71,7 +71,7 @@ public class StockDO implements Serializable {
     }
 
     //制造商id
-    private Integer mfrsid;
+    private String mfrsid;
     private String mfrsname;
 
     public String getMfrsname() {
@@ -201,21 +201,21 @@ public class StockDO implements Serializable {
     //配件型
     private String partsStyle;
     //球镜上限
-    private Long sphUp;
+    private String sphUp;
     //球镜下限
-    private Long sphDown;
+    private String sphDown;
     //球镜区间
     private String sphqj;
     //柱镜上限
-    private Long cylUp;
+    private String cylUp;
     //柱镜下限
-    private Long cylDown;
+    private String cylDown;
     //柱镜区间
     private String cylqj;
     //下加光左
-    private Long lightbelowRight;
+    private String lightbelowRight;
     //下加光右
-    private Long lightbelowLeft;
+    private String lightbelowLeft;
     //下加光区间
     private String lightbelowqj;
     //色号
@@ -359,14 +359,14 @@ public class StockDO implements Serializable {
     /**
      * 设置：制造商id
      */
-    public void setMfrsid(Integer mfrsid) {
+    public void setMfrsid(String mfrsid) {
         this.mfrsid = mfrsid;
     }
 
     /**
      * 获取：制造商id
      */
-    public Integer getMfrsid() {
+    public String getMfrsid() {
         return mfrsid;
     }
 
@@ -797,84 +797,84 @@ public class StockDO implements Serializable {
     /**
      * 设置：球镜上限
      */
-    public void setSphUp(Long sphUp) {
+    public void setSphUp(String sphUp) {
         this.sphUp = sphUp;
     }
 
     /**
      * 获取：球镜上限
      */
-    public Long getSphUp() {
+    public String getSphUp() {
         return sphUp;
     }
 
     /**
      * 设置：球镜下限
      */
-    public void setSphDown(Long sphDown) {
+    public void setSphDown(String sphDown) {
         this.sphDown = sphDown;
     }
 
     /**
      * 获取：球镜下限
      */
-    public Long getSphDown() {
+    public String getSphDown() {
         return sphDown;
     }
 
     /**
      * 设置：柱镜上限
      */
-    public void setCylUp(Long cylUp) {
+    public void setCylUp(String cylUp) {
         this.cylUp = cylUp;
     }
 
     /**
      * 获取：柱镜上限
      */
-    public Long getCylUp() {
+    public String getCylUp() {
         return cylUp;
     }
 
     /**
      * 设置：柱镜下限
      */
-    public void setCylDown(Long cylDown) {
+    public void setCylDown(String cylDown) {
         this.cylDown = cylDown;
     }
 
     /**
      * 获取：柱镜下限
      */
-    public Long getCylDown() {
+    public String getCylDown() {
         return cylDown;
     }
 
     /**
      * 设置：下加光左
      */
-    public void setLightbelowRight(Long lightbelowRight) {
+    public void setLightbelowRight(String lightbelowRight) {
         this.lightbelowRight = lightbelowRight;
     }
 
     /**
      * 获取：下加光左
      */
-    public Long getLightbelowRight() {
+    public String getLightbelowRight() {
         return lightbelowRight;
     }
 
     /**
      * 设置：下加光右
      */
-    public void setLightbelowLeft(Long lightbelowLeft) {
+    public void setLightbelowLeft(String lightbelowLeft) {
         this.lightbelowLeft = lightbelowLeft;
     }
 
     /**
      * 获取：下加光右
      */
-    public Long getLightbelowLeft() {
+    public String getLightbelowLeft() {
         return lightbelowLeft;
     }
 

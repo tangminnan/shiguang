@@ -688,7 +688,7 @@ public class SettlementController {
 		map2.put("cardNumber",settlementDO.getMemberNumber());
 		map2.put("saleNumber",settlementDO.getSaleNumber());
 
-		if (null != settlementDO.getOptometrywlName()){
+		if (null != settlementDO.getOptometrywlName() && !"".equals(settlementDO.getOptometrywlName())){
 			model.addAttribute("optometryName",settlementDO.getOptometrywlName());
 			if (1 == settlementDO.getRecipelwlType()){
 				List<KjjyDO> kjjyDOList = kjjyService.list(map2);
