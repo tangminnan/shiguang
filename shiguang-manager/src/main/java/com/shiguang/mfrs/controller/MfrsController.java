@@ -73,7 +73,6 @@ public class MfrsController {
     //查询制造商
     @ResponseBody
     @GetMapping("/mfrsList")
-    @RequiresPermissions("mfrs:mfrs:mfrs")
     public PageUtils mfrsList(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);

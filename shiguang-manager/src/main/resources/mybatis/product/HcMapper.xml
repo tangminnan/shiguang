@@ -49,7 +49,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                group by h.id order by  h.id desc
+                order by  h.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -58,7 +58,29 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*)  from aa_hc
+        select count(*)  from aa_hc h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
+        left join c_unit u on h.unitid= u.unitid
+        <where>
+            <!--<if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>-->
+            <!--<if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>-->
+            <!--<if test="goodsCode != null and goodsCode != ''">and h.produc_code = #{goodsCode}</if>-->
+            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>-->
+            <!--<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>-->
+            <if test="producNum != null and producNum != ''">and h.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and h.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and h.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and   #{retailPrice} &lt;=  h.retail_price and h.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  h.tax_price and h.retail_price &lt;=  #{taxPrice2}
+            </if>
+            <if test="big != null and big != ''">and h.big = #{big}</if>
+            <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
+            and  h.state= 1
+        </where>
     </select>
 
     <insert id="save" parameterType="com.shiguang.product.domain.HcDO" useGeneratedKeys="true" keyProperty="id">

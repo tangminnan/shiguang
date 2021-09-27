@@ -219,6 +219,7 @@ function inposion() {
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['800px', '520px'],
+				method: 'get', // 服务器数据的请求方式 get or post
                 content: "/stock/pidiao/selextkc/"+ outPosition,// iframe的url
                 cancel: function (index, layero) {
                     var rows = window[layero.find('iframe')[0]['name']].showCol();

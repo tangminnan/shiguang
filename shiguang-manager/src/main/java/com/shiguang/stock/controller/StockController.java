@@ -619,7 +619,7 @@ public class StockController {
     //跳转镜架商品查询
     @GetMapping("/jingjia/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:jingjia")
-    String jingjia(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+    String jingjia(@PathVariable("mfrsid") String mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
         Map<String, Object> map = new HashMap<>();
@@ -636,7 +636,7 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectjingjia")
     public List<ProducaDO> selectjingjia(String producNum, String producCode, String producName,
-                                         Integer mfrsid, Integer brandid,String brandname,
+                                         String mfrsid, Integer brandid,String brandname,
                                          String producFactorycolor, String size, Integer materialid,
                                          Integer technologyId, String producFactory, String factory,
                                          String retailPrice, String retailPrice2,
@@ -664,7 +664,7 @@ public class StockController {
     //跳转配件商品查询
     @GetMapping("/peijian/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:peijian")
-    String peijian(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+    String peijian(@PathVariable("mfrsid") String mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
         return "/stock/stock/peijian";
@@ -674,7 +674,7 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectpeijian")
     public List<PartsDO> selectpeijian(String producNum, String producCode, String producName,
-                                       Integer mfrsid, Integer brandid,String brandname,
+                                       String mfrsid, Integer brandid,String brandname,
                                        String partsStyle, String producFactory, String factory,
                                        String retailPrice, String retailPrice2,
                                        Model model) {
@@ -698,7 +698,7 @@ public class StockController {
     //跳转镜片商品查询
     @GetMapping("/jingpian/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:jingpian")
-    String jingpian(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+    String jingpian(@PathVariable("mfrsid") String mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
         Map<String, Object> map = new HashMap<>();
@@ -725,7 +725,7 @@ public class StockController {
     //镜片List-----------成品
     @ResponseBody
     @RequestMapping(value = "/selectJpcp")
-    public List<JpcpDO> selectJpcp(Integer mfrsid,String producNum, String producCode, String producName,
+    public List<JpcpDO> selectJpcp(String mfrsid,String producNum, String producCode, String producName,
                                    Integer brandid,String brandname, Integer lensId,Integer refractivityid,Integer gradualId,
                                    Integer lightId,Integer functionId, String factory,String retailPrice,String retailPrice2,
                                    Model model) {
@@ -752,7 +752,7 @@ public class StockController {
     //镜片List-----------定做
     @ResponseBody
     @RequestMapping(value = "/selectJpdz")
-    public List<JpdzDO> selectJpdz(Integer mfrsid,String producNum, String producCode, String producName,
+    public List<JpdzDO> selectJpdz(String mfrsid,String producNum, String producCode, String producName,
                                    Integer brandid,String brandname, Integer lensId,Integer refractivityid,Integer gradualId,
                                    Integer lightId,Integer functionId, String factory,String retailPrice,String retailPrice2,
                                    Model model) {
@@ -778,7 +778,7 @@ public class StockController {
     //跳转隐形商品查询
     @GetMapping("/yinxing/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:yinxing")
-    String yinxing(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+    String yinxing(@PathVariable("mfrsid") String mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
         Map<String, Object> map = new HashMap<>();
@@ -794,7 +794,7 @@ public class StockController {
     //隐形List-----------成品
     @ResponseBody
     @RequestMapping(value = "/selectYxcp")
-    public List<YxcpDO> selectYxcp(Integer mfrsid,String producNum, String producCode, String producName,
+    public List<YxcpDO> selectYxcp(String mfrsid,String producNum, String producCode, String producName,
                                    Integer brandid,String brandname,String producFactory,String factory,
                                    String retailPrice,String retailPrice2,Integer usageId,Integer typeId,
                                    Model model) {
@@ -819,7 +819,7 @@ public class StockController {
     //隐形List-----------定做
     @ResponseBody
     @RequestMapping(value = "/selectYxdz")
-    public List<YxdzDO> selectYxdz(Integer mfrsid,String producNum, String producCode, String producName,
+    public List<YxdzDO> selectYxdz(String mfrsid,String producNum, String producCode, String producName,
                                    Integer brandid,String brandname,String producFactory,String factory,
                                    String retailPrice,String retailPrice2,Integer usageId,Integer typeId,
                                    Model model) {
@@ -844,7 +844,7 @@ public class StockController {
     //跳转护理液商品查询
     @GetMapping("/hly/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:hly")
-    String hly(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+    String hly(@PathVariable("mfrsid") String mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
         return "/stock/stock/hly";
@@ -854,7 +854,7 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectHly")
     public List<HlyDO> selectHly(String producNum, String producCode, String producName,String brandname,
-                                 Integer mfrsid, Integer brandid, String mainCapacity, String secondCapacity,
+                                 String mfrsid, Integer brandid, String mainCapacity, String secondCapacity,
                                  String producFactory, String factory,String retailPrice,String retailPrice2,
                                  Model model) {
         Map<String, Object> map = new HashMap<>();
@@ -878,7 +878,7 @@ public class StockController {
     //跳转太阳镜商品查询
     @GetMapping("/tyj/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:tyj")
-    String tyj(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+    String tyj(@PathVariable("mfrsid") String mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
         return "/stock/stock/tyj";
@@ -888,7 +888,7 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectTyj")
     public List<TyjDO> selectTyj(String producNum, String producCode, String producName,
-                                 String brandname, Integer mfrsid, Integer brandid, String producFactorycolor, String size,
+                                 String brandname, String mfrsid, Integer brandid, String producFactorycolor, String size,
                                  String producFactory, String factory,String retailPrice,String retailPrice2,
                                  Model model) {
         Map<String, Object> map = new HashMap<>();
@@ -913,7 +913,7 @@ public class StockController {
     //跳转老花镜商品查询
     @GetMapping("/lhj/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:lhj")
-    String lhj(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+    String lhj(@PathVariable("mfrsid") String mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
         //老花镜度数
@@ -927,7 +927,7 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectLhj")
     public List<OldlensDO> selectLhj(String producNum, String producCode, String producName,
-                                     Integer mfrsid, Integer brandid,String brandname,
+                                     String mfrsid, Integer brandid,String brandname,
                                      String producFactorycolor, String size,Integer oldId,
                                      String producFactory, String factory,String retailPrice,String retailPrice2,
                                      Model model) {
@@ -953,7 +953,7 @@ public class StockController {
     //跳转耗材商品查询
     @GetMapping("/hc/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:hc")
-    String hc(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+    String hc(@PathVariable("mfrsid") String mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
         return "/stock/stock/hc";
@@ -963,7 +963,7 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectHc")
     public List<HcDO> selectHc(String producNum, String producCode, String producName,
-                               Integer mfrsid, Integer brandid,String brandname,String retailPrice,String retailPrice2,
+                               String mfrsid, Integer brandid,String brandname,String retailPrice,String retailPrice2,
                                String producFactory, String factory, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum", producNum);
@@ -984,7 +984,7 @@ public class StockController {
     //跳转视光商品查询
     @GetMapping("/sg/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:sg")
-    String sg(@PathVariable("mfrsid") Integer mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+    String sg(@PathVariable("mfrsid") String mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("mfrsname", mfrsname);
         return "/stock/stock/sg";
@@ -994,7 +994,7 @@ public class StockController {
     @ResponseBody
     @RequestMapping(value = "/selectSg")
     public List<ShiguangDO> selectSg(String producNum, String producCode, String producName,
-                                     Integer mfrsid, Integer brandid,String brandname,String retailPrice,String retailPrice2,
+                                     String mfrsid, Integer brandid,String brandname,String retailPrice,String retailPrice2,
                                      String producFactory, String factory, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum", producNum);

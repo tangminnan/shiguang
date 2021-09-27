@@ -40,7 +40,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                group by s.id order by s.id desc
+                 order by s.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -49,14 +49,30 @@
 
     </select>
     <select id="count" resultType="int">
-        select count(*) from aa_shiguang
+        select count(*) from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
+        left join c_unit u on s.unitid= u.unitid
+        <where>
+            <if test="producNum != null and producNum != ''">and s.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and   #{retailPrice} &lt;=  s.retail_price and s.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  s.tax_price and s.retail_price &lt;=  #{taxPrice2}
+            </if>
+            <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
+            and  s.state= 1
+        </where>
     </select>
     <select id="getshiguang" resultType="com.shiguang.product.domain.ShiguangDO">
         select m.mfrsname,b.brandname,u.unitname,
         s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
         s.`proid`,s.`unitid`,s.`batchid`,s.`leixing`,s.`tax`,s.`tax_price`,s.`trade_price`,s.`transfer_price`,s.`retail_price`,
         s.`xsstate`,s.`state`,s.`classtype`
-        from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsid left join c_brand b on s.brandnum=b.brandnum left join
+        from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsid left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid` left join
         c_unit u on s.unitid= u.unitid
         <where>
             <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
@@ -69,7 +85,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                group by s.id order by  s.id desc
+                  order by  s.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -78,7 +94,14 @@
     </select>
 
     <select id="getshiguangcount" resultType="int">
-        select count(*) from aa_shiguang
+        select count(*)    from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsid left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid` left join
+        c_unit u on s.unitid= u.unitid
+        <where>
+            <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
+            <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
+            and s.state= 1
+        </where>
+
     </select>
 
     <insert id="save" parameterType="com.shiguang.product.domain.ShiguangDO" useGeneratedKeys="true" keyProperty="id">

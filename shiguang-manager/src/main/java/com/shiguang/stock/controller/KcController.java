@@ -109,11 +109,19 @@ public class KcController {
 //    }
     //库存查询
     @ResponseBody
-    @GetMapping("/selectKc")
+    @RequestMapping("/selectKc")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
         query.put("status",0);
+                //———获取当前登录用户的公司id————
+        String companyid=ShiroUtils.getUser().getCompanyId();
+        if(companyid != null){
+            query.put("companyid",companyid);
+        }else if (companyid == null){
+            String departNumber=ShiroUtils.getUser().getStoreNum();
+            query.put("departNumber",departNumber);
+        }
         List<StockDO> stockDOS = stockService.kccxList(query);
         int total = stockService.kccxListCount(query);
         PageUtils pageUtils = new PageUtils(stockDOS, total);

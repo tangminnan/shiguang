@@ -46,7 +46,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                group by h.id order by  h.id desc
+                 order by  h.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -54,7 +54,29 @@
         </if>
     </select>
     <select id="count" resultType="int">
-        select count(*) from aa_hly
+        select count(*) from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
+        left join c_unit u on h.unitid= u.unitid
+        <where>
+            <!--<if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>-->
+            <!--<if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>-->
+            <!--<if test="goodsCode != null and goodsCode != ''">and h.produc_code = #{goodsCode}</if>-->
+            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>-->
+            <!--<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>-->
+            <if test="producNum != null and producNum != ''">and h.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and h.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and h.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and   #{retailPrice} &lt;=  h.retail_price and h.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  h.tax_price and h.retail_price &lt;=  #{taxPrice2}
+            </if>
+            <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
+            and  h.state= 1
+        </where>
+
     </select>
 
 
@@ -63,7 +85,7 @@
         h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,b.`brandname`,
         h.`factory`,h.`proid`,h.`unitid`,u.unitname,h.`product_type`,h.`main_capacity`,h.`second_capacity`,h.`produc_factory`,
         h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,h.`xsstate`,h.`state`,h.`classtype`
-        FROM aa_hly h LEFT JOIN c_brand b ON h.brandnum = b.brandnum LEFT JOIN c_unit u ON h.unitid = u.unitid
+        FROM aa_hly h LEFT JOIN c_brand b ON h.brandnum = b.brandnum AND h.`mfrsid`=b.`mfrsid` LEFT JOIN c_unit u ON h.unitid = u.unitid
         <where>
             <if test="id != null and id != ''">and h.id = #{id}</if>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
@@ -104,7 +126,33 @@
     </select>
 
     <select id="gethlycount" resultType="int">
-        select count(*)  FROM aa_hly
+        select count(*)   FROM aa_hly h LEFT JOIN c_brand b ON h.brandnum = b.brandnum AND h.`mfrsid`=b.`mfrsid` LEFT JOIN c_unit u ON h.unitid = u.unitid
+        <where>
+            <if test="id != null and id != ''">and h.id = #{id}</if>
+            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+            <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
+            <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
+            <if test="brandnum != null and brandnum != ''">and h.brandnum = #{brandnum}</if>
+            <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
+            <if test="proid != null and proid != ''">and h.proid = #{proid}</if>
+            <if test="unitid != null and unitid != ''">and h.unitid = #{unitid}</if>
+            <if test="productType != null and productType != ''">and h.product_type = #{productType}</if>
+            <if test="mainCapacity != null and mainCapacity != ''">and h.main_capacity = #{mainCapacity}</if>
+            <if test="secondCapacity != null and secondCapacity != ''">and h.second_capacity = #{secondCapacity}</if>
+            <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
+            <if test="upday != null and upday != ''">and h.upday = #{upday}</if>
+            <if test="downday != null and downday != ''">and h.downday = #{downday}</if>
+            <if test="tax != null and tax != ''">and h.tax = #{tax}</if>
+            <if test="taxPrice != null and taxPrice != ''">and h.tax_price = #{taxPrice}</if>
+            <if test="tradePrice != null and tradePrice != ''">and h.trade_price = #{tradePrice}</if>
+            <if test="transferPrice != null and transferPrice != ''">and h.transfer_price = #{transferPrice}</if>
+            <if test="retailPrice != null and retailPrice != ''">and h.retail_price = #{retailPrice}</if>
+            <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
+            <if test="classtype != null and classtype != ''">and h.classtype = #{classtype}</if>
+            and h.state = 1
+        </where>
     </select>
 
     <insert id="save" parameterType="com.shiguang.product.domain.HlyDO" useGeneratedKeys="true" keyProperty="id">

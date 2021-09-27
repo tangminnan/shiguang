@@ -54,15 +54,15 @@ public class JpcpDO implements Serializable {
     //单位
     private String unitname;
     //球镜id
-    private Long sphId;
+    private String sphId;
     //球镜名称
     private String sph;
     //柱镜id
-    private Long cylId;
+    private String cylId;
     //柱镜名称
     private String cyl;
     //下加光id
-    private Long lightbelowId;
+    private String lightbelowId;
     //下加光名称
     private String lightbelow;
     //材料分类id
@@ -249,42 +249,42 @@ public class JpcpDO implements Serializable {
     /**
      * 设置：球镜id
      */
-    public void setSphId(Long sphId) {
+    public void setSphId(String sphId) {
         this.sphId = sphId;
     }
 
     /**
      * 获取：球镜id
      */
-    public Long getSphId() {
+    public String getSphId() {
         return sphId;
     }
 
     /**
      * 设置：柱镜id
      */
-    public void setCylId(Long cylId) {
+    public void setCylId(String cylId) {
         this.cylId = cylId;
     }
 
     /**
      * 获取：柱镜id
      */
-    public Long getCylId() {
+    public String getCylId() {
         return cylId;
     }
 
     /**
      * 设置：下加光id
      */
-    public void setLightbelowId(Long lightbelowId) {
+    public void setLightbelowId(String lightbelowId) {
         this.lightbelowId = lightbelowId;
     }
 
     /**
      * 获取：下加光id
      */
-    public Long getLightbelowId() {
+    public String getLightbelowId() {
         return lightbelowId;
     }
 

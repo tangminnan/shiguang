@@ -1089,8 +1089,8 @@
         from aa_produca p left join c_unit u on p.unitid=u.unitid
         left join c_material m on p.materialid=m.materialid
         left join a_technology t on p.technology_id=t.technology_id
-        left join c_brand b on p.brandnum=b.brandnum
-        left join c_mfrs mfrs on p.mfrsid=mfrs.mfrsid
+        left join c_brand b on p.brandnum=b.brandnum AND p.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on p.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
@@ -1117,8 +1117,8 @@
         p.factory,p.retail_price,p.tax_price,p.parts_style,p.produc_code,
         p.trade_price,p.transfer_price,mfrs.medicinecode,p.classtype
         from aa_parts p left join c_unit u on p.unitid=u.unitid
-        left join c_brand b on p.brandnum=b.brandnum
-        left join c_mfrs mfrs on p.mfrsid=mfrs.mfrsid
+        left join c_brand b on p.brandnum=b.brandnum AND p.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on p.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
@@ -1145,8 +1145,8 @@
          left join p_lens le on j.lens_id=le.lens_id
          left join p_gradual g on j.gradual_id=g.gradual_id
          left join p_function f on j.function_id=f.function_id
-        left join c_brand b on j.brandnum=b.brandnum
-        left join c_mfrs mfrs on j.mfrsid=mfrs.mfrsid
+        left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on j.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
@@ -1179,8 +1179,8 @@
         left join p_lens le on j.lens_id=le.lens_id
         left join p_gradual g on j.gradual_id=g.gradual_id
         left join p_function f on j.function_id=f.function_id
-        left join c_brand b on j.brandnum=b.brandnum
-        left join c_mfrs mfrs on j.mfrsid=mfrs.mfrsid
+        left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on j.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
@@ -1210,8 +1210,8 @@
         	left join a_cyl c on y.cyl_id=c.cyl_id
         	left join p_usage pu  on y.usage_id=pu.usage_id
         	left join p_type pt  on y.type_id=pt.type_id
-        	left join c_brand b on y.brandnum=b.brandnum
-            left join c_mfrs mfrs on y.mfrsid=mfrs.mfrsid
+        	left join c_brand b on y.brandnum=b.brandnum AND y.`mfrsid`=b.`mfrsid`
+            left join c_mfrs mfrs on y.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and y.produc_code = #{producCode}</if>
@@ -1240,8 +1240,8 @@
 		left join a_cyl c on y.cyl_id=c.cyl_id
 		left join p_usage pu  on y.usage_id=pu.usage_id
 		left join p_type pt  on y.type_id=pt.type_id
-		left join c_brand b on y.brandnum=b.brandnum
-        left join c_mfrs mfrs on y.mfrsid=mfrs.mfrsid
+		left join c_brand b on y.brandnum=b.brandnum AND y.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on y.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and y.produc_code = #{producCode}</if>
@@ -1268,8 +1268,8 @@
         h.produc_num,h.produc_name,b.brandname,h.produc_factory,h.factory,u.unitname,h.retail_price,h.tax_price,h.main_capacity,h.second_capacity,h.produc_code,
         h.trade_price,h.transfer_price,mfrs.medicinecode,h.classtype
         from aa_hly h left join c_unit u on h.unitid = u.unitid
-        left join c_brand b on h.brandnum=b.brandnum
-        left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsid
+        left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
@@ -1291,8 +1291,8 @@
         select t.id as goodsxinxiid,t.produc_num,t.produc_name,t.produc_code,b.brandname, t.produc_factory,t.factory,u.unitname,
         t.retail_price,t.tax_price,t.produc_factorycolor,t.size,t.trade_price,t.transfer_price,mfrs.medicinecode,t.classtype
         from aa_tyj t left join c_unit u on t.unitid=u.unitid
-        left join c_brand b on t.brandnum=b.brandnum
-        left join c_mfrs mfrs on t.mfrsid=mfrs.mfrsid
+        left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on t.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and t.produc_code = #{producCode}</if>
@@ -1318,7 +1318,8 @@
         o.produc_num,o.produc_name,o.produc_code,b.brandname,o.produc_factory,o.factory,o.retail_price,o.tax_price,u.unitname,
         old.degrees,o.size,o.produc_factorycolor,o.trade_price,o.transfer_price,mfrs.medicinecode,o.classtype
         from aa_oldlens o left join c_unit u on o.unitid=u.unitid left join a_olddegrees old on o.old_id=old.old_id
-        left join c_brand b on o.brandnum=b.brandnum  left join c_mfrs mfrs on o.mfrsid=mfrs.mfrsid
+        left join c_brand b on o.brandnum=b.brandnum  AND o.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on o.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and o.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and o.produc_code = #{producCode}</if>
@@ -1343,7 +1344,8 @@
         select h.id as goodsxinxiid,h.produc_num,h.produc_name,h.produc_code,b.brandname,u.unitname,h.retail_price,h.tax_price,h.produc_factory,
         h.trade_price,h.transfer_price,mfrs.medicinecode ,h.classtype
         from aa_hc h left join c_unit u on h.unitid=u.unitid
-        left join c_brand b on h.brandnum=b.brandnum  left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsid
+        left join c_brand b on h.brandnum=b.brandnum  AND h.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
@@ -1364,7 +1366,8 @@
         s.produc_num,s.produc_name,s.produc_code,b.brandname,s.factory,s.produc_factory,u.unitname,s.retail_price,s.tax_price,
         s.trade_price,s.transfer_price,mfrs.medicinecode,s.classtype
         from aa_shiguang s left join c_unit u on s.unitid=u.unitid
-        left join c_brand b on s.brandnum=b.brandnum  left join c_mfrs mfrs on s.mfrsid=mfrs.mfrsid
+        left join c_brand b on s.brandnum=b.brandnum  AND s.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on s.mfrsid=mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and s.produc_code = #{producCode}</if>
@@ -1403,7 +1406,7 @@
         s.batch,s.zhuce_number,s.produce_day,s.useday,s.factory,s.mfrsid,s.unit,s.classtype,s.returnzt
         from stock s left join c_goods g on s.goods_type=g.goodsid left join c_mfrs m on s.mfrsid=m.mfrsid
         left join c_position po on s.position_id=po.position_id
-        left join c_brand b on s.brandname=b.brandname
+        left join c_brand b on s.brandname=b.brandname AND s.`mfrsid`=b.`mfrsid`
         left join department d on po.depart_number=d.depart_number
         <where>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
@@ -1437,7 +1440,29 @@
         </if>
     </select>
     <select id="kccxListCount" resultType="int">
-        select count(*)  from stock
+        select count(*)   from stock s left join c_goods g on s.goods_type=g.goodsid left join c_mfrs m on s.mfrsid=m.mfrsid
+        left join c_position po on s.position_id=po.position_id
+        left join c_brand b on s.brandname=b.brandname AND s.`mfrsid`=b.`mfrsid`
+        left join department d on po.depart_number=d.depart_number
+        <where>
+            <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>
+            <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and   #{retailPrice} &lt;=  j.retail_price and j.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
+            <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
+            <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
+            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
+            <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
+            <if test="classtype != null and classtype != ''">and s.classtype = #{classtype}</if>
+            <if test="status != null and status != ''">and s.status = #{status}</if>
+            <if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>
+        </where>
     </select>
 
     <update id="updateStatus" parameterType="com.shiguang.stock.domain.StockDO">

@@ -56,11 +56,11 @@ public class YxcpDO implements Serializable {
     //单位
     private String unitname;
     //柱镜id
-    private Long cylId;
+    private String cylId;
     //柱镜
     private String cyl;
     //球镜id
-    private Long sphId;
+    private String sphId;
     //球镜
     private String sph;
     //曲率
@@ -231,28 +231,28 @@ public class YxcpDO implements Serializable {
     /**
      * 设置：球镜id
      */
-    public void setSphId(Long sphId) {
+    public void setSphId(String sphId) {
         this.sphId = sphId;
     }
 
     /**
      * 获取：球镜id
      */
-    public Long getSphId() {
+    public String getSphId() {
         return sphId;
     }
 
     /**
      * 设置：柱镜id
      */
-    public void setCylId(Long cylId) {
+    public void setCylId(String cylId) {
         this.cylId = cylId;
     }
 
     /**
      * 获取：柱镜id
      */
-    public Long getCylId() {
+    public String getCylId() {
         return cylId;
     }
 

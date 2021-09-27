@@ -19,7 +19,7 @@
         j.`lightbelow_id`,lt.`lightbelow`,j.`lens_id`,pl.`lens_name`,j.`batchid`,j.`light_id`,lig.`light_name` as lightName,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
         j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`,j.`classtype`,j.`produc_factory`,g.`gradual_name`,
         r.`refractivityvalue`,f.`function_name`,m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph
-        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum left join
+        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum   AND j.`mfrsid`=b.`mfrsid` left join
         c_unit u on j.unitid= u.unitid left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
         left join p_light lig on lig.light_id=j.light_id
         left join a_lightbelow lt on lt.lightbelow_id=j.lightbelow_id
@@ -62,7 +62,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                group by j.id order by  j.id desc
+                  order by  j.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -70,7 +70,43 @@
         </if>
     </select>
     <select id="count" resultType="int">
-        select count(*)  from aa_jpcp
+        select count(*)  from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum   AND j.`mfrsid`=b.`mfrsid` left join
+        c_unit u on j.unitid= u.unitid left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
+        left join p_light lig on lig.light_id=j.light_id
+        left join a_lightbelow lt on lt.lightbelow_id=j.lightbelow_id
+        left join p_lens pl on pl.lens_id = j.lens_id
+        left join p_gradual g on g.gradual_id = j.gradual_id
+        left join c_refractivity r on r.refractivityid = j.refractivityid
+        left join p_function f on f.function_id = j.function_id
+        <where>
+            <if test="producNum != null and producNum != ''">and j.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and   #{retailPrice} &lt;=  j.retail_price and j.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  j.tax_price and j.retail_price &lt;=  #{taxPrice2}
+            </if>
+
+
+            <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
+            <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
+            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
+
+            <if test="sph != null and sph != ''">
+                and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+            </if>
+            <if test="cyl != null and cyl != ''">
+                and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            </if>
+            <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
+            <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
+            <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
+            and j.state= 1
+        </where>
     </select>
 
     <insert id="save" parameterType="com.shiguang.product.domain.JpcpDO" useGeneratedKeys="true" keyProperty="id">
