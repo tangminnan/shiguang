@@ -112,7 +112,6 @@ public class HighMemberController {
     }
 
     @GetMapping("/detail/{id}")
-    @RequiresPermissions("information:highmember:detail")
     String detail(@PathVariable("id") Long id,Model model){
         MemberDO member = memberService.get(id);
         if (member.getSex() == 0){

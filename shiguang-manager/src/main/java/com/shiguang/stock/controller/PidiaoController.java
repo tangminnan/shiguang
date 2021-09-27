@@ -386,7 +386,7 @@ public class PidiaoController {
 				stockDO.setGoodsType(Integer.valueOf(goods));
 
 
-				stockDO.setMfrsid(Integer.valueOf(mfrsid));
+				stockDO.setMfrsid(mfrsid);
 				stockDO.setBrandname(brandname);
 				stockDO.setUnit(unit);
 				stockDO.setRetailPrice(money);
@@ -503,7 +503,7 @@ public class PidiaoController {
 				String goodsType= pidiaoDO.getGoodsType();
 				stockDO.setGoodsType(Integer.valueOf(goodsType));
 				String mfrsid = pidiaoDO.getMfrsid();
-				stockDO.setMfrsid(Integer.valueOf(mfrsid));
+				stockDO.setMfrsid(mfrsid);
 				String brandname=pidiaoDO.getBrandname();
 				stockDO.setBrandname(brandname);
 				String unit =pidiaoDO.getUnit();

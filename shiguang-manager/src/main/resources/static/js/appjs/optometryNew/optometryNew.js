@@ -84,7 +84,7 @@ function load() {
                         field: 'cardNumber',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            var e = '<span class="btn btn-success btn-sm ' + s_edit_h + '" href="#" title="综合验光"  mce_href="#" onclick="edit(\''
+                            var e = '<span class="btn btn-success btn-sm " href="#" title="综合验光"  mce_href="#" onclick="edit(\''
                                 + value
                                 + '\')">综合验光</span> ';
                             // var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
