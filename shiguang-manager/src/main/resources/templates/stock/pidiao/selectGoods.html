@@ -88,56 +88,14 @@
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input type="button" value="查询" onclick="getall()"/>
+        <input type="button" value="查询" onclick="reLoad()"/>
         <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
 
 <!--商品信息-->
 <div class="m40 tabS msgBoxDD">
-    <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tbody>
-        <tr class="thead">
-            <td>
-                多选
-                <!--<input type="checkbox"/>-->
-            </td>
-            <td>商品代码</td>
-            <td>商品条码</td>
-            <td>商品名称</td>
-            <td>数量</td>
-            <td>商品类别</td>
-            <td>型号</td>
-            <td>制造商</td>
-            <td>标准零售价</td>
-            <!--<td>原价合计</td>-->
-            <!--<td>成本价格</td>-->
-            <!--<td>成本合计</td>-->
-            <!--<td>批发价格</td>-->
-            <!--<td>批发合计</td>-->
-            <td>仓位</td>
-            <td>批号</td>
-            <td>注册证号</td>
-            <td>生产日期</td>
-            <td>效期</td>
-            <td style="display: none">镜片类型</td>
-            <td style="display: none">制造商</td>
-            <td style="display: none">品牌</td>
-            <td style="display: none">单位</td>
-            <td style="display: none">类别</td>
-            <td style="display: none">商品id</td>
-        </tr>
-        <!--<tr>-->
-        <!--<td colspan="3">页内合计：</td>-->
-        <!--<td>45684</td>-->
-        <!--<td colspan="5"></td>-->
-        <!--<td>0.00</td>-->
-        <!--<td></td>-->
-        <!--<td>55555555</td>-->
-        <!--<td></td>-->
-        <!--</tr>-->
-        </tbody>
-    </table>
+    <table id="exampleTable" data-mobile-responsive="true"></table>
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
@@ -166,50 +124,125 @@
                 }
             }
         });
-        $.ajax({
-            url: '/kucun/stock/selectKc',
-            type: 'post',
-            dataType: "json",
-            data: {
-                'xsstate': xsstate,
-                'positionName': positionName,
-                'outPosition': outPosition,
-                'limit' : 10000000,
-                'offset' : 0
-            },
-            success: function (xml) {
-                for (var i = 0; i < xml.length; i++) {
-                    $(".buyBtns").append("<tr class='val'> " +
-                        "<td><input name='one'  type=\"checkbox\"/></td>\n" +
-                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                        "<td name='goodsCode'>" + xml[i].goodsCode + "</td>\n" +
-                        "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                        "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                        "<td name='gdname'>" + xml[i].gdname + "</td>\n" +
-                        "<td name='factory'>" + xml[i].factory + "</td>\n" +
-                        "<td name='mfrsname'>" + xml[i].mfrsname + "</td>\n" +
-                        "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                        "<td style='display: none' name='priceSum'>" + xml[i].priceSum + "</td>\n" +
-                        "<td style='display: none' name='costPrice'>" + xml[i].costPrice + "</td>\n" +
-                        "<td style='display: none' name='costSum'>" + xml[i].costSum + "</td>\n" +
-                        "<td style='display: none' name='wholePrice'>" + xml[i].wholePrice + "</td>\n" +
-                        "<td style='display: none' name='wholeSum'>" + xml[i].wholeSum + "</td>\n" +
-                        "<td name='positionName'>" + xml[i].positionName + "</td>" +
-                        "<td name='batch'>" + xml[i].batch + "</td>" +
-                        "<td name='zhuceNumber'>" + xml[i].zhuceNumber + "</td>" +
-                        "<td name='produceDay'>" + xml[i].produceDay + "</td>" +
-                        "<td name='useday'>" + xml[i].useday + "</td>" +
-                        "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
-                        "<td name='mfrsid' style='display: none'>" + xml[i].mfrsid + "</td>" +
-                        "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>" +
-                        "<td name='unit' style='display: none'>" + xml[i].unit + "</td>" +
-                        "<td name='goodsid' style='display: none'>" + xml[i].goodsid + "</td>" +
-                        "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>" +
-                        "</tr>");
-                }
-            }
-        })
     });
+
+
+    $(function () {
+        load();
+    });
+    function load() {
+        $('#exampleTable')
+            .bootstrapTable(
+                {
+                    method: 'get', // 服务器数据的请求方式 get or post
+                    url: '/kucun/stock/selectKc',// 服务器数据的加载地址
+                    //	showRefresh : true,
+                    //	showToggle : true,
+                    //	showColumns : true,
+                    iconSize: 'outline',
+                    toolbar: '#exampleToolbar',
+                    striped: true, // 设置为true会有隔行变色效果
+                    dataType: "json", // 服务器返回的数据类型
+                    pagination: true, // 设置为true会在底部显示分页条
+                    // queryParamsType : "limit",
+                    // //设置为limit则会发送符合RESTFull格式的参数
+                    singleSelect: false, // 设置为true将禁止多选
+                    // contentType : "application/x-www-form-urlencoded",
+                    // //发送到服务器的数据编码类型
+                    pageSize: 10, // 如果设置了分页，每页数据条数
+                    pageNumber: 1, // 如果设置了分布，首页页码
+                    //search : true, // 是否显示搜索框
+                    showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                    sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                    queryParams: function (params) {
+                        return {
+                            //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                            limit: params.limit,
+                            offset: params.offset,
+                            xsstate: $('#xsstate').val(),
+                            positionId: $('#positionId').val(),
+                            goodsNum : $("#goodsNum").val(),
+                            goodsCode : $("#goodsCode").val(),
+                            goodsName : $("#goodsName").val(),
+                            goodsType : $("#goodsType option:selected").val(),
+                            mfrsname : $("#mfrsname").val(),
+                            brandname : $("#brandname").val(),
+                            retailPrice : $("*[name='retailPrice']").val(),
+                            retailPrice2 : $("*[name='retailPrice2']").val(),
+                            xsstate : $("input[name='xsstate']:checked").val(),
+                            positionId : $('#positionId option:selected').val()
+                            // name:$('#searchName').val(),
+                            // username:$('#searchName').val()
+                        };
+                    },
+                    columns: [
+                        {
+                            checkbox: true
+                        },
+                        {
+                            field : 'goodsNum' ,
+                            title : '商品代码'
+                        },
+                        {
+                            field: 'goodsCode',
+                            title: '商品条码'
+                        },
+                        {
+                            field: 'goodsName',
+                            title: '商品名称'
+                        },
+
+                        {
+                            field: 'goodsCount',
+                            title: '数量'
+                        },
+
+                        {
+                            field: 'gdname',
+                            title: '商品类别'
+                        },
+                        {
+                            field: 'factory',
+                            title: '型号'
+                        },
+                        {
+                            field: 'mfrsname',
+                            title: '制造商'
+                        },
+                        {
+                            field: 'retailPrice',
+                            title: '标准零售价'
+                        },
+                        {
+                            field: 'positionName',
+                            title: '仓位'
+                        },
+                        {
+                            field: 'batch',
+                            title: '批号'
+                        },
+                        {
+                            field: 'zhuceNumber',
+                            title: '注册证号'
+                        },
+                        {
+                            field: 'produceDay ',
+                            title: '生产日期'
+                        },
+                        {
+                            field: 'useday ',
+                            title: '效期'
+                        },
+
+                    ]
+                });
+
+    }
+
+
+
+
+
     <!--选择制造商-->
     function choiceMfrs() {
         var goodsid = document.getElementById('goodsType').value;
@@ -284,11 +317,8 @@
             jp.style = "display: none";
         }
     }
-    function getall() {
-        var goodsNum = $("#goodsNum").val();
-        var goodsCode = $("#goodsCode").val();
-        var goodsName = $("#goodsName").val();
-        var goodsType = $("#goodsType option:selected").val();
+
+    function reLoad() {
         if (goodsType == 1){
             var  classtype ="";
         } else if (goodsType == 2){
@@ -308,73 +338,9 @@
         } else if (goodsType == 9){
             var  classtype ="";
         }
-        // layer.alert(classtype +"类型");
-        var mfrsname = $("#mfrsname").val();
-        var brandname = $("#brandname").val();
-        var retailPrice = $("*[name='retailPrice']").val();
-        var retailPrice2 = $("*[name='retailPrice2']").val();
-        var xsstate=$("input[name='xsstate']:checked").val();
-        var positionName = $('#positionName option:selected').text();
-        var positionNames = ""
-        if (positionName == "--请选择--") {
-            positionName = positionNames;
-        }
-        var outPosition = document.getElementById('outPosition').value;
         $(".val").remove();
-        $.ajax({
-            url: '/kucun/stock/selectKc',
-            type: 'post',
-            dataType: "json",
-            data: {
-                'goodsNum': goodsNum,
-                'goodsCode': goodsCode,
-                'goodsName': goodsName,
-                'goodsType': goodsType,
-                'mfrsname': mfrsname,
-                'brandname': brandname,
-                'retailPrice': retailPrice,
-                'retailPrice2': retailPrice2,
-                'xsstate': xsstate,
-                'positionName': positionName,
-                'classtype': classtype,
-                'outPosition': outPosition,
-                'limit' : 10000000,
-                'offset' : 0
-            },
-            success: function (xml) {
-                for (var i = 0; i < xml.length; i++) {
-                    $(".buyBtns").append("<tr class='val'>" +
-                        "<td><input name='one'  type=\"checkbox\"/></td>\n" +
-                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                        "<td name='goodsCode'>" + xml[i].goodsCode + "</td>\n" +
-                        "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                        "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                        "<td name='gdname'>" + xml[i].gdname + "</td>\n" +
-                        "<td name='mfrsname'>" + xml[i].mfrsname + "</td>\n" +
-                        "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                        "<td style='display: none' name='priceSum'>" + xml[i].priceSum + "</td>\n" +
-                        "<td style='display: none' name='costPrice'>" + xml[i].costPrice + "</td>\n" +
-                        "<td style='display: none' name='costSum'>" + xml[i].costSum + "</td>\n" +
-                        "<td style='display: none' name='wholePrice'>" + xml[i].wholePrice + "</td>\n" +
-                        "<td style='display: none' name='wholeSum'>" + xml[i].wholeSum + "</td>\n" +
-                        "<td name='positionName'>" + xml[i].positionName + "</td>" +
-                        "<td name='batch'>" + xml[i].batch + "</td>" +
-                        "<td name='zhuceNumber'>" + xml[i].zhuceNumber + "</td>" +
-                        "<td name='produceDay'>" + xml[i].produceDay + "</td>" +
-                        "<td name='useday'>" + xml[i].useday + "</td>" +
-                        "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
-                        "<td name='mfrsid' style='display: none'>" + xml[i].mfrsid + "</td>" +
-                        "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>" +
-                        "<td name='unit' style='display: none'>" + xml[i].unit + "</td>" +
-                        "<td name='goodsid' style='display: none'>" + xml[i].goodsid + "</td>" +
-                        "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>" +
-
-                        "</tr>");
-                }
-            }
-        })
+        $('#exampleTable').bootstrapTable('refresh');
     }
-
     function positionChange() {
         var xsstate=$("input[name='xsstate']:checked").val();
         $(".cw").remove();

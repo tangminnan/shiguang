@@ -351,11 +351,16 @@ function batchRemove() {
 
 
 function showCol() {
-    var check = $("input[name='one']:checked");//选中的复选框
+    alert("批调aaa")
+    // var check = $("input[name='one']:checked");//选中的复选框
+    var check = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     var objArray = [];
-    check.each(function () {
+    // alert(JSON.stringify(check));
+    $.each(check, function(i, row) {
+        // ids[i] = row['id'];
+
         var obj = {};
-        var rowstr = $(this).parent("td").parent("tr");
+        // var rowstr = $(this).parent("td").parent("tr");
 		//———获取当前系统时间—————
         var timeNow = new Date();
         var year = timeNow.getFullYear();
@@ -363,26 +368,25 @@ function showCol() {
         var date = timeNow.getDate() > 10 ? timeNow.getDate() : "0" + timeNow.getDate();
         obj.createTime = year + "-" + month + "-" + date;
 
-        var goodsNum = rowstr.find("[name='goodsNum']").html();//注意html()和val()
-        var goodsCode = rowstr.find("[name='goodsCode']").html();
-        var goodsName = rowstr.find("[name='goodsName']").html();
-        var goodsCount = rowstr.find("[name='goodsCount']").html();
-        var gdname = rowstr.find("[name='gdname']").html();
-        var mfrsname = rowstr.find("[name='mfrsname']").html();
-        var factory = rowstr.find("[name='factory']").html();
-        var retailPrice = rowstr.find("[name='retailPrice']").html();
-        var priceSum = rowstr.find("[name='priceSum']").html();
-        var costPrice = rowstr.find("[name='costPrice']").html();
-        var costSum = rowstr.find("[name='costSum']").html();
-        var wholePrice = rowstr.find("[name='wholePrice']").html();
-        var wholeSum = rowstr.find("[name='wholeSum']").html();
-        var positionName = rowstr.find("[name='positionName']").html();
-        var batch = rowstr.find("[name='batch']").html();
-        var zhuceNumber = rowstr.find("[name='zhuceNumber']").html();
-        var produceDay = rowstr.find("[name='produceDay']").html();
-        var useday = rowstr.find("[name='useday']").html();
-        var classtype = rowstr.find("[name='classtype']").html();
-        var gdname = rowstr.find("[name='gdname']").html();
+        var goodsNum = row['goodsNum'];//注意html()和val()
+        var goodsCode = row['goodsCode'] ;
+        var goodsName = row['goodsName'] ;
+        var goodsCount = row['goodsCount'];
+        var gdname = row['gdname'] ;
+        var mfrsname = row['mfrsname'] ;
+        var factory = row['factory'] ;
+        var retailPrice = row['retailPrice'] ;
+        var priceSum = row['priceSum'] ;
+        var costPrice = row['costPrice'] ;
+        var costSum = row['costSum'] ;
+        var wholePrice = row['wholePrice'] ;
+        var wholeSum = row['wholeSum'] ;
+        var positionName = row['positionName'] ;
+        var batch = row['batch'];
+        var zhuceNumber = row['zhuceNumber'] ;
+        var produceDay = row['produceDay'] ;
+        var useday = row['useday'] ;
+        var classtype = row['classtype'] ;
         obj.goodsNum = goodsNum;
         obj.goodsCode = goodsCode;
         obj.goodsName = goodsName;
@@ -404,19 +408,18 @@ function showCol() {
         obj.produceDay = produceDay;
         obj.useday = useday;
         obj.classtype = classtype;
-        obj.gdname = gdname;
 
-        var mfrsid = rowstr.find("[name='mfrsid']").html();
+        var mfrsid = row['mfrsid'] ;
         obj.mfrsid = mfrsid;
 
-        var brandname = rowstr.find("[name='brandname']").html();
+        var brandname = row['brandname'] ;
         obj.brandname = brandname;
 
-        var unit = rowstr.find("[name='unit']").html();
+        var unit = row['unit'] ;
         obj.unit = unit;
-        var goodsid = rowstr.find("[name='goodsid']").html();
+        var goodsid = row['goodsid'] ;
         obj.goodsid = goodsid;
-        var goodsxinxiid = rowstr.find("[name='goodsxinxiid']").html();
+        var goodsxinxiid = row['goodsxinxiid'] ;
         obj.goodsxinxiid = goodsxinxiid;
 
 
@@ -424,7 +427,6 @@ function showCol() {
     });
     return objArray;
 }
-
 
 
 function save() {
