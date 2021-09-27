@@ -53,7 +53,7 @@ public class GainLossDO implements Serializable {
 	//单位
 	private String unitname;
 	//制造商id
-	private Integer mfrsid;
+	private String mfrsid;
 	//商品品种
 	private String brandname;
 	//标准价格
@@ -235,9 +235,9 @@ public class GainLossDO implements Serializable {
 
 	public String getUnitname() {return unitname;}
 
-	public void setMfrsid(Integer mfrsid){this.mfrsid = mfrsid;}
+	public void setMfrsid(String mfrsid){this.mfrsid = mfrsid;}
 
-	public Integer getMfrsid() {return mfrsid;}
+	public String getMfrsid() {return mfrsid;}
 
 	public void setBrandname(String brandname){this.brandname = brandname;}
 
