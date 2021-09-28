@@ -18,7 +18,7 @@ public class WeiwaishujuDO implements Serializable {
 	//委外数据id
 	private Long id;
 	//销售单号
-	private String danjunum;
+	private String number;
 	//单据日期
 	private String danjuDay;
 	//所属部门
@@ -28,7 +28,7 @@ public class WeiwaishujuDO implements Serializable {
 	//镜片类型
 	private String jcStyle;
 	//取镜时间
-	private Date timetime;
+	private String timetime;
 	//单据类型
 	private String danjuStyle;
 	//原配镜单
@@ -145,14 +145,14 @@ public class WeiwaishujuDO implements Serializable {
 	/**
 	 * 设置：销售单号
 	 */
-	public void setDanjunum(String danjunum) {
-		this.danjunum = danjunum;
+	public void setnumber(String number) {
+		this.number = number;
 	}
 	/**
 	 * 获取：销售单号
 	 */
-	public String getDanjunum() {
-		return danjunum;
+	public String getnumber() {
+		return number;
 	}
 	/**
 	 * 设置：单据日期
@@ -205,13 +205,13 @@ public class WeiwaishujuDO implements Serializable {
 	/**
 	 * 设置：取镜时间
 	 */
-	public void setTimetime(Date timetime) {
+	public void setTimetime(String timetime) {
 		this.timetime = timetime;
 	}
 	/**
 	 * 获取：取镜时间
 	 */
-	public Date getTimetime() {
+	public String getTimetime() {
 		return timetime;
 	}
 	/**

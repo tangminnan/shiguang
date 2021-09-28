@@ -8,6 +8,7 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+	// alert(1111+"成功")
 	$.ajax({
 		cache : true,
 		type : "POST",

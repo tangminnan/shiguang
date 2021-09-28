@@ -1,8 +1,10 @@
 package com.shiguang.stock.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.product.domain.HcDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -72,7 +74,6 @@ public class WeiwaishujuController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("stock:weiwaishuju:add")
 	public R save( WeiwaishujuDO weiwaishuju){
 		if(weiwaishujuService.save(weiwaishuju)>0){
 			return R.ok();
@@ -113,5 +114,18 @@ public class WeiwaishujuController {
 		weiwaishujuService.batchRemove(ids);
 		return R.ok();
 	}
-	
+
+
+	//得到委外数据
+	@ResponseBody
+	@RequestMapping(value = "/getWeiwaiShuju")
+	public List<WeiwaishujuDO> getWeiwaiShuju(String number, Model model) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("number", number);
+		List<WeiwaishujuDO> weiwaiShuju = weiwaishujuService.getWeiwaiShuju(map);
+		model.addAttribute("weiwaiShuju", weiwaiShuju);
+		return weiwaiShuju;
+	}
+
+
 }

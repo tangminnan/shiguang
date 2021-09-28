@@ -29,4 +29,7 @@ public interface WeiwaishujuDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	//得到委外数据
+	List<WeiwaishujuDO> getWeiwaiShuju(Map<String, Object> map);
 }

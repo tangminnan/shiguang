@@ -219,6 +219,7 @@ public class PidiaoController {
 	@RequiresPermissions("stock:pidiao:add")
 	public R save( PidiaoDO pidiao,StockDO stockDO){
 		String pidiaoNumber=pidiao.getPidiaoNumber();
+
 		String zhidanPeople=pidiao.getZhidanPeople();
 		Date danjuDay=pidiao.getDanjuDay();
 		String outDepartment=pidiao.getOutDepartment();

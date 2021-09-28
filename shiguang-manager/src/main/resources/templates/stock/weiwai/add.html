@@ -12,6 +12,8 @@
 </head>
 <body>
 <!--查询条件-->
+
+<form class="form-horizontal m-t" id="signupForm">
 <div class="m40 tabS msgBox">
 	<h3>单据信息</h3>
 	<table border="0" cellspacing="0" cellpadding="0">
@@ -37,8 +39,13 @@
 			<td>制造商：</td>
 			<td>
 				<input id="mfrsid" name="mfrsid" type="hidden" />
-				<input id="mfrsName" name="mfrsName" type="text" readonly />
+				<input id="mfrsName" name="mfrsname" type="text" readonly />
 				<input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()" />
+			</td>
+			<td>收入仓位：</td>
+			<td>
+				<input id="positionId" name="positionId"  th:value="${positionId}" type="hidden" />
+				<input id="positionName" name="positionName"  th:value="${positionName}" type="text" />
 			</td>
 
 		</tr>
@@ -68,7 +75,7 @@
 		<input type="button" class="empty" value="外部配镜单" onclick="waibu()" />
 		<input id="status" name="status" value="1" type="hidden" />
 		<input id="username" name="username" value="未收货" type="hidden" />
-		<input type="button" class="H_bc" value="保存并审核" onclick="" />
+		<input type="button" class="H_bc" value="保存并审核" onclick="save()" />
 	</div>
 </div>
 <!--商品信息-->
@@ -124,8 +131,389 @@
 		</tbody>
 	</table>
 </div>
+</form>
+
 <div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/weiwai/add.js"></script>
 <script type="text/javascript">
+
+	$().ready(function() {
+		var number = window.localStorage.getItem("number");//销售单号
+		var eyeStyle = window.localStorage.getItem("eyeStyle");//定做类型
+		alert(eyeStyle)
+		var mfrsid = window.localStorage.getItem("mfrsid");//制造商id
+		alert(mfrsid)
+		$('#mfrsid').val(mfrsid);
+		var mfrsname = window.localStorage.getItem("mfrsname");//制造商名称
+		alert(mfrsname)
+		$('#mfrsName').val(mfrsname);
+		if(eyeStyle==3){
+			$("#eyeStyle").find("[value='" + eyeStyle + "']").attr("selected", true);
+			$(".val2").remove();
+			tab1.style = "display: block";
+			tab2.style = "display: none";
+			if (number !=null ){
+				$.ajax({
+					url: '/stock/weiwaishuju/getWeiwaiShuju',
+					type: 'post',
+					dataType: "json",
+					data: {
+						'number': number,
+					},
+					success: function (xml) {
+						for (var i = 0; i < xml.length; i++) {
+							if(null == xml[i].number){
+								xml[i].number="";
+							}
+							if(null == xml[i].timetime){
+								xml[i].timetime="";
+							}
+							if(null == xml[i].rightName){
+								xml[i].rightName="";
+							}
+							if(null == xml[i].weiwaiStyle){
+								xml[i].weiwaiStyle="";
+							}
+
+							if(null == xml[i].rightR){
+								xml[i].rightR="";
+							}
+
+							if(null == xml[i].countr){
+								xml[i].countr="";
+							}
+							if(null == xml[i].rightsph){
+								xml[i].rightsph="";
+							}
+							if(null == xml[i].rightcyl){
+								xml[i].rightcyl="";
+							}
+							if(null == xml[i].rightzx){
+								xml[i].rightzx="";
+							}
+							if(null == xml[i].rightAdd){
+								xml[i].rightAdd="";
+							}
+							if(null == xml[i].rightSlj){
+								xml[i].rightSlj="";
+							}
+							if(null == xml[i].rightzj){
+								xml[i].rightzj="";
+							}
+							if(null == xml[i].yaoqiur){
+								xml[i].yaoqiur="";
+							}
+
+
+
+							if(null == xml[i].leftName){
+								xml[i].leftName="";
+							}
+							if(null == xml[i].countl){
+								xml[i].countl="";
+							}
+							if(null == xml[i].leftL){
+								xml[i].leftL="";
+							}
+							if(null == xml[i].leftsph){
+								xml[i].leftsph="";
+							}
+							if(null == xml[i].leftcyl){
+								xml[i].leftcyl="";
+							}
+							if(null == xml[i].leftzx){
+								xml[i].leftzx="";
+							}
+							if(null == xml[i].leftAdd){
+								xml[i].leftAdd="";
+							}
+							if(null == xml[i].leftSlj){
+								xml[i].leftSlj="";
+							}
+							if(null == xml[i].leftzj){
+								xml[i].leftzj="";
+							}
+							if(null == xml[i].yaoqiul){
+								xml[i].yaoqiul="";
+							}
+							$(".heji1").before("<tr class='val1'>" +
+									"<td >" + xml[i].number + "</td>\n" +//0
+									"<input name='saleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1
+
+									"<td>" + xml[i].timetime + "</td>\n" +//2
+									"<input name='mirrorTime' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
+
+									"<td>" + xml[i].rightName + "</td>\n" +//2
+									"<input name='goodsName' type='hidden' value='" + xml[i].rightName + "'>\n" +//3
+
+									"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
+									"<input name='style' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
+
+									"<td>" + xml[i].rightR + "</td>\n" +//2
+									"<input name='rl' type='hidden' value='" + xml[i].rightR + "'>\n" +//3
+
+									"<td>" + xml[i].countr + "</td>\n" +//数量
+									"<input name='count' type='hidden' value='" + xml[i].countr + "'>\n" +
+
+
+									"<td>" + xml[i].rightsph + "</td>\n" +//球镜
+									"<input name='sph' type='hidden' value='" + xml[i].rightsph + "'>\n" +//3
+
+									"<td>" + xml[i].rightcyl + "</td>\n" +//zhu镜
+									"<input name='cyl' type='hidden' value='" + xml[i].rightcyl + "'>\n" +
+
+
+									"<td>" + xml[i].rightzx + "</td>\n" +//zhu镜
+									"<input name='axial' type='hidden' value='" + xml[i].rightzx + "'>\n" +
+
+									"<td>" + xml[i].rightAdd + "</td>\n" +//zhu镜
+									"<input name='lightbelow' type='hidden' value='" + xml[i].rightAdd + "'>\n" +
+
+									"<td>" + xml[i].rightSlj + "</td>\n" +//zhu镜
+									"<input name='lengjing' type='hidden' value='" + xml[i].rightSlj + "'>\n" +
+
+									"<td>" + xml[i].rightzj + "</td>\n" +//zhu镜
+									"<input name='diameter' type='hidden' value='" + xml[i].rightzj + "'>\n" +
+
+									"<td>" + xml[i].yaoqiur + "</td>\n" +//zhu镜
+									"<input name='yaoqiu' type='hidden' value='" + xml[i].yaoqiur + "'>\n" +
+
+
+									"</tr>"+
+
+
+
+									"<tr class='val1'>" +
+									"<td >" + xml[i].number + "</td>\n" +//0
+									"<input name='saleNumber2' type='hidden' value='" + xml[i].number + "'>\n" +//1
+
+									"<td>" + xml[i].timetime + "</td>\n" +//2
+									"<input name='mirrorTime2' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
+
+									"<td>" + xml[i].leftName + "</td>\n" +//2
+									"<input name='goodsName2' type='hidden' value='" + xml[i].leftName + "'>\n" +//3
+
+									"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
+									"<input name='style2' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
+
+									"<td>" + xml[i].leftL + "</td>\n" +//2
+									"<input name='rl2' type='hidden' value='" + xml[i].leftL + "'>\n" +//3
+
+									"<td>" + xml[i].countl + "</td>\n" +//数量
+									"<input name='count2' type='hidden' value='" + xml[i].countl + "'>\n" +
+
+									"<td>" + xml[i].leftsph + "</td>\n" +//球镜
+									"<input name='sph2' type='hidden' value='" + xml[i].leftsph + "'>\n" +//3
+
+									"<td>" + xml[i].leftcyl + "</td>\n" +//zhu镜
+									"<input name='cyl2' type='hidden' value='" + xml[i].leftcyl + "'>\n" +
+
+
+									"<td>" + xml[i].leftzx + "</td>\n" +//zhu镜
+									"<input name='axial2' type='hidden' value='" + xml[i].leftzx + "'>\n" +
+
+									"<td>" + xml[i].leftAdd + "</td>\n" +//zhu镜
+									"<input name='lightbelow2' type='hidden' value='" + xml[i].leftAdd + "'>\n" +
+
+									"<td>" + xml[i].leftSlj + "</td>\n" +//zhu镜
+									"<input name='lengjing2' type='hidden' value='" + xml[i].leftSlj + "'>\n" +
+
+									"<td>" + xml[i].leftzj + "</td>\n" +//zhu镜
+									"<input name='diameter2' type='hidden' value='" + xml[i].leftzj + "'>\n" +
+
+									"<td>" + xml[i].yaoqiul + "</td>\n" +//zhu镜
+									"<input name='yaoqiu2' type='hidden' value='" + xml[i].yaoqiul + "'>\n" +
+									"</tr>"
+							);//页面每个数量
+						}
+					}
+				})
+			}
+		}else if (eyeStyle == 4){
+			$("#eyeStyle").find("[value='" + eyeStyle + "']").attr("selected", true);
+			$(".val1").remove();
+			tab1.style = "display: none";
+			tab2.style = "display: block";
+			if (number !=null ){
+				$.ajax({
+					url: '/stock/weiwaishuju/getWeiwaiShuju',
+					type: 'post',
+					dataType: "json",
+					data: {
+						'number': number,
+					},
+					success: function (xml) {
+						for (var i = 0; i < xml.length; i++) {
+							if(null == xml[i].number){
+								xml[i].number="";
+							}
+							if(null == xml[i].timetime){
+								xml[i].timetime="";
+							}
+							if(null == xml[i].rightNameyx){
+								xml[i].rightNameyx="";
+							}
+							if(null == xml[i].weiwaiStyle){
+								xml[i].weiwaiStyle="";
+							}
+
+							if(null == xml[i].rightRyx){
+								xml[i].rightRyx="";
+							}
+
+							if(null == xml[i].countr){
+								xml[i].countr="";
+							}
+							if(null == xml[i].rightsphyx){
+								xml[i].rightsphyx="";
+							}
+							if(null == xml[i].rightcylyx){
+								xml[i].rightcylyx="";
+							}
+							if(null == xml[i].rightzxyx){
+								xml[i].rightzxyx="";
+							}
+							if(null == xml[i].rightJd){
+								xml[i].rightJd="";
+							}
+							if(null == xml[i].rightqulv){
+								xml[i].rightqulv="";
+							}
+							if(null == xml[i].rightzj){
+								xml[i].rightzj="";
+							}
+							if(null == xml[i].yaoqiuryx){
+								xml[i].yaoqiuryx="";
+							}
+
+							if(null == xml[i].rightNameyx){
+								xml[i].rightNameyx="";
+							}
+
+
+							if(null == xml[i].countr){
+								xml[i].countr="";
+							}
+							if(null == xml[i].leftLyx){
+								xml[i].leftLyx="";
+							}
+							if(null == xml[i].rightsphyx){
+								xml[i].rightsphyx="";
+							}
+							if(null == xml[i].rightcylyx){
+								xml[i].rightcylyx="";
+							}
+							if(null == xml[i].rightzxyx){
+								xml[i].rightzxyx="";
+							}
+							if(null == xml[i].rightJd){
+								xml[i].rightJd="";
+							}
+							if(null == xml[i].rightqulv){
+								xml[i].rightqulv="";
+							}
+							if(null == xml[i].rightzj){
+								xml[i].rightzj="";
+							}
+							if(null == xml[i].yaoqiuryx){
+								xml[i].yaoqiuryx="";
+							}
+
+							$(".heji2").before("<tr class='val1'>" +
+									"<td >" + xml[i].number + "</td>\n" +//0
+									"<input name='saleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1
+
+									"<td>" + xml[i].timetime + "</td>\n" +//2
+									"<input name='mirrorTime' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
+
+									"<td>" + xml[i].rightNameyx + "</td>\n" +//2
+									"<input name='goodsName' type='hidden' value='" + xml[i].rightNameyx + "'>\n" +//3
+
+									"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
+									"<input name='style' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
+
+									"<td>" + xml[i].rightRyx + "</td>\n" +//2
+									"<input name='rl' type='hidden' value='" + xml[i].rightRyx + "'>\n" +//3
+
+									"<td>" + xml[i].countryx + "</td>\n" +//数量
+									"<input name='count' type='hidden' value='" + xml[i].countryx + "'>\n" +
+
+									"<td>" + xml[i].rightsphyx + "</td>\n" +//球镜
+									"<input name='sph' type='hidden' value='" + xml[i].rightsphyx + "'>\n" +//3
+
+									"<td>" + xml[i].rightcylyx + "</td>\n" +//zhu镜
+									"<input name='cyl' type='hidden' value='" + xml[i].rightcylyx + "'>\n" +
+
+
+									"<td>" + xml[i].rightzxyx + "</td>\n" +//zhu镜
+									"<input name='axial' type='hidden' value='" + xml[i].rightzxyx + "'>\n" +
+
+									"<td>" + xml[i].rightJd + "</td>\n" +//zhu镜
+									"<input name='jd' type='hidden' value='" + xml[i].rightJd + "'>\n" +
+
+									"<td>" + xml[i].rightqulv + "</td>\n" +//zhu镜
+									"<input name='curvature' type='hidden' value='" + xml[i].rightqulv + "'>\n" +
+
+									"<td>" + xml[i].rightzj + "</td>\n" +//zhu镜
+									"<input name='diameter' type='hidden' value='" + xml[i].rightzj + "'>\n" +
+
+									"<td>" + xml[i].yaoqiuryx + "</td>\n" +//zhu镜
+									"<input name='yaoqiu' type='hidden' value='" + xml[i].yaoqiuryx + "'>\n" +
+									"</tr>"+
+
+
+
+									"<td >" + xml[i].number + "</td>\n" +//0
+									"<input name='saleNumber2' type='hidden' value='" + xml[i].number + "'>\n" +//1
+
+									"<td>" + xml[i].timetime + "</td>\n" +//2
+									"<input name='mirrorTime2' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
+
+									"<td>" + xml[i].leftNameyx + "</td>\n" +//2
+									"<input name='goodsName2' type='hidden' value='" + xml[i].leftNameyx + "'>\n" +//3
+
+									"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
+									"<input name='style2' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
+
+									"<td>" + xml[i].leftLyx + "</td>\n" +//2
+									"<input name='rl2' type='hidden' value='" + xml[i].leftLyx + "'>\n" +//3
+
+									"<td>" + xml[i].countryx + "</td>\n" +//数量
+									"<input name='count2' type='hidden' value='" + xml[i].countryx + "'>\n" +
+
+									"<td>" + xml[i].leftsphyx + "</td>\n" +//球镜
+									"<input name='sph2' type='hidden' value='" + xml[i].leftsphyx + "'>\n" +//3
+
+									"<td>" + xml[i].leftcylyx + "</td>\n" +//zhu镜
+									"<input name='cyl2' type='hidden' value='" + xml[i].leftcylyx + "'>\n" +
+
+
+									"<td>" + xml[i].leftzxyx + "</td>\n" +//zhu镜
+									"<input name='axial2' type='hidden' value='" + xml[i].leftzxyx + "'>\n" +
+
+									"<td>" + xml[i].leftJd + "</td>\n" +//zhu镜
+									"<input name='jd2' type='hidden' value='" + xml[i].leftJd + "'>\n" +
+
+									"<td>" + xml[i].leftqulv + "</td>\n" +//zhu镜
+									"<input name='curvature2' type='hidden' value='" + xml[i].leftqulv + "'>\n" +
+
+									"<td>" + xml[i].leftzj + "</td>\n" +//zhu镜
+									"<input name='diameter2' type='hidden' value='" + xml[i].leftzj + "'>\n" +
+
+									"<td>" + xml[i].yaoqiuryx + "</td>\n" +//zhu镜
+									"<input name='yaoqiu2' type='hidden' value='" + xml[i].yaoqiuryx + "'>\n" +
+									"</tr>"
+							);//页面每个数量
+						}
+					}
+				})
+			}
+		}
+
+
+		window.localStorage.removeItem("number");
+
+	});
     //显示
     function show() {
         var eyeStyle = $('#eyeStyle').val();
@@ -158,7 +546,7 @@
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
                         $("#mfrsName").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
+                        $("#mfrsid").val(rows[i].mfrsnum);
                         $("#mfrsNames").val(rows[i].mfrsname);
                     }
                 }
@@ -173,6 +561,7 @@
 	function waibu() {
         var eyeStyle = $('#eyeStyle').val();
         var mfrsid = $('#mfrsid').val();
+        var mfrsname = $('#mfrsName').val();
         var zhidanPeople = $('#zhidanPeople').val();
         if (eyeStyle == ""){
             layer.alert("请选择订单类型！");
@@ -185,7 +574,7 @@
                     maxmin: true,
                     shadeClose: false, // 点击遮罩关闭层
                     area: ['800px', '520px'],
-                    content: "/stock/weiwai/getGoods/" + eyeStyle+'/'+mfrsid+'/'+zhidanPeople,// iframe的url
+                    content: "/stock/weiwai/getGoods/" + eyeStyle+'/'+mfrsid+'/'+mfrsname+'/'+zhidanPeople,// iframe的url
                     // btn: ['确定', '取消'],
                     // yes: function(index, layero) {
                     //     var rows = $(layero).find("iframe")[0].contentWindow.addshang();
@@ -207,6 +596,8 @@
                 layer.full(toIndex);
 			}
     }
+
+
 </script>
 </body>
 </html>

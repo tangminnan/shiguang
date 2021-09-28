@@ -15,6 +15,13 @@
         </sourceRoots>
       </configuration>
     </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <datasource-mapping />
+        <naming-strategy-map />
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -27,6 +34,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/RXTXcomm.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -115,7 +131,11 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:jconsole:1.8.0">
         <CLASSES>
+<<<<<<< HEAD
           <root url="jar://D:/jdk181/jdk1.8.0_181/lib/jconsole.jar!/" />
+=======
+          <root url="jar://C:/Program Files/Java/jdk1.8.0_181/lib/jconsole.jar!/" />
+>>>>>>> c35f8c74fc39d21804fcc35603dbbc636f26ccad
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -124,7 +144,11 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:tools:1.8.0">
         <CLASSES>
+<<<<<<< HEAD
           <root url="jar://D:/jdk181/jdk1.8.0_181/lib/tools.jar!/" />
+=======
+          <root url="jar://C:/Program Files/Java/jdk1.8.0_181/lib/tools.jar!/" />
+>>>>>>> c35f8c74fc39d21804fcc35603dbbc636f26ccad
         </CLASSES>
         <JAVADOC />
         <SOURCES />

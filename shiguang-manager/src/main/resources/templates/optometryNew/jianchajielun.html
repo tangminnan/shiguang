@@ -1408,18 +1408,18 @@
         }
     };
 
-    function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用
-        var val = parseFloat(e.value)
-        var val1 = e.value
-        // console.log(val);
-        var num = val1.indexOf(".") + 2
-        console.log(num);
-        if (val1.length > num) {
-            console.log(123);
-            var val2 = 0 | val * 100
-            e.value = val2 / 100
-        }
-    }
+    // function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用【限制输入在两位位数】
+    //     var val = parseFloat(e.value)
+    //     var val1 = e.value
+    //     // console.log(val);
+    //     var num = val1.indexOf(".") + 2
+    //     console.log(num);
+    //     if (val1.length > num) {
+    //         console.log(123);
+    //         var val2 = 0 | val * 100
+    //         e.value = val2 / 100
+    //     }
+    // }
 
     //自动补0，四舍五入
     function shuzi(e) {

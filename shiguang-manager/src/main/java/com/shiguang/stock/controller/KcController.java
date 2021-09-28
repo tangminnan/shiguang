@@ -122,6 +122,7 @@ public class KcController {
             String departNumber=ShiroUtils.getUser().getStoreNum();
             query.put("departNumber",departNumber);
         }
+        query.put("status","0");
         List<StockDO> stockDOS = stockService.kccxList(query);
         int total = stockService.kccxListCount(query);
         PageUtils pageUtils = new PageUtils(stockDOS, total);

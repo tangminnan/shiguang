@@ -8,8 +8,11 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+    var weiwaiStyle = $("#weiwaiStyle option:selected").val();
 	var eyeStyle=$('#eyeStyle').val();
-    alert(eyeStyle)
+    var number =$('#number').val();
+    var mfrsid =$('#mfrsid').val();
+    var mfrsname =$('#mfrsname').val();
 
     if (eyeStyle==3){//镜片
     	var rightNum =$("#rightNum").val();
@@ -30,12 +33,16 @@ function save() {
                     parent.layer.alert("Connection error");
                 },
                 success: function (data) {
+
                     if (data.code == 0) {
                         parent.layer.msg("操作成功");
+                        window.localStorage.setItem("number",number);//销售单号
+                        window.localStorage.setItem("eyeStyle",eyeStyle);//类型
+                        window.localStorage.setItem("mfrsid",mfrsid);//制造商num
+                        window.localStorage.setItem("mfrsname",mfrsname);//制造商名称
                         var index1 = window.parent.layer.getFrameIndex(window.name); // 获取窗口索引
                         // 获取窗口索引
                         window.parent.layer.close(index1);
-
                         window.parent.location.reload();
                     } else {
                         parent.layer.alert(data.msg)
@@ -66,6 +73,8 @@ function save() {
                 success: function (data) {
                     if (data.code == 0) {
                         parent.layer.msg("操作成功");
+                        window.localStorage.setItem("number",number);
+                        window.localStorage.setItem("eyeStyle",eyeStyle);
                         var index1 = window.parent.layer.getFrameIndex(window.name); // 获取窗口索引
                         // 获取窗口索引
                         window.parent.layer.close(index1);
