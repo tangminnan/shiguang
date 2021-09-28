@@ -1298,7 +1298,7 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
-            <if test="lightId != null and lightId != ''">and j.light_d = #{lightId}</if>
+            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
             <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
@@ -1338,7 +1338,7 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
-            <if test="lightId != null and lightId != ''">and j.light_d = #{lightId}</if>
+            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
             <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>

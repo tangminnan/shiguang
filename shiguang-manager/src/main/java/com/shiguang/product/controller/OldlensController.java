@@ -3,6 +3,7 @@ package com.shiguang.product.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.StringUtils;
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;
@@ -47,6 +48,11 @@ public class OldlensController {
     @Autowired
     private OlddegreesService olddegreesService;
 
+
+    private Double retailPrice;
+    private Double retailPrice2;
+    private Double taxPrice;
+    private Double taxPrice2;
     @GetMapping()
     String Oldlens() {
         return "product/oldlens/oldlens";
@@ -57,6 +63,21 @@ public class OldlensController {
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+        if (StringUtils.isNotBlank(params.get("taxPrice").toString()))
+            taxPrice = Double.parseDouble(params.get("taxPrice").toString());
+        if (StringUtils.isNotBlank(params.get("taxPrice2").toString()))
+            taxPrice2 = Double.parseDouble(params.get("taxPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+        query.put("taxPrice", taxPrice);
+        query.put("taxPrice2", taxPrice2);
+
         List<OldlensDO> oldlensList = oldlensService.list(query);
         int total = oldlensService.count(query);
         PageUtils pageUtils = new PageUtils(oldlensList, total);
