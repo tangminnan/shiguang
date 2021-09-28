@@ -189,7 +189,7 @@
 			`card_number`,
 			`sex`,
 			`depart_number`,
-			`company_id`，
+			`company_id`,
 			`birthday_year`,
 			`birthday_month`,
 			`birthday_day`,

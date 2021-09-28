@@ -133,8 +133,6 @@ public class UserManagerController extends BaseController {
             return R.error("该用户已存在");
         }
         user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
-        user.setCompanyId(ShiroUtils.getUser().getCompanyId());
-        user.setCompany(ShiroUtils.getUser().getCompany());
         if (userService.save(user) > 0) {
             return R.ok();
         }

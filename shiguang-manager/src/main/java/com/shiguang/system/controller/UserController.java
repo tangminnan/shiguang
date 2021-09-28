@@ -181,6 +181,8 @@ public class UserController extends BaseController {
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		DepartmentDO departmentDO = departmentService.getDepartName(user.getStoreNum());
 		user.setStore(departmentDO.getDepartName());
+		user.setCompanyId(ShiroUtils.getUser().getCompanyId());
+		user.setCompany(ShiroUtils.getUser().getCompany());
 		if (userService.save(user) > 0) {
 			return R.ok();
 		}
