@@ -80,11 +80,7 @@ public class LogStatusController {
         //查询列表数据
         Query query = new Query(params);
         query.put("logisticStatus","销售完成");
-        if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyid",ShiroUtils.getUser().getCompanyId());
-        } else {
-            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
-        }
+        query.put("companyid",ShiroUtils.getUser().getCompanyId());
         //query.put("storeDescribe","镜片");
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

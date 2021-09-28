@@ -57,11 +57,7 @@ public class GlassessController {
         Query query = new Query(params);
         query.put("state",1);
         query.put("type","检查单");
-        if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyid",ShiroUtils.getUser().getCompanyId());
-        } else {
-            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
-        }
+        query.put("companyid",ShiroUtils.getUser().getCompanyId());
         List<SettlementDO> settlementDOList = settlementService.findGlassesData(query);
         if (null != settlementDOList && settlementDOList.size() > 0){
             for (SettlementDO settlementDO : settlementDOList){

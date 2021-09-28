@@ -51,11 +51,7 @@ public class ExamineController {
         //查询列表数据
         Query query = new Query(params);
         query.put("logisticStatus","加工师加工");
-        if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyid",ShiroUtils.getUser().getCompanyId());
-        } else {
-            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
-        }
+        query.put("companyid",ShiroUtils.getUser().getCompanyId());
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){

@@ -58,11 +58,7 @@ public class SettlementMethodController {
 //		int total = settlementService.count(query);
 //		PageUtils pageUtils = new PageUtils(settlementList, total);
         query.put("state",1);
-        if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyid",ShiroUtils.getUser().getCompanyId());
-        } else {
-            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
-        }
+        query.put("companyid",ShiroUtils.getUser().getCompanyId());
         List<MemberDO> memberDOList = memberService.payList(query);
         int total = memberService.payCount(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);

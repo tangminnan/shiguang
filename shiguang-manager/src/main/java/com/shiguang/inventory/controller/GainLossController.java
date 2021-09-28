@@ -105,13 +105,7 @@ public class GainLossController {
 		String documentTime = simpleDateFormat.format(new Date());
 		model.addAttribute("documentTime",documentTime);
 		Map<String,Object> query = new HashMap<>();
-		if (null != ShiroUtils.getUser().getCompanyId()){
-			query.put("companyId",ShiroUtils.getUser().getCompanyId());
-		} else {
-			if (null != ShiroUtils.getUser().getStoreNum()){
-				query.put("departNumber",ShiroUtils.getUser().getStoreNum());
-			}
-		}
+		query.put("companyId",ShiroUtils.getUser().getCompanyId());
 		List<PositionDO> positionDOList = positionService.list(query);
 		model.addAttribute("positionDOList",positionDOList);
 	    return "inventory/gainLoss/add";

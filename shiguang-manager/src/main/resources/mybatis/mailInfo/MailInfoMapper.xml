@@ -10,13 +10,10 @@
     <select id="list" resultType="com.shiguang.mailInfo.domain.MailInfoDO">
         select mi.`id`,mi.`sale_number`,mi.`card_member`,mi.`member_name`,mi.`member_tel`,mi.`member_areacode`,mi.`consignee`,
         mi.`mail_form`,mi.`track_number`,mi.`enter_name`,mi.`enter_timr`,mi.`address`,mi.`insured`,mi.`insured_money`
-        from mail_info mi left join member m on m.card_number = mi.card_member left join department d on d.depart_number = m.depart_number
+        from mail_info mi left join member m on m.card_number = mi.card_member
         <where>
             <if test="id != null and id != ''"> and mi.id = #{id} </if>
-            <if test="departNumber != null and departNumber != ''">
-                and m.depart_number = ${departNumber}
-            </if>
-            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
             <if test="saleNumber != null and saleNumber != ''"> and mi.sale_number like concat('%', #{saleNumber},'%') </if>
             <if test="cardMember != null and cardMember != ''"> and mi.card_member like concat('%', #{cardMember},'%') </if>
             <if test="memberName != null and memberName != ''"> and mi.member_name like concat('%', #{memberName},'%') </if>
@@ -45,22 +42,23 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from mail_info
+        select count(*) from mail_info mi left join member m on m.card_number = mi.card_member
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
-            <if test="cardMember != null and cardMember != ''"> and card_member like concat('%', #{cardMember},'%') </if>
-            <if test="memberName != null and memberName != ''"> and member_name like concat('%', #{memberName},'%') </if>
-            <if test="memberTel != null and memberTel != ''"> and member_tel = #{memberTel} </if>
-            <if test="memberAreacode != null and memberAreacode != ''"> and member_areacode = #{memberAreacode} </if>
-            <if test="consignee != null and consignee != ''"> and consignee = #{consignee} </if>
-            <if test="mailForm != null and mailForm != ''"> and mail_form = #{mailForm} </if>
-            <if test="enterName != null and enterName != ''"> and enter_name = #{enterName} </if>
-            <if test="enterTimr != null and enterTimr != ''"> and enter_timr = #{enterTimr} </if>
-            <if test="address != null and address != ''"> and address = #{address} </if>
-            <if test="insured != null and insured != ''"> and insured = #{insured} </if>
-            <if test="insuredMoney != null and insuredMoney != ''"> and insured_money = #{insuredMoney} </if>
-            and status = 0
+            <if test="id != null and id != ''"> and mi.id = #{id} </if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
+            <if test="saleNumber != null and saleNumber != ''"> and mi.sale_number like concat('%', #{saleNumber},'%') </if>
+            <if test="cardMember != null and cardMember != ''"> and mi.card_member like concat('%', #{cardMember},'%') </if>
+            <if test="memberName != null and memberName != ''"> and mi.member_name like concat('%', #{memberName},'%') </if>
+            <if test="memberTel != null and memberTel != ''"> and mi.member_tel = #{memberTel} </if>
+            <if test="memberAreacode != null and memberAreacode != ''"> and mi.member_areacode = #{memberAreacode} </if>
+            <if test="consignee != null and consignee != ''"> and mi.consignee = #{consignee} </if>
+            <if test="mailForm != null and mailForm != ''"> and mi.mail_form = #{mailForm} </if>
+            <if test="enterName != null and enterName != ''"> and mi.enter_name = #{enterName} </if>
+            <if test="enterTimr != null and enterTimr != ''"> and mi.enter_timr = #{enterTimr} </if>
+            <if test="address != null and address != ''"> and mi.address = #{address} </if>
+            <if test="insured != null and insured != ''"> and mi.insured = #{insured} </if>
+            <if test="insuredMoney != null and insuredMoney != ''"> and mi.insured_money = #{insuredMoney} </if>
+            and mi.status = 0
         </where>
     </select>
 
