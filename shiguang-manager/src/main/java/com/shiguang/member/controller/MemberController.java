@@ -62,37 +62,25 @@ public class MemberController {
         //查询列表数据
         Query query = new Query(params);
         query.put("state",1);
-        if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyId",ShiroUtils.getUser().getCompanyId());
-        } else {
-            if (null != ShiroUtils.getUser().getStoreNum()){
-                query.put("departNumber",ShiroUtils.getUser().getStoreNum());
-            }
-        }
+        query.put("companyId",ShiroUtils.getUser().getCompanyId());
         if (null != params.get("ageStart") && !"".equals(params.get("ageStart"))){
             query.put("agestart",Long.parseLong(params.get("ageStart").toString()));
-            query.put("departNumber","");
             query.put("companyId","");
         }
         if (null != params.get("ageEnd")&& !"".equals(params.get("ageEnd"))){
             query.put("ageend",Long.parseLong(params.get("ageEnd").toString()));
-            query.put("departNumber","");
             query.put("companyId","");
         }
         if (null != params.get("sex") && !"".equals(params.get("sex"))){
-            query.put("departNumber","");
             query.put("companyId","");
         }
         if (null != params.get("phone1") && !"".equals(params.get("phone1"))){
-            query.put("departNumber","");
             query.put("companyId","");
         }
         if (null != params.get("name") && !"".equals(params.get("name"))){
-            query.put("departNumber","");
             query.put("companyId","");
         }
         if (null != params.get("cardNumber") && !"".equals(params.get("cardNumber"))){
-            query.put("departNumber","");
             query.put("companyId","");
         }
         List<MemberDO> memberList = memberService.list(query);
@@ -297,6 +285,7 @@ public class MemberController {
         if (null != ShiroUtils.getUser().getStoreNum()){
             member.setDepartNumber(ShiroUtils.getUser().getStoreNum());
         }
+        member.setCompanyId(ShiroUtils.getUser().getCompanyId());
         if(memberService.save(member)>0){
             return R.ok();
         }

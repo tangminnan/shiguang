@@ -4,29 +4,25 @@
 <mapper namespace="com.shiguang.member.dao.MemberDao">
 
     <select id="get" resultType="com.shiguang.member.domain.MemberDO">
-		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member where id = #{value}
+		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`company_id`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member where id = #{value}
 	</select>
 
     <select id="getCardNumber" resultType="com.shiguang.member.domain.MemberDO">
-		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member where card_number = #{value}
+		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`company_id`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member where card_number = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.member.domain.MemberDO">
-        select m.`id`,m.`name`,m.`member_option`,m.`card_number`,m.`sex`,m.`depart_number`,m.`birthday_year`,m.`birthday_month`,
+        select m.`id`,m.`name`,m.`member_option`,m.`card_number`,m.`sex`,m.`depart_number`,m.`company_id`,m.`birthday_year`,m.`birthday_month`,
         m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,
         m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,
         m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,
         m.`address`,m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status`,m.`state`
         from member m
-        left join department d on d.depart_number = m.depart_number
         <where>
             <if test="id != null and id != ''"> and m.id = #{id} </if>
             <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
             <if test="memberOption != null and memberOption != ''"> and m.member_option = #{memberOption} </if>
-            <if test="departNumber != null and departNumber != ''">
-             and m.depart_number = ${departNumber}
-            </if>
-            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
             <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
@@ -82,12 +78,10 @@
     <select id="payList" resultType="com.shiguang.member.domain.MemberDO">
     select m.`id`,m.`name`,m.`card_number`,c.`id` as costId,c.`is_sale`,c.`type`,c.`sale_number`,m.`sex`,m.`depart_number`,m.`birthday_year`,m.`birthday_month`,m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,m.`address`,m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status` from member m
     join cost c on c.member_number = m.card_number
-     join department d on d.depart_number = m.depart_number
     <where>
         <if test="id != null and id != ''"> and m.id = #{id} </if>
         <if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
-        <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
-        <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
+        <if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
         <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
         <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
         <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
@@ -120,12 +114,11 @@
         count(*) from (
         select count(m.id) from member m
         join cost c on c.member_number = m.card_number
-        join department d on d.depart_number = m.depart_number
         <where>
             <if test="id != null and id != ''"> and m.id = #{id} </if>
             <if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
             <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
-            <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
+            <if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
             <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
@@ -142,15 +135,11 @@
 
     <select id="count" resultType="int">
         select count(*) from member m
-        left join department d on d.depart_number = m.depart_number
         <where>
             <if test="id != null and id != ''"> and m.id = #{id} </if>
             <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
             <if test="memberOption != null and memberOption != ''"> and m.member_option = #{memberOption} </if>
-            <if test="departNumber != null and departNumber != ''">
-                and m.depart_number = ${departNumber}
-            </if>
-            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
             <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
@@ -200,6 +189,7 @@
 			`card_number`,
 			`sex`,
 			`depart_number`,
+			`company_id`，
 			`birthday_year`,
 			`birthday_month`,
 			`birthday_day`,
@@ -243,6 +233,7 @@
 			#{cardNumber},
 			#{sex},
 			#{departNumber},
+			#{companyId},
 			#{birthdayYear},
 			#{birthdayMonth},
 			#{birthdayDay},

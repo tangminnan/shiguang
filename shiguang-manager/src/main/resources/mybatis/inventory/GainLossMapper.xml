@@ -26,9 +26,6 @@
             <if test="documentDate != null and documentDate != ''"> and gl.document_date = #{documentDate} </if>
             <if test="recenuePosition != null and recenuePosition != ''"> and gl.recenue_position = #{recenuePosition} </if>
             <if test="singleName != null and singleName != ''"> and gl.single_name = #{singleName} </if>
-            <if test="departNumber != null and departNumber != ''">
-                and d.depart_number = ${departNumber}
-            </if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
         </where>
         <choose>
@@ -58,9 +55,6 @@
             <if test="documentDate != null and documentDate != ''"> and gl.document_date = #{documentDate} </if>
             <if test="recenuePosition != null and recenuePosition != ''"> and gl.recenue_position = #{recenuePosition} </if>
             <if test="singleName != null and singleName != ''"> and gl.single_name = #{singleName} </if>
-            <if test="departNumber != null and departNumber != ''">
-                and d.depart_number = ${departNumber}
-            </if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
         </where>
     </select>
