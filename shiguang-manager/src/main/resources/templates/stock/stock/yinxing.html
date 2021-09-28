@@ -119,42 +119,14 @@
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input type="button" value="查询" onclick="getYinxing()"/>
+        <input type="button" value="查询" onclick="reLoad()"/>
         <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
 
 <!--商品信息-->
 <div class="m40 tabS msgBoxDD">
-    <table border="0" cellspacing="0" cellpadding="0" class="buyBtns" id="buyBtns">
-        <tbody>
-        <tr class="thead">
-            <td>
-                多选
-                <!--<input type="checkbox"/>-->
-            </td>
-            <td>商品代码</td>
-            <td>商品名称</td>
-            <td>单位</td>
-            <td>厂家型号</td>
-            <td>标准零售价格</td>
-            <td>含税成本</td>
-            <td>球镜</td>
-            <td>柱镜</td>
-            <td>曲率</td>
-            <td>直径</td>
-            <td>使用类型</td>
-            <td>抛弃型分类</td>
-            <td style="display: none">批发价格</td>
-            <td style="display: none">调货成本</td>
-            <td style="display: none">商品条码</td>
-            <td style="display: none">商品品种</td>
-            <td style="display: none">镜片类型</td>
-            <td style="display: none">医疗器械经营许可证</td>
-            <td style="display: none">id</td>
-        </tr>
-        </tbody>
-    </table>
+    <table border="0" cellspacing="0" cellpadding="0" class="buyBtns"></table>
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/stock/stock.js"></script>
@@ -162,72 +134,147 @@
     $(document).ready(function () {
         var mfrsid = $("#mfrsid").val();
         $(".val").remove();
-        $.ajax({
-            url: '/stock/stock/selectYxcp',
-            type: 'post',
-            dataType: "json",
-            data: {
-                'mfrsid': mfrsid
-            },
-            success: function (xml) {
-                for (var i = 0; i < xml.length; i++) {
-                    if(null == xml[i].unitname){
-                        xml[i].unitname="";
-                    }
-                    if(null == xml[i].factory){
-                        xml[i].factory="";
-                    }
-                    if(null == xml[i].sph){
-                        xml[i].sph="";
-                    }
-                    if(null == xml[i].cyl){
-                        xml[i].cyl="";
-                    }
-                    if(null == xml[i].curvature){
-                        xml[i].curvature="";
-                    }
-                    if(null == xml[i].diameter){
-                        xml[i].diameter="";
-                    }
-                    if(null == xml[i].usageName){
-                        xml[i].usageName="";
-                    }
-                    if(null == xml[i].typeName){
-                        xml[i].typeName="";
-                    }
-                    if(null == xml[i].classtype){
-                        xml[i].classtype="";
-                    }
-                    if(null == xml[i].medicinecode){
-                        xml[i].medicinecode="";
-                    }
+        $(function () {
+            load();
+        });
+        function load() {
+            $('#exampleTable')
+                .bootstrapTable(
+                    {
+                        method: 'get', // 服务器数据的请求方式 get or post
+                        url:  '/stock/stock/selectYxcp', // 服务器数据的加载地址
+                        //	showRefresh : true,
+                        //	showToggle : true,
+                        //	showColumns : true,
+                        iconSize: 'outline',
+                        toolbar: '#exampleToolbar',
+                        striped: true, // 设置为true会有隔行变色效果
+                        dataType: "json", // 服务器返回的数据类型
+                        pagination: true, // 设置为true会在底部显示分页条
+                        // queryParamsType : "limit",
+                        // //设置为limit则会发送符合RESTFull格式的参数
+                        singleSelect: false, // 设置为true将禁止多选
+                        // contentType : "application/x-www-form-urlencoded",
+                        // //发送到服务器的数据编码类型
+                        pageSize: 10, // 如果设置了分页，每页数据条数
+                        pageNumber: 1, // 如果设置了分布，首页页码
+                        //search : true, // 是否显示搜索框
+                        showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                        sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                        queryParams: function (params) {
+                            return {
+                                //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                limit: params.limit,
+                                offset: params.offset,
+                                producNum  : $("#producNum").val(),
+                                producCode  : $("#producCode").val(),
+                                producName  : $("#producName").val(),
+                                mfrsid  : $("#mfrsid").val(),
+                                brandid  : $("#brandid").val(),
+                                brandname  : $("#brandname").val(),
+                                producFactorycolor  : $("#producFactorycolor").val(),
+                                size  : $("#size").val(),
+                                producFactory  : $("#producFactory").val(),
+                                factory  : $("#factory").val(),
+                                retailPrice  : $("#retailPrice").val(),
+                                retailPrice2  : $("#retailPrice2").val()
 
-                    $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                        "<td name='producNum'>" + xml[i].producNum + "</td>\n" +
-                        "<td name='producName'>" + xml[i].producName + "</td>\n" +
-                        "<td name='unitname'>" + xml[i].unitname + "</td>\n" +
-                        "<td name='factory'>" + xml[i].factory + "</td>\n" +
-                        "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                        "<td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
-                        "<td name='sph'>" + xml[i].sph + "</td>\n" +
-                        "<td name='cyl'>" + xml[i].cyl + "</td>\n" +
-                        "<td name='curvature'>" + xml[i].curvature + "</td>\n" +
-                        "<td name='diameter'>" + xml[i].diameter + "</td>\n" +
-                        "<td name='usageName'>" + xml[i].usageName + "</td>\n" +
-                        "<td name='typeName'>" + xml[i].typeName + "</td>\n" +
-                        "<td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
-                        "<td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
-                        "<td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
-                        "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>" +
-                        "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
-                        "<td name='medicinecode' style='display: none'>" + xml[i].medicinecode + "</td>" +
-                        "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>" +
-                        "</tr>>");
-                }
-            }
-        })
+                            };
+                        },
+                        columns: [
+                            {
+                                checkbox: true
+                            },
+                            {
+                                field : 'producNum',
+                                title : '商品代码'
+                            },
+                            {
+                                field: 'producName',
+                                title: '商品名称'
+                            },
+                                {
+                                    field: 'unitname',
+                                    title: '单位'
+                                },
+
+                            {
+                                field: 'factory',
+                                title: '厂家型号'
+                            },
+
+                            {
+                                field: 'unitname',
+                                title: '单位'
+                            },
+
+                            {
+                                field: 'retailPrice',
+                                title: '标准零售价格'
+                            },
+                            {
+                                field: 'taxPrice',
+                                title: '含税成本'
+                            },
+                            {
+                                field: 'sph',
+                                title: '球镜'
+                            },
+                            {
+                                field: 'cyl',
+                                title: '柱镜'
+                            },
+                            {
+                                field: 'curvature',
+                                title: '曲率'
+                            },
+                            {
+                                field: 'diameter',
+                                title: '直径'
+                            },
+                            {
+                                field: 'usageName',
+                                title: '使用类型'
+                            },
+                            {
+                                field: 'typeName',
+                                title: '抛弃型分类'
+                            },
+
+                            // {
+                            //     field: 'tradePrice',
+                            //     title: '批发价格'
+                            // },
+                            // {
+                            //     field: 'transferPrice',
+                            //     title: '调货成本'
+                            // },// {
+                            //     field: 'producCode',
+                            //     title: '商品条码'
+                            // },// {
+                            //     field: 'brandname',
+                            //     title: '商品品种'
+                            // },
+                            // {
+                            //     field: 'medicinecode',
+                            //     title: '医疗器械经营许可证'
+                            // },// {
+                            //     field: 'classtype',
+                            //     title: '镜片类型'
+                            // },// {
+                            //     field: 'goodsxinxiid',
+                            //     title: 'id'
+                            // },
+                        ]
+                    });
+
+        }
     });
 
+    function reLoad() {
+        // $(".val").remove();
+        $('#exampleTable').bootstrapTable('refresh');
+    }
     function getYinxing() {
         $(".val").remove();
         $(" .valYxcp").remove();
@@ -304,12 +351,7 @@
                             "<td name='factory'>" + xml[i].factory + "</td>\n" +
                             "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
                             "<td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
-                            "<td name='sph'>" + xml[i].sph + "</td>\n" +
-                            "<td name='cyl'>" + xml[i].cyl + "</td>\n" +
-                            "<td name='curvature'>" + xml[i].curvature + "</td>\n" +
-                            "<td name='diameter'>" + xml[i].diameter + "</td>\n" +
-                            "<td name='usageName'>" + xml[i].usageName + "</td>\n" +
-                            "<td name='typeName'>" + xml[i].typeName + "</td>\n" +
+
                             "<td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
                             "<td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
                             "<td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +

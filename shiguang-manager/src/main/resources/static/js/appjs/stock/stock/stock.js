@@ -91,23 +91,72 @@ function batchSelect() {
 
 // 选择单品
 function showCol() {
-    var check = $("input[name='one']:checked");//选中的复选框
+    var check = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     var objArray = [];
-    check.each(function () {
+    $.each(check, function(i, row) {
+        // ids[i] = row['id'];
         var obj = {};
-        var rowstr = $(this).parent("td").parent("tr");
-        var producNum = rowstr.find("[name='producNum']").html();//注意html()和val()
-        var producName = rowstr.find("[name='producName']").html();
-        var producFactory = rowstr.find("[name='producFactory']").html();
-        var unitname = rowstr.find("[name='unitname']").html();
-        var factory = rowstr.find("[name='factory']").html();
-        var retailPrice = rowstr.find("[name='retailPrice']").html();
-        var taxPrice = rowstr.find("[name='taxPrice']").html();
-        var producFactorycolor = rowstr.find("[name='producFactorycolor']").html();
-        var materialName = rowstr.find("[name='materialName']").html();
-        var size = rowstr.find("[name='size']").html();
-        var producCode = rowstr.find("[name='producCode']").html();
-        var brandname = rowstr.find("[name='brandname']").html();
+        if(null == row['producNum']){
+            var producNum  ="";
+        }else {
+            var producNum =  row['producNum'];
+        }
+        if(null == row['producName']){
+            var producName  ="";
+        }else {
+            var producName =  row['producName'] ;
+        }
+        if(null == row['producFactory']){
+            var producFactory  ="";
+        }else {
+            var producFactory =  row['producFactory'] ;
+        }
+        if(null == row['unitname']){
+            var unitname  ="";
+        }else {
+            var unitname =  row['unitname'] ;
+        }
+
+        if(null == row['factory']){
+            var factory  ="";
+        }else {
+            var factory =  row['factory'] ;
+        }
+        if(null == row['retailPrice']){
+            var retailPrice  ="";
+        }else {
+            var retailPrice =  row['retailPrice'] ;
+        }
+        if(null == row['taxPrice']){
+            var taxPrice  ="";
+        }else {
+            var taxPrice =  row['taxPrice'] ;
+        }
+        if(null == row['producFactorycolor']){
+            var producFactorycolor  ="";
+        }else {
+            var producFactorycolor =  row['producFactorycolor'] ;
+        }
+        if(null == row['materialName']){
+            var materialName  ="";
+        }else {
+            var materialName =  row['materialName'] ;
+        }
+        if(null == row['size']){
+            var size  ="";
+        }else {
+            var size =  row['size'] ;
+        }
+        if(null == row['producCode']){
+            var producCode  ="";
+        }else {
+            var producCode =  row['producCode'] ;
+        }
+        if(null == row['brandname']){
+            var brandname  ="";
+        }else {
+            var brandname =  row['brandname'] ;
+        }
         obj.producNum = producNum;
         obj.producName = producName;
         obj.producFactory = producFactory;
@@ -128,71 +177,186 @@ function showCol() {
         // obj.createTime = year + "-" + month + "-" + date;
         var createTime=new Date( +new Date() + 8 * 3600 * 1000 ).toJSON().substr(0,19).replace("T"," ");
         obj.createTime=createTime;
-        var tradePrice = rowstr.find("[name='tradePrice']").html();
+
+        if(null == row['tradePrice']){
+            var tradePrice  ="";
+        }else {
+            var tradePrice =  row['tradePrice'] ;
+        }
         obj.tradePrice = tradePrice;
-        var transferPrice = rowstr.find("[name='transferPrice']").html();
+
+        if(null == row['transferPrice']){
+            var transferPrice  ="";
+        }else {
+            var transferPrice =  row['transferPrice'] ;
+        }
         obj.transferPrice = transferPrice;
 
         //配件
-        var partsStyle = rowstr.find("[name='partsStyle']").html();
+        if(null == row['partsStyle']){
+            var partsStyle  ="";
+        }else {
+            var partsStyle =  row['partsStyle'] ;
+        }
         obj.partsStyle = partsStyle;
         //镜片
-        var sph = rowstr.find("[name='sph']").html();
+        if(null == row['sph']){
+            var sph  ="";
+        }else {
+            var sph =  row['sph'] ;
+        }
         obj.sph = sph;
-        var cyl = rowstr.find("[name='cyl']").html();
+        if(null == row['cyl']){
+            var cyl  ="";
+        }else {
+            var cyl =  row['cyl'] ;
+        }
         obj.cyl = cyl;
-        var lightbelow = rowstr.find("[name='lightbelow']").html();
+        if(null == row['lightbelow']){
+            var lightbelow  ="";
+        }else {
+            var lightbelow =  row['lightbelow'] ;
+        }
         obj.lightbelow = lightbelow;
-        var refractivityvalue = rowstr.find("[name='refractivityvalue']").html();
+        if(null == row['refractivityvalue']){
+            var refractivityvalue  ="";
+        }else {
+            var refractivityvalue =  row['refractivityvalue'] ;
+        }
         obj.refractivityvalue = refractivityvalue;
-        var lightName = rowstr.find("[name='lightName']").html();
+        if(null == row['lightName']){
+            var lightName  ="";
+        }else {
+            var lightName =  row['lightName'] ;
+        }
         obj.lightName = lightName;
-        var lensName = rowstr.find("[name='lensName']").html();
+        if(null == row['lensName']){
+            var lensName  ="";
+        }else {
+            var lensName =  row['lensName'] ;
+        }
+
         obj.lensName = lensName;
-        var gradualName = rowstr.find("[name='gradualName']").html();
+        if(null == row['gradualName']){
+            var gradualName  ="";
+        }else {
+            var gradualName =  row['gradualName'] ;
+        }
+
         obj.gradualName = gradualName;
-        var functionName = rowstr.find("[name='functionName']").html();
+        if(null == row['functionName']){
+            var functionName  ="";
+        }else {
+            var functionName =  row['functionName'] ;
+        }
+
         obj.functionName = functionName;
 
         //隐形
-        var curvature = rowstr.find("[name='curvature']").html();
+        if(null == row['curvature']){
+            var curvature  ="";
+        }else {
+            var curvature =  row['curvature'] ;
+        }
+
         obj.curvature = curvature;
-        var diameter = rowstr.find("[name='diameter']").html();
+        if(null == row['diameter']){
+            var diameter  ="";
+        }else {
+            var diameter =  row['diameter'] ;
+        }
+
         obj.diameter = diameter;
-        var usageName = rowstr.find("[name='usageName']").html();
+        if(null == row['usageName']){
+            var usageName  ="";
+        }else {
+            var usageName =  row['usageName'] ;
+        }
+
         obj.usageName = usageName;
-        var typeName = rowstr.find("[name='typeName']").html();
+        if(null == row['typeName']){
+            var typeName  ="";
+        }else {
+            var typeName =  row['typeName'] ;
+        }
+
         obj.typeName = typeName;
 
 
 
 
         //护理液
-        var mainCapacity = rowstr.find("[name='mainCapacity']").html();
+        if(null == row['mainCapacity']){
+            var mainCapacity  ="";
+        }else {
+            var mainCapacity =  row['mainCapacity'] ;
+        }
+
         obj.mainCapacity = mainCapacity;
-        var secondCapacity = rowstr.find("[name='secondCapacity']").html();
+        if(null == row['secondCapacity']){
+            var secondCapacity  ="";
+        }else {
+            var secondCapacity =  row['secondCapacity'] ;
+        }
+
         obj.secondCapacity = secondCapacity;
         //太阳镜
         //老花镜
-        var degrees = rowstr.find("[name='degrees']").html();
+        if(null == row['degrees']){
+            var degrees  ="";
+        }else {
+            var degrees =  row['degrees'] ;
+        }
+
         obj.degrees = degrees;
+        if(null == row['classtype']){
+            var classtype  ="";
+        }else {
+            var classtype =  row['classtype'] ;
+        }
 
-        var classtype = rowstr.find("[name='classtype']").html();
         obj.classtype = classtype;
+        if(null == row['producFactory']){
+            var producFactory  ="";
+        }else {
+            var producFactory =  row['producFactory'] ;
+        }
 
-        var producFactory = rowstr.find("[name='producFactory']").html();
         obj.producFactory = producFactory;
+        if(null == row['medicinecode']){
+            var medicinecode  ="";
+        }else {
+            var medicinecode =  row['medicinecode'] ;
+        }
 
-        var medicinecode = rowstr.find("[name='medicinecode']").html();
         obj.medicinecode = medicinecode;
-        var factory = rowstr.find("[name='factory']").html();
-        obj.factory = factory;
-        var classtype = rowstr.find("[name='classtype']").html();
-        obj.classtype = classtype;
-        var gdname = rowstr.find("[name='gdname']").html();
-        obj.gdname = gdname;
+        if(null == row['factory']){
+            var factory  ="";
+        }else {
+            var factory =  row['factory'] ;
+        }
 
-        var goodsxinxiid = rowstr.find("[name='goodsxinxiid']").html();
+        obj.factory = factory;
+        if(null == row['classtype']){
+            var classtype  ="";
+        }else {
+            var classtype =  row['classtype'] ;
+        }
+
+        obj.classtype = classtype;
+        if(null == row['gdname']){
+            var gdname  ="";
+        }else {
+            var gdname =  row['gdname'] ;
+        }
+
+        obj.gdname = gdname;
+        if(null == row['goodsxinxiid']){
+            var goodsxinxiid  ="";
+        }else {
+            var goodsxinxiid =  row['goodsxinxiid'] ;
+        }
+
         obj.goodsxinxiid = goodsxinxiid;
 
 

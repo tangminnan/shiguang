@@ -351,8 +351,6 @@ function batchRemove() {
 
 
 function showCol() {
-    alert("批调aaa")
-    // var check = $("input[name='one']:checked");//选中的复选框
     var check = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     var objArray = [];
     // alert(JSON.stringify(check));
@@ -368,25 +366,132 @@ function showCol() {
         var date = timeNow.getDate() > 10 ? timeNow.getDate() : "0" + timeNow.getDate();
         obj.createTime = year + "-" + month + "-" + date;
 
-        var goodsNum = row['goodsNum'];//注意html()和val()
-        var goodsCode = row['goodsCode'] ;
-        var goodsName = row['goodsName'] ;
-        var goodsCount = row['goodsCount'];
-        var gdname = row['gdname'] ;
-        var mfrsname = row['mfrsname'] ;
-        var factory = row['factory'] ;
-        var retailPrice = row['retailPrice'] ;
-        var priceSum = row['priceSum'] ;
-        var costPrice = row['costPrice'] ;
-        var costSum = row['costSum'] ;
-        var wholePrice = row['wholePrice'] ;
-        var wholeSum = row['wholeSum'] ;
-        var positionName = row['positionName'] ;
-        var batch = row['batch'];
-        var zhuceNumber = row['zhuceNumber'] ;
-        var produceDay = row['produceDay'] ;
-        var useday = row['useday'] ;
-        var classtype = row['classtype'] ;
+        if(null == row['goodsNum']){
+            var goodsNum ="";
+        }else {
+            var goodsNum = row['goodsNum'];
+        }
+
+        if(null == row['goodsCode']){
+            var goodsCode  ="";
+        }else {
+            var goodsCode = row['goodsCode'] ;
+        }
+
+        if(null == row['goodsName']){
+            var goodsName  ="";
+        }else {
+            var goodsName = row['goodsName'] ;
+
+        }
+        if(null == row['goodsCount']){
+            var goodsCount  ="";
+        }else {
+            var goodsCount = row['goodsCount'];
+        }
+
+        if(null == row['gdname']){
+            var gdname  ="";
+        }else {
+            var gdname = row['gdname'] ;
+        }
+
+        if(null == row['mfrsname']){
+            var mfrsname  ="";
+        }else {
+            var mfrsname = row['mfrsname'] ;
+        }
+
+        if(null == row['factory']){
+            var factory  ="";
+        }else {
+            var factory = row['factory'] ;
+        }
+
+        if(null == row['retailPrice']){
+            var retailPrice  ="";
+        }else {
+            var retailPrice = row['retailPrice'] ;
+        }
+
+        if(null == row['priceSum']){
+            var priceSum  ="";
+        }else {
+            var priceSum = row['priceSum'] ;
+        }
+
+        if(null == row['costPrice']){
+            var costPrice  ="";
+        }else {
+            var costPrice = row['costPrice'] ;
+        }
+
+        if(null == row['costSum']){
+            var costSum  ="";
+        }else {
+            var costSum = row['costSum'] ;
+        }
+
+        if(null == row['wholePrice']){
+            var wholePrice  ="";
+        }else {
+            var wholePrice = row['wholePrice'] ;
+        }
+
+        if(null == row['wholeSum']){
+            var wholeSum  ="";
+        }else {
+            var wholeSum = row['wholeSum'] ;
+        }
+
+        if(null == row['positionName']){
+            var positionName  ="";
+        }else {
+            var positionName = row['positionName'] ;
+        }
+
+        if(null == row['batch']){
+            var batch  ="";
+        }else {
+            var batch = row['batch'];
+        }
+
+        if(null == row['zhuceNumber']){
+            var zhuceNumber  ="";
+        }else {
+            var zhuceNumber = row['zhuceNumber'] ;
+        }
+
+        if(null == row['produceDay']){
+            var produceDay  ="";
+        }else {
+            var produceDay = row['produceDay'] ;
+        }
+
+        if(null == row['useday']){
+            var useday  ="";
+        }else {
+            var useday = row['useday'] ;
+        }
+
+        if(null == row['classtype']){
+            var classtype  ="";
+        }else {
+            var classtype = row['classtype'] ;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         obj.goodsNum = goodsNum;
         obj.goodsCode = goodsCode;
         obj.goodsName = goodsName;
@@ -409,17 +514,42 @@ function showCol() {
         obj.useday = useday;
         obj.classtype = classtype;
 
-        var mfrsid = row['mfrsid'] ;
+        if(null == row['mfrsid']){
+            var mfrsid  ="";
+        }else {
+            var mfrsid = row['mfrsid'] ;
+        }
+
         obj.mfrsid = mfrsid;
 
-        var brandname = row['brandname'] ;
+        if(null == row['brandname']){
+            var brandname  ="";
+        }else {
+            var brandname = row['brandname'] ;
+        }
+
         obj.brandname = brandname;
 
-        var unit = row['unit'] ;
+
+        if(null == row['unit']){
+            var unit  ="";
+        }else {
+            var unit = row['unit'] ;
+        }
         obj.unit = unit;
-        var goodsid = row['goodsid'] ;
+
+        if(null == row['goodsid']){
+            var goodsid  ="";
+        }else {
+            var goodsid = row['goodsid'] ;
+        }
         obj.goodsid = goodsid;
-        var goodsxinxiid = row['goodsxinxiid'] ;
+
+        if(null == row['goodsxinxiid']){
+            var goodsxinxiid  ="";
+        }else {
+            var goodsxinxiid = row['goodsxinxiid'] ;
+        }
         obj.goodsxinxiid = goodsxinxiid;
 
 

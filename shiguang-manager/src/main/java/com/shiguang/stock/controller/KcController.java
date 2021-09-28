@@ -74,39 +74,6 @@ public class KcController {
         return positionList;
     }
 
-    //    库存查询
-//    @ResponseBody
-//    @RequestMapping(value = "/selectKc")
-//    public List<StockDO> selectSg(String goodsNum, String goodsCode, String goodsName,
-//                                  Integer goodsType, String mfrsname,String brandname,String retailPrice, String retailPrice2,
-//                                  String xsstate, String positionId,String classtype,String outPosition, Model model) {
-//        Map<String, Object> map = new HashMap<>();
-//
-//        //———获取当前登录用户的公司id————
-//        String companyid=ShiroUtils.getUser().getCompanyId();
-//        if(companyid != null){
-//            map.put("companyid",companyid);
-//        }else if (companyid == null){
-//            String departNumber=ShiroUtils.getUser().getStoreNum();
-//            map.put("departNumber",departNumber);
-//        }
-//        map.put("goodsNum", goodsNum);
-//        map.put("goodsCode", goodsCode);
-//        map.put("goodsName", goodsName);
-//        map.put("goodsType", goodsType);
-//        map.put("mfrsname", mfrsname);
-//        map.put("brandname", brandname);
-//        map.put("retailPrice", retailPrice);
-//        map.put("retailPrice2", retailPrice2);
-//        map.put("xsstate", xsstate);
-//        map.put("positionId", positionId);
-//        map.put("classtype", classtype);
-//        map.put("status","0");
-//        map.put("outPosition",outPosition);
-//        List<StockDO> stockDOS = stockService.kccxList(map);
-//        model.addAttribute("stockDOS", stockDOS);
-//        return stockDOS;
-//    }
     //库存查询
     @ResponseBody
     @RequestMapping("/selectKc")

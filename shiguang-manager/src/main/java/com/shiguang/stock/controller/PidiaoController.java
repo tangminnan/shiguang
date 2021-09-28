@@ -81,7 +81,7 @@ public class PidiaoController {
 		if(null != ShiroUtils.getUser().getCompanyId()){
 			companyId = ShiroUtils.getUser().getCompanyId();
 			query.put("companyId",companyId);
-		}else if (companyId == ""){
+		}else if (null != ShiroUtils.getUser().getStoreNum()){
 			departNumber=ShiroUtils.getUser().getStoreNum();
 			query.put("departNumber",departNumber);
 		}

@@ -634,32 +634,20 @@ public class StockController {
 
     //镜架List
     @ResponseBody
-    @RequestMapping(value = "/selectjingjia")
-    public List<ProducaDO> selectjingjia(String producNum, String producCode, String producName,
-                                         String mfrsid, Integer brandid,String brandname,
-                                         String producFactorycolor, String size, Integer materialid,
-                                         Integer technologyId, String producFactory, String factory,
-                                         String retailPrice, String retailPrice2,
-                                         Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("mfrsid", mfrsid);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("producFactorycolor", producFactorycolor);
-        map.put("sizes", size);
-        map.put("materialid", materialid);
-        map.put("technologyId", technologyId);
-        map.put("producFactory", producFactory);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        List<ProducaDO> producaDOList = stockService.selectJingjia(map);
-        model.addAttribute("producaDOList", producaDOList);
-        return producaDOList;
+    @RequestMapping("/selectjingjia")
+    public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<ProducaDO> producaDOList = stockService.selectJingjia(query);
+        int total = stockService.selectJingjiaCount(query);
+        PageUtils pageUtils = new PageUtils(producaDOList, total);
+        return pageUtils;
     }
+
+
+
+
+
 
     //跳转配件商品查询
     @GetMapping("/peijian/{mfrsid}/{mfrsname}")
@@ -672,29 +660,15 @@ public class StockController {
 
     //配件List
     @ResponseBody
-    @RequestMapping(value = "/selectpeijian")
-    public List<PartsDO> selectpeijian(String producNum, String producCode, String producName,
-                                       String mfrsid, Integer brandid,String brandname,
-                                       String partsStyle, String producFactory, String factory,
-                                       String retailPrice, String retailPrice2,
-                                       Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("mfrsid", mfrsid);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("partsStyle", partsStyle);
-        map.put("producFactory", producFactory);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        List<PartsDO> partsDOList = stockService.selectPeijian(map);
-        model.addAttribute("partsDOList", partsDOList);
-        return partsDOList;
+    @RequestMapping("/selectpeijian")
+    public PageUtils selectpeijian(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<PartsDO> partsDOList = stockService.selectPeijian(query);
+        int total = stockService.selectPeijianCount(query);
+        PageUtils pageUtils = new PageUtils(partsDOList, total);
+        return pageUtils;
     }
-
     //跳转镜片商品查询
     @GetMapping("/jingpian/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:jingpian")
@@ -722,59 +696,30 @@ public class StockController {
         return "/stock/stock/jingpian";
     }
 
+
     //镜片List-----------成品
     @ResponseBody
-    @RequestMapping(value = "/selectJpcp")
-    public List<JpcpDO> selectJpcp(String mfrsid,String producNum, String producCode, String producName,
-                                   Integer brandid,String brandname, Integer lensId,Integer refractivityid,Integer gradualId,
-                                   Integer lightId,Integer functionId, String factory,String retailPrice,String retailPrice2,
-                                   Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("mfrsid", mfrsid);
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("lensId", lensId);
-        map.put("refractivityid", refractivityid);
-        map.put("lightId", lightId);
-        map.put("functionId", functionId);
-        map.put("gradualId", gradualId);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        List<JpcpDO> jpcpDOList = stockService.selectJpcp(map);
-        model.addAttribute("jpcpDOList", jpcpDOList);
-        return jpcpDOList;
+    @RequestMapping("/selectJpcp")
+    public PageUtils selectJpcp(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<JpcpDO> jpcpDOList = stockService.selectJpcp(query);
+        int total = stockService.selectJpcpCount(query);
+        PageUtils pageUtils = new PageUtils(jpcpDOList, total);
+        return pageUtils;
+    }
+   //镜片List-----------定做
+    @ResponseBody
+    @RequestMapping("/selectJpdz")
+    public PageUtils selectJpdz(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<JpdzDO> jpdzDOList = stockService.selectJpdz(query);
+        int total = stockService.selectJpdzCount(query);
+        PageUtils pageUtils = new PageUtils(jpdzDOList, total);
+        return pageUtils;
     }
 
-    //镜片List-----------定做
-    @ResponseBody
-    @RequestMapping(value = "/selectJpdz")
-    public List<JpdzDO> selectJpdz(String mfrsid,String producNum, String producCode, String producName,
-                                   Integer brandid,String brandname, Integer lensId,Integer refractivityid,Integer gradualId,
-                                   Integer lightId,Integer functionId, String factory,String retailPrice,String retailPrice2,
-                                   Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("mfrsid", mfrsid);
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("lensId", lensId);
-        map.put("refractivityid", refractivityid);
-        map.put("lightId", lightId);
-        map.put("functionId", functionId);
-        map.put("gradualId", gradualId);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        List<JpdzDO> jpdzDOList = stockService.selectJpdz(map);
-        model.addAttribute("jpdzDOList", jpdzDOList);
-        return jpdzDOList;
-    }
     //跳转隐形商品查询
     @GetMapping("/yinxing/{mfrsid}/{mfrsname}")
     @RequiresPermissions("stock:stock:yinxing")
@@ -790,56 +735,30 @@ public class StockController {
         model.addAttribute("typeDOList", typeDOList);
         return "/stock/stock/yinxing";
     }
-
     //隐形List-----------成品
     @ResponseBody
-    @RequestMapping(value = "/selectYxcp")
-    public List<YxcpDO> selectYxcp(String mfrsid,String producNum, String producCode, String producName,
-                                   Integer brandid,String brandname,String producFactory,String factory,
-                                   String retailPrice,String retailPrice2,Integer usageId,Integer typeId,
-                                   Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("mfrsid", mfrsid);
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("producFactory", producFactory);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        map.put("usageId", usageId);
-        map.put("typeId", typeId);
-        List<YxcpDO> yxcpDOList = stockService.selectYxcp(map);
-        model.addAttribute("yxcpDOList", yxcpDOList);
-        return yxcpDOList;
+    @RequestMapping("/selectYxcp")
+    public PageUtils selectYxcp(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<YxcpDO> yxcpDOList = stockService.selectYxcp(query);
+        int total = stockService.selectYxcpCount(query);
+        PageUtils pageUtils = new PageUtils(yxcpDOList, total);
+        return pageUtils;
     }
-
     //隐形List-----------定做
     @ResponseBody
-    @RequestMapping(value = "/selectYxdz")
-    public List<YxdzDO> selectYxdz(String mfrsid,String producNum, String producCode, String producName,
-                                   Integer brandid,String brandname,String producFactory,String factory,
-                                   String retailPrice,String retailPrice2,Integer usageId,Integer typeId,
-                                   Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("mfrsid", mfrsid);
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("producFactory", producFactory);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        map.put("usageId", usageId);
-        map.put("typeId", typeId);
-        List<YxdzDO> yxdzDOList = stockService.selectYxdz(map);
-        model.addAttribute("yxdzDOList", yxdzDOList);
-        return yxdzDOList;
+    @RequestMapping("/selectYxdz")
+    public PageUtils selectYxdz(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<YxdzDO> yxdzDOList = stockService.selectYxdz(query);
+        int total = stockService.selectYxdzCount(query);
+        PageUtils pageUtils = new PageUtils(yxdzDOList, total);
+        return pageUtils;
     }
+
+
 
     //跳转护理液商品查询
     @GetMapping("/hly/{mfrsid}/{mfrsname}")
@@ -849,31 +768,18 @@ public class StockController {
         model.addAttribute("mfrsname", mfrsname);
         return "/stock/stock/hly";
     }
-
     //护理液
     @ResponseBody
-    @RequestMapping(value = "/selectHly")
-    public List<HlyDO> selectHly(String producNum, String producCode, String producName,String brandname,
-                                 String mfrsid, Integer brandid, String mainCapacity, String secondCapacity,
-                                 String producFactory, String factory,String retailPrice,String retailPrice2,
-                                 Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("mfrsid", mfrsid);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("mainCapacity", mainCapacity);
-        map.put("secondCapacity", secondCapacity);
-        map.put("producFactory", producFactory);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        List<HlyDO> hlyDOList = stockService.selectHly(map);
-        model.addAttribute("hlyDOList", hlyDOList);
-        return hlyDOList;
+    @RequestMapping("/selectHly")
+    public PageUtils selectHly(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<HlyDO> hlyDOList = stockService.selectHly(query);
+        int total = stockService.selectHlyCount(query);
+        PageUtils pageUtils = new PageUtils(hlyDOList, total);
+        return pageUtils;
     }
+
 
     //跳转太阳镜商品查询
     @GetMapping("/tyj/{mfrsid}/{mfrsname}")
@@ -886,28 +792,16 @@ public class StockController {
 
     //太阳镜
     @ResponseBody
-    @RequestMapping(value = "/selectTyj")
-    public List<TyjDO> selectTyj(String producNum, String producCode, String producName,
-                                 String brandname, String mfrsid, Integer brandid, String producFactorycolor, String size,
-                                 String producFactory, String factory,String retailPrice,String retailPrice2,
-                                 Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("mfrsid", mfrsid);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("producFactorycolor", producFactorycolor);
-        map.put("size", size);
-        map.put("producFactory", producFactory);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        List<TyjDO> tyjDOList = stockService.selectTyj(map);
-        model.addAttribute("tyjDOList", tyjDOList);
-        return tyjDOList;
+    @RequestMapping("/selectTyj")
+    public PageUtils selectTyj(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<TyjDO> tyjDOList = stockService.selectTyj(query);
+        int total = stockService.selectTyjCount(query);
+        PageUtils pageUtils = new PageUtils(tyjDOList, total);
+        return pageUtils;
     }
+
 
 
     //跳转老花镜商品查询
@@ -925,30 +819,16 @@ public class StockController {
 
     //老花镜
     @ResponseBody
-    @RequestMapping(value = "/selectLhj")
-    public List<OldlensDO> selectLhj(String producNum, String producCode, String producName,
-                                     String mfrsid, Integer brandid,String brandname,
-                                     String producFactorycolor, String size,Integer oldId,
-                                     String producFactory, String factory,String retailPrice,String retailPrice2,
-                                     Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("mfrsid", mfrsid);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("producFactorycolor", producFactorycolor);
-        map.put("size", size);
-        map.put("oldId", oldId);
-        map.put("producFactory", producFactory);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        List<OldlensDO> oldlensDOS = stockService.selectLhj(map);
-        model.addAttribute("oldlensDOS", oldlensDOS);
-        return oldlensDOS;
+    @RequestMapping("/selectLhj")
+    public PageUtils selectLhj(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<OldlensDO> oldlensDOS = stockService.selectLhj(query);
+        int total = stockService.selectLhjCount(query);
+        PageUtils pageUtils = new PageUtils(oldlensDOS, total);
+        return pageUtils;
     }
+
 
     //跳转耗材商品查询
     @GetMapping("/hc/{mfrsid}/{mfrsname}")
@@ -961,24 +841,14 @@ public class StockController {
 
     //耗材
     @ResponseBody
-    @RequestMapping(value = "/selectHc")
-    public List<HcDO> selectHc(String producNum, String producCode, String producName,
-                               String mfrsid, Integer brandid,String brandname,String retailPrice,String retailPrice2,
-                               String producFactory, String factory, Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("mfrsid", mfrsid);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("producFactory", producFactory);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        List<HcDO> hcDOList = stockService.selectHc(map);
-        model.addAttribute("hcDOList", hcDOList);
-        return hcDOList;
+    @RequestMapping("/selectHc")
+    public PageUtils selectHc(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<HcDO> hcDOList = stockService.selectHc(query);
+        int total = stockService.selectHcCount(query);
+        PageUtils pageUtils = new PageUtils(hcDOList, total);
+        return pageUtils;
     }
 
     //跳转视光商品查询
@@ -992,26 +862,15 @@ public class StockController {
 
     //视光
     @ResponseBody
-    @RequestMapping(value = "/selectSg")
-    public List<ShiguangDO> selectSg(String producNum, String producCode, String producName,
-                                     String mfrsid, Integer brandid,String brandname,String retailPrice,String retailPrice2,
-                                     String producFactory, String factory, Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("producNum", producNum);
-        map.put("producCode", producCode);
-        map.put("producName", producName);
-        map.put("mfrsid", mfrsid);
-        map.put("brandid", brandid);
-        map.put("brandname", brandname);
-        map.put("producFactory", producFactory);
-        map.put("factory", factory);
-        map.put("retailPrice", retailPrice);
-        map.put("retailPrice2", retailPrice2);
-        List<ShiguangDO> shiguangDOS = stockService.selectSg(map);
-        model.addAttribute("shiguangDOS", shiguangDOS);
-        return shiguangDOS;
+    @RequestMapping("/selectSg")
+    public PageUtils selectSg(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<ShiguangDO> shiguangDOS = stockService.selectSg(query);
+        int total = stockService.selectSgCount(query);
+        PageUtils pageUtils = new PageUtils(shiguangDOS, total);
+        return pageUtils;
     }
-
 
     /**
      * 浏览器打印二维码

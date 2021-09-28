@@ -200,10 +200,20 @@ public class StockServiceImpl implements StockService {
         return stockDao.selectJingjia(map);
     }
 
+    @Override
+    public int selectJingjiaCount(Map<String, Object> map) {
+        return stockDao.selectJingjiaCount(map);
+    }
+
     //<!--配件【商】【品】【查】【询】-->
     @Override
     public List<PartsDO> selectPeijian(Map<String, Object> map) {
         return stockDao.selectPeijian(map);
+    }
+
+    @Override
+    public int selectPeijianCount(Map<String, Object> map) {
+        return stockDao.selectPeijianCount(map);
     }
 
     //<!--镜片定做【商】【品】【查】【询】-->
@@ -212,10 +222,20 @@ public class StockServiceImpl implements StockService {
         return stockDao.selectJpdz(map);
     }
 
+    @Override
+    public int selectJpdzCount(Map<String, Object> map) {
+        return stockDao.selectJpdzCount(map);
+    }
+
     //<!--镜片成品【商】【品】【查】【询】-->
     @Override
     public List<JpcpDO> selectJpcp(Map<String, Object> map) {
         return stockDao.selectJpcp(map);
+    }
+
+    @Override
+    public int selectJpcpCount(Map<String, Object> map) {
+        return stockDao.selectJpcpCount(map);
     }
 
     //<!--隐形定做【商】【品】【查】【询】-->
@@ -224,10 +244,20 @@ public class StockServiceImpl implements StockService {
         return stockDao.selectYxdz(map);
     }
 
+    @Override
+    public int selectYxdzCount(Map<String, Object> map) {
+        return stockDao.selectYxdzCount(map);
+    }
+
     //<!--隐形成品【商】【品】【查】【询】-->
     @Override
     public List<YxcpDO> selectYxcp(Map<String, Object> map) {
         return stockDao.selectYxcp(map);
+    }
+
+    @Override
+    public int selectYxcpCount(Map<String, Object> map) {
+        return stockDao.selectYxdzCount(map);
     }
 
     //<!--护理液【商】【品】【查】【询】-->
@@ -236,10 +266,20 @@ public class StockServiceImpl implements StockService {
         return stockDao.selectHly(map);
     }
 
+    @Override
+    public int selectHlyCount(Map<String, Object> map) {
+        return stockDao.selectHlyCount(map);
+    }
+
     //<!--太阳镜【商】【品】【查】【询】-->
     @Override
     public List<TyjDO> selectTyj(Map<String, Object> map) {
         return stockDao.selectTyj(map);
+    }
+
+    @Override
+    public int selectTyjCount(Map<String, Object> map) {
+        return stockDao.selectTyjCount(map);
     }
 
     //<!--老花镜【商】【品】【查】【询】-->
@@ -248,17 +288,31 @@ public class StockServiceImpl implements StockService {
         return stockDao.selectLhj(map);
     }
 
+    @Override
+    public int selectLhjCount(Map<String, Object> map) {
+        return stockDao.selectLhjCount(map);
+    }
+
     //<!--耗材【商】【品】【查】【询】-->
     @Override
     public List<HcDO> selectHc(Map<String, Object> map) {
         return stockDao.selectHc(map);
     }
 
-    //<!--视光【商】【品】【查】【询】-->
+    @Override
+    public int selectHcCount(Map<String, Object> map) {
+        return stockDao.selectHcCount(map);
+    }
+//<!--视光【商】【品】【查】【询】-->
 
     @Override
     public List<ShiguangDO> selectSg(Map<String, Object> map) {
         return stockDao.selectSg(map);
+    }
+
+    @Override
+    public int selectSgCount(Map<String, Object> map) {
+        return stockDao.selectSgCount(map);
     }
 
     @Override

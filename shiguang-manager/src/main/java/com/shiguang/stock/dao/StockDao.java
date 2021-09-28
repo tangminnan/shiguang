@@ -93,36 +93,37 @@ public interface StockDao {
 
     //<!--镜架【商】【品】【查】【询】-->
     List<ProducaDO> selectJingjia(Map<String, Object> map);
-
+    int selectJingjiaCount(Map<String, Object> map);
     //<!--配件【商】【品】【查】【询】-->
     List<PartsDO> selectPeijian(Map<String, Object> map);
-
+    int selectPeijianCount(Map<String, Object> map);
     //<!--镜片定做【商】【品】【查】【询】-->
     List<JpdzDO> selectJpdz(Map<String, Object> map);
-
+    int selectJpdzCount(Map<String, Object> map);
     //<!--镜片成品【商】【品】【查】【询】-->
     List<JpcpDO> selectJpcp(Map<String, Object> map);
-
+    int selectJpcpCount(Map<String, Object> map);
     //<!--隐形定做【商】【品】【查】【询】-->
     List<YxdzDO> selectYxdz(Map<String, Object> map);
-
+    int selectYxdzCount(Map<String, Object> map);
     //<!--隐形成品【商】【品】【查】【询】-->
     List<YxcpDO> selectYxcp(Map<String, Object> map);
-
+    int selectYxcpCount(Map<String, Object> map);
     //<!--护理液【商】【品】【查】【询】-->
     List<HlyDO> selectHly(Map<String, Object> map);
-
+    int selectHlyCount(Map<String, Object> map);
     //<!--太阳镜【商】【品】【查】【询】-->
     List<TyjDO> selectTyj(Map<String, Object> map);
-
+    int selectTyjCount(Map<String, Object> map);
     //<!--老花镜【商】【品】【查】【询】-->
     List<OldlensDO> selectLhj(Map<String, Object> map);
-
+    int selectLhjCount(Map<String, Object> map);
     //<!--耗材【商】【品】【查】【询】-->
     List<HcDO> selectHc(Map<String, Object> map);
-
+    int selectHcCount(Map<String, Object> map);
     //<!--视光【商】【品】【查】【询】-->
     List<ShiguangDO> selectSg(Map<String, Object> map);
+    int selectSgCount(Map<String, Object> map);
 
     //查询该条码的库存数量
     StockDO getProduceCode(StockDO stockDO);
