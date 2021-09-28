@@ -51,5 +51,9 @@ public class WeiwaishujuServiceImpl implements WeiwaishujuService {
 	public int batchRemove(Long[] ids){
 		return weiwaishujuDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public List<WeiwaishujuDO> getWeiwaiShuju(Map<String, Object> map) {
+		return weiwaishujuDao.getWeiwaiShuju(map);
+	}
 }

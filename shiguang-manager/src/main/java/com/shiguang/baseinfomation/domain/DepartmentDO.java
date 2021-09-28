@@ -42,7 +42,36 @@ public class DepartmentDO implements Serializable {
     private String companyName;
     //状态(0:删除1:未删除)
     private Long state;
+    //仓位id
+    private Long positionId;
+    //仓位名称
+    private String positionName;
+    /**
+     * 设置：仓位id
+     */
+    public void setPositionId(Long positionId) {
+        this.positionId = positionId;
+    }
 
+    /**
+     * 获取：仓位id
+     */
+    public Long getPositionId() {
+        return positionId;
+    }
+    /**
+     * 设置：仓位名称
+     */
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
+
+    /**
+     * 获取：仓位名称
+     */
+    public String getPositionName() {
+        return positionName;
+    }
     /**
      * 设置：
      */

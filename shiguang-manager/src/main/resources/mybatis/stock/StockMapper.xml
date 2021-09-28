@@ -1394,7 +1394,7 @@
              <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
              <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
              <if test="brandname != null and brandname != ''">and brandname = #{brandname}</if>
-             <if test="goodsxinxiid != null and goodsxinxiid != ''">and goodsxinxiid = #{goodsxinxiid}</if>
+<!--             <if test="goodsxinxiid != null and goodsxinxiid != ''">and goodsxinxiid = #{goodsxinxiid}</if>-->
          </where>
         order by id
     </select>

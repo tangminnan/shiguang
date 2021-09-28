@@ -4,16 +4,24 @@
 <mapper namespace="com.shiguang.stock.dao.WeiwaiDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`changjia_number`,`shouhuo_people`,
-		`shouhuo_phone`,`shouhuo_address`,`beizhu`,`sale_number`,`mirror_time`,`goods_name`,`style`,`rl`,`count`,`sph`,`cyl`,
-		`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,`status`,`username`
+		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`position_id`,`position_name`,
+		`changjia_number`,`shouhuo_people`,
+		`shouhuo_phone`,`shouhuo_address`,`beizhu`,
+		`sale_number`,`mirror_time`,`goods_name`,`style`,`rl`,`count`,`sph`,`cyl`,
+		`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,
+		`sale_number2`,`mirror_time2`,`goods_name2`,`style2`,`rl2`,`count2`,`sph2`,`cyl2`,
+		`axial2`,`lightbelow2`,`lengjing2`,`diameter2`,`yaoqiu2`,`jd2`,`curvature2`,
+		`status`,`username`
 		from stock_weiwai where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`changjia_number`,
-		`shouhuo_people`,`shouhuo_phone`,`shouhuo_address`,`beizhu`,`sale_number`,`mirror_time`,`goods_name`,
+		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`position_id`,`position_name`,`changjia_number`,
+		`shouhuo_people`,`shouhuo_phone`,`shouhuo_address`,`beizhu`,
+		`sale_number`,`mirror_time`,`goods_name`,
 		`style`,`rl`,`count`,`sph`,`cyl`,`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,
+		`sale_number2`,`mirror_time2`,`goods_name2`,`style2`,`rl2`,`count2`,`sph2`,`cyl2`,
+		`axial2`,`lightbelow2`,`lengjing2`,`diameter2`,`yaoqiu2`,`jd2`,`curvature2`,
 		`status`,`username`
 		from stock_weiwai
         <where>  
@@ -23,11 +31,15 @@
 		  		  <if test="eyeStyle != null and eyeStyle != ''"> and eye_style = #{eyeStyle} </if>
 		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
 		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+		  		  <if test="positionName != null and positionName != ''"> and position_name = #{positionName} </if>
 		  		  <if test="changjiaNumber != null and changjiaNumber != ''"> and changjia_number = #{changjiaNumber} </if>
 		  		  <if test="shouhuoPeople != null and shouhuoPeople != ''"> and shouhuo_people = #{shouhuoPeople} </if>
 		  		  <if test="shouhuoPhone != null and shouhuoPhone != ''"> and shouhuo_phone = #{shouhuoPhone} </if>
 		  		  <if test="shouhuoAddress != null and shouhuoAddress != ''"> and shouhuo_address = #{shouhuoAddress} </if>
 		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+
 		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
@@ -43,6 +55,23 @@
 		  		  <if test="yaoqiu != null and yaoqiu != ''"> and yaoqiu = #{yaoqiu} </if>
 		  		  <if test="jd != null and jd != ''"> and jd = #{jd} </if>
 		  		  <if test="curvature != null and curvature != ''"> and curvature = #{curvature} </if>
+
+			<if test="saleNumber2 != null and saleNumber2 != ''"> and sale_number2 = #{saleNumber2} </if>
+			<if test="mirrorTime2 != null and mirrorTime2 != ''"> and mirror_time2 = #{mirrorTime2} </if>
+			<if test="goodsName2 != null and goodsName2 != ''"> and goods_name2 = #{goodsName2} </if>
+			<if test="style2 != null and style2 != ''"> and style2 = #{style2} </if>
+			<if test="rl2 != null and rl != ''"> and rl2 = #{rl2} </if>
+			<if test="count2 != null and count2 != ''"> and count2 = #{count2} </if>
+			<if test="sph2 != null and sph2 != ''"> and sph2 = #{sph2} </if>
+			<if test="cyl2 != null and cyl2 != ''"> and cyl2 = #{cyl2} </if>
+			<if test="axial2 != null and axial2 != ''"> and axial2 = #{axial2} </if>
+			<if test="lightbelow2 != null and lightbelow2 != ''"> and lightbelow2 = #{lightbelow2} </if>
+			<if test="lengjing2 != null and lengjing2 != ''"> and lengjing2 = #{lengjing2} </if>
+			<if test="diameter2 != null and diameter2 != ''"> and diameter2 = #{diameter2} </if>
+			<if test="yaoqiu2 != null and yaoqiu2 != ''"> and yaoqiu2 = #{yaoqiu2} </if>
+			<if test="jd2 != null and jd2 != ''"> and jd2 = #{jd2} </if>
+			<if test="curvature2 != null and curvature2 != ''"> and curvature2 = #{curvature2} </if>
+
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
 		  		</where>
@@ -68,11 +97,15 @@
 		  		  <if test="eyeStyle != null and eyeStyle != ''"> and eye_style = #{eyeStyle} </if>
 		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
 		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+			 <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+			 <if test="positionName != null and positionName != ''"> and position_name = #{positionName} </if>
 		  		  <if test="changjiaNumber != null and changjiaNumber != ''"> and changjia_number = #{changjiaNumber} </if>
 		  		  <if test="shouhuoPeople != null and shouhuoPeople != ''"> and shouhuo_people = #{shouhuoPeople} </if>
 		  		  <if test="shouhuoPhone != null and shouhuoPhone != ''"> and shouhuo_phone = #{shouhuoPhone} </if>
 		  		  <if test="shouhuoAddress != null and shouhuoAddress != ''"> and shouhuo_address = #{shouhuoAddress} </if>
 		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+
 		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
@@ -88,6 +121,23 @@
 		  		  <if test="yaoqiu != null and yaoqiu != ''"> and yaoqiu = #{yaoqiu} </if>
 		  		  <if test="jd != null and jd != ''"> and jd = #{jd} </if>
 		  		  <if test="curvature != null and curvature != ''"> and curvature = #{curvature} </if>
+
+			 <if test="saleNumber2 != null and saleNumber2 != ''"> and sale_number2 = #{saleNumber2} </if>
+			 <if test="mirrorTime2 != null and mirrorTime2 != ''"> and mirror_time2 = #{mirrorTime2} </if>
+			 <if test="goodsName2 != null and goodsName2 != ''"> and goods_name2 = #{goodsName2} </if>
+			 <if test="style2 != null and style2 != ''"> and style2 = #{style2} </if>
+			 <if test="rl2 != null and rl != ''"> and rl2 = #{rl2} </if>
+			 <if test="count2 != null and count2 != ''"> and count2 = #{count2} </if>
+			 <if test="sph2 != null and sph2 != ''"> and sph2 = #{sph2} </if>
+			 <if test="cyl2 != null and cyl2 != ''"> and cyl2 = #{cyl2} </if>
+			 <if test="axial2 != null and axial2 != ''"> and axial2 = #{axial2} </if>
+			 <if test="lightbelow2 != null and lightbelow2 != ''"> and lightbelow2 = #{lightbelow2} </if>
+			 <if test="lengjing2 != null and lengjing2 != ''"> and lengjing2 = #{lengjing2} </if>
+			 <if test="diameter2 != null and diameter2 != ''"> and diameter2 = #{diameter2} </if>
+			 <if test="yaoqiu2 != null and yaoqiu2 != ''"> and yaoqiu2 = #{yaoqiu2} </if>
+			 <if test="jd2 != null and jd2 != ''"> and jd2 = #{jd2} </if>
+			 <if test="curvature2 != null and curvature2 != ''"> and curvature2 = #{curvature2} </if>
+
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
 		  		</where>
@@ -102,11 +152,15 @@
 			`eye_style`, 
 			`zhidan_people`, 
 			`mfrsid`, 
-			`changjia_number`, 
+			`mfrsname`,
+			`position_id`,
+			`position_name`,
+			`changjia_number`,
 			`shouhuo_people`, 
 			`shouhuo_phone`, 
 			`shouhuo_address`, 
-			`beizhu`, 
+			`beizhu`,
+
 			`sale_number`, 
 			`mirror_time`, 
 			`goods_name`, 
@@ -120,8 +174,25 @@
 			`lengjing`, 
 			`diameter`, 
 			`yaoqiu`, 
-			`jd`, 
+			`jd`,
 			`curvature`,
+
+			`sale_number2`,
+			`mirror_time2`,
+			`goods_name2`,
+			`style2`,
+			`rl2`,
+			`count2`,
+			`sph2`,
+			`cyl2`,
+			`axial2`,
+			`lightbelow2`,
+			`lengjing2`,
+			`diameter2`,
+			`yaoqiu2`,
+			`jd2`,
+			`curvature2`,
+
 			`status`,
 			`username`
 		)
@@ -133,11 +204,15 @@
 			#{eyeStyle}, 
 			#{zhidanPeople}, 
 			#{mfrsid}, 
-			#{changjiaNumber}, 
+			#{mfrsname},
+			#{positionId},
+			#{positionName},
+			#{changjiaNumber},
 			#{shouhuoPeople}, 
 			#{shouhuoPhone}, 
 			#{shouhuoAddress}, 
-			#{beizhu}, 
+			#{beizhu},
+
 			#{saleNumber}, 
 			#{mirrorTime}, 
 			#{goodsName}, 
@@ -153,6 +228,24 @@
 			#{yaoqiu}, 
 			#{jd}, 
 			#{curvature},
+
+			#{saleNumber2},
+			#{mirrorTime2},
+			#{goodsName2},
+			#{style2},
+			#{rl2},
+			#{count2},
+			#{sph2},
+			#{cyl2},
+			#{axial2},
+			#{lightbelow2},
+			#{lengjing2},
+			#{diameter2},
+			#{yaoqiu2},
+			#{jd2},
+			#{curvature2},
+
+
 			#{status},
 			#{username}
 		)
@@ -166,11 +259,15 @@
 			<if test="eyeStyle != null">`eye_style` = #{eyeStyle}, </if>
 			<if test="zhidanPeople != null">`zhidan_people` = #{zhidanPeople}, </if>
 			<if test="mfrsid != null">`mfrsid` = #{mfrsid}, </if>
+			<if test="mfrsname != null">`mfrsname` = #{mfrsname}, </if>
+			<if test="positionId != null">`position_id` = #{positionId}, </if>
+			<if test="positionName != null">`position_name` = #{positionName}, </if>
 			<if test="changjiaNumber != null">`changjia_number` = #{changjiaNumber}, </if>
 			<if test="shouhuoPeople != null">`shouhuo_people` = #{shouhuoPeople}, </if>
 			<if test="shouhuoPhone != null">`shouhuo_phone` = #{shouhuoPhone}, </if>
 			<if test="shouhuoAddress != null">`shouhuo_address` = #{shouhuoAddress}, </if>
 			<if test="beizhu != null">`beizhu` = #{beizhu}, </if>
+
 			<if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
 			<if test="mirrorTime != null">`mirror_time` = #{mirrorTime}, </if>
 			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
@@ -186,6 +283,24 @@
 			<if test="yaoqiu != null">`yaoqiu` = #{yaoqiu}, </if>
 			<if test="jd != null">`jd` = #{jd}, </if>
 			<if test="curvature != null">`curvature` = #{curvature},</if>
+
+			<if test="saleNumber2 != null">`sale_number2` = #{saleNumber2}, </if>
+			<if test="mirrorTime2 != null">`mirror_time2` = #{mirrorTime2}, </if>
+			<if test="goodsName2 != null">`goods_name2` = #{goodsName2}, </if>
+			<if test="style2 != null">`style2` = #{style2}, </if>
+			<if test="rl2 != null">`rl2` = #{rl2}, </if>
+			<if test="count2 != null">`count2` = #{count2}, </if>
+			<if test="sph2 != null">`sph2` = #{sph2}, </if>
+			<if test="cyl2 != null">`cyl2` = #{cyl2}, </if>
+			<if test="axial2 != null">`axial2` = #{axial2}, </if>
+			<if test="lightbelow2 != null">`lightbelow2` = #{lightbelow2}, </if>
+			<if test="lengjing2 != null">`lengjing2` = #{lengjing2}, </if>
+			<if test="diameter2 != null">`diameter2` = #{diameter2}, </if>
+			<if test="yaoqiu2 != null">`yaoqiu2` = #{yaoqiu2}, </if>
+			<if test="jd2 != null">`jd2` = #{jd2}, </if>
+			<if test="curvature2 != null">`curvature2` = #{curvature2},</if>
+
+
 			<if test="status != null">`status` = #{status},</if>
 			<if test="username != null">`username` = #{username}</if>
 		</set>
@@ -237,8 +352,9 @@
 		</where>
 	</select>
 	<select id="phoneOrAddres"  resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
-		select depart_tel,depart_address from department
-		where depart_number = #{departNumber}
+		SELECT d.depart_number,d.depart_tel,d.depart_address,p.position_id,p.position_name
+		FROM department d JOIN c_position p on d.depart_number = p.depart_number
+		where d.depart_number = #{departNumber}
 	</select>
 	<select id="selectDepartment"  resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
 	select id,depart_name from department

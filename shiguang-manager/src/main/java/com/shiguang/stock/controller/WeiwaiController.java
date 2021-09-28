@@ -11,6 +11,7 @@ import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.common.utils.*;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.product.domain.HcDO;
+import com.shiguang.stock.domain.StockDO;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,8 +83,12 @@ public class WeiwaiController {
 			DepartmentDO departmentDO= weiwaiService.phoneOrAddres(departNumber);
 			String departTel=departmentDO.getDepartTel();
 			String departAddress=departmentDO.getDepartAddress();
+			Long positionId=departmentDO.getPositionId();
+			String positionName=departmentDO.getPositionName();
 			model.addAttribute("departTel",departTel);
 			model.addAttribute("departAddress",departAddress);
+			model.addAttribute("positionId",positionId);
+			model.addAttribute("positionName",positionName);
 		}else if (companyId != null){
 			model.addAttribute("departTel","");
 			model.addAttribute("departAddress","");
@@ -106,18 +111,380 @@ public class WeiwaiController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("stock:weiwai:add")
-	public R save( WeiwaiDO weiwai){
+	public R save(WeiwaiDO weiwai , StockDO stock){
+		String danjuNumber=weiwai.getDanjuNumber();
+		String danjuDay=weiwai.getDanjuDay();
+		String eyeStyle=weiwai.getEyeStyle();
+		String zhidanPeople=weiwai.getZhidanPeople();
+		String mfrsid=weiwai.getMfrsid();
+		String mfrsname=weiwai.getMfrsname();
+		Long positionId=weiwai.getPositionId();
+		String positionName=weiwai.getPositionName();
+		String shouhuoPeople=weiwai.getShouhuoPeople();
+		String shouhuoPhone=weiwai.getShouhuoPhone();
+		String shouhuoAddress=weiwai.getShouhuoAddress();
+		String beizhu=weiwai.getBeizhu();
+		String status=weiwai.getStatus();
+		String username=weiwai.getUsername();
 
 
+		String[] saleNumber1=weiwai.getSaleNumber().split(",");
 
 
+		String[] mirrorTime1=weiwai.getMirrorTime().split(",");
+		String[] goodsName1=weiwai.getGoodsName().split(",");
+		String[] style1=weiwai.getStyle().split(",");
+		String[] rl1=weiwai.getRl().split(",");
+		String[] count1=weiwai.getCount().split(",");
+		String[] sph1=weiwai.getSph().split(",");
+		String[] cyl1=weiwai.getCyl().split(",");
+		String[] axial1=weiwai.getAxial().split(",");
+
+		String[] diameter1=weiwai.getDiameter().split(",");
 
 
-
-		if(weiwaiService.save(weiwai)>0){
-			return R.ok();
+		String[] jd1 = new String[0];
+		if (weiwai.getJd() !=null){
+			jd1=weiwai.getJd().split(",");
 		}
-		return R.error();
+		String[] curvature1 = new String[0];
+		if (weiwai.getCurvature()!=null){
+			curvature1=weiwai.getCurvature().split(",");
+		}
+		String[] lightbelow1 = new String[0];
+		if (weiwai.getLightbelow()!=null){
+			lightbelow1=weiwai.getLightbelow().split(",");
+		}
+		String[] lengjing1 = new String[0];
+		if (weiwai.getLengjing()!=null){
+			lengjing1=weiwai.getLengjing().split(",");
+		}
+		String[] yaoqiu1 = new String[0];
+		if (weiwai.getYaoqiu()!=null){
+			yaoqiu1=weiwai.getYaoqiu().split(",");
+		}
+
+
+
+		String[] saleNumber2=weiwai.getSaleNumber2().split(",");
+		String[] mirrorTime2=weiwai.getMirrorTime2().split(",");
+		String[] goodsName2=weiwai.getGoodsName2().split(",");
+		String[] style2=weiwai.getStyle2().split(",");
+		String[] rl2=weiwai.getRl2().split(",");
+		String[] count2=weiwai.getCount2().split(",");
+		String[] sph2=weiwai.getSph2().split(",");
+		String[] cyl2=weiwai.getCyl2().split(",");
+		String[] axial2=weiwai.getAxial2().split(",");
+		String[] diameter2=weiwai.getDiameter2().split(",");
+		String[] jd2 = new String[0];
+		if (weiwai.getJd2() !=null){
+			jd2=weiwai.getJd2().split(",");
+		}
+		String[] curvature2 = new String[0];
+		if (weiwai.getCurvature2()!=null){
+			curvature2=weiwai.getCurvature2().split(",");
+		}
+		String[] lightbelow2 = new String[0];
+		if (weiwai.getLightbelow2()!=null){
+			lightbelow2=weiwai.getLightbelow2().split(",");
+		}
+		String[] lengjing2 = new String[0];
+		if (weiwai.getLengjing2()!=null){
+			lengjing2=weiwai.getLengjing2().split(",");
+		}
+		String[] yaoqiu2 = new String[0];
+		if (weiwai.getYaoqiu2()!=null){
+			yaoqiu2=weiwai.getYaoqiu2().split(",");
+		}
+		for (int i = 0; i < saleNumber1.length; i++) {
+			WeiwaiDO weiwaiDO = new WeiwaiDO();
+			weiwaiDO.setDanjuNumber(danjuNumber);
+			weiwaiDO.setDanjuDay(danjuDay);
+			weiwaiDO.setEyeStyle(eyeStyle);
+			weiwaiDO.setZhidanPeople(zhidanPeople);
+			weiwaiDO.setMfrsid(mfrsid);
+			weiwaiDO.setMfrsname(mfrsname);
+			weiwaiDO.setPositionId(positionId);
+			weiwaiDO.setPositionName(positionName);
+			weiwaiDO.setShouhuoPeople(shouhuoPeople);
+			weiwaiDO.setShouhuoPhone(shouhuoPhone);
+			weiwaiDO.setShouhuoAddress(shouhuoAddress);
+			weiwaiDO.setBeizhu(beizhu);
+			weiwaiDO.setStatus(status);
+			weiwaiDO.setUsername(username);
+
+			try {
+				String saleNumber = saleNumber1[i];
+				weiwaiDO.setSaleNumber(saleNumber);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setSaleNumber("");
+			}
+			try {
+				String mirrorTime = mirrorTime1[i];
+				weiwaiDO.setMirrorTime(mirrorTime);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setMirrorTime("");
+			}
+			try {
+				String goodsName = goodsName1[i];
+				weiwaiDO.setGoodsName(goodsName);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setGoodsName("");
+			}
+			try {
+				String style = style1[i];
+				weiwaiDO.setStyle(style);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setStyle("");
+			}
+			try {
+				String rl = rl1[i];
+				weiwaiDO.setRl(rl);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setRl("");
+			}
+
+			try {
+				String count = count1[i];
+				weiwaiDO.setCount(count);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setCount("");
+			}
+			try {
+				String sph = sph1[i];
+				weiwaiDO.setSph(sph);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setSph("");
+			}
+			try {
+				String cyl = cyl1[i];
+				weiwaiDO.setCyl(cyl);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setCyl("");
+			}
+			try {
+				String axial = axial1[i];
+				weiwaiDO.setAxial(axial);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setAxial("");
+			}
+			try {
+				String jd = jd1[i];
+				weiwaiDO.setJd(jd);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setJd("");
+			}
+			try {
+				String curvature = curvature1[i];
+				weiwaiDO.setCurvature(curvature);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setCurvature("");
+			}
+			try {
+				String diameter = diameter1[i];
+				weiwaiDO.setDiameter(diameter);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setDiameter("");
+			}
+			try {
+				String lightbelow = lightbelow1[i];
+				weiwaiDO.setLightbelow(lightbelow);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setLightbelow("");
+			}
+			try {
+				String lengjing = lengjing1[i];
+				weiwaiDO.setLengjing(lengjing);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setLengjing("");
+			}
+			try {
+				String yaoqiu = yaoqiu1[i];
+				weiwaiDO.setYaoqiu(yaoqiu);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setYaoqiu("");
+			}
+			////第2个
+
+			try {
+				String saleNumber = saleNumber2[i];
+				weiwaiDO.setSaleNumber2(saleNumber);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setSaleNumber2("");
+			}
+			try {
+				String mirrorTime = mirrorTime2[i];
+				weiwaiDO.setMirrorTime2(mirrorTime);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setMirrorTime2("");
+			}
+			try {
+				String goodsName = goodsName2[i];
+				weiwaiDO.setGoodsName2(goodsName);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setGoodsName2("");
+			}
+			try {
+				String style = style2[i];
+				weiwaiDO.setStyle2(style);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setStyle2("");
+			}
+			try {
+				String rl = rl2[i];
+				weiwaiDO.setRl2(rl);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setRl2("");
+			}
+
+			try {
+				String count = count2[i];
+				weiwaiDO.setCount2(count);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setCount2("");
+			}
+			try {
+				String sph = sph2[i];
+				weiwaiDO.setSph2(sph);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setSph2("");
+			}
+			try {
+				String cyl = cyl2[i];
+				weiwaiDO.setCyl2(cyl);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setCyl2("");
+			}
+			try {
+				String axial = axial2[i];
+				weiwaiDO.setAxial2(axial);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setAxial2("");
+			}
+			try {
+				String jd = jd2[i];
+				weiwaiDO.setJd2(jd);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setJd2("");
+			}
+			try {
+				String curvature = curvature2[i];
+				weiwaiDO.setCurvature2(curvature);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setCurvature2("");
+			}
+			try {
+				String diameter = diameter2[i];
+				weiwaiDO.setDiameter2(diameter);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setDiameter2("");
+			}
+			try {
+				String lightbelow = lightbelow2[i];
+				weiwaiDO.setLightbelow2(lightbelow);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setLightbelow2("");
+			}
+			try {
+				String lengjing = lengjing2[i];
+				weiwaiDO.setLengjing2(lengjing);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setLengjing2("");
+			}
+			try {
+				String yaoqiu = yaoqiu2[i];
+				weiwaiDO.setYaoqiu2(yaoqiu);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				weiwaiDO.setYaoqiu2("");
+			}
+
+			weiwaiService.save(weiwaiDO);
+
+
+//			//加库存
+//			stockDO.setPositionId(weiwai.());
+//			stockDO.setGoodsNum(goodsNum);
+//			StockDO jiaGoodsList = stockService.haveNum(stockDO);
+//			if (null != jiaGoodsList){
+//				String gdcount = jiaGoodsList.getGoodsCount();
+//				Integer goodsCountNew = Integer.valueOf(useCount);
+//				Integer gdcountNew = Integer.valueOf(gdcount);
+//				Integer newGoodsCount = gdcountNew + goodsCountNew;
+//				stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+//				stockService.updateGoodsCount(stockDO);//修改数量
+//			}else {
+//				stockDO.setGoodsCode(goodsCode);
+//				stockDO.setGoodsName(goodsName);
+//				stockDO.setGoodsCount(useCount);
+//
+//
+//
+//				stockDO.setGoodsType(Integer.valueOf(goods));
+//
+//
+//				stockDO.setMfrsid(mfrsid);
+//				stockDO.setBrandname(brandname);
+//				stockDO.setUnit(unit);
+//				stockDO.setRetailPrice(money);
+//				stockDO.setStatus("1");
+//				stockDO.setReturnzt(retyrnzt);
+//				stockDO.setDanjuNumber(pidiaoNumber);
+//				stockDO.setCreateTime(danjuDay);
+//				stockDO.setDanjuDay(danjuDay);
+//
+//				try {
+//					String useday =useday1[i];
+//					stockDO.setUseday(useday);
+//				}catch (ArrayIndexOutOfBoundsException e){
+//					stockDO.setUseday("");
+//				}
+//				try {
+//					String batch = batch1[i];
+//					stockDO.setBatch(batch);
+//				}catch (ArrayIndexOutOfBoundsException e){
+//					stockDO.setBatch("");
+//				}
+//				try {
+//					String zhuceNumber =zhuceNumber1[i];
+//					stockDO.setZhuceNumber(zhuceNumber);
+//				}catch (ArrayIndexOutOfBoundsException e){
+//					stockDO.setZhuceNumber("");
+//				}
+//				try {
+//					String produceDay = produceDay1 [i];
+//					stockDO.setProduceDay(produceDay);
+//				}catch (ArrayIndexOutOfBoundsException e){
+//					stockDO.setProduceDay("");
+//				}
+//
+//
+//
+//
+//				if(null != pidiao.getClasstype()){
+//					String classtype = classtype1[i];
+//					stockDO.setClasstype(classtype);
+//				}else{
+//					stockDO.setClasstype("");
+//				}
+//				try {
+//					String factory = factory1[i];
+//
+//					stockDO.setFactory(factory);
+//				}catch (ArrayIndexOutOfBoundsException e){
+//					stockDO.setFactory("");
+//				}
+//				stockDO.setGoodsxinxiid(goodsxinxiid);
+//
+//				if (stockService.save(stockDO) < 0) {
+//					return R.error();
+//				}
+			}
+
+
+
+
+//		}
+		return R.ok();
 	}
 	/**
 	 * 修改
@@ -155,8 +522,9 @@ public class WeiwaiController {
 	}
 
 //外部配镜单查询
-@GetMapping("/getGoods/{eyeStyle}/{mfrsid}/{zhidanPeople}")
-String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid") Integer mfrsid,@PathVariable("zhidanPeople") String zhidanPeople, Model model) {
+@GetMapping("/getGoods/{eyeStyle}/{mfrsid}/{mfrsname}/{zhidanPeople}")
+String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid") String  mfrsid,
+				@PathVariable("mfrsname") String mfrsname, @PathVariable("zhidanPeople") String zhidanPeople, Model model) {
 	//商品类别
 	if (eyeStyle == 3){
 		model.addAttribute("eyeStyles", "框镜订做");
@@ -167,6 +535,7 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 	}
 	model.addAttribute("mfrsid",mfrsid);
 	model.addAttribute("zhidanPeople",zhidanPeople);
+	model.addAttribute("mfrsname",mfrsname);
 	//———生成单据编号————
 	Long uuid = GuuidUtil.getUUID();
 	String danjunum = "W" + uuid.toString();
@@ -210,14 +579,15 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 			map.put("classtype", "2");
 			map.put("eyeStyles", "隐形");
 		}
-		//———获取当前登录用户的公司id————
-		String companyId=ShiroUtils.getUser().getCompanyId();
-		if(companyId == null){
-			String departNumber=ShiroUtils.getUser().getStoreNum();
-			map.put("departNumber",departNumber);
-		}else if (companyId != null){
-			map.put("departNumber","");
-		}
+//		【只能查当前部门的】
+//		//———获取当前登录用户的公司id————
+//		String companyId=ShiroUtils.getUser().getCompanyId();
+//		if(companyId == null){
+//			String departNumber=ShiroUtils.getUser().getStoreNum();
+//			map.put("departNumber",departNumber);
+//		}else if (companyId != null){
+//			map.put("departNumber","");
+//		}
 		List<SalesDO> selectOrder = weiwaiService.selectOrder(map);
 		model.addAttribute("selectOrder", selectOrder);
 		return selectOrder;

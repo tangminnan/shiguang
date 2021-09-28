@@ -39,11 +39,12 @@
 		<h3>单据信息</h3>
 		<input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="hidden"/>
 		<input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="hidden"/>
+		<input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="hidden"/>
 		<table class="tabA" border="0" cellspacing="0" cellpadding="0">
 			<tbody>
 			<tr>
 				<td>销售单号</td>
-				<td><input id="danjunum" name="danjunum" th:value="${danjunum}" readonly type="text" /></td>
+				<td><input id="number" name="number" th:value="${danjunum}" readonly type="text" /></td>
 				<td>单据日期</td>
 				<td><input id="danjuDay" name="danjuDay" th:value="${danjuDay}" readonly type="text" /></td>
 				<td>所属门店</td>
@@ -79,7 +80,7 @@
 				</td>
 				<td>委外类型</td>
 				<td>
-					<select id="weiwaiStyle" name="weiwayStyle">
+					<select id="weiwaiStyle" name="weiwaiStyle">
 						<option value="委外订单">委外订单</option>
 						<option value="委外加工">委外加工</option>
 					</select>
