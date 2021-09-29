@@ -78,7 +78,8 @@ public class StockController {
     @Autowired
     private OlddegreesService olddegreesService;
 
-
+    private Double retailPrice;
+    private Double retailPrice2;
     @GetMapping()
     @RequiresPermissions("stock:stock:stock")
     String Stock() {
@@ -638,6 +639,16 @@ public class StockController {
     public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
+
         List<ProducaDO> producaDOList = stockService.selectJingjia(query);
         int total = stockService.selectJingjiaCount(query);
         PageUtils pageUtils = new PageUtils(producaDOList, total);
@@ -664,6 +675,16 @@ public class StockController {
     public PageUtils selectpeijian(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
+
         List<PartsDO> partsDOList = stockService.selectPeijian(query);
         int total = stockService.selectPeijianCount(query);
         PageUtils pageUtils = new PageUtils(partsDOList, total);
@@ -703,6 +724,16 @@ public class StockController {
     public PageUtils selectJpcp(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
+
         List<JpcpDO> jpcpDOList = stockService.selectJpcp(query);
         int total = stockService.selectJpcpCount(query);
         PageUtils pageUtils = new PageUtils(jpcpDOList, total);
@@ -714,6 +745,15 @@ public class StockController {
     public PageUtils selectJpdz(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
         List<JpdzDO> jpdzDOList = stockService.selectJpdz(query);
         int total = stockService.selectJpdzCount(query);
         PageUtils pageUtils = new PageUtils(jpdzDOList, total);
@@ -741,6 +781,15 @@ public class StockController {
     public PageUtils selectYxcp(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
         List<YxcpDO> yxcpDOList = stockService.selectYxcp(query);
         int total = stockService.selectYxcpCount(query);
         PageUtils pageUtils = new PageUtils(yxcpDOList, total);
@@ -752,6 +801,15 @@ public class StockController {
     public PageUtils selectYxdz(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
         List<YxdzDO> yxdzDOList = stockService.selectYxdz(query);
         int total = stockService.selectYxdzCount(query);
         PageUtils pageUtils = new PageUtils(yxdzDOList, total);
@@ -774,6 +832,15 @@ public class StockController {
     public PageUtils selectHly(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
         List<HlyDO> hlyDOList = stockService.selectHly(query);
         int total = stockService.selectHlyCount(query);
         PageUtils pageUtils = new PageUtils(hlyDOList, total);
@@ -796,6 +863,15 @@ public class StockController {
     public PageUtils selectTyj(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
         List<TyjDO> tyjDOList = stockService.selectTyj(query);
         int total = stockService.selectTyjCount(query);
         PageUtils pageUtils = new PageUtils(tyjDOList, total);
@@ -823,6 +899,15 @@ public class StockController {
     public PageUtils selectLhj(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
         List<OldlensDO> oldlensDOS = stockService.selectLhj(query);
         int total = stockService.selectLhjCount(query);
         PageUtils pageUtils = new PageUtils(oldlensDOS, total);
@@ -845,6 +930,15 @@ public class StockController {
     public PageUtils selectHc(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
         List<HcDO> hcDOList = stockService.selectHc(query);
         int total = stockService.selectHcCount(query);
         PageUtils pageUtils = new PageUtils(hcDOList, total);
@@ -866,6 +960,15 @@ public class StockController {
     public PageUtils selectSg(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
         List<ShiguangDO> shiguangDOS = stockService.selectSg(query);
         int total = stockService.selectSgCount(query);
         PageUtils pageUtils = new PageUtils(shiguangDOS, total);

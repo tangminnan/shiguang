@@ -30,17 +30,17 @@
                 <input id="phone1" name="phone1" type="text"/>
             </td>
         </tr>
-        <tr>
-            <td>会员性别 </td>
-            <td>
-                <input id="sex" name="sex" type="text" />
-            </td>
-        </tr>
+<!--        <tr>-->
+<!--            <td>会员性别 </td>-->
+<!--            <td>-->
+<!--                <input id="sex" name="sex" type="text" />-->
+<!--            </td>-->
+<!--        </tr>-->
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
         <input type="button" value="查询" onclick="reLoad()"/>
-        <input type="button" class="empty" value="清空" />
+        <input type="button" class="empty" value="清空" onclick="clearText()" />
     </div>
 
     <table id="exampleTable" ></table>
@@ -70,5 +70,16 @@
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/optometryNew/optometryNew.js"></script>
+<script type="text/javascript">
+    //清空
+    function clearText() {
+        var controls = document.getElementsByTagName('input');
+        for (var i = 0; i < controls.length; i++) {
+            if (controls[i].type == 'text') {
+                controls[i].value = '';
+            }
+        }
+    }
+</script>
 </body>
 </html>

@@ -72,6 +72,13 @@ public class OptometryNewController {
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if (query.get("cardNumber") != "" || query.get("name") !="" || query.get("phone1") != ""){
+            query.put("companyId","");
+        }else  {
+            query.put("companyId",companyId);
+        }
         query.put("state", 1);
         List<MemberDO> memberDOList = memberService.yanguangList(query);
         int total = memberService.yanguangCount(query);

@@ -1360,7 +1360,7 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
-            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
+            <if test="lightId != null and lightId != ''">and j.light_ikccxListd = #{lightId}</if>
             <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
@@ -1812,7 +1812,7 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  j.retail_price and j.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  s.retail_price and s.retail_price &lt;=  #{retailPrice2}
             </if>
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
             <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
@@ -1848,7 +1848,7 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  j.retail_price and j.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  s.retail_price and s.retail_price &lt;=  #{retailPrice2}
             </if>
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
             <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>

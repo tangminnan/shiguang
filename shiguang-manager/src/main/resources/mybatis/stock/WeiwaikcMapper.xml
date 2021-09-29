@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.stock.dao.WeiwaikcDao">
+
+	<select id="get" resultType="com.shiguang.stock.domain.WeiwaikcDO">
+		select `id`,`position_id`,`gkname`,`hyknum`,`phone`,`danju_number`,`sale_number`,`mirror_time`,`goods_name`,`count`,`sale_number2`,`mirror_time2`,`goods_name2`,`count2`,`status` from stock_weiwaikc where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.stock.domain.WeiwaikcDO">
+		select `id`,`position_id`,`gkname`,`hyknum`,`phone`,`danju_number`,`sale_number`,`mirror_time`,`goods_name`,`count`,`sale_number2`,`mirror_time2`,`goods_name2`,`count2`,`status` from stock_weiwaikc
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+		  		  <if test="gkname != null and gkname != ''"> and gkname = #{gkname} </if>
+		  		  <if test="hyknum != null and hyknum != ''"> and hyknum = #{hyknum} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="danjuNumber != null and danjuNumber != ''"> and danju_number = #{danjuNumber} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
+		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+		  		  <if test="count != null and count != ''"> and count = #{count} </if>
+		  		  <if test="saleNumber2 != null and saleNumber2 != ''"> and sale_number2 = #{saleNumber2} </if>
+		  		  <if test="mirrorTime2 != null and mirrorTime2 != ''"> and mirror_time2 = #{mirrorTime2} </if>
+		  		  <if test="goodsName2 != null and goodsName2 != ''"> and goods_name2 = #{goodsName2} </if>
+		  		  <if test="count2 != null and count2 != ''"> and count2 = #{count2} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from stock_weiwaikc
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+		  		  <if test="gkname != null and gkname != ''"> and gkname = #{gkname} </if>
+		  		  <if test="hyknum != null and hyknum != ''"> and hyknum = #{hyknum} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="danjuNumber != null and danjuNumber != ''"> and danju_number = #{danjuNumber} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
+		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+		  		  <if test="count != null and count != ''"> and count = #{count} </if>
+		  		  <if test="saleNumber2 != null and saleNumber2 != ''"> and sale_number2 = #{saleNumber2} </if>
+		  		  <if test="mirrorTime2 != null and mirrorTime2 != ''"> and mirror_time2 = #{mirrorTime2} </if>
+		  		  <if test="goodsName2 != null and goodsName2 != ''"> and goods_name2 = #{goodsName2} </if>
+		  		  <if test="count2 != null and count2 != ''"> and count2 = #{count2} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.stock.domain.WeiwaikcDO" useGeneratedKeys="true" keyProperty="id">
+		insert into stock_weiwaikc
+		(
+			`position_id`, 
+			`gkname`, 
+			`hyknum`, 
+			`phone`, 
+			`danju_number`, 
+			`sale_number`, 
+			`mirror_time`, 
+			`goods_name`, 
+			`count`, 
+			`sale_number2`, 
+			`mirror_time2`, 
+			`goods_name2`, 
+			`count2`, 
+			`status`
+		)
+		values
+		(
+			#{positionId}, 
+			#{gkname}, 
+			#{hyknum}, 
+			#{phone}, 
+			#{danjuNumber}, 
+			#{saleNumber}, 
+			#{mirrorTime}, 
+			#{goodsName}, 
+			#{count}, 
+			#{saleNumber2}, 
+			#{mirrorTime2}, 
+			#{goodsName2}, 
+			#{count2}, 
+			#{status}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.stock.domain.WeiwaikcDO">
+		update stock_weiwaikc 
+		<set>
+			<if test="positionId != null">`position_id` = #{positionId}, </if>
+			<if test="gkname != null">`gkname` = #{gkname}, </if>
+			<if test="hyknum != null">`hyknum` = #{hyknum}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="danjuNumber != null">`danju_number` = #{danjuNumber}, </if>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
+			<if test="mirrorTime != null">`mirror_time` = #{mirrorTime}, </if>
+			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+			<if test="count != null">`count` = #{count}, </if>
+			<if test="saleNumber2 != null">`sale_number2` = #{saleNumber2}, </if>
+			<if test="mirrorTime2 != null">`mirror_time2` = #{mirrorTime2}, </if>
+			<if test="goodsName2 != null">`goods_name2` = #{goodsName2}, </if>
+			<if test="count2 != null">`count2` = #{count2}, </if>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from stock_weiwaikc where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from stock_weiwaikc where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

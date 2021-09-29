@@ -12,6 +12,9 @@ import com.shiguang.common.utils.*;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.product.domain.HcDO;
 import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.domain.WeiwaikcDO;
+import com.shiguang.stock.service.StockService;
+import com.shiguang.stock.service.WeiwaikcService;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +46,10 @@ public class WeiwaiController {
 	private WeiwaiService weiwaiService;
 	@Autowired
 	private DepartmentService departmentService;
+
+	//委外库存
+	@Autowired
+	private WeiwaikcService weiwaikcService;
 
 	@GetMapping()
 	@RequiresPermissions("stock:weiwai:weiwai")
@@ -78,9 +85,10 @@ public class WeiwaiController {
 		model.addAttribute("zhidanPeople", ShiroUtils.getUser().getName());
 		//———获取当前登录用户的公司id————
 		String companyId=ShiroUtils.getUser().getCompanyId();
-		if(companyId == null){
+		if(companyId != null){
 			String departNumber=ShiroUtils.getUser().getStoreNum();
 			DepartmentDO departmentDO= weiwaiService.phoneOrAddres(departNumber);
+
 			String departTel=departmentDO.getDepartTel();
 			String departAddress=departmentDO.getDepartAddress();
 			Long positionId=departmentDO.getPositionId();
@@ -89,7 +97,7 @@ public class WeiwaiController {
 			model.addAttribute("departAddress",departAddress);
 			model.addAttribute("positionId",positionId);
 			model.addAttribute("positionName",positionName);
-		}else if (companyId != null){
+		}else if (companyId == null){
 			model.addAttribute("departTel","");
 			model.addAttribute("departAddress","");
 		}
@@ -111,7 +119,7 @@ public class WeiwaiController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("stock:weiwai:add")
-	public R save(WeiwaiDO weiwai , StockDO stock){
+	public R save(WeiwaiDO weiwai , WeiwaikcDO weiwaikcDO){
 		String danjuNumber=weiwai.getDanjuNumber();
 		String danjuDay=weiwai.getDanjuDay();
 		String eyeStyle=weiwai.getEyeStyle();
@@ -126,6 +134,10 @@ public class WeiwaiController {
 		String beizhu=weiwai.getBeizhu();
 		String status=weiwai.getStatus();
 		String username=weiwai.getUsername();
+
+		String gkname=weiwai.getGkname();
+		String hyknum=weiwai.getHyknum();
+		String phone=weiwai.getPhone();
 
 
 		String[] saleNumber1=weiwai.getSaleNumber().split(",");
@@ -196,6 +208,7 @@ public class WeiwaiController {
 		if (weiwai.getYaoqiu2()!=null){
 			yaoqiu2=weiwai.getYaoqiu2().split(",");
 		}
+
 		for (int i = 0; i < saleNumber1.length; i++) {
 			WeiwaiDO weiwaiDO = new WeiwaiDO();
 			weiwaiDO.setDanjuNumber(danjuNumber);
@@ -212,6 +225,10 @@ public class WeiwaiController {
 			weiwaiDO.setBeizhu(beizhu);
 			weiwaiDO.setStatus(status);
 			weiwaiDO.setUsername(username);
+
+			weiwaiDO.setGkname(gkname);
+			weiwaiDO.setHyknum(hyknum);
+			weiwaiDO.setPhone(phone);
 
 			try {
 				String saleNumber = saleNumber1[i];
@@ -401,89 +418,31 @@ public class WeiwaiController {
 			weiwaiService.save(weiwaiDO);
 
 
-//			//加库存
-//			stockDO.setPositionId(weiwai.());
-//			stockDO.setGoodsNum(goodsNum);
-//			StockDO jiaGoodsList = stockService.haveNum(stockDO);
-//			if (null != jiaGoodsList){
-//				String gdcount = jiaGoodsList.getGoodsCount();
-//				Integer goodsCountNew = Integer.valueOf(useCount);
-//				Integer gdcountNew = Integer.valueOf(gdcount);
-//				Integer newGoodsCount = gdcountNew + goodsCountNew;
-//				stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-//				stockService.updateGoodsCount(stockDO);//修改数量
-//			}else {
-//				stockDO.setGoodsCode(goodsCode);
-//				stockDO.setGoodsName(goodsName);
-//				stockDO.setGoodsCount(useCount);
-//
-//
-//
-//				stockDO.setGoodsType(Integer.valueOf(goods));
-//
-//
-//				stockDO.setMfrsid(mfrsid);
-//				stockDO.setBrandname(brandname);
-//				stockDO.setUnit(unit);
-//				stockDO.setRetailPrice(money);
-//				stockDO.setStatus("1");
-//				stockDO.setReturnzt(retyrnzt);
-//				stockDO.setDanjuNumber(pidiaoNumber);
-//				stockDO.setCreateTime(danjuDay);
-//				stockDO.setDanjuDay(danjuDay);
-//
-//				try {
-//					String useday =useday1[i];
-//					stockDO.setUseday(useday);
-//				}catch (ArrayIndexOutOfBoundsException e){
-//					stockDO.setUseday("");
-//				}
-//				try {
-//					String batch = batch1[i];
-//					stockDO.setBatch(batch);
-//				}catch (ArrayIndexOutOfBoundsException e){
-//					stockDO.setBatch("");
-//				}
-//				try {
-//					String zhuceNumber =zhuceNumber1[i];
-//					stockDO.setZhuceNumber(zhuceNumber);
-//				}catch (ArrayIndexOutOfBoundsException e){
-//					stockDO.setZhuceNumber("");
-//				}
-//				try {
-//					String produceDay = produceDay1 [i];
-//					stockDO.setProduceDay(produceDay);
-//				}catch (ArrayIndexOutOfBoundsException e){
-//					stockDO.setProduceDay("");
-//				}
-//
-//
-//
-//
-//				if(null != pidiao.getClasstype()){
-//					String classtype = classtype1[i];
-//					stockDO.setClasstype(classtype);
-//				}else{
-//					stockDO.setClasstype("");
-//				}
-//				try {
-//					String factory = factory1[i];
-//
-//					stockDO.setFactory(factory);
-//				}catch (ArrayIndexOutOfBoundsException e){
-//					stockDO.setFactory("");
-//				}
-//				stockDO.setGoodsxinxiid(goodsxinxiid);
-//
-//				if (stockService.save(stockDO) < 0) {
-//					return R.error();
-//				}
+				weiwaikcDO.setPositionId(weiwai.getPositionId().toString());
+				weiwaikcDO.setGkname(weiwai.getGkname());
+				weiwaikcDO.setHyknum(weiwai.getHyknum());
+				weiwaikcDO.setPhone(weiwai.getPhone());
+				weiwaikcDO.setDanjuNumber(weiwai.getDanjuNumber());
+				weiwaikcDO.setSaleNumber(weiwai.getSaleNumber());
+				weiwaikcDO.setMirrorTime(weiwai.getMirrorTime());
+				weiwaikcDO.getGoodsName(weiwai.getGoodsName());
+				weiwaikcDO.getCount(weiwai.getCount());
+
+
+				weiwaikcDO.setSaleNumber2(weiwai.getSaleNumber2());
+				weiwaikcDO.setMirrorTime2(weiwai.getMirrorTime2());
+				weiwaikcDO.setGoodsName2(weiwai.getGoodsName2());
+				weiwaikcDO.getCount2(weiwai.getCount2());
+				weiwaikcDO.getStatus(weiwai.getStatus());
+
+
+
+			if(weiwaikcService.save(weiwaikcDO)>0){
+				return R.ok();
+			}
+			return R.error();
 			}
 
-
-
-
-//		}
 		return R.ok();
 	}
 	/**
@@ -579,15 +538,15 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 			map.put("classtype", "2");
 			map.put("eyeStyles", "隐形");
 		}
-//		【只能查当前部门的】
-//		//———获取当前登录用户的公司id————
-//		String companyId=ShiroUtils.getUser().getCompanyId();
-//		if(companyId == null){
-//			String departNumber=ShiroUtils.getUser().getStoreNum();
-//			map.put("departNumber",departNumber);
-//		}else if (companyId != null){
-//			map.put("departNumber","");
-//		}
+//		【只能查当前公司的】
+		//———获取当前登录用户的公司id————
+		String companyId=ShiroUtils.getUser().getCompanyId();
+		if(companyId == null){
+			map.put("departNumber","");
+		}else if (companyId != null){
+			map.put("companyId",companyId);
+		}
+		map.put("isSale",1);
 		List<SalesDO> selectOrder = weiwaiService.selectOrder(map);
 		model.addAttribute("selectOrder", selectOrder);
 		return selectOrder;

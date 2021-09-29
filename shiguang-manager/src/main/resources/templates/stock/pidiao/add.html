@@ -136,6 +136,7 @@
     $(document).ready(function () {
         // function outposion() {
             var outDepartment = $("#outDepartment").val();
+            alert(outDepartment);
             $(".outcw").empty("");
             // $(".outcw").append("<option value=''></option>");
             $.ajax({
@@ -155,7 +156,27 @@
             })
         // }
     });
-
+	function outposion() {
+	var outDepartment = $("#outDepartment").val();
+	alert(outDepartment);
+	$(".outcw").empty("");
+	// $(".outcw").append("<option value=''></option>");
+	$.ajax({
+		url: '/stock/pidiao/outposion',
+		type: 'post',
+		dataType: "json",
+		data: {
+			'outDepartment': outDepartment
+		},
+		success: function (datajson) {
+			$(datajson).each(function (key) {  //循环读取后台传来的Json数据
+				var id = datajson[key].positionId;   //角色id
+				var roleName = datajson[key].positionName; //角色名称
+				$(".outcw").append("<option value='" + id + "'>" + roleName + "</option>");
+			});
+		}
+	})
+	}
 function indepartment() {
 	var inCompany = $('#inCompany').val();
     $(".ings").empty("");

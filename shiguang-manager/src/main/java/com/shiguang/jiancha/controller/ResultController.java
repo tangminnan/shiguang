@@ -280,6 +280,7 @@ public class ResultController {
         model.addAttribute("resultList",resultList);
         if (null != resultList){
             for (ResultDO resultDO:resultList){
+                //是否结算
                 String haveid = resultDO.getHaveid();
                 if (null !=haveid && "" != haveid){
                     resultDO.setHaveid("0");
@@ -320,6 +321,35 @@ public class ResultController {
         model.addAttribute("tryresultsDO",tryresultsDO);
 
         return "optometryNew/chufangall";
+    }
+ /**
+     * 修改所有验光信息详情
+     */
+    @GetMapping("/updateShuju/{ptometryNumber}")
+    String  updateShuju(@PathVariable("ptometryNumber") String ptometryNumber,Model model) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("ptometryNumber",ptometryNumber);
+        //验光数据
+        TryresultsDO tryresultsDO =tryresultsService.getTryresult(map);
+        //所有处方
+        ResultDO resultDO= resultService.getChufangAll(map);
+        model.addAttribute("resultDO",resultDO);
+        if (tryresultsDO.getSex() == 0) {
+                tryresultsDO.setSexx("男");
+            } else {
+                tryresultsDO.setSexx("女");
+            }
+        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date time = tryresultsDO.getCreateTime();
+        String newtime = sdftime.format(time);
+        model.addAttribute("newtime", newtime);
+        //————————————————散瞳用药————————————————————————————————
+        List<PharmacyDO> pharmacyDOList = pharmacyService.list(map);
+        model.addAttribute("pharmacyDOList", pharmacyDOList);
+        model.addAttribute("tryresultsDO",tryresultsDO);
+
+        return "optometryNew/chufangalledit";
     }
 
 

@@ -69,6 +69,9 @@
 		</tr>
 
 	</table>
+	<input id="gkname" name="gkname"   type="hidden"/>
+	<input id="hyknum" name="hyknum"  type="hidden"/>
+	<input id="phone" name="phone"  type="hidden"/>
 	<!--保存/清空-->
 	<div class="BQ-btn">
 		<!--<input type="button" value="内部配镜单" />-->
@@ -147,6 +150,18 @@
 		var mfrsname = window.localStorage.getItem("mfrsname");//制造商名称
 		// alert(mfrsname)
 		$('#mfrsName').val(mfrsname);
+
+
+		var gkname = window.localStorage.getItem("gkname");
+		alert(gkname)
+		$('#gkname').val(gkname);
+
+		var hyknum = window.localStorage.getItem("hyknum");
+		$('#hyknum').val(hyknum);
+
+		var phone = window.localStorage.getItem("phone");
+		$('#phone').val(phone);
+
 		if(eyeStyle==3){
 			$("#eyeStyle").find("[value='" + eyeStyle + "']").attr("selected", true);
 			$(".val2").remove();
@@ -162,6 +177,11 @@
 					},
 					success: function (xml) {
 						for (var i = 0; i < xml.length; i++) {
+							// //顾客信息
+							// alert(xml[i].name)
+							// $("#gkname").val(xml[i].name);
+							// $("#hyknum").val(xml[i].memberNumber);
+							// $("#phone").val(xml[i].phone);
 							if(null == xml[i].number){
 								xml[i].number="";
 							}
@@ -344,6 +364,13 @@
 					},
 					success: function (xml) {
 						for (var i = 0; i < xml.length; i++) {
+
+							// //顾客信息
+							// alert(xml[i].name)
+							// $("#gkname").val(xml[i].name);
+							// $("#hyknum").val(xml[i].memberNumber);
+							// $("#phone").val(xml[i].phone1);
+
 							if(null == xml[i].number){
 								xml[i].number="";
 							}
@@ -512,6 +539,13 @@
 
 
 		window.localStorage.removeItem("number");
+		window.localStorage.removeItem("eyeStyle");
+		window.localStorage.removeItem("mfrsid");
+		window.localStorage.removeItem("mfrsname");
+
+		window.localStorage.removeItem("mfrsname");
+		window.localStorage.removeItem("hyknum");
+		window.localStorage.removeItem("phone");
 
 	});
     //显示

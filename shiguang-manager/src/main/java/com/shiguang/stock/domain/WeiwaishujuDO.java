@@ -129,7 +129,12 @@ public class WeiwaishujuDO implements Serializable {
 	private String yaoqiuryx;
 	//要求OS
 	private String yaoqiulyx;
-
+	//顾客姓名
+	private String gkname;
+	//会员卡
+	private String hyknum;
+	//手机号
+	private String phone;
 	/**
 	 * 设置：委外数据id
 	 */
@@ -813,5 +818,29 @@ public class WeiwaishujuDO implements Serializable {
 	 */
 	public String getYaoqiulyx() {
 		return yaoqiulyx;
+	}
+
+	public String getGkname() {
+		return gkname;
+	}
+
+	public void setGkname(String gkname) {
+		this.gkname = gkname;
+	}
+
+	public String getHyknum() {
+		return hyknum;
+	}
+
+	public void setHyknum(String hyknum) {
+		this.hyknum = hyknum;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }

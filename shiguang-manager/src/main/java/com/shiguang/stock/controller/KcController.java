@@ -3,6 +3,7 @@ package com.shiguang.stock.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.common.utils.StringUtils;
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.PositionDO;
@@ -43,6 +44,9 @@ public class KcController {
     //仓位
     @Autowired
     private PositionService positionService;
+
+    private Double retailPrice;
+    private Double retailPrice2;
 
     @GetMapping()
     @RequiresPermissions("kucun:stock:stock")
@@ -90,6 +94,16 @@ public class KcController {
             query.put("departNumber",departNumber);
         }
         query.put("status","0");
+        // 钱转换
+        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+
+
+        query.put("retailPrice", retailPrice);
+        query.put("retailPrice2", retailPrice2);
+
         List<StockDO> stockDOS = stockService.kccxList(query);
         int total = stockService.kccxListCount(query);
         PageUtils pageUtils = new PageUtils(stockDOS, total);

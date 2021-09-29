@@ -45,6 +45,8 @@ public class WeiwaiDO implements Serializable {
 
 
 
+
+
 	//配镜单号
 	private String saleNumber;
 	//取镜时间
@@ -75,6 +77,8 @@ public class WeiwaiDO implements Serializable {
 	private String jd;
 	//曲率
 	private String curvature;
+
+
 
 	//配镜单号
 	private String saleNumber2;
@@ -111,6 +115,12 @@ public class WeiwaiDO implements Serializable {
 	private String status;
 	//工号
 	private String username;
+	//顾客姓名
+	private String gkname;
+	//会员卡
+	private String hyknum;
+	//手机号
+	private String phone;
 
 	/**
 	 * 设置：id
@@ -728,4 +738,27 @@ public class WeiwaiDO implements Serializable {
 		this.saleName = saleName;
 	}
 
+	public String getGkname() {
+		return gkname;
+	}
+
+	public void setGkname(String gkname) {
+		this.gkname = gkname;
+	}
+
+	public String getHyknum() {
+		return hyknum;
+	}
+
+	public void setHyknum(String hyknum) {
+		this.hyknum = hyknum;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 }

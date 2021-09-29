@@ -36,7 +36,8 @@ function load() {
                         // username:$('#searchName').val()
                         cardNumber: $('#cardNumber').val(),
                         saleNumber: $('#saleNumber').val(),
-                        name: $('#name').val()
+                        name: $('#name').val(),
+                        phone1: $('#phone1').val(),
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -130,28 +131,43 @@ function load() {
                                 align: 'center',
                                 formatter: function (value, row, index) {
                                     // alert(row.haveid);
-                                    if (row.haveid == "1"){
+                                    if (row.haveid == "1"){ //是否结算
                                         if (row.status=="1"){
                                             var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
                                                 + value
                                                 + '\')">详情</span> ';
+
+                                            // var a = '<span class="btn btn-primary btn-sm" href="#" title="修改"  mce_href="#" onclick="updateShuju(\''
+                                            //     + value
+                                            //     + '\')">修改</span> ';
+
                                             var h = '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#" onclick="upremove(\''
                                                 + value
                                                 + '\')">删除</span> ';
+
+
+                                            // var d= '<span class="btn btn-success btn-sm " href="#" title="修改"  mce_href="#" onclick="updateShuju(\''
+                                            //     + value
+                                            //     + '\')">修改</span> ';
+
                                         }else if (row.status =="0") {
                                             var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
                                                 + value
                                                 + '\')">详情</span> ';
+                                            // var a = '';
                                             var h = '';
+                                            // var d = '';
                                         }
-                                    } else if (row.haveid == "0") {
+                                    } else if (row.haveid == "0") { //是否结算
                                     var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
                                         + value
                                         + '\')">详情</span> ';
                                     var h='';
+                                    // var a='';
+                                    //     var d='';
 
                                 }
-                                    return f + h;
+                                    return f + h   ;
                                 }
                             }
 
@@ -232,6 +248,20 @@ function selectShuju(ptometryNumber) {
         shadeClose: false, // 点击遮罩关闭层
         area: ['800px', '520px'],
         content: '/jiancha/result/chufangall/' + ptometryNumber // iframe的url
+
+    });
+    layer.full(toIndex);
+}
+//修改
+function updateShuju(ptometryNumber) {
+    // alert("详情")
+    var toIndex = layer.open({
+        type: 2,
+        title: '修改',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: '/jiancha/result/updateShuju/' + ptometryNumber // iframe的url
 
     });
     layer.full(toIndex);

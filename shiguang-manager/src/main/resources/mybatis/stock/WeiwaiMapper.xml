@@ -11,7 +11,8 @@
 		`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,
 		`sale_number2`,`mirror_time2`,`goods_name2`,`style2`,`rl2`,`count2`,`sph2`,`cyl2`,
 		`axial2`,`lightbelow2`,`lengjing2`,`diameter2`,`yaoqiu2`,`jd2`,`curvature2`,
-		`status`,`username`
+		`status`,`username`,
+		`gkname`,`hyknum`,`phone`
 		from stock_weiwai where id = #{value}
 	</select>
 
@@ -22,7 +23,7 @@
 		`style`,`rl`,`count`,`sph`,`cyl`,`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,
 		`sale_number2`,`mirror_time2`,`goods_name2`,`style2`,`rl2`,`count2`,`sph2`,`cyl2`,
 		`axial2`,`lightbelow2`,`lengjing2`,`diameter2`,`yaoqiu2`,`jd2`,`curvature2`,
-		`status`,`username`
+		`status`,`username`,`gkname`,`hyknum`,`phone`
 		from stock_weiwai
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -74,6 +75,10 @@
 
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
+
+		  		  <if test="gkname != null and gkname != ''"> and gkname = #{gkname} </if>
+		  		  <if test="hyknum != null and hyknum != ''"> and hyknum = #{hyknum} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -140,6 +145,10 @@
 
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
+
+			 <if test="gkname != null and gkname != ''"> and gkname = #{gkname} </if>
+			 <if test="hyknum != null and hyknum != ''"> and hyknum = #{hyknum} </if>
+			 <if test="phone != null and phone != ''"> and phone = #{phone} </if>
 		  		</where>
 	</select>
 	 
@@ -194,7 +203,10 @@
 			`curvature2`,
 
 			`status`,
-			`username`
+			`username`,
+			`gkname`,
+			`hyknum`,
+			`phone`
 		)
 		values
 		(
@@ -247,7 +259,11 @@
 
 
 			#{status},
-			#{username}
+			#{username},
+			#{gkname},
+			#{hyknum},
+			#{phone}
+
 		)
 	</insert>
 	 
@@ -302,7 +318,11 @@
 
 
 			<if test="status != null">`status` = #{status},</if>
-			<if test="username != null">`username` = #{username}</if>
+			<if test="username != null">`username` = #{username},</if>
+
+			<if test="gkname != null">`gkname` = #{gkname},</if>
+			<if test="hyknum != null">`hyknum` = #{hyknum},</if>
+			<if test="phone != null">`phone` = #{phone}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -354,7 +374,7 @@
 	<select id="phoneOrAddres"  resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
 		SELECT d.depart_number,d.depart_tel,d.depart_address,p.position_id,p.position_name
 		FROM department d JOIN c_position p on d.depart_number = p.depart_number
-		where d.depart_number = #{departNumber}
+		where p.depart_number = #{departNumber}
 	</select>
 	<select id="selectDepartment"  resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
 	select id,depart_name from department
@@ -362,13 +382,15 @@
 
 	<select id="selectOrder" resultType="com.shiguang.storeSales.domain.SalesDO">
 		SELECT
+		company_id,
+		is_sale,
 		store_num,
 		left_right,
 		process_ask,
 		goods_num,
 		jp_goods_name,
 		jp_goods_num,
-		depart_name AS  mirorAddress,
+		depart_name AS mirorAddress,
 		sale_number,
 		member_number,
 		NAME,
@@ -398,6 +420,8 @@
 		FROM
 		(
 		SELECT
+		m.company_id,
+		co.is_sale,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
@@ -436,11 +460,13 @@
 		FROM
 		jc_kjjy k
 		LEFT JOIN store_sales sa ON sa.ptometry_number = k.ptometry_number
+		JOIN cost co ON sa.sale_number=co.sale_number
 		JOIN settlement s ON s.sale_number = sa.sale_number
 		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id
-		UNION
+		LEFT JOIN department de ON sa.store_num = de.id UNION
 		SELECT
+		m.company_id,
+		co.is_sale,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
@@ -479,11 +505,13 @@
 		FROM
 		jc_kjyy ky
 		LEFT JOIN store_sales sa ON sa.ptometry_number = ky.ptometry_number
+		JOIN cost co ON sa.sale_number=co.sale_number
 		JOIN settlement s ON s.sale_number = sa.sale_number
 		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id
-		UNION
+		LEFT JOIN department de ON sa.store_num = de.id UNION
 		SELECT
+		m.company_id,
+		co.is_sale,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
@@ -522,11 +550,13 @@
 		FROM
 		jc_sgjj sg
 		LEFT JOIN store_sales sa ON sa.ptometry_number = sg.ptometry_number
+		JOIN cost co ON sa.sale_number=co.sale_number
 		JOIN settlement s ON s.sale_number = sa.sale_number
 		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id
-		UNION
+		LEFT JOIN department de ON sa.store_num = de.id UNION
 		SELECT
+		m.company_id,
+		co.is_sale,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
@@ -565,10 +595,13 @@
 		FROM
 		jc_zy z
 		LEFT JOIN store_sales sa ON sa.ptometry_number = z.ptometry_number
+		JOIN cost co ON sa.sale_number=co.sale_number
 		JOIN settlement s ON s.sale_number = sa.sale_number
 		LEFT JOIN member m ON s.member_number = m.card_number
 		LEFT JOIN department de ON sa.store_num = de.id UNION
 		SELECT
+		m.company_id,
+		co.is_sale,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
@@ -607,10 +640,13 @@
 		FROM
 		jc_rxjmjcj x
 		LEFT JOIN store_sales sa ON sa.ptometry_number = x.ptometry_number
+		JOIN cost co ON sa.sale_number=co.sale_number
 		JOIN settlement s ON s.sale_number = sa.sale_number
 		LEFT JOIN member m ON s.member_number = m.card_number
 		LEFT JOIN department de ON sa.store_num = de.id UNION
 		SELECT
+		m.company_id,
+		co.is_sale,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
@@ -649,10 +685,13 @@
 		FROM
 		jc_sjxl sx
 		LEFT JOIN store_sales sa ON sa.ptometry_number = sx.ptometry_number
+		JOIN cost co ON sa.sale_number=co.sale_number
 		JOIN settlement s ON s.sale_number = sa.sale_number
 		LEFT JOIN member m ON s.member_number = m.card_number
 		LEFT JOIN department de ON sa.store_num = de.id UNION
 		SELECT
+		m.company_id,
+		co.is_sale,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
@@ -691,6 +730,7 @@
 		FROM
 		jc_rgp rg
 		LEFT JOIN store_sales sa ON sa.ptometry_number = rg.ptometry_number
+		JOIN cost co ON sa.sale_number=co.sale_number
 		JOIN settlement s ON s.sale_number = sa.sale_number
 		LEFT JOIN member m ON s.member_number = m.card_number
 		LEFT JOIN department de ON sa.store_num = de.id
@@ -700,6 +740,8 @@
 			<if test="classtype != null and classtype != ''">and  FIND_IN_SET(#{classtype},classtype)</if>
 			<if test="eyeStyles != null and eyeStyles != ''">and  FIND_IN_SET(eye_type,#{eyeStyles})</if>
 			<if test="departNumber != null and departNumber != ''">and store_num = #{departNumber}</if>
+			<if test="isSale != null and isSale != ''">and is_sale = #{isSale}</if>
+			<if test="companyId != null and companyId != ''">and company_id = #{companyId}</if>
 		</where>
 		group by sale_number
 	</select>

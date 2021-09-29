@@ -4,11 +4,23 @@
 <mapper namespace="com.shiguang.stock.dao.WeiwaishujuDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.WeiwaishujuDO">
-		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`rightsph`,`leftsph`,`rightcyl`,`leftcyl`,`rightzx`,`leftzx`,`right_add`,`left_add`,`right_slj`,`left_slj`,`right_jd`,`left_jd`,`right_fartj`,`left_fartj`,`right_neartj`,`left_neartj`,`rightqulv`,`leftqulv`,`rightzj`,`leftzj`,`rightsphyx`,`leftsphyx`,`rightcylyx`,`leftcylyx`,`rightzxyx`,`leftzxyx`,`right_num`,`left_num`,`right_name`,`left_name`,`right_r`,`left_l`,`countr`,`countl`,`yaoqiur`,`yaoqiul`,`right_numyx`,`left_numyx`,`right_nameyx`,`left_nameyx`,`right_ryx`,`left_lyx`,`countryx`,`countlyx`,`yaoqiuryx`,`yaoqiulyx` from stock_weiwaishuju where id = #{value}
+		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,
+		`weiwai_style`,`beizhu`,`rightsph`,`leftsph`,`rightcyl`,`leftcyl`,`rightzx`,`leftzx`,`right_add`,`left_add`,
+		`right_slj`,`left_slj`,`right_jd`,`left_jd`,`right_fartj`,`left_fartj`,`right_neartj`,`left_neartj`,`rightqulv`,
+		`leftqulv`,`rightzj`,`leftzj`,`rightsphyx`,`leftsphyx`,`rightcylyx`,`leftcylyx`,`rightzxyx`,`leftzxyx`,
+		`right_num`,`left_num`,`right_name`,`left_name`,`right_r`,`left_l`,`countr`,`countl`,`yaoqiur`,`yaoqiul`,
+		`right_numyx`,`left_numyx`,`right_nameyx`,`left_nameyx`,`right_ryx`,`left_lyx`,`countryx`,`countlyx`,`yaoqiuryx`,
+		`yaoqiulyx`,
+		`gkname`,`hyknum`,`phone`
+		 from stock_weiwaishuju where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.WeiwaishujuDO">
-		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`rightsph`,`leftsph`,`rightcyl`,`leftcyl`,`rightzx`,`leftzx`,`right_add`,`left_add`,`right_slj`,`left_slj`,`right_jd`,`left_jd`,`right_fartj`,`left_fartj`,`right_neartj`,`left_neartj`,`rightqulv`,`leftqulv`,`rightzj`,`leftzj`,`rightsphyx`,`leftsphyx`,`rightcylyx`,`leftcylyx`,`rightzxyx`,`leftzxyx`,`right_num`,`left_num`,`right_name`,`left_name`,`right_r`,`left_l`,`countr`,`countl`,`yaoqiur`,`yaoqiul`,`right_numyx`,`left_numyx`,`right_nameyx`,`left_nameyx`,`right_ryx`,`left_lyx`,`countryx`,`countlyx`,`yaoqiuryx`,`yaoqiulyx` from stock_weiwaishuju
+		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`rightsph`,`leftsph`,`rightcyl`,`leftcyl`,`rightzx`,`leftzx`,`right_add`,`left_add`,`right_slj`,`left_slj`,`right_jd`,`left_jd`,`right_fartj`,`left_fartj`,`right_neartj`,`left_neartj`,`rightqulv`,`leftqulv`,`rightzj`,`leftzj`,
+		`rightsphyx`,`leftsphyx`,`rightcylyx`,`leftcylyx`,`rightzxyx`,`leftzxyx`,`right_num`,`left_num`,`right_name`,
+		`left_name`,`right_r`,`left_l`,`countr`,`countl`,`yaoqiur`,`yaoqiul`,`right_numyx`,`left_numyx`,`right_nameyx`,
+		`left_nameyx`,`right_ryx`,`left_lyx`,`countryx`,`countlyx`,`yaoqiuryx`,`yaoqiulyx`,
+		`gkname`,`hyknum`,`phone` from stock_weiwaishuju
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="number != null and number != ''"> and number = #{number} </if>
@@ -67,6 +79,10 @@
 			<if test="countlyx != null and countlyx != ''"> and countlyx = #{countlyx} </if>
 			<if test="yaoqiuryx != null and yaoqiuryx != ''"> and yaoqiuryx = #{yaoqiuryx} </if>
 			<if test="yaoqiulyx != null and yaoqiulyx != ''"> and yaoqiulyx = #{yaoqiulyx} </if>
+
+			<if test="gkname != null and gkname != ''"> and gkname = #{gkname} </if>
+			<if test="hyknum != null and hyknum != ''"> and hyknum = #{hyknum} </if>
+			<if test="phone != null and phone != ''"> and phone = #{phone} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -141,6 +157,10 @@
 			<if test="countlyx != null and countlyx != ''"> and countlyx = #{countlyx} </if>
 			<if test="yaoqiuryx != null and yaoqiuryx != ''"> and yaoqiuryx = #{yaoqiuryx} </if>
 			<if test="yaoqiulyx != null and yaoqiulyx != ''"> and yaoqiulyx = #{yaoqiulyx} </if>
+
+			<if test="gkname != null and gkname != ''"> and gkname = #{gkname} </if>
+			<if test="hyknum != null and hyknum != ''"> and hyknum = #{hyknum} </if>
+			<if test="phone != null and phone != ''"> and phone = #{phone} </if>
 		</where>
 	</select>
 
@@ -202,7 +222,10 @@
 			`countryx`,
 			`countlyx`,
 			`yaoqiuryx`,
-			`yaoqiulyx`
+			`yaoqiulyx`,
+			`gkname`,
+			`hyknum`,
+			`phone`
 		)
 		values
 		(
@@ -261,7 +284,10 @@
 			#{countryx},
 			#{countlyx},
 			#{yaoqiuryx},
-			#{yaoqiulyx}
+			#{yaoqiulyx},
+			#{gkname},
+			#{hyknum},
+			#{phone}
 		)
 	</insert>
 
@@ -323,7 +349,11 @@
 			<if test="countryx != null">`countryx` = #{countryx}, </if>
 			<if test="countlyx != null">`countlyx` = #{countlyx}, </if>
 			<if test="yaoqiuryx != null">`yaoqiuryx` = #{yaoqiuryx}, </if>
-			<if test="yaoqiulyx != null">`yaoqiulyx` = #{yaoqiulyx}</if>
+			<if test="yaoqiulyx != null">`yaoqiulyx` = #{yaoqiulyx},</if>
+
+			<if test="gkname != null">`gkname` = #{gkname},</if>
+			<if test="hyknum != null">`hyknum` = #{hyknum},</if>
+			<if test="phone != null">`phone` = #{phone}</if>
 		</set>
 		where id = #{id}
 	</update>

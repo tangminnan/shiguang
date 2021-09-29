@@ -140,7 +140,7 @@
 				<td>轴向</td>
 				<td>曲率</td>
 				<td>直径</td>
-				<td>选择</td>
+<!--				<td>选择</td>-->
 			</tr>
 			<tr>
 				<td>OD</td>
@@ -222,7 +222,7 @@
 				<td>直径</td>
 				<td>数量</td>
 				<td width="300">特殊加工要求</td>
-				<td width="100">操作</td>
+<!--				<td width="100">操作</td>-->
 			</tr>
 			<tr>
 				<td><input id="rightNumyx" name="rightNumyx"   type="text" /></td>
@@ -235,7 +235,7 @@
 				<td><input id="zjyx1"   type="text" /></td>
 				<td><input id="countryx" name="countryx" type="text" /></td>
 				<td><input id="yaoqiuryx" name="yaoqiuryx" type="text" /></td>
-				<td><input type="button" class="qingK" value="清空" /></td>
+<!--				<td><input type="button" class="qingK" value="清空" /></td>-->
 			</tr>
 			<tr>
 				<td><input id="leftNumyx" name="leftNumyx"  type="text" /></td>
@@ -248,9 +248,16 @@
 				<td><input id="zjyx2"   type="text" /></td>
 				<td><input id="countlyx" name="countlyx" type="text" /></td>
 				<td><input id="yaoqiulyx" name="yaoqiulyx" type="text" /></td>
-				<td><input type="button" class="qingK" value="清空" /></td>
+<!--				<td><input type="button" class="qingK" value="清空" /></td>-->
 			</tr>
 		</table>
+
+		<input id="gkname" name="gkname"   type="hidden"/>
+		<input id="hyknum" name="hyknum"  type="hidden"/>
+		<input id="phone" name="phone"  type="hidden"/>
+
+
+
 		<div class="allpik"><input type="button" value="选择" onclick="save()" /></div>
 	</div>
 </form>
@@ -412,6 +419,11 @@
                     $("#zxyx2").val(rows[i].leftzx);
 
 
+                    //顾客信息
+					$("#gkname").val(rows[i].name);
+					$("#hyknum").val(rows[i].memberNumber);
+					$("#phone").val(rows[i].phone1);
+
 
                     if (eyeStyle==3){//镜片
                         var array = rows[i].jpGoodsNum.split(",");
@@ -471,18 +483,18 @@
         }
     };
 
-    function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用
-        var val = parseFloat(e.value);
-        var val1 = e.value;
-        // console.log(val);
-        var num = val1.indexOf(".") + 2;
-        console.log(num);
-        if (val1.length > num) {
-            console.log(123);
-            var val2 = 0 | val * 100;
-            e.value = val2 / 100
-        }
-    }
+    // function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用
+    //     var val = parseFloat(e.value);
+    //     var val1 = e.value;
+    //     // console.log(val);
+    //     var num = val1.indexOf(".") + 2;
+    //     console.log(num);
+    //     if (val1.length > num) {
+    //         console.log(123);
+    //         var val2 = 0 | val * 100;
+    //         e.value = val2 / 100
+    //     }
+    // }
 
 
 

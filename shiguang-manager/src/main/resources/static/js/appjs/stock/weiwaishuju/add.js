@@ -14,6 +14,10 @@ function save() {
     var mfrsid =$('#mfrsid').val();
     var mfrsname =$('#mfrsname').val();
 
+    var gkname =$('#gkname').val();
+    var hyknum =$('#hyknum').val();
+    var phone =$('#phone').val();
+
     if (eyeStyle==3){//镜片
     	var rightNum =$("#rightNum").val();
     	var leftNum =$("#leftNum").val();
@@ -40,6 +44,10 @@ function save() {
                         window.localStorage.setItem("eyeStyle",eyeStyle);//类型
                         window.localStorage.setItem("mfrsid",mfrsid);//制造商num
                         window.localStorage.setItem("mfrsname",mfrsname);//制造商名称
+
+                        window.localStorage.setItem("gkname",gkname);
+                        window.localStorage.setItem("hyknum",hyknum);
+                        window.localStorage.setItem("phone",phone);
                         var index1 = window.parent.layer.getFrameIndex(window.name); // 获取窗口索引
                         // 获取窗口索引
                         window.parent.layer.close(index1);
