@@ -279,7 +279,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -293,7 +294,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                GROUP BY st.goods_name
+                GROUP BY st.goods_num
                 order by st.id desc
             </otherwise>
         </choose>
@@ -313,7 +314,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -342,7 +344,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -395,7 +398,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -430,7 +434,8 @@
             <if test="goodsCode != null and goodsCode != ''">and j.`produc_code` = #{goodsCode}</if>
             <if test="goodsName != null and goodsName != ''">and j.`produc_name` = #{goodsName}</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and j.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and j.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &lt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &gt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>
@@ -481,7 +486,8 @@
             <if test="goodsCode != null and goodsCode != ''">and j.`produc_code` = #{goodsCode}</if>
             <if test="goodsName != null and goodsName != ''">and j.`produc_name` = #{goodsName}</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and j.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and j.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and j.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &lt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &gt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>
@@ -520,7 +526,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -554,7 +561,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -579,7 +587,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -612,7 +621,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -637,7 +647,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -670,7 +681,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -695,7 +707,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -728,7 +741,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -753,7 +767,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -786,7 +801,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -811,7 +827,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -844,7 +861,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -933,7 +951,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -972,7 +991,8 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and st.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -1004,7 +1024,8 @@
             <if test="goodsCode != null and goodsCode != ''">and y.`produc_code` = #{goodsCode}</if>
             <if test="goodsName != null and goodsName != ''">and y.`produc_name` = #{goodsName}</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and y.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and y.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and y.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &lt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &gt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>
@@ -1038,7 +1059,8 @@
             <if test="goodsCode != null and goodsCode != ''">and y.`produc_code` = #{goodsCode}</if>
             <if test="goodsName != null and goodsName != ''">and y.`produc_name` = #{goodsName}</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
-            <if test="retailPrice != null and retailPrice != ''">and y.retail_price = #{retailPrice}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and y.retail_price >= #{retailPriceStart}</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and y.retail_price &lt;= #{retailPriceEnd}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &lt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &gt;= #{rightYuanYongQJ}</if>
             <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>

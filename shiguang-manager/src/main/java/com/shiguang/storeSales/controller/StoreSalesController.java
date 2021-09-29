@@ -172,8 +172,8 @@ public class StoreSalesController {
         model.addAttribute("optometryDO", optometryDO);
         Map<String, Object> map = new HashMap<>();
         map.put("roleType", 1);
-        if (null != ShiroUtils.getUser().getStoreNum()){
-            map.put("storeNum",ShiroUtils.getUser().getStoreNum());
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
         List<UserDO> userDOList = userService.getRoleList(map);
         model.addAttribute("userDOList", userDOList);
@@ -744,6 +744,7 @@ public class StoreSalesController {
 
     /**
      * 查询镜架
+     *
      *
      * @param params
      * @return

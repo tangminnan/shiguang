@@ -33,7 +33,7 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                consultRoom: $("#consultRoom").val()
+                                consultRoom: window.localStorage.getItem("consultRoom")
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -83,7 +83,9 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	var consultRoom = $("#consultRoom").val();
+	var consultRoom =window.localStorage.getItem("consultRoom");
+	alert(consultRoom);
+	alert("3424");
     var counter = 10;
     setInterval(function() {
         counter--;
