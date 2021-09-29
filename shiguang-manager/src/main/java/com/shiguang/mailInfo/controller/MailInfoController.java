@@ -38,7 +38,9 @@ public class MailInfoController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         List<MailInfoDO> infoList = infoService.list(query);
         int total = infoService.count(query);
         PageUtils pageUtils = new PageUtils(infoList, total);

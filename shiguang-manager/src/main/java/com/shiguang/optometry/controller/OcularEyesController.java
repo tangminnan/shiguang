@@ -54,10 +54,6 @@ public class OcularEyesController {
 //        query.put("dateNow",dateNow);
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyId",ShiroUtils.getUser().getCompanyId());
-        } else {
-            if (null != ShiroUtils.getUser().getStoreNum()){
-                query.put("departNumber",ShiroUtils.getUser().getStoreNum());
-            }
         }
         List<MemberDO> memberDOList = eyesService.findOptoEyesList(query);
         int total = eyesService.findOptoEyesCount(query);

@@ -42,8 +42,6 @@ public class DepartmentController {
         query.put("state",1);
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyId",ShiroUtils.getUser().getCompanyId());
-        } else if (null != ShiroUtils.getUser().getStoreNum()){
-            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
         List<DepartmentDO> departmentList = departmentService.list(query);
         int total = departmentService.count(query);
@@ -57,8 +55,6 @@ public class DepartmentController {
         Map<String, Object> map = new HashMap<>();
         if (null != ShiroUtils.getUser().getCompanyId()){
             map.put("ids",ShiroUtils.getUser().getCompanyId());
-        } else if (null != ShiroUtils.getUser().getStoreNum()){
-            map.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
         List<CompanyDO> list = companyService.list(map);
         model.addAttribute("companyList",list);
@@ -94,6 +90,7 @@ public class DepartmentController {
         Map<String,Object> map = new HashMap<>();
         String departNumber = department.getDepartNumber();
         map.put("departNumber",departNumber);
+        map.put("companyId",ShiroUtils.getUser().getCompanyId());
         List<DepartmentDO> list = departmentService.list(map);
         if (list.size() > 0){
             return R.error("部门编码已存在");

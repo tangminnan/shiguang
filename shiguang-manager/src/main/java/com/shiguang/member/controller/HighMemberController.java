@@ -84,6 +84,9 @@ public class HighMemberController {
 //                query.put("departNumber",ShiroUtils.getUser().getStoreNum());
 //            }
 //        }
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         List<MemberDO> memberList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberList, total);

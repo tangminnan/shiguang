@@ -17,6 +17,7 @@ import com.shiguang.system.obs.ObsService;
 import com.shiguang.system.service.RoleService;
 import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.xmlbeans.impl.jam.mutable.MPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -127,8 +128,10 @@ public class UserManagerController extends BaseController {
         if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
             return R.error(1, "演示系统不允许修改,完整体验请部署程序");
         }
+        Map<String,Object> map = new HashMap<>();
         String userName = user.getUsername();
-        UserDO userDO = userService.getUserName(userName);
+        map.put("userName",userName);
+        UserDO userDO = userService.getUserName(map);
         if (null != userDO){
             return R.error("该用户已存在");
         }

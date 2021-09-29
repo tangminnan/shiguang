@@ -80,7 +80,9 @@ public class GainLossController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-        query.put("companyId",ShiroUtils.getUser().getCompanyId());
+		if (null != ShiroUtils.getUser().getCompanyId()){
+			query.put("companyId",ShiroUtils.getUser().getCompanyId());
+		}
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		List<GainLossDO> gainLossList = gainLossService.list(query);
 		if (null != gainLossList && gainLossList.size() > 0){

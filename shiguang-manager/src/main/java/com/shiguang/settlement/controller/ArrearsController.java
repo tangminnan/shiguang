@@ -51,7 +51,9 @@ public class ArrearsController {
 //		PageUtils pageUtils = new PageUtils(settlementList, total);
         query.put("state",1);
         query.put("isSale",1);
-        query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        }
         query.put("payWay","定金");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         List<SettlementDO> settlementDOList = settlementService.findArrearsData(query);

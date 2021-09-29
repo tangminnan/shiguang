@@ -140,12 +140,12 @@
 	$().ready(function() {
 		var number = window.localStorage.getItem("number");//销售单号
 		var eyeStyle = window.localStorage.getItem("eyeStyle");//定做类型
-		alert(eyeStyle)
+		// alert(eyeStyle)
 		var mfrsid = window.localStorage.getItem("mfrsid");//制造商id
-		alert(mfrsid)
+		// alert(mfrsid)
 		$('#mfrsid').val(mfrsid);
 		var mfrsname = window.localStorage.getItem("mfrsname");//制造商名称
-		alert(mfrsname)
+		// alert(mfrsname)
 		$('#mfrsName').val(mfrsname);
 		if(eyeStyle==3){
 			$("#eyeStyle").find("[value='" + eyeStyle + "']").attr("selected", true);

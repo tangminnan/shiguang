@@ -58,6 +58,9 @@ public class UnqualiffedController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
+		if (null != ShiroUtils.getUser().getCompanyId()){
+			query.put("companyId",ShiroUtils.getUser().getCompanyId());
+		}
 		List<UnqualiffedDO> unqualiffedList = unqualiffedService.list(query);
 		int total = unqualiffedService.count(query);
 		PageUtils pageUtils = new PageUtils(unqualiffedList, total);

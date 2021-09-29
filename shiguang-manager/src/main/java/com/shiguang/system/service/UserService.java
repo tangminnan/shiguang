@@ -45,7 +45,7 @@ public interface UserService {
 
 	int findCountManages(Map<String,Object> map);
 
-	UserDO getUserName(String userName);
+	UserDO getUserName(Map<String,Object> map);
 
 	int resetPwd(UserVO userVO,UserDO userDO) throws Exception;
 	int adminResetPwd(UserVO userVO) throws Exception;

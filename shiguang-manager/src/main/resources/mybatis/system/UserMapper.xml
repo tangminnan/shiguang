@@ -13,7 +13,11 @@
 
 	<select id="getUserName" resultType="com.shiguang.system.domain.UserDO">
 		select `user_id`,`username`,`name`,`password`,`discount`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,
-		biaoge_neirong,`technical_title`,`consultation_fee`,`synopsis`,`head` from sys_user where username = #{value}
+		biaoge_neirong,`technical_title`,`consultation_fee`,`synopsis`,`head` from sys_user
+		<where>
+			<if test="userName != null and userName != ''"> and username = #{userName} </if>
+			<if test="conpanyId != null and conpanyId != ''"> and company_id = #{conpanyId} </if>
+		</where>
 	</select>
 
 	<select id="getRoleList" resultType="com.shiguang.system.domain.UserDO">

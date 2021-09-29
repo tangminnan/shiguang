@@ -43,7 +43,9 @@ public class InitialController {
         //查询列表数据
         Query query = new Query(params);
         query.put("logisticStatus","发料");
-        query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        }
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){

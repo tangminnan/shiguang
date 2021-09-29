@@ -42,7 +42,9 @@ public class CostController {
 //        PageUtils pageUtils = new PageUtils(costList, total);
         query.put("state",1);
         query.put("status","0");
-        query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         List<MemberDO> memberDOList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);

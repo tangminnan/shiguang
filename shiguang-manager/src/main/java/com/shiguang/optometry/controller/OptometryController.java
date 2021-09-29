@@ -61,10 +61,6 @@ public class OptometryController {
 //        query.put("dateNow",dateNow);
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyId",ShiroUtils.getUser().getCompanyId());
-        } else {
-            if (null != ShiroUtils.getUser().getStoreNum()){
-                query.put("departNumber",ShiroUtils.getUser().getStoreNum());
-            }
         }
         List<MemberDO> memberDOList = optometryService.findOptoList(query);
         int total = optometryService.findOptoCount(query);

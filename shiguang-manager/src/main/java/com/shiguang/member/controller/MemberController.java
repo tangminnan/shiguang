@@ -62,7 +62,9 @@ public class MemberController {
         //查询列表数据
         Query query = new Query(params);
         query.put("state",1);
-        query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         if (null != params.get("ageStart") && !"".equals(params.get("ageStart"))){
             query.put("agestart",Long.parseLong(params.get("ageStart").toString()));
             query.put("companyId","");

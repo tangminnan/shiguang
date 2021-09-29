@@ -8,24 +8,27 @@
 	</select>
 
 	<select id="list" resultType="com.shiguang.unqualiffed.domain.UnqualiffedDO">
-		select `id`,`document_number`,`department_appli`,`position_appli`,`sale_number`,`prepared_name`,`responsible_name`,`bill_number`,`cause`,`phenomenon`,`handle`,`bill_date` from unqualiffed
+		select u.`id`,u.`document_number`,u.`department_appli`,u.`position_appli`,u.`sale_number`,u.`prepared_name`,u.`responsible_name`,u.`bill_number`,u.`cause`,
+		u.`phenomenon`,u.`handle`,u.`bill_date`
+		from unqualiffed u join department d on d.depart_number = u.document_number join c_company c on c.id = d.company_id
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
-		  		  <if test="preparedName != null and preparedName != ''"> and prepared_name = #{preparedName} </if>
-		  		  <if test="responsibleName != null and responsibleName != ''"> and responsible_name = #{responsibleName} </if>
-		  		  <if test="billNumber != null and billNumber != ''"> and bill_number = #{billNumber} </if>
-		  		  <if test="cause != null and cause != ''"> and cause = #{cause} </if>
-		  		  <if test="phenomenon != null and phenomenon != ''"> and phenomenon = #{phenomenon} </if>
-		  		  <if test="handle != null and handle != ''"> and handle = #{handle} </if>
-		  		  <if test="billDate != null and billDate != ''"> and bill_date = #{billDate} </if>
+		  		  <if test="id != null and id != ''"> and u.id = #{id} </if>
+			      <if test="companyId !=null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and u.sale_number like concat('%', #{saleNumber},'%') </if>
+		  		  <if test="preparedName != null and preparedName != ''"> and u.prepared_name = #{preparedName} </if>
+		  		  <if test="responsibleName != null and responsibleName != ''"> and u.responsible_name = #{responsibleName} </if>
+		  		  <if test="billNumber != null and billNumber != ''"> and u.bill_number = #{billNumber} </if>
+		  		  <if test="cause != null and cause != ''"> and u.cause = #{cause} </if>
+		  		  <if test="phenomenon != null and phenomenon != ''"> and u.phenomenon = #{phenomenon} </if>
+		  		  <if test="handle != null and handle != ''"> and u.handle = #{handle} </if>
+		  		  <if test="billDate != null and billDate != ''"> and u.bill_date = #{billDate} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id desc
+                order by u.id desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -34,17 +37,18 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from unqualiffed
-		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-			 <if test="saleNumber != null and saleNumber != ''"> and sale_number like concat('%', #{saleNumber},'%') </if>
-		  		  <if test="preparedName != null and preparedName != ''"> and prepared_name = #{preparedName} </if>
-		  		  <if test="responsibleName != null and responsibleName != ''"> and responsible_name = #{responsibleName} </if>
-		  		  <if test="billNumber != null and billNumber != ''"> and bill_number = #{billNumber} </if>
-		  		  <if test="cause != null and cause != ''"> and cause = #{cause} </if>
-		  		  <if test="phenomenon != null and phenomenon != ''"> and phenomenon = #{phenomenon} </if>
-		  		  <if test="handle != null and handle != ''"> and handle = #{handle} </if>
-		  		  <if test="billDate != null and billDate != ''"> and bill_date = #{billDate} </if>
+		select count(*) from unqualiffed u join department d on d.depart_number = u.document_number join c_company c on c.id = d.company_id
+		 <where>
+			 <if test="id != null and id != ''"> and u.id = #{id} </if>
+			 <if test="companyId !=null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+			 <if test="saleNumber != null and saleNumber != ''"> and u.sale_number like concat('%', #{saleNumber},'%') </if>
+			 <if test="preparedName != null and preparedName != ''"> and u.prepared_name = #{preparedName} </if>
+			 <if test="responsibleName != null and responsibleName != ''"> and u.responsible_name = #{responsibleName} </if>
+			 <if test="billNumber != null and billNumber != ''"> and u.bill_number = #{billNumber} </if>
+			 <if test="cause != null and cause != ''"> and u.cause = #{cause} </if>
+			 <if test="phenomenon != null and phenomenon != ''"> and u.phenomenon = #{phenomenon} </if>
+			 <if test="handle != null and handle != ''"> and u.handle = #{handle} </if>
+			 <if test="billDate != null and billDate != ''"> and u.bill_date = #{billDate} </if>
 		  		</where>
 	</select>
 	 

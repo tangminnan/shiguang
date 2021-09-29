@@ -158,8 +158,12 @@ public class UserController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
+		Map<String,Object> map = new HashMap<>();
 		String userName = user.getUsername();
-		UserDO userDO = userService.getUserName(userName);
+		String conpanyId = ShiroUtils.getUser().getCompanyId();
+		map.put("userName",userName);
+		map.put("conpanyId",conpanyId);
+		UserDO userDO = userService.getUserName(map);
 		if (null != userDO){
 			return R.error("该用户已存在");
 		}

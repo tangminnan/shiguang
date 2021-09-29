@@ -127,7 +127,9 @@ public class StoreSalesController {
 //        List<OptometryDO> optometryList = optometryService.list(query);
 //        int total = optometryService.count(query);
         query.put("state", 1);
-        query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         List<MemberDO> memberDOList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);

@@ -60,7 +60,9 @@ public class DrawBackController {
 //		int total = settlementService.count(query);
 //		PageUtils pageUtils = new PageUtils(settlementList, total);
         query.put("state",1);
-        query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        }
         List<MemberDO> memberDOList = drawbackService.memberList(query);
         int total = drawbackService.memberCount(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);

@@ -261,8 +261,8 @@ public class UserServiceImpl implements UserService {
 	public int findCountManages(Map<String,Object> map){return userMapper.findCountManages(map);}
 
 	@Override
-	public UserDO getUserName(String userName) {
-		return userMapper.getUserName(userName);
+	public UserDO getUserName(Map<String,Object> map) {
+		return userMapper.getUserName(map);
 	}
 
 }
