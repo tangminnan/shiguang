@@ -54,6 +54,7 @@ public class LineController {
         Query query = new Query(params);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         query.put("lineTime",simpleDateFormat.format(new Date()));
+		query.put("storey","4");
         List<LineDO> lineList = lineService.list(query);
 		if (null != lineList && lineList.size() > 0){
 			for (LineDO lineDO : lineList){
@@ -104,6 +105,7 @@ public class LineController {
 		Map<String,Object> map = new HashMap<>();
 		map.put("consultRoom",consultRoom);
 		map.put("lineTime",simpleDateFormat.format(new Date()));
+		map.put("storey","4");
 		List<LineDO> lineDOList = lineService.list(map);
 		if (null != lineDOList && lineDOList.size() > 0){
 			Long lineId = lineDOList.get(0).getId();
@@ -125,6 +127,7 @@ public class LineController {
 			lineMemberDO.setName(lineDOs.getName());
 			lineMemberDO.setSex(lineDOs.getSex());
 			lineMemberDO.setLineTime(lineDOs.getLineTime());
+			lineMemberDO.setStorey(lineDOs.getStorey());
 			if(lineMemberService.save(lineMemberDO)>0){
 				return R.ok();
 			}
@@ -143,6 +146,7 @@ public class LineController {
 		Map<String,Object> map = new HashMap<>();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		map.put("lineTime",simpleDateFormat.format(new Date()));
+		map.put("storey","4");
 		List<LineDO> lineDOList = lineService.lineList(map);
 		resultMap.put("lineDOList",lineDOList);
 		List<LineMemberDO> lineMemberDOList = new ArrayList<>();
@@ -204,6 +208,7 @@ public class LineController {
 		lineMemberDO.setConsultRoom(consultRoom);
 		lineMemberDO.setName(lineDOs.getName());
 		lineMemberDO.setSex(lineDOs.getSex());
+		lineMemberDO.setStorey(lineDOs.getStorey());
 		if(lineMemberService.save(lineMemberDO)>0){
 			return R.ok();
 		}

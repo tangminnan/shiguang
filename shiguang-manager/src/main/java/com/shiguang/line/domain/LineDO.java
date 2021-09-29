@@ -30,6 +30,8 @@ public class LineDO implements Serializable {
 	private String callStatus;
 	//诊室
 	private String consultRoom;
+	//楼层
+	private String storey;
 	//排队日期
 	private Date lineTime;
 	private String lineDate;
@@ -123,6 +125,14 @@ public class LineDO implements Serializable {
 	public String getConsultRoom() {
 		return consultRoom;
 	}
+	/**
+	 * 楼层
+	 */
+	public void setStorey(String storey){this.storey = storey;}
+	/**
+	 * 楼层
+	 */
+	public String getStorey(){return storey;}
 	/**
 	 * 设置：排队日期
 	 */

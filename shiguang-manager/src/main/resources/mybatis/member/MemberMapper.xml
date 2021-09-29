@@ -81,7 +81,7 @@
     <where>
         <if test="id != null and id != ''"> and m.id = #{id} </if>
         <if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
-        <if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
+        <if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
         <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
         <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
         <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
@@ -118,7 +118,7 @@
             <if test="id != null and id != ''"> and m.id = #{id} </if>
             <if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
             <if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
-            <if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
+            <if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
             <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>

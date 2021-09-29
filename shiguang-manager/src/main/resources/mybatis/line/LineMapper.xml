@@ -4,16 +4,17 @@
 <mapper namespace="com.shiguang.line.dao.LineDao">
 
     <select id="get" resultType="com.shiguang.line.domain.LineDO">
-		select `id`,`member_number`,`sex`,`name`,`call_type`,`call_status`,`consult_room`,`line_time` from line where id = #{value}
+		select `id`,`member_number`,`sex`,`name`,`call_type`,`call_status`,`consult_room`,`storey`,`line_time` from line where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.line.domain.LineDO">
-        select `id`,`member_number`,`sex`,`name`,`call_type`,`call_status`,`consult_room`,`line_time` from line
+        select `id`,`member_number`,`sex`,`name`,`call_type`,`call_status`,`consult_room`,`storey`,`line_time` from line
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="storey != null and storey != ''"> and storey = #{storey} </if>
             <if test="callType != null and callType != ''"> and call_type = #{callType} </if>
             <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
             <!--and call_status in ('1','2','3') or call_status = '0'-->
@@ -48,13 +49,14 @@
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="callType != null and callType != ''"> and call_type = #{callType} </if>
+            <if test="storey != null and storey != ''"> and storey = #{storey} </if>
             <if test="callStatus != null and callStatus != ''"> and call_status = #{callStatus} </if>
             <choose>
                 <when test="consultRoom != null and consultRoom != ''">
                     and (consult_room = #{consultRoom} and call_status in ('1','2','3') or call_status = '0')
                 </when>
                 <otherwise>
-                    call_status = '0'
+                   and (call_status in ('1','2','3') or call_status = '0')
                 </otherwise>
             </choose>
 
@@ -65,13 +67,14 @@
     </select>
 
     <select id="lineList" resultType="com.shiguang.line.domain.LineDO">
-        select `id`,`member_number`,`sex`,`name`,`call_type`,`call_status`,`consult_room`,`line_time` from line
+        select `id`,`member_number`,`sex`,`name`,`call_type`,`call_status`,`consult_room`,`storey`,`line_time` from line
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="callType != null and callType != ''"> and call_type = #{callType} </if>
+            <if test="storey != null and storey != ''"> and storey = #{storey} </if>
             <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
             and (consult_room is null or consult_room ='') and call_status != '4'
@@ -99,6 +102,7 @@
 			`call_type`,
 			`call_status`,
 			`consult_room`,
+			`storey`,
 			`line_time`
 		)
 		values
@@ -110,6 +114,7 @@
 			#{callType},
 			#{callStatus},
 			#{consultRoom},
+			#{storey},
 			#{lineTime}
 		)
 	</insert>

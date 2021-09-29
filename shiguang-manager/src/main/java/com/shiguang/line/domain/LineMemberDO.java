@@ -16,6 +16,8 @@ public class LineMemberDO implements Serializable {
     private Long sex;
     //诊室
     private String consultRoom;
+    //楼层
+    private String storey;
     //创建时间
     private Date lineTime;
     private String lineDate;
@@ -80,6 +82,14 @@ public class LineMemberDO implements Serializable {
     public String getConsultRoom() {
         return consultRoom;
     }
+    /**
+     * 楼层
+     */
+    public void setStorey(String storey){this.storey = storey;}
+    /**
+     * 楼层
+     */
+    public String getStorey(){return storey;}
 
     public void setLineTime(Date lineTime){this.lineTime = lineTime;}
 

@@ -3,15 +3,16 @@
 
 <mapper namespace="com.shiguang.line.dao.LineMemberDao">
     <select id="get" resultType="com.shiguang.line.domain.LineMemberDO">
-		select `id`,`member_number`,`name`,`sex`,`consult_room`,`line_time` from line_member where id = #{value}
+		select `id`,`member_number`,`name`,`sex`,`consult_room`,`storey`,`line_time` from line_member where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.line.domain.LineMemberDO">
-        select `id`,`member_number`,`name`,`sex`,`consult_room`,`line_time` from line_member
+        select `id`,`member_number`,`name`,`sex`,`consult_room`,`storey`,`line_time` from line_member
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="storey != null and storey != ''"> and storey = #{storey} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="consultRoom != null and consultRoom != ''"> and consult_room = #{consultRoom} </if>
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
@@ -34,6 +35,7 @@
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="storey != null and storey != ''"> and storey = #{storey} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="consultRoom != null and consultRoom != ''"> and consult_room = #{consultRoom} </if>
@@ -42,9 +44,10 @@
     </select>
 
     <select id="listMember" resultType="com.shiguang.line.domain.LineDO">
-        select `id`,`member_number`,`name`,`sex`,`consult_room`,`line_time` from line
+        select `id`,`member_number`,`name`,`sex`,`consult_room`,`storey`,`line_time` from line
         <where>
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+            <if test="storey != null and storey != ''"> and storey = #{storey} </if>
             and consult_room is not null and call_status != '4'
         </where>
         <choose>
@@ -67,6 +70,7 @@
 			`name`,
 			`sex`,
 			`consult_room`,
+			`storey`,
 			`line_time`
 		)
 		values
@@ -75,6 +79,7 @@
 			#{name},
 			#{sex},
 			#{consultRoom},
+			#{storey},
 			#{lineTime}
 		)
 	</insert>
