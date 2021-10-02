@@ -87,8 +87,8 @@ public class HighMemberController {
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
-        List<MemberDO> memberList = memberService.list(query);
-        int total = memberService.count(query);
+        List<MemberDO> memberList = memberService.heightlist(query);
+        int total = memberService.heightcount(query);
         PageUtils pageUtils = new PageUtils(memberList, total);
         return pageUtils;
     }

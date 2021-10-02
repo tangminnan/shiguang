@@ -34,12 +34,15 @@ import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.xmlgraphics.xmp.schemas.DublinCoreAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.plaf.metal.MetalTheme;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.*;
 
 @Controller("StoreSalesController")
@@ -249,21 +252,21 @@ public class StoreSalesController {
     @PostMapping("/save")
     @RequiresPermissions("information:store:add")
     public R save(SalesDO salesDO) {
-        if (null == salesDO.getIsJp() || null == salesDO.getIsJj()) {
-            salesDO.setIsJp(0L);
-            salesDO.setIsJj("无");
-        }
-        if (!salesDO.getStoreDescribe().contains("隐形")){
-            if ("镜架".equals(salesDO.getStoreDescribe())
-                    || "镜片".equals(salesDO.getStoreDescribe())) {
-                if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
-                    return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
-                }
-            }
-            if (salesDO.getIsJp() < 2 ) {
-                return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
-            }
-        }
+//        if (null == salesDO.getIsJp() || null == salesDO.getIsJj()) {
+//            salesDO.setIsJp(0L);
+//            salesDO.setIsJj("无");
+//        }
+//        if (!salesDO.getStoreDescribe().contains("隐形")){
+//            if ("镜架".equals(salesDO.getStoreDescribe())
+//                    || "镜片".equals(salesDO.getStoreDescribe())) {
+//                if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
+//                    return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
+//                }
+//            }
+//            if (salesDO.getIsJp() < 2 ) {
+//                return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
+//            }
+//        }
 
         Long saleNumber = GuuidUtil.getUUID();
         salesDO.setSaleNumber("X" + saleNumber);
@@ -810,6 +813,18 @@ public class StoreSalesController {
         //查询列表数据
         Query query = new Query(params);
         Map<String,Object> maps = new HashMap<>();
+        if (null != params.get("goodsName") && !"".equals(params.get("goodsName"))){
+            maps.put("goodsName",params.get("goodsName"));
+        }
+        if (null != params.get("goodsNum") && !"".equals(params.get("goodsNum"))){
+            maps.put("goodsNum",params.get("goodsNum"));
+        }
+        if (null != params.get("retailPriceStart") && !"".equals(params.get("retailPriceStart"))){
+            maps.put("retailPriceStart",params.get("retailPriceStart"));
+        }
+        if (null != params.get("retailPriceEnd") && !"".equals(params.get("retailPriceEnd"))){
+            maps.put("retailPriceEnd",params.get("retailPriceEnd"));
+        }
         PageUtils pageUtils = null;
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
@@ -853,6 +868,7 @@ public class StoreSalesController {
                 int total = stockService.countJpcp(maps);
                 pageUtils = new PageUtils(jpcpDOList, total);
             } else if ("1".equals(dzType)) {
+                List<StockDO> newJpdzList = new ArrayList<>();
                 List<StockDO> jpdzDOList = stockService.listJpdz(maps);
                 if (null != jpdzDOList && jpdzDOList.size() > 0){
                     for (StockDO stockDO : jpdzDOList){
@@ -861,10 +877,166 @@ public class StoreSalesController {
                         } else if ("1".equals(params.get("jingpianType").toString())){
                             stockDO.setLeftRight("左");
                         }
+                        if ("0.00".equals(stockDO.getSphUp())){
+                            stockDO.setSphUp("+"+stockDO.getSphUp());
+                        }
+                        if ("0.00".equals(stockDO.getSphDown())){
+                            stockDO.setSphDown("+"+stockDO.getSphDown());
+                        }
+                        if ("0.00".equals(stockDO.getCylUp())){
+                            stockDO.setCylUp("+"+stockDO.getCylUp());
+                        }
+                        if ("0.00".equals(stockDO.getCylDown())){
+                            stockDO.setCylDown("+"+stockDO.getCylDown());
+                        }
+                        Double stockSphUp=null;
+                        Double stockSphDown=null;
+                        Double stockCylUp=null;
+                        Double stockCylDown=null;
+                        Double rightqj = null;
+                        Double rightzj = null;
+                        Double leftqj = null;
+                        Double leftzj = null;
+                        if ("0".equals(params.get("jingpianType").toString())){
+                            if (params.get("rightYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("-")){
+                                rightqj = Math.abs(Double.parseDouble(params.get("rightYuanYongQJ").toString()));
+                                stockSphUp = Math.abs(Double.parseDouble(stockDO.getSphUp()));
+                                stockSphDown = Math.abs(Double.parseDouble(stockDO.getSphDown()));
+                                if (rightqj > stockSphUp || rightqj < stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
+                                rightqj = Double.parseDouble(params.get("rightYuanYongQJ").toString());
+                                stockSphUp = Double.parseDouble(stockDO.getSphUp());
+                                stockSphDown = Double.parseDouble(stockDO.getSphDown());
+                                if (rightqj < stockSphUp || rightqj > stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("rightYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("-")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("rightYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("+")){
+                                rightqj = Math.abs(Double.parseDouble(params.get("rightYuanYongQJ").toString()));
+                                stockSphUp = Math.abs(Double.parseDouble(stockDO.getSphUp()));
+                                if (rightqj > stockSphUp){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("+")){
+                                rightqj = Double.parseDouble(params.get("rightYuanYongQJ").toString());
+                                stockSphUp = Double.parseDouble(stockDO.getSphUp());
+                                stockSphDown = Double.parseDouble(stockDO.getSphDown());
+                                if(rightqj > stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            }
+                            if (params.get("rightYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("-")){
+                                rightzj = Math.abs(Double.parseDouble(params.get("rightYuanYongZJ").toString()));
+                                stockCylUp = Math.abs(Double.parseDouble(stockDO.getCylUp()));
+                                stockCylDown = Math.abs(Double.parseDouble(stockDO.getCylDown()));
+                                if (rightzj > stockCylUp || rightzj < stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
+                                rightzj = Double.parseDouble(params.get("rightYuanYongZJ").toString());
+                                stockCylUp = Double.parseDouble(stockDO.getCylUp());
+                                stockCylDown = Double.parseDouble(stockDO.getCylDown());
+                                if (rightzj < stockCylUp || rightqj > stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("rightYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("-")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("rightYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("+")){
+                                rightzj = Math.abs(Double.parseDouble(params.get("rightYuanYongZJ").toString()));
+                                stockCylUp = Math.abs(Double.parseDouble(stockDO.getCylUp()));
+                                if (rightzj > stockCylUp){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("+")){
+                                rightzj = Double.parseDouble(params.get("rightYuanYongZJ").toString());
+                                stockCylUp = Double.parseDouble(stockDO.getCylUp());
+                                stockCylDown = Double.parseDouble(stockDO.getCylDown());
+                                if(rightzj > stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            }
+                        } else if ("1".equals(params.get("jingpianType").toString())){
+                            if (params.get("leftYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("-")){
+                                leftqj = Math.abs(Double.parseDouble(params.get("leftYuanYongQJ").toString()));
+                                stockSphUp = Math.abs(Double.parseDouble(stockDO.getSphUp()));
+                                stockSphDown = Math.abs(Double.parseDouble(stockDO.getSphDown()));
+                                if (leftqj > stockSphUp || leftqj < stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
+                                leftqj = Double.parseDouble(params.get("leftYuanYongQJ").toString());
+                                stockSphUp = Double.parseDouble(stockDO.getSphUp());
+                                stockSphDown = Double.parseDouble(stockDO.getSphDown());
+                                if (leftqj < stockSphUp || leftqj > stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("leftYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("-")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("leftYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("+")){
+                                leftqj = Math.abs(Double.parseDouble(params.get("leftYuanYongQJ").toString()));
+                                stockSphUp = Math.abs(Double.parseDouble(stockDO.getSphUp()));
+                                if (leftqj > stockSphUp){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("+")){
+                                leftqj = Double.parseDouble(params.get("leftYuanYongQJ").toString());
+                                stockSphUp = Double.parseDouble(stockDO.getSphUp());
+                                stockSphDown = Double.parseDouble(stockDO.getSphDown());
+                                if(leftqj > stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            }
+                            if (params.get("leftYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("-")){
+                                leftzj = Math.abs(Double.parseDouble(params.get("leftYuanYongZJ").toString()));
+                                stockCylUp = Math.abs(Double.parseDouble(stockDO.getCylUp()));
+                                stockCylDown = Math.abs(Double.parseDouble(stockDO.getCylDown()));
+                                if (leftzj > stockCylUp || leftzj < stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
+                                leftzj = Double.parseDouble(params.get("leftYuanYongZJ").toString());
+                                stockCylUp = Double.parseDouble(stockDO.getCylUp());
+                                stockCylDown = Double.parseDouble(stockDO.getCylDown());
+                                if (leftzj < stockCylUp || leftzj > stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("leftYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("-")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("leftYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("+")){
+                                leftzj = Math.abs(Double.parseDouble(params.get("leftYuanYongZJ").toString()));
+                                stockCylUp = Math.abs(Double.parseDouble(stockDO.getCylUp()));
+                                if (leftzj > stockCylUp){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("+")){
+                                leftzj = Double.parseDouble(params.get("leftYuanYongZJ").toString());
+                                stockCylUp = Double.parseDouble(stockDO.getCylUp());
+                                stockCylDown = Double.parseDouble(stockDO.getCylDown());
+                                if(leftzj > stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            }
+                        }
                     }
                 }
-                int total = stockService.countJpdz(maps);
-                pageUtils = new PageUtils(jpdzDOList, total);
+                for (StockDO stockDO : jpdzDOList){
+                    if (!"1".equals(stockDO.getGoodsCode())){
+                        newJpdzList.add(stockDO);
+                    }
+                }
+                int total = newJpdzList.size();
+                pageUtils = new PageUtils(newJpdzList, total);
             }
         } else {
             List<StockDO> jpcpDOList = stockService.listJpcp(maps);
@@ -1226,6 +1398,18 @@ public class StoreSalesController {
         //查询列表数据
         Query query = new Query(params);
         Map<String,Object> maps = new HashMap<>();
+        if (null != params.get("goodsName") && !"".equals(params.get("goodsName"))){
+            maps.put("goodsName",params.get("goodsName"));
+        }
+        if (null != params.get("goodsNum") && !"".equals(params.get("goodsNum"))){
+            maps.put("goodsNum",params.get("goodsNum"));
+        }
+        if (null != params.get("retailPriceStart") && !"".equals(params.get("retailPriceStart"))){
+            maps.put("retailPriceStart",params.get("retailPriceStart"));
+        }
+        if (null != params.get("retailPriceEnd") && !"".equals(params.get("retailPriceEnd"))){
+            maps.put("retailPriceEnd",params.get("retailPriceEnd"));
+        }
         PageUtils pageUtils = null;
         Map<String,Object> mapstr = new HashMap<>();
         List<GoodsDO> goodsDOList = goodsService.list(mapstr);
@@ -1237,7 +1421,7 @@ public class StoreSalesController {
         }
         if (null != params.get("yxType")) {
             if ("0".equals(params.get("jingpianType").toString())) {
-                maps.put("rightYuanYongQJ", params.get("rightYuanYongQJ"));
+                maps.put("rightYuanYongQJ",params.get("rightYuanYongQJ"));
                 maps.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
             } else if ("1".equals(params.get("jingpianType").toString())) {
                 maps.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
@@ -1275,7 +1459,32 @@ public class StoreSalesController {
                     map.put("departNumber", departNumber);
                 }
                 maps.put("goodsType",goodsId);
+//                if (params.get("rightYuanYongQJ").toString().contains("-")){
+//                    maps.put("fuhao",Double.parseDouble("-"));
+//                    maps.put("rightYuanYongQJF",Double.parseDouble(params.get("rightYuanYongQJ").toString().substring(0,1)));
+//                } else if (params.get("rightYuanYongQJ").toString().contains("+")){
+//                    maps.put("fuhao",Double.parseDouble("+"));
+//                    maps.put("rightYuanYongQJZ", Double.parseDouble(params.get("rightYuanYongQJ").toString().substring(0,1)));
+//                }
+//                if (params.get("rightYuanYongZJ").toString().contains("-")){
+//                    maps.put("fuhao",Double.parseDouble("-"));
+//                    maps.put("rightYuanYongZJF", Double.parseDouble(params.get("rightYuanYongZJ").toString().substring(0,1)));
+//                } else if (params.get("rightYuanYongZJ").toString().contains("+")){
+//                    maps.put("fuhao",Double.parseDouble("+"));
+//                    maps.put("rightYuanYongZJZ", Double.parseDouble(params.get("rightYuanYongZJ").toString().substring(0,1)));
+//                }
+//                if (params.get("leftYuanYongQJ").toString().contains("-")){
+//                    maps.put("leftYuanYongQJF",params.get("leftYuanYongQJ"));
+//                } else if (params.get("leftYuanYongQJ").toString().contains("+")){
+//                    maps.put("leftYuanYongQJZ", params.get("leftYuanYongQJ"));
+//                }
+//                if (params.get("leftYuanYongZJ").toString().contains("-")){
+//                    maps.put("leftYuanYongZJF", params.get("leftYuanYongZJ"));
+//                } else if (params.get("leftYuanYongZJ").toString().contains("+")){
+//                    maps.put("leftYuanYongZJZ", params.get("leftYuanYongZJ"));
+//                }
                 List<StockDO> yxdzDOList = stockService.listYxdz(maps);
+                List<StockDO> newyxdzList = new ArrayList<>();
                 if (null != yxdzDOList && yxdzDOList.size() > 0){
                     for (StockDO stockDO : yxdzDOList){
                         if ("0".equals(params.get("jingpianType").toString())){
@@ -1283,10 +1492,168 @@ public class StoreSalesController {
                         } else if ("1".equals(params.get("jingpianType").toString())){
                             stockDO.setLeftRight("左");
                         }
+                        if ("0.00".equals(stockDO.getSphUp())){
+                            stockDO.setSphUp("+"+stockDO.getSphUp());
+                        }
+                        if ("0.00".equals(stockDO.getSphDown())){
+                            stockDO.setSphDown("+"+stockDO.getSphDown());
+                        }
+                        if ("0.00".equals(stockDO.getCylUp())){
+                            stockDO.setCylUp("+"+stockDO.getCylUp());
+                        }
+                        if ("0.00".equals(stockDO.getCylDown())){
+                            stockDO.setCylDown("+"+stockDO.getCylDown());
+                        }
+                        Double stockSphUp=null;
+                        Double stockSphDown=null;
+                        Double stockCylUp=null;
+                        Double stockCylDown=null;
+                        Double rightqj = null;
+                        Double rightzj = null;
+                        Double leftqj = null;
+                        Double leftzj = null;
+                        if ("0".equals(params.get("jingpianType").toString())){
+                            if (params.get("rightYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("-")){
+                                rightqj = Math.abs(Double.parseDouble(params.get("rightYuanYongQJ").toString()));
+                                stockSphUp = Math.abs(Double.parseDouble(stockDO.getSphUp()));
+                                stockSphDown = Math.abs(Double.parseDouble(stockDO.getSphDown()));
+                                if (rightqj > stockSphUp || rightqj < stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
+                                rightqj = Double.parseDouble(params.get("rightYuanYongQJ").toString());
+                                stockSphUp = Double.parseDouble(stockDO.getSphUp());
+                                stockSphDown = Double.parseDouble(stockDO.getSphDown());
+                                if (rightqj < stockSphUp || rightqj > stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("rightYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("-")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("rightYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("+")){
+                                rightqj = Math.abs(Double.parseDouble(params.get("rightYuanYongQJ").toString()));
+                                stockSphUp = Math.abs(Double.parseDouble(stockDO.getSphUp()));
+                                if (rightqj > stockSphUp){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("+")){
+                                rightqj = Double.parseDouble(params.get("rightYuanYongQJ").toString());
+                                stockSphUp = Double.parseDouble(stockDO.getSphUp());
+                                stockSphDown = Double.parseDouble(stockDO.getSphDown());
+                                if(rightqj > stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            }
+                            if (params.get("rightYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("-")){
+                                rightzj = Math.abs(Double.parseDouble(params.get("rightYuanYongZJ").toString()));
+                                stockCylUp = Math.abs(Double.parseDouble(stockDO.getCylUp()));
+                                stockCylDown = Math.abs(Double.parseDouble(stockDO.getCylDown()));
+                                if (rightzj > stockCylUp || rightzj < stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
+                                rightzj = Double.parseDouble(params.get("rightYuanYongZJ").toString());
+                                stockCylUp = Double.parseDouble(stockDO.getCylUp());
+                                stockCylDown = Double.parseDouble(stockDO.getCylDown());
+                                if (rightzj < stockCylUp || rightqj > stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("rightYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("-")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("rightYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("+")){
+                                rightzj = Math.abs(Double.parseDouble(params.get("rightYuanYongZJ").toString()));
+                                stockCylUp = Math.abs(Double.parseDouble(stockDO.getCylUp()));
+                                if (rightzj > stockCylUp){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("rightYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("+")){
+                                rightzj = Double.parseDouble(params.get("rightYuanYongZJ").toString());
+                                stockCylUp = Double.parseDouble(stockDO.getCylUp());
+                                stockCylDown = Double.parseDouble(stockDO.getCylDown());
+                                if(rightzj > stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            }
+                        } else if ("1".equals(params.get("jingpianType").toString())){
+                            if (params.get("leftYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("-")){
+                                leftqj = Math.abs(Double.parseDouble(params.get("leftYuanYongQJ").toString()));
+                                stockSphUp = Math.abs(Double.parseDouble(stockDO.getSphUp()));
+                                stockSphDown = Math.abs(Double.parseDouble(stockDO.getSphDown()));
+                                if (leftqj > stockSphUp || leftqj < stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
+                                leftqj = Double.parseDouble(params.get("leftYuanYongQJ").toString());
+                                stockSphUp = Double.parseDouble(stockDO.getSphUp());
+                                stockSphDown = Double.parseDouble(stockDO.getSphDown());
+                                if (leftqj < stockSphUp || leftqj > stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("leftYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("-")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("leftYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("+")){
+                                leftqj = Math.abs(Double.parseDouble(params.get("leftYuanYongQJ").toString()));
+                                stockSphUp = Math.abs(Double.parseDouble(stockDO.getSphUp()));
+                                if (leftqj > stockSphUp){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("-") && stockDO.getSphDown().contains("+")){
+                                leftqj = Double.parseDouble(params.get("leftYuanYongQJ").toString());
+                                stockSphUp = Double.parseDouble(stockDO.getSphUp());
+                                stockSphDown = Double.parseDouble(stockDO.getSphDown());
+                                if(leftqj > stockSphDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            }
+                            if (params.get("leftYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("-")){
+                                leftzj = Math.abs(Double.parseDouble(params.get("leftYuanYongZJ").toString()));
+                                stockCylUp = Math.abs(Double.parseDouble(stockDO.getCylUp()));
+                                stockCylDown = Math.abs(Double.parseDouble(stockDO.getCylDown()));
+                                if (leftzj > stockCylUp || leftzj < stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
+                                leftzj = Double.parseDouble(params.get("leftYuanYongZJ").toString());
+                                stockCylUp = Double.parseDouble(stockDO.getCylUp());
+                                stockCylDown = Double.parseDouble(stockDO.getCylDown());
+                                if (leftzj < stockCylUp || leftzj > stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("leftYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("-")){
+                                stockDO.setGoodsCode("1");
+                            } else if (params.get("leftYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("+")){
+                                leftzj = Math.abs(Double.parseDouble(params.get("leftYuanYongZJ").toString()));
+                                stockCylUp = Math.abs(Double.parseDouble(stockDO.getCylUp()));
+                                if (leftzj > stockCylUp){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            } else if (params.get("leftYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("-") && stockDO.getCylDown().contains("+")){
+                                leftzj = Double.parseDouble(params.get("leftYuanYongZJ").toString());
+                                stockCylUp = Double.parseDouble(stockDO.getCylUp());
+                                stockCylDown = Double.parseDouble(stockDO.getCylDown());
+                                if(leftzj > stockCylDown){
+                                    stockDO.setGoodsCode("1");
+                                }
+                            }
+                        }
+
                     }
                 }
-                int total = stockService.countYxdz(maps);
-                pageUtils = new PageUtils(yxdzDOList, total);
+                for (StockDO stockDO : yxdzDOList){
+                    if (!"1".equals(stockDO.getGoodsCode())){
+                        newyxdzList.add(stockDO);
+                    }
+                }
+                //int total = stockService.countYxdz(maps);
+                int total = newyxdzList.size();
+                pageUtils = new PageUtils(newyxdzList, total);
             }
         } else {
             List<StockDO> yxcpDOList = stockService.listYxcp(query);

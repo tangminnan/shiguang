@@ -34,29 +34,29 @@
                             </i>视光中心管理系统
                         </h3>
                     </div>
-                    <div class="dropdown profile-element hidden">
+                    <div class="dropdown profile-element">
 
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear">
-                            <span class="block m-t-xs"><strong class="font-bold"
-                                                               th:text="${username}">admin</strong></span>
-                            <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
-                             </span>
+                            <!--<span class="clear">当前登录人：-->
+                            <!--&lt;!&ndash;<span class="block m-t-xs"><strong class="font-bold"&ndash;&gt;-->
+                                                               <!--&lt;!&ndash;th:text="${username}">admin</strong></span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>&ndash;&gt;-->
+                             <!--</span>-->
                         </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a @click="personal" href="#">修改头像</a>
-                            </li>
-                            <li><a @click="personal" href="#">个人资料</a>
-                            </li>
-                            <li><a @click="personal" href="#">密码修改</a>
-                            </li>
-                            <li><a @click="personal" href="#">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="/logout">安全退出</a>
-                            </li>
-                        </ul>
-                        <div class="logo-element">针灸治疗仪</div>
+                        <!--<ul class="dropdown-menu animated fadeInRight m-t-xs">-->
+                            <!--<li><a @click="personal" href="#">修改头像</a>-->
+                            <!--</li>-->
+                            <!--<li><a @click="personal" href="#">个人资料</a>-->
+                            <!--</li>-->
+                            <!--<li><a @click="personal" href="#">密码修改</a>-->
+                            <!--</li>-->
+                            <!--<li><a @click="personal" href="#">信箱</a>-->
+                            <!--</li>-->
+                            <!--<li class="divider"></li>-->
+                            <!--<li><a href="/logout">安全退出</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                        <!--<div class="logo-element">针灸治疗仪</div>-->
                     </div>
                 </li>
                 <li><a href="#"> <i class="fa fa-home"></i> <span
@@ -148,6 +148,10 @@
                        data-id="index_v1.html">首页</a>
                 </div>
             </nav>
+            <div style="right: 80px;position:absolute;">当前登录人：
+                <strong class="font-bold"
+                        th:text="${username}">admin</strong>
+            </div>
             <button class="roll-nav roll-right J_tabRight">
                 <i class="fa fa-forward"></i>
             </button>

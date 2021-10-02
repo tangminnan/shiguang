@@ -43,8 +43,9 @@ function load() {
                         areaName: $("#areaName").val(),
                         vocation: $("#vocation").val(),
                         source: $("#source").val(),
-                        cardType: $("#cardType").val()
-
+                        cardType: $("#cardType").val(),
+                        peijingTimeStart: $("#peijingTimeStart").val(),
+                        peijingTimeEnd: $("#peijingTimeEnd").val()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

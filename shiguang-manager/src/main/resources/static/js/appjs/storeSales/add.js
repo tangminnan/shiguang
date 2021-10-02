@@ -8,6 +8,10 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+    layer.confirm("确认是否要结算", {
+        btn : [ '确定', '取消' ]
+        // 按钮
+    }, function() {
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -30,7 +34,9 @@ function save() {
 
 		}
 	});
+    }, function() {
 
+    });
 }
 
 function jiesuan(){

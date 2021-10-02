@@ -106,6 +106,12 @@
 						</select>
 						<input id="departNumber" name="departNumber" class="form-control" type="hidden">
 					</div>
+					<div class="columns pull-right nopadding">
+						<input id="peijingTimeStart" type="text"
+							   placeholder="配镜时间">
+						<input id="peijingTimeEnd" type="text"
+							   placeholder="配镜时间">
+					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
 					</table>
 				</div>
@@ -160,6 +166,16 @@
         }
         $("#departNumber").val(interester);
     }
+    laydate.render({
+        elem: '#peijingTimeStart',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+    laydate.render({
+        elem: '#peijingTimeEnd',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
 </script>
 </body>
 </html>

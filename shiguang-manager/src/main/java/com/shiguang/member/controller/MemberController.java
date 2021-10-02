@@ -11,6 +11,8 @@ import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
+import com.shiguang.system.domain.UserDO;
+import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,8 @@ public class MemberController {
     private SalesService salesService;
     @Autowired
     private LineService lineService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping()
     @RequiresPermissions("information:member:member")
@@ -207,17 +211,26 @@ public class MemberController {
     @RequiresPermissions("information:member:member")
     public PageUtils salelist(@RequestParam Map<String, Object> params){
         //查询列表数据
+        List<SalesDO> salesDOList = new ArrayList<>();
+        PageUtils pageUtils = null;
+        Long userId = ShiroUtils.getUser().getUserId();
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId",userId);
+        List<UserDO> userDOList = userService.getRoleList(map);
+        if (null != userDOList && userDOList.size() > 0){
+            for (UserDO userDO : userDOList){
+                if ("验光师".equals(userDO.getRoleName())){
+                    return pageUtils;
+                }
+            }
+        }
         Query query = new Query(params);
         query.put("status","1");
         query.put("memberNumber",query.get("cardNumber"));
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyId",ShiroUtils.getUser().getCompanyId());
-        } else {
-            if (null != ShiroUtils.getUser().getStoreNum()){
-                query.put("departNumber",ShiroUtils.getUser().getStoreNum());
-            }
         }
-        List<SalesDO> salesDOList = salesService.salelist(query);
+        salesDOList = salesService.salelist(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if (null != salesDOList){
             for (SalesDO salesDO : salesDOList){
@@ -250,7 +263,7 @@ public class MemberController {
             }
         }
         int total = salesService.salecount(query);
-        PageUtils pageUtils = new PageUtils(salesDOList, total);
+        pageUtils = new PageUtils(salesDOList, total);
         return pageUtils;
     }
 

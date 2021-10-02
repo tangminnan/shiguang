@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.line.dao.RefractionDao">
+    <select id="get" resultType="com.shiguang.line.domain.RefractionLineDO">
+		select `id`,`member_name`,`refraction_status`,`refraction_time`,`refraction_name`,`refraction` from refraction_line where id = #{value}
+	</select>
+
+    <select id="getRefraction" resultType="com.shiguang.line.domain.RefractionDO">
+		select `id`,`refraction_name`,`name` from refraction where name = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.line.domain.RefractionLineDO">
+        select `id`,`member_name`,`refraction_status`,`refraction_time`,`refraction_name`,`refraction` from refraction_line
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <if test="refractionName != null and refractionName != ''"> and refraction_name = #{refractionName} </if>
+            <if test="refractionStatus != null and refractionStatus != ''"> and refraction_status != #{refractionStatus} </if>
+            <if test="lineTime != null and lineTime != ''"> and date_format(refraction_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by refraction_time ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from refraction_line
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <if test="refractionName != null and refractionName != ''"> and refraction_name = #{refractionName} </if>
+            <if test="lineTime != null and lineTime != ''"> and date_format(refraction_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+    </select>
+
+    <select id="listMember" resultType="com.shiguang.line.domain.RefractionLineMemberDO">
+        select `id`,`member_name`,`refraction_name`,`refraction`,`refraction_time` from refraction_line_member
+        <where>
+            <if test="lineTime != null and lineTime != ''"> and date_format(refraction_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.line.domain.RefractionDO" useGeneratedKeys="true" keyProperty="id">
+		insert into refraction
+		(
+			`refraction_name`,
+			`name`
+		)
+		values
+		(
+			#{refractionName},
+			#{name}
+		)
+	</insert>
+
+    <insert id="saveLine" parameterType="com.shiguang.line.domain.RefractionLineDO" useGeneratedKeys="true" keyProperty="id">
+		insert into refraction_line
+		(
+		    `member_name`,
+		    `refraction_status`,
+		    `refraction_time`,
+			`refraction_name`
+		)
+		values
+		(
+			#{memberName},
+			#{refractionStatus},
+			#{refractionTime},
+			#{refractionName}
+		)
+	</insert>
+
+    <insert id="saveLineMember" parameterType="com.shiguang.line.domain.RefractionLineMemberDO" useGeneratedKeys="true" keyProperty="id">
+		insert into refraction_line_member
+		(
+		    `member_name`,
+		    `refraction_name`,
+		    `refraction_time`,
+		    `refraction`
+		)
+		values
+		(
+			#{memberName},
+			#{refractionName},
+			#{refractionTime},
+			#{refraction}
+		)
+	</insert>
+
+    <update id="updateLine" parameterType="com.shiguang.line.domain.RefractionLineDO">
+        update refraction_line
+        <set>
+            <if test="refractionStatus != null">`refraction_status` = #{refractionStatus}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from refraction where name = #{value}
+	</delete>
+
+    <delete id="removeMember">
+		delete from refraction_line_member where id = #{value}
+	</delete>
+
+</mapper>

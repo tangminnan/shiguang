@@ -269,18 +269,18 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`produc_factory`,pr.`produc_color`,ac.`materialname`,pr.`size`
-        from stock st left join aa_produca pr on pr.id = st.goodsxinxiid left join c_material ac on ac.materialid =
+        from stock st left join aa_produca pr on pr.produc_num = st.goods_num left join c_material ac on ac.materialid =
         pr.materialid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -304,18 +304,18 @@
     </select>
 
     <select id="countJiajia" resultType="int">
-        select count(*) from stock st left join aa_produca pr on pr.id = st.goodsxinxiid left join a_caizhi ac on
+        select count(*) from stock st left join aa_produca pr on pr.produc_num = st.goods_num left join a_caizhi ac on
         ac.caizhi_id = pr.materialid
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -332,20 +332,20 @@
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,st.`classtype`,	j.sph_id as sph,
         j.cyl_id as cyl,l.`lightbelow`,r.`refractivityvalue`,pl.`light_name`,le.`lens_name`
-        from stock st left join aa_jpcp j on j.id = st.goodsxinxiid
+        from stock st left join aa_jpcp j on j.produc_num = st.goods_num
         left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
         j.refractivityid
         left join p_light pl on pl.light_id = j.light_id left join p_lens le on le.lens_id = j.lens_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -386,20 +386,20 @@
 
     <select id="countJpcp" resultType="int">
         select count(*)
-        from stock st left join aa_jpcp j on j.id = st.goodsxinxiid
+        from stock st left join aa_jpcp j on j.produc_num = st.goods_num
         left join a_lightbelow l on l.lightbelow_id = j.lightbelow_id left join c_refractivity r on r.refractivityid =
         j.refractivityid
         left join p_light pl on pl.light_id = j.light_id left join p_lens le on le.lens_id = j.lens_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -430,20 +430,20 @@
         left join p_function f on f.function_id = j.function_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and j.`produc_num` = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and j.`produc_num` like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and j.`produc_code` = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and j.`produc_name` = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and j.`produc_name` like concat('%', #{goodsName},'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and j.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and j.retail_price &lt;= #{retailPriceEnd}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &lt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &gt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_down) &lt;= ABS(#{rightYuanYongZJ})</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_up &lt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_down &gt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{leftYuanYongZJ})</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(j.cyl_down) &lt;= ABS(#{leftYuanYongZJ})</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(j.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(j.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
+            <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &lt;= #{rightYuanYongQJ}</if>-->
+            <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &gt;= #{rightYuanYongQJ}</if>-->
+            <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>-->
+            <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_down) &lt;= ABS(#{rightYuanYongZJ})</if>-->
+            <!--<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_up &lt;= #{leftYuanYongQJ}</if>-->
+            <!--<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_down &gt;= #{leftYuanYongQJ}</if>-->
+            <!--<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{leftYuanYongZJ})</if>-->
+            <!--<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(j.cyl_down) &lt;= ABS(#{leftYuanYongZJ})</if>-->
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%',-->
                 <!--#{rightYuanYongQJ},'%')-->
             <!--</if>-->
@@ -465,9 +465,9 @@
                 order by j.id desc
             </otherwise>
         </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
+        <!--<if test="offset != null and limit != null">-->
+            <!--limit 0, 1000000-->
+        <!--</if>-->
     </select>
 
     <select id="countJpdz" resultType="int">
@@ -482,20 +482,20 @@
         left join p_function f on f.function_id = j.function_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and j.`produc_num` = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and j.`produc_num` like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and j.`produc_code` = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and j.`produc_name` = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and j.`produc_name` like concat('%', #{goodsName},'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and j.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and j.retail_price &lt;= #{retailPriceEnd}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &lt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &gt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_down) &lt;= ABS(#{rightYuanYongZJ})</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_up &lt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_down &gt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{leftYuanYongZJ})</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(j.cyl_down) &lt;= ABS(#{leftYuanYongZJ})</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(j.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(j.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
+            <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &lt;= #{rightYuanYongQJ}</if>-->
+            <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &gt;= #{rightYuanYongQJ}</if>-->
+            <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>-->
+            <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_down) &lt;= ABS(#{rightYuanYongZJ})</if>-->
+            <!--<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_up &lt;= #{leftYuanYongQJ}</if>-->
+            <!--<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and j.sph_down &gt;= #{leftYuanYongQJ}</if>-->
+            <!--<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{leftYuanYongZJ})</if>-->
+            <!--<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(j.cyl_down) &lt;= ABS(#{leftYuanYongZJ})</if>-->
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and s.sph like concat('%',-->
             <!--#{rightYuanYongQJ},'%')-->
             <!--</if>-->
@@ -516,18 +516,18 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`produc_factory`,pr.`parts_style`
-        from stock st left join aa_parts pr on pr.id = st.goodsxinxiid
+        from stock st left join aa_parts pr on pr.produc_num = st.goods_num
         <where>
             <if test="partsStyle != null and partsStyle != ''">and pr.parts_style = #{partsStyle}</if>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -551,18 +551,18 @@
     </select>
 
     <select id="countJiajiapj" resultType="int">
-        select count(*) from stock st left join aa_parts pr on pr.id = st.goodsxinxiid and pr.parts_style = '框镜'
+        select count(*) from stock st left join aa_parts pr on pr.produc_num = st.goods_num and pr.parts_style = '框镜'
         <where>
             <if test="partsStyle != null and partsStyle != ''">and pr.parts_style = #{partsStyle}</if>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -578,17 +578,17 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`produc_factory`,pr.`produc_color`,pr.`size`
-        from stock st left join aa_tyj pr on pr.id = st.goodsxinxiid
+        from stock st left join aa_tyj pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -612,17 +612,17 @@
     </select>
 
     <select id="countTaiyj" resultType="int">
-        select count(*) from stock st left join aa_tyj pr on pr.id = st.goodsxinxiid
+        select count(*) from stock st left join aa_tyj pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -638,17 +638,17 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`
-        from stock st left join aa_hc pr on pr.id = st.goodsxinxiid
+        from stock st left join aa_hc pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -672,17 +672,17 @@
     </select>
 
     <select id="countHaocai" resultType="int">
-        select count(*) from stock st left join aa_hc pr on pr.id = st.goodsxinxiid
+        select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -698,17 +698,17 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`
-        from stock st left join aa_oldlens pr on pr.id = st.goodsxinxiid
+        from stock st left join aa_oldlens pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -732,17 +732,17 @@
     </select>
 
     <select id="countLaohj" resultType="int">
-        select count(*) from stock st left join aa_hc pr on pr.id = st.goodsxinxiid
+        select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -758,17 +758,17 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`produc_factory`
-        from stock st left join aa_shiguang pr on pr.id = st.goodsxinxiid
+        from stock st left join aa_shiguang pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -792,17 +792,17 @@
     </select>
 
     <select id="countShiguang" resultType="int">
-        select count(*) from stock st left join aa_hc pr on pr.id = st.goodsxinxiid
+        select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -818,17 +818,17 @@
         select
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`main_capacity`,pr.`second_capacity`
-        from stock st left join aa_hly pr on pr.id = st.goodsxinxiid
+        from stock st left join aa_hly pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -852,17 +852,17 @@
     </select>
 
     <select id="countHuly" resultType="int">
-        select count(*) from stock st left join aa_hly pr on pr.id = st.goodsxinxiid
+        select count(*) from stock st left join aa_hly pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -882,9 +882,9 @@
         pr.give_type
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
@@ -916,9 +916,9 @@
         g.gift_num = pr.give_type
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
@@ -940,19 +940,19 @@
         st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
         st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,st.`classtype`,t.`type_name`,u.`usage_name`,cu.`unitname` as unit,
         y.`curvature`,y.sph_id as sph,y.cyl_id as cyl
-        from stock st left join aa_yxcp y on y.id = st.goodsxinxiid left join p_type t on t.type_id = y.type_id
+        from stock st left join aa_yxcp y on y.produc_num = st.goods_num left join p_type t on t.type_id = y.type_id
         left join c_unit cu on cu.unitid = y.unitid
         left join p_usage u on u.usage_id = y.usage_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -985,14 +985,14 @@
         left join p_usage u on u.usage_id = y.usage_id
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and st.goods_num = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and st.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and st.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and st.retail_price &lt;= #{retailPriceEnd}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
             <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
             <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
@@ -1020,20 +1020,22 @@
         left join p_usage u on u.usage_id = y.usage_id
         <where>
             <if test="id != null and id != ''">and y.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and y.`produc_num` = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and y.`produc_num` like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and y.`produc_code` = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and y.`produc_name` = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and y.`produc_name` like concat('%', #{goodsName},'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and y.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and y.retail_price &lt;= #{retailPriceEnd}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &lt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &gt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_down) &lt;= ABS(#{rightYuanYongZJ})</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_up &lt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_down &gt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{leftYuanYongZJ})</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(y.cyl_down) &lt;= ABS(#{leftYuanYongZJ})</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(y.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(y.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
+            <!--<if test="rightYuanYongQJF != null and rightYuanYongQJF != ''">and y.sph_up &lt;= #{fuhao}#{rightYuanYongQJF}</if>-->
+            <!--<if test="rightYuanYongQJF != null and rightYuanYongQJF != ''">and y.sph_down >= #{fuhao}#{rightYuanYongQJF}</if>-->
+            <!--<if test="rightYuanYongQJZ != null and rightYuanYongQJZ != ''">and y.sph_up &lt;= #{fuhao}#{rightYuanYongQJZ}</if>-->
+            <!--<if test="rightYuanYongQJZ != null and rightYuanYongQJZ != ''">and y.sph_down >= #{fuhao}#{rightYuanYongQJZ}</if>-->
+            <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>-->
+            <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_down) &lt;= ABS(#{rightYuanYongZJ})</if>-->
+            <!--<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_up &lt;= #{leftYuanYongQJ}</if>-->
+            <!--<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_down &gt;= #{leftYuanYongQJ}</if>-->
+            <!--<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{leftYuanYongZJ})</if>-->
+            <!--<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(y.cyl_down) &lt;= ABS(#{leftYuanYongZJ})</if>-->
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1043,9 +1045,9 @@
                 order by y.id desc
             </otherwise>
         </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
+        <!--<if test="offset != null and limit != null">-->
+            <!--limit 0, 100000-->
+        <!--</if>-->
     </select>
 
     <select id="countYxdz" resultType="int">
@@ -1055,20 +1057,20 @@
         left join p_usage u on u.usage_id = y.usage_id
         <where>
             <if test="id != null and id != ''">and y.id = #{id}</if>
-            <if test="goodsNum != null and goodsNum != ''">and y.`produc_num` = #{goodsNum}</if>
+            <if test="goodsNum != null and goodsNum != ''">and y.`produc_num` like concat('%', #{goodsNum},'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and y.`produc_code` = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and y.`produc_name` = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and y.`produc_name` like concat('%', #{goodsName},'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
-            <if test="retailPriceStart != null and retailPriceStart != ''">and y.retail_price >= #{retailPriceStart}</if>
-            <if test="retailPriceEnd != null and retailPriceEnd != ''">and y.retail_price &lt;= #{retailPriceEnd}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &lt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &gt;= #{rightYuanYongQJ}</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>
-            <if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_down) &lt;= ABS(#{rightYuanYongZJ})</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_up &lt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_down &gt;= #{leftYuanYongQJ}</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{leftYuanYongZJ})</if>
-            <if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(y.cyl_down) &lt;= ABS(#{leftYuanYongZJ})</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(y.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(y.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
+            <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &lt;= #{rightYuanYongQJ}</if>-->
+            <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &gt;= #{rightYuanYongQJ}</if>-->
+            <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>-->
+            <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_down) &lt;= ABS(#{rightYuanYongZJ})</if>-->
+            <!--<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_up &lt;= #{leftYuanYongQJ}</if>-->
+            <!--<if test="leftYuanYongQJ != null and leftYuanYongQJ != ''">and y.sph_down &gt;= #{leftYuanYongQJ}</if>-->
+            <!--<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{leftYuanYongZJ})</if>-->
+            <!--<if test="leftYuanYongZJ != null and leftYuanYongZJ != ''">and ABS(y.cyl_down) &lt;= ABS(#{leftYuanYongZJ})</if>-->
         </where>
     </select>
 

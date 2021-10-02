@@ -21,6 +21,10 @@ public interface MemberDao {
 
     int count(Map<String,Object> map);
 
+    List<MemberDO> heightlist(Map<String,Object> map);
+
+    int heightcount(Map<String,Object> map);
+
     int payCount(Map<String,Object> map);
 
     int save(MemberDO member);

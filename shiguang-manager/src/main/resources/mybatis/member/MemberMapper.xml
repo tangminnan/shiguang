@@ -181,6 +181,123 @@
         </where>
     </select>
 
+    <select id="heightlist" resultType="com.shiguang.member.domain.MemberDO">
+        select m.`id`,m.`name`,m.`member_option`,m.`card_number`,m.`sex`,m.`depart_number`,m.`company_id`,m.`birthday_year`,m.`birthday_month`,
+        m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,
+        m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,
+        m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,
+        m.`address`,m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status`,m.`state`
+        from member m left join store_sales ss on ss.member_number = m.card_number
+        <where>
+            <if test="id != null and id != ''"> and m.id = #{id} </if>
+            <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
+            <if test="memberOption != null and memberOption != ''"> and m.member_option = #{memberOption} </if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+            <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
+            <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
+            <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
+            <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
+            <if test="age != null and age != ''"> and m.age = #{age} </if>
+            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+            <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
+            <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+            <if test="provinceCode != null and provinceCode != ''"> and m.province_code = #{provinceCode} </if>
+            <if test="provinceName != null and provinceName != ''"> and m.province_name = #{provinceName} </if>
+            <if test="cityCode != null and cityCode != ''"> and m.city_code = #{cityCode} </if>
+            <if test="cityName != null and cityName != ''"> and m.city_name = #{cityName} </if>
+            <if test="areaCode != null and areaCode != ''"> and m.area_code = #{areaCode} </if>
+            <if test="areaName != null and areaName != ''"> and m.area_name = #{areaName} </if>
+            <if test="cardType != null and cardType != ''"> and m.card_type = #{cardType} </if>
+            <if test="masterCard != null and masterCard != ''"> and m.master_card = #{masterCard} </if>
+            <if test="minorName != null and minorName != ''"> and m.minor_name = #{minorName} </if>
+            <if test="crowdType != null and crowdType != ''"> and m.crowd_type = #{crowdType} </if>
+            <if test="exclusiveCustomer != null and exclusiveCustomer != ''"> and m.exclusive_customer = #{exclusiveCustomer} </if>
+            <if test="exclusiveCustomerId != null and exclusiveCustomerId != ''"> and m.exclusive_customer_id = #{exclusiveCustomerId} </if>
+            <if test="identityType != null and identityType != ''"> and m.identity_type = #{identityType} </if>
+            <if test="identityId != null and identityId != ''"> and m.identity_id = #{identityId} </if>
+            <if test="vocation != null and vocation != ''"> and m.vocation = #{vocation} </if>
+            <if test="school != null and school != ''"> and m.school = #{school} </if>
+            <if test="qqNumber != null and qqNumber != ''"> and m.qq_number = #{qqNumber} </if>
+            <if test="email != null and email != ''"> and m.email = #{mail} </if>
+            <if test="address != null and address != ''"> and m.address = #{address} </if>
+            <if test="postalCode != null and postalCode != ''"> and m.postal_code = #{postalCode} </if>
+            <if test="interest != null and interest != ''"> and m.interest = #{interest} </if>
+            <if test="source != null and source != ''"> and m.source = #{source} </if>
+            <if test="integralPasd != null and integralPasd != ''"> and m.integral_pasd = #{integralPasd} </if>
+            <if test="remark != null and remark != ''"> and m.remark = #{remark} </if>
+            <if test="registerTime != null and registerTime != ''"> and m.register_time = #{registerTime} </if>
+            <if test="status != null and status != ''"> and m.status = #{status} </if>
+            <if test="state != null and state != ''"> and m.state = #{state} </if>
+            <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
+            <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
+            <if test="peijingTimeStart != null and peijingTimeStart != ''"> and date_format(ss.peijing_time ,'%Y-%m-%d') &lt;= #{peijingTimeStart} </if>
+            <if test="peijingTimeEnd != null and peijingTimeEnd != ''"> and date_format(ss.peijing_time ,'%Y-%m-%d') >= #{peijingTimeEnd} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                group by m.card_number
+                order by m.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="heightcount" resultType="int">
+        select count(*) from member m left join store_sales ss on ss.member_number = m.card_number
+        <where>
+            <if test="id != null and id != ''"> and m.id = #{id} </if>
+            <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
+            <if test="memberOption != null and memberOption != ''"> and m.member_option = #{memberOption} </if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+            <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
+            <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
+            <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
+            <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
+            <if test="age != null and age != ''"> and m.age = #{age} </if>
+            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+            <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
+            <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+            <if test="provinceCode != null and provinceCode != ''"> and m.province_code = #{provinceCode} </if>
+            <if test="provinceName != null and provinceName != ''"> and m.province_name = #{provinceName} </if>
+            <if test="cityCode != null and cityCode != ''"> and m.city_code = #{cityCode} </if>
+            <if test="cityName != null and cityName != ''"> and m.city_name = #{cityName} </if>
+            <if test="areaCode != null and areaCode != ''"> and m.area_code = #{areaCode} </if>
+            <if test="areaName != null and areaName != ''"> and m.area_name = #{areaName} </if>
+            <if test="cardType != null and cardType != ''"> and m.card_type = #{cardType} </if>
+            <if test="masterCard != null and masterCard != ''"> and m.master_card = #{masterCard} </if>
+            <if test="minorName != null and minorName != ''"> and m.minor_name = #{minorName} </if>
+            <if test="crowdType != null and crowdType != ''"> and m.crowd_type = #{crowdType} </if>
+            <if test="exclusiveCustomer != null and exclusiveCustomer != ''"> and m.exclusive_customer = #{exclusiveCustomer} </if>
+            <if test="exclusiveCustomerId != null and exclusiveCustomerId != ''"> and m.exclusive_customer_id = #{exclusiveCustomerId} </if>
+            <if test="identityType != null and identityType != ''"> and m.identity_type = #{identityType} </if>
+            <if test="identityId != null and identityId != ''"> and m.identity_id = #{identityId} </if>
+            <if test="vocation != null and vocation != ''"> and m.vocation = #{vocation} </if>
+            <if test="school != null and school != ''"> and m.school = #{school} </if>
+            <if test="qqNumber != null and qqNumber != ''"> and m.qq_number = #{qqNumber} </if>
+            <if test="email != null and email != ''"> and m.email = #{mail} </if>
+            <if test="address != null and address != ''"> and m.address = #{address} </if>
+            <if test="postalCode != null and postalCode != ''"> and m.postal_code = #{postalCode} </if>
+            <if test="interest != null and interest != ''"> and m.interest = #{interest} </if>
+            <if test="source != null and source != ''"> and m.source = #{source} </if>
+            <if test="integralPasd != null and integralPasd != ''"> and m.integral_pasd = #{integralPasd} </if>
+            <if test="remark != null and remark != ''"> and m.remark = #{remark} </if>
+            <if test="registerTime != null and registerTime != ''"> and m.register_time = #{registerTime} </if>
+            <if test="status != null and status != ''"> and m.status = #{status} </if>
+            <if test="state != null and state != ''"> and m.state = #{state} </if>
+            <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
+            <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
+            <if test="peijingTimeStart != null and peijingTimeStart != ''"> and date_format(ss.peijing_time ,'%Y-%m-%d') &lt;= #{peijingTimeStart} </if>
+            <if test="peijingTimeEnd != null and peijingTimeEnd != ''"> and date_format(ss.peijing_time ,'%Y-%m-%d') >= #{peijingTimeEnd} </if>
+        </where>
+    </select>
+
     <insert id="save" parameterType="com.shiguang.member.domain.MemberDO" useGeneratedKeys="true" keyProperty="id">
 		insert into member
 		(

@@ -57,6 +57,16 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public List<MemberDO> heightlist(Map<String, Object> map){
+        return memberDao.heightlist(map);
+    }
+
+    @Override
+    public int heightcount(Map<String, Object> map){
+        return memberDao.heightcount(map);
+    }
+
+    @Override
     public int payCount(Map<String, Object> map){
         return memberDao.payCount(map);
     }

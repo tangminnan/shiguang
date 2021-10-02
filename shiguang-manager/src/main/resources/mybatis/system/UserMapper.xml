@@ -21,10 +21,11 @@
 	</select>
 
 	<select id="getRoleList" resultType="com.shiguang.system.domain.UserDO">
-		select u.name,u.user_id from sys_user u left join sys_user_role ur on ur.user_id = u.user_id left join sys_role r on r.role_id = ur.role_id
+		select u.name,u.user_id,r.role_name from sys_user u left join sys_user_role ur on ur.user_id = u.user_id left join sys_role r on r.role_id = ur.role_id
 		<where>
 			<if test="roleType != null and roleType != ''"> and r.role_type = #{roleType} </if>
 			<if test="companyId != null and companyId != ''"> and u.company_id = #{companyId} </if>
+			<if test="userId != null and userId != ''"> and u.user_id = #{userId} </if>
 		</where>
 	</select>
 

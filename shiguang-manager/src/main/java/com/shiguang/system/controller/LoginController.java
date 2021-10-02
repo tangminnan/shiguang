@@ -58,7 +58,7 @@ public class LoginController extends BaseController {
 		}else {
 			model.addAttribute("picUrl","/img/photo_s.jpg");
 		}
-		model.addAttribute("username", getUser().getUsername());
+		model.addAttribute("username", getUser().getName());
 		return "index_v1";
 	}
 

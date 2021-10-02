@@ -82,16 +82,12 @@
 		sl.`settle_date` as settleDate
 		from store_sales ss join settlement sl on sl.sale_number = ss.sale_number
 		join member m on m.card_number = ss.member_number
-		join department d on d.depart_number = m.depart_number
 		<where>
 			<if test="id != null and id != ''"> and ss.id = #{id} </if>
 			<if test="memberNumber != null and memberNumber != ''"> and ss.member_number = #{memberNumber} </if>
 			<if test="saleName != null and saleName != ''"> and ss.sale_name = #{saleName} </if>
 			<if test="saleNumber != null and saleNumber != ''"> and ss.sale_number = #{saleNumber} </if>
-			<if test="departNumber != null and departNumber != ''">
-				and m.depart_number = ${departNumber}
-			</if>
-			<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+			<if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
