@@ -115,13 +115,16 @@ public class WeiwaiDO implements Serializable {
 	private String status;
 	//工号
 	private String username;
+	//收货时间
+	private String shTime;
 	//顾客姓名
 	private String gkname;
 	//会员卡
 	private String hyknum;
 	//手机号
 	private String phone;
-
+	//配送。退回
+	private String shstatus;
 	/**
 	 * 设置：id
 	 */
@@ -760,5 +763,21 @@ public class WeiwaiDO implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getShTime() {
+		return shTime;
+	}
+
+	public void setShTime(String shTime) {
+		this.shTime = shTime;
+	}
+
+	public String getShstatus() {
+		return shstatus;
+	}
+
+	public void setShstatus(String shstatus) {
+		this.shstatus = shstatus;
 	}
 }

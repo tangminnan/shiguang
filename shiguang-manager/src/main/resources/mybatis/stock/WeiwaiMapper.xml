@@ -167,7 +167,7 @@
 			`changjia_number`,
 			`shouhuo_people`, 
 			`shouhuo_phone`, 
-			`shouhuo_address`, 
+			`shouhuo_address`,
 			`beizhu`,
 
 			`sale_number`, 
@@ -204,9 +204,11 @@
 
 			`status`,
 			`username`,
+			`sh_time`,
 			`gkname`,
 			`hyknum`,
-			`phone`
+			`phone`,
+			`shstatus`
 		)
 		values
 		(
@@ -260,9 +262,11 @@
 
 			#{status},
 			#{username},
+			#{shTime},
 			#{gkname},
 			#{hyknum},
-			#{phone}
+			#{phone},
+			#{shstatus}
 
 		)
 	</insert>
@@ -322,7 +326,7 @@
 
 			<if test="gkname != null">`gkname` = #{gkname},</if>
 			<if test="hyknum != null">`hyknum` = #{hyknum},</if>
-			<if test="phone != null">`phone` = #{phone}</if>
+			<if test="fv != null">`phone` = #{phone}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -371,10 +375,15 @@
 			<if test="goodsCode != null and goodsCode != ''"> and s.goods_code = #{goodsCode} </if>
 		</where>
 	</select>
+<!--	<select id="phoneOrAddres"  resultType="com.shiguang.baseinfomation.domain.DepartmentDO">-->
 	<select id="phoneOrAddres"  resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
 		SELECT d.depart_number,d.depart_tel,d.depart_address,p.position_id,p.position_name
 		FROM department d JOIN c_position p on d.depart_number = p.depart_number
-		where p.depart_number = #{departNumber}
+		<where>
+			<if test="companyid != null and companyid != ''"> and d.company_id = #{companyid} </if>
+			<if test="positionOrder != null and positionOrder != ''"> and p.position_order = #{positionOrder} </if>
+		</where>
+
 	</select>
 	<select id="selectDepartment"  resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
 	select id,depart_name from department
@@ -745,5 +754,24 @@
 		</where>
 		group by sale_number
 	</select>
+
+	<!--确认收货-->
+	<update id="updateStatus" parameterType="com.shiguang.stock.domain.WeiwaiDO">
+		update stock_weiwai
+		<set>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="shTime != null">`sh_time` = #{shTime} </if>
+		</set>
+		where danju_number = #{danjuNumber}
+	</update>
+
+	<select id="jkPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
+		select * from stock_weiwai where danju_number = #{value}
+	</select>
+	<select id="yxPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
+		select * from stock_weiwai where danju_number = #{value}
+	</select>
+
 
 </mapper>

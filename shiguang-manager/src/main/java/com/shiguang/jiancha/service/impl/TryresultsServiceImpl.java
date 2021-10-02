@@ -70,4 +70,30 @@ public class TryresultsServiceImpl implements TryresultsService {
     public TryresultsDO  getTryresult(Map<String, Object> map) {
         return tryresultsDao.getTryresult(map);
     }
+
+
+    //所有-验光数据
+
+    @Override
+    public List<TryresultsDO> yanguangListShuju(Map<String, Object> map) {
+        return tryresultsDao.yanguangListShuju(map);
+    }
+
+    @Override
+    public int yanguangListShujuCount(Map<String, Object> map) {
+        return tryresultsDao.yanguangListShujuCount(map);
+    }
+
+    //下处方后修改数据的状态为0--不能修改了没有修改按钮
+
+    @Override
+    public int updateStatus(TryresultsDO tryresultsDO) {
+        return tryresultsDao.updateStatus(tryresultsDO);
+    }
+    //修改检查结论数据
+
+    @Override
+    public int updateTry(TryresultsDO tryresults) {
+        return tryresultsDao.updateTry(tryresults);
+    }
 }

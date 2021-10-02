@@ -1,5 +1,7 @@
 package com.shiguang.jiancha.service;
 
+import com.shiguang.jiancha.domain.ResultDO;
+import com.shiguang.jiancha.domain.RgpDO;
 import com.shiguang.jiancha.domain.TryresultsDO;
 import com.shiguang.member.domain.MemberDO;
 
@@ -28,6 +30,7 @@ public interface TryresultsService {
 
     int update(TryresultsDO tryresults);
 
+
     int remove(Long id);
 
     int batchRemove(Long[] ids);
@@ -36,4 +39,18 @@ public interface TryresultsService {
     List<TryresultsDO> listYanguang(Map<String, Object> map);
 
     TryresultsDO getTryresult(Map<String, Object> map);
+
+
+
+
+
+    //所有-验光数据
+    List<TryresultsDO> yanguangListShuju(Map<String, Object> map);
+    int yanguangListShujuCount(Map<String, Object> map);
+    //下处方后修改数据的状态为0--不能修改了没有修改按钮
+    int updateStatus(TryresultsDO tryresultsDO );
+    //修改检查结论数据
+    int updateTry(TryresultsDO tryresults);
+
+
 }

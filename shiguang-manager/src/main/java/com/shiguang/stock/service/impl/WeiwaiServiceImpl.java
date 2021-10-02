@@ -1,6 +1,7 @@
 package com.shiguang.stock.service.impl;
 
 import com.shiguang.baseinfomation.domain.DepartmentDO;
+import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,8 +66,8 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	}
 
 	@Override
-	public DepartmentDO phoneOrAddres(String departNumber) {
-		return weiwaiDao.phoneOrAddres(departNumber);
+	public DepartmentDO phoneOrAddres(Map<String,Object> map) {
+		return weiwaiDao.phoneOrAddres(map);
 	}
 
 	@Override
@@ -77,5 +78,22 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	@Override
 	public List<SalesDO> selectOrder(Map<String, Object> map) {
 		return weiwaiDao.selectOrder(map);
+	}
+
+
+	@Override
+	public int updateStatus(WeiwaiDO weiwaiDO) {
+		return weiwaiDao.updateStatus(weiwaiDO);
+	}
+
+
+	@Override
+	public WeiwaiDO jkPeijingdan(String danjuNumber) {
+		return weiwaiDao.jkPeijingdan(danjuNumber);
+	}
+
+	@Override
+	public WeiwaiDO yxPeijingdan(String danjuNumber) {
+		return weiwaiDao.yxPeijingdan(danjuNumber);
 	}
 }

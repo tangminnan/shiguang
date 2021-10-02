@@ -76,7 +76,10 @@
 			`mirror_time2`, 
 			`goods_name2`, 
 			`count2`, 
-			`status`
+			`status`,
+			`username`,
+			`sh_time`,
+			`shstatus`
 		)
 		values
 		(
@@ -93,7 +96,10 @@
 			#{mirrorTime2}, 
 			#{goodsName2}, 
 			#{count2}, 
-			#{status}
+			#{status},
+			#{username},
+			#{shTime},
+			#{shstatus}
 		)
 	</insert>
 	 
@@ -129,4 +135,15 @@
 		</foreach>
 	</delete>
 
+
+	<!--确认收货-->
+	<update id="updateStatus" parameterType="com.shiguang.stock.domain.WeiwaikcDO">
+		update stock_weiwaikc
+		<set>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="shTime != null">`sh_time` = #{shTime} </if>
+		</set>
+		where danju_number = #{danjuNumber}
+	</update>
 </mapper>

@@ -45,7 +45,12 @@ public class WeiwaikcDO implements Serializable {
 	private String count2;
 	//1未收货，0已收货未配送，2配送
 	private String status;
-
+	//工号
+	private String username;
+	//收货时间
+	private String shTime;
+	//配送。退回
+	private String shstatus;
 	/**
 	 * 设置：委外入库id
 	 */
@@ -229,5 +234,46 @@ public class WeiwaikcDO implements Serializable {
 	 */
 	public String getStatus(String status) {
 		return this.status;
+	}
+
+
+	public String getGoodsName() {
+		return goodsName;
+	}
+
+	public String getCount() {
+		return count;
+	}
+
+	public String getCount2() {
+		return count2;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getShTime() {
+		return shTime;
+	}
+
+	public void setShTime(String shTime) {
+		this.shTime = shTime;
+	}
+
+	public String getShstatus() {
+		return shstatus;
+	}
+
+	public void setShstatus(String shstatus) {
+		this.shstatus = shstatus;
 	}
 }

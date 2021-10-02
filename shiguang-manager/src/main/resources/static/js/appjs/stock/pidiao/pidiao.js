@@ -181,18 +181,18 @@ function load() {
                                             var d ='';
                                         }else if (row.status == "1" || row.returnzt=="1") {
                                             if (row.flags == "1") {
-                                                var e = '<span class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="详情" onclick="edit(\''
+                                                var e = '<span class="btn btn-primary btn-sm '  + '" href="#" mce_href="#" title="详情" onclick="edit(\''
                                                     + row.id
                                                     + '\')">详情</span> ';
                                                 var a = '';
                                                 var d = '';
                                             } else if (row.flags == "0") {
-                                                var e = '<span class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="详情" onclick="edit(\''
+                                                var e = '<span class="btn btn-primary btn-sm '  + '" href="#" mce_href="#" title="详情" onclick="edit(\''
                                                     + row.id
                                                     + '\')">详情</span> ';
                                                 var a = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#" onclick="userNum(\''
                                                     + row.pidiaoNumber + '\')">确认收货</span> ';
-                                                var d = '<span class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="退回"  mce_href="#" onclick="remove(\''
+                                                var d = '<span class="btn btn-danger btn-sm '     + '" href="#" title="退回"  mce_href="#" onclick="remove(\''
                                                     + row.pidiaoNumber
                                                     + '\')">退回</span> ';
                                             }
@@ -223,7 +223,7 @@ function add() {
 function edit(id) {
     var toIndex = layer.open({
 		type : 2,
-		title : '编辑',
+		title : '详情',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],

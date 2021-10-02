@@ -1,5 +1,6 @@
 package com.shiguang.stock.service.impl;
 
+import com.shiguang.stock.domain.WeiwaiDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,9 @@ public class WeiwaikcServiceImpl implements WeiwaikcService {
 	public int batchRemove(Long[] ids){
 		return weiwaikcDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public int updateStatus(WeiwaikcDO weiwaikcDO) {
+		return weiwaikcDao.updateStatus(weiwaikcDO);
+	}
 }

@@ -67,49 +67,62 @@ function load() {
 									field : 'phone',
 									title : '电话'
 								},
+							// {
+							// 		field : '',
+							// 		title : '销售门店'
+							// 	},
 							{
-									field : '',
-									title : '销售门店'
-								},
-                            {
-                                field : 'eyeType',
-                                title : '订做类型'
-                            },
+								field : 'eyeStyle',
+								title : '订做类型',
+								align : 'center',
+								formatter : function(value, row, index) {
+									if(value == 3){
+										return '<span class="label">框镜订做</span>';
+									}else if(value == 4){
+										return '<span class="label">隐形订做</span>';
+
+									}
+								}
+							},
 								{
 									field : 'mfrsname',
 									title : '制造商'
 								},
 
 							{
-									field : 'saleName',
+									field : 'zhidanPeople',
 									title : '制单人'
 								},
 							{
-									field : 'settleDate',
+									field : 'danjuDay',
 									title : '单据日期'
 								},
 
-                            // {
-                            //     title: '操作',
-                            //     field: 'danjuNumber',
-                            //     align: 'center',
-                            //     formatter: function (value, row, index) {
-                            //         if (row.status == "1") {
-                            //             var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
-                            //                 + row.id + '\')">详情</span> ';
-                            //             var f = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#" style="width:26%" onclick="userNum(\''
-                            //                 + row.danjuNumber + '\')">确认收货</span> ';
-                            //             var n = '';
-                            //         } else if (row.status == "0") {
-                            //             var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
-                            //                 + row.id + '\')">详情</span> ';
-                            //             var f = '';
-                            //             var n = '<span class="btn btn-warning btn-sm"  href="#" title="条形码打印"  mce_href="#" onclick="code(\''
-                            //                 + row.goodsType+" ','"+ row.danjuNumber + '\')">条形码打印</span> ';
-                            //         }
-                            //         return a + f + n ;
-                            //     }
-                            // }
+                            {
+                                title: '操作',
+                                field: 'danjuNumber',
+                                align: 'center',
+                                formatter: function (value, row, index) {
+                                    if (row.status == "1") {
+                                        var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="detial(\''
+                                            + row.id + '\')">详情</span> ';
+                                        var f = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#" style="width:26%" onclick="userNum(\''
+                                            + row.danjuNumber + '\')">确认收货</span> ';
+                                        var n = '';
+                                        var j = '';
+                                    } else if (row.status == "0") {
+                                        var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="detial(\''
+                                            + row.id + '\')">详情</span> ';
+                                        var f = '';
+                                        var n = '<span class="btn btn-warning btn-sm"  href="#" title="配送"  mce_href="#" onclick="peisong(\''
+                                            + row.goodsType+" ','"+ row.danjuNumber + '\')">配送</span> ';
+                                        var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="peisong(\''
+                                            + row.goodsType+" ','"+ row.danjuNumber + '\')">退回</span> ';
+
+                                    }
+                                    return a + f + n + j ;
+                                }
+                            }
 								]
 					});
 }
@@ -127,17 +140,18 @@ function add() {
 	});
     layer.full(toIndex)
 }
-function edit(id) {
+function detial(id) {
     var toIndex = layer.open({
 		type : 2,
-		title : '编辑',
+		title : '详情',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefix + '/detial/' + id // iframe的url
 	});
     layer.full(toIndex)
 }
+
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
@@ -195,4 +209,56 @@ function batchRemove() {
 	}, function() {
 
 	});
+}
+
+function userNum(danjuNumber) {
+	var status="0";
+	if (status == "0"){
+		// alert("输入工号")
+		layer.open({
+			type : 2,
+			title : '输入工号',
+			maxmin : true,
+			shadeClose : false, // 点击遮罩关闭层
+			area : [ '800px', '520px' ],
+			content :"/stock/weiwai/userNum/"+ danjuNumber
+		});
+
+	}
+}
+//修改启用状态
+function upshTime() {
+	var danjuNumber = document.getElementById('danjuNumber').value;
+	var username = document.getElementById('username').value;
+	var status = "0";
+	if (username !=""){
+		alert("qqqqqqqq");
+		$.ajax({
+			url: "/stock/weiwai/updateStatus",
+			type: "post",
+			data: {
+				'danjuNumber': danjuNumber,
+				'status': status,
+				'username':username
+			},
+			dataType: 'JSON',
+			async: false,
+			success: function (data) {
+				if (data.code == 0) {
+					parent.layer.msg("操作成功");
+					parent.reLoad();
+					var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+					parent.layer.close(index);
+
+				} else {
+					parent.layer.alert(data.msg)
+				}
+
+			}
+		});
+	} else {
+		layer.alert("请输入工号！");
+	}
+
+
 }

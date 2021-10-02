@@ -11,6 +11,7 @@ import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.common.utils.*;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.product.domain.HcDO;
+import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.domain.WeiwaikcDO;
 import com.shiguang.stock.service.StockService;
@@ -86,8 +87,12 @@ public class WeiwaiController {
 		//———获取当前登录用户的公司id————
 		String companyId=ShiroUtils.getUser().getCompanyId();
 		if(companyId != null){
-			String departNumber=ShiroUtils.getUser().getStoreNum();
-			DepartmentDO departmentDO= weiwaiService.phoneOrAddres(departNumber);
+			Integer companyid=Integer.valueOf(companyId);
+//			String departNumber=ShiroUtils.getUser().getStoreNum();
+			Map<String, Object> map = new HashMap<>();
+			map.put("companyid",companyid);
+			map.put("positionOrder",2);
+			DepartmentDO departmentDO= weiwaiService.phoneOrAddres(map);
 
 			String departTel=departmentDO.getDepartTel();
 			String departAddress=departmentDO.getDepartAddress();
@@ -109,10 +114,30 @@ public class WeiwaiController {
 	@RequiresPermissions("stock:weiwai:edit")
 	String edit(@PathVariable("id") Long id,Model model){
 		WeiwaiDO weiwai = weiwaiService.get(id);
+		String time = weiwai.getDanjuDay();
 		model.addAttribute("weiwai", weiwai);
-	    return "stock/weiwai/edit";
+		String eyeStyle=weiwai.getEyeStyle();
+		if (eyeStyle.equals("3")){
+			model.addAttribute("eyeStyle","框镜订做");
+		}else if (eyeStyle.equals("4")){
+			model.addAttribute("eyeStyle","隐形订做");
+		}
+	    return "stock/weiwai/detial";
 	}
-	
+	@GetMapping("/detial/{id}")
+	@RequiresPermissions("stock:weiwai:detial")
+	String detial(@PathVariable("id") Long id,Model model){
+		WeiwaiDO weiwai = weiwaiService.get(id);
+		model.addAttribute("weiwai", weiwai);
+		String eyeStyle=weiwai.getEyeStyle();
+		if (eyeStyle.equals("3")){
+			model.addAttribute("eyeStyle","框镜订做");
+		}else if (eyeStyle.equals("4")){
+			model.addAttribute("eyeStyle","隐形订做");
+		}
+	    return "stock/weiwai/detial";
+	}
+
 	/**
 	 * 保存
 	 */
@@ -134,6 +159,7 @@ public class WeiwaiController {
 		String beizhu=weiwai.getBeizhu();
 		String status=weiwai.getStatus();
 		String username=weiwai.getUsername();
+
 
 		String gkname=weiwai.getGkname();
 		String hyknum=weiwai.getHyknum();
@@ -225,6 +251,8 @@ public class WeiwaiController {
 			weiwaiDO.setBeizhu(beizhu);
 			weiwaiDO.setStatus(status);
 			weiwaiDO.setUsername(username);
+			weiwaiDO.setShTime("");
+			weiwaiDO.setShstatus("");
 
 			weiwaiDO.setGkname(gkname);
 			weiwaiDO.setHyknum(hyknum);
@@ -434,6 +462,8 @@ public class WeiwaiController {
 				weiwaikcDO.setGoodsName2(weiwai.getGoodsName2());
 				weiwaikcDO.getCount2(weiwai.getCount2());
 				weiwaikcDO.getStatus(weiwai.getStatus());
+				weiwaikcDO.getShTime();
+				weiwaikcDO.getShstatus();
 
 
 
@@ -552,5 +582,63 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 		return selectOrder;
 	}
 
-	
+	/**
+	 * 输入工号
+	 */
+	@GetMapping("/userNum/{danjuNumber}")
+	String userNum(@PathVariable("danjuNumber") String danjuNumber ,Model model) {
+		model.addAttribute("danjuNumber",danjuNumber);
+		return "/stock/weiwai/userNum";
+	}
+
+	/**
+	 * 收货状态
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/updateStatus")
+	public R updateEnable(String danjuNumber, String status ,String username) {
+		WeiwaiDO weiwaiDO = new WeiwaiDO();
+		weiwaiDO.setDanjuNumber(danjuNumber);
+		weiwaiDO.setStatus(status);
+		weiwaiDO.setUsername(username);
+		//———获取当前系统时间—————
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+		Date date = new Date();
+		String shTime = sdf.format(date);
+		weiwaiDO.setShTime(shTime);
+		weiwaiService.updateStatus(weiwaiDO);
+
+		WeiwaikcDO weiwaikcDO = new WeiwaikcDO();
+		weiwaikcDO.setDanjuNumber(danjuNumber);
+		weiwaikcDO.setStatus(status);
+		weiwaikcDO.setUsername(username);
+		weiwaikcService.updateStatus(weiwaikcDO);
+
+		return R.ok();
+	}
+
+	//打印镜框
+	@GetMapping("/jkPeijingdan")
+	String jkPeijingdan(String danjuNumber, Model model) {
+		WeiwaiDO weiwaiDO = weiwaiService.jkPeijingdan(danjuNumber);
+		model.addAttribute("weiwaiDO", weiwaiDO);
+		//———获取当前系统时间—————
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+		Date date = new Date();
+		String dayinDay = sdf.format(date);
+		model.addAttribute("dayinDay", dayinDay);
+		return "/stock/weiwai/jkPeijingdan";
+	}
+	//打印隐形src/main/resources/templates/stock/weiwai/.html:84
+	@GetMapping("/yxPeijingdan")
+	String yxPeijingdan(String danjuNumber, Model model) {
+		WeiwaiDO weiwaiDO = weiwaiService.yxPeijingdan(danjuNumber);
+		model.addAttribute("weiwaiDO", weiwaiDO);
+		//———获取当前系统时间—————
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+		Date date = new Date();
+		String dayinDay = sdf.format(date);
+		model.addAttribute("dayinDay", dayinDay);
+		return "/stock/weiwai/yxPeijingdan";
+	}
 }

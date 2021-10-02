@@ -2671,5 +2671,35 @@ public class TryresultsDO implements Serializable {
     public void setPhone1(String phone1) {
         this.phone1 = phone1;
     }
+
+
+    private String trystatus;
+    private String rstatus;
+
+    public String getTrystatus() {
+        return trystatus;
+    }
+
+    public void setTrystatus(String trystatus) {
+        this.trystatus = trystatus;
+    }
+
+    public String getRstatus() {
+        return rstatus;
+    }
+
+    public void setRstatus(String rstatus) {
+        this.rstatus = rstatus;
+    }
+    //是否结算
+    private String haveid;
+
+    public String getHaveid() {
+        return haveid;
+    }
+
+    public void setHaveid(String haveid) {
+        this.haveid = haveid;
+    }
 }
 

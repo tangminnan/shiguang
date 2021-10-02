@@ -36,4 +36,14 @@ public interface TryresultsDao {
     List<TryresultsDO> listDoctor(Map<String, Object> map);
     List<TryresultsDO> listYanguang(Map<String, Object> map);
     TryresultsDO  getTryresult(Map<String, Object> map);
+
+
+
+    //所有-验光数据
+    List<TryresultsDO> yanguangListShuju(Map<String, Object> map);
+    int yanguangListShujuCount(Map<String, Object> map);
+    //下处方后修改数据的状态为0--不能修改了没有修改按钮
+    int updateStatus(TryresultsDO tryresultsDO );
+    //修改检查结论数据
+    int updateTry(TryresultsDO tryresults);
 }

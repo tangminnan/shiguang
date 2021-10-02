@@ -46,6 +46,7 @@
                         <input type="radio" name="classtype" value="2" /> 订做片
                     </label>
                 </div>
+                <input type="hidden" id="classtype" value="0" />
                 <!--<div id="yx" style="display: none">-->
                     <!--<label class="radio-inline">-->
                         <!--<input type="radio" name="classtype"  value="3" /> 成品片-->
@@ -137,11 +138,14 @@
                 }
             }
         });
+
+
         $(function () {
             load();
         });
 
         function load() {
+
             $('#exampleTable')
                 .bootstrapTable(
                     {
@@ -170,7 +174,7 @@
                                 //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                                 limit: params.limit,
                                 offset: params.offset,
-                                xsstate: $('#xsstate').val(),
+                                // xsstate: $('#xsstate').val(),
                                 positionId: $('#positionId').val(),
                                 goodsNum : $("#goodsNum").val(),
                                 goodsCode : $("#goodsCode").val(),
@@ -181,6 +185,7 @@
                                 retailPrice : $("*[name='retailPrice']").val(),
                                 retailPrice2 : $("*[name='retailPrice2']").val(),
                                 xsstate : $("input[name='xsstate']:checked").val(),
+                                classtype : $("#classtype").val(),
                                 positionId : $('#positionId option:selected').val()
                                 // name:$('#searchName').val(),
                                 // username:$('#searchName').val()
@@ -304,28 +309,14 @@
         }
     }
     function reLoad() {
-        if (goodsType == 1){
-            var  classtype ="";
-        } else if (goodsType == 2){
-            var  classtype ="";
-        } else if (goodsType == 3){
-            var classtype=$("input[name='classtype']:checked").val();
-        } else if (goodsType == 4){
-            var classtype=$("input[name='classtype']:checked").val();
-        } else if (goodsType == 5){
-            var  classtype ="";
-        } else if (goodsType == 6){
-            var  classtype ="";
-        } else if (goodsType == 7){
-            var  classtype ="";
-        } else if (goodsType == 8){
-            var  classtype ="";
-        } else if (goodsType == 9){
-            var  classtype ="";
+        $("#classtype").val(0) ;
+        var goodsType = $("#goodsType option:selected").val();
+            if (goodsType == 3 || goodsType == 4){
+                $("#classtype").val($("input[name='classtype']:checked").val());
         }
 
         $(".val").remove();
-        $('#exampleTable').bootstrapTable('refresh');
+       $('#exampleTable').bootstrapTable('refresh');
     }
     function positionChange() {
         var xsstate=$("input[name='xsstate']:checked").val();

@@ -300,7 +300,6 @@ public class BrandController {
 
     //跳转制造商
     @GetMapping("/findmfrs/{goodsids}")
-    @RequiresPermissions("mfrs:brand:findmfrs")
     String findmfrs(@PathVariable("goodsids") Integer goodsids, Model model) {
         Map<String, Object> map = new HashMap<>();
         //商品

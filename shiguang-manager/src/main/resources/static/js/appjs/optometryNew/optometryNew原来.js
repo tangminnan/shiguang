@@ -52,7 +52,11 @@ function load() {
                         title: '会员卡号',
                         align: 'center'
                     },
-
+                    // {
+                    //     field: 'saleNumber',
+                    //     title: '缴费单号',
+                    //     align: 'center'
+                    // },
                     {
                         field: 'name',
                         title: '姓名',
@@ -118,53 +122,57 @@ function load() {
                                 title:'验光时间'
                             },
                             {
+                                field:'followTime',
+                                title:'复诊时间'
+                            },
+                            {
                                 title: '操作',
                                 field: 'ptometryNumber',
                                 align: 'center',
                                 formatter: function (value, row, index) {
-
-                                        if (row.trystatus=="1"){
-                                            var f = '<span class="btn btn-primary btn-sm" href="#" title="修改"  mce_href="#" onclick="updateTryshuju(\''
+                                    // alert(row.haveid);
+                                    if (row.haveid == "1"){ //是否结算
+                                        if (row.status=="1"){
+                                            var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
                                                 + value
-                                                + '\')">修改</span> ';
+                                                + '\')">详情</span> ';
 
-                                        }else if (row.trystatus =="0") {
-                                            var f = '';
+                                            // var a = '<span class="btn btn-primary btn-sm" href="#" title="修改"  mce_href="#" onclick="updateShuju(\''
+                                            //     + value
+                                            //     + '\')">修改</span> ';
 
-                                            if (row.haveid == "1"){ //是否结算
-                                                if (row.rstatus=="1"){
-                                                    var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
-                                                        + value
-                                                        + '\')">详情</span> ';
-
-                                                    var h = '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#" onclick="upremove(\''
-                                                        + value
-                                                        + '\')">删除</span> ';
-
-                                                }else if (row.rstatus =="0") {
-                                                    var f = '<span class="btn btn-primary btn-sm" href="#" title="修改"  mce_href="#" onclick="updateTryshuju(\''
-                                                        + value
-                                                        + '\')">修改</span> ';
-                                                    var h = '';
-
-                                                }
-                                            } else if (row.haveid == "0") { //是否结算
-                                                var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
-                                                    + value
-                                                    + '\')">详情</span> ';
-                                                var h='';
+                                            var h = '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#" onclick="upremove(\''
+                                                + value
+                                                + '\')">删除</span> ';
 
 
-                                            }
-                                            return f + h   ;
+                                            // var d= '<span class="btn btn-success btn-sm " href="#" title="修改"  mce_href="#" onclick="updateShuju(\''
+                                            //     + value
+                                            //     + '\')">修改</span> ';
+
+                                        }else if (row.status =="0") {
+                                            var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
+                                                + value
+                                                + '\')">详情</span> ';
+                                            // var a = '';
+                                            var h = '';
+                                            // var d = '';
                                         }
+                                    } else if (row.haveid == "0") { //是否结算
+                                    var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
+                                        + value
+                                        + '\')">详情</span> ';
+                                    var h='';
+                                    // var a='';
+                                    //     var d='';
 
-                                    return f  ;
+                                }
+                                    return f + h   ;
                                 }
                             }
 
                         ],
-                        url: "/jiancha/tryresults/yanguangListShuju",
+                        url: "/jiancha/result/shujulist",
                         method: 'get',
                         queryParams:{cardNumber:cardNumber},
                         ajaxOptions:{cardNumber:cardNumber},
@@ -336,18 +344,3 @@ function batchRemove() {
 
     });
 }
-//修改检查数据
-function updateTryshuju(ptometryNumber) {
-    alert("修改数据")
-    alert(ptometryNumber)
-    var toIndex = layer.open({
-        type: 2,
-        title: '修改',
-        maxmin: true,
-        shadeClose: false, // 点击遮罩关闭层
-        area: ['800px', '520px'],
-        content:   '/jiancha/tryresults/updateTryshuju/' + ptometryNumber // iframe的url
-    });
-    layer.full(toIndex);
-}
-

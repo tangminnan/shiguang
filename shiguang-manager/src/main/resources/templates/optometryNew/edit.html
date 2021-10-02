@@ -118,7 +118,7 @@
                     <td>OS <input name="farXkos" type="text"/></td>
                     <td rowspan="2">主导眼</td>
                     <td rowspan="2">
-                        <select id="dominantEye" name="dominantEye">
+                        <select id="dominantEye" name="dominantEye" style="width: 100%">
                             <option></option>
                             <option value="右">右</option>
                             <option value="交替">交替</option>
@@ -142,8 +142,8 @@
             <h3>双眼视功能检查</h3>
             <div class="H_jc">
                 <span>双眼视功能检查:</span>
-                <input id="PH-S" name="sgnSf" value="1" type="radio">
-                <label for="PH-S" style="margin-right: 5%" checked>是</label>
+                <input id="PH-S" name="sgnSf" value="1" type="radio" checked>
+                <label for="PH-S" style="margin-right: 5%" >是</label>
                 <input id="PH-F" name="sgnSf" value="2" type="radio" >
                 <label for="PH-F">否</label>
                 <span>原因：</span>
@@ -166,7 +166,7 @@
                         <td class="bg-d7">WORTH 4 DOT</td>
                         <td colspan="2">
                             远：
-                            <select id="sgnFardot" name="sgnFardot">
+                            <select id="sgnFardot" name="sgnFardot" style="width: 20%">
                                 <option value=""></option>
                                 <option value="2dots">2dots</option>
                                 <option value="3dots">3dots</option>
@@ -673,7 +673,7 @@
                     <td><input class="input_text" id="addRightz" name="addRightz" type="text" onblur="zhengfu(this)"
                                oninput="getmoney(this,10)" autofocus/></td>
                     <td><input class="input_text" id="yuanRz" name="yuanRz" type="text" /></td>
-                    <td><input id="nearRightz" name="nearRightz" type="text"/></td>
+                    <td><input class="input_text" id="nearRightz" name="nearRightz" type="text"/></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -695,7 +695,7 @@
                         <input class="input_text" id="dvaLeftz" name="dvaLeftz" type="text" oninput="getmoney(this,10)" autofocus/>
                     </td>
                     <td>
-                        <input class="input_text" id="nvaLeftz" name="nvaLeftz" type="text" onblur="zhengfu(this)"
+                        <input class="input_text" id="nvaLeftz" name="nvaLeftz" type="text"
                                oninput="getmoney(this,10)" autofocus/>
                     </td>
                     <td>
@@ -718,7 +718,7 @@
                     </td>
                     <td><input class="input_text" id="yuanLz" name="yuanLz" type="text"/>
                     </td>
-                    <td><input id="nearLeftz" name="nearLeftz" type="text"/>
+                    <td><input class="input_text"  id="nearLeftz" name="nearLeftz" type="text"/>
                     </td>
                     <td></td>
                 </tr>
@@ -787,9 +787,12 @@
                                oninput="getmoney(this,10)" autofocus/>
                     </td>
                     <td>
-                        <input class="input_text" id="yuanRrty" name="yuanRrty" type="text" o/>
+                        <input class="input_text" id="yuanRrty" name="yuanRrty" type="text"  />
                     </td>
-                    <td></td>
+                    <td>
+
+                        <input class="input_text" id="nearRighttry" name="nearRighttry" type="text" />
+                    </td>
                 </tr>
                 <tr>
                     <td>OS</td>
@@ -834,7 +837,9 @@
                     <td>
                         <input class="input_text" id="yuanLrty" name="yuanLrty" type="text" />
                     </td>
-                    <td></td>
+                    <td>
+                        <input class="input_text" id="nearLefttry" name="nearLefttry" type="text" />
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -858,6 +863,7 @@
             <!--<label for="JK2"><input name="cont" type="radio" id="JK2"> TOPCON</label>-->
             <!--<input type="button" value="读取设备接口"/>-->
             <!--</div>-->
+            <input id="status" name="status" value="1" type="hidden" />
             <div class="Keep"><input type="button" value="保存" onclick="saveTry()"/></div>
         </div>
     </div>
@@ -889,7 +895,7 @@
 
     //主观验光和试戴镜联动
     $(".zgQG").click(function () {
-        for (var i = 0; i < $(".zhuguan .input_text").length; i++) {
+        for (var i = 0; i <= $(".zhuguan .input_text").length; i++) {
             $(".zhuguan2 .input_text").eq(i).val($(".zhuguan .input_text").eq(i).val())
         }
     });

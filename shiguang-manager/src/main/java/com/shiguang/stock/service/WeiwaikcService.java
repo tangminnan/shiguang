@@ -1,5 +1,6 @@
 package com.shiguang.stock.service;
 
+import com.shiguang.stock.domain.WeiwaiDO;
 import com.shiguang.stock.domain.WeiwaikcDO;
 
 import java.util.List;
@@ -27,4 +28,7 @@ public interface WeiwaikcService {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	//确认收货
+	int updateStatus(WeiwaikcDO weiwaikcDO);
 }

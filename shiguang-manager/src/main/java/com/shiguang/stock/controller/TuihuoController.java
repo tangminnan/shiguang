@@ -283,7 +283,7 @@ public class TuihuoController {
 	//跳转库存查询
 	@GetMapping("/getGood/{positionId}/{positionName}/{mfrsid}/{mfrsName}")
 	String getGood(@PathVariable("positionId") String positionId,@PathVariable("positionName") String positionName,
-				   @PathVariable("mfrsid") Integer  mfrsid,@PathVariable("mfrsName") String mfrsName,Model model) {
+				   @PathVariable("mfrsid") String  mfrsid,@PathVariable("mfrsName") String mfrsName,Model model) {
 		Map<String, Object> map = new HashMap<>();
 		//商品
 		List<GoodsDO> goodsDOList = goodsService.list(map);
@@ -297,7 +297,7 @@ public class TuihuoController {
 	//镜架List
 	@ResponseBody
 	@RequestMapping(value = "/selectjingjia")
-	public List<StockDO> selectjingjia(Integer mfrsid,String positionId,Integer goodsType,
+	public List<StockDO> selectjingjia(String mfrsid,String positionId,Integer goodsType,
 									   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
@@ -314,7 +314,7 @@ public class TuihuoController {
 //配件List
 	@ResponseBody
 	@RequestMapping(value = "/selectpeijian")
-	public List<StockDO> selectpeijian(Integer mfrsid,String positionId,Integer goodsType,
+	public List<StockDO> selectpeijian(String mfrsid,String positionId,Integer goodsType,
 									   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
@@ -331,7 +331,7 @@ public class TuihuoController {
 	//JpcpList
 	@ResponseBody
 	@RequestMapping(value = "/selectJpcp")
-	public List<StockDO> selectJpcp(Integer mfrsid,String positionId,Integer goodsType,String classtype,
+	public List<StockDO> selectJpcp(String mfrsid,String positionId,Integer goodsType,String classtype,
 									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
@@ -349,7 +349,7 @@ public class TuihuoController {
 //JpdzList
 	@ResponseBody
 	@RequestMapping(value = "/selectJpdz")
-	public List<StockDO> selectJpdz(Integer mfrsid,String positionId,Integer goodsType,String classtype,
+	public List<StockDO> selectJpdz(String mfrsid,String positionId,Integer goodsType,String classtype,
 									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
@@ -367,7 +367,7 @@ public class TuihuoController {
 //YxcpList
 	@ResponseBody
 	@RequestMapping(value = "/selectYxcp")
-	public List<StockDO> selectYxcp(Integer mfrsid,String positionId,Integer goodsType,String classtype,
+	public List<StockDO> selectYxcp(String mfrsid,String positionId,Integer goodsType,String classtype,
 									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
@@ -385,7 +385,7 @@ public class TuihuoController {
 //YxdzList
 	@ResponseBody
 	@RequestMapping(value = "/selectYxdz")
-	public List<StockDO> selectYxdz(Integer mfrsid,String positionId,Integer goodsType,String classtype,
+	public List<StockDO> selectYxdz(String mfrsid,String positionId,Integer goodsType,String classtype,
 									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
@@ -403,7 +403,7 @@ public class TuihuoController {
 //护理液List
 	@ResponseBody
 	@RequestMapping(value = "/selectHly")
-	public List<StockDO> selecthly(Integer mfrsid,String positionId,Integer goodsType,String classtype,
+	public List<StockDO> selecthly(String mfrsid,String positionId,Integer goodsType,String classtype,
 								   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
@@ -421,7 +421,7 @@ public class TuihuoController {
 //太阳镜List
 	@ResponseBody
 	@RequestMapping(value = "/selectTyj")
-	public List<StockDO> selecttyj(Integer mfrsid,String positionId,Integer goodsType,String classtype,
+	public List<StockDO> selecttyj(String mfrsid,String positionId,Integer goodsType,String classtype,
 								   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
@@ -439,7 +439,7 @@ public class TuihuoController {
 //老花镜List
 	@ResponseBody
 	@RequestMapping(value = "/selectLhj")
-	public List<StockDO> selectLhj(Integer mfrsid,String positionId,Integer goodsType,String classtype,
+	public List<StockDO> selectLhj(String mfrsid,String positionId,Integer goodsType,String classtype,
 								   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
@@ -457,7 +457,7 @@ public class TuihuoController {
 //耗材LIst
 	@ResponseBody
 	@RequestMapping(value = "/selectHc")
-	public List<StockDO> selectHc(Integer mfrsid,String positionId,Integer goodsType,String classtype,
+	public List<StockDO> selectHc(String mfrsid,String positionId,Integer goodsType,String classtype,
 								  String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);
@@ -475,7 +475,7 @@ public class TuihuoController {
 //视光LIst
 	@ResponseBody
 	@RequestMapping(value = "/selectSg")
-	public List<StockDO> selectSg(Integer mfrsid,String positionId,Integer goodsType,String classtype,
+	public List<StockDO> selectSg(String mfrsid,String positionId,Integer goodsType,String classtype,
 								String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mfrsid", mfrsid);

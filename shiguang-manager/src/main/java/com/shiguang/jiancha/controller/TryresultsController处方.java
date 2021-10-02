@@ -3,11 +3,7 @@ package com.shiguang.jiancha.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
-import com.shiguang.common.utils.ShiroUtils;
-import com.shiguang.jiancha.domain.PharmacyDO;
-import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.TryresultsDO;
-import com.shiguang.jiancha.service.PharmacyService;
 import com.shiguang.jiancha.service.TryresultsService;
 import com.shiguang.line.domain.LineDO;
 import com.shiguang.line.service.LineService;
@@ -19,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,10 +33,6 @@ public class TryresultsController {
     private TryresultsService tryresultsService;
     @Autowired
     private LineService lineService;
-
-    //散瞳用药
-    @Autowired
-    private PharmacyService pharmacyService;
 
     @GetMapping()
     @RequiresPermissions("jiancha:tryresults:tryresults")
@@ -129,66 +120,4 @@ public class TryresultsController {
         return R.ok();
     }
 
-    /**
-     * 一个会员所有验光信息
-     */
-    @ResponseBody
-    @GetMapping("/yanguangListShuju")
-    public List<TryresultsDO> yanguangListShuju(String cardNumber, Model model) {
-        //查询列表数据
-        Map<String, Object> map = new HashMap<>();
-        map.put("cardNumber", cardNumber);
-        List<TryresultsDO> tryresultsDOList = tryresultsService.yanguangListShuju(map);
-        model.addAttribute("tryresultsDOList", tryresultsDOList);
-        if (null != tryresultsDOList){
-            for (TryresultsDO tryresultsDO:tryresultsDOList){
-                //是否结算
-                String haveid = tryresultsDO.getHaveid();
-                if (null !=haveid && "" != haveid){
-                    tryresultsDO.setHaveid("0");
-                }else {
-                    tryresultsDO.setHaveid("1");
-                }
-            }
-        }
-        return tryresultsDOList;
-    }
-
-    /**
-     * 修改所有验光信息详情------[][][]
-     */
-    @GetMapping("/updateTryshuju/{ptometryNumber}")
-    String updateTryshuju(@PathVariable("ptometryNumber") String ptometryNumber, Model model) {
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("ptometryNumber", ptometryNumber);
-        //验光数据
-        TryresultsDO tryresultsDO = tryresultsService.getTryresult(map);
-        if (tryresultsDO.getSex() == 0) {
-            tryresultsDO.setSexx("男");
-        } else {
-            tryresultsDO.setSexx("女");
-        }
-        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date time = tryresultsDO.getCreateTime();
-        String newtime = sdftime.format(time);
-        model.addAttribute("newtime", newtime);
-        //————————————————散瞳用药————————————————————————————————
-        List<PharmacyDO> pharmacyDOList = pharmacyService.list(map);
-        model.addAttribute("pharmacyDOList", pharmacyDOList);
-        model.addAttribute("tryresultsDO", tryresultsDO);
-        //———获取当前登录用户的名称————
-        model.addAttribute("optometryName", ShiroUtils.getUser().getName());
-        return "optometryNew/tryedit";
-    }
-
-    /**
-     * 修改验光数据
-     */
-    @ResponseBody
-    @RequestMapping("/updateTry")
-    public R updateTry(TryresultsDO tryresults) {
-        tryresultsService.updateTry(tryresults);
-        return R.ok();
-    }
 }

@@ -1,5 +1,6 @@
 package com.shiguang.stock.dao;
 
+import com.shiguang.stock.domain.WeiwaiDO;
 import com.shiguang.stock.domain.WeiwaikcDO;
 
 import java.util.List;
@@ -29,4 +30,7 @@ public interface WeiwaikcDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	//确认收货
+	int updateStatus(WeiwaikcDO weiwaikcDO);
 }
