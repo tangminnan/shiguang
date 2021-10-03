@@ -154,6 +154,8 @@ public class StockController {
         model.addAttribute("danjuDay", danjuDay);
         return "stock/stock/edit";
     }
+
+
     @ResponseBody
     @RequestMapping(value = "/selectOrder")
     public List<OrderDO> selectOrder(String danjuNumber, Integer goodsType,Model model) {

@@ -74,11 +74,11 @@ public class DistributionController {
     @RequestMapping("/update")
     @RequiresPermissions("information:distribution:edit")
     public R update(LogStatusDO status){
-        status.setLogisticStatus("加工配送");
+        status.setLogisticStatus("配送");
         statusService.update(status);
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
         workRecoedDO.setUserName(status.getProcessName());
-        workRecoedDO.setType("加工配送");
+        workRecoedDO.setType("配送");
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
         return R.ok();

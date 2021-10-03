@@ -338,8 +338,8 @@ function batchRemove() {
 }
 //修改检查数据
 function updateTryshuju(ptometryNumber) {
-    alert("修改数据")
-    alert(ptometryNumber)
+    // alert("修改数据")
+    // alert(ptometryNumber)
     var toIndex = layer.open({
         type: 2,
         title: '修改',

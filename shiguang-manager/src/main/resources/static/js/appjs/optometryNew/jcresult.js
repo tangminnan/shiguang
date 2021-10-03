@@ -11,6 +11,7 @@ $.validator.setDefaults({
 function saveCF() {
     var followTime= $('#followTime').val();
     var chufangType = $("#chufangType").val();
+    // var chufangType = $("select[name='region[chufangType]']").val();
     // alert(followTime)
     if (chufangType == ""){
         return layer.alert("请选择处方类型！")

@@ -4,11 +4,17 @@
 <mapper namespace="com.shiguang.stock.dao.WeiwaikcDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.WeiwaikcDO">
-		select `id`,`position_id`,`gkname`,`hyknum`,`phone`,`danju_number`,`sale_number`,`mirror_time`,`goods_name`,`count`,`sale_number2`,`mirror_time2`,`goods_name2`,`count2`,`status` from stock_weiwaikc where id = #{value}
+		select `id`,`position_id`,`gkname`,`hyknum`,`phone`,`danju_number`,`sale_number`,`mirror_time`,`goods_name`,
+		`count`,`sale_number2`,`mirror_time2`,`goods_name2`,`count2`,
+		`status`,`username`,`sh_time`,`shstatus` ,`psname`,`salenumbery`,`pstime`
+		from stock_weiwaikc where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.WeiwaikcDO">
-		select `id`,`position_id`,`gkname`,`hyknum`,`phone`,`danju_number`,`sale_number`,`mirror_time`,`goods_name`,`count`,`sale_number2`,`mirror_time2`,`goods_name2`,`count2`,`status` from stock_weiwaikc
+		select `id`,`position_id`,`gkname`,`hyknum`,`phone`,`danju_number`,`sale_number`,
+		`mirror_time`,`goods_name`,`count`,`sale_number2`,`mirror_time2`,`goods_name2`,`count2`,
+		`status`,`username`,`sh_time`,`shstatus` ,`psname`,`salenumbery`,`pstime`
+		from stock_weiwaikc
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
@@ -24,7 +30,15 @@
 		  		  <if test="mirrorTime2 != null and mirrorTime2 != ''"> and mirror_time2 = #{mirrorTime2} </if>
 		  		  <if test="goodsName2 != null and goodsName2 != ''"> and goods_name2 = #{goodsName2} </if>
 		  		  <if test="count2 != null and count2 != ''"> and count2 = #{count2} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+
+
+		  		  	<if test="status != null and status != ''"> and status = #{status} </if>
+					<if test="username != null and username != ''"> and username = #{username} </if>
+					<if test="shTime != null and shTime != ''"> and sh_time = #{shTime} </if>
+					<if test="shstatus != null and shstatus != ''"> and shstatus = #{shstatus} </if>
+					<if test="psname != null and psname != ''"> and psname = #{psname} </if>
+					<if test="salenumbery != null and salenumbery != ''"> and salenumbery = #{salenumbery} </if>
+					<if test="pstime != null and pstime != ''"> and pstime = #{pstime} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -56,7 +70,14 @@
 		  		  <if test="mirrorTime2 != null and mirrorTime2 != ''"> and mirror_time2 = #{mirrorTime2} </if>
 		  		  <if test="goodsName2 != null and goodsName2 != ''"> and goods_name2 = #{goodsName2} </if>
 		  		  <if test="count2 != null and count2 != ''"> and count2 = #{count2} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+
+			 <if test="status != null and status != ''"> and status = #{status} </if>
+			 <if test="username != null and username != ''"> and username = #{username} </if>
+			 <if test="shTime != null and shTime != ''"> and sh_time = #{shTime} </if>
+			 <if test="shstatus != null and shstatus != ''"> and shstatus = #{shstatus} </if>
+			 <if test="psname != null and psname != ''"> and psname = #{psname} </if>
+			 <if test="salenumbery != null and salenumbery != ''"> and salenumbery = #{salenumbery} </if>
+			 <if test="pstime != null and pstime != ''"> and pstime = #{pstime} </if>
 		  		</where>
 	</select>
 	 
@@ -79,7 +100,10 @@
 			`status`,
 			`username`,
 			`sh_time`,
-			`shstatus`
+			`shstatus`,
+			`psname`,
+			`salenumbery`,
+			`pstime`
 		)
 		values
 		(
@@ -99,7 +123,10 @@
 			#{status},
 			#{username},
 			#{shTime},
-			#{shstatus}
+			#{shstatus},
+			#{psname},
+			#{salenumbery},
+			#{pstime}
 		)
 	</insert>
 	 
@@ -119,7 +146,16 @@
 			<if test="mirrorTime2 != null">`mirror_time2` = #{mirrorTime2}, </if>
 			<if test="goodsName2 != null">`goods_name2` = #{goodsName2}, </if>
 			<if test="count2 != null">`count2` = #{count2}, </if>
-			<if test="status != null">`status` = #{status}</if>
+
+			<if test="status != null">`status` = #{status},</if>
+			<if test="username != null">`username` = #{username},</if>
+
+			<if test="shTime != null">`sh_time` = #{shTime},</if>
+			<if test="shstatus != null">`shstatus` = #{shstatus},</if>
+			<if test="psname != null">`psname` = #{psname},</if>
+
+			<if test="salenumbery != null">`salenumbery` = #{salenumbery},</if>
+			<if test="pstime != null">`pstime` = #{pstime}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -136,13 +172,17 @@
 	</delete>
 
 
-	<!--确认收货-->
+	<!--确认收货   [配送][][退回][][][]-->
 	<update id="updateStatus" parameterType="com.shiguang.stock.domain.WeiwaikcDO">
 		update stock_weiwaikc
 		<set>
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="username != null">`username` = #{username}, </if>
-			<if test="shTime != null">`sh_time` = #{shTime} </if>
+			<if test="shTime != null">`sh_time` = #{shTime} ,</if>
+
+			<if test="shstatus != null">`shstatus` = #{shstatus} ,</if>
+			<if test="psname != null">`psname` = #{psname}, </if>
+			<if test="pstime != null">`pstime` = #{pstime} </if>
 		</set>
 		where danju_number = #{danjuNumber}
 	</update>

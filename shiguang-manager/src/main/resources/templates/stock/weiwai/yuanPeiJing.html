@@ -21,162 +21,269 @@
 			<td>
 				<input id="saleNumber" name="saleNumber" type="text">
 			</td>
-			<td>所属部门：</td>
-			<td width="25%">
-				<select id="departmentId" name="departmentId">
-					<option></option>
-					<option th:each="ls:${departmentDOList}"
-							th:text="${ls.departName}"
-							th:value="${ls.id}"></option>
-				</select>
-			</td>
-			<td>配镜时间：</td>
+			<td>顾客姓名：</td>
 			<td>
-				<input id="optometryName" name="optometryName" type="text" >至<input id="optometryName2" name="optometryName2" type="text" >
+				<input id="name" name="name" type="text" />
+			</td>
+			<td>会员卡号：</td>
+			<td>
+				<input id="memberNumber" name="memberNumber" type="text" />
 			</td>
 		</tr>
 		<tr>
-			<td>取镜时间：</td>
+			<td>顾客电话：</td>
 			<td>
-				<input id="mirrorTime" name="mirrorTime" type="text" >至<input id="mirrorTime2" name="mirrorTime2" type="text" >
+				<input id="phone1" name="phone1" type="text" />
 			</td>
 		</tr>
 	</table>
 	<!--保存/清空-->
 	<div class="BQ-btn">
-		<input type="button" value="查询" onclick="getOrder()"/>
+		<input type="button" value="查询" onclick="reLoad()"/>
 	</div>
 </div>
 <!--商品信息-->
 <div class="m40 tabS msgBoxDD">
-	<table  border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-		<tbody>
-		<tr class="thead">
-			<td>单选</td>
-			<td>配镜单号</td>
-			<td>顾客姓名</td>
-			<td>会员卡号</td>
-			<td>顾客电话</td>
-			<td>配镜时间</td>
-			<td>应收金额</td>
-			<td style="display: none">处方</td>
-			<td style="display: none">球镜OD</td>
-			<td style="display: none">柱镜OD</td>
-			<td style="display: none">轴向OD</td>
-			<td style="display: none">ADDOD</td>
-			<td style="display: none">三棱镜OD</td>
-			<td style="display: none">基底OD</td>
-			<td style="display: none">瞳距（远）OD</td>
-			<td style="display: none">瞳距（近）OD</td>
-			<td style="display: none">球镜OS</td>
-			<td style="display: none">柱镜OS</td>
-			<td style="display: none">轴向OS</td>
-			<td style="display: none">ADDOS</td>
-			<td style="display: none">三棱镜OS</td>
-			<td style="display: none">基底OS</td>
-			<td style="display: none">瞳距（远）OS</td>
-			<td style="display: none">瞳距（近）OS</td>
-		</tr>
-		</tbody>
-	</table>
+<!--	<table  border="0" cellspacing="0" cellpadding="0" class="buyBtns">-->
+<!--		<tbody>-->
+<!--		<tr class="thead">-->
+<!--			<td>单选</td>-->
+<!--			<td>配镜单号</td>-->
+<!--			<td>顾客姓名</td>-->
+<!--			<td>会员卡号</td>-->
+<!--			<td>顾客电话</td>-->
+<!--			<td>配镜时间</td>-->
+<!--			<td>应收金额</td>-->
+
+
+
+<!--			<td  >处方</td>-->
+<!--			<td  >球镜OD</td>-->
+<!--			<td  >柱镜OD</td>-->
+<!--			<td  >轴向OD</td>-->
+<!--			<td  >ADDOD</td>-->
+<!--			<td  >三棱镜OD</td>-->
+<!--			<td  >基底OD</td>-->
+<!--			<td  >瞳距（远）OD</td>-->
+<!--			<td  >瞳距（近）OD</td>-->
+<!--			<td  >球镜OS</td>-->
+<!--			<td  >柱镜OS</td>-->
+<!--			<td  >轴向OS</td>-->
+<!--			<td  >ADDOS</td>-->
+<!--			<td  >三棱镜OS</td>-->
+<!--			<td  >基底OS</td>-->
+<!--			<td  >瞳距（远）OS</td>-->
+<!--			<td  >瞳距（近）OS</td>-->
+<!--		</tr>-->
+<!--		</tbody>-->
+<!--	</table>-->
+	<table id="exampleTable" data-mobile-responsive="true"></table>
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/weiwai/getGoods.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        var eyeStyle = $("#eyeStyle").val();
-        $(".val").remove();
-        $.ajax({
-            url: '/stock/weiwai/selectOrder',
-            type: 'post',
-            dataType: "json",
-            data: {
-                'eyeStyle': eyeStyle
-            },
-            success: function (xml) {
-                for (var i = 0; i < xml.length; i++) {
-                    $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                        "<td name='saleNumber'>" + xml[i].saleNumber + "</td>\n" +
-                        "<td name='name'>" + xml[i].name + "</td>\n" +
-                        "<td name='memberNumber'>" + xml[i].memberNumber + "</td>\n" +
-                        "<td name='phone1'>" + xml[i].phone1 + "</td>\n" +
-                        "<td name='settleDate'>" + xml[i].settleDate + "</td>\n" +
-                        "<td name='amountMoney'>" + xml[i].amountMoney + "</td>\n" +
-                        "<td style='display: none' name='recipelType'>" + xml[i].recipelType + "</td>\n" +
+    // $(document).ready(function () {
+    //     var eyeStyle = $("#eyeStyle").val();
+    //     $(".val").remove();
+    //     $.ajax({
+    //         url: '/stock/weiwai/selectOrder',
+    //         type: 'post',
+    //         dataType: "json",
+    //         data: {
+    //             'eyeStyle': eyeStyle
+    //         },
+    //         success: function (xml) {
+    //             for (var i = 0; i < xml.length; i++) {
+    //                 $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
+    //                     "<td name='saleNumber'>" + xml[i].saleNumber + "</td>\n" +
+    //                     "<td name='name'>" + xml[i].name + "</td>\n" +
+    //                     "<td name='memberNumber'>" + xml[i].memberNumber + "</td>\n" +
+    //                     "<td name='phone1'>" + xml[i].phone1 + "</td>\n" +
+    //                     "<td name='settleDate'>" + xml[i].settleDate + "</td>\n" +
+    //                     "<td name='amountMoney'>" + xml[i].amountMoney + "</td>\n" +
+    //                     "<td   name='recipelType'>" + xml[i].recipelType + "</td>\n" +
+	//
+    //                     "<td name='rightsph'>" + xml[i].rightsph + "</td>\n" +
+    //                     "<td name='rightcyl'>" + xml[i].rightcyl + "</td>\n" +
+    //                     "<td name='rightzx'>" + xml[i].rightzx + "</td>\n" +
+	//
+    //                     "<td name='rightAdd'>" + xml[i].rightAdd + "</td>\n" +
+    //                     "<td name='rightSlj'>" + xml[i].rightSlj + "</td>\n" +
+    //                     "<td name='rightJd'>" + xml[i].rightJd + "</td>\n" +
+	//
+    //                     "<td name='rightFartj'>" + xml[i].rightFartj + "</td>\n" +
+    //                     "<td name='rightNeartj'>" + xml[i].rightNeartj + "</td>\n" +
+	// 					"<td name='leftsph'>" + xml[i].leftsph + "</td>\n" +
+    //                     "<td name='leftcyl'>" + xml[i].leftcyl + "</td>\n" +
+    //                     "<td name='leftzx'>" + xml[i].leftzx + "</td>\n" +
+    //                     "<td name='leftAdd'>" + xml[i].leftAdd + "</td>\n" +
+    //                     "<td name='leftSlj'>" + xml[i].leftSlj + "</td>\n" +
+    //                     "<td name='leftJd'>" + xml[i].leftJd + "</td>\n" +
+    //                     "<td name='leftFartj'>" + xml[i].leftFartj + "</td>\n" +
+    //                     "<td name='leftNeartj'>" + xml[i].leftNeartj + "</td>\n" +
+	//
+	//
+    //                     "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+    //                     "<td name='jpGoodsName'>" + xml[i].jpGoodsName + "</td>\n" +
+    //                     "<td name='jpGoodsNum'>" + xml[i].jpGoodsNum + "</td>\n" +
+    //                     "<td name='leftRight'>" + xml[i].leftRight + "</td>\n" +
+    //                     "</tr>");
+    //             }
+    //         }
+    //     })
+    // });
+	$(document).ready(function () {
+		$(".val").remove();
+		$(function () {
+			load();
+		});
+		function load() {
+			$('#exampleTable')
+					.bootstrapTable(
+							{
+								method: 'get', // 服务器数据的请求方式 get or post
+								url: '/stock/weiwai/selectOrder',// 服务器数据的加载地址
+								//	showRefresh : true,
+								//	showToggle : true,
+								//	showColumns : true,
+								iconSize: 'outline',
+								toolbar: '#exampleToolbar',
+								striped: true, // 设置为true会有隔行变色效果
+								dataType: "json", // 服务器返回的数据类型
+								pagination: true, // 设置为true会在底部显示分页条
+								// queryParamsType : "limit",
+								// //设置为limit则会发送符合RESTFull格式的参数
+								singleSelect: false, // 设置为true将禁止多选
+								// contentType : "application/x-www-form-urlencoded",
+								// //发送到服务器的数据编码类型
+								pageSize: 10, // 如果设置了分页，每页数据条数
+								pageNumber: 1, // 如果设置了分布，首页页码
+								//search : true, // 是否显示搜索框
+								showColumns: false, // 是否显示内容下拉框（选择显示的列）
+								sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+								queryParams: function (params) {
+									return {
+										//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+										limit: params.limit,
+										offset: params.offset,
+										eyeStyle  : $("#eyeStyle").val(),
+										saleNumber  : $("#saleNumber").val(),
+										name  : $("#name").val(),
+										memberNumber  : $("#memberNumber").val(),
+										phone1  : $("#phone1").val()
 
-                        "<td style='display: none' name='rightsph'>" + xml[i].rightsph + "</td>\n" +
-                        "<td style='display: none' name='rightcyl'>" + xml[i].rightcyl + "</td>\n" +
-                        "<td style='display: none' name='rightzx'>" + xml[i].rightzx + "</td>\n" +
-                        "<td style='display: none' name='rightAdd'>" + xml[i].rightAdd + "</td>\n" +
-                        "<td style='display: none' name='rightSlj'>" + xml[i].rightSlj + "</td>\n" +
-                        "<td style='display: none' name='rightJd'>" + xml[i].rightJd + "</td>\n" +
-                        "<td style='display: none' name='rightFartj'>" + xml[i].rightFartj + "</td>\n" +
-                        "<td style='display: none' name='rightNeartj'>" + xml[i].rightNeartj + "</td>\n" +
-						"<td style='display: none' name='leftsph'>" + xml[i].leftsph + "</td>\n" +
-                        "<td style='display: none' name='leftcyl'>" + xml[i].leftcyl + "</td>\n" +
-                        "<td style='display: none' name='leftzx'>" + xml[i].leftzx + "</td>\n" +
-                        "<td style='display: none' name='leftAdd'>" + xml[i].leftAdd + "</td>\n" +
-                        "<td style='display: none' name='leftSlj'>" + xml[i].leftSlj + "</td>\n" +
-                        "<td style='display: none' name='leftJd'>" + xml[i].leftJd + "</td>\n" +
-                        "<td style='display: none' name='leftFartj'>" + xml[i].leftFartj + "</td>\n" +
-                        "<td style='display: none' name='leftNeartj'>" + xml[i].leftNeartj + "</td>\n" +
-                        "<td style='display: none' name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                        "<td style='display: none' name='jpGoodsName'>" + xml[i].jpGoodsName + "</td>\n" +
-                        "<td style='display: none' name='jpGoodsNum'>" + xml[i].jpGoodsNum + "</td>\n" +
-                        "<td style='display: none' name='leftRight'>" + xml[i].leftRight + "</td>\n" +
-                        "</tr>");
-                }
-            }
-        })
-    });
-    function getHc() {
-        var producNum = $("#producNum").val();
-        var producCode = $("#producCode").val();
-        var producName = $("#producName").val();
-        var mfrsid = $("#mfrsid").val();
-        var brandid = $("#brandid").val();
-        var brandname = $("#brandname").val();
-        var producFactory = $("#producFactory").val();
-        var factory = $("#factory").val();
-        var retailPrice = $("#retailPrice").val();
-        var retailPrice2 = $("#retailPrice2").val();
+									};
+								},
+								columns: [
+									{
+										checkbox: true
+									},
+									{
+										field : 'saleNumber',
+										title : '配镜单号'
+									},
+									{
+										field: 'name',
+										title: '顾客姓名'
+									},
+									{
+										field: 'memberNumber',
+										title: '会员卡号'
+									},
+											{
+										field: 'phone1',
+										title: '顾客电话'
+									},
+										{
+										field: 'settleDate',
+										title: '配镜时间'
+									},
+									{
+										field: 'amountMoney',
+										title: '应收金额'
+									},
+									// {
+									// 	field: 'recipelType',
+									// 	title: '处方'
+									// },
+									{
+										field: 'recipelType',
+										title: '处方'
+									},
 
-        $(".val").remove();
-        $.ajax({
-            url: '/stock/stock/selectHc',
-            type: 'post',
-            dataType: "json",
-            data: {
-                'producNum': producNum,
-                'producCode': producCode,
-                'producName': producName,
-                'mfrsid': mfrsid,
-                'brandid': brandid,
-                'brandname': brandname,
-                'producFactory': producFactory,
-                'factory': factory,
-                'retailPrice': retailPrice,
-                'retailPrice2': retailPrice2
-            },
-            success: function (xml) {
-                for (var i = 0; i < xml.length; i++) {
-                    // if(null == xml[i].producFactory){
-                    //     xml[i].producFactory="";
-                    // }
-                    $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                        "<td name='saleNumber'>" + xml[i].saleNumber + "</td>\n" +
-                        "<td name='name'>" + xml[i].name + "</td>\n" +
-                        "<td name='memberNumber'>" + xml[i].memberNumber + "</td>\n" +
-                        "<td name='phone1'>" + xml[i].phone1 + "</td>\n" +
-                        "<td name='settleDate'>" + xml[i].settleDate + "</td>\n" +
-                        "<td name='amountMoney'>" + xml[i].amountMoney + "</td>\n" +
-                        "<td name='amountMoney'>" + xml[i].amountMoney + "</td>\n" +
-                        "<td name='recipelType'>" + xml[i].recipelType + "</td>\n" +
-                        "</tr>");
-                }
-            }
-        })
-    }
+											{
+										field: 'rightsph',
+										title: '球镜OD'
+									},{
+										field: 'rightcyl',
+										title: '柱镜OD'
+									},{
+										field: 'rightzx',
+										title: '轴向OD'
+									},{
+										field: 'rightAdd',
+										title: 'ADDOD'
+									},{
+										field: 'rightSlja',
+										title: '三棱镜OD'
+									},{
+										field: 'rightJd',
+										title: '基底OD'
+									},{
+										field: 'rightFartj',
+										title: '瞳距（远）OD'
+									},{
+										field: 'rightNeartj',
+										title: '瞳距（近）OD'
+									},{
+										field: 'leftsph',
+										title: '球镜OS'
+									},{
+										field: 'leftcyl',
+										title: '柱镜OS'
+									},{
+										field: 'leftzx',
+										title: '轴向OS'
+									},{
+										field: 'leftAdd',
+										title: 'ADDOS'
+									},{
+										field: 'leftSlja',
+										title: '三棱镜OS'
+									},{
+										field: 'leftJd',
+										title: '基底OS'
+									},{
+										field: 'leftFartj',
+										title: '瞳距（远）OS'
+									},{
+										field: 'leftNeartj',
+										title: '瞳距（近）OS'
+									},
+									// {
+									// 	field: 'goodsNum',
+									// 	title: '商品代码'
+									// },
+									// {
+									// 	field: 'jpGoodsName',
+									// 	title: '商品名称'
+									// },{
+									// 	field: 'jpGoodsNum',
+									// 	title: '商品条码'
+									// },{
+									// 	field: 'leftRight',
+									// 	title: '左右'
+									// },
+								]
+							});
+
+		}
+	});
+
+	function reLoad() {
+		// $(".val").remove();
+		$('#exampleTable').bootstrapTable('refresh');
+	}
 
 </script>
 </body>

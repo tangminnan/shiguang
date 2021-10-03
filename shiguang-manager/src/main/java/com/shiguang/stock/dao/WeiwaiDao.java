@@ -44,8 +44,8 @@ public interface WeiwaiDao {
 
 	//查询配镜单
 	List<SalesDO> selectOrder(Map<String, Object> map);
-
-	//确认收货
+//	int selectOrderCount(Map<String, Object> map);
+	//<!--确认收货   [配送][][退回][][][]-->
 	int updateStatus(WeiwaiDO weiwaiDO);
 
 	//委外镜框配镜单

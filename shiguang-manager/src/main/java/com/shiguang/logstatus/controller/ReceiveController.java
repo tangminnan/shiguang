@@ -43,7 +43,7 @@ public class ReceiveController {
     public PageUtils receivelist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        query.put("logisticStatus","加工配送");
+        query.put("logisticStatus","配送");
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyid",ShiroUtils.getUser().getCompanyId());
         }
@@ -52,7 +52,10 @@ public class ReceiveController {
         for (SalesDO salesDO : salesDOList){
             salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
             salesDO.setPeijingDate(simpleDateFormat.format(salesDO.getPeijingTime()));
-            salesDO.setFaliaoTime(simpleDateFormat.format(salesDO.getFaliaoDate()));
+            if (null != salesDO.getFaliaoDate()){
+                salesDO.setFaliaoTime(simpleDateFormat.format(salesDO.getFaliaoDate()));
+            }
+
         }
         int total = statusService.findSaleCount(query);
         PageUtils pageUtils = new PageUtils(salesDOList, total);

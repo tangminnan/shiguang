@@ -51,6 +51,37 @@ public class WeiwaikcDO implements Serializable {
 	private String shTime;
 	//配送。退回
 	private String shstatus;
+	//配送人员或者退回
+	private String psname;
+	//配送或者退回时间
+	private String pstime;
+
+	public String getPstime() {
+		return pstime;
+	}
+
+	public void setPstime(String pstime) {
+		this.pstime = pstime;
+	}
+
+	public String getPsname() {
+		return psname;
+	}
+
+	public void setPsname(String psname) {
+		this.psname = psname;
+	}
+	//原配镜单
+	private String salenumbery;
+
+	public String getSalenumbery() {
+		return salenumbery;
+	}
+
+	public void setSalenumbery(String salenumbery) {
+		this.salenumbery = salenumbery;
+	}
+
 	/**
 	 * 设置：委外入库id
 	 */

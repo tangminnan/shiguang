@@ -9,6 +9,9 @@ import java.util.Map;
 import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.common.utils.*;
+import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.domain.WorkRecoedDO;
+import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.product.domain.HcDO;
 import com.shiguang.stock.domain.PidiaoDO;
@@ -17,6 +20,7 @@ import com.shiguang.stock.domain.WeiwaikcDO;
 import com.shiguang.stock.service.StockService;
 import com.shiguang.stock.service.WeiwaikcService;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -47,6 +51,9 @@ public class WeiwaiController {
 	private WeiwaiService weiwaiService;
 	@Autowired
 	private DepartmentService departmentService;
+	//配送
+	@Autowired
+	private LogStatusService statusService;
 
 	//委外库存
 	@Autowired
@@ -164,6 +171,7 @@ public class WeiwaiController {
 		String gkname=weiwai.getGkname();
 		String hyknum=weiwai.getHyknum();
 		String phone=weiwai.getPhone();
+		String salenumbery=weiwai.getSalenumbery();
 
 
 		String[] saleNumber1=weiwai.getSaleNumber().split(",");
@@ -253,6 +261,11 @@ public class WeiwaiController {
 			weiwaiDO.setUsername(username);
 			weiwaiDO.setShTime("");
 			weiwaiDO.setShstatus("");
+			weiwaiDO.setPsname("");
+
+			weiwaiDO.setSalenumbery(salenumbery);
+			weiwaiDO.setPstime("");
+
 
 			weiwaiDO.setGkname(gkname);
 			weiwaiDO.setHyknum(hyknum);
@@ -462,9 +475,12 @@ public class WeiwaiController {
 				weiwaikcDO.setGoodsName2(weiwai.getGoodsName2());
 				weiwaikcDO.getCount2(weiwai.getCount2());
 				weiwaikcDO.getStatus(weiwai.getStatus());
-				weiwaikcDO.getShTime();
-				weiwaikcDO.getShstatus();
 
+				weiwaikcDO.setShTime("");
+				weiwaikcDO.setShstatus("");
+				weiwaikcDO.setPsname("");
+				weiwaikcDO.setSalenumbery(salenumbery);
+				weiwaikcDO.setPstime("");
 
 
 			if(weiwaikcService.save(weiwaikcDO)>0){
@@ -556,30 +572,60 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 		model.addAttribute("eyeStyle",eyeStyle);
 		return "/stock/weiwai/yuanPeiJing";
 	}
+//	//销售单
+//	@ResponseBody
+//	@RequestMapping(value = "/selectOrder")
+//	public List<SalesDO> orderList(Integer eyeStyle, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		if (eyeStyle == 3){
+//			map.put("classtype", "2");
+//			map.put("eyeStyles", "框镜");
+//		}else if (eyeStyle == 4){
+//			map.put("classtype", "2");
+//			map.put("eyeStyles", "隐形");
+//		}
+////		【只能查当前公司的】
+//		//———获取当前登录用户的公司id————
+//		String companyId=ShiroUtils.getUser().getCompanyId();
+//		if(companyId == null){
+//			map.put("departNumber","");
+//		}else if (companyId != null){
+//			map.put("companyId",companyId);
+//		}
+//		map.put("isSale",1);
+//		List<SalesDO> selectOrder = weiwaiService.selectOrder(map);
+//		model.addAttribute("selectOrder", selectOrder);
+//		return selectOrder;
+//	}
+
 	//销售单
 	@ResponseBody
-	@RequestMapping(value = "/selectOrder")
-	public List<SalesDO> orderList(Integer eyeStyle, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		if (eyeStyle == 3){
-			map.put("classtype", "2");
-			map.put("eyeStyles", "框镜");
-		}else if (eyeStyle == 4){
-			map.put("classtype", "2");
-			map.put("eyeStyles", "隐形");
+	@RequestMapping("/selectOrder")
+	public PageUtils selectOrder(@RequestParam Map<String, Object> params) {
+		//查询列表数据
+		Query query = new Query(params);
+		if ( "3".equals(params.get("eyeStyle"))){
+			query.put("classtype", "2");
+			query.put("eyeStyles", "框镜");
+		}else if ("4".equals(params.get("eyeStyle"))){
+			query.put("classtype", "2");
+			query.put("eyeStyles", "隐形");
 		}
 //		【只能查当前公司的】
 		//———获取当前登录用户的公司id————
 		String companyId=ShiroUtils.getUser().getCompanyId();
 		if(companyId == null){
-			map.put("departNumber","");
+			query.put("departNumber","");
 		}else if (companyId != null){
-			map.put("companyId",companyId);
+			query.put("companyId",companyId);
 		}
-		map.put("isSale",1);
-		List<SalesDO> selectOrder = weiwaiService.selectOrder(map);
-		model.addAttribute("selectOrder", selectOrder);
-		return selectOrder;
+
+		query.put("isSale",1);
+		List<SalesDO> selectOrder = weiwaiService.selectOrder(query);
+//		int total = weiwaiService.selectOrderCount(query);
+		int total = 1000000;
+		PageUtils pageUtils = new PageUtils(selectOrder, total);
+		return pageUtils;
 	}
 
 	/**
@@ -612,6 +658,7 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 		weiwaikcDO.setDanjuNumber(danjuNumber);
 		weiwaikcDO.setStatus(status);
 		weiwaikcDO.setUsername(username);
+		weiwaikcDO.setShTime(shTime);
 		weiwaikcService.updateStatus(weiwaikcDO);
 
 		return R.ok();
@@ -641,4 +688,108 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 		model.addAttribute("dayinDay", dayinDay);
 		return "/stock/weiwai/yxPeijingdan";
 	}
+
+
+
+	/**
+	 * 配送输入工号
+	 */
+	@GetMapping("/userNumps/{salenumbery}/{danjuNumber}")
+	String userNumps(@PathVariable("salenumbery") String salenumbery ,
+					 @PathVariable("danjuNumber") String danjuNumber ,Model model) {
+		model.addAttribute("danjuNumber",danjuNumber);
+		model.addAttribute("salenumbery",salenumbery);
+		return "/stock/weiwai/userNumps";
+	}
+	/**
+	 * 取镜处收货
+	 */
+	@PostMapping( "/editShouhuo")
+	@ResponseBody
+	public R editShouhuo(String danjuNumber, String salenumbery, String shstatus ,String psname){
+		LogStatusDO logStatusDO = new LogStatusDO();
+		logStatusDO.setSaleNumber(salenumbery);
+		logStatusDO.setLogisticStatus("配送");
+		WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+		workRecoedDO.setUserName(psname);
+		workRecoedDO.setType("配送");
+		workRecoedDO.setDateTime(new Date());
+		statusService.saveRecord(workRecoedDO);
+
+		if(statusService.editFaliao(logStatusDO)>0){
+			WeiwaiDO weiwaiDO = new WeiwaiDO();
+			weiwaiDO.setDanjuNumber(danjuNumber);
+			weiwaiDO.setShstatus(shstatus);
+			weiwaiDO.setPsname(psname);
+			//———获取当前系统时间—————
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+			Date date = new Date();
+			String newDate = sdf.format(date);
+			weiwaiDO.setPstime(newDate);
+			weiwaiService.updateStatus(weiwaiDO);
+
+
+			WeiwaikcDO weiwaikcDO = new WeiwaikcDO();
+			weiwaikcDO.setDanjuNumber(danjuNumber);
+			weiwaikcDO.setShstatus(shstatus);
+			weiwaikcDO.setPsname(psname);
+			//———获取当前系统时间—————
+			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+			Date date1 = new Date();
+			String newDate1 = sdf.format(date1);
+			weiwaiDO.setPstime(newDate1);
+			weiwaikcService.updateStatus(weiwaikcDO);
+			return R.ok();
+		}
+		return R.error();
+	}
+
+
+	/**
+	 * 退货输入工号
+	 */
+	@GetMapping("/userNumth/{salenumbery}/{danjuNumber}")
+	String userNumth(@PathVariable("salenumbery") String salenumbery ,
+					 @PathVariable("danjuNumber") String danjuNumber ,Model model) {
+		model.addAttribute("danjuNumber",danjuNumber);
+		model.addAttribute("salenumbery",salenumbery);
+		return "/stock/weiwai/userNumth";
+	}
+	/**
+	 * 取镜处收货
+	 */
+	@PostMapping( "/editTuihuo")
+	@ResponseBody
+	public R editTuihuo(String danjuNumber,  String shstatus ,String psname){
+
+			WeiwaiDO weiwaiDO = new WeiwaiDO();
+			weiwaiDO.setDanjuNumber(danjuNumber);
+			weiwaiDO.setShstatus(shstatus);
+			weiwaiDO.setPsname(psname);
+			//———获取当前系统时间—————
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+			Date date = new Date();
+			String newDate = sdf.format(date);
+			weiwaiDO.setPstime(newDate);
+
+
+
+			WeiwaikcDO weiwaikcDO = new WeiwaikcDO();
+			weiwaikcDO.setDanjuNumber(danjuNumber);
+			weiwaikcDO.setShstatus(shstatus);
+			weiwaikcDO.setPsname(psname);
+			//———获取当前系统时间—————
+			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+			Date date1 = new Date();
+			String newDate1 = sdf.format(date1);
+			weiwaiDO.setPstime(newDate1);
+		if(weiwaiService.updateStatus(weiwaiDO)>0){
+			weiwaikcService.updateStatus(weiwaikcDO);
+			return R.ok();
+		}
+		return R.error();
+	}
 }
+
+
+

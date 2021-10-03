@@ -72,6 +72,7 @@
 	<input id="gkname" name="gkname"   type="hidden"/>
 	<input id="hyknum" name="hyknum"  type="hidden"/>
 	<input id="phone" name="phone"  type="hidden"/>
+	<input id="salenumbery" name="salenumbery"  type="hidden"/>
 	<!--保存/清空-->
 	<div class="BQ-btn">
 		<!--<input type="button" value="内部配镜单" />-->
@@ -161,6 +162,9 @@
 
 		var phone = window.localStorage.getItem("phone");
 		$('#phone').val(phone);
+
+		var salenumbery = window.localStorage.getItem("saleNumber");
+		$('#salenumbery').val(salenumbery);
 
 		if(eyeStyle==3){
 			$("#eyeStyle").find("[value='" + eyeStyle + "']").attr("selected", true);

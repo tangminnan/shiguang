@@ -80,7 +80,12 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 		return weiwaiDao.selectOrder(map);
 	}
 
+//	@Override
+//	public int selectOrderCount(Map<String, Object> map) {
+//		return weiwaiDao.selectOrderCount(map);
+//	}
 
+	//<!--确认收货   [配送][][退回][][][]-->
 	@Override
 	public int updateStatus(WeiwaiDO weiwaiDO) {
 		return weiwaiDao.updateStatus(weiwaiDO);

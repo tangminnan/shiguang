@@ -105,8 +105,9 @@ public class ResultController {
     @PostMapping("/save")
     @RequiresPermissions("jiancha:result:add")
     public R save(ResultDO result,TryresultsDO tryresultsDO) {
+
 //        处方类型所有数据保存
-         if ("2".equals(result.getChufangType())) {
+         if (result.getKjyyPrescriptionType() != null  && result.getKjyyPrescriptionType() != "") {
              if (result.getKjyyDoctor() == "" || result.getKjyyOptometryName() == "") {
                  return R.error("请选择医生或验光师");
              } else {
@@ -116,7 +117,7 @@ public class ResultController {
 
 
 
-         if ("1".equals(result.getChufangType()) ) {
+        if (result.getKjjyPrescriptionType() != null  && result.getKjjyPrescriptionType() != "") {
              if (result.getKjjyDoctor() == "" || result.getKjjyOptometryName() == "") {
                  return R.error("请选择医生或验光师");
              } else {
@@ -124,7 +125,7 @@ public class ResultController {
              }
          }
 
-        if ("3".equals(result.getChufangType())) {
+        if (result.getSgjjPrescriptionType() != null  && result.getSgjjPrescriptionType() != "") {
             if (result.getSgjjDoctor() == "" || result.getSgjjOptometryName() == "") {
                 return R.error("请选择医生或验光师");
             } else {
@@ -132,7 +133,7 @@ public class ResultController {
             }
         }
 
-       if ("5".equals(result.getChufangType())) {
+        if (result.getRxPrescriptionType() != null  && result.getRxPrescriptionType() != "") {
            if (result.getRxDoctor() == "" || result.getRxOptometryName() == "") {
                return R.error("请选择医生或验光师");
            } else {
@@ -141,7 +142,7 @@ public class ResultController {
        }
 
 
-        if ("4".equals(result.getChufangType())) {
+        if (result.getZyPrescriptionType() != null  && result.getZyPrescriptionType() != "") {
             if (result.getZyDoctor() == "" || result.getZyOptometryName() == "") {
                 return R.error("请选择医生或验光师");
             } else {
@@ -149,7 +150,7 @@ public class ResultController {
             }
         }
 
-        if ("7".equals(result.getChufangType())) {
+        if (result.getSjxlPrescriptionType() != null  && result.getSjxlPrescriptionType() != "") {
             if (result.getSjxlDoctor() == "" || result.getSjxlOptometryName() == "") {
                 return R.error("请选择医生或验光师");
             } else {
@@ -158,7 +159,7 @@ public class ResultController {
         }
 
 
-         if ("8".equals(result.getChufangType())) {
+        if (result.getVstPrescriptionType() != null  && result.getVstPrescriptionType() != "") {
              if (result.getVstDoctor() == "" ||  result.getVstOptometryName() == ""){
                  return R.error("请选择医生或验光师");
              } else {
@@ -167,7 +168,7 @@ public class ResultController {
         }
 
 
-       if ("9".equals(result.getChufangType() )) {
+        if (result.getCrtPrescriptionType() != null  && result.getCrtPrescriptionType() != "") {
            if (result.getCrtDoctor() == "" ||  result.getCrtOptometryName() == ""){
                return R.error("请选择医生或验光师");
            } else {
@@ -176,7 +177,7 @@ public class ResultController {
         }
 
 
-         if ("10".equals(result.getChufangType() )) {
+        if (result.getRgpPrescriptionType() != null  && result.getRgpPrescriptionType() != "") {
              if (result.getRgpDoctor() == "" || result.getRgpOptometryName() == "") {
                  return R.error("请选择医生或验光师");
              } else {
@@ -185,7 +186,7 @@ public class ResultController {
          }
 
 
-        if ("11".equals(result.getChufangType())) {
+        if (result.getYpPrescriptionType() != null  && result.getYpPrescriptionType() != "") {
             if (result.getYpDoctor() == "" || result.getYpOptometryName() == "") {
                 return R.error("请选择医生或验光师");
             } else {
@@ -193,6 +194,14 @@ public class ResultController {
                 yaopinService.saveYaopin(result);
             }
         }
+//        if ("11".equals(result.getChufangType())) {
+//            if (result.getYpDoctor() == "" || result.getYpOptometryName() == "") {
+//                return R.error("请选择医生或验光师");
+//            } else {
+//
+//                yaopinService.saveYaopin(result);
+//            }
+//        }
 //        if (result.getYpPrescriptionType() != null  && result.getYpPrescriptionType() != "") {
 //            if (result.getYpDoctor() == "" || result.getYpOptometryName() == "") {
 //                return R.error("请选择医生或验光师");

@@ -5051,7 +5051,7 @@ public class ResultDO implements Serializable {
     public void setZyBeizhu(String zyBeizhu) {
         this.zyBeizhu = zyBeizhu;
     }
-private String chufangType;
+    private String chufangType;
 
     public String getChufangType() {
         return chufangType;

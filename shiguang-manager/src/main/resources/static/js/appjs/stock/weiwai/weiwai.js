@@ -56,6 +56,9 @@ function load() {
 									title : '单据编号'
 								},
 								{
+									field : 'salenumbery',
+									title : '原配镜单'
+								},{
 									field : 'gkname',
 									title : '会员姓名'
 								},
@@ -96,7 +99,28 @@ function load() {
 							{
 									field : 'danjuDay',
 									title : '单据日期'
+								},{
+									field : 'shTime',
+									title : '收货时间'
+								},{
+									field : 'pstime',
+									title : '配送或退回时间'
 								},
+							{
+								field : 'shstatus',
+								title : '操作状态',
+								align : 'center',
+								formatter : function(value, row, index) {
+									// alert(value)
+									if(value == '1'){
+										// alert(row.returnzt);
+										return '<span class="label">已退回</span>';
+
+									}if (value == '0') {
+										return '<span class="label">已配送</span>';
+									}
+								}
+							},
 
                             {
                                 title: '操作',
@@ -114,10 +138,16 @@ function load() {
                                         var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="detial(\''
                                             + row.id + '\')">详情</span> ';
                                         var f = '';
-                                        var n = '<span class="btn btn-warning btn-sm"  href="#" title="配送"  mce_href="#" onclick="peisong(\''
-                                            + row.goodsType+" ','"+ row.danjuNumber + '\')">配送</span> ';
-                                        var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="peisong(\''
-                                            + row.goodsType+" ','"+ row.danjuNumber + '\')">退回</span> ';
+                                        if (row.shstatus==""){
+											var n = '<span class="btn btn-warning btn-sm"  href="#" title="配送"  mce_href="#" onclick="psNum(\''
+												+ row.salenumbery+" ','"+  row.danjuNumber + '\')">配送</span> ';
+											var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="thNum(\''
+												+ row.salenumbery+" ','"+  row.danjuNumber + '\')">退回</span> ';
+										}else {
+											var n = '';
+											var j = '';
+										}
+
 
                                     }
                                     return a + f + n + j ;
@@ -226,13 +256,13 @@ function userNum(danjuNumber) {
 
 	}
 }
-//修改启用状态
+//修改收货状态
 function upshTime() {
 	var danjuNumber = document.getElementById('danjuNumber').value;
 	var username = document.getElementById('username').value;
 	var status = "0";
 	if (username !=""){
-		alert("qqqqqqqq");
+		// alert("qqqqqqqq");
 		$.ajax({
 			url: "/stock/weiwai/updateStatus",
 			type: "post",
@@ -259,6 +289,108 @@ function upshTime() {
 	} else {
 		layer.alert("请输入工号！");
 	}
+}
 
+//配送
+function psNum(salenumbery,danjuNumber) {
+	var shstatus="0";
+	if (shstatus == "0"){
+		// alert("输入工号")
+		layer.open({
+			type : 2,
+			title : '输入工号',
+			maxmin : true,
+			shadeClose : false, // 点击遮罩关闭层
+			area : [ '800px', '520px' ],
+			content :"/stock/weiwai/userNumps/"+ salenumbery+'/'+danjuNumber
+		});
 
+	}
+}
+function peisong() {
+	var danjuNumber = document.getElementById('danjuNumber').value;
+	var salenumbery = document.getElementById('salenumbery').value;
+	var psname = document.getElementById('username').value;
+	var shstatus = "0";
+	if (username != "") {
+		// alert("qqqqqqqq");
+		$.ajax({
+			url: "/stock/weiwai/editShouhuo",
+			type: "post",
+			data: {
+				'danjuNumber': danjuNumber,
+				'shstatus': shstatus,
+				'psname': psname,
+				'salenumbery': salenumbery
+			},
+			dataType: 'JSON',
+			async: false,
+			success: function (data) {
+				if (data.code == 0) {
+					parent.layer.msg("操作成功");
+					parent.reLoad();
+					var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+					parent.layer.close(index);
+
+				} else {
+					parent.layer.alert(data.msg)
+				}
+
+			}
+		});
+	} else {
+		layer.alert("请输入工号！");
+	}
+}
+
+//退货
+function thNum(salenumbery,danjuNumber) {
+	var shstatus="0";
+	if (shstatus == "0"){
+		// alert("输入工号")
+		layer.open({
+			type : 2,
+			title : '输入工号',
+			maxmin : true,
+			shadeClose : false, // 点击遮罩关闭层
+			area : [ '800px', '520px' ],
+			content :"/stock/weiwai/userNumth/"+ salenumbery+'/'+danjuNumber
+		});
+
+	}
+}
+function tuihuo() {
+	var danjuNumber = document.getElementById('danjuNumber').value;
+	var salenumbery = document.getElementById('salenumbery').value;
+	var psname = document.getElementById('username').value;
+	var shstatus = "1";
+	if (username != "") {
+		alert("退货");
+		$.ajax({
+			url: "/stock/weiwai/editTuihuo",
+			type: "post",
+			data: {
+				'danjuNumber': danjuNumber,
+				'shstatus': shstatus,
+				'psname': psname,
+				'salenumbery': salenumbery
+			},
+			dataType: 'JSON',
+			async: false,
+			success: function (data) {
+				if (data.code == 0) {
+					parent.layer.msg("操作成功");
+					parent.reLoad();
+					var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+					parent.layer.close(index);
+
+				} else {
+					parent.layer.alert(data.msg)
+				}
+
+			}
+		});
+	} else {
+		layer.alert("请输入工号！");
+	}
 }

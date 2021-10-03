@@ -1953,22 +1953,22 @@ public class SalesDO implements Serializable {
 		this.name = name;
 	}
 
-	private String rightsph;
-	private String leftsph;
-	private String rightcyl;
-	private String leftcyl;
-	private String rightzx;
-	private String leftzx;
-	private String rightAdd;
-	private String leftAdd;
-	private String rightSlj;
-	private String leftSlj;
-	private String rightJd;
-	private String leftJd;
-	private String rightFartj;
-	private String leftFartj;
-	private String rightNeartj;
-	private String leftNeartj;
+	private String rightsph;//OD球镜
+	private String leftsph;//OS球镜
+	private String rightcyl;//OD柱镜
+	private String leftcyl;//OS柱镜
+	private String rightzx;//OD轴向
+	private String leftzx;//OS轴向
+	private String rightAdd;//ODADD
+	private String leftAdd;//OSADD
+	private String rightSlja;//OD三棱镜
+	private String leftSlja;//OS三棱镜
+	private String rightJd;//OD基底
+	private String leftJd;//OS基底
+	private String rightFartj;//OD远瞳距
+	private String leftFartj;//OS远瞳距
+	private String rightNeartj;//OD近瞳距
+	private String leftNeartj;//OS近瞳距
 
 	public String getRightsph() {
 		return rightsph;
@@ -2034,20 +2034,20 @@ public class SalesDO implements Serializable {
 		this.leftAdd = leftAdd;
 	}
 
-	public String getRightSlj() {
-		return rightSlj;
+	public String getRightSlja() {
+		return rightSlja;
 	}
 
-	public void setRightSlj(String rightSlj) {
-		this.rightSlj = rightSlj;
+	public void setRightSlja(String rightSlja) {
+		this.rightSlja = rightSlja;
 	}
 
-	public String getLeftSlj() {
-		return leftSlj;
+	public String getLeftSlja() {
+		return leftSlja;
 	}
 
-	public void setLeftSlj(String leftSlj) {
-		this.leftSlj = leftSlj;
+	public void setLeftSlja(String leftSlja) {
+		this.leftSlja = leftSlja;
 	}
 
 	public String getRightJd() {
