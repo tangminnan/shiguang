@@ -18,6 +18,7 @@ function getKjpeijian() {
                 var retailPrice = rows[i].retailPrice;
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td>1</td>";
@@ -92,6 +93,7 @@ function getTaiyangjing(){
                 var retailPrice = rows[i].retailPrice;
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td>1</td>";
@@ -166,6 +168,7 @@ function getHaocai() {
                 var retailPrice = rows[i].retailPrice;
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td>1</td>";
@@ -240,6 +243,7 @@ function getLaohuajing() {
                 var retailPrice = rows[i].retailPrice;
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td>1</td>";
@@ -311,6 +315,7 @@ function getShiguang(){
                 var retailPrice = rows[i].retailPrice;
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td>1</td>";
@@ -386,6 +391,7 @@ function getHuliye(){
                 var retailPrice = rows[i].retailPrice;
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td>1</td>";
@@ -461,6 +467,7 @@ function getPeijian(){
                 var retailPrice = rows[i].retailPrice;
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td>1</td>";
@@ -608,6 +615,7 @@ function getYinxing(){
                 var retailPrice = rows[i].retailPrice;
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td>"+rows[i].leftRight+"</td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td>1</td>";
@@ -687,6 +695,7 @@ function getYinxingpj(){
                 var retailPrice = rows[i].retailPrice;
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td>1</td>";
@@ -757,6 +766,7 @@ function getZengpin(){
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td></td>";
                 html += "<td>0.00</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td>1</td>";
@@ -806,6 +816,7 @@ function getZijia(){
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
                 html += "<td>"+rows[i].producName+"</td>";
+                html += "<td></td>";
                 html += "<td>0.00</td>";
                 html += "<td>1</td>";
                 html += "<td>1</td>";
@@ -854,6 +865,7 @@ function getZipian(){
             for (var i=0;i<rows.length;i++){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" /></td>";
                 html += "<td>"+rows[i].producName+"</td>";
+                html += "<td></td>";
                 html += "<td>0.00</td>";
                 html += "<td>1</td>";
                 html += "<td>1</td>";

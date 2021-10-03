@@ -168,7 +168,7 @@
 				<td class="Light_green">OD</td>
 				<td><input type="text" onchange="getBeishu()" name="rightQJyy" id="rightYuanYongQJ"/></td>
 					<td><input type="text"id="rightYuanYongZJ" name="rightZJyy" onchange="getBeishu()"/></td>
-				<td><input type="text" id="rightzhouxiang" name="rightzhouxiangyy" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" id="rightzhouxiang" name="rightzhouxiangyy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" id="rightsanlingjing" name="rightsanlingjingyy"/></td>
 				<td>
 					<select id="rightjidi" name="rightjidiyy">
@@ -187,7 +187,7 @@
 				<td class="Light_green">OS</td>
 				<td><input type="text"  id="leftYuanYongQJ" name="leftQJyy" onchange="getBeishu()"/></td>
 				<td><input type="text"  id="leftYuanYongZJ" name="leftZJyy" onchange="getBeishu()"/></td>
-				<td><input type="text" id="leftzhouxiang" name="leftzhouxiangyy" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" id="leftzhouxiang" name="leftzhouxiangyy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" id="leftsanlingjing" name="leftsanlingjingyy"/></td>
 				<td>
 					<select id="leftjidi" name="leftjidiyy">
@@ -258,7 +258,7 @@
 				<td><input type="text"  id="yingxingBC" /></td>
 				<td><input type="text"  id="rightYinxingQJ" name="rightQJyx" onchange="getyxbeishu()"/></td>
 				<td><input type="text"  id="rightYinxingZJ" name="rightZJyx" onchange="getyxbeishu()"/></td>
-				<td><input type="text"  id="rightYXzhouxiang" name="rightzhouxiangyx" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text"  id="rightYXzhouxiang" name="rightzhouxiangyx" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text"  id="rightqulv" name="rightqulvyx"/></td>
 				<td><input type="text"  id="rightzhijing" name="rightzhijingyx"/></td>
 				<td><input type="text"  id="rightYingXingVA" name="rightYingXingVAyx"/></td>
@@ -270,7 +270,7 @@
 				<td><input type="text" value=" " id="leftBC"/></td>
 				<td><input type="text" value=" " id="leftYinxingQJ" name="leftQJyx" onchange="getyxbeishu()"/></td>
 				<td><input type="text" value=" " id="leftYinxingZJ" name="leftZJyx" onchange="getyxbeishu()"/></td>
-				<td><input type="text" value=" " id="leftYXzhouxiang" name="leftzhouxiangyx" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftYXzhouxiang" name="leftzhouxiangyx" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" value=" " id="leftqulv" name="leftqulvyx"/></td>
 				<td><input type="text" value=" " id="leftzhijing" name="leftzhijingyx"/></td>
 				<td><input type="text" value=" " id="leftYingXingVA" name="leftYingXingVAyx"/></td>
@@ -308,7 +308,7 @@
 				<td class="Light_blue">OD</td>
 				<td><input type="text" value="" id="rightFuLiaoQJ" name="rightQJjy" onchange="getFuliaobeishu()"/></td>
 				<td><input type="text"  id="rightFuLiaoZJ" name="rightZJjy" onchange="getFuliaobeishu()"/></td>
-				<td><input type="text"  id="rightFLzhouxiang" name="rightzhouxiangjy" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text"  id="rightFLzhouxiang" name="rightzhouxiangjy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text"  id="rightFLslj" name="rightsanlingjingjy"/></td>
 				<td>
 					<select id="rightFLjidi" name="rightjidijy">
@@ -327,7 +327,7 @@
 				<td class="Light_blue">OS</td>
 				<td><input type="text" value=" " id="leftFuLiaoQJ" name="leftQJjy" onchange="getFuliaobeishu()"/></td>
 				<td><input type="text" value=" " id="leftFuLiaoZJ" name="leftZJjy" onchange="getFuliaobeishu()"/></td>
-				<td><input type="text" value=" " id="leftFLzhouxiang" name="leftzhouxiangjy" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftFLzhouxiang" name="leftzhouxiangjy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" value=" " id="leftFLslj" name="leftsanlingjingjy"/></td>
 				<td>
 					<select id="leftFLjidi" name="leftjidijy">
@@ -396,7 +396,7 @@
 				<td class="Light_yellow">OD</td>
 				<td><input type="text" id="rightJianJinsgQJ" name="rightQJsg" onchange="getJianjsgBs()"/></td>
 				<td><input type="text" id="rightJianJinsgZJ" name="rightZJsg" onchange="getJianjsgBs()"/></td>
-				<td><input type="text" id="rightSGzhouxiang" name="rightzhouxiangsg" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" id="rightSGzhouxiang" name="rightzhouxiangsg" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" id="rightSGslj" name="rightsanlingjingsg"/></td>
 				<td>
 					<select id="rightSGjidi" name="rightjidisg">
@@ -415,7 +415,7 @@
 				<td class="Light_yellow">OS</td>
 				<td><input type="text" value=" " id="leftJianJinsgQJ" name="leftQJsg" onchange="getJianjsgBs()"/></td>
 				<td><input type="text" value=" " id="leftJianJinsgZJ" name="leftZJsg" onchange="getJianjsgBs()"/></td>
-				<td><input type="text" value=" " id="leftSGzhouxiang" name="leftzhouxiangsg" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftSGzhouxiang" name="leftzhouxiangsg" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" value=" " id="leftSGslj" name="leftsanlingjingsg"/></td>
 				<td>
 					<select id="leftSGjidi" name="leftjidisg">
@@ -484,7 +484,7 @@
 				<td class="Light_darkBlue">OD</td>
 				<td><input type="text" id="rightZhongYongQJ" name="rightQJzy" onchange="getZhongYongBs()"/></td>
 				<td><input type="text" id="rightZhongYongZJ" name="rightZJzy" onchange="getZhongYongBs()"/></td>
-				<td><input type="text" id="rightzhongyongzx" name="rightzhouxiangzy" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" id="rightzhongyongzx" name="rightzhouxiangzy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" id="rightzhongyongslj" name="rightsanlingjingzy"/></td>
 				<td>
 					<select id="rightzhongyongjd" name="rightjidizy">
@@ -503,7 +503,7 @@
 				<td class="Light_darkBlue">OS</td>
 				<td><input type="text" value=" " id="leftZhongYongQJ" name="leftQJzy" onchange="getZhongYongBs()"/></td>
 				<td><input type="text" value=" " id="leftZhongYongZJ" name="leftZJzy" onchange="getZhongYongBs()"/></td>
-				<td><input type="text" value=" " id="leftzhongyongzx" name="leftzhouxiangzy" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftzhongyongzx" name="leftzhouxiangzy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" value=" " id="leftzhongyongslj" name="leftsanlingjingzy"/></td>
 				<td>
 					<select id="leftzhongyongjd" name="leftjidizy">
@@ -574,7 +574,7 @@
 				<td class="Light_pink">OD</td>
 				<td><input type="text" value="0.75" id="rightJiaoMosxQJ" name="rightQJ" onchange="getJMSXBs()"/></td>
 				<td><input type="text" value="0.75" id="rightJiaoMosxZJ" name="rightZJ" onchange="getJMSXBs()"/></td>
-				<td><input type="text" value="0.75" id="rightJMSXzx" name="rightzhouxiang" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value="0.75" id="rightJMSXzx" name="rightzhouxiang" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" value="0.75" /></td>
 				<td><input type="text" value="0.75" /></td>
 				<td><input type="text" value="0.75" /></td>
@@ -587,7 +587,7 @@
 				<td class="Light_pink">OS</td>
 				<td><input type="text" value="0.75" id="leftJiaoMosxQJ" name="leftQJ" onchange="getJMSXBs()"/></td>
 				<td><input type="text" value="0.75" id="leftJiaoMosxZJ" name="leftZJ" onchange="getJMSXBs()"/></td>
-				<td><input type="text" value="0.75" id="leftJMSXzx" name="leftzhouxiang" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value="0.75" id="leftJMSXzx" name="leftzhouxiang" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" value="0.75" /></td>
 				<td><input type="text" value="" /></td>
 				<td><input type="text" value="" /></td>
@@ -644,7 +644,7 @@
 				<td class="Light_green">OD</td>
 				<td><input type="text" value="0.75" id="rightShiJuexlQJ" name="rightQJxl" onchange="getSjxlBs()"/></td>
 				<td><input type="text" value="0.75" id="rightShiJuexlZJ" name="rightZJxl" onchange="getSjxlBs()"/></td>
-				<td><input type="text" value="0.75" id="rightSJXLzx" name="rightzhouxiangxl" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value="0.75" id="rightSJXLzx" name="rightzhouxiangxl" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" value="0.75" id="rightSJXLslj" name="rightsanlingjingxl"/></td>
 				<td>
 					<select id="rightSJXLjidi" name="rightjidixl" >
@@ -664,7 +664,7 @@
 				<td class="Light_green">OS</td>
 				<td><input type="text" value=" " id="leftShiJuexlQJ" name="leftQJxl" onchange="getSjxlBs()"/></td>
 				<td><input type="text" value=" " id="leftShiJuexlZJ" name="leftZJxl" onchange="getSjxlBs()"/></td>
-				<td><input type="text" value=" " id="leftSJXLzx" name="leftzhouxiangxl" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftSJXLzx" name="leftzhouxiangxl" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
 				<td><input type="text" value=" " id="leftSJXLslj" name="leftsanlingjingxl"/></td>
 				<td>
 					<select id="leftSJXLjidi" name="leftjidixl">
@@ -1082,6 +1082,7 @@
 			<tr>
 				<th><input name="cho" type="checkbox" /></th>
 				<th style="width: 300px;">商品名称</th>
+				<th>双眼</th>
 				<th style="width: 50px;">单价</th>
 				<th>可用库存</th>
 				<th>数量</th>
@@ -1187,6 +1188,13 @@
         $("#saleName").find("[value="+salenames+"]").attr("selected",true);
 
     });
+
+    function zhouxiang(e){
+        var obj = parseFloat(e.value);
+        if (obj < 0 || obj > 180) {
+             layer.alert("轴向在0-180之间");
+        }
+	}
 
     function updatePerson(){
 		$("#saleName").attr("disabled",false);
@@ -1604,6 +1612,7 @@
                     var retailPrice = rows[i].retailPrice;
                     html = "<tr><td><input id='grp1' name=\"cho\" onchange='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")' type=\"checkbox\" /></td>";
                     html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].goodsName+"</td>";
+                    html += "<td></td>";
                     html += "<input id='storeName' name='storeName' value="+rows[i].goodsName+" text='hidden'/>"
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>"+rows[i].goodsCount+"</td>";
@@ -1789,6 +1798,7 @@ var classArray=[];
                 // var rows = sessionStorage.getItem("row");
                 // alert(rows.length)
                 //arrayjp = rows.length;
+				//alert(JSON.stringify(rows));
                 if (rows.length > 0){
                     a=a+1;
                 }
@@ -1797,6 +1807,7 @@ var classArray=[];
                     var retailPrice = rows[i].retailPrice;
                     html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                     html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].goodsName+"</td>";
+                    html += "<td>"+rows[i].leftRight+"</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>"+rows[i].goodsCount+"</td>";
                     html += "<td>1</td>";
