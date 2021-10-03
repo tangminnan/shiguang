@@ -465,9 +465,9 @@
                 order by j.id desc
             </otherwise>
         </choose>
-        <!--<if test="offset != null and limit != null">-->
-            <!--limit 0, 1000000-->
-        <!--</if>-->
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <select id="countJpdz" resultType="int">
@@ -1045,9 +1045,9 @@
                 order by y.id desc
             </otherwise>
         </choose>
-        <!--<if test="offset != null and limit != null">-->
-            <!--limit 0, 100000-->
-        <!--</if>-->
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <select id="countYxdz" resultType="int">

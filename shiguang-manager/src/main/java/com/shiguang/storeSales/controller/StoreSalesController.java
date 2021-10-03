@@ -1035,7 +1035,7 @@ public class StoreSalesController {
                         newJpdzList.add(stockDO);
                     }
                 }
-                int total = newJpdzList.size();
+                int total = 10000000;
                 pageUtils = new PageUtils(newJpdzList, total);
             }
         } else {
@@ -1556,7 +1556,7 @@ public class StoreSalesController {
                                 rightzj = Double.parseDouble(params.get("rightYuanYongZJ").toString());
                                 stockCylUp = Double.parseDouble(stockDO.getCylUp());
                                 stockCylDown = Double.parseDouble(stockDO.getCylDown());
-                                if (rightzj < stockCylUp || rightqj > stockCylDown){
+                                if (rightzj < stockCylUp || rightzj > stockCylDown){
                                     stockDO.setGoodsCode("1");
                                 }
                             } else if (params.get("rightYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
@@ -1652,7 +1652,7 @@ public class StoreSalesController {
                     }
                 }
                 //int total = stockService.countYxdz(maps);
-                int total = newyxdzList.size();
+                int total = 10000000;
                 pageUtils = new PageUtils(newyxdzList, total);
             }
         } else {
