@@ -372,6 +372,11 @@ public class LogStatusController {
                 stockService.updateGoodsCount(stockDO);
             }
         }
+        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
+        workRecoedDO.setType("发料");
+        workRecoedDO.setDateTime(new Date());
+        statusService.saveRecord(workRecoedDO);
         if(statusService.editFaliao(logStatusDO)>0){
             return R.ok();
         }
@@ -418,6 +423,11 @@ public class LogStatusController {
             logStatusDO.setFaliaoName(ShiroUtils.getUser().getName());
             statusService.editFaliao(logStatusDO);
         }
+        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
+        workRecoedDO.setType("批量发料");
+        workRecoedDO.setDateTime(new Date());
+        statusService.saveRecord(workRecoedDO);
 //        Map<String,Object> map = new HashMap<>();
 //        map.put("logisticStatus","发料");
 //        map.put("faliaoDate",new Date());

@@ -71,7 +71,7 @@ public class ReceiveController {
         logStatusDO.setLogisticStatus("收货");
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
         workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
-        workRecoedDO.setType("取镜");
+        workRecoedDO.setType("收货");
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
         if(statusService.editFaliao(logStatusDO)>0){

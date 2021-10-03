@@ -5,6 +5,7 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.domain.LogStatusDO;
+import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -64,6 +66,11 @@ public class TakeMirrorController {
         LogStatusDO logStatusDO = new LogStatusDO();
         logStatusDO.setSaleNumber(saleNumber);
         logStatusDO.setLogisticStatus("顾客取镜");
+        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
+        workRecoedDO.setType("顾客取镜");
+        workRecoedDO.setDateTime(new Date());
+        statusService.saveRecord(workRecoedDO);
         if(statusService.editFaliao(logStatusDO)>0){
             return R.ok();
         }
