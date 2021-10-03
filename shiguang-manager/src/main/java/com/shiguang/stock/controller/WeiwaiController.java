@@ -620,7 +620,7 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 			query.put("companyId",companyId);
 		}
 
-		query.put("isSale",1);
+		query.put("saleType",1);
 		List<SalesDO> selectOrder = weiwaiService.selectOrder(query);
 //		int total = weiwaiService.selectOrderCount(query);
 		int total = 1000000;

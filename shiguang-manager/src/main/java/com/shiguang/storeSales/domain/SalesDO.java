@@ -539,10 +539,12 @@ public class SalesDO implements Serializable {
 	 * 是否缴费
 	 */
 	public void setIsSale(Long isSale){this.isSale = isSale;}
+
 	/**
 	 * 是否缴费
 	 */
 	public Long getIsSale() {return isSale;}
+
 	/**
 	 * 实付金额
 	 */

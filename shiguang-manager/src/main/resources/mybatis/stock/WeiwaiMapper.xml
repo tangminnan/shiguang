@@ -417,18 +417,17 @@
 
 	<select id="selectOrder" resultType="com.shiguang.storeSales.domain.SalesDO">
 		SELECT
+		depart_name AS mirorAddress,
 		company_id,
-		is_sale,
 		store_num,
 		left_right,
 		process_ask,
 		goods_num,
 		jp_goods_name,
 		jp_goods_num,
-		depart_name AS mirorAddress,
 		sale_number,
 		member_number,
-		name,
+		NAME,
 		phone_1,
 		eye_type,
 		settle_date,
@@ -455,21 +454,21 @@
 		FROM
 		(
 		SELECT
+		de.depart_name,
 		m.company_id,
-		co.is_sale,
+		sa.sale_type,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
 		sa.jp_goods_name,
 		sa.jp_goods_num,
-		de.depart_name,
-		s.sale_number,
-		s.member_number,
-		m.NAME,
+		sa.sale_number,
+		sa.member_number,
+		m. NAME,
 		m.phone_1,
 		sa.eye_type,
-		s.settle_date,
+		sa.peijing_time AS settle_date,
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
@@ -494,27 +493,26 @@
 		'' AS leftNeartj
 		FROM
 		jc_kjjy k
-		LEFT JOIN store_sales sa ON sa.ptometry_number = k.ptometry_number
-		JOIN cost co ON sa.sale_number=co.sale_number
-		JOIN settlement s ON s.sale_number = sa.sale_number
-		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id UNION
+		JOIN store_sales sa ON sa.ptometry_number = k.ptometry_number
+		JOIN member m ON sa.member_number = m.card_number
+		JOIN department de ON sa.store_num = de.id
+		UNION
 		SELECT
+		de.depart_name,
 		m.company_id,
-		co.is_sale,
+		sa.sale_type,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
 		sa.jp_goods_name,
 		sa.jp_goods_num,
-		de.depart_name,
-		s.sale_number,
-		s.member_number,
-		m.NAME,
+		sa.sale_number,
+		sa.member_number,
+		m. NAME,
 		m.phone_1,
 		sa.eye_type,
-		s.settle_date,
+		sa.peijing_time AS settle_date,
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
@@ -539,27 +537,26 @@
 		'' AS leftNeartj
 		FROM
 		jc_kjyy ky
-		LEFT JOIN store_sales sa ON sa.ptometry_number = ky.ptometry_number
-		JOIN cost co ON sa.sale_number=co.sale_number
-		JOIN settlement s ON s.sale_number = sa.sale_number
-		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id UNION
+		JOIN store_sales sa ON sa.ptometry_number = ky.ptometry_number
+		JOIN member m ON sa.member_number = m.card_number
+		JOIN department de ON sa.store_num = de.id
+		UNION
 		SELECT
+		de.depart_name,
 		m.company_id,
-		co.is_sale,
+		sa.sale_type,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
 		sa.jp_goods_name,
 		sa.jp_goods_num,
-		de.depart_name,
-		s.sale_number,
-		s.member_number,
-		m.name,
+		sa.sale_number,
+		sa.member_number,
+		m. NAME,
 		m.phone_1,
 		sa.eye_type,
-		s.settle_date,
+		sa.peijing_time AS settle_date,
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
@@ -584,27 +581,26 @@
 		sg.sgjj_jytjos AS leftNeartj
 		FROM
 		jc_sgjj sg
-		LEFT JOIN store_sales sa ON sa.ptometry_number = sg.ptometry_number
-		JOIN cost co ON sa.sale_number=co.sale_number
-		JOIN settlement s ON s.sale_number = sa.sale_number
-		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id UNION
+		JOIN store_sales sa ON sa.ptometry_number = sg.ptometry_number
+		JOIN member m ON sa.member_number = m.card_number
+		JOIN department de ON sa.store_num = de.id
+		UNION
 		SELECT
+		de.depart_name,
 		m.company_id,
-		co.is_sale,
+		sa.sale_type,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
 		sa.jp_goods_name,
 		sa.jp_goods_num,
-		de.depart_name,
-		s.sale_number,
-		s.member_number,
-		m.name,
+		sa.sale_number,
+		sa.member_number,
+		m. NAME,
 		m.phone_1,
 		sa.eye_type,
-		s.settle_date,
+		sa.peijing_time AS settle_date,
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
@@ -629,27 +625,26 @@
 		'' AS leftNeartj
 		FROM
 		jc_zy z
-		LEFT JOIN store_sales sa ON sa.ptometry_number = z.ptometry_number
-		JOIN cost co ON sa.sale_number=co.sale_number
-		JOIN settlement s ON s.sale_number = sa.sale_number
-		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id UNION
+		JOIN store_sales sa ON sa.ptometry_number = z.ptometry_number
+		JOIN member m ON sa.member_number = m.card_number
+		JOIN department de ON sa.store_num = de.id
+		UNION
 		SELECT
+		de.depart_name,
 		m.company_id,
-		co.is_sale,
+		sa.sale_type,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
 		sa.jp_goods_name,
 		sa.jp_goods_num,
-		de.depart_name,
-		s.sale_number,
-		s.member_number,
-		m.name,
+		sa.sale_number,
+		sa.member_number,
+		m. NAME,
 		m.phone_1,
 		sa.eye_type,
-		s.settle_date,
+		sa.peijing_time AS settle_date,
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
@@ -675,26 +670,25 @@
 		FROM
 		jc_rxjmjcj x
 		LEFT JOIN store_sales sa ON sa.ptometry_number = x.ptometry_number
-		JOIN cost co ON sa.sale_number=co.sale_number
-		JOIN settlement s ON s.sale_number = sa.sale_number
-		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id UNION
+		LEFT JOIN member m ON sa.member_number = m.card_number
+		JOIN department de ON sa.store_num = de.id
+		UNION
 		SELECT
+		de.depart_name,
 		m.company_id,
-		co.is_sale,
+		sa.sale_type,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
 		sa.jp_goods_name,
 		sa.jp_goods_num,
-		de.depart_name,
-		s.sale_number,
-		s.member_number,
-		m.name,
+		sa.sale_number,
+		sa.member_number,
+		m. NAME,
 		m.phone_1,
 		sa.eye_type,
-		s.settle_date,
+		sa.peijing_time AS settle_date,
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
@@ -719,27 +713,26 @@
 		sx.sjxl_jytjos AS leftNeartj
 		FROM
 		jc_sjxl sx
-		LEFT JOIN store_sales sa ON sa.ptometry_number = sx.ptometry_number
-		JOIN cost co ON sa.sale_number=co.sale_number
-		JOIN settlement s ON s.sale_number = sa.sale_number
-		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id UNION
+		JOIN store_sales sa ON sa.ptometry_number = sx.ptometry_number
+		JOIN member m ON sa.member_number = m.card_number
+		JOIN department de ON sa.store_num = de.id
+		UNION
 		SELECT
+		de.depart_name,
 		m.company_id,
-		co.is_sale,
+		sa.sale_type,
 		sa.store_num,
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
 		sa.jp_goods_name,
 		sa.jp_goods_num,
-		de.depart_name,
-		s.sale_number,
-		s.member_number,
-		m.name,
+		sa.sale_number,
+		sa.member_number,
+		m. NAME,
 		m.phone_1,
 		sa.eye_type,
-		s.settle_date,
+		sa.peijing_time AS settle_date,
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
@@ -764,17 +757,15 @@
 		'' AS leftNeartj
 		FROM
 		jc_rgp rg
-		LEFT JOIN store_sales sa ON sa.ptometry_number = rg.ptometry_number
-		JOIN cost co ON sa.sale_number=co.sale_number
-		JOIN settlement s ON s.sale_number = sa.sale_number
-		LEFT JOIN member m ON s.member_number = m.card_number
-		LEFT JOIN department de ON sa.store_num = de.id
+		JOIN store_sales sa ON sa.ptometry_number = rg.ptometry_number
+		JOIN member m ON sa.member_number = m.card_number
+		JOIN department de ON sa.store_num = de.id
 		) aia
 		<where>
 			<if test="classtype != null and classtype != ''">and  FIND_IN_SET(#{classtype},classtype)</if>
 			<if test="eyeStyles != null and eyeStyles != ''">and  FIND_IN_SET(eye_type,#{eyeStyles})</if>
 			<if test="departNumber != null and departNumber != ''">and store_num = #{departNumber}</if>
-			<if test="isSale != null and isSale != ''">and is_sale = #{isSale}</if>
+			<if test="saleType != null and saleType != ''">and sale_type = #{saleType}</if>
 			<if test="companyId != null and companyId != ''">and company_id = #{companyId}</if>
 
 			<if test="saleNumber != null and saleNumber != ''">and sale_number = #{saleNumber}</if>
@@ -1189,10 +1180,12 @@
 
 
 	<select id="jkPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select * from stock_weiwai where danju_number = #{value}
+		select w.*,s.right_fartj,s.left_fartj,s.right_neartj,s.left_neartj from stock_weiwai w join  stock_weiwaishuju s on  w.sale_number =s.number
+		 where w.danju_number = #{value}
 	</select>
 	<select id="yxPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select * from stock_weiwai where danju_number = #{value}
+		select w.*,s.right_fartj,s.left_fartj,s.right_neartj,s.left_neartj from stock_weiwai w join  stock_weiwaishuju s on  w.sale_number =s.number
+		 where w.danju_number = #{value}
 	</select>
 
 

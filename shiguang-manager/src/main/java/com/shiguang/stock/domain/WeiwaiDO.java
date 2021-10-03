@@ -806,4 +806,61 @@ public class WeiwaiDO implements Serializable {
 	public void setShstatus(String shstatus) {
 		this.shstatus = shstatus;
 	}
+
+	//远瞳距OD
+	private String rightFartj;
+	//远瞳距OS
+	private String leftFartj;
+	//近瞳距OD
+	private String rightNeartj;
+	//近瞳距OS
+	private String leftNeartj;
+	/**
+	 * 设置：远瞳距OD
+	 */
+	public void setRightFartj(String rightFartj) {
+		this.rightFartj = rightFartj;
+	}
+	/**
+	 * 获取：远瞳距OD
+	 */
+	public String getRightFartj() {
+		return rightFartj;
+	}
+	/**
+	 * 设置：远瞳距OS
+	 */
+	public void setLeftFartj(String leftFartj) {
+		this.leftFartj = leftFartj;
+	}
+	/**
+	 * 获取：远瞳距OS
+	 */
+	public String getLeftFartj() {
+		return leftFartj;
+	}
+	/**
+	 * 设置：近瞳距OD
+	 */
+	public void setRightNeartj(String rightNeartj) {
+		this.rightNeartj = rightNeartj;
+	}
+	/**
+	 * 获取：近瞳距OD
+	 */
+	public String getRightNeartj() {
+		return rightNeartj;
+	}
+	/**
+	 * 设置：近瞳距OS
+	 */
+	public void setLeftNeartj(String leftNeartj) {
+		this.leftNeartj = leftNeartj;
+	}
+	/**
+	 * 获取：近瞳距OS
+	 */
+	public String getLeftNeartj() {
+		return leftNeartj;
+	}
 }
