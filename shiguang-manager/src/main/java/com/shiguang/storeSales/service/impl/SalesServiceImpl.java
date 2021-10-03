@@ -36,6 +36,11 @@ public class SalesServiceImpl implements SalesService {
 	public int save(SalesDO sales){
 		return salesDao.save(sales);
 	}
+
+	@Override
+	public int updateSale(SalesDO sales){
+		return salesDao.updateSale(sales);
+	}
 	
 	@Override
 	public int update(SalesDO sales){

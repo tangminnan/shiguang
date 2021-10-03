@@ -222,11 +222,22 @@ public class SettlementController {
 	@PostMapping("/save")
 	@RequiresPermissions("information:settlement:add")
 	public R save(SettlementDO settlement){
+		SalesDO salesDO = new SalesDO();
 		CostDO costDO = new CostDO();
 		//costDO.setMemberNumber(settlement.getMemberNumber());
 		costDO.setIsSale(1L);
 		costDO.setSaleNumber(settlement.getSaleNumber());
 		//costDO.setId(settlement.getCostId());
+		SalesDO salesDO1 = salesService.getSaleNumber(settlement.getSaleNumber());
+		if (null != salesDO1){
+			if ("定金".equals(settlement.getPayWay())){
+				salesDO.setSaleType("2");
+			} else {
+				salesDO.setSaleType("1");
+			}
+			salesDO.setSaleNumber(settlement.getSaleNumber());
+			salesService.updateSale(salesDO);
+		}
 		if ("定金".equals(settlement.getPayWay())){
 			costDO.setType("定金单");
 		}

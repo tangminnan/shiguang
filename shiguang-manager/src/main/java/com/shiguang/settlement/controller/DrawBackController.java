@@ -88,6 +88,13 @@ public class DrawBackController {
         } else {
             drawbackDO.setDrawbackMoney(String.valueOf(settlementDO.getActualMoney()));
         }
+        SalesDO salesDOs = new SalesDO();
+        SalesDO salesDO1 = salesService.getSaleNumber(saleNumber);
+        if (null != salesDO1){
+            salesDOs.setSaleType("3");
+            salesDOs.setSaleNumber(saleNumber);
+            salesService.updateSale(salesDOs);
+        }
         CostDO costDO = new CostDO();
         costDO.setId(settlementDO.getCostId());
         costDO.setIsSale(2L);

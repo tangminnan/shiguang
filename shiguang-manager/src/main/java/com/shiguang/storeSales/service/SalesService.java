@@ -2,6 +2,7 @@ package com.shiguang.storeSales.service;
 
 
 import com.shiguang.storeSales.domain.*;
+import org.apache.tools.ant.taskdefs.Sleep;
 
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,8 @@ public interface SalesService {
 	int count(Map<String, Object> map);
 	
 	int save(SalesDO sales);
+
+	int updateSale(SalesDO salesDO);
 	
 	int update(SalesDO sales);
 	

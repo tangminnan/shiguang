@@ -465,6 +465,7 @@ public class StoreSalesController {
         costDO.setStoreNum(ShiroUtils.getUser().getStore());
         costService.save(costDO);
         salesDO.setPeijingTime(new Date());
+        salesDO.setSaleType("0");
         if (null != salesDO.getGoodsNum()){
             String goodsCode = salesDO.getGoodsCode();
             String storeDesc = salesDO.getStoreDescribe();

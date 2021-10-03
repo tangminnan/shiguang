@@ -163,7 +163,8 @@
 			`classtype`,
 			`batch`,
 			`left_right`,
-			`jp_goods_num`
+			`jp_goods_num`,
+			`sale_type`
 		)
 		values
 		(
@@ -209,10 +210,19 @@
 			#{classtype},
 			#{batch},
 			#{leftRight},
-			#{jpGoodsNum}
+			#{jpGoodsNum},
+			#{saleType}
 		)
 	</insert>
-	 
+
+	<update id="updateSale" parameterType="com.shiguang.storeSales.domain.SalesDO">
+		update store_sales
+		<set>
+			<if test="saleType != null">`sale_type` = #{saleType}, </if>
+		</set>
+		where sale_number = #{saleNumber}
+	</update>
+
 	<update id="update" parameterType="com.shiguang.storeSales.domain.SalesDO">
 		update store_sales 
 		<set>

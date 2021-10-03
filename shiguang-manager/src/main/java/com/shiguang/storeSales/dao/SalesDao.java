@@ -23,6 +23,8 @@ public interface SalesDao {
 	int count(Map<String, Object> map);
 	
 	int save(SalesDO sales);
+
+	int updateSale(SalesDO salesDO);
 	
 	int update(SalesDO sales);
 	

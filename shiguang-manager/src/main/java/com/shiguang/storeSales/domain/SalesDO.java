@@ -21,6 +21,8 @@ public class SalesDO implements Serializable {
 	private Long id;
 	//验光号
 	private String ptometryNumber;
+	//是否缴费
+	private String saleType;
 	//会员卡号
 	private String memberNumber;
 	private String memberName;
@@ -428,6 +430,10 @@ public class SalesDO implements Serializable {
 	public void setPtometryNumber(String ptometryNumber) {
 		this.ptometryNumber = ptometryNumber;
 	}
+
+	public void setSaleType(String saleType) {this.saleType = saleType;}
+
+	public String getSaleType(){return saleType;}
 	/**
 	 * 获取：验光号
 	 */
