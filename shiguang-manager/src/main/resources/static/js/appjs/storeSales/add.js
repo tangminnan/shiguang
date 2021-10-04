@@ -8,10 +8,15 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+	var amountMoney = $("#amountMoney").val();
+	alert(amountMoney);
     layer.confirm("确认是否要结算", {
         btn : [ '确定', '取消' ]
         // 按钮
     }, function() {
+    	if (amountMoney == ""){
+    		return layer.alert("请先下单")
+		}
 	$.ajax({
 		cache : true,
 		type : "POST",
