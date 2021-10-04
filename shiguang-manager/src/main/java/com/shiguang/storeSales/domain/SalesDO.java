@@ -218,6 +218,7 @@ public class SalesDO implements Serializable {
 	//镜片名称
 	private String jpGoodsName;
 	private String jpGoodsNum;
+	private String jpGoodsCode;
 
 	public String getJpGoodsNum() {
 		return jpGoodsNum;
@@ -226,6 +227,10 @@ public class SalesDO implements Serializable {
 	public void setJpGoodsNum(String jpGoodsNum) {
 		this.jpGoodsNum = jpGoodsNum;
 	}
+
+	public void setJpGoodsCode(String jpGoodsCode){this.jpGoodsCode = jpGoodsCode;}
+
+	public String getJpGoodsCode(){return jpGoodsCode;}
 
 	//右眼镜片
 	private String rightjp;

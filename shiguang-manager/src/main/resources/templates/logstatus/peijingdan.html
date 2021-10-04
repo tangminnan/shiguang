@@ -15,6 +15,7 @@
 		<input id="cost" th:value="${settlementDO.additionalCost}" type="hidden">
 		<input id="storeName" th:value="${settlementDO.storeName}" type="hidden">
 		<input id="goodsNum" th:value="${settlementDO.goodsNum}" type="hidden">
+		<input id="leftRight" th:value="${settlementDO.leftRight}" type="hidden">
 		<input id="goodsDescribe" th:value="${settlementDO.storeDescribe}" type="hidden">
 		<input id="unit" th:value="${settlementDO.unit}" type="hidden">
 		<input id="storeUnit" th:value="${settlementDO.storeUnit}" type="hidden">
@@ -171,12 +172,22 @@
         $("#price").append(storeUnitstr);
         var goodsNumArray = $("#goodsNum").val();
         var goodsDescribe = $("#goodsDescribe").val();
+        var leftRights = $("#leftRight").val();
+        leftRights = leftRights.split(",");
         goodsNumArray = goodsNumArray.split(",");
         goodsDescribe = goodsDescribe.split(",");
         var html = "";
+        alert(goodsNumArray.length)
+		var a=0;
         for (var i=0;i<goodsNumArray.length;i++){
             if (goodsDescribe[i] == "镜片"){
-                html += "镜片条码：<input name='goodsNum' type='text'>";
+                if (leftRights[a] == "右"){
+                    html += "镜片右条码：<input name='goodsNum' type='text'>";
+				}
+                if (leftRights[a] == "左"){
+                    html += "镜片左条码：<input name='goodsNum' type='text'>";
+				}
+                a= a+1;
 			}
 
 		}

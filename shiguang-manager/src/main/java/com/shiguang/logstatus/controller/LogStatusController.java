@@ -303,7 +303,7 @@ public class LogStatusController {
         LogStatusDO logStatusDO = new LogStatusDO();
         Map<String,Object> map = new HashMap<>();
         map.put("saleNumber",status.getSaleNumber());
-        map.put("goodsCode",status.getGoodsNum());
+        map.put("jpGoodsCode",status.getGoodsNum());
         List<SalesDO> salesDOList = salesService.list(map);
         if (salesDOList.size() == 0){
             return R.error("检验有误");
@@ -322,7 +322,7 @@ public class LogStatusController {
         }
         Map<String,Object> maps = new HashMap<>();
         maps.put("departNumber", storeNum);
-        PositionDO positionDO = stockService.findPosition(maps);
+        PositionDO positionDO = stockService.findHegePosition(maps);
         for (int a=0;a<storeDescribe.length;a++){
             if (!"镜架".equals(storeDescribe[a])){
                 StockDO stockDOs = new StockDO();
