@@ -21,7 +21,7 @@
 		`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,`sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,
 		`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,`sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,
 		`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf` ,`sphere_right2`,`sphere_left2`,`cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,
-		`tjod`,`tjos`,`status`
+		`tjod`,`tjos`,`status`,`litishi`
         from jc_tryresults where id = #{value}
 	</select>
 
@@ -42,7 +42,7 @@
         `sgn_ciss`,`sgn_fardot`,`sgn_neardot`,`sgn_farsp1`,`sgn_farsp2`,`sgn_farcz1`,`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,
         `sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,
         `sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf`,`sphere_right2`,`sphere_left2`,
-        `cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,`tjod`,`tjos`,`status`
+        `cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,`tjod`,`tjos`,`status`,`litishi`
         from jc_tryresults
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
@@ -215,6 +215,7 @@
             <if test="tjod != null and tjod != ''"> and tjod = #{tjod} </if>
             <if test="tjos != null and tjos != ''"> and tjos = #{tjos} </if>
             <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="litishi != null and litishi != ''"> and litishi = #{litishi} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -402,6 +403,7 @@
             <if test="tjod != null and tjod != ''"> and tjod = #{tjod} </if>
             <if test="tjos != null and tjos != ''"> and tjos = #{tjos} </if>
             <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="litishi != null and litishi != ''"> and litishi = #{litishi} </if>
         </where>
     </select>
 
@@ -576,7 +578,8 @@
 			`axial_left2`,
 			`tjod`,
 			`tjos`,
-			`status`
+			`status`,
+			`litishi`
 		)
 		values
 		(
@@ -748,7 +751,8 @@
 			#{axialLeft2},
 			#{tjod},
 			#{tjos},
-			#{status}
+			#{status},
+			#{litishi}
 		)
 	</insert>
 
@@ -924,6 +928,7 @@
             <if test="tjod != null">`tjod` = #{tjod},</if>
             <if test="tjos != null">`tjos` = #{tjos},</if>
             <if test="status != null">`status` = #{status}</if>
+            <if test="litishi != null">`litishi` = #{litishi}</if>
         </set>
         where id = #{id}
     </update>
@@ -1231,7 +1236,8 @@
             <if test="axialLeft2 != null">`axial_left2` = #{axialLeft2},</if>
             <if test="tjod != null">`tjod` = #{tjod},</if>
             <if test="tjos != null">`tjos` = #{tjos},</if>
-            <if test="status != null">`status` = #{status}</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="litishi != null">`litishi` = #{litishi}</if>
         </set>
         where ptometry_number = #{ptometryNumber}
     </update>
