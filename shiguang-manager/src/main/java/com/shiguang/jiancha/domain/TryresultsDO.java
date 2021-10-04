@@ -2158,6 +2158,8 @@ public class TryresultsDO implements Serializable {
     private String sgnAllygytj2;
     //AC/A
     private String sgnAc;
+    //立体式
+    private String litishi;
     //梯度法/计算法
     private String sgnAcway;
     //调节反应BBC/MEM
@@ -2463,6 +2465,16 @@ public class TryresultsDO implements Serializable {
     public String getSgnAc() {
         return sgnAc;
     }
+    //立体式
+
+    public String getLitishi() {
+        return litishi;
+    }
+
+    public void setLitishi(String litishi) {
+        this.litishi = litishi;
+    }
+
     /**
      * 设置：梯度法/计算法
      */

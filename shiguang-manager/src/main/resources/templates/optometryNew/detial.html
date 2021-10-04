@@ -198,6 +198,7 @@
                                 <option value="BO">BO</option>
                                 <option value="BU">BU</option>
                                 <option value="BD">BD</option>
+                                <option value="BD">BD</option>
                             </select>
                             <input id="sgnFarsp2s" name="sgnFarsp2s" th:value="${tryresultsDO.sgnFarsp2}" type="hidden">
                         </td>
@@ -245,31 +246,79 @@
                         <td>远距水平隐斜视：</td>
                         <td colspan="3">
                             <input id="sgnVgfarsp1" name="sgnVgfarsp1" th:value="${tryresultsDO.sgnVgfarsp1}" readonly type="text"  /> △
-                            <input id="sgnVgfarsp2" name="sgnVgfarsp2" th:value="${tryresultsDO.sgnVgfarsp2}" readonly  type="text" />
+<!--                            <input id="sgnVgfarsp2" name="sgnVgfarsp2" th:value="${tryresultsDO.sgnVgfarsp2}" readonly  type="text" />-->
+                            <select id="sgnVgfarsp2" name="sgnVgfarsp2" th:value="${tryresultsDO.sgnVgfarsp2}" disabled>
+                                <option value=""></option>
+                                <option value="正位">正位</option>
+                                <option value="BI">BI</option>
+                                <option value="BO">BO</option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                            <input id="sgnVgfarsp2s" name="sgnVgfarsp2s" th:value="${tryresultsDO.sgnVgfarsp2}"
+                                   type="hidden">
+
+
                         </td>
                         <td>远距垂直隐斜视：</td>
                         <td colspan="4">
                             <input id="sgnVgfarcz1" name="sgnVgfarcz1" th:value="${tryresultsDO.sgnVgfarcz1}" readonly type="text"  /> △
-                            <input id="sgnVgfarcz2"  name="sgnVgfarcz2" th:value="${tryresultsDO.sgnVgfarcz2}" readonly type="text" />
+<!--                            <input id="sgnVgfarcz2"  name="sgnVgfarcz2" th:value="${tryresultsDO.sgnVgfarcz2}" readonly type="text" />-->
+                            <select id="sgnVgfarcz2"  name="sgnVgfarcz2" th:value="${tryresultsDO.sgnVgfarcz2}">
+                                <option value=""></option>
+                                <option value="正位">正位</option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                            <input id="sgnVgfarcz2s" name="sgnVgfarcz2s" th:value="${tryresultsDO.sgnVgfarcz2}"
+                                   type="hidden">
                         </td>
                     </tr>
                     <tr>
                         <td>近距水平隐斜视：</td>
                         <td colspan="3">
                             <input id="sgnVgnearsp1" name="sgnVgnearsp1" th:value="${tryresultsDO.sgnVgnearsp1}" readonly  type="text"  /> △
-                            <input id="sgnVgnearsp2" name="sgnVgnearsp2" th:value="${tryresultsDO.sgnVgnearsp2}" readonly  type="text" />
+<!--                            <input id="sgnVgnearsp2" name="sgnVgnearsp2" th:value="${tryresultsDO.sgnVgnearsp2}" readonly  type="text" />-->
+                            <select id="sgnVgnearsp2" name="sgnVgnearsp2" th:value="${tryresultsDO.sgnVgnearsp2}" >
+                                <option value=""></option>
+                                <option value="正位">正位</option>
+                                <option value="BI">BI</option>
+                                <option value="BO">BO</option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                            <input id="sgnVgnearsp2s" name="sgnVgnearsp2s" th:value="${tryresultsDO.sgnVgnearsp2}"
+                                   type="hidden">
                         </td>
                         <td>近距垂直隐斜视：</td>
                         <td colspan="4">
                             <input id="sgnVgnearcz1" name="sgnVgnearcz1" th:value="${tryresultsDO.sgnVgnearcz1}" readonly   type="text"/> △
-                            <input id="sgnVgnearcz2" name="sgnVgnearcz2" th:value="${tryresultsDO.sgnVgnearcz2}" readonly   type="text" />
+<!--                            <input id="sgnVgnearcz2" name="sgnVgnearcz2" th:value="${tryresultsDO.sgnVgnearcz2}" readonly   type="text" />-->
+                            <select id="sgnVgnearcz2" name="sgnVgnearcz2" th:value="${tryresultsDO.sgnVgnearcz2}">
+                                <option value=""></option>
+                                <option value="正位">正位</option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                            <input id="sgnVgnearcz2s" name="sgnVgnearcz2s" th:value="${tryresultsDO.sgnVgnearcz2}"
+                                   type="hidden">
                         </td>
                     </tr>
                     <tr>
                         <td>综合验光仪瞳距：</td>
                         <td colspan="3">
                             <input id="sgnAllygytj1" name="sgnAllygytj1" th:value="${tryresultsDO.sgnAllygytj1}" readonly   type="text"  /> △
-                            <input id="sgnAllygytj2" name="sgnAllygytj2" th:value="${tryresultsDO.sgnAllygytj2}" readonly   type="text"   /></td>
+<!--                            <input id="sgnAllygytj2" name="sgnAllygytj2" th:value="${tryresultsDO.sgnAllygytj2}" readonly   type="text"   /></td>-->
+                            <select id="sgnAllygytj2" name="sgnAllygytj2" th:value="${tryresultsDO.sgnAllygytj2}" >
+                                <option value=""></option>
+                                <option value="正位">正位</option>
+                                <option value="BI">BI</option>
+                                <option value="BO">BO</option>
+                                <option value="BU">BU</option>
+                                <option value="BD">BD</option>
+                            </select>
+                            <input id="sgnAllygytj2s" name="sgnAllygytj2s" th:value="${tryresultsDO.sgnAllygytj2}"
+                                   type="hidden">
                         <td colspan="5"></td>
                     </tr>
                     <tr>
@@ -282,6 +331,16 @@
                             <label><input id="b1" name="sgnAcway" th:field="*{tryresultsDO.sgnAcway}" value="2"
                                           type="radio" onclick="return false">
                                 计算法</label>
+                        </td>
+                        <td class="bg-d7">立体式</td>
+                        <td colspan="6" style="text-align:left;">
+                            <select id="litishi" name="litishi" th:value="${tryresultsDO.litishi}">
+                                <option></option>
+                                <option value="有">有</option>
+                                <option value="无">无</option>
+                            </select>
+                            <input id="litishis" name="litishis"  th:value="${tryresultsDO.litishi}"
+                                   type="hidden">
                         </td>
                     </tr>
                     <tr>
@@ -837,6 +896,34 @@
         $("#jdrTry").find("[value='" + jdrTrys + "']").attr("selected", true);
         var jdlTrys = $("input[name='jdlTrys']").val();
         $("#jdlTry").find("[value='" + jdlTrys + "']").attr("selected", true);
+        var litishis = $("input[name='litishis']").val();
+        $("#litishi").find("[value='" + litishis + "']").attr("selected", true);
+
+
+
+
+        var sgnVgfarsp2s = $("input[name='sgnVgfarsp2s']").val();
+        $("#sgnVgfarsp2").find("[value='" + sgnVgfarsp2s + "']").attr("selected", true);
+
+        var sgnVgfarcz2s = $("input[name='sgnVgfarcz2s']").val();
+        $("#sgnVgfarcz2").find("[value='" + sgnVgfarcz2s + "']").attr("selected", true);
+
+        var sgnVgnearsp2s = $("input[name='sgnVgnearsp2s']").val();
+        $("#sgnVgnearsp2").find("[value='" + sgnVgnearsp2s + "']").attr("selected", true);
+
+        var sgnVgnearcz2s = $("input[name='sgnVgnearcz2s']").val();
+        $("#sgnVgnearcz2").find("[value='" + sgnVgnearcz2s + "']").attr("selected", true);
+
+        var sgnAllygytj2s = $("input[name='sgnAllygytj2s']").val();
+        $("#sgnAllygytj2").find("[value='" + sgnAllygytj2s + "']").attr("selected", true);
+
+
+
+
+
+
+
+
 
         $(function () {
             $("input[type='radio']").click(function () {
