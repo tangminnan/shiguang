@@ -23,7 +23,8 @@ public interface TryresultsDao {
     int count(Map<String, Object> map);
 
     int save(TryresultsDO tryresults);
-
+    //    <!--//判断是否存在验光号-->
+    List<TryresultsDO> haveYanguangNum(Map<String, Object> map);
     int update(TryresultsDO tryresults);
 
     int remove(Long id);

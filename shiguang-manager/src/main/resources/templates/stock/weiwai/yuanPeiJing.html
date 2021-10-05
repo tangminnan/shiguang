@@ -82,56 +82,6 @@
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/weiwai/getGoods.js"></script>
 <script type="text/javascript">
-    // $(document).ready(function () {
-    //     var eyeStyle = $("#eyeStyle").val();
-    //     $(".val").remove();
-    //     $.ajax({
-    //         url: '/stock/weiwai/selectOrder',
-    //         type: 'post',
-    //         dataType: "json",
-    //         data: {
-    //             'eyeStyle': eyeStyle
-    //         },
-    //         success: function (xml) {
-    //             for (var i = 0; i < xml.length; i++) {
-    //                 $(".buyBtns").append("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-    //                     "<td name='saleNumber'>" + xml[i].saleNumber + "</td>\n" +
-    //                     "<td name='name'>" + xml[i].name + "</td>\n" +
-    //                     "<td name='memberNumber'>" + xml[i].memberNumber + "</td>\n" +
-    //                     "<td name='phone1'>" + xml[i].phone1 + "</td>\n" +
-    //                     "<td name='settleDate'>" + xml[i].settleDate + "</td>\n" +
-    //                     "<td name='amountMoney'>" + xml[i].amountMoney + "</td>\n" +
-    //                     "<td   name='recipelType'>" + xml[i].recipelType + "</td>\n" +
-	//
-    //                     "<td name='rightsph'>" + xml[i].rightsph + "</td>\n" +
-    //                     "<td name='rightcyl'>" + xml[i].rightcyl + "</td>\n" +
-    //                     "<td name='rightzx'>" + xml[i].rightzx + "</td>\n" +
-	//
-    //                     "<td name='rightAdd'>" + xml[i].rightAdd + "</td>\n" +
-    //                     "<td name='rightSlj'>" + xml[i].rightSlj + "</td>\n" +
-    //                     "<td name='rightJd'>" + xml[i].rightJd + "</td>\n" +
-	//
-    //                     "<td name='rightFartj'>" + xml[i].rightFartj + "</td>\n" +
-    //                     "<td name='rightNeartj'>" + xml[i].rightNeartj + "</td>\n" +
-	// 					"<td name='leftsph'>" + xml[i].leftsph + "</td>\n" +
-    //                     "<td name='leftcyl'>" + xml[i].leftcyl + "</td>\n" +
-    //                     "<td name='leftzx'>" + xml[i].leftzx + "</td>\n" +
-    //                     "<td name='leftAdd'>" + xml[i].leftAdd + "</td>\n" +
-    //                     "<td name='leftSlj'>" + xml[i].leftSlj + "</td>\n" +
-    //                     "<td name='leftJd'>" + xml[i].leftJd + "</td>\n" +
-    //                     "<td name='leftFartj'>" + xml[i].leftFartj + "</td>\n" +
-    //                     "<td name='leftNeartj'>" + xml[i].leftNeartj + "</td>\n" +
-	//
-	//
-    //                     "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-    //                     "<td name='jpGoodsName'>" + xml[i].jpGoodsName + "</td>\n" +
-    //                     "<td name='jpGoodsNum'>" + xml[i].jpGoodsNum + "</td>\n" +
-    //                     "<td name='leftRight'>" + xml[i].leftRight + "</td>\n" +
-    //                     "</tr>");
-    //             }
-    //         }
-    //     })
-    // });
 	$(document).ready(function () {
 		$(".val").remove();
 		$(function () {
@@ -201,6 +151,10 @@
 									{
 										field: 'amountMoney',
 										title: '应收金额'
+									},
+									{
+										field: 'mirorAddress',
+										title: '销售门店'
 									},
 									// {
 									// 	field: 'recipelType',

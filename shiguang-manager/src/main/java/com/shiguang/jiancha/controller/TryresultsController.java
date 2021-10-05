@@ -11,6 +11,7 @@ import com.shiguang.jiancha.service.PharmacyService;
 import com.shiguang.jiancha.service.TryresultsService;
 import com.shiguang.line.domain.LineDO;
 import com.shiguang.line.service.LineService;
+import com.shiguang.mfrs.domain.BrandDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -88,7 +89,15 @@ public class TryresultsController {
         lineDO.setLineDate(simpleDateFormat.format(new Date()));
         lineDO.setCallStatus("4");
         lineService.updateByMember(lineDO);
-        if (tryresultsService.save(tryresults) > 0) {
+      String ptometryNumber= tryresults.getPtometryNumber();
+        Map<String, Object> map = new HashMap<>();
+        map.put("ptometryNumber", ptometryNumber);
+        List<TryresultsDO> list = tryresultsService.haveYanguangNum(map);
+        if (list.size() > 0) {
+//            return R.error("品牌代码已存在");
+            tryresultsService.updateTry(tryresults);
+            return R.ok();
+        }else if (tryresultsService.save(tryresults) > 0) {
             return R.ok();
         }
         return R.error();

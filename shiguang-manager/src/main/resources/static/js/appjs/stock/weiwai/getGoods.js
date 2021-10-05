@@ -1,17 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 选择配镜单
 function batchSelect() {
     // var check = $("input[name='one']:checked");//选中的复选框
@@ -207,12 +194,18 @@ function batchSelect() {
         }else {
             var leftRight =  row['leftRight'];
         }
+        if(null == row['mirorAddress']){
+            var mirorAddress  ="";
+        }else {
+            var mirorAddress =  row['mirorAddress'];
+        }
 
         obj.goodsNum = goodsNum;
 
         obj.jpGoodsName = jpGoodsName;
         obj.jpGoodsNum = jpGoodsNum;
         obj.leftRight = leftRight;
+        obj.mirorAddress = mirorAddress;
 
         objArray.push(obj);
     });

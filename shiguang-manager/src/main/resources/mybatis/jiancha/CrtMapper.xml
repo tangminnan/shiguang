@@ -4,46 +4,48 @@
 <mapper namespace="com.shiguang.jiancha.dao.CrtDao">
 
     <select id="get" resultType="com.shiguang.jiancha.domain.CrtDO">
-		select `crt_id`,`card_number`,`crt_prescription_type`,`crt_doctor`,`crt_optometry_name`,`crt_sdbhod`,`crt_sdbhos`,`ctr_bcod`,`crt_bcos`,`crt_rzdod`,`crt_rzdos`,`crt_lzaod`,`crt_lzaos`,`crt_rzd2od`,`crt_rzd2os`,`crt_lza2od`,`crt_lza2os`,`crt_jfod`,`crt_jfos`,`crt_diaod`,`crt_diaos`,`crt_vaod`,`crt_vaos`,`crt_jpysod`,`crt_jpysos`,`crt_syjpod`,`crt_syjpos`,`crt_beizhu` from jc_crt where crt_id = #{value}
+		select `crt_id`,`card_number`,`crt_prescription_type`,`crt_doctor`,`crt_optometry_name`,`crt_sdbhod`,`crt_sdbhos`,`ctr_bcod`,`crt_bcos`,`crt_rzdod`,`crt_rzdos`,`crt_lzaod`,`crt_lzaos`,`crt_rzd2od`,`crt_rzd2os`,`crt_lza2od`,`crt_lza2os`,`crt_jfod`,`crt_jfos`,`crt_diaod`,`crt_diaos`,`crt_vaod`,`crt_vaos`,`crt_jpysod`,`crt_jpysos`,`crt_syjpod`,`crt_syjpos`,`crt_beizhu`,`ptometry_number`,`status`,`crt_sphod`,`crt_sphos`,`crt_cylod`,`crt_cylos`,`crt_axialod`,`crt_axialos` from jc_crt where crt_id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.jiancha.domain.CrtDO">
-        select
-        `crt_id`,`card_number`,`crt_prescription_type`,`crt_doctor`,`crt_optometry_name`,`crt_sdbhod`,`crt_sdbhos`,`ctr_bcod`,`crt_bcos`,`crt_rzdod`,`crt_rzdos`,`crt_lzaod`,`crt_lzaos`,`crt_rzd2od`,`crt_rzd2os`,`crt_lza2od`,`crt_lza2os`,`crt_jfod`,`crt_jfos`,`crt_diaod`,`crt_diaos`,`crt_vaod`,`crt_vaos`,`crt_jpysod`,`crt_jpysos`,`crt_syjpod`,`crt_syjpos`,`crt_beizhu`
-        from jc_crt
+        select `crt_id`,`card_number`,`crt_prescription_type`,`crt_doctor`,`crt_optometry_name`,`crt_sdbhod`,`crt_sdbhos`,`ctr_bcod`,`crt_bcos`,`crt_rzdod`,`crt_rzdos`,`crt_lzaod`,`crt_lzaos`,`crt_rzd2od`,`crt_rzd2os`,`crt_lza2od`,`crt_lza2os`,`crt_jfod`,`crt_jfos`,`crt_diaod`,`crt_diaos`,`crt_vaod`,`crt_vaos`,`crt_jpysod`,`crt_jpysos`,`crt_syjpod`,`crt_syjpos`,`crt_beizhu`,`ptometry_number`,`status`,`crt_sphod`,`crt_sphos`,`crt_cylod`,`crt_cylos`,`crt_axialod`,`crt_axialos` from jc_crt
         <where>
-            <if test="crtId != null and crtId != ''">and crt_id = #{crtId}</if>
-            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
-            <if test="crtPrescriptionType != null and crtPrescriptionType != ''">and crt_prescription_type =
-                #{crtPrescriptionType}
-            </if>
-            <if test="crtDoctor != null and crtDoctor != ''">and crt_doctor = #{crtDoctor}</if>
-            <if test="crtOptometryName != null and crtOptometryName != ''">and crt_optometry_name =
-                #{crtOptometryName}
-            </if>
-            <if test="crtSdbhod != null and crtSdbhod != ''">and crt_sdbhod = #{crtSdbhod}</if>
-            <if test="crtSdbhos != null and crtSdbhos != ''">and crt_sdbhos = #{crtSdbhos}</if>
-            <if test="ctrBcod != null and ctrBcod != ''">and ctr_bcod = #{ctrBcod}</if>
-            <if test="crtBcos != null and crtBcos != ''">and crt_bcos = #{crtBcos}</if>
-            <if test="crtRzdod != null and crtRzdod != ''">and crt_rzdod = #{crtRzdod}</if>
-            <if test="crtRzdos != null and crtRzdos != ''">and crt_rzdos = #{crtRzdos}</if>
-            <if test="crtLzaod != null and crtLzaod != ''">and crt_lzaod = #{crtLzaod}</if>
-            <if test="crtLzaos != null and crtLzaos != ''">and crt_lzaos = #{crtLzaos}</if>
-            <if test="crtRzd2od != null and crtRzd2od != ''">and crt_rzd2od = #{crtRzd2od}</if>
-            <if test="crtRzd2os != null and crtRzd2os != ''">and crt_rzd2os = #{crtRzd2os}</if>
-            <if test="crtLza2od != null and crtLza2od != ''">and crt_lza2od = #{crtLza2od}</if>
-            <if test="crtLza2os != null and crtLza2os != ''">and crt_lza2os = #{crtLza2os}</if>
-            <if test="crtJfod != null and crtJfod != ''">and crt_jfod = #{crtJfod}</if>
-            <if test="crtJfos != null and crtJfos != ''">and crt_jfos = #{crtJfos}</if>
-            <if test="crtDiaod != null and crtDiaod != ''">and crt_diaod = #{crtDiaod}</if>
-            <if test="crtDiaos != null and crtDiaos != ''">and crt_diaos = #{crtDiaos}</if>
-            <if test="crtVaod != null and crtVaod != ''">and crt_vaod = #{crtVaod}</if>
-            <if test="crtVaos != null and crtVaos != ''">and crt_vaos = #{crtVaos}</if>
-            <if test="crtJpysod != null and crtJpysod != ''">and crt_jpysod = #{crtJpysod}</if>
-            <if test="crtJpysos != null and crtJpysos != ''">and crt_jpysos = #{crtJpysos}</if>
-            <if test="crtSyjpod != null and crtSyjpod != ''">and crt_syjpod = #{crtSyjpod}</if>
-            <if test="crtSyjpos != null and crtSyjpos != ''">and crt_syjpos = #{crtSyjpos}</if>
-            <if test="crtBeizhu != null and crtBeizhu != ''">and crt_beizhu = #{crtBeizhu}</if>
+            <if test="crtId != null and crtId != ''"> and crt_id = #{crtId} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+            <if test="crtPrescriptionType != null and crtPrescriptionType != ''"> and crt_prescription_type = #{crtPrescriptionType} </if>
+            <if test="crtDoctor != null and crtDoctor != ''"> and crt_doctor = #{crtDoctor} </if>
+            <if test="crtOptometryName != null and crtOptometryName != ''"> and crt_optometry_name = #{crtOptometryName} </if>
+            <if test="crtSdbhod != null and crtSdbhod != ''"> and crt_sdbhod = #{crtSdbhod} </if>
+            <if test="crtSdbhos != null and crtSdbhos != ''"> and crt_sdbhos = #{crtSdbhos} </if>
+            <if test="ctrBcod != null and ctrBcod != ''"> and ctr_bcod = #{ctrBcod} </if>
+            <if test="crtBcos != null and crtBcos != ''"> and crt_bcos = #{crtBcos} </if>
+            <if test="crtRzdod != null and crtRzdod != ''"> and crt_rzdod = #{crtRzdod} </if>
+            <if test="crtRzdos != null and crtRzdos != ''"> and crt_rzdos = #{crtRzdos} </if>
+            <if test="crtLzaod != null and crtLzaod != ''"> and crt_lzaod = #{crtLzaod} </if>
+            <if test="crtLzaos != null and crtLzaos != ''"> and crt_lzaos = #{crtLzaos} </if>
+            <if test="crtRzd2od != null and crtRzd2od != ''"> and crt_rzd2od = #{crtRzd2od} </if>
+            <if test="crtRzd2os != null and crtRzd2os != ''"> and crt_rzd2os = #{crtRzd2os} </if>
+            <if test="crtLza2od != null and crtLza2od != ''"> and crt_lza2od = #{crtLza2od} </if>
+            <if test="crtLza2os != null and crtLza2os != ''"> and crt_lza2os = #{crtLza2os} </if>
+            <if test="crtJfod != null and crtJfod != ''"> and crt_jfod = #{crtJfod} </if>
+            <if test="crtJfos != null and crtJfos != ''"> and crt_jfos = #{crtJfos} </if>
+            <if test="crtDiaod != null and crtDiaod != ''"> and crt_diaod = #{crtDiaod} </if>
+            <if test="crtDiaos != null and crtDiaos != ''"> and crt_diaos = #{crtDiaos} </if>
+            <if test="crtVaod != null and crtVaod != ''"> and crt_vaod = #{crtVaod} </if>
+            <if test="crtVaos != null and crtVaos != ''"> and crt_vaos = #{crtVaos} </if>
+            <if test="crtJpysod != null and crtJpysod != ''"> and crt_jpysod = #{crtJpysod} </if>
+            <if test="crtJpysos != null and crtJpysos != ''"> and crt_jpysos = #{crtJpysos} </if>
+            <if test="crtSyjpod != null and crtSyjpod != ''"> and crt_syjpod = #{crtSyjpod} </if>
+            <if test="crtSyjpos != null and crtSyjpos != ''"> and crt_syjpos = #{crtSyjpos} </if>
+            <if test="crtBeizhu != null and crtBeizhu != ''"> and crt_beizhu = #{crtBeizhu} </if>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="crtSphod != null and crtSphod != ''"> and crt_sphod = #{crtSphod} </if>
+            <if test="crtSphos != null and crtSphos != ''"> and crt_sphos = #{crtSphos} </if>
+            <if test="crtCylod != null and crtCylod != ''"> and crt_cylod = #{crtCylod} </if>
+            <if test="crtCylos != null and crtCylos != ''"> and crt_cylos = #{crtCylos} </if>
+            <if test="crtAxialod != null and crtAxialod != ''"> and crt_axialod = #{crtAxialod} </if>
+            <if test="crtAxialos != null and crtAxialos != ''"> and crt_axialos = #{crtAxialos} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -61,101 +63,121 @@
     <select id="count" resultType="int">
         select count(*) from jc_crt
         <where>
-            <if test="crtId != null and crtId != ''">and crt_id = #{crtId}</if>
-            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
-            <if test="crtPrescriptionType != null and crtPrescriptionType != ''">and crt_prescription_type =
-                #{crtPrescriptionType}
-            </if>
-            <if test="crtDoctor != null and crtDoctor != ''">and crt_doctor = #{crtDoctor}</if>
-            <if test="crtOptometryName != null and crtOptometryName != ''">and crt_optometry_name =
-                #{crtOptometryName}
-            </if>
-            <if test="crtSdbhod != null and crtSdbhod != ''">and crt_sdbhod = #{crtSdbhod}</if>
-            <if test="crtSdbhos != null and crtSdbhos != ''">and crt_sdbhos = #{crtSdbhos}</if>
-            <if test="ctrBcod != null and ctrBcod != ''">and ctr_bcod = #{ctrBcod}</if>
-            <if test="crtBcos != null and crtBcos != ''">and crt_bcos = #{crtBcos}</if>
-            <if test="crtRzdod != null and crtRzdod != ''">and crt_rzdod = #{crtRzdod}</if>
-            <if test="crtRzdos != null and crtRzdos != ''">and crt_rzdos = #{crtRzdos}</if>
-            <if test="crtLzaod != null and crtLzaod != ''">and crt_lzaod = #{crtLzaod}</if>
-            <if test="crtLzaos != null and crtLzaos != ''">and crt_lzaos = #{crtLzaos}</if>
-            <if test="crtRzd2od != null and crtRzd2od != ''">and crt_rzd2od = #{crtRzd2od}</if>
-            <if test="crtRzd2os != null and crtRzd2os != ''">and crt_rzd2os = #{crtRzd2os}</if>
-            <if test="crtLza2od != null and crtLza2od != ''">and crt_lza2od = #{crtLza2od}</if>
-            <if test="crtLza2os != null and crtLza2os != ''">and crt_lza2os = #{crtLza2os}</if>
-            <if test="crtJfod != null and crtJfod != ''">and crt_jfod = #{crtJfod}</if>
-            <if test="crtJfos != null and crtJfos != ''">and crt_jfos = #{crtJfos}</if>
-            <if test="crtDiaod != null and crtDiaod != ''">and crt_diaod = #{crtDiaod}</if>
-            <if test="crtDiaos != null and crtDiaos != ''">and crt_diaos = #{crtDiaos}</if>
-            <if test="crtVaod != null and crtVaod != ''">and crt_vaod = #{crtVaod}</if>
-            <if test="crtVaos != null and crtVaos != ''">and crt_vaos = #{crtVaos}</if>
-            <if test="crtJpysod != null and crtJpysod != ''">and crt_jpysod = #{crtJpysod}</if>
-            <if test="crtJpysos != null and crtJpysos != ''">and crt_jpysos = #{crtJpysos}</if>
-            <if test="crtSyjpod != null and crtSyjpod != ''">and crt_syjpod = #{crtSyjpod}</if>
-            <if test="crtSyjpos != null and crtSyjpos != ''">and crt_syjpos = #{crtSyjpos}</if>
-            <if test="crtBeizhu != null and crtBeizhu != ''">and crt_beizhu = #{crtBeizhu}</if>
+            <if test="crtId != null and crtId != ''"> and crt_id = #{crtId} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+            <if test="crtPrescriptionType != null and crtPrescriptionType != ''"> and crt_prescription_type = #{crtPrescriptionType} </if>
+            <if test="crtDoctor != null and crtDoctor != ''"> and crt_doctor = #{crtDoctor} </if>
+            <if test="crtOptometryName != null and crtOptometryName != ''"> and crt_optometry_name = #{crtOptometryName} </if>
+            <if test="crtSdbhod != null and crtSdbhod != ''"> and crt_sdbhod = #{crtSdbhod} </if>
+            <if test="crtSdbhos != null and crtSdbhos != ''"> and crt_sdbhos = #{crtSdbhos} </if>
+            <if test="ctrBcod != null and ctrBcod != ''"> and ctr_bcod = #{ctrBcod} </if>
+            <if test="crtBcos != null and crtBcos != ''"> and crt_bcos = #{crtBcos} </if>
+            <if test="crtRzdod != null and crtRzdod != ''"> and crt_rzdod = #{crtRzdod} </if>
+            <if test="crtRzdos != null and crtRzdos != ''"> and crt_rzdos = #{crtRzdos} </if>
+            <if test="crtLzaod != null and crtLzaod != ''"> and crt_lzaod = #{crtLzaod} </if>
+            <if test="crtLzaos != null and crtLzaos != ''"> and crt_lzaos = #{crtLzaos} </if>
+            <if test="crtRzd2od != null and crtRzd2od != ''"> and crt_rzd2od = #{crtRzd2od} </if>
+            <if test="crtRzd2os != null and crtRzd2os != ''"> and crt_rzd2os = #{crtRzd2os} </if>
+            <if test="crtLza2od != null and crtLza2od != ''"> and crt_lza2od = #{crtLza2od} </if>
+            <if test="crtLza2os != null and crtLza2os != ''"> and crt_lza2os = #{crtLza2os} </if>
+            <if test="crtJfod != null and crtJfod != ''"> and crt_jfod = #{crtJfod} </if>
+            <if test="crtJfos != null and crtJfos != ''"> and crt_jfos = #{crtJfos} </if>
+            <if test="crtDiaod != null and crtDiaod != ''"> and crt_diaod = #{crtDiaod} </if>
+            <if test="crtDiaos != null and crtDiaos != ''"> and crt_diaos = #{crtDiaos} </if>
+            <if test="crtVaod != null and crtVaod != ''"> and crt_vaod = #{crtVaod} </if>
+            <if test="crtVaos != null and crtVaos != ''"> and crt_vaos = #{crtVaos} </if>
+            <if test="crtJpysod != null and crtJpysod != ''"> and crt_jpysod = #{crtJpysod} </if>
+            <if test="crtJpysos != null and crtJpysos != ''"> and crt_jpysos = #{crtJpysos} </if>
+            <if test="crtSyjpod != null and crtSyjpod != ''"> and crt_syjpod = #{crtSyjpod} </if>
+            <if test="crtSyjpos != null and crtSyjpos != ''"> and crt_syjpos = #{crtSyjpos} </if>
+            <if test="crtBeizhu != null and crtBeizhu != ''"> and crt_beizhu = #{crtBeizhu} </if>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="crtSphod != null and crtSphod != ''"> and crt_sphod = #{crtSphod} </if>
+            <if test="crtSphos != null and crtSphos != ''"> and crt_sphos = #{crtSphos} </if>
+            <if test="crtCylod != null and crtCylod != ''"> and crt_cylod = #{crtCylod} </if>
+            <if test="crtCylos != null and crtCylos != ''"> and crt_cylos = #{crtCylos} </if>
+            <if test="crtAxialod != null and crtAxialod != ''"> and crt_axialod = #{crtAxialod} </if>
+            <if test="crtAxialos != null and crtAxialos != ''"> and crt_axialos = #{crtAxialos} </if>
         </where>
     </select>
 
     <insert id="save" parameterType="com.shiguang.jiancha.domain.CrtDO" useGeneratedKeys="true" keyProperty="crtId">
 		insert into jc_crt
 		(
-			`card_number`, 
-			`crt_prescription_type`, 
-			`crt_doctor`, 
-			`crt_optometry_name`, 
-			`crt_sdbhod`, 
-			`crt_sdbhos`, 
-			`ctr_bcod`, 
-			`crt_bcos`, 
-			`crt_rzdod`, 
-			`crt_rzdos`, 
-			`crt_lzaod`, 
-			`crt_lzaos`, 
-			`crt_rzd2od`, 
-			`crt_rzd2os`, 
-			`crt_lza2od`, 
-			`crt_lza2os`, 
-			`crt_jfod`, 
-			`crt_jfos`, 
-			`crt_diaod`, 
-			`crt_diaos`, 
-			`crt_vaod`, 
-			`crt_vaos`, 
-			`crt_jpysod`, 
-			`crt_jpysos`, 
-			`crt_syjpod`, 
-			`crt_syjpos`, 
-			`crt_beizhu`
+			`card_number`,
+			`crt_prescription_type`,
+			`crt_doctor`,
+			`crt_optometry_name`,
+			`crt_sdbhod`,
+			`crt_sdbhos`,
+			`ctr_bcod`,
+			`crt_bcos`,
+			`crt_rzdod`,
+			`crt_rzdos`,
+			`crt_lzaod`,
+			`crt_lzaos`,
+			`crt_rzd2od`,
+			`crt_rzd2os`,
+			`crt_lza2od`,
+			`crt_lza2os`,
+			`crt_jfod`,
+			`crt_jfos`,
+			`crt_diaod`,
+			`crt_diaos`,
+			`crt_vaod`,
+			`crt_vaos`,
+			`crt_jpysod`,
+			`crt_jpysos`,
+			`crt_syjpod`,
+			`crt_syjpos`,
+			`crt_beizhu`,
+			`ptometry_number`,
+			`status`,
+			`crt_sphod`,
+			`crt_sphos`,
+			`crt_cylod`,
+			`crt_cylos`,
+			`crt_axialod`,
+			`crt_axialos`
 		)
 		values
 		(
-			#{cardNumber}, 
-			#{crtPrescriptionType}, 
-			#{crtDoctor}, 
-			#{crtOptometryName}, 
-			#{crtSdbhod}, 
-			#{crtSdbhos}, 
-			#{ctrBcod}, 
-			#{crtBcos}, 
-			#{crtRzdod}, 
-			#{crtRzdos}, 
-			#{crtLzaod}, 
-			#{crtLzaos}, 
-			#{crtRzd2od}, 
-			#{crtRzd2os}, 
-			#{crtLza2od}, 
-			#{crtLza2os}, 
-			#{crtJfod}, 
-			#{crtJfos}, 
-			#{crtDiaod}, 
-			#{crtDiaos}, 
-			#{crtVaod}, 
-			#{crtVaos}, 
-			#{crtJpysod}, 
-			#{crtJpysos}, 
-			#{crtSyjpod}, 
-			#{crtSyjpos}, 
-			#{crtBeizhu}
+			#{cardNumber},
+			#{crtPrescriptionType},
+			#{crtDoctor},
+			#{crtOptometryName},
+			#{crtSdbhod},
+			#{crtSdbhos},
+			#{ctrBcod},
+			#{crtBcos},
+			#{crtRzdod},
+			#{crtRzdos},
+			#{crtLzaod},
+			#{crtLzaos},
+			#{crtRzd2od},
+			#{crtRzd2os},
+			#{crtLza2od},
+			#{crtLza2os},
+			#{crtJfod},
+			#{crtJfos},
+			#{crtDiaod},
+			#{crtDiaos},
+			#{crtVaod},
+			#{crtVaos},
+			#{crtJpysod},
+			#{crtJpysos},
+			#{crtSyjpod},
+			#{crtSyjpos},
+			#{crtBeizhu},
+			#{ptometryNumber},
+			#{status},
+			#{crtSphod},
+			#{crtSphos},
+			#{crtCylod},
+			#{crtCylos},
+			#{crtAxialod},
+			#{crtAxialos}
 		)
 	</insert>
     <insert id="saveCrt" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="crtId">
@@ -189,7 +211,13 @@
 			`crt_syjpos`,
 			`crt_beizhu`,
 			`ptometry_number`,
-			`status`
+			`status`,
+			`crt_sphod`,
+			`crt_sphos`,
+			`crt_cylod`,
+			`crt_cylos`,
+			`crt_axialod`,
+			`crt_axialos`
 		)
 		values
 		(
@@ -221,40 +249,54 @@
 			#{crtSyjpos},
 			#{crtBeizhu},
 			#{ptometryNumber},
-			#{status}
+			#{status},
+			#{crtSphod},
+			#{crtSphos},
+			#{crtCylod},
+			#{crtCylos},
+			#{crtAxialod},
+			#{crtAxialos}
 		)
 	</insert>
 
     <update id="update" parameterType="com.shiguang.jiancha.domain.CrtDO">
         update jc_crt
         <set>
-            <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
-            <if test="crtPrescriptionType != null">`crt_prescription_type` = #{crtPrescriptionType},</if>
-            <if test="crtDoctor != null">`crt_doctor` = #{crtDoctor},</if>
-            <if test="crtOptometryName != null">`crt_optometry_name` = #{crtOptometryName},</if>
-            <if test="crtSdbhod != null">`crt_sdbhod` = #{crtSdbhod},</if>
-            <if test="crtSdbhos != null">`crt_sdbhos` = #{crtSdbhos},</if>
-            <if test="ctrBcod != null">`ctr_bcod` = #{ctrBcod},</if>
-            <if test="crtBcos != null">`crt_bcos` = #{crtBcos},</if>
-            <if test="crtRzdod != null">`crt_rzdod` = #{crtRzdod},</if>
-            <if test="crtRzdos != null">`crt_rzdos` = #{crtRzdos},</if>
-            <if test="crtLzaod != null">`crt_lzaod` = #{crtLzaod},</if>
-            <if test="crtLzaos != null">`crt_lzaos` = #{crtLzaos},</if>
-            <if test="crtRzd2od != null">`crt_rzd2od` = #{crtRzd2od},</if>
-            <if test="crtRzd2os != null">`crt_rzd2os` = #{crtRzd2os},</if>
-            <if test="crtLza2od != null">`crt_lza2od` = #{crtLza2od},</if>
-            <if test="crtLza2os != null">`crt_lza2os` = #{crtLza2os},</if>
-            <if test="crtJfod != null">`crt_jfod` = #{crtJfod},</if>
-            <if test="crtJfos != null">`crt_jfos` = #{crtJfos},</if>
-            <if test="crtDiaod != null">`crt_diaod` = #{crtDiaod},</if>
-            <if test="crtDiaos != null">`crt_diaos` = #{crtDiaos},</if>
-            <if test="crtVaod != null">`crt_vaod` = #{crtVaod},</if>
-            <if test="crtVaos != null">`crt_vaos` = #{crtVaos},</if>
-            <if test="crtJpysod != null">`crt_jpysod` = #{crtJpysod},</if>
-            <if test="crtJpysos != null">`crt_jpysos` = #{crtJpysos},</if>
-            <if test="crtSyjpod != null">`crt_syjpod` = #{crtSyjpod},</if>
-            <if test="crtSyjpos != null">`crt_syjpos` = #{crtSyjpos},</if>
-            <if test="crtBeizhu != null">`crt_beizhu` = #{crtBeizhu}</if>
+            <if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+            <if test="crtPrescriptionType != null">`crt_prescription_type` = #{crtPrescriptionType}, </if>
+            <if test="crtDoctor != null">`crt_doctor` = #{crtDoctor}, </if>
+            <if test="crtOptometryName != null">`crt_optometry_name` = #{crtOptometryName}, </if>
+            <if test="crtSdbhod != null">`crt_sdbhod` = #{crtSdbhod}, </if>
+            <if test="crtSdbhos != null">`crt_sdbhos` = #{crtSdbhos}, </if>
+            <if test="ctrBcod != null">`ctr_bcod` = #{ctrBcod}, </if>
+            <if test="crtBcos != null">`crt_bcos` = #{crtBcos}, </if>
+            <if test="crtRzdod != null">`crt_rzdod` = #{crtRzdod}, </if>
+            <if test="crtRzdos != null">`crt_rzdos` = #{crtRzdos}, </if>
+            <if test="crtLzaod != null">`crt_lzaod` = #{crtLzaod}, </if>
+            <if test="crtLzaos != null">`crt_lzaos` = #{crtLzaos}, </if>
+            <if test="crtRzd2od != null">`crt_rzd2od` = #{crtRzd2od}, </if>
+            <if test="crtRzd2os != null">`crt_rzd2os` = #{crtRzd2os}, </if>
+            <if test="crtLza2od != null">`crt_lza2od` = #{crtLza2od}, </if>
+            <if test="crtLza2os != null">`crt_lza2os` = #{crtLza2os}, </if>
+            <if test="crtJfod != null">`crt_jfod` = #{crtJfod}, </if>
+            <if test="crtJfos != null">`crt_jfos` = #{crtJfos}, </if>
+            <if test="crtDiaod != null">`crt_diaod` = #{crtDiaod}, </if>
+            <if test="crtDiaos != null">`crt_diaos` = #{crtDiaos}, </if>
+            <if test="crtVaod != null">`crt_vaod` = #{crtVaod}, </if>
+            <if test="crtVaos != null">`crt_vaos` = #{crtVaos}, </if>
+            <if test="crtJpysod != null">`crt_jpysod` = #{crtJpysod}, </if>
+            <if test="crtJpysos != null">`crt_jpysos` = #{crtJpysos}, </if>
+            <if test="crtSyjpod != null">`crt_syjpod` = #{crtSyjpod}, </if>
+            <if test="crtSyjpos != null">`crt_syjpos` = #{crtSyjpos}, </if>
+            <if test="crtBeizhu != null">`crt_beizhu` = #{crtBeizhu}, </if>
+            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber}, </if>
+            <if test="status != null">`status` = #{status}, </if>
+            <if test="crtSphod != null">`crt_sphod` = #{crtSphod}, </if>
+            <if test="crtSphos != null">`crt_sphos` = #{crtSphos}, </if>
+            <if test="crtCylod != null">`crt_cylod` = #{crtCylod}, </if>
+            <if test="crtCylos != null">`crt_cylos` = #{crtCylos}, </if>
+            <if test="crtAxialod != null">`crt_axialod` = #{crtAxialod}, </if>
+            <if test="crtAxialos != null">`crt_axialos` = #{crtAxialos}</if>
         </set>
         where crt_id = #{crtId}
     </update>
@@ -262,13 +304,7 @@
     <delete id="remove">
 		delete from jc_crt where crt_id = #{value}
 	</delete>
-    <update id="upremove" parameterType="com.shiguang.jiancha.domain.CrtDO">
-        update jc_crt
-        <set>
-            <if test="status != null">`status` = #{status}</if>
-        </set>
-        where ptometry_number = #{ptometryNumber}
-    </update>
+
     <delete id="batchRemove">
         delete from jc_crt where crt_id in
         <foreach item="crtId" collection="array" open="(" separator="," close=")">

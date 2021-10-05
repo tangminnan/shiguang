@@ -4,38 +4,40 @@
 <mapper namespace="com.shiguang.jiancha.dao.RgpDao">
 
     <select id="get" resultType="com.shiguang.jiancha.domain.RgpDO">
-		select `rgp_id`,`card_number`,`rgp_prescription_type`,`rgp_doctor`,`rgp_optometry_name`,`rgp_qgdod`,`rgp_qgdos`,`rgp_bcod`,`rgp_bcos`,`rgp_diaod`,`rgp_diaos`,`rgp_sgod`,`rgp_sgos`,`rgp_jpysod`,`rgp_jpysos`,`rgp_tssjod`,`rgp_tssjos`,`rgp_syjpod`,`rgp_syjpos`,`rgp_beizhu` from jc_rgp where rgp_id = #{value}
+		select `rgp_id`,`card_number`,`rgp_prescription_type`,`rgp_doctor`,`rgp_optometry_name`,`rgp_qgdod`,`rgp_qgdos`,`rgp_bcod`,`rgp_bcos`,`rgp_diaod`,`rgp_diaos`,`rgp_sgod`,`rgp_sgos`,`rgp_jpysod`,`rgp_jpysos`,`rgp_tssjod`,`rgp_tssjos`,`rgp_syjpod`,`rgp_syjpos`,`rgp_beizhu`,`ptometry_number`,`status`,`rgp_sphod`,`rgp_sphos`,`rgp_cylod`,`rgp_cylos`,`rgp_axialod`,`rgp_axialos` from jc_rgp where rgp_id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.jiancha.domain.RgpDO">
-        select
-        `rgp_id`,`card_number`,`rgp_prescription_type`,`rgp_doctor`,`rgp_optometry_name`,`rgp_qgdod`,`rgp_qgdos`,`rgp_bcod`,`rgp_bcos`,`rgp_diaod`,`rgp_diaos`,`rgp_sgod`,`rgp_sgos`,`rgp_jpysod`,`rgp_jpysos`,`rgp_tssjod`,`rgp_tssjos`,`rgp_syjpod`,`rgp_syjpos`,`rgp_beizhu`
-        from jc_rgp
+        select `rgp_id`,`card_number`,`rgp_prescription_type`,`rgp_doctor`,`rgp_optometry_name`,`rgp_qgdod`,`rgp_qgdos`,`rgp_bcod`,`rgp_bcos`,`rgp_diaod`,`rgp_diaos`,`rgp_sgod`,`rgp_sgos`,`rgp_jpysod`,`rgp_jpysos`,`rgp_tssjod`,`rgp_tssjos`,`rgp_syjpod`,`rgp_syjpos`,`rgp_beizhu`,`ptometry_number`,`status`,`rgp_sphod`,`rgp_sphos`,`rgp_cylod`,`rgp_cylos`,`rgp_axialod`,`rgp_axialos` from jc_rgp
         <where>
-            <if test="rgpId != null and rgpId != ''">and rgp_id = #{rgpId}</if>
-            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
-            <if test="rgpPrescriptionType != null and rgpPrescriptionType != ''">and rgp_prescription_type =
-                #{rgpPrescriptionType}
-            </if>
-            <if test="rgpDoctor != null and rgpDoctor != ''">and rgp_doctor = #{rgpDoctor}</if>
-            <if test="rgpOptometryName != null and rgpOptometryName != ''">and rgp_optometry_name =
-                #{rgpOptometryName}
-            </if>
-            <if test="rgpQgdod != null and rgpQgdod != ''">and rgp_qgdod = #{rgpQgdod}</if>
-            <if test="rgpQgdos != null and rgpQgdos != ''">and rgp_qgdos = #{rgpQgdos}</if>
-            <if test="rgpBcod != null and rgpBcod != ''">and rgp_bcod = #{rgpBcod}</if>
-            <if test="rgpBcos != null and rgpBcos != ''">and rgp_bcos = #{rgpBcos}</if>
-            <if test="rgpDiaod != null and rgpDiaod != ''">and rgp_diaod = #{rgpDiaod}</if>
-            <if test="rgpDiaos != null and rgpDiaos != ''">and rgp_diaos = #{rgpDiaos}</if>
-            <if test="rgpSgod != null and rgpSgod != ''">and rgp_sgod = #{rgpSgod}</if>
-            <if test="rgpSgos != null and rgpSgos != ''">and rgp_sgos = #{rgpSgos}</if>
-            <if test="rgpJpysod != null and rgpJpysod != ''">and rgp_jpysod = #{rgpJpysod}</if>
-            <if test="rgpJpysos != null and rgpJpysos != ''">and rgp_jpysos = #{rgpJpysos}</if>
-            <if test="rgpTssjod != null and rgpTssjod != ''">and rgp_tssjod = #{rgpTssjod}</if>
-            <if test="rgpTssjos != null and rgpTssjos != ''">and rgp_tssjos = #{rgpTssjos}</if>
-            <if test="rgpSyjpod != null and rgpSyjpod != ''">and rgp_syjpod = #{rgpSyjpod}</if>
-            <if test="rgpSyjpos != null and rgpSyjpos != ''">and rgp_syjpos = #{rgpSyjpos}</if>
-            <if test="rgpBeizhu != null and rgpBeizhu != ''">and rgp_beizhu = #{rgpBeizhu}</if>
+            <if test="rgpId != null and rgpId != ''"> and rgp_id = #{rgpId} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+            <if test="rgpPrescriptionType != null and rgpPrescriptionType != ''"> and rgp_prescription_type = #{rgpPrescriptionType} </if>
+            <if test="rgpDoctor != null and rgpDoctor != ''"> and rgp_doctor = #{rgpDoctor} </if>
+            <if test="rgpOptometryName != null and rgpOptometryName != ''"> and rgp_optometry_name = #{rgpOptometryName} </if>
+            <if test="rgpQgdod != null and rgpQgdod != ''"> and rgp_qgdod = #{rgpQgdod} </if>
+            <if test="rgpQgdos != null and rgpQgdos != ''"> and rgp_qgdos = #{rgpQgdos} </if>
+            <if test="rgpBcod != null and rgpBcod != ''"> and rgp_bcod = #{rgpBcod} </if>
+            <if test="rgpBcos != null and rgpBcos != ''"> and rgp_bcos = #{rgpBcos} </if>
+            <if test="rgpDiaod != null and rgpDiaod != ''"> and rgp_diaod = #{rgpDiaod} </if>
+            <if test="rgpDiaos != null and rgpDiaos != ''"> and rgp_diaos = #{rgpDiaos} </if>
+            <if test="rgpSgod != null and rgpSgod != ''"> and rgp_sgod = #{rgpSgod} </if>
+            <if test="rgpSgos != null and rgpSgos != ''"> and rgp_sgos = #{rgpSgos} </if>
+            <if test="rgpJpysod != null and rgpJpysod != ''"> and rgp_jpysod = #{rgpJpysod} </if>
+            <if test="rgpJpysos != null and rgpJpysos != ''"> and rgp_jpysos = #{rgpJpysos} </if>
+            <if test="rgpTssjod != null and rgpTssjod != ''"> and rgp_tssjod = #{rgpTssjod} </if>
+            <if test="rgpTssjos != null and rgpTssjos != ''"> and rgp_tssjos = #{rgpTssjos} </if>
+            <if test="rgpSyjpod != null and rgpSyjpod != ''"> and rgp_syjpod = #{rgpSyjpod} </if>
+            <if test="rgpSyjpos != null and rgpSyjpos != ''"> and rgp_syjpos = #{rgpSyjpos} </if>
+            <if test="rgpBeizhu != null and rgpBeizhu != ''"> and rgp_beizhu = #{rgpBeizhu} </if>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="rgpSphod != null and rgpSphod != ''"> and rgp_sphod = #{rgpSphod} </if>
+            <if test="rgpSphos != null and rgpSphos != ''"> and rgp_sphos = #{rgpSphos} </if>
+            <if test="rgpCylod != null and rgpCylod != ''"> and rgp_cylod = #{rgpCylod} </if>
+            <if test="rgpCylos != null and rgpCylos != ''"> and rgp_cylos = #{rgpCylos} </if>
+            <if test="rgpAxialod != null and rgpAxialod != ''"> and rgp_axialod = #{rgpAxialod} </if>
+            <if test="rgpAxialos != null and rgpAxialos != ''"> and rgp_axialos = #{rgpAxialos} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -53,77 +55,97 @@
     <select id="count" resultType="int">
         select count(*) from jc_rgp
         <where>
-            <if test="rgpId != null and rgpId != ''">and rgp_id = #{rgpId}</if>
-            <if test="cardNumber != null and cardNumber != ''">and card_number = #{cardNumber}</if>
-            <if test="rgpPrescriptionType != null and rgpPrescriptionType != ''">and rgp_prescription_type =
-                #{rgpPrescriptionType}
-            </if>
-            <if test="rgpDoctor != null and rgpDoctor != ''">and rgp_doctor = #{rgpDoctor}</if>
-            <if test="rgpOptometryName != null and rgpOptometryName != ''">and rgp_optometry_name =
-                #{rgpOptometryName}
-            </if>
-            <if test="rgpQgdod != null and rgpQgdod != ''">and rgp_qgdod = #{rgpQgdod}</if>
-            <if test="rgpQgdos != null and rgpQgdos != ''">and rgp_qgdos = #{rgpQgdos}</if>
-            <if test="rgpBcod != null and rgpBcod != ''">and rgp_bcod = #{rgpBcod}</if>
-            <if test="rgpBcos != null and rgpBcos != ''">and rgp_bcos = #{rgpBcos}</if>
-            <if test="rgpDiaod != null and rgpDiaod != ''">and rgp_diaod = #{rgpDiaod}</if>
-            <if test="rgpDiaos != null and rgpDiaos != ''">and rgp_diaos = #{rgpDiaos}</if>
-            <if test="rgpSgod != null and rgpSgod != ''">and rgp_sgod = #{rgpSgod}</if>
-            <if test="rgpSgos != null and rgpSgos != ''">and rgp_sgos = #{rgpSgos}</if>
-            <if test="rgpJpysod != null and rgpJpysod != ''">and rgp_jpysod = #{rgpJpysod}</if>
-            <if test="rgpJpysos != null and rgpJpysos != ''">and rgp_jpysos = #{rgpJpysos}</if>
-            <if test="rgpTssjod != null and rgpTssjod != ''">and rgp_tssjod = #{rgpTssjod}</if>
-            <if test="rgpTssjos != null and rgpTssjos != ''">and rgp_tssjos = #{rgpTssjos}</if>
-            <if test="rgpSyjpod != null and rgpSyjpod != ''">and rgp_syjpod = #{rgpSyjpod}</if>
-            <if test="rgpSyjpos != null and rgpSyjpos != ''">and rgp_syjpos = #{rgpSyjpos}</if>
-            <if test="rgpBeizhu != null and rgpBeizhu != ''">and rgp_beizhu = #{rgpBeizhu}</if>
+            <if test="rgpId != null and rgpId != ''"> and rgp_id = #{rgpId} </if>
+            <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+            <if test="rgpPrescriptionType != null and rgpPrescriptionType != ''"> and rgp_prescription_type = #{rgpPrescriptionType} </if>
+            <if test="rgpDoctor != null and rgpDoctor != ''"> and rgp_doctor = #{rgpDoctor} </if>
+            <if test="rgpOptometryName != null and rgpOptometryName != ''"> and rgp_optometry_name = #{rgpOptometryName} </if>
+            <if test="rgpQgdod != null and rgpQgdod != ''"> and rgp_qgdod = #{rgpQgdod} </if>
+            <if test="rgpQgdos != null and rgpQgdos != ''"> and rgp_qgdos = #{rgpQgdos} </if>
+            <if test="rgpBcod != null and rgpBcod != ''"> and rgp_bcod = #{rgpBcod} </if>
+            <if test="rgpBcos != null and rgpBcos != ''"> and rgp_bcos = #{rgpBcos} </if>
+            <if test="rgpDiaod != null and rgpDiaod != ''"> and rgp_diaod = #{rgpDiaod} </if>
+            <if test="rgpDiaos != null and rgpDiaos != ''"> and rgp_diaos = #{rgpDiaos} </if>
+            <if test="rgpSgod != null and rgpSgod != ''"> and rgp_sgod = #{rgpSgod} </if>
+            <if test="rgpSgos != null and rgpSgos != ''"> and rgp_sgos = #{rgpSgos} </if>
+            <if test="rgpJpysod != null and rgpJpysod != ''"> and rgp_jpysod = #{rgpJpysod} </if>
+            <if test="rgpJpysos != null and rgpJpysos != ''"> and rgp_jpysos = #{rgpJpysos} </if>
+            <if test="rgpTssjod != null and rgpTssjod != ''"> and rgp_tssjod = #{rgpTssjod} </if>
+            <if test="rgpTssjos != null and rgpTssjos != ''"> and rgp_tssjos = #{rgpTssjos} </if>
+            <if test="rgpSyjpod != null and rgpSyjpod != ''"> and rgp_syjpod = #{rgpSyjpod} </if>
+            <if test="rgpSyjpos != null and rgpSyjpos != ''"> and rgp_syjpos = #{rgpSyjpos} </if>
+            <if test="rgpBeizhu != null and rgpBeizhu != ''"> and rgp_beizhu = #{rgpBeizhu} </if>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+            <if test="status != null and status != ''"> and status = #{status} </if>
+            <if test="rgpSphod != null and rgpSphod != ''"> and rgp_sphod = #{rgpSphod} </if>
+            <if test="rgpSphos != null and rgpSphos != ''"> and rgp_sphos = #{rgpSphos} </if>
+            <if test="rgpCylod != null and rgpCylod != ''"> and rgp_cylod = #{rgpCylod} </if>
+            <if test="rgpCylos != null and rgpCylos != ''"> and rgp_cylos = #{rgpCylos} </if>
+            <if test="rgpAxialod != null and rgpAxialod != ''"> and rgp_axialod = #{rgpAxialod} </if>
+            <if test="rgpAxialos != null and rgpAxialos != ''"> and rgp_axialos = #{rgpAxialos} </if>
         </where>
     </select>
 
     <insert id="save" parameterType="com.shiguang.jiancha.domain.RgpDO" useGeneratedKeys="true" keyProperty="rgpId">
 		insert into jc_rgp
 		(
-			`card_number`, 
-			`rgp_prescription_type`, 
-			`rgp_doctor`, 
-			`rgp_optometry_name`, 
-			`rgp_qgdod`, 
-			`rgp_qgdos`, 
-			`rgp_bcod`, 
-			`rgp_bcos`, 
-			`rgp_diaod`, 
-			`rgp_diaos`, 
-			`rgp_sgod`, 
-			`rgp_sgos`, 
-			`rgp_jpysod`, 
-			`rgp_jpysos`, 
-			`rgp_tssjod`, 
-			`rgp_tssjos`, 
-			`rgp_syjpod`, 
-			`rgp_syjpos`, 
-			`rgp_beizhu`
+			`card_number`,
+			`rgp_prescription_type`,
+			`rgp_doctor`,
+			`rgp_optometry_name`,
+			`rgp_qgdod`,
+			`rgp_qgdos`,
+			`rgp_bcod`,
+			`rgp_bcos`,
+			`rgp_diaod`,
+			`rgp_diaos`,
+			`rgp_sgod`,
+			`rgp_sgos`,
+			`rgp_jpysod`,
+			`rgp_jpysos`,
+			`rgp_tssjod`,
+			`rgp_tssjos`,
+			`rgp_syjpod`,
+			`rgp_syjpos`,
+			`rgp_beizhu`,
+			`ptometry_number`,
+			`status`,
+			`rgp_sphod`,
+			`rgp_sphos`,
+			`rgp_cylod`,
+			`rgp_cylos`,
+			`rgp_axialod`,
+			`rgp_axialos`
 		)
 		values
 		(
-			#{cardNumber}, 
-			#{rgpPrescriptionType}, 
-			#{rgpDoctor}, 
-			#{rgpOptometryName}, 
-			#{rgpQgdod}, 
-			#{rgpQgdos}, 
-			#{rgpBcod}, 
-			#{rgpBcos}, 
-			#{rgpDiaod}, 
-			#{rgpDiaos}, 
-			#{rgpSgod}, 
-			#{rgpSgos}, 
-			#{rgpJpysod}, 
-			#{rgpJpysos}, 
-			#{rgpTssjod}, 
-			#{rgpTssjos}, 
-			#{rgpSyjpod}, 
-			#{rgpSyjpos}, 
-			#{rgpBeizhu}
+			#{cardNumber},
+			#{rgpPrescriptionType},
+			#{rgpDoctor},
+			#{rgpOptometryName},
+			#{rgpQgdod},
+			#{rgpQgdos},
+			#{rgpBcod},
+			#{rgpBcos},
+			#{rgpDiaod},
+			#{rgpDiaos},
+			#{rgpSgod},
+			#{rgpSgos},
+			#{rgpJpysod},
+			#{rgpJpysos},
+			#{rgpTssjod},
+			#{rgpTssjos},
+			#{rgpSyjpod},
+			#{rgpSyjpos},
+			#{rgpBeizhu},
+			#{ptometryNumber},
+			#{status},
+			#{rgpSphod},
+			#{rgpSphos},
+			#{rgpCylod},
+			#{rgpCylos},
+			#{rgpAxialod},
+			#{rgpAxialos}
 		)
 	</insert>
     <insert id="saveRgp" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="rgpId">
@@ -149,7 +171,13 @@
 			`rgp_syjpos`,
 			`rgp_beizhu`,
 			`ptometry_number`,
-			`status`
+			`status`,
+			`rgp_sphod`,
+			`rgp_sphos`,
+			`rgp_cylod`,
+			`rgp_cylos`,
+			`rgp_axialod`,
+			`rgp_axialos`
 		)
 		values
 		(
@@ -173,32 +201,46 @@
 			#{rgpSyjpos},
 			#{rgpBeizhu},
 			#{ptometryNumber},
-			#{status}
+			#{status},
+			#{rgpSphod},
+			#{rgpSphos},
+			#{rgpCylod},
+			#{rgpCylos},
+			#{rgpAxialod},
+			#{rgpAxialos}
 		)
 	</insert>
 
     <update id="update" parameterType="com.shiguang.jiancha.domain.RgpDO">
         update jc_rgp
         <set>
-            <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
-            <if test="rgpPrescriptionType != null">`rgp_prescription_type` = #{rgpPrescriptionType},</if>
-            <if test="rgpDoctor != null">`rgp_doctor` = #{rgpDoctor},</if>
-            <if test="rgpOptometryName != null">`rgp_optometry_name` = #{rgpOptometryName},</if>
-            <if test="rgpQgdod != null">`rgp_qgdod` = #{rgpQgdod},</if>
-            <if test="rgpQgdos != null">`rgp_qgdos` = #{rgpQgdos},</if>
-            <if test="rgpBcod != null">`rgp_bcod` = #{rgpBcod},</if>
-            <if test="rgpBcos != null">`rgp_bcos` = #{rgpBcos},</if>
-            <if test="rgpDiaod != null">`rgp_diaod` = #{rgpDiaod},</if>
-            <if test="rgpDiaos != null">`rgp_diaos` = #{rgpDiaos},</if>
-            <if test="rgpSgod != null">`rgp_sgod` = #{rgpSgod},</if>
-            <if test="rgpSgos != null">`rgp_sgos` = #{rgpSgos},</if>
-            <if test="rgpJpysod != null">`rgp_jpysod` = #{rgpJpysod},</if>
-            <if test="rgpJpysos != null">`rgp_jpysos` = #{rgpJpysos},</if>
-            <if test="rgpTssjod != null">`rgp_tssjod` = #{rgpTssjod},</if>
-            <if test="rgpTssjos != null">`rgp_tssjos` = #{rgpTssjos},</if>
-            <if test="rgpSyjpod != null">`rgp_syjpod` = #{rgpSyjpod},</if>
-            <if test="rgpSyjpos != null">`rgp_syjpos` = #{rgpSyjpos},</if>
-            <if test="rgpBeizhu != null">`rgp_beizhu` = #{rgpBeizhu}</if>
+            <if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+            <if test="rgpPrescriptionType != null">`rgp_prescription_type` = #{rgpPrescriptionType}, </if>
+            <if test="rgpDoctor != null">`rgp_doctor` = #{rgpDoctor}, </if>
+            <if test="rgpOptometryName != null">`rgp_optometry_name` = #{rgpOptometryName}, </if>
+            <if test="rgpQgdod != null">`rgp_qgdod` = #{rgpQgdod}, </if>
+            <if test="rgpQgdos != null">`rgp_qgdos` = #{rgpQgdos}, </if>
+            <if test="rgpBcod != null">`rgp_bcod` = #{rgpBcod}, </if>
+            <if test="rgpBcos != null">`rgp_bcos` = #{rgpBcos}, </if>
+            <if test="rgpDiaod != null">`rgp_diaod` = #{rgpDiaod}, </if>
+            <if test="rgpDiaos != null">`rgp_diaos` = #{rgpDiaos}, </if>
+            <if test="rgpSgod != null">`rgp_sgod` = #{rgpSgod}, </if>
+            <if test="rgpSgos != null">`rgp_sgos` = #{rgpSgos}, </if>
+            <if test="rgpJpysod != null">`rgp_jpysod` = #{rgpJpysod}, </if>
+            <if test="rgpJpysos != null">`rgp_jpysos` = #{rgpJpysos}, </if>
+            <if test="rgpTssjod != null">`rgp_tssjod` = #{rgpTssjod}, </if>
+            <if test="rgpTssjos != null">`rgp_tssjos` = #{rgpTssjos}, </if>
+            <if test="rgpSyjpod != null">`rgp_syjpod` = #{rgpSyjpod}, </if>
+            <if test="rgpSyjpos != null">`rgp_syjpos` = #{rgpSyjpos}, </if>
+            <if test="rgpBeizhu != null">`rgp_beizhu` = #{rgpBeizhu}, </if>
+            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber}, </if>
+            <if test="status != null">`status` = #{status}, </if>
+            <if test="rgpSphod != null">`rgp_sphod` = #{rgpSphod}, </if>
+            <if test="rgpSphos != null">`rgp_sphos` = #{rgpSphos}, </if>
+            <if test="rgpCylod != null">`rgp_cylod` = #{rgpCylod}, </if>
+            <if test="rgpCylos != null">`rgp_cylos` = #{rgpCylos}, </if>
+            <if test="rgpAxialod != null">`rgp_axialod` = #{rgpAxialod}, </if>
+            <if test="rgpAxialos != null">`rgp_axialos` = #{rgpAxialos}</if>
         </set>
         where rgp_id = #{rgpId}
     </update>
@@ -206,13 +248,6 @@
     <delete id="remove">
 		delete from jc_rgp where rgp_id = #{value}
 	</delete>
-    <update id="upremove" parameterType="com.shiguang.jiancha.domain.RgpDO">
-        update jc_rgp
-        <set>
-            <if test="status != null">`status` = #{status}</if>
-        </set>
-        where ptometry_number = #{ptometryNumber}
-    </update>
 
     <delete id="batchRemove">
         delete from jc_rgp where rgp_id in

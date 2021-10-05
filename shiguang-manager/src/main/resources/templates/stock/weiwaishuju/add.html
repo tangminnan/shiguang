@@ -355,9 +355,13 @@
                     if(null == rows[i].goodsNum){
                         rows[i].goodsNum="";
                     }
+					if(null == rows[i].mirorAddress){
+                        rows[i].mirorAddress="";
+                    }
 
 
 
+                    $("#departname").val(rows[i].mirorAddress);
                     $("#saleNumber").val(rows[i].saleNumber);
 
                     $("#rightsph").val(rows[i].rightsph);
