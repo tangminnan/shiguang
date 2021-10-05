@@ -109,6 +109,17 @@ public class SalesDO implements Serializable {
 	private String settleTime;
 	//验光师
 	private String optometryName;
+	//右眼瞳高
+	private String righttg;
+	//左眼瞳高
+	private String lefttg;
+	public void setRighttg(String righttg) {this.righttg = righttg;}
+
+	public String getRighttg() {return righttg;}
+
+	public void setLefttg(String lefttg) {this.lefttg = lefttg;}
+
+	public String getLefttg() {return lefttg;}
 	//外来处方类型
 	private String outRecipel;
 	//处方类型

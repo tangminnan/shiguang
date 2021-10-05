@@ -295,6 +295,20 @@ public class StoreSalesController {
 //            }
         }
         //Model model=null;
+        //保存瞳高
+        if ("远用".equals(salesDO.getRecipelType())){
+            salesDO.setRighttg(salesDO.getRighttonggaoyy());
+            salesDO.setLefttg(salesDO.getLefttonggaoyy());
+        } else if ("近用".equals(salesDO.getRecipelType())){
+            salesDO.setRighttg(salesDO.getRighttonggaojy());
+            salesDO.setLefttg(salesDO.getLefttonggaojy());
+        } else if ("渐进/双光".equals(salesDO.getRecipelType())){
+            salesDO.setRighttg(salesDO.getRighttonggaosg());
+            salesDO.setLefttg(salesDO.getLefttonggaosg());
+        } else if ("中用".equals(salesDO.getRecipelType())){
+            salesDO.setRighttg(salesDO.getRighttonggaozy());
+            salesDO.setLefttg(salesDO.getLefttonggaozy());
+        }
         if ("2".equals(salesDO.getChufang())) {
             if (salesDO.getRecipelwlType() == 1) {
                 KjjyDO kjjyDO = new KjjyDO();
