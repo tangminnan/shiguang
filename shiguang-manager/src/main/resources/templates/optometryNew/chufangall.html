@@ -1569,7 +1569,7 @@
                     <td class="PL30" colspan="2">7 角膜接触镜VST
                         <input type="hidden" class="input_del" id="remove7" th:value="${resultDO.vstPrescriptionType}" readonly/>
                     </td>
-                    <td style="text-align: right" colspan="11">
+                    <td style="text-align: right" colspan="14">
                         医生：
                         <select id="vstDoctor" name="vstDoctor" th:value="${resultDO.vstDoctor}" disabled>
                             <option></option>
@@ -1594,6 +1594,9 @@
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
+                    <td>球镜</td>
+                    <td>柱镜</td>
+                    <td>轴向</td>
                     <td>试戴片编号</td>
                     <td>FK</td>
                     <td>曲率半径</td>
@@ -1609,6 +1612,10 @@
                 </tr>
                 <tr>
                     <td>OD</td>
+                    <td><input th:value="${resultDO.vstSphod}" name="vstSphod" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.vstCylod}" name="vstCylod" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.vstAxialod}" name="vstAxialod" readonly type="text"/></td>
+
                     <td><input th:value="${resultDO.vstSdbhod}" name="vstSdbhod" readonly type="text"/></td>
                     <td><input th:value="${resultDO.vstFkod}" name="vstFkod" readonly type="text"/></td>
                     <td><input th:value="${resultDO.vstQlbjod}" name="vstQlbjod" readonly type="text"/></td>
@@ -1626,6 +1633,10 @@
                 </tr>
                 <tr>
                     <td>OS</td>
+                    <td><input th:value="${resultDO.vstSphos}" name="vstSphos" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.vstCylos}" name="vstCylos" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.vstAxialos}" name="vstAxialos" readonly type="text"/></td>
+
                     <td><input readonly th:value="${resultDO.vstSdbhos}" name="vstSdbhos" type="text"/></td>
                     <td><input readonly th:value="${resultDO.vstFkos}" name="vstFkos" type="text"/></td>
                     <td><input readonly th:value="${resultDO.vstQlbjos}" name="vstQlbjos" type="text"/></td>
@@ -1655,7 +1666,7 @@
                 <tr>
                     <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="hidden" class="input_del" id="remove8" readonly th:value="${resultDO.crtPrescriptionType}"/>
                     </td>
-                    <td style="text-align: right" colspan="10">
+                    <td style="text-align: right" colspan="13">
                         医生：
                         <select id="crtDoctor" name="crtDoctor" th:value="${resultDO.crtDoctor}" disabled>
                             <option></option>
@@ -1680,6 +1691,9 @@
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
+                    <td>球镜</td>
+                    <td>柱镜</td>
+                    <td>轴向</td>
                     <td>试戴片编号</td>
                     <td>BC</td>
                     <td>RZD</td>
@@ -1694,6 +1708,10 @@
                 </tr>
                 <tr>
                     <td>OD</td>
+                    <td><input th:value="${resultDO.crtSphod}" name="crtSphod" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.crtCylod}" name="crtCylod" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.crtAxialod}" name="crtAxialod" readonly type="text"/></td>
+
                     <td><input readonly th:value="${resultDO.crtSdbhod}" name="crtSdbhod" type="text"/></td>
                     <td><input readonly th:value="${resultDO.ctrBcod}" name="ctrBcod" type="text"/></td>
                     <td><input readonly th:value="${resultDO.crtRzdod}" name="crtRzdod" type="text"/></td>
@@ -1710,6 +1728,10 @@
                 </tr>
                 <tr>
                     <td>OS</td>
+                    <td><input th:value="${resultDO.crtSphos}" name="crtSphos" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.crtCylos}" name="crtCylos" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.crtAxialos}" name="crtAxialos" readonly type="text"/></td>
+
                     <td><input  readonly th:value="${resultDO.crtSdbhos}" name="crtSdbhos" type="text"/></td>
                     <td><input  readonly th:value="${resultDO.crtBcos}" name="crtBcos" type="text"/></td>
                     <td><input  readonly th:value="${resultDO.crtRzdos}" name="crtRzdos" type="text"/></td>
@@ -1737,11 +1759,13 @@
                 <tr>
                     <td class="PL30" colspan="2">9 RGP
                         <input type="hidden" class="input_del" id="remove9" readonly th:value="${resultDO.rgpPrescriptionType}"/></td>
-                    <td style="text-align: right" colspan="6">
+                    <td style="text-align: right" colspan="9">
                         <select id="rgpDoctor" name="rgpDoctor"  th:value="${resultDO.rgpDoctor}" disabled>
                             <option></option>
-                            <option value="孙伟">孙伟</option>
-                            <option value="维护二">维护二</option>
+                            <option th:each="ls:${listDoctor}"
+                                    th:text="${ls.name}"
+                                    th:value="${ls.name}"
+                            ></option>
                         </select>
                         <input id="rgpDoctors" name="rgpDoctors" readonly th:value="${resultDO.rgpDoctor}" type="hidden">
 
@@ -1759,6 +1783,9 @@
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
+                    <td>球镜</td>
+                    <td>柱镜</td>
+                    <td>轴向</td>
                     <td>屈光度</td>
                     <td>BC</td>
                     <td>DIA</td>
@@ -1769,6 +1796,10 @@
                 </tr>
                 <tr>
                     <td>OD</td>
+                    <td><input th:value="${resultDO.rgpSphod}" name="rgpSphod" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.rgpCylod}" name="rgpCylod" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.rgpAxialod}" name="rgpAxialod" readonly type="text"/></td>
+
                     <td><input readonly th:value="${resultDO.rgpQgdod}" name="rgpQgdod" type="text"/></td>
                     <td><input readonly th:value="${resultDO.rgpBcod}" name="rgpBcod" type="text"/></td>
                     <td><input readonly th:value="${resultDO.rgpDiaod}" name="rgpDiaod" type="text"/></td>
@@ -1781,6 +1812,10 @@
                 </tr>
                 <tr>
                     <td>OS</td>
+                    <td><input th:value="${resultDO.rgpSphos}" name="rgpSphos" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.rgpCylos}" name="rgpCylos" readonly type="text"/></td>
+                    <td><input th:value="${resultDO.rgpAxialos}" name="rgpAxialos" readonly type="text"/></td>
+
                     <td><input readonly th:value="${resultDO.rgpQgdos}" name="rgpQgdos" type="text"/></td>
                     <td><input readonly th:value="${resultDO.rgpBcos}" name="rgpBcos" type="text"/></td>
                     <td><input readonly th:value="${resultDO.rgpDiaos}" name="rgpDiaos" type="text"/></td>

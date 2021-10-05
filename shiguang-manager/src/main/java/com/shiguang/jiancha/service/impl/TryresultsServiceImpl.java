@@ -40,6 +40,12 @@ public class TryresultsServiceImpl implements TryresultsService {
     public int save(TryresultsDO tryresults) {
         return tryresultsDao.save(tryresults);
     }
+    //    <!--//判断是否存在验光号-->
+
+    @Override
+    public List<TryresultsDO> haveYanguangNum(Map<String, Object> map) {
+        return tryresultsDao.haveYanguangNum(map);
+    }
 
     @Override
     public int update(TryresultsDO tryresults) {

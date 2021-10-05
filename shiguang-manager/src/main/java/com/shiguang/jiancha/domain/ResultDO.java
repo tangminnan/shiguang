@@ -841,6 +841,19 @@ public class ResultDO implements Serializable {
     //备注
     private String crtBeizhu;
 
+    //球镜OD右
+    private String crtSphod;
+    //球镜OS左
+    private String crtSphos;
+    //柱镜OD
+    private String crtCylod;
+    //柱镜OS
+    private String crtCylos;
+    //轴向OD
+    private String crtAxialod;
+    //轴向OS
+    private String crtAxialos;
+
     /**
      * 设置：角膜接触镜CRTid
      */
@@ -1219,7 +1232,78 @@ public class ResultDO implements Serializable {
     public String getCrtBeizhu() {
         return crtBeizhu;
     }
-
+    /**
+     * 设置：球镜OD右
+     */
+    public void setCrtSphod(String crtSphod) {
+        this.crtSphod = crtSphod;
+    }
+    /**
+     * 获取：球镜OD右
+     */
+    public String getCrtSphod() {
+        return crtSphod;
+    }
+    /**
+     * 设置：球镜OS左
+     */
+    public void setCrtSphos(String crtSphos) {
+        this.crtSphos = crtSphos;
+    }
+    /**
+     * 获取：球镜OS左
+     */
+    public String getCrtSphos() {
+        return crtSphos;
+    }
+    /**
+     * 设置：柱镜OD
+     */
+    public void setCrtCylod(String crtCylod) {
+        this.crtCylod = crtCylod;
+    }
+    /**
+     * 获取：柱镜OD
+     */
+    public String getCrtCylod() {
+        return crtCylod;
+    }
+    /**
+     * 设置：柱镜OS
+     */
+    public void setCrtCylos(String crtCylos) {
+        this.crtCylos = crtCylos;
+    }
+    /**
+     * 获取：柱镜OS
+     */
+    public String getCrtCylos() {
+        return crtCylos;
+    }
+    /**
+     * 设置：轴向OD
+     */
+    public void setCrtAxialod(String crtAxialod) {
+        this.crtAxialod = crtAxialod;
+    }
+    /**
+     * 获取：轴向OD
+     */
+    public String getCrtAxialod() {
+        return crtAxialod;
+    }
+    /**
+     * 设置：轴向OS
+     */
+    public void setCrtAxialos(String crtAxialos) {
+        this.crtAxialos = crtAxialos;
+    }
+    /**
+     * 获取：轴向OS
+     */
+    public String getCrtAxialos() {
+        return crtAxialos;
+    }
     //框架近用id
     private Long kjjyId;
 
@@ -2093,6 +2177,18 @@ public class ResultDO implements Serializable {
     private String rgpSyjpos;
     //备注
     private String rgpBeizhu;
+    //球镜OD右
+    private String rgpSphod;
+    //球镜OS左
+    private String rgpSphos;
+    //柱镜OD
+    private String rgpCylod;
+    //柱镜OS
+    private String rgpCylos;
+    //轴向OD
+    private String rgpAxialod;
+    //轴向OS
+    private String rgpAxialos;
 
     /**
      * 设置：角膜接触镜CRTid
@@ -2359,6 +2455,79 @@ public class ResultDO implements Serializable {
      */
     public String getRgpBeizhu() {
         return rgpBeizhu;
+    }
+
+    /**
+     * 设置：球镜OD右
+     */
+    public void setRgpSphod(String rgpSphod) {
+        this.rgpSphod = rgpSphod;
+    }
+    /**
+     * 获取：球镜OD右
+     */
+    public String getRgpSphod() {
+        return rgpSphod;
+    }
+    /**
+     * 设置：球镜OS左
+     */
+    public void setRgpSphos(String rgpSphos) {
+        this.rgpSphos = rgpSphos;
+    }
+    /**
+     * 获取：球镜OS左
+     */
+    public String getRgpSphos() {
+        return rgpSphos;
+    }
+    /**
+     * 设置：柱镜OD
+     */
+    public void setRgpCylod(String rgpCylod) {
+        this.rgpCylod = rgpCylod;
+    }
+    /**
+     * 获取：柱镜OD
+     */
+    public String getRgpCylod() {
+        return rgpCylod;
+    }
+    /**
+     * 设置：柱镜OS
+     */
+    public void setRgpCylos(String rgpCylos) {
+        this.rgpCylos = rgpCylos;
+    }
+    /**
+     * 获取：柱镜OS
+     */
+    public String getRgpCylos() {
+        return rgpCylos;
+    }
+    /**
+     * 设置：轴向OD
+     */
+    public void setRgpAxialod(String rgpAxialod) {
+        this.rgpAxialod = rgpAxialod;
+    }
+    /**
+     * 获取：轴向OD
+     */
+    public String getRgpAxialod() {
+        return rgpAxialod;
+    }
+    /**
+     * 设置：轴向OS
+     */
+    public void setRgpAxialos(String rgpAxialos) {
+        this.rgpAxialos = rgpAxialos;
+    }
+    /**
+     * 获取：轴向OS
+     */
+    public String getRgpAxialos() {
+        return rgpAxialos;
     }
     //软性角膜接触镜id
     private Long rxId;
@@ -4265,6 +4434,18 @@ public class ResultDO implements Serializable {
     private String vstSyjpos;
     //备注
     private String vstBeizhu;
+    //球镜OD右
+    private String vstSphod;
+    //球镜OS左
+    private String vstSphos;
+    //柱镜OD
+    private String vstCylod;
+    //柱镜OS
+    private String vstCylos;
+    //轴向OD
+    private String vstAxialod;
+    //轴向OS
+    private String vstAxialos;
 
     /**
      * 设置：角膜接触镜VSTid
@@ -4666,7 +4847,78 @@ public class ResultDO implements Serializable {
     public String getVstBeizhu() {
         return vstBeizhu;
     }
-
+    /**
+     * 设置：球镜OD右
+     */
+    public void setVstSphod(String vstSphod) {
+        this.vstSphod = vstSphod;
+    }
+    /**
+     * 获取：球镜OD右
+     */
+    public String getVstSphod() {
+        return vstSphod;
+    }
+    /**
+     * 设置：球镜OS左
+     */
+    public void setVstSphos(String vstSphos) {
+        this.vstSphos = vstSphos;
+    }
+    /**
+     * 获取：球镜OS左
+     */
+    public String getVstSphos() {
+        return vstSphos;
+    }
+    /**
+     * 设置：柱镜OD
+     */
+    public void setVstCylod(String vstCylod) {
+        this.vstCylod = vstCylod;
+    }
+    /**
+     * 获取：柱镜OD
+     */
+    public String getVstCylod() {
+        return vstCylod;
+    }
+    /**
+     * 设置：柱镜OS
+     */
+    public void setVstCylos(String vstCylos) {
+        this.vstCylos = vstCylos;
+    }
+    /**
+     * 获取：柱镜OS
+     */
+    public String getVstCylos() {
+        return vstCylos;
+    }
+    /**
+     * 设置：轴向OD
+     */
+    public void setVstAxialod(String vstAxialod) {
+        this.vstAxialod = vstAxialod;
+    }
+    /**
+     * 获取：轴向OD
+     */
+    public String getVstAxialod() {
+        return vstAxialod;
+    }
+    /**
+     * 设置：轴向OS
+     */
+    public void setVstAxialos(String vstAxialos) {
+        this.vstAxialos = vstAxialos;
+    }
+    /**
+     * 获取：轴向OS
+     */
+    public String getVstAxialos() {
+        return vstAxialos;
+    }
     private Long ypId;
     //处方类型
     private String ypPrescriptionType;

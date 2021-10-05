@@ -976,7 +976,7 @@
             <tr>
                 <td class="PL30" colspan="2">7 角膜接触镜VST <input type="button" class="input_del" id="remove7" value="删 除"/>
                 </td>
-                <td style="text-align: right" colspan="11">
+                <td style="text-align: right" colspan="14">
                     医生：
                     <select name="vstDoctor">
                         <option></option>
@@ -997,6 +997,9 @@
             </tr>
             <tr class="tabS_bg">
                 <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
                 <td>试戴片编号</td>
                 <td>FK</td>
                 <td>曲率半径</td>
@@ -1012,6 +1015,11 @@
             </tr>
             <tr>
                 <td>OD</td>
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="vstSphod" type="text"onblur="zhengfu(this)"
+                           oninput="getmoney(this,10)" autofocus/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="vstCylod" type="text"onblur="zhengfu(this)"
+                           oninput="getmoney(this,10)" autofocus/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="vstAxialod"  name="vstAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input name="vstSdbhod" type="text"/></td>
                 <td><input name="vstFkod" type="text"/></td>
                 <td><input name="vstQlbjod" type="text"/></td>
@@ -1029,6 +1037,12 @@
             </tr>
             <tr>
                 <td>OS</td>
+
+                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="vstSphos" type="text"onblur="zhengfu(this)"
+                            oninput="getmoney(this,10)" autofocus/></td>
+                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="vstCylos" type="text"onblur="zhengfu(this)"
+                            oninput="getmoney(this,10)" autofocus/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="vstAxialos"  name="vstAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input name="vstSdbhos" type="text"/></td>
                 <td><input name="vstFkos" type="text"/></td>
                 <td><input name="vstQlbjos" type="text"/></td>
@@ -1056,7 +1070,7 @@
             <tr>
                 <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="button" class="input_del" id="remove8" value="删 除"/>
                 </td>
-                <td style="text-align: right" colspan="10">
+                <td style="text-align: right" colspan="13">
                     医生：
                     <select name="crtDoctor">
                         <option></option>
@@ -1077,6 +1091,9 @@
             </tr>
             <tr class="tabS_bg">
                 <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
                 <td>试戴片编号</td>
                 <td>BC</td>
                 <td>RZD</td>
@@ -1091,6 +1108,12 @@
             </tr>
             <tr>
                 <td>OD</td>
+
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="crtSphod" type="text"onblur="zhengfu(this)"
+                           oninput="getmoney(this,10)" autofocus/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="crtCylod" type="text"onblur="zhengfu(this)"
+                           oninput="getmoney(this,10)" autofocus/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="crtAxialod"  name="crtAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input name="crtSdbhod" type="text"/></td>
                 <td><input name="ctrBcod" type="text"/></td>
                 <td><input name="crtRzdod" type="text"/></td>
@@ -1107,6 +1130,11 @@
             </tr>
             <tr>
                 <td>OS</td>
+                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="crtSphos" type="text"onblur="zhengfu(this)"
+                            oninput="getmoney(this,10)" autofocus/></td>
+                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="crtCylos" type="text"onblur="zhengfu(this)"
+                            oninput="getmoney(this,10)" autofocus/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="crtAxialos"  name="crtAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input name="crtSdbhos" type="text"/></td>
                 <td><input name="crtBcos" type="text"/></td>
                 <td><input name="crtRzdos" type="text"/></td>
@@ -1133,7 +1161,7 @@
             <tr>
                 <td class="PL30" colspan="2">9 RGP
                     <input type="button" class="input_del" id="remove9" value="删 除"/></td>
-                <td style="text-align: right" colspan="6">
+                <td style="text-align: right" colspan="9">
                     医生：
                     <select name="rgpDoctor">
                         <option></option>
@@ -1154,6 +1182,9 @@
             </tr>
             <tr class="tabS_bg">
                 <td class="w170">&nbsp;</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
                 <td>屈光度</td>
                 <td>BC</td>
                 <td>DIA</td>
@@ -1164,6 +1195,12 @@
             </tr>
             <tr>
                 <td>OD</td>
+
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="rgpSphod" type="text"onblur="zhengfu(this)"
+                           oninput="getmoney(this,10)" autofocus/></td>
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="rgpCylod" type="text"onblur="zhengfu(this)"
+                           oninput="getmoney(this,10)" autofocus/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="rgpAxialod"  name="rgpAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input name="rgpQgdod" type="text"/></td>
                 <td><input name="rgpBcod" type="text"/></td>
                 <td><input name="rgpDiaod" type="text"/></td>
@@ -1176,6 +1213,12 @@
             </tr>
             <tr>
                 <td>OS</td>
+
+                <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="rgpSphos" type="text"onblur="zhengfu(this)"
+                            oninput="getmoney(this,10)" autofocus/></td>
+                <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="rgpCylos" type="text"onblur="zhengfu(this)"
+                            oninput="getmoney(this,10)" autofocus/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="rgpAxialos"  name="rgpAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input name="rgpQgdos" type="text"/></td>
                 <td><input name="rgpBcos" type="text"/></td>
                 <td><input name="rgpDiaos" type="text"/></td>

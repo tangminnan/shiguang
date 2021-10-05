@@ -4,6 +4,7 @@ import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.RgpDO;
 import com.shiguang.jiancha.domain.TryresultsDO;
 import com.shiguang.member.domain.MemberDO;
+import com.shiguang.mfrs.domain.BrandDO;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,8 @@ public interface TryresultsService {
     int count(Map<String, Object> map);
 
     int save(TryresultsDO tryresults);
-
+    //    <!--//判断是否存在验光号-->
+    List<TryresultsDO> haveYanguangNum(Map<String, Object> map);
     int update(TryresultsDO tryresults);
 
 
