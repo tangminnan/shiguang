@@ -558,6 +558,11 @@ function getYinxing(){
         rightYuanYongZJ = $("#rightShiJuexlZJ").val();
         leftYuanYongQJ = $("#leftShiJuexlQJ").val();
         leftYuanYongZJ = $("#leftShiJuexlZJ").val();
+    } else if (cfType == 8){
+        rightYuanYongQJ = $("#rightVstQJ").val();
+        rightYuanYongZJ = $("#rightVstZJ").val();
+        leftYuanYongQJ = $("#leftVstQJ").val();
+        leftYuanYongZJ = $("#leftVstZJ").val();
     }
     if (cfType == '' && shoutian == 2){
         if (shoutianCFType == 1){
@@ -590,6 +595,11 @@ function getYinxing(){
             rightYuanYongZJ = $("#rightShiJuexlZJ").val();
             leftYuanYongQJ = $("#leftShiJuexlQJ").val();
             leftYuanYongZJ = $("#leftShiJuexlZJ").val();
+        } else if (shoutianCFType == 8){
+            rightYuanYongQJ = $("#rightVstQJ").val();
+            rightYuanYongZJ = $("#rightVstZJ").val();
+            leftYuanYongQJ = $("#leftVstQJ").val();
+            leftYuanYongZJ = $("#leftVstZJ").val();
         }
     }
     if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){

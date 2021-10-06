@@ -655,6 +655,54 @@
 		LEFT JOIN jc_result r ON sx.card_number = r.card_number and r.ptometry_number = sx.ptometry_number
 		UNION
 		SELECT
+		r.card_number AS cardNumber,
+		r.ptometry_number AS ptometryNum,
+		r.create_time AS createTime,
+		jv.vst_prescription_type AS chufangType,
+		jv.vst_optometry_name AS yangsName,
+		jv.`status` AS STATUS,
+		jv.vst_sphod AS rightsph,
+		jv.vst_sphos AS leftsph,
+		jv.vst_cylod AS rightcyl,
+		jv.vst_cylos AS leftcyl,
+		jv.vst_axialod AS rightzx,
+		jv.vst_axialos AS leftzx,
+		jv.vst_sdbhod AS rightprism,
+		jv.vst_sdbhos AS leftprism,
+		jv.vst_fkod AS rightjd,
+		jv.vst_fkos AS leftjd,
+		jv.vst_qlbjod AS rightyytj,
+		jv.vst_qlbjos AS leftyytj,
+		jv.vst_acod AS righttg,
+		jv.vst_acos AS lefttg,
+		jv.vst_jfod AS rightva,
+		jv.vst_jfos AS leftva,
+		jv.vst_diaod AS rightsyjp,
+		jv.vst_diaos AS leftsyjp,
+		jv.vst_bcod AS rightunit,
+		jv.vst_bcos AS leftunit,
+		jv.vst_cpclyod AS rightjytj,
+		jv.vst_cpclyos AS leftjytj,
+		jv.vst_eod AS rightjyva,
+		jv.vst_eos AS leftjyva,
+		jv.vst_vaod AS rightqgd,
+		jv.vst_vaos AS leftqgd,
+		jv.vst_jpysod AS rightbc,
+		jv.vst_jpysos AS leftbc,
+		jv.vst_syjpod AS rightdia,
+		jv.vst_syjpos AS leftdia,
+		'' AS rightsg,
+		'' AS leftsg,
+		'' AS righttssj,
+		'' AS lefttssj,
+		'' AS rightrgpsyjp,
+		'' AS leftrgpsyjp
+		FROM
+		jc_vst jv
+		LEFT JOIN jc_result r ON jv.card_number = r.card_number
+		AND r.ptometry_number = jv.ptometry_number
+		UNION
+		SELECT
 		r.card_number as cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,

@@ -698,6 +698,9 @@
 			<tbody>
 			<tr class="Light_pink">
 				<td>角膜塑形镜VST</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
 				<td>试戴片编号</td>
 				<td>FK</td>
 				<td>曲率半径</td>
@@ -708,23 +711,29 @@
 			</tr>
 			<tr>
 				<td class="Light_pink">OD</td>
-				<td><input type="text" value="" /></td>
-				<td><input type="text" value="" /></td>
-				<td><input type="text" value="" /></td>
-				<td><input type="text" value="" /></td>
-				<td><input type="text" value="" /></td>
-				<td><input type="text" value="" /></td>
-				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" id="rightVstQJ" name="rightQJvst"/></td>
+				<td><input type="text" value="" id="rightVstZJ" name="rightZJvst"/></td>
+				<td><input type="text" value="" id="rightVstzx" name="rightzhouxiangvst" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value="" id="rightVstSdjbh"/></td>
+				<td><input type="text" value="" id="rightVstFK"/></td>
+				<td><input type="text" value="" id="rightVstQlbj"/></td>
+				<td><input type="text" value="" id="rightVstAC"/></td>
+				<td><input type="text" value="" id="rightVstJF"/></td>
+				<td><input type="text" value="" id="rightVstDIA"/></td>
+				<td><input type="text" value="" id="rightVstBC"/></td>
 			</tr>
 			<tr>
 				<td class="Light_pink">OS</td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " id="leftVstQJ" name="leftQJvst"/></td>
+				<td><input type="text" value="" id="leftVstZJ" name="leftZJvst"/></td>
+				<td><input type="text" value="" id="leftVstzx" name="leftzhouxiangvst" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value="" id="leftVstSdjbh"/></td>
+				<td><input type="text" value="" id="leftVstFK"/></td>
+				<td><input type="text" value="" id="leftVstQlbj"/></td>
+				<td><input type="text" value="" id="leftVstAC"/></td>
+				<td><input type="text" value="" id="leftVstJF"/></td>
+				<td><input type="text" value="" id="leftVstDIA"/></td>
+				<td><input type="text" value="" id="leftVstBC"/></td>
 			</tr>
 			<tr class="Light_pink">
 				<td> </td>
@@ -733,38 +742,41 @@
 				<td>VA</td>
 				<td colspan="2">镜片颜色</td>
 				<td colspan="2">品牌</td>
+				<td colspan="3"></td>
 			</tr>
 			<tr>
 				<td class="Light_pink">OD</td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " id="rightVstCPCLY"/></td>
+				<td><input type="text" value=" " id="rightVstE"/></td>
+				<td><input type="text" value=" " id="rightVstVA"/></td>
 				<td colspan="2">
-					<select>
-						<option value="">无色</option>
-						<option value="">蓝色</option>
-						<option value="">粉色</option>
+					<select id="rightVstJPColor">
+						<option value="无色">无色</option>
+						<option value="蓝色">蓝色</option>
+						<option value="粉色">粉色</option>
 					</select>
 				</td>
-				<td colspan="2"><input type="text" value=" " /></td>
+				<td colspan="2"><input type="text" value=" " id="rightVstPinPai"/></td>
+				<td colspan="3"><input type="text" value=" " /></td>
 			</tr>
 			<tr>
 				<td class="Light_pink">OS</td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
-				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " id="leftVstCPCLY"/></td>
+				<td><input type="text" value=" " id="leftVstE"/></td>
+				<td><input type="text" value=" " id="leftVstVA"/></td>
 				<td colspan="2">
-					<select>
+					<select id="leftVstJPColor">
 						<option value="">无色</option>
 						<option value="">蓝色</option>
 						<option value="">粉色</option>
 					</select>
 				</td>
-				<td colspan="2"><input type="text" value=" " /></td>
+				<td colspan="2"><input type="text" value=" " id="leftVstPinPai"/></td>
+				<td colspan="3"><input type="text" value=" " /></td>
 			</tr>
 			<tr>
 				<td class="Light_pink">备注：</td>
-				<td colspan="8"><input class="aling_left" type="text" value=" " /></td>
+				<td colspan="10"><input class="aling_left" type="text" value=" " /></td>
 			</tr>
 			</tbody>
 		</table>
@@ -1311,7 +1323,7 @@
             zhongyong.style="display:none";
             jiaomosx.style="display:none";
             shijuexl.style="display:none";
-            jiaomosxVST.style="display:none";
+            jiaomosxVST.style="display:block";
             jiaomosxCRT.style="display:none";
             rgp.style="display:none";
             yaopin.style="display:none";
@@ -1744,7 +1756,12 @@ var classArray=[];
             rightYuanYongZJ = $("#rightShiJuexlZJ").val();
             leftYuanYongQJ = $("#leftShiJuexlQJ").val();
             leftYuanYongZJ = $("#leftShiJuexlZJ").val();
-		}
+		} else if (cfType == 8){
+            rightYuanYongQJ = $("#rightVstQJ").val();
+            rightYuanYongZJ = $("#rightVstZJ").val();
+            leftYuanYongQJ = $("#leftVstQJ").val();
+            leftYuanYongZJ = $("#leftVstZJ").val();
+        }
 		if (cfType == '' && shoutian == 2){
             if (shoutianCFType == 1){
                 rightYuanYongQJ = $("#rightFuLiaoQJ").val();
@@ -1776,6 +1793,11 @@ var classArray=[];
                 rightYuanYongZJ = $("#rightShiJuexlZJ").val();
                 leftYuanYongQJ = $("#leftShiJuexlQJ").val();
                 leftYuanYongZJ = $("#leftShiJuexlZJ").val();
+            }  else if (shoutianCFType == 8){
+                rightYuanYongQJ = $("#rightVstQJ").val();
+                rightYuanYongZJ = $("#rightVstZJ").val();
+                leftYuanYongQJ = $("#leftVstQJ").val();
+                leftYuanYongZJ = $("#leftVstZJ").val();
             }
 		}
         if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
@@ -2236,7 +2258,7 @@ var classArray=[];
         $("#ptometryNumber").val(data.ptometryNum);
         // alert(data.chufangType)
         getType(data.chufangType);
-        if (data.chufangType == 5){
+        if (data.chufangType == 5 || data.chufangType == 8){
             $("#eyeType1").removeAttr("checked");
             $("#eyeType2").attr("checked","checked");
         } else {
@@ -2527,7 +2549,44 @@ var classArray=[];
             if (data.leftjyva != ''){
                 document.getElementById("leftSJXLjyva").readOnly=true;
             }
-		} else if (data.chufangType == 10){
+		}  else if (data.chufangType == 8){
+            $("#rightVstQJ").val(data.rightsph);
+            document.getElementById("rightVstQJ").readOnly=true;
+            $("#rightVstZJ").val(data.rightcyl);
+            document.getElementById("rightVstZJ").readOnly=true;
+            $("#rightVstzx").val(data.rightzx);
+            document.getElementById("rightVstzx").readOnly=true;
+            $("#rightVstSdjbh").val(data.rightprism);
+            $("#rightVstFK").val(data.rightjd);
+            $("#rightVstQlbj").val(data.rightyytj);
+            $("#rightVstAC").val(data.righttg);
+            $("#rightVstJF").val(data.rightva);
+            $("#rightVstDIA").val(data.rightsyjp);
+            $("#rightVstBC").val(data.rightunit);
+            $("#rightVstCPCLY").val(data.rightjytj);
+            $("#rightVstE").val(data.rightjyva);
+            $("#rightVstVA").val(data.rightqgd);
+            $("#rightVstJPColor").val(data.rightbc);
+            $("#rightVstPinPai").val(data.rightdia);
+            $("#leftVstQJ").val(data.leftsph);
+            document.getElementById("leftVstQJ").readOnly=true;
+            $("#leftVstZJ").val(data.leftcyl);
+            document.getElementById("leftVstZJ").readOnly=true;
+            $("#leftVstzx").val(data.leftzx);
+            document.getElementById("leftVstzx").readOnly=true;
+            $("#leftVstSdjbh").val(data.leftprism);
+            $("#leftVstFK").val(data.leftjd);
+            $("#leftVstQlbj").val(data.leftyytj);
+            $("#leftVstAC").val(data.lefttg);
+            $("#leftVstJF").val(data.leftva);
+            $("#leftVstDIA").val(data.leftsyjp);
+            $("#leftVstBC").val(data.leftunit);
+            $("#leftVstCPCLY").val(data.leftjytj);
+            $("#leftVstE").val(data.leftjyva);
+            $("#leftVstVA").val(data.leftqgd);
+            $("#leftVstJPColor").val(data.leftbc);
+            $("#leftVstPinPai").val(data.leftdia);
+        } else if (data.chufangType == 10){
             $("#rightRGPqgd").val(data.rightqgd);
             if (data.rightqgd != ''){
                 document.getElementById("rightRGPqgd").readOnly=true;
