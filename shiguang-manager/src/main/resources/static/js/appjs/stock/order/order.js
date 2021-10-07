@@ -184,3 +184,20 @@ function updateEnable() {
 
 
 }
+
+
+// /**
+//  * 模板导入会员
+//  */
+// function importtemplate(){
+//     var checkType='PU_TONG';
+//     var toIndex = layer.open({
+//         type : 2,
+//         title : '批调导入',
+//         maxmin : true,
+//         shadeClose : false, // 点击遮罩关闭层
+//         area : [ '800px', '520px' ],
+//         content : prefix + '/information/'+checkType // iframe的url
+//     });
+//     layer.full(toIndex)
+// }

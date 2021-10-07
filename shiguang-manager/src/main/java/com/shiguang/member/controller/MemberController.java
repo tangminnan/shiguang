@@ -148,30 +148,30 @@ public class MemberController {
         return "member/edit";
     }
 
-    @GetMapping("/information/{checkType}")
-    @RequiresPermissions("information:member:member")
-    public String importtemplate(Model model, @PathVariable("checkType") String checkType) {
-        model.addAttribute("checkType", checkType);
-        Map<String, Object> map = new HashMap<>();
-        List<DepartmentDO> departmentDOList = departmentService.list(map);
-        map.put("state",1);
-        model.addAttribute("departmentDOList",departmentDOList);
-        if ("PU_TONG".equals(checkType)) {
-            return "member/importtemplate";
-        }
-        return null;
-    }
-
-    /**
-     * 导入
-     */
-    @PostMapping("/importMember")
-    @ResponseBody
-    @RequiresPermissions("information:member:member")
-    public R importMember(String departNumber, String checkType, MultipartFile file) {
-        return memberService.importMember(departNumber, checkType, file);
-
-    }
+//    @GetMapping("/information/{checkType}")
+//    @RequiresPermissions("information:member:member")
+//    public String importtemplate(Model model, @PathVariable("checkType") String checkType) {
+//        model.addAttribute("checkType", checkType);
+//        Map<String, Object> map = new HashMap<>();
+//        List<DepartmentDO> departmentDOList = departmentService.list(map);
+//        map.put("state",1);
+//        model.addAttribute("departmentDOList",departmentDOList);
+//        if ("PU_TONG".equals(checkType)) {
+//            return "member/importtemplate";
+//        }
+//        return null;
+//    }
+//
+//    /**
+//     * 导入
+//     */
+//    @PostMapping("/importMember")
+//    @ResponseBody
+//    @RequiresPermissions("information:member:member")
+//    public R importMember(String departNumber, String checkType, MultipartFile file) {
+//        return memberService.importMember(departNumber, checkType, file);
+//
+//    }
 
     @GetMapping("/detail/{id}")
     @RequiresPermissions("information:member:detail")

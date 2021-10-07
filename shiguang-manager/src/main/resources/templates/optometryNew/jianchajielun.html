@@ -290,7 +290,7 @@
                 </td>
                 <td><input th:value="${tryresultsDO.yuanRrty}" name="kjyyYytjod" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightRighttry}" name="kjyyTgod" type="text"/></td>
-                <td><input name="kjyyVaod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaRighttry}" name="kjyyVaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
@@ -314,7 +314,7 @@
                 </td>
                 <td><input th:value="${tryresultsDO.yuanLrty}"      name="kjyyYytjos" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightLefttry}" name="kjyyTgos" type="text"/></td>
-                <td><input name="kjyyVaos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaLefttry}"  name="kjyyVaos" type="text"/></td>
             </tr>
             <tr>
                 <td rowspan="2" colspan="1">建议镜片材质:</td>
@@ -429,7 +429,7 @@
                 </td>
                 <td><input th:value="${tryresultsDO.yuanRrty}"name="kjjyYytjod" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightRighttry}"name="kjjyTgod" type="text"/></td>
-                <td><input name="kjjyVaod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaRighttry}"  name="kjjyVaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
@@ -452,7 +452,7 @@
                 </td>
                 <td><input  th:value="${tryresultsDO.yuanLrty}"       name="kjjyYytjos" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.heightLefttry}"  name="kjjyTgos" type="text"/></td>
-                <td><input name="kjjyVaos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaLefttry}"  name="kjjyVaos" type="text"/></td>
             </tr>
             <tr>
                 <td rowspan="2" colspan="1">建议镜片材质:</td>
@@ -559,8 +559,8 @@
                 <td><input  th:value="${tryresultsDO.yuanRrty}"        name="sgjjYytjod" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.nearRighttry}"   name="sgjjJytjod" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.heightLefttry}"   name="sgjjTgod" type="text"/></td>
-                <td><input  name="sgjjYyvaod" type="text"/></td>
-                <td><input  name="sgjjJyvaod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.dvaRighttry}"  name="sgjjYyvaod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.nvaRighttry}"  name="sgjjJyvaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
@@ -574,8 +574,8 @@
                 <td><input    th:value="${tryresultsDO.yuanLrty}"       name="sgjjYytjos" type="text"/></td>
                 <td><input    th:value="${tryresultsDO.nearLefttry}"   name="sgjjJytjos" type="text"/></td>
                 <td><input    th:value="${tryresultsDO.heightLefttry}"  name="sgjjTgos" type="text"/></td>
-                <td><input  name="sgjjYyvaos" type="text"/></td>
-                <td><input  name="sgjjJyvaos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaLefttry}"  name="sgjjYyvaos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.nvaLefttry}"  name="sgjjJyvaos" type="text"/></td>
             </tr>
             <tr>
                 <td rowspan="2" colspan="1">建议镜片材质:</td>
@@ -678,7 +678,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialRighttry}"  id="rxAxialod" name="rxAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input name="rxZjod" type="text"/></td>
-                <td><input name="rxVaod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaRighttry}"  name="rxVaod" type="text"/></td>
                 <td>适用镜片：<input name="rxSyjpod" style="width:60%" type="text"/></td>
                 <td><input name="rxUnitod" type="text"/></td>
                 <td rowspan="2">
@@ -699,7 +699,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialLefttry}" id="rxAxialos"  name="rxAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
                 <td><input name="rxZjos" type="text"/></td>
-                <td><input name="rxVaos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaLefttry}"  name="rxVaos" type="text"/></td>
                 <td>适用镜片：<input name="rxSyjpos" style="width:60%" type="text"/></td>
                 <td><input name="rxUnitos" type="text"/></td>
             </tr>
@@ -777,7 +777,7 @@
                 </td>
                 <td><input name="zyZytjod" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightRighttry}" name="zyTgod" type="text"/></td>
-                <td><input name="zyVaod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaRighttry}" name="zyVaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
@@ -800,7 +800,7 @@
                 </td>
                 <td><input name="zyZytjos" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightLefttry}" name="zyTgos" type="text"/></td>
-                <td><input name="zyVaos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaLefttry}" name="zyVaos" type="text"/></td>
             </tr>
             <tr>
                 <td rowspan="2" colspan="1">建议镜片材质:</td>
@@ -915,8 +915,8 @@
                 </td>
                 <td><input name="sjxlYytjod" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.heightRighttry}"name="sjxlJytjod" type="text"/></td>
-                <td><input name="sjxlYyvaod" type="text"/></td>
-                <td><input name="sjxlJyvaod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.dvaRighttry}"  name="sjxlYyvaod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.nvaRighttry}"  name="sjxlJyvaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
@@ -939,8 +939,8 @@
                 </td>
                 <td><input name="sjxlYytjos" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightLefttry}"  name="sjxlJytjos" type="text"/></td>
-                <td><input name="sjxlYyvaos" type="text"/></td>
-                <td><input name="sjxlJyvaos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.dvaLefttry}"  name="sjxlYyvaos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.nvaLefttry}"  name="sjxlJyvaos" type="text"/></td>
             </tr>
             <tr>
                 <td>家庭训练：</td>
@@ -1029,7 +1029,7 @@
                 <td><input name="vstBcod" type="text"/></td>
                 <td><input name="vstCpclyod" type="text"/></td>
                 <td><input name="vstEod" type="text"/></td>
-                <td><input name="vstVaod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.dvaRighttry}" name="vstVaod" type="text"/></td>
                 <td>
                     <select name="vstJpysod"></select>
                 </td>
@@ -1052,7 +1052,7 @@
                 <td><input name="vstBcos" type="text"/></td>
                 <td><input name="vstCpclyos" type="text"/></td>
                 <td><input name="vstEos" type="text"/></td>
-                <td><input name="vstVaos" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.dvaLefttry}" name="vstVaos" type="text"/></td>
                 <td>
                     <select name="vstJpysos"></select>
                 </td>
@@ -1122,7 +1122,7 @@
                 <td><input name="crtLza2od" type="text"/></td>
                 <td><input name="crtJfod" type="text"/></td>
                 <td><input name="crtDiaod" type="text"/></td>
-                <td><input name="crtVaod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaRighttry}"  name="crtVaod" type="text"/></td>
                 <td>
                     <select name="crtJpysod"></select>
                 </td>
@@ -1143,7 +1143,7 @@
                 <td><input name="crtLza2os" type="text"/></td>
                 <td><input name="crtJfos" type="text"/></td>
                 <td><input name="crtDiaos" type="text"/></td>
-                <td><input name="crtVaos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaLefttry}"  name="crtVaos" type="text"/></td>
                 <td>
                     <select name="crtJpysos"></select>
                 </td>
@@ -1402,12 +1402,14 @@
     $(".button_true").click(function () {
         goodsidstr($(".select_value").val());
     });
+    //点击删除处方数值为空
     $(".input_del").click(function () {
         // console.log($(this).parentsUntil('table').eq(2).parent());
         // $('table tbody').empty();
         // $(this).parentsUntil('table').value="";
-        $(this).parentsUntil('table').eq(2).parent().find("input").not(".input_del").val("")
-        $(this).parentsUntil('table').eq(2).parent().find("select").val("")
+        // $(this).parentsUntil('table').eq(2).parent().find("input").not(".input_del").val("");
+        $(this).parentsUntil('table').eq(2).parent().find("input");
+        $(this).parentsUntil('table').eq(2).parent().find("select").val("");
         $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
     });
 

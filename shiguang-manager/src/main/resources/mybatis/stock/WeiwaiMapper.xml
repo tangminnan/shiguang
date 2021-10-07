@@ -1180,12 +1180,39 @@
 
 
 	<select id="jkPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select w.*,s.right_fartj,s.left_fartj,s.right_neartj,s.left_neartj from stock_weiwai w join  stock_weiwaishuju s on  w.sale_number =s.number
-		 where w.danju_number = #{value}
+			SELECT
+				w.*,
+				s.right_fartj,
+				s.left_fartj,
+				s.right_neartj,
+				s.left_neartj,
+				j.view_good_name as goodsName,
+				jp.view_good_name as goodsName2
+			FROM
+				stock_weiwai w
+				JOIN stock_weiwaishuju s ON w.sale_number = s.number
+				JOIN aa_jpdz j ON s.right_num=j.produc_num
+				JOIN aa_jpdz jp ON s.left_num=jp.produc_num
+				where w.danju_number = #{value}
 	</select>
+<!--	<select id="yxPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
+<!--			select -->
+<!--				w.*,s.right_fartj,s.left_fartj,s.right_neartj,s.left_neartj,-->
+<!--				y.view_good_name as goodsName,-->
+<!--				yx.view_good_name as goodsName2-->
+<!--			 from stock_weiwai w -->
+<!--			join  stock_weiwaishuju s on  w.sale_number =s.number-->
+<!--			JOIN aa_yxdz y ON s.right_num=y.produc_num-->
+<!--			JOIN aa_yxdz yx ON s.left_num=yx.produc_num		-->
+<!--			 where w.danju_number = #{value}-->
+<!--	</select>-->
 	<select id="yxPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select w.*,s.right_fartj,s.left_fartj,s.right_neartj,s.left_neartj from stock_weiwai w join  stock_weiwaishuju s on  w.sale_number =s.number
-		 where w.danju_number = #{value}
+			select w.*,s.right_fartj,s.left_fartj,s.right_neartj,s.left_neartj from stock_weiwai w join  stock_weiwaishuju s on  w.sale_number =s.number
+			 from stock_weiwai w
+			join  stock_weiwaishuju s on  w.sale_number =s.number
+			JOIN aa_yxdz y ON s.right_num=y.produc_num
+			JOIN aa_yxdz yx ON s.left_num=yx.produc_num
+			 where w.danju_number = #{value}
 	</select>
 
 

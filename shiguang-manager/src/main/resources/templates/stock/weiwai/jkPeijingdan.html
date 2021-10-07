@@ -13,7 +13,7 @@
 	h4{font-size: 20px;margin-bottom: 15px;}
 	h3{text-align: center;font-size: 24px;letter-spacing:2px;margin-bottom: 25px;}
 	table{width: 100%;table-layout:fixed;word-break:break-all;word-wrap:break-word;border-collapse:collapse;}
-	table td,table th{padding:5px 3px;}
+	/*table td,table th{padding:5px 3px;}*/
 	.tabB{border-left:1px solid #000;border-top:1px solid #000;text-align: center;margin:10px 0;}
 	.tabB td,.tabB th{border-right:1px solid #000;border-bottom:1px solid #000;}
 	.tabC b{width:100px;display: inline-block;text-align:right;margin-right:10px;}
@@ -30,6 +30,7 @@
 			<td><b>订单编号：</b><span th:text="${weiwaiDO.danjuNumber}"></span></td>
 			<td><b>订单日期：</b><span th:text="${weiwaiDO.danjuDay}"></span></td>
 			<td><b>制造商：</b><span th:text="${weiwaiDO.mfrsname}"></span></td>
+			<td><b>打印日期：</b><span th:text="${dayinDay}"></span></td>
 		</tr>
 	</table>
 	<table class="tabB" border="0" cellspacing="0" cellpadding="0">
@@ -37,28 +38,28 @@
 			<tr>
 				<th width="100">配镜单号</th>
 				<th width="20%">商品名称</th>
-				<th width="80">委外方式</th>
-				<th width="50">R/L</th>
+				<th width="50">委外方式</th>
+				<th width="40">R/L</th>
 				<th width="50">球镜</th>
 				<th width="50">柱镜</th>
-				<th width="50">轴向</th>
-				<th width="50">瞳距(远)</th>
-				<th width="50">瞳距(近)</th>
-				<th width="50">瞳高</th>
-				<th width="50">下加</th>
-				<th width="50">棱镜</th>
-				<th width="50">基底</th>
-				<th width="50">直径</th>
-				<th width="50">数量</th>
+				<th width="40">轴向</th>
+				<th width="40">瞳距(远)</th>
+				<th width="40">瞳距(近)</th>
+				<th width="40">瞳高</th>
+				<th width="40">下加</th>
+				<th width="40">棱镜</th>
+				<th width="40">基底</th>
+				<th width="40">直径</th>
+				<th width="40">数量</th>
 				<th width="100">取镜日期</th>
-				<th width="80">顾客姓名</th>
-<!--				<th width="80">销售门店</th>-->
-				<th width="80">备注</th>
+				<th width="20">顾客姓名</th>
+<!--				<th width="40">销售门店</th>-->
+				<th width="40">备注</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td rowspan="2"><span th:text="${weiwaiDO.saleNumber}"></span></td>
+				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>
 				<td><span th:text="${weiwaiDO.goodsName}"></span></td>
 				<td><span th:text="${weiwaiDO.style}"></span></td>
 				<td><span th:text="${weiwaiDO.rl}"></span></td>
@@ -84,7 +85,7 @@
 				<td><span th:text="${weiwaiDO.sph2}"></span></td>
 				<td><span th:text="${weiwaiDO.cyl2}"></span></td>
 				<td><span th:text="${weiwaiDO.axial2}"></span></td>
-				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>
+				<td><span th:text="${weiwaiDO.leftFartj}"></span></td>
 				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>
 				<td> </td>
 				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>
@@ -94,28 +95,255 @@
 				<td><span th:text="${weiwaiDO.count2}"></span></td>
 				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>
 			</tr>
+<!--			<tr>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
+<!--			</tr>-->
+
+<!--			<tr>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
+<!--			</tr>-->
+
+<!--			<tr>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
+<!--			</tr>-->
+
+<!--			<tr>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
+<!--			</tr>-->
+
+<!--			<tr>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
+<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
+<!--			</tr>-->
+<!--			<tr>-->
+<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
+<!--				<td> </td>-->
+<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
+<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
+<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
+<!--			</tr>-->
 		</tbody>
 	</table>
 	<table class="tabC" border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<td colspan="2"><b>备注：</b>此批订货请于<em></em>月<em></em>日前送达。</td>
-		</tr>
-		<tr>
-			<td colspan="3"><b>收货地址：</b><span th:text="${weiwaiDO.shouhuoAddress}"></span></td>
-		</tr>
+<!--		<tr>-->
+<!--			<td colspan="2"><b>备注：</b>此批订货请于<em></em>月<em></em>日前送达。</td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td colspan="3"><b>收货地址：</b><span th:text="${weiwaiDO.shouhuoAddress}"></span></td>-->
+<!--		</tr>-->
 
 		<tr>
 			<td><b>联系人：</b><span th:text="${weiwaiDO.shouhuoPeople}"></span></td>
 			<td><b>联系电话：</b><span th:text="${weiwaiDO.shouhuoPhone}"></span></td>
+			<td colspan="3"><b>收货地址：</b><span th:text="${weiwaiDO.shouhuoAddress}"></span></td>
 		</tr>
 		<tr>
 			<td><b>制单人：</b><span th:text="${weiwaiDO.zhidanPeople}"></span></td>
 			<td><b>审核人：</b><span th:text="${weiwaiDO.zhidanPeople}"></span></td>
-			<td><b>审核日期：</b><span th:text="${weiwaiDO.danjuDay}"></span>-08-29</td>
+			<td colspan="2"><b>审核日期：</b><span th:text="${weiwaiDO.danjuDay}"></span></td>
 		</tr>
-		<tr>
-			<td colspan="3"><b>打印日期：</b><span th:text="${dayinDay}"></span></td>
-		</tr>
+<!--		<tr>-->
+<!--			<td colspan="3"><b>打印日期：</b><span th:text="${dayinDay}"></span></td>-->
+<!--		</tr>-->
 	</table>
 </div>
 </body>

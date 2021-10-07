@@ -64,7 +64,7 @@ public class WeiwaiController {
 	String Weiwai(){
 	    return "stock/weiwai/weiwai";
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("stock:weiwai:weiwai")
@@ -76,7 +76,7 @@ public class WeiwaiController {
 		PageUtils pageUtils = new PageUtils(weiwaiList, total);
 		return pageUtils;
 	}
-	
+
 	@GetMapping("/add")
 	@RequiresPermissions("stock:weiwai:add")
 	String add(Model model){
@@ -501,7 +501,7 @@ public class WeiwaiController {
 		weiwaiService.update(weiwai);
 		return R.ok();
 	}
-	
+
 	/**
 	 * 删除
 	 */
@@ -514,7 +514,7 @@ public class WeiwaiController {
 		}
 		return R.error();
 	}
-	
+
 	/**
 	 * 删除
 	 */
