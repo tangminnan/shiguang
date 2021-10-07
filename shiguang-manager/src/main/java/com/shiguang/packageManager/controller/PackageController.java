@@ -54,6 +54,8 @@ public class PackageController {
     @Autowired
     private JpdzService jpdzService;
     @Autowired
+    private YxdzService yxdzService;
+    @Autowired
     private TyjService tyjService;
     @Autowired
     private OldlensService oldlensService;
@@ -170,6 +172,7 @@ public class PackageController {
         List<PartsDO> partsDOList = new ArrayList<>();
         List<JpcpDO> jpcpDOList = new ArrayList<>();
         List<JpdzDO> jpdzDOList = new ArrayList<>();
+        List<YxdzDO> yxdzDOList = new ArrayList<>();
         List<TyjDO> tyjDOList = new ArrayList<>();
         List<OldlensDO> oldlensDOList = new ArrayList<>();
         List<HcDO> hcDOList = new ArrayList<>();
@@ -197,6 +200,10 @@ public class PackageController {
             jpdzDOList = jpdzService.listDz(query);
             int total = jpdzService.countDz(query);
             pageUtils = new PageUtils(jpdzDOList, total);
+        }  else if ("隐形订做片".equals(query.get("goodsType"))){
+            yxdzDOList = yxdzService.list(query);
+            int total = yxdzService.count(query);
+            pageUtils = new PageUtils(yxdzDOList, total);
         } else if ("太阳镜".equals(query.get("goodsType"))){
             tyjDOList = tyjService.list(query);
             int total = tyjService.count(query);
