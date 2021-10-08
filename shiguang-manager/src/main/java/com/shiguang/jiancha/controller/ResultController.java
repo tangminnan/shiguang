@@ -106,11 +106,29 @@ public class ResultController {
     @RequiresPermissions("jiancha:result:add")
     public R save(ResultDO result,TryresultsDO tryresultsDO) {
 
+//        String kjyy = result.getKjyyPrescriptionType();
+//        String[] kjyytype = kjyy.split(",");
+//        String kjyytypes = kjyytype[0];
+//        result.setKjyyPrescriptionType(kjyytypes);
+
 //        处方类型所有数据保存
          if (result.getKjyyPrescriptionType() != null  && result.getKjyyPrescriptionType() != "") {
              if (result.getKjyyDoctor() == "" || result.getKjyyOptometryName() == "") {
                  return R.error("请选择医生或验光师");
              } else {
+                 if ("".equals(result.getKjyySphod())){
+                     result.setKjyySphod("0.00");
+                 }
+                 if ("".equals(result.getKjyySphos())){
+                     result.setKjyySphos("0.00");
+                 }
+                 if ("".equals(result.getKjyyCylod())){
+                     result.setKjyyCylod("0.00");
+                 }
+                 if ("".equals(result.getKjyyCylos())){
+                     result.setKjyyCylos("0.00");
+                 }
+
                  kjyyServce.savekjyy(result);
              }
          }
@@ -121,6 +139,20 @@ public class ResultController {
              if (result.getKjjyDoctor() == "" || result.getKjjyOptometryName() == "") {
                  return R.error("请选择医生或验光师");
              } else {
+
+
+                 if ("".equals(result.getKjjySphod())){
+                     result.setKjjySphod("0.00");
+                 }
+                 if ("".equals(result.getKjjySphos())){
+                     result.setKjjySphos("0.00");
+                 }
+                 if ("".equals(result.getKjjyCylod())){
+                     result.setKjjyCylod("0.00");
+                 }
+                 if ("".equals(result.getKjjyCylos())){
+                     result.setKjjyCylos("0.00");
+                 }
                  kjjyService.savekjjy(result);
              }
          }
@@ -129,6 +161,19 @@ public class ResultController {
             if (result.getSgjjDoctor() == "" || result.getSgjjOptometryName() == "") {
                 return R.error("请选择医生或验光师");
             } else {
+
+                if ("".equals(result.getSgjjSphod())){
+                    result.setSgjjSphod("0.00");
+                }
+                if ("".equals(result.getSgjjSphos())){
+                    result.setSgjjSphos("0.00");
+                }
+                if ("".equals(result.getSgjjCylod())){
+                    result.setSgjjCylod("0.00");
+                }
+                if ("".equals(result.getSgjjCylos())){
+                    result.setSgjjCylos("0.00");
+                }
                 sgjjService.savesgjj(result);
             }
         }
@@ -137,6 +182,20 @@ public class ResultController {
            if (result.getRxDoctor() == "" || result.getRxOptometryName() == "") {
                return R.error("请选择医生或验光师");
            } else {
+
+
+               if ("".equals(result.getRxSphod())){
+                   result.setRxSphod("0.00");
+               }
+               if ("".equals(result.getRxSphos())){
+                   result.setRxSphos("0.00");
+               }
+               if ("".equals(result.getRxCylod())){
+                   result.setRxCylod("0.00");
+               }
+               if ("".equals(result.getRxCylos())){
+                   result.setRxCylos("0.00");
+               }
                rxjmjcjService.saveRxjmjcj(result);
            }
        }
@@ -146,6 +205,20 @@ public class ResultController {
             if (result.getZyDoctor() == "" || result.getZyOptometryName() == "") {
                 return R.error("请选择医生或验光师");
             } else {
+
+
+                if ("".equals(result.getZySphod())){
+                    result.setZySphod("0.00");
+                }
+                if ("".equals(result.getZySphos())){
+                    result.setZySphos("0.00");
+                }
+                if ("".equals(result.getZyCylod())){
+                    result.setZyCylod("0.00");
+                }
+                if ("".equals(result.getZyCylos())){
+                    result.setZyCylos("0.00");
+                }
                 zyService.saveZY(result);
             }
         }
@@ -154,6 +227,20 @@ public class ResultController {
             if (result.getSjxlDoctor() == "" || result.getSjxlOptometryName() == "") {
                 return R.error("请选择医生或验光师");
             } else {
+
+
+                if ("".equals(result.getSjxlSphod())){
+                    result.setSjxlSphod("0.00");
+                }
+                if ("".equals(result.getSjxlSphos())){
+                    result.setSjxlSphos("0.00");
+                }
+                if ("".equals(result.getSjxlCylod())){
+                    result.setSjxlCylod("0.00");
+                }
+                if ("".equals(result.getSjxlCylos())){
+                    result.setSjxlCylos("0.00");
+                }
                 sjxlService.saveSjxl(result);
             }
         }
@@ -163,6 +250,20 @@ public class ResultController {
              if (result.getVstDoctor() == "" ||  result.getVstOptometryName() == ""){
                  return R.error("请选择医生或验光师");
              } else {
+
+
+                 if ("".equals(result.getVstSphod())){
+                     result.setVstSphod("0.00");
+                 }
+                 if ("".equals(result.getVstSphos())){
+                     result.setVstSphos("0.00");
+                 }
+                 if ("".equals(result.getVstCylod())){
+                     result.setVstCylod("0.00");
+                 }
+                 if ("".equals(result.getVstCylos())){
+                     result.setVstCylos("0.00");
+                 }
                  vstService.saveVst(result);
              }
         }
@@ -172,6 +273,19 @@ public class ResultController {
            if (result.getCrtDoctor() == "" ||  result.getCrtOptometryName() == ""){
                return R.error("请选择医生或验光师");
            } else {
+
+               if ("".equals(result.getCrtSphod())){
+                   result.setCrtSphod("0.00");
+               }
+               if ("".equals(result.getCrtSphos())){
+                   result.setCrtSphos("0.00");
+               }
+               if ("".equals(result.getCrtCylod())){
+                   result.setCrtCylod("0.00");
+               }
+               if ("".equals(result.getCrtCylos())){
+                   result.setCrtCylos("0.00");
+               }
                crtService.saveCrt(result);
            }
         }
@@ -181,6 +295,19 @@ public class ResultController {
              if (result.getRgpDoctor() == "" || result.getRgpOptometryName() == "") {
                  return R.error("请选择医生或验光师");
              } else {
+
+                 if ("".equals(result.getRgpSphod())){
+                     result.setRgpSphod("0.00");
+                 }
+                 if ("".equals(result.getRgpSphos())){
+                     result.setRgpSphos("0.00");
+                 }
+                 if ("".equals(result.getRgpCylod())){
+                     result.setRgpCylod("0.00");
+                 }
+                 if ("".equals(result.getRgpCylos())){
+                     result.setRgpCylos("0.00");
+                 }
                  rgpService.saveRgp(result);
              }
          }
@@ -190,7 +317,6 @@ public class ResultController {
             if (result.getYpDoctor() == "" || result.getYpOptometryName() == "") {
                 return R.error("请选择医生或验光师");
             } else {
-
                 yaopinService.saveYaopin(result);
             }
         }
@@ -236,7 +362,7 @@ public class ResultController {
      */
     @ResponseBody
     @RequestMapping("/upremove")
-    @RequiresPermissions("jiancha:result:upremove")
+//    @RequiresPermissions("jiancha:result:upremove")
     public R upremove(String  ptometryNumber) {
         ResultDO resultDO = new ResultDO();
         resultDO.setStatus("0");

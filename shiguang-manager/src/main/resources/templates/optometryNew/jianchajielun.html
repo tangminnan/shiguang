@@ -233,7 +233,7 @@
             <tbody id="kuangjiayy">
             <tr>
                 <td class="PL30" colspan="2">1 框架--远用
-                    <input type="button" class="input_del" id="remove1" value="删 除"/>
+                    <input type="button" class="input_del" id="remove1" value="删 除" onclick="deleteInput(this)"/>
                 </td>
 
                 <td style="text-align: right" colspan="7">
@@ -376,7 +376,7 @@
             <tbody id="kuangjiajy">
             <tr>
                 <td class="PL30" colspan="2">2 框架--近用
-                    <input type="button" class="input_del" id="remove2" value="删 除"/></td>
+                    <input type="button" class="input_del" id="remove2" value="删 除" onclick="deleteInput(this)"/></td>
                 <td style="text-align: right" colspan="7">
                     医生：
                     <select id="kjjyDoctor" name="kjjyDoctor">
@@ -514,7 +514,7 @@
             <tbody id="jianjsg">
             <tr>
                 <td class="PL30" colspan="2">3
-                    框架--双光/渐进 <input type="button" class="input_del" id="remove3" value="删 除"/>
+                    框架--双光/渐进 <input type="button" class="input_del" id="remove3" value="删 除" onclick="deleteInput(this)"/>
                 </td>
                 <td style="text-align: right" colspan="8">
                     医生：
@@ -636,7 +636,7 @@
         <table id="tab4" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="ruanxjmjcj">
             <tr>
-                <td class="PL30" colspan="2">4 软性角膜接触镜 <input type="button" class="input_del" id="remove4" value="删 除"/>
+                <td class="PL30" colspan="2">4 软性角膜接触镜 <input type="button" class="input_del" id="remove4" value="删 除" onclick="deleteInput(this)"/>
                 </td>
                 <td style="text-align: right" colspan="8">
                     医生：
@@ -725,7 +725,7 @@
         <table id="tab5" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="kuangjiazy">
             <tr>
-                <td class="PL30" colspan="2">5 框架--中用 <input type="button" class="input_del" id="remove5" value="删 除"/></td>
+                <td class="PL30" colspan="2">5 框架--中用 <input type="button" class="input_del" id="remove5" value="删 除" onclick="deleteInput(this)"/></td>
                 <td style="text-align: right" colspan="7">
                     医生：
                     <select id="zyDoctor" name="zyDoctor">
@@ -862,7 +862,7 @@
             <tbody id="shijxl">
             <tr>
                 <td class="PL30" colspan="2">6 视觉训练
-                    <input type="button" class="input_del" id="remove6" value="删 除"/></td>
+                    <input type="button" class="input_del" id="remove6" value="删 除" onclick="deleteInput(this)"/></td>
                 <td style="text-align: right" colspan="8">
                     医生：
                     <select name="sjxlDoctor">
@@ -974,7 +974,7 @@
         <table id="tab7" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="jmvst">
             <tr>
-                <td class="PL30" colspan="2">7 角膜接触镜VST <input type="button" class="input_del" id="remove7" value="删 除"/>
+                <td class="PL30" colspan="2">7 角膜接触镜VST <input type="button" class="input_del" id="remove7" value="删 除" onclick="deleteInput(this)"/>
                 </td>
                 <td style="text-align: right" colspan="14">
                     医生：
@@ -1068,7 +1068,7 @@
         <table id="tab8" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="jmcrt">
             <tr>
-                <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="button" class="input_del" id="remove8" value="删 除"/>
+                <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="button" class="input_del" id="remove8" value="删 除" onclick="deleteInput(this)"/>
                 </td>
                 <td style="text-align: right" colspan="13">
                     医生：
@@ -1160,7 +1160,7 @@
             <tbody id="jcrgp">
             <tr>
                 <td class="PL30" colspan="2">9 RGP
-                    <input type="button" class="input_del" id="remove9" value="删 除"/></td>
+                    <input type="button" class="input_del" id="remove9" value="删 除" onclick="deleteInput(this)"/></td>
                 <td style="text-align: right" colspan="9">
                     医生：
                     <select name="rgpDoctor">
@@ -1240,7 +1240,7 @@
             <tbody id="jcyp">
             <tr>
                 <td class="PL30" colspan="2">10 药品
-                    <input type="button" class="input_del" id="remove10" value="删 除"/></td>
+                    <input type="button" class="input_del" id="remove10" value="删 除" onclick="deleteInput(this)"/></td>
                 <td style="text-align: right">
                     医生：
                     <select name="ypDoctor">
@@ -1346,41 +1346,43 @@
     }
 
     //处方显隐增加
+    // var a=0;
     function goodsidstr(value) {
         if (value == '2') {
             tab1.style = "display: block";
+            // a = a+1;
             var html1 = "";
-            html1 = "<input type=\"text\" name=\"kjyyPrescriptionType\" value=\"2\" hidden/>";
+            html1 = "<input type=\"text\"   id='kjyyPrescriptionType' name=\"kjyyPrescriptionType\" value=\"2\" hidden/>";
             $("#kuangjiayy").append(html1);
         } else if (value == '1') {
             tab2.style = "display: block";
             var html2 = "";
-            html2 = "<input type=\"text\" name=\"kjjyPrescriptionType\" value=\"1\" hidden/>";
+            html2 = "<input type=\"text\" id='kjjyPrescriptionType' name=\"kjjyPrescriptionType\" value=\"1\" hidden/>";
             $("#kuangjiajy").append(html2);
         } else if (value == '3') {
             tab3.style = "display: block";
             var html3 = "";
-            html3 = "<input type=\"text\" name=\"sgjjPrescriptionType\" value=\"3\" hidden/>";
+            html3 = "<input type=\"text\" id='sgjjPrescriptionType' name=\"sgjjPrescriptionType\" value=\"3\" hidden/>";
             $("#jianjsg").append(html3);
         } else if (value == '5') {
             tab4.style = "display: block";
             var html4 = "";
-            html4 = "<input type=\"text\" name=\"rxPrescriptionType\" value=\"5\" hidden/>";
+            html4 = "<input type=\"text\" id='rxPrescriptionType' name=\"rxPrescriptionType\" value=\"5\" hidden/>";
             $("#ruanxjmjcj").append(html4);
         } else if (value == '4') {
             tab5.style = "display: block";
             var html5 = "";
-            html5 = "<input type=\"text\" name=\"zyPrescriptionType\" value=\"4\" hidden/>";
+            html5 = "<input type=\"text\" id='zyPrescriptionType' name=\"zyPrescriptionType\" value=\"4\" hidden/>";
             $("#kuangjiazy").append(html5);
         } else if (value == '7') {
             tab6.style = "display: block";
             var html6 = "";
-            html6 = "<input type=\"text\" name=\"sjxlPrescriptionType\" value=\"7\" hidden/>";
+            html6 = "<input type=\"text\" id='sjxlPrescriptionType' name=\"sjxlPrescriptionType\" value=\"7\" hidden/>";
             $("#shijxl").append(html6);
         } else if (value == '8') {
             tab7.style = "display: block";
             var html7 = "";
-            html7 = "<input type=\"text\" name=\"vstPrescriptionType\" value=\"8\" hidden/>";
+            html7 = "<input type=\"text\" id='vstPrescriptionType' name=\"vstPrescriptionType\" value=\"8\" hidden/>";
             $("#jmvst").append(html7);
         } else if (value == '9') {
             tab8.style = "display: block";
@@ -1402,16 +1404,56 @@
     $(".button_true").click(function () {
         goodsidstr($(".select_value").val());
     });
-    //点击删除处方数值为空
-    $(".input_del").click(function () {
-        // console.log($(this).parentsUntil('table').eq(2).parent());
-        // $('table tbody').empty();
-        // $(this).parentsUntil('table').value="";
-        // $(this).parentsUntil('table').eq(2).parent().find("input").not(".input_del").val("");
-        $(this).parentsUntil('table').eq(2).parent().find("input");
-        $(this).parentsUntil('table').eq(2).parent().find("select").val("");
-        $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
-    });
+
+    // 点击删除处方数值为空
+    // $(".input_del").click(function () {
+    //     // console.log($(this).parentsUntil('table').eq(2).parent());
+    //     // $('table tbody').empty();
+    //     // $(this).parentsUntil('table').value="";
+    //     // $(this).parentsUntil('table').eq(2).parent().find("input").not(".input_del").val("");
+    //     $(this).parentsUntil('table').eq(2).parent().find("input");
+    //     $(this).parentsUntil('table').eq(2).parent().find("select").val("");
+    //     $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+    // });
+    // 点击删除处方数值为空
+    function deleteInput(obj){
+        if (obj.id == 'remove1'){
+            $("#kjyyPrescriptionType").remove();
+            // $(obj).parentsUntil('table').eq(2).parent().find("input");
+            // $(obj).parentsUntil('table').eq(2).parent().find("select").val("");
+            // $(obj).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+        }
+        if (obj.id=='remove2'){
+            $("#kjjyPrescriptionType").remove();
+        }
+        if (obj.id=='remove3'){
+            $("#sgjjPrescriptionType").remove();
+        }
+        if (obj.id=='remove4'){
+            $("#rxPrescriptionType").remove();
+        }
+        if (obj.id=='remove5'){
+            $("#zyPrescriptionType").remove();
+        }
+        if (obj.id=='remove6'){
+            $("#sjxlPrescriptionType").remove();
+        }
+        if (obj.id=='remove7'){
+            $("#vstPrescriptionType").remove();
+        }
+        if (obj.id=='remove8'){
+            $("#crtPrescriptionType").remove();
+        }
+        if (obj.id=='remove9'){
+            $("#rgpPrescriptionType").remove();
+        }
+        if (obj.id=='remove10'){
+            $("#ypPrescriptionType").remove();
+        }
+        $(obj).parentsUntil('table').eq(2).parent().find("input");
+        $(obj).parentsUntil('table').eq(2).parent().find("select").val("");
+        $(obj).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+    }
 
     //清空
     function clearText() {

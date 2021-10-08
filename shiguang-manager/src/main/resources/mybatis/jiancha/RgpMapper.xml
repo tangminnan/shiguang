@@ -255,5 +255,11 @@
             #{rgpId}
         </foreach>
     </delete>
-
+	<update id="upremove" parameterType="com.shiguang.jiancha.domain.RgpDO">
+		update jc_rgp
+		<set>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where ptometry_number = #{ptometryNumber}
+	</update>
 </mapper>

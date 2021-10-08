@@ -12,7 +12,10 @@ import com.shiguang.common.utils.*;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
+import com.shiguang.member.service.MemberService;
 import com.shiguang.mfrs.domain.GoodsDO;
+import com.shiguang.mfrs.domain.PositionDO;
+import com.shiguang.mfrs.service.PositionService;
 import com.shiguang.product.domain.HcDO;
 import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.StockDO;
@@ -35,6 +38,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shiguang.stock.domain.WeiwaiDO;
 import com.shiguang.stock.service.WeiwaiService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 委外表
@@ -54,10 +58,12 @@ public class WeiwaiController {
 	//配送
 	@Autowired
 	private LogStatusService statusService;
-
 	//委外库存
 	@Autowired
 	private WeiwaikcService weiwaikcService;
+	//会员
+	@Autowired
+	private PositionService positionService;
 
 	@GetMapping()
 	@RequiresPermissions("stock:weiwai:weiwai")
@@ -569,34 +575,9 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 
 	@GetMapping("/PeiJing/{eyeStyle}")
 	String PeiJing(@PathVariable("eyeStyle") Integer eyeStyle, Model model) {
-		model.addAttribute("eyeStyle",eyeStyle);
+		model.addAttribute("eyeStyle", eyeStyle);
 		return "/stock/weiwai/yuanPeiJing";
 	}
-//	//销售单
-//	@ResponseBody
-//	@RequestMapping(value = "/selectOrder")
-//	public List<SalesDO> orderList(Integer eyeStyle, Model model) {
-//		Map<String, Object> map = new HashMap<>();
-//		if (eyeStyle == 3){
-//			map.put("classtype", "2");
-//			map.put("eyeStyles", "框镜");
-//		}else if (eyeStyle == 4){
-//			map.put("classtype", "2");
-//			map.put("eyeStyles", "隐形");
-//		}
-////		【只能查当前公司的】
-//		//———获取当前登录用户的公司id————
-//		String companyId=ShiroUtils.getUser().getCompanyId();
-//		if(companyId == null){
-//			map.put("departNumber","");
-//		}else if (companyId != null){
-//			map.put("companyId",companyId);
-//		}
-//		map.put("isSale",1);
-//		List<SalesDO> selectOrder = weiwaiService.selectOrder(map);
-//		model.addAttribute("selectOrder", selectOrder);
-//		return selectOrder;
-//	}
 
 	//销售单
 	@ResponseBody
@@ -772,8 +753,6 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 			String newDate = sdf.format(date);
 			weiwaiDO.setPstime(newDate);
 
-
-
 			WeiwaikcDO weiwaikcDO = new WeiwaikcDO();
 			weiwaikcDO.setDanjuNumber(danjuNumber);
 			weiwaikcDO.setShstatus(shstatus);
@@ -789,7 +768,39 @@ String getGoods(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid
 		}
 		return R.error();
 	}
+
+//进入导入页面
+	@GetMapping("/information/{checkType}")
+	public String importtemplate(Model model, @PathVariable("checkType") String checkType) {
+		model.addAttribute("checkType", checkType);
+		Map<String, Object> map = new HashMap<>();
+		//———获取当前登录用户的公司id————
+		String companyId=ShiroUtils.getUser().getCompanyId();
+		if(companyId == null){
+			String departNumber=ShiroUtils.getUser().getStoreNum();
+			map.put("departNumber",departNumber);
+		}else if (companyId != null){
+			map.put("companyId",companyId);
+		}
+		map.put("status","0");
+		//获取当前公司的所有仓位
+		List<PositionDO> positionDOList = positionService.list(map);
+		map.put("state",1);
+		model.addAttribute("positionDOList",positionDOList);
+		if ("PU_TONG".equals(checkType)) {
+			return "/stock/stock/importtemplate";
+		}
+		return null;
+	}
+
+	/**
+	 * 导入
+	 */
+	@PostMapping("/importMember")
+	@ResponseBody
+//	@RequiresPermissions("information:member:member")
+	public R importMember(String departNumber, String checkType, MultipartFile file) {
+//		return positionService.importMember(departNumber, checkType, file);
+		return null;
+	}
 }
-
-
-

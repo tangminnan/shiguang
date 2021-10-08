@@ -326,4 +326,11 @@
 		</foreach>
 	</delete>
 
+	<update id="upremove" parameterType="com.shiguang.jiancha.domain.VstDO">
+		update jc_vst
+		<set>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where ptometry_number = #{ptometryNumber}
+	</update>
 </mapper>
