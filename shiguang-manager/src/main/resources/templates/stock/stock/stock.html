@@ -13,9 +13,9 @@
                                 onclick="add()">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
                         </button>
-<!--                        <button shiro:hasPermission="information:member:member" type="button" class="btn  btn-default" onclick="importtemplate()">-->
-<!--                            会员信息导入-->
-<!--                        </button>-->
+                        <button shiro:hasPermission="information:member:member" type="button" class="btn  btn-default" onclick="importtemplate()">
+                            批量导入
+                        </button>
                         <button shiro:hasPermission="stock:stock:batchRemove" type="button" class="btn  btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
@@ -59,7 +59,9 @@
 </div>
 </div>
 <div th:include="include :: footer"></div>
+<!--订单列表-->
 <script type="text/javascript" src="/js/appjs/stock/order/order.js"></script>
+
 <script type="text/javascript" src="/js/appjs/stock/stock/stock.js"></script>
 </body>
 </html>

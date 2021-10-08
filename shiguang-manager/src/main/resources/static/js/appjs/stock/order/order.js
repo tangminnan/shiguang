@@ -89,13 +89,6 @@ function load() {
                         field: 'danjuNumber',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            // var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                            //     + row.id
-                            //     + '\')"><i class="fa fa-edit"></i></a> ';
-                            // var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                            //     + row.id
-                            //     + '\')"><i class="fa fa-remove"></i></a> ';
-                            // alert(row.status)
                             if (row.status == "1") {
                                 var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
                                     + row.id + '\')">详情</span> ';
@@ -186,18 +179,18 @@ function updateEnable() {
 }
 
 
-// /**
-//  * 模板导入会员
-//  */
-// function importtemplate(){
-//     var checkType='PU_TONG';
-//     var toIndex = layer.open({
-//         type : 2,
-//         title : '批调导入',
-//         maxmin : true,
-//         shadeClose : false, // 点击遮罩关闭层
-//         area : [ '800px', '520px' ],
-//         content : prefix + '/information/'+checkType // iframe的url
-//     });
-//     layer.full(toIndex)
-// }
+/**
+ * 模板导入商品
+ */
+function importtemplate(){
+    var checkType='PU_TONG';
+    var toIndex = layer.open({
+        type : 2,
+        title : '批调导入',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : '/stock/weiwai/information/'+checkType // iframe的url
+    });
+    layer.full(toIndex)
+}
