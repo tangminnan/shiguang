@@ -25,6 +25,12 @@ public interface CostDao {
 	List<CostDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
+
+	List<CostDO> getSaleNumber(String saleNumber);
+
+	List<CostDO> costlist(Map<String, Object> map);
+
+	int costcount(Map<String, Object> map);
 	
 	int save(CostDO cost);
 	

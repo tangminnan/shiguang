@@ -254,37 +254,112 @@ public class PackageController {
                 map.put("goodsType",goodsType[i]);
                 String[] goosName = packageInfoDO.getGoodsName().split(",");
                 map.put("goodsName",goosName[i]);
-                String[] orginalStart = packageInfoDO.getOriginalStartPrice().split(",");
-                String[] orginalEnd = packageInfoDO.getOriginalEndPrice().split(",");
-                map.put("originalStartPrice",orginalStart[i]);
-                map.put("originalEndPrice",orginalEnd[i]);
+                if (null != packageInfoDO.getOriginalStartPrice()){
+                    try {
+                        String[] orginalStart = packageInfoDO.getOriginalStartPrice().split(",");
+                        if (orginalStart.length > 0){
+                            map.put("originalStartPrice",orginalStart[i]);
+                        } else {
+                            map.put("originalStartPrice","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("originalStartPrice","");
+                    }
+                }
+                if (null != packageInfoDO.getOriginalEndPrice()){
+                    try {
+                        String[] orginalEnd = packageInfoDO.getOriginalEndPrice().split(",");
+                        if (orginalEnd.length > 0){
+                            map.put("originalEndPrice",orginalEnd[i]);
+                        } else {
+                            map.put("originalEndPrice","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("originalEndPrice","");
+                    }
+                }
                 if (null != packageInfoDO.getPackageStartPrice()){
-                    String[] packageStart = packageInfoDO.getPackageStartPrice().split(",");
-                    map.put("packageStartPrice",packageStart[i]);
+                    try {
+                        String[] packageStart = packageInfoDO.getPackageStartPrice().split(",");
+                        if (packageStart.length > 0){
+                            map.put("packageStartPrice",packageStart[i]);
+                        } else {
+                            map.put("packageStartPrice","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("packageStartPrice","");
+                    }
                 }
                 if (null != packageInfoDO.getPackageEndPrice()){
-                    String[] packageEnd = packageInfoDO.getPackageEndPrice().split(",");
-                    map.put("packageEndPrice",packageEnd[i]);
+                    try {
+                        String[] packageEnd = packageInfoDO.getPackageEndPrice().split(",");
+                        if (packageEnd.length > 0){
+                            map.put("packageEndPrice",packageEnd[i]);
+                        } else {
+                            map.put("packageEndPrice","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("packageEndPrice","");
+                    }
                 }
-                String[] saleNumberStr = packageInfoDO.getSaleNumber().split(",");
-                map.put("saleNumber",saleNumberStr[i]);
+                if (null != packageInfoDO.getSaleNumber()){
+                    try {
+                        String[] saleNumberStr = packageInfoDO.getSaleNumber().split(",");
+                        if (saleNumberStr.length > 0){
+                            map.put("saleNumber",saleNumberStr[i]);
+                        } else {
+                            map.put("saleNumber","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("saleNumber","");
+                    }
+                }
+
                 if (null != packageInfoDO.getFullStartPrice()){
-                    String[] fullStart = packageInfoDO.getFullStartPrice().split(",");
-                    map.put("fullStartPrice",fullStart[i]);
+                    try {
+                        String[] fullStart = packageInfoDO.getFullStartPrice().split(",");
+                        if (fullStart.length > 0){
+                            map.put("fullStartPrice",fullStart[i]);
+                        } else {
+                            map.put("fullStartPrice","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("fullStartPrice","");
+                    }
                 }
                 if (null != packageInfoDO.getFullEndPrice()){
-                    String[] fullEnd = packageInfoDO.getFullEndPrice().split(",");
-                    map.put("fullEndPrice",fullEnd[i]);
+                    try {
+                        String[] fullEnd = packageInfoDO.getFullEndPrice().split(",");
+                        if (fullEnd.length > 0){
+                            map.put("fullEndPrice",fullEnd[i]);
+                        } else {
+                            map.put("fullEndPrice","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("fullStartPrice","");
+                    }
                 }
                 if (null != packageInfoDO.getPreferentialWay()){
-                    String[] preferWay = packageInfoDO.getPreferentialWay().split(",");
-                    map.put("preferentialWay",preferWay[i]);
+                    try {
+                        String[] preferWay = packageInfoDO.getPreferentialWay().split(",");
+                        if (preferWay.length > 0){
+                            map.put("preferentialWay",preferWay[i]);
+                        } else {
+                            map.put("preferentialWay","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
+                        map.put("preferentialWay","");
+                    }
                 }
                 if (null != packageInfoDO.getUnitPrice()){
-                    String[] unitPriceStr = packageInfoDO.getUnitPrice().split(",");
-                    if (unitPriceStr.length > 0){
-                        map.put("unitPrice",unitPriceStr[i]);
-                    } else {
+                    try {
+                        String[] unitPriceStr = packageInfoDO.getUnitPrice().split(",");
+                        if (unitPriceStr.length > 0){
+                            map.put("unitPrice",unitPriceStr[i]);
+                        } else {
+                            map.put("unitPrice","");
+                        }
+                    }catch (ArrayIndexOutOfBoundsException e) {
                         map.put("unitPrice","");
                     }
                 }

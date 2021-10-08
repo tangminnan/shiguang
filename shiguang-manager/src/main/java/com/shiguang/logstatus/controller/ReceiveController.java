@@ -4,6 +4,8 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.line.service.LineMemberService;
+import com.shiguang.line.service.LineService;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +29,8 @@ public class ReceiveController {
     private LogStatusService statusService;
     @Autowired
     private SalesService salesService;
+    @Autowired
+    private LineService lineService;
 
     /**
      * 取镜处收货
@@ -68,7 +73,7 @@ public class ReceiveController {
     @PostMapping( "/editShouhuo")
     @ResponseBody
     @RequiresPermissions("information:receive:edit")
-    public R editShouhuo(String saleNumber){
+    public R editShouhuo(String saleNumber,String memberName){
         LogStatusDO logStatusDO = new LogStatusDO();
         logStatusDO.setSaleNumber(saleNumber);
         logStatusDO.setLogisticStatus("收货");
@@ -78,6 +83,10 @@ public class ReceiveController {
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
         if(statusService.editFaliao(logStatusDO)>0){
+            Map<String,Object> map = new HashMap<>();
+            map.put("type","取镜");
+            map.put("memberName",memberName);
+            lineService.callList(map);
             return R.ok();
         }
         return R.error();

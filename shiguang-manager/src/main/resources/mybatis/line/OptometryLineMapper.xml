@@ -3,7 +3,7 @@
 
 <mapper namespace="com.shiguang.line.dao.OptometryLineDao">
 
-    <select id="get" resultType="com.shiguang.line.domain.LineDO">
+    <select id="get" resultType="com.shiguang.line.domain.YgLineDO">
 		select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline where id = #{value}
 	</select>
 

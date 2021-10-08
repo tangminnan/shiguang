@@ -1,5 +1,5 @@
 
-var prefix = "/information/line"
+var prefix = "/information/optometryline"
 $(function() {
 	load();
 });
@@ -45,12 +45,8 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-																{
-									field : 'memberNumber', 
-									title : '会员卡号' 
-								},
                             {
-                                field : 'name',
+                                field : 'memberName',
                                 title : '姓名'
                             },
 																{

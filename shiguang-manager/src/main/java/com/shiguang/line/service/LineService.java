@@ -34,4 +34,6 @@ public interface LineService {
 	List<LineDO> lineList(Map<String,Object> map);
 
 	int removeMember(LineDO lineDO);
+
+	Map<String,Object> callList(Map<String,Object> map);
 }

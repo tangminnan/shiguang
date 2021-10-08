@@ -19,6 +19,13 @@ public class CostDO implements Serializable {
 	private Long id;
 	//会员卡号
 	private String memberNumber;
+	//会员姓名
+	private String memberName;
+	//会员性别
+	private Long sex;
+	private String sexx;
+	//联系电话
+	private String phone;
 	//销售单号
 	private String saleNumber;
 	//应收金额
@@ -72,6 +79,14 @@ public class CostDO implements Serializable {
 	public String getMemberNumber() {
 		return memberNumber;
 	}
+	public void setMemberName(String memberName){this.memberName = memberName;}
+	public String getMemberName(){return memberName;}
+	public void setSex(){this.sex = sex;}
+	public Long getSex(){return sex;}
+	public void setSexx(String sexx){this.sexx = sexx;}
+	public String getSexx(){return sexx;}
+	public void setPhone(String phone){this.phone = phone;}
+	public String getPhone(){return phone;}
 	/**
 	 * 设置：销售单号
 	 */
