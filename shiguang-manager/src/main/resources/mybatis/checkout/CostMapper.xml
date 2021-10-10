@@ -60,6 +60,60 @@
         </where>
     </select>
 
+    <select id="costlist" resultType="com.shiguang.checkout.domain.CostDO">
+        select c.`id`,c.`member_number`,m.`name` as memberName,m.`sex` as sex,m.`phone_1` as phone,c.`sale_number`,c.`cost_type`,c.`shorthand_code`,
+        c.`cost_name`,c.`cost_money`,c.`arrear_money`,c.`sale_name`,c.`is_sale`,c.`create_time`,c.`type`,c.`original_price`
+        from cost c join member m on m.card_number = c.member_number
+        <where>
+            <if test="id != null and id != ''"> and c.id = #{id} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and c.member_number like concat('%', #{memberNumber},'%') </if>
+            <if test="saleNumber != null and saleNumber != ''"> and c.sale_number like concat('%', #{saleNumber},'%') </if>
+            <if test="createTime != null and createTime != ''"> and date_format(c.create_time ,'%Y-%m-%d') = #{createTime} </if>
+            <if test="costName != null and costName != ''"> and c.cost_name = #{costName} </if>
+            <if test="memberName != null and memberName != ''"> and m.`name` = #{memberName} </if>
+            <if test="costMoney != null and costMoney != ''"> and c.cost_money = #{costMoney} </if>
+            <if test="phone != null and phone != ''"> and ,m.`phone_1` = #{phone} </if>
+            <if test="arrearMoney != null and arrearMoney != ''"> and c.arrear_money = #{arrearMoney} </if>
+            <if test="saleName != null and saleName != ''"> and c.sale_name = #{saleName} </if>
+            and c.is_sale = 0 and c.type ='检查单'
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                group by c.`sale_number`
+                order by c.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="costcount" resultType="int">
+        select count(*) from cost c join member m on m.card_number = c.member_number
+        <where>
+            <if test="id != null and id != ''"> and c.id = #{id} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and c.member_number like concat('%', #{memberNumber},'%') </if>
+            <if test="saleNumber != null and saleNumber != ''"> and c.sale_number like concat('%', #{saleNumber},'%') </if>
+            <if test="createTime != null and createTime != ''"> and date_format(c.create_time ,'%Y-%m-%d') = #{createTime} </if>
+            <if test="costName != null and costName != ''"> and c.cost_name = #{costName} </if>
+            <if test="memberName != null and memberName != ''"> and m.`name` = #{memberName} </if>
+            <if test="costMoney != null and costMoney != ''"> and c.cost_money = #{costMoney} </if>
+            <if test="arrearMoney != null and arrearMoney != ''"> and c.arrear_money = #{arrearMoney} </if>
+            <if test="saleName != null and saleName != ''"> and c.sale_name = #{saleName} </if>
+            and c.is_sale = 0 and c.type ='检查单'
+        </where>
+    </select>
+
+    <select id="getSaleNumber" resultType="com.shiguang.checkout.domain.CostDO">
+        select c.`id`,c.`member_number`,m.`name` as memberName,m.`sex` as sex,m.`phone_1` as phone,c.`sale_number`,c.`cost_type`,c.`shorthand_code`,
+        c.`cost_name`,c.`cost_money`,c.`arrear_money`,c.`sale_name`,c.`is_sale`,c.`create_time`,c.`type`,c.`original_price`
+        from cost c join member m on m.card_number = c.member_number
+		where c.sale_number = #{value}
+	</select>
+
     <insert id="save" parameterType="com.shiguang.checkout.domain.CostDO">
 		insert into cost
 		(

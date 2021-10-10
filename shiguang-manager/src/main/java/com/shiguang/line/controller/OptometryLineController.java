@@ -127,6 +127,7 @@ public class OptometryLineController {
             lineMemberDOList.add(lineMemberDO);
         }
         resultMap.put("lineMemberDOS",lineMemberDOList);
+        resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到验光室"+lineMemberDOS.get(0).getConsultRoom()+"就诊");
         List<Map<String,Object>> roomList = new ArrayList<>();
         List<YgLineDO> lineMemberDOList1 = optometryLineService.lineList(map);
         if (null != lineMemberDOList1 && lineMemberDOList1.size() > 0){

@@ -80,7 +80,7 @@ public class RefractionController {
         }
         returnMap.put("code",300);
         returnMap.put("message","叫号失败");
-        return R.error();
+        return returnMap;
     }
 
     /**
@@ -105,6 +105,7 @@ public class RefractionController {
             lineMemberDOList.add(lineMemberDO);
         }
         resultMap.put("lineMemberDOS",lineMemberDOList);
+        resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到"+lineMemberDOS.get(0).getRefraction()+"室就诊");
         List<Map<String,Object>> roomList = new ArrayList<>();
         map.put("refractionStatus",4);
         List<RefractionLineDO> lineMemberDOList1 = refractionService.list(map);

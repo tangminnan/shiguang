@@ -36,7 +36,22 @@ public class CostServiceImpl implements CostService {
 	public int count(Map<String, Object> map){
 		return costDao.count(map);
 	}
-	
+
+	@Override
+	public List<CostDO> getSaleNumber(String saleNumber){
+		return costDao.getSaleNumber(saleNumber);
+	}
+
+	@Override
+	public List<CostDO> costlist(Map<String, Object> map){
+		return costDao.costlist(map);
+	}
+
+	@Override
+	public int costcount(Map<String, Object> map){
+		return costDao.costcount(map);
+	}
+
 	@Override
 	public int save(CostDO cost){
 		return costDao.save(cost);

@@ -1,5 +1,5 @@
 
-var prefix = "/information/receive"
+var prefix = "/information/bill"
 $(function() {
 	load();
 });
@@ -9,7 +9,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/receivelist", // 服务器数据的加载地址
+						url : prefix + "/list", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -33,7 +33,9 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                saleNumber: $("#saleNumber").val()
+                                cardNumber:$("#cardNumber").val(),
+                                name:$("#name").val(),
+                                phone1:$("#phone1").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -46,28 +48,32 @@ function load() {
 						// 返回false将会终止请求
 						columns : [
 								{
-									field : 'saleNumber',
-									title : '配镜单号'
-								},
-								{
-									field : 'eyeType',
-									title : '配镜类型'
+									field : 'memberNumber',
+									title : '会员卡号',
+									align : 'center'
 								},
 								{
 									field : 'memberName',
-									title : '顾客姓名'
+									title : '姓名',
+									align : 'center'
 								},
 								{
-									field : 'phone1',
-									title : '联系电话'
+									field : 'sexx',
+									title : '性别',
+									align : 'center',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return '<span class="label">男</span>';
+										}else if(value == '1'){
+											return '<span class="label">女</span>';
+
+										}
+									}
 								},
 								{
-									field : 'peijingDate',
-									title : '配镜日期'
-								},
-								{
-									field : 'mirrorDate',
-									title : '取镜日期'
+									field : 'phone',
+									title : '联系方式',
+									align : 'center'
 								},
 																{
 									title : '操作',
@@ -75,15 +81,18 @@ function load() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										// var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-										// 		+ row.id
+										// 		+ value
 										// 		+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" title="收货"  mce_href="#" onclick="editShouhuo(\''
-												+ row.saleNumber+'\',\''+ row.memberName
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return d ;
+                                        var e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" onclick="detail(\''
+                                            + row.saleNumber
+                                            + '\')" style="text-decoration: none;">详情</a>';
+										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+												+ row.saleNumber
+												+ '\')"><i class="fa fa-remove"></i></a> ';
+										// var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+										// 		+ row.id
+										// 		+ '\')"><i class="fa fa-key"></i></a> ';
+										return e + d;
 									}
 								} ]
 					});
@@ -101,26 +110,39 @@ function add() {
 		content : prefix + '/add' // iframe的url
 	});
 }
-function edit(id) {
-	layer.open({
+function edit(cardNumber) {
+   var toIndex = layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefix + '/edit/' + cardNumber // iframe的url
 	});
+   layer.full(toIndex);
 }
-function editShouhuo(saleNumber,memberName) {
-	layer.confirm('确定要取镜处收货？', {
+
+function detail(saleNumber) {
+    var toIndex = layer.open({
+        type : 2,
+        title : '详情',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : prefix + '/detail/' + saleNumber // iframe的url
+    });
+    layer.full(toIndex);
+}
+
+function remove(saleNumber) {
+	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/editShouhuo",
+			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'saleNumber' : saleNumber,
-				'memberName' : memberName
+				'saleNumber' : saleNumber
 			},
 			success : function(r) {
 				if (r.code==0) {

@@ -144,46 +144,9 @@ public class LineController {
 	public Map<String,Object> callList(){
 		Map<String,Object> resultMap = new HashMap<>();
 		Map<String,Object> map = new HashMap<>();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		map.put("lineTime",simpleDateFormat.format(new Date()));
-		map.put("storey","4");
-		List<LineDO> lineDOList = lineService.lineList(map);
-		resultMap.put("lineDOList",lineDOList);
-		List<LineMemberDO> lineMemberDOList = new ArrayList<>();
-		List<LineMemberDO> lineMemberDOS = lineMemberService.list(map);
-		LineMemberDO lineMemberDO = new LineMemberDO();
-		if (null != lineMemberDOS && lineMemberDOS.size() > 0){
-			lineMemberDO.setName(lineMemberDOS.get(0).getName());
-			lineMemberDO.setSex(lineMemberDOS.get(0).getSex());
-			lineMemberDO.setConsultRoom(lineMemberDOS.get(0).getConsultRoom());
-			lineMemberDO.setMemberNumber(lineMemberDOS.get(0).getConsultRoom());
-			lineMemberDO.setId(lineMemberDOS.get(0).getId());
-			lineMemberDOList.add(lineMemberDO);
-		}
-		resultMap.put("lineMemberDOS",lineMemberDOList);
-		List<Map<String,Object>> roomList = new ArrayList<>();
-		List<LineDO> lineMemberDOList1 = lineMemberService.listMember(map);
-		if (null != lineMemberDOList1 && lineMemberDOList1.size() > 0){
-			for (LineDO lineMemberDOstr : lineMemberDOList1){
-				if (!"".equals(lineMemberDOstr.getConsultRoom())){
-					Map<String,Object> roomMap = new HashMap<>();
-					roomMap.put("id",lineMemberDOstr.getId());
-					roomMap.put("memberNumber",lineMemberDOstr.getMemberNumber());
-					roomMap.put("name",lineMemberDOstr.getName());
-					roomMap.put("sex",lineMemberDOstr.getSex());
-					roomMap.put("consultRoom",lineMemberDOstr.getConsultRoom());
-					roomList.add(roomMap);
-				}
-			}
-		}
-		resultMap.put("roomList",roomList);
-		if (null != lineMemberDOS && lineMemberDOS.size() > 0){
-//				LineDO lineDO = new LineDO();
-//				lineDO.setMemberNumber(lineMemberDO.getMemberNumber());
-//				lineDO.setLineDate(simpleDateFormat.format(new Date()));
-//				lineService.removeMember(lineDO);
-				lineMemberService.remove(lineMemberDOS.get(0).getId());
-		}
+		map.put("type","取镜");
+		map.put("memberName","张三");
+		resultMap = lineService.callList(map);
 		return resultMap;
 	}
 
