@@ -35,6 +35,11 @@ public class OptometryLineServiceImpl implements OptometryLineService {
     }
 
     @Override
+    public int updateStatus(YgLineDO line) {
+        return optometryLineDao.updateStatus(line);
+    }
+
+    @Override
     public List<YgLineDO> lineList(Map<String, Object> map) {
         return optometryLineDao.lineList(map);
     }

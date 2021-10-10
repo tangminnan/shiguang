@@ -300,9 +300,9 @@
 				<td>轴向</td>
 				<td>三棱镜</td>
 				<td>基地</td>
-				<td>远用瞳距（mm）</td>
+				<td>近用瞳距（mm）</td>
 				<td>瞳高(mm)</td>
-				<td>远用VA</td>
+				<td>近用VA</td>
 			</tr>
 			<tr>
 				<td class="Light_blue">OD</td>
@@ -389,8 +389,10 @@
 				<td>三棱镜</td>
 				<td>基地</td>
 				<td>远用瞳距（mm）</td>
+				<td>近用瞳距（mm）</td>
 				<td>瞳高(mm)</td>
 				<td>远用VA</td>
+				<td>近用VA</td>
 			</tr>
 			<tr>
 				<td class="Light_yellow">OD</td>
@@ -408,8 +410,10 @@
 					</select>
 				</td>
 				<td><input type="text" id="rightSGyuanyTj" name="rightyuanyongtjsg"/></td>
+				<td><input type="text" id="rightSGjinyTj" name="rightjinyongtjsg"/></td>
 				<td><input type="text" id="rightSGTonggao" name="righttonggaosg"/></td>
 				<td><input type="text" id="rightSGyuanyongVA" name="rightyuanyongVAsg"/></td>
+				<td><input type="text" id="rightSGjinyongVA" name="rightjinyongVAsg"/></td>
 			</tr>
 			<tr>
 				<td class="Light_yellow">OS</td>
@@ -427,17 +431,19 @@
 					</select>
 				</td>
 				<td><input type="text" value=" " id="leftSGyuanyTj" name="leftyuanyongtjsg"/></td>
+				<td><input type="text" value=" " id="leftSGjinyTj" name="leftjinyongtjsg"/></td>
 				<td><input type="text" value=" " id="leftSGTonggao" name="lefttonggaosg"/></td>
 				<td><input type="text" value=" " id="leftSGyuanyongVA" name="leftyuanyongVAsg"/></td>
+				<td><input type="text" value=" " id="leftSGjinyongVA" name="leftjinyongVAsg"/></td>
 			</tr>
 			<tr class="Light_yellow aling_left">
 				<td colspan="3">建议镜片材质：</td>
 				<td colspan="3">处理方式：</td>
-				<td colspan="3">建议镜框：</td>
+				<td colspan="5">建议镜框：</td>
 			</tr>
 			<tr>
 				<td class="Light_yellow">备注：</td>
-				<td colspan="8"><input class="aling_left" id="shuangguangRemark" name="remark" type="text" /></td>
+				<td colspan="10"><input class="aling_left" id="shuangguangRemark" name="remark" type="text" /></td>
 			</tr>
 			<tr class="Light_yellow">
 				<td> </td>
@@ -448,7 +454,7 @@
 				<td>镜片通道(mm)</td>
 				<td>对角线(mm)</td>
 				<td>框型</td>
-				<td>直径(mm)</td>
+				<td colspan="3">直径(mm)</td>
 			</tr>
 			<tr>
 				<td class="Light_yellow">手动填写</td>
@@ -459,7 +465,7 @@
 				<td><input type="text" value=" " id="jptd" name="jingpiantongdao"/></td>
 				<td><input type="text" value=" " id="sgduijiaoxian" name="duijiaoxian"/></td>
 				<td><input type="text" value=" " id="sgkuangxing" name="kuangxing"/></td>
-				<td><input type="text" value=" " id="sgzhijing" name="zhijing"/></td>
+				<td colspan="3"><input type="text" value=" " id="sgzhijing" name="zhijing"/></td>
 			</tr>
 			</tbody>
 		</table>
@@ -714,26 +720,26 @@
 				<td><input type="text" value="" id="rightVstQJ" name="rightQJvst"/></td>
 				<td><input type="text" value="" id="rightVstZJ" name="rightZJvst"/></td>
 				<td><input type="text" value="" id="rightVstzx" name="rightzhouxiangvst" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
-				<td><input type="text" value="" id="rightVstSdjbh"/></td>
-				<td><input type="text" value="" id="rightVstFK"/></td>
-				<td><input type="text" value="" id="rightVstQlbj"/></td>
-				<td><input type="text" value="" id="rightVstAC"/></td>
-				<td><input type="text" value="" id="rightVstJF"/></td>
-				<td><input type="text" value="" id="rightVstDIA"/></td>
-				<td><input type="text" value="" id="rightVstBC"/></td>
+				<td><input type="text" value="" id="rightVstSdjbh" name="rightVstSdjbh"/></td>
+				<td><input type="text" value="" id="rightVstFK" name="rightVstFK"/></td>
+				<td><input type="text" value="" id="rightVstQlbj" name="rightVstQlbj"/></td>
+				<td><input type="text" value="" id="rightVstAC" name="rightVstAC"/></td>
+				<td><input type="text" value="" id="rightVstJF" name="rightVstJF"/></td>
+				<td><input type="text" value="" id="rightVstDIA" name="rightVstDIA"/></td>
+				<td><input type="text" value="" id="rightVstBC" name="rightVstBC"/></td>
 			</tr>
 			<tr>
 				<td class="Light_pink">OS</td>
 				<td><input type="text" value=" " id="leftVstQJ" name="leftQJvst"/></td>
 				<td><input type="text" value="" id="leftVstZJ" name="leftZJvst"/></td>
 				<td><input type="text" value="" id="leftVstzx" name="leftzhouxiangvst" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
-				<td><input type="text" value="" id="leftVstSdjbh"/></td>
-				<td><input type="text" value="" id="leftVstFK"/></td>
-				<td><input type="text" value="" id="leftVstQlbj"/></td>
-				<td><input type="text" value="" id="leftVstAC"/></td>
-				<td><input type="text" value="" id="leftVstJF"/></td>
-				<td><input type="text" value="" id="leftVstDIA"/></td>
-				<td><input type="text" value="" id="leftVstBC"/></td>
+				<td><input type="text" value="" id="leftVstSdjbh" name="leftVstSdjbh"/></td>
+				<td><input type="text" value="" id="leftVstFK" name="leftVstFK"/></td>
+				<td><input type="text" value="" id="leftVstQlbj" name="leftVstQlbj"/></td>
+				<td><input type="text" value="" id="leftVstAC" name="leftVstAC"/></td>
+				<td><input type="text" value="" id="leftVstJF" name="leftVstJF"/></td>
+				<td><input type="text" value="" id="leftVstDIA" name="leftVstDIA"/></td>
+				<td><input type="text" value="" id="leftVstBC" name="leftVstBC"/></td>
 			</tr>
 			<tr class="Light_pink">
 				<td> </td>
@@ -746,9 +752,9 @@
 			</tr>
 			<tr>
 				<td class="Light_pink">OD</td>
-				<td><input type="text" value=" " id="rightVstCPCLY"/></td>
-				<td><input type="text" value=" " id="rightVstE"/></td>
-				<td><input type="text" value=" " id="rightVstVA"/></td>
+				<td><input type="text" value=" " id="rightVstCPCLY" name="rightVstCPCLY"/></td>
+				<td><input type="text" value=" " id="rightVstE" name="rightVstE"/></td>
+				<td><input type="text" value=" " id="rightVstVA" name="rightVstVA"/></td>
 				<td colspan="2">
 					<select id="rightVstJPColor">
 						<option value="无色">无色</option>
@@ -756,14 +762,14 @@
 						<option value="粉色">粉色</option>
 					</select>
 				</td>
-				<td colspan="2"><input type="text" value=" " id="rightVstPinPai"/></td>
+				<td colspan="2"><input type="text" value=" " id="rightVstPinPai" name="rightVstPinPai"/></td>
 				<td colspan="3"><input type="text" value=" " /></td>
 			</tr>
 			<tr>
 				<td class="Light_pink">OS</td>
-				<td><input type="text" value=" " id="leftVstCPCLY"/></td>
-				<td><input type="text" value=" " id="leftVstE"/></td>
-				<td><input type="text" value=" " id="leftVstVA"/></td>
+				<td><input type="text" value=" " id="leftVstCPCLY" name="leftVstCPCLY"/></td>
+				<td><input type="text" value=" " id="leftVstE" name="leftVstE"/></td>
+				<td><input type="text" value=" " id="leftVstVA" name="leftVstVA"/></td>
 				<td colspan="2">
 					<select id="leftVstJPColor">
 						<option value="">无色</option>
@@ -771,12 +777,12 @@
 						<option value="">粉色</option>
 					</select>
 				</td>
-				<td colspan="2"><input type="text" value=" " id="leftVstPinPai"/></td>
+				<td colspan="2"><input type="text" value=" " id="leftVstPinPai" name="leftVstPinPai"/></td>
 				<td colspan="3"><input type="text" value=" " /></td>
 			</tr>
 			<tr>
 				<td class="Light_pink">备注：</td>
-				<td colspan="10"><input class="aling_left" type="text" value=" " /></td>
+				<td colspan="10"><input class="aling_left" type="text" value=" " name="remark"/></td>
 			</tr>
 			</tbody>
 		</table>
@@ -2288,7 +2294,7 @@ var classArray=[];
             if (data.righttg != ''){
                 document.getElementById("rightFLtonggao").readOnly=true;
 			}
-			$("#rightFLyuanyongVA").val(data.rightva);
+			$("#rightFLyuanyongVA").val(data.rightjyva);
             if (data.rightva != ''){
                 document.getElementById("rightFLyuanyongVA").readOnly=true;
 			}
@@ -2304,11 +2310,11 @@ var classArray=[];
             }
             var leftjidi = data.leftjd;
             $("#leftFLjidi").find("[value='"+leftjidi+"']").attr("selected",true);
-            $("#leftFLyuanyTj").val(data.leftyytj);
+            $("#leftFLyuanyTj").val(data.leftjytj);
             if (data.leftyytj != ''){
                 document.getElementById("leftFLyuanyTj").readOnly=true;
             }
-            $("#leftFLtonggao").val(data.lefttg);
+            $("#leftFLtonggao").val(data.leftjyva);
             if (data.lefttg != ''){
                 document.getElementById("leftFLtonggao").readOnly=true;
             }
@@ -2382,6 +2388,10 @@ var classArray=[];
             if (data.rightyytj != ''){
                 document.getElementById("rightSGyuanyTj").readOnly=true;
             }
+            $("#rightSGjinyTj").val(data.rightjytj);
+            if (data.rightjytj != ''){
+                document.getElementById("rightSGjinyTj").readOnly=true;
+            }
             $("#rightSGTonggao").val(data.righttg);
             if (data.righttg != ''){
                 document.getElementById("rightSGTonggao").readOnly=true;
@@ -2389,6 +2399,10 @@ var classArray=[];
             $("#rightSGyuanyongVA").val(data.rightva);
             if (data.rightva != ''){
                 document.getElementById("rightSGyuanyongVA").readOnly=true;
+            }
+            $("#rightSGjinyongVA").val(data.rightjyva);
+            if (data.rightjyva != ''){
+                document.getElementById("rightSGjinyongVA").readOnly=true;
             }
             $("#leftJianJinsgQJ").val(data.leftsph);
             document.getElementById("leftJianJinsgQJ").readOnly=true;
@@ -2406,6 +2420,10 @@ var classArray=[];
             if (data.leftyytj != ''){
                 document.getElementById("leftSGyuanyTj").readOnly=true;
             }
+            $("#leftSjinyTj").val(data.leftjytj);
+            if (data.leftjytj != ''){
+                document.getElementById("leftSjinyTj").readOnly=true;
+            }
             $("#leftSGTonggao").val(data.lefttg);
             if (data.lefttg != ''){
                 document.getElementById("leftSGTonggao").readOnly=true;
@@ -2413,6 +2431,10 @@ var classArray=[];
             $("#leftSGyuanyongVA").val(data.leftva);
             if (data.leftva != ''){
                 document.getElementById("leftSGyuanyongVA").readOnly=true;
+            }
+            $("#leftSGjinyongVA").val(data.leftjyva);
+            if (data.leftjyva != ''){
+                document.getElementById("leftSGjinyongVA").readOnly=true;
             }
 		} else if (data.chufangType == 4){
             $("#rightZhongYongQJ").val(data.rightsph);

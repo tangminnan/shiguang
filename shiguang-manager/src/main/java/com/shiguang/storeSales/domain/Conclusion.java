@@ -46,6 +46,10 @@ public class Conclusion implements Serializable {
     private String rightyytj;
     //远/中用瞳距OS
     private String leftyytj;
+    //近/中用瞳距OD
+    private String rightjytj;
+    //近/中用瞳距OS
+    private String leftjytj;
     //瞳高OD
     private String righttg;
     //瞳高OS
@@ -62,10 +66,6 @@ public class Conclusion implements Serializable {
     private String rightunit;
     //片/盒OS
     private String leftunit;
-    //近用瞳距OD
-    private String rightjytj;
-    //近用瞳距OS
-    private String leftjytj;
     //近用VA(OD)
     private String rightjyva;
     //近用VA(OS)

@@ -105,6 +105,8 @@ public class StoreSalesController {
     @Autowired
     private SjxlService sjxlService;
     @Autowired
+    private VstService vstService;
+    @Autowired
     private RgpService rgpService;
     @Autowired
     private YaopinService yaopinService;
@@ -318,8 +320,16 @@ public class StoreSalesController {
                 kjjyDO.setKjjyOptometryName(salesDO.getSaleName());
                 kjjyDO.setKjjySphod(salesDO.getRightQJjy());
                 kjjyDO.setKjjySphos(salesDO.getLeftQJjy());
-                kjjyDO.setKjjyCylod(salesDO.getRightZJjy());
-                kjjyDO.setKjjyCylos(salesDO.getLeftZJjy());
+                if ("".equals(salesDO.getRightZJjy()) || null == salesDO.getRightZJjy()){
+                    kjjyDO.setKjjyCylod("0.00");
+                }else {
+                    kjjyDO.setKjjyCylod(salesDO.getRightZJjy());
+                }
+                if ("".equals(salesDO.getLeftZJjy()) || null == salesDO.getLeftZJjy()){
+                    kjjyDO.setKjjyCylos("0.00");
+                }else {
+                    kjjyDO.setKjjyCylos(salesDO.getLeftZJjy());
+                }
                 kjjyDO.setKjjyAxialod(salesDO.getRightzhouxiangjy());
                 kjjyDO.setKjjyAxialos(salesDO.getLeftzhouxiangjy());
                 kjjyDO.setKjjyPrismod(salesDO.getRightsanlingjingjy());
@@ -341,8 +351,17 @@ public class StoreSalesController {
                 kjyyDO.setKjyyOptometryName(salesDO.getSaleName());
                 kjyyDO.setKjyySphod(salesDO.getRightQJyy());
                 kjyyDO.setKjyySphos(salesDO.getLeftQJyy());
-                kjyyDO.setKjyyCylod(salesDO.getRightZJyy());
-                kjyyDO.setKjyyCylos(salesDO.getLeftZJyy());
+                if ("".equals(salesDO.getRightZJyy()) || null == salesDO.getRightZJyy()){
+                    kjyyDO.setKjyyCylod("0.00");
+                } else {
+                    kjyyDO.setKjyyCylod(salesDO.getRightZJyy());
+                }
+                if ("".equals(salesDO.getLeftZJyy()) || null == salesDO.getLeftZJyy()){
+                    kjyyDO.setKjyyCylos("0.00");
+                } else {
+                    kjyyDO.setKjyyCylos(salesDO.getLeftZJyy());
+                }
+
                 kjyyDO.setKjyyAxialod(salesDO.getRightzhouxiangyy());
                 kjyyDO.setKjyyAxialos(salesDO.getLeftzhouxiangyy());
                 kjyyDO.setKjyyPrismod(salesDO.getRightsanlingjingyy());
@@ -364,16 +383,29 @@ public class StoreSalesController {
                 sgjjDO.setSgjjOptometryName(salesDO.getSaleName());
                 sgjjDO.setSgjjSphod(salesDO.getRightQJsg());
                 sgjjDO.setSgjjSphos(salesDO.getLeftQJsg());
-                sgjjDO.setSgjjCylod(salesDO.getRightZJsg());
-                sgjjDO.setSgjjCylos(salesDO.getLeftZJsg());
+                if ("".equals(salesDO.getRightZJsg()) || null == salesDO.getRightZJsg()){
+                    sgjjDO.setSgjjCylod("0.00");
+                }else {
+                    sgjjDO.setSgjjCylod(salesDO.getRightZJsg());
+                }
+                if ("".equals(salesDO.getLeftZJsg()) || null == salesDO.getLeftZJsg()){
+                    sgjjDO.setSgjjCylos("0.00");
+                }else {
+                    sgjjDO.setSgjjCylos(salesDO.getLeftZJsg());
+                }
+
                 sgjjDO.setSgjjAxialod(salesDO.getRightzhouxiangsg());
                 sgjjDO.setSgjjAxialos(salesDO.getLeftzhouxiangsg());
                 sgjjDO.setSgjjYytjod(salesDO.getRightyuanyongtjsg());
                 sgjjDO.setSgjjYytjos(salesDO.getLeftyuanyongtjsg());
+                sgjjDO.setSgjjJytjod(salesDO.getRightjinyongtjsg());
+                sgjjDO.setSgjjJytjos(salesDO.getLeftjinyongtjsg());
                 sgjjDO.setSgjjTgod(salesDO.getRighttonggaosg());
                 sgjjDO.setSgjjTgos(salesDO.getLefttonggaosg());
                 sgjjDO.setSgjjYyvaod(salesDO.getRightyuanyongVAsg());
                 sgjjDO.setSgjjYyvaos(salesDO.getLeftyuanyongVAsg());
+                sgjjDO.setSgjjJyvaod(salesDO.getRightjinyongVAsg());
+                sgjjDO.setSgjjJyvaos(salesDO.getLeftjinyongVAsg());
                 sgjjService.save(sgjjDO);
             } else if (salesDO.getRecipelwlType() == 4) {
                 ZyDO zyDO = new ZyDO();
@@ -383,8 +415,16 @@ public class StoreSalesController {
                 zyDO.setZyOptometryName(salesDO.getSaleName());
                 zyDO.setZySphod(salesDO.getRightQJzy());
                 zyDO.setZySphos(salesDO.getLeftQJzy());
-                zyDO.setZyCylod(salesDO.getRightZJzy());
-                zyDO.setZyCylos(salesDO.getLeftZJzy());
+                if ("".equals(salesDO.getRightZJzy()) || null == salesDO.getRightZJzy()){
+                    zyDO.setZyCylod("0.00");
+                } else {
+                    zyDO.setZyCylod(salesDO.getRightZJzy());
+                }
+                if ("".equals(salesDO.getLeftZJzy()) || null == salesDO.getLeftZJzy()){
+                    zyDO.setZyCylos("0.00");
+                } else {
+                    zyDO.setZyCylos(salesDO.getLeftZJzy());
+                }
                 zyDO.setZyAxialod(salesDO.getRightzhouxiangzy());
                 zyDO.setZyAxialos(salesDO.getLeftzhouxiangzy());
                 zyDO.setZyPrismod(salesDO.getRightsanlingjingzy());
@@ -406,8 +446,16 @@ public class StoreSalesController {
                 rxjmjcjDO.setRxOptometryName(salesDO.getSaleName());
                 rxjmjcjDO.setRxSphod(salesDO.getRightQJyx());
                 rxjmjcjDO.setRxSphos(salesDO.getLeftQJyx());
-                rxjmjcjDO.setRxCylod(salesDO.getRightZJyx());
-                rxjmjcjDO.setRxCylos(salesDO.getLeftZJyx());
+                if ("".equals(salesDO.getRightZJyx()) || null == salesDO.getRightZJyx()){
+                    rxjmjcjDO.setRxCylod("0.00");
+                } else {
+                    rxjmjcjDO.setRxCylod(salesDO.getRightZJyx());
+                }
+                if ("".equals(salesDO.getLeftZJyx()) || null == salesDO.getLeftZJyx()){
+                    rxjmjcjDO.setRxCylos("0.00");
+                } else {
+                    rxjmjcjDO.setRxCylos(salesDO.getLeftZJyx());
+                }
                 rxjmjcjDO.setRxAxialod(salesDO.getRightzhouxiangyx());
                 rxjmjcjDO.setRxAxialos(salesDO.getLeftzhouxiangyx());
                 rxjmjcjDO.setRxZjod(salesDO.getRightzhijingyx());
@@ -423,8 +471,17 @@ public class StoreSalesController {
                 sjxlDO.setSjxlOptometryName(salesDO.getSaleName());
                 sjxlDO.setSjxlSphod(salesDO.getRightQJxl());
                 sjxlDO.setSjxlSphos(salesDO.getLeftQJxl());
-                sjxlDO.setSjxlCylod(salesDO.getRightZJxl());
-                sjxlDO.setSjxlCylos(salesDO.getLeftZJxl());
+                if ("".equals(salesDO.getRightZJxl()) || null == salesDO.getRightZJxl()){
+                    sjxlDO.setSjxlCylod("0.00");
+                } else {
+                    sjxlDO.setSjxlCylod(salesDO.getRightZJxl());
+                }
+                if ("".equals(salesDO.getLeftZJxl()) || null == salesDO.getLeftZJxl()){
+                    sjxlDO.setSjxlCylos("0.00");
+                } else {
+                    sjxlDO.setSjxlCylos(salesDO.getLeftZJxl());
+                }
+
                 sjxlDO.setSjxlAxialod(salesDO.getRightzhouxiangxl());
                 sjxlDO.setSjxlAxialos(salesDO.getLeftzhouxiangxl());
                 sjxlDO.setSjxlJdod(salesDO.getRightjidixl());
@@ -434,6 +491,43 @@ public class StoreSalesController {
                 sjxlDO.setSjxlYyvaod(salesDO.getRightSJXLyyva());
                 sjxlDO.setSjxlYyvaos(salesDO.getLeftSJXLyyva());
                 sjxlService.save(sjxlDO);
+            }else if (salesDO.getRecipelwlType() == 8){
+                VstDO vstDO = new VstDO();
+                vstDO.setVstSphod(salesDO.getRightQJvst());
+                vstDO.setVstSphos(salesDO.getLeftQJvst());
+                if ("".equals(salesDO.getRightZJvst()) || null == salesDO.getRightZJvst()){
+                    vstDO.setVstCylod("0.00");
+                } else {
+                    vstDO.setVstCylod(salesDO.getRightZJvst());
+                }
+                if ("".equals(salesDO.getLeftZJvst()) || null == salesDO.getLeftZJvst()){
+                    vstDO.setVstCylos("0.00");
+                } else {
+                    vstDO.setVstCylos(salesDO.getLeftZJvst());
+                }
+                vstDO.setVstAxialod(salesDO.getRightzhouxiangvst());
+                vstDO.setVstAxialos(salesDO.getLeftzhouxiangvst());
+                vstDO.setVstSdbhod(salesDO.getRightVstSdjbh());
+                vstDO.setVstSdbhos(salesDO.getLeftVstSdjbh());
+                vstDO.setVstFkod(salesDO.getRightVstFK());
+                vstDO.setVstFkos(salesDO.getLeftVstFK());
+                vstDO.setVstQlbjod(salesDO.getRightVstQlbj());
+                vstDO.setVstQlbjos(salesDO.getLeftVstQlbj());
+                vstDO.setVstAcod(salesDO.getRightVstAC());
+                vstDO.setVstAcos(salesDO.getLeftVstAC());
+                vstDO.setVstJfod(salesDO.getRightVstJF());
+                vstDO.setVstJfos(salesDO.getLeftVstJF());
+                vstDO.setVstDiaod(salesDO.getRightVstDIA());
+                vstDO.setVstDiaos(salesDO.getLeftVstDIA());
+                vstDO.setVstBcod(salesDO.getRightVstBC());
+                vstDO.setVstBcos(salesDO.getLeftVstBC());
+                vstDO.setVstCpclyod(salesDO.getRightVstCPCLY());
+                vstDO.setVstCpclyod(salesDO.getLeftVstCPCLY());
+                vstDO.setVstEod(salesDO.getRightVstE());
+                vstDO.setVstEos(salesDO.getLeftVstE());
+                vstDO.setVstVaod(salesDO.getRightVstVA());
+                vstDO.setVstVaos(salesDO.getLeftVstVA());
+                vstService.save(vstDO);
             } else if (salesDO.getRecipelwlType() == 10) {
                 RgpDO rgpDO = new RgpDO();
                 rgpDO.setCardNumber(salesDO.getMemberNumber());

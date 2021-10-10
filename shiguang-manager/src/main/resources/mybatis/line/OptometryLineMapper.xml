@@ -96,6 +96,14 @@
         where id = #{id}
     </update>
 
+    <update id="updateStatus" parameterType="com.shiguang.line.domain.YgLineDO">
+        update ygline
+        <set>
+            <if test="callStatus != null">`call_status` = #{callStatus} </if>
+        </set>
+        where member_number = ${memeberNumber} and date_format(line_time ,'%Y-%m-%d') = #{lineTime}
+    </update>
+
     <select id="listMember" resultType="com.shiguang.line.domain.YgLineMemberDO">
         select `id`,`member_name`,`sex`,`consult_room`,`line_time` from ygline_member
         <where>

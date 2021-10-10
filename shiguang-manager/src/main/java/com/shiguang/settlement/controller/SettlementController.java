@@ -376,9 +376,9 @@ public class SettlementController {
 					conclusion.setRightcyl(kjjyDOList.get(0).getKjjyCylod());
 					conclusion.setRightzx(kjjyDOList.get(0).getKjjyAxialod());
 					if (null != kjjyDOList.get(0).getKjjyYytjod()){
-						conclusion.setRightyytj(kjjyDOList.get(0).getKjjyYytjod());
+						conclusion.setRightjytj(kjjyDOList.get(0).getKjjyYytjod());
 					} else {
-						conclusion.setRightyytj("");
+						conclusion.setRightjytj("");
 					}
 					conclusion.setRighttg(kjjyDOList.get(0).getKjjyTgod());
 					conclusion.setRightprism(kjjyDOList.get(0).getKjjyPrismod());
@@ -388,15 +388,27 @@ public class SettlementController {
 					conclusion.setLeftcyl(kjjyDOList.get(0).getKjjyCylos());
 					conclusion.setLeftzx(kjjyDOList.get(0).getKjjyAxialos());
 					if (null != kjjyDOList.get(0).getKjjyYytjos()){
-						conclusion.setLeftyytj(kjjyDOList.get(0).getKjjyYytjos());
+						conclusion.setLeftjytj(kjjyDOList.get(0).getKjjyYytjos());
 					} else {
-						conclusion.setLeftyytj("");
+						conclusion.setLeftjytj("");
 					}
 					conclusion.setLefttg(kjjyDOList.get(0).getKjjyTgos());
 					conclusion.setLeftprism(kjjyDOList.get(0).getKjjyPrismos());
 					conclusion.setLeftjd(kjjyDOList.get(0).getKjjyJdos());
 					conclusion.setLeftAdd("");
+					if (null != kjjyDOList.get(0).getKjjyVaod()){
+						conclusion.setRightjyva("");
+					} else {
+						conclusion.setRightjyva(kjjyDOList.get(0).getKjjyVaod());
+					}
+					if (null != kjjyDOList.get(0).getKjjyVaos()){
+						conclusion.setLeftjyva(kjjyDOList.get(0).getKjjyVaos());
+					} else {
+						conclusion.setLeftjyva("");
+					}
+
 				}
+				settlementDO.setRecipelType("近用");
 			} else if (2 == settlementDO.getRecipelwlType()){
 				List<KjyyDO> kjyyDOList = kjyyService.list(map2);
 				if (null != kjyyDOList && kjyyDOList.size() > 0){
@@ -424,7 +436,18 @@ public class SettlementController {
 					conclusion.setLeftprism(kjyyDOList.get(0).getKjyyPrismos());
 					conclusion.setLeftjd(kjyyDOList.get(0).getKjyyJdos());
 					conclusion.setLeftAdd("");
+					if (null != kjyyDOList.get(0).getKjyyVaod()){
+						conclusion.setRightva(kjyyDOList.get(0).getKjyyVaod());
+					} else {
+						conclusion.setRightva("");
+					}
+					if (null != kjyyDOList.get(0).getKjyyVaos()){
+						conclusion.setLeftva(kjyyDOList.get(0).getKjyyVaos());
+					} else {
+						conclusion.setLeftva("");
+					}
 				}
+				settlementDO.setRecipelType("远用");
 			} else if (3 == settlementDO.getRecipelwlType()){
 				List<SgjjDO> sgjjDOList = sgjjService.list(map2);
 				if (null != sgjjDOList && sgjjDOList.size() > 0){
@@ -435,6 +458,11 @@ public class SettlementController {
 						conclusion.setRightyytj(sgjjDOList.get(0).getSgjjYytjod());
 					} else {
 						conclusion.setRightyytj("");
+					}
+					if (null != sgjjDOList.get(0).getSgjjJytjod()){
+						conclusion.setRightjytj(sgjjDOList.get(0).getSgjjJytjod());
+					} else {
+						conclusion.setRightjytj("");
 					}
 					conclusion.setRighttg(sgjjDOList.get(0).getSgjjTgod());
 					conclusion.setRightprism("");
@@ -448,11 +476,37 @@ public class SettlementController {
 					} else {
 						conclusion.setLeftyytj("");
 					}
+					if (null != sgjjDOList.get(0).getSgjjJytjos()){
+						conclusion.setLeftjytj(sgjjDOList.get(0).getSgjjJytjos());
+					} else {
+						conclusion.setLeftjytj("");
+					}
 					conclusion.setLefttg(sgjjDOList.get(0).getSgjjTgos());
 					conclusion.setLeftprism("");
 					conclusion.setLeftjd("");
 					conclusion.setLeftAdd("");
+					if (null != sgjjDOList.get(0).getSgjjJyvaod()){
+						conclusion.setRightjyva(sgjjDOList.get(0).getSgjjJyvaod());
+					} else {
+						conclusion.setRightjyva("");
+					}
+					if (null != sgjjDOList.get(0).getSgjjYyvaod()){
+						conclusion.setRightva(sgjjDOList.get(0).getSgjjYyvaod());
+					} else {
+						conclusion.setRightva("");
+					}
+					if (null != sgjjDOList.get(0).getSgjjJyvaos()){
+						conclusion.setLeftjyva(sgjjDOList.get(0).getSgjjJyvaos());
+					} else {
+						conclusion.setLeftjyva("");
+					}
+					if (null != sgjjDOList.get(0).getSgjjYyvaos()){
+						conclusion.setLeftva(sgjjDOList.get(0).getSgjjYyvaos());
+					} else {
+						conclusion.setLeftva("");
+					}
 				}
+				settlementDO.setRecipelType("渐进/双光");
 			} else if (4 == settlementDO.getRecipelwlType()){
 				List<ZyDO> zyDOList = zyService.list(map2);
 				if (null != zyDOList && zyDOList.size() > 0){
@@ -481,6 +535,7 @@ public class SettlementController {
 					conclusion.setLeftjd(zyDOList.get(0).getZyJdos());
 					conclusion.setLeftAdd("");
 				}
+				settlementDO.setRecipelType("中用");
 			} else if (5 == settlementDO.getRecipelwlType()){
 				List<RxjmjcjDO> rxjmjcjDOList = rxjmjcjService.list(map2);
 				if (null != rxjmjcjDOList && rxjmjcjDOList.size() > 0){
@@ -501,6 +556,7 @@ public class SettlementController {
 					conclusion.setLeftjd("");
 					conclusion.setLeftAdd("");
 				}
+				settlementDO.setRecipelType("隐形");
 			} else if (7 == settlementDO.getRecipelwlType()){
 				List<SjxlDO> sjxlDOList = sjxlService.list(map2);
 				if (null != sjxlDOList && sjxlDOList.size() > 0){
@@ -530,6 +586,7 @@ public class SettlementController {
 					conclusion.setLeftAdd("");
 				}
 			}
+			settlementDO.setRecipelType("视觉训练");
 		} else {
 			model.addAttribute("optometryName",settlementDO.getOptometryName());
 			List<Conclusion> conclusionList = salesService.conclusionList(map2);
@@ -601,7 +658,7 @@ public class SettlementController {
 
 		String addPrice = settlementDO.getAdditionalPrice();
 		Double priceSum = 0.00;
-		if (null != addPrice){
+		if (null != addPrice && !"".equals(addPrice)){
 			String[] addPriceStr = addPrice.split(",");
 			for (int d=0;d<addPriceStr.length;d++){
 				String price = addPriceStr[d];

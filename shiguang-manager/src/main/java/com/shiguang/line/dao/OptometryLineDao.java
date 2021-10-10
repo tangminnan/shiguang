@@ -17,6 +17,8 @@ public interface OptometryLineDao {
 
     int update(YgLineDO line);
 
+    int updateStatus(YgLineDO ygLineDO);
+
     List<YgLineDO> lineList(Map<String,Object> map);
 
     List<YgLineMemberDO> listMember(Map<String,Object> map);

@@ -300,10 +300,14 @@ public class SalesDO implements Serializable {
 	private String rightjidisg;
 	//渐近/双光远用瞳距OD
 	private String rightyuanyongtjsg;
+	//渐近/双光近用瞳距OD
+	private String rightjinyongtjsg;
 	//渐近/双光瞳高OD
 	private String righttonggaosg;
-	//渐近/双光VA(OD)
+	//渐近/双光远用VA(OD)
 	private String rightyuanyongVAsg;
+	//渐近/双光近用VA(OD)
+	private String rightjinyongVAsg;
 	//渐近/双光球镜OS
 	private String leftQJsg;
 	//渐近/双光柱镜OS
@@ -314,12 +318,16 @@ public class SalesDO implements Serializable {
 	private String leftsanlingjingsg;
 	//渐近/双光基地OS
 	private String leftjidisg;
-	//渐近/双光瞳距OD
+	//渐近/双光远用瞳距OD
 	private String leftyuanyongtjsg;
+	//渐近/双光近用瞳距OD
+	private String leftjinyongtjsg;
 	//渐近/双光瞳高OS
 	private String lefttonggaosg;
-	//渐近/双光VA(OS)
+	//渐近/双光远用VA(OS)
 	private String leftyuanyongVAsg;
+	//渐近/双光近用VA(OS)
+	private String leftjinyongVAsg;
 
 
 	//中用球镜OD
@@ -425,6 +433,64 @@ public class SalesDO implements Serializable {
 	private String leftSJXLyyva;
 	//视觉训练近用va
 	private String leftSJXLjyva;
+
+	//角膜塑形镜vst
+	//球镜OD
+	private String rightQJvst;
+	//柱镜OD
+	private String rightZJvst;
+	//轴向OD
+	private String rightzhouxiangvst;
+	//试戴镜编号
+	private String rightVstSdjbh;
+	//FK
+	private String rightVstFK;
+	//曲率半径
+	private String rightVstQlbj;
+	//AC
+	private String rightVstAC;
+	//降幅
+	private String rightVstJF;
+	//DIA
+	private String rightVstDIA;
+	//BC
+	private String rightVstBC;
+	//CP/CLY
+	private String rightVstCPCLY;
+	//E值
+	private String rightVstE;
+	//VA
+	private String rightVstVA;
+	//品牌
+	private String rightVstPinPai;
+	//球镜OS
+	private String leftQJvst;
+	//柱镜OS
+	private String leftZJvst;
+	//轴向OS
+	private String leftzhouxiangvst;
+	//试戴镜编号
+	private String leftVstSdjbh;
+	//FK
+	private String leftVstFK;
+	//曲率半径
+	private String leftVstQlbj;
+	//AC
+	private String leftVstAC;
+	//降幅
+	private String leftVstJF;
+	//DIA
+	private String leftVstDIA;
+	//BC
+	private String leftVstBC;
+	//CP/CLY
+	private String leftVstCPCLY;
+	//E值
+	private String leftVstE;
+	//VA
+	private String leftVstVA;
+	//品牌
+	private String leftVstPinPai;
 
 
 
@@ -1479,6 +1545,23 @@ public class SalesDO implements Serializable {
 	 * 渐近/双光瞳距OD
 	 */
 	public String getRightyuanyongtjsg() {return rightyuanyongtjsg;}
+
+	public void setRightjinyongtjsg(String rightjinyongtjsg){this.rightjinyongtjsg = this.rightjinyongtjsg;}
+
+	public String getRightjinyongtjsg(){return rightjinyongtjsg;}
+
+	public void setRightjinyongVAsg(String rightjinyongVAsg){this.rightjinyongVAsg = this.rightjinyongVAsg;}
+
+	public String getRightjinyongVAsg(){return rightjinyongVAsg;}
+
+	public void setLeftjinyongtjsg(String leftjinyongtjsg){this.leftjinyongtjsg = leftjinyongtjsg;}
+
+	public String getLeftjinyongtjsg(){return leftjinyongtjsg;}
+
+	public void setLeftjinyongVAsg(String leftjinyongVAsg){this.leftjinyongVAsg = leftjinyongVAsg;}
+
+	public String getLeftjinyongVAsg(){return leftjinyongVAsg;}
+
 	/**
 	 * 瞳高OD
 	 */
@@ -2124,5 +2207,230 @@ public class SalesDO implements Serializable {
 
 	public void setLeftRight(String leftRight) {
 		this.leftRight = leftRight;
+	}
+
+
+	public String getRightQJvst() {
+		return rightQJvst;
+	}
+
+	public void setRightQJvst(String rightQJvst) {
+		this.rightQJvst = rightQJvst;
+	}
+
+	public String getRightZJvst() {
+		return rightZJvst;
+	}
+
+	public void setRightZJvst(String rightZJvst) {
+		this.rightZJvst = rightZJvst;
+	}
+
+	public String getRightzhouxiangvst() {
+		return rightzhouxiangvst;
+	}
+
+	public void setRightzhouxiangvst(String rightzhouxiangvst) {
+		this.rightzhouxiangvst = rightzhouxiangvst;
+	}
+
+	public String getRightVstSdjbh() {
+		return rightVstSdjbh;
+	}
+
+	public void setRightVstSdjbh(String rightVstSdjbh) {
+		this.rightVstSdjbh = rightVstSdjbh;
+	}
+
+	public String getRightVstFK() {
+		return rightVstFK;
+	}
+
+	public void setRightVstFK(String rightVstFK) {
+		this.rightVstFK = rightVstFK;
+	}
+
+	public String getRightVstQlbj() {
+		return rightVstQlbj;
+	}
+
+	public void setRightVstQlbj(String rightVstQlbj) {
+		this.rightVstQlbj = rightVstQlbj;
+	}
+
+	public String getRightVstAC() {
+		return rightVstAC;
+	}
+
+	public void setRightVstAC(String rightVstAC) {
+		this.rightVstAC = rightVstAC;
+	}
+
+	public String getRightVstJF() {
+		return rightVstJF;
+	}
+
+	public void setRightVstJF(String rightVstJF) {
+		this.rightVstJF = rightVstJF;
+	}
+
+	public String getRightVstDIA() {
+		return rightVstDIA;
+	}
+
+	public void setRightVstDIA(String rightVstDIA) {
+		this.rightVstDIA = rightVstDIA;
+	}
+
+	public String getRightVstBC() {
+		return rightVstBC;
+	}
+
+	public void setRightVstBC(String rightVstBC) {
+		this.rightVstBC = rightVstBC;
+	}
+
+	public String getRightVstCPCLY() {
+		return rightVstCPCLY;
+	}
+
+	public void setRightVstCPCLY(String rightVstCPCLY) {
+		this.rightVstCPCLY = rightVstCPCLY;
+	}
+
+	public String getRightVstE() {
+		return rightVstE;
+	}
+
+	public void setRightVstE(String rightVstE) {
+		this.rightVstE = rightVstE;
+	}
+
+	public String getRightVstVA() {
+		return rightVstVA;
+	}
+
+	public void setRightVstVA(String rightVstVA) {
+		this.rightVstVA = rightVstVA;
+	}
+
+	public String getRightVstPinPai() {
+		return rightVstPinPai;
+	}
+
+	public void setRightVstPinPai(String rightVstPinPai) {
+		this.rightVstPinPai = rightVstPinPai;
+	}
+
+	public String getLeftQJvst() {
+		return leftQJvst;
+	}
+
+	public void setLeftQJvst(String leftQJvst) {
+		this.leftQJvst = leftQJvst;
+	}
+
+	public String getLeftZJvst() {
+		return leftZJvst;
+	}
+
+	public void setLeftZJvst(String leftZJvst) {
+		this.leftZJvst = leftZJvst;
+	}
+
+	public String getLeftzhouxiangvst() {
+		return leftzhouxiangvst;
+	}
+
+	public void setLeftzhouxiangvst(String leftzhouxiangvst) {
+		this.leftzhouxiangvst = leftzhouxiangvst;
+	}
+
+	public String getLeftVstSdjbh() {
+		return leftVstSdjbh;
+	}
+
+	public void setLeftVstSdjbh(String leftVstSdjbh) {
+		this.leftVstSdjbh = leftVstSdjbh;
+	}
+
+	public String getLeftVstFK() {
+		return leftVstFK;
+	}
+
+	public void setLeftVstFK(String leftVstFK) {
+		this.leftVstFK = leftVstFK;
+	}
+
+	public String getLeftVstQlbj() {
+		return leftVstQlbj;
+	}
+
+	public void setLeftVstQlbj(String leftVstQlbj) {
+		this.leftVstQlbj = leftVstQlbj;
+	}
+
+	public String getLeftVstAC() {
+		return leftVstAC;
+	}
+
+	public void setLeftVstAC(String leftVstAC) {
+		this.leftVstAC = leftVstAC;
+	}
+
+	public String getLeftVstJF() {
+		return leftVstJF;
+	}
+
+	public void setLeftVstJF(String leftVstJF) {
+		this.leftVstJF = leftVstJF;
+	}
+
+	public String getLeftVstDIA() {
+		return leftVstDIA;
+	}
+
+	public void setLeftVstDIA(String leftVstDIA) {
+		this.leftVstDIA = leftVstDIA;
+	}
+
+	public String getLeftVstBC() {
+		return leftVstBC;
+	}
+
+	public void setLeftVstBC(String leftVstBC) {
+		this.leftVstBC = leftVstBC;
+	}
+
+	public String getLeftVstCPCLY() {
+		return leftVstCPCLY;
+	}
+
+	public void setLeftVstCPCLY(String leftVstCPCLY) {
+		this.leftVstCPCLY = leftVstCPCLY;
+	}
+
+	public String getLeftVstE() {
+		return leftVstE;
+	}
+
+	public void setLeftVstE(String leftVstE) {
+		this.leftVstE = leftVstE;
+	}
+
+	public String getLeftVstVA() {
+		return leftVstVA;
+	}
+
+	public void setLeftVstVA(String leftVstVA) {
+		this.leftVstVA = leftVstVA;
+	}
+
+	public String getLeftVstPinPai() {
+		return leftVstPinPai;
+	}
+
+	public void setLeftVstPinPai(String leftVstPinPai) {
+		this.leftVstPinPai = leftVstPinPai;
 	}
 }

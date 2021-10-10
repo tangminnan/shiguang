@@ -89,6 +89,7 @@ public class SettlementMethodController {
                     costDO.setSaleNumber(costDO1.getSaleNumber());
                     costDO.setSumMoney(sumMoney);
                     costDO.setSaleName(costDO1.getSaleName());
+                    costDO.setOriginalPrice(costDO1.getOriginalPrice());
                 }
             }
         }

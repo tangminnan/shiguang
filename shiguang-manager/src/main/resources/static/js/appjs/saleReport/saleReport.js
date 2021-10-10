@@ -34,7 +34,8 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
                                 saleNum:$("#saleNum").val(),
-                                settleDate:$("#settleDate").val()
+                                settleDateStart:$("#settleDateStart").val(),
+                                settleDateEnd:$("#settleDateEnd").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};

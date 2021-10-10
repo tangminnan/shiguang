@@ -48,13 +48,11 @@ public class SaleReportController {
         query.put("state",1);
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyid",ShiroUtils.getUser().getCompanyId());
-        } else {
-            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //Date date = new Date();
         //query.put("settleDate",simpleDateFormat.format(date));
-        query.put("settleDate",simpleDateFormat.format(query.get("saleDate")));
+        //query.put("settleDate",simpleDateFormat.format(query.get("saleDate")));
         List<SalesDO> list = saleReportService.findSaleReport(query);
         List<Map<String,Object>> saleReportList = new ArrayList<>();
         if (null != list && list.size() > 0){

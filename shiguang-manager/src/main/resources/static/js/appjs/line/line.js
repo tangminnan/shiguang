@@ -85,8 +85,6 @@ function reLoad() {
 }
 function add() {
 	var consultRoom =window.localStorage.getItem("consultRoom");
-	alert(consultRoom);
-	alert("3424");
     var counter = 10;
     setInterval(function() {
         counter--;
