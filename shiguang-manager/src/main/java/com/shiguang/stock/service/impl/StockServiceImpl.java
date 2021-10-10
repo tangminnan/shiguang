@@ -434,7 +434,10 @@ public class StockServiceImpl implements StockService {
                         String useday = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 效期
                         String count = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 数量
                         StockDO stockDO = new StockDO();
-                        stockDO.setGoodsType(goodsType);
+//                        stockDO.setGoodsType(goodsType);
+//                        stockDO.setGoodsType(goodsType);
+//                        stockDO.setGoodsType(goodsType);
+//                        stockDO.setGoodsType(goodsType);
                         stockDao.save(stockDO);
 
                         num++;
