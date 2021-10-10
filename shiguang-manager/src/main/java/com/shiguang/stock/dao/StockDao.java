@@ -149,4 +149,9 @@ public interface StockDao {
 
     OrderDO getShouhuo(String danjuNumber);
     List<OrderDO> getShouhuoList(Map<String, Object> map);
+
+
+    //    查询相关信息
+    StockDO jingjias(StockDO stockDO);
+//    List<StockDO> jingjias(Map<String, Object> map);
 }

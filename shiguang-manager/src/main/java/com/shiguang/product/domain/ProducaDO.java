@@ -32,7 +32,7 @@ public class ProducaDO implements Serializable {
     //商品名称
     private String producName;
     //制造商id
-    private String  mfrsnum;
+    private String  mfrsid;
     //制造商
     private String mfrsname;
     //商品品种（品牌id
@@ -183,15 +183,12 @@ public class ProducaDO implements Serializable {
     /**
      * 设置：制造商id
      */
-    public void setMfrsnum(String  mfrsnum) {
-        this. mfrsnum =  mfrsnum;
+    public String getMfrsid() {
+        return mfrsid;
     }
 
-    /**
-     * 获取：制造商id
-     */
-    public String getMfrsnum() {
-        return  mfrsnum;
+    public void setMfrsid(String mfrsid) {
+        this.mfrsid = mfrsid;
     }
 
     /**

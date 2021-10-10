@@ -385,8 +385,16 @@ public class StockServiceImpl implements StockService {
         return stockDao.getShouhuoList(map);
     }
 
+//    @Override
+//    public List<StockDO> jingjias(Map<String, Object> map) {
+//        return stockDao.jingjias(map);
+//    }
 
 
+    @Override
+    public StockDO jingjias(StockDO stockDO) {
+        return stockDao.jingjias(stockDO);
+    }
 
     /**
      * excel数据导入
@@ -432,15 +440,22 @@ public class StockServiceImpl implements StockService {
                         row = sheet.getRow(rowNum);
                         String goodsNum = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 代码
                         String useday = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 效期
-                        String count = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 数量
-                        StockDO stockDO = new StockDO();
-//                        stockDO.setGoodsType(goodsType);
-//                        stockDO.setGoodsType(goodsType);
-//                        stockDO.setGoodsType(goodsType);
-//                        stockDO.setGoodsType(goodsType);
-                        stockDao.save(stockDO);
+                        String count = ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    // 数量
+                        Integer goodstype=goodsType;
+                        if (goodstype==1){
+                            StockDO stockDO = new StockDO();
+//                            stockDO.setGoodsType(goodstype);
+                            stockDO.setGoodsNum(goodsNum);
+                          StockDO jingjiass=  stockDao.jingjias(stockDO);
+//                            jingjiass.
 
-                        num++;
+                            stockDO.setGoodsType(goodsType);
+
+                            stockDao.save(stockDO);
+
+                            num++;
+
+                        }
 
 
                     } catch (Exception e) {

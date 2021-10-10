@@ -1083,4 +1083,89 @@ public class StockDO implements Serializable {
     public void setMaterialname(String materialname) {
         this.materialname = materialname;
     }
+
+
+//、、、、、、、、采购入库、、、、、、、、、、、、、、
+    private String producNum;
+    //商品条码
+    private String producCode;
+    //商品名称
+    private String producName;
+    //制造商id
+//    private String mfrsid;
+    //制造商
+//    private String mfrsname;
+    //商品品种（品牌id
+    private Integer brandid;
+    //品牌
+//    private String brandname;
+    private String brandnum;
+    //型号
+//    private String producFactory;
+
+    //计量单位
+    private Integer unitid;
+    //单位
+    private String unitname;
+    //标准零售价格
+//    private String retailPrice;
+    //镜片类型
+//    private String classtype;
+
+
+    public String getProducNum() {
+        return producNum;
+    }
+
+    public void setProducNum(String producNum) {
+        this.producNum = producNum;
+    }
+
+    public String getProducCode() {
+        return producCode;
+    }
+
+    public void setProducCode(String producCode) {
+        this.producCode = producCode;
+    }
+
+    public String getProducName() {
+        return producName;
+    }
+
+    public void setProducName(String producName) {
+        this.producName = producName;
+    }
+
+    public Integer getBrandid() {
+        return brandid;
+    }
+
+    public void setBrandid(Integer brandid) {
+        this.brandid = brandid;
+    }
+
+    public String getBrandnum() {
+        return brandnum;
+    }
+
+    public void setBrandnum(String brandnum) {
+        this.brandnum = brandnum;
+    }
+
+    public Integer getUnitid() {
+        return unitid;
+    }
+
+    public void setUnitid(Integer unitid) {
+        this.unitid = unitid;
+    }
+
+    public String getUnitname() {
+        return unitname;
+    }
+
+    public void setUnitname(String unitname) {
+        this.unitname = unitname;
+    }
 }

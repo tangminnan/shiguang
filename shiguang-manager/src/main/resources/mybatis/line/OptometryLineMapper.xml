@@ -101,7 +101,7 @@
         <set>
             <if test="callStatus != null">`call_status` = #{callStatus} </if>
         </set>
-        where member_number = ${memeberNumber} and date_format(line_time ,'%Y-%m-%d') = #{lineTime}
+        where member_number = #{memberNumber} and date_format(line_time ,'%Y-%m-%d') = #{lineDate}
     </update>
 
     <select id="listMember" resultType="com.shiguang.line.domain.YgLineMemberDO">

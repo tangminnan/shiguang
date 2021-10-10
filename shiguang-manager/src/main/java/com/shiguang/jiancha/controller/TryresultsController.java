@@ -10,7 +10,9 @@ import com.shiguang.jiancha.domain.TryresultsDO;
 import com.shiguang.jiancha.service.PharmacyService;
 import com.shiguang.jiancha.service.TryresultsService;
 import com.shiguang.line.domain.LineDO;
+import com.shiguang.line.domain.YgLineDO;
 import com.shiguang.line.service.LineService;
+import com.shiguang.line.service.OptometryLineService;
 import com.shiguang.mfrs.domain.BrandDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,8 @@ public class TryresultsController {
     private TryresultsService tryresultsService;
     @Autowired
     private LineService lineService;
+    @Autowired
+    private OptometryLineService optometryLineService;
 
     //散瞳用药
     @Autowired
@@ -84,17 +88,21 @@ public class TryresultsController {
     @RequiresPermissions("jiancha:tryresults:add")
     public R save(TryresultsDO tryresults) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        LineDO lineDO = new LineDO();
-        lineDO.setMemberNumber(tryresults.getCardNumber());
-        lineDO.setLineDate(simpleDateFormat.format(new Date()));
-        lineDO.setCallStatus("4");
-        lineService.updateByMember(lineDO);
+//        LineDO lineDO = new LineDO();
+//        lineDO.setMemberNumber(tryresults.getCardNumber());
+//        lineDO.setLineDate(simpleDateFormat.format(new Date()));
+//        lineDO.setCallStatus("4");
+//        lineService.updateByMember(lineDO);
+        YgLineDO ygLineDO = new YgLineDO();
+        ygLineDO.setLineDate(simpleDateFormat.format(new Date()));
+        ygLineDO.setMemberNumber(tryresults.getCardNumber());
+        ygLineDO.setCallStatus("4");
+        optometryLineService.updateStatus(ygLineDO);
       String ptometryNumber= tryresults.getPtometryNumber();
         Map<String, Object> map = new HashMap<>();
         map.put("ptometryNumber", ptometryNumber);
         List<TryresultsDO> list = tryresultsService.haveYanguangNum(map);
         if (list.size() > 0) {
-//            return R.error("品牌代码已存在");
             tryresultsService.updateTry(tryresults);
             return R.ok();
         }else if (tryresultsService.save(tryresults) > 0) {
