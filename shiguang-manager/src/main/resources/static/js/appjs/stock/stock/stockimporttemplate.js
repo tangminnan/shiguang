@@ -9,11 +9,10 @@ $.validator.setDefaults({
 });
 function daoru(){
 	var formData = new FormData(document.getElementById("signupForm"));
-	alert("导入库存")
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/information/member/importMember",
+		url : "/stock/stock/importStock",
 		data : formData,// 你的formid
 		processData:false,
 		contentType:false,

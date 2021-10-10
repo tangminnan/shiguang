@@ -190,7 +190,7 @@ function importtemplate(){
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '520px' ],
-        content : '/stock/weiwai/information/'+checkType // iframe的url
+        content : '/stock/stock/information/'+checkType // iframe的url
     });
     layer.full(toIndex)
 }

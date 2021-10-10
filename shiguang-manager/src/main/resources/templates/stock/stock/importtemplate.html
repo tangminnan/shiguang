@@ -13,11 +13,22 @@
 						   <div class="form-group">
 								<label class="col-sm-3 control-label">接收仓位：</label>
 								<div class="col-sm-8">
-								<select name="departNumber" id="departNumber"   class="selectpicker show-tick form-control" data-live-search="true" data-actions-box="false" data-size="5" required>
+								<select name="positionId" id="positionId"   class="selectpicker show-tick " data-live-search="true" data-actions-box="false" data-size="5" required>
 									<option value="">请选择仓位</option>
 									<option th:each="hd:${positionDOList}"
 									 th:text="${hd.positionName}"
 									 th:value="${hd.positionId}"></option>
+								</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">商品类别：</label>
+								<div class="col-sm-8">
+								<select name="goodsType" id="goodsType"   class="selectpicker show-tick " data-live-search="true" data-actions-box="false" data-size="5" required>
+									<option value="">请选择商品类别</option>
+									<option th:each="hd:${goodsDOList}"
+									 th:text="${hd.goodsname}"
+									 th:value="${hd.goodsid}"></option>
 								</select>
 								</div>
 							</div>
@@ -30,7 +41,8 @@
 						   <div class="form-group">	
 								<label class="col-sm-3 control-label">excel文件上传</label>
 								<div class="col-sm-8">
-									<input id="fileName" name="file" class="form-control" type="file">
+<!--									<input id="fileName" name="file" class="form-control" type="file">-->
+									<input id="fileName" name="file"  type="file">
 									<p style="color:red;">*文件格式为.xlsx；请确保导入数据的正确性，以保证库存的正确！</p>
 								</div>
 							</div>
@@ -47,6 +59,6 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/stock/weiwai/stockimporttemplate.js"></script>
+	<script type="text/javascript" src="/js/appjs/stock/stock/stockimporttemplate.js"></script>
 </body>
 </html>

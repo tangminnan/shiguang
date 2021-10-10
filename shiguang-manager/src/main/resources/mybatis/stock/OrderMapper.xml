@@ -22,7 +22,7 @@
         s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
         s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`,s.`classtype`,
         s.`factory`,s.`status`,s.`username`,s.`returnzt`
-        from stock_order s left join c_mfrs m on s.mfrsid=m.mfrsid
+        from stock_order s left join c_mfrs m on s.mfrsid=m.mfrsnum
         left join c_position po on s.position_id=po.position_id
         left join department d on po.depart_number= d.depart_number
         <where>

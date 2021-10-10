@@ -306,7 +306,7 @@
                             <label for="H_AC_a"><input name="sgnAcway" value="1" type="radio" id="H_AC_a" checked> 梯度法</label>
                             <label for="H_AC_b"><input name="sgnAcway"  value="2" type="radio" id="H_AC_b"> 计算法</label>
                         </td>
-                        <td class="bg-d7">立体式</td>
+                        <td class="bg-d7">立体视</td>
                         <td colspan="3" style="text-align:left;">
                            <select id="litishi" name="litishi">
                                <option></option>
@@ -371,7 +371,7 @@
                         <input name="cornealFirstK1Right" th:value="${ocularEyesDO.cornealFirstK1Right}"
                                type="text"  oninput="getmoney(this,10)" autofocus/>@
                         <input name="cornealLastK1Right" th:value="${ocularEyesDO.cornealLastK1Right}"
-                               type="text" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
+                               type="text" onkeyup="value=value.replace(/[^\d]+/g,'')" />
                     </td>
                     <td>
                         <!--                        <h3>nnnnnnn</h3>-->
@@ -385,7 +385,7 @@
                         <input name="cornealFirstK2Right" th:value="${ocularEyesDO.cornealFirstK2Right}"
                                type="text" oninput="getmoney(this,10)" autofocus/>@
                         <input name="cornealLastK2Right" th:value="${ocularEyesDO.cornealLastK2Right}"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/>
                     </td>
                     <td>
                         <input name="intraocularOd" th:value="${ocularEyesDO.intraocularOd}" type="text"/> mmHg
@@ -400,13 +400,13 @@
                         <input name="cornealFirstK1Left" th:value="${ocularEyesDO.cornealFirstK1Left}"
                                oninput="getmoney(this,10)" autofocus type="text"/>@
                         <input name="cornealLastK1Left" th:value="${ocularEyesDO.cornealLastK1Left}"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"  type="text"/>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"   type="text"/>
                     </td>
                     <td>
                         <input name="cornealFirstK2Left" th:value="${ocularEyesDO.cornealFirstK2Left}"
                                oninput="getmoney(this,10)" autofocus   type="text"/>@
                         <input name="cornealLastK2Left" th:value="${ocularEyesDO.cornealLastK2Left}"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"  type="text"/>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"   type="text"/>
                     </td>
                     <td>
                         <input name="intraocularOs" th:value="${ocularEyesDO.intraocularOs}" type="text"/> mmHg
@@ -474,7 +474,7 @@
                     </td>
                     <td>
                         <input id="axialRight" name="axialRight" th:value="${optometryFrontDO.axialRight}" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"  type="text"/>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/>
                     </td>
                     <td rowspan="2">散瞳后</td>
                     <td>
@@ -484,7 +484,7 @@
                         <input name="cylinderRight2" th:value="${optometryAfterDO.cylinderRight}"onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus  type="text"/>
                     </td>
                     <td>
-                        <input id="axialRight2" name="axialRight2" th:value="${optometryAfterDO.axialRight}" onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"   type="text"/>
+                        <input id="axialRight2" name="axialRight2" th:value="${optometryAfterDO.axialRight}" onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')"    type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -497,7 +497,7 @@
                     </td>
                     <td>
                         <input id="axialLeft" name="axialLeft" th:value="${optometryFrontDO.axialLeft}" type="text"
-                               onblur="zhouxiang(this)"  onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" />
+                               onblur="zhouxiang(this)"  onkeyup="value=value.replace(/[^\d]+/g,'')"  />
                     </td>
                     <td>
                         <input name="sphereLeft2" th:value="${optometryAfterDO.sphereLeft}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
@@ -507,7 +507,7 @@
                     </td>
                     <td>
                         <input id="axialLeft2" name="axialLeft2" th:value="${optometryAfterDO.axialLeft}" type="text"
-                               onblur="zhouxiang(this)"  onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" />
+                               onblur="zhouxiang(this)"  onkeyup="value=value.replace(/[^\d]+/g,'')"  />
                     </td>
                 </tr>
                 <tr>
@@ -586,7 +586,7 @@
                     <td><input name="sphJyod" th:value="${optometryDO.sphJyod}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input name="cylJyod" th:value="${optometryDO.cylJyod}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input id="axialJyod" name="axialJyod" th:value="${optometryDO.axialJyod}" type="text"
-                               onblur="zhouxiang(this)"  onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"   /></td>
+                               onblur="zhouxiang(this)"  onkeyup="value=value.replace(/[^\d]+/g,'')"    /></td>
                     <td><input name="vaJyod" th:value="${optometryDO.vaJyod}" type="text"/></td>
                     <td><input name="pdJyod" th:value="${optometryDO.pdJyod}" type="text"/></td>
                     <td colspan="2"></td>
@@ -596,7 +596,7 @@
                     <td><input name="sphJyos" th:value="${optometryDO.sphJyos}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input name="cylJyos" th:value="${optometryDO.cylJyos}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input id="axialJyos" name="axialJyos" th:value="${optometryDO.axialJyos}" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"  type="text"/></td>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"   type="text"/></td>
                     <td><input name="vaJyos" th:value="${optometryDO.vaJyos}" type="text"/></td>
                     <td><input name="pdJyos" th:value="${optometryDO.pdJyos}" type="text"/></td>
                     <td colspan="2"></td>
@@ -620,7 +620,7 @@
                     <td><input name="sphCpod" th:value="${optometryDO.sphCpod}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input name="cylCpod" th:value="${optometryDO.cylCpod}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input id="axialCpod" name="axialCpod" th:value="${optometryDO.axialCpod}" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/></td>
                     <td><input name="dvaCpod" th:value="${optometryDO.dvaCpod}" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input name="nvaCpod" th:value="${optometryDO.nvaCpod}" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input name="addCpod" th:value="${optometryDO.addCpod}" onblur="zhengfu(this)"
@@ -632,7 +632,7 @@
                     <td><input name="sphCpos" th:value="${optometryDO.sphCpos}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input name="cylCpos" th:value="${optometryDO.cylCpos}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input id="axialCpos" name="axialCpos" th:value="${optometryDO.axialCpos}" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/></td>
                     <td><input name="dvaCpos" th:value="${optometryDO.dvaCpos}" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input name="nvaCpos" th:value="${optometryDO.nvaCpos}" oninput="getmoney(this,10)" autofocus type="text"/></td>
                     <td><input name="addCpos" th:value="${optometryDO.addCpos}" onblur="zhengfu(this)"
@@ -668,7 +668,7 @@
                     <td><input class="input_text" id="cylinderRightz" name="cylinderRightz" type="text"
                                onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus/></td>
                     <td><input class="input_text" id="axialRightz" name="axialRightz" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/></td>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/></td>
                     <td><input class="input_text" id="dvaRightz" name="dvaRightz" oninput="getmoney(this,10)" autofocus type="text" /></td>
                     <td><input class="input_text" id="nvaRightz" name="nvaRightz" type="text" oninput="getmoney(this,10)" autofocus/></td>
                     <td><input id="prismRightz" name="prismRightz" class="short input_text"
@@ -702,7 +702,7 @@
                     </td>
                     <td>
                         <input class="input_text" id="axialLeftz" name="axialLeftz" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/>
                     </td>
                     <td>
                         <input class="input_text" id="dvaLeftz" name="dvaLeftz" type="text" oninput="getmoney(this,10)" autofocus/>
@@ -771,7 +771,7 @@
                     </td>
                     <td>
                         <input class="input_text" id="axialRighttry" name="axialRighttry" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/>
                     </td>
                     <td>
                         <input class="input_text" id="dvaRighttry" name="dvaRighttry" type="text" oninput="getmoney(this,10)" autofocus/>
@@ -821,7 +821,7 @@
                     </td>
                     <td>
                         <input class="input_text" id="axialLefttry" name="axialLefttry" onblur="zhouxiang(this)"
-                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" type="text"/>
+                               onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/>
                     </td>
                     <td>
                         <input class="input_text" id="dvaLefttry" name="dvaLefttry" type="text" oninput="getmoney(this,10)" autofocus/>

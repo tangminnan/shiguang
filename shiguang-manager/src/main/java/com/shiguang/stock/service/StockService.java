@@ -1,11 +1,13 @@
 package com.shiguang.stock.service;
 
 
+import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.*;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.StockDO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -144,6 +146,7 @@ public interface StockService {
     OrderDO getShouhuo(String danjuNumber);
     List<OrderDO> getShouhuoList(Map<String, Object> map);
 
-
+    //采购批量导入
+    R importStock(Integer goodsType,String positionId, String checkType, MultipartFile file);
 
 }

@@ -79,6 +79,7 @@ public class OptometryNewController {
         }else  {
             query.put("companyId",companyId);
         }
+        query.put("status", 0);
         query.put("state", 1);
         List<MemberDO> memberDOList = memberService.yanguangList(query);
         int total = memberService.yanguangCount(query);

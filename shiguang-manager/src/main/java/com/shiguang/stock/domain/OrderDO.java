@@ -64,7 +64,7 @@ public class OrderDO implements Serializable {
     }
 
     //制造商id
-    private Integer mfrsid;
+    private String mfrsid;
     private String mfrsname;
 
     public String getMfrsname() {
@@ -368,14 +368,14 @@ public class OrderDO implements Serializable {
     /**
      * 设置：制造商id
      */
-    public void setMfrsid(Integer mfrsid) {
+    public void setMfrsid(String mfrsid) {
         this.mfrsid = mfrsid;
     }
 
     /**
      * 获取：制造商id
      */
-    public Integer getMfrsid() {
+    public String getMfrsid() {
         return mfrsid;
     }
 

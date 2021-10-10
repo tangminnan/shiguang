@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -1062,5 +1063,47 @@ public class StockController {
         List<OrderDO> shouhuoList = stockService.getShouhuoList(map);
         model.addAttribute("shouhuoList", shouhuoList);
         return shouhuoList;
+    }
+
+
+
+
+
+    //进入导入页面
+    @GetMapping("/information/{checkType}")
+    public String importtemplate(Model model, @PathVariable("checkType") String checkType) {
+        model.addAttribute("checkType", checkType);
+        Map<String, Object> map = new HashMap<>();
+        //———获取当前登录用户的公司id————
+        String companyId = ShiroUtils.getUser().getCompanyId();
+        if (companyId == null) {
+            String departNumber = ShiroUtils.getUser().getStoreNum();
+            map.put("departNumber", departNumber);
+        } else if (companyId != null) {
+            map.put("companyId", companyId);
+        }
+        map.put("status", "0");
+        //获取当前公司的所有仓位
+        List<PositionDO> positionDOList = positionService.list(map);
+        map.put("state", 1);
+        model.addAttribute("positionDOList", positionDOList);
+        //商品类别
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
+        if ("PU_TONG".equals(checkType)) {
+            return "/stock/stock/importtemplate";
+        }
+        return null;
+    }
+
+    /**
+     * 导入
+     */
+    @PostMapping("/importStock")
+    @ResponseBody
+//    @RequiresPermissions("information:member:member")
+    public R importStock(Integer goodsType, String positionId,String checkType, MultipartFile file) {
+        return stockService.importStock(goodsType,positionId, checkType, file);
+
     }
 }

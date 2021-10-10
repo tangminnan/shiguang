@@ -1,16 +1,29 @@
 package com.shiguang.stock.service.impl;
 
+import com.shiguang.common.utils.R;
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.*;
 import com.shiguang.stock.dao.StockDao;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
+import com.shiguang.system.config.ExcelUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @Service
@@ -370,5 +383,104 @@ public class StockServiceImpl implements StockService {
     @Override
     public List<OrderDO> getShouhuoList(Map<String, Object> map) {
         return stockDao.getShouhuoList(map);
+    }
+
+
+
+
+    /**
+     * excel数据导入
+     */
+    @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED)
+    public R importStock(Integer goodsType, String positionId,String checkType, MultipartFile file) {
+        System.out.println("==============file================" + file);
+        int num = 0;
+        InputStream in = null;
+        Workbook book = null;
+        List<Integer> list = new ArrayList<>();
+        try {
+            if (file != null) {
+                in = file.getInputStream();
+                book = ExcelUtils.getBook(file);
+                Sheet sheet = book.getSheetAt(0);
+                Row row;
+                int lastnum = sheet.getLastRowNum();
+                //判断导入的Excel中是否有未填项
+                for (int a = 1; a <= sheet.getLastRowNum(); a++) {
+                    row = sheet.getRow(a);
+                    if (ExcelUtils.getCellFormatValue(row.getCell((short) 0)) != "" &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 0)) != null &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 1)) != "" &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 1)) != null &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 2)) != "" &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 2)) != null &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 3)) != "" &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 3)) != null &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 4)) != "" &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 4)) != null &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 5)) != "" &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 5)) != null &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 6)) != "" &&
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 6)) != null) ;
+                    else
+                        return R.error("Excel中有部分基本信息数据为空，请检查好重新导入");
+                }
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+                    try {
+                        row = sheet.getRow(rowNum);
+                        String goodsNum = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 代码
+                        String useday = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 效期
+                        String count = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 数量
+                        StockDO stockDO = new StockDO();
+                        stockDO.setGoodsType(goodsType);
+                        stockDao.save(stockDO);
+
+                        num++;
+
+
+                    } catch (Exception e) {
+                        System.out.println("导入失败======第" + (rowNum + 1) + "条==================");
+                        e.printStackTrace();
+                    }
+
+                }
+                if (list.size() > 0) {
+                    return R.ok("上传成功,共增加[" + num + "]条,第" + list + "行导入用户失败，原因：姓名或者出生日期可能无效");
+                } else {
+                    return R.ok("上传成功,共增加[" + num + "]条");
+                }
+            } else {
+                return R.error("请选择导入的文件!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (book != null)
+                    book.close();
+                if (in != null)
+                    in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return R.error();
+    }
+
+    //判断名字是否都为汉字
+    private boolean checkRealName(String realName) {
+        if (StringUtils.isEmpty(realName)) {
+            return false;
+        }
+
+        char[] ch = realName.toCharArray();
+        for (char c : ch) {
+            if (c < 0x4E00 || c > 0x9FA5) {
+                return false;
+            }
+        }
+        return true;
     }
 }

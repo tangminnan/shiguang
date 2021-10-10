@@ -11,6 +11,7 @@
     <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 <body>
+<!--onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" 轴向-->
 <form class="form-horizontal m-t" id="jielun">
     <div class="topTab">
         <ul>
@@ -273,7 +274,7 @@
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjyyCylod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"   id="kjyyAxialod"  name="kjyyAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"   id="kjyyAxialod"  name="kjyyAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"   name="kjyyPrismod" class="short" type="text"/>
                     △
                 </td>
@@ -298,7 +299,7 @@
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}" name="kjyyCylos" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialLefttry}"    id="kjyyAxialos" name="kjyyAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"    id="kjyyAxialos" name="kjyyAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input th:value="${tryresultsDO.prismLefttry}"    name="kjyyPrismos" class="short" type="text"/> △
                 </td>
                 <td>
@@ -413,7 +414,7 @@
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjjyCylod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}" id="kjjyAxialod" name="kjjyAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}" id="kjjyAxialod" name="kjjyAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}" name="kjjyPrismod" class="short" type="text"/> △
                 </td>
                 <td>
@@ -437,7 +438,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}"name="kjjyCylos" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialLefttry}"  id="kjjyAxialos" name="kjjyAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}"  id="kjjyAxialos" name="kjjyAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input th:value="${tryresultsDO.prismLefttry}"   name="kjjyPrismos" class="short" type="text"/> △</td>
                 <td>
                     <select id="kjjyJdos" name="kjjyJdos" th:value="${tryresultsDO.jdlTry}" >
@@ -553,7 +554,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}"name="sgjjCylod" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}" id="sgjjAxialod"  name="sgjjAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}" id="sgjjAxialod"  name="sgjjAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input  th:value="${tryresultsDO.addRighttry}"     name="sgjjAddod" onblur="zhengfu(this)"
                             oninput="getmoney(this,10)" autofocus type="text"/></td>
                 <td><input  th:value="${tryresultsDO.yuanRrty}"        name="sgjjYytjod" type="text"/></td>
@@ -568,7 +569,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input   th:value="${tryresultsDO.cylinderLefttry}"name="sgjjCylos" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
-                <td><input   th:value="${tryresultsDO.axialLefttry}"  id="sgjjAxialos" name="sgjjAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input   th:value="${tryresultsDO.axialLefttry}"  id="sgjjAxialos" name="sgjjAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input    th:value="${tryresultsDO.addLefttry}"    name="sgjjAddos" onblur="zhengfu(this)"
                               oninput="getmoney(this,10)" autofocus type="text"/></td>
                 <td><input    th:value="${tryresultsDO.yuanLrty}"       name="sgjjYytjos" type="text"/></td>
@@ -676,7 +677,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}"name="rxCylod" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"  id="rxAxialod" name="rxAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="rxAxialod" name="rxAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="rxZjod" type="text"/></td>
                 <td><input th:value="${tryresultsDO.dvaRighttry}"  name="rxVaod" type="text"/></td>
                 <td>适用镜片：<input name="rxSyjpod" style="width:60%" type="text"/></td>
@@ -697,7 +698,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}"name="rxCylos" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialLefttry}" id="rxAxialos"  name="rxAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialLefttry}" id="rxAxialos"  name="rxAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="rxZjos" type="text"/></td>
                 <td><input th:value="${tryresultsDO.dvaLefttry}"  name="rxVaos" type="text"/></td>
                 <td>适用镜片：<input name="rxSyjpos" style="width:60%" type="text"/></td>
@@ -762,7 +763,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="zyCylod" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"  id="zyAxialod"  name="zyAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="zyAxialod"  name="zyAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"    name="zyPrismod" class="short" type="text"/> △</td>
                 <td>
                     <select id="zyJdod" name="zyJdod" th:value="${tryresultsDO.jdrTry}">
@@ -785,7 +786,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="zyCylos" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
-                <td><input  th:value="${tryresultsDO.axialLefttry}" id="zyAxialos"  name="zyAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="zyAxialos"  name="zyAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input  th:value="${tryresultsDO.prismLefttry}"   name="zyPrismos" class="short" type="text"/> △</td>
                 <td>
                     <select id="zyJdos" name="zyJdos" th:value="${tryresultsDO.jdlTry}">
@@ -900,7 +901,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="sjxlCylod" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"  id="sjxlAxialod"  name="sjxlAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="sjxlAxialod"  name="sjxlAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"   name="sjxlSljod" class="short" type="text"/> △</td>
                 <td>
                     <select id="sjxlJdod" name="sjxlJdod" th:value="${tryresultsDO.jdrTry}">
@@ -924,7 +925,7 @@
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="sjxlCylos" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
-                <td><input  th:value="${tryresultsDO.axialLefttry}" id="sjxlAxialos"  name="sjxlAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="sjxlAxialos"  name="sjxlAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input  th:value="${tryresultsDO.prismLefttry}"   name="sjxlSljos" class="short" type="text"/> △</td>
                 <td>
                     <select id="sjxlJdos" name="sjxlJdos"th:value="${tryresultsDO.jdlTry}">
@@ -1019,7 +1020,7 @@
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="vstCylod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"  id="vstAxialod"  name="vstAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="vstAxialod"  name="vstAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="vstSdbhod" type="text"/></td>
                 <td><input name="vstFkod" type="text"/></td>
                 <td><input name="vstQlbjod" type="text"/></td>
@@ -1042,7 +1043,7 @@
                             oninput="getmoney(this,10)" autofocus/></td>
                 <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="vstCylos" type="text"onblur="zhengfu(this)"
                             oninput="getmoney(this,10)" autofocus/></td>
-                <td><input  th:value="${tryresultsDO.axialLefttry}" id="vstAxialos"  name="vstAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="vstAxialos"  name="vstAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="vstSdbhos" type="text"/></td>
                 <td><input name="vstFkos" type="text"/></td>
                 <td><input name="vstQlbjos" type="text"/></td>
@@ -1113,7 +1114,7 @@
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="crtCylod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"  id="crtAxialod"  name="crtAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="crtAxialod"  name="crtAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="crtSdbhod" type="text"/></td>
                 <td><input name="ctrBcod" type="text"/></td>
                 <td><input name="crtRzdod" type="text"/></td>
@@ -1134,7 +1135,7 @@
                             oninput="getmoney(this,10)" autofocus/></td>
                 <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="crtCylos" type="text"onblur="zhengfu(this)"
                             oninput="getmoney(this,10)" autofocus/></td>
-                <td><input  th:value="${tryresultsDO.axialLefttry}" id="crtAxialos"  name="crtAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="crtAxialos"  name="crtAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="crtSdbhos" type="text"/></td>
                 <td><input name="crtBcos" type="text"/></td>
                 <td><input name="crtRzdos" type="text"/></td>
@@ -1200,7 +1201,7 @@
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="rgpCylod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.axialRighttry}"  id="rgpAxialod"  name="rgpAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input th:value="${tryresultsDO.axialRighttry}"  id="rgpAxialod"  name="rgpAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="rgpQgdod" type="text"/></td>
                 <td><input name="rgpBcod" type="text"/></td>
                 <td><input name="rgpDiaod" type="text"/></td>
@@ -1218,7 +1219,7 @@
                             oninput="getmoney(this,10)" autofocus/></td>
                 <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="rgpCylos" type="text"onblur="zhengfu(this)"
                             oninput="getmoney(this,10)" autofocus/></td>
-                <td><input  th:value="${tryresultsDO.axialLefttry}" id="rgpAxialos"  name="rgpAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="rgpAxialos"  name="rgpAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="rgpQgdos" type="text"/></td>
                 <td><input name="rgpBcos" type="text"/></td>
                 <td><input name="rgpDiaos" type="text"/></td>
@@ -1560,7 +1561,7 @@
         if (val < 0 || val > 180) {
             layer.alert("轴向在0-180之间");
         } else {
-            e.value = val.toFixed(2)
+            e.value = val.toFixed(0)
         }
         var kjyyAxialod=document.getElementById('kjyyAxialod').value;
         if (kjyyAxialod == "NaN"){
