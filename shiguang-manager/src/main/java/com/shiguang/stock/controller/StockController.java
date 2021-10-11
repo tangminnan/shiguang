@@ -143,7 +143,7 @@ public class StockController {
         model.addAttribute("createTime", newDate);
         return "stock/stock/add";
     }
-
+///采购详情页面
     @GetMapping("/edit/{id}")
     @RequiresPermissions("stock:stock:edit")
     String edit(@PathVariable("id") Long id, Model model) {
@@ -156,7 +156,7 @@ public class StockController {
         return "stock/stock/edit";
     }
 
-
+    ///采购详情列表
     @ResponseBody
     @RequestMapping(value = "/selectOrder")
     public List<OrderDO> selectOrder(String danjuNumber, Integer goodsType,Model model) {
@@ -200,6 +200,8 @@ public class StockController {
         String[] classtype1=stock.getClasstype().split(",");
         String[] factory1=stock.getFactory().split(",");
         String[] goodsxinxiid1=stock.getGoodsxinxiid().toString().split(",");
+
+        String[] createTime1=stock.getCreateTime().toString().split(",");
 
         for (int i = 0; i < name.length; i++) {
             StockDO stockDO = new StockDO();
@@ -303,7 +305,13 @@ public class StockController {
 
 
                 stockDO.setPositionName(stock.getPositionName());
-                stockDO.setCreateTime(stock.getCreateTime());
+                try {
+                    String createTime = createTime1[i];
+                    stockDO.setCreateTime(createTime);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    stockDO.setCreateTime("");
+                }
+
                 stockDO.setDanjuNumber(stock.getDanjuNumber());
                 stockDO.setOrderNumber(stock.getOrderNumber());
                 stockDO.setYundanNumber(stock.getYundanNumber());
@@ -483,7 +491,12 @@ public class StockController {
 
             orderDO1.setPositionId(orderDO.getPositionId());
             orderDO1.setPositionName(orderDO.getPositionName());
-            orderDO1.setCreateTime(orderDO.getCreateTime());
+            try {
+                String createTime = createTime1[i];
+                orderDO1.setCreateTime(createTime);
+            }catch (ArrayIndexOutOfBoundsException e){
+                orderDO1.setCreateTime("");
+            }
             orderDO1.setDanjuNumber(orderDO.getDanjuNumber());
             orderDO1.setOrderNumber(orderDO.getOrderNumber());
             orderDO1.setYundanNumber(orderDO.getYundanNumber());
@@ -1011,7 +1024,7 @@ public class StockController {
         return "/stock/stock/code";
     }
 
-    //打印
+    //打印订单
     @GetMapping("/dayinOrder")
     String dayinOrder(String danjuNumber, Model model) {
         OrderDO getOeder = stockService.getOeder(danjuNumber);
@@ -1037,7 +1050,8 @@ public class StockController {
         List<OrderDO> orderDOList = stockService.getOederList(map);
         model.addAttribute("orderDOList", orderDOList);
         return orderDOList;
-    } //打印
+    }
+    //打印收货
     @GetMapping("/shouhuoOrder")
     String shouhuoOrder(String danjuNumber, Model model) {
         OrderDO getShouhuo = stockService.getShouhuo(danjuNumber);

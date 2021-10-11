@@ -195,7 +195,7 @@ public class PidiaoController {
 	String edit(@PathVariable("id") Long id,Model model){
 		PidiaoDO pidiao = pidiaoService.get(id);
 		SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date time = pidiao.getDanjuDay();
+		String time = pidiao.getDanjuDay();
 		String danjuDay = sdftime.format(time);
 		model.addAttribute("danjuDay", danjuDay);
 		model.addAttribute("pidiao", pidiao);
@@ -221,7 +221,7 @@ public class PidiaoController {
 		String pidiaoNumber=pidiao.getPidiaoNumber();
 
 		String zhidanPeople=pidiao.getZhidanPeople();
-		Date danjuDay=pidiao.getDanjuDay();
+		String danjuDay=pidiao.getDanjuDay();
 		String outDepartment=pidiao.getOutDepartment();
 		String outPosition=pidiao.getOutPosition();
 		String inCompany=pidiao.getInCompany();
@@ -511,13 +511,13 @@ public class PidiaoController {
 				stockDO.setUnit(unit);
 				String retailPrice = pidiaoDO.getRetailPrice();
 				stockDO.setRetailPrice(retailPrice);
-				Date createTime=pidiaoDO.getCreateTime();
+				String createTime=pidiaoDO.getCreateTime();
 				stockDO.setCreateTime(createTime);
 				String danjuNumber = pidiaoDO.getPidiaoNumber();
 				stockDO.setDanjuNumber(danjuNumber);
 				String zhidanPeople = pidiaoDO.getZhidanPeople();
 				stockDO.setZhidanPeople(zhidanPeople);
-				Date danjuDay = pidiaoDO.getCreateTime();
+				String danjuDay = pidiaoDO.getCreateTime();
 				stockDO.setDanjuDay(danjuDay);
 				String zhuceNumber = pidiaoDO.getZhuceNumber();
 				stockDO.setZhuceNumber(zhuceNumber);
@@ -548,7 +548,7 @@ public class PidiaoController {
 	String pidiaodan(String pidiaoNumber, Model model) {
 		PidiaoDO getpidiao = pidiaoService.getpidiao(pidiaoNumber);
 		SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date time = getpidiao.getDanjuDay();
+		String time = getpidiao.getDanjuDay();
 		String danjuDay = sdftime.format(time);
 		model.addAttribute("danjuDay", danjuDay);
 		model.addAttribute("getpidiao", getpidiao);

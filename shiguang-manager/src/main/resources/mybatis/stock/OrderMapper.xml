@@ -9,7 +9,7 @@
 		o.`zhidan_people`,o.`danju_day`,o.`tuihuo_number`,o.`factory_number`,o.`beizhu`,o.`unit`,o.`batch`,o.`zhuce_number`,o.`produce_day`,o.`useday`,o.`classtype`,
 		o.`factory`,o.`status`,o.`username`,o.`returnzt`,m.`mfrsname`,p.`position_name`,g.`goodsname` as gdname
 		 from stock_order o
-		 left join c_mfrs m on o.mfrsid=m.mfrsid
+		 left join c_mfrs m on o.mfrsid=m.mfrsnum
 		 left join c_position p on  o.position_id=p.position_id
 		 left join c_goods g on o.goods_type=g.goodsid
 		 where o.id = #{value}

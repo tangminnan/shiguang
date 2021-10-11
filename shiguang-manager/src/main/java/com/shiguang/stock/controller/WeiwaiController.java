@@ -142,7 +142,7 @@ public class WeiwaiController {
 		}
 		return "stock/weiwai/detial";
 	}
-
+//委外详情
 	@GetMapping("/detial/{id}")
 	@RequiresPermissions("stock:weiwai:detial")
 	String detial(@PathVariable("id") Long id, Model model) {

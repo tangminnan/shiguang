@@ -127,7 +127,7 @@ public class StockDO implements Serializable {
     //仓位名称
     private String positionName;
     //入库时间
-    private Date createTime;
+    private String createTime;
     //单据编号
     private String danjuNumber;
     //订单编号
@@ -137,7 +137,7 @@ public class StockDO implements Serializable {
     //制单人
     private String zhidanPeople;
     //单据日期
-    private Date danjuDay;
+    private String danjuDay;
     //退货单号
     private String tuihuoNumber;
     //厂家订单号
@@ -527,14 +527,14 @@ public class StockDO implements Serializable {
     /**
      * 设置：单据日期
      */
-    public void setDanjuDay(Date danjuDay) {
+    public void setDanjuDay(String danjuDay) {
         this.danjuDay = danjuDay;
     }
 
     /**
      * 获取：单据日期
      */
-    public Date getDanjuDay() {
+    public String getDanjuDay() {
         return danjuDay;
     }
 
@@ -751,14 +751,14 @@ public class StockDO implements Serializable {
     /**
      * 设置：入库时间
      */
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
     /**
      * 获取：入库时间
      */
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 

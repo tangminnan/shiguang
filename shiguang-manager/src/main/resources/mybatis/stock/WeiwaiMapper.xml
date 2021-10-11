@@ -737,14 +737,14 @@
 		sa.amount_money,
 		sa.recipel_type,
 		sa.classtype,
-		'' chufangType,
-		'' AS yangsname,
-		'' AS rightsph,
-		'' AS leftsph,
-		'' AS rightcyl,
-		'' AS leftcyl,
-		'' AS rightzx,
-		'' AS leftzx,
+		rg.rgp_prescription_type AS chufangType,
+		rg.rgp_optometry_name AS yangsname,
+		rg.rgp_sphod AS rightsph,
+		rg.rgp_sphos AS leftsph,
+		rg.rgp_cylod AS rightcyl,
+		rg.rgp_cylos AS leftcyl,
+		rg.rgp_axialod AS rightzx,
+		rg.rgp_axialos AS leftzx,
 		'' AS rightAdd,
 		'' AS leftAdd,
 		'' AS rightSlja,
@@ -758,6 +758,94 @@
 		FROM
 		jc_rgp rg
 		JOIN store_sales sa ON sa.ptometry_number = rg.ptometry_number
+		JOIN member m ON sa.member_number = m.card_number
+		JOIN department de ON sa.store_num = de.id
+		UNION
+		SELECT
+		de.depart_name,
+		m.company_id,
+		sa.sale_type,
+		sa.store_num,
+		sa.left_right,
+		sa.process_ask,
+		sa.goods_num,
+		sa.jp_goods_name,
+		sa.jp_goods_num,
+		sa.sale_number,
+		sa.member_number,
+		m. NAME,
+		m.phone_1,
+		sa.eye_type,
+		sa.peijing_time AS settle_date,
+		sa.sale_name,
+		sa.amount_money,
+		sa.recipel_type,
+		sa.classtype,
+		vs.vst_prescription_type AS chufangType,
+		vs.vst_optometry_name AS yangsname,
+		vs.vst_sphod AS rightsph,
+		vs.vst_sphos AS leftsph,
+		vs.vst_cylod AS rightcyl,
+		vs.vst_cylos AS leftcyl,
+		vs.vst_axialod AS rightzx,
+		vs.vst_axialos AS leftzx,
+		'' AS rightAdd,
+		'' AS leftAdd,
+		'' AS rightSlja,
+		'' AS leftSlja,
+		'' AS rightJd,
+		'' AS leftJd,
+		vs.vst_vaod AS rightFartj,
+		vs.vst_vaos AS leftFartj,
+		'' AS rightNeartj,
+		'' AS leftNeartj
+		FROM
+		jc_vst vs
+		JOIN store_sales sa ON sa.ptometry_number = vs.ptometry_number
+		JOIN member m ON sa.member_number = m.card_number
+		JOIN department de ON sa.store_num = de.id
+		UNION
+		SELECT
+		de.depart_name,
+		m.company_id,
+		sa.sale_type,
+		sa.store_num,
+		sa.left_right,
+		sa.process_ask,
+		sa.goods_num,
+		sa.jp_goods_name,
+		sa.jp_goods_num,
+		sa.sale_number,
+		sa.member_number,
+		m. NAME,
+		m.phone_1,
+		sa.eye_type,
+		sa.peijing_time AS settle_date,
+		sa.sale_name,
+		sa.amount_money,
+		sa.recipel_type,
+		sa.classtype,
+		cr.crt_prescription_type AS chufangType,
+		cr.crt_optometry_name AS yangsname,
+		cr.crt_sphod AS rightsph,
+		cr.crt_sphos AS leftsph,
+		cr.crt_cylod AS rightcyl,
+		cr.crt_cylos AS leftcyl,
+		cr.crt_axialod AS rightzx,
+		cr.crt_axialos AS leftzx,
+		'' AS rightAdd,
+		'' AS leftAdd,
+		'' AS rightSlja,
+		'' AS leftSlja,
+		'' AS rightJd,
+		'' AS leftJd,
+		cr.crt_vaod AS rightFartj,
+		cr.crt_vaod AS leftFartj,
+		'' AS rightNeartj,
+		'' AS leftNeartj
+		FROM
+		jc_crt cr
+		JOIN store_sales sa ON sa.ptometry_number = cr.ptometry_number
 		JOIN member m ON sa.member_number = m.card_number
 		JOIN department de ON sa.store_num = de.id
 		) aia

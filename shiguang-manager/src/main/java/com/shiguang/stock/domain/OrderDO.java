@@ -130,7 +130,7 @@ public class OrderDO implements Serializable {
     //仓位名称
     private String positionName;
     //入库时间
-    private Date createTime;
+    private String createTime;
     //单据编号
     private String danjuNumber;
     //订单编号
@@ -768,14 +768,14 @@ public class OrderDO implements Serializable {
     /**
      * 设置：入库时间
      */
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
     /**
      * 获取：入库时间
      */
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 

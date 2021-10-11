@@ -4,6 +4,7 @@ import com.shiguang.common.utils.R;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.*;
+import com.shiguang.stock.dao.OrderDao;
 import com.shiguang.stock.dao.StockDao;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
@@ -30,6 +31,8 @@ import java.util.*;
 public class StockServiceImpl implements StockService {
     @Autowired
     private StockDao stockDao;
+    @Autowired
+    private OrderDao orderDao;
 
     @Override
     public StockDO get(Long id) {
@@ -415,44 +418,75 @@ public class StockServiceImpl implements StockService {
                 Row row;
                 int lastnum = sheet.getLastRowNum();
                 //判断导入的Excel中是否有未填项
-                for (int a = 1; a <= sheet.getLastRowNum(); a++) {
+                for (int a = 2; a <= sheet.getLastRowNum(); a++) {
                     row = sheet.getRow(a);
                     if (ExcelUtils.getCellFormatValue(row.getCell((short) 0)) != "" &&
                             ExcelUtils.getCellFormatValue(row.getCell((short) 0)) != null &&
                             ExcelUtils.getCellFormatValue(row.getCell((short) 1)) != "" &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 1)) != null &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 2)) != "" &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 2)) != null &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 3)) != "" &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 3)) != null &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 4)) != "" &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 4)) != null &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 5)) != "" &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 5)) != null &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 6)) != "" &&
-                            ExcelUtils.getCellFormatValue(row.getCell((short) 6)) != null) ;
+                            ExcelUtils.getCellFormatValue(row.getCell((short) 1)) != null
+//                            &&
+//                            ExcelUtils.getCellFormatValue(row.getCell((short) 2)) != "" &&
+//                            ExcelUtils.getCellFormatValue(row.getCell((short) 2)) != null &&
+//                            ExcelUtils.getCellFormatValue(row.getCell((short) 3)) != "" &&
+//                            ExcelUtils.getCellFormatValue(row.getCell((short) 3)) != null &&
+//                            ExcelUtils.getCellFormatValue(row.getCell((short) 4)) != "" &&
+//                            ExcelUtils.getCellFormatValue(row.getCell((short) 4)) != null &&
+//                            ExcelUtils.getCellFormatValue(row.getCell((short) 5)) != "" &&
+//                            ExcelUtils.getCellFormatValue(row.getCell((short) 5)) != null &&
+//                            ExcelUtils.getCellFormatValue(row.getCell((short) 6)) != "" &&
+//                            ExcelUtils.getCellFormatValue(row.getCell((short) 6)) != null
+                    ) ;
                     else
                         return R.error("Excel中有部分基本信息数据为空，请检查好重新导入");
                 }
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-                for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                for (int rowNum = 2; rowNum <= sheet.getLastRowNum(); rowNum++) {
                     try {
                         row = sheet.getRow(rowNum);
-                        String goodsNum = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 代码
-                        String useday = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 效期
-                        String count = ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    // 数量
+                        String goodsNums = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 代码
+                        String usedays = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 效期
+                        String counts = ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    // 数量
                         Integer goodstype=goodsType;
                         if (goodstype==1){
                             StockDO stockDO = new StockDO();
 //                            stockDO.setGoodsType(goodstype);
-                            stockDO.setGoodsNum(goodsNum);
+                            stockDO.setGoodsNum(goodsNums);
                           StockDO jingjiass=  stockDao.jingjias(stockDO);
-//                            jingjiass.
+                            String goodsNum=jingjiass.getProducNum();
+                            String goodsCode=jingjiass.getProducCode();
+                            String goodsName=jingjiass.getProducName();
+                            String mfrsid=jingjiass.getMfrsid();
+                            String brandname=jingjiass.getBrandname();
+                            String retailPrice=jingjiass.getRetailPrice();
+                            String unitname=jingjiass.getUnitname();
+                            String producFactory=jingjiass.getProducFactory();
+                            String classtype=jingjiass.getClasstype();
 
+                            stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
 
-                            stockDao.save(stockDO);
+                            stockDO.setGoodsNum(goodsNum);
+//                            if ("".equals(usedays))
+                            stockDO.setGoodsCode(goodsCode);
+                            stockDO.setGoodsName(goodsName);
+                            stockDO.setBrandname(brandname);
+                            stockDO.setRetailPrice(retailPrice);
+                            stockDO.setUnitname(unitname);
+                            stockDO.setMfrsid(mfrsid);
+                            stockDO.setProducFactory(producFactory);
+                            stockDO.setClasstype(classtype);
+                            stockDO.setGoodsCount(counts);
+                            stockDO.setUseday(usedays);
+//                            获取当前时间
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+//                            stockDO.setCreateTime(sdf);
+                            stockDao.save(stockDO);
+                            OrderDO orderDO = new OrderDO();
+
+                            if (orderDao.save(orderDO) < 0) {
+                                return R.error();
+                            }
                             num++;
 
                         }

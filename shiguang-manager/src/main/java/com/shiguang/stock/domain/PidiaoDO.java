@@ -56,7 +56,7 @@ public class PidiaoDO implements Serializable {
 	//制单人
 	private String zhidanPeople;
 	//单据日期
-	private Date danjuDay;
+	private String danjuDay;
 	//委外收货单
 	private String outsourcingNumber;
 	//备注
@@ -303,13 +303,13 @@ public class PidiaoDO implements Serializable {
 	/**
 	 * 设置：单据日期
 	 */
-	public void setDanjuDay(Date danjuDay) {
+	public void setDanjuDay(String danjuDay) {
 		this.danjuDay = danjuDay;
 	}
 	/**
 	 * 获取：单据日期
 	 */
-	public Date getDanjuDay() {
+	public String getDanjuDay() {
 		return danjuDay;
 	}
 	/**
@@ -616,7 +616,7 @@ public class PidiaoDO implements Serializable {
 	private String wholeSum;
 
 	//入库时间
-	private Date createTime;
+	private String createTime;
 	//单据编号
 	private String danjuNumber;
 	//订单编号
@@ -734,11 +734,11 @@ public class PidiaoDO implements Serializable {
 		this.wholeSum = wholeSum;
 	}
 
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 

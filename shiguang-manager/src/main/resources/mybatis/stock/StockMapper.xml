@@ -1882,7 +1882,7 @@
     <select id="getOeder" resultType="com.shiguang.stock.domain.OrderDO">
           select m.mfrsname,o.danju_number,d.depart_name,o.danju_day,d.depart_tel,d.depart_address,o.zhidan_people,o.goods_type
           from stock_order o
-          left join c_mfrs m on o.mfrsid=m.mfrsid
+          left join c_mfrs m on o.mfrsid=m.mfrsnum
           left join c_position p on o.position_id=p.position_id
           left join  department d on p.depart_number=d.depart_number
           where o.danju_number = #{value}
@@ -1917,7 +1917,7 @@
     </select><select id="getShouhuo" resultType="com.shiguang.stock.domain.OrderDO">
           select m.mfrsname,o.danju_number,d.depart_name,o.danju_day,d.depart_tel,d.depart_address,o.zhidan_people,o.goods_type,o.beizhu
           from stock_order o
-          left join c_mfrs m on o.mfrsid=m.mfrsid
+          left join c_mfrs m on o.mfrsid=m.mfrsnum
           left join c_position p on o.position_id=p.position_id
           left join  department d on p.depart_number=d.depart_number
           where o.danju_number = #{value}
