@@ -94,6 +94,49 @@
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
+                	if(xml[i].gdname==null){
+						xml[i].gdname=""
+					}
+                	if(xml[i].goodsName==null){
+						xml[i].goodsName=""
+					}
+                	if(xml[i].factory==null){
+						xml[i].factory=""
+					}
+                	if(xml[i].producFactorycolor==null){
+						xml[i].producFactorycolor=""
+					}
+                	if(xml[i].unit==null){
+						xml[i].unit=""
+					}
+                	if(xml[i].retailPrice==null){
+						xml[i].retailPrice=""
+					}
+                	if(xml[i].goodsCount==null){
+						xml[i].goodsCount=""
+					}
+                	if(xml[i].beizhu==null){
+						xml[i].beizhu=""
+					}
+                	if(xml[i].jscpsph==null){
+						xml[i].jscpsph=""
+					}
+                	if(xml[i].jpcpcyl==null){
+						xml[i].jpcpcyl=""
+					}
+                	if(xml[i].yxcpsph==null){
+						xml[i].yxcpsph=""
+					}
+                	if(xml[i].yxcpcyl==null){
+						xml[i].yxcpcyl=""
+					}
+                	if(xml[i].tyjproducfactorycolor==null){
+						xml[i].tyjproducfactorycolor=""
+					}
+                	if(xml[i].oldproducfactorycolor==null){
+						xml[i].oldproducfactorycolor=""
+					}
+
                     if (goodsType==1){
                         $(".liebiao").after("<tr class='val'> " +
                             "<td>" + xml[i].gdname + "</td>\n" +
