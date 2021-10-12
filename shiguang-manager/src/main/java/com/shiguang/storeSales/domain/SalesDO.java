@@ -492,6 +492,57 @@ public class SalesDO implements Serializable {
 	//品牌
 	private String leftVstPinPai;
 
+	//角膜塑形镜CRT
+	//球镜OD
+	private String rightQjcrt;
+	//柱镜OD
+	private String rightZjcrt;
+	//轴向OD
+	private String rightZhouxiangcrt;
+	//试戴镜编号
+	private String rightSdjbhcrt;
+	//BC
+	private String rightBCcrt;
+	//RZD
+	private String rightRZDcrt;
+	//LZA
+	private String rightLZAcrt;
+	//RZD2
+	private String rightRZD2crt;
+	//LZA2
+	private String rightLZA2crt;
+	//降幅
+	private String rightJFcrt;
+	//DIA
+	private String rightDIAcrt;
+	//VA
+	private String rightVAcrt;
+	//球镜OS
+	private String leftQjcrt;
+	//柱镜OS
+	private String leftZjcrt;
+	//轴向OS
+	private String leftZhouxiangcrt;
+	//试戴镜编号
+	private String leftSdjbhcrt;
+	//BC
+	private String leftBCcrt;
+	//RZD
+	private String leftRZDcrt;
+	//LZA
+	private String leftLZAcrt;
+	//RZD2
+	private String leftRZD2crt;
+	//LZA2
+	private String leftLZA2crt;
+	//降幅
+	private String leftJFcrt;
+	//DIA
+	private String leftDIAcrt;
+	//VA
+	private String leftVAcrt;
+
+
 
 
 	/**
@@ -2432,5 +2483,201 @@ public class SalesDO implements Serializable {
 
 	public void setLeftVstPinPai(String leftVstPinPai) {
 		this.leftVstPinPai = leftVstPinPai;
+	}
+
+	public String getRightQjcrt() {
+		return rightQjcrt;
+	}
+
+	public void setRightQjcrt(String rightQjcrt) {
+		this.rightQjcrt = rightQjcrt;
+	}
+
+	public String getRightZjcrt() {
+		return rightZjcrt;
+	}
+
+	public void setRightZjcrt(String rightZjcrt) {
+		this.rightZjcrt = rightZjcrt;
+	}
+
+	public String getRightZhouxiangcrt() {
+		return rightZhouxiangcrt;
+	}
+
+	public void setRightZhouxiangcrt(String rightZhouxiangcrt) {
+		this.rightZhouxiangcrt = rightZhouxiangcrt;
+	}
+
+	public String getRightSdjbhcrt() {
+		return rightSdjbhcrt;
+	}
+
+	public void setRightSdjbhcrt(String rightSdjbhcrt) {
+		this.rightSdjbhcrt = rightSdjbhcrt;
+	}
+
+	public String getRightBCcrt() {
+		return rightBCcrt;
+	}
+
+	public void setRightBCcrt(String rightBCcrt) {
+		this.rightBCcrt = rightBCcrt;
+	}
+
+	public String getRightRZDcrt() {
+		return rightRZDcrt;
+	}
+
+	public void setRightRZDcrt(String rightRZDcrt) {
+		this.rightRZDcrt = rightRZDcrt;
+	}
+
+	public String getRightLZAcrt() {
+		return rightLZAcrt;
+	}
+
+	public void setRightLZAcrt(String rightLZAcrt) {
+		this.rightLZAcrt = rightLZAcrt;
+	}
+
+	public String getRightRZD2crt() {
+		return rightRZD2crt;
+	}
+
+	public void setRightRZD2crt(String rightRZD2crt) {
+		this.rightRZD2crt = rightRZD2crt;
+	}
+
+	public String getRightLZA2crt() {
+		return rightLZA2crt;
+	}
+
+	public void setRightLZA2crt(String rightLZA2crt) {
+		this.rightLZA2crt = rightLZA2crt;
+	}
+
+	public String getRightJFcrt() {
+		return rightJFcrt;
+	}
+
+	public void setRightJFcrt(String rightJFcrt) {
+		this.rightJFcrt = rightJFcrt;
+	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public String getRightDIAcrt() {
+		return rightDIAcrt;
+	}
+
+	public void setRightDIAcrt(String rightDIAcrt) {
+		this.rightDIAcrt = rightDIAcrt;
+	}
+
+	public String getRightVAcrt() {
+		return rightVAcrt;
+	}
+
+	public void setRightVAcrt(String rightVAcrt) {
+		this.rightVAcrt = rightVAcrt;
+	}
+
+	public String getLeftQjcrt() {
+		return leftQjcrt;
+	}
+
+	public void setLeftQjcrt(String leftQjcrt) {
+		this.leftQjcrt = leftQjcrt;
+	}
+
+	public String getLeftZjcrt() {
+		return leftZjcrt;
+	}
+
+	public void setLeftZjcrt(String leftZjcrt) {
+		this.leftZjcrt = leftZjcrt;
+	}
+
+	public String getLeftZhouxiangcrt() {
+		return leftZhouxiangcrt;
+	}
+
+	public void setLeftZhouxiangcrt(String leftZhouxiangcrt) {
+		this.leftZhouxiangcrt = leftZhouxiangcrt;
+	}
+
+	public String getLeftSdjbhcrt() {
+		return leftSdjbhcrt;
+	}
+
+	public void setLeftSdjbhcrt(String leftSdjbhcrt) {
+		this.leftSdjbhcrt = leftSdjbhcrt;
+	}
+
+	public String getLeftBCcrt() {
+		return leftBCcrt;
+	}
+
+	public void setLeftBCcrt(String leftBCcrt) {
+		this.leftBCcrt = leftBCcrt;
+	}
+
+	public String getLeftRZDcrt() {
+		return leftRZDcrt;
+	}
+
+	public void setLeftRZDcrt(String leftRZDcrt) {
+		this.leftRZDcrt = leftRZDcrt;
+	}
+
+	public String getLeftLZAcrt() {
+		return leftLZAcrt;
+	}
+
+	public void setLeftLZAcrt(String leftLZAcrt) {
+		this.leftLZAcrt = leftLZAcrt;
+	}
+
+	public String getLeftRZD2crt() {
+		return leftRZD2crt;
+	}
+
+	public void setLeftRZD2crt(String leftRZD2crt) {
+		this.leftRZD2crt = leftRZD2crt;
+	}
+
+	public String getLeftLZA2crt() {
+		return leftLZA2crt;
+	}
+
+	public void setLeftLZA2crt(String leftLZA2crt) {
+		this.leftLZA2crt = leftLZA2crt;
+	}
+
+	public String getLeftJFcrt() {
+		return leftJFcrt;
+	}
+
+	public void setLeftJFcrt(String leftJFcrt) {
+		this.leftJFcrt = leftJFcrt;
+	}
+
+	public String getLeftDIAcrt() {
+		return leftDIAcrt;
+	}
+
+	public void setLeftDIAcrt(String leftDIAcrt) {
+		this.leftDIAcrt = leftDIAcrt;
+	}
+
+	public String getLeftVAcrt() {
+		return leftVAcrt;
+	}
+
+	public void setLeftVAcrt(String leftVAcrt) {
+		this.leftVAcrt = leftVAcrt;
 	}
 }

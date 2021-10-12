@@ -32,6 +32,7 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
+                                goodsCode:$("#goodsCode").val(),
                                 goodsName:$('#goodsName').val(),
                                 goodsNum:$('#goodsNum').val(),
                                 retailPriceStart:$('#retailPriceStart').val(),
@@ -90,7 +91,10 @@ function load() {
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
-
+document.onkeydown = function(e){
+    if((e||event).keyCode==13)
+        reLoad();
+};
 // function remove(id) {
 // 	layer.confirm('确定要删除选中的记录？', {
 // 		btn : [ '确定', '取消' ]

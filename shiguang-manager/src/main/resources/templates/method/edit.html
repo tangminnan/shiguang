@@ -177,12 +177,10 @@
             var payModels = $("#payModels").val();
             var paymodelStr = payModels.split(",");
             // var payModelss = $("input[name='payModelss']").val();
-            alert(paymodelStr[0]);
             $("#payModel").find("[value="+paymodelStr[0]+"]").attr("selected",true);
             var saleNumber = $("#saleNumber").val()
             var saleName = $("#saleName").val()
             var originalPrice = $("#originalPrice").val()
-			alert(originalPrice);
             var sumMoney = $("#sumMoney").val()
             $("#aa").text(saleNumber)
             $("#bb").text(saleName)

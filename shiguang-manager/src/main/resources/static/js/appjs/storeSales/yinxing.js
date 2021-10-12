@@ -47,6 +47,7 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
                                 yxType:$("#yxType").val(),
+                                goodsCode:$("#goodsCode").val(),
                                 goodsNum:$('#goodsNum').val(),
                                 goodsName:$('#goodsName').val(),
                                 jingpianType:$("#jingpianType").val(),
@@ -206,7 +207,10 @@ function reLoad() {
         $('#exampleTable').bootstrapTable('hideColumn', 'goodsCount');
 	}
 }
-
+document.onkeydown = function(e){
+    if((e||event).keyCode==13)
+        reLoad();
+};
 function batchSelect() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     return rows;

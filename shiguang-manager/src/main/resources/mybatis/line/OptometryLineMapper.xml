@@ -12,6 +12,7 @@
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
             <!--and call_status in ('1','2','3') or call_status = '0'-->
@@ -66,6 +67,7 @@
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>

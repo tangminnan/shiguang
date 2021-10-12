@@ -93,11 +93,17 @@ public class TryresultsController {
 //        lineDO.setLineDate(simpleDateFormat.format(new Date()));
 //        lineDO.setCallStatus("4");
 //        lineService.updateByMember(lineDO);
-        YgLineDO ygLineDO = new YgLineDO();
-        ygLineDO.setLineDate(simpleDateFormat.format(new Date()));
-        ygLineDO.setMemberNumber(tryresults.getCardNumber());
-        ygLineDO.setCallStatus("4");
-        optometryLineService.updateStatus(ygLineDO);
+        Map<String,Object> maps = new HashMap<>();
+        maps.put("memberNumber",tryresults.getCardNumber());
+        maps.put("lineTime",simpleDateFormat.format(new Date()));
+        List<YgLineDO> ygLineDOList = optometryLineService.lineList(maps);
+        if (null != ygLineDOList && ygLineDOList.size() > 0){
+            YgLineDO ygLineDO = new YgLineDO();
+            ygLineDO.setLineDate(simpleDateFormat.format(new Date()));
+            ygLineDO.setMemberNumber(tryresults.getCardNumber());
+            ygLineDO.setCallStatus("4");
+            optometryLineService.updateStatus(ygLineDO);
+        }
       String ptometryNumber= tryresults.getPtometryNumber();
         Map<String, Object> map = new HashMap<>();
         map.put("ptometryNumber", ptometryNumber);

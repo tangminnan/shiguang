@@ -42,6 +42,7 @@ function load() {
 								offset:params.offset,
                                 dzType:$("#dzType").val(),
                                 goodsName:$('#goodsName').val(),
+                                goodsCode:$("#goodsCode").val(),
                                 goodsNum:$('#goodsNum').val(),
                                 jingpianType:$("#jingpianType").val(),
                                 rightYuanYongQJ:$("#rightYuanYongQJ").val(),
@@ -231,7 +232,10 @@ function reLoad() {
         $('#exampleTable').bootstrapTable('hideColumn', 'functionName');
 	}
 }
-
+document.onkeydown = function(e){
+    if((e||event).keyCode==13)
+        reLoad();
+};
 function batchSelect() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     return rows;

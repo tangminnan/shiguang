@@ -66,7 +66,7 @@ public class MemberDO implements Serializable {
     //证件类型(1:居民身份证2:机动车驾驶证3:台湾居民来往大陆通行证4:中国人民解放军军人证5:中国人民武装警察身份证6:护照7:户口本)
     private String identityType;
     //联系人证件号码
-    private Long identityId;
+    private String identityId;
     //职业(1:工人2:学生3:农民4:教师5:军人6:管理者7:工程师)
     private String vocation;
     //学校
@@ -462,13 +462,13 @@ public class MemberDO implements Serializable {
     /**
      * 设置：联系人证件号码
      */
-    public void setIdentityId(Long identityId) {
+    public void setIdentityId(String identityId) {
         this.identityId = identityId;
     }
     /**
      * 获取：联系人证件号码
      */
-    public Long getIdentityId() {
+    public String getIdentityId() {
         return identityId;
     }
     /**

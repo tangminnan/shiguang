@@ -72,6 +72,10 @@ public class SettlementController {
 	@Autowired
 	private SjxlService sjxlService;
 	@Autowired
+	private VstService vstService;
+	@Autowired
+	private CrtService crtService;
+	@Autowired
 	private ZyService zyService;
 	@Autowired
 	private LogStatusService logStatusService;
@@ -585,8 +589,51 @@ public class SettlementController {
 					conclusion.setLeftjd(sjxlDOList.get(0).getSjxlJdos());
 					conclusion.setLeftAdd("");
 				}
+				settlementDO.setRecipelType("视觉训练");
+			}else if (settlementDO.getRecipelwlType() == 8){
+				List<VstDO> vstDOList = vstService.list(map2);
+				if (null != vstDOList && vstDOList.size() > 0){
+					conclusion.setRightsph(vstDOList.get(0).getVstSphod());
+					conclusion.setRightcyl(vstDOList.get(0).getVstCylod());
+					conclusion.setRightzx(vstDOList.get(0).getVstAxialod());
+					conclusion.setRightyytj("");
+					conclusion.setRighttg("");
+					conclusion.setRightprism("");
+					conclusion.setRightjd("");
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(vstDOList.get(0).getVstSphos());
+					conclusion.setLeftcyl(vstDOList.get(0).getVstCylos());
+					conclusion.setLeftzx(vstDOList.get(0).getVstAxialos());
+					conclusion.setLeftyytj("");
+					conclusion.setLefttg("");
+					conclusion.setLeftprism("");
+					conclusion.setLeftjd("");
+					conclusion.setLeftAdd("");
+				}
+				settlementDO.setRecipelType("角膜塑形镜VST");
+			} else if (settlementDO.getRecipelwlType() == 9){
+				List<CrtDO> crtDOList = crtService.list(map2);
+				if (null != crtDOList && crtDOList.size() > 0){
+					conclusion.setRightsph(crtDOList.get(0).getCrtSdbhod());
+					conclusion.setRightcyl(crtDOList.get(0).getCrtCylod());
+					conclusion.setRightzx(crtDOList.get(0).getCrtAxialod());
+					conclusion.setRightyytj("");
+					conclusion.setRighttg("");
+					conclusion.setRightprism("");
+					conclusion.setRightjd("");
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(crtDOList.get(0).getCrtSphod());
+					conclusion.setLeftcyl(crtDOList.get(0).getCrtCylos());
+					conclusion.setLeftzx(crtDOList.get(0).getCrtAxialos());
+					conclusion.setLeftyytj("");
+					conclusion.setLefttg("");
+					conclusion.setLeftprism("");
+					conclusion.setLeftjd("");
+					conclusion.setLeftAdd("");
+				}
+				settlementDO.setRecipelType("角膜塑形镜CRT");
 			}
-			settlementDO.setRecipelType("视觉训练");
+
 		} else {
 			model.addAttribute("optometryName",settlementDO.getOptometryName());
 			List<Conclusion> conclusionList = salesService.conclusionList(map2);
@@ -914,6 +961,46 @@ public class SettlementController {
 					conclusion.setLefttg("");
 					conclusion.setLeftprism(sjxlDOList.get(0).getSjxlSljos());
 					conclusion.setLeftjd(sjxlDOList.get(0).getSjxlJdos());
+					conclusion.setLeftAdd("");
+				}
+			}else if (settlementDO.getRecipelwlType() == 8){
+				List<VstDO> vstDOList = vstService.list(map2);
+				if (null != vstDOList && vstDOList.size() > 0){
+					conclusion.setRightsph(vstDOList.get(0).getVstSphod());
+					conclusion.setRightcyl(vstDOList.get(0).getVstCylod());
+					conclusion.setRightzx(vstDOList.get(0).getVstAxialod());
+					conclusion.setRightyytj("");
+					conclusion.setRighttg("");
+					conclusion.setRightprism("");
+					conclusion.setRightjd("");
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(vstDOList.get(0).getVstSphos());
+					conclusion.setLeftcyl(vstDOList.get(0).getVstCylos());
+					conclusion.setLeftzx(vstDOList.get(0).getVstAxialos());
+					conclusion.setLeftyytj("");
+					conclusion.setLefttg("");
+					conclusion.setLeftprism("");
+					conclusion.setLeftjd("");
+					conclusion.setLeftAdd("");
+				}
+			} else if (settlementDO.getRecipelwlType() == 9){
+				List<CrtDO> crtDOList = crtService.list(map2);
+				if (null != crtDOList && crtDOList.size() > 0){
+					conclusion.setRightsph(crtDOList.get(0).getCrtSdbhod());
+					conclusion.setRightcyl(crtDOList.get(0).getCrtCylod());
+					conclusion.setRightzx(crtDOList.get(0).getCrtAxialod());
+					conclusion.setRightyytj("");
+					conclusion.setRighttg("");
+					conclusion.setRightprism("");
+					conclusion.setRightjd("");
+					conclusion.setRightAdd("");
+					conclusion.setLeftsph(crtDOList.get(0).getCrtSphod());
+					conclusion.setLeftcyl(crtDOList.get(0).getCrtCylos());
+					conclusion.setLeftzx(crtDOList.get(0).getCrtAxialos());
+					conclusion.setLeftyytj("");
+					conclusion.setLefttg("");
+					conclusion.setLeftprism("");
+					conclusion.setLeftjd("");
 					conclusion.setLeftAdd("");
 				}
 			}
