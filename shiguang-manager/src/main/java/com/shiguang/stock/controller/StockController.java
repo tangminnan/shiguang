@@ -149,9 +149,10 @@ public class StockController {
     String edit(@PathVariable("id") Long id, Model model) {
         OrderDO orderDO = orderService.get(id);
         model.addAttribute("orderDO", orderDO);
-        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date time = orderDO.getDanjuDay();
-        String danjuDay = sdftime.format(time);
+//        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String time = orderDO.getDanjuDay();
+//        String danjuDay = sdftime.format(time);
+        String danjuDay = orderDO.getDanjuDay();
         model.addAttribute("danjuDay", danjuDay);
         return "stock/stock/edit";
     }
@@ -352,13 +353,13 @@ public class StockController {
                     stockDO.setProduceDay("");
                 }
                 try {
-                    String status = status1[i];
+                    String status = status1[0];
                     stockDO.setStatus(status);
                 }catch (ArrayIndexOutOfBoundsException e){
                     stockDO.setStatus("");
                 }
                 try {
-                    String username =username1 [i];
+                    String username =username1 [0];
                     stockDO.setUsername(username);
                 }catch (ArrayIndexOutOfBoundsException e){
                     stockDO.setUsername("");
@@ -539,13 +540,13 @@ public class StockController {
                 orderDO1.setProduceDay("");
             }
             try {
-                String status = status2[i];
+                String status = status2[0];
                 orderDO1.setStatus(status);
             }catch (ArrayIndexOutOfBoundsException e){
                 orderDO1.setStatus("");
             }
             try {
-                String username =username2 [i];
+                String username =username2 [0];
                 orderDO1.setUsername(username);
             }catch (ArrayIndexOutOfBoundsException e){
                 orderDO1.setUsername("");
@@ -1028,9 +1029,10 @@ public class StockController {
     @GetMapping("/dayinOrder")
     String dayinOrder(String danjuNumber, Model model) {
         OrderDO getOeder = stockService.getOeder(danjuNumber);
-        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date time = getOeder.getDanjuDay();
-        String danjuDay = sdftime.format(time);
+//        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String time = getOeder.getDanjuDay();
+//        String danjuDay = sdftime.format(time);
+        String danjuDay=getOeder.getDanjuDay();
         model.addAttribute("danjuDay", danjuDay);
         model.addAttribute("getOeder", getOeder);
         //———获取当前系统时间—————
@@ -1040,7 +1042,7 @@ public class StockController {
         model.addAttribute("newDate", newDate);
         return "/stock/stock/dayinOrder";
     }
-
+//打印订单列表
     @ResponseBody
     @RequestMapping(value = "/getOederList")
     public List<OrderDO> getOederList(String danjuNumber, Integer goodsType,Model model) {
@@ -1055,9 +1057,10 @@ public class StockController {
     @GetMapping("/shouhuoOrder")
     String shouhuoOrder(String danjuNumber, Model model) {
         OrderDO getShouhuo = stockService.getShouhuo(danjuNumber);
-        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date time = getShouhuo.getDanjuDay();
-        String danjuDay = sdftime.format(time);
+//        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String time = getShouhuo.getDanjuDay();
+//        String danjuDay = sdftime.format(time);
+        String danjuDay = getShouhuo.getDanjuDay();
         model.addAttribute("danjuDay", danjuDay);
         model.addAttribute("getShouhuo", getShouhuo);
         //———获取当前系统时间—————

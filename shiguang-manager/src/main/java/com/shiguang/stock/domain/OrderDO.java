@@ -140,7 +140,7 @@ public class OrderDO implements Serializable {
     //制单人
     private String zhidanPeople;
     //单据日期
-    private Date danjuDay;
+    private String danjuDay;
     //退货单号
     private String tuihuoNumber;
     //厂家订单号
@@ -536,14 +536,14 @@ public class OrderDO implements Serializable {
     /**
      * 设置：单据日期
      */
-    public void setDanjuDay(Date danjuDay) {
+    public void setDanjuDay(String danjuDay) {
         this.danjuDay = danjuDay;
     }
 
     /**
      * 获取：单据日期
      */
-    public Date getDanjuDay() {
+    public String getDanjuDay() {
         return danjuDay;
     }
 

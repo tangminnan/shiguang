@@ -1,6 +1,8 @@
 package com.shiguang.stock.service.impl;
 
+import com.shiguang.common.utils.GuuidUtil;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.*;
@@ -10,6 +12,7 @@ import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
 import com.shiguang.system.config.ExcelUtils;
+import io.swagger.models.auth.In;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.poi.ss.usermodel.*;
@@ -439,19 +442,21 @@ public class StockServiceImpl implements StockService {
                     else
                         return R.error("Excel中有部分基本信息数据为空，请检查好重新导入");
                 }
-//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                //———生成单据编号————
+                Long uuid = GuuidUtil.getUUID();
+                String danjuNumber = "PIN" + uuid.toString();
                 for (int rowNum = 2; rowNum <= sheet.getLastRowNum(); rowNum++) {
                     try {
                         row = sheet.getRow(rowNum);
                         String goodsNums = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 代码
-                        String usedays = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 效期
-                        String counts = ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    // 数量
+                        String counts  = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 效期
+                        String usedays= ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    // 数量
                         Integer goodstype=goodsType;
                         if (goodstype==1){
                             StockDO stockDO = new StockDO();
-//                            stockDO.setGoodsType(goodstype);
                             stockDO.setGoodsNum(goodsNums);
-                          StockDO jingjiass=  stockDao.jingjias(stockDO);
+                            StockDO jingjiass=  stockDao.jingjias(stockDO);
                             String goodsNum=jingjiass.getProducNum();
                             String goodsCode=jingjiass.getProducCode();
                             String goodsName=jingjiass.getProducName();
@@ -459,30 +464,100 @@ public class StockServiceImpl implements StockService {
                             String brandname=jingjiass.getBrandname();
                             String retailPrice=jingjiass.getRetailPrice();
                             String unitname=jingjiass.getUnitname();
-                            String producFactory=jingjiass.getProducFactory();
+                            String factory=jingjiass.getProducFactory();
                             String classtype=jingjiass.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
 
                             stockDO.setGoodsNum(goodsNum);
-//                            if ("".equals(usedays))
-                            stockDO.setGoodsCode(goodsCode);
+
                             stockDO.setGoodsName(goodsName);
                             stockDO.setBrandname(brandname);
                             stockDO.setRetailPrice(retailPrice);
-                            stockDO.setUnitname(unitname);
+                            stockDO.setUnit(unitname);
                             stockDO.setMfrsid(mfrsid);
-                            stockDO.setProducFactory(producFactory);
+                            //型号
+                            stockDO.setFactory(factory);
+                            //类型
                             stockDO.setClasstype(classtype);
+                            //数量
                             stockDO.setGoodsCount(counts);
-                            stockDO.setUseday(usedays);
-//                            获取当前时间
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            //效期
+                            Date dd = new Date();
+                            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String xiaoqi="";
+                            String code="";
+                            if (StringUtils.isNotBlank(usedays)) {
+                                if (usedays.contains("-")) {
+                                    dd = sdf.parse(usedays);
+                                    //student.setLastCheckTime(dd);
+                                } else {
+                                    Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                    Date d = calendar.getTime();
+                                    dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
+                                    String str = sdf.format(dd);
+                                    String yeah = str.substring(0, 4); //取年
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    code =yeah + yue + ri;
+                                }
+                            }
 
-//                            stockDO.setCreateTime(sdf);
-                            stockDao.save(stockDO);
+                            stockDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                stockDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                stockDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            //———入库时间—————
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date date = new Date();
+                            String createTime = createTimenew.format(date);
+                            stockDO.setCreateTime(createTime);
+                            stockDO.setDanjuNumber(danjuNumber);
+                            //------制单人------
+                            String zhidanPeople= ShiroUtils.getUser().getName();
+                            stockDO.setZhidanPeople(zhidanPeople);
+                            //---单据日期--
+                            stockDO.setDanjuDay(createTime);
+                            //收货状态
+                            stockDO.setStatus("1");
+                            stockDO.setUsername("未收货");
+                            stockDO.setReturnzt("1");
+                            if (stockDao.save(stockDO) < 0) {
+                                return R.error();
+                            }
+//                            stockDao.save(stockDO);
+
+//-----------------------------采购订单--------------------
                             OrderDO orderDO = new OrderDO();
+                            orderDO.setGoodsNum(goodsNum);
+//                            orderDO.setGoodsCode(goodsCode);
+                            orderDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                orderDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                stockDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            orderDO.setGoodsName(goodsName);
+                            orderDO.setGoodsCount(counts);
+                            orderDO.setGoodsType(goodstype);
+                            orderDO.setMfrsid(mfrsid);
+                            orderDO.setBrandname(brandname);
+                            orderDO.setUnit(unitname);
+                            orderDO.setRetailPrice(retailPrice);
+                            orderDO.setPositionId(positionId);
+                            orderDO.setCreateTime(createTime);
+                            orderDO.setDanjuNumber(danjuNumber);
+                            orderDO.setZhidanPeople(zhidanPeople);
+                            orderDO.setDanjuDay(createTime);
+                            orderDO.setClasstype(classtype);
+                            orderDO.setFactory(factory);
+                            orderDO.setStatus("1");
+                            orderDO.setUsername("未收货");
+                            orderDO.setReturnzt("1");
 
                             if (orderDao.save(orderDO) < 0) {
                                 return R.error();

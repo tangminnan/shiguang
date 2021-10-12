@@ -33,6 +33,7 @@ import com.shiguang.storeSales.domain.*;
 import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
+import io.swagger.models.auth.In;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.xmlgraphics.xmp.schemas.DublinCoreAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
