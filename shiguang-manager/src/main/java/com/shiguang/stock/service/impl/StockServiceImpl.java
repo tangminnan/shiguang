@@ -3,7 +3,6 @@ package com.shiguang.stock.service.impl;
 import com.shiguang.common.utils.GuuidUtil;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
-import com.shiguang.member.domain.MemberDO;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.*;
 import com.shiguang.stock.dao.OrderDao;
@@ -391,15 +390,50 @@ public class StockServiceImpl implements StockService {
         return stockDao.getShouhuoList(map);
     }
 
-//    @Override
-//    public List<StockDO> jingjias(Map<String, Object> map) {
-//        return stockDao.jingjias(map);
-//    }
-
 
     @Override
     public StockDO jingjias(StockDO stockDO) {
         return stockDao.jingjias(stockDO);
+    }
+
+    @Override
+    public StockDO peijians(StockDO stockDO) {
+        return stockDao.peijians(stockDO);
+    }
+
+    @Override
+    public StockDO jingpians(StockDO stockDO) {
+        return stockDao.jingpians(stockDO);
+    }
+
+    @Override
+    public StockDO yinxings(StockDO stockDO) {
+        return stockDao.yinxings(stockDO);
+    }
+
+    @Override
+    public StockDO huliyes(StockDO stockDO) {
+        return stockDao.huliyes(stockDO);
+    }
+
+    @Override
+    public StockDO taiyangjings(StockDO stockDO) {
+        return stockDao.taiyangjings(stockDO);
+    }
+
+    @Override
+    public StockDO laohuajings(StockDO stockDO) {
+        return stockDao.laohuajings(stockDO);
+    }
+
+    @Override
+    public StockDO haocais(StockDO stockDO) {
+        return stockDao.haocais(stockDO);
+    }
+
+    @Override
+    public StockDO shiguangs(StockDO stockDO) {
+        return stockDao.shiguangs(stockDO);
     }
 
     /**
@@ -450,8 +484,8 @@ public class StockServiceImpl implements StockService {
                     try {
                         row = sheet.getRow(rowNum);
                         String goodsNums = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 代码
-                        String counts  = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    // 效期
-                        String usedays= ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    // 数量
+                        String counts  = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    //  数量
+                        String usedays= ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    //  效期
                         Integer goodstype=goodsType;
                         if (goodstype==1){
                             StockDO stockDO = new StockDO();
@@ -526,8 +560,19 @@ public class StockServiceImpl implements StockService {
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-                            if (stockDao.save(stockDO) < 0) {
-                                return R.error();
+                            //判断是否已存在商品
+                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+                            if (null != goodsNumList) {
+                                String gdcount = goodsNumList.getGoodsCount();
+                                String  goodsCountNew = counts;
+                                Integer gdcountNew = Integer.parseInt(gdcount);
+                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+                                Double newGoodsCount = gdcountNew + goodsCountNews;
+                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+                                stockDao.updateGoodsCount(stockDO);//修改数量
+                            } else if(null == goodsNumList) {
+                                stockDao.save(stockDO);
                             }
 //                            stockDao.save(stockDO);
 
@@ -539,7 +584,983 @@ public class StockServiceImpl implements StockService {
                             if (usedays !="" && usedays !=null){
                                 orderDO.setGoodsCode(goodsCode+code);
                             }else {
+                                orderDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            orderDO.setGoodsName(goodsName);
+                            orderDO.setGoodsCount(counts);
+                            orderDO.setGoodsType(goodstype);
+                            orderDO.setMfrsid(mfrsid);
+                            orderDO.setBrandname(brandname);
+                            orderDO.setUnit(unitname);
+                            orderDO.setRetailPrice(retailPrice);
+                            orderDO.setPositionId(positionId);
+                            orderDO.setCreateTime(createTime);
+                            orderDO.setDanjuNumber(danjuNumber);
+                            orderDO.setZhidanPeople(zhidanPeople);
+                            orderDO.setDanjuDay(createTime);
+                            orderDO.setClasstype(classtype);
+                            orderDO.setFactory(factory);
+                            orderDO.setStatus("1");
+                            orderDO.setUsername("未收货");
+                            orderDO.setReturnzt("1");
+
+                            if (orderDao.save(orderDO) < 0) {
+                                return R.error();
+                            }
+                            num++;
+
+                        }else if (goodstype==2){
+                            StockDO stockDO = new StockDO();
+                            stockDO.setGoodsNum(goodsNums);
+                            StockDO jingjiass=  stockDao.peijians(stockDO);
+                            String goodsNum=jingjiass.getProducNum();
+                            String goodsCode=jingjiass.getProducCode();
+                            String goodsName=jingjiass.getProducName();
+                            String mfrsid=jingjiass.getMfrsid();
+                            String brandname=jingjiass.getBrandname();
+                            String retailPrice=jingjiass.getRetailPrice();
+                            String unitname=jingjiass.getUnitname();
+                            String factory=jingjiass.getProducFactory();
+                            String classtype=jingjiass.getClasstype();
+
+                            stockDO.setPositionId(positionId);
+                            stockDO.setGoodsType(goodsType);
+
+                            stockDO.setGoodsNum(goodsNum);
+
+                            stockDO.setGoodsName(goodsName);
+                            stockDO.setBrandname(brandname);
+                            stockDO.setRetailPrice(retailPrice);
+                            stockDO.setUnit(unitname);
+                            stockDO.setMfrsid(mfrsid);
+                            //型号
+                            stockDO.setFactory(factory);
+                            //类型
+                            stockDO.setClasstype(classtype);
+                            //数量
+                            stockDO.setGoodsCount(counts);
+                            //效期
+                            Date dd = new Date();
+                            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String xiaoqi="";
+                            String code="";
+                            if (StringUtils.isNotBlank(usedays)) {
+                                if (usedays.contains("-")) {
+                                    dd = sdf.parse(usedays);
+                                    //student.setLastCheckTime(dd);
+                                } else {
+                                    Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                    Date d = calendar.getTime();
+                                    dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
+                                    String str = sdf.format(dd);
+                                    String yeah = str.substring(0, 4); //取年
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    code =yeah + yue + ri;
+                                }
+                            }
+
+                            stockDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                stockDO.setGoodsCode(goodsCode+code);
+                            }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            //———入库时间—————
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date date = new Date();
+                            String createTime = createTimenew.format(date);
+                            stockDO.setCreateTime(createTime);
+                            stockDO.setDanjuNumber(danjuNumber);
+                            //------制单人------
+                            String zhidanPeople= ShiroUtils.getUser().getName();
+                            stockDO.setZhidanPeople(zhidanPeople);
+                            //---单据日期--
+                            stockDO.setDanjuDay(createTime);
+                            //收货状态
+                            stockDO.setStatus("1");
+                            stockDO.setUsername("未收货");
+                            stockDO.setReturnzt("1");
+                            //判断是否已存在商品
+                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+                            if (null != goodsNumList) {
+                                String gdcount = goodsNumList.getGoodsCount();
+                                String  goodsCountNew = counts;
+                                Integer gdcountNew = Integer.parseInt(gdcount);
+                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+                                Double newGoodsCount = gdcountNew + goodsCountNews;
+                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+                                stockDao.updateGoodsCount(stockDO);//修改数量
+                            } else if(null == goodsNumList) {
+                                stockDao.save(stockDO);
+                            }
+//                            stockDao.save(stockDO);
+
+//-----------------------------采购订单--------------------
+                            OrderDO orderDO = new OrderDO();
+                            orderDO.setGoodsNum(goodsNum);
+//                            orderDO.setGoodsCode(goodsCode);
+                            orderDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                orderDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                orderDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            orderDO.setGoodsName(goodsName);
+                            orderDO.setGoodsCount(counts);
+                            orderDO.setGoodsType(goodstype);
+                            orderDO.setMfrsid(mfrsid);
+                            orderDO.setBrandname(brandname);
+                            orderDO.setUnit(unitname);
+                            orderDO.setRetailPrice(retailPrice);
+                            orderDO.setPositionId(positionId);
+                            orderDO.setCreateTime(createTime);
+                            orderDO.setDanjuNumber(danjuNumber);
+                            orderDO.setZhidanPeople(zhidanPeople);
+                            orderDO.setDanjuDay(createTime);
+                            orderDO.setClasstype(classtype);
+                            orderDO.setFactory(factory);
+                            orderDO.setStatus("1");
+                            orderDO.setUsername("未收货");
+                            orderDO.setReturnzt("1");
+
+                            if (orderDao.save(orderDO) < 0) {
+                                return R.error();
+                            }
+                            num++;
+
+                        }else if (goodstype==3){
+                            StockDO stockDO = new StockDO();
+                            stockDO.setGoodsNum(goodsNums);
+                            StockDO jingjiass=  stockDao.jingpians(stockDO);
+                            String goodsNum=jingjiass.getProducNum();
+                            String goodsCode=jingjiass.getProducCode();
+                            String goodsName=jingjiass.getProducName();
+                            String mfrsid=jingjiass.getMfrsid();
+                            String brandname=jingjiass.getBrandname();
+                            String retailPrice=jingjiass.getRetailPrice();
+                            String unitname=jingjiass.getUnitname();
+                            String factory=jingjiass.getProducFactory();
+                            String classtype=jingjiass.getClasstype();
+
+                            stockDO.setPositionId(positionId);
+                            stockDO.setGoodsType(goodsType);
+
+                            stockDO.setGoodsNum(goodsNum);
+
+                            stockDO.setGoodsName(goodsName);
+                            stockDO.setBrandname(brandname);
+                            stockDO.setRetailPrice(retailPrice);
+                            stockDO.setUnit(unitname);
+                            stockDO.setMfrsid(mfrsid);
+                            //型号
+                            stockDO.setFactory(factory);
+                            //类型
+                            stockDO.setClasstype(classtype);
+                            //数量
+                            stockDO.setGoodsCount(counts);
+                            //效期
+                            Date dd = new Date();
+                            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String xiaoqi="";
+                            String code="";
+                            if (StringUtils.isNotBlank(usedays)) {
+                                if (usedays.contains("-")) {
+                                    dd = sdf.parse(usedays);
+                                    //student.setLastCheckTime(dd);
+                                } else {
+                                    Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                    Date d = calendar.getTime();
+                                    dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
+                                    String str = sdf.format(dd);
+                                    String yeah = str.substring(0, 4); //取年
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    code =yeah + yue + ri;
+                                }
+                            }
+
+                            stockDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                stockDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                stockDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            //———入库时间—————
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date date = new Date();
+                            String createTime = createTimenew.format(date);
+                            stockDO.setCreateTime(createTime);
+                            stockDO.setDanjuNumber(danjuNumber);
+                            //------制单人------
+                            String zhidanPeople= ShiroUtils.getUser().getName();
+                            stockDO.setZhidanPeople(zhidanPeople);
+                            //---单据日期--
+                            stockDO.setDanjuDay(createTime);
+                            //收货状态
+                            stockDO.setStatus("1");
+                            stockDO.setUsername("未收货");
+                            stockDO.setReturnzt("1");
+                            //判断是否已存在商品
+                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+                            if (null != goodsNumList) {
+                                String gdcount = goodsNumList.getGoodsCount();
+                                String  goodsCountNew = counts;
+                                Integer gdcountNew = Integer.parseInt(gdcount);
+                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+                                Double newGoodsCount = gdcountNew + goodsCountNews;
+                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+                                stockDao.updateGoodsCount(stockDO);//修改数量
+                            } else if(null == goodsNumList) {
+                                stockDao.save(stockDO);
+                            }
+//                            stockDao.save(stockDO);
+
+//-----------------------------采购订单--------------------
+                            OrderDO orderDO = new OrderDO();
+                            orderDO.setGoodsNum(goodsNum);
+//                            orderDO.setGoodsCode(goodsCode);
+                            orderDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                orderDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                orderDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            orderDO.setGoodsName(goodsName);
+                            orderDO.setGoodsCount(counts);
+                            orderDO.setGoodsType(goodstype);
+                            orderDO.setMfrsid(mfrsid);
+                            orderDO.setBrandname(brandname);
+                            orderDO.setUnit(unitname);
+                            orderDO.setRetailPrice(retailPrice);
+                            orderDO.setPositionId(positionId);
+                            orderDO.setCreateTime(createTime);
+                            orderDO.setDanjuNumber(danjuNumber);
+                            orderDO.setZhidanPeople(zhidanPeople);
+                            orderDO.setDanjuDay(createTime);
+                            orderDO.setClasstype(classtype);
+                            orderDO.setFactory(factory);
+                            orderDO.setStatus("1");
+                            orderDO.setUsername("未收货");
+                            orderDO.setReturnzt("1");
+
+                            if (orderDao.save(orderDO) < 0) {
+                                return R.error();
+                            }
+                            num++;
+
+                        }else if (goodstype==4){
+                            StockDO stockDO = new StockDO();
+                            stockDO.setGoodsNum(goodsNums);
+                            StockDO jingjiass=  stockDao.yinxings(stockDO);
+                            String goodsNum=jingjiass.getProducNum();
+                            String goodsCode=jingjiass.getProducCode();
+                            String goodsName=jingjiass.getProducName();
+                            String mfrsid=jingjiass.getMfrsid();
+                            String brandname=jingjiass.getBrandname();
+                            String retailPrice=jingjiass.getRetailPrice();
+                            String unitname=jingjiass.getUnitname();
+                            String factory=jingjiass.getProducFactory();
+                            String classtype=jingjiass.getClasstype();
+
+                            stockDO.setPositionId(positionId);
+                            stockDO.setGoodsType(goodsType);
+
+                            stockDO.setGoodsNum(goodsNum);
+
+                            stockDO.setGoodsName(goodsName);
+                            stockDO.setBrandname(brandname);
+                            stockDO.setRetailPrice(retailPrice);
+                            stockDO.setUnit(unitname);
+                            stockDO.setMfrsid(mfrsid);
+                            //型号
+                            stockDO.setFactory(factory);
+                            //类型
+                            stockDO.setClasstype(classtype);
+                            //数量
+                            stockDO.setGoodsCount(counts);
+                            //效期
+                            Date dd = new Date();
+                            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String xiaoqi="";
+                            String code="";
+                            if (StringUtils.isNotBlank(usedays)) {
+                                if (usedays.contains("-")) {
+                                    dd = sdf.parse(usedays);
+                                    //student.setLastCheckTime(dd);
+                                } else {
+                                    Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                    Date d = calendar.getTime();
+                                    dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
+                                    String str = sdf.format(dd);
+                                    String yeah = str.substring(0, 4); //取年
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    code =yeah + yue + ri;
+                                }
+                            }
+
+                            stockDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                stockDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                stockDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            //———入库时间—————
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date date = new Date();
+                            String createTime = createTimenew.format(date);
+                            stockDO.setCreateTime(createTime);
+                            stockDO.setDanjuNumber(danjuNumber);
+                            //------制单人------
+                            String zhidanPeople= ShiroUtils.getUser().getName();
+                            stockDO.setZhidanPeople(zhidanPeople);
+                            //---单据日期--
+                            stockDO.setDanjuDay(createTime);
+                            //收货状态
+                            stockDO.setStatus("1");
+                            stockDO.setUsername("未收货");
+                            stockDO.setReturnzt("1");
+                            //判断是否已存在商品
+                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+                            if (null != goodsNumList) {
+                                String gdcount = goodsNumList.getGoodsCount();
+                                String  goodsCountNew = counts;
+                                Integer gdcountNew = Integer.parseInt(gdcount);
+                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+                                Double newGoodsCount = gdcountNew + goodsCountNews;
+                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+                                stockDao.updateGoodsCount(stockDO);//修改数量
+                            } else if(null == goodsNumList) {
+                                stockDao.save(stockDO);
+                            }
+//                            stockDao.save(stockDO);
+
+//-----------------------------采购订单--------------------
+                            OrderDO orderDO = new OrderDO();
+                            orderDO.setGoodsNum(goodsNum);
+//                            orderDO.setGoodsCode(goodsCode);
+                            orderDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                orderDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                orderDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            orderDO.setGoodsName(goodsName);
+                            orderDO.setGoodsCount(counts);
+                            orderDO.setGoodsType(goodstype);
+                            orderDO.setMfrsid(mfrsid);
+                            orderDO.setBrandname(brandname);
+                            orderDO.setUnit(unitname);
+                            orderDO.setRetailPrice(retailPrice);
+                            orderDO.setPositionId(positionId);
+                            orderDO.setCreateTime(createTime);
+                            orderDO.setDanjuNumber(danjuNumber);
+                            orderDO.setZhidanPeople(zhidanPeople);
+                            orderDO.setDanjuDay(createTime);
+                            orderDO.setClasstype(classtype);
+                            orderDO.setFactory(factory);
+                            orderDO.setStatus("1");
+                            orderDO.setUsername("未收货");
+                            orderDO.setReturnzt("1");
+
+                            if (orderDao.save(orderDO) < 0) {
+                                return R.error();
+                            }
+                            num++;
+
+                        }else if (goodstype==5){
+                            StockDO stockDO = new StockDO();
+                            stockDO.setGoodsNum(goodsNums);
+                            StockDO jingjiass=  stockDao.huliyes(stockDO);
+                            String goodsNum=jingjiass.getProducNum();
+                            String goodsCode=jingjiass.getProducCode();
+                            String goodsName=jingjiass.getProducName();
+                            String mfrsid=jingjiass.getMfrsid();
+                            String brandname=jingjiass.getBrandname();
+                            String retailPrice=jingjiass.getRetailPrice();
+                            String unitname=jingjiass.getUnitname();
+                            String factory=jingjiass.getProducFactory();
+                            String classtype=jingjiass.getClasstype();
+
+                            stockDO.setPositionId(positionId);
+                            stockDO.setGoodsType(goodsType);
+
+                            stockDO.setGoodsNum(goodsNum);
+
+                            stockDO.setGoodsName(goodsName);
+                            stockDO.setBrandname(brandname);
+                            stockDO.setRetailPrice(retailPrice);
+                            stockDO.setUnit(unitname);
+                            stockDO.setMfrsid(mfrsid);
+                            //型号
+                            stockDO.setFactory(factory);
+                            //类型
+                            stockDO.setClasstype(classtype);
+                            //数量
+                            stockDO.setGoodsCount(counts);
+                            //效期
+                            Date dd = new Date();
+                            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String xiaoqi="";
+                            String code="";
+                            if (StringUtils.isNotBlank(usedays)) {
+                                if (usedays.contains("-")) {
+                                    dd = sdf.parse(usedays);
+                                    //student.setLastCheckTime(dd);
+                                } else {
+                                    Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                    Date d = calendar.getTime();
+                                    dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
+                                    String str = sdf.format(dd);
+                                    String yeah = str.substring(0, 4); //取年
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    code =yeah + yue + ri;
+                                }
+                            }
+
+                            stockDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                stockDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                stockDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            //———入库时间—————
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date date = new Date();
+                            String createTime = createTimenew.format(date);
+                            stockDO.setCreateTime(createTime);
+                            stockDO.setDanjuNumber(danjuNumber);
+                            //------制单人------
+                            String zhidanPeople= ShiroUtils.getUser().getName();
+                            stockDO.setZhidanPeople(zhidanPeople);
+                            //---单据日期--
+                            stockDO.setDanjuDay(createTime);
+                            //收货状态
+                            stockDO.setStatus("1");
+                            stockDO.setUsername("未收货");
+                            stockDO.setReturnzt("1");
+                            //判断是否已存在商品
+                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+                            if (null != goodsNumList) {
+                                String gdcount = goodsNumList.getGoodsCount();
+                                String  goodsCountNew = counts;
+                                Integer gdcountNew = Integer.parseInt(gdcount);
+                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+                                Double newGoodsCount = gdcountNew + goodsCountNews;
+                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+                                stockDao.updateGoodsCount(stockDO);//修改数量
+                            } else if(null == goodsNumList) {
+                                stockDao.save(stockDO);
+                            }
+//                            stockDao.save(stockDO);
+
+//-----------------------------采购订单--------------------
+                            OrderDO orderDO = new OrderDO();
+                            orderDO.setGoodsNum(goodsNum);
+//                            orderDO.setGoodsCode(goodsCode);
+                            orderDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                orderDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                orderDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            orderDO.setGoodsName(goodsName);
+                            orderDO.setGoodsCount(counts);
+                            orderDO.setGoodsType(goodstype);
+                            orderDO.setMfrsid(mfrsid);
+                            orderDO.setBrandname(brandname);
+                            orderDO.setUnit(unitname);
+                            orderDO.setRetailPrice(retailPrice);
+                            orderDO.setPositionId(positionId);
+                            orderDO.setCreateTime(createTime);
+                            orderDO.setDanjuNumber(danjuNumber);
+                            orderDO.setZhidanPeople(zhidanPeople);
+                            orderDO.setDanjuDay(createTime);
+                            orderDO.setClasstype(classtype);
+                            orderDO.setFactory(factory);
+                            orderDO.setStatus("1");
+                            orderDO.setUsername("未收货");
+                            orderDO.setReturnzt("1");
+
+                            if (orderDao.save(orderDO) < 0) {
+                                return R.error();
+                            }
+                            num++;
+
+                        }else if (goodstype==6){
+                            StockDO stockDO = new StockDO();
+                            stockDO.setGoodsNum(goodsNums);
+                            StockDO jingjiass=  stockDao.taiyangjings(stockDO);
+                            String goodsNum=jingjiass.getProducNum();
+                            String goodsCode=jingjiass.getProducCode();
+                            String goodsName=jingjiass.getProducName();
+                            String mfrsid=jingjiass.getMfrsid();
+                            String brandname=jingjiass.getBrandname();
+                            String retailPrice=jingjiass.getRetailPrice();
+                            String unitname=jingjiass.getUnitname();
+                            String factory=jingjiass.getProducFactory();
+                            String classtype=jingjiass.getClasstype();
+
+                            stockDO.setPositionId(positionId);
+                            stockDO.setGoodsType(goodsType);
+
+                            stockDO.setGoodsNum(goodsNum);
+
+                            stockDO.setGoodsName(goodsName);
+                            stockDO.setBrandname(brandname);
+                            stockDO.setRetailPrice(retailPrice);
+                            stockDO.setUnit(unitname);
+                            stockDO.setMfrsid(mfrsid);
+                            //型号
+                            stockDO.setFactory(factory);
+                            //类型
+                            stockDO.setClasstype(classtype);
+                            //数量
+                            stockDO.setGoodsCount(counts);
+                            //效期
+                            Date dd = new Date();
+                            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String xiaoqi="";
+                            String code="";
+                            if (StringUtils.isNotBlank(usedays)) {
+                                if (usedays.contains("-")) {
+                                    dd = sdf.parse(usedays);
+                                    //student.setLastCheckTime(dd);
+                                } else {
+                                    Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                    Date d = calendar.getTime();
+                                    dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
+                                    String str = sdf.format(dd);
+                                    String yeah = str.substring(0, 4); //取年
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    code =yeah + yue + ri;
+                                }
+                            }
+
+                            stockDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                stockDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                stockDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            //———入库时间—————
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date date = new Date();
+                            String createTime = createTimenew.format(date);
+                            stockDO.setCreateTime(createTime);
+                            stockDO.setDanjuNumber(danjuNumber);
+                            //------制单人------
+                            String zhidanPeople= ShiroUtils.getUser().getName();
+                            stockDO.setZhidanPeople(zhidanPeople);
+                            //---单据日期--
+                            stockDO.setDanjuDay(createTime);
+                            //收货状态
+                            stockDO.setStatus("1");
+                            stockDO.setUsername("未收货");
+                            stockDO.setReturnzt("1");
+                            //判断是否已存在商品
+                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+                            if (null != goodsNumList) {
+                                String gdcount = goodsNumList.getGoodsCount();
+                                String  goodsCountNew = counts;
+                                Integer gdcountNew = Integer.parseInt(gdcount);
+                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+                                Double newGoodsCount = gdcountNew + goodsCountNews;
+                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+                                stockDao.updateGoodsCount(stockDO);//修改数量
+                            } else if(null == goodsNumList) {
+                                stockDao.save(stockDO);
+                            }
+//                            stockDao.save(stockDO);
+
+//-----------------------------采购订单--------------------
+                            OrderDO orderDO = new OrderDO();
+                            orderDO.setGoodsNum(goodsNum);
+//                            orderDO.setGoodsCode(goodsCode);
+                            orderDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                orderDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                orderDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            orderDO.setGoodsName(goodsName);
+                            orderDO.setGoodsCount(counts);
+                            orderDO.setGoodsType(goodstype);
+                            orderDO.setMfrsid(mfrsid);
+                            orderDO.setBrandname(brandname);
+                            orderDO.setUnit(unitname);
+                            orderDO.setRetailPrice(retailPrice);
+                            orderDO.setPositionId(positionId);
+                            orderDO.setCreateTime(createTime);
+                            orderDO.setDanjuNumber(danjuNumber);
+                            orderDO.setZhidanPeople(zhidanPeople);
+                            orderDO.setDanjuDay(createTime);
+                            orderDO.setClasstype(classtype);
+                            orderDO.setFactory(factory);
+                            orderDO.setStatus("1");
+                            orderDO.setUsername("未收货");
+                            orderDO.setReturnzt("1");
+
+                            if (orderDao.save(orderDO) < 0) {
+                                return R.error();
+                            }
+                            num++;
+
+                        }else if (goodstype==7){
+                            StockDO stockDO = new StockDO();
+                            stockDO.setGoodsNum(goodsNums);
+                            StockDO jingjiass=  stockDao.laohuajings(stockDO);
+                            String goodsNum=jingjiass.getProducNum();
+                            String goodsCode=jingjiass.getProducCode();
+                            String goodsName=jingjiass.getProducName();
+                            String mfrsid=jingjiass.getMfrsid();
+                            String brandname=jingjiass.getBrandname();
+                            String retailPrice=jingjiass.getRetailPrice();
+                            String unitname=jingjiass.getUnitname();
+                            String factory=jingjiass.getProducFactory();
+                            String classtype=jingjiass.getClasstype();
+
+                            stockDO.setPositionId(positionId);
+                            stockDO.setGoodsType(goodsType);
+
+                            stockDO.setGoodsNum(goodsNum);
+
+                            stockDO.setGoodsName(goodsName);
+                            stockDO.setBrandname(brandname);
+                            stockDO.setRetailPrice(retailPrice);
+                            stockDO.setUnit(unitname);
+                            stockDO.setMfrsid(mfrsid);
+                            //型号
+                            stockDO.setFactory(factory);
+                            //类型
+                            stockDO.setClasstype(classtype);
+                            //数量
+                            stockDO.setGoodsCount(counts);
+                            //效期
+                            Date dd = new Date();
+                            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String xiaoqi="";
+                            String code="";
+                            if (StringUtils.isNotBlank(usedays)) {
+                                if (usedays.contains("-")) {
+                                    dd = sdf.parse(usedays);
+                                    //student.setLastCheckTime(dd);
+                                } else {
+                                    Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                    Date d = calendar.getTime();
+                                    dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
+                                    String str = sdf.format(dd);
+                                    String yeah = str.substring(0, 4); //取年
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    code =yeah + yue + ri;
+                                }
+                            }
+
+                            stockDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                stockDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                stockDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            //———入库时间—————
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date date = new Date();
+                            String createTime = createTimenew.format(date);
+                            stockDO.setCreateTime(createTime);
+                            stockDO.setDanjuNumber(danjuNumber);
+                            //------制单人------
+                            String zhidanPeople= ShiroUtils.getUser().getName();
+                            stockDO.setZhidanPeople(zhidanPeople);
+                            //---单据日期--
+                            stockDO.setDanjuDay(createTime);
+                            //收货状态
+                            stockDO.setStatus("1");
+                            stockDO.setUsername("未收货");
+                            stockDO.setReturnzt("1");
+                            //判断是否已存在商品
+                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+                            if (null != goodsNumList) {
+                                String gdcount = goodsNumList.getGoodsCount();
+                                String  goodsCountNew = counts;
+                                Integer gdcountNew = Integer.parseInt(gdcount);
+                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+                                Double newGoodsCount = gdcountNew + goodsCountNews;
+                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+                                stockDao.updateGoodsCount(stockDO);//修改数量
+                            } else if(null == goodsNumList) {
+                                stockDao.save(stockDO);
+                            }
+//                            stockDao.save(stockDO);
+
+//-----------------------------采购订单--------------------
+                            OrderDO orderDO = new OrderDO();
+                            orderDO.setGoodsNum(goodsNum);
+//                            orderDO.setGoodsCode(goodsCode);
+                            orderDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                orderDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                orderDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            orderDO.setGoodsName(goodsName);
+                            orderDO.setGoodsCount(counts);
+                            orderDO.setGoodsType(goodstype);
+                            orderDO.setMfrsid(mfrsid);
+                            orderDO.setBrandname(brandname);
+                            orderDO.setUnit(unitname);
+                            orderDO.setRetailPrice(retailPrice);
+                            orderDO.setPositionId(positionId);
+                            orderDO.setCreateTime(createTime);
+                            orderDO.setDanjuNumber(danjuNumber);
+                            orderDO.setZhidanPeople(zhidanPeople);
+                            orderDO.setDanjuDay(createTime);
+                            orderDO.setClasstype(classtype);
+                            orderDO.setFactory(factory);
+                            orderDO.setStatus("1");
+                            orderDO.setUsername("未收货");
+                            orderDO.setReturnzt("1");
+
+                            if (orderDao.save(orderDO) < 0) {
+                                return R.error();
+                            }
+                            num++;
+
+                        }else if (goodstype==8){
+                            StockDO stockDO = new StockDO();
+                            stockDO.setGoodsNum(goodsNums);
+                            StockDO jingjiass=  stockDao.haocais(stockDO);
+                            String goodsNum=jingjiass.getProducNum();
+                            String goodsCode=jingjiass.getProducCode();
+                            String goodsName=jingjiass.getProducName();
+                            String mfrsid=jingjiass.getMfrsid();
+                            String brandname=jingjiass.getBrandname();
+                            String retailPrice=jingjiass.getRetailPrice();
+                            String unitname=jingjiass.getUnitname();
+                            String factory=jingjiass.getProducFactory();
+                            String classtype=jingjiass.getClasstype();
+
+                            stockDO.setPositionId(positionId);
+                            stockDO.setGoodsType(goodsType);
+
+                            stockDO.setGoodsNum(goodsNum);
+
+                            stockDO.setGoodsName(goodsName);
+                            stockDO.setBrandname(brandname);
+                            stockDO.setRetailPrice(retailPrice);
+                            stockDO.setUnit(unitname);
+                            stockDO.setMfrsid(mfrsid);
+                            //型号
+                            stockDO.setFactory(factory);
+                            //类型
+                            stockDO.setClasstype(classtype);
+                            //数量
+                            stockDO.setGoodsCount(counts);
+                            //效期
+                            Date dd = new Date();
+                            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String xiaoqi="";
+                            String code="";
+                            if (StringUtils.isNotBlank(usedays)) {
+                                if (usedays.contains("-")) {
+                                    dd = sdf.parse(usedays);
+                                    //student.setLastCheckTime(dd);
+                                } else {
+                                    Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                    Date d = calendar.getTime();
+                                    dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
+                                    String str = sdf.format(dd);
+                                    String yeah = str.substring(0, 4); //取年
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    code =yeah + yue + ri;
+                                }
+                            }
+
+                            stockDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                stockDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                stockDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            //———入库时间—————
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date date = new Date();
+                            String createTime = createTimenew.format(date);
+                            stockDO.setCreateTime(createTime);
+                            stockDO.setDanjuNumber(danjuNumber);
+                            //------制单人------
+                            String zhidanPeople= ShiroUtils.getUser().getName();
+                            stockDO.setZhidanPeople(zhidanPeople);
+                            //---单据日期--
+                            stockDO.setDanjuDay(createTime);
+                            //收货状态
+                            stockDO.setStatus("1");
+                            stockDO.setUsername("未收货");
+                            stockDO.setReturnzt("1");
+                            //判断是否已存在商品
+                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+                            if (null != goodsNumList) {
+                                String gdcount = goodsNumList.getGoodsCount();
+                                String  goodsCountNew = counts;
+                                Integer gdcountNew = Integer.parseInt(gdcount);
+                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+                                Double newGoodsCount = gdcountNew + goodsCountNews;
+                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+                                stockDao.updateGoodsCount(stockDO);//修改数量
+                            } else if(null == goodsNumList) {
+                                stockDao.save(stockDO);
+                            }
+//                            stockDao.save(stockDO);
+
+//-----------------------------采购订单--------------------
+                            OrderDO orderDO = new OrderDO();
+                            orderDO.setGoodsNum(goodsNum);
+//                            orderDO.setGoodsCode(goodsCode);
+                            orderDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                orderDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                orderDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            orderDO.setGoodsName(goodsName);
+                            orderDO.setGoodsCount(counts);
+                            orderDO.setGoodsType(goodstype);
+                            orderDO.setMfrsid(mfrsid);
+                            orderDO.setBrandname(brandname);
+                            orderDO.setUnit(unitname);
+                            orderDO.setRetailPrice(retailPrice);
+                            orderDO.setPositionId(positionId);
+                            orderDO.setCreateTime(createTime);
+                            orderDO.setDanjuNumber(danjuNumber);
+                            orderDO.setZhidanPeople(zhidanPeople);
+                            orderDO.setDanjuDay(createTime);
+                            orderDO.setClasstype(classtype);
+                            orderDO.setFactory(factory);
+                            orderDO.setStatus("1");
+                            orderDO.setUsername("未收货");
+                            orderDO.setReturnzt("1");
+
+                            if (orderDao.save(orderDO) < 0) {
+                                return R.error();
+                            }
+                            num++;
+
+                        }else if (goodstype==9){
+                            StockDO stockDO = new StockDO();
+                            stockDO.setGoodsNum(goodsNums);
+                            StockDO jingjiass=  stockDao.shiguangs(stockDO);
+                            String goodsNum=jingjiass.getProducNum();
+                            String goodsCode=jingjiass.getProducCode();
+                            String goodsName=jingjiass.getProducName();
+                            String mfrsid=jingjiass.getMfrsid();
+                            String brandname=jingjiass.getBrandname();
+                            String retailPrice=jingjiass.getRetailPrice();
+                            String unitname=jingjiass.getUnitname();
+                            String factory=jingjiass.getProducFactory();
+                            String classtype=jingjiass.getClasstype();
+
+                            stockDO.setPositionId(positionId);
+                            stockDO.setGoodsType(goodsType);
+
+                            stockDO.setGoodsNum(goodsNum);
+
+                            stockDO.setGoodsName(goodsName);
+                            stockDO.setBrandname(brandname);
+                            stockDO.setRetailPrice(retailPrice);
+                            stockDO.setUnit(unitname);
+                            stockDO.setMfrsid(mfrsid);
+                            //型号
+                            stockDO.setFactory(factory);
+                            //类型
+                            stockDO.setClasstype(classtype);
+                            //数量
+                            stockDO.setGoodsCount(counts);
+                            //效期
+                            Date dd = new Date();
+                            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String xiaoqi="";
+                            String code="";
+                            if (StringUtils.isNotBlank(usedays)) {
+                                if (usedays.contains("-")) {
+                                    dd = sdf.parse(usedays);
+                                    //student.setLastCheckTime(dd);
+                                } else {
+                                    Calendar calendar = new GregorianCalendar(1900, 0, -1);
+                                    Date d = calendar.getTime();
+                                    dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
+                                    String str = sdf.format(dd);
+                                    String yeah = str.substring(0, 4); //取年
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    code =yeah + yue + ri;
+                                }
+                            }
+
+                            stockDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                stockDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                stockDO.setGoodsCode(goodsCode+"00000000");
+                            }
+                            //———入库时间—————
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date date = new Date();
+                            String createTime = createTimenew.format(date);
+                            stockDO.setCreateTime(createTime);
+                            stockDO.setDanjuNumber(danjuNumber);
+                            //------制单人------
+                            String zhidanPeople= ShiroUtils.getUser().getName();
+                            stockDO.setZhidanPeople(zhidanPeople);
+                            //---单据日期--
+                            stockDO.setDanjuDay(createTime);
+                            //收货状态
+                            stockDO.setStatus("1");
+                            stockDO.setUsername("未收货");
+                            stockDO.setReturnzt("1");
+                            //判断是否已存在商品
+                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+                            if (null != goodsNumList) {
+                                String gdcount = goodsNumList.getGoodsCount();
+                                String  goodsCountNew = counts;
+                                Integer gdcountNew = Integer.parseInt(gdcount);
+                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+                                Double newGoodsCount = gdcountNew + goodsCountNews;
+                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+
+                                stockDao.updateGoodsCount(stockDO);//修改数量
+                            } else if(null == goodsNumList) {
+                                stockDao.save(stockDO);
+                            }
+//                            stockDao.save(stockDO);
+
+//-----------------------------采购订单--------------------
+                            OrderDO orderDO = new OrderDO();
+                            orderDO.setGoodsNum(goodsNum);
+//                            orderDO.setGoodsCode(goodsCode);
+                            orderDO.setUseday(xiaoqi);
+                            if (usedays !="" && usedays !=null){
+                                orderDO.setGoodsCode(goodsCode+code);
+                            }else {
+                                orderDO.setGoodsCode(goodsCode+"00000000");
                             }
                             orderDO.setGoodsName(goodsName);
                             orderDO.setGoodsCount(counts);

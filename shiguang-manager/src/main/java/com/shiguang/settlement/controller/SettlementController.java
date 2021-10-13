@@ -170,9 +170,9 @@ public class SettlementController {
 		return "settlement/jsedit";
 	}
 
-	@GetMapping("/detail/{cardNumber}/{saleNumber}/{costId}")
+	@GetMapping("/detail/{cardNumber}/{saleNumber}")
 	@RequiresPermissions("information:settlement:detail")
-	String detail(@PathVariable("cardNumber") String cardNumber,@PathVariable("saleNumber") String saleNumber,@PathVariable("costId") Long costId,Model model){
+	String detail(@PathVariable("cardNumber") String cardNumber,@PathVariable("saleNumber") String saleNumber,Model model){
 		MemberDO memberDO = memberService.getCardNumber(cardNumber);
 		model.addAttribute("memberDO",memberDO);
 //		CostDO costDO = costService.get(costId);
@@ -202,7 +202,7 @@ public class SettlementController {
 //			}
 //		}
 		model.addAttribute("costDO",costDO);
-		SettlementDO settlement = settlementService.getCostId(costId);
+		SettlementDO settlement = settlementService.getSaleNumers(saleNumber);
 		//List<SettlementDO> settlement = settlementService.list(map);
 //		if ("0".equals(settlement.getPayModel())){
 //			settlement.setPayModel("微信");
