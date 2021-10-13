@@ -90,10 +90,10 @@ function load() {
 											   t='';
 										} else if (row.isSale == 1) {
                                                e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" ' +
-												   'onclick="detail(\''+value+'\',\''+row.saleNumber+'\',\''+row.costId+'\')" style="text-decoration: none;">详情</a>';
+												   'onclick="detail(\''+value+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">详情</a>';
                                                t = '<a class="btn btn-primary btn-xs" href="#" title="打印"  mce_href="#" ' +
-                                                'onclick="dayin(\''+row.type+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印</a>';
-										} else if (row.isSale == 2){
+                                                'onclick="dayin(\''+row.isSale+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印</a>';
+										} else if (row.isSale == 3){
                                             e = '<a class="btn btn-primary btn-xs" href="#" title="已退款"  mce_href="#"  style="text-decoration: none;">已退款</a>';
                                             t = '';
 										}
@@ -134,24 +134,24 @@ function edit(cardNumber,saleNumber) {
     layer.full(toIndex)
 }
 
-function detail(cardNumber,saleNumber,costId) {
+function detail(cardNumber,saleNumber) {
     var toIndex = layer.open({
         type : 2,
         title : '详情',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '1500px', '520px' ],
-        content : prefix + '/detail/' + cardNumber+'/'+ saleNumber+'/'+costId // iframe的url
+        content : prefix + '/detail/' + cardNumber+'/'+ saleNumber // iframe的url
     });
     layer.full(toIndex)
 }
 
 function dayin(type,saleNumber){
-	if (type == "检查单"){
+	if (type == 100){
         window.open("/information/settlement/jianchadayin?saleNumber="+saleNumber);
-	} else if (type == "配镜单") {
+	} else if (type == 1) {
         window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
-	} else if (type == "定金单"){
+	} else if (type == 2){
         window.open("/information/settlement/dingjindan?saleNumber="+saleNumber);
 	}
 }

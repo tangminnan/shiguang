@@ -220,83 +220,89 @@ function inposion() {
 }
     // <!--单品添加商品-->
     function choiceGoods() {
-        var outDepartment = $('#outDepartment').val();
-        var outPosition = $('#outPosition').val();
-        var inCompany = $('#inCompany').val();
-        var inDepartment = $('#inDepartment').val();
-        if (outDepartment == "") {
-            layer.alert("请选择发出部门！");
-        } else if (outPosition == "") {
-            layer.alert("请选择发出仓位！");
-        }else if (inCompany == ""){
-            layer.alert("请选择接收公司！");
-		} else if (inDepartment == ""){
-          	layer.alert("请选择接收部门！");
+		var outDepartment = $('#outDepartment').val();
+		var outPosition = $('#outPosition').val();
+		var inCompany = $('#inCompany').val();
+		var inDepartment = $('#inDepartment').val();
+		if (outDepartment == "") {
+			layer.alert("请选择发出部门！");
+		} else if (outPosition == "") {
+			layer.alert("请选择发出仓位！");
+		} else if (inCompany == "") {
+			layer.alert("请选择接收公司！");
+		} else if (inDepartment == "") {
+			layer.alert("请选择接收部门！");
 		} else {
-            // $(".val").remove();
-            var toIndex = layer.open({
-                type: 2,
-                title: '库存查询',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
+			// $(".val").remove();
+			var toIndex = layer.open({
+				type: 2,
+				title: '库存查询',
+				maxmin: true,
+				shadeClose: false, // 点击遮罩关闭层
+				area: ['800px', '520px'],
 				method: 'get', // 服务器数据的请求方式 get or post
-                content: "/stock/pidiao/selextkc/"+ outPosition,// iframe的url
-                cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
-                    for (var i = 0; i < rows.length; i++) {
-                        // alert( rows[i].goodsid);
-
-                        $(".liebiao").after("<tr class='val'> " +
-							// "<td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "<td name='goodsNum'>" + rows[i].goodsNum + "</td>\n" +
-                            "<input name='goodsNum' type='hidden' value='" + rows[i].goodsNum + "'>\n" +
-                            "<td name='goodsName'>" + rows[i].goodsName + "</td>\n" +
-                            "<input name='goodsName' type='hidden' value='" + rows[i].goodsName + "'>\n" +
-                            "<td name='factory'>" + rows[i].factory + "</td>\n" +
-                            "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
-                            // "<td name='needCount'>" + rows[i].needCount + "</td>\n" +
-                            "<td name='goodsCount'>" + rows[i].goodsCount + "</td>\n" +
-                            "<input name='goodsCount' type='hidden' value='" + rows[i].goodsCount + "'>\n" +
-                            "<td >" + "<input name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
-                            "<td name='goodsCode'>" + rows[i].goodsCode + "</td>\n" +
-                            "<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>\n" +
-                            "<td name='useday'>" + rows[i].useday + "</td>\n" +
-                            "<input name='useday' type='hidden' value='" + rows[i].useday + "'>\n" +
-                            "<td name='batch'>" + rows[i].batch + "</td>\n" +
-                            "<input name='batch' type='hidden' value='" + rows[i].batch + "'>\n" +
-                            "<td name='zhuceNumber'>" + rows[i].zhuceNumber + "</td>\n" +
-                            "<input name='zhuceNumber' type='hidden' value='" + rows[i].zhuceNumber + "'>\n" +
-                            "<td name='produceDay'>" + rows[i].produceDay + "</td>\n" +
-                            "<input name='produceDay' type='hidden' value='" + rows[i].produceDay + "'>\n" +
-
-
-                            "<td name='classtype' style='display: none'>" + rows[i].classtype + "</td>\n" +
-                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
-                            "<td name='goodsid' style='display: none'>" + rows[i].goodsid + "</td>\n" +
-                            "<input name='goods' type='hidden' value='" + rows[i].goodsid + "'>\n" +
-
-                            "<td name='mfrsid' style='display: none'>" + rows[i].mfrsid + "</td>\n" +
-                            "<input name='mfrsid' type='hidden' value='" + rows[i].mfrsid + "'>\n" +
-                            "<td name='brandname' style='display: none'>" + rows[i].brandname + "</td>\n" +
-                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
-							"<td name='unit' style='display: none'>" + rows[i].unit + "</td>\n" +
-                            "<input name='unit' type='hidden' value='" + rows[i].unit + "'>\n" +
-
-							"<td name='money' style='display: none'>" + rows[i].retailPrice + "</td>\n" +
-                            "<input name='money' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
-
-							"<td name='goodsxinxiid' style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
-                            "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
+				content: "/stock/pidiao/selextkc/" + outPosition,// iframe的url
+				cancel: function (index, layero) {
+					var rows = window[layero.find('iframe')[0]['name']].showCol();
+					var a = 0;
+					for (var i = 0; i < rows.length; i++) {
+						a = a + 1;
+						$(".liebiao").after("<tr class='val'> " +
+								// "<td><input name='one'  type=\"checkbox\"/></td>\n" +
+								"<td name='goodsNum'>" + rows[i].goodsNum + "</td>\n" +
+								"<input name='goodsNum' type='hidden' value='" + rows[i].goodsNum + "'>\n" +
+								"<td name='goodsName'>" + rows[i].goodsName + "</td>\n" +
+								"<input name='goodsName' type='hidden' value='" + rows[i].goodsName + "'>\n" +
+								"<td name='factory'>" + rows[i].factory + "</td>\n" +
+								"<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
+								// "<td name='needCount'>" + rows[i].needCount + "</td>\n" +
+								"<td name='goodsCount'>" + rows[i].goodsCount + "</td>\n" +
+								"<input id='goodsCount" + a + "' name='goodsCount' type='hidden' value='" + rows[i].goodsCount + "'>\n" +
+								"<td >" + "<input id='useCount" + a + "' name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='shuliang()'/>" + "</td>" +
+								"<td name='goodsCode'>" + rows[i].goodsCode + "</td>\n" +
+								"<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>\n" +
+								"<td name='useday'>" + rows[i].useday + "</td>\n" +
+								"<input name='useday' type='hidden' value='" + rows[i].useday + "'>\n" +
+								"<td name='batch'>" + rows[i].batch + "</td>\n" +
+								"<input name='batch' type='hidden' value='" + rows[i].batch + "'>\n" +
+								"<td name='zhuceNumber'>" + rows[i].zhuceNumber + "</td>\n" +
+								"<input name='zhuceNumber' type='hidden' value='" + rows[i].zhuceNumber + "'>\n" +
+								"<td name='produceDay'>" + rows[i].produceDay + "</td>\n" +
+								"<input name='produceDay' type='hidden' value='" + rows[i].produceDay + "'>\n" +
 
 
-                            "</tr>");
-                    }
-                }
-            });
-            layer.full(toIndex)
+								"<td name='classtype' style='display: none'>" + rows[i].classtype + "</td>\n" +
+								"<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+								"<td name='goodsid' style='display: none'>" + rows[i].goodsid + "</td>\n" +
+								"<input name='goods' type='hidden' value='" + rows[i].goodsid + "'>\n" +
+
+								"<td name='mfrsid' style='display: none'>" + rows[i].mfrsid + "</td>\n" +
+								"<input name='mfrsid' type='hidden' value='" + rows[i].mfrsid + "'>\n" +
+								"<td name='brandname' style='display: none'>" + rows[i].brandname + "</td>\n" +
+								"<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+								"<td name='unit' style='display: none'>" + rows[i].unit + "</td>\n" +
+								"<input name='unit' type='hidden' value='" + rows[i].unit + "'>\n" +
+
+								"<td name='money' style='display: none'>" + rows[i].retailPrice + "</td>\n" +
+								"<input name='money' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+
+								"<td name='goodsxinxiid' style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
+								"<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
+
+
+								"</tr>");
+					}
+				}
+			});
+			layer.full(toIndex)
 		}
-    }
+	}
+	function shuliang() {
+		var kcshuliang=$("#goodsCount + a").val();
+		var useshuliang=$("#useCount + a").val();
+		alert(kcshuliang);
+		alert(useshuliang);
+	}
 </script>
 </body>
 </html>

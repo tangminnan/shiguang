@@ -248,6 +248,12 @@ public class StockController {
             stockDO.setGoodsCode(goodsCode);
             stockDO.setPositionId(stock.getPositionId());
             stockDO.setPositionName(positionName);
+            try {
+                String useday = useday1[i];
+                stockDO.setUseday(useday);
+            }catch (ArrayIndexOutOfBoundsException e){
+                stockDO.setUseday("");
+            }
             StockDO goodsNumList = stockService.haveNum(stockDO);
             if (null != goodsNumList) {
                 String gdcount = goodsNumList.getGoodsCount();
@@ -328,12 +334,7 @@ public class StockController {
                 }catch (ArrayIndexOutOfBoundsException e){
                     stockDO.setUnit("");
                 }
-                try {
-                    String useday = useday1[i];
-                    stockDO.setUseday(useday);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setUseday("");
-                }
+
                 try {
                     String batch = batch1[i];
                     stockDO.setBatch(batch);

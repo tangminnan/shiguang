@@ -148,7 +148,14 @@ public interface StockService {
 
     //采购批量导入
     R importStock(Integer goodsType,String positionId, String checkType, MultipartFile file);
-//    查询相关信息镜架
+    //    查询相关信息
     StockDO jingjias(StockDO stockDO);
-//    List<OrderDO> getShouhuoList(Map<String, Object> map);
+    StockDO peijians(StockDO stockDO);
+    StockDO jingpians(StockDO stockDO);
+    StockDO yinxings(StockDO stockDO);
+    StockDO huliyes(StockDO stockDO);
+    StockDO taiyangjings(StockDO stockDO);
+    StockDO laohuajings(StockDO stockDO);
+    StockDO haocais(StockDO stockDO);
+    StockDO shiguangs(StockDO stockDO);
 }
