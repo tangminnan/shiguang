@@ -93,6 +93,8 @@ function save() {
                         window.localStorage.setItem("gkname",gkname);
                         window.localStorage.setItem("hyknum",hyknum);
                         window.localStorage.setItem("phone",phone);
+
+                        window.localStorage.setItem("saleNumber",saleNumber);
                         var index1 = window.parent.layer.getFrameIndex(window.name); // 获取窗口索引
                         // 获取窗口索引
                         window.parent.layer.close(index1);

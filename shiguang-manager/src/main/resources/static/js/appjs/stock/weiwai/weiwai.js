@@ -140,9 +140,9 @@ function load() {
                                         var f = '';
                                         if (row.shstatus==""){
 											var n = '<span class="btn btn-warning btn-sm"  href="#" title="配送"  mce_href="#" onclick="psNum(\''
-												+ row.salenumbery+" ','"+  row.danjuNumber + '\')">配送</span> ';
+												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">配送</span> ';
 											var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="thNum(\''
-												+ row.salenumbery+" ','"+  row.danjuNumber + '\')">退回</span> ';
+												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">退回</span> ';
 										}else {
 											var n = '';
 											var j = '';
@@ -292,7 +292,7 @@ function upshTime() {
 }
 
 //配送
-function psNum(salenumbery,danjuNumber) {
+function psNum(salenumbery,danjuNumber,eyeStyle) {
 	var shstatus="0";
 	if (shstatus == "0"){
 		// alert("输入工号")
@@ -302,7 +302,7 @@ function psNum(salenumbery,danjuNumber) {
 			maxmin : true,
 			shadeClose : false, // 点击遮罩关闭层
 			area : [ '800px', '520px' ],
-			content :"/stock/weiwai/userNumps/"+ salenumbery+'/'+danjuNumber
+			content :"/stock/weiwai/userNumps/"+ salenumbery+'/'+danjuNumber+'/'+eyeStyle
 		});
 
 	}
@@ -311,6 +311,7 @@ function peisong() {
 	var danjuNumber = document.getElementById('danjuNumber').value;
 	var salenumbery = document.getElementById('salenumbery').value;
 	var psname = document.getElementById('username').value;
+	var eyeStyle = document.getElementById('eyeStyle').value;
 	var shstatus = "0";
 	if (username != "") {
 		// alert("qqqqqqqq");
@@ -321,7 +322,8 @@ function peisong() {
 				'danjuNumber': danjuNumber,
 				'shstatus': shstatus,
 				'psname': psname,
-				'salenumbery': salenumbery
+				'salenumbery': salenumbery,
+				'eyeStyle':eyeStyle
 			},
 			dataType: 'JSON',
 			async: false,

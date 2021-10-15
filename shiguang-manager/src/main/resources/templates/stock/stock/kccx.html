@@ -102,7 +102,7 @@
         <tr>
             <td>标准零售价格：</td>
             <td>
-                <input id="retailPrice" name="retailPrice" type="text"/> ~ <input name="retailPrice2" type="text"/>
+                <input id="retailPrice" name="retailPrice" type="text"/> ~ <input id="retailPrice2" name="retailPrice2" type="text"/>
             </td>
         </tr>
     </table>
@@ -182,8 +182,8 @@
                                 goodsType : $("#goodsType option:selected").val(),
                                 mfrsname : $("#mfrsname").val(),
                                 brandname : $("#brandname").val(),
-                                retailPrice : $("*[name='retailPrice']").val(),
-                                retailPrice2 : $("*[name='retailPrice2']").val(),
+                                retailPrice : $("#retailPrice").val(),
+                                retailPrice2 : $("#retailPrice2").val(),
                                 xsstate : $("input[name='xsstate']:checked").val(),
                                 classtype : $("#classtype").val(),
                                 positionId : $('#positionId option:selected').val()

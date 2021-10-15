@@ -983,51 +983,7 @@
 		order by id desc
 	</select>
 
-<!--    <select id="yanguangListShuju" resultType="com.shiguang.jiancha.domain.TryresultsDO">-->
-<!--	SELECT-->
-<!--	    id,-->
-<!--        card_number,-->
-<!--	    ptometry_number,-->
-<!--	    optometry_name,-->
-<!--	    create_time,-->
-<!--	    trystatus ,-->
-<!--        rstatus-->
-<!--    FROM-->
-<!--	    (-->
-<!--	SELECT-->
-<!--		t.id,-->
-<!--		t.card_number,-->
-<!--		t.ptometry_number,-->
-<!--		t.optometry_name,-->
-<!--		t.create_time,-->
-<!--		t.status as trystatus,-->
-<!--		'' as rstatus-->
-<!--	FROM-->
-<!--		jc_tryresults  t-->
-<!--		LEFT JOIN jc_result r ON t.ptometry_number = r.ptometry_number-->
-<!--		UNION-->
-<!--	SELECT-->
-<!--		t.id,-->
-<!--		t.card_number,-->
-<!--		t.ptometry_number,-->
-<!--		t.optometry_name,-->
-<!--		t.create_time,-->
-<!--		t.status as trystatus,-->
-<!--		r.status as rstatus-->
-<!--	FROM-->
-<!--		jc_result r-->
-<!--		LEFT JOIN jc_tryresults t ON t.ptometry_number = r.ptometry_number-->
-<!--	) aia-->
-<!--        where  card_number=#{cardNumber} order by  id desc-->
-<!--	</select> -->
-<!--    <select id="yanguangListShuju" resultType="com.shiguang.jiancha.domain.TryresultsDO">-->
-<!--	SELECT-->
-<!--		t.id,t.card_number,t.ptometry_number,t.optometry_name,t.create_time,t.status as trystatus,r.status as rstatus-->
-<!--	FROM-->
-<!--		jc_tryresults  t-->
-<!--		LEFT JOIN jc_result r ON t.ptometry_number = r.ptometry_number-->
-<!--        where  t.card_number=#{cardNumber} order by  t.id desc-->
-<!--	</select> -->
+
     <select id="yanguangListShuju" resultType="com.shiguang.jiancha.domain.TryresultsDO">
 	SELECT
 		t.id,t.card_number,t.ptometry_number,t.optometry_name,t.create_time,t.status as trystatus,r.status as rstatus,
@@ -1036,7 +992,9 @@
 		jc_tryresults  t
 		LEFT JOIN jc_result r ON t.ptometry_number = r.ptometry_number
 		LEFT JOIN store_sales s ON r.ptometry_number = s.ptometry_number
-        where  t.card_number=#{cardNumber} order by  t.id desc
+        where  t.card_number=#{cardNumber}
+        group by t.ptometry_number
+        order by  t.id desc
 	</select>
     <select id="yanguangListShujuCount" resultType="int">
 		select count(*) from jc_tryresults
