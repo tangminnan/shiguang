@@ -16,7 +16,7 @@ public class StockDO implements Serializable {
 
     //主键
     private Long id;
-    //状态
+    //收货状态
     private String status;
     //工号
     private String  username;

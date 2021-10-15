@@ -1803,14 +1803,15 @@
         as 'gdname',g.goodsid,m.mfrsname,s.brandname,s.retail_price,s.price_sum,
         s.cost_price,s.cost_sum,s.whole_price,s.whole_sum,po.position_name,
         s.batch,s.zhuce_number,s.produce_day,s.useday,s.factory,s.mfrsid,s.unit,s.classtype,s.returnzt
-        from stock s left join c_goods g on s.goods_type=g.goodsid left join c_mfrs m on s.mfrsid=m.mfrsid
+        from stock s left join c_goods g on s.goods_type=g.goodsid left join c_mfrs m on s.mfrsid=m.mfrsnum
         left join c_position po on s.position_id=po.position_id
         left join c_brand b on s.brandname=b.brandname AND s.`mfrsid`=b.`mfrsid`
         left join department d on po.depart_number=d.depart_number
         <where>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
             <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>
+<!--            <if test="goodsName != null and goodsName != ''">and  s.goods_name= #{goodsName}</if>-->
+            <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
@@ -1830,23 +1831,23 @@
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-            <otherwise>
-                group by s.id
-            </otherwise>
+<!--            <otherwise>-->
+<!--             group by s.id-->
+<!--            </otherwise>-->
         </choose>
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
         </if>
     </select>
     <select id="kccxListCount" resultType="int">
-        select count(*)   from stock s left join c_goods g on s.goods_type=g.goodsid left join c_mfrs m on s.mfrsid=m.mfrsid
+        select count(*)   from stock s left join c_goods g on s.goods_type=g.goodsid left join c_mfrs m on s.mfrsid=m.mfrsnum
         left join c_position po on s.position_id=po.position_id
         left join c_brand b on s.brandname=b.brandname AND s.`mfrsid`=b.`mfrsid`
         left join department d on po.depart_number=d.depart_number
         <where>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
             <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>
+            <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>

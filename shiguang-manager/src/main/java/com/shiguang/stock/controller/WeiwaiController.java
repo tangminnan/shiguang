@@ -680,30 +680,41 @@ public class WeiwaiController {
 	/**
 	 * 配送输入工号
 	 */
-	@GetMapping("/userNumps/{salenumbery}/{danjuNumber}")
+	@GetMapping("/userNumps/{salenumbery}/{danjuNumber}/{eyeStyle}")
 	String userNumps(@PathVariable("salenumbery") String salenumbery,
-					 @PathVariable("danjuNumber") String danjuNumber, Model model) {
+					 @PathVariable("danjuNumber") String danjuNumber,
+					 @PathVariable("eyeStyle") String eyeStyle, Model model) {
 		model.addAttribute("danjuNumber", danjuNumber);
 		model.addAttribute("salenumbery", salenumbery);
+		model.addAttribute("eyeStyle", eyeStyle);
 		return "/stock/weiwai/userNumps";
 	}
 
 	/**
-	 * 取镜处收货
+	 * 取镜处收货或者加工检验
 	 */
 	@PostMapping("/editShouhuo")
 	@ResponseBody
-	public R editShouhuo(String danjuNumber, String salenumbery, String shstatus, String psname) {
+	public R editShouhuo(String danjuNumber, String salenumbery, String shstatus, String psname,String eyeStyle) {
 		LogStatusDO logStatusDO = new LogStatusDO();
-		logStatusDO.setSaleNumber(salenumbery);
-		logStatusDO.setLogisticStatus("配送");
-		WorkRecoedDO workRecoedDO = new WorkRecoedDO();
-		workRecoedDO.setUserName(psname);
-		workRecoedDO.setType("配送");
-		workRecoedDO.setDateTime(new Date());
-		statusService.saveRecord(workRecoedDO);
-
-		if (statusService.editFaliao(logStatusDO) > 0) {
+		if ("3".equals(eyeStyle)){
+			logStatusDO.setSaleNumber(salenumbery);
+			logStatusDO.setLogisticStatus("委外完成");
+			WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+			workRecoedDO.setUserName(psname);
+			workRecoedDO.setType("委外完成");
+			workRecoedDO.setDateTime(new Date());
+			statusService.saveRecord(workRecoedDO);
+		}else if ("4".equals(eyeStyle)) {
+			logStatusDO.setSaleNumber(salenumbery);
+			logStatusDO.setLogisticStatus("配送");
+			WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+			workRecoedDO.setUserName(psname);
+			workRecoedDO.setType("配送");
+			workRecoedDO.setDateTime(new Date());
+			statusService.saveRecord(workRecoedDO);
+		}
+		if (statusService.save(logStatusDO) > 0) {
 			WeiwaiDO weiwaiDO = new WeiwaiDO();
 			weiwaiDO.setDanjuNumber(danjuNumber);
 			weiwaiDO.setShstatus(shstatus);
