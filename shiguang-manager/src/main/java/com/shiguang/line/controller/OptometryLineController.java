@@ -114,7 +114,7 @@ public class OptometryLineController {
         Map<String,Object> map = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         map.put("lineTime",simpleDateFormat.format(new Date()));
-        List<YgLineDO> lineDOList = optometryLineService.lineList(map);
+        List<YgLineDO> lineDOList = optometryLineService.linesList(map);
         resultMap.put("lineDOList",lineDOList);
         List<YgLineMemberDO> lineMemberDOList = new ArrayList<>();
         List<YgLineMemberDO> lineMemberDOS = optometryLineService.listMember(map);
@@ -125,9 +125,12 @@ public class OptometryLineController {
             lineMemberDO.setConsultRoom(lineMemberDOS.get(0).getConsultRoom());
             lineMemberDO.setId(lineMemberDOS.get(0).getId());
             lineMemberDOList.add(lineMemberDO);
+            resultMap.put("lineMemberDOS",lineMemberDOList);
+            resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到"+lineMemberDOS.get(0).getConsultRoom()+"就诊");
+        } else {
+            resultMap.put("lineMemberDOS",lineMemberDOList);
+            resultMap.put("content","");
         }
-        resultMap.put("lineMemberDOS",lineMemberDOList);
-        resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到验光室"+lineMemberDOS.get(0).getConsultRoom()+"就诊");
         List<Map<String,Object>> roomList = new ArrayList<>();
         List<YgLineDO> lineMemberDOList1 = optometryLineService.lineList(map);
         if (null != lineMemberDOList1 && lineMemberDOList1.size() > 0){
@@ -135,7 +138,7 @@ public class OptometryLineController {
                 if (!"".equals(lineMemberDOstr.getConsultRoom())){
                     Map<String,Object> roomMap = new HashMap<>();
                     roomMap.put("id",lineMemberDOstr.getId());
-                    roomMap.put("name",lineMemberDOstr.getMemberName());
+                    roomMap.put("memberName",lineMemberDOstr.getMemberName());
                     roomMap.put("sex",lineMemberDOstr.getSex());
                     roomMap.put("consultRoom",lineMemberDOstr.getConsultRoom());
                     roomList.add(roomMap);

@@ -64,7 +64,7 @@ public class LineManagerController {
         MemberDO memberDO = memberService.get(id);
         LineDO lineDO = new LineDO();
         lineDO.setMemberNumber(memberDO.getCardNumber());
-        lineDO.setName(memberDO.getName());
+        lineDO.setMemberName(memberDO.getName());
         lineDO.setSex(memberDO.getSex());
         lineDO.setCallStatus("0");
         lineDO.setStorey("4");

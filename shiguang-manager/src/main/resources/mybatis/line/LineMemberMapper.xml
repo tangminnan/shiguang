@@ -3,15 +3,15 @@
 
 <mapper namespace="com.shiguang.line.dao.LineMemberDao">
     <select id="get" resultType="com.shiguang.line.domain.LineMemberDO">
-		select `id`,`member_number`,`name`,`sex`,`consult_room`,`storey`,`line_time` from line_member where id = #{value}
+		select `id`,`member_number`,`member_name`,`sex`,`consult_room`,`storey`,`line_time` from line_member where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.line.domain.LineMemberDO">
-        select `id`,`member_number`,`name`,`sex`,`consult_room`,`storey`,`line_time` from line_member
+        select `id`,`member_number`,`member_name`,`sex`,`consult_room`,`storey`,`line_time` from line_member
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="memberName != null and memberName != ''"> and `member_name` = #{memberName} </if>
             <if test="storey != null and storey != ''"> and storey = #{storey} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="consultRoom != null and consultRoom != ''"> and consult_room = #{consultRoom} </if>
@@ -36,7 +36,7 @@
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
             <if test="storey != null and storey != ''"> and storey = #{storey} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="memberName != null and memberName != ''"> and `member_name` = #{memberName} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="consultRoom != null and consultRoom != ''"> and consult_room = #{consultRoom} </if>
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
@@ -44,7 +44,7 @@
     </select>
 
     <select id="listMember" resultType="com.shiguang.line.domain.LineDO">
-        select `id`,`member_number`,`name`,`sex`,`consult_room`,`storey`,`line_time` from line
+        select `id`,`member_number`,`member_name`,`sex`,`consult_room`,`storey`,`line_time` from line
         <where>
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
             <if test="storey != null and storey != ''"> and storey = #{storey} </if>
@@ -67,7 +67,7 @@
 		insert into line_member
 		(
 			`member_number`,
-			`name`,
+			`member_name`,
 			`sex`,
 			`consult_room`,
 			`storey`,
@@ -76,7 +76,7 @@
 		values
 		(
 			#{memberNumber},
-			#{name},
+			#{memberName},
 			#{sex},
 			#{consultRoom},
 			#{storey},
@@ -88,7 +88,7 @@
         update line_member
         <set>
             <if test="memberNumber != null">`member_number` = #{memberNumber}, </if>
-            <if test="name != null">`name` = #{name}, </if>
+            <if test="memberName != null">`member_name` = #{memberName}, </if>
             <if test="sex != null">`sex` = #{sex}, </if>
             <if test="consultRoom != null">`consult_room` = #{consultRoom}</if>
         </set>

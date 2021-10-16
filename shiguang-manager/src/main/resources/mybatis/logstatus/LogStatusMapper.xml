@@ -93,15 +93,14 @@
 		sa.`store_name`,sa.`store_describe`,sa.`store_unit`,sa.`store_count`,sa.`remark`,sa.`saleremark`,sa.`give_name`,sa.`peijing_time`,sa.`optometry_name`,sa.`out_recipel`,
 		sa.`recipel_type`,sa.`optometrywl_name`,sa.`recipelwl_type`,sa.`taocan_name`,sa.`additional_price`,sa.`additional_count`,sa.`classtype`,ls.`logistic_status` as logStatus,ls.`faliao_name` as faliaoName,ls.`faliao_date` as faliaoDate
         from store_sales sa
-        join cost c on c.sale_number = sa.sale_number and c.is_sale = 1
         join log_status ls on ls.sale_number = sa.sale_number
         join member m on m.card_number = sa.member_number and m.state = 1 and m.`status` = 0
-        join department d on d.depart_number = m.depart_number
         <where>
             <if test="logisticStatus != null and logisticStatus != ''"> and ls.logistic_status = #{logisticStatus} </if>
+            <if test="logisticStatuss != null and logisticStatuss != ''"> and (ls.logistic_status = '委外完成' or ls.logistic_status = '销售完成') </if>
             <if test="saleNumber !=null and saleNumber != ''">and sa.sale_number like concat('%', #{saleNumber},'%')</if>
             <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
-            <if test="companyid !=null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
+            <if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
             <if test="classtype != null and classtype != ''">and FIND_IN_SET(#{classtype},sa.classtype) </if>
             <if test="storeDescribe != null and storeDescribe != ''">or sa.`store_describe` in (#{storeDescribe})</if>
         </where>

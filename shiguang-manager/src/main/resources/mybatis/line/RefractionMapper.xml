@@ -16,7 +16,15 @@
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <if test="refractionName != null and refractionName != ''"> and refraction_name = #{refractionName} </if>
-            <if test="refractionStatus != null and refractionStatus != ''"> and refraction_status != #{refractionStatus} </if>
+            <choose>
+                <when test="refraction != null and refraction != ''">
+                    and (refraction = #{refraction} and refraction_status in ('1','2','3') or refraction_status = '0')
+                </when>
+                <otherwise>
+                    and (refraction_status in ('1','2','3') or refraction_status = '0')
+                </otherwise>
+            </choose>
+            <!--<if test="refractionStatus != null and refractionStatus != ''"> and refraction_status != #{refractionStatus} </if>-->
             <if test="lineTime != null and lineTime != ''"> and date_format(refraction_time ,'%Y-%m-%d') = #{lineTime} </if>
         </where>
         <choose>
@@ -38,9 +46,42 @@
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <if test="refractionName != null and refractionName != ''"> and refraction_name = #{refractionName} </if>
+            <choose>
+                <when test="refraction != null and refraction != ''">
+                    and (refraction = #{refraction} and refraction_status in ('1','2','3') or refraction_status = '0')
+                </when>
+                <otherwise>
+                    and (refraction_status in ('1','2','3') or refraction_status = '0')
+                </otherwise>
+            </choose>
             <if test="lineTime != null and lineTime != ''"> and date_format(refraction_time ,'%Y-%m-%d') = #{lineTime} </if>
         </where>
     </select>
+
+    <select id="refrationlineList" resultType="com.shiguang.line.domain.YgLineDO">
+        select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from refraction_line
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+            and (refraction is not null or refraction !='') and refraction_status != '4'
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by line_time ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
 
     <select id="listMember" resultType="com.shiguang.line.domain.RefractionLineMemberDO">
         select `id`,`member_name`,`refraction_name`,`refraction`,`refraction_time` from refraction_line_member

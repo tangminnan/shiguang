@@ -79,7 +79,7 @@ function load() {
 									align : 'center',
 									formatter : function(value, row, index) {
                                         var e = '<a class="btn btn-primary btn-xs" href="#" title="更改结款方式"  mce_href="#" ' +
-												 'onclick="edit(\''+ value+ '\',\''+row.saleNumber+'\',\''+row.costId+'\')" style="text-decoration: none;">更改结款方式</a>';
+												 'onclick="edit(\''+ value+ '\',\''+row.saleNumber+'\')" style="text-decoration: none;">更改结款方式</a>';
 											   // e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" ' +
 												//    'onclick="edit(\''+value+'\',\''+row.saleNumber+'\')"><i class="fa fa-edit"></i></a> ';
 										return e;
@@ -101,39 +101,18 @@ function add() {
 	});
     layer.full(toIndex)
 }
-function edit(cardNumber,saleNumber,costId) {
+function edit(cardNumber,saleNumber) {
     var toIndex = layer.open({
 		type : 2,
 		title : '结款',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '1500px', '520px' ],
-		content : prefix + '/edit/'+cardNumber+'/'+ saleNumber +'/'+costId // iframe的url
+		content : prefix + '/edit/'+cardNumber+'/'+ saleNumber // iframe的url
 	});
     layer.full(toIndex)
 }
 
-function detail(cardNumber,saleNumber,costId) {
-    var toIndex = layer.open({
-        type : 2,
-        title : '详情',
-        maxmin : true,
-        shadeClose : false, // 点击遮罩关闭层
-        area : [ '1500px', '520px' ],
-        content : prefix + '/detail/' + cardNumber+'/'+ saleNumber+'/'+costId // iframe的url
-    });
-    layer.full(toIndex)
-}
-
-function dayin(type,saleNumber){
-	if (type == "检查单"){
-        window.open("/information/settlement/jianchadayin?saleNumber="+saleNumber);
-	} else if (type == "配镜单") {
-        window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
-	} else if (type == "定金单"){
-        window.open("/information/settlement/dingjindan?saleNumber="+saleNumber);
-	}
-}
 
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

@@ -23,7 +23,7 @@ public class LineDO implements Serializable {
 	private Long sex;
 	private String sexx;
 	//姓名
-	private String name;
+	private String memberName;
 	//叫号
 	private String callType;
 	//是否叫号(0:未叫号1:已叫号2:已过号)
@@ -80,14 +80,14 @@ public class LineDO implements Serializable {
 	/**
 	 * 设置：姓名
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	/**
 	 * 获取：姓名
 	 */
-	public String getName() {
-		return name;
+	public String getMemberName() {
+		return memberName;
 	}
 	/**
 	 * 设置：叫号

@@ -112,7 +112,9 @@
 			`rx_unitos`, 
 			`rx_clfs`, 
 			`rx_hlypz`, 
-			`rx_beizhu`
+			`rx_beizhu`,
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -139,7 +141,9 @@
 			#{rxUnitos}, 
 			#{rxClfs}, 
 			#{rxHlypz}, 
-			#{rxBeizhu}
+			#{rxBeizhu},
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
     <insert id="saveRxjmjcj" parameterType="com.shiguang.jiancha.domain.RxjmjcjDO" useGeneratedKeys="true"

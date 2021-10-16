@@ -131,7 +131,9 @@
 			`sgjj_jykj`, 
 			`sgjj_kjlx`, 
 			`sgjj_text`, 
-			`sgjj_beizhu`
+			`sgjj_beizhu`,
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -163,7 +165,9 @@
 			#{sgjjJykj}, 
 			#{sgjjKjlx}, 
 			#{sgjjText}, 
-			#{sgjjBeizhu}
+			#{sgjjBeizhu},
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
     <insert id="savesgjj" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true"

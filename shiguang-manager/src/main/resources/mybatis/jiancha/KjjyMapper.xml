@@ -125,7 +125,9 @@
 			`kjjy_jykj`,
 			`kjjy_kjlx`,
 			`kjjy_text`,
-			`kjjy_beizhu`
+			`kjjy_beizhu`,
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -155,7 +157,9 @@
 			#{kjjyJykj},
 			#{kjjyKjlx},
 			#{kjjyText},
-			#{kjjyBeizhu}
+			#{kjjyBeizhu},
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
     <insert id="savekjjy" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true"

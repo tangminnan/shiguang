@@ -79,7 +79,7 @@ public class LogStatusController {
     public PageUtils faliaolist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        query.put("logisticStatus","销售完成");
+        query.put("logisticStatuss","1");
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyid",ShiroUtils.getUser().getCompanyId());
         }
@@ -89,14 +89,17 @@ public class LogStatusController {
         for (SalesDO salesDO : salesDOList){
             salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
             salesDO.setPeijingDate(simpleDateFormat.format(salesDO.getPeijingTime()));
-            if (null != salesDO.getClasstype()){
-                String[] classArray = salesDO.getClasstype().split(",");
-                boolean result = false;
-                result = Arrays.asList(classArray).contains("2");
-                if (result == true){
-                    salesDO.setClassTypeFL("2");
-                }
+            if ("委外完成".equals(salesDO.getLogStatus())){
+                salesDO.setClassTypeFL("2");
             }
+//            if (null != salesDO.getClasstype()){
+//                String[] classArray = salesDO.getClasstype().split(",");
+//                boolean result = false;
+//                result = Arrays.asList(classArray).contains("2");
+//                if (result == true){
+//
+//                }
+//            }
         }
         int total = statusService.findSaleCount(query);
         PageUtils pageUtils = new PageUtils(salesDOList, total);
@@ -316,12 +319,12 @@ public class LogStatusController {
         String storeDesc = salesDO.getStoreDescribe();
         String[] storeDescribe = storeDesc.split(",");
         String[] goodsCode = salesDO.getGoodsCode().split(",");
-        String storeNum = "";
-        if (null != ShiroUtils.getUser().getStoreNum()) {
-            storeNum = ShiroUtils.getUser().getStoreNum();
+        String companyId = "";
+        if (null != ShiroUtils.getUser().getCompanyId()) {
+            companyId = ShiroUtils.getUser().getCompanyId();
         }
         Map<String,Object> maps = new HashMap<>();
-        maps.put("departNumber", storeNum);
+        maps.put("companyId", companyId);
         PositionDO positionDO = stockService.findHegePosition(maps);
         for (int a=0;a<storeDescribe.length;a++){
             if (!"镜架".equals(storeDescribe[a])){

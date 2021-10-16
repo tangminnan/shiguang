@@ -74,7 +74,7 @@ public class LineServiceImpl implements LineService {
 		List<LineMemberDO> lineMemberDOList = new ArrayList<>();
 		if ("取镜".equals(maps.get("type"))){
 			LineMemberDO lineMemberDO = new LineMemberDO();
-				lineMemberDO.setName(maps.get("memberName").toString());
+				lineMemberDO.setMemberName(maps.get("memberName").toString());
 				lineMemberDOList.add(lineMemberDO);
 			resultMap.put("lineMemberDOS",lineMemberDOList);
 			resultMap.put("content","请"+maps.get("memberName")+"到取镜处取镜");
@@ -88,7 +88,7 @@ public class LineServiceImpl implements LineService {
 			List<LineMemberDO> lineMemberDOS = lineMemberService.list(map);
 			LineMemberDO lineMemberDO = new LineMemberDO();
 			if (null != lineMemberDOS && lineMemberDOS.size() > 0){
-				lineMemberDO.setName(lineMemberDOS.get(0).getName());
+				lineMemberDO.setMemberName(lineMemberDOS.get(0).getMemberName());
 				lineMemberDO.setSex(lineMemberDOS.get(0).getSex());
 				lineMemberDO.setConsultRoom(lineMemberDOS.get(0).getConsultRoom());
 				lineMemberDO.setMemberNumber(lineMemberDOS.get(0).getConsultRoom());
@@ -96,7 +96,7 @@ public class LineServiceImpl implements LineService {
 				lineMemberDOList.add(lineMemberDO);
 			}
 			resultMap.put("lineMemberDOS",lineMemberDOList);
-			resultMap.put("content","请"+lineMemberDOS.get(0).getName()+"到训练室"+lineMemberDOS.get(0).getConsultRoom()+"就诊");
+			resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到训练室"+lineMemberDOS.get(0).getConsultRoom()+"就诊");
 			List<Map<String,Object>> roomList = new ArrayList<>();
 			List<LineDO> lineMemberDOList1 = lineMemberService.listMember(map);
 			if (null != lineMemberDOList1 && lineMemberDOList1.size() > 0){
@@ -105,7 +105,7 @@ public class LineServiceImpl implements LineService {
 						Map<String,Object> roomMap = new HashMap<>();
 						roomMap.put("id",lineMemberDOstr.getId());
 						roomMap.put("memberNumber",lineMemberDOstr.getMemberNumber());
-						roomMap.put("name",lineMemberDOstr.getName());
+						roomMap.put("memberName",lineMemberDOstr.getMemberName());
 						roomMap.put("sex",lineMemberDOstr.getSex());
 						roomMap.put("consultRoom",lineMemberDOstr.getConsultRoom());
 						roomList.add(roomMap);

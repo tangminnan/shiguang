@@ -198,8 +198,6 @@
         var leftsph = $("#leftsph").val();
         var leftcyl = $("#leftcyl").val();
         var leftzx = $("#leftzx").val();
-        // alert(Number(rightsph)>0);
-		// alert(Number(aa) >0);
 		if (Number(rightsph) > 0){
            var rightsph2 =  Number(rightsph) + Number(rightcyl);
            $("#rightsph2").text("+"+rightsph2);
@@ -287,274 +285,350 @@
 	function getCheckOut(){
         //var jdjCylRight1 = $("#jdjCylRight1").val();
         var rightsph = $("#rightsph").val();
-        var rightsph2 = $("#rightsph2").val();
+        var rightsph22 = $("#rightsph2").text();
         var rightcyl = $("#rightcyl").val();
-        var rightcyl2 = $("#rightcyl2").val();
+        var rightcyl22 = $("#rightcyl2").text();
         var rightzx = $("#rightzx").val();
-        var rightzx2 = $("#rightzx2").val();
+        var rightzx22 = $("#rightzx2").text();
         var leftsph = $("#leftsph").val();
-        var leftsph2 = $("#leftsph2").val();
+        var leftsph22 = $("#leftsph2").text();
         var leftcyl = $("#leftcyl").val();
-        var leftcyl2 = $("#leftcyl2").val();
+        var leftcyl22 = $("#leftcyl2").text();
         var leftzx = $("#leftzx").val();
-        var leftzx2 = $("#leftzx2").val();
-        if (Math.abs(rightsph) > Math.abs(rightsph2)){
-            if ( Math.abs(rightsph) >= 0.00 && Math.abs(rightsph) <= 9.00){
+        var leftzx22 = $("#leftzx2").text();
+        // if (Math.abs(rightsph) > Math.abs(rightsph2)){
+            if (Math.abs(rightsph) >= 0.00 && Math.abs(rightsph) <= 9.00){
                 var rightsph1 = Number(rightsph) + Number(+0.12);
                 var rightsph2 = Number(rightsph) + Number(-0.12);
                 var jdjSphRight11 = $("#jdjSphRight1").val();
                 if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
                     jdjSphRight1.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphRight11) >= Math.abs(rightsph1) && Math.abs(jdjSphRight11) <= Math.abs(rightsph2)){
+                    jdjSphRight1.style = "background-color:#008000;";
+				} else if (Math.abs(rightsph) == 0){
+                    jdjSphRight1.style = "background-color:#008000;";
+				} else {
                     jdjSphRight1.style = "background-color:#ff0000;";
                 }
-                var jdjSphRight12 = $("#jdjSphRight2").val();
-                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
-                    jdjSphRight2.style = "background-color:#008000;";
-                } else {
-                    jdjSphRight2.style = "background-color:#ff0000;";
-                }
+                // var jdjSphRight12 = $("#jdjSphRight2").val();
+                // if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                //     jdjSphRight2.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphRight12) >= Math.abs(rightsph1) && Math.abs(jdjSphRight12) <= Math.abs(rightsph2)){
+                //     jdjSphRight2.style = "background-color:#008000;";
+                // }else {
+                //     jdjSphRight2.style = "background-color:#ff0000;";
+                // }
             } else if (Math.abs(rightsph) > 9.00 && Math.abs(rightsph) <= 12.00){
                 var rightsph1 = Number(rightsph) + Number(+0.18);
                 var rightsph2 = Number(rightsph) + Number(-0.18);
                 var jdjSphRight11 = $("#jdjSphRight1").val();
                 if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
                     jdjSphRight1.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphRight11) >= Math.abs(rightsph1) && Math.abs(jdjSphRight11) <= Math.abs(rightsph2)){
+                    jdjSphRight1.style = "background-color:#008000;";
+				} else {
                     jdjSphRight1.style = "background-color:#ff0000;";
                 }
-                var jdjSphRight12 = $("#jdjSphRight2").val();
-                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
-                    jdjSphRight2.style = "background-color:#008000;";
-                } else {
-                    jdjSphRight2.style = "background-color:#ff0000;";
-                }
+                // var jdjSphRight12 = $("#jdjSphRight2").val();
+                // if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                //     jdjSphRight2.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphRight12) >= Math.abs(rightsph1) && Math.abs(jdjSphRight12) <= Math.abs(rightsph2)){
+                //     jdjSphRight2.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphRight2.style = "background-color:#ff0000;";
+                // }
             } else if (Math.abs(rightsph) > 12.00 && Math.abs(rightsph) <= 20.00){
                 var rightsph1 = Number(rightsph) + Number(+0.25);
                 var rightsph2 = Number(rightsph) + Number(-0.25);
                 var jdjSphRight11 = $("#jdjSphRight1").val();
                 if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
                     jdjSphRight1.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphRight11) >= Math.abs(rightsph1) && Math.abs(jdjSphRight11) <= Math.abs(rightsph2)){
+                    jdjSphRight1.style = "background-color:#008000;";
+				} else {
                     jdjSphRight1.style = "background-color:#ff0000;";
                 }
-                var jdjSphRight12 = $("#jdjSphRight2").val();
-                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
-                    jdjSphRight2.style = "background-color:#008000;";
-                } else {
-                    jdjSphRight2.style = "background-color:#ff0000;";
-                }
+                // var jdjSphRight12 = $("#jdjSphRight2").val();
+                // if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                //     jdjSphRight2.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphRight12) >= Math.abs(rightsph1) && Math.abs(jdjSphRight12) <= Math.abs(rightsph2)){
+                //     jdjSphRight2.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphRight2.style = "background-color:#ff0000;";
+                // }
             } else if (Math.abs(rightsph) > 20.00){
                 var rightsph1 = Number(rightsph) + Number(+0.37);
                 var rightsph2 = Number(rightsph) + Number(-0.37);
                 var jdjSphRight11 = $("#jdjSphRight1").val();
                 if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
                     jdjSphRight1.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphRight11) >= Math.abs(rightsph1) && Math.abs(jdjSphRight11) <= Math.abs(rightsph2)){
+                    jdjSphRight1.style = "background-color:#008000;";
+				} else {
                     jdjSphRight1.style = "background-color:#ff0000;";
                 }
-                var jdjSphRight12 = $("#jdjSphRight2").val();
-                if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
-                    jdjSphRight2.style = "background-color:#008000;";
-                } else {
-                    jdjSphRight2.style = "background-color:#ff0000;";
-                }
+                // var jdjSphRight12 = $("#jdjSphRight2").val();
+                // if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
+                //     jdjSphRight2.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphRight12) >= Math.abs(rightsph1) && Math.abs(jdjSphRight12) <= Math.abs(rightsph2)){
+                //     jdjSphRight2.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphRight2.style = "background-color:#ff0000;";
+                // }
             }
-		} else {
-            if (Math.abs(rightsph2) >= 0.00 && Math.abs(rightsph2) <= 9.00){
-                var rightsph1 = Number(rightsph2) + Number(+0.12);
-                var rightsph2 = Number(rightsph2) + Number(-0.12);
+		// } else {
+            if (Math.abs(rightsph22) >= 0.00 && Math.abs(rightsph22) <= 9.00){
+                var rightsph1 = Number(rightsph22) + Number(+0.12);
+                var rightsph2 = Number(rightsph22) + Number(-0.12);
                 var jdjSphRight12 = $("#jdjSphRight2").val();
                 if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
                     jdjSphRight2.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphRight12) >= Math.abs(rightsph1) && Math.abs(jdjSphRight12) <= Math.abs(rightsph2)){
+                    jdjSphRight2.style = "background-color:#008000;";
+				} else if (Math.abs(rightsph22) == 0){
+                    jdjSphRight2.style = "background-color:#008000;";
+				} else {
                     jdjSphRight2.style = "background-color:#ff0000;";
                 }
-                var jdjSphRight11 = $("#jdjSphRight1").val();
-                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
-                    jdjSphRight1.style = "background-color:#008000;";
-                } else {
-                    jdjSphRight1.style = "background-color:#ff0000;";
-                }
-            } else if (Math.abs(rightsph2) > 9.00 && Math.abs(rightsph2) <= 12.00){
-                var rightsph1 = Number(rightsph2) + Number(+0.18);
-                var rightsph2 = Number(rightsph2) + Number(-0.18);
+                // var jdjSphRight11 = $("#jdjSphRight1").val();
+                // if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                //     jdjSphRight1.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphRight11) >= Math.abs(rightsph1) && Math.abs(jdjSphRight11) <= Math.abs(rightsph2)){
+                //     jdjSphRight1.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphRight1.style = "background-color:#ff0000;";
+                // }
+            } else if (Math.abs(rightsph22) > 9.00 && Math.abs(rightsph22) <= 12.00){
+                var rightsph1 = Number(rightsph22) + Number(+0.18);
+                var rightsph2 = Number(rightsph22) + Number(-0.18);
                 var jdjSphRight12 = $("#jdjSphRight2").val();
                 if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
                     jdjSphRight2.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphRight12) >= Math.abs(rightsph1) && Math.abs(jdjSphRight12) <= Math.abs(rightsph2)){
+                    jdjSphRight2.style = "background-color:#008000;";
+				} else {
                     jdjSphRight2.style = "background-color:#ff0000;";
                 }
-                var jdjSphRight11 = $("#jdjSphRight1").val();
-                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
-                    jdjSphRight1.style = "background-color:#008000;";
-                } else {
-                    jdjSphRight1.style = "background-color:#ff0000;";
-                }
-            } else if (Math.abs(rightsph2) > 12.00 && Math.abs(rightsph2) <= 20.00){
-                var rightsph1 = Number(rightsph2) + Number(+0.25);
-                var rightsph2 = Number(rightsph2) + Number(-0.25);
+                // var jdjSphRight11 = $("#jdjSphRight1").val();
+                // if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                //     jdjSphRight1.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphRight11) >= Math.abs(rightsph1) && Math.abs(jdjSphRight11) <= Math.abs(rightsph2)){
+                //     jdjSphRight1.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphRight1.style = "background-color:#ff0000;";
+                // }
+            } else if (Math.abs(rightsph22) > 12.00 && Math.abs(rightsph22) <= 20.00){
+                var rightsph1 = Number(rightsph22) + Number(+0.25);
+                var rightsph2 = Number(rightsph22) + Number(-0.25);
                 var jdjSphRight12 = $("#jdjSphRight2").val();
                 if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
                     jdjSphRight2.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphRight12) >= Math.abs(rightsph1) && Math.abs(jdjSphRight12) <= Math.abs(rightsph2)){
+                    jdjSphRight2.style = "background-color:#008000;";
+				} else {
                     jdjSphRight2.style = "background-color:#ff0000;";
                 }
-                var jdjSphRight11 = $("#jdjSphRight1").val();
-                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
-                    jdjSphRight1.style = "background-color:#008000;";
-                } else {
-                    jdjSphRight1.style = "background-color:#ff0000;";
-                }
-            } else if (Math.abs(rightsph2) > 20.00){
-                var rightsph1 = Number(rightsph2) + Number(+0.37);
-                var rightsph2 = Number(rightsph2) + Number(-0.37);
+                // var jdjSphRight11 = $("#jdjSphRight1").val();
+                // if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                //     jdjSphRight1.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphRight11) >= Math.abs(rightsph1) && Math.abs(jdjSphRight11) <= Math.abs(rightsph2)){
+                //     jdjSphRight1.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphRight1.style = "background-color:#ff0000;";
+                // }
+            } else if (Math.abs(rightsph22) > 20.00){
+                var rightsph1 = Number(rightsph22) + Number(+0.37);
+                var rightsph2 = Number(rightsph22) + Number(-0.37);
                 var jdjSphRight12 = $("#jdjSphRight2").val();
                 if (Math.abs(jdjSphRight12) >= Math.abs(rightsph2) && Math.abs(jdjSphRight12) <= Math.abs(rightsph1)){
                     jdjSphRight2.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphRight12) >= Math.abs(rightsph1) && Math.abs(jdjSphRight12) <= Math.abs(rightsph2)){
+                    jdjSphRight2.style = "background-color:#008000;";
+				} else {
                     jdjSphRight2.style = "background-color:#ff0000;";
                 }
-                var jdjSphRight11 = $("#jdjSphRight1").val();
-                if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
-                    jdjSphRight1.style = "background-color:#008000;";
-                } else {
-                    jdjSphRight1.style = "background-color:#ff0000;";
-                }
+                // var jdjSphRight11 = $("#jdjSphRight1").val();
+                // if (Math.abs(jdjSphRight11) >= Math.abs(rightsph2) && Math.abs(jdjSphRight11) <= Math.abs(rightsph1)){
+                //     jdjSphRight1.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphRight11) >= Math.abs(rightsph1) && Math.abs(jdjSphRight11) <= Math.abs(rightsph2)){
+                //     jdjSphRight1.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphRight1.style = "background-color:#ff0000;";
+                // }
             }
-		}
-		if (Math.abs(leftsph) > Math.abs(leftsph2)){
+        // }
+        // if (Math.abs(leftsph) > Math.abs(leftsph2)){
             if (Math.abs(leftsph) >= 0.00 && Math.abs(leftsph) <= 9.00){
                 var leftsph1 = Number(leftsph) + Number(+0.12);
                 var leftsph2 = Number(leftsph) + Number(-0.12);
                 var jdjSphLeft11 = $("#jdjSphLeft1").val();
                 if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
                     jdjSphLeft1.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph2)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+				} else if (Math.abs(leftsph) == 0){
+                    jdjSphLeft1.style = "background-color:#008000;";
+				} else {
                     jdjSphLeft1.style = "background-color:#ff0000;";
                 }
-                var jdjSphLeft12 = $("#jdjSphLeft2").val();
-                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
-                    jdjSphLeft2.style = "background-color:#008000;";
-                } else {
-                    jdjSphLeft2.style = "background-color:#ff0000;";
-                }
+                // var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                // if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                //     jdjSphLeft2.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph2)){
+                //     jdjSphLeft2.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphLeft2.style = "background-color:#ff0000;";
+                // }
             } else if (Math.abs(leftsph) > 9.00 && Math.abs(leftsph) <= 12.00){
                 var leftsph1 = Number(leftsph) + Number(+0.18);
                 var leftsph2 = Number(leftsph) + Number(-0.18);
                 var jdjSphLeft11 = $("#jdjSphLeft1").val();
                 if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
                     jdjSphLeft1.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph2)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+				} else {
                     jdjSphLeft1.style = "background-color:#ff0000;";
                 }
-                var jdjSphLeft12 = $("#jdjSphLeft2").val();
-                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
-                    jdjSphLeft2.style = "background-color:#008000;";
-                } else {
-                    jdjSphLeft2.style = "background-color:#ff0000;";
-                }
+                // var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                // if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                //     jdjSphLeft2.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph2)){
+                //     jdjSphLeft2.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphLeft2.style = "background-color:#ff0000;";
+                // }
             } else if (Math.abs(leftsph) > 12.00 && Math.abs(leftsph) <= 20.00){
                 var leftsph1 = Number(leftsph) + Number(+0.25);
                 var leftsph2 = Number(leftsph) + Number(-0.25);
                 var jdjSphLeft11 = $("#jdjSphLeft1").val();
                 if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
                     jdjSphLeft1.style = "background-color:#008000;";
-                } else {
+				} else if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph2)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+				} else {
                     jdjSphLeft1.style = "background-color:#ff0000;";
                 }
-                var jdjSphLeft12 = $("#jdjSphLeft2").val();
-                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
-                    jdjSphLeft2.style = "background-color:#008000;";
-                } else {
-                    jdjSphLeft2.style = "background-color:#ff0000;";
-                }
+                // var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                // if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                //     jdjSphLeft2.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph2)){
+                //     jdjSphLeft2.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphLeft2.style = "background-color:#ff0000;";
+                // }
             } else if (Math.abs(leftsph) > 20.00){
                 var leftsph1 = Number(leftsph) + Number(+0.37);
                 var leftsph2 = Number(leftsph) + Number(-0.37);
                 var jdjSphLeft11 = $("#jdjSphLeft1").val();
                 if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
                     jdjSphLeft1.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph2)){
+                    jdjSphLeft1.style = "background-color:#008000;";
+				} else {
                     jdjSphLeft1.style = "background-color:#ff0000;";
                 }
-                var jdjSphLeft12 = $("#jdjSphLeft2").val();
-                if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
-                    jdjSphLeft2.style = "background-color:#008000;";
-                } else {
-                    jdjSphLeft2.style = "background-color:#ff0000;";
-                }
+                // var jdjSphLeft12 = $("#jdjSphLeft2").val();
+                // if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
+                //     jdjSphLeft2.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph2)){
+                //     jdjSphLeft2.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphLeft2.style = "background-color:#ff0000;";
+                // }
             }
-		} else {
-            if (Math.abs(leftsph2) >= 0.00 && Math.abs(leftsph2) <= 9.00){
-                var leftsph1 = Number(leftsph2) + Number(+0.12);
-                var leftsph2 = Number(leftsph2) + Number(-0.12);
+		// } else {
+            if (Math.abs(leftsph22) >= 0.00 && Math.abs(leftsph22) <= 9.00){
+                var leftsph1 = Number(leftsph22) + Number(+0.12);
+                var leftsph2 = Number(leftsph22) + Number(-0.12);
                 var jdjSphLeft12 = $("#jdjSphLeft2").val();
                 if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
                     jdjSphLeft2.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph2)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+				} else if (Math.abs(leftsph22) == 0){
+                    jdjSphLeft2.style = "background-color:#008000;";
+				} else {
                     jdjSphLeft2.style = "background-color:#ff0000;";
                 }
-                var jdjSphLeft11 = $("#jdjSphLeft1").val();
-                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
-                    jdjSphLeft1.style = "background-color:#008000;";
-                } else {
-                    jdjSphLeft1.style = "background-color:#ff0000;";
-                }
-            } else if (Math.abs(leftsph2) > 9.00 && Math.abs(leftsph2) <= 12.00){
-                var leftsph1 = Number(leftsph2) + Number(+0.18);
-                var leftsph2 = Number(leftsph2) + Number(-0.18);
+                // var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                // if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                //     jdjSphLeft1.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph2)){
+                //     jdjSphLeft1.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphLeft1.style = "background-color:#ff0000;";
+                // }
+            } else if (Math.abs(leftsph22) > 9.00 && Math.abs(leftsph22) <= 12.00){
+                var leftsph1 = Number(leftsph22) + Number(+0.18);
+                var leftsph2 = Number(leftsph22) + Number(-0.18);
                 var jdjSphLeft12 = $("#jdjSphLeft2").val();
                 if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
                     jdjSphLeft2.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph2)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+				} else {
                     jdjSphLeft2.style = "background-color:#ff0000;";
                 }
-                var jdjSphLeft11 = $("#jdjSphLeft1").val();
-                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
-                    jdjSphLeft1.style = "background-color:#008000;";
-                } else {
-                    jdjSphLeft1.style = "background-color:#ff0000;";
-                }
-            } else if (Math.abs(leftsph2) > 12.00 && Math.abs(leftsph2) <= 20.00){
-                var leftsph1 = Number(leftsph2) + Number(+0.25);
-                var leftsph2 = Number(leftsph2) + Number(-0.25);
+                // var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                // if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                //     jdjSphLeft1.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph2)){
+                //     jdjSphLeft1.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphLeft1.style = "background-color:#ff0000;";
+                // }
+            } else if (Math.abs(leftsph22) > 12.00 && Math.abs(leftsph22) <= 20.00){
+                var leftsph1 = Number(leftsph22) + Number(+0.25);
+                var leftsph2 = Number(leftsph22) + Number(-0.25);
                 var jdjSphLeft12 = $("#jdjSphLeft2").val();
                 if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
                     jdjSphLeft2.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph2)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+				} else {
                     jdjSphLeft2.style = "background-color:#ff0000;";
                 }
-                var jdjSphLeft11 = $("#jdjSphLeft1").val();
-                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
-                    jdjSphLeft1.style = "background-color:#008000;";
-                } else {
-                    jdjSphLeft1.style = "background-color:#ff0000;";
-                }
-            } else if (Math.abs(leftsph2) > 20.00){
-                var leftsph1 = Number(leftsph2) + Number(+0.37);
-                var leftsph2 = Number(leftsph2) + Number(-0.37);
+                // var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                // if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                //     jdjSphLeft1.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph2)){
+                //     jdjSphLeft1.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphLeft1.style = "background-color:#ff0000;";
+                // }
+            } else if (Math.abs(leftsph22) > 20.00){
+                var leftsph1 = Number(leftsph22) + Number(+0.37);
+                var leftsph2 = Number(leftsph22) + Number(-0.37);
                 var jdjSphLeft12 = $("#jdjSphLeft2").val();
                 if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph1)){
                     jdjSphLeft2.style = "background-color:#008000;";
-                } else {
+                } else if (Math.abs(jdjSphLeft12) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft12) <= Math.abs(leftsph2)){
+                    jdjSphLeft2.style = "background-color:#008000;";
+				} else {
                     jdjSphLeft2.style = "background-color:#ff0000;";
                 }
-                var jdjSphLeft11 = $("#jdjSphLeft1").val();
-                if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
-                    jdjSphLeft1.style = "background-color:#008000;";
-                } else {
-                    jdjSphLeft1.style = "background-color:#ff0000;";
-                }
+                // var jdjSphLeft11 = $("#jdjSphLeft1").val();
+                // if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph2) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph1)){
+                //     jdjSphLeft1.style = "background-color:#008000;";
+                // } else if (Math.abs(jdjSphLeft11) >= Math.abs(leftsph1) && Math.abs(jdjSphLeft11) <= Math.abs(leftsph2)){
+                //     jdjSphLeft1.style = "background-color:#008000;";
+                // } else {
+                //     jdjSphLeft1.style = "background-color:#ff0000;";
+                // }
             }
-		}
+		// }
 		if (Math.abs(rightcyl) >=0.00 && Math.abs(rightcyl) <= 0.75){
             var rightcyl1 = Number(rightcyl) + Number(+0.09);
             var rightcyl2 = Number(rightcyl) + Number(-0.09);
             var jdjCylRight11 = $("#jdjCylRight1").val();
             if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl1)){
                 jdjCylRight1.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl1) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl2)){
+                jdjCylRight1.style = "background-color:#008000;";
+			} else if (Math.abs(rightcyl) == 0){
+                jdjCylRight1.style = "background-color:#008000;";
+			} else {
                 jdjCylRight1.style = "background-color:#ff0000;";
             }
 		} else if (Math.abs(rightcyl) >=0.75 && Math.abs(rightcyl) <= 4.00){
@@ -563,7 +637,9 @@
             var jdjCylRight11 = $("#jdjCylRight1").val();
             if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl1)){
                 jdjCylRight1.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl1) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl2)){
+                jdjCylRight1.style = "background-color:#008000;";
+			} else {
                 jdjCylRight1.style = "background-color:#ff0000;";
             }
 		} else if (Math.abs(rightcyl) >4.00 && Math.abs(rightcyl) <= 6.00){
@@ -572,7 +648,9 @@
             var jdjCylRight11 = $("#jdjCylRight1").val();
             if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl1)){
                 jdjCylRight1.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl1) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl2)){
+                jdjCylRight1.style = "background-color:#008000;";
+			} else {
                 jdjCylRight1.style = "background-color:#ff0000;";
             }
         } else if (Math.abs(rightcyl) >6.00 ){
@@ -581,44 +659,56 @@
             var jdjCylRight11 = $("#jdjCylRight1").val();
             if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl1)){
                 jdjCylRight1.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylRight11) >= Math.abs(rightcyl1) && Math.abs(jdjCylRight11) <= Math.abs(rightcyl2)){
+                jdjCylRight1.style = "background-color:#008000;";
+			} else {
                 jdjCylRight1.style = "background-color:#ff0000;";
             }
         }
-        if (Math.abs(rightcyl2) >=0.00 && Math.abs(rightcyl2) <= 0.75){
-            var rightcyl1 = Number(rightcyl2) + Number(+0.09);
-            var rightcyl2 = Number(rightcyl2) + Number(-0.09);
+        if (Math.abs(rightcyl22) >=0.00 && Math.abs(rightcyl22) <= 0.75){
+            var rightcyl1 = Number(rightcyl22) + Number(+0.09);
+            var rightcyl2 = Number(rightcyl22) + Number(-0.09);
             var jdjCylRight12 = $("#jdjCylRight2").val();
             if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl1)){
                 jdjCylRight2.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl1) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl2)){
+                jdjCylRight2.style = "background-color:#008000;";
+			} else if (Math.abs(rightcyl22) == 0){
+                jdjCylRight2.style = "background-color:#008000;";
+			} else {
                 jdjCylRight2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(rightcyl2) >=0.75 && Math.abs(rightcyl2) <= 4.00){
-            var rightcyl1 = Number(rightcyl2) + Number(+0.12);
-            var rightcyl2 = Number(rightcyl2) + Number(-0.12);
+        } else if (Math.abs(rightcyl22) >=0.75 && Math.abs(rightcyl22) <= 4.00){
+            var rightcyl1 = Number(rightcyl22) + Number(+0.12);
+            var rightcyl2 = Number(rightcyl22) + Number(-0.12);
             var jdjCylRight12 = $("#jdjCylRight2").val();
             if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl1)){
                 jdjCylRight2.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl1) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl2)){
+                jdjCylRight2.style = "background-color:#008000;";
+			} else {
                 jdjCylRight2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(rightcyl2) >4.00 && Math.abs(rightcyl2) <= 6.00){
-            var rightcyl1 = Number(rightcyl2) + Number(+0.18);
-            var rightcyl2 = Number(rightcyl2) + Number(-0.18);
+        } else if (Math.abs(rightcyl22) >4.00 && Math.abs(rightcyl22) <= 6.00){
+            var rightcyl1 = Number(rightcyl22) + Number(+0.18);
+            var rightcyl2 = Number(rightcyl22) + Number(-0.18);
             var jdjCylRight12 = $("#jdjCylRight2").val();
             if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl1)){
                 jdjCylRight2.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl1) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl2)){
+                jdjCylRight2.style = "background-color:#008000;";
+			} else {
                 jdjCylRight2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(rightcyl2) >6.00 ){
-            var rightcyl1 = Number(rightcyl2) + Number(+0.25);
-            var rightcyl2 = Number(rightcyl2) + Number(-0.25);
+        } else if (Math.abs(rightcyl22) >6.00 ){
+            var rightcyl1 = Number(rightcyl22) + Number(+0.25);
+            var rightcyl2 = Number(rightcyl22) + Number(-0.25);
             var jdjCylRight12 = $("#jdjCylRight2").val();
             if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl2) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl1)){
                 jdjCylRight2.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylRight12) >= Math.abs(rightcyl1) && Math.abs(jdjCylRight12) <= Math.abs(rightcyl2)){
+                jdjCylRight2.style = "background-color:#008000;";
+			} else {
                 jdjCylRight2.style = "background-color:#ff0000;";
             }
         }
@@ -629,7 +719,11 @@
             var jdjCylLeft11 = $("#jdjCylLeft1").val();
             if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl1)){
                 jdjCylLeft1.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl1) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl2)){
+                jdjCylLeft1.style = "background-color:#008000;";
+			} else if (Math.abs(leftcyl) == 0){
+                jdjCylLeft1.style = "background-color:#008000;";
+			} else {
                 jdjCylLeft1.style = "background-color:#ff0000;";
             }
         } else if (Math.abs(leftcyl) >=0.75 && Math.abs(leftcyl) <= 4.00){
@@ -638,7 +732,9 @@
             var jdjCylLeft11 = $("#jdjCylLeft1").val();
             if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl1)){
                 jdjCylLeft1.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl1) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl2)){
+                jdjCylLeft1.style = "background-color:#008000;";
+			} else {
                 jdjCylLeft1.style = "background-color:#ff0000;";
             }
         } else if (Math.abs(leftcyl) >4.00 && Math.abs(leftcyl) <= 6.00){
@@ -647,7 +743,9 @@
             var jdjCylLeft11 = $("#jdjCylLeft1").val();
             if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl1)){
                 jdjCylLeft1.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl1) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl2)){
+                jdjCylLeft1.style = "background-color:#008000;";
+			} else {
                 jdjCylLeft1.style = "background-color:#ff0000;";
             }
         } else if (Math.abs(leftcyl) >6.00 ){
@@ -656,44 +754,56 @@
             var jdjCylLeft11 = $("#jdjCylLeft1").val();
             if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl1)){
                 jdjCylLeft1.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylLeft11) >= Math.abs(leftcyl1) && Math.abs(jdjCylLeft11) <= Math.abs(leftcyl2)){
+                jdjCylLeft1.style = "background-color:#008000;";
+			} else {
                 jdjCylLeft1.style = "background-color:#ff0000;";
             }
         }
-        if (Math.abs(leftcyl2) >=0.00 && Math.abs(leftcyl2) <= 0.75){
-            var leftcyl1 = Number(leftcyl2) + Number(+0.09);
-            var leftcyl2 = Number(leftcyl2) + Number(-0.09);
+        if (Math.abs(leftcyl22) >=0.00 && Math.abs(leftcyl22) <= 0.75){
+            var leftcyl1 = Number(leftcyl22) + Number(+0.09);
+            var leftcyl2 = Number(leftcyl22) + Number(-0.09);
             var jdjCylLeft12 = $("#jdjCylLeft2").val();
             if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl1)){
                 jdjCylLeft2.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl1) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl2)){
+                jdjCylLeft2.style = "background-color:#008000;";
+			} else if (Math.abs(leftcyl22) == 0){
+                jdjCylLeft2.style = "background-color:#008000;";
+			} else {
                 jdjCylLeft2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(leftcyl2) >=0.75 && Math.abs(leftcyl2) <= 4.00){
-            var leftcyl1 = Number(leftcyl2) + Number(+0.12);
-            var leftcyl2 = Number(leftcyl2) + Number(-0.12);
+        } else if (Math.abs(leftcyl22) >=0.75 && Math.abs(leftcyl22) <= 4.00){
+            var leftcyl1 = Number(leftcyl22) + Number(+0.12);
+            var leftcyl2 = Number(leftcyl22) + Number(-0.12);
             var jdjCylLeft12 = $("#jdjCylLeft2").val();
             if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl1)){
                 jdjCylLeft2.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl1) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl2)){
+                jdjCylLeft2.style = "background-color:#008000;";
+			} else {
                 jdjCylLeft2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(leftcyl2) >4.00 && Math.abs(leftcyl2) <= 6.00){
-            var leftcyl1 = Number(leftcyl2) + Number(+0.18);
-            var leftcyl2 = Number(leftcyl2) + Number(-0.18);
+        } else if (Math.abs(leftcyl22) >4.00 && Math.abs(leftcyl22) <= 6.00){
+            var leftcyl1 = Number(leftcyl22) + Number(+0.18);
+            var leftcyl2 = Number(leftcyl22) + Number(-0.18);
             var jdjCylLeft12 = $("#jdjCylLeft2").val();
             if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl1)){
                 jdjCylLeft2.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl1) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl2)){
+                jdjCylLeft2.style = "background-color:#008000;";
+			} else {
                 jdjCylLeft2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(leftcyl2) >6.00 ){
-            var leftcyl1 = Number(leftcyl2) + Number(+0.25);
-            var leftcyl2 = Number(leftcyl2) + Number(-0.25);
+        } else if (Math.abs(leftcyl22) >6.00 ){
+            var leftcyl1 = Number(leftcyl22) + Number(+0.25);
+            var leftcyl2 = Number(leftcyl22) + Number(-0.25);
             var jdjCylLeft12 = $("#jdjCylLeft2").val();
             if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl2) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl1)){
                 jdjCylLeft2.style = "background-color:#008000;";
-            } else {
+            } else if (Math.abs(jdjCylLeft12) >= Math.abs(leftcyl1) && Math.abs(jdjCylLeft12) <= Math.abs(leftcyl2)){
+                jdjCylLeft2.style = "background-color:#008000;";
+			} else {
                 jdjCylLeft2.style = "background-color:#ff0000;";
             }
         }
@@ -752,54 +862,54 @@
                 jdjZxRight1.style = "background-color:#ff0000;";
             }
         }
-        if (Math.abs(rightcyl2) >= 0.125 && Math.abs(rightcyl2) <= 0.25){
-            var rightzx1 = Number(rightzx2) + Number(2);
-            var rightzx2 = Number(rightzx2) - Number(2);
+        if (Math.abs(rightcyl22) >= 0.125 && Math.abs(rightcyl22) <= 0.25){
+            var rightzx1 = Number(rightzx22) + Number(2);
+            var rightzx2 = Number(rightzx22) - Number(2);
             var jdjZxRight12 = $("#jdjZxRight2").val();
             if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
                 jdjZxRight2.style = "background-color:#008000;";
             } else {
                 jdjZxRight2.style = "background-color:#ff0000;";
             }
-		} else if (Math.abs(rightcyl2) > 0.25 && Math.abs(rightcyl2) <= 0.50){
-            var rightzx1 = Number(rightzx2) + Number(9);
-            var rightzx2 = Number(rightzx2) - Number(9);
+		} else if (Math.abs(rightcyl22) > 0.25 && Math.abs(rightcyl22) <= 0.50){
+            var rightzx1 = Number(rightzx22) + Number(9);
+            var rightzx2 = Number(rightzx22) - Number(9);
             var jdjZxRight12 = $("#jdjZxRight2").val();
             if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
                 jdjZxRight2.style = "background-color:#008000;";
             } else {
                 jdjZxRight2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(rightcyl2) > 0.50 && Math.abs(rightcyl2) <= 0.75){
-            var rightzx1 = Number(rightzx2) + Number(6);
-            var rightzx2 = Number(rightzx2) - Number(6);
+        } else if (Math.abs(rightcyl22) > 0.50 && Math.abs(rightcyl22) <= 0.75){
+            var rightzx1 = Number(rightzx22) + Number(6);
+            var rightzx2 = Number(rightzx22) - Number(6);
             var jdjZxRight12 = $("#jdjZxRight2").val();
             if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
                 jdjZxRight2.style = "background-color:#008000;";
             } else {
                 jdjZxRight2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(rightcyl2) > 0.75 && Math.abs(rightcyl2) <= 1.50){
-            var rightzx1 = Number(rightzx2) + Number(4);
-            var rightzx2 = Number(rightzx2) - Number(4);
+        } else if (Math.abs(rightcyl22) > 0.75 && Math.abs(rightcyl22) <= 1.50){
+            var rightzx1 = Number(rightzx22) + Number(4);
+            var rightzx2 = Number(rightzx22) - Number(4);
             var jdjZxRight12 = $("#jdjZxRight2").val();
             if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
                 jdjZxRight2.style = "background-color:#008000;";
             } else {
                 jdjZxRight2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(rightcyl2) > 1.50 && Math.abs(rightcyl2) <= 2.50){
-            var rightzx1 = Number(rightzx2) + Number(3);
-            var rightzx2 = Number(rightzx2) - Number(3);
+        } else if (Math.abs(rightcyl22) > 1.50 && Math.abs(rightcyl22) <= 2.50){
+            var rightzx1 = Number(rightzx22) + Number(3);
+            var rightzx2 = Number(rightzx22) - Number(3);
             var jdjZxRight12 = $("#jdjZxRight2").val();
             if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
                 jdjZxRight2.style = "background-color:#008000;";
             } else {
                 jdjZxRight2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(rightcyl2) > 2.50 ){
-            var rightzx1 = Number(rightzx2) + Number(2);
-            var rightzx2 = Number(rightzx2) - Number(2);
+        } else if (Math.abs(rightcyl22) > 2.50 ){
+            var rightzx1 = Number(rightzx22) + Number(2);
+            var rightzx2 = Number(rightzx22) - Number(2);
             var jdjZxRight12 = $("#jdjZxRight2").val();
             if (Math.abs(jdjZxRight12) >= rightzx2 && Math.abs(jdjZxRight12) <= Math.abs(rightzx1)){
                 jdjZxRight2.style = "background-color:#008000;";
@@ -863,54 +973,54 @@
                 jdjZxLeft1.style = "background-color:#ff0000;";
             }
         }
-        if (Math.abs(leftcyl2) >= 0.125 && Math.abs(leftcyl2) <= 0.25){
-            var leftzx1 = Number(leftzx2) + Number(2);
-            var leftzx2 = Number(leftzx2) - Number(2);
+        if (Math.abs(leftcyl22) >= 0.125 && Math.abs(leftcyl22) <= 0.25){
+            var leftzx1 = Number(leftzx22) + Number(2);
+            var leftzx2 = Number(leftzx22) - Number(2);
             var jdjZxLeft12 = $("#jdjZxLeft2").val();
             if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
                 jdjZxLeft2.style = "background-color:#008000;";
             } else {
                 jdjZxLeft2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(leftcyl2) > 0.25 && Math.abs(leftcyl2) <= 0.50){
-            var leftzx1 = Number(leftzx2) + Number(9);
-            var leftzx2 = Number(leftzx2) - Number(9);
+        } else if (Math.abs(leftcyl22) > 0.25 && Math.abs(leftcyl22) <= 0.50){
+            var leftzx1 = Number(leftzx22) + Number(9);
+            var leftzx2 = Number(leftzx22) - Number(9);
             var jdjZxLeft12 = $("#jdjZxLeft2").val();
             if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
                 jdjZxLeft2.style = "background-color:#008000;";
             } else {
                 jdjZxLeft2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(leftcyl2) > 0.50 && Math.abs(leftcyl2) <= 0.75){
-            var leftzx1 = Number(leftzx2) + Number(6);
-            var leftzx2 = Number(leftzx2) - Number(6);
+        } else if (Math.abs(leftcyl22) > 0.50 && Math.abs(leftcyl22) <= 0.75){
+            var leftzx1 = Number(leftzx22) + Number(6);
+            var leftzx2 = Number(leftzx22) - Number(6);
             var jdjZxLeft12 = $("#jdjZxLeft2").val();
             if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
                 jdjZxLeft2.style = "background-color:#008000;";
             } else {
                 jdjZxLeft2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(leftcyl2) > 0.75 && Math.abs(leftcyl2) <= 1.50){
-            var leftzx1 = Number(leftzx2) + Number(4);
-            var leftzx2 = Number(leftzx2) - Number(4);
+        } else if (Math.abs(leftcyl22) > 0.75 && Math.abs(leftcyl22) <= 1.50){
+            var leftzx1 = Number(leftzx22) + Number(4);
+            var leftzx2 = Number(leftzx22) - Number(4);
             var jdjZxLeft12 = $("#jdjZxLeft2").val();
             if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
                 jdjZxLeft2.style = "background-color:#008000;";
             } else {
                 jdjZxLeft2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(leftcyl2) > 1.50 && Math.abs(leftcyl2) <= 2.50){
-            var leftzx1 = Number(leftzx2) + Number(3);
-            var leftzx2 = Number(leftzx2) - Number(3);
+        } else if (Math.abs(leftcyl22) > 1.50 && Math.abs(leftcyl22) <= 2.50){
+            var leftzx1 = Number(leftzx22) + Number(3);
+            var leftzx2 = Number(leftzx22) - Number(3);
             var jdjZxLeft12 = $("#jdjZxLeft2").val();
             if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
                 jdjZxLeft2.style = "background-color:#008000;";
             } else {
                 jdjZxLeft2.style = "background-color:#ff0000;";
             }
-        } else if (Math.abs(leftcyl2) > 2.50 ){
-            var leftzx1 = Number(leftzx2) + Number(2);
-            var leftzx2 = Number(leftzx2) - Number(2);
+        } else if (Math.abs(leftcyl22) > 2.50 ){
+            var leftzx1 = Number(leftzx22) + Number(2);
+            var leftzx2 = Number(leftzx22) - Number(2);
             var jdjZxLeft12 = $("#jdjZxLeft2").val();
             if (Math.abs(jdjZxLeft12) >= leftzx2 && Math.abs(jdjZxLeft12) <= Math.abs(leftzx1)){
                 jdjZxLeft2.style = "background-color:#008000;";

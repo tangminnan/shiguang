@@ -248,10 +248,17 @@ public class SettlementController {
 		costService.updateMember(costDO);
 		settlement.setSaleName(ShiroUtils.getUser().getName());
 		settlement.setSettleDate(new Date());
-		LogStatusDO logStatusDO = new LogStatusDO();
-		logStatusDO.setSaleNumber(settlement.getSaleNumber());
-		logStatusDO.setLogisticStatus("销售完成");
-		logStatusService.save(logStatusDO);
+		if (null != salesDO1.getClasstype()){
+			String[] classArray = salesDO1.getClasstype().split(",");
+			boolean result = false;
+			result = Arrays.asList(classArray).contains("2");
+			if (result == false){
+				LogStatusDO logStatusDO = new LogStatusDO();
+				logStatusDO.setSaleNumber(settlement.getSaleNumber());
+				logStatusDO.setLogisticStatus("销售完成");
+				logStatusService.save(logStatusDO);
+			}
+		}
 		if(settlementService.save(settlement)>0){
 			return R.ok();
 		}
@@ -641,10 +648,25 @@ public class SettlementController {
 				conclusion.setRightsph(conclusionList.get(0).getRightsph());
 				conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
 				conclusion.setRightzx(conclusionList.get(0).getRightzx());
+				if (null != conclusionList.get(0).getRightva()){
+					conclusion.setRightva(conclusionList.get(0).getRightva());
+				}else {
+					conclusion.setRightva("");
+				}
+				if (null != conclusionList.get(0).getRightjyva()){
+					conclusion.setRightjyva(conclusionList.get(0).getRightjyva());
+				}else{
+					conclusion.setRightjyva("");
+				}
 				if (null != conclusionList.get(0).getRightyytj()){
 					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
 				} else {
 					conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
+				}
+				if (null != conclusionList.get(0).getRightjytj()){
+					conclusion.setRightjytj(conclusionList.get(0).getRightjytj());
+				}else {
+					conclusion.setRightjytj("");
 				}
 				conclusion.setRighttg(conclusionList.get(0).getRighttg());
 				conclusion.setRightprism(conclusionList.get(0).getRightprism());
@@ -652,10 +674,25 @@ public class SettlementController {
 				conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
 				conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
 				conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
+				if (null != conclusionList.get(0).getLeftva()){
+					conclusion.setLeftva(conclusionList.get(0).getLeftva());
+				}else {
+					conclusion.setLeftva("");
+				}
+				if (null != conclusionList.get(0).getLeftjyva()){
+					conclusion.setLeftjyva(conclusionList.get(0).getLeftjyva());
+				}else {
+					conclusion.setLeftjyva("");
+				}
 				if (null != conclusionList.get(0).getLeftyytj()){
 					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
 				} else {
 					conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
+				}
+				if (null != conclusionList.get(0).getLeftjytj()){
+					conclusion.setLeftjytj(conclusionList.get(0).getLeftjytj());
+				}else {
+					conclusion.setLeftjytj("");
 				}
 				conclusion.setLefttg(conclusionList.get(0).getLefttg());
 				conclusion.setLeftprism(conclusionList.get(0).getLeftprism());

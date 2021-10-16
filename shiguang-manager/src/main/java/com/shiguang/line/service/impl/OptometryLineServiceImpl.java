@@ -45,6 +45,16 @@ public class OptometryLineServiceImpl implements OptometryLineService {
     }
 
     @Override
+    public List<YgLineDO> linesList(Map<String, Object> map) {
+        return optometryLineDao.linesList(map);
+    }
+
+    @Override
+    public List<YgLineMemberDO> linememberList(Map<String, Object> map) {
+        return optometryLineDao.linememberList(map);
+    }
+
+    @Override
     public List<YgLineMemberDO> listMember(Map<String, Object> map) {
         return optometryLineDao.listMember(map);
     }

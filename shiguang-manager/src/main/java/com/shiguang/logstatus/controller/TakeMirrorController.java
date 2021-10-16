@@ -49,7 +49,9 @@ public class TakeMirrorController {
         for (SalesDO salesDO : salesDOList){
             salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
             salesDO.setPeijingDate(simpleDateFormat.format(salesDO.getPeijingTime()));
-            salesDO.setFaliaoTime(simpleDateFormat.format(salesDO.getFaliaoDate()));
+            if (null != salesDO.getFaliaoDate()){
+                salesDO.setFaliaoTime(simpleDateFormat.format(salesDO.getFaliaoDate()));
+            }
         }
         int total = statusService.findSaleCount(query);
         PageUtils pageUtils = new PageUtils(salesDOList, total);

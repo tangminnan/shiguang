@@ -11,7 +11,7 @@ public class LineMemberDO implements Serializable {
     //会员卡号
     private String memberNumber;
     //姓名
-    private String name;
+    private String memberName;
     //性别
     private Long sex;
     //诊室
@@ -49,14 +49,14 @@ public class LineMemberDO implements Serializable {
     /**
      * 设置：姓名
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
     }
     /**
      * 获取：姓名
      */
-    public String getName() {
-        return name;
+    public String getMemberName() {
+        return memberName;
     }
     /**
      * 设置：性别

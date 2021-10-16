@@ -124,7 +124,7 @@ public class LineController {
 			LineMemberDO lineMemberDO = new LineMemberDO();
 			lineMemberDO.setMemberNumber(lineDOs.getMemberNumber());
 			lineMemberDO.setConsultRoom(consultRoom);
-			lineMemberDO.setName(lineDOs.getName());
+			lineMemberDO.setMemberName(lineDOs.getMemberName());
 			lineMemberDO.setSex(lineDOs.getSex());
 			lineMemberDO.setLineTime(lineDOs.getLineTime());
 			lineMemberDO.setStorey(lineDOs.getStorey());
@@ -144,8 +144,8 @@ public class LineController {
 	public Map<String,Object> callList(){
 		Map<String,Object> resultMap = new HashMap<>();
 		Map<String,Object> map = new HashMap<>();
-		map.put("type","取镜");
-		map.put("memberName","张三");
+//		map.put("type","取镜");
+//		map.put("memberName","张三");
 		resultMap = lineService.callList(map);
 		return resultMap;
 	}
@@ -169,7 +169,7 @@ public class LineController {
 		LineMemberDO lineMemberDO = new LineMemberDO();
 		lineMemberDO.setMemberNumber(lineDOs.getMemberNumber());
 		lineMemberDO.setConsultRoom(consultRoom);
-		lineMemberDO.setName(lineDOs.getName());
+		lineMemberDO.setMemberName(lineDOs.getMemberName());
 		lineMemberDO.setSex(lineDOs.getSex());
 		lineMemberDO.setStorey(lineDOs.getStorey());
 		if(lineMemberService.save(lineMemberDO)>0){

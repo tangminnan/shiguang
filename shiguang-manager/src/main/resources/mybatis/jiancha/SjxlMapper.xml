@@ -122,7 +122,9 @@
 			`sjxl_jyvaos`, 
 			`sjxl_jtxl`, 
 			`sjxl_xlsxl`, 
-			`sjxl_beizhu`
+			`sjxl_beizhu`,
+			`ptometry_number`,
+			`status`
 		)
 		values
 		(
@@ -151,7 +153,9 @@
 			#{sjxlJyvaos}, 
 			#{sjxlJtxl}, 
 			#{sjxlXlsxl}, 
-			#{sjxlBeizhu}
+			#{sjxlBeizhu},
+			#{ptometryNumber},
+			#{status}
 		)
 	</insert>
     <insert id="saveSjxl" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true"

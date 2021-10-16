@@ -640,12 +640,12 @@ public class StoreSalesController {
             String storeDesc = salesDO.getStoreDescribe();
             String[] goodsStr = goodsCode.split(",");
             String[] goodsDescribe = storeDesc.split(",");
-            String storeNum = "";
+            String companyId = "";
             PositionDO positionDO = null;
-            if (null != ShiroUtils.getUser().getStoreNum()) {
-                storeNum = ShiroUtils.getUser().getStoreNum();
+            if (null != ShiroUtils.getUser().getCompanyId()) {
+                companyId = ShiroUtils.getUser().getCompanyId();
                 Map<String,Object> map = new HashMap<>();
-                map.put("departNumber", storeNum);
+                map.put("companyId", companyId);
                 positionDO = stockService.findPosition(map);
             }
             for (int e=0;e<goodsDescribe.length;e++){

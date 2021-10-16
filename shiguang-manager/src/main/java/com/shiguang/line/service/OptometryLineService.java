@@ -19,6 +19,10 @@ public interface OptometryLineService {
 
     List<YgLineDO> lineList(Map<String,Object> map);
 
+    List<YgLineDO> linesList(Map<String,Object> map);
+
+    List<YgLineMemberDO> linememberList(Map<String,Object> map);
+
     List<YgLineMemberDO> listMember(Map<String,Object> map);
 
     int saveLineMember(YgLineMemberDO ygLineMemberDO);

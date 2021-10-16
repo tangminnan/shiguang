@@ -1076,19 +1076,19 @@
 
     <!-- 查询仓位 -->
     <select id="findPosition" resultType="com.shiguang.mfrs.domain.PositionDO">
-        select `position_id`,`position_num`,`depart_number`,`depart_name`,`position_name` from c_position
+        select p.`position_id`,p.`position_num`,p.`depart_number`,p.`depart_name`,p.`position_name` from c_position p join department d on d.depart_number = p.depart_number
         <where>
-            <if test="departNumber != null and departNumber != ''">and depart_number = #{departNumber}</if>
-            and position_order = '1'
+            <if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
+            and p.position_order = '1'
         </where>
     </select>
 
     <!-- 查询仓位 -->
     <select id="findHegePosition" resultType="com.shiguang.mfrs.domain.PositionDO">
-        select `position_id`,`position_num`,`depart_number`,`depart_name`,`position_name` from c_position
+        select p.`position_id`,p.`position_num`,p.`depart_number`,p.`depart_name`,p.`position_name` from c_position p join department d on d.depart_number = p.depart_number
         <where>
-            <if test="departNumber != null and departNumber != ''">and depart_number = #{departNumber}</if>
-            and position_order = '2'
+            <if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
+            and p.position_order = '2'
         </where>
     </select>
 
