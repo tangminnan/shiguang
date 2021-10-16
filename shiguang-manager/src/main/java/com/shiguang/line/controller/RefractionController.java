@@ -93,7 +93,7 @@ public class RefractionController {
         Map<String,Object> map = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         map.put("lineTime",simpleDateFormat.format(new Date()));
-        List<RefractionLineDO> lineDOList = refractionService.refrationlineList(map);
+        List<RefractionLineDO> lineDOList = refractionService.refrationlinesList(map);
         resultMap.put("lineDOList",lineDOList);
         List<RefractionLineMemberDO> lineMemberDOList = new ArrayList<>();
         List<RefractionLineMemberDO> lineMemberDOS = refractionService.listMember(map);
@@ -108,9 +108,9 @@ public class RefractionController {
         resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到"+lineMemberDOS.get(0).getRefraction()+"室就诊");
         List<Map<String,Object>> roomList = new ArrayList<>();
         map.put("refractionStatus",4);
-        List<RefractionLineMemberDO> lineMemberDOList1 = refractionService.listMember(map);
+        List<RefractionLineDO> lineMemberDOList1 = refractionService.refrationlineList(map);
         if (null != lineMemberDOList1 && lineMemberDOList1.size() > 0){
-            for (RefractionLineMemberDO lineMemberDOstr : lineMemberDOList1){
+            for (RefractionLineDO lineMemberDOstr : lineMemberDOList1){
                     Map<String,Object> roomMap = new HashMap<>();
                     roomMap.put("id",lineMemberDOstr.getId());
                     roomMap.put("name",lineMemberDOstr.getMemberName());

@@ -41,6 +41,11 @@ public class RefractionServiceImpl implements RefractionService {
 	}
 
 	@Override
+	public List<RefractionLineDO> refrationlinesList(Map<String, Object> map){
+		return lineDao.refrationlinesList(map);
+	}
+
+	@Override
 	public List<RefractionLineMemberDO> listMember(Map<String, Object> map){
 		return lineDao.listMember(map);
 	}

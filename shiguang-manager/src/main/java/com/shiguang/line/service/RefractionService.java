@@ -16,6 +16,8 @@ public interface RefractionService {
 
     List<RefractionLineDO> refrationlineList(Map<String,Object> map);
 
+    List<RefractionLineDO> refrationlinesList(Map<String,Object> map);
+
     List<RefractionLineMemberDO> listMember(Map<String,Object> map);
 
     int count(Map<String, Object> map);

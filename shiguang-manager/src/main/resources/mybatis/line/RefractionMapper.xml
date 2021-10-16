@@ -82,6 +82,29 @@
         </if>
     </select>
 
+    <select id="refrationlinesList" resultType="com.shiguang.line.domain.YgLineDO">
+        select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from refraction_line
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+            and (refraction is null or refraction ='') and refraction_status != '4'
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by line_time ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
     <select id="listMember" resultType="com.shiguang.line.domain.RefractionLineMemberDO">
         select `id`,`member_name`,`refraction_name`,`refraction`,`refraction_time` from refraction_line_member
