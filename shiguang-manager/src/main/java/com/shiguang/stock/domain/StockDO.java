@@ -91,6 +91,11 @@ public class StockDO implements Serializable {
         this.brandname = brandname;
     }
 
+    //盘盈盘亏的商品数量
+    private String inventoryCount;
+    public void setInventoryCount(String inventoryCount){this.inventoryCount = inventoryCount;}
+    public String getInventoryCount() {return inventoryCount;}
+
     //标准零售价格
     private String retailPrice;
     //原价合计

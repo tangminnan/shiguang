@@ -8,9 +8,9 @@
         j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
         j.`trade_price`,j.`transfer_price`,j.`retail_price` ,j.`xsstate`,j.`state`,j.`classtype`,j.`produc_factory`,
         m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph
-        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum AND jz.`mfrsid`=b.`mfrsid` left join
+        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid` left join
         c_unit u on j.unitid= u.unitid  left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
-        where id = #{value}
+        where j.id = #{value}
     </select>
     <!--//修改时显示制造商和商品品种名称-->
     <select id="list" resultType="com.shiguang.product.domain.JpcpDO">

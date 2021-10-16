@@ -108,10 +108,10 @@
     var html = "";
 	for (var i=0;i<goodsList.length;i++){
 		html = "<tr><td><input type='checkbox' /></td>";
-		html += "<td>"+goodsList[i].producNum+"</td>";
-		html += "<td>"+goodsList[i].producCode+"</td>";
-		html += "<td>"+goodsList[i].producName+"</td>";
-		html += "<td>"+goodsList[i].producFactory+"</td>";
+		html += "<td>"+goodsList[i].goodsNum+"</td>";
+		html += "<td>"+goodsList[i].goodsCode+"</td>";
+		html += "<td>"+goodsList[i].goodsName+"</td>";
+		html += "<td>"+goodsList[i].factory+"</td>";
 		html += "<td>"+goodsList[i].inventoryCount+"</td></tr>";
 		$("#inventoryId").append(html);
 	}

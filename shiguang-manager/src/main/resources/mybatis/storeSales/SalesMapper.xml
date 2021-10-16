@@ -703,6 +703,54 @@
 		AND r.ptometry_number = jv.ptometry_number
 		UNION
 		SELECT
+		r.card_number AS cardNumber,
+		r.ptometry_number AS ptometryNum,
+		r.create_time AS createTime,
+		crt.crt_prescription_type AS chufangType,
+		crt.crt_optometry_name AS yangsName,
+		crt.`status` AS STATUS,
+		crt.crt_sphod AS rightsph,
+		crt.crt_sphos AS leftsph,
+		crt.crt_cylod AS rightcyl,
+		crt.crt_cylos AS leftcyl,
+		crt.crt_axialod AS rightzx,
+		crt.crt_axialos AS leftzx,
+		'' AS rightprism,
+		'' AS leftprism,
+		'' AS rightjd,
+		'' AS leftjd,
+		'' AS rightyytj,
+		'' AS leftyytj,
+		'' AS righttg,
+		'' AS lefttg,
+		'' AS rightva,
+		'' AS leftva,
+		'' AS rightsyjp,
+		'' AS leftsyjp,
+		'' AS rightunit,
+		'' AS leftunit,
+		'' AS rightjytj,
+		'' AS leftjytj,
+		'' AS rightjyva,
+		'' AS leftjyva,
+		'' AS rightqgd,
+		'' AS leftqgd,
+		'' AS rightbc,
+		'' AS leftbc,
+		'' AS rightdia,
+		'' AS leftdia,
+		'' AS rightsg,
+		'' AS leftsg,
+		'' AS righttssj,
+		'' AS lefttssj,
+		'' AS rightrgpsyjp,
+		'' AS leftrgpsyjp
+		FROM
+		jc_crt crt
+		LEFT JOIN jc_result r ON crt.card_number = r.card_number
+		AND r.ptometry_number = crt.ptometry_number
+		UNION
+		SELECT
 		r.card_number as cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,

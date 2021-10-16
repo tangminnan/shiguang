@@ -7,9 +7,9 @@
         select p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`proid`,p.`parts_style`,
           p.`unitid`,p.`batchid`,p.`refractivityid`,p.`tax`,p.`tax_price`,p.`trade_price`,p.`transfer_price`,p.`retail_price`,p.`xsstate`,p.`state`,
           m.mfrsname,b.brandname,u.unitname,p.`classtype`
-          from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum left join
+          from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum  and p.mfrsid=b.mfrsid left join
           c_unit u on p.unitid= u.unitid
-          where id = #{value}
+          where p.id = #{value}
     </select>
 
     <select id="list" resultType="com.shiguang.product.domain.PartsDO">

@@ -257,21 +257,23 @@ public class StoreSalesController {
     @PostMapping("/save")
     @RequiresPermissions("information:store:add")
     public R save(SalesDO salesDO) {
-//        if (null == salesDO.getIsJp() || null == salesDO.getIsJj()) {
-//            salesDO.setIsJp(0L);
-//            salesDO.setIsJj("无");
-//        }
-//        if (!salesDO.getStoreDescribe().contains("隐形")){
-//            if ("镜架".equals(salesDO.getStoreDescribe())
-//                    || "镜片".equals(salesDO.getStoreDescribe())) {
-//                if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
-//                    return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
-//                }
-//            }
-//            if (salesDO.getIsJp() < 2 ) {
-//                return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
-//            }
-//        }
+        if (!"辅料".equals(salesDO.getEyeType())){
+            if (null == salesDO.getIsJp() || null == salesDO.getIsJj()) {
+                salesDO.setIsJp(0L);
+                salesDO.setIsJj("无");
+            }
+            if (!salesDO.getStoreDescribe().contains("隐形")){
+                if ("镜架".equals(salesDO.getStoreDescribe())
+                        || "镜片".equals(salesDO.getStoreDescribe())) {
+                    if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
+                        return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
+                    }
+                }
+                if (salesDO.getIsJp() < 2 ) {
+                    return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
+                }
+            }
+        }
 
         Long saleNumber = GuuidUtil.getUUID();
         salesDO.setSaleNumber("X" + saleNumber);

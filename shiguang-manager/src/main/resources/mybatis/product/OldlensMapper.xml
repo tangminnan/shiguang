@@ -7,9 +7,9 @@
         select m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandid`,o.`brandnum`,o.`factory`,o.`produc_factory`,
         o.`produc_factorycolor`,o.`unitid`,o.`old_id`,o.`batchid`,o.`size`,o.`color`,o.`style_id`,o.`tax`,o.`tax_price`,o.`trade_price`,
         o.`transfer_price`,o.`retail_price` ,o.`xsstate`,o.`state`,o.`classtype`
-        from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsnum left join c_brand b on o.brandnum=b.brandnum
+        from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsnum left join c_brand b on o.brandnum=b.brandnum  and o.mfrsid=b.mfrsid
         left join  c_unit u on o.unitid= u.unitid
-        where id = #{value}
+        where o.id = #{value}
     </select>
 
     <select id="list" resultType="com.shiguang.product.domain.OldlensDO">

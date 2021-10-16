@@ -24,7 +24,7 @@
       left join p_gradual g on g.gradual_id = j.gradual_id
       left join  p_function f on f.function_id = j.function_id
       left join c_mfrs m on j.mfrsid=m.mfrsnum
-      left join c_brand b on j.brandnum=b.brandnum
+      left join c_brand b on j.brandnum=b.brandnum  and j.mfrsid=b.mfrsid
       left join c_unit u on u.unitid=j.unitid
       left join a_cyl yl on yl.cyl_id=j.cyl_up
       left join a_cyl cyl on cyl.cyl_id=j.cyl_down
@@ -33,7 +33,7 @@
       left join a_lightbelow lt on lt.lightbelow_id=j.lightbelow_left
       left join a_lightbelow ltb on ltb.lightbelow_id=j.lightbelow_right
       left join p_light lig on lig.light_id=j.light_id
-      where id = #{value}
+      where j.id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.product.domain.JpdzDO">

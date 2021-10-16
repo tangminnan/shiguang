@@ -648,22 +648,27 @@ public class SettlementController {
 				conclusion.setRightsph(conclusionList.get(0).getRightsph());
 				conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
 				conclusion.setRightzx(conclusionList.get(0).getRightzx());
-				if (null != conclusionList.get(0).getRightva()){
+				if (null != conclusionList.get(0).getRightva() && !"".equals(conclusionList.get(0).getRightva()) ){
 					conclusion.setRightva(conclusionList.get(0).getRightva());
 				}else {
-					conclusion.setRightva("");
+					if(null != conclusionList.get(0).getRightqgd() && !"".equals(conclusionList.get(0).getRightqgd())){
+						conclusion.setRightva(conclusionList.get(0).getRightqgd());
+					}else {
+						conclusion.setRightva("");
+					}
+
 				}
-				if (null != conclusionList.get(0).getRightjyva()){
+				if (null != conclusionList.get(0).getRightjyva() && !"".equals(conclusionList.get(0).getRightjyva())){
 					conclusion.setRightjyva(conclusionList.get(0).getRightjyva());
 				}else{
 					conclusion.setRightjyva("");
 				}
-				if (null != conclusionList.get(0).getRightyytj()){
+				if (null != conclusionList.get(0).getRightyytj() && !"".equals(conclusionList.get(0).getRightyytj())){
 					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
 				} else {
 					conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
 				}
-				if (null != conclusionList.get(0).getRightjytj()){
+				if (null != conclusionList.get(0).getRightjytj() && !"".equals(conclusionList.get(0).getRightjytj())){
 					conclusion.setRightjytj(conclusionList.get(0).getRightjytj());
 				}else {
 					conclusion.setRightjytj("");
@@ -674,22 +679,26 @@ public class SettlementController {
 				conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
 				conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
 				conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
-				if (null != conclusionList.get(0).getLeftva()){
+				if (null != conclusionList.get(0).getLeftva() && !"".equals(conclusionList.get(0).getLeftva())){
 					conclusion.setLeftva(conclusionList.get(0).getLeftva());
 				}else {
-					conclusion.setLeftva("");
+					if (null != conclusionList.get(0).getLeftqgd() && !"".equals(conclusionList.get(0).getLeftqgd())){
+						conclusion.setLeftva(conclusionList.get(0).getLeftqgd());
+					} else {
+						conclusion.setLeftva("");
+					}
 				}
-				if (null != conclusionList.get(0).getLeftjyva()){
+				if (null != conclusionList.get(0).getLeftjyva() && !"".equals(conclusionList.get(0).getLeftjyva())){
 					conclusion.setLeftjyva(conclusionList.get(0).getLeftjyva());
 				}else {
-					conclusion.setLeftjyva("");
+						conclusion.setLeftjyva("");
 				}
-				if (null != conclusionList.get(0).getLeftyytj()){
+				if (null != conclusionList.get(0).getLeftyytj() && !"".equals(conclusionList.get(0).getLeftyytj())){
 					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
 				} else {
 					conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
 				}
-				if (null != conclusionList.get(0).getLeftjytj()){
+				if (null != conclusionList.get(0).getLeftjytj() && !"".equals(conclusionList.get(0).getLeftjytj())){
 					conclusion.setLeftjytj(conclusionList.get(0).getLeftjytj());
 				}else {
 					conclusion.setLeftjytj("");

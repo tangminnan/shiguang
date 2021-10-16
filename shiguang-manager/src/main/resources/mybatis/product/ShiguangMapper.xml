@@ -8,9 +8,9 @@
 		 s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
 		s.`proid`,s.`unitid`,s.`batchid`,s.`leixing`,s.`tax`,s.`tax_price`,s.`trade_price`,s.`transfer_price`,s.`retail_price`,
 		s.`xsstate`,s.`state`,s.`classtype`
-		from aa_shiguang  s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum left join
+		from aa_shiguang  s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum  and s.mfrsid=b.mfrsid  left join
         c_unit u on s.unitid= u.unitid
-		where id = #{value}
+		where s.id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.product.domain.ShiguangDO">

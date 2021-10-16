@@ -110,7 +110,7 @@ public class GainLossController {
 		query.put("companyId",ShiroUtils.getUser().getCompanyId());
 		List<PositionDO> positionDOList = positionService.list(query);
 		model.addAttribute("positionDOList",positionDOList);
-	    return "inventory/gainLoss/add";
+	    return "inventory/gainloss/add";
 	}
 
 	@GetMapping("/edit/{id}")
@@ -129,11 +129,13 @@ public class GainLossController {
 		gainLoss.setDocumentTime(simpleDateFormat.format(gainLoss.getDocumentDate()));
 		model.addAttribute("gainLoss",gainLoss);
 		if ("镜架".equals(gainLoss.getInventoryType())){
-			String[] goodsId = gainLoss.getGoodsId().split(",");
+			String[] goodsId = gainLoss.getProducCode().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
-			List<ProducaDO> goodsList = new ArrayList<>();
+			List<StockDO> goodsList = new ArrayList<>();
 			for (int i=0;i<goodsId.length;i++){
-				ProducaDO producaDO = producaService.get(Long.parseLong(goodsId[i]));
+				StockDO stockDO = new StockDO();
+				stockDO.setGoodsCode(goodsId[i]);
+				StockDO producaDO = stockService.getProduceCode(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 				goodsList.add(producaDO);
 			}
@@ -235,7 +237,7 @@ public class GainLossController {
 			}
 			model.addAttribute("goodsList",goodsList);
 		}
-		return "inventory/gainLoss/detail";
+		return "inventory/gainloss/detail";
 	}
 
 	@GetMapping("/goods/{goodsType}")
@@ -260,7 +262,7 @@ public class GainLossController {
 		} else if ("视光".equals(goodsType)){
 			return "inventory/gainLoss/shiguang";
 		}
-		return "inventory/gainLoss/goods";
+		return "inventory/gainloss/goods";
 	}
 
 	@ResponseBody
@@ -316,7 +318,7 @@ public class GainLossController {
 	@RequiresPermissions("information:gainLoss:barcode")
 	String barcode(@PathVariable("goodsType") String goodsType,Model model){
 		model.addAttribute("goodsType",goodsType);
-		return "inventory/gainLoss/barcode";
+		return "inventory/gainloss/barcode";
 	}
 
 	@ResponseBody
