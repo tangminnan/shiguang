@@ -181,11 +181,6 @@
 					},
 					success: function (xml) {
 						for (var i = 0; i < xml.length; i++) {
-							// //顾客信息
-							// alert(xml[i].name)
-							// $("#gkname").val(xml[i].name);
-							// $("#hyknum").val(xml[i].memberNumber);
-							// $("#phone").val(xml[i].phone);
 							if(null == xml[i].number){
 								xml[i].number="";
 							}
@@ -260,6 +255,8 @@
 							if(null == xml[i].yaoqiul){
 								xml[i].yaoqiul="";
 							}
+							alert(xml[i].rightName)
+							alert(xml[i].leftName)
 							$(".heji1").before("<tr class='val1'>" +
 									"<td >" + xml[i].number + "</td>\n" +//0
 									"<input name='saleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1

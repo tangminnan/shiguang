@@ -24,7 +24,9 @@ function save() {
     	var rightNum =$("#rightNum").val();
     	var leftNum =$("#leftNum").val();
     	var timetime =$("#timetime").val();
-		if (rightNum=="" || leftNum=="" ){
+        alert(rightNum)
+        alert(leftNum)
+		if (rightNum=="" && leftNum=="" ){
 			layer.alert("请添加商品！")
 		}else if (timetime==""){
 		    layer.alert("请选择取镜时间！")
@@ -68,7 +70,7 @@ function save() {
         var rightNumyx =$("#rightNumyx").val();
         var leftNumyx =$("#leftNumyx").val();
         var timetime =$("#timetime").val();
-        if (rightNumyx=="" || leftNumyx=="" ){
+        if (rightNumyx=="" && leftNumyx=="" ){
             layer.alert("请添加商品！")
         }else if (timetime==""){
             layer.alert("请选择取镜时间！")

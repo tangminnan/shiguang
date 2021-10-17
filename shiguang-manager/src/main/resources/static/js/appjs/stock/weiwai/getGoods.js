@@ -206,7 +206,26 @@ function batchSelect() {
         obj.jpGoodsNum = jpGoodsNum;
         obj.leftRight = leftRight;
         obj.mirorAddress = mirorAddress;
-
+        //加工要求
+        if(null == row['processAsk']){
+            var processAsk  ="";
+        }else {
+            var processAsk =  row['processAsk'];
+        }
+        obj.processAsk = processAsk;
+        //瞳高
+        if(null == row['righttg']){
+            var righttg  ="";
+        }else {
+            var righttg =  row['righttg'];
+        }
+        obj.righttg = righttg;
+        if(null == row['lefttg']){
+            var lefttg  ="";
+        }else {
+            var lefttg =  row['lefttg'];
+        }
+        obj.lefttg = lefttg;
         objArray.push(obj);
     });
 

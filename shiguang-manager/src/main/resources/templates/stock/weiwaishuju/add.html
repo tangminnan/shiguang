@@ -294,73 +294,9 @@
             area: ['800px', '520px'],
             content: "/stock/weiwai/PeiJing/" + eyeStyle,// iframe的url
             cancel: function (index, layero) {
-                // var departmentIds=$('#departmentIds').val();
-                // alert(departmentIds)
+
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 for (var i = 0; i < rows.length; i++) {
-                    // alert(JSON.stringify(rows))
-                    // alert(rows[i].rightcyl)
-                    if(null == rows[i].saleNumber){
-                        rows[i].saleNumber="";
-                    }
-
-                    if(null == rows[i].rightsph){
-                        rows[i].rightsph="";
-                    }
-                    if(null == rows[i].rightcyl){
-                        rows[i].rightcyl="";
-                    }
-                    if(null == rows[i].rightzx){
-                        rows[i].rightzx="";
-                    }
-                    if(null == rows[i].rightAdd){
-                        rows[i].rightAdd="";
-                    }
-                    if(null == rows[i].rightSlj){
-                        rows[i].rightSlj="";
-                    }
-                    if(null == rows[i].rightJd){
-                        rows[i].rightJd="";
-                    }
-                    if(null == rows[i].rightFartj){
-                        rows[i].rightFartj="";
-                    }
-                    if(null == rows[i].rightNeartj){
-                        rows[i].rightNeartj="";
-                    }
-                    if(null == rows[i].leftsph){
-                        rows[i].leftsph="";
-                    }
-                    if(null == rows[i].leftcyl){
-                        rows[i].leftcyl="";
-                    }
-                    if(null == rows[i].leftzx){
-                        rows[i].leftzx="";
-                    }
-                    if(null == rows[i].leftAdd){
-                        rows[i].leftAdd="";
-                    }
-                    if(null == rows[i].leftSlj){
-                        rows[i].leftSlj="";
-                    }
-                    if(null == rows[i].leftJd){
-                        rows[i].leftJd="";
-                    }
-                    if(null == rows[i].leftFartj){
-                        rows[i].leftFartj="";
-                    }
-                    if(null == rows[i].leftNeartj){
-                        rows[i].leftNeartj="";
-                    }
-                    if(null == rows[i].goodsNum){
-                        rows[i].goodsNum="";
-                    }
-					if(null == rows[i].mirorAddress){
-                        rows[i].mirorAddress="";
-                    }
-
-
-
                     $("#departname").val(rows[i].mirorAddress);
                     $("#saleNumber").val(rows[i].saleNumber);
 
@@ -374,21 +310,6 @@
                     $("#rightNeartj").val(rows[i].rightNeartj);
 
 
-
-
-
-
-
-
-                    $("#sph1").val(rows[i].rightsph);
-                    $("#cyl1").val(rows[i].rightcyl);
-                    $("#zx1").val(rows[i].rightzx);
-                    $("#xj1").val(rows[i].rightAdd);
-                    $("#lj1").val(rows[i].rightSlj);
-                    $("#jd1").val(rows[i].rightJd);
-                    // $("#tg1").val(rows[i].rightFartj);
-
-
                     $("#leftsph").val(rows[i].leftsph);
                     $("#leftcyl").val(rows[i].leftcyl);
                     $("#leftzx").val(rows[i].leftzx);
@@ -397,14 +318,6 @@
                     $("#leftJd").val(rows[i].leftJd);
                     $("#leftFartj").val(rows[i].leftFartj);
                     $("#leftNeartj").val(rows[i].leftNeartj);
-
-                    $("#sph2").val(rows[i].leftsph);
-                    $("#cyl2").val(rows[i].leftcyl);
-                    $("#zx2").val(rows[i].leftzx);
-                    $("#xj2").val(rows[i].leftAdd);
-                    $("#lj2").val(rows[i].leftSlj);
-                    $("#jd2").val(rows[i].leftJd);
-
 
 
                     $("#rightsphyx").val(rows[i].rightsph);
@@ -429,6 +342,7 @@
 					$("#phone").val(rows[i].phone1);
 
 
+
                     if (eyeStyle==3){//镜片
                         var array = rows[i].jpGoodsNum.split(",");
 
@@ -436,17 +350,60 @@
                         var jpName = rows[i].jpGoodsName.split(",");
 
                         for (var t=0;t<array.length;t++){
-
-                            $("#rightNum").val(array[0]);
-                            $("#rightName").val(jpName[0]);
-                            $("#rightR").val(leftRight[0]);
-                            $("#countr").val(1);
-
-
-                            $("#leftNum").val(array[1]);
-                            $("#leftName").val(jpName[1]);
-                            $("#leftL").val(leftRight[1]);
-                            $("#countl").val(1);
+							if(array[0]==undefined){
+								$("#rightNum").val("");
+								$("#rightName").val("");
+								$("#rightR").val("");
+								$("#countr").val("");
+								$("#yaoqiur").val("");
+								$("#sph1").val("");
+								$("#cyl1").val("");
+								$("#zx1").val("");
+								$("#xj1").val("");
+								$("#lj1").val("");
+								$("#jd1").val("");
+								$("#tg1").val("");
+							}else {
+								$("#rightNum").val(array[0]);
+								$("#rightName").val(jpName[0]);
+								$("#rightR").val(leftRight[0]);
+								$("#countr").val(1);
+								$("#yaoqiur").val(rows[i].processAsk);
+								$("#sph1").val(rows[i].rightsph);
+								$("#cyl1").val(rows[i].rightcyl);
+								$("#zx1").val(rows[i].rightzx);
+								$("#xj1").val(rows[i].rightAdd);
+								$("#lj1").val(rows[i].rightSlj);
+								$("#jd1").val(rows[i].rightJd);
+								$("#tg1").val(rows[i].righttg);
+							}
+							if(array[1]==undefined){
+								$("#leftNum").val("");
+								$("#leftName").val("");
+								$("#leftL").val("");
+								$("#countl").val("");
+								$("#yaoqiul").val("");
+								$("#sph2").val("");
+								$("#cyl2").val("");
+								$("#zx2").val("");
+								$("#xj2").val("");
+								$("#lj2").val("");
+								$("#jd2").val("");
+								$("#tg2").val("");
+							}else {
+								$("#leftNum").val(array[1]);
+								$("#leftName").val(jpName[1]);
+								$("#leftL").val(leftRight[1]);
+								$("#countl").val(1);
+								$("#yaoqiul").val(rows[i].processAsk);
+								$("#sph2").val(rows[i].leftsph);
+								$("#cyl2").val(rows[i].leftcyl);
+								$("#zx2").val(rows[i].leftzx);
+								$("#xj2").val(rows[i].leftAdd);
+								$("#lj2").val(rows[i].leftSlj);
+								$("#jd2").val(rows[i].leftJd);
+								$("#tg2").val(rows[i].lefttg);
+							}
 
 
 
@@ -460,14 +417,34 @@
                         var jpName = rows[i].jpGoodsName.split(",");
 
                         for (var t=0;t<array.length;t++){
-                            $("#rightNumyx").val(array[0]);
-                            $("#rightNameyx").val(jpName[0]);
-                            $("#rightRyx").val(leftRight[0]);
-                            $("#countryx").val(1);
-                            $("#leftNumyx").val(array[1]);
-                            $("#leftNameyx").val(jpName[1]);
-                            $("#leftLyx").val(leftRight[1]);
-                            $("#countlyx").val(1);
+                        	if (array[0]=undefined){
+								$("#rightNumyx").val("");
+								$("#rightNameyx").val("");
+								$("#rightRyx").val("");
+								$("#countryx").val("");
+								$("#yaoqiuryx").val("");
+							}else {
+                        		$("#rightNumyx").val(array[0]);
+								$("#rightNameyx").val(jpName[0]);
+								$("#rightRyx").val(leftRight[0]);
+								$("#countryx").val(1);
+								$("#yaoqiuryx").val(rows[i].processAsk);
+							}
+
+							if(array[1]=undefined){
+								$("#leftNumyx").val("");
+								$("#leftNameyx").val("");
+								$("#leftLyx").val("");
+								$("#countlyx").val("");
+								$("#yaoqiulyx").val("");
+							}else {
+								$("#leftNumyx").val("");
+								$("#leftNameyx").val("");
+								$("#leftLyx").val("");
+								$("#countlyx").val("");
+								$("#yaoqiulyx").val("");
+							}
+
                         }
                     }
 
