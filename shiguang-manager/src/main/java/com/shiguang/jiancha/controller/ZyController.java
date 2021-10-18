@@ -3,6 +3,7 @@ package com.shiguang.jiancha.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.ZyDO;
 import com.shiguang.jiancha.service.ZyService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -79,8 +80,8 @@ public class ZyController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("jiancha:zy:edit")
-    public R update(ZyDO zy) {
-        zyService.update(zy);
+    public R update(ResultDO result) {
+        zyService.update(result);
         return R.ok();
     }
 

@@ -24,8 +24,6 @@ function save() {
     	var rightNum =$("#rightNum").val();
     	var leftNum =$("#leftNum").val();
     	var timetime =$("#timetime").val();
-        alert(rightNum)
-        alert(leftNum)
 		if (rightNum=="" && leftNum=="" ){
 			layer.alert("请添加商品！")
 		}else if (timetime==""){

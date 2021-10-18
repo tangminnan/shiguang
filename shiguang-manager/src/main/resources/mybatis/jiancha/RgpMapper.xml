@@ -210,8 +210,11 @@
 			#{rgpAxialos}
 		)
 	</insert>
-
-    <update id="update" parameterType="com.shiguang.jiancha.domain.RgpDO">
+	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.RgpDO">
+        select ptometry_number
+        from jc_rgp where ptometry_number=#{ptometryNumber}
+    </select>
+    <update id="update" parameterType="com.shiguang.jiancha.domain.ResultDO">
         update jc_rgp
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
@@ -242,7 +245,7 @@
             <if test="rgpAxialod != null">`rgp_axialod` = #{rgpAxialod}, </if>
             <if test="rgpAxialos != null">`rgp_axialos` = #{rgpAxialos}</if>
         </set>
-        where rgp_id = #{rgpId}
+		where  ptometry_number=#{ptometryNumber}
     </update>
 
     <delete id="remove">

@@ -327,13 +327,8 @@
                     $("#leftcylyx").val(rows[i].leftcyl);
                     $("#leftzxyx").val(rows[i].leftzx);
 
-                    $("#sphyx1").val(rows[i].rightsph);
-                    $("#cylyx1").val(rows[i].rightcyl);
-                    $("#zxyx1").val(rows[i].rightzx);
 
-                    $("#sphyx2").val(rows[i].leftsph);
-                    $("#cylyx2").val(rows[i].leftcyl);
-                    $("#zxyx2").val(rows[i].leftzx);
+
 
 
                     //顾客信息
@@ -345,7 +340,6 @@
 
                     if (eyeStyle==3){//镜片
                         var array = rows[i].jpGoodsNum.split(",");
-
                         var leftRight = rows[i].leftRight.split(",");
                         var jpName = rows[i].jpGoodsName.split(",");
 
@@ -404,45 +398,53 @@
 								$("#jd2").val(rows[i].leftJd);
 								$("#tg2").val(rows[i].lefttg);
 							}
-
-
-
-
-
                         }
                     } else if (eyeStyle ==4){//隐形
                         var array = rows[i].goodsNum.split(",");
-
                         var leftRight = rows[i].leftRight.split(",");
                         var jpName = rows[i].jpGoodsName.split(",");
 
                         for (var t=0;t<array.length;t++){
-                        	if (array[0]=undefined){
+                        	if (array[0]==undefined){
 								$("#rightNumyx").val("");
 								$("#rightNameyx").val("");
 								$("#rightRyx").val("");
 								$("#countryx").val("");
 								$("#yaoqiuryx").val("");
+								$("#sphyx1").val("");
+								$("#cylyx1").val("");
+								$("#zxyx1").val("");
 							}else {
                         		$("#rightNumyx").val(array[0]);
 								$("#rightNameyx").val(jpName[0]);
 								$("#rightRyx").val(leftRight[0]);
 								$("#countryx").val(1);
 								$("#yaoqiuryx").val(rows[i].processAsk);
+								$("#sphyx1").val(rows[i].rightsph);
+								$("#cylyx1").val(rows[i].rightcyl);
+								$("#zxyx1").val(rows[i].rightzx);
 							}
 
-							if(array[1]=undefined){
+							if(array[1]==undefined){
 								$("#leftNumyx").val("");
 								$("#leftNameyx").val("");
 								$("#leftLyx").val("");
 								$("#countlyx").val("");
 								$("#yaoqiulyx").val("");
+								$("#sphyx2").val("");
+								$("#cylyx2").val("");
+								$("#zxyx2").val("");
+
 							}else {
-								$("#leftNumyx").val("");
-								$("#leftNameyx").val("");
-								$("#leftLyx").val("");
-								$("#countlyx").val("");
-								$("#yaoqiulyx").val("");
+								$("#leftNumyx").val(array[1]);
+								$("#leftNameyx").val(jpName[1]);
+								$("#leftLyx").val(leftRight[1]);
+								$("#countlyx").val(1);
+								$("#yaoqiulyx").val(rows[i].processAsk);
+								$("#sphyx2").val(rows[i].leftsph);
+								$("#cylyx2").val(rows[i].leftcyl);
+								$("#zxyx2").val(rows[i].leftzx);
+
 							}
 
                         }

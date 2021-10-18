@@ -205,8 +205,11 @@
 			#{status}
 		)
 	</insert>
-
-    <update id="update" parameterType="com.shiguang.jiancha.domain.RxjmjcjDO">
+    <select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.RxjmjcjDO">
+        select ptometry_number
+        from jc_rxjmjcj where ptometry_number=#{ptometryNumber}
+    </select>
+    <update id="update" parameterType="com.shiguang.jiancha.domain.ResultDO">
         update jc_rxjmjcj
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
@@ -231,9 +234,11 @@
             <if test="rxUnitos != null">`rx_unitos` = #{rxUnitos},</if>
             <if test="rxClfs != null">`rx_clfs` = #{rxClfs},</if>
             <if test="rxHlypz != null">`rx_hlypz` = #{rxHlypz},</if>
-            <if test="rxBeizhu != null">`rx_beizhu` = #{rxBeizhu}</if>
+            <if test="rxBeizhu != null">`rx_beizhu` = #{rxBeizhu},</if>
+            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber}, </if>
+            <if test="status != null">`status` = #{status} </if>
         </set>
-        where rx_id = #{rxId}
+        where  ptometry_number=#{ptometryNumber}
     </update>
 
     <delete id="remove">

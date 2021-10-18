@@ -23,8 +23,10 @@
 
 </head>
 <body>
-<div class="container"> 
+<div class="container">
 	<h3>镜框委外订单</h3>
+	<input id="goodsName" name="goodsName" th:value="${weiwaiDO.goodsName}" type="hidden"/>
+	<input id="goodsName2" name="goodsName" th:value="${weiwaiDO.goodsName2}" type="hidden"/>
 	<table class="tabA" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td><b>订单编号：</b><span th:text="${weiwaiDO.danjuNumber}"></span></td>
@@ -58,269 +60,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>
-				<td><span th:text="${weiwaiDO.goodsName}"></span></td>
-				<td><span th:text="${weiwaiDO.style}"></span></td>
-				<td><span th:text="${weiwaiDO.rl}"></span></td>
-				<td><span th:text="${weiwaiDO.sph}"></span></td>
-				<td><span th:text="${weiwaiDO.cyl}"></span></td>
-				<td><span th:text="${weiwaiDO.axial}"></span></td>
-				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>
-				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>
-				<td> </td>
-				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>
-				<td><span th:text="${weiwaiDO.lengjing}"></span></td>
-				<td><span th:text="${weiwaiDO.jd}"></span></td>
-				<td><span th:text="${weiwaiDO.diameter}"></span></td>
-				<td><span th:text="${weiwaiDO.count}"></span></td>
-				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>
-				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>
-				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>
-			</tr>
-			<tr>
-				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>
-				<td><span th:text="${weiwaiDO.style2}"></span></td>
-				<td><span th:text="${weiwaiDO.rl2}"></span></td>
-				<td><span th:text="${weiwaiDO.sph2}"></span></td>
-				<td><span th:text="${weiwaiDO.cyl2}"></span></td>
-				<td><span th:text="${weiwaiDO.axial2}"></span></td>
-				<td><span th:text="${weiwaiDO.leftFartj}"></span></td>
-				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>
-				<td> </td>
-				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>
-				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>
-				<td><span th:text="${weiwaiDO.jd2}"></span></td>
-				<td><span th:text="${weiwaiDO.diameter2}"></span></td>
-				<td><span th:text="${weiwaiDO.count2}"></span></td>
-				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>
-			</tr>
-<!--			<tr>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
-<!--			</tr>-->
-
-<!--			<tr>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
-<!--			</tr>-->
-
-<!--			<tr>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
-<!--			</tr>-->
-
-<!--			<tr>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
-<!--			</tr>-->
-
-<!--			<tr>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.salenumbery}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightFartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
-<!--				<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.style2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.rightNeartj}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.leftNeartj}"></span></td>-->
-<!--				<td> </td>-->
-<!--				<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
-<!--				<td><span th:text="${weiwaiDO.count2}"></span></td>-->
-<!--				<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
-<!--			</tr>-->
+			<tr style="font-weight:bold;font-size: 15px;" class="heji1"></tr>
 		</tbody>
 	</table>
 	<table class="tabC" border="0" cellspacing="0" cellpadding="0">
@@ -346,5 +86,62 @@
 <!--		</tr>-->
 	</table>
 </div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+	$().ready(function () {
+		var goodsName =$('#goodsName').val();
+		var goodsName2 =$('#goodsName2').val();
+		alert(goodsName)
+		alert(goodsName2)
+		if (goodsName != ""){
+			alert("第一个")
+			$(".heji1").before(
+					"<tr>"+
+					"<td rowspan='2'>"+"<span th:text='${weiwaiDO.salenumbery}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.goodsName}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.style}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.rl}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.sph}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.cyl}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.axial}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.rightFartj}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.rightNeartj}'>"+"</span>"+"</td>"+
+					"<td>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.lightbelow}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.lengjing}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.jd}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.diameter}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.count}'>"+"</span>"+"</td>"+
+					"<td rowspan='2'>"+"<span th:text='${weiwaiDO.mirrorTime}'>"+"</span>"+"</td>"+
+					"<td rowspan='2'>"+"<span th:text='${weiwaiDO.gkname}'>"+"</span>"+"</td>"+
+					"<td>"+"<span th:text='${weiwaiDO.yaoqiu}'>"+"</span>"+"</td>"+
+					"</tr>"
+			);
+		}
+		if (goodsName2 != ""){
+			alert("第er1个")
+			$(".heji1").before(
+				"<tr>"+
+				"<td>"+"<span th:text='${weiwaiDO.goodsName2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.style2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.rl2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.sph2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.cyl2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.axial2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.leftFartj}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.leftNeartj}'>"+"</span>"+"</td>"+
+				"<td>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.lightbelow2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.lengjing2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.jd2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.diameter2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.count2}'>"+"</span>"+"</td>"+
+				"<td>"+"<span th:text='${weiwaiDO.yaoqiu2}'>"+"</span>"+"</td>"+
+				"</tr>"
+			);
+		}
+	});
+</script>
+
 </body>
 </html>

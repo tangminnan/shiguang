@@ -140,7 +140,7 @@ function load() {
                                         var f = '';
                                         if (row.shstatus==""){
 											var n = '<span class="btn btn-warning btn-sm"  href="#" title="配送"  mce_href="#" onclick="psNum(\''
-												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">配送</span> ';
+												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle+" ','"+  row.yaoqiu+" ','"+  row.yaoqiu2 + '\')">配送</span> ';
 											var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="thNum(\''
 												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">退回</span> ';
 										}else {
@@ -292,7 +292,19 @@ function upshTime() {
 }
 
 //配送
-function psNum(salenumbery,danjuNumber,eyeStyle) {
+function psNum(salenumbery,danjuNumber,eyeStyle,yaoqiu,yaoqiu2) {
+	alert(yaoqiu.length);
+	alert(yaoqiu2.length)
+	alert(yaoqiu== '')
+	alert(yaoqiu2== '');
+	if (yaoqiu== ''){
+		alert(1111)
+		yaoqiu ="空"
+	}
+	if (yaoqiu2== ''){
+		alert(22222)
+		yaoqiu2 ="空"
+	}
 	var shstatus="0";
 	if (shstatus == "0"){
 		// alert("输入工号")
@@ -302,7 +314,7 @@ function psNum(salenumbery,danjuNumber,eyeStyle) {
 			maxmin : true,
 			shadeClose : false, // 点击遮罩关闭层
 			area : [ '800px', '520px' ],
-			content :"/stock/weiwai/userNumps/"+ salenumbery+'/'+danjuNumber+'/'+eyeStyle
+			content :"/stock/weiwai/userNumps/"+ salenumbery+'/'+danjuNumber+'/'+eyeStyle+'/'+yaoqiu+'/'+yaoqiu2
 		});
 
 	}
@@ -312,9 +324,11 @@ function peisong() {
 	var salenumbery = document.getElementById('salenumbery').value;
 	var psname = document.getElementById('username').value;
 	var eyeStyle = document.getElementById('eyeStyle').value;
+	var yaoqiu = $("#yaoqiu").val();
+	var yaoqiu2 = $("#yaoqiu2").val();
 	var shstatus = "0";
 	if (username != "") {
-		// alert("qqqqqqqq");
+		// alert(eyeStyle);
 		$.ajax({
 			url: "/stock/weiwai/editShouhuo",
 			type: "post",
@@ -323,7 +337,9 @@ function peisong() {
 				'shstatus': shstatus,
 				'psname': psname,
 				'salenumbery': salenumbery,
-				'eyeStyle':eyeStyle
+				'eyeStyle':eyeStyle,
+				'yaoqiu':yaoqiu,
+				'yaoqiu2':yaoqiu2
 			},
 			dataType: 'JSON',
 			async: false,

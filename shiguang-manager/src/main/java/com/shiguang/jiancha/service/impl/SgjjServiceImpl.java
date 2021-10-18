@@ -42,8 +42,13 @@ public class SgjjServiceImpl implements SgjjService {
     }
 
     @Override
-    public int update(SgjjDO sgjj) {
-        return sgjjDao.update(sgjj);
+    public List<ResultDO> haveYanguangNum(Map<String, Object> map) {
+        return sgjjDao.haveYanguangNum(map);
+    }
+
+    @Override
+    public int update(ResultDO result) {
+        return sgjjDao.update(result);
     }
 
     @Override

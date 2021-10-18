@@ -42,8 +42,13 @@ public class KjjyServiceImpl implements KjjyService {
     }
 
     @Override
-    public int update(KjjyDO kjjy) {
-        return kjjyDao.update(kjjy);
+    public List<ResultDO> haveYanguangNum(Map<String, Object> map) {
+        return kjjyDao.haveYanguangNum(map);
+    }
+
+    @Override
+    public int update(ResultDO result) {
+        return kjjyDao.update(result);
     }
 
     @Override

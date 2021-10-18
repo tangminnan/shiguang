@@ -24,8 +24,9 @@ public interface ZyService {
 	int save(ZyDO zy);
 
 	int saveZY(ResultDO result);
-
-	int update(ZyDO zy);
+	//    是否有保存这个验光号数据
+	List<ResultDO> haveYanguangNum(Map<String, Object> map);
+	int update(ResultDO result);
 	int remove(Long zyId);
 	int upremove(ZyDO zyDO);
 	

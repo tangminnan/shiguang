@@ -270,8 +270,11 @@
 			#{vstAxialos}
 		)
 	</insert>
-
-	<update id="update" parameterType="com.shiguang.jiancha.domain.VstDO">
+	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.VstDO">
+        select ptometry_number
+        from jc_vst where ptometry_number=#{ptometryNumber}
+    </select>
+	<update id="update" parameterType="com.shiguang.jiancha.domain.ResultDO">
 		update jc_vst
 		<set>
 			<if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
@@ -312,7 +315,7 @@
 			<if test="vstAxialod != null">`vst_axialod` = #{vstAxialod}, </if>
 			<if test="vstAxialos != null">`vst_axialos` = #{vstAxialos}</if>
 		</set>
-		where vst_id = #{vstId}
+		where  ptometry_number=#{ptometryNumber}
 	</update>
 
 	<delete id="remove">

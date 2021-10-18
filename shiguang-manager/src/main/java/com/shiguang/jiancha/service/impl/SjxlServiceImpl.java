@@ -42,8 +42,13 @@ public class SjxlServiceImpl implements SjxlService {
     }
 
     @Override
-    public int update(SjxlDO sjxl) {
-        return sjxlDao.update(sjxl);
+    public List<ResultDO> haveYanguangNum(Map<String, Object> map) {
+        return sjxlDao.haveYanguangNum(map);
+    }
+
+    @Override
+    public int update(ResultDO result) {
+        return sjxlDao.update(result);
     }
 
     @Override

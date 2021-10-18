@@ -42,8 +42,13 @@ public class RgpServiceImpl implements RgpService {
     }
 
     @Override
-    public int update(RgpDO rgp) {
-        return rgpDao.update(rgp);
+    public List<ResultDO> haveYanguangNum(Map<String, Object> map) {
+        return rgpDao.haveYanguangNum(map);
+    }
+
+    @Override
+    public int update(ResultDO result) {
+        return rgpDao.update(result);
     }
 
     @Override

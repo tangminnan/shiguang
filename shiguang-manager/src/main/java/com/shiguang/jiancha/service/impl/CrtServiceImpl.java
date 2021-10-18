@@ -42,8 +42,13 @@ public class CrtServiceImpl implements CrtService {
     }
 
     @Override
-    public int update(CrtDO crt) {
-        return crtDao.update(crt);
+    public List<ResultDO> haveYanguangNum(Map<String, Object> map) {
+        return crtDao.haveYanguangNum(map);
+    }
+
+    @Override
+    public int update(ResultDO result) {
+        return crtDao.update(result);
     }
 
     @Override

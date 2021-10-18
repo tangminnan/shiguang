@@ -42,8 +42,13 @@ public class VstServiceImpl implements VstService {
     }
 
     @Override
-    public int update(VstDO vst) {
-        return vstDao.update(vst);
+    public List<ResultDO> haveYanguangNum(Map<String, Object> map) {
+        return vstDao.haveYanguangNum(map);
+    }
+
+    @Override
+    public int update(ResultDO result) {
+        return vstDao.update(result);
     }
 
     @Override

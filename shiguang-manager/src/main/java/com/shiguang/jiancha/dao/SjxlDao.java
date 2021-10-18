@@ -26,8 +26,9 @@ public interface SjxlDao {
     int save(SjxlDO sjxl);
 
     int saveSjxl(ResultDO result);
-
-    int update(SjxlDO sjxl);
+    //    是否有保存这个验光号数据
+    List<ResultDO> haveYanguangNum(Map<String, Object> map);
+    int update(ResultDO result);
     int remove(Long sjxl_id);
     int upremove(SjxlDO sjxlDO);
 

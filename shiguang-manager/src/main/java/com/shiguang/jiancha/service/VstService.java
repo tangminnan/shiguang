@@ -24,8 +24,9 @@ public interface VstService {
     int save(VstDO vst);
 
     int saveVst(ResultDO result);
-
-    int update(VstDO vst);
+    //    是否有保存这个验光号数据
+    List<ResultDO> haveYanguangNum(Map<String, Object> map);
+    int update(ResultDO result);
     int remove(Long vstId);
     int upremove(VstDO vstDO);
 

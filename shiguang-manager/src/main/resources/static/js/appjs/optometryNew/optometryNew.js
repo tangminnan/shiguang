@@ -129,8 +129,7 @@ function load() {
                                                 + '\')">修改</span> ';
 
                                         }else if (row.trystatus =="0") {
-                                            var f = '';
-
+                                            // var f = '';
                                             if (row.haveid == "1"){ //是否结算
                                                 if (row.rstatus=="1"){
                                                     var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''

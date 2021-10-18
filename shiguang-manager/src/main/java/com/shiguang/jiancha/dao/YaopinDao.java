@@ -26,8 +26,9 @@ public interface YaopinDao {
     int save(YaopinDO yaopin);
 
     int saveYaopin(ResultDO result);
-
-    int update(YaopinDO yaopin);
+    //    是否有保存这个验光号数据
+    List<ResultDO> haveYanguangNum(Map<String, Object> map);
+    int update(ResultDO result);
     int remove(Long yp_id);
     int upremove(YaopinDO yaopinDO);
 

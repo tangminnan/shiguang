@@ -227,8 +227,11 @@
 			#{status}
 		)
 	</insert>
-
-    <update id="update" parameterType="com.shiguang.jiancha.domain.KjyyDO">
+    <select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.KjyyDO">
+        select ptometry_number
+        from jc_kjyy where ptometry_number=#{ptometryNumber}
+    </select>
+    <update id="update" parameterType="com.shiguang.jiancha.domain.ResultDO">
         update jc_kjyy
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
@@ -256,9 +259,11 @@
             <if test="kjyyJykj != null">`kjyy_jykj` = #{kjyyJykj},</if>
             <if test="kjyyKjlx != null">`kjyy_kjlx` = #{kjyyKjlx},</if>
             <if test="kjyyText != null">`kjyy_text` = #{kjyyText},</if>
-            <if test="kjyyBeizhu != null">`kjyy_beizhu` = #{kjyyBeizhu}</if>
+            <if test="kjyyBeizhu != null">`kjyy_beizhu` = #{kjyyBeizhu},</if>
+            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber}, </if>
+            <if test="status != null">`status` = #{status} </if>
         </set>
-        where kjyy_id = #{kjyyId}
+        where  ptometry_number=#{ptometryNumber}
     </update>
 
     <delete id="remove">

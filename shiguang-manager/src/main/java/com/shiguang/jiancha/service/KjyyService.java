@@ -2,6 +2,7 @@ package com.shiguang.jiancha.service;
 
 import com.shiguang.jiancha.domain.KjyyDO;
 import com.shiguang.jiancha.domain.ResultDO;
+import com.shiguang.jiancha.domain.TryresultsDO;
 
 import java.util.List;
 import java.util.Map;
@@ -24,8 +25,10 @@ public interface KjyyService {
     int save(KjyyDO kjyy);
 
     int savekjyy(ResultDO result);
+//    是否有保存这个验光号数据
+    List<ResultDO> haveYanguangNum(Map<String, Object> map);
 
-    int update(KjyyDO kjyy);
+    int update(ResultDO result);
     int remove(Long kjyyId);
     int upremove(KjyyDO kjyyDO);
 

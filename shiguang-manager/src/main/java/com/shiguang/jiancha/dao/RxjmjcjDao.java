@@ -26,8 +26,9 @@ public interface RxjmjcjDao {
     int save(RxjmjcjDO rxjmjcj);
 
     int saveRxjmjcj(ResultDO result);
-
-    int update(RxjmjcjDO rxjmjcj);
+    //    是否有保存这个验光号数据
+    List<ResultDO> haveYanguangNum(Map<String, Object> map);
+    int update(ResultDO result);
     int remove(Long rx_id);
     int upremove(RxjmjcjDO rxjmjcjDO);
 

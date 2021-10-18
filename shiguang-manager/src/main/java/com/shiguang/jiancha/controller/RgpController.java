@@ -3,6 +3,7 @@ package com.shiguang.jiancha.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.RgpDO;
 import com.shiguang.jiancha.service.RgpService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -79,8 +80,8 @@ public class RgpController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("jiancha:rgp:edit")
-    public R update(RgpDO rgp) {
-        rgpService.update(rgp);
+    public R update(ResultDO result) {
+        rgpService.update(result);
         return R.ok();
     }
 

@@ -1,57 +1,40 @@
 package com.shiguang.stock.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.common.utils.*;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
-import com.shiguang.member.service.MemberService;
-import com.shiguang.mfrs.domain.GoodsDO;
-import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.mfrs.service.PositionService;
-import com.shiguang.product.domain.HcDO;
-import com.shiguang.stock.domain.PidiaoDO;
-import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.domain.WeiwaiDO;
 import com.shiguang.stock.domain.WeiwaikcDO;
-import com.shiguang.stock.service.StockService;
+import com.shiguang.stock.service.WeiwaiService;
 import com.shiguang.stock.service.WeiwaikcService;
 import com.shiguang.storeSales.domain.SalesDO;
-import com.shiguang.storeSales.service.SalesService;
+import com.sun.tools.javac.code.Attribute;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import sun.plugin.javascript.navig.Array;
 
-import com.shiguang.stock.domain.WeiwaiDO;
-import com.shiguang.stock.service.WeiwaiService;
-import org.springframework.web.multipart.MultipartFile;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 委外表
- * 
+ *
  * @author cln
  * @email bushuo@163.com
  * @date 2021-09-15 11:26:24
  */
- 
+
 @Controller
 @RequestMapping("/stock/weiwai")
-public class WeiwaiController {
+public class WeiwaiController{
 	@Autowired
 	private WeiwaiService weiwaiService;
 	@Autowired
@@ -128,21 +111,21 @@ public class WeiwaiController {
 		return "stock/weiwai/add";
 	}
 
-	@GetMapping("/edit/{id}")
-	@RequiresPermissions("stock:weiwai:edit")
-	String edit(@PathVariable("id") Long id, Model model) {
-		WeiwaiDO weiwai = weiwaiService.get(id);
-		String time = weiwai.getDanjuDay();
-		model.addAttribute("weiwai", weiwai);
-		String eyeStyle = weiwai.getEyeStyle();
-		if (eyeStyle.equals("3")) {
-			model.addAttribute("eyeStyle", "框镜订做");
-		} else if (eyeStyle.equals("4")) {
-			model.addAttribute("eyeStyle", "隐形订做");
-		}
-		return "stock/weiwai/detial";
-	}
-//委外详情
+//	@GetMapping("/edit/{id}")
+//	@RequiresPermissions("stock:weiwai:edit")
+//	String edit(@PathVariable("id") Long id, Model model) {
+//		WeiwaiDO weiwai = weiwaiService.get(id);
+//		String time = weiwai.getDanjuDay();
+//		model.addAttribute("weiwai", weiwai);
+//		String eyeStyle = weiwai.getEyeStyle();
+//		if (eyeStyle.equals("3")) {
+//			model.addAttribute("eyeStyle", "框镜订做");
+//		} else if (eyeStyle.equals("4")) {
+//			model.addAttribute("eyeStyle", "隐形订做");
+//		}
+//		return "stock/weiwai/detial";
+//	}
+	//委外详情按钮跳转页面
 	@GetMapping("/detial/{id}")
 	@RequiresPermissions("stock:weiwai:detial")
 	String detial(@PathVariable("id") Long id, Model model) {
@@ -185,76 +168,99 @@ public class WeiwaiController {
 		String phone = weiwai.getPhone();
 		String salenumbery = weiwai.getSalenumbery();
 
+		String  saleNumber1="";
+		String  mirrorTime1 ="";
+		String  goodsName1 ="";
+		String  style1 ="";
+		String  rl1 ="";
+		String  count1 ="";
+		String  sph1 ="";
+		String  cyl1 ="";
+		String  axial1 ="";
+		String  diameter1 ="";
+		String  jd1 ="";
+		String  curvature1 ="";
+		String  lightbelow1 ="";
+		String  lengjing1 ="";
+		String  yaoqiu1 ="";
+		String fristgoodsname=weiwai.getGoodsName();
+		String secendgoodsname=weiwai.getGoodsName2();
+		if (null==fristgoodsname){
 
-		String[] saleNumber1 = weiwai.getSaleNumber().split(",");
+		}else {
+			saleNumber1 = weiwai.getSaleNumber() ;
+			mirrorTime1 = weiwai.getMirrorTime() ;
+			goodsName1 = weiwai.getGoodsName() ;
+			style1 = weiwai.getStyle() ;
+			rl1 = weiwai.getRl() ;
+			count1 = weiwai.getCount() ;
+			sph1 = weiwai.getSph() ;
+			cyl1 = weiwai.getCyl() ;
+			axial1 = weiwai.getAxial() ;
+			diameter1 = weiwai.getDiameter() ;
+			if (weiwai.getJd() != null) {
+				jd1 = weiwai.getJd() ;
+			}
+			if (weiwai.getCurvature() != null) {
+				curvature1 = weiwai.getCurvature() ;
+			}
+			if (weiwai.getLightbelow() != null) {
+				lightbelow1 = weiwai.getLightbelow() ;
+			}
+			if (weiwai.getLengjing() != null) {
+				lengjing1 = weiwai.getLengjing() ;
+			}
+			if (weiwai.getYaoqiu() != null) {
+				yaoqiu1 = weiwai.getYaoqiu() ;
+			}
+		}
+		String saleNumber2 ="";
+		String mirrorTime2 ="";
+		String goodsName2 ="";
+		String style2 ="";
+		String rl2 ="";
+		String count2 ="";
+		String sph2 ="";
+		String cyl2 ="";
+		String axial2 ="";
+		String diameter2 ="";
+		String jd2 ="";
+		String curvature2 ="";
+		String lightbelow2 ="";
+		String lengjing2 ="";
+		String yaoqiu2 ="";
+		if (null==secendgoodsname){
 
+		}else {
+			saleNumber2 = weiwai.getSaleNumber2() ;
+			mirrorTime2 = weiwai.getMirrorTime2() ;
+			goodsName2 = weiwai.getGoodsName2() ;
+			style2 = weiwai.getStyle2() ;
+			rl2 = weiwai.getRl2() ;
+			count2 = weiwai.getCount2() ;
+			sph2 = weiwai.getSph2() ;
+			cyl2 = weiwai.getCyl2() ;
+			axial2 = weiwai.getAxial2() ;
+			diameter2 = weiwai.getDiameter2() ;
+			if (weiwai.getJd2() != null) {
+				jd2 = weiwai.getJd2() ;
+			}
+			if (weiwai.getCurvature2() != null) {
+				curvature2 = weiwai.getCurvature2() ;
+			}
 
-		String[] mirrorTime1 = weiwai.getMirrorTime().split(",");
-		String[] goodsName1 = weiwai.getGoodsName().split(",");
-		String[] style1 = weiwai.getStyle().split(",");
-		String[] rl1 = weiwai.getRl().split(",");
-		String[] count1 = weiwai.getCount().split(",");
-		String[] sph1 = weiwai.getSph().split(",");
-		String[] cyl1 = weiwai.getCyl().split(",");
-		String[] axial1 = weiwai.getAxial().split(",");
+			if (weiwai.getLightbelow2() != null) {
+				lightbelow2 = weiwai.getLightbelow2() ;
+			}
 
-		String[] diameter1 = weiwai.getDiameter().split(",");
-
-
-		String[] jd1 = new String[0];
-		if (weiwai.getJd() != null) {
-			jd1 = weiwai.getJd().split(",");
-		}
-		String[] curvature1 = new String[0];
-		if (weiwai.getCurvature() != null) {
-			curvature1 = weiwai.getCurvature().split(",");
-		}
-		String[] lightbelow1 = new String[0];
-		if (weiwai.getLightbelow() != null) {
-			lightbelow1 = weiwai.getLightbelow().split(",");
-		}
-		String[] lengjing1 = new String[0];
-		if (weiwai.getLengjing() != null) {
-			lengjing1 = weiwai.getLengjing().split(",");
-		}
-		String[] yaoqiu1 = new String[0];
-		if (weiwai.getYaoqiu() != null) {
-			yaoqiu1 = weiwai.getYaoqiu().split(",");
+			if (weiwai.getLengjing2() != null) {
+				lengjing2 = weiwai.getLengjing2() ;
+			}
+			if (weiwai.getYaoqiu2() != null) {
+				yaoqiu2 = weiwai.getYaoqiu2() ;
+			}
 		}
 
-
-		String[] saleNumber2 = weiwai.getSaleNumber2().split(",");
-		String[] mirrorTime2 = weiwai.getMirrorTime2().split(",");
-		String[] goodsName2 = weiwai.getGoodsName2().split(",");
-		String[] style2 = weiwai.getStyle2().split(",");
-		String[] rl2 = weiwai.getRl2().split(",");
-		String[] count2 = weiwai.getCount2().split(",");
-		String[] sph2 = weiwai.getSph2().split(",");
-		String[] cyl2 = weiwai.getCyl2().split(",");
-		String[] axial2 = weiwai.getAxial2().split(",");
-		String[] diameter2 = weiwai.getDiameter2().split(",");
-		String[] jd2 = new String[0];
-		if (weiwai.getJd2() != null) {
-			jd2 = weiwai.getJd2().split(",");
-		}
-		String[] curvature2 = new String[0];
-		if (weiwai.getCurvature2() != null) {
-			curvature2 = weiwai.getCurvature2().split(",");
-		}
-		String[] lightbelow2 = new String[0];
-		if (weiwai.getLightbelow2() != null) {
-			lightbelow2 = weiwai.getLightbelow2().split(",");
-		}
-		String[] lengjing2 = new String[0];
-		if (weiwai.getLengjing2() != null) {
-			lengjing2 = weiwai.getLengjing2().split(",");
-		}
-		String[] yaoqiu2 = new String[0];
-		if (weiwai.getYaoqiu2() != null) {
-			yaoqiu2 = weiwai.getYaoqiu2().split(",");
-		}
-
-		for (int i = 0; i < saleNumber1.length; i++) {
 			WeiwaiDO weiwaiDO = new WeiwaiDO();
 			weiwaiDO.setDanjuNumber(danjuNumber);
 			weiwaiDO.setDanjuDay(danjuDay);
@@ -283,186 +289,156 @@ public class WeiwaiController {
 			weiwaiDO.setPhone(phone);
 
 			try {
-				String saleNumber = saleNumber1[i];
-				weiwaiDO.setSaleNumber(saleNumber);
+				weiwaiDO.setSaleNumber(saleNumber1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setSaleNumber("");
 			}
 			try {
-				String mirrorTime = mirrorTime1[i];
-				weiwaiDO.setMirrorTime(mirrorTime);
+				weiwaiDO.setMirrorTime(mirrorTime1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setMirrorTime("");
 			}
 			try {
-				String goodsName = goodsName1[i];
-				weiwaiDO.setGoodsName(goodsName);
+				weiwaiDO.setGoodsName(goodsName1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setGoodsName("");
 			}
 			try {
-				String style = style1[i];
-				weiwaiDO.setStyle(style);
+				weiwaiDO.setStyle(style1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setStyle("");
 			}
 			try {
-				String rl = rl1[i];
-				weiwaiDO.setRl(rl);
+				weiwaiDO.setRl(rl1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setRl("");
 			}
 
 			try {
-				String count = count1[i];
-				weiwaiDO.setCount(count);
+				weiwaiDO.setCount(count1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setCount("");
 			}
 			try {
-				String sph = sph1[i];
-				weiwaiDO.setSph(sph);
+				weiwaiDO.setSph(sph1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setSph("");
 			}
 			try {
-				String cyl = cyl1[i];
-				weiwaiDO.setCyl(cyl);
+				weiwaiDO.setCyl(cyl1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setCyl("");
 			}
 			try {
-				String axial = axial1[i];
-				weiwaiDO.setAxial(axial);
+				weiwaiDO.setAxial(axial1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setAxial("");
 			}
 			try {
-				String jd = jd1[i];
-				weiwaiDO.setJd(jd);
+				weiwaiDO.setJd(jd1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setJd("");
 			}
 			try {
-				String curvature = curvature1[i];
-				weiwaiDO.setCurvature(curvature);
+				weiwaiDO.setCurvature(curvature1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setCurvature("");
 			}
 			try {
-				String diameter = diameter1[i];
-				weiwaiDO.setDiameter(diameter);
+				weiwaiDO.setDiameter(diameter1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setDiameter("");
 			}
 			try {
-				String lightbelow = lightbelow1[i];
-				weiwaiDO.setLightbelow(lightbelow);
+				weiwaiDO.setLightbelow(lightbelow1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setLightbelow("");
 			}
 			try {
-				String lengjing = lengjing1[i];
-				weiwaiDO.setLengjing(lengjing);
+				weiwaiDO.setLengjing(lengjing1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setLengjing("");
 			}
 			try {
-				String yaoqiu = yaoqiu1[i];
-				weiwaiDO.setYaoqiu(yaoqiu);
+				weiwaiDO.setYaoqiu(yaoqiu1);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setYaoqiu("");
 			}
 			////第2个
 
 			try {
-				String saleNumber = saleNumber2[i];
-				weiwaiDO.setSaleNumber2(saleNumber);
+				weiwaiDO.setSaleNumber2(saleNumber2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setSaleNumber2("");
 			}
 			try {
-				String mirrorTime = mirrorTime2[i];
-				weiwaiDO.setMirrorTime2(mirrorTime);
+				weiwaiDO.setMirrorTime2(mirrorTime2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setMirrorTime2("");
 			}
 			try {
-				String goodsName = goodsName2[i];
-				weiwaiDO.setGoodsName2(goodsName);
+				weiwaiDO.setGoodsName2(goodsName2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setGoodsName2("");
 			}
 			try {
-				String style = style2[i];
-				weiwaiDO.setStyle2(style);
+				weiwaiDO.setStyle2(style2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setStyle2("");
 			}
 			try {
-				String rl = rl2[i];
-				weiwaiDO.setRl2(rl);
+				weiwaiDO.setRl2(rl2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setRl2("");
 			}
 
 			try {
-				String count = count2[i];
-				weiwaiDO.setCount2(count);
+				weiwaiDO.setCount2(count2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setCount2("");
 			}
 			try {
-				String sph = sph2[i];
-				weiwaiDO.setSph2(sph);
+				weiwaiDO.setSph2(sph2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setSph2("");
 			}
 			try {
-				String cyl = cyl2[i];
-				weiwaiDO.setCyl2(cyl);
+				weiwaiDO.setCyl2(cyl2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setCyl2("");
 			}
 			try {
-				String axial = axial2[i];
-				weiwaiDO.setAxial2(axial);
+				weiwaiDO.setAxial2(axial2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setAxial2("");
 			}
 			try {
-				String jd = jd2[i];
-				weiwaiDO.setJd2(jd);
+				weiwaiDO.setJd2(jd2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setJd2("");
 			}
 			try {
-				String curvature = curvature2[i];
-				weiwaiDO.setCurvature2(curvature);
+				weiwaiDO.setCurvature2(curvature2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setCurvature2("");
 			}
 			try {
-				String diameter = diameter2[i];
-				weiwaiDO.setDiameter2(diameter);
+				weiwaiDO.setDiameter2(diameter2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setDiameter2("");
 			}
 			try {
-				String lightbelow = lightbelow2[i];
-				weiwaiDO.setLightbelow2(lightbelow);
+				weiwaiDO.setLightbelow2(lightbelow2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setLightbelow2("");
 			}
 			try {
-				String lengjing = lengjing2[i];
-				weiwaiDO.setLengjing2(lengjing);
+				weiwaiDO.setLengjing2(lengjing2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setLengjing2("");
 			}
 			try {
-				String yaoqiu = yaoqiu2[i];
-				weiwaiDO.setYaoqiu2(yaoqiu);
+				weiwaiDO.setYaoqiu2(yaoqiu2);
 			} catch (ArrayIndexOutOfBoundsException e) {
 				weiwaiDO.setYaoqiu2("");
 			}
@@ -498,9 +474,7 @@ public class WeiwaiController {
 				return R.ok();
 			}
 			return R.error();
-		}
 
-		return R.ok();
 	}
 
 	/**
@@ -680,13 +654,17 @@ public class WeiwaiController {
 	/**
 	 * 配送输入工号
 	 */
-	@GetMapping("/userNumps/{salenumbery}/{danjuNumber}/{eyeStyle}")
+	@GetMapping("/userNumps/{salenumbery}/{danjuNumber}/{eyeStyle}/{yaoqiu}/{yaoqiu2}")
 	String userNumps(@PathVariable("salenumbery") String salenumbery,
 					 @PathVariable("danjuNumber") String danjuNumber,
-					 @PathVariable("eyeStyle") String eyeStyle, Model model) {
+					 @PathVariable("eyeStyle") String eyeStyle,
+					 @PathVariable("yaoqiu") String yaoqiu,
+					 @PathVariable("yaoqiu2") String yaoqiu2,Model model) {
 		model.addAttribute("danjuNumber", danjuNumber);
 		model.addAttribute("salenumbery", salenumbery);
 		model.addAttribute("eyeStyle", eyeStyle);
+		model.addAttribute("yaoqiu", yaoqiu);
+		model.addAttribute("yaoqiu2", yaoqiu2);
 		return "/stock/weiwai/userNumps";
 	}
 
@@ -695,17 +673,35 @@ public class WeiwaiController {
 	 */
 	@PostMapping("/editShouhuo")
 	@ResponseBody
-	public R editShouhuo(String danjuNumber, String salenumbery, String shstatus, String psname,String eyeStyle) {
+	public R editShouhuo(String danjuNumber, String salenumbery, String shstatus, String psname,String eyeStyle,
+						 String yaoqiu,String yaoqiu2) {
 		LogStatusDO logStatusDO = new LogStatusDO();
-		if ("3".equals(eyeStyle)){
-			logStatusDO.setSaleNumber(salenumbery);
-			logStatusDO.setLogisticStatus("委外完成");
-			WorkRecoedDO workRecoedDO = new WorkRecoedDO();
-			workRecoedDO.setUserName(psname);
-			workRecoedDO.setType("委外完成");
-			workRecoedDO.setDateTime(new Date());
-			statusService.saveRecord(workRecoedDO);
-		}else if ("4".equals(eyeStyle)) {
+		String [] array=yaoqiu.split(",");
+		String [] array2=yaoqiu2.split(",");
+		boolean flag=false;
+		boolean flag2=false;
+		flag = Arrays.asList(array).contains("委外代加工");
+		flag2 = Arrays.asList(array2).contains("委外代加工");
+		if ("3".equals(eyeStyle.trim())){//去除空格
+			if(flag == true || flag2 == true){
+				logStatusDO.setSaleNumber(salenumbery);
+				logStatusDO.setLogisticStatus("配送");
+				WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+				workRecoedDO.setUserName(psname);
+				workRecoedDO.setType("配送");
+				workRecoedDO.setDateTime(new Date());
+				statusService.saveRecord(workRecoedDO);
+			}else {
+				logStatusDO.setSaleNumber(salenumbery);
+				logStatusDO.setLogisticStatus("委外完成");
+				WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+				workRecoedDO.setUserName(psname);
+				workRecoedDO.setType("委外完成");
+				workRecoedDO.setDateTime(new Date());
+				statusService.saveRecord(workRecoedDO);
+			}
+
+		}else if ("4".equals(eyeStyle.trim())) {//去除空格
 			logStatusDO.setSaleNumber(salenumbery);
 			logStatusDO.setLogisticStatus("配送");
 			WorkRecoedDO workRecoedDO = new WorkRecoedDO();

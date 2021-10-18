@@ -24,8 +24,9 @@ public interface CrtService {
     int save(CrtDO crt);
 
     int saveCrt(ResultDO result);
-
-    int update(CrtDO crt);
+    //    是否有保存这个验光号数据
+    List<ResultDO> haveYanguangNum(Map<String, Object> map);
+    int update(ResultDO result);
     int remove(Long crtId);
     int upremove(CrtDO crtDO );
 

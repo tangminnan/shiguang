@@ -38,6 +38,11 @@ public class ResultServiceImpl implements ResultService {
 	}
 
 	@Override
+	public List<ResultDO> haveYanguangNum(Map<String, Object> map) {
+		return resultDao.haveYanguangNum(map);
+	}
+
+	@Override
 	public int update(ResultDO result) {
 		return resultDao.update(result);
 	}

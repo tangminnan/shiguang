@@ -255,97 +255,101 @@
 							if(null == xml[i].yaoqiul){
 								xml[i].yaoqiul="";
 							}
-							alert(xml[i].rightName)
-							alert(xml[i].leftName)
-							$(".heji1").before("<tr class='val1'>" +
-									"<td >" + xml[i].number + "</td>\n" +//0
-									"<input name='saleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1
 
-									"<td>" + xml[i].timetime + "</td>\n" +//2
-									"<input name='mirrorTime' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
+							if (""==xml[i].rightName){
+								$(".heji1").before("");
+							}else {
+								$(".heji1").before("<tr class='val1'>" +
+										"<td >" + xml[i].number + "</td>\n" +//0
+										"<input name='saleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1
 
-									"<td>" + xml[i].rightName + "</td>\n" +//2
-									"<input name='goodsName' type='hidden' value='" + xml[i].rightName + "'>\n" +//3
+										"<td>" + xml[i].timetime + "</td>\n" +//2
+										"<input name='mirrorTime' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
 
-									"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
-									"<input name='style' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
+										"<td>" + xml[i].rightName + "</td>\n" +//2
+										"<input name='goodsName' type='hidden' value='" + xml[i].rightName + "'>\n" +//3
 
-									"<td>" + xml[i].rightR + "</td>\n" +//2
-									"<input name='rl' type='hidden' value='" + xml[i].rightR + "'>\n" +//3
+										"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
+										"<input name='style' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
 
-									"<td>" + xml[i].countr + "</td>\n" +//数量
-									"<input name='count' type='hidden' value='" + xml[i].countr + "'>\n" +
+										"<td>" + xml[i].rightR + "</td>\n" +//2
+										"<input name='rl' type='hidden' value='" + xml[i].rightR + "'>\n" +//3
 
-
-									"<td>" + xml[i].rightsph + "</td>\n" +//球镜
-									"<input name='sph' type='hidden' value='" + xml[i].rightsph + "'>\n" +//3
-
-									"<td>" + xml[i].rightcyl + "</td>\n" +//zhu镜
-									"<input name='cyl' type='hidden' value='" + xml[i].rightcyl + "'>\n" +
+										"<td>" + xml[i].countr + "</td>\n" +//数量
+										"<input name='count' type='hidden' value='" + xml[i].countr + "'>\n" +
 
 
-									"<td>" + xml[i].rightzx + "</td>\n" +//zhu镜
-									"<input name='axial' type='hidden' value='" + xml[i].rightzx + "'>\n" +
+										"<td>" + xml[i].rightsph + "</td>\n" +//球镜
+										"<input name='sph' type='hidden' value='" + xml[i].rightsph + "'>\n" +//3
 
-									"<td>" + xml[i].rightAdd + "</td>\n" +//zhu镜
-									"<input name='lightbelow' type='hidden' value='" + xml[i].rightAdd + "'>\n" +
-
-									"<td>" + xml[i].rightSlj + "</td>\n" +//zhu镜
-									"<input name='lengjing' type='hidden' value='" + xml[i].rightSlj + "'>\n" +
-
-									"<td>" + xml[i].rightzj + "</td>\n" +//zhu镜
-									"<input name='diameter' type='hidden' value='" + xml[i].rightzj + "'>\n" +
-
-									"<td>" + xml[i].yaoqiur + "</td>\n" +//zhu镜
-									"<input name='yaoqiu' type='hidden' value='" + xml[i].yaoqiur + "'>\n" +
+										"<td>" + xml[i].rightcyl + "</td>\n" +//zhu镜
+										"<input name='cyl' type='hidden' value='" + xml[i].rightcyl + "'>\n" +
 
 
-									"</tr>"+
+										"<td>" + xml[i].rightzx + "</td>\n" +//zhu镜
+										"<input name='axial' type='hidden' value='" + xml[i].rightzx + "'>\n" +
+
+										"<td>" + xml[i].rightAdd + "</td>\n" +//zhu镜
+										"<input name='lightbelow' type='hidden' value='" + xml[i].rightAdd + "'>\n" +
+
+										"<td>" + xml[i].rightSlj + "</td>\n" +//zhu镜
+										"<input name='lengjing' type='hidden' value='" + xml[i].rightSlj + "'>\n" +
+
+										"<td>" + xml[i].rightzj + "</td>\n" +//zhu镜
+										"<input name='diameter' type='hidden' value='" + xml[i].rightzj + "'>\n" +
+
+										"<td>" + xml[i].yaoqiur + "</td>\n" +//zhu镜
+										"<input name='yaoqiu' type='hidden' value='" + xml[i].yaoqiur + "'>\n" +
+										"</tr>"
+								);//页面每个数量
+							}
+							if (""==xml[i].leftName){
+								$(".heji1").before("");
+							}else {
+								$(".heji1").before(
+										"<tr class='val1'>" +
+										"<td >" + xml[i].number + "</td>\n" +//0
+										"<input name='saleNumber2' type='hidden' value='" + xml[i].number + "'>\n" +//1
+
+										"<td>" + xml[i].timetime + "</td>\n" +//2
+										"<input name='mirrorTime2' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
+
+										"<td>" + xml[i].leftName + "</td>\n" +//2
+										"<input name='goodsName2' type='hidden' value='" + xml[i].leftName + "'>\n" +//3
+
+										"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
+										"<input name='style2' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
+
+										"<td>" + xml[i].leftL + "</td>\n" +//2
+										"<input name='rl2' type='hidden' value='" + xml[i].leftL + "'>\n" +//3
+
+										"<td>" + xml[i].countl + "</td>\n" +//数量
+										"<input name='count2' type='hidden' value='" + xml[i].countl + "'>\n" +
+
+										"<td>" + xml[i].leftsph + "</td>\n" +//球镜
+										"<input name='sph2' type='hidden' value='" + xml[i].leftsph + "'>\n" +//3
+
+										"<td>" + xml[i].leftcyl + "</td>\n" +//zhu镜
+										"<input name='cyl2' type='hidden' value='" + xml[i].leftcyl + "'>\n" +
 
 
+										"<td>" + xml[i].leftzx + "</td>\n" +//zhu镜
+										"<input name='axial2' type='hidden' value='" + xml[i].leftzx + "'>\n" +
 
-									"<tr class='val1'>" +
-									"<td >" + xml[i].number + "</td>\n" +//0
-									"<input name='saleNumber2' type='hidden' value='" + xml[i].number + "'>\n" +//1
+										"<td>" + xml[i].leftAdd + "</td>\n" +//zhu镜
+										"<input name='lightbelow2' type='hidden' value='" + xml[i].leftAdd + "'>\n" +
 
-									"<td>" + xml[i].timetime + "</td>\n" +//2
-									"<input name='mirrorTime2' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
+										"<td>" + xml[i].leftSlj + "</td>\n" +//zhu镜
+										"<input name='lengjing2' type='hidden' value='" + xml[i].leftSlj + "'>\n" +
 
-									"<td>" + xml[i].leftName + "</td>\n" +//2
-									"<input name='goodsName2' type='hidden' value='" + xml[i].leftName + "'>\n" +//3
+										"<td>" + xml[i].leftzj + "</td>\n" +//zhu镜
+										"<input name='diameter2' type='hidden' value='" + xml[i].leftzj + "'>\n" +
 
-									"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
-									"<input name='style2' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
-
-									"<td>" + xml[i].leftL + "</td>\n" +//2
-									"<input name='rl2' type='hidden' value='" + xml[i].leftL + "'>\n" +//3
-
-									"<td>" + xml[i].countl + "</td>\n" +//数量
-									"<input name='count2' type='hidden' value='" + xml[i].countl + "'>\n" +
-
-									"<td>" + xml[i].leftsph + "</td>\n" +//球镜
-									"<input name='sph2' type='hidden' value='" + xml[i].leftsph + "'>\n" +//3
-
-									"<td>" + xml[i].leftcyl + "</td>\n" +//zhu镜
-									"<input name='cyl2' type='hidden' value='" + xml[i].leftcyl + "'>\n" +
-
-
-									"<td>" + xml[i].leftzx + "</td>\n" +//zhu镜
-									"<input name='axial2' type='hidden' value='" + xml[i].leftzx + "'>\n" +
-
-									"<td>" + xml[i].leftAdd + "</td>\n" +//zhu镜
-									"<input name='lightbelow2' type='hidden' value='" + xml[i].leftAdd + "'>\n" +
-
-									"<td>" + xml[i].leftSlj + "</td>\n" +//zhu镜
-									"<input name='lengjing2' type='hidden' value='" + xml[i].leftSlj + "'>\n" +
-
-									"<td>" + xml[i].leftzj + "</td>\n" +//zhu镜
-									"<input name='diameter2' type='hidden' value='" + xml[i].leftzj + "'>\n" +
-
-									"<td>" + xml[i].yaoqiul + "</td>\n" +//zhu镜
-									"<input name='yaoqiu2' type='hidden' value='" + xml[i].yaoqiul + "'>\n" +
-									"</tr>"
-							);//页面每个数量
+										"<td>" + xml[i].yaoqiul + "</td>\n" +//zhu镜
+										"<input name='yaoqiu2' type='hidden' value='" + xml[i].yaoqiul + "'>\n" +
+										"</tr>"
+								);//页面每个数量
+							}
 						}
 					}
 				})
@@ -365,13 +369,6 @@
 					},
 					success: function (xml) {
 						for (var i = 0; i < xml.length; i++) {
-
-							// //顾客信息
-							// alert(xml[i].name)
-							// $("#gkname").val(xml[i].name);
-							// $("#hyknum").val(xml[i].memberNumber);
-							// $("#phone").val(xml[i].phone1);
-
 							if(null == xml[i].number){
 								xml[i].number="";
 							}
@@ -446,7 +443,9 @@
 							if(null == xml[i].yaoqiuryx){
 								xml[i].yaoqiuryx="";
 							}
-
+							if (""==xml[i].rightNameyx){
+								$(".heji2").before("");
+							}else {
 							$(".heji2").before("<tr class='val1'>" +
 									"<td >" + xml[i].number + "</td>\n" +//0
 									"<input name='saleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1
@@ -487,51 +486,55 @@
 
 									"<td>" + xml[i].yaoqiuryx + "</td>\n" +//zhu镜
 									"<input name='yaoqiu' type='hidden' value='" + xml[i].yaoqiuryx + "'>\n" +
-									"</tr>"+
-
-
-
-									"<td >" + xml[i].number + "</td>\n" +//0
-									"<input name='saleNumber2' type='hidden' value='" + xml[i].number + "'>\n" +//1
-
-									"<td>" + xml[i].timetime + "</td>\n" +//2
-									"<input name='mirrorTime2' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
-
-									"<td>" + xml[i].leftNameyx + "</td>\n" +//2
-									"<input name='goodsName2' type='hidden' value='" + xml[i].leftNameyx + "'>\n" +//3
-
-									"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
-									"<input name='style2' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
-
-									"<td>" + xml[i].leftLyx + "</td>\n" +//2
-									"<input name='rl2' type='hidden' value='" + xml[i].leftLyx + "'>\n" +//3
-
-									"<td>" + xml[i].countryx + "</td>\n" +//数量
-									"<input name='count2' type='hidden' value='" + xml[i].countryx + "'>\n" +
-
-									"<td>" + xml[i].leftsphyx + "</td>\n" +//球镜
-									"<input name='sph2' type='hidden' value='" + xml[i].leftsphyx + "'>\n" +//3
-
-									"<td>" + xml[i].leftcylyx + "</td>\n" +//zhu镜
-									"<input name='cyl2' type='hidden' value='" + xml[i].leftcylyx + "'>\n" +
-
-
-									"<td>" + xml[i].leftzxyx + "</td>\n" +//zhu镜
-									"<input name='axial2' type='hidden' value='" + xml[i].leftzxyx + "'>\n" +
-
-									"<td>" + xml[i].leftJd + "</td>\n" +//zhu镜
-									"<input name='jd2' type='hidden' value='" + xml[i].leftJd + "'>\n" +
-
-									"<td>" + xml[i].leftqulv + "</td>\n" +//zhu镜
-									"<input name='curvature2' type='hidden' value='" + xml[i].leftqulv + "'>\n" +
-
-									"<td>" + xml[i].leftzj + "</td>\n" +//zhu镜
-									"<input name='diameter2' type='hidden' value='" + xml[i].leftzj + "'>\n" +
-
-									"<td>" + xml[i].yaoqiuryx + "</td>\n" +//zhu镜
-									"<input name='yaoqiu2' type='hidden' value='" + xml[i].yaoqiuryx + "'>\n" +
 									"</tr>"
-							);//页面每个数量
+							);
+							}
+							if (""==xml[i].leftNameyx){
+								$(".heji2").before("");
+							}else {
+								$(".heji2").before(
+										"<td >" + xml[i].number + "</td>\n" +//0
+										"<input name='saleNumber2' type='hidden' value='" + xml[i].number + "'>\n" +//1
+
+										"<td>" + xml[i].timetime + "</td>\n" +//2
+										"<input name='mirrorTime2' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
+
+										"<td>" + xml[i].leftNameyx + "</td>\n" +//2
+										"<input name='goodsName2' type='hidden' value='" + xml[i].leftNameyx + "'>\n" +//3
+
+										"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
+										"<input name='style2' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
+
+										"<td>" + xml[i].leftLyx + "</td>\n" +//2
+										"<input name='rl2' type='hidden' value='" + xml[i].leftLyx + "'>\n" +//3
+
+										"<td>" + xml[i].countryx + "</td>\n" +//数量
+										"<input name='count2' type='hidden' value='" + xml[i].countryx + "'>\n" +
+
+										"<td>" + xml[i].leftsphyx + "</td>\n" +//球镜
+										"<input name='sph2' type='hidden' value='" + xml[i].leftsphyx + "'>\n" +//3
+
+										"<td>" + xml[i].leftcylyx + "</td>\n" +//zhu镜
+										"<input name='cyl2' type='hidden' value='" + xml[i].leftcylyx + "'>\n" +
+
+
+										"<td>" + xml[i].leftzxyx + "</td>\n" +//zhu镜
+										"<input name='axial2' type='hidden' value='" + xml[i].leftzxyx + "'>\n" +
+
+										"<td>" + xml[i].leftJd + "</td>\n" +//zhu镜
+										"<input name='jd2' type='hidden' value='" + xml[i].leftJd + "'>\n" +
+
+										"<td>" + xml[i].leftqulv + "</td>\n" +//zhu镜
+										"<input name='curvature2' type='hidden' value='" + xml[i].leftqulv + "'>\n" +
+
+										"<td>" + xml[i].leftzj + "</td>\n" +//zhu镜
+										"<input name='diameter2' type='hidden' value='" + xml[i].leftzj + "'>\n" +
+
+										"<td>" + xml[i].yaoqiuryx + "</td>\n" +//zhu镜
+										"<input name='yaoqiu2' type='hidden' value='" + xml[i].yaoqiuryx + "'>\n" +
+										"</tr>"
+								);//页面每个数量
+							}
 						}
 					}
 				})

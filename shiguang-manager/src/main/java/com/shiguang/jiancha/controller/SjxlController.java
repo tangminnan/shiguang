@@ -3,6 +3,7 @@ package com.shiguang.jiancha.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.SjxlDO;
 import com.shiguang.jiancha.service.SjxlService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -79,8 +80,8 @@ public class SjxlController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("jiancha:sjxl:edit")
-    public R update(SjxlDO sjxl) {
-        sjxlService.update(sjxl);
+    public R update(ResultDO result) {
+        sjxlService.update(result);
         return R.ok();
     }
 

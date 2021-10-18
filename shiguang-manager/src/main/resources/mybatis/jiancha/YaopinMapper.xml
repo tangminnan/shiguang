@@ -94,8 +94,11 @@
 			#{status}
 		)
 	</insert>
-
-    <update id="update" parameterType="com.shiguang.jiancha.domain.YaopinDO">
+    <select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.YaopinDO">
+        select ptometry_number
+        from jc_yaopin where ptometry_number=#{ptometryNumber}
+    </select>
+    <update id="update" parameterType="com.shiguang.jiancha.domain.ResultDO">
         update jc_yaopin
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
@@ -103,9 +106,11 @@
             <if test="ypDoctor != null">`yp_doctor` = #{ypDoctor},</if>
             <if test="ypOptometryName != null">`yp_optometry_name` = #{ypOptometryName},</if>
             <if test="ypNr != null">`yp_nr` = #{ypNr},</if>
-            <if test="ypYm != null">`yp_ym` = #{ypYm}</if>
+            <if test="ypYm != null">`yp_ym` = #{ypYm},</if>
+            <if test="ptometryNumber != null">`ptometry_number` = #{ptometryNumber}, </if>
+            <if test="status != null">`status` = #{status} </if>
         </set>
-        where yp_id = #{ypId}
+        where  ptometry_number=#{ptometryNumber}
     </update>
 
     <delete id="remove">

@@ -42,8 +42,13 @@ public class RxjmjcjServiceImpl implements RxjmjcjService {
     }
 
     @Override
-    public int update(RxjmjcjDO rxjmjcj) {
-        return rxjmjcjDao.update(rxjmjcj);
+    public List<ResultDO> haveYanguangNum(Map<String, Object> map) {
+        return rxjmjcjDao.haveYanguangNum(map);
+    }
+
+    @Override
+    public int update(ResultDO result) {
+        return rxjmjcjDao.update(result);
     }
 
     @Override

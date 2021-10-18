@@ -3,6 +3,7 @@ package com.shiguang.jiancha.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.YaopinDO;
 import com.shiguang.jiancha.service.YaopinService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -79,8 +80,8 @@ public class YaopinController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("jiancha:yaopin:edit")
-    public R update(YaopinDO yaopin) {
-        yaopinService.update(yaopin);
+    public R update(ResultDO result) {
+        yaopinService.update(result);
         return R.ok();
     }
 

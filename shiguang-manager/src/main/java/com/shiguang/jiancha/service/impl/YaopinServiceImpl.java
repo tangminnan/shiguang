@@ -42,8 +42,13 @@ public class YaopinServiceImpl implements YaopinService {
     }
 
     @Override
-    public int update(YaopinDO yaopin) {
-        return yaopinDao.update(yaopin);
+    public List<ResultDO> haveYanguangNum(Map<String, Object> map) {
+        return yaopinDao.haveYanguangNum(map);
+    }
+
+    @Override
+    public int update(ResultDO result) {
+        return yaopinDao.update(result);
     }
 
     @Override

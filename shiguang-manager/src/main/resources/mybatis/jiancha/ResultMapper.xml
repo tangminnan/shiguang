@@ -226,7 +226,10 @@
 			#{status}
 		)
 	</insert>
-	 
+	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.ResultDO">
+        select ptometry_number
+        from jc_result where ptometry_number=#{ptometryNumber}
+    </select>
 	<update id="update" parameterType="com.shiguang.jiancha.domain.ResultDO">
 		update jc_result 
 		<set>
@@ -275,9 +278,10 @@
 			<if test="yizhu != null">`yizhu` = #{yizhu}, </if>
 			<if test="way != null">`way` = #{way}, </if>
 			<if test="followTime != null">`follow_time` = #{followTime}, </if>
-			<if test="visitType != null">`visit_type` = #{visitType}</if>
+			<if test="visitType != null">`visit_type` = #{visitType},</if>
+			<if test="status != null">`status` = #{status}</if>
 		</set>
-		where id = #{id}
+		where  ptometry_number=#{ptometryNumber}
 	</update>
 	
 	<delete id="remove">

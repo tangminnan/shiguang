@@ -3,6 +3,7 @@ package com.shiguang.jiancha.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.VstDO;
 import com.shiguang.jiancha.service.VstService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -79,8 +80,8 @@ public class VstController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("jiancha:vst:edit")
-    public R update(VstDO vst) {
-        vstService.update(vst);
+    public R update(ResultDO result) {
+        vstService.update(result);
         return R.ok();
     }
 

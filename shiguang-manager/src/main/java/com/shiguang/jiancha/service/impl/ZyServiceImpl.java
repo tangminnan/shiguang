@@ -44,8 +44,13 @@ public class ZyServiceImpl implements ZyService {
 	}
 
 	@Override
-	public int update(ZyDO zy) {
-		return zyDao.update(zy);
+	public List<ResultDO> haveYanguangNum(Map<String, Object> map) {
+		return zyDao.haveYanguangNum(map);
+	}
+
+	@Override
+	public int update(ResultDO result) {
+		return zyDao.update(result);
 	}
 
 	@Override

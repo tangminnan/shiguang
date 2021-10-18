@@ -258,8 +258,11 @@
 			#{crtAxialos}
 		)
 	</insert>
-
-    <update id="update" parameterType="com.shiguang.jiancha.domain.CrtDO">
+	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.CrtDO">
+        select ptometry_number
+        from jc_crt where ptometry_number=#{ptometryNumber}
+    </select>
+    <update id="update" parameterType="com.shiguang.jiancha.domain.ResultDO">
         update jc_crt
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
@@ -298,7 +301,7 @@
             <if test="crtAxialod != null">`crt_axialod` = #{crtAxialod}, </if>
             <if test="crtAxialos != null">`crt_axialos` = #{crtAxialos}</if>
         </set>
-        where crt_id = #{crtId}
+        where  ptometry_number=#{ptometryNumber}
     </update>
 
     <delete id="remove">

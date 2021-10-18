@@ -24,8 +24,9 @@ public interface KjjyService {
     int save(KjjyDO kjjy);
 
     int savekjjy(ResultDO result);
-
-    int update(KjjyDO kjjy);
+    //    是否有保存这个验光号数据
+    List<ResultDO> haveYanguangNum(Map<String, Object> map);
+    int update(ResultDO result);
 
     int remove(Long kjjyId);
     int upremove(KjjyDO kjjyDO);
