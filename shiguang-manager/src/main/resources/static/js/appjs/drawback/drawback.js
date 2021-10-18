@@ -81,7 +81,7 @@ function load() {
                                         var e;
                                         if (row.isSale == 1){
                                             e = '<a class="btn btn-primary btn-xs" href="#" title="退款"  mce_href="#" ' +
-                                                'onclick="tuikuan(\''+ value+ '\',\''+row.saleNumber+'\')" style="text-decoration: none;">退款</a>';
+                                                'onclick="edit(\''+ value+ '\',\''+row.saleNumber+'\')" style="text-decoration: none;">退款</a>';
 										} else if (row.isSale == 2){
                                             e = '<a class="btn btn-primary btn-xs" href="#" title="已退款"  mce_href="#" style="text-decoration: none;">已退款</a>';
 										}

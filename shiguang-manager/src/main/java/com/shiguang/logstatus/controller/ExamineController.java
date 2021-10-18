@@ -80,9 +80,26 @@ public class ExamineController {
         SalesDO status = statusService.getLogSaleNumber(saleNumber);
         if (null != status.getJpGoodsName()){
             String jpName = status.getJpGoodsName();
-            String[] jpStr = jpName.split(",");
-            status.setRightjp(jpStr[0]);
-            status.setLeftjp(jpStr[1]);
+            try {
+                String[] jpStr = jpName.split(",");
+                if (jpStr.length > 0){
+                    status.setRightjp(jpStr[0]);
+                } else {
+                    status.setRightjp("");
+                }
+            }catch (ArrayIndexOutOfBoundsException e) {
+                status.setRightjp("");
+            }
+            try {
+                String[] jpStr = jpName.split(",");
+                if (jpStr.length > 1){
+                    status.setLeftjp(jpStr[1]);
+                } else {
+                    status.setLeftjp("");
+                }
+            }catch (ArrayIndexOutOfBoundsException e) {
+                status.setLeftjp("");
+            }
         }else {
             status.setRightjp("");
             status.setLeftjp("");

@@ -54,7 +54,7 @@ public class SettlementServiceImpl implements SettlementService {
 	}
 	
 	@Override
-	public int remove(Long id){
+	public int remove(String id){
 		return settlementDao.remove(id);
 	}
 	

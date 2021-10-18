@@ -1092,6 +1092,14 @@
         </where>
     </select>
 
+    <select id="findBuHegePosition" resultType="com.shiguang.mfrs.domain.PositionDO">
+        select p.`position_id`,p.`position_num`,p.`depart_number`,p.`depart_name`,p.`position_name` from c_position p join department d on d.depart_number = p.depart_number
+        <where>
+            <if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
+            and p.position_order = '3'
+        </where>
+    </select>
+
     <!--更新库存  -->
     <update id="updateStockCCount" parameterType="com.shiguang.stock.domain.StockDO">
         update stock

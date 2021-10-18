@@ -88,6 +88,8 @@ public interface StockService {
 
     PositionDO findHegePosition(Map<String, Object> map);
 
+    PositionDO findBuHegePosition(Map<String, Object> map);
+
     StockDO getGoodsNum(String goodsNum);
 
     //<!--镜架【商】【品】【查】【询】-->

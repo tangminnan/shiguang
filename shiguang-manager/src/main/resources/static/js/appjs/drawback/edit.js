@@ -4,14 +4,14 @@ $().ready(function() {
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		save();
+		update();
 	}
 });
-function save() {
+function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/information/settlement/save",
+		url : "/information/drawback/update",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
@@ -21,7 +21,6 @@ function save() {
 			if (data.code == 0) {
 				parent.layer.msg("操作成功");
 				parent.reLoad();
-                //$('#exampleTable').bootstrapTable('refresh');
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 				parent.layer.close(index);
 
@@ -42,32 +41,20 @@ function validateRule() {
 			},
             payModel : {
                 required : true
-            },
-            modelMoney :{
-                required : true
 			},
             payMoney : {
-                required : true
-            },
-            payWay : {
                 required : true
 			}
 		},
 		messages : {
 			name : {
-				required : icon + "请输入姓名"
+				required : icon + "请输入名字"
 			},
             payModel : {
                 required : icon + "请选择支付方式"
-            },
-            modelMoney :{
-                required : icon + "请输入缴费金额"
-            },
+			},
             payMoney : {
                 required : icon + "请输入缴费金额"
-            },
-            payWay : {
-                required : icon + "请选择付款方式"
             }
 		}
 	})

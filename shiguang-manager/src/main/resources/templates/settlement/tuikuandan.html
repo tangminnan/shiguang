@@ -5,12 +5,12 @@
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>配镜单打印</title>
+	<title>退款单打印</title>
 	<link rel="stylesheet" href="/css/css.css" type="text/css">
 </head>
 <body>
 <div class="Print">
-	<h3>配镜单</h3>
+	<h3>退款单</h3>
 	<ul class="ul3">
 		<input id="cost" th:value="${settlementDO.additionalCost}" type="hidden">
 		<input id="storeName" th:value="${settlementDO.storeName}" type="hidden">
@@ -77,20 +77,20 @@
 		</tr>
 	</table>
 	<table class="Htab2" cellpadding="0" cellspacing="0" id="tbodys">
-		<tr class="thead" >
+		<tr class="thead">
 			<td>商品名称</td>
 			<td>批号</td>
 			<td>单位</td>
 			<td>数量</td>
 			<td>原价金额</td>
 		</tr>
-		<tr>
-			<td id="goodsName"></td>
-			<td><span id="batch"></span></td>
-			<td><span id="unitName"></span></td>
-			<td><span id="count"></span></td>
-			<td><span id="price"></span></td>
-		</tr>
+		<!--<tr>-->
+			<!--<td id="goodsName"></td>-->
+			<!--<td><span id="batch"></span></td>-->
+			<!--<td><span id="unitName"></span></td>-->
+			<!--<td><span id="count"></span></td>-->
+			<!--<td><span id="price"></span></td>-->
+		<!--</tr>-->
 		<!--<tr>-->
 			<!--<td>THEREFOPO蒸汽热敷眼罩（10片/盒） </td>-->
 			<!--<td>100</td>-->
@@ -113,10 +113,10 @@
 			<td>单价</td>
 			<td rowspan="4" class="td1">
 				<!--<p>原价合计：<b><span th:text="${settlementDO.optometryName}"></span></b> &nbsp;&nbsp; 折扣金额：<b>408.00</b></p>-->
-				<p>原价合计：<b><span th:text="${settlementDO.primeMoney}"></span></b> &nbsp;&nbsp; </p>
-				<p>付款方式：<b><span th:text="${payModels}"></span></b></p>
+				<p>原价合计：<b>-<span th:text="${settlementDO.primeMoney}"></span></b> &nbsp;&nbsp; </p>
+				<p>付款方式：<b>-<span th:text="${payModels}"></span></b></p>
 				<p>套餐：<span th:text="${settlementDO.taocanName}"></span></p>
-				<p>实收合计：<b><span th:text="${payMoney}"></span></b> </p>
+				<p>实收合计：<b>-<span th:text="${payMoney}"></span></b> </p>
 			</td>
 		</tr>
 		<tr>
@@ -155,64 +155,52 @@
         var storeName = $("#storeName").val();
         var storeNamearray = storeName.split(",");
         var unit = $("#unit").val();
-        var unitArray = "";
-        if (null != unit){
-            unitArray = unit.split(",");
-        }
-        var batchArray="";
+        var unitArray = unit.split(",");
         var batch = $("#batchs").val();
-        if (null != batch){
-            batchArray = batch.split(",");
-        }
-        var storeUnitArray ="";
+        var batchArray = batch.split(",");
         var storeUnit = $("#storeUnit").val();
-        if (null != storeUnit){
-            storeUnitArray = storeUnit.split(",");
-        }
-        var storeCountArray ="";
+        var storeUnitArray = storeUnit.split(",");
         var storeCount = $("#storeCount").val();
-        if (null != storeCount){
-            storeCountArray = storeCount.split(",");
-        }
+        var storeCountArray = storeCount.split(",");
         for (var i=0;i<storeNamearray.length;i++){
             htmlt = "<tr><td>"+storeNamearray[i]+"</td>";
             if ('' == batchArray){
                 htmlt += "<td></td>";
-			} else if (null == batchArray[i]){
+            } else if (null == batchArray[i]){
                 htmlt += "<td></td>";
-			} else if ('null' == batchArray[i]){
+            } else if ('null' == batchArray[i]){
                 htmlt += "<td></td>";
             } else if (undefined == batchArray[i]){
                 htmlt += "<td></td>";
-			} else if (null == batch){
+            } else if (null == batch){
                 htmlt += "<td></td>";
             } else {
                 htmlt += "<td>"+batchArray[i]+"</td>";
-			}
-			if ('' == unitArray){
+            }
+            if ('' == unitArray){
                 htmlt += "<td></td>";
-			} else if (null == unitArray[i]){
+            } else if (null == unitArray[i]){
                 htmlt += "<td></td>";
-			} else if ('null' == unitArray[i]){
+            } else if ('null' == unitArray[i]){
                 htmlt += "<td></td>";
             } else if (undefined == unitArray[i]){
                 htmlt += "<td></td>";
-			} else {
+            } else {
                 htmlt += "<td>"+unitArray[i]+"</td>";
-			}
-			if ('' == storeCountArray){
+            }
+            if ('' == storeCountArray){
                 htmlt += "<td></td>";
-			}else {
-                htmlt += "<td>"+storeCountArray[i]+"</td>";
-			}
-			if ('' == storeUnitArray){
+            } else {
+                htmlt += "<td>-"+storeCountArray[i]+"</td>";
+            }
+            if ('' == storeUnitArray){
                 htmlt += "<td></td>";
-			} else {
-                htmlt += "<td>"+storeUnitArray[i]+"</td>";
-			}
+            } else {
+                htmlt += "<td>-"+storeUnitArray[i]+"</td>";
+            }
             htmlt += "</tr>";
             $("#tbodys").append(htmlt)
-        }
+		}
     });
 </script>
 <script th:inline="javascript">

@@ -39,8 +39,10 @@ public class SettlementDO implements Serializable {
 	private String saleNumber;
 	//付款方式
 	private String payWay;
-	//预收金额
+	//定金金额
 	private Double frontMoney;
+	//缴定金时间
+	private Date frontTime;
 	//会员姓名
 	private String memberName;
 	//性别
@@ -167,6 +169,10 @@ public class SettlementDO implements Serializable {
 	public void setFrontMoney(Double frontMoney) {this.frontMoney = frontMoney;}
 
 	public Double getFrontMoney() {return frontMoney;}
+
+	public void setFrontTime(Date frontTime){this.frontTime = frontTime;}
+
+	public Date getFrontTime(){return frontTime;}
 
 	public void setMemberName(String memberName) {this.memberName =memberName;}
 

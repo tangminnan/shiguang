@@ -19,6 +19,7 @@ import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -69,78 +70,56 @@ public class DrawBackController {
         return pageUtils;
     }
 
+    @GetMapping("/edit/{cardNumber}/{saleNumber}")
+    @RequiresPermissions("information:drawback:edit")
+    String detail(@PathVariable("cardNumber") String cardNumber,@PathVariable("saleNumber") String saleNumber,Model model){
+        MemberDO memberDO = memberService.getCardNumber(cardNumber);
+        model.addAttribute("memberDO",memberDO);
+//		CostDO costDO = costService.get(costId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("saleNumber",saleNumber);
+//        List<CostDO> costDOList = costService.list(map);
+//        Double sumMoney =0.00;
+//        CostDO costDO = new CostDO();
+//        for (CostDO costDO1 : costDOList){
+//            if (null != costDO1.getCostMoney()){
+//                if (null != costDO1.getCostMoney()){
+//                    sumMoney = sumMoney + costDO1.getCostMoney();
+//                    costDO1.setSumMoney(sumMoney);
+//                    costDO = new CostDO();
+//                    costDO.setId(costDO1.getId());
+//                    costDO.setMemberNumber(costDO1.getMemberNumber());
+//                    costDO.setSaleNumber(costDO1.getSaleNumber());
+//                    costDO.setSumMoney(sumMoney);
+//                    costDO.setSaleName(costDO1.getSaleName());
+//                    costDO.setOriginalPrice(costDO1.getOriginalPrice());
+//                }
+//            }
+//        }
+//		if (null != costDO.getCostMoney()) {
+//			if (null != costDO.getCostMoney()){
+//				sumMoney = sumMoney + costDO.getCostMoney();
+//				costDO.setSumMoney(sumMoney);
+//			}
+//		}
+//        model.addAttribute("costDO",costDO);
+        //SettlementDO settlement = settlementService.getCostId(costId);
+        //List<SettlementDO> settlement = settlementService.list(map);
+        SettlementDO settlement = settlementService.getSaleNumers(saleNumber);
+        SalesDO salesDO = salesService.getSaleNumber(saleNumber);
+        model.addAttribute("settlement", settlement);
+        model.addAttribute("salesDO",salesDO);
+        return "drawback/edit";
+    }
+
     /**
      * 退款
      */
-    @PostMapping( "/tuikuan")
+    @PostMapping( "/update")
     @ResponseBody
-    @RequiresPermissions("information:drawback:tuikuan")
-    public R remove(String cardNumber,String saleNumber){
-        MemberDO memberDO = memberService.getCardNumber(cardNumber);
-        DrawbackDO drawbackDO = new DrawbackDO();
-        drawbackDO.setDrawbackNumber(String.valueOf(GuuidUtil.getUUID()));
-        drawbackDO.setCreaterName(ShiroUtils.getUser().getName());
-        drawbackDO.setCreateTime(new Date());
-        drawbackDO.setDrawbackName(memberDO.getName());
-        SettlementDO settlementDO = settlementService.getSaleNumers(saleNumber);
-        if ("定金".equals(settlementDO.getPayWay())){
-            drawbackDO.setDrawbackMoney(String.valueOf(settlementDO.getPayMoney()));
-        } else {
-            drawbackDO.setDrawbackMoney(String.valueOf(settlementDO.getActualMoney()));
-        }
-        SalesDO salesDOs = new SalesDO();
-        SalesDO salesDO1 = salesService.getSaleNumber(saleNumber);
-        if (null != salesDO1){
-            salesDOs.setSaleType("3");
-            salesDOs.setSaleNumber(saleNumber);
-            salesService.updateSale(salesDOs);
-        }
-        CostDO costDO = new CostDO();
-        costDO.setId(settlementDO.getCostId());
-        costDO.setIsSale(2L);
-        costService.update(costDO);
-        SalesDO salesDO = salesService.getSaleNumber(saleNumber);
-        LogStatusDO logStatusDO = logStatusService.getLogStatusBySaleNum(saleNumber);
-        String storeNum = salesDO.getStoreNum();
-        String[] count = salesDO.getStoreCount().split(",");
-        String[] goodsCode = salesDO.getGoodsCode().split(",");
-        String[] storeDescribe = salesDO.getStoreDescribe().split(",");
-        Map<String,Object> map = new HashMap<>();
-        map.put("departNumber",storeNum);
-        PositionDO positionDO = stockService.findPosition(map);
-        for (int i=0;i<goodsCode.length;i++){
-            StockDO stockDO = new StockDO();
-            stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-            stockDO.setGoodsCode(goodsCode[i]);
-            StockDO stockDO1 = stockService.getProduceCode(stockDO);
-            if (!"销售完成".equals(logStatusDO.getLogisticStatus())){
-                if (null != stockDO1){
-                    int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
-                    stockDO.setGoodsCount(godsCount + "");
-                    stockService.updateGoodsCount(stockDO);
-                } else {
-                    return R.error("库存中不存在该商品");
-                }
-
-            } else if (null != logStatusDO){
-                if (!"镜片".equals(storeDescribe[i])){
-                    if (null != stockDO1){
-                        int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
-                        stockDO.setGoodsCount(godsCount + "");
-                        stockService.updateGoodsCount(stockDO);
-                    } else {
-                        return R.error("库存中不存在该商品");
-                    }
-
-                }
-            }
-
-
-        }
-        if(drawbackService.save(drawbackDO)>0){
-            return R.ok("退款成功");
-        }
-        return R.error();
+    @RequiresPermissions("information:drawback:edit")
+    public R remove(DrawbackDO drawbackDO){
+        return drawbackService.saveMoney(drawbackDO);
     }
 
 }

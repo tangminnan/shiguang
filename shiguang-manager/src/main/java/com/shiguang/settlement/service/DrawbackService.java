@@ -1,6 +1,7 @@
 package com.shiguang.settlement.service;
 
 
+import com.shiguang.common.utils.R;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.settlement.domain.DrawbackDO;
 
@@ -33,4 +34,6 @@ public interface DrawbackService {
 	List<MemberDO> memberList(Map<String,Object> map);
 
 	int memberCount(Map<String,Object> map);
+
+	R saveMoney(DrawbackDO drawbackDO);
 }

@@ -17,6 +17,10 @@ public class DrawbackDO implements Serializable {
 	
 	//主键
 	private Long id;
+	//销售单号
+	private String saleNumber;
+	//会员卡号
+	private String memberNumber;
 	//退款单号
 	private String drawbackNumber;
 	//顾客姓名
@@ -27,6 +31,8 @@ public class DrawbackDO implements Serializable {
 	private String createrName;
 	//退款时间
 	private Date createTime;
+	//退款方式
+	private String drackbackWay;
 
 	/**
 	 * 设置：主键
@@ -40,6 +46,11 @@ public class DrawbackDO implements Serializable {
 	public Long getId() {
 		return id;
 	}
+
+	public void setSaleNumber(String saleNumber){this.saleNumber = saleNumber;}
+	public String getSaleNumber(){return saleNumber;}
+	public void setMemberNumber(String memberNumber){this.memberNumber = memberNumber;}
+	public String getMemberNumber(){return memberNumber;}
 	/**
 	 * 设置：退款单号
 	 */
@@ -100,4 +111,8 @@ public class DrawbackDO implements Serializable {
 	public Date getCreateTime() {
 		return createTime;
 	}
+
+	public void setDrackbackWay(String drackbackWay){this.drackbackWay = drackbackWay;}
+
+	public String getDrackbackWay(){return drackbackWay;}
 }

@@ -186,9 +186,11 @@ public class LogStatusController {
                 }
             }
             model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));
-
+            model.addAttribute("payMoney",settlementDO1.getPayMoney());
+        } else {
+            model.addAttribute("payMoney",settlementDO1.getPayMoney());
         }
-        model.addAttribute("settlementDO1",settlementDO1);
+
         Map<String,Object> map2 = new HashMap<>();
         map2.put("cardNumber",settlementDO.getMemberNumber());
         List<Conclusion> conclusionList = salesService.conclusionList(map2);
@@ -281,6 +283,7 @@ public class LogStatusController {
         } else {
             model.addAttribute("countSum","");
         }
+        model.addAttribute("companyName",ShiroUtils.getUser().getCompany());
         return "logstatus/peijingdan";
     }
 

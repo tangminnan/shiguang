@@ -841,6 +841,7 @@ function getZijia(){
                 html += "<td><em onclick='del(this,0.00,\""+rows[i].producName+"\")'></em></td>";
                 html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].producName+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
+                html += "<input id='isJj' name='isJj' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='自架' type='hidden' />"
                 html += "</tr>";
@@ -850,6 +851,7 @@ function getZijia(){
                 //arraystore.push(rows[i].producName);
                 arrayunit.push(0.00);
                 arraycount.push(1)
+                $("#isJj").val("有")
             }
             //$("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
@@ -891,6 +893,7 @@ function getZipian(){
                 html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].producName+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='isJp'name='isJp' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='自片' type='hidden' />"
                 html += "</tr>";
                 $("#goods").append(html);
@@ -899,8 +902,10 @@ function getZipian(){
                 //arraystore.push(rows[i].producName);
                 arrayunit.push(0.00);
                 arraycount.push(1)
+                arrayjp.push(1);
             }
             //$("#storeName").val(arraystore);
+            $("#isJp").val(arrayjp.length);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
             //son_msg就是子页面中的msg数据

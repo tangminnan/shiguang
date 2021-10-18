@@ -21,7 +21,7 @@
 		<input id="storeUnit" th:value="${settlementDO.storeUnit}" type="hidden">
 		<input id="storeCount" th:value="${settlementDO.storeCount}" type="hidden">
 		<li>配镜单号：<span th:text="${settlementDO.saleNumber}"></span></li>
-		<li>验配中心：<span th:text="${settlementDO.mirorAddress}"></span></li>
+		<li>验配中心：<span th:text="${companyName}"></span></li>
 		<li>配镜日期：<span th:text="${settlementDO.peijingDate}"></span></li>
 	</ul>
 	<ul class="ul5">
@@ -72,10 +72,10 @@
 			<td></td>
 		</tr>
 	</table>
-	<table class="Htab2" cellpadding="0" cellspacing="0">
-		<tr class="thead" id="tbodys">
+	<table class="Htab2" cellpadding="0" cellspacing="0" id="tbodys">
+		<tr class="thead" >
 			<td>商品名称</td>
-			<!--<td>规格</td>-->
+			<td>批号</td>
 			<td>单位</td>
 			<td>数量</td>
 			<td>原价金额</td>
@@ -111,7 +111,7 @@
 				<p>原价合计：<b><span th:text="${settlementDO.amountMoney}"></span></b> &nbsp;&nbsp; </p>
 				<p>付款方式：<b><span th:text="${payModels}"></span></b></p>
 				<p>套餐：<span th:text="${settlementDO.taocanName}"></span></p>
-				<p>实收合计：<b><span th:text="${settlementDO.amountMoney}"></span></b> </p>
+				<p>实收合计：<b><span th:text="${payMoney}"></span></b> </p>
 			</td>
 		</tr>
 		<tr>
@@ -155,21 +155,67 @@
 <script type="text/javascript" src="/js/appjs/logstatus/peijingdan.js"></script>
 <script type="text/javascript">
     $().ready(function(){
+        var htmlt="";
         var cost = $("#cost").val();
         var storeName = $("#storeName").val();
+        var storeNamearray = storeName.split(",");
         var unit = $("#unit").val();
+        var unitArray = "";
+        if (null != unit){
+             unitArray = unit.split(",");
+		}
+        var batchArray="";
+        var batch = $("#batchs").val();
+        if (null != batch){
+            batchArray = batch.split(",");
+		}
+        var storeUnitArray ="";
         var storeUnit = $("#storeUnit").val();
+        if (null != storeUnit){
+            storeUnitArray = storeUnit.split(",");
+		}
+        var storeCountArray ="";
         var storeCount = $("#storeCount").val();
-        var storeNamestr = storeName.replace(/,/g,'<br>');
-        var unitstr = unit.replace(/,/g,'<br/>');
-        var storeUnitstr = storeUnit.replace(/,/g,'<br>');
-        var storeCountstr = storeCount.replace(/,/g,'<br>');
-        // var costStr = cost.replace(/,/g,'<br>');
-        //$("#goodsName").append(costStr);
-        $("#goodsName").append(storeNamestr);
-        $("#unitName").append(unitstr);
-        $("#count").append(storeCountstr);
-        $("#price").append(storeUnitstr);
+        if (null != storeCount){
+            storeCountArray = storeCount.split(",");
+		}
+        for (var i=0;i<storeNamearray.length;i++){
+            htmlt = "<tr><td>"+storeNamearray[i]+"</td>";
+            if ('' == batchArray){
+                htmlt += "<td></td>";
+			} else if (null == batchArray[i]){
+                htmlt += "<td></td>";
+            } else if ('null' == batchArray[i]){
+                htmlt += "<td></td>";
+            } else if (undefined == batchArray[i]){
+                htmlt += "<td></td>";
+            } else {
+                htmlt += "<td>"+batchArray[i]+"</td>";
+            }
+            if (''==unitArray){
+                htmlt += "<td></td>";
+			} else if (null == unitArray[i]){
+                htmlt += "<td></td>";
+            } else if ('null' == unitArray[i]){
+                htmlt += "<td></td>";
+            } else if (undefined == unitArray[i]){
+                htmlt += "<td></td>";
+            } else {
+                htmlt += "<td>"+unitArray[i]+"</td>";
+            }
+            if ('' == storeCountArray){
+                htmlt += "<td></td>";
+			} else {
+                htmlt += "<td>"+storeCountArray[i]+"</td>";
+			}
+			if ('' == storeUnitArray){
+                htmlt += "<td></td>";
+			} else {
+                htmlt += "<td>"+storeUnitArray[i]+"</td>";
+			}
+            htmlt += "</tr>";
+            $("#tbodys").append(htmlt)
+        }
         var goodsNumArray = $("#goodsNum").val();
         var goodsDescribe = $("#goodsDescribe").val();
         var leftRights = $("#leftRight").val();

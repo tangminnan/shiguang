@@ -69,6 +69,7 @@
 			`pay_money`,
 			`pay_way`,
 			`front_money`,
+			`front_time`,
 			`settle_date`
 		)
 		values
@@ -85,6 +86,7 @@
 			#{payMoney},
 			#{payWay},
 			#{frontMoney},
+			#{frontTime},
 			#{settleDate}
 		)
 	</insert>
@@ -115,7 +117,7 @@
 	</update>
 	
 	<delete id="remove">
-		delete from settlement where id = #{value}
+		delete from settlement where sale_number = #{value}
 	</delete>
 	
 	<delete id="batchRemove">

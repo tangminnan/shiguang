@@ -29,7 +29,7 @@ public interface SettlementService {
 	
 	int update(SettlementDO settlement);
 	
-	int remove(Long id);
+	int remove(String id);
 	
 	int batchRemove(Long[] ids);
 

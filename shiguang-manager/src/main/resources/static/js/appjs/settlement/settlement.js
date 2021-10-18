@@ -95,15 +95,16 @@ function load() {
                                                 'onclick="dayin(\''+row.isSale+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印</a>';
 										} else if (row.isSale == 3){
                                             e = '<a class="btn btn-primary btn-xs" href="#" title="已退款"  mce_href="#"  style="text-decoration: none;">已退款</a>';
-                                            t = '';
+                                            t = '<a class="btn btn-primary btn-xs" href="#" title="打印"  mce_href="#" ' +
+                                                'onclick="dayin(\''+row.isSale+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印</a>';
 										}
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.id
+												+ row.saleNumber
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ row.id
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + t;
+										return e + t + d;
 									}
 								} ]
 					});
@@ -153,6 +154,8 @@ function dayin(type,saleNumber){
         window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
 	} else if (type == 2){
         window.open("/information/settlement/dingjindan?saleNumber="+saleNumber);
+	} else if (type == 3){
+        window.open("/information/settlement/tuikuandan?saleNumber="+saleNumber);
 	}
 }
 

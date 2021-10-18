@@ -273,8 +273,15 @@ public class StoreSalesController {
                     return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
                 }
             }
+               String[] leftRight = salesDO.getLeftRight().split(",");
+                boolean resultRight = false;
+                boolean resultLeft = false;
+                resultRight = Arrays.asList(leftRight).contains("右");
+                resultLeft = Arrays.asList(leftRight).contains("左");
+                if (resultRight == false || resultLeft == false){
+                    return R.error("镜片选择左右眼重复，请重新选择！");
+                }
         }
-
         Long saleNumber = GuuidUtil.getUUID();
         salesDO.setSaleNumber("X" + saleNumber);
         if (null != salesDO) {
@@ -288,8 +295,16 @@ public class StoreSalesController {
                 salesDO.setProcessAsk(salesDO.getProcessAsk());
             }
             if (null != salesDO.getPtometryNumber()){
-                String[] pto = salesDO.getPtometryNumber().split(",");
-                salesDO.setPtometryNumber(pto[0]);
+                try {
+                    String[] pto = salesDO.getPtometryNumber().split(",");
+                    if (pto.length > 0){
+                        salesDO.setPtometryNumber(pto[0]);
+                    } else {
+                        salesDO.setPtometryNumber("");
+                    }
+                }catch (ArrayIndexOutOfBoundsException e) {
+                    salesDO.setPtometryNumber("");
+                }
             } else {
                 salesDO.setPtometryNumber("Y"+GuuidUtil.getUUID());
             }
@@ -305,16 +320,16 @@ public class StoreSalesController {
         }
         //Model model=null;
         //保存瞳高
-        if ("远用".equals(salesDO.getRecipelType())){
+        if ("远用".equals(salesDO.getRecipelType()) || salesDO.getRecipelwlType() == 2){
             salesDO.setRighttg(salesDO.getRighttonggaoyy());
             salesDO.setLefttg(salesDO.getLefttonggaoyy());
-        } else if ("近用".equals(salesDO.getRecipelType())){
+        } else if ("近用".equals(salesDO.getRecipelType()) || salesDO.getRecipelwlType() == 1){
             salesDO.setRighttg(salesDO.getRighttonggaojy());
             salesDO.setLefttg(salesDO.getLefttonggaojy());
-        } else if ("渐进/双光".equals(salesDO.getRecipelType())){
+        } else if ("渐进/双光".equals(salesDO.getRecipelType()) || salesDO.getRecipelwlType() == 3){
             salesDO.setRighttg(salesDO.getRighttonggaosg());
             salesDO.setLefttg(salesDO.getLefttonggaosg());
-        } else if ("中用".equals(salesDO.getRecipelType())){
+        } else if ("中用".equals(salesDO.getRecipelType()) || salesDO.getRecipelwlType() == 4){
             salesDO.setRighttg(salesDO.getRighttonggaozy());
             salesDO.setLefttg(salesDO.getLefttonggaozy());
         }
