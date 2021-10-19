@@ -320,19 +320,37 @@ public class StoreSalesController {
         }
         //Model model=null;
         //保存瞳高
-        if ("远用".equals(salesDO.getRecipelType()) || salesDO.getRecipelwlType() == 2){
-            salesDO.setRighttg(salesDO.getRighttonggaoyy());
-            salesDO.setLefttg(salesDO.getLefttonggaoyy());
-        } else if ("近用".equals(salesDO.getRecipelType()) || salesDO.getRecipelwlType() == 1){
-            salesDO.setRighttg(salesDO.getRighttonggaojy());
-            salesDO.setLefttg(salesDO.getLefttonggaojy());
-        } else if ("渐进/双光".equals(salesDO.getRecipelType()) || salesDO.getRecipelwlType() == 3){
-            salesDO.setRighttg(salesDO.getRighttonggaosg());
-            salesDO.setLefttg(salesDO.getLefttonggaosg());
-        } else if ("中用".equals(salesDO.getRecipelType()) || salesDO.getRecipelwlType() == 4){
-            salesDO.setRighttg(salesDO.getRighttonggaozy());
-            salesDO.setLefttg(salesDO.getLefttonggaozy());
+        if (!"".equals(salesDO.getRecipelType()) && null != salesDO.getRecipelType()){
+            if ("远用".equals(salesDO.getRecipelType())){
+                salesDO.setRighttg(salesDO.getRighttonggaoyy());
+                salesDO.setLefttg(salesDO.getLefttonggaoyy());
+            } else if ("近用".equals(salesDO.getRecipelType())){
+                salesDO.setRighttg(salesDO.getRighttonggaojy());
+                salesDO.setLefttg(salesDO.getLefttonggaojy());
+            } else if ("渐进/双光".equals(salesDO.getRecipelType())){
+                salesDO.setRighttg(salesDO.getRighttonggaosg());
+                salesDO.setLefttg(salesDO.getLefttonggaosg());
+            } else if ("中用".equals(salesDO.getRecipelType())){
+                salesDO.setRighttg(salesDO.getRighttonggaozy());
+                salesDO.setLefttg(salesDO.getLefttonggaozy());
+            }
+        } else if (null != salesDO.getRecipelwlType() && !"".equals(salesDO.getRecipelwlType())){
+            if (salesDO.getRecipelwlType() == 2){
+                salesDO.setRighttg(salesDO.getRighttonggaoyy());
+                salesDO.setLefttg(salesDO.getLefttonggaoyy());
+            } else if (salesDO.getRecipelwlType() == 1){
+                salesDO.setRighttg(salesDO.getRighttonggaojy());
+                salesDO.setLefttg(salesDO.getLefttonggaojy());
+            } else if (salesDO.getRecipelwlType() == 3){
+                salesDO.setRighttg(salesDO.getRighttonggaosg());
+                salesDO.setLefttg(salesDO.getLefttonggaosg());
+            } else if (salesDO.getRecipelwlType() == 4){
+                salesDO.setRighttg(salesDO.getRighttonggaozy());
+                salesDO.setLefttg(salesDO.getLefttonggaozy());
+            }
         }
+
+
         if ("2".equals(salesDO.getChufang())) {
             if (salesDO.getRecipelwlType() == 1) {
                 KjjyDO kjjyDO = new KjjyDO();
@@ -1619,8 +1637,8 @@ public class StoreSalesController {
                 Long positionId = null;
                 if (null != departNumber){
                     Map<String, Object> map = new HashMap<>();
-                    map.put("departNumber", departNumber);
-                    PositionDO positionDO = stockService.findPosition(map);
+                    map.put("companyId", ShiroUtils.getUser().getCompanyId());
+                    PositionDO positionDO = stockService.findHegePosition(map);
                     if (null != positionDO) {
                         positionId = positionDO.getPositionId();
                     }

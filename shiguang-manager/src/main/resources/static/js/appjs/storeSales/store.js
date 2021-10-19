@@ -36,6 +36,7 @@ function getKjpeijian() {
                 html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='yingshoujjpj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                 html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
@@ -44,16 +45,19 @@ function getKjpeijian() {
                 $("#goods").append(html);
                 $("#yingshouMoneyjjpj"+a+"").text(rows[i].retailPrice)
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                arraycount.push(1)
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 //arraystore.push(rows[i].goodsName);
                 //arrayunit.push(rows[i].retailPrice);
                 //unitarray.push(rows[i].unit);
                 //goodsNumArray.push(rows[i].goodsNum);
-                arraycount.push(1)
+                arraycount.push(1);
+                classArray.push(1);
             }
             //$("#storeName").val(arraystore);
             //$("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
             //$("#unit").val(unitarray);
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
@@ -111,6 +115,7 @@ function getTaiyangjing(){
                 html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshoutyj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
@@ -124,11 +129,13 @@ function getTaiyangjing(){
                 //arrayunit.push(rows[i].retailPrice);
                 //unitarray.push(rows[i].unit);
                 //goodsNumArray.push(rows[i].goodsNum);
-                arraycount.push(1)
+                arraycount.push(1);
+                classArray.push(1);
             }
             //$("#storeName").val(arraystore);
             //$("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
             //$("#unit").val(unitarray);
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
@@ -186,6 +193,7 @@ function getHaocai() {
                 html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshouhc"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
@@ -199,11 +207,13 @@ function getHaocai() {
                 //arrayunit.push(rows[i].retailPrice);
                // unitarray.push(rows[i].unit);
                 //goodsNumArray.push(rows[i].goodsNum);
-                arraycount.push(1)
+                arraycount.push(1);
+                classArray.push(1);
             }
             //$("#storeName").val(arraystore);
             //$("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
             //$("#unit").val(unitarray);
            // $("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
@@ -260,6 +270,7 @@ function getLaohuajing() {
                 html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshoulhj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
@@ -272,11 +283,13 @@ function getLaohuajing() {
                 //arraystore.push(rows[i].goodsName);
                 //arrayunit.push(rows[i].retailPrice);
                 //goodsNumArray.push(rows[i].goodsNum);
-                arraycount.push(1)
+                arraycount.push(1);
+                classArray.push(1);
             }
             //$("#storeName").val(arraystore);
             //$("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
             var lis="";
@@ -333,6 +346,7 @@ function getShiguang(){
                 html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshousg"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
@@ -346,11 +360,13 @@ function getShiguang(){
                 //arrayunit.push(rows[i].retailPrice);
                 //unitarray.push(rows[i].unit);
                 //goodsNumArray.push(rows[i].goodsNum);
-                arraycount.push(1)
+                arraycount.push(1);
+                classArray.push(1);
             }
             //$("#storeName").val(arraystore);
             //$("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
             //$("#unit").val(unitarray);
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
@@ -409,6 +425,7 @@ function getHuliye(){
                 html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshouhly"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
@@ -422,11 +439,13 @@ function getHuliye(){
                 //arrayunit.push(rows[i].retailPrice);
                // unitarray.push(rows[i].unit);
                 //goodsNumArray.push(rows[i].goodsNum);
-                arraycount.push(1)
+                arraycount.push(1);
+                classArray.push(1);
             }
             //$("#storeName").val(arraystore);
             //$("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
            // $("#unit").val(unitarray);
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
@@ -485,6 +504,7 @@ function getPeijian(){
                 html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshoupj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
@@ -498,11 +518,13 @@ function getPeijian(){
                // arrayunit.push(rows[i].retailPrice);
                 //unitarray.push(rows[i].unit);
                 //goodsNumArray.push(rows[i].goodsNum);
-                arraycount.push(1)
+                arraycount.push(1);
+                classArray.push(1);
             }
             //$("#storeName").val(arraystore);
            // $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
             //$("#unit").val(unitarray);
            // $("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
@@ -723,6 +745,7 @@ function getYinxingpj(){
                 html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                 html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='yingshouyxpj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
@@ -736,11 +759,13 @@ function getYinxingpj(){
                // arrayunit.push(rows[i].retailPrice);
                 //unitarray.push(rows[i].unit);
                // goodsNumArray.push(rows[i].goodsNum);
-                arraycount.push(1)
+                arraycount.push(1);
+                classArray.push(1);
             }
             //$("#storeName").val(arraystore);
            // $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
            // $("#unit").val(unitarray);
             //$("#goodsNum").val(goodsNumArray);
             $("#ula").empty();
@@ -792,6 +817,7 @@ function getZengpin(){
                 html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].goodsName+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='赠品' type='hidden' />"
                 html += "</tr>";
@@ -801,10 +827,12 @@ function getZengpin(){
                // arraystore.push(rows[i].goodsName);
                 arrayunit.push(0.00);
                 arraycount.push(1)
+                classArray.push(1);
             }
             //$("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -842,6 +870,7 @@ function getZijia(){
                 html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].producName+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='isJj' name='isJj' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='自架' type='hidden' />"
                 html += "</tr>";
@@ -851,11 +880,13 @@ function getZijia(){
                 //arraystore.push(rows[i].producName);
                 arrayunit.push(0.00);
                 arraycount.push(1)
+                classArray.push(1);
                 $("#isJj").val("有")
             }
             //$("#storeName").val(arraystore);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
@@ -894,6 +925,7 @@ function getZipian(){
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' />"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='isJp'name='isJp' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='自片' type='hidden' />"
                 html += "</tr>";
                 $("#goods").append(html);
@@ -903,11 +935,13 @@ function getZipian(){
                 arrayunit.push(0.00);
                 arraycount.push(1)
                 arrayjp.push(1);
+                classArray.push(1);
             }
             //$("#storeName").val(arraystore);
             $("#isJp").val(arrayjp.length);
             $("#storeUnit").val(arrayunit);
             $("#storeCount").val(arraycount);
+            $("#classtype").val(classArray);
             //son_msg就是子页面中的msg数据
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }

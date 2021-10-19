@@ -1340,7 +1340,7 @@
             zhongyong.style="display:none";
             jiaomosx.style="display:none";
             shijuexl.style="display:none";
-            jiaomosxVST.style="display:block";
+            jiaomosxVST.style="display:none";
             jiaomosxCRT.style="display:none";
             rgp.style="display:none";
             yaopin.style="display:none";
@@ -1631,6 +1631,7 @@
     var jpArray=[];
     var eyejpArray=[];
     var a=-1;
+    var classArray=[];
 	function getJingjia(){
         var toIndex = layer.open({
             type : 2,
@@ -1675,6 +1676,7 @@
                     html += "<input id='storeCount' name='storeCount' type='hidden' />"
 					html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                     html += "<input id='isJj' name='isJj' type='hidden' />"
+                    html += "<input id='classtype' name='classtype' type='hidden' />"
                     html += "<input id='yingshoujj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                     html += "<input id='producaNum' name='producaNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
@@ -1691,12 +1693,14 @@
                    // goodsNumArray.push(rows[i].goodsNum);
                     //jjArray.push(rows[i].goodsName)
                     arraycount.push(1)
+                    classArray.push(1);
                     //producaNum.push(rows[i].goodsNum);
 					$("#isJj").val("有")
 				}
                 //$("#storeName").val(arraystore);
                 //$("#storeUnit").val(arrayunit);
                 $("#storeCount").val(arraycount);
+                $("#classtype").val(classArray);
                 //$("#unit").val(unitarray);
                 //$("#goodsNum").val(goodsNumArray);
                 //$("#jjGoodsName").val(jjArray);
@@ -1747,7 +1751,7 @@
         $("#storeUnit").val(arrayunit);
         $("#storeCount").val(arraycount);
     }
-var classArray=[];
+
     function getJingpian(){
 	    var  rightYuanYongQJ = '';
 	    var rightYuanYongZJ = '';
