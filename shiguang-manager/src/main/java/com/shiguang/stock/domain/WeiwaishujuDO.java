@@ -8,9 +8,9 @@ import java.util.Date;
 /**
  *
  *
- * @author wjl
+ * @author cln
  * @email bushuo@163.com
- * @date 2021-09-18 19:36:15
+ * @date 2021-10-20 14:14:36
  */
 public class WeiwaishujuDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -89,52 +89,54 @@ public class WeiwaishujuDO implements Serializable {
 	private String rightzxyx;
 	//轴向OSyx
 	private String leftzxyx;
-	//商品代码OD
-	private String rightNum;
-	//商品代码OS
-	private String leftNum;
-	//商品名称OD
-	private String rightName;
-	//商品名称OS
-	private String leftName;
-	//镜片型OD
-	private String rightR;
-	//镜片型OS
-	private String leftL;
-	//数量OD
-	private String countr;
-	//数量OS
-	private String countl;
-	//要求OD
-	private String yaoqiur;
-	//要求OS
-	private String yaoqiul;
-	//商品代码ODyx
-	private String rightNumyx;
-	//商品代码OSyx
-	private String leftNumyx;
-	//商品名称ODyx
-	private String rightNameyx;
-	//商品名称OSyx
-	private String leftNameyx;
-	//镜片型ODyx
-	private String rightRyx;
-	//镜片型OSyx
-	private String leftLyx;
-	//数量ODyx
-	private String countryx;
-	//数量OS
-	private String countlyx;
-	//要求OD
-	private String yaoqiuryx;
-	//要求OS
-	private String yaoqiulyx;
+
+
+	//商品代码
+	private String num;
+	//条码
+	private String code;
+	//商品名称
+	private String name;
+	//镜片型左右
+	private String leftRight;
+	//数量
+	private String count;
+	//要求
+	private String yaoqiu;
+	//商品代码yx
+	private String numyx;
+	private String codeyx;
+	//商品名称yx
+	private String nameyx;
+	//镜片型左右yx
+	private String leftRightYx;
+	//数量yx
+	private String countyx;
+	//要求隐形
+	private String yaoqiuyx;
 	//顾客姓名
 	private String gkname;
 	//会员卡
 	private String hyknum;
 	//手机号
 	private String phone;
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getCodeyx() {
+		return codeyx;
+	}
+
+	public void setCodeyx(String codeyx) {
+		this.codeyx = codeyx;
+	}
+
 	/**
 	 * 设置：委外数据id
 	 */
@@ -150,13 +152,13 @@ public class WeiwaishujuDO implements Serializable {
 	/**
 	 * 设置：销售单号
 	 */
-	public void setnumber(String number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	/**
 	 * 获取：销售单号
 	 */
-	public String getnumber() {
+	public String getNumber() {
 		return number;
 	}
 	/**
@@ -580,267 +582,159 @@ public class WeiwaishujuDO implements Serializable {
 		return leftzxyx;
 	}
 	/**
-	 * 设置：商品代码OD
+	 * 设置：商品代码
 	 */
-	public void setRightNum(String rightNum) {
-		this.rightNum = rightNum;
+	public void setNum(String num) {
+		this.num = num;
 	}
 	/**
-	 * 获取：商品代码OD
+	 * 获取：商品代码
 	 */
-	public String getRightNum() {
-		return rightNum;
+	public String getNum() {
+		return num;
 	}
 	/**
-	 * 设置：商品代码OS
+	 * 设置：商品名称
 	 */
-	public void setLeftNum(String leftNum) {
-		this.leftNum = leftNum;
+	public void setName(String name) {
+		this.name = name;
 	}
 	/**
-	 * 获取：商品代码OS
+	 * 获取：商品名称
 	 */
-	public String getLeftNum() {
-		return leftNum;
+	public String getName() {
+		return name;
 	}
 	/**
-	 * 设置：商品名称OD
+	 * 设置：镜片型左右
 	 */
-	public void setRightName(String rightName) {
-		this.rightName = rightName;
+	public void setLeftRight(String leftRight) {
+		this.leftRight = leftRight;
 	}
 	/**
-	 * 获取：商品名称OD
+	 * 获取：镜片型左右
 	 */
-	public String getRightName() {
-		return rightName;
+	public String getLeftRight() {
+		return leftRight;
 	}
 	/**
-	 * 设置：商品名称OS
+	 * 设置：数量
 	 */
-	public void setLeftName(String leftName) {
-		this.leftName = leftName;
+	public void setCount(String count) {
+		this.count = count;
 	}
 	/**
-	 * 获取：商品名称OS
+	 * 获取：数量
 	 */
-	public String getLeftName() {
-		return leftName;
+	public String getCount() {
+		return count;
 	}
 	/**
-	 * 设置：镜片型OD
+	 * 设置：要求
 	 */
-	public void setRightR(String rightR) {
-		this.rightR = rightR;
+	public void setYaoqiu(String yaoqiu) {
+		this.yaoqiu = yaoqiu;
 	}
 	/**
-	 * 获取：镜片型OD
+	 * 获取：要求
 	 */
-	public String getRightR() {
-		return rightR;
+	public String getYaoqiu() {
+		return yaoqiu;
 	}
 	/**
-	 * 设置：镜片型OS
+	 * 设置：商品代码yx
 	 */
-	public void setLeftL(String leftL) {
-		this.leftL = leftL;
+	public void setNumyx(String numyx) {
+		this.numyx = numyx;
 	}
 	/**
-	 * 获取：镜片型OS
+	 * 获取：商品代码yx
 	 */
-	public String getLeftL() {
-		return leftL;
+	public String getNumyx() {
+		return numyx;
 	}
 	/**
-	 * 设置：数量OD
+	 * 设置：商品名称yx
 	 */
-	public void setCountr(String countr) {
-		this.countr = countr;
+	public void setNameyx(String nameyx) {
+		this.nameyx = nameyx;
 	}
 	/**
-	 * 获取：数量OD
+	 * 获取：商品名称yx
 	 */
-	public String getCountr() {
-		return countr;
+	public String getNameyx() {
+		return nameyx;
 	}
 	/**
-	 * 设置：数量OS
+	 * 设置：镜片型左右yx
 	 */
-	public void setCountl(String countl) {
-		this.countl = countl;
+	public void setLeftRightYx(String leftRightYx) {
+		this.leftRightYx = leftRightYx;
 	}
 	/**
-	 * 获取：数量OS
+	 * 获取：镜片型左右yx
 	 */
-	public String getCountl() {
-		return countl;
+	public String getLeftRightYx() {
+		return leftRightYx;
 	}
 	/**
-	 * 设置：要求OD
+	 * 设置：数量yx
 	 */
-	public void setYaoqiur(String yaoqiur) {
-		this.yaoqiur = yaoqiur;
+	public void setCountyx(String countyx) {
+		this.countyx = countyx;
 	}
 	/**
-	 * 获取：要求OD
+	 * 获取：数量yx
 	 */
-	public String getYaoqiur() {
-		return yaoqiur;
+	public String getCountyx() {
+		return countyx;
 	}
 	/**
-	 * 设置：要求OS
+	 * 设置：要求隐形
 	 */
-	public void setYaoqiul(String yaoqiul) {
-		this.yaoqiul = yaoqiul;
+	public void setYaoqiuyx(String yaoqiuyx) {
+		this.yaoqiuyx = yaoqiuyx;
 	}
 	/**
-	 * 获取：要求OS
+	 * 获取：要求隐形
 	 */
-	public String getYaoqiul() {
-		return yaoqiul;
+	public String getYaoqiuyx() {
+		return yaoqiuyx;
 	}
 	/**
-	 * 设置：商品代码ODyx
+	 * 设置：顾客姓名
 	 */
-	public void setRightNumyx(String rightNumyx) {
-		this.rightNumyx = rightNumyx;
-	}
-	/**
-	 * 获取：商品代码ODyx
-	 */
-	public String getRightNumyx() {
-		return rightNumyx;
-	}
-	/**
-	 * 设置：商品代码OSyx
-	 */
-	public void setLeftNumyx(String leftNumyx) {
-		this.leftNumyx = leftNumyx;
-	}
-	/**
-	 * 获取：商品代码OSyx
-	 */
-	public String getLeftNumyx() {
-		return leftNumyx;
-	}
-	/**
-	 * 设置：商品名称ODyx
-	 */
-	public void setRightNameyx(String rightNameyx) {
-		this.rightNameyx = rightNameyx;
-	}
-	/**
-	 * 获取：商品名称ODyx
-	 */
-	public String getRightNameyx() {
-		return rightNameyx;
-	}
-	/**
-	 * 设置：商品名称OSyx
-	 */
-	public void setLeftNameyx(String leftNameyx) {
-		this.leftNameyx = leftNameyx;
-	}
-	/**
-	 * 获取：商品名称OSyx
-	 */
-	public String getLeftNameyx() {
-		return leftNameyx;
-	}
-	/**
-	 * 设置：镜片型ODyx
-	 */
-	public void setRightRyx(String rightRyx) {
-		this.rightRyx = rightRyx;
-	}
-	/**
-	 * 获取：镜片型ODyx
-	 */
-	public String getRightRyx() {
-		return rightRyx;
-	}
-	/**
-	 * 设置：镜片型OSyx
-	 */
-	public void setLeftLyx(String leftLyx) {
-		this.leftLyx = leftLyx;
-	}
-	/**
-	 * 获取：镜片型OSyx
-	 */
-	public String getLeftLyx() {
-		return leftLyx;
-	}
-	/**
-	 * 设置：数量ODyx
-	 */
-	public void setCountryx(String countryx) {
-		this.countryx = countryx;
-	}
-	/**
-	 * 获取：数量ODyx
-	 */
-	public String getCountryx() {
-		return countryx;
-	}
-	/**
-	 * 设置：数量OS
-	 */
-	public void setCountlyx(String countlyx) {
-		this.countlyx = countlyx;
-	}
-	/**
-	 * 获取：数量OS
-	 */
-	public String getCountlyx() {
-		return countlyx;
-	}
-	/**
-	 * 设置：要求OD
-	 */
-	public void setYaoqiuryx(String yaoqiuryx) {
-		this.yaoqiuryx = yaoqiuryx;
-	}
-	/**
-	 * 获取：要求OD
-	 */
-	public String getYaoqiuryx() {
-		return yaoqiuryx;
-	}
-	/**
-	 * 设置：要求OS
-	 */
-	public void setYaoqiulyx(String yaoqiulyx) {
-		this.yaoqiulyx = yaoqiulyx;
-	}
-	/**
-	 * 获取：要求OS
-	 */
-	public String getYaoqiulyx() {
-		return yaoqiulyx;
-	}
-
-	public String getGkname() {
-		return gkname;
-	}
-
 	public void setGkname(String gkname) {
 		this.gkname = gkname;
 	}
-
-	public String getHyknum() {
-		return hyknum;
+	/**
+	 * 获取：顾客姓名
+	 */
+	public String getGkname() {
+		return gkname;
 	}
-
+	/**
+	 * 设置：会员卡
+	 */
 	public void setHyknum(String hyknum) {
 		this.hyknum = hyknum;
 	}
-
-	public String getPhone() {
-		return phone;
+	/**
+	 * 获取：会员卡
+	 */
+	public String getHyknum() {
+		return hyknum;
 	}
-
+	/**
+	 * 设置：手机号
+	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	/**
+	 * 获取：手机号
+	 */
+	public String getPhone() {
+		return phone;
 	}
 }

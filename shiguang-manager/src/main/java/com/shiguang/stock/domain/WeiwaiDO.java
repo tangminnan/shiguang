@@ -59,6 +59,8 @@ public class WeiwaiDO implements Serializable {
 	private String mirrorTime;
 	//商品名称
 	private String goodsName;
+	//代码
+	private String num;
 	//委外方式
 	private String style;
 	//镜片类型r/l
@@ -86,36 +88,6 @@ public class WeiwaiDO implements Serializable {
 
 
 
-	//配镜单号
-	private String saleNumber2;
-	//取镜时间
-	private String mirrorTime2;
-	//商品名称
-	private String goodsName2;
-	//委外方式
-	private String style2;
-	//镜片类型r/l
-	private String rl2;
-	//数量
-	private String count2;
-	//球镜
-	private String sph2;
-	//柱镜
-	private String cyl2;
-	//轴向
-	private String axial2;
-	//下加
-	private String lightbelow2;
-	//棱镜
-	private String lengjing2;
-	//直径
-	private String diameter2;
-	//加工要求
-	private String yaoqiu2;
-	//基底
-	private String jd2;
-	//曲率
-	private String curvature2;
 
 	//收货状态
 	private String status;
@@ -360,6 +332,15 @@ public class WeiwaiDO implements Serializable {
 	public String getGoodsName() {
 		return goodsName;
 	}
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
 	/**
 	 * 设置：委外方式
 	 */
@@ -506,186 +487,6 @@ public class WeiwaiDO implements Serializable {
 	}
 
 
-	/**
-	 * 设置：配镜单号
-	 */
-	public void setSaleNumber2(String saleNumber2) {
-		this.saleNumber2 = saleNumber2;
-	}
-	/**
-	 * 获取：配镜单号
-	 */
-	public String getSaleNumber2() {
-		return saleNumber2;
-	}
-	/**
-	 * 设置：取镜时间
-	 */
-	public void setMirrorTime2(String  mirrorTime2) {
-		this.mirrorTime2 = mirrorTime2;
-	}
-	/**
-	 * 获取：取镜时间
-	 */
-	public String getMirrorTime2() {
-		return mirrorTime2;
-	}
-	/**
-	 * 设置：商品名称
-	 */
-	public void setGoodsName2(String goodsName2) {
-		this.goodsName2 = goodsName2;
-	}
-	/**
-	 * 获取：商品名称
-	 */
-	public String getGoodsName2() {
-		return goodsName2;
-	}
-	/**
-	 * 设置：委外方式
-	 */
-	public void setStyle2(String style2) {
-		this.style2 = style2;
-	}
-	/**
-	 * 获取：委外方式
-	 */
-	public String getStyle2() {
-		return style2;
-	}
-	/**
-	 * 设置：镜片类型r/l
-	 */
-	public void setRl2(String rl2) {
-		this.rl2 = rl2;
-	}
-	/**
-	 * 获取：镜片类型r/l
-	 */
-	public String getRl2() {
-		return rl2;
-	}
-	/**
-	 * 设置：数量
-	 */
-	public void setCount2(String count2) {
-		this.count2 = count2;
-	}
-	/**
-	 * 获取：数量
-	 */
-	public String getCount2() {
-		return count2;
-	}
-	/**
-	 * 设置：球镜
-	 */
-	public void setSph2(String sph2) {
-		this.sph2 = sph2;
-	}
-	/**
-	 * 获取：球镜
-	 */
-	public String getSph2() {
-		return sph2;
-	}
-	/**
-	 * 设置：柱镜
-	 */
-	public void setCyl2(String cyl2) {
-		this.cyl2 = cyl2;
-	}
-	/**
-	 * 获取：柱镜
-	 */
-	public String getCyl2() {
-		return cyl2;
-	}
-	/**
-	 * 设置：轴向
-	 */
-	public void setAxial2(String axial2) {
-		this.axial2 = axial2;
-	}
-	/**
-	 * 获取：轴向
-	 */
-	public String getAxial2() {
-		return axial2;
-	}
-	/**
-	 * 设置：下加
-	 */
-	public void setLightbelow2(String lightbelow2) {
-		this.lightbelow2 = lightbelow2;
-	}
-	/**
-	 * 获取：下加
-	 */
-	public String getLightbelow2() {
-		return lightbelow2;
-	}
-	/**
-	 * 设置：棱镜
-	 */
-	public void setLengjing2(String lengjing2) {
-		this.lengjing2 = lengjing2;
-	}
-	/**
-	 * 获取：棱镜
-	 */
-	public String getLengjing2() {
-		return lengjing2;
-	}
-	/**
-	 * 设置：直径
-	 */
-	public void setDiameter2(String diameter2) {
-		this.diameter2 = diameter2;
-	}
-	/**
-	 * 获取：直径
-	 */
-	public String getDiameter2() {
-		return diameter2;
-	}
-	/**
-	 * 设置：加工要求
-	 */
-	public void setYaoqiu2(String yaoqiu2) {
-		this.yaoqiu2 = yaoqiu2;
-	}
-	/**
-	 * 获取：加工要求
-	 */
-	public String getYaoqiu2() {
-		return yaoqiu2;
-	}
-	/**
-	 * 设置：基底
-	 */
-	public void setJd2(String jd2) {
-		this.jd2 = jd2;
-	}
-	/**
-	 * 获取：基底
-	 */
-	public String getJd2() {
-		return jd2;
-	}
-	/**
-	 * 设置：曲率
-	 */
-	public void setCurvature2(String curvature2) {
-		this.curvature2 = curvature2;
-	}
-	/**
-	 * 获取：曲率
-	 */
-	public String getCurvature2() {
-		return curvature2;
-	}
 
 	public String getStatus() {
 		return status;

@@ -231,6 +231,16 @@ public class SalesDO implements Serializable {
 	private String jpGoodsNum;
 	private String jpGoodsCode;
 
+//	private List<SalesDO> lists = new ArrayList<>();
+//
+//	public List<SalesDO> getLists() {
+//		return lists;
+//	}
+//
+//	public void setLists(List<SalesDO> lists) {
+//		this.lists = lists;
+//	}
+
 	public String getJpGoodsNum() {
 		return jpGoodsNum;
 	}
@@ -2121,6 +2131,43 @@ public class SalesDO implements Serializable {
 	private String leftFartj;//OS远瞳距
 	private String rightNeartj;//OD近瞳距
 	private String leftNeartj;//OS近瞳距
+	private String rightqulv;//OD曲率
+	private String leftqulv;//OS曲率
+	private String rightzj;//OD直径
+	private String leftzj;//OS直径
+	private String leftRight;
+
+	public String getRightqulv() {
+		return rightqulv;
+	}
+
+	public void setRightqulv(String rightqulv) {
+		this.rightqulv = rightqulv;
+	}
+
+	public String getLeftqulv() {
+		return leftqulv;
+	}
+
+	public void setLeftqulv(String leftqulv) {
+		this.leftqulv = leftqulv;
+	}
+
+	public String getRightzj() {
+		return rightzj;
+	}
+
+	public void setRightzj(String rightzj) {
+		this.rightzj = rightzj;
+	}
+
+	public String getLeftzj() {
+		return leftzj;
+	}
+
+	public void setLeftzj(String leftzj) {
+		this.leftzj = leftzj;
+	}
 
 	public String getRightsph() {
 		return rightsph;
@@ -2250,7 +2297,6 @@ public class SalesDO implements Serializable {
 		this.leftNeartj = leftNeartj;
 	}
 
-	private String leftRight;
 
 	public String getLeftRight() {
 		return leftRight;

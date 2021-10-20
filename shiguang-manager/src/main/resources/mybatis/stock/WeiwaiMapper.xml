@@ -7,10 +7,8 @@
 		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`position_id`,`position_name`,
 		`changjia_number`,`shouhuo_people`,
 		`shouhuo_phone`,`shouhuo_address`,`beizhu`,
-		`sale_number`,`mirror_time`,`goods_name`,`style`,`rl`,`count`,`sph`,`cyl`,
+		`sale_number`,`mirror_time`,`goods_name`,`num`,`style`,`rl`,`count`,`sph`,`cyl`,
 		`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,
-		`sale_number2`,`mirror_time2`,`goods_name2`,`style2`,`rl2`,`count2`,`sph2`,`cyl2`,
-		`axial2`,`lightbelow2`,`lengjing2`,`diameter2`,`yaoqiu2`,`jd2`,`curvature2`,
 		`status`,`username`,`sh_time`,`shstatus` ,`psname`,
 		`gkname`,`hyknum`,`phone`,`salenumbery`,`pstime`
 		from stock_weiwai where id = #{value}
@@ -19,10 +17,8 @@
 	<select id="list" resultType="com.shiguang.stock.domain.WeiwaiDO">
 		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`position_id`,`position_name`,`changjia_number`,
 		`shouhuo_people`,`shouhuo_phone`,`shouhuo_address`,`beizhu`,
-		`sale_number`,`mirror_time`,`goods_name`,
+		`sale_number`,`mirror_time`,`goods_name`,`num`,
 		`style`,`rl`,`count`,`sph`,`cyl`,`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,
-		`sale_number2`,`mirror_time2`,`goods_name2`,`style2`,`rl2`,`count2`,`sph2`,`cyl2`,
-		`axial2`,`lightbelow2`,`lengjing2`,`diameter2`,`yaoqiu2`,`jd2`,`curvature2`,
 		`gkname`,`hyknum`,`phone`,
 		`status`,`username`,`sh_time`,`shstatus` ,`psname`,`salenumbery`,`pstime`
 		from stock_weiwai
@@ -45,6 +41,7 @@
 		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
 		  		  <if test="style != null and style != ''"> and style = #{style} </if>
 		  		  <if test="rl != null and rl != ''"> and rl = #{rl} </if>
 		  		  <if test="count != null and count != ''"> and count = #{count} </if>
@@ -58,21 +55,6 @@
 		  		  <if test="jd != null and jd != ''"> and jd = #{jd} </if>
 		  		  <if test="curvature != null and curvature != ''"> and curvature = #{curvature} </if>
 
-			<if test="saleNumber2 != null and saleNumber2 != ''"> and sale_number2 = #{saleNumber2} </if>
-			<if test="mirrorTime2 != null and mirrorTime2 != ''"> and mirror_time2 = #{mirrorTime2} </if>
-			<if test="goodsName2 != null and goodsName2 != ''"> and goods_name2 = #{goodsName2} </if>
-			<if test="style2 != null and style2 != ''"> and style2 = #{style2} </if>
-			<if test="rl2 != null and rl != ''"> and rl2 = #{rl2} </if>
-			<if test="count2 != null and count2 != ''"> and count2 = #{count2} </if>
-			<if test="sph2 != null and sph2 != ''"> and sph2 = #{sph2} </if>
-			<if test="cyl2 != null and cyl2 != ''"> and cyl2 = #{cyl2} </if>
-			<if test="axial2 != null and axial2 != ''"> and axial2 = #{axial2} </if>
-			<if test="lightbelow2 != null and lightbelow2 != ''"> and lightbelow2 = #{lightbelow2} </if>
-			<if test="lengjing2 != null and lengjing2 != ''"> and lengjing2 = #{lengjing2} </if>
-			<if test="diameter2 != null and diameter2 != ''"> and diameter2 = #{diameter2} </if>
-			<if test="yaoqiu2 != null and yaoqiu2 != ''"> and yaoqiu2 = #{yaoqiu2} </if>
-			<if test="jd2 != null and jd2 != ''"> and jd2 = #{jd2} </if>
-			<if test="curvature2 != null and curvature2 != ''"> and curvature2 = #{curvature2} </if>
 
 		  		  <if test="gkname != null and gkname != ''"> and gkname = #{gkname} </if>
 		  		  <if test="hyknum != null and hyknum != ''"> and hyknum = #{hyknum} </if>
@@ -122,6 +104,7 @@
 		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
 		  		  <if test="style != null and style != ''"> and style = #{style} </if>
 		  		  <if test="rl != null and rl != ''"> and rl = #{rl} </if>
 		  		  <if test="count != null and count != ''"> and count = #{count} </if>
@@ -135,21 +118,6 @@
 		  		  <if test="jd != null and jd != ''"> and jd = #{jd} </if>
 		  		  <if test="curvature != null and curvature != ''"> and curvature = #{curvature} </if>
 
-			 <if test="saleNumber2 != null and saleNumber2 != ''"> and sale_number2 = #{saleNumber2} </if>
-			 <if test="mirrorTime2 != null and mirrorTime2 != ''"> and mirror_time2 = #{mirrorTime2} </if>
-			 <if test="goodsName2 != null and goodsName2 != ''"> and goods_name2 = #{goodsName2} </if>
-			 <if test="style2 != null and style2 != ''"> and style2 = #{style2} </if>
-			 <if test="rl2 != null and rl != ''"> and rl2 = #{rl2} </if>
-			 <if test="count2 != null and count2 != ''"> and count2 = #{count2} </if>
-			 <if test="sph2 != null and sph2 != ''"> and sph2 = #{sph2} </if>
-			 <if test="cyl2 != null and cyl2 != ''"> and cyl2 = #{cyl2} </if>
-			 <if test="axial2 != null and axial2 != ''"> and axial2 = #{axial2} </if>
-			 <if test="lightbelow2 != null and lightbelow2 != ''"> and lightbelow2 = #{lightbelow2} </if>
-			 <if test="lengjing2 != null and lengjing2 != ''"> and lengjing2 = #{lengjing2} </if>
-			 <if test="diameter2 != null and diameter2 != ''"> and diameter2 = #{diameter2} </if>
-			 <if test="yaoqiu2 != null and yaoqiu2 != ''"> and yaoqiu2 = #{yaoqiu2} </if>
-			 <if test="jd2 != null and jd2 != ''"> and jd2 = #{jd2} </if>
-			 <if test="curvature2 != null and curvature2 != ''"> and curvature2 = #{curvature2} </if>
 
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
@@ -186,7 +154,8 @@
 			`sale_number`, 
 			`mirror_time`, 
 			`goods_name`, 
-			`style`, 
+			`num`,
+			`style`,
 			`rl`, 
 			`count`, 
 			`sph`, 
@@ -198,23 +167,6 @@
 			`yaoqiu`, 
 			`jd`,
 			`curvature`,
-
-			`sale_number2`,
-			`mirror_time2`,
-			`goods_name2`,
-			`style2`,
-			`rl2`,
-			`count2`,
-			`sph2`,
-			`cyl2`,
-			`axial2`,
-			`lightbelow2`,
-			`lengjing2`,
-			`diameter2`,
-			`yaoqiu2`,
-			`jd2`,
-			`curvature2`,
-
 
 			`gkname`,
 			`hyknum`,
@@ -248,7 +200,8 @@
 			#{saleNumber}, 
 			#{mirrorTime}, 
 			#{goodsName}, 
-			#{style}, 
+			#{num},
+			#{style},
 			#{rl}, 
 			#{count}, 
 			#{sph}, 
@@ -260,24 +213,6 @@
 			#{yaoqiu}, 
 			#{jd}, 
 			#{curvature},
-
-			#{saleNumber2},
-			#{mirrorTime2},
-			#{goodsName2},
-			#{style2},
-			#{rl2},
-			#{count2},
-			#{sph2},
-			#{cyl2},
-			#{axial2},
-			#{lightbelow2},
-			#{lengjing2},
-			#{diameter2},
-			#{yaoqiu2},
-			#{jd2},
-			#{curvature2},
-
-
 
 			#{gkname},
 			#{hyknum},
@@ -313,6 +248,7 @@
 			<if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
 			<if test="mirrorTime != null">`mirror_time` = #{mirrorTime}, </if>
 			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+			<if test="num != null">`num` = #{num}, </if>
 			<if test="style != null">`style` = #{style}, </if>
 			<if test="rl != null">`rl` = #{rl}, </if>
 			<if test="count != null">`count` = #{count}, </if>
@@ -325,23 +261,6 @@
 			<if test="yaoqiu != null">`yaoqiu` = #{yaoqiu}, </if>
 			<if test="jd != null">`jd` = #{jd}, </if>
 			<if test="curvature != null">`curvature` = #{curvature},</if>
-
-			<if test="saleNumber2 != null">`sale_number2` = #{saleNumber2}, </if>
-			<if test="mirrorTime2 != null">`mirror_time2` = #{mirrorTime2}, </if>
-			<if test="goodsName2 != null">`goods_name2` = #{goodsName2}, </if>
-			<if test="style2 != null">`style2` = #{style2}, </if>
-			<if test="rl2 != null">`rl2` = #{rl2}, </if>
-			<if test="count2 != null">`count2` = #{count2}, </if>
-			<if test="sph2 != null">`sph2` = #{sph2}, </if>
-			<if test="cyl2 != null">`cyl2` = #{cyl2}, </if>
-			<if test="axial2 != null">`axial2` = #{axial2}, </if>
-			<if test="lightbelow2 != null">`lightbelow2` = #{lightbelow2}, </if>
-			<if test="lengjing2 != null">`lengjing2` = #{lengjing2}, </if>
-			<if test="diameter2 != null">`diameter2` = #{diameter2}, </if>
-			<if test="yaoqiu2 != null">`yaoqiu2` = #{yaoqiu2}, </if>
-			<if test="jd2 != null">`jd2` = #{jd2}, </if>
-			<if test="curvature2 != null">`curvature2` = #{curvature2},</if>
-
 
 			<if test="status != null">`status` = #{status},</if>
 			<if test="username != null">`username` = #{username},</if>
@@ -425,8 +344,11 @@
 		left_right,
 		process_ask,
 		goods_num,
-		jp_goods_name,
-		jp_goods_num,
+		store_name,
+		goods_code,
+		store_count,
+		classtype,
+		store_describe,
 		sale_number,
 		member_number,
 		NAME,
@@ -436,7 +358,6 @@
 		sale_name,
 		amount_money,
 		recipel_type,
-		classtype,
 		rightsph,
 		leftsph,
 		rightcyl,
@@ -465,8 +386,11 @@
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
-		sa.jp_goods_name,
-		sa.jp_goods_num,
+		sa.store_name,
+		sa.goods_code,
+		sa.store_count,
+		sa.classtype,
+		sa.store_describe,
 		sa.sale_number,
 		sa.member_number,
 		m. NAME,
@@ -476,7 +400,6 @@
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
-		sa.classtype,
 		k.kjjy_prescription_type AS chufangType,
 		k.kjjy_optometry_name AS yangsName,
 		k.kjjy_sphod AS rightsph,
@@ -511,8 +434,11 @@
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
-		sa.jp_goods_name,
-		sa.jp_goods_num,
+		sa.store_name,
+		sa.goods_code,
+		sa.store_count,
+		sa.classtype,
+		sa.store_describe,
 		sa.sale_number,
 		sa.member_number,
 		m. NAME,
@@ -522,7 +448,6 @@
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
-		sa.classtype,
 		ky.kjyy_prescription_type AS chufangType,
 		ky.kjyy_optometry_name AS yangsName,
 		ky.kjyy_sphod AS rightsph,
@@ -557,8 +482,11 @@
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
-		sa.jp_goods_name,
-		sa.jp_goods_num,
+		sa.store_name,
+		sa.goods_code,
+		sa.store_count,
+		sa.classtype,
+		sa.store_describe,
 		sa.sale_number,
 		sa.member_number,
 		m. NAME,
@@ -568,7 +496,6 @@
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
-		sa.classtype,
 		sg.sgjj_prescription_type AS chufangType,
 		sg.sgjj_optometry_name AS yangsname,
 		sg.sgjj_sphod AS rightsph,
@@ -603,8 +530,11 @@
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
-		sa.jp_goods_name,
-		sa.jp_goods_num,
+		sa.store_name,
+		sa.goods_code,
+		sa.store_count,
+		sa.classtype,
+		sa.store_describe,
 		sa.sale_number,
 		sa.member_number,
 		m. NAME,
@@ -614,7 +544,6 @@
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
-		sa.classtype,
 		z.zy_prescription_type AS chufangType,
 		z.zy_optometry_name AS yangsname,
 		z.zy_sphod AS rightsph,
@@ -649,8 +578,11 @@
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
-		sa.jp_goods_name,
-		sa.jp_goods_num,
+		sa.store_name,
+		sa.goods_code,
+		sa.store_count,
+		sa.classtype,
+		sa.store_describe,
 		sa.sale_number,
 		sa.member_number,
 		m. NAME,
@@ -660,7 +592,6 @@
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
-		sa.classtype,
 		x.rx_prescription_type AS chufangType,
 		x.rx_optometry_name AS yangsname,
 		x.rx_sphod AS rightsph,
@@ -695,8 +626,11 @@
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
-		sa.jp_goods_name,
-		sa.jp_goods_num,
+		sa.store_name,
+		sa.goods_code,
+		sa.store_count,
+		sa.classtype,
+		sa.store_describe,
 		sa.sale_number,
 		sa.member_number,
 		m. NAME,
@@ -706,7 +640,6 @@
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
-		sa.classtype,
 		sx.sjxl_prescription_type AS chufangType,
 		sx.sjxl_optometry_name AS yangsname,
 		sx.sjxl_sphod AS rightsph,
@@ -741,8 +674,11 @@
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
-		sa.jp_goods_name,
-		sa.jp_goods_num,
+		sa.store_name,
+		sa.goods_code,
+		sa.store_count,
+		sa.classtype,
+		sa.store_describe,
 		sa.sale_number,
 		sa.member_number,
 		m. NAME,
@@ -752,7 +688,6 @@
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
-		sa.classtype,
 		rg.rgp_prescription_type AS chufangType,
 		rg.rgp_optometry_name AS yangsname,
 		rg.rgp_sphod AS rightsph,
@@ -787,8 +722,11 @@
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
-		sa.jp_goods_name,
-		sa.jp_goods_num,
+		sa.store_name,
+		sa.goods_code,
+		sa.store_count,
+		sa.classtype,
+		sa.store_describe,
 		sa.sale_number,
 		sa.member_number,
 		m. NAME,
@@ -798,7 +736,6 @@
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
-		sa.classtype,
 		vs.vst_prescription_type AS chufangType,
 		vs.vst_optometry_name AS yangsname,
 		vs.vst_sphod AS rightsph,
@@ -833,8 +770,11 @@
 		sa.left_right,
 		sa.process_ask,
 		sa.goods_num,
-		sa.jp_goods_name,
-		sa.jp_goods_num,
+		sa.store_name,
+		sa.goods_code,
+		sa.store_count,
+		sa.classtype,
+		sa.store_describe,
 		sa.sale_number,
 		sa.member_number,
 		m. NAME,
@@ -844,7 +784,6 @@
 		sa.sale_name,
 		sa.amount_money,
 		sa.recipel_type,
-		sa.classtype,
 		cr.crt_prescription_type AS chufangType,
 		cr.crt_optometry_name AS yangsname,
 		cr.crt_sphod AS rightsph,

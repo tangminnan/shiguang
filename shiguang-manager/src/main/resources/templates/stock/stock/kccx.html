@@ -46,7 +46,7 @@
                         <input type="radio" name="classtype" value="2" /> 订做片
                     </label>
                 </div>
-                <input type="hidden" id="classtype" value="0" />
+                <input type="hidden" id="classtype" value="" />
                 <!--<div id="yx" style="display: none">-->
                     <!--<label class="radio-inline">-->
                         <!--<input type="radio" name="classtype"  value="3" /> 成品片-->
@@ -309,7 +309,12 @@
         }
     }
     function reLoad() {
-        $("#classtype").val(0) ;
+        var goodsType=$("#goodsType").val();
+        if (goodsType== ""){
+            $("#classtype").val("") ;
+        }else {
+            $("#classtype").val("0") ;
+        }
         var goodsType = $("#goodsType option:selected").val();
             if (goodsType == 3 || goodsType == 4){
                 $("#classtype").val($("input[name='classtype']:checked").val());

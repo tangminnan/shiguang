@@ -35,14 +35,7 @@ public class WeiwaikcDO implements Serializable {
 	private String goodsName;
 	//数量
 	private String count;
-	//配镜单号2
-	private String saleNumber2;
-	//取镜时间2
-	private String mirrorTime2;
-	//商品名称2
-	private String goodsName2;
-	//数量2
-	private String count2;
+
 	//1未收货，0已收货未配送，2配送
 	private String status;
 	//工号
@@ -204,55 +197,9 @@ public class WeiwaikcDO implements Serializable {
 	public String getCount(String count) {
 		return this.count;
 	}
-	/**
-	 * 设置：配镜单号2
-	 */
-	public void setSaleNumber2(String saleNumber2) {
-		this.saleNumber2 = saleNumber2;
-	}
-	/**
-	 * 获取：配镜单号2
-	 */
-	public String getSaleNumber2() {
-		return saleNumber2;
-	}
-	/**
-	 * 设置：取镜时间2
-	 */
-	public void setMirrorTime2(String mirrorTime2) {
-		this.mirrorTime2 = mirrorTime2;
-	}
-	/**
-	 * 获取：取镜时间2
-	 */
-	public String getMirrorTime2() {
-		return mirrorTime2;
-	}
-	/**
-	 * 设置：商品名称2
-	 */
-	public void setGoodsName2(String goodsName2) {
-		this.goodsName2 = goodsName2;
-	}
-	/**
-	 * 获取：商品名称2
-	 */
-	public String getGoodsName2() {
-		return goodsName2;
-	}
-	/**
-	 * 设置：数量2
-	 */
-	public void setCount2(String count2) {
-		this.count2 = count2;
-	}
-	/**
-	 * 获取：数量2
-	 * @param count2
-	 */
-	public String getCount2(String count2) {
-		return this.count2;
-	}
+
+
+
 	/**
 	 * 设置：1未收货，0已收货未配送，2配送
 	 */
@@ -276,9 +223,6 @@ public class WeiwaikcDO implements Serializable {
 		return count;
 	}
 
-	public String getCount2() {
-		return count2;
-	}
 
 	public String getStatus() {
 		return status;

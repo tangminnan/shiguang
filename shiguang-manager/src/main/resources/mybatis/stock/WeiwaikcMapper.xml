@@ -5,14 +5,14 @@
 
 	<select id="get" resultType="com.shiguang.stock.domain.WeiwaikcDO">
 		select `id`,`position_id`,`gkname`,`hyknum`,`phone`,`danju_number`,`sale_number`,`mirror_time`,`goods_name`,
-		`count`,`sale_number2`,`mirror_time2`,`goods_name2`,`count2`,
+		`count`,
 		`status`,`username`,`sh_time`,`shstatus` ,`psname`,`salenumbery`,`pstime`
 		from stock_weiwaikc where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.WeiwaikcDO">
 		select `id`,`position_id`,`gkname`,`hyknum`,`phone`,`danju_number`,`sale_number`,
-		`mirror_time`,`goods_name`,`count`,`sale_number2`,`mirror_time2`,`goods_name2`,`count2`,
+		`mirror_time`,`goods_name`,`count`,
 		`status`,`username`,`sh_time`,`shstatus` ,`psname`,`salenumbery`,`pstime`
 		from stock_weiwaikc
         <where>  
@@ -26,11 +26,6 @@
 		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
 		  		  <if test="count != null and count != ''"> and count = #{count} </if>
-		  		  <if test="saleNumber2 != null and saleNumber2 != ''"> and sale_number2 = #{saleNumber2} </if>
-		  		  <if test="mirrorTime2 != null and mirrorTime2 != ''"> and mirror_time2 = #{mirrorTime2} </if>
-		  		  <if test="goodsName2 != null and goodsName2 != ''"> and goods_name2 = #{goodsName2} </if>
-		  		  <if test="count2 != null and count2 != ''"> and count2 = #{count2} </if>
-
 
 		  		  	<if test="status != null and status != ''"> and status = #{status} </if>
 					<if test="username != null and username != ''"> and username = #{username} </if>
@@ -66,10 +61,6 @@
 		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
 		  		  <if test="count != null and count != ''"> and count = #{count} </if>
-		  		  <if test="saleNumber2 != null and saleNumber2 != ''"> and sale_number2 = #{saleNumber2} </if>
-		  		  <if test="mirrorTime2 != null and mirrorTime2 != ''"> and mirror_time2 = #{mirrorTime2} </if>
-		  		  <if test="goodsName2 != null and goodsName2 != ''"> and goods_name2 = #{goodsName2} </if>
-		  		  <if test="count2 != null and count2 != ''"> and count2 = #{count2} </if>
 
 			 <if test="status != null and status != ''"> and status = #{status} </if>
 			 <if test="username != null and username != ''"> and username = #{username} </if>
@@ -92,11 +83,7 @@
 			`sale_number`, 
 			`mirror_time`, 
 			`goods_name`, 
-			`count`, 
-			`sale_number2`, 
-			`mirror_time2`, 
-			`goods_name2`, 
-			`count2`, 
+			`count`,
 			`status`,
 			`username`,
 			`sh_time`,
@@ -116,10 +103,7 @@
 			#{mirrorTime}, 
 			#{goodsName}, 
 			#{count}, 
-			#{saleNumber2}, 
-			#{mirrorTime2}, 
-			#{goodsName2}, 
-			#{count2}, 
+
 			#{status},
 			#{username},
 			#{shTime},
@@ -142,10 +126,6 @@
 			<if test="mirrorTime != null">`mirror_time` = #{mirrorTime}, </if>
 			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
 			<if test="count != null">`count` = #{count}, </if>
-			<if test="saleNumber2 != null">`sale_number2` = #{saleNumber2}, </if>
-			<if test="mirrorTime2 != null">`mirror_time2` = #{mirrorTime2}, </if>
-			<if test="goodsName2 != null">`goods_name2` = #{goodsName2}, </if>
-			<if test="count2 != null">`count2` = #{count2}, </if>
 
 			<if test="status != null">`status` = #{status},</if>
 			<if test="username != null">`username` = #{username},</if>

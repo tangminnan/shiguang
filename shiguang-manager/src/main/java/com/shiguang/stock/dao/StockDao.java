@@ -158,6 +158,8 @@ public interface StockDao {
     StockDO peijians(StockDO stockDO);
     StockDO jingpians(StockDO stockDO);
     StockDO yinxings(StockDO stockDO);
+    StockDO jingpiandzs(StockDO stockDO);
+    StockDO yinxingdzs(StockDO stockDO);
     StockDO huliyes(StockDO stockDO);
     StockDO taiyangjings(StockDO stockDO);
     StockDO laohuajings(StockDO stockDO);
