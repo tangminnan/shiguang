@@ -19,7 +19,8 @@ import java.util.Map;
 public interface WeiwaiService {
 	
 	WeiwaiDO get(Long id);
-	
+
+
 	List<WeiwaiDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
@@ -51,7 +52,7 @@ public interface WeiwaiService {
 	WeiwaiDO jkPeijingdan(String danjuNumber);
 	//委外隐形配镜单
 	WeiwaiDO yxPeijingdan(String danjuNumber);
-
-
+//确认收获库存偶没有
+	WeiwaiDO weiwaiOrder(String  danjuNumber);
 
 }

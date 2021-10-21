@@ -61,6 +61,16 @@ public class WeiwaiDO implements Serializable {
 	private String goodsName;
 	//代码
 	private String num;
+	private String code;
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	//委外方式
 	private String style;
 	//镜片类型r/l

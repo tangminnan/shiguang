@@ -52,4 +52,7 @@ public interface WeiwaiDao {
 	WeiwaiDO jkPeijingdan(String danjuNumber);
 	//委外隐形配镜单
 	WeiwaiDO yxPeijingdan(String danjuNumber);
+
+	//确认收获库存偶没有
+	WeiwaiDO weiwaiOrder(String  danjuNumber);
 }
