@@ -176,7 +176,7 @@ public class ExamineController {
     LensMeterDO jiaoduji(Model model) {
         Map<String,Object> map = new HashMap<>();
         LensMeterDO lensMeterDO = new LensMeterDO();
-        serialPort.sendToData();
+        //serialPort.sendToData();
         List<LensMeterDO> lensMeterDOList = lensMeterService.list(map);
         if (null != lensMeterDOList && lensMeterDOList.size() > 0){
             lensMeterDO.setId(lensMeterDOList.get(0).getId());

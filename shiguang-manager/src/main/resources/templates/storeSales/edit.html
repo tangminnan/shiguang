@@ -1678,7 +1678,7 @@
 					html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                     html += "<input id='isJj' name='isJj' type='hidden' />"
                     html += "<input id='classtype' name='classtype' type='hidden' />"
-                    html += "<input id='leftRight' name='leftRight' type='hidden' value='"+空+"'/>"
+                    html += "<input id='leftRight' name='leftRight' type='hidden' value='空'/>"
                     html += "<input id='yingshoujj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                     html += "<input id='producaNum' name='producaNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
@@ -2311,7 +2311,7 @@
             document.getElementById("rightFuLiaoQJ").readOnly=true;
             $("#rightFuLiaoZJ").val(data.rightcyl);
             document.getElementById("rightFuLiaoZJ").readOnly=true;
-            $("#rightzhouxiang").val(data.rightzx);
+            $("#rightFLzhouxiang").val(data.rightzx);
             document.getElementById("rightzhouxiang").readOnly=true;
             $("#rightFLslj").val(data.rightprism);
             if (data.rightprism != ''){
@@ -2345,7 +2345,7 @@
             }
             var leftjidi = data.leftjd;
             $("#leftFLjidi").find("[value='"+leftjidi+"']").attr("selected",true);
-            $("#leftFLyuanyTj").val(data.leftjytj);
+            $("#leftFLyuanyTj").val(data.leftyytj);
             if (data.leftyytj != ''){
                 document.getElementById("leftFLyuanyTj").readOnly=true;
             }

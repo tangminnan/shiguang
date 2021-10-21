@@ -12,6 +12,6 @@ public class Chuank {
         // 调用串口操作类的sendComm方法发送数据到串口
         //serialPort.sendComm("FEF10A000000000000000AFF");
         // 关闭串口
-        serialPort.closeSerialPort();
+        //serialPort.closeSerialPort();
     }
 }

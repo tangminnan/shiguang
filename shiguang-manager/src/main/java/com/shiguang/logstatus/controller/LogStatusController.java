@@ -369,9 +369,10 @@ public class LogStatusController {
         SalesDO salesDO = salesService.getSaleNumber(saleNumber);
         String storeDesc = salesDO.getStoreDescribe();
         String[] storeDescribe = storeDesc.split(",");
+        String[] storeCode = salesDO.getGoodsCode().split(",");
         for (int a=0;a<storeDescribe.length;a++){
             if (storeDescribe[a] != "镜架"){
-                StockDO stockDO = stockService.getGoodsNum(storeDescribe[a]);
+                StockDO stockDO = stockService.getGoodsNum(storeCode[a]);
                 Long countGoods = Long.parseLong(stockDO.getGoodsCount());
                 Long count = countGoods - 1;
                 stockDO.setGoodsCount(String.valueOf(count));
@@ -421,12 +422,25 @@ public class LogStatusController {
     @RequiresPermissions("information:logstatus:batchFaliao")
     public R batchFaliao(@RequestParam("ids[]") Long[] ids){
         for (int i=0;i<ids.length;i++){
-            SalesDO salesDO =salesService.get(ids[i]);
+            SalesDO salesDOs =salesService.get(ids[i]);
             LogStatusDO logStatusDO = new LogStatusDO();
-            logStatusDO.setSaleNumber(salesDO.getSaleNumber());
+            logStatusDO.setSaleNumber(salesDOs.getSaleNumber());
             logStatusDO.setLogisticStatus("发料");
             logStatusDO.setFaliaoDate(new Date());
             logStatusDO.setFaliaoName(ShiroUtils.getUser().getName());
+            SalesDO salesDO = salesService.getSaleNumber(salesDOs.getSaleNumber());
+            String storeDesc = salesDO.getStoreDescribe();
+            String[] storeDescribe = storeDesc.split(",");
+            String[] storeCode = salesDO.getGoodsCode().split(",");
+            for (int a=0;a<storeDescribe.length;a++){
+                if (storeDescribe[a] != "镜架"){
+                    StockDO stockDO = stockService.getGoodsNum(storeCode[a]);
+                    Long countGoods = Long.parseLong(stockDO.getGoodsCount());
+                    Long count = countGoods - 1;
+                    stockDO.setGoodsCount(String.valueOf(count));
+                    stockService.updateGoodsCount(stockDO);
+                }
+            }
             statusService.editFaliao(logStatusDO);
         }
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();

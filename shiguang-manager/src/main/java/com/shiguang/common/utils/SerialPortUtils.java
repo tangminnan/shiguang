@@ -1,5 +1,7 @@
 package com.shiguang.common.utils;
 
+import com.shiguang.logstatus.domain.LensMeterDO;
+import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.optometry.controller.SerialDataUtils;
 import com.shiguang.optometry.domain.BleDataBean;
 import com.shiguang.optometry.domain.OptometryDO;
@@ -26,6 +28,7 @@ import java.util.List;
 public class SerialPortUtils implements SerialPortEventListener {
     // 检测系统中可用的通讯端口类
     private CommPortIdentifier commPortId;
+    private LensMeterService lensMeterService = (LensMeterService) SpringUtil.getBean("lensMeterServiceImpl");
     // 枚举类型
     private Enumeration<CommPortIdentifier> portList;
     @Autowired
@@ -41,7 +44,7 @@ public class SerialPortUtils implements SerialPortEventListener {
     // 保存串口返回信息十六进制
     private String dataHex;
     //拼接读取设备的十六进制
-    private String dataSerial="";
+    public String dataSerial="";
     private SerialDataUtils serialDataUtils = SerialDataUtils.getSerialPortUtils();
 
     /**
@@ -142,7 +145,26 @@ public class SerialPortUtils implements SerialPortEventListener {
                 break;
             }
             dataSerial = dataSerial + dataHex.toString();
+            dataSerial = hexStringToString(dataSerial);
             System.out.println(dataSerial);
+            String zifuRightSph = dataSerial.substring(39, 40);
+            String rightsph = zifuRightSph + dataSerial.substring(41, 45);
+            String zifuRightCyl = dataSerial.substring(45, 46);
+            String rightcyl = zifuRightCyl +  dataSerial.substring(47, 51);
+            String rightzx = dataSerial.substring(51, 54);
+            String zifuLeftSph = dataSerial.substring(75, 76);
+            String leftsph = zifuLeftSph + dataSerial.substring(77, 81);
+            String zifuLeftCyl = dataSerial.substring(81, 82);
+            String leftcyl = zifuLeftCyl + dataSerial.substring(83, 87);
+            String leftzx = dataSerial.substring(87, 90);
+            LensMeterDO lensMeterDO = new LensMeterDO();
+            lensMeterDO.setRightSph(rightsph);
+            lensMeterDO.setRightCyl(rightcyl);
+            lensMeterDO.setRightZx(rightzx);
+            lensMeterDO.setLeftSph(leftsph);
+            lensMeterDO.setLeftCyl(leftcyl);
+            lensMeterDO.setLeftZx(leftzx);
+            lensMeterService.save(lensMeterDO);
             //serialDataUtils.toData(builder.toString());
 //            BleDataBean bleDataBean = SerialDataUtils.toOptometry(builder.toString());
 //            List<ResultDiopterDO> list = bleDataBean.getSca();
@@ -386,31 +408,43 @@ public class SerialPortUtils implements SerialPortEventListener {
     }
 
     public static void main(String[] args) {
-        String aa = "01444C4D0249444E49";
-        String bb = "44454B2F4C4D2D3630";
-        String cc = "30501720522D30322E";
-        String dd = "32352B30302E303030303017505230302E";
-        String ee = "30304917505230302E";
-        String ff = "30305517204C2D3031";
-        String gg = "2E37352B30302E3030";
-        String hh = "30303017504C30302E";
-        String ii = "30304F17504C3030";
-        String kk = "2E303055170431333441";
-        StringBuffer ss = new StringBuffer();
-            ss.append(aa);
-            ss.append(bb);
-            ss.append(cc);
-            ss.append(dd);
-            ss.append(ee);
-            ss.append(ff);
-            ss.append(gg);
-            ss.append(hh);
-            ss.append(ii);
-            ss.append(kk);
+//        String aa = "01444C4D0249444E49";
+//        String bb = "44454B2F4C4D2D3630";
+//        String cc = "30501720522D30322E";
+//        String dd = "32352B30302E303030303017505230302E";
+//        String ee = "30304917505230302E";
+//        String ff = "30305517204C2D3031";
+//        String gg = "2E37352B30302E3030";
+//        String hh = "30303017504C30302E";
+//        String ii = "30304F17504C3030";
+//        String kk = "2E303055170431333441";
+//        StringBuffer ss = new StringBuffer();
+//            ss.append(aa);
+//            ss.append(bb);
+//            ss.append(cc);
+//            ss.append(dd);
+//            ss.append(ee);
+//            ss.append(ff);
+//            ss.append(gg);
+//            ss.append(hh);
+//            ss.append(ii);
+//            ss.append(kk);
 //        lizi=  aa +bb +cc+dd +ee +ff+gg+hh+ii+kk;
 //        System.out.println(SerialPortUtils.lizi);
         //this.readComms(SerialPortUtils.lizi);
         //System.out.println(SerialPortUtils.dataBuffer);
+//        String string ="DLM\u0002IDNIDEK/LM-7P\u0017DA2021.10.20.16:45\u0017 R+03.78-00.52118\u0017PR00.02O\u0017PR00.09U\u0017 L+03.77-00.51118\u0017PL00.02I\u0017PL00.09U\u0017\u000416E7";
+//        System.out.println(string.substring(39, 40));
+//        System.out.println(string.substring(41, 45));
+//        System.out.println(string.substring(45, 46));
+//        System.out.println(string.substring(47, 51));
+//        System.out.println(string.substring(51, 54));
+//        System.out.println(string.substring(36, 38));
+//        System.out.println(string.substring(75, 76));
+//        System.out.println(string.substring(77, 81));
+//        System.out.println(string.substring(81, 82));
+//        System.out.println(string.substring(83, 87));
+//        System.out.println(string.substring(87, 90));
     }
 
 //    public static void main(String[] args) {
@@ -441,7 +475,8 @@ public class SerialPortUtils implements SerialPortEventListener {
 //        System.out.println(dataBuffer);
 //        System.out.println(ss);
 //        String string = "\u0001DLM\u0002IDNIDEK/LM-600P\u0017 R-06.50-01.50010\u0017PR00.00I\u0017PR00.00U\u0017 L-05.75-01.50179\u0017PL00.00O\u0017PL00.00U\u0017\u00041372";
-//        //System.out.println(string);
+        //System.out.println(string);
+//    String string ="DLM\u0002IDNIDEK/LM-7P\u0017DA2021.10.20.16:45\u0017 R+03.78-00.52118\u0017PR00.02O\u0017PR00.09U\u0017 L+03.77-00.51118\u0017PL00.02I\u0017PL00.09U\u0017\u000416E7";
 //        System.out.println(string.substring(22, 23));
 //        System.out.println(string.substring(25, 29));
 //        System.out.println(string.substring(31, 35));
