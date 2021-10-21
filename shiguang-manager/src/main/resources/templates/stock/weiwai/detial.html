@@ -96,77 +96,7 @@
                             <td>直径</td>
                             <td>加工要求</td>
                         </tr>
-                        <tr style="font-weight:bold;font-size: 15px;" class="heji1" id="heji1">
-
-                            <td><input id='saleNumber' name='saleNumber' th:value='${weiwai.saleNumber}' type='text'
-                                       readonly/></td>
-                            <td><input id='mirrorTime' name='mirrorTime' th:value='${weiwai.mirrorTime}' type='text'
-                                       readonly/></td>
-
-                            <td><input id='goodsName' name='goodsName' th:value='${weiwai.goodsName}' type='text'
-                                       readonly/></td>
-
-                            <td><input id='style' name='style' th:value='${weiwai.style}' type='text' readonly/></td>
-
-                            <td><input id='rl' name='rl' th:value='${weiwai.rl}' type='text' readonly/></td>
-
-                            <td><input id='count' name='count' th:value='${weiwai.count}' type='text' readonly/></td>
-
-
-                            <td><input id='sph' name='sph' th:value='${weiwai.sph}' type='text' readonly/></td>
-
-                            <td><input id='cyl' name='cyl' th:value='${weiwai.cyl}' type='text' readonly/></td>
-
-
-                            <td><input id='axial' name='axial' th:value='${weiwai.axial}' type='text' readonly/></td>
-
-                            <td><input id='lightbelow' name='lightbelow' th:value='${weiwai.lightbelow}' type='text'
-                                       readonly/></td>
-
-                            <td><input id='lengjing' name='lengjing' th:value='${weiwai.lengjing}' type='text'
-                                       readonly/></td>
-
-                            <td><input id='diameter' name='diameter' th:value='${weiwai.diameter}' type='text'
-                                       readonly/></td>
-
-                            <td><input id='yaoqiu' name='yaoqiu' th:value='${weiwai.yaoqiu}' type='text' readonly/></td>
-                        </tr>
-                        <tr>
-                            <td><input id='saleNumber2' name='saleNumber2' th:value='${weiwai.saleNumber2}' type='text'
-                                       readonly/></td>
-
-                            <td><input id='mirrorTime2' name='mirrorTime2' th:value='${weiwai.mirrorTime2}' type='text'
-                                       readonly></td>
-
-                            <td><input id='goodsName2' name='goodsName2' th:value='${weiwai.goodsName2}' type='text'
-                                       readonly/></td>
-
-                            <td><input id='style2' name='style2' th:value='${weiwai.style2}' type='text' readonly></td>
-
-                            <td><input id='rl2' name='rl2' th:value='${weiwai.rl2}' type='text' readonly></td>
-
-                            <td><input id='count2' name='count2' th:value='${weiwai.count2}' type='text' readonly></td>
-
-                            <td><input id='sph2' name='sph2' th:value='${weiwai.sph2}' type='text' readonly/></td>
-
-                            <td><input id='cyl2' name='cyl2' th:value='${weiwai.cyl2}' type='text' readonly></td>
-
-
-                            <td><input id='axial2' name='axial2' th:value='${weiwai.axial2}' type='text' readonly></td>
-
-                            <td><input id='lightbelow2' name='lightbelow2' th:value='${weiwai.lightbelow2}' type='text'
-                                       readonly></td>
-
-                            <td><input id='lengjing2' name='lengjing2' th:value='${weiwai.lengjing2}' type='text'
-                                       readonly></td>
-
-                            <td><input id='diameter2' name='diameter2' th:value='${weiwai.diameter2}' type='text'
-                                       readonly></td>
-
-                            <td><input id='yaoqiu2' name='yaoqiu2' th:value='${weiwai.yaoqiu2}' type='text' readonly>
-                            </td>
-
-                        </tr>
+                        <tr class="jp"></tr>
                     </table>
                 </td>
             </tr>
@@ -218,36 +148,6 @@
                             <td><input name='yaoqiu' th:value='${weiwai.yaoqiu}' type='text' readonly/></td>
                         </tr>
 
-                        <tr>
-
-                            <td><input name='saleNumber2' th:value='${weiwai.saleNumber2}' type='text' readonly/></td>
-
-                            <td><input name='mirrorTime2' th:value='${weiwai.mirrorTime2}' type='text' readonly/></td>
-
-                            <td><input name='goodsName2' th:value='${weiwai.goodsName2}' type='text' readonly/></td>
-
-                            <td><input name='style2' th:value='${weiwai.style2}' type='text' readonly/></td>
-
-                            <td><input name='rl2' th:value='${weiwai.rl2}' type='text' readonly/></td>
-
-                            <td><input name='count2' th:value='${weiwai.count2}' type='text' readonly/></td>
-
-                            <td><input name='sph2' th:value='${weiwai.sph2}' type='text' readonly/></td>
-
-                            <td><input name='cyl2' th:value='${weiwai.cyl2}' type='text' readonly/></td>
-
-
-                            <td><input name='axial2' th:value='${weiwai.axial2}' type='text' readonly/></td>
-
-                            <td><input name='jd2' th:value='${weiwai.jd2}' type='text' readonly/></td>
-
-                            <td><input id='curvature2' name='curvature2' th:value='${weiwai.curvature2}' type='text'
-                                       readonly/></td>
-
-                            <td><input name='diameter2' th:value='${weiwai.diameter2}' type='text' readonly/></td>
-
-                            <td><input name='yaoqiu2' th:value='${weiwai.yaoqiu2}' type='text' readonly/></td>
-                        </tr>
                     </table>
                 </td>
             </tr>
@@ -260,10 +160,42 @@
 <script type="text/javascript">
     $().ready(function () {
         var eyeStyle = $('#eyeStyle').val();
+        var html="";
         if (eyeStyle == '框镜订做') {
             $(".val2").remove();
             tab1.style = "display: block";
             tab2.style = "display: none";
+            var array = weiwai.saleNumber.split(",");//配镜单号
+            var mirrorTime = weiwai.mirrorTime.split(",");//取镜时间
+            var goodsName = weiwai.goodsName.split(",");//名称
+            var style = weiwai.style.split(",");//委外方式
+            var rl = weiwai.rl.split(",");//镜片类型左右
+            var count = weiwai.count.split(",");//数量
+            var sph = weiwai.sph.split(",");
+            var cyl = weiwai.cyl.split(",");
+            var axial = weiwai.axial.split(",");
+            var lightbelow = weiwai.lightbelow.split(",");
+            var lengjing = weiwai.lengjing.split(",");
+            var diameter = weiwai.diameter.split(",");
+            var yaoqiu = weiwai.yaoqiu.split(",");
+            for (var a = 0; a < array.length; a++) {
+                html += "<tr>";
+                html += "<td><input id='saleNumber' name='saleNumber'   value='" + array[a] + "'  type='text'readonly/></td>";
+                html += "<td><input id='mirrorTime' name='mirrorTime'  value='" + mirrorTime[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='goodsName' name='goodsName'  value='" + goodsName[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='style' name='style'  value='" + style[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='rl' name='rl'  value='" + rl[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='count' name='count'  value='" + count[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='sph' name='sph'  value='" + sph[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='cyl' name='cyl'  value='" + cyl[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='axial' name='axial'  value='" + axial[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='lightbelow' name='lightbelow'  value='" + lightbelow[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='lengjing' name='lengjing'  value='" + lengjing[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='diameter' name='diameter'  value='" + diameter[a] + "' type='text'readonly/></td>";
+                html += "<td><input id='yaoqiu' name='yaoqiu'  value='" + yaoqiu[a] + "' type='text'readonly/></td>";
+            }
+
+
         } else if (eyeStyle == '隐形订做') {
             $(".val1").remove();
             tab1.style = "display: none";

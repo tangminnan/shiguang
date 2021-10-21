@@ -1,283 +1,381 @@
 <!doctype html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="keywords" content="" />
-	<meta name="description" content="" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>收据2</title>
-	<style type="text/css">
-		*{padding: 0;margin: 0;box-sizing: border-box;font-size: 14px;}
-		.main{margin:25px;}
-		input[type="text"],select,textarea{width: 100%;line-height: 28px;outline: none;padding:2px 10px;border:1px solid #ddd;}
-		select{height:32px;}
-		textarea{height:auto;font-size: 14px;resize:none;}
-		h3{font-size: 18px;margin-bottom: 10px;}
-		table{width: 100%;text-align: center;margin-bottom: 20px;}
-		table td{height:36px;padding:2px;border-bottom:2px solid #fff;border-right: 2px solid #fff;}
-		.tabA{background: #e9f0fa;}
-		.tabA td:nth-child(odd){background: #cddfeb;}
-		.Xze,.qingK{width: 80px;height: 32px;margin-left: 10px;background: #0091f2;color:#fff;border:1px solid #fff;outline: none;border-radius:5px;}
-		.tabB{background: #d4f2da;}
-		.tabB td{width:9.09%;}
-		.tabB input,.tabC input{text-align: center;}
-		.Add{width: 60%;height: 32px;background: #24c543;color:#fff;border:1px solid #fff;outline: none;border-radius:5px;}
-		.tabC{background: #cbdde7;}
-		.qingK{margin-left: 0;}
-		.allpik input{width: 150px;height: 42px;font-size: 16px;letter-spacing:2px; background: #0091f2;color:#fff;border:2px solid #e9f0fa;outline: none;border-radius:5px;}
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>收据2</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
 
-		.tabB1{background: #f6e2ee;}
-		.tabB1 td{width: 12.5%;}
-		.Add1{width: 60%;height: 32px;background: #df5eab;color:#fff;border:1px solid #fff;outline: none;border-radius:5px;}
+        .main {
+            margin: 25px;
+        }
 
-	</style>
+        input[type="text"], select, textarea {
+            width: 100%;
+            line-height: 28px;
+            outline: none;
+            padding: 2px 10px;
+            border: 1px solid #ddd;
+        }
+
+        select {
+            height: 32px;
+        }
+
+        textarea {
+            height: auto;
+            font-size: 14px;
+            resize: none;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table td {
+            height: 36px;
+            padding: 2px;
+            border-bottom: 2px solid #fff;
+            border-right: 2px solid #fff;
+        }
+
+        .tabA {
+            background: #e9f0fa;
+        }
+
+        .tabA td:nth-child(odd) {
+            background: #cddfeb;
+        }
+
+        .Xze, .qingK {
+            width: 80px;
+            height: 32px;
+            margin-left: 10px;
+            background: #0091f2;
+            color: #fff;
+            border: 1px solid #fff;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .tabB {
+            background: #d4f2da;
+        }
+
+        .tabB td {
+            width: 9.09%;
+        }
+
+        .tabB input, .tabC input {
+            text-align: center;
+        }
+
+        .Add {
+            width: 60%;
+            height: 32px;
+            background: #24c543;
+            color: #fff;
+            border: 1px solid #fff;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .tabC {
+            background: #cbdde7;
+        }
+
+        .qingK {
+            margin-left: 0;
+        }
+
+        .allpik input {
+            width: 150px;
+            height: 42px;
+            font-size: 16px;
+            letter-spacing: 2px;
+            background: #0091f2;
+            color: #fff;
+            border: 2px solid #e9f0fa;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .tabB1 {
+            background: #f6e2ee;
+        }
+
+        .tabB1 td {
+            width: 12.5%;
+        }
+
+        .Add1 {
+            width: 60%;
+            height: 32px;
+            background: #df5eab;
+            color: #fff;
+            border: 1px solid #fff;
+            outline: none;
+            border-radius: 5px;
+        }
+
+    </style>
 
 </head>
 <body>
 <form class="form-horizontal m-t" id="signupForm">
-	<div class="main">
-		<h3>单据信息</h3>
-		<input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="hidden"/>
-		<input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="hidden"/>
-		<input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="hidden"/>
-		<table class="tabA" border="0" cellspacing="0" cellpadding="0">
-			<tbody>
-			<tr>
-				<td>销售单号</td>
-				<td><input id="number" name="number" th:value="${danjunum}" readonly type="text" /></td>
-				<td>单据日期</td>
-				<td><input id="danjuDay" name="danjuDay" th:value="${danjuDay}" readonly type="text" /></td>
-				<td>所属门店</td>
-				<td>
-					<input id="departname" name="departname" th:value="${departmentName}" readonly type="text" />
-				</td>
-			</tr>
-			<tr>
-				<td>制单人</td>
-				<td>
-					<input id="zhidanPeople" name="zhidanPeople" th:value="${zhidanPeople}" readonly type="text" />
-				</td>
-				<td>镜片型</td>
-				<td>
-					<input id="jcStyle" name="jcStyle" th:value="${eyeStyles}" readonly type="text" />
-				</td>
-				<td>预计取镜时间</td>
-				<td><input readonly id="timetime" name="timetime" type="text" /></td>
-			</tr>
-			<tr>
-				<td>单据类型</td>
-				<td>
-					<select id="danjuStyle" name="danjuStyle">
-						<option value="1">外部配镜单</option>
-						<option value="2">回修配镜单</option>
-						<option value="3">报残配镜单</option>
-					</select>
-				</td>
-				<td>原配镜单</td>
-				<td style="text-align:left;">
-					<input id="saleNumber" name="saleNumber"  readonly type="text" style="width:80%" />
-					<input type="button" class="Xze" value="选择" onclick="PeiJing()" />
-				</td>
-				<td>委外类型</td>
-				<td>
-					<select id="weiwaiStyle" name="weiwaiStyle">
-						<option value="委外订单">委外订单</option>
-						<option value="委外加工">委外加工</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>备注</td>
-				<td colspan="5"><textarea name="beizhu" id="beizhu" cols="30" rows="2"></textarea></td>
-			</tr>
-			</tbody>
-		</table>
+    <div class="main">
+        <h3>单据信息</h3>
+        <input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="hidden"/>
+        <input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="hidden"/>
+        <input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="hidden"/>
+        <table class="tabA" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td>销售单号</td>
+                <td><input id="number" name="number" th:value="${danjunum}" readonly type="text"/></td>
+                <td>单据日期</td>
+                <td><input id="danjuDay" name="danjuDay" th:value="${danjuDay}" readonly type="text"/></td>
+                <td>所属门店</td>
+                <td>
+                    <input id="departname" name="departname" th:value="${departmentName}" readonly type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <td>制单人</td>
+                <td>
+                    <input id="zhidanPeople" name="zhidanPeople" th:value="${zhidanPeople}" readonly type="text"/>
+                </td>
+                <td>镜片型</td>
+                <td>
+                    <input id="jcStyle" name="jcStyle" th:value="${eyeStyles}" readonly type="text"/>
+                </td>
+                <td>预计取镜时间</td>
+                <td><input readonly id="timetime" name="timetime" type="text"/></td>
+            </tr>
+            <tr>
+                <td>单据类型</td>
+                <td>
+                    <select id="danjuStyle" name="danjuStyle">
+                        <option value="1">外部配镜单</option>
+                        <option value="2">回修配镜单</option>
+                        <option value="3">报残配镜单</option>
+                    </select>
+                </td>
+                <td>原配镜单</td>
+                <td style="text-align:left;">
+                    <input id="saleNumber" name="saleNumber" readonly type="text" style="width:80%"/>
+                    <input type="button" class="Xze" value="选择" onclick="PeiJing()"/>
+                </td>
+                <td>委外类型</td>
+                <td>
+                    <select id="weiwaiStyle" name="weiwaiStyle">
+                        <option value="委外订单">委外订单</option>
+                        <option value="委外加工">委外加工</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="5"><textarea name="beizhu" id="beizhu" cols="30" rows="2"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
 
-		<h3>度数录入</h3>
-		<table  id="tab1" style="display: none" class="tabB" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td></td>
-				<td>球镜</td>
-				<td>柱镜</td>
-				<td>轴向</td>
-				<td>ADD</td>
-				<td>三菱镜</td>
-				<td>基底</td>
-				<td>瞳距（远）</td>
-				<td>瞳距（近）</td>
-<!--				<td>选择</td>-->
-			</tr>
-			<tr>
-				<td>OD</td>
-				<td><input id="rightsph" name="rightsph"  onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text" /></td>
-				<td><input id="rightcyl" name="rightcyl"  onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text" /></td>
-				<td><input id="rightzx" name="rightzx"    onblur="zhouxiang(this)" type="text" /></td>
-				<td><input id="rightAdd" name="rightAdd"  type="text" /></td>
-				<td><input id="rightSlj" name="rightSlj" type="text" /></td>
-				<td><input id="rightJd" name="rightJd"  type="text" /></td>
-				<td><input id="rightFartj" name="rightFartj" type="text" /></td>
-				<td><input id="rightNeartj" name="rightNeartj"   type="text" /></td>
-<!--				<td><input type="button" class="Add" value="单品添加商品" onclick="getGoods()" /></td>-->
-			</tr>
-			<tr>
-				<td>OS</td>
-				<td><input id="leftsph" name="leftsph"  onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text" /></td>
-				<td><input id="leftcyl" name="leftcyl" onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text" /></td>
-				<td><input id="leftzx" name="leftzx"  onblur="zhouxiang(this)" type="text" /></td>
-				<td><input id="leftAdd" name="leftAdd"   type="text" /></td>
-				<td><input id="leftSlj" name="leftSlj"  type="text" /></td>
-				<td><input id="leftJd" name="leftJd"  type="text" /></td>
-				<td><input id="leftFartj" name="leftFartj"   type="text" /></td>
-				<td><input id="leftNeartj" name="leftNeartj"   type="text" /></td>
-<!--				<td><input type="button" class="Add" value="单品添加商品" onclick="getGoods()"/></td>-->
-			</tr>
-		</table>
-		<table id="tab2" style="display: none" class="tabB1" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td></td>
-				<td>球镜</td>
-				<td>柱镜</td>
-				<td>轴向</td>
-				<td>曲率</td>
-				<td>直径</td>
-<!--				<td>选择</td>-->
-			</tr>
-			<tr>
-				<td>OD</td>
-				<td><input id="rightsphyx" name="rightsphyx"  onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text" /></td>
-				<td><input id="rightcylyx" name="rightcylyx"  onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text" /></td>
-				<td><input id="rightzxyx" name="rightzxyx"    onblur="zhouxiang(this)" type="text" /></td>
-				<td><input id="rightqulv" name="rightqulv" type="text" /></td>
-				<td><input id="rightzj" name="rightzj" type="text" /></td>
-<!--				<td><input type="button" class="Add1" value="单品添加商品" /></td>-->
-			</tr>
-			<tr>
-				<td>OS</td>
-				<td><input id="leftsphyx" name="leftsphyx"  onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text" /></td>
-				<td><input id="leftcylyx" name="leftcylyx" onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text" /></td>
-				<td><input id="leftzxyx" name="leftzxyx"  onblur="zhouxiang(this)" type="text" /></td>
-				<td><input id="leftqulv" name="leftqulv" type="text" /></td>
-				<td><input id="leftzj" name="leftzj" type="text" /></td>
-<!--				<td><input type="button" class="Add1" value="单品添加商品" /></td>-->
-			</tr>
-		</table>
+        <h3>度数录入</h3>
+        <table id="tab1" style="display: none" class="tabB" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td></td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>ADD</td>
+                <td>三菱镜</td>
+                <td>基底</td>
+                <td>瞳距（远）</td>
+                <td>瞳距（近）</td>
+                <!--				<td>选择</td>-->
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input id="rightsph" name="rightsph" onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text"/>
+                </td>
+                <td><input id="rightcyl" name="rightcyl" onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text"/>
+                </td>
+                <td><input id="rightzx" name="rightzx" onblur="zhouxiang(this)" type="text"/></td>
+                <td><input id="rightAdd" name="rightAdd" type="text"/></td>
+                <td><input id="rightSlj" name="rightSlj" type="text"/></td>
+                <td><input id="rightJd" name="rightJd" type="text"/></td>
+                <td><input id="rightFartj" name="rightFartj" type="text"/></td>
+                <td><input id="rightNeartj" name="rightNeartj" type="text"/></td>
+                <!--				<td><input type="button" class="Add" value="单品添加商品" onclick="getGoods()" /></td>-->
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input id="leftsph" name="leftsph" onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text"/>
+                </td>
+                <td><input id="leftcyl" name="leftcyl" onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text"/>
+                </td>
+                <td><input id="leftzx" name="leftzx" onblur="zhouxiang(this)" type="text"/></td>
+                <td><input id="leftAdd" name="leftAdd" type="text"/></td>
+                <td><input id="leftSlj" name="leftSlj" type="text"/></td>
+                <td><input id="leftJd" name="leftJd" type="text"/></td>
+                <td><input id="leftFartj" name="leftFartj" type="text"/></td>
+                <td><input id="leftNeartj" name="leftNeartj" type="text"/></td>
+                <!--				<td><input type="button" class="Add" value="单品添加商品" onclick="getGoods()"/></td>-->
+            </tr>
+        </table>
+        <table id="tab2" style="display: none" class="tabB1" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td></td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>曲率</td>
+                <td>直径</td>
+                <!--				<td>选择</td>-->
+            </tr>
+            <tr>
+                <td>OD</td>
+                <td><input id="rightsphyx" name="rightsphyx" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                           type="text"/></td>
+                <td><input id="rightcylyx" name="rightcylyx" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                           type="text"/></td>
+                <td><input id="rightzxyx" name="rightzxyx" onblur="zhouxiang(this)" type="text"/></td>
+                <td><input id="rightqulv" name="rightqulv" type="text"/></td>
+                <td><input id="rightzj" name="rightzj" type="text"/></td>
+                <!--				<td><input type="button" class="Add1" value="单品添加商品" /></td>-->
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><input id="leftsphyx" name="leftsphyx" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                           type="text"/></td>
+                <td><input id="leftcylyx" name="leftcylyx" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                           type="text"/></td>
+                <td><input id="leftzxyx" name="leftzxyx" onblur="zhouxiang(this)" type="text"/></td>
+                <td><input id="leftqulv" name="leftqulv" type="text"/></td>
+                <td><input id="leftzj" name="leftzj" type="text"/></td>
+                <!--				<td><input type="button" class="Add1" value="单品添加商品" /></td>-->
+            </tr>
+        </table>
 
-		<h3>商品列表</h3>
-		<table id="tab3" style="display: none" class="tabC" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td width="250">商品代码</td>
-				<td width="250">商品名称</td>
-				<td>镜片型</td>
-				<td>球镜</td>
-				<td>柱镜</td>
-				<td>轴向</td>
-				<td>下加</td>
-				<td>棱镜</td>
-				<td>基底</td>
-				<td>瞳高</td>
-				<td>数量</td>
-				<td width="300">加工要求</td>
-<!--				<td width="100">操作</td>-->
-			</tr>
-			<tr>
-				<td><input id="rightNum" name="rightNum"   type="text" /></td>
-				<td><input id="rightName" name="rightName" type="text" /></td>
-				<td><input id="rightR" name="rightR"     type="text" /></td>
-				<td><input id="sph1" type="text" /></td>
-				<td><input id="cyl1" type="text" /></td>
-				<td><input id="zx1"  type="text" /></td>
-				<td><input id="xj1"  type="text" /></td>
-				<td><input id="lj1"  type="text" /></td>
-				<td><input id="jd1"  type="text" /></td>
-				<td><input id="tg1"  type="text" /></td>
-				<td><input id="countr" name="countr"  type="text"/></td>
-				<td><input id="yaoqiur" name="yaoqiur" type="text" /></td>
-<!--				<td><input type="button" class="qingK" value="清空" /></td>-->
-			</tr>
-			<tr>
-				<td><input id="leftNum" name="leftNum" type="text" /></td>
-				<td><input id="leftName" name="leftName"type="text" /></td>
-				<td><input id="leftL" name="leftL"    type="text" /></td>
-				<td><input id="sph2"type="text" /></td>
-				<td><input id="cyl2"type="text" /></td>
-				<td><input id="zx2" type="text" /></td>
-				<td><input id="xj2" type="text" /></td>
-				<td><input id="lj2" type="text" /></td>
-				<td><input id="jd2" type="text" /></td>
-				<td><input id="tg2" type="text" /></td>
-				<td><input id="countl" name="countl" type="text" /></td>
-				<td><input id="yaoqiul" name="yaoqiul" type="text" /></td>
-<!--				<td><input type="button" class="qingK" value="清空" /></td>-->
-			</tr>
-		</table>
-		<table id="tab4" style="display: none" class="tabC" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td width="250">商品代码</td>
-				<td width="250">商品名称</td>
-				<td>镜片型</td>
-				<td>球镜</td>
-				<td>柱镜</td>
-				<td>轴向</td>
-				<td>曲率</td>
-				<td>直径</td>
-				<td>数量</td>
-				<td width="300">特殊加工要求</td>
-<!--				<td width="100">操作</td>-->
-			</tr>
-			<tr>
-				<td><input id="rightNumyx" name="rightNumyx"   type="text" /></td>
-				<td><input id="rightNameyx" name="rightNameyx" type="text" /></td>
-				<td><input id="rightRyx" name="rightRyx"     type="text" /></td>
-				<td><input id="sphyx1"  type="text" /></td>
-				<td><input id="cylyx1"  type="text" /></td>
-				<td><input id="zxyx1"   type="text" /></td>
-				<td><input id="qulvyx1" type="text" /></td>
-				<td><input id="zjyx1"   type="text" /></td>
-				<td><input id="countryx" name="countryx" type="text" /></td>
-				<td><input id="yaoqiuryx" name="yaoqiuryx" type="text" /></td>
-<!--				<td><input type="button" class="qingK" value="清空" /></td>-->
-			</tr>
-			<tr>
-				<td><input id="leftNumyx" name="leftNumyx"  type="text" /></td>
-				<td><input id="leftNameyx" name="leftNameyx"type="text" /></td>
-				<td><input id="leftLyx" name="leftLyx"    type="text" /></td>
-				<td><input id="sphyx2"  type="text" /></td>
-				<td><input id="cylyx2"  type="text" /></td>
-				<td><input id="zxyx2"   type="text" /></td>
-				<td><input id="qulvyx2" type="text" /></td>
-				<td><input id="zjyx2"   type="text" /></td>
-				<td><input id="countlyx" name="countlyx" type="text" /></td>
-				<td><input id="yaoqiulyx" name="yaoqiulyx" type="text" /></td>
-<!--				<td><input type="button" class="qingK" value="清空" /></td>-->
-			</tr>
-		</table>
+        <h3>商品列表</h3>
+        <table id="jp" class="tabC" border="0" cellspacing="0" cellpadding="0"></table>
+        <table id="yx" class="tabC" border="0" cellspacing="0" cellpadding="0"></table>
+        <table id="tab3" style="display: none" class="tabC" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="250">商品代码</td>
+                <td width="250">商品名称</td>
+                <td>镜片型</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>下加</td>
+                <td>棱镜</td>
+                <td>基底</td>
+                <td>瞳高</td>
+                <td>数量</td>
+                <td width="300">加工要求</td>
+                <!--				<td width="100">操作</td>-->
+            </tr>
+            <tr class="jingkuangs"></tr>
+        </table>
+        <table id="tab4" style="display: none" class="tabC" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="250">商品代码</td>
+                <td width="250">商品名称</td>
+                <td>镜片型</td>
+                <td>球镜</td>
+                <td>柱镜</td>
+                <td>轴向</td>
+                <td>曲率</td>
+                <td>直径</td>
+                <td>数量</td>
+                <td width="300">特殊加工要求</td>
+                <!--				<td width="100">操作</td>-->
+            </tr>
+            <tr class="yinxings"></tr>
 
-		<input id="gkname" name="gkname"   type="hidden"/>
-		<input id="hyknum" name="hyknum"  type="hidden"/>
-		<input id="phone" name="phone"  type="hidden"/>
+        </table>
+
+        <input id="gkname" name="gkname" type="hidden"/>
+        <input id="hyknum" name="hyknum" type="hidden"/>
+        <input id="phone" name="phone" type="hidden"/>
 
 
-
-		<div class="allpik"><input type="button" value="选择" onclick="save()" /></div>
-	</div>
+        <div class="allpik"><input type="button" value="选择" onclick="save()"/></div>
+    </div>
 </form>
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/weiwaishuju/add.js"></script>
 <script type="text/javascript">
     $().ready(function () {
         var eyeStyle = $('#eyeStyle').val();
-        if (eyeStyle==3){
+        var html = "";
+        var b = 0;
+        if (eyeStyle == 3) {
             tab1.style = "display: block";
             tab3.style = "display: block";
             tab2.style = "display: none";
             tab4.style = "display: none";
-        } else if (eyeStyle == 4){
+            for (var a = 0; a < 2; a++) {
+                html += "<tr>";
+                html += "<td><input id='num" + b + "' name='num'   type='text' /></td>";
+                html += "<td><input id='name" + b + "' name='name' type='text' /></td>";
+                html += "<td><input id='leftRight" + b + "' name='leftRight'     type='text' /></td>";
+                html += "<td><input id='sph" + b + "'  type='text' /></td>";
+                html += "<td><input id='cyl" + b + "'  type='text' /></td>";
+                html += "<td><input id='zx" + b + "'  type='text' /></td>";
+                html += "<td><input id='xj" + b + "'  type='text' /></td>";
+                html += "<td><input id='lj" + b + "'  type='text' /></td>";
+                html += "<td><input id='jd" + b + "'  type='text' /></td>";
+                html += "<td><input id='tg" + b + "'  type='text' /></td>";
+                html += "<td><input id='count" + b + "'name='count'  type='text'/></td>";
+                html += "<td><input id='yaoqiu" + b + "' name='yaoqiu' type='text' /></td>";
+                html += "<td><input id='code" + b + "' name='code'  type='hidden' /></td>";
+                html += "</tr>";
+                b = b + 1;
+            }
+            $(".jingkuangs").before(html);
+        } else if (eyeStyle == 4) {
             tab1.style = "display: none";
             tab3.style = "display: none";
             tab2.style = "display: block";
             tab4.style = "display: block";
+            for (var a = 0; a < 2; a++) {
+                html += "<tr>";
+                html += "<td><input id='numyx" + b + "' name='numyx'   type='text' /></td>";
+                html += "<td><input id='nameyx" + b + "' name='nameyx' type='text' /></td>";
+                html += "<td><input id='leftRightYx" + b + "' name='leftRightYx'     type='text' /></td>";
+                html += "<td><input id='sphyx" + b + "'  type='text' /></td>";
+                html += "<td><input id='cylyx" + b + "'  type='text' /></td>";
+                html += "<td><input id='zxyx" + b + "'  type='text' /></td>";
+                html += "<td><input id='qulvyx" + b + "'type='text' /></td>";
+                html += "<td><input id='zjyx" + b + "'   type='text' /></td>";
+                html += "<td><input id='countyx" + b + "' name='countyx' type='text' /></td>";
+                html += "<td><input id='yaoqiuyx" + b + "' name='yaoqiuyx' type='text' /></td>";
+                html += "<td><input id='code" + b + "' name='code'  type='hidden' /></td>";
+                html += "</tr>";
+                b = b + 1;
+            }
+            $(".yinxings").before(html);
         }
     });
+
     //日期
     laydate.render({
         elem: '#timetime',
@@ -285,6 +383,9 @@
     });
 
     function PeiJing() {
+        $("#tab3").remove();
+        $("#tab4").remove();
+        var html = "";
         var eyeStyle = $('#eyeStyle').val();
         var toIndex = layer.open({
             type: 2,
@@ -328,126 +429,137 @@
                     $("#leftzxyx").val(rows[i].leftzx);
 
 
-
-
-
                     //顾客信息
-					$("#gkname").val(rows[i].name);
-					$("#hyknum").val(rows[i].memberNumber);
-					$("#phone").val(rows[i].phone1);
+                    $("#gkname").val(rows[i].name);
+                    $("#hyknum").val(rows[i].memberNumber);
+                    $("#phone").val(rows[i].phone1);
+                    var b = 0;
+                    if (eyeStyle == 3) {//镜片
+                        html += "<tr>";
+                        html += "<td width='250'>商品代码</td>";
+                        html += "<td width='250'>商品名称</td>";
+                        html += "<td>镜片型</td>";
+                        html += "<td>球镜</td>";
+                        html += "<td>柱镜</td>";
+                        html += "<td>轴向</td>";
+                        html += "<td>下加</td>";
+                        html += "<td>棱镜</td>";
+                        html += "<td>基底</td>";
+                        html += "<td>瞳高</td>";
+                        html += "<td>数量</td>";
+                        html += "<td width='300'>加工要求</td>";
+                        html += "</tr>";
+                        var array = rows[i].goodsNum.split(",");//代码
+                        var goodsCode = rows[i].goodsCode.split(",");//条码
+                        var leftRight = rows[i].leftRight.split(",");//左右
+                        var storeName = rows[i].storeName.split(",");//名称
+                        var storeDescribe = rows[i].storeDescribe.split(",");//描述
+                        var storeCount = rows[i].storeCount.split(",");//数量
+                        var classtype = rows[i].classtype.split(",");//定做还是成品
 
+                        for (var a = 0; a < array.length; a++) {
 
+                            if (storeDescribe[a] == "镜片") {
+                                if (leftRight[a] == "右") {
+                                    var sph = rows[i].rightsph;
+                                    var cyl = rows[i].rightcyl;
+                                    var zx = rows[i].rightzx;
+                                    var xj = rows[i].rightAdd;
+                                    var lj = rows[i].rightSlj;
+                                    var jd = rows[i].rightJd;
+                                    var tg = rows[i].righttg;
+                                } else if (leftRight[a] == "左") {
+                                    var sph = rows[i].leftsph;
+                                    var cyl = rows[i].leftcyl;
+                                    var zx = rows[i].leftzx;
+                                    var xj = rows[i].leftAdd;
+                                    var lj = rows[i].leftSlj;
+                                    var jd = rows[i].leftJd;
+                                    var tg = rows[i].lefttg;
+                                }
+                                if (classtype[a] == "2") {
+                                    html += "<tr>";
+                                    html += "<td><input id='num" + b + "' name='num'  value='" + array[a] + "' type='text' /></td>";
+                                    html += "<td><input id='name" + b + "' name='name'  value='" + storeName[a] + "' type='text' /></td>";
+                                    html += "<td><input id='leftRight" + b + "' name='leftRight'  value='" + leftRight[a] + "' type='text' /></td>";
+                                    html += "<td><input id='sph" + b + "' value='" + sph + "' type='text' /></td>";
+                                    html += "<td><input id='cyl" + b + "' value='" + cyl + "' type='text' /></td>";
+                                    html += "<td><input id='zx" + b + "'  value='" + zx + "' type='text' /></td>";
+                                    html += "<td><input id='xj" + b + "'  value='" + xj + "' type='text' /></td>";
+                                    html += "<td><input id='lj" + b + "'  value='" + lj + "' type='text' /></td>";
+                                    html += "<td><input id='jd" + b + "' value='" + jd + "' type='text' /></td>";
+                                    html += "<td><input id='tg" + b + "' value='" + tg + "' type='text' /></td>";
+                                    html += "<td><input id='count" + b + "' name='count'  value='" + storeCount[a] + "' type='text'/></td>";
+                                    html += "<td><input id='yaoqiu" + b + "' name='yaoqiu' value='" + rows[i].processAsk + "' type='text' /></td>";
+                                    html += "<td><input id='code" + b + "' name='code' value='" + goodsCode[a] + "' type='hidden' /></td>";
+                                    html += "</tr>";
+                                    b = b + 1;
+                                }
 
-                    if (eyeStyle==3){//镜片
-                        var array = rows[i].jpGoodsNum.split(",");
-                        var leftRight = rows[i].leftRight.split(",");
-                        var jpName = rows[i].jpGoodsName.split(",");
-
-                        for (var t=0;t<array.length;t++){
-							if(array[0]==undefined){
-								$("#rightNum").val("");
-								$("#rightName").val("");
-								$("#rightR").val("");
-								$("#countr").val("");
-								$("#yaoqiur").val("");
-								$("#sph1").val("");
-								$("#cyl1").val("");
-								$("#zx1").val("");
-								$("#xj1").val("");
-								$("#lj1").val("");
-								$("#jd1").val("");
-								$("#tg1").val("");
-							}else {
-								$("#rightNum").val(array[0]);
-								$("#rightName").val(jpName[0]);
-								$("#rightR").val(leftRight[0]);
-								$("#countr").val(1);
-								$("#yaoqiur").val(rows[i].processAsk);
-								$("#sph1").val(rows[i].rightsph);
-								$("#cyl1").val(rows[i].rightcyl);
-								$("#zx1").val(rows[i].rightzx);
-								$("#xj1").val(rows[i].rightAdd);
-								$("#lj1").val(rows[i].rightSlj);
-								$("#jd1").val(rows[i].rightJd);
-								$("#tg1").val(rows[i].righttg);
-							}
-							if(array[1]==undefined){
-								$("#leftNum").val("");
-								$("#leftName").val("");
-								$("#leftL").val("");
-								$("#countl").val("");
-								$("#yaoqiul").val("");
-								$("#sph2").val("");
-								$("#cyl2").val("");
-								$("#zx2").val("");
-								$("#xj2").val("");
-								$("#lj2").val("");
-								$("#jd2").val("");
-								$("#tg2").val("");
-							}else {
-								$("#leftNum").val(array[1]);
-								$("#leftName").val(jpName[1]);
-								$("#leftL").val(leftRight[1]);
-								$("#countl").val(1);
-								$("#yaoqiul").val(rows[i].processAsk);
-								$("#sph2").val(rows[i].leftsph);
-								$("#cyl2").val(rows[i].leftcyl);
-								$("#zx2").val(rows[i].leftzx);
-								$("#xj2").val(rows[i].leftAdd);
-								$("#lj2").val(rows[i].leftSlj);
-								$("#jd2").val(rows[i].leftJd);
-								$("#tg2").val(rows[i].lefttg);
-							}
+                            }
                         }
-                    } else if (eyeStyle ==4){//隐形
-                        var array = rows[i].goodsNum.split(",");
-                        var leftRight = rows[i].leftRight.split(",");
-                        var jpName = rows[i].jpGoodsName.split(",");
+                        $("#jp").append(html);
 
-                        for (var t=0;t<array.length;t++){
-                        	if (array[0]==undefined){
-								$("#rightNumyx").val("");
-								$("#rightNameyx").val("");
-								$("#rightRyx").val("");
-								$("#countryx").val("");
-								$("#yaoqiuryx").val("");
-								$("#sphyx1").val("");
-								$("#cylyx1").val("");
-								$("#zxyx1").val("");
-							}else {
-                        		$("#rightNumyx").val(array[0]);
-								$("#rightNameyx").val(jpName[0]);
-								$("#rightRyx").val(leftRight[0]);
-								$("#countryx").val(1);
-								$("#yaoqiuryx").val(rows[i].processAsk);
-								$("#sphyx1").val(rows[i].rightsph);
-								$("#cylyx1").val(rows[i].rightcyl);
-								$("#zxyx1").val(rows[i].rightzx);
-							}
+                    } else if (eyeStyle == 4) {//隐形
+                        html += "<tr>";
+                        html += "<td width='250'>商品代码</td>";
+                        html += "<td width='250'>商品名称</td>";
+                        html += "<td>镜片型</td>";
+                        html += "<td>球镜</td>";
+                        html += "<td>柱镜</td>";
+                        html += "<td>轴向</td>";
+                        html += "<td>曲率</td>";
+                        html += "<td>直径</td>";
+                        html += "<td>数量</td>";
+                        html += "<td width='300'>加工要求</td>";
+                        html += "</tr>";
+                        var array = rows[i].goodsNum.split(",");//代码
+                        var goodsCode = rows[i].goodsCode.split(",");//条码
+                        var leftRight = rows[i].leftRight.split(",");//左右
+                        var storeName = rows[i].storeName.split(",");//名称
+                        var storeDescribe = rows[i].storeDescribe.split(",");//描述
+                        var storeCount = rows[i].storeCount.split(",");//数量
+                        var classtype = rows[i].classtype.split(",");//定做还是成品
+                        for (var a = 0; a < array.length; a++) {
+                            if (storeDescribe[a] == "隐形") {
+                                if (leftRight[a] == "右") {
+                                    var sphyx = rows[i].rightsph;
+                                    var cylyx = rows[i].rightcyl;
+                                    var zxyx = rows[i].rightzx;
+                                    // var qulvyx = rows[i].rightqulv;
+                                    // var zjyx = rows[i].rightzj;
+                                    var qulvyx = "";
+                                    var zjyx = "";
+                                } else if (leftRight[a] == "左") {
+                                    var sphyx = rows[i].leftsph;
+                                    var cylyx = rows[i].leftcyl;
+                                    var zxyx = rows[i].leftzx;
+                                    // var qulvyx = rows[i].leftqulv;
+                                    // var zjyx = rows[i].leftzj;
+                                    var qulvyx = "";
+                                    var zjyx = "";
+                                }
+                                if (classtype[a] == "2") {
+                                    html += "<tr>";
+                                    html += "<td><input id='numyx" + b + "' name='numyx'  value='" + array[a] + "'  type='text' /></td>";
+                                    html += "<td><input id='nameyx" + b + "' name='nameyx'  value='" + storeName[a] + "' type='text' /></td>";
+                                    html += "<td><input id='leftRightYx" + b + "' name='leftRightYx'   value='" + leftRight[a] + "'   type='text' /></td>";
+                                    html += "<td><input id='sphyx" + b + "' value='" + sphyx + "' type='text' /></td>";
+                                    html += "<td><input id='cylyx" + b + "' value='" + cylyx + "' type='text' /></td>";
+                                    html += "<td><input id='zxyx" + b + "'  value='" + zxyx + "' type='text' /></td>";
+                                    html += "<td><input id='qulvyx" + b + "' value='" + qulvyx + "' type='text' /></td>";
+                                    html += "<td><input id='zjyx" + b + "'   value='" + zjyx + "' type='text' /></td>";
+                                    html += "<td><input id='countyx" + b + "'  name='countyx' value='" + storeCount[a] + "'  type='text' /></td>";
+                                    html += "<td><input id='yaoqiuyx" + b + "' name='yaoqiuyx' value='" + rows[i].processAsk + "'  type='text' /></td>";
+                                    html += "<td><input id=' codeyx" + b + "' name='codeyx' value='" + goodsCode[a] + "' type='hidden' /></td>";
+                                    html += "</tr>";
+                                    b = b + 1;
+                                }
 
-							if(array[1]==undefined){
-								$("#leftNumyx").val("");
-								$("#leftNameyx").val("");
-								$("#leftLyx").val("");
-								$("#countlyx").val("");
-								$("#yaoqiulyx").val("");
-								$("#sphyx2").val("");
-								$("#cylyx2").val("");
-								$("#zxyx2").val("");
-
-							}else {
-								$("#leftNumyx").val(array[1]);
-								$("#leftNameyx").val(jpName[1]);
-								$("#leftLyx").val(leftRight[1]);
-								$("#countlyx").val(1);
-								$("#yaoqiulyx").val(rows[i].processAsk);
-								$("#sphyx2").val(rows[i].leftsph);
-								$("#cylyx2").val(rows[i].leftcyl);
-								$("#zxyx2").val(rows[i].leftzx);
-
-							}
-
+                            }
                         }
+                        $("#yx").append(html);
+
                     }
 
                 }
@@ -465,59 +577,6 @@
             e.value = val.toFixed(2)
         }
     };
-
-    // function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用
-    //     var val = parseFloat(e.value);
-    //     var val1 = e.value;
-    //     // console.log(val);
-    //     var num = val1.indexOf(".") + 2;
-    //     console.log(num);
-    //     if (val1.length > num) {
-    //         console.log(123);
-    //         var val2 = 0 | val * 100;
-    //         e.value = val2 / 100
-    //     }
-    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // function addshang() {
-    // 	// layer.alert("是否添加选择商品！");
-    //     var rightNum = $("#rightNum").val();
-    //     var rightName = $("#rightName").val();
-    //     var rightrl = $("#rightrl").val();
-    //     var leftNum = $("#leftNum").val();
-    //     var leftName =  $("#leftName").val();
-    //     var leftrl = $("#leftrl").val();
-    //     var array=[];
-    //     //array.push({'rightNum':rightNum},{'rightName':rightName},{'rightrl':rightrl},{'leftNum':leftNum},{'leftName':leftName},{'leftrl':leftrl});
-    //     array.push(rightNum);
-    //     array.push(rightName);
-    //     array.push(rightrl);
-    //     array.push(leftNum);
-    //     array.push(leftName);
-    //     array.push(leftrl);
-    // 	return array;
-    // }
 </script>
 </body>
 </html>

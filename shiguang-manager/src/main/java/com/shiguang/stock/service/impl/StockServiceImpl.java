@@ -412,8 +412,18 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public StockDO jingpiandzs(StockDO stockDO) {
+        return stockDao.jingpiandzs(stockDO);
+    }
+
+    @Override
     public StockDO yinxings(StockDO stockDO) {
         return stockDao.yinxings(stockDO);
+    }
+
+    @Override
+    public StockDO yinxingdzs(StockDO stockDO) {
+        return stockDao.yinxingdzs(stockDO);
     }
 
     @Override
@@ -466,17 +476,6 @@ public class StockServiceImpl implements StockService {
                             ExcelUtils.getCellFormatValue(row.getCell((short) 0)) != null &&
                             ExcelUtils.getCellFormatValue(row.getCell((short) 1)) != "" &&
                             ExcelUtils.getCellFormatValue(row.getCell((short) 1)) != null
-//                            &&
-//                            ExcelUtils.getCellFormatValue(row.getCell((short) 2)) != "" &&
-//                            ExcelUtils.getCellFormatValue(row.getCell((short) 2)) != null &&
-//                            ExcelUtils.getCellFormatValue(row.getCell((short) 3)) != "" &&
-//                            ExcelUtils.getCellFormatValue(row.getCell((short) 3)) != null &&
-//                            ExcelUtils.getCellFormatValue(row.getCell((short) 4)) != "" &&
-//                            ExcelUtils.getCellFormatValue(row.getCell((short) 4)) != null &&
-//                            ExcelUtils.getCellFormatValue(row.getCell((short) 5)) != "" &&
-//                            ExcelUtils.getCellFormatValue(row.getCell((short) 5)) != null &&
-//                            ExcelUtils.getCellFormatValue(row.getCell((short) 6)) != "" &&
-//                            ExcelUtils.getCellFormatValue(row.getCell((short) 6)) != null
                     ) ;
                     else
                         return R.error("Excel中有部分基本信息数据为空，请检查好重新导入");
@@ -495,16 +494,16 @@ public class StockServiceImpl implements StockService {
                         if (goodstype==1){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO jingjiass=  stockDao.jingjias(stockDO);
-                            String goodsNum=jingjiass.getProducNum();
-                            String goodsCode=jingjiass.getProducCode();
-                            String goodsName=jingjiass.getProducName();
-                            String mfrsid=jingjiass.getMfrsid();
-                            String brandname=jingjiass.getBrandname();
-                            String retailPrice=jingjiass.getRetailPrice();
-                            String unitname=jingjiass.getUnitname();
-                            String factory=jingjiass.getProducFactory();
-                            String classtype=jingjiass.getClasstype();
+                            StockDO shiguangs=  stockDao.jingjias(stockDO);
+                            String goodsNum=shiguangs.getProducNum();
+                            String goodsCode=shiguangs.getProducCode();
+                            String goodsName=shiguangs.getProducName();
+                            String mfrsid=shiguangs.getMfrsid();
+                            String brandname=shiguangs.getBrandname();
+                            String retailPrice=shiguangs.getRetailPrice();
+                            String unitname=shiguangs.getUnitname();
+                            String factory=shiguangs.getProducFactory();
+                            String classtype=shiguangs.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -617,16 +616,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==2){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO jingjiass=  stockDao.peijians(stockDO);
-                            String goodsNum=jingjiass.getProducNum();
-                            String goodsCode=jingjiass.getProducCode();
-                            String goodsName=jingjiass.getProducName();
-                            String mfrsid=jingjiass.getMfrsid();
-                            String brandname=jingjiass.getBrandname();
-                            String retailPrice=jingjiass.getRetailPrice();
-                            String unitname=jingjiass.getUnitname();
-                            String factory=jingjiass.getProducFactory();
-                            String classtype=jingjiass.getClasstype();
+                            StockDO peijians=  stockDao.peijians(stockDO);
+                            String goodsNum=peijians.getProducNum();
+                            String goodsCode=peijians.getProducCode();
+                            String goodsName=peijians.getProducName();
+                            String mfrsid=peijians.getMfrsid();
+                            String brandname=peijians.getBrandname();
+                            String retailPrice=peijians.getRetailPrice();
+                            String unitname=peijians.getUnitname();
+                            String factory=peijians.getProducFactory();
+                            String classtype=peijians.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -739,16 +738,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==3){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO jingjiass=  stockDao.jingpians(stockDO);
-                            String goodsNum=jingjiass.getProducNum();
-                            String goodsCode=jingjiass.getProducCode();
-                            String goodsName=jingjiass.getProducName();
-                            String mfrsid=jingjiass.getMfrsid();
-                            String brandname=jingjiass.getBrandname();
-                            String retailPrice=jingjiass.getRetailPrice();
-                            String unitname=jingjiass.getUnitname();
-                            String factory=jingjiass.getProducFactory();
-                            String classtype=jingjiass.getClasstype();
+                            StockDO jingpians=  stockDao.jingpians(stockDO);
+                            String goodsNum=jingpians.getProducNum();
+                            String goodsCode=jingpians.getProducCode();
+                            String goodsName=jingpians.getProducName();
+                            String mfrsid=jingpians.getMfrsid();
+                            String brandname=jingpians.getBrandname();
+                            String retailPrice=jingpians.getRetailPrice();
+                            String unitname=jingpians.getUnitname();
+                            String factory=jingpians.getProducFactory();
+                            String classtype=jingpians.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -861,16 +860,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==4){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO jingjiass=  stockDao.yinxings(stockDO);
-                            String goodsNum=jingjiass.getProducNum();
-                            String goodsCode=jingjiass.getProducCode();
-                            String goodsName=jingjiass.getProducName();
-                            String mfrsid=jingjiass.getMfrsid();
-                            String brandname=jingjiass.getBrandname();
-                            String retailPrice=jingjiass.getRetailPrice();
-                            String unitname=jingjiass.getUnitname();
-                            String factory=jingjiass.getProducFactory();
-                            String classtype=jingjiass.getClasstype();
+                            StockDO yinxings=  stockDao.yinxings(stockDO);
+                            String goodsNum=yinxings.getProducNum();
+                            String goodsCode=yinxings.getProducCode();
+                            String goodsName=yinxings.getProducName();
+                            String mfrsid=yinxings.getMfrsid();
+                            String brandname=yinxings.getBrandname();
+                            String retailPrice=yinxings.getRetailPrice();
+                            String unitname=yinxings.getUnitname();
+                            String factory=yinxings.getProducFactory();
+                            String classtype=yinxings.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -983,16 +982,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==5){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO jingjiass=  stockDao.huliyes(stockDO);
-                            String goodsNum=jingjiass.getProducNum();
-                            String goodsCode=jingjiass.getProducCode();
-                            String goodsName=jingjiass.getProducName();
-                            String mfrsid=jingjiass.getMfrsid();
-                            String brandname=jingjiass.getBrandname();
-                            String retailPrice=jingjiass.getRetailPrice();
-                            String unitname=jingjiass.getUnitname();
-                            String factory=jingjiass.getProducFactory();
-                            String classtype=jingjiass.getClasstype();
+                            StockDO shiguangs=  stockDao.shiguangs(stockDO);
+                            String goodsNum=shiguangs.getProducNum();
+                            String goodsCode=shiguangs.getProducCode();
+                            String goodsName=shiguangs.getProducName();
+                            String mfrsid=shiguangs.getMfrsid();
+                            String brandname=shiguangs.getBrandname();
+                            String retailPrice=shiguangs.getRetailPrice();
+                            String unitname=shiguangs.getUnitname();
+                            String factory=shiguangs.getProducFactory();
+                            String classtype=shiguangs.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -1105,16 +1104,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==6){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO jingjiass=  stockDao.taiyangjings(stockDO);
-                            String goodsNum=jingjiass.getProducNum();
-                            String goodsCode=jingjiass.getProducCode();
-                            String goodsName=jingjiass.getProducName();
-                            String mfrsid=jingjiass.getMfrsid();
-                            String brandname=jingjiass.getBrandname();
-                            String retailPrice=jingjiass.getRetailPrice();
-                            String unitname=jingjiass.getUnitname();
-                            String factory=jingjiass.getProducFactory();
-                            String classtype=jingjiass.getClasstype();
+                            StockDO shiguangs=  stockDao.shiguangs(stockDO);
+                            String goodsNum=shiguangs.getProducNum();
+                            String goodsCode=shiguangs.getProducCode();
+                            String goodsName=shiguangs.getProducName();
+                            String mfrsid=shiguangs.getMfrsid();
+                            String brandname=shiguangs.getBrandname();
+                            String retailPrice=shiguangs.getRetailPrice();
+                            String unitname=shiguangs.getUnitname();
+                            String factory=shiguangs.getProducFactory();
+                            String classtype=shiguangs.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -1227,16 +1226,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==7){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO jingjiass=  stockDao.laohuajings(stockDO);
-                            String goodsNum=jingjiass.getProducNum();
-                            String goodsCode=jingjiass.getProducCode();
-                            String goodsName=jingjiass.getProducName();
-                            String mfrsid=jingjiass.getMfrsid();
-                            String brandname=jingjiass.getBrandname();
-                            String retailPrice=jingjiass.getRetailPrice();
-                            String unitname=jingjiass.getUnitname();
-                            String factory=jingjiass.getProducFactory();
-                            String classtype=jingjiass.getClasstype();
+                            StockDO shiguangs=  stockDao.shiguangs(stockDO);
+                            String goodsNum=shiguangs.getProducNum();
+                            String goodsCode=shiguangs.getProducCode();
+                            String goodsName=shiguangs.getProducName();
+                            String mfrsid=shiguangs.getMfrsid();
+                            String brandname=shiguangs.getBrandname();
+                            String retailPrice=shiguangs.getRetailPrice();
+                            String unitname=shiguangs.getUnitname();
+                            String factory=shiguangs.getProducFactory();
+                            String classtype=shiguangs.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -1349,16 +1348,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==8){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO jingjiass=  stockDao.haocais(stockDO);
-                            String goodsNum=jingjiass.getProducNum();
-                            String goodsCode=jingjiass.getProducCode();
-                            String goodsName=jingjiass.getProducName();
-                            String mfrsid=jingjiass.getMfrsid();
-                            String brandname=jingjiass.getBrandname();
-                            String retailPrice=jingjiass.getRetailPrice();
-                            String unitname=jingjiass.getUnitname();
-                            String factory=jingjiass.getProducFactory();
-                            String classtype=jingjiass.getClasstype();
+                            StockDO shiguangs=  stockDao.shiguangs(stockDO);
+                            String goodsNum=shiguangs.getProducNum();
+                            String goodsCode=shiguangs.getProducCode();
+                            String goodsName=shiguangs.getProducName();
+                            String mfrsid=shiguangs.getMfrsid();
+                            String brandname=shiguangs.getBrandname();
+                            String retailPrice=shiguangs.getRetailPrice();
+                            String unitname=shiguangs.getUnitname();
+                            String factory=shiguangs.getProducFactory();
+                            String classtype=shiguangs.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -1471,16 +1470,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==9){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO jingjiass=  stockDao.shiguangs(stockDO);
-                            String goodsNum=jingjiass.getProducNum();
-                            String goodsCode=jingjiass.getProducCode();
-                            String goodsName=jingjiass.getProducName();
-                            String mfrsid=jingjiass.getMfrsid();
-                            String brandname=jingjiass.getBrandname();
-                            String retailPrice=jingjiass.getRetailPrice();
-                            String unitname=jingjiass.getUnitname();
-                            String factory=jingjiass.getProducFactory();
-                            String classtype=jingjiass.getClasstype();
+                            StockDO shiguangs=  stockDao.shiguangs(stockDO);
+                            String goodsNum=shiguangs.getProducNum();
+                            String goodsCode=shiguangs.getProducCode();
+                            String goodsName=shiguangs.getProducName();
+                            String mfrsid=shiguangs.getMfrsid();
+                            String brandname=shiguangs.getBrandname();
+                            String retailPrice=shiguangs.getRetailPrice();
+                            String unitname=shiguangs.getUnitname();
+                            String factory=shiguangs.getProducFactory();
+                            String classtype=shiguangs.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);

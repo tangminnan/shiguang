@@ -177,16 +177,26 @@ function batchSelect() {
             var goodsNum =  row['goodsNum'];
         }
 
-        if(null == row['jpGoodsName']){
-            var jpGoodsName  ="";
+        // if(null == row['jpGoodsName']){
+        //     var jpGoodsName  ="";
+        // }else {
+        //     var jpGoodsName =  row['jpGoodsName'];
+        // }
+        //
+        // if(null == row['jpGoodsNum']){
+        //     var jpGoodsNum  ="";
+        // }else {
+        //     var jpGoodsNum =  row['jpGoodsNum'];
+        // }
+        if(null == row['storeName']){
+            var storeName  ="";
         }else {
-            var jpGoodsName =  row['jpGoodsName'];
+            var storeName =  row['storeName'];
         }
-
-        if(null == row['jpGoodsNum']){
-            var jpGoodsNum  ="";
+        if(null == row['goodsCode']){
+            var goodsCode  ="";
         }else {
-            var jpGoodsNum =  row['jpGoodsNum'];
+            var goodsCode =  row['goodsCode'];
         }
 
         if(null == row['leftRight']){
@@ -202,8 +212,10 @@ function batchSelect() {
 
         obj.goodsNum = goodsNum;
 
-        obj.jpGoodsName = jpGoodsName;
-        obj.jpGoodsNum = jpGoodsNum;
+        // obj.jpGoodsName = jpGoodsName;
+        // obj.jpGoodsNum = jpGoodsNum;
+        obj.storeName = storeName;
+        obj.goodsCode = goodsCode;
         obj.leftRight = leftRight;
         obj.mirorAddress = mirorAddress;
         //加工要求
@@ -220,12 +232,39 @@ function batchSelect() {
             var righttg =  row['righttg'];
         }
         obj.righttg = righttg;
+
         if(null == row['lefttg']){
             var lefttg  ="";
         }else {
             var lefttg =  row['lefttg'];
         }
         obj.lefttg = lefttg;
+
+
+
+
+        //描述
+        if (null == row['storeDescribe']){
+            var storeDescribe = "";
+        }else {
+            var storeDescribe= row['storeDescribe'];
+        }
+        obj.storeDescribe=storeDescribe;
+        //数量
+        if (null == row['storeCount']){
+            var storeCount = "";
+        }else {
+            var storeCount= row['storeCount'];
+        }
+        obj.storeCount=storeCount;
+        //classtype类型定做成品
+        if (null == row['classtype']){
+            var classtype = "";
+        }else {
+            var classtype= row['classtype'];
+        }
+        obj.classtype=classtype;
+
         objArray.push(obj);
     });
 
