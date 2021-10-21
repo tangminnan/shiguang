@@ -330,7 +330,7 @@ public class LogStatusController {
         maps.put("companyId", companyId);
         PositionDO positionDO = stockService.findHegePosition(maps);
         for (int a=0;a<storeDescribe.length;a++){
-            if (!"镜架".equals(storeDescribe[a])){
+            if (!"镜架".equals(storeDescribe[a]) && !"自架".equals(storeDescribe[a]) && !"自片".equals(storeDescribe[a]) ){
                 StockDO stockDOs = new StockDO();
                 stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
                 stockDOs.setGoodsCode(goodsCode[a]);
@@ -432,13 +432,25 @@ public class LogStatusController {
             String storeDesc = salesDO.getStoreDescribe();
             String[] storeDescribe = storeDesc.split(",");
             String[] storeCode = salesDO.getGoodsCode().split(",");
+            String companyId = "";
+            if (null != ShiroUtils.getUser().getCompanyId()) {
+                companyId = ShiroUtils.getUser().getCompanyId();
+            }
+            Map<String,Object> maps = new HashMap<>();
+            maps.put("companyId", companyId);
+            PositionDO positionDO = stockService.findHegePosition(maps);
             for (int a=0;a<storeDescribe.length;a++){
-                if (storeDescribe[a] != "镜架"){
-                    StockDO stockDO = stockService.getGoodsNum(storeCode[a]);
-                    Long countGoods = Long.parseLong(stockDO.getGoodsCount());
-                    Long count = countGoods - 1;
-                    stockDO.setGoodsCount(String.valueOf(count));
-                    stockService.updateGoodsCount(stockDO);
+                if (!"镜架".equals(storeDescribe[a]) && !"自架".equals(storeDescribe[a]) && !"自片".equals(storeDescribe[a]) ){
+                    StockDO stockDOs = new StockDO();
+                    stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
+                    stockDOs.setGoodsCode(storeCode[a]);
+                    StockDO stockDO = stockService.getProduceCode(stockDOs);
+                    if (null != stockDO){
+                        Long countGoods = Long.parseLong(stockDO.getGoodsCount());
+                        Long count = countGoods - 1;
+                        stockDO.setGoodsCount(String.valueOf(count));
+                        stockService.updateGoodsCount(stockDO);
+                    }
                 }
             }
             statusService.editFaliao(logStatusDO);
