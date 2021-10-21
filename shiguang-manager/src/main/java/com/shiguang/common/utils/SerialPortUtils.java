@@ -43,8 +43,6 @@ public class SerialPortUtils implements SerialPortEventListener {
     private String data;
     // 保存串口返回信息十六进制
     private String dataHex;
-    //拼接读取设备的十六进制
-    public String dataSerial="";
     private SerialDataUtils serialDataUtils = SerialDataUtils.getSerialPortUtils();
 
     /**
@@ -130,6 +128,7 @@ public class SerialPortUtils implements SerialPortEventListener {
             inputStream = serialPort.getInputStream();
             // 通过输入流对象的available方法获取数组字节长度
             byte[] readBuffer = new byte[inputStream.available()];
+            String dataSerial="";
             // 从线路上读取数据流
             int len = 0;
             while ((len = inputStream.read(readBuffer)) != -1) {
@@ -147,16 +146,17 @@ public class SerialPortUtils implements SerialPortEventListener {
             dataSerial = dataSerial + dataHex.toString();
             dataSerial = hexStringToString(dataSerial);
             System.out.println(dataSerial);
-            String zifuRightSph = dataSerial.substring(39, 40);
-            String rightsph = zifuRightSph + dataSerial.substring(41, 45);
-            String zifuRightCyl = dataSerial.substring(45, 46);
-            String rightcyl = zifuRightCyl +  dataSerial.substring(47, 51);
-            String rightzx = dataSerial.substring(51, 54);
-            String zifuLeftSph = dataSerial.substring(75, 76);
-            String leftsph = zifuLeftSph + dataSerial.substring(77, 81);
-            String zifuLeftCyl = dataSerial.substring(81, 82);
-            String leftcyl = zifuLeftCyl + dataSerial.substring(83, 87);
-            String leftzx = dataSerial.substring(87, 90);
+            String zifuRightSph = dataSerial.substring(40,41);
+            String dd = dataSerial.substring(42, 46);
+            String rightsph = zifuRightSph + dataSerial.substring(42, 46);
+            String zifuRightCyl = dataSerial.substring(46, 47);
+            String rightcyl = zifuRightCyl +  dataSerial.substring(48, 52);
+            String rightzx = dataSerial.substring(52, 55);
+            String zifuLeftSph = dataSerial.substring(76, 77);
+            String leftsph = zifuLeftSph + dataSerial.substring(78, 82);
+            String zifuLeftCyl = dataSerial.substring(82, 83);
+            String leftcyl = zifuLeftCyl + dataSerial.substring(84, 88);
+            String leftzx = dataSerial.substring(88, 91);
             LensMeterDO lensMeterDO = new LensMeterDO();
             lensMeterDO.setRightSph(rightsph);
             lensMeterDO.setRightCyl(rightcyl);
@@ -210,8 +210,8 @@ public class SerialPortUtils implements SerialPortEventListener {
 //                inputStream = null;
 //                break;
 //            }
-            dataSerial = dataSerial + aa;
-            System.out.println(dataSerial);
+//            dataSerial = dataSerial + aa;
+//            System.out.println(dataSerial);
             //serialDataUtils.toData(builder.toString());
 //            BleDataBean bleDataBean = SerialDataUtils.toOptometry(builder.toString());
 //            List<ResultDiopterDO> list = bleDataBean.getSca();
@@ -241,8 +241,8 @@ public class SerialPortUtils implements SerialPortEventListener {
      */
     public void sendToData(){
         //String lizi = "01444C4D0249444E4944454B2F4C4D2D363030501720522D30322E32352B30302E303030303017505230302E30304917505230302E30305517204C2D30312E37352B30302E303030303017504C30302E30304F17504C30302E303055170431333441";
-        dataSerial = hexStringToString(dataSerial);
-        serialDataUtils.todataJdj(dataSerial);
+//        dataSerial = hexStringToString(dataSerial);
+//        serialDataUtils.todataJdj(dataSerial);
         //serialDataUtils.todataJdj(lizi);
     }
 
