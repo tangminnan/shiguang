@@ -33,6 +33,9 @@ public class WeiwaikcDO implements Serializable {
 	private String mirrorTime;
 	//商品名称
 	private String goodsName;
+	//代码
+	private String num;
+	private String code;
 	//数量
 	private String count;
 
@@ -48,6 +51,22 @@ public class WeiwaikcDO implements Serializable {
 	private String psname;
 	//配送或者退回时间
 	private String pstime;
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 
 	public String getPstime() {
 		return pstime;

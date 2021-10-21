@@ -5,14 +5,14 @@
 
 	<select id="get" resultType="com.shiguang.stock.domain.WeiwaikcDO">
 		select `id`,`position_id`,`gkname`,`hyknum`,`phone`,`danju_number`,`sale_number`,`mirror_time`,`goods_name`,
-		`count`,
+		`count`,`num`,`code`,
 		`status`,`username`,`sh_time`,`shstatus` ,`psname`,`salenumbery`,`pstime`
 		from stock_weiwaikc where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.WeiwaikcDO">
 		select `id`,`position_id`,`gkname`,`hyknum`,`phone`,`danju_number`,`sale_number`,
-		`mirror_time`,`goods_name`,`count`,
+		`mirror_time`,`goods_name`,`count`,`num`,`code`,
 		`status`,`username`,`sh_time`,`shstatus` ,`psname`,`salenumbery`,`pstime`
 		from stock_weiwaikc
         <where>  
@@ -26,6 +26,8 @@
 		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
 		  		  <if test="count != null and count != ''"> and count = #{count} </if>
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
+		  		  <if test="code != null and code != ''"> and code = #{code} </if>
 
 		  		  	<if test="status != null and status != ''"> and status = #{status} </if>
 					<if test="username != null and username != ''"> and username = #{username} </if>
@@ -61,7 +63,8 @@
 		  		  <if test="mirrorTime != null and mirrorTime != ''"> and mirror_time = #{mirrorTime} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
 		  		  <if test="count != null and count != ''"> and count = #{count} </if>
-
+			 <if test="num != null and num != ''"> and num = #{num} </if>
+			 <if test="code != null and code != ''"> and code = #{code} </if>
 			 <if test="status != null and status != ''"> and status = #{status} </if>
 			 <if test="username != null and username != ''"> and username = #{username} </if>
 			 <if test="shTime != null and shTime != ''"> and sh_time = #{shTime} </if>
@@ -84,6 +87,8 @@
 			`mirror_time`, 
 			`goods_name`, 
 			`count`,
+			`num`,
+			`code`,
 			`status`,
 			`username`,
 			`sh_time`,
@@ -103,6 +108,8 @@
 			#{mirrorTime}, 
 			#{goodsName}, 
 			#{count}, 
+			#{num},
+			#{code},
 
 			#{status},
 			#{username},
@@ -126,6 +133,8 @@
 			<if test="mirrorTime != null">`mirror_time` = #{mirrorTime}, </if>
 			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
 			<if test="count != null">`count` = #{count}, </if>
+			<if test="num != null">`num` = #{num}, </if>
+			<if test="code != null">`code` = #{code}, </if>
 
 			<if test="status != null">`status` = #{status},</if>
 			<if test="username != null">`username` = #{username},</if>

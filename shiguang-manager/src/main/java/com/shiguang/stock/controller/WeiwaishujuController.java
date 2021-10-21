@@ -1,5 +1,6 @@
 package com.shiguang.stock.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +76,23 @@ public class WeiwaishujuController {
 	@ResponseBody
 	@PostMapping("/save")
 	public R save( WeiwaishujuDO weiwaishuju){
+		if (weiwaishuju.getCode()!="" && weiwaishuju.getCode()!=null){
+			String[] codeskc=weiwaishuju.getCode().split(",");
+			String codeKcs="";
+			for (int i=0;i<codeskc.length;i++){
+				codeKcs += codeskc[i]+"00000000,";
+			}
+			weiwaishuju.setCode(codeKcs);
+		}
+		if (weiwaishuju.getCodeyx()!="" && weiwaishuju.getCodeyx() != null){
+			String[] codeskcyx=weiwaishuju.getCodeyx().split(",");
+			String codeKcsyx="";
+			for (int i=0;i<codeskcyx.length;i++){
+				codeKcsyx += codeskcyx[i]+"00000000";
+			}
+			weiwaishuju.setCodeyx(codeKcsyx);
+		}
+
 		if(weiwaishujuService.save(weiwaishuju)>0){
 			return R.ok();
 		}

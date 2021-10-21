@@ -101,4 +101,9 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	public WeiwaiDO yxPeijingdan(String danjuNumber) {
 		return weiwaiDao.yxPeijingdan(danjuNumber);
 	}
+
+	@Override
+	public WeiwaiDO weiwaiOrder(String danjuNumber) {
+		return weiwaiDao.weiwaiOrder(danjuNumber);
+	}
 }

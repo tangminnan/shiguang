@@ -1,5 +1,6 @@
 package com.shiguang.stock.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -123,17 +124,178 @@ public class OrderController {
      */
     @ResponseBody
     @RequestMapping(value = "/updateStatus")
-    public R updateEnable(String danjuNumber, String status ,String username) {
-        OrderDO orderDO = new OrderDO();
-        StockDO stockDO = new StockDO();
-        orderDO.setDanjuNumber(danjuNumber);
-        orderDO.setStatus(status);
-        orderDO.setUsername(username);
-        stockDO.setDanjuNumber(danjuNumber);
-        stockDO.setStatus(status);
-        stockDO.setUsername(username);
-        orderService.updateStatus(orderDO);
-        stockService.updateStatus(stockDO);
+    public R updateEnable(String danjuNumber, String status ,String username,StockDO stockDO) {
+
+//        String positionName=stock.getPositionName();
+//        String str = stock.getGoodsNum();
+//        String[] name = str.split(",");
+//        String[] goodsCode1=stock.getGoodsCode().split(",");
+//        String[] goodsName1= stock.getGoodsName().split(",");
+//        String[] brandname1= stock.getBrandname().split(",");
+//        String[] goodCount1= stock.getGoodsCount().toString().split(",");
+//        String[] costPrice1 =stock.getCostPrice().split(",");
+//        String[] wholePrice1=stock.getWholePrice().split(",");
+//        String[] retailPrice1= stock.getRetailPrice().split(",");
+//        String[] unit1=stock.getUnit().split(",");
+//        String[] useday1=stock.getUseday().split(",");
+//        String[] batch1=stock.getBatch().split(",");
+//        String[] zhuceNumber1=stock.getZhuceNumber().split(",");
+//        String[] produceDay1=stock.getProduceDay().split(",");
+//        String[] status1=stock.getStatus().split(",");
+//        String[] username1=stock.getUsername().split(",");
+//        String[] classtype1=stock.getClasstype().split(",");
+//        String[] factory1=stock.getFactory().split(",");
+//        String[] goodsxinxiid1=stock.getGoodsxinxiid().toString().split(",");
+//
+//        String[] createTime1=stock.getCreateTime().toString().split(",");
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber",danjuNumber);
+        List<OrderDO> orderDOS = orderService.orderdingdan(map);
+        for (OrderDO orderkc:orderDOS){
+            String goodsCount =orderkc.getGoodsCount();//采购数量
+            //判断是否已存在商品
+            String goodsNum = orderkc.getGoodsNum();
+            String goodsCode = orderkc.getGoodsCode();
+            stockDO.setGoodsNum(goodsNum);
+            stockDO.setGoodsCode(goodsCode);
+            stockDO.setPositionId(orderkc.getPositionId());
+            stockDO.setPositionName(orderkc.getPositionName());
+            try {
+                String useday = orderkc.getUseday();
+                stockDO.setUseday(useday);
+            }catch (ArrayIndexOutOfBoundsException e){
+                stockDO.setUseday("");
+            }
+            StockDO goodsNumList = stockService.haveNum(stockDO);
+            if (null != goodsNumList) {
+                String gdcount = goodsNumList.getGoodsCount();
+                Integer goodsCountNew = Integer.valueOf(goodsCount);
+                Integer gdcountNew = Integer.valueOf(gdcount);
+                Integer newGoodsCount = goodsCountNew + gdcountNew;
+                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+                stockService.updateGoodsCount(stockDO);//修改数量
+            }else {
+                stockDO.setGoodsCount(goodsCount);//数量
+                stockDO.setGoodsType(orderkc.getGoodsType());
+                stockDO.setMfrsid(orderkc.getMfrsid());
+                stockDO.setGoodsName(orderkc.getGoodsName());
+                stockDO.setBrandname(orderkc.getBrandname());
+                try {
+                    String retailPrice =orderkc.getRetailPrice();
+                    stockDO.setRetailPrice(retailPrice);
+                    Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
+                    stockDO.setPriceSum(Double.toString(priceSum));
+
+                }catch (ArrayIndexOutOfBoundsException e){
+                    stockDO.setRetailPrice("");
+                    stockDO.setPriceSum("");
+                }
+
+                stockDO.setPositionName(orderkc.getPositionName());
+                try {
+                    String createTime = orderkc.getCreateTime();
+                    stockDO.setCreateTime(createTime);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    stockDO.setCreateTime("");
+                }
+
+                stockDO.setDanjuNumber(orderkc.getDanjuNumber());
+                stockDO.setOrderNumber(orderkc.getOrderNumber());
+                stockDO.setYundanNumber(orderkc.getYundanNumber());
+                stockDO.setZhidanPeople(orderkc.getZhidanPeople());
+                stockDO.setDanjuDay(orderkc.getDanjuDay());
+                stockDO.setTuihuoNumber(orderkc.getTuihuoNumber());
+                stockDO.setFactoryNumber(orderkc.getFactoryNumber());
+                stockDO.setBeizhu(orderkc.getBeizhu());
+                stockDO.setReturnzt(orderkc.getReturnzt());
+                try {
+                    String unit = orderkc.getUnit();
+                    stockDO.setUnit(unit);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    stockDO.setUnit("");
+                }
+
+                try {
+                    String batch = orderkc.getBatch();
+                    stockDO.setBatch(batch);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    stockDO.setBatch("");
+                }
+                try {
+                    String zhuceNumber =orderkc.getZhuceNumber() ;
+                    stockDO.setZhuceNumber(zhuceNumber);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    stockDO.setZhuceNumber("");
+                }
+                try {
+                    String produceDay = orderkc.getProduceDay();
+                    stockDO.setProduceDay(produceDay);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    stockDO.setProduceDay("");
+                }
+                try {
+                   String status1 = orderkc.getStatus();
+                    stockDO.setStatus(status1);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    stockDO.setStatus("");
+                }
+                try {
+                   String username1 =orderkc.getUsername();
+                    stockDO.setUsername(username1);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    stockDO.setUsername("");
+                }
+                try {
+                    String goodsxinxiid =orderkc.getGoodsxinxiid();
+                    stockDO.setGoodsxinxiid(goodsxinxiid);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    stockDO.setGoodsxinxiid("");
+                }
+
+
+
+
+
+                if(null != orderkc.getClasstype()){
+                    try {
+                        String classtype = orderkc.getClasstype();
+                        stockDO.setClasstype(classtype);
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        stockDO.setClasstype("");
+                    }
+                }else{
+                    stockDO.setClasstype("");
+                }
+
+
+                if(null != orderkc.getFactory()) {
+                    try {
+                        String factory = orderkc.getFactory();
+                        stockDO.setFactory(factory);
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        stockDO.setFactory("");
+                    }
+                }else {
+                    stockDO.setFactory("");
+                }
+
+
+                if (stockService.save(stockDO) > 0) {
+                    OrderDO orderDO = new OrderDO();
+                    StockDO stockDO1 = new StockDO();
+                    orderDO.setDanjuNumber(danjuNumber);
+                    orderDO.setStatus(status);
+                    orderDO.setUsername(username);
+                    stockDO1.setDanjuNumber(danjuNumber);
+                    stockDO1.setStatus(status);
+                    stockDO1.setUsername(username);
+                    orderService.updateStatus(orderDO);
+                    stockService.updateStatus(stockDO1);
+                }
+            }
+
+        }
         return R.ok();
     }
 }

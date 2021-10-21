@@ -92,7 +92,7 @@ function load() {
                             if (row.status == "1") {
                                 var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
                                     + row.id + '\')">详情</span> ';
-                                var f = '<span class="btn btn-success btn-sm" href="#" title="收货"  mce_href="#" style="width:26%" onclick="userNum(\''
+                                var f = '<span class="btn btn-success btn-sm" href="#" title="收货"  mce_href="#"  onclick="userNum(\''
                                     + row.danjuNumber + '\')">收货</span> ';
                                 var n = '';
                             } else if (row.status == "0") {

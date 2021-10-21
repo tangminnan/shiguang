@@ -186,6 +186,7 @@
                             var str = xml[i].name;
                             var name = str.split(",");
                             var num = xml[i].num.split(",");
+                            var code = xml[i].code.split(",");
                             var leftRight = xml[i].leftRight.split(",");
                             var count = xml[i].count.split(",");
                             var yaoqiu = xml[i].yaoqiu.split(",");
@@ -219,6 +220,7 @@
                                     "<input name='yaoqiu' type='hidden' value='" + yaoqiu[a] + "'>\n" +
                                     "<td style='display:none;'>" + num[a] + "</td>\n" +
                                     "<input name='num' type='hidden' value='" + num[a] + "'>\n" +
+                                    "<input name='code' type='hidden' value='" + code[a] + "'>\n" +
                                     "</tr>"
                                 );//页面每个数量
                             }
@@ -244,6 +246,7 @@
 							var str = xml[i].nameyx;
 							var nameyx = str.split(",");
 							var numyx = xml[i].numyx.split(",");
+							var codeyx = xml[i].codeyx.split(",");
 							var leftRightYx = xml[i].leftRightYx.split(",");
 							var countyx = xml[i].countyx.split(",");
 							var yaoqiuyx = xml[i].yaoqiuyx.split(",");
@@ -277,6 +280,7 @@
 										"<input name='yaoqiu' type='hidden' value='" + yaoqiuyx[a] + "'>\n" +
 										"<td style='display:none;'>" + numyx[a] + "</td>\n" +
 										"<input name='num' type='hidden' value='" + numyx[a] + "'>\n" +
+										"<input name='code' type='hidden' value='" + codeyx[a] + "'>\n" +
 										"</tr>"
 								);
 							}

@@ -340,4 +340,10 @@
             <if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>
         </where>
     </select>
+    <select id="orderdingdan" resultType="com.shiguang.stock.domain.OrderDO">
+        select * FROM stock_order
+        <where>
+            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+        </where>
+    </select>
 </mapper>

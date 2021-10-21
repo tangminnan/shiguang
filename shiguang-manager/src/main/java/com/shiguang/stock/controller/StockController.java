@@ -177,237 +177,9 @@ public class StockController {
     @PostMapping("/save")
     @RequiresPermissions("stock:stock:add")
     public R save(StockDO stock, OrderDO orderDO) {
-        String positionName=stock.getPositionName();
-        String str = stock.getGoodsNum();
-        String[] name = str.split(",");
-        String[] goodsCode1=stock.getGoodsCode().split(",");
-        String[] goodsName1= stock.getGoodsName().split(",");
-        String[] brandname1= stock.getBrandname().split(",");
-        String[] goodCount1= stock.getGoodsCount().toString().split(",");
-        String[] costPrice1 =stock.getCostPrice().split(",");
-        String[] wholePrice1=stock.getWholePrice().split(",");
-        String[] retailPrice1= stock.getRetailPrice().split(",");
-        String[] unit1=stock.getUnit().split(",");
-        String[] useday1=stock.getUseday().split(",");
 
-
-
-
-        String[] batch1=stock.getBatch().split(",");
-        String[] zhuceNumber1=stock.getZhuceNumber().split(",");
-        String[] produceDay1=stock.getProduceDay().split(",");
-        String[] status1=stock.getStatus().split(",");
-        String[] username1=stock.getUsername().split(",");
-        String[] classtype1=stock.getClasstype().split(",");
-        String[] factory1=stock.getFactory().split(",");
-        String[] goodsxinxiid1=stock.getGoodsxinxiid().toString().split(",");
-
-        String[] createTime1=stock.getCreateTime().toString().split(",");
-
-        for (int i = 0; i < name.length; i++) {
-            StockDO stockDO = new StockDO();
-
-
-
-            try {
-                String goodsNum = name[i];
-                stockDO.setGoodsNum(goodsNum);
-            }catch (ArrayIndexOutOfBoundsException e){
-                stockDO.setGoodsNum("");
-            }
-            try {
-                String goodsCode = goodsCode1[i];
-                stockDO.setGoodsCode(goodsCode);
-            }catch (ArrayIndexOutOfBoundsException e){
-                stockDO.setGoodsCode("");
-            }
-            try {
-                String goodsName = goodsName1[i];
-                stockDO.setGoodsName(goodsName);
-            }catch (ArrayIndexOutOfBoundsException e){
-                stockDO.setGoodsName("");
-            }
-            try {
-                String brandname = brandname1[i];
-                stockDO.setBrandname(brandname);
-            }catch (ArrayIndexOutOfBoundsException e){
-                stockDO.setBrandname("");
-            }
-
-
-
-
-
-
-            String goodsCount = goodCount1[i];
-
-            //判断是否已存在商品
-            String goodsNum = name[i];
-            String goodsCode = goodsCode1[i];
-            stockDO.setGoodsNum(goodsNum);
-            stockDO.setGoodsCode(goodsCode);
-            stockDO.setPositionId(stock.getPositionId());
-            stockDO.setPositionName(positionName);
-            try {
-                String useday = useday1[i];
-                stockDO.setUseday(useday);
-            }catch (ArrayIndexOutOfBoundsException e){
-                stockDO.setUseday("");
-            }
-            StockDO goodsNumList = stockService.haveNum(stockDO);
-            if (null != goodsNumList) {
-                String gdcount = goodsNumList.getGoodsCount();
-                Integer goodsCountNew = Integer.valueOf(goodsCount);
-                Integer gdcountNew = Integer.valueOf(gdcount);
-                Integer newGoodsCount = goodsCountNew + gdcountNew;
-                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-
-                stockService.updateGoodsCount(stockDO);//修改数量
-            } else {
-                stockDO.setGoodsCount(goodsCount);//数量
-                stockDO.setGoodsType(stock.getGoodsType());
-                stockDO.setMfrsid(stock.getMfrsid());
-
-                try {
-                    String costPrice = costPrice1[i];
-                    stockDO.setCostPrice(costPrice);
-
-                    Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodsCount);
-                    stockDO.setCostSum(Double.toString(costSum));
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setCostPrice("");
-                    stockDO.setCostSum("");
-                }
-                 try {
-                     String wholePrice = wholePrice1[i];
-                     stockDO.setWholePrice(wholePrice);
-                     Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodsCount);
-                     stockDO.setWholeSum(Double.toString(wholeSum));
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setWholePrice("");
-                    stockDO.setWholeSum("");
-                }
-                try {
-                    String retailPrice =retailPrice1 [i];
-                    stockDO.setRetailPrice(retailPrice);
-                    Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
-                    stockDO.setPriceSum(Double.toString(priceSum));
-
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setRetailPrice("");
-                    stockDO.setPriceSum("");
-                }
-
-
-
-
-
-
-
-//            String transferPrice = stock.getTransferPrice().split(",")[i];
-//            stockDO.setTransferPrice(transferPrice);
-//            Double transferPricecount = Double.parseDouble(transferPrice) * Double.parseDouble(goodsCount);
-//            stockDO.setCostSum(Double.toString(transferPricecount));
-
-
-
-                stockDO.setPositionName(stock.getPositionName());
-                try {
-                    String createTime = createTime1[i];
-                    stockDO.setCreateTime(createTime);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setCreateTime("");
-                }
-
-                stockDO.setDanjuNumber(stock.getDanjuNumber());
-                stockDO.setOrderNumber(stock.getOrderNumber());
-                stockDO.setYundanNumber(stock.getYundanNumber());
-                stockDO.setZhidanPeople(stock.getZhidanPeople());
-                stockDO.setDanjuDay(stock.getDanjuDay());
-                stockDO.setTuihuoNumber(stock.getTuihuoNumber());
-                stockDO.setFactoryNumber(stock.getFactoryNumber());
-                stockDO.setBeizhu(stock.getBeizhu());
-                stockDO.setReturnzt(stock.getReturnzt());
-                try {
-                    String unit = unit1[i];
-                    stockDO.setUnit(unit);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setUnit("");
-                }
-
-                try {
-                    String batch = batch1[i];
-                    stockDO.setBatch(batch);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setBatch("");
-                }
-                try {
-                    String zhuceNumber =zhuceNumber1 [i];
-                    stockDO.setZhuceNumber(zhuceNumber);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setZhuceNumber("");
-                }
-                try {
-                    String produceDay = produceDay1[i];
-                    stockDO.setProduceDay(produceDay);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setProduceDay("");
-                }
-                try {
-                    String status = status1[0];
-                    stockDO.setStatus(status);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setStatus("");
-                }
-                try {
-                    String username =username1 [0];
-                    stockDO.setUsername(username);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setUsername("");
-                }
-                try {
-                    String goodsxinxiid =goodsxinxiid1 [i];
-                    stockDO.setGoodsxinxiid(goodsxinxiid);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setGoodsxinxiid("");
-                }
-
-
-
-
-
-                if(null != stock.getClasstype()){
-                    try {
-                        String classtype = classtype1[i];
-                        stockDO.setClasstype(classtype);
-                    }catch (ArrayIndexOutOfBoundsException e){
-                        stockDO.setClasstype("");
-                    }
-                }else{
-                    stockDO.setClasstype("");
-                }
-
-
-                if(null != stock.getFactory()) {
-                    try {
-                        String factory = factory1[i];
-                        stockDO.setFactory(factory);
-                    }catch (ArrayIndexOutOfBoundsException e){
-                        stockDO.setFactory("");
-                    }
-                }else {
-                    stockDO.setFactory("");
-                }
-
-
-                if (stockService.save(stockDO) < 0) {
-                    return R.error();
-                }
-            }
-
-        }
         String strOrder = stock.getGoodsNum();
-        String[] namesOrder2 = strOrder.split(",");
+        String[] numOrder2 = strOrder.split(",");
         String[] goodsCode2=orderDO.getGoodsCode().split(",");
         String[] goodsName2=orderDO.getGoodsName().split(",");
         String[] brandname2=orderDO.getBrandname().split(",");
@@ -425,10 +197,10 @@ public class StockController {
         String[] classtype2=orderDO.getClasstype().split(",");
         String[] factory2=orderDO.getFactory().split(",");
         String[] goodsxinxiid2=orderDO.getGoodsxinxiid().toString().split(",");
-
-        for (int i = 0; i < namesOrder2.length; i++) {
+        String[] createTime2=stock.getCreateTime().toString().split(",");
+        for (int i = 0; i < numOrder2.length; i++) {
             OrderDO orderDO1 = new OrderDO();
-            String goodsNum = name[i];
+            String goodsNum = numOrder2[i];
             orderDO1.setGoodsNum(goodsNum);
 
             try {
@@ -465,12 +237,6 @@ public class StockController {
                  orderDO1.setWholePrice(wholePrice);
                  Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodsCount);
                  orderDO1.setWholeSum(Double.toString(wholeSum));    //批发合计
-
-//            String transferPrice = stock.getTransferPrice().split(",")[i];
-//            stockDO.setTransferPrice(transferPrice);
-//            Double transferPricecount = Double.parseDouble(transferPrice) * Double.parseDouble(goodsCount);
-//            stockDO.setCostSum(Double.toString(transferPricecount));
-
                  String retailPrice = retailPrice2[i];
                  orderDO1.setRetailPrice(retailPrice);
                  Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
@@ -485,16 +251,10 @@ public class StockController {
                 orderDO1.setPriceSum("");
             }
 
-
-
-
-
-
-
             orderDO1.setPositionId(orderDO.getPositionId());
             orderDO1.setPositionName(orderDO.getPositionName());
             try {
-                String createTime = createTime1[i];
+                String createTime = createTime2[i];
                 orderDO1.setCreateTime(createTime);
             }catch (ArrayIndexOutOfBoundsException e){
                 orderDO1.setCreateTime("");
