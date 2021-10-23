@@ -136,4 +136,26 @@
         </where>
         group by sale_number
     </select>
+
+	<!-- 查询中心店的营业员的报表 -->
+	<select id="findSaleReportForms" resultType="com.shiguang.settlement.domain.SettlementDO">
+		select s.`id`,s.`cost_id`,s.`sale_number`,s.`member_number`,s.`sale_name`,s.`actual_money`,s.`payment_money`,s.`change_money`,s.`pay_model`,
+		s.`model_money`,s.`pay_money`,s.`pay_way`,s.`front_money`,s.`settle_date`,s.`front_time`,d.`drawback_money` as drawBackMoney,d.`drackback_way` as drawBackWay
+		 from settlement s join member m on m.card_number = s.member_number left join drawback d on d.sale_number = s.sale_number
+		 <where>
+			 <if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
+			 <if test="settleDateStart !=null and settleDateStart != ''">date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			 <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+		 </where>
+	</select>
+
+	<select id="findSaleReportFormsCount" resultType="com.shiguang.settlement.domain.SettlementDO">
+		select count (*)
+		from settlement s join member m on m.card_number = s.member_number
+		<where>
+			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''">date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''">date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+		</where>
+	</select>
 </mapper>

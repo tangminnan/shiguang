@@ -374,8 +374,10 @@ public class SettlementController {
 			}
 			model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));
 			model.addAttribute("payMoney",settlementDO1.getPayMoney());
+			model.addAttribute("changeMoney",settlementDO1.getChangeMoney());
 		} else {
 			model.addAttribute("payMoney","");
+			model.addAttribute("changeMoney","");
 		}
 
 		Map<String,Object> map2 = new HashMap<>();

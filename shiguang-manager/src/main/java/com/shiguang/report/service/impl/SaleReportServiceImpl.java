@@ -29,4 +29,14 @@ public class SaleReportServiceImpl implements SaleReportService {
     public SaleReportDO findCostList(Map<String,Object> map){
         return saleReportDao.findCostList(map);
     }
+
+    @Override
+    public List<SettlementDO> findSaleReportForms(Map<String, Object> map){
+        return saleReportDao.findSaleReportForms(map);
+    }
+
+    @Override
+    public int findSaleReportFormsCount(Map<String, Object> map){
+        return saleReportDao.findSaleReportFormsCount(map);
+    }
 }

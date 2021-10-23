@@ -1645,7 +1645,6 @@
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 // var rows = sessionStorage.getItem("row");
                 // alert(rows.length)
-				alert(JSON.stringify(rows));
                 if (rows.length > 0){
                     a=a+1;
 				}
@@ -1658,7 +1657,7 @@
                     html += "<input id='storeName' name='storeName' value="+rows[i].goodsName+" text='hidden'/>"
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>"+rows[i].goodsCount+"</td>";
-                    html += "<td>1</td>";
+                    html += "<td><input name='storeCount' value='1' style='width:15px;'/></td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td id='zhekoulv"+i+"'>0.00</td>";
                     html += "<td id='zhekoujj"+a+"'>0.00</td>";
@@ -1674,10 +1673,10 @@
                     html += "<input id='jjGoodsName' name='jjGoodsName' type='hidden' value='"+rows[i].goodsName+"'/>"
                     html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='storeUnit' name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"' />"
-                    html += "<input id='storeCount' name='storeCount' type='hidden' />"
+                    // html += "<input id='storeCount' name='storeCount' type='hidden' />"
 					html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                     html += "<input id='isJj' name='isJj' type='hidden' />"
-                    html += "<input id='classtype' name='classtype' type='hidden' />"
+                    html += "<input id='classtype' name='classtype' type='hidden' value='1'/>"
                     html += "<input id='leftRight' name='leftRight' type='hidden' value='空'/>"
                     html += "<input id='yingshoujj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                     html += "<input id='producaNum' name='producaNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
@@ -1694,15 +1693,15 @@
                     //unitarray.push(rows[i].unit);
                    // goodsNumArray.push(rows[i].goodsNum);
                     //jjArray.push(rows[i].goodsName)
-                    arraycount.push(1)
-                    classArray.push(1);
+                    // arraycount.push(1)
+                    //classArray.push(1);
                     //producaNum.push(rows[i].goodsNum);
 					$("#isJj").val("有")
 				}
                 //$("#storeName").val(arraystore);
                 //$("#storeUnit").val(arrayunit);
-                $("#storeCount").val(arraycount);
-                $("#classtype").val(classArray);
+                // $("#storeCount").val(arraycount);
+                //$("#classtype").val(classArray);
                 //$("#unit").val(unitarray);
                 //$("#goodsNum").val(goodsNumArray);
                 //$("#jjGoodsName").val(jjArray);
@@ -1866,7 +1865,7 @@
                     html += "<td>"+rows[i].leftRight+"</td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>"+rows[i].goodsCount+"</td>";
-                    html += "<td>1</td>";
+                    html += "<td><input name='storeCount' value='1' style='width:15px;'/></td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td id='zhekoulv"+i+"'>0.00</td>";
                     html += "<td id='zhekoujp"+a+"'>0.00</td>";
@@ -1883,10 +1882,10 @@
                     html += "<input id='jpGoodsCode'name='jpGoodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                     html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
                     html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
-                    html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                    // html += "<input id='storeCount'name='storeCount' type='hidden' />"
                     html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
                     html += "<input id='leftRight' name='leftRight' type='hidden' value='"+rows[i].leftRight+"'/>"
-                    html += "<input id='classtype' name='classtype' type='hidden' />"
+                    html += "<input id='classtype' name='classtype' type='hidden' value='"+rows[i].classtype+"'/>"
                     html += "<input id='isJp'name='isJp' type='hidden' />"
                     html += "<input id='yingshoujp"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
                     html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
@@ -1901,15 +1900,15 @@
                     //unitarray.push(rows[i].unit);
                    // goodsNumArray.push(rows[i].goodsNum);
                     //jpArray.push(rows[i].goodsName)
-                    classArray.push(rows[i].classtype);
-                    arraycount.push(1);
+                    //classArray.push(rows[i].classtype);
+                    //arraycount.push(1);
                     arrayjp.push(1);
                 }
                 $("#isJp").val(arrayjp.length);
-                $("#classtype").val(classArray);
+                //$("#classtype").val(classArray);
                 //$("#storeName").val(arraystore);
                 //$("#storeUnit").val(arrayunit);
-                $("#storeCount").val(arraycount);
+                //$("#storeCount").val(arraycount);
                 //$("#unit").val(unitarray);
                 //$("#goodsNum").val(goodsNumArray);
                 //$("#jpGoodsName").val(jpArray);

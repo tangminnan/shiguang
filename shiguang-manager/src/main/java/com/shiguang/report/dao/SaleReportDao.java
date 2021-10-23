@@ -13,4 +13,8 @@ public interface SaleReportDao {
     int findSaleReportCount(Map<String, Object> map);
 
     SaleReportDO findCostList(Map<String,Object> map);
+
+    List<SettlementDO> findSaleReportForms(Map<String,Object> map);
+
+    int findSaleReportFormsCount(Map<String, Object> map);
 }

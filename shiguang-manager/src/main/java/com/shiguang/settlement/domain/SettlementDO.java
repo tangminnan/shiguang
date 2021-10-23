@@ -56,6 +56,10 @@ public class SettlementDO implements Serializable {
 	private String settleTime;
 	//原价合计
 	private Double originalPrice;
+	//退款金额
+	private String drawBackMoney;
+	//退款方式
+	private String drawBackWay;
 
 
 	/**
@@ -210,4 +214,12 @@ public class SettlementDO implements Serializable {
 	public Long getAge() {
 		return age;
 	}
+
+	public void setDrawBackMoney(String drawBackMoney){this.drawBackMoney = drawBackMoney;}
+
+	public String getDrawBackMoney(){return drawBackMoney;}
+
+	public void setDrawBackWay(String drawBackWay){this.drawBackWay = drawBackWay;}
+
+	public String getDrawBackWay(){return drawBackWay;}
 }

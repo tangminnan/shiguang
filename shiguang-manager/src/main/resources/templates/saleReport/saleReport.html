@@ -22,14 +22,14 @@
 						<div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
-							<div class="columns pull-right  nopadding">
-								<input id="saleNum" type="text" class="form-control"
-									   placeholder="人员工号">
-							</div>
-							<div class="columns pull-right  nopadding">
-								<input id="settleDateStart" type="text" class="form-control"
+							<!--<div class="columns pull-right  nopadding">-->
+								<!--<input id="saleNum" type="text" class="form-control"-->
+									   <!--placeholder="人员工号">-->
+							<!--</div>-->
+							<div class="columns pull-right nopadding">
+								<input id="settleDateStart" type="text"
 									   placeholder="开始日期">～
-								<input id="settleDateEnd" type="text" class="form-control"
+								<input id="settleDateEnd" type="text"
 									   placeholder="结束日期">
 							</div>
 						</div>
@@ -45,7 +45,12 @@
 	<script type="text/javascript" src="/js/appjs/saleReport/saleReport.js"></script>
 <script type="text/javascript">
     laydate.render({
-        elem: '#settleDate',
+        elem: '#settleDateStart',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+    laydate.render({
+        elem: '#settleDateEnd',
         format: 'yyyy-MM-dd',
         type: 'date'
     });

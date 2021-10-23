@@ -114,13 +114,13 @@ public class UnqualiffedController {
 		for (int i=0;i<salesDOList.size();i++){
 			List<SaleGoodsDO> list = new ArrayList<>();
 			String[] storeDescribe = salesDOList.get(i).getStoreDescribe().split(",");
+			String[] goodsCode = salesDOList.get(i).getGoodsCode().split(",");
+			String[] goodsNum = salesDOList.get(i).getGoodsNum().split(",");
+			String[] goodsName = salesDOList.get(i).getStoreName().split(",");
+			String[] goodsCount = salesDOList.get(i).getStoreCount().split(",");
 			for (int a=0;a<storeDescribe.length;a++){
 				if ("镜片".equals(storeDescribe[a])){
 					SaleGoodsDO saleGoodsDO = new SaleGoodsDO();
-					String[] goodsCode = salesDOList.get(a).getGoodsCode().split(",");
-					String[] goodsNum = salesDOList.get(a).getGoodsNum().split(",");
-					String[] goodsName = salesDOList.get(a).getStoreName().split(",");
-					String[] goodsCount = salesDOList.get(a).getStoreCount().split(",");
 					saleGoodsDO.setGoodsCode(goodsCode[a]);
 					saleGoodsDO.setGoodsNum(goodsNum[a]);
 					saleGoodsDO.setGoodsName(goodsName[a]);

@@ -102,9 +102,10 @@ function load() {
 }
 function reLoad() {
 	// $('#exampleTable').bootstrapTable('refresh');
-   var saleNum = $("#saleNum").val();
-     var settleDate = $("#settleDate").val();
-    window.open("/information/saleReport/reportList?saleNum="+saleNum+"&settleDate="+settleDate);
+   //var saleNum = $("#saleNum").val();
+     var settleDateStart = $("#settleDateStart").val();
+     var settleDateEnd = $("#settleDateEnd").val();
+    window.open("/information/saleReport/reportList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd);
 }
 function add() {
 	var toIndex = layer.open({
