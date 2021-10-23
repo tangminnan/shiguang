@@ -144,18 +144,20 @@
 		 from settlement s join member m on m.card_number = s.member_number left join drawback d on d.sale_number = s.sale_number
 		 <where>
 			 <if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
-			 <if test="settleDateStart !=null and settleDateStart != ''">date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			 <if test="settleDateStart !=null and settleDateStart != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
 			 <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			 <if test="state !=null and state != ''">and m.state = #{state}</if>
 		 </where>
 	</select>
 
 	<select id="findSaleReportFormsCount" resultType="com.shiguang.settlement.domain.SettlementDO">
 		select count (*)
-		from settlement s join member m on m.card_number = s.member_number
+		from settlement s join member m on m.card_number = s.member_number left join drawback d on d.sale_number = s.sale_number
 		<where>
 			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
-			<if test="settleDateStart !=null and settleDateStart != ''">date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
-			<if test="settleDateEnd !=null and settleDateEnd != ''">date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="state !=null and state != ''">and m.state = #{state}</if>
 		</where>
 	</select>
 </mapper>
