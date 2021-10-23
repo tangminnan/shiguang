@@ -185,9 +185,6 @@ public class SaleReportController {
 //		PageUtils pageUtils = new PageUtils(settlementList, total);
         Map<String,Object> query = new HashMap<>();
         query.put("state",1);
-        if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyid",ShiroUtils.getUser().getCompanyId());
-        }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         if (!"".equals(settleDateStart)){
@@ -205,7 +202,9 @@ public class SaleReportController {
 //        }
         //query.put("settleDate","2021-08-25");
         if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+            if(!"3".equals(ShiroUtils.getUser().getCompanyId())){
+                query.put("companyid",ShiroUtils.getUser().getCompanyId());
+            }
         }
         List<SettlementDO> list = saleReportService.findSaleReportForms(query);
 //        List<Map<String,Object>> saleReportList = new ArrayList<>();
