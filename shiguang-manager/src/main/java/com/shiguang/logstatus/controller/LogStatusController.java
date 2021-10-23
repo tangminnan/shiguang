@@ -261,7 +261,7 @@ public class LogStatusController {
 
         String addPrice = settlementDO.getAdditionalPrice();
         Double priceSum = 0.00;
-        if (null != addPrice){
+        if (null != addPrice && !"".equals(addPrice)){
             String[] addPriceStr = addPrice.split(",");
             for (int d=0;d<addPriceStr.length;d++){
                 String price = addPriceStr[d];
@@ -326,11 +326,17 @@ public class LogStatusController {
         if (null != ShiroUtils.getUser().getCompanyId()) {
             companyId = ShiroUtils.getUser().getCompanyId();
         }
+        PositionDO positionDO = new PositionDO();
         Map<String,Object> maps = new HashMap<>();
-        maps.put("companyId", companyId);
-        PositionDO positionDO = stockService.findHegePosition(maps);
         for (int a=0;a<storeDescribe.length;a++){
             if (!"镜架".equals(storeDescribe[a]) && !"自架".equals(storeDescribe[a]) && !"自片".equals(storeDescribe[a]) ){
+                if (!"镜片".equals(storeDescribe[a]) && !"隐形".equals(storeDescribe[a])){
+                    maps.put("companyId", companyId);
+                    positionDO = stockService.findPosition(maps);
+                } else {
+                    maps.put("companyId", companyId);
+                    positionDO = stockService.findHegePosition(maps);
+                }
                 StockDO stockDOs = new StockDO();
                 stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
                 stockDOs.setGoodsCode(goodsCode[a]);

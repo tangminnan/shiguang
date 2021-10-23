@@ -224,16 +224,16 @@
         goodsDescribe = goodsDescribe.split(",");
         var html = "";
         // alert(goodsNumArray.length)
-		var a=0;
         for (var i=0;i<goodsNumArray.length;i++){
+            alert(goodsDescribe[i]);
+            alert(leftRights[i]);
             if (goodsDescribe[i] == "镜片"){
-                if (leftRights[a] == "右"){
+                if (leftRights[i] == "右"){
                     html += "镜片右条码：<input name='goodsNum' type='text'>";
 				}
-                if (leftRights[a] == "左"){
+                if (leftRights[i] == "左"){
                     html += "镜片左条码：<input name='goodsNum' type='text'>";
 				}
-                a= a+1;
 			}
 
 		}

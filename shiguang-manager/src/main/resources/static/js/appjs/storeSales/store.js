@@ -876,8 +876,10 @@ function getZijia(){
                 html += "<td>0.00</td>";
                 html += "<td>自架</td>";
                 html += "<td><em onclick='del(this,0.00,\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' value='副'/>"
                 html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].producName+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='0.00'/>"
+                html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].producNum+"'/>"
                 html += "<input id='isJj' name='isJj' type='hidden' />"
                 html += "<input id='classtype' name='classtype' type='hidden' />"
                 html += "<input id='leftRight' name='leftRight' type='hidden' value='空'/>"
@@ -931,8 +933,10 @@ function getZipian(){
                 html += "<td>0.00</td>";
                 html += "<td>自片</td>";
                 html += "<td><em onclick='del(this,0.00,\""+rows[i].producName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' value='片'/>"
                 html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].producName+"'/>"
                 html += "<input id='storeUnit'name='storeUnit' type='hidden' value='0.00'/>"
+                html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].producNum+"'/>"
                 html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='isJp'name='isJp' type='hidden' />"
                 html += "<input id='classtype' name='classtype' type='hidden' />"

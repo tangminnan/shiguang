@@ -3,6 +3,7 @@ package com.shiguang.common.utils;
 public class Chuank {
     public static void main(String[] args) {
         System.out.println("启动了！！！");
+        System.out.println("长度!!!"+args.length);
         // 实例化串口操作类对象
         SerialPortUtils serialPort = new SerialPortUtils();
         // 创建串口必要参数接收类并赋值，赋值串口号，波特率，校验位，数据位，停止位
@@ -12,6 +13,9 @@ public class Chuank {
         // 调用串口操作类的sendComm方法发送数据到串口
         //serialPort.sendComm("FEF10A000000000000000AFF");
         // 关闭串口
-        //serialPort.closeSerialPort();
+        if (args.length == 4){
+            serialPort.closeSerialPort();
+        }
+
     }
 }

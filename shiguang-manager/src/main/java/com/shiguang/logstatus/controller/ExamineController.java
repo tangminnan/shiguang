@@ -168,6 +168,14 @@ public class ExamineController {
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
         lensMeterService.remove(status.getLensMeterId());
+        try {
+            Method method = Chuank.class.getMethod("main",
+                    String[].class);
+            method.invoke(null,
+                    (Object) new String[4]);
+        } catch (Exception e) {
+            Throwable cause = e.getCause();
+        }
         return R.ok();
     }
 
