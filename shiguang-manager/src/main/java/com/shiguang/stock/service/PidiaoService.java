@@ -1,6 +1,7 @@
 package com.shiguang.stock.service;
 
 import com.shiguang.mfrs.domain.PositionDO;
+import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.StockDO;
 
@@ -47,4 +48,7 @@ public interface PidiaoService {
 	List<PidiaoDO> returnList(Map<String, Object> map);
 	//退回修改状态
 	int updatereturnzt(PidiaoDO pidiaoDO);
+
+	//根据采购订单号查询库存有没有
+	List<PidiaoDO> pidiaodan(Map<String,Object>map);
 }

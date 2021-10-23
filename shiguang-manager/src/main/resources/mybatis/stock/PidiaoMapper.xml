@@ -27,7 +27,7 @@
 		c.name as ings, d.depart_name as inbm, de.depart_name as outbm,
 		po.position_name as outcw ,pos.position_name as incw,
 		p.`id`,p.`pidiao_number`,
-		p.`zhidan_people`,p.`danju_day`,p.`outsourcing_number`,p.`beizhu`,p.`returnzt`
+		p.`zhidan_people`,p.`danju_day`,p.`outsourcing_number`,p.`beizhu`,p.`returnzt`,p.`stockorder`
 		from stock_pidiao p
 		left join sys_user u on p.zhidan_people =u.name
 
@@ -47,7 +47,7 @@
 		p.`out_departmentid`,p.`out_positionid`,p.`in_positionid`,p.`in_companyid`,p.`in_departmentid`,
 		p.`zhidan_people`,p.`danju_day`,p.`outsourcing_number`,p.`beizhu`,p.`goods_num`,p.`goods_name`,p.`need_count`,p.`goods_count`,p.`use_count`,p.`goods_code`,
 		p.`batch`,p.`zhuce_number`,p.`produce_day`,p.`useday`,p.`all_count`,p.`classtype`,p.`factory`,p.`status`,p.`username`,p.`goods`,p.`brandname`,p.`mfrsid`,
-		p.`unit`,p.`money`,p.`sh_time`,p.`returnzt`
+		p.`unit`,p.`money`,p.`sh_time`,p.`returnzt`,p.`stockorder`
 		from stock_pidiao p
 
 		join c_position po on p.out_positionid=po.position_id
@@ -97,6 +97,7 @@
 		  		  <if test="money != null and money != ''"> and p.money = #{money} </if>
 		  		  <if test="shTime != null and shTime != ''"> and p.sh_time = #{shTime} </if>
 		  		  <if test="returnzt != null and returnzt != ''"> and p.returnzt = #{returnzt} </if>
+		  		  <if test="stockorder != null and stockorder != ''"> and p.stockorder = #{stockorder} </if>
 
 			<if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>
 			<if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>
@@ -162,6 +163,7 @@
 			 <if test="shTime != null and shTime != ''"> and p.sh_time = #{shTime} </if>
 			 <if test="money != null and money != ''"> and money = #{money} </if>
 			 <if test="returnzt != null and returnzt != ''"> and returnzt = #{returnzt} </if>
+			 <if test="stockorder != null and stockorder != ''"> and stockorder = #{stockorder} </if>
 		  		</where>
 	</select>
 	 
@@ -207,7 +209,8 @@
 			`money`,
 			`sh_time`,
 			`returnzt`,
-			`goodsxinxiid`
+			`goodsxinxiid`,
+			`stockorder`
 		)
 		values
 		(
@@ -252,7 +255,8 @@
 			#{money},
 			#{shTime},
 			#{returnzt},
-			#{goodsxinxiid}
+			#{goodsxinxiid},
+			#{stockorder}
 		)
 	</insert>
 	 
@@ -297,7 +301,8 @@
 			<if test="unit != null">`unit` = #{unit},</if>
 			<if test="money != null">`money` = #{money},</if>
 			<if test="shTime != null">`sh_time` = #{shTime},</if>
-			<if test="returnzt != null">`returnzt` = #{returnzt}</if>
+			<if test="returnzt != null">`returnzt` = #{returnzt},</if>
+			<if test="stockorder != null">`stockorder` = #{stockorder}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -375,7 +380,8 @@
 		<set>
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="username != null">`username` = #{username}, </if>
-			<if test="shTime != null">`sh_time` = #{shTime} </if>
+			<if test="shTime != null">`sh_time` = #{shTime}, </if>
+			<if test="stockorder != null">`stockorder` = #{stockorder} </if>
 		</set>
 		where pidiao_number = #{pidiaoNumber}
 	</update>
@@ -392,4 +398,11 @@
 		</set>
 		where pidiao_number = #{pidiaoNumber}
 	</update>
+
+	<select id="pidiaodan" resultType="com.shiguang.stock.domain.PidiaoDO">
+		select * FROM stock_pidiao
+		<where>
+			<if test="pidiaoNumber != null and pidiaoNumber != ''">and pidiao_number = #{pidiaoNumber}</if>
+		</where>
+	</select>
 </mapper>

@@ -10,67 +10,73 @@
 		`sale_number`,`mirror_time`,`goods_name`,`num`,`code`,`style`,`rl`,`count`,`sph`,`cyl`,
 		`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,
 		`status`,`username`,`sh_time`,`shstatus` ,`psname`,
-		`gkname`,`hyknum`,`phone`,`salenumbery`,`pstime`
+		`gkname`,`hyknum`,`phone`,`salenumbery`,`pstime`,`stockorder`
 		from stock_weiwai where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.stock.domain.WeiwaiDO">
         select
-        `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`position_id`,`position_name`,`changjia_number`,
-        `shouhuo_people`,`shouhuo_phone`,`shouhuo_address`,`beizhu`,
-        `sale_number`,`mirror_time`,`goods_name`,`num`,`code`,
-        `style`,`rl`,`count`,`sph`,`cyl`,`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,
-        `gkname`,`hyknum`,`phone`,
-        `status`,`username`,`sh_time`,`shstatus` ,`psname`,`salenumbery`,`pstime`
-        from stock_weiwai
+        s.`id`,s.`danju_number`,s.`danju_day`,s.`eye_style`,s.`zhidan_people`,s.`mfrsid`,s.`mfrsname`,s.`position_id`,
+        s.`position_name`,s.`changjia_number`,
+       s. `shouhuo_people`,s.`shouhuo_phone`,s.`shouhuo_address`,s.`beizhu`,
+        s.`sale_number`,s.`mirror_time`,s.`goods_name`,s.`num`,s.`code`,
+        s.`style`,s.`rl`,s.`count`,s.`sph`,s.`cyl`,s.`axial`,s.`lightbelow`,s.`lengjing`,s.`diameter`,s.`yaoqiu`,s.`jd`,
+        s.`curvature`,s.`gkname`,s.`hyknum`,s.`phone`,
+        s.`status`,s.`username`,s.`sh_time`,s.`shstatus` ,s.`psname`,s.`salenumbery`,s.`pstime`,s.`stockorder`
+        from stock_weiwai s
+        left join c_position po on s.position_id=po.position_id
+        left join department d on po.depart_number= d.depart_number
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
-            <if test="danjuDay != null and danjuDay != ''">and danju_day = #{danjuDay}</if>
-            <if test="eyeStyle != null and eyeStyle != ''">and eye_style = #{eyeStyle}</if>
-            <if test="zhidanPeople != null and zhidanPeople != ''">and zhidan_people = #{zhidanPeople}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="mfrsname != null and mfrsname != ''">and mfrsname = #{mfrsname}</if>
-            <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
-            <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
-            <if test="changjiaNumber != null and changjiaNumber != ''">and changjia_number = #{changjiaNumber}</if>
-            <if test="shouhuoPeople != null and shouhuoPeople != ''">and shouhuo_people = #{shouhuoPeople}</if>
-            <if test="shouhuoPhone != null and shouhuoPhone != ''">and shouhuo_phone = #{shouhuoPhone}</if>
-            <if test="shouhuoAddress != null and shouhuoAddress != ''">and shouhuo_address = #{shouhuoAddress}</if>
-            <if test="beizhu != null and beizhu != ''">and beizhu = #{beizhu}</if>
+            <if test="id != null and id != ''">and s.id = #{id}</if>
+            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number = #{danjuNumber}</if>
+            <if test="danjuDay != null and danjuDay != ''">and s.danju_day = #{danjuDay}</if>
+            <if test="eyeStyle != null and eyeStyle != ''">and s.eye_style = #{eyeStyle}</if>
+            <if test="zhidanPeople != null and zhidanPeople != ''">and s.zhidan_people = #{zhidanPeople}</if>
+            <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and s.mfrsname = #{mfrsname}</if>
+            <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
+            <if test="positionName != null and positionName != ''">and s.position_name = #{positionName}</if>
+            <if test="changjiaNumber != null and changjiaNumber != ''">and s.changjia_number = #{changjiaNumber}</if>
+            <if test="shouhuoPeople != null and shouhuoPeople != ''">and s.shouhuo_people = #{shouhuoPeople}</if>
+            <if test="shouhuoPhone != null and shouhuoPhone != ''">and s.shouhuo_phone = #{shouhuoPhone}</if>
+            <if test="shouhuoAddress != null and shouhuoAddress != ''">and s.shouhuo_address = #{shouhuoAddress}</if>
+            <if test="beizhu != null and beizhu != ''">and s.beizhu = #{beizhu}</if>
 
-            <if test="saleNumber != null and saleNumber != ''">and sale_number = #{saleNumber}</if>
-            <if test="mirrorTime != null and mirrorTime != ''">and mirror_time = #{mirrorTime}</if>
-            <if test="goodsName != null and goodsName != ''">and goods_name = #{goodsName}</if>
-            <if test="num != null and num != ''">and num = #{num}</if>
-            <if test="code != null and code != ''">and code = #{code}</if>
-            <if test="style != null and style != ''">and style = #{style}</if>
-            <if test="rl != null and rl != ''">and rl = #{rl}</if>
-            <if test="count != null and count != ''">and count = #{count}</if>
-            <if test="sph != null and sph != ''">and sph = #{sph}</if>
-            <if test="cyl != null and cyl != ''">and cyl = #{cyl}</if>
-            <if test="axial != null and axial != ''">and axial = #{axial}</if>
-            <if test="lightbelow != null and lightbelow != ''">and lightbelow = #{lightbelow}</if>
-            <if test="lengjing != null and lengjing != ''">and lengjing = #{lengjing}</if>
-            <if test="diameter != null and diameter != ''">and diameter = #{diameter}</if>
-            <if test="yaoqiu != null and yaoqiu != ''">and yaoqiu = #{yaoqiu}</if>
-            <if test="jd != null and jd != ''">and jd = #{jd}</if>
-            <if test="curvature != null and curvature != ''">and curvature = #{curvature}</if>
-
-
-            <if test="gkname != null and gkname != ''">and gkname = #{gkname}</if>
-            <if test="hyknum != null and hyknum != ''">and hyknum = #{hyknum}</if>
-            <if test="phone != null and phone != ''">and phone = #{phone}</if>
+            <if test="saleNumber != null and saleNumber != ''">and s.sale_number = #{saleNumber}</if>
+            <if test="mirrorTime != null and mirrorTime != ''">and s.mirror_time = #{mirrorTime}</if>
+            <if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>
+            <if test="num != null and num != ''">and s.num = #{num}</if>
+            <if test="code != null and code != ''">and s.code = #{code}</if>
+            <if test="style != null and style != ''">and s.style = #{style}</if>
+            <if test="rl != null and rl != ''">and s.rl = #{rl}</if>
+            <if test="count != null and count != ''">and s.count = #{count}</if>
+            <if test="sph != null and sph != ''">and s.sph = #{sph}</if>
+            <if test="cyl != null and cyl != ''">and s.cyl = #{cyl}</if>
+            <if test="axial != null and axial != ''">and s.axial = #{axial}</if>
+            <if test="lightbelow != null and lightbelow != ''">and s.lightbelow = #{lightbelow}</if>
+            <if test="lengjing != null and lengjing != ''">and s.lengjing = #{lengjing}</if>
+            <if test="diameter != null and diameter != ''">and s.diameter = #{diameter}</if>
+            <if test="yaoqiu != null and yaoqiu != ''">and s.yaoqiu = #{yaoqiu}</if>
+            <if test="jd != null and jd != ''">and s.jd = #{jd}</if>
+            <if test="curvature != null and curvature != ''">and s.curvature = #{curvature}</if>
 
 
-            <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="username != null and username != ''">and username = #{username}</if>
-            <if test="shTime != null and shTime != ''">and sh_time = #{shTime}</if>
-            <if test="shstatus != null and shstatus != ''">and shstatus = #{shstatus}</if>
-            <if test="psname != null and psname != ''">and psname = #{psname}</if>
+            <if test="gkname != null and gkname != ''">and s.gkname = #{gkname}</if>
+            <if test="hyknum != null and hyknum != ''">and s.hyknum = #{hyknum}</if>
+            <if test="phone != null and phone != ''">and s.phone = #{phone}</if>
 
-            <if test="salenumbery != null and salenumbery != ''">and salenumbery = #{salenumbery}</if>
-            <if test="pstime != null and pstime != ''">and pstime = #{pstime}</if>
+
+            <if test="status != null and status != ''">and s.status = #{status}</if>
+            <if test="username != null and username != ''">and s.username = #{username}</if>
+            <if test="shTime != null and shTime != ''">and s.sh_time = #{shTime}</if>
+            <if test="shstatus != null and shstatus != ''">and s.shstatus = #{shstatus}</if>
+            <if test="psname != null and psname != ''">and s.psname = #{psname}</if>
+
+            <if test="salenumbery != null and salenumbery != ''">and s.salenumbery = #{salenumbery}</if>
+            <if test="pstime != null and pstime != ''">and s.pstime = #{pstime}</if>
+            <if test="stockorder != null and stockorder != ''">and s.stockorder = #{stockorder}</if>
+            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
+            <if test="companyid != null and companyid != ''">and sFIND_IN_SET(d.company_id,#{companyid})</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -133,6 +139,7 @@
             <if test="phone != null and phone != ''">and phone = #{phone}</if>
             <if test="salenumbery != null and salenumbery != ''">and salenumbery = #{salenumbery}</if>
             <if test="pstime != null and pstime != ''">and pstime = #{pstime}</if>
+            <if test="stockorder != null and stockorder != ''">and stockorder = #{stockorder}</if>
         </where>
     </select>
 
@@ -182,7 +189,8 @@
 			`shstatus`,
 			`psname`,
 			`salenumbery`,
-			`pstime`
+			`pstime`,
+			`stockorder`
 		)
 		values
 		(
@@ -228,7 +236,8 @@
 			#{shstatus},
 			#{psname},
 			#{salenumbery},
-			#{pstime}
+			#{pstime},
+			#{stockorder}
 
 		)
 	</insert>
@@ -278,7 +287,8 @@
             <if test="hyknum != null">`hyknum` = #{hyknum},</if>
             <if test="phone != null">`phone` = #{phone},</if>
             <if test="salenumbery != null">`salenumbery` = #{salenumbery},</if>
-            <if test="pstime != null">`pstime` = #{pstime}</if>
+            <if test="pstime != null">`pstime` = #{pstime},</if>
+            <if test="stockorder != null">`stockorder` = #{stockorder}</if>
         </set>
         where id = #{id}
     </update>
@@ -860,7 +870,8 @@
 
             <if test="shstatus != null">`shstatus` = #{shstatus} ,</if>
             <if test="psname != null">`psname` = #{psname} ,</if>
-            <if test="pstime != null">`pstime` = #{pstime}</if>
+            <if test="pstime != null">`pstime` = #{pstime},</if>
+            <if test="stockorder != null">`stockorder` = #{stockorder}</if>
         </set>
         where danju_number = #{danjuNumber}
     </update>

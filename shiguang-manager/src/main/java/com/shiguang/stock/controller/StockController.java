@@ -102,7 +102,14 @@ public class StockController {
             String departNumber=ShiroUtils.getUser().getStoreNum();
             query.put("departNumber",departNumber);
         }else if (companyid != null){
-            query.put("companyid",companyid);
+            if ("3".equals(companyid)){
+
+                query.put("companyid",null);
+            }else {
+                query.put("companyid",companyid);
+            }
+
+
         }
         List<OrderDO> orderDOList = orderService.list(query);
         int total = orderService.count(query);

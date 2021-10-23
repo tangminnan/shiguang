@@ -65,12 +65,16 @@ public class KcController {
         Map<String, Object> map = new HashMap<>();
         //仓位
         //———获取当前登录用户的公司id————
-        String companyId=ShiroUtils.getUser().getCompanyId();
-        if(companyId != null){
-            map.put("companyId",companyId);
-        }else if (companyId == null){
-            String departNumber=ShiroUtils.getUser().getStoreNum();
-            map.put("departNumber",departNumber);
+        String companyId = ShiroUtils.getUser().getCompanyId();
+        if (companyId != null) {
+            if ("3".equals(companyId)) {
+                map.put("companyId",null);
+            } else {
+                map.put("companyId", companyId);
+            }
+        } else if (companyId == null) {
+            String departNumber = ShiroUtils.getUser().getStoreNum();
+            map.put("departNumber", departNumber);
         }
         map.put("xsstate", xsstate);
         List<PositionDO> positionList = positionService.positionList(map);
@@ -84,15 +88,19 @@ public class KcController {
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-                //———获取当前登录用户的公司id————
-        String companyid=ShiroUtils.getUser().getCompanyId();
-        if(companyid != null){
-            query.put("companyid",companyid);
-        }else if (companyid == null){
-            String departNumber=ShiroUtils.getUser().getStoreNum();
-            query.put("departNumber",departNumber);
+        //———获取当前登录用户的公司id————
+        String companyid = ShiroUtils.getUser().getCompanyId();
+        if (companyid != null) {
+            if ("3".equals(companyid)) {
+                query.put("companyid", null);
+            } else {
+                query.put("companyid", companyid);
+            }
+        } else if (companyid == null) {
+            String departNumber = ShiroUtils.getUser().getStoreNum();
+            query.put("departNumber", departNumber);
         }
-        query.put("status","0");
+        query.put("status", "0");
         // 钱转换
         if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
             retailPrice = Double.parseDouble(params.get("retailPrice").toString());

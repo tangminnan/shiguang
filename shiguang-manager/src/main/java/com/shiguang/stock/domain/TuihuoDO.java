@@ -24,7 +24,7 @@ public class TuihuoDO implements Serializable {
 	//单据日期
 	private String danjuDay;
 	//制造商id
-	private Integer mfrsid;
+	private String mfrsid;
 	//制造商（供应商）
 	private String mfrsname;
 	//发出仓位id
@@ -51,6 +51,16 @@ public class TuihuoDO implements Serializable {
 	//三种方式
 	private String style;
 	private String retailPrice;
+	//库存对应单据号
+	private String stockorder;
+
+	public String getStockorder() {
+		return stockorder;
+	}
+
+	public void setStockorder(String stockorder) {
+		this.stockorder = stockorder;
+	}
 
 	public String getRetailPrice() {
 		return retailPrice;
@@ -119,13 +129,13 @@ public class TuihuoDO implements Serializable {
 	/**
 	 * 设置：制造商id
 	 */
-	public void setMfrsid(Integer mfrsid) {
+	public void setMfrsid(String mfrsid) {
 		this.mfrsid = mfrsid;
 	}
 	/**
 	 * 获取：制造商id
 	 */
-	public Integer getMfrsid() {
+	public String getMfrsid() {
 		return mfrsid;
 	}
 	/**

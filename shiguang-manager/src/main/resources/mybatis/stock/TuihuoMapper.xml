@@ -5,9 +5,9 @@
 
 	<select id="get" resultType="com.shiguang.stock.domain.TuihuoDO">
 		select t.`id`,t.`tuihuo_num`,t.`zhidan_people`,t.`danju_day`,t.`mfrsid`,m.`mfrsname`,t.`position_id`,p.`position_name`,t.`beizhu`,t.`goodsxinxiid`,t.`goods_num`,
-		t.`goods_name`,t.`factory`,t.`unit`,t.`goods_count`,t.`count`,t.`goods_code`,t.`style`,t.`retail_price`
+		t.`goods_name`,t.`factory`,t.`unit`,t.`goods_count`,t.`count`,t.`goods_code`,t.`style`,t.`retail_price`,t.`stockorder`
 		from stock_tuihuo t
-		left join c_mfrs m on t.mfrsid=m.mfrsid
+		left join c_mfrs m on t.mfrsid=m.mfrsnum
 		left join c_position p on t.position_id=t.position_id
 		where t.id = #{value}
 		group by t.id
@@ -15,7 +15,8 @@
 
 	<select id="list" resultType="com.shiguang.stock.domain.TuihuoDO">
 		select `id`,`tuihuo_num`,`zhidan_people`,`danju_day`,`mfrsid`,`mfrsname`,`position_id`,`beizhu`,`goodsxinxiid`,`goods_num`,
-		`goods_name`,`factory`,`unit`,`goods_count`,`count`,`goods_code`,`style` ,`retail_price`from stock_tuihuo
+		`goods_name`,`factory`,`unit`,`goods_count`,`count`,`goods_code`,`style` ,`retail_price`,`stockorder`
+		from stock_tuihuo
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
@@ -35,6 +36,7 @@
 		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
 		  		  <if test="style != null and style != ''"> and style = #{style} </if>
 		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
+		  		  <if test="stockorder != null and stockorder != ''"> and stockorder = #{stockorder} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -70,6 +72,7 @@
 		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
 		  		  <if test="style != null and style != ''"> and style = #{style} </if>
 		  		  <if test="retailPrice != null and retailPrice != ''"> and retail_price = #{retailPrice} </if>
+		  		  <if test="stockorder != null and stockorder != ''"> and stockorder = #{stockorder} </if>
 		  		</where>
 	</select>
 	 
@@ -92,7 +95,8 @@
 			`count`, 
 			`goods_code`,
 			`style`,
-			`retail_price`
+			`retail_price`,
+			`stockorder`
 		)
 		values
 		(
@@ -112,7 +116,8 @@
 			#{count}, 
 			#{goodsCode},
 			#{style},
-			#{retailPrice}
+			#{retailPrice},
+			#{stockorder}
 		)
 	</insert>
 	 
@@ -135,7 +140,8 @@
 			<if test="count != null">`count` = #{count}, </if>
 			<if test="goodsCode != null">`goods_code` = #{goodsCode},</if>
 			<if test="style != null">`style` = #{style},</if>
-			<if test="retailPrice != null">`retail_price` = #{retailPrice}</if>
+			<if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
+			<if test="stockorder != null">`stockorder` = #{stockorder}</if>
 		</set>
 		where id = #{id}
 	</update>

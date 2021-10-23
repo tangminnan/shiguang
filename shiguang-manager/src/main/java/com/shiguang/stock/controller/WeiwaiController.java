@@ -72,6 +72,19 @@ public class WeiwaiController {
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        //———获取当前登录用户的公司id————
+        String companyid=ShiroUtils.getUser().getCompanyId();
+        if(companyid == null){
+            String departNumber=ShiroUtils.getUser().getStoreNum();
+            query.put("departNumber",departNumber);
+        }else if (companyid != null){
+            if ("3".equals(companyid)){
+
+                query.put("companyid",null);
+            }else {
+                query.put("companyid",companyid);
+            }
+        }
         List<WeiwaiDO> weiwaiList = weiwaiService.list(query);
         int total = weiwaiService.count(query);
         PageUtils pageUtils = new PageUtils(weiwaiList, total);
@@ -593,6 +606,7 @@ public class WeiwaiController {
                         Date dates = new Date();
                         String shTime = sdf.format(dates);
                         weiwaiDO.setShTime(shTime);
+                        weiwaiDO.setStockorder(danjuNumbers);
                         weiwaiService.updateStatus(weiwaiDO);
 
                         WeiwaikcDO weiwaikcDO = new WeiwaikcDO();

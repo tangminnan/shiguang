@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.*;
 import com.shiguang.product.domain.HcDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.service.OrderService;
 import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 
 /**
@@ -161,6 +159,7 @@ public class OrderController {
             stockDO.setGoodsCode(goodsCode);
             stockDO.setPositionId(orderkc.getPositionId());
             stockDO.setPositionName(orderkc.getPositionName());
+
             try {
                 String useday = orderkc.getUseday();
                 stockDO.setUseday(useday);
@@ -280,17 +279,17 @@ public class OrderController {
                     stockDO.setFactory("");
                 }
 
-
                 if (stockService.save(stockDO) > 0) {
-                    OrderDO orderDO = new OrderDO();
+                    OrderDO orderDO1 = new OrderDO();
                     StockDO stockDO1 = new StockDO();
-                    orderDO.setDanjuNumber(danjuNumber);
-                    orderDO.setStatus(status);
-                    orderDO.setUsername(username);
+                    orderDO1.setDanjuNumber(danjuNumber);
+                    orderDO1.setStatus(status);
+                    orderDO1.setUsername(username);
+                    orderDO1.setStockorder(orderkc.getDanjuNumber());
                     stockDO1.setDanjuNumber(danjuNumber);
                     stockDO1.setStatus(status);
                     stockDO1.setUsername(username);
-                    orderService.updateStatus(orderDO);
+                    orderService.updateStatus(orderDO1);
                     stockService.updateStatus(stockDO1);
                 }
             }

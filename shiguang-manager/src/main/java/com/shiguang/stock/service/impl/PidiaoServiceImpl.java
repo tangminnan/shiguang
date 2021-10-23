@@ -92,4 +92,9 @@ public class PidiaoServiceImpl implements PidiaoService {
 	public int updatereturnzt(PidiaoDO pidiaoDO) {
 		return pidiaoDao.updatereturnzt(pidiaoDO);
 	}
+
+	@Override
+	public List<PidiaoDO> pidiaodan(Map<String, Object> map) {
+		return pidiaoDao.pidiaodan(map);
+	}
 }

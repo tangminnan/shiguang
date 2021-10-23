@@ -117,6 +117,16 @@ public class WeiwaiDO implements Serializable {
 	private String psname;
 	//配送或者退回时间
 	private String pstime;
+	//库存对应单据号
+	private String stockorder;
+
+	public String getStockorder() {
+		return stockorder;
+	}
+
+	public void setStockorder(String stockorder) {
+		this.stockorder = stockorder;
+	}
 
 	public String getPstime() {
 		return pstime;
