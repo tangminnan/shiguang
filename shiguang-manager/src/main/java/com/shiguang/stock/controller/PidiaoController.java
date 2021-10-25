@@ -260,7 +260,8 @@ public class PidiaoController {
         String[] brandname1 = pidiao.getBrandname().split(",");
         String[] unit1 = pidiao.getUnit().split(",");
         String[] money1 = pidiao.getMoney().split(",");
-        String[] goodsxinxiid1 = pidiao.getGoodsxinxiid().toString().split(",");
+        String[] goodsxinxiid1 = pidiao.getGoodsxinxiid().split(",");
+        String[] stockorder1 = pidiao.getStockorder().split(",");
 
         for (int i = 0; i < name.length; i++) {
             PidiaoDO pidiaoDO = new PidiaoDO();
@@ -349,8 +350,23 @@ public class PidiaoController {
             String money = money1[i];
             pidiaoDO.setMoney(money);
 
-            String goodsxinxiid = goodsxinxiid1[i];
-            pidiaoDO.setGoodsxinxiid(goodsxinxiid);
+
+            try {
+                String goodsxinxiid = goodsxinxiid1[i];
+                pidiaoDO.setGoodsxinxiid(goodsxinxiid);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                pidiaoDO.setGoodsxinxiid("");
+            }
+            try {
+                String stockorder = stockorder1[i];
+                pidiaoDO.setStockorder(stockorder);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                pidiaoDO.setStockorder("");
+            }
+
+
+
+
 
 
             //减库存
@@ -367,7 +383,6 @@ public class PidiaoController {
                 Integer gdcountNew = Integer.valueOf(gdcount);
                 Integer newGoodsCount = gdcountNew - goodsCountNew;
                 stockDOjiankucun.setGoodsCount(String.valueOf(newGoodsCount));
-
                 stockService.updateGoodsCount(stockDOjiankucun);//修改数量
             }
 //			批调单保存
@@ -416,53 +431,64 @@ public class PidiaoController {
                 //———退货号————
                 String tuihuoNumber = pidiaoDO.getPidiaoNumber();
                 stockDO.setTuihuoNumber(tuihuoNumber);
+                stockDO.setUsername(ShiroUtils.getUser().getName());
                 stockService.updateGoodsCount(stockDO);//修改数量
+
+
                 pidiaoDO.setReturnzt("0");
+                pidiaoDO.setUsername(ShiroUtils.getUser().getName());
+                //———获取当前系统时间—————
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                Date date = new Date();
+                String newDate = sdf.format(date);
+                pidiaoDO.setShTime(newDate);
                 pidiaoService.updatereturnzt(pidiaoDO);
 
-            } else {
-                String goodsCode = pidiaoDO.getGoodsCode();
-                stockDO.setGoodsCode(goodsCode);
-                String goodsName = pidiaoDO.getGoodsName();
-                stockDO.setGoodsName(goodsName);
-                stockDO.setGoodsCount(useCount);
-                String goodsType = pidiaoDO.getGoodsType();
-                stockDO.setGoodsType(Integer.valueOf(goodsType));
-                String mfrsid = pidiaoDO.getMfrsid();
-                stockDO.setMfrsid(mfrsid);
-                String brandname = pidiaoDO.getBrandname();
-                stockDO.setBrandname(brandname);
-                String unit = pidiaoDO.getUnit();
-                stockDO.setUnit(unit);
-                String retailPrice = pidiaoDO.getRetailPrice();
-                stockDO.setRetailPrice(retailPrice);
-                String createTime = pidiaoDO.getCreateTime();
-                stockDO.setCreateTime(createTime);
-                String danjuNumber = pidiaoDO.getPidiaoNumber();
-                stockDO.setDanjuNumber(danjuNumber);
-                String zhidanPeople = pidiaoDO.getZhidanPeople();
-                stockDO.setZhidanPeople(zhidanPeople);
-                String danjuDay = pidiaoDO.getCreateTime();
-                stockDO.setDanjuDay(danjuDay);
-                String zhuceNumber = pidiaoDO.getZhuceNumber();
-                stockDO.setZhuceNumber(zhuceNumber);
-                String classtype = pidiaoDO.getClasstype();
-                stockDO.setClasstype(classtype);
-                String factory = pidiaoDO.getFactory();
-                stockDO.setFactory(factory);
-                stockDO.setStatus("0");
-                stockDO.setReturnzt("0");
-                //———退货号————
-                String tuihuoNumber = pidiaoDO.getPidiaoNumber();
-                stockDO.setTuihuoNumber(tuihuoNumber);
-                String username = pidiaoDO.getUsername();
-                stockDO.setUsername(username);
-                if (stockService.save(stockDO) < 0) {
-                    return R.error();
-                }
-                pidiaoDO.setReturnzt("0");
-                pidiaoService.updatereturnzt(pidiaoDO);
             }
+//            一定会有才会批调
+//            else {
+//                String goodsCode = pidiaoDO.getGoodsCode();
+//                stockDO.setGoodsCode(goodsCode);
+//                String goodsName = pidiaoDO.getGoodsName();
+//                stockDO.setGoodsName(goodsName);
+//                stockDO.setGoodsCount(useCount);
+//                String goodsType = pidiaoDO.getGoodsType();
+//                stockDO.setGoodsType(Integer.valueOf(goodsType));
+//                String mfrsid = pidiaoDO.getMfrsid();
+//                stockDO.setMfrsid(mfrsid);
+//                String brandname = pidiaoDO.getBrandname();
+//                stockDO.setBrandname(brandname);
+//                String unit = pidiaoDO.getUnit();
+//                stockDO.setUnit(unit);
+//                String retailPrice = pidiaoDO.getRetailPrice();
+//                stockDO.setRetailPrice(retailPrice);
+//                String createTime = pidiaoDO.getCreateTime();
+//                stockDO.setCreateTime(createTime);
+//                String danjuNumber = pidiaoDO.getPidiaoNumber();
+//                stockDO.setDanjuNumber(danjuNumber);
+//                String zhidanPeople = pidiaoDO.getZhidanPeople();
+//                stockDO.setZhidanPeople(zhidanPeople);
+//                String danjuDay = pidiaoDO.getCreateTime();
+//                stockDO.setDanjuDay(danjuDay);
+//                String zhuceNumber = pidiaoDO.getZhuceNumber();
+//                stockDO.setZhuceNumber(zhuceNumber);
+//                String classtype = pidiaoDO.getClasstype();
+//                stockDO.setClasstype(classtype);
+//                String factory = pidiaoDO.getFactory();
+//                stockDO.setFactory(factory);
+//                stockDO.setStatus("0");
+//                stockDO.setReturnzt("0");
+//                //———退货号————
+//                String tuihuoNumber = pidiaoDO.getPidiaoNumber();
+//                stockDO.setTuihuoNumber(tuihuoNumber);
+//                String username = pidiaoDO.getUsername();
+//                stockDO.setUsername(username);
+//                if (stockService.save(stockDO) < 0) {
+//                    return R.error();
+//                }
+//                pidiaoDO.setReturnzt("0");
+//                pidiaoService.updatereturnzt(pidiaoDO);
+//            }
 
         }
         return R.ok();
@@ -507,7 +533,7 @@ public class PidiaoController {
     }
 
     /**
-     * 启用状态
+     * 收货添加库存
      */
     @ResponseBody
     @RequestMapping(value = "/updateStatus")
@@ -533,6 +559,27 @@ public class PidiaoController {
                 Integer newGoodsCount = gdcountNew + goodsCountNew;
                 stockDO.setGoodsCount(String.valueOf(newGoodsCount));
                 stockService.updateGoodsCount(stockDO);//修改数量
+
+
+                PidiaoDO pidiaoDO1 = new PidiaoDO();
+                pidiaoDO1.setPidiaoNumber(pidiaoNumber);
+                pidiaoDO1.setStatus(status);
+                pidiaoDO1.setUsername(username);
+                //———获取当前系统时间—————
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                Date date = new Date();
+                String shTime = sdf.format(date);
+                pidiaoDO1.setShTime(shTime);
+
+                pidiaoDO1.setStockorder(jiaGoodsList.getDanjuNumber());
+                pidiaoService.updateStatus(pidiaoDO1);
+
+                StockDO stockDO1 = new StockDO();
+                stockDO1.setDanjuNumber(pidiaoNumber);
+                stockDO1.setStatus(status);
+                stockDO1.setUsername(username);
+                stockDO1.setZhidanPeople(pidiaoDO.getZhidanPeople());
+                stockService.updateStatus(stockDO1);
             } else {
                 stockDO.setGoodsCode(pidiaoDO.getGoodsCode());
                 stockDO.setGoodsName(pidiaoDO.getGoodsName());
@@ -593,14 +640,18 @@ public class PidiaoController {
                     Date date = new Date();
                     String shTime = sdf.format(date);
                     pidiaoDO1.setShTime(shTime);
-                    pidiaoDO1.setStockorder(stockDO.getDanjuNumber());
+                    if ("".equals(jiaGoodsList)){
+                        pidiaoDO1.setStockorder(pidiaoDO.getDanjuNumber());
+                    }else {
+                        pidiaoDO1.setStockorder(pidiaoDO.getDanjuNumber());
+                    }
                     pidiaoService.updateStatus(pidiaoDO1);
 
                     StockDO stockDO1 = new StockDO();
                     stockDO1.setDanjuNumber(pidiaoNumber);
                     stockDO1.setStatus(status);
                     stockDO1.setUsername(username);
-                    stockDO1.setZhidanPeople(username);
+                    stockDO1.setZhidanPeople(pidiaoDO.getZhidanPeople());
                     stockService.updateStatus(stockDO1);
 
                 }

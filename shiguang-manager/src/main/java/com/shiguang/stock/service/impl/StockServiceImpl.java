@@ -564,20 +564,20 @@ public class StockServiceImpl implements StockService {
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-                            //判断是否已存在商品
-                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-                            if (null != goodsNumList) {
-                                String gdcount = goodsNumList.getGoodsCount();
-                                String  goodsCountNew = counts;
-                                Integer gdcountNew = Integer.parseInt(gdcount);
-                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-                                Double newGoodsCount = gdcountNew + goodsCountNews;
-                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-
-                                stockDao.updateGoodsCount(stockDO);//修改数量
-                            } else if(null == goodsNumList) {
-                                stockDao.save(stockDO);
-                            }
+//                            //判断是否已存在商品
+//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+//                            if (null != goodsNumList) {
+//                                String gdcount = goodsNumList.getGoodsCount();
+//                                String  goodsCountNew = counts;
+//                                Integer gdcountNew = Integer.parseInt(gdcount);
+//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+//                                Double newGoodsCount = gdcountNew + goodsCountNews;
+//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+//
+//                                stockDao.updateGoodsCount(stockDO);//修改数量
+//                            } else if(null == goodsNumList) {
+//                                stockDao.save(stockDO);
+//                            }
 //                            stockDao.save(stockDO);
 
 //-----------------------------采购订单--------------------
@@ -686,20 +686,20 @@ public class StockServiceImpl implements StockService {
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-                            //判断是否已存在商品
-                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-                            if (null != goodsNumList) {
-                                String gdcount = goodsNumList.getGoodsCount();
-                                String  goodsCountNew = counts;
-                                Integer gdcountNew = Integer.parseInt(gdcount);
-                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-                                Double newGoodsCount = gdcountNew + goodsCountNews;
-                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-
-                                stockDao.updateGoodsCount(stockDO);//修改数量
-                            } else if(null == goodsNumList) {
-                                stockDao.save(stockDO);
-                            }
+//                            //判断是否已存在商品
+//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+//                            if (null != goodsNumList) {
+//                                String gdcount = goodsNumList.getGoodsCount();
+//                                String  goodsCountNew = counts;
+//                                Integer gdcountNew = Integer.parseInt(gdcount);
+//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+//                                Double newGoodsCount = gdcountNew + goodsCountNews;
+//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+//
+//                                stockDao.updateGoodsCount(stockDO);//修改数量
+//                            } else if(null == goodsNumList) {
+//                                stockDao.save(stockDO);
+//                            }
 //                            stockDao.save(stockDO);
 
 //-----------------------------采购订单--------------------
@@ -808,20 +808,20 @@ public class StockServiceImpl implements StockService {
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-                            //判断是否已存在商品
-                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-                            if (null != goodsNumList) {
-                                String gdcount = goodsNumList.getGoodsCount();
-                                String  goodsCountNew = counts;
-                                Integer gdcountNew = Integer.parseInt(gdcount);
-                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-                                Double newGoodsCount = gdcountNew + goodsCountNews;
-                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-
-                                stockDao.updateGoodsCount(stockDO);//修改数量
-                            } else if(null == goodsNumList) {
-                                stockDao.save(stockDO);
-                            }
+//                            //判断是否已存在商品
+//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+//                            if (null != goodsNumList) {
+//                                String gdcount = goodsNumList.getGoodsCount();
+//                                String  goodsCountNew = counts;
+//                                Integer gdcountNew = Integer.parseInt(gdcount);
+//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+//                                Double newGoodsCount = gdcountNew + goodsCountNews;
+//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+//
+//                                stockDao.updateGoodsCount(stockDO);//修改数量
+//                            } else if(null == goodsNumList) {
+//                                stockDao.save(stockDO);
+//                            }
 //                            stockDao.save(stockDO);
 
 //-----------------------------采购订单--------------------
@@ -930,20 +930,20 @@ public class StockServiceImpl implements StockService {
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-                            //判断是否已存在商品
-                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-                            if (null != goodsNumList) {
-                                String gdcount = goodsNumList.getGoodsCount();
-                                String  goodsCountNew = counts;
-                                Integer gdcountNew = Integer.parseInt(gdcount);
-                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-                                Double newGoodsCount = gdcountNew + goodsCountNews;
-                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-
-                                stockDao.updateGoodsCount(stockDO);//修改数量
-                            } else if(null == goodsNumList) {
-                                stockDao.save(stockDO);
-                            }
+//                            //判断是否已存在商品
+//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+//                            if (null != goodsNumList) {
+//                                String gdcount = goodsNumList.getGoodsCount();
+//                                String  goodsCountNew = counts;
+//                                Integer gdcountNew = Integer.parseInt(gdcount);
+//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+//                                Double newGoodsCount = gdcountNew + goodsCountNews;
+//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+//
+//                                stockDao.updateGoodsCount(stockDO);//修改数量
+//                            } else if(null == goodsNumList) {
+//                                stockDao.save(stockDO);
+//                            }
 //                            stockDao.save(stockDO);
 
 //-----------------------------采购订单--------------------
@@ -1052,20 +1052,20 @@ public class StockServiceImpl implements StockService {
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-                            //判断是否已存在商品
-                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-                            if (null != goodsNumList) {
-                                String gdcount = goodsNumList.getGoodsCount();
-                                String  goodsCountNew = counts;
-                                Integer gdcountNew = Integer.parseInt(gdcount);
-                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-                                Double newGoodsCount = gdcountNew + goodsCountNews;
-                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-
-                                stockDao.updateGoodsCount(stockDO);//修改数量
-                            } else if(null == goodsNumList) {
-                                stockDao.save(stockDO);
-                            }
+//                            //判断是否已存在商品
+//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+//                            if (null != goodsNumList) {
+//                                String gdcount = goodsNumList.getGoodsCount();
+//                                String  goodsCountNew = counts;
+//                                Integer gdcountNew = Integer.parseInt(gdcount);
+//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+//                                Double newGoodsCount = gdcountNew + goodsCountNews;
+//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+//
+//                                stockDao.updateGoodsCount(stockDO);//修改数量
+//                            } else if(null == goodsNumList) {
+//                                stockDao.save(stockDO);
+//                            }
 //                            stockDao.save(stockDO);
 
 //-----------------------------采购订单--------------------
@@ -1174,20 +1174,20 @@ public class StockServiceImpl implements StockService {
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-                            //判断是否已存在商品
-                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-                            if (null != goodsNumList) {
-                                String gdcount = goodsNumList.getGoodsCount();
-                                String  goodsCountNew = counts;
-                                Integer gdcountNew = Integer.parseInt(gdcount);
-                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-                                Double newGoodsCount = gdcountNew + goodsCountNews;
-                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-
-                                stockDao.updateGoodsCount(stockDO);//修改数量
-                            } else if(null == goodsNumList) {
-                                stockDao.save(stockDO);
-                            }
+//                            //判断是否已存在商品
+//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+//                            if (null != goodsNumList) {
+//                                String gdcount = goodsNumList.getGoodsCount();
+//                                String  goodsCountNew = counts;
+//                                Integer gdcountNew = Integer.parseInt(gdcount);
+//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+//                                Double newGoodsCount = gdcountNew + goodsCountNews;
+//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+//
+//                                stockDao.updateGoodsCount(stockDO);//修改数量
+//                            } else if(null == goodsNumList) {
+//                                stockDao.save(stockDO);
+//                            }
 //                            stockDao.save(stockDO);
 
 //-----------------------------采购订单--------------------
@@ -1296,20 +1296,20 @@ public class StockServiceImpl implements StockService {
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-                            //判断是否已存在商品
-                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-                            if (null != goodsNumList) {
-                                String gdcount = goodsNumList.getGoodsCount();
-                                String  goodsCountNew = counts;
-                                Integer gdcountNew = Integer.parseInt(gdcount);
-                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-                                Double newGoodsCount = gdcountNew + goodsCountNews;
-                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-
-                                stockDao.updateGoodsCount(stockDO);//修改数量
-                            } else if(null == goodsNumList) {
-                                stockDao.save(stockDO);
-                            }
+//                            //判断是否已存在商品
+//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+//                            if (null != goodsNumList) {
+//                                String gdcount = goodsNumList.getGoodsCount();
+//                                String  goodsCountNew = counts;
+//                                Integer gdcountNew = Integer.parseInt(gdcount);
+//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+//                                Double newGoodsCount = gdcountNew + goodsCountNews;
+//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+//
+//                                stockDao.updateGoodsCount(stockDO);//修改数量
+//                            } else if(null == goodsNumList) {
+//                                stockDao.save(stockDO);
+//                            }
 //                            stockDao.save(stockDO);
 
 //-----------------------------采购订单--------------------
@@ -1418,20 +1418,20 @@ public class StockServiceImpl implements StockService {
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-                            //判断是否已存在商品
-                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-                            if (null != goodsNumList) {
-                                String gdcount = goodsNumList.getGoodsCount();
-                                String  goodsCountNew = counts;
-                                Integer gdcountNew = Integer.parseInt(gdcount);
-                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-                                Double newGoodsCount = gdcountNew + goodsCountNews;
-                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-
-                                stockDao.updateGoodsCount(stockDO);//修改数量
-                            } else if(null == goodsNumList) {
-                                stockDao.save(stockDO);
-                            }
+//                            //判断是否已存在商品
+//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+//                            if (null != goodsNumList) {
+//                                String gdcount = goodsNumList.getGoodsCount();
+//                                String  goodsCountNew = counts;
+//                                Integer gdcountNew = Integer.parseInt(gdcount);
+//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+//                                Double newGoodsCount = gdcountNew + goodsCountNews;
+//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+//
+//                                stockDao.updateGoodsCount(stockDO);//修改数量
+//                            } else if(null == goodsNumList) {
+//                                stockDao.save(stockDO);
+//                            }
 //                            stockDao.save(stockDO);
 
 //-----------------------------采购订单--------------------
@@ -1540,20 +1540,20 @@ public class StockServiceImpl implements StockService {
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-                            //判断是否已存在商品
-                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-                            if (null != goodsNumList) {
-                                String gdcount = goodsNumList.getGoodsCount();
-                                String  goodsCountNew = counts;
-                                Integer gdcountNew = Integer.parseInt(gdcount);
-                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-                                Double newGoodsCount = gdcountNew + goodsCountNews;
-                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-
-                                stockDao.updateGoodsCount(stockDO);//修改数量
-                            } else if(null == goodsNumList) {
-                                stockDao.save(stockDO);
-                            }
+//                            //判断是否已存在商品
+//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
+//                            if (null != goodsNumList) {
+//                                String gdcount = goodsNumList.getGoodsCount();
+//                                String  goodsCountNew = counts;
+//                                Integer gdcountNew = Integer.parseInt(gdcount);
+//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
+//                                Double newGoodsCount = gdcountNew + goodsCountNews;
+//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+//
+//                                stockDao.updateGoodsCount(stockDO);//修改数量
+//                            } else if(null == goodsNumList) {
+//                                stockDao.save(stockDO);
+//                            }
 //                            stockDao.save(stockDO);
 
 //-----------------------------采购订单--------------------

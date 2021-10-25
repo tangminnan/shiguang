@@ -232,7 +232,8 @@
         <set>
             <if test="goodsCount != null">`goods_count` = #{goodsCount},</if>
             <if test="returnzt != null">`returnzt` = #{returnzt},</if>
-            <if test="tuihuoNumber != null">`tuihuo_number` = #{tuihuoNumber}</if>
+            <if test="tuihuoNumber != null">`tuihuo_number` = #{tuihuoNumber},</if>
+            <if test="username != null">`username` = #{username} </if>
         </set>
         <where>
             <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
@@ -1127,7 +1128,9 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <!--<if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>-->
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+
             <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and p.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1165,7 +1168,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and p.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1193,7 +1196,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and p.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1223,7 +1226,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and p.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1251,7 +1254,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1291,7 +1294,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1325,7 +1328,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1365,7 +1368,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and j.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and j.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1396,7 +1399,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and y.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and y.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and y.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1431,7 +1434,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and y.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and y.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and y.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1460,7 +1463,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and y.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and y.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and y.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1496,7 +1499,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and y.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and y.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and y.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1523,7 +1526,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1554,7 +1557,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1577,7 +1580,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and t.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and t.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and t.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and t.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1611,7 +1614,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and t.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and t.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and t.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and t.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1638,7 +1641,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and o.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and o.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and o.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and o.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and o.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1672,7 +1675,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and o.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and o.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and o.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and o.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and o.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1698,7 +1701,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1727,7 +1730,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1749,7 +1752,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and s.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
             <if test="mfrsname != null and mfrsname != ''">and mfrs.mfrsname = #{mfrsname}</if>
             <if test="brandid != null and brandid != ''">and s.brandid = #{brandid}</if>
@@ -1779,7 +1782,7 @@
         <where>
             <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and s.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
             <if test="mfrsname != null and mfrsname != ''">and mfrs.mfrsname = #{mfrsname}</if>
             <if test="brandid != null and brandid != ''">and s.brandid = #{brandid}</if>
@@ -1793,7 +1796,7 @@
     </select>
     <!--【是否已存在商品信息】-->
     <select id="haveNum" resultType="com.shiguang.stock.domain.StockDO">
-        select  goods_count from stock
+        select  * from stock
          <where>
              <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
              <if test="goodsCode != null and goodsCode != ''">and goods_code = #{goodsCode}</if>
@@ -1808,7 +1811,7 @@
     </select>
     <!--【库存查询】-->
     <select id="kccxList" resultType="com.shiguang.stock.domain.StockDO">
-        select  s.goodsxinxiid,s.goods_num,s.goods_code,s.goods_name,s.goods_count,g.goodsname
+        select  s.danju_number,s.goodsxinxiid,s.goods_num,s.goods_code,s.goods_name,s.goods_count,g.goodsname
         as 'gdname',g.goodsid,m.mfrsname,s.brandname,s.retail_price,s.price_sum,
         s.cost_price,s.cost_sum,s.whole_price,s.whole_sum,po.position_name,
         s.batch,s.zhuce_number,s.produce_day,s.useday,s.factory,s.mfrsid,s.unit,s.classtype,s.returnzt

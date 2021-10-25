@@ -56,7 +56,7 @@
 		join department de on p.in_departmentid= de.depart_number
         <where>  
 		  		  <if test="id != null and id != ''"> and p.id = #{id} </if>
-		  		  <if test="pidiaoNumber != null and pidiaoNumber != ''"> and p.pidiao_number = #{pidiaoNumber} </if>
+			      <if test="pidiaoNumber != null and pidiaoNumber != ''">and  p.pidiao_number LIKE concat(concat('%', #{pidiaoNumber}),'%')</if>
 		  		  <if test="guanlianNumber != null and guanlianNumber != ''"> and p.guanlian_number = #{guanlianNumber} </if>
 
 		  		  <if test="outDepartmentid != null and outDepartmentid != ''"> and p.out_departmentid = #{outDepartmentid} </if>
@@ -394,7 +394,9 @@
 	<update id="updatereturnzt" parameterType="com.shiguang.stock.domain.PidiaoDO">
 		update stock_pidiao
 		<set>
-			<if test="returnzt != null">`returnzt` = #{returnzt} </if>
+			<if test="returnzt != null">`returnzt` = #{returnzt} ,</if>
+			<if test="shTime != null">`sh_time` = #{shTime} ,</if>
+			<if test="username != null">`username` = #{username} </if>
 		</set>
 		where pidiao_number = #{pidiaoNumber}
 	</update>
