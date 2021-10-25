@@ -1,12 +1,13 @@
 var dataArray=new Array();
-function getData(objNum,objName,objCode){
+function getData(objNum,objName,objCode,saleNumber){
     // dataArray["goodsNum"] = objNum;
     // dataArray["goodsName"] = objCode;
     // alert(dataArray)
     var map1={
         goodsNum:objNum,
         goodsName:objName,
-        goodsCode:objCode
+        goodsCode:objCode,
+        saleNumber:saleNumber
 };
     if (null != map1){
         dataArray.push(map1);
@@ -30,6 +31,7 @@ function addGoods (){
                 goodsHtml = "<tr><td><input type=\"checkbox\" /></td>";
                 goodsHtml += "<td>"+rows[i].goodsNum+"</td>";
                 goodsHtml += "<input type='hidden' id='goodsNum' name='goodsNum' value='"+rows[i].goodsNum+"'>";
+                goodsHtml += "<input type='hidden' id='saleNumber' name='saleNumber' value='"+rows[i].saleNumber+"'>";
                 goodsHtml += "<td>"+rows[i].goodsName+"</td>";
                 goodsHtml += "<input type='hidden' id='goodsName' name='goodsName' value='"+rows[i].goodsName+"'>";
                 goodsHtml += "<td style='width: 25%;'>";

@@ -144,7 +144,7 @@
 
 
     <select id="listDz" resultType="com.shiguang.product.domain.JpdzDO">
-        select lig.light_name,
+        select
         yl.cyl,
         cyl.cyl,
         ph.sph,

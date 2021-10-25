@@ -17,6 +17,8 @@ public class UnqualiffedDO implements Serializable {
 	
 	//主键
 	private Long id;
+	//公司id
+	private String companyId;
 	//单据编号
 	private String documentNumber;
 	//申请部门
@@ -202,4 +204,8 @@ public class UnqualiffedDO implements Serializable {
 	public void setGoodsCode(String goodsCode) {this.goodsCode = goodsCode;}
 
 	public String getGoodsCode() {return goodsCode;}
+
+	public void setCompanyId(String companyId){this.companyId =companyId;}
+
+	public String getCompanyId(){return companyId;}
 }

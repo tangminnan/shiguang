@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -101,7 +102,7 @@ public class DrawbackServiceImpl implements DrawbackService {
 	@Override
 	@Transactional
 	public R saveMoney(DrawbackDO drawbackDO){
-
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		MemberDO memberDO = memberService.getCardNumber(drawbackDO.getMemberNumber());
 		DrawbackDO drawbackDOs = new DrawbackDO();
 		drawbackDO.setDrawbackNumber(String.valueOf(GuuidUtil.getUUID()));
@@ -157,7 +158,7 @@ public class DrawbackServiceImpl implements DrawbackService {
 							stockDO.setBrandname(producaD.get(0).getBrandname());
 							stockDO.setRetailPrice(producaD.get(0).getRetailPrice());
 							stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-							//stockDO.setCreateTime(new Date());
+							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
 							stockDO.setFactory(producaD.get(0).getFactory());
 							stockDO.setUsername(ShiroUtils.getUser().getUsername());
@@ -188,7 +189,7 @@ public class DrawbackServiceImpl implements DrawbackService {
 							stockDO.setBrandname(producaD.get(0).getBrandname());
 							stockDO.setRetailPrice(producaD.get(0).getRetailPrice());
 							stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-							//stockDO.setCreateTime(new Date());
+							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
 							if (null != producaD.get(0).getFactory() && !"".equals(producaD.get(0).getFactory())){
 								stockDO.setFactory(producaD.get(0).getFactory());
@@ -215,6 +216,7 @@ public class DrawbackServiceImpl implements DrawbackService {
 								}
 								stockDO.setClasstype("2");
 								stockDO.setUsername(ShiroUtils.getUser().getUsername());
+								stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 								stockService.save(stockDO);
 							}
 						} else if ("1".equals(classType[i])){
@@ -234,6 +236,7 @@ public class DrawbackServiceImpl implements DrawbackService {
 								}
 								stockDO.setClasstype("1");
 								stockDO.setUsername(ShiroUtils.getUser().getUsername());
+								stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 								stockService.save(stockDO);
 							}
 						}
