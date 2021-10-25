@@ -23,6 +23,24 @@ public class PidiaoDO implements Serializable {
 	private String goodsxinxiid;
 	//库存对应单据号
 	private String stockorder;
+	private String stockorders;
+	private String danzi;
+
+	public String getDanzi() {
+		return danzi;
+	}
+
+	public void setDanzi(String danzi) {
+		this.danzi = danzi;
+	}
+
+	public String getStockorders() {
+		return stockorders;
+	}
+
+	public void setStockorders(String stockorders) {
+		this.stockorders = stockorders;
+	}
 
 	public String getStockorder() {
 		return stockorder;

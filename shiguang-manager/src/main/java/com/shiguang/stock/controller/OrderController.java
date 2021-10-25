@@ -124,28 +124,6 @@ public class OrderController {
     @RequestMapping(value = "/updateStatus")
     public R updateEnable(String danjuNumber, String status ,String username,StockDO stockDO) {
 
-//        String positionName=stock.getPositionName();
-//        String str = stock.getGoodsNum();
-//        String[] name = str.split(",");
-//        String[] goodsCode1=stock.getGoodsCode().split(",");
-//        String[] goodsName1= stock.getGoodsName().split(",");
-//        String[] brandname1= stock.getBrandname().split(",");
-//        String[] goodCount1= stock.getGoodsCount().toString().split(",");
-//        String[] costPrice1 =stock.getCostPrice().split(",");
-//        String[] wholePrice1=stock.getWholePrice().split(",");
-//        String[] retailPrice1= stock.getRetailPrice().split(",");
-//        String[] unit1=stock.getUnit().split(",");
-//        String[] useday1=stock.getUseday().split(",");
-//        String[] batch1=stock.getBatch().split(",");
-//        String[] zhuceNumber1=stock.getZhuceNumber().split(",");
-//        String[] produceDay1=stock.getProduceDay().split(",");
-//        String[] status1=stock.getStatus().split(",");
-//        String[] username1=stock.getUsername().split(",");
-//        String[] classtype1=stock.getClasstype().split(",");
-//        String[] factory1=stock.getFactory().split(",");
-//        String[] goodsxinxiid1=stock.getGoodsxinxiid().toString().split(",");
-//
-//        String[] createTime1=stock.getCreateTime().toString().split(",");
 
         Map<String, Object> map = new HashMap<>();
         map.put("danjuNumber",danjuNumber);
@@ -174,6 +152,18 @@ public class OrderController {
                 Integer newGoodsCount = goodsCountNew + gdcountNew;
                 stockDO.setGoodsCount(String.valueOf(newGoodsCount));
                 stockService.updateGoodsCount(stockDO);//修改数量
+
+                OrderDO orderDO1 = new OrderDO();
+                StockDO stockDO1 = new StockDO();
+                orderDO1.setDanjuNumber(danjuNumber);
+                orderDO1.setStatus(status);
+                orderDO1.setUsername(username);
+                orderDO1.setStockorder(goodsNumList.getDanjuNumber());
+                stockDO1.setDanjuNumber(goodsNumList.getDanjuNumber());
+                stockDO1.setStatus(status);
+                stockDO1.setUsername(username);
+                orderService.updateStatus(orderDO1);
+                stockService.updateStatus(stockDO1);
             }else {
                 stockDO.setGoodsCount(goodsCount);//数量
                 stockDO.setGoodsType(orderkc.getGoodsType());
@@ -285,7 +275,12 @@ public class OrderController {
                     orderDO1.setDanjuNumber(danjuNumber);
                     orderDO1.setStatus(status);
                     orderDO1.setUsername(username);
-                    orderDO1.setStockorder(orderkc.getDanjuNumber());
+                    if ("".equals(goodsNumList)){
+                        orderDO1.setStockorder(orderkc.getDanjuNumber());
+                    }else {
+                        orderDO1.setStockorder(orderkc.getDanjuNumber());
+                    }
+
                     stockDO1.setDanjuNumber(danjuNumber);
                     stockDO1.setStatus(status);
                     stockDO1.setUsername(username);

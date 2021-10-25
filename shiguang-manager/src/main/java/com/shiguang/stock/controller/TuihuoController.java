@@ -155,85 +155,96 @@ public class TuihuoController {
 				Integer newCount = yuancounts - counts;
 				stock.setGoodsCount(String.valueOf(newCount));
 				stockService.updateGoodsCount(stock);//修改数量
+
+
+
+				TuihuoDO tuihuoDO = new TuihuoDO();
+				tuihuoDO.setTuihuoNum(tuihuo.getTuihuoNum());
+				tuihuoDO.setZhidanPeople(tuihuo.getZhidanPeople());
+				//日期
+				tuihuoDO.setDanjuDay(tuihuo.getDanjuDay());
+				tuihuoDO.setMfrsid(tuihuo.getMfrsid());
+				tuihuoDO.setMfrsid(tuihuo.getMfrsid());
+				tuihuoDO.setPositionId(tuihuo.getPositionId());
+				tuihuoDO.setBeizhu(tuihuo.getBeizhu());
+				tuihuoDO.setGoodsxinxiid(tuihuo.getGoodsxinxiid());
+				try {
+//				String goodsNum = goodsNum1[i];
+					tuihuoDO.setGoodsNum(goodsNum);
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setGoodsNum("");
+				}
+				try {
+//				String goodsxinxiid = goodsxinxiid1[i];
+					tuihuoDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setGoodsxinxiid(Long.valueOf(""));
+				}
+				try {
+					String goodsName = goodsName1[i];
+					tuihuoDO.setGoodsName(goodsName);
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setGoodsName("");
+				}
+				try {
+					String factory = factory1[i];
+					tuihuoDO.setFactory(factory);
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setFactory("");
+				}
+				try {
+					String unit = unit1[i];
+					tuihuoDO.setUnit(unit);
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setUnit("");
+				}
+				try {
+					String goodsCount = goodsCount1[i];
+					tuihuoDO.setGoodsCount(goodsCount);
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setGoodsCount("");
+				}
+				try {
+//				String count = count1[i];
+					tuihuoDO.setCount(count);
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setCount("");
+				}
+				try {
+//				String goodsCode = goodsCode1[i];
+					tuihuoDO.setGoodsCode(goodsCode);
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setGoodsCode("");
+				}
+				try {
+					String style = style1[i];
+					tuihuoDO.setStyle(style);
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setStyle("");
+				}
+				try {
+					String retailProce = retailProce1[i];
+					tuihuoDO.setRetailPrice(retailProce);
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setRetailPrice("");
+				}
+				try {
+					String stockorder = goodsList.getDanjuNumber();
+					tuihuoDO.setStockorder(stockorder);
+				}catch (ArrayIndexOutOfBoundsException e){
+					tuihuoDO.setStockorder("");
+				}
+
+
+
+				if (tuihuoService.save(tuihuoDO) < 0) {
+					return R.error();
+				}
+
 			}
-		}
-		for (int i = 0; i < goodsNum1.length; i++) {
-			TuihuoDO tuihuoDO = new TuihuoDO();
-			tuihuoDO.setTuihuoNum(tuihuo.getTuihuoNum());
-			tuihuoDO.setZhidanPeople(tuihuo.getZhidanPeople());
-			//日期
-			tuihuoDO.setDanjuDay(tuihuo.getDanjuDay());
-			tuihuoDO.setMfrsid(tuihuo.getMfrsid());
-			tuihuoDO.setMfrsid(tuihuo.getMfrsid());
-			tuihuoDO.setPositionId(tuihuo.getPositionId());
-			tuihuoDO.setBeizhu(tuihuo.getBeizhu());
-			tuihuoDO.setGoodsxinxiid(tuihuo.getGoodsxinxiid());
-			try {
-				String goodsNum = goodsNum1[i];
-				tuihuoDO.setGoodsNum(goodsNum);
-			}catch (ArrayIndexOutOfBoundsException e){
-				tuihuoDO.setGoodsNum("");
-			}
-			try {
-				String goodsxinxiid = goodsxinxiid1[i];
-				tuihuoDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
-			}catch (ArrayIndexOutOfBoundsException e){
-				tuihuoDO.setGoodsxinxiid(Long.valueOf(""));
-			}
-			try {
-				String goodsName = goodsName1[i];
-				tuihuoDO.setGoodsName(goodsName);
-			}catch (ArrayIndexOutOfBoundsException e){
-				tuihuoDO.setGoodsName("");
-			}
-			try {
-				String factory = factory1[i];
-				tuihuoDO.setFactory(factory);
-			}catch (ArrayIndexOutOfBoundsException e){
-				tuihuoDO.setFactory("");
-			}
-			try {
-				String unit = unit1[i];
-				tuihuoDO.setUnit(unit);
-			}catch (ArrayIndexOutOfBoundsException e){
-				tuihuoDO.setUnit("");
-			}
-			try {
-				String goodsCount = goodsCount1[i];
-				tuihuoDO.setGoodsCount(goodsCount);
-			}catch (ArrayIndexOutOfBoundsException e){
-				tuihuoDO.setGoodsCount("");
-			}
-			try {
-				String count = count1[i];
-				tuihuoDO.setCount(count);
-			}catch (ArrayIndexOutOfBoundsException e){
-				tuihuoDO.setCount("");
-			}
-			try {
-				String goodsCode = goodsCode1[i];
-				tuihuoDO.setGoodsCode(goodsCode);
-			}catch (ArrayIndexOutOfBoundsException e){
-				tuihuoDO.setGoodsCode("");
-			}
-			try {
-				String style = style1[i];
-				tuihuoDO.setStyle(style);
-			}catch (ArrayIndexOutOfBoundsException e){
-				tuihuoDO.setStyle("");
-			}
-			try {
-				String retailProce = retailProce1[i];
-				tuihuoDO.setRetailPrice(retailProce);
-			}catch (ArrayIndexOutOfBoundsException e){
-				tuihuoDO.setRetailPrice("");
 			}
 
-			if (tuihuoService.save(tuihuoDO) < 0) {
-				return R.error();
-			}
 
-	}
 		return R.ok();
 }
 	/**

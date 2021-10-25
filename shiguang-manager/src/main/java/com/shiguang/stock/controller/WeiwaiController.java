@@ -547,6 +547,34 @@ public class WeiwaiController {
                 Integer newGoodsCount = gdcountNew + goodsCountNew;
                 stockDO1.setGoodsCount(String.valueOf(newGoodsCount));
                 stockService.updateGoodsCount(stockDO1);//修改数量
+
+                WeiwaiDO weiwaiDO = new WeiwaiDO();
+                weiwaiDO.setDanjuNumber(danjuNumber);
+                weiwaiDO.setStatus(status);
+                weiwaiDO.setUsername(username);
+                //———获取当前系统时间—————
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                Date dates = new Date();
+                String shTime = sdf.format(dates);
+                weiwaiDO.setShTime(shTime);
+                String danjuNumbers = jiaGoodsList.getDanjuNumber();
+                weiwaiDO.setStockorder(danjuNumbers);
+                weiwaiService.updateStatus(weiwaiDO);
+
+                WeiwaikcDO weiwaikcDO = new WeiwaikcDO();
+                weiwaikcDO.setDanjuNumber(danjuNumber);
+                weiwaikcDO.setStatus(status);
+                weiwaikcDO.setUsername(username);
+                weiwaikcDO.setShTime(shTime);
+                weiwaikcService.updateStatus(weiwaikcDO);
+
+                StockDO stockDOs = new StockDO();
+                stockDOs.setDanjuNumber(danjuNumber);
+                stockDOs.setStatus(status);
+                stockDOs.setUsername(username);
+                stockService.updateStatus(stockDOs);
+
+
             } else {
                 String goodsType = orderDOS.getEyeStyle();//类别
                 if ("3".equals(goodsType)) {

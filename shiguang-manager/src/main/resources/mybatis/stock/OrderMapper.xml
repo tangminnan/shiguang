@@ -44,7 +44,10 @@
             <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
             <if test="positionName != null and positionName != ''">and s.position_name = #{positionName}</if>
             <if test="createTime != null and createTime != ''">and s.create_time = #{createTime}</if>
-            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number = #{danjuNumber}</if>
+            <!--<if test="danjuNumber != null and danjuNumber != ''">and s.danju_number = #{danjuNumber}</if>-->
+
+            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number LIKE concat(concat('%', #{danjuNumber}),'%')</if>
+
             <if test="orderNumber != null and orderNumber != ''">and s.order_number = #{orderNumber}</if>
             <if test="yundanNumber != null and yundanNumber != ''">and s.yundan_number = #{yundanNumber}</if>
             <if test="zhidanPeople != null and zhidanPeople != ''">and s.zhidan_people = #{zhidanPeople}</if>

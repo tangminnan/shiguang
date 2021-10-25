@@ -28,12 +28,12 @@
         left join department d on po.depart_number= d.depart_number
         <where>
             <if test="id != null and id != ''">and s.id = #{id}</if>
-            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number = #{danjuNumber}</if>
+            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number  LIKE concat(concat('%', #{danjuNumber}),'%')</if>
             <if test="danjuDay != null and danjuDay != ''">and s.danju_day = #{danjuDay}</if>
             <if test="eyeStyle != null and eyeStyle != ''">and s.eye_style = #{eyeStyle}</if>
             <if test="zhidanPeople != null and zhidanPeople != ''">and s.zhidan_people = #{zhidanPeople}</if>
             <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
-            <if test="mfrsname != null and mfrsname != ''">and s.mfrsname = #{mfrsname}</if>
+            <if test="mfrsname != null and mfrsname != ''">and s.mfrsname  LIKE concat(concat('%', #{mfrsname}),'%')</if>
             <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
             <if test="positionName != null and positionName != ''">and s.position_name = #{positionName}</if>
             <if test="changjiaNumber != null and changjiaNumber != ''">and s.changjia_number = #{changjiaNumber}</if>
@@ -61,10 +61,9 @@
             <if test="curvature != null and curvature != ''">and s.curvature = #{curvature}</if>
 
 
-            <if test="gkname != null and gkname != ''">and s.gkname = #{gkname}</if>
-            <if test="hyknum != null and hyknum != ''">and s.hyknum = #{hyknum}</if>
-            <if test="phone != null and phone != ''">and s.phone = #{phone}</if>
-
+            <if test="gkname != null and gkname != ''">and s.gkname  LIKE concat(concat('%', #{gkname}),'%')</if>
+            <if test="hyknum != null and hyknum != ''">and s.hyknum  LIKE concat(concat('%', #{hyknum}),'%')</if>
+            <if test="phone != null and phone != ''">and s.phone  LIKE concat(concat('%', #{phone}),'%')</if>
 
             <if test="status != null and status != ''">and s.status = #{status}</if>
             <if test="username != null and username != ''">and s.username = #{username}</if>
@@ -72,11 +71,13 @@
             <if test="shstatus != null and shstatus != ''">and s.shstatus = #{shstatus}</if>
             <if test="psname != null and psname != ''">and s.psname = #{psname}</if>
 
-            <if test="salenumbery != null and salenumbery != ''">and s.salenumbery = #{salenumbery}</if>
+
+
+            <if test="salenumbery != null and salenumbery != ''">and s.salenumbery  LIKE concat(concat('%', #{salenumbery}),'%')</if>
             <if test="pstime != null and pstime != ''">and s.pstime = #{pstime}</if>
             <if test="stockorder != null and stockorder != ''">and s.stockorder = #{stockorder}</if>
             <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
-            <if test="companyid != null and companyid != ''">and sFIND_IN_SET(d.company_id,#{companyid})</if>
+            <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

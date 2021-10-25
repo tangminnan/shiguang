@@ -32,7 +32,8 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
+                                pidiaoNumber:$('#pidiaoNumber').val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -112,10 +113,10 @@ function load() {
 								// 	field : 'goodsCount',
 								// 	title : '可调用数量'
 								// },
-																{
-									field : 'useCount',
-									title : '批调数量'
-								},
+								// 								{
+								// 	field : 'useCount',
+								// 	title : '批调数量'
+								// },
 								// 								{
 								// 	field : 'goodsCode',
 								// 	title : '商品条码'
@@ -551,6 +552,13 @@ function showCol() {
             var goodsxinxiid = row['goodsxinxiid'] ;
         }
         obj.goodsxinxiid = goodsxinxiid;
+
+        if(null == row['danjuNumber']){
+            var danjuNumber  ="";
+        }else {
+            var danjuNumber = row['danjuNumber'] ;
+        }
+        obj.danjuNumber = danjuNumber;
 
 
         objArray.push(obj);

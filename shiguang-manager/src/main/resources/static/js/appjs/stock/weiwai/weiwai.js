@@ -32,7 +32,13 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
+                                danjuNumber:$('#danjuNumber').val(),
+                                salenumbery:$('#salenumbery').val(),
+                                gkname:$('#gkname').val(),
+                                hyknum:$('#hyknum').val(),
+                                phone:$('#phone').val(),
+                                mfrsname:$('#mfrsname').val(),
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -104,7 +110,7 @@ function load() {
 									title : '收货时间'
 								},{
 									field : 'pstime',
-									title : '配送或退回时间'
+									title : '配送时间'
 								},
 							{
 								field : 'shstatus',
@@ -130,10 +136,10 @@ function load() {
                                     if (row.status == "1") {
                                         var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="detial(\''
                                             + row.id + '\')">详情</span> ';
-                                        var f = '<span class="btn btn-success btn-sm" href="#" title="收货"  mce_href="#"   onclick="userNum(\''
-                                            + row.danjuNumber + '\')">收货</span> ';
+                                        var f = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#"   onclick="userNum(\''
+                                            + row.danjuNumber + '\')">确认收货</span> ';
                                         var n = '';
-                                        var j = '';
+                                        // var j = '';
                                     } else if (row.status == "0") {
                                         var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="detial(\''
                                             + row.id + '\')">详情</span> ';
@@ -141,16 +147,16 @@ function load() {
                                         if (row.shstatus==""){
 											var n = '<span class="btn btn-warning btn-sm"  href="#" title="配送"  mce_href="#" onclick="psNum(\''
 												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle+" ','"+  row.yaoqiu+" ','"+  row.yaoqiu2 + '\')">配送</span> ';
-											var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="thNum(\''
-												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">退回</span> ';
+											// var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="thNum(\''
+											// 	+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">退回</span> ';
 										}else {
 											var n = '';
-											var j = '';
+											// var j = '';
 										}
 
 
                                     }
-                                    return a + f + n + j ;
+                                    return a + f + n  ;
                                 }
                             }
 								]

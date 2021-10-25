@@ -372,7 +372,7 @@
 	<select id="orderList" resultType="com.shiguang.stock.domain.TuihuoDO">
 		select t.`id`,t.`tuihuo_num`,t.`zhidan_people`,t.`danju_day`,t.`mfrsid`,m.`mfrsname`,t.`position_id`,p.position_name,t.`beizhu`,t.`style`
 		from stock_tuihuo t
-		left join c_mfrs m on t.mfrsid=m.mfrsid
+		left join c_mfrs m on t.mfrsid=m.mfrsnum
 		left join c_position p on t.position_id=t.position_id
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
@@ -398,7 +398,7 @@
 	<select id="orderCount" resultType="int">
 		select count(*)
 		from stock_tuihuo t
-		left join c_mfrs m on t.mfrsid=m.mfrsid
+		left join c_mfrs m on t.mfrsid=m.mfrsnum
 		left join c_position p on t.position_id=t.position_id
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
@@ -433,7 +433,7 @@
 	<select id="getDanju" resultType="com.shiguang.stock.domain.TuihuoDO">
 		select t.tuihuo_num,t.danju_day,m.mfrsname,p.position_name,t.beizhu,t.zhidan_people,t.style
 		from stock_tuihuo t
-		left join c_mfrs m on t.mfrsid
+		left join c_mfrs m on t.mfrsid = m.mfrsnum
 		left join c_position p on t.position_id=p.position_id
 		where t.tuihuo_num = #{value}
 		group by  t.tuihuo_num
