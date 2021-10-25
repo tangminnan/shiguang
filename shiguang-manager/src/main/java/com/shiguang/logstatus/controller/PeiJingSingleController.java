@@ -40,7 +40,9 @@ public class PeiJingSingleController {
         //查询列表数据
         Query query = new Query(params);
         if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+            if (!"3".equals(ShiroUtils.getUser().getCompanyId())){
+                query.put("companyid",ShiroUtils.getUser().getCompanyId());
+            }
         }
         List<SalesDO> salesDOList = statusService.findSalePeijingAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
