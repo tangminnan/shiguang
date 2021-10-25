@@ -190,7 +190,28 @@
                             var leftRight = xml[i].leftRight.split(",");
                             var count = xml[i].count.split(",");
                             var yaoqiu = xml[i].yaoqiu.split(",");
+                            var sph="";
+                            var cyl="";
+                            var axial="";
+                            var lightbelow="";
+                            var lengjing="";
+                            var diameter="";
                             for (var a = 0; a < name.length; a++) {
+                                if (leftRight[a]=="右"){
+                                    sph=xml[i].rightsph;
+                                    cyl=xml[i].rightcyl;
+                                    axial= xml[i].rightzx;
+                                    lightbelow= xml[i].rightAdd;
+                                    lengjing=  xml[i].rightSlj ;
+                                    diameter=  xml[i].rightzj ;
+                                }else if (leftRight[a]=="左") {
+                                    sph=xml[i].leftsph;
+                                    cyl=xml[i].leftcyl;
+                                    axial= xml[i].leftzx;
+                                    lightbelow= xml[i].leftAdd;
+                                    lengjing=  xml[i].leftSlj ;
+                                    diameter=  xml[i].leftzj ;
+                                }
                                 $(".heji1").before("<tr class='val1'>" +
                                     "<td >" + xml[i].number + "</td>\n" +//0
                                     "<input name='saleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1
@@ -204,20 +225,20 @@
                                     "<input name='rl' type='hidden' value='" + leftRight[a] + "'>\n" +//3
                                     "<td>" + count [a] + "</td>\n" +//数量
                                     "<input name='count' type='hidden' value='" + count [a] + "'>\n" +
-                                    "<td>" + xml[i].rightsph + "</td>\n" +//球镜
-                                    "<input name='sph' type='hidden' value='" + xml[i].rightsph + "'>\n" +//3
-                                    "<td>" + xml[i].rightcyl + "</td>\n" +//zhu镜
-                                    "<input name='cyl' type='hidden' value='" + xml[i].rightcyl + "'>\n" +
-                                    "<td>" + xml[i].rightzx + "</td>\n" +//zhu镜
-                                    "<input name='axial' type='hidden' value='" + xml[i].rightzx + "'>\n" +
-                                    "<td>" + xml[i].rightAdd + "</td>\n" +//zhu镜
-                                    "<input name='lightbelow' type='hidden' value='" + xml[i].rightAdd + "'>\n" +
-                                    "<td>" + xml[i].rightSlj + "</td>\n" +//zhu镜
-                                    "<input name='lengjing' type='hidden' value='" + xml[i].rightSlj + "'>\n" +
-                                    "<td>" + xml[i].rightzj + "</td>\n" +//zhu镜
-                                    "<input name='diameter' type='hidden' value='" + xml[i].rightzj + "'>\n" +
+                                    "<td>" + sph + "</td>\n" +//球镜
+                                    "<input name='sph' type='hidden' value='" + sph + "'>\n" +//3
+                                    "<td>" + cyl + "</td>\n" +//zhu镜
+                                    "<input name='cyl' type='hidden' value='" + cyl+ "'>\n" +
+                                    "<td>" + axial + "</td>\n" +//zhu镜
+                                    "<input name='axial' type='hidden' value='" + axial+ "'>\n" +
+                                    "<td>" + lightbelow+ "</td>\n" +//zhu镜
+                                    "<input name='lightbelow' type='hidden' value='" + lightbelow + "'>\n" +
+                                    "<td>" + lengjing + "</td>\n" +//zhu镜
+                                    "<input name='lengjing' type='hidden' value='" +lengjing+ "'>\n" +
+                                    "<td>" + diameter + "</td>\n" +//zhu镜
+                                    "<input name='diameter' type='hidden' value='" + diameter + "'>\n" +
                                     "<td>" + yaoqiu[a] + "</td>\n" +//zhu镜
-                                    "<input name='yaoqiu' type='hidden' value='" + yaoqiu[a] + "'>\n" +
+                                    "<input id='' name='yaoqiu' type='hidden' value='" + yaoqiu[a] + "'>\n" +
                                     "<td style='display:none;'>" + num[a] + "</td>\n" +
                                     "<input name='num' type='hidden' value='" + num[a] + "'>\n" +
                                     "<input name='code' type='hidden' value='" + code[a] + "'>\n" +

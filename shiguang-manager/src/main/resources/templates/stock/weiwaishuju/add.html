@@ -490,7 +490,7 @@
                                     html += "<td><input id='jd" + b + "' value='" + jd + "' type='text' /></td>";
                                     html += "<td><input id='tg" + b + "' value='" + tg + "' type='text' /></td>";
                                     html += "<td><input id='count" + b + "' name='count'  value='" + storeCount[a] + "' type='text'/></td>";
-                                    html += "<td><input id='yaoqiu" + b + "' name='yaoqiu' value='" + rows[i].processAsk + "' type='text' /></td>";
+                                    html += "<td><input id='yaoqiu" + b + "' name='yaoqiu' value='" + rows[i].processAsk.replaceAll(",","/") + "' type='text' /></td>";
                                     html += "<td><input id='code" + b + "' name='code' value='" + goodsCode[a] + "' type='hidden' /></td>";
                                     html += "</tr>";
                                     b = b + 1;

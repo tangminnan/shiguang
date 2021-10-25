@@ -842,10 +842,11 @@
             <if test="saleType != null and saleType != ''">and sale_type = #{saleType}</if>
             <if test="companyId != null and companyId != ''">and company_id = #{companyId}</if>
 
-            <if test="saleNumber != null and saleNumber != ''">and sale_number = #{saleNumber}</if>
-            <if test="name != null and name != ''">and name = #{name}</if>
-            <if test="memberNumber != null and memberNumber != ''">and member_number = #{memberNumber}</if>
-            <if test="phone1 != null and phone1 != ''">and phone1 = #{phone1}</if>
+
+            <if test="saleNumber != null and saleNumber != ''">and sale_number LIKE concat(concat('%', #{saleNumber}),'%')</if>
+            <if test="name != null and name != ''">and name LIKE concat(concat('%', #{name}),'%')</if>
+            <if test="memberNumber != null and memberNumber != ''">and memberNumber LIKE concat(concat('%', #{memberNumber}),'%')</if>
+            <if test="phone1 != null and phone1 != ''">and phone1 LIKE concat(concat('%', #{phone1}),'%')</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
