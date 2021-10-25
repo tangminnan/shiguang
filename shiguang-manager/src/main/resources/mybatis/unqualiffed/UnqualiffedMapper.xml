@@ -8,12 +8,12 @@
 	</select>
 
 	<select id="list" resultType="com.shiguang.unqualiffed.domain.UnqualiffedDO">
-		select u.`id`,u.`document_number`,u.`department_appli`,u.`position_appli`,u.`sale_number`,u.`prepared_name`,u.`responsible_name`,u.`bill_number`,u.`cause`,
+		select u.`id`,u.`company_id`,u.`document_number`,u.`department_appli`,u.`position_appli`,u.`sale_number`,u.`prepared_name`,u.`responsible_name`,u.`bill_number`,u.`cause`,
 		u.`phenomenon`,u.`handle`,u.`bill_date`
-		from unqualiffed u join department d on d.depart_number = u.document_number join c_company c on c.id = d.company_id
+		from unqualiffed u join c_company c on c.id = u.company_id
         <where>  
 		  		  <if test="id != null and id != ''"> and u.id = #{id} </if>
-			      <if test="companyId !=null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+			      <if test="companyId !=null and companyId != ''">and FIND_IN_SET(u.company_id,#{companyId})</if>
 		  		  <if test="saleNumber != null and saleNumber != ''"> and u.sale_number like concat('%', #{saleNumber},'%') </if>
 		  		  <if test="preparedName != null and preparedName != ''"> and u.prepared_name = #{preparedName} </if>
 		  		  <if test="responsibleName != null and responsibleName != ''"> and u.responsible_name = #{responsibleName} </if>
@@ -55,6 +55,7 @@
 	<insert id="save" parameterType="com.shiguang.unqualiffed.domain.UnqualiffedDO" useGeneratedKeys="true" keyProperty="id">
 		insert into unqualiffed
 		(
+		   `company_id`,
 		   `document_number`,
 		   `department_appli`,
 		   `position_appli`,
@@ -74,6 +75,7 @@
 		)
 		values
 		(
+		    #{companyId},
 		    #{documentNumber},
 		    #{departmentAppli},
 		    #{positionAppli},

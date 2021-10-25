@@ -83,9 +83,9 @@
 		</tr>
 		<tr>
 			<td>焦度计</td>
-			<td><input type="text" id="jdjSphRight1" name="jdjSphRight1"/></td>
-			<td><input type="text" id="jdjCylRight1" name="jdjCylRight1"/></td>
-			<td><input type="text" id="jdjZxRight1" name="jdjZxRight1"/></td>
+			<td><input type="text" id="jdjSphRight1" name="jdjSphRight1" onchange="getJdjSphRight()"/></td>
+			<td><input type="text" id="jdjCylRight1" name="jdjCylRight1" onchange="getJdjCylRight()"/></td>
+			<td><input type="text" id="jdjZxRight1" name="jdjZxRight1" onchange="getJdjZxRight()"/></td>
 			<td rowspan="3">
 				<select name="xieshiRight" id="xieshiRight">
 					<option value="">--请选择--</option>
@@ -200,13 +200,13 @@
         var leftzx = $("#leftzx").val();
 		if (Number(rightsph) > 0){
            var rightsph2 =  Number(rightsph) + Number(rightcyl);
-           $("#rightsph2").text("+"+rightsph2);
+           $("#rightsph2").text("+"+rightsph2.toFixed(2));
 		} else {
             var rightsph2 = Number(rightsph) + Number(rightcyl);
-            $("#rightsph2").text(rightsph2);
+            $("#rightsph2").text(rightsph2.toFixed(2));
 		}
 		rightcyl -= rightcyl*2;
-		$("#rightcyl2").text("+"+rightcyl);
+		$("#rightcyl2").text("+"+rightcyl.toFixed(2));
 		if (Number(rightzx) > 90){
 		    var rightzx2 = Number(rightzx)-Number(90);
 		    $("#rightzx2").text(rightzx2);
@@ -216,13 +216,13 @@
 		}
         if (Number(leftsph) > 0){
             var leftsph2 =  Number(leftsph) + Number(leftcyl);
-            $("#leftsph2").text("+"+leftsph2);
+            $("#leftsph2").text("+"+leftsph2.toFixed(2));
         } else {
             var leftsph2 = Number(leftsph) + Number(leftcyl);
-            $("#leftsph2").text(leftsph2);
+            $("#leftsph2").text(leftsph2.toFixed(2));
         }
         leftcyl -= leftcyl*2;
-        $("#leftcyl2").text("+"+leftcyl);
+        $("#leftcyl2").text("+"+leftcyl.toFixed(2));
         if (Number(leftzx) > 90){
             var leftzx2 = Number(leftzx)-Number(90);
             $("#leftzx2").text(leftzx2);
@@ -231,56 +231,98 @@
             $("#leftzx2").text(leftzx2);
         }
     });
+    function getJdjSphRight(){
+
+	}
     function getFetch(){
-        $.ajax({
-            type : 'POST',
-            data : {},
-            url : '/information/examine/jiaoduji',
-            success : function(data) {
-                $("#lensMeterId").val(data.id);
-				$("#jdjSphRight1").val(data.rightSph);
-                $("#jdjCylRight1").val(data.rightCyl);
-                $("#jdjZxRight1").val(data.rightZx);
-                $("#jdjSphLeft1").val(data.leftSph);
-                $("#jdjCylLeft1").val(data.leftCyl);
-                $("#jdjZxLeft1").val(data.leftZx);
-                var rightcyl = data.rightCyl;
-                var leftcyl = data.rightCyl;
-                if (Number(data.rightSph) > 0){
-                    var rightsph2 =  Number(data.rightSph) + Number(data.rightCyl);
-                    $("#jdjSphRight2").val("+"+rightsph2);
-                } else {
-                    var rightsph2 = Number(data.rightSph) + Number(data.rightCyl);
-                    $("#jdjSphRight2").val(rightsph2);
-                }
-                rightcyl -= rightcyl*2;
-                $("#jdjCylRight2").val("+"+rightcyl);
-                if (Number(data.rightZx) > 90){
-                    var rightzx2 = Number(data.rightZx)-Number(90);
-                    $("#jdjZxRight2").val(rightzx2);
-                } else {
-                    var rightzx2 = Number(data.rightZx)+Number(90);
-                    $("#jdjZxRight2").val(rightzx2);
-                }
-                if (Number(data.leftSph) > 0){
-                    var leftsph2 =  Number(data.leftSph) + Number(data.leftCyl);
-                    $("#jdjSphLeft2").val("+"+leftsph2);
-                } else {
-                    var leftsph2 = Number(data.leftSph) + Number(data.leftCyl);
-                    $("#jdjSphLeft2").val(leftsph2);
-                }
-                leftcyl -= leftcyl*2;
-                $("#jdjCylLeft2").val("+"+leftcyl);
-                if (Number(data.leftZx) > 90){
-                    var leftzx2 = Number(data.leftZx)-Number(90);
-                    $("#jdjZxLeft2").val(leftzx2);
-                } else {
-                    var leftzx2 = Number(data.leftZx)+Number(90);
-                    $("#jdjZxLeft2").val(leftzx2);
-                }
-                $("#chuichajdj").val(0);
-            }
-        });
+        var rightsph = $("#jdjSphRight1").val();
+        var rightcyl = $("#jdjCylRight1").val();
+        if (Number(rightsph) > 0){
+            var rightsph2 =  Number(rightsph) + Number(rightcyl);
+            $("#jdjSphRight2").val("+"+rightsph2);
+        } else {
+            var rightsph2 = Number(rightsph) + Number(rightcyl);
+            $("#jdjSphRight2").val(rightsph2);
+        }
+        rightcyl -= rightcyl*2;
+        $("#jdjCylRight2").val("+"+rightcyl);
+        var rightzx = $("#jdjZxRight1").val();
+        if (Number(rightzx) > 90){
+            var rightzx2 = Number(rightzx)-Number(90);
+            $("#jdjZxRight2").val(rightzx2);
+        } else {
+            var rightzx2 = Number(rightzx)+Number(90);
+            $("#jdjZxRight2").val(rightzx2);
+        }
+        var leftsph = $("#jdjSphLeft1").val();
+        var leftcyl = $("#jdjCylLeft1").val();
+        if (Number(leftsph) > 0){
+            var leftsph2 =  Number(leftsph) + Number(leftcyl);
+            $("#jdjSphLeft2").val("+"+leftsph2);
+        } else {
+            var leftsph2 = Number(leftsph) + Number(leftcyl);
+            $("#jdjSphLeft2").val(leftsph2);
+        }
+        leftcyl -= leftcyl*2;
+        $("#jdjCylLeft2").val("+"+leftcyl);
+        var leftzx = $("#jdjZxLeft1").val();
+        if (Number(leftzx) > 90){
+            var leftzx2 = Number(leftzx)-Number(90);
+            $("#jdjZxLeft2").val(leftzx2);
+        } else {
+            var leftzx2 = Number(leftzx)+Number(90);
+            $("#jdjZxLeft2").val(leftzx2);
+        }
+        $("#chuichajdj").val(0);
+        // $.ajax({
+        //     type : 'POST',
+        //     data : {},
+        //     url : '/information/examine/jiaoduji',
+        //     success : function(data) {
+        //         $("#lensMeterId").val(data.id);
+			// 	$("#jdjSphRight1").val(data.rightSph);
+        //         $("#jdjCylRight1").val(data.rightCyl);
+        //         $("#jdjZxRight1").val(data.rightZx);
+        //         $("#jdjSphLeft1").val(data.leftSph);
+        //         $("#jdjCylLeft1").val(data.leftCyl);
+        //         $("#jdjZxLeft1").val(data.leftZx);
+        //         var rightcyl = data.rightCyl;
+        //         var leftcyl = data.leftCyl;
+        //         if (Number(data.rightSph) > 0){
+        //             var rightsph2 =  Number(data.rightSph) + Number(data.rightCyl);
+        //             $("#jdjSphRight2").val("+"+rightsph2);
+        //         } else {
+        //             var rightsph2 = Number(data.rightSph) + Number(data.rightCyl);
+        //             $("#jdjSphRight2").val(rightsph2);
+        //         }
+        //         rightcyl -= rightcyl*2;
+        //         $("#jdjCylRight2").val("+"+rightcyl);
+        //         if (Number(data.rightZx) > 90){
+        //             var rightzx2 = Number(data.rightZx)-Number(90);
+        //             $("#jdjZxRight2").val(rightzx2);
+        //         } else {
+        //             var rightzx2 = Number(data.rightZx)+Number(90);
+        //             $("#jdjZxRight2").val(rightzx2);
+        //         }
+        //         if (Number(data.leftSph) > 0){
+        //             var leftsph2 =  Number(data.leftSph) + Number(data.leftCyl);
+        //             $("#jdjSphLeft2").val("+"+leftsph2);
+        //         } else {
+        //             var leftsph2 = Number(data.leftSph) + Number(data.leftCyl);
+        //             $("#jdjSphLeft2").val(leftsph2);
+        //         }
+        //         leftcyl -= leftcyl*2;
+        //         $("#jdjCylLeft2").val("+"+leftcyl);
+        //         if (Number(data.leftZx) > 90){
+        //             var leftzx2 = Number(data.leftZx)-Number(90);
+        //             $("#jdjZxLeft2").val(leftzx2);
+        //         } else {
+        //             var leftzx2 = Number(data.leftZx)+Number(90);
+        //             $("#jdjZxLeft2").val(leftzx2);
+        //         }
+        //         $("#chuichajdj").val(0);
+        //     }
+        // });
 	}
 	function getCheckOut(){
         //var jdjCylRight1 = $("#jdjCylRight1").val();

@@ -95,12 +95,13 @@
                      $("#amountMoney").append(rows[i].amountMoney);
                      $("#mirrorDate").append(rows[i].mirrorDate);
                      $("#saleDate").append(rows[i].peijingDate);
+                     var saleNumber = rows[i].saleNumber
                     var godist = rows[i].list;
                     for (var a=0;a<godist.length;a++){
                         var goodsNumStr = godist[a].goodsNum;
                         var goodsNameStr = godist[a].goodsName;
                         var goodsCodeStr = godist[a].goodsCode;
-                        html = "<tr><td><input type=\"checkbox\" onchange='getData(\""+goodsNumStr+"\",\""+goodsNameStr+"\",\""+goodsCodeStr+"\")'/></td>";
+                        html = "<tr><td><input type=\"checkbox\" onchange='getData(\""+goodsNumStr+"\",\""+goodsNameStr+"\",\""+goodsCodeStr+"\",\""+saleNumber+"\")'/></td>";
                         html += "<td>"+godist[a].goodsNum+"</td>";
                         html += "<td>"+godist[a].goodsCode+"</td>";
                         html += "<td>"+godist[a].goodsName+"</td>";

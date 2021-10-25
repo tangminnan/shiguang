@@ -6,6 +6,12 @@ import java.util.*;
 import com.shiguang.common.utils.*;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.PositionService;
+import com.shiguang.product.domain.JpcpDO;
+import com.shiguang.product.domain.JpdzDO;
+import com.shiguang.product.service.JpcpService;
+import com.shiguang.product.service.JpdzService;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import com.shiguang.storeSales.domain.SaleGoodsDO;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
@@ -45,6 +51,12 @@ public class UnqualiffedController {
 	private PositionService positionService;
 	@Autowired
 	private SalesService salesService;
+	@Autowired
+	private StockService stockService;
+	@Autowired
+	private JpdzService jpdzService;
+	@Autowired
+	private JpcpService jpcpService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:unqualiffed:unqualiffed")
@@ -158,6 +170,67 @@ public class UnqualiffedController {
 	@PostMapping("/save")
 	@RequiresPermissions("information:unqualiffed:add")
 	public R save(UnqualiffedDO unqualiffed){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String[] saleNumber = unqualiffed.getSaleNumber().split(",");
+		SalesDO salesDO = salesService.getSaleNumber(saleNumber[0]);
+		Map<String,Object> map = new HashMap<>();
+		map.put("companyId",ShiroUtils.getUser().getCompanyId());
+		PositionDO positionDO = stockService.findBuHegePosition(map);
+		String[] goodsCode = salesDO.getGoodsCode().split(",");
+		String[] count = salesDO.getStoreCount().split(",");
+		for (int i=0;i<goodsCode.length;i++){
+			StockDO stockDO = new StockDO();
+			stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+			stockDO.setGoodsCode(goodsCode[i]);
+			String[] goodsNum = salesDO.getGoodsNum().split(",");
+			String[] goodsName = salesDO.getStoreName().split(",");
+			stockDO.setGoodsNum(goodsNum[i]);
+			stockDO.setGoodsName(goodsName[i]);
+			stockDO.setGoodsCount(Integer.parseInt(count[i]) +"");
+			String[] classType = salesDO.getClasstype().split(",");
+			if ("2".equals(classType[i])){
+				Map<String,Object> maps = new HashMap<>();
+				maps.put("producNum",goodsNum[i]);
+				List<JpdzDO> jpdzDOS = jpdzService.listDz(maps);
+				if (null != jpdzDOS && jpdzDOS.size() > 0){
+					stockDO.setUnit(jpdzDOS.get(0).getUnitname());
+					stockDO.setMfrsid(jpdzDOS.get(0).getMfrsid());
+					stockDO.setGoodsType(3);
+					stockDO.setBrandname(jpdzDOS.get(0).getBrandname());
+					stockDO.setRetailPrice(jpdzDOS.get(0).getRetailPrice());
+					stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+					stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+					if (null != jpdzDOS.get(0).getFactory() && !"".equals(jpdzDOS.get(0).getFactory())){
+						stockDO.setFactory(jpdzDOS.get(0).getFactory());
+					}
+					stockDO.setClasstype("2");
+					stockDO.setUsername(ShiroUtils.getUser().getUsername());
+					stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+					stockService.save(stockDO);
+				}
+			} else if ("1".equals(classType[i])){
+				Map<String,Object> maps = new HashMap<>();
+				maps.put("producNum",goodsNum[i]);
+				List<JpcpDO> jpcpDOS = jpcpService.list(maps);
+				if (null != jpcpDOS && jpcpDOS.size() > 0){
+					stockDO.setUnit(jpcpDOS.get(0).getUnitname());
+					stockDO.setMfrsid(jpcpDOS.get(0).getMfrsid());
+					stockDO.setGoodsType(3);
+					stockDO.setBrandname(jpcpDOS.get(0).getBrandname());
+					stockDO.setRetailPrice(jpcpDOS.get(0).getRetailPrice());
+					stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+					stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+					if (null != jpcpDOS.get(0).getProducFactory() && !"".equals(jpcpDOS.get(0).getProducFactory())){
+						stockDO.setFactory(jpcpDOS.get(0).getProducFactory());
+					}
+					stockDO.setClasstype("1");
+					stockDO.setUsername(ShiroUtils.getUser().getUsername());
+					stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+					stockService.save(stockDO);
+				}
+			}
+		}
+		unqualiffed.setCompanyId(ShiroUtils.getUser().getCompanyId());
 		if(unqualiffedService.save(unqualiffed)>0){
 			return R.ok();
 		}
