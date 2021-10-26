@@ -83,7 +83,7 @@ public class UnqualiffedController {
 	@RequiresPermissions("information:unqualiffed:add")
 	String add(Model model){
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String documentNumber = String.valueOf(GuuidUtil.getUUID());
+		String documentNumber = "DJ"+GuuidUtil.getUUID();
 		String preparedName = ShiroUtils.getUser().getName();
 		String departmentAppli = ShiroUtils.getUser().getStore();
 		String billDate = simpleDateFormat.format(new Date());
@@ -236,6 +236,26 @@ public class UnqualiffedController {
 		}
 		return R.error();
 	}
+
+	/**
+	 * 详情
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/detail/{id}")
+	@RequiresPermissions("information:package:detail")
+	String detail(@PathVariable("id") Long id,Model model){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		UnqualiffedDO unqualiffedDO = unqualiffedService.get(id);
+		String positionapild = unqualiffedDO.getPositionAppli();
+		PositionDO positionDO = positionService.getPositionNum(positionapild);
+		unqualiffedDO.setBillTime(simpleDateFormat.format(unqualiffedDO.getBillDate()));
+		model.addAttribute("unqualiffedDO",unqualiffedDO);
+		model.addAttribute("positionDO",positionDO);
+		return "unqualiffed/detail";
+	}
+
 	/**
 	 * 修改
 	 */

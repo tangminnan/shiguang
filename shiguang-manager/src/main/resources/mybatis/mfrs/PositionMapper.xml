@@ -102,6 +102,11 @@
     update c_position set `state` = #{state} where position_id = #{positionId}
     </update>
 
+    <!-- 根据仓位代码查询仓位名称 -->
+    <select id="getPositionNum" resultType="com.shiguang.mfrs.domain.PositionDO">
+		select `position_id`,`position_num`,`depart_number`,`depart_name`,`position_name`,`position_order`,`state_id`,`xsstate`,`state` from c_position where position_num = #{value}
+    </select>
+
     <!--库存查询相对应的仓库-->
     <select id="positionList" resultType="com.shiguang.mfrs.domain.PositionDO">
         select po.position_id, po.position_name,po.`position_num`  from c_position po  left join department d on po.depart_number=d.depart_number

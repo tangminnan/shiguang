@@ -51,6 +51,7 @@ public class UnqualiffedDO implements Serializable {
 	private String handle;
 	//单据日期
 	private Date billDate;
+	private String billTime;
 
 	/**
 	 * 设置：主键
@@ -208,4 +209,8 @@ public class UnqualiffedDO implements Serializable {
 	public void setCompanyId(String companyId){this.companyId =companyId;}
 
 	public String getCompanyId(){return companyId;}
+
+	public void setBillTime(String billTime){this.billTime = billTime;}
+
+	public String getBillTime(){return billTime;}
 }
