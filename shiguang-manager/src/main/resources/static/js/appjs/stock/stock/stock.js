@@ -12,6 +12,7 @@ function add() {
 }
 
 function edit(id) {
+    // alert("采购详情页")
     var toIndex = layer.open({
         type: 2,
         title: '详情',

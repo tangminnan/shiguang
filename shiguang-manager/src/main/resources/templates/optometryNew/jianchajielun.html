@@ -1353,52 +1353,52 @@
             tab1.style = "display: block";
             // a = a+1;
             var html1 = "";
-            html1 = "<input type=\"text\"   id='kjyyPrescriptionType' name=\"kjyyPrescriptionType\" value=\"2\" hidden/>";
+            html1 = "<input type='text'   id='kjyyPrescriptionType' name='kjyyPrescriptionType' value='2' hidden/>";
             $("#kuangjiayy").append(html1);
         } else if (value == '1') {
             tab2.style = "display: block";
             var html2 = "";
-            html2 = "<input type=\"text\" id='kjjyPrescriptionType' name=\"kjjyPrescriptionType\" value=\"1\" hidden/>";
+            html2 = "<input type='text' id='kjjyPrescriptionType' name='kjjyPrescriptionType' value='1' hidden/>";
             $("#kuangjiajy").append(html2);
         } else if (value == '3') {
             tab3.style = "display: block";
             var html3 = "";
-            html3 = "<input type=\"text\" id='sgjjPrescriptionType' name=\"sgjjPrescriptionType\" value=\"3\" hidden/>";
+            html3 = "<input type='text' id='sgjjPrescriptionType' name='sgjjPrescriptionType' value='3' hidden/>";
             $("#jianjsg").append(html3);
         } else if (value == '5') {
             tab4.style = "display: block";
             var html4 = "";
-            html4 = "<input type=\"text\" id='rxPrescriptionType' name=\"rxPrescriptionType\" value=\"5\" hidden/>";
+            html4 = "<input type='text' id='rxPrescriptionType' name='rxPrescriptionType' value='5' hidden/>";
             $("#ruanxjmjcj").append(html4);
         } else if (value == '4') {
             tab5.style = "display: block";
             var html5 = "";
-            html5 = "<input type=\"text\" id='zyPrescriptionType' name=\"zyPrescriptionType\" value=\"4\" hidden/>";
+            html5 = "<input type='text' id='zyPrescriptionType' name='zyPrescriptionType' value='4' hidden/>";
             $("#kuangjiazy").append(html5);
         } else if (value == '7') {
             tab6.style = "display: block";
             var html6 = "";
-            html6 = "<input type=\"text\" id='sjxlPrescriptionType' name=\"sjxlPrescriptionType\" value=\"7\" hidden/>";
+            html6 = "<input type='text' id='sjxlPrescriptionType' name='sjxlPrescriptionType' value='7' hidden/>";
             $("#shijxl").append(html6);
         } else if (value == '8') {
             tab7.style = "display: block";
             var html7 = "";
-            html7 = "<input type=\"text\" id='vstPrescriptionType' name=\"vstPrescriptionType\" value=\"8\" hidden/>";
+            html7 = "<input type='text' id='vstPrescriptionType' name='vstPrescriptionType' value='8' hidden/>";
             $("#jmvst").append(html7);
         } else if (value == '9') {
             tab8.style = "display: block";
             var html8 = "";
-            html8 = "<input type=\"text\" name=\"crtPrescriptionType\" value=\"9\" hidden/>";
+            html8 = "<input type='text' id='crtPrescriptionType' name='crtPrescriptionType' value='9' hidden/>";
             $("#jmcrt").append(html8);
         } else if (value == '10') {
             tab9.style = "display: block";
             var html9 = "";
-            html9 = "<input type=\"text\" name=\"rgpPrescriptionType\" value=\"10\" hidden/>";
+            html9 = "<input type='text' id='rgpPrescriptionType' name='rgpPrescriptionType' value='10' hidden/>";
             $("#jcrgp").append(html9);
         } else if (value == '11') {
             tab10.style = "display: block";
             var html10 = "";
-            html10 = "<input type=\"text\" name=\"ypPrescriptionType\" value=\"11\" hidden/>";
+            html10 = "<input type='text' id='ypPrescriptionType' name='ypPrescriptionType' value='11' hidden/>";
             $("#jcyp").append(html10);
         }
     };
@@ -1420,9 +1420,6 @@
     function deleteInput(obj){
         if (obj.id == 'remove1'){
             $("#kjyyPrescriptionType").remove();
-            // $(obj).parentsUntil('table').eq(2).parent().find("input");
-            // $(obj).parentsUntil('table').eq(2).parent().find("select").val("");
-            // $(obj).parentsUntil('table').eq(2).parent().attr("style", "display: none");
         }
         if (obj.id=='remove2'){
             $("#kjjyPrescriptionType").remove();

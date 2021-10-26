@@ -8,6 +8,7 @@ import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.mfrs.service.PositionService;
+import com.shiguang.product.domain.JpdzDO;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.domain.WeiwaiDO;
@@ -143,23 +144,34 @@ public class WeiwaiController {
         } else if (eyeStyle.equals("4")) {
             model.addAttribute("eyeStyle", "隐形订做");
         }
-        String[] saleNumber = weiwai.getSaleNumber().split(",");
-        model.addAttribute("saleNumber", saleNumber);
+//        String[] saleNumber = weiwai.getSaleNumber().split(",");
+//        model.addAttribute("saleNumber", saleNumber);
 
-        String[] saleNumbers = weiwai.getSaleNumber().split(",");//配镜单号
-        String[] mirrorTimes = weiwai.getMirrorTime().split(",");//取镜时间
-        String[] goodsNames = weiwai.getGoodsName().split(",");//名称
-        String[] styles = weiwai.getStyle().split(",");//委外方式
-        String[] rls = weiwai.getRl().split(",");//镜片类型左右
-        String[] counts = weiwai.getCount().split(",");//数量
-        String[] sphs = weiwai.getSph().split(",");
-        String[] cyls = weiwai.getCyl().split(",");
-        String[] axials = weiwai.getAxial().split(",");
-        String[] lightbelows = weiwai.getLightbelow().split(",");
-        String[] lengjings = weiwai.getLengjing().split(",");
-        String[] diameters = weiwai.getDiameter().split(",");
-        String[] yaoqius = weiwai.getYaoqiu().split(",");
+//        String[] saleNumbers = weiwai.getSaleNumber().split(",");//配镜单号
+//        String[] mirrorTimes = weiwai.getMirrorTime().split(",");//取镜时间
+//        String[] goodsNames = weiwai.getGoodsName().split(",");//名称
+//        String[] styles = weiwai.getStyle().split(",");//委外方式
+//        String[] rls = weiwai.getRl().split(",");//镜片类型左右
+//        String[] counts = weiwai.getCount().split(",");//数量
+//        String[] sphs = weiwai.getSph().split(",");
+//        String[] cyls = weiwai.getCyl().split(",");
+//        String[] axials = weiwai.getAxial().split(",");
+//        String[] lightbelows = weiwai.getLightbelow().split(",");
+//        String[] lengjings = weiwai.getLengjing().split(",");
+//        String[] diameters = weiwai.getDiameter().split(",");
+//        String[] yaoqius = weiwai.getYaoqiu().split(",");
         return "stock/weiwai/detial";
+    }
+    ///委外采购详情列表
+    @ResponseBody
+    @RequestMapping(value = "/selectWeiwaiOrder")
+    public List<WeiwaiDO> selectWeiwaiOrder(String danjuNumber ,Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber", danjuNumber);
+//        map.put("goodsType", goodsType);
+        List<WeiwaiDO> weiwaiOrder = weiwaiService.selectWeiwaiOrder(map);
+        model.addAttribute("weiwaiOrder", weiwaiOrder);
+        return weiwaiOrder;
     }
 
     /**
@@ -744,6 +756,30 @@ public class WeiwaiController {
         return "/stock/weiwai/jkPeijingdan";
     }
 
+    ///委外采购详情列表
+    @ResponseBody
+    @RequestMapping(value = "/jkPeijingdanList")
+    public List<WeiwaiDO> selectJKList(String danjuNumber ,Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber", danjuNumber);
+        WeiwaiDO weiwaiDO = weiwaiService.jkPeijingdan(danjuNumber);
+        //商品代码
+        String[] nums= weiwaiDO.getNum().split(",");
+        String[] goodsnames = new String[nums.length];
+        String name;
+        for (int i=0;i<nums.length;i++){
+            String num=nums[i];
+            JpdzDO jpdzDO=weiwaiService.jkname(num);
+            name=jpdzDO.getViewGoodName();
+            goodsnames[i]=name;
+        }
+        List<WeiwaiDO> weiwaiDOList = weiwaiService.jkPeijingdanList(map);
+        model.addAttribute("goodsnames",goodsnames);
+        model.addAttribute("weiwaiDOList", weiwaiDOList);
+        return weiwaiDOList;
+    }
+
+
     //打印隐形src/main/resources/templates/stock/weiwai/.html:84
     @GetMapping("/yxPeijingdan")
     String yxPeijingdan(String danjuNumber, Model model) {
@@ -892,3 +928,4 @@ public class WeiwaiController {
     }
 
 }
+

@@ -24,9 +24,8 @@
 </head>
 <body>
 <div class="container">
+    <input id="danjuNumber" th:value="${weiwaiDO.danjuNumber}" type="text"/>
 	<h3>镜框委外订单</h3>
-	<input id="goodsName" name="goodsName" th:value="${weiwaiDO.goodsName}" type="hidden"/>
-	<input id="goodsName2" name="goodsName" th:value="${weiwaiDO.goodsName2}" type="hidden"/>
 	<table class="tabA" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td><b>订单编号：</b><span th:text="${weiwaiDO.danjuNumber}"></span></td>
@@ -50,16 +49,19 @@
 				<th width="40">瞳高</th>
 				<th width="40">下加</th>
 				<th width="40">棱镜</th>
-				<th width="40">基底</th>
-				<th width="40">直径</th>
+				<!--<th width="40">基底</th>-->
+				<!--<th width="40">直径</th>-->
 				<th width="40">数量</th>
 				<th width="100">取镜日期</th>
 				<th width="20">顾客姓名</th>
 <!--				<th width="40">销售门店</th>-->
 				<th width="40">备注</th>
+
+
+
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="jp">
 			<tr style="font-weight:bold;font-size: 15px;" class="heji1"></tr>
 		</tbody>
 	</table>
@@ -88,59 +90,63 @@
 </div>
 <div th:include="include::footer"></div>
 <script type="text/javascript">
-	$().ready(function () {
-		var goodsName =$('#goodsName').val();
-		var goodsName2 =$('#goodsName2').val();
-		alert(goodsName)
-		alert(goodsName2)
-		if (goodsName != ""){
-			alert("第一个")
-			$(".heji1").before(
-					"<tr>"+
-					"<td rowspan='2'>"+"<span th:text='${weiwaiDO.salenumbery}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.goodsName}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.style}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.rl}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.sph}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.cyl}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.axial}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.rightFartj}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.rightNeartj}'>"+"</span>"+"</td>"+
-					"<td>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.lightbelow}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.lengjing}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.jd}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.diameter}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.count}'>"+"</span>"+"</td>"+
-					"<td rowspan='2'>"+"<span th:text='${weiwaiDO.mirrorTime}'>"+"</span>"+"</td>"+
-					"<td rowspan='2'>"+"<span th:text='${weiwaiDO.gkname}'>"+"</span>"+"</td>"+
-					"<td>"+"<span th:text='${weiwaiDO.yaoqiu}'>"+"</span>"+"</td>"+
-					"</tr>"
-			);
-		}
-		if (goodsName2 != ""){
-			alert("第er1个")
-			$(".heji1").before(
-				"<tr>"+
-				"<td>"+"<span th:text='${weiwaiDO.goodsName2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.style2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.rl2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.sph2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.cyl2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.axial2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.leftFartj}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.leftNeartj}'>"+"</span>"+"</td>"+
-				"<td>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.lightbelow2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.lengjing2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.jd2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.diameter2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.count2}'>"+"</span>"+"</td>"+
-				"<td>"+"<span th:text='${weiwaiDO.yaoqiu2}'>"+"</span>"+"</td>"+
-				"</tr>"
-			);
-		}
-	});
+    $(document).ready(function () {
+        var danjuNumber = $('#danjuNumber').val();
+        alert(danjuNumber + "单据");
+        var html="";
+        $.ajax({
+            url: '/stock/weiwai/jkPeijingdanList',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'danjuNumber': danjuNumber
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    var salenumbery=xml[i].salenumbery.split(',');
+                    var mirrorTime=xml[i].mirrorTime.split(',');
+                    var goodsName=xml[i].goodsName.split(',');
+                    var style=xml[i].style.split(',');
+                    var rl=xml[i].rl.split(',');
+                    var count=xml[i].count.split(',');
+                    var sph=xml[i].sph.split(',');
+                    var cyl=xml[i].cyl.split(',');
+                    var axial=xml[i].axial.split(',');
+                    var lightbelow=xml[i].lightbelow.split(',');
+                    var lengjing=xml[i].lengjing.split(',');
+                    // var jd=xml[i].jd.split(',');
+                    // var diameter=xml[i].diameter.split(',');
+                    var yaoqiu=xml[i].yaoqiu.split(',');
+                    var gkname=xml[i].gkname.split(',');
+                    for (var t=0;t<goodsName.length;t++){
+                        html += "<tr>";
+                        html += "<td>"+salenumbery[0]+"</td>";
+                        // html += "<td>"+mirrorTime[t]+"</td>";
+                        html += "<td>"+goodsName[t]+"</td>";
+                        html += "<td>"+style[t]+"</td>";
+                        html += "<td>"+rl[t]+"</td>";
+                        html += "<td>"+sph[t]+"</td>";
+                        html += "<td>"+cyl[t]+"</td>";
+                        html += "<td>"+axial[t]+"</td>";
+                        html += "<td>"+"瞳距远"+"</td>";
+                        html += "<td>"+"瞳距近"+"</td>";
+                        html += "<td>"+"瞳高"+"</td>";
+                        html += "<td>"+lightbelow[t]+"</td>";
+                        html += "<td>"+lengjing[t]+"</td>";
+                        // html += "<td>"+jd[t]+"</td>";
+                        // html += "<td>"+diameter[t]+"</td>";
+                        html += "<td>"+count[t]+"</td>";
+                        html += "<td>"+mirrorTime[t]+"</td>";
+                        html += "<td>"+gkname[0]+"</td>";
+                        html += "<td>"+yaoqiu[t]+"</td>";
+                        html += "</tr>";
+                    }
+                    $('#jp').append(html);
+                }
+
+            }
+        });
+    })
 </script>
 
 </body>

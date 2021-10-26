@@ -31,6 +31,7 @@ public class JpdzDO implements Serializable {
     private String producCode;
     //商品名称
     private String producName;
+    private String viewGoodName;
     //制造商id
     private String mfrsid;
     private String mfrsname;
@@ -186,6 +187,14 @@ public class JpdzDO implements Serializable {
      */
     public String getProducCode() {
         return producCode;
+    }
+
+    public String getViewGoodName() {
+        return viewGoodName;
+    }
+
+    public void setViewGoodName(String viewGoodName) {
+        this.viewGoodName = viewGoodName;
     }
 
     /**

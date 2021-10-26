@@ -880,20 +880,17 @@
 
 
     <select id="jkPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
-			SELECT
-				w.*,
-				s.right_fartj,
-				s.left_fartj,
-				s.right_neartj,
-				s.left_neartj,
-				j.view_good_name as goodsName,
+			SELECT * FROM stock_weiwai where danju_number = #{value}
+	</select>
+    <select id="jkname" resultType="com.shiguang.product.domain.JpdzDO">
+		select view_good_name from aa_jpdz where produc_num=#{value}
+	</select>
+    <select id="jkPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">
+			SELECT * FROM stock_weiwai
+        <where>
+            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+        </where>
 
-			FROM
-				stock_weiwai w
-				JOIN stock_weiwaishuju s ON w.sale_number = s.number
-				left JOIN aa_jpdz j ON s.num=j.produc_num
-
-				where w.danju_number = #{value}
 	</select>
     <select id="yxPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
 			select w.*,s.right_fartj,s.left_fartj,s.right_neartj,s.left_neartj
@@ -905,6 +902,12 @@
 	</select>
     <select id="weiwaiOrder" resultType="com.shiguang.stock.domain.WeiwaiDO">
 		select * FROM stock_weiwai where  danju_number = #{value}
+	</select>
+<select id="selectWeiwaiOrder" resultType="com.shiguang.stock.domain.WeiwaiDO">
+	select * FROM stock_weiwai
+    <where>
+        <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+    </where>
 	</select>
 
 
