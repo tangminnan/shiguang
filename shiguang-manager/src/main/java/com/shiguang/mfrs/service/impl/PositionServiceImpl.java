@@ -62,6 +62,11 @@ public class PositionServiceImpl implements PositionService {
         return positionDao.updateState(position);
     }
 
+    @Override
+    public PositionDO getPositionNum(String positionNum) {
+        return positionDao.getPositionNum(positionNum);
+    }
+
     //     <!--库存查询相对应的仓库-->
     @Override
     public List<PositionDO> positionList(Map<String, Object> map) {

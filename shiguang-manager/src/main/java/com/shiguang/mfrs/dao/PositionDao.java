@@ -38,6 +38,8 @@ public interface PositionDao {
     //删除修改状态
     int updateState(PositionDO position);
 
+    PositionDO getPositionNum(String positionNum);
+
     //     <!--库存查询相对应的仓库-->
     List<PositionDO> positionList(Map<String, Object> map);
 }

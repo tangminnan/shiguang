@@ -4,7 +4,7 @@
 <mapper namespace="com.shiguang.unqualiffed.dao.UnqualiffedDao">
 
 	<select id="get" resultType="com.shiguang.unqualiffed.domain.UnqualiffedDO">
-		select `id`,`sale_number`,`prepared_name`,`responsible_name`,`bill_number`,`cause`,`phenomenon`,`handle`,`bill_date` from unqualiffed where id = #{value}
+		select `id`,`sale_number`,`document_number`,`department_appli`,`position_appli`,`prepared_name`,`responsible_name`,`bill_number`,`cause`,`phenomenon`,`handle`,`remark`,`count`,`goods_num`,`goods_name`,`goods_code`,`bill_date` from unqualiffed where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.unqualiffed.domain.UnqualiffedDO">

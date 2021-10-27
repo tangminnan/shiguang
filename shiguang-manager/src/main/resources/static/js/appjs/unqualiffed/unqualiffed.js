@@ -64,19 +64,18 @@ function load() {
 									field : 'responsibleName',
 									title : '责任人',
 									align : 'center'
+								},
+																{
+									title : '操作',
+									field : 'id',
+									align : 'center',
+									formatter : function(value, row, index) {
+                                        var e = '<a class="btn btn-primary btn-xs" href="#" mce_href="#" title="详情" onclick="detail(\''
+                                            + value
+                                            + '\')">详情</a> ';
+										return e;
+									}
 								}
-								// 								{
-								// 	title : '操作',
-								// 	field : 'cardNumber',
-								// 	align : 'center',
-								// 	formatter : function(value, row, index) {
-                                 //        var e = '<a class="btn btn-primary btn-xs" href="#" title="编辑"  mce_href="#" ' +
-								// 				 'onclick="edit(\''+ value+ '\',\''+row.saleNumber+'\',\''+row.costId+'\')" style="text-decoration: none;">更改结款方式</a>';
-								// 			   // e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" ' +
-								// 				//    'onclick="edit(\''+value+'\',\''+row.saleNumber+'\')"><i class="fa fa-edit"></i></a> ';
-								// 		return e;
-								// 	}
-								// }
 								]
 					});
 }
@@ -106,14 +105,14 @@ function edit(cardNumber,saleNumber,costId) {
     layer.full(toIndex)
 }
 
-function detail(cardNumber,saleNumber,costId) {
+function detail(id) {
     var toIndex = layer.open({
         type : 2,
         title : '详情',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '1500px', '520px' ],
-        content : prefix + '/detail/' + cardNumber+'/'+ saleNumber+'/'+costId // iframe的url
+        content : prefix + '/detail/' + id // iframe的url
     });
     layer.full(toIndex)
 }
