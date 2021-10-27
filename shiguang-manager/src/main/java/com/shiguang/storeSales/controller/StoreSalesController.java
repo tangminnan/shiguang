@@ -675,6 +675,7 @@ public class StoreSalesController {
             String storeDesc = salesDO.getStoreDescribe();
             String[] goodsStr = goodsCode.split(",");
             String[] goodsDescribe = storeDesc.split(",");
+            String[] goodsCount = salesDO.getStoreCount().split(",");
             String companyId = "";
             PositionDO positionDO = null;
             if (null != ShiroUtils.getUser().getCompanyId()) {
@@ -694,7 +695,7 @@ public class StoreSalesController {
                     stockDOs.setGoodsCode(goodsStr[e]);
                     StockDO stockDO = stockService.getProduceCode(stockDOs);
                     Long countGoods = Long.parseLong(stockDO.getGoodsCount());
-                    Long count = countGoods - 1;
+                    Long count = countGoods - Long.valueOf(goodsCount[e]);
                     stockDO.setGoodsCount(String.valueOf(count));
                     stockService.updateGoodsCount(stockDO);
                 }
