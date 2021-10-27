@@ -27,6 +27,11 @@ public class WeiwaiDO implements Serializable {
 	//制造商id
 	private String  mfrsid;
 	private String  mfrsname;
+	//商品品牌制造商
+	private String  goodsmfrsid;
+	//商品品牌代码
+	private String  goodsbrandnum;
+	private String  goodsbrandname;
 	//仓位id
 	private Long positionId;
 	//仓位名称
@@ -226,6 +231,31 @@ public class WeiwaiDO implements Serializable {
 	public String getMfrsname() {
 		return mfrsname;
 	}
+
+	public String getGoodsmfrsid() {
+		return goodsmfrsid;
+	}
+
+	public void setGoodsmfrsid(String goodsmfrsid) {
+		this.goodsmfrsid = goodsmfrsid;
+	}
+
+	public String getGoodsbrandnum() {
+		return goodsbrandnum;
+	}
+
+	public void setGoodsbrandnum(String goodsbrandnum) {
+		this.goodsbrandnum = goodsbrandnum;
+	}
+
+	public String getGoodsbrandname() {
+		return goodsbrandname;
+	}
+
+	public void setGoodsbrandname(String goodsbrandname) {
+		this.goodsbrandname = goodsbrandname;
+	}
+
 	/**
 	 * 设置：仓位id
 	 */

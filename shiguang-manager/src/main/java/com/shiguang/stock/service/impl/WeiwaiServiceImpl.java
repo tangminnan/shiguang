@@ -1,7 +1,9 @@
 package com.shiguang.stock.service.impl;
 
 import com.shiguang.baseinfomation.domain.DepartmentDO;
+import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.product.domain.JpdzDO;
+import com.shiguang.product.domain.YxdzDO;
 import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,13 +99,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	public WeiwaiDO jkPeijingdan(String danjuNumber) {
 		return weiwaiDao.jkPeijingdan(danjuNumber);
 	}
-
-	@Override
-	public JpdzDO jkname(String num) {
-		return weiwaiDao.jkname(num);
-	}
 	//委外隐形配镜单List
-
 	@Override
 	public List<WeiwaiDO> jkPeijingdanList(Map<String, Object> map) {
 		return weiwaiDao.jkPeijingdanList(map);
@@ -122,5 +118,20 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	@Override
 	public List<WeiwaiDO> selectWeiwaiOrder(Map<String, Object> map) {
 		return weiwaiDao.selectWeiwaiOrder(map);
+	}
+
+	@Override
+	public JpdzDO selectbrandnumjpdz(String num) {
+		return weiwaiDao.selectbrandnumjpdz(num);
+	}
+
+	@Override
+	public YxdzDO selectbrandnumyxdz(String num) {
+		return weiwaiDao.selectbrandnumyxdz(num);
+	}
+
+	@Override
+	public BrandDO jkbrandname(Map<String, Object> maps) {
+		return weiwaiDao.jkbrandname(maps);
 	}
 }

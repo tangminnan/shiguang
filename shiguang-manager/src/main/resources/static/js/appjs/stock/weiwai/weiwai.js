@@ -50,9 +50,9 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-								// {
-								// 	checkbox : true
-								// },
+								{
+									checkbox : true
+								},
 								// 								{
 								// 	field : 'id',
 								// 	title : 'id'
@@ -146,7 +146,7 @@ function load() {
                                         var f = '';
                                         if (row.shstatus==""){
 											var n = '<span class="btn btn-warning btn-sm"  href="#" title="配送"  mce_href="#" onclick="psNum(\''
-												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle+" ','"+  row.yaoqiu+" ','"+  row.yaoqiu2 + '\')">配送</span> ';
+												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle+" ','"+  row.yaoqiu  + '\')">配送</span> ';
 											// var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="thNum(\''
 											// 	+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">退回</span> ';
 										}else {
@@ -298,19 +298,15 @@ function upshTime() {
 }
 
 //配送
-function psNum(salenumbery,danjuNumber,eyeStyle,yaoqiu,yaoqiu2) {
-	alert(yaoqiu.length);
-	alert(yaoqiu2.length)
-	alert(yaoqiu== '')
-	alert(yaoqiu2== '');
+function psNum(salenumbery,danjuNumber,eyeStyle,yaoqiu ) {
+
 	if (yaoqiu== ''){
-		alert(1111)
 		yaoqiu ="空"
 	}
-	if (yaoqiu2== ''){
-		alert(22222)
-		yaoqiu2 ="空"
-	}
+	// alert(salenumbery)
+	// alert(danjuNumber)
+	// alert(eyeStyle)
+	// alert(yaoqiu)
 	var shstatus="0";
 	if (shstatus == "0"){
 		// alert("输入工号")
@@ -320,7 +316,7 @@ function psNum(salenumbery,danjuNumber,eyeStyle,yaoqiu,yaoqiu2) {
 			maxmin : true,
 			shadeClose : false, // 点击遮罩关闭层
 			area : [ '800px', '520px' ],
-			content :"/stock/weiwai/userNumps/"+ salenumbery+'/'+danjuNumber+'/'+eyeStyle+'/'+yaoqiu+'/'+yaoqiu2
+			content :"/stock/weiwai/userNumps/"+ salenumbery+'/'+danjuNumber+'/'+eyeStyle+'/'+yaoqiu+'/'+shstatus
 		});
 
 	}
@@ -331,7 +327,6 @@ function peisong() {
 	var psname = document.getElementById('username').value;
 	var eyeStyle = document.getElementById('eyeStyle').value;
 	var yaoqiu = $("#yaoqiu").val();
-	var yaoqiu2 = $("#yaoqiu2").val();
 	var shstatus = "0";
 	if (username != "") {
 		// alert(eyeStyle);
@@ -344,8 +339,7 @@ function peisong() {
 				'psname': psname,
 				'salenumbery': salenumbery,
 				'eyeStyle':eyeStyle,
-				'yaoqiu':yaoqiu,
-				'yaoqiu2':yaoqiu2
+				'yaoqiu':yaoqiu
 			},
 			dataType: 'JSON',
 			async: false,
@@ -389,7 +383,7 @@ function tuihuo() {
 	var psname = document.getElementById('username').value;
 	var shstatus = "1";
 	if (username != "") {
-		alert("退货");
+		// alert("退货");
 		$.ajax({
 			url: "/stock/weiwai/editTuihuo",
 			type: "post",

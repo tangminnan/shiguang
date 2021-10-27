@@ -74,10 +74,10 @@ function batchSelect() {
             var rightAdd =  row['rightAdd'];
         }
 
-        if(null == row['rightSlj']){
-            var rightSlj  ="";
+        if(null == row['rightSlja']){
+            var rightSlja  ="";
         }else {
-            var rightSlj =  row['rightSlj'];
+            var rightSlja =  row['rightSlja'];
         }
 
         if(null == row['rightJd']){
@@ -122,10 +122,10 @@ function batchSelect() {
             var leftAdd =  row['leftAdd'];
         }
 
-       if(null == row['leftSlj']){
-            var leftSlj  ="";
+       if(null == row['leftSlja']){
+            var leftSlja  ="";
         }else {
-            var leftSlj =  row['leftSlj'];
+            var leftSlja =  row['leftSlja'];
         }
 
        if(null == row['leftJd']){
@@ -157,7 +157,7 @@ function batchSelect() {
         obj.rightcyl = rightcyl;
         obj.rightzx = rightzx;
         obj.rightAdd = rightAdd;
-        obj.rightSlj = rightSlj;
+        obj.rightSlja= rightSlja;
         obj.rightJd = rightJd;
         obj.rightFartj = rightFartj;
         obj.rightNeartj = rightNeartj;
@@ -166,7 +166,7 @@ function batchSelect() {
         obj.leftcyl = leftcyl;
         obj.leftzx = leftzx;
         obj.leftAdd = leftAdd;
-        obj.leftSlj = leftSlj;
+        obj.leftSlja = leftSlja;
         obj.leftJd = leftJd;
         obj.leftFartj = leftFartj;
         obj.leftNeartj = leftNeartj;

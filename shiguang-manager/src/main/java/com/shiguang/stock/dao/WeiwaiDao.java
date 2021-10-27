@@ -1,7 +1,9 @@
 package com.shiguang.stock.dao;
 
 import com.shiguang.baseinfomation.domain.DepartmentDO;
+import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.product.domain.JpdzDO;
+import com.shiguang.product.domain.YxdzDO;
 import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.WeiwaiDO;
 
@@ -56,7 +58,6 @@ public interface WeiwaiDao {
 
 	//委外隐形配镜单
 	WeiwaiDO yxPeijingdan(String danjuNumber);
-	JpdzDO jkname(String num);
 	//委外隐形配镜单List
 	List<WeiwaiDO> jkPeijingdanList(Map<String, Object> map);
 	//确认收获库存偶没有
@@ -64,4 +65,11 @@ public interface WeiwaiDao {
 
 	//委外详情列表
 	List<WeiwaiDO> selectWeiwaiOrder(Map<String, Object> map);
+
+	////商品代码查询品牌
+	JpdzDO selectbrandnumjpdz(String num);
+	YxdzDO selectbrandnumyxdz(String num);
+
+	//打印单查询品牌名称
+	BrandDO jkbrandname(Map<String, Object> maps);
 }

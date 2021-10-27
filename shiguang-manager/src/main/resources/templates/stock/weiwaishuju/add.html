@@ -398,6 +398,7 @@
 
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 for (var i = 0; i < rows.length; i++) {
+                    // alert(rows[i].rightSlja)
                     $("#departname").val(rows[i].mirorAddress);
                     $("#saleNumber").val(rows[i].saleNumber);
 
@@ -405,7 +406,7 @@
                     $("#rightcyl").val(rows[i].rightcyl);
                     $("#rightzx").val(rows[i].rightzx);
                     $("#rightAdd").val(rows[i].rightAdd);
-                    $("#rightSlj").val(rows[i].rightSlj);
+                    $("#rightSlj").val(rows[i].rightSlja);
                     $("#rightJd").val(rows[i].rightJd);
                     $("#rightFartj").val(rows[i].rightFartj);
                     $("#rightNeartj").val(rows[i].rightNeartj);
@@ -415,7 +416,7 @@
                     $("#leftcyl").val(rows[i].leftcyl);
                     $("#leftzx").val(rows[i].leftzx);
                     $("#leftAdd").val(rows[i].leftAdd);
-                    $("#leftSlj").val(rows[i].leftSlj);
+                    $("#leftSlj").val(rows[i].leftSlja);
                     $("#leftJd").val(rows[i].leftJd);
                     $("#leftFartj").val(rows[i].leftFartj);
                     $("#leftNeartj").val(rows[i].leftNeartj);
@@ -465,7 +466,7 @@
                                     var cyl = rows[i].rightcyl;
                                     var zx = rows[i].rightzx;
                                     var xj = rows[i].rightAdd;
-                                    var lj = rows[i].rightSlj;
+                                    var lj = rows[i].rightSlja;
                                     var jd = rows[i].rightJd;
                                     var tg = rows[i].righttg;
                                 } else if (leftRight[a] == "左") {
@@ -473,7 +474,7 @@
                                     var cyl = rows[i].leftcyl;
                                     var zx = rows[i].leftzx;
                                     var xj = rows[i].leftAdd;
-                                    var lj = rows[i].leftSlj;
+                                    var lj = rows[i].leftSlja;
                                     var jd = rows[i].leftJd;
                                     var tg = rows[i].lefttg;
                                 }
@@ -490,7 +491,7 @@
                                     html += "<td><input id='jd" + b + "' value='" + jd + "' type='text' /></td>";
                                     html += "<td><input id='tg" + b + "' value='" + tg + "' type='text' /></td>";
                                     html += "<td><input id='count" + b + "' name='count'  value='" + storeCount[a] + "' type='text'/></td>";
-                                    html += "<td><input id='yaoqiu" + b + "' name='yaoqiu' value='" + rows[i].processAsk.replaceAll(",","/") + "' type='text' /></td>";
+                                    html += "<td><input id='yaoqiu" + b + "' name='yaoqiu' value='" + rows[i].processAsk.replaceAll(",","") + "' type='text' /></td>";
                                     html += "<td><input id='code" + b + "' name='code' value='" + goodsCode[a] + "' type='hidden' /></td>";
                                     html += "</tr>";
                                     b = b + 1;

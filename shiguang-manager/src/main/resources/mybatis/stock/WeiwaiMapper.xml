@@ -4,7 +4,7 @@
 <mapper namespace="com.shiguang.stock.dao.WeiwaiDao">
 
     <select id="get" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`position_id`,`position_name`,
+		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`goodsmfrsid`,`goodsbrandnum`,`goodsbrandname`,`position_id`,`position_name`,
 		`changjia_number`,`shouhuo_people`,
 		`shouhuo_phone`,`shouhuo_address`,`beizhu`,
 		`sale_number`,`mirror_time`,`goods_name`,`num`,`code`,`style`,`rl`,`count`,`sph`,`cyl`,
@@ -16,9 +16,8 @@
 
     <select id="list" resultType="com.shiguang.stock.domain.WeiwaiDO">
         select
-        s.`id`,s.`danju_number`,s.`danju_day`,s.`eye_style`,s.`zhidan_people`,s.`mfrsid`,s.`mfrsname`,s.`position_id`,
-        s.`position_name`,s.`changjia_number`,
-       s. `shouhuo_people`,s.`shouhuo_phone`,s.`shouhuo_address`,s.`beizhu`,
+        s.`id`,s.`danju_number`,s.`danju_day`,s.`eye_style`,s.`zhidan_people`,s.`mfrsid`,s.`mfrsname`,s.`goodsmfrsid`,s.`goodsbrandnum`,s.`goodsbrandname`,
+        s.`position_id`,s.`position_name`,s.`changjia_number`,s. `shouhuo_people`,s.`shouhuo_phone`,s.`shouhuo_address`,s.`beizhu`,
         s.`sale_number`,s.`mirror_time`,s.`goods_name`,s.`num`,s.`code`,
         s.`style`,s.`rl`,s.`count`,s.`sph`,s.`cyl`,s.`axial`,s.`lightbelow`,s.`lengjing`,s.`diameter`,s.`yaoqiu`,s.`jd`,
         s.`curvature`,s.`gkname`,s.`hyknum`,s.`phone`,
@@ -34,6 +33,9 @@
             <if test="zhidanPeople != null and zhidanPeople != ''">and s.zhidan_people = #{zhidanPeople}</if>
             <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
             <if test="mfrsname != null and mfrsname != ''">and s.mfrsname  LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="goodsmfrsid != null and goodsmfrsid != ''">and s.goodsmfrsid  LIKE concat(concat('%', #{goodsmfrsid}),'%')</if>
+            <if test="goodsbrandnum != null and goodsbrandnum != ''">and s.goodsbrandnum  LIKE concat(concat('%', #{goodsbrandnum}),'%')</if>
+            <if test="goodsbrandname != null and goodsbrandname != ''">and s.goodsbrandname  LIKE concat(concat('%', #{goodsbrandname}),'%')</if>
             <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
             <if test="positionName != null and positionName != ''">and s.position_name = #{positionName}</if>
             <if test="changjiaNumber != null and changjiaNumber != ''">and s.changjia_number = #{changjiaNumber}</if>
@@ -102,6 +104,9 @@
             <if test="zhidanPeople != null and zhidanPeople != ''">and zhidan_people = #{zhidanPeople}</if>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
             <if test="mfrsname != null and mfrsname != ''">and mfrsname = #{mfrsname}</if>
+            <if test="goodsmfrsid != null and goodsmfrsid != ''">and goodsmfrsid = #{goodsmfrsid}</if>
+            <if test="goodsbrandnum != null and goodsbrandnum != ''">and goodsbrandnum = #{goodsbrandnum}</if>
+            <if test="goodsbrandname != null and goodsbrandname != ''">and goodsbrandname = #{goodsbrandname}</if>
             <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
             <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
             <if test="changjiaNumber != null and changjiaNumber != ''">and changjia_number = #{changjiaNumber}</if>
@@ -154,6 +159,9 @@
 			`zhidan_people`, 
 			`mfrsid`, 
 			`mfrsname`,
+			`goodsmfrsid`,
+			`goodsbrandnum`,
+			`goodsbrandname`,
 			`position_id`,
 			`position_name`,
 			`changjia_number`,
@@ -202,6 +210,9 @@
 			#{zhidanPeople}, 
 			#{mfrsid}, 
 			#{mfrsname},
+			#{goodsmfrsid},
+			#{goodsbrandnum},
+			#{goodsbrandname},
 			#{positionId},
 			#{positionName},
 			#{changjiaNumber},
@@ -252,6 +263,9 @@
             <if test="zhidanPeople != null">`zhidan_people` = #{zhidanPeople},</if>
             <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
             <if test="mfrsname != null">`mfrsname` = #{mfrsname},</if>
+            <if test="goodsmfrsid != null">`goodsmfrsid` = #{goodsmfrsid},</if>
+            <if test="goodsbrandnum != null">`goodsbrandnum` = #{goodsbrandnum},</if>
+            <if test="goodsbrandname != null">`goodsbrandname` = #{goodsbrandname},</if>
             <if test="positionId != null">`position_id` = #{positionId},</if>
             <if test="positionName != null">`position_name` = #{positionName},</if>
             <if test="changjiaNumber != null">`changjia_number` = #{changjiaNumber},</if>
@@ -882,9 +896,7 @@
     <select id="jkPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
 			SELECT * FROM stock_weiwai where danju_number = #{value}
 	</select>
-    <select id="jkname" resultType="com.shiguang.product.domain.JpdzDO">
-		select view_good_name from aa_jpdz where produc_num=#{value}
-	</select>
+
     <select id="jkPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">
 			SELECT * FROM stock_weiwai
         <where>
@@ -903,12 +915,28 @@
     <select id="weiwaiOrder" resultType="com.shiguang.stock.domain.WeiwaiDO">
 		select * FROM stock_weiwai where  danju_number = #{value}
 	</select>
-<select id="selectWeiwaiOrder" resultType="com.shiguang.stock.domain.WeiwaiDO">
-	select * FROM stock_weiwai
-    <where>
-        <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
-    </where>
+    <select id="selectWeiwaiOrder" resultType="com.shiguang.stock.domain.WeiwaiDO">
+	    select * FROM stock_weiwai
+        <where>
+            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+        </where>
 	</select>
 
-
+    <select id="selectbrandnumjpdz" resultType="com.shiguang.product.domain.JpdzDO">
+		  select a.mfrsid,a.brandnum ,b.brandname from  aa_jpdz a
+          join c_brand b on a.mfrsid=b.mfrsid and a.brandnum=b.brandnum
+          where a.produc_num=#{value}
+	</select>
+    <select id="selectbrandnumyxdz" resultType="com.shiguang.product.domain.YxdzDO">
+		  select a.mfrsid,a.brandnum ,b.brandname from  aa_yxdz a
+          join c_brand b on a.mfrsid=b.mfrsid and a.brandnum=b.brandnum
+          where a.produc_num=#{value}
+	</select>
+    <select id="jkbrandname" resultType="com.shiguang.mfrs.domain.BrandDO">
+        select brandname from c_brand
+        <where>
+            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
+            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
+        </where>
+	</select>
 </mapper>

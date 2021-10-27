@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="container">
-    <input id="danjuNumber" th:value="${weiwaiDO.danjuNumber}" type="text"/>
+    <input id="danjuNumber" th:value="${weiwaiDO.danjuNumber}" type="hidden"/>
 	<h3>镜框委外订单</h3>
 	<table class="tabA" border="0" cellspacing="0" cellpadding="0">
 		<tr>
@@ -37,25 +37,46 @@
 	<table class="tabB" border="0" cellspacing="0" cellpadding="0">
 		<thead>
 			<tr>
-				<th width="100">配镜单号</th>
-				<th width="20%">商品名称</th>
-				<th width="50">委外方式</th>
-				<th width="40">R/L</th>
-				<th width="50">球镜</th>
-				<th width="50">柱镜</th>
-				<th width="40">轴向</th>
-				<th width="40">瞳距(远)</th>
-				<th width="40">瞳距(近)</th>
-				<th width="40">瞳高</th>
-				<th width="40">下加</th>
-				<th width="40">棱镜</th>
+				<!--<th width="100">配镜单号</th>-->
+				<!--<th width="20%">商品名称</th>-->
+				<!--<th width="50">委外方式</th>-->
+				<!--<th width="40">R/L</th>-->
+				<!--<th width="50">球镜</th>-->
+				<!--<th width="50">柱镜</th>-->
+				<!--<th width="40">轴向</th>-->
+				<!--<th width="40">瞳距(远)</th>-->
+				<!--<th width="40">瞳距(近)</th>-->
+				<!--<th width="40">瞳高</th>-->
+				<!--<th width="40">下加</th>-->
+				<!--<th width="40">棱镜</th>-->
+				<!--&lt;!&ndash;<th width="40">基底</th>&ndash;&gt;-->
+				<!--&lt;!&ndash;<th width="40">直径</th>&ndash;&gt;-->
+				<!--<th width="40">数量</th>-->
+				<!--<th width="100">取镜日期</th>-->
+				<!--<th width="20">顾客姓名</th>-->
+<!--&lt;!&ndash;				<th width="40">销售门店</th>&ndash;&gt;-->
+				<!--<th width="40">备注</th>-->
+
+
+				<th >配镜单号</th>
+				<th  >商品名称</th>
+				<th  >委外方式</th>
+				<th  >R/L</th>
+				<th  >球镜</th>
+				<th  >柱镜</th>
+				<th  >轴向</th>
+				<th  >瞳距(远)</th>
+				<th  >瞳距(近)</th>
+				<th  >瞳高</th>
+				<th  >下加</th>
+				<th  >棱镜</th>
 				<!--<th width="40">基底</th>-->
 				<!--<th width="40">直径</th>-->
-				<th width="40">数量</th>
-				<th width="100">取镜日期</th>
-				<th width="20">顾客姓名</th>
+				<th  >数量</th>
+				<th  >取镜日期</th>
+				<th  >顾客姓名</th>
 <!--				<th width="40">销售门店</th>-->
-				<th width="40">备注</th>
+				<th  >备注</th>
 
 
 
@@ -92,7 +113,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var danjuNumber = $('#danjuNumber').val();
-        alert(danjuNumber + "单据");
+        // alert(danjuNumber + "单据");
         var html="";
         $.ajax({
             url: '/stock/weiwai/jkPeijingdanList',
@@ -106,6 +127,7 @@
                     var salenumbery=xml[i].salenumbery.split(',');
                     var mirrorTime=xml[i].mirrorTime.split(',');
                     var goodsName=xml[i].goodsName.split(',');
+                    var goodsbrandname=xml[i].goodsbrandname.split(',');
                     var style=xml[i].style.split(',');
                     var rl=xml[i].rl.split(',');
                     var count=xml[i].count.split(',');
@@ -122,15 +144,15 @@
                         html += "<tr>";
                         html += "<td>"+salenumbery[0]+"</td>";
                         // html += "<td>"+mirrorTime[t]+"</td>";
-                        html += "<td>"+goodsName[t]+"</td>";
+                        html += "<td>"+goodsbrandname[t]+"</td>";
                         html += "<td>"+style[t]+"</td>";
                         html += "<td>"+rl[t]+"</td>";
                         html += "<td>"+sph[t]+"</td>";
                         html += "<td>"+cyl[t]+"</td>";
                         html += "<td>"+axial[t]+"</td>";
-                        html += "<td>"+"瞳距远"+"</td>";
-                        html += "<td>"+"瞳距近"+"</td>";
-                        html += "<td>"+"瞳高"+"</td>";
+                        html += "<td>"+" "+"</td>";
+                        html += "<td>"+" "+"</td>";
+                        html += "<td>"+" "+"</td>";
                         html += "<td>"+lightbelow[t]+"</td>";
                         html += "<td>"+lengjing[t]+"</td>";
                         // html += "<td>"+jd[t]+"</td>";
