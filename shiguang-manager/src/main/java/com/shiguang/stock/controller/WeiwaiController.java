@@ -846,12 +846,13 @@ public class WeiwaiController {
     public R editShouhuo(String danjuNumber, String salenumbery, String shstatus, String psname, String eyeStyle,
                          String yaoqiu  ) {
         LogStatusDO logStatusDO = new LogStatusDO();
-        String[] array = yaoqiu.split(",");
-        boolean flag = false;
-        flag = Arrays.asList(array).contains("委外代加工");
+//        String[] array = yaoqiu.split(",");
+//        boolean flag = false;
+//        flag = Arrays.asList(array).contains("委外代加工");
+        String  str = yaoqiu;
+        Integer flag=str.indexOf("委外代加工");  // true
         if ("3".equals(eyeStyle.trim())) {//去除空格
-//            if (flag == true || flag2 == true) {
-            if (flag == true){
+            if (flag != -1){
                 logStatusDO.setSaleNumber(salenumbery);
                 logStatusDO.setLogisticStatus("配送");
                 WorkRecoedDO workRecoedDO = new WorkRecoedDO();
@@ -890,7 +891,6 @@ public class WeiwaiController {
                         stockService.updateGoodsCount(stock);//修改数量
                     }
                 }
-
 
             } else {
                 logStatusDO.setSaleNumber(salenumbery);
@@ -943,11 +943,6 @@ public class WeiwaiController {
                     stockService.updateGoodsCount(stock);//修改数量
                 }
             }
-
-
-
-
-
 
 
         }

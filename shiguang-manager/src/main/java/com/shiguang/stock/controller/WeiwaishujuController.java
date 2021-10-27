@@ -88,7 +88,7 @@ public class WeiwaishujuController {
 			String[] codeskcyx=weiwaishuju.getCodeyx().split(",");
 			String codeKcsyx="";
 			for (int i=0;i<codeskcyx.length;i++){
-				codeKcsyx += codeskcyx[i]+"00000000";
+				codeKcsyx += codeskcyx[i]+"00000000,";
 			}
 			weiwaishuju.setCodeyx(codeKcsyx);
 		}
