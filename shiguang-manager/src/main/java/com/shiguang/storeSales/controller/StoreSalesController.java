@@ -684,7 +684,7 @@ public class StoreSalesController {
                 positionDO = stockService.findPosition(map);
             }
             for (int e=0;e<goodsDescribe.length;e++){
-                if ("镜架".equals(goodsDescribe[e])){
+                if (!"镜片".equals(goodsDescribe[e]) && !"隐形".equals(goodsDescribe[e])){
                     StockDO stockDOs = new StockDO();
                     if (null != positionDO){
                         stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));

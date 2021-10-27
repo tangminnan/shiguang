@@ -249,17 +249,19 @@ public class SettlementController {
 //		costService.updateMember(costDO);
 		settlement.setSaleName(ShiroUtils.getUser().getName());
 		settlement.setSettleDate(new Date());
-		if (null != salesDO1.getClasstype()){
-			String[] classArray = salesDO1.getClasstype().split(",");
-			boolean result = false;
-			result = Arrays.asList(classArray).contains("2");
-			if (result == false){
-				LogStatusDO logStatusDO = new LogStatusDO();
-				logStatusDO.setSaleNumber(settlement.getSaleNumber());
-				logStatusDO.setLogisticStatus("销售完成");
-				logStatusService.save(logStatusDO);
-			}
-		}
+//		if (null != salesDO1.getClasstype()){
+//			String[] classArray = salesDO1.getClasstype().split(",");
+//			String[] storeDescribe = salesDO1.getStoreDescribe().split(",");
+//			boolean result = false;
+//			boolean flag = false;
+//			result = Arrays.asList(classArray).contains("2");
+//			if (result == true){
+//				LogStatusDO logStatusDO = new LogStatusDO();
+//				logStatusDO.setSaleNumber(settlement.getSaleNumber());
+//				logStatusDO.setLogisticStatus("销售完成");
+//				logStatusService.save(logStatusDO);
+//			}
+//		}
 		if(settlementService.save(settlement)>0){
 			return R.ok();
 		}
