@@ -892,26 +892,28 @@
         where danju_number = #{danjuNumber}
     </update>
 
-
+<!--打印委外框镜配镜单-->
     <select id="jkPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
 			SELECT * FROM stock_weiwai where danju_number = #{value}
 	</select>
-
+    <!--打印委外框镜配镜单列表-->
     <select id="jkPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">
 			SELECT * FROM stock_weiwai
         <where>
             <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
         </where>
-
 	</select>
+    <!--打印委外隐形配镜单-->
     <select id="yxPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
-			select w.*,s.right_fartj,s.left_fartj,s.right_neartj,s.left_neartj
-			from stock_weiwai w
-			join  stock_weiwaishuju s on  w.sale_number =s.number
-			left JOIN aa_yxdz y ON s.num=y.produc_num
-
-			 where w.danju_number = #{value}
+			  SELECT * FROM stock_weiwai where danju_number = #{value}
 	</select>
+    <!--打印委外框镜配镜单列表-->
+    <select id="yxPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">
+        SELECT * FROM stock_weiwai
+        <where>
+            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+        </where>
+    </select>
     <select id="weiwaiOrder" resultType="com.shiguang.stock.domain.WeiwaiDO">
 		select * FROM stock_weiwai where  danju_number = #{value}
 	</select>

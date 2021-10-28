@@ -83,10 +83,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 		return weiwaiDao.selectOrder(map);
 	}
 
-//	@Override
-//	public int selectOrderCount(Map<String, Object> map) {
-//		return weiwaiDao.selectOrderCount(map);
-//	}
+
 
 	//<!--确认收货   [配送][][退回][][][]-->
 	@Override
@@ -94,20 +91,25 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 		return weiwaiDao.updateStatus(weiwaiDO);
 	}
 
-	//委外隐形配镜单
+	//委外框镜配镜单
 	@Override
 	public WeiwaiDO jkPeijingdan(String danjuNumber) {
 		return weiwaiDao.jkPeijingdan(danjuNumber);
 	}
-	//委外隐形配镜单List
+	//委外框镜配镜单List
 	@Override
 	public List<WeiwaiDO> jkPeijingdanList(Map<String, Object> map) {
 		return weiwaiDao.jkPeijingdanList(map);
 	}
-
+	//委外隐形配镜单
 	@Override
 	public WeiwaiDO yxPeijingdan(String danjuNumber) {
 		return weiwaiDao.yxPeijingdan(danjuNumber);
+	}
+	//委外隐形配镜单List
+	@Override
+	public List<WeiwaiDO> yxPeijingdanList(Map<String, Object> map) {
+		return weiwaiDao.yxPeijingdanList(map);
 	}
 
 	@Override

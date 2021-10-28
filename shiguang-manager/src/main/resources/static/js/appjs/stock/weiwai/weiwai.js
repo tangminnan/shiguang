@@ -268,7 +268,7 @@ function upshTime() {
 	var username = document.getElementById('username').value;
 	var status = "0";
 	if (username !=""){
-		// alert("qqqqqqqq");
+
 		$.ajax({
 			url: "/stock/weiwai/updateStatus",
 			type: "post",
@@ -303,10 +303,7 @@ function psNum(salenumbery,danjuNumber,eyeStyle,yaoqiu ) {
 	if (yaoqiu== ''){
 		yaoqiu ="空"
 	}
-	// alert(salenumbery)
-	// alert(danjuNumber)
-	// alert(eyeStyle)
-	// alert(yaoqiu)
+
 	var shstatus="0";
 	if (shstatus == "0"){
 		// alert("输入工号")
@@ -412,3 +409,184 @@ function tuihuo() {
 		layer.alert("请输入工号！");
 	}
 }
+
+//批量打印
+function dayinList() {
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	var mfrsids="";
+    if (rows.length == 0) {
+        layer.msg("请选择要批量打印的数据！");
+        return;
+    }else {
+        var ids = new Array();
+        var mfrsid = new Array();
+        // 遍历所有选择的行数据，取每条数据对应的ID
+        $.each(rows, function(i, row) {
+            ids[i] = row['id'];
+             mfrsid[i]=row['mfrsid'];
+             mfrsids=mfrsid[0];
+        });
+        for (var i=0;i<mfrsid.length;i++){
+            // alert(mfrsids);
+            // alert(mfrsid[i]);
+            if (mfrsids!=mfrsid[i]){
+                return layer.alert("请选择同一个制造商！");
+            }
+		}
+        window.open("/stock/weiwai/dayinList?ids="+ids+"&mfrsid="+mfrsid);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function dayinList() {
+//     var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+//     if (rows.length == 0) {
+//         layer.msg("请选择要批量打印的数据");
+//         return;
+//     }
+//     layer.confirm("确认要打印选中的'" + rows.length + "'条数据吗?",
+// 		{
+//         btn : [ '确定', '取消' ]
+//         // 按钮
+// 		}
+//     , function() {
+//         var ids = new Array();
+//         // 遍历所有选择的行数据，取每条数据对应的ID
+//         $.each(rows, function(i, row) {
+//             ids[i] = row['id'];
+//         });
+//             window.open("/stock/weiwai/dayinList");
+//         })
+//     //     var toIndex = layer.open({
+//     //         type : 2,
+//     //         title : '批量打印',
+//     //         maxmin : true,
+//     //         shadeClose : false, // 点击遮罩关闭层
+//     //         area : [ '800px', '520px' ],
+//     //         // content : prefix + '/dayinList' // iframe的url
+//     //         content : window.open("/stock/weiwai/dayinList") // iframe的url
+//     //     });
+//     //     layer.full(toIndex)
+//     // });
+// }
