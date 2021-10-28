@@ -54,12 +54,13 @@ public interface WeiwaiDao {
 
 	//委外镜框配镜单
 	WeiwaiDO jkPeijingdan(String danjuNumber);
-
+	//委外框镜配镜单List
+	List<WeiwaiDO> jkPeijingdanList(Map<String, Object> map);
 
 	//委外隐形配镜单
 	WeiwaiDO yxPeijingdan(String danjuNumber);
 	//委外隐形配镜单List
-	List<WeiwaiDO> jkPeijingdanList(Map<String, Object> map);
+	List<WeiwaiDO> yxPeijingdanList(Map<String, Object> map);
 	//确认收获库存偶没有
 	WeiwaiDO weiwaiOrder(String  danjuNumber);
 

@@ -24,6 +24,7 @@
 </head>
 <body>
 <div class="container">
+	<input id="danjuNumber" th:value="${weiwaiDO.danjuNumber}" type="hidden"/>
 	<h3>隐形委外订单</h3>
 	<table class="tabA" border="0" cellspacing="0" cellpadding="0">
 		<tr>
@@ -35,74 +36,73 @@
 	<table class="tabB" border="0" cellspacing="0" cellpadding="0">
 		<thead>
 		<tr>
-			<th width="100">配镜单号</th>
-			<th width="20%">商品名称</th>
-			<th>委外方式</th>
-			<th>R/L</th>
-			<th width="50">球镜</th>
-			<th width="50">柱镜</th>
-			<th width="50">轴向</th>
+			<th style="width: 10%;">配镜单号</th>
+			<th style="width: 20%;">商品名称</th>
+			<th style="width: 7%;">委外方式</th>
+			<th style="width: 3%;">R/L</th>
+			<th style="width: 7%;">球镜</th>
+			<th style="width: 7%;">柱镜</th>
+			<th style="width: 7%;">轴向</th>
 <!--			<th>瞳距(远)</th>-->
 <!--			<th>瞳距(近)</th>-->
 <!--			<th>瞳高</th>-->
-			<th width="50">下加</th>
-			<th width="50">棱镜</th>
-			<th width="50">基底</th>
-			<th width="50">直径</th>
-			<th width="50">数量</th>
-			<th width="100">取镜日期</th>
-			<th width="80">顾客姓名</th>
+			<!--<th width="50">下加</th>-->
+			<!--<th width="50">棱镜</th>-->
+			<th style="width: 7%;">基底</th>
+			<th style="width: 7%;">直径</th>
+			<th style="width: 4%;">数量</th>
+			<th style="width: 10%;">取镜日期</th>
+			<th  style="width: 7%;">顾客姓名</th>
 			<!--				<th width="80">销售门店</th>-->
-			<th width="80">备注</th>
+			<th style="width: 10%;">备注</th>
 		</tr>
 		</thead>
-		<tbody>
-		<tr>
-			<td rowspan="2"><span th:text="${weiwaiDO.saleNumber}"></span></td>
-			<td><span th:text="${weiwaiDO.goodsName}"></span></td>
-			<td><span th:text="${weiwaiDO.style}"></span></td>
-			<td><span th:text="${weiwaiDO.rl}"></span></td>
-			<td><span th:text="${weiwaiDO.sph}"></span></td>
-			<td><span th:text="${weiwaiDO.cyl}"></span></td>
-			<td><span th:text="${weiwaiDO.axial}"></span></td>
-<!--			<td><span th:text="${weiwaiDO.axial}"></span></td>-->
-<!--			<td><span th:text="${weiwaiDO.axial}"></span></td>-->
-<!--			<td><span th:text="${weiwaiDO.axial}"></span></td>-->
-			<td><span th:text="${weiwaiDO.lightbelow}"></span></td>
-			<td><span th:text="${weiwaiDO.lengjing}"></span></td>
-			<td><span th:text="${weiwaiDO.jd}"></span></td>
-			<td><span th:text="${weiwaiDO.diameter}"></span></td>
-			<td><span th:text="${weiwaiDO.count}"></span></td>
-			<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>
-			<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>
-			<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>
-		</tr>
-		<tr>
-			<td><span th:text="${weiwaiDO.goodsName2}"></span></td>
-			<td><span th:text="${weiwaiDO.style2}"></span></td>
-			<td><span th:text="${weiwaiDO.rl2}"></span></td>
-			<td><span th:text="${weiwaiDO.sph2}"></span></td>
-			<td><span th:text="${weiwaiDO.cyl2}"></span></td>
-			<td><span th:text="${weiwaiDO.axial2}"></span></td>
-<!--			<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
-<!--			<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
-<!--			<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
-			<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>
-			<td><span th:text="${weiwaiDO.lengjing2}"></span></td>
-			<td><span th:text="${weiwaiDO.jd2}"></span></td>
-			<td><span th:text="${weiwaiDO.diameter2}"></span></td>
-			<td><span th:text="${weiwaiDO.count2}"></span></td>
-			<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>
-		</tr>
+
+		<tbody id="yx">
+			<tr style="font-weight:bold;font-size: 15px;" class="heji1"></tr>
 		</tbody>
+		<!--<tbody>-->
+		<!--<tr>-->
+			<!--<td rowspan="2"><span th:text="${weiwaiDO.saleNumber}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.goodsName}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.style}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.rl}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.sph}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.cyl}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.axial}"></span></td>-->
+ <!---->
+			<!--<td><span th:text="${weiwaiDO.lightbelow}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.lengjing}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.jd}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.diameter}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.count}"></span></td>-->
+			<!--<td rowspan="2"><span th:text="${weiwaiDO.mirrorTime}"></span></td>-->
+			<!--<td rowspan="2"><span th:text="${weiwaiDO.gkname}"></span></td>-->
+			<!--<td ><span th:text="${weiwaiDO.yaoqiu}"></span></td>-->
+		<!--</tr>-->
+		<!--<tr>-->
+			<!--<td><span th:text="${weiwaiDO.goodsName2}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.style2}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.rl2}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.sph2}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.cyl2}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.axial2}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.lightbelow2}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.lengjing2}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.jd2}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.diameter2}"></span></td>-->
+			<!--<td><span th:text="${weiwaiDO.count2}"></span></td>-->
+			<!--<td ><span th:text="${weiwaiDO.yaoqiu2}"></span></td>-->
+		<!--</tr>-->
+		<!--</tbody>-->
 	</table>
 	<table class="tabC" border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<td colspan="2"><b>备注：</b>此批订货请于<em></em>月<em></em>日前送达。</td>
-		</tr>
-		<tr>
-			<td colspan="3"><b>收货地址：</b><span th:text="${weiwaiDO.shouhuoAddress}"></span></td>
-		</tr>
+		<!--<tr>-->
+			<!--<td colspan="2"><b>备注：</b>此批订货请于<em></em>月<em></em>日前送达。</td>-->
+		<!--</tr>-->
+		<!--<tr>-->
+			<!--<td colspan="3"><b>收货地址：</b><span th:text="${weiwaiDO.shouhuoAddress}"></span></td>-->
+		<!--</tr>-->
 
 		<tr>
 			<td><b>联系人：</b><span th:text="${weiwaiDO.shouhuoPeople}"></span></td>
@@ -113,10 +113,66 @@
 			<td><b>审核人：</b><span th:text="${weiwaiDO.zhidanPeople}"></span></td>
 			<td><b>审核日期：</b><span th:text="${weiwaiDO.danjuDay}"></span>-08-29</td>
 		</tr>
-		<tr>
-			<td colspan="3"><b>打印日期：</b><span th:text="${dayinDay}"></span></td>
-		</tr>
+		<!--<tr>-->
+			<!--<td colspan="3"><b>打印日期：</b><span th:text="${dayinDay}"></span></td>-->
+		<!--</tr>-->
 	</table>
 </div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var danjuNumber = $('#danjuNumber').val();
+        var html="";
+        $.ajax({
+            url: '/stock/weiwai/yxPeijingdanList',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'danjuNumber': danjuNumber
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    var salenumbery=xml[i].salenumbery.split(',');
+                    var mirrorTime=xml[i].mirrorTime.split(',');
+                    var goodsName=xml[i].goodsName.split(',');
+                    var goodsbrandname=xml[i].goodsbrandname.split(',');
+                    var style=xml[i].style.split(',');
+                    var rl=xml[i].rl.split(',');
+                    var count=xml[i].count.split(',');
+                    var sph=xml[i].sph.split(',');
+                    var cyl=xml[i].cyl.split(',');
+                    var axial=xml[i].axial.split(',');
+                    var lightbelow=xml[i].lightbelow.split(',');
+                    var lengjing=xml[i].lengjing.split(',');
+					var jd=xml[i].jd.split(',');
+                    var diameter=xml[i].diameter.split(',');
+                    var yaoqiu=xml[i].yaoqiu.split(',');
+                    var gkname=xml[i].gkname.split(',');
+                    for (var t=0;t<goodsName.length;t++){
+                        html += "<tr>";
+                        html += "<td>"+salenumbery[0]+"</td>";
+                        html += "<td>"+goodsbrandname[t]+"</td>";
+                        html += "<td>"+style[t]+"</td>";
+                        html += "<td>"+rl[t]+"</td>";
+                        html += "<td>"+sph[t]+"</td>";
+                        html += "<td>"+cyl[t]+"</td>";
+                        html += "<td>"+axial[t]+"</td>";
+                        // html += "<td>"+lightbelow[t]+"</td>";
+                        // html += "<td>"+lengjing[t]+"</td>";
+                        html += "<td>"+jd[t]+"</td>";
+                        html += "<td>"+diameter[t]+"</td>";
+                        html += "<td>"+count[t]+"</td>";
+                        html += "<td>"+mirrorTime[t]+"</td>";
+                        html += "<td>"+gkname[0]+"</td>";
+                        html += "<td>"+yaoqiu[t]+"</td>";
+                        html += "</tr>";
+                    }
+                    $('#yx').append(html);
+                }
+
+            }
+        });
+    })
+</script>
 </body>
 </html>

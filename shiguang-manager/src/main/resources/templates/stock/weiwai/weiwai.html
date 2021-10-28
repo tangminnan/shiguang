@@ -10,11 +10,14 @@
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
 							<button shiro:hasPermission="stock:weiwai:add" type="button" class="btn  btn-primary" onclick="add()">
-								<i class="fa fa-plus" aria-hidden="true"></i>委外订单新增
+								 委外订单新增
+							</button>
+							<button shiro:hasPermission="stock:weiwai:danyiinList" type="button" class="btn  btn-default" onclick="dayinList()">
+								 批量打印
 							</button>
 							<button shiro:hasPermission="stock:weiwai:batchRemove" type="button" class="btn  btn-danger"
 								onclick="batchRemove()">
-								<i class="fa fa-trash" aria-hidden="true"></i>删除
+								 删除
 							</button>
 						</div>
 						<div class="columns pull-right">
@@ -47,10 +50,6 @@
 								   placeholder="制造商">
 						</div>
 
-
-
-
-
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
 					</table>
@@ -81,7 +80,7 @@
 				var s_resetPwd_h = '';
 			</script>
 		</div>
-	</div>
+
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/stock/weiwai/weiwai.js"></script>
 </body>

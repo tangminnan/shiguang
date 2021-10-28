@@ -55,17 +55,19 @@ public interface WeiwaiService {
 
 	//委外镜框配镜单
 	WeiwaiDO jkPeijingdan(String danjuNumber);
-
-	//委外隐形配镜单List
+	//委外框镜配镜单List
 	List<WeiwaiDO> jkPeijingdanList(Map<String, Object> map);
+
 	//委外隐形配镜单
 	WeiwaiDO yxPeijingdan(String danjuNumber);
+	//委外隐形配镜单List
+	List<WeiwaiDO> yxPeijingdanList(Map<String, Object> map);
 	//确认收获库存偶没有
 	WeiwaiDO weiwaiOrder(String  danjuNumber);
 
 	//委外详情列表
 	List<WeiwaiDO> selectWeiwaiOrder(Map<String, Object> map);
-////商品代码查询品牌代码
+	//商品代码查询品牌代码
 	JpdzDO selectbrandnumjpdz(String num);
 	YxdzDO selectbrandnumyxdz(String num);
 	//打印单查询品牌名称

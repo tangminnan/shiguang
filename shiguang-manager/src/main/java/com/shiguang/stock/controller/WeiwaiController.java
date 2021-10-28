@@ -484,6 +484,7 @@ public class WeiwaiController {
         return R.ok();
     }
 
+
     //外部配镜单查询
     @GetMapping("/getGoods/{eyeStyle}/{mfrsid}/{mfrsname}/{zhidanPeople}")
     String getGoods(@PathVariable("eyeStyle") Integer eyeStyle, @PathVariable("mfrsid") String mfrsid,
@@ -781,7 +782,7 @@ public class WeiwaiController {
         return R.ok();
     }
 
-    //打印镜框
+    //打印委外框镜配镜单
     @GetMapping("/jkPeijingdan")
     String jkPeijingdan(String danjuNumber, Model model) {
         WeiwaiDO weiwaiDO = weiwaiService.jkPeijingdan(danjuNumber);
@@ -793,8 +794,7 @@ public class WeiwaiController {
         model.addAttribute("dayinDay", dayinDay);
         return "/stock/weiwai/jkPeijingdan";
     }
-
-    ///委外采购详情列表
+    ///打印委外框镜配镜单列表
     @ResponseBody
     @RequestMapping(value = "/jkPeijingdanList")
     public List<WeiwaiDO> selectJKList(String danjuNumber ,Model model ) {
@@ -806,7 +806,7 @@ public class WeiwaiController {
     }
 
 
-    //打印隐形src/main/resources/templates/stock/weiwai/.html:84
+    //打印委外隐形配镜单
     @GetMapping("/yxPeijingdan")
     String yxPeijingdan(String danjuNumber, Model model) {
         WeiwaiDO weiwaiDO = weiwaiService.yxPeijingdan(danjuNumber);
@@ -817,6 +817,16 @@ public class WeiwaiController {
         String dayinDay = sdf.format(date);
         model.addAttribute("dayinDay", dayinDay);
         return "/stock/weiwai/yxPeijingdan";
+    }
+    ///打印委外隐形配镜单列表
+    @ResponseBody
+    @RequestMapping(value = "/yxPeijingdanList")
+    public List<WeiwaiDO> yxPeijingdanList(String danjuNumber ,Model model ) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber", danjuNumber);
+        List<WeiwaiDO> weiwaiDOList = weiwaiService.yxPeijingdanList(map);
+        model.addAttribute("weiwaiDOList", weiwaiDOList);
+        return weiwaiDOList;
     }
 
 
@@ -1018,6 +1028,25 @@ public class WeiwaiController {
         }
         return R.error();
     }
+
+
+
+    /**
+     * 批量打印
+     */
+    @GetMapping("/dayinList")
+    @RequiresPermissions("stock:weiwai:danyiinList")
+    String dayinList(  String[] ids, String[] mfrsid,Model model) {
+        model.addAttribute("ids",ids);
+        model.addAttribute("mfrsid",mfrsid);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String dayinDay = sdf.format(date);
+        model.addAttribute("dayinDay", dayinDay);
+        return "/stock/weiwai/dayinList";
+    }
+
 
 }
 
