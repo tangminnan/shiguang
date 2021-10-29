@@ -59,8 +59,18 @@ public class TuihuoServiceImpl implements TuihuoService {
 	}
 
 	@Override
+	public int selectJingjiacount(Map<String, Object> map) {
+		return tuihuoDao.selectJingjiacount(map);
+	}
+
+	@Override
 	public List<StockDO> selectPeijian(Map<String, Object> map) {
 		return tuihuoDao.selectPeijian(map);
+	}
+
+	@Override
+	public int selectPeijiancount(Map<String, Object> map) {
+		return tuihuoDao.selectPeijiancount(map);
 	}
 
 	@Override
@@ -69,8 +79,18 @@ public class TuihuoServiceImpl implements TuihuoService {
 	}
 
 	@Override
+	public int selectJpdzcount(Map<String, Object> map) {
+		return tuihuoDao.selectJpdzcount(map);
+	}
+
+	@Override
 	public List<StockDO> selectJpcp(Map<String, Object> map) {
 		return tuihuoDao.selectJpcp(map);
+	}
+
+	@Override
+	public int selectJpcpcount(Map<String, Object> map) {
+		return tuihuoDao.selectJpcpcount(map);
 	}
 
 	@Override
@@ -79,8 +99,18 @@ public class TuihuoServiceImpl implements TuihuoService {
 	}
 
 	@Override
+	public int selectYxdzcount(Map<String, Object> map) {
+		return tuihuoDao.selectYxdzcount(map);
+	}
+
+	@Override
 	public List<StockDO> selectYxcp(Map<String, Object> map) {
 		return tuihuoDao.selectYxdz(map);
+	}
+
+	@Override
+	public int selectYxcpcount(Map<String, Object> map) {
+		return tuihuoDao.selectYxcpcount(map);
 	}
 
 	@Override
@@ -89,8 +119,18 @@ public class TuihuoServiceImpl implements TuihuoService {
 	}
 
 	@Override
+	public int selectHlycount(Map<String, Object> map) {
+		return tuihuoDao.selectHlycount(map);
+	}
+
+	@Override
 	public List<StockDO> selectTyj(Map<String, Object> map) {
 		return tuihuoDao.selectTyj(map);
+	}
+
+	@Override
+	public int selectTyjcount(Map<String, Object> map) {
+		return tuihuoDao.selectTyjcount(map);
 	}
 
 	@Override
@@ -99,13 +139,28 @@ public class TuihuoServiceImpl implements TuihuoService {
 	}
 
 	@Override
+	public int selectLhjcount(Map<String, Object> map) {
+		return tuihuoDao.selectLhjcount(map);
+	}
+
+	@Override
 	public List<StockDO> selectHc(Map<String, Object> map) {
 		return tuihuoDao.selectHc(map);
 	}
 
 	@Override
+	public int selectHccount(Map<String, Object> map) {
+		return tuihuoDao.selectHccount(map);
+	}
+
+	@Override
 	public List<StockDO> selectSg(Map<String, Object> map) {
 		return tuihuoDao.selectSg(map);
+	}
+
+	@Override
+	public int selectSgcount(Map<String, Object> map) {
+		return tuihuoDao.selectSgcount(map);
 	}
 
 	@Override

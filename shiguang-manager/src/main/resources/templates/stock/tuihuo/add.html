@@ -136,9 +136,11 @@
         //     layer.alert("请选择发出仓位！");
         // } else
 
-            if (style == ""){
+		if (style == ""){
             layer.alert("请选择出库方式！");
-        } else {
+        }else if (style=="退货" && mfrsid=="空值" ){
+            layer.alert("请选择制造商！");
+			}  else {
             // $(".val").remove();
             var toIndex = layer.open({
                 type: 2,

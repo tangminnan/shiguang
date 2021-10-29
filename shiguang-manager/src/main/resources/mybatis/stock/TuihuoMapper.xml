@@ -4,7 +4,8 @@
 <mapper namespace="com.shiguang.stock.dao.TuihuoDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.TuihuoDO">
-		select t.`id`,t.`tuihuo_num`,t.`zhidan_people`,t.`danju_day`,t.`mfrsid`,m.`mfrsname`,t.`position_id`,p.`position_name`,t.`beizhu`,t.`goodsxinxiid`,t.`goods_num`,
+		select t.`id`,t.`tuihuo_num`,t.`zhidan_people`,t.`danju_day`,t.`mfrsid`,m.`mfrsname`,t.`position_id`,p.`position_name`,
+		t.`goodsbrandname`,t.`beizhu`,t.`goodsxinxiid`,t.`goods_num`,
 		t.`goods_name`,t.`factory`,t.`unit`,t.`goods_count`,t.`count`,t.`goods_code`,t.`style`,t.`retail_price`,t.`stockorder`
 		from stock_tuihuo t
 		left join c_mfrs m on t.mfrsid=m.mfrsnum
@@ -14,7 +15,7 @@
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.TuihuoDO">
-		select `id`,`tuihuo_num`,`zhidan_people`,`danju_day`,`mfrsid`,`mfrsname`,`position_id`,`beizhu`,`goodsxinxiid`,`goods_num`,
+		select `id`,`tuihuo_num`,`zhidan_people`,`danju_day`,`mfrsid`,`mfrsname`,`position_id`,`beizhu`,`goodsbrandname`,`goodsxinxiid`,`goods_num`,
 		`goods_name`,`factory`,`unit`,`goods_count`,`count`,`goods_code`,`style` ,`retail_price`,`stockorder`
 		from stock_tuihuo
         <where>  
@@ -27,6 +28,7 @@
 		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
 		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
 		  		  <if test="goodsxinxiid != null and goodsxinxiid != ''"> and goodsxinxiid = #{goodsxinxiid} </if>
+		  		  <if test="goodsbrandname != null and goodsbrandname != ''"> and goodsbrandname = #{goodsbrandname} </if>
 		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
 		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
@@ -63,6 +65,7 @@
 		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
 		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
 		  		  <if test="goodsxinxiid != null and goodsxinxiid != ''"> and goodsxinxiid = #{goodsxinxiid} </if>
+		  		  <if test="goodsbrandname != null and goodsbrandname != ''"> and goodsbrandname = #{goodsbrandname} </if>
 		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
 		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
 		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
@@ -87,7 +90,8 @@
 			`position_id`, 
 			`beizhu`, 
 			`goodsxinxiid`, 
-			`goods_num`, 
+			`goodsbrandname`,
+			`goods_num`,
 			`goods_name`, 
 			`factory`, 
 			`unit`, 
@@ -108,7 +112,8 @@
 			#{positionId}, 
 			#{beizhu}, 
 			#{goodsxinxiid}, 
-			#{goodsNum}, 
+			#{goodsbrandname},
+			#{goodsNum},
 			#{goodsName}, 
 			#{factory}, 
 			#{unit}, 
@@ -132,6 +137,7 @@
 			<if test="positionId != null">`position_id` = #{positionId}, </if>
 			<if test="beizhu != null">`beizhu` = #{beizhu}, </if>
 			<if test="goodsxinxiid != null">`goodsxinxiid` = #{goodsxinxiid}, </if>
+			<if test="goodsbrandname != null">`goodsbrandname` = #{goodsbrandname}, </if>
 			<if test="goodsNum != null">`goods_num` = #{goodsNum}, </if>
 			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
 			<if test="factory != null">`factory` = #{factory}, </if>
@@ -168,14 +174,29 @@
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
 			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
 			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
 			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
-
-
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="selectJingjiacount" resultType="int">
+		select count(*)  from  stock s
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 	</select>
 	<select id="selectPeijian" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,p.parts_style,s.retail_price,s.goods_count,po.position_name,s.goodsxinxiid
@@ -186,12 +207,30 @@
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
 			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
 			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
 			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="selectPeijiancount" resultType="int">
+		select count(*)  from  stock s
+
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 	</select>
 	<select id="selectJpdz" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num, s.goods_code, s.goods_name,s.unit,s.goodsxinxiid,
@@ -215,6 +254,23 @@
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="selectJpdzcount" resultType="int">
+		select count(*)  from  stock s
+
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 	</select>
 	<select id="selectJpcp" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.unit,sp.sph,cy.cyl,l.lightbelow,r.refractivityvalue,li.light_name,g.gradual_name,
@@ -240,6 +296,22 @@
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 			group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="selectJpcpcount" resultType="int">
+		select count(*)  from  stock s
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 	</select>
 	<select id="selectYxdz" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.unit,y.sph_up,y.sph_down,y.cyl_up,y.cyl_down,y.curvature_one,y.curvature_yi,
@@ -260,6 +332,22 @@
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 			group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="selectYxdzcount" resultType="int">
+		select count(*)  from  stock s
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 	</select>
 	<select id="selectYxcp" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.unit,sp.sph,cy.cyl,y.curvature,y.diameter,u.usage_name,t.type_name,s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
@@ -280,7 +368,23 @@
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
-				group by s.goods_code
+			group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="selectYxcpcount" resultType="int">
+		select count(*)  from  stock s
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 	</select>
 	<select id="selectHly" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
@@ -292,12 +396,30 @@
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
 			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
 			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
 			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="selectHlycount" resultType="int">
+		select count(*)  from  stock s
+
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 	</select>
 	<select id="selectTyj" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
@@ -310,12 +432,30 @@
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
 			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
 			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
 			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="selectTyjcount" resultType="int">
+		select count(*)  from  stock s
+
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 	</select>
 	<select id="selectLhj" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
@@ -329,12 +469,30 @@
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
 			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
 			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
 			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="selectLhjcount" resultType="int">
+		select count(*)  from  stock s
+
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 	</select>
 	<select id="selectHc" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
@@ -346,12 +504,30 @@
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
 			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
 			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
 			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="selectHccount" resultType="int">
+		select count(*)  from  stock s
+
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
 	</select>
 	<select id="selectSg" resultType="com.shiguang.stock.domain.StockDO">
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
@@ -363,14 +539,30 @@
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
 			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
 			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
 			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
 		</where>
 		group by s.goods_code
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
-
+	<select id="selectSgcount" resultType="int">
+		select count(*)  from  stock s
+		<where>
+			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+			<if test="goodsType != null and goodsType != ''"> and s.goods_type = #{goodsType} </if>
+			<if test="classtype != null and classtype != ''"> and s.classtype = #{classtype} </if>
+			<if test="goodsNum != null and goodsNum != ''">and s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+		</where>
+	</select>
 	<select id="orderList" resultType="com.shiguang.stock.domain.TuihuoDO">
 		select t.`id`,t.`tuihuo_num`,t.`zhidan_people`,t.`danju_day`,t.`mfrsid`,m.`mfrsname`,t.`position_id`,p.position_name,t.`beizhu`,t.`style`
 		from stock_tuihuo t
@@ -396,12 +588,12 @@
 			<if test="style != null and style != ''"> and style = #{style} </if>
 		</where>
 		group by tuihuo_num  order by id desc
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
 	<select id="orderCount" resultType="int">
-		select count(*)
-		from stock_tuihuo t
-		left join c_mfrs m on t.mfrsid=m.mfrsnum
-		left join c_position p on t.position_id=t.position_id
+		select count(*) from stock_tuihuo t
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
@@ -430,6 +622,9 @@
 			<if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
 		</where>
 		group by id
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
 
 	<select id="getDanju" resultType="com.shiguang.stock.domain.TuihuoDO">
@@ -441,12 +636,14 @@
 		group by  t.tuihuo_num
 	</select>
 	<select id="getDanjuList" resultType="com.shiguang.stock.domain.TuihuoDO">
-		select goods_num,goods_name,unit,count,retail_price,goods_code
-		from stock_tuihuo
+		select * from stock_tuihuo
 		<where>
 			<if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
 		</where>
 		group by id
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
 
 </mapper>

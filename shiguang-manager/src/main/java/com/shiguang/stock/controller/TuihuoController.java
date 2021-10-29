@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.shiguang.common.utils.*;
+import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.BrandService;
@@ -145,8 +146,8 @@ public class TuihuoController {
 			stock.setGoodsCode(goodsCode);
 			String count = count1[i];
 			stock.setCount(count);
-			String goodsxinxiid = goodsxinxiid1[i];
-			stock.setGoodsxinxiid(goodsxinxiid);
+//			String goodsxinxiid = goodsxinxiid1[i];
+//			stock.setGoodsxinxiid(goodsxinxiid);
 			StockDO goodsList = stockService.haveNum(stock);
 			if (null != goodsList) {
 				String yuancount = goodsList.getGoodsCount();
@@ -159,6 +160,8 @@ public class TuihuoController {
 
 
 				TuihuoDO tuihuoDO = new TuihuoDO();
+				tuihuoDO.setGoodsbrandname(goodsList.getBrandname());
+
 				tuihuoDO.setTuihuoNum(tuihuo.getTuihuoNum());
 				tuihuoDO.setZhidanPeople(tuihuo.getZhidanPeople());
 				//日期
@@ -310,202 +313,337 @@ public class TuihuoController {
 		model.addAttribute("mfrsName", mfrsName);
 		return "/stock/tuihuo/getGood";
 	}
-	//镜架List
-	@ResponseBody
-	@RequestMapping(value = "/selectjingjia")
-	public List<StockDO> selectjingjia(String mfrsid,String positionId,Integer goodsType,
-									   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> jingjiagoods = tuihuoService.selectJingjia(map);
-		model.addAttribute("jingjiagoods", jingjiagoods);
-		return jingjiagoods;
-	}
+//	//镜架List
+//	@ResponseBody
+//	@RequestMapping(value = "/selectjingjia")
+//	public List<StockDO> selectjingjia(String mfrsid,String positionId,Integer goodsType,
+//									   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> jingjiagoods = tuihuoService.selectJingjia(map);
+//		model.addAttribute("jingjiagoods", jingjiagoods);
+//		return jingjiagoods;
+//	}
+//镜架List
+@ResponseBody
+@GetMapping("/selectjingjia")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> jingjiagoods = tuihuoService.selectJingjia(query);
+	int total = brandService.count(query);
+	PageUtils pageUtils = new PageUtils(jingjiagoods, total);
+	return pageUtils;
+}
+
+
+////配件List
+//	@ResponseBody
+//	@RequestMapping(value = "/selectpeijian")
+//	public List<StockDO> selectpeijian(String mfrsid,String positionId,Integer goodsType,
+//									   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> partsgoods = tuihuoService.selectPeijian(map);
+//		model.addAttribute("partsgoods", partsgoods);
+//		return partsgoods;
+//	}
 //配件List
-	@ResponseBody
-	@RequestMapping(value = "/selectpeijian")
-	public List<StockDO> selectpeijian(String mfrsid,String positionId,Integer goodsType,
-									   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> partsgoods = tuihuoService.selectPeijian(map);
-		model.addAttribute("partsgoods", partsgoods);
-		return partsgoods;
-	}
-	//JpcpList
-	@ResponseBody
-	@RequestMapping(value = "/selectJpcp")
-	public List<StockDO> selectJpcp(String mfrsid,String positionId,Integer goodsType,String classtype,
-									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("classtype", classtype);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> jpcpgoods = tuihuoService.selectJpcp(map);
-		model.addAttribute("jpcpgoods", jpcpgoods);
-		return jpcpgoods;
-	}
+@ResponseBody
+@GetMapping("/selectpeijian")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selectpeijian(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> partsgoods  = tuihuoService.selectPeijian(query);
+	int total = tuihuoService.selectPeijiancount(query);
+	PageUtils pageUtils = new PageUtils(partsgoods, total);
+	return pageUtils;
+}
+//	//JpcpList
+//	@ResponseBody
+//	@RequestMapping(value = "/selectJpcp")
+//	public List<StockDO> selectJpcp(String mfrsid,String positionId,Integer goodsType,String classtype,
+//									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("classtype", classtype);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> jpcpgoods = tuihuoService.selectJpcp(map);
+//		model.addAttribute("jpcpgoods", jpcpgoods);
+//		return jpcpgoods;
+//	}
+//JpcpList
+@ResponseBody
+@GetMapping("/selectJpcp")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selectJpcp(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> jpcpgoods = tuihuoService.selectJpcp(query);
+	int total = tuihuoService.selectJpcpcount(query);
+	PageUtils pageUtils = new PageUtils(jpcpgoods, total);
+	return pageUtils;
+}
+////JpdzList
+//	@ResponseBody
+//	@RequestMapping(value = "/selectJpdz")
+//	public List<StockDO> selectJpdz(String mfrsid,String positionId,Integer goodsType,String classtype,
+//									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("classtype", classtype);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> jpdzgoods = tuihuoService.selectJpdz(map);
+//		model.addAttribute("jpdzgoods", jpdzgoods);
+//		return jpdzgoods;
+//	}
 //JpdzList
-	@ResponseBody
-	@RequestMapping(value = "/selectJpdz")
-	public List<StockDO> selectJpdz(String mfrsid,String positionId,Integer goodsType,String classtype,
-									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("classtype", classtype);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> jpdzgoods = tuihuoService.selectJpdz(map);
-		model.addAttribute("jpdzgoods", jpdzgoods);
-		return jpdzgoods;
-	}
+@ResponseBody
+@GetMapping("/selectJpdz")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selectJpdz(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> jpdzgoods = tuihuoService.selectJpdz(query);
+	int total = tuihuoService.selectJpdzcount(query);
+	PageUtils pageUtils = new PageUtils(jpdzgoods, total);
+	return pageUtils;
+}
+////YxcpList
+//	@ResponseBody
+//	@RequestMapping(value = "/selectYxcp")
+//	public List<StockDO> selectYxcp(String mfrsid,String positionId,Integer goodsType,String classtype,
+//									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("classtype", classtype);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> yxcpgoods = tuihuoService.selectYxcp(map);
+//		model.addAttribute("yxcpgoods", yxcpgoods);
+//		return yxcpgoods;
+//	}
 //YxcpList
-	@ResponseBody
-	@RequestMapping(value = "/selectYxcp")
-	public List<StockDO> selectYxcp(String mfrsid,String positionId,Integer goodsType,String classtype,
-									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("classtype", classtype);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> yxcpgoods = tuihuoService.selectYxcp(map);
-		model.addAttribute("yxcpgoods", yxcpgoods);
-		return yxcpgoods;
-	}
+@ResponseBody
+@GetMapping("/selectYxcp")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selectYxcp(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> yxcpgoods = tuihuoService.selectYxcp(query);
+	int total = tuihuoService.selectYxcpcount(query);
+	PageUtils pageUtils = new PageUtils(yxcpgoods, total);
+	return pageUtils;
+}
+
+////YxdzList
+//	@ResponseBody
+//	@RequestMapping(value = "/selectYxdz")
+//	public List<StockDO> selectYxdz(String mfrsid,String positionId,Integer goodsType,String classtype,
+//									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("classtype", classtype);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> yxdzgoods = tuihuoService.selectYxdz(map);
+//		model.addAttribute("yxdzgoods", yxdzgoods);
+//		return yxdzgoods;
+//	}
 //YxdzList
-	@ResponseBody
-	@RequestMapping(value = "/selectYxdz")
-	public List<StockDO> selectYxdz(String mfrsid,String positionId,Integer goodsType,String classtype,
-									String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("classtype", classtype);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> yxdzgoods = tuihuoService.selectYxdz(map);
-		model.addAttribute("yxdzgoods", yxdzgoods);
-		return yxdzgoods;
-	}
+@ResponseBody
+@GetMapping("/selectYxdz")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selectYxdz(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> yxdzgoods  = tuihuoService.selectYxdz(query);
+	int total = tuihuoService.selectYxdzcount(query);
+	PageUtils pageUtils = new PageUtils(yxdzgoods, total);
+	return pageUtils;
+}
+///护理液List
+//	@ResponseBody
+//	@RequestMapping(value = "/selectHly")
+//	public List<StockDO> selecthly(String mfrsid,String positionId,Integer goodsType,String classtype,
+//								   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("classtype", classtype);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> hlygoods = tuihuoService.selectHly(map);
+//		model.addAttribute("hlygoods", hlygoods);
+//		return hlygoods;
+//	}
 //护理液List
-	@ResponseBody
-	@RequestMapping(value = "/selectHly")
-	public List<StockDO> selecthly(String mfrsid,String positionId,Integer goodsType,String classtype,
-								   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("classtype", classtype);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> hlygoods = tuihuoService.selectHly(map);
-		model.addAttribute("hlygoods", hlygoods);
-		return hlygoods;
-	}
+@ResponseBody
+@GetMapping("/selectHly")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selecthly(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> hlygoods = tuihuoService.selectHly(query);
+	int total = tuihuoService.selectHlycount(query);
+	PageUtils pageUtils = new PageUtils(hlygoods, total);
+	return pageUtils;
+}
+////太阳镜List
+//	@ResponseBody
+//	@RequestMapping(value = "/")
+//	public List<StockDO> selecttyj(String mfrsid,String positionId,Integer goodsType,String classtype,
+//								   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("classtype", classtype);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> tyjgoods = tuihuoService.selectTyj(map);
+//		model.addAttribute("tyjgoods", tyjgoods);
+//		return tyjgoods;
+//	}
 //太阳镜List
-	@ResponseBody
-	@RequestMapping(value = "/selectTyj")
-	public List<StockDO> selecttyj(String mfrsid,String positionId,Integer goodsType,String classtype,
-								   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("classtype", classtype);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> tyjgoods = tuihuoService.selectTyj(map);
-		model.addAttribute("tyjgoods", tyjgoods);
-		return tyjgoods;
-	}
+@ResponseBody
+@GetMapping("/selectTyj")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selecttyj(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> tyjgoods = tuihuoService.selectTyj(query);
+	int total = tuihuoService.selectTyjcount(query);
+	PageUtils pageUtils = new PageUtils(tyjgoods, total);
+	return pageUtils;
+}
+////老花镜List
+//	@ResponseBody
+//	@RequestMapping(value = "/selectLhj")
+//	public List<StockDO> selectLhj(String mfrsid,String positionId,Integer goodsType,String classtype,
+//								   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("classtype", classtype);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> lhjgoods = tuihuoService.selectLhj(map);
+//		model.addAttribute("lhjgoods", lhjgoods);
+//		return lhjgoods;
+//	}
 //老花镜List
-	@ResponseBody
-	@RequestMapping(value = "/selectLhj")
-	public List<StockDO> selectLhj(String mfrsid,String positionId,Integer goodsType,String classtype,
-								   String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("classtype", classtype);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> lhjgoods = tuihuoService.selectLhj(map);
-		model.addAttribute("lhjgoods", lhjgoods);
-		return lhjgoods;
-	}
-//耗材LIst
-	@ResponseBody
-	@RequestMapping(value = "/selectHc")
-	public List<StockDO> selectHc(String mfrsid,String positionId,Integer goodsType,String classtype,
-								  String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("classtype", classtype);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> hcgoods = tuihuoService.selectHc(map);
-		model.addAttribute("hcgoods", hcgoods);
-		return hcgoods;
-	}
+@ResponseBody
+@GetMapping("/selectLhj")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selectLhj(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> lhjgoods = tuihuoService.selectLhj(query);
+	int total = tuihuoService.selectLhjcount(query);
+	PageUtils pageUtils = new PageUtils(lhjgoods, total);
+	return pageUtils;
+}
+////耗材LIst
+//	@ResponseBody
+//	@RequestMapping(value = "/selectHc")
+//	public List<StockDO> selectHc(String mfrsid,String positionId,Integer goodsType,String classtype,
+//								  String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("classtype", classtype);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> hcgoods = tuihuoService.selectHc(map);
+//		model.addAttribute("hcgoods", hcgoods);
+//		return hcgoods;
+//	}
+//耗材List
+@ResponseBody
+@GetMapping("/selectHc")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selectHc(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> hcgoods = tuihuoService.selectHc(query);
+	int total = tuihuoService.selectHccount(query);
+	PageUtils pageUtils = new PageUtils(hcgoods, total);
+	return pageUtils;
+}
+//////视光LIst
+//	@ResponseBody
+//	@RequestMapping(value = "/selectSg")
+//	public List<StockDO> selectSg(String mfrsid,String positionId,Integer goodsType,String classtype,
+//								String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("mfrsid", mfrsid);
+//		map.put("positionId", positionId);
+//		map.put("goodsType", goodsType);
+//		map.put("classtype", classtype);
+//		map.put("goodsNum", goodsNum);
+//		map.put("goodsCode", goodsCode);
+//		map.put("goodsName", goodsName);
+//		map.put("brandname", brandname);
+//		List<StockDO> hcgoods = tuihuoService.selectSg(map);
+//		model.addAttribute("hcgoods", hcgoods);
+//		return hcgoods;
+//	}
 //视光LIst
-	@ResponseBody
-	@RequestMapping(value = "/selectSg")
-	public List<StockDO> selectSg(String mfrsid,String positionId,Integer goodsType,String classtype,
-								String goodsNum,String goodsCode,String goodsName,String brandname, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mfrsid", mfrsid);
-		map.put("positionId", positionId);
-		map.put("goodsType", goodsType);
-		map.put("classtype", classtype);
-		map.put("goodsNum", goodsNum);
-		map.put("goodsCode", goodsCode);
-		map.put("goodsName", goodsName);
-		map.put("brandname", brandname);
-		List<StockDO> hcgoods = tuihuoService.selectSg(map);
-		model.addAttribute("hcgoods", hcgoods);
-		return hcgoods;
-	}
+@ResponseBody
+@GetMapping("/selectSg")
+//@RequiresPermissions("mfrs:brand:brand")
+public PageUtils selectSg(@RequestParam Map<String, Object> params) {
+	//查询列表数据
+	Query query = new Query(params);
+	List<StockDO> sggoods = tuihuoService.selectSg(query);
+	int total = tuihuoService.selectSgcount(query);
+	PageUtils pageUtils = new PageUtils(sggoods, total);
+	return pageUtils;
+}
 //详情List
 	@ResponseBody
 	@RequestMapping(value = "/selectOrder")

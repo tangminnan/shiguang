@@ -34,6 +34,8 @@ public class TuihuoDO implements Serializable {
 	private String beizhu;
 	//商品信息id
 	private Long goodsxinxiid;
+	//商品品牌名称
+	private String goodsbrandname;
 	//商品代码
 	private String goodsNum;
 	//商品名称
@@ -219,6 +221,15 @@ public class TuihuoDO implements Serializable {
 	public String getGoodsName() {
 		return goodsName;
 	}
+
+	public String getGoodsbrandname() {
+		return goodsbrandname;
+	}
+
+	public void setGoodsbrandname(String goodsbrandname) {
+		this.goodsbrandname = goodsbrandname;
+	}
+
 	/**
 	 * 设置：型号
 	 */

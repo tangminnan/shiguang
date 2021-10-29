@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>商品查询</title>
     <link rel="stylesheet" href="/css/css.css" type="text/css">
-    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+    <!--<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>-->
+    <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.3.js"></script>
+    <script src="/js/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 <!--查询条件-->
@@ -53,12 +54,13 @@
                 </select>
                 <div id="jp" style="display: none">
                     <label class="radio-inline">
-                        <input id="xz1" type="radio" name="classtype"  value="1" checked /> 成品片
+                        <input type="radio" name="classtype"  value="1" /> 成品片
                     </label>
                     <label class="radio-inline">
-                        <input id="xz2" type="radio" name="classtype" value="2" /> 订做片
+                        <input type="radio" name="classtype" value="2" /> 订做片
                     </label>
                 </div>
+                <input type="hidden" id="classtype" value="" />
             </td>
             <td>仓位名称：</td>
             <td >
@@ -83,201 +85,10 @@
 
 <!--商品信息-->
 <div class="m40 tabS msgBoxDD">
-    <!--<h3>商品信息</h3>-->
-    <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-        <tbody>
-        <tr id="tab1" style="display:none">
-            <td style="width: 100vw;">
-                <table>
-                    <tr class="thead">
-                        <td>多选</td>
-                        <td>商品代码</td>
-                        <td>商品名称</td>
-                        <td>型号</td>
-                        <td>单位</td>
-                        <td>厂家色号</td>
-                        <td>镜架材质</td>
-                        <td>镜架尺寸</td>
-                        <td>标准零售价</td>
-                        <td>仓位</td>
-                        <td>库存数量</td>
-                        <td style="display: none">商品条码</td>
-                        <td style="display: none">goodsxinxiid</td>
-                    </tr>
-                    <tr style="font-weight:bold;font-size: 15px;" class="heji1"></tr>
-                </table>
-            </td>
-        </tr>
-        <tr id="tab2" style="display:none">
-            <td style="width: 100vw;">
-                <table>
-                    <tr class="thead">
-                        <td>多选</td>
-                        <td>商品代码</td>
-                        <td>商品名称</td>
-                        <td>型号</td>
-                        <td>单位</td>
-                        <td>配件型</td>
-                        <td>标准零售价</td>
-                        <td>仓位</td>
-                        <td>库存数量</td>
-                        <td style="display: none">商品条码</td>
-                    </tr>
-                    <tr style="font-weight:bold;font-size: 15px;" class="heji2"></tr>
-                </table>
-            </td>
-        </tr>
-        <tr id="tab3" style="display:none">
-            <td style="width: 100vw;">
-                <table>
-                    <tr class="thead">
-                        <td>多选</td>
-                        <td>商品代码</td>
-                        <td>商品名称</td>
-                        <td>单位</td>
-                        <td>球镜</td>
-                        <td>柱镜</td>
-                        <td>下加光</td>
-                        <td>折射率</td>
-                        <td>光度分类</td>
-                        <td>渐进片分类</td>
-                        <td>镜片功能</td>
-                        <td>标准零售价</td>
-                        <td>仓位</td>
-                        <td>库存数量</td>
-                        <td style="display: none">商品条码</td>
-                    </tr>
-                    <tr style="font-weight:bold;font-size: 15px;" class="heji3"></tr>
-                </table>
-            </td>
-        </tr>
-        <tr id="tab4" style="display:none">
-            <td style="width: 100vw;">
-                <table>
-                    <tr class="thead">
-                        <td>多选</td>
-                        <td>商品代码</td>
-                        <td>商品名称</td>
-                        <td>单位</td>
-                        <td>球镜</td>
-                        <td>柱镜</td>
-                        <td>曲率</td>
-                        <td>直径</td>
-                        <td>使用类型</td>
-                        <td>抛弃型分类</td>
-                        <td>标准零售价</td>
-                        <td>仓位</td>
-                        <td>库存数量</td>
-                        <td style="display: none">商品条码</td>
-                    </tr>
-                    <tr style="font-weight:bold;font-size: 15px;" class="heji4"></tr>
-                </table>
-            </td>
-        </tr>
-
-        <tr id="tab5" style="display:none">
-            <td style="width: 100vw;">
-                <table>
-                    <tr class="thead">
-                        <td>多选</td>
-                        <td>商品代码</td>
-                        <td>商品名称</td>
-                        <td>型号</td>
-                        <td>单位</td>
-                        <td>主容量</td>
-                        <td>次容量</td>
-                        <td>标准零售价</td>
-                        <td>仓位</td>
-                        <td>库存数量</td>
-                        <td style="display: none">商品条码</td>
-                    </tr>
-                    <tr style="font-weight:bold;font-size: 15px;" class="heji5"></tr>
-                </table>
-            </td>
-        </tr>
-        <tr id="tab6" style="display:none">
-            <td style="width: 100vw;">
-                <table>
-                    <tr class="thead">
-                        <td>多选</td>
-                        <td>商品代码</td>
-                        <td>商品名称</td>
-                        <td>型号</td>
-                        <td>单位</td>
-                        <td>厂家色号</td>
-                        <td>镜架尺寸</td>
-                        <td>标准零售价</td>
-                        <td>仓位</td>
-                        <td>库存数量</td>
-                        <td style="display: none">商品条码</td>
-                    </tr>
-                    <tr style="font-weight:bold;font-size: 15px;" class="heji6"></tr>
-                </table>
-            </td>
-        </tr>
-        <tr id="tab7" style="display:none">
-            <td style="width: 100vw;">
-                <table>
-                    <tr class="thead">
-                        <td>多选</td>
-                        <td>商品代码</td>
-                        <td>商品名称</td>
-                        <td>型号</td>
-                        <td>单位</td>
-                        <td>老花镜度数</td>
-                        <td>镜架尺寸</td>
-                        <td>厂家色号</td>
-                        <td>标准零售价</td>
-                        <td>仓位</td>
-                        <td>库存数量</td>
-                        <td style="display: none">商品条码</td>
-                    </tr>
-                    <tr style="font-weight:bold;font-size: 15px;" class="heji7"></tr>
-                </table>
-            </td>
-        </tr>
-        <tr id="tab8" style="display:none">
-            <td style="width: 100vw;">
-                <table>
-                    <tr class="thead">
-                        <td>多选</td>
-                        <td>商品代码</td>
-                        <td>商品名称</td>
-                        <td>型号</td>
-                        <td>单位</td>
-                        <td>标准零售价</td>
-                        <td>仓位</td>
-                        <td>库存数量</td>
-                        <td style="display: none">商品条码</td>
-                    </tr>
-                    <tr style="font-weight:bold;font-size: 15px;" class="heji8"></tr>
-                </table>
-            </td>
-        </tr>
-        <tr id="tab9" style="display:none">
-            <td style="width: 100vw;">
-                <table>
-                    <tr class="thead">
-                        <td>多选</td>
-                        <td>商品代码</td>
-                        <td>商品名称</td>
-                        <td>型号</td>
-                        <td>单位</td>
-                        <td>标准零售价</td>
-                        <td>仓位</td>
-                        <td>库存数量</td>
-                        <td style="display: none">商品条码</td>
-                    </tr>
-
-                    <tr style="font-weight:bold;font-size: 15px;" class="heji9"></tr>
-                </table>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <table id="exampleTable" data-mobile-responsive="true"></table>
 </div>
 <div th:include="include :: footer"></div>
-<script type="text/javascript" src="/js/appjs/stock/tuihuo/tuihuo.js"></script>
+<script type="text/javascript" src="/js/appjs/stock/tuihuo/getGood.js"></script>
 <script type="text/javascript">
     function choiceBrand() {
         var goodsid = document.getElementById('goodsType').value;
@@ -329,1059 +140,1030 @@
         }
     }
     function getall() {
-        var goodsType = $('#goodsType').val();
-        var mfrsid = $('#mfrsid').val();
-        var positionId = $('#positionId').val();
+        var goodsType=$("#goodsType").val();
+        if (goodsType== ""){
+            $("#classtype").val("") ;
+        }else {
+            $("#classtype").val("0") ;
+        }
+        var goodsType = $("#goodsType option:selected").val();
+        if (goodsType == 3 || goodsType == 4){
+            $("#classtype").val($("input[name='classtype']:checked").val());
+        }
 
+        $('#exampleTable').bootstrapTable('destroy');
 
-        var  goodsNum=$('#goodsNum').val();
-        var  goodsCode=$('#goodsCode').val();
-        var  goodsName=$('#goodsName').val();
-        var  brandname=$('#brandname').val();
         if (goodsType == ""){
             layer.alert("请选择商品类型！")
         }
         if (goodsType == 1) {
-            $(".val").remove();
-            $(".val2").remove();
-            $(".val3").remove();
-            $(".val4").remove();
-            $(".val5").remove();
-            $(".val6").remove();
-            $(".val7").remove();
-            $(".val8").remove();
-            $(".val9").remove();
-            tab1.style = "display: block";
-            tab2.style = "display: none";
-            tab3.style = "display: none";
-            tab4.style = "display: none";
-            tab5.style = "display: none";
-            tab6.style = "display: none";
-            tab7.style = "display: none";
-            tab8.style = "display: none";
-            tab9.style = "display: none";
-            $.ajax({
-                url: '/stock/tuihuo/selectjingjia',
-                type: 'post',
-                dataType: "json",
-                data: {
-                    'mfrsid': mfrsid,
-                    'positionId': positionId,
-                    'goodsType': goodsType,
-                    'goodsNum': goodsNum,
-                    'goodsCode': goodsCode,
-                    'goodsName': goodsName,
-                    'brandname': brandname
+                $('#exampleTable')
+                    .bootstrapTable(
+                        {
+                            method: 'get', // 服务器数据的请求方式 get or post
+                            url: '/stock/tuihuo/selectjingjia', // 服务器数据的加载地址
+                            //	showRefresh : true,
+                            //	showToggle : true,
+                            //	showColumns : true,
+                            iconSize: 'outline',
+                            toolbar: '#exampleToolbar',
+                            striped: true, // 设置为true会有隔行变色效果
+                            dataType: "json", // 服务器返回的数据类型
+                            pagination: true, // 设置为true会在底部显示分页条
+                            // queryParamsType : "limit",
+                            // //设置为limit则会发送符合RESTFull格式的参数
+                            singleSelect: false, // 设置为true将禁止多选
+                            // contentType : "application/x-www-form-urlencoded",
+                            // //发送到服务器的数据编码类型
+                            pageSize: 10, // 如果设置了分页，每页数据条数
+                            pageNumber: 1, // 如果设置了分布，首页页码
+                            //search : true, // 是否显示搜索框
+                            showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                            sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                            queryParams: function (params) {
+                                return {
+                                    //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                    limit: params.limit,
+                                    offset: params.offset,
+                                    mfrsid: $('#mfrsid').val(),
+                                    positionId : $("#positionId").val(),
+                                    goodsType : $("#goodsType").val(),
+                                    goodsNum : $("#goodsNum").val(),
+                                    goodsCode : $("#goodsCode").val(),
+                                    goodsName : $("#goodsName").val(),
+                                    brandname : $("#brandname").val(),
+                                    classtype : $("#classtype").val()
+                                };
+                            },
+                            columns: [
+                                {
+                                    checkbox: true
+                                },
+                                {
+                                    field : 'goodsNum',
+                                    title : '商品代码'
+                                },
+                                {
+                                    field: 'goodsName',
+                                    title: '商品名称'
+                                },
 
+                                {
+                                    field: 'factory',
+                                    title: '型号'
+                                },
 
-                },
-                success: function (xml) {
-                    for (var i = 0; i < xml.length; i++) {
-                        if(null == xml[i].goodsNum){
-                            xml[i].goodsNum="";
-                        }
-                        if(null == xml[i].goodsName){
-                            xml[i].goodsName="";
-                        }
-                         if(null == xml[i].factory){
-                            xml[i].factory="";
-                        }
-                         if(null == xml[i].unit){
-                            xml[i].unit="";
-                        }
-                         if(null == xml[i].producFactorycolor){
-                            xml[i].producFactorycolor="";
-                        }
-                        if(null == xml[i].materialname){
-                            xml[i].materialname="";
-                        }
-                        if(null == xml[i].size){
-                            xml[i].size="";
-                        }
-                        if(null == xml[i].retailPrice){
-                            xml[i].retailPrice="";
-                        }
-                        if(null == xml[i].positionName){
-                            xml[i].positionName="";
-                        }
-                        if(null == xml[i].goodsCount){
-                            xml[i].goodsCount="";
-                        }
-                        if(null == xml[i].goodsCode){
-                            xml[i].goodsCode="";
-                        }
-                        if(null == xml[i].goodsxinxiid){
-                            xml[i].goodsxinxiid="";
-                        }
-
-                        $(".heji1").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
-                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
-                            "<td name='producFactorycolor'>" + xml[i].producFactorycolor + "</td>\n" +
-                            "<td name='materialname'>" + xml[i].materialname + "</td>\n" +
-                            "<td name='size'>" + xml[i].size + "</td>\n" +
-                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                            "</tr>");
-                    }
-                }
-            })
+                                {
+                                    field: 'unit',
+                                    title: '单位'
+                                },
+                                {
+                                    field: 'producFactorycolor',
+                                    title: '厂家色号'
+                                },
+                                {
+                                    field: 'materialname',
+                                    title: '镜架材质'
+                                },
+                                {
+                                    field: 'size',
+                                    title: '镜架尺寸'
+                                },
+                                {
+                                    field: 'retailPrice',
+                                    title: '标准零售价'
+                                },
+                                {
+                                    field: 'positionName',
+                                    title: '仓位'
+                                },
+                                {
+                                    field: 'goodsCount',
+                                    title: '库存数量'
+                                },
+                                {
+                                    field: 'goodsCode',
+                                    title: '商品条码'
+                                }
+                            ]
+                        });
         } else if (goodsType == 2) {
-            $(".val").remove();
-            $(".val2").remove();
-            $(".val3").remove();
-            $(".val4").remove();
-            $(".val5").remove();
-            $(".val6").remove();
-            $(".val7").remove();
-            $(".val8").remove();
-            $(".val9").remove();
-            tab1.style = "display: none";
-            tab2.style = "display: block";
-            tab3.style = "display: none";
-            tab4.style = "display: none";
-            tab5.style = "display: none";
-            tab6.style = "display: none";
-            tab7.style = "display: none";
-            tab8.style = "display: none";
-            tab9.style = "display: none";
-            $.ajax({
-                url: '/stock/tuihuo/selectpeijian',
-                type: 'post',
-                dataType: "json",
-                data: {
-                    'mfrsid': mfrsid,
-                    'positionId': positionId,
-                    'goodsType': goodsType
-
-                },
-                success: function (xml) {
-                    for (var i = 0; i < xml.length; i++) {
-                        if(null == xml[i].goodsNum){
-                            xml[i].goodsNum="";
-                        }
-                        if(null == xml[i].goodsName){
-                            xml[i].goodsName="";
-                        }
-                        if(null == xml[i].factory){
-                            xml[i].factory="";
-                        }
-                        if(null == xml[i].unit){
-                            xml[i].unit="";
-                        }
-                        if(null == xml[i].partsStyle){
-                            xml[i].partsStyle="";
-                        }
-                        if(null == xml[i].retailPrice){
-                            xml[i].retailPrice="";
-                        }
-                        if(null == xml[i].positionName){
-                            xml[i].positionName="";
-                        }
-                        if(null == xml[i].goodsCount){
-                            xml[i].goodsCount="";
-                        }
-                        if(null == xml[i].goodsCode){
-                            xml[i].goodsCode="";
-                        }
-                        if(null == xml[i].goodsxinxiid){
-                            xml[i].goodsxinxiid="";
-                        }
-
-                        $(".heji2").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
-                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
-                            "<td name='partsStyle'>" + xml[i].partsStyle + "</td>\n" +
-                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                            "</tr>");
-                    }
-                }
-            })
+            $('#exampleTable')
+                .bootstrapTable(
+                    {
+                        method: 'get', // 服务器数据的请求方式 get or post
+                        url: '/stock/tuihuo/selectpeijian', // 服务器数据的加载地址
+                        //	showRefresh : true,
+                        //	showToggle : true,
+                        //	showColumns : true,
+                        iconSize: 'outline',
+                        toolbar: '#exampleToolbar',
+                        striped: true, // 设置为true会有隔行变色效果
+                        dataType: "json", // 服务器返回的数据类型
+                        pagination: true, // 设置为true会在底部显示分页条
+                        // queryParamsType : "limit",
+                        // //设置为limit则会发送符合RESTFull格式的参数
+                        singleSelect: false, // 设置为true将禁止多选
+                        // contentType : "application/x-www-form-urlencoded",
+                        // //发送到服务器的数据编码类型
+                        pageSize: 10, // 如果设置了分页，每页数据条数
+                        pageNumber: 1, // 如果设置了分布，首页页码
+                        //search : true, // 是否显示搜索框
+                        showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                        sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                        queryParams: function (params) {
+                            return {
+                                //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                limit: params.limit,
+                                offset: params.offset,
+                                mfrsid: $('#mfrsid').val(),
+                                positionId : $("#positionId").val(),
+                                goodsType : $("#goodsType").val(),
+                                goodsNum : $("#goodsNum").val(),
+                                goodsCode : $("#goodsCode").val(),
+                                goodsName : $("#goodsName").val(),
+                                brandname : $("#brandname").val(),
+                                classtype : $("#classtype").val()
+                            };
+                        },
+                        columns: [
+                            {
+                                checkbox: true
+                            },
+                            {
+                                field : 'goodsNum',
+                                title : '商品代码'
+                            },
+                            {
+                                field: 'goodsName',
+                                title: '商品名称'
+                            },
+                            {
+                                field: 'factory',
+                                title: '型号'
+                            },
+                            {
+                                field: 'unit',
+                                title: '单位'
+                            },
+                            {
+                                field: 'partsStyle',
+                                title: '配件型 '
+                            },
+                            {
+                                field: 'retailPrice',
+                                title: '标准零售价'
+                            },
+                            {
+                                field: 'positionName',
+                                title: '仓位'
+                            },
+                            {
+                                field: 'goodsCount',
+                                title: '库存数量'
+                            },
+                            {
+                                field: 'goodsCode',
+                                title: '商品条码'
+                            }
+                        ]
+                    });
         } else if (goodsType == 3) {
-
-            $(".val").remove();
-            $(".val2").remove();
-            $(".val3").remove();
-            $(".val4").remove();
-            $(".val5").remove();
-            $(".val6").remove();
-            $(".val7").remove();
-            $(".val8").remove();
-            $(".val9").remove();
-            tab1.style = "display: none";
-            tab2.style = "display: none";
-            tab3.style = "display: block";
-            tab4.style = "display: none";
-            tab5.style = "display: none";
-            tab6.style = "display: none";
-            tab7.style = "display: none";
-            tab8.style = "display: none";
-            tab9.style = "display: none";
-            var classtype =$('input:radio:checked').val();
-            if (classtype == 1){
-                $.ajax({
-                    url: '/stock/tuihuo/selectJpcp',
-                    type: 'post',
-                    dataType: "json",
-                    data: {
-                        'mfrsid': mfrsid,
-                        'positionId': positionId,
-                        'goodsType': goodsType,
-                        'classtype':classtype,
-                        'goodsNum': goodsNum,
-                        'goodsCode': goodsCode,
-                        'goodsName': goodsName,
-                        'brandname': brandname
-
-                    },
-                    success: function (xml) {
-                        for (var i = 0; i < xml.length; i++) {
-                            if(null == xml[i].goodsNum){
-                                xml[i].goodsNum="";
-                            }
-                            if(null == xml[i].goodsName){
-                                xml[i].goodsName="";
-                            }
-                            if(null == xml[i].factory){
-                                xml[i].factory="";
-                            }
-                            if(null == xml[i].unit){
-                                xml[i].unit="";
-                            }
-                            if(null == xml[i].sph){
-                                xml[i].sph="";
-                            }
-                            if(null == xml[i].cyl){
-                                xml[i].cyl="";
-                            }
-                            if(null == xml[i].lightbelow){
-                                xml[i].lightbelow="";
-                            }
-                            if(null == xml[i].refractivityvalue){
-                                xml[i].refractivityvalue="";
-                            }
-                            if(null == xml[i].lightName){
-                                xml[i].lightName="";
-                            }
-                            if(null == xml[i].gradualName){
-                                xml[i].gradualName="";
-                            }
-                            if(null == xml[i].functionName){
-                                xml[i].functionName="";
-                            }
-
-
-                            if(null == xml[i].retailPrice){
-                                xml[i].retailPrice="";
-                            }
-                            if(null == xml[i].positionName){
-                                xml[i].positionName="";
-                            }
-                            if(null == xml[i].goodsCount){
-                                xml[i].goodsCount="";
-                            }
-                            if(null == xml[i].goodsCode){
-                                xml[i].goodsCode="";
-                            }
-                            if(null == xml[i].goodsxinxiid){
-                                xml[i].goodsxinxiid="";
-                            }
-
-                            $(".heji3").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                                "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                                "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                                "<td name='unit'>" + xml[i].unit + "</td>\n" +
-                                "<td name='factory' style='display: none'>"+ "</td>\n" +
-                                "<td name='sph'>" + xml[i].sph + "</td>\n" +
-                                "<td name='cyl'>" + xml[i].cyl + "</td>\n" +
-                                "<td name='lightbelow'>" + xml[i].lightbelow + "</td>\n" +
-                                "<td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
-                                "<td name='lightName'>" + xml[i].lightName + "</td>\n" +
-                                "<td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
-                                "<td name='functionName'>" + xml[i].functionName + "</td>\n" +
-
-                                "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                                "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                                "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                                "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                                "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                                "</tr>");
-                        }
-                    }
-                })
-            } else if (classtype ==2){
-                $.ajax({
-                    url: '/stock/tuihuo/selectJpdz',
-                    type: 'post',
-                    dataType: "json",
-                    data: {
-                        'mfrsid': mfrsid,
-                        'positionId': positionId,
-                        'goodsType': goodsType,
-                        'classtype':classtype,
-                        'goodsNum': goodsNum,
-                        'goodsCode': goodsCode,
-                        'goodsName': goodsName,
-                        'brandname': brandname
-
-                    },
-                    success: function (xml) {
-                        for (var i = 0; i < xml.length; i++) {
-                            if(null == xml[i].goodsNum){
-                                xml[i].goodsNum="";
-                            }
-                            if(null == xml[i].goodsName){
-                                xml[i].goodsName="";
-                            }
-                            if(null == xml[i].factory){
-                                xml[i].factory="";
-                            }
-                            if(null == xml[i].unit){
-                                xml[i].unit="";
-                            }
-                            if(null == xml[i].sphUp){
-                                xml[i].sphUp="";
-                            }
-                             if(null == xml[i].sphDown){
-                                xml[i].sphDown="";
-                            }
-
-                            if(null == xml[i].cylUp){
-                                xml[i].cylUp="";
-                            }
-                            if(null == xml[i].cylDown){
-                                xml[i].cylDown="";
-                            }
-
-                            if(null == xml[i].lightbelowRight){
-                                xml[i].lightbelowRight="";
-                            }
-                            if(null == xml[i].lightbelowLeft){
-                                xml[i].lightbelowLeft="";
-                            }
-
-                            if(null == xml[i].refractivityvalue){
-                                xml[i].refractivityvalue="";
-                            }
-                            if(null == xml[i].lightName){
-                                xml[i].lightName="";
-                            }
-                            if(null == xml[i].gradualName){
-                                xml[i].gradualName="";
-                            }
-                            if(null == xml[i].functionName){
-                                xml[i].functionName="";
-                            }
-
-
-                            if(null == xml[i].retailPrice){
-                                xml[i].retailPrice="";
-                            }
-                            if(null == xml[i].positionName){
-                                xml[i].positionName="";
-                            }
-                            if(null == xml[i].goodsCount){
-                                xml[i].goodsCount="";
-                            }
-                            if(null == xml[i].goodsCode){
-                                xml[i].goodsCode="";
-                            }
-                            if(null == xml[i].goodsxinxiid){
-                                xml[i].goodsxinxiid="";
-                            }
-
-                            $(".heji3").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                                "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                                "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                                "<td name='unit'>" + xml[i].unit + "</td>\n" +
-                                "<td name='factory' style='display: none'>"+ "</td>\n" +
-                                "<td name='sph'>" + xml[i].sphUp+ xml[i].sphDown + "</td>\n" +
-                                "<td name='cyl'>" + xml[i].cylUp+ xml[i].cylDown+ "</td>\n" +
-                                "<td name='lightbelow'>" + xml[i].lightbelowRight+ xml[i].lightbelowLeft + "</td>\n" +
-                                "<td name='refractivityvalue'>" + xml[i].refractivityvalue + "</td>\n" +
-                                "<td name='lightName'>" + xml[i].lightName + "</td>\n" +
-                                "<td name='gradualName'>" + xml[i].gradualName + "</td>\n" +
-                                "<td name='functionName'>" + xml[i].functionName + "</td>\n" +
-
-                                "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                                "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                                "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                                "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                                "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                                "</tr>");
-                        }
-                    }
-                })
+            var classtype = $('input:radio:checked').val();
+            if (classtype == 1) {
+                $('#exampleTable')
+                    .bootstrapTable(
+                        {
+                            method: 'get', // 服务器数据的请求方式 get or post
+                            url: '/stock/tuihuo/selectJpcp', // 服务器数据的加载地址
+                            //	showRefresh : true,
+                            //	showToggle : true,
+                            //	showColumns : true,
+                            iconSize: 'outline',
+                            toolbar: '#exampleToolbar',
+                            striped: true, // 设置为true会有隔行变色效果
+                            dataType: "json", // 服务器返回的数据类型
+                            pagination: true, // 设置为true会在底部显示分页条
+                            // queryParamsType : "limit",
+                            // //设置为limit则会发送符合RESTFull格式的参数
+                            singleSelect: false, // 设置为true将禁止多选
+                            // contentType : "application/x-www-form-urlencoded",
+                            // //发送到服务器的数据编码类型
+                            pageSize: 10, // 如果设置了分页，每页数据条数
+                            pageNumber: 1, // 如果设置了分布，首页页码
+                            //search : true, // 是否显示搜索框
+                            showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                            sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                            queryParams: function (params) {
+                                return {
+                                    //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                    limit: params.limit,
+                                    offset: params.offset,
+                                    mfrsid: $('#mfrsid').val(),
+                                    positionId: $("#positionId").val(),
+                                    goodsType: $("#goodsType").val(),
+                                    goodsNum: $("#goodsNum").val(),
+                                    goodsCode: $("#goodsCode").val(),
+                                    goodsName: $("#goodsName").val(),
+                                    brandname: $("#brandname").val(),
+                                    classtype : $("#classtype").val()
+                                };
+                            },
+                            columns: [
+                                {
+                                    checkbox: true
+                                },
+                                {
+                                    field: 'goodsNum',
+                                    title: '商品代码'
+                                },
+                                {
+                                    field: 'goodsName',
+                                    title: '商品名称'
+                                },
+                                // {
+                                //     field: 'factory',
+                                //     title: '型号'
+                                // },
+                                {
+                                    field: 'unit',
+                                    title: '单位'
+                                },
+                                {
+                                    field: 'sph',
+                                    title: '球镜 '
+                                },
+                                {
+                                    field: 'cyl',
+                                    title: '柱镜 '
+                                },
+                                {
+                                    field: 'lightbelow',
+                                    title: '下加光 '
+                                },
+                                {
+                                    field: 'refractivityvalue',
+                                    title: '折射率 '
+                                },
+                                {
+                                    field: 'lightName',
+                                    title: '光度分类 '
+                                },
+                                {
+                                    field: 'gradualName',
+                                    title: '渐进片分类 '
+                                },
+                                {
+                                    field: 'functionName',
+                                    title: '镜片功能 '
+                                },
+                                {
+                                    field: 'retailPrice',
+                                    title: '标准零售价'
+                                },
+                                {
+                                    field: 'positionName',
+                                    title: '仓位'
+                                },
+                                {
+                                    field: 'goodsCount',
+                                    title: '库存数量'
+                                },
+                                {
+                                    field: 'goodsCode',
+                                    title: '商品条码'
+                                }
+                            ]
+                        });
+            } else if (classtype == 2) {
+                $('#exampleTable')
+                    .bootstrapTable(
+                        {
+                            method: 'get', // 服务器数据的请求方式 get or post
+                            url: '/stock/tuihuo/selectJpdz', // 服务器数据的加载地址
+                            //	showRefresh : true,
+                            //	showToggle : true,
+                            //	showColumns : true,
+                            iconSize: 'outline',
+                            toolbar: '#exampleToolbar',
+                            striped: true, // 设置为true会有隔行变色效果
+                            dataType: "json", // 服务器返回的数据类型
+                            pagination: true, // 设置为true会在底部显示分页条
+                            // queryParamsType : "limit",
+                            // //设置为limit则会发送符合RESTFull格式的参数
+                            singleSelect: false, // 设置为true将禁止多选
+                            // contentType : "application/x-www-form-urlencoded",
+                            // //发送到服务器的数据编码类型
+                            pageSize: 10, // 如果设置了分页，每页数据条数
+                            pageNumber: 1, // 如果设置了分布，首页页码
+                            //search : true, // 是否显示搜索框
+                            showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                            sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                            queryParams: function (params) {
+                                return {
+                                    //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                    limit: params.limit,
+                                    offset: params.offset,
+                                    mfrsid: $('#mfrsid').val(),
+                                    positionId: $("#positionId").val(),
+                                    goodsType: $("#goodsType").val(),
+                                    goodsNum: $("#goodsNum").val(),
+                                    goodsCode: $("#goodsCode").val(),
+                                    goodsName: $("#goodsName").val(),
+                                    brandname: $("#brandname").val(),
+                                    classtype : $("#classtype").val()
+                                };
+                            },
+                            columns: [
+                                {
+                                    checkbox: true
+                                },
+                                {
+                                    field: 'goodsNum',
+                                    title: '商品代码'
+                                },
+                                {
+                                    field: 'goodsName',
+                                    title: '商品名称'
+                                },
+                                // {
+                                //     field: 'factory',
+                                //     title: '型号'
+                                // },
+                                {
+                                    field: 'unit',
+                                    title: '单位'
+                                },
+                                {
+                                    field: 'sph',
+                                    title: '球镜 '
+                                },
+                                {
+                                    field: 'cyl',
+                                    title: '柱镜 '
+                                },
+                                {
+                                    field: 'lightbelow',
+                                    title: '下加光 '
+                                },
+                                {
+                                    field: 'refractivityvalue',
+                                    title: '折射率 '
+                                },
+                                {
+                                    field: 'lightName',
+                                    title: '光度分类 '
+                                },
+                                {
+                                    field: 'gradualName',
+                                    title: '渐进片分类 '
+                                },
+                                {
+                                    field: 'functionName',
+                                    title: '镜片功能 '
+                                },
+                                {
+                                    field: 'retailPrice',
+                                    title: '标准零售价'
+                                },
+                                {
+                                    field: 'positionName',
+                                    title: '仓位'
+                                },
+                                {
+                                    field: 'goodsCount',
+                                    title: '库存数量'
+                                },
+                                {
+                                    field: 'goodsCode',
+                                    title: '商品条码'
+                                }
+                            ]
+                        });
             }
-
         } else if (goodsType == 4) {
-            $(".val").remove();
-            $(".val2").remove();
-            $(".val3").remove();
-            $(".val4").remove();
-            $(".val5").remove();
-            $(".val6").remove();
-            $(".val7").remove();
-            $(".val8").remove();
-            $(".val9").remove();
-            tab1.style = "display: none";
-            tab2.style = "display: none";
-            tab3.style = "display: none";
-            tab4.style = "display: block";
-            tab5.style = "display: none";
-            tab6.style = "display: none";
-            tab7.style = "display: none";
-            tab8.style = "display: none";
-            tab9.style = "display: none";
-            var classtype =$('input:radio:checked').val();
-            if (classtype == 1){
-                $.ajax({
-                    url: '/stock/tuihuo/selectYxcp',
-                    type: 'post',
-                    dataType: "json",
-                    data: {
-                        'mfrsid': mfrsid,
-                        'positionId': positionId,
-                        'goodsType': goodsType,
-                        'classtype':classtype,
-                        'goodsNum': goodsNum,
-                        'goodsCode': goodsCode,
-                        'goodsName': goodsName,
-                        'brandname': brandname
-                    },
-                    success: function (xml) {
-                        for (var i = 0; i < xml.length; i++) {
-                            if(null == xml[i].goodsNum){
-                                xml[i].goodsNum="";
-                            }
-                            if(null == xml[i].goodsName){
-                                xml[i].goodsName="";
-                            }
-                            if(null == xml[i].factory){
-                                xml[i].factory="";
-                            }
-                            if(null == xml[i].unit){
-                                xml[i].unit="";
-                            }
-                            if(null == xml[i].sph){
-                                xml[i].sph="";
-                            }
-                            if(null == xml[i].cyl){
-                                xml[i].cyl="";
-                            }
-
-
-                            if(null == xml[i].curvature){
-                                xml[i].curvature="";
-                            }
-                            if(null == xml[i].diameter){
-                                xml[i].diameter="";
-                            }
-
-                            if(null == xml[i].usageName){
-                                xml[i].usageName="";
-                            }
-
-                            if(null == xml[i].typeName){
-                                xml[i].typeName="";
-                            }
-
-                            if(null == xml[i].retailPrice){
-                                xml[i].retailPrice="";
-                            }
-                            if(null == xml[i].positionName){
-                                xml[i].positionName="";
-                            }
-                            if(null == xml[i].goodsCount){
-                                xml[i].goodsCount="";
-                            }
-                            if(null == xml[i].goodsCode){
-                                xml[i].goodsCode="";
-                            }
-                            if(null == xml[i].goodsxinxiid){
-                                xml[i].goodsxinxiid="";
-                            }
-
-                            $(".heji4").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                                "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                                "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                                "<td name='unit'>" + xml[i].unit + "</td>\n" +
-                                "<td name='factory' style='display: none'>"+ "</td>\n" +
-                                "<td name='sph'>" + xml[i].sph + "</td>\n" +
-                                "<td name='cyl'>" + xml[i].cyl + "</td>\n" +
-                                "<td name='curvature'>" + xml[i].curvature + "</td>\n" +
-
-                                "<td name='diameter'>" + xml[i].diameter + "</td>\n" +
-                                "<td name='usageName'>" + xml[i].usageName + "</td>\n" +
-
-                                "<td name='typeName'>" + xml[i].typeName + "</td>\n" +
-
-                                "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                                "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                                "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                                "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                                "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                                "</tr>");
-                        }
-                    }
-                })
-            } else if (classtype ==2){
-                $.ajax({
-                    url: '/stock/tuihuo/selectYxdz',
-                    type: 'post',
-                    dataType: "json",
-                    data: {
-                        'mfrsid': mfrsid,
-                        'positionId': positionId,
-                        'goodsType': goodsType,
-                        'classtype':classtype,
-                        'goodsNum': goodsNum,
-                        'goodsCode': goodsCode,
-                        'goodsName': goodsName,
-                        'brandname': brandname
-
-
-                    },
-                    success: function (xml) {
-                        for (var i = 0; i < xml.length; i++) {
-                            if(null == xml[i].goodsNum){
-                                xml[i].goodsNum="";
-                            }
-                            if(null == xml[i].goodsName){
-                                xml[i].goodsName="";
-                            }
-                            if(null == xml[i].factory){
-                                xml[i].factory="";
-                            }
-                            if(null == xml[i].unit){
-                                xml[i].unit="";
-                            }
-                            if(null == xml[i].sphUp){
-                                xml[i].sphUp="";
-                            }
-                            if(null == xml[i].sphDown){
-                                xml[i].sphDown="";
-                            }
-
-                            if(null == xml[i].cylUp){
-                                xml[i].cylUp="";
-                            }
-                            if(null == xml[i].cylDown){
-                                xml[i].cylDown="";
-                            }
-
-
-                            if(null == xml[i].curvatureOne){
-                                xml[i].curvatureOne="";
-                            }
-                            if(null == xml[i].curvatureYi){
-                                xml[i].curvatureYi="";
-                            }
-                            if(null == xml[i].diameterOne){
-                                xml[i].diameterOne="";
-                            }
-                            if(null == xml[i].diameterYi){
-                                xml[i].diameterYi="";
-                            }
-
-                            if(null == xml[i].usageName){
-                                xml[i].usageName="";
-                            }
-
-                            if(null == xml[i].typeName){
-                                xml[i].typeName="";
-                            }
-
-                            if(null == xml[i].retailPrice){
-                                xml[i].retailPrice="";
-                            }
-                            if(null == xml[i].positionName){
-                                xml[i].positionName="";
-                            }
-                            if(null == xml[i].goodsCount){
-                                xml[i].goodsCount="";
-                            }
-                            if(null == xml[i].goodsCode){
-                                xml[i].goodsCode="";
-                            }
-                            if(null == xml[i].goodsxinxiid){
-                                xml[i].goodsxinxiid="";
-                            }
-                            $(".heji4").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                                "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                                "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                                "<td name='unit'>" + xml[i].unit + "</td>\n" +
-                                "<td name='factory' style='display: none'>"+ "</td>\n" +
-                                "<td name='sph'>" + xml[i].sphUp +xml[i].sphDown+ "</td>\n" +
-                                "<td name='cyl'>" + xml[i].cylUp + xml[i].cylDown+"</td>\n" +
-                                "<td name='curvature'>" + xml[i].curvatureOne + xml[i].curvatureYi+"</td>\n" +
-
-                                "<td name='diameter'>" + xml[i].diameterOne +xml[i].diameterYi+ "</td>\n" +
-                                "<td name='usageName'>" + xml[i].usageName + "</td>\n" +
-
-                                "<td name='typeName'>" + xml[i].typeName + "</td>\n" +
-
-                                "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                                "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                                "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                                "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                                "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                                "</tr>");
-                        }
-                    }
-                })
-            }
-        } else if (goodsType == 5) {
-            $(".val").remove();
-            $(".val2").remove();
-            $(".val3").remove();
-            $(".val4").remove();
-            $(".val5").remove();
-            $(".val6").remove();
-            $(".val7").remove();
-            $(".val8").remove();
-            $(".val9").remove();
-            tab1.style = "display: none";
-            tab2.style = "display: none";
-            tab3.style = "display: none";
-            tab4.style = "display: none";
-            tab5.style = "display: block";
-            tab6.style = "display: none";
-            tab7.style = "display: none";
-            tab8.style = "display: none";
-            tab9.style = "display: none";
-            $.ajax({
-                url: '/stock/tuihuo/selectHly',
-                type: 'post',
-                dataType: "json",
-                data: {
-                    'mfrsid': mfrsid,
-                    'positionId': positionId,
-                    'goodsType': goodsType,
-                    'goodsNum': goodsNum,
-                    'goodsCode': goodsCode,
-                    'goodsName': goodsName,
-                    'brandname': brandname
-
-                },
-                success: function (xml) {
-                    for (var i = 0; i < xml.length; i++) {
-                        if(null == xml[i].goodsNum){
-                            xml[i].goodsNum="";
-                        }
-                        if(null == xml[i].goodsName){
-                            xml[i].goodsName="";
-                        }
-                        if(null == xml[i].factory){
-                            xml[i].factory="";
-                        }
-                        if(null == xml[i].unit){
-                            xml[i].unit="";
-                        }
-                        if(null == xml[i].mainCapacity){
-                            xml[i].mainCapacity="";
-                        }
-                        if(null == xml[i].secondCapacity){
-                            xml[i].secondCapacity="";
-                        }
-                        if(null == xml[i].retailPrice){
-                            xml[i].retailPrice="";
-                        }
-                        if(null == xml[i].positionName){
-                            xml[i].positionName="";
-                        }
-                        if(null == xml[i].goodsCount){
-                            xml[i].goodsCount="";
-                        }
-                        if(null == xml[i].goodsCode){
-                            xml[i].goodsCode="";
-                        }
-                        if(null == xml[i].goodsxinxiid){
-                            xml[i].goodsxinxiid="";
-                        }
-
-                        $(".heji5").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
-                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
-
-                            "<td name='mainCapacity'>" + xml[i].mainCapacity + "</td>\n" +
-                            "<td name='secondCapacity'>" + xml[i].secondCapacity + "</td>\n" +
-
-                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                            "</tr>");
-                    }
+                var classtype = $('input:radio:checked').val();
+                if (classtype == 1) {
+                    $('#exampleTable')
+                        .bootstrapTable(
+                            {
+                                method: 'get', // 服务器数据的请求方式 get or post
+                                url: '/stock/tuihuo/selectYxcp', // 服务器数据的加载地址
+                                //	showRefresh : true,
+                                //	showToggle : true,
+                                //	showColumns : true,
+                                iconSize: 'outline',
+                                toolbar: '#exampleToolbar',
+                                striped: true, // 设置为true会有隔行变色效果
+                                dataType: "json", // 服务器返回的数据类型
+                                pagination: true, // 设置为true会在底部显示分页条
+                                // queryParamsType : "limit",
+                                // //设置为limit则会发送符合RESTFull格式的参数
+                                singleSelect: false, // 设置为true将禁止多选
+                                // contentType : "application/x-www-form-urlencoded",
+                                // //发送到服务器的数据编码类型
+                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageNumber: 1, // 如果设置了分布，首页页码
+                                //search : true, // 是否显示搜索框
+                                showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                                sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                                queryParams: function (params) {
+                                    return {
+                                        //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                        limit: params.limit,
+                                        offset: params.offset,
+                                        mfrsid: $('#mfrsid').val(),
+                                        positionId: $("#positionId").val(),
+                                        goodsType: $("#goodsType").val(),
+                                        goodsNum: $("#goodsNum").val(),
+                                        goodsCode: $("#goodsCode").val(),
+                                        goodsName: $("#goodsName").val(),
+                                        brandname: $("#brandname").val(),
+                                        classtype : $("#classtype").val()
+                                    };
+                                },
+                                columns: [
+                                    {
+                                        checkbox: true
+                                    },
+                                    {
+                                        field: 'goodsNum',
+                                        title: '商品代码'
+                                    },
+                                    {
+                                        field: 'goodsName',
+                                        title: '商品名称'
+                                    },
+                                    // {
+                                    //     field: 'factory',
+                                    //     title: '型号'
+                                    // },
+                                    {
+                                        field: 'unit',
+                                        title: '单位'
+                                    },
+                                    {
+                                        field: 'sph',
+                                        title: '球镜 '
+                                    },
+                                    {
+                                        field: 'cyl',
+                                        title: '柱镜 '
+                                    },
+                                    {
+                                        field: 'curvature',
+                                        title: '曲率 '
+                                    },
+                                    {
+                                        field: 'diameter',
+                                        title: '直径 '
+                                    },
+                                    {
+                                        field: 'usageName',
+                                        title: '使用类型 '
+                                    },
+                                    {
+                                        field: 'typeName',
+                                        title: '抛弃型分类 '
+                                    },
+                                    {
+                                        field: 'retailPrice',
+                                        title: '标准零售价'
+                                    },
+                                    {
+                                        field: 'positionName',
+                                        title: '仓位'
+                                    },
+                                    {
+                                        field: 'goodsCount',
+                                        title: '库存数量'
+                                    },
+                                    {
+                                        field: 'goodsCode',
+                                        title: '商品条码'
+                                    }
+                                ]
+                            });
+                } else if (classtype == 2) {
+                    $('#exampleTable')
+                        .bootstrapTable(
+                            {
+                                method: 'get', // 服务器数据的请求方式 get or post
+                                url: '/stock/tuihuo/selectYxdz', // 服务器数据的加载地址
+                                //	showRefresh : true,
+                                //	showToggle : true,
+                                //	showColumns : true,
+                                iconSize: 'outline',
+                                toolbar: '#exampleToolbar',
+                                striped: true, // 设置为true会有隔行变色效果
+                                dataType: "json", // 服务器返回的数据类型
+                                pagination: true, // 设置为true会在底部显示分页条
+                                // queryParamsType : "limit",
+                                // //设置为limit则会发送符合RESTFull格式的参数
+                                singleSelect: false, // 设置为true将禁止多选
+                                // contentType : "application/x-www-form-urlencoded",
+                                // //发送到服务器的数据编码类型
+                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageNumber: 1, // 如果设置了分布，首页页码
+                                //search : true, // 是否显示搜索框
+                                showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                                sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                                queryParams: function (params) {
+                                    return {
+                                        //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                        limit: params.limit,
+                                        offset: params.offset,
+                                        mfrsid: $('#mfrsid').val(),
+                                        positionId: $("#positionId").val(),
+                                        goodsType: $("#goodsType").val(),
+                                        goodsNum: $("#goodsNum").val(),
+                                        goodsCode: $("#goodsCode").val(),
+                                        goodsName: $("#goodsName").val(),
+                                        brandname: $("#brandname").val(),
+                                        classtype : $("#classtype").val()
+                                    };
+                                },
+                                columns: [
+                                    {
+                                        checkbox: true
+                                    },
+                                    {
+                                        field: 'goodsNum',
+                                        title: '商品代码'
+                                    },
+                                    {
+                                        field: 'goodsName',
+                                        title: '商品名称'
+                                    },
+                                    // {
+                                    //     field: 'factory',
+                                    //     title: '型号'
+                                    // },
+                                    {
+                                        field: 'unit',
+                                        title: '单位'
+                                    },
+                                    {
+                                        field: 'sph',
+                                        title: '球镜 '
+                                    },
+                                    {
+                                        field: 'cyl',
+                                        title: '柱镜 '
+                                    },
+                                    {
+                                        field: 'curvature',
+                                        title: '曲率 '
+                                    },
+                                    {
+                                        field: 'diameter',
+                                        title: '直径 '
+                                    },
+                                    {
+                                        field: 'usageName',
+                                        title: '使用类型 '
+                                    },
+                                    {
+                                        field: 'typeName',
+                                        title: '抛弃型分类 '
+                                    },
+                                    {
+                                        field: 'retailPrice',
+                                        title: '标准零售价'
+                                    },
+                                    {
+                                        field: 'positionName',
+                                        title: '仓位'
+                                    },
+                                    {
+                                        field: 'goodsCount',
+                                        title: '库存数量'
+                                    },
+                                    {
+                                        field: 'goodsCode',
+                                        title: '商品条码'
+                                    }
+                                ]
+                            });
                 }
-            })
+        }else if (goodsType == 5) {
+                    $('#exampleTable')
+                        .bootstrapTable(
+                            {
+                                method: 'get', // 服务器数据的请求方式 get or post
+                                url: '/stock/tuihuo/selectHly',// 服务器数据的加载地址
+                                //	showRefresh : true,
+                                //	showToggle : true,
+                                //	showColumns : true,
+                                iconSize: 'outline',
+                                toolbar: '#exampleToolbar',
+                                striped: true, // 设置为true会有隔行变色效果
+                                dataType: "json", // 服务器返回的数据类型
+                                pagination: true, // 设置为true会在底部显示分页条
+                                // queryParamsType : "limit",
+                                // //设置为limit则会发送符合RESTFull格式的参数
+                                singleSelect: false, // 设置为true将禁止多选
+                                // contentType : "application/x-www-form-urlencoded",
+                                // //发送到服务器的数据编码类型
+                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageNumber: 1, // 如果设置了分布，首页页码
+                                //search : true, // 是否显示搜索框
+                                showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                                sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                                queryParams: function (params) {
+                                    return {
+                                        //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                        limit: params.limit,
+                                        offset: params.offset,
+                                        mfrsid: $('#mfrsid').val(),
+                                        positionId: $("#positionId").val(),
+                                        goodsType: $("#goodsType").val(),
+                                        goodsNum: $("#goodsNum").val(),
+                                        goodsCode: $("#goodsCode").val(),
+                                        goodsName: $("#goodsName").val(),
+                                        brandname: $("#brandname").val(),
+                                        classtype : $("#classtype").val()
+                                    };
+                                },
+                                columns: [
+                                    {
+                                        checkbox: true
+                                    },
+                                    {
+                                        field: 'goodsNum',
+                                        title: '商品代码'
+                                    },
+                                    {
+                                        field: 'goodsName',
+                                        title: '商品名称'
+                                    },
+                                    {
+                                        field: 'factory',
+                                        title: '型号'
+                                    },
+                                    {
+                                        field: 'unit',
+                                        title: '单位'
+                                    },
+                                    {
+                                        field: 'mainCapacity',
+                                        title: '主容量 '
+                                    },
+                                    {
+                                        field: 'secondCapacity',
+                                        title: '次容量 '
+                                    },
+                                    {
+                                        field: 'retailPrice',
+                                        title: '标准零售价'
+                                    },
+                                    {
+                                        field: 'positionName',
+                                        title: '仓位'
+                                    },
+                                    {
+                                        field: 'goodsCount',
+                                        title: '库存数量'
+                                    },
+                                    {
+                                        field: 'goodsCode',
+                                        title: '商品条码'
+                                    }
+                                ]
+                            });
         } else if (goodsType == 6) {
-            $(".val").remove();
-            $(".val2").remove();
-            $(".val3").remove();
-            $(".val4").remove();
-            $(".val5").remove();
-            $(".val6").remove();
-            $(".val7").remove();
-            $(".val8").remove();
-            $(".val9").remove();
-            tab1.style = "display: none";
-            tab2.style = "display: none";
-            tab3.style = "display: none";
-            tab4.style = "display: none";
-            tab5.style = "display: none";
-            tab6.style = "display: block";
-            tab7.style = "display: none";
-            tab8.style = "display: none";
-            tab9.style = "display: none";
-            $.ajax({
-                url: '/stock/tuihuo/selectTyj',
-                type: 'post',
-                dataType: "json",
-                data: {
-                    'mfrsid': mfrsid,
-                    'positionId': positionId,
-                    'goodsType': goodsType,
-                    'goodsNum': goodsNum,
-                    'goodsCode': goodsCode,
-                    'goodsName': goodsName,
-                    'brandname': brandname
-
-                },
-                success: function (xml) {
-                    for (var i = 0; i < xml.length; i++) {
-                        if(null == xml[i].goodsNum){
-                            xml[i].goodsNum="";
-                        }
-                        if(null == xml[i].goodsName){
-                            xml[i].goodsName="";
-                        }
-                        if(null == xml[i].factory){
-                            xml[i].factory="";
-                        }
-                        if(null == xml[i].unit){
-                            xml[i].unit="";
-                        }
-                        if(null == xml[i].producFactorycolor){
-                            xml[i].producFactorycolor="";
-                        }
-                        if(null == xml[i].size){
-                            xml[i].size="";
-                        }
-                        if(null == xml[i].retailPrice){
-                            xml[i].retailPrice="";
-                        }
-                        if(null == xml[i].positionName){
-                            xml[i].positionName="";
-                        }
-                        if(null == xml[i].goodsCount){
-                            xml[i].goodsCount="";
-                        }
-                        if(null == xml[i].goodsCode){
-                            xml[i].goodsCode="";
-                        }
-                        if(null == xml[i].goodsxinxiid){
-                            xml[i].goodsxinxiid="";
-                        }
-
-                        $(".heji6").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
-                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
-                            "<td name='producFactorycolor'>" + xml[i].producFactorycolor + "</td>\n" +
-                            "<td name='size'>" + xml[i].size + "</td>\n" +
-                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                            "</tr>");
-                    }
-                }
-            })
+                    $('#exampleTable')
+                        .bootstrapTable(
+                            {
+                                method: 'get', // 服务器数据的请求方式 get or post
+                                url: '/stock/tuihuo/selectTyj',// 服务器数据的加载地址
+                                //	showRefresh : true,
+                                //	showToggle : true,
+                                //	showColumns : true,
+                                iconSize: 'outline',
+                                toolbar: '#exampleToolbar',
+                                striped: true, // 设置为true会有隔行变色效果
+                                dataType: "json", // 服务器返回的数据类型
+                                pagination: true, // 设置为true会在底部显示分页条
+                                // queryParamsType : "limit",
+                                // //设置为limit则会发送符合RESTFull格式的参数
+                                singleSelect: false, // 设置为true将禁止多选
+                                // contentType : "application/x-www-form-urlencoded",
+                                // //发送到服务器的数据编码类型
+                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageNumber: 1, // 如果设置了分布，首页页码
+                                //search : true, // 是否显示搜索框
+                                showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                                sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                                queryParams: function (params) {
+                                    return {
+                                        //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                        limit: params.limit,
+                                        offset: params.offset,
+                                        mfrsid: $('#mfrsid').val(),
+                                        positionId: $("#positionId").val(),
+                                        goodsType: $("#goodsType").val(),
+                                        goodsNum: $("#goodsNum").val(),
+                                        goodsCode: $("#goodsCode").val(),
+                                        goodsName: $("#goodsName").val(),
+                                        brandname: $("#brandname").val(),
+                                        classtype : $("#classtype").val()
+                                    };
+                                },
+                                columns: [
+                                    {
+                                        checkbox: true
+                                    },
+                                    {
+                                        field: 'goodsNum',
+                                        title: '商品代码'
+                                    },
+                                    {
+                                        field: 'goodsName',
+                                        title: '商品名称'
+                                    },
+                                    {
+                                        field: 'factory',
+                                        title: '型号'
+                                    },
+                                    {
+                                        field: 'unit',
+                                        title: '单位'
+                                    },
+                                    {
+                                        field: 'producFactorycolor',
+                                        title: '厂家色号 '
+                                    },
+                                    {
+                                        field: 'size',
+                                        title: '镜架尺寸 '
+                                    },
+                                    {
+                                        field: 'retailPrice',
+                                        title: '标准零售价'
+                                    },
+                                    {
+                                        field: 'positionName',
+                                        title: '仓位'
+                                    },
+                                    {
+                                        field: 'goodsCount',
+                                        title: '库存数量'
+                                    },
+                                    {
+                                        field: 'goodsCode',
+                                        title: '商品条码'
+                                    }
+                                ]
+                            });
         } else if (goodsType == 7) {
-            $(".val").remove();
-            $(".val2").remove();
-            $(".val3").remove();
-            $(".val4").remove();
-            $(".val5").remove();
-            $(".val6").remove();
-            $(".val7").remove();
-            $(".val8").remove();
-            $(".val9").remove();
-            tab1.style = "display: none";
-            tab2.style = "display: none";
-            tab3.style = "display: none";
-            tab4.style = "display: none";
-            tab5.style = "display: none";
-            tab6.style = "display: none";
-            tab7.style = "display: block";
-            tab8.style = "display: none";
-            tab9.style = "display: none";
-            $.ajax({
-                url: '/stock/tuihuo/selectLhj',
-                type: 'post',
-                dataType: "json",
-                data: {
-                    'mfrsid': mfrsid,
-                    'positionId': positionId,
-                    'goodsType': goodsType,
-                    'goodsNum': goodsNum,
-                    'goodsCode': goodsCode,
-                    'goodsName': goodsName,
-                    'brandname': brandname
+                    $('#exampleTable')
+                        .bootstrapTable(
+                            {
+                                method: 'get', // 服务器数据的请求方式 get or post
+                                url: '/stock/tuihuo/selectLhj',// 服务器数据的加载地址
+                                //	showRefresh : true,
+                                //	showToggle : true,
+                                //	showColumns : true,
+                                iconSize: 'outline',
+                                toolbar: '#exampleToolbar',
+                                striped: true, // 设置为true会有隔行变色效果
+                                dataType: "json", // 服务器返回的数据类型
+                                pagination: true, // 设置为true会在底部显示分页条
+                                // queryParamsType : "limit",
+                                // //设置为limit则会发送符合RESTFull格式的参数
+                                singleSelect: false, // 设置为true将禁止多选
+                                // contentType : "application/x-www-form-urlencoded",
+                                // //发送到服务器的数据编码类型
+                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageNumber: 1, // 如果设置了分布，首页页码
+                                //search : true, // 是否显示搜索框
+                                showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                                sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                                queryParams: function (params) {
+                                    return {
+                                        //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                        limit: params.limit,
+                                        offset: params.offset,
+                                        mfrsid: $('#mfrsid').val(),
+                                        positionId: $("#positionId").val(),
+                                        goodsType: $("#goodsType").val(),
+                                        goodsNum: $("#goodsNum").val(),
+                                        goodsCode: $("#goodsCode").val(),
+                                        goodsName: $("#goodsName").val(),
+                                        brandname: $("#brandname").val(),
+                                        classtype : $("#classtype").val()
+                                    };
+                                },
+                                columns: [
+                                    {
+                                        checkbox: true
+                                    },
+                                    {
+                                        field: 'goodsNum',
+                                        title: '商品代码'
+                                    },
+                                    {
+                                        field: 'goodsName',
+                                        title: '商品名称'
+                                    },
+                                    {
+                                        field: 'factory',
+                                        title: '型号'
+                                    },
+                                    {
+                                        field: 'unit',
+                                        title: '单位'
+                                    },
 
-                },
-                success: function (xml) {
-                    for (var i = 0; i < xml.length; i++) {
-                        if(null == xml[i].goodsNum){
-                            xml[i].goodsNum="";
-                        }
-                        if(null == xml[i].goodsName){
-                            xml[i].goodsName="";
-                        }
-                        if(null == xml[i].factory){
-                            xml[i].factory="";
-                        }
-                        if(null == xml[i].unit){
-                            xml[i].unit="";
-                        }
-                        if(null == xml[i].degrees){
-                            xml[i].degrees="";
-                        }
+                                    {
+                                        field: 'degrees',
+                                        title: '老花镜度数 '
+                                    }, {
+                                        field: 'size',
+                                        title: '镜架尺寸 '
+                                    },
+                                    {
+                                        field: 'producFactorycolor',
+                                        title: '厂家色号 '
+                                    },
 
-                        if(null == xml[i].size){
-                            xml[i].size="";
-                        }
-                        if(null == xml[i].producFactorycolor){
-                            xml[i].producFactorycolor="";
-                        }
-
-                        if(null == xml[i].retailPrice){
-                            xml[i].retailPrice="";
-                        }
-                        if(null == xml[i].positionName){
-                            xml[i].positionName="";
-                        }
-                        if(null == xml[i].goodsCount){
-                            xml[i].goodsCount="";
-                        }
-                        if(null == xml[i].goodsCode){
-                            xml[i].goodsCode="";
-                        }
-                        if(null == xml[i].goodsxinxiid){
-                            xml[i].goodsxinxiid="";
-                        }
-
-                        $(".heji7").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
-                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
-                            "<td name='degrees'>" + xml[i].degrees + "</td>\n" +
-
-                            "<td name='size'>" + xml[i].size + "</td>\n" +
-                            "<td name='producFactorycolor'>" + xml[i].producFactorycolor + "</td>\n" +
-                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                            "</tr>");
-                    }
-                }
-            })
+                                    {
+                                        field: 'retailPrice',
+                                        title: '标准零售价'
+                                    },
+                                    {
+                                        field: 'positionName',
+                                        title: '仓位'
+                                    },
+                                    {
+                                        field: 'goodsCount',
+                                        title: '库存数量'
+                                    },
+                                    {
+                                        field: 'goodsCode',
+                                        title: '商品条码'
+                                    }
+                                ]
+                            });
         } else if (goodsType == 8) {
-            $(".val").remove();
-            $(".val2").remove();
-            $(".val3").remove();
-            $(".val4").remove();
-            $(".val5").remove();
-            $(".val6").remove();
-            $(".val7").remove();
-            $(".val8").remove();
-            $(".val9").remove();
-            tab1.style = "display: none";
-            tab2.style = "display: none";
-            tab3.style = "display: none";
-            tab4.style = "display: none";
-            tab5.style = "display: none";
-            tab6.style = "display: none";
-            tab7.style = "display: none";
-            tab8.style = "display: block";
-            tab9.style = "display: none";
-            $.ajax({
-                url: '/stock/tuihuo/selectHc',
-                type: 'post',
-                dataType: "json",
-                data: {
-                    'mfrsid': mfrsid,
-                    'positionId': positionId,
-                    'goodsType': goodsType,
-                    'goodsNum': goodsNum,
-                    'goodsCode': goodsCode,
-                    'goodsName': goodsName,
-                    'brandname': brandname
-
-                },
-                success: function (xml) {
-                    for (var i = 0; i < xml.length; i++) {
-                        if(null == xml[i].goodsNum){
-                            xml[i].goodsNum="";
-                        }
-                        if(null == xml[i].goodsName){
-                            xml[i].goodsName="";
-                        }
-                        if(null == xml[i].factory){
-                            xml[i].factory="";
-                        }
-                        if(null == xml[i].unit){
-                            xml[i].unit="";
-                        }
-                        if(null == xml[i].retailPrice){
-                            xml[i].retailPrice="";
-                        }
-                        if(null == xml[i].positionName){
-                            xml[i].positionName="";
-                        }
-                        if(null == xml[i].goodsCount){
-                            xml[i].goodsCount="";
-                        }
-                        if(null == xml[i].goodsCode){
-                            xml[i].goodsCode="";
-                        }
-                        if(null == xml[i].goodsxinxiid){
-                            xml[i].goodsxinxiid="";
-                        }
-
-                        $(".heji8").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
-                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
-                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                            "</tr>");
-                    }
+                    $('#exampleTable')
+                        .bootstrapTable(
+                            {
+                                method: 'get', // 服务器数据的请求方式 get or post
+                                url: '/stock/tuihuo/selectHc',// 服务器数据的加载地址
+                                //	showRefresh : true,
+                                //	showToggle : true,
+                                //	showColumns : true,
+                                iconSize: 'outline',
+                                toolbar: '#exampleToolbar',
+                                striped: true, // 设置为true会有隔行变色效果
+                                dataType: "json", // 服务器返回的数据类型
+                                pagination: true, // 设置为true会在底部显示分页条
+                                // queryParamsType : "limit",
+                                // //设置为limit则会发送符合RESTFull格式的参数
+                                singleSelect: false, // 设置为true将禁止多选
+                                // contentType : "application/x-www-form-urlencoded",
+                                // //发送到服务器的数据编码类型
+                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageNumber: 1, // 如果设置了分布，首页页码
+                                //search : true, // 是否显示搜索框
+                                showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                                sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                                queryParams: function (params) {
+                                    return {
+                                        //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                        limit: params.limit,
+                                        offset: params.offset,
+                                        mfrsid: $('#mfrsid').val(),
+                                        positionId: $("#positionId").val(),
+                                        goodsType: $("#goodsType").val(),
+                                        goodsNum: $("#goodsNum").val(),
+                                        goodsCode: $("#goodsCode").val(),
+                                        goodsName: $("#goodsName").val(),
+                                        brandname: $("#brandname").val(),
+                                        classtype : $("#classtype").val()
+                                    };
+                                },
+                                columns: [
+                                    {
+                                        checkbox: true
+                                    },
+                                    {
+                                        field: 'goodsNum',
+                                        title: '商品代码'
+                                    },
+                                    {
+                                        field: 'goodsName',
+                                        title: '商品名称'
+                                    },
+                                    {
+                                        field: 'factory',
+                                        title: '型号'
+                                    },
+                                    {
+                                        field: 'unit',
+                                        title: '单位'
+                                    },
+                                    {
+                                        field: 'retailPrice',
+                                        title: '标准零售价'
+                                    },
+                                    {
+                                        field: 'positionName',
+                                        title: '仓位'
+                                    },
+                                    {
+                                        field: 'goodsCount',
+                                        title: '库存数量'
+                                    },
+                                    {
+                                        field: 'goodsCode',
+                                        title: '商品条码'
+                                    }
+                                ]
+                            });
+         } else if (goodsType == 9) {
+            alert("视光")
+                    $('#exampleTable')
+                        .bootstrapTable(
+                            {
+                                method: 'get', // 服务器数据的请求方式 get or post
+                                url: '/stock/tuihuo/selectSg',// 服务器数据的加载地址
+                                //	showRefresh : true,
+                                //	showToggle : true,
+                                //	showColumns : true,
+                                iconSize: 'outline',
+                                toolbar: '#exampleToolbar',
+                                striped: true, // 设置为true会有隔行变色效果
+                                dataType: "json", // 服务器返回的数据类型
+                                pagination: true, // 设置为true会在底部显示分页条
+                                // queryParamsType : "limit",
+                                // //设置为limit则会发送符合RESTFull格式的参数
+                                singleSelect: false, // 设置为true将禁止多选
+                                // contentType : "application/x-www-form-urlencoded",
+                                // //发送到服务器的数据编码类型
+                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageNumber: 1, // 如果设置了分布，首页页码
+                                //search : true, // 是否显示搜索框
+                                showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                                sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                                queryParams: function (params) {
+                                    return {
+                                        //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                        limit: params.limit,
+                                        offset: params.offset,
+                                        mfrsid: $('#mfrsid').val(),
+                                        positionId: $("#positionId").val(),
+                                        goodsType: $("#goodsType").val(),
+                                        goodsNum: $("#goodsNum").val(),
+                                        goodsCode: $("#goodsCode").val(),
+                                        goodsName: $("#goodsName").val(),
+                                        brandname: $("#brandname").val(),
+                                        classtype : $("#classtype").val()
+                                    };
+                                },
+                                columns: [
+                                    {
+                                        checkbox: true
+                                    },
+                                    {
+                                        field: 'goodsNum',
+                                        title: '商品代码'
+                                    },
+                                    {
+                                        field: 'goodsName',
+                                        title: '商品名称'
+                                    },
+                                    {
+                                        field: 'factory',
+                                        title: '型号'
+                                    },
+                                    {
+                                        field: 'unit',
+                                        title: '单位'
+                                    },
+                                    {
+                                        field: 'retailPrice',
+                                        title: '标准零售价'
+                                    },
+                                    {
+                                        field: 'positionName',
+                                        title: '仓位'
+                                    },
+                                    {
+                                        field: 'goodsCount',
+                                        title: '库存数量'
+                                    },
+                                    {
+                                        field: 'goodsCode',
+                                        title: '商品条码'
+                                    }
+                                ]
+                            });
                 }
-            })
-        } else if (goodsType == 9) {
-            $(".val").remove();
-            $(".val2").remove();
-            $(".val3").remove();
-            $(".val4").remove();
-            $(".val5").remove();
-            $(".val6").remove();
-            $(".val7").remove();
-            $(".val8").remove();
-            $(".val9").remove();
-            tab1.style = "display: none";
-            tab2.style = "display: none";
-            tab3.style = "display: none";
-            tab4.style = "display: none";
-            tab5.style = "display: none";
-            tab6.style = "display: none";
-            tab7.style = "display: none";
-            tab8.style = "display: none";
-            tab9.style = "display: block";
-            $.ajax({
-                url: '/stock/tuihuo/selectSg',
-                type: 'post',
-                dataType: "json",
-                data: {
-                    'mfrsid': mfrsid,
-                    'positionId': positionId,
-                    'goodsType': goodsType,
-                    'goodsNum': goodsNum,
-                    'goodsCode': goodsCode,
-                    'goodsName': goodsName,
-                    'brandname': brandname
 
-                },
-                success: function (xml) {
-                    for (var i = 0; i < xml.length; i++) {
-                        if(null == xml[i].goodsNum){
-                            xml[i].goodsNum="";
-                        }
-                        if(null == xml[i].goodsName){
-                            xml[i].goodsName="";
-                        }
-                        if(null == xml[i].factory){
-                            xml[i].factory="";
-                        }
-                        if(null == xml[i].unit){
-                            xml[i].unit="";
-                        }
-                        if(null == xml[i].retailPrice){
-                            xml[i].retailPrice="";
-                        }
-                        if(null == xml[i].positionName){
-                            xml[i].positionName="";
-                        }
-                        if(null == xml[i].goodsCount){
-                            xml[i].goodsCount="";
-                        }
-                        if(null == xml[i].goodsCode){
-                            xml[i].goodsCode="";
-                        }
-                        if(null == xml[i].goodsxinxiid){
-                            xml[i].goodsxinxiid="";
-                        }
-
-                        $(".heji9").before("<tr class='val'> <td><input name='one'  type=\"checkbox\"/></td>\n" +
-                            "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                            "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
-                            "<td name='factory'>" + xml[i].factory + "</td>\n" +
-                            "<td name='unit'>" + xml[i].unit + "</td>\n" +
-                            "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-                            "<td name='positionName'>" + xml[i].positionName + "</td>\n" +
-                            "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                            "<td name='goodsCode' style='display: none'>" + xml[i].goodsCode + "</td>\n" +
-                            "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
-                            "</tr>");
-                    }
-                }
-            })
-        } else {
-            $(".val1").remove();
-            $(".val2").remove();
-            $(".val3").remove();
-            $(".val4").remove();
-            $(".val5").remove();
-            $(".val6").remove();
-            $(".val7").remove();
-            $(".val8").remove();
-            $(".val9").remove();
-            tab1.style = "display: none";
-            tab2.style = "display: none";
-            tab3.style = "display: none";
-            tab4.style = "display: none";
-            tab5.style = "display: none";
-            tab6.style = "display: none";
-            tab7.style = "display: none";
-            tab8.style = "display: none";
-            tab9.style = "display: none";
         }
-    }
-
 </script>
 
 </body>
