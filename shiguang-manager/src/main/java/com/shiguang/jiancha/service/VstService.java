@@ -29,6 +29,6 @@ public interface VstService {
     int update(ResultDO result);
     int remove(Long vstId);
     int upremove(VstDO vstDO);
-
+    int updatevst(VstDO vstDO);
     int batchRemove(Long[] vstIds);
 }

@@ -31,6 +31,6 @@ public interface RxjmjcjDao {
     int update(ResultDO result);
     int remove(Long rx_id);
     int upremove(RxjmjcjDO rxjmjcjDO);
-
+    int updaterxjmjcj(RxjmjcjDO rxjmjcjDO);
     int batchRemove(Long[] rxIds);
 }

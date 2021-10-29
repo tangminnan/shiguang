@@ -62,6 +62,11 @@ public class CrtServiceImpl implements CrtService {
     }
 
     @Override
+    public int updatecrt(CrtDO crtDO) {
+        return crtDao.updatecrt(crtDO);
+    }
+
+    @Override
     public int batchRemove(Long[] crtIds) {
         return crtDao.batchRemove(crtIds);
     }

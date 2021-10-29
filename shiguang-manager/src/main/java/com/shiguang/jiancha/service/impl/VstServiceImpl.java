@@ -62,6 +62,11 @@ public class VstServiceImpl implements VstService {
     }
 
     @Override
+    public int updatevst(VstDO vstDO) {
+        return vstDao.updatevst(vstDO);
+    }
+
+    @Override
     public int batchRemove(Long[] vstIds) {
         return vstDao.batchRemove(vstIds);
     }

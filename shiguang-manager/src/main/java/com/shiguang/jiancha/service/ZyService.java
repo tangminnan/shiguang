@@ -29,6 +29,6 @@ public interface ZyService {
 	int update(ResultDO result);
 	int remove(Long zyId);
 	int upremove(ZyDO zyDO);
-	
+	int updatezy(ZyDO zyDO);
 	int batchRemove(Long[] zyIds);
 }

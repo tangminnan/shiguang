@@ -62,6 +62,11 @@ public class RxjmjcjServiceImpl implements RxjmjcjService {
     }
 
     @Override
+    public int updaterxjmjcj(RxjmjcjDO rxjmjcjDO) {
+        return rxjmjcjDao.updaterxjmjcj(rxjmjcjDO);
+    }
+
+    @Override
     public int batchRemove(Long[] rxIds) {
         return rxjmjcjDao.batchRemove(rxIds);
     }

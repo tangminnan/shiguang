@@ -280,6 +280,31 @@
 		where  ptometry_number=#{ptometryNumber}
     </update>
 
+	<update id="updatesgjj" parameterType="com.shiguang.jiancha.domain.SgjjDO">
+		update jc_sgjj
+		<set>
+			<if test="sgjjAddod != null">`sgjj_addod` = #{sgjjAddod},</if>
+			<if test="sgjjAddos != null">`sgjj_addos` = #{sgjjAddos},</if>
+			<if test="sgjjYytjod != null">`sgjj_yytjod` = #{sgjjYytjod},</if>
+			<if test="sgjjYytjos != null">`sgjj_yytjos` = #{sgjjYytjos},</if>
+			<if test="sgjjJytjod != null">`sgjj_jytjod` = #{sgjjJytjod},</if>
+			<if test="sgjjJytjos != null">`sgjj_jytjos` = #{sgjjJytjos},</if>
+			<if test="sgjjTgod != null">`sgjj_tgod` = #{sgjjTgod},</if>
+			<if test="sgjjTgos != null">`sgjj_tgos` = #{sgjjTgos},</if>
+			<if test="sgjjYyvaod != null">`sgjj_yyvaod` = #{sgjjYyvaod},</if>
+			<if test="sgjjYyvaos != null">`sgjj_yyvaos` = #{sgjjYyvaos},</if>
+			<if test="sgjjJyvaod != null">`sgjj_jyvaod` = #{sgjjJyvaod},</if>
+			<if test="sgjjJyvaos != null">`sgjj_jyvaos` = #{sgjjJyvaos},</if>
+			<if test="sgjjJpcz != null">`sgjj_jpcz` = #{sgjjJpcz},</if>
+			<if test="sgjjClfs != null">`sgjj_clfs` = #{sgjjClfs},</if>
+			<if test="sgjjJykj != null">`sgjj_jykj` = #{sgjjJykj},</if>
+			<if test="sgjjKjlx != null">`sgjj_kjlx` = #{sgjjKjlx},</if>
+			<if test="sgjjText != null">`sgjj_text` = #{sgjjText},</if>
+			<if test="sgjjBeizhu != null">`sgjj_beizhu` = #{sgjjBeizhu}</if>
+		</set>
+		where  ptometry_number=#{ptometryNumber}
+	</update>
+
     <delete id="remove">
 		delete from jc_sgjj where sgjj_id = #{value}
 	</delete>

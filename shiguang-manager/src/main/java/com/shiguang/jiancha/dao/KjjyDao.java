@@ -34,6 +34,6 @@ public interface KjjyDao {
     int remove(Long kjjy_id);
     int upremove(KjjyDO kjjyDO);
 
-
+    int updatekjjy(KjjyDO kjjyDO);
     int batchRemove(Long[] kjjyIds);
 }

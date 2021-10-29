@@ -318,6 +318,38 @@
 		where  ptometry_number=#{ptometryNumber}
 	</update>
 
+	<update id="updatevst" parameterType="com.shiguang.jiancha.domain.VstDO">
+		update jc_vst
+		<set>
+			<if test="vstSdbhod != null">`vst_sdbhod` = #{vstSdbhod}, </if>
+			<if test="vstSdbhos != null">`vst_sdbhos` = #{vstSdbhos}, </if>
+			<if test="vstFkod != null">`vst_fkod` = #{vstFkod}, </if>
+			<if test="vstFkos != null">`vst_fkos` = #{vstFkos}, </if>
+			<if test="vstQlbjod != null">`vst_qlbjod` = #{vstQlbjod}, </if>
+			<if test="vstQlbjos != null">`vst_qlbjos` = #{vstQlbjos}, </if>
+			<if test="vstAcod != null">`vst_acod` = #{vstAcod}, </if>
+			<if test="vstAcos != null">`vst_acos` = #{vstAcos}, </if>
+			<if test="vstJfod != null">`vst_jfod` = #{vstJfod}, </if>
+			<if test="vstJfos != null">`vst_jfos` = #{vstJfos}, </if>
+			<if test="vstDiaod != null">`vst_diaod` = #{vstDiaod}, </if>
+			<if test="vstDiaos != null">`vst_diaos` = #{vstDiaos}, </if>
+			<if test="vstBcod != null">`vst_bcod` = #{vstBcod}, </if>
+			<if test="vstBcos != null">`vst_bcos` = #{vstBcos}, </if>
+			<if test="vstCpclyod != null">`vst_cpclyod` = #{vstCpclyod}, </if>
+			<if test="vstCpclyos != null">`vst_cpclyos` = #{vstCpclyos}, </if>
+			<if test="vstEod != null">`vst_eod` = #{vstEod}, </if>
+			<if test="vstEos != null">`vst_eos` = #{vstEos}, </if>
+			<if test="vstVaod != null">`vst_vaod` = #{vstVaod}, </if>
+			<if test="vstVaos != null">`vst_vaos` = #{vstVaos}, </if>
+			<if test="vstJpysod != null">`vst_jpysod` = #{vstJpysod}, </if>
+			<if test="vstJpysos != null">`vst_jpysos` = #{vstJpysos}, </if>
+			<if test="vstSyjpod != null">`vst_syjpod` = #{vstSyjpod}, </if>
+			<if test="vstSyjpos != null">`vst_syjpos` = #{vstSyjpos}, </if>
+			<if test="vstBeizhu != null">`vst_beizhu` = #{vstBeizhu} </if>
+		</set>
+		where  ptometry_number=#{ptometryNumber}
+	</update>
+
 	<delete id="remove">
 		delete from jc_vst where vst_id = #{value}
 	</delete>

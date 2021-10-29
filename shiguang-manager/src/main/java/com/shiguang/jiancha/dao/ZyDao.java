@@ -30,6 +30,6 @@ public interface ZyDao {
 	int update(ResultDO result);
 	int remove(Long zy_id);
 	int upremove(ZyDO zyDO);
-	
+	int updatezy(ZyDO zyDO);
 	int batchRemove(Long[] zyIds);
 }

@@ -30,5 +30,7 @@ public interface SgjjService {
     int remove(Long sgjjId);
     int upremove(SgjjDO sgjjDO);
 
+    int updatesgjj(SgjjDO sgjjDO);
+
     int batchRemove(Long[] sgjjIds);
 }

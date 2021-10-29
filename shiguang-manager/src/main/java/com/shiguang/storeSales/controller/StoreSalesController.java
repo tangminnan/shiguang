@@ -278,9 +278,12 @@ public class StoreSalesController {
                 boolean resultLeft = false;
                 resultRight = Arrays.asList(leftRight).contains("右");
                 resultLeft = Arrays.asList(leftRight).contains("左");
-                if (resultRight == false || resultLeft == false){
-                    return R.error("镜片选择左右眼重复，请重新选择！");
+                if (!"隐形".equals(salesDO.getEyeType())){
+                    if (resultRight == false || resultLeft == false){
+                        return R.error("镜片选择左右眼重复，请重新选择！");
+                    }
                 }
+
         }
         Long saleNumber = GuuidUtil.getUUID();
         salesDO.setSaleNumber("X" + saleNumber);
@@ -653,6 +656,120 @@ public class StoreSalesController {
                 yaopinDO.setStatus("1");
                 yaopinService.save(yaopinDO);
             }
+        } else {
+            if ("近用".equals(salesDO.getRecipelType())) {
+                KjjyDO kjjyDO = new KjjyDO();
+                kjjyDO.setPtometryNumber(salesDO.getPtometryNumber());
+                kjjyDO.setKjjyAxialod(salesDO.getRightzhouxiangjy());
+                kjjyDO.setKjjyAxialos(salesDO.getLeftzhouxiangjy());
+                kjjyDO.setKjjyPrismod(salesDO.getRightsanlingjingjy());
+                kjjyDO.setKjjyPrismos(salesDO.getLeftsanlingjingjy());
+                kjjyDO.setKjjyJdod(salesDO.getRightjidijy());
+                kjjyDO.setKjjyJdos(salesDO.getLeftjidijy());
+                kjjyDO.setKjjyYytjod(salesDO.getRightyuanyongtjjy());
+                kjjyDO.setKjjyYytjos(salesDO.getLeftyuanyongtjjy());
+                kjjyDO.setKjjyTgod(salesDO.getRighttonggaojy());
+                kjjyDO.setKjjyTgos(salesDO.getLefttonggaojy());
+                kjjyDO.setKjjyVaod(salesDO.getRightyuanyongVAjy());
+                kjjyDO.setKjjyVaos(salesDO.getLeftyuanyongVAjy());
+                kjjyService.updatekjjy(kjjyDO);
+            } else if ("远用".equals(salesDO.getRecipelType())) {
+                KjyyDO kjyyDO = new KjyyDO();
+                kjyyDO.setPtometryNumber(salesDO.getPtometryNumber());
+                kjyyDO.setKjyyPrismod(salesDO.getRightsanlingjingyy());
+                kjyyDO.setKjyyPrismos(salesDO.getLeftsanlingjingyy());
+                kjyyDO.setKjyyJdod(salesDO.getRightjidiyy());
+                kjyyDO.setKjyyJdos(salesDO.getLeftjidiyy());
+                kjyyDO.setKjyyYytjod(salesDO.getRightyuanyongtjyy());
+                kjyyDO.setKjyyYytjos(salesDO.getLeftyuanyongtjyy());
+                kjyyDO.setKjyyTgod(salesDO.getRighttonggaoyy());
+                kjyyDO.setKjyyTgos(salesDO.getLefttonggaoyy());
+                kjyyDO.setKjyyVaod(salesDO.getRightyuanyongVAyy());
+                kjyyDO.setKjyyVaos(salesDO.getLeftyuanyongVAyy());
+                kjyyService.updatekjyy(kjyyDO);
+            } else if ("渐进/双光".equals(salesDO.getRecipelType())) {
+                SgjjDO sgjjDO = new SgjjDO();
+                sgjjDO.setPtometryNumber(salesDO.getPtometryNumber());
+                sgjjDO.setSgjjYytjod(salesDO.getRightyuanyongtjsg());
+                sgjjDO.setSgjjYytjos(salesDO.getLeftyuanyongtjsg());
+                sgjjDO.setSgjjJytjod(salesDO.getRightjinyongtjsg());
+                sgjjDO.setSgjjJytjos(salesDO.getLeftjinyongtjsg());
+                sgjjDO.setSgjjTgod(salesDO.getRighttonggaosg());
+                sgjjDO.setSgjjTgos(salesDO.getLefttonggaosg());
+                sgjjDO.setSgjjYyvaod(salesDO.getRightyuanyongVAsg());
+                sgjjDO.setSgjjYyvaos(salesDO.getLeftyuanyongVAsg());
+                sgjjDO.setSgjjJyvaod(salesDO.getRightjinyongVAsg());
+                sgjjDO.setSgjjJyvaos(salesDO.getLeftjinyongVAsg());
+                sgjjService.updatesgjj(sgjjDO);
+            } else if ("中用".equals(salesDO.getRecipelType())) {
+                ZyDO zyDO = new ZyDO();
+                zyDO.setPtometryNumber(salesDO.getPtometryNumber());
+                zyDO.setZyPrismod(salesDO.getRightsanlingjingzy());
+                zyDO.setZyPrismos(salesDO.getLeftsanlingjingzy());
+                zyDO.setZyJdod(salesDO.getRightjidizy());
+                zyDO.setZyJdos(salesDO.getLeftjidizy());
+                zyDO.setZyZytjod(salesDO.getRightyuanyongtjzy());
+                zyDO.setZyZytjos(salesDO.getLeftyuanyongtjzy());
+                zyDO.setZyTgod(salesDO.getRighttonggaozy());
+                zyDO.setZyTgos(salesDO.getLefttonggaozy());
+                zyDO.setZyVaod(salesDO.getRightyuanyongVAzy());
+                zyDO.setZyVaos(salesDO.getLeftyuanyongVAzy());
+                zyService.updatezy(zyDO);
+            } else if ("隐形".equals(salesDO.getRecipelType())) {
+                RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
+                rxjmjcjDO.setPtometryNumber(salesDO.getPtometryNumber());
+                rxjmjcjDO.setRxZjod(salesDO.getRightzhijingyx());
+                rxjmjcjDO.setRxZjos(salesDO.getLeftzhijingyx());
+                rxjmjcjDO.setRxVaod(salesDO.getRightYingXingVAyx());
+                rxjmjcjDO.setRxVaos(salesDO.getLeftYingXingVAyx());
+                rxjmjcjService.updaterxjmjcj(rxjmjcjDO);
+            }else if ("角膜塑形镜VST".equals(salesDO.getRecipelType())){
+                VstDO vstDO = new VstDO();
+                vstDO.setPtometryNumber(salesDO.getPtometryNumber());
+                vstDO.setVstSdbhod(salesDO.getRightVstSdjbh());
+                vstDO.setVstSdbhos(salesDO.getLeftVstSdjbh());
+                vstDO.setVstFkod(salesDO.getRightVstFK());
+                vstDO.setVstFkos(salesDO.getLeftVstFK());
+                vstDO.setVstQlbjod(salesDO.getRightVstQlbj());
+                vstDO.setVstQlbjos(salesDO.getLeftVstQlbj());
+                vstDO.setVstAcod(salesDO.getRightVstAC());
+                vstDO.setVstAcos(salesDO.getLeftVstAC());
+                vstDO.setVstJfod(salesDO.getRightVstJF());
+                vstDO.setVstJfos(salesDO.getLeftVstJF());
+                vstDO.setVstDiaod(salesDO.getRightVstDIA());
+                vstDO.setVstDiaos(salesDO.getLeftVstDIA());
+                vstDO.setVstBcod(salesDO.getRightVstBC());
+                vstDO.setVstBcos(salesDO.getLeftVstBC());
+                vstDO.setVstCpclyod(salesDO.getRightVstCPCLY());
+                vstDO.setVstCpclyod(salesDO.getLeftVstCPCLY());
+                vstDO.setVstEod(salesDO.getRightVstE());
+                vstDO.setVstEos(salesDO.getLeftVstE());
+                vstDO.setVstVaod(salesDO.getRightVstVA());
+                vstDO.setVstVaos(salesDO.getLeftVstVA());
+                vstService.updatevst(vstDO);
+            } else if ("角膜塑形镜CRT".equals(salesDO.getRecipelType())){
+                CrtDO crtDO = new CrtDO();
+                crtDO.setPtometryNumber(salesDO.getPtometryNumber());
+                crtDO.setCrtSdbhod(salesDO.getRightSdjbhcrt());
+                crtDO.setCrtSdbhos(salesDO.getLeftSdjbhcrt());
+                crtDO.setCtrBcod(salesDO.getRightBCcrt());
+                crtDO.setCrtBcos(salesDO.getLeftBCcrt());
+                crtDO.setCrtRzdod(salesDO.getRightRZDcrt());
+                crtDO.setCrtRzdos(salesDO.getLeftRZDcrt());
+                crtDO.setCrtLzaod(salesDO.getRightLZAcrt());
+                crtDO.setCrtLzaos(salesDO.getLeftLZAcrt());
+                crtDO.setCrtRzd2od(salesDO.getRightRZD2crt());
+                crtDO.setCrtRzd2os(salesDO.getLeftRZD2crt());
+                crtDO.setCrtLza2od(salesDO.getRightLZA2crt());
+                crtDO.setCrtLza2os(salesDO.getLeftLZA2crt());
+                crtDO.setCrtJfod(salesDO.getRightJFcrt());
+                crtDO.setCrtJfos(salesDO.getLeftJFcrt());
+                crtDO.setCrtDiaod(salesDO.getRightDIAcrt());
+                crtDO.setCrtDiaos(salesDO.getLeftDIAcrt());
+                crtDO.setCrtVaod(salesDO.getRightVAcrt());
+                crtDO.setCrtVaos(salesDO.getLeftVAcrt());
+                crtService.updatecrt(crtDO);
+            }
         }
         CostDO costDO = new CostDO();
         costDO.setIsSale(0L);
@@ -685,7 +802,8 @@ public class StoreSalesController {
                 positionDO = stockService.findPosition(map);
             }
             for (int e=0;e<goodsDescribe.length;e++){
-                if (!"镜片".equals(goodsDescribe[e]) && !"隐形".equals(goodsDescribe[e])){
+                if (!"镜片".equals(goodsDescribe[e]) && !"隐形".equals(goodsDescribe[e]) && !"自架".equals(goodsDescribe[e])
+                        && !"自片".equals(goodsDescribe[e]) && !"赠品".equals(goodsDescribe[e])){
                     StockDO stockDOs = new StockDO();
                     if (null != positionDO){
                         stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));

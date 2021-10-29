@@ -241,6 +241,30 @@
         where  ptometry_number=#{ptometryNumber}
     </update>
 
+    <update id="updaterxjmjcj" parameterType="com.shiguang.jiancha.domain.RxjmjcjDO">
+        update jc_rxjmjcj
+        <set>
+            <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+            <if test="rxPrescriptionType != null">`rx_prescription_type` = #{rxPrescriptionType},</if>
+            <if test="rxDoctor != null">`rx_doctor` = #{rxDoctor},</if>
+            <if test="rxOptometryName != null">`rx_optometry_name` = #{rxOptometryName},</if>
+            <if test="rxBcod != null">`rx_bcod` = #{rxBcod},</if>
+            <if test="rxBcos != null">`rx_bcos` = #{rxBcos},</if>
+            <if test="rxZjod != null">`rx_zjod` = #{rxZjod},</if>
+            <if test="rxZjos != null">`rx_zjos` = #{rxZjos},</if>
+            <if test="rxVaod != null">`rx_vaod` = #{rxVaod},</if>
+            <if test="rxVaos != null">`rx_vaos` = #{rxVaos},</if>
+            <if test="rxSyjpod != null">`rx_syjpod` = #{rxSyjpod},</if>
+            <if test="rxSyjpos != null">`rx_syjpos` = #{rxSyjpos},</if>
+            <if test="rxUnitod != null">`rx_unitod` = #{rxUnitod},</if>
+            <if test="rxUnitos != null">`rx_unitos` = #{rxUnitos},</if>
+            <if test="rxClfs != null">`rx_clfs` = #{rxClfs},</if>
+            <if test="rxHlypz != null">`rx_hlypz` = #{rxHlypz},</if>
+            <if test="rxBeizhu != null">`rx_beizhu` = #{rxBeizhu}</if>
+        </set>
+        where  ptometry_number=#{ptometryNumber}
+    </update>
+
     <delete id="remove">
 		delete from jc_rxjmjcj where rx_id = #{value}
 	</delete>

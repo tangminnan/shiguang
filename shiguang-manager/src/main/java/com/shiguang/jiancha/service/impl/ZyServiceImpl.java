@@ -64,6 +64,11 @@ public class ZyServiceImpl implements ZyService {
 	}
 
 	@Override
+	public int updatezy(ZyDO zyDO) {
+		return zyDao.updatezy(zyDO);
+	}
+
+	@Override
 	public int batchRemove(Long[] zyIds) {
 		return zyDao.batchRemove(zyIds);
 	}

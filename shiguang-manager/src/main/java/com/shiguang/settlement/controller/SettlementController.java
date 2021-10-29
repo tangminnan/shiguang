@@ -1689,7 +1689,9 @@ public class SettlementController {
 			String[] goodsCount = salesDO.getStoreCount().split(",");
 			String[] goodsStr = salesDO.getGoodsCode().split(",");
 			for (int i=0;i<saleDescribe.length;i++){
-				if (!"镜片".equals(saleDescribe[i]) && !"隐形".equals(saleDescribe[i])){
+				if (!"镜片".equals(saleDescribe[i]) && !"隐形".equals(saleDescribe[i])
+						&& !"自架".equals(saleDescribe[i])
+						&& !"自片".equals(saleDescribe[i]) && !"赠品".equals(saleDescribe[i])){
 					StockDO stockDOs = new StockDO();
 					if (null != positionDO){
 						stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));

@@ -254,7 +254,30 @@
 		</set>
 		where  ptometry_number=#{ptometryNumber}
 	</update>
-	
+
+	<update id="updatezy" parameterType="com.shiguang.jiancha.domain.ZyDO">
+		update jc_zy
+		<set>
+			<if test="zyPrismod != null">`zy_prismod` = #{zyPrismod}, </if>
+			<if test="zyPrismos != null">`zy_prismos` = #{zyPrismos}, </if>
+			<if test="zyJdod != null">`zy_jdod` = #{zyJdod}, </if>
+			<if test="zyJdos != null">`zy_jdos` = #{zyJdos}, </if>
+			<if test="zyZytjod != null">`zy_zytjod` = #{zyZytjod}, </if>
+			<if test="zyZytjos != null">`zy_zytjos` = #{zyZytjos}, </if>
+			<if test="zyTgod != null">`zy_tgod` = #{zyTgod}, </if>
+			<if test="zyTgos != null">`zy_tgos` = #{zyTgos}, </if>
+			<if test="zyVaod != null">`zy_vaod` = #{zyVaod}, </if>
+			<if test="zyVaos != null">`zy_vaos` = #{zyVaos}, </if>
+			<if test="zyJpcz != null">`zy_jpcz` = #{zyJpcz}, </if>
+			<if test="zyClfs != null">`zy_clfs` = #{zyClfs}, </if>
+			<if test="zyJyjk != null">`zy_jyjk` = #{zyJyjk}, </if>
+			<if test="zyJklx != null">`zy_jklx` = #{zyJklx}, </if>
+			<if test="zyText != null">`zy_text` = #{zyText}, </if>
+			<if test="zyBeizhu != null">`zy_beizhu` = #{zyBeizhu}</if>
+		</set>
+		where  ptometry_number=#{ptometryNumber}
+	</update>
+
 	<delete id="remove">
 		delete from jc_zy where zy_id = #{value}
 	</delete>

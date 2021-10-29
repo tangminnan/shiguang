@@ -31,6 +31,6 @@ public interface SgjjDao {
     int update(ResultDO result);
     int remove(Long sgjj_id);
     int upremove(SgjjDO sgjjDO);
-
+    int updatesgjj(SgjjDO sgjjDO);
     int batchRemove(Long[] sgjjIds);
 }

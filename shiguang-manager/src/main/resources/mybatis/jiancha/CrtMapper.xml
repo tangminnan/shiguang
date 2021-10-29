@@ -304,6 +304,36 @@
         where  ptometry_number=#{ptometryNumber}
     </update>
 
+	<update id="updatecrt" parameterType="com.shiguang.jiancha.domain.ResultDO">
+		update jc_crt
+		<set>
+			<if test="crtSdbhod != null">`crt_sdbhod` = #{crtSdbhod}, </if>
+			<if test="crtSdbhos != null">`crt_sdbhos` = #{crtSdbhos}, </if>
+			<if test="ctrBcod != null">`ctr_bcod` = #{ctrBcod}, </if>
+			<if test="crtBcos != null">`crt_bcos` = #{crtBcos}, </if>
+			<if test="crtRzdod != null">`crt_rzdod` = #{crtRzdod}, </if>
+			<if test="crtRzdos != null">`crt_rzdos` = #{crtRzdos}, </if>
+			<if test="crtLzaod != null">`crt_lzaod` = #{crtLzaod}, </if>
+			<if test="crtLzaos != null">`crt_lzaos` = #{crtLzaos}, </if>
+			<if test="crtRzd2od != null">`crt_rzd2od` = #{crtRzd2od}, </if>
+			<if test="crtRzd2os != null">`crt_rzd2os` = #{crtRzd2os}, </if>
+			<if test="crtLza2od != null">`crt_lza2od` = #{crtLza2od}, </if>
+			<if test="crtLza2os != null">`crt_lza2os` = #{crtLza2os}, </if>
+			<if test="crtJfod != null">`crt_jfod` = #{crtJfod}, </if>
+			<if test="crtJfos != null">`crt_jfos` = #{crtJfos}, </if>
+			<if test="crtDiaod != null">`crt_diaod` = #{crtDiaod}, </if>
+			<if test="crtDiaos != null">`crt_diaos` = #{crtDiaos}, </if>
+			<if test="crtVaod != null">`crt_vaod` = #{crtVaod}, </if>
+			<if test="crtVaos != null">`crt_vaos` = #{crtVaos}, </if>
+			<if test="crtJpysod != null">`crt_jpysod` = #{crtJpysod}, </if>
+			<if test="crtJpysos != null">`crt_jpysos` = #{crtJpysos}, </if>
+			<if test="crtSyjpod != null">`crt_syjpod` = #{crtSyjpod}, </if>
+			<if test="crtSyjpos != null">`crt_syjpos` = #{crtSyjpos}, </if>
+			<if test="crtBeizhu != null">`crt_beizhu` = #{crtBeizhu} </if>
+		</set>
+		where  ptometry_number=#{ptometryNumber}
+	</update>
+
     <delete id="remove">
 		delete from jc_crt where crt_id = #{value}
 	</delete>

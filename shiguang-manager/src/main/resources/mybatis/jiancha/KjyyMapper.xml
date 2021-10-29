@@ -266,6 +266,29 @@
         where  ptometry_number=#{ptometryNumber}
     </update>
 
+    <update id="updatekjyy" parameterType="com.shiguang.jiancha.domain.KjyyDO">
+        update jc_kjyy
+        <set>
+            <if test="kjyyPrismod != null">`kjyy_prismod` = #{kjyyPrismod},</if>
+            <if test="kjyyPrismos != null">`kjyy_prismos` = #{kjyyPrismos},</if>
+            <if test="kjyyJdod != null">`kjyy_jdod` = #{kjyyJdod},</if>
+            <if test="kjyyJdos != null">`kjyy_jdos` = #{kjyyJdos},</if>
+            <if test="kjyyYytjod != null">`kjyy_yytjod` = #{kjyyYytjod},</if>
+            <if test="kjyyYytjos != null">`kjyy_yytjos` = #{kjyyYytjos},</if>
+            <if test="kjyyTgod != null">`kjyy_tgod` = #{kjyyTgod},</if>
+            <if test="kjyyTgos != null">`kjyy_tgos` = #{kjyyTgos},</if>
+            <if test="kjyyVaod != null">`kjyy_vaod` = #{kjyyVaod},</if>
+            <if test="kjyyVaos != null">`kjyy_vaos` = #{kjyyVaos},</if>
+            <if test="kjyyJpcz != null">`kjyy_jpcz` = #{kjyyJpcz},</if>
+            <if test="kjyyClfs != null">`kjyy_clfs` = #{kjyyClfs},</if>
+            <if test="kjyyJykj != null">`kjyy_jykj` = #{kjyyJykj},</if>
+            <if test="kjyyKjlx != null">`kjyy_kjlx` = #{kjyyKjlx},</if>
+            <if test="kjyyText != null">`kjyy_text` = #{kjyyText},</if>
+            <if test="kjyyBeizhu != null">`kjyy_beizhu` = #{kjyyBeizhu}</if>
+        </set>
+        where  ptometry_number=#{ptometryNumber}
+    </update>
+
     <delete id="remove">
 		delete from jc_kjyy where kjyy_id = #{value}
 	</delete>

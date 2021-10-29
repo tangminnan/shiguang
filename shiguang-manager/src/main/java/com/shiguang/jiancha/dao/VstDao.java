@@ -31,6 +31,6 @@ public interface VstDao {
     int update(ResultDO result);
     int remove(Long vst_id);
     int upremove(VstDO vstDO);
-
+    int updatevst(VstDO vstDO);
     int batchRemove(Long[] vstIds);
 }
