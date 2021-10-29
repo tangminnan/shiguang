@@ -117,7 +117,7 @@
 	</update>
 	
 	<delete id="remove">
-		delete from settlement where sale_number = #{value}
+		delete from store_sales where sale_number = #{value}
 	</delete>
 	
 	<delete id="batchRemove">

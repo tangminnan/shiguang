@@ -19,8 +19,11 @@ import com.shiguang.mailInfo.domain.MailInfoDO;
 import com.shiguang.mailInfo.service.MailInfoService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
+import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import com.shiguang.storeSales.domain.Conclusion;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
@@ -55,6 +58,8 @@ public class SettlementController {
 	private CostService costService;
 	@Autowired
 	private SalesService salesService;
+	@Autowired
+	private StockService stockService;
 	@Autowired
 	private ResultService resultService;
 	@Autowired
@@ -1670,6 +1675,36 @@ public class SettlementController {
 	@ResponseBody
 	@RequiresPermissions("information:settlement:remove")
 	public R remove(String id){
+		SalesDO salesDO = salesService.getSaleNumber(id);
+		String companyId = "";
+		PositionDO positionDO = null;
+		if (null != ShiroUtils.getUser().getCompanyId()) {
+			companyId = ShiroUtils.getUser().getCompanyId();
+			Map<String,Object> map = new HashMap<>();
+			map.put("companyId", companyId);
+			positionDO = stockService.findPosition(map);
+		}
+		if (null != salesDO){
+			String[] saleDescribe = salesDO.getStoreDescribe().split(",");
+			String[] goodsCount = salesDO.getStoreCount().split(",");
+			String[] goodsStr = salesDO.getGoodsCode().split(",");
+			for (int i=0;i<saleDescribe.length;i++){
+				if (!"镜片".equals(saleDescribe[i]) && !"隐形".equals(saleDescribe[i])){
+					StockDO stockDOs = new StockDO();
+					if (null != positionDO){
+						stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
+					} else {
+						stockDOs.setPositionId("");
+					}
+					stockDOs.setGoodsCode(goodsStr[i]);
+					StockDO stockDO = stockService.getProduceCode(stockDOs);
+					Long countGoods = Long.parseLong(stockDO.getGoodsCount());
+					Long count = countGoods + Long.valueOf(goodsCount[i]);
+					stockDO.setGoodsCount(String.valueOf(count));
+					stockService.updateGoodsCount(stockDO);
+				}
+			}
+		}
 		if(settlementService.remove(id)>0){
 			return R.ok();
 		}
