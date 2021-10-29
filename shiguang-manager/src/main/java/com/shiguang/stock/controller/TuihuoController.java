@@ -174,12 +174,11 @@ public class TuihuoController {
 				}catch (ArrayIndexOutOfBoundsException e){
 					tuihuoDO.setGoodsNum("");
 				}
-				try {
-//				String goodsxinxiid = goodsxinxiid1[i];
-					tuihuoDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
-				}catch (ArrayIndexOutOfBoundsException e){
-					tuihuoDO.setGoodsxinxiid(Long.valueOf(""));
-				}
+//				try {
+//					tuihuoDO.setGoodsxinxiid(Long.valueOf(goodsxinxiid));
+//				}catch (ArrayIndexOutOfBoundsException e){
+//					tuihuoDO.setGoodsxinxiid(Long.valueOf(""));
+//				}
 				try {
 					String goodsName = goodsName1[i];
 					tuihuoDO.setGoodsName(goodsName);
@@ -301,6 +300,12 @@ public class TuihuoController {
 		model.addAttribute("goodsDOList", goodsDOList);
 		model.addAttribute("positionId", positionId);
 		model.addAttribute("positionName", positionName);
+		if ("空值".equals(mfrsid)){
+			mfrsid="";
+		}
+		if ("空值".equals(mfrsName)){
+			mfrsName="";
+		}
 		model.addAttribute("mfrsid", mfrsid);
 		model.addAttribute("mfrsName", mfrsName);
 		return "/stock/tuihuo/getGood";

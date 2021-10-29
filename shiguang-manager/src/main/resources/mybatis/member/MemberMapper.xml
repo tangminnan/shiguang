@@ -473,9 +473,10 @@
             <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
             <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
             <if test="age != null and age != ''"> and m.age = #{age} </if>
-            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
-            <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
-            <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+            <if test="phone1 != null and phone1 != ''"> and m.phone_1 like concat('%', #{phone1},'%') </if>
+            <if test="phone2 != null and phone2 != ''"> and m.phone_2 like concat('%', #{phone2},'%') </if>
+            <if test="phone3 != null and phone3 != ''"> and m.phone_3 like concat('%', #{phone3},'%') </if>
+
             <if test="provinceCode != null and provinceCode != ''"> and m.province_code = #{provinceCode} </if>
             <if test="provinceName != null and provinceName != ''"> and m.province_name = #{provinceName} </if>
             <if test="cityCode != null and cityCode != ''"> and m.city_code = #{cityCode} </if>

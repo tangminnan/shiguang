@@ -282,7 +282,9 @@
     function choiceBrand() {
         var goodsid = document.getElementById('goodsType').value;
         var mfrsid = document.getElementById('mfrsid').value;
-        if (goodsid == "") {
+        if (mfrsid==""){
+            layer.alert("请选择制造商！");
+        } else if (goodsid == "") {
             layer.alert("请选择商品类别！");
         } else {
             //选择镜架

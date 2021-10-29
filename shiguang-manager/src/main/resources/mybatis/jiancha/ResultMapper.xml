@@ -11,8 +11,9 @@
 		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`cbzd_zg`,`cbzd_ysy`,`cbzd_jsy`,`cbzd_sg`,`cbzd_qgcc`,`cbzd_rs`,`cbzd_xs`,`cbzd_ls`,`cbzd_yqzc`,`cbzd_dsl`,`cbzd_bz`,`cbzd_sypg`,`kjyj`,`kjyj_fqm`,`kjyj_qm`,`kjyj_jjdjd`,`kjyj_bsp`,`kjyj_flg`,`kjyj_zblj`,`jmjcj`,`jmjcj_ok`,`jmjcj_rgb`,`jmjcj_sg`,`jmjcj_ctx`,`jmjcj_pqx`,`jmjcj_zblj`,`sjxl`,`sjxl_tjxl`,`sjxl_rxxl`,`sjxl_jxxl`,`sjxl_srzxl`,`sjxl_jqskxl`,`sjxl_jqjhxl`,`sjxl_jqtjfsxl`,`yjjkyyxw`,`dslzsqjp`,`rszgfs`,`yyws`,`yizhu`,`way`,`follow_time`,`visit_type` from jc_result
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-		  		  <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''">and  card_number LIKE concat(concat('%', #{cardNumber}),'%')</if>
+			<if test="ptometryNumber != null and ptometryNumber != ''">and  ptometry_number LIKE concat(concat('%', #{ptometryNumber}),'%')</if>
+
 		  		  <if test="optometryName != null and optometryName != ''"> and optometry_name = #{optometryName} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="cbzdZg != null and cbzdZg != ''"> and cbzd_zg = #{cbzdZg} </if>

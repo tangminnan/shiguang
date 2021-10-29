@@ -121,13 +121,22 @@
         var positionId = $('#positionId').val();
         var positionName = $('#positionId').find("option:selected").text();
         var style = $('#style').val();
-        if (mfrsid == "") {
-            layer.alert("请选择制造商！");
-        } else if (mfrsName == "") {
-            layer.alert("请选择制造商！");
-        }else if (positionId == ""){
-            layer.alert("请选择发出仓位！");
-        } else if (style == ""){
+
+		if (mfrsid=='' || mfrsid==null){
+		    mfrsid="空值";
+		}
+		if (mfrsName=='' || mfrsName==null){
+		    mfrsName="空值"
+		}
+        // if (mfrsid == "") {
+        //     layer.alert("请选择制造商！");
+        // } else if (mfrsName == "") {
+        //     layer.alert("请选择制造商！");
+        // }else if (positionId == ""){
+        //     layer.alert("请选择发出仓位！");
+        // } else
+
+            if (style == ""){
             layer.alert("请选择出库方式！");
         } else {
             // $(".val").remove();
