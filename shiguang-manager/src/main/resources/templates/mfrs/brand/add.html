@@ -142,64 +142,65 @@
                                 <!--<input id="registration" name="registration" type="text">-->
                             <!--</div>-->
                         <!--</div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label class="col-sm-3 control-label">产地：</label>-->
-<!--                            <div class="col-sm-8">-->
-<!--                                <input id="address" name="address" type="text">-->
-<!--                            </div>-->
-<!--                        </div>-->
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">计量单位：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<select id="unitid" name="unitid" style="width: 200px">-->
-                                    <!--<option></option>-->
-                                    <!--<option th:each="ls:${unitDOList}"-->
-                                            <!--th:text="${ls.unitname}"-->
-                                            <!--th:value="${ls.unitid}"-->
-                                    <!--&gt;</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                        <!--</div>-->
 
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">采购结算方式：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<select id="payid" name="payid" onchange="payChange()">-->
-                                    <!--<option></option>-->
-                                    <!--<option th:each="ls:${payDOList}"-->
-                                            <!--th:text="${ls.paymethod}"-->
-                                            <!--th:value="${ls.payid}"-->
-                                    <!--&gt;</option>-->
-                                <!--</select>-->
-                                <!--<input id="payday" name="payday" type="text" hidden placeholder="请输入天数"-->
-                                       <!--style="width: 95px"-->
-                                       <!--oninput="value=value.replace(/[^\d]/g,'')">-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">批号管理：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<label class="radio-inline"> <input type="radio"-->
-                                                                    <!--name="batchid" value="1"/> 是-->
-                                <!--</label>-->
-                                <!--<label class="radio-inline"> <input type="radio"-->
-                                                                    <!--name="batchid" value="2" checked/> 否-->
-                                <!--</label>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">厂家型号：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<input id="factory" name="factory" type="text">-->
-                                <!--<span style="color: red">品牌型号为默认商品型号</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label class="col-sm-3 control-label">促销金额：</label>-->
-<!--                            <div class="col-sm-8">-->
-<!--                                <input id="money" name="money" type="text">-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产地：</label>
+                            <div class="col-sm-8">
+                                <input id="address" name="address" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">计量单位：</label>
+                            <div class="col-sm-8">
+                                <select id="unitid" name="unitid" style="width: 200px">
+                                    <option></option>
+                                    <option th:each="ls:${unitDOList}"
+                                            th:text="${ls.unitname}"
+                                            th:value="${ls.unitid}"
+                                    ></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">采购结算方式：</label>
+                            <div class="col-sm-8">
+                                <select id="payid" name="payid" onchange="payChange()">
+                                    <option></option>
+                                    <option th:each="ls:${payDOList}"
+                                            th:text="${ls.paymethod}"
+                                            th:value="${ls.payid}"
+                                    ></option>
+                                </select>
+                                <input id="payday" name="payday" type="text" hidden placeholder="请输入天数"
+                                       style="width: 95px"
+                                       oninput="value=value.replace(/[^\d]/g,'')">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">批号管理：</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline"> <input type="radio"
+                                                                    name="batchid" value="1"/> 是
+                                </label>
+                                <label class="radio-inline"> <input type="radio"
+                                                                    name="batchid" value="2" checked/> 否
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">厂家型号：</label>
+                            <div class="col-sm-8">
+                                <input id="factory" name="factory" type="text">
+                                <span style="color: red">品牌型号为默认商品型号</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">促销金额：</label>
+                            <div class="col-sm-8">
+                                <input id="money" name="money" type="text">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">速记码：</label>
                             <div class="col-sm-8">
