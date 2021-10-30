@@ -7,6 +7,10 @@
 		select `id`,`inventory_id`,`inventory_type`,`goods_id`,`goods_num`,`goods_code`,`goods_name`,`goods_time`,`goods_batch`,`factory`,`unitname`,`book_num`,`actual_num`,`surplus` from inventory_bill where id = #{value}
 	</select>
 
+	<select id="getInventoryId" resultType="com.shiguang.inventory.domain.BillDO">
+		select `id`,`inventory_id`,`inventory_type`,`goods_id`,`goods_num`,`goods_code`,`goods_name`,`goods_time`,`goods_batch`,`factory`,`unitname`,`book_num`,`actual_num`,`surplus` from inventory_bill where inventory_id = #{value}
+	</select>
+
 	<select id="list" resultType="com.shiguang.inventory.domain.BillDO">
 		select `id`,`inventory_id`,`inventory_type`,`goods_id`,`goods_num`,`goods_code`,`goods_name`,`goods_time`,`goods_batch`,`factory`,`unitname`,`book_num`,`actual_num`,`surplus` from inventory_bill
         <where>  

@@ -16,6 +16,8 @@ import java.util.Map;
 public interface BillService {
 	
 	BillDO get(Long id);
+
+	List<BillDO> getInventoryId(Long inventoryId);
 	
 	List<BillDO> list(Map<String, Object> map);
 	

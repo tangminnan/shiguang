@@ -276,7 +276,7 @@ public class InventoryController {
 			query.put("inventoryType","1");
 		}
 		List<BillDO> billDOList = billService.list(query);
-		int total = inventoryService.count(query);
+		int total = billService.count(query);
 		PageUtils pageUtils = new PageUtils(billDOList, total);
 		return pageUtils;
 	}

@@ -21,7 +21,12 @@ public class BillServiceImpl implements BillService {
 	public BillDO get(Long id){
 		return billDao.get(id);
 	}
-	
+
+	@Override
+	public List<BillDO> getInventoryId(Long id){
+		return billDao.getInventoryId(id);
+	}
+
 	@Override
 	public List<BillDO> list(Map<String, Object> map){
 		return billDao.list(map);

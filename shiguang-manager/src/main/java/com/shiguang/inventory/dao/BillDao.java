@@ -17,6 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface BillDao {
 
 	BillDO get(Long id);
+
+	List<BillDO> getInventoryId(Long inventoryId);
 	
 	List<BillDO> list(Map<String, Object> map);
 	
