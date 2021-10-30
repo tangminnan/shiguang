@@ -494,16 +494,16 @@ public class StockServiceImpl implements StockService {
                         if (goodstype==1){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO shiguangs=  stockDao.jingjias(stockDO);
-                            String goodsNum=shiguangs.getProducNum();
-                            String goodsCode=shiguangs.getProducCode();
-                            String goodsName=shiguangs.getProducName();
-                            String mfrsid=shiguangs.getMfrsid();
-                            String brandname=shiguangs.getBrandname();
-                            String retailPrice=shiguangs.getRetailPrice();
-                            String unitname=shiguangs.getUnitname();
-                            String factory=shiguangs.getProducFactory();
-                            String classtype=shiguangs.getClasstype();
+                            StockDO jingjias=  stockDao.jingjias(stockDO);
+                            String goodsNum=jingjias.getProducNum();
+                            String goodsCode=jingjias.getProducCode();
+                            String goodsName=jingjias.getProducName();
+                            String mfrsid=jingjias.getMfrsid();
+                            String brandname=jingjias.getBrandname();
+                            String retailPrice=jingjias.getRetailPrice();
+                            String unitname=jingjias.getUnitname();
+                            String factory=jingjias.getProducFactory();
+                            String classtype=jingjias.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -535,11 +535,13 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeah = str.substring(0, 4); //取年
+                                    String yeahs = str.substring(0, 4); //取年
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeah + "-" + yue + "-" + ri;
-                                    code =yeah + yue + ri;
+                                    //code =yeah + yue + ri;
+                                    code = yeah+yue + ri+"AA";
                                 }
                             }
 
@@ -657,11 +659,13 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeah = str.substring(0, 4); //取年
+                                    String yeahs = str.substring(0, 4); //取年
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeah + "-" + yue + "-" + ri;
-                                    code =yeah + yue + ri;
+                                    //code =yeah + yue + ri;
+                                    code = yeah+yue + ri+"AA";
                                 }
                             }
 
@@ -779,11 +783,13 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeah = str.substring(0, 4); //取年
+                                    String yeahs = str.substring(0, 4); //取年
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeah + "-" + yue + "-" + ri;
-                                    code =yeah + yue + ri;
+                                    //code =yeah + yue + ri;
+                                    code = yeah+yue + ri+"AA";
                                 }
                             }
 
@@ -901,11 +907,13 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeah = str.substring(0, 4); //取年
+                                    String yeahs = str.substring(0, 4); //取年
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeah + "-" + yue + "-" + ri;
-                                    code =yeah + yue + ri;
+                                    //code =yeah + yue + ri;
+                                    code = yeah+yue + ri+"AA";
                                 }
                             }
 
@@ -982,16 +990,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==5){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO shiguangs=  stockDao.shiguangs(stockDO);
-                            String goodsNum=shiguangs.getProducNum();
-                            String goodsCode=shiguangs.getProducCode();
-                            String goodsName=shiguangs.getProducName();
-                            String mfrsid=shiguangs.getMfrsid();
-                            String brandname=shiguangs.getBrandname();
-                            String retailPrice=shiguangs.getRetailPrice();
-                            String unitname=shiguangs.getUnitname();
-                            String factory=shiguangs.getProducFactory();
-                            String classtype=shiguangs.getClasstype();
+                            StockDO huliyes=  stockDao.huliyes(stockDO);
+                            String goodsNum=huliyes.getProducNum();
+                            String goodsCode=huliyes.getProducCode();
+                            String goodsName=huliyes.getProducName();
+                            String mfrsid=huliyes.getMfrsid();
+                            String brandname=huliyes.getBrandname();
+                            String retailPrice=huliyes.getRetailPrice();
+                            String unitname=huliyes.getUnitname();
+                            String factory=huliyes.getProducFactory();
+                            String classtype=huliyes.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -1023,11 +1031,13 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeah = str.substring(0, 4); //取年
+                                    String yeahs = str.substring(0, 4); //取年
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeah + "-" + yue + "-" + ri;
-                                    code =yeah + yue + ri;
+                                    //code =yeah + yue + ri;
+                                    code = yeah+yue + ri+"AA";
                                 }
                             }
 
@@ -1104,16 +1114,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==6){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO shiguangs=  stockDao.shiguangs(stockDO);
-                            String goodsNum=shiguangs.getProducNum();
-                            String goodsCode=shiguangs.getProducCode();
-                            String goodsName=shiguangs.getProducName();
-                            String mfrsid=shiguangs.getMfrsid();
-                            String brandname=shiguangs.getBrandname();
-                            String retailPrice=shiguangs.getRetailPrice();
-                            String unitname=shiguangs.getUnitname();
-                            String factory=shiguangs.getProducFactory();
-                            String classtype=shiguangs.getClasstype();
+                            StockDO taiyangjings=  stockDao.taiyangjings(stockDO);
+                            String goodsNum=taiyangjings.getProducNum();
+                            String goodsCode=taiyangjings.getProducCode();
+                            String goodsName=taiyangjings.getProducName();
+                            String mfrsid=taiyangjings.getMfrsid();
+                            String brandname=taiyangjings.getBrandname();
+                            String retailPrice=taiyangjings.getRetailPrice();
+                            String unitname=taiyangjings.getUnitname();
+                            String factory=taiyangjings.getProducFactory();
+                            String classtype=taiyangjings.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -1145,11 +1155,13 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeah = str.substring(0, 4); //取年
+                                    String yeahs = str.substring(0, 4); //取年
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeah + "-" + yue + "-" + ri;
-                                    code =yeah + yue + ri;
+                                    //code =yeah + yue + ri;
+                                    code = yeah+yue + ri+"AA";
                                 }
                             }
 
@@ -1226,16 +1238,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==7){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO shiguangs=  stockDao.shiguangs(stockDO);
-                            String goodsNum=shiguangs.getProducNum();
-                            String goodsCode=shiguangs.getProducCode();
-                            String goodsName=shiguangs.getProducName();
-                            String mfrsid=shiguangs.getMfrsid();
-                            String brandname=shiguangs.getBrandname();
-                            String retailPrice=shiguangs.getRetailPrice();
-                            String unitname=shiguangs.getUnitname();
-                            String factory=shiguangs.getProducFactory();
-                            String classtype=shiguangs.getClasstype();
+                            StockDO laohuajings=  stockDao.laohuajings(stockDO);
+                            String goodsNum=laohuajings.getProducNum();
+                            String goodsCode=laohuajings.getProducCode();
+                            String goodsName=laohuajings.getProducName();
+                            String mfrsid=laohuajings.getMfrsid();
+                            String brandname=laohuajings.getBrandname();
+                            String retailPrice=laohuajings.getRetailPrice();
+                            String unitname=laohuajings.getUnitname();
+                            String factory=laohuajings.getProducFactory();
+                            String classtype=laohuajings.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -1267,11 +1279,13 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeah = str.substring(0, 4); //取年
+                                    String yeahs = str.substring(0, 4); //取年
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeah + "-" + yue + "-" + ri;
-                                    code =yeah + yue + ri;
+                                    //code =yeah + yue + ri;
+                                    code = yeah+yue + ri+"AA";
                                 }
                             }
 
@@ -1348,16 +1362,16 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==8){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO shiguangs=  stockDao.shiguangs(stockDO);
-                            String goodsNum=shiguangs.getProducNum();
-                            String goodsCode=shiguangs.getProducCode();
-                            String goodsName=shiguangs.getProducName();
-                            String mfrsid=shiguangs.getMfrsid();
-                            String brandname=shiguangs.getBrandname();
-                            String retailPrice=shiguangs.getRetailPrice();
-                            String unitname=shiguangs.getUnitname();
-                            String factory=shiguangs.getProducFactory();
-                            String classtype=shiguangs.getClasstype();
+                            StockDO haocais=  stockDao.haocais(stockDO);
+                            String goodsNum=haocais.getProducNum();
+                            String goodsCode=haocais.getProducCode();
+                            String goodsName=haocais.getProducName();
+                            String mfrsid=haocais.getMfrsid();
+                            String brandname=haocais.getBrandname();
+                            String retailPrice=haocais.getRetailPrice();
+                            String unitname=haocais.getUnitname();
+                            String factory=haocais.getProducFactory();
+                            String classtype=haocais.getClasstype();
 
                             stockDO.setPositionId(positionId);
                             stockDO.setGoodsType(goodsType);
@@ -1389,11 +1403,13 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeah = str.substring(0, 4); //取年
+                                    String yeahs = str.substring(0, 4); //取年
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeah + "-" + yue + "-" + ri;
-                                    code =yeah + yue + ri;
+                                    //code =yeah + yue + ri;
+                                    code = yeah+yue + ri+"AA";
                                 }
                             }
 
@@ -1511,11 +1527,13 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeah = str.substring(0, 4); //取年
+                                    String yeahs = str.substring(0, 4); //取年
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeah + "-" + yue + "-" + ri;
-                                    code =yeah + yue + ri;
+                                    //code =yeah + yue + ri;
+                                    code =yeah + yue + ri+"AA";
                                 }
                             }
 
