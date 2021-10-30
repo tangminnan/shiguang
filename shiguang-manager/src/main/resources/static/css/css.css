@@ -442,7 +442,7 @@ input.HbcBtn_QK,
 .Print .ul5 li:nth-child(4){width: 15%;}
 .Print .ul5 li:nth-child(5){width: 22%;text-align: right;}
 .Print .Tabbor{border-bottom:1px solid #666;}
-.Print .Htab1{text-align: center;margin-bottom: 30px;}
+.Print .Htab1{text-align: center;}
 .Print .Htab2{margin-bottom: 30px;text-align: center;}
 .Print .Htab2 td:nth-child(1){width:35%;text-align: left;}
 .Print .Htab3{border-top:1px solid #666;border-bottom:1px solid #666;}
