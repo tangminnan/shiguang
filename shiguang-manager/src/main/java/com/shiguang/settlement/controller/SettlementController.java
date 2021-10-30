@@ -20,6 +20,8 @@ import com.shiguang.mailInfo.service.MailInfoService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.mfrs.domain.PositionDO;
+import com.shiguang.product.domain.ProducaDO;
+import com.shiguang.product.service.ProducaService;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
 import com.shiguang.stock.domain.StockDO;
@@ -84,6 +86,8 @@ public class SettlementController {
 	private ZyService zyService;
 	@Autowired
 	private LogStatusService logStatusService;
+	@Autowired
+	private ProducaService producaService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:settlement:settlement")
@@ -254,19 +258,20 @@ public class SettlementController {
 //		costService.updateMember(costDO);
 		settlement.setSaleName(ShiroUtils.getUser().getName());
 		settlement.setSettleDate(new Date());
-//		if (null != salesDO1.getClasstype()){
-//			String[] classArray = salesDO1.getClasstype().split(",");
-//			String[] storeDescribe = salesDO1.getStoreDescribe().split(",");
-//			boolean result = false;
-//			boolean flag = false;
-//			result = Arrays.asList(classArray).contains("2");
-//			if (result == true){
-//				LogStatusDO logStatusDO = new LogStatusDO();
-//				logStatusDO.setSaleNumber(settlement.getSaleNumber());
-//				logStatusDO.setLogisticStatus("销售完成");
-//				logStatusService.save(logStatusDO);
-//			}
-//		}
+		if (null != salesDO1.getClasstype()){
+			String[] classArray = salesDO1.getClasstype().split(",");
+			String[] storeDescribe = salesDO1.getStoreDescribe().split(",");
+			for (int i=0;i<storeDescribe.length;i++){
+				if ("镜片".equals(storeDescribe[i])){
+					if ("1".equals(classArray[i])){
+						LogStatusDO logStatusDO = new LogStatusDO();
+						logStatusDO.setSaleNumber(settlement.getSaleNumber());
+						logStatusDO.setLogisticStatus("销售完成");
+						logStatusService.save(logStatusDO);
+					}
+				}
+			}
+		}
 		if(settlementService.save(settlement)>0){
 			return R.ok();
 		}
@@ -327,6 +332,30 @@ public class SettlementController {
 			settlementDO.setSexx("男");
 		} else if (settlementDO.getSex() == 1){
 			settlementDO.setSexx("女");
+		}
+		if (null != settlementDO.getJjGoodsName()){
+			String[] storeDescribe = settlementDO.getStoreDescribe().split(",");
+			String[] goodsNum = settlementDO.getGoodsNum().split(",");
+			String[] jjgoodsName = settlementDO.getJjGoodsName().split(",");
+			String[] color= new String[jjgoodsName.length];
+			int a=0;
+			for (int i=0;i<storeDescribe.length;i++){
+				if ("镜架".equals(storeDescribe[i])){
+					ProducaDO producaDO = producaService.getJjBygoodNums(goodsNum[i]);
+					if (null != producaDO){
+						color[a] = producaDO.getProducColor();
+						a= a+1;
+					}
+				}
+			}
+			StringBuilder sb = new StringBuilder();
+			if (null != color && color.length>0){
+				for (String n:color){
+					sb.append(n.replace("'", "\\'")).append(",");
+				}
+				sb.deleteCharAt(sb.length() - 1);
+			}
+			settlementDO.setColorSize(sb.toString());
 		}
 		model.addAttribute("settlementDO",settlementDO);
 		model.addAttribute("companyName",ShiroUtils.getUser().getCompany());

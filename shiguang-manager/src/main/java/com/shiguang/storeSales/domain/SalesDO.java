@@ -263,6 +263,10 @@ public class SalesDO implements Serializable {
 	private String classTypeFL;
 	//批号
 	private String batch;
+	//色号
+	private String colorSize;
+	public void setColorSize(String colorSize){this.colorSize = colorSize;}
+	public String getColorSize(){return colorSize;}
 	List<SaleGoodsDO> list = new ArrayList<>();
 
 	//近用球镜OD

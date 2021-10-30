@@ -195,6 +195,15 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="getJjBygoodNums" resultType="com.shiguang.product.domain.ProducaDO">
+        select
+          pr.`produc_factory`,pr.`produc_color`,ac.`materialname`,pr.`size`
+        from  aa_produca pr left join c_material ac on ac.materialid =
+        pr.materialid
+        where pr.produc_num = #{value}
+    </select>
+
     <!--菜单联动显示-->
     <select id="choice" resultType="com.shiguang.product.domain.ProducaDO">
 		select  brandid,brandnum ,brandname  from c_brand

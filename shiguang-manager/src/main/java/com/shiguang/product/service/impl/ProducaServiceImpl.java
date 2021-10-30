@@ -59,6 +59,11 @@ public class ProducaServiceImpl implements ProducaService {
         return producaDao.batchRemove(ids);
     }
 
+    @Override
+    public ProducaDO getJjBygoodNums(String goodNum) {
+        return producaDao.getJjBygoodNums(goodNum);
+    }
+
     //菜单联动显示
     @Override
     public List<BrandDO> choice(Map<String, Object> map) {

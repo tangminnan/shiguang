@@ -36,6 +36,8 @@ public interface ProducaDao {
 
     int batchRemove(Long[] ids);
 
+    ProducaDO getJjBygoodNums(String goodNum);
+
     //菜单联动显示
     List<BrandDO> choice(Map<String, Object> map);
 

@@ -17,7 +17,9 @@
 		<input id="unit" th:value="${settlementDO.unit}" type="hidden">
 		<input id="batchs" th:value="${settlementDO.batch}" type="hidden">
 		<input id="storeUnit" th:value="${settlementDO.storeUnit}" type="hidden">
+		<input id="colorSize" th:value="${settlementDO.colorSize}" type="hidden">
 		<input id="storeCount" th:value="${settlementDO.storeCount}" type="hidden">
+		<input id="storeDescribe" th:value="${settlementDO.storeDescribe}" type="hidden">
 		<li>配镜单号：<span th:text="${settlementDO.saleNumber}"></span></li>
 		<li>验配中心：<span th:text="${companyName}"></span></li>
 		<li>配镜日期：<span th:text="${settlementDO.peijingDate}"></span></li>
@@ -80,6 +82,7 @@
 		<tr class="thead" >
 			<td>商品名称</td>
 			<td>批号</td>
+			<td>色号</td>
 			<td>单位</td>
 			<td>数量</td>
 			<td>原价金额</td>
@@ -152,6 +155,16 @@
 <script type="text/javascript">
     $().ready(function(){
         var htmlt="";
+        var storeDesc = $("#storeDescribe").val();
+        var storeDescArray = "";
+        if (null != storeDesc){
+            storeDescArray = storeDesc.split(",");
+		}
+        var colorSize = $("#colorSize").val();
+        var colorSizeArray = "";
+        if (null != colorSize){
+            colorSizeArray = colorSize.split(",");
+		}
         var cost = $("#cost").val();
         var storeName = $("#storeName").val();
         var storeNamearray = storeName.split(",");
@@ -175,6 +188,7 @@
         if (null != storeCount){
             storeCountArray = storeCount.split(",");
         }
+        var a=0;
         for (var i=0;i<storeNamearray.length;i++){
             htmlt = "<tr><td>"+storeNamearray[i]+"</td>";
             if ('' == batchArray){
@@ -190,6 +204,19 @@
             } else {
                 htmlt += "<td>"+batchArray[i]+"</td>";
 			}
+			if (storeDescArray[i] == '镜架'){
+                if ('' == colorSizeArray){
+                    htmlt += "<td></td>";
+                } else if (null == colorSizeArray[a]){
+                    htmlt += "<td></td>";
+                } else {
+                    htmlt += "<td>"+colorSizeArray[a]+"</td>";
+                }
+                a=a+1;
+			} else {
+                htmlt += "<td></td>";
+			}
+
 			if ('' == unitArray){
                 htmlt += "<td></td>";
 			} else if (null == unitArray[i]){

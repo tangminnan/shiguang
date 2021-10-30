@@ -1060,6 +1060,18 @@ public class StoreSalesController {
         return "storeSales/discount";
     }
 
+
+    @ResponseBody
+    @PostMapping("/saveDiscount")
+    @RequiresPermissions("information:store:getDiscount")
+    public R saveDiscount(String saleAccount){
+        //String userName = ShiroUtils.getUser().getUsername();
+        if (!saleAccount.equals("001")){
+            return R.error("该员工没有打折权限");
+        }
+        return R.ok();
+    }
+
     /**
      * 镜架
      */
