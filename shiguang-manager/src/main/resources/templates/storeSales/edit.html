@@ -1658,13 +1658,13 @@
                     a=a+1;
 				}
                 for (var i=0;i<rows.length;i++){
+                    alert(rows[i].goodsName);
                     var goodsNumStr = rows[i].goodsNum;
                     var retailPrice = rows[i].retailPrice;
                     var desc = '镜架';
                     html = "<tr><td><input id='grp1' name=\"cho\" onchange='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")' type=\"checkbox\" /></td>";
                     html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].goodsName+"</td>";
                     html += "<td></td>";
-                    html += "<input id='storeName' name='storeName' value="+rows[i].goodsName+" text='hidden'/>"
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td>"+rows[i].goodsCount+"</td>";
                     html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";

@@ -88,14 +88,22 @@ public class InventoryServiceImpl implements InventoryService {
 				BufferedReader br = new BufferedReader(isr);
 				String lineTxt = null;
 				String goodsCode="";
+				List<String> lists = new ArrayList<>();
 				List<String> list = new ArrayList<>();
 				while ((lineTxt = br.readLine()) != null) {
-					list.add(lineTxt);
+					lists.add(lineTxt);
 					System.out.println(lineTxt);
 				}
 				br.close();
-				Collections.sort(list);
+				Collections.sort(lists);
 				int count=0;
+				if (null != lists && lists.size()>0){
+					for (String s : lists){
+						if (!"".equals(s)){
+							list.add(s);
+						}
+					}
+				}
 				goodsCode = list.get(0);
 				if ("".equals(goodsCode)){
 					goodsCode = list.get(2);
@@ -333,6 +341,12 @@ public class InventoryServiceImpl implements InventoryService {
 			} else if ("0".equals(billDO1.getInventoryType())){
 				inventoryDO.setGain("0");
 			}
+		}
+		if (null == inventoryDO.getGain() || "".equals(inventoryDO.getGain())){
+			inventoryDO.setGain("无盘盈");
+		}
+		if (null == inventoryDO.getLoss() | "".equals(inventoryDO.getLoss())){
+			inventoryDO.setGain("无盘亏");
 		}
 		this.save(inventoryDO);
 		return R.ok();

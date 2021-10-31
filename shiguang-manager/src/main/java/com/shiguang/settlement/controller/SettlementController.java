@@ -261,15 +261,15 @@ public class SettlementController {
 		if (null != salesDO1.getClasstype()){
 			String[] classArray = salesDO1.getClasstype().split(",");
 			String[] storeDescribe = salesDO1.getStoreDescribe().split(",");
-			for (int i=0;i<storeDescribe.length;i++){
-				if ("镜片".equals(storeDescribe[i])){
-					if ("1".equals(classArray[i])){
-						LogStatusDO logStatusDO = new LogStatusDO();
-						logStatusDO.setSaleNumber(settlement.getSaleNumber());
-						logStatusDO.setLogisticStatus("销售完成");
-						logStatusService.save(logStatusDO);
-					}
-				}
+			boolean resultLeft = false;
+			boolean jpresult = false;
+			resultLeft = Arrays.asList(classArray).contains("2");
+			jpresult = Arrays.asList(storeDescribe).contains("镜片");
+			if (resultLeft == false && jpresult == true){
+				LogStatusDO logStatusDO = new LogStatusDO();
+				logStatusDO.setSaleNumber(settlement.getSaleNumber());
+				logStatusDO.setLogisticStatus("销售完成");
+				logStatusService.save(logStatusDO);
 			}
 		}
 		if(settlementService.save(settlement)>0){
