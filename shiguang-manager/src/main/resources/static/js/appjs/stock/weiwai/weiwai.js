@@ -414,17 +414,21 @@ function tuihuo() {
 function dayinList() {
     var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	var mfrsids="";
+	var mfrsnames="";
     if (rows.length == 0) {
         layer.msg("请选择要批量打印的数据！");
         return;
     }else {
         var ids = new Array();
         var mfrsid = new Array();
+        var danjuNumbers = new Array();
         // 遍历所有选择的行数据，取每条数据对应的ID
         $.each(rows, function(i, row) {
             ids[i] = row['id'];
+            danjuNumbers[i] = row['danjuNumber'];
              mfrsid[i]=row['mfrsid'];
              mfrsids=mfrsid[0];
+            mfrsnames=row['mfrsname'];
         });
         for (var i=0;i<mfrsid.length;i++){
             // alert(mfrsids);
@@ -433,7 +437,7 @@ function dayinList() {
                 return layer.alert("请选择同一个制造商！");
             }
 		}
-        window.open("/stock/weiwai/dayinList?ids="+ids+"&mfrsid="+mfrsid);
+        window.open("/stock/weiwai/dayinList?ids="+ids+"&danjuNumbers="+danjuNumbers+"&mfrsid="+mfrsid+"&mfrsnames="+mfrsnames);
 	}
 }
 

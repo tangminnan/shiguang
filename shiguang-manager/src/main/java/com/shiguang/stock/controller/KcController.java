@@ -11,15 +11,16 @@ import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.mfrs.service.PositionService;
 import com.shiguang.product.domain.HcDO;
 import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.domain.WeiwaiDO;
 import com.shiguang.stock.service.StockService;
+import com.sun.org.apache.regexp.internal.RE;
+import com.sun.org.glassfish.external.probe.provider.annotations.ProbeParam;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -85,7 +86,7 @@ public class KcController {
     //库存查询
     @ResponseBody
     @RequestMapping("/selectKc")
-    public PageUtils list(@RequestParam Map<String, Object> params) {
+    public PageUtils list(@RequestParam Map<String, Object> params,Model model) {
         //查询列表数据
         Query query = new Query(params);
         //———获取当前登录用户的公司id————
@@ -112,9 +113,24 @@ public class KcController {
         query.put("retailPrice2", retailPrice2);
 
         List<StockDO> stockDOS = stockService.kccxList(query);
+
         int total = stockService.kccxListCount(query);
         PageUtils pageUtils = new PageUtils(stockDOS, total);
         return pageUtils;
+    }
+
+//    //库存数量
+    @ResponseBody
+    @GetMapping("/countall")
+    public Integer countall(@RequestParam("goodsid") String goodsid, @RequestParam("mfrsid") String mfrsid,
+                            @RequestParam("brandname") String brandname, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("goodsid",goodsid);
+        map.put("mfrsid",mfrsid);
+        map.put("brandname",brandname);
+        int countall=stockService.countall(map);
+        model.addAttribute("countall",countall);
+        return countall;
     }
 
 }

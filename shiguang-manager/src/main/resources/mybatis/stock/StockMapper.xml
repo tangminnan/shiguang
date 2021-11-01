@@ -1825,6 +1825,7 @@
 <!--            <if test="goodsName != null and goodsName != ''">and  s.goods_name= #{goodsName}</if>-->
             <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
@@ -1843,37 +1844,42 @@
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-<!--            <otherwise>-->
-<!--             group by s.id-->
-<!--            </otherwise>-->
+            <otherwise>
+             group by s.id
+            </otherwise>
         </choose>
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
         </if>
     </select>
+    <select id="countall" resultType="int">
+        select sum(goods_count) as countall  from stock
+        <where>
+            <if test="goodsNum != null and goodsNum != ''">and  goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and  goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and   goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+            <if test="goodsid != null and goodsid != ''">and  goods_type = #{goodsid}</if>
+            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
+            <if test="brandname != null and brandname != ''">and  brandname = #{brandname}</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and   #{retailPrice} &lt;=  retail_price and  retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="positionId != null and positionId != ''">and  position_id = #{positionId}</if>
+        </where>
+    </select>
     <select id="kccxListCount" resultType="int">
-        select count(*)   from stock s left join c_goods g on s.goods_type=g.goodsid left join c_mfrs m on s.mfrsid=m.mfrsnum
-        left join c_position po on s.position_id=po.position_id
-        left join c_brand b on s.brandname=b.brandname AND s.`mfrsid`=b.`mfrsid`
-        left join department d on po.depart_number=d.depart_number
+        select count(*)   from stock s
         <where>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
             <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
             <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  s.retail_price and s.retail_price &lt;=  #{retailPrice2}
             </if>
-            <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
-            <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
-            <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
-            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
-            <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
             <if test="classtype != null and classtype != ''">and s.classtype = #{classtype}</if>
             <if test="status != null and status != ''">and s.status = #{status}</if>
-            <if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>
         </where>
     </select>
 

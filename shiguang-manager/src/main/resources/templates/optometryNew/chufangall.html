@@ -815,26 +815,30 @@
                     <td class="PL30" colspan="2">1 框架--远用
                         <input type="hidden" class="input_del" id="remove1" th:value="${resultDO.kjyyPrescriptionType}" readonly/>
                     </td>
-                    <td style="text-align: right" colspan="7">
-                        医生：
-                        <select id="kjyyDoctor" name="kjyyDoctor" th:value="${resultDO.kjyyDoctor}" disabled>
-                                <option></option>
-                                <option th:each="ls:${listDoctor}"
-                                        th:text="${ls.name}"
-                                        th:value="${ls.name}"
-                                ></option>
-                        </select>
-                        <input id="kjyyDoctors" name="kjyyDoctors" th:value="${resultDO.kjyyDoctor}" type="hidden" readonly>
-                        验光师：
-                        <select id="kjyyOptometryName" name="kjyyOptometryName" th:value="${resultDO.kjyyOptometryName}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listYanguang}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="kjyyOptometryNames" name="kjyyOptometryNames" th:value="${resultDO.kjyyOptometryName}" type="hidden" readonly>
-                    </td>
+                    <!--<td style="text-align: right" colspan="7">-->
+                        <!--医生：-->
+                        <!--<select id="kjyyDoctor" name="kjyyDoctor" th:value="${resultDO.kjyyDoctor}" disabled>-->
+                                <!--<option></option>-->
+                                <!--<option th:each="ls:${listDoctor}"-->
+                                        <!--th:text="${ls.name}"-->
+                                        <!--th:value="${ls.name}"-->
+                                <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="kjyyDoctors" name="kjyyDoctors" th:value="${resultDO.kjyyDoctor}" type="hidden" readonly>-->
+                        <!--验光师：-->
+                        <!--<select id="kjyyOptometryName" name="kjyyOptometryName" th:value="${resultDO.kjyyOptometryName}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listYanguang}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="kjyyOptometryNames" name="kjyyOptometryNames" th:value="${resultDO.kjyyOptometryName}" type="hidden" readonly>-->
+                    <!--</td>-->
+                    <td style="text-align: right" colspan="3">医生：</td>
+                    <td><input id="kjyyDoctor" name="kjyyDoctor" th:value="${resultDO.kjyyDoctor}" type="text" readonly></td>
+                    <td style="text-align: right" >验光师：</td>
+                    <td><input id="kjyyOptometryName" name="kjyyOptometryName" th:value="${resultDO.kjyyOptometryName}" type="text" readonly></td>
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
@@ -971,25 +975,29 @@
                 <tr>
                     <td class="PL30" colspan="2">2 框架--近用
                         <input type="hidden" readonly class="input_del" id="remove2"  th:value="${resultDO.kjjyPrescriptionType}"/></td>
-                    <td style="text-align: right" colspan="7">
-                        医生：
-                        <select id="kjjyDoctor" name="kjjyDoctor" th:value="${resultDO.kjjyDoctor}" disabled>
-                            <option th:each="ls:${listDoctor}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="kjjyDoctors" name="kjjyDoctors" th:value="${resultDO.kjjyDoctor}"  readonly type="hidden">
-                        验光师：
-                        <select id="kjjyOptometryName" name="kjjyOptometryName"th:value="${resultDO.kjjyOptometryName}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listYanguang}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="kjjyOptometryNames" name="kjjyOptometryNames" th:value="${resultDO.kjjyOptometryName}" readonly type="hidden">
-                    </td>
+                    <!--<td style="text-align: right" colspan="7">-->
+                        <!--医生：-->
+                        <!--<select id="kjjyDoctor" name="kjjyDoctor" th:value="${resultDO.kjjyDoctor}" disabled>-->
+                            <!--<option th:each="ls:${listDoctor}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="kjjyDoctors" name="kjjyDoctors" th:value="${resultDO.kjjyDoctor}"  readonly type="hidden">-->
+                        <!--验光师：-->
+                        <!--<select id="kjjyOptometryName" name="kjjyOptometryName"th:value="${resultDO.kjjyOptometryName}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listYanguang}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="kjjyOptometryNames" name="kjjyOptometryNames" th:value="${resultDO.kjjyOptometryName}" readonly type="hidden">-->
+                    <!--</td>-->
+                    <td style="text-align: right" colspan="3">医生：</td>
+                    <td><input id="kjjyDoctor" name="kjyyDoctor" th:value="${resultDO.kjyyDoctor}" type="text" readonly></td>
+                    <td style="text-align: right"  >验光师：</td>
+                    <td><input id="kjjyOptometryName" name="kjyyOptometryName" th:value="${resultDO.kjyyOptometryName}" type="text" readonly></td>
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
@@ -1110,27 +1118,33 @@
                     <td class="PL30" colspan="2">3
                         框架--双光/渐进 <input type="hidden" readonly class="input_del" id="remove3" th:value="${resultDO.sgjjPrescriptionType}"/>
                     </td>
-                    <td style="text-align: right" colspan="8">
-                        医生：
-                        <select id="sgjjDoctor" name="sgjjDoctor"  th:value="${resultDO.sgjjDoctor}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listDoctor}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="sgjjDoctors" name="sgjjDoctors" th:value="${resultDO.sgjjDoctor}" readonly type="hidden">
-                        验光师：
-                        <select id="sgjjOptometryName" name="sgjjOptometryName"  th:value="${resultDO.sgjjOptometryName}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listYanguang}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="sgjjOptometryNames" name="sgjjOptometryNames" th:value="${resultDO.sgjjOptometryName}" readonly type="hidden">
-                    </td>
+                    <!--<td style="text-align: right" colspan="8">-->
+                        <!--医生：-->
+                        <!--<select id="sgjjDoctor" name="sgjjDoctor"  th:value="${resultDO.sgjjDoctor}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listDoctor}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="sgjjDoctors" name="sgjjDoctors" th:value="${resultDO.sgjjDoctor}" readonly type="hidden">-->
+                        <!--验光师：-->
+                        <!--<select id="sgjjOptometryName" name="sgjjOptometryName"  th:value="${resultDO.sgjjOptometryName}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listYanguang}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="sgjjOptometryNames" name="sgjjOptometryNames" th:value="${resultDO.sgjjOptometryName}" readonly type="hidden">-->
+                    <!--</td>-->
+
+                    <td style="text-align: right" colspan="3">医生：</td>
+                    <td><input id="sgjjDoctor" name="sgjjDoctor" th:value="${resultDO.sgjjDoctor}" type="text" readonly></td>
+                    <td style="text-align: right"  >验光师：</td>
+                    <td><input id="sgjjOptometryName" name="sgjjOptometryName" th:value="${resultDO.sgjjOptometryName}"  type="text" readonly></td>
                 </tr>
+
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
                     <td>球镜</td>
@@ -1233,26 +1247,31 @@
                     <td class="PL30" colspan="2">4 软性角膜接触镜
                         <input type="hidden" class="input_del" id="remove4" th:value="${resultDO.rxPrescriptionType}" readonly/>
                     </td>
-                    <td style="text-align: right" colspan="8">
-                        医生：
-                        <select id="rxDoctor" name="rxDoctor" th:value="${resultDO.rxDoctor}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listDoctor}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="rxDoctors" name="rxDoctors" th:value="${resultDO.rxDoctor}" readonly type="hidden">
-                        验光师：
-                        <select id="rxOptometryName" name="rxOptometryName" th:value="${resultDO.rxOptometryName}" disabled >
-                            <option></option>
-                            <option th:each="ls:${listYanguang}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="rxOptometryNames" name="rxOptometryNames" th:value="${resultDO.rxOptometryName}" readonly type="hidden">
-                    </td>
+                    <!--<td style="text-align: right" colspan="8">-->
+                        <!--医生：-->
+                        <!--<select id="rxDoctor" name="rxDoctor" th:value="${resultDO.rxDoctor}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listDoctor}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="rxDoctors" name="rxDoctors" th:value="${resultDO.rxDoctor}" readonly type="hidden">-->
+                        <!--验光师：-->
+                        <!--<select id="rxOptometryName" name="rxOptometryName" th:value="${resultDO.rxOptometryName}" disabled >-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listYanguang}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="rxOptometryNames" name="rxOptometryNames" th:value="${resultDO.rxOptometryName}" readonly type="hidden">-->
+                    <!--</td>-->
+
+                    <td style="text-align: right" colspan="3">医生：</td>
+                    <td><input id="rxDoctor" name="rxDoctor" th:value="${resultDO.rxDoctor}" type="text" readonly></td>
+                    <td style="text-align: right"  >验光师：</td>
+                    <td><input id="rxOptometryName" name="rxOptometryName" th:value="${resultDO.rxOptometryName}"   type="text" readonly></td>
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
@@ -1319,26 +1338,31 @@
                     <td class="PL30" colspan="2">5 框架--中用
                         <input type="hidden" class="input_del" id="remove5" th:value="${resultDO.zyPrescriptionType}" readonly/>
                     </td>
-                    <td style="text-align: right" colspan="7">
-                        医生：
-                        <select id="zyDoctor" name="zyDoctor" th:value="${resultDO.zyDoctor}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listDoctor}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="zyDoctors" name="zyDoctors" th:value="${resultDO.zyDoctor}" readonly type="hidden">
-                        验光师：
-                        <select id="zyOptometryName" name="zyOptometryName" th:value="${resultDO.zyOptometryName}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listYanguang}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="zyOptometryNames" name="zyOptometryNames" th:value="${resultDO.zyOptometryName}" readonly type="hidden">
-                    </td>
+                    <!--<td style="text-align: right" colspan="7">-->
+                        <!--医生：-->
+                        <!--<select id="zyDoctor" name="zyDoctor" th:value="${resultDO.zyDoctor}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listDoctor}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="zyDoctors" name="zyDoctors" th:value="${resultDO.zyDoctor}" readonly type="hidden">-->
+                        <!--验光师：-->
+                        <!--<select id="zyOptometryName" name="zyOptometryName" th:value="${resultDO.zyOptometryName}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listYanguang}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="zyOptometryNames" name="zyOptometryNames" th:value="${resultDO.zyOptometryName}" readonly type="hidden">-->
+                    <!--</td>-->
+
+                    <td style="text-align: right" colspan="3">医生：</td>
+                    <td><input id="zyDoctor" name="zyDoctor" th:value="${resultDO.zyDoctor}"  type="text" readonly></td>
+                    <td style="text-align: right">验光师：</td>
+                    <td><input id="zyOptometryName" name="zyOptometryName" th:value="${resultDO.zyOptometryName}"    type="text" readonly></td>
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
@@ -1463,28 +1487,32 @@
                 <tr>
                     <td class="PL30" colspan="2">6 视觉训练
                         <input type="hidden" class="input_del" id="remove6" th:value="${resultDO.sjxlPrescriptionType}" readonly/></td>
-                    <td style="text-align: right" colspan="8">
-                        医生：
-                        <select id="sjxlDoctor" name="sjxlDoctor"  th:value="${resultDO.sjxlDoctor}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listDoctor}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="sjxlDoctors" name="sjxlDoctors" th:value="${resultDO.sjxlDoctor}" readonly type="hidden">
+                    <!--<td style="text-align: right" colspan="8">-->
+                        <!--医生：-->
+                        <!--<select id="sjxlDoctor" name="sjxlDoctor"  th:value="${resultDO.sjxlDoctor}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listDoctor}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="sjxlDoctors" name="sjxlDoctors" th:value="${resultDO.sjxlDoctor}" readonly type="hidden">-->
 
-                        验光师：
-                        <select id="sjxlOptometryName" name="sjxlOptometryName"  th:value="${resultDO.sjxlOptometryName}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listYanguang}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="sjxlOptometryNames" name="sjxlOptometryNames" th:value="${resultDO.sjxlOptometryName}" readonly type="hidden">
+                        <!--验光师：-->
+                        <!--<select id="sjxlOptometryName" name="sjxlOptometryName"  th:value="${resultDO.sjxlOptometryName}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listYanguang}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="sjxlOptometryNames" name="sjxlOptometryNames" th:value="${resultDO.sjxlOptometryName}" readonly type="hidden">-->
+                    <!--</td>-->
 
-                    </td>
+                    <td style="text-align: right" colspan="3">医生：</td>
+                    <td><input id="sjxlDoctor" name="sjxlDoctor" th:value="${resultDO.sjxlDoctor}" type="text" readonly></td>
+                    <td style="text-align: right">验光师：</td>
+                    <td><input id="sjxlOptometryName" name="sjxlOptometryName" th:value="${resultDO.sjxlOptometryName}" type="text" readonly></td>
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
@@ -1505,7 +1533,7 @@
                     <td><input th:value="${resultDO.sjxlAxialod}" name="sjxlAxialod" type="text" readonly/></td>
                     <td><input th:value="${resultDO.sjxlSljod}" name="sjxlSljod" class="short" type="text" readonly/> △</td>
                     <td>
-                        <select name="sjxlJdod"th:value="${resultDO.sjxlJdod}" disabled>
+                        <select id="sjxlJdod" name="sjxlJdod"th:value="${resultDO.sjxlJdod}" disabled>
                             <option value=""> </option>
                             <option value="内">内</option>
                             <option value="外">外</option>
@@ -1569,28 +1597,32 @@
                     <td class="PL30" colspan="2">7 角膜接触镜VST
                         <input type="hidden" class="input_del" id="remove7" th:value="${resultDO.vstPrescriptionType}" readonly/>
                     </td>
-                    <td style="text-align: right" colspan="14">
-                        医生：
-                        <select id="vstDoctor" name="vstDoctor" th:value="${resultDO.vstDoctor}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listDoctor}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="vstDoctors" name="vstDoctors" th:value="${resultDO.vstDoctor}" readonly type="hidden">
+                    <!--<td style="text-align: right" colspan="14">-->
+                        <!--医生：-->
+                        <!--<select id="vstDoctor" name="vstDoctor" th:value="${resultDO.vstDoctor}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listDoctor}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                       <!---->
+                        <!--<input id="vstDoctors" name="vstDoctors" th:value="${resultDO.vstDoctor}" readonly type="hidden">-->
 
-                        验光师：
-                        <select id="vstOptometryName" name="vstOptometryName" th:value="${resultDO.vstOptometryName}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listYanguang}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="vstOptometryNames" name="vstOptometryNames" th:value="${resultDO.vstOptometryName}" readonly type="hidden">
-
-                    </td>
+                        <!--验光师：-->
+                        <!--<select id="vstOptometryName" name="vstOptometryName" th:value="${resultDO.vstOptometryName}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listYanguang}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="vstOptometryNames" name="vstOptometryNames" th:value="${resultDO.vstOptometryName}" readonly type="hidden">-->
+                    <!--</td>-->
+                    <td style="text-align: right" colspan="3">医生：</td>
+                    <td> <input id="vstDoctor" name="vstDoctor" th:value="${resultDO.vstDoctor}" readonly type="text"></td>
+                    <td style="text-align: right">验光师：</td>
+                    <td><input id="vstOptometryName" name="vstOptometryName" th:value="${resultDO.vstOptometryName}" readonly type="text"></td>
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
@@ -1666,28 +1698,32 @@
                 <tr>
                     <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="hidden" class="input_del" id="remove8" readonly th:value="${resultDO.crtPrescriptionType}"/>
                     </td>
-                    <td style="text-align: right" colspan="13">
-                        医生：
-                        <select id="crtDoctor" name="crtDoctor" th:value="${resultDO.crtDoctor}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listDoctor}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="crtDoctors" name="crtDoctors" th:value="${resultDO.crtDoctor}" readonly  type="hidden">
+                    <!--<td style="text-align: right" colspan="13">-->
+                        <!--医生：-->
+                        <!--<select id="crtDoctor" name="crtDoctor" th:value="${resultDO.crtDoctor}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listDoctor}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!---->
+                        <!--<input id="crtDoctors" name="crtDoctors" th:value="${resultDO.crtDoctor}" readonly  type="hidden">-->
 
-                        验光师：
-                        <select id="crtOptometryName" name="crtOptometryName" th:value="${resultDO.crtOptometryName}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listYanguang}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="crtOptometryNames" name="crtOptometryNames" th:value="${resultDO.crtOptometryName}" readonly type="hidden">
-
-                    </td>
+                        <!--验光师：-->
+                        <!--<select id="crtOptometryName" name="crtOptometryName" th:value="${resultDO.crtOptometryName}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listYanguang}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="crtOptometryNames" name="crtOptometryNames" th:value="${resultDO.crtOptometryName}" readonly type="hidden">-->
+                    <!--</td>-->
+                    <td style="text-align: right" colspan="3">医生：</td>
+                    <td> <input id="crtDoctor" name="crtDoctor" th:value="${resultDO.crtDoctor}" readonly  type="text"></td>
+                    <td style="text-align: right">验光师：</td>
+                    <td> <input id="crtOptometryName" name="crtOptometryName" th:value="${resultDO.crtOptometryName}" readonly type="text"></td>
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
@@ -1759,27 +1795,31 @@
                 <tr>
                     <td class="PL30" colspan="2">9 RGP
                         <input type="hidden" class="input_del" id="remove9" readonly th:value="${resultDO.rgpPrescriptionType}"/></td>
-                    <td style="text-align: right" colspan="9">
-                        <select id="rgpDoctor" name="rgpDoctor"  th:value="${resultDO.rgpDoctor}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listDoctor}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="rgpDoctors" name="rgpDoctors" readonly th:value="${resultDO.rgpDoctor}" type="hidden">
+                    <!--<td style="text-align: right" colspan="9">-->
+                        <!--医生：-->
+                        <!--<select id="rgpDoctor" name="rgpDoctor"  th:value="${resultDO.rgpDoctor}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listDoctor}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="rgpDoctors" name="rgpDoctors" readonly th:value="${resultDO.rgpDoctor}" type="hidden">-->
 
-                        验光师：
-                        <select id="rgpOptometryName" name="rgpOptometryName"  th:value="${resultDO.rgpOptometryName}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listYanguang}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="rgpOptometryNames" name="rgpOptometryNames" readonly th:value="${resultDO.rgpOptometryName}" type="hidden">
-
-                    </td>
+                        <!--验光师：-->
+                        <!--<select id="rgpOptometryName" name="rgpOptometryName"  th:value="${resultDO.rgpOptometryName}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listYanguang}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!--<input id="rgpOptometryNames" name="rgpOptometryNames" readonly th:value="${resultDO.rgpOptometryName}" type="hidden">-->
+                    <!--</td>-->
+                    <td style="text-align: right" colspan="3">医生：</td>
+                    <td>  <input id="rgpDoctor" name="rgpDoctor"  th:value="${resultDO.rgpDoctor}"  readonly type="text"></td>
+                    <td style="text-align: right">验光师：</td>
+                    <td><input id="rgpOptometryName" name="rgpOptometryName"  th:value="${resultDO.rgpOptometryName}" type="text"></td>
                 </tr>
                 <tr class="tabS_bg">
                     <td class="w170">&nbsp;</td>
@@ -1839,28 +1879,33 @@
                 <tr>
                     <td class="PL30" colspan="2">10 药品
                         <input readonly type="hidden" class="input_del" id="remove10" th:value="${resultDO.ypPrescriptionType}"/></td>
-                    <td style="text-align: right">
-                        医生：
-                        <select id="ypDoctor" name="ypDoctor"  th:value="${resultDO.ypDoctor}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listDoctor}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="ypDoctors" name="ypDoctors" th:value="${resultDO.ypDoctor}" readonly type="hidden">
+                    <!--<td style="text-align: right">-->
+                        <!--医生：-->
+                        <!--<select id="ypDoctor" name="ypDoctor"  th:value="${resultDO.ypDoctor}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listDoctor}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                       <!---->
+                        <!--<input id="ypDoctors" name="ypDoctors" th:value="${resultDO.ypDoctor}" readonly type="hidden">-->
 
-                        验光师：
-                        <select id="ypOptometryName" name="ypOptometryName"  th:value="${resultDO.ypOptometryName}" disabled>
-                            <option></option>
-                            <option th:each="ls:${listYanguang}"
-                                    th:text="${ls.name}"
-                                    th:value="${ls.name}"
-                            ></option>
-                        </select>
-                        <input id="ypOptometryNames" name="ypOptometryNames" readonly th:value="${resultDO.ypOptometryName}" type="hidden">
-
-                    </td>
+                        <!--验光师：-->
+                        <!--<select id="ypOptometryName" name="ypOptometryName"  th:value="${resultDO.ypOptometryName}" disabled>-->
+                            <!--<option></option>-->
+                            <!--<option th:each="ls:${listYanguang}"-->
+                                    <!--th:text="${ls.name}"-->
+                                    <!--th:value="${ls.name}"-->
+                            <!--&gt;</option>-->
+                        <!--</select>-->
+                        <!---->
+                        <!--<input id="ypOptometryNames" name="ypOptometryNames" readonly th:value="${resultDO.ypOptometryName}" type="hidden">-->
+                    <!--</td>-->
+                    <td style="text-align: right" colspan="3">医生：</td>
+                    <td>  <input id="ypDoctor" name="ypDoctor" th:value="${resultDO.ypDoctor}" readonly type="text"></td>
+                    <td style="text-align: right">验光师：</td>
+                    <td><input id="ypOptometryName" name="ypOptometryName" readonly th:value="${resultDO.ypOptometryName}" type="text"></td>
                 </tr>
                 <tr>
                     <td class="w170">内容：</td>

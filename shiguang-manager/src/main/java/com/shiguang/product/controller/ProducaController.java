@@ -275,7 +275,7 @@ ProducaController {
      */
     @GetMapping("/findbrand/{mfrsid}/{goodsid}")
     @RequiresPermissions("product:produca:findbrand")
-    String findbrand(@PathVariable("mfrsid") Integer mfrsid,@PathVariable("goodsid") Integer goodsid, Model model) {
+    String findbrand(@PathVariable("mfrsid") String mfrsid,@PathVariable("goodsid") Integer goodsid, Model model) {
         model.addAttribute("mfrsid", mfrsid);
         model.addAttribute("goodsid", goodsid);
         Map<String, Object> map = new HashMap<>();

@@ -100,7 +100,6 @@ public class BrandController {
     //查询商品品种
     @ResponseBody
     @GetMapping("/findbrandList")
-    @RequiresPermissions("mfrs:brand:brand")
     public PageUtils findbrandList(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);

@@ -120,7 +120,6 @@
                 <td style="width: 200px">折射率：</td>
                 <td>
                     <select id="refractivityid" name="refractivityid" style="width: 200px">
-                        <option value="">--请选择--</option>
                         <option th:each="ls:${refractivityDOList}" th:text="${ls.refractivityvalue}"
                                 th:value="${ls.refractivityid}"></option>
                     </select>

@@ -49,6 +49,7 @@ public class StockDO implements Serializable {
     private String goodsName;
     //数量
     private String goodsCount;
+    private Integer countall;
     //商品类别
     private Integer goodsType;
     private String gdname;
@@ -137,6 +138,14 @@ public class StockDO implements Serializable {
 
     public void setPositionId(String positionId) {
         this.positionId = positionId;
+    }
+
+    public Integer getCountall() {
+        return countall;
+    }
+
+    public void setCountall(Integer countall) {
+        this.countall = countall;
     }
 
     //仓位名称

@@ -215,6 +215,7 @@ function save() {
 //选择制造商
 function batchSelect() {
     var rows = $("#exampleTable").bootstrapTable("getSelections");
+    // alert(JSON.stringify(rows))
     return rows;
 };
 
