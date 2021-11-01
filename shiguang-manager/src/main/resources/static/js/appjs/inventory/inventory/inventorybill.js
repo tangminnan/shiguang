@@ -84,7 +84,16 @@ function load() {
                             },
                             {
                                 field : 'surplus',
-                                title : '盈余数量'
+                                title : '盈余数量',
+                                formatter : function(value, row, index) {
+                                    if (value == 0){
+                                        return value ;
+                                    } else {
+                                    	var e ="<a style='color: red;text-decoration:none;'>"+value+"</a>"
+                                        return e;
+                                    }
+
+                                }
                             }]
 					});
 }
