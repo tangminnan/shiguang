@@ -14,7 +14,6 @@ import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.domain.WeiwaiDO;
 import com.shiguang.stock.service.StockService;
 import com.sun.org.apache.regexp.internal.RE;
-import com.sun.org.glassfish.external.probe.provider.annotations.ProbeParam;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
