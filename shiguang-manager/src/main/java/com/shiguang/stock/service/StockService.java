@@ -136,6 +136,8 @@ public interface StockService {
 
     //【库存查询】
     List<StockDO> kccxList(Map<String, Object> map);
+    //数量
+    int countall(Map<String, Object> map);
     int kccxListCount(Map<String, Object> map);
     //确认收货
     int updateStatus(StockDO stock);

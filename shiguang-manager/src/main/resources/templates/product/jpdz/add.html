@@ -221,7 +221,6 @@
                 <td>折射率：</td>
                 <td style="width:20%;">
                     <select id="refractivityid" name="refractivityid" class="form-control">
-                        <option></option>
                         <option th:each="ls:${refractivityDOList}"
                                 th:text="${ls.refractivityvalue}"
                                 th:value="${ls.refractivityid}"

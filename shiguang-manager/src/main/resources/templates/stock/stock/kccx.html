@@ -97,11 +97,16 @@
             <td>
                 <input id="retailPrice" name="retailPrice" type="text"/> ~ <input id="retailPrice2" name="retailPrice2" type="text"/>
             </td>
+            <td > 数量：</td>
+            <td>
+                <input id="countall"  readonly type="text"/>
+            </td>
         </tr>
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
         <input type="button" value="查询" onclick="reLoad()"/>
+        <!--<input type="button" value="查看数量" onclick="countall()"/>-->
         <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
@@ -134,6 +139,7 @@
 
 
         $(function () {
+            countall();
             load();
         });
 
@@ -172,13 +178,14 @@
                                 goodsCode : $("#goodsCode").val(),
                                 goodsName : $("#goodsName").val(),
                                 goodsType : $("#goodsType option:selected").val(),
-                                mfrsname : $("#mfrsname").val(),
+                                mfrsid : $("#mfrsid").val(),
+                                // mfrsname : $("#mfrsname").val(),
                                 brandname : $("#brandname").val(),
                                 retailPrice : $("#retailPrice").val(),
                                 retailPrice2 : $("#retailPrice2").val(),
                                 xsstate : $("input[name='xsstate']:checked").val(),
-                                classtype : $("#classtype").val(),
-                                positionId : $('#positionId option:selected').val()
+                                classtype : $("#classtype").val()
+                                // positionId : $('#positionId option:selected').val()
                                 // name:$('#searchName').val(),
                                 // username:$('#searchName').val()
                             };
@@ -226,6 +233,15 @@
 
         }
     });
+
+
+
+
+
+
+
+
+
     <!--选择制造商-->
     function choiceMfrs() {
         var goodsid = document.getElementById('goodsType').value;
@@ -244,7 +260,8 @@
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
                         $("#mfrsname").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
+                        $("#mfrsid").val(rows[i].mfrsnum);
+                        alert(rows[i].mfrsnum)
                         // $("#mfrsNames").val(rows[i].mfrsname);
                     }
                 }
@@ -308,12 +325,12 @@
             $("#classtype").val("0") ;
         }
         var goodsType = $("#goodsType option:selected").val();
-            if (goodsType == 3 || goodsType == 4){
+            if (goodsType == 3 || goodsType == 4) {
                 $("#classtype").val($("input[name='classtype']:checked").val());
-        }
-
+            }
         $(".val").remove();
-       $('#exampleTable').bootstrapTable('refresh');
+        countall();
+        $('#exampleTable').bootstrapTable('refresh');
     }
     function positionChange() {
         var xsstate=$("input[name='xsstate']:checked").val();
@@ -334,7 +351,6 @@
             }
         });
     }
-
     //清空
     function clearText() {
         var controls = document.getElementsByTagName('input');
@@ -344,6 +360,33 @@
             }
         }
     }
+    
+    
+    
+    //查看总数
+    function countall() {
+        var goodsid = $("#goodsType").val();
+        var mfrsid = $('#mfrsid').val();
+        var brandname = $("#brandname").val();
+
+        $.ajax({
+            url: '/kucun/stock/countall',
+            type: 'get',
+            dataType: "json",
+            data: {
+                'goodsid': goodsid,
+                'mfrsid': mfrsid,
+                'brandname': brandname
+            },
+            success: function (xml) {
+                // alert(xml)
+                // console.log(xml)
+                // alert(JSON.stringify(xml))
+                $("#countall").val(xml);
+            }
+        })
+    }
+
 </script>
 
 </body>

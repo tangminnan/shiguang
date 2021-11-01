@@ -1036,14 +1036,23 @@ public class WeiwaiController {
      */
     @GetMapping("/dayinList")
     @RequiresPermissions("stock:weiwai:danyiinList")
-    String dayinList(  String[] ids, String[] mfrsid,Model model) {
+    String dayinList(  String[] ids,String[] danjuNumbers, String[] mfrsid,String  mfrsnames,Model model) {
         model.addAttribute("ids",ids);
+        String danjuNumber="";
+        for (int i=0;i<danjuNumbers.length;i++){
+            danjuNumber+=danjuNumbers[i]+",";
+        }
+        model.addAttribute("danjuNumber",danjuNumber);
         model.addAttribute("mfrsid",mfrsid);
+        model.addAttribute("mfrsnames",mfrsnames);
         //———获取当前系统时间—————
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
         Date date = new Date();
         String dayinDay = sdf.format(date);
         model.addAttribute("dayinDay", dayinDay);
+        //------制单人------
+        String zhidanPeoples = ShiroUtils.getUser().getName();
+        model.addAttribute("zhidanPeoples",zhidanPeoples);
         return "/stock/weiwai/dayinList";
     }
 

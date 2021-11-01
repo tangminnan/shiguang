@@ -361,6 +361,11 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public int countall(Map<String, Object> map) {
+        return stockDao.countall(map);
+    }
+
+    @Override
     public int kccxListCount(Map<String, Object> map) {
         return stockDao.kccxListCount(map);
     }

@@ -24,15 +24,18 @@
 </head>
 <body>
 <div class="container">
-    <!--<input id="danjuNumber" th:value="${weiwaiDO.danjuNumber}" type="hidden"/>-->
+    <input id="danjuNumbers" th:value="${danjuNumbers}" type="text"/>
 	<h3>镜框委外订单</h3>
 	<table class="tabA" border="0" cellspacing="0" cellpadding="0">
-		<!--<tr>-->
+		<tr>
 			<!--<td><b>订单编号：</b><span th:text="${weiwaiDO.danjuNumber}"></span></td>-->
 			<!--<td><b>订单日期：</b><span th:text="${weiwaiDO.danjuDay}"></span></td>-->
-			<!--<td><b>制造商：</b><span th:text="${weiwaiDO.mfrsname}"></span></td>-->
+			<td><b>制造商：</b><span th:text="${mfrsnames}"></span></td>
+			<td><b>制单人：</b><span th:text="${zhidanPeoples}"></span></td>
 			<td><b>打印日期：</b><span th:text="${dayinDay}"></span></td>
-		<!--</tr>-->
+
+
+		</tr>
 	</table>
 	<table class="tabB" border="0" cellspacing="0" cellpadding="0">
 		<thead>
@@ -83,66 +86,66 @@
 	</table>
 </div>
 <div th:include="include::footer"></div>
-<!--<script type="text/javascript">-->
-    <!--$(document).ready(function () {-->
-        <!--var danjuNumber = $('#danjuNumber').val();-->
-        <!--// alert(danjuNumber + "单据");-->
-        <!--var html="";-->
-        <!--$.ajax({-->
-            <!--url: '/stock/weiwai/jkPeijingdanList',-->
-            <!--type: 'post',-->
-            <!--dataType: "json",-->
-            <!--data: {-->
-                <!--'danjuNumber': danjuNumber-->
-            <!--},-->
-            <!--success: function (xml) {-->
-                <!--for (var i = 0; i < xml.length; i++) {-->
-                    <!--var salenumbery=xml[i].salenumbery.split(',');-->
-                    <!--var mirrorTime=xml[i].mirrorTime.split(',');-->
-                    <!--var goodsName=xml[i].goodsName.split(',');-->
-                    <!--var goodsbrandname=xml[i].goodsbrandname.split(',');-->
-                    <!--var style=xml[i].style.split(',');-->
-                    <!--var rl=xml[i].rl.split(',');-->
-                    <!--var count=xml[i].count.split(',');-->
-                    <!--var sph=xml[i].sph.split(',');-->
-                    <!--var cyl=xml[i].cyl.split(',');-->
-                    <!--var axial=xml[i].axial.split(',');-->
-                    <!--var lightbelow=xml[i].lightbelow.split(',');-->
-                    <!--var lengjing=xml[i].lengjing.split(',');-->
-                    <!--// var jd=xml[i].jd.split(',');-->
-                    <!--// var diameter=xml[i].diameter.split(',');-->
-                    <!--var yaoqiu=xml[i].yaoqiu.split(',');-->
-                    <!--var gkname=xml[i].gkname.split(',');-->
-                    <!--for (var t=0;t<goodsName.length;t++){-->
-                        <!--html += "<tr>";-->
-                        <!--html += "<td>"+salenumbery[0]+"</td>";-->
-                        <!--// html += "<td>"+mirrorTime[t]+"</td>";-->
-                        <!--html += "<td>"+goodsbrandname[t]+"</td>";-->
-                        <!--html += "<td>"+style[t]+"</td>";-->
-                        <!--html += "<td>"+rl[t]+"</td>";-->
-                        <!--html += "<td>"+sph[t]+"</td>";-->
-                        <!--html += "<td>"+cyl[t]+"</td>";-->
-                        <!--html += "<td>"+axial[t]+"</td>";-->
-                        <!--html += "<td>"+" "+"</td>";-->
-                        <!--html += "<td>"+" "+"</td>";-->
-                        <!--html += "<td>"+" "+"</td>";-->
-                        <!--html += "<td>"+lightbelow[t]+"</td>";-->
-                        <!--html += "<td>"+lengjing[t]+"</td>";-->
-                        <!--// html += "<td>"+jd[t]+"</td>";-->
-                        <!--// html += "<td>"+diameter[t]+"</td>";-->
-                        <!--html += "<td>"+count[t]+"</td>";-->
-                        <!--html += "<td>"+mirrorTime[t]+"</td>";-->
-                        <!--html += "<td>"+gkname[0]+"</td>";-->
-                        <!--html += "<td>"+yaoqiu[t]+"</td>";-->
-                        <!--html += "</tr>";-->
-                    <!--}-->
-                    <!--$('#jp').append(html);-->
-                <!--}-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var danjuNumber = $('#danjuNumbers').val();
+        // alert(danjuNumber + "单据");
+        var html="";
+        $.ajax({
+            url: '/stock/weiwai/jkPeijingdanList',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'danjuNumber': danjuNumber
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    var salenumbery=xml[i].salenumbery.split(',');
+                    var mirrorTime=xml[i].mirrorTime.split(',');
+                    var goodsName=xml[i].goodsName.split(',');
+                    var goodsbrandname=xml[i].goodsbrandname.split(',');
+                    var style=xml[i].style.split(',');
+                    var rl=xml[i].rl.split(',');
+                    var count=xml[i].count.split(',');
+                    var sph=xml[i].sph.split(',');
+                    var cyl=xml[i].cyl.split(',');
+                    var axial=xml[i].axial.split(',');
+                    var lightbelow=xml[i].lightbelow.split(',');
+                    var lengjing=xml[i].lengjing.split(',');
+                    // var jd=xml[i].jd.split(',');
+                    // var diameter=xml[i].diameter.split(',');
+                    var yaoqiu=xml[i].yaoqiu.split(',');
+                    var gkname=xml[i].gkname.split(',');
+                    for (var t=0;t<goodsName.length;t++){
+                        html += "<tr>";
+                        html += "<td>"+salenumbery[0]+"</td>";
+                        // html += "<td>"+mirrorTime[t]+"</td>";
+                        html += "<td>"+goodsbrandname[t]+"</td>";
+                        html += "<td>"+style[t]+"</td>";
+                        html += "<td>"+rl[t]+"</td>";
+                        html += "<td>"+sph[t]+"</td>";
+                        html += "<td>"+cyl[t]+"</td>";
+                        html += "<td>"+axial[t]+"</td>";
+                        html += "<td>"+" "+"</td>";
+                        html += "<td>"+" "+"</td>";
+                        html += "<td>"+" "+"</td>";
+                        html += "<td>"+lightbelow[t]+"</td>";
+                        html += "<td>"+lengjing[t]+"</td>";
+                        // html += "<td>"+jd[t]+"</td>";
+                        // html += "<td>"+diameter[t]+"</td>";
+                        html += "<td>"+count[t]+"</td>";
+                        html += "<td>"+mirrorTime[t]+"</td>";
+                        html += "<td>"+gkname[0]+"</td>";
+                        html += "<td>"+yaoqiu[t]+"</td>";
+                        html += "</tr>";
+                    }
+                    $('#jp').append(html);
+                }
 
-            <!--}-->
-        <!--});-->
-    <!--})-->
-<!--</script>-->
+            }
+        });
+    })
+</script>
 
 </body>
 </html>
