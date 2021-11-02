@@ -18,4 +18,6 @@ public interface SaleReportService {
     List<SettlementDO> findSaleReportForms(Map<String,Object> map);
 
     int findSaleReportFormsCount(Map<String, Object> map);
+
+    List<SalesDO> findGoodsList(Map<String,Object> map);
 }

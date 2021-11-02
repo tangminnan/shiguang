@@ -2230,13 +2230,13 @@
 		addhtml += "</tr>";
 		addhtml += "<input id='additionalCost' name='additionalCost' type='hidden'/>"
         // addhtml += "<input id='additionalPrice' name='additionalPrice' type='hidden'/>";
-        addhtml += "<input id='additionalPrices' name='additionalPrice' type='hidden' />";
+        addhtml += "<input id='additionalPrices' name='additionalPrice' type='hidden'/>";
 		//document.getElementById('additionalPrice').value = "";
 		$("#fujia").append(addhtml);
         addinal.push(options.text());
         addinalPrice.push(options.val());
         $("#additionalCost").val(addinal);
-        $("#additionalPrices").val()
+        $("#additionalPrices").val(addinalPrice)
 	}
 	var priceNum=0.00;
     function sum(obj){

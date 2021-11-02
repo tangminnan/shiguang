@@ -39,4 +39,9 @@ public class SaleReportServiceImpl implements SaleReportService {
     public int findSaleReportFormsCount(Map<String, Object> map){
         return saleReportDao.findSaleReportFormsCount(map);
     }
+
+    @Override
+    public List<SalesDO> findGoodsList(Map<String, Object> map){
+        return saleReportDao.findGoodsList(map);
+    }
 }

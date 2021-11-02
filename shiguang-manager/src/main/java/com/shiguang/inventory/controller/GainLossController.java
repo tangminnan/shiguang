@@ -71,7 +71,7 @@ public class GainLossController {
 	@GetMapping()
 	@RequiresPermissions("information:gainLoss:gainLoss")
 	String GainLoss(){
-	    return "inventory/gainLoss/gainLoss";
+	    return "inventory/gainloss/gainLoss";
 	}
 	
 	@ResponseBody
@@ -118,7 +118,7 @@ public class GainLossController {
 	String edit(@PathVariable("id") Long id,Model model){
 		GainLossDO gainLoss = gainLossService.get(id);
 		model.addAttribute("gainLoss", gainLoss);
-	    return "inventory/gainLoss/edit";
+	    return "inventory/gainloss/edit";
 	}
 
 	@GetMapping("/detail/{id}")
