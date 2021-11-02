@@ -67,6 +67,16 @@ public class WeiwaiDO implements Serializable {
 	//代码
 	private String num;
 	private String code;
+	//条码
+	private String QRCode;
+
+	public String getQRCode() {
+		return QRCode;
+	}
+
+	public void setQRCode(String QRCode) {
+		this.QRCode = QRCode;
+	}
 
 	public String getCode() {
 		return code;

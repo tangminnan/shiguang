@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="container">
-    <input id="danjuNumbers" th:value="${danjuNumbers}" type="text"/>
+    <input id="danjuNumber" th:value="${danjuNumber}" type="hidden"/>
 	<h3>镜框委外订单</h3>
 	<table class="tabA" border="0" cellspacing="0" cellpadding="0">
 		<tr>
@@ -88,7 +88,7 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript">
     $(document).ready(function () {
-        var danjuNumber = $('#danjuNumbers').val();
+        var danjuNumber = $('#danjuNumber').val();
         // alert(danjuNumber + "单据");
         var html="";
         $.ajax({
@@ -99,6 +99,7 @@
                 'danjuNumber': danjuNumber
             },
             success: function (xml) {
+                // alert(JSON.stringify(xml))
                 for (var i = 0; i < xml.length; i++) {
                     var salenumbery=xml[i].salenumbery.split(',');
                     var mirrorTime=xml[i].mirrorTime.split(',');
@@ -116,7 +117,9 @@
                     // var diameter=xml[i].diameter.split(',');
                     var yaoqiu=xml[i].yaoqiu.split(',');
                     var gkname=xml[i].gkname.split(',');
+                    // alert(goodsName.length)
                     for (var t=0;t<goodsName.length;t++){
+                        // alert(goodsbrandname[t])
                         html += "<tr>";
                         html += "<td>"+salenumbery[0]+"</td>";
                         // html += "<td>"+mirrorTime[t]+"</td>";
@@ -139,9 +142,8 @@
                         html += "<td>"+yaoqiu[t]+"</td>";
                         html += "</tr>";
                     }
-                    $('#jp').append(html);
                 }
-
+                $('#jp').append(html);
             }
         });
     })

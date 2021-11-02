@@ -73,4 +73,7 @@ public interface WeiwaiDao {
 
 	//打印单查询品牌名称
 	BrandDO jkbrandname(Map<String, Object> maps);
+
+	//条码
+	WeiwaiDO getCode(String  danjuNumber);
 }

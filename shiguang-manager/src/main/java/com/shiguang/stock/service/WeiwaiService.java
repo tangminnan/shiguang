@@ -72,4 +72,6 @@ public interface WeiwaiService {
 	YxdzDO selectbrandnumyxdz(String num);
 	//打印单查询品牌名称
 	BrandDO jkbrandname(Map<String, Object> maps);
+	//条码
+	WeiwaiDO getCode(String  danjuNumber);
 }

@@ -99,8 +99,8 @@ function load() {
                                 var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
                                     + row.id + '\')">详情</span> ';
                                 var f = '';
-                                var n = '<span class="btn btn-warning btn-sm"  href="#" title="条形码打印"  mce_href="#" onclick="code(\''
-                                    + row.goodsType+" ','"+ row.danjuNumber + '\')">条形码打印</span> ';
+                                var n = '<span class="btn btn-warning btn-sm"  href="#" title="条码"  mce_href="#" onclick="code(\''
+                                    + row.goodsType+" ','"+ row.danjuNumber + '\')">条码</span> ';
                             }
                             return a + f + n ;
                         }

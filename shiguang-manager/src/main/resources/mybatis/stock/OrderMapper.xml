@@ -265,7 +265,7 @@
 		select o.goods_name,o.goods_code,o.goods_count,o.factory,o.retail_price,p.produc_factorycolor
         from stock_order o
         left join  aa_produca p on o.goodsxinxiid=p.id
-        where danju_number = #{danjuNumber}
+        where o.danju_number = #{danjuNumber}
 	</select>
     <update id="updateStatus" parameterType="com.shiguang.stock.domain.OrderDO">
         update stock_order

@@ -1,5 +1,6 @@
 package com.shiguang.stock.service;
 
+import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.WeiwaiDO;
 import com.shiguang.stock.domain.WeiwaikcDO;
 
@@ -31,4 +32,5 @@ public interface WeiwaikcService {
 
 	//确认收货
 	int updateStatus(WeiwaikcDO weiwaikcDO);
+
 }

@@ -438,10 +438,6 @@ public class WeiwaiController {
         weiwaikcDO.setPstime("");
 
 
-
-
-
-
         if (weiwaikcService.save(weiwaikcDO) > 0) {
             return R.ok();
         }
@@ -799,9 +795,16 @@ public class WeiwaiController {
     @RequestMapping(value = "/jkPeijingdanList")
     public List<WeiwaiDO> selectJKList(String danjuNumber ,Model model ) {
         Map<String, Object> map = new HashMap<>();
-        map.put("danjuNumber", danjuNumber);
-        List<WeiwaiDO> weiwaiDOList = weiwaiService.jkPeijingdanList(map);
-        model.addAttribute("weiwaiDOList", weiwaiDOList);
+//        map.put("danjuNumber", danjuNumber);
+        String[] danjuNumbes=danjuNumber.split(",");
+        List<WeiwaiDO> weiwaiDOList=new ArrayList<>();
+        List<WeiwaiDO> weiwaiDan=new ArrayList<>();
+        for (int i=0;i<danjuNumbes.length;i++){
+            String danjunum=danjuNumbes[i];
+            map.put("danjuNumber",danjunum);
+            weiwaiDan = weiwaiService.jkPeijingdanList(map);
+            weiwaiDOList.addAll(weiwaiDan);
+        }
         return weiwaiDOList;
     }
 
@@ -1056,6 +1059,67 @@ public class WeiwaiController {
         return "/stock/weiwai/dayinList";
     }
 
+//    /**
+//     * 浏览器打印二维码
+//     */
+//    @GetMapping("/code")
+//    public String code(String danjuNumber, Model model) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("danjuNumber",danjuNumber);
+//        List<OrderDO> orderDOS = orderService.getCode(map);
+//        model.addAttribute("orderDOS", orderDOS);
+//        for (OrderDO orderDO1 : orderDOS){
+//            String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
+//            code = "data:image/png;base64," + code;
+//            orderDO1.setQRCode(code);
+//        }
+//        return "/stock/stock/code";
+//    }
+    /**
+     * 浏览器打印二维码
+     */
+    @GetMapping("/code")
+    public String code(String danjuNumber, Model model) {
+
+        WeiwaiDO weiwaiDO = weiwaiService.getCode(danjuNumber);
+        String[] goodsCodes= weiwaiDO.getCode().split(",");
+        String[] goodsCounts= weiwaiDO.getCount().split(",");
+        String [] codeAndCounts = new String[goodsCodes.length];
+        String codes="";
+        String counts="";
+        for (int i=0;i<goodsCodes.length;i++) {
+            codes = goodsCodes[i];
+            counts = goodsCounts[i];
+            codeAndCounts[i] = codes + "," + counts;
+        }
+        model.addAttribute("codeAndCounts",codeAndCounts);
+
+        List<Map<String ,Object>> weiwaiDOList=new ArrayList<>();
+        for (int i=0;i<codeAndCounts.length;i++) {
+            Map<String,Object> map=new HashMap<>();
+            String[] countcode=codeAndCounts[i].split(",");
+            map.put("goodsCodes",countcode[0]);
+            map.put("goodsCounts",countcode[1]);
+            weiwaiDOList.add(map);
+        }
+//       model.addAttribute("weiwaiDOList", weiwaiDOList);
+
+        List<Map<String ,Object>> weiwaiCode=new ArrayList<>();
+        for (int a=0;a<weiwaiDOList.size();a++){
+            Map<String,Object> map=new HashMap<>();
+            String goodsCode=String.valueOf(weiwaiDOList.get(a).get("goodsCodes"));
+            String goodsCount=String.valueOf(weiwaiDOList.get(a).get("goodsCounts"));
+            String code = QRCodeUtil.creatRrCode(String.valueOf(goodsCode), 200,200);
+            code = "data:image/png;base64," + code;
+            map.put("goodsCode",goodsCode);
+            map.put("goodsCount",goodsCount);
+            map.put("QRCode",code);
+            weiwaiCode.add(map);
+        }
+        model.addAttribute("weiwaiCode", weiwaiCode);
+        model.addAttribute("goodsCounts",goodsCounts);
+        return "/stock/weiwai/code";
+    }
 
 }
 

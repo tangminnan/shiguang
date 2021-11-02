@@ -254,7 +254,7 @@ public class OrderDO implements Serializable {
     private String curvatureEr;
     //定做周期（天）
     private Long cycle;
-
+//条码
     private String QRCode;
 
     public String getQRCode() {
