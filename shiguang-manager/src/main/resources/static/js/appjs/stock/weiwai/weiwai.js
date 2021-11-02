@@ -139,6 +139,7 @@ function load() {
                                         var f = '<span class="btn btn-success btn-sm" href="#" title="收货"  mce_href="#"   onclick="userNum(\''
                                             + row.danjuNumber + '\')">收货</span> ';
                                         var n = '';
+                                        var c = '';
                                         // var j = '';
                                     } else if (row.status == "0") {
                                         var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="detial(\''
@@ -149,14 +150,17 @@ function load() {
 												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle+" ','"+  row.yaoqiu  + '\')">配送</span> ';
 											// var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="thNum(\''
 											// 	+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">退回</span> ';
+                                            var c = '';
 										}else {
 											var n = '';
 											// var j = '';
+                                            var c = '<span class="btn btn-danger btn-sm"  href="#" title="条码"  mce_href="#" onclick="code(\''
+                                                + row.goodsType+" ','"+ row.danjuNumber + '\')">条码</span> ';
 										}
 
 
                                     }
-                                    return a + f + n  ;
+                                    return a + f + n  +c;
                                 }
                             }
 								]
@@ -442,6 +446,10 @@ function dayinList() {
 }
 
 
+//打印条码
+function code(goodsType,danjuNumber){
+        window.open("/stock/weiwai/code?danjuNumber="+danjuNumber);
+}
 
 
 

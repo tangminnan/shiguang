@@ -941,4 +941,9 @@
             <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
         </where>
 	</select>
+
+
+    <select id="getCode" resultType="com.shiguang.stock.domain.WeiwaiDO">
+		select  code,count from stock_weiwai   where danju_number = #{danjuNumber}
+	</select>
 </mapper>

@@ -33,4 +33,5 @@ public interface WeiwaikcDao {
 
 	//确认收货
 	int updateStatus(WeiwaikcDO weiwaikcDO);
+
 }

@@ -136,4 +136,10 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	public BrandDO jkbrandname(Map<String, Object> maps) {
 		return weiwaiDao.jkbrandname(maps);
 	}
+
+
+	@Override
+	public WeiwaiDO getCode(String danjuNumber) {
+		return weiwaiDao.getCode(danjuNumber);
+	}
 }
