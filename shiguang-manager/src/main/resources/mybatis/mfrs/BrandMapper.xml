@@ -80,6 +80,7 @@
              <if test="payid != null and payid != ''">and b.payid = #{payid}</if>
              <if test="mfrsids != null and mfrsids != ''">and b.mfrsid = #{mfrsids}</if>
              <if test="goodsids != null and goodsids != ''">and b.goodsid = #{goodsids}</if>
+             <if test="mfrsnames != null and mfrsnames != ''">and m.mfrsname = #{mfrsnames}</if>
              <!--<if test="mfrsids != null and mfrsids != ''">and b.mfrsid LIKE concat('%', #{mfrsids},'%')</if>-->
              <!--<if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat('%', #{goodsids},'%')</if>-->
              and  b.state= 1

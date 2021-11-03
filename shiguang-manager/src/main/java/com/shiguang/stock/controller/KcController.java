@@ -4,12 +4,12 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.common.utils.StringUtils;
-import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.GoodsDO;
-import com.shiguang.mfrs.domain.PositionDO;
-import com.shiguang.mfrs.service.GoodsService;
-import com.shiguang.mfrs.service.PositionService;
+import com.shiguang.mfrs.domain.*;
+import com.shiguang.mfrs.service.*;
 import com.shiguang.product.domain.HcDO;
+import com.shiguang.product.service.ProducaService;
+import com.shiguang.product.service.StyleService;
+import com.shiguang.product.service.TechnologyService;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.domain.WeiwaiDO;
 import com.shiguang.stock.service.StockService;
@@ -44,6 +44,16 @@ public class KcController {
     //仓位
     @Autowired
     private PositionService positionService;
+
+    //制造商
+    @Autowired
+    private MfrsService mfrsService;
+    //支付方式
+    @Autowired
+    private PayService payService;
+    @Autowired
+    private  BrandService brandService;
+
 
     private Double retailPrice;
     private Double retailPrice2;
@@ -117,6 +127,34 @@ public class KcController {
         PageUtils pageUtils = new PageUtils(stockDOS, total);
         return pageUtils;
     }
+
+
+
+    /**
+     * 选择商品品种
+     */
+    @GetMapping("/findbrand/{mfrsname}/{goodsid}")
+    String findbrand(@PathVariable("mfrsname") String mfrsname,@PathVariable("goodsid") Integer goodsid, Model model) {
+        model.addAttribute("mfrsname", mfrsname);
+        model.addAttribute("goodsid", goodsid);
+        Map<String, Object> map = new HashMap<>();
+        //品牌
+        List<BrandDO> brandDOList = brandService.list(map);
+        model.addAttribute("brandDOList", brandDOList);
+        //商品类别
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
+        //制造商
+        List<MfrsDO> mfrsDOList = mfrsService.list(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        //支付
+        List<PayDO> payDOList = payService.list(map);
+        model.addAttribute("payDOList", payDOList);
+        return "/product/produca/findBrand";
+
+    }
+
+
 
 //    //库存数量
     @ResponseBody

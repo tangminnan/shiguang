@@ -34,8 +34,10 @@ function load() {
                         offset: params.offset,
                         mfrsids: $('#mfrsids').val(),
                         goodsids: $('#goodsids').val(),
+                        mfrsnames: $('#mfrsnames').val(),
                         goodsid: $('#goodsid').val(),
                         mfrsid: $('#mfrsid').val(),
+
                         brandnum: $('#brandnum').val(),
                         stateId: $('#stateId').val(),
                         payid: $('#payid').val(),
