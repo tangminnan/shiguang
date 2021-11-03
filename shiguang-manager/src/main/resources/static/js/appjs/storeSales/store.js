@@ -664,7 +664,7 @@ function getYinxing(){
         }
     }
     if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
-        return alert("请选择球镜度数");
+        return layer.alert("请选择球镜度数");
     }
     var str = 0;
     var toIndex = layer.open({
@@ -1034,7 +1034,7 @@ var shishouqj=0.00;
 function getTaocanXz(){
     var checkDate="";
     if (check_val == '' && check_val != undefined){
-        return alert("请选择商品")
+        return layer.alert("请选择商品")
     } else {
         $("#checkValue").val(check_val);
         checkDate = $("#checkValue").val();

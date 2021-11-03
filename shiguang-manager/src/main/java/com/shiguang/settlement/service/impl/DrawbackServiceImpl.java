@@ -162,6 +162,9 @@ public class DrawbackServiceImpl implements DrawbackService {
 							stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
 							stockDO.setFactory(producaD.get(0).getFactory());
 							stockDO.setUsername(ShiroUtils.getUser().getUsername());
+							stockDO.setClasstype("0");
+							stockDO.setStatus("0");
+							stockDO.setReturnzt("1");
 							stockService.save(stockDO);
 						}
 					}
@@ -195,6 +198,9 @@ public class DrawbackServiceImpl implements DrawbackService {
 								stockDO.setFactory(producaD.get(0).getFactory());
 							}
 							stockDO.setUsername(ShiroUtils.getUser().getUsername());
+							stockDO.setClasstype("0");
+							stockDO.setStatus("0");
+							stockDO.setReturnzt("1");
 							stockService.save(stockDO);
 						}
 					} else if ("镜片".equals(storeDescribe[i])){
@@ -217,6 +223,8 @@ public class DrawbackServiceImpl implements DrawbackService {
 								stockDO.setClasstype("2");
 								stockDO.setUsername(ShiroUtils.getUser().getUsername());
 								stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+								stockDO.setStatus("0");
+								stockDO.setReturnzt("1");
 								stockService.save(stockDO);
 							}
 						} else if ("1".equals(classType[i])){
@@ -237,6 +245,8 @@ public class DrawbackServiceImpl implements DrawbackService {
 								stockDO.setClasstype("1");
 								stockDO.setUsername(ShiroUtils.getUser().getUsername());
 								stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+								stockDO.setStatus("0");
+								stockDO.setReturnzt("1");
 								stockService.save(stockDO);
 							}
 						}

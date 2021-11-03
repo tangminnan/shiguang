@@ -324,6 +324,7 @@ public class LogStatusController {
         String storeDesc = salesDO.getStoreDescribe();
         String[] storeDescribe = storeDesc.split(",");
         String[] goodsCode = salesDO.getGoodsCode().split(",");
+        String[] storeCount = salesDO.getStoreCount().split(",");
         String companyId = "";
         if (null != ShiroUtils.getUser().getCompanyId()) {
             companyId = ShiroUtils.getUser().getCompanyId();
@@ -345,7 +346,7 @@ public class LogStatusController {
                 StockDO stockDO = stockService.getProduceCode(stockDOs);
                 if (null != stockDO){
                     Long countGoods = Long.parseLong(stockDO.getGoodsCount());
-                    Long count = countGoods - 1;
+                    Long count = countGoods - Long.valueOf(storeCount[a]);
                     stockDO.setGoodsCount(String.valueOf(count));
                     stockService.updateGoodsCount(stockDO);
                 }
@@ -439,7 +440,8 @@ public class LogStatusController {
             SalesDO salesDO = salesService.getSaleNumber(salesDOs.getSaleNumber());
             String storeDesc = salesDO.getStoreDescribe();
             String[] storeDescribe = storeDesc.split(",");
-            String[] storeCode = salesDO.getGoodsCode().split(",");
+            String[] storeNum = salesDO.getGoodsNum().split(",");
+            String[] storeCount = salesDO.getStoreCount().split(",");
             String companyId = "";
             if (null != ShiroUtils.getUser().getCompanyId()) {
                 companyId = ShiroUtils.getUser().getCompanyId();
@@ -451,11 +453,11 @@ public class LogStatusController {
                 if (!"镜架".equals(storeDescribe[a]) && !"自架".equals(storeDescribe[a]) && !"自片".equals(storeDescribe[a]) ){
                     StockDO stockDOs = new StockDO();
                     stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
-                    stockDOs.setGoodsCode(storeCode[a]);
-                    StockDO stockDO = stockService.getProduceCode(stockDOs);
+                    stockDOs.setGoodsNum(storeNum[a]);
+                    StockDO stockDO = stockService.getProduceNum(stockDOs);
                     if (null != stockDO){
                         Long countGoods = Long.parseLong(stockDO.getGoodsCount());
-                        Long count = countGoods - 1;
+                        Long count = countGoods - Long.valueOf(storeCount[i]);
                         stockDO.setGoodsCount(String.valueOf(count));
                         stockService.updateGoodsCount(stockDO);
                     }

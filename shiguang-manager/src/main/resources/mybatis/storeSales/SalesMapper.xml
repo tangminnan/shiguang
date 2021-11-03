@@ -4,7 +4,7 @@
 <mapper namespace="com.shiguang.storeSales.dao.SalesDao">
 
 	<select id="get" resultType="com.shiguang.storeSales.domain.SalesDO">
-		select `id`,`member_number`,`sale_name`,`sale_number`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name`,`batch` from store_sales where id = #{value}
+		select `id`,`member_number`,`sale_name`,`sale_number`,`goods_num`,`eye_type`,`amount_money`,`mirror_way`,`mirror_time`,`miror_address`,`urgent_status`,`goods_rebate`,`fixed_price`,`moling_money`,`additional_cost`,`process_ask`,`store_name`,`store_describe`,`store_unit`,`store_count`,`remark`,`give_name`,`batch` from store_sales where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.storeSales.domain.SalesDO">

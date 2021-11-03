@@ -20,4 +20,6 @@ public interface SaleReportService {
     int findSaleReportFormsCount(Map<String, Object> map);
 
     List<SalesDO> findGoodsList(Map<String,Object> map);
+
+    List<SalesDO> findSaleNameList(Map<String,Object> map);
 }

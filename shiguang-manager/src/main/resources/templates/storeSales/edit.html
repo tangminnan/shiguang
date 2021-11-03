@@ -40,7 +40,7 @@
 					<option th:each="ls:${userDOList}"
 							th:text="${ls.name}"
 							th:value="${ls.name}"></option>
-					<input id="salenames" name="saleName" th:value="${saleName}" type="hidden"/>
+					<input id="salenames" name="saleNames" th:value="${saleName}" type="hidden"/>
 				</select>
 		</span>
 	</div>
@@ -1211,7 +1211,7 @@
         var myTime = "";
         myTime = year + "-" + month + "-" + date +" "+ hour + ":"+ minutes + ":"+ seconds;
         $("#yanguangTime").val(myTime);
-        var salenames = $("input[name='saleName']").val();
+        var salenames = $("input[name='saleNames']").val();
         $("#saleName").find("[value="+salenames+"]").attr("selected",true);
 
     });
@@ -1658,7 +1658,6 @@
                     a=a+1;
 				}
                 for (var i=0;i<rows.length;i++){
-                    alert(rows[i].goodsName);
                     var goodsNumStr = rows[i].goodsNum;
                     var retailPrice = rows[i].retailPrice;
                     var desc = '镜架';
@@ -2039,7 +2038,7 @@
             }
 		}
         if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
-            return alert("请选择球镜度数");
+            return layer.alert("请选择球镜度数");
         }
         // alert(rightYuanYongQJ == '');
         // alert(rightYuanYongZJ == null);
@@ -2240,15 +2239,12 @@
 	}
 	var priceNum=0.00;
     function sum(obj){
-	    alert(obj)
         var yjyhPrice = $("#amountMoney").val();
         document.getElementById('additionalPrices').value = "";
         var privaul = $("#prival").val();
-        alert(privaul);
         prce = privaul;
         var sumprices = (parseFloat(privaul) * parseFloat(obj)).toFixed(2);
         sumprice.innerText = sumprices;
-        alert(sumprices)
         //$("#sumprice").val(sumprices);
 		$("#additionalPrices").val(sumprices);
         priceNum = sumprices;
@@ -2362,7 +2358,7 @@
         var molingMoney = $("#molingMoney").val();
         if (parseInt(molingMoney) >= parseInt(price)){
             $("#molingMoney").val(0.00);
-            return alert("抹零金额不能大于实收金额");
+            return layer.alert("抹零金额不能大于实收金额");
         }
         if ("" == molingMoney){
             molingPrice = 0.00;
@@ -2384,7 +2380,6 @@
         lis += "<li>抹零金额："+molingPrice+"</li>";
         $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
         if ("0.00" != zkMoney){
-            alert(zkMoney)
             price = (parseFloat(price) - parseFloat(zkMoney)).toFixed(2);
         }
         lis += "<li>应收金额："+price+"</li>";
@@ -2402,19 +2397,19 @@
 		var leftYuanYongQJ = $("#leftYuanYongQJ").val();
 		var leftYuanYongZJ = $("#leftYuanYongZJ").val();
 		if (rightYuanYongQJ%0.25!=0){
-		    alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("rightYuanYongQJ").value="";
 		}
 		if (rightYuanYongZJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("rightYuanYongZJ").value="";
 		}
         if (leftYuanYongQJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("leftYuanYongQJ").value="";
         }
         if (leftYuanYongZJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("leftYuanYongZJ").value="";
         }
     }
@@ -2424,19 +2419,19 @@
        var leftYinxingQJ = $("#leftYinxingQJ").val();
        var leftYinxingZJ = $("#leftYinxingZJ").val();
         if (rightYinxingQJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("rightYinxingQJ").value="";
         }
         if (rightYinxingZJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("rightYinxingZJ").value="";
         }
         if (leftYinxingQJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("leftYinxingQJ").value="";
         }
         if (leftYinxingZJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("leftYinxingZJ").value="";
         }
     }
@@ -2446,19 +2441,19 @@
         var leftFuLiaoQJ = $("#leftFuLiaoQJ").val();
         var leftFuLiaoZJ= $("#leftFuLiaoZJ").val();
         if (rightFuLiaoQJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("rightFuLiaoQJ").value="";
         }
         if (rightFuLiaoZJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("rightFuLiaoZJ").value="";
         }
         if (leftFuLiaoQJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("leftFuLiaoQJ").value="";
         }
         if (leftFuLiaoZJ%0.25!=0){
-            alert("球镜、柱镜、ADD应为0.25的倍数!");
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
             document.getElementById("leftFuLiaoZJ").value="";
         }
 	}

@@ -169,10 +169,14 @@
 		s.`recipel_type`,s.`optometrywl_name`,s.`recipelwl_type`,s.`taocan_name`,s.`classtype`,s.`additional_price`,s.`additional_count`,s.`unit`,s.`batch`,s.`left_right`,s.`righttg`,s.`lefttg`
 		from store_sales s join member m on m.card_number = s.member_number
 		<where>
-			<if test="settleDateStart !=null and settleDateStart != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
-			<if test="settleDateEnd !=null and settleDateEnd != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''">and date_format(s.peijing_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''">and date_format(s.peijing_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
 			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
 		</where>
+	</select>
+
+	<select id="findSaleNameList" resultType="com.shiguang.storeSales.domain.SalesDO">
+		select sale_name from store_sales  where sale_type = '1' GROUP BY sale_name
 	</select>
 </mapper>
