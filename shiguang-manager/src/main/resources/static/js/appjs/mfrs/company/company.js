@@ -34,7 +34,7 @@ function load() {
                         limit: params.limit,
                         offset:params.offset,
                         name: $('#name').val(),
-                        province: $('#province').val(),
+                        provinceName: $('#province').val(),
                         type: $('#type').val(),
                         telephone :$('#telephone').val()
                         // name:$('#searchName').val(),

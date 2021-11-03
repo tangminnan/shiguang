@@ -1838,7 +1838,7 @@
 <!--            <if test="goodsName != null and goodsName != ''">and  s.goods_name= #{goodsName}</if>-->
             <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
-            <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
+            <!--<if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>-->
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
@@ -1866,14 +1866,14 @@
         </if>
     </select>
     <select id="countall" resultType="int">
-        select sum(goods_count) as countall  from stock
+        select sum(s.goods_count) as countall  from stock s join c_mfrs m on s.mfrsid=m.mfrsnum
         <where>
-            <if test="goodsNum != null and goodsNum != ''">and  goods_num = #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and  goods_code = #{goodsCode}</if>
-            <if test="goodsName != null and goodsName != ''">and   goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
-            <if test="goodsid != null and goodsid != ''">and  goods_type = #{goodsid}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandname != null and brandname != ''">and  brandname = #{brandname}</if>
+            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and   s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+            <if test="goodsid != null and goodsid != ''">and  s.goods_type = #{goodsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and  s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  retail_price and  retail_price &lt;=  #{retailPrice2}
             </if>

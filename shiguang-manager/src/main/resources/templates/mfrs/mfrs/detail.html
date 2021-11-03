@@ -94,6 +94,7 @@
                             <div class="col-sm-8">
                                 <select name="payid" id="payid" th:value="${mfrs.payid}" onchange="payChange()"
                                         data-actions-box="false" data-size="5" disabled>
+                                    <option></option>
                                     <option th:each="ls:${payDOList}"
                                             th:text="${ls.paymethod}"
                                             th:value="${ls.payid}"></option>

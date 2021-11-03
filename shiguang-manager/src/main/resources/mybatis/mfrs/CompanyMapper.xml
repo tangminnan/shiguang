@@ -21,7 +21,10 @@
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
             <if test="ids != null and ids != ''">and FIND_IN_SET(id,#{ids}) </if>
-            <if test="name != null and name != ''">and name = #{name}</if>
+
+            <if test="name != null and name != ''">and name LIKE concat('%', #{name},'%')</if>
+
+            <if test="provinceName != null and provinceName != ''">and province_name = #{provinceName}</if>
             <if test="province != null and province != ''">and province = #{province}</if>
             <if test="citys != null and citys != ''">and citys = #{citys}</if>
             <if test="provinceCode != null and provinceCode != ''"> and province_code = #{provinceCode} </if>
@@ -30,8 +33,11 @@
             <if test="cityName != null and cityName != ''"> and city_name = #{cityName} </if>
             <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
             <if test="areaName != null and areaName != ''"> and area_name = #{areaName} </if>
-            <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="telephone != null and telephone != ''">and telephone = #{telephone}</if>
+
+            <if test="type != null and type != ''">and type LIKE concat('%', #{type},'%')</if>
+
+            <if test="telephone != null and telephone != ''">and telephone LIKE concat('%', #{telephone},'%')</if>
+
             <if test="legalperson != null and legalperson != ''">and legalperson = #{legalperson}</if>
             <if test="phone != null and phone != ''">and phone = #{phone}</if>
             <if test="purchaseaddress != null and purchaseaddress != ''">and purchaseaddress = #{purchaseaddress}</if>

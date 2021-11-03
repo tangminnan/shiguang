@@ -121,11 +121,11 @@ public class KcController {
 //    //库存数量
     @ResponseBody
     @GetMapping("/countall")
-    public Integer countall(@RequestParam("goodsid") String goodsid, @RequestParam("mfrsid") String mfrsid,
+    public Integer countall(@RequestParam("goodsid") String goodsid, @RequestParam("mfrsname") String mfrsname,
                             @RequestParam("brandname") String brandname, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("goodsid",goodsid);
-        map.put("mfrsid",mfrsid);
+        map.put("mfrsname",mfrsname);
         map.put("brandname",brandname);
         int countall=stockService.countall(map);
         model.addAttribute("countall",countall);

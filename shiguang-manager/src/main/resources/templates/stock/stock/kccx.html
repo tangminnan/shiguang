@@ -51,7 +51,7 @@
             </td>
             <td>制造商：</td>
             <td>
-                <input id="mfrsid" name="mfrsid" type="hidden" value=""/>
+                <!--<input id="mfrsid" name="mfrsid" type="hidden" value=""/>-->
                 <input id="mfrsname" name="mfrsname" type="text" readonly/>
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
             </td>
@@ -178,8 +178,8 @@
                                 goodsCode : $("#goodsCode").val(),
                                 goodsName : $("#goodsName").val(),
                                 goodsType : $("#goodsType option:selected").val(),
-                                mfrsid : $("#mfrsid").val(),
-                                // mfrsname : $("#mfrsname").val(),
+                                // mfrsid : $("#mfrsid").val(),
+                                mfrsname : $("#mfrsname").val(),
                                 brandname : $("#brandname").val(),
                                 retailPrice : $("#retailPrice").val(),
                                 retailPrice2 : $("#retailPrice2").val(),
@@ -261,7 +261,7 @@
                     for (var i = 0; i < rows.length; i++) {
                         $("#mfrsname").val(rows[i].mfrsname);
                         $("#mfrsid").val(rows[i].mfrsnum);
-                        alert(rows[i].mfrsnum)
+                        // alert(rows[i].mfrsnum)
                         // $("#mfrsNames").val(rows[i].mfrsname);
                     }
                 }
@@ -366,7 +366,7 @@
     //查看总数
     function countall() {
         var goodsid = $("#goodsType").val();
-        var mfrsid = $('#mfrsid').val();
+        var mfrsname = $('#mfrsname').val();
         var brandname = $("#brandname").val();
 
         $.ajax({
@@ -375,7 +375,7 @@
             dataType: "json",
             data: {
                 'goodsid': goodsid,
-                'mfrsid': mfrsid,
+                'mfrsname': mfrsname,
                 'brandname': brandname
             },
             success: function (xml) {
