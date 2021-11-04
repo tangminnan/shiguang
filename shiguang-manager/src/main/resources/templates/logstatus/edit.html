@@ -83,9 +83,9 @@
 		</tr>
 		<tr>
 			<td>焦度计</td>
-			<td><input type="text" id="jdjSphRight1" name="jdjSphRight1" onchange="getJdjSphRight()"/></td>
-			<td><input type="text" id="jdjCylRight1" name="jdjCylRight1" onchange="getJdjCylRight()"/></td>
-			<td><input type="text" id="jdjZxRight1" name="jdjZxRight1" onchange="getJdjZxRight()"/></td>
+			<td><input type="text" id="jdjSphRight1" name="jdjSphRight1" /></td>
+			<td><input type="text" id="jdjCylRight1" name="jdjCylRight1" /></td>
+			<td><input type="text" id="jdjZxRight1" name="jdjZxRight1" /></td>
 			<td rowspan="3">
 				<select name="xieshiRight" id="xieshiRight">
 					<option value="">--请选择--</option>
@@ -200,10 +200,19 @@
         var leftzx = $("#leftzx").val();
 		if (Number(rightsph) > 0){
            var rightsph2 =  Number(rightsph) + Number(rightcyl);
-           $("#rightsph2").text("+"+rightsph2.toFixed(2));
+           if (rightsph2 > 0){
+               $("#rightsph2").text("+"+rightsph2.toFixed(2));
+		   } else {
+               $("#rightsph2").text(rightsph2.toFixed(2));
+		   }
+
 		} else {
             var rightsph2 = Number(rightsph) + Number(rightcyl);
-            $("#rightsph2").text(rightsph2.toFixed(2));
+            if (rightsph2 > 0){
+                $("#rightsph2").text("+"+rightsph2.toFixed(2));
+            } else {
+                $("#rightsph2").text(rightsph2.toFixed(2));
+            }
 		}
 		rightcyl -= rightcyl*2;
 		$("#rightcyl2").text("+"+rightcyl.toFixed(2));
@@ -216,10 +225,18 @@
 		}
         if (Number(leftsph) > 0){
             var leftsph2 =  Number(leftsph) + Number(leftcyl);
-            $("#leftsph2").text("+"+leftsph2.toFixed(2));
+			if (leftsph2 > 0){
+                $("#leftsph2").text("+"+leftsph2.toFixed(2));
+			} else {
+                $("#leftsph2").text(leftsph2.toFixed(2));
+			}
         } else {
             var leftsph2 = Number(leftsph) + Number(leftcyl);
-            $("#leftsph2").text(leftsph2.toFixed(2));
+            if (leftsph2 > 0){
+                $("#leftsph2").text("+"+leftsph2.toFixed(2));
+            } else {
+                $("#leftsph2").text(leftsph2.toFixed(2));
+            }
         }
         leftcyl -= leftcyl*2;
         $("#leftcyl2").text("+"+leftcyl.toFixed(2));
@@ -231,18 +248,26 @@
             $("#leftzx2").text(leftzx2);
         }
     });
-    function getJdjSphRight(){
 
-	}
     function getFetch(){
         var rightsph = $("#jdjSphRight1").val();
         var rightcyl = $("#jdjCylRight1").val();
         if (Number(rightsph) > 0){
             var rightsph2 =  Number(rightsph) + Number(rightcyl);
-            $("#jdjSphRight2").val("+"+rightsph2);
+            if (rightsph2 > 0){
+                $("#jdjSphRight2").val("+"+rightsph2);
+			} else {
+                $("#jdjSphRight2").val(rightsph2);
+			}
+
         } else {
             var rightsph2 = Number(rightsph) + Number(rightcyl);
-            $("#jdjSphRight2").val(rightsph2);
+            if (rightsph2 > 0){
+                $("#jdjSphRight2").val("+"+rightsph2);
+			} else {
+                $("#jdjSphRight2").val(rightsph2);
+			}
+
         }
         rightcyl -= rightcyl*2;
         $("#jdjCylRight2").val("+"+rightcyl);
@@ -258,10 +283,19 @@
         var leftcyl = $("#jdjCylLeft1").val();
         if (Number(leftsph) > 0){
             var leftsph2 =  Number(leftsph) + Number(leftcyl);
-            $("#jdjSphLeft2").val("+"+leftsph2);
+            if (leftsph2 > 0){
+                $("#jdjSphLeft2").val("+"+leftsph2);
+			} else {
+                $("#jdjSphLeft2").val(leftsph2);
+			}
+
         } else {
             var leftsph2 = Number(leftsph) + Number(leftcyl);
-            $("#jdjSphLeft2").val(leftsph2);
+            if (leftsph2 > 0){
+                $("#jdjSphLeft2").val("+"+leftsph2);
+            } else {
+                $("#jdjSphLeft2").val(leftsph2);
+            }
         }
         leftcyl -= leftcyl*2;
         $("#jdjCylLeft2").val("+"+leftcyl);
@@ -903,7 +937,9 @@
             } else {
                 jdjZxRight1.style = "background-color:#ff0000;";
             }
-        }
+        } else if (Math.abs(rightcyl) == 0.00){
+            jdjZxRight1.style = "background-color:#008000;";
+		}
         if (Math.abs(rightcyl22) >= 0.125 && Math.abs(rightcyl22) <= 0.25){
             var rightzx1 = Number(rightzx22) + Number(2);
             var rightzx2 = Number(rightzx22) - Number(2);
@@ -958,7 +994,9 @@
             } else {
                 jdjZxRight2.style = "background-color:#ff0000;";
             }
-        }
+        } else if (Math.abs(rightcyl22) == 0.00){
+            jdjZxRight2.style = "background-color:#008000;";
+		}
 
         if (Math.abs(leftcyl) >=0.125 && Math.abs(leftcyl) <= 0.25){
             var leftzx1 = Number(leftzx) + Number(16);
@@ -1014,7 +1052,9 @@
             } else {
                 jdjZxLeft1.style = "background-color:#ff0000;";
             }
-        }
+        } else if (Math.abs(leftcyl) == 0.00){
+            jdjZxLeft1.style = "background-color:#008000;";
+		}
         if (Math.abs(leftcyl22) >= 0.125 && Math.abs(leftcyl22) <= 0.25){
             var leftzx1 = Number(leftzx22) + Number(2);
             var leftzx2 = Number(leftzx22) - Number(2);
@@ -1069,7 +1109,9 @@
             } else {
                 jdjZxLeft2.style = "background-color:#ff0000;";
             }
-        }
+        } else if (Math.abs(leftcyl22) == 0.00){
+            jdjZxLeft2.style = "background-color:#008000;";
+		}
 
         chuichajdj.style = "background-color:#008000;";
 	}

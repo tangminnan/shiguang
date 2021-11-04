@@ -103,6 +103,8 @@
             <if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
             <if test="classtype != null and classtype != ''">and FIND_IN_SET(#{classtype},sa.classtype) </if>
             <if test="storeDescribe != null and storeDescribe != ''">or sa.`store_describe` in (#{storeDescribe})</if>
+            <if test="memberName !=null and memberName != ''">and m.`name` like concat('%', #{memberName},'%')</if>
+            <if test="phone !=null and phone != ''">and m.`phone_1` like concat('%', #{phone},'%')</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

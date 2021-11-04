@@ -112,7 +112,12 @@ public class ExamineController {
         if (null != conclusionList && conclusionList.size() > 0){
             conclusion.setRightsph(conclusionList.get(0).getRightsph());
             conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
-            conclusion.setRightzx(conclusionList.get(0).getRightzx());
+            if (!"".equals(conclusionList.get(0).getRightzx()) && null != conclusionList.get(0).getRightzx()){
+                conclusion.setRightzx(conclusionList.get(0).getRightzx());
+            } else {
+                conclusion.setRightzx("0");
+            }
+
             if (null != conclusionList.get(0).getRightyytj()){
                 conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
             } else {
@@ -123,7 +128,11 @@ public class ExamineController {
             conclusion.setRightjd(conclusionList.get(0).getRightjd());
             conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
             conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
-            conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
+            if (null != conclusionList.get(0).getLeftzx() && !"".equals(conclusionList.get(0).getLeftzx())){
+                conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
+            } else {
+                conclusion.setLeftzx("0");
+            }
             if (null != conclusionList.get(0).getLeftyytj()){
                 conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
             } else {

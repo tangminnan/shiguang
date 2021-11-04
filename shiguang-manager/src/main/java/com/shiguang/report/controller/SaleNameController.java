@@ -42,8 +42,7 @@ public class SaleNameController {
         List<SalesDO> salesDOList = saleReportService.findGoodsList(query);
         List<SalesDO> saleNameList = saleReportService.findSaleNameList(query);
         List<Map<String,Object>> list = new ArrayList<>();
-        String salename="";
-
+        //String salename="";
         if (null != salesDOList && salesDOList.size() > 0){
             for (SalesDO salesDO : saleNameList){
                 int jjcount=0;
@@ -104,6 +103,8 @@ public class SaleNameController {
             }
 
         }
+        model.addAttribute("list",list);
+        model.addAttribute("date",simpleDateFormat.format(new Date()));
         return "";
     }
 }

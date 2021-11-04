@@ -34,7 +34,9 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
                                 saleNumber: $("#saleNumber").val(),
-                                classtype:$("#classtype").val()
+                                classtype:$("#classtype").val(),
+                                memberName:$('#memberName').val(),
+                                phone:$('#phone').val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
