@@ -368,17 +368,57 @@
 	</select>
 	<select id="findAll" resultType="com.shiguang.storeSales.domain.Conclusion">
 		SELECT
-		cardNumber,ptometryNum,createTime,chufangType,yangsName,status,rightsph,leftsph,rightcyl,leftcyl,rightzx,leftzx,rightprism,leftprism,rightjd,leftjd,
-		rightyytj,leftyytj,righttg,lefttg,rightva,leftva,rightsyjp,leftsyjp,rightunit,leftunit,rightjytj,leftjytj,rightjyva,leftjyva,rightqgd,leftqgd,
-		rightbc,leftbc,rightdia,leftdia,rightsg,leftsg,righttssj,lefttssj,rightrgpsyjp,leftrgpsyjp
-		from
-		(SELECT
-		r.card_number as cardNumber,
+		cardNumber,
+		ptometryNum,
+		createTime,
+		chufangType,
+		yangsName,
+		STATUS,
+		rightsph,
+		leftsph,
+		rightcyl,
+		leftcyl,
+		rightzx,
+		leftzx,
+		rightprism,
+		leftprism,
+		rightjd,
+		leftjd,
+		rightyytj,
+		leftyytj,
+		righttg,
+		lefttg,
+		rightva,
+		leftva,
+		rightsyjp,
+		leftsyjp,
+		rightunit,
+		leftunit,
+		rightjytj,
+		leftjytj,
+		rightjyva,
+		leftjyva,
+		rightqgd,
+		leftqgd,
+		rightbc,
+		leftbc,
+		rightdia,
+		leftdia,
+		rightsg,
+		leftsg,
+		righttssj,
+		lefttssj,
+		rightrgpsyjp,
+		leftrgpsyjp
+		FROM
+		(
+		SELECT
+		k.card_number AS cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		k.kjjy_prescription_type AS chufangType,
 		k.kjjy_optometry_name AS yangsName,
-		k.`status` as status,
+		k.`status` AS STATUS,
 		k.kjjy_sphod AS rightsph,
 		k.kjjy_sphos AS leftsph,
 		k.kjjy_cylod AS rightcyl,
@@ -403,29 +443,30 @@
 		'' AS leftjytj,
 		k.kjjy_vaod AS rightjyva,
 		k.kjjy_vaos AS leftjyva,
-		'' as rightqgd,
-		'' as leftqgd,
-		'' as rightbc,
-		'' as leftbc,
-		'' as rightdia,
-		'' as leftdia,
-		'' as rightsg,
-		'' as leftsg,
-		'' as righttssj,
-		'' as lefttssj,
-		'' as rightrgpsyjp,
-		'' as leftrgpsyjp
+		'' AS rightqgd,
+		'' AS leftqgd,
+		'' AS rightbc,
+		'' AS leftbc,
+		'' AS rightdia,
+		'' AS leftdia,
+		'' AS rightsg,
+		'' AS leftsg,
+		'' AS righttssj,
+		'' AS lefttssj,
+		'' AS rightrgpsyjp,
+		'' AS leftrgpsyjp
 		FROM
 		jc_kjjy k
-		LEFT JOIN jc_result r ON k.card_number = r.card_number and r.ptometry_number = k.ptometry_number
+		LEFT JOIN jc_result r ON k.card_number = r.card_number
+		AND r.ptometry_number = k.ptometry_number
 		UNION
 		SELECT
-		r.card_number as cardNumber,
+		ky.card_number AS cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		ky.kjyy_prescription_type AS chufangType,
 		ky.kjyy_optometry_name AS yangsName,
-		ky.`status` as status,
+		ky.`status` AS STATUS,
 		ky.kjyy_sphod AS rightsph,
 		ky.kjyy_sphos AS leftsph,
 		ky.kjyy_cylod AS rightcyl,
@@ -450,29 +491,30 @@
 		'' AS leftjytj,
 		'' AS rightjyva,
 		'' AS leftjyva,
-		'' as rightqgd,
-		'' as leftqgd,
-		'' as rightbc,
-		'' as leftbc,
-		'' as rightdia,
-		'' as leftdia,
-		'' as rightsg,
-		'' as leftsg,
-		'' as righttssj,
-		'' as lefttssj,
-		'' as rightrgpsyjp,
-		'' as leftrgpsyjp
+		'' AS rightqgd,
+		'' AS leftqgd,
+		'' AS rightbc,
+		'' AS leftbc,
+		'' AS rightdia,
+		'' AS leftdia,
+		'' AS rightsg,
+		'' AS leftsg,
+		'' AS righttssj,
+		'' AS lefttssj,
+		'' AS rightrgpsyjp,
+		'' AS leftrgpsyjp
 		FROM
 		jc_kjyy ky
-		LEFT JOIN  jc_result r ON ky.card_number = r.card_number and ky.ptometry_number = r.ptometry_number
+		LEFT JOIN jc_result r ON ky.card_number = r.card_number
+		AND ky.ptometry_number = r.ptometry_number
 		UNION
 		SELECT
-		r.card_number as cardNumber,
+		sg.card_number AS cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		sg.sgjj_prescription_type AS chufangType,
 		sg.sgjj_optometry_name AS yangsName,
-		sg.`status` as status,
+		sg.`status` AS STATUS,
 		sg.sgjj_sphod AS rightsph,
 		sg.sgjj_sphos AS leftsph,
 		sg.sgjj_cylod AS rightcyl,
@@ -497,29 +539,30 @@
 		sg.sgjj_jytjos AS leftjytj,
 		sg.sgjj_jyvaod AS rightjyva,
 		sg.sgjj_jyvaos AS leftjyva,
-		'' as rightqgd,
-		'' as leftqgd,
-		'' as rightbc,
-		'' as leftbc,
-		'' as rightdia,
-		'' as leftdia,
-		'' as rightsg,
-		'' as leftsg,
-		'' as righttssj,
-		'' as lefttssj,
-		'' as rightrgpsyjp,
-		'' as leftrgpsyjp
+		'' AS rightqgd,
+		'' AS leftqgd,
+		'' AS rightbc,
+		'' AS leftbc,
+		'' AS rightdia,
+		'' AS leftdia,
+		'' AS rightsg,
+		'' AS leftsg,
+		'' AS righttssj,
+		'' AS lefttssj,
+		'' AS rightrgpsyjp,
+		'' AS leftrgpsyjp
 		FROM
 		jc_sgjj sg
-		LEFT JOIN jc_result r ON sg.card_number = r.card_number and r.ptometry_number = sg.ptometry_number
+		LEFT JOIN jc_result r ON sg.card_number = r.card_number
+		AND r.ptometry_number = sg.ptometry_number
 		UNION
 		SELECT
-		r.card_number as cardNumber,
+		z.card_number AS cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		z.zy_prescription_type AS chufangType,
 		z.zy_optometry_name AS yangsName,
-		z.`status` as status,
+		z.`status` AS STATUS,
 		z.zy_sphod AS rightsph,
 		z.zy_sphos AS leftsph,
 		z.zy_cylod AS rightcyl,
@@ -544,29 +587,30 @@
 		'' AS leftjytj,
 		'' AS rightjyva,
 		'' AS leftjyva,
-		'' as rightqgd,
-		'' as leftqgd,
-		'' as rightbc,
-		'' as leftbc,
-		'' as rightdia,
-		'' as leftdia,
-		'' as rightsg,
-		'' as leftsg,
-		'' as righttssj,
-		'' as lefttssj,
-		'' as rightrgpsyjp,
-		'' as leftrgpsyjp
+		'' AS rightqgd,
+		'' AS leftqgd,
+		'' AS rightbc,
+		'' AS leftbc,
+		'' AS rightdia,
+		'' AS leftdia,
+		'' AS rightsg,
+		'' AS leftsg,
+		'' AS righttssj,
+		'' AS lefttssj,
+		'' AS rightrgpsyjp,
+		'' AS leftrgpsyjp
 		FROM
 		jc_zy z
-		LEFT JOIN jc_result r ON z.card_number = r.card_number and r.ptometry_number = z.ptometry_number
+		LEFT JOIN jc_result r ON z.card_number = r.card_number
+		AND r.ptometry_number = z.ptometry_number
 		UNION
 		SELECT
-		r.card_number as cardNumber,
+		x.card_number AS cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		x.rx_prescription_type AS chufangType,
 		x.rx_optometry_name AS yangsName,
-		x.`status` as status,
+		x.`status` AS STATUS,
 		x.rx_sphod AS rightsph,
 		x.rx_sphos AS leftsph,
 		x.rx_cylod AS rightcyl,
@@ -591,29 +635,30 @@
 		'' AS leftjytj,
 		'' AS rightjyva,
 		'' AS leftjyva,
-		'' as rightqgd,
-		'' as leftqgd,
-		'' as rightbc,
-		'' as leftbc,
-		'' as rightdia,
-		'' as leftdia,
-		'' as rightsg,
-		'' as leftsg,
-		'' as righttssj,
-		'' as lefttssj,
-		'' as rightrgpsyjp,
-		'' as leftrgpsyjp
+		'' AS rightqgd,
+		'' AS leftqgd,
+		'' AS rightbc,
+		'' AS leftbc,
+		'' AS rightdia,
+		'' AS leftdia,
+		'' AS rightsg,
+		'' AS leftsg,
+		'' AS righttssj,
+		'' AS lefttssj,
+		'' AS rightrgpsyjp,
+		'' AS leftrgpsyjp
 		FROM
 		jc_rxjmjcj x
-		LEFT JOIN jc_result r ON x.card_number = r.card_number and r.ptometry_number = x.ptometry_number
+		LEFT JOIN jc_result r ON x.card_number = r.card_number
+		AND r.ptometry_number = x.ptometry_number
 		UNION
 		SELECT
-		r.card_number as cardNumber,
+		sx.card_number AS cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		sx.sjxl_prescription_type AS chufangType,
 		sx.sjxl_optometry_name AS yangsName,
-		sx.`status` as status,
+		sx.`status` AS STATUS,
 		sx.sjxl_sphod AS rightsph,
 		sx.sjxl_sphos AS leftsph,
 		sx.sjxl_cylod AS rightcyl,
@@ -638,24 +683,25 @@
 		sx.sjxl_jytjos AS leftjytj,
 		sx.sjxl_jyvaod AS rightjyva,
 		sx.sjxl_jyvaos AS leftjyva,
-		'' as rightqgd,
-		'' as leftqgd,
-		'' as rightbc,
-		'' as leftbc,
-		'' as rightdia,
-		'' as leftdia,
-		'' as rightsg,
-		'' as leftsg,
-		'' as righttssj,
-		'' as lefttssj,
-		'' as rightrgpsyjp,
-		'' as leftrgpsyjp
+		'' AS rightqgd,
+		'' AS leftqgd,
+		'' AS rightbc,
+		'' AS leftbc,
+		'' AS rightdia,
+		'' AS leftdia,
+		'' AS rightsg,
+		'' AS leftsg,
+		'' AS righttssj,
+		'' AS lefttssj,
+		'' AS rightrgpsyjp,
+		'' AS leftrgpsyjp
 		FROM
 		jc_sjxl sx
-		LEFT JOIN jc_result r ON sx.card_number = r.card_number and r.ptometry_number = sx.ptometry_number
+		LEFT JOIN jc_result r ON sx.card_number = r.card_number
+		AND r.ptometry_number = sx.ptometry_number
 		UNION
 		SELECT
-		r.card_number AS cardNumber,
+		jv.card_number AS cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		jv.vst_prescription_type AS chufangType,
@@ -703,7 +749,7 @@
 		AND r.ptometry_number = jv.ptometry_number
 		UNION
 		SELECT
-		r.card_number AS cardNumber,
+		crt.card_number AS cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		crt.crt_prescription_type AS chufangType,
@@ -751,12 +797,12 @@
 		AND r.ptometry_number = crt.ptometry_number
 		UNION
 		SELECT
-		r.card_number as cardNumber,
+		rg.card_number AS cardNumber,
 		r.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		rg.rgp_prescription_type AS chufangType,
 		rg.rgp_optometry_name AS yangsName,
-		rg.`status` as status,
+		rg.`status` AS STATUS,
 		'' AS rightsph,
 		'' AS leftsph,
 		'' AS rightcyl,
@@ -781,21 +827,22 @@
 		'' AS leftjytj,
 		'' AS rightjyva,
 		'' AS leftjyva,
-		rg.rgp_qgdod as rightqgd,
-		rg.rgp_qgdos as leftqgd,
-		rg.rgp_bcod as rightbc,
-		rg.rgp_bcos as leftbc,
-		rg.rgp_diaod as rightdia,
-		rg.rgp_diaos as leftdia,
-		rg.rgp_sgod as rightsg,
-		rg.rgp_sgos as leftsg,
-		rg.rgp_tssjod as righttssj,
-		rg.rgp_tssjos as lefttssj,
-		rg.rgp_syjpod as rightrgpsyjp,
-		rg.rgp_syjpos as leftrgpsyjp
+		rg.rgp_qgdod AS rightqgd,
+		rg.rgp_qgdos AS leftqgd,
+		rg.rgp_bcod AS rightbc,
+		rg.rgp_bcos AS leftbc,
+		rg.rgp_diaod AS rightdia,
+		rg.rgp_diaos AS leftdia,
+		rg.rgp_sgod AS rightsg,
+		rg.rgp_sgos AS leftsg,
+		rg.rgp_tssjod AS righttssj,
+		rg.rgp_tssjos AS lefttssj,
+		rg.rgp_syjpod AS rightrgpsyjp,
+		rg.rgp_syjpos AS leftrgpsyjp
 		FROM
 		jc_rgp rg
-		LEFT JOIN jc_result r ON rg.card_number = r.card_number and r.ptometry_number = rg.ptometry_number
+		LEFT JOIN jc_result r ON rg.card_number = r.card_number
+		AND r.ptometry_number = rg.ptometry_number
 		) aia
 		<where>
 			<if test="cardNumber != null and cardNumber != ''"> and cardNumber = #{cardNumber}</if>
