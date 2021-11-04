@@ -13,7 +13,7 @@
     </select>
     <select id="list" resultType="com.shiguang.mfrs.domain.PositionDO">
         select po.`position_id`,po.`position_num`,po.`position_name`,d.`depart_name`,po.`position_order`,po.`state_id`,po.`xsstate`,po.`state`
-        from c_position po  left join department d on po.depart_number=d.depart_number
+        from c_position po  join department d on po.depart_number=d.depart_number
         <where>
             <!--<if test="positionNum != null and positionNum != ''">and po.position_num = #{positionNum}</if>-->
             <!--<if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>-->
@@ -34,7 +34,7 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from c_position po  left join department d on po.depart_number=d.depart_number
+        select count(*) from c_position po   join department d on po.depart_number=d.depart_number
         <where>
             <if test="positionNum != null and positionNum != ''">and po.position_num LIKE concat(concat('%', #{positionNum}),'%')</if>
             <if test="departNumber != null and departNumber != ''">and po.depart_number LIKE concat(concat('%', #{departNumber}),'%')</if>
@@ -109,7 +109,7 @@
 
     <!--库存查询相对应的仓库-->
     <select id="positionList" resultType="com.shiguang.mfrs.domain.PositionDO">
-        select po.position_id, po.position_name,po.`position_num`  from c_position po  left join department d on po.depart_number=d.depart_number
+        select po.position_id, po.position_name,po.`position_num`  from c_position po  join department d on po.depart_number=d.depart_number
         <where>
             <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
             <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
