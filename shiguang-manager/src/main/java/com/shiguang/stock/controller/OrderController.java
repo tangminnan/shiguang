@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.shiguang.common.utils.*;
-import com.shiguang.product.domain.HcDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
+import com.shiguang.system.domain.UserDO;
+import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,14 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.service.OrderService;
-import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.R;
 
 /**
@@ -41,6 +40,8 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private StockService stockService;
+    @Autowired
+    UserService userService;
 
     @GetMapping()
     @RequiresPermissions("stock:order:order")
@@ -124,172 +125,179 @@ public class OrderController {
     @RequestMapping(value = "/updateStatus")
     public R updateEnable(String danjuNumber, String status ,String username,StockDO stockDO) {
 
-
         Map<String, Object> map = new HashMap<>();
-        map.put("danjuNumber",danjuNumber);
-        List<OrderDO> orderDOS = orderService.orderdingdan(map);
-        for (OrderDO orderkc:orderDOS){
-            String goodsCount =orderkc.getGoodsCount();//采购数量
-            //判断是否已存在商品
-            String goodsNum = orderkc.getGoodsNum();
-            String goodsCode = orderkc.getGoodsCode();
-            stockDO.setGoodsNum(goodsNum);
-            stockDO.setGoodsCode(goodsCode);
-            stockDO.setPositionId(orderkc.getPositionId());
-            stockDO.setPositionName(orderkc.getPositionName());
+        map.put("danjuNumber", danjuNumber);
+        map.put("userName", username);
+        //———获取当前登录用户的公司id————
+        String conpanyId = ShiroUtils.getUser().getCompanyId();
+        map.put("conpanyId", conpanyId);
+        UserDO userDO = userService.getUserName(map);
+        if (null == userDO) {
+            return R.error("该工号不存在");
+        } else {
 
-            try {
-                String useday = orderkc.getUseday();
-                stockDO.setUseday(useday);
-            }catch (ArrayIndexOutOfBoundsException e){
-                stockDO.setUseday("");
-            }
-            StockDO goodsNumList = stockService.haveNum(stockDO);
-            if (null != goodsNumList) {
-                String gdcount = goodsNumList.getGoodsCount();
-                Integer goodsCountNew = Integer.valueOf(goodsCount);
-                Integer gdcountNew = Integer.valueOf(gdcount);
-                Integer newGoodsCount = goodsCountNew + gdcountNew;
-                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-                stockService.updateGoodsCount(stockDO);//修改数量
-
-                OrderDO orderDO1 = new OrderDO();
-                StockDO stockDO1 = new StockDO();
-                orderDO1.setDanjuNumber(danjuNumber);
-                orderDO1.setStatus(status);
-                orderDO1.setUsername(username);
-                orderDO1.setStockorder(goodsNumList.getDanjuNumber());
-                stockDO1.setDanjuNumber(goodsNumList.getDanjuNumber());
-                stockDO1.setStatus(status);
-                stockDO1.setUsername(username);
-                orderService.updateStatus(orderDO1);
-                stockService.updateStatus(stockDO1);
-            }else {
-                stockDO.setGoodsCount(goodsCount);//数量
-                stockDO.setGoodsType(orderkc.getGoodsType());
-                stockDO.setMfrsid(orderkc.getMfrsid());
-                stockDO.setGoodsName(orderkc.getGoodsName());
-                stockDO.setBrandname(orderkc.getBrandname());
-                try {
-                    String retailPrice =orderkc.getRetailPrice();
-                    stockDO.setRetailPrice(retailPrice);
-                    Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
-                    stockDO.setPriceSum(Double.toString(priceSum));
-
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setRetailPrice("");
-                    stockDO.setPriceSum("");
-                }
-
+            List<OrderDO> orderDOS = orderService.orderdingdan(map);
+            for (OrderDO orderkc : orderDOS) {
+                String goodsCount = orderkc.getGoodsCount();//采购数量
+                //判断是否已存在商品
+                String goodsNum = orderkc.getGoodsNum();
+                String goodsCode = orderkc.getGoodsCode();
+                stockDO.setGoodsNum(goodsNum);
+                stockDO.setGoodsCode(goodsCode);
+                stockDO.setPositionId(orderkc.getPositionId());
                 stockDO.setPositionName(orderkc.getPositionName());
-                try {
-                    String createTime = orderkc.getCreateTime();
-                    stockDO.setCreateTime(createTime);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setCreateTime("");
-                }
-
-                stockDO.setDanjuNumber(orderkc.getDanjuNumber());
-                stockDO.setOrderNumber(orderkc.getOrderNumber());
-                stockDO.setYundanNumber(orderkc.getYundanNumber());
-                stockDO.setZhidanPeople(orderkc.getZhidanPeople());
-                stockDO.setDanjuDay(orderkc.getDanjuDay());
-                stockDO.setTuihuoNumber(orderkc.getTuihuoNumber());
-                stockDO.setFactoryNumber(orderkc.getFactoryNumber());
-                stockDO.setBeizhu(orderkc.getBeizhu());
-                stockDO.setReturnzt(orderkc.getReturnzt());
-                try {
-                    String unit = orderkc.getUnit();
-                    stockDO.setUnit(unit);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setUnit("");
-                }
 
                 try {
-                    String batch = orderkc.getBatch();
-                    stockDO.setBatch(batch);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setBatch("");
+                    String useday = orderkc.getUseday();
+                    stockDO.setUseday(useday);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    stockDO.setUseday("");
                 }
-                try {
-                    String zhuceNumber =orderkc.getZhuceNumber() ;
-                    stockDO.setZhuceNumber(zhuceNumber);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setZhuceNumber("");
-                }
-                try {
-                    String produceDay = orderkc.getProduceDay();
-                    stockDO.setProduceDay(produceDay);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setProduceDay("");
-                }
-                try {
-                   String status1 = orderkc.getStatus();
-                    stockDO.setStatus(status1);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setStatus("");
-                }
-                try {
-                   String username1 =orderkc.getUsername();
-                    stockDO.setUsername(username1);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setUsername("");
-                }
-                try {
-                    String goodsxinxiid =orderkc.getGoodsxinxiid();
-                    stockDO.setGoodsxinxiid(goodsxinxiid);
-                }catch (ArrayIndexOutOfBoundsException e){
-                    stockDO.setGoodsxinxiid("");
-                }
+                StockDO goodsNumList = stockService.haveNum(stockDO);
+                if (null != goodsNumList) {
+                    String gdcount = goodsNumList.getGoodsCount();
+                    Integer goodsCountNew = Integer.valueOf(goodsCount);
+                    Integer gdcountNew = Integer.valueOf(gdcount);
+                    Integer newGoodsCount = goodsCountNew + gdcountNew;
+                    stockDO.setGoodsCount(String.valueOf(newGoodsCount));
+                    stockService.updateGoodsCount(stockDO);//修改数量
 
-
-
-
-
-                if(null != orderkc.getClasstype()){
-                    try {
-                        String classtype = orderkc.getClasstype();
-                        stockDO.setClasstype(classtype);
-                    }catch (ArrayIndexOutOfBoundsException e){
-                        stockDO.setClasstype("");
-                    }
-                }else{
-                    stockDO.setClasstype("");
-                }
-
-
-                if(null != orderkc.getFactory()) {
-                    try {
-                        String factory = orderkc.getFactory();
-                        stockDO.setFactory(factory);
-                    }catch (ArrayIndexOutOfBoundsException e){
-                        stockDO.setFactory("");
-                    }
-                }else {
-                    stockDO.setFactory("");
-                }
-
-                if (stockService.save(stockDO) > 0) {
                     OrderDO orderDO1 = new OrderDO();
                     StockDO stockDO1 = new StockDO();
                     orderDO1.setDanjuNumber(danjuNumber);
                     orderDO1.setStatus(status);
                     orderDO1.setUsername(username);
-                    if ("".equals(goodsNumList)){
-                        orderDO1.setStockorder(orderkc.getDanjuNumber());
-                    }else {
-                        orderDO1.setStockorder(orderkc.getDanjuNumber());
-                    }
-
-                    stockDO1.setDanjuNumber(danjuNumber);
+                    orderDO1.setStockorder(goodsNumList.getDanjuNumber());
+                    stockDO1.setDanjuNumber(goodsNumList.getDanjuNumber());
                     stockDO1.setStatus(status);
                     stockDO1.setUsername(username);
                     orderService.updateStatus(orderDO1);
                     stockService.updateStatus(stockDO1);
+                } else {
+                    stockDO.setGoodsCount(goodsCount);//数量
+                    stockDO.setGoodsType(orderkc.getGoodsType());
+                    stockDO.setMfrsid(orderkc.getMfrsid());
+                    stockDO.setGoodsName(orderkc.getGoodsName());
+                    stockDO.setBrandname(orderkc.getBrandname());
+                    try {
+                        String retailPrice = orderkc.getRetailPrice();
+                        stockDO.setRetailPrice(retailPrice);
+                        Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodsCount);
+                        stockDO.setPriceSum(Double.toString(priceSum));
+
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        stockDO.setRetailPrice("");
+                        stockDO.setPriceSum("");
+                    }
+
+                    stockDO.setPositionName(orderkc.getPositionName());
+                    try {
+                        String createTime = orderkc.getCreateTime();
+                        stockDO.setCreateTime(createTime);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        stockDO.setCreateTime("");
+                    }
+
+                    stockDO.setDanjuNumber(orderkc.getDanjuNumber());
+                    stockDO.setOrderNumber(orderkc.getOrderNumber());
+                    stockDO.setYundanNumber(orderkc.getYundanNumber());
+                    stockDO.setZhidanPeople(orderkc.getZhidanPeople());
+                    stockDO.setDanjuDay(orderkc.getDanjuDay());
+                    stockDO.setTuihuoNumber(orderkc.getTuihuoNumber());
+                    stockDO.setFactoryNumber(orderkc.getFactoryNumber());
+                    stockDO.setBeizhu(orderkc.getBeizhu());
+                    stockDO.setReturnzt(orderkc.getReturnzt());
+                    try {
+                        String unit = orderkc.getUnit();
+                        stockDO.setUnit(unit);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        stockDO.setUnit("");
+                    }
+
+                    try {
+                        String batch = orderkc.getBatch();
+                        stockDO.setBatch(batch);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        stockDO.setBatch("");
+                    }
+                    try {
+                        String zhuceNumber = orderkc.getZhuceNumber();
+                        stockDO.setZhuceNumber(zhuceNumber);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        stockDO.setZhuceNumber("");
+                    }
+                    try {
+                        String produceDay = orderkc.getProduceDay();
+                        stockDO.setProduceDay(produceDay);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        stockDO.setProduceDay("");
+                    }
+                    try {
+                        String status1 = orderkc.getStatus();
+                        stockDO.setStatus(status1);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        stockDO.setStatus("");
+                    }
+                    try {
+                        String username1 = orderkc.getUsername();
+                        stockDO.setUsername(username1);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        stockDO.setUsername("");
+                    }
+                    try {
+                        String goodsxinxiid = orderkc.getGoodsxinxiid();
+                        stockDO.setGoodsxinxiid(goodsxinxiid);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        stockDO.setGoodsxinxiid("");
+                    }
+
+
+                    if (null != orderkc.getClasstype()) {
+                        try {
+                            String classtype = orderkc.getClasstype();
+                            stockDO.setClasstype(classtype);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            stockDO.setClasstype("");
+                        }
+                    } else {
+                        stockDO.setClasstype("");
+                    }
+
+
+                    if (null != orderkc.getFactory()) {
+                        try {
+                            String factory = orderkc.getFactory();
+                            stockDO.setFactory(factory);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            stockDO.setFactory("");
+                        }
+                    } else {
+                        stockDO.setFactory("");
+                    }
+
+                    if (stockService.save(stockDO) > 0) {
+                        OrderDO orderDO1 = new OrderDO();
+                        StockDO stockDO1 = new StockDO();
+                        orderDO1.setDanjuNumber(danjuNumber);
+                        orderDO1.setStatus(status);
+                        orderDO1.setUsername(username);
+                        if ("".equals(goodsNumList)) {
+                            orderDO1.setStockorder(orderkc.getDanjuNumber());
+                        } else {
+                            orderDO1.setStockorder(orderkc.getDanjuNumber());
+                        }
+
+                        stockDO1.setDanjuNumber(danjuNumber);
+                        stockDO1.setStatus(status);
+                        stockDO1.setUsername(username);
+                        orderService.updateStatus(orderDO1);
+                        stockService.updateStatus(stockDO1);
+                    }
                 }
+
             }
+            return R.ok();
 
         }
-        return R.ok();
     }
 }

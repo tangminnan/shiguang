@@ -338,7 +338,7 @@ public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
 	List<StockDO> jingjiagoods = tuihuoService.selectJingjia(query);
-	int total = brandService.count(query);
+	int total = tuihuoService.selectJingjiacount(query);
 	PageUtils pageUtils = new PageUtils(jingjiagoods, total);
 	return pageUtils;
 }

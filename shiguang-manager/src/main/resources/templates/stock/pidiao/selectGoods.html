@@ -40,7 +40,7 @@
                 </select>
                 <div id="jp" style="display: none">
                     <label class="radio-inline">
-                        <input type="radio" name="classtype"  value="1" /> 成品片
+                        <input type="radio" name="classtype" checked value="1" /> 成品片
                     </label>
                     <label class="radio-inline">
                         <input type="radio" name="classtype" value="2" /> 订做片
@@ -311,7 +311,7 @@
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
                         $("#mfrsname").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
+                        $("#mfrsid").val(rows[i].mfrsnum);
                         // $("#mfrsNames").val(rows[i].mfrsname);
                     }
                 }
@@ -322,6 +322,7 @@
     function choiceBrand() {
         var goodsid = document.getElementById('goodsType').value;
         var mfrsid = document.getElementById('mfrsid').value;
+
         if (mfrsid == "") {
             layer.alert("请选择制造商！");
         } else {
