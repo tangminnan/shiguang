@@ -414,7 +414,7 @@
 		(
 		SELECT
 		k.card_number AS cardNumber,
-		r.ptometry_number AS ptometryNum,
+		k.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		k.kjjy_prescription_type AS chufangType,
 		k.kjjy_optometry_name AS yangsName,
@@ -462,7 +462,7 @@
 		UNION
 		SELECT
 		ky.card_number AS cardNumber,
-		r.ptometry_number AS ptometryNum,
+		ky.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		ky.kjyy_prescription_type AS chufangType,
 		ky.kjyy_optometry_name AS yangsName,
@@ -510,7 +510,7 @@
 		UNION
 		SELECT
 		sg.card_number AS cardNumber,
-		r.ptometry_number AS ptometryNum,
+		sg.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		sg.sgjj_prescription_type AS chufangType,
 		sg.sgjj_optometry_name AS yangsName,
@@ -558,7 +558,7 @@
 		UNION
 		SELECT
 		z.card_number AS cardNumber,
-		r.ptometry_number AS ptometryNum,
+		z.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		z.zy_prescription_type AS chufangType,
 		z.zy_optometry_name AS yangsName,
@@ -606,7 +606,7 @@
 		UNION
 		SELECT
 		x.card_number AS cardNumber,
-		r.ptometry_number AS ptometryNum,
+		x.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		x.rx_prescription_type AS chufangType,
 		x.rx_optometry_name AS yangsName,
@@ -654,7 +654,7 @@
 		UNION
 		SELECT
 		sx.card_number AS cardNumber,
-		r.ptometry_number AS ptometryNum,
+		sx.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		sx.sjxl_prescription_type AS chufangType,
 		sx.sjxl_optometry_name AS yangsName,
@@ -702,7 +702,7 @@
 		UNION
 		SELECT
 		jv.card_number AS cardNumber,
-		r.ptometry_number AS ptometryNum,
+		jv.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		jv.vst_prescription_type AS chufangType,
 		jv.vst_optometry_name AS yangsName,
@@ -750,7 +750,7 @@
 		UNION
 		SELECT
 		crt.card_number AS cardNumber,
-		r.ptometry_number AS ptometryNum,
+		crt.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		crt.crt_prescription_type AS chufangType,
 		crt.crt_optometry_name AS yangsName,
@@ -798,7 +798,7 @@
 		UNION
 		SELECT
 		rg.card_number AS cardNumber,
-		r.ptometry_number AS ptometryNum,
+		rg.ptometry_number AS ptometryNum,
 		r.create_time AS createTime,
 		rg.rgp_prescription_type AS chufangType,
 		rg.rgp_optometry_name AS yangsName,

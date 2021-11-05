@@ -8,6 +8,8 @@ import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.system.domain.UserDO;
+import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +27,8 @@ import java.util.Map;
 public class ProcessController {
     @Autowired
     private LogStatusService statusService;
+    @Autowired
+    private UserService userService;
 
     /**
      * 加工师加工
@@ -71,13 +76,24 @@ public class ProcessController {
     @RequestMapping("/update")
     @RequiresPermissions("information:process:edit")
     public R update(LogStatusDO status){
-        status.setLogisticStatus("加工师加工");
-        statusService.update(status);
-        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
-        workRecoedDO.setUserName(status.getProcessName());
-        workRecoedDO.setType("加工");
-        workRecoedDO.setDateTime(new Date());
-        statusService.saveRecord(workRecoedDO);
-        return R.ok();
+        String userName = status.getProcessName();
+        Map<String,Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("conpanyId",ShiroUtils.getUser().getCompanyId());
+        }
+        map.put("userName",userName);
+        UserDO userDO = userService.getUserName(map);
+        if (null != userDO){
+            status.setLogisticStatus("加工师加工");
+            statusService.update(status);
+            WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+            workRecoedDO.setUserName(status.getProcessName());
+            workRecoedDO.setType("加工");
+            workRecoedDO.setDateTime(new Date());
+            statusService.saveRecord(workRecoedDO);
+            return R.ok();
+        } else {
+            return R.error("该工号不存在");
+        }
     }
 }
