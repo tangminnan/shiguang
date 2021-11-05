@@ -874,6 +874,9 @@
             limit #{offset}, #{limit}
         </if>
     </select>
+    <select id="selectOrderCount" resultType="int">
+        select count(*) from store_sales where classtype like '%2%';
+    </select>
 
 
     <!--确认收货   [配送][][退回][][][]-->

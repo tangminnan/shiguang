@@ -551,8 +551,8 @@ public class WeiwaiController {
 
         query.put("saleType", 1);
         List<SalesDO> selectOrder = weiwaiService.selectOrder(query);
-//		int total = weiwaiService.selectOrderCount(query);
-        int total = 1000000;
+		int total = weiwaiService.selectOrderCount(query);
+//        int total = 1000000;
         PageUtils pageUtils = new PageUtils(selectOrder, total);
         return pageUtils;
     }

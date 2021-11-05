@@ -48,7 +48,7 @@ public interface WeiwaiService {
 
 	//查询配镜单
 	List<SalesDO> selectOrder(Map<String, Object> map);
-//	int selectOrderCount(Map<String, Object> map);
+	int selectOrderCount(Map<String, Object> map);
 
 //<!--确认收货   [配送][][退回][][][]-->
 	int updateStatus(WeiwaiDO weiwaiDO);

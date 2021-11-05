@@ -88,7 +88,7 @@
         group by b.brandid order by b.xsstate desc ,b.brandid desc
     </select>
     <select id="finfBrandcount" resultType="int">
-    select count(*) from c_brand b left join c_mfrs m on b.mfrsid=m.mfrsnum left join c_goods good on b.goodsid=good.goodsid
+    select count(*) from c_brand b   join c_mfrs m on b.mfrsid=m.mfrsnum  join c_goods good on b.goodsid=good.goodsid
         <where>
             <if test="goodsid != null and goodsid != ''">and b.goodsid = #{goodsid}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
@@ -251,7 +251,7 @@
         <!--</where>-->
     <!--</select>-->
     <select id="caidan" resultType="com.shiguang.mfrs.domain.GoodsDO">
-        select g.goodsid ,g.goodsname from c_mfrs m left join c_goods g on
+        select g.goodsid ,g.goodsname from c_mfrs m join c_goods g on
         FIND_IN_SET(g.goodsid,m.goodsid)
         <where>
             <if test="mfrsid != null and mfrsid != ''">and m.mfrsid = #{mfrsid}</if>
