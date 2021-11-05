@@ -191,7 +191,7 @@
         sa.`store_name`,sa.`store_describe`,sa.`store_unit`,sa.`store_count`,sa.`remark`,sa.`saleremark`,sa.`give_name`,sa.`peijing_time`,sa.`optometry_name`,sa.`out_recipel`,
         sa.`recipel_type`,sa.`optometrywl_name`,sa.`recipelwl_type`,sa.`taocan_name`,sa.`additional_price`,sa.`additional_count`,ls.`logistic_status` as logStatus,ls.`faliao_name` as faliaoName,ls.`faliao_date` as faliaoDate
         from store_sales sa
-        join log_status ls on ls.sale_number = sa.sale_number
+        left join log_status ls on ls.sale_number = sa.sale_number
         join member m on m.card_number = sa.member_number and m.state = 1 and m.`status` = 0
         <where>
             <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
@@ -200,6 +200,7 @@
             <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
             <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
             <if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
+            and sa.sale_type = '1'
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

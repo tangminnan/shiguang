@@ -49,6 +49,14 @@ public class PeiJingSingleController {
         for (SalesDO salesDO : salesDOList){
             salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
             salesDO.setPeijingDate(simpleDateFormat.format(salesDO.getPeijingTime()));
+            if (null == salesDO.getLogStatus() || "".equals(salesDO.getLogStatus())){
+                if ("辅料".equals(salesDO.getEyeType())){
+                    salesDO.setLogStatus("销售完成");
+                } else {
+                    salesDO.setLogStatus("委外配送");
+                }
+
+            }
         }
         int total = statusService.findSalePeijingCount(query);
         PageUtils pageUtils = new PageUtils(salesDOList, total);
