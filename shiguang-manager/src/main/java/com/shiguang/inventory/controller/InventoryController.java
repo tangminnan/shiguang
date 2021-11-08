@@ -169,7 +169,7 @@ public class InventoryController {
 				if ("盘盈".equals(gainlossType)){
 					if ("0".equals(billDOList.get(i).getInventoryType())){
 						countsb.append(billDOList.get(i).getSurplus()+",");
-						goodsidsb.append(billDOList.get(i).getGoodsId()+",");
+						//goodsidsb.append(billDOList.get(i).getGoodsId()+",");
 						goodsNumsb.append(billDOList.get(i).getGoodsNum()+",");
 						goodsCodesb.append(billDOList.get(i).getGoodsCode()+",");
 						goodsNamesb.append(billDOList.get(i).getGoodsName()+",");
@@ -177,7 +177,7 @@ public class InventoryController {
 				} else if ("盘亏".equals(gainlossType)){
 					if ("1".equals(billDOList.get(i).getInventoryType())){
 						countsb.append(billDOList.get(i).getSurplus().substring(1)+",");
-						goodsidsb.append(billDOList.get(i).getGoodsId()+",");
+						//goodsidsb.append(billDOList.get(i).getGoodsId()+",");
 						goodsNumsb.append(billDOList.get(i).getGoodsNum()+",");
 						goodsCodesb.append(billDOList.get(i).getGoodsCode()+",");
 						goodsNamesb.append(billDOList.get(i).getGoodsName()+",");
@@ -187,7 +187,7 @@ public class InventoryController {
 				if ("盘盈".equals(gainlossType)){
 					if ("0".equals(billDOList.get(i).getInventoryType())){
 						countsb.append(billDOList.get(i).getSurplus());
-						goodsidsb.append(billDOList.get(i).getGoodsId());
+						//goodsidsb.append(billDOList.get(i).getGoodsId());
 						goodsNumsb.append(billDOList.get(i).getGoodsNum());
 						goodsCodesb.append(billDOList.get(i).getGoodsCode());
 						goodsNamesb.append(billDOList.get(i).getGoodsName());
@@ -195,7 +195,7 @@ public class InventoryController {
 				} else if ("盘亏".equals(gainlossType)){
 					if ("1".equals(billDOList.get(i).getInventoryType())){
 						countsb.append(billDOList.get(i).getSurplus().substring(1));
-						goodsidsb.append(billDOList.get(i).getGoodsId());
+						//goodsidsb.append(billDOList.get(i).getGoodsId());
 						goodsNumsb.append(billDOList.get(i).getGoodsNum());
 						goodsCodesb.append(billDOList.get(i).getGoodsCode());
 						goodsNamesb.append(billDOList.get(i).getGoodsName());
@@ -204,7 +204,7 @@ public class InventoryController {
 			}
 		}
 		gainLossDO.setInventoryCount(countsb.toString());
-		gainLossDO.setGoodsId(goodsidsb.toString());
+		//gainLossDO.setGoodsId(goodsidsb.toString());
 		gainLossDO.setGoodsNum(goodsNumsb.toString());
 		gainLossDO.setProducCode(goodsCodesb.toString());
 		gainLossDO.setGoodsName(goodsNamesb.toString());

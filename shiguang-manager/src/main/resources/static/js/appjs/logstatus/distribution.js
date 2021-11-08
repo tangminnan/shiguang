@@ -47,6 +47,9 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
+                            {
+                                checkbox : true
+                            },
 								{
 									field : 'saleNumber',
 									title : '配镜单号'
@@ -129,37 +132,54 @@ function editShouhuo(saleNumber) {
 
 function resetPwd(id) {
 }
-function batchRemove() {
+function batchDistribution() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
 		layer.msg("请选择要删除的数据");
 		return;
 	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
-		btn : [ '确定', '取消' ]
-	// 按钮
-	}, function() {
-		var ids = new Array();
-		// 遍历所有选择的行数据，取每条数据对应的ID
-		$.each(rows, function(i, row) {
-			ids[i] = row['id'];
-		});
-		$.ajax({
-			type : 'POST',
-			data : {
-				"ids" : ids
-			},
-			url : prefix + '/batchRemove',
-			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	}, function() {
+    var userName="";
+    layer.open({
+        type : 2,
+        title : '编辑',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '500px', '220px' ],
+        content : '/information/distribution/disedit/', // iframe的url
+        btn: ['确定', '取消'],
+        yes: function(index, layero) {
+            var row = $(layero).find("iframe")[0].contentWindow.sure();
+            userName = row;
+            layer.close(index);//需要手动关闭窗口
+            layer.confirm("确认要配送选中的数据吗?", {
+                btn : [ '确定', '取消' ]
+                // 按钮
+            }, function() {
+                var ids = new Array();
+                // 遍历所有选择的行数据，取每条数据对应的ID
+                $.each(rows, function(i, row) {
+                    ids[i] = row['id'];
+                });
+                $.ajax({
+                    type : 'POST',
+                    data : {
+                        "ids" : ids,
+						"userName" : userName
+                    },
+                    url : prefix + '/batchDistribution',
+                    success : function(r) {
+                        if (r.code == 0) {
+                            layer.msg(r.msg);
+                            reLoad();
+                        } else {
+                            layer.msg(r.msg);
+                        }
+                    }
+                });
+            }, function() {
 
-	});
+            });
+        }
+    });
+
 }

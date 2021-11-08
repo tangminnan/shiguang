@@ -346,7 +346,7 @@ public class InventoryServiceImpl implements InventoryService {
 			inventoryDO.setGain("无盘盈");
 		}
 		if (null == inventoryDO.getLoss() | "".equals(inventoryDO.getLoss())){
-			inventoryDO.setGain("无盘亏");
+			inventoryDO.setLoss("无盘亏");
 		}
 		this.save(inventoryDO);
 		return R.ok();

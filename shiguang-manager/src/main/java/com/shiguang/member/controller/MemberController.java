@@ -289,6 +289,14 @@ public class MemberController {
                         salesDO.setRecipelType("RGP");
                     }
                 }
+                if (null == salesDO.getLogStatus() || "".equals(salesDO.getLogStatus())){
+                    if ("辅料".equals(salesDO.getEyeType())){
+                        salesDO.setLogStatus("销售完成");
+                    } else {
+                        salesDO.setLogStatus("委外配送");
+                    }
+
+                }
                 if (null != salesDO.getSettleDate()){
                     salesDO.setSettleTime(simpleDateFormat.format(salesDO.getSettleDate()));
                 }

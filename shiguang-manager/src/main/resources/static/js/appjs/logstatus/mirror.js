@@ -47,6 +47,9 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
+                            {
+                                checkbox : true
+                            },
 								{
 									field : 'saleNumber',
 									title : '配镜单号'
@@ -133,7 +136,7 @@ function editQujing(saleNumber) {
 
 function resetPwd(id) {
 }
-function batchRemove() {
+function batchQujing() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
 		layer.msg("请选择要删除的数据");
@@ -153,7 +156,7 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchRemove',
+			url : prefix + '/batchQujing',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);

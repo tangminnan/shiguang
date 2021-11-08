@@ -158,6 +158,10 @@ function load() {
                         title : '收款日期'
                     },
                     {
+                        field : 'logStatus',
+                        title : '在途状态'
+                    },
+                    {
                         title: '操作',
                         field: 'saleNumber',
                         align: 'center',

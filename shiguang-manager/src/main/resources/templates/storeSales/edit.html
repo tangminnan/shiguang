@@ -1654,10 +1654,11 @@
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 // var rows = sessionStorage.getItem("row");
                 // alert(rows.length)
-                if (rows.length > 0){
-                    a=a+1;
-				}
+                // if (rows.length > 0){
+                //     a=a+1;
+                // }
                 for (var i=0;i<rows.length;i++){
+                    a=a+1;
                     var goodsNumStr = rows[i].goodsNum;
                     var retailPrice = rows[i].retailPrice;
                     var desc = '镜架';

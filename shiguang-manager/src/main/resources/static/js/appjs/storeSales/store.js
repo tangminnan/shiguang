@@ -10,10 +10,11 @@ function getKjpeijian() {
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
-            if (rows.length > 0){
-                a=a+1;
-            }
+            // if (rows.length > 0){
+            //     a=a+1;
+            // }
             for (var i=0;i<rows.length;i++){
+                a=a+1;
                 var goodsNumStr = rows[i].goodsNum;
                 var retailPrice = rows[i].retailPrice;
                 var desc = "框镜";
@@ -91,10 +92,11 @@ function getTaiyangjing(){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
-            if (rows.length > 0){
-                a=a+1;
-            }
+            // if (rows.length > 0){
+            //     a=a+1;
+            // }
             for (var i=0;i<rows.length;i++){
+                a=a+1;
                 var goodsNumStr = rows[i].goodsNum;
                 var retailPrice = rows[i].retailPrice;
                 var desc = "太阳镜";
@@ -172,10 +174,11 @@ function getHaocai() {
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
-            if (rows.length > 0){
-                a=a+1;
-            }
+            // if (rows.length > 0){
+            //     a=a+1;
+            // }
             for (var i=0;i<rows.length;i++){
+                a=a+1;
                 var goodsNumStr = rows[i].goodsNum;
                 var retailPrice = rows[i].retailPrice;
                 var desc = "耗材";
@@ -253,10 +256,11 @@ function getLaohuajing() {
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
-            if (rows.length > 0){
-                a=a+1;
-            }
+            // if (rows.length > 0){
+            //     a=a+1;
+            // }
             for (var i=0;i<rows.length;i++){
+                a=a+1;
                 var goodsNumStr = rows[i].goodsNum;
                 var retailPrice = rows[i].retailPrice;
                 var desc = "老花镜";
@@ -331,10 +335,11 @@ function getShiguang(){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
-            if (rows.length > 0){
-                a=a+1;
-            }
+            // if (rows.length > 0){
+            //     a=a+1;
+            // }
             for (var i=0;i<rows.length;i++){
+                a=a+1;
                 var goodsNumStr = rows[i].goodsNum;
                 var retailPrice = rows[i].retailPrice;
                 var desc = "视光";
@@ -412,10 +417,11 @@ function getHuliye(){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
-            if (rows.length > 0){
-                a=a+1;
-            }
+            // if (rows.length > 0){
+            //     a=a+1;
+            // }
             for (var i=0;i<rows.length;i++){
+                a=a+1;
                 var goodsNumStr = rows[i].goodsNum;
                 var retailPrice = rows[i].retailPrice;
                 var dsc = '护理液';
@@ -515,10 +521,11 @@ function getPeijian(){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
-            if (rows.length > 0){
-                a=a+1;
-            }
+            // if (rows.length > 0){
+            //     a=a+1;
+            // }
             for (var i=0;i<rows.length;i++){
+                a=a+1;
                 var goodsNumStr = rows[i].goodsNum;
                 var retailPrice = rows[i].retailPrice;
                 var desc = "配件";
@@ -678,10 +685,11 @@ function getYinxing(){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
-            if (rows.length > 0){
-                a=a+1;
-            }
+            // if (rows.length > 0){
+            //     a=a+1;
+            // }
             for (var i=0;i<rows.length;i++){
+                a=a+1;
                 var goodsNumStr = rows[i].goodsNum;
                 var retailPrice = rows[i].retailPrice;
                 var desc = "隐形";
@@ -760,10 +768,11 @@ function getYinxingpj(){
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
-            if (rows.length > 0){
-                a=a+1;
-            }
+            // if (rows.length > 0){
+            //     a=a+1;
+            // }
             for (var i=0;i<rows.length;i++){
+                a=a+1;
                 var goodsNumStr = rows[i].goodsNum;
                 var retailPrice = rows[i].retailPrice;
                 var desc = "隐形配件"

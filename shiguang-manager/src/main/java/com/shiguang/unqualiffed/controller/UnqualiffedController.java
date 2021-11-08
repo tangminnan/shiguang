@@ -117,6 +117,9 @@ public class UnqualiffedController {
 	public PageUtils goodslist(@RequestParam Map<String, Object> params){
 		//查询列表数据
 		Query query = new Query(params);
+		if (null != ShiroUtils.getUser().getCompanyId()){
+			query.put("companyId",ShiroUtils.getUser().getCompanyId());
+		}
 		List<SalesDO> salesDOList = salesService.peijinglist(query);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		for (SalesDO salesDO : salesDOList){
@@ -125,23 +128,24 @@ public class UnqualiffedController {
 		}
 		for (int i=0;i<salesDOList.size();i++){
 			List<SaleGoodsDO> list = new ArrayList<>();
-			String[] storeDescribe = salesDOList.get(i).getStoreDescribe().split(",");
-			String[] goodsCode = salesDOList.get(i).getGoodsCode().split(",");
-			String[] goodsNum = salesDOList.get(i).getGoodsNum().split(",");
-			String[] goodsName = salesDOList.get(i).getStoreName().split(",");
-			String[] goodsCount = salesDOList.get(i).getStoreCount().split(",");
-			for (int a=0;a<storeDescribe.length;a++){
-				if ("镜片".equals(storeDescribe[a])){
-					SaleGoodsDO saleGoodsDO = new SaleGoodsDO();
-					saleGoodsDO.setGoodsCode(goodsCode[a]);
-					saleGoodsDO.setGoodsNum(goodsNum[a]);
-					saleGoodsDO.setGoodsName(goodsName[a]);
-					saleGoodsDO.setSaleCount(goodsCount[a]);
-					list.add(saleGoodsDO);
+			if (null != salesDOList.get(i).getStoreDescribe()){
+				String[] storeDescribe = salesDOList.get(i).getStoreDescribe().split(",");
+				String[] goodsCode = salesDOList.get(i).getGoodsCode().split(",");
+				String[] goodsNum = salesDOList.get(i).getGoodsNum().split(",");
+				String[] goodsName = salesDOList.get(i).getStoreName().split(",");
+				String[] goodsCount = salesDOList.get(i).getStoreCount().split(",");
+				for (int a=0;a<storeDescribe.length;a++){
+					if ("镜片".equals(storeDescribe[a])){
+						SaleGoodsDO saleGoodsDO = new SaleGoodsDO();
+						saleGoodsDO.setGoodsCode(goodsCode[a]);
+						saleGoodsDO.setGoodsNum(goodsNum[a]);
+						saleGoodsDO.setGoodsName(goodsName[a]);
+						saleGoodsDO.setSaleCount(goodsCount[a]);
+						list.add(saleGoodsDO);
+					}
 				}
+				salesDOList.get(i).setList(list);
 			}
-			salesDOList.get(i).setList(list);
-
 		}
 		int total = salesService.peijingcount(query);
 		PageUtils pageUtils = new PageUtils(salesDOList, total);

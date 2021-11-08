@@ -97,6 +97,11 @@ function load() {
                                             e = '<a class="btn btn-primary btn-xs" href="#" title="已退款"  mce_href="#"  style="text-decoration: none;">已退款</a>';
                                             t = '<a class="btn btn-primary btn-xs" href="#" title="打印"  mce_href="#" ' +
                                                 'onclick="dayin(\''+row.isSale+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印</a>';
+										} else if (row.isSale == 2){
+                                            e = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" ' +
+                                                'onclick="detail(\''+value+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">详情</a>';
+                                            t = '<a class="btn btn-primary btn-xs" href="#" title="打印"  mce_href="#" ' +
+                                                'onclick="dayin(\''+row.isSale+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印</a>';
 										}
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.saleNumber

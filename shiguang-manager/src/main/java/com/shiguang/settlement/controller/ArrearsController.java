@@ -11,6 +11,8 @@ import com.shiguang.member.service.MemberService;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.DrawbackService;
 import com.shiguang.settlement.service.SettlementService;
+import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,8 @@ public class ArrearsController {
     private DrawbackService drawbackService;
     @Autowired
     private CostService costService;
+    @Autowired
+    private SalesService salesService;
 
     @GetMapping()
     @RequiresPermissions("information:arrears:arrears")
@@ -111,6 +115,10 @@ public class ArrearsController {
             costDO.setType("配镜单");
             costService.update(costDO);
         }
+        SalesDO salesDO = new SalesDO();
+        salesDO.setSaleNumber(settlement.getSaleNumber());
+        salesDO.setSaleType("1");
+        salesService.updateSale(salesDO);
         return R.ok();
     }
 

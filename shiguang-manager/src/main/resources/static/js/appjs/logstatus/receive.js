@@ -47,6 +47,9 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
+                            {
+                                checkbox : true
+                            },
 								{
 									field : 'saleNumber',
 									title : '配镜单号'
@@ -138,13 +141,13 @@ function editShouhuo(saleNumber,memberName) {
 
 function resetPwd(id) {
 }
-function batchRemove() {
+function batchShouhuo() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
 		layer.msg("请选择要删除的数据");
 		return;
 	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+	layer.confirm("确认要收货选中的数据吗?", {
 		btn : [ '确定', '取消' ]
 	// 按钮
 	}, function() {
@@ -158,7 +161,7 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchRemove',
+			url : prefix + '/batchShouhuo',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);

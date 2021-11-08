@@ -221,7 +221,7 @@ public class StoreSalesController {
         if (null != conclusionList) {
             for (Conclusion c : conclusionList) {
                 //String ygtime = sdfs.format(c.getCreateTime());
-                //c.setYanguangTime(sdfs.format(c.getCreateTime()));
+                c.setYanguangTime(sdfs.format(c.getCreateTime()));
                 if ("1".equals(c.getChufangType())) {
                     c.setChufang("近用");
                 } else if ("2".equals(c.getChufangType())) {

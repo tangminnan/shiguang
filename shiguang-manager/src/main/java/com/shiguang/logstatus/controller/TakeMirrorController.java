@@ -7,7 +7,10 @@ import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
+import com.shiguang.settlement.domain.SettlementDO;
+import com.shiguang.settlement.service.SettlementService;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,10 @@ import java.util.Map;
 public class TakeMirrorController {
     @Autowired
     private LogStatusService statusService;
+    @Autowired
+    private SalesService salesService;
+    @Autowired
+    private SettlementService settlementService;
 
     /**
      * 顾客取镜
@@ -66,6 +73,10 @@ public class TakeMirrorController {
     @RequiresPermissions("information:mirror:edit")
     public R editQujing(String saleNumber){
         LogStatusDO logStatusDO = new LogStatusDO();
+        SettlementDO settlementDO = settlementService.getSaleNumers(saleNumber);
+        if (!"全款".equals(settlementDO.getPayWay())){
+            return R.error("该会员还有欠款未缴，需缴完欠款才能取镜");
+        }
         logStatusDO.setSaleNumber(saleNumber);
         logStatusDO.setLogisticStatus("顾客取镜");
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
@@ -77,6 +88,32 @@ public class TakeMirrorController {
             return R.ok();
         }
         return R.error();
+    }
+
+    /**
+     * 批量收货
+     */
+    @PostMapping( "/batchQujing")
+    @ResponseBody
+    @RequiresPermissions("information:logstatus:batchQujing")
+    public R batchQujing(@RequestParam("ids[]") Long[] ids) {
+        for (int i = 0; i < ids.length; i++) {
+            SalesDO salesDOs = salesService.get(ids[i]);
+            SettlementDO settlementDO = settlementService.getSaleNumers(salesDOs.getSaleNumber());
+            if (!"全款".equals(settlementDO.getPayWay())){
+                return R.error("该会员还有欠款未缴，需缴完欠款才能取镜");
+            }
+            LogStatusDO logStatusDO = new LogStatusDO();
+            logStatusDO.setSaleNumber(salesDOs.getSaleNumber());
+            logStatusDO.setLogisticStatus("顾客取镜");
+            statusService.editFaliao(logStatusDO);
+        }
+        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
+        workRecoedDO.setType("顾客取镜");
+        workRecoedDO.setDateTime(new Date());
+        statusService.saveRecord(workRecoedDO);
+        return R.ok();
     }
 
 }

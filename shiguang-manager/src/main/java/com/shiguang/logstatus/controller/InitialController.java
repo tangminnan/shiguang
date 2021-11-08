@@ -5,6 +5,7 @@ import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.unqualiffed.domain.UnqualiffedDO;
 import com.shiguang.unqualiffed.service.UnqualiffedService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -25,6 +26,8 @@ public class InitialController {
     private LogStatusService statusService;
     @Autowired
     private UnqualiffedService unqualiffedService;
+    @Autowired
+    private SalesService salesService;
 
     /**
      * 加工师初检
@@ -85,6 +88,44 @@ public class InitialController {
             statusService.update(status);
         }
 
+        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
+        workRecoedDO.setType("初检");
+        workRecoedDO.setDateTime(new Date());
+        statusService.saveRecord(workRecoedDO);
+        return R.ok();
+    }
+
+    @GetMapping("/initialpl")
+    @RequiresPermissions("information:initial:edit")
+    String initialpl(Model model){
+        return "logstatus/initialpl";
+    }
+
+    /**
+     * 批量初检
+     */
+    @PostMapping( "/batchInitial")
+    @ResponseBody
+    @RequiresPermissions("information:logstatus:batchInitial")
+    public R batchInitial(@RequestParam("ids[]") Long[] ids,String initial) {
+        for (int i = 0; i < ids.length; i++) {
+            SalesDO salesDOs = salesService.get(ids[i]);
+            LogStatusDO logStatusDO = new LogStatusDO();
+            if ("2".equals(initial)) {
+                UnqualiffedDO unqualiffedDO = new UnqualiffedDO();
+                unqualiffedDO.setBillNumber(String.valueOf(GuuidUtil.getUUID()));
+                unqualiffedDO.setSaleNumber(salesDOs.getSaleNumber());
+                unqualiffedDO.setPreparedName(ShiroUtils.getUser().getName());
+                unqualiffedDO.setResponsibleName(ShiroUtils.getUser().getName());
+                unqualiffedDO.setBillDate(new Date());
+                unqualiffedService.save(unqualiffedDO);
+            } else {
+                logStatusDO.setSaleNumber(salesDOs.getSaleNumber());
+                logStatusDO.setLogisticStatus("加工初检");
+                statusService.update(logStatusDO);
+            }
+        }
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
         workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
         workRecoedDO.setType("初检");

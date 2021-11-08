@@ -8,6 +8,7 @@ import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -29,6 +30,8 @@ public class ProcessController {
     private LogStatusService statusService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private SalesService salesService;
 
     /**
      * 加工师加工
@@ -55,7 +58,9 @@ public class ProcessController {
         for (SalesDO salesDO : salesDOList){
             salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
             salesDO.setPeijingDate(simpleDateFormat.format(salesDO.getPeijingTime()));
-            salesDO.setFaliaoTime(simpleDateFormat.format(salesDO.getFaliaoDate()));
+            if (null != salesDO.getFaliaoDate()){
+                salesDO.setFaliaoTime(simpleDateFormat.format(salesDO.getFaliaoDate()));
+            }
         }
         int total = statusService.findSaleCount(query);
         PageUtils pageUtils = new PageUtils(salesDOList, total);
@@ -96,4 +101,43 @@ public class ProcessController {
             return R.error("该工号不存在");
         }
     }
+
+    @GetMapping("/processEdit")
+    @RequiresPermissions("information:process:edit")
+    String processEdit(Model model){
+        return "logstatus/processeditpl";
+    }
+
+    /**
+     * 批量加工
+     */
+    @PostMapping( "/batchProcess")
+    @ResponseBody
+    @RequiresPermissions("information:logstatus:batchProcess")
+    public R batchInitial(@RequestParam("ids[]") Long[] ids,String userName) {
+        Map<String,Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("conpanyId",ShiroUtils.getUser().getCompanyId());
+        }
+        map.put("userName",userName);
+        UserDO userDO = userService.getUserName(map);
+        if (null != userDO){
+            for (int i = 0; i < ids.length; i++) {
+                SalesDO salesDOs = salesService.get(ids[i]);
+                LogStatusDO status = new LogStatusDO();
+                status.setSaleNumber(salesDOs.getSaleNumber());
+                status.setLogisticStatus("加工师加工");
+                statusService.update(status);
+            }
+            WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+            workRecoedDO.setUserName(userName);
+            workRecoedDO.setType("加工");
+            workRecoedDO.setDateTime(new Date());
+            statusService.saveRecord(workRecoedDO);
+            return R.ok();
+        } else {
+            return R.error("该工号不存在");
+        }
+    }
+
 }

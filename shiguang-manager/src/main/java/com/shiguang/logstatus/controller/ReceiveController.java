@@ -1,9 +1,6 @@
 package com.shiguang.logstatus.controller;
 
-import com.shiguang.common.utils.PageUtils;
-import com.shiguang.common.utils.Query;
-import com.shiguang.common.utils.R;
-import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.common.utils.*;
 import com.shiguang.line.service.LineMemberService;
 import com.shiguang.line.service.LineService;
 import com.shiguang.logstatus.domain.LogStatusDO;
@@ -11,6 +8,7 @@ import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
+import com.shiguang.unqualiffed.domain.UnqualiffedDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,6 +88,28 @@ public class ReceiveController {
             return R.ok();
         }
         return R.error();
+    }
+
+    /**
+     * 批量收货
+     */
+    @PostMapping( "/batchShouhuo")
+    @ResponseBody
+    @RequiresPermissions("information:logstatus:batchShouhuo")
+    public R batchShouhuo(@RequestParam("ids[]") Long[] ids) {
+        for (int i = 0; i < ids.length; i++) {
+            SalesDO salesDOs = salesService.get(ids[i]);
+            LogStatusDO logStatusDO = new LogStatusDO();
+            logStatusDO.setSaleNumber(salesDOs.getSaleNumber());
+            logStatusDO.setLogisticStatus("收货");
+            statusService.editFaliao(logStatusDO);
+        }
+        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+        workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
+        workRecoedDO.setType("收货");
+        workRecoedDO.setDateTime(new Date());
+        statusService.saveRecord(workRecoedDO);
+        return R.ok();
     }
 
 }
