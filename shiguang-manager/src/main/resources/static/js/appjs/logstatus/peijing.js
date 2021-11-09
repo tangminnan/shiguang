@@ -47,6 +47,9 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
+                            {
+                                checkbox : true
+                            },
 																{
 									field : 'saleNumber', 
 									title : '配镜单号'
@@ -108,6 +111,20 @@ function reLoad() {
 function peijingdan(saleNumber){
     window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
 }
+
+function outtemplate(){
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    if (rows.length == 0) {
+        layer.msg("选择要导出的数据");
+        return;
+    }
+    var ids=[];
+    $.each(rows, function(i, row) {
+        ids[i] = row['id'];
+    });
+    window.location.href="/information/peijing/shujudaochu?ids="+ids;
+}
+
 
 function add() {
 	layer.open({

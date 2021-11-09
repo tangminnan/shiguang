@@ -44,4 +44,6 @@ public interface ProducaService {
     //删除修改状态
     int updateState(ProducaDO produca);
 
+    ProducaDO getJJInfomation(String goodNum);
+
 }

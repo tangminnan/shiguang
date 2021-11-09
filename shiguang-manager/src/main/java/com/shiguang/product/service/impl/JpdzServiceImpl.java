@@ -79,4 +79,9 @@ public class JpdzServiceImpl implements JpdzService {
     public List<JpdzDO> haveNum(Map<String, Object> map) {
         return jpdzDao.haveNum(map);
     }
+
+    @Override
+    public JpdzDO getJpdzInfomation(String goodNum) {
+        return jpdzDao.getJpdzInfomation(goodNum);
+    }
 }

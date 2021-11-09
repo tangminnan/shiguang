@@ -40,4 +40,6 @@ public interface YxdzService {
 
     //判断是否存在商品代码
     List<YxdzDO> haveNum(Map<String, Object> map);
+
+    YxdzDO getYxdzInfomation(String goodNum);
 }

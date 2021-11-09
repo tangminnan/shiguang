@@ -40,4 +40,6 @@ public interface HcDao {
     int updateState(HcDO hc);
     //判断是否存在商品代码
     List<HcDO> haveNum(Map<String, Object> map);
+
+    HcDO getHcInfomation(String goodNum);
 }

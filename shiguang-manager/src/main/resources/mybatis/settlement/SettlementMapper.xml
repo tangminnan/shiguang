@@ -127,7 +127,7 @@
 		</foreach>
 	</delete>
 	<select id="getSaleNumers" resultType="com.shiguang.settlement.domain.SettlementDO">
-		select `id`,`cost_id`,`sale_number`,`member_number`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`model_money`,`pay_money`,`pay_way` from settlement where sale_number = #{value}
+		select `id`,`cost_id`,`sale_number`,`member_number`,`sale_name`,`actual_money`,`payment_money`,`change_money`,`pay_model`,`model_money`,`pay_money`,`pay_way` from settlement where sale_number = #{value}
 	</select>
 	<select id="findArrearsData" resultType="com.shiguang.settlement.domain.SettlementDO">
 		select sl.`id`,sl.`sale_number`,sl.`member_number`,m.`name` as memberName,sl.`actual_money`,sl.`model_money`,sl.`pay_money`,sl.`pay_way`,sl.`front_money`,sl.`settle_date`,c.`original_price` from settlement sl

@@ -39,4 +39,6 @@ public interface JpcpService {
     int updateState(JpcpDO jpcp);
     //判断是否存在商品代码
     List<JpcpDO> haveNum(Map<String, Object> map);
+
+    JpcpDO getJpcpInfomation(String goodNum);
 }

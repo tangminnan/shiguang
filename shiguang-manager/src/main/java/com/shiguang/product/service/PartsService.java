@@ -43,4 +43,6 @@ public interface PartsService {
 
     //判断是否存在商品代码
     List<PartsDO> haveNum(Map<String, Object> map);
+
+    PartsDO getPartInfomation(String goodNum);
 }

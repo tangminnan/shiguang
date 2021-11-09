@@ -44,4 +44,6 @@ public interface ShiguangDao {
 
     //判断是否存在商品代码
     List<ShiguangDO> haveNum(Map<String, Object> map);
+
+    ShiguangDO getShiguangInfomation(String goodNum);
 }

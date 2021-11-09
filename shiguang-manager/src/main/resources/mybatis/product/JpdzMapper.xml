@@ -381,6 +381,17 @@
 		delete from aa_jpdz where id = #{value}
 	</delete>
 
+    <select id="getJpdzInfomation" resultType="com.shiguang.product.domain.JpdzDO">
+        select
+        m.mfrsname,b.brandname,u.unitnum,u.unitname,j.`retail_price`,
+        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`factory`,j.`produc_factory`
+        from aa_jpdz j
+        left join c_mfrs m on j.mfrsid=m.mfrsnum
+        left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid`
+        left join c_unit u on u.unitid=j.unitid
+        where j.`produc_num` = #{value}
+    </select>
+
     <delete id="batchRemove">
         delete from aa_jpdz where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">

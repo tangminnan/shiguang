@@ -75,4 +75,9 @@ public class PartsServiceImpl implements PartsService {
     public List<PartsDO> haveNum(Map<String, Object> map) {
         return partsDao.haveNum(map);
     }
+
+    @Override
+    public PartsDO getPartInfomation(String goodNum) {
+        return partsDao.getPartInfomation(goodNum);
+    }
 }

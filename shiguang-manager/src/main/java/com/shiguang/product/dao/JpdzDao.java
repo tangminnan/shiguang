@@ -44,4 +44,6 @@ public interface JpdzDao {
     int updateState(JpdzDO jpdz);
     //判断是否存在商品代码
     List<JpdzDO> haveNum(Map<String, Object> map);
+
+    JpdzDO getJpdzInfomation(String goodNum);
 }

@@ -71,4 +71,9 @@ public class JpcpServiceImpl implements JpcpService {
     public List<JpcpDO> haveNum(Map<String, Object> map) {
         return jpcpDao.haveNum(map);
     }
+
+    @Override
+    public JpcpDO getJpcpInfomation(String goodNum) {
+        return jpcpDao.getJpcpInfomation(goodNum);
+    }
 }

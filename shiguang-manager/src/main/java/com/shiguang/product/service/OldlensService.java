@@ -39,4 +39,6 @@ public interface OldlensService {
 
     //判断是否存在商品代码
     List<OldlensDO> haveNum(Map<String, Object> map);
+
+    OldlensDO getOldlenInfomation(String goodNum);
 }

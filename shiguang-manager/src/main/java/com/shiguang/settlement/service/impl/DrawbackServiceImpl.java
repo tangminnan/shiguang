@@ -149,19 +149,17 @@ public class DrawbackServiceImpl implements DrawbackService {
 						stockDO.setGoodsName(goodsName[i]);
 						stockDO.setGoodsCount(Integer.parseInt(count[i]) +"");
 						if ("镜架".equals(storeDescribe[i])){
-							Map<String,Object> maps = new HashMap<>();
-							maps.put("producNum",goodsNum[i]);
-							List<ProducaDO> producaD = producaService.list(maps);
-							if (null != producaD && producaD.size() > 0){
-								stockDO.setUnit(producaD.get(0).getUnitname());
-								stockDO.setMfrsid(producaD.get(0).getMfrsid());
+							ProducaDO producaD = producaService.getJJInfomation(goodsNum[i]);
+							if (null != producaD){
+								stockDO.setUnit(producaD.getUnitname());
+								stockDO.setMfrsid(producaD.getMfrsid());
 								stockDO.setGoodsType(1);
-								stockDO.setBrandname(producaD.get(0).getBrandname());
-								stockDO.setRetailPrice(producaD.get(0).getRetailPrice());
+								stockDO.setBrandname(producaD.getBrandname());
+								stockDO.setRetailPrice(producaD.getRetailPrice());
 								stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
 								stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 								stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
-								stockDO.setFactory(producaD.get(0).getFactory());
+								stockDO.setFactory(producaD.getFactory());
 								stockDO.setUsername(ShiroUtils.getUser().getUsername());
 								stockDO.setClasstype("0");
 								stockDO.setStatus("0");
@@ -183,20 +181,18 @@ public class DrawbackServiceImpl implements DrawbackService {
 						stockDO.setGoodsName(goodsName[i]);
 						stockDO.setGoodsCount(Integer.parseInt(count[i]) +"");
 						if ("镜架".equals(storeDescribe[i])){
-							Map<String,Object> maps = new HashMap<>();
-							maps.put("producNum",goodsNum[i]);
-							List<ProducaDO> producaD = producaService.list(maps);
-							if (null != producaD && producaD.size() > 0){
-								stockDO.setUnit(producaD.get(0).getUnitname());
-								stockDO.setMfrsid(producaD.get(0).getMfrsid());
+							ProducaDO producaD = producaService.getJJInfomation(goodsNum[i]);
+							if (null != producaD){
+								stockDO.setUnit(producaD.getUnitname());
+								stockDO.setMfrsid(producaD.getMfrsid());
 								stockDO.setGoodsType(1);
-								stockDO.setBrandname(producaD.get(0).getBrandname());
-								stockDO.setRetailPrice(producaD.get(0).getRetailPrice());
+								stockDO.setBrandname(producaD.getBrandname());
+								stockDO.setRetailPrice(producaD.getRetailPrice());
 								stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
 								stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 								stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
-								if (null != producaD.get(0).getFactory() && !"".equals(producaD.get(0).getFactory())){
-									stockDO.setFactory(producaD.get(0).getFactory());
+								if (null != producaD.getFactory() && !"".equals(producaD.getFactory())){
+									stockDO.setFactory(producaD.getFactory());
 								}
 								stockDO.setUsername(ShiroUtils.getUser().getUsername());
 								stockDO.setClasstype("0");
@@ -207,19 +203,17 @@ public class DrawbackServiceImpl implements DrawbackService {
 						} else if ("镜片".equals(storeDescribe[i])){
 							String[] classType = salesDO.getClasstype().split(",");
 							if ("2".equals(classType[i])){
-								Map<String,Object> maps = new HashMap<>();
-								maps.put("producNum",goodsNum[i]);
-								List<JpdzDO> jpdzDOS = jpdzService.listDz(maps);
-								if (null != jpdzDOS && jpdzDOS.size() > 0){
-									stockDO.setUnit(jpdzDOS.get(0).getUnitname());
-									stockDO.setMfrsid(jpdzDOS.get(0).getMfrsid());
+								JpdzDO jpdzDOS = jpdzService.getJpdzInfomation(goodsNum[i]);
+								if (null != jpdzDOS){
+									stockDO.setUnit(jpdzDOS.getUnitname());
+									stockDO.setMfrsid(jpdzDOS.getMfrsid());
 									stockDO.setGoodsType(3);
-									stockDO.setBrandname(jpdzDOS.get(0).getBrandname());
-									stockDO.setRetailPrice(jpdzDOS.get(0).getRetailPrice());
+									stockDO.setBrandname(jpdzDOS.getBrandname());
+									stockDO.setRetailPrice(jpdzDOS.getRetailPrice());
 									stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
 									stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
-									if (null != jpdzDOS.get(0).getFactory() && !"".equals(jpdzDOS.get(0).getFactory())){
-										stockDO.setFactory(jpdzDOS.get(0).getFactory());
+									if (null != jpdzDOS.getFactory() && !"".equals(jpdzDOS.getFactory())){
+										stockDO.setFactory(jpdzDOS.getFactory());
 									}
 									stockDO.setClasstype("2");
 									stockDO.setUsername(ShiroUtils.getUser().getUsername());
@@ -229,19 +223,17 @@ public class DrawbackServiceImpl implements DrawbackService {
 									stockService.save(stockDO);
 								}
 							} else if ("1".equals(classType[i])){
-								Map<String,Object> maps = new HashMap<>();
-								maps.put("producNum",goodsNum[i]);
-								List<JpcpDO> jpcpDOS = jpcpService.list(maps);
-								if (null != jpcpDOS && jpcpDOS.size() > 0){
-									stockDO.setUnit(jpcpDOS.get(0).getUnitname());
-									stockDO.setMfrsid(jpcpDOS.get(0).getMfrsid());
+								JpcpDO jpcpDOS = jpcpService.getJpcpInfomation(goodsNum[i]);
+								if (null != jpcpDOS){
+									stockDO.setUnit(jpcpDOS.getUnitname());
+									stockDO.setMfrsid(jpcpDOS.getMfrsid());
 									stockDO.setGoodsType(3);
-									stockDO.setBrandname(jpcpDOS.get(0).getBrandname());
-									stockDO.setRetailPrice(jpcpDOS.get(0).getRetailPrice());
+									stockDO.setBrandname(jpcpDOS.getBrandname());
+									stockDO.setRetailPrice(jpcpDOS.getRetailPrice());
 									stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
 									stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
-									if (null != jpcpDOS.get(0).getProducFactory() && !"".equals(jpcpDOS.get(0).getProducFactory())){
-										stockDO.setFactory(jpcpDOS.get(0).getProducFactory());
+									if (null != jpcpDOS.getProducFactory() && !"".equals(jpcpDOS.getProducFactory())){
+										stockDO.setFactory(jpcpDOS.getProducFactory());
 									}
 									stockDO.setClasstype("1");
 									stockDO.setUsername(ShiroUtils.getUser().getUsername());
@@ -255,20 +247,83 @@ public class DrawbackServiceImpl implements DrawbackService {
 					}
 				}
 			} else {
-				if (null != stockDO1){
-					int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
-					stockDO.setGoodsCount(godsCount + "");
-					stockService.updateGoodsCount(stockDO);
-				} else {
-					positionDO = stockService.findPosition(map);
-					StockDO stockDOs = new StockDO();
-					stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
-					stockDOs.setGoodsCode(goodsCode[i]);
-					StockDO stockDO2 = stockService.getProduceCode(stockDOs);
-					int godsCount = Integer.parseInt(stockDO2.getGoodsCount()) + Integer.parseInt(count[i]);
-					stockDOs.setGoodsCount(godsCount + "");
-					stockService.updateGoodsCount(stockDOs);
+				if (!"镜架".equals(storeDescribe[i]) && !"自架".equals(storeDescribe[i]) && !"镜片".equals(storeDescribe[i])
+						&& !"隐形".equals(storeDescribe[i]) && !"自片".equals(storeDescribe[i])){
+						positionDO = stockService.findPosition(map);
+						StockDO stockDOs = new StockDO();
+						stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
+						stockDOs.setGoodsCode(goodsCode[i]);
+						StockDO stockDO2 = stockService.getProduceCode(stockDOs);
+						int godsCount = Integer.parseInt(stockDO2.getGoodsCount()) + Integer.parseInt(count[i]);
+						stockDOs.setGoodsCount(godsCount + "");
+						stockService.updateGoodsCount(stockDOs);
+				} else if ("镜架".equals(storeDescribe[i])){
+					if (null != stockDO1){
+						int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+						stockDO.setGoodsCount(godsCount + "");
+						stockService.updateGoodsCount(stockDO);
+					} else {
+						String[] goodsNum = salesDO.getGoodsNum().split(",");
+						String[] goodsName = salesDO.getStoreName().split(",");
+						stockDO.setGoodsNum(goodsNum[i]);
+						stockDO.setGoodsName(goodsName[i]);
+						stockDO.setGoodsCount(Integer.parseInt(count[i]) + "");
+						ProducaDO producaD = producaService.getJJInfomation(goodsNum[i]);
+						if (null != producaD){
+							stockDO.setUnit(producaD.getUnitname());
+							stockDO.setMfrsid(producaD.getMfrsid());
+							stockDO.setGoodsType(1);
+							stockDO.setBrandname(producaD.getBrandname());
+							stockDO.setRetailPrice(producaD.getRetailPrice());
+							stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+							stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+							if (null != producaD.getFactory() && !"".equals(producaD.getFactory())){
+								stockDO.setFactory(producaD.getFactory());
+							}
+							stockDO.setUsername(ShiroUtils.getUser().getUsername());
+							stockDO.setClasstype("0");
+							stockDO.setStatus("0");
+							stockDO.setReturnzt("1");
+							stockService.save(stockDO);
+						}
+					}
+				} else if ("镜片".equals(storeDescribe[i])){
+					if (null != stockDO1){
+						int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+						stockDO.setGoodsCount(godsCount + "");
+						stockService.updateGoodsCount(stockDO);
+					} else {
+						String[] goodsNum = salesDO.getGoodsNum().split(",");
+						String[] goodsName = salesDO.getStoreName().split(",");
+						stockDO.setGoodsNum(goodsNum[i]);
+						stockDO.setGoodsName(goodsName[i]);
+						stockDO.setGoodsCount(Integer.parseInt(count[i]) + "");
+						String[] classType = salesDO.getClasstype().split(",");
+						if ("1".equals(classType[i])){
+							JpcpDO jpcpDOS = jpcpService.getJpcpInfomation(goodsNum[i]);
+							if (null != jpcpDOS){
+								stockDO.setUnit(jpcpDOS.getUnitname());
+								stockDO.setMfrsid(jpcpDOS.getMfrsid());
+								stockDO.setGoodsType(3);
+								stockDO.setBrandname(jpcpDOS.getBrandname());
+								stockDO.setRetailPrice(jpcpDOS.getRetailPrice());
+								stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+								stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+								if (null != jpcpDOS.getProducFactory() && !"".equals(jpcpDOS.getProducFactory())){
+									stockDO.setFactory(jpcpDOS.getProducFactory());
+								}
+								stockDO.setClasstype("1");
+								stockDO.setUsername(ShiroUtils.getUser().getUsername());
+								stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+								stockDO.setStatus("0");
+								stockDO.setReturnzt("1");
+								stockService.save(stockDO);
+							}
+						}
+					}
 				}
+
 			}
 
 		}

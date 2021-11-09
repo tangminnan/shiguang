@@ -70,4 +70,9 @@ public class YxdzServiceImpl implements YxdzService {
     public List<YxdzDO> haveNum(Map<String, Object> map) {
         return yxdzDao.haveNum(map);
     }
+
+    @Override
+    public YxdzDO getYxdzInfomation(String goodNum) {
+        return yxdzDao.getYxdzInfomation(goodNum);
+    }
 }

@@ -40,4 +40,6 @@ public interface HlyService {
 
     //判断是否存在商品代码
     List<HlyDO> haveNum(Map<String, Object> map);
+
+    HlyDO getHlyInfomation(String goodNum);
 }

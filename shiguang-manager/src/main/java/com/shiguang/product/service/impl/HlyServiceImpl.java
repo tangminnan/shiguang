@@ -81,4 +81,9 @@ public class HlyServiceImpl implements HlyService {
     public List<HlyDO> haveNum(Map<String, Object> map) {
         return hlyDao.haveNum(map);
     }
+
+    @Override
+    public HlyDO getHlyInfomation(String goodNum) {
+        return hlyDao.getHlyInfomation(goodNum);
+    }
 }

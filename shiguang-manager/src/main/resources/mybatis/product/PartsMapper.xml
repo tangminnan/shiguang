@@ -167,6 +167,17 @@
 		delete from aa_parts where id = #{value}
 	</delete>
 
+    <!-- 通过商品代码查询商品信息 -->
+    <select id="getPartInfomation" resultType="com.shiguang.product.domain.PartsDO" >
+      select
+        p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,
+        p.`retail_price`,p.`xsstate`,p.`state`,
+        m.mfrsname,b.brandname,u.unitname,p.`classtype`
+        from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum AND p.`mfrsid`=b.`mfrsid`
+        left join c_unit u on p.unitid= u.unitid
+        where p.`produc_num` = #{value}
+    </select>
+
     <delete id="batchRemove">
         delete from aa_parts where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">

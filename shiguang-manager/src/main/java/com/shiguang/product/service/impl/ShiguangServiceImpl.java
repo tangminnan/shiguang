@@ -79,4 +79,9 @@ public class ShiguangServiceImpl implements ShiguangService {
     public List<ShiguangDO> haveNum(Map<String, Object> map) {
         return shiguangDao.haveNum(map);
     }
+
+    @Override
+    public ShiguangDO getShiguangInfomation(String goodNum) {
+        return shiguangDao.getShiguangInfomation(goodNum);
+    }
 }

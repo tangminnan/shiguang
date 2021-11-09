@@ -185,6 +185,17 @@
 		delete from aa_tyj where id = #{value}
 	</delete>
 
+    <!-- 根据商品代码查询商品信息 -->
+    <select id="getTyjInfomation" resultType="com.shiguang.product.domain.TyjDO">
+                select
+        t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`brandnum`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
+        t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
+        t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`xsstate`,t.`state`,t.`classtype`
+        from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsnum left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
+        left join c_unit u on t.unitid= u.unitid
+        where t.`produc_num` = #{value}
+    </select>
+
     <delete id="batchRemove">
         delete from aa_tyj where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">

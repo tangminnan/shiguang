@@ -263,6 +263,17 @@
         </foreach>
     </delete>
 
+    <!-- 根据商品代码查询商品信息 -->
+    <select id="getHlyInfomation" resultType="com.shiguang.product.domain.HlyDO">
+                select m.`mfrsname`,b.`brandname`,u.`unitname`,
+        h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
+        h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
+        h.`xsstate`,h.`state`,h.`classtype`
+        from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
+        left join c_unit u on h.unitid= u.unitid
+        where h.`produc_num` = #{value}
+    </select>
+
     <!--菜单联动显示-->
     <select id="choice" resultType="com.shiguang.product.domain.HlyDO">
 		select  brandid,brandnum ,brandname  from c_brand  where mfrsid=#{mfrsid} and goodsid=#{goodsid} group by brandid

@@ -71,4 +71,9 @@ public class HcServiceImpl implements HcService {
     public List<HcDO> haveNum(Map<String, Object> map) {
         return hcDao.haveNum(map);
     }
+
+    @Override
+    public HcDO getHcInfomation(String goodNum) {
+        return hcDao.getHcInfomation(goodNum);
+    }
 }

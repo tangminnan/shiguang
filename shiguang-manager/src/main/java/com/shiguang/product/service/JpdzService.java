@@ -2,6 +2,7 @@ package com.shiguang.product.service;
 
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.product.domain.HlyDO;
+import com.shiguang.product.domain.JpcpDO;
 import com.shiguang.product.domain.JpdzDO;
 
 import java.util.List;
@@ -43,4 +44,6 @@ public interface JpdzService {
 
     //判断是否存在商品代码
     List<JpdzDO> haveNum(Map<String, Object> map);
+
+    JpdzDO getJpdzInfomation(String goodNum);
 }

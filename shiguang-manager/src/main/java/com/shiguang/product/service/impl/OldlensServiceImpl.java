@@ -70,4 +70,9 @@ public class OldlensServiceImpl implements OldlensService {
     public List<OldlensDO> haveNum(Map<String, Object> map) {
         return oldlensDao.haveNum(map);
     }
+
+    @Override
+    public OldlensDO getOldlenInfomation(String goodNum) {
+        return oldlensDao.getOldlenInfomation(goodNum);
+    }
 }

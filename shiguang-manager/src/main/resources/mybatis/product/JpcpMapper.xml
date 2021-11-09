@@ -226,6 +226,18 @@
         </foreach>
     </delete>
 
+    <!-- 通过商品代码查询商品信息 -->
+    <select id="getJpcpInfomation" resultType="com.shiguang.product.domain.JpcpDO">
+         select
+        j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
+        j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
+        j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`,j.`classtype`,j.`produc_factory`,
+       m.mfrsname,b.brandname,u.unitname
+        from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum   AND j.`mfrsid`=b.`mfrsid` left join
+        c_unit u on j.unitid= u.unitid left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
+        where j.`produc_num` = #{value}
+    </select>
+
     <!--菜单联动显示-->
     <select id="choice" resultType="com.shiguang.product.domain.JpcpDO">
 		select  brandid,brandnum ,brandname  from c_brand  where mfrsid=#{mfrsid} and goodsid=#{goodsid} group by brandid

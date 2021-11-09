@@ -411,6 +411,7 @@ public class SettlementController {
 			model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));
 			model.addAttribute("payMoney",settlementDO1.getPayMoney());
 			model.addAttribute("changeMoney",settlementDO1.getChangeMoney());
+			model.addAttribute("sellName",settlementDO1.getSaleName());
 		} else {
 			model.addAttribute("payMoney","");
 			model.addAttribute("changeMoney","");
@@ -420,7 +421,7 @@ public class SettlementController {
 		Conclusion conclusion = new Conclusion();
 		map2.put("cardNumber",settlementDO.getMemberNumber());
 		map2.put("saleNumber",settlementDO.getSaleNumber());
-
+		map2.put("ptometry_number",settlementDO.getPtometryNumber());
 		if (!"".equals(settlementDO.getOptometrywlName()) && null != settlementDO.getOptometrywlName()){
 			model.addAttribute("optometryName",settlementDO.getOptometrywlName());
 			if (1 == settlementDO.getRecipelwlType()){

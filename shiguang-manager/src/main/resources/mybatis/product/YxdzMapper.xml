@@ -239,6 +239,15 @@
 		delete from aa_yxdz where id = #{value}
 	</delete>
 
+	<!-- 根据商品代码查询商品信息 -->
+	<select id="getYxdzInfomation" resultType="com.shiguang.product.domain.YxdzDO">
+		        select m.`mfrsname`,b.`brandname`,u.`unitname`,y.`retail_price`,
+        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`factory`,y.`produc_factory`,y.`proid`,y.`unitid`
+        from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsnum left join c_brand b on y.brandnum=b.brandnum AND m.`mfrsid`=b.`mfrsid`
+        left join c_unit u on y.unitid= u.unitid
+        where y.`produc_num` = #{value}
+	</select>
+
     <delete id="batchRemove">
         delete from aa_yxdz where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">

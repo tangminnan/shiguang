@@ -69,4 +69,9 @@ public class TyjServiceImpl implements TyjService {
     public List<TyjDO> haveNum(Map<String, Object> map) {
         return tyjDao.haveNum(map);
     }
+
+    @Override
+    public TyjDO getTyjInfomation(String goodNum) {
+        return tyjDao.getTyjInfomation(goodNum);
+    }
 }

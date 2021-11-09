@@ -75,4 +75,9 @@ public class ProducaServiceImpl implements ProducaService {
     public int updateState(ProducaDO produca) {
         return producaDao.updateState(produca);
     }
+
+    @Override
+    public ProducaDO getJJInfomation(String goodNum) {
+        return producaDao.getJJInfomation(goodNum);
+    }
 }
