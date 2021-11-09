@@ -79,18 +79,15 @@
                     </select>
 				</span>
             </td>
-            <!--<td>经销方式：</td>-->
-            <!--<td>-->
-            <!--<select>-->
-            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-            <!--</select>-->
-            <!--</td>-->
-            <!--<td>商品状态</td>-->
-            <!--<td>-->
-            <!--<select>-->
-            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-            <!--</select>-->
-            <!--</td>-->
+
+            <td>筛选库存信息</td>
+            <td>
+                <select id="kccount" name="kccount" style="width: 55%;">
+                    <option value="">显示库存所有的商品信息</option>
+                    <option value="0">显示库存=0的商品信息</option>
+                    <option value="1">显示库存>0的商品信息</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>标准零售价格：</td>
@@ -184,7 +181,8 @@
                                 retailPrice : $("#retailPrice").val(),
                                 retailPrice2 : $("#retailPrice2").val(),
                                 xsstate : $("input[name='xsstate']:checked").val(),
-                                classtype : $("#classtype").val()
+                                classtype : $("#classtype").val(),
+                                kccount : $("#kccount").val(),
                                 // positionId : $('#positionId option:selected').val()
                                 // name:$('#searchName').val(),
                                 // username:$('#searchName').val()
@@ -389,9 +387,9 @@
 
 
 
-    function stocklog() {
-        alert("库存流水")
-    }
+    // function stocklog() {
+    //     window.open("/stock/stock/codeJingjia?danjuNumber="+danjuNumber);
+    // }
 </script>
 
 </body>

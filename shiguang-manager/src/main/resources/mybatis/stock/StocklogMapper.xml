@@ -4,21 +4,26 @@
 <mapper namespace="com.shiguang.stock.dao.StocklogDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.StocklogDO">
-		select `id`,`num`,`code`,`name`,`counts`,`day`,`way`,`username`,`position_id` from stock_stocklog where id = #{value}
+		select `id`,`num`,`code`,`name`,`goodsid`,`money`,`useday`,`bacth`,`counts`,`inposition_id`,`outposition_id`,`day`,`way`,`username` from stock_stocklog where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.StocklogDO">
-		select `id`,`num`,`code`,`name`,`counts`,`day`,`way`,`username`,`position_id` from stock_stocklog
+		select `id`,`num`,`code`,`name`,`goodsid`,`money`,`useday`,`bacth`,`counts`,`inposition_id`,`outposition_id`,`day`,`way`,`username` from stock_stocklog
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="num != null and num != ''"> and num = #{num} </if>
 		  		  <if test="code != null and code != ''"> and code = #{code} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
+		  		  <if test="money != null and money != ''"> and money = #{money} </if>
+		  		  <if test="useday != null and useday != ''"> and useday = #{useday} </if>
+		  		  <if test="bacth != null and bacth != ''"> and bacth = #{bacth} </if>
 		  		  <if test="counts != null and counts != ''"> and counts = #{counts} </if>
+		  		  <if test="inpositionId != null and inpositionId != ''"> and inposition_id = #{inpositionId} </if>
+		  		  <if test="outpositionId != null and outpositionId != ''"> and outposition_id = #{outpositionId} </if>
 		  		  <if test="day != null and day != ''"> and day = #{day} </if>
 		  		  <if test="way != null and way != ''"> and way = #{way} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
-		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -40,11 +45,16 @@
 		  		  <if test="num != null and num != ''"> and num = #{num} </if>
 		  		  <if test="code != null and code != ''"> and code = #{code} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
+		  		  <if test="money != null and money != ''"> and money = #{money} </if>
+		  		  <if test="useday != null and useday != ''"> and useday = #{useday} </if>
+		  		  <if test="bacth != null and bacth != ''"> and bacth = #{bacth} </if>
 		  		  <if test="counts != null and counts != ''"> and counts = #{counts} </if>
+		  		  <if test="inpositionId != null and inpositionId != ''"> and inposition_id = #{inpositionId} </if>
+		  		  <if test="outpositionId != null and outpositionId != ''"> and outposition_id = #{outpositionId} </if>
 		  		  <if test="day != null and day != ''"> and day = #{day} </if>
 		  		  <if test="way != null and way != ''"> and way = #{way} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
-		  		  <if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
 		  		</where>
 	</select>
 	 
@@ -54,22 +64,32 @@
 			`num`, 
 			`code`, 
 			`name`, 
+			`goodsid`, 
+			`money`, 
+			`useday`, 
+			`bacth`, 
 			`counts`, 
+			`inposition_id`, 
+			`outposition_id`, 
 			`day`, 
 			`way`, 
-			`username`, 
-			`position_id`
+			`username`
 		)
 		values
 		(
 			#{num}, 
 			#{code}, 
 			#{name}, 
+			#{goodsid}, 
+			#{money}, 
+			#{useday}, 
+			#{bacth}, 
 			#{counts}, 
+			#{inpositionId}, 
+			#{outpositionId}, 
 			#{day}, 
 			#{way}, 
-			#{username}, 
-			#{positionId}
+			#{username}
 		)
 	</insert>
 	 
@@ -79,11 +99,16 @@
 			<if test="num != null">`num` = #{num}, </if>
 			<if test="code != null">`code` = #{code}, </if>
 			<if test="name != null">`name` = #{name}, </if>
+			<if test="goodsid != null">`goodsid` = #{goodsid}, </if>
+			<if test="money != null">`money` = #{money}, </if>
+			<if test="useday != null">`useday` = #{useday}, </if>
+			<if test="bacth != null">`bacth` = #{bacth}, </if>
 			<if test="counts != null">`counts` = #{counts}, </if>
+			<if test="inpositionId != null">`inposition_id` = #{inpositionId}, </if>
+			<if test="outpositionId != null">`outposition_id` = #{outpositionId}, </if>
 			<if test="day != null">`day` = #{day}, </if>
 			<if test="way != null">`way` = #{way}, </if>
-			<if test="username != null">`username` = #{username}, </if>
-			<if test="positionId != null">`position_id` = #{positionId}</if>
+			<if test="username != null">`username` = #{username}</if>
 		</set>
 		where id = #{id}
 	</update>

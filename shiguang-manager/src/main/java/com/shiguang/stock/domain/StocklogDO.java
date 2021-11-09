@@ -6,11 +6,12 @@ import java.util.Date;
 
 
 /**
- * 
+ * kucunlog
+
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-11-05 16:13:22
+ * @date 2021-11-08 14:58:43
  */
 public class StocklogDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,16 +24,26 @@ public class StocklogDO implements Serializable {
 	private String code;
 	//商品名称
 	private String name;
+	//商品类别id
+	private Integer goodsid;
+	//价钱
+	private Double money;
+	//效期
+	private String useday;
+	//批号
+	private String bacth;
 	//数量
 	private String counts;
+	//接收仓位id
+	private Long inpositionId;
+	//发出仓位id
+	private Long outpositionId;
 	//日期
 	private String day;
 	//方式
 	private String way;
 	//工号
 	private String username;
-	//仓位id
-	private Long positionId;
 
 	/**
 	 * 设置：库存logid
@@ -83,6 +94,54 @@ public class StocklogDO implements Serializable {
 		return name;
 	}
 	/**
+	 * 设置：商品类别id
+	 */
+	public void setGoodsid(Integer goodsid) {
+		this.goodsid = goodsid;
+	}
+	/**
+	 * 获取：商品类别id
+	 */
+	public Integer getGoodsid() {
+		return goodsid;
+	}
+	/**
+	 * 设置：价钱
+	 */
+	public void setMoney(Double money) {
+		this.money = money;
+	}
+	/**
+	 * 获取：价钱
+	 */
+	public Double getMoney() {
+		return money;
+	}
+	/**
+	 * 设置：效期
+	 */
+	public void setUseday(String useday) {
+		this.useday = useday;
+	}
+	/**
+	 * 获取：效期
+	 */
+	public String getUseday() {
+		return useday;
+	}
+	/**
+	 * 设置：批号
+	 */
+	public void setBacth(String bacth) {
+		this.bacth = bacth;
+	}
+	/**
+	 * 获取：批号
+	 */
+	public String getBacth() {
+		return bacth;
+	}
+	/**
 	 * 设置：数量
 	 */
 	public void setCounts(String counts) {
@@ -93,6 +152,30 @@ public class StocklogDO implements Serializable {
 	 */
 	public String getCounts() {
 		return counts;
+	}
+	/**
+	 * 设置：接收仓位id
+	 */
+	public void setInpositionId(Long inpositionId) {
+		this.inpositionId = inpositionId;
+	}
+	/**
+	 * 获取：接收仓位id
+	 */
+	public Long getInpositionId() {
+		return inpositionId;
+	}
+	/**
+	 * 设置：发出仓位id
+	 */
+	public void setOutpositionId(Long outpositionId) {
+		this.outpositionId = outpositionId;
+	}
+	/**
+	 * 获取：发出仓位id
+	 */
+	public Long getOutpositionId() {
+		return outpositionId;
 	}
 	/**
 	 * 设置：日期
@@ -129,17 +212,5 @@ public class StocklogDO implements Serializable {
 	 */
 	public String getUsername() {
 		return username;
-	}
-	/**
-	 * 设置：仓位id
-	 */
-	public void setPositionId(Long positionId) {
-		this.positionId = positionId;
-	}
-	/**
-	 * 获取：仓位id
-	 */
-	public Long getPositionId() {
-		return positionId;
 	}
 }

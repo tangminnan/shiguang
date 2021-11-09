@@ -64,8 +64,32 @@ function load() {
 									title : '商品名称' 
 								},
 																{
+									field : 'goodsid', 
+									title : '商品类别id' 
+								},
+																{
+									field : 'money', 
+									title : '价钱' 
+								},
+																{
+									field : 'useday', 
+									title : '效期' 
+								},
+																{
+									field : 'bacth', 
+									title : '批号' 
+								},
+																{
 									field : 'counts', 
 									title : '数量' 
+								},
+																{
+									field : 'inpositionId', 
+									title : '接收仓位id' 
+								},
+																{
+									field : 'outpositionId', 
+									title : '发出仓位id' 
 								},
 																{
 									field : 'day', 
@@ -78,10 +102,6 @@ function load() {
 																{
 									field : 'username', 
 									title : '工号' 
-								},
-																{
-									field : 'positionId', 
-									title : '仓位id' 
 								},
 																{
 									title : '操作',

@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
+ * kucunlog
+
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-11-05 16:13:22
+ * @date 2021-11-08 14:58:43
  */
 public interface StocklogService {
 	

@@ -120,7 +120,12 @@ public class KcController {
 
         query.put("retailPrice", retailPrice);
         query.put("retailPrice2", retailPrice2);
-
+        String kucount=params.get("kccount").toString();
+        if (kucount.equals("0")){
+            query.put("kccount0",kucount);
+        }else if (kucount.equals("1")){
+            query.put("kccount1","0");
+        }
         List<StockDO> stockDOS = stockService.kccxList(query);
 
         int total = stockService.kccxListCount(query);
