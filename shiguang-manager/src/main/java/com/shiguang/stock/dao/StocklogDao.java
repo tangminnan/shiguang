@@ -8,10 +8,11 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 
+ * kucunlog
+
  * @author cln
  * @email bushuo@163.com
- * @date 2021-11-05 16:13:22
+ * @date 2021-11-08 14:58:43
  */
 @Mapper
 public interface StocklogDao {

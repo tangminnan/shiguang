@@ -30,7 +30,35 @@
         left join c_unit u on p.unitid= u.unitid
 
 
+        <where>
+            <if test="producNum != null and producNum != ''">and p.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and p.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
+            <if test="retailPrice != null and retailPrice != ''">
+                and   #{retailPrice} &lt;=  p.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and p.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  p.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and p.retail_price &lt;=  #{taxPrice2}
+            </if>
 
+
+            <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
+            <if test="producColor != null and producColor != ''">and p.produc_color = #{producColor}</if>
+            <if test="size != null and size != ''">and p.size = #{size}</if>
+            <if test="technologyId != null and technologyId != ''">and p.technology_id = #{technologyId}</if>
+            <if test="materialid != null and materialid != ''">and p.materialid = #{materialid}</if>
+            <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
+            <if test="styleId != null and styleId != ''">and p.style_id = #{styleId}</if>
+            and p.state= 1
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -53,10 +81,16 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
             <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  p.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and p.retail_price &lt;=  #{retailPrice2}
             </if>
             <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  p.tax_price and p.retail_price &lt;=  #{taxPrice2}
+                and   #{taxPrice} &lt;=  p.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and p.retail_price &lt;=  #{taxPrice2}
             </if>
 
 

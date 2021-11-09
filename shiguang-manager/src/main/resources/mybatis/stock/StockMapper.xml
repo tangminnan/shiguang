@@ -1842,8 +1842,12 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price and s.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  s.retail_price
             </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and s.retail_price &lt;=  #{retailPrice2}
+            </if>
+
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
             <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
             <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
@@ -1852,6 +1856,10 @@
             <if test="classtype != null and classtype != ''">and s.classtype = #{classtype}</if>
             <if test="status != null and status != ''">and s.status = #{status}</if>
             <if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>
+
+            <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
+            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1866,22 +1874,30 @@
         </if>
     </select>
     <select id="countall" resultType="int">
-        select sum(s.goods_count) as countall  from stock s join c_mfrs m on s.mfrsid=m.mfrsnum
+        select ifnull(sum(s.goods_count),0)  as countall from stock s join c_mfrs m on s.mfrsid=m.mfrsnum
         <where>
             <if test="goodsNum != null and goodsNum != ''">and  s.goods_num = #{goodsNum}</if>
             <if test="goodsCode != null and goodsCode != ''">and  s.goods_code = #{goodsCode}</if>
             <if test="goodsName != null and goodsName != ''">and   s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
-            <if test="goodsid != null and goodsid != ''">and  s.goods_type = #{goodsid}</if>
+
+            <if test="goodsType != null and goodsType != ''">and  s.goods_type = #{goodsType}</if>
+            <!--<if test="xsstate != null and xsstate != ''">and  s.xsstate = #{xsstate}</if>-->
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and  s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  retail_price and  retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  s.retail_price
             </if>
-            <if test="positionId != null and positionId != ''">and  position_id = #{positionId}</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and s.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="positionId != null and positionId != ''">and  s.position_id = #{positionId}</if>
+            <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
+            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
         </where>
     </select>
     <select id="kccxListCount" resultType="int">
         select count(*)   from stock s
+
         <where>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
             <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
@@ -1889,10 +1905,16 @@
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price and s.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  s.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and s.retail_price &lt;=  #{retailPrice2}
             </if>
             <if test="classtype != null and classtype != ''">and s.classtype = #{classtype}</if>
             <if test="status != null and status != ''">and s.status = #{status}</if>
+
+            <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
+            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
         </where>
     </select>
 

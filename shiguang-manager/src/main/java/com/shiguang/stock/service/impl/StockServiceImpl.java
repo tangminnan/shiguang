@@ -549,7 +549,7 @@ public class StockServiceImpl implements StockService {
                                     String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
-                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    xiaoqi =yeahs + "-" + yue + "-" + ri;
                                     //code =yeah + yue + ri;
                                     code = yeah+yue + ri+"AA";
                                 }
@@ -673,7 +673,7 @@ public class StockServiceImpl implements StockService {
                                     String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
-                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    xiaoqi =yeahs + "-" + yue + "-" + ri;
                                     //code =yeah + yue + ri;
                                     code = yeah+yue + ri+"AA";
                                 }
@@ -797,7 +797,7 @@ public class StockServiceImpl implements StockService {
                                     String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
-                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    xiaoqi =yeahs + "-" + yue + "-" + ri;
                                     //code =yeah + yue + ri;
                                     code = yeah+yue + ri+"AA";
                                 }
@@ -921,7 +921,7 @@ public class StockServiceImpl implements StockService {
                                     String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
-                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    xiaoqi =yeahs + "-" + yue + "-" + ri;
                                     //code =yeah + yue + ri;
                                     code = yeah+yue + ri+"AA";
                                 }
@@ -1045,7 +1045,7 @@ public class StockServiceImpl implements StockService {
                                     String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
-                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    xiaoqi =yeahs + "-" + yue + "-" + ri;
                                     //code =yeah + yue + ri;
                                     code = yeah+yue + ri+"AA";
                                 }
@@ -1169,7 +1169,7 @@ public class StockServiceImpl implements StockService {
                                     String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
-                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    xiaoqi =yeahs + "-" + yue + "-" + ri;
                                     //code =yeah + yue + ri;
                                     code = yeah+yue + ri+"AA";
                                 }
@@ -1293,7 +1293,7 @@ public class StockServiceImpl implements StockService {
                                     String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
-                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    xiaoqi =yeahs + "-" + yue + "-" + ri;
                                     //code =yeah + yue + ri;
                                     code = yeah+yue + ri+"AA";
                                 }
@@ -1417,7 +1417,7 @@ public class StockServiceImpl implements StockService {
                                     String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
-                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    xiaoqi =yeahs + "-" + yue + "-" + ri;
                                     //code =yeah + yue + ri;
                                     code = yeah+yue + ri+"AA";
                                 }
@@ -1541,7 +1541,7 @@ public class StockServiceImpl implements StockService {
                                     String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
-                                    xiaoqi =yeah + "-" + yue + "-" + ri;
+                                    xiaoqi =yeahs + "-" + yue + "-" + ri;
                                     //code =yeah + yue + ri;
                                     code =yeah + yue + ri+"AA";
                                 }

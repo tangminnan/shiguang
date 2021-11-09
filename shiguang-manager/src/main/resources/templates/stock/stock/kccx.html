@@ -79,18 +79,15 @@
                     </select>
 				</span>
             </td>
-            <!--<td>经销方式：</td>-->
-            <!--<td>-->
-            <!--<select>-->
-            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-            <!--</select>-->
-            <!--</td>-->
-            <!--<td>商品状态</td>-->
-            <!--<td>-->
-            <!--<select>-->
-            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-            <!--</select>-->
-            <!--</td>-->
+
+            <td>筛选库存信息</td>
+            <td>
+                <select id="kccount" name="kccount" style="width: 55%;">
+                    <option value="">显示库存所有的商品信息</option>
+                    <option value="0">显示库存=0的商品信息</option>
+                    <option value="1">显示库存>0的商品信息</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>标准零售价格：</td>
@@ -106,7 +103,7 @@
     <!--保存/清空-->
     <div class="BQ-btn">
         <input type="button" value="查询" onclick="reLoad()"/>
-        <!--<input type="button" value="库存流水" onclick="stocklog()"/>-->
+        <input type="button" value="库存流水" onclick="stocklog()"/>
         <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
@@ -184,7 +181,8 @@
                                 retailPrice : $("#retailPrice").val(),
                                 retailPrice2 : $("#retailPrice2").val(),
                                 xsstate : $("input[name='xsstate']:checked").val(),
-                                classtype : $("#classtype").val()
+                                classtype : $("#classtype").val(),
+                                kccount : $("#kccount").val(),
                                 // positionId : $('#positionId option:selected').val()
                                 // name:$('#searchName').val(),
                                 // username:$('#searchName').val()
@@ -368,6 +366,33 @@
         var goodsid = $("#goodsType").val();
         var mfrsname = $('#mfrsname').val();
         var brandname = $("#brandname").val();
+        var kccount = $("#kccount").val();
+        var retailPrice = $("#retailPrice").val();
+        var retailPrice2 = $("#retailPrice2").val();
+
+
+        // var positionId= $('#positionId').val(),
+        // var goodsNum = $("#goodsNum").val(),
+        // var goodsCode = $("#goodsCode").val(),
+        // var goodsName = $("#goodsName").val(),
+        // var goodsType = $("#goodsType option:selected").val(),
+        // var // mfrsid : $("#mfrsid").val(),
+        // var mfrsname : $("#mfrsname").val(),
+        // var brandname : $("#brandname").val(),
+        // var retailPrice : $("#retailPrice").val(),
+        // var retailPrice2 : $("#retailPrice2").val(),
+        // var xsstate : $("input[name='xsstate']:checked").val(),
+        // var classtype : $("#classtype").val(),
+        // var kccount : $("#kccount").val(),
+
+
+
+
+
+
+
+
+
 
         $.ajax({
             url: '/kucun/stock/countall',
@@ -376,7 +401,10 @@
             data: {
                 'goodsid': goodsid,
                 'mfrsname': mfrsname,
-                'brandname': brandname
+                'brandname': brandname,
+                'kccount': kccount,
+                'retailPrice': retailPrice,
+                'retailPrice2': retailPrice2,
             },
             success: function (xml) {
                 // alert(xml)
@@ -390,7 +418,7 @@
 
 
     function stocklog() {
-        alert("库存流水")
+        window.open("/stock/stocklog/stocklog");
     }
 </script>
 

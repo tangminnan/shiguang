@@ -28,12 +28,18 @@
             <if test="goodsCode != null and goodsCode != ''">and y.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
             <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  y.retail_price and y.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  y.tax_price and y.retail_price &lt;=  #{taxPrice2}
-            </if>
+			<if test="retailPrice != null and retailPrice != ''">
+				and   #{retailPrice} &lt;=  y.retail_price
+			</if>
+			<if test="retailPrice2 != null and retailPrice2 != ''">
+				and y.retail_price &lt;=  #{retailPrice2}
+			</if>
+			<if test="taxPrice != null and taxPrice != ''">
+				and   #{taxPrice} &lt;=  y.tax_price
+			</if>
+			<if test="taxPrice2 != null and taxPrice2 != ''">
+				and y.retail_price &lt;=  #{taxPrice2}
+			</if>
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="xsstate != null and xsstate != ''">and y.xsstate = #{xsstate}</if>
@@ -63,10 +69,16 @@
 			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
 			<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
 			<if test="retailPrice != null and retailPrice != ''">
-				and   #{retailPrice} &lt;=  y.retail_price and y.retail_price &lt;=  #{retailPrice2}
+				and   #{retailPrice} &lt;=  y.retail_price
+			</if>
+			<if test="retailPrice2 != null and retailPrice2 != ''">
+				and y.retail_price &lt;=  #{retailPrice2}
 			</if>
 			<if test="taxPrice != null and taxPrice != ''">
-				and   #{taxPrice} &lt;=  y.tax_price and y.retail_price &lt;=  #{taxPrice2}
+				and   #{taxPrice} &lt;=  y.tax_price
+			</if>
+			<if test="taxPrice2 != null and taxPrice2 != ''">
+				and y.retail_price &lt;=  #{taxPrice2}
 			</if>
 			<if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
 			<if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>

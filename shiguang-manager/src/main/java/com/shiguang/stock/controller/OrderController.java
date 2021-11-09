@@ -1,12 +1,18 @@
 package com.shiguang.stock.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.shiguang.common.utils.*;
 import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.domain.StocklogDO;
+import com.shiguang.stock.domain.StockqualifyDO;
 import com.shiguang.stock.service.StockService;
+import com.shiguang.stock.service.StocklogService;
+import com.shiguang.stock.service.StockqualifyService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -42,7 +48,10 @@ public class OrderController {
     private StockService stockService;
     @Autowired
     UserService userService;
-
+    @Autowired
+    private StocklogService stocklogService;
+    @Autowired
+    private StockqualifyService stockqualifyService;
     @GetMapping()
     @RequiresPermissions("stock:order:order")
     String Order(){
@@ -161,6 +170,27 @@ public class OrderController {
                     Integer newGoodsCount = goodsCountNew + gdcountNew;
                     stockDO.setGoodsCount(String.valueOf(newGoodsCount));
                     stockService.updateGoodsCount(stockDO);//修改数量
+                    ///log
+                    StocklogDO stocklogDO=new StocklogDO();
+                    stocklogDO.setNum(orderkc.getGoodsNum());
+                    stocklogDO.setCode(orderkc.getGoodsCode());
+                    stocklogDO.setName(orderkc.getGoodsName());
+                    stocklogDO.setGoodsid(orderkc.getGoodsType());
+                    stocklogDO.setMoney(Double.valueOf(orderkc.getRetailPrice()));
+                    stocklogDO.setUseday(orderkc.getUseday());
+                    stocklogDO.setBacth(orderkc.getBatch());
+                    stocklogDO.setCounts(orderkc.getGoodsCount());
+                    stocklogDO.setInpositionId(Long.valueOf(orderkc.getPositionId()));
+                    stocklogDO.setOutpositionId(null);
+                    //———获取当前系统时间—————
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                    Date date = new Date();
+                    String newDate = sdf.format(date);
+                    stocklogDO.setDay(newDate);
+                    stocklogDO.setWay("采购"+orderkc.getGoodsCount()+"个"+orderkc.getGoodsName());
+                    stocklogDO.setUsername(username);
+                    stocklogService.save(stocklogDO);
+
 
                     OrderDO orderDO1 = new OrderDO();
                     StockDO stockDO1 = new StockDO();
@@ -274,6 +304,32 @@ public class OrderController {
                     } else {
                         stockDO.setFactory("");
                     }
+                    ///log
+                    StocklogDO stocklogDO=new StocklogDO();
+                    stocklogDO.setNum(orderkc.getGoodsNum());
+                    stocklogDO.setCode(orderkc.getGoodsCode());
+                    stocklogDO.setName(orderkc.getGoodsName());
+                    stocklogDO.setGoodsid(orderkc.getGoodsType());
+                    stocklogDO.setMoney(Double.valueOf(orderkc.getRetailPrice()));
+                    stocklogDO.setUseday(orderkc.getUseday());
+                    stocklogDO.setBacth(orderkc.getBatch());
+                    stocklogDO.setCounts(orderkc.getGoodsCount());
+                    stocklogDO.setInpositionId(Long.valueOf(orderkc.getPositionId()));
+                    stocklogDO.setOutpositionId(null);
+                    //———获取当前系统时间—————
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                    Date date = new Date();
+                    String newDate = sdf.format(date);
+                    stocklogDO.setDay(newDate);
+                    stocklogDO.setWay("采购"+orderkc.getGoodsCount()+"个"+orderkc.getGoodsName());
+                    stocklogDO.setUsername(username);
+                    stocklogService.save(stocklogDO);
+                    //合格仓
+
+                    StockqualifyDO stockqualifyDO=new StockqualifyDO();
+                    stockqualifyDO.setPositionId(Long.valueOf(orderkc.getPositionId()));
+                    stockqualifyDO.setGoodsCode(orderkc.getGoodsCode());
+                    stockqualifyService.save(stockqualifyDO);
 
                     if (stockService.save(stockDO) > 0) {
                         OrderDO orderDO1 = new OrderDO();
@@ -286,7 +342,6 @@ public class OrderController {
                         } else {
                             orderDO1.setStockorder(orderkc.getDanjuNumber());
                         }
-
                         stockDO1.setDanjuNumber(danjuNumber);
                         stockDO1.setStatus(status);
                         stockDO1.setUsername(username);
