@@ -165,11 +165,16 @@ public class KcController {
     @ResponseBody
     @GetMapping("/countall")
     public Integer countall(@RequestParam("goodsid") String goodsid, @RequestParam("mfrsname") String mfrsname,
-                            @RequestParam("brandname") String brandname, Model model) {
+                            @RequestParam("brandname") String brandname,@RequestParam("kccount") String kccount, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("goodsid",goodsid);
         map.put("mfrsname",mfrsname);
         map.put("brandname",brandname);
+        if (kccount.equals("0")){
+            map.put("kccount0",kccount);
+        }else if (kccount.equals("1")){
+            map.put("kccount1","0");
+        }
         int countall=stockService.countall(map);
         model.addAttribute("countall",countall);
         return countall;

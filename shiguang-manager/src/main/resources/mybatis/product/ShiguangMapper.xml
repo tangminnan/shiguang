@@ -27,10 +27,16 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
             <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price and s.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  s.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and s.retail_price &lt;=  #{retailPrice2}
             </if>
             <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  s.tax_price and s.retail_price &lt;=  #{taxPrice2}
+                and   #{taxPrice} &lt;=  s.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and s.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
             and  s.state= 1
@@ -58,10 +64,16 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
             <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price and s.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  s.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and s.retail_price &lt;=  #{retailPrice2}
             </if>
             <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  s.tax_price and s.retail_price &lt;=  #{taxPrice2}
+                and   #{taxPrice} &lt;=  s.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and s.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
             and  s.state= 1
