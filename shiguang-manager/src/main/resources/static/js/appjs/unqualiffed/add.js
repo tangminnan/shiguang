@@ -8,6 +8,16 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+	var positionAppli = $("#positionAppli").val();
+	if ('' == positionAppli){
+		layer.alert("请选择申请仓位");
+		return
+	}
+	var goodsNum = $("#goodsNum").val();
+	if ('' == goodsNum){
+		layer.alert("请选择商品")
+		return
+	}
 	$.ajax({
 		cache : true,
 		type : "POST",

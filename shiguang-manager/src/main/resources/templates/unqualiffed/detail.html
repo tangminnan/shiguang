@@ -97,7 +97,12 @@
             goodsHtml += "<td>"+goodsName[i]+"</td>";
             goodsHtml += "<td style='width: 25%;'>";
             goodsHtml += "<input style='text-align:center;' id='cause' name='cause' value='"+cause[i]+"'/>";
-            goodsHtml += "<input style='text-align:center;' name='phenomenon' value='"+phenomenon[i]+"'/>";
+            if (phenomenon == ''){
+                goodsHtml += "<input style='text-align:center;' name='phenomenon'/>";
+            } else {
+                goodsHtml += "<input style='text-align:center;' name='phenomenon' value='"+phenomenon[i]+"'/>";
+            }
+
             goodsHtml += "</td>";
             goodsHtml += "<td><input type='text' id='remark' name='remark' value='"+remark[i]+"'></td>";
             goodsHtml += "<td><input type='text' id='count' name='count' value='"+count[i]+"'></td>";
