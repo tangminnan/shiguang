@@ -31,6 +31,8 @@
 <body>
 	<div class="container">
 		<h3>收银员工作统计</h3>
+		<input type="hidden" id="settleDateStart" th:value="${settleDateStart}">
+		<input type="hidden" id="settleDateEnd" th:value="${settleDateEnd}">
 		<table border="0" cellspacing="0" cellpadding="0" id="reportId">
 			<tr class="thead">
 				<td>销售门店</td>
@@ -48,7 +50,7 @@
 				<td> - </td>
 			</tr>
 			<tr>
-				<td>哈尔滨中心店</td>
+				<td ><a href="#" onclick="reportDefinte()">哈尔滨中心店</a></td>
 				<td><span th:text="${shihsouTotal}"></span></td>
 				<td><span th:text="${xianjinMoney}"></span></td>
 				<td>0.00</td>
@@ -102,6 +104,11 @@
 	<script th:inline="javascript">
         $().ready(function(){
         });
+        function reportDefinte(){
+            var settleDateStart =  $("#settleDateStart").val();
+            var settleDateEnd = $("#settleDateEnd").val();
+            window.open("/information/saleReport/reportDetailList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd);
+		}
 	</script>
 </body>
 </html>

@@ -189,13 +189,17 @@ public class SaleReportController {
         Date date = new Date();
         if (!"".equals(settleDateStart)){
             query.put("settleDateStart",settleDateStart);
+            model.addAttribute("settleDateStart",settleDateStart);
         } else {
             query.put("settleDateStart",simpleDateFormat.format(date));
+            model.addAttribute("settleDateStart",simpleDateFormat.format(date));
         }
         if (!"".equals(settleDateEnd)){
             query.put("settleDateEnd",settleDateEnd);
+            model.addAttribute("settleDateEnd",settleDateEnd);
         } else {
             query.put("settleDateEnd",simpleDateFormat.format(date));
+            model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
         }
 //        if (!"".equals(saleNum)){
 //            query.put("saleNum",saleNum);
@@ -240,6 +244,138 @@ public class SaleReportController {
         model.addAttribute("shihsouTotal",shihsouTotal);
         model.addAttribute("date", simpleDateFormat.format(new Date()));
         return "saleReport/saleReportForm";
+    }
+
+    /**
+     * 收银员明细报表打印
+     * @param
+     * @param model
+     * @return
+     */
+    @GetMapping("/reportDetailList")
+    public String reportDetailList(String settleDateStart,String settleDateEnd,Model model) {
+        Map<String,Object> query = new HashMap<>();
+        query.put("state",1);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        if (!"".equals(settleDateStart)){
+            query.put("settleDateStart",settleDateStart);
+        } else {
+            query.put("settleDateStart",simpleDateFormat.format(date));
+        }
+        if (!"".equals(settleDateEnd)){
+            query.put("settleDateEnd",settleDateEnd);
+        } else {
+            query.put("settleDateEnd",simpleDateFormat.format(date));
+        }
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            if(!"3".equals(ShiroUtils.getUser().getCompanyId())){
+                query.put("companyid",ShiroUtils.getUser().getCompanyId());
+            }
+        }
+        List<SalesDO> salesDOList = saleReportService.findSaleReportDetailForms(query);
+        List<SettlementDO> saleNameList = saleReportService.findSaleNameSettleList(query);
+        List<Map<String,Object>> list = new ArrayList<>();
+        if (null != salesDOList && salesDOList.size() >0){
+            for (SettlementDO salesDO : saleNameList){
+                double jjMoney=0.00;
+                double jpMoney=0.00;
+                double jjpjMoney=0.00;
+                double pjMoney=0.00;
+                double tyjMoney=0.00;
+                double lhjMoney=0.00;
+                double yxMoney=0.00;
+                double hlyMoney=0.00;
+                double sgMoney=0.00;
+                double addMoney=0.00;
+                double hcMoney=0.00;
+                double amountMoney=0.00;
+                double primMoney=0.00;
+                double qianfeiMoney=0.00;
+                double dingjinMoney=0.00;
+                for (SalesDO salesDOs : salesDOList){
+                    String[] storeDescribe = salesDOs.getStoreDescribe().split(",");
+                    String[] storeCount = salesDOs.getStoreCount().split(",");
+                    String[] storeUnit = salesDOs.getStoreUnit().split(",");
+                    if (null != salesDOs.getAdditionalPrice() && !"".equals(salesDOs.getAdditionalPrice())){
+                        String[] addPrice = salesDOs.getAdditionalPrice().split(",");
+                        for (int a =0;a< addPrice.length;a++){
+                            addMoney = addMoney + Double.valueOf(addPrice[a]);
+                        }
+                    }
+                    if (salesDO.getSaleName().equals(salesDOs.getSaleName())){
+                        for (int i=0;i<storeDescribe.length;i++){
+                            if ("镜架".equals(storeDescribe[i])){
+                                if ("".equals(storeUnit[i])){
+                                    jjMoney = jjMoney + 0.00;
+                                } else {
+                                    jjMoney = jjMoney + Double.valueOf(storeUnit[i]);
+                                }
+
+                            } else if ("镜片".equals(storeDescribe[i])){
+                                jpMoney = jpMoney + Double.valueOf(storeUnit[i]);
+                            } else if ("配件".equals(storeDescribe[i])){
+                                pjMoney = pjMoney + Double.valueOf(storeUnit[i]);
+                            } else if ("镜架配件".equals(storeDescribe[i])){
+                                jjpjMoney = jjpjMoney + Double.valueOf(storeUnit[i]);
+                            } else if ("隐形".equals(storeDescribe[i])){
+                                yxMoney = yxMoney + Double.valueOf(storeUnit[i]);
+                            } else if ("护理液".equals(storeDescribe[i])){
+                                hlyMoney = hlyMoney + Double.valueOf(storeUnit[i]);
+                            } else if ("视光".equals(storeDescribe[i])){
+                                sgMoney = sgMoney + Double.valueOf(storeUnit[i]);
+                            } else if ("太阳镜".equals(storeDescribe[i])){
+                                tyjMoney = tyjMoney + Double.valueOf(storeUnit[i]);
+                            } else if ("老花镜".equals(storeDescribe[i])){
+                                lhjMoney = lhjMoney + Double.valueOf(storeUnit[i]);
+                            } else if ("耗材".equals(storeDescribe[i])){
+                                hcMoney = hcMoney +Double.valueOf(storeUnit[i]);
+                            }
+                        }
+
+                        primMoney = primMoney + Double.valueOf(salesDOs.getPrimeMoney());
+                        if ("2".equals(salesDOs.getSaleType())){
+                            String dingjin = salesDOs.getModelMoney().toString();
+                            dingjin = dingjin.substring(0,dingjin.length()-1);
+                            dingjinMoney = dingjinMoney + Double.valueOf(dingjin);
+                            String qianfei = salesDOs.getChangeMoney().substring(1);
+                            qianfeiMoney = qianfeiMoney + Double.valueOf(qianfei);
+                            amountMoney = amountMoney + Double.valueOf(dingjin);
+                        } else {
+                            String[] modelsMoney = salesDOs.getModelMoney().split(",");
+                            String changesMoney=salesDOs.getChangeMoney();
+                            for (int s=0;s<modelsMoney.length;s++){
+                                amountMoney = amountMoney + Double.valueOf(modelsMoney[s]);
+                                amountMoney = amountMoney - Double.valueOf(changesMoney);
+                            }
+
+                        }
+                    }
+                }
+                Map<String,Object> map = new HashMap<>();
+                map.put("jjMoney",jjMoney);
+                map.put("jpMoney",jpMoney);
+                map.put("pjMoney",pjMoney);
+                map.put("jjpjMoney",jjpjMoney);
+                map.put("tyjMoney",tyjMoney);
+                map.put("lhjMoney",lhjMoney);
+                map.put("yxMoney",yxMoney);
+                map.put("hlyMoney",hlyMoney);
+                map.put("sgMoney",sgMoney);
+                map.put("hcMoney",hcMoney);
+                map.put("saleName",salesDO.getSaleName());
+                map.put("saleAccount",salesDO.getSaleAcount());
+                map.put("addMoney",addMoney);
+                map.put("amountMoney",amountMoney);
+                map.put("primMoney",primMoney);
+                map.put("dingjinMoney",dingjinMoney);
+                map.put("qianfeiMoney",qianfeiMoney);
+                list.add(map);
+            }
+        }
+        model.addAttribute("list",list);
+        model.addAttribute("date",simpleDateFormat.format(new Date()));
+        return "saleReport/saleReportDetailForm";
     }
 
 

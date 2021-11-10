@@ -190,56 +190,63 @@
         }
         var a=0;
         for (var i=0;i<storeNamearray.length;i++){
-            htmlt = "<tr><td>"+storeNamearray[i]+"</td>";
-            if ('' == batchArray){
-                htmlt += "<td></td>";
-			} else if (null == batchArray[i]){
-                htmlt += "<td></td>";
-			} else if ('null' == batchArray[i]){
-                htmlt += "<td></td>";
-            } else if (undefined == batchArray[i]){
-                htmlt += "<td></td>";
-			} else if (null == batch){
-                htmlt += "<td></td>";
+            if (i>=4){
+                htmlt += "<tr><td>......</td>";
+                htmlt += "</tr>";
+                $("#tbodys").append(htmlt);
+                break;
             } else {
-                htmlt += "<td>"+batchArray[i]+"</td>";
-			}
-			if (storeDescArray[i] == '镜架'){
-                if ('' == colorSizeArray){
+                htmlt = "<tr><td>"+storeNamearray[i]+"</td>";
+                if ('' == batchArray){
                     htmlt += "<td></td>";
-                } else if (null == colorSizeArray[a]){
+                } else if (null == batchArray[i]){
+                    htmlt += "<td></td>";
+                } else if ('null' == batchArray[i]){
+                    htmlt += "<td></td>";
+                } else if (undefined == batchArray[i]){
+                    htmlt += "<td></td>";
+                } else if (null == batch){
                     htmlt += "<td></td>";
                 } else {
-                    htmlt += "<td>"+colorSizeArray[a]+"</td>";
+                    htmlt += "<td>"+batchArray[i]+"</td>";
                 }
-                a=a+1;
-			} else {
-                htmlt += "<td></td>";
-			}
+                if (storeDescArray[i] == '镜架'){
+                    if ('' == colorSizeArray){
+                        htmlt += "<td></td>";
+                    } else if (null == colorSizeArray[a]){
+                        htmlt += "<td></td>";
+                    } else {
+                        htmlt += "<td>"+colorSizeArray[a]+"</td>";
+                    }
+                    a=a+1;
+                } else {
+                    htmlt += "<td></td>";
+                }
 
-			if ('' == unitArray){
-                htmlt += "<td></td>";
-			} else if (null == unitArray[i]){
-                htmlt += "<td></td>";
-			} else if ('null' == unitArray[i]){
-                htmlt += "<td></td>";
-            } else if (undefined == unitArray[i]){
-                htmlt += "<td></td>";
-			} else {
-                htmlt += "<td>"+unitArray[i]+"</td>";
-			}
-			if ('' == storeCountArray){
-                htmlt += "<td></td>";
-			}else {
-                htmlt += "<td>"+storeCountArray[i]+"</td>";
-			}
-			if ('' == storeUnitArray){
-                htmlt += "<td></td>";
-			} else {
-                htmlt += "<td>"+storeUnitArray[i]+"</td>";
-			}
-            htmlt += "</tr>";
-            $("#tbodys").append(htmlt)
+                if ('' == unitArray){
+                    htmlt += "<td></td>";
+                } else if (null == unitArray[i]){
+                    htmlt += "<td></td>";
+                } else if ('null' == unitArray[i]){
+                    htmlt += "<td></td>";
+                } else if (undefined == unitArray[i]){
+                    htmlt += "<td></td>";
+                } else {
+                    htmlt += "<td>"+unitArray[i]+"</td>";
+                }
+                if ('' == storeCountArray){
+                    htmlt += "<td></td>";
+                }else {
+                    htmlt += "<td>"+storeCountArray[i]+"</td>";
+                }
+                if ('' == storeUnitArray){
+                    htmlt += "<td></td>";
+                } else {
+                    htmlt += "<td>"+storeUnitArray[i]+"</td>";
+                }
+                htmlt += "</tr>";
+                $("#tbodys").append(htmlt)
+            }
         }
     });
 </script>

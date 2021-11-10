@@ -187,41 +187,48 @@
             storeCountArray = storeCount.split(",");
 		}
         for (var i=0;i<storeNamearray.length;i++){
-            htmlt = "<tr><td>"+storeNamearray[i]+"</td>";
-            if ('' == batchArray){
-                htmlt += "<td></td>";
-			} else if (null == batchArray[i]){
-                htmlt += "<td></td>";
-            } else if ('null' == batchArray[i]){
-                htmlt += "<td></td>";
-            } else if (undefined == batchArray[i]){
-                htmlt += "<td></td>";
+            if (i>=4){
+                htmlt += "<tr><td>......</td>";
+                htmlt += "</tr>";
+                $("#tbodys").append(htmlt);
+                break;
             } else {
-                htmlt += "<td>"+batchArray[i]+"</td>";
+                htmlt = "<tr><td>"+storeNamearray[i]+"</td>";
+                if ('' == batchArray){
+                    htmlt += "<td></td>";
+                } else if (null == batchArray[i]){
+                    htmlt += "<td></td>";
+                } else if ('null' == batchArray[i]){
+                    htmlt += "<td></td>";
+                } else if (undefined == batchArray[i]){
+                    htmlt += "<td></td>";
+                } else {
+                    htmlt += "<td>"+batchArray[i]+"</td>";
+                }
+                if (''==unitArray){
+                    htmlt += "<td></td>";
+                } else if (null == unitArray[i]){
+                    htmlt += "<td></td>";
+                } else if ('null' == unitArray[i]){
+                    htmlt += "<td></td>";
+                } else if (undefined == unitArray[i]){
+                    htmlt += "<td></td>";
+                } else {
+                    htmlt += "<td>"+unitArray[i]+"</td>";
+                }
+                if ('' == storeCountArray){
+                    htmlt += "<td></td>";
+                } else {
+                    htmlt += "<td>"+storeCountArray[i]+"</td>";
+                }
+                if ('' == storeUnitArray){
+                    htmlt += "<td></td>";
+                } else {
+                    htmlt += "<td>"+storeUnitArray[i]+"</td>";
+                }
+                htmlt += "</tr>";
+                $("#tbodys").append(htmlt)
             }
-            if (''==unitArray){
-                htmlt += "<td></td>";
-			} else if (null == unitArray[i]){
-                htmlt += "<td></td>";
-            } else if ('null' == unitArray[i]){
-                htmlt += "<td></td>";
-            } else if (undefined == unitArray[i]){
-                htmlt += "<td></td>";
-            } else {
-                htmlt += "<td>"+unitArray[i]+"</td>";
-            }
-            if ('' == storeCountArray){
-                htmlt += "<td></td>";
-			} else {
-                htmlt += "<td>"+storeCountArray[i]+"</td>";
-			}
-			if ('' == storeUnitArray){
-                htmlt += "<td></td>";
-			} else {
-                htmlt += "<td>"+storeUnitArray[i]+"</td>";
-			}
-            htmlt += "</tr>";
-            $("#tbodys").append(htmlt)
         }
         var goodsNumArray = $("#goodsNum").val();
         var goodsDescribe = $("#goodsDescribe").val();
@@ -234,10 +241,10 @@
         for (var i=0;i<goodsNumArray.length;i++){
             if (goodsDescribe[i] == "镜片"){
                 if (leftRights[i] == "右"){
-                    html += "镜片右条码：<input name='goodsNum' type='text'>";
+                    html += "镜片右条码：<input name='goodsNum' type='text' onkeydown ='if(event.keyCode==13){event.keyCode=0;return false}'>";
 				}
                 if (leftRights[i] == "左"){
-                    html += "镜片左条码：<input name='goodsNum' type='text'>";
+                    html += "镜片左条码：<input name='goodsNum' type='text' onkeydown ='if(event.keyCode==13){event.keyCode=0;return false}'>";
 				}
 			}
 

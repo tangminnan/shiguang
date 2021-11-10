@@ -22,4 +22,8 @@ public interface SaleReportService {
     List<SalesDO> findGoodsList(Map<String,Object> map);
 
     List<SalesDO> findSaleNameList(Map<String,Object> map);
+
+    List<SalesDO> findSaleReportDetailForms(Map<String,Object> map);
+
+    List<SettlementDO> findSaleNameSettleList(Map<String,Object> map);
 }

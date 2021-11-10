@@ -51,6 +51,8 @@ public class SaleNameController {
                 double jpMoney=0.00;
                 int pjcount=0;
                 double pjMoney=0.00;
+                int jjpjcount=0;
+                double jjpjMoney=0.00;
                 int yxcount=0;
                 double yxMoney=0.00;
                 int hlycount=0;
@@ -72,6 +74,9 @@ public class SaleNameController {
                             } else if ("配件".equals(storeDescribe[i])){
                                 pjcount = pjcount + Integer.parseInt(storeCount[i]);
                                 pjMoney = pjMoney + Double.valueOf(storeUnit[i]);
+                            } else if ("镜架配件".equals(storeDescribe[i])){
+                                jjpjcount = jjpjcount + Integer.parseInt(storeCount[i]);
+                                jjpjMoney = jjpjMoney + Double.valueOf(storeUnit[i]);
                             } else if ("隐形".equals(storeDescribe[i])){
                                 yxcount = yxcount + Integer.parseInt(storeCount[i]);
                                 yxMoney = yxMoney + Double.valueOf(storeUnit[i]);
@@ -93,6 +98,8 @@ public class SaleNameController {
                 map.put("jpMoney",jpMoney);
                 map.put("pjcount",pjcount);
                 map.put("pjMoney",pjMoney);
+                map.put("jjpjcount",jjpjcount);
+                map.put("jjpjMoney",jjpjMoney);
                 map.put("yxcount",yxcount);
                 map.put("yxMoney",yxMoney);
                 map.put("hlycount",hlycount);

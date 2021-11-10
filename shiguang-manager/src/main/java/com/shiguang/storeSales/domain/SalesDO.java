@@ -269,6 +269,15 @@ public class SalesDO implements Serializable {
 	public String getColorSize(){return colorSize;}
 	List<SaleGoodsDO> list = new ArrayList<>();
 
+	private String changeMoney;
+	private String modelMoney;
+
+	public void setChangeMoney(String changeMoney){this.changeMoney = changeMoney;}
+	public String getChangeMoney(){return changeMoney;}
+
+	public void setModelMoney(String modelMoney){this.modelMoney = modelMoney;}
+	public String getModelMoney(){return modelMoney;}
+
 	//近用球镜OD
 	private String rightQJjy;
 	//近用柱镜OD

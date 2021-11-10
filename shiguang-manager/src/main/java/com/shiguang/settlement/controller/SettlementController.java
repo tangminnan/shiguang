@@ -21,6 +21,7 @@ import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.ProducaDO;
+import com.shiguang.product.domain.ShiguangDO;
 import com.shiguang.product.service.ProducaService;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
@@ -257,6 +258,7 @@ public class SettlementController {
 //		}
 //		costService.updateMember(costDO);
 		settlement.setSaleName(ShiroUtils.getUser().getName());
+		settlement.setSaleAcount(ShiroUtils.getUser().getUsername());
 		settlement.setSettleDate(new Date());
 		if (null != salesDO1.getClasstype()){
 			String[] classArray = salesDO1.getClasstype().split(",");

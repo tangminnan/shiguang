@@ -23,6 +23,8 @@ public class SettlementDO implements Serializable {
 	private String memberNumber;
 	//收银员
 	private String saleName;
+	//员工工号
+	private String saleAcount;
 	//实际金额
 	private Double actualMoney;
 	//缴费金额
@@ -222,4 +224,8 @@ public class SettlementDO implements Serializable {
 	public void setDrawBackWay(String drawBackWay){this.drawBackWay = drawBackWay;}
 
 	public String getDrawBackWay(){return drawBackWay;}
+
+	public void setSaleAcount(String saleAcount){this.saleAcount = saleAcount;}
+
+	public String getSaleAcount(){return saleAcount;}
 }

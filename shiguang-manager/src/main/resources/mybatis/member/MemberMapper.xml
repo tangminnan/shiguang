@@ -61,6 +61,7 @@
             <if test="state != null and state != ''"> and m.state = #{state} </if>
             <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
+            and m.status = 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -92,6 +93,7 @@
         <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
         <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
         <if test="state != null and state != ''"> and m.state = #{state} </if>
+        and m.`status` = 0
 <!--        <if test="isSale != null and isSale != ''"> and c.is_sale = #{isSale} </if>-->
     </where>
     <choose>
@@ -129,6 +131,7 @@
             <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
             <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
             <if test="state != null and state != ''"> and m.state = #{state} </if>
+            and m.`status` = 0
         </where>
         group by s.`sale_number`) u
     </select>
@@ -178,6 +181,7 @@
             <if test="state != null and state != ''"> and m.state = #{state} </if>
             <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
+            and m.status = 0
         </where>
     </select>
 
