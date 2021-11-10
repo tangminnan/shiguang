@@ -108,6 +108,9 @@ public class PositionController {
         String positionNum = position.getPositionNum();
         Map<String, Object> map = new HashMap<>();
         map.put("positionNum", positionNum);
+//———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        map.put("companyId",companyId);
         List<PositionDO> list = positionService.haveNum(map);
         if (list.size() > 0) {
             return R.error("仓位代码已存在");

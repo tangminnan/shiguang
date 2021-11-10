@@ -266,7 +266,7 @@ function userNum(danjuNumber) {
 
 	}
 }
-//修改收货状态
+//修改收货状态添加库存
 function upshTime() {
 	var danjuNumber = document.getElementById('danjuNumber').value;
 	var username = document.getElementById('username').value;

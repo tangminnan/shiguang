@@ -19,7 +19,9 @@ import com.shiguang.mfrs.service.PositionService;
 import com.shiguang.product.domain.HcDO;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.domain.StocklogDO;
 import com.shiguang.stock.service.StockService;
+import com.shiguang.stock.service.StocklogService;
 import io.swagger.models.auth.In;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +66,8 @@ public class PidiaoController {
     //库存
     @Autowired
     private StockService stockService;
+    @Autowired
+    private StocklogService stocklogService;
 
     @GetMapping()
     @RequiresPermissions("stock:pidiao:pidiao")
@@ -108,7 +112,8 @@ public class PidiaoController {
 
 
         }
-        int total = pidiaoService.count(query);
+//        int total = pidiaoService.count(query);
+        int total = pidiaoList.size();
         PageUtils pageUtils = new PageUtils(pidiaoList, total);
         return pageUtils;
     }
@@ -224,7 +229,7 @@ public class PidiaoController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("stock:pidiao:add")
-    public R save(PidiaoDO pidiao, StockDO stockDO) {
+    public R save(PidiaoDO pidiao, StockDO stockDO,Model model) {
         String pidiaoNumber = pidiao.getPidiaoNumber();
 
         String zhidanPeople = pidiao.getZhidanPeople();
@@ -384,6 +389,33 @@ public class PidiaoController {
                 Integer newGoodsCount = gdcountNew - goodsCountNew;
                 stockDOjiankucun.setGoodsCount(String.valueOf(newGoodsCount));
                 stockService.updateGoodsCount(stockDOjiankucun);//修改数量
+
+                ///log
+                StocklogDO stocklogDO=new StocklogDO();
+                stocklogDO.setDanjunum(pidiaoNumber);
+                stocklogDO.setNum(pidiaoDO.getGoodsNum());
+                stocklogDO.setCode(pidiaoDO.getGoodsCode());
+                stocklogDO.setName(pidiaoDO.getGoodsName());
+                stocklogDO.setGoodsid(Integer.valueOf(pidiaoDO.getGoods()));
+                stocklogDO.setMfrsnum(pidiaoDO.getMfrsid());
+                stocklogDO.setBrandname(pidiaoDO.getBrandname());
+                stocklogDO.setMoney(pidiaoDO.getMoney());
+                stocklogDO.setUseday(pidiaoDO.getUseday());
+                stocklogDO.setBacth(pidiaoDO.getBatch());
+                stocklogDO.setCounts(String.valueOf(goodsCountNew));
+                stocklogDO.setInpositionId(Long.valueOf(pidiaoDO.getInPositionid()));
+                stocklogDO.setOutpositionId(Long.valueOf(pidiaoDO.getOutPositionid()));
+                stocklogDO.setZhidanPeople(pidiaoDO.getZhidanPeople());
+//                //———获取当前系统时间—————
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                Date date = new Date();
+                String newDate = sdf.format(date);
+                stocklogDO.setDay(newDate);
+//                    stocklogDO.setWay(orderkc.getZhidanPeople()+"批调"+orderkc.getGoodsCount()+"个"+orderkc.getGoodsName());
+                stocklogDO.setWay("批调出库");
+                //———获取当前登录用户的工号————
+                stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
+                stocklogService.save(stocklogDO);
             }
 //			批调单保存
             pidiaoService.save(pidiaoDO);
@@ -431,18 +463,41 @@ public class PidiaoController {
                 //———退货号————
                 String tuihuoNumber = pidiaoDO.getPidiaoNumber();
                 stockDO.setTuihuoNumber(tuihuoNumber);
-                stockDO.setUsername(ShiroUtils.getUser().getName());
+                stockDO.setUsername(ShiroUtils.getUser().getUsername());
                 stockService.updateGoodsCount(stockDO);//修改数量
 
 
                 pidiaoDO.setReturnzt("0");
-                pidiaoDO.setUsername(ShiroUtils.getUser().getName());
+                pidiaoDO.setUsername(ShiroUtils.getUser().getUsername());
                 //———获取当前系统时间—————
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
                 Date date = new Date();
                 String newDate = sdf.format(date);
                 pidiaoDO.setShTime(newDate);
                 pidiaoService.updatereturnzt(pidiaoDO);
+
+
+                ///log
+                StocklogDO stocklogDO=new StocklogDO();
+                stocklogDO.setDanjunum(pidiaoNumber);
+                stocklogDO.setNum(pidiaoDO.getGoodsNum());
+                stocklogDO.setCode(pidiaoDO.getGoodsCode());
+                stocklogDO.setName(pidiaoDO.getGoodsName());
+                stocklogDO.setGoodsid(Integer.valueOf(pidiaoDO.getGoods()));
+                stocklogDO.setMfrsnum(pidiaoDO.getMfrsid());
+                stocklogDO.setBrandname(pidiaoDO.getBrandname());
+                stocklogDO.setMoney(pidiaoDO.getMoney());
+                stocklogDO.setUseday(pidiaoDO.getUseday());
+                stocklogDO.setBacth(pidiaoDO.getBatch());
+                stocklogDO.setCounts(String.valueOf(useCount));
+                stocklogDO.setInpositionId(Long.valueOf(pidiaoDO.getInPositionid()));
+                stocklogDO.setOutpositionId(Long.valueOf(pidiaoDO.getOutPositionid()));
+                stocklogDO.setZhidanPeople(pidiaoDO.getZhidanPeople());
+                stocklogDO.setDay(newDate);
+//                    stocklogDO.setWay(orderkc.getZhidanPeople()+"批调"+orderkc.getGoodsCount()+"个"+orderkc.getGoodsName());
+                stocklogDO.setWay("批调退回");
+                stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
+                stocklogService.save(stocklogDO);
 
             }
 //            一定会有才会批调
@@ -580,6 +635,32 @@ public class PidiaoController {
                 stockDO1.setUsername(username);
                 stockDO1.setZhidanPeople(pidiaoDO.getZhidanPeople());
                 stockService.updateStatus(stockDO1);
+
+                ///log
+                StocklogDO stocklogDO=new StocklogDO();
+                stocklogDO.setDanjunum(pidiaoNumber);
+                stocklogDO.setNum(pidiaoDO.getGoodsNum());
+                stocklogDO.setCode(pidiaoDO.getGoodsCode());
+                stocklogDO.setName(pidiaoDO.getGoodsName());
+                stocklogDO.setGoodsid(Integer.valueOf(pidiaoDO.getGoods()));
+                stocklogDO.setMfrsnum(pidiaoDO.getMfrsid());
+                stocklogDO.setBrandname(pidiaoDO.getBrandname());
+                stocklogDO.setMoney(pidiaoDO.getMoney());
+                stocklogDO.setUseday(pidiaoDO.getUseday());
+                stocklogDO.setBacth(pidiaoDO.getBatch());
+                stocklogDO.setCounts(String.valueOf(goodsCount));
+                stocklogDO.setInpositionId(Long.valueOf(pidiaoDO.getInPositionid()));
+                stocklogDO.setOutpositionId(Long.valueOf(pidiaoDO.getOutPositionid()));
+                stocklogDO.setZhidanPeople(pidiaoDO.getZhidanPeople());
+//                //———获取当前系统时间—————
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+//                Date date = new Date();
+//                String newDate = sdf.format(date);
+                stocklogDO.setDay(shTime);
+//                    stocklogDO.setWay(orderkc.getZhidanPeople()+"批调"+orderkc.getGoodsCount()+"个"+orderkc.getGoodsName());
+                stocklogDO.setWay("批调收货");
+                stocklogDO.setUsername(username);
+                stocklogService.save(stocklogDO);
             } else {
                 stockDO.setGoodsCode(pidiaoDO.getGoodsCode());
                 stockDO.setGoodsName(pidiaoDO.getGoodsName());
@@ -629,7 +710,31 @@ public class PidiaoController {
                     stockDO.setFactory("");
                 }
                 stockDO.setGoodsxinxiid(pidiaoDO.getGoodsxinxiid());
-
+                ///log
+                StocklogDO stocklogDO=new StocklogDO();
+                stocklogDO.setDanjunum(pidiaoNumber);
+                stocklogDO.setNum(pidiaoDO.getGoodsNum());
+                stocklogDO.setCode(pidiaoDO.getGoodsCode());
+                stocklogDO.setName(pidiaoDO.getGoodsName());
+                stocklogDO.setGoodsid(Integer.valueOf(pidiaoDO.getGoods()));
+                stocklogDO.setMfrsnum(pidiaoDO.getMfrsid());
+                stocklogDO.setBrandname(pidiaoDO.getBrandname());
+                stocklogDO.setMoney(pidiaoDO.getMoney());
+                stocklogDO.setUseday(pidiaoDO.getUseday());
+                stocklogDO.setBacth(pidiaoDO.getBatch());
+                stocklogDO.setCounts(goodsCount);
+                stocklogDO.setInpositionId(Long.valueOf(pidiaoDO.getInPositionid()));
+                stocklogDO.setOutpositionId(Long.valueOf(pidiaoDO.getOutPositionid()));
+                stocklogDO.setZhidanPeople(pidiaoDO.getZhidanPeople());
+//                //———获取当前系统时间—————
+                SimpleDateFormat sdfs = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                Date dates = new Date();
+                String newDate = sdfs.format(dates);
+                stocklogDO.setDay(newDate);
+//                    stocklogDO.setWay(orderkc.getZhidanPeople()+"批调"+orderkc.getGoodsCount()+"个"+orderkc.getGoodsName());
+                stocklogDO.setWay("批调收货");
+                stocklogDO.setUsername(username);
+                stocklogService.save(stocklogDO);
                 if (stockService.save(stockDO) > 0) {
                     PidiaoDO pidiaoDO1 = new PidiaoDO();
                     pidiaoDO1.setPidiaoNumber(pidiaoNumber);

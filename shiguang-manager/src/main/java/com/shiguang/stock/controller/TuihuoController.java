@@ -15,8 +15,10 @@ import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.domain.StocklogDO;
 import com.shiguang.stock.service.PidiaoService;
 import com.shiguang.stock.service.StockService;
+import com.shiguang.stock.service.StocklogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -57,7 +59,8 @@ public class TuihuoController {
 	//库存
 	@Autowired
 	private StockService stockService ;
-	
+	@Autowired
+	private StocklogService stocklogService;
 	@GetMapping()
 	@RequiresPermissions("stock:tuihuo:tuihuo")
 	String Tuihuo(){
@@ -167,10 +170,10 @@ public class TuihuoController {
 				//日期
 				tuihuoDO.setDanjuDay(tuihuo.getDanjuDay());
 				tuihuoDO.setMfrsid(tuihuo.getMfrsid());
-				tuihuoDO.setMfrsid(tuihuo.getMfrsid());
 				tuihuoDO.setPositionId(tuihuo.getPositionId());
 				tuihuoDO.setBeizhu(tuihuo.getBeizhu());
 				tuihuoDO.setGoodsxinxiid(tuihuo.getGoodsxinxiid());
+				tuihuoDO.setGoodsid(goodsList.getGoodsType());
 				try {
 //				String goodsNum = goodsNum1[i];
 					tuihuoDO.setGoodsNum(goodsNum);
@@ -238,6 +241,28 @@ public class TuihuoController {
 				}
 
 
+				///log
+				StocklogDO stocklogDO=new StocklogDO();
+				stocklogDO.setDanjunum(tuihuo.getTuihuoNum());
+
+				stocklogDO.setNum(goodsList.getGoodsNum());
+				stocklogDO.setCode(goodsList.getGoodsCode());
+				stocklogDO.setName(goodsList.getGoodsName());
+				stocklogDO.setGoodsid(goodsList.getGoodsType());
+				stocklogDO.setMfrsnum(goodsList.getMfrsid());
+				stocklogDO.setBrandname(goodsList.getBrandname());
+				stocklogDO.setMoney(goodsList.getRetailPrice());
+				stocklogDO.setUseday(goodsList.getUseday());
+				stocklogDO.setBacth(goodsList.getBatch());
+				stocklogDO.setCounts(String.valueOf(counts));
+				stocklogDO.setInpositionId(null);
+				stocklogDO.setOutpositionId(Long.valueOf(positionId));
+				stocklogDO.setZhidanPeople(tuihuo.getZhidanPeople());
+				stocklogDO.setDay(tuihuo.getDanjuDay());
+//                    stocklogDO.setWay(orderkc.getZhidanPeople()+"批调"+orderkc.getGoodsCount()+"个"+orderkc.getGoodsName());
+				stocklogDO.setWay(style1[0]);
+				stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
+				stocklogService.save(stocklogDO);
 
 				if (tuihuoService.save(tuihuoDO) < 0) {
 					return R.error();

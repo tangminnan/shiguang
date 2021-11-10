@@ -1155,8 +1155,18 @@
             <if test="sizes != null and sizes != ''">and p.size = #{sizes}</if>
             <if test="technologyId != null and technologyId != ''">and t.technology_id = #{technologyId}</if>
             <if test="materialid != null and materialid != ''">and m.materialid = #{materialid}</if>
+
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  p.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and p.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  p.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and p.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
         <choose>
@@ -1194,7 +1204,16 @@
             <if test="technologyId != null and technologyId != ''">and t.technology_id = #{technologyId}</if>
             <if test="materialid != null and materialid != ''">and m.materialid = #{materialid}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  p.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and p.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  p.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and p.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
     </select>
@@ -1217,7 +1236,16 @@
             <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and p.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  p.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and p.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  p.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and p.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
         <choose>
@@ -1247,7 +1275,16 @@
             <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and p.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price and p.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  p.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and p.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  p.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and p.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
     </select>
@@ -1278,7 +1315,16 @@
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  j.retail_price and j.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  j.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and j.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  j.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and j.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
@@ -1318,7 +1364,16 @@
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  j.retail_price and j.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  j.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and j.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  j.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and j.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
@@ -1352,7 +1407,16 @@
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  j.retail_price and j.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  j.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and j.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  j.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and j.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
         </where>
@@ -1392,7 +1456,16 @@
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  j.retail_price and j.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  j.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and j.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  j.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and j.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
         </where>
@@ -1419,7 +1492,16 @@
             <if test="producFactory != null and producFactory != ''">and y.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and y.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  y.retail_price and y.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  y.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and y.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  y.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and y.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
@@ -1454,7 +1536,16 @@
             <if test="producFactory != null and producFactory != ''">and y.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and y.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  y.retail_price and y.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  y.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and y.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  y.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and y.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
@@ -1483,7 +1574,16 @@
             <if test="producFactory != null and producFactory != ''">and y.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and y.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  y.retail_price and y.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  y.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and y.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  y.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and y.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
@@ -1519,7 +1619,16 @@
             <if test="producFactory != null and producFactory != ''">and y.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and y.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  y.retail_price and y.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  y.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and y.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  y.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and y.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
@@ -1548,7 +1657,16 @@
             <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  h.retail_price and h.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  h.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and h.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  h.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and h.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
         <choose>
@@ -1579,7 +1697,16 @@
             <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  h.retail_price and h.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  h.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and h.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  h.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and h.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
     </select>
@@ -1605,7 +1732,16 @@
             <if test="producFactory != null and producFactory != ''">and t.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and t.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  t.retail_price and t.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  t.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and t.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  t.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and t.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
         <choose>
@@ -1639,7 +1775,16 @@
             <if test="producFactory != null and producFactory != ''">and t.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and t.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  t.retail_price and t.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  t.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and t.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  t.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and t.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
     </select>
@@ -1666,7 +1811,16 @@
             <if test="producFactory != null and producFactory != ''">and o.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and o.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  o.retail_price and o.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  o.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and o.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  o.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and o.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
         <choose>
@@ -1700,7 +1854,16 @@
             <if test="producFactory != null and producFactory != ''">and o.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and o.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  o.retail_price and o.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  o.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and o.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  o.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and o.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
     </select>
@@ -1721,7 +1884,16 @@
             <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  h.retail_price and h.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  h.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and h.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  h.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and h.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
         <choose>
@@ -1750,7 +1922,16 @@
             <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  h.retail_price and h.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  h.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and h.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  h.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and h.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
     </select>
@@ -1773,7 +1954,16 @@
             <if test="producFactory != null and producFactory != ''">and s.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and s.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price and s.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  s.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and s.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  s.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and s.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
         <choose>
@@ -1803,7 +1993,16 @@
             <if test="producFactory != null and producFactory != ''">and s.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and s.factory = #{factory}</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price and s.retail_price &lt;=  #{retailPrice2}
+                and   #{retailPrice} &lt;=  s.retail_price
+            </if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">
+                and s.retail_price &lt;=  #{retailPrice2}
+            </if>
+            <if test="taxPrice != null and taxPrice != ''">
+                and   #{taxPrice} &lt;=  s.tax_price
+            </if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">
+                and s.retail_price &lt;=  #{taxPrice2}
             </if>
         </where>
     </select>
@@ -1875,13 +2074,17 @@
     </select>
     <select id="countall" resultType="int">
         select ifnull(sum(s.goods_count),0)  as countall from stock s join c_mfrs m on s.mfrsid=m.mfrsnum
+        join c_position po on s.position_id=po.position_id
         <where>
             <if test="goodsNum != null and goodsNum != ''">and  s.goods_num = #{goodsNum}</if>
             <if test="goodsCode != null and goodsCode != ''">and  s.goods_code = #{goodsCode}</if>
             <if test="goodsName != null and goodsName != ''">and   s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
-
             <if test="goodsType != null and goodsType != ''">and  s.goods_type = #{goodsType}</if>
-            <!--<if test="xsstate != null and xsstate != ''">and  s.xsstate = #{xsstate}</if>-->
+
+
+            <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
+            <if test="classtype != null and classtype != ''">and s
+                .classtype = #{classtype}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and  s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">

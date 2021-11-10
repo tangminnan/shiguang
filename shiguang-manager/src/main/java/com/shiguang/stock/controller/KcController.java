@@ -164,20 +164,37 @@ public class KcController {
 //    //库存数量
     @ResponseBody
     @GetMapping("/countall")
-    public Integer countall(@RequestParam("goodsid") String goodsid, @RequestParam("mfrsname") String mfrsname,
-                            @RequestParam("brandname") String brandname,@RequestParam("kccount") String kccount, Model model) {
+    public Integer countall(
+            @RequestParam("positionId") String positionId,
+            @RequestParam("goodsNum") String goodsNum,
+            @RequestParam("goodsCode") String goodsCode,
+            @RequestParam("goodsName") String goodsName,
+            @RequestParam("goodsType") String goodsType,
+            @RequestParam("mfrsname") String mfrsname,
+            @RequestParam("brandname") String brandname,
+            @RequestParam("kccount") String kccount,
+            @RequestParam("retailPrice") String retailPrice,
+            @RequestParam("retailPrice2") String retailPrice2,
+            @RequestParam("xsstate") String xsstate,
+            @RequestParam("classtype") String classtype,
+                            Model model) {
         Map<String, Object> map = new HashMap<>();
-        map.put("goodsid",goodsid);
+        map.put("positionId",positionId);
+        map.put("goodsNum",goodsNum);
+        map.put("goodsCode",goodsCode);
+        map.put("goodsName",goodsName);
+        map.put("goodsType",goodsType);
         map.put("mfrsname",mfrsname);
         map.put("brandname",brandname);
-        if (kccount.equals("0")){
-            map.put("kccount0",kccount);
-        }else if (kccount.equals("1")){
-            map.put("kccount1","0");
-        }
-        int countall=stockService.countall(map);
-        model.addAttribute("countall",countall);
-        return countall;
+        map.put("kccount",kccount);
+        map.put("retailPrice",retailPrice);
+        map.put("retailPrice2",retailPrice2);
+        map.put("xsstate",xsstate);
+        map.put("classtype",classtype);
+        int countalls=stockService.countall(map);
+        model.addAttribute("countalls",countalls);
+//        int countall=Integer.valueOf(countalls);
+        return countalls;
     }
 
 }

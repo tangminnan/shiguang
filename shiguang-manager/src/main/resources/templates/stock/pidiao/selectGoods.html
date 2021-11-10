@@ -79,6 +79,7 @@
             <!--</td>-->
         <!--</tr>-->
         <tr>
+            <input id="kccount" type="kccount"  value=""/>
             <input id="outPosition" type="hidden" th:value="${outPosition}"/>
             <td>标准零售价格：</td>
             <td>
@@ -159,7 +160,7 @@
                             //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                             limit: params.limit,
                             offset: params.offset,
-                            xsstate: $('#xsstate').val(),
+                            // xsstate: $('#xsstate').val(),
                             positionId: $('#positionId').val(),
                             goodsNum : $("#goodsNum").val(),
                             goodsCode : $("#goodsCode").val(),
@@ -171,7 +172,8 @@
                             retailPrice2 : $("*[name='retailPrice2']").val(),
                             xsstate : $("input[name='xsstate']:checked").val(),
                             positionId : $('#positionId option:selected').val(),
-                            outPosition : $('#outPosition').val()
+                            outPosition : $('#outPosition').val(),
+                            kccount : $('#kccount').val()
                             // name:$('#searchName').val(),
                             // username:$('#searchName').val()
                         };

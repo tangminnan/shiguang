@@ -11,7 +11,7 @@ import java.util.Map;
  * 
  * @author cln
  * @email bushuo@163.com
- * @date 2021-11-08 14:58:43
+ * @date 2021-11-09 15:00:50
  */
 public interface StocklogService {
 	

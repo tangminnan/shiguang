@@ -103,7 +103,6 @@
     <!--保存/清空-->
     <div class="BQ-btn">
         <input type="button" value="查询" onclick="reLoad()"/>
-        <input type="button" value="库存流水" onclick="stocklog()"/>
         <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
@@ -115,9 +114,9 @@
 <div th:include="include :: footer"></div>
 <script type="text/javascript">
     $(document).ready(function () {
-        //var xsstate=$("input[name='xsstate']:checked").val();
+        var xsstate=$("input[name='xsstate']:checked").val();
         var positionId = $('#positionId option:selected').val();
-        var xsstate = 0;
+        // var xsstate = 0;
         $(".cw").remove();
         $.ajax({
             url: '/kucun/stock/selectPosion',
@@ -169,7 +168,6 @@
                                 //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                                 limit: params.limit,
                                 offset: params.offset,
-                                // xsstate: $('#xsstate').val(),
                                 positionId: $('#positionId').val(),
                                 goodsNum : $("#goodsNum").val(),
                                 goodsCode : $("#goodsCode").val(),
@@ -180,7 +178,7 @@
                                 brandname : $("#brandname").val(),
                                 retailPrice : $("#retailPrice").val(),
                                 retailPrice2 : $("#retailPrice2").val(),
-                                xsstate : $("input[name='xsstate']:checked").val(),
+                                xsstate: $("input[name='xsstate']:checked").val(),
                                 classtype : $("#classtype").val(),
                                 kccount : $("#kccount").val(),
                                 // positionId : $('#positionId option:selected').val()
@@ -363,48 +361,54 @@
     
     //查看总数
     function countall() {
-        var goodsid = $("#goodsType").val();
-        var mfrsname = $('#mfrsname').val();
+        // var goodsid = $("#goodsType").val();
+        // var mfrsname = $('#mfrsname').val();
+        // var brandname = $("#brandname").val();
+        // var kccount = $("#kccount").val();
+        // var retailPrice = $("#retailPrice").val();
+        // var retailPrice2 = $("#retailPrice2").val();
+
+
+        var positionId= $('#positionId').val();
+        var goodsNum = $("#goodsNum").val();
+        var goodsCode = $("#goodsCode").val();
+        var goodsName = $("#goodsName").val();
+        var goodsType=$("#goodsType").val();
+        if (goodsType== ""){
+            $("#classtype").val("") ;
+        }else {
+            $("#classtype").val("0") ;
+        }
+        var goodsType = $("#goodsType option:selected").val();
+        if (goodsType == 3 || goodsType == 4) {
+            $("#classtype").val($("input[name='classtype']:checked").val());
+        }
+
+        var mfrsname = $("#mfrsname").val();
         var brandname = $("#brandname").val();
         var kccount = $("#kccount").val();
         var retailPrice = $("#retailPrice").val();
         var retailPrice2 = $("#retailPrice2").val();
-
-
-        // var positionId= $('#positionId').val(),
-        // var goodsNum = $("#goodsNum").val(),
-        // var goodsCode = $("#goodsCode").val(),
-        // var goodsName = $("#goodsName").val(),
-        // var goodsType = $("#goodsType option:selected").val(),
-        // var // mfrsid : $("#mfrsid").val(),
-        // var mfrsname : $("#mfrsname").val(),
-        // var brandname : $("#brandname").val(),
-        // var retailPrice : $("#retailPrice").val(),
-        // var retailPrice2 : $("#retailPrice2").val(),
-        // var xsstate : $("input[name='xsstate']:checked").val(),
-        // var classtype : $("#classtype").val(),
-        // var kccount : $("#kccount").val(),
-
-
-
-
-
-
-
-
-
-
+        var xsstate=$("input[name='xsstate']:checked").val();
+        var classtype = $("#classtype").val();
         $.ajax({
             url: '/kucun/stock/countall',
             type: 'get',
             dataType: "json",
             data: {
-                'goodsid': goodsid,
+                'positionId': positionId,
+                'goodsNum': goodsNum,
+                'goodsCode': goodsCode,
+                'goodsName': goodsName,
+                'goodsType': goodsType,
                 'mfrsname': mfrsname,
                 'brandname': brandname,
                 'kccount': kccount,
                 'retailPrice': retailPrice,
                 'retailPrice2': retailPrice2,
+                'xsstate': xsstate,
+                'classtype': classtype
+
             },
             success: function (xml) {
                 // alert(xml)
@@ -417,9 +421,7 @@
 
 
 
-    function stocklog() {
-        window.open("/stock/stocklog/stocklog");
-    }
+
 </script>
 
 </body>

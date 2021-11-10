@@ -160,11 +160,13 @@
 			 <if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
 			 <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
 			 <if test="unit != null and unit != ''"> and unit = #{unit} </if>
-			 <if test="shTime != null and shTime != ''"> and p.sh_time = #{shTime} </if>
+			 <if test="shTime != null and shTime != ''"> and  sh_time = #{shTime} </if>
 			 <if test="money != null and money != ''"> and money = #{money} </if>
 			 <if test="returnzt != null and returnzt != ''"> and returnzt = #{returnzt} </if>
 			 <if test="stockorder != null and stockorder != ''"> and stockorder = #{stockorder} </if>
 		  		</where>
+		group by pidiao_number
+		order by id desc
 	</select>
 	 
 	<insert id="save" parameterType="com.shiguang.stock.domain.PidiaoDO" useGeneratedKeys="true" keyProperty="id">

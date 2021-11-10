@@ -40,6 +40,7 @@ public class TuihuoDO implements Serializable {
 	private String goodsNum;
 	//商品名称
 	private String goodsName;
+	private Integer goodsid;
 	//型号
 	private String factory;
 	//单位
@@ -220,6 +221,14 @@ public class TuihuoDO implements Serializable {
 	 */
 	public String getGoodsName() {
 		return goodsName;
+	}
+
+	public Integer getGoodsid() {
+		return goodsid;
+	}
+
+	public void setGoodsid(Integer goodsid) {
+		this.goodsid = goodsid;
 	}
 
 	public String getGoodsbrandname() {
