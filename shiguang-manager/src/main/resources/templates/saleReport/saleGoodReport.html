@@ -23,9 +23,14 @@
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
 							<div class="columns pull-right  nopadding">
-								<select class="form-control" name="saleType" id="saleType" >
-									<option value="0">营业员</option>
-									<option value="1">收银员 </option>
+								<select class="form-control" name="goodsType" id="goodsType" >
+									<option value="">请选择商品类别</option>
+									<option value="镜架">镜架</option>
+									<option value="配件">配件</option>
+									<option value="镜片">镜片</option>
+									<option value="隐形">隐形</option>
+									<option value="护理液">护理液</option>
+									<option value="视光">视光</option>
 								</select>
 							</div>
 
@@ -45,7 +50,7 @@
 	</div>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/saleReport/saleReport.js"></script>
+	<script type="text/javascript" src="/js/appjs/saleReport/saleGoodReport.js"></script>
 <script type="text/javascript">
     laydate.render({
         elem: '#settleDateStart',

@@ -297,12 +297,6 @@ public class SaleReportController {
                     String[] storeDescribe = salesDOs.getStoreDescribe().split(",");
                     String[] storeCount = salesDOs.getStoreCount().split(",");
                     String[] storeUnit = salesDOs.getStoreUnit().split(",");
-                    if (null != salesDOs.getAdditionalPrice() && !"".equals(salesDOs.getAdditionalPrice())){
-                        String[] addPrice = salesDOs.getAdditionalPrice().split(",");
-                        for (int a =0;a< addPrice.length;a++){
-                            addMoney = addMoney + Double.valueOf(addPrice[a]);
-                        }
-                    }
                     if (salesDO.getSaleName().equals(salesDOs.getSaleName())){
                         for (int i=0;i<storeDescribe.length;i++){
                             if ("镜架".equals(storeDescribe[i])){
@@ -331,6 +325,18 @@ public class SaleReportController {
                             } else if ("耗材".equals(storeDescribe[i])){
                                 hcMoney = hcMoney +Double.valueOf(storeUnit[i]);
                             }
+                            if (null != salesDOs.getAdditionalPrice()){
+                                try {
+                                    String[] addPrice = salesDOs.getAdditionalPrice().split(",");
+                                    if (addPrice.length > 0){
+                                        addMoney = addMoney + Double.valueOf(addPrice[i]);
+                                    } else {
+                                        addMoney = 0.00;
+                                    }
+                                }catch (ArrayIndexOutOfBoundsException e) {
+                                    addMoney = 0.00;
+                                }
+                            }
                         }
 
                         primMoney = primMoney + Double.valueOf(salesDOs.getPrimeMoney());
@@ -348,8 +354,8 @@ public class SaleReportController {
                                 amountMoney = amountMoney + Double.valueOf(modelsMoney[s]);
                                 amountMoney = amountMoney - Double.valueOf(changesMoney);
                             }
-
                         }
+
                     }
                 }
                 Map<String,Object> map = new HashMap<>();

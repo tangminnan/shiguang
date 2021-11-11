@@ -24,7 +24,7 @@ public class SaleGoodsController {
     @GetMapping()
     @RequiresPermissions("information:saleGoods:saleGoods")
     String SaleGoods(){
-        return "saleGoods/saleGoods";
+        return "saleReport/saleGoodReport";
     }
 
     @GetMapping("/salegoodsList")
@@ -34,13 +34,17 @@ public class SaleGoodsController {
         Date date = new Date();
         if (!"".equals(settleDateStart)){
             query.put("settleDateStart",settleDateStart);
+            model.addAttribute("settleDateStart",settleDateStart);
         } else {
             query.put("settleDateStart",simpleDateFormat.format(date));
+            model.addAttribute("settleDateStart",simpleDateFormat.format(date));
         }
         if (!"".equals(settleDateEnd)){
             query.put("settleDateEnd",settleDateEnd);
+            model.addAttribute("settleDateEnd",settleDateEnd);
         } else {
             query.put("settleDateEnd",simpleDateFormat.format(date));
+            model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
         }
         List<SalesDO> salesDOList = saleReportService.findGoodsList(query);
         int jjcount = 0;
@@ -61,13 +65,13 @@ public class SaleGoodsController {
                 String[] storeDescribe = salesDO.getStoreDescribe().split(",");
                 String[] storeCount = salesDO.getStoreCount().split(",");
                 String[] storeMoney = salesDO.getStoreUnit().split(",");
-                String[] addPrice = null;
-                if (null != salesDO.getAdditionalPrice()){
-                     addPrice = salesDO.getAdditionalPrice().split(",");
-                     for (int a =0; a<addPrice.length;a++){
-                         addMoney = addMoney + Double.valueOf(addPrice[a]);
-                     }
-                }
+//                String[] addPrice = null;
+//                if (null != salesDO.getAdditionalPrice()){
+//                     addPrice = salesDO.getAdditionalPrice().split(",");
+//                     for (int a =0; a<addPrice.length;a++){
+//                         addMoney = addMoney + Double.valueOf(addPrice[a]);
+//                     }
+//                }
                 if (!"".equals(goodsType) && null != goodsType){
                     for (int i=0;i<storeDescribe.length;i++){
                         if ("镜架".equals(goodsType)){
@@ -101,6 +105,57 @@ public class SaleGoodsController {
                                 sgMoney = sgMoney + Double.valueOf(storeMoney[i]);
                             }
                         }
+                        if (null != salesDO.getAdditionalPrice()){
+                            try {
+                                String[] addPrice = salesDO.getAdditionalPrice().split(",");
+                                if (addPrice.length > 0){
+                                    addMoney = addMoney + Double.valueOf(addPrice[i]);
+                                } else {
+                                    addMoney = 0.00;
+                                }
+                            }catch (ArrayIndexOutOfBoundsException e) {
+                                addMoney = 0.00;
+                            }
+                        }
+                    }
+                } else {
+                    for (int i=0;i<storeDescribe.length;i++){
+                        if ("镜架".equals(storeDescribe[i])){
+                            jjcount = jjcount + Integer.parseInt(storeCount[i]);
+                            jjMoney = jjMoney + Double.valueOf(storeMoney[i]);
+                        }
+                        if ("配件".equals(storeDescribe[i])){
+                            pjcount = pjcount + Integer.parseInt(storeCount[i]);
+                            pjMoney = pjMoney + Double.valueOf(storeMoney[i]);
+                        }
+                        if ("镜片".equals(storeDescribe[i])){
+                            jpcount = jpcount + Integer.parseInt(storeCount[i]);
+                            jpMoney = jpMoney + Double.valueOf(storeMoney[i]);
+                        }
+                        if ("隐形".equals(storeDescribe[i])){
+                            yxcount = yxcount + Integer.parseInt(storeCount[i]);
+                            yxMoney = yxMoney + Double.valueOf(storeMoney[i]);
+                        }
+                        if ("护理液".equals(storeDescribe[i])){
+                            hlycount = hlycount + Integer.parseInt(storeCount[i]);
+                            hlyMoney = hlyMoney + Double.valueOf(storeMoney[i]);
+                        }
+                        if ("视光".equals(storeDescribe[i])){
+                            sgcount = sgcount + Integer.parseInt(storeCount[i]);
+                            sgMoney = sgMoney + Double.valueOf(storeMoney[i]);
+                        }
+                        if (null != salesDO.getAdditionalPrice()){
+                            try {
+                                String[] addPrice = salesDO.getAdditionalPrice().split(",");
+                                if (addPrice.length > 0){
+                                    addMoney = addMoney + Double.valueOf(addPrice[i]);
+                                } else {
+                                    addMoney = 0.00;
+                                }
+                            }catch (ArrayIndexOutOfBoundsException e) {
+                                addMoney = 0.00;
+                            }
+                        }
                     }
                 }
             }
@@ -127,7 +182,6 @@ public class SaleGoodsController {
                 model.addAttribute("sgcount",sgcount);
                 model.addAttribute("sgMoney",sgMoney);
             }
-            model.addAttribute("goodsType",goodsType);
         } else {
             model.addAttribute("jjcount",jjcount);
             model.addAttribute("jjMoney",jjMoney);
@@ -142,11 +196,12 @@ public class SaleGoodsController {
             model.addAttribute("sgcount",sgcount);
             model.addAttribute("sgMoney",sgMoney);
         }
+        model.addAttribute("goodsType",goodsType);
         model.addAttribute("totalCount",totalCount);
         model.addAttribute("totalMoney",totalMoney);
         model.addAttribute("addMoney",addMoney);
         //SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
         model.addAttribute("date",simpleDateFormat.format(new Date()));
-        return "saleReport/saleReportForm";
+        return "saleReport/saleGoodReportForm";
     }
 }

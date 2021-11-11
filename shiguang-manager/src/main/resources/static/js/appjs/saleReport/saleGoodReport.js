@@ -105,12 +105,8 @@ function reLoad() {
    //var saleNum = $("#saleNum").val();
      var settleDateStart = $("#settleDateStart").val();
      var settleDateEnd = $("#settleDateEnd").val();
-     var saleType = $("#saleType").val();
-     if (0 == saleType){
-         window.open("/information/saleName/salenameList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd);
-	 } else if (1 == saleType){
-         window.open("/information/saleReport/reportList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd);
-	 }
+     var goodsType = $("#goodsType").val();
+     window.open("/information/saleGoods/salegoodsList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&goodsType="+goodsType);
 
 }
 function add() {

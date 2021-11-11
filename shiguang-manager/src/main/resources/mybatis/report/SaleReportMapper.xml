@@ -177,7 +177,14 @@
 	</select>
 
 	<select id="findSaleNameList" resultType="com.shiguang.storeSales.domain.SalesDO">
-		select sale_name from store_sales  where sale_type = '1' GROUP BY sale_name
+		select s.`sale_account`,s.`sale_name` from store_sales s join member m on m.card_number = s.member_number
+		<where>
+			<if test="settleDateStart !=null and settleDateStart != ''">and date_format(s.peijing_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''">and date_format(s.peijing_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="state !=null and state != ''">and m.state = #{state}</if>
+			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
+		</where>
+		GROUP BY s.sale_name
 	</select>
 
 	<select id="findSaleNameSettleList" resultType="com.shiguang.settlement.domain.SettlementDO">
