@@ -281,18 +281,31 @@
 	<delete id="remove">
 		delete from jc_zy where zy_id = #{value}
 	</delete>
-	<update id="upremove" parameterType="com.shiguang.jiancha.domain.ZyDO">
-		update jc_zy
-		<set>
-			<if test="status != null">`status` = #{status}</if>
-		</set>
-		where ptometry_number = #{ptometryNumber}
-	</update>
+	<delete id="upremove">
+		delete from jc_zy where ptometry_number = #{ptometryNumber}
+	</delete>
+	<!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.ZyDO">-->
+		<!--update jc_zy-->
+		<!--<set>-->
+			<!--<if test="status != null">`status` = #{status}</if>-->
+		<!--</set>-->
+		<!--where ptometry_number = #{ptometryNumber}-->
+	<!--</update>-->
 	<delete id="batchRemove">
 		delete from jc_zy where zy_id in 
 		<foreach item="zyId" collection="array" open="(" separator="," close=")">
 			#{zyId}
 		</foreach>
 	</delete>
+	<select id="chufangall" resultType="com.shiguang.jiancha.domain.ZyDO">
+		select `zy_id`,`card_number`,`zy_prescription_type`,`zy_doctor`,`zy_optometry_name`,`zy_sphod`,`zy_sphos`,`zy_cylod`,`zy_cylos`,`zy_axialod`,
+		`zy_axialos`,`zy_prismod`,`zy_prismos`,`zy_jdod`,`zy_jdos`,`zy_zytjod`,`zy_zytjos`,`zy_tgod`,`zy_tgos`,`zy_vaod`,`zy_vaos`,`zy_jpcz`,`zy_clfs`,
+		`zy_jyjk`,`zy_jklx`,`zy_text`,`zy_beizhu`
+		from jc_zy
+		<where>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="status != null and status != ''"> and  status = #{status} </if>
+		</where>
+	</select>
 
 </mapper>

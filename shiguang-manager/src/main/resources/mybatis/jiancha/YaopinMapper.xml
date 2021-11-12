@@ -7,6 +7,7 @@
 		select `yp_id`,`card_number`,`yp_prescription_type`,`yp_doctor`,`yp_optometry_name`,`yp_nr`,`yp_ym` from jc_yaopin where yp_id = #{value}
 	</select>
 
+
     <select id="list" resultType="com.shiguang.jiancha.domain.YaopinDO">
         select `yp_id`,`card_number`,`yp_prescription_type`,`yp_doctor`,`yp_optometry_name`,`yp_nr`,`yp_ym` from
         jc_yaopin
@@ -116,18 +117,28 @@
     <delete id="remove">
 		delete from jc_yaopin where yp_id = #{value}
 	</delete>
-    <update id="upremove" parameterType="com.shiguang.jiancha.domain.YaopinDO">
-        update jc_yaopin
-        <set>
-            <if test="status != null">`status` = #{status}</if>
-        </set>
-        where ptometry_number = #{ptometryNumber}
-    </update>
+    <delete id="upremove">
+		delete from jc_yaopin  where ptometry_number = #{ptometryNumber}
+	</delete>
+    <!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.YaopinDO">-->
+        <!--update jc_yaopin-->
+        <!--<set>-->
+            <!--<if test="status != null">`status` = #{status}</if>-->
+        <!--</set>-->
+        <!--where ptometry_number = #{ptometryNumber}-->
+    <!--</update>-->
     <delete id="batchRemove">
         delete from jc_yaopin where yp_id in
         <foreach item="ypId" collection="array" open="(" separator="," close=")">
             #{ypId}
         </foreach>
     </delete>
-
+    <select id="chufangall" resultType="com.shiguang.jiancha.domain.YaopinDO">
+        select `yp_id`,`card_number`,`yp_prescription_type`,`yp_doctor`,`yp_optometry_name`,`yp_nr`,`yp_ym`
+        from jc_yaopin
+        <where>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+            <if test="status != null and status != ''"> and  status = #{status} </if>
+        </where>
+    </select>
 </mapper>

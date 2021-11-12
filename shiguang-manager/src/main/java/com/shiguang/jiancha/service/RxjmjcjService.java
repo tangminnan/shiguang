@@ -19,6 +19,7 @@ public interface RxjmjcjService {
 
     List<RxjmjcjDO> list(Map<String, Object> map);
 
+
     int count(Map<String, Object> map);
 
     int save(RxjmjcjDO rxjmjcj);
@@ -31,4 +32,6 @@ public interface RxjmjcjService {
     int upremove(RxjmjcjDO rxjmjcjDO);
     int updaterxjmjcj(RxjmjcjDO rxjmjcjDO);
     int batchRemove(Long[] rxIds);
+
+    RxjmjcjDO chufangall(String ptometryNumber,String status);
 }

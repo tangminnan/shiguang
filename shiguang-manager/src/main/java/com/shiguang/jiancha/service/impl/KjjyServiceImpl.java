@@ -7,6 +7,7 @@ import com.shiguang.jiancha.service.KjjyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,11 @@ public class KjjyServiceImpl implements KjjyService {
     public List<KjjyDO> list(Map<String, Object> map) {
         return kjjyDao.list(map);
     }
+
+//    @Override
+//    public List<KjjyDO> chufangall(Map<String, Object> map) {
+//        return kjjyDao.chufangall(map);
+//    }
 
     @Override
     public int count(Map<String, Object> map) {
@@ -69,5 +75,10 @@ public class KjjyServiceImpl implements KjjyService {
     @Override
     public int batchRemove(Long[] kjjyIds) {
         return kjjyDao.batchRemove(kjjyIds);
+    }
+
+    @Override
+    public KjjyDO chufangall(String ptometryNumber, String status) {
+        return kjjyDao.chufangall(ptometryNumber,status);
     }
 }

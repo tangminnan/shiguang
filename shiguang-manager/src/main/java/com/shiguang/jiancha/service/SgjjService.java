@@ -18,6 +18,7 @@ public interface SgjjService {
     SgjjDO get(Long sgjjId);
 
     List<SgjjDO> list(Map<String, Object> map);
+//    List<SgjjDO> chufangall(Map<String, Object> map);
 
     int count(Map<String, Object> map);
 
@@ -33,4 +34,7 @@ public interface SgjjService {
     int updatesgjj(SgjjDO sgjjDO);
 
     int batchRemove(Long[] sgjjIds);
+
+    SgjjDO chufangall(String ptometryNumber,String status);
+
 }

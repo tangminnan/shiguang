@@ -65,4 +65,9 @@ public class YaopinServiceImpl implements YaopinService {
     public int batchRemove(Long[] ypIds) {
         return yaopinDao.batchRemove(ypIds);
     }
+
+    @Override
+    public YaopinDO chufangall(String ptometryNumber, String status) {
+        return yaopinDao.chufangall(ptometryNumber,status);
+    }
 }

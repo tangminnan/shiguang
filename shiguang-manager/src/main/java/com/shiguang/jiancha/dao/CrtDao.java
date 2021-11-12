@@ -3,6 +3,7 @@ package com.shiguang.jiancha.dao;
 import com.shiguang.jiancha.domain.CrtDO;
 import com.shiguang.jiancha.domain.ResultDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -34,4 +35,7 @@ public interface CrtDao {
     int upremove(CrtDO crtDO);
     int updatecrt(CrtDO crtDO);
     int batchRemove(Long[] crtIds);
+
+    CrtDO chufangall(@Param("ptometryNumber") String ptometryNumber, @Param("status") String status);
+
 }

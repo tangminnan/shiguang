@@ -7,6 +7,7 @@
 		select `rx_id`,`card_number`,`rx_prescription_type`,`rx_doctor`,`rx_optometry_name`,`rx_bcod`,`rx_bcos`,`rx_sphod`,`rx_sphos`,`rx_cylod`,`rx_cylos`,`rx_axialod`,`rx_axialos`,`rx_zjod`,`rx_zjos`,`rx_vaod`,`rx_vaos`,`rx_syjpod`,`rx_syjpos`,`rx_unitod`,`rx_unitos`,`rx_clfs`,`rx_hlypz`,`rx_beizhu` from jc_rxjmjcj where rx_id = #{value}
 	</select>
 
+
     <select id="list" resultType="com.shiguang.jiancha.domain.RxjmjcjDO">
         select
         `rx_id`,`card_number`,`sale_number`,`rx_prescription_type`,`rx_doctor`,`rx_optometry_name`,`rx_bcod`,`rx_bcos`,`rx_sphod`,`rx_sphos`,`rx_cylod`,`rx_cylos`,`rx_axialod`,`rx_axialos`,`rx_zjod`,`rx_zjos`,`rx_vaod`,`rx_vaos`,`rx_syjpod`,`rx_syjpos`,`rx_unitod`,`rx_unitos`,`rx_clfs`,`rx_hlypz`,`rx_beizhu`
@@ -268,13 +269,16 @@
     <delete id="remove">
 		delete from jc_rxjmjcj where rx_id = #{value}
 	</delete>
-    <update id="upremove" parameterType="com.shiguang.jiancha.domain.RxjmjcjDO">
-        update jc_rxjmjcj
-        <set>
-            <if test="status != null">`status` = #{status}</if>
-        </set>
-        where ptometry_number = #{ptometryNumber}
-    </update>
+    <delete id="upremove">
+		delete from jc_rxjmjcj where ptometry_number = #{ptometryNumber}
+	</delete>
+    <!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.RxjmjcjDO">-->
+        <!--update jc_rxjmjcj-->
+        <!--<set>-->
+            <!--<if test="status != null">`status` = #{status}</if>-->
+        <!--</set>-->
+        <!--where ptometry_number = #{ptometryNumber}-->
+    <!--</update>-->
 
     <delete id="batchRemove">
         delete from jc_rxjmjcj where rx_id in
@@ -282,5 +286,13 @@
             #{rxId}
         </foreach>
     </delete>
-
+    <select id="chufangall" resultType="com.shiguang.jiancha.domain.RxjmjcjDO">
+        select `rx_id`,`card_number`,`rx_prescription_type`,`rx_doctor`,`rx_optometry_name`,`rx_bcod`,`rx_bcos`,`rx_sphod`,`rx_sphos`,`rx_cylod`,`rx_cylos`,
+        `rx_axialod`,`rx_axialos`,`rx_zjod`,`rx_zjos`,`rx_vaod`,`rx_vaos`,`rx_syjpod`,`rx_syjpos`,`rx_unitod`,`rx_unitos`,`rx_clfs`,`rx_hlypz`,`rx_beizhu`
+        from jc_rxjmjcj
+        <where>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+            <if test="status != null and status != ''"> and  status = #{status} </if>
+        </where>
+    </select>
 </mapper>

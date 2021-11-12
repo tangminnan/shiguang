@@ -7,6 +7,7 @@
 		select `sgjj_id`,`card_number`,`sgjj_prescription_type`,`sgjj_doctor`,`sgjj_optometry_name`,`sgjj_sphod`,`sgjj_sphos`,`sgjj_cylod`,`sgjj_cylos`,`sgjj_axialod`,`sgjj_axialos`,`sgjj_addod`,`sgjj_addos`,`sgjj_yytjod`,`sgjj_yytjos`,`sgjj_jytjod`,`sgjj_jytjos`,`sgjj_tgod`,`sgjj_tgos`,`sgjj_yyvaod`,`sgjj_yyvaos`,`sgjj_jyvaod`,`sgjj_jyvaos`,`sgjj_jpcz`,`sgjj_clfs`,`sgjj_jykj`,`sgjj_kjlx`,`sgjj_text`,`sgjj_beizhu` from jc_sgjj where sgjj_id = #{value}
 	</select>
 
+
     <select id="list" resultType="com.shiguang.jiancha.domain.SgjjDO">
         select
         `sgjj_id`,`card_number`,`sale_number`,`sgjj_prescription_type`,`sgjj_doctor`,`sgjj_optometry_name`,`sgjj_sphod`,`sgjj_sphos`,`sgjj_cylod`,`sgjj_cylos`,`sgjj_axialod`,`sgjj_axialos`,`sgjj_addod`,`sgjj_addos`,`sgjj_yytjod`,`sgjj_yytjos`,`sgjj_jytjod`,`sgjj_jytjos`,`sgjj_tgod`,`sgjj_tgos`,`sgjj_yyvaod`,`sgjj_yyvaos`,`sgjj_jyvaod`,`sgjj_jyvaos`,`sgjj_jpcz`,`sgjj_clfs`,`sgjj_jykj`,`sgjj_kjlx`,`sgjj_text`,`sgjj_beizhu`
@@ -308,13 +309,16 @@
     <delete id="remove">
 		delete from jc_sgjj where sgjj_id = #{value}
 	</delete>
-	<update id="upremove" parameterType="com.shiguang.jiancha.domain.SgjjDO">
-		update jc_sgjj
-		<set>
-			<if test="status != null">`status` = #{status}</if>
-		</set>
-		where ptometry_number = #{ptometryNumber}
-	</update>
+    <delete id="upremove">
+		delete from jc_sgjj where ptometry_number = #{ptometryNumber}
+	</delete>
+	<!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.SgjjDO">-->
+		<!--update jc_sgjj-->
+		<!--<set>-->
+			<!--<if test="status != null">`status` = #{status}</if>-->
+		<!--</set>-->
+		<!--where ptometry_number = #{ptometryNumber}-->
+	<!--</update>-->
 
     <delete id="batchRemove">
         delete from jc_sgjj where sgjj_id in
@@ -322,5 +326,14 @@
             #{sgjjId}
         </foreach>
     </delete>
-
+	<select id="chufangall" resultType="com.shiguang.jiancha.domain.SgjjDO">
+		select `sgjj_id`,`card_number`,`sgjj_prescription_type`,`sgjj_doctor`,`sgjj_optometry_name`,`sgjj_sphod`,`sgjj_sphos`,`sgjj_cylod`,`sgjj_cylos`,
+		`sgjj_axialod`,`sgjj_axialos`,`sgjj_addod`,`sgjj_addos`,`sgjj_yytjod`,`sgjj_yytjos`,`sgjj_jytjod`,`sgjj_jytjos`,`sgjj_tgod`,`sgjj_tgos`,`sgjj_yyvaod`,
+		`sgjj_yyvaos`,`sgjj_jyvaod`,`sgjj_jyvaos`,`sgjj_jpcz`,`sgjj_clfs`,`sgjj_jykj`,`sgjj_kjlx`,`sgjj_text`,`sgjj_beizhu`
+		from jc_sgjj
+		<where>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="status != null and status != ''"> and  status = #{status} </if>
+		</where>
+	</select>
 </mapper>

@@ -7,6 +7,7 @@
 		select `sjxl_id`,`card_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,`sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_tgod`,`sjxl_tgos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu` from jc_sjxl where sjxl_id = #{value}
 	</select>
 
+
     <select id="list" resultType="com.shiguang.jiancha.domain.SjxlDO">
         select
         `sjxl_id`,`card_number`,`sale_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,`sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_tgod`,`sjxl_tgos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu`
@@ -285,18 +286,30 @@
     <delete id="remove">
 		delete from jc_sjxl where sjxl_id = #{value}
 	</delete>
-    <update id="upremove" parameterType="com.shiguang.jiancha.domain.SjxlDO">
-        update jc_sjxl
-        <set>
-            <if test="status != null">`status` = #{status}</if>
-        </set>
-        where ptometry_number = #{ptometryNumber}
-    </update>
+    <delete id="upremove">
+		delete from jc_sjxl where ptometry_number = #{ptometryNumber}
+	</delete>
+    <!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.SjxlDO">-->
+        <!--update jc_sjxl-->
+        <!--<set>-->
+            <!--<if test="status != null">`status` = #{status}</if>-->
+        <!--</set>-->
+        <!--where ptometry_number = #{ptometryNumber}-->
+    <!--</update>-->
     <delete id="batchRemove">
         delete from jc_sjxl where sjxl_id in
         <foreach item="sjxlId" collection="array" open="(" separator="," close=")">
             #{sjxlId}
         </foreach>
     </delete>
-
+    <select id="chufangall" resultType="com.shiguang.jiancha.domain.SjxlDO">
+        select `sjxl_id`,`card_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,
+        `sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_tgod`,
+        `sjxl_tgos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu`
+        from jc_sjxl
+        <where>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+            <if test="status != null and status != ''"> and  status = #{status} </if>
+        </where>
+    </select>
 </mapper>

@@ -65,4 +65,9 @@ public class RgpServiceImpl implements RgpService {
     public int batchRemove(Long[] rgpIds) {
         return rgpDao.batchRemove(rgpIds);
     }
+
+    @Override
+    public RgpDO chufangall(String ptometryNumber, String status) {
+        return rgpDao.chufangall(ptometryNumber,status);
+    }
 }

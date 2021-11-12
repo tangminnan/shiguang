@@ -31,4 +31,6 @@ public interface VstService {
     int upremove(VstDO vstDO);
     int updatevst(VstDO vstDO);
     int batchRemove(Long[] vstIds);
+    VstDO chufangall(String ptometryNumber,String status);
+
 }

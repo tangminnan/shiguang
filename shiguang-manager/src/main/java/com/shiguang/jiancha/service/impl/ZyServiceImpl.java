@@ -72,4 +72,9 @@ public class ZyServiceImpl implements ZyService {
 	public int batchRemove(Long[] zyIds) {
 		return zyDao.batchRemove(zyIds);
 	}
+
+	@Override
+	public ZyDO chufangall(String ptometryNumber, String status) {
+		return zyDao.chufangall(ptometryNumber,status);
+	}
 }

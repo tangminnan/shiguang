@@ -70,4 +70,9 @@ public class VstServiceImpl implements VstService {
     public int batchRemove(Long[] vstIds) {
         return vstDao.batchRemove(vstIds);
     }
+
+    @Override
+    public VstDO chufangall(String ptometryNumber, String status) {
+        return vstDao.chufangall(ptometryNumber,status);
+    }
 }

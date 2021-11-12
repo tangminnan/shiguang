@@ -258,11 +258,24 @@
             #{rgpId}
         </foreach>
     </delete>
-	<update id="upremove" parameterType="com.shiguang.jiancha.domain.RgpDO">
-		update jc_rgp
-		<set>
-			<if test="status != null">`status` = #{status}</if>
-		</set>
-		where ptometry_number = #{ptometryNumber}
-	</update>
+	<delete id="upremove">
+		delete from jc_rgp where ptometry_number = #{ptometryNumber}
+	</delete>
+	<!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.RgpDO">-->
+		<!--update jc_rgp-->
+		<!--<set>-->
+			<!--<if test="status != null">`status` = #{status}</if>-->
+		<!--</set>-->
+		<!--where ptometry_number = #{ptometryNumber}-->
+	<!--</update>-->
+	<select id="chufangall" resultType="com.shiguang.jiancha.domain.RgpDO">
+		select `rgp_id`,`card_number`,`rgp_prescription_type`,`rgp_doctor`,`rgp_optometry_name`,`rgp_qgdod`,`rgp_qgdos`,`rgp_bcod`,`rgp_bcos`,`rgp_diaod`,
+		`rgp_diaos`,`rgp_sgod`,`rgp_sgos`,`rgp_jpysod`,`rgp_jpysos`,`rgp_tssjod`,`rgp_tssjos`,`rgp_syjpod`,`rgp_syjpos`,`rgp_beizhu`,`ptometry_number`,
+		`status`,`rgp_sphod`,`rgp_sphos`,`rgp_cylod`,`rgp_cylos`,`rgp_axialod`,`rgp_axialos`
+		from jc_rgp
+		<where>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="status != null and status != ''"> and  status = #{status} </if>
+		</where>
+	</select>
 </mapper>

@@ -70,4 +70,9 @@ public class RxjmjcjServiceImpl implements RxjmjcjService {
     public int batchRemove(Long[] rxIds) {
         return rxjmjcjDao.batchRemove(rxIds);
     }
+
+    @Override
+    public RxjmjcjDO chufangall(String ptometryNumber, String status) {
+        return rxjmjcjDao.chufangall(ptometryNumber,status);
+    }
 }

@@ -3,6 +3,7 @@ package com.shiguang.jiancha.dao;
 import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.RxjmjcjDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -33,4 +34,8 @@ public interface RxjmjcjDao {
     int upremove(RxjmjcjDO rxjmjcjDO);
     int updaterxjmjcj(RxjmjcjDO rxjmjcjDO);
     int batchRemove(Long[] rxIds);
+
+
+    RxjmjcjDO chufangall(@Param("ptometryNumber") String ptometryNumber, @Param("status") String status);
+
 }

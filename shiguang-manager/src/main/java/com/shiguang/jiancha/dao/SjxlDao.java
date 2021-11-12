@@ -3,6 +3,7 @@ package com.shiguang.jiancha.dao;
 import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.SjxlDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -33,4 +34,5 @@ public interface SjxlDao {
     int upremove(SjxlDO sjxlDO);
 
     int batchRemove(Long[] sjxlIds);
+    SjxlDO chufangall(@Param("ptometryNumber") String ptometryNumber, @Param("status") String status);
 }

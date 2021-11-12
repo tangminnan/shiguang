@@ -3,6 +3,7 @@ package com.shiguang.jiancha.dao;
 import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.VstDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -33,4 +34,7 @@ public interface VstDao {
     int upremove(VstDO vstDO);
     int updatevst(VstDO vstDO);
     int batchRemove(Long[] vstIds);
+    VstDO chufangall(@Param("ptometryNumber") String ptometryNumber, @Param("status") String status);
+
+
 }

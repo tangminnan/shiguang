@@ -246,15 +246,18 @@
             layer.alert("请选择计量单位");
         } else if (small == "") {
             layer.alert("请选择其他商品小类");
-        } else if (tax == "") {
-            layer.alert("请输入税率");
-        } else if (taxPrice == "") {
-            layer.alert("请输入含税单价");
-        } else if (tradePrice == "") {
-            layer.alert("请输入批发价格");
-        } else if (transferPrice == "") {
-            layer.alert("请输入调货成本");
-        } else if (retailPrice == "") {
+        }
+        // else if (tax == "") {
+        //     layer.alert("请输入税率");
+        // } else if (taxPrice == "") {
+        //     layer.alert("请输入含税单价");
+        // } else if (tradePrice == "") {
+        //     layer.alert("请输入批发价格");
+        // } else if (transferPrice == "") {
+        //     layer.alert("请输入调货成本");
+        // }
+
+        else if (retailPrice == "") {
             layer.alert("请输入标准零售价格");
         } else {
             save();

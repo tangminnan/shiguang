@@ -4,7 +4,10 @@
 <mapper namespace="com.shiguang.jiancha.dao.KjyyDao">
 
     <select id="get" resultType="com.shiguang.jiancha.domain.KjyyDO">
-		select `kjyy_id`,`card_number`,`kjyy_prescription_type`,`kjyy_doctor`,`kjyy_optometry_name`,`kjyy_sphod`,`kjyy_sphos`,`kjyy_cylod`,`kjyy_cylos`,`kjyy_axialod`,`kjyy_axialos`,`kjyy_prismod`,`kjyy_prismos`,`kjyy_jdod`,`kjyy_jdos`,`kjyy_yytjod`,`kjyy_yytjos`,`kjyy_tgod`,`kjyy_tgos`,`kjyy_vaod`,`kjyy_vaos`,`kjyy_jpcz`,`kjyy_clfs`,`kjyy_jykj`,`kjyy_kjlx`,`kjyy_text`,`kjyy_beizhu` from jc_kjyy where kjyy_id = #{value}
+		select `kjyy_id`,`card_number`,`kjyy_prescription_type`,`kjyy_doctor`,`kjyy_optometry_name`,`kjyy_sphod`,`kjyy_sphos`,`kjyy_cylod`,`kjyy_cylos`,
+		`kjyy_axialod`,`kjyy_axialos`,`kjyy_prismod`,`kjyy_prismos`,`kjyy_jdod`,`kjyy_jdos`,`kjyy_yytjod`,`kjyy_yytjos`,`kjyy_tgod`,`kjyy_tgos`,`kjyy_vaod`,
+		`kjyy_vaos`,`kjyy_jpcz`,`kjyy_clfs`,`kjyy_jykj`,`kjyy_kjlx`,`kjyy_text`,`kjyy_beizhu`
+		from jc_kjyy where kjyy_id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.jiancha.domain.KjyyDO">
@@ -292,13 +295,16 @@
     <delete id="remove">
 		delete from jc_kjyy where kjyy_id = #{value}
 	</delete>
-    <update id="upremove" parameterType="com.shiguang.jiancha.domain.KjyyDO">
-        update jc_kjyy
-        <set>
-            <if test="status != null">`status` = #{status}</if>
-        </set>
-        where ptometry_number = #{ptometryNumber}
-    </update>
+    <delete id="upremove">
+		delete from jc_kjyy where ptometry_number = #{ptometryNumber}
+	</delete>
+    <!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.KjyyDO">-->
+        <!--update jc_kjyy-->
+        <!--<set>-->
+            <!--<if test="status != null">`status` = #{status}</if>-->
+        <!--</set>-->
+        <!--where ptometry_number = #{ptometryNumber}-->
+    <!--</update>-->
     <delete id="batchRemove">
         delete from jc_kjyy where kjyy_id in
         <foreach item="kjyyId" collection="array" open="(" separator="," close=")">
@@ -306,4 +312,15 @@
         </foreach>
     </delete>
 
+    <select id="chufangall" resultType="com.shiguang.jiancha.domain.KjyyDO">
+		select `kjyy_id`,`card_number`,`kjyy_prescription_type`,`kjyy_doctor`,`kjyy_optometry_name`,
+		`kjyy_sphod`,`kjyy_sphos`,`kjyy_cylod`,`kjyy_cylos`,`kjyy_axialod`,`kjyy_axialos`,`kjyy_prismod`,`kjyy_prismos`,
+		`kjyy_jdod`,`kjyy_jdos`,`kjyy_yytjod`,`kjyy_yytjos`,`kjyy_tgod`,`kjyy_tgos`,`kjyy_vaod`,`kjyy_vaos`,`kjyy_jpcz`,`kjyy_clfs`,
+		`kjyy_jykj`,`kjyy_kjlx`,`kjyy_text`,`kjyy_beizhu`
+		from jc_kjyy
+        <where>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+            <if test="status != null and status != ''"> and  status = #{status} </if>
+        </where>
+	</select>
 </mapper>

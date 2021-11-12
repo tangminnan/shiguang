@@ -344,12 +344,27 @@
             #{crtId}
         </foreach>
     </delete>
+	<delete id="upremove">
+		delete from jc_crt where ptometry_number = #{ptometryNumber}
+	</delete>
+	<!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.CrtDO">-->
+		<!--update jc_crt-->
+		<!--<set>-->
+			<!--<if test="status != null">`status` = #{status}</if>-->
+		<!--</set>-->
+		<!--where ptometry_number = #{ptometryNumber}-->
+	<!--</update>-->
 
-	<update id="upremove" parameterType="com.shiguang.jiancha.domain.CrtDO">
-		update jc_crt
-		<set>
-			<if test="status != null">`status` = #{status}</if>
-		</set>
-		where ptometry_number = #{ptometryNumber}
-	</update>
+	<select id="chufangall" resultType="com.shiguang.jiancha.domain.CrtDO">
+		select `crt_id`,`card_number`,`crt_prescription_type`,`crt_doctor`,`crt_optometry_name`,
+		`crt_sdbhod`,`crt_sdbhos`,`ctr_bcod`,`crt_bcos`,`crt_rzdod`,`crt_rzdos`,`crt_lzaod`,`crt_lzaos`,
+		`crt_rzd2od`,`crt_rzd2os`,`crt_lza2od`,`crt_lza2os`,`crt_jfod`,`crt_jfos`,`crt_diaod`,`crt_diaos`,`crt_vaod`,
+		`crt_vaos`,`crt_jpysod`,`crt_jpysos`,`crt_syjpod`,`crt_syjpos`,`crt_beizhu`,`ptometry_number`,`status`,`crt_sphod`,`crt_sphos`,
+		`crt_cylod`,`crt_cylos`,`crt_axialod`,`crt_axialos`
+		from jc_crt
+		<where>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="status != null and status != ''"> and  status = #{status} </if>
+		</where>
+	</select>
 </mapper>

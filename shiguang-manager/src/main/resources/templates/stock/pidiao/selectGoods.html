@@ -79,7 +79,7 @@
             <!--</td>-->
         <!--</tr>-->
         <tr>
-            <input id="kccount" type="kccount"  value=""/>
+            <input id="kccount" type="kccount"  value="1" hidden/>
             <input id="outPosition" type="hidden" th:value="${outPosition}"/>
             <td>标准零售价格：</td>
             <td>
@@ -161,7 +161,7 @@
                             limit: params.limit,
                             offset: params.offset,
                             // xsstate: $('#xsstate').val(),
-                            positionId: $('#positionId').val(),
+                            // positionId: $('#positionId').val(),
                             goodsNum : $("#goodsNum").val(),
                             goodsCode : $("#goodsCode").val(),
                             goodsName : $("#goodsName").val(),
@@ -171,7 +171,7 @@
                             retailPrice : $("*[name='retailPrice']").val(),
                             retailPrice2 : $("*[name='retailPrice2']").val(),
                             xsstate : $("input[name='xsstate']:checked").val(),
-                            positionId : $('#positionId option:selected').val(),
+                            // positionId : $('#positionId option:selected').val(),
                             outPosition : $('#outPosition').val(),
                             kccount : $('#kccount').val()
                             // name:$('#searchName').val(),

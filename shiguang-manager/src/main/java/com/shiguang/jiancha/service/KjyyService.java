@@ -35,4 +35,7 @@ public interface KjyyService {
     int updatekjyy(KjyyDO kjyyDO);
 
     int batchRemove(Long[] kjyyIds);
+
+    KjyyDO chufangall(String ptometryNumber,String status);
+//List<KjyyDO> chufangall(Map<String, Object> map);
 }

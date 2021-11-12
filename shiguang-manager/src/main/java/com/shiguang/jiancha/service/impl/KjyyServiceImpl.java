@@ -71,4 +71,11 @@ public class KjyyServiceImpl implements KjyyService {
     public int batchRemove(Long[] kjyyIds) {
         return kjyyDao.batchRemove(kjyyIds);
     }
+
+    @Override
+    public KjyyDO chufangall(String ptometryNumber, String status) {
+        return kjyyDao.chufangall(ptometryNumber,status);
+    }
+
+
 }

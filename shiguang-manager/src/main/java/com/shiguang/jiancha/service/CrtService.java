@@ -31,4 +31,6 @@ public interface CrtService {
     int upremove(CrtDO crtDO );
     int updatecrt(CrtDO crtDO);
     int batchRemove(Long[] crtIds);
+    CrtDO chufangall(String ptometryNumber,String status);
+
 }

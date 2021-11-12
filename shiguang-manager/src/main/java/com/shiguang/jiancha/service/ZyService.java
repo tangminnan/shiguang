@@ -18,7 +18,7 @@ public interface ZyService {
 	ZyDO get(Long zyId);
 	
 	List<ZyDO> list(Map<String, Object> map);
-	
+
 	int count(Map<String, Object> map);
 	
 	int save(ZyDO zy);
@@ -31,4 +31,6 @@ public interface ZyService {
 	int upremove(ZyDO zyDO);
 	int updatezy(ZyDO zyDO);
 	int batchRemove(Long[] zyIds);
+
+	ZyDO chufangall(String ptometryNumber,String status);
 }

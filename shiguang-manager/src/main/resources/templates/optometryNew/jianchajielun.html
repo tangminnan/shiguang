@@ -410,7 +410,8 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <input id="sphod" th:value="${tryresultsDO.sphereRighttry}" hidden/>
+                <input id="sphod" th:value="${tryresultsDO.sphereRighttry}"  hidden/>
+                <input id="addod" th:value="${tryresultsDO.addRighttry}" hidden />
                 <td><input  id="kjjySphod"  name="kjjySphod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjjyCylod" type="text"onblur="zhengfu(this)"
@@ -435,7 +436,8 @@
             </tr>
             <tr>
                 <td>OS</td>
-                <input id="sphos" th:value="${tryresultsDO.sphereLefttry}" hidden/>
+                <input id="sphos" th:value="${tryresultsDO.sphereLefttry}" hidden />
+                <input id="addos" th:value="${tryresultsDO.addLefttry}" hidden />
                 <td><input  id="kjjySphos" name="kjjySphos" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}"name="kjjyCylos" type="text"onblur="zhengfu(this)"
@@ -1326,6 +1328,29 @@
 <script type="text/javascript">
 
     $().ready(function () {
+        getSixMonth();
+
+        var sphod=parseFloat($('#sphod').val());
+        var addod=parseFloat($('#addod').val());
+        var sphos=parseFloat($('#sphos').val());
+        var addos=parseFloat($('#addos').val());
+
+
+        var sphaddod=(sphod+addod).toFixed(2);
+        var sphaddos=(sphos+addos).toFixed(2);
+        if (sphaddod>0){
+            sphaddod="+"+sphaddod
+        }
+        if (sphaddos>0){
+            sphaddos="+"+sphaddos
+        }
+
+        $('#kjjySphod').val(sphaddod);
+        $('#kjjySphos').val(sphaddos);
+
+
+
+
         var kjyyJdods = $("input[name='kjyyJdods']").val();
         $("#kjyyJdod").find("[value=" + kjyyJdods + "]").attr("selected", true);
         var kjyyJdoss = $("input[name='kjyyJdoss']").val();
@@ -1342,25 +1367,6 @@
         $("#sjxlJdod").find("[value=" + sjxlJdods + "]").attr("selected", true);
         var sjxlJdoss = $("input[name='sjxlJdoss']").val();
         $("#sjxlJdos").find("[value=" + sjxlJdoss + "]").attr("selected", true);
-
-        var sphod=parseFloat($('#sphod').val());
-        var kjjyPrismod=parseFloat($('#kjjyPrismod').val());
-        var sphos=parseFloat($('#sphos').val());
-        var kjjyPrismos=parseFloat($('#kjjyPrismos').val());
-        // var sphaddod=sphod.toFixed(2)+kjjyPrismod.toFixed(2);
-        // var sphaddos=sphos.toFixed(2)+kjjyPrismos.toFixed(2);
-
-        var sphaddod=(sphod+kjjyPrismod).toFixed(2);
-        var sphaddos=(sphos+kjjyPrismos).toFixed(2);
-        if (sphaddod>0){
-            sphaddod="+"+sphaddod
-        }
-        if (sphaddos>0){
-            sphaddos="+"+sphaddos
-        }
-        $('#kjjySphod').val(sphaddod);
-        $('#kjjySphos').val(sphaddos);
-        getSixMonth();
     });
 
 
@@ -1520,22 +1526,23 @@
     });
 
     function getSixMonth() {
+        // alert("三个月后")
         var resultDate,year,month,date,shi,fen,miao;
         var currDate = new Date();
         year=currDate.getFullYear();
         month=currDate.getMonth()+1;
         date=currDate.getDate();
-        shi=currDate.getHours();
-        fen=currDate.getMinutes();
-        miao=currDate.getSeconds();
+        // shi=currDate.getHours();
+        // fen=currDate.getMinutes();
+        // miao=currDate.getSeconds();
         if ((month+3)>12){
             month=month-12+3;
             year=year+1;
         } else {
             month=month+3;
         }
-        resultDate=year+'-'+month+'-'+date+'  '+shi+':'+fen+':'+miao;
-
+        resultDate=year+'-'+month+'-'+date;
+        // alert(resultDate);
         $('#followTime').val(resultDate);
         return resultDate;
     }

@@ -65,4 +65,9 @@ public class SjxlServiceImpl implements SjxlService {
     public int batchRemove(Long[] sjxlIds) {
         return sjxlDao.batchRemove(sjxlIds);
     }
+
+    @Override
+    public SjxlDO chufangall(String ptometryNumber, String status) {
+        return sjxlDao.chufangall(ptometryNumber,status);
+    }
 }

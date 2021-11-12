@@ -70,4 +70,9 @@ public class CrtServiceImpl implements CrtService {
     public int batchRemove(Long[] crtIds) {
         return crtDao.batchRemove(crtIds);
     }
+
+    @Override
+    public CrtDO chufangall(String ptometryNumber, String status) {
+        return crtDao.chufangall(ptometryNumber,status);
+    }
 }

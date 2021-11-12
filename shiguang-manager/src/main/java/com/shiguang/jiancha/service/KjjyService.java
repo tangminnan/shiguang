@@ -1,6 +1,7 @@
 package com.shiguang.jiancha.service;
 
 import com.shiguang.jiancha.domain.KjjyDO;
+import com.shiguang.jiancha.domain.KjyyDO;
 import com.shiguang.jiancha.domain.ResultDO;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public interface KjjyService {
     KjjyDO get(Long kjjyId);
 
     List<KjjyDO> list(Map<String, Object> map);
+//    List<KjjyDO> chufangall(Map<String, Object> map);
 
     int count(Map<String, Object> map);
 
@@ -34,4 +36,6 @@ public interface KjjyService {
     int updatekjjy(KjjyDO kjjyDO);
 
     int batchRemove(Long[] kjjyIds);
+
+    KjjyDO chufangall(String ptometryNumber,String status);
 }

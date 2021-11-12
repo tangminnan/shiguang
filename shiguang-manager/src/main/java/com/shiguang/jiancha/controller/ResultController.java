@@ -418,37 +418,37 @@ public class ResultController {
 //    @RequiresPermissions("jiancha:result:upremove")
     public R upremove(String ptometryNumber) {
         ResultDO resultDO = new ResultDO();
-        resultDO.setStatus("0");
+//        resultDO.setStatus("0");
         resultDO.setPtometryNumber(ptometryNumber);
         CrtDO crtDO = new CrtDO();
-        crtDO.setStatus("0");
+//        crtDO.setStatus("0");
         crtDO.setPtometryNumber(ptometryNumber);
         KjjyDO kjjyDO = new KjjyDO();
-        kjjyDO.setStatus("0");
+//        kjjyDO.setStatus("0");
         kjjyDO.setPtometryNumber(ptometryNumber);
         KjyyDO kjyyDO = new KjyyDO();
-        kjyyDO.setStatus("0");
+//        kjyyDO.setStatus("0");
         kjyyDO.setPtometryNumber(ptometryNumber);
         RgpDO rgpDO = new RgpDO();
-        rgpDO.setStatus("0");
+//        rgpDO.setStatus("0");
         rgpDO.setPtometryNumber(ptometryNumber);
         RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
-        rxjmjcjDO.setStatus("0");
+//        rxjmjcjDO.setStatus("0");
         rxjmjcjDO.setPtometryNumber(ptometryNumber);
         SgjjDO sgjjDO = new SgjjDO();
-        sgjjDO.setStatus("0");
+//        sgjjDO.setStatus("0");
         sgjjDO.setPtometryNumber(ptometryNumber);
         SjxlDO sjxlDO = new SjxlDO();
-        sjxlDO.setStatus("0");
+//        sjxlDO.setStatus("0");
         sjxlDO.setPtometryNumber(ptometryNumber);
         VstDO vstDO = new VstDO();
-        vstDO.setStatus("0");
+//        vstDO.setStatus("0");
         vstDO.setPtometryNumber(ptometryNumber);
         YaopinDO yaopinDO = new YaopinDO();
-        yaopinDO.setStatus("0");
+//        yaopinDO.setStatus("0");
         yaopinDO.setPtometryNumber(ptometryNumber);
         ZyDO zyDO = new ZyDO();
-        zyDO.setStatus("0");
+//        zyDO.setStatus("0");
         zyDO.setPtometryNumber(ptometryNumber);
         resultService.upremove(resultDO);
         kjyyServce.upremove(kjyyDO);
@@ -503,9 +503,30 @@ public class ResultController {
         map.put("ptometryNumber", ptometryNumber);
         //验光数据
         TryresultsDO tryresultsDO = tryresultsService.getTryresult(map);
-        //所有处方
+        //所有处方【未删除】
         ResultDO resultDO = resultService.getChufangAll(map);
+//        KjyyDO kjyyDOList =kjyyServce.chufangall(ptometryNumber,status);
+//        KjjyDO kjjyDOList = kjjyService.chufangall(ptometryNumber,status);
+//        SgjjDO sgjjDOList =sgjjService.chufangall(ptometryNumber,status);
+//        RxjmjcjDO rxjmjcjDOList =rxjmjcjService.chufangall(ptometryNumber,status);
+//        ZyDO zyDOList =zyService.chufangall(ptometryNumber,status);
+//        SjxlDO sjxlDOList =sjxlService.chufangall(ptometryNumber,status);
+//        VstDO vstDOList =vstService.chufangall(ptometryNumber,status);
+//        CrtDO crtDOList =crtService.chufangall(ptometryNumber,status);
+//        RgpDO rgpDOList =rgpService.chufangall(ptometryNumber,status);
+//        YaopinDO yaopinDOList =yaopinService.chufangall(ptometryNumber,status);
+//
         model.addAttribute("resultDO", resultDO);
+//        model.addAttribute("kjyyDOList", kjyyDOList);
+//        model.addAttribute("kjjyDOList", kjjyDOList);
+//        model.addAttribute("sgjjDOList", sgjjDOList);
+//        model.addAttribute("rxjmjcjDOList", rxjmjcjDOList);
+//        model.addAttribute("zyDOList", zyDOList);
+//        model.addAttribute("sjxlDOList", sjxlDOList);
+//        model.addAttribute("vstDOList", vstDOList);
+//        model.addAttribute("crtDOList", crtDOList);
+//        model.addAttribute("rgpDOList", rgpDOList);
+//        model.addAttribute("yaopinDOList", yaopinDOList);
         if (tryresultsDO.getSex() == 0) {
             tryresultsDO.setSexx("男");
         } else {

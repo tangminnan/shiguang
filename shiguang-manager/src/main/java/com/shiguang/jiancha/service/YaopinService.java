@@ -31,4 +31,7 @@ public interface YaopinService {
     int upremove(YaopinDO yaopinDO);
 
     int batchRemove(Long[] ypIds);
+
+    YaopinDO chufangall(String ptometryNumber,String status);
+
 }

@@ -7,6 +7,7 @@
 		select `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_optometry_name`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu`,`ptometry_number`,`status`,`vst_sphod`,`vst_sphos`,`vst_cylod`,`vst_cylos`,`vst_axialod`,`vst_axialos` from jc_vst where vst_id = #{value}
 	</select>
 
+
 	<select id="list" resultType="com.shiguang.jiancha.domain.VstDO">
 		select `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_optometry_name`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu`,`ptometry_number`,`status`,`vst_sphod`,`vst_sphos`,`vst_cylod`,`vst_cylos`,`vst_axialod`,`vst_axialos` from jc_vst
 		<where>
@@ -360,12 +361,25 @@
 			#{vstId}
 		</foreach>
 	</delete>
-
-	<update id="upremove" parameterType="com.shiguang.jiancha.domain.VstDO">
-		update jc_vst
-		<set>
-			<if test="status != null">`status` = #{status}</if>
-		</set>
-		where ptometry_number = #{ptometryNumber}
-	</update>
+	<delete id="upremove">
+		delete from jc_vst where ptometry_number = #{ptometryNumber}
+	</delete>
+	<!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.VstDO">-->
+		<!--update jc_vst-->
+		<!--<set>-->
+			<!--<if test="status != null">`status` = #{status}</if>-->
+		<!--</set>-->
+		<!--where ptometry_number = #{ptometryNumber}-->
+	<!--</update>-->
+	<select id="chufangall" resultType="com.shiguang.jiancha.domain.VstDO">
+		select `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_optometry_name`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,
+		`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,
+		`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu`,`ptometry_number`,`status`,`vst_sphod`,`vst_sphos`,`vst_cylod`,
+		`vst_cylos`,`vst_axialod`,`vst_axialos`
+		from jc_vst
+		<where>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="status != null and status != ''"> and  status = #{status} </if>
+		</where>
+	</select>
 </mapper>

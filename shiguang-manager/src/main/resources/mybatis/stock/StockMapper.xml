@@ -2083,8 +2083,7 @@
 
 
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
-            <if test="classtype != null and classtype != ''">and s
-                .classtype = #{classtype}</if>
+            <if test="classtype != null and classtype != ''">and s.classtype = #{classtype}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and  s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">
@@ -2118,6 +2117,8 @@
 
             <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
             <if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+            <if test="positionId != null and positionId != ''">and  s.position_id = #{positionId}</if>
+            <if test="outPosition != null and outPosition != ''">and  s.position_id = #{outPosition}</if>
         </where>
     </select>
 

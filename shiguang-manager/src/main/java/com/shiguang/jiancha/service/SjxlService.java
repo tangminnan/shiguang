@@ -19,6 +19,7 @@ public interface SjxlService {
 
     List<SjxlDO> list(Map<String, Object> map);
 
+
     int count(Map<String, Object> map);
 
     int save(SjxlDO sjxl);
@@ -31,4 +32,6 @@ public interface SjxlService {
     int upremove(SjxlDO sjxlDO);
 
     int batchRemove(Long[] sjxlIds);
+
+    SjxlDO chufangall(String ptometryNumber,String status);
 }

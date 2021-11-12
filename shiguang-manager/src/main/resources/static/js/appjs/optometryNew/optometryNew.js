@@ -131,6 +131,7 @@ function load() {
                                         }else if (row.trystatus =="0") {
                                             // var f = '';
                                             if (row.haveid == "1"){ //是否结算
+                                                // alert(row.rstatus)
                                                 if (row.rstatus=="1"){
                                                     var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
                                                         + value
@@ -140,7 +141,7 @@ function load() {
                                                         + value
                                                         + '\')">删除</span> ';
 
-                                                }else if (row.rstatus =="0") {
+                                                }else if (row.rstatus ==null) {
                                                     var f = '<span class="btn btn-primary btn-sm" href="#" title="修改"  mce_href="#" onclick="updateTryshuju(\''
                                                         + value
                                                         + '\')">修改</span> ';

@@ -31,4 +31,6 @@ public interface RgpService {
     int upremove(RgpDO rgpDO);
 
     int batchRemove(Long[] rgpIds);
+    RgpDO chufangall(String ptometryNumber,String status);
+
 }

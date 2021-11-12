@@ -3,6 +3,7 @@ package com.shiguang.jiancha.dao;
 import com.shiguang.jiancha.domain.KjjyDO;
 import com.shiguang.jiancha.domain.ResultDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public interface KjjyDao {
     KjjyDO get(Long kjjyId);
 
     List<KjjyDO> list(Map<String, Object> map);
+//    List<KjjyDO> chufangall(Map<String, Object> map);
 
     int count(Map<String, Object> map);
 
@@ -36,4 +38,6 @@ public interface KjjyDao {
 
     int updatekjjy(KjjyDO kjjyDO);
     int batchRemove(Long[] kjjyIds);
+
+    KjjyDO chufangall(@Param("ptometryNumber") String ptometryNumber, @Param("status") String status);
 }

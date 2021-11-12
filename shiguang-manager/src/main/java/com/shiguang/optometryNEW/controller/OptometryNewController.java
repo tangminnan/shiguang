@@ -303,8 +303,17 @@ public class OptometryNewController {
                 tryresultsDO.setHeightRighttry(trylist.get(0).getHeightRighttry());
                 tryresultsDO.setHeightLefttry(trylist.get(0).getHeightLefttry());
 
-                tryresultsDO.setAddRighttry(trylist.get(0).getAddRighttry());
-                tryresultsDO.setAddLefttry(trylist.get(0).getAddLefttry());
+                String addod=trylist.get(0).getAddRighttry();
+                if ("".equals(addod)){
+                    addod="0";
+                }
+                tryresultsDO.setAddRighttry(addod);
+                String addos=trylist.get(0).getAddLefttry();
+                if ("".equals(addos)){
+                    addos="0";
+                }
+                tryresultsDO.setAddLefttry(addos);
+
 
                 tryresultsDO.setYuanRrty(trylist.get(0).getYuanRrty());
                 tryresultsDO.setYuanLrty(trylist.get(0).getYuanLrty());
@@ -329,7 +338,7 @@ public class OptometryNewController {
         return "optometryNew/jianchajielun";
     }
     /**
-     * 详情
+     * 最后一次详情
      */
 //        @GetMapping("/detail/{cardNumber}")
 //        @RequiresPermissions("information:optometryNew:detail")

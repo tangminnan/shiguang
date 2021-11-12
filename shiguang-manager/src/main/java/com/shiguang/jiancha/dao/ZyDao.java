@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 框架中用表
@@ -32,4 +33,6 @@ public interface ZyDao {
 	int upremove(ZyDO zyDO);
 	int updatezy(ZyDO zyDO);
 	int batchRemove(Long[] zyIds);
+
+	ZyDO chufangall(@Param("ptometryNumber") String ptometryNumber, @Param("status") String status);
 }

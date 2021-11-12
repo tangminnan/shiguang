@@ -3,6 +3,7 @@ package com.shiguang.jiancha.dao;
 import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.RgpDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -36,4 +37,5 @@ public interface RgpDao {
 
 
     int batchRemove(Long[] rgpIds);
+    RgpDO chufangall(@Param("ptometryNumber") String ptometryNumber, @Param("status") String status);
 }

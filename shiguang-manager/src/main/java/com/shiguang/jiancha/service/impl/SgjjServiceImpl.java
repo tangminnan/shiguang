@@ -25,6 +25,11 @@ public class SgjjServiceImpl implements SgjjService {
     public List<SgjjDO> list(Map<String, Object> map) {
         return sgjjDao.list(map);
     }
+//
+//    @Override
+//    public List<SgjjDO> chufangall(Map<String, Object> map) {
+//        return sgjjDao.chufangall(map);
+//    }
 
     @Override
     public int count(Map<String, Object> map) {
@@ -69,5 +74,10 @@ public class SgjjServiceImpl implements SgjjService {
     @Override
     public int batchRemove(Long[] sgjjIds) {
         return sgjjDao.batchRemove(sgjjIds);
+    }
+
+    @Override
+    public SgjjDO chufangall(String ptometryNumber, String status) {
+        return sgjjDao.chufangall(ptometryNumber,status);
     }
 }

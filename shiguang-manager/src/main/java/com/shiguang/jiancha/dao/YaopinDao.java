@@ -3,6 +3,7 @@ package com.shiguang.jiancha.dao;
 import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiancha.domain.YaopinDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -33,4 +34,6 @@ public interface YaopinDao {
     int upremove(YaopinDO yaopinDO);
 
     int batchRemove(Long[] ypIds);
+    YaopinDO chufangall(@Param("ptometryNumber") String ptometryNumber, @Param("status") String status);
+
 }
