@@ -4,12 +4,12 @@
 <mapper namespace="com.shiguang.jiancha.dao.SjxlDao">
 
     <select id="get" resultType="com.shiguang.jiancha.domain.SjxlDO">
-		select `sjxl_id`,`card_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,`sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu` from jc_sjxl where sjxl_id = #{value}
+		select `sjxl_id`,`card_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,`sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_tgod`,`sjxl_tgos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu` from jc_sjxl where sjxl_id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.jiancha.domain.SjxlDO">
         select
-        `sjxl_id`,`card_number`,`sale_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,`sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu`
+        `sjxl_id`,`card_number`,`sale_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,`sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_tgod`,`sjxl_tgos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu`
         from jc_sjxl
         <where>
             <if test="sjxlId != null and sjxlId != ''">and sjxl_id = #{sjxlId}</if>
@@ -36,6 +36,10 @@
             <if test="sjxlYytjos != null and sjxlYytjos != ''">and sjxl_yytjos = #{sjxlYytjos}</if>
             <if test="sjxlJytjod != null and sjxlJytjod != ''">and sjxl_jytjod = #{sjxlJytjod}</if>
             <if test="sjxlJytjos != null and sjxlJytjos != ''">and sjxl_jytjos = #{sjxlJytjos}</if>
+            <if test="sjxlTgod != null and sjxlTgod != ''">and sjxl_tgod = #{sjxlTgod}</if>
+            <if test="sjxlTgos != null and sjxlTgos != ''">and sjxl_tgos = #{sjxlTgos}</if>
+
+
             <if test="sjxlYyvaod != null and sjxlYyvaod != ''">and sjxl_yyvaod = #{sjxlYyvaod}</if>
             <if test="sjxlYyvaos != null and sjxlYyvaos != ''">and sjxl_yyvaos = #{sjxlYyvaos}</if>
             <if test="sjxlJyvaod != null and sjxlJyvaod != ''">and sjxl_jyvaod = #{sjxlJyvaod}</if>
@@ -84,6 +88,10 @@
             <if test="sjxlYytjos != null and sjxlYytjos != ''">and sjxl_yytjos = #{sjxlYytjos}</if>
             <if test="sjxlJytjod != null and sjxlJytjod != ''">and sjxl_jytjod = #{sjxlJytjod}</if>
             <if test="sjxlJytjos != null and sjxlJytjos != ''">and sjxl_jytjos = #{sjxlJytjos}</if>
+
+            <if test="sjxlTgod != null and sjxlTgod != ''">and sjxl_tgod = #{sjxlTgod}</if>
+            <if test="sjxlTgos != null and sjxlTgos != ''">and sjxl_tgos = #{sjxlTgos}</if>
+
             <if test="sjxlYyvaod != null and sjxlYyvaod != ''">and sjxl_yyvaod = #{sjxlYyvaod}</if>
             <if test="sjxlYyvaos != null and sjxlYyvaos != ''">and sjxl_yyvaos = #{sjxlYyvaos}</if>
             <if test="sjxlJyvaod != null and sjxlJyvaod != ''">and sjxl_jyvaod = #{sjxlJyvaod}</if>
@@ -115,7 +123,10 @@
 			`sjxl_yytjod`, 
 			`sjxl_yytjos`, 
 			`sjxl_jytjod`, 
-			`sjxl_jytjos`, 
+			`sjxl_jytjos`,
+			`sjxl_tgod`,
+			`sjxl_tgos`,
+
 			`sjxl_yyvaod`, 
 			`sjxl_yyvaos`, 
 			`sjxl_jyvaod`, 
@@ -146,7 +157,10 @@
 			#{sjxlYytjod}, 
 			#{sjxlYytjos}, 
 			#{sjxlJytjod}, 
-			#{sjxlJytjos}, 
+			#{sjxlJytjos},
+			#{sjxlTgod},
+			#{sjxlTgos},
+
 			#{sjxlYyvaod}, 
 			#{sjxlYyvaos}, 
 			#{sjxlJyvaod}, 
@@ -180,6 +194,9 @@
 			`sjxl_yytjos`,
 			`sjxl_jytjod`,
 			`sjxl_jytjos`,
+
+			`sjxl_tgod`,
+			`sjxl_tgos`,
 			`sjxl_yyvaod`,
 			`sjxl_yyvaos`,
 			`sjxl_jyvaod`,
@@ -210,6 +227,9 @@
 			#{sjxlYytjos},
 			#{sjxlJytjod},
 			#{sjxlJytjos},
+			#{sjxlTgod},
+			#{sjxlTgos},
+
 			#{sjxlYyvaod},
 			#{sjxlYyvaos},
 			#{sjxlJyvaod},
@@ -246,6 +266,9 @@
             <if test="sjxlYytjos != null">`sjxl_yytjos` = #{sjxlYytjos},</if>
             <if test="sjxlJytjod != null">`sjxl_jytjod` = #{sjxlJytjod},</if>
             <if test="sjxlJytjos != null">`sjxl_jytjos` = #{sjxlJytjos},</if>
+            <if test="sjxlTgod != null">`sjxl_tgod` = #{sjxlTgod},</if>
+            <if test="sjxlTgos != null">`sjxl_tgos` = #{sjxlTgos},</if>
+
             <if test="sjxlYyvaod != null">`sjxl_yyvaod` = #{sjxlYyvaod},</if>
             <if test="sjxlYyvaos != null">`sjxl_yyvaos` = #{sjxlYyvaos},</if>
             <if test="sjxlJyvaod != null">`sjxl_jyvaod` = #{sjxlJyvaod},</if>

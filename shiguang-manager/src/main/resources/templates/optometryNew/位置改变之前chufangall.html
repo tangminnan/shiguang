@@ -83,35 +83,31 @@
                 <tr>
                     <td rowspan="2" class="w170">裸眼视力</td>
                     <td width="120">远</td>
+                    <td>OU <input name="farLyou" th:value="${tryresultsDO.farLyou}" readonly type="text"/></td>
                     <td>OD <input name="farLyod" th:value="${tryresultsDO.farLyod}" readonly type="text"/></td>
                     <td>OS <input name="farLyos" th:value="${tryresultsDO.farLyos}" readonly type="text"/></td>
-                    <td>OU <input name="farLyou" th:value="${tryresultsDO.farLyou}" readonly type="text"/></td>
                     <td rowspan="2" style="width:8%;">原镜视力</td>
                     <td width="120">远</td>
+                    <td>OU <input name="farYjou" th:value="${tryresultsDO.farYjou}" readonly type="text"/></td>
                     <td>OD <input name="farYjod" th:value="${tryresultsDO.farYjod}" readonly type="text"/></td>
                     <td>OS <input name="farYjos" th:value="${tryresultsDO.farYjos}" readonly type="text"/></td>
-                    <td>OU <input name="farYjou" th:value="${tryresultsDO.farYjou}" readonly type="text"/></td>
-
                 </tr>
                 <tr>
                     <td>近</td>
+                    <td>OU <input name="nearLyou" th:value="${tryresultsDO.nearLyou}" readonly type="text"></td>
                     <td>OD <input name="nearLyod" th:value="${tryresultsDO.nearLyod}" readonly type="text"/></td>
                     <td>OS <input name="nearLyos" th:value="${tryresultsDO.nearLyos}" readonly type="text"/></td>
-                    <td>OU <input name="nearLyou" th:value="${tryresultsDO.nearLyou}" readonly type="text"></td>
-
                     <td>近</td>
+                    <td>OU <input name="nearYjou" th:value="${tryresultsDO.nearYjou}" readonly type="text"/></td>
                     <td>OD <input name="nearYjod" th:value="${tryresultsDO.nearYjod}" readonly type="text"/></td>
                     <td>OS <input name="nearYjos" th:value="${tryresultsDO.nearYjos}" readonly type="text"/></td>
-                    <td>OU <input name="nearYjou" th:value="${tryresultsDO.nearYjou}" readonly type="text"/></td>
-
                 </tr>
                 <tr>
                     <td rowspan="2">小孔视力</td>
                     <td>远</td>
+                    <td>OU <input name="farXkou" th:value="${tryresultsDO.farXkou}" readonly  type="text"/></td>
                     <td>OD <input name="farXkod" th:value="${tryresultsDO.farXkod}" readonly  type="text"/></td>
                     <td>OS <input name="farXkos" th:value="${tryresultsDO.farXkos}" readonly  type="text"/></td>
-                    <td>OU <input name="farXkou" th:value="${tryresultsDO.farXkou}" readonly  type="text"/></td>
-
                     <td rowspan="2">主导眼</td>
                     <td rowspan="2">
                         <select id="dominantEye" name="dominantEye" th:value="${tryresultsDO.dominantEye}" disabled >
@@ -127,10 +123,9 @@
                 </tr>
                 <tr>
                     <td>近</td>
+                    <td>OU <input name="nearXkou" th:value="${tryresultsDO.nearXkou}" readonly type="text"/></td>
                     <td>OD <input name="nearXkod" th:value="${tryresultsDO.nearXkod}" readonly type="text"/></td>
                     <td>OS <input name="nearXkos" th:value="${tryresultsDO.nearXkos}" readonly type="text"/></td>
-                    <td>OU <input name="nearXkou" th:value="${tryresultsDO.nearXkou}" readonly type="text"/></td>
-
                 </tr>
                 </tbody>
             </table>
@@ -192,65 +187,6 @@
                         <td colspan="7" class="H_red">3个绿灯（右眼抑制），2个红灯（左眼抑制），5个灯2红3绿（复视），4个灯1红2绿1混合（正常）</td>
                     </tr>
                     <tr>
-
-                    </tr>
-                    <tr>
-                        <td class="bg-d7">立体视</td>
-                        <td colspan="2" style="text-align:left;">
-                            <select id="litishi" name="litishi" th:value="${tryresultsDO.litishi}" disabled style="width:30%">
-                                <option></option>
-                                <option value="有">有</option>
-                                <option value="无">无</option>
-                            </select>
-                            <input id="litishis" name="litishis" th:value="${tryresultsDO.litishi}"
-                                   type="hidden" readonly>
-                        </td>
-                        <td class="bg-d7">AC/A</td>
-                        <td colspan="6" style="text-align:left;">
-                            <input id="sgnAc" name="sgnAc" th:value="${tryresultsDO.sgnAc}" readonly type="text" style="width:27%" />
-                            <label><input id="b" name="sgnAcway" th:field="*{tryresultsDO.sgnAcway}" value="1"
-                                          type="radio" onclick="return false">
-                                梯度法</label>
-                            <label><input id="b1" name="sgnAcway" th:field="*{tryresultsDO.sgnAcway}" value="2"
-                                          type="radio" onclick="return false">
-                                计算法</label>
-                        </td>
-                    </tr>
-
-                    <tr>
-
-                        <td rowspan="3" class="bg-d7">正负相对调节</td>
-                        <td colspan="2">PRA：<input id="sgnPra" name="sgnPra" th:value="${tryresultsDO.sgnPra}" readonly type="text" /> D</td>
-                        <td colspan="2" class="H_red">-2.50D±1.00D（近视力表）</td>
-                        <td rowspan="3" class="bg-d7">调节反应</td>
-                        <td rowspan="3">
-                            <label>
-                                <input name="sgnTjfy" value="1" th:field="*{tryresultsDO.sgnTjfy}" onclick="return false" type="radio" id="c" > BCC</label>
-                            <label>
-                                <input name="sgnTjfy" value="2" th:field="*{tryresultsDO.sgnTjfy}" onclick="return false" type="radio" id="c1"> MEM</label>
-                        </td>
-                        <td colspan="2">OU <input id="sgnTjfyou" name="sgnTjfyou" th:value="${tryresultsDO.sgnTjfyou}" readonly type="text" /> D</td>
-                        <td rowspan="3" class="H_red">+0.25~+0.75D<br/>调节超前 <+0.25D<br/>调节滞后 >+0.75D</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">NRA：<input id="sgnNra" name="sgnNra"  th:value="${tryresultsDO.sgnNra}" readonly  type="text" /> D</td>
-                        <td colspan="2" class="H_red">+2.00D±0.50D（近视力表）</td>
-
-                        <td colspan="2">OD <input id="sgnTjfyod" name="sgnTjfyod" th:value="${tryresultsDO.sgnTjfyod}" readonly type="text" /> D</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">
-                            遮盖单眼是否变清晰
-                            <label ><input name="sgnZfsf" value="1" th:field="*{tryresultsDO.sgnZfsf}" onclick="return false" type="radio" id="d" checked> 是</label>
-                            <label ><input name="sgnZfsf" value="2" th:field="*{tryresultsDO.sgnZfsf}" onclick="return false" type="radio" id="d1"> 否</label>
-                        </td>
-
-                        <td colspan="2">OS <input id="sgnTjfyos" name="sgnTjfyos"  th:value="${tryresultsDO.sgnTjfyos}" readonly  type="text" /> D</td>
-                    </tr>
-
-
-
-                    <tr>
                         <td rowspan="2" class="bg-d7">眼位：远</td>
                         <td>水平</td>
                         <td><input id="sgnFarsp1" name="sgnFarsp1" th:value="${tryresultsDO.sgnFarsp1}" readonly  type="text"  /> △ </td>
@@ -304,7 +240,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td rowspan="2" class="bg-d7">Von Graefe法</td>
+                        <td rowspan="3" class="bg-d7">Von Graefe法</td>
                         <td>远距水平隐斜视：</td>
                         <td colspan="3">
                             <input id="sgnVgfarsp1" name="sgnVgfarsp1" th:value="${tryresultsDO.sgnVgfarsp1}" readonly type="text"  /> △
@@ -328,15 +264,52 @@
                             <input id="sgnVgnearcz2" name="sgnVgnearcz2" th:value="${tryresultsDO.sgnVgnearcz2}" readonly   type="text" />
                         </td>
                     </tr>
-                    <!--<tr>-->
-                        <!--<td>综合验光仪瞳距：</td>-->
-                        <!--<td colspan="3">-->
-                            <!--<input id="sgnAllygytj1" name="sgnAllygytj1" th:value="${tryresultsDO.sgnAllygytj1}" readonly   type="text"  /> △-->
-                            <!--<input id="sgnAllygytj2" name="sgnAllygytj2" th:value="${tryresultsDO.sgnAllygytj2}" readonly   type="text"   /></td>-->
-                        <!--<td colspan="5"></td>-->
-                    <!--</tr>-->
-
-
+                    <tr>
+                        <td>综合验光仪瞳距：</td>
+                        <td colspan="3">
+                            <input id="sgnAllygytj1" name="sgnAllygytj1" th:value="${tryresultsDO.sgnAllygytj1}" readonly   type="text"  /> △
+                            <input id="sgnAllygytj2" name="sgnAllygytj2" th:value="${tryresultsDO.sgnAllygytj2}" readonly   type="text"   /></td>
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr>
+                        <td class="bg-d7">AC/A</td>
+                        <td colspan="9" style="text-align:left;">
+                            <input id="sgnAc" name="sgnAc" th:value="${tryresultsDO.sgnAc}"  type="text" style="width:10%" />
+                            <label><input id="b" name="sgnAcway" th:field="*{tryresultsDO.sgnAcway}" value="1"
+                                          type="radio" onclick="return false">
+                                梯度法</label>
+                            <label><input id="b1" name="sgnAcway" th:field="*{tryresultsDO.sgnAcway}" value="2"
+                                          type="radio" onclick="return false">
+                                计算法</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3" class="bg-d7">调节反应</td>
+                        <td rowspan="3">
+                            <label>
+                                <input name="sgnTjfy" value="1" th:field="*{tryresultsDO.sgnTjfy}" onclick="return false" type="radio" id="c" > BCC</label>
+                            <label>
+                                <input name="sgnTjfy" value="2" th:field="*{tryresultsDO.sgnTjfy}" onclick="return false" type="radio" id="c1"> MEM</label>
+                        </td>
+                        <td colspan="2">OU <input id="sgnTjfyou" name="sgnTjfyou" th:value="${tryresultsDO.sgnTjfyou}" readonly type="text" /> D</td>
+                        <td rowspan="3" class="H_red">+0.25~+0.75D<br/>调节超前 <+0.25D<br/>调节滞后 >+0.75D</td>
+                        <td rowspan="3" class="bg-d7">正负相对调节</td>
+                        <td colspan="2">PRA：<input id="sgnPra" name="sgnPra" th:value="${tryresultsDO.sgnPra}" readonly type="text" /> D</td>
+                        <td colspan="2" class="H_red">-2.50D±1.00D（近视力表）</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">OD <input id="sgnTjfyod" name="sgnTjfyod" th:value="${tryresultsDO.sgnTjfyod}" readonly type="text" /> D</td>
+                        <td colspan="2">NRA：<input id="sgnNra" name="sgnNra"  th:value="${tryresultsDO.sgnNra}" readonly  type="text" /> D</td>
+                        <td colspan="2" class="H_red">-2.00D±0.50D（近视力表）</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">OS <input id="sgnTjfyos" name="sgnTjfyos"  th:value="${tryresultsDO.sgnTjfyos}" readonly  type="text" /> D</td>
+                        <td colspan="4">
+                            遮盖单眼是否变清晰
+                            <label ><input name="sgnZfsf" value="1" th:field="*{tryresultsDO.sgnZfsf}" onclick="return false" type="radio" id="d" checked> 是</label>
+                            <label ><input name="sgnZfsf" value="2" th:field="*{tryresultsDO.sgnZfsf}" onclick="return false" type="radio" id="d1"> 否</label>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -766,9 +739,7 @@
                     <td>
                         <input class="input_text" id="yuanRrty" name="yuanRrty" type="text" th:value="${tryresultsDO.yuanRrty}" readonly/>
                     </td>
-                    <td>
-                        <input class="input_text" id="nearRighttry" name="nearRighttry" type="text" th:value="${tryresultsDO.nearRighttry}" readonly/>
-                    </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>OS</td>
@@ -815,9 +786,7 @@
                     <td>
                         <input class="input_text" id="yuanLrty" name="yuanLrty"  th:value="${tryresultsDO.yuanLrty}" readonly  type="text" />
                     </td>
-                    <td>
-                        <input class="input_text" id="nearLefttry" name="nearLefttry" type="text" th:value="${tryresultsDO.nearLefttry}" readonly/>
-                    </td>
+                    <td></td>
                 </tr>
                 </tbody>
             </table>
@@ -1037,9 +1006,9 @@
                     <td>轴向</td>
                     <td>三棱镜</td>
                     <td>基底</td>
-                    <td>近用瞳距(mm)</td>
+                    <td>远用瞳距(mm)</td>
                     <td>瞳高(mm)</td>
-                    <td>近用VA</td>
+                    <td>远用VA</td>
                 </tr>
                 <tr>
                     <td>OD</td>
@@ -1552,8 +1521,7 @@
                     <td>轴向</td>
                     <td>三棱镜</td>
                     <td>基底</td>
-                    <td>远用瞳距(mm)</td>
-                    <td>近用瞳距(mm)</td>
+                    <td>中用瞳距(mm)</td>
                     <td>瞳高(mm)</td>
                     <td>近用VA</td>
                     <td>近用VA</td>
@@ -1576,9 +1544,6 @@
                     </td>
                     <td><input th:value="${resultDO.sjxlYytjod}" name="sjxlYytjod" readonly type="text"/></td>
                     <td><input th:value="${resultDO.sjxlJytjod}" name="sjxlJytjod" readonly type="text"/></td>
-
-                    <td><input th:value="${resultDO.sjxlTgod}"  name="sjxlTgod" type="text"/></td>
-
                     <td><input th:value="${resultDO.sjxlYyvaod}" name="sjxlYyvaod" readonly type="text"/></td>
                     <td><input th:value="${resultDO.sjxlJyvaod}" name="sjxlJyvaod" readonly type="text"/></td>
                 </tr>
@@ -1600,9 +1565,6 @@
                     </td>
                     <td><input th:value="${resultDO.sjxlYytjos}" name="sjxlYytjos" readonly type="text"/></td>
                     <td><input th:value="${resultDO.sjxlJytjos}" name="sjxlJytjos" readonly type="text"/></td>
-
-                    <td><input th:value="${resultDO.sjxlTgos}"  name="sjxlTgos" type="text"/></td>
-
                     <td><input th:value="${resultDO.sjxlYyvaos}" name="sjxlYyvaos" readonly type="text"/></td>
                     <td><input th:value="${resultDO.sjxlJyvaos}" name="sjxlJyvaos" readonly type="text"/></td>
                 </tr>
@@ -1975,13 +1937,6 @@
         $("#sgnFardot").find("[value='" + sgnFardots + "']").attr("selected", true);
         var sgnNeardots = $("input[name='sgnNeardots']").val();
         $("#sgnNeardot").find("[value='" + sgnNeardots + "']").attr("selected", true);
-
-        var litishis = $("input[name='litishis']").val();
-        $("#litishi").find("[value='" + litishis + "']").attr("selected", true);
-
-
-
-
         var sgnFarsp2s = $("input[name='sgnFarsp2s']").val();
         $("#sgnFarsp2").find("[value='" + sgnFarsp2s + "']").attr("selected", true);
         var sgnNearsp2s = $("input[name='sgnNearsp2s']").val();
