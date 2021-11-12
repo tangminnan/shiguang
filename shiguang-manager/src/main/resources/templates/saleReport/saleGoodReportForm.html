@@ -27,16 +27,28 @@
 		<h3>商品销售分析表（类别）</h3>
 		<input type="hidden" id="goodsType" th:value="${goodsType}">
 		<input type="hidden" id="jjcount" th:value="${jjcount}">
+		<input type="hidden" id="jjpercen" th:value="${jjpercen}">
 		<input type="hidden" id="jjMoney" th:value="${jjMoney}">
+		<input type="hidden" id="zjcount" th:value="${zjcount}">
+		<input type="hidden" id="zjpercen" th:value="${zjpercen}">
+		<input type="hidden" id="zjMoney" th:value="${zjMoney}">
+		<input type="hidden" id="zpcount" th:value="${zpcount}">
+		<input type="hidden" id="zppercen" th:value="${zppercen}">
+		<input type="hidden" id="zpMoney" th:value="${zpMoney}">
 		<input type="hidden" id="jpcount" th:value="${jpcount}">
+		<input type="hidden" id="jppercen" th:value="${jppercen}">
 		<input type="hidden" id="jpMoney" th:value="${jpMoney}">
 		<input type="hidden" id="pjcount" th:value="${pjcount}">
+		<input type="hidden" id="pjpercen" th:value="${pjpercen}">
 		<input type="hidden" id="pjMoney" th:value="${pjMoney}">
 		<input type="hidden" id="yxcount" th:value="${yxcount}">
+		<input type="hidden" id="yxpercen" th:value="${yxpercen}">
 		<input type="hidden" id="yxMoney" th:value="${yxMoney}">
 		<input type="hidden" id="hlycount" th:value="${hlycount}">
+		<input type="hidden" id="hlypercen" th:value="${hlypercen}">
 		<input type="hidden" id="hlyMoney" th:value="${hlyMoney}">
 		<input type="hidden" id="sgcount" th:value="${sgcount}">
+		<input type="hidden" id="sgpercen" th:value="${sgpercen}">
 		<input type="hidden" id="sgMoney" th:value="${sgMoney}">
 		<input type="hidden" id="totalCount" th:value="${totalCount}">
 		<input type="hidden" id="totalMoney" th:value="${totalMoney}">
@@ -112,16 +124,28 @@
         $().ready(function(){
            var goodsType = $("#goodsType").val();
            var jjcount = $("#jjcount").val();
+           var jjpercen = $("#jjpercen").val();
            var jjMoney = $("#jjMoney").val();
+           var zjcount = $("#zjcount").val();
+           var zjpercen = $("#zjpercen").val();
+           var zjMoney = $("#zpMoney").val();
+           var zpcount = $("#zpcount").val();
+           var zppercen = $("#zppercen").val();
+           var zpMoney = $("#zpMoney").val();
            var jpcount = $("#jpcount").val();
+           var jppercen = $("#jppercen").val();
            var jpMoney = $("#jpMoney").val();
            var pjcount = $("#pjcount").val();
+           var pjpercen = $("#pjpercen").val();
            var pjMoney = $("#pjMoney").val();
            var yxcount = $("#yxcount").val();
+           var yxpercen = $("#yxpercen").val();
            var yxMoney = $("#yxMoney").val();
            var hlycount = $("#hlycount").val();
+           var hlypercen = $("#hlypercen").val();
            var hlyMoney = $("#hlyMoney").val();
            var sgcount = $("#sgcount").val();
+           var sgpercen = $("#sgpercen").val();
            var sgMoney = $("#sgMoney").val();
            var totalCount = $("#totalCount").val();
            var totalMoney = $("#totalMoney").val();
@@ -133,32 +157,42 @@
                html += "<td class='cBlue'>镜架</td>";
                html += "<td>"+jjcount+"</td>";
                html += "<td>"+jjMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+jjpercen+"</td>";
+               html += "</tr>";
+               html += "<tr><td class='cBlue'>自架</td>";
+               html += "<td>"+zjcount+"</td>";
+               html += "<td>"+zjMoney+"</td>";
+               html += "<td>"+zjpercen+"</td>";
+               html += "</tr>";
+               html += "<tr><td class='cBlue'>自片</td>";
+               html += "<td>"+zpcount+"</td>";
+               html += "<td>"+zpMoney+"</td>";
+               html += "<td>"+zppercen+"</td>";
                html += "</tr>";
                html += "<tr><td class='cBlue'>镜片</td>";
                html += "<td>"+jpcount+"</td>";
                html += "<td>"+jpMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+jppercen+"</td>";
                html += "</tr>";
                html += "<tr><td class='cBlue'>配件</td>";
                html += "<td>"+pjcount+"</td>";
                html += "<td>"+pjMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+pjpercen+"</td>";
                html += "</tr>";
                html += "<tr><td class='cBlue'>隐形</td>";
                html += "<td>"+yxcount+"</td>";
                html += "<td>"+yxMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+yxpercen+"</td>";
                html += "</tr>";
                html += "<tr><td class='cBlue'>护理液</td>";
                html += "<td>"+hlycount+"</td>";
                html += "<td>"+hlyMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+hlypercen+"</td>";
                html += "</tr>";
                html += "<tr><td class='cBlue'>视光</td>";
                html += "<td>"+sgcount+"</td>";
                html += "<td>"+sgMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+sgpercen+"</td>";
                html += "</tr>";
                html += "<tr class='tfoot'><td>合计:</td>";
                html += "<td>"+totalCount+"</td>";
@@ -176,7 +210,7 @@
                html += "<td class='cBlue'>镜架</td>";
                html += "<td>"+jjcount+"</td>";
                html += "<td>"+jjMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+jjpercen+"</td>";
                html += "</tr>";
                html += "<tr class='tfoot'><td>合计:</td>";
                html += "<td>"+totalCount+"</td>";
@@ -194,7 +228,7 @@
                html += "<td class='cBlue'>配件</td>";
                html += "<td>"+pjcount+"</td>";
                html += "<td>"+pjMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+pjpercen+"</td>";
                html += "</tr>";
                html += "<tr class='tfoot'><td>合计:</td>";
                html += "<td>"+totalCount+"</td>";
@@ -212,7 +246,7 @@
                html += "<td class='cBlue'>镜片</td>";
                html += "<td>"+jpcount+"</td>";
                html += "<td>"+jpMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+jppercen+"</td>";
                html += "</tr>";
                html += "<tr class='tfoot'><td>合计:</td>";
                html += "<td>"+totalCount+"</td>";
@@ -230,7 +264,7 @@
                html += "<td class='cBlue'>隐形</td>";
                html += "<td>"+yxcount+"</td>";
                html += "<td>"+yxMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+yxpercen+"</td>";
                html += "</tr>";
                html += "<tr class='tfoot'><td>合计:</td>";
                html += "<td>"+totalCount+"</td>";
@@ -248,7 +282,7 @@
                html += "<td class='cBlue'>护理液</td>";
                html += "<td>"+hlycount+"</td>";
                html += "<td>"+hlyMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+hlypercen+"</td>";
                html += "</tr>";
                html += "<tr class='tfoot'><td>合计:</td>";
                html += "<td>"+totalCount+"</td>";
@@ -266,7 +300,43 @@
                html += "<td class='cBlue'>视光</td>";
                html += "<td>"+sgcount+"</td>";
                html += "<td>"+sgMoney+"</td>";
-               html += "<td>14.35%</td>";
+               html += "<td>"+sgpercen+"</td>";
+               html += "</tr>";
+               html += "<tr class='tfoot'><td>合计:</td>";
+               html += "<td>"+totalCount+"</td>";
+               html += "<td>"+totalMoney+"</td>";
+               html += "<td> </td>";
+               html += "</tr>";
+               html += "<tr><td>附加费用</td>";
+               html += "<td>"+(date+"至今+")+"</td>";
+               html += "<td>"+addMoney+"</td>";
+               html += "<td></td>";
+               html += "</tr>";
+               $("#goodId").append(html);
+		   } else if ('自架' == goodsType){
+               html = "<tr>";
+               html += "<td class='cBlue'>自架</td>";
+               html += "<td>"+zjcount+"</td>";
+               html += "<td>"+zjMoney+"</td>";
+               html += "<td>"+zjpercen+"</td>";
+               html += "</tr>";
+               html += "<tr class='tfoot'><td>合计:</td>";
+               html += "<td>"+totalCount+"</td>";
+               html += "<td>"+totalMoney+"</td>";
+               html += "<td> </td>";
+               html += "</tr>";
+               html += "<tr><td>附加费用</td>";
+               html += "<td>"+(date+"至今+")+"</td>";
+               html += "<td>"+addMoney+"</td>";
+               html += "<td></td>";
+               html += "</tr>";
+               $("#goodId").append(html);
+		   } else if ('自片' == goodsType){
+               html = "<tr>";
+               html += "<td class='cBlue'>自片</td>";
+               html += "<td>"+zpcount+"</td>";
+               html += "<td>"+zpMoney+"</td>";
+               html += "<td>"+zppercen+"</td>";
                html += "</tr>";
                html += "<tr class='tfoot'><td>合计:</td>";
                html += "<td>"+totalCount+"</td>";

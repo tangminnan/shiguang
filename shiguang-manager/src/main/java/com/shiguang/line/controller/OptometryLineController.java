@@ -126,7 +126,7 @@ public class OptometryLineController {
             lineMemberDO.setId(lineMemberDOS.get(0).getId());
             lineMemberDOList.add(lineMemberDO);
             resultMap.put("lineMemberDOS",lineMemberDOList);
-            resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到"+lineMemberDOS.get(0).getConsultRoom()+"就诊");
+            resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到"+lineMemberDOS.get(0).getConsultRoom()+"做综合验光检查");
         } else {
             resultMap.put("lineMemberDOS",lineMemberDOList);
             resultMap.put("content","");

@@ -23,6 +23,7 @@ import com.shiguang.stock.service.StockService;
 import com.shiguang.storeSales.domain.Conclusion;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
+import io.swagger.models.auth.In;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -817,8 +818,8 @@ public class LogStatusController {
                     stockDOs.setGoodsNum(storeNum[a]);
                     StockDO stockDO = stockService.getProduceNum(stockDOs);
                     if (null != stockDO){
-                        Long countGoods = Long.parseLong(stockDO.getGoodsCount());
-                        Long count = countGoods - Long.valueOf(storeCount[i]);
+                        int countGoods = Integer.parseInt(stockDO.getGoodsCount());
+                        int count = countGoods - Integer.parseInt(storeCount[a]);
                         stockDO.setGoodsCount(String.valueOf(count));
                         stockService.updateGoodsCount(stockDO);
                     }

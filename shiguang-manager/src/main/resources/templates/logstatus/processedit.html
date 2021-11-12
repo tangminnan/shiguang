@@ -12,7 +12,7 @@
 	<!--保存-->
 <form class="form-horizontal m-t" id="signupForm" style="margin-top: 20px;text-align: center;">
 	<input id="saleNumber" name="saleNumber" type="hidden" th:value="${saleNumber}">
-	员工账号:<input type="text" id="processName" name="processName">
+	员工账号:<input type="text" id="processName" name="processName" onkeydown ="if(event.keyCode==13){event.keyCode=0;return false}">
 	<div class="form-group">
 		<div class="col-sm-8 col-sm-offset-3">
 			<button style="font-size: 20px;margin-top:35px;background-color: #358afd;width: 10%;color:white;" type="submit" >保存</button>

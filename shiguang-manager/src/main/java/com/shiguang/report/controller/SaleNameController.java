@@ -57,6 +57,8 @@ public class SaleNameController {
                 double jjpjMoney=0.00;
                 int zjcount=0;
                 double zjMoney = 0.00;
+                int zpcount=0;
+                double zpMoney = 0.00;
                 int yxcount=0;
                 double yxMoney=0.00;
                 int tyjcount= 0;
@@ -73,56 +75,82 @@ public class SaleNameController {
                 double primMoney=0.00;
                 double amountMoney=0.00;
                 for (SalesDO salesDOs : salesDOList){
-                    String[] storeDescribe = salesDOs.getStoreDescribe().split(",");
-                    String[] storeCount = salesDOs.getStoreCount().split(",");
-                    String[] storeUnit = salesDOs.getStoreUnit().split(",");
-                    String[] classType = salesDOs.getClasstype().split(",");
+                    String[] storeDescribe = null;
+                    String[] storeCount = null;
+                    String[] storeUnit = null;
+                    String[] classType = null;
+                    if (null != salesDOs.getStoreDescribe()){
+                        storeDescribe = salesDOs.getStoreDescribe().split(",");
+                        storeCount = salesDOs.getStoreCount().split(",");
+                        storeUnit = salesDOs.getStoreUnit().split(",");
+                        classType = salesDOs.getClasstype().split(",");
+                    }
                     if (salesDO.getSaleName().equals(salesDOs.getSaleName())){
-                        for (int i=0;i<storeDescribe.length;i++){
-                            if ("镜架".equals(storeDescribe[i])){
-                                jjcount = jjcount + Integer.parseInt(storeCount[i]);
-                                jjMoney = jjMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("镜片".equals(storeDescribe[i])){
-                                if ("1".equals(classType)){
-                                    jpcpcount = jpcpcount + Integer.parseInt(storeCount[i]);
-                                    jpcpMoney = jpcpMoney + Double.valueOf(storeUnit[i]);
-                                } else if ("2".equals(classType)){
-                                    jpdzcount = jpdzcount + Integer.parseInt(storeCount[i]);
-                                    jpdzMoney = jpdzMoney + Double.valueOf(storeUnit[i]);
+                        if (null != storeDescribe){
+                            for (int i=0;i<storeDescribe.length;i++){
+                                if ("镜架".equals(storeDescribe[i])){
+                                    jjcount = jjcount + Integer.parseInt(storeCount[i]);
+                                    jjMoney = jjMoney + Double.valueOf(storeUnit[i]);
+                                } else if ("镜片".equals(storeDescribe[i])){
+                                    if ("1".equals(classType)){
+                                        jpcpcount = jpcpcount + Integer.parseInt(storeCount[i]);
+                                        jpcpMoney = jpcpMoney + Double.valueOf(storeUnit[i]);
+                                    } else if ("2".equals(classType)){
+                                        jpdzcount = jpdzcount + Integer.parseInt(storeCount[i]);
+                                        jpdzMoney = jpdzMoney + Double.valueOf(storeUnit[i]);
+                                    }
+                                } else if ("配件".equals(storeDescribe[i])){
+                                    pjcount = pjcount + Integer.parseInt(storeCount[i]);
+                                    pjMoney = pjMoney + Double.valueOf(storeUnit[i]);
+                                } else if ("镜架配件".equals(storeDescribe[i])){
+                                    jjpjcount = jjpjcount + Integer.parseInt(storeCount[i]);
+                                    jjpjMoney = jjpjMoney + Double.valueOf(storeUnit[i]);
+                                } else if ("隐形".equals(storeDescribe[i])){
+                                    yxcount = yxcount + Integer.parseInt(storeCount[i]);
+                                    yxMoney = yxMoney + Double.valueOf(storeUnit[i]);
+                                } else if ("护理液".equals(storeDescribe[i])){
+                                    hlycount = hlycount + Integer.parseInt(storeCount[i]);
+                                    hlyMoney = hlyMoney + Double.valueOf(storeUnit[i]);
+                                } else if ("视光".equals(storeDescribe[i])){
+                                    sgcount = sgcount + Integer.parseInt(storeCount[i]);
+                                    sgMoney = sgMoney + Double.valueOf(storeUnit[i]);
+                                } else if ("自架".equals(storeDescribe[i])){
+                                    zjcount = zjcount + Integer.parseInt(storeCount[i]);
+                                    zjMoney = 0.00;
+                                } else if ("自片".equals(storeDescribe[i])){
+                                    zpcount = zpcount + Integer.parseInt(storeCount[i]);
+                                    zpMoney = 0.00;
+                                } else if ("太阳镜".equals(storeDescribe[i])){
+                                    tyjcount = tyjcount + Integer.parseInt(storeCount[i]);
+                                    tyjMoney = tyjMoney + Double.valueOf(storeUnit[i]);
+                                } else if ("老花镜".equals(storeDescribe[i])){
+                                    lhjcount = lhjcount + Integer.parseInt(storeCount[i]);
+                                    lhjMoney = lhjMoney + Double.valueOf(storeUnit[i]);
+                                } else if ("耗材".equals(storeDescribe[i])){
+                                    hccount = hccount + Integer.parseInt(storeCount[i]);
+                                    hcMoney = hcMoney + Double.valueOf(storeUnit[i]);
                                 }
-                            } else if ("配件".equals(storeDescribe[i])){
-                                pjcount = pjcount + Integer.parseInt(storeCount[i]);
-                                pjMoney = pjMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("镜架配件".equals(storeDescribe[i])){
-                                jjpjcount = jjpjcount + Integer.parseInt(storeCount[i]);
-                                jjpjMoney = jjpjMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("隐形".equals(storeDescribe[i])){
-                                yxcount = yxcount + Integer.parseInt(storeCount[i]);
-                                yxMoney = yxMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("护理液".equals(storeDescribe[i])){
-                                hlycount = hlycount + Integer.parseInt(storeCount[i]);
-                                hlyMoney = hlyMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("视光".equals(storeDescribe[i])){
-                                sgcount = sgcount + Integer.parseInt(storeCount[i]);
-                                sgMoney = sgMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("自架".equals(storeDescribe[i])){
-                                zjcount = zjcount + Integer.parseInt(storeCount[i]);
-                                zjMoney = 0.00;
-                            } else if ("太阳镜".equals(storeDescribe[i])){
-                                tyjcount = tyjcount + Integer.parseInt(storeCount[i]);
-                                tyjMoney = tyjMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("老花镜".equals(storeDescribe[i])){
-                                lhjcount = lhjcount + Integer.parseInt(storeCount[i]);
-                                lhjMoney = lhjMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("耗材".equals(storeDescribe[i])){
-                                hccount = hccount + Integer.parseInt(storeCount[i]);
-                                hcMoney = hcMoney + Double.valueOf(storeUnit[i]);
+                                if (null != salesDOs.getAdditionalPrice()){
+                                    try {
+                                        String[] addPrice = salesDOs.getAdditionalPrice().split(",");
+                                        if (addPrice.length > 0){
+                                            addMoney = addMoney + Double.valueOf(addPrice[i]);
+                                        } else {
+                                            addMoney = 0.00;
+                                        }
+                                    }catch (ArrayIndexOutOfBoundsException e) {
+                                        addMoney = 0.00;
+                                    }
+                                }
                             }
+                        } else {
                             if (null != salesDOs.getAdditionalPrice()){
                                 try {
                                     String[] addPrice = salesDOs.getAdditionalPrice().split(",");
                                     if (addPrice.length > 0){
-                                        addMoney = addMoney + Double.valueOf(addPrice[i]);
+                                        for (int t=0;t<addPrice.length;t++){
+                                            addMoney = addMoney + Double.valueOf(addPrice[t]);
+                                        }
                                     } else {
                                         addMoney = 0.00;
                                     }
@@ -156,6 +184,8 @@ public class SaleNameController {
                 map.put("sgMoney",sgMoney);
                 map.put("zjcount",zjcount);
                 map.put("zjMoney",zjMoney);
+                map.put("zpcount",zpcount);
+                map.put("zpMoney",zpMoney);
                 map.put("tyjcount",tyjcount);
                 map.put("tyjMoney",tyjMoney);
                 map.put("lhjcount",lhjcount);
@@ -182,6 +212,8 @@ public class SaleNameController {
         double totaljjpjMoney=0.00;
         int totalzjcount=0;
         double totalzjMoney = 0.00;
+        int totalzpcount=0;
+        double totalzpMoney = 0.00;
         int totalyxcount=0;
         double totalyxMoney=0.00;
         int totaltyjcount= 0;
@@ -210,6 +242,8 @@ public class SaleNameController {
             totalpjMoney = totalpjMoney + Double.valueOf(maps.get("pjMoney").toString());
             totalzjcount = totalzjcount + Integer.parseInt(maps.get("zjcount").toString());
             totalzjMoney = totalzjMoney + Double.valueOf(maps.get("zjMoney").toString());
+            totalzpcount = totalzpcount + Integer.parseInt(maps.get("zpcount").toString());
+            totalzpMoney = totalzpMoney + Double.valueOf(maps.get("zpMoney").toString());
             totalyxcount = totalyxcount + Integer.parseInt(maps.get("yxcount").toString());
             totalyxMoney = totalyxMoney + Double.valueOf(maps.get("yxMoney").toString());
             totaltyjcount = totaltyjcount + Integer.parseInt(maps.get("tyjcount").toString());
@@ -234,6 +268,8 @@ public class SaleNameController {
         model.addAttribute("totaljpdzMoney",totaljpdzMoney);
         model.addAttribute("totalzjcount",totalzjcount);
         model.addAttribute("totalzjMoney",totalzjMoney);
+        model.addAttribute("totalzpcount",totalzpcount);
+        model.addAttribute("totalzpMoney",totalzpMoney);
         model.addAttribute("totaltyjcount",totaltyjcount);
         model.addAttribute("totaltyjMoney",totaltyjMoney);
         model.addAttribute("totaljjpjcount",totaljjpjcount);
