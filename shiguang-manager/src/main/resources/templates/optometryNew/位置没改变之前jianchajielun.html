@@ -410,13 +410,12 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <input id="sphod" th:value="${tryresultsDO.sphereRighttry}" hidden/>
-                <td><input  id="kjjySphod"  name="kjjySphod" type="text"onblur="zhengfu(this)"
+                <td><input th:value="${tryresultsDO.sphereRighttry}" name="kjjySphod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjjyCylod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialRighttry}" id="kjjyAxialod" name="kjjyAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
-                <td><input th:value="${tryresultsDO.prismRighttry}" id="kjjyPrismod" name="kjjyPrismod" class="short" type="text"/> △
+                <td><input th:value="${tryresultsDO.prismRighttry}" name="kjjyPrismod" class="short" type="text"/> △
                 </td>
                 <td>
                     <select id="kjjyJdod" name="kjjyJdod" th:value="${tryresultsDO.jdrTry}">
@@ -435,13 +434,12 @@
             </tr>
             <tr>
                 <td>OS</td>
-                <input id="sphos" th:value="${tryresultsDO.sphereLefttry}" hidden/>
-                <td><input  id="kjjySphos" name="kjjySphos" type="text"onblur="zhengfu(this)"
+                <td><input th:value="${tryresultsDO.sphereLefttry}"  name="kjjySphos" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}"name="kjjyCylos" type="text"onblur="zhengfu(this)"
                              oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialLefttry}"  id="kjjyAxialos" name="kjjyAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
-                <td><input th:value="${tryresultsDO.prismLefttry}"  id="kjjyPrismos" name="kjjyPrismos" class="short" type="text"/> △</td>
+                <td><input th:value="${tryresultsDO.prismLefttry}"   name="kjjyPrismos" class="short" type="text"/> △</td>
                 <td>
                     <select id="kjjyJdos" name="kjjyJdos" th:value="${tryresultsDO.jdlTry}" >
                         <option value=""> </option>
@@ -757,7 +755,7 @@
                 <td>基底</td>
                 <td>中用瞳距(mm)</td>
                 <td>瞳高(mm)</td>
-                <td>中用VA</td>
+                <td>近用VA</td>
             </tr>
             <tr>
                 <td>OD</td>
@@ -780,8 +778,7 @@
                 </td>
                 <td><input name="zyZytjod" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightRighttry}" name="zyTgod" type="text"/></td>
-                <!--<td><input th:value="${tryresultsDO.dvaRighttry}" name="zyVaod" type="text"/></td>-->
-                <td><input name="zyVaod" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaRighttry}" name="zyVaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
@@ -804,8 +801,7 @@
                 </td>
                 <td><input name="zyZytjos" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightLefttry}" name="zyTgos" type="text"/></td>
-                <!--<td><input th:value="${tryresultsDO.dvaLefttry}" name="zyVaos" type="text"/></td>-->
-                <td><input name="zyVaos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.dvaLefttry}" name="zyVaos" type="text"/></td>
             </tr>
             <tr>
                 <td rowspan="2" colspan="1">建议镜片材质:</td>
@@ -894,8 +890,7 @@
                 <td>轴向</td>
                 <td>三棱镜</td>
                 <td>基底</td>
-                <td>远用瞳距(mm)</td>
-                <td>近用瞳距(mm)</td>
+                <td>中用瞳距(mm)</td>
                 <td>瞳高(mm)</td>
                 <td>远用VA</td>
                 <td>近用VA</td>
@@ -919,9 +914,8 @@
                     <input id="sjxlJdods" name="sjxlJdods" th:value="${tryresultsDO.jdrTry}"
                            type="hidden">
                 </td>
-                <td><input th:value="${tryresultsDO.yuanRrty}"      name="sjxlYytjod" type="text"/></td>
-                <td><input th:value="${tryresultsDO.nearRighttry}"  name="sjxlJytjod" type="text"/></td>
-                <td><input  th:value="${tryresultsDO.heightRighttry}"name="sjxlTgod" type="text"/></td>
+                <td><input name="sjxlYytjod" type="text"/></td>
+                <td><input  th:value="${tryresultsDO.heightRighttry}"name="sjxlJytjod" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.dvaRighttry}"  name="sjxlYyvaod" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.nvaRighttry}"  name="sjxlJyvaod" type="text"/></td>
             </tr>
@@ -944,9 +938,8 @@
                     <input id="sjxlJdoss" name="sjxlJdoss" th:value="${tryresultsDO.jdlTry}"
                            type="hidden">
                 </td>
-                <td><input th:value="${tryresultsDO.yuanLrty}"      name="sjxlYytjos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.nearLefttry}"   name="sjxlJytjos" type="text"/></td>
-                <td><input th:value="${tryresultsDO.heightLefttry}"  name="sjxlTgos" type="text"/></td>
+                <td><input name="sjxlYytjos" type="text"/></td>
+                <td><input th:value="${tryresultsDO.heightLefttry}"  name="sjxlJytjos" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.dvaLefttry}"  name="sjxlYyvaos" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.nvaLefttry}"  name="sjxlJyvaos" type="text"/></td>
             </tr>
@@ -1297,10 +1290,6 @@
             </select>
             <span>复诊时间: </span>
             <input id="followTime" name="followTime" type="text"/>
-            <!--<input id="followTimes" name="followTime" title="三个月"  onblur="getSixMonth()" type="text"/>-->
-            <!--<input id="followTimes" name="followTime"   placeholder="三个月" onclick="getSixMonth()" type="button"/>-->
-            <!--<input id="followTimes" name="followTime"  type="button" value="三个月" onclick="getSixMonth()"/>-->
-
             <span>复诊类型：</span>
             <select name="visitType">
                 <option></option>
@@ -1342,25 +1331,6 @@
         $("#sjxlJdod").find("[value=" + sjxlJdods + "]").attr("selected", true);
         var sjxlJdoss = $("input[name='sjxlJdoss']").val();
         $("#sjxlJdos").find("[value=" + sjxlJdoss + "]").attr("selected", true);
-
-        var sphod=parseFloat($('#sphod').val());
-        var kjjyPrismod=parseFloat($('#kjjyPrismod').val());
-        var sphos=parseFloat($('#sphos').val());
-        var kjjyPrismos=parseFloat($('#kjjyPrismos').val());
-        // var sphaddod=sphod.toFixed(2)+kjjyPrismod.toFixed(2);
-        // var sphaddos=sphos.toFixed(2)+kjjyPrismos.toFixed(2);
-
-        var sphaddod=(sphod+kjjyPrismod).toFixed(2);
-        var sphaddos=(sphos+kjjyPrismos).toFixed(2);
-        if (sphaddod>0){
-            sphaddod="+"+sphaddod
-        }
-        if (sphaddos>0){
-            sphaddos="+"+sphaddos
-        }
-        $('#kjjySphod').val(sphaddod);
-        $('#kjjySphos').val(sphaddos);
-        getSixMonth();
     });
 
 
@@ -1518,27 +1488,6 @@
         elem: '#followTime',
         type: 'date'
     });
-
-    function getSixMonth() {
-        var resultDate,year,month,date,shi,fen,miao;
-        var currDate = new Date();
-        year=currDate.getFullYear();
-        month=currDate.getMonth()+1;
-        date=currDate.getDate();
-        shi=currDate.getHours();
-        fen=currDate.getMinutes();
-        miao=currDate.getSeconds();
-        if ((month+3)>12){
-            month=month-12+3;
-            year=year+1;
-        } else {
-            month=month+3;
-        }
-        resultDate=year+'-'+month+'-'+date+'  '+shi+':'+fen+':'+miao;
-
-        $('#followTime').val(resultDate);
-        return resultDate;
-    }
 
     //正负+—
     function zhengfu(e) {//正负用onblur事件触发

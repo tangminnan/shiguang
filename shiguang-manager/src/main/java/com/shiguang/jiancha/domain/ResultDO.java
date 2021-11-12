@@ -3692,6 +3692,8 @@ public class ResultDO implements Serializable {
     private String sjxlJytjod;
     //近用瞳距(mm)(OS)
     private String sjxlJytjos;
+    private String sjxlTgod;
+    private String sjxlTgos;
     //远用va(OD)
     private String sjxlYyvaod;
     //远用va(OS)
@@ -3959,6 +3961,22 @@ public class ResultDO implements Serializable {
         return sjxlJytjos;
     }
 
+    public String getSjxlTgod() {
+        return sjxlTgod;
+    }
+
+    public void setSjxlTgod(String sjxlTgod) {
+        this.sjxlTgod = sjxlTgod;
+    }
+
+    public String getSjxlTgos() {
+        return sjxlTgos;
+    }
+
+    public void setSjxlTgos(String sjxlTgos) {
+        this.sjxlTgos = sjxlTgos;
+    }
+
     /**
      * 设置：远用va(OD)
      */
@@ -3973,6 +3991,7 @@ public class ResultDO implements Serializable {
         return sjxlYyvaod;
     }
 
+
     /**
      * 设置：远用va(OS)
      */
@@ -3986,6 +4005,7 @@ public class ResultDO implements Serializable {
     public String getSjxlYyvaos() {
         return sjxlYyvaos;
     }
+
 
     /**
      * 设置：近用va(OD)

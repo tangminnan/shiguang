@@ -53,6 +53,9 @@ public class SjxlDO implements Serializable {
     private String sjxlJytjod;
     //近用瞳距(mm)(OS)
     private String sjxlJytjos;
+    //瞳高
+    private String sjxlTgod;
+    private String sjxlTgos;
     //远用va(OD)
     private String sjxlYyvaod;
     //远用va(OS)
@@ -358,6 +361,22 @@ public class SjxlDO implements Serializable {
      */
     public void setSjxlYyvaod(String sjxlYyvaod) {
         this.sjxlYyvaod = sjxlYyvaod;
+    }
+
+    public String getSjxlTgod() {
+        return sjxlTgod;
+    }
+
+    public void setSjxlTgod(String sjxlTgod) {
+        this.sjxlTgod = sjxlTgod;
+    }
+
+    public String getSjxlTgos() {
+        return sjxlTgos;
+    }
+
+    public void setSjxlTgos(String sjxlTgos) {
+        this.sjxlTgos = sjxlTgos;
     }
 
     /**
