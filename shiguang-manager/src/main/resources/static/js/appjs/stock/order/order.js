@@ -62,6 +62,10 @@ function load() {
                         title: '制造商'
                     },
                     {
+                        field: 'gdname',
+                        title: '类型'
+                    },
+                    {
                         field: 'zhidanPeople',
                         title: '入库人'
                     },
@@ -73,10 +77,7 @@ function load() {
                         field: 'danjuDay',
                         title: '制单日期'
                     },
-                    // {
-                    //     field: 'goodsType',
-                    //     title: '类型'
-                    // },
+
                     // {
                     //     field: '',
                     //     title: '审核人'
@@ -89,11 +90,14 @@ function load() {
                         field: 'danjuNumber',
                         align: 'center',
                         formatter: function (value, row, index) {
+                            // alert(row.danjuNumber)
                             if (row.status == "1") {
                                 var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
                                     + row.id + '\')">详情</span> ';
                                 var f = '<span class="btn btn-success btn-sm" href="#" title="收货"  mce_href="#"  onclick="userNum(\''
                                     + row.danjuNumber + '\')">收货</span> ';
+                                var r= '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#"  onclick="remove(\''
+                                    + row.id + '\')">删除</span> ';
                                 var n = '';
                             } else if (row.status == "0") {
                                 var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
@@ -101,17 +105,51 @@ function load() {
                                 var f = '';
                                 var n = '<span class="btn btn-warning btn-sm"  href="#" title="条码"  mce_href="#" onclick="code(\''
                                     + row.goodsType+" ','"+ row.danjuNumber + '\')">条码</span> ';
+                                var r ='';
                             }
-                            return a + f + n ;
+                            return a + f + n + r ;
                         }
                     }
                 ]
+
+
             });
 }
 
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
 }
+
+
+
+
+
+
+function remove(id) {
+    layer.confirm('确定要删除选中的记录？', {
+        btn : [ '确定', '取消' ]
+    }, function() {
+        $.ajax({
+            url : "/stock/stock/remove",
+            type : "post",
+            data : {
+                'id' : id
+            },
+            success : function(r) {
+                if (r.code==0) {
+                    layer.msg(r.msg);
+                    reLoad();
+                }else{
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    })
+}
+
+
+
+
 
 
 

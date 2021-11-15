@@ -18,7 +18,7 @@
 
     <select id="list" resultType="com.shiguang.stock.domain.OrderDO">
         select
-        s.`id`,s.`goods_num`,s.`goods_code`,s.`goods_name`,s.`goods_count`,s.`goods_type`,s.`mfrsid`,s.`brandname`,s.`retail_price`,
+        s.`id`,s.`goods_num`,s.`goods_code`,s.`goods_name`,s.`goods_count`,s.`goods_type`,g.`goodsname` as gdname, s.`mfrsid`,s.`brandname`,s.`retail_price`,
         s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`,s.`position_id`, po.`position_name`, s.`create_time`,
         s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
         s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`,s.`classtype`,
@@ -27,6 +27,7 @@
         join c_mfrs m on s.mfrsid=m.mfrsnum
         join c_position po on s.position_id=po.position_id
         join department d on po.depart_number= d.depart_number
+        join c_goods g on s.goods_type=g.goodsid
         <where>
             <if test="id != null and id != ''">and s.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
@@ -222,9 +223,9 @@
         </foreach>
     </delete>
     <select id="getCode" resultType="com.shiguang.stock.domain.OrderDO">
-		select o.goods_name,o.goods_code,o.goods_count,o.factory,o.retail_price,p.produc_factorycolor
+		select o.goods_name,o.goods_code,o.goods_count,o.factory,o.retail_price,p.produc_factorycolor,p.view_good_name
         from stock_order o
-        left join  aa_produca p on o.goodsxinxiid=p.id
+        left join  aa_produca p on o.goods_num=p.produc_num
         where o.danju_number = #{danjuNumber}
 	</select>
     <update id="updateStatus" parameterType="com.shiguang.stock.domain.OrderDO">
@@ -321,6 +322,13 @@
     <select id="orderdingdan" resultType="com.shiguang.stock.domain.OrderDO">
         select * FROM stock_order
         <where>
+            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+        </where>
+    </select>
+    <select id="haveOrderNum" resultType="com.shiguang.stock.domain.OrderDO">
+        select * FROM stock_order
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
             <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
         </where>
     </select>

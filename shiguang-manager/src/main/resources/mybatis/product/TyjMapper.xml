@@ -6,7 +6,7 @@
     <select id="get" resultType="com.shiguang.product.domain.TyjDO">
 		select t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`brandnum`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
 		t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
-		t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`xsstate`,t.`state`,t.`classtype`
+		t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`xsstate`,t.`state`,t.`classtype`,t.`view_good_name`
 		from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsnum left join c_brand b on t.brandnum=b.brandnum  and t.mfrsid=b.mfrsid
         left join  c_unit u on t.unitid= u.unitid
 		where t.id = #{value}
@@ -16,7 +16,7 @@
         select
         t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`brandnum`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
         t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
-        t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`xsstate`,t.`state`,t.`classtype`
+        t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`xsstate`,t.`state`,t.`classtype`,t.`view_good_name`
         from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsnum left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
         left join c_unit u on t.unitid= u.unitid
         <where>
@@ -43,6 +43,7 @@
             <if test="size != null and size != ''">and t.size = #{size}</if>
             <if test="xsstate != null and xsstate != ''">and t.xsstate = #{xsstate}</if>
             <if test="styleId != null and styleId != ''">and t.style_id = #{styleId}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and t.view_good_name = #{viewGoodName}</if>
             and  t.state= 1
         </where>
 
@@ -86,6 +87,7 @@
             <if test="size != null and size != ''">and t.size = #{size}</if>
             <if test="xsstate != null and xsstate != ''">and t.xsstate = #{xsstate}</if>
             <if test="styleId != null and styleId != ''">and t.style_id = #{styleId}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and t.view_good_name = #{viewGoodName}</if>
             and  t.state= 1
         </where>
     </select>
@@ -117,7 +119,8 @@
 			`retail_price`,
 			`xsstate`,
 			`state`,
-			`classtype`
+			`classtype`,
+			`view_good_name`
 		)
 		values
 		(
@@ -145,7 +148,8 @@
 			#{retailPrice},
 			#{xsstate},
 			#{state},
-			#{classtype}
+			#{classtype},
+			#{viewGoodName}
 		)
 	</insert>
 
@@ -176,7 +180,8 @@
             <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
             <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state},</if>
-            <if test="classtype != null">`classtype` = #{classtype}</if>
+            <if test="classtype != null">`classtype` = #{classtype},</if>
+            <if test="viewGoodName != null">`view_good_name` = #{viewGoodName}</if>
         </set>
         where id = #{id}
     </update>
@@ -190,7 +195,7 @@
                 select
         t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`brandnum`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
         t.`produc_color`,t.`batchid`,t.`size`,t.`function`,t.`color`,t.`style_id`,t.`year`,t.`tax`,t.`tax_price`,t.`trade_price`,
-        t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`xsstate`,t.`state`,t.`classtype`
+        t.`transfer_price`,t.`retail_price`, m.`mfrsname`,b.`brandname`,u.`unitname`,t.`xsstate`,t.`state`,t.`classtype`,t.`view_good_name`
         from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsnum left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
         left join c_unit u on t.unitid= u.unitid
         where t.`produc_num` = #{value}

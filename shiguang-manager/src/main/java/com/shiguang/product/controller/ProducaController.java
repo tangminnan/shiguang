@@ -230,7 +230,7 @@ ProducaController {
     //制造商——商品类别菜单下来选择
     @ResponseBody
     @RequestMapping(value = "/choice")
-    List<BrandDO> choice(Integer mfrsid, String goodsid, Model model) {
+    List<BrandDO> choice(String mfrsid, String goodsid, Model model) {
         Map<String, Object> map = new HashMap();
         map.put("mfrsid", mfrsid);
         map.put("goodsid", goodsid);

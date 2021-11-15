@@ -4,6 +4,7 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.StringUtils;
+import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.mfrs.domain.RefractivityDO;
 import com.shiguang.mfrs.domain.UnitDO;
@@ -169,14 +170,15 @@ public class PartsController {
         partsService.batchRemove(ids);
         return R.ok();
     }
-//
+
 //    //制造商——商品类别菜单下来选择
 //    @ResponseBody
 //    @RequestMapping(value = "/choice")
-//    List<BrandDO> choice(Integer mfrsid,String goodsid, Model model) {
+//    List<BrandDO> choice(String mfrsid, String goodsid, Model model) {
 //        Map<String, Object> map = new HashMap();
 //        map.put("mfrsid", mfrsid);
 //        map.put("goodsid", goodsid);
+//        map.put("xsstate","0");
 //        List<BrandDO> brandDOList = producaService.choice(map);
 //        model.addAttribute("brandDOList", brandDOList);
 //        return brandDOList;

@@ -7,7 +7,7 @@
 		select m.`mfrsname`,b.`brandname`,u.`unitname`,
 		h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
 		h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
-		h.`xsstate`,h.`state`,h.`classtype`
+		h.`xsstate`,h.`state`,h.`classtype`,h.`view_good_name`
 		from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
         left join  c_unit u on h.unitid= u.unitid
 		where h.id = #{value}
@@ -17,7 +17,7 @@
         select m.`mfrsname`,b.`brandname`,u.`unitname`,
         h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
         h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
-        h.`xsstate`,h.`state`,h.`classtype`
+        h.`xsstate`,h.`state`,h.`classtype`,h.`view_good_name`
         from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
         left join c_unit u on h.unitid= u.unitid
         <where>
@@ -44,6 +44,7 @@
                 and h.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and h.view_good_name = #{viewGoodName}</if>
             and  h.state= 1
         </where>
 
@@ -86,6 +87,7 @@
                 and h.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and h.view_good_name = #{viewGoodName}</if>
             and  h.state= 1
         </where>
 
@@ -96,7 +98,8 @@
         select
         h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,b.`brandname`,
         h.`factory`,h.`proid`,h.`unitid`,u.unitname,h.`product_type`,h.`main_capacity`,h.`second_capacity`,h.`produc_factory`,
-        h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,h.`xsstate`,h.`state`,h.`classtype`
+        h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,h.`xsstate`,h.`state`,
+        h.`classtype`,h.`view_good_name`
         FROM aa_hly h LEFT JOIN c_brand b ON h.brandnum = b.brandnum AND h.`mfrsid`=b.`mfrsid` LEFT JOIN c_unit u ON h.unitid = u.unitid
         <where>
             <if test="id != null and id != ''">and h.id = #{id}</if>
@@ -122,6 +125,7 @@
             <if test="retailPrice != null and retailPrice != ''">and h.retail_price = #{retailPrice}</if>
             <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and h.classtype = #{classtype}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and h.view_good_name = #{viewGoodName}</if>
            and h.state = 1
         </where>
         <choose>
@@ -163,6 +167,7 @@
             <if test="retailPrice != null and retailPrice != ''">and h.retail_price = #{retailPrice}</if>
             <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and h.classtype = #{classtype}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and h.view_good_name = #{viewGoodName}</if>
             and h.state = 1
         </where>
     </select>
@@ -192,7 +197,8 @@
 			`retail_price`,
 			`xsstate`,
 			`state`,
-			`classtype`
+			`classtype`,
+			`view_good_name`
 		)
 		values
 		(
@@ -218,7 +224,8 @@
 			#{retailPrice},
 			#{xsstate},
 			#{state},
-			#{classtype}
+			#{classtype},
+			#{viewGoodName}
 		)
 	</insert>
 
@@ -247,7 +254,8 @@
             <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
             <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state},</if>
-            <if test="classtype != null">`classtype` = #{classtype}</if>
+            <if test="classtype != null">`classtype` = #{classtype},</if>
+            <if test="viewGoodName != null">`view_good_name` = #{viewGoodName}</if>
         </set>
         where id = #{id}
     </update>
@@ -268,14 +276,14 @@
                 select m.`mfrsname`,b.`brandname`,u.`unitname`,
         h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
         h.`second_capacity`,h.`produc_factory`,h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,
-        h.`xsstate`,h.`state`,h.`classtype`
+        h.`xsstate`,h.`state`,h.`classtype`,h`view_good_name`
         from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
         left join c_unit u on h.unitid= u.unitid
         where h.`produc_num` = #{value}
     </select>
 
     <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.HlyDO">
+    <select id="choice" resultType="com.shiguang.mfrs.domain.BrandDO">
 		select  brandid,brandnum ,brandname  from c_brand  where mfrsid=#{mfrsid} and goodsid=#{goodsid} group by brandid
 	</select>
     <!--删除状态修改-->

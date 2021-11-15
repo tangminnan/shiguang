@@ -136,6 +136,12 @@ public class TyjController {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum",producNum);
         List<TyjDO> haveNum=tyjService.haveNum(map);
+        String producName=tyj.getProducName();
+        String factory=tyj.getProducFactory();
+        String color=tyj.getProducColor();
+        String retailPrice=tyj.getRetailPrice();
+        tyj.setViewGoodName(producName);
+        tyj.setProducName(producName+"-型号:"+factory+"-颜色:"+color+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }

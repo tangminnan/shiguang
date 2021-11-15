@@ -55,7 +55,7 @@ public class JpcpServiceImpl implements JpcpService {
 
     //菜单联动显示
     @Override
-    public List<BrandDO> choice(Integer mfrsid) {
+    public List<BrandDO> choice(String mfrsid) {
         return jpcpDao.choice(mfrsid);
     }
 

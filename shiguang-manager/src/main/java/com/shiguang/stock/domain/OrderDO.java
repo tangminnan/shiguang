@@ -59,6 +59,7 @@ public class OrderDO implements Serializable {
     private String goodsCode;
     //商品名称
     private String goodsName;
+    private String viewGoodName;
     //数量
     private String goodsCount;
     //商品类别
@@ -345,6 +346,14 @@ public class OrderDO implements Serializable {
      */
     public String getGoodsName() {
         return goodsName;
+    }
+
+    public String getViewGoodName() {
+        return viewGoodName;
+    }
+
+    public void setViewGoodName(String viewGoodName) {
+        this.viewGoodName = viewGoodName;
     }
 
     /**

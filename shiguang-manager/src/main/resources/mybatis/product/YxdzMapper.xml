@@ -8,7 +8,8 @@
 		y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`factory`,y.`produc_factory`,y.`proid`,y.`unitid`,y.`sph_id`,
 		y.`span_id`,y.`cyl_id`,y.`sph_up`,y.`sph_down`,y.`sph_span`,y.`cyl_up`,y.`cyl_down`,y.`cyl_span`,y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,
 		y.`curvature_er`,y.`diameter_one`,y.`diameter_yi`,y.`contact_lens`,y.`cycle`,y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,
-		y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,y.`retail_price`,y.`xsstate`,y.`state`,y.`classtype`
+		y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,y.`retail_price`,
+		y.`xsstate`,y.`state`,y.`classtype`,y.`view_good_name`
 		from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsnum left join c_brand b on y.brandnum=b.brandnum  and y.mfrsid=b.mfrsid
         left join  c_unit u on y.unitid= u.unitid
 		where y.id = #{value}
@@ -19,7 +20,8 @@
         y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`factory`,y.`produc_factory`,y.`proid`,y.`unitid`,y.`sph_id`,
         y.`span_id`,y.`cyl_id`,y.`sph_up`,y.`sph_down`,y.`sph_span`,y.`cyl_up`,y.`cyl_down`,y.`cyl_span`,y.`curvature_one`,y.`curvature_yi`,y.`curvature_two`,
         y.`curvature_er`,y.`diameter_one`,y.`diameter_yi`,y.`contact_lens`,y.`cycle`,y.`usage_id`,y.`type_id`,y.`use_days`,y.`upday`,y.`downday`,y.`color`,y.`invisible_id`,
-        y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,y.`retail_price`,y.`xsstate`,y.`state`,y.`classtype`
+        y.`caizhi_id`,y.`combined_photometry`,y.`tax`,y.`tax_price`,y.`trade_price`,y.`transfer_price`,
+		y.`retail_price`,y.`xsstate`,y.`state`,y.`classtype`,y.`view_good_name`
         from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsnum left join c_brand b on y.brandnum=b.brandnum AND m.`mfrsid`=b.`mfrsid`
         left join c_unit u on y.unitid= u.unitid
         <where>
@@ -43,6 +45,7 @@
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="xsstate != null and xsstate != ''">and y.xsstate = #{xsstate}</if>
+			<if test="viewGoodName != null and viewGoodName != ''">and y.view_good_name = #{viewGoodName}</if>
             and y.state=1
         </where>
 		<choose>
@@ -83,6 +86,7 @@
 			<if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
 			<if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
 			<if test="xsstate != null and xsstate != ''">and y.xsstate = #{xsstate}</if>
+			<if test="viewGoodName != null and viewGoodName != ''">and y.view_good_name = #{viewGoodName}</if>
 			and y.state=1
 		</where>
     </select>
@@ -133,7 +137,8 @@
 			 `retail_price`,
 			`xsstate`,
 			`state`,
-			`classtype`
+			`classtype`,
+			`view_good_name`
 		)
 		values
 		(
@@ -180,7 +185,8 @@
 			#{retailPrice},
 			#{xsstate},
 			#{state},
-			#{classtype}
+			#{classtype},
+			#{viewGoodName}
 		)
 	</insert>
 
@@ -230,7 +236,8 @@
             <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
             <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state},</if>
-            <if test="classtype != null">`classtype` = #{classtype}</if>
+            <if test="classtype != null">`classtype` = #{classtype},</if>
+            <if test="viewGoodName != null">`view_good_name` = #{viewGoodName}</if>
         </set>
         where id = #{id}
     </update>
@@ -242,7 +249,8 @@
 	<!-- 根据商品代码查询商品信息 -->
 	<select id="getYxdzInfomation" resultType="com.shiguang.product.domain.YxdzDO">
 		        select m.`mfrsname`,b.`brandname`,u.`unitname`,y.`retail_price`,
-        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`factory`,y.`produc_factory`,y.`proid`,y.`unitid`
+        y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`factory`,
+        y.`produc_factory`,y.`proid`,y.`unitid`,y.`view_good_name`
         from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsnum left join c_brand b on y.brandnum=b.brandnum AND m.`mfrsid`=b.`mfrsid`
         left join c_unit u on y.unitid= u.unitid
         where y.`produc_num` = #{value}

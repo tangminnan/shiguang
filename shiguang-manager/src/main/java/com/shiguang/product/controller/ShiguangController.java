@@ -119,6 +119,12 @@ public class ShiguangController {
         String producNum = shiguang.getProducNum();
         Map<String, Object> map = new HashMap<>();
         map.put("producNum",producNum);
+
+        String producName=shiguang.getProducName();
+        String factory=shiguang.getProducFactory();
+        String retailPrice=shiguang.getRetailPrice();
+        shiguang.setViewGoodName(producName);
+        shiguang.setProducName(producName+"-型号:"+factory+"-标价:"+retailPrice);
         List<ShiguangDO> haveNum=shiguangService.haveNum(map);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");

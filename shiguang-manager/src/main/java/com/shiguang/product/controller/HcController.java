@@ -118,6 +118,12 @@ public class HcController {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum",producNum);
         List<HcDO> haveNum=hcService.haveNum(map);
+
+        String producName=hc.getProducName();
+        String factory=hc.getProducFactory();
+        String retailPrice=hc.getRetailPrice();
+        hc.setViewGoodName(producName);
+        hc.setProducName(producName+"-型号:"+factory+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }
@@ -151,7 +157,7 @@ public class HcController {
     //制造商——商品类别菜单下来选择
     @ResponseBody
     @RequestMapping(value = "/choice")
-    List<BrandDO> choice(Integer mfrsid, Model model) {
+    List<BrandDO> choice(String mfrsid, Model model) {
         List<BrandDO> brandDOList = hcService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;

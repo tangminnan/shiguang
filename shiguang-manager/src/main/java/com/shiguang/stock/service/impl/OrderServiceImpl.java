@@ -76,4 +76,9 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderDO> orderdingdan(Map<String, Object> map) {
 		return orderDao.orderdingdan(map);
 	}
+
+	@Override
+	public List<OrderDO> haveOrderNum(Map<String, Object> map) {
+		return orderDao.haveOrderNum(map);
+	}
 }

@@ -245,7 +245,7 @@
     </select>
 
     <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.JpcpDO">
+    <select id="choice" resultType="com.shiguang.mfrs.domain.BrandDO">
 		select  brandid,brandnum ,brandname  from c_brand  where mfrsid=#{mfrsid} and goodsid=#{goodsid} group by brandid
 	</select>
     <!--删除状态修改-->

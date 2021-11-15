@@ -54,7 +54,7 @@ public class OldlensServiceImpl implements OldlensService {
 
     //菜单联动显示
     @Override
-    public List<BrandDO> choice(Integer mfrsid) {
+    public List<BrandDO> choice(String mfrsid) {
         return oldlensDao.choice(mfrsid);
     }
 

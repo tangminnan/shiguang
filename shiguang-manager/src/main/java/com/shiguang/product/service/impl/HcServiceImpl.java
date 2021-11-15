@@ -54,8 +54,10 @@ public class HcServiceImpl implements HcService {
 
 
     //菜单联动显示
+
+
     @Override
-    public List<BrandDO> choice(Integer mfrsid) {
+    public List<BrandDO> choice(String mfrsid) {
         return hcDao.choice(mfrsid);
     }
 

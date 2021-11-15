@@ -147,6 +147,13 @@ public class OldlensController {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum",producNum);
         List<OldlensDO> haveNum=oldlensService.haveNum(map);
+//成品花镜-球镜：+3.75-型号：0-标价：88.00
+        String producName=oldlens.getProducName();
+        String oldId=oldlens.getOldId();
+        String factory=oldlens.getProducFactory();
+        String retailPrice=oldlens.getRetailPrice();
+        oldlens.setViewGoodName(producName);
+        oldlens.setProducName(producName+"-球镜:"+oldId+"-型号:"+factory+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }
@@ -180,7 +187,7 @@ public class OldlensController {
     //制造商——商品类别菜单下来选择
     @ResponseBody
     @RequestMapping(value = "/choice")
-    List<BrandDO> choice(Integer mfrsid, Model model) {
+    List<BrandDO> choice(String mfrsid, Model model) {
         List<BrandDO> brandDOList = oldlensService.choice(mfrsid);
         model.addAttribute("brandDOList", brandDOList);
         return brandDOList;
