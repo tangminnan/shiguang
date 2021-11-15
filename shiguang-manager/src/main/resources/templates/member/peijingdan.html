@@ -87,13 +87,13 @@
 			<td>数量</td>
 			<td>原价金额</td>
 		</tr>
-		<tr>
-			<td id="goodsName"></td>
-			<td><span id="batch"></span></td>
-			<td><span id="unitName"></span></td>
-			<td><span id="count"></span></td>
-			<td><span id="price"></span></td>
-		</tr>
+		<!--<tr>-->
+			<!--<td id="goodsName"></td>-->
+			<!--<td><span id="batch"></span></td>-->
+			<!--<td><span id="unitName"></span></td>-->
+			<!--<td><span id="count"></span></td>-->
+			<!--<td><span id="price"></span></td>-->
+		<!--</tr>-->
 		<!--<tr>-->
 			<!--<td>THEREFOPO蒸汽热敷眼罩（10片/盒） </td>-->
 			<!--<td>100</td>-->
@@ -190,8 +190,8 @@
         }
         var a=0;
         for (var i=0;i<storeNamearray.length;i++){
-            if (i>=4){
-                htmlt += "<tr><td>......</td>";
+            if (i>3){
+                htmlt = "<tr><td>......</td>";
                 htmlt += "</tr>";
                 $("#tbodys").append(htmlt);
                 break;

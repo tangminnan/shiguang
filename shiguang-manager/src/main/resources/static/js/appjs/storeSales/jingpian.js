@@ -236,9 +236,30 @@ document.onkeydown = function(e){
     if((e||event).keyCode==13)
         reLoad();
 };
+
+function sure(){
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    // var jingpianType = $("#jingpianType").val();
+    // alert("43");
+    // alert(jingpianType)
+    // if ('0' == jingpianType){
+    //     alert("22")
+    //     window.localStorage.setItem("rowsRight",rows)
+    // } else if ('1' == jingpianType){
+    //     alert("33")
+    //     window.localStorage.setItem("rowsLeft",rows)
+    // }
+    return rows;
+}
+
 function batchSelect() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-    return rows;
+    var jingpianType = $("#jingpianType").val();
+    if ('0' == jingpianType){
+        window.localStorage.setItem("rowsRight",JSON.stringify(rows))
+    } else if ('1' == jingpianType){
+        window.localStorage.setItem("rowsLeft",JSON.stringify(rows))
+    }
 	// if (rows.length == 0) {
 	// 	layer.msg("请选择要删除的数据");
 	// 	return;

@@ -143,7 +143,7 @@ function resetPwd(id) {
 function batchProcess() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
-		layer.msg("请选择要删除的数据");
+		layer.msg("请选择要加工的数据");
 		return;
 	}
 	var userName="";

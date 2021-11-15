@@ -221,7 +221,11 @@ public class StoreSalesController {
         if (null != conclusionList) {
             for (Conclusion c : conclusionList) {
                 //String ygtime = sdfs.format(c.getCreateTime());
-                c.setYanguangTime(sdfs.format(c.getCreateTime()));
+                if (null != c.getCreateTime()){
+                    c.setYanguangTime(sdfs.format(c.getCreateTime()));
+                } else {
+                    c.setYanguangTime(sdfs.format(new Date()));
+                }
                 if ("1".equals(c.getChufangType())) {
                     c.setChufang("近用");
                 } else if ("2".equals(c.getChufangType())) {
@@ -274,11 +278,14 @@ public class StoreSalesController {
                 }
             }
                String[] leftRight = salesDO.getLeftRight().split(",");
+               String[] storeDescribe = salesDO.getStoreDescribe().split(",");
                 boolean resultRight = false;
                 boolean resultLeft = false;
+                boolean zipian = false;
                 resultRight = Arrays.asList(leftRight).contains("右");
                 resultLeft = Arrays.asList(leftRight).contains("左");
-                if (!"隐形".equals(salesDO.getEyeType())){
+                zipian = Arrays.asList(storeDescribe).contains("自片");
+                if (!"隐形".equals(salesDO.getEyeType()) && zipian == false){
                     if (resultRight == false || resultLeft == false){
                         return R.error("镜片选择左右眼重复，请重新选择！");
                     }
@@ -297,16 +304,16 @@ public class StoreSalesController {
             if (null != salesDO.getProcessAsk()) {
                 salesDO.setProcessAsk(salesDO.getProcessAsk());
             }
-            if (null != salesDO.getPtometryNumber()){
+            if (null != salesDO.getPtometryNumber() && !"".equals(salesDO.getPtometryNumber())){
                 try {
                     String[] pto = salesDO.getPtometryNumber().split(",");
                     if (pto.length > 0){
                         salesDO.setPtometryNumber(pto[0]);
                     } else {
-                        salesDO.setPtometryNumber("");
+                        salesDO.setPtometryNumber("Y"+GuuidUtil.getUUID());
                     }
                 }catch (ArrayIndexOutOfBoundsException e) {
-                    salesDO.setPtometryNumber("");
+                    salesDO.setPtometryNumber("Y"+GuuidUtil.getUUID());
                 }
             } else {
                 salesDO.setPtometryNumber("Y"+GuuidUtil.getUUID());
@@ -388,6 +395,13 @@ public class StoreSalesController {
                 kjjyDO.setKjjyVaos(salesDO.getLeftyuanyongVAjy());
                 kjjyDO.setStatus("1");
                 kjjyService.save(kjjyDO);
+                ResultDO resultDO = new ResultDO();
+                resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setCreateTime(new Date());
+                resultDO.setOptometryName(salesDO.getOptometrywlName());
+                resultDO.setStatus("1");
+                resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 2) {
                 KjyyDO kjyyDO = new KjyyDO();
                 kjyyDO.setPtometryNumber(salesDO.getPtometryNumber());
@@ -422,6 +436,13 @@ public class StoreSalesController {
                 kjyyDO.setKjyyVaos(salesDO.getLeftyuanyongVAyy());
                 kjyyDO.setStatus("1");
                 kjyyService.save(kjyyDO);
+                ResultDO resultDO = new ResultDO();
+                resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setCreateTime(new Date());
+                resultDO.setOptometryName(salesDO.getOptometrywlName());
+                resultDO.setStatus("1");
+                resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 3) {
                 SgjjDO sgjjDO = new SgjjDO();
                 sgjjDO.setPtometryNumber(salesDO.getPtometryNumber());
@@ -456,6 +477,13 @@ public class StoreSalesController {
                 sgjjDO.setSgjjJyvaos(salesDO.getLeftjinyongVAsg());
                 sgjjDO.setStatus("1");
                 sgjjService.save(sgjjDO);
+                ResultDO resultDO = new ResultDO();
+                resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setCreateTime(new Date());
+                resultDO.setOptometryName(salesDO.getOptometrywlName());
+                resultDO.setStatus("1");
+                resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 4) {
                 ZyDO zyDO = new ZyDO();
                 zyDO.setPtometryNumber(salesDO.getPtometryNumber());
@@ -489,6 +517,13 @@ public class StoreSalesController {
                 zyDO.setZyVaos(salesDO.getLeftyuanyongVAzy());
                 zyDO.setStatus("1");
                 zyService.save(zyDO);
+                ResultDO resultDO = new ResultDO();
+                resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setCreateTime(new Date());
+                resultDO.setOptometryName(salesDO.getOptometrywlName());
+                resultDO.setStatus("1");
+                resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 5) {
                 RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
                 rxjmjcjDO.setPtometryNumber(salesDO.getPtometryNumber());
@@ -516,6 +551,13 @@ public class StoreSalesController {
                 rxjmjcjDO.setRxVaos(salesDO.getLeftYingXingVAyx());
                 rxjmjcjDO.setStatus("1");
                 rxjmjcjService.save(rxjmjcjDO);
+                ResultDO resultDO = new ResultDO();
+                resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setCreateTime(new Date());
+                resultDO.setOptometryName(salesDO.getOptometrywlName());
+                resultDO.setStatus("1");
+                resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 7) {
                 SjxlDO sjxlDO = new SjxlDO();
                 sjxlDO.setPtometryNumber(salesDO.getPtometryNumber());
@@ -546,6 +588,13 @@ public class StoreSalesController {
                 sjxlDO.setSjxlYyvaos(salesDO.getLeftSJXLyyva());
                 sjxlDO.setStatus("1");
                 sjxlService.save(sjxlDO);
+                ResultDO resultDO = new ResultDO();
+                resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setCreateTime(new Date());
+                resultDO.setOptometryName(salesDO.getOptometrywlName());
+                resultDO.setStatus("1");
+                resultService.save(resultDO);
             }else if (salesDO.getRecipelwlType() == 8){
                 VstDO vstDO = new VstDO();
                 vstDO.setPtometryNumber(salesDO.getPtometryNumber());
@@ -587,6 +636,13 @@ public class StoreSalesController {
                 vstDO.setVstVaos(salesDO.getLeftVstVA());
                 vstDO.setStatus("1");
                 vstService.save(vstDO);
+                ResultDO resultDO = new ResultDO();
+                resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setCreateTime(new Date());
+                resultDO.setOptometryName(salesDO.getOptometrywlName());
+                resultDO.setStatus("1");
+                resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 9){
                 CrtDO crtDO = new CrtDO();
                 crtDO.setPtometryNumber(salesDO.getPtometryNumber());
@@ -626,6 +682,13 @@ public class StoreSalesController {
                 crtDO.setCrtVaod(salesDO.getRightVAcrt());
                 crtDO.setCrtVaos(salesDO.getLeftVAcrt());
                 crtService.save(crtDO);
+                ResultDO resultDO = new ResultDO();
+                resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setCreateTime(new Date());
+                resultDO.setOptometryName(salesDO.getOptometrywlName());
+                resultDO.setStatus("1");
+                resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 10) {
                 RgpDO rgpDO = new RgpDO();
                 rgpDO.setPtometryNumber(salesDO.getPtometryNumber());
@@ -648,6 +711,13 @@ public class StoreSalesController {
                 rgpDO.setRgpSyjpos(salesDO.getLeftPinpai());
                 rgpDO.setStatus("1");
                 rgpService.save(rgpDO);
+                ResultDO resultDO = new ResultDO();
+                resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setCreateTime(new Date());
+                resultDO.setOptometryName(salesDO.getOptometrywlName());
+                resultDO.setStatus("1");
+                resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 11) {
                 YaopinDO yaopinDO = new YaopinDO();
                 yaopinDO.setPtometryNumber(salesDO.getPtometryNumber());
@@ -658,6 +728,13 @@ public class StoreSalesController {
                 yaopinDO.setYpYm(salesDO.getYpName());
                 yaopinDO.setStatus("1");
                 yaopinService.save(yaopinDO);
+                ResultDO resultDO = new ResultDO();
+                resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setCreateTime(new Date());
+                resultDO.setOptometryName(salesDO.getOptometrywlName());
+                resultDO.setStatus("1");
+                resultService.save(resultDO);
             }
         } else {
             if ("近用".equals(salesDO.getRecipelType())) {

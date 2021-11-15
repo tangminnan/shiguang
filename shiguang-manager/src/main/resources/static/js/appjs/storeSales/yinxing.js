@@ -67,8 +67,7 @@ function load() {
 						// 返回false将会终止请求
 						columns : [
                             {
-                                checkbox : true,
-                                field:'checkid'
+                                checkbox : true
                             },
 								{
 									field : 'goodsNum',
@@ -211,9 +210,20 @@ document.onkeydown = function(e){
     if((e||event).keyCode==13)
         reLoad();
 };
+
+function sure(){
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    return rows;
+}
+
 function batchSelect() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-    return rows;
+    var jingpianType = $("#jingpianType").val();
+    if ('0' == jingpianType){
+        window.localStorage.setItem("rowsRight",JSON.stringify(rows))
+    } else if ('1' == jingpianType){
+        window.localStorage.setItem("rowsLeft",JSON.stringify(rows))
+    }
 	// if (rows.length == 0) {
 	// 	layer.msg("请选择要删除的数据");
 	// 	return;
