@@ -14,6 +14,7 @@ import com.shiguang.stock.service.OrderService;
 import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -175,7 +176,20 @@ public class StockController {
         model.addAttribute("orderDOList", orderDOList);
         return orderDOList;
     }
-
+//    //数量
+    @ResponseBody
+    @GetMapping("/countall")
+    public Integer countall(
+            @RequestParam("goodsType") String goodsType,
+            @RequestParam("danjuNumber") String danjuNumber,
+            Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("goodsType",goodsType);
+        map.put("danjuNumber",danjuNumber);
+        int total=orderService.countall(map);
+        model.addAttribute("total",total);
+        return total;
+    }
 
     /**
      * 保存
@@ -366,14 +380,27 @@ public class StockController {
     }
 
     /**
-     * 删除
+     * 删除采购订单
      */
     @PostMapping("/remove")
     @ResponseBody
     @RequiresPermissions("stock:stock:remove")
-    public R remove(Long id) {
-        if (stockService.remove(id) > 0) {
-            return R.ok();
+    public R remove(Long id ) {
+        Map<String,Object> map=new HashMap<>();
+        map.put("id",id);
+       List<OrderDO> orderDOS= orderService.haveOrderNum(map);
+        if (orderDOS!=null){
+            for (OrderDO orderDO:orderDOS){
+                String danjuNumber=orderDO.getDanjuNumber();
+                Map<String,Object> map1=new HashMap<>();
+                map1.put("danjuNumber",danjuNumber);
+                List<OrderDO> orderDOList=orderService.haveOrderNum(map1);
+                for (OrderDO orderDO1:orderDOList){
+                    Long ids=orderDO1.getId();
+                    orderService.remove(ids);
+                }
+                return R.ok();
+            }
         }
         return R.error();
     }

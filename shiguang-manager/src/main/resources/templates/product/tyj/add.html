@@ -165,23 +165,23 @@
                 </td>
                 <td>含税单价：</td>
                 <td>
-                    <input id="taxPrice" name="taxPrice" type="text"
+                    <input id="taxPrice" name="taxPrice" type="text" value="0"
                            oninput="getmoney(this,10)" autofocus/>
-                    <em>*</em>
+                    <!--<em>*</em>-->
                 </td>
                 <td>批发价格：</td>
                 <td colspan="3">
-                    <input id="tradePrice" name="tradePrice" type="text" style="width: 60%"
+                    <input id="tradePrice" name="tradePrice" type="text" style="width: 60%" value="0"
                            oninput="getmoney(this,10)" autofocus/>
-                    <em>*</em>
+                    <!--<em>*</em>-->
                 </td>
             </tr>
             <tr>
                 <td>调货成本：</td>
                 <td>
-                    <input id="transferPrice" name="transferPrice" type="text"
+                    <input id="transferPrice" name="transferPrice" type="text"  value="0"
                            oninput="getmoney(this,10)" autofocus/>
-                    <em>*</em>
+                    <!--<em>*</em>-->
                 </td>
                 <td>标准零售价格：</td>
                 <td colspan="3">
@@ -300,7 +300,8 @@
                     // var id = datajson[key].brandid;
                     var num = datajson[key].brandnum;
                     var roleName = datajson[key].brandname;
-                    $("#brandnum").append("<option value='" + num + "'>" + roleName + "</option>")
+                    $("#brandnum").append("<option value='" + num + "'>" + roleName + "</option>");
+                    // $('#producName').val(roleName);
                 });
             }
         });

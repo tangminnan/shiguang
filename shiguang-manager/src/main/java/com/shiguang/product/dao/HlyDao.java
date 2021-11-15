@@ -36,7 +36,7 @@ public interface HlyDao {
 
 
     //菜单联动显示
-    List<BrandDO> choice(@Param("mfrsid") Integer mfrsid);
+    List<BrandDO> choice(@Param("mfrsid") String mfrsid);
 
     //删除修改状态
     int updateState(HlyDO hly);

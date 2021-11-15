@@ -35,6 +35,7 @@ public class YxcpDO implements Serializable {
     private String mfrsid;
     //制造商代码
     private String mfrsname;
+    private String viewGoodName;
     //品牌id
     private Integer brandid;
     //品牌代码
@@ -171,7 +172,13 @@ public class YxcpDO implements Serializable {
     public String getProducName() {
         return producName;
     }
+    public String getViewGoodName() {
+        return viewGoodName;
+    }
 
+    public void setViewGoodName(String viewGoodName) {
+        this.viewGoodName = viewGoodName;
+    }
     /**
      * 设置：制造商id
      */

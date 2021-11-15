@@ -33,6 +33,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public int countall(Map<String, Object> map) {
+		return orderDao.countall(map);
+	}
+
+	@Override
 	public int save(OrderDO order){
 		return orderDao.save(order);
 	}
@@ -70,5 +75,10 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OrderDO> orderdingdan(Map<String, Object> map) {
 		return orderDao.orderdingdan(map);
+	}
+
+	@Override
+	public List<OrderDO> haveOrderNum(Map<String, Object> map) {
+		return orderDao.haveOrderNum(map);
 	}
 }

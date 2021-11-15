@@ -244,7 +244,7 @@
 
     <delete id="remove">
     delete from stock where id = #{value}
-</delete>
+    </delete>
 
     <delete id="batchRemove">
         delete from stock where id in

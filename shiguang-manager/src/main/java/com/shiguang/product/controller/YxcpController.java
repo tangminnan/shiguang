@@ -243,6 +243,12 @@ public class YxcpController {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum",producNum);
         List<YxcpDO> haveNum=yxcpService.haveNum(map);
+        String producName=yxcp.getProducName();
+        String sphId=yxcp.getSphId();
+        String cylId=yxcp.getCylId();
+        String retailPrice=yxcp.getRetailPrice();
+        yxcp.setViewGoodName(producName);
+        yxcp.setProducName(producName+"-球镜:"+sphId+"-柱镜:"+cylId+"-颜色:"+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }

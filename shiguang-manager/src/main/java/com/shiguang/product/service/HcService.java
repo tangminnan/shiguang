@@ -31,7 +31,7 @@ public interface HcService {
     int batchRemove(Long[] ids);
 
     //菜单联动显示
-    List<BrandDO> choice(Integer mfrsid);
+    List<BrandDO> choice(String mfrsid);
 
     //删除修改状态
     int updateState(HcDO hc);

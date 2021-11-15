@@ -7,7 +7,7 @@
         select j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
         j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
         j.`trade_price`,j.`transfer_price`,j.`retail_price` ,j.`xsstate`,j.`state`,j.`classtype`,j.`produc_factory`,
-        m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph
+        m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph,j.`view_good_name`
         from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid` left join
         c_unit u on j.unitid= u.unitid  left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
         where j.id = #{value}
@@ -18,7 +18,7 @@
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
         j.`lightbelow_id`,lt.`lightbelow`,j.`lens_id`,pl.`lens_name`,j.`batchid`,j.`light_id`,lig.`light_name` as lightName,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
         j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`,j.`classtype`,j.`produc_factory`,g.`gradual_name`,
-        r.`refractivityvalue`,f.`function_name`,m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph
+        r.`refractivityvalue`,f.`function_name`,m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph,j.`view_good_name`
         from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum   AND j.`mfrsid`=b.`mfrsid` left join
         c_unit u on j.unitid= u.unitid left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
         left join p_light lig on lig.light_id=j.light_id
@@ -60,6 +60,7 @@
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and j.view_good_name = #{viewGoodName}</if>
             and j.state= 1
         </where>
 
@@ -117,6 +118,8 @@
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and j.view_good_name = #{viewGoodName}</if>
+
             and j.state= 1
         </where>
     </select>
@@ -149,7 +152,8 @@
 			`xsstate`,
 			`state`,
 			`classtype`,
-			`produc_factory`
+			`produc_factory`,
+			`view_good_name`
 		)
 		values
 		(
@@ -178,7 +182,8 @@
 			#{xsstate},
 			#{state},
 			#{classtype},
-			#{producFactory}
+			#{producFactory},
+			#{viewGoodName}
 		)
 	</insert>
     <!--//修改停用启用-->
@@ -209,8 +214,9 @@
             <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
             <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state},</if>
-            <if test="classtype != null">`classtype` = #{classtype}</if>
-            <if test="producFactory != null">`produc_factory` = #{producFactory}</if>
+            <if test="classtype != null">`classtype` = #{classtype},</if>
+            <if test="producFactory != null">`produc_factory` = #{producFactory},</if>
+            <if test="viewGoodName != null">`view_good_name` = #{viewGoodName}</if>
         </set>
         where id = #{id}
     </update>
@@ -232,14 +238,14 @@
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
         j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
         j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`,j.`classtype`,j.`produc_factory`,
-       m.mfrsname,b.brandname,u.unitname
+       m.mfrsname,b.brandname,u.unitname,j.`view_good_name`
         from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum   AND j.`mfrsid`=b.`mfrsid` left join
         c_unit u on j.unitid= u.unitid left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
         where j.`produc_num` = #{value}
     </select>
 
     <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.JpcpDO">
+    <select id="choice" resultType="com.shiguang.mfrs.domain.BrandDO">
 		select  brandid,brandnum ,brandname  from c_brand  where mfrsid=#{mfrsid} and goodsid=#{goodsid} group by brandid
 	</select>
     <!--删除状态修改-->

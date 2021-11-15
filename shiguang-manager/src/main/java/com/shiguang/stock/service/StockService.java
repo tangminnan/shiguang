@@ -30,7 +30,7 @@ public interface StockService {
 
     int update(StockDO stock);
 
-    int remove(Long id);
+    int remove(Long id );
 
     int batchRemove(Long[] ids);
 

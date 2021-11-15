@@ -7,7 +7,7 @@
 		select m.mfrsname,b.brandname,u.unitname,
 		 s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
 		s.`proid`,s.`unitid`,s.`batchid`,s.`leixing`,s.`tax`,s.`tax_price`,s.`trade_price`,s.`transfer_price`,s.`retail_price`,
-		s.`xsstate`,s.`state`,s.`classtype`
+		s.`xsstate`,s.`state`,s.`classtype`,s.`view_good_name`
 		from aa_shiguang  s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum  and s.mfrsid=b.mfrsid  left join
         c_unit u on s.unitid= u.unitid
 		where s.id = #{value}
@@ -17,7 +17,7 @@
         select m.mfrsname,b.brandname,u.unitname,
         s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
         s.`proid`,s.`unitid`,s.`batchid`,s.`leixing`,s.`tax`,s.`tax_price`,s.`trade_price`,s.`transfer_price`,s.`retail_price`,
-        s.`xsstate`,s.`state`,s.`classtype`
+        s.`xsstate`,s.`state`,s.`classtype`,s.`view_good_name`
         from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
         left join c_unit u on s.unitid= u.unitid
         <where>
@@ -39,6 +39,7 @@
                 and s.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and s.view_good_name = #{viewGoodName}</if>
             and  s.state= 1
         </where>
         <choose>
@@ -76,6 +77,7 @@
                 and s.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and s.view_good_name = #{viewGoodName}</if>
             and  s.state= 1
         </where>
     </select>
@@ -83,7 +85,7 @@
         select m.mfrsname,b.brandname,u.unitname,
         s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
         s.`proid`,s.`unitid`,s.`batchid`,s.`leixing`,s.`tax`,s.`tax_price`,s.`trade_price`,s.`transfer_price`,s.`retail_price`,
-        s.`xsstate`,s.`state`,s.`classtype`
+        s.`xsstate`,s.`state`,s.`classtype`,s.`view_good_name`
         from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsid left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid` left join
         c_unit u on s.unitid= u.unitid
         <where>
@@ -110,7 +112,7 @@
         select m.mfrsname,b.brandname,u.unitname,
         s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
         s.`proid`,s.`unitid`,s.`batchid`,s.`leixing`,s.`tax`,s.`tax_price`,s.`trade_price`,s.`transfer_price`,s.`retail_price`,
-        s.`xsstate`,s.`state`,s.`classtype`
+        s.`xsstate`,s.`state`,s.`classtype`,s.`view_good_name`
         from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
         left join c_unit u on s.unitid= u.unitid
         where s.`produc_num` = #{value}
@@ -149,7 +151,8 @@
 			`retail_price`,
 			`xsstate`,
 			`state`,
-			`classtype`
+			`classtype`,
+			`view_good_name`
 		)
 		values
 		(
@@ -172,7 +175,8 @@
 			#{retailPrice},
 			#{xsstate},
 			#{state},
-			#{classtype}
+			#{classtype},
+			#{viewGoodName}
 		)
 	</insert>
 
@@ -198,7 +202,8 @@
             <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
             <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state},</if>
-            <if test="classtype != null">`classtype` = #{classtype}</if>
+            <if test="classtype != null">`classtype` = #{classtype},</if>
+            <if test="viewGoodName != null">`view_good_name` = #{viewGoodName}</if>
         </set>
         where id = #{id}
     </update>

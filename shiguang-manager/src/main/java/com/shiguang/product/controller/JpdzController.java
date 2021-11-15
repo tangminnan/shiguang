@@ -234,6 +234,16 @@ public class JpdzController {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum",producNum);
         List<JpdzDO> haveNum=jpdzService.haveNum(map);
+        //球镜柱镜颜色标价
+        String producName=jpdz.getProducName();
+        String cylUp=jpdz.getCylUp();
+        String cylDown=jpdz.getCylDown();
+        String sphUp=jpdz.getSphUp();
+        String sphDown=jpdz.getSphDown();
+//        String color=jpcp.getColor();
+        String retailPrice=jpdz.getRetailPrice();
+        jpdz.setViewGoodName(producName);
+        jpdz.setProducName(producName+"-球镜:"+cylUp+"/"+cylDown+"-柱镜:"+sphUp+"/"+sphDown+"-颜色:"+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }
