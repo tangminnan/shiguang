@@ -175,7 +175,20 @@ public class StockController {
         model.addAttribute("orderDOList", orderDOList);
         return orderDOList;
     }
-
+//    //数量
+    @ResponseBody
+    @GetMapping("/countall")
+    public Integer countall(
+            @RequestParam("goodsType") String goodsType,
+            @RequestParam("danjuNumber") String danjuNumber,
+            Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("goodsType",goodsType);
+        map.put("danjuNumber",danjuNumber);
+        int total=orderService.countall(map);
+        model.addAttribute("total",total);
+        return total;
+    }
 
     /**
      * 保存

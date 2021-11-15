@@ -20,7 +20,8 @@ public interface OrderService {
 	List<OrderDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
-	
+	int countall(Map<String, Object> map);
+
 	int save(OrderDO order);
 	
 	int update(OrderDO order);

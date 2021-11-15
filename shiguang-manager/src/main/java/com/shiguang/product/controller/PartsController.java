@@ -135,6 +135,11 @@ public class PartsController {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum",producNum);
         List<PartsDO> haveNum=partsService.haveNum(map);
+        String producName=parts.getProducName();
+        String factory=parts.getProducFactory();
+        String retailPrice=parts.getRetailPrice();
+        parts.setViewGoodName(producName);
+        parts.setProducName(producName+"-型号:"+factory+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }

@@ -31,6 +31,7 @@ public class ShiguangDO implements Serializable {
     private String producCode;
     //商品名称
     private String producName;
+    private String viewGoodName;
     //制造商id
     private String mfrsid;
     //制造商代码
@@ -146,7 +147,13 @@ public class ShiguangDO implements Serializable {
     public String getProducName() {
         return producName;
     }
+    public String getViewGoodName() {
+        return viewGoodName;
+    }
 
+    public void setViewGoodName(String viewGoodName) {
+        this.viewGoodName = viewGoodName;
+    }
     /**
      * 设置：制造商id
      */

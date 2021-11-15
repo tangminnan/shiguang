@@ -237,6 +237,14 @@ public class JpcpController {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum",producNum);
         List<JpcpDO> haveNum=jpcpService.haveNum(map);
+        //球镜柱镜颜色标价
+        String producName=jpcp.getProducName();
+        String cyl=jpcp.getCylId();
+        String sph=jpcp.getSphId();
+//        String color=jpcp.getColor();
+        String retailPrice=jpcp.getRetailPrice();
+        jpcp.setViewGoodName(producName);
+        jpcp.setProducName(producName+"-球镜:"+cyl+"-柱镜:"+sph+"-颜色:"+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }

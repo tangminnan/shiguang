@@ -190,6 +190,12 @@ ProducaController {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum",producNum);
         List<ProducaDO> haveNum=producaService.haveNum(map);
+        String producName=produca.getProducName();
+        String factory=produca.getProducFactory();
+        String producColor=produca.getProducColor();
+        String retailPrice=produca.getRetailPrice();
+        produca.setViewGoodName(producName);
+        produca.setProducName(producName+"-型号:"+factory+"-色号:"+producColor+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }
