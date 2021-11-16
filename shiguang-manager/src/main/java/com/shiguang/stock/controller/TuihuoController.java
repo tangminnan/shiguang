@@ -74,7 +74,8 @@ public class TuihuoController {
 		//查询列表数据
         Query query = new Query(params);
 		List<TuihuoDO> tuihuoList = tuihuoService.orderList(query);
-		int total = tuihuoService.orderCount(query);
+//		int total = tuihuoService.orderCount(query);
+		int total = tuihuoList.size();
 		PageUtils pageUtils = new PageUtils(tuihuoList, total);
 		return pageUtils;
 	}

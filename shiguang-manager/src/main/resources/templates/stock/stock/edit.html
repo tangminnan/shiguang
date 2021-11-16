@@ -580,6 +580,7 @@
                 'goodsType' :goodsType
             },
             success: function (xml) {
+                // alert(JSON.stringify(xml))
                 for (var i = 0; i < xml.length; i++) {
                     if(null == xml[i].goodsNum){
                         xml[i].goodsNum="";

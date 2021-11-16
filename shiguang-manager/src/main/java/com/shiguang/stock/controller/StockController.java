@@ -84,7 +84,11 @@ public class StockController {
     private Double retailPrice2;
     @GetMapping()
     @RequiresPermissions("stock:stock:stock")
-    String Stock() {
+    String Stock(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //商品
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
         return "stock/stock/stock";
     }
 

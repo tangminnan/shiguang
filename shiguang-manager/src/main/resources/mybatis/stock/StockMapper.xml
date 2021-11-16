@@ -2147,33 +2147,65 @@
           where o.danju_number = #{value}
 		  group by o.danju_number
     </select>
+    <!--<select id="getOederList" resultType="com.shiguang.stock.domain.OrderDO">-->
+        <!--select-->
+        <!--g.goodsname as gdname,o.goods_name,o.factory,produca.produc_factorycolor,o.retail_price,-->
+        <!--o.goods_count,o.beizhu,o.unit,-->
+        <!--s.sph as jscpsph,c.cyl as jpcpcyl,-->
+        <!--sp.sph as yxcpsph,cy.cyl as yxcpcyl,-->
+        <!--tyj.produc_factorycolor as tyjproducfactorycolor,-->
+        <!--old.produc_factorycolor as oldproducfactorycolor-->
+        <!--from-->
+        <!--stock_order o-->
+        <!--left join c_goods g on o.goods_type=g.goodsid-->
+        <!--left join aa_produca produca on o.goodsxinxiid=produca.id-->
+        <!--left join aa_parts parts  on o.goodsxinxiid=parts.id-->
+        <!--left join aa_jpcp jpcp  on o.goodsxinxiid=jpcp.id-->
+        <!--left join a_sph s  on jpcp.sph_id=s.sph_id-->
+        <!--left join a_cyl c  on jpcp.cyl_id=c.cyl_id-->
+        <!--left join aa_yxcp yxcp  on o.goodsxinxiid=yxcp.id-->
+        <!--left join a_sph sp  on yxcp.sph_id=sp.sph_id-->
+        <!--left join a_cyl cy  on yxcp.cyl_id=cy.cyl_id-->
+        <!--left join aa_hly h on o.goodsxinxiid=h.id-->
+        <!--left join aa_tyj tyj on o.goodsxinxiid=tyj.id-->
+        <!--left join aa_oldlens old on o.goodsxinxiid=old.id-->
+        <!--<where>-->
+            <!--<if test="danjuNumber != null and danjuNumber != ''">and o.danju_number = #{danjuNumber}</if>-->
+            <!--<if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>-->
+        <!--</where>-->
+    <!--</select>-->
     <select id="getOederList" resultType="com.shiguang.stock.domain.OrderDO">
-        select
-        g.goodsname as gdname,o.goods_name,o.factory,produca.produc_factorycolor,o.retail_price,
-        o.goods_count,o.beizhu,o.unit,
-        s.sph as jscpsph,c.cyl as jpcpcyl,
-        sp.sph as yxcpsph,cy.cyl as yxcpcyl,
-        tyj.produc_factorycolor as tyjproducfactorycolor,
-        old.produc_factorycolor as oldproducfactorycolor
-        from
+        SELECT
+        g.goodsname AS gdname,
+        o.goods_name,
+        o.factory,
+        produca.produc_factorycolor,
+        o.retail_price,
+        o.goods_count,
+        o.beizhu,
+        o.unit,
+        jpcp.sph_id AS jscpsph,
+        jpcp.cyl_id AS jpcpcyl,
+        yxcp.sph_id AS yxcpsph,
+        yxcp.cyl_id AS yxcpcyl,
+        tyj.produc_factorycolor AS tyjproducfactorycolor,
+        old.produc_factorycolor AS oldproducfactorycolor
+        FROM
         stock_order o
-        left join c_goods g on o.goods_type=g.goodsid
-        left join aa_produca produca on o.goodsxinxiid=produca.id
-        left join aa_parts parts  on o.goodsxinxiid=parts.id
-        left join aa_jpcp jpcp  on o.goodsxinxiid=jpcp.id
-        left join a_sph s  on jpcp.sph_id=s.sph_id
-        left join a_cyl c  on jpcp.cyl_id=c.cyl_id
-        left join aa_yxcp yxcp  on o.goodsxinxiid=yxcp.id
-        left join a_sph sp  on yxcp.sph_id=sp.sph_id
-        left join a_cyl cy  on yxcp.cyl_id=cy.cyl_id
-        left join aa_hly h on o.goodsxinxiid=h.id
-        left join aa_tyj tyj on o.goodsxinxiid=tyj.id
-        left join aa_oldlens old on o.goodsxinxiid=old.id
+        LEFT JOIN c_goods g ON o.goods_type = g.goodsid
+        LEFT JOIN aa_produca produca ON o.goodsxinxiid = produca.id
+        LEFT JOIN aa_parts parts ON o.goodsxinxiid = parts.id
+        LEFT JOIN aa_jpcp jpcp ON o.goodsxinxiid = jpcp.id
+        LEFT JOIN aa_yxcp yxcp ON o.goodsxinxiid = yxcp.id
+        LEFT JOIN aa_hly h ON o.goodsxinxiid = h.id
+        LEFT JOIN aa_tyj tyj ON o.goodsxinxiid = tyj.id
+        LEFT JOIN aa_oldlens old ON o.goodsxinxiid = old.id
         <where>
             <if test="danjuNumber != null and danjuNumber != ''">and o.danju_number = #{danjuNumber}</if>
             <if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>
         </where>
-    </select><select id="getShouhuo" resultType="com.shiguang.stock.domain.OrderDO">
+    </select>
+    <select id="getShouhuo" resultType="com.shiguang.stock.domain.OrderDO">
           select m.mfrsname,o.danju_number,d.depart_name,o.danju_day,d.depart_tel,d.depart_address,o.zhidan_people,o.goods_type,o.beizhu
           from stock_order o
           left join c_mfrs m on o.mfrsid=m.mfrsnum

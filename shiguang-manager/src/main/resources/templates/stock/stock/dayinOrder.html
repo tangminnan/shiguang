@@ -20,6 +20,11 @@
 	.tabC b{width:100px;}
 	.tabC em{width:60px;display: inline-block;border-bottom:1px solid #000;vertical-align: bottom;font-style:normal;text-align: center;}
 	p{float: right;margin-top: 50px;}
+.myinput{
+	border: none;
+	background: white;
+	outline: none;
+}
 </style>
 
 </head>
@@ -56,14 +61,13 @@
 		<tbody class="liebiao"></tbody>
 	</table>
 	<table class="tabC" border="0" cellspacing="0" cellpadding="0">
-
-
+		<!--<tr>-->
+			<!--<td colspan="3"><b>所需材料：</b></td>-->
+		<!--</tr>-->
 		<tr>
-			<td colspan="2"><b>备注：</b>此批订货请于<em></em>月<em></em>日前送达。</td>
+			<!--<td colspan="2"><b>备注：</b>此批订货请于<em></em>月<em></em>日前送达。</td>-->
+			<td colspan="2"><b>总数量：</b><input id="countall"  readonly type="text" class="myinput"/></td>
 			<td><b>实际收货日：</b><span th:text="${newDate}"></span></td>
-		</tr>
-		<tr>
-			<td colspan="3"><b>所需材料：</b></td>
 		</tr>
 		<tr>
 			<td><b>联系人：</b><span th:text="${getOeder.zhidanPeople}"></span></td>
@@ -80,6 +84,7 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript">
     $().ready(function () {
+        countall();
         var danjuNumber = $("#danjuNumber").val();
         var goodsType = $("#goodsType").val();
         $(".val").remove();
@@ -284,6 +289,26 @@
             }
         })
     });
+
+    //查看总数
+    function countall() {
+        var goodsType=$("#goodsType").val();
+        var danjuNumber=$("#danjuNumber").val();
+        $.ajax({
+            url: '/stock/stock/countall',
+            type: 'get',
+            dataType: "json",
+            data: {
+                'goodsType': goodsType,
+                'danjuNumber': danjuNumber
+
+            },
+            success: function (xml) {
+                $("#countall").val(xml);
+            }
+        })
+    }
+
 </script>
 </body>
 </html>

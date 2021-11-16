@@ -10,7 +10,7 @@ function load() {
         .bootstrapTable(
             {
                 method: 'get', // 服务器数据的请求方式 get or post
-                url: prefix + "/list", // 服务器数据的加载地址
+                url: "/stock/stock" + "/list", // 服务器数据的加载地址
                 //	showRefresh : true,
                 //	showToggle : true,
                 //	showColumns : true,
@@ -36,7 +36,8 @@ function load() {
                         offset: params.offset,
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
-                        danjuNumber :$('#danjuNumber').val()
+                        danjuNumber :$('#danjuNumber').val(),
+                        goodsid :$('#goodsid').val()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -63,7 +64,7 @@ function load() {
                     },
                     {
                         field: 'gdname',
-                        title: '类型'
+                        title: '商品类别'
                     },
                     {
                         field: 'zhidanPeople',

@@ -20,6 +20,11 @@
 	.tabC b{width:100px;}
 	.tabC em{width:60px;display: inline-block;border-bottom:1px solid #000;vertical-align: bottom;font-style:normal;text-align: center;}
 	p{float: right;margin-top: 50px;}
+	.myinput{
+		border: none;
+		background: white;
+		outline: none;
+	}
 </style>
 
 </head>
@@ -37,6 +42,8 @@
 		<tr >
 			<td><b>订单号：</b><span th:text="${getShouhuo.danjuNumber}"></span></td>
 			<td><b>订单时间：</b><span th:text="${danjuDay}"></span></td>
+			<td><b>总数量：</b><input id="countall"  readonly type="text" class="myinput"/></td>
+
 		</tr>
 	</table>
 	<table class="tabB" border="0" cellspacing="0" cellpadding="0">
@@ -67,6 +74,7 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript">
     $().ready(function () {
+        countall();
         var danjuNumber = $("#danjuNumber").val();
         var goodsType = $("#goodsType").val();
         $(".val").remove();
@@ -93,6 +101,25 @@
             }
         })
     });
+
+    //查看总数
+    function countall() {
+        var goodsType=$("#goodsType").val();
+        var danjuNumber=$("#danjuNumber").val();
+        $.ajax({
+            url: '/stock/stock/countall',
+            type: 'get',
+            dataType: "json",
+            data: {
+                'goodsType': goodsType,
+                'danjuNumber': danjuNumber
+
+            },
+            success: function (xml) {
+                $("#countall").val(xml);
+            }
+        })
+    }
 </script>
 </body>
 </html>
