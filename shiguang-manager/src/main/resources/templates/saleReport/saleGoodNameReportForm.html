@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>商品销售分析表（类别）</title>
+<style type="text/css">
+	*{padding: 0;margin: 0;box-sizing: border-box;font-size: 14px;}
+	.fl{float: left;}
+	.fr{float: right;}
+	.container {margin:50px auto;width:600px;}
+	h3{font-size: 20px;text-align: center;letter-spacing: 1px;margin-bottom:15px;}
+	table{width: 100%;border-left:1px solid #000;border-top:1px solid #000;text-align: center;color:#333;}
+	table td{border-right:1px solid #000;border-bottom:1px solid #000;padding:6px 2px;}
+	.thead{background: #dcdcdc;font-weight: bold;color:#000;}
+	.tfoot{background: #fecccc;font-weight: bold;}
+	.tfoot td{color: #fd0c0c !important;}
+	.txt{overflow: hidden;margin:15px 0;font-weight: bold;}
+	.cBlue{color:#2063fd;}
+</style>
+
+</head>
+<body>
+	<div class="container">
+		<h3>商品销售分析表（类别）</h3>
+		<!--<input type="hidden" id="goodsType" th:value="${goodsType}">-->
+		<!--<input type="hidden" id="jjcount" th:value="${jjcount}">-->
+		<!--<input type="hidden" id="jjpercen" th:value="${jjpercen}">-->
+		<!--<input type="hidden" id="jjMoney" th:value="${jjMoney}">-->
+		<!--<input type="hidden" id="zjcount" th:value="${zjcount}">-->
+		<!--<input type="hidden" id="zjpercen" th:value="${zjpercen}">-->
+		<!--<input type="hidden" id="zjMoney" th:value="${zjMoney}">-->
+		<!--<input type="hidden" id="zpcount" th:value="${zpcount}">-->
+		<!--<input type="hidden" id="zppercen" th:value="${zppercen}">-->
+		<!--<input type="hidden" id="zpMoney" th:value="${zpMoney}">-->
+		<!--<input type="hidden" id="jpcount" th:value="${jpcount}">-->
+		<!--<input type="hidden" id="jppercen" th:value="${jppercen}">-->
+		<!--<input type="hidden" id="jpMoney" th:value="${jpMoney}">-->
+		<!--<input type="hidden" id="pjcount" th:value="${pjcount}">-->
+		<!--<input type="hidden" id="pjpercen" th:value="${pjpercen}">-->
+		<!--<input type="hidden" id="pjMoney" th:value="${pjMoney}">-->
+		<!--<input type="hidden" id="yxcount" th:value="${yxcount}">-->
+		<!--<input type="hidden" id="yxpercen" th:value="${yxpercen}">-->
+		<!--<input type="hidden" id="yxMoney" th:value="${yxMoney}">-->
+		<!--<input type="hidden" id="hlycount" th:value="${hlycount}">-->
+		<!--<input type="hidden" id="hlypercen" th:value="${hlypercen}">-->
+		<!--<input type="hidden" id="hlyMoney" th:value="${hlyMoney}">-->
+		<!--<input type="hidden" id="sgcount" th:value="${sgcount}">-->
+		<!--<input type="hidden" id="sgpercen" th:value="${sgpercen}">-->
+		<!--<input type="hidden" id="sgMoney" th:value="${sgMoney}">-->
+		<!--<input type="hidden" id="totalCount" th:value="${totalCount}">-->
+		<!--<input type="hidden" id="totalMoney" th:value="${totalMoney}">-->
+		<!--<input type="hidden" id="addMoney" th:value="${addMoney}">-->
+		<!--<input type="hidden" id="date" th:value="${settleDateStart}">-->
+		<input type="hidden" id="settleDateEnd" th:value="${settleDateEnd}">
+		<input type="hidden" id="settleDateStart" th:value="${settleDateStart}">
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody id="goodId">
+			<tr class="thead">
+				<td rowspan="2">商品代码</td>
+			  <td rowspan="2">类别名称</td>
+			  <td colspan="3">类别名称</td>
+			</tr>
+			<tr class="thead">
+				<td width="150">实售数量</td>
+				<td>实售金额</td>
+				<td>金额占比</td>
+			</tr>
+			<!--<tr>-->
+				<!--<td class="cBlue">镜架</td>-->
+				<!--<td>217</td>-->
+				<!--<td>564.00</td>-->
+				<!--<td>14.35%</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td class="cBlue">配件</td>-->
+				<!--<td>217</td>-->
+				<!--<td>564.00</td>-->
+				<!--<td>14.35%</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td class="cBlue">镜片</td>-->
+				<!--<td>217</td>-->
+				<!--<td>564.00</td>-->
+				<!--<td>14.35%</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td class="cBlue">护理液</td>-->
+				<!--<td>217</td>-->
+				<!--<td>564.00</td>-->
+				<!--<td>14.35%</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td class="cBlue">隐形</td>-->
+				<!--<td>217</td>-->
+				<!--<td>564.00</td>-->
+				<!--<td>14.35%</td>-->
+			<!--</tr>-->
+			<!--<tr class="tfoot">-->
+				<!--<td>合计：</td>-->
+				<!--<td>217</td>-->
+				<!--<td>564.00</td>-->
+				<!--<td> </td>-->
+			<!--</tr>-->
+			</tbody>
+			<tr>
+				<td></td>
+				<td>附加费用</td>
+				<td><span th:text="${settleDateStart}"></span></td>
+				<td><span th:text="${addMoney}"></span></td>
+				<td> </td>
+			</tr>
+			<tr class="tfoot">
+				<td></td>
+				<td>总合计：</td>
+				<td><span th:text="${totalCount}"></span></td>
+				<td><span th:text="${totalMoney}"></span></td>
+                <td></td>
+			</tr>
+		</table>
+		<div class="txt">
+			<p class="fl">打印日期：<span th:text="${date}"></span></p>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/saleReport/saleReportdy.js"></script>
+	<script th:inline="javascript">
+        $().ready(function(){
+            var list = [[${lists}]];
+            var html =0;
+            for (var i=0;i<list.length;i++){
+                html = "<tr><td>"+list[i].goodsNum+"</td>"
+				html += "<td class='cBlue'>"+list[i].name+"</td>"
+				html += "<td>"+list[i].count+"</td>"
+				html += "<td>"+list[i].money+"</td>"
+                html += "<td>"+list[i].percent+"</td>"
+				html += "</tr>"
+				$("#goodId").append(html);
+			}
+        });
+	</script>
+</body>
+</html>
