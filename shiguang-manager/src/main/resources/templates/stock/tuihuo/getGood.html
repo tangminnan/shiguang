@@ -79,6 +79,7 @@
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
+        <input id="kccount" type="kccount"  value="1" hidden/>
         <input type="button" value="查询" onclick="getall()"/>
     </div>
 </div>
@@ -192,7 +193,8 @@
                                     goodsCode : $("#goodsCode").val(),
                                     goodsName : $("#goodsName").val(),
                                     brandname : $("#brandname").val(),
-                                    classtype : $("#classtype").val()
+                                    classtype : $("#classtype").val(),
+                                    kccount : $('#kccount').val()
                                 };
                             },
                             columns: [
@@ -283,7 +285,9 @@
                                 goodsCode : $("#goodsCode").val(),
                                 goodsName : $("#goodsName").val(),
                                 brandname : $("#brandname").val(),
-                                classtype : $("#classtype").val()
+                                classtype : $("#classtype").val(),
+                                kccount : $('#kccount').val()
+
                             };
                         },
                         columns: [
@@ -366,7 +370,10 @@
                                     goodsCode: $("#goodsCode").val(),
                                     goodsName: $("#goodsName").val(),
                                     brandname: $("#brandname").val(),
-                                    classtype : $("#classtype").val()
+                                    classtype : $("#classtype").val(),
+                                    kccount : $('#kccount').val()
+
+
                                 };
                             },
                             columns: [
@@ -471,7 +478,9 @@
                                     goodsCode: $("#goodsCode").val(),
                                     goodsName: $("#goodsName").val(),
                                     brandname: $("#brandname").val(),
-                                    classtype : $("#classtype").val()
+                                    classtype : $("#classtype").val(),
+                                    kccount : $('#kccount').val()
+
                                 };
                             },
                             columns: [
@@ -579,7 +588,9 @@
                                         goodsCode: $("#goodsCode").val(),
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
-                                        classtype : $("#classtype").val()
+                                        classtype : $("#classtype").val(),
+                                        kccount : $('#kccount').val()
+
                                     };
                                 },
                                 columns: [
@@ -680,7 +691,9 @@
                                         goodsCode: $("#goodsCode").val(),
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
-                                        classtype : $("#classtype").val()
+                                        classtype : $("#classtype").val(),
+                                        kccount : $('#kccount').val()
+
                                     };
                                 },
                                 columns: [
@@ -782,7 +795,9 @@
                                         goodsCode: $("#goodsCode").val(),
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
-                                        classtype : $("#classtype").val()
+                                        classtype : $("#classtype").val(),
+                                        kccount : $('#kccount').val()
+
                                     };
                                 },
                                 columns: [
@@ -867,7 +882,9 @@
                                         goodsCode: $("#goodsCode").val(),
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
-                                        classtype : $("#classtype").val()
+                                        classtype : $("#classtype").val(),
+                                        kccount : $('#kccount').val()
+
                                     };
                                 },
                                 columns: [
@@ -952,7 +969,9 @@
                                         goodsCode: $("#goodsCode").val(),
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
-                                        classtype : $("#classtype").val()
+                                        classtype : $("#classtype").val(),
+                                        kccount : $('#kccount').val()
+
                                     };
                                 },
                                 columns: [
@@ -1042,7 +1061,9 @@
                                         goodsCode: $("#goodsCode").val(),
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
-                                        classtype : $("#classtype").val()
+                                        classtype : $("#classtype").val(),
+                                        kccount : $('#kccount').val()
+
                                     };
                                 },
                                 columns: [
@@ -1084,7 +1105,7 @@
                                 ]
                             });
          } else if (goodsType == 9) {
-            alert("视光")
+            // alert("视光")
                     $('#exampleTable')
                         .bootstrapTable(
                             {
@@ -1120,7 +1141,9 @@
                                         goodsCode: $("#goodsCode").val(),
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
-                                        classtype : $("#classtype").val()
+                                        classtype : $("#classtype").val(),
+                                        kccount : $('#kccount').val()
+
                                     };
                                 },
                                 columns: [

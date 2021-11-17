@@ -363,6 +363,12 @@ public class TuihuoController {
 public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> jingjiagoods = tuihuoService.selectJingjia(query);
 	int total = tuihuoService.selectJingjiacount(query);
 	PageUtils pageUtils = new PageUtils(jingjiagoods, total);
@@ -394,6 +400,12 @@ public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
 public PageUtils selectpeijian(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> partsgoods  = tuihuoService.selectPeijian(query);
 	int total = tuihuoService.selectPeijiancount(query);
 	PageUtils pageUtils = new PageUtils(partsgoods, total);
@@ -424,6 +436,12 @@ public PageUtils selectpeijian(@RequestParam Map<String, Object> params) {
 public PageUtils selectJpcp(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> jpcpgoods = tuihuoService.selectJpcp(query);
 	int total = tuihuoService.selectJpcpcount(query);
 	PageUtils pageUtils = new PageUtils(jpcpgoods, total);
@@ -454,6 +472,12 @@ public PageUtils selectJpcp(@RequestParam Map<String, Object> params) {
 public PageUtils selectJpdz(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> jpdzgoods = tuihuoService.selectJpdz(query);
 	int total = tuihuoService.selectJpdzcount(query);
 	PageUtils pageUtils = new PageUtils(jpdzgoods, total);
@@ -471,6 +495,8 @@ public PageUtils selectJpdz(@RequestParam Map<String, Object> params) {
 //		map.put("classtype", classtype);
 //		map.put("goodsNum", goodsNum);
 //		map.put("goodsCode", goodsCode);
+
+
 //		map.put("goodsName", goodsName);
 //		map.put("brandname", brandname);
 //		List<StockDO> yxcpgoods = tuihuoService.selectYxcp(map);
@@ -484,6 +510,12 @@ public PageUtils selectJpdz(@RequestParam Map<String, Object> params) {
 public PageUtils selectYxcp(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> yxcpgoods = tuihuoService.selectYxcp(query);
 	int total = tuihuoService.selectYxcpcount(query);
 	PageUtils pageUtils = new PageUtils(yxcpgoods, total);
@@ -515,6 +547,12 @@ public PageUtils selectYxcp(@RequestParam Map<String, Object> params) {
 public PageUtils selectYxdz(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> yxdzgoods  = tuihuoService.selectYxdz(query);
 	int total = tuihuoService.selectYxdzcount(query);
 	PageUtils pageUtils = new PageUtils(yxdzgoods, total);
@@ -545,6 +583,12 @@ public PageUtils selectYxdz(@RequestParam Map<String, Object> params) {
 public PageUtils selecthly(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> hlygoods = tuihuoService.selectHly(query);
 	int total = tuihuoService.selectHlycount(query);
 	PageUtils pageUtils = new PageUtils(hlygoods, total);
@@ -575,6 +619,12 @@ public PageUtils selecthly(@RequestParam Map<String, Object> params) {
 public PageUtils selecttyj(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> tyjgoods = tuihuoService.selectTyj(query);
 	int total = tuihuoService.selectTyjcount(query);
 	PageUtils pageUtils = new PageUtils(tyjgoods, total);
@@ -605,6 +655,12 @@ public PageUtils selecttyj(@RequestParam Map<String, Object> params) {
 public PageUtils selectLhj(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> lhjgoods = tuihuoService.selectLhj(query);
 	int total = tuihuoService.selectLhjcount(query);
 	PageUtils pageUtils = new PageUtils(lhjgoods, total);
@@ -635,6 +691,12 @@ public PageUtils selectLhj(@RequestParam Map<String, Object> params) {
 public PageUtils selectHc(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> hcgoods = tuihuoService.selectHc(query);
 	int total = tuihuoService.selectHccount(query);
 	PageUtils pageUtils = new PageUtils(hcgoods, total);
@@ -665,6 +727,12 @@ public PageUtils selectHc(@RequestParam Map<String, Object> params) {
 public PageUtils selectSg(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
+	String kucount=params.get("kccount").toString();
+	if (kucount.equals("0")){
+		query.put("kccount0",kucount);
+	}else if (kucount.equals("1")){
+		query.put("kccount1","0");
+	}
 	List<StockDO> sggoods = tuihuoService.selectSg(query);
 	int total = tuihuoService.selectSgcount(query);
 	PageUtils pageUtils = new PageUtils(sggoods, total);
