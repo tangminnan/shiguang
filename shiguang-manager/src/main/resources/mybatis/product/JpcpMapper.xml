@@ -7,9 +7,9 @@
         select j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
         j.`lightbelow_id`,j.`lens_id`,j.`batchid`,j.`light_id`,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
         j.`trade_price`,j.`transfer_price`,j.`retail_price` ,j.`xsstate`,j.`state`,j.`classtype`,j.`produc_factory`,
-        m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph,j.`view_good_name`
+        m.mfrsname,b.brandname,u.unitname,j.`view_good_name`
         from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid` left join
-        c_unit u on j.unitid= u.unitid  left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
+        c_unit u on j.unitid= u.unitid
         where j.id = #{value}
     </select>
     <!--//修改时显示制造商和商品品种名称-->
@@ -18,14 +18,13 @@
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
         j.`lightbelow_id`,lt.`lightbelow`,j.`lens_id`,pl.`lens_name`,j.`batchid`,j.`light_id`,lig.`light_name` as lightName,j.`gradual_id`,j.`refractivityid`,j.`function_id`,j.`tax`,j.`tax_price`,
         j.`trade_price`,j.`transfer_price`,j.`retail_price`,j.`xsstate`,j.`state`,j.`classtype`,j.`produc_factory`,g.`gradual_name`,
-        r.`refractivityvalue`,f.`function_name`,m.mfrsname,b.brandname,u.unitname,l.cyl,s.sph,j.`view_good_name`
+        f.`function_name`,m.mfrsname,b.brandname,u.unitname, j.`view_good_name`
         from aa_jpcp j left join c_mfrs m on j.mfrsid=m.mfrsnum left join c_brand b on j.brandnum=b.brandnum   AND j.`mfrsid`=b.`mfrsid` left join
-        c_unit u on j.unitid= u.unitid left join a_cyl l on l.cyl_id=j.cyl_id left join a_sph s on s.sph_id=j.sph_id
+        c_unit u on j.unitid= u.unitid
         left join p_light lig on lig.light_id=j.light_id
         left join a_lightbelow lt on lt.lightbelow_id=j.lightbelow_id
         left join p_lens pl on pl.lens_id = j.lens_id
         left join p_gradual g on g.gradual_id = j.gradual_id
-        left join c_refractivity r on r.refractivityid = j.refractivityid
         left join p_function f on f.function_id = j.function_id
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>

@@ -1381,18 +1381,38 @@
     </select>
     <!--镜片成品【商】【品】【查】【询】-->
     <select id="selectJpcp" resultType="com.shiguang.product.domain.JpcpDO">
-        select j.id as goodsxinxiid,j.produc_num,j.produc_name,u.unitname,b.brandname,j.retail_price,j.tax_price,s.sph,c.cyl,
-        li.lightbelow,r.refractivityvalue,l.light_name,le.lens_name,g.gradual_name,f.function_name,
-        j.produc_code,j.trade_price,j.transfer_price,mfrs.medicinecode,j.classtype,j.produc_factory
-        from aa_jpcp j join c_unit u on j.unitid=u.unitid left join a_sph s on j.sph_id=s.sph_id
-        left join a_cyl c on j.cyl_id=c.cyl_id left join a_lightbelow li on j.lightbelow_id=li.lightbelow_id
-        left join c_refractivity r on j.refractivityid=r.refractivityid
-        left join p_light l on j.light_id=l.light_id
-        left join p_lens le on j.lens_id=le.lens_id
-        left join p_gradual g on j.gradual_id=g.gradual_id
-        left join p_function f on j.function_id=f.function_id
-        left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid`
-        left join c_mfrs mfrs on j.mfrsid=mfrs.mfrsnum
+        SELECT
+        j.id AS goodsxinxiid,
+        j.produc_num,
+        j.produc_name,
+        u.unitname,
+        b.brandname,
+        j.retail_price,
+        j.tax_price,
+        j.sph_id as sph,
+        j.cyl_id as cyl,
+        j.lightbelow_id as lightbelow,
+        j.refractivityid as refractivityvalue,
+        l.light_name,
+        le.lens_name,
+        g.gradual_name,
+        f.function_name,
+        j.produc_code,
+        j.trade_price,
+        j.transfer_price,
+        mfrs.medicinecode,
+        j.classtype,
+        j.produc_factory
+        FROM
+        aa_jpcp j
+        JOIN c_unit u ON j.unitid = u.unitid
+        LEFT JOIN p_light l ON j.light_id = l.light_id
+        LEFT JOIN p_lens le ON j.lens_id = le.lens_id
+        LEFT JOIN p_gradual g ON j.gradual_id = g.gradual_id
+        LEFT JOIN p_function f ON j.function_id = f.function_id
+        LEFT JOIN c_brand b ON j.brandnum = b.brandnum
+        AND j.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_mfrs mfrs ON j.mfrsid = mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
@@ -1433,15 +1453,15 @@
         </if>
     </select>
     <select id="selectJpcpCount" resultType="int">
-        select count(*) from aa_jpcp j join c_unit u on j.unitid=u.unitid left join a_sph s on j.sph_id=s.sph_id
-        left join a_cyl c on j.cyl_id=c.cyl_id left join a_lightbelow li on j.lightbelow_id=li.lightbelow_id
-        left join c_refractivity r on j.refractivityid=r.refractivityid
-        left join p_light l on j.light_id=l.light_id
-        left join p_lens le on j.lens_id=le.lens_id
-        left join p_gradual g on j.gradual_id=g.gradual_id
-        left join p_function f on j.function_id=f.function_id
-        left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid`
-        left join c_mfrs mfrs on j.mfrsid=mfrs.mfrsnum
+        select count(*)  FROM aa_jpcp j
+        JOIN c_unit u ON j.unitid = u.unitid
+        LEFT JOIN p_light l ON j.light_id = l.light_id
+        LEFT JOIN p_lens le ON j.lens_id = le.lens_id
+        LEFT JOIN p_gradual g ON j.gradual_id = g.gradual_id
+        LEFT JOIN p_function f ON j.function_id = f.function_id
+        LEFT JOIN c_brand b ON j.brandnum = b.brandnum
+        AND j.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_mfrs mfrs ON j.mfrsid = mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
@@ -1554,16 +1574,34 @@
     </select>
     <!--隐形成品【商】【品】【查】【询】-->
     <select id="selectYxcp" resultType="com.shiguang.product.domain.YxcpDO">
-        select y.id as goodsxinxiid,
-	    y.produc_num,y.produc_name,y.produc_code,u.unitname,y.factory,y.retail_price,y.tax_price,s.sph,c.cyl,
-	    y.curvature,y.diameter,pu.usage_name,pt.type_name,y.trade_price,y.transfer_price,b.brandname,mfrs.medicinecode,y.classtype,y.factory
-		from aa_yxcp y left join c_unit u on y.unitid=u.unitid
-		left join a_sph s on y.sph_id=s.sph_id
-		left join a_cyl c on y.cyl_id=c.cyl_id
-		left join p_usage pu  on y.usage_id=pu.usage_id
-		left join p_type pt  on y.type_id=pt.type_id
-		left join c_brand b on y.brandnum=b.brandnum AND y.`mfrsid`=b.`mfrsid`
-        left join c_mfrs mfrs on y.mfrsid=mfrs.mfrsnum
+        SELECT
+        y.id AS goodsxinxiid,
+        y.produc_num,
+        y.produc_name,
+        y.produc_code,
+        u.unitname,
+        y.factory,
+        y.retail_price,
+        y.tax_price,
+        y.sph_id AS sph,
+        y.cyl_id AS cyl,
+        y.curvature,
+        y.diameter,
+        pu.usage_name,
+        pt.type_name,
+        y.trade_price,
+        y.transfer_price,
+        b.brandname,
+        mfrs.medicinecode,
+        y.classtype
+        FROM
+        aa_yxcp y
+        LEFT JOIN c_unit u ON y.unitid = u.unitid
+        LEFT JOIN p_usage pu ON y.usage_id = pu.usage_id
+        LEFT JOIN p_type pt ON y.type_id = pt.type_id
+        LEFT JOIN c_brand b ON y.brandnum = b.brandnum
+        AND y.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_mfrs mfrs ON y.mfrsid = mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and y.produc_code = #{producCode}</if>
@@ -1602,13 +1640,14 @@
         </if>
     </select>
     <select id="selectYxcpCount" resultType="int">
-        select count(*) from aa_yxcp y left join c_unit u on y.unitid=u.unitid
-        left join a_sph s on y.sph_id=s.sph_id
-        left join a_cyl c on y.cyl_id=c.cyl_id
-        left join p_usage pu  on y.usage_id=pu.usage_id
-        left join p_type pt  on y.type_id=pt.type_id
-        left join c_brand b on y.brandnum=b.brandnum AND y.`mfrsid`=b.`mfrsid`
-        left join c_mfrs mfrs on y.mfrsid=mfrs.mfrsnum
+        select count(*)  FROM
+        aa_yxcp y
+        LEFT JOIN c_unit u ON y.unitid = u.unitid
+        LEFT JOIN p_usage pu ON y.usage_id = pu.usage_id
+        LEFT JOIN p_type pt ON y.type_id = pt.type_id
+        LEFT JOIN c_brand b ON y.brandnum = b.brandnum
+        AND y.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_mfrs mfrs ON y.mfrsid = mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and y.produc_code = #{producCode}</if>

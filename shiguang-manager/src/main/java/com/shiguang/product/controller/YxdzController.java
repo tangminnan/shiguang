@@ -242,6 +242,14 @@ public class YxdzController {
         Map<String, Object> map = new HashMap<>();
         map.put("producNum",producNum);
         List<YxdzDO> haveNum=yxdzService.haveNum(map);
+        String producName=yxdz.getProducName();
+        String cylUp=yxdz.getCylUp();
+        String cylDown=yxdz.getCylDown();
+        String sphUp=yxdz.getSphUp();
+        String sphDown=yxdz.getSphDown();
+        String retailPrice=yxdz.getRetailPrice();
+        yxdz.setViewGoodName(producName);
+        yxdz.setProducName(producName+"-球镜:"+sphUp+"/"+sphDown+"-柱镜:"+cylUp+"/"+cylDown+"-颜色:"+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }

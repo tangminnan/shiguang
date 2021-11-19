@@ -243,7 +243,7 @@ public class JpdzController {
 //        String color=jpcp.getColor();
         String retailPrice=jpdz.getRetailPrice();
         jpdz.setViewGoodName(producName);
-        jpdz.setProducName(producName+"-球镜:"+cylUp+"/"+cylDown+"-柱镜:"+sphUp+"/"+sphDown+"-颜色:"+"-标价:"+retailPrice);
+        jpdz.setProducName(producName+"-球镜:"+sphUp+"/"+sphDown+"-柱镜:"+cylUp+"/"+cylDown+"-颜色:"+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }

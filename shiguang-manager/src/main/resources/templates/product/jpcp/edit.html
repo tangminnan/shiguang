@@ -71,6 +71,7 @@
                 <td>
                     <select name="unitid" id="unitid" th:value="${jpcp.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
+                        <option></option>
                         <option th:each="ls:${unitDOList}"
                                 th:text="${ls.unitname}"
                                 th:value="${ls.unitid}"></option>
@@ -82,10 +83,11 @@
                 <td>球镜：</td>
                 <td>
                     <select id="sphId" name="sphId" th:value="${jpcp.sphId}" class="form-control"
-                            data-actions-box="false" data-size="5" disabled>
+                            data-actions-box="false" data-size="5"  disabled>
+                        <option></option>
                         <option th:each="ls:${sphDOList}"
                                 th:text="${ls.sph}"
-                                th:value="${ls.sphId}"
+                                th:value="${ls.sph}"
                         ></option>
                         <input id="sphIds" name="sphIds" th:value="${jpcp.sphId}" class="form-control"
                                type="hidden">
@@ -95,10 +97,11 @@
                 <td>柱镜：</td>
                 <td>
                     <select id="cylId" name="cylId" th:value="${jpcp.cylId}" class="form-control"
-                            data-actions-box="false" data-size="5" disabled>
+                            data-actions-box="false" data-size="5"  disabled>
+                        <option></option>
                         <option th:each="ls:${cylDOList}"
                                 th:text="${ls.cyl}"
-                                th:value="${ls.cylId}"
+                                th:value="${ls.cyl}"
                         ></option>
                         <input id="cylIds" name="cylIds" th:value="${jpcp.cylId}" class="form-control"
                                type="hidden">
@@ -112,9 +115,10 @@
                     <select id="lightbelowId" name="lightbelowId" th:value="${jpcp.lightbelowId}"
                             class="form-control"
                             data-actions-box="false" data-size="5">
+                        <option></option>
                         <option th:each="ls:${lightbelowDOList}"
                                 th:text="${ls.lightbelow}"
-                                th:value="${ls.lightbelowId}"
+                                th:value="${ls.lightbelow}"
                         ></option>
                         <input id="lightbelowIds" name="lightbelowIds" th:value="${jpcp.lightbelowId}"
                                class="form-control"
@@ -125,6 +129,7 @@
                 <td>
                     <select id="lensId" name="lensId" th:value="${jpcp.lensId}" class="form-control"
                             data-actions-box="false" data-size="5">
+                        <option></option>
                         <option th:each="ls:${lensDOList}"
                                 th:text="${ls.lensName}"
                                 th:value="${ls.lensId}"
@@ -146,9 +151,9 @@
                 <!--</td>-->
                 <td>销售状态：</td>
                 <td>
-                    <input th:field="*{jpcp.xsstate}" name="xsstate" value="1" type="radio">
+                    <input id="PH-S" th:field="*{jpcp.xsstate}" name="xsstate" value="1" type="radio">
                     <label for="PH-S" style="margin-right: 5%">禁用</label>
-                    <input th:field="*{jpcp.xsstate}" name="xsstate" value="0" type="radio">
+                    <input id="PH-F" th:field="*{jpcp.xsstate}" name="xsstate" value="0" type="radio">
                     <label for="PH-F">启用</label>
                     <em>*</em>
                 </td>
@@ -167,6 +172,7 @@
                     <select id="lightId" name="lightId" th:value="${jpcp.lightId}" class="form-control"
                             data-actions-box="false" data-size="5"
                             onchange="lightIdstr()">
+                        <option></option>
                         <option th:each="ls:${lightDOList}"
                                 th:text="${ls.lightName}"
                                 th:value="${ls.lightId}"
@@ -180,6 +186,7 @@
                     <select id="gradualId" name="gradualId" th:value="${jpcp.gradualId}"
                             class="form-control" style="display: none;"
                             data-actions-box="false" data-size="5">
+                        <option></option>
                         <option th:each="ls:${gradualDOList}"
                                 th:text="${ls.gradualName}"
                                 th:value="${ls.gradualId}"
@@ -196,7 +203,7 @@
                             data-actions-box="false" data-size="5">
                         <option th:each="ls:${refractivityDOList}"
                                 th:text="${ls.refractivityvalue}"
-                                th:value="${ls.refractivityid}"
+                                th:value="${ls.refractivityvalue}"
                         ></option>
                     </select>
                     <input id="refractivityids" name="refractivityids" th:value="${jpcp.refractivityid}"
@@ -210,6 +217,7 @@
                     <select id="functionId" name="functionId" th:value="${jpcp.functionId}"
                             class="form-control"
                             data-actions-box="false" data-size="5">
+                        <option></option>
                         <option th:each="ls:${functionDOList}"
                                 th:text="${ls.functionName}"
                                 th:value="${ls.functionId}"
@@ -292,9 +300,12 @@
         //球镜
         var sphIds = $("input[name='sphIds']").val();
         $("#sphId").find("[value='" + sphIds + "']").attr("selected", true);
+        // alert(sphIds)
         //柱镜
         var cylIds = $("input[name='cylIds']").val();
-        $("#cylIds").find("[value='" + cylIds + "']").attr("selected", true);
+        $("#cylId").find("[value='" + cylIds + "']").attr("selected", true);
+        // alert(cylIds)
+
         //下加光
         var lightbelowIds = $("input[name='lightbelowIds']").val();
         $("#lightbelowId").find("[value='" + lightbelowIds + "']").attr("selected", true);

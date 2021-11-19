@@ -64,6 +64,7 @@
                             <div class="col-sm-8">
                                 <select name="unitid" id="unitid" th:value="${jpcp.unitid}" class="form-control"
                                         data-actions-box="false" data-size="5" disabled>
+                                    <option></option>
                                     <option th:each="ls:${unitDOList}"
                                             th:text="${ls.unitname}"
                                             th:value="${ls.unitid}"></option>
@@ -79,7 +80,7 @@
                                         data-actions-box="false" data-size="5" disabled>
                                     <option th:each="ls:${sphDOList}"
                                             th:text="${ls.sph}"
-                                            th:value="${ls.sphId}"
+                                            th:value="${ls.sph}"
                                     ></option>
                                     <input id="sphIds" name="sphIds" th:value="${jpcp.sphId}" class="form-control"
                                            type="hidden">
@@ -93,7 +94,7 @@
                                         data-actions-box="false" data-size="5" disabled>
                                     <option th:each="ls:${cylDOList}"
                                             th:text="${ls.cyl}"
-                                            th:value="${ls.cylId}"
+                                            th:value="${ls.cyl}"
                                     ></option>
                                     <input id="cylIds" name="cylIds" th:value="${jpcp.cylId}" class="form-control"
                                            type="hidden">
@@ -106,9 +107,10 @@
                                 <select id="lightbelowId" name="lightbelowId" th:value="${jpcp.lightbelowId}"
                                         class="form-control"
                                         data-actions-box="false" data-size="5" disabled>
+                                    <option></option>
                                     <option th:each="ls:${lightbelowDOList}"
                                             th:text="${ls.lightbelow}"
-                                            th:value="${ls.lightbelowId}"
+                                            th:value="${ls.lightbelow}"
                                     ></option>
                                     <input id="lightbelowIds" name="lightbelowIds" th:value="${jpcp.lightbelowId}"
                                            class="form-control"
@@ -121,6 +123,7 @@
                             <div class="col-sm-8">
                                 <select id="lensId" name="lensId" th:value="${jpcp.lensId}" class="form-control"
                                         data-actions-box="false" data-size="5" disabled>
+                                    <option></option>
                                     <option th:each="ls:${lensDOList}"
                                             th:text="${ls.lensName}"
                                             th:value="${ls.lensId}"
@@ -162,6 +165,7 @@
                                 <select id="lightId" name="lightId" th:value="${jpcp.lightId}" class="form-control"
                                         data-actions-box="false" data-size="5"
                                         onchange="lightIdstr(this.options[this.options.selectedIndex].value)" disabled>
+                                    <option></option>
                                     <option th:each="ls:${lightDOList}"
                                             th:text="${ls.lightName}"
                                             th:value="${ls.lightId}"
@@ -177,6 +181,7 @@
                                 <select id="gradualId" name="gradualId" th:value="${jpcp.gradualId}"
                                         class="form-control"
                                         data-actions-box="false" data-size="5" disabled>
+                                    <option></option>
                                     <option th:each="ls:${gradualDOList}"
                                             th:text="${ls.gradualName}"
                                             th:value="${ls.gradualId}"
@@ -195,7 +200,7 @@
                                         data-actions-box="false" data-size="5" disabled>
                                     <option th:each="ls:${refractivityDOList}"
                                             th:text="${ls.refractivityvalue}"
-                                            th:value="${ls.refractivityid}"
+                                            th:value="${ls.refractivityvalue}"
                                     ></option>
                                 </select>
                                 <input id="refractivityids" name="refractivityids" th:value="${jpcp.refractivityid}"
@@ -209,6 +214,7 @@
                                 <select id="functionId" name="functionId" th:value="${jpcp.functionId}"
                                         class="form-control"
                                         data-actions-box="false" data-size="5" disabled>
+                                    <option></option>
                                     <option th:each="ls:${functionDOList}"
                                             th:text="${ls.functionName}"
                                             th:value="${ls.functionId}"
@@ -276,7 +282,7 @@
         $("#sphId").find("[value='" + sphIds + "']").attr("selected", true);
         //柱镜
         var cylIds = $("input[name='cylIds']").val();
-        $("#cylIds").find("[value='" + cylIds + "']").attr("selected", true);
+        $("#cylId").find("[value='" + cylIds + "']").attr("selected", true);
         //下加光
         var lightbelowIds = $("input[name='lightbelowIds']").val();
         $("#lightbelowId").find("[value='" + lightbelowIds + "']").attr("selected", true);

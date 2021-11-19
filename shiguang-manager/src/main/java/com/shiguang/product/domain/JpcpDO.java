@@ -81,7 +81,7 @@ public class JpcpDO implements Serializable {
     //渐进片分类名称
     private String gradualName;
     //折射率id
-    private Integer refractivityid;
+    private String refractivityid;
     //折射率
     private String refractivityvalue;
     //镜片功能id
@@ -354,14 +354,14 @@ public class JpcpDO implements Serializable {
     /**
      * 设置：折射率id
      */
-    public void setRefractivityid(Integer refractivityid) {
+    public void setRefractivityid(String refractivityid) {
         this.refractivityid = refractivityid;
     }
 
     /**
      * 获取：折射率id
      */
-    public Integer getRefractivityid() {
+    public String getRefractivityid() {
         return refractivityid;
     }
 

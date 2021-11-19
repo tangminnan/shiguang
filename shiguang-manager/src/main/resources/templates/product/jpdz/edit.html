@@ -87,6 +87,7 @@
                 <td>
                     <select name="unitid" id="unitid" th:value="${jpdz.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
+                        <option></option>
                         <option th:each="ls:${unitDOList}"
                                 th:text="${ls.unitname}"
                                 th:value="${ls.unitid}"></option>
@@ -101,7 +102,8 @@
                 <td>
                     上限
                     <select id="sphUp" name="sphUp" th:value="${jpdz.sphUp}"
-                            data-actions-box="false" data-size="5" style="width:15%">
+                            data-actions-box="false" data-size="5" style="width:15%" disabled>
+                        <option></option>
                         <option th:each="ls:${sphDOList}"
                                 th:text="${ls.sph}"
                                 th:value="${ls.sph}"
@@ -111,7 +113,8 @@
                            type="hidden">
                     下限
                     <select id="sphDown" name="sphDown" th:value="${jpdz.sphDown}" style="width: 15%"
-                            data-actions-box="false" data-size="5">
+                            data-actions-box="false" data-size="5" disabled>
+                        <option></option>
                         <option th:each="ls:${sphDOList}"
                                 th:text="${ls.sph}"
                                 th:value="${ls.sph}"
@@ -121,7 +124,8 @@
                     </select>
                     跨度
                     <select id="sphSpan" name="sphSpan" th:value="${jpdz.sphSpan}" style="width: 15%"
-                            data-actions-box="false" data-size="5">
+                            data-actions-box="false" data-size="5" disabled>
+                        <option></option>
                         <option th:each="ls:${spanDOList}"
                                 th:text="${ls.span}"
                                 th:value="${ls.span}"
@@ -135,7 +139,8 @@
                 <td>
                     上限
                     <select id="cylUp" name="cylUp" th:value="${jpdz.cylUp}" data-actions-box="false" style="width:55%"
-                            data-size="5">
+                            data-size="5" disabled>
+                        <option></option>
                         <option th:each="ls:${cylDOList}"
                                 th:text="${ls.cyl}"
                                 th:value="${ls.cyl}"
@@ -147,7 +152,8 @@
                     <br>
                     下限
                     <select id="cylDown" name="cylDown" th:value="${jpdz.cylDown}" style="width:55%"
-                            data-actions-box="false" data-size="5">
+                            data-actions-box="false" data-size="5" disabled>
+                        <option></option>
                         <option th:each="ls:${cylDOList}"
                                 th:text="${ls.cyl}"
                                 th:value="${ls.cyl}"
@@ -159,7 +165,8 @@
                     <br>
                     跨度
                     <select id="cylSpan" name="cylSpan" th:value="${jpdz.cylSpan}" style="width:55%"
-                            data-actions-box="false" data-size="5">
+                            data-actions-box="false" data-size="5" disabled>
+                        <option></option>
                         <option th:each="ls:${spanDOList}"
                                 th:text="${ls.span}"
                                 th:value="${ls.span}"
@@ -172,7 +179,8 @@
                 <td>下加光：</td>
                 <td>
                     <select id="lightbelowRight" name="lightbelowRight" th:value="${jpdz.cylSpan}" style="width: 25%"
-                            data-actions-box="false" data-size="5">
+                            data-actions-box="false" data-size="5" >
+                        <option></option>
                         <option th:each="ls:${lightbelowDOList}"
                                 th:text="${ls.lightbelow}"
                                 th:value="${ls.lightbelow}"
@@ -183,6 +191,7 @@
                     </select>
                     -<select id="lightbelowLeft" name="lightbelowLeft" th:value="${jpdz.cylSpan}" style="width: 25%"
                              data-actions-box="false" data-size="5">
+                    <option></option>
                     <option th:each="ls:${lightbelowDOList}"
                             th:text="${ls.lightbelow}"
                             th:value="${ls.lightbelow}"
@@ -199,6 +208,7 @@
                 <td>
                     <select id="lensId" name="lensId" th:value="${jpdz.lensId}" class="form-control"
                             data-actions-box="false" data-size="5">
+                        <option></option>
                         <option th:each="ls:${lensDOList}"
                                 th:text="${ls.lensName}"
                                 th:value="${ls.lensId}"
@@ -237,6 +247,7 @@
                     <select id="lightId" name="lightId" th:value="${jpdz.lightId}" class="form-control"
                             data-actions-box="false" data-size="5"
                             onchange="lightIdstr()">
+                        <option></option>
                         <option th:each="ls:${lightDOList}"
                                 th:text="${ls.lightName}"
                                 th:value="${ls.lightId}"
@@ -250,6 +261,7 @@
                     <select id="gradualId" name="gradualId" th:value="${jpdz.gradualId}"
                             class="form-control" style="display: none;"
                             data-actions-box="false" data-size="5">
+                        <option></option>
                         <option th:each="ls:${gradualDOList}"
                                 th:text="${ls.gradualName}"
                                 th:value="${ls.gradualId}"
@@ -266,7 +278,7 @@
                             data-actions-box="false" data-size="5">
                         <option th:each="ls:${refractivityDOList}"
                                 th:text="${ls.refractivityvalue}"
-                                th:value="${ls.refractivityid}"
+                                th:value="${ls.refractivityvalue}"
                         ></option>
                     </select>
                     <input id="refractivityids" name="refractivityids" th:value="${jpdz.refractivityid}"
@@ -280,6 +292,7 @@
                     <select id="functionId" name="functionId" th:value="${jpdz.functionId}"
                             class="form-control"
                             data-actions-box="false" data-size="5">
+                        <option></option>
                         <option th:each="ls:${functionDOList}"
                                 th:text="${ls.functionName}"
                                 th:value="${ls.functionId}"
@@ -409,6 +422,7 @@
         $("#gradualId").find("[value='" + gradualIds + "']").attr("selected", true);
         //折射率
         var refractivityids = $("input[name='refractivityids']").val();
+        // alert(refractivityids)
         $("#refractivityid").find("[value='" + refractivityids + "']").attr("selected", true);
         //功能片
         var functionIds = $("input[name='functionIds']").val();

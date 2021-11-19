@@ -79,7 +79,7 @@
                             <label class="col-sm-3 control-label">配件型：</label>
                             <div class="col-sm-8">
                                 <select id="partsStyle" name="partsStyle" class="form-control" disabled>
-                                    <option></option>
+                                    <option value=""></option>
                                     <option value="框镜" th:field="*{parts.partsStyle}">框镜</option>
                                     <option value="隐形" th:field="*{parts.partsStyle}">隐形</option>
                                 </select>
@@ -135,7 +135,7 @@
                                         data-actions-box="false" data-size="5" disabled>
                                     <option th:each="ls:${refractivityDOList}"
                                             th:text="${ls.refractivityvalue}"
-                                            th:value="${ls.refractivityid}"
+                                            th:value="${ls.refractivityvalue}"
                                     ></option>
                                 </select>
                                 <input id="refractivityids" name="refractivityids" th:value="${parts.refractivityid}"

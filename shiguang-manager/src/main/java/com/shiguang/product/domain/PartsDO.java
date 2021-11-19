@@ -65,7 +65,7 @@ public class PartsDO implements Serializable {
     //批号管理（1是：2否）
     private String batchid;
     //折射率id
-    private Integer refractivityid;
+    private String refractivityid;
     //税率(%)
     private String tax;
     //含税单价
@@ -271,14 +271,14 @@ public class PartsDO implements Serializable {
     /**
      * 设置：折射率id
      */
-    public void setRefractivityid(Integer refractivityid) {
+    public void setRefractivityid(String refractivityid) {
         this.refractivityid = refractivityid;
     }
 
     /**
      * 获取：折射率id
      */
-    public Integer getRefractivityid() {
+    public String getRefractivityid() {
         return refractivityid;
     }
 

@@ -85,6 +85,7 @@
                 <td>配件型：</td>
                 <td>
                     <select id="partsStyle" name="partsStyle">
+                        <option value=""></option>
                         <option value="框镜" th:field="*{parts.partsStyle}">框镜</option>
                         <option value="隐形" th:field="*{parts.partsStyle}">隐形</option>
                     </select>
@@ -96,6 +97,7 @@
                 <td>
                     <select name="unitid" id="unitid" th:value="${parts.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
+                        <option></option>
                         <option th:each="ls:${unitDOList}"
                                 th:text="${ls.unitname}"
                                 th:value="${ls.unitid}"></option>
@@ -138,7 +140,7 @@
                             data-actions-box="false" data-size="5">
                         <option th:each="ls:${refractivityDOList}"
                                 th:text="${ls.refractivityvalue}"
-                                th:value="${ls.refractivityid}"
+                                th:value="${ls.refractivityvalue}"
                         ></option>
                     </select>
                     <input id="refractivityids" name="refractivityids" th:value="${parts.refractivityid}"

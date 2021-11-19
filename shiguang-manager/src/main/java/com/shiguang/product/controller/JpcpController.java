@@ -244,7 +244,7 @@ public class JpcpController {
 //        String color=jpcp.getColor();
         String retailPrice=jpcp.getRetailPrice();
         jpcp.setViewGoodName(producName);
-        jpcp.setProducName(producName+"-球镜:"+cyl+"-柱镜:"+sph+"-颜色:"+"-标价:"+retailPrice);
+        jpcp.setProducName(producName+"-球镜:"+sph+"-柱镜:"+cyl+"-颜色:"+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }
