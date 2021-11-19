@@ -64,6 +64,24 @@
 		)
 	</insert>
 
+    <insert id="saveJdj" parameterType="com.shiguang.logstatus.domain.JDJInfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into jdj_fetch
+		(
+			`jdj_info`
+		)
+		values
+		(
+			#{jdjInfo}
+		)
+	</insert>
+
+    <select id="jdjList" resultType="com.shiguang.logstatus.domain.JDJInfoDO">
+        select `id`,`jdj_info` from jdj_fetch
+    </select>
+    <delete id="deleteJdj">
+        delete from jdj_fetch where id = #{value}
+    </delete>
+
     <update id="update" parameterType="com.shiguang.logstatus.domain.LensMeterDO">
         update lens_meter
         <set>

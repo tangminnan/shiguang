@@ -272,7 +272,7 @@
 
 	<select id="peijinglist" resultType="com.shiguang.storeSales.domain.SalesDO">
 		select s.`id`,s.`member_number`,m.`name` as memberName,m.`phone_1` as memberTel,m.`address` as address,s.`sale_name`,s.`sale_number`,s.`goods_num`,s.`goods_code`,s.`eye_type`,s.`amount_money`,s.`prime_money`,s.`mirror_way`,
-		s.`mirror_time`,s.`miror_address`,s.`urgent_status`,s.`goods_rebate`,s.`fixed_price`,s.`moling_money`,s.`additional_cost`,
+		s.`mirror_time`,s.`miror_address`,s.`urgent_status`,s.`goods_rebate`,s.`fixed_price`,s.`moling_money`,s.`additional_cost`,s.`classtype`,
 		s.`process_ask`,s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`give_name`,s.`peijing_time`,s.`batch`
 		from store_sales s join member m on m.card_number = s.member_number and m.state = 1 and m.`status` = 0
 		left join log_status ls on ls.sale_number = s.sale_number

@@ -47,6 +47,10 @@ public class UnqualiffedDO implements Serializable {
 	private String goodsName;
 	//商品条码
 	private String goodsCode;
+	//商品描述
+	private String storeDescribe;
+	//订做还是成品
+	private String classType;
 	//处理
 	private String handle;
 	//单据日期
@@ -213,4 +217,20 @@ public class UnqualiffedDO implements Serializable {
 	public void setBillTime(String billTime){this.billTime = billTime;}
 
 	public String getBillTime(){return billTime;}
+
+	public String getStoreDescribe() {
+		return storeDescribe;
+	}
+
+	public void setStoreDescribe(String storeDescribe) {
+		this.storeDescribe = storeDescribe;
+	}
+
+	public String getClassType() {
+		return classType;
+	}
+
+	public void setClassType(String classType) {
+		this.classType = classType;
+	}
 }

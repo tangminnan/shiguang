@@ -1,5 +1,5 @@
 var dataArray=new Array();
-function getData(objNum,objName,objCode,saleNumber){
+function getData(objNum,objName,objCode,saleNumber,storeDescribe,classType,saleCount){
     // dataArray["goodsNum"] = objNum;
     // dataArray["goodsName"] = objCode;
     // alert(dataArray)
@@ -7,7 +7,10 @@ function getData(objNum,objName,objCode,saleNumber){
         goodsNum:objNum,
         goodsName:objName,
         goodsCode:objCode,
-        saleNumber:saleNumber
+        saleNumber:saleNumber,
+        storeDescribe:storeDescribe,
+        classType:classType,
+        saleCount:saleCount
 };
     if (null != map1){
         dataArray.push(map1);
@@ -34,6 +37,8 @@ function addGoods (){
                 goodsHtml += "<input type='hidden' id='saleNumber' name='saleNumber' value='"+rows[i].saleNumber+"'>";
                 goodsHtml += "<td>"+rows[i].goodsName+"</td>";
                 goodsHtml += "<input type='hidden' id='goodsName' name='goodsName' value='"+rows[i].goodsName+"'>";
+                goodsHtml += "<input type='hidden' id='storeDescribe' name='storeDescribe' value='"+rows[i].storeDescribe+"'>";
+                goodsHtml += "<input type='hidden' id='classType' name='classType' value='"+rows[i].classType+"'>";
                 goodsHtml += "<td style='width: 25%;'>";
                 goodsHtml += "<select id='cause"+c+"' name='cause' onchange='getCause(this)'>";
                 goodsHtml += "<option value=''>请选择所属原因</option>";
@@ -51,7 +56,7 @@ function addGoods (){
                 goodsHtml += "</select>";
                 goodsHtml += "</td>";
                 goodsHtml += "<td><input type='text' id='remark' name='remark'></td>";
-                goodsHtml += "<td><input type='text' id='count' name='count' value='1' readonly></td>";
+                goodsHtml += "<td><input type='text' id='count' name='count' value='"+rows[i].saleCount+"' readonly></td>";
                 goodsHtml += "<td><input type='text' id='goodsCode' name='goodsCode'value='"+rows[i].goodsCode+"'></td>";
                 goodsHtml += "<td>";
                 goodsHtml += "<select id='handle' name='handle'>";

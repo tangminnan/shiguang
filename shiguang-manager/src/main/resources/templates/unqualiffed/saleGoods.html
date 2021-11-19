@@ -101,7 +101,10 @@
                         var goodsNumStr = godist[a].goodsNum;
                         var goodsNameStr = godist[a].goodsName;
                         var goodsCodeStr = godist[a].goodsCode;
-                        html = "<tr><td><input type=\"checkbox\" onchange='getData(\""+goodsNumStr+"\",\""+goodsNameStr+"\",\""+goodsCodeStr+"\",\""+saleNumber+"\")'/></td>";
+                        var storeDescribe = godist[a].goodsbs;
+                        var classType = godist[a].classType;
+                        var saleCount = godist[a].saleCount;
+                        html = "<tr><td><input type=\"checkbox\" onchange='getData(\""+goodsNumStr+"\",\""+goodsNameStr+"\",\""+goodsCodeStr+"\",\""+saleNumber+"\",\""+storeDescribe+"\",\""+classType+"\",\""+saleCount+"\")'/></td>";
                         html += "<td>"+godist[a].goodsNum+"</td>";
                         html += "<td>"+godist[a].goodsCode+"</td>";
                         html += "<td>"+godist[a].goodsName+"</td>";

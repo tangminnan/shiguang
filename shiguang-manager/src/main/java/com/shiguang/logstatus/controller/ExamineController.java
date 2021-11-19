@@ -1,6 +1,7 @@
 package com.shiguang.logstatus.controller;
 
 import com.shiguang.common.utils.*;
+import com.shiguang.logstatus.domain.JDJInfoDO;
 import com.shiguang.logstatus.domain.LensMeterDO;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
@@ -32,7 +33,6 @@ public class ExamineController {
     private SalesService salesService;
     @Autowired
     private LensMeterService lensMeterService;
-    SerialPortUtils serialPort = new SerialPortUtils();
 
     /**
      * 加工师检验
@@ -197,15 +197,40 @@ public class ExamineController {
         Map<String,Object> map = new HashMap<>();
         LensMeterDO lensMeterDO = new LensMeterDO();
         //serialPort.sendToData();
-        List<LensMeterDO> lensMeterDOList = lensMeterService.list(map);
-        if (null != lensMeterDOList && lensMeterDOList.size() > 0){
-            lensMeterDO.setId(lensMeterDOList.get(0).getId());
-            lensMeterDO.setRightSph(lensMeterDOList.get(0).getRightSph());
-            lensMeterDO.setRightCyl(lensMeterDOList.get(0).getRightCyl());
-            lensMeterDO.setRightZx(lensMeterDOList.get(0).getRightZx());
-            lensMeterDO.setLeftSph(lensMeterDOList.get(0).getLeftSph());
-            lensMeterDO.setLeftCyl(lensMeterDOList.get(0).getLeftCyl());
-            lensMeterDO.setLeftZx(lensMeterDOList.get(0).getLeftZx());
+        List<JDJInfoDO> jdjInfoDOS = lensMeterService.jdjList(map);
+        if (null != jdjInfoDOS && jdjInfoDOS.size() > 0){
+            String dataSerial = jdjInfoDOS.get(0).getJdjInfo();
+            Long id = jdjInfoDOS.get(0).getId();
+            String zifuRightSph = dataSerial.substring(40,41);
+            String dd = dataSerial.substring(42, 46);
+            String rightsph = zifuRightSph + dataSerial.substring(42, 46);
+            String zifuRightCyl = dataSerial.substring(46, 47);
+            String rightcyl = zifuRightCyl +  dataSerial.substring(48, 52);
+            String rightzx = dataSerial.substring(52, 55);
+            String zifuLeftSph = dataSerial.substring(76, 77);
+            String leftsph = zifuLeftSph + dataSerial.substring(78, 82);
+            String zifuLeftCyl = dataSerial.substring(82, 83);
+            String leftcyl = zifuLeftCyl + dataSerial.substring(84, 88);
+            String leftzx = dataSerial.substring(88, 91);
+            LensMeterDO lensMeterDOs = new LensMeterDO();
+            lensMeterDOs.setRightSph(rightsph);
+            lensMeterDOs.setRightCyl(rightcyl);
+            lensMeterDOs.setRightZx(rightzx);
+            lensMeterDOs.setLeftSph(leftsph);
+            lensMeterDOs.setLeftCyl(leftcyl);
+            lensMeterDOs.setLeftZx(leftzx);
+            lensMeterService.save(lensMeterDOs);
+            lensMeterService.deleteJdj(id);
+            List<LensMeterDO> lensMeterDOList = lensMeterService.list(map);
+            if (null != lensMeterDOList && lensMeterDOList.size() > 0){
+                lensMeterDO.setId(lensMeterDOList.get(0).getId());
+                lensMeterDO.setRightSph(lensMeterDOList.get(0).getRightSph());
+                lensMeterDO.setRightCyl(lensMeterDOList.get(0).getRightCyl());
+                lensMeterDO.setRightZx(lensMeterDOList.get(0).getRightZx());
+                lensMeterDO.setLeftSph(lensMeterDOList.get(0).getLeftSph());
+                lensMeterDO.setLeftCyl(lensMeterDOList.get(0).getLeftCyl());
+                lensMeterDO.setLeftZx(lensMeterDOList.get(0).getLeftZx());
+            }
         }
         model.addAttribute("lensMeterDO",lensMeterDO);
         return lensMeterDO;

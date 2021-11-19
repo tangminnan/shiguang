@@ -73,4 +73,23 @@ public class SpringUtil implements ApplicationContextAware {
     public static String[] getAliases(String name) throws NoSuchBeanDefinitionException {
         return getApplicationContext().getAliases(name);
     }
+
+    /**
+     * 字节拼接
+     */
+    public static byte[] decode2(byte[] data, byte[] result) {
+
+        byte[] tempResult;
+
+        if (result == null) {
+            tempResult = new byte[data.length];
+            System.arraycopy(data, 0, tempResult, 0, data.length);
+        } else {
+            tempResult = new byte[data.length + result.length];
+            System.arraycopy(result, 0, tempResult, 0, result.length);
+            System.arraycopy(data, 0, tempResult, result.length, data.length);
+        }
+
+        return tempResult;
+    }
 }

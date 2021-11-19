@@ -1,6 +1,7 @@
 package com.shiguang.logstatus.service.impl;
 
 import com.shiguang.logstatus.dao.LensMeterDao;
+import com.shiguang.logstatus.domain.JDJInfoDO;
 import com.shiguang.logstatus.domain.LensMeterDO;
 import com.shiguang.logstatus.service.LensMeterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,20 @@ public class LensMeterServiceImpl implements LensMeterService {
     @Override
     public int batchRemove(Long[] ids){
         return meterDao.batchRemove(ids);
+    }
+
+    @Override
+    public int saveJdj(JDJInfoDO jdjInfoDO){
+        return meterDao.saveJdj(jdjInfoDO);
+    }
+
+    @Override
+    public List<JDJInfoDO> jdjList(Map<String, Object> map){
+        return meterDao.jdjList(map);
+    }
+
+    @Override
+    public int deleteJdj(Long id){
+        return meterDao.deleteJdj(id);
     }
 }

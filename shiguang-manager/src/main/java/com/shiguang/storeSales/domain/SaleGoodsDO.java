@@ -15,6 +15,8 @@ public class SaleGoodsDO implements Serializable {
     private String goodsbs;
     //销售数量
     private String saleCount;
+    //订做还是成品
+    private String classType;
 
     public void setGoodsNum(String goodsNum){this.goodsNum = goodsNum;}
 
@@ -31,4 +33,20 @@ public class SaleGoodsDO implements Serializable {
     public void setSaleCount(String saleCount){this.saleCount = saleCount;}
 
     public String getSaleCount() {return saleCount;}
+
+    public String getGoodsbs() {
+        return goodsbs;
+    }
+
+    public void setGoodsbs(String goodsbs) {
+        this.goodsbs = goodsbs;
+    }
+
+    public String getClassType() {
+        return classType;
+    }
+
+    public void setClassType(String classType) {
+        this.classType = classType;
+    }
 }

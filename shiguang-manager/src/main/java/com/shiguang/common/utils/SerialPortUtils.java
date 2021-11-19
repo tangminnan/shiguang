@@ -1,11 +1,8 @@
 package com.shiguang.common.utils;
 
-import com.shiguang.logstatus.domain.LensMeterDO;
+import com.shiguang.logstatus.domain.JDJInfoDO;
 import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.optometry.controller.SerialDataUtils;
-import com.shiguang.optometry.domain.BleDataBean;
-import com.shiguang.optometry.domain.OptometryDO;
-import com.shiguang.optometry.domain.ResultDiopterDO;
 import com.shiguang.optometry.service.OptometryService;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
@@ -19,6 +16,7 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.logging.LogRecord;
 
 
 /**
@@ -44,6 +42,7 @@ public class SerialPortUtils implements SerialPortEventListener {
     // 保存串口返回信息十六进制
     private String dataHex;
     private SerialDataUtils serialDataUtils = SerialDataUtils.getSerialPortUtils();
+    private byte[] byteArray = null;
 
     /**
      * 初始化串口
@@ -128,43 +127,48 @@ public class SerialPortUtils implements SerialPortEventListener {
             inputStream = serialPort.getInputStream();
             // 通过输入流对象的available方法获取数组字节长度
             byte[] readBuffer = new byte[inputStream.available()];
-            String dataSerial="";
+            byteArray = SpringUtil.decode2(readBuffer,byteArray);
+            Message message = Message.obtain();
+            message.what = 1;
+            handler.removeMessages(1);
+            handler.sendMessageDelayed(message,1000);
+//            String dataSerial="";
             // 从线路上读取数据流
-            int len = 0;
-            while ((len = inputStream.read(readBuffer)) != -1) {
-                // 直接获取到的数据
-                // data = new String(readBuffer, 0, len).trim();
-                // 转为十六进制数据
-                dataHex = bytesToHexString(readBuffer);
-                builder.append(dataHex);
-                //System.out.println("data:" + data);
-                System.out.println("dataHex:" + dataHex);// 读取后置空流对象
-                inputStream.close();
-                inputStream = null;
-                break;
-            }
-            dataSerial = dataSerial + dataHex.toString();
-            dataSerial = hexStringToString(dataSerial);
-            System.out.println(dataSerial);
-            String zifuRightSph = dataSerial.substring(40,41);
-            String dd = dataSerial.substring(42, 46);
-            String rightsph = zifuRightSph + dataSerial.substring(42, 46);
-            String zifuRightCyl = dataSerial.substring(46, 47);
-            String rightcyl = zifuRightCyl +  dataSerial.substring(48, 52);
-            String rightzx = dataSerial.substring(52, 55);
-            String zifuLeftSph = dataSerial.substring(76, 77);
-            String leftsph = zifuLeftSph + dataSerial.substring(78, 82);
-            String zifuLeftCyl = dataSerial.substring(82, 83);
-            String leftcyl = zifuLeftCyl + dataSerial.substring(84, 88);
-            String leftzx = dataSerial.substring(88, 91);
-            LensMeterDO lensMeterDO = new LensMeterDO();
-            lensMeterDO.setRightSph(rightsph);
-            lensMeterDO.setRightCyl(rightcyl);
-            lensMeterDO.setRightZx(rightzx);
-            lensMeterDO.setLeftSph(leftsph);
-            lensMeterDO.setLeftCyl(leftcyl);
-            lensMeterDO.setLeftZx(leftzx);
-            lensMeterService.save(lensMeterDO);
+//            int len = 0;
+//            while ((len = inputStream.read(readBuffer)) != -1) {
+//                // 直接获取到的数据
+//                // data = new String(readBuffer, 0, len).trim();
+//                // 转为十六进制数据
+//                dataHex = bytesToHexString(readBuffer);
+//                builder.append(dataHex);
+//                //System.out.println("data:" + data);
+//                System.out.println("dataHex:" + dataHex);// 读取后置空流对象
+//                inputStream.close();
+//                inputStream = null;
+//                break;
+//            }
+//            dataSerial = dataSerial + dataHex.toString();
+//            dataSerial = hexStringToString(dataSerial);
+//            System.out.println(dataSerial);
+//            String zifuRightSph = dataSerial.substring(40,41);
+//            String dd = dataSerial.substring(42, 46);
+//            String rightsph = zifuRightSph + dataSerial.substring(42, 46);
+//            String zifuRightCyl = dataSerial.substring(46, 47);
+//            String rightcyl = zifuRightCyl +  dataSerial.substring(48, 52);
+//            String rightzx = dataSerial.substring(52, 55);
+//            String zifuLeftSph = dataSerial.substring(76, 77);
+//            String leftsph = zifuLeftSph + dataSerial.substring(78, 82);
+//            String zifuLeftCyl = dataSerial.substring(82, 83);
+//            String leftcyl = zifuLeftCyl + dataSerial.substring(84, 88);
+//            String leftzx = dataSerial.substring(88, 91);
+//            LensMeterDO lensMeterDO = new LensMeterDO();
+//            lensMeterDO.setRightSph(rightsph);
+//            lensMeterDO.setRightCyl(rightcyl);
+//            lensMeterDO.setRightZx(rightzx);
+//            lensMeterDO.setLeftSph(leftsph);
+//            lensMeterDO.setLeftCyl(leftcyl);
+//            lensMeterDO.setLeftZx(leftzx);
+//            lensMeterService.save(lensMeterDO);
             //serialDataUtils.toData(builder.toString());
 //            BleDataBean bleDataBean = SerialDataUtils.toOptometry(builder.toString());
 //            List<ResultDiopterDO> list = bleDataBean.getSca();
@@ -189,52 +193,20 @@ public class SerialPortUtils implements SerialPortEventListener {
         }
     }
 
-
-    public void readComms(String aa) {
-//        try {
-//            StringBuilder builder = new StringBuilder();
-//            inputStream = serialPort.getInputStream();
-//            // 通过输入流对象的available方法获取数组字节长度
-//            byte[] readBuffer = new byte[inputStream.available()];
-//            // 从线路上读取数据流
-//            int len = 0;
-//            while ((len = inputStream.read(readBuffer)) != -1) {
-//                // 直接获取到的数据
-//                // data = new String(readBuffer, 0, len).trim();
-//                // 转为十六进制数据
-//                dataHex = bytesToHexString(readBuffer);
-//                builder.append(dataHex);
-//                //System.out.println("data:" + data);
-//                System.out.println("dataHex:" + dataHex);// 读取后置空流对象
-//                inputStream.close();
-//                inputStream = null;
-//                break;
-//            }
-//            dataSerial = dataSerial + aa;
-//            System.out.println(dataSerial);
-            //serialDataUtils.toData(builder.toString());
-//            BleDataBean bleDataBean = SerialDataUtils.toOptometry(builder.toString());
-//            List<ResultDiopterDO> list = bleDataBean.getSca();
-//            OptometryDO optometryDO = new OptometryDO();
-//            for (int i = 0; i < list.size(); i++) {
-//                if ("AVG".equals(list.get(i).getType())) {
-//                    if ("L".equals(list.get(i).getIfrl())) {
-//                        optometryDO.setSphereLeft(list.get(i).getDiopterS());
-//                        optometryDO.setAxialLeft(list.get(i).getDiopterA());
-//                        optometryDO.setCylinderLeft(list.get(i).getDiopterC());
-//                    } else if ("R".equals(list.get(i).getIfrl())) {
-//                        optometryDO.setSphereRight(list.get(i).getDiopterS());
-//                        optometryDO.setAxialRight(list.get(i).getDiopterA());
-//                        optometryDO.setCylinderRight(list.get(i).getDiopterC());
-//                    }
-//                }
-//            }
-//            optometryDO.setCreateTime(new Date());
-//            optometryService.save(optometryDO);
-//        } catch (IOException e) {
-//            System.out.println("读取串口数据时发生IO异常");
-//        }
-    }
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1:
+                    String ss =bytesToHexString(byteArray);
+                    JDJInfoDO jdjInfoDO = new JDJInfoDO();
+                    jdjInfoDO.setJdjInfo(ss);
+                    lensMeterService.saveJdj(jdjInfoDO);
+                    byteArray = null;
+                    break;
+            }
+        }
+    };
 
     /**
      * 读取串口返回的信息

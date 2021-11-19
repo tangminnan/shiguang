@@ -1373,7 +1373,7 @@ public class StoreSalesController {
                                 rightzj = Double.parseDouble(params.get("rightYuanYongZJ").toString());
                                 stockCylUp = Double.parseDouble(stockDO.getCylUp());
                                 stockCylDown = Double.parseDouble(stockDO.getCylDown());
-                                if (rightzj < stockCylUp || rightqj > stockCylDown){
+                                if (rightzj < stockCylUp || rightzj > stockCylDown){
                                     stockDO.setGoodsCode("1");
                                 }
                             } else if (params.get("rightYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
@@ -1468,7 +1468,7 @@ public class StoreSalesController {
                     }
                 }
                 int total = 10000000;
-                pageUtils = new PageUtils(newJpdzList, total);
+                pageUtils = new PageUtils(newJpdzList, newJpdzList.size());
             }
         } else {
             List<StockDO> jpcpDOList = stockService.listJpcp(maps);

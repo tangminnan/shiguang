@@ -148,6 +148,7 @@ public class UnqualiffedController {
 				String[] goodsNum = salesDOList.get(i).getGoodsNum().split(",");
 				String[] goodsName = salesDOList.get(i).getStoreName().split(",");
 				String[] goodsCount = salesDOList.get(i).getStoreCount().split(",");
+				String[] classType = salesDOList.get(i).getClasstype().split(",");
 				for (int a=0;a<storeDescribe.length;a++){
 //					if ("镜片".equals(storeDescribe[a])){
 						SaleGoodsDO saleGoodsDO = new SaleGoodsDO();
@@ -155,6 +156,8 @@ public class UnqualiffedController {
 						saleGoodsDO.setGoodsNum(goodsNum[a]);
 						saleGoodsDO.setGoodsName(goodsName[a]);
 						saleGoodsDO.setSaleCount(goodsCount[a]);
+						saleGoodsDO.setGoodsbs(storeDescribe[a]);
+						saleGoodsDO.setClassType(classType[a]);
 						list.add(saleGoodsDO);
 //					}
 				}
@@ -190,20 +193,20 @@ public class UnqualiffedController {
 	public R save(UnqualiffedDO unqualiffed){
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String[] saleNumber = unqualiffed.getSaleNumber().split(",");
-		SalesDO salesDO = salesService.getSaleNumber(saleNumber[0]);
+		//SalesDO salesDO = salesService.getSaleNumber(saleNumber[0]);
 		Map<String,Object> map = new HashMap<>();
 		map.put("companyId",ShiroUtils.getUser().getCompanyId());
 		PositionDO positionDO = stockService.findBuHegePosition(map);
-		String[] goodsCode = salesDO.getGoodsCode().split(",");
-		String[] count = salesDO.getStoreCount().split(",");
-		String[] storeDescribe = salesDO.getStoreDescribe().split(",");
+		String[] goodsCode = unqualiffed.getGoodsCode().split(",");
+		String[] count = unqualiffed.getCount().split(",");
+		String[] storeDescribe = unqualiffed.getStoreDescribe().split(",");
 		for (int i=0;i<goodsCode.length;i++){
-			String[] goodsNum = salesDO.getGoodsNum().split(",");
-			String[] goodsName = salesDO.getStoreName().split(",");
+			String[] goodsNum = unqualiffed.getGoodsNum().split(",");
+			String[] goodsName = unqualiffed.getGoodsName().split(",");
 			StockDO stockDO = new StockDO();
 			stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
 			stockDO.setGoodsCode(goodsCode[i]);
-			String[] classType = salesDO.getClasstype().split(",");
+			String[] classType = unqualiffed.getClassType().split(",");
 			if ("2".equals(classType[i])){
 				Map<String,Object> maps = new HashMap<>();
 				maps.put("producNum",goodsNum[i]);
@@ -216,6 +219,7 @@ public class UnqualiffedController {
 					if (null != stockDO1){
 						int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 						stockDO.setGoodsCount(godsCount + "");
+						unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
 						stockService.updateGoodsCount(stockDO);
 					} else {
 						stockDO.setGoodsNum(goodsNum[i]);
@@ -236,6 +240,7 @@ public class UnqualiffedController {
 						stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 						stockDO.setStatus("0");
 						stockDO.setReturnzt("1");
+						stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
 						stockService.save(stockDO);
 					}
 
@@ -249,6 +254,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
+							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -269,6 +275,7 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
+							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -286,6 +293,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
+							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -306,6 +314,7 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
+							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -319,6 +328,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
+							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -339,6 +349,7 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
+							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -352,6 +363,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
+							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -372,6 +384,7 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
+							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -385,6 +398,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
+							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -405,6 +419,7 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
+							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -418,6 +433,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
+							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -438,6 +454,7 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
+							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -451,6 +468,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
+							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -471,6 +489,7 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
+							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -484,6 +503,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
+							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -504,6 +524,7 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
+							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -517,6 +538,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
+							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -537,6 +559,7 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
+							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
 							stockService.save(stockDO);
 						}
 					}

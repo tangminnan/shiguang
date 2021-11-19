@@ -1,5 +1,6 @@
 package com.shiguang.logstatus.service;
 
+import com.shiguang.logstatus.domain.JDJInfoDO;
 import com.shiguang.logstatus.domain.LensMeterDO;
 
 import java.util.List;
@@ -19,4 +20,10 @@ public interface LensMeterService {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    int saveJdj(JDJInfoDO jdjInfoDO);
+
+    List<JDJInfoDO> jdjList(Map<String,Object> map);
+
+    int deleteJdj(Long id);
 }
