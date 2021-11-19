@@ -701,7 +701,6 @@ function getYinxing(){
             rows = dataArray;
             for (var i=0;i<rows.length;i++){
                 a=a+1;
-                alert(rows[i][0].goodsNum)
                 var goodsNumStr = rows[i][0].goodsNum;
                 var retailPrice = rows[i][0].retailPrice;
                 var desc = "隐形";
