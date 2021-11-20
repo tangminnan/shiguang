@@ -253,7 +253,7 @@
 		j.cyl_down,
 		j.lightbelow_right,
 		j.lightbelow_left,
-		re.refractivityvalue,
+		j.refractivityid as refractivityvalue,
 		l.light_name,
 		g.gradual_name,
 		f.function_name,
@@ -262,9 +262,8 @@
 		po.position_name
 		FROM
 		stock s
-		 JOIN aa_jpdz j ON s.goods_num	= j.produc_num
-		  JOIN c_position po ON s.position_id = po.position_id
-		LEFT JOIN c_refractivity re ON j.refractivityid = re.refractivityid
+		JOIN aa_jpdz j ON s.goods_num = j.produc_num
+		JOIN c_position po ON s.position_id = po.position_id
 		LEFT JOIN p_light l ON j.light_id = l.light_id
 		LEFT JOIN p_gradual g ON j.gradual_id = g.gradual_id
 		LEFT JOIN p_function f ON j.function_id = f.function_id
@@ -302,15 +301,29 @@
 		</where>
 	</select>
 	<select id="selectJpcp" resultType="com.shiguang.stock.domain.StockDO">
-		select s.goods_num,s.goods_code,s.goods_name,s.unit,j.sph_id as sph,j.cyl_id as cyl,j.lightbelow_id as lightbelow,r.refractivityvalue,li.light_name,g.gradual_name,
-		f.function_name,s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
-		from  stock s
-		  join aa_jpcp j on s.goods_num	= j.produc_num
-		left join c_refractivity r on j.refractivityid=r.refractivityid
-		left join p_light li on j.light_id=li.light_id
-		left join p_gradual g on j.gradual_id = g.gradual_id
-		left join p_function f on j.function_id=f.function_id
-		  join c_position po on s.position_id=po.position_id
+		SELECT
+		s.goods_num,
+		s.goods_code,
+		s.goods_name,
+		s.unit,
+		j.sph_id AS sph,
+		j.cyl_id AS cyl,
+		j.lightbelow_id AS lightbelow,
+		j.refractivityid as refractivityvalue,
+		li.light_name,
+		g.gradual_name,
+		f.function_name,
+		s.retail_price,
+		po.position_name,
+		s.goods_count,
+		s.goodsxinxiid
+		FROM
+		stock s
+		JOIN aa_jpcp j ON s.goods_num = j.produc_num
+		LEFT JOIN p_light li ON j.light_id = li.light_id
+		LEFT JOIN p_gradual g ON j.gradual_id = g.gradual_id
+		LEFT JOIN p_function f ON j.function_id = f.function_id
+		JOIN c_position po ON s.position_id = po.position_id
 		<where>
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
 			<if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
