@@ -55,7 +55,7 @@ function load() {
                                     align : 'center'
 								},
 								{
-									field : 'cardType',
+									field : 'followTime',
 									title : '复验时间',
                                     align : 'center'
 								},

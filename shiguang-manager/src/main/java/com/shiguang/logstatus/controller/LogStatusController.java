@@ -109,6 +109,11 @@ public class LogStatusController {
             query.put("companyid",ShiroUtils.getUser().getCompanyId());
         }
         //query.put("storeDescribe","镜片");
+        if (null != params.get("memberName") && !"".equals(params.get("memberName"))){
+            query.put("memberName",String.valueOf(query.get("memberName")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
+        }
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){

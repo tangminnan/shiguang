@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -79,67 +81,184 @@ public class SaleNameController {
                     String[] storeCount = null;
                     String[] storeUnit = null;
                     String[] classType = null;
-                    if (null != salesDOs.getStoreDescribe()){
+                    if (null != salesDOs.getStoreDescribe() && !"".equals(salesDOs.getStoreDescribe())){
                         storeDescribe = salesDOs.getStoreDescribe().split(",");
+                    }
+                    if (null != salesDOs.getStoreCount() && !"".equals(salesDOs.getStoreCount())){
                         storeCount = salesDOs.getStoreCount().split(",");
+                    }
+
+                    if (null != salesDOs.getStoreUnit() && !"".equals(salesDOs.getStoreUnit())){
                         storeUnit = salesDOs.getStoreUnit().split(",");
+                    }
+
+                    if (null != salesDOs.getClasstype() && !"".equals(salesDOs.getClasstype())){
                         classType = salesDOs.getClasstype().split(",");
                     }
                     if (salesDO.getSaleName().equals(salesDOs.getSaleName())){
                         if (null != storeDescribe){
                             for (int i=0;i<storeDescribe.length;i++){
                                 if ("镜架".equals(storeDescribe[i])){
-                                    jjcount = jjcount + Integer.parseInt(storeCount[i]);
-                                    jjMoney = jjMoney + Double.valueOf(storeUnit[i]);
-                                } else if ("镜片".equals(storeDescribe[i])){
-                                    if ("1".equals(classType)){
-                                        jpcpcount = jpcpcount + Integer.parseInt(storeCount[i]);
-                                        jpcpMoney = jpcpMoney + Double.valueOf(storeUnit[i]);
-                                    } else if ("2".equals(classType)){
-                                        jpdzcount = jpdzcount + Integer.parseInt(storeCount[i]);
-                                        jpdzMoney = jpdzMoney + Double.valueOf(storeUnit[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        jjcount = jjcount + Integer.parseInt(storeCount[i]);
                                     }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            jjMoney = jjMoney + Double.valueOf((Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i])));
+                                        } else {
+                                            jjMoney = jjMoney + Double.valueOf(storeUnit[i]);
+                                        }
+                                    }
+
+                                } else if ("镜片".equals(storeDescribe[i])){
+                                    if (null != classType){
+                                        if ("1".equals(classType)){
+                                            if (null != storeCount && !"".equals(storeCount)){
+                                                jpcpcount = jpcpcount + Integer.parseInt(storeCount[i]);
+                                            }
+                                            if (null != storeUnit && !"".equals(storeUnit)){
+                                                if (null != storeCount && !"".equals(storeCount)){
+                                                    jpcpMoney = jpcpMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                                } else {
+                                                    jpcpMoney = jpcpMoney + Double.valueOf(storeUnit[i]);
+                                                }
+
+                                            }
+                                        } else if ("2".equals(classType)){
+                                            if (null != storeCount && !"".equals(storeCount)){
+                                                jpdzcount = jpdzcount + Integer.parseInt(storeCount[i]);
+                                            }
+                                            if (null != storeUnit && !"".equals(storeUnit)){
+                                                if (null != storeCount && !"".equals(storeCount)){
+                                                    jpdzMoney = jpdzMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                                } else {
+                                                    jpdzMoney = jpdzMoney + Double.valueOf(storeUnit[i]);
+                                                }
+
+                                            }
+                                        }
+                                    }
+
                                 } else if ("配件".equals(storeDescribe[i])){
-                                    pjcount = pjcount + Integer.parseInt(storeCount[i]);
-                                    pjMoney = pjMoney + Double.valueOf(storeUnit[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        pjcount = pjcount + Integer.parseInt(storeCount[i]);
+                                    }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            pjMoney = pjMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        } else {
+                                            pjMoney = pjMoney + Double.valueOf(storeUnit[i]);
+                                        }
+
+                                    }
                                 } else if ("镜架配件".equals(storeDescribe[i])){
-                                    jjpjcount = jjpjcount + Integer.parseInt(storeCount[i]);
-                                    jjpjMoney = jjpjMoney + Double.valueOf(storeUnit[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        jjpjcount = jjpjcount + Integer.parseInt(storeCount[i]);
+                                    }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            jjpjMoney = jjpjMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        } else {
+                                            jjpjMoney = jjpjMoney + Double.valueOf(storeUnit[i]);
+                                        }
+
+                                    }
                                 } else if ("隐形".equals(storeDescribe[i])){
-                                    yxcount = yxcount + Integer.parseInt(storeCount[i]);
-                                    yxMoney = yxMoney + Double.valueOf(storeUnit[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        yxcount = yxcount + Integer.parseInt(storeCount[i]);
+                                    }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            yxMoney = yxMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        } else {
+                                            yxMoney = yxMoney + Double.valueOf(storeUnit[i]);
+                                        }
+
+                                    }
                                 } else if ("护理液".equals(storeDescribe[i])){
-                                    hlycount = hlycount + Integer.parseInt(storeCount[i]);
-                                    hlyMoney = hlyMoney + Double.valueOf(storeUnit[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        hlycount = hlycount + Integer.parseInt(storeCount[i]);
+                                    }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeUnit[i] && !"".equals(storeUnit[i])){
+                                            if (null != storeCount && !"".equals(storeCount)){
+                                                hlyMoney = hlyMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                            } else {
+                                                hlyMoney = hlyMoney + Double.valueOf(storeUnit[i]);
+                                            }
+                                        }
+                                    }
+
                                 } else if ("视光".equals(storeDescribe[i])){
-                                    sgcount = sgcount + Integer.parseInt(storeCount[i]);
-                                    sgMoney = sgMoney + Double.valueOf(storeUnit[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        sgcount = sgcount + Integer.parseInt(storeCount[i]);
+                                    }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            sgMoney = sgMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        } else {
+                                            sgMoney = sgMoney + Double.valueOf(storeUnit[i]);
+                                        }
+
+                                    }
                                 } else if ("自架".equals(storeDescribe[i])){
-                                    zjcount = zjcount + Integer.parseInt(storeCount[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        zjcount = zjcount + Integer.parseInt(storeCount[i]);
+                                    }
                                     zjMoney = 0.00;
                                 } else if ("自片".equals(storeDescribe[i])){
-                                    zpcount = zpcount + Integer.parseInt(storeCount[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        zpcount = zpcount + Integer.parseInt(storeCount[i]);
+                                    }
                                     zpMoney = 0.00;
                                 } else if ("太阳镜".equals(storeDescribe[i])){
-                                    tyjcount = tyjcount + Integer.parseInt(storeCount[i]);
-                                    tyjMoney = tyjMoney + Double.valueOf(storeUnit[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        tyjcount = tyjcount + Integer.parseInt(storeCount[i]);
+                                    }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            tyjMoney = tyjMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        } else {
+                                            tyjMoney = tyjMoney + Double.valueOf(storeUnit[i]);
+                                        }
+
+                                    }
                                 } else if ("老花镜".equals(storeDescribe[i])){
-                                    lhjcount = lhjcount + Integer.parseInt(storeCount[i]);
-                                    lhjMoney = lhjMoney + Double.valueOf(storeUnit[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        lhjcount = lhjcount + Integer.parseInt(storeCount[i]);
+                                    }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            lhjMoney = lhjMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        } else {
+                                            lhjMoney = lhjMoney + Double.valueOf(storeUnit[i]);
+                                        }
+                                    }
                                 } else if ("耗材".equals(storeDescribe[i])){
-                                    hccount = hccount + Integer.parseInt(storeCount[i]);
-                                    hcMoney = hcMoney + Double.valueOf(storeUnit[i]);
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        hccount = hccount + Integer.parseInt(storeCount[i]);
+                                    }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            hcMoney = hcMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        } else {
+                                            hcMoney = hcMoney + Double.valueOf(storeUnit[i]);
+                                        }
+
+                                    }
                                 }
                                 if (null != salesDOs.getAdditionalPrice()){
                                     try {
                                         String[] addPrice = salesDOs.getAdditionalPrice().split(",");
                                         if (addPrice.length > 0){
-                                            addMoney = addMoney + Double.valueOf(addPrice[i]);
+                                            if(null != addPrice[i] && !"".equals(addPrice[i])){
+                                                addMoney = addMoney + Double.valueOf(addPrice[i]);
+                                            }
                                         } else {
-                                            addMoney = 0.00;
+                                            addMoney = addMoney + 0.00;
                                         }
                                     }catch (ArrayIndexOutOfBoundsException e) {
-                                        addMoney = 0.00;
+                                        addMoney = addMoney + 0.00;
                                     }
                                 }
                             }
@@ -152,49 +271,54 @@ public class SaleNameController {
                                             addMoney = addMoney + Double.valueOf(addPrice[t]);
                                         }
                                     } else {
-                                        addMoney = 0.00;
+                                        addMoney = addMoney + 0.00;
                                     }
                                 }catch (ArrayIndexOutOfBoundsException e) {
-                                    addMoney = 0.00;
+                                    addMoney = addMoney + 0.00;
                                 }
                             }
                         }
-                        primMoney = primMoney + Double.valueOf(salesDOs.getPrimeMoney());
-                        amountMoney = amountMoney + Double.valueOf(salesDOs.getAmountMoney());
+                        if (null != salesDOs.getPrimeMoney()){
+                            primMoney = primMoney + Double.valueOf(salesDOs.getPrimeMoney());
+                        }
+                        if (null != salesDOs.getAmountMoney()){
+                            amountMoney = amountMoney + Double.valueOf(salesDOs.getAmountMoney());
+                        }
+
                     }
                 }
                 Map<String,Object> map = new HashMap<>();
                 map.put("saleName",salesDO.getSaleName());
                 map.put("saleAccount",salesDO.getSaleAccount());
                 map.put("jjcount",jjcount);
-                map.put("jjMoney",jjMoney);
+                map.put("jjMoney",new BigDecimal(jjMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("jpcpcount",jpcpcount);
-                map.put("jpcpMoney",jpcpMoney);
+                map.put("jpcpMoney",new BigDecimal(jpcpMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("jpdzcount",jpdzcount);
-                map.put("jpdzMoney",jpdzMoney);
+                map.put("jpdzMoney",new BigDecimal(jpdzMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("pjcount",pjcount);
-                map.put("pjMoney",pjMoney);
+                map.put("pjMoney",new BigDecimal(pjMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("jjpjcount",jjpjcount);
-                map.put("jjpjMoney",jjpjMoney);
+                map.put("jjpjMoney",new BigDecimal(jjpjMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("yxcount",yxcount);
-                map.put("yxMoney",yxMoney);
+                map.put("yxMoney",new BigDecimal(yxMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("hlycount",hlycount);
-                map.put("hlyMoney",hlyMoney);
+                map.put("hlyMoney",new BigDecimal(hlyMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("sgcount",sgcount);
-                map.put("sgMoney",sgMoney);
+                map.put("sgMoney",new BigDecimal(sgMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("zjcount",zjcount);
                 map.put("zjMoney",zjMoney);
                 map.put("zpcount",zpcount);
                 map.put("zpMoney",zpMoney);
                 map.put("tyjcount",tyjcount);
-                map.put("tyjMoney",tyjMoney);
+                map.put("tyjMoney",new BigDecimal(tyjMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("lhjcount",lhjcount);
-                map.put("lhjMoney",lhjMoney);
+                map.put("lhjMoney",new BigDecimal(lhjMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("hccount",hccount);
-                map.put("hcMoney",hcMoney);
-                map.put("addMoney",addMoney);
-                map.put("primMoney",primMoney);
-                map.put("amountMoney",amountMoney);
+                map.put("hcMoney",new BigDecimal(hcMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("addMoney",new BigDecimal(addMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("primMoney",new BigDecimal(primMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("amountMoney",new BigDecimal(amountMoney).setScale(2,RoundingMode.HALF_UP));
                 list.add(map);
             }
         }
@@ -261,34 +385,34 @@ public class SaleNameController {
             totalamountMoney = totalamountMoney + Double.valueOf(maps.get("amountMoney").toString());
         }
         model.addAttribute("totaljjcount",totaljjcount);
-        model.addAttribute("totaljjMoney",totaljjMoney);
+        model.addAttribute("totaljjMoney",new BigDecimal(totaljjMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totaljpcpcount",totaljpcpcount);
-        model.addAttribute("totaljpcpMoney",totaljpcpMoney);
+        model.addAttribute("totaljpcpMoney",new BigDecimal(totaljpcpMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totaljpdzcount",totaljpdzcount);
-        model.addAttribute("totaljpdzMoney",totaljpdzMoney);
+        model.addAttribute("totaljpdzMoney",new BigDecimal(totaljpdzMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totalzjcount",totalzjcount);
         model.addAttribute("totalzjMoney",totalzjMoney);
         model.addAttribute("totalzpcount",totalzpcount);
         model.addAttribute("totalzpMoney",totalzpMoney);
         model.addAttribute("totaltyjcount",totaltyjcount);
-        model.addAttribute("totaltyjMoney",totaltyjMoney);
+        model.addAttribute("totaltyjMoney",new BigDecimal(totaltyjMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totaljjpjcount",totaljjpjcount);
-        model.addAttribute("totaljjpjMoney",totaljjpjMoney);
+        model.addAttribute("totaljjpjMoney",new BigDecimal(totaljjpjMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totalpjcount",totalpjcount);
-        model.addAttribute("totalpjMoney",totalpjMoney);
+        model.addAttribute("totalpjMoney",new BigDecimal(totalpjMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totalyxcount",totalyxcount);
-        model.addAttribute("totalyxMoney",totalyxMoney);
+        model.addAttribute("totalyxMoney",new BigDecimal(totalyxMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totalhlycount",totalhlycount);
-        model.addAttribute("totalhlyMoney",totalhlyMoney);
+        model.addAttribute("totalhlyMoney",new BigDecimal(totalhlyMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totallhjcount",totallhjcount);
-        model.addAttribute("totallhjMoney",totallhjMoney);
+        model.addAttribute("totallhjMoney",new BigDecimal(totallhjMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totalsgcount",totalsgcount);
-        model.addAttribute("totalsgMoney",totalsgMoney);
+        model.addAttribute("totalsgMoney",new BigDecimal(totalsgMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totalhccount",totalhccount);
-        model.addAttribute("totalhcMoney",totalhcMoney);
-        model.addAttribute("totaladdMoney",totaladdMoney);
-        model.addAttribute("totalprimMoney",totalprimMoney);
-        model.addAttribute("totalamountMoney",totalamountMoney);
+        model.addAttribute("totalhcMoney",new BigDecimal(totalhcMoney).setScale(2,RoundingMode.HALF_UP));
+        model.addAttribute("totaladdMoney",new BigDecimal(totaladdMoney).setScale(2,RoundingMode.HALF_UP));
+        model.addAttribute("totalprimMoney",new BigDecimal(totalprimMoney).setScale(2,RoundingMode.HALF_UP));
+        model.addAttribute("totalamountMoney",new BigDecimal(totalamountMoney).setScale(2,RoundingMode.HALF_UP));
         return "saleReport/saleNameReportForm";
     }
 }

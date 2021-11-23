@@ -138,6 +138,9 @@ public class StoreSalesController {
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
+        if (null != params.get("name") && !"".equals(params.get("name"))){
+            query.put("name",String.valueOf(query.get("name")).trim());
+        }
         List<MemberDO> memberDOList = memberService.list(query);
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);

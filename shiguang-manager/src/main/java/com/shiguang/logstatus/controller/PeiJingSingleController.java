@@ -56,6 +56,11 @@ public class PeiJingSingleController {
                 query.put("companyid",ShiroUtils.getUser().getCompanyId());
             }
         }
+        if (null != params.get("name") && !"".equals(params.get("name"))){
+            query.put("name",String.valueOf(query.get("name")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
+        }
         List<SalesDO> salesDOList = statusService.findSalePeijingAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){

@@ -113,12 +113,17 @@ public class MemberController {
             query.put("companyId","");
         }
         if (null != params.get("phone1") && !"".equals(params.get("phone1"))){
+            query.put("phone1",String.valueOf(query.get("phone1")).trim());
             query.put("companyId","");
         }
         if (null != params.get("name") && !"".equals(params.get("name"))){
+            query.put("name",String.valueOf(query.get("name")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
             query.put("companyId","");
         }
         if (null != params.get("cardNumber") && !"".equals(params.get("cardNumber"))){
+            query.put("cardNumber",String.valueOf(query.get("cardNumber")).trim());
             query.put("companyId","");
         }
         List<MemberDO> memberList = memberService.list(query);
@@ -266,7 +271,7 @@ public class MemberController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if (null != salesDOList){
             for (SalesDO salesDO : salesDOList){
-                if (!"".equals(salesDO.getOptometrywlName())){
+                if (!"".equals(salesDO.getRecipelwlType())){
                     if ("1".equals(salesDO.getRecipelwlType())){
                         salesDO.setRecipelType("近用");
                     }else if ("2".equals(salesDO.getRecipelwlType())){

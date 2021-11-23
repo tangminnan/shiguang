@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -214,6 +216,8 @@ public class SaleReportController {
         double weixinMoney = 0;
         double zfbMoney = 0;
         double xianjinMoney = 0;
+        double yikatongoney = 0;
+        double yyshoufeichuMoney = 0;
         double qtsubTotal = 0;
         double tkMoney = 0;
         double shihsouTotal = 0;
@@ -231,17 +235,23 @@ public class SaleReportController {
                         zfbMoney = zfbMoney + Double.valueOf(modelMoney[i]);
                     } else if ("4".equals(payModel[i])){
                         xianjinMoney = xianjinMoney + Double.valueOf(modelMoney[i]);
+                    } else if ("2".equals(payModel[i])){
+                        yyshoufeichuMoney = yyshoufeichuMoney + Double.valueOf(modelMoney[i]);
+                    } else if ("3".equals(payModel[i])){
+                        yikatongoney = yikatongoney + Double.valueOf(modelMoney[i]);
                     }
                 }
             }
         }
         qtsubTotal = weixinMoney + zfbMoney;
-        shihsouTotal = weixinMoney + zfbMoney +xianjinMoney -tkMoney;
-        model.addAttribute("weixinMoney",weixinMoney);
-        model.addAttribute("zfbMoney",zfbMoney);
-        model.addAttribute("xianjinMoney",xianjinMoney);
-        model.addAttribute("qtsubTotal",qtsubTotal);
-        model.addAttribute("shihsouTotal",shihsouTotal);
+        shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney -tkMoney ;
+        model.addAttribute("weixinMoney",new BigDecimal(weixinMoney).setScale(2,RoundingMode.HALF_UP));
+        model.addAttribute("zfbMoney",new BigDecimal(zfbMoney).setScale(2,RoundingMode.HALF_UP));
+        model.addAttribute("xianjinMoney",new BigDecimal(xianjinMoney).setScale(2,RoundingMode.HALF_UP));
+        model.addAttribute("yyshoufeichuMoney",new BigDecimal(yyshoufeichuMoney).setScale(2,RoundingMode.HALF_UP));
+        model.addAttribute("yikatongoney",new BigDecimal(yikatongoney).setScale(2,RoundingMode.HALF_UP));
+        model.addAttribute("qtsubTotal",new BigDecimal(qtsubTotal).setScale(2,RoundingMode.HALF_UP));
+        model.addAttribute("shihsouTotal",new BigDecimal(shihsouTotal).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("date", simpleDateFormat.format(new Date()));
         return "saleReport/saleReportForm";
     }
@@ -294,88 +304,147 @@ public class SaleReportController {
                 double qianfeiMoney=0.00;
                 double dingjinMoney=0.00;
                 for (SalesDO salesDOs : salesDOList){
-                    String[] storeDescribe = salesDOs.getStoreDescribe().split(",");
-                    String[] storeCount = salesDOs.getStoreCount().split(",");
-                    String[] storeUnit = salesDOs.getStoreUnit().split(",");
+                    String[] storeDescribe = null;
+                    if (null != salesDOs.getStoreDescribe() && !"".equals(salesDOs.getStoreDescribe())){
+                        storeDescribe = salesDOs.getStoreDescribe().split(",");
+                    }
+                    String[] storeCount = null;
+                    if (null != salesDOs.getStoreCount() && !"".equals(salesDOs.getStoreCount())){
+                        storeCount = salesDOs.getStoreCount().split(",");
+                    }
+                    String[] storeUnit = null;
+                    if (null != salesDOs.getStoreUnit()){
+                        storeUnit = salesDOs.getStoreUnit().split(",");
+                    }
+
                     if (salesDO.getSaleName().equals(salesDOs.getSaleName())){
-                        for (int i=0;i<storeDescribe.length;i++){
-                            if ("镜架".equals(storeDescribe[i])){
-                                if ("".equals(storeUnit[i])){
-                                    jjMoney = jjMoney + 0.00;
-                                } else {
-                                    jjMoney = jjMoney + Double.valueOf(storeUnit[i]);
-                                }
-
-                            } else if ("镜片".equals(storeDescribe[i])){
-                                jpMoney = jpMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("配件".equals(storeDescribe[i])){
-                                pjMoney = pjMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("镜架配件".equals(storeDescribe[i])){
-                                jjpjMoney = jjpjMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("隐形".equals(storeDescribe[i])){
-                                yxMoney = yxMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("护理液".equals(storeDescribe[i])){
-                                hlyMoney = hlyMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("视光".equals(storeDescribe[i])){
-                                sgMoney = sgMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("太阳镜".equals(storeDescribe[i])){
-                                tyjMoney = tyjMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("老花镜".equals(storeDescribe[i])){
-                                lhjMoney = lhjMoney + Double.valueOf(storeUnit[i]);
-                            } else if ("耗材".equals(storeDescribe[i])){
-                                hcMoney = hcMoney +Double.valueOf(storeUnit[i]);
-                            }
-                            if (null != salesDOs.getAdditionalPrice()){
-                                try {
-                                    String[] addPrice = salesDOs.getAdditionalPrice().split(",");
-                                    if (addPrice.length > 0){
-                                        addMoney = addMoney + Double.valueOf(addPrice[i]);
-                                    } else {
-                                        addMoney = 0.00;
+                        if (null != storeDescribe){
+                            for (int i=0;i<storeDescribe.length;i++){
+                                if ("镜架".equals(storeDescribe[i])){
+                                    if (null != storeUnit && null != storeCount){
+                                        if ("".equals(storeUnit[i])){
+                                            jjMoney = jjMoney + 0.00;
+                                        } else {
+                                            jjMoney = jjMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        }
                                     }
-                                }catch (ArrayIndexOutOfBoundsException e) {
-                                    addMoney = 0.00;
+                                } else if ("镜片".equals(storeDescribe[i])){
+                                    if (null != storeUnit && !"".equals(storeUnit) && null != storeCount && !"".equals(storeCount)){
+                                        if (!"".equals(storeUnit[i]) && null != storeUnit[i] && !"".equals(storeCount[i]) && null != storeCount[i]) {
+                                            jpMoney = jpMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        }
+                                    }
+
+                                } else if ("配件".equals(storeDescribe[i])){
+                                    if (null != storeUnit && !"".equals(storeUnit) && null != storeCount && !"".equals(storeCount)){
+                                        if (!"".equals(storeUnit[i]) && null != storeUnit[i] && !"".equals(storeCount[i]) && null != storeCount[i]) {
+                                            pjMoney = pjMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        }
+                                    }
+
+                                } else if ("镜架配件".equals(storeDescribe[i])){
+                                    if (null != storeUnit && !"".equals(storeUnit) && null != storeCount && !"".equals(storeCount)){
+                                        if (!"".equals(storeUnit[i]) && null != storeUnit[i] && !"".equals(storeCount[i]) && null != storeCount[i]) {
+                                            jjpjMoney = jjpjMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        }
+                                    }
+
+                                } else if ("隐形".equals(storeDescribe[i])){
+                                    if (null != storeUnit && !"".equals(storeUnit) && null != storeCount && !"".equals(storeCount)){
+                                        if (!"".equals(storeUnit[i]) && null != storeUnit[i] && !"".equals(storeCount[i]) && null != storeCount[i]) {
+                                            yxMoney = yxMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        }
+                                    }
+
+                                } else if ("护理液".equals(storeDescribe[i])){
+                                    if (null != storeUnit && !"".equals(storeUnit) && null != storeCount && !"".equals(storeCount)){
+                                        if (!"".equals(storeUnit[i]) && null != storeUnit[i] && !"".equals(storeCount[i]) && null != storeCount[i]){
+                                            hlyMoney = hlyMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        }
+
+                                    }
+
+                                } else if ("视光".equals(storeDescribe[i])){
+                                    if (null != storeUnit && !"".equals(storeUnit) && null != storeCount && !"".equals(storeCount)){
+                                        if (!"".equals(storeUnit[i]) && null != storeUnit[i] && !"".equals(storeCount[i]) && null != storeCount[i]) {
+                                            sgMoney = sgMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        }
+                                    }
+
+                                } else if ("太阳镜".equals(storeDescribe[i])){
+                                    if (null != storeUnit && !"".equals(storeUnit) && null != storeCount && !"".equals(storeCount)){
+                                        if (!"".equals(storeUnit[i]) && null != storeUnit[i] && !"".equals(storeCount[i]) && null != storeCount[i]) {
+                                            tyjMoney = tyjMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        }
+                                    }
+
+                                } else if ("老花镜".equals(storeDescribe[i])){
+                                    if (null != storeUnit && !"".equals(storeUnit) && null != storeCount && !"".equals(storeCount)){
+                                        if (!"".equals(storeUnit[i]) && null != storeUnit[i] && !"".equals(storeCount[i]) && null != storeCount[i]) {
+                                            lhjMoney = lhjMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        }
+                                    }
+
+                                } else if ("耗材".equals(storeDescribe[i])){
+                                    if (null != storeUnit && null != storeCount){
+                                        if (!"".equals(storeUnit[i]) && null != storeUnit[i] && !"".equals(storeCount[i]) && null != storeCount[i]) {
+                                            hcMoney = hcMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                        }
+                                    }
+
+                                }
+                                if (null != salesDOs.getAdditionalPrice()){
+                                    try {
+                                        String[] addPrice = salesDOs.getAdditionalPrice().split(",");
+                                        if (addPrice.length > 0){
+                                            if (null != addPrice[i] && !"".equals(addPrice[i])){
+                                                addMoney = addMoney + Double.valueOf(addPrice[i]);
+                                            }
+                                        } else {
+                                            addMoney = addMoney +  0.00;
+                                        }
+                                    }catch (ArrayIndexOutOfBoundsException e) {
+                                        addMoney = addMoney +  0.00;
+                                    }
+                                }
+                            }
+                            primMoney = primMoney + Double.valueOf(salesDOs.getPrimeMoney());
+                            if ("2".equals(salesDOs.getSaleType())){
+                                String dingjin = salesDOs.getModelMoney().toString();
+                                dingjin = dingjin.substring(0,dingjin.length()-1);
+                                dingjinMoney = dingjinMoney + Double.valueOf(dingjin);
+                                String qianfei = salesDOs.getChangeMoney().substring(1);
+                                qianfeiMoney = qianfeiMoney + Double.valueOf(qianfei);
+                                amountMoney = amountMoney + Double.valueOf(dingjin);
+                            } else {
+                                String[] modelsMoney = salesDOs.getModelMoney().split(",");
+                                String changesMoney=salesDOs.getChangeMoney();
+                                for (int s=0;s<modelsMoney.length;s++){
+                                    amountMoney = amountMoney + Double.valueOf(modelsMoney[s]);
+                                    amountMoney = amountMoney - Double.valueOf(changesMoney);
                                 }
                             }
                         }
-
-                        primMoney = primMoney + Double.valueOf(salesDOs.getPrimeMoney());
-                        if ("2".equals(salesDOs.getSaleType())){
-                            String dingjin = salesDOs.getModelMoney().toString();
-                            dingjin = dingjin.substring(0,dingjin.length()-1);
-                            dingjinMoney = dingjinMoney + Double.valueOf(dingjin);
-                            String qianfei = salesDOs.getChangeMoney().substring(1);
-                            qianfeiMoney = qianfeiMoney + Double.valueOf(qianfei);
-                            amountMoney = amountMoney + Double.valueOf(dingjin);
-                        } else {
-                            String[] modelsMoney = salesDOs.getModelMoney().split(",");
-                            String changesMoney=salesDOs.getChangeMoney();
-                            for (int s=0;s<modelsMoney.length;s++){
-                                amountMoney = amountMoney + Double.valueOf(modelsMoney[s]);
-                                amountMoney = amountMoney - Double.valueOf(changesMoney);
-                            }
-                        }
-
                     }
                 }
                 Map<String,Object> map = new HashMap<>();
-                map.put("jjMoney",jjMoney);
-                map.put("jpMoney",jpMoney);
-                map.put("pjMoney",pjMoney);
-                map.put("jjpjMoney",jjpjMoney);
-                map.put("tyjMoney",tyjMoney);
-                map.put("lhjMoney",lhjMoney);
-                map.put("yxMoney",yxMoney);
-                map.put("hlyMoney",hlyMoney);
-                map.put("sgMoney",sgMoney);
-                map.put("hcMoney",hcMoney);
+                map.put("jjMoney",new BigDecimal(jjMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("jpMoney",new BigDecimal(jpMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("pjMoney",new BigDecimal(pjMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("jjpjMoney",new BigDecimal(jjpjMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("tyjMoney",new BigDecimal(tyjMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("lhjMoney",new BigDecimal(lhjMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("yxMoney",new BigDecimal(yxMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("hlyMoney",new BigDecimal(hlyMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("sgMoney",new BigDecimal(sgMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("hcMoney",new BigDecimal(hcMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("saleName",salesDO.getSaleName());
                 map.put("saleAccount",salesDO.getSaleAcount());
                 map.put("addMoney",addMoney);
-                map.put("amountMoney",amountMoney);
-                map.put("primMoney",primMoney);
-                map.put("dingjinMoney",dingjinMoney);
-                map.put("qianfeiMoney",qianfeiMoney);
+                map.put("amountMoney",new BigDecimal(amountMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("primMoney",new BigDecimal(primMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("dingjinMoney",new BigDecimal(dingjinMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("qianfeiMoney",new BigDecimal(qianfeiMoney).setScale(2,RoundingMode.HALF_UP));
                 list.add(map);
             }
         }
