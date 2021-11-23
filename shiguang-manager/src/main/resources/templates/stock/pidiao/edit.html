@@ -39,6 +39,10 @@
 				<td>
 					<input th:value="${pidiao.outcw}" readonly type="text"/>
 				</td>
+				<td> 总数量：</td>
+				<td>
+					<input id="countall"  readonly type="text"/>
+				</td>
 
 			</tr>
 			<tr>
@@ -143,6 +147,7 @@
                 }
             }
         })
+		countall();
     });
 	
 	function dayin() {
@@ -153,6 +158,25 @@
 	// 	var pidiaoNumber = $('#pidiaoNumber').val();
     //     window.open("/stock/pidiao/pidiaodan?pidiaoNumber="+ pidiaoNumber);
     // }
+
+
+    //查看总数
+    function countall() {
+        // var goodsType=$("#goodsType").val();
+        var pidiaoNumber=$("#pidiaoNumber").val();
+        $.ajax({
+            url: '/stock/pidiao/countall',
+            type: 'get',
+            dataType: "json",
+            data: {
+                'pidiaoNumber': pidiaoNumber
+
+            },
+            success: function (xml) {
+                $("#countall").val(xml);
+            }
+        })
+    }
 </script>
 </body>
 </html>

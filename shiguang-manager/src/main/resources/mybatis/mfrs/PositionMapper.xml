@@ -125,6 +125,6 @@
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
             and  po.state=1
         </where>
-        group by position_id order by  position_id desc
+        group by position_id order by  position_id
     </select>
 </mapper>

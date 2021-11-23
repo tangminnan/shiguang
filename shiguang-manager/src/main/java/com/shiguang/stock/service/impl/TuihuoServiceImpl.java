@@ -187,4 +187,9 @@ public class TuihuoServiceImpl implements TuihuoService {
 	public List<TuihuoDO> getDanjuList(Map<String, Object> map) {
 		return tuihuoDao.getDanjuList(map);
 	}
+
+	@Override
+	public int countall(Map<String, Object> map) {
+		return tuihuoDao.countall(map);
+	}
 }

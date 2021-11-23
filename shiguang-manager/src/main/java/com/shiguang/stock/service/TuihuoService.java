@@ -62,5 +62,5 @@ public interface TuihuoService {
 	TuihuoDO getDanju(String tuihuoNum);
 	List<TuihuoDO> getDanjuList(Map<String, Object> map);
 
-
+	int countall(Map<String, Object> map);
 }

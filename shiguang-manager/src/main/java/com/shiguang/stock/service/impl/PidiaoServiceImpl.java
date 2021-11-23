@@ -97,4 +97,9 @@ public class PidiaoServiceImpl implements PidiaoService {
 	public List<PidiaoDO> pidiaodan(Map<String, Object> map) {
 		return pidiaoDao.pidiaodan(map);
 	}
+
+	@Override
+	public int countall(Map<String, Object> map) {
+		return pidiaoDao.countall(map);
+	}
 }

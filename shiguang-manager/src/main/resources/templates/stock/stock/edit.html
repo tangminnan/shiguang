@@ -103,6 +103,7 @@
 							<td>注册证号</td>
 							<td>生产日期</td>
 							<td>数量</td>
+							<td>操作</td>
 
 
 						</tr>
@@ -137,6 +138,7 @@
 							<td>注册证号</td>
 							<td>生产日期</td>
 							<td>数量</td>
+							<td>操作</td>
 						</tr>
 						<tr style="font-weight:bold;font-size: 15px;" class="heji2">
 							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -174,6 +176,7 @@
 							<td>注册证号</td>
 							<td>生产日期</td>
 							<td>数量</td>
+							<td>操作</td>
 						</tr>
 						<tr style="font-weight:bold;font-size: 15px;" class="heji3">
 							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -211,6 +214,7 @@
 							<td>注册证号</td>
 							<td>生产日期</td>
 							<td>数量</td>
+							<td>操作</td>
 						</tr>
 						<tr style="font-weight:bold;font-size: 15px;" class="heji4">
 							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -243,6 +247,7 @@
 							<td>注册证号</td>
 							<td>生产日期</td>
 							<td>数量</td>
+							<td>操作</td>
 						</tr>
 						<tr style="font-weight:bold;font-size: 15px;" class="heji5">
 							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -275,6 +280,7 @@
 							<td>注册证号</td>
 							<td>生产日期</td>
 							<td>数量</td>
+							<td>操作</td>
 						</tr>
 						<tr style="font-weight:bold;font-size: 15px;" class="heji6">
 							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -308,6 +314,7 @@
 							<td>注册证号</td>
 							<td>生产日期</td>
 							<td>数量</td>
+							<td>操作</td>
 						</tr>
 						<tr style="font-weight:bold;font-size: 15px;" class="heji7">
 							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -338,6 +345,7 @@
 							<td>注册证号</td>
 							<td>生产日期</td>
 							<td>数量</td>
+							<td>操作</td>
 						</tr>
 						<tr style="font-weight:bold;font-size: 15px;" class="heji8">
 							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -368,6 +376,7 @@
 							<td>注册证号</td>
 							<td>生产日期</td>
 							<td>数量</td>
+							<td>操作</td>
 						</tr>
 
 						<tr style="font-weight:bold;font-size: 15px;" class="heji9">
@@ -384,6 +393,7 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript">
     $().ready(function () {
+        // alert("打印单个条码");
         var danjuNumber = $("#danjuNumber").val();
         var goodsType = $("#goodsType").val();
         // alert(goodsType)
@@ -690,11 +700,13 @@
 
                             "<td >" + xml[i].createTime + "</td>\n" +
                             "<td  >" + xml[i].goodsCode + "</td>\n" +
+
                             "<td >" + xml[i].useday + "</td>\n" +
                             "<td >" + xml[i].batch + "</td>\n" +
                             "<td >" + xml[i].zhuceNumber + "</td>\n" +
                             "<td >" + xml[i].produceDay + "</td>\n" +
                             "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
                     }else if (goodsType==2){
                         $(".heji2").before("<tr class='val1'>" +
@@ -706,12 +718,14 @@
 
                             "<td >" + xml[i].createTime + "</td>\n" +
                             "<td  >" + xml[i].goodsCode + "</td>\n" +
+
                             "<td >" + xml[i].useday + "</td>\n" +
                             "<td >" + xml[i].batch + "</td>\n" +
                             "<td >" + xml[i].zhuceNumber + "</td>\n" +
                             "<td >" + xml[i].produceDay + "</td>\n" +
                             "<td >" + xml[i].goodsCount + "</td>\n" +
-                            "</tr>");//页面每个数量
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+							"</tr>");//页面每个数量
 					}else if (goodsType==3){
                         $(".heji3").before("<tr class='val1'>" +
                             "<td >" + xml[i].goodsNum + "</td>\n" +
@@ -727,12 +741,14 @@
 
                             "<td >" + xml[i].createTime + "</td>\n" +
                             "<td  >" + xml[i].goodsCode + "</td>\n" +
+
                             "<td >" + xml[i].useday + "</td>\n" +
                             "<td >" + xml[i].batch + "</td>\n" +
                             "<td >" + xml[i].zhuceNumber + "</td>\n" +
                             "<td >" + xml[i].produceDay + "</td>\n" +
                             "<td >" + xml[i].goodsCount + "</td>\n" +
-                            "</tr>");//页面每个数量
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+							"</tr>");//页面每个数量
 					}else if (goodsType==4){
                         $(".heji4").before("<tr class='val1'>" +
                             "<td >" + xml[i].goodsNum + "</td>\n" +
@@ -748,11 +764,13 @@
 
                             "<td >" + xml[i].createTime + "</td>\n" +
                             "<td  >" + xml[i].goodsCode + "</td>\n" +
+
                             "<td >" + xml[i].useday + "</td>\n" +
                             "<td >" + xml[i].batch + "</td>\n" +
                             "<td >" + xml[i].zhuceNumber + "</td>\n" +
                             "<td >" + xml[i].produceDay + "</td>\n" +
                             "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
 					}else if (goodsType==5){
                         $(".heji5").before("<tr class='val1'>" +
@@ -764,11 +782,13 @@
                             "<td>" + xml[i].secondCapacity + "</td>\n" +
 
                             "<td  >" + xml[i].goodsCode + "</td>\n" +
+
                             "<td >" + xml[i].useday + "</td>\n" +
                             "<td >" + xml[i].batch + "</td>\n" +
                             "<td >" + xml[i].zhuceNumber + "</td>\n" +
                             "<td >" + xml[i].produceDay + "</td>\n" +
                             "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
 					}else if (goodsType==6){
                         $(".heji6").before("<tr class='val1'>" +
@@ -781,11 +801,13 @@
 
                             "<td >" + xml[i].createTime + "</td>\n" +
                             "<td  >" + xml[i].goodsCode + "</td>\n" +
+
                             "<td >" + xml[i].useday + "</td>\n" +
                             "<td >" + xml[i].batch + "</td>\n" +
                             "<td >" + xml[i].zhuceNumber + "</td>\n" +
                             "<td >" + xml[i].produceDay + "</td>\n" +
                             "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
 					}else if (goodsType==7){
                         $(".heji7").before("<tr class='val1'>" +
@@ -799,11 +821,13 @@
 
                             "<td >" + xml[i].createTime + "</td>\n" +
                             "<td  >" + xml[i].goodsCode + "</td>\n" +
+
                             "<td >" + xml[i].useday + "</td>\n" +
                             "<td >" + xml[i].batch + "</td>\n" +
                             "<td >" + xml[i].zhuceNumber + "</td>\n" +
                             "<td >" + xml[i].produceDay + "</td>\n" +
                             "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
 					}else if (goodsType==8){
                         $(".heji8").before("<tr class='val1'>" +
@@ -812,11 +836,13 @@
                             "<td>" + xml[i].factory + "</td>\n" +
                             "<td >" + xml[i].createTime + "</td>\n" +
                             "<td  >" + xml[i].goodsCode + "</td>\n" +
+
                             "<td >" + xml[i].useday + "</td>\n" +
                             "<td >" + xml[i].batch + "</td>\n" +
                             "<td >" + xml[i].zhuceNumber + "</td>\n" +
                             "<td >" + xml[i].produceDay + "</td>\n" +
                             "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
 					}else if (goodsType==9){
                         $(".heji9").before("<tr class='val1'>" +
@@ -825,11 +851,13 @@
                             "<td>" + xml[i].factory + "</td>\n" +
                             "<td >" + xml[i].createTime + "</td>\n" +
                             "<td  >" + xml[i].goodsCode + "</td>\n" +
+
                             "<td >" + xml[i].useday + "</td>\n" +
                             "<td >" + xml[i].batch + "</td>\n" +
                             "<td >" + xml[i].zhuceNumber + "</td>\n" +
                             "<td >" + xml[i].produceDay + "</td>\n" +
                             "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
 					}
 
@@ -865,6 +893,18 @@
                 $("#countall").val(xml);
             }
         })
+    }
+
+    function codeDayin(object) {
+        var codeOne =object;
+        var goodsType = $('#goodsType').val();
+        var danjuNumber = $('#danjuNumber').val();
+        if (goodsType==1){
+            window.open("/stock/stock/codeJingjiaOne?danjuNumber="+danjuNumber+'&codeOne='+codeOne);
+        } else {
+            window.open("/stock/stock/codeOne?danjuNumber="+danjuNumber+'&codeOne='+codeOne);
+        }
+
     }
 </script>
 </body>

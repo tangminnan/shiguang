@@ -128,6 +128,17 @@ public class KcController {
         }
         List<StockDO> stockDOS = stockService.kccxList(query);
 
+
+        Integer count;
+        Integer counts = 0;
+        for(StockDO stockDO:stockDOS){
+           count =Integer.valueOf(stockDO.getGoodsCount());
+            counts+=count;
+        }
+        model.addAttribute("counts",counts);
+
+       
+
         int total = stockService.kccxListCount(query);
         PageUtils pageUtils = new PageUtils(stockDOS, total);
         return pageUtils;

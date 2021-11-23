@@ -94,9 +94,13 @@
             <td>
                 <input id="retailPrice" name="retailPrice" type="text"/> ~ <input id="retailPrice2" name="retailPrice2" type="text"/>
             </td>
-            <td > 数量：</td>
+            <td > 总数量：</td>
             <td>
                 <input id="countall"  readonly type="text"/>
+            </td>
+            <td > 当前页合计：</td>
+            <td>
+                <input id="heji"   readonly type="text"/>
             </td>
         </tr>
     </table>
@@ -224,7 +228,11 @@
                                 title: '仓位'
                             }
 
-                            ]
+                            ] ,
+                        success: function (xml) {
+                            alert(JSON.stringify(xml))
+                            $("#heji").val(xml);
+                        }
                     });
 
         }
@@ -358,17 +366,9 @@
     }
     
     
-    
+
     //查看总数
     function countall() {
-        // var goodsid = $("#goodsType").val();
-        // var mfrsname = $('#mfrsname').val();
-        // var brandname = $("#brandname").val();
-        // var kccount = $("#kccount").val();
-        // var retailPrice = $("#retailPrice").val();
-        // var retailPrice2 = $("#retailPrice2").val();
-
-
         var positionId= $('#positionId').val();
         var goodsNum = $("#goodsNum").val();
         var goodsCode = $("#goodsCode").val();

@@ -230,8 +230,20 @@ public class PidiaoController {
     @PostMapping("/save")
     @RequiresPermissions("stock:pidiao:add")
     public R save(PidiaoDO pidiao, StockDO stockDO,Model model) {
+       String[] counts =pidiao.getUseCount().split(",");
+       String[] num =pidiao.getGoodsNum().split(",");
+       String count;
+       for (int i=0; i<num.length;i++){
+           try {
+                 count = counts[i];
+           }catch (ArrayIndexOutOfBoundsException e){
+                 count="";
+           }
+           if ("".equals(count)){
+               return R.error("数量不能为空！");
+           }
+       }
         String pidiaoNumber = pidiao.getPidiaoNumber();
-
         String zhidanPeople = pidiao.getZhidanPeople();
         String danjuDay = pidiao.getDanjuDay();
         String outDepartment = pidiao.getOutDepartment();
@@ -368,9 +380,6 @@ public class PidiaoController {
             } catch (ArrayIndexOutOfBoundsException e) {
                 pidiaoDO.setStockorder("");
             }
-
-
-
 
 
 
@@ -763,6 +772,20 @@ public class PidiaoController {
             }
         }
         return R.ok();
-
     }
+
+    //    //总数量
+    @ResponseBody
+    @GetMapping("/countall")
+    public Integer countall(
+            @RequestParam("pidiaoNumber") String pidiaoNumber, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("pidiaoNumber",pidiaoNumber);
+        int total=pidiaoService.countall(map);
+        model.addAttribute("total",total);
+        return total;
+    }
+
 }
+
+

@@ -47,7 +47,12 @@
 			<td>
 				<input id="style" name="style" th:value="${tuihuo.style}" type="text" readonly style="width: 49%"/>
 			</td>
+			<td> 总数量：</td>
+			<td>
+				<input id="countall"  readonly type="text"/>
+			</td>
 		</tr>
+
 		<tr>
 			<td>备注：</td>
 			<td colspan="5"><textarea id="beizhu" name="beizhu" xml="3"  th:text="${tuihuo.beizhu}" readonly></textarea></td>
@@ -113,11 +118,31 @@
                 }
             }
         })
+		countall();
     });
 
     function dayin() {
         var tuihuoNum = $('#tuihuoNum').val();
         window.open("/stock/tuihuo/danju?tuihuoNum="+ tuihuoNum);
+    }
+
+
+    //查看总数
+    function countall() {
+        // var goodsType=$("#goodsType").val();
+        var tuihuoNum=$("#tuihuoNum").val();
+        $.ajax({
+            url: '/stock/tuihuo/countall',
+            type: 'get',
+            dataType: "json",
+            data: {
+                'tuihuoNum': tuihuoNum
+
+            },
+            success: function (xml) {
+                $("#countall").val(xml);
+            }
+        })
     }
 </script>
 </body>

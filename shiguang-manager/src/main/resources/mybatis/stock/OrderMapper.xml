@@ -227,7 +227,10 @@
 		select o.goods_name,o.goods_code,o.goods_count,o.factory,o.retail_price,p.produc_factorycolor,p.view_good_name
         from stock_order o
         left join  aa_produca p on o.goods_num=p.produc_num
-        where o.danju_number = #{danjuNumber}
+        <where>
+            <if test="danjuNumber != null and danjuNumber != ''">and o.danju_number = #{danjuNumber}</if>
+            <if test="codeOne != null and codeOne != ''">and o.goods_code = #{codeOne}</if>
+        </where>
 	</select>
     <update id="updateStatus" parameterType="com.shiguang.stock.domain.OrderDO">
         update stock_order

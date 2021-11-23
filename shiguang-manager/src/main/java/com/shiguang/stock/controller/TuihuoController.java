@@ -125,8 +125,27 @@ public class TuihuoController {
 	@PostMapping("/save")
 	@RequiresPermissions("stock:tuihuo:add")
 	public R save(StockDO stockDO, TuihuoDO tuihuo){
-		String positionId=stockDO.getPositionId();
 
+		String[] shuliangs =tuihuo.getCount().split(",");
+		String[] kyshuliangs =tuihuo.getGoodsCount().split(",");
+		String[] num =tuihuo.getGoodsNum().split(",");
+		String shuliang ;
+		String kyshuliang = null;
+		for (int i=0; i<num.length;i++){
+			try {
+				shuliang = shuliangs[i];
+				kyshuliang = kyshuliangs[i];
+			}catch (ArrayIndexOutOfBoundsException e){
+				shuliang="";
+			}
+			if ("".equals(shuliang)){
+				return R.error("数量不能为空！");
+			}else if(Integer.valueOf(shuliang) > Integer.valueOf(kyshuliang)){
+				return R.error("数量不能大于可用库存！");
+			}
+		}
+
+		String positionId=stockDO.getPositionId();
 		String[] goodsNum1 = stockDO.getGoodsNum().split(",");
 		String[] goodsName1 = stockDO.getGoodsName().split(",");
 		String[] factory1 = stockDO.getFactory().split(",");
@@ -772,4 +791,18 @@ public PageUtils selectSg(@RequestParam Map<String, Object> params) {
 		model.addAttribute("danjuList", danjuList);
 		return danjuList;
 	}
+
+
+	//    //总数量
+	@ResponseBody
+	@GetMapping("/countall")
+	public Integer countall(
+			@RequestParam("tuihuoNum") String tuihuoNum, Model model) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("tuihuoNum",tuihuoNum);
+		int total=tuihuoService.countall(map);
+		model.addAttribute("total",total);
+		return total;
+	}
+
 }

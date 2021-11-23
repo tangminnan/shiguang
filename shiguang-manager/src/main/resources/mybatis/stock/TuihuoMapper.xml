@@ -715,4 +715,11 @@
 		</if>
 	</select>
 
+	<select id="countall" resultType="int">
+		select  sum(goods_count) from stock_tuihuo
+		<where>
+			<if test="pidiaoNumber != null and pidiaoNumber != ''">and  pidiao_number = #{pidiaoNumber}</if>
+		</where>
+	</select>
+
 </mapper>

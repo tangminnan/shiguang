@@ -52,4 +52,6 @@ public interface PidiaoDao {
 	int updatereturnzt(PidiaoDO pidiaoDO);
 	//根据采购订单号查询库存有没有
 	List<PidiaoDO> pidiaodan(Map<String,Object>map);
+
+	int countall(Map<String, Object> map);
 }

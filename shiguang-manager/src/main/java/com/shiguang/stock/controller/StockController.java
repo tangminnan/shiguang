@@ -180,7 +180,7 @@ public class StockController {
         model.addAttribute("orderDOList", orderDOList);
         return orderDOList;
     }
-//    //数量
+//    //总数量
     @ResponseBody
     @GetMapping("/countall")
     public Integer countall(
@@ -202,6 +202,19 @@ public class StockController {
     @PostMapping("/save")
     @RequiresPermissions("stock:stock:add")
     public R save(StockDO stock, OrderDO orderDO) {
+        String[] counts =stock.getGoodsCount().split(",");
+        String[] num =stock.getGoodsNum().split(",");
+        String count;
+        for (int i=0; i<num.length;i++){
+            try {
+                count = counts[i];
+            }catch (ArrayIndexOutOfBoundsException e){
+                count="";
+            }
+            if ("".equals(count)){
+                return R.error("数量不能为空！");
+            }
+        }
 
         String strOrder = stock.getGoodsNum();
         String[] numOrder2 = strOrder.split(",");
@@ -824,6 +837,40 @@ public class StockController {
         return "/stock/stock/code";
     }
 
+    /**
+     * 浏览器打印二维码一个
+     */
+    @GetMapping("/codeJingjiaOne")
+    public String codeJingjiaOne(String danjuNumber,String codeOne, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber",danjuNumber);
+        map.put("codeOne",codeOne);
+        List<OrderDO> orderDOS = orderService.getCode(map);
+        model.addAttribute("orderDOS", orderDOS);
+        for (OrderDO orderDO1 : orderDOS){
+            String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
+            code = "data:image/png;base64," + code;
+            orderDO1.setQRCode(code);
+        }
+        return "/stock/stock/codeJingjiaOne";
+    }
+    /**
+     * 浏览器打印二维码一个
+     */
+    @GetMapping("/codeOne")
+    public String codeOne(String danjuNumber,String codeOne, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber",danjuNumber);
+        map.put("codeOne",codeOne);
+        List<OrderDO> orderDOS = orderService.getCode(map);
+        model.addAttribute("orderDOS", orderDOS);
+        for (OrderDO orderDO1 : orderDOS){
+            String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
+            code = "data:image/png;base64," + code;
+            orderDO1.setQRCode(code);
+        }
+        return "/stock/stock/codeOne";
+    }
     //打印订单
     @GetMapping("/dayinOrder")
     String dayinOrder(String danjuNumber, Model model) {
