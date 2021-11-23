@@ -107,7 +107,8 @@
     <!--保存/清空-->
     <div class="BQ-btn">
         <input type="button" value="查询" onclick="reLoad()"/>
-        <input type="button" class="empty" value="清空" onclick="clearText()"/>
+        <input type="button" value="当前页合计" onclick="newcount()"/>
+        <!--<input type="button" class="empty" value="清空" onclick="clearText()"/>-->
     </div>
 </div>
 
@@ -139,8 +140,9 @@
 
 
         $(function () {
-            countall();
             load();
+            countall();
+            // newcount();
         });
 
         function load() {
@@ -226,16 +228,26 @@
                             },{
                                 field: 'positionName',
                                 title: '仓位'
-                            }
+                            },
+                            {
+                                field: 'newcount',
+                                title: '当前页数量',
 
-                            ] ,
-                        success: function (xml) {
-                            alert(JSON.stringify(xml))
-                            $("#heji").val(xml);
-                        }
+                                formatter: function (value, row, index) {
+                                    var e = "<input style='color: red;text-align: center'  id='newcount' name='newcount' readonly value="+ row.newcount+">"
+                                    return e ;
+                                }
+                            },
+
+                            ]
+                        // success: function (xml) {
+                        //     alert(JSON.stringify(xml))
+                        //     $("#heji").val(xml);
+                        // }
                     });
 
         }
+
     });
 
 
@@ -333,8 +345,9 @@
                 $("#classtype").val($("input[name='classtype']:checked").val());
             }
         $(".val").remove();
-        countall();
         $('#exampleTable').bootstrapTable('refresh');
+        countall();
+        // newcount();
     }
     function positionChange() {
         var xsstate=$("input[name='xsstate']:checked").val();
@@ -419,7 +432,10 @@
         })
     }
 
-
+function newcount() {
+    var newcountid=$('#newcount').val();
+    $("#heji").val(newcountid);
+}
 
 
 </script>

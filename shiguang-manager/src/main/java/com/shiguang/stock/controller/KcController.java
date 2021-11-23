@@ -130,15 +130,16 @@ public class KcController {
 
 
         Integer count;
-        Integer counts = 0;
+        Integer newcount = 0;
         for(StockDO stockDO:stockDOS){
            count =Integer.valueOf(stockDO.getGoodsCount());
-            counts+=count;
+            newcount+=count;
+//            stockDO.setNewcount(newcount);
         }
-        model.addAttribute("counts",counts);
-
-       
-
+        for(StockDO stockDO:stockDOS){
+            stockDO.setNewcount(newcount);
+        }
+        model.addAttribute("newcount",newcount);
         int total = stockService.kccxListCount(query);
         PageUtils pageUtils = new PageUtils(stockDOS, total);
         return pageUtils;
@@ -209,3 +210,4 @@ public class KcController {
     }
 
 }
+

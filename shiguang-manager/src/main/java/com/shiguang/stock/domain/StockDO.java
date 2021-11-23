@@ -18,6 +18,8 @@ public class StockDO implements Serializable {
     private Long id;
     //收货状态
     private String status;
+    //收货状态
+    private Integer newcount;
     //工号
     private String  username;
     //商品信息id
@@ -1191,5 +1193,13 @@ public class StockDO implements Serializable {
 
     public void setUnitname(String unitname) {
         this.unitname = unitname;
+    }
+
+    public Integer getNewcount() {
+        return newcount;
+    }
+
+    public void setNewcount(Integer newcount) {
+        this.newcount = newcount;
     }
 }
