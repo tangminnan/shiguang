@@ -60,6 +60,26 @@ public class GlassessController {
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyid",ShiroUtils.getUser().getCompanyId());
         }
+        if (null != params.get("saleNumber") && !"".equals(params.get("saleNumber"))){
+            query.put("saleNumber",String.valueOf(query.get("saleNumber")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
+        }
+        if (null != params.get("cardNumber") && !"".equals(params.get("cardNumber"))){
+            query.put("cardNumber",String.valueOf(query.get("cardNumber")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
+        }
+        if (null != params.get("name") && !"".equals(params.get("name"))){
+            query.put("name",String.valueOf(query.get("name")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
+        }
+        if (null != params.get("phone1") && !"".equals(params.get("phone1"))){
+            query.put("phone1",String.valueOf(query.get("phone1")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
+        }
         List<SettlementDO> settlementDOList = settlementService.findGlassesData(query);
         if (null != settlementDOList && settlementDOList.size() > 0){
             for (SettlementDO settlementDO : settlementDOList){

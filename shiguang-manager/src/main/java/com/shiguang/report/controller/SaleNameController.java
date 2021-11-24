@@ -112,7 +112,7 @@ public class SaleNameController {
 
                                 } else if ("镜片".equals(storeDescribe[i])){
                                     if (null != classType){
-                                        if ("1".equals(classType)){
+                                        if ("1".equals(classType[i])){
                                             if (null != storeCount && !"".equals(storeCount)){
                                                 jpcpcount = jpcpcount + Integer.parseInt(storeCount[i]);
                                             }
@@ -124,7 +124,7 @@ public class SaleNameController {
                                                 }
 
                                             }
-                                        } else if ("2".equals(classType)){
+                                        } else if ("2".equals(classType[i])){
                                             if (null != storeCount && !"".equals(storeCount)){
                                                 jpdzcount = jpdzcount + Integer.parseInt(storeCount[i]);
                                             }

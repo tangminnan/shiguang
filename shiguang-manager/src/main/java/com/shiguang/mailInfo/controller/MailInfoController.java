@@ -41,6 +41,21 @@ public class MailInfoController {
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
+        if (null != params.get("saleNumber") && !"".equals(params.get("saleNumber"))){
+            query.put("saleNumber",String.valueOf(query.get("saleNumber")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
+        }
+        if (null != params.get("cardMember") && !"".equals(params.get("cardMember"))){
+            query.put("cardMember",String.valueOf(query.get("cardMember")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
+        }
+        if (null != params.get("memberName") && !"".equals(params.get("memberName"))){
+            query.put("memberName",String.valueOf(query.get("memberName")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
+        }
         List<MailInfoDO> infoList = infoService.list(query);
         int total = infoService.count(query);
         PageUtils pageUtils = new PageUtils(infoList, total);

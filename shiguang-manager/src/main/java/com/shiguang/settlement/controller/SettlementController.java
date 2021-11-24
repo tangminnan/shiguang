@@ -109,6 +109,21 @@ public class SettlementController {
 		if (null != ShiroUtils.getUser().getCompanyId()){
 			query.put("companyid",ShiroUtils.getUser().getCompanyId());
 		}
+		if (null != params.get("cardNumber") && !"".equals(params.get("cardNumber"))){
+			query.put("cardNumber",String.valueOf(query.get("cardNumber")).trim());
+			query.put("offset",0);
+			query.put("limit",10);
+		}
+		if (null != params.get("name") && !"".equals(params.get("name"))){
+			query.put("name",String.valueOf(query.get("name")).trim());
+			query.put("offset",0);
+			query.put("limit",10);
+		}
+		if (null != params.get("phone1") && !"".equals(params.get("phone1"))){
+			query.put("phone1",String.valueOf(query.get("phone1")).trim());
+			query.put("offset",0);
+			query.put("limit",10);
+		}
 		List<MemberDO> memberDOList = memberService.payList(query);
 		int total = memberService.payCount(query);
 		PageUtils pageUtils = new PageUtils(memberDOList, total);
@@ -183,6 +198,7 @@ public class SettlementController {
 	@GetMapping("/detail/{cardNumber}/{saleNumber}")
 	@RequiresPermissions("information:settlement:detail")
 	String detail(@PathVariable("cardNumber") String cardNumber,@PathVariable("saleNumber") String saleNumber,Model model){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		MemberDO memberDO = memberService.getCardNumber(cardNumber);
 		model.addAttribute("memberDO",memberDO);
 //		CostDO costDO = costService.get(costId);
@@ -213,6 +229,11 @@ public class SettlementController {
 //		}
 		model.addAttribute("costDO",costDO);
 		SettlementDO settlement = settlementService.getSaleNumers(saleNumber);
+		if (null != settlement){
+			if (null != settlement.getSettleDate()){
+				settlement.setSettleTime(simpleDateFormat.format(settlement.getSettleDate()));
+			}
+		}
 		//List<SettlementDO> settlement = settlementService.list(map);
 //		if ("0".equals(settlement.getPayModel())){
 //			settlement.setPayModel("微信");

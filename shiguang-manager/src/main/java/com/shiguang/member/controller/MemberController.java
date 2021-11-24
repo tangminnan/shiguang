@@ -102,11 +102,13 @@ public class MemberController {
             query.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
         if (null != params.get("ageStart") && !"".equals(params.get("ageStart"))){
-            query.put("agestart",Long.parseLong(params.get("ageStart").toString()));
+            query.put("agestart",Long.parseLong(params.get("ageStart").toString().trim()));
             query.put("companyId","");
         }
         if (null != params.get("ageEnd")&& !"".equals(params.get("ageEnd"))){
-            query.put("ageend",Long.parseLong(params.get("ageEnd").toString()));
+            query.put("ageend",Long.parseLong(params.get("ageEnd").toString().trim()));
+            query.put("offset",0);
+            query.put("limit",10);
             query.put("companyId","");
         }
         if (null != params.get("sex") && !"".equals(params.get("sex"))){
@@ -114,6 +116,8 @@ public class MemberController {
         }
         if (null != params.get("phone1") && !"".equals(params.get("phone1"))){
             query.put("phone1",String.valueOf(query.get("phone1")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
             query.put("companyId","");
         }
         if (null != params.get("name") && !"".equals(params.get("name"))){
@@ -124,6 +128,8 @@ public class MemberController {
         }
         if (null != params.get("cardNumber") && !"".equals(params.get("cardNumber"))){
             query.put("cardNumber",String.valueOf(query.get("cardNumber")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
             query.put("companyId","");
         }
         List<MemberDO> memberList = memberService.list(query);
