@@ -230,17 +230,22 @@ public class PidiaoController {
     @PostMapping("/save")
     @RequiresPermissions("stock:pidiao:add")
     public R save(PidiaoDO pidiao, StockDO stockDO,Model model) {
-       String[] counts =pidiao.getUseCount().split(",");
+       String[] usecounts =pidiao.getUseCount().split(",");
        String[] num =pidiao.getGoodsNum().split(",");
-       String count;
+       String[] kyshuliangs =pidiao.getGoodsCount().split(",");
+       String usecount;
+        String kyshuliang = null;
        for (int i=0; i<num.length;i++){
            try {
-                 count = counts[i];
+                 usecount = usecounts[i];
+               kyshuliang = kyshuliangs[i];
            }catch (ArrayIndexOutOfBoundsException e){
-                 count="";
+               usecount="";
            }
-           if ("".equals(count)){
+           if ("".equals(usecount)){
                return R.error("数量不能为空！");
+           }else if(Integer.valueOf(usecount) > Integer.valueOf(kyshuliang)){
+               return R.error("数量不能大于可用库存！");
            }
        }
         String pidiaoNumber = pidiao.getPidiaoNumber();

@@ -98,16 +98,18 @@
             <td>
                 <input id="countall" style="color: red" readonly type="text"/>
             </td>
-            <td > 当前页合计：</td>
-            <td>
-                <input id="heji"  style="color: red" readonly type="text"/>
-            </td>
+            <!--<td > 当前页合计：</td>-->
+            <!--<td>-->
+                <!--<input id="heji"  style="color: red" readonly type="text"/>-->
+            <!--</td>-->
         </tr>
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
         <input type="button" value="查询" onclick="reLoad()"/>
-        <input type="button" value="当前页合计" onclick="newcount()"/>
+        <!--<input type="button" value="当前页合计" onclick="newcount()"/>-->
+        <!--<span style="color: red">当前页数量：</span>-->
+        <!--<input style="color: red;font-size: 15px;" id="countcln" name="countcln" readonly/>-->
         <!--<input type="button" class="empty" value="清空" onclick="clearText()"/>-->
     </div>
 </div>
@@ -141,8 +143,8 @@
 
         $(function () {
             load();
+            $("#countcln").val();
             countall();
-            // newcount();
         });
 
         function load() {
@@ -229,24 +231,36 @@
                                 field: 'positionName',
                                 title: '仓位'
                             },
-                            {
-                                field: 'newcount',
-                                title: '当前页数量',
+                            // {
+                            //     field: 'newcount',
+                            //     title: '当前页数量',
+                            //
+                            //     // formatter: function (value, row, index) {
+                            //     //     var e = "<input style='color: red;text-align: center' type='hidden' id='newcount' name='newcount' readonly value="+ row.newcount+">"
+                            //     //     return e ;
+                            //     // }
+                            // },
+                            {field:'newcount',title:'当前页数量',formatter: function(value,row,index){
+                                    if(row.newcount !=""){
+                                        return "<span style='color: red;font-size: 15px;' readonly>"+row.newcount+"</span>";
+                                    }else{
+                                        return "<span style='color: red;font-size: 15px;' readonly>"+row.newcount+"</span>";
+                                    }
+                                }},
 
-                                formatter: function (value, row, index) {
-                                    var e = "<input style='color: red;text-align: center'  id='newcount' name='newcount' readonly value="+ row.newcount+">"
-                                    return e ;
-                                }
-                            },
+                            // {field:'hasPrintStr',title:'状态',width:10,halign:'center',align:'right',styler: function(value,row,index){
+                            //         if(row.hasPrint == 'WDY'){
+                            //             return 'color:red;';
+                            //         }else{
+                            //             return 'color:blue;';
+                            //         }
+                            //     }},
 
-                            ]
-                        // success: function (xml) {
-                        //     alert(JSON.stringify(xml))
-                        //     $("#heji").val(xml);
-                        // }
+
+                        ]
                     });
-
         }
+
 
     });
 
@@ -424,9 +438,6 @@
 
             },
             success: function (xml) {
-                // alert(xml)
-                // console.log(xml)
-                // alert(JSON.stringify(xml))
                 $("#countall").val(xml);
             }
         })

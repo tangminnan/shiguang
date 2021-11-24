@@ -94,7 +94,10 @@
 </div>
 <!--商品信息-->
 <div class="m40 tabS SPmsg">
-	<h3>商品信息</h3>
+	<h3>商品信息&nbsp;&nbsp;&nbsp;&nbsp;
+		<span style="color: red">当前页数量：</span>
+		<input style="color: red;font-size: 15px;" id="newcount" name="newcount" readonly/>
+	</h3>
 	<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
 		<tbody>
 		<tr class="thead">
@@ -127,6 +130,8 @@
 	</table>
 	<div class="Cbtn buyBtns">
 		<input type="button" class="H_bc" value="保存并审核"  onclick="save()"/>
+		<span style="color: red">当前页数量：</span>
+		<input style="color: red;font-size: 15px;" id="newcounts" name="newcount" readonly/>
 	</div>
 </div>
 </form>
@@ -258,7 +263,7 @@ function inposion() {
 								// "<td name='needCount'>" + rows[i].needCount + "</td>\n" +
 								"<td name='goodsCount'>" + rows[i].goodsCount + "</td>\n" +
 								"<input id='goodsCount" + a + "' name='goodsCount' type='hidden' value='" + rows[i].goodsCount + "'>\n" +
-								"<td >" + "<input id='useCount" + a + "' name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='shuliang()'/>" + "</td>" +
+								"<td >" + "<input id='useCount" + a + "' name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)'/>" + "</td>" +
 								"<td name='goodsCode'>" + rows[i].goodsCode + "</td>\n" +
 								"<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>\n" +
 								"<td name='useday'>" + rows[i].useday + "</td>\n" +
@@ -305,6 +310,19 @@ function inposion() {
 	// 	var useshuliang=$("#useCount + a").val();
 	// 	//
 	// }
+
+    function hejiadd(object) {
+        addcount=0;
+        $("input[name='useCount']").each(
+            function(){
+                var goodsCount=$(this).val();
+                addcount +=Number(goodsCount);
+                $("input[name='allcount']").val(addcount);
+                $("input[name='newcount']").val(addcount);
+                // alert(addcount)
+            }
+        )
+    }
 </script>
 </body>
 </html>

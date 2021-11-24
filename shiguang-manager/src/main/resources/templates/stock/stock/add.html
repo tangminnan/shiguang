@@ -91,7 +91,11 @@
 
         <!--商品信息-->
         <div class="m40 tabS SPmsg">
-            <h3>商品信息</h3>
+            <h3>商品信息&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="color: red">当前页数量：</span>
+                <input style="color: red;font-size: 15px;" id="newcount" name="newcount" readonly/>
+            </h3>
+
             <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
                 <tbody>
                     <tr id="tab1" style="display:none">
@@ -119,6 +123,7 @@
                                     <td>注册证号</td>
                                     <td>生产日期</td>
                                     <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
 
 
                                 </tr>
@@ -153,6 +158,7 @@
                                     <td>注册证号</td>
                                     <td>生产日期</td>
                                     <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji2">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -190,6 +196,7 @@
                                     <td>注册证号</td>
                                     <td>生产日期</td>
                                     <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji3">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -227,6 +234,7 @@
                                     <td>注册证号</td>
                                     <td>生产日期</td>
                                     <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji4">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -260,6 +268,7 @@
                                     <td>注册证号</td>
                                     <td>生产日期</td>
                                     <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji5">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -292,6 +301,7 @@
                                     <td>注册证号</td>
                                     <td>生产日期</td>
                                     <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji6">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -325,6 +335,7 @@
                                     <td>注册证号</td>
                                     <td>生产日期</td>
                                     <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji7">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -355,6 +366,7 @@
                                     <td>注册证号</td>
                                     <td>生产日期</td>
                                     <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji8">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -385,6 +397,7 @@
                                     <td>注册证号</td>
                                     <td>生产日期</td>
                                     <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
                                 </tr>
 
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji9">
@@ -398,6 +411,8 @@
             </table>
             <div class="Cbtn buyBtns">
                 <input type="button" class="H_bc" value="保存并审核" onclick="save()" />
+                <span style="color: red">当前页数量：</span>
+                <input style="color: red;font-size: 15px;" id="newcounts" name="newcount" readonly/>
                 <!--<input type="checkbox" id="HHbc"/> <label for="HHbc">保存并审核</label>-->
             </div>
         </div>
@@ -407,6 +422,10 @@
     <script type="text/javascript" src="/js/appjs/stock/stock/showdate.js"></script>
     <!--<script type="text/javascript" src="/js/appjs/stock/stock/date.js"></script>-->
     <script type="text/javascript">
+        var a = 0;
+        var b = 0;
+        var addcount = 0;
+
         function dingdanNum() {
             var goodsid = document.getElementById('goodsType').value;
             var mfrsid = document.getElementById('mfrsid').value;
@@ -432,6 +451,8 @@
         function goodsidstr() {
             var value = $("#goodsType option:selected").text();
             if (value == '镜架') {
+                $("input[name='newcount']").val("");
+                addcount=0;
                 $(".val2").remove();
                 $(".val3").remove();
                 $(".val4").remove();
@@ -450,6 +471,8 @@
                 tab8.style = "display: none";
                 tab9.style = "display: none";
             } else if (value == '配件') {
+                $("input[name='newcount']").val("");
+                addcount=0;
                 $(".val1").remove();
                 $(".val3").remove();
                 $(".val4").remove();
@@ -468,6 +491,8 @@
                 tab8.style = "display: none";
                 tab9.style = "display: none";
             } else if (value == '镜片') {
+                $("input[name='newcount']").val("");
+                addcount=0;
                 $(".val1").remove();
                 $(".val2").remove();
                 $(".val4").remove();
@@ -486,6 +511,8 @@
                 tab8.style = "display: none";
                 tab9.style = "display: none";
             } else if (value == '隐形') {
+                $("input[name='newcount']").val("");
+                addcount=0;
                 $(".val1").remove();
                 $(".val2").remove();
                 $(".val3").remove();
@@ -504,6 +531,8 @@
                 tab8.style = "display: none";
                 tab9.style = "display: none";
             } else if (value == '护理液') {
+                $("input[name='newcount']").val("");
+                addcount=0;
                 $(".val1").remove();
                 $(".val2").remove();
                 $(".val3").remove();
@@ -522,6 +551,8 @@
                 tab8.style = "display: none";
                 tab9.style = "display: none";
             } else if (value == '太阳镜') {
+                $("input[name='newcount']").val("");
+                addcount=0;
                 $(".val1").remove();
                 $(".val2").remove();
                 $(".val3").remove();
@@ -540,6 +571,8 @@
                 tab8.style = "display: none";
                 tab9.style = "display: none";
             } else if (value == '老花镜') {
+                $("input[name='newcount']").val("");
+                addcount=0;
                 $(".val1").remove();
                 $(".val2").remove();
                 $(".val3").remove();
@@ -558,6 +591,8 @@
                 tab8.style = "display: none";
                 tab9.style = "display: none";
             } else if (value == '耗材') {
+                $("input[name='newcount']").val("");
+                addcount=0;
                 $(".val1").remove();
                 $(".val2").remove();
                 $(".val3").remove();
@@ -576,6 +611,8 @@
                 tab8.style = "display: block";
                 tab9.style = "display: none";
             } else if (value == '视光') {
+                $("input[name='newcount']").val("");
+                addcount=0;
                 $(".val1").remove();
                 $(".val2").remove();
                 $(".val3").remove();
@@ -594,6 +631,8 @@
                 tab8.style = "display: none";
                 tab9.style = "display: block";
             } else {
+                $("input[name='newcount']").val("");
+                addcount=0;
                 $(".val1").remove();
                 $(".val2").remove();
                 $(".val3").remove();
@@ -646,8 +685,6 @@
         }
 
         // <!--单品添加商品-->
-        var a = 0;
-        var b = 0;
         function choiceGoods() {
             var goodsid = document.getElementById('goodsType').value;
             var mfrsid = document.getElementById('mfrsid').value;
@@ -712,7 +749,8 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input name='goodsCount' value='1' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'   onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)' />" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -743,6 +781,7 @@
                                 type: 'date'
                             });
                         }
+
                     }
                 });
                 layer.full(toIndex);
@@ -798,7 +837,8 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input  readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input name='goodsCount' value='1' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -889,7 +929,8 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input name='goodsCount' value='1' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -981,7 +1022,8 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input name='goodsCount' value='1' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1069,7 +1111,8 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input name='goodsCount' value='1' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1156,7 +1199,8 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input name='goodsCount' value='1' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1245,7 +1289,8 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input name='goodsCount' value='1' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1331,7 +1376,8 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input name='goodsCount' value='1' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1417,7 +1463,8 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input name='goodsCount'  value='1' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1453,6 +1500,35 @@
                 });
                 layer.full(toIndex);
             }
+        }
+
+
+        function shuliang(object) {
+            // id='goodsCount' name='goodsCount'
+            var counts=$("#"+object).val();
+
+            document.getElementsByName("goodsCount").values(counts);
+        }
+
+        // function hejiadd(object) {
+        //     addcount =Number(addcount)+Number(object);
+        //    // $("#allcount").val(addcount);
+        //    $("input[name='allcount']").val(addcount);
+        //    // $("#newcount").val(addcount);
+        //     $("input[name='newcount']").val(addcount);
+        // }
+        // var addcount;
+        function hejiadd(object) {
+            addcount=0;
+            $("input[name='goodsCount']").each(
+                function(){
+                    var goodsCount=$(this).val();
+                    addcount +=Number(goodsCount);
+                    $("input[name='allcount']").val(addcount);
+                    $("input[name='newcount']").val(addcount);
+                    // alert(addcount)
+                }
+            )
         }
 
     </script>
