@@ -16,7 +16,7 @@
         gl.`mfrsid`,gl.`brandname`,`retail_price`,gl.`class_type`,gl.`examine_name`,gl.`examine_date`,gl.`examine_status`
         from gain_loss gl
         join c_position c on c.position_id = gl.position_id
-        join department d on d.depart_number = gl.department_number
+        left join department d on d.depart_number = gl.department_number and FIND_IN_SET(d.company_id,#{companyId})
         <where>
             <if test="id != null and id != ''"> and gl.id = #{id} </if>
             <if test="documentNo != null and documentNo != ''"> and gl.document_no like concat('%', #{documentNo},'%') </if>
@@ -26,7 +26,7 @@
             <if test="documentDate != null and documentDate != ''"> and gl.document_date = #{documentDate} </if>
             <if test="recenuePosition != null and recenuePosition != ''"> and gl.recenue_position = #{recenuePosition} </if>
             <if test="singleName != null and singleName != ''"> and gl.single_name = #{singleName} </if>
-            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+            <!--<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>-->
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

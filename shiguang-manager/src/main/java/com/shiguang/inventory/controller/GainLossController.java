@@ -141,99 +141,144 @@ public class GainLossController {
 			}
 			model.addAttribute("goodsList",goodsList);
 		} else if ("配件".equals(gainLoss.getInventoryType())){
-			String[] goodsId = gainLoss.getGoodsId().split(",");
+			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
-			List<PartsDO> goodsList = new ArrayList<>();
-			for (int i=0;i<goodsId.length;i++){
-				PartsDO partsDO = partsService.get(Long.parseLong(goodsId[i]));
-				partsDO.setInventoryCount(goodsCount[i]);
-				goodsList.add(partsDO);
+			//List<PartsDO> goodsList = new ArrayList<>();
+			List<StockDO> goodsList = new ArrayList<>();
+			for (int i=0;i<goodsNum.length;i++){
+//				PartsDO partsDO = partsService.getPartInfomation(goodsNum[i]);
+//				partsDO.setInventoryCount(goodsCount[i]);
+//				goodsList.add(partsDO);
+				StockDO stockDO = new StockDO();
+				stockDO.setGoodsNum(goodsNum[i]);
+				StockDO producaDO = stockService.getProduceNum(stockDO);
+				producaDO.setInventoryCount(goodsCount[i]);
+				goodsList.add(producaDO);
 			}
 			model.addAttribute("goodsList",goodsList);
 		} else if ("镜片".equals(gainLoss.getInventoryType())){
-			String[] goodsId = gainLoss.getGoodsId().split(",");
+			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
-			List<Object> goodsList = new ArrayList<>();
-			for (int i=0;i<goodsId.length;i++){
-				JpdzDO jpdzDO = jpdzService.get(Long.parseLong(goodsId[i]));
-				if (null != jpdzDO){
-					jpdzDO.setInventoryCount(goodsCount[i]);
-					goodsList.add(jpdzDO);
-				} else {
-					JpcpDO jpcpDO = jpcpService.get(Long.parseLong(goodsId[i]));
-					if (null != jpcpDO){
-						jpcpDO.setInventoryCount(goodsCount[i]);
-						goodsList.add(jpcpDO);
-					}
-				}
+			//List<Object> goodsList = new ArrayList<>();
+			List<StockDO> goodsList = new ArrayList<>();
+			for (int i=0;i<goodsNum.length;i++){
+//				JpdzDO jpdzDO = jpdzService.getJpdzInfomation(goodsNum[i]);
+//				if (null != jpdzDO){
+//					jpdzDO.setInventoryCount(goodsCount[i]);
+//					goodsList.add(jpdzDO);
+//				} else {
+//					JpcpDO jpcpDO = jpcpService.getJpcpInfomation(goodsNum[i]);
+//					if (null != jpcpDO){
+//						jpcpDO.setInventoryCount(goodsCount[i]);
+//						goodsList.add(jpcpDO);
+//					}
+//				}
+				StockDO stockDO = new StockDO();
+				stockDO.setGoodsNum(goodsNum[i]);
+				StockDO producaDO = stockService.getProduceNum(stockDO);
+				producaDO.setInventoryCount(goodsCount[i]);
+					goodsList.add(producaDO);
 			}
 			model.addAttribute("goodsList",goodsList);
 		} else if ("隐形".equals(gainLoss.getInventoryType())){
-			String[] goodsId = gainLoss.getGoodsId().split(",");
+			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
-			List<Object> goodsList = new ArrayList<>();
-			for (int i=0;i<goodsId.length;i++){
-				YxcpDO yxcpDO = yxcpService.get(Long.parseLong(goodsId[i]));
-				if (null != yxcpDO){
-					yxcpDO.setInventoryCount(goodsCount[i]);
-					goodsList.add(yxcpDO);
-				} else {
-					YxdzDO yxdzDO = yxdzService.get(Long.parseLong(goodsId[i]));
-					if (null != yxdzDO){
-						yxdzDO.setInventoryCount(goodsCount[i]);
-						goodsList.add(yxdzDO);
-					}
-				}
+			List<StockDO> goodsList = new ArrayList<>();
+			for (int i=0;i<goodsNum.length;i++){
+//				YxcpDO yxcpDO =new YxcpDO();
+//				if (null != yxcpDO){
+//					yxcpDO.setInventoryCount(goodsCount[i]);
+//					goodsList.add(yxcpDO);
+//				} else {
+//					YxdzDO yxdzDO = yxdzService.getYxdzInfomation(goodsNum[i]);
+//					if (null != yxdzDO){
+//						yxdzDO.setInventoryCount(goodsCount[i]);
+//						goodsList.add(yxdzDO);
+//					}
+//				}
+				StockDO stockDO = new StockDO();
+				stockDO.setGoodsNum(goodsNum[i]);
+				StockDO producaDO = stockService.getProduceNum(stockDO);
+				producaDO.setInventoryCount(goodsCount[i]);
+				goodsList.add(producaDO);
 			}
 			model.addAttribute("goodsList",goodsList);
 		} else if ("护理液".equals(gainLoss.getInventoryType())){
-			String[] goodsId = gainLoss.getGoodsId().split(",");
+			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
-			List<HlyDO> goodsList = new ArrayList<>();
-			for (int i=0;i<goodsId.length;i++){
-				HlyDO hlyDO = hlyService.get(Long.parseLong(goodsId[i]));
-				hlyDO.setInventoryCount(goodsCount[i]);
-				goodsList.add(hlyDO);
+			List<StockDO> goodsList = new ArrayList<>();
+			for (int i=0;i<goodsNum.length;i++){
+//				HlyDO hlyDO = hlyService.getHlyInfomation(goodsNum[i]);
+//				hlyDO.setInventoryCount(goodsCount[i]);
+//				goodsList.add(hlyDO);
+				StockDO stockDO = new StockDO();
+				stockDO.setGoodsNum(goodsNum[i]);
+				StockDO producaDO = stockService.getProduceNum(stockDO);
+				producaDO.setInventoryCount(goodsCount[i]);
+				goodsList.add(producaDO);
 			}
 			model.addAttribute("goodsList",goodsList);
 		} else if ("太阳镜".equals(gainLoss.getInventoryType())){
-			String[] goodsId = gainLoss.getGoodsId().split(",");
+			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
-			List<TyjDO> goodsList = new ArrayList<>();
-			for (int i=0;i<goodsId.length;i++){
-				TyjDO tyjDO = tyjService.get(Long.parseLong(goodsId[i]));
-				tyjDO.setInventoryCount(goodsCount[i]);
-				goodsList.add(tyjDO);
+			List<StockDO> goodsList = new ArrayList<>();
+			for (int i=0;i<goodsNum.length;i++){
+//				TyjDO tyjDO = tyjService.getTyjInfomation(goodsNum[i]);
+//				tyjDO.setInventoryCount(goodsCount[i]);
+//				goodsList.add(tyjDO);
+				StockDO stockDO = new StockDO();
+				stockDO.setGoodsNum(goodsNum[i]);
+				StockDO producaDO = stockService.getProduceNum(stockDO);
+				producaDO.setInventoryCount(goodsCount[i]);
+				goodsList.add(producaDO);
 			}
 			model.addAttribute("goodsList",goodsList);
 		} else if ("老花镜".equals(gainLoss.getInventoryType())){
-			String[] goodsId = gainLoss.getGoodsId().split(",");
+			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
-			List<OldlensDO> goodsList = new ArrayList<>();
-			for (int i=0;i<goodsId.length;i++){
-				OldlensDO oldlensDO = oldlensService.get(Long.parseLong(goodsId[i]));
-				oldlensDO.setInventoryCount(goodsCount[i]);
-				goodsList.add(oldlensDO);
+			//List<OldlensDO> goodsList = new ArrayList<>();
+			List<StockDO> goodsList = new ArrayList<>();
+			for (int i=0;i<goodsNum.length;i++){
+//				OldlensDO oldlensDO = oldlensService.getOldlenInfomation(goodsNum[i]);
+//				oldlensDO.setInventoryCount(goodsCount[i]);
+//				goodsList.add(oldlensDO);
+				StockDO stockDO = new StockDO();
+				stockDO.setGoodsNum(goodsNum[i]);
+				StockDO producaDO = stockService.getProduceNum(stockDO);
+				producaDO.setInventoryCount(goodsCount[i]);
+				goodsList.add(producaDO);
 			}
 			model.addAttribute("goodsList",goodsList);
 		} else if ("耗材".equals(gainLoss.getInventoryType())){
-			String[] goodsId = gainLoss.getGoodsId().split(",");
+			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
-			List<HcDO> goodsList = new ArrayList<>();
-			for (int i=0;i<goodsId.length;i++){
-				HcDO hcDO = hcService.get(Long.parseLong(goodsId[i]));
-				hcDO.setInventoryCount(goodsCount[i]);
-				goodsList.add(hcDO);
+			//List<HcDO> goodsList = new ArrayList<>();
+			List<StockDO> goodsList = new ArrayList<>();
+			for (int i=0;i<goodsNum.length;i++){
+//				HcDO hcDO = hcService.getHcInfomation(goodsNum[i]);
+//				hcDO.setInventoryCount(goodsCount[i]);
+//				goodsList.add(hcDO);
+				StockDO stockDO = new StockDO();
+				stockDO.setGoodsNum(goodsNum[i]);
+				StockDO producaDO = stockService.getProduceNum(stockDO);
+				producaDO.setInventoryCount(goodsCount[i]);
+				goodsList.add(producaDO);
 			}
 			model.addAttribute("goodsList",goodsList);
 		} else if ("视光".equals(gainLoss.getInventoryType())){
-			String[] goodsId = gainLoss.getGoodsId().split(",");
+			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
-			List<ShiguangDO> goodsList = new ArrayList<>();
-			for (int i=0;i<goodsId.length;i++){
-				ShiguangDO shiguangDO = shiguangService.get(Long.parseLong(goodsId[i]));
-				shiguangDO.setInventoryCount(goodsCount[i]);
-				goodsList.add(shiguangDO);
+			//List<ShiguangDO> goodsList = new ArrayList<>();
+			List<StockDO> goodsList = new ArrayList<>();
+			for (int i=0;i<goodsNum.length;i++){
+//				ShiguangDO shiguangDO = shiguangService.getShiguangInfomation(goodsNum[i]);
+//				shiguangDO.setInventoryCount(goodsCount[i]);
+//				goodsList.add(shiguangDO);
+				StockDO stockDO = new StockDO();
+				stockDO.setGoodsNum(goodsNum[i]);
+				StockDO producaDO = stockService.getProduceNum(stockDO);
+				producaDO.setInventoryCount(goodsCount[i]);
+				goodsList.add(producaDO);
 			}
 			model.addAttribute("goodsList",goodsList);
 		}

@@ -143,7 +143,7 @@ public class InventoryController {
 	@PostMapping( "/saveSingle")
 	@ResponseBody
 	@RequiresPermissions("information:inventory:saveSingle")
-	public R saveSingle(Long inventoryId,String gainlossType){
+	public R saveSingle(Long inventoryId,String gainlossType,String remark){
 		InventoryDO inventory = inventoryService.getInventory(inventoryId);
 		Map<String,Object> map = new HashMap<>();
 		map.put("inventoryId",inventory.getInventoryId());
@@ -247,6 +247,7 @@ public class InventoryController {
 		gainLossDO.setExamineName(ShiroUtils.getUser().getName());
 		gainLossDO.setExamineDate(new Date());
 		gainLossDO.setExamineStatus("1");
+		gainLossDO.setRemark(remark);
 		if(gainLossService.save(gainLossDO)>0){
 			return R.ok();
 		}

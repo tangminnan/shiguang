@@ -116,6 +116,10 @@ function edit(id) {
 function saveSingle(){
 	var inventoryId = $("#inventoryId").val();
 	var gainlossType = $("#gainlossType").val();
+	var remark = $("#remark").val();
+	if ('' == remark){
+		return layer.alert("请输入备注或原因")
+	}
     layer.confirm('确定要生成盘点单？', {
         btn : [ '确定', '取消' ]
     }, function() {
@@ -124,7 +128,8 @@ function saveSingle(){
             type : "post",
             data : {
                 'inventoryId' : inventoryId,
-				'gainlossType':gainlossType
+				'gainlossType':gainlossType,
+				'remark':remark
             },
             success : function(r) {
                 if (r.code==0) {
