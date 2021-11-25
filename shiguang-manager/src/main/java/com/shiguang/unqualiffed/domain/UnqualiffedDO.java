@@ -21,6 +21,8 @@ public class UnqualiffedDO implements Serializable {
 	private String companyId;
 	//单据编号
 	private String documentNumber;
+	//单据编号(跟库存单据编号相对应)
+	private String danjuNumber;
 	//申请部门
 	private String departmentAppli;
 	//申报仓位
@@ -77,6 +79,15 @@ public class UnqualiffedDO implements Serializable {
 	 * 单据编号
 	 */
 	public String getDocumentNumber() {return documentNumber;}
+
+	public String getDanjuNumber() {
+		return danjuNumber;
+	}
+
+	public void setDanjuNumber(String danjuNumber) {
+		this.danjuNumber = danjuNumber;
+	}
+
 	/**
 	 * 申请部门
 	 */

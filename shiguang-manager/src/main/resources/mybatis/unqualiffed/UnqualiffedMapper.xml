@@ -57,6 +57,7 @@
 		(
 		   `company_id`,
 		   `document_number`,
+		   `danju_number`,
 		   `department_appli`,
 		   `position_appli`,
 			`sale_number`, 
@@ -77,6 +78,7 @@
 		(
 		    #{companyId},
 		    #{documentNumber},
+		    #{danjuNumber},
 		    #{departmentAppli},
 		    #{positionAppli},
 			#{saleNumber}, 

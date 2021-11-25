@@ -205,21 +205,21 @@ public class UnqualiffedController {
 			String[] goodsName = unqualiffed.getGoodsName().split(",");
 			StockDO stockDO = new StockDO();
 			stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-			stockDO.setGoodsCode(goodsCode[i]);
 			String[] classType = unqualiffed.getClassType().split(",");
 			if ("2".equals(classType[i])){
 				Map<String,Object> maps = new HashMap<>();
 				maps.put("producNum",goodsNum[i]);
 				JpdzDO jpdzDOS = jpdzService.getJpdzInfomation(goodsNum[i]);
+				stockDO.setGoodsCode(goodsCode[i]+"00000000");
 				if (null != jpdzDOS ){
 					StockDO stockDOs = new StockDO();
 					stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
-					stockDOs.setGoodsCode(goodsCode[i]);
+					stockDOs.setGoodsCode(goodsCode[i]+"00000000");
 					StockDO stockDO1 = stockService.getProduceCode(stockDOs);
 					if (null != stockDO1){
 						int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 						stockDO.setGoodsCount(godsCount + "");
-						unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
+						unqualiffed.setDanjuNumber(stockDO1.getDanjuNumber());
 						stockService.updateGoodsCount(stockDO);
 					} else {
 						stockDO.setGoodsNum(goodsNum[i]);
@@ -240,21 +240,23 @@ public class UnqualiffedController {
 						stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 						stockDO.setStatus("0");
 						stockDO.setReturnzt("1");
-						stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
+						unqualiffed.setDanjuNumber("DJBH"+GuuidUtil.getUUID());
+						stockDO.setDanjuNumber(unqualiffed.getDanjuNumber());
 						stockService.save(stockDO);
 					}
 
 				} else {
 					YxdzDO yxdzDOList =yxdzService.getYxdzInfomation(goodsNum[i]);
+					stockDO.setGoodsCode(goodsCode[i]+"00000000");
 					if (null != yxdzDOList){
 						StockDO stockDOs = new StockDO();
 						stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
-						stockDOs.setGoodsCode(goodsCode[i]);
+						stockDOs.setGoodsCode(goodsCode[i]+"00000000");
 						StockDO stockDO1 = stockService.getProduceCode(stockDOs);
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
-							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
+							unqualiffed.setDanjuNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -275,7 +277,8 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
-							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
+							unqualiffed.setDanjuNumber("DJBH"+GuuidUtil.getUUID());
+							stockDO.setDanjuNumber(unqualiffed.getDanjuNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -283,6 +286,7 @@ public class UnqualiffedController {
 			} else if ("1".equals(classType[i])){
 				Map<String,Object> maps = new HashMap<>();
 				maps.put("producNum",goodsNum[i]);
+				stockDO.setGoodsCode(goodsCode[i]+"00000000");
 				if ("镜片".equals(storeDescribe[i])){
 					JpcpDO jpcpDOS = jpcpService.getJpcpInfomation(goodsNum[i]);
 					if (null != jpcpDOS){
@@ -293,7 +297,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
-							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
+							unqualiffed.setDanjuNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -314,7 +318,8 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
-							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
+							unqualiffed.setDanjuNumber("DJBH"+GuuidUtil.getUUID());
+							stockDO.setDanjuNumber(unqualiffed.getDanjuNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -328,7 +333,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
-							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
+							unqualiffed.setDanjuNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -349,7 +354,8 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
-							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
+							unqualiffed.setDanjuNumber("DJBH"+GuuidUtil.getUUID());
+							stockDO.setDanjuNumber(unqualiffed.getDanjuNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -363,7 +369,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
-							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
+							unqualiffed.setDanjuNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -384,7 +390,8 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
-							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
+							unqualiffed.setDanjuNumber("DJBH"+GuuidUtil.getUUID());
+							stockDO.setDanjuNumber(unqualiffed.getDanjuNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -398,7 +405,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
-							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
+							unqualiffed.setDanjuNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -419,7 +426,8 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
-							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
+							unqualiffed.setDanjuNumber("DJBH"+GuuidUtil.getUUID());
+							stockDO.setDanjuNumber(unqualiffed.getDanjuNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -433,7 +441,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
-							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
+							unqualiffed.setDanjuNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -454,7 +462,8 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
-							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
+							unqualiffed.setDanjuNumber("DJBH"+GuuidUtil.getUUID());
+							stockDO.setDanjuNumber(unqualiffed.getDanjuNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -468,7 +477,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
-							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
+							unqualiffed.setDanjuNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -489,7 +498,8 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
-							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
+							unqualiffed.setDanjuNumber("DJBH"+GuuidUtil.getUUID());
+							stockDO.setDanjuNumber(unqualiffed.getDanjuNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -503,7 +513,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
-							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
+							unqualiffed.setDanjuNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -524,7 +534,8 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
-							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
+							unqualiffed.setDanjuNumber("DJBH"+GuuidUtil.getUUID());
+							stockDO.setDanjuNumber(unqualiffed.getDanjuNumber());
 							stockService.save(stockDO);
 						}
 					}
@@ -538,7 +549,7 @@ public class UnqualiffedController {
 						if (null != stockDO1){
 							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 							stockDO.setGoodsCount(godsCount + "");
-							unqualiffed.setDocumentNumber(stockDO1.getDanjuNumber());
+							unqualiffed.setDanjuNumber(stockDO1.getDanjuNumber());
 							stockService.updateGoodsCount(stockDO);
 						} else {
 							stockDO.setGoodsNum(goodsNum[i]);
@@ -559,7 +570,8 @@ public class UnqualiffedController {
 							stockDO.setCreateTime(simpleDateFormat.format(new Date()));
 							stockDO.setStatus("0");
 							stockDO.setReturnzt("1");
-							stockDO.setDanjuNumber(unqualiffed.getDocumentNumber());
+							unqualiffed.setDanjuNumber("DJBH"+GuuidUtil.getUUID());
+							stockDO.setDanjuNumber(unqualiffed.getDanjuNumber());
 							stockService.save(stockDO);
 						}
 					}
