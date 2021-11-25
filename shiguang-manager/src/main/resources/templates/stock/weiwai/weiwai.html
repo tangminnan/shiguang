@@ -66,6 +66,10 @@
 				var s_edit_h = 'hidden';
 				var s_remove_h = 'hidden';
 				var s_resetPwd_h = 'hidden';
+                var s_detial_h = 'hidden';
+                var s_userNum_h = 'hidden';
+                var s_psNum_h = 'hidden';
+                var s_code_h = 'hidden';
 			</script>
 		</div>
 		<div shiro:hasPermission="stock:weiwai:edit">
@@ -81,6 +85,26 @@
 		<div shiro:hasPermission="stock:weiwai:resetPwd">
 			<script type="text/javascript">
 				var s_resetPwd_h = '';
+			</script>
+		</div>
+	<div shiro:hasPermission="stock:weiwai:detial">
+			<script type="text/javascript">
+				var s_detial_h = '';
+			</script>
+		</div>
+	<div shiro:hasPermission="stock:weiwai:userNum">
+			<script type="text/javascript">
+				var s_userNum_h = '';
+			</script>
+		</div>
+	<div shiro:hasPermission="stock:weiwai:psNum">
+			<script type="text/javascript">
+				var s_psNum_h = '';
+			</script>
+		</div>
+	<div shiro:hasPermission="stock:weiwai:code">
+			<script type="text/javascript">
+				var s_code_h = '';
 			</script>
 		</div>
 

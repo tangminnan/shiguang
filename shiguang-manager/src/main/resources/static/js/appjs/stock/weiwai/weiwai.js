@@ -134,19 +134,19 @@ function load() {
                                 align: 'center',
                                 formatter: function (value, row, index) {
                                     if (row.status == "1") {
-                                        var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="detial(\''
+                                        var a = '<span class="btn btn-primary btn-sm' + s_detial_h + '"  href="#" title="详情"  mce_href="#" onclick="detial(\''
                                             + row.id + '\')">详情</span> ';
-                                        var f = '<span class="btn btn-success btn-sm" href="#" title="收货"  mce_href="#"   onclick="userNum(\''
+                                        var f = '<span class="btn btn-success btn-sm' +s_userNum_h+ '" href="#" title="收货"  mce_href="#"   onclick="userNum(\''
                                             + row.danjuNumber + '\')">收货</span> ';
                                         var n = '';
                                         var c = '';
                                         // var j = '';
                                     } else if (row.status == "0") {
-                                        var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="detial(\''
+                                        var a = '<span class="btn btn-primary btn-sm' + s_detial_h + '"  href="#" title="详情"  mce_href="#" onclick="detial(\''
                                             + row.id + '\')">详情</span> ';
                                         var f = '';
                                         if (row.shstatus==""){
-											var n = '<span class="btn btn-warning btn-sm"  href="#" title="配送"  mce_href="#" onclick="psNum(\''
+											var n = '<span class="btn btn-warning btn-sm' + s_psNum_h + '"   href="#" title="配送"  mce_href="#" onclick="psNum(\''
 												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle+" ','"+  row.yaoqiu  + '\')">配送</span> ';
 											// var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="thNum(\''
 											// 	+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">退回</span> ';
@@ -154,7 +154,7 @@ function load() {
 										}else {
 											var n = '';
 											// var j = '';
-                                            var c = '<span class="btn btn-danger btn-sm"  href="#" title="条码"  mce_href="#" onclick="code(\''
+                                            var c = '<span class="btn btn-danger btn-sm' + s_code_h + '"    href="#" title="条码"  mce_href="#" onclick="code(\''
                                                 + row.goodsType+" ','"+ row.danjuNumber + '\')">条码</span> ';
 										}
 
@@ -307,7 +307,6 @@ function psNum(salenumbery,danjuNumber,eyeStyle,yaoqiu ) {
 	if (yaoqiu== ''){
 		yaoqiu ="空"
 	}
-
 	var shstatus="0";
 	if (shstatus == "0"){
 		// alert("输入工号")
@@ -317,7 +316,7 @@ function psNum(salenumbery,danjuNumber,eyeStyle,yaoqiu ) {
 			maxmin : true,
 			shadeClose : false, // 点击遮罩关闭层
 			area : [ '800px', '520px' ],
-			content :"/stock/weiwai/userNumps/"+ salenumbery+'/'+danjuNumber+'/'+eyeStyle+'/'+yaoqiu+'/'+shstatus
+			content :"/stock/weiwai/psNum/"+ salenumbery+'/'+danjuNumber+'/'+eyeStyle+'/'+yaoqiu+'/'+shstatus
 		});
 
 	}

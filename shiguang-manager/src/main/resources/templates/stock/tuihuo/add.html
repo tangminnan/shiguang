@@ -85,7 +85,7 @@
 </div>
 
 <!--商品信息-->
-<div class="m40 tabS SPmsg">
+<div class="m40 tabS SPmsg ">
 	<h3>商品信息&nbsp;&nbsp;&nbsp;&nbsp;
 		<span style="color: red">当前页数量：</span>
 		<input style="color: red;font-size: 15px;" id="newcount" name="newcount" readonly/>
@@ -103,6 +103,7 @@
 			<td>商品条码</td>
 			<td style="display: none">goodsxinxiid</td>
 			<td style="display: none">标准零售价</td>
+			<td  >操作</td>
 		</tr>
 		<tr style="font-weight:bold;font-size: 15px;" class="goods"></tr>
 		</tbody>
@@ -182,6 +183,7 @@
                             "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
                             "<td style='display: none' name='retailPrice'>" + rows[i].retailPrice + "</td>\n" +
                             "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+                            "<td><em  onclick='delertTr(this)'></em></td>\n" +
                             "</tr>");
                     }
                 }
@@ -202,6 +204,22 @@
                 // alert(addcount)
             }
         )
+    }
+
+    function delertTr(obj) {
+        var x;
+        var r=confirm("是否删除该的商品!");
+        if (r==true){
+            x="确定";
+        }
+        else{
+            x="取消";
+        }
+        if(x=="确定"){
+            var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+            tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+        }
+        hejiadd();
     }
 </script>
 </form>

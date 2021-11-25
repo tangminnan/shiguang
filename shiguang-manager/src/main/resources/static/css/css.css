@@ -306,6 +306,7 @@ h1, h2, h3, h4, h5, h6{ font-size:100%;font-weight: normal;}
 .Choose tbody td{height: 32px;text-align: center;border-bottom: 1px solid #d8ecfe;}
 .Choose tbody tr:hover{background: #e3f0fc;}
 .Choose table em{width: 16px;height: 20px;display: inline-block;background:url(../img/del_red.png);cursor: pointer;}
+.SPmsg table em{width: 16px;height: 20px;display: inline-block;background:url(../img/del_red.png);cursor: pointer;}
 .cho_tabA{width: 100%;}
 .cho_tabA input{background:url(../img/Fcheck_no.png);width: 14px;height: 14px;vertical-align:middle;margin-top: -3px;margin-right:3px;}
 .cho_tabA input:checked{background-image:url(../img/Fcheck_yes.png);}

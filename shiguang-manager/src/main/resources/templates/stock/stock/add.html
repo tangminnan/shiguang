@@ -9,6 +9,9 @@
     <title>采购收货新增</title>
     <link rel="stylesheet" href="/css/css.css" type="text/css">
     <!--<link rel="stylesheet" href="/css/date.css" type="text/css">-->
+
+
+
 </head>
 
 <body>
@@ -83,7 +86,6 @@
                     <input id="returnzt" name="returnzt" value="1" type="hidden" />
                     <input id="username" name="username" value="未收货" type="hidden" />
                     <input type="button" class="H_bc" value="保存并审核" onclick="save()" />
-                    <!--<input type="checkbox" id="Hbc"/> <label for="Hbc">保存并审核</label>-->
                 </div>
             </div>
 
@@ -99,10 +101,9 @@
             <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
                 <tbody>
                     <tr id="tab1" style="display:none">
-                        <td style="width: 100vw;">
-                            <table>
+                        <td style="width: 100%;" class="Choose">
+                            <table >
                                 <tr class="thead">
-                                    <!--<td>全选 <input type="checkbox"/></td>-->
                                     <td>商品代码</td>
                                     <td>商品名称</td>
                                     <td>型号</td>
@@ -124,9 +125,11 @@
                                     <td>生产日期</td>
                                     <td>数量</td>
                                     <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
 
 
                                 </tr>
+
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji1">
                                     <!--<td colspan="10" style="text-align:right;">合计</td>-->
                                     <!--<td value="0"></td>-->
@@ -136,10 +139,9 @@
                         </td>
                     </tr>
                     <tr id="tab2" style="display:none">
-                        <td style="width: 100vw;">
-                            <table>
+                        <td style="width: 100%;" class="Choose">
+                            <table >
                                 <tr class="thead">
-                                    <!--<td>全选 <input type="checkbox"/></td>-->
                                     <td>商品代码</td>
                                     <td>商品名称</td>
                                     <td>型号</td>
@@ -159,6 +161,7 @@
                                     <td>生产日期</td>
                                     <td>数量</td>
                                     <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji2">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -167,11 +170,10 @@
                             </table>
                         </td>
                     </tr>
-                    <tr id="tab3" style="display:none">
-                        <td style="width: 100vw;">
+                    <tr id="tab3" style="display:none" >
+                        <td style="width: 100%;"class="Choose">
                             <table>
                                 <tr class="thead">
-                                    <!--<td>全选 <input type="checkbox"/></td>-->
                                     <td>商品代码</td>
                                     <td>商品名称</td>
                                     <td>型号</td>
@@ -197,6 +199,7 @@
                                     <td>生产日期</td>
                                     <td>数量</td>
                                     <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji3">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -205,11 +208,10 @@
                             </table>
                         </td>
                     </tr>
-                    <tr id="tab4" style="display:none">
-                        <td style="width: 100vw;">
+                    <tr id="tab4" style="display:none" >
+                        <td style="width: 100%;" class="Choose">
                             <table>
                                 <tr class="thead">
-                                    <!--<td>全选 <input type="checkbox"/></td>-->
                                     <td>商品代码</td>
                                     <td>商品名称</td>
                                     <td>厂家型号</td>
@@ -235,6 +237,7 @@
                                     <td>生产日期</td>
                                     <td>数量</td>
                                     <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji4">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -245,10 +248,9 @@
                     </tr>
 
                     <tr id="tab5" style="display:none">
-                        <td style="width: 100vw;">
+                        <td style="width: 100%;" class="Choose">
                             <table>
                                 <tr class="thead">
-                                    <!--<td>全选 <input type="checkbox"/></td>-->
                                     <td>商品代码</td>
                                     <td>商品名称</td>
                                     <td>型号</td>
@@ -269,6 +271,7 @@
                                     <td>生产日期</td>
                                     <td>数量</td>
                                     <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji5">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -278,10 +281,9 @@
                         </td>
                     </tr>
                     <tr id="tab6" style="display:none">
-                        <td style="width: 100vw;">
+                        <td style="width: 100%;" class="Choose">
                             <table>
                                 <tr class="thead">
-                                    <!--<td>全选 <input type="checkbox"/></td>-->
                                     <td>商品代码</td>
                                     <td>商品名称</td>
                                     <td>型号</td>
@@ -302,6 +304,7 @@
                                     <td>生产日期</td>
                                     <td>数量</td>
                                     <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji6">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -311,10 +314,9 @@
                         </td>
                     </tr>
                     <tr id="tab7" style="display:none">
-                        <td style="width: 100vw;">
+                        <td style="width: 100%;" class="Choose">
                             <table>
                                 <tr class="thead">
-                                    <!--<td>全选 <input type="checkbox"/></td>-->
                                     <td>商品代码</td>
                                     <td>商品名称</td>
                                     <td>型号</td>
@@ -336,6 +338,7 @@
                                     <td>生产日期</td>
                                     <td>数量</td>
                                     <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji7">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -345,10 +348,9 @@
                         </td>
                     </tr>
                     <tr id="tab8" style="display:none">
-                        <td style="width: 100vw;">
+                        <td style="width: 100%;" class="Choose">
                             <table>
                                 <tr class="thead">
-                                    <!--<td>全选 <input type="checkbox"/></td>-->
                                     <td>商品代码</td>
                                     <td>商品名称</td>
                                     <td>型号</td>
@@ -367,6 +369,7 @@
                                     <td>生产日期</td>
                                     <td>数量</td>
                                     <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
                                 </tr>
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji8">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
@@ -375,11 +378,10 @@
                             </table>
                         </td>
                     </tr>
-                    <tr id="tab9" style="display:none">
-                        <td style="width: 100vw;">
+                    <tr id="tab9" style="display:none" >
+                        <td style="width: 100%;" class="Choose">
                             <table>
                                 <tr class="thead">
-                                    <!--<td>全选 <input type="checkbox"/></td>-->
                                     <td>商品代码</td>
                                     <td>商品名称</td>
                                     <td>型号</td>
@@ -398,8 +400,8 @@
                                     <td>生产日期</td>
                                     <td>数量</td>
                                     <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
                                 </tr>
-
                                 <tr style="font-weight:bold;font-size: 15px;" class="heji9">
                                     <!--<td colspan="12" style="text-align:right;">合计：</td>-->
                                     <!--<td>0</td>-->
@@ -413,7 +415,6 @@
                 <input type="button" class="H_bc" value="保存并审核" onclick="save()" />
                 <span style="color: red">当前页数量：</span>
                 <input style="color: red;font-size: 15px;" id="newcounts" name="newcount" readonly/>
-                <!--<input type="checkbox" id="HHbc"/> <label for="HHbc">保存并审核</label>-->
             </div>
         </div>
     </form>
@@ -709,7 +710,6 @@
                             a = a + 1;
                             b = b + 1;
                             $(".heji1").before("<tr class='val1'>" +
-                                // "<td><input type=\"checkbox\"/></td>\n" +
                                 "<td >" + rows[i].producNum + "</td>\n" +//0
                                 "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +//1
                                 "<td>" + rows[i].producName + "</td>\n" +//2
@@ -751,6 +751,7 @@
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'   onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)' />" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -800,7 +801,6 @@
                             a = a + 1;
                             b = b + 1;
                             $(".heji2").before("<tr class='val2'>" +
-                                // "<td><input type=\"checkbox\"/></td>\n" +
                                 "<td >" + rows[i].producNum + "</td>\n" +
                                 "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                                 "<td>" + rows[i].producName + "</td>\n" +
@@ -839,6 +839,7 @@
                                 "<td >" + "<input  readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -888,7 +889,6 @@
                             a = a + 1;
                             b = b + 1;
                             $(".heji3").before("<tr class='val3'>" +
-                                // "<td><input type=\"checkbox\"/></td>\n" +
                                 "<td >" + rows[i].producNum + "</td>\n" +
                                 "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                                 "<td>" + rows[i].producName + "</td>\n" +
@@ -931,6 +931,7 @@
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -980,7 +981,6 @@
                             a = a + 1;
                             b = b + 1;
                             $(".heji4").before("<tr class='val4'>" +
-                                // "<td><input type=\"checkbox\"/></td>\n" +
                                 "<td >" + rows[i].producNum + "</td>\n" +
                                 "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                                 "<td>" + rows[i].producName + "</td>\n" +
@@ -1024,6 +1024,7 @@
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1073,7 +1074,6 @@
                             a = a + 1;
                             b = b + 1;
                             $(".heji5").before("<tr class='val5'>" +
-                                // "<td><input type=\"checkbox\"/></td>\n" +
                                 "<td >" + rows[i].producNum + "</td>\n" +
                                 "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                                 "<td>" + rows[i].producName + "</td>\n" +
@@ -1113,6 +1113,7 @@
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1162,7 +1163,6 @@
                             a = a + 1;
                             b = b + 1;
                             $(".heji6").before("<tr class='val6'>" +
-                                // "<td><input type=\"checkbox\"/></td>\n" +
                                 "<td >" + rows[i].producNum + "</td>\n" +
                                 "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                                 "<td>" + rows[i].producName + "</td>\n" +
@@ -1201,6 +1201,7 @@
                                 "<td >" + "<input readonly  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1250,7 +1251,6 @@
                             a = a + 1;
                             b = b + 1;
                             $(".heji7").before("<tr class='val7'>" +
-                                // "<td><input type=\"checkbox\"/></td>\n" +
                                 "<td >" + rows[i].producNum + "</td>\n" +
                                 "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                                 "<td>" + rows[i].producName + "</td>\n" +
@@ -1291,6 +1291,7 @@
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1340,7 +1341,6 @@
                             a = a + 1;
                             b = b + 1;
                             $(".heji8").before("<tr class='val8'>" +
-                                // "<td><input type=\"checkbox\"/></td>\n" +
                                 "<td >" + rows[i].producNum + "</td>\n" +
                                 "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                                 "<td>" + rows[i].producName + "</td>\n" +
@@ -1378,6 +1378,7 @@
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1427,7 +1428,6 @@
                             a = a + 1;
                             b = b + 1;
                             $(".heji9").before("<tr class='val9'>" +
-                                // "<td><input type=\"checkbox\"/></td>\n" +
                                 "<td >" + rows[i].producNum + "</td>\n" +
                                 "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
                                 "<td>" + rows[i].producName + "</td>\n" +
@@ -1465,6 +1465,7 @@
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
                                 "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
                             //日期
                             laydate.render({
@@ -1510,14 +1511,6 @@
             document.getElementsByName("goodsCount").values(counts);
         }
 
-        // function hejiadd(object) {
-        //     addcount =Number(addcount)+Number(object);
-        //    // $("#allcount").val(addcount);
-        //    $("input[name='allcount']").val(addcount);
-        //    // $("#newcount").val(addcount);
-        //     $("input[name='newcount']").val(addcount);
-        // }
-        // var addcount;
         function hejiadd(object) {
             addcount=0;
             $("input[name='goodsCount']").each(
@@ -1529,6 +1522,23 @@
                     // alert(addcount)
                 }
             )
+        }
+
+
+        function delertTr(obj) {
+            var x;
+            var r=confirm("是否删除该的商品!");
+            if (r==true){
+                x="确定";
+            }
+            else{
+                x="取消";
+            }
+            if(x=="确定"){
+                var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+                tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+            }
+            hejiadd();
         }
 
     </script>

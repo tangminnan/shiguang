@@ -120,6 +120,7 @@
 			<td style="display: none">品牌</td>
 			<td style="display: none">标准价格</td>
 			<td style="display: none">商品id</td>
+			<td  >操作</td>
 		</tr>
 		<tr class="liebiao">
 			<!--<td colspan="5"></td>-->
@@ -297,7 +298,7 @@ function inposion() {
 								"<td name='stockorder' style='display: none'>" + rows[i].danjuNumber + "</td>\n" +
 								"<input name='stockorder' type='hidden' value='" + rows[i].danjuNumber + "'>\n" +
 
-
+                            	"<td><em  onclick='delertTr(this)'></em></td>\n" +
 								"</tr>");
 					}
 				}
@@ -322,6 +323,22 @@ function inposion() {
                 // alert(addcount)
             }
         )
+    }
+
+    function delertTr(obj) {
+        var x;
+        var r=confirm("是否删除该的商品!");
+        if (r==true){
+            x="确定";
+        }
+        else{
+            x="取消";
+        }
+        if(x=="确定"){
+            var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+            tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+        }
+        hejiadd();
     }
 </script>
 </body>
