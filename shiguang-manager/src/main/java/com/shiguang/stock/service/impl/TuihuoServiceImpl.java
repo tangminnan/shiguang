@@ -105,7 +105,7 @@ public class TuihuoServiceImpl implements TuihuoService {
 
 	@Override
 	public List<StockDO> selectYxcp(Map<String, Object> map) {
-		return tuihuoDao.selectYxdz(map);
+		return tuihuoDao.selectYxcp(map);
 	}
 
 	@Override

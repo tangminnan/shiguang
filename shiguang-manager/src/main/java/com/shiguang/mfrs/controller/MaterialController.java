@@ -95,18 +95,18 @@ public class MaterialController {
         return R.ok();
     }
 
-//	/**
-//	 * 删除
-//	 */
-//	@PostMapping( "/remove")
-//	@ResponseBody
-//	@RequiresPermissions("mfrs:material:remove")
-//	public R remove( Integer materialid){
-//		if(materialService.remove(materialid)>0){
-//		return R.ok();
-//		}
-//		return R.error();
-//	}
+	/**
+	 * 删除
+	 */
+	@PostMapping( "/remove")
+	@ResponseBody
+	@RequiresPermissions("mfrs:material:remove")
+	public R remove( Integer materialid){
+		if(materialService.remove(materialid)>0){
+		return R.ok();
+		}
+		return R.error();
+	}
 
     /**
      * 批量删除
@@ -119,19 +119,19 @@ public class MaterialController {
         return R.ok();
     }
 
-    /**
-     * 删除修改状态
-     */
-    @ResponseBody
-    @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
-    public R updateStatus(Integer materialid) {
-        MaterialDO materialDO = new MaterialDO();
-        materialDO.setState(0L);
-        materialDO.setMaterialid(materialid);
-        if (materialService.updateState(materialDO) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除修改状态
+//     */
+//    @ResponseBody
+//    @RequestMapping("/remove")
+//    @RequiresPermissions("mfrs:material:remove")
+//    public R updateStatus(Integer materialid) {
+//        MaterialDO materialDO = new MaterialDO();
+//        materialDO.setState(0L);
+//        materialDO.setMaterialid(materialid);
+//        if (materialService.updateState(materialDO) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 }

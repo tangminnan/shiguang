@@ -202,18 +202,18 @@ public class CompanyController {
 		return R.ok();
 	}
 
-//	/**
-//	 * 删除
-//	 */
-//	@PostMapping( "/remove")
-//	@ResponseBody
-//	@RequiresPermissions("mfrs:company:remove")
-//	public R remove( Integer id){
-//		if(companyService.remove(id)>0){
-//		return R.ok();
-//		}
-//		return R.error();
-//	}
+	/**
+	 * 删除
+	 */
+	@PostMapping( "/remove")
+	@ResponseBody
+	@RequiresPermissions("mfrs:company:remove")
+	public R remove( Integer id){
+		if(companyService.remove(id)>0){
+		return R.ok();
+		}
+		return R.error();
+	}
 //
 //	/**
 //	 * 删除
@@ -238,19 +238,19 @@ public class CompanyController {
 		return R.ok();
 	}
 
-	/**
-	 * 删除修改状态
-	 */
-	@ResponseBody
-	@RequestMapping("/remove")
-	@RequiresPermissions("mfrs:mfrs:remove")
-	public R updateStatus(Integer id) {
-		CompanyDO companyDO = new CompanyDO();
-		companyDO.setState(0L);
-		companyDO.setId(id);
-		if (companyService.update(companyDO) > 0) {
-			return R.ok();
-		}
-		return R.error();
-	}
+//	/**
+//	 * 删除修改状态
+//	 */
+//	@ResponseBody
+//	@RequestMapping("/remove")
+//	@RequiresPermissions("mfrs:company:remove")
+//	public R updateStatus(Integer id) {
+//		CompanyDO companyDO = new CompanyDO();
+//		companyDO.setState(0L);
+//		companyDO.setId(id);
+//		if (companyService.update(companyDO) > 0) {
+//			return R.ok();
+//		}
+//		return R.error();
+//	}
 }

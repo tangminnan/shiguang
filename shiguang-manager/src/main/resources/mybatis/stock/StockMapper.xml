@@ -2053,10 +2053,9 @@
              <if test="goodsCode != null and goodsCode != ''">and goods_code = #{goodsCode}</if>
              <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
              <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
-             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-             <if test="brandname != null and brandname != ''">and brandname = #{brandname}</if>
+             <!--<if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>-->
+             <!--<if test="brandname != null and brandname != ''">and brandname = #{brandname}</if>-->
              <if test="useday != null and useday != ''">and useday = #{useday}</if>
-<!--             <if test="goodsxinxiid != null and goodsxinxiid != ''">and goodsxinxiid = #{goodsxinxiid}</if>-->
          </where>
         order by id
     </select>
@@ -2261,10 +2260,10 @@
             <if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>
         </where>
     </select>
-
+<!--a.retail_price,a.tax_price as costPrice,a.trade_price as wholePrice,a.transfer_price,-->
     <select id="jingjias" resultType="com.shiguang.stock.domain.StockDO">
         select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
-        a.retail_price,a.tax_price as costPrice,a.trade_price as wholePrice,a.transfer_price,
+        a.retail_price,a.tax_price ,a.trade_price ,a.transfer_price,
 		a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
         from aa_produca a
         join c_brand b on b.brandnum=a.brandnum and a.mfrsid=b.mfrsid
@@ -2305,7 +2304,7 @@
     <select id="yinxings" resultType="com.shiguang.stock.domain.StockDO">
         select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
-        a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
+        a.unitid,u.unitname,a.factory as produc_factory,a.classtype,m.medicinecode
         from aa_yxcp a
         join c_brand b on b.brandnum=a.brandnum and a.mfrsid=b.mfrsid
         join c_unit u on a.unitid=u.unitid
@@ -2356,7 +2355,7 @@
         select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
         a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
-        from aa_hc az
+        from aa_hc a
         join c_brand b on b.brandnum=a.brandnum and a.mfrsid=b.mfrsid
         join c_unit u on a.unitid=u.unitid
         join c_mfrs m on a.mfrsid=m.mfrsnum
