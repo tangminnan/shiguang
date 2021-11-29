@@ -189,4 +189,7 @@
     <delete id="removeMember">
 		delete from ygline_member where id = #{value}
 	</delete>
+    <delete id="remove">
+        delete from ygline where id = #{value}
+    </delete>
 </mapper>

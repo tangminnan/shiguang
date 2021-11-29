@@ -9,12 +9,16 @@ $.validator.setDefaults({
 });
 function save() {
 	var amountMoney = $("#amountMoney").val();
+	var saleName = $("#saleName").val();
     layer.confirm("确认是否要结算", {
         btn : [ '确定', '取消' ]
         // 按钮
     }, function() {
     	if (amountMoney == ""){
     		return layer.alert("请先下单")
+		}
+		if (saleName == ''){
+    		return layer.alert("请选择销售人员")
 		}
 	$.ajax({
 		cache : true,

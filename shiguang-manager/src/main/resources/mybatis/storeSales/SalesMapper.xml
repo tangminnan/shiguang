@@ -262,6 +262,10 @@
 	<delete id="remove">
 		delete from store_sales where id = #{value}
 	</delete>
+
+	<delete id="removeSaleNum">
+		delete from store_sales where sale_number = #{value}
+	</delete>
 	
 	<delete id="batchRemove">
 		delete from store_sales where id in 
@@ -302,6 +306,7 @@
 			<if test="remark != null and remark != ''"> and s.remark = #{remark} </if>
 			<if test="giveName != null and giveName != ''"> and s.give_name = #{giveName} </if>
 			<if test="logisticStatus != null and logisticStatus != ''"> and ls.logistic_status != #{logisticStatus} </if>
+			 and s.sale_type = '1'
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -381,6 +386,7 @@
 		createTime,
 		chufangType,
 		yangsName,
+		yanguangName,
 		STATUS,
 		rightsph,
 		leftsph,
@@ -426,6 +432,7 @@
 		r.create_time AS createTime,
 		k.kjjy_prescription_type AS chufangType,
 		k.kjjy_optometry_name AS yangsName,
+		r.optometry_name as yanguangName,
 		k.`status` AS STATUS,
 		k.kjjy_sphod AS rightsph,
 		k.kjjy_sphos AS leftsph,
@@ -474,6 +481,7 @@
 		r.create_time AS createTime,
 		ky.kjyy_prescription_type AS chufangType,
 		ky.kjyy_optometry_name AS yangsName,
+		r.optometry_name as yanguangName,
 		ky.`status` AS STATUS,
 		ky.kjyy_sphod AS rightsph,
 		ky.kjyy_sphos AS leftsph,
@@ -522,6 +530,7 @@
 		r.create_time AS createTime,
 		sg.sgjj_prescription_type AS chufangType,
 		sg.sgjj_optometry_name AS yangsName,
+		r.optometry_name as yanguangName,
 		sg.`status` AS STATUS,
 		sg.sgjj_sphod AS rightsph,
 		sg.sgjj_sphos AS leftsph,
@@ -570,6 +579,7 @@
 		r.create_time AS createTime,
 		z.zy_prescription_type AS chufangType,
 		z.zy_optometry_name AS yangsName,
+		r.optometry_name as yanguangName,
 		z.`status` AS STATUS,
 		z.zy_sphod AS rightsph,
 		z.zy_sphos AS leftsph,
@@ -618,6 +628,7 @@
 		r.create_time AS createTime,
 		x.rx_prescription_type AS chufangType,
 		x.rx_optometry_name AS yangsName,
+		r.optometry_name as yanguangName,
 		x.`status` AS STATUS,
 		x.rx_sphod AS rightsph,
 		x.rx_sphos AS leftsph,
@@ -666,6 +677,7 @@
 		r.create_time AS createTime,
 		sx.sjxl_prescription_type AS chufangType,
 		sx.sjxl_optometry_name AS yangsName,
+		r.optometry_name as yanguangName,
 		sx.`status` AS STATUS,
 		sx.sjxl_sphod AS rightsph,
 		sx.sjxl_sphos AS leftsph,
@@ -714,6 +726,7 @@
 		r.create_time AS createTime,
 		jv.vst_prescription_type AS chufangType,
 		jv.vst_optometry_name AS yangsName,
+		r.optometry_name as yanguangName,
 		jv.`status` AS STATUS,
 		jv.vst_sphod AS rightsph,
 		jv.vst_sphos AS leftsph,
@@ -762,6 +775,7 @@
 		r.create_time AS createTime,
 		crt.crt_prescription_type AS chufangType,
 		crt.crt_optometry_name AS yangsName,
+		r.optometry_name as yanguangName,
 		crt.`status` AS STATUS,
 		crt.crt_sphod AS rightsph,
 		crt.crt_sphos AS leftsph,
@@ -810,6 +824,7 @@
 		r.create_time AS createTime,
 		rg.rgp_prescription_type AS chufangType,
 		rg.rgp_optometry_name AS yangsName,
+		r.optometry_name as yanguangName,
 		rg.`status` AS STATUS,
 		'' AS rightsph,
 		'' AS leftsph,

@@ -117,4 +117,9 @@ public class SalesServiceImpl implements SalesService {
 		return salesDao.salecount(map);
 	}
 
+	@Override
+	public int removeSaleNum(String saleNumber){
+		return salesDao.removeSaleNum(saleNumber);
+	}
+
 }

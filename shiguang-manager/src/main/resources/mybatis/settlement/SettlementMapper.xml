@@ -119,7 +119,7 @@
 	</update>
 	
 	<delete id="remove">
-		delete from store_sales where sale_number = #{value}
+		delete from settlement where sale_number = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
@@ -172,16 +172,16 @@
 
 	<select id="findGlassesData" resultType="com.shiguang.settlement.domain.SettlementDO">
 		select sl.`id`,sl.`sale_number`,sl.`member_number`,m.`name` as memberName,m.`sex` as sex,m.`age` as age,sl.`actual_money`,sl.`pay_money`,sl.`model_money`,sl.`pay_way`,
-		sl.`front_money`,sl.`settle_date`,c.`original_price`
+		sl.`front_money`,sl.`settle_date`,ss.`prime_money` as originalPrice
 		 from settlement sl
 		 join member m on sl.member_number = m.card_number
-		 join cost c on c.id = sl.cost_id
+		 join store_sales ss on sl.sale_number = ss.sale_number
 		<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
 		<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
 		<if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
 		<if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
 		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number like concat('%', #{saleNumber},'%') </if>
-		<if test="type != null and type != ''"> and c.type != #{type}</if>
+		<!--<if test="type != null and type != ''"> and c.type != #{type}</if>-->
 		<if test="state != null and state != ''"> and m.state = #{state} </if>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">

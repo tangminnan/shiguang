@@ -68,4 +68,9 @@ public class OptometryLineServiceImpl implements OptometryLineService {
     public int removeMember(Long id) {
         return optometryLineDao.removeMember(id);
     }
+
+    @Override
+    public int remove(Long id) {
+        return optometryLineDao.remove(id);
+    }
 }

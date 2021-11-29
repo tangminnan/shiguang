@@ -18,6 +18,8 @@ public class Conclusion implements Serializable {
     private String chufang;
     //验光师
     private String yangsName;
+    //验光师
+    private String yanguangName;
     //球镜OD
     private String rightsph;
     //球镜OS
@@ -118,6 +120,10 @@ public class Conclusion implements Serializable {
     public void setYangsName(String yangsName){this.yangsName = yangsName;}
 
     public String getYangsName() {return yangsName;}
+
+    public void setYanguangName(String yanguangName){this.yanguangName = yanguangName;}
+
+    public String getYanguangName() {return yanguangName;}
 
     public void setRightsph(String rightsph) {this.rightsph = rightsph;}
 

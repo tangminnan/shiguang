@@ -241,10 +241,23 @@ public class SaleReportController {
                         yikatongoney = yikatongoney + Double.valueOf(modelMoney[i]);
                     }
                 }
+                xianjinMoney = xianjinMoney - settlementDO.getChangeMoney();
+
+                if ("0".equals(settlementDO.getDrawBackWay())){
+                    weixinMoney = weixinMoney-Double.valueOf(settlementDO.getDrawBackMoney());
+                } else if ("1".equals(settlementDO.getDrawBackWay())){
+                    zfbMoney = zfbMoney - Double.valueOf(settlementDO.getDrawBackMoney());
+                } else if ("2".equals(settlementDO.getDrawBackWay())){
+                    yyshoufeichuMoney = yyshoufeichuMoney - Double.valueOf(settlementDO.getDrawBackMoney());
+                } else if ("3".equals(settlementDO.getDrawBackWay())){
+                    yikatongoney = yikatongoney - Double.valueOf(settlementDO.getDrawBackMoney());
+                } else if ("4".equals(settlementDO.getDrawBackWay())){
+                    xianjinMoney = xianjinMoney - Double.valueOf(settlementDO.getDrawBackMoney());
+                }
             }
         }
         qtsubTotal = weixinMoney + zfbMoney;
-        shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney -tkMoney ;
+        shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney;
         model.addAttribute("weixinMoney",new BigDecimal(weixinMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("zfbMoney",new BigDecimal(zfbMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("xianjinMoney",new BigDecimal(xianjinMoney).setScale(2,RoundingMode.HALF_UP));

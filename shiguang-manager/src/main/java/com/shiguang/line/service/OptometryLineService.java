@@ -28,4 +28,6 @@ public interface OptometryLineService {
     int saveLineMember(YgLineMemberDO ygLineMemberDO);
 
     int removeMember(Long id);
+
+    int remove(Long id);
 }

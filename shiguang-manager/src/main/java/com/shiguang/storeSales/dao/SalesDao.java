@@ -56,4 +56,6 @@ public interface SalesDao {
 
 	int salecount(Map<String, Object> map);
 
+	int removeSaleNum(String saleNumber);
+
 }

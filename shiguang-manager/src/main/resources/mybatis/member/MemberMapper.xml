@@ -76,38 +76,68 @@
         </if>
     </select>
 
-    <select id="payList" resultType="com.shiguang.member.domain.MemberDO">
-    select m.`id`,m.`name`,m.`card_number`,s.`sale_type` as isSale,s.`sale_number`,m.`sex`,m.`depart_number`,m.`birthday_year`,m.`birthday_month`,m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,m.`address`,m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status` from member m
-    join store_sales s on s.member_number = m.card_number
+    <select id="payList" resultType="com.shiguang.settlement.domain.JieKuanMoneyDO">
+        SELECT name,companyId,cardNumber,isSale,saleNumber,peijingTime,sex,departNumber,age,phone1,saleForm,state,status from(
+        SELECT
+        m.`name` as name,
+        m.company_id as companyId,
+        m.`card_number` as cardNumber,
+        s.`sale_type` AS isSale,
+        s.`sale_number` as saleNumber,
+        s.peijing_time as peijingTime,
+        m.`sex` as sex,
+        m.`depart_number` as departNumber,
+        m.`age` as age,
+        m.`phone_1` as phone1,
+        '配镜单' as saleForm,
+        m.state as state,
+        m.`status` as `status`
+        FROM
+        member m
+        JOIN store_sales s ON s.member_number = m.card_number
+        union
+        select
+        m.`name` as name,
+        m.company_id as companyId,
+        m.`card_number` as cardNumber,
+        c.is_sale AS isSale,
+        c.`sale_number` as saleNumber,
+        c.create_time as peijingTime,
+        m.`sex` as sex,
+        m.`depart_number` as departNumber,
+        m.`age` as age,
+        m.`phone_1` as phone1,
+        '检查单' as saleForm,
+        m.state as state,
+        m.`status` as `status`
+        FROM
+        member m
+        JOIN cost c ON c.member_number = m.card_number
+        ) aia
     <where>
-        <if test="id != null and id != ''"> and m.id = #{id} </if>
-        <if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
-        <if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
-        <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
-        <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
-        <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
-        <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
-        <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
-        <if test="age != null and age != ''"> and m.age = #{age} </if>
-        <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
-        <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
-        <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
-        <if test="state != null and state != ''"> and m.state = #{state} </if>
-        and m.`status` = 0
+        <if test="name != null and name != ''"> and name like concat('%', #{name},'%') </if>
+        <if test="companyid !=null and companyid != ''">and FIND_IN_SET(companyId,#{companyid})</if>
+        <if test="cardNumber != null and cardNumber != ''"> and cardNumber like concat('%', #{cardNumber},'%') </if>
+        <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+        <if test="age != null and age != ''"> and age = #{age} </if>
+        <if test="phone1 != null and phone1 != ''"> and phone1 = #{phone1} </if>
+        and `status` = 0
+        and state = 1
 <!--        <if test="isSale != null and isSale != ''"> and c.is_sale = #{isSale} </if>-->
     </where>
-    <choose>
-        <when test="sort != null and sort.trim() != ''">
-            order by ${sort} ${order}
-        </when>
-        <otherwise>
-            group by s.`sale_number`
-            order by s.peijing_time desc
-        </otherwise>
-    </choose>
-    <if test="offset != null and limit != null">
-        limit #{offset}, #{limit}
-    </if>
+        order by peijingTime desc
+    <!--<choose>-->
+        <!--<when test="sort != null and sort.trim() != ''">-->
+            <!--order by ${sort} ${order}-->
+        <!--</when>-->
+        <!--<otherwise>-->
+            <!--group by s.`sale_number`-->
+            <!--order by s.peijing_time desc-->
+        <!--</otherwise>-->
+    <!--</choose>-->
+    <!--<if test="offset != null and limit != null">-->
+        <!--limit #{offset}, #{limit}-->
+    <!--</if>-->
 
 </select>
 

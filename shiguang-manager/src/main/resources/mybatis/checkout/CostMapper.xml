@@ -118,6 +118,7 @@
 		insert into cost
 		(
 			`id`,
+			`company_id`,
 			`member_number`,
 			`sale_number`,
 			`cost_type`,
@@ -125,6 +126,7 @@
 			`cost_name`,
 			`cost_money`,
 			`arrear_money`,
+			`sale_account`,
 			`sale_name`,
 			`is_sale`,
 			`create_time`,
@@ -136,6 +138,7 @@
 		values
 		(
 			#{id},
+			#{companyId},
 			#{memberNumber},
 			#{saleNumber},
 			#{costType},
@@ -143,6 +146,7 @@
 			#{costName},
 			#{costMoney},
 			#{arrearMoney},
+			#{saleAccount},
 			#{saleName},
 			#{isSale},
 			#{createTime},

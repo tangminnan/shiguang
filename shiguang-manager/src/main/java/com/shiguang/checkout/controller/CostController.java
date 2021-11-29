@@ -78,6 +78,7 @@ public class CostController {
         CostDO cost = new CostDO();
         Long saleNumber =  GuuidUtil.getUUID();
         cost.setSaleNumber("X"+saleNumber);
+        cost.setCompanyId(ShiroUtils.getUser().getCompanyId());
         for (int i=0;i<json.size();i++) {
             jsonOne = json.getJSONObject(i);
             String key = (String) jsonOne.get("Key");
@@ -93,8 +94,9 @@ public class CostController {
                 cost.setCostMoney(Double.parseDouble(value));
                 cost.setCostType(0L);
                 cost.setIsSale(0L);
-                String username = ShiroUtils.getUser().getUsername();
+                String username = ShiroUtils.getUser().getName();
                 cost.setSaleName(username);
+                cost.setSaleAccount(ShiroUtils.getUser().getUsername());
                 cost.setCreateTime(new Date());
                 cost.setType("检查单");
                 cost.setStoreNum(ShiroUtils.getUser().getStoreNum());

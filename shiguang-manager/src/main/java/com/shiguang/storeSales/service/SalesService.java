@@ -56,4 +56,6 @@ public interface SalesService {
 
 	int salecount(Map<String, Object> map);
 
+	int removeSaleNum(String saleNumber);
+
 }

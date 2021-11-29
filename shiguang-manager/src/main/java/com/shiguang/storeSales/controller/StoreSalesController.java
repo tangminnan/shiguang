@@ -229,6 +229,9 @@ public class StoreSalesController {
                 } else {
                     c.setYanguangTime(sdfs.format(new Date()));
                 }
+                if (null == c.getYangsName() || "".equals(c.getYangsName())){
+                    c.setYangsName(c.getYanguangName());
+                }
                 if ("1".equals(c.getChufangType())) {
                     c.setChufang("近用");
                 } else if ("2".equals(c.getChufangType())) {
@@ -854,20 +857,20 @@ public class StoreSalesController {
                 crtService.updatecrt(crtDO);
             }
         }
-        CostDO costDO = new CostDO();
-        costDO.setIsSale(0L);
-        costDO.setMemberNumber(salesDO.getMemberNumber());
-        costDO.setSaleNumber(salesDO.getSaleNumber());
-        costDO.setCostType(0L);
-        costDO.setCostMoney(salesDO.getAmountMoney());
-        costDO.setOriginalPrice(salesDO.getPrimeMoney());
-        costDO.setSaleName(salesDO.getSaleName());
-        costDO.setIsSale(0L);
-        costDO.setCreateTime(new Date());
-        costDO.setType("配镜单");
-        costDO.setStoreName(ShiroUtils.getUser().getStore());
-        costDO.setStoreNum(ShiroUtils.getUser().getStore());
-        costService.save(costDO);
+//        CostDO costDO = new CostDO();
+//        costDO.setIsSale(0L);
+//        costDO.setMemberNumber(salesDO.getMemberNumber());
+//        costDO.setSaleNumber(salesDO.getSaleNumber());
+//        costDO.setCostType(0L);
+//        costDO.setCostMoney(salesDO.getAmountMoney());
+//        costDO.setOriginalPrice(salesDO.getPrimeMoney());
+//        costDO.setSaleName(salesDO.getSaleName());
+//        costDO.setIsSale(0L);
+//        costDO.setCreateTime(new Date());
+//        costDO.setType("配镜单");
+//        costDO.setStoreName(ShiroUtils.getUser().getStore());
+//        costDO.setStoreNum(ShiroUtils.getUser().getStore());
+//        costService.save(costDO);
         salesDO.setPeijingTime(new Date());
         salesDO.setSaleType("0");
         if (null != salesDO.getGoodsNum()){
@@ -2088,7 +2091,7 @@ public class StoreSalesController {
                 }
                 //int total = stockService.countYxdz(maps);
                 int total = 10000000;
-                pageUtils = new PageUtils(newyxdzList, total);
+                pageUtils = new PageUtils(newyxdzList, newyxdzList.size());
             }
         } else {
             List<StockDO> yxcpDOList = stockService.listYxcp(query);
@@ -2102,7 +2105,7 @@ public class StoreSalesController {
                 }
             }
             int total = yxcpService.count(query);
-            pageUtils = new PageUtils(yxcpDOList, total);
+            pageUtils = new PageUtils(yxcpDOList, yxcpDOList.size());
         }
         return pageUtils;
     }

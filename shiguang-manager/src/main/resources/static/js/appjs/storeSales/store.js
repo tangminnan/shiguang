@@ -332,24 +332,29 @@ function getShiguang(){
         area : [ '800px', '520px' ],
         content : "/information/store/shiguang/",// iframe的url
         cancel: function(index, layero){
-            var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            var rows = $(layero).find("iframe")[0].contentWindow.sure();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
             // if (rows.length > 0){
             //     a=a+1;
             // }
+            var shiguang = window.localStorage.getItem("shiguang");
+            if (null != shiguang){
+                rows = JSON.parse(shiguang);
+            }
+            localStorage.clear();
             for (var i=0;i<rows.length;i++){
                 a=a+1;
-                var goodsNumStr = rows[i].goodsNum;
-                var retailPrice = rows[i].retailPrice;
+                var goodsNumStr = rows[i][0].goodsNum;
+                var retailPrice = rows[i][0].retailPrice;
                 var desc = "视光";
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
-                html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td>"+rows[i][0].goodsName+"</td>";
                 html += "<td></td>";
-                html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td>"+rows[i].goodsCount+"</td>";
+                html += "<td>"+rows[i][0].retailPrice+"</td>";
+                html += "<td>"+rows[i][0].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
-                html += "<td>"+rows[i].retailPrice+"</td>";
+                html += "<td>"+rows[i][0].retailPrice+"</td>";
                 html += "<td id='zhekoulv"+a+"'>0.00</td>";
                 html += "<td id='zhekousg"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneysg"+a+"'>0.00</td>";
@@ -357,22 +362,22 @@ function getShiguang(){
                 html += "<td id='molingMoneysg"+a+"'>0.00</td>";
                 html += "<td id='yingshouMoneysg"+a+"'>0.00</td>";
                 html += "<td>视光</td>";
-                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
-                html += "<input id='unit' name='unit' type='hidden' value='"+rows[i].unit+"'/>"
-                html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].goodsName+"'/>"
-                html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
-                html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
+                html += "<td><em onclick='del(this,\"" + rows[i][0].retailPrice + "\",\""+rows[i][0].goodsName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' value='"+rows[i][0].unit+"'/>"
+                html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i][0].goodsName+"'/>"
+                html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i][0].goodsNum+"'/>"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i][0].retailPrice+"'/>"
                 //html += "<input id='storeCount'name='storeCount' type='hidden' />"
                 html += "<input id='classtype' name='classtype' type='hidden' value='1'/>"
                 html += "<input id='leftRight' name='leftRight' type='hidden' value='空'/>"
-                html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
-                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
-                html += "<input id='yingshousg"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
+                html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i][0].goodsCode+"'/>"
+                html += "<input id='batch' name='batch' value='"+rows[i][0].batch+"' type='hidden' />"
+                html += "<input id='yingshousg"+a+"' value='"+rows[i][0].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='视光' type='hidden' />"
                 html += "</tr>";
                 $("#goods").append(html);
-                $("#yingshouMoneysg"+a+"").text(rows[i].retailPrice)
-                price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                $("#yingshouMoneysg"+a+"").text(rows[i][0].retailPrice)
+                price = (parseFloat(price)+ parseFloat(rows[i][0].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 //arraystore.push(rows[i].goodsName);
                 //arrayunit.push(rows[i].retailPrice);

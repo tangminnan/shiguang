@@ -1,6 +1,7 @@
 package com.shiguang.member.dao;
 
 import com.shiguang.member.domain.MemberDO;
+import com.shiguang.settlement.domain.JieKuanMoneyDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ public interface MemberDao {
 
     List<MemberDO> list(Map<String,Object> map);
 
-    List<MemberDO> payList(Map<String,Object> map);
+    List<JieKuanMoneyDO> payList(Map<String,Object> map);
 
     int count(Map<String,Object> map);
 

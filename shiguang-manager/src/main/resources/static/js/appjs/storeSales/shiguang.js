@@ -119,15 +119,17 @@ document.onkeydown = function(e){
 
 function resetPwd(id) {
 }
-function batchSelect() {
-	var obj = [];
-	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-    	// $.each(rows, function(i, row) {
-         //    obj.push(row);
-    	// });
-    // alert(rows.length)
-    // sessionStorage.setItem("row",rows);
+
+function sure(){
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	return rows;
+}
+
+var array = new Array();
+function batchSelect() {
+	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    array.push(rows);
+    window.localStorage.setItem("shiguang",JSON.stringify(array))
    // window.opener.goodsInfo(rows);
 	// if (rows.length == 0) {
 	// 	layer.msg("请选择要购买的镜架");

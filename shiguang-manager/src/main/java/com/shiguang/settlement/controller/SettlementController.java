@@ -23,6 +23,7 @@ import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.product.domain.ShiguangDO;
 import com.shiguang.product.service.ProducaService;
+import com.shiguang.settlement.domain.JieKuanMoneyDO;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
 import com.shiguang.stock.domain.StockDO;
@@ -124,9 +125,18 @@ public class SettlementController {
 			query.put("offset",0);
 			query.put("limit",10);
 		}
-		List<MemberDO> memberDOList = memberService.payList(query);
-		int total = memberService.payCount(query);
-		PageUtils pageUtils = new PageUtils(memberDOList, total);
+		List<JieKuanMoneyDO> memberDOList = memberService.payList(query);
+		if (null != memberDOList && memberDOList.size() > 0){
+			for (JieKuanMoneyDO jieKuanMoneyDO : memberDOList){
+				if ("检查单".equals(jieKuanMoneyDO.getSaleForm())){
+					if ("1".equals(jieKuanMoneyDO.getIsSale())){
+						jieKuanMoneyDO.setIsSale("4");
+					}
+				}
+			}
+		}
+		//int total = memberService.payCount(query);
+		PageUtils pageUtils = new PageUtils(memberDOList, memberDOList.size());
 		return pageUtils;
 	}
 	
@@ -145,30 +155,59 @@ public class SettlementController {
 		//CostDO costDO = costService.get(costId);
 		Map<String,Object> map = new HashMap<>();
 		map.put("saleNumber",saleNumber);
-		List<CostDO> costDOList = costService.list(map);
-		Double sumMoney =0.00;
-		CostDO costDO = new CostDO();
-		for (CostDO costDO1 : costDOList){
-			if (null != costDO1.getCostMoney()){
-				if (null != costDO1.getCostMoney()){
-					sumMoney = sumMoney + costDO1.getCostMoney();
-					costDO1.setSumMoney(sumMoney);
-					costDO = new CostDO();
-					costDO.setId(costDO1.getId());
-					costDO.setMemberNumber(costDO1.getMemberNumber());
-					costDO.setSaleNumber(costDO1.getSaleNumber());
-					costDO.setSumMoney(sumMoney);
-					costDO.setSaleName(costDO1.getSaleName());
-					if (null == costDO1.getOriginalPrice()){
-						costDO.setOriginalPrice(sumMoney);
-					} else {
-						costDO.setOriginalPrice(costDO1.getOriginalPrice());
-					}
-				}
-			}
-		}
+		SalesDO salesDO = salesService.getSaleNumber(saleNumber);
+		if (null != salesDO){
+            model.addAttribute("salesDO",salesDO);
+        } else {
+            List<CostDO> costDOList = costService.list(map);
+            Double sumMoney =0.00;
+            CostDO costDO = new CostDO();
+            for (CostDO costDO1 : costDOList){
+                if (null != costDO1.getCostMoney()){
+                    if (null != costDO1.getCostMoney()){
+                        sumMoney = sumMoney + costDO1.getCostMoney();
+                        costDO1.setSumMoney(sumMoney);
+                        costDO = new CostDO();
+                        costDO.setId(costDO1.getId());
+                        costDO.setMemberNumber(costDO1.getMemberNumber());
+                        costDO.setSaleNumber(costDO1.getSaleNumber());
+                        costDO.setAmountMoney(sumMoney);
+                        costDO.setSaleName(costDO1.getSaleName());
+                        if (null == costDO1.getOriginalPrice()){
+                            costDO.setPrimeMoney(sumMoney);
+                        } else {
+                            costDO.setPrimeMoney(costDO1.getOriginalPrice());
+                        }
+                    }
+                }
+            }
+            model.addAttribute("salesDO",costDO);
+        }
 
-		model.addAttribute("costDO",costDO);
+//		List<CostDO> costDOList = costService.list(map);
+//		Double sumMoney =0.00;
+//		CostDO costDO = new CostDO();
+//		for (CostDO costDO1 : costDOList){
+//			if (null != costDO1.getCostMoney()){
+//				if (null != costDO1.getCostMoney()){
+//					sumMoney = sumMoney + costDO1.getCostMoney();
+//					costDO1.setSumMoney(sumMoney);
+//					costDO = new CostDO();
+//					costDO.setId(costDO1.getId());
+//					costDO.setMemberNumber(costDO1.getMemberNumber());
+//					costDO.setSaleNumber(costDO1.getSaleNumber());
+//					costDO.setSumMoney(sumMoney);
+//					costDO.setSaleName(costDO1.getSaleName());
+//					if (null == costDO1.getOriginalPrice()){
+//						costDO.setOriginalPrice(sumMoney);
+//					} else {
+//						costDO.setOriginalPrice(costDO1.getOriginalPrice());
+//					}
+//				}
+//			}
+//		}
+
+//		model.addAttribute("costDO",costDO);
 //		SettlementDO settlement = settlementService.get(id);
 //		model.addAttribute("settlement", settlement);
 	    return "settlement/edit";
@@ -204,30 +243,58 @@ public class SettlementController {
 //		CostDO costDO = costService.get(costId);
 		Map<String,Object> map = new HashMap<>();
 		map.put("saleNumber",saleNumber);
-		List<CostDO> costDOList = costService.list(map);
-		Double sumMoney =0.00;
-		CostDO costDO = new CostDO();
-		for (CostDO costDO1 : costDOList){
-			if (null != costDO1.getCostMoney()){
+		SalesDO salesDO = salesService.getSaleNumber(saleNumber);
+		if(null != salesDO){
+			model.addAttribute("salesDO",salesDO);
+		} else {
+			List<CostDO> costDOList = costService.list(map);
+			Double sumMoney =0.00;
+			CostDO costDO = new CostDO();
+			for (CostDO costDO1 : costDOList){
 				if (null != costDO1.getCostMoney()){
-					sumMoney = sumMoney + costDO1.getCostMoney();
-					costDO1.setSumMoney(sumMoney);
-					costDO = new CostDO();
-					costDO.setId(costDO1.getId());
-					costDO.setMemberNumber(costDO1.getMemberNumber());
-					costDO.setSaleNumber(costDO1.getSaleNumber());
-					costDO.setSumMoney(sumMoney);
-					costDO.setSaleName(costDO1.getSaleName());
+					if (null != costDO1.getCostMoney()){
+						sumMoney = sumMoney + costDO1.getCostMoney();
+						costDO1.setSumMoney(sumMoney);
+						costDO = new CostDO();
+						costDO.setId(costDO1.getId());
+						costDO.setMemberNumber(costDO1.getMemberNumber());
+						costDO.setSaleNumber(costDO1.getSaleNumber());
+						costDO.setAmountMoney(sumMoney);
+						costDO.setSaleName(costDO1.getSaleName());
+						if (null == costDO1.getOriginalPrice()){
+							costDO.setPrimeMoney(sumMoney);
+						} else {
+							costDO.setPrimeMoney(costDO1.getOriginalPrice());
+						}
+					}
 				}
 			}
+			model.addAttribute("salesDO",costDO);
 		}
+//		List<CostDO> costDOList = costService.list(map);
+//		Double sumMoney =0.00;
+//		CostDO costDO = new CostDO();
+//		for (CostDO costDO1 : costDOList){
+//			if (null != costDO1.getCostMoney()){
+//				if (null != costDO1.getCostMoney()){
+//					sumMoney = sumMoney + costDO1.getCostMoney();
+//					costDO1.setSumMoney(sumMoney);
+//					costDO = new CostDO();
+//					costDO.setId(costDO1.getId());
+//					costDO.setMemberNumber(costDO1.getMemberNumber());
+//					costDO.setSaleNumber(costDO1.getSaleNumber());
+//					costDO.setSumMoney(sumMoney);
+//					costDO.setSaleName(costDO1.getSaleName());
+//				}
+//			}
+//		}
 //		if (null != costDO.getCostMoney()) {
 //			if (null != costDO.getCostMoney()){
 //				sumMoney = sumMoney + costDO.getCostMoney();
 //				costDO.setSumMoney(sumMoney);
 //			}
 //		}
-		model.addAttribute("costDO",costDO);
+//		model.addAttribute("costDO",costDO);
 		SettlementDO settlement = settlementService.getSaleNumers(saleNumber);
 		if (null != settlement){
 			if (null != settlement.getSettleDate()){
@@ -273,6 +340,32 @@ public class SettlementController {
 			}
 			salesDO.setSaleNumber(settlement.getSaleNumber());
 			salesService.updateSale(salesDO);
+			if (null != salesDO1.getClasstype()){
+				String[] classArray = salesDO1.getClasstype().split(",");
+				String[] storeDescribe = salesDO1.getStoreDescribe().split(",");
+				boolean resultLeft = false;
+				boolean jpresult = false;
+				resultLeft = Arrays.asList(classArray).contains("2");
+				jpresult = Arrays.asList(storeDescribe).contains("镜片");
+				if (resultLeft == false && jpresult == true){
+					LogStatusDO logStatusDO = new LogStatusDO();
+					logStatusDO.setSaleNumber(settlement.getSaleNumber());
+					logStatusDO.setLogisticStatus("销售完成");
+					logStatusService.save(logStatusDO);
+				}
+			}
+		} else {
+			Map<String,Object> map = new HashMap<>();
+			map.put("saleNumber",settlement.getSaleNumber());
+			List<CostDO> costDOList = costService.list(map);
+			if(null != costDOList && costDOList.size() > 0){
+				for (CostDO costDO : costDOList) {
+					CostDO costDO1 = new CostDO();
+					costDO1.setId(costDO.getId());
+					costDO1.setIsSale(1L);
+					costService.update(costDO1);
+				}
+			}
 		}
 //		if ("定金".equals(settlement.getPayWay())){
 //			costDO.setType("定金单");
@@ -281,20 +374,7 @@ public class SettlementController {
 		settlement.setSaleName(ShiroUtils.getUser().getName());
 		settlement.setSaleAcount(ShiroUtils.getUser().getUsername());
 		settlement.setSettleDate(new Date());
-		if (null != salesDO1.getClasstype()){
-			String[] classArray = salesDO1.getClasstype().split(",");
-			String[] storeDescribe = salesDO1.getStoreDescribe().split(",");
-			boolean resultLeft = false;
-			boolean jpresult = false;
-			resultLeft = Arrays.asList(classArray).contains("2");
-			jpresult = Arrays.asList(storeDescribe).contains("镜片");
-			if (resultLeft == false && jpresult == true){
-				LogStatusDO logStatusDO = new LogStatusDO();
-				logStatusDO.setSaleNumber(settlement.getSaleNumber());
-				logStatusDO.setLogisticStatus("销售完成");
-				logStatusService.save(logStatusDO);
-			}
-		}
+
 		if(settlementService.save(settlement)>0){
 			return R.ok();
 		}
@@ -1761,6 +1841,7 @@ public class SettlementController {
 			}
 		}
 		if(settlementService.remove(id)>0){
+			salesService.removeSaleNum(id);
 			return R.ok();
 		}
 		return R.error();

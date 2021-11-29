@@ -8,6 +8,7 @@ import com.shiguang.line.domain.LineMemberDO;
 import com.shiguang.line.domain.YgLineDO;
 import com.shiguang.line.domain.YgLineMemberDO;
 import com.shiguang.line.service.OptometryLineService;
+import com.shiguang.member.domain.MemberDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -154,6 +155,19 @@ public class OptometryLineController {
             optometryLineService.removeMember(lineMemberDOS.get(0).getId());
         }
         return resultMap;
+    }
+
+    /**
+     * 删除
+     */
+    @PostMapping( "/remove")
+    @ResponseBody
+    @RequiresPermissions("information:optometryline:remove")
+    public R remove(Long id){
+        if(optometryLineService.remove(id)>0){
+            return R.ok();
+        }
+        return R.error();
     }
 
 }

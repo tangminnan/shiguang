@@ -11,6 +11,7 @@ import com.shiguang.jiancha.service.ResultService;
 import com.shiguang.mailInfo.service.MailInfoService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
+import com.shiguang.settlement.domain.JieKuanMoneyDO;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
 import com.shiguang.storeSales.domain.SalesDO;
@@ -62,9 +63,9 @@ public class SettlementMethodController {
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyid",ShiroUtils.getUser().getCompanyId());
         }
-        List<MemberDO> memberDOList = memberService.payList(query);
+        List<JieKuanMoneyDO> memberDOList = memberService.payList(query);
         int total = memberService.payCount(query);
-        PageUtils pageUtils = new PageUtils(memberDOList, total);
+        PageUtils pageUtils = new PageUtils(memberDOList, memberDOList.size());
         return pageUtils;
     }
 

@@ -17,6 +17,8 @@ public class CostDO implements Serializable {
 	
 	//主键
 	private Long id;
+	//公司id
+	private String companyId;
 	//会员卡号
 	private String memberNumber;
 	//会员姓名
@@ -30,6 +32,10 @@ public class CostDO implements Serializable {
 	private String saleNumber;
 	//应收金额
 	private Double sumMoney;
+	//结算金额
+	private Double amountMoney;
+	//原价金额
+	private Double primeMoney;
 	//缴费类型(0:缴费1:退费)
 	private Long costType;
 	//速记码
@@ -40,6 +46,8 @@ public class CostDO implements Serializable {
 	private Double costMoney;
 	//欠费金额
 	private Double arrearMoney;
+	//员工工号
+	private String saleAccount;
 	//销售人员
 	private String saleName;
 	//是否缴费(0:未缴费1:已缴费)
@@ -67,6 +75,15 @@ public class CostDO implements Serializable {
 	public Long getId() {
 		return id;
 	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
 	/**
 	 * 设置：会员卡号
 	 */
@@ -111,6 +128,23 @@ public class CostDO implements Serializable {
 	public Double getSumMoney() {
 		return sumMoney;
 	}
+
+	public Double getAmountMoney() {
+		return amountMoney;
+	}
+
+	public void setAmountMoney(Double amountMoney) {
+		this.amountMoney = amountMoney;
+	}
+
+	public Double getPrimeMoney() {
+		return primeMoney;
+	}
+
+	public void setPrimeMoney(Double primeMoney) {
+		this.primeMoney = primeMoney;
+	}
+
 	/**
 	 * 设置：缴费类型(0:缴费1:退费)
 	 */
@@ -171,6 +205,15 @@ public class CostDO implements Serializable {
 	public Double getArrearMoney() {
 		return arrearMoney;
 	}
+
+	public String getSaleAccount() {
+		return saleAccount;
+	}
+
+	public void setSaleAccount(String saleAccount) {
+		this.saleAccount = saleAccount;
+	}
+
 	/**
 	 * 设置：销售人员
 	 */

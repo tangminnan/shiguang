@@ -7,6 +7,7 @@ import com.shiguang.common.utils.isIDCardUtil;
 import com.shiguang.member.dao.MemberDao;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
+import com.shiguang.settlement.domain.JieKuanMoneyDO;
 import com.shiguang.system.config.ExcelUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -47,7 +48,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MemberDO> payList(Map<String, Object> map){
+    public List<JieKuanMoneyDO> payList(Map<String, Object> map){
         return memberDao.payList(map);
     }
 
