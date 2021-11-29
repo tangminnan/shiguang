@@ -11,7 +11,6 @@ import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
 import com.shiguang.system.config.ExcelUtils;
-import io.swagger.models.auth.In;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.poi.ss.usermodel.*;
@@ -466,7 +465,7 @@ public class StockServiceImpl implements StockService {
      */
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED)
-    public R importStock(Integer goodsType, String positionId,String checkType, MultipartFile file) {
+    public R importStock(Integer goodsType, String positionId,String checkType,String dzlx, MultipartFile file) {
         System.out.println("==============file================" + file);
         int num = 0;
         InputStream in = null;
@@ -501,6 +500,8 @@ public class StockServiceImpl implements StockService {
                         String counts  = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    //  数量
                         String usedays= ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    //  效期
                         Integer goodstype=goodsType;
+                        String styles=dzlx;
+
                         if (goodstype==1){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
@@ -752,7 +753,12 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==3){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO jingpians=  stockDao.jingpians(stockDO);
+                            StockDO jingpians=null;
+                            if("1".equals(styles)){
+                                jingpians =  stockDao.jingpians(stockDO);
+                            }else if ("2".equals(styles)){
+                                jingpians=  stockDao.jingpiandzs(stockDO);
+                            }
                             String goodsNum=jingpians.getProducNum();
                             String goodsCode=jingpians.getProducCode();
                             String goodsName=jingpians.getProducName();
@@ -876,7 +882,12 @@ public class StockServiceImpl implements StockService {
                         }else if (goodstype==4){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
-                            StockDO yinxings=  stockDao.yinxings(stockDO);
+                            StockDO yinxings=null;
+                            if("1".equals(styles)){
+                                yinxings =  stockDao.yinxings(stockDO);
+                            }else if ("2".equals(styles)){
+                                yinxings=  stockDao.yinxingdzs(stockDO);
+                            }
                             String goodsNum=yinxings.getProducNum();
                             String goodsCode=yinxings.getProducCode();
                             String goodsName=yinxings.getProducName();

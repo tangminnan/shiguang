@@ -412,7 +412,7 @@ function save() {
 }
 
 function editSave() {
-    alert("先删除")
+    // alert("先删除")
         $.ajax({
             cache: true,
             type: "POST",

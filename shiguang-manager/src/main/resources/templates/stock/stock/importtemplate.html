@@ -24,7 +24,8 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">商品类别：</label>
 								<div class="col-sm-8">
-								<select name="goodsType" id="goodsType"   class="selectpicker show-tick " data-live-search="true" data-actions-box="false" data-size="5" required>
+								<select name="goodsType" id="goodsType"  onchange="selectgoods()"
+										class="selectpicker show-tick " data-live-search="true" data-actions-box="false" data-size="5" required>
 									<option value="">请选择商品类别</option>
 									<option th:each="hd:${goodsDOList}"
 									 th:text="${hd.goodsname}"
@@ -32,6 +33,18 @@
 								</select>
 								</div>
 							</div>
+							<div class="form-group">
+								<div id="jp" style="display: none;margin-left: 26%;">
+									<label class="radio-inline">
+										<input type="radio" name="dzlx"  value="1" checked/> 成品片
+									</label>
+									<label class="radio-inline">
+										<input type="radio" name="dzlx" value="2" /> 订做片
+									</label>
+								</div>
+								<input type="hidden" id="dzlx" value="" />
+							</div>
+
 						   <div class="form-group">	
 						   		<label class="col-sm-3 control-label">选择模板</label>
 							   	<div class="col-sm-8">
@@ -60,5 +73,29 @@
 	</div>
 	<div th:include="include::footer"></div>
 	<script type="text/javascript" src="/js/appjs/stock/stock/stockimporttemplate.js"></script>
+	<script type="text/javascript">
+        function selectgoods() {
+            var goodsType = $("#goodsType option:selected").val();
+            if (goodsType == 1){
+                jp.style = "display: none;margin-left: 26%";
+            }else if (goodsType == 2){
+                jp.style = "display: none;margin-left: 26%";
+            }else if (goodsType == 3){
+                jp.style = "display: block;margin-left: 26%";
+            }else if (goodsType == 4){
+                jp.style = "display: block;margin-left: 26%";
+            }else if (goodsType == 5){
+                jp.style = "display: none;margin-left: 26%";
+            }else if (goodsType == 6){
+                jp.style = "display: none;margin-left: 26%";
+            }else if (goodsType == 7){
+                jp.style = "display: none;margin-left: 26%";
+            }else if (goodsType == 8){
+                jp.style = "display: none;margin-left: 26%";
+            }else if (goodsType == 9){
+                jp.style = "display: none;margin-left: 26%";
+            }
+        }
+	</script>
 </body>
 </html>

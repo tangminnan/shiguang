@@ -115,10 +115,12 @@ public class StockDO implements Serializable {
     private String priceSum;
     //成本价格
     private String costPrice;
+    private String taxPrice;
     //成本合计
     private String costSum;
     //批发价格
     private String wholePrice;
+    private String tradePrice;
     //批发合计
     private String wholeSum;
     //仓位id
@@ -429,6 +431,22 @@ public class StockDO implements Serializable {
      */
     public void setCostPrice(String costPrice) {
         this.costPrice = costPrice;
+    }
+
+    public String getTaxPrice() {
+        return taxPrice;
+    }
+
+    public void setTaxPrice(String taxPrice) {
+        this.taxPrice = taxPrice;
+    }
+
+    public String getTradePrice() {
+        return tradePrice;
+    }
+
+    public void setTradePrice(String tradePrice) {
+        this.tradePrice = tradePrice;
     }
 
     /**

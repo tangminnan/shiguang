@@ -296,16 +296,27 @@ public class JpdzController {
         return R.ok();
     }
 
+//    /**
+//     * 删除修改状态
+//     */
+//    @ResponseBody
+//    @RequestMapping("/remove")
+//    public R updateStatus(Long id) {
+//        JpdzDO jpdzDO = new JpdzDO();
+//        jpdzDO.setState(0L);
+//        jpdzDO.setId(id);
+//        if (jpdzService.updateState(jpdzDO) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
     /**
-     * 删除修改状态
+     * 删除
      */
     @ResponseBody
     @RequestMapping("/remove")
-    public R updateStatus(Long id) {
-        JpdzDO jpdzDO = new JpdzDO();
-        jpdzDO.setState(0L);
-        jpdzDO.setId(id);
-        if (jpdzService.updateState(jpdzDO) > 0) {
+    public R remove(Long id) {
+        if(jpdzService.remove(id)>0){
             return R.ok();
         }
         return R.error();

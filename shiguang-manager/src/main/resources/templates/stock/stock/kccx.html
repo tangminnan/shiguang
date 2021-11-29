@@ -292,7 +292,7 @@
         <!--<input type="button" value="当前页合计" onclick="newcount()"/>-->
         <!--<span style="color: red">当前页数量：</span>-->
         <!--<input style="color: red;font-size: 15px;" id="countcln" name="countcln" readonly/>-->
-        <!--<input type="button" class="empty" value="清空" onclick="clearText()"/>-->
+        <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
 
@@ -509,7 +509,9 @@
     }
     function selectgoods() {
         var goodsType = $("#goodsType option:selected").val();
-        if (goodsType == 1){
+        if (goodsType == ""){
+            jp.style = "display: none";
+        }if (goodsType == 1){
             jp.style = "display: none";
         }else if (goodsType == 2){
             jp.style = "display: none";

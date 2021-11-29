@@ -96,18 +96,18 @@ public class RefractivityController {
         return R.ok();
     }
 
-//	/**
-//	 * 删除
-//	 */
-//	@PostMapping( "/remove")
-//	@ResponseBody
-//	@RequiresPermissions("mfrs:refractivity:remove")
-//	public R remove( Integer refractivityid){
-//		if(refractivityService.remove(refractivityid)>0){
-//		return R.ok();
-//		}
-//		return R.error();
-//	}
+	/**
+	 * 删除
+	 */
+	@PostMapping( "/remove")
+	@ResponseBody
+	@RequiresPermissions("mfrs:refractivity:remove")
+	public R remove( Integer refractivityid){
+		if(refractivityService.remove(refractivityid)>0){
+		return R.ok();
+		}
+		return R.error();
+	}
 
     /**
      * 批量删除
@@ -120,19 +120,19 @@ public class RefractivityController {
         return R.ok();
     }
 
-    /**
-     * 删除修改状态
-     */
-    @ResponseBody
-    @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:mfrs:remove")
-    public R updateStatus(Integer refractivityid) {
-        RefractivityDO refractivityDO = new RefractivityDO();
-        refractivityDO.setState(0L);
-        refractivityDO.setRefractivityid(refractivityid);
-        if (refractivityService.updateState(refractivityDO) > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 删除修改状态
+//     */
+//    @ResponseBody
+//    @RequestMapping("/remove")
+//    @RequiresPermissions("mfrs:refractivity:remove")
+//    public R updateStatus(Integer refractivityid) {
+//        RefractivityDO refractivityDO = new RefractivityDO();
+//        refractivityDO.setState(0L);
+//        refractivityDO.setRefractivityid(refractivityid);
+//        if (refractivityService.updateState(refractivityDO) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 }

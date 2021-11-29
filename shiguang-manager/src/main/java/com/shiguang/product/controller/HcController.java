@@ -11,6 +11,7 @@ import com.shiguang.mfrs.service.UnitService;
 import com.shiguang.product.domain.HcDO;
 import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.product.service.HcService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -176,16 +177,27 @@ public class HcController {
         return R.ok();
     }
 
+//    /**
+//     * 删除修改状态
+//     */
+//    @ResponseBody
+//    @RequestMapping("/remove")
+//    public R updateStatus(Long id) {
+//        HcDO hcDO = new HcDO();
+//        hcDO.setState(0L);
+//        hcDO.setId(id);
+//        if (hcService.updateState(hcDO) > 0) {
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
     /**
-     * 删除修改状态
+     * 删除
      */
     @ResponseBody
     @RequestMapping("/remove")
-    public R updateStatus(Long id) {
-        HcDO hcDO = new HcDO();
-        hcDO.setState(0L);
-        hcDO.setId(id);
-        if (hcService.updateState(hcDO) > 0) {
+    public R remove(Long id) {
+        if(hcService.remove(id)>0){
             return R.ok();
         }
         return R.error();
