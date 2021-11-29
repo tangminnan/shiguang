@@ -93,7 +93,9 @@ function load() {
                         formatter: function (value, row, index) {
                             // alert(row.danjuNumber)
                             if (row.status == "1") {
-                                var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
+                                var b = '<span class="btn btn-info btn-sm '+s_edit_h+'" href="#" title="修改"  mce_href="#" onclick="edit(\''
+                                    + row.id + '\')">修改</span> ';
+                                var a = '<span class="btn btn-primary btn-sm '+s_detial_h+'" href="#" title="详情"  mce_href="#" onclick="detial(\''
                                     + row.id + '\')">详情</span> ';
                                 var f = '<span class="btn btn-success btn-sm" href="#" title="收货"  mce_href="#"  onclick="userNum(\''
                                     + row.danjuNumber + '\')">收货</span> ';
@@ -101,14 +103,15 @@ function load() {
                                     + row.id + '\')">删除</span> ';
                                 var n = '';
                             } else if (row.status == "0") {
-                                var a = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="edit(\''
+                                var b ='';
+                                var a = '<span class="btn btn-primary btn-sm'+s_detial_h+'" href="#" title="详情"  mce_href="#" onclick="detial(\''
                                     + row.id + '\')">详情</span> ';
                                 var f = '';
                                 var n = '<span class="btn btn-warning btn-sm"  href="#" title="条码"  mce_href="#" onclick="code(\''
                                     + row.goodsType+" ','"+ row.danjuNumber + '\')">条码</span> ';
                                 var r ='';
                             }
-                            return a + f + n + r ;
+                            return b + a + f + n + r ;
                         }
                     }
                 ]

@@ -1,0 +1,911 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>商品采购详情</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+	<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+	<!--单据信息-->
+	<div class="m40 tabS msgBox">
+		<h3>单据信息</h3>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr>
+				<td>单据编号：</td>
+				<td>
+					<input id="danjuNumber" name="danjuNumber" th:value="${orderDO.danjuNumber}" type="text" style="width: 50%" readonly />
+				</td>
+				<td>入库人：</td>
+				<td><input id="zhidanPeople" name="zhidanPeople" th:value="${orderDO.zhidanPeople}" type="text" readonly /></td>
+				<td>采购类型：</td>
+				<td>
+					<input id="goodsType" name="goodsType" th:value="${orderDO.goodsType}" type="hidden" />
+					<input id="gdname" name="gdname" th:value="${orderDO.gdname}" type="text" readonly />
+				</td>
+			</tr>
+			<tr>
+				<td>制造商：</td>
+				<td>
+					<input id="mfrsid" name="mfrsid" th:value="${orderDO.mfrsid}" type="hidden" />
+					<input id="mfrsName" name="mfrsName" th:value="${orderDO.mfrsname}" type="text" readonly />
+				</td>
+				<td>供应商：</td>
+				<td>
+					<input id="mfrsNames" name="mfrsNames"  th:value="${orderDO.mfrsname}" type="text" readonly />
+				</td>
+				<td>收入仓位：</td>
+				<td>
+					<input id="positionId" name="positionId"  th:value="${orderDO.positionName}" type="text" readonly />
+				</td>
+			</tr>
+			<tr>
+				<!--<td>运单号：</td>-->
+				<!--<td><input id="yundanNumber" name="yundanNumber" type="text" /></td>-->
+
+				<td>单据日期：</td>
+				<td><input id="danjuDay" name="danjuDay" th:value="${danjuDay}" type="text" readonly /></td>
+				<!--<td>厂家订单号：</td>-->
+				<!--<td><input id="factoryNumber" name="factoryNumber" type="text"/><em>*</em></td>-->
+				<td style="color: red"> 总数量：</td>
+				<td>
+					<input id="countall"  style="color: red" readonly type="text"/>
+				</td>
+			</tr>
+			<tr>
+				<td>备注：</td>
+				<td colspan="5">
+					<textarea id="beizhu" name="beizhu" xml="3" th:text="${orderDO.beizhu}" readonly></textarea>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<!--保存/清空-->
+		<div class="BQ-btn" style="margin-left:80%">
+			<input type="button" class="empty" value="打印收货单据" onclick="shouhuo()"  />
+			<input type="button" class="empty" value="打印订单单据" onclick="dayin()"/>
+		</div>
+	</div>
+
+	<!--商品信息-->
+	<div class="m40 tabS SPmsg">
+		<h3>商品信息</h3>
+		<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+			<tbody>
+			<tr id="tab1" style="display:none">
+				<td style="width: 100vw;">
+					<table>
+						<tr class="thead">
+							<!--<td>全选 <input type="checkbox"/></td>-->
+							<td>商品代码</td>
+							<td>商品名称</td>
+							<td>型号</td>
+							<td>色号</td>
+							<td>框架材质</td>
+							<td>框架尺寸</td>
+							<td>入库时间</td>
+							<td>商品条码</td>
+							<td style="display: none">标准零售价</td>
+							<td style="display: none">含税单价</td>
+							<td style="display: none">批发价格</td>
+							<td style="display: none">调货成本</td>
+							<td style="display: none">单位</td>
+							<td style="display: none">商品品种</td>
+							<td style="display: none">商品id</td>
+							<td>效期</td>
+							<td>批号</td>
+							<td>注册证号</td>
+							<td>生产日期</td>
+							<td>数量</td>
+							<td>操作</td>
+
+
+						</tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji1">
+							<!--<td colspan="10" style="text-align:right;">合计</td>-->
+							<!--<td value="0"></td>-->
+							<!--<input id="heji" name="heji" value="0" type="text"/>-->
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr id="tab2" style="display:none">
+				<td style="width: 100vw;">
+					<table>
+						<tr class="thead">
+							<!--<td>全选 <input type="checkbox"/></td>-->
+							<td>商品代码</td>
+							<td>商品名称</td>
+							<td>型号</td>
+							<td>配件型</td>
+							<td>入库时间</td>
+							<td>商品条码</td>
+							<td style="display: none">标准零售价</td>
+							<td style="display: none">含税单价</td>
+							<td style="display: none">批发价格</td>
+							<td style="display: none">调货成本</td>
+							<td style="display: none">单位</td>
+							<td style="display: none">商品品种</td>
+							<td style="display: none">商品id</td>
+							<td>效期</td>
+							<td>批号</td>
+							<td>注册证号</td>
+							<td>生产日期</td>
+							<td>数量</td>
+							<td>操作</td>
+						</tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji2">
+							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
+							<!--<td>0</td>-->
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr id="tab3" style="display:none">
+				<td style="width: 100vw;">
+					<table>
+						<tr class="thead">
+							<!--<td>全选 <input type="checkbox"/></td>-->
+							<td>商品代码</td>
+							<td>商品名称</td>
+							<td>型号</td>
+							<td>球镜</td>
+							<td>柱镜</td>
+							<td>下加光</td>
+							<td>折射率</td>
+							<td>光度分类</td>
+							<td>材料分类</td>
+							<td>入库时间</td>
+							<td>商品条码</td>
+							<td style="display: none">标准零售价</td>
+							<td style="display: none">含税单价</td>
+							<td style="display: none">批发价格</td>
+							<td style="display: none">调货成本</td>
+							<td style="display: none">单位</td>
+							<td style="display: none">商品品种</td>
+							<td style="display: none">镜片类型</td>
+							<td style="display: none">商品id</td>
+							<td>效期</td>
+							<td>批号</td>
+							<td>注册证号</td>
+							<td>生产日期</td>
+							<td>数量</td>
+							<td>操作</td>
+						</tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji3">
+							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
+							<!--<td>0</td>-->
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr id="tab4" style="display:none">
+				<td style="width: 100vw;">
+					<table>
+						<tr class="thead">
+							<!--<td>全选 <input type="checkbox"/></td>-->
+							<td>商品代码</td>
+							<td>商品名称</td>
+							<td>厂家型号</td>
+							<td>球镜</td>
+							<td>柱镜</td>
+							<td>曲率</td>
+							<td>直径</td>
+							<td>使用类型</td>
+							<td>抛弃型分类</td>
+							<td>入库时间</td>
+							<td>商品条码</td>
+							<td style="display: none">标准零售价</td>
+							<td style="display: none">含税单价</td>
+							<td style="display: none">批发价格</td>
+							<td style="display: none">调货成本</td>
+							<td style="display: none">单位</td>
+							<td style="display: none">商品品种</td>
+							<td style="display: none">镜片类型</td>
+							<td style="display: none">商品id</td>
+							<td>效期</td>
+							<td>批号</td>
+							<td>注册证号</td>
+							<td>生产日期</td>
+							<td>数量</td>
+							<td>操作</td>
+						</tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji4">
+							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
+							<!--<td>0</td>-->
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr id="tab5" style="display:none">
+				<td style="width: 100vw;">
+					<table>
+						<tr class="thead">
+							<!--<td>全选 <input type="checkbox"/></td>-->
+							<td>商品代码</td>
+							<td>商品名称</td>
+							<td>型号</td>
+							<td>主容量</td>
+							<td>次容量</td>
+							<td>商品条码</td>
+							<td style="display: none">标准零售价</td>
+							<td style="display: none">含税单价</td>
+							<td style="display: none">批发价格</td>
+							<td style="display: none">调货成本</td>
+							<td style="display: none">单位</td>
+							<td style="display: none">商品品种</td>
+							<td style="display: none">商品id</td>
+							<td>效期</td>
+							<td>批号</td>
+							<td>注册证号</td>
+							<td>生产日期</td>
+							<td>数量</td>
+							<td>操作</td>
+						</tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji5">
+							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
+							<!--<td>0</td>-->
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr id="tab6" style="display:none">
+				<td style="width: 100vw;">
+					<table>
+						<tr class="thead">
+							<!--<td>全选 <input type="checkbox"/></td>-->
+							<td>商品代码</td>
+							<td>商品名称</td>
+							<td>型号</td>
+							<td>色号</td>
+							<td>框架尺寸</td>
+							<td>入库时间</td>
+							<td>商品条码</td>
+							<td style="display: none">标准零售价</td>
+							<td style="display: none">含税单价</td>
+							<td style="display: none">批发价格</td>
+							<td style="display: none">调货成本</td>
+							<td style="display: none">单位</td>
+							<td style="display: none">商品品种</td>
+							<td style="display: none">商品id</td>
+							<td>效期</td>
+							<td>批号</td>
+							<td>注册证号</td>
+							<td>生产日期</td>
+							<td>数量</td>
+							<td>操作</td>
+						</tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji6">
+							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
+							<!--<td>0</td>-->
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr id="tab7" style="display:none">
+				<td style="width: 100vw;">
+					<table>
+						<tr class="thead">
+							<!--<td>全选 <input type="checkbox"/></td>-->
+							<td>商品代码</td>
+							<td>商品名称</td>
+							<td>型号</td>
+							<td>框架尺寸</td>
+							<td>老花镜度数</td>
+							<td>厂家色号</td>
+							<td>入库时间</td>
+							<td>商品条码</td>
+							<td style="display: none">标准零售价</td>
+							<td style="display: none">含税单价</td>
+							<td style="display: none">批发价格</td>
+							<td style="display: none">调货成本</td>
+							<td style="display: none">单位</td>
+							<td style="display: none">商品品种</td>
+							<td style="display: none">商品id</td>
+							<td>效期</td>
+							<td>批号</td>
+							<td>注册证号</td>
+							<td>生产日期</td>
+							<td>数量</td>
+							<td>操作</td>
+						</tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji7">
+							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
+							<!--<td>0</td>-->
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr id="tab8" style="display:none">
+				<td style="width: 100vw;">
+					<table>
+						<tr class="thead">
+							<!--<td>全选 <input type="checkbox"/></td>-->
+							<td>商品代码</td>
+							<td>商品名称</td>
+							<td>型号</td>
+							<td>入库时间</td>
+							<td>商品条码</td>
+							<td style="display: none">标准零售价</td>
+							<td style="display: none">含税单价</td>
+							<td style="display: none">批发价格</td>
+							<td style="display: none">调货成本</td>
+							<td style="display: none">单位</td>
+							<td style="display: none">商品品种</td>
+							<td style="display: none">商品id</td>
+							<td>效期</td>
+							<td>批号</td>
+							<td>注册证号</td>
+							<td>生产日期</td>
+							<td>数量</td>
+							<td>操作</td>
+						</tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji8">
+							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
+							<!--<td>0</td>-->
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr id="tab9" style="display:none">
+				<td style="width: 100vw;">
+					<table>
+						<tr class="thead">
+							<!--<td>全选 <input type="checkbox"/></td>-->
+							<td>商品代码</td>
+							<td>商品名称</td>
+							<td>型号</td>
+							<td>入库时间</td>
+							<td>商品条码</td>
+							<td style="display: none">标准零售价</td>
+							<td style="display: none">含税单价</td>
+							<td style="display: none">批发价格</td>
+							<td style="display: none">调货成本</td>
+							<td style="display: none">单位</td>
+							<td style="display: none">商品品种</td>
+							<td style="display: none">商品id</td>
+							<td>效期</td>
+							<td>批号</td>
+							<td>注册证号</td>
+							<td>生产日期</td>
+							<td>数量</td>
+							<td>操作</td>
+						</tr>
+
+						<tr style="font-weight:bold;font-size: 15px;" class="heji9">
+							<!--<td colspan="12" style="text-align:right;">合计：</td>-->
+							<!--<td>0</td>-->
+						</tr>
+					</table>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</form>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    $().ready(function () {
+        // alert("打印单个条码");
+        var danjuNumber = $("#danjuNumber").val();
+        var goodsType = $("#goodsType").val();
+        // alert(goodsType)
+        var value = $("#gdname").val()
+        if (value == '镜架') {
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: block";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '配件') {
+            $(".val1").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: block";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '镜片') {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: block";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '隐形') {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: block";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '护理液') {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: block";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '太阳镜') {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: block";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '老花镜') {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: block";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        } else if (value == '耗材') {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: block";
+            tab9.style = "display: none";
+        } else if (value == '视光') {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: block";
+        } else {
+            $(".val1").remove();
+            $(".val2").remove();
+            $(".val3").remove();
+            $(".val4").remove();
+            $(".val5").remove();
+            $(".val6").remove();
+            $(".val7").remove();
+            $(".val8").remove();
+            $(".val9").remove();
+            tab1.style = "display: none";
+            tab2.style = "display: none";
+            tab3.style = "display: none";
+            tab4.style = "display: none";
+            tab5.style = "display: none";
+            tab6.style = "display: none";
+            tab7.style = "display: none";
+            tab8.style = "display: none";
+            tab9.style = "display: none";
+        }
+
+        $.ajax({
+            url: '/stock/stock/selectOrder',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'danjuNumber': danjuNumber,
+                'goodsType' :goodsType
+            },
+            success: function (xml) {
+                // alert(JSON.stringify(xml))
+                for (var i = 0; i < xml.length; i++) {
+                    if(null == xml[i].goodsNum){
+                        xml[i].goodsNum="";
+                    }
+                    if(null == xml[i].goodsName){
+                        xml[i].goodsName="";
+                    }
+                     if(null == xml[i].factory){
+                        xml[i].factory="";
+                    }
+                     if(null == xml[i].producFactorycolor){
+                        xml[i].producFactorycolor="";
+                    }
+                    if(null == xml[i].materialname){
+                        xml[i].materialname="";
+                    }
+                    if(null == xml[i].size){
+                        xml[i].size="";
+                    }
+                     if(null == xml[i].createTime){
+                        xml[i].createTime="";
+                    }
+                    if(null == xml[i].goodsCode){
+                        xml[i].goodsCode="";
+                    }
+                    if(null == xml[i].useday){
+                        xml[i].useday="";
+                    }
+                    if(null == xml[i].batch){
+                        xml[i].batch="";
+                    }
+                    if(null == xml[i].zhuceNumber){
+                        xml[i].zhuceNumber="";
+                    }
+                    if(null == xml[i].produceDay){
+                        xml[i].produceDay="";
+                    }
+                    if(null == xml[i].goodsCount){
+                        xml[i].goodsCount="";
+                    }
+                    if(null == xml[i].partsStyle){
+                        xml[i].partsStyle="";
+                    }
+                    if(null == xml[i].jscpsph){
+                        xml[i].jscpsph="";
+                    }
+                     if(null == xml[i].jpcpcyl){
+                        xml[i].jpcpcyl="";
+                    }
+                    if(null == xml[i].jpcplightbelow){
+                        xml[i].jpcplightbelow="";
+                    }
+                    if(null == xml[i].jpcprefractivityvalue){
+                        xml[i].jpcprefractivityvalue="";
+                    }
+                    if(null == xml[i].jpcplightname){
+                        xml[i].jpcplightname="";
+                    }
+                    if(null == xml[i].jpcplensname){
+                        xml[i].jpcplensname="";
+                    }
+                    if(null == xml[i].yxcpsph){
+                        xml[i].yxcpsph="";
+                    }
+                    if(null == xml[i].yxcpcyl){
+                        xml[i].yxcpcyl="";
+                    }
+                     if(null == xml[i].yxcpcurvature){
+                        xml[i].yxcpcurvature="";
+                    }
+                    if(null == xml[i].yxcpdiameter){
+                        xml[i].yxcpdiameter="";
+                    }
+                    if(null == xml[i].yxcpusagename){
+                        xml[i].yxcpusagename="";
+                    }
+                    if(null == xml[i].yxcptypename){
+                        xml[i].yxcptypename="";
+                    }
+                    if(null == xml[i].tyjsize){
+                        xml[i].tyjsize="";
+                    }
+                    if(null == xml[i].tyjproducfactorycolor){
+                        xml[i].tyjproducfactorycolor="";
+                    }
+                    if(null == xml[i].oldsize){
+                        xml[i].oldsize="";
+                    }
+                    if(null == xml[i].degrees){
+                        xml[i].degrees="";
+                    }
+                    if(null == xml[i].oldproducfactorycolor){
+                        xml[i].oldproducfactorycolor="";
+                    }
+
+
+
+                    if(goodsType == 1 ){
+                        $(".heji1").before("<tr class='val1'>" +
+                            "<td >" + xml[i].goodsNum + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + xml[i].producFactorycolor + "</td>\n" +
+                            "<td>" + xml[i].materialname + "</td>\n" +
+                            "<td>" + xml[i].size + "</td>\n" +
+
+                            "<td >" + xml[i].createTime + "</td>\n" +
+                            "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                            "<td >" + xml[i].useday + "</td>\n" +
+                            "<td >" + xml[i].batch + "</td>\n" +
+                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                            "<td >" + xml[i].produceDay + "</td>\n" +
+                            "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                            "</tr>");//页面每个数量
+                    }else if (goodsType==2){
+                        $(".heji2").before("<tr class='val1'>" +
+                            "<td >" + xml[i].goodsNum + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + xml[i].partsStyle + "</td>\n" +
+
+                            "<td >" + xml[i].createTime + "</td>\n" +
+                            "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                            "<td >" + xml[i].useday + "</td>\n" +
+                            "<td >" + xml[i].batch + "</td>\n" +
+                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                            "<td >" + xml[i].produceDay + "</td>\n" +
+                            "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+							"</tr>");//页面每个数量
+					}else if (goodsType==3){
+                        $(".heji3").before("<tr class='val1'>" +
+                            "<td >" + xml[i].goodsNum + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + xml[i].jscpsph + "</td>\n" +
+                            "<td>" + xml[i].jpcpcyl + "</td>\n" +
+                            "<td>" + xml[i].jpcplightbelow + "</td>\n" +
+                            "<td>" + xml[i].jpcprefractivityvalue + "</td>\n" +
+                            "<td>" + xml[i].jpcplightname + "</td>\n" +
+                            "<td>" + xml[i].jpcplensname + "</td>\n" +
+
+                            "<td >" + xml[i].createTime + "</td>\n" +
+                            "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                            "<td >" + xml[i].useday + "</td>\n" +
+                            "<td >" + xml[i].batch + "</td>\n" +
+                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                            "<td >" + xml[i].produceDay + "</td>\n" +
+                            "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+							"</tr>");//页面每个数量
+					}else if (goodsType==4){
+                        $(".heji4").before("<tr class='val1'>" +
+                            "<td >" + xml[i].goodsNum + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + xml[i].yxcpsph + "</td>\n" +
+                            "<td>" + xml[i].yxcpcyl + "</td>\n" +
+                            "<td>" + xml[i].yxcpcurvature + "</td>\n" +
+                            "<td>" + xml[i].yxcpdiameter + "</td>\n" +
+                            "<td>" + xml[i].yxcpusagename + "</td>\n" +
+                            "<td>" + xml[i].yxcptypename + "</td>\n" +
+
+                            "<td >" + xml[i].createTime + "</td>\n" +
+                            "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                            "<td >" + xml[i].useday + "</td>\n" +
+                            "<td >" + xml[i].batch + "</td>\n" +
+                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                            "<td >" + xml[i].produceDay + "</td>\n" +
+                            "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                            "</tr>");//页面每个数量
+					}else if (goodsType==5){
+                        $(".heji5").before("<tr class='val1'>" +
+                            "<td >" + xml[i].goodsNum + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + xml[i].mainCapacity + "</td>\n" +
+                            "<td>" + xml[i].secondCapacity + "</td>\n" +
+
+                            "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                            "<td >" + xml[i].useday + "</td>\n" +
+                            "<td >" + xml[i].batch + "</td>\n" +
+                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                            "<td >" + xml[i].produceDay + "</td>\n" +
+                            "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                            "</tr>");//页面每个数量
+					}else if (goodsType==6){
+                        $(".heji6").before("<tr class='val1'>" +
+                            "<td >" + xml[i].goodsNum + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + xml[i].tyjsize + "</td>\n" +
+                            "<td>" + xml[i].tyjproducfactorycolor + "</td>\n" +
+
+                            "<td >" + xml[i].createTime + "</td>\n" +
+                            "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                            "<td >" + xml[i].useday + "</td>\n" +
+                            "<td >" + xml[i].batch + "</td>\n" +
+                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                            "<td >" + xml[i].produceDay + "</td>\n" +
+                            "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                            "</tr>");//页面每个数量
+					}else if (goodsType==7){
+                        $(".heji7").before("<tr class='val1'>" +
+                            "<td >" + xml[i].goodsNum + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+
+                            "<td>" + xml[i].oldsize + "</td>\n" +
+                            "<td>" + xml[i].degrees + "</td>\n" +
+                            "<td>" + xml[i].oldproducfactorycolor + "</td>\n" +
+
+                            "<td >" + xml[i].createTime + "</td>\n" +
+                            "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                            "<td >" + xml[i].useday + "</td>\n" +
+                            "<td >" + xml[i].batch + "</td>\n" +
+                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                            "<td >" + xml[i].produceDay + "</td>\n" +
+                            "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                            "</tr>");//页面每个数量
+					}else if (goodsType==8){
+                        $(".heji8").before("<tr class='val1'>" +
+                            "<td >" + xml[i].goodsNum + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+                            "<td >" + xml[i].createTime + "</td>\n" +
+                            "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                            "<td >" + xml[i].useday + "</td>\n" +
+                            "<td >" + xml[i].batch + "</td>\n" +
+                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                            "<td >" + xml[i].produceDay + "</td>\n" +
+                            "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                            "</tr>");//页面每个数量
+					}else if (goodsType==9){
+                        $(".heji9").before("<tr class='val1'>" +
+                            "<td >" + xml[i].goodsNum + "</td>\n" +
+                            "<td>" + xml[i].goodsName + "</td>\n" +
+                            "<td>" + xml[i].factory + "</td>\n" +
+                            "<td >" + xml[i].createTime + "</td>\n" +
+                            "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                            "<td >" + xml[i].useday + "</td>\n" +
+                            "<td >" + xml[i].batch + "</td>\n" +
+                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                            "<td >" + xml[i].produceDay + "</td>\n" +
+                            "<td >" + xml[i].goodsCount + "</td>\n" +
+                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                            "</tr>");//页面每个数量
+					}
+
+                }
+            }
+        })
+		countall();
+    });
+	
+	function dayin() {
+		var danjuNumber = $('#danjuNumber').val();
+        window.open("/stock/stock/dayinOrder?danjuNumber="+ danjuNumber);
+    }
+    function shouhuo() {
+		var danjuNumber = $('#danjuNumber').val();
+        window.open("/stock/stock/shouhuoOrder?danjuNumber="+ danjuNumber);
+    }
+
+    //查看总数
+    function countall() {
+        var goodsType=$("#goodsType").val();
+        var danjuNumber=$("#danjuNumber").val();
+        $.ajax({
+            url: '/stock/stock/countall',
+            type: 'get',
+            dataType: "json",
+            data: {
+                'goodsType': goodsType,
+                'danjuNumber': danjuNumber
+
+            },
+            success: function (xml) {
+                $("#countall").val(xml);
+            }
+        })
+    }
+
+    function codeDayin(object) {
+        var codeOne =object;
+        var goodsType = $('#goodsType').val();
+        var danjuNumber = $('#danjuNumber').val();
+        if (goodsType==1){
+            window.open("/stock/stock/codeJingjiaOne?danjuNumber="+danjuNumber+'&codeOne='+codeOne);
+        } else {
+            window.open("/stock/stock/codeOne?danjuNumber="+danjuNumber+'&codeOne='+codeOne);
+        }
+
+    }
+</script>
+</body>
+</html>

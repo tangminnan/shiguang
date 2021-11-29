@@ -210,7 +210,11 @@
             <if test="returnzt != null">`returnzt` = #{returnzt},</if>
             <if test="stockorder != null">`stockorder` = #{stockorder}</if>
         </set>
-        where id = #{id}
+        <where>
+        <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+        <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
+        <if test="goodsName != null and goodsName != ''">and goods_name = #{goodsName}</if>
+        </where>
     </update>
 
     <delete id="remove">

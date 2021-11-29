@@ -155,18 +155,19 @@ public class StockController {
         model.addAttribute("createTime", newDate);
         return "stock/stock/add";
     }
+
+
+
+
 ///采购详情页面
-    @GetMapping("/edit/{id}")
-    @RequiresPermissions("stock:stock:edit")
-    String edit(@PathVariable("id") Long id, Model model) {
+    @GetMapping("/detial/{id}")
+    @RequiresPermissions("stock:stock:detial")
+    String detial(@PathVariable("id") Long id, Model model) {
         OrderDO orderDO = orderService.get(id);
         model.addAttribute("orderDO", orderDO);
-//        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String time = orderDO.getDanjuDay();
-//        String danjuDay = sdftime.format(time);
         String danjuDay = orderDO.getDanjuDay();
         model.addAttribute("danjuDay", danjuDay);
-        return "stock/stock/edit";
+        return "stock/stock/detial";
     }
 
     ///采购详情列表
@@ -222,7 +223,7 @@ public class StockController {
         String[] goodsName2=orderDO.getGoodsName().split(",");
         String[] brandname2=orderDO.getBrandname().split(",");
         String[] goodsCount2=orderDO.getGoodsCount().split(",");
-        String[] costPrice2=orderDO.getGoodsCount().split(",");
+        String[] costPrice2=orderDO.getCostPrice().split(",");
         String[] wholePrice2=stock.getWholePrice().split(",");
         String[] retailPrice2=stock.getRetailPrice().split(",");
         String[] unit2=orderDO.getUnit().split(",");
@@ -385,16 +386,244 @@ public class StockController {
         return R.ok();
     }
 
+
+
     /**
      * 修改
      */
-    @ResponseBody
-    @RequestMapping("/update")
+    @GetMapping("/edit/{id}")
     @RequiresPermissions("stock:stock:edit")
-    public R update(StockDO stock) {
-        stockService.update(stock);
+    String edit(@PathVariable("id") Long id, Model model) {
+        OrderDO orderDO = orderService.get(id);
+        model.addAttribute("orderDO", orderDO);
+        String danjuDay = orderDO.getDanjuDay();
+        model.addAttribute("danjuDay", danjuDay);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String newDate = sdf.format(date);
+        model.addAttribute("createTime", newDate);
+        return "stock/stock/edit";
+    }
+
+    /**
+     * 修改保存
+     */
+    @ResponseBody
+    @PostMapping("/editSave")
+    public R editSave(StockDO stock, OrderDO orderDO) {
+        String[] goodsNums=orderDO.getGoodsNum().split(",");
+        String[] goodCounts=orderDO.getGoodsCount().split(",");
+
+        String count;
+        for (int i=0; i<goodsNums.length;i++){
+            try {
+                count = goodCounts[i];
+            }catch (ArrayIndexOutOfBoundsException e){
+                count="";
+            }
+            if ("".equals(count)){
+                return R.error("数量不能为空！");
+            }
+        }
+
+        Map<String,Object> editmap=new HashMap<>();
+        String danjuNumber=orderDO.getDanjuNumber();
+        editmap.put("danjuNumber",danjuNumber);
+        List<OrderDO> orderDOList=orderService.haveOrderNum(editmap);
+        for (OrderDO orderDO1:orderDOList){
+            Long ids=orderDO1.getId();
+            orderService.remove(ids);
+        }
+
+        OrderDO orderDO1=new OrderDO();
+//        String goodsid=orderDO.getGdname();
+        Integer goodsid=orderDO.getGoodsType();
+        orderDO1.setDanjuNumber(orderDO.getDanjuNumber());//1
+        orderDO1.setOrderNumber(orderDO.getOrderNumber());
+        orderDO1.setYundanNumber(orderDO.getYundanNumber());
+        orderDO1.setZhidanPeople(orderDO.getZhidanPeople());//2
+        orderDO1.setDanjuDay(orderDO.getDanjuDay());
+        orderDO1.setTuihuoNumber(orderDO.getTuihuoNumber());
+        orderDO1.setFactoryNumber(orderDO.getFactoryNumber());
+        orderDO1.setBeizhu(orderDO.getBeizhu());
+        orderDO1.setReturnzt(orderDO.getReturnzt());
+
+        String[] goodsCodes=orderDO.getGoodsCode().split(",");
+        String[] goodsNames=orderDO.getGoodsName().split(",");
+        String[] usedays=orderDO.getUseday().split(",");
+        String[] batchs=orderDO.getBatch().split(",");
+        String[] produceDays=orderDO.getProduceDay().split(",");
+
+        String[] createTimes=orderDO.getCreateTime().split(",");
+        if (Integer.valueOf(1).equals(goodsid)){
+            for(int index=0;index<goodsNums.length;index++){
+                   String num=goodsNums[index];
+                   StockDO stockDO=new StockDO();
+                   stockDO.setGoodsNum(num);
+                   StockDO jingjias=  stockService.jingjias(stockDO);
+                   String mfrsid=jingjias.getMfrsid();
+                   String brandname=jingjias.getBrandname();
+                   String unitname=jingjias.getUnitname();
+                   String factory=jingjias.getProducFactory();
+                   String classtype=jingjias.getClasstype();
+
+                   orderDO1.setPositionId(orderDO.getPositionId());//15
+                   orderDO1.setGoodsType(goodsid);//5
+                   orderDO1.setGoodsNum(goodsNums[index]);//1
+                   orderDO1.setGoodsCode(goodsCodes[index]);//2
+                   orderDO1.setGoodsName(goodsNames[index]);//3
+                   orderDO1.setBrandname(brandname);//7
+                   orderDO1.setUnit(unitname);//8
+                   orderDO1.setMfrsid(mfrsid);//6
+
+                   //数量
+                   orderDO1.setGoodsCount(goodCounts[index]);//4
+                   String retailPrice=jingjias.getRetailPrice();
+                   orderDO1.setRetailPrice(retailPrice);//9
+                   Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodCounts[index]);
+                   orderDO1.setPriceSum(Double.toString(priceSum));  //原价合计10
+                   String costPrice = jingjias.getCostPrice();
+                   orderDO1.setCostPrice(costPrice); //成本价格11
+                   Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodCounts[index]);
+                   orderDO1.setCostSum(Double.toString(costSum)); //成本合计12
+                   String wholePrice = jingjias.getWholePrice();
+                   orderDO1.setWholePrice(wholePrice);//13
+                   Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodCounts[index]);
+                   orderDO1.setWholeSum(Double.toString(wholeSum));    //批发合计14
+                   orderDO1.setCreateTime(createTimes[index]);//16
+                   orderDO1.setDanjuNumber(orderDO.getDanjuNumber());//17
+                   orderDO1.setZhidanPeople(orderDO.getZhidanPeople());//18
+                   orderDO1.setDanjuDay(createTimes[index]);//19
+                   orderDO1.setBeizhu(orderDO.getBeizhu());//19
+
+                try { //20批号
+                    String batch = batchs[index];
+                    orderDO1.setBatch(batch);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    orderDO1.setBatch("");
+                }
+
+                   orderDO1.setZhuceNumber(jingjias.getZhuceNumber());//21注册
+
+                try {//22生产
+                    String produceDay = produceDays[index];
+                    orderDO1.setProduceDay(produceDay);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    orderDO1.setProduceDay("");
+                }
+
+
+                try {//23效期
+                    String useday = usedays[index];
+                    orderDO1.setUseday(useday);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    orderDO1.setUseday("");
+                }
+
+                   //类型
+                   orderDO1.setClasstype(classtype);
+                   //型号
+                   orderDO1.setFactory(factory);
+                   orderDO1.setStatus(orderDO.getStatus());
+                   orderDO1.setUsername(orderDO.getUsername());
+                   orderDO1.setReturnzt(orderDO.getReturnzt());
+                   orderDO1.setStockorder(orderDO.getStockorder());
+                   orderService.save(orderDO1);
+               }
+
+
+
+        }else if (Integer.valueOf(2).equals(goodsid)){
+            for(int index=0;index<goodsNums.length;index++){
+                String num=goodsNums[index];
+                StockDO stockDO=new StockDO();
+                stockDO.setGoodsNum(num);
+                StockDO peijians=  stockService.peijians(stockDO);
+                String mfrsid=peijians.getMfrsid();
+                String brandname=peijians.getBrandname();
+                String unitname=peijians.getUnitname();
+                String factory=peijians.getProducFactory();
+                String classtype=peijians.getClasstype();
+
+                orderDO1.setPositionId(orderDO.getPositionId());//15
+                orderDO1.setGoodsType(goodsid);//5
+                orderDO1.setGoodsNum(goodsNums[index]);//1
+                orderDO1.setGoodsCode(goodsCodes[index]);//2
+                orderDO1.setGoodsName(goodsNames[index]);//3
+                orderDO1.setBrandname(brandname);//7
+                orderDO1.setUnit(unitname);//8
+                orderDO1.setMfrsid(mfrsid);//6
+
+                //数量
+                orderDO1.setGoodsCount(goodCounts[index]);//4
+                String retailPrice=peijians.getRetailPrice();
+                orderDO1.setRetailPrice(retailPrice);//9
+                Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodCounts[index]);
+                orderDO1.setPriceSum(Double.toString(priceSum));  //原价合计10
+                String costPrice = peijians.getCostPrice();
+                orderDO1.setCostPrice(costPrice); //成本价格11
+                Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodCounts[index]);
+                orderDO1.setCostSum(Double.toString(costSum)); //成本合计12
+                String wholePrice = peijians.getWholePrice();
+                orderDO1.setWholePrice(wholePrice);//13
+                Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodCounts[index]);
+                orderDO1.setWholeSum(Double.toString(wholeSum));    //批发合计14
+                orderDO1.setCreateTime(createTimes[index]);//16
+                orderDO1.setDanjuNumber(orderDO.getDanjuNumber());//17
+                orderDO1.setZhidanPeople(orderDO.getZhidanPeople());//18
+                orderDO1.setDanjuDay(createTimes[index]);//19
+                orderDO1.setBeizhu(orderDO.getBeizhu());//19
+
+                try { //20批号
+                    String batch = batchs[index];
+                    orderDO1.setBatch(batch);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    orderDO1.setBatch("");
+                }
+
+                orderDO1.setZhuceNumber(peijians.getZhuceNumber());//21注册
+
+                try {//22生产
+                    String produceDay = produceDays[index];
+                    orderDO1.setProduceDay(produceDay);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    orderDO1.setProduceDay("");
+                }
+
+
+                try {//23效期
+                    String useday = usedays[index];
+                    orderDO1.setUseday(useday);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    orderDO1.setUseday("");
+                }
+
+                //类型
+                orderDO1.setClasstype(classtype);
+                //型号
+                orderDO1.setFactory(factory);
+                orderDO1.setStatus(orderDO.getStatus());
+                orderDO1.setUsername(orderDO.getUsername());
+                orderDO1.setReturnzt(orderDO.getReturnzt());
+                orderDO1.setStockorder(orderDO.getStockorder());
+                orderService.save(orderDO1);
+            }
+
+
+
+        }
+
+
+
+
         return R.ok();
     }
+
+
+
+
+
 
     /**
      * 删除采购订单

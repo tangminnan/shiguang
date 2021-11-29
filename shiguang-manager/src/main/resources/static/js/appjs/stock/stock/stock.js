@@ -12,14 +12,24 @@ function add() {
 }
 
 function edit(id) {
-    // alert("采购详情页")
+    var toIndex = layer.open({
+        type: 2,
+        title: '修改',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/edit/' + id // iframe的url
+    });
+    layer.full(toIndex);
+}
+function detial(id) {
     var toIndex = layer.open({
         type: 2,
         title: '详情',
         maxmin: true,
         shadeClose: false, // 点击遮罩关闭层
         area: ['800px', '520px'],
-        content: prefix + '/edit/' + id // iframe的url
+        content: prefix + '/detial/' + id // iframe的url
     });
     layer.full(toIndex);
 }
@@ -370,16 +380,11 @@ function showCol() {
 function save() {
     var goodsid = document.getElementById('goodsType').value;
     var mfrsid = document.getElementById('mfrsid').value;
-    // var heji = document.getElementById('heji').value;
-    // layer.alert(heji);
     if (goodsid == "") {
         layer.alert("请选择采购类型！");
     } else if (goodsid != "" && mfrsid == "") {
         layer.alert("请选择所属制造商！");
     }
-    // else if (goodsid != "" && mfrsid != "" && heji == 0) {
-    //     layer.alert("请添加单品商品!");
-    // }
     else if (goodsid != "" && mfrsid != "") {//&& heji != ""
         $.ajax({
             cache: true,
@@ -404,6 +409,32 @@ function save() {
             }
         });
     }
+}
+
+function editSave() {
+    alert("先删除")
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/stock/stock/editSave",
+            data: $('#signupForm').serialize(),// 你的formid
+            async: false,
+            error: function (request) {
+                parent.layer.alert("Connection error");
+            },
+            success: function (data) {
+                if (data.code == 0) {
+                    parent.layer.msg("操作成功");
+                    parent.reLoad();
+                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    parent.layer.close(index);
+
+                } else {
+                    parent.layer.alert(data.msg)
+                }
+
+            }
+        });
 }
 
 

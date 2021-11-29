@@ -50,6 +50,7 @@
         var s_edit_h = 'hidden';
         var s_remove_h = 'hidden';
         var s_resetPwd_h = 'hidden';
+        var s_detial_h = 'hidden';
     </script>
 </div>
 <div shiro:hasPermission="stock:stock:edit">
@@ -65,6 +66,11 @@
 <div shiro:hasPermission="stock:stock:resetPwd">
     <script type="text/javascript">
         var s_resetPwd_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="stock:stock:detial">
+    <script type="text/javascript">
+        var s_detial_h = '';
     </script>
 </div>
 </div>

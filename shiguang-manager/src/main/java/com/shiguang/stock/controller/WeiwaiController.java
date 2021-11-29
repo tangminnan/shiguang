@@ -562,9 +562,10 @@ public class WeiwaiController {
     }
 
     /**
-     * 输入工号
+     * 收货输入工号
      */
     @GetMapping("/userNum/{danjuNumber}")
+    @RequiresPermissions("stock:weiwai:userNum")
     String userNum(@PathVariable("danjuNumber") String danjuNumber, Model model) {
         model.addAttribute("danjuNumber", danjuNumber);
         return "/stock/weiwai/userNum";
@@ -933,8 +934,9 @@ public class WeiwaiController {
     /**
      * 配送输入工号
      */
-   @GetMapping("/userNumps/{salenumbery}/{danjuNumber}/{eyeStyle}/{yaoqiu}/{shstatus}")
-    String userNumps(@PathVariable("salenumbery") String salenumbery,
+    @RequiresPermissions("stock:weiwai:psNum")
+    @GetMapping("/psNum/{salenumbery}/{danjuNumber}/{eyeStyle}/{yaoqiu}/{shstatus}")
+    String psNum(@PathVariable("salenumbery") String salenumbery,
                      @PathVariable("danjuNumber") String danjuNumber,
                      @PathVariable("eyeStyle") String eyeStyle,
                      @PathVariable("yaoqiu") String yaoqiu,
@@ -1240,6 +1242,7 @@ public class WeiwaiController {
      * 浏览器打印二维码
      */
     @GetMapping("/code")
+    @RequiresPermissions("stock:weiwai:code")
     public String code(String danjuNumber, Model model) {
 
         WeiwaiDO weiwaiDO = weiwaiService.getCode(danjuNumber);
