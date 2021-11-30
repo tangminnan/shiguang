@@ -138,6 +138,8 @@ function load() {
                                             + row.id + '\')">详情</span> ';
                                         var f = '<span class="btn btn-success btn-sm' +s_userNum_h+ '" href="#" title="收货"  mce_href="#"   onclick="userNum(\''
                                             + row.danjuNumber + '\')">收货</span> ';
+                                        var b = '<span class="btn btn-danger btn-sm' +s_remove_h+ '" href="#" title="删除"  mce_href="#"   onclick="remove(\''
+                                            + row.id + '\')">删除</span> ';
                                         var n = '';
                                         var c = '';
                                         // var j = '';
@@ -145,6 +147,7 @@ function load() {
                                         var a = '<span class="btn btn-primary btn-sm' + s_detial_h + '"  href="#" title="详情"  mce_href="#" onclick="detial(\''
                                             + row.id + '\')">详情</span> ';
                                         var f = '';
+                                        var b = '';
                                         if (row.shstatus==""){
 											var n = '<span class="btn btn-warning btn-sm' + s_psNum_h + '"   href="#" title="配送"  mce_href="#" onclick="psNum(\''
 												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle+" ','"+  row.yaoqiu  + '\')">配送</span> ';
@@ -160,7 +163,7 @@ function load() {
 
 
                                     }
-                                    return a + f + n  +c;
+                                    return a + f + n  +c +b;
                                 }
                             }
 								]

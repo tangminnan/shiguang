@@ -52,6 +52,10 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	public int remove(Long id){
 		return weiwaiDao.remove(id);
 	}
+	@Override
+	public int removes(String saleNumber){
+		return weiwaiDao.removes(saleNumber);
+	}
 	
 	@Override
 	public int batchRemove(Long[] ids){

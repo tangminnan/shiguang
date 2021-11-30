@@ -277,48 +277,6 @@
         where danju_number = #{danjuNumber}
     </update>
 
-    <!--<select id="selectOrder" resultType="com.shiguang.stock.domain.OrderDO">-->
-        <!--select-->
-        <!--o.goods_num,o.goods_name,o.factory,produca.produc_factorycolor,m.materialname,produca.size,-->
-        <!--o.create_time,o.goods_code,o.useday,o.batch,o.zhuce_number,o.produce_day,o.goods_count,-->
-        <!--parts.parts_style,s.sph as jscpsph,c.cyl as jpcpcyl,l.lightbelow as jpcplightbelow,r.refractivityvalue as jpcprefractivityvalue,light.light_name as jpcplightname,lens.lens_name as jpcplensname,-->
-        <!--sp.sph as yxcpsph,cy.cyl as yxcpcyl,yxcp.curvature as yxcpcurvature,yxcp.diameter as yxcpdiameter,u.usage_name as yxcpusagename,t.type_name as yxcptypename,-->
-        <!--h.main_capacity,h.second_capacity,-->
-        <!--tyj.size as tyjsize,tyj.produc_factorycolor as tyjproducfactorycolor,-->
-        <!--old.size as oldsize,ol.degrees,old.produc_factorycolor as oldproducfactorycolor-->
-        <!--from-->
-        <!--stock_order o-->
-        <!--left join aa_produca produca on o.goodsxinxiid=produca.id-->
-        <!--left join c_material m on produca.materialid=m.materialid-->
-
-        <!--left join aa_parts parts  on o.goodsxinxiid=parts.id-->
-
-        <!--left join aa_jpcp jpcp  on o.goodsxinxiid=jpcp.id-->
-        <!--left join a_sph s  on jpcp.sph_id=s.sph_id-->
-        <!--left join a_cyl c  on jpcp.cyl_id=c.cyl_id-->
-        <!--left join a_lightbelow l  on jpcp.lightbelow_id=l.lightbelow_id-->
-        <!--left join c_refractivity r  on jpcp.refractivityid=r.refractivityid-->
-        <!--left join p_light light  on jpcp.light_id=light.light_id-->
-        <!--left join p_lens lens  on jpcp.lens_id=lens.lens_id-->
-
-        <!--left join aa_yxcp yxcp  on o.goodsxinxiid=yxcp.id-->
-        <!--left join a_sph sp  on yxcp.sph_id=sp.sph_id-->
-        <!--left join a_cyl cy  on yxcp.cyl_id=cy.cyl_id-->
-        <!--left join p_usage u on yxcp.usage_id=u.usage_id-->
-        <!--left join p_type t on yxcp.type_id=t.type_id-->
-
-        <!--left join aa_hly h on o.goodsxinxiid=h.id-->
-
-        <!--left join aa_tyj tyj on o.goodsxinxiid=tyj.id-->
-
-        <!--left join aa_oldlens old on o.goodsxinxiid=old.id-->
-        <!--left join a_olddegrees ol on old.old_id=ol.old_id-->
-
-        <!--<where>-->
-            <!--<if test="danjuNumber != null and danjuNumber != ''">and o.danju_number = #{danjuNumber}</if>-->
-            <!--<if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>-->
-        <!--</where>-->
-    <!--</select>-->
     <select id="selectOrder" resultType="com.shiguang.stock.domain.OrderDO">
         SELECT
         o.goods_num,
@@ -338,13 +296,31 @@
         jpcp.sph_id AS jscpsph,
         jpcp.cyl_id AS jpcpcyl,
         jpcp.lightbelow_id AS jpcplightbelow,
-        r.refractivityvalue AS jpcprefractivityvalue,
+        jpcp.refractivityid AS jpcprefractivityvalue,
         light.light_name AS jpcplightname,
         lens.lens_name AS jpcplensname,
+        jpdz.sph_up AS jpdzSphUp,
+        jpdz.sph_down AS jpdzSphDown,
+        jpdz.cyl_up AS jpdzCylUp,
+        jpdz.cyl_down AS jpdzCylDown,
+        jpdz.lightbelow_right AS jpdzLightbelowRight,
+        jpdz.lightbelow_left AS jpdzLightbelowLeft,
+        jpdz.refractivityid AS jpdzrefractivityvalue,
         yxcp.sph_id AS yxcpsph,
         yxcp.cyl_id AS yxcpcyl,
         yxcp.curvature AS yxcpcurvature,
         yxcp.diameter AS yxcpdiameter,
+
+        yxdz.sph_up AS yxdzSphUp,
+        yxdz.sph_down AS yxdzSphDown,
+        yxdz.cyl_up AS yxdzCylUp,
+        yxdz.cyl_down AS yxdzCylDown,
+        yxdz.curvature_one AS yxdzCurvatureOne,
+        yxdz.curvature_yi AS yxdzCurvatureYi,
+        yxdz.diameter_one AS yxdzDiameterOne,
+        yxdz.diameter_yi AS yxdzDiameterYi,
+
+
         u.usage_name AS yxcpusagename,
         t.type_name AS yxcptypename,
         h.main_capacity,
@@ -356,22 +332,21 @@
         old.produc_factorycolor AS oldproducfactorycolor
         FROM
         stock_order o
-        LEFT JOIN aa_produca produca ON o.goodsxinxiid = produca.id
+        LEFT JOIN aa_produca produca ON o.goods_num = produca.produc_num
         LEFT JOIN c_material m ON produca.materialid = m.materialid
-        LEFT JOIN aa_parts parts ON o.goodsxinxiid = parts.id
-        LEFT JOIN aa_jpcp jpcp ON o.goodsxinxiid = jpcp.id
-
+        LEFT JOIN aa_parts parts ON o.goods_num = parts.produc_num
+        LEFT JOIN aa_jpcp jpcp ON o.goods_num = jpcp.produc_num
+        LEFT JOIN aa_jpdz jpdz ON o.goods_num = jpdz.produc_num
         LEFT JOIN a_lightbelow l ON jpcp.lightbelow_id = l.lightbelow_id
-        LEFT JOIN c_refractivity r ON jpcp.refractivityid = r.refractivityid
         LEFT JOIN p_light light ON jpcp.light_id = light.light_id
         LEFT JOIN p_lens lens ON jpcp.lens_id = lens.lens_id
-        LEFT JOIN aa_yxcp yxcp ON o.goodsxinxiid = yxcp.id
-
+        LEFT JOIN aa_yxcp yxcp ON o.goods_num = yxcp.produc_num
+        LEFT JOIN aa_yxdz yxdz ON o.goods_num = yxdz.produc_num
         LEFT JOIN p_usage u ON yxcp.usage_id = u.usage_id
         LEFT JOIN p_type t ON yxcp.type_id = t.type_id
-        LEFT JOIN aa_hly h ON o.goodsxinxiid = h.id
-        LEFT JOIN aa_tyj tyj ON o.goodsxinxiid = tyj.id
-        LEFT JOIN aa_oldlens old ON o.goodsxinxiid = old.id
+        LEFT JOIN aa_hly h ON o.goods_num = h.produc_num
+        LEFT JOIN aa_tyj tyj ON o.goods_num = tyj.produc_num
+        LEFT JOIN aa_oldlens old ON o.goods_num = old.produc_num
         LEFT JOIN a_olddegrees ol ON old.old_id = ol.old_id
         <where>
             <if test="danjuNumber != null and danjuNumber != ''">and o.danju_number = #{danjuNumber}</if>

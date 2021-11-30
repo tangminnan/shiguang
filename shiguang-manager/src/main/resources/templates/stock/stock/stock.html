@@ -13,8 +13,11 @@
                                 onclick="add()">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
                         </button>
-                        <button shiro:hasPermission="information:member:member" type="button" class="btn  btn-default" onclick="importtemplate()">
+                        <button shiro:hasPermission="stock:stock:information" type="button" class="btn  btn-default" onclick="importtemplate()">
                             批量导入
+                        </button>
+                        <button shiro:hasPermission="stock:stock:adddz" type="button" class="btn  btn-primary" onclick="adddz()">
+                            订做片新增
                         </button>
                         <button shiro:hasPermission="stock:stock:batchRemove" type="button" class="btn  btn-danger"
                                 onclick="batchRemove()">
@@ -71,6 +74,16 @@
 <div shiro:hasPermission="stock:stock:detial">
     <script type="text/javascript">
         var s_detial_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="stock:stock:information">
+    <script type="text/javascript">
+        var s_information_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="stock:stock:adddz">
+    <script type="text/javascript">
+        var s_addz_h = '';
     </script>
 </div>
 </div>

@@ -253,7 +253,7 @@
             <td>定做类型：</td>
             <td>
                 <select id="dzlx" >
-                    <option value="成品片">成品片</option>
+                    <option value="订做片">订做片</option>
                 </select>
             </td>
         <!--</tr>-->
@@ -347,13 +347,14 @@
         $(".val").remove();
         $(function () {
             load();
+
         });
         function load() {
             $('#exampleTable')
                 .bootstrapTable(
                     {
                         method: 'get', // 服务器数据的请求方式 get or post
-                        url:  '/stock/stock/selectJpcp',// 服务器数据的加载地址
+                        url:  '/stock/stock/selectJpdz',// 服务器数据的加载地址
                         //	showRefresh : true,
                         //	showToggle : true,
                         //	showColumns : true,
@@ -429,14 +430,38 @@
                                 title: '含税成本'
                             },
                             {
-                                field: 'sph',
-                                title: '球镜'
+                                title: '球镜',
+                                align: 'center',
+                                formatter: function (value, row, index) {
+                                    if (row.sphUp != null && row.sphDown != null) {
+                                        return row.sphUp + "/" + row.sphDown
+                                    } else {
+                                        return ""
+                                    }
+                                }
+                            },
+                            {
+                                title: '柱镜',
+                                align: 'center',
+                                formatter: function (value, row, index) {
+                                    if (row.cylUp != null && row.cylDown != null) {
+                                        return row.cylUp + "/" + row.cylDown
+                                    } else {
+                                        return ""
+                                    }
+                                }
+
                             },{
-                                field: 'cyl',
-                                title: '柱镜'
-                            },{
-                                field: 'lightbelow',
-                                title: '下加光'
+                                title: '下加光',
+                                align: 'center',
+                                formatter: function (value, row, index) {
+                                    if (row.lightbelowRight != null && row.lightbelowLeft != null) {
+                                        return row.lightbelowRight + "/" + row.lightbelowLeft
+                                    } else {
+                                        return ""
+                                    }
+                                }
+
                             },{
                                 field: 'refractivityvalue',
                                 title: '折射率'
@@ -466,7 +491,7 @@
                             //     field: 'brandname',
                             //     title: '商品品种'
                             // },
-                           // {
+                            // {
                             //     field: 'classtype',
                             //     title: '镜片类型'
                             // },
@@ -480,14 +505,12 @@
                             // },
                         ]
                     });
-
         }
     });
-
     function reLoad() {
         $('#exampleTable').bootstrapTable('refresh');
-        $('#exampleTabledz').bootstrapTable('refresh');
     }
+
 
     function choiceBrand() {
         var goodsid = document.getElementById('goodsid').value;

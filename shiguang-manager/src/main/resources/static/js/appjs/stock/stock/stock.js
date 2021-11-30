@@ -10,6 +10,17 @@ function add() {
     });
     layer.full(toIndex);
 }
+function adddz() {
+    var toIndex = layer.open({
+        type: 2,
+        title: '增加',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/adddz' // iframe的url
+    });
+    layer.full(toIndex);
+}
 
 function edit(id) {
     var toIndex = layer.open({
@@ -105,6 +116,7 @@ function showCol() {
     var check = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     var objArray = [];
     $.each(check, function(i, row) {
+        // alert(JSON.stringify(row))
         // ids[i] = row['id'];
         var obj = {};
         if(null == row['producNum']){
@@ -229,6 +241,48 @@ function showCol() {
             var lightbelow =  row['lightbelow'] ;
         }
         obj.lightbelow = lightbelow;
+
+
+        if(null == row['sphUp']){
+            var sphUp  ="";
+        }else {
+            var sphUp =  row['sphUp'] ;
+        }
+        obj.sphUp = sphUp;
+        if(null == row['cylUp']){
+            var cylUp  ="";
+        }else {
+            var cylUp =  row['cylUp'] ;
+        }
+        obj.cylUp = cylUp;
+        if(null == row['sphDown']){
+            var sphDown  ="";
+        }else {
+            var sphDown =  row['sphDown'] ;
+        }
+        obj.sphDown = sphDown;
+        if(null == row['cylDown']){
+            var cylDown  ="";
+        }else {
+            var cylDown =  row['cylDown'] ;
+        }
+        obj.cylDown = cylDown;
+        if(null == row['lightbelowRight']){
+            var lightbelowRight  ="";
+        }else {
+            var lightbelowRight =  row['lightbelowRight'] ;
+        }
+        obj.lightbelowRight = lightbelowRight;
+        if(null == row['lightbelowLeft']){
+            var lightbelowLeft  ="";
+        }else {
+            var lightbelowLeft =  row['lightbelowLeft'] ;
+        }
+        obj.lightbelowLeft = lightbelowLeft;
+
+
+
+
         if(null == row['refractivityvalue']){
             var refractivityvalue  ="";
         }else {

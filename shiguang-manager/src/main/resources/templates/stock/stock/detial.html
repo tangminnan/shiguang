@@ -15,6 +15,7 @@
 	<!--单据信息-->
 	<div class="m40 tabS msgBox">
 		<h3>单据信息</h3>
+		<input id="styles" name="styles" th:value="${orderDO.classtype}" type="hidden" style="width: 50%" readonly />
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tbody>
 			<tr>
@@ -598,10 +599,10 @@
                     if(null == xml[i].goodsName){
                         xml[i].goodsName="";
                     }
-                     if(null == xml[i].factory){
+                    if(null == xml[i].factory){
                         xml[i].factory="";
                     }
-                     if(null == xml[i].producFactorycolor){
+                    if(null == xml[i].producFactorycolor){
                         xml[i].producFactorycolor="";
                     }
                     if(null == xml[i].materialname){
@@ -610,7 +611,7 @@
                     if(null == xml[i].size){
                         xml[i].size="";
                     }
-                     if(null == xml[i].createTime){
+                    if(null == xml[i].createTime){
                         xml[i].createTime="";
                     }
                     if(null == xml[i].goodsCode){
@@ -637,7 +638,7 @@
                     if(null == xml[i].jscpsph){
                         xml[i].jscpsph="";
                     }
-                     if(null == xml[i].jpcpcyl){
+                    if(null == xml[i].jpcpcyl){
                         xml[i].jpcpcyl="";
                     }
                     if(null == xml[i].jpcplightbelow){
@@ -652,13 +653,37 @@
                     if(null == xml[i].jpcplensname){
                         xml[i].jpcplensname="";
                     }
+                    if(null == xml[i].jpdzSphUp){
+                        xml[i].jpdzSphUp="";
+                    }
+                    if(null == xml[i].jpdzSphDown){
+                        xml[i].jpdzSphDown="";
+                    }
+                    if(null == xml[i].jpdzCylUp){
+                        xml[i].jpdzCylUp="";
+                    }
+                    if(null == xml[i].jpdzCylDown){
+                        xml[i].jpdzCylDown="";
+                    }
+                    if(null == xml[i].jpdzLightbelowRight){
+                        xml[i].jpdzLightbelowRight="";
+                    }
+                    if(null == xml[i].jpdzLightbelowLeft){
+                        xml[i].jpdzLightbelowLeft="";
+                    }
+                    if(null == xml[i].jpdzrefractivityvalue){
+                        xml[i].jpdzrefractivityvalue="";
+                    }
+
+
+
                     if(null == xml[i].yxcpsph){
                         xml[i].yxcpsph="";
                     }
                     if(null == xml[i].yxcpcyl){
                         xml[i].yxcpcyl="";
                     }
-                     if(null == xml[i].yxcpcurvature){
+                    if(null == xml[i].yxcpcurvature){
                         xml[i].yxcpcurvature="";
                     }
                     if(null == xml[i].yxcpdiameter){
@@ -670,6 +695,34 @@
                     if(null == xml[i].yxcptypename){
                         xml[i].yxcptypename="";
                     }
+
+
+                    if(null == xml[i].yxdzSphUp){
+                        xml[i].yxdzSphUp="";
+                    }
+                    if(null == xml[i].yxdzSphDown){
+                        xml[i].yxdzSphDown="";
+                    }
+                    if(null == xml[i].yxdzCylUp){
+                        xml[i].yxdzCylUp="";
+                    }
+                    if(null == xml[i].yxdzCylDown){
+                        xml[i].yxdzCylDown="";
+                    }
+                    if(null == xml[i].yxdzCurvatureOne){
+                        xml[i].yxdzCurvatureOne="";
+                    }
+                    if(null == xml[i].yxdzCurvatureYi){
+                        xml[i].yxdzCurvatureYi="";
+                    }
+                    if(null == xml[i].yxdzDiameterOne){
+                        xml[i].yxdzDiameterOne="";
+                    }
+                    if(null == xml[i].yxdzDiameterYi){
+                        xml[i].yxdzDiameterYi="";
+                    }
+
+
                     if(null == xml[i].tyjsize){
                         xml[i].tyjsize="";
                     }
@@ -684,6 +737,12 @@
                     }
                     if(null == xml[i].oldproducfactorycolor){
                         xml[i].oldproducfactorycolor="";
+                    }
+                    if(null == xml[i].mainCapacity){
+                        xml[i].mainCapacity="";
+                    }
+                    if(null == xml[i].secondCapacity){
+                        xml[i].secondCapacity="";
                     }
 
 
@@ -725,54 +784,109 @@
                             "<td >" + xml[i].produceDay + "</td>\n" +
                             "<td >" + xml[i].goodsCount + "</td>\n" +
                             "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
-							"</tr>");//页面每个数量
-					}else if (goodsType==3){
-                        $(".heji3").before("<tr class='val1'>" +
-                            "<td >" + xml[i].goodsNum + "</td>\n" +
-                            "<td>" + xml[i].goodsName + "</td>\n" +
-                            "<td>" + xml[i].factory + "</td>\n" +
-
-                            "<td>" + xml[i].jscpsph + "</td>\n" +
-                            "<td>" + xml[i].jpcpcyl + "</td>\n" +
-                            "<td>" + xml[i].jpcplightbelow + "</td>\n" +
-                            "<td>" + xml[i].jpcprefractivityvalue + "</td>\n" +
-                            "<td>" + xml[i].jpcplightname + "</td>\n" +
-                            "<td>" + xml[i].jpcplensname + "</td>\n" +
-
-                            "<td >" + xml[i].createTime + "</td>\n" +
-                            "<td  >" + xml[i].goodsCode + "</td>\n" +
-
-                            "<td >" + xml[i].useday + "</td>\n" +
-                            "<td >" + xml[i].batch + "</td>\n" +
-                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
-                            "<td >" + xml[i].produceDay + "</td>\n" +
-                            "<td >" + xml[i].goodsCount + "</td>\n" +
-                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
-							"</tr>");//页面每个数量
-					}else if (goodsType==4){
-                        $(".heji4").before("<tr class='val1'>" +
-                            "<td >" + xml[i].goodsNum + "</td>\n" +
-                            "<td>" + xml[i].goodsName + "</td>\n" +
-                            "<td>" + xml[i].factory + "</td>\n" +
-
-                            "<td>" + xml[i].yxcpsph + "</td>\n" +
-                            "<td>" + xml[i].yxcpcyl + "</td>\n" +
-                            "<td>" + xml[i].yxcpcurvature + "</td>\n" +
-                            "<td>" + xml[i].yxcpdiameter + "</td>\n" +
-                            "<td>" + xml[i].yxcpusagename + "</td>\n" +
-                            "<td>" + xml[i].yxcptypename + "</td>\n" +
-
-                            "<td >" + xml[i].createTime + "</td>\n" +
-                            "<td  >" + xml[i].goodsCode + "</td>\n" +
-
-                            "<td >" + xml[i].useday + "</td>\n" +
-                            "<td >" + xml[i].batch + "</td>\n" +
-                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
-                            "<td >" + xml[i].produceDay + "</td>\n" +
-                            "<td >" + xml[i].goodsCount + "</td>\n" +
-                            "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
-					}else if (goodsType==5){
+                    }else if (goodsType==3){
+                        var styles=$('#styles').val();
+                        if ("1"==styles){
+                                $(".heji3").before("<tr class='val1'>" +
+                                    "<td >" + xml[i].goodsNum + "</td>\n" +
+                                    "<td>" + xml[i].goodsName + "</td>\n" +
+                                    "<td>" + xml[i].factory + "</td>\n" +
+
+                                    "<td>" + xml[i].jscpsph + "</td>\n" +
+                                    "<td>" + xml[i].jpcpcyl + "</td>\n" +
+                                    "<td>" + xml[i].jpcplightbelow + "</td>\n" +
+                                    "<td>" + xml[i].jpcprefractivityvalue + "</td>\n" +
+                                    "<td>" + xml[i].jpcplightname + "</td>\n" +
+                                    "<td>" + xml[i].jpcplensname + "</td>\n" +
+
+                                    "<td >" + xml[i].createTime + "</td>\n" +
+                                    "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                                    "<td >" + xml[i].useday + "</td>\n" +
+                                    "<td >" + xml[i].batch + "</td>\n" +
+                                    "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                                    "<td >" + xml[i].produceDay + "</td>\n" +
+                                    "<td >" + xml[i].goodsCount + "</td>\n" +
+                                    "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                                    "</tr>");//页面每个数量
+
+                        }else if ("2"==styles){
+                            $(".heji3").before("<tr class='val1'>" +
+                                "<td >" + xml[i].goodsNum + "</td>\n" +
+                                "<td>" + xml[i].goodsName + "</td>\n" +
+                                "<td>" + xml[i].factory + "</td>\n" +
+
+                                "<td>" + xml[i].jpdzSphUp+'/'+ xml[i].jpdzSphDown+ "</td>\n" +
+                                "<td>" + xml[i].jpdzCylUp+'/'+ xml[i].jpdzCylDown+ "</td>\n" +
+                                "<td>" + xml[i].jpdzLightbelowRight+'/'+ xml[i].jpdzLightbelowLeft+ "</td>\n" +
+                                "<td>" + xml[i].jpdzrefractivityvalue + "</td>\n" +
+                                "<td>" + xml[i].jpcplightname + "</td>\n" +
+                                "<td>" + xml[i].jpcplensname + "</td>\n" +
+
+                                "<td >" + xml[i].createTime + "</td>\n" +
+                                "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                                "<td >" + xml[i].useday + "</td>\n" +
+                                "<td >" + xml[i].batch + "</td>\n" +
+                                "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                                "<td >" + xml[i].produceDay + "</td>\n" +
+                                "<td >" + xml[i].goodsCount + "</td>\n" +
+                                "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                                "</tr>");//页面每个数量
+						}
+
+                    }else if (goodsType==4){
+                        var styles=$('#styles').val();
+                        if ("1"==styles){
+                            $(".heji4").before("<tr class='val1'>" +
+                                "<td >" + xml[i].goodsNum + "</td>\n" +
+                                "<td>" + xml[i].goodsName + "</td>\n" +
+                                "<td>" + xml[i].factory + "</td>\n" +
+
+                                "<td>" + xml[i].yxcpsph + "</td>\n" +
+                                "<td>" + xml[i].yxcpcyl + "</td>\n" +
+                                "<td>" + xml[i].yxcpcurvature + "</td>\n" +
+                                "<td>" + xml[i].yxcpdiameter + "</td>\n" +
+                                "<td>" + xml[i].yxcpusagename + "</td>\n" +
+                                "<td>" + xml[i].yxcptypename + "</td>\n" +
+
+                                "<td >" + xml[i].createTime + "</td>\n" +
+                                "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                                "<td >" + xml[i].useday + "</td>\n" +
+                                "<td >" + xml[i].batch + "</td>\n" +
+                                "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                                "<td >" + xml[i].produceDay + "</td>\n" +
+                                "<td >" + xml[i].goodsCount + "</td>\n" +
+                                "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                                "</tr>");//页面每个数量
+						} else if ("2"==styles){
+                            $(".heji4").before("<tr class='val1'>" +
+                                "<td >" + xml[i].goodsNum + "</td>\n" +
+                                "<td>" + xml[i].goodsName + "</td>\n" +
+                                "<td>" + xml[i].factory + "</td>\n" +
+
+								"<td>" + xml[i].yxdzSphUp+'/'+xml[i].yxdzSphDown + "</td>\n" +
+								"<td>" + xml[i].yxdzCylUp+'/'+xml[i].yxdzCylDown + "</td>\n" +
+								"<td>" + xml[i].yxdzCurvatureOne+'/'+xml[i].yxdzCurvatureYi + "</td>\n" +
+								"<td>" + xml[i].yxdzDiameterOne+'/'+xml[i].yxdzDiameterYi + "</td>\n" +
+                                "<td>" + xml[i].yxcpusagename + "</td>\n" +
+                                "<td>" + xml[i].yxcptypename + "</td>\n" +
+
+                                "<td >" + xml[i].createTime + "</td>\n" +
+                                "<td  >" + xml[i].goodsCode + "</td>\n" +
+
+                                "<td >" + xml[i].useday + "</td>\n" +
+                                "<td >" + xml[i].batch + "</td>\n" +
+                                "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                                "<td >" + xml[i].produceDay + "</td>\n" +
+                                "<td >" + xml[i].goodsCount + "</td>\n" +
+                                "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                                "</tr>");//页面每个数量
+						}
+
+                    }else if (goodsType==5){
                         $(".heji5").before("<tr class='val1'>" +
                             "<td >" + xml[i].goodsNum + "</td>\n" +
                             "<td>" + xml[i].goodsName + "</td>\n" +
@@ -790,14 +904,14 @@
                             "<td >" + xml[i].goodsCount + "</td>\n" +
                             "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
-					}else if (goodsType==6){
+                    }else if (goodsType==6){
                         $(".heji6").before("<tr class='val1'>" +
                             "<td >" + xml[i].goodsNum + "</td>\n" +
                             "<td>" + xml[i].goodsName + "</td>\n" +
                             "<td>" + xml[i].factory + "</td>\n" +
 
-                            "<td>" + xml[i].tyjsize + "</td>\n" +
                             "<td>" + xml[i].tyjproducfactorycolor + "</td>\n" +
+                            "<td>" + xml[i].tyjsize + "</td>\n" +
 
                             "<td >" + xml[i].createTime + "</td>\n" +
                             "<td  >" + xml[i].goodsCode + "</td>\n" +
@@ -809,7 +923,7 @@
                             "<td >" + xml[i].goodsCount + "</td>\n" +
                             "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
-					}else if (goodsType==7){
+                    }else if (goodsType==7){
                         $(".heji7").before("<tr class='val1'>" +
                             "<td >" + xml[i].goodsNum + "</td>\n" +
                             "<td>" + xml[i].goodsName + "</td>\n" +
@@ -829,7 +943,7 @@
                             "<td >" + xml[i].goodsCount + "</td>\n" +
                             "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
-					}else if (goodsType==8){
+                    }else if (goodsType==8){
                         $(".heji8").before("<tr class='val1'>" +
                             "<td >" + xml[i].goodsNum + "</td>\n" +
                             "<td>" + xml[i].goodsName + "</td>\n" +
@@ -844,7 +958,7 @@
                             "<td >" + xml[i].goodsCount + "</td>\n" +
                             "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
-					}else if (goodsType==9){
+                    }else if (goodsType==9){
                         $(".heji9").before("<tr class='val1'>" +
                             "<td >" + xml[i].goodsNum + "</td>\n" +
                             "<td>" + xml[i].goodsName + "</td>\n" +
@@ -859,20 +973,20 @@
                             "<td >" + xml[i].goodsCount + "</td>\n" +
                             "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                             "</tr>");//页面每个数量
-					}
+                    }
 
                 }
             }
         })
-		countall();
+        countall();
     });
-	
-	function dayin() {
-		var danjuNumber = $('#danjuNumber').val();
+
+    function dayin() {
+        var danjuNumber = $('#danjuNumber').val();
         window.open("/stock/stock/dayinOrder?danjuNumber="+ danjuNumber);
     }
     function shouhuo() {
-		var danjuNumber = $('#danjuNumber').val();
+        var danjuNumber = $('#danjuNumber').val();
         window.open("/stock/stock/shouhuoOrder?danjuNumber="+ danjuNumber);
     }
 

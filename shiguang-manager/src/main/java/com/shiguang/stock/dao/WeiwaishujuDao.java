@@ -27,7 +27,8 @@ public interface WeiwaishujuDao {
 	int update(WeiwaishujuDO weiwaishuju);
 	
 	int remove(Long id);
-	
+	int removes(String number);
+
 	int batchRemove(Long[] ids);
 
 	//得到委外数据

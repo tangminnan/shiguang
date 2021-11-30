@@ -42,10 +42,13 @@ public class WeiwaikcServiceImpl implements WeiwaikcService {
 	public int update(WeiwaikcDO weiwaikc){
 		return weiwaikcDao.update(weiwaikc);
 	}
-	
 	@Override
 	public int remove(Long id){
 		return weiwaikcDao.remove(id);
+	}
+	@Override
+	public int removes(String saleNumber){
+		return weiwaikcDao.removes(saleNumber);
 	}
 	
 	@Override

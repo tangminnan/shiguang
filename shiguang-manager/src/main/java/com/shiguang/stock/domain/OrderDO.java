@@ -267,6 +267,15 @@ public class OrderDO implements Serializable {
     }
 
     private String classtype;
+    private String styles;
+
+    public String getStyles() {
+        return styles;
+    }
+
+    public void setStyles(String styles) {
+        this.styles = styles;
+    }
 
     public String getClasstype() {
         return classtype;
@@ -1093,12 +1102,35 @@ public class OrderDO implements Serializable {
     private String jpcprefractivityvalue;
     private String jpcplightname;
     private String jpcplensname;
+
+    private String jpdzSphUp;
+    private String jpdzSphDown;
+    private String jpdzCylUp;
+    private String jpdzCylDown;
+    private String jpdzLightbelowRight;
+    private String jpdzLightbelowLeft;
+    private String jpdzrefractivityvalue;
+
+
+
     private String yxcpsph;
     private String yxcpcyl;
     private String yxcpcurvature;
     private String yxcpdiameter;
     private String yxcpusagename;
     private String yxcptypename;
+
+
+    private String yxdzSphUp;
+    private String yxdzSphDown;
+    private String yxdzCylUp;
+    private String yxdzCylDown;
+    private String yxdzCurvatureOne;
+    private String yxdzCurvatureYi;
+    private String yxdzDiameterOne;
+    private String yxdzDiameterYi;
+
+
     private String tyjsize;
     private String tyjproducfactorycolor;
     private String oldsize;
@@ -1169,6 +1201,62 @@ public class OrderDO implements Serializable {
         this.jpcplensname = jpcplensname;
     }
 
+    public String getJpdzSphUp() {
+        return jpdzSphUp;
+    }
+
+    public void setJpdzSphUp(String jpdzSphUp) {
+        this.jpdzSphUp = jpdzSphUp;
+    }
+
+    public String getJpdzSphDown() {
+        return jpdzSphDown;
+    }
+
+    public void setJpdzSphDown(String jpdzSphDown) {
+        this.jpdzSphDown = jpdzSphDown;
+    }
+
+    public String getJpdzCylUp() {
+        return jpdzCylUp;
+    }
+
+    public void setJpdzCylUp(String jpdzCylUp) {
+        this.jpdzCylUp = jpdzCylUp;
+    }
+
+    public String getJpdzCylDown() {
+        return jpdzCylDown;
+    }
+
+    public void setJpdzCylDown(String jpdzCylDown) {
+        this.jpdzCylDown = jpdzCylDown;
+    }
+
+    public String getJpdzLightbelowRight() {
+        return jpdzLightbelowRight;
+    }
+
+    public void setJpdzLightbelowRight(String jpdzLightbelowRight) {
+        this.jpdzLightbelowRight = jpdzLightbelowRight;
+    }
+
+    public String getJpdzLightbelowLeft() {
+        return jpdzLightbelowLeft;
+    }
+
+    public void setJpdzLightbelowLeft(String jpdzLightbelowLeft) {
+        this.jpdzLightbelowLeft = jpdzLightbelowLeft;
+    }
+
+    public String getJpdzrefractivityvalue() {
+        return jpdzrefractivityvalue;
+    }
+
+    public void setJpdzrefractivityvalue(String jpdzrefractivityvalue) {
+        this.jpdzrefractivityvalue = jpdzrefractivityvalue;
+    }
+
     public String getYxcpsph() {
         return yxcpsph;
     }
@@ -1215,6 +1303,71 @@ public class OrderDO implements Serializable {
 
     public void setYxcptypename(String yxcptypename) {
         this.yxcptypename = yxcptypename;
+    }
+
+
+    public String getYxdzSphUp() {
+        return yxdzSphUp;
+    }
+
+    public void setYxdzSphUp(String yxdzSphUp) {
+        this.yxdzSphUp = yxdzSphUp;
+    }
+
+    public String getYxdzSphDown() {
+        return yxdzSphDown;
+    }
+
+    public void setYxdzSphDown(String yxdzSphDown) {
+        this.yxdzSphDown = yxdzSphDown;
+    }
+
+    public String getYxdzCylUp() {
+        return yxdzCylUp;
+    }
+
+    public void setYxdzCylUp(String yxdzCylUp) {
+        this.yxdzCylUp = yxdzCylUp;
+    }
+
+    public String getYxdzCylDown() {
+        return yxdzCylDown;
+    }
+
+    public void setYxdzCylDown(String yxdzCylDown) {
+        this.yxdzCylDown = yxdzCylDown;
+    }
+
+    public String getYxdzCurvatureOne() {
+        return yxdzCurvatureOne;
+    }
+
+    public void setYxdzCurvatureOne(String yxdzCurvatureOne) {
+        this.yxdzCurvatureOne = yxdzCurvatureOne;
+    }
+
+    public String getYxdzCurvatureYi() {
+        return yxdzCurvatureYi;
+    }
+
+    public void setYxdzCurvatureYi(String yxdzCurvatureYi) {
+        this.yxdzCurvatureYi = yxdzCurvatureYi;
+    }
+
+    public String getYxdzDiameterOne() {
+        return yxdzDiameterOne;
+    }
+
+    public void setYxdzDiameterOne(String yxdzDiameterOne) {
+        this.yxdzDiameterOne = yxdzDiameterOne;
+    }
+
+    public String getYxdzDiameterYi() {
+        return yxdzDiameterYi;
+    }
+
+    public void setYxdzDiameterYi(String yxdzDiameterYi) {
+        this.yxdzDiameterYi = yxdzDiameterYi;
     }
 
     public String getTyjsize() {

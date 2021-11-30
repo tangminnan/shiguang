@@ -12,10 +12,7 @@ import com.shiguang.mfrs.service.PositionService;
 import com.shiguang.product.domain.JpdzDO;
 import com.shiguang.product.domain.YxdzDO;
 import com.shiguang.stock.domain.*;
-import com.shiguang.stock.service.StockService;
-import com.shiguang.stock.service.StocklogService;
-import com.shiguang.stock.service.WeiwaiService;
-import com.shiguang.stock.service.WeiwaikcService;
+import com.shiguang.stock.service.*;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
@@ -45,6 +42,8 @@ import java.util.*;
 public class WeiwaiController {
     @Autowired
     private WeiwaiService weiwaiService;
+    @Autowired
+    private WeiwaishujuService weiwaishujuService;
     @Autowired
     private DepartmentService departmentService;
     //配送
@@ -467,7 +466,16 @@ public class WeiwaiController {
     @ResponseBody
     @RequiresPermissions("stock:weiwai:remove")
     public R remove(Long id) {
-        if (weiwaiService.remove(id) > 0) {
+        WeiwaiDO weiwaiDO=weiwaiService.get(id);
+        String[] saleNumbers= weiwaiDO.getSaleNumber().split(",");
+        String saleNumber= weiwaiDO.getSaleNumber();
+        for (int i=0;i<1;i++){
+           String number=saleNumbers[0];
+            weiwaishujuService.removes(number);//1个
+        }
+
+        weiwaikcService.removes(saleNumber);//2个
+        if (weiwaiService.removes(saleNumber) > 0) {
             return R.ok();
         }
         return R.error();

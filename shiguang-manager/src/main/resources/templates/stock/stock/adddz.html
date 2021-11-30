@@ -1,0 +1,507 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>采购收货新增</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+    <!--<link rel="stylesheet" href="/css/date.css" type="text/css">-->
+
+
+
+</head>
+
+<body>
+    <form class="form-horizontal m-t" id="signupForm">
+        <div class="new_h3">采购收货新增</div>
+        <div class="m40 tabS PHGL">
+            <h3>检查条件</h3>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td>单据编号：</td>
+                        <td>
+                            <input id="danjuNumber" name="danjuNumber" th:value="${uuidstr}" type="text"
+                                style="background-color: #e4e4e4" readonly />
+                        </td>
+                        <td>入库人：</td>
+                        <td><input id="zhidanPeople" name="zhidanPeople" th:value="${optometryName}" type="text"
+                                style="background-color: #e4e4e4" readonly /></td>
+                        <td>采购类型：</td>
+                        <td width="25%">
+                            <select id="goodsType" name="goodsType" onchange="goodsidstr()">
+                                <option></option>
+                                <option value="3">镜片</option>
+                                <option value="4">隐形</option>
+                                <!--<option th:each="ls:${goodsDOList}" th:text="${ls.goodsname}" th:value="${ls.goodsid}">-->
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>制造商：</td>
+                        <td>
+                            <input id="mfrsid" name="mfrsid" type="hidden" />
+                            <input id="mfrsName" name="mfrsName" type="text" readonly />
+                            <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()" />
+                        </td>
+                        <td>供应商：</td>
+                        <td>
+                            <input id="mfrsNames" name="mfrsNames" type="text" readonly />
+                        </td>
+                        <td>收入仓位：</td>
+                        <td>
+                            <select id="positionId" name="positionId">
+                                <option th:each="ls:${positionDOList}" th:text="${ls.positionName}"
+                                    th:value="${ls.positionId}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>运单号：</td>
+                        <td><input id="yundanNumber" name="yundanNumber" type="text" /></td>
+                        <td>单据日期：</td>
+                        <td><input id="danjuDay" name="danjuDay" th:value="${createTime}" type="text"
+                                style="background-color: #e4e4e4" readonly /></td>
+                        <!--<td>厂家订单号：</td>-->
+                        <!--<td><input id="factoryNumber" name="factoryNumber" type="text"/><em>*</em></td>-->
+                    </tr>
+                    <tr>
+                        <td>备注：</td>
+                        <td colspan="5"><textarea id="beizhu" name="beizhu" rows="3"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="HH_btns">
+                <div class="Xbtn">
+                    <input type="button" value="单品添加商品" onclick="choiceGoods()" />
+                    <!--<input type="button" value="已核销订单添加商品"/>-->
+                    <!--<input type="button" value="二维表添加商品"/>-->
+                    <!--<input class="HgreenBG" type="button" value="打印条码"/>-->
+                </div>
+                <div class="Cbtn buyBtns">
+                    <input id="status" name="status" value="1" type="hidden" />
+                    <input id="returnzt" name="returnzt" value="1" type="hidden" />
+                    <input id="username" name="username" value="未收货" type="hidden" />
+                    <input type="button" class="H_bc" value="保存并审核" onclick="save()" />
+                </div>
+            </div>
+
+        </div>
+
+        <!--商品信息-->
+        <div class="m40 tabS SPmsg">
+            <h3>商品信息&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="color: red">当前页数量：</span>
+                <input style="color: red;font-size: 15px;" id="newcount" name="newcount" readonly/>
+            </h3>
+
+            <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+                <tbody>
+                    <tr id="tab3" style="display:none" >
+                        <td style="width: 100%;"class="Choose">
+                            <table>
+                                <tr class="thead">
+                                    <td>商品代码</td>
+                                    <td>商品名称</td>
+                                    <td>型号</td>
+                                    <td>球镜</td>
+                                    <td>柱镜</td>
+                                    <td>下加光</td>
+                                    <td>折射率</td>
+                                    <td>光度分类</td>
+                                    <td>材料分类</td>
+                                    <td>入库时间</td>
+                                    <td>商品条码</td>
+                                    <td style="display: none">标准零售价</td>
+                                    <td style="display: none">含税单价</td>
+                                    <td style="display: none">批发价格</td>
+                                    <td style="display: none">调货成本</td>
+                                    <td style="display: none">单位</td>
+                                    <td style="display: none">商品品种</td>
+                                    <td style="display: none">镜片类型</td>
+                                    <td style="display: none">商品id</td>
+                                    <td>效期</td>
+                                    <td>批号</td>
+                                    <td>注册证号</td>
+                                    <td>生产日期</td>
+                                    <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
+                                </tr>
+                                <tr style="font-weight:bold;font-size: 15px;" class="heji3">
+                                    <!--<td colspan="12" style="text-align:right;">合计：</td>-->
+                                    <!--<td>0</td>-->
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr id="tab4" style="display:none" >
+                        <td style="width: 100%;" class="Choose">
+                            <table>
+                                <tr class="thead">
+                                    <td>商品代码</td>
+                                    <td>商品名称</td>
+                                    <td>厂家型号</td>
+                                    <td>球镜</td>
+                                    <td>柱镜</td>
+                                    <td>曲率</td>
+                                    <td>直径</td>
+                                    <td>使用类型</td>
+                                    <td>抛弃型分类</td>
+                                    <td>入库时间</td>
+                                    <td>商品条码</td>
+                                    <td style="display: none">标准零售价</td>
+                                    <td style="display: none">含税单价</td>
+                                    <td style="display: none">批发价格</td>
+                                    <td style="display: none">调货成本</td>
+                                    <td style="display: none">单位</td>
+                                    <td style="display: none">商品品种</td>
+                                    <td style="display: none">镜片类型</td>
+                                    <td style="display: none">商品id</td>
+                                    <td>效期</td>
+                                    <td>批号</td>
+                                    <td>注册证号</td>
+                                    <td>生产日期</td>
+                                    <td>数量</td>
+                                    <td style="color: #ff0000 ; display: none">当前页数量</td>
+                                    <td>操作</td>
+                                </tr>
+                                <tr style="font-weight:bold;font-size: 15px;" class="heji4">
+                                    <!--<td colspan="12" style="text-align:right;">合计：</td>-->
+                                    <!--<td>0</td>-->
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="Cbtn buyBtns">
+                <input type="button" class="H_bc" value="保存并审核" onclick="save()" />
+                <span style="color: red">当前页数量：</span>
+                <input style="color: red;font-size: 15px;" id="newcounts" name="newcount" readonly/>
+            </div>
+        </div>
+    </form>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript" src="/js/appjs/stock/stock/stock.js"></script>
+    <script type="text/javascript" src="/js/appjs/stock/stock/showdate.js"></script>
+    <!--<script type="text/javascript" src="/js/appjs/stock/stock/date.js"></script>-->
+    <script type="text/javascript">
+        var a = 0;
+        var b = 0;
+        // var addcount = 0;
+
+        function dingdanNum() {
+            var goodsid = document.getElementById('goodsType').value;
+            var mfrsid = document.getElementById('mfrsid').value;
+            // layer.alert(goodsid);
+            if (goodsid == "") {
+                layer.alert("请选择采购类型！");
+            } else if (goodsid != "" && mfrsid == "") {
+                layer.alert("请选择所属制造商！");
+            }
+        }
+
+        function tuihuiNum() {
+            var goodsid = document.getElementById('goodsType').value;
+            var mfrsid = document.getElementById('mfrsid').value;
+            // layer.alert(goodsid);
+            if (goodsid == "") {
+                layer.alert("请选择采购类型！");
+            } else if (goodsid != "" && mfrsid == "") {
+                layer.alert("请选择所属制造商！");
+            }
+        }
+
+        function goodsidstr() {
+            var value = $("#goodsType option:selected").text();
+            if (value == '镜片') {
+                $("input[name='newcount']").val("");
+                addcount=0;
+                $(".val4").remove();
+                tab3.style = "display: block";
+                tab4.style = "display: none";
+            } else if (value == '隐形') {
+                $("input[name='newcount']").val("");
+                addcount=0;
+                $(".val3").remove();
+                tab3.style = "display: none";
+                tab4.style = "display: block";
+            }
+        }
+
+        // <!--选择制造商-->
+        function choiceMfrs() {
+            var goodsid = document.getElementById('goodsType').value;
+            // layer.alert(goodsid);
+            if (goodsid == "") {
+                layer.alert("请选择采购类型！");
+            } else {
+                //选择镜架
+                var toIndex = layer.open({
+                    type: 2,
+                    title: '制造商',
+                    maxmin: true,
+                    shadeClose: false, // 点击遮罩关闭层
+                    area: ['800px', '520px'],
+                    content: "/stock/stock/findmfrs/" + goodsid,// iframe的url
+                    cancel: function (index, layero) {
+                        var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                        for (var i = 0; i < rows.length; i++) {
+                            $("#mfrsName").val(rows[i].mfrsname);
+                            $("#mfrsid").val(rows[i].mfrsnum);
+                            // alert(rows[i].mfrsnum);
+
+                            $("#mfrsNames").val(rows[i].mfrsname);
+                        }
+                    }
+                });
+                layer.full(toIndex);
+            }
+        }
+
+        // <!--单品添加商品-->
+        function choiceGoods() {
+            var goodsid = document.getElementById('goodsType').value;
+            var mfrsid = document.getElementById('mfrsid').value;
+            var goodVal = $("#goodsType option:selected").text();
+            var mfrsname = document.getElementById('mfrsName').value;
+            if (goodsid == "") {
+                layer.alert("请选择采购类型！");
+            } else if (goodsid != "" && mfrsid == "") {
+                layer.alert("请选择所属制造商！");
+            } if (goodVal == "镜片") {
+                // $(".val3").remove();
+                var toIndex = layer.open({
+                    type: 2,
+                    title: '商品查询',
+                    maxmin: true,
+                    shadeClose: false, // 点击遮罩关闭层
+                    area: ['800px', '520px'],
+                    content: "/stock/stock/jpdz/" + mfrsid + "/" + mfrsname,// iframe的url
+                    cancel: function (index, layero) {
+                        var rows = window[layero.find('iframe')[0]['name']].showCol();
+                        for (var i = 0; i < rows.length; i++) {
+                            a = a + 1;
+                            b = b + 1;
+                            $(".heji3").before("<tr class='val3'>" +
+                                "<td >" + rows[i].producNum + "</td>\n" +
+                                "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
+                                "<td>" + rows[i].producName + "</td>\n" +
+                                "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
+                                "<td>" + rows[i].factory + "</td>\n" +
+                                "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
+                                "<td>" + rows[i].sphUp+'/'+rows[i].sphDown + "</td>\n" +
+                                "<td>" + rows[i].cylUp+'/'+rows[i].cylDown + "</td>\n" +
+                                "<td>" + rows[i].lightbelowRight + '/' + rows[i].lightbelowLeft+ "</td>\n" +
+                                "<td>" + rows[i].refractivityvalue + "</td>\n" +
+                                "<td>" + rows[i].lightName + "</td>\n" +
+                                "<td>" + rows[i].lensName + "</td>\n" +
+                                "<td >" + rows[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
+                                "<td  >" + rows[i].producCode + "</td>\n" +
+                                "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
+                                "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
+                                "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
+                                "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
+                                "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
+                                "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
+                                "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                                "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
+                                "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                                "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
+                                "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
+                                // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
+                                "<td >" + rows[i].medicinecode + "</td>\n" +
+                                "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
+                                // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                                "</tr>");//页面每个数量
+                            //日期
+                            laydate.render({
+                                elem: '#useday' + a,
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
+                            });
+                            //日期
+                            laydate.render({
+                                elem: '#produceDay' + b,
+                                type: 'date'
+                            });
+                        }
+
+                    }
+                });
+                layer.full(toIndex);
+            } else if (goodVal == "隐形") {
+                // $(".val4").remove();
+                var toIndex = layer.open({
+                    type: 2,
+                    title: '商品查询',
+                    maxmin: true,
+                    shadeClose: false, // 点击遮罩关闭层
+                    area: ['800px', '520px'],
+                    content: "/stock/stock/yxdz/" + mfrsid + "/" + mfrsname,// iframe的url
+                    cancel: function (index, layero) {
+                        var rows = window[layero.find('iframe')[0]['name']].showCol();
+                        for (var i = 0; i < rows.length; i++) {
+                            a = a + 1;
+                            b = b + 1;
+                            $(".heji4").before("<tr class='val4'>" +
+                                "<td >" + rows[i].producNum + "</td>\n" +
+                                "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
+                                "<td>" + rows[i].producName + "</td>\n" +
+                                "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
+                                "<td>" + rows[i].factory + "</td>\n" +
+                                "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
+                                "<td>" + rows[i].sph + "</td>\n" +
+                                "<td>" + rows[i].cyl + "</td>\n" +
+                                "<td>" + rows[i].curvature + "</td>\n" +
+                                "<td>" + rows[i].diameter + "</td>\n" +
+                                "<td>" + rows[i].usageName + "</td>\n" +
+                                "<td>" + rows[i].typeName + "</td>\n" +
+                                "<td >" + rows[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
+                                "<td  >" + rows[i].producCode + "</td>\n" +
+                                "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
+                                "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
+                                "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
+                                "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
+                                "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
+                                "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
+                                "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                                "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+
+                                "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                                "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
+                                "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
+
+                                // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
+                                "<td >" + rows[i].medicinecode + "</td>\n" +
+                                "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
+                                // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                                "</tr>");//页面每个数量
+                            //日期
+                            laydate.render({
+                                elem: '#useday' + a,
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
+                            });
+                            //日期
+                            laydate.render({
+                                elem: '#produceDay' + b,
+                                type: 'date'
+                            });
+                        }
+
+                    }
+                });
+                layer.full(toIndex);
+            }
+        }
+
+
+        function shuliang(object) {
+            // id='goodsCount' name='goodsCount'
+            var counts=$("#"+object).val();
+
+            document.getElementsByName("goodsCount").values(counts);
+        }
+
+        function hejiadd(object) {
+            addcount=0;
+            $("input[name='goodsCount']").each(
+                function(){
+                    var goodsCount=$(this).val();
+                    addcount +=Number(goodsCount);
+                    $("input[name='allcount']").val(addcount);
+                    $("input[name='newcount']").val(addcount);
+                    // alert(addcount)
+                }
+            )
+        }
+
+
+        function delertTr(obj) {
+            var x;
+            var r=confirm("是否删除该的商品!");
+            if (r==true){
+                x="确定";
+            }
+            else{
+                x="取消";
+            }
+            if(x=="确定"){
+                var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+                tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+            }
+            hejiadd();
+        }
+
+    </script>
+</body>
+
+</html>

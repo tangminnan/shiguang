@@ -319,6 +319,9 @@
 	<delete id="remove">
 		delete from stock_weiwaishuju where id = #{value}
 	</delete>
+	<delete id="removes">
+		delete from stock_weiwaishuju where number = #{value}
+	</delete>
 
 	<delete id="batchRemove">
 		delete from stock_weiwaishuju where id in

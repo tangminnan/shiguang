@@ -35,7 +35,8 @@ public interface WeiwaiService {
 	int update(WeiwaiDO weiwai);
 	
 	int remove(Long id);
-	
+	int removes(String saleNumber);
+
 	int batchRemove(Long[] ids);
 
 	//配镜单

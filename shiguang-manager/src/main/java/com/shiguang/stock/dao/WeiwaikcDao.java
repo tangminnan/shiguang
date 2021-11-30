@@ -28,7 +28,8 @@ public interface WeiwaikcDao {
 	int update(WeiwaikcDO weiwaikc);
 	
 	int remove(Long id);
-	
+	int removes(String saleNumber);
+
 	int batchRemove(Long[] ids);
 
 	//确认收货

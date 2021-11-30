@@ -1290,17 +1290,42 @@
     </select>
     <!--镜片定做【商】【品】【查】【询】-->
     <select id="selectJpdz" resultType="com.shiguang.product.domain.JpdzDO">
-        select j.id as goodsxinxiid,j.produc_num,j.produc_name,u.unitname,b.brandname,j.factory,j.retail_price,j.tax_price,j.sph_up,j.sph_down,j.cyl_up,
-        j.cyl_down,j.lightbelow_left,j.lightbelow_right,r.refractivityvalue,l.light_name,le.lens_name,g.gradual_name,f.function_name,
-        j.produc_code,j.trade_price,j.transfer_price,mfrs.medicinecode,j.classtype,j.produc_factory
-        from aa_jpdz j left join c_unit u on j.unitid=u.unitid
-         left join c_refractivity r on j.refractivityid=r.refractivityid
-         left join p_light l on j.light_id=l.light_id
-         left join p_lens le on j.lens_id=le.lens_id
-         left join p_gradual g on j.gradual_id=g.gradual_id
-         left join p_function f on j.function_id=f.function_id
-        left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid`
-        left join c_mfrs mfrs on j.mfrsid=mfrs.mfrsnum
+        SELECT
+        j.id AS goodsxinxiid,
+        j.produc_num,
+        j.produc_name,
+        u.unitname,
+        b.brandname,
+        j.factory,
+        j.retail_price,
+        j.tax_price,
+        j.sph_up,
+        j.sph_down,
+        j.cyl_up,
+        j.cyl_down,
+        j.lightbelow_left,
+        j.lightbelow_right,
+        j.refractivityid as refractivityvalue,
+        l.light_name,
+        le.lens_name,
+        g.gradual_name,
+        f.function_name,
+        j.produc_code,
+        j.trade_price,
+        j.transfer_price,
+        mfrs.medicinecode,
+        j.classtype,
+        j.produc_factory
+        FROM
+        aa_jpdz j
+        LEFT JOIN c_unit u ON j.unitid = u.unitid
+        LEFT JOIN p_light l ON j.light_id = l.light_id
+        LEFT JOIN p_lens le ON j.lens_id = le.lens_id
+        LEFT JOIN p_gradual g ON j.gradual_id = g.gradual_id
+        LEFT JOIN p_function f ON j.function_id = f.function_id
+        LEFT JOIN c_brand b ON j.brandnum = b.brandnum
+        AND j.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_mfrs mfrs ON j.mfrsid = mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>

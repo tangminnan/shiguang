@@ -15,6 +15,7 @@
 	<!--单据信息-->
 	<div class="m40 tabS msgBox">
 		<h3>单据信息</h3>
+		<input id="styles" name="styles" th:value="${orderDO.classtype}" type="hidden" style="width: 50%" readonly />
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tbody>
 			<tr>
@@ -670,6 +671,34 @@
                     if(null == xml[i].jpcplensname){
                         xml[i].jpcplensname="";
                     }
+
+
+                    if(null == xml[i].jpdzSphUp){
+                        xml[i].jpdzSphUp="";
+                    }
+                    if(null == xml[i].jpdzSphDown){
+                        xml[i].jpdzSphDown="";
+                    }
+                    if(null == xml[i].jpdzCylUp){
+                        xml[i].jpdzCylUp="";
+                    }
+                    if(null == xml[i].jpdzCylDown){
+                        xml[i].jpdzCylDown="";
+                    }
+                    if(null == xml[i].jpdzLightbelowRight){
+                        xml[i].jpdzLightbelowRight="";
+                    }
+                    if(null == xml[i].jpdzLightbelowLeft){
+                        xml[i].jpdzLightbelowLeft="";
+                    }
+                    if(null == xml[i].jpdzrefractivityvalue){
+                        xml[i].jpdzrefractivityvalue="";
+                    }
+
+
+
+
+
                     if(null == xml[i].yxcpsph){
                         xml[i].yxcpsph="";
                     }
@@ -688,6 +717,35 @@
                     if(null == xml[i].yxcptypename){
                         xml[i].yxcptypename="";
                     }
+
+
+                    if(null == xml[i].yxdzSphUp){
+                        xml[i].yxdzSphUp="";
+                    }
+                    if(null == xml[i].yxdzSphDown){
+                        xml[i].yxdzSphDown="";
+                    }
+                    if(null == xml[i].yxdzCylUp){
+                        xml[i].yxdzCylUp="";
+                    }
+                    if(null == xml[i].yxdzCylDown){
+                        xml[i].yxdzCylDown="";
+                    }
+                    if(null == xml[i].yxdzCurvatureOne){
+                        xml[i].yxdzCurvatureOne="";
+                    }
+                    if(null == xml[i].yxdzCurvatureYi){
+                        xml[i].yxdzCurvatureYi="";
+                    }
+                    if(null == xml[i].yxdzDiameterOne){
+                        xml[i].yxdzDiameterOne="";
+                    }
+                    if(null == xml[i].yxdzDiameterYi){
+                        xml[i].yxdzDiameterYi="";
+                    }
+
+
+
                     if(null == xml[i].tyjsize){
                         xml[i].tyjsize="";
                     }
@@ -702,6 +760,13 @@
                     }
                     if(null == xml[i].oldproducfactorycolor){
                         xml[i].oldproducfactorycolor="";
+                    }
+
+                    if(null == xml[i].mainCapacity){
+                        xml[i].mainCapacity="";
+                    }
+                    if(null == xml[i].secondCapacity){
+                        xml[i].secondCapacity="";
                     }
 
                     if(goodsType == 1 ){
@@ -755,63 +820,131 @@
                             "<td><em  onclick='delertTr(this)'></em></td>\n" +
 							"</tr>");//页面每个数量
 					}else if (goodsType==3){
-                        $(".heji3").before("<tr class='val1'>" +
-                            "<td >" + xml[i].goodsNum + "</td>\n" +
-                            "<input name='goodsNum' type='hidden' value='" + xml[i].goodsNum  + "'>\n" +//1
-                            "<td>" + xml[i].goodsName + "</td>\n" +
-                            "<input name='goodsName' type='hidden' value='" + xml[i].goodsName + "'>\n" +//3
-                            "<td>" + xml[i].factory + "</td>\n" +
+                        var styles=$('#styles').val();
+                        if ("1"==styles){
+                            $(".heji3").before("<tr class='val1'>" +
+                                "<td >" + xml[i].goodsNum + "</td>\n" +
+                                "<input name='goodsNum' type='hidden' value='" + xml[i].goodsNum  + "'>\n" +//1
+                                "<td>" + xml[i].goodsName + "</td>\n" +
+                                "<input name='goodsName' type='hidden' value='" + xml[i].goodsName + "'>\n" +//3
+                                "<td>" + xml[i].factory + "</td>\n" +
 
-                            "<td>" + xml[i].jscpsph + "</td>\n" +
-                            "<td>" + xml[i].jpcpcyl + "</td>\n" +
-                            "<td>" + xml[i].jpcplightbelow + "</td>\n" +
-                            "<td>" + xml[i].jpcprefractivityvalue + "</td>\n" +
-                            "<td>" + xml[i].jpcplightname + "</td>\n" +
-                            "<td>" + xml[i].jpcplensname + "</td>\n" +
+                                "<td>" + xml[i].jscpsph + "</td>\n" +
+                                "<td>" + xml[i].jpcpcyl + "</td>\n" +
+                                "<td>" + xml[i].jpcplightbelow + "</td>\n" +
+                                "<td>" + xml[i].jpcprefractivityvalue + "</td>\n" +
+                                "<td>" + xml[i].jpcplightname + "</td>\n" +
+                                "<td>" + xml[i].jpcplensname + "</td>\n" +
 
-                            "<td >" + xml[i].createTime + "</td>\n" +
-                            "<input name='createTime' type='hidden' value='" + xml[i].createTime + "'>\n" +//3
-                            "<td  >" + xml[i].goodsCode + "</td>\n" +
-                            "<input name='goodsCode' type='hidden' value='" + xml[i].goodsCode + "'>\n" +//3
-                            "<td >" + xml[i].useday + "</td>\n" +
-                            "<input name='useday' type='hidden' value='" + xml[i].useday + "'>\n" +//3
-                            "<td >" + xml[i].batch + "</td>\n" +
-                            "<input name='batch' type='hidden' value='" + xml[i].batch + "'>\n" +//3
-                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
-                            "<td >" + xml[i].produceDay + "</td>\n" +
-                            "<input name='produceDay' type='hidden' value='" + xml[i].produceDay + "'>\n" +//3
-                            "<td ><input name='goodsCount' value='" + xml[i].goodsCount + "' onchange='hejiadd(this.value)' style='width: 185px;height: 28px;text-align: center;border: 1px solid #cac3c3;'/></td>\n" +
-                            "<td><em  onclick='delertTr(this)'></em></td>\n" +
-							"</tr>");//页面每个数量
+                                "<td >" + xml[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + xml[i].createTime + "'>\n" +//3
+                                "<td  >" + xml[i].goodsCode + "</td>\n" +
+                                "<input name='goodsCode' type='hidden' value='" + xml[i].goodsCode + "'>\n" +//3
+                                "<td >" + xml[i].useday + "</td>\n" +
+                                "<input name='useday' type='hidden' value='" + xml[i].useday + "'>\n" +//3
+                                "<td >" + xml[i].batch + "</td>\n" +
+                                "<input name='batch' type='hidden' value='" + xml[i].batch + "'>\n" +//3
+                                "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                                "<td >" + xml[i].produceDay + "</td>\n" +
+                                "<input name='produceDay' type='hidden' value='" + xml[i].produceDay + "'>\n" +//3
+                                "<td ><input name='goodsCount' value='" + xml[i].goodsCount + "' onchange='hejiadd(this.value)' style='width: 185px;height: 28px;text-align: center;border: 1px solid #cac3c3;'/></td>\n" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                                "</tr>");//页面每个数量
+
+                        }else if ("2"==styles){
+                            $(".heji3").before("<tr class='val1'>" +
+                                "<td >" + xml[i].goodsNum + "</td>\n" +
+                                "<input name='goodsNum' type='hidden' value='" + xml[i].goodsNum  + "'>\n" +//1
+                                "<td>" + xml[i].goodsName + "</td>\n" +
+                                "<input name='goodsName' type='hidden' value='" + xml[i].goodsName + "'>\n" +//3
+                                "<td>" + xml[i].factory + "</td>\n" +
+
+                                "<td>" + xml[i].jpdzSphUp+'/'+ xml[i].jpdzSphDown+ "</td>\n" +
+                                "<td>" + xml[i].jpdzCylUp+'/'+ xml[i].jpdzCylDown+ "</td>\n" +
+                                "<td>" + xml[i].jpdzLightbelowRight+'/'+ xml[i].jpdzLightbelowLeft+ "</td>\n" +
+                                "<td>" + xml[i].jpdzrefractivityvalue + "</td>\n" +
+                                "<td>" + xml[i].jpcplightname + "</td>\n" +
+                                "<td>" + xml[i].jpcplensname + "</td>\n" +
+
+                                "<td >" + xml[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + xml[i].createTime + "'>\n" +//3
+                                "<td  >" + xml[i].goodsCode + "</td>\n" +
+                                "<input name='goodsCode' type='hidden' value='" + xml[i].goodsCode + "'>\n" +//3
+                                "<td >" + xml[i].useday + "</td>\n" +
+                                "<input name='useday' type='hidden' value='" + xml[i].useday + "'>\n" +//3
+                                "<td >" + xml[i].batch + "</td>\n" +
+                                "<input name='batch' type='hidden' value='" + xml[i].batch + "'>\n" +//3
+                                "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                                "<td >" + xml[i].produceDay + "</td>\n" +
+                                "<input name='produceDay' type='hidden' value='" + xml[i].produceDay + "'>\n" +//3
+                                "<td ><input name='goodsCount' value='" + xml[i].goodsCount + "' onchange='hejiadd(this.value)' style='width: 185px;height: 28px;text-align: center;border: 1px solid #cac3c3;'/></td>\n" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                                "</tr>");//页面每个数量
+                        }
 					}else if (goodsType==4){
-                        $(".heji4").before("<tr class='val1'>" +
-                            "<td >" + xml[i].goodsNum + "</td>\n" +
-                            "<input name='goodsNum' type='hidden' value='" + xml[i].goodsNum  + "'>\n" +//1
-                            "<td>" + xml[i].goodsName + "</td>\n" +
-                            "<input name='goodsName' type='hidden' value='" + xml[i].goodsName + "'>\n" +//3
-                            "<td>" + xml[i].factory + "</td>\n" +
+                        var styles=$('#styles').val();
+                        if ("1"==styles){
+                            $(".heji4").before("<tr class='val1'>" +
+                                "<td >" + xml[i].goodsNum + "</td>\n" +
+                                "<input name='goodsNum' type='hidden' value='" + xml[i].goodsNum  + "'>\n" +//1
+                                "<td>" + xml[i].goodsName + "</td>\n" +
+                                "<input name='goodsName' type='hidden' value='" + xml[i].goodsName + "'>\n" +//3
+                                "<td>" + xml[i].factory + "</td>\n" +
 
-                            "<td>" + xml[i].yxcpsph + "</td>\n" +
-                            "<td>" + xml[i].yxcpcyl + "</td>\n" +
-                            "<td>" + xml[i].yxcpcurvature + "</td>\n" +
-                            "<td>" + xml[i].yxcpdiameter + "</td>\n" +
-                            "<td>" + xml[i].yxcpusagename + "</td>\n" +
-                            "<td>" + xml[i].yxcptypename + "</td>\n" +
+                                "<td>" + xml[i].yxcpsph + "</td>\n" +
+                                "<td>" + xml[i].yxcpcyl + "</td>\n" +
+                                "<td>" + xml[i].yxcpcurvature + "</td>\n" +
+                                "<td>" + xml[i].yxcpdiameter + "</td>\n" +
+                                "<td>" + xml[i].yxcpusagename + "</td>\n" +
+                                "<td>" + xml[i].yxcptypename + "</td>\n" +
 
-                            "<td >" + xml[i].createTime + "</td>\n" +
-                            "<input name='createTime' type='hidden' value='" + xml[i].createTime + "'>\n" +//3
-                            "<td  >" + xml[i].goodsCode + "</td>\n" +
-                            "<input name='goodsCode' type='hidden' value='" + xml[i].goodsCode + "'>\n" +//3
-                            "<td >" + xml[i].useday + "</td>\n" +
-                            "<input name='useday' type='hidden' value='" + xml[i].useday + "'>\n" +//3
-                            "<td >" + xml[i].batch + "</td>\n" +
-                            "<input name='batch' type='hidden' value='" + xml[i].batch + "'>\n" +//3
-                            "<td >" + xml[i].zhuceNumber + "</td>\n" +
-                            "<td >" + xml[i].produceDay + "</td>\n" +
-                            "<input name='produceDay' type='hidden' value='" + xml[i].produceDay + "'>\n" +//3
-                            "<td ><input name='goodsCount' value='" + xml[i].goodsCount + "' onchange='hejiadd(this.value)' style='width: 185px;height: 28px;text-align: center;border: 1px solid #cac3c3;'/></td>\n" +
-                            "<td><em  onclick='delertTr(this)'></em></td>\n" +
-                            "</tr>");//页面每个数量
+                                "<td >" + xml[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + xml[i].createTime + "'>\n" +//3
+                                "<td  >" + xml[i].goodsCode + "</td>\n" +
+                                "<input name='goodsCode' type='hidden' value='" + xml[i].goodsCode + "'>\n" +//3
+                                "<td >" + xml[i].useday + "</td>\n" +
+                                "<input name='useday' type='hidden' value='" + xml[i].useday + "'>\n" +//3
+                                "<td >" + xml[i].batch + "</td>\n" +
+                                "<input name='batch' type='hidden' value='" + xml[i].batch + "'>\n" +//3
+                                "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                                "<td >" + xml[i].produceDay + "</td>\n" +
+                                "<input name='produceDay' type='hidden' value='" + xml[i].produceDay + "'>\n" +//3
+                                "<td ><input name='goodsCount' value='" + xml[i].goodsCount + "' onchange='hejiadd(this.value)' style='width: 185px;height: 28px;text-align: center;border: 1px solid #cac3c3;'/></td>\n" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                                "</tr>");//页面每个数量
+						}else if ("2"==styles){
+                            $(".heji4").before("<tr class='val1'>" +
+                                "<td >" + xml[i].goodsNum + "</td>\n" +
+                                "<input name='goodsNum' type='hidden' value='" + xml[i].goodsNum  + "'>\n" +//1
+                                "<td>" + xml[i].goodsName + "</td>\n" +
+                                "<input name='goodsName' type='hidden' value='" + xml[i].goodsName + "'>\n" +//3
+                                "<td>" + xml[i].factory + "</td>\n" +
+
+                                "<td>" + xml[i].yxdzSphUp+'/'+xml[i].yxdzSphDown + "</td>\n" +
+                                "<td>" + xml[i].yxdzCylUp+'/'+xml[i].yxdzCylDown + "</td>\n" +
+                                "<td>" + xml[i].yxdzCurvatureOne+'/'+xml[i].yxdzCurvatureYi + "</td>\n" +
+                                "<td>" + xml[i].yxdzDiameterOne+'/'+xml[i].yxdzDiameterYi + "</td>\n" +
+
+
+                                "<td>" + xml[i].yxcpusagename + "</td>\n" +
+                                "<td>" + xml[i].yxcptypename + "</td>\n" +
+
+                                "<td >" + xml[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + xml[i].createTime + "'>\n" +//3
+                                "<td  >" + xml[i].goodsCode + "</td>\n" +
+                                "<input name='goodsCode' type='hidden' value='" + xml[i].goodsCode + "'>\n" +//3
+                                "<td >" + xml[i].useday + "</td>\n" +
+                                "<input name='useday' type='hidden' value='" + xml[i].useday + "'>\n" +//3
+                                "<td >" + xml[i].batch + "</td>\n" +
+                                "<input name='batch' type='hidden' value='" + xml[i].batch + "'>\n" +//3
+                                "<td >" + xml[i].zhuceNumber + "</td>\n" +
+                                "<td >" + xml[i].produceDay + "</td>\n" +
+                                "<input name='produceDay' type='hidden' value='" + xml[i].produceDay + "'>\n" +//3
+                                "<td ><input name='goodsCount' value='" + xml[i].goodsCount + "' onchange='hejiadd(this.value)' style='width: 185px;height: 28px;text-align: center;border: 1px solid #cac3c3;'/></td>\n" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                                "</tr>");//页面每个数量
+						}
+
 					}else if (goodsType==5){
                         $(".heji5").before("<tr class='val1'>" +
                             "<td >" + xml[i].goodsNum + "</td>\n" +
@@ -845,8 +978,9 @@
                             "<input name='goodsName' type='hidden' value='" + xml[i].goodsName + "'>\n" +//3
                             "<td>" + xml[i].factory + "</td>\n" +
 
-                            "<td>" + xml[i].tyjsize + "</td>\n" +
                             "<td>" + xml[i].tyjproducfactorycolor + "</td>\n" +
+                            "<td>" + xml[i].tyjsize + "</td>\n" +
+
 
                             "<td >" + xml[i].createTime + "</td>\n" +
                             "<input name='createTime' type='hidden' value='" + xml[i].createTime + "'>\n" +//3
@@ -996,6 +1130,7 @@
     function choiceGoods() {
         var mfrsid = document.getElementById('mfrsid').value;
         var goodVal = $("#gdname").val();
+        var styles = $("#styles").val();
         var mfrsname = document.getElementById('mfrsName').value;
         if (goodVal == "镜架") {
             // $(".val1").remove();
@@ -1177,189 +1312,375 @@
             });
             layer.full(toIndex);
         } else if (goodVal == "镜片") {
-            // $(".val3").remove();
-            var toIndex = layer.open({
-                type: 2,
-                title: '商品查询',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
-                content: "/stock/stock/jingpian/" + mfrsid + "/" + mfrsname,// iframe的url
-                cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
-                    for (var i = 0; i < rows.length; i++) {
-                        a = a + 1;
-                        b = b + 1;
-                        $(".heji3").before("<tr class='val3'>" +
-                            "<td >" + rows[i].producNum + "</td>\n" +
-                            "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
-                            "<td>" + rows[i].producName + "</td>\n" +
-                            "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
-                            "<td>" + rows[i].factory + "</td>\n" +
-                            "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
-                            "<td>" + rows[i].sph + "</td>\n" +
-                            "<td>" + rows[i].cyl + "</td>\n" +
-                            "<td>" + rows[i].lightbelow + "</td>\n" +
-                            "<td>" + rows[i].refractivityvalue + "</td>\n" +
-                            "<td>" + rows[i].lightName + "</td>\n" +
-                            "<td>" + rows[i].lensName + "</td>\n" +
-                            "<td >" + rows[i].createTime + "</td>\n" +
-                            "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
-                            "<td  >" + rows[i].producCode + "</td>\n" +
-                            "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
-                            "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
-                            "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
-                            "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
-                            "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
-                            "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
-                            "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
-                            "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
-                            "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
-                            "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
-                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+            if(styles==1){
+                // $(".val3").remove();
+                var toIndex = layer.open({
+                    type: 2,
+                    title: '商品查询',
+                    maxmin: true,
+                    shadeClose: false, // 点击遮罩关闭层
+                    area: ['800px', '520px'],
+                    content: "/stock/stock/jingpian/" + mfrsid + "/" + mfrsname,// iframe的url
+                    cancel: function (index, layero) {
+                        var rows = window[layero.find('iframe')[0]['name']].showCol();
+                        for (var i = 0; i < rows.length; i++) {
+                            a = a + 1;
+                            b = b + 1;
+                            $(".heji3").before("<tr class='val3'>" +
+                                "<td >" + rows[i].producNum + "</td>\n" +
+                                "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
+                                "<td>" + rows[i].producName + "</td>\n" +
+                                "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
+                                "<td>" + rows[i].factory + "</td>\n" +
+                                "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
+                                "<td>" + rows[i].sph + "</td>\n" +
+                                "<td>" + rows[i].cyl + "</td>\n" +
+                                "<td>" + rows[i].lightbelow + "</td>\n" +
+                                "<td>" + rows[i].refractivityvalue + "</td>\n" +
+                                "<td>" + rows[i].lightName + "</td>\n" +
+                                "<td>" + rows[i].lensName + "</td>\n" +
+                                "<td >" + rows[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
+                                "<td  >" + rows[i].producCode + "</td>\n" +
+                                "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
+                                "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
+                                "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
+                                "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
+                                "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
+                                "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
+                                "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                                "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
 
-                            "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
-                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
-                            "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
-                            "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
-                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                            "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
-                            "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
-                            "<td >" + rows[i].medicinecode + "</td>\n" +
-                            "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                            "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                            "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
-                            "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
-                            "<td><em  onclick='delertTr(this)'></em></td>\n" +
-                            "</tr>");//页面每个数量
-                        //日期
-                        laydate.render({
-                            elem: '#useday' + a,
-                            type: 'date',
-                            trigger: 'click',	  // 事件类型
-                            done: function (value, date, endDate) {
-                                var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18)
-                                if (value == "") {
-                                    console.log(123);
-                                    $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000"
-                                    $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000"
-                                    console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
-                                    // $('#goodsCode').val(data_val + "00000000")
-                                } else {
-                                    $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "")
-                                    $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "")
-                                    console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
-                                    // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                                "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
+                                "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
+                                // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
+                                "<td >" + rows[i].medicinecode + "</td>\n" +
+                                "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
+                                // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                                "</tr>");//页面每个数量
+                            //日期
+                            laydate.render({
+                                elem: '#useday' + a,
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
                                 }
-                                $(this).focus();
+                            });
+                            //日期
+                            laydate.render({
+                                elem: '#produceDay' + b,
+                                type: 'date'
+                            });
+                        }
 
-                            }
-                        });
-                        //日期
-                        laydate.render({
-                            elem: '#produceDay' + b,
-                            type: 'date'
-                        });
                     }
+                });
+			}else if (styles==2){
+                // $(".val3").remove();
+                var toIndex = layer.open({
+                    type: 2,
+                    title: '商品查询',
+                    maxmin: true,
+                    shadeClose: false, // 点击遮罩关闭层
+                    area: ['800px', '520px'],
+                    content: "/stock/stock/jpdz/" + mfrsid + "/" + mfrsname,// iframe的url
+                    cancel: function (index, layero) {
+                        var rows = window[layero.find('iframe')[0]['name']].showCol();
+                        for (var i = 0; i < rows.length; i++) {
+                            a = a + 1;
+                            b = b + 1;
+                            $(".heji3").before("<tr class='val3'>" +
+                                "<td >" + rows[i].producNum + "</td>\n" +
+                                "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
+                                "<td>" + rows[i].producName + "</td>\n" +
+                                "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
+                                "<td>" + rows[i].factory + "</td>\n" +
+                                "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
+                                "<td>" + rows[i].sphUp+'/'+rows[i].sphDown + "</td>\n" +
+                                "<td>" + rows[i].cylUp+'/'+rows[i].cylDown + "</td>\n" +
+                                "<td>" + rows[i].lightbelowRight + '/' + rows[i].lightbelowLeft+ "</td>\n" +
+                                "<td>" + rows[i].refractivityvalue + "</td>\n" +
+                                "<td>" + rows[i].lightName + "</td>\n" +
+                                "<td>" + rows[i].lensName + "</td>\n" +
+                                "<td >" + rows[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
+                                "<td  >" + rows[i].producCode + "</td>\n" +
+                                "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
+                                "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
+                                "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
+                                "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
+                                "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
+                                "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
+                                "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                                "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
 
-                }
-            });
+                                "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                                "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
+                                "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
+                                // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
+                                "<td >" + rows[i].medicinecode + "</td>\n" +
+                                "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
+                                // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                                "</tr>");//页面每个数量
+                            //日期
+                            laydate.render({
+                                elem: '#useday' + a,
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
+                            });
+                            //日期
+                            laydate.render({
+                                elem: '#produceDay' + b,
+                                type: 'date'
+                            });
+                        }
+
+                    }
+                });
+			}
             layer.full(toIndex);
         } else if (goodVal == "隐形") {
-            // $(".val4").remove();
-            var toIndex = layer.open({
-                type: 2,
-                title: '商品查询',
-                maxmin: true,
-                shadeClose: false, // 点击遮罩关闭层
-                area: ['800px', '520px'],
-                content: "/stock/stock/yinxing/" + mfrsid + "/" + mfrsname,// iframe的url
-                cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
-                    for (var i = 0; i < rows.length; i++) {
-                        a = a + 1;
-                        b = b + 1;
-                        $(".heji4").before("<tr class='val4'>" +
-                            "<td >" + rows[i].producNum + "</td>\n" +
-                            "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
-                            "<td>" + rows[i].producName + "</td>\n" +
-                            "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
-                            "<td>" + rows[i].factory + "</td>\n" +
-                            "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
-                            "<td>" + rows[i].sph + "</td>\n" +
-                            "<td>" + rows[i].cyl + "</td>\n" +
-                            "<td>" + rows[i].curvature + "</td>\n" +
-                            "<td>" + rows[i].diameter + "</td>\n" +
-                            "<td>" + rows[i].usageName + "</td>\n" +
-                            "<td>" + rows[i].typeName + "</td>\n" +
-                            "<td >" + rows[i].createTime + "</td>\n" +
-                            "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
-                            "<td  >" + rows[i].producCode + "</td>\n" +
-                            "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
-                            "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
-                            "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
-                            "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
-                            "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
-                            "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
-                            "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
-                            "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
-                            "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
-                            "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
-                            "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
-                            "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
-                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+            if(styles==1){
+                var toIndex = layer.open({
+                    type: 2,
+                    title: '商品查询',
+                    maxmin: true,
+                    shadeClose: false, // 点击遮罩关闭层
+                    area: ['800px', '520px'],
+                    content: "/stock/stock/yinxing/" + mfrsid + "/" + mfrsname,// iframe的url
+                    cancel: function (index, layero) {
+                        var rows = window[layero.find('iframe')[0]['name']].showCol();
+                        for (var i = 0; i < rows.length; i++) {
+                            a = a + 1;
+                            b = b + 1;
+                            $(".heji4").before("<tr class='val4'>" +
+                                "<td >" + rows[i].producNum + "</td>\n" +
+                                "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
+                                "<td>" + rows[i].producName + "</td>\n" +
+                                "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
+                                "<td>" + rows[i].factory + "</td>\n" +
+                                "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
+                                "<td>" + rows[i].sph + "</td>\n" +
+                                "<td>" + rows[i].cyl + "</td>\n" +
+                                "<td>" + rows[i].curvature + "</td>\n" +
+                                "<td>" + rows[i].diameter + "</td>\n" +
+                                "<td>" + rows[i].usageName + "</td>\n" +
+                                "<td>" + rows[i].typeName + "</td>\n" +
+                                "<td >" + rows[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
+                                "<td  >" + rows[i].producCode + "</td>\n" +
+                                "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
+                                "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
+                                "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
+                                "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
+                                "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
+                                "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
+                                "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                                "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
 
-                            "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
-                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
-                            "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
-                            "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                                "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
+                                "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
 
-                            // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                            "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
-                            "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
-                            "<td >" + rows[i].medicinecode + "</td>\n" +
-                            "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
-                            // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                            "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                            "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
-                            "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
-                            "<td><em  onclick='delertTr(this)'></em></td>\n" +
-                            "</tr>");//页面每个数量
-                        //日期
-                        laydate.render({
-                            elem: '#useday' + a,
-                            type: 'date',
-                            trigger: 'click',	  // 事件类型
-                            done: function (value, date, endDate) {
-                                var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18)
-                                if (value == "") {
-                                    console.log(123);
-                                    $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000"
-                                    $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000"
-                                    console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
-                                    // $('#goodsCode').val(data_val + "00000000")
-                                } else {
-                                    $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "")
-                                    $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "")
-                                    console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
-                                    // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
+                                "<td >" + rows[i].medicinecode + "</td>\n" +
+                                "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
+                                // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                                "</tr>");//页面每个数量
+                            //日期
+                            laydate.render({
+                                elem: '#useday' + a,
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
                                 }
-                                $(this).focus();
+                            });
+                            //日期
+                            laydate.render({
+                                elem: '#produceDay' + b,
+                                type: 'date'
+                            });
+                        }
 
-                            }
-                        });
-                        //日期
-                        laydate.render({
-                            elem: '#produceDay' + b,
-                            type: 'date'
-                        });
                     }
+                });
+            }else if (styles==2){
+                var toIndex = layer.open({
+                    type: 2,
+                    title: '商品查询',
+                    maxmin: true,
+                    shadeClose: false, // 点击遮罩关闭层
+                    area: ['800px', '520px'],
+                    content: "/stock/stock/yxdz/" + mfrsid + "/" + mfrsname,// iframe的url
+                    cancel: function (index, layero) {
+                        var rows = window[layero.find('iframe')[0]['name']].showCol();
+                        for (var i = 0; i < rows.length; i++) {
+                            a = a + 1;
+                            b = b + 1;
+                            $(".heji4").before("<tr class='val4'>" +
+                                "<td >" + rows[i].producNum + "</td>\n" +
+                                "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>\n" +
+                                "<td>" + rows[i].producName + "</td>\n" +
+                                "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>\n" +
+                                "<td>" + rows[i].factory + "</td>\n" +
+                                "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
+                                "<td>" + rows[i].sph + "</td>\n" +
+                                "<td>" + rows[i].cyl + "</td>\n" +
+                                "<td>" + rows[i].curvature + "</td>\n" +
+                                "<td>" + rows[i].diameter + "</td>\n" +
+                                "<td>" + rows[i].usageName + "</td>\n" +
+                                "<td>" + rows[i].typeName + "</td>\n" +
+                                "<td >" + rows[i].createTime + "</td>\n" +
+                                "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>\n" +
+                                "<td  >" + rows[i].producCode + "</td>\n" +
+                                "<input name='goodsCode' type='hidden' value='" + rows[i].producCode + "'>\n" +
+                                "<td style='display: none' >" + rows[i].retailPrice + "</td>\n" +
+                                "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].taxPrice + "</td>\n" +
+                                "<input name='costPrice' type='hidden' value='" + rows[i].taxPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].tradePrice + "</td>\n" +
+                                "<input  name='wholePrice' type='hidden' value='" + rows[i].tradePrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].transferPrice + "</td>\n" +
+                                "<input name='transferPrice' type='hidden' value='" + rows[i].transferPrice + "'>\n" +
+                                "<td style='display: none' >" + rows[i].unitname + "</td>\n" +
+                                "<input name='unit' type='hidden' value='" + rows[i].unitname + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].brandname + "</td>\n" +
+                                "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
 
-                }
-            });
+                                "<td  style='display: none'>" + rows[i].classtype + "</td>\n" +
+                                "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+                                "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
+                                "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
+
+                                // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='useday" + a + "' name='useday'  type=\"text\"/>" + "</td>\n" +
+                                "<td >" + "<input  name='batch' type='text'/>" + "</td>\n" +
+                                "<td >" + rows[i].medicinecode + "</td>\n" +
+                                "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
+                                // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
+                                "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
+                                "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                                "</tr>");//页面每个数量
+                            //日期
+                            laydate.render({
+                                elem: '#useday' + a,
+                                type: 'date',
+                                trigger: 'click',	  // 事件类型
+                                done: function (value, date, endDate) {
+                                    var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18)
+                                    if (value == "") {
+                                        console.log(123);
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000"
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000"
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + "00000000")
+                                    } else {
+                                        $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "")
+                                        $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "")
+                                        console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+                                        // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+                                    }
+                                    $(this).focus();
+
+                                }
+                            });
+                            //日期
+                            laydate.render({
+                                elem: '#produceDay' + b,
+                                type: 'date'
+                            });
+                        }
+
+                    }
+                });
+            }
+            // $(".val4").remove();
             layer.full(toIndex);
         } else if (goodVal == "护理液") {
             // $(".val5").remove();
