@@ -35,7 +35,9 @@ function load() {
 								offset:params.offset,
                                 saleNumber: $("#saleNumber").val(),
                                 name:$("#name").val(),
-                                phone1:$("#phone1").val()
+                                phone1:$("#phone1").val(),
+                                peijingDateStart:$("#peijingDateStart").val(),
+                                peijingDateEnd:$("#peijingDateEnd").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};

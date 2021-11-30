@@ -200,6 +200,8 @@
             <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
             <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
             <if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
+            <if test="peijingDateStart !=null and peijingDateStart != ''">and date_format(sa.peijing_time ,'%Y-%m-%d') >= #{peijingDateStart} </if>
+            <if test="peijingDateEnd !=null and peijingDateEnd != ''">and date_format(sa.peijing_time ,'%Y-%m-%d') &lt;= #{peijingDateEnd} </if>
             and sa.sale_type = '1'
         </where>
         <choose>
@@ -218,16 +220,18 @@
     <select id="findSalePeijingCount" resultType="int">
         select count(*)
         from store_sales sa
-        join log_status ls on ls.sale_number = sa.sale_number
+        left join log_status ls on ls.sale_number = sa.sale_number
         join member m on m.card_number = sa.member_number and m.state = 1 and m.`status` = 0
-        join department d on d.depart_number = m.depart_number
         <where>
             <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
             <if test="saleNumber !=null and saleNumber != ''">and sa.sale_number like concat('%', #{saleNumber},'%')</if>
             <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
             <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
             <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
-            <if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>
+            <if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
+            <if test="peijingDateStart !=null and peijingDateStart != ''">and date_format(sa.peijing_time ,'%Y-%m-%d') >= #{peijingDateStart} </if>
+            <if test="peijingDateEnd !=null and peijingDateEnd != ''">and date_format(sa.peijing_time ,'%Y-%m-%d') &lt;= #{peijingDateEnd} </if>
+            and sa.sale_type = '1'
         </where>
     </select>
 

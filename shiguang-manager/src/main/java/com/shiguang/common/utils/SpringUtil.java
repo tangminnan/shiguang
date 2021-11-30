@@ -92,4 +92,9 @@ public class SpringUtil implements ApplicationContextAware {
 
         return tempResult;
     }
+
+    public static String getStringData(String bytesStr,String startStr, int add,String endStr){
+        return bytesStr.substring(bytesStr.indexOf(startStr) + add, bytesStr.indexOf(endStr));
+    }
+
 }

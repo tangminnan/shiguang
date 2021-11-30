@@ -535,7 +535,7 @@ public class SaleGoodsController {
                                     //jjMoney = jjMoney + Double.valueOf(storeMoney[i]);
                                     if (null != storeMoney && !"".equals(storeMoney)){
                                         if (null != storeMoney[i] && !"".equals(storeMoney[i])){
-                                            sumMoney = sumMoney + Double.valueOf(storeMoney[i]);
+                                            sumMoney = sumMoney + Double.valueOf(Double.valueOf(storeMoney[i])*Integer.parseInt(storeCount[i]));
                                         }
                                     }
                                     if (null != goodsNum && !"".equals(goodsNum)){
@@ -582,7 +582,7 @@ public class SaleGoodsController {
                                     //jpMoney = jpMoney + Double.valueOf(storeMoney[i]);
                                     if (null != storeMoney && !"".equals(storeMoney)){
                                         if (null != storeMoney[i] && !"".equals(storeMoney[i])){
-                                            sumMoney = sumMoney + Double.valueOf(storeMoney[i]);
+                                            sumMoney = sumMoney + Double.valueOf(Double.valueOf(storeMoney[i])*Integer.parseInt(storeCount[i]));
                                         }
                                     }
                                     if (null != goodsNum && !"".equals(goodsNum)){
@@ -629,7 +629,7 @@ public class SaleGoodsController {
                                     //pjMoney = pjMoney + Double.valueOf(storeMoney[i]);
                                     if (null != storeMoney && !"".equals(storeMoney)){
                                         if (null != storeMoney[i] && !"".equals(storeMoney[i])){
-                                            sumMoney = sumMoney + Double.valueOf(storeMoney[i]);
+                                            sumMoney = sumMoney + Double.valueOf(Double.valueOf(storeMoney[i])*Integer.parseInt(storeCount[i]));
                                         }
                                     }
                                     if (null != goodsNum && !"".equals(goodsNum)){
@@ -676,7 +676,7 @@ public class SaleGoodsController {
                                     //yxMoney = yxMoney + Double.valueOf(storeMoney[i]);
                                     if (null != storeMoney && !"".equals(storeMoney)){
                                         if (null != storeMoney[i] && !"".equals(storeMoney[i])){
-                                            sumMoney = sumMoney + Double.valueOf(storeMoney[i]);
+                                            sumMoney = sumMoney + Double.valueOf(Double.valueOf(storeMoney[i])*Integer.parseInt(storeCount[i]));
                                         }
                                     }
                                     if (null != goodsNum && !"".equals(goodsNum)){
@@ -723,7 +723,7 @@ public class SaleGoodsController {
                                     //hlyMoney = hlyMoney + Double.valueOf(storeMoney[i]);
                                     if (null != storeMoney && !"".equals(storeMoney)){
                                         if (null != storeMoney[i] && !"".equals(storeMoney[i])){
-                                            sumMoney = sumMoney + Double.valueOf(storeMoney[i]);
+                                            sumMoney = sumMoney + Double.valueOf(Double.valueOf(storeMoney[i])*Integer.parseInt(storeCount[i]));
                                         }
                                     }
                                     if (null != goodsNum && !"".equals(goodsNum)){
@@ -770,7 +770,7 @@ public class SaleGoodsController {
                                     //sgMoney = sgMoney + Double.valueOf(storeMoney[i]);
                                     if (null != storeMoney && !"".equals(storeMoney)){
                                         if (null != storeMoney[i] && !"".equals(storeMoney[i])){
-                                            sumMoney = sumMoney + Double.valueOf(storeMoney[i]);
+                                            sumMoney = sumMoney + Double.valueOf(Double.valueOf(storeMoney[i])*Integer.parseInt(storeCount[i]));
                                         }
                                     }
                                     if (null != goodsNum && !"".equals(goodsNum)){
@@ -863,33 +863,36 @@ public class SaleGoodsController {
         java.text.NumberFormat numberformat=java.text.NumberFormat.getInstance();
         numberformat.setMaximumFractionDigits(2);
         List<Map<String,Object>> lists = new ArrayList<>();
-        String ss="";
         int totalCount = 0;
-        int a=-1;
+        List<String> listNum = new ArrayList<>();
         for (int i=0;i<list.size();i++){
+            listNum.add(list.get(i).get("goodsNum").toString());
+        }
+        Collections.sort(listNum);
+        for  ( int  i  =   0 ; i  <  listNum.size()  -   1 ; i ++ )  {
+            for  ( int  j  =  listNum.size()  -   1 ; j  >  i; j -- )  {
+                if  (listNum.get(j).equals(listNum.get(i)))  {
+                    listNum.remove(j);
+                }
+            }
+        }
+
+        for (int a=0;a<listNum.size();a++){
             Map<String,Object> map = new HashMap<>();
-            totalCount = totalCount + Integer.parseInt(list.get(i).get("count").toString());
-            if (ss.equals(list.get(i).get("goodsNum"))){
-                for (int j=0;j<lists.size();j++){
-                    map.put("goodsNum",list.get(i).get("goodsNum"));
-                    map.put("name",list.get(i).get("name"));
-                    map.put("count",Integer.parseInt(list.get(i).get("count").toString())
-                            + Integer.parseInt(lists.get(j).get("count").toString()));
-                    map.put("money",Double.valueOf(list.get(i).get("money").toString())
-                            + Double.valueOf(lists.get(j).get("money").toString()));
+            int count =0;
+            double countMoney = 0.00;
+            for (int d=0;d<list.size();d++){
+                if (listNum.get(a).equals(list.get(d).get("goodsNum"))){
+                    count = count + Integer.parseInt(list.get(d).get("count").toString());
+                    totalCount = totalCount + Integer.parseInt(list.get(d).get("count").toString());
+                    countMoney = countMoney + Double.valueOf(Double.valueOf(list.get(d).get("money").toString())*Integer.parseInt(list.get(d).get("count").toString()));
+                    map.put("goodsNum",list.get(d).get("goodsNum"));
+                    map.put("name",list.get(d).get("name"));
+                    map.put("count",count);
+                    map.put("money",countMoney);
                     double money = Double.valueOf(map.get("money")+"");
                     map.put("percent",numberformat.format((float)money/(float)sumMoney*100)+"%");
                 }
-                lists.remove(a);
-            } else {
-                a=a+1;
-                ss = list.get(i).get("goodsNum").toString();
-                map.put("goodsNum",list.get(i).get("goodsNum"));
-                map.put("name",list.get(i).get("name"));
-                map.put("count",list.get(i).get("count"));
-                map.put("money",list.get(i).get("money"));
-                double money = Double.valueOf(map.get("money")+"");
-                map.put("percent",numberformat.format((float)money/(float)sumMoney*100)+"%");
             }
             lists.add(map);
         }

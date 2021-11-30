@@ -35,6 +35,12 @@
 							<input id="phone1" type="text" class="form-control"
 								   placeholder="联系电话">
 						</div>
+						<div class="columns pull-right nopadding">
+							<input id="peijingDateStart" type="text"
+								   placeholder="开始日期">～
+							<input id="peijingDateEnd" type="text"
+								   placeholder="结束日期">
+						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
 					</table>
@@ -68,5 +74,17 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/logstatus/peijing.js"></script>
+<script type="text/javascript">
+    laydate.render({
+        elem: '#peijingDateStart',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+    laydate.render({
+        elem: '#peijingDateEnd',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+</script>
 </body>
 </html>

@@ -215,18 +215,25 @@ public class ExamineController {
         List<JDJInfoDO> jdjInfoDOS = lensMeterService.jdjList(map);
         if (null != jdjInfoDOS && jdjInfoDOS.size() > 0){
             String dataSerial = jdjInfoDOS.get(0).getJdjInfo();
+            String right = SpringUtil.getStringData(dataSerial," R",2,"PR");
             Long id = jdjInfoDOS.get(0).getId();
-            String zifuRightSph = dataSerial.substring(40,41);
-            String dd = dataSerial.substring(42, 46);
-            String rightsph = zifuRightSph + dataSerial.substring(42, 46);
-            String zifuRightCyl = dataSerial.substring(46, 47);
-            String rightcyl = zifuRightCyl +  dataSerial.substring(48, 52);
-            String rightzx = dataSerial.substring(52, 55);
-            String zifuLeftSph = dataSerial.substring(76, 77);
-            String leftsph = zifuLeftSph + dataSerial.substring(78, 82);
-            String zifuLeftCyl = dataSerial.substring(82, 83);
-            String leftcyl = zifuLeftCyl + dataSerial.substring(84, 88);
-            String leftzx = dataSerial.substring(88, 91);
+            String zifuRightSph = right.substring(0,1);
+            String rightsph = zifuRightSph + right.substring(2,6);
+            String zifuRightCyl = right.substring(6,7);
+            String rightcyl = zifuRightCyl + right.substring(8, 12);
+            String rightzx = right.substring(12, 15);
+            if ("0".equals(rightzx.substring(0,1))){
+                rightzx =  right.substring(13, 15);
+            }
+            String left = SpringUtil.getStringData(dataSerial," L",2,"PR");
+            String zifuLeftSph = left.substring(0, 1);
+            String leftsph = zifuLeftSph + left.substring(2, 6);
+            String zifuLeftCyl = left.substring(6, 7);
+            String leftcyl = zifuLeftCyl + left.substring(8, 12);
+            String leftzx = left.substring(12, 15);
+            if ("0".equals(leftzx.substring(0,1))){
+                leftzx =  left.substring(13, 15);
+            }
             LensMeterDO lensMeterDOs = new LensMeterDO();
             lensMeterDOs.setRightSph(rightsph);
             lensMeterDOs.setRightCyl(rightcyl);
