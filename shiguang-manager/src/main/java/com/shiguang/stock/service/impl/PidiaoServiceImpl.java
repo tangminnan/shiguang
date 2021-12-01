@@ -27,12 +27,12 @@ public class PidiaoServiceImpl implements PidiaoService {
 	public List<PidiaoDO> list(Map<String, Object> map){
 		return pidiaoDao.list(map);
 	}
-	
+
 	@Override
 	public int count(Map<String, Object> map){
 		return pidiaoDao.count(map);
 	}
-	
+
 	@Override
 	public int save(PidiaoDO pidiao){
 		return pidiaoDao.save(pidiao);
@@ -101,5 +101,10 @@ public class PidiaoServiceImpl implements PidiaoService {
 	@Override
 	public int countall(Map<String, Object> map) {
 		return pidiaoDao.countall(map);
+	}
+
+	@Override
+	public List<PidiaoDO> getCode(Map<String, Object> map) {
+		return pidiaoDao.getCode(map);
 	}
 }

@@ -141,6 +141,8 @@ public class ShiguangController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(ShiguangDO shiguang) {
+        String name=shiguang.getBrandname()+"-型号:"+shiguang.getFactory()+"-标价:"+shiguang.getRetailPrice();
+        shiguang.setProducName(name);
         shiguangService.update(shiguang);
         return R.ok();
     }

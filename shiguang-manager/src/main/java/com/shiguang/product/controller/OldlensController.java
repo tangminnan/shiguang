@@ -169,6 +169,8 @@ public class OldlensController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(OldlensDO oldlens) {
+        String name=oldlens.getBrandname() +"-球镜:"+oldlens.getOldId()+"-型号:"+oldlens.getFactory()+"-标价:"+oldlens.getRetailPrice();
+        oldlens.setProducName(name);
         oldlensService.update(oldlens);
         return R.ok();
     }

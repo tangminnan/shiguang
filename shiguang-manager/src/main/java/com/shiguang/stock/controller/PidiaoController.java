@@ -112,8 +112,8 @@ public class PidiaoController {
 
 
         }
-//        int total = pidiaoService.count(query);
-        int total = pidiaoList.size();
+        int total = pidiaoService.count(query);
+//        int total = pidiaoList.size();
         PageUtils pageUtils = new PageUtils(pidiaoList, total);
         return pageUtils;
     }
@@ -791,6 +791,31 @@ public class PidiaoController {
         return total;
     }
 
+
+
+    /**
+     * 浏览器打印二维码一个
+     */
+    @GetMapping("/codeOne")
+    public String codeOne(String pidiaoNumber,String codeOne, Model model) {
+        String goods = codeOne.substring(0,1);
+        Map<String, Object> map = new HashMap<>();
+        map.put("pidiaoNumber",pidiaoNumber);
+        map.put("codeOne",codeOne);
+        List<PidiaoDO> pidiaoDOS = pidiaoService.getCode(map);
+        model.addAttribute("pidiaoDOS", pidiaoDOS);
+        for (PidiaoDO pidiaoDO : pidiaoDOS){
+            String code = QRCodeUtil.creatRrCode(pidiaoDO.getGoodsCode(), 200,200);
+            code = "data:image/png;base64," + code;
+            pidiaoDO.setQRCode(code);
+        }
+
+        if ("1".equals(goods)){
+            return "/stock/pidiao/codeJingjiaOne";
+        }else {
+            return "/stock/pidiao/codeOne";
+        }
+    }
 }
 
 

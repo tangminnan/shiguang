@@ -50,7 +50,7 @@
                 </td>
                 <td>商品品种：</td>
                 <td style="width:20%;">
-                    <input th:value="${hc.brandname}" type="text" readonly style="background-color: #e4e4e4">
+                    <input name="brandname" th:value="${hc.brandname}" type="text" readonly style="background-color: #e4e4e4">
                     <input id="brandid" name="brandid" th:value="${hc.brandid}"
                            type="hidden">
                     <em>*</em>
@@ -192,19 +192,19 @@
             <tr>
                 <td>税率（%）：</td>
                 <td>
-                    <input id="tax" name="tax" th:value="${hc.tax}" type="text" oninput="getmoney(this,10)" autofocus>
+                    <input id="tax" name="tax" th:value="${hc.tax}" type="text"   autofocus>
                     <em>*</em>
                 </td>
                 <td>含税单价：</td>
                 <td>
                     <input id="taxPrice" name="taxPrice" th:value="${hc.taxPrice}"
-                           type="text" oninput="getmoney(this,10)" autofocus>
+                           type="text" oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus>
                     <!--<em>*</em>-->
                 </td>
                 <td>批发价格：</td>
                 <td colspan="3">
                     <input id="tradePrice" name="tradePrice" th:value="${hc.tradePrice}"
-                           type="text" oninput="getmoney(this,10)" autofocus>
+                           type="text" oninput="getmoney(this,10)"  onchange="shuzi(this)" autofocus>
                     <!--<em>*</em>-->
                 </td>
             </tr>
@@ -212,13 +212,13 @@
                 <td>调货成本：</td>
                 <td>
                     <input id="transferPrice" name="transferPrice" th:value="${hc.transferPrice}"
-                           type="text" oninput="getmoney(this,10)" autofocus>
+                           type="text" oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus>
                     <!--<em>*</em>-->
                 </td>
                 <td>标准零售价格：</td>
                 <td colspan="3">
                     <input id="retailPrice" name="retailPrice" th:value="${hc.retailPrice}"
-                           type="text" oninput="getmoney(this,10)" autofocus style="width: 29%">
+                           type="text" oninput="getmoney(this,10)" onchange="shuzi(this)"  autofocus style="width: 29%">
                     <em>*</em>
                 </td>
             </tr>
@@ -325,6 +325,15 @@
         }
     }
 
+    function shuzi(e) {
+        var val = parseFloat(e.value);
+        val=parseInt(val*100)/100;
+        if (val > 0) {
+            e.value = val.toFixed(2)
+        } else if (val <= 0) {
+            e.value = val.toFixed(2)
+        }
+    };
 </script>
 </body>
 

@@ -260,11 +260,14 @@ public class JpcpController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(JpcpDO jpcp) {
-        //判断是否已存在
-        Integer value = jpcp.getLightId();
-        if (value != 5) {
-            jpcp.setGradualId(1);
-        }
+
+//        Integer value = jpcp.getLightId();
+//        if (value != 5) {
+//            jpcp.setGradualId(1);
+//        }
+
+        String name=jpcp.getBrandname()+"-球镜:"+jpcp.getCylId()+"-柱镜:"+jpcp.getSphId()+"-颜色:"+"-标价:"+jpcp.getRetailPrice();
+        jpcp.setProducName(name);
         jpcpService.update(jpcp);
 
         return R.ok();

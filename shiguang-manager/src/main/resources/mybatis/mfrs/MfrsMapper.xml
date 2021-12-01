@@ -36,7 +36,8 @@
 
             <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum LIKE concat(concat('%', #{mfrsnum}),'%')</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
-            <if test="goodsid != null and goodsid != ''">and g.goodsid in (#{goodsid})</if>
+            <!--<if test="goodsid != null and goodsid != ''">and g.goodsid in (#{goodsid})</if>-->
+            <if test="goodsid != null and goodsid != ''">and FIND_IN_SET (#{goodsid},m.goodsid)</if>
             <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state =1
@@ -61,7 +62,7 @@
         <where>
             <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum LIKE concat(concat('%', #{mfrsnum}),'%')</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
-            <if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid}</if>
+            <if test="goodsid != null and goodsid != ''">and FIND_IN_SET (#{goodsid},m.goodsid)</if>
             <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
             <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
             and m.state =1

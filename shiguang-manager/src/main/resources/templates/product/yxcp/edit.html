@@ -52,7 +52,7 @@
                 </td>
                 <td>商品品种：</td>
                 <td style="width:20%;">
-                    <input th:value="${yxcp.brandname}" style="background-color: #e4e4e4"
+                    <input name="brandname" th:value="${yxcp.brandname}" style="background-color: #e4e4e4"
                            type="text" readonly>
                     <input id="brandid" name="brandid" th:value="${yxcp.brandid}"
                            type="hidden">
@@ -81,30 +81,34 @@
                 </td>
                 <td>球镜：</td>
                 <td>
-                    <select id="sphId" name="sphId" th:value="${yxcp.sphId}" class="form-control"
-                            data-actions-box="false" data-size="5" disabled>
-                        <option></option>
-                        <option th:each="ls:${sphDOList}"
-                                th:text="${ls.sph}"
-                                th:value="${ls.sph}"
-                        ></option>
-                        <input id="sphIds" name="sphIds" th:value="${yxcp.sphId}" class="form-control"
-                               type="hidden">
-                    </select>
+                    <!--<select id="sphId" name="sphId" th:value="${yxcp.sphId}" class="form-control"-->
+                            <!--data-actions-box="false" data-size="5" disabled>-->
+                        <!--<option></option>-->
+                        <!--<option th:each="ls:${sphDOList}"-->
+                                <!--th:text="${ls.sph}"-->
+                                <!--th:value="${ls.sph}"-->
+                        <!--&gt;</option>-->
+                        <!--<input id="sphIds" name="sphIds" th:value="${yxcp.sphId}" class="form-control"-->
+                               <!--type="hidden">-->
+                    <!--</select>-->
+                    <input id="sphId" name="sphId" th:value="${yxcp.sphId}"  class="form-control"
+                            style="background-color: #e4e4e4" type="text" readonly>
                     <em>*</em>
                 </td>
                 <td>柱镜：</td>
                 <td>
-                    <select id="cylId" name="cylId" th:value="${yxcp.cylId}" class="form-control"
-                            data-actions-box="false" data-size="5" disabled>
-                        <option></option>
-                        <option th:each="ls:${cylDOList}"
-                                th:text="${ls.cyl}"
-                                th:value="${ls.cyl}"
-                        ></option>
-                        <input id="cylIds" name="cylIds" th:value="${yxcp.cylId}" class="form-control"
-                               type="hidden">
-                    </select>
+                    <!--<select id="cylId" name="cylId" th:value="${yxcp.cylId}" class="form-control"-->
+                            <!--data-actions-box="false" data-size="5" disabled>-->
+                        <!--<option></option>-->
+                        <!--<option th:each="ls:${cylDOList}"-->
+                                <!--th:text="${ls.cyl}"-->
+                                <!--th:value="${ls.cyl}"-->
+                        <!--&gt;</option>-->
+                        <!--<input id="cylIds" name="cylIds" th:value="${yxcp.cylId}" class="form-control"-->
+                               <!--type="hidden">-->
+                    <!--</select>-->
+                    <input id="cylId" name="cylId" th:value="${yxcp.cylId}"  class="form-control"
+                           style="background-color: #e4e4e4" type="text" readonly>
                     <em>*</em>
                 </td>
             </tr>
@@ -245,14 +249,14 @@
                 <td>含税单价：</td>
                 <td>
                     <input id="taxPrice" name="taxPrice" th:value="${yxcp.taxPrice}" type="text"
-                           oninput="getmoney(this,10)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
                     <!--<em>*</em>-->
                 </td>
                 <td>批发价格：</td>
                 <td colspan="3">
                     <input id="tradePrice" name="tradePrice" th:value="${yxcp.tradePrice}" type="text"
                            style="width: 60%"
-                           oninput="getmoney(this,10)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
                     <!--<em>*</em>-->
                 </td>
             </tr>
@@ -260,14 +264,14 @@
                 <td>调货成本：</td>
                 <td>
                     <input id="transferPrice" name="transferPrice" th:value="${yxcp.transferPrice}" type="text"
-                           oninput="getmoney(this,10)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
                     <!--<em>*</em>-->
                 </td>
                 <td>标准零售价格：</td>
                 <td colspan="3">
                     <input id="retailPrice" name="retailPrice" th:value="${yxcp.retailPrice}" type="text"
                            style="width: 29%"
-                           oninput="getmoney(this,10)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
                     <em>*</em>
                 </td>
             </tr>
@@ -337,6 +341,15 @@
             }
         }
     }
+    function shuzi(e) {
+        var val = parseFloat(e.value);
+        val=parseInt(val*100)/100;
+        if (val > 0) {
+            e.value = val.toFixed(2)
+        } else if (val <= 0) {
+            e.value = val.toFixed(2)
+        }
+    };
 </script>
 </body>
 </html>

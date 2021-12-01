@@ -20,9 +20,9 @@ public interface PidiaoService {
 	PidiaoDO get(Long id);
 
 	List<PidiaoDO> list(Map<String, Object> map);
-	
+
 	int count(Map<String, Object> map);
-	
+
 	int save(PidiaoDO pidiao);
 	
 	int update(PidiaoDO pidiao);
@@ -53,4 +53,5 @@ public interface PidiaoService {
 	List<PidiaoDO> pidiaodan(Map<String,Object>map);
 	int countall(Map<String, Object> map);
 
+	List<PidiaoDO> getCode(Map<String, Object> map);
 }

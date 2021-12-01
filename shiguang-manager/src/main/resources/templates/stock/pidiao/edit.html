@@ -101,6 +101,7 @@
 				<td style="display: none">类别</td>
 				<td style="display: none">制造商</td>
 				<td style="display: none">品牌</td>
+				<td>操作</td>
 			</tr>
 			<tr class="liebiao">
 
@@ -140,9 +141,10 @@
 
 
                         "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>\n" +
-                        "<td name='gdname' style='display: none'>" + xml[i].gdname + "</td>\n" +
+                        "<td name='goods' style='display: none'>" + xml[i].goods + "</td>\n" +
                         "<td name='mfrsid' style='display: none'>" + xml[i].mfrsid + "</td>\n" +
                         "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>\n" +
+                        "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
                         "</tr>");
                 }
             }
@@ -176,6 +178,13 @@
                 $("#countall").val(xml);
             }
         })
+    }
+
+    function codeDayin(object) {
+        var codeOne =object;
+        var pidiaoNumber = $('#pidiaoNumber').val();
+		window.open("/stock/pidiao/codeOne?pidiaoNumber="+pidiaoNumber+'&codeOne='+codeOne);
+
     }
 </script>
 </body>

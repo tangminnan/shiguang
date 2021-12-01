@@ -119,12 +119,12 @@
 		</if>
 	</select>
 	
- 	<select id="count" resultType="int">
+ 	<select id="countLsit" resultType="int">
 		select count(*) from stock_pidiao
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="pidiaoNumber != null and pidiaoNumber != ''"> and pidiao_number = #{pidiaoNumber} </if>
-		  		  <if test="guanlianNumber != null and guanlianNumber != ''"> and guanlian_number = #{guanlianNumber} </if>
+		  	<if test="id != null and id != ''"> and id = #{id} </if>
+		  	<if test="pidiaoNumber != null and pidiaoNumber != ''"> and pidiao_number = #{pidiaoNumber} </if>
+		  	<if test="guanlianNumber != null and guanlianNumber != ''"> and guanlian_number = #{guanlianNumber} </if>
 
 			 <if test="outDepartmentid != null and outDepartmentid != ''"> and out_departmentid = #{outDepartmentid} </if>
 			 <if test="outPositionid != null and outPositionid != ''"> and out_positionid = #{outPositionid} </if>
@@ -168,7 +168,10 @@
 		group by pidiao_number
 		order by id desc
 	</select>
-	 
+	 <select id="count" resultType="int">
+		 select COUNT(DISTINCT pidiao_number) from stock_pidiao
+	</select>
+
 	<insert id="save" parameterType="com.shiguang.stock.domain.PidiaoDO" useGeneratedKeys="true" keyProperty="id">
 		insert into stock_pidiao
 		(
@@ -412,9 +415,19 @@
 
 
 	<select id="countall" resultType="int">
-		select  sum(goods_count) from stock_pidiao
+		select  sum(use_count) from stock_pidiao
 		<where>
 			<if test="pidiaoNumber != null and pidiaoNumber != ''">and  pidiao_number = #{pidiaoNumber}</if>
+		</where>
+	</select>
+
+	<select id="getCode" resultType="com.shiguang.stock.domain.PidiaoDO">
+		select pd.goods_name,pd.goods_code,pd.goods_count,pd.factory,pd.money as retail_price,p.produc_factorycolor,p.view_good_name
+		from stock_pidiao pd
+		left join  aa_produca p on pd.goods_num=p.produc_num
+		<where>
+			<if test="pidiaoNumber != null and pidiaoNumber != ''">and pd.pidiao_number = #{pidiaoNumber}</if>
+			<if test="codeOne != null and codeOne != ''">and pd.goods_code = #{codeOne}</if>
 		</where>
 	</select>
 </mapper>

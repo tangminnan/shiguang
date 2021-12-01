@@ -141,6 +141,8 @@ public class HlyController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(HlyDO hly) {
+        String name=hly.getBrandname()+"-型号:"+hly.getFactory()+"-标价:"+hly.getRetailPrice();
+        hly.setProducName(name);
         hlyService.update(hly);
         return R.ok();
     }

@@ -396,6 +396,11 @@ function showCol() {
         }else {
             var gdname = row['gdname'] ;
         }
+        if(null == row['goods']){
+            var goods  ="";
+        }else {
+            var goods = row['goods'] ;
+        }
 
         if(null == row['mfrsname']){
             var mfrsname  ="";
@@ -498,6 +503,7 @@ function showCol() {
         obj.goodsName = goodsName;
         obj.goodsCount = goodsCount;
         obj.gdname = gdname;
+        obj.goods = goods;
         obj.factory = factory;
         obj.mfrsname = mfrsname;
 

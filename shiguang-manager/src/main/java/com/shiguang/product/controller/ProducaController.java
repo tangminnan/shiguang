@@ -212,10 +212,11 @@ ProducaController {
     @RequestMapping("/update")
     @RequiresPermissions("product:produca:edit")
     public R update(ProducaDO produca) {
+       String name= produca.getBrandname()+"-型号:"+produca.getFactory()+"-色号:"+produca.getProducColor()+"-标价:"+produca.getRetailPrice();
+        produca.setProducName(name);
         producaService.update(produca);
         return R.ok();
     }
-
     /**
      * 批量删除
      */

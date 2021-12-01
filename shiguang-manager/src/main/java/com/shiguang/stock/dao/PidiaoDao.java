@@ -54,4 +54,6 @@ public interface PidiaoDao {
 	List<PidiaoDO> pidiaodan(Map<String,Object>map);
 
 	int countall(Map<String, Object> map);
+
+	List<PidiaoDO> getCode(Map<String, Object> map);
 }

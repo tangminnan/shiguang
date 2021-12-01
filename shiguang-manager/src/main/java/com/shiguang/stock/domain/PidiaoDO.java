@@ -17,6 +17,7 @@ import java.util.Date;
 public class PidiaoDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+
 	//批调id
 	private Long id;
 	//商品信息id
@@ -896,5 +897,35 @@ public class PidiaoDO implements Serializable {
 
 	public void setLensName(String lensName) {
 		this.lensName = lensName;
+	}
+	//条码
+	private String QRCode;
+	//名称
+	private String viewGoodName;
+	//色号
+	private String producFactorycolor;
+
+	public String getViewGoodName() {
+		return viewGoodName;
+	}
+
+	public void setViewGoodName(String viewGoodName) {
+		this.viewGoodName = viewGoodName;
+	}
+
+	public String getQRCode() {
+		return QRCode;
+	}
+
+	public void setQRCode(String QRCode) {
+		this.QRCode = QRCode;
+	}
+
+	public String getProducFactorycolor() {
+		return producFactorycolor;
+	}
+
+	public void setProducFactorycolor(String producFactorycolor) {
+		this.producFactorycolor = producFactorycolor;
 	}
 }

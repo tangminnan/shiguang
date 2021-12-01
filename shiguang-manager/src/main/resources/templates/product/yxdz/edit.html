@@ -52,7 +52,7 @@
                 </td>
                 <td>商品品种：</td>
                 <td style="width:20%;">
-                    <input th:value="${yxdz.brandname}" style="background-color: #e4e4e4"
+                    <input name="brandname" th:value="${yxdz.brandname}" style="background-color: #e4e4e4"
                            type="text" readonly>
                     <input id="brandid" name="brandid" th:value="${yxdz.brandid}"
                            type="hidden">
@@ -100,71 +100,83 @@
                 <td>球镜：</td>
                 <td>
                     上限
-                    <select id="sphUp" name="sphUp" th:value="${yxdz.sphUp}" style="width:15%"
-                            data-actions-box="false" data-size="5">
-                        <option th:each="ls:${sphDOList}"
-                                th:text="${ls.sph}"
-                                th:value="${ls.sph}"
-                        ></option>
-                        <input id="sphUps" name="sphUps" th:value="${yxdz.sphUp}" class="form-control"
-                               type="hidden">
-                    </select>
+                    <!--<select id="sphUp" name="sphUp" th:value="${yxdz.sphUp}" style="width:15%"-->
+                            <!--data-actions-box="false" data-size="5">-->
+                        <!--<option th:each="ls:${sphDOList}"-->
+                                <!--th:text="${ls.sph}"-->
+                                <!--th:value="${ls.sph}"-->
+                        <!--&gt;</option>-->
+                        <!--<input id="sphUps" name="sphUps" th:value="${yxdz.sphUp}" class="form-control"-->
+                               <!--type="hidden">-->
+                    <!--</select>-->
+                    <input id="sphUp" name="sphUp" th:value="${yxdz.sphUp}"  class="form-control"
+                           style="width: 15%;background-color: #e4e4e4" type="text" readonly>
                     下限
-                    <select id="sphDown" name="sphDown" th:value="${yxdz.sphDown}" style="width:15%"
-                            data-actions-box="false" data-size="5">
-                        <option th:each="ls:${sphDOList}"
-                                th:text="${ls.sph}"
-                                th:value="${ls.sph}"
-                        ></option>
-                        <input id="sphDowns" name="sphDowns" th:value="${yxdz.sphDown}" class="form-control"
-                               type="hidden">
-                    </select>
+                    <!--<select id="sphDown" name="sphDown" th:value="${yxdz.sphDown}" style="width:15%"-->
+                            <!--data-actions-box="false" data-size="5">-->
+                        <!--<option th:each="ls:${sphDOList}"-->
+                                <!--th:text="${ls.sph}"-->
+                                <!--th:value="${ls.sph}"-->
+                        <!--&gt;</option>-->
+                        <!--<input id="sphDowns" name="sphDowns" th:value="${yxdz.sphDown}" class="form-control"-->
+                               <!--type="hidden">-->
+                    <!--</select>-->
+                    <input  id="sphDown" name="sphDown" th:value="${yxdz.sphDown}"  class="form-control"
+                           style="width: 15%;background-color: #e4e4e4" type="text" readonly>
                     跨度
-                    <select id="sphSpan" name="sphSpan" th:value="${yxdz.sphSpan}" style="width:15%"
-                            data-actions-box="false" data-size="5">
-                        <option th:each="ls:${spanDOList}"
-                                th:text="${ls.span}"
-                                th:value="${ls.span}"
-                        ></option>
-                        <input id="sphSpans" name="sphSpans" th:value="${yxdz.sphSpan}" class="form-control"
-                               type="hidden">
-                    </select>
+                    <!--<select id="sphSpan" name="sphSpan" th:value="${yxdz.sphSpan}" style="width:15%"-->
+                            <!--data-actions-box="false" data-size="5">-->
+                        <!--<option th:each="ls:${spanDOList}"-->
+                                <!--th:text="${ls.span}"-->
+                                <!--th:value="${ls.span}"-->
+                        <!--&gt;</option>-->
+                        <!--<input id="sphSpans" name="sphSpans" th:value="${yxdz.sphSpan}" class="form-control"-->
+                               <!--type="hidden">-->
+                    <!--</select>-->
+                    <input id="sphSpan" name="sphSpan" th:value="${yxdz.sphSpan}" class="form-control"
+                           style="width: 15%;background-color: #e4e4e4" type="text" readonly>
                     <em>*</em>
                 </td>
                 <td>柱镜：</td>
                 <td>
                     上限
-                    <select id="cylUp" name="cylUp" th:value="${yxdz.cylUp}" data-actions-box="false" style="width:55%"
-                            data-size="5">
-                        <option th:each="ls:${cylDOList}"
-                                th:text="${ls.cyl}"
-                                th:value="${ls.cyl}"
-                        ></option>
-                        <input id="cylUps" name="cylUps" th:value="${yxdz.cylUp}" class="form-control"
-                               type="hidden">
-                    </select>
+                    <!--<select id="cylUp" name="cylUp" th:value="${yxdz.cylUp}" data-actions-box="false" style="width:55%"-->
+                            <!--data-size="5">-->
+                        <!--<option th:each="ls:${cylDOList}"-->
+                                <!--th:text="${ls.cyl}"-->
+                                <!--th:value="${ls.cyl}"-->
+                        <!--&gt;</option>-->
+                        <!--<input id="cylUps" name="cylUps" th:value="${yxdz.cylUp}" class="form-control"-->
+                               <!--type="hidden">-->
+                    <!--</select>-->
+                    <input id="cylUp" name="cylUp" th:value="${yxdz.cylUp}"  class="form-control"
+                           style="width: 55%;background-color: #e4e4e4" type="text" readonly>
                     <br>
                     下限
-                    <select id="cylDown" name="cylDown" th:value="${yxdz.cylDown}" style="width:55%"
-                            data-actions-box="false" data-size="5">
-                        <option th:each="ls:${cylDOList}"
-                                th:text="${ls.cyl}"
-                                th:value="${ls.cyl}"
-                        ></option>
-                        <input id="cylDowns" name="cylDowns" th:value="${yxdz.cylDown}" class="form-control"
-                               type="hidden">
-                    </select>
+                    <!--<select id="cylDown" name="cylDown" th:value="${yxdz.cylDown}" style="width:55%"-->
+                            <!--data-actions-box="false" data-size="5">-->
+                        <!--<option th:each="ls:${cylDOList}"-->
+                                <!--th:text="${ls.cyl}"-->
+                                <!--th:value="${ls.cyl}"-->
+                        <!--&gt;</option>-->
+                        <!--<input id="cylDowns" name="cylDowns" th:value="${yxdz.cylDown}" class="form-control"-->
+                               <!--type="hidden">-->
+                    <!--</select>-->
+                    <input id="cylDown" name="cylDown" th:value="${yxdz.cylDown}" class="form-control"
+                           style="width: 55%;background-color: #e4e4e4" type="text" readonly>
                     <br>
                     跨度
-                    <select id="cylSpan" name="cylSpan" th:value="${yxdz.cylSpan}" style="width:55%"
-                            data-actions-box="false" data-size="5">
-                        <option th:each="ls:${spanDOList}"
-                                th:text="${ls.span}"
-                                th:value="${ls.span}"
-                        ></option>
-                        <input id="cylSpans" name="cylSpans" th:value="${yxdz.cylSpan}" class="form-control"
-                               type="hidden">
-                    </select>
+                    <!--<select id="cylSpan" name="cylSpan" th:value="${yxdz.cylSpan}" style="width:55%"-->
+                            <!--data-actions-box="false" data-size="5">-->
+                        <!--<option th:each="ls:${spanDOList}"-->
+                                <!--th:text="${ls.span}"-->
+                                <!--th:value="${ls.span}"-->
+                        <!--&gt;</option>-->
+                        <!--<input id="cylSpans" name="cylSpans" th:value="${yxdz.cylSpan}" class="form-control"-->
+                               <!--type="hidden">-->
+                    <!--</select>-->
+                    <input id="cylSpan" name="cylSpan" th:value="${yxdz.cylSpan}" class="form-control"
+                           style="width: 55%;background-color: #e4e4e4" type="text" readonly>
                     <em>*</em>
                 </td>
                 <td>曲率1：</td>
@@ -209,8 +221,9 @@
                 <td>
                     <input id="cycle" name="cycle" th:value="${yxdz.cycle}" class="form-control"
                            type="text">天
+                    <em>*</em>
+
                 </td>
-                <em>*</em>
                 <td>销售状态：</td>
                 <td>
                     <input th:field="*{yxdz.xsstate}" name="xsstate" value="1" type="radio" id="PH-S"> <label for="PH-S"
@@ -330,14 +343,14 @@
                 <td>含税单价：</td>
                 <td>
                     <input id="taxPrice" name="taxPrice" th:value="${yxdz.taxPrice}" type="text"
-                           oninput="getmoney(this,10)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
                     <!--<em>*</em>-->
                 </td>
                 <td>批发价格：</td>
                 <td colspan="3">
                     <input id="tradePrice" name="tradePrice" th:value="${yxdz.tradePrice}" type="text"
                            style="width: 60%"
-                           oninput="getmoney(this,10)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
                     <!--<em>*</em>-->
                 </td>
             </tr>
@@ -345,14 +358,14 @@
                 <td>调货成本：</td>
                 <td>
                     <input id="transferPrice" name="transferPrice" th:value="${yxdz.transferPrice}" type="text"
-                           oninput="getmoney(this,10)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
                     <!--<em>*</em>-->
                 </td>
                 <td>标准零售价格：</td>
                 <td colspan="3">
                     <input id="retailPrice" name="retailPrice" th:value="${yxdz.retailPrice}" type="text"
                            style="width: 29%"
-                           oninput="getmoney(this,10)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
                     <em>*</em>
                 </td>
             </tr>
@@ -467,7 +480,15 @@
             }
         }
     }
-
+    function shuzi(e) {
+        var val = parseFloat(e.value);
+        val=parseInt(val*100)/100;
+        if (val > 0) {
+            e.value = val.toFixed(2)
+        } else if (val <= 0) {
+            e.value = val.toFixed(2)
+        }
+    };
 </script>
 
 </body>

@@ -156,6 +156,8 @@ public class PartsController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(PartsDO parts) {
+        String name=parts.getBrandname()+"-型号:"+parts.getFactory()+"-标价:"+parts.getRetailPrice();
+        parts.setProducName(name);
         partsService.update(parts);
         return R.ok();
     }

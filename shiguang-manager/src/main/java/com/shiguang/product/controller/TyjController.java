@@ -157,6 +157,8 @@ public class TyjController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(TyjDO tyj) {
+        String name=tyj.getBrandname()+"-型号:"+tyj.getFactory()+"-颜色:"+tyj.getProducColor()+"-标价:"+tyj.getRetailPrice();
+        tyj.setProducName(name);
         tyjService.update(tyj);
         return R.ok();
     }

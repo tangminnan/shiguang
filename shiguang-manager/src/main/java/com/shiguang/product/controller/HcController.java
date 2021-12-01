@@ -140,6 +140,8 @@ public class HcController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(HcDO hc) {
+        String name= hc.getBrandname()+"-型号:"+hc.getFactory()+"-标价:"+hc.getRetailPrice();
+        hc.setProducName(name);
         hcService.update(hc);
         return R.ok();
     }

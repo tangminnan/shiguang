@@ -259,6 +259,8 @@ public class JpdzController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(JpdzDO jpdz) {
+        String name=jpdz.getBrandname()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-颜色:"+"-标价:"+jpdz.getRetailPrice();
+        jpdz.setProducName(name);
         jpdzService.update(jpdz);
         return R.ok();
     }

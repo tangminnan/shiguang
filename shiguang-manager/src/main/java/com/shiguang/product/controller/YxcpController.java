@@ -264,6 +264,8 @@ public class YxcpController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(YxcpDO yxcp) {
+        String name=yxcp.getBrandname()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-颜色:"+"-标价:"+yxcp.getRetailPrice();
+        yxcp.setProducName(name);
         yxcpService.update(yxcp);
         return R.ok();
     }

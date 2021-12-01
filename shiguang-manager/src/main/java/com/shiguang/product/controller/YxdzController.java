@@ -265,6 +265,8 @@ public class YxdzController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(YxdzDO yxdz) {
+        String name=yxdz.getBrandname()+"-球镜:"+yxdz.getSphUp()+"/"+yxdz.getSphDown()+"-柱镜:"+yxdz.getCylUp()+"/"+yxdz.getCylDown()+"-颜色:"+"-标价:"+yxdz.getRetailPrice();
+        yxdz.setProducName(name);
         yxdzService.update(yxdz);
         return R.ok();
     }
