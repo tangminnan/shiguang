@@ -332,12 +332,13 @@ function getShiguang(){
         area : [ '800px', '520px' ],
         content : "/information/store/shiguang/",// iframe的url
         cancel: function(index, layero){
-            var rows = $(layero).find("iframe")[0].contentWindow.sure();
+            //var rows = $(layero).find("iframe")[0].contentWindow.sure();
             // var rows = sessionStorage.getItem("row");
             // alert(rows.length)
             // if (rows.length > 0){
             //     a=a+1;
             // }
+            var rows = '';
             var shiguang = window.localStorage.getItem("shiguang");
             if (null != shiguang){
                 rows = JSON.parse(shiguang);

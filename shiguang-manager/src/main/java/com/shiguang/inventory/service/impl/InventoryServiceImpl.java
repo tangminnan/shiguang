@@ -131,13 +131,13 @@ public class InventoryServiceImpl implements InventoryService {
 				}
 				if (stockDOList.size() >= list.size()){
 					for (int i=0;i<stockDOList.size();i++){
-						if(!listGode.get(i).equals(list.get(i))){
+						if(!listGode.contains(list.get(i))){
 							stockDOS.add(stockDOList.get(i));
 						}
 					}
 				} else if (stockDOList.size() < list.size()){
 					for (int i=0;i<list.size();i++){
-						if(!listGode.get(i).equals(list.get(i))){
+						if(!listGode.contains(list.get(i))){
 							stockDOS.add(stockDOList.get(i));
 						}
 					}
