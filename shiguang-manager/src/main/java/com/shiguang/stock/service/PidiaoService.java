@@ -54,4 +54,7 @@ public interface PidiaoService {
 	int countall(Map<String, Object> map);
 
 	List<PidiaoDO> getCode(Map<String, Object> map);
+
+	//是否有这个单号
+	List<PidiaoDO> haveOrderNum(Map<String, Object> map);
 }

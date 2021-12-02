@@ -175,20 +175,25 @@ function load() {
 									formatter : function(value, row, index) {
                                         // alert(row.returnzt)
                                         if(row.status =="0" || row.returnzt=="0" ){
-                                            var e = '<span class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="详情" onclick="edit(\''
+                                            var e = '<span class="btn btn-primary btn-sm '+s_detials_h+'" href="#" mce_href="#" title="详情" onclick="detials(\''
                                                 + row.id
                                                 + '\')">详情</span> ';
                                             var a='';
                                             var d ='';
+                                            // var s ='';
                                         }else if (row.status == "1" || row.returnzt=="1") {
                                             if (row.flags == "1") {
-                                                var e = '<span class="btn btn-primary btn-sm '  + '" href="#" mce_href="#" title="详情" onclick="edit(\''
+                                                var e = '<span class="btn btn-primary btn-sm '+s_detials_h + '" href="#" mce_href="#" title="详情" onclick="detials(\''
                                                     + row.id
                                                     + '\')">详情</span> ';
                                                 var a = '';
                                                 var d = '';
+                                                // var s = '';
                                             } else if (row.flags == "0") {
-                                                var e = '<span class="btn btn-primary btn-sm '  + '" href="#" mce_href="#" title="详情" onclick="edit(\''
+                                                // var s = '<span class="btn btn-warning btn-sm '+s_edit_h+ '" href="#" mce_href="#" title="修改" onclick="edit(\''
+                                                //     + row.id
+                                                //     + '\')">修改</span> ';
+                                                var e = '<span class="btn btn-primary btn-sm '+s_detials_h+ '" href="#" mce_href="#" title="详情" onclick="detials(\''
                                                     + row.id
                                                     + '\')">详情</span> ';
                                                 var a = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#" onclick="userNum(\''
@@ -222,14 +227,27 @@ function add() {
     layer.full(toIndex);
 }
 function edit(id) {
+    // alert("修改")
     var toIndex = layer.open({
 		type : 2,
-		title : '详情',
+		title : '修改',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
+    layer.full(toIndex);
+}
+function detials(id) {
+    // alert("详情")
+    var toIndex = layer.open({
+        type : 2,
+        title : '详情',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : prefix + '/detials/' + id // iframe的url
+    });
     layer.full(toIndex);
 }
 function userNum(pidiaoNumber) {

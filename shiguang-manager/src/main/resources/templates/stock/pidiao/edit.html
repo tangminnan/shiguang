@@ -33,30 +33,35 @@
 			<tr>
 				<td>发出部门：</td>
 				<td>
-					<input th:value="${pidiao.outbm}" readonly type="text"/>
+                    <input id="outDepartment" name="outDepartment" th:value="${pidiao.outDepartmentid}" readonly type="text"/>
+                    <input th:value="${pidiao.outbm}" readonly type="text"/>
 				</td>
 				<td>发出仓位：</td>
 				<td>
+					<input id="outPosition" name="outPosition" th:value="${pidiao.outPositionid}" readonly type="text"/>
 					<input th:value="${pidiao.outcw}" readonly type="text"/>
 				</td>
-				<td style="color: red"> 总数量：</td>
-				<td>
-					<input id="countall" style="color: red"  readonly type="text"/>
-				</td>
+				<!--<td style="color: red"> 总数量：</td>-->
+				<!--<td>-->
+					<!--<input id="countall" style="color: red"  readonly type="text"/>-->
+				<!--</td>-->
 
 			</tr>
 			<tr>
 				<td>接收公司：</td>
 				<td>
+                    <input id="inCompany" name="inCompany" th:value="${pidiao.inCompanyid}" readonly type="text"/>
 					<input th:value="${pidiao.ings}" readonly type="text"/>
 				</td>
 				<td>接收部门：</td>
 				<td>
-					<input th:value="${pidiao.inbm}" readonly type="text"/>
+                    <input id="inDepartment" name="inDepartment" th:value="${pidiao.inDepartmentid}" readonly type="text"/>
+                    <input th:value="${pidiao.inbm}" readonly type="text"/>
 				</td>
 
 				<td>接收仓位：</td>
 				<td>
+                    <input id="inPosition" name="inPosition" th:value="${pidiao.inPositionid}" readonly type="text"/>
 					<input th:value="${pidiao.incw}" readonly type="text"/>
 				</td>
 
@@ -69,18 +74,28 @@
 			</tr>
 			</tbody>
 		</table>
-		<!--保存/清空-->
-		<div class="BQ-btn" style="margin-left:80%
-
-">
-			<!--<input type="button" class="empty" value="打印条码" onclick="dayinCode()"  />-->
-			<input type="button" class="empty" value="打印单据" onclick="dayin()"/>
+		<div class="HH_btns">
+			<div class="Xbtn">
+				<input type="button" value="单品添加商品" onclick="choiceGoods()" />
+				<!--<input type="button" value="已核销订单添加商品" />-->
+				<!--<input type="button" value="二维表添加商品" />-->
+				<!--<input class="HgreenBG" type="button" value="打印条码" />-->
+			</div>
+			<div class="Cbtn buyBtns">
+				<input name="status" value="1" type="hidden"/>
+				<input id="returnzt" name="returnzt" value="1" type="hidden"/>
+				<input name="shTime" value="" type="hidden"/>
+				<input type="button" class="H_bc" value="保存并审核" onclick="editSave()" />
+			</div>
 		</div>
 	</div>
 
 	<!--商品信息-->
 	<div class="m40 tabS SPmsg">
-		<h3>商品信息</h3>
+		<h3>商品信息&nbsp;&nbsp;&nbsp;&nbsp;
+			<span style="color: red">当前页数量：</span>
+			<input style="color: red;font-size: 15px;" id="newcount" name="newcount" readonly/>
+		</h3>
 		<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
 			<tbody>
 			<tr class="thead">
@@ -108,10 +123,15 @@
 			</tr>
 			</tbody>
 		</table>
+		<div class="Cbtn buyBtns">
+			<input type="button" class="H_bc" value="保存并审核"  onclick="editSave()"/>
+			<span style="color: red">当前页数量：</span>
+			<input style="color: red;font-size: 15px;" id="newcounts" name="newcount" readonly/>
+		</div>
 	</div>
+
 </form>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
 <script type="text/javascript">
     $().ready(function () {
         var pidiaoNumber = $("#pidiaoNumber").val();
@@ -125,41 +145,65 @@
             },
             success: function (xml) {
                 for (var i = 0; i < xml.length; i++) {
-                    $(".liebiao").after("<tr class='val'> " +
-                        // "<td><input name='one'  type=\"checkbox\"/></td>\n" +
+                    $(".liebiao").before("<tr class='val'> " +
+
+
                         "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                        "<input name='goodsNum' type='hidden' value='" + xml[i].goodsNum + "'>\n" +
                         "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                        "<input name='goodsName' type='hidden' value='" + xml[i].goodsName + "'>\n" +
                         "<td name='factory'>" + xml[i].factory + "</td>\n" +
-                        // "<td name='needCount'>" + xml[i].needCount + "</td>\n" +
+                        "<input name='factory' type='hidden' value='" + xml[i].factory + "'>\n" +
+
+
                         "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
-                        "<td name='useCount'>" + xml[i].useCount + "</td>\n" +
+                        "<input id='goodsCount" + "' name='goodsCount' type='hidden' value='" + xml[i].goodsCount + "'>\n" +
+
+                        "<td ><input name='useCount' value='" + xml[i].useCount + "' onchange='hejiadd(this.value)' style='width: 185px;height: 28px;text-align: center;border: 1px solid #cac3c3;'/></td>\n" +
+
+
                         "<td name='goodsCode'>" + xml[i].goodsCode + "</td>\n" +
+                        "<input name='goodsCode' type='hidden' value='" + xml[i].goodsCode + "'>\n" +
                         "<td name='useday'>" + xml[i].useday + "</td>\n" +
+                        "<input name='useday' type='hidden' value='" + xml[i].useday + "'>\n" +
                         "<td name='batch'>" + xml[i].batch + "</td>\n" +
+                        "<input name='batch' type='hidden' value='" + xml[i].batch + "'>\n" +
                         "<td name='zhuceNumber'>" + xml[i].zhuceNumber + "</td>\n" +
+                        "<input name='zhuceNumber' type='hidden' value='" + xml[i].zhuceNumber + "'>\n" +
                         "<td name='produceDay'>" + xml[i].produceDay + "</td>\n" +
+                        "<input name='produceDay' type='hidden' value='" + xml[i].produceDay + "'>\n" +
 
 
                         "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>\n" +
-                        "<td name='goods' style='display: none'>" + xml[i].goods + "</td>\n" +
+                        "<input name='classtype' type='hidden' value='" + xml[i].classtype + "'>\n" +
+                        "<td name='goodsid' style='display: none'>" + xml[i].goodsid + "</td>\n" +
+                        "<input name='goods' type='hidden' value='" + xml[i].goodsid + "'>\n" +
+
                         "<td name='mfrsid' style='display: none'>" + xml[i].mfrsid + "</td>\n" +
+                        "<input name='mfrsid' type='hidden' value='" + xml[i].mfrsid + "'>\n" +
                         "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>\n" +
-                        "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                        "<input name='brandname' type='hidden' value='" + xml[i].brandname + "'>\n" +
+                        "<td name='unit' style='display: none'>" + xml[i].unit + "</td>\n" +
+                        "<input name='unit' type='hidden' value='" + xml[i].unit + "'>\n" +
+
+                        "<td name='money' style='display: none'>" + xml[i].retailPrice + "</td>\n" +
+                        "<input name='money' type='hidden' value='" + xml[i].retailPrice + "'>\n" +
+
+                        "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>\n" +
+                        "<input name='goodsxinxiid' type='hidden' value='" + xml[i].goodsxinxiid + "'>\n" +
+
+                        "<td name='stockorder' style='display: none'>" + xml[i].danjuNumber + "</td>\n" +
+                        "<input name='stockorder' type='hidden' value='" + xml[i].danjuNumber + "'>\n" +
+
+                        "<td><em  onclick='delertTr(this)'></em></td>\n" +
+
                         "</tr>");
                 }
             }
-        })
+        });
 		countall();
     });
 	
-	function dayin() {
-		var pidiaoNumber = $('#pidiaoNumber').val();
-        window.open("/stock/pidiao/pidiaodan?pidiaoNumber="+ pidiaoNumber);
-    }
-    // function dayinCode() {
-	// 	var pidiaoNumber = $('#pidiaoNumber').val();
-    //     window.open("/stock/pidiao/pidiaodan?pidiaoNumber="+ pidiaoNumber);
-    // }
 
 
     //查看总数
@@ -176,15 +220,147 @@
             },
             success: function (xml) {
                 $("#countall").val(xml);
+                $("input[name='allcount']").val(xml);
+                $("input[name='newcount']").val(xml);
             }
         })
     }
 
-    function codeDayin(object) {
-        var codeOne =object;
-        var pidiaoNumber = $('#pidiaoNumber').val();
-		window.open("/stock/pidiao/codeOne?pidiaoNumber="+pidiaoNumber+'&codeOne='+codeOne);
+    // <!--单品添加商品-->
+    function choiceGoods() {
 
+        var outPosition = $('#outPosition').val();
+            // $(".val").remove();
+            var toIndex = layer.open({
+                type: 2,
+                title: '库存查询',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                method: 'get', // 服务器数据的请求方式 get or post
+                content: "/stock/pidiao/selextkc/" + outPosition,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var a = 0;
+                    for (var i = 0; i < rows.length; i++) {
+                        a = a + 1;
+                        $(".liebiao").before("<tr class='val'> " +
+                            // "<td><input name='one'  type=\"checkbox\"/></td>\n" +
+                            "<td name='goodsNum'>" + rows[i].goodsNum + "</td>\n" +
+                            "<input name='goodsNum' type='hidden' value='" + rows[i].goodsNum + "'>\n" +
+                            "<td name='goodsName'>" + rows[i].goodsName + "</td>\n" +
+                            "<input name='goodsName' type='hidden' value='" + rows[i].goodsName + "'>\n" +
+                            "<td name='factory'>" + rows[i].factory + "</td>\n" +
+                            "<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
+                            // "<td name='needCount'>" + rows[i].needCount + "</td>\n" +
+                            "<td name='goodsCount'>" + rows[i].goodsCount + "</td>\n" +
+                            "<input id='goodsCount" + a + "' name='goodsCount' type='hidden' value='" + rows[i].goodsCount + "'>\n" +
+                            "<td >" + "<input id='useCount" + a + "' name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)'/>" + "</td>" +
+                            "<td name='goodsCode'>" + rows[i].goodsCode + "</td>\n" +
+                            "<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>\n" +
+                            "<td name='useday'>" + rows[i].useday + "</td>\n" +
+                            "<input name='useday' type='hidden' value='" + rows[i].useday + "'>\n" +
+                            "<td name='batch'>" + rows[i].batch + "</td>\n" +
+                            "<input name='batch' type='hidden' value='" + rows[i].batch + "'>\n" +
+                            "<td name='zhuceNumber'>" + rows[i].zhuceNumber + "</td>\n" +
+                            "<input name='zhuceNumber' type='hidden' value='" + rows[i].zhuceNumber + "'>\n" +
+                            "<td name='produceDay'>" + rows[i].produceDay + "</td>\n" +
+                            "<input name='produceDay' type='hidden' value='" + rows[i].produceDay + "'>\n" +
+
+
+                            "<td name='classtype' style='display: none'>" + rows[i].classtype + "</td>\n" +
+                            "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+                            "<td name='goodsid' style='display: none'>" + rows[i].goodsid + "</td>\n" +
+                            "<input name='goods' type='hidden' value='" + rows[i].goodsid + "'>\n" +
+
+                            "<td name='mfrsid' style='display: none'>" + rows[i].mfrsid + "</td>\n" +
+                            "<input name='mfrsid' type='hidden' value='" + rows[i].mfrsid + "'>\n" +
+                            "<td name='brandname' style='display: none'>" + rows[i].brandname + "</td>\n" +
+                            "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+                            "<td name='unit' style='display: none'>" + rows[i].unit + "</td>\n" +
+                            "<input name='unit' type='hidden' value='" + rows[i].unit + "'>\n" +
+
+                            "<td name='money' style='display: none'>" + rows[i].retailPrice + "</td>\n" +
+                            "<input name='money' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
+
+                            "<td name='goodsxinxiid' style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
+                            "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
+
+                            "<td name='stockorder' style='display: none'>" + rows[i].danjuNumber + "</td>\n" +
+                            "<input name='stockorder' type='hidden' value='" + rows[i].danjuNumber + "'>\n" +
+
+                            "<td><em  onclick='delertTr(this)'></em></td>\n" +
+                            "</tr>");
+                    }
+                }
+            });
+            layer.full(toIndex)
+    }
+
+
+    function hejiadd(object) {
+        addcount=0;
+        var size=$("input[name='useCount']").length;
+        // alert(size+"数量");
+        if (size!=0){
+            $("input[name='useCount']").each(
+                function(){
+                    var goodsCount=$(this).val();
+                    addcount +=Number(goodsCount);
+                    $("input[name='allcount']").val(addcount);
+                    $("input[name='newcount']").val(addcount);
+                    // alert(addcount)
+                }
+            )
+        }else if (size==0){
+            $("input[name='allcount']").val(addcount);
+            $("input[name='newcount']").val(addcount);
+        }
+
+    }
+
+
+    function delertTr(obj) {
+        var x;
+        var r=confirm("是否删除该的商品!");
+        if (r==true){
+            x="确定";
+        }
+        else{
+            x="取消";
+        }
+        if(x=="确定"){
+            var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+            tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+        }
+        hejiadd();
+    }
+
+
+    function editSave() {
+        // alert("先删除")
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/stock/pidiao/editSave",
+            data: $('#signupForm').serialize(),// 你的formid
+            async: false,
+            error: function (request) {
+                parent.layer.alert("Connection error");
+            },
+            success: function (data) {
+                if (data.code == 0) {
+                    parent.layer.msg("操作成功");
+                    parent.reLoad();
+                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    parent.layer.close(index);
+
+                } else {
+                    parent.layer.alert(data.msg)
+                }
+
+            }
+        });
     }
 </script>
 </body>

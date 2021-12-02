@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>商品批调管理</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+	<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+	<!--单据信息-->
+	<div class="m40 tabS msgBox">
+		<h3>单据信息详情向前向前向前</h3>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>批调单号：</td>
+				<td>
+					<input id="pidiaoNumber" name="pidiaoNumber" th:value="${pidiao.pidiaoNumber}"  readonly type="text">
+				</td>
+				<td>制单人：</td>
+				<td>
+					<input id="zhidanPeople" name="zhidanPeople" th:value="${pidiao.zhidanPeople}" readonly type="text" />
+				</td>
+				<td>单据日期：</td>
+				<td>
+					<input id="danjuDay" name="danjuDay" th:value="${danjuDay}"  readonly type="text"/>
+				</td>
+			</tr>
+			<tr>
+				<td>发出部门：</td>
+				<td>
+					<input th:value="${pidiao.outbm}" readonly type="text"/>
+				</td>
+				<td>发出仓位：</td>
+				<td>
+					<input th:value="${pidiao.outcw}" readonly type="text"/>
+				</td>
+				<td style="color: red"> 总数量：</td>
+				<td>
+					<input id="countall" style="color: red"  readonly type="text"/>
+				</td>
+
+			</tr>
+			<tr>
+				<td>接收公司：</td>
+				<td>
+					<input th:value="${pidiao.ings}" readonly type="text"/>
+				</td>
+				<td>接收部门：</td>
+				<td>
+					<input th:value="${pidiao.inbm}" readonly type="text"/>
+				</td>
+
+				<td>接收仓位：</td>
+				<td>
+					<input th:value="${pidiao.incw}" readonly type="text"/>
+				</td>
+
+			</tr>
+			<tr>
+				<td>备注：</td>
+				<td colspan="5">
+					<textarea id="beizhu" name="beizhu" rows="3" th:text="${pidiao.beizhu}" readonly></textarea>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<!--保存/清空-->
+		<div class="BQ-btn" style="margin-left:80%
+
+">
+			<!--<input type="button" class="empty" value="打印条码" onclick="dayinCode()"  />-->
+			<input type="button" class="empty" value="打印单据" onclick="dayin()"/>
+		</div>
+	</div>
+
+	<!--商品信息-->
+	<div class="m40 tabS SPmsg">
+		<h3>商品信息</h3>
+		<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+			<tbody>
+			<tr class="thead">
+				<!--<td>全选 <input type="checkbox" /></td>-->
+				<!--<td></td>-->
+				<td>商品代码</td>
+				<td>商品名称</td>
+				<td>型号</td>
+				<!--<td>需求数量</td>-->
+				<td>可调用数量</td>
+				<td>批调数量</td>
+				<td>商品条码</td>
+				<td>效期</td>
+				<td>批号</td>
+				<td>注册证号</td>
+				<td>生产日期</td>
+				<td style="display: none">镜片类型</td>
+				<td style="display: none">类别</td>
+				<td style="display: none">制造商</td>
+				<td style="display: none">品牌</td>
+				<td>操作</td>
+			</tr>
+			<tr class="liebiao">
+
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</form>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        var pidiaoNumber = $("#pidiaoNumber").val();
+        $(".val").remove();
+        $.ajax({
+            url: '/stock/pidiao/selectPidiao',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'pidiaoNumber': pidiaoNumber
+            },
+            success: function (xml) {
+                for (var i = 0; i < xml.length; i++) {
+                    $(".liebiao").before("<tr class='val'> " +
+                        // "<td><input name='one'  type=\"checkbox\"/></td>\n" +
+                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
+                        "<td name='goodsName'>" + xml[i].goodsName + "</td>\n" +
+                        "<td name='factory'>" + xml[i].factory + "</td>\n" +
+                        // "<td name='needCount'>" + xml[i].needCount + "</td>\n" +
+                        "<td name='goodsCount'>" + xml[i].goodsCount + "</td>\n" +
+                        "<td name='useCount'>" + xml[i].useCount + "</td>\n" +
+                        "<td name='goodsCode'>" + xml[i].goodsCode + "</td>\n" +
+                        "<td name='useday'>" + xml[i].useday + "</td>\n" +
+                        "<td name='batch'>" + xml[i].batch + "</td>\n" +
+                        "<td name='zhuceNumber'>" + xml[i].zhuceNumber + "</td>\n" +
+                        "<td name='produceDay'>" + xml[i].produceDay + "</td>\n" +
+
+
+                        "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>\n" +
+                        "<td name='goods' style='display: none'>" + xml[i].goods + "</td>\n" +
+                        "<td name='mfrsid' style='display: none'>" + xml[i].mfrsid + "</td>\n" +
+                        "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>\n" +
+                        "<td><input id='"+xml[i].goodsCode+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>"+
+                        "</tr>");
+                }
+            }
+        })
+		countall();
+    });
+	
+	function dayin() {
+		var pidiaoNumber = $('#pidiaoNumber').val();
+        window.open("/stock/pidiao/pidiaodan?pidiaoNumber="+ pidiaoNumber);
+    }
+    // function dayinCode() {
+	// 	var pidiaoNumber = $('#pidiaoNumber').val();
+    //     window.open("/stock/pidiao/pidiaodan?pidiaoNumber="+ pidiaoNumber);
+    // }
+
+
+    //查看总数
+    function countall() {
+        // var goodsType=$("#goodsType").val();
+        var pidiaoNumber=$("#pidiaoNumber").val();
+        $.ajax({
+            url: '/stock/pidiao/countall',
+            type: 'get',
+            dataType: "json",
+            data: {
+                'pidiaoNumber': pidiaoNumber
+
+            },
+            success: function (xml) {
+                $("#countall").val(xml);
+            }
+        })
+    }
+
+    function codeDayin(object) {
+        var codeOne =object;
+        var pidiaoNumber = $('#pidiaoNumber').val();
+		window.open("/stock/pidiao/codeOne?pidiaoNumber="+pidiaoNumber+'&codeOne='+codeOne);
+
+    }
+</script>
+</body>
+</html>

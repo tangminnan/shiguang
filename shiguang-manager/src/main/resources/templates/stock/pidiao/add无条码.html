@@ -78,9 +78,9 @@
 	<div class="HH_btns">
 		<div class="Xbtn">
 			<input type="button" value="单品添加商品" onclick="choiceGoods()" />
-
-			<input id="barcode" type="button" onclick="getBarcode()" value="条码扫描" />
-
+			<!--<input type="button" value="已核销订单添加商品" />-->
+			<!--<input type="button" value="二维表添加商品" />-->
+			<!--<input class="HgreenBG" type="button" value="打印条码" />-->
 		</div>
 		<div class="Cbtn buyBtns">
 			<input name="status" value="1" type="hidden"/>
@@ -127,7 +127,6 @@
 			<!--<td>合计：</td>-->
 			<!--<td>45684</td>-->
 		</tr>
-		<input id="inventoryId" type="hidden"/>
 		</tbody>
 	</table>
 	<div class="Cbtn buyBtns">
@@ -346,35 +345,6 @@ function inposion() {
         }
         hejiadd();
     }
-
-
-
-    function getBarcode(){
-        var outDepartment = $('#outDepartment').val();
-        var outPosition = $('#outPosition').val();
-        var inCompany = $('#inCompany').val();
-        var inDepartment = $('#inDepartment').val();
-        if (outDepartment == "") {
-            layer.alert("请选择发出部门！");
-        } else if (outPosition == "") {
-            layer.alert("请选择发出仓位！");
-        } else if (inCompany == "") {
-            layer.alert("请选择接收公司！");
-        } else if (inDepartment == "") {
-            layer.alert("请选择接收部门！");
-        } else{
-            layer.open({
-                type : 2,
-                title : '商品添加',
-                maxmin : true,
-                shadeClose : false, // 点击遮罩关闭层
-                area : [ '500px', '220px' ],
-                content : "/stock/pidiao/barcode/"+outPosition, // iframe的url
-            });
-		}
-    }
-
-
 </script>
 </body>
 </html>

@@ -195,15 +195,23 @@
 
     function hejiadd(object) {
         addcount=0;
-        $("input[name='count']").each(
-            function(){
-                var goodsCount=$(this).val();
-                addcount +=Number(goodsCount);
-                $("input[name='allcount']").val(addcount);
-                $("input[name='newcount']").val(addcount);
-                // alert(addcount)
-            }
-        )
+        var size=$("input[name='count']").length;
+        // alert(size+"数量");
+        if (size!=0){
+            $("input[name='count']").each(
+                function(){
+                    var goodsCount=$(this).val();
+                    addcount +=Number(goodsCount);
+                    $("input[name='allcount']").val(addcount);
+                    $("input[name='newcount']").val(addcount);
+                    // alert(addcount)
+                }
+            )
+        }else if (size==0){
+            $("input[name='allcount']").val(addcount);
+            $("input[name='newcount']").val(addcount);
+        }
+
     }
 
     function delertTr(obj) {

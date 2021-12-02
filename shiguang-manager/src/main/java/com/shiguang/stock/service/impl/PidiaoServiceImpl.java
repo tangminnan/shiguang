@@ -107,4 +107,9 @@ public class PidiaoServiceImpl implements PidiaoService {
 	public List<PidiaoDO> getCode(Map<String, Object> map) {
 		return pidiaoDao.getCode(map);
 	}
+
+	@Override
+	public List<PidiaoDO> haveOrderNum(Map<String, Object> map) {
+		return pidiaoDao.haveOrderNum(map);
+	}
 }
