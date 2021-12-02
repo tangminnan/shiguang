@@ -73,6 +73,7 @@ public class SaleGoodsController {
         String sgpercen = "";
         double sgMoney = 0.00;
         double addMoney = 0.00;
+        double totalMoney = 0.00;
         if (null != salesDOList && salesDOList.size() > 0){
             for (SalesDO salesDO : salesDOList){
                 String[] storeDescribe = null;
@@ -124,8 +125,8 @@ public class SaleGoodsController {
                                         }
                                     }
                                 }
-                            } else if ("配件".equals(goodsType)){
-                                if ("配件".equals(storeDescribe[i])){
+                            } else if ("配件".equals(goodsType) || "镜架配件".equals(goodsType)){
+                                if ("配件".equals(storeDescribe[i]) || "镜架配件".equals(storeDescribe[i])){
                                     if (null != storeCount && !"".equals(storeCount)){
                                         if (null != storeCount[i] && !"".equals(storeCount[i])) {
                                             pjcount = pjcount + Integer.parseInt(storeCount[i]);
@@ -234,7 +235,7 @@ public class SaleGoodsController {
                                         }
                                     }
                                 }
-                                if ("配件".equals(storeDescribe[i])){
+                                if ("配件".equals(storeDescribe[i]) || "镜架配件".equals(storeDescribe[i])){
                                     if (null != storeCount && !"".equals(storeCount)){
                                         if (null != storeCount[i] && !"".equals(storeCount[i])) {
                                             pjcount = pjcount + Integer.parseInt(storeCount[i]);
@@ -329,11 +330,12 @@ public class SaleGoodsController {
                         }
                     }
                 }
-
+                totalMoney = totalMoney + salesDO.getAmountMoney();
             }
+
         }
         int totalCount  = jjcount + jpcount + pjcount + yxcount + hlycount + sgcount + zjcount + zpcount;
-        double totalMoney = jjMoney + jpMoney + pjMoney + yxMoney + hlyMoney + sgMoney;
+        //double totalMoney = jjMoney + jpMoney + pjMoney + yxMoney + hlyMoney + sgMoney;
         java.text.NumberFormat numberformat=java.text.NumberFormat.getInstance();
         numberformat.setMaximumFractionDigits(2);
         if (!"".equals(goodsType) && null != goodsType){

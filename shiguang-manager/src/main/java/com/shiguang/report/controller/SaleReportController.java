@@ -406,20 +406,6 @@ public class SaleReportController {
                                     }
 
                                 }
-                                if (null != salesDOs.getAdditionalPrice()){
-                                    try {
-                                        String[] addPrice = salesDOs.getAdditionalPrice().split(",");
-                                        if (addPrice.length > 0){
-                                            if (null != addPrice[i] && !"".equals(addPrice[i])){
-                                                addMoney = addMoney + Double.valueOf(addPrice[i]);
-                                            }
-                                        } else {
-                                            addMoney = addMoney +  0.00;
-                                        }
-                                    }catch (ArrayIndexOutOfBoundsException e) {
-                                        addMoney = addMoney +  0.00;
-                                    }
-                                }
                             }
                             primMoney = primMoney + Double.valueOf(salesDOs.getPrimeMoney());
                             if ("2".equals(salesDOs.getSaleType())){
@@ -437,6 +423,24 @@ public class SaleReportController {
                                     amountMoney = amountMoney - Double.valueOf(changesMoney);
                                 }
                             }
+                        }
+                        if (null != salesDOs.getAdditionalPrice()){
+                            String[] addPrice = salesDOs.getAdditionalPrice().split(",");
+                            for (int s=0;s<addPrice.length;s++){
+                                addMoney = addMoney + Double.valueOf(addPrice[s]);
+                            }
+//                            try {
+//                                String[] addPrice = salesDOs.getAdditionalPrice().split(",");
+//                                if (addPrice.length > 0){
+//                                    if (null != addPrice[i] && !"".equals(addPrice[i])){
+//                                        addMoney = addMoney + Double.valueOf(addPrice[i]);
+//                                    }
+//                                } else {
+//                                    addMoney = addMoney +  0.00;
+//                                }
+//                            }catch (ArrayIndexOutOfBoundsException e) {
+//                                addMoney = addMoney +  0.00;
+//                            }
                         }
                     }
                 }
