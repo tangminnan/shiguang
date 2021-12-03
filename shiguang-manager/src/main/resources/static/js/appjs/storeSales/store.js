@@ -697,7 +697,7 @@ function getYinxing(){
             var dataArray = new Array();
             var rowsRight = window.localStorage.getItem("rowsRight");
             var rowsLeft = window.localStorage.getItem("rowsLeft");
-            if (null != JSON.parse(rowsRight) || null != JSON.parse(rowsLeft)){
+            if (null != JSON.parse(rowsRight)){
                 dataArray.push(JSON.parse(rowsRight));
             }
             if (null != JSON.parse(rowsLeft)){
