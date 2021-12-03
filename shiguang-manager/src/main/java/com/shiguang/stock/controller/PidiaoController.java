@@ -96,7 +96,8 @@ public class PidiaoController {
                 } else {
                     pidiaoDO.setFlags("1");
                 }
-            } else {
+            }
+            else {
                 pidiaoDO.setFlags("0");
             }
 
