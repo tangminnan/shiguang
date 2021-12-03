@@ -96,7 +96,8 @@ public class PidiaoController {
                 } else {
                     pidiaoDO.setFlags("1");
                 }
-            } else {
+            }
+            else {
                 pidiaoDO.setFlags("0");
             }
 
@@ -1039,6 +1040,12 @@ public class PidiaoController {
             code = "data:image/png;base64," + code;
             pidiaoDO.setQRCode(code);
         }
+//        for (int i =0;i<1;i++) {
+//            PidiaoDO pidiao=pidiaoDOS.get(i);
+//            String code = QRCodeUtil.creatRrCode(pidiao.getGoodsCode(), 200, 200);
+//            code = "data:image/png;base64," + code;
+//            pidiao.setQRCode(code);
+//        }
 
         if ("1".equals(goods)) {
             return "/stock/pidiao/codeJingjiaOne";

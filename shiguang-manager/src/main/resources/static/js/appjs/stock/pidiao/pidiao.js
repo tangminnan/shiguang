@@ -173,27 +173,31 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-                                        // alert(row.returnzt)
+                                        // alert(row.status+"status");
+                                        // alert(row.returnzt+"returnzt");
+                                        // alert(row.flags+"flags");
                                         if(row.status =="0" || row.returnzt=="0" ){
-                                            var e = '<span class="btn btn-primary btn-sm '+s_detials_h+'" href="#" mce_href="#" title="详情" onclick="detials(\''
+                                            var e = '<span class="btn btn-primary btn-sm '+'" href="#" mce_href="#" title="详情" onclick="detials(\''
                                                 + row.id
                                                 + '\')">详情</span> ';
                                             var a='';
                                             var d ='';
                                             // var s ='';
+                                            // alert("详情")
                                         }else if (row.status == "1" || row.returnzt=="1") {
                                             if (row.flags == "1") {
-                                                var e = '<span class="btn btn-primary btn-sm '+s_detials_h + '" href="#" mce_href="#" title="详情" onclick="detials(\''
+                                                var e = '<span class="btn btn-primary btn-sm ' + '" href="#" mce_href="#" title="详情" onclick="detials(\''
                                                     + row.id
                                                     + '\')">详情</span> ';
                                                 var a = '';
                                                 var d = '';
                                                 // var s = '';
+                                                // alert("flages==1+详情")
                                             } else if (row.flags == "0") {
                                                 // var s = '<span class="btn btn-warning btn-sm '+s_edit_h+ '" href="#" mce_href="#" title="修改" onclick="edit(\''
                                                 //     + row.id
                                                 //     + '\')">修改</span> ';
-                                                var e = '<span class="btn btn-primary btn-sm '+s_detials_h+ '" href="#" mce_href="#" title="详情" onclick="detials(\''
+                                                var e = '<span class="btn btn-primary btn-sm '+ '" href="#" mce_href="#" title="详情" onclick="detials(\''
                                                     + row.id
                                                     + '\')">详情</span> ';
                                                 var a = '<span class="btn btn-success btn-sm" href="#" title="确认收货"  mce_href="#" onclick="userNum(\''
@@ -201,10 +205,11 @@ function load() {
                                                 var d = '<span class="btn btn-danger btn-sm '     + '" href="#" title="退回"  mce_href="#" onclick="remove(\''
                                                     + row.pidiaoNumber
                                                     + '\')">退回</span> ';
+                                                // alert("flages==0+详情+收货")
                                             }
 
                                         }else if (row.returnzt == "0"){
-
+                                            // alert("空")
                                         }
 
 										return e + a + d;

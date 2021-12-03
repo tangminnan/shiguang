@@ -82,6 +82,66 @@
         delete from jdj_fetch where id = #{value}
     </delete>
 
+    <insert id="saveJdjInfomation" parameterType="com.shiguang.logstatus.domain.JdjInfomationDO" useGeneratedKeys="true" keyProperty="id">
+		insert into jdj_info
+		(
+		   `id`,
+		   `company_id`,
+			`remark1`,
+			`remark2`,
+			`remark3`,
+			`remark4`,
+			`remark5`,
+			`remark6`,
+			`remark7`,
+			`remark8`,
+			`remark9`,
+			`remark10`,
+			`remark11`
+		)
+		values
+		(
+		    #{id},
+		    #{companyId},
+			#{remark1},
+			#{remark2},
+			#{remark3},
+			#{remark4},
+			#{remark5},
+			#{remark6},
+			#{remark7},
+			#{remark8},
+			#{remark9},
+			#{remark10},
+			#{remark11}
+		)
+	</insert>
+    <update id="updateJdjInfomation" parameterType="com.shiguang.logstatus.domain.JdjInfomationDO">
+        update jdj_info
+        <set>
+            <if test="remark2 != null">`remark2` = #{remark2}, </if>
+            <if test="remark3 != null">`remark3` = #{remark3}, </if>
+            <if test="remark4 != null">`remark4` = #{remark4}, </if>
+            <if test="remark5 != null">`remark5` = #{remark5}, </if>
+            <if test="remark6 != null">`remark6` = #{remark6}, </if>
+            <if test="remark7 != null">`remark7` = #{remark7}</if>
+            <if test="remark8 != null">`remark8` = #{remark8}, </if>
+            <if test="remark9 != null">`remark9` = #{remark9}, </if>
+            <if test="remark10 != null">`remark10` = #{remark10}, </if>
+            <if test="remark11 != null">`remark11` = #{remark11}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getJdjInfomation" resultType="com.shiguang.logstatus.domain.JdjInfomationDO">
+        select `id`,`company_id`,`remark1`,`remark2`,`remark3`,`remark4`,`remark5`,`remark6`,`remark7`,`remark8`,`remark9`,`remark10`,`remark11`
+         from jdj_info  where id = #{value}
+    </select>
+
+    <delete id="deleteJdjInfomation">
+        delete from jdj_info where id = #{value}
+    </delete>
+
     <update id="update" parameterType="com.shiguang.logstatus.domain.LensMeterDO">
         update lens_meter
         <set>

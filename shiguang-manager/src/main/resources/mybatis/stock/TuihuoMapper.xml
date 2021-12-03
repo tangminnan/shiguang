@@ -697,9 +697,9 @@
 	</select>
 
 	<select id="countall" resultType="int">
-		select  sum(goods_count) from stock_tuihuo
+		select  sum(count) from stock_tuihuo
 		<where>
-			<if test="pidiaoNumber != null and pidiaoNumber != ''">and  pidiao_number = #{pidiaoNumber}</if>
+			<if test="tuihuoNum != null and tuihuoNum != ''">and  tuihuo_num = #{tuihuoNum}</if>
 		</where>
 	</select>
 
