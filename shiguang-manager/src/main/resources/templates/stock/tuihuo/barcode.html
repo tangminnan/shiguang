@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>条码扫描</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+	<!--保存-->
+<form class="form-horizontal m-t" id="signupForm" style="margin-top: 20px;text-align: center;">
+	<input id="positionId" th:value="${positionId}" type="hidden">
+	<input id="mfrsname" th:value="${mfrsname}" type="hidden">
+	商品条码:<input type="text" name="goodsCode" id="goodsCode">
+</form>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/stock/tuihuo/barcode.js"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

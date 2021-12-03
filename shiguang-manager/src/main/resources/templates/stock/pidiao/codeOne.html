@@ -15,11 +15,31 @@
 	</div>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
+	// $().ready(function () {
+	//     var html ="";
+	//     var list = [[${pidiaoDOS}]];
+	// 	for (var i=0;i<list.length;i++){
+	// 	    alert(list[i].goodsCode);
+	// 	    for (var a=0;a<1;a++){
+	// 	    	html += "<div class=w33>";
+	// 	        html +="<img alt='' src='"+list[i].QRCode+"' >";
+	// 	        html +="<p cellspacing=\"0\" cellpadding=\"0\" style=\" width: 100%;\">";
+	// 	        html +="<tbody>";
+	// 	        html += "<tr>";
+	// 	        html += "<td style='font-size:8px'>"+list[i].goodsCode+"</td>";
+    //             html += "</tr>";
+    //             html += "</tbody>";
+    //             html += "</p>";
+    //             html += "</div>";
+	// 		}
+	// 	}
+	// 	$("#devid").append(html);
+    // })
 	$().ready(function () {
 	    var html ="";
 	    var list = [[${pidiaoDOS}]];
-		for (var i=0;i<list.length;i++){
-		    // alert(list[i].goodsCount);
+		for (var i=0;i<1;i++){
+		    // alert(list[i].goodsCode);
 		    for (var a=0;a<1;a++){
 		    	html += "<div class=w33>";
 		        html +="<img alt='' src='"+list[i].QRCode+"' >";

@@ -74,7 +74,7 @@
 	<div class="HH_btns">
 		<div class="Xbtn">
 			<input type="button" value="单品添加商品" onclick="getGood()" />
-			<!--<input class="HgreenBG" type="button" value="条码扫描" />-->
+			<input id="barcode" type="button" onclick="getBarcode()" value="条码扫描" />
 		</div>
 		<div class="Cbtn buyBtns">
 			<input type="button" class="H_bc" value="保存并审核" onclick="save()" />
@@ -91,7 +91,7 @@
 		<input style="color: red;font-size: 15px;" id="newcount" name="newcount" readonly/>
 	</h3>
 	<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-		<tbody>
+		<tbody id="inventoryId">
 		<tr class="thead">
 			<!--<td>多选</td>-->
 			<td>商品代码</td>
@@ -134,13 +134,7 @@
 		if (mfrsName=='' || mfrsName==null){
 		    mfrsName="空值"
 		}
-        // if (mfrsid == "") {
-        //     layer.alert("请选择制造商！");
-        // } else if (mfrsName == "") {
-        //     layer.alert("请选择制造商！");
-        // }else if (positionId == ""){
-        //     layer.alert("请选择发出仓位！");
-        // } else
+
 
 		if (style == ""){
             layer.alert("请选择出库方式！");
@@ -228,6 +222,39 @@
             tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
         }
         hejiadd();
+    }
+
+
+
+    function getBarcode(){
+        var style = $('#style').val();
+        var positionId = $('#positionId').val();
+        var mfrsid = $('#mfrsid').val();
+        var mfrsname = $('#mfrsName').val();
+
+        if (mfrsid=='' || mfrsid==null){
+            mfrsid="空值";
+        }
+        if (mfrsname=='' || mfrsname==null){
+            mfrsname="空值"
+        }
+		// alert(mfrsname);
+
+        if (style == ""){
+            layer.alert("请选择出库方式！");
+        }else if (style=="退货" && mfrsid=="空值" ){
+            layer.alert("请选择制造商！");
+        }else {
+            layer.open({
+                type : 2,
+                title : '商品添加',
+                maxmin : true,
+                shadeClose : false, // 点击遮罩关闭层
+                area : [ '500px', '220px' ],
+                content : "/stock/tuihuo/barcode/"+positionId+"/" +mfrsname, // iframe的url
+            });
+		}
+
     }
 </script>
 </form>
