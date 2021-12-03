@@ -1,6 +1,8 @@
 package com.shiguang.common.utils;
 
 import com.shiguang.logstatus.domain.JDJInfoDO;
+import com.shiguang.logstatus.domain.JdjInfomationDO;
+import com.shiguang.logstatus.domain.LensMeterDO;
 import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.optometry.controller.SerialDataUtils;
 import com.shiguang.optometry.service.OptometryService;
@@ -17,6 +19,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.LogRecord;
+import java.util.logging.SimpleFormatter;
 
 
 /**
@@ -33,6 +36,17 @@ public class SerialPortUtils implements SerialPortEventListener {
     private OptometryService optometryService;
     // RS232串口
     private SerialPort serialPort;
+    public static SerialPortUtils serialPort1 = null;
+
+    private SerialPortUtils() {
+    }
+
+    public static SerialPortUtils getSerialPortUtils() {
+        if (serialPort1 == null) {
+            serialPort1 = new SerialPortUtils();
+        }
+        return serialPort1;
+    }
     // 输入流
     private InputStream inputStream;
     // 输出流
@@ -43,6 +57,8 @@ public class SerialPortUtils implements SerialPortEventListener {
     private String dataHex;
     private SerialDataUtils serialDataUtils = SerialDataUtils.getSerialPortUtils();
     private byte[] byteArray = null;
+    int a=1;
+    String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
 
     /**
      * 初始化串口
@@ -53,6 +69,7 @@ public class SerialPortUtils implements SerialPortEventListener {
      */
     @SuppressWarnings("unchecked")
     public void init(ParamConfig paramConfig) {
+        a=1;
         // 获取系统中所有的通讯端口
         portList = CommPortIdentifier.getPortIdentifiers();
         // 记录是否含有指定串口
@@ -123,95 +140,132 @@ public class SerialPortUtils implements SerialPortEventListener {
      */
     public void readComm() {
         try {
+            JdjInfomationDO jdjInfomationDO = new JdjInfomationDO();
             StringBuilder builder = new StringBuilder();
             inputStream = serialPort.getInputStream();
             // 通过输入流对象的available方法获取数组字节长度
             byte[] readBuffer = new byte[inputStream.available()];
             byteArray = SpringUtil.decode2(readBuffer,byteArray);
-            Message message = Message.obtain();
-            message.what = 1;
-            handler.removeMessages(1);
-            handler.sendMessageDelayed(message,1000);
-//            String dataSerial="";
-            // 从线路上读取数据流
+//            System.out.println(bytesToHexString(readBuffer));
+            int len = 0;
+            while ((len = inputStream.read(readBuffer)) != -1) {
+                dataHex = bytesToHexString(readBuffer);
+                builder.append(dataHex);
+                //System.out.println("dataHex结果:" + dataHex);// 读取后置空流对象
+                inputStream.close();
+                inputStream = null;
+                break;
+            }
+//            System.out.println("当前a="+a);
+//            System.out.println("当前登录账号："+id);
+            if (a==1){
+                a=a+1;
+                jdjInfomationDO.setId(Long.valueOf(id));
+                jdjInfomationDO.setCompanyId(ShiroUtils.getUser().getCompanyId());
+                jdjInfomationDO.setRemark1(dataHex);
+                lensMeterService.saveJdjInfomation(jdjInfomationDO);
+            } else if(a==2){
+                a=a+1;
+                jdjInfomationDO.setRemark2(dataHex);
+                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                jdjInfomationDO.setId(Long.valueOf(id));
+                lensMeterService.updateJdjInfomation(jdjInfomationDO);
+            } else if (a == 3){
+                a=a+1;
+                jdjInfomationDO.setRemark3(dataHex);
+                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                jdjInfomationDO.setId(Long.valueOf(id));
+                lensMeterService.updateJdjInfomation(jdjInfomationDO);
+            } else if (a == 4){
+                a=a+1;
+                jdjInfomationDO.setRemark4(dataHex);
+                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                jdjInfomationDO.setId(Long.valueOf(id));
+                lensMeterService.updateJdjInfomation(jdjInfomationDO);
+            } else if (a == 5){
+                a=a+1;
+                jdjInfomationDO.setRemark5(dataHex);
+                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                jdjInfomationDO.setId(Long.valueOf(id));
+                lensMeterService.updateJdjInfomation(jdjInfomationDO);
+            } else if (a == 6){
+                a=a+1;
+                jdjInfomationDO.setRemark6(dataHex);
+                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                jdjInfomationDO.setId(Long.valueOf(id));
+                lensMeterService.updateJdjInfomation(jdjInfomationDO);
+            } else if (a == 7){
+                a=a+1;
+                jdjInfomationDO.setRemark7(dataHex);
+                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                jdjInfomationDO.setId(Long.valueOf(id));
+                lensMeterService.updateJdjInfomation(jdjInfomationDO);
+            } else if (a == 8){
+                a=a+1;
+                jdjInfomationDO.setRemark8(dataHex);
+                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                jdjInfomationDO.setId(Long.valueOf(id));
+                lensMeterService.updateJdjInfomation(jdjInfomationDO);
+            } else if (a == 9){
+                a=a+1;
+                jdjInfomationDO.setRemark9(dataHex);
+                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                jdjInfomationDO.setId(Long.valueOf(id));
+                lensMeterService.updateJdjInfomation(jdjInfomationDO);
+            } else if (a == 10){
+                a=a+1;
+                jdjInfomationDO.setRemark10(dataHex);
+                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                jdjInfomationDO.setId(Long.valueOf(id));
+                lensMeterService.updateJdjInfomation(jdjInfomationDO);
+            } else if (a == 11){
+                a=a+1;
+                jdjInfomationDO.setRemark11(dataHex);
+                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                jdjInfomationDO.setId(Long.valueOf(id));
+                lensMeterService.updateJdjInfomation(jdjInfomationDO);
+            }
+
+//            System.out.println("结果:="+builder);
+//            byteArray = SpringUtil.decode2(readBuffer,byteArray);
 //            int len = 0;
 //            while ((len = inputStream.read(readBuffer)) != -1) {
-//                // 直接获取到的数据
-//                // data = new String(readBuffer, 0, len).trim();
-//                // 转为十六进制数据
-//                dataHex = bytesToHexString(readBuffer);
-//                builder.append(dataHex);
-//                //System.out.println("data:" + data);
-//                System.out.println("dataHex:" + dataHex);// 读取后置空流对象
-//                inputStream.close();
-//                inputStream = null;
-//                break;
+//                byteArray = SpringUtil.decode2(readBuffer,byteArray);
+//                System.out.println(byteArray);
 //            }
-//            dataSerial = dataSerial + dataHex.toString();
-//            dataSerial = hexStringToString(dataSerial);
-//            System.out.println(dataSerial);
-//            String zifuRightSph = dataSerial.substring(40,41);
-//            String dd = dataSerial.substring(42, 46);
-//            String rightsph = zifuRightSph + dataSerial.substring(42, 46);
-//            String zifuRightCyl = dataSerial.substring(46, 47);
-//            String rightcyl = zifuRightCyl +  dataSerial.substring(48, 52);
-//            String rightzx = dataSerial.substring(52, 55);
-//            String zifuLeftSph = dataSerial.substring(76, 77);
-//            String leftsph = zifuLeftSph + dataSerial.substring(78, 82);
-//            String zifuLeftCyl = dataSerial.substring(82, 83);
-//            String leftcyl = zifuLeftCyl + dataSerial.substring(84, 88);
-//            String leftzx = dataSerial.substring(88, 91);
-//            LensMeterDO lensMeterDO = new LensMeterDO();
-//            lensMeterDO.setRightSph(rightsph);
-//            lensMeterDO.setRightCyl(rightcyl);
-//            lensMeterDO.setRightZx(rightzx);
-//            lensMeterDO.setLeftSph(leftsph);
-//            lensMeterDO.setLeftCyl(leftcyl);
-//            lensMeterDO.setLeftZx(leftzx);
-//            lensMeterService.save(lensMeterDO);
-            //serialDataUtils.toData(builder.toString());
-//            BleDataBean bleDataBean = SerialDataUtils.toOptometry(builder.toString());
-//            List<ResultDiopterDO> list = bleDataBean.getSca();
-//            OptometryDO optometryDO = new OptometryDO();
-//            for (int i = 0; i < list.size(); i++) {
-//                if ("AVG".equals(list.get(i).getType())) {
-//                    if ("L".equals(list.get(i).getIfrl())) {
-//                        optometryDO.setSphereLeft(list.get(i).getDiopterS());
-//                        optometryDO.setAxialLeft(list.get(i).getDiopterA());
-//                        optometryDO.setCylinderLeft(list.get(i).getDiopterC());
-//                    } else if ("R".equals(list.get(i).getIfrl())) {
-//                        optometryDO.setSphereRight(list.get(i).getDiopterS());
-//                        optometryDO.setAxialRight(list.get(i).getDiopterA());
-//                        optometryDO.setCylinderRight(list.get(i).getDiopterC());
-//                    }
-//                }
-//            }
-//            optometryDO.setCreateTime(new Date());
-//            optometryService.save(optometryDO);
+//            System.out.println(bytesToHexString(readBuffer));
+            //Message message = Message.obtain();
+            //message.what = 1;
+            //handler.removeMessages(1);
+            //handler.sendMessageDelayed(message,1000);
         } catch (IOException e) {
+            serialPort1.closeSerialPort();
             System.out.println("读取串口数据时发生IO异常");
         }
     }
 
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 1:
-                    String ss =bytesToHexString(byteArray);
-                    JDJInfoDO jdjInfoDO = new JDJInfoDO();
-                    jdjInfoDO.setJdjInfo(ss);
-                    lensMeterService.saveJdj(jdjInfoDO);
-                    byteArray = null;
-                    break;
-            }
-        }
-    };
+//    public Handler handler = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            switch (msg.what){
+//                case 1:
+//                    String ss =bytesToHexString(byteArray);
+//                    JDJInfoDO jdjInfoDO = new JDJInfoDO();
+//                    jdjInfoDO.setJdjInfo(ss);
+//                   //lensMeterService.saveJdj(jdjInfoDO);
+//                    byteArray = null;
+//                    break;
+//            }
+//        }
+//    };
+
 
     /**
      * 读取串口返回的信息
      */
     public void sendToData(){
+        String ss =bytesToHexString(byteArray);
+        System.out.println("解析完="+ss);
         //String lizi = "01444C4D0249444E4944454B2F4C4D2D363030501720522D30322E32352B30302E303030303017505230302E30304917505230302E30305517204C2D30312E37352B30302E303030303017504C30302E30304F17504C30302E303055170431333441";
 //        dataSerial = hexStringToString(dataSerial);
 //        serialDataUtils.todataJdj(dataSerial);

@@ -1,10 +1,7 @@
 package com.shiguang.logstatus.controller;
 
 import com.shiguang.common.utils.*;
-import com.shiguang.logstatus.domain.JDJInfoDO;
-import com.shiguang.logstatus.domain.LensMeterDO;
-import com.shiguang.logstatus.domain.LogStatusDO;
-import com.shiguang.logstatus.domain.WorkRecoedDO;
+import com.shiguang.logstatus.domain.*;
 import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mfrs.domain.GoodsDO;
@@ -12,6 +9,7 @@ import com.shiguang.storeSales.domain.Conclusion;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.aspectj.apache.bcel.generic.LineNumberGen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +31,8 @@ public class ExamineController {
     private SalesService salesService;
     @Autowired
     private LensMeterService lensMeterService;
+    //@Autowired
+    private SerialPortUtils serialPort;
 
     /**
      * 加工师检验
@@ -212,11 +212,43 @@ public class ExamineController {
         Map<String,Object> map = new HashMap<>();
         LensMeterDO lensMeterDO = new LensMeterDO();
         //serialPort.sendToData();
-        List<JDJInfoDO> jdjInfoDOS = lensMeterService.jdjList(map);
-        if (null != jdjInfoDOS && jdjInfoDOS.size() > 0){
-            String dataSerial = jdjInfoDOS.get(0).getJdjInfo();
+        Long id = Long.valueOf(ShiroUtils.getUser().getCompanyId() + ShiroUtils.getUser().getUsername());
+        //List<JDJInfoDO> jdjInfoDOS = lensMeterService.jdjList(map);
+        JdjInfomationDO jdjInfomationDO = lensMeterService.getJdjInfomation(id);
+        if (null != jdjInfomationDO){
+            String jdjInfoDOS = jdjInfomationDO.getRemark1() + jdjInfomationDO.getRemark2();
+            if (null != jdjInfomationDO.getRemark3() && !"".equals(jdjInfomationDO.getRemark3())){
+                jdjInfoDOS =  jdjInfoDOS + jdjInfomationDO.getRemark3();
+            }
+            if (null != jdjInfomationDO.getRemark4() && !"".equals(jdjInfomationDO.getRemark4())){
+                jdjInfoDOS =  jdjInfoDOS + jdjInfomationDO.getRemark4();
+            }
+            if (null != jdjInfomationDO.getRemark5() && !"".equals(jdjInfomationDO.getRemark5())){
+                jdjInfoDOS =  jdjInfoDOS + jdjInfomationDO.getRemark5();
+            }
+            if (null != jdjInfomationDO.getRemark6() && !"".equals(jdjInfomationDO.getRemark6())){
+                jdjInfoDOS =  jdjInfoDOS + jdjInfomationDO.getRemark6();
+            }
+            if (null != jdjInfomationDO.getRemark7() && !"".equals(jdjInfomationDO.getRemark7())){
+                jdjInfoDOS =  jdjInfoDOS + jdjInfomationDO.getRemark7();
+            }
+
+            if (null != jdjInfomationDO.getRemark8() && !"".equals(jdjInfomationDO.getRemark8())){
+                jdjInfoDOS =  jdjInfoDOS + jdjInfomationDO.getRemark8();
+            }
+            if (null != jdjInfomationDO.getRemark9() && !"".equals(jdjInfomationDO.getRemark9())){
+                jdjInfoDOS =  jdjInfoDOS + jdjInfomationDO.getRemark9();
+            }
+            if (null != jdjInfomationDO.getRemark10() && !"".equals(jdjInfomationDO.getRemark10())){
+                jdjInfoDOS =  jdjInfoDOS + jdjInfomationDO.getRemark10();
+            }
+            if (null != jdjInfomationDO.getRemark11() && !"".equals(jdjInfomationDO.getRemark11())){
+                jdjInfoDOS =  jdjInfoDOS + jdjInfomationDO.getRemark11();
+            }
+            String dataSerial = SerialPortUtils.hexStringToString(jdjInfoDOS);
+                    //String dataSerial = jdjInfoDOS.get(0).getJdjInfo();
             String right = SpringUtil.getStringData(dataSerial," R",2,"PR");
-            Long id = jdjInfoDOS.get(0).getId();
+            //Long id = jdjInfoDOS.get(0).getId();
             String zifuRightSph = right.substring(0,1);
             String rightsph = zifuRightSph + right.substring(2,6);
             String zifuRightCyl = right.substring(6,7);
@@ -225,7 +257,10 @@ public class ExamineController {
             if ("0".equals(rightzx.substring(0,1))){
                 rightzx =  right.substring(13, 15);
             }
-            String left = SpringUtil.getStringData(dataSerial," L",2,"PR");
+            if ("0".equals(rightzx.substring(0,1))){
+                rightzx =  right.substring(14, 15);
+            }
+            String left = SpringUtil.getStringData(dataSerial," L",2,"PL");
             String zifuLeftSph = left.substring(0, 1);
             String leftsph = zifuLeftSph + left.substring(2, 6);
             String zifuLeftCyl = left.substring(6, 7);
@@ -234,27 +269,46 @@ public class ExamineController {
             if ("0".equals(leftzx.substring(0,1))){
                 leftzx =  left.substring(13, 15);
             }
-            LensMeterDO lensMeterDOs = new LensMeterDO();
-            lensMeterDOs.setRightSph(rightsph);
-            lensMeterDOs.setRightCyl(rightcyl);
-            lensMeterDOs.setRightZx(rightzx);
-            lensMeterDOs.setLeftSph(leftsph);
-            lensMeterDOs.setLeftCyl(leftcyl);
-            lensMeterDOs.setLeftZx(leftzx);
-            lensMeterService.save(lensMeterDOs);
-            lensMeterService.deleteJdj(id);
-            List<LensMeterDO> lensMeterDOList = lensMeterService.list(map);
-            if (null != lensMeterDOList && lensMeterDOList.size() > 0){
-                lensMeterDO.setId(lensMeterDOList.get(0).getId());
-                lensMeterDO.setRightSph(lensMeterDOList.get(0).getRightSph());
-                lensMeterDO.setRightCyl(lensMeterDOList.get(0).getRightCyl());
-                lensMeterDO.setRightZx(lensMeterDOList.get(0).getRightZx());
-                lensMeterDO.setLeftSph(lensMeterDOList.get(0).getLeftSph());
-                lensMeterDO.setLeftCyl(lensMeterDOList.get(0).getLeftCyl());
-                lensMeterDO.setLeftZx(lensMeterDOList.get(0).getLeftZx());
+            if ("0".equals(leftzx.substring(0,1))){
+                leftzx =  left.substring(14, 15);
             }
+            LensMeterDO lensMeterDOs = new LensMeterDO();
+            //lensMeterDO.setId(lensMeterDOList.get(0).getId());
+            lensMeterDO.setRightSph(rightsph);
+            lensMeterDO.setRightCyl(rightcyl);
+            lensMeterDO.setRightZx(rightzx);
+            lensMeterDO.setLeftSph(leftsph);
+            lensMeterDO.setLeftCyl(leftcyl);
+            lensMeterDO.setLeftZx(leftzx);
+            lensMeterService.deleteJdjInfomation(id);
+//            lensMeterDOs.setRightSph(rightsph);
+//            lensMeterDOs.setRightCyl(rightcyl);
+//            lensMeterDOs.setRightZx(rightzx);
+//            lensMeterDOs.setLeftSph(leftsph);
+//            lensMeterDOs.setLeftCyl(leftcyl);
+//            lensMeterDOs.setLeftZx(leftzx);
+//            lensMeterService.save(lensMeterDOs);
+//            lensMeterService.deleteJdj(id);
+//            List<LensMeterDO> lensMeterDOList = lensMeterService.list(map);
+//            if (null != lensMeterDOList && lensMeterDOList.size() > 0){
+//                lensMeterDO.setId(lensMeterDOList.get(0).getId());
+//                lensMeterDO.setRightSph(lensMeterDOList.get(0).getRightSph());
+//                lensMeterDO.setRightCyl(lensMeterDOList.get(0).getRightCyl());
+//                lensMeterDO.setRightZx(lensMeterDOList.get(0).getRightZx());
+//                lensMeterDO.setLeftSph(lensMeterDOList.get(0).getLeftSph());
+//                lensMeterDO.setLeftCyl(lensMeterDOList.get(0).getLeftCyl());
+//                lensMeterDO.setLeftZx(lensMeterDOList.get(0).getLeftZx());
+//            }
         }
         model.addAttribute("lensMeterDO",lensMeterDO);
+        try {
+            Method method = Chuank.class.getMethod("main",
+                    String[].class);
+            method.invoke(null,
+                    (Object) new String[4]);
+        } catch (Exception e) {
+            Throwable cause = e.getCause();
+        }
         return lensMeterDO;
     }
 

@@ -1,6 +1,7 @@
 package com.shiguang.logstatus.dao;
 
 import com.shiguang.logstatus.domain.JDJInfoDO;
+import com.shiguang.logstatus.domain.JdjInfomationDO;
 import com.shiguang.logstatus.domain.LensMeterDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -28,4 +29,12 @@ public interface LensMeterDao {
     List<JDJInfoDO> jdjList(Map<String,Object> map);
 
     int deleteJdj(Long id);
+
+    int saveJdjInfomation(JdjInfomationDO jdjInfomationDO);
+
+    int updateJdjInfomation(JdjInfomationDO jdjInfomationDO);
+
+    JdjInfomationDO getJdjInfomation(Long id);
+
+    int deleteJdjInfomation(Long id);
 }
