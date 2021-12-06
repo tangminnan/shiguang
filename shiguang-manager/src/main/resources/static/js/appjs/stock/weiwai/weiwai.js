@@ -157,7 +157,7 @@ function load() {
 										}else {
 											var n = '';
 											// var j = '';
-                                            var c = '<span class="btn btn-danger btn-sm' + s_code_h + '"    href="#" title="条码"  mce_href="#" onclick="code(\''
+                                            var c = '<span class="btn btn-warning btn-sm' + s_code_h + '"    href="#" title="条码"  mce_href="#" onclick="code(\''
                                                 + row.goodsType+" ','"+ row.danjuNumber + '\')">条码</span> ';
 										}
 
