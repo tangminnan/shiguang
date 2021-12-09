@@ -43,11 +43,18 @@
         left join c_unit u on u.unitid=j.unitid
         left join p_light lig on lig.light_id=j.light_id
         <where>
-            <if test="producNum != null and producNum != ''">and j.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
+            <!--<if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>-->
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+
+
+            <!--<if test="producNum != null and producNum != ''">and j.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>-->
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="goodsCode != null and goodsCode != ''">and j.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
-            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
+            <!--<if test="goodsCode != null and goodsCode != ''">and j.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
+            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>-->
+            <!--<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>-->
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  j.retail_price
             </if>
@@ -103,11 +110,18 @@
         left join a_lightbelow ltb on ltb.lightbelow_id=j.lightbelow_right
         left join p_light lig on lig.light_id=j.light_id
         <where>
-            <if test="producNum != null and producNum != ''">and j.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
+            <!--<if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>-->
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+
+
+            <!--<if test="producNum != null and producNum != ''">and j.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>-->
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="goodsCode != null and goodsCode != ''">and j.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
-            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
+            <!--<if test="goodsCode != null and goodsCode != ''">and j.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
+            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>-->
+            <!--<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>-->
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  j.retail_price
             </if>
@@ -383,10 +397,7 @@
             #{id}
         </foreach>
     </delete>
-    <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.JpdzDO">
-		select  brandid,brandnum ,brandname  from c_brand  where mfrsid=#{mfrsid} and goodsid=#{goodsid} group by brandid
-	</select>
+
     <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.JpdzDO">
     update aa_jpdz set `state` = #{state} where id = #{id}

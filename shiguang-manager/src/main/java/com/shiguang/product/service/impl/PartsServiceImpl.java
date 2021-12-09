@@ -58,11 +58,6 @@ public class PartsServiceImpl implements PartsService {
         return partsDao.mglist(map);
     }
 
-    //菜单联动显示
-    @Override
-    public List<BrandDO> choice(Integer mfrsid) {
-        return partsDao.choice(mfrsid);
-    }
 
     //删除修改状态
     @Override

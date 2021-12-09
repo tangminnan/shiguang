@@ -20,11 +20,18 @@
         from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum AND p.`mfrsid`=b.`mfrsid`
         left join c_unit u on p.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and p.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
+            <!--<if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>-->
+            <if test="goodsCode != null and goodsCode != ''">and p.produc_code = #{goodsCode}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+
+
+            <!--<if test="producNum != null and producNum != ''">and p.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>-->
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="goodsCode != null and goodsCode != ''">and p.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
-            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
+            <!--<if test="goodsCode != null and goodsCode != ''">and p.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
+            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>-->
+            <!--<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>-->
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  p.retail_price
             </if>
@@ -60,11 +67,18 @@
         select count(*) from aa_parts p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum AND p.`mfrsid`=b.`mfrsid`
         left join c_unit u on p.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and p.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
+            <!--<if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>-->
+            <if test="goodsCode != null and goodsCode != ''">and p.produc_code = #{goodsCode}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+
+
+            <!--<if test="producNum != null and producNum != ''">and p.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>-->
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="goodsCode != null and goodsCode != ''">and p.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
-            <if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>
+            <!--<if test="goodsCode != null and goodsCode != ''">and p.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
+            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>-->
+            <!--<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>-->
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  p.retail_price
             </if>
@@ -196,10 +210,7 @@
         where g.goodsid=2 and m.state= 1
         group by m.mfrsid order by m.mfrsid desc
 	</select>
-    <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.PartsDO">
-		select  brandid,brandnum ,brandname  from c_brand  where mfrsid=#{mfrsid} and goodsid=#{goodsid} group by brandid
-	</select>
+
     <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.PartsDO">
     update aa_parts set `state` = #{state} where id = #{id}

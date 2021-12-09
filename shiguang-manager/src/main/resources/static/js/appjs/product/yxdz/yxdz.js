@@ -114,7 +114,7 @@ function load() {
                         align: 'center',
                         formatter: function (value, row, index) {
                             if (row.sphUp != null && row.sphDown != null) {
-                                return row.sphUp + "/" + row.sphDown
+                                return row.sphDown + "/" + row.sphUp
                             } else {
                                 return ""
                             }
@@ -129,7 +129,7 @@ function load() {
                         align: 'center',
                         formatter: function (value, row, index) {
                             if (row.cylUp != null && row.cylDown != null) {
-                                return row.cylUp + "/" + row.cylDown
+                                return row.cylDown + "/" + row.cylUp
                             } else {
                                 return ""
                             }
@@ -165,7 +165,7 @@ function load() {
                         align: 'center',
                         formatter: function (value, row, index) {
                             if (row.curvatureOne != null && row.curvatureYi != null) {
-                                return row.curvatureOne + "/" + row.curvatureYi
+                                return row.curvatureYi + "/" + row.curvatureOne
                             } else {
                                 return ""
                             }
@@ -203,7 +203,7 @@ function load() {
                         align: 'center',
                         formatter: function (value, row, index) {
                             if (row.diameterOne != null && row.diameterYi != null) {
-                                return row.diameterOne + "/" + row.diameterYi
+                                return row.diameterYi + "/" + row.diameterOne
                             } else {
                                 return ""
                             }

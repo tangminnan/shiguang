@@ -32,8 +32,6 @@ public interface JpcpService {
     int batchRemove(Long[] ids);
 
 
-    //菜单联动显示
-    List<BrandDO> choice(String mfrsid);
 
     //删除修改状态
     int updateState(JpcpDO jpcp);

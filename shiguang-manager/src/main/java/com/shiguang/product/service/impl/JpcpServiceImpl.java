@@ -53,11 +53,6 @@ public class JpcpServiceImpl implements JpcpService {
     }
 
 
-    //菜单联动显示
-    @Override
-    public List<BrandDO> choice(String mfrsid) {
-        return jpcpDao.choice(mfrsid);
-    }
 
     //删除修改状态
     @Override

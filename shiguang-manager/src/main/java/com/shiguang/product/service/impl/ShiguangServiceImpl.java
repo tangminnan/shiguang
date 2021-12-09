@@ -62,11 +62,6 @@ public class ShiguangServiceImpl implements ShiguangService {
     }
 
 
-    //菜单联动显示
-    @Override
-    public List<BrandDO> choice(Integer mfrsid) {
-        return shiguangDao.choice(mfrsid);
-    }
 
     //删除修改状态
     @Override

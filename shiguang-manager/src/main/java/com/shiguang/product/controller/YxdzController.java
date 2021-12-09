@@ -281,14 +281,7 @@ public class YxdzController {
         return R.ok();
     }
 
-    //制造商——商品类别菜单下来选择
-    @ResponseBody
-    @RequestMapping(value = "/choice")
-    List<BrandDO> choice(Integer mfrsid, Model model) {
-        List<BrandDO> brandDOList = yxdzService.choice(mfrsid);
-        model.addAttribute("brandDOList", brandDOList);
-        return brandDOList;
-    }
+
 
     /**
      * 启用修改状态

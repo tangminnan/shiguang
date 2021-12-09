@@ -62,11 +62,7 @@ public class JpdzServiceImpl implements JpdzService {
     }
 
 
-    //菜单联动显示
-    @Override
-    public List<BrandDO> choice(Integer mfrsid) {
-        return jpdzDao.choice(mfrsid);
-    }
+
 
     //删除修改状态
     @Override

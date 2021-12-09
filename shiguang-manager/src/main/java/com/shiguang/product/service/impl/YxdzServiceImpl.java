@@ -52,12 +52,7 @@ public class YxdzServiceImpl implements YxdzService {
     }
 
 
-    //菜单联动显示
-    @Override
-    public List<BrandDO> choice(Integer mfrsid) {
 
-        return yxdzDao.choice(mfrsid);
-    }
 
     //删除修改状态
     @Override

@@ -157,14 +157,6 @@ public class HcController {
         return R.ok();
     }
 
-    //制造商——商品类别菜单下来选择
-    @ResponseBody
-    @RequestMapping(value = "/choice")
-    List<BrandDO> choice(String mfrsid, Model model) {
-        List<BrandDO> brandDOList = hcService.choice(mfrsid);
-        model.addAttribute("brandDOList", brandDOList);
-        return brandDOList;
-    }
 
     /**
      * 启用修改状态

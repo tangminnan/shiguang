@@ -38,8 +38,6 @@ public interface PartsDao {
     //查询配件制造商
     List<MgDO> mglist(Map<String, Object> map);
 
-    //菜单联动显示
-    List<BrandDO> choice(@Param("mfrsid") Integer mfrsid);
 
     //删除修改状态
     int updateState(PartsDO parts);

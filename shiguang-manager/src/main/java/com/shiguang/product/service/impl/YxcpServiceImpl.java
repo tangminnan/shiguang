@@ -52,11 +52,6 @@ public class YxcpServiceImpl implements YxcpService {
     }
 
 
-    //菜单联动显示
-    @Override
-    public List<BrandDO> choice(Integer mfrsid) {
-        return yxcpDao.choice(mfrsid);
-    }
 
     //删除修改状态
     @Override
