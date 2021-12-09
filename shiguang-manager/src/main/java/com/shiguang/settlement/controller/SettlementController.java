@@ -524,7 +524,7 @@ public class SettlementController {
 		Conclusion conclusion = new Conclusion();
 		map2.put("cardNumber",settlementDO.getMemberNumber());
 		map2.put("saleNumber",settlementDO.getSaleNumber());
-		map2.put("ptometry_number",settlementDO.getPtometryNumber());
+		map2.put("ptometryNumber",settlementDO.getPtometryNumber());
 		if (!"".equals(settlementDO.getOptometrywlName()) && null != settlementDO.getOptometrywlName()){
 			model.addAttribute("optometryName",settlementDO.getOptometrywlName());
 			if (1 == settlementDO.getRecipelwlType()){
@@ -1808,45 +1808,9 @@ public class SettlementController {
 	@ResponseBody
 	@RequiresPermissions("information:settlement:remove")
 	public R remove(String id){
-		SalesDO salesDO = salesService.getSaleNumber(id);
-		String companyId = "";
-		PositionDO positionDO = null;
-		if (null != ShiroUtils.getUser().getCompanyId()) {
-			companyId = ShiroUtils.getUser().getCompanyId();
-			Map<String,Object> map = new HashMap<>();
-			map.put("companyId", companyId);
-			positionDO = stockService.findPosition(map);
-		}
-		if (null != salesDO){
-			String[] saleDescribe = salesDO.getStoreDescribe().split(",");
-			String[] goodsCount = salesDO.getStoreCount().split(",");
-			String[] goodsStr = salesDO.getGoodsCode().split(",");
-			for (int i=0;i<saleDescribe.length;i++){
-				if (!"镜片".equals(saleDescribe[i]) && !"隐形".equals(saleDescribe[i])
-						&& !"自架".equals(saleDescribe[i])
-						&& !"自片".equals(saleDescribe[i]) && !"赠品".equals(saleDescribe[i])){
-					StockDO stockDOs = new StockDO();
-					if (null != positionDO){
-						stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
-					} else {
-						stockDOs.setPositionId("");
-					}
-					stockDOs.setGoodsCode(goodsStr[i]);
-					StockDO stockDO = stockService.getProduceCode(stockDOs);
-					Long countGoods = Long.parseLong(stockDO.getGoodsCount());
-					Long count = countGoods + Long.valueOf(goodsCount[i]);
-					stockDO.setGoodsCount(String.valueOf(count));
-					stockService.updateGoodsCount(stockDO);
-				}
-			}
-		}
-		if(settlementService.remove(id)>0){
-			salesService.removeSaleNum(id);
-			return R.ok();
-		}
-		return R.error();
+		return settlementService.deleteSale(id);
 	}
-	
+
 	/**
 	 * 删除
 	 */

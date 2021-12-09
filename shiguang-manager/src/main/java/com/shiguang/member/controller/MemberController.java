@@ -433,7 +433,7 @@ public class MemberController {
         Conclusion conclusion = new Conclusion();
         map2.put("cardNumber",settlementDO.getMemberNumber());
         map2.put("saleNumber",settlementDO.getSaleNumber());
-        map2.put("ptometry_number",settlementDO.getPtometryNumber());
+        map2.put("ptometryNumber",settlementDO.getPtometryNumber());
         if (!"".equals(settlementDO.getOptometrywlName()) && null != settlementDO.getOptometrywlName()){
             model.addAttribute("optometryName",settlementDO.getOptometrywlName());
             if (1 == settlementDO.getRecipelwlType()){

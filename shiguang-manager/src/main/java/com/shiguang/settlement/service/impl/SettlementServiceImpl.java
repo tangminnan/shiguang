@@ -1,12 +1,20 @@
 package com.shiguang.settlement.service.impl;
 
+import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.settlement.dao.SettlementDao;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.SalesService;
+import org.apache.tools.ant.taskdefs.Sleep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +25,10 @@ import java.util.Map;
 public class SettlementServiceImpl implements SettlementService {
 	@Autowired
 	private SettlementDao settlementDao;
+	@Autowired
+	private SalesService salesService;
+	@Autowired
+	private StockService stockService;
 	
 	@Override
 	public SettlementDO get(Long id){
@@ -96,5 +108,49 @@ public class SettlementServiceImpl implements SettlementService {
 	@Override
 	public int updateMethod(SettlementDO settlement){
 		return settlementDao.updateMethod(settlement);
+	}
+
+	@Override
+	public R deleteSale(String id) {
+		SalesDO salesDO = salesService.getSaleNumber(id);
+		String companyId = "";
+		PositionDO positionDO = null;
+		if (null != ShiroUtils.getUser().getCompanyId()) {
+			companyId = ShiroUtils.getUser().getCompanyId();
+			Map<String,Object> map = new HashMap<>();
+			map.put("companyId", companyId);
+			positionDO = stockService.findPosition(map);
+		}
+		if (null != salesDO){
+			String[] saleDescribe = salesDO.getStoreDescribe().split(",");
+			String[] goodsCount = salesDO.getStoreCount().split(",");
+			String[] goodsStr = salesDO.getGoodsCode().split(",");
+			for (int i=0;i<saleDescribe.length;i++){
+				if (!"镜片".equals(saleDescribe[i]) && !"隐形".equals(saleDescribe[i])
+						&& !"自架".equals(saleDescribe[i])
+						&& !"自片".equals(saleDescribe[i]) && !"赠品".equals(saleDescribe[i])){
+					StockDO stockDOs = new StockDO();
+					if (null != positionDO){
+						stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
+					} else {
+						stockDOs.setPositionId("");
+					}
+					stockDOs.setGoodsCode(goodsStr[i]);
+					StockDO stockDO = stockService.getProduceCode(stockDOs);
+					if (null != stockDO){
+                        Long countGoods = Long.parseLong(stockDO.getGoodsCount());
+                        Long count = countGoods + Long.valueOf(goodsCount[i]);
+                        stockDO.setGoodsCount(String.valueOf(count));
+                        stockService.updateGoodsCount(stockDO);
+                    }
+
+				}
+			}
+		}
+		if(this.remove(id)>0){
+			salesService.removeSaleNum(id);
+			return R.ok();
+		}
+		return R.error();
 	}
 }

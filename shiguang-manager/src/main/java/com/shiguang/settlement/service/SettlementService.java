@@ -1,6 +1,7 @@
 package com.shiguang.settlement.service;
 
 
+import com.shiguang.common.utils.R;
 import com.shiguang.settlement.domain.SettlementDO;
 
 import java.util.List;
@@ -46,5 +47,7 @@ public interface SettlementService {
 	int findGlassesDataCount(Map<String,Object> map);
 
 	int updateMethod(SettlementDO settlementDO);
+
+	R deleteSale(String saleNumber);
 
 }
