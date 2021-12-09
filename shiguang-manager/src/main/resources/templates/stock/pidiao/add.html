@@ -225,6 +225,7 @@ function inposion() {
         }
     })
 }
+    var a = 0;
     // <!--单品添加商品-->
     function choiceGoods() {
 		var outDepartment = $('#outDepartment').val();
@@ -251,7 +252,6 @@ function inposion() {
 				content: "/stock/pidiao/selextkc/" + outPosition,// iframe的url
 				cancel: function (index, layero) {
 					var rows = window[layero.find('iframe')[0]['name']].showCol();
-					var a = 0;
 					for (var i = 0; i < rows.length; i++) {
 						a = a + 1;
 						$(".liebiao").before("<tr class='val'> " +
