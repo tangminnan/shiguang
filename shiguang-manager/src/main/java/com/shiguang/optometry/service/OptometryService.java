@@ -2,6 +2,7 @@ package com.shiguang.optometry.service;
 
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.optometry.domain.OptometryDO;
+import com.shiguang.optometry.domain.OptometryInfoDO;
 import com.shiguang.optometry.domain.ProcessAskDO;
 
 import java.util.List;
@@ -47,4 +48,12 @@ public interface OptometryService {
     List<OptometryDO> userList(Map<String, Object> map);
     //检查用户数量
     int userListcount(Map<String, Object> map);
+
+    int saveOptoInfomation(OptometryInfoDO optometryInfoDO);
+
+    int updateOptoInfomation(OptometryInfoDO optometryInfoDO);
+
+    OptometryInfoDO getOptoInfomation(Long id);
+
+    int deleteOptoInfomation(Long id);
 }

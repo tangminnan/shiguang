@@ -412,4 +412,96 @@
             <if test="name != null and name != ''"> and m.name = #{name} </if>
         </where>
     </select>
+
+    <!-- 存储电脑验光数据 -->
+    <insert id="saveOptoInfomation" parameterType="com.shiguang.optometry.domain.OptometryInfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into optometry_info
+		(
+		   `id`,
+		   `company_id`,
+			`remark1`,
+			`remark2`,
+			`remark3`,
+			`remark4`,
+			`remark5`,
+			`remark6`,
+			`remark7`,
+			`remark8`,
+			`remark9`,
+			`remark10`,
+			`remark11`,
+			`remark12`,
+			`remark13`,
+			`remark14`,
+			`remark15`,
+			`remark16`,
+			`remark17`,
+			`remark18`,
+			`remark19`,
+			`remark20`
+		)
+		values
+		(
+		    #{id},
+		    #{companyId},
+			#{remark1},
+			#{remark2},
+			#{remark3},
+			#{remark4},
+			#{remark5},
+			#{remark6},
+			#{remark7},
+			#{remark8},
+			#{remark9},
+			#{remark10},
+			#{remark11},
+			#{remark12},
+			#{remark13},
+			#{remark14},
+			#{remark15},
+			#{remark16},
+			#{remark17},
+			#{remark18},
+			#{remark19},
+			#{remark20}
+		)
+	</insert>
+
+    <update id="updateOptoInfomation" parameterType="com.shiguang.optometry.domain.OptometryInfoDO">
+        update optometry_info
+        <set>
+            <if test="remark2 != null">`remark2` = #{remark2}, </if>
+            <if test="remark3 != null">`remark3` = #{remark3}, </if>
+            <if test="remark4 != null">`remark4` = #{remark4}, </if>
+            <if test="remark5 != null">`remark5` = #{remark5}, </if>
+            <if test="remark6 != null">`remark6` = #{remark6}, </if>
+            <if test="remark7 != null">`remark7` = #{remark7}</if>
+            <if test="remark8 != null">`remark8` = #{remark8}, </if>
+            <if test="remark9 != null">`remark9` = #{remark9}, </if>
+            <if test="remark10 != null">`remark10` = #{remark10}, </if>
+            <if test="remark11 != null">`remark11` = #{remark11}</if>
+            <if test="remark12 != null">`remark12` = #{remark12}</if>
+            <if test="remark13 != null">`remark13` = #{remark13}</if>
+            <if test="remark14 != null">`remark14` = #{remark14}</if>
+            <if test="remark15 != null">`remark15` = #{remark15}</if>
+            <if test="remark16 != null">`remark16` = #{remark16}</if>
+            <if test="remark17 != null">`remark17` = #{remark17}</if>
+            <if test="remark18 != null">`remark18` = #{remark18}</if>
+            <if test="remark19 != null">`remark19` = #{remark19}</if>
+            <if test="remark20 != null">`remark20` = #{remark20}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getOptoInfomation" resultType="com.shiguang.optometry.domain.OptometryInfoDO">
+        select `id`,`company_id`,`remark1`,`remark2`,`remark3`,`remark4`,`remark5`,`remark6`,`remark7`,`remark8`,`remark9`,`remark10`,`remark11`,
+        `remark12`,`remark13`,`remark14`,`remark15`,`remark16`,`remark17`,`remark18`,`remark19`,`remark20`
+         from optometry_info  where id = #{value}
+    </select>
+
+    <delete id="deleteOptoInfomation">
+        delete from optometry_info where id = #{value}
+    </delete>
+
+
 </mapper>

@@ -16,7 +16,6 @@ import com.shiguang.stock.service.*;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
-import com.sun.tools.javac.code.Attribute;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

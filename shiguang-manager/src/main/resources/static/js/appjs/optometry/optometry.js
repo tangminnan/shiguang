@@ -80,8 +80,8 @@ function load() {
 									field : 'cardNumber',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-xs '+s_edit_h+'" href="#" mce_href="#" title="读取" ' +
-											'onclick="edit(\''+ value + '\',\''+row.saleNumber+'\')" style="text-decoration: none;">读取</a> ';
+										var e = '<a class="btn btn-primary btn-xs '+s_edit_h+'" href="#" mce_href="#" title="验光" ' +
+											'onclick="edit(\''+ value + '\',\''+row.saleNumber+'\')" style="text-decoration: none;">验光</a> ';
 										// var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 										// 		+ row.id
 										// 		+ '\')"><i class="fa fa-remove"></i></a> ';

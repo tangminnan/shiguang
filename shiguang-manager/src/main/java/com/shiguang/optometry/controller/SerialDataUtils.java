@@ -87,124 +87,99 @@ public class SerialDataUtils {
      * @return
      */
     public void toData(String data) {
-        if (!isBT) {
-            if (data.contains("53204E6F3D303030303020")) {
-                isBT = true;
-                type = "isOptometry";
-                return;
-            }
-//            if (data.length() == 9) {
-//                String isHW = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
-//                GetCheckBean.HeightAndWeight tohw = tohw(isHW);
-//                heightweightDao.lsSave(tohw);
+//        if (!isBT) {
+//            if (data.contains("53204E6F3D303030303020")) {
+//                isBT = true;
+//                type = "isOptometry";
 //                return;
 //            }
-            String s = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
-            if (s.contains("bp")) {
-                isBT = true;
-                type = "isBlood";
-                return;
-            }
-            byte[] bytes = data.getBytes();//获得byte数组
-//        byte[] bytes = ByteUtils.hexStr2Byte(data);//获得byte数组
-            for (int i = 0; i < bytes.length; i++) {
-                if (i < bytes.length - 3) {
-                    byte[] btByte = new byte[]{bytes[i], bytes[i + 1], bytes[i + 2]};
-                    if (Arrays.equals(btByte, DNT)) {
-                        isBT = true;
-                        type = "isLensMeter";
-                        return;
-                    }
-                    if (Arrays.equals(btByte, Drm) || Arrays.equals(btByte, drm) || Arrays.equals(btByte, DRM) || Arrays.equals(btByte, DKM)) {
-                        isBT = true;
-                        type = "isOptometry";
-                        return;
-                    }
-                }
-            }
-        } else {
-            switch (type) {
-//                case "isBlood":
-//                    String isBlood = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
-//                    GetCheckBean.BloodPressure toBlood = toBlood(isBlood);
-//                    bloodPressureService.lsSave(toBlood);
+////            if (data.length() == 9) {
+////                String isHW = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+////                GetCheckBean.HeightAndWeight tohw = tohw(isHW);
+////                heightweightDao.lsSave(tohw);
+////                return;
+////            }
+//            String s = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+//            if (s.contains("bp")) {
+//                isBT = true;
+//                type = "isBlood";
+//                return;
+//            }
+//            byte[] bytes = data.getBytes();//获得byte数组
+////        byte[] bytes = ByteUtils.hexStr2Byte(data);//获得byte数组
+//            for (int i = 0; i < bytes.length; i++) {
+//                if (i < bytes.length - 3) {
+//                    byte[] btByte = new byte[]{bytes[i], bytes[i + 1], bytes[i + 2]};
+//                    if (Arrays.equals(btByte, DNT)) {
+//                        isBT = true;
+//                        type = "isLensMeter";
+//                        return;
+//                    }
+//                    if (Arrays.equals(btByte, Drm) || Arrays.equals(btByte, drm) || Arrays.equals(btByte, DRM) || Arrays.equals(btByte, DKM)) {
+//                        isBT = true;
+//                        type = "isOptometry";
+//                        return;
+//                    }
+//                }
+//            }
+//        } else {
+//            switch (type) {
+////                case "isBlood":
+////                    String isBlood = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+////                    GetCheckBean.BloodPressure toBlood = toBlood(isBlood);
+////                    bloodPressureService.lsSave(toBlood);
+////                    isBT = false;
+////                    type = "";
+////                    break;
+//                case "isLensMeter":
+////                    String isPressure = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+////                    GetCheckBean.ResultEyepressureDOBean eyepressureDOBean = toIOP(isPressure);
+////                    eyePressureDao.lsSave(eyepressureDOBean);
+//                    String isLensMeter = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
+//                    String rightsph = isLensMeter.substring(25, 29);
+//                    String rightcyl = isLensMeter.substring(31, 35);
+//                    String rightzx = isLensMeter.substring(36, 38);
+//                    String leftsph = isLensMeter.substring(61, 65);
+//                    String leftcyl = isLensMeter.substring(67, 71);
+//                    String leftzx = isLensMeter.substring(71, 75);
+//                    LensMeterDO lensMeterDO = new LensMeterDO();
+//                    lensMeterDO.setRightSph(rightsph);
+//                    lensMeterDO.setRightCyl(rightcyl);
+//                    lensMeterDO.setRightZx(rightzx);
+//                    lensMeterDO.setLeftSph(leftsph);
+//                    lensMeterDO.setLeftCyl(leftcyl);
+//                    lensMeterDO.setLeftZx(leftzx);
+//                    lensMeterService.save(lensMeterDO);
 //                    isBT = false;
 //                    type = "";
 //                    break;
-                case "isLensMeter":
-//                    String isPressure = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
-//                    GetCheckBean.ResultEyepressureDOBean eyepressureDOBean = toIOP(isPressure);
-//                    eyePressureDao.lsSave(eyepressureDOBean);
-                    String isLensMeter = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
-                    String rightsph = isLensMeter.substring(25, 29);
-                    String rightcyl = isLensMeter.substring(31, 35);
-                    String rightzx = isLensMeter.substring(36, 38);
-                    String leftsph = isLensMeter.substring(61, 65);
-                    String leftcyl = isLensMeter.substring(67, 71);
-                    String leftzx = isLensMeter.substring(71, 75);
-                    LensMeterDO lensMeterDO = new LensMeterDO();
-                    lensMeterDO.setRightSph(rightsph);
-                    lensMeterDO.setRightCyl(rightcyl);
-                    lensMeterDO.setRightZx(rightzx);
-                    lensMeterDO.setLeftSph(leftsph);
-                    lensMeterDO.setLeftCyl(leftcyl);
-                    lensMeterDO.setLeftZx(leftzx);
-                    lensMeterService.save(lensMeterDO);
-                    isBT = false;
-                    type = "";
-                    break;
-                case "isOptometry":
+//                case "isOptometry":
                     String isOptometry = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
                     BleDataBean bleDataBean = SerialDataUtils.toOptometry(isOptometry);
                     List<ResultDiopterDO> list = bleDataBean.getSca();
                     OptometryDO optometryDO = new OptometryDO();
-                    for (int i = 0; i < list.size(); i++) {
-                        if ("AVG".equals(list.get(i).getType())) {
-                            if ("L".equals(list.get(i).getIfrl())) {
-                                optometryDO.setSphereLeft(list.get(i).getDiopterS());
-                                optometryDO.setAxialLeft(list.get(i).getDiopterA());
-                                optometryDO.setCylinderLeft(list.get(i).getDiopterC());
-                            } else if ("R".equals(list.get(i).getIfrl())) {
-                                optometryDO.setSphereRight(list.get(i).getDiopterS());
-                                optometryDO.setAxialRight(list.get(i).getDiopterA());
-                                optometryDO.setCylinderRight(list.get(i).getDiopterC());
-                            }
-                        }
-                    }
+//                    for (int i = 0; i < list.size(); i++) {
+//                        if ("AVG".equals(list.get(i).getType())) {
+//                            if ("L".equals(list.get(i).getIfrl())) {
+//                                optometryDO.setSphereLeft(list.get(i).getDiopterS());
+//                                optometryDO.setAxialLeft(list.get(i).getDiopterA());
+//                                optometryDO.setCylinderLeft(list.get(i).getDiopterC());
+//                            } else if ("R".equals(list.get(i).getIfrl())) {
+//                                optometryDO.setSphereRight(list.get(i).getDiopterS());
+//                                optometryDO.setAxialRight(list.get(i).getDiopterA());
+//                                optometryDO.setCylinderRight(list.get(i).getDiopterC());
+//                            }
+//                        }
+//                    }
                     optometryDO.setCreateTime(new Date());
                     optometryService.save(optometryDO);
-//                    linShiData linShiData = new linShiData();
-//                    linShiData.setData(isOptometry);
-//                    linShiData.setAddDate(new Date());
-//                    heightweightDao.dataSave(linShiData);
-                    isBT = false;
-                    type = "";
-                    break;
-            }
-        }
+//                    isBT = false;
+//                    type = "";
+//                    break;
+//            }
+//        }
 
 
-    }
-
-    /**
-     * 焦度计解析
-     */
-    public void todataJdj(String isLensMeter){
-        //String isLensMeter = CodeUtil.ascii2String(ByteUtils.hexStr2Byte(data));
-        String rightsph = isLensMeter.substring(25, 29);
-        String rightcyl = isLensMeter.substring(31, 35);
-        String rightzx = isLensMeter.substring(36, 38);
-        String leftsph = isLensMeter.substring(61, 65);
-        String leftcyl = isLensMeter.substring(67, 71);
-        String leftzx = isLensMeter.substring(71, 75);
-        LensMeterDO lensMeterDO = new LensMeterDO();
-        lensMeterDO.setRightSph(rightsph);
-        lensMeterDO.setRightCyl(rightcyl);
-        lensMeterDO.setRightZx(rightzx);
-        lensMeterDO.setLeftSph(leftsph);
-        lensMeterDO.setLeftCyl(leftcyl);
-        lensMeterDO.setLeftZx(leftzx);
-        lensMeterService.save(lensMeterDO);
     }
 
     /**

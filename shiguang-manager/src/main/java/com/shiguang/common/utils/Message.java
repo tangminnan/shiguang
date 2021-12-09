@@ -1,97 +1,104 @@
 package com.shiguang.common.utils;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.concurrent.Delayed;
+import java.util.concurrent.TimeUnit;
 
-public final  class Message implements Serializable {
-    private static final int FLAG_IN_USE = 1;
-    int flags;
-    //消息需要处理时的时刻
-    long when;
-    //其他线程发送到当前线程的任务
-    Runnable callBack;
-    //发送消息工具Handler
-    Handler target;
-    //链表结构
-    Message next;
-    //校验标记
+public class Message implements Delayed {
+
     public int what;
-    //整型数据1
+
     public int arg1;
-    //整型数据2
+
     public int arg2;
-    //任意数据
+
     public Object obj;
 
-    private Message() {
+    //微秒
+    long when;
+
+    List data;
+
+    Handler target;
+
+    Runnable callback;
+
+    Message next;
+
+
+    //使用消息池，实现反复利用
+    private static Object POOL_LOCK = new Object();
+
+    private static final int MAX_POOL_SIZE = 50;
+
+    private static int poolSize = 0;
+
+    private static Message sPool;
+
+
+
+    public Message() {
     }
 
-    public static Message obtain(Handler handler) {
-        Message msg = new Message();
-        msg.target = handler;
+    public static Message obtain(Handler target) {
+        Message msg = obtain();
+        msg.target = target;
+
         return msg;
     }
 
-    static Message obtain(Handler handler, Runnable runnable) {
-        Message msg = new Message();
-        msg.target = handler;
-        msg.callBack = runnable;
-        return msg;
-    }
-
-    static Message obtain() {
-        Message msg = new Message();
-        return msg;
-    }
-
-    public static Message obtain(Handler handler, int what, int arg1, int arg2, Object obj) {
-        Message msg = new Message();
-        msg.target = handler;
-        msg.what = what;
-        msg.arg1 = arg1;
-        msg.arg2 = arg2;
-        msg.obj = obj;
-        return msg;
-    }
-
-    /**
-     * 发送该消息
-     */
-    public void sendToTarget() {
-        target.sendMessage(this);
-    }
-
-    /**
-     * 回收该消息
-     * @return
-     */
-    public boolean recycle() {
-        if (isInUse()) {
-            return false;
+    public static Message obtain() {
+        if (sPool != null) {
+            synchronized (POOL_LOCK) {
+                Message m = sPool;
+                sPool = sPool.next;
+                m.next = null;
+                poolSize--;
+                return m;
+            }
         }
-        flags = 0;
-        when = 0;
-        callBack = null;
-        target = null;
-        next = null;
+
+        return new Message();
+    }
+
+    public void recyle() {
         what = 0;
         arg1 = 0;
         arg2 = 0;
         obj = null;
-        return true;
+        data = null;
+        target = null;
+        callback = null;
+        next = null;
+
+        synchronized(POOL_LOCK) {
+            if (poolSize < MAX_POOL_SIZE) {
+                next = sPool;
+                sPool = this;
+                poolSize++;
+            }
+
+        }
     }
 
-    /**
-     * 标记该消息正在使用
-     */
-    void markInUse() {
-        flags |= FLAG_IN_USE;
+
+    @Override
+    public long getDelay(TimeUnit timeUnit) {//实现Delayed接口
+        long result = timeUnit.convert((when - System.currentTimeMillis()) * 1000, TimeUnit.NANOSECONDS);
+        //System.out.println("getDelay: result=" + result);
+        return result;
     }
 
-    /**
-     * 判断该消息是否正在使用
-     * @return
-     */
-    boolean isInUse() {
-        return (flags & FLAG_IN_USE) == FLAG_IN_USE;
+    @Override
+    public int compareTo(Delayed delayed) {//实现Comparable接口
+        Message msg = (Message) delayed;
+        if (this.when > msg.when) {
+            return 1;
+        } else if (this.when < msg.when){
+            return -1;
+        }
+        return 0;
     }
+
 }

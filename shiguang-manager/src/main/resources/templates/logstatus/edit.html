@@ -250,113 +250,133 @@
     });
 
     function getFetch(){
-        var rightsph = $("#jdjSphRight1").val();
-        var rightcyl = $("#jdjCylRight1").val();
-        if (Number(rightsph) > 0){
-            var rightsph2 =  Number(rightsph) + Number(rightcyl);
-            if (rightsph2 > 0){
-                $("#jdjSphRight2").val("+"+rightsph2);
-			} else {
-                $("#jdjSphRight2").val(rightsph2);
-			}
-
-        } else {
-            var rightsph2 = Number(rightsph) + Number(rightcyl);
-            if (rightsph2 > 0){
-                $("#jdjSphRight2").val("+"+rightsph2);
-			} else {
-                $("#jdjSphRight2").val(rightsph2);
-			}
-
-        }
-        rightcyl -= rightcyl*2;
-        $("#jdjCylRight2").val("+"+rightcyl);
-        var rightzx = $("#jdjZxRight1").val();
-        if (Number(rightzx) > 90){
-            var rightzx2 = Number(rightzx)-Number(90);
-            $("#jdjZxRight2").val(rightzx2);
-        } else {
-            var rightzx2 = Number(rightzx)+Number(90);
-            $("#jdjZxRight2").val(rightzx2);
-        }
-        var leftsph = $("#jdjSphLeft1").val();
-        var leftcyl = $("#jdjCylLeft1").val();
-        if (Number(leftsph) > 0){
-            var leftsph2 =  Number(leftsph) + Number(leftcyl);
-            if (leftsph2 > 0){
-                $("#jdjSphLeft2").val("+"+leftsph2);
-			} else {
-                $("#jdjSphLeft2").val(leftsph2);
-			}
-
-        } else {
-            var leftsph2 = Number(leftsph) + Number(leftcyl);
-            if (leftsph2 > 0){
-                $("#jdjSphLeft2").val("+"+leftsph2);
-            } else {
-                $("#jdjSphLeft2").val(leftsph2);
-            }
-        }
-        leftcyl -= leftcyl*2;
-        $("#jdjCylLeft2").val("+"+leftcyl);
-        var leftzx = $("#jdjZxLeft1").val();
-        if (Number(leftzx) > 90){
-            var leftzx2 = Number(leftzx)-Number(90);
-            $("#jdjZxLeft2").val(leftzx2);
-        } else {
-            var leftzx2 = Number(leftzx)+Number(90);
-            $("#jdjZxLeft2").val(leftzx2);
-        }
-        $("#chuichajdj").val(0);
-        // $.ajax({
-        //     type : 'POST',
-        //     data : {},
-        //     url : '/information/examine/jiaoduji',
-        //     success : function(data) {
-        //         $("#lensMeterId").val(data.id);
-			// 	$("#jdjSphRight1").val(data.rightSph);
-        //         $("#jdjCylRight1").val(data.rightCyl);
-        //         $("#jdjZxRight1").val(data.rightZx);
-        //         $("#jdjSphLeft1").val(data.leftSph);
-        //         $("#jdjCylLeft1").val(data.leftCyl);
-        //         $("#jdjZxLeft1").val(data.leftZx);
-        //         var rightcyl = data.rightCyl;
-        //         var leftcyl = data.leftCyl;
-        //         if (Number(data.rightSph) > 0){
-        //             var rightsph2 =  Number(data.rightSph) + Number(data.rightCyl);
-        //             $("#jdjSphRight2").val("+"+rightsph2);
-        //         } else {
-        //             var rightsph2 = Number(data.rightSph) + Number(data.rightCyl);
-        //             $("#jdjSphRight2").val(rightsph2);
-        //         }
-        //         rightcyl -= rightcyl*2;
-        //         $("#jdjCylRight2").val("+"+rightcyl);
-        //         if (Number(data.rightZx) > 90){
-        //             var rightzx2 = Number(data.rightZx)-Number(90);
-        //             $("#jdjZxRight2").val(rightzx2);
-        //         } else {
-        //             var rightzx2 = Number(data.rightZx)+Number(90);
-        //             $("#jdjZxRight2").val(rightzx2);
-        //         }
-        //         if (Number(data.leftSph) > 0){
-        //             var leftsph2 =  Number(data.leftSph) + Number(data.leftCyl);
-        //             $("#jdjSphLeft2").val("+"+leftsph2);
-        //         } else {
-        //             var leftsph2 = Number(data.leftSph) + Number(data.leftCyl);
-        //             $("#jdjSphLeft2").val(leftsph2);
-        //         }
-        //         leftcyl -= leftcyl*2;
-        //         $("#jdjCylLeft2").val("+"+leftcyl);
-        //         if (Number(data.leftZx) > 90){
-        //             var leftzx2 = Number(data.leftZx)-Number(90);
-        //             $("#jdjZxLeft2").val(leftzx2);
-        //         } else {
-        //             var leftzx2 = Number(data.leftZx)+Number(90);
-        //             $("#jdjZxLeft2").val(leftzx2);
-        //         }
-        //         $("#chuichajdj").val(0);
+        // var rightsph = $("#jdjSphRight1").val();
+        // var rightcyl = $("#jdjCylRight1").val();
+        // if (Number(rightsph) > 0){
+        //     var rightsph2 =  Number(rightsph) + Number(rightcyl);
+        //     if (rightsph2 > 0){
+        //         $("#jdjSphRight2").val("+"+rightsph2);
+		// 	} else {
+        //         $("#jdjSphRight2").val(rightsph2);
+		// 	}
+		//
+        // } else {
+        //     var rightsph2 = Number(rightsph) + Number(rightcyl);
+        //     if (rightsph2 > 0){
+        //         $("#jdjSphRight2").val("+"+rightsph2);
+		// 	} else {
+        //         $("#jdjSphRight2").val(rightsph2);
+		// 	}
+		//
+        // }
+        // rightcyl -= rightcyl*2;
+        // $("#jdjCylRight2").val("+"+rightcyl);
+        // var rightzx = $("#jdjZxRight1").val();
+        // if (Number(rightzx) > 90){
+        //     var rightzx2 = Number(rightzx)-Number(90);
+        //     $("#jdjZxRight2").val(rightzx2);
+        // } else {
+        //     var rightzx2 = Number(rightzx)+Number(90);
+        //     $("#jdjZxRight2").val(rightzx2);
+        // }
+        // var leftsph = $("#jdjSphLeft1").val();
+        // var leftcyl = $("#jdjCylLeft1").val();
+        // if (Number(leftsph) > 0){
+        //     var leftsph2 =  Number(leftsph) + Number(leftcyl);
+        //     if (leftsph2 > 0){
+        //         $("#jdjSphLeft2").val("+"+leftsph2);
+		// 	} else {
+        //         $("#jdjSphLeft2").val(leftsph2);
+		// 	}
+		//
+        // } else {
+        //     var leftsph2 = Number(leftsph) + Number(leftcyl);
+        //     if (leftsph2 > 0){
+        //         $("#jdjSphLeft2").val("+"+leftsph2);
+        //     } else {
+        //         $("#jdjSphLeft2").val(leftsph2);
         //     }
-        // });
+        // }
+        // leftcyl -= leftcyl*2;
+        // $("#jdjCylLeft2").val("+"+leftcyl);
+        // var leftzx = $("#jdjZxLeft1").val();
+        // if (Number(leftzx) > 90){
+        //     var leftzx2 = Number(leftzx)-Number(90);
+        //     $("#jdjZxLeft2").val(leftzx2);
+        // } else {
+        //     var leftzx2 = Number(leftzx)+Number(90);
+        //     $("#jdjZxLeft2").val(leftzx2);
+        // }
+        // $("#chuichajdj").val(0);
+        $.ajax({
+            type : 'POST',
+            data : {},
+            url : '/information/examine/jiaoduji',
+            success : function(data) {
+                $("#lensMeterId").val(data.id);
+				$("#jdjSphRight1").val(data.rightSph);
+                $("#jdjCylRight1").val(data.rightCyl);
+                $("#jdjZxRight1").val(data.rightZx);
+                $("#jdjSphLeft1").val(data.leftSph);
+                $("#jdjCylLeft1").val(data.leftCyl);
+                $("#jdjZxLeft1").val(data.leftZx);
+                var rightcyl = data.rightCyl;
+                var leftcyl = data.leftCyl;
+                if (Number(data.rightSph) > 0){
+                    var rightsph2 =  Number(data.rightSph) + Number(data.rightCyl);
+                        if (rightsph2 > 0){
+                            $("#jdjSphRight2").val("+"+rightsph2);
+                    	} else {
+                            $("#jdjSphRight2").val(rightsph2);
+                    	}
+                    //$("#jdjSphRight2").val("+"+rightsph2);
+                } else {
+                    var rightsph2 = Number(data.rightSph) + Number(data.rightCyl);
+                    if (rightsph2 > 0){
+                        $("#jdjSphRight2").val("+"+rightsph2);
+                    } else {
+                        $("#jdjSphRight2").val(rightsph2);
+                    }
+                    //$("#jdjSphRight2").val(rightsph2);
+                }
+                rightcyl -= rightcyl*2;
+                $("#jdjCylRight2").val("+"+rightcyl);
+                if (Number(data.rightZx) > 90){
+                    var rightzx2 = Number(data.rightZx)-Number(90);
+                    $("#jdjZxRight2").val(rightzx2);
+                } else {
+                    var rightzx2 = Number(data.rightZx)+Number(90);
+                    $("#jdjZxRight2").val(rightzx2);
+                }
+                if (Number(data.leftSph) > 0){
+                    var leftsph2 =  Number(data.leftSph) + Number(data.leftCyl);
+                        if (leftsph2 > 0){
+                            $("#jdjSphLeft2").val("+"+leftsph2);
+                    	} else {
+                            $("#jdjSphLeft2").val(leftsph2);
+                    	}
+                    //$("#jdjSphLeft2").val("+"+leftsph2);
+                } else {
+                    var leftsph2 = Number(data.leftSph) + Number(data.leftCyl);
+                        if (leftsph2 > 0){
+                            $("#jdjSphLeft2").val("+"+leftsph2);
+                    	} else {
+                            $("#jdjSphLeft2").val(leftsph2);
+                    	}
+                    //$("#jdjSphLeft2").val(leftsph2);
+                }
+                leftcyl -= leftcyl*2;
+                $("#jdjCylLeft2").val("+"+leftcyl);
+                if (Number(data.leftZx) > 90){
+                    var leftzx2 = Number(data.leftZx)-Number(90);
+                    $("#jdjZxLeft2").val(leftzx2);
+                } else {
+                    var leftzx2 = Number(data.leftZx)+Number(90);
+                    $("#jdjZxLeft2").val(leftzx2);
+                }
+                $("#chuichajdj").val(0);
+            }
+        });
 	}
 	function getCheckOut(){
         //var jdjCylRight1 = $("#jdjCylRight1").val();

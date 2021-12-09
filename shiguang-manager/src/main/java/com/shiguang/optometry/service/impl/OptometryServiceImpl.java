@@ -3,6 +3,7 @@ package com.shiguang.optometry.service.impl;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.optometry.dao.OptometryDao;
 import com.shiguang.optometry.domain.OptometryDO;
+import com.shiguang.optometry.domain.OptometryInfoDO;
 import com.shiguang.optometry.domain.ProcessAskDO;
 import com.shiguang.optometry.service.OptometryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,4 +106,26 @@ public class OptometryServiceImpl implements OptometryService {
     public int userListcount(Map<String, Object> map) {
         return optometryDao.userListcount(map);
     }
+
+    @Override
+    public int saveOptoInfomation(OptometryInfoDO optometryInfoDO) {
+        return optometryDao.saveOptoInfomation(optometryInfoDO);
+    }
+
+    @Override
+    public int updateOptoInfomation(OptometryInfoDO optometry) {
+        return optometryDao.updateOptoInfomation(optometry);
+    }
+
+    @Override
+    public OptometryInfoDO getOptoInfomation(Long id) {
+        return optometryDao.getOptoInfomation(id);
+    }
+
+    @Override
+    public int deleteOptoInfomation(Long id) {
+        return optometryDao.deleteOptoInfomation(id);
+    }
+
+
 }

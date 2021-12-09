@@ -1,6 +1,5 @@
 package com.shiguang.line.domain;
 
-import com.sun.xml.internal.rngom.digested.DTextPattern;
 
 import java.io.Serializable;
 import java.util.Date;

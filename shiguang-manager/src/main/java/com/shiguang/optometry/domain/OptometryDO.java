@@ -17,73 +17,73 @@ public class OptometryDO implements Serializable {
     //散瞳用药
     private String pharmacy;
     //球镜(右眼OD)
-    private Double sphereRight;
+    private String sphereRight;
     //球镜(左眼OS)
-    private Double sphereLeft;
+    private String sphereLeft;
     //柱镜(右眼OD)
-    private Double cylinderRight;
+    private String cylinderRight;
     //柱镜(左眼OS)
-    private Double cylinderLeft;
+    private String cylinderLeft;
     //轴向(右眼-OD)
-    private Double axialRight;
+    private String axialRight;
     //轴向(左眼OS)
-    private Double axialLeft;
+    private String axialLeft;
     //角膜散光(OD)
     private String cornealAstigmatismOd;
     //角膜散光(OS)
     private String cornealAstigmatismOs;
     //瞳距(OD)
-    private Double pdOd;
+    private String pdOd;
     //瞳距(OS)
-    private Double pdOs;
+    private String pdOs;
     //检影球镜(OD)
-    private Double sphJyod;
+    private String sphJyod;
     //检影球镜(OS)
-    private Double sphJyos;
+    private String sphJyos;
     //检影柱镜(OD)
-    private Double cylJyod;
+    private String cylJyod;
     //检影柱镜(OS)
-    private Double cylJyos;
+    private String cylJyos;
     //检影轴向(OD)
-    private Double axialJyod;
+    private String axialJyod;
     //检影轴向(OS)
-    private Double axialJyos;
+    private String axialJyos;
     //检影VA(OD)
-    private Double vaJyod;
+    private String vaJyod;
     //检影VA(OS)
-    private Double vaJyos;
+    private String vaJyos;
     //检影瞳距(mm)(OD)
-    private Double pdJyod;
+    private String pdJyod;
     //检影瞳距(mm)(OS)
-    private Double pdJyos;
+    private String pdJyos;
     //插片球镜(OD)
-    private Double sphCpod;
+    private String sphCpod;
     //插片球镜(OS)
-    private Double sphCpos;
+    private String sphCpos;
     //插片柱镜(OD)
-    private Double cylCpod;
+    private String cylCpod;
     //插片柱镜(OS)
-    private Double cylCpos;
+    private String cylCpos;
     //插片轴向(OD)
-    private Double axialCpod;
+    private String axialCpod;
     //插片轴向(OS)
-    private Double axialCpos;
+    private String axialCpos;
     //插片DVA(OD)
-    private Double dvaCpod;
+    private String dvaCpod;
     //插片DVA(OS)
-    private Double dvaCpos;
+    private String dvaCpos;
     //插片NVA(OD)
-    private Double nvaCpod;
+    private String nvaCpod;
     //插片NVA(OS)
-    private Double nvaCpos;
+    private String nvaCpos;
     //插片add(OD)
-    private Double addCpod;
+    private String addCpod;
     //插片add(OS)
-    private Double addCpos;
+    private String addCpos;
     //插片测量距离(OD)
-    private Double distanceOd;
+    private String distanceOd;
     //插片测量距离(OS)
-    private Double distanceOs;
+    private String distanceOs;
     //创建时间
     private Date createTime;
 
@@ -243,84 +243,84 @@ public class OptometryDO implements Serializable {
     /**
      * 设置：球镜(右眼OD)
      */
-    public void setSphereRight(Double sphereRight) {
+    public void setSphereRight(String sphereRight) {
         this.sphereRight = sphereRight;
     }
 
     /**
      * 获取：球镜(右眼OD)
      */
-    public Double getSphereRight() {
+    public String getSphereRight() {
         return sphereRight;
     }
 
     /**
      * 设置：球镜(左眼OS)
      */
-    public void setSphereLeft(Double sphereLeft) {
+    public void setSphereLeft(String sphereLeft) {
         this.sphereLeft = sphereLeft;
     }
 
     /**
      * 获取：球镜(左眼OS)
      */
-    public Double getSphereLeft() {
+    public String getSphereLeft() {
         return sphereLeft;
     }
 
     /**
      * 设置：柱镜(右眼OD)
      */
-    public void setCylinderRight(Double cylinderRight) {
+    public void setCylinderRight(String cylinderRight) {
         this.cylinderRight = cylinderRight;
     }
 
     /**
      * 获取：柱镜(右眼OD)
      */
-    public Double getCylinderRight() {
+    public String getCylinderRight() {
         return cylinderRight;
     }
 
     /**
      * 设置：柱镜(左眼OS)
      */
-    public void setCylinderLeft(Double cylinderLeft) {
+    public void setCylinderLeft(String cylinderLeft) {
         this.cylinderLeft = cylinderLeft;
     }
 
     /**
      * 获取：柱镜(左眼OS)
      */
-    public Double getCylinderLeft() {
+    public String getCylinderLeft() {
         return cylinderLeft;
     }
 
     /**
      * 设置：轴向(右眼-OD)
      */
-    public void setAxialRight(Double axialRight) {
+    public void setAxialRight(String axialRight) {
         this.axialRight = axialRight;
     }
 
     /**
      * 获取：轴向(右眼-OD)
      */
-    public Double getAxialRight() {
+    public String getAxialRight() {
         return axialRight;
     }
 
     /**
      * 设置：轴向(左眼OS)
      */
-    public void setAxialLeft(Double axialLeft) {
+    public void setAxialLeft(String axialLeft) {
         this.axialLeft = axialLeft;
     }
 
     /**
      * 获取：轴向(左眼OS)
      */
-    public Double getAxialLeft() {
+    public String getAxialLeft() {
         return axialLeft;
     }
 
@@ -355,364 +355,364 @@ public class OptometryDO implements Serializable {
     /**
      * 设置：瞳距(OD)
      */
-    public void setPdOd(Double pdOd) {
+    public void setPdOd(String pdOd) {
         this.pdOd = pdOd;
     }
 
     /**
      * 获取：瞳距(OD)
      */
-    public Double getPdOd() {
+    public String getPdOd() {
         return pdOd;
     }
 
     /**
      * 设置：瞳距(OS)
      */
-    public void setPdOs(Double pdOs) {
+    public void setPdOs(String pdOs) {
         this.pdOs = pdOs;
     }
 
     /**
      * 获取：瞳距(OS)
      */
-    public Double getPdOs() {
+    public String getPdOs() {
         return pdOs;
     }
 
     /**
      * 设置：检影球镜(OD)
      */
-    public void setSphJyod(Double sphJyod) {
+    public void setSphJyod(String sphJyod) {
         this.sphJyod = sphJyod;
     }
 
     /**
      * 获取：检影球镜(OD)
      */
-    public Double getSphJyod() {
+    public String getSphJyod() {
         return sphJyod;
     }
 
     /**
      * 设置：检影球镜(OS)
      */
-    public void setSphJyos(Double sphJyos) {
+    public void setSphJyos(String sphJyos) {
         this.sphJyos = sphJyos;
     }
 
     /**
      * 获取：检影球镜(OS)
      */
-    public Double getSphJyos() {
+    public String getSphJyos() {
         return sphJyos;
     }
 
     /**
      * 设置：检影柱镜(OD)
      */
-    public void setCylJyod(Double cylJyod) {
+    public void setCylJyod(String cylJyod) {
         this.cylJyod = cylJyod;
     }
 
     /**
      * 获取：检影柱镜(OD)
      */
-    public Double getCylJyod() {
+    public String getCylJyod() {
         return cylJyod;
     }
 
     /**
      * 设置：检影柱镜(OS)
      */
-    public void setCylJyos(Double cylJyos) {
+    public void setCylJyos(String cylJyos) {
         this.cylJyos = cylJyos;
     }
 
     /**
      * 获取：检影柱镜(OS)
      */
-    public Double getCylJyos() {
+    public String getCylJyos() {
         return cylJyos;
     }
 
     /**
      * 设置：检影轴向(OD)
      */
-    public void setAxialJyod(Double axialJyod) {
+    public void setAxialJyod(String axialJyod) {
         this.axialJyod = axialJyod;
     }
 
     /**
      * 获取：检影轴向(OD)
      */
-    public Double getAxialJyod() {
+    public String getAxialJyod() {
         return axialJyod;
     }
 
     /**
      * 设置：检影轴向(OS)
      */
-    public void setAxialJyos(Double axialJyos) {
+    public void setAxialJyos(String axialJyos) {
         this.axialJyos = axialJyos;
     }
 
     /**
      * 获取：检影轴向(OS)
      */
-    public Double getAxialJyos() {
+    public String getAxialJyos() {
         return axialJyos;
     }
 
     /**
      * 设置：检影VA(OD)
      */
-    public void setVaJyod(Double vaJyod) {
+    public void setVaJyod(String vaJyod) {
         this.vaJyod = vaJyod;
     }
 
     /**
      * 获取：检影VA(OD)
      */
-    public Double getVaJyod() {
+    public String getVaJyod() {
         return vaJyod;
     }
 
     /**
      * 设置：检影VA(OS)
      */
-    public void setVaJyos(Double vaJyos) {
+    public void setVaJyos(String vaJyos) {
         this.vaJyos = vaJyos;
     }
 
     /**
      * 获取：检影VA(OS)
      */
-    public Double getVaJyos() {
+    public String getVaJyos() {
         return vaJyos;
     }
 
     /**
      * 设置：检影瞳距(mm)(OD)
      */
-    public void setPdJyod(Double pdJyod) {
+    public void setPdJyod(String pdJyod) {
         this.pdJyod = pdJyod;
     }
 
     /**
      * 获取：检影瞳距(mm)(OD)
      */
-    public Double getPdJyod() {
+    public String getPdJyod() {
         return pdJyod;
     }
 
     /**
      * 设置：检影瞳距(mm)(OS)
      */
-    public void setPdJyos(Double pdJyos) {
+    public void setPdJyos(String pdJyos) {
         this.pdJyos = pdJyos;
     }
 
     /**
      * 获取：检影瞳距(mm)(OS)
      */
-    public Double getPdJyos() {
+    public String getPdJyos() {
         return pdJyos;
     }
 
     /**
      * 设置：插片球镜(OD)
      */
-    public void setSphCpod(Double sphCpod) {
+    public void setSphCpod(String sphCpod) {
         this.sphCpod = sphCpod;
     }
 
     /**
      * 获取：插片球镜(OD)
      */
-    public Double getSphCpod() {
+    public String getSphCpod() {
         return sphCpod;
     }
 
     /**
      * 设置：插片球镜(OS)
      */
-    public void setSphCpos(Double sphCpos) {
+    public void setSphCpos(String sphCpos) {
         this.sphCpos = sphCpos;
     }
 
     /**
      * 获取：插片球镜(OS)
      */
-    public Double getSphCpos() {
+    public String getSphCpos() {
         return sphCpos;
     }
 
     /**
      * 设置：插片柱镜(OD)
      */
-    public void setCylCpod(Double cylCpod) {
+    public void setCylCpod(String cylCpod) {
         this.cylCpod = cylCpod;
     }
 
     /**
      * 获取：插片柱镜(OD)
      */
-    public Double getCylCpod() {
+    public String getCylCpod() {
         return cylCpod;
     }
 
     /**
      * 设置：插片柱镜(OS)
      */
-    public void setCylCpos(Double cylCpos) {
+    public void setCylCpos(String cylCpos) {
         this.cylCpos = cylCpos;
     }
 
     /**
      * 获取：插片柱镜(OS)
      */
-    public Double getCylCpos() {
+    public String getCylCpos() {
         return cylCpos;
     }
 
     /**
      * 设置：插片轴向(OD)
      */
-    public void setAxialCpod(Double axialCpod) {
+    public void setAxialCpod(String axialCpod) {
         this.axialCpod = axialCpod;
     }
 
     /**
      * 获取：插片轴向(OD)
      */
-    public Double getAxialCpod() {
+    public String getAxialCpod() {
         return axialCpod;
     }
 
     /**
      * 设置：插片轴向(OS)
      */
-    public void setAxialCpos(Double axialCpos) {
+    public void setAxialCpos(String axialCpos) {
         this.axialCpos = axialCpos;
     }
 
     /**
      * 获取：插片轴向(OS)
      */
-    public Double getAxialCpos() {
+    public String getAxialCpos() {
         return axialCpos;
     }
 
     /**
      * 设置：插片DVA(OD)
      */
-    public void setDvaCpod(Double dvaCpod) {
+    public void setDvaCpod(String dvaCpod) {
         this.dvaCpod = dvaCpod;
     }
 
     /**
      * 获取：插片DVA(OD)
      */
-    public Double getDvaCpod() {
+    public String getDvaCpod() {
         return dvaCpod;
     }
 
     /**
      * 设置：插片DVA(OS)
      */
-    public void setDvaCpos(Double dvaCpos) {
+    public void setDvaCpos(String dvaCpos) {
         this.dvaCpos = dvaCpos;
     }
 
     /**
      * 获取：插片DVA(OS)
      */
-    public Double getDvaCpos() {
+    public String getDvaCpos() {
         return dvaCpos;
     }
 
     /**
      * 设置：插片NVA(OD)
      */
-    public void setNvaCpod(Double nvaCpod) {
+    public void setNvaCpod(String nvaCpod) {
         this.nvaCpod = nvaCpod;
     }
 
     /**
      * 获取：插片NVA(OD)
      */
-    public Double getNvaCpod() {
+    public String getNvaCpod() {
         return nvaCpod;
     }
 
     /**
      * 设置：插片NVA(OS)
      */
-    public void setNvaCpos(Double nvaCpos) {
+    public void setNvaCpos(String nvaCpos) {
         this.nvaCpos = nvaCpos;
     }
 
     /**
      * 获取：插片NVA(OS)
      */
-    public Double getNvaCpos() {
+    public String getNvaCpos() {
         return nvaCpos;
     }
 
     /**
      * 设置：插片add(OD)
      */
-    public void setAddCpod(Double addCpod) {
+    public void setAddCpod(String addCpod) {
         this.addCpod = addCpod;
     }
 
     /**
      * 获取：插片add(OD)
      */
-    public Double getAddCpod() {
+    public String getAddCpod() {
         return addCpod;
     }
 
     /**
      * 设置：插片add(OS)
      */
-    public void setAddCpos(Double addCpos) {
+    public void setAddCpos(String addCpos) {
         this.addCpos = addCpos;
     }
 
     /**
      * 获取：插片add(OS)
      */
-    public Double getAddCpos() {
+    public String getAddCpos() {
         return addCpos;
     }
 
     /**
      * 设置：插片测量距离(OD)
      */
-    public void setDistanceOd(Double distanceOd) {
+    public void setDistanceOd(String distanceOd) {
         this.distanceOd = distanceOd;
     }
 
     /**
      * 获取：插片测量距离(OD)
      */
-    public Double getDistanceOd() {
+    public String getDistanceOd() {
         return distanceOd;
     }
 
     /**
      * 设置：插片测量距离(OS)
      */
-    public void setDistanceOs(Double distanceOs) {
+    public void setDistanceOs(String distanceOs) {
         this.distanceOs = distanceOs;
     }
 
     /**
      * 获取：插片测量距离(OS)
      */
-    public Double getDistanceOs() {
+    public String getDistanceOs() {
         return distanceOs;
     }
 

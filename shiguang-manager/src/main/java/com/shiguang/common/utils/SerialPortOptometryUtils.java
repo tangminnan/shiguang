@@ -1,11 +1,11 @@
 package com.shiguang.common.utils;
 
-import com.shiguang.logstatus.domain.JDJInfoDO;
 import com.shiguang.logstatus.domain.JdjInfomationDO;
-import com.shiguang.logstatus.domain.LensMeterDO;
 import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.optometry.controller.SerialDataUtils;
+import com.shiguang.optometry.domain.OptometryInfoDO;
 import com.shiguang.optometry.service.OptometryService;
+import com.shiguang.storeSales.service.SalesService;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
@@ -15,35 +15,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Date;
 import java.util.Enumeration;
-import java.util.List;
-import java.util.logging.LogRecord;
-import java.util.logging.SimpleFormatter;
 
 
 /**
  * 串口参数的配置 串口一般有如下参数可以在该串口打开以前进行配置： 包括串口号，波特率，输入/输出流控制，数据位数，停止位和奇偶校验。
  */
 // 注：串口操作类一定要继承SerialPortEventListener
-public class SerialPortUtils implements SerialPortEventListener {
+public class SerialPortOptometryUtils implements SerialPortEventListener {
     // 检测系统中可用的通讯端口类
     private CommPortIdentifier commPortId;
     private LensMeterService lensMeterService = (LensMeterService) SpringUtil.getBean("lensMeterServiceImpl");
+    private OptometryService optometryService = (OptometryService) SpringUtil.getBean("optometryServiceImpl");
     // 枚举类型
     private Enumeration<CommPortIdentifier> portList;
-    @Autowired
-    private OptometryService optometryService;
+//    @Autowired
+//    private OptometryService optometryService;
     // RS232串口
     private SerialPort serialPort;
-    public static SerialPortUtils serialPort1 = null;
+    public static SerialPortOptometryUtils serialPort1 = null;
 
-    private SerialPortUtils() {
+    private SerialPortOptometryUtils() {
     }
 
-    public static SerialPortUtils getSerialPortUtils() {
+    public static SerialPortOptometryUtils getSerialPortUtils() {
         if (serialPort1 == null) {
-            serialPort1 = new SerialPortUtils();
+            serialPort1 = new SerialPortOptometryUtils();
         }
         return serialPort1;
     }
@@ -141,91 +138,147 @@ public class SerialPortUtils implements SerialPortEventListener {
      */
     public void readComm() {
         try {
-            JdjInfomationDO jdjInfomationDO = new JdjInfomationDO();
+            OptometryInfoDO jdjInfomationDO = new OptometryInfoDO();
             StringBuilder builder = new StringBuilder();
             inputStream = serialPort.getInputStream();
             // 通过输入流对象的available方法获取数组字节长度
             byte[] readBuffer = new byte[inputStream.available()];
-            byteArray = SpringUtil.decode2(readBuffer,byteArray);
-//            System.out.println(bytesToHexString(readBuffer));
-            int len = 0;
-            while ((len = inputStream.read(readBuffer)) != -1) {
+            // 从线路上读取数据流
+            while ((inputStream.read(readBuffer)) != -1) {
+                // 直接获取到的数据
+                // data = new String(readBuffer, 0, len).trim();
+                // 转为十六进制数据
                 dataHex = bytesToHexString(readBuffer);
                 builder.append(dataHex);
-                //System.out.println("dataHex结果:" + dataHex);// 读取后置空流对象
                 inputStream.close();
                 inputStream = null;
                 break;
             }
-//            System.out.println("当前a="+a);
-//            System.out.println("当前登录账号："+id);
-            if (a==1){
-                a=a+1;
-                jdjInfomationDO.setId(Long.valueOf(id));
-                jdjInfomationDO.setCompanyId(ShiroUtils.getUser().getCompanyId());
-                jdjInfomationDO.setRemark1(dataHex);
-                lensMeterService.saveJdjInfomation(jdjInfomationDO);
-            } else if(a==2){
-                a=a+1;
-                jdjInfomationDO.setRemark2(dataHex);
-                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
-                jdjInfomationDO.setId(Long.valueOf(id));
-                lensMeterService.updateJdjInfomation(jdjInfomationDO);
-            } else if (a == 3){
-                a=a+1;
-                jdjInfomationDO.setRemark3(dataHex);
-                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
-                jdjInfomationDO.setId(Long.valueOf(id));
-                lensMeterService.updateJdjInfomation(jdjInfomationDO);
-            } else if (a == 4){
-                a=a+1;
-                jdjInfomationDO.setRemark4(dataHex);
-                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
-                jdjInfomationDO.setId(Long.valueOf(id));
-                lensMeterService.updateJdjInfomation(jdjInfomationDO);
-            } else if (a == 5){
-                a=a+1;
-                jdjInfomationDO.setRemark5(dataHex);
-                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
-                jdjInfomationDO.setId(Long.valueOf(id));
-                lensMeterService.updateJdjInfomation(jdjInfomationDO);
-            } else if (a == 6){
-                a=a+1;
-                jdjInfomationDO.setRemark6(dataHex);
-                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
-                jdjInfomationDO.setId(Long.valueOf(id));
-                lensMeterService.updateJdjInfomation(jdjInfomationDO);
-            } else if (a == 7){
-                a=a+1;
-                jdjInfomationDO.setRemark7(dataHex);
-                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
-                jdjInfomationDO.setId(Long.valueOf(id));
-                lensMeterService.updateJdjInfomation(jdjInfomationDO);
-            } else if (a == 8){
-                a=a+1;
-                jdjInfomationDO.setRemark8(dataHex);
-                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
-                jdjInfomationDO.setId(Long.valueOf(id));
-                lensMeterService.updateJdjInfomation(jdjInfomationDO);
-            } else if (a == 9){
-                a=a+1;
-                jdjInfomationDO.setRemark9(dataHex);
-                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
-                jdjInfomationDO.setId(Long.valueOf(id));
-                lensMeterService.updateJdjInfomation(jdjInfomationDO);
-            } else if (a == 10){
-                a=a+1;
-                jdjInfomationDO.setRemark10(dataHex);
-                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
-                jdjInfomationDO.setId(Long.valueOf(id));
-                lensMeterService.updateJdjInfomation(jdjInfomationDO);
-            } else if (a == 11){
-                a=a+1;
-                jdjInfomationDO.setRemark11(dataHex);
-                //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
-                jdjInfomationDO.setId(Long.valueOf(id));
-                lensMeterService.updateJdjInfomation(jdjInfomationDO);
-            }
+            System.out.println("电脑验光数据:"+builder.toString());
+            System.out.println("dataHex数据："+dataHex);
+            System.out.println("当前a="+a);
+            System.out.println("当前登录账号："+id);
+                if (a == 1) {
+                    a=a+1;
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    jdjInfomationDO.setCompanyId(ShiroUtils.getUser().getCompanyId());
+                    jdjInfomationDO.setRemark1(dataHex);
+                    optometryService.saveOptoInfomation(jdjInfomationDO);
+                } else if (a == 2) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark2(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 3) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark3(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 4) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark4(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 5) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark5(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 6) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark6(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 7) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark7(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 8) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark8(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 9) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark9(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 10) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark10(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 11) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark11(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 12) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark12(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 13) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark13(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 14) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark14(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 15) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark15(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 16) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark16(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 17) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark17(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 18) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark18(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 19) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark19(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                } else if (a == 20) {
+                    a=a+1;
+                    jdjInfomationDO.setRemark20(dataHex);
+                    //String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+                    jdjInfomationDO.setId(Long.valueOf(id));
+                    optometryService.updateOptoInfomation(jdjInfomationDO);
+                }
 
 //            System.out.println("结果:="+builder);
 //            byteArray = SpringUtil.decode2(readBuffer,byteArray);

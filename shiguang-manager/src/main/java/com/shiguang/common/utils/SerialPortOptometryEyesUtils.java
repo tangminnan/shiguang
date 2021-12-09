@@ -1,9 +1,8 @@
 package com.shiguang.common.utils;
 
-import com.shiguang.logstatus.domain.JDJInfoDO;
 import com.shiguang.logstatus.domain.JdjInfomationDO;
-import com.shiguang.logstatus.domain.LensMeterDO;
 import com.shiguang.logstatus.service.LensMeterService;
+import com.shiguang.optometry.controller.SerialDataEyesUtils;
 import com.shiguang.optometry.controller.SerialDataUtils;
 import com.shiguang.optometry.service.OptometryService;
 import gnu.io.CommPortIdentifier;
@@ -15,18 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Date;
 import java.util.Enumeration;
-import java.util.List;
-import java.util.logging.LogRecord;
-import java.util.logging.SimpleFormatter;
 
 
 /**
  * 串口参数的配置 串口一般有如下参数可以在该串口打开以前进行配置： 包括串口号，波特率，输入/输出流控制，数据位数，停止位和奇偶校验。
  */
 // 注：串口操作类一定要继承SerialPortEventListener
-public class SerialPortUtils implements SerialPortEventListener {
+public class SerialPortOptometryEyesUtils implements SerialPortEventListener {
     // 检测系统中可用的通讯端口类
     private CommPortIdentifier commPortId;
     private LensMeterService lensMeterService = (LensMeterService) SpringUtil.getBean("lensMeterServiceImpl");
@@ -36,14 +31,14 @@ public class SerialPortUtils implements SerialPortEventListener {
     private OptometryService optometryService;
     // RS232串口
     private SerialPort serialPort;
-    public static SerialPortUtils serialPort1 = null;
+    public static SerialPortOptometryEyesUtils serialPort1 = null;
 
-    private SerialPortUtils() {
+    private SerialPortOptometryEyesUtils() {
     }
 
-    public static SerialPortUtils getSerialPortUtils() {
+    public static SerialPortOptometryEyesUtils getSerialPortUtils() {
         if (serialPort1 == null) {
-            serialPort1 = new SerialPortUtils();
+            serialPort1 = new SerialPortOptometryEyesUtils();
         }
         return serialPort1;
     }
@@ -55,10 +50,10 @@ public class SerialPortUtils implements SerialPortEventListener {
     private String data;
     // 保存串口返回信息十六进制
     private String dataHex;
-    private SerialDataUtils serialDataUtils = SerialDataUtils.getSerialPortUtils();
+    private SerialDataEyesUtils serialDataUtils = SerialDataEyesUtils.getSerialPortUtils();
     private byte[] byteArray = null;
     int a=1;
-    String id;
+    String id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
 
     /**
      * 初始化串口
@@ -70,7 +65,6 @@ public class SerialPortUtils implements SerialPortEventListener {
     @SuppressWarnings("unchecked")
     public void init(ParamConfig paramConfig) {
         a=1;
-        id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
         // 获取系统中所有的通讯端口
         portList = CommPortIdentifier.getPortIdentifiers();
         // 记录是否含有指定串口

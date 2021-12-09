@@ -1,76 +1,40 @@
 package com.shiguang.common.utils;
 
 public final class Looper {
-    //当前线程Looper存储
-    static final ThreadLocal<Looper> sThreadLocal = new ThreadLocal<>();
-    //主线程Looper
-    private static Looper sMainLooper;
-    //当前线程Looper管理的消息队列
-    final MessageQueue mQueue;
-    //当前线程
-    final Thread mThread;
+    private static ThreadLocal<Looper> sThreadLocal = new ThreadLocal<Looper>();
+
+    MessageQueue queue;
 
     private Looper() {
-        mQueue = new MessageQueue();
-        mThread = Thread.currentThread();
+        queue = new MessageQueue();
     }
 
-    /**
-     * 循环准备，需在handler创建之前调用
-     */
     public static void prepare() {
         if (sThreadLocal.get() != null) {
-            throw new RuntimeException("Only one Looper may be created per thread");
+            throw new IllegalStateException("each thread should not has more than one looper");
         }
+
         sThreadLocal.set(new Looper());
     }
 
-    /**
-     * 若当前线程为主线程，则采用该循环准备
-     */
-    public static void prepareMainLooper() {
-        prepare();
-        synchronized (Looper.class) {
-            if (sMainLooper != null) {
-                throw new IllegalStateException("The main Looper has already been prepared.");
-            }
-            sMainLooper = myLooper();
-        }
-    }
-
-    /**
-     * 获取主线程Looper
-     * @return
-     */
-    public static Looper getMainLooper() {
-        synchronized (Looper.class) {
-            return sMainLooper;
-        }
-    }
-
-    /**
-     * 获取当前线程Looper
-     * @return
-     */
     public static Looper myLooper() {
         return sThreadLocal.get();
     }
 
-    /**
-     * 循环处理消息队列，堵塞线程
-     */
     public static void loop() {
-        final Looper me = myLooper();
-        if (me == null) {
-            throw new RuntimeException("No Looper; Looper.prepare() wasn't called on this thread.");
-        }
-        for (;;) {
-            Message msg = me.mQueue.next();
+        Looper looper = myLooper();
+        MessageQueue mMessageQueue = looper.queue;
+        for (; ;) {
+            Message msg = mMessageQueue.next();
+
             if (msg == null) {
-                //表示消息队列已退出（不具备退出标记）
                 return;
             }
+
             msg.target.dispatchMessage(msg);
+
+            msg.recyle();
         }
     }
+
 }
