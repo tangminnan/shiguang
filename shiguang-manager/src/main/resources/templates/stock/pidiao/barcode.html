@@ -17,7 +17,9 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/pidiao/barcode.js"></script>
 <script type="text/javascript">
-
+	window.onload=function () {
+		document.getElementsByName('goodsCode')[0].focus();
+	}
 </script>
 </body>
 </html>

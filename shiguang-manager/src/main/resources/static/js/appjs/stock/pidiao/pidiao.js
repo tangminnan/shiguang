@@ -589,6 +589,8 @@ function showCol() {
         }
         obj.danjuNumber = danjuNumber;
 
+        obj.useCount = 1;
+
 
         objArray.push(obj);
     });

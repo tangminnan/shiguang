@@ -79,7 +79,7 @@
 		<div class="Xbtn">
 			<input type="button" value="单品添加商品" onclick="choiceGoods()" />
 
-			<input id="barcode" type="button" onclick="getBarcode()" value="条码扫描" />
+			<!--<input id="barcode" type="button" onclick="getBarcode()" value="条码扫描" />-->
 
 		</div>
 		<div class="Cbtn buyBtns">
@@ -87,7 +87,6 @@
 			<input id="returnzt" name="returnzt" value="1" type="hidden"/>
 			<input name="shTime" value="" type="hidden"/>
 			<input type="button" class="H_bc" value="保存并审核" onclick="save()" />
-			<!--<input type="checkbox" id="Hbc" /> <label for="Hbc">保存并审核</label>-->
 		</div>
 	</div>
 
@@ -160,8 +159,10 @@
                         $(".outcw").append("<option value='" + id + "'>" + roleName + "</option>");
                     });
                 }
-            })
+            });
         // }
+
+        hejiadd();
     });
 	function outposion() {
 	var outDepartment = $("#outDepartment").val();
@@ -254,7 +255,7 @@ function inposion() {
 					var rows = window[layero.find('iframe')[0]['name']].showCol();
 					for (var i = 0; i < rows.length; i++) {
 						a = a + 1;
-						$(".liebiao").before("<tr class='val'> " +
+						$("#inventoryId").append("<tr class='val'> " +
 								// "<td><input name='one'  type=\"checkbox\"/></td>\n" +
 								"<td name='goodsNum'>" + rows[i].goodsNum + "</td>\n" +
 								"<input name='goodsNum' type='hidden' value='" + rows[i].goodsNum + "'>\n" +
@@ -265,8 +266,8 @@ function inposion() {
 								// "<td name='needCount'>" + rows[i].needCount + "</td>\n" +
 								"<td name='goodsCount'>" + rows[i].goodsCount + "</td>\n" +
 								"<input id='goodsCount" + a + "' name='goodsCount' type='hidden' value='" + rows[i].goodsCount + "'>\n" +
-								"<td >" + "<input id='useCount" + a + "' name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)'/>" + "</td>" +
-								"<td name='goodsCode'>" + rows[i].goodsCode + "</td>\n" +
+								"<td >" + "<input id='useCount" + a + "' index = a  name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)' value='" + rows[i].useCount + "'/>" + "</td>" +
+                                "<td name='goodsCode'>" + rows[i].goodsCode + "</td>\n" +
 								"<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>\n" +
 								"<td name='useday'>" + rows[i].useday + "</td>\n" +
 								"<input name='useday' type='hidden' value='" + rows[i].useday + "'>\n" +
@@ -302,6 +303,7 @@ function inposion() {
                             	"<td><em  onclick='delertTr(this)'></em></td>\n" +
 								"</tr>");
 					}
+                    hejiadd();
 				}
 			});
 			layer.full(toIndex)
@@ -312,7 +314,7 @@ function inposion() {
     function hejiadd(object) {
         addcount=0;
         var size=$("input[name='useCount']").length;
-        // alert(size+"数量");
+        alert(size+"数量");
         if (size!=0){
             $("input[name='useCount']").each(
                 function(){
@@ -374,6 +376,31 @@ function inposion() {
 		}
     }
 
+
+
+    $("body").on("dblclick","input[name=useCount]",function(){
+        // console.log(123)
+        // alert("etyyyyyyyyyyyyyyyyyy")
+        var x;
+        var r=confirm("是否向下复制数量!");
+        if (r==true){
+            x="确定";
+        }
+        else{
+            x="取消";
+        }
+        if(x=="确定"){
+            var index = $("input[name=useCount]").index($(this));
+            // $("#ad ul li").index(this)
+            // console.log($("input[name=useCount]"));
+            // alert(index);
+            for (var i = index; i < $("input[name=useCount]").length; i++) {
+                $("input[name=useCount]").eq(i).val($(this).val())
+            }
+            hejiadd();
+        }
+
+        })
 
 </script>
 </body>

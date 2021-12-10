@@ -63,7 +63,7 @@ function findGoods(){
                 barHtml+= "<td name='goodsCount'>" + datajson[key].goodsCount + "</td>";
                 barHtml+= "<input name='goodsCount' type='hidden' value='" + datajson[key].goodsCount + "'>";
 
-                barHtml+= "<td>" + "<input name='count' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)'/>" + "</td>";
+                barHtml+= "<td>" + "<input name='count' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)' />" + "</td>";
 
                 barHtml+= "<td name='goodsCode'>" + datajson[key].goodsCode + "</td>";
                 barHtml+= "<input name='goodsCode' type='hidden' value='" + datajson[key].goodsCode + "'>";

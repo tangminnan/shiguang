@@ -182,6 +182,7 @@ function showCol() {
         }
         obj.producNum = producNum;
         obj.producName = producName;
+        obj.goodsCount = 1;
         obj.producFactory = producFactory;
         obj.unitname = unitname;
         obj.factory = factory;
@@ -427,6 +428,7 @@ function showCol() {
 
         objArray.push(obj);
     });
+    // hejiadd();
     return objArray;
 }
 

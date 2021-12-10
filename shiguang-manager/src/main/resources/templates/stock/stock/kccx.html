@@ -516,8 +516,10 @@
         }else if (goodsType == 2){
             jp.style = "display: none";
         }else if (goodsType == 3){
+            $("#classtype").val("") ;
             jp.style = "display: block";
         }else if (goodsType == 4){
+            $("#classtype").val("") ;
             jp.style = "display: block";
         }else if (goodsType == 5){
             jp.style = "display: none";
@@ -536,7 +538,7 @@
         if (goodsType== ""){
             $("#classtype").val("") ;
         }else {
-            $("#classtype").val("0") ;
+            $("#classtype").val("1") ;
         }
         var goodsType = $("#goodsType option:selected").val();
             if (goodsType == 3 || goodsType == 4) {

@@ -423,6 +423,9 @@
     <script type="text/javascript" src="/js/appjs/stock/stock/showdate.js"></script>
     <!--<script type="text/javascript" src="/js/appjs/stock/stock/date.js"></script>-->
     <script type="text/javascript">
+        $(document).ready(function () {
+           hejiadd();
+        });
         var a = 0;
         var b = 0;
         // var addcount = 0;
@@ -452,6 +455,9 @@
         function goodsidstr() {
             var value = $("#goodsType option:selected").text();
             if (value == '镜架') {
+                $("#mfrsid").val("");
+                $("#mfrsName").val("");
+                $("#mfrsNames").val("");
                 $("input[name='newcount']").val("");
                 addcount=0;
                 $(".val2").remove();
@@ -471,7 +477,11 @@
                 tab7.style = "display: none";
                 tab8.style = "display: none";
                 tab9.style = "display: none";
+                hejiadd();
             } else if (value == '配件') {
+                $("#mfrsid").val("");
+                $("#mfrsName").val("");
+                $("#mfrsNames").val("");
                 $("input[name='newcount']").val("");
                 addcount=0;
                 $(".val1").remove();
@@ -491,7 +501,11 @@
                 tab7.style = "display: none";
                 tab8.style = "display: none";
                 tab9.style = "display: none";
+                hejiadd();
             } else if (value == '镜片') {
+                $("#mfrsid").val("");
+                $("#mfrsName").val("");
+                $("#mfrsNames").val("");
                 $("input[name='newcount']").val("");
                 addcount=0;
                 $(".val1").remove();
@@ -511,7 +525,11 @@
                 tab7.style = "display: none";
                 tab8.style = "display: none";
                 tab9.style = "display: none";
+                hejiadd();
             } else if (value == '隐形') {
+                $("#mfrsid").val("");
+                $("#mfrsName").val("");
+                $("#mfrsNames").val("");
                 $("input[name='newcount']").val("");
                 addcount=0;
                 $(".val1").remove();
@@ -531,7 +549,11 @@
                 tab7.style = "display: none";
                 tab8.style = "display: none";
                 tab9.style = "display: none";
+                hejiadd();
             } else if (value == '护理液') {
+                $("#mfrsid").val("");
+                $("#mfrsName").val("");
+                $("#mfrsNames").val("");
                 $("input[name='newcount']").val("");
                 addcount=0;
                 $(".val1").remove();
@@ -551,7 +573,11 @@
                 tab7.style = "display: none";
                 tab8.style = "display: none";
                 tab9.style = "display: none";
+                hejiadd();
             } else if (value == '太阳镜') {
+                $("#mfrsid").val("");
+                $("#mfrsName").val("");
+                $("#mfrsNames").val("");
                 $("input[name='newcount']").val("");
                 addcount=0;
                 $(".val1").remove();
@@ -571,7 +597,11 @@
                 tab7.style = "display: none";
                 tab8.style = "display: none";
                 tab9.style = "display: none";
+                hejiadd();
             } else if (value == '老花镜') {
+                $("#mfrsid").val("");
+                $("#mfrsName").val("");
+                $("#mfrsNames").val("");
                 $("input[name='newcount']").val("");
                 addcount=0;
                 $(".val1").remove();
@@ -591,7 +621,11 @@
                 tab7.style = "display: block";
                 tab8.style = "display: none";
                 tab9.style = "display: none";
+                hejiadd();
             } else if (value == '耗材') {
+                $("#mfrsid").val("");
+                $("#mfrsName").val("");
+                $("#mfrsNames").val("");
                 $("input[name='newcount']").val("");
                 addcount=0;
                 $(".val1").remove();
@@ -611,7 +645,11 @@
                 tab7.style = "display: none";
                 tab8.style = "display: block";
                 tab9.style = "display: none";
+                hejiadd();
             } else if (value == '视光') {
+                $("#mfrsid").val("");
+                $("#mfrsName").val("");
+                $("#mfrsNames").val("");
                 $("input[name='newcount']").val("");
                 addcount=0;
                 $(".val1").remove();
@@ -631,7 +669,11 @@
                 tab7.style = "display: none";
                 tab8.style = "display: none";
                 tab9.style = "display: block";
+                hejiadd();
             } else {
+                $("#mfrsid").val("");
+                $("#mfrsName").val("");
+                $("#mfrsNames").val("");
                 $("input[name='newcount']").val("");
                 addcount=0;
                 $(".val1").remove();
@@ -652,6 +694,7 @@
                 tab7.style = "display: none";
                 tab8.style = "display: none";
                 tab9.style = "display: none";
+                hejiadd();
             }
         }
 
@@ -749,7 +792,7 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'   onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)' />" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'  onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "' />" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
@@ -782,7 +825,7 @@
                                 type: 'date'
                             });
                         }
-
+                        hejiadd();
                     }
                 });
                 layer.full(toIndex);
@@ -837,7 +880,7 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input  readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
@@ -870,7 +913,7 @@
                                 type: 'date'
                             });
                         }
-
+                        hejiadd();
                     }
                 });
                 layer.full(toIndex);
@@ -929,7 +972,7 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
@@ -962,7 +1005,7 @@
                                 type: 'date'
                             });
                         }
-
+                        hejiadd();
                     }
                 });
                 layer.full(toIndex);
@@ -1022,7 +1065,7 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
@@ -1055,7 +1098,7 @@
                                 type: 'date'
                             });
                         }
-
+                        hejiadd();
                     }
                 });
                 layer.full(toIndex);
@@ -1111,7 +1154,7 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
@@ -1144,7 +1187,7 @@
                                 type: 'date'
                             });
                         }
-
+                        hejiadd();
                     }
                 });
                 layer.full(toIndex);
@@ -1199,7 +1242,7 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly  id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
@@ -1232,7 +1275,7 @@
                                 type: 'date'
                             });
                         }
-
+                        hejiadd();
                     }
                 });
                 layer.full(toIndex);
@@ -1289,7 +1332,7 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
@@ -1322,7 +1365,7 @@
                                 type: 'date'
                             });
                         }
-
+                        hejiadd();
                     }
                 });
                 layer.full(toIndex);
@@ -1376,7 +1419,7 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
@@ -1409,7 +1452,7 @@
                                 type: 'date'
                             });
                         }
-
+                        hejiadd();
                     }
                 });
                 layer.full(toIndex);
@@ -1463,7 +1506,7 @@
                                 "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>\n" +
                                 // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 "<td >" + "<input readonly id='produceDay" + b + "'  name='produceDay'  type=\"text\"/>" + "</td>\n" +
-                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onkeyup='shuliang(this.id)' onchange='hejiadd(this.value)'/>" + "</td>" +
+                                "<td  >" + "<input  id='goodsCount" + a + "' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>" +
                                 "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>" +
                                 "<td><em  onclick='delertTr(this)'></em></td>\n" +
                                 "</tr>");//页面每个数量
@@ -1496,7 +1539,7 @@
                                 type: 'date'
                             });
                         }
-
+                        hejiadd();
                     }
                 });
                 layer.full(toIndex);
@@ -1504,12 +1547,6 @@
         }
 
 
-        function shuliang(object) {
-            // id='goodsCount' name='goodsCount'
-            var counts=$("#"+object).val();
-
-            document.getElementsByName("goodsCount").values(counts);
-        }
 
         function hejiadd(object) {
             addcount=0;
@@ -1548,6 +1585,26 @@
             }
             hejiadd();
         }
+
+        $("body").on("dblclick","input[name=goodsCount]",function(){
+
+            var x;
+            var r=confirm("是否向下复制数量!");
+            if (r==true){
+                x="确定";
+            }
+            else{
+                x="取消";
+            }
+            if(x=="确定"){
+                var index = $("input[name=goodsCount]").index($(this));
+                for (var i = index; i < $("input[name=goodsCount]").length; i++) {
+                    $("input[name=goodsCount]").eq(i).val($(this).val())
+                }
+                hejiadd();
+            }
+
+        })
 
     </script>
 </body>

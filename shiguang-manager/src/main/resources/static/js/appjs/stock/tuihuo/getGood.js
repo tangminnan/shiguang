@@ -53,6 +53,7 @@ function showCol() {
         obj.goodsCode = goodsCode;
         obj.goodsxinxiid = goodsxinxiid;
         obj.retailPrice = retailPrice;
+        obj.count = 1;
         objArray.push(obj);
     });
     return objArray;

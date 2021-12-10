@@ -74,11 +74,10 @@
 	<div class="HH_btns">
 		<div class="Xbtn">
 			<input type="button" value="单品添加商品" onclick="getGood()" />
-			<input id="barcode" type="button" onclick="getBarcode()" value="条码扫描" />
+			<!--<input id="barcode" type="button" onclick="getBarcode()" value="条码扫描" />-->
 		</div>
 		<div class="Cbtn buyBtns">
 			<input type="button" class="H_bc" value="保存并审核" onclick="save()" />
-			<!--<input type="checkbox" id="Hbc" /> <label for="Hbc">保存并审核</label>-->
 		</div>
 	</div>
 
@@ -120,6 +119,9 @@
 <script type="text/javascript" src="/js/appjs/stock/tuihuo/findmfrs.js"></script>
 <script type="text/javascript" src="/js/appjs/stock/tuihuo/add.js"></script>
 <script type="text/javascript">
+    $(document).ready(function () {
+        hejiadd();
+    });
     // <!--单品添加商品-->
     function getGood() {
         var mfrsid = $('#mfrsid').val();
@@ -156,7 +158,7 @@
                         // if(null == xml[i].factory){
                         //     xml[i].factory="";
                         // }
-                        $(".goods").before("<tr class='val'> " +
+                        $("#inventoryId").append("<tr class='val'> " +
                             // "<td><input name='one'  type=\"checkbox\"/></td>\n" +
                             "<td name='goodsNum'>" + rows[i].goodsNum + "</td>\n" +
                             "<input name='goodsNum' type='hidden' value='" + rows[i].goodsNum + "'>\n" +
@@ -170,7 +172,7 @@
 							 "<td name='goodsCount'>" + rows[i].goodsCount + "</td>\n" +
                             "<input name='goodsCount' type='hidden' value='" + rows[i].goodsCount + "'>\n" +
 
-                            "<td>" + "<input name='count' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)'/>" + "</td>" +
+                            "<td>" + "<input name='count' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)' value='" + rows[i].count + "'/>" + "</td>" +
 
 							"<td name='goodsCode'>" + rows[i].goodsCode + "</td>\n" +
                             "<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>\n" +
@@ -180,6 +182,7 @@
                             "<td><em  onclick='delertTr(this)'></em></td>\n" +
                             "</tr>");
                     }
+                    hejiadd();
                 }
             });
             layer.full(toIndex)
@@ -256,6 +259,26 @@
 		}
 
     }
+
+    $("body").on("dblclick","input[name=count]",function(){
+
+        var x;
+        var r=confirm("是否向下复制数量!");
+        if (r==true){
+            x="确定";
+        }
+        else{
+            x="取消";
+        }
+        if(x=="确定"){
+            var index = $("input[name=count]").index($(this));
+            for (var i = index; i < $("input[name=count]").length; i++) {
+                $("input[name=count]").eq(i).val($(this).val())
+            }
+            hejiadd();
+        }
+
+    })
 </script>
 </form>
 </body>
