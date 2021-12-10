@@ -184,13 +184,17 @@
 	    if ('' == goodsType){
 	        return layer.alert("请选择盘点类型")
 		}
+		var positionId = $("#positionId").val();
+	    if ('' == positionId){
+	        return layer.alert("请选择盘点仓位")
+		}
         layer.open({
             type : 2,
             title : '商品添加',
             maxmin : true,
             shadeClose : false, // 点击遮罩关闭层
             area : [ '500px', '220px' ],
-            content : "/information/gainLoss/barcode/" +goodsType, // iframe的url
+            content : "/information/gainLoss/barcode/" +goodsType+'/'+positionId, // iframe的url
         });
 	}
 

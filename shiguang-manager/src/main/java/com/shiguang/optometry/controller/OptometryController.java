@@ -189,7 +189,7 @@ public class OptometryController {
             }
 
             String dataSerial = SerialPortUtils.hexStringToString(jdjInfoDOS);
-            dataSerial = dataSerial.substring(dataSerial.indexOf("IDNIDEK/ARK-1"));
+            dataSerial = dataSerial.substring(dataSerial.indexOf("DRM"));
             System.out.println("数据="+dataSerial);
             String left = SpringUtil.getStringData(dataSerial,"OL",2,"OR");
             String zfsphleft = left.substring(0,1);
@@ -221,6 +221,7 @@ public class OptometryController {
             optometryDO.setSphereRight(rightsph);
             optometryDO.setCylinderRight(rightcyl);
             optometryDO.setAxialRight(rightzx);
+            optometryService.deleteOptoInfomation(id);
         }
         try {
             Method method = ChuankOptometry.class.getMethod("main",

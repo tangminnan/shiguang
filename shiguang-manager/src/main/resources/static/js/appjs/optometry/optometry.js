@@ -1,7 +1,7 @@
 
 var prefix = "/information/optometry"
 $(function() {
-	load();
+	//load();
 });
 
 function load() {
@@ -95,6 +95,7 @@ function load() {
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
+    load();
     // var cardMember = $("#cardNumber").val();
     // if ("" != cardMember){
      //    $.ajax({

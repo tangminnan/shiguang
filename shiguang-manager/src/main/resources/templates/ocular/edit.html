@@ -211,6 +211,7 @@
                         <!--</div>-->
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
+                                <button type="button" class="btn btn-primary" onclick="getEyes()">读取</button>
                                 <button type="submit" class="btn btn-primary">提交</button>
                             </div>
                         </div>
@@ -222,6 +223,16 @@
 </div>
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/ocular/add.js">
+</script>
+<script type="text/javascript">
+    function getEyes(){
+        $.ajax({
+            type : 'POST',
+            url : '/information/ocular/getOcular',
+            success : function(data) {
+            }
+        });
+    }
 </script>
 </body>
 </html>

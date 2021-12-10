@@ -359,61 +359,64 @@ public class GainLossController {
 	/**
 	 * 条码扫描
 	 */
-	@GetMapping("/barcode/{goodsType}")
+	@GetMapping("/barcode/{goodsType}/{positionId}")
 	@RequiresPermissions("information:gainLoss:barcode")
-	String barcode(@PathVariable("goodsType") String goodsType,Model model){
+	String barcode(@PathVariable("goodsType") String goodsType,@PathVariable("positionId") String positionId,Model model){
 		model.addAttribute("goodsType",goodsType);
+		model.addAttribute("positionId",positionId);
 		return "inventory/gainloss/barcode";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/codeList")
-	List<?> codeList(String goodsCode, String goodsType, Model model) {
+	List<?> codeList(String goodsCode, String goodsType, String positionId,Model model) {
 //		List<GoodsDO> goodsDOList = brandService.caidan(mfrsid);
 //		model.addAttribute("goodsDOList", goodsDOList);
 		Map<String,Object> map = new HashMap<>();
 		map.put("goodsCode",goodsCode);
+		map.put("positionId",positionId);
 		List<String> list = new ArrayList<>();
-		if ("隐形".equals(goodsType)){
-			List<YxcpDO> yxcpDOList = yxcpService.list(map);
-			if (null != yxcpDOList && yxcpDOList.size() > 0){
-				return yxcpDOList;
-			} else {
-				List<YxdzDO> yxdzDOList = yxdzService.list(map);
-				return yxdzDOList;
-			}
-
-		} else if ("护理液".equals(goodsType)){
-			List<HlyDO> hlyDOList = hlyService.list(map);
-			return hlyDOList;
-		} else if ("镜架".equals(goodsType)){
-			List<ProducaDO> producaDOList = producaService.list(map);
-			return producaDOList;
-		} else if ("配件".equals(goodsType)){
-			List<PartsDO> partsDOList = partsService.list(map);
-			return partsDOList;
-		} else if ("镜片".equals(goodsType)){
-			List<JpcpDO> jpcpDOList = jpcpService.list(map);
-			if (null != jpcpDOList && jpcpDOList.size() > 0){
-				return jpcpDOList;
-			} else {
-				List<JpdzDO> jpdzDOList = jpdzService.listDz(map);
-				return jpdzDOList;
-			}
-		} else if ("太阳镜".equals(goodsType)){
-			List<TyjDO> tyjDOList = tyjService.list(map);
-			return tyjDOList;
-		} else if ("老花镜".equals(goodsType)){
-			List<OldlensDO> oldlensDOList = oldlensService.list(map);
-			return oldlensDOList;
-		} else if ("耗材".equals(goodsType)){
-			List<HcDO> hcDOList = hcService.list(map);
-			return hcDOList;
-		} else if ("视光".equals(goodsType)){
-			List<ShiguangDO> shiguangDOList = shiguangService.list(map);
-			return shiguangDOList;
-		}
-		return list;
+		List<StockDO> stockDOList = stockService.list(map);
+//		if ("隐形".equals(goodsType)){
+//			List<YxcpDO> yxcpDOList = yxcpService.list(map);
+//			if (null != yxcpDOList && yxcpDOList.size() > 0){
+//				return yxcpDOList;
+//			} else {
+//				List<YxdzDO> yxdzDOList = yxdzService.list(map);
+//				return yxdzDOList;
+//			}
+//
+//		} else if ("护理液".equals(goodsType)){
+//			List<HlyDO> hlyDOList = hlyService.list(map);
+//			return hlyDOList;
+//		} else if ("镜架".equals(goodsType)){
+//			List<ProducaDO> producaDOList = producaService.list(map);
+//			return producaDOList;
+//		} else if ("配件".equals(goodsType)){
+//			List<PartsDO> partsDOList = partsService.list(map);
+//			return partsDOList;
+//		} else if ("镜片".equals(goodsType)){
+//			List<JpcpDO> jpcpDOList = jpcpService.list(map);
+//			if (null != jpcpDOList && jpcpDOList.size() > 0){
+//				return jpcpDOList;
+//			} else {
+//				List<JpdzDO> jpdzDOList = jpdzService.listDz(map);
+//				return jpdzDOList;
+//			}
+//		} else if ("太阳镜".equals(goodsType)){
+//			List<TyjDO> tyjDOList = tyjService.list(map);
+//			return tyjDOList;
+//		} else if ("老花镜".equals(goodsType)){
+//			List<OldlensDO> oldlensDOList = oldlensService.list(map);
+//			return oldlensDOList;
+//		} else if ("耗材".equals(goodsType)){
+//			List<HcDO> hcDOList = hcService.list(map);
+//			return hcDOList;
+//		} else if ("视光".equals(goodsType)){
+//			List<ShiguangDO> shiguangDOList = shiguangService.list(map);
+//			return shiguangDOList;
+//		}
+		return stockDOList;
 	}
 
 	/**
