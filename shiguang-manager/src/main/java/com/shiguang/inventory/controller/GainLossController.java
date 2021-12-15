@@ -377,6 +377,11 @@ public class GainLossController {
 		map.put("positionId",positionId);
 		List<String> list = new ArrayList<>();
 		List<StockDO> stockDOList = stockService.list(map);
+		if (null != stockDOList && stockDOList.size() > 0){
+			for (StockDO stockDO : stockDOList){
+				stockDO.setGoodsCount("1");
+			}
+		}
 //		if ("隐形".equals(goodsType)){
 //			List<YxcpDO> yxcpDOList = yxcpService.list(map);
 //			if (null != yxcpDOList && yxcpDOList.size() > 0){

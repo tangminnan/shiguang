@@ -853,6 +853,7 @@ public class MemberController {
             }
         } else {
             map.put("identityId",member.getIdentityId());
+            map.put("state","1");
             List<MemberDO> list = memberService.list(map);
             if (list.size() > 0){
                 return R.error("该会员已存在");
