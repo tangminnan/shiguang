@@ -108,7 +108,7 @@ public class ResultDO implements Serializable {
     private String followTime;
     //复诊类型
     private String visitType;
-    //删除状态
+    //删除状态0删除1未删除
     private String status;
     //是否结算
     private String haveid;
@@ -1725,9 +1725,9 @@ public class ResultDO implements Serializable {
     private Long kjyyId;
     //处方类型
     private String kjyyPrescriptionType;
-    //医生
+    //kjyy医生
     private String kjyyDoctor;
-    //验光师
+    //kjyy验光师
     private String kjyyOptometryName;
     //球镜OD
     private String kjyySphod;
@@ -3692,7 +3692,9 @@ public class ResultDO implements Serializable {
     private String sjxlJytjod;
     //近用瞳距(mm)(OS)
     private String sjxlJytjos;
+//    瞳高(mm)(OD)
     private String sjxlTgod;
+//    瞳高(mm)(OS)
     private String sjxlTgos;
     //远用va(OD)
     private String sjxlYyvaod;

@@ -89,23 +89,23 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">采购结算方式：</label>
-                            <div class="col-sm-8">
-                                <select name="payid" id="payid" th:value="${mfrs.payid}" onchange="payChange()"
-                                        data-actions-box="false" data-size="5" disabled>
-                                    <option></option>
-                                    <option th:each="ls:${payDOList}"
-                                            th:text="${ls.paymethod}"
-                                            th:value="${ls.payid}"></option>
-                                </select>
-                                <input id="payids" name="payids" th:value="${mfrs.payid}"
-                                       type="hidden">
-                                <input id="payday" name="payday" th:value="${mfrs.payday}" type="text" hidden
-                                       placeholder="请输入天数"
-                                       oninput="value=value.replace(/[^\d]/g,'')">
-                            </div>
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">采购结算方式：</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<select name="payid" id="payid" th:value="${mfrs.payid}" onchange="payChange()"-->
+                                        <!--data-actions-box="false" data-size="5" disabled>-->
+                                    <!--<option></option>-->
+                                    <!--<option th:each="ls:${payDOList}"-->
+                                            <!--th:text="${ls.paymethod}"-->
+                                            <!--th:value="${ls.payid}"></option>-->
+                                <!--</select>-->
+                                <!--<input id="payids" name="payids" th:value="${mfrs.payid}"-->
+                                       <!--type="hidden">-->
+                                <!--<input id="payday" name="payday" th:value="${mfrs.payday}" type="text" hidden-->
+                                       <!--placeholder="请输入天数"-->
+                                       <!--oninput="value=value.replace(/[^\d]/g,'')">-->
+                            <!--</div>-->
+                        <!--</div>-->
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">开票状态：</label>

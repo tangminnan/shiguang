@@ -98,7 +98,7 @@
 		<input style="color: red;font-size: 15px;" id="newcount" name="newcount" readonly/>
 	</h3>
 	<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
-		<tbody id="inventoryId" value="曹林">
+		<tbody id="inventoryId">
 		<tr class="thead">
 			<!--<td>全选 <input type="checkbox" /></td>-->
 			<!--<td></td>-->
@@ -227,11 +227,6 @@ function inposion() {
     })
 }
     var a = 0;
-    var barHtml="";
-    var flag="";
-    var flags="";
-    var arr = new Array();
-    var countarr = new Array();
     // <!--单品添加商品-->
     function choiceGoods() {
 		var outDepartment = $('#outDepartment').val();
@@ -258,92 +253,56 @@ function inposion() {
 				content: "/stock/pidiao/selextkc/" + outPosition,// iframe的url
 				cancel: function (index, layero) {
 					var rows = window[layero.find('iframe')[0]['name']].showCol();
-                    lable:
-                    {
-                        for (var i = 0; i < rows.length; i++) {
-                            a = a + 1;
-                            barHtml += "<tr class='val'>";
-                            barHtml += "<td name='goodsNum'>" + rows[i].goodsNum + "</td>";
-                            barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].goodsNum + "'>";
-                            barHtml += "<td name='goodsName'>" + rows[i].goodsName + "</td>";
-                            barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].goodsName + "'>";
-                            barHtml += "<td name='factory'>" + rows[i].factory + "</td>";
-                            barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
-                            barHtml += "<td name='goodsCount'>" + rows[i].goodsCount + "</td>";
-                            barHtml += "<input id='goodsCount" + a + "' name='goodsCount' type='hidden' value='" + rows[i].goodsCount + "'>";
-                            barHtml += "<td >" + "<input id='useCount" + a + "' index = a  name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)' value='" + rows[i].useCount + "'/>" + "</td>";
-                            barHtml += "<td name='goodsCode'>" + rows[i].goodsCode + "</td>";
-                            barHtml += "<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>";
-                            barHtml += "<td name='useday'>" + rows[i].useday + "</td>";
-                            barHtml += "<input name='useday' type='hidden' value='" + rows[i].useday + "'>";
-                            barHtml += "<td name='batch'>" + rows[i].batch + "</td>";
-                            barHtml += "<input name='batch' type='hidden' value='" + rows[i].batch + "'>";
-                            barHtml += "<td name='zhuceNumber'>" + rows[i].zhuceNumber + "</td>";
-                            barHtml += "<input name='zhuceNumber' type='hidden' value='" + rows[i].zhuceNumber + "'>";
-                            barHtml += "<td name='produceDay'>" + rows[i].produceDay + "</td>";
-                            barHtml += "<input name='produceDay' type='hidden' value='" + rows[i].produceDay + "'>";
+					for (var i = 0; i < rows.length; i++) {
+						a = a + 1;
+						$("#inventoryId").append("<tr class='val'> " +
+								// "<td><input name='one'  type=\"checkbox\"/></td>\n" +
+								"<td name='goodsNum'>" + rows[i].goodsNum + "</td>\n" +
+								"<input name='goodsNum' type='hidden' value='" + rows[i].goodsNum + "'>\n" +
+								"<td name='goodsName'>" + rows[i].goodsName + "</td>\n" +
+								"<input name='goodsName' type='hidden' value='" + rows[i].goodsName + "'>\n" +
+								"<td name='factory'>" + rows[i].factory + "</td>\n" +
+								"<input name='factory' type='hidden' value='" + rows[i].factory + "'>\n" +
+								// "<td name='needCount'>" + rows[i].needCount + "</td>\n" +
+								"<td name='goodsCount'>" + rows[i].goodsCount + "</td>\n" +
+								"<input id='goodsCount" + a + "' name='goodsCount' type='hidden' value='" + rows[i].goodsCount + "'>\n" +
+								"<td >" + "<input id='useCount" + a + "' index = a  name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)' value='" + rows[i].useCount + "'/>" + "</td>" +
+                                "<td name='goodsCode'>" + rows[i].goodsCode + "</td>\n" +
+								"<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>\n" +
+								"<td name='useday'>" + rows[i].useday + "</td>\n" +
+								"<input name='useday' type='hidden' value='" + rows[i].useday + "'>\n" +
+								"<td name='batch'>" + rows[i].batch + "</td>\n" +
+								"<input name='batch' type='hidden' value='" + rows[i].batch + "'>\n" +
+								"<td name='zhuceNumber'>" + rows[i].zhuceNumber + "</td>\n" +
+								"<input name='zhuceNumber' type='hidden' value='" + rows[i].zhuceNumber + "'>\n" +
+								"<td name='produceDay'>" + rows[i].produceDay + "</td>\n" +
+								"<input name='produceDay' type='hidden' value='" + rows[i].produceDay + "'>\n" +
 
 
-                            barHtml += "<td name='classtype' style='display: none'>" + rows[i].classtype + "</td>";
-                            barHtml += "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>";
-                            barHtml += "<td name='goodsid' style='display: none'>" + rows[i].goodsid + "</td>";
-                            barHtml += "<input name='goods' type='hidden' value='" + rows[i].goodsid + "'>";
+								"<td name='classtype' style='display: none'>" + rows[i].classtype + "</td>\n" +
+								"<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>\n" +
+								"<td name='goodsid' style='display: none'>" + rows[i].goodsid + "</td>\n" +
+								"<input name='goods' type='hidden' value='" + rows[i].goodsid + "'>\n" +
 
-                            barHtml += "<td name='mfrsid' style='display: none'>" + rows[i].mfrsid + "</td>";
-                            barHtml += "<input name='mfrsid' type='hidden' value='" + rows[i].mfrsid + "'>";
-                            barHtml += "<td name='brandname' style='display: none'>" + rows[i].brandname + "</td>";
-                            barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
-                            barHtml += "<td name='unit' style='display: none'>" + rows[i].unit + "</td>";
-                            barHtml += "<input name='unit' type='hidden' value='" + rows[i].unit + "'>";
+								"<td name='mfrsid' style='display: none'>" + rows[i].mfrsid + "</td>\n" +
+								"<input name='mfrsid' type='hidden' value='" + rows[i].mfrsid + "'>\n" +
+								"<td name='brandname' style='display: none'>" + rows[i].brandname + "</td>\n" +
+								"<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>\n" +
+								"<td name='unit' style='display: none'>" + rows[i].unit + "</td>\n" +
+								"<input name='unit' type='hidden' value='" + rows[i].unit + "'>\n" +
 
-                            barHtml += "<td name='money' style='display: none'>" + rows[i].retailPrice + "</td>";
-                            barHtml += "<input name='money' type='hidden' value='" + rows[i].retailPrice + "'>";
+								"<td name='money' style='display: none'>" + rows[i].retailPrice + "</td>\n" +
+								"<input name='money' type='hidden' value='" + rows[i].retailPrice + "'>\n" +
 
-                            barHtml += "<td name='goodsxinxiid' style='display: none'>" + rows[i].goodsxinxiid + "</td>";
-                            barHtml += "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>";
+								"<td name='goodsxinxiid' style='display: none'>" + rows[i].goodsxinxiid + "</td>\n" +
+								"<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>\n" +
 
-                            barHtml += "<td name='stockorder' style='display: none'>" + rows[i].danjuNumber + "</td>";
-                            barHtml += "<input name='stockorder' type='hidden' value='" + rows[i].danjuNumber + "'>";
+								"<td name='stockorder' style='display: none'>" + rows[i].danjuNumber + "</td>\n" +
+								"<input name='stockorder' type='hidden' value='" + rows[i].danjuNumber + "'>\n" +
 
-                            barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
-                            barHtml += "</tr>";
-                            // alert($("input[name=goodsCode]").length+"长度");
-                            if ($("input[name=goodsCode]").length == 0) {
-                                $("#inventoryId").append(barHtml);
-                                barHtml = "";
-                            } else if ($("input[name=goodsCode]").length != 0) {
-
-
-                                for (var as = 0; as < $("input[name=goodsCode]").length; as++) {
-                                    var goodsCode = $("input[name=goodsCode]").eq(as).val();
-                                    var useCount = $("input[name=useCount]").eq(as).val();
-                                    arr[as] = goodsCode;
-                                    countarr[as] = useCount;
-                                }
-
-                                for (var index = 0; index < arr.length; index++) {
-                                    if (arr[index] == rows[i].goodsCode) {
-                                        flag = "1";
-                                        flags = "修改";
-                                        // alert("扫码和原来的一样数量加1");
-                                        var count = countarr[index];
-                                        $("input[name=useCount]").eq(index).val(parseInt(count) + parseInt(1));
-                                        barHtml = "";
-                                        // break lable;
-                                    } else if (arr[index] != rows[i].goodsCode) {
-                                        // alert("新增111");
-                                        flag = "0";
-                                        flags = "新增";
-                                    }
-                                }
-                            }
-                            if (flags == "新增" && flag == "0") {
-                                // alert("条码没有过新增");
-                                $("#inventoryId").append(barHtml);
-                                barHtml = "";
-                            }
-                        }
-                    }
+                            	"<td><em  onclick='delertTr(this)'></em></td>\n" +
+								"</tr>");
+					}
                     hejiadd();
 				}
 			});
@@ -384,8 +343,6 @@ function inposion() {
         if(x=="确定"){
             var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
             tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
-            arr = new Array();
-
         }
         hejiadd();
     }
@@ -414,17 +371,14 @@ function inposion() {
                 area : [ '500px', '220px' ],
                 content : "/stock/pidiao/barcode/"+outPosition, // iframe的url
             });
-
 		}
     }
 
 
 
-
-
-
-
     $("body").on("dblclick","input[name=useCount]",function(){
+        // console.log(123)
+        // alert("etyyyyyyyyyyyyyyyyyy")
         var x;
         var r=confirm("是否向下复制数量!");
         if (r==true){

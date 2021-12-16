@@ -49,13 +49,13 @@ public class OcularEyesDO implements Serializable {
     private Double cornealFirstK1Left;
     //角膜K1值@A(左眼)
     private Double cornealLastK1Left;
-    //角膜K1值(右眼)
+    //角膜K2值(右眼)
     private Double cornealFirstK2Right;
-    //角膜K1值@A(右眼)
+    //角膜K2值@A(右眼)
     private Double cornealLastK2Right;
-    //角膜K1值(左眼)
+    //角膜K2值(左眼)
     private Double cornealFirstK2Left;
-    //角膜K1值@A(左眼)
+    //角膜K2值@A(左眼)
     private Double cornealLastK2Left;
     //散光(右眼)
     private Double astigmiaFirstRight;

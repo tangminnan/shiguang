@@ -324,21 +324,46 @@ function showCol() {
         }else {
             var curvature =  row['curvature'] ;
         }
-
         obj.curvature = curvature;
         if(null == row['diameter']){
             var diameter  ="";
         }else {
             var diameter =  row['diameter'] ;
         }
-
         obj.diameter = diameter;
+
+
+
+        if(null == row['curvatureOne']){
+            var curvatureOne  ="";
+        }else {
+            var curvatureOne =  row['curvatureOne'] ;
+        }
+        obj.curvatureOne = curvatureOne;
+        if(null == row['curvatureYi']){
+            var curvatureYi  ="";
+        }else {
+            var curvatureYi =  row['curvatureYi'] ;
+        }
+        obj.curvatureYi = curvatureYi;
+        if(null == row['diameterOne']){
+            var diameterOne  ="";
+        }else {
+            var diameterOne =  row['diameterOne'] ;
+        }
+        obj.diameterOne = diameterOne;
+        if(null == row['diameterYi']){
+            var diameterYi  ="";
+        }else {
+            var diameterYi =  row['diameterYi'] ;
+        }
+        obj.diameterYi = diameterYi;
+
         if(null == row['usageName']){
             var usageName  ="";
         }else {
             var usageName =  row['usageName'] ;
         }
-
         obj.usageName = usageName;
         if(null == row['typeName']){
             var typeName  ="";

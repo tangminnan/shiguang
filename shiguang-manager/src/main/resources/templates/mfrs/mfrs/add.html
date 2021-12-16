@@ -24,7 +24,7 @@
             <tr>
                 <td>制造商代码：</td>
                 <td>
-                    <input id="mfrsnum" name="mfrsnum" type="text">
+                    <input id="mfrsnum" name="mfrsnum" type="text" onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
                     <br>
                     <em>*制造商代码不能超过2位</em>
                 </td>
@@ -83,18 +83,18 @@
                 </td>
             </tr>
             <tr>
-                <td>采购结算方式：</td>
-                <td>
-                    <select id="payid" name="payid" onchange="payChange()">
-                        <option value="">--请选择--</option>
-                        <option th:each="ls:${payDOList}"
-                                th:text="${ls.paymethod}"
-                                th:value="${ls.payid}"
-                        ></option>
-                    </select>
-                    <input id="payday" name="payday" type="text" hidden placeholder="请输入天数"
-                           oninput="value=value.replace(/[^\d]/g,'')">
-                </td>
+                <!--<td>采购结算方式：</td>-->
+                <!--<td>-->
+                    <!--<select id="payid" name="payid" onchange="payChange()">-->
+                        <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+                        <!--<option th:each="ls:${payDOList}"-->
+                                <!--th:text="${ls.paymethod}"-->
+                                <!--th:value="${ls.payid}"-->
+                        <!--&gt;</option>-->
+                    <!--</select>-->
+                    <!--<input id="payday" name="payday" type="text" hidden placeholder="请输入天数"-->
+                           <!--oninput="value=value.replace(/[^\d]/g,'')">-->
+                <!--</td>-->
                 <td>开票状态：</td>
                 <td>
                     <div class="col-sm-8">
@@ -193,6 +193,7 @@
             type: 'date'
         });
         function baocun() {
+            var numlength=$("#mfrsnum").val().length;
             var mfrsnum = document.getElementById('mfrsnum').value;
             var mfrsname = document.getElementById('mfrsname').value;
             var mfrscontacts = document.getElementById('mfrscontacts').value;
@@ -203,7 +204,10 @@
                     goodsid.push($(this).val());
                 }
             });
-            if (mfrsnum == "") {
+            // alert(numlength);
+            if (numlength!=2) {
+                layer.alert("制造商代码不能超过2位！");
+            } else if (mfrsnum == "") {
                 layer.alert("请输入制造商代码！");
             } else if (mfrsnum != "" && mfrsname == "") {
                 layer.alert("请输入制造商简称！")

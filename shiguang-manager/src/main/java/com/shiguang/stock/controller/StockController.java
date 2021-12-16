@@ -86,9 +86,9 @@ public class StockController {
     @RequiresPermissions("stock:stock:stock")
     String Stock(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //商品
-        List<GoodsDO> goodsDOList = goodsService.list(map);
-        model.addAttribute("goodsDOList", goodsDOList);
+//        //商品
+//        List<GoodsDO> goodsDOList = goodsService.list(map);
+//        model.addAttribute("goodsDOList", goodsDOList);
         return "stock/stock/stock";
     }
 
@@ -113,8 +113,41 @@ public class StockController {
             }else {
                 query.put("companyid",companyid);
             }
-
-
+        }
+       Object gdname=query.get("goodsid");
+        if ("镜架".equals(gdname)){
+            query.put("goodsid",1);
+            query.put("classtype","1");
+        }else if ("配件".equals(gdname)){
+            query.put("goodsid",2);
+            query.put("classtype","1");
+        }else if ("镜片".equals(gdname)){
+            query.put("goodsid",3);
+            query.put("classtype","1");
+        }else if ("订做镜片".equals(gdname)){
+            query.put("goodsid",3);
+            query.put("classtype","2");
+        }else if ("隐形".equals(gdname)){
+            query.put("goodsid",4);
+            query.put("classtype","1");
+        }else if ("订做隐形".equals(gdname)){
+            query.put("goodsid",4);
+            query.put("classtype","2");
+        }else if ("护理液".equals(gdname)){
+            query.put("goodsid",5);
+            query.put("classtype","1");
+        }else if ("太阳镜".equals(gdname)){
+            query.put("goodsid",6);
+            query.put("classtype","1");
+        }else if ("老花镜".equals(gdname)){
+            query.put("goodsid",7);
+            query.put("classtype","1");
+        }else if ("耗材".equals(gdname)){
+            query.put("goodsid",8);
+            query.put("classtype","1");
+        }else if ("视光".equals(gdname)) {
+            query.put("goodsid",9);
+            query.put("classtype","1");
         }
         List<OrderDO> orderDOList = orderService.list(query);
         int total = orderService.count(query);
@@ -769,83 +802,6 @@ public class StockController {
                     String num=goodsNums[index];
                     StockDO stockDO=new StockDO();
                     stockDO.setGoodsNum(num);
-                    StockDO yinxingdzs=  stockService.yinxingdzs(stockDO);
-                    String mfrsid=yinxingdzs.getMfrsid();
-                    String brandname=yinxingdzs.getBrandname();
-                    String unitname=yinxingdzs.getUnitname();
-                    String factory=yinxingdzs.getProducFactory();
-                    String classtype=yinxingdzs.getClasstype();
-
-                    orderDO1.setPositionId(orderDO.getPositionId());//15
-                    orderDO1.setGoodsType(goodsid);//5
-                    orderDO1.setGoodsNum(goodsNums[index]);//1
-                    orderDO1.setGoodsCode(goodsCodes[index]);//2
-                    orderDO1.setGoodsName(goodsNames[index]);//3
-                    orderDO1.setBrandname(brandname);//7
-                    orderDO1.setUnit(unitname);//8
-                    orderDO1.setMfrsid(mfrsid);//6
-
-                    //数量
-                    orderDO1.setGoodsCount(goodCounts[index]);//4
-                    String retailPrice=yinxingdzs.getRetailPrice();
-                    orderDO1.setRetailPrice(retailPrice);//9
-                    Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodCounts[index]);
-                    orderDO1.setPriceSum(Double.toString(priceSum));  //原价合计10
-                    String costPrice = yinxingdzs.getTaxPrice();
-                    orderDO1.setCostPrice(costPrice); //成本价格11
-                    Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodCounts[index]);
-                    orderDO1.setCostSum(Double.toString(costSum)); //成本合计12
-                    String wholePrice = yinxingdzs.getTradePrice();
-                    orderDO1.setWholePrice(wholePrice);//13
-                    Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodCounts[index]);
-                    orderDO1.setWholeSum(Double.toString(wholeSum));    //批发合计14
-                    orderDO1.setCreateTime(createTimes[index]);//16
-                    orderDO1.setDanjuNumber(orderDO.getDanjuNumber());//17
-                    orderDO1.setZhidanPeople(orderDO.getZhidanPeople());//18
-                    orderDO1.setDanjuDay(createTimes[index]);//19
-                    orderDO1.setBeizhu(orderDO.getBeizhu());//19
-
-                    try { //20批号
-                        String batch = batchs[index];
-                        orderDO1.setBatch(batch);
-                    }catch (ArrayIndexOutOfBoundsException e){
-                        orderDO1.setBatch("");
-                    }
-
-                    orderDO1.setZhuceNumber(yinxingdzs
-
-                            .getZhuceNumber());//21注册
-
-                    try {//22生产
-                        String produceDay = produceDays[index];
-                        orderDO1.setProduceDay(produceDay);
-                    }catch (ArrayIndexOutOfBoundsException e){
-                        orderDO1.setProduceDay("");
-                    }
-
-
-                    try {//23效期
-                        String useday = usedays[index];
-                        orderDO1.setUseday(useday);
-                    }catch (ArrayIndexOutOfBoundsException e){
-                        orderDO1.setUseday("");
-                    }
-
-                    //类型
-                    orderDO1.setClasstype(classtype);
-                    //型号
-                    orderDO1.setFactory(factory);
-                    orderDO1.setStatus(orderDO.getStatus());
-                    orderDO1.setUsername(orderDO.getUsername());
-                    orderDO1.setReturnzt(orderDO.getReturnzt());
-                    orderDO1.setStockorder(orderDO.getStockorder());
-                    orderService.save(orderDO1);
-                }
-            }else if ("2".equals(styles)){
-                for(int index=0;index<goodsNums.length;index++){
-                    String num=goodsNums[index];
-                    StockDO stockDO=new StockDO();
-                    stockDO.setGoodsNum(num);
                     StockDO yinxings=  stockService.yinxings(stockDO);
                     String mfrsid=yinxings.getMfrsid();
                     String brandname=yinxings.getBrandname();
@@ -890,6 +846,81 @@ public class StockController {
                     }
 
                     orderDO1.setZhuceNumber(yinxings.getZhuceNumber());//21注册
+
+                    try {//22生产
+                        String produceDay = produceDays[index];
+                        orderDO1.setProduceDay(produceDay);
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        orderDO1.setProduceDay("");
+                    }
+
+
+                    try {//23效期
+                        String useday = usedays[index];
+                        orderDO1.setUseday(useday);
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        orderDO1.setUseday("");
+                    }
+
+                    //类型
+                    orderDO1.setClasstype(classtype);
+                    //型号
+                    orderDO1.setFactory(factory);
+                    orderDO1.setStatus(orderDO.getStatus());
+                    orderDO1.setUsername(orderDO.getUsername());
+                    orderDO1.setReturnzt(orderDO.getReturnzt());
+                    orderDO1.setStockorder(orderDO.getStockorder());
+                    orderService.save(orderDO1);
+                }
+            }else if ("2".equals(styles)){
+                for(int index=0;index<goodsNums.length;index++){
+                    String num=goodsNums[index];
+                    StockDO stockDO=new StockDO();
+                    stockDO.setGoodsNum(num);
+                    StockDO yinxingdzs=  stockService.yinxingdzs(stockDO);
+                    String mfrsid=yinxingdzs.getMfrsid();
+                    String brandname=yinxingdzs.getBrandname();
+                    String unitname=yinxingdzs.getUnitname();
+                    String factory=yinxingdzs.getProducFactory();
+                    String classtype=yinxingdzs.getClasstype();
+
+                    orderDO1.setPositionId(orderDO.getPositionId());//15
+                    orderDO1.setGoodsType(goodsid);//5
+                    orderDO1.setGoodsNum(goodsNums[index]);//1
+                    orderDO1.setGoodsCode(goodsCodes[index]);//2
+                    orderDO1.setGoodsName(goodsNames[index]);//3
+                    orderDO1.setBrandname(brandname);//7
+                    orderDO1.setUnit(unitname);//8
+                    orderDO1.setMfrsid(mfrsid);//6
+
+                    //数量
+                    orderDO1.setGoodsCount(goodCounts[index]);//4
+                    String retailPrice=yinxingdzs.getRetailPrice();
+                    orderDO1.setRetailPrice(retailPrice);//9
+                    Double priceSum = Double.parseDouble(retailPrice) * Double.parseDouble(goodCounts[index]);
+                    orderDO1.setPriceSum(Double.toString(priceSum));  //原价合计10
+                    String costPrice = yinxingdzs.getTaxPrice();
+                    orderDO1.setCostPrice(costPrice); //成本价格11
+                    Double costSum = Double.parseDouble(costPrice) * Double.parseDouble(goodCounts[index]);
+                    orderDO1.setCostSum(Double.toString(costSum)); //成本合计12
+                    String wholePrice = yinxingdzs.getTradePrice();
+                    orderDO1.setWholePrice(wholePrice);//13
+                    Double wholeSum = Double.parseDouble(wholePrice) * Double.parseDouble(goodCounts[index]);
+                    orderDO1.setWholeSum(Double.toString(wholeSum));    //批发合计14
+                    orderDO1.setCreateTime(createTimes[index]);//16
+                    orderDO1.setDanjuNumber(orderDO.getDanjuNumber());//17
+                    orderDO1.setZhidanPeople(orderDO.getZhidanPeople());//18
+                    orderDO1.setDanjuDay(createTimes[index]);//19
+                    orderDO1.setBeizhu(orderDO.getBeizhu());//19
+
+                    try { //20批号
+                        String batch = batchs[index];
+                        orderDO1.setBatch(batch);
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        orderDO1.setBatch("");
+                    }
+
+                    orderDO1.setZhuceNumber(yinxingdzs.getZhuceNumber());//21注册
 
                     try {//22生产
                         String produceDay = produceDays[index];

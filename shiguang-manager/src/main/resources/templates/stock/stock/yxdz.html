@@ -377,10 +377,6 @@
                                 field: 'producName',
                                 title: '商品名称'
                             },
-                                {
-                                    field: 'unitname',
-                                    title: '单位'
-                                },
 
                             {
                                 field: 'factory',
@@ -405,7 +401,7 @@
                                 align: 'center',
                                 formatter: function (value, row, index) {
                                     if (row.sphUp != null && row.sphDown != null) {
-                                        return row.sphUp + "/" + row.sphDown
+                                        return row.sphDown + "/" + row.sphUp
                                     } else {
                                         return ""
                                     }
@@ -416,7 +412,7 @@
                                 align: 'center',
                                 formatter: function (value, row, index) {
                                     if (row.cylUp != null && row.cylDown != null) {
-                                        return row.cylUp + "/" + row.cylDown
+                                        return row.cylDown + "/" + row.cylUp
                                     } else {
                                         return ""
                                     }

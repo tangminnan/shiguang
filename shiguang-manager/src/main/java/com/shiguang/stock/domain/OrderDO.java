@@ -22,21 +22,7 @@ public class OrderDO implements Serializable {
     //库存对应单据号
     private String stockorder;
 
-    public String getStockorder() {
-        return stockorder;
-    }
 
-    public void setStockorder(String stockorder) {
-        this.stockorder = stockorder;
-    }
-
-    public String getGoodsxinxiid() {
-        return goodsxinxiid;
-    }
-
-    public void setGoodsxinxiid(String goodsxinxiid) {
-        this.goodsxinxiid = goodsxinxiid;
-    }
 
     //状态
     private String status;
@@ -45,13 +31,6 @@ public class OrderDO implements Serializable {
     //退回状态
     private String returnzt;
 
-    public String getReturnzt() {
-        return returnzt;
-    }
-
-    public void setReturnzt(String returnzt) {
-        this.returnzt = returnzt;
-    }
 
     //商品代码
     private String goodsNum;
@@ -66,35 +45,15 @@ public class OrderDO implements Serializable {
     private Integer goodsType;
     private String gdname;
 
-    public String getGdname() {
-        return gdname;
-    }
-
-    public void setGdname(String gdname) {
-        this.gdname = gdname;
-    }
 
     //制造商id
     private String mfrsid;
     private String mfrsname;
 
-    public String getMfrsname() {
-        return mfrsname;
-    }
 
-    public void setMfrsname(String mfrsname) {
-        this.mfrsname = mfrsname;
-    }
 
     private String brandname;
 
-    public String getBrandname() {
-        return brandname;
-    }
-
-    public void setBrandname(String brandname) {
-        this.brandname = brandname;
-    }
 
     //标准零售价格
     private String retailPrice;
@@ -114,29 +73,7 @@ public class OrderDO implements Serializable {
     private String departName;
 
 
-    public String getDepartName() {
-        return departName;
-    }
 
-    public void setDepartName(String departName) {
-        this.departName = departName;
-    }
-
-    public String getDepartNumber() {
-        return departNumber;
-    }
-
-    public void setDepartNumber(String departNumber) {
-        this.departNumber = departNumber;
-    }
-
-    public String getPositionId() {
-        return positionId;
-    }
-
-    public void setPositionId(String positionId) {
-        this.positionId = positionId;
-    }
 
     //仓位名称
     private String positionName;
@@ -283,6 +220,73 @@ public class OrderDO implements Serializable {
 
     public void setClasstype(String classtype) {
         this.classtype = classtype;
+    }
+    public String getDepartName() {
+        return departName;
+    }
+
+    public void setDepartName(String departName) {
+        this.departName = departName;
+    }
+
+    public String getDepartNumber() {
+        return departNumber;
+    }
+
+    public void setDepartNumber(String departNumber) {
+        this.departNumber = departNumber;
+    }
+
+    public String getPositionId() {
+        return positionId;
+    }
+
+    public void setPositionId(String positionId) {
+        this.positionId = positionId;
+    }
+    public String getMfrsname() {
+        return mfrsname;
+    }
+
+    public void setMfrsname(String mfrsname) {
+        this.mfrsname = mfrsname;
+    }
+    public String getBrandname() {
+        return brandname;
+    }
+
+    public void setBrandname(String brandname) {
+        this.brandname = brandname;
+    }
+    public String getGdname() {
+        return gdname;
+    }
+
+    public void setGdname(String gdname) {
+        this.gdname = gdname;
+    }
+    public String getReturnzt() {
+        return returnzt;
+    }
+
+    public void setReturnzt(String returnzt) {
+        this.returnzt = returnzt;
+    }
+
+    public String getStockorder() {
+        return stockorder;
+    }
+
+    public void setStockorder(String stockorder) {
+        this.stockorder = stockorder;
+    }
+
+    public String getGoodsxinxiid() {
+        return goodsxinxiid;
+    }
+
+    public void setGoodsxinxiid(String goodsxinxiid) {
+        this.goodsxinxiid = goodsxinxiid;
     }
 
     /**

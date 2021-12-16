@@ -146,7 +146,7 @@ public class TryresultsDO implements Serializable {
     private String cornealFirstK2Left;
     //角膜K2值@A(左眼)
     private String cornealLastK2Left;
-    //平Kos
+    //平Kod
     private String pkod;
     //平Kos
     private String pkos;
@@ -154,13 +154,13 @@ public class TryresultsDO implements Serializable {
     private String pk1od;
     //平K1os
     private String pk1os;
-    //陡K1
+    //陡K1od
     private String dkod;
-    //陡K1
+    //陡K1os
     private String dkos;
-    //陡K1
+    //陡K1os
     private String dk1os;
-    //陡K1
+    //陡K1od
     private String dk1od;
     //平均k2OD
     private String pjkOd;
@@ -196,7 +196,9 @@ public class TryresultsDO implements Serializable {
     private String cornealAstigmatismOd;
     //角膜散光(OS)
     private String cornealAstigmatismOs;
+//    测量瞳距od
     private String  tjod;
+//    测量瞳距os
     private String  tjos;
 
     public String getTjod() {
@@ -2110,7 +2112,7 @@ public class TryresultsDO implements Serializable {
     }
 
 
-    //双眼视功能检查（是否）
+    //双眼视功能检查（1是,2否）
     private String sgnSf;
     //原因
     private String sgnReason;
@@ -2160,9 +2162,9 @@ public class TryresultsDO implements Serializable {
     private String sgnAc;
     //立体式
     private String litishi;
-    //梯度法/计算法
+    //1梯度法/2计算法
     private String sgnAcway;
-    //调节反应BBC/MEM
+    //调节反应1BBC/2MEM
     private String sgnTjfy;
     //调节反应OU
     private String sgnTjfyou;
@@ -2174,7 +2176,7 @@ public class TryresultsDO implements Serializable {
     private String sgnPra;
     //正/负相对调节NRA
     private String sgnNra;
-    //遮盖单眼是否变清晰是否
+    //遮盖单眼是否变清晰1是2否
     private String sgnZfsf;
 
     /**

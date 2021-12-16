@@ -37,7 +37,8 @@ function load() {
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                         danjuNumber :$('#danjuNumber').val(),
-                        goodsid :$('#goodsid').val()
+                        goodsid :$('#goodsid').val(),
+                        classtype :$('#classtype').val()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -63,9 +64,22 @@ function load() {
                         title: '制造商'
                     },
                     {
-                        field: 'gdname',
-                        title: '商品类别'
+                        title: '商品类别',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.classtype == 2) {
+                               if (row.gdname=="镜片"){
+                                   return "订做镜片"
+                               }else if (row.gdname=="隐形"){
+                                   return "订做隐形"
+                               }
+                            } else {
+                                return row.gdname
+                            }
+                        }
+
                     },
+
                     {
                         field: 'zhidanPeople',
                         title: '入库人'

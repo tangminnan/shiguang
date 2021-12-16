@@ -34,12 +34,24 @@
                     <div class="columns pull-right col-md-2 nopadding">
                         <select name="goodsid" id="goodsid" class="form-control" data-actions-box="false"
                                 data-size="5">
-                            <option value="">商品类别</option>
-                            <option th:each="ls:${goodsDOList}"
-                                    th:text="${ls.goodsname}"
-                                    th:value="${ls.goodsid}"></option>
+                            <option value=""></option>
+                            <!--<option th:each="ls:${goodsDOList}"-->
+                                    <!--th:text="${ls.goodsname}"-->
+                                    <!--th:value="${ls.goodsid}"></option>-->
+                            <option value="镜架">镜架</option>
+                            <option value="配件">配件</option>
+                            <option value="镜片">镜片</option>
+                            <option value="订做镜片">订做镜片</option>
+                            <option value="隐形">隐形</option>
+                            <option value="订做隐形">订做隐形</option>
+                            <option value="护理液">护理液</option>
+                            <option value="太阳镜">太阳镜</option>
+                            <option value="老花镜">老花镜</option>
+                            <option value="耗材">耗材</option>
+                            <option value="视光">视光</option>
 
                         </select>
+                        <input id="classtype" type="hidden" value="" />
                     </div>
                 </div>
                 <table id="exampleTable" data-mobile-responsive="true"></table>

@@ -1061,26 +1061,9 @@ public class PidiaoController {
     String barcode(@PathVariable("outPosition") String outPosition,
                        Model model){
         model.addAttribute("outPosition",outPosition);
+
         return "stock/pidiao/barcode";
     }
-//    /**
-//     * 条码扫描
-//     */
-//    @GetMapping("/barcodeTwo/{outPosition}")
-//    String barcodeTwo(@PathVariable("outPosition") String outPosition,
-//                       Model model){
-//        model.addAttribute("outPosition",outPosition);
-//        return "stock/pidiao/barcode";
-//    }
-//
-//    /**
-//     * 条码扫描
-//     */
-//    @GetMapping("/barcodes")
-//    String barcodes(String outPosition,Model model){
-//        model.addAttribute("outPosition",outPosition);
-//        return "stock/pidiao/barcode";
-//    }
 
     @ResponseBody
     @RequestMapping(value = "/codeList")
