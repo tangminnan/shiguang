@@ -250,9 +250,16 @@ public class OptometryController {
 //        lineDO.setLineDate(simpleDateFormat.format(new Date()));
 //        lineDO.setCallStatus("4");
 //        lineService.updateByMember(lineDO);
-        if (optometryService.save(optometry) > 0) {
+        if (optometry.getMydriasis() == 0){
+            if (optometryService.save(optometry) > 0) {
+                return R.ok();
+            }
+        } else if (optometry.getMydriasis() == 1){
+            optometry.setCreateDate(simpleDateFormat.format(new Date()));
+            optometryService.update(optometry);
             return R.ok();
         }
+
 
         return R.error();
     }

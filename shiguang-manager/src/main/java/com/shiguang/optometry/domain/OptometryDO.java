@@ -86,6 +86,20 @@ public class OptometryDO implements Serializable {
     private String distanceOs;
     //创建时间
     private Date createTime;
+    private String createDate;
+    //散瞳后
+    //球镜(右眼OD)
+    private String sphereRight2;
+    //球镜(左眼OS)
+    private String sphereLeft2;
+    //柱镜(右眼OD)
+    private String cylinderRight2;
+    //柱镜(左眼OS)
+    private String cylinderLeft2;
+    //轴向(右眼-OD)
+    private String axialRight2;
+    //轴向(左眼OS)
+    private String axialLeft2;
 
 
 
@@ -728,5 +742,61 @@ public class OptometryDO implements Serializable {
      */
     public Date getCreateTime() {
         return createTime;
+    }
+
+    public String getSphereRight2() {
+        return sphereRight2;
+    }
+
+    public void setSphereRight2(String sphereRight2) {
+        this.sphereRight2 = sphereRight2;
+    }
+
+    public String getSphereLeft2() {
+        return sphereLeft2;
+    }
+
+    public void setSphereLeft2(String sphereLeft2) {
+        this.sphereLeft2 = sphereLeft2;
+    }
+
+    public String getCylinderRight2() {
+        return cylinderRight2;
+    }
+
+    public void setCylinderRight2(String cylinderRight2) {
+        this.cylinderRight2 = cylinderRight2;
+    }
+
+    public String getCylinderLeft2() {
+        return cylinderLeft2;
+    }
+
+    public void setCylinderLeft2(String cylinderLeft2) {
+        this.cylinderLeft2 = cylinderLeft2;
+    }
+
+    public String getAxialRight2() {
+        return axialRight2;
+    }
+
+    public void setAxialRight2(String axialRight2) {
+        this.axialRight2 = axialRight2;
+    }
+
+    public String getAxialLeft2() {
+        return axialLeft2;
+    }
+
+    public void setAxialLeft2(String axialLeft2) {
+        this.axialLeft2 = axialLeft2;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 }

@@ -30,7 +30,6 @@ function save() {
 			parent.layer.alert("Connection error");
 		},
 		success : function(data) {
-			alert("3434")
             var cardNumber = $("#memberInumber").val();
             layer.open({
                 type : 2,

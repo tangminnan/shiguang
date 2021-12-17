@@ -238,12 +238,12 @@
             <if test="mydriasis != null">`mydriasis` = #{mydriasis},</if>
             <if test="pharmacyId != null">`pharmacy_id` = #{pharmacyId},</if>
             <if test="pharmacy != null">`pharmacy` = #{pharmacy},</if>
-            <if test="sphereRight != null">`sphere_right` = #{sphereRight},</if>
-            <if test="sphereLeft != null">`sphere_left` = #{sphereLeft},</if>
-            <if test="cylinderRight != null">`cylinder_right` = #{cylinderRight},</if>
-            <if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft},</if>
-            <if test="axialRight != null">`axial_right` = #{axialRight},</if>
-            <if test="axialLeft != null">`axial_left` = #{axialLeft},</if>
+            <!--<if test="sphereRight != null">`sphere_right` = #{sphereRight},</if>-->
+            <!--<if test="sphereLeft != null">`sphere_left` = #{sphereLeft},</if>-->
+            <!--<if test="cylinderRight != null">`cylinder_right` = #{cylinderRight},</if>-->
+            <!--<if test="cylinderLeft != null">`cylinder_left` = #{cylinderLeft},</if>-->
+            <!--<if test="axialRight != null">`axial_right` = #{axialRight},</if>-->
+            <!--<if test="axialLeft != null">`axial_left` = #{axialLeft},</if>-->
             <if test="cornealAstigmatismOs != null">`corneal_astigmatism_os` = #{cornealAstigmatismOs},</if>
             <if test="cornealAstigmatismOd != null">`corneal_astigmatism_od` = #{cornealAstigmatismOd},</if>
             <if test="sphJyod != null">`sph_jyod` = #{sphJyod},</if>
@@ -270,8 +270,14 @@
             <if test="addCpos != null">`add_cpos` = #{addCpos},</if>
             <if test="distanceOd != null">`distance_od` = #{distanceOd},</if>
             <if test="distanceOs != null">`distance_os` = #{distanceOs}</if>
+            <if test="sphereRight2 != null">`sphere_right2` = #{sphereRight2},</if>
+            <if test="sphereLeft2 != null">`sphere_left2` = #{sphereLeft2},</if>
+            <if test="cylinderRight2 != null">`cylinder_right2` = #{cylinderRight2},</if>
+            <if test="cylinderLeft2 != null">`cylinder_left2` = #{cylinderLeft2},</if>
+            <if test="axialRight2 != null">`axial_right2` = #{axialRight2},</if>
+            <if test="axialLeft2 != null">`axial_left2` = #{axialLeft2},</if>
         </set>
-        where id = #{id}
+        where member_inumber = #{memberInumber} and date_format(create_time ,'%Y-%m-%d') = #{createDate} and `mydriasis` = 0
     </update>
 
     <delete id="remove">
@@ -356,6 +362,7 @@
     where mydriasis=1 and member_inumber = #{cardNumber}
     order by create_time desc
 </select>
+
 
     <select id="processlist" resultType="com.shiguang.optometry.domain.ProcessAskDO">
         select `id`,`process_num`,`process_name` from process_ask
