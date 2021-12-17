@@ -1,0 +1,2922 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>门店销售</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+	<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body>
+<!--<div class="topTab">-->
+	<!--<ul>-->
+		<!--<li class="on"><a href="">门店销售</a></li>-->
+		<!--&lt;!&ndash;<li><a href="">当日未结算管理</a></li>&ndash;&gt;-->
+	<!--</ul>-->
+<!--</div>-->
+<form class="form-horizontal m-t" id="signupForm">
+<!--顾客资料-->
+<div class="m40 msgBox">
+	<h3>顾客资料 <span class="sure_red">可直接输入会员卡号并按【回车键】确认</span></h3>
+	<div class="gukeMSG1">
+		<span class="s1"><input type="button" value="查询" onclick="getSelect()"/></span>
+		<span class="s2">卡号：<input type="text" value="" id="cardMember" th:value="${memberDO.cardNumber}"/></span>
+		<span class="s3">
+			<input type="button" value="会员新增" onclick="getMemberAdd()"/>
+			<input type="button" value="会员修改" onclick="getMemberEdit()"/>
+		</span>
+		<span class="s4">
+			<label><input name="eyeType" id="eyeType1" type="radio" value="框镜" checked onchange="getCheck(this.value)"> 框镜</label>
+			<label><input name="eyeType" id="eyeType2" type="radio" value="隐形" onchange="getCheck(this.value)"> 隐形</label>
+			<label><input name="eyeType" id="eyeType3" type="radio" value="辅料" onchange="getCheck(this.value)"> 辅料</label>
+		</span>
+		<span class="s5">
+			<input type="button" onclick="updatePerson()" value="更换销售人员" />
+				<select id="saleName" name="saleName" readonly="readonly">
+					<option></option>
+					<option th:each="ls:${userDOList}"
+							th:text="${ls.name}"
+							th:value="${ls.name}"></option>
+					<input id="salenames" name="saleNames" th:value="${saleName}" type="hidden"/>
+				</select>
+		</span>
+	</div>
+	<div class="gukeMSG2">
+		顾客姓名：<input type="text" id="memberName" th:value="${memberDO.name}" disabled/>
+		顾客电话：<input type="text"  id="memberTel" th:value="${memberDO.phone1}" disabled/>
+		性别：<input class="short" type="text" id="memberSex" th:value="${memberDO.sexx}" disabled/>
+		年龄：<input class="short" type="text" id="memberAge" th:value="${memberDO.age}" disabled/>
+		会员卡类型：<input type="text" id="memberType" th:value="${memberDO.cardType}" disabled/>
+		积分：<input type="text" id="memberPoint" value="200" disabled/>
+		来源：<input type="text" id="memberSource" th:value="${memberDO.source}" disabled/>
+		<input id="memberId" name="memberId" th:value="${memberDO.id}"  type="hidden">
+		<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">
+		<input id="memname" name="memname" th:value="${memberDO.name}"  type="hidden">
+		<input id="memberNumber" name="memberNumber" th:value="${memberDO.cardNumber}"  type="hidden">
+		<!--<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">-->
+		<input class="xiangQ" type="button" value="详情" onclick="getMemberDetail()"/>
+        <input id="checkValue" name="checkValue"   type="hidden">
+	</div>
+</div>
+
+<!--处方类型-->
+<div class="m40 tabS colorTab">
+	<h3>处方类型</h3>
+
+	<!--左侧表格-->
+	<div class="blueLeft">
+		<div class="blueLeft_top">
+			<table cellspacing="0" cellpadding="0">
+				<tr class="blueTop">
+					<td colspan="3">
+						<label><input name="chufang" type="radio" value="1" checked onchange="getChufang(this.value)"> 提交处方</label>
+						<label><input name="chufang" type="radio" value="2" onchange="getChufang(this.value)"> 手填处方</label>
+					</td>
+				</tr>
+
+				<tr id="tab1" style="display:none">
+					<td style="width: 24%;">验光号</td>
+					<td id="ygh"></td>
+				</tr>
+				<tr id="tab11" style="display:none;">
+					<td>验光师</td>
+					<td>
+						<select id="disaa" name="optometrywlName" style="width: 100px;">
+							<option value="">--请选择--</option>
+							<option th:each="ls:${yanguangDOList}"
+									th:text="${ls.name}"
+									th:value="${ls.name}"></option>
+						</select>
+						<input name="optometryName" id="optometryName" type="hidden">
+						<em></em>
+					</td>
+				</tr>
+				<tr id="tab111" style="display:none;">
+					<td>外来处方</td>
+					<td class="wailai">
+						<label><input name="wailai" id="wailai" type="checkbox" onclick="check(this)"> 外来处方</label>
+						<select id="outRecipel" name="outRecipel" style="display: none;width: 100px;">
+							<option value="">--请选择--</option>
+							<option value="自报光度">自报光度</option>
+							<option value="医院处方">医院处方</option>
+						</select>
+					</td>
+				</tr>
+				<tr id="tab1111" style="display:none;">
+					<td>验光时间</td>
+					<td><input id="yanguangTime" name="yanguangTime" readonly/></td>
+				</tr>
+				<tr id="tab11111" style="display:none;">
+					<td>处方类型</td>
+					<td>
+						<input name="recipelType" id="recipelTypes" type="hidden">
+						<select id="recipelwlType" name="recipelwlType" onchange="getType(this.value)">
+							<option value="" >--请选择--</option>
+							<option value="2" >远用</option>
+							<option value="1" >近用</option>
+							<option value="3" >渐进/双光</option>
+							<option value="4" >中用</option>
+							<option value="5" >隐形</option>
+							<option value="6" >角膜塑形镜</option>
+							<option value="7" >视觉训练</option>
+							<option value="8" >角膜塑形镜VST</option>
+							<option value="9" >角膜塑形镜CRT</option>
+							<option value="10" >RGP</option>
+							<option value="11" >药品</option>
+						</select>
+						<!--<input class="empty" type="button" value="清空" />-->
+					</td>
+				</tr>
+				<tr id="tab111111" style="display:none;">
+					<td class="chuF_red" colspan="2" style="color: #fc4242">会员使用外来处方或者未通过验光正式提交处方时使用！</td>
+				</tr>
+
+				<tr id="tab2" style="display:''">
+					<td style="width:25%;">处方类型</td>
+					<td style="width:25%;">验光师</td>
+					<td>验光时间</td>
+				</tr>
+			</table>
+		</div>
+		<div class="blueLeft_down" id="tab22" style="display: '';">
+			<table cellspacing="0" cellpadding="0">
+				<tbody id="tbodys">
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: block;" id="kuangjing">
+		<table class="greenTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_green">
+				<td>远用</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>三棱镜</td>
+				<td>基地</td>
+				<td>远用瞳距（mm）</td>
+				<td>瞳高(mm)</td>
+				<td>远用VA</td>
+			</tr>
+			<tr>
+				<td class="Light_green">OD</td>
+				<td><input type="text" onchange="getBeishu()" name="rightQJyy" id="rightYuanYongQJ"/></td>
+					<td><input type="text"id="rightYuanYongZJ" name="rightZJyy" onchange="getBeishu()"/></td>
+				<td><input type="text" id="rightzhouxiang" name="rightzhouxiangyy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" id="rightsanlingjing" name="rightsanlingjingyy"/></td>
+				<td>
+					<select id="rightjidi" name="rightjidiyy">
+						<option value="">请选择</option>
+						<option value="内">内</option>
+						<option value="外">外</option>
+						<option value="上">上</option>
+						<option value="下">下</option>
+					</select>
+				</td>
+				<td><input type="text" id="rightyuanyongtj" name="rightyuanyongtjyy"/></td>
+				<td><input type="text" id="righttonggao" name="righttonggaoyy"/></td>
+				<td><input type="text" id="rightyuanyongVA" name="rightyuanyongVAyy"/></td>
+			</tr>
+			<tr>
+				<td class="Light_green">OS</td>
+				<td><input type="text"  id="leftYuanYongQJ" name="leftQJyy" onchange="getBeishu()"/></td>
+				<td><input type="text"  id="leftYuanYongZJ" name="leftZJyy" onchange="getBeishu()"/></td>
+				<td><input type="text" id="leftzhouxiang" name="leftzhouxiangyy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" id="leftsanlingjing" name="leftsanlingjingyy"/></td>
+				<td>
+					<select id="leftjidi" name="leftjidiyy">
+						<option value="">请选择</option>
+						<option value="内">内</option>
+						<option value="外">外</option>
+						<option value="上">上</option>
+						<option value="下">下</option>
+					</select>
+				</td>
+				<td><input type="text" id="leftyuanyongtj" name="leftyuanyongtjyy"/></td>
+				<td><input type="text" id="lefttonggao" name="lefttonggaoyy"/></td>
+				<td><input type="text" id="leftyuanyongVA" name="leftyuanyongVAyy"/></td>
+			</tr>
+			<tr class="Light_green aling_left">
+				<td colspan="3">建议镜片材质：</td>
+				<td colspan="3">处理方式：</td>
+				<td colspan="3">建议镜框：</td>
+			</tr>
+			<tr>
+				<td class="Light_green">备注：</td>
+				<td colspan="8"><input class="aling_left" type="text" id="yuanyongRemark" name="remarkyy" /></td>
+			</tr>
+			<tr class="Light_green">
+				<td> </td>
+				<td>旧瞳距(mm)</td>
+				<td>片高(mm)</td>
+				<td>片宽(mm)</td>
+				<td>中梁(mm)</td>
+				<td>镜片通道(mm)</td>
+				<td>对角线(mm)</td>
+				<td>框型</td>
+				<td>直径(mm)</td>
+			</tr>
+			<tr>
+				<td class="Light_green">手动填写</td>
+				<td><input type="text" id="oldtongju" name="oldtongju"/></td>
+				<td><input type="text" id="piangao" name="piangao"/></td>
+				<td><input type="text" id="piankuan" name="piankuan"/></td>
+				<td><input type="text" id="zhongliang" name="zhongliang"/></td>
+				<td><input type="text" id="jingpiantongdao" name="jingpiantongdao"/></td>
+				<td><input type="text" id="duijiaoxian" name="duijiaoxian"/></td>
+				<td><input type="text" id="kuangxing" name="kuangxing"/></td>
+				<td><input type="text" id="zhijing" name="zhijing"/></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none" id="yinxing">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td> </td>
+				<td>BC</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>曲率</td>
+				<td>直径</td>
+				<td>隐形VA</td>
+				<td>适用镜片</td>
+				<td>片/盒数</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text"  id="yingxingBC" /></td>
+				<td><input type="text"  id="rightYinxingQJ" name="rightQJyx" onchange="getyxbeishu()"/></td>
+				<td><input type="text"  id="rightYinxingZJ" name="rightZJyx" onchange="getyxbeishu()"/></td>
+				<td><input type="text"  id="rightYXzhouxiang" name="rightzhouxiangyx" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text"  id="rightqulv" name="rightqulvyx"/></td>
+				<td><input type="text"  id="rightzhijing" name="rightzhijingyx"/></td>
+				<td><input type="text"  id="rightYingXingVA" name="rightYingXingVAyx"/></td>
+				<td><input type="text"  id="rightSYjingpian" name="rightSYjingpianyx"/></td>
+				<td><input type="text"  id="rightPian" name="rightPianyx"/></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value=" " id="leftBC"/></td>
+				<td><input type="text" value=" " id="leftYinxingQJ" name="leftQJyx" onchange="getyxbeishu()"/></td>
+				<td><input type="text" value=" " id="leftYinxingZJ" name="leftZJyx" onchange="getyxbeishu()"/></td>
+				<td><input type="text" value=" " id="leftYXzhouxiang" name="leftzhouxiangyx" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftqulv" name="leftqulvyx"/></td>
+				<td><input type="text" value=" " id="leftzhijing" name="leftzhijingyx"/></td>
+				<td><input type="text" value=" " id="leftYingXingVA" name="leftYingXingVAyx"/></td>
+				<td><input type="text" value=" " id="leftSYjingpian" name="leftSYjingpianyx"/></td>
+				<td><input type="text" value=" " id="leftPian" name="leftPianyx"/></td>
+			</tr>
+			<tr class="Light_pink aling_left">
+				<td>建议护理液：</td>
+				<td colspan="9"> </td>
+			</tr>
+			<tr>
+				<td class="Light_pink">备注：</td>
+				<td colspan="9"><input class="aling_left" type="text" id="yinxingRemark" name="remark" /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none" id="fuliao">
+		<table class="greenTab blueTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_blue">
+				<td>近用</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>三棱镜</td>
+				<td>基地</td>
+				<td>近用瞳距（mm）</td>
+				<td>瞳高(mm)</td>
+				<td>近用VA</td>
+			</tr>
+			<tr>
+				<td class="Light_blue">OD</td>
+				<td><input type="text" value="" id="rightFuLiaoQJ" name="rightQJjy" onchange="getFuliaobeishu()"/></td>
+				<td><input type="text"  id="rightFuLiaoZJ" name="rightZJjy" onchange="getFuliaobeishu()"/></td>
+				<td><input type="text"  id="rightFLzhouxiang" name="rightzhouxiangjy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text"  id="rightFLslj" name="rightsanlingjingjy"/></td>
+				<td>
+					<select id="rightFLjidi" name="rightjidijy">
+						<option value="">请选择</option>
+						<option value="内">内</option>
+						<option value="外">外</option>
+						<option value="上">上</option>
+						<option value="下">下</option>
+					</select>
+				</td>
+				<td><input type="text" id="rightFLyuanyTj" name="rightyuanyongtjjy"/></td>
+				<td><input type="text" id="rightFLtonggao" name="righttonggaojy"/></td>
+				<td><input type="text" id="rightFLyuanyongVA" name="rightyuanyongVAjy"/></td>
+			</tr>
+			<tr>
+				<td class="Light_blue">OS</td>
+				<td><input type="text" value=" " id="leftFuLiaoQJ" name="leftQJjy" onchange="getFuliaobeishu()"/></td>
+				<td><input type="text" value=" " id="leftFuLiaoZJ" name="leftZJjy" onchange="getFuliaobeishu()"/></td>
+				<td><input type="text" value=" " id="leftFLzhouxiang" name="leftzhouxiangjy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftFLslj" name="leftsanlingjingjy"/></td>
+				<td>
+					<select id="leftFLjidi" name="leftjidijy">
+						<option value="">请选择</option>
+						<option value="内">内</option>
+						<option value="外">外</option>
+						<option value="上">上</option>
+						<option value="下">下</option>
+					</select>
+				</td>
+				<td><input type="text" id="leftFLyuanyTj" name="leftyuanyongtjjy"/></td>
+				<td><input type="text" id="leftFLtonggao" name="lefttonggaojy"/></td>
+				<td><input type="text" id="leftFLyuanyongVA" name="leftyuanyongVA"jy/></td>
+			</tr>
+			<tr class="Light_blue aling_left">
+				<td colspan="3">建议镜片材质：</td>
+				<td colspan="3">处理方式：</td>
+				<td colspan="3">建议镜框：</td>
+			</tr>
+			<tr>
+				<td class="Light_blue">备注：</td>
+				<td colspan="8"><input class="aling_left" id="fuliaoRemark" name="remark" type="text" /></td>
+			</tr>
+			<tr class="Light_blue">
+				<td> </td>
+				<td>旧瞳距(mm)</td>
+				<td>片高(mm)</td>
+				<td>片宽(mm)</td>
+				<td>中梁(mm)</td>
+				<td>镜片通道(mm)</td>
+				<td>对角线(mm)</td>
+				<td>框型</td>
+				<td>直径(mm)</td>
+			</tr>
+			<tr>
+				<td class="Light_blue">手动填写</td>
+				<td><input type="text" value=" " name="oldtongju"/></td>
+				<td><input type="text" value=" " name="piangao"/></td>
+				<td><input type="text" value=" " name="piankuan"/></td>
+				<td><input type="text" value=" " name="zhongliang"/></td>
+				<td><input type="text" value=" " name="jingpiantongdao"/></td>
+				<td><input type="text" value=" " name="duijiaoxian"/></td>
+				<td><input type="text" value=" " name="kuangxing"/></td>
+				<td><input type="text" value=" " name="zhijing"/></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="jianjinsg">
+		<table class="greenTab yellowTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_yellow">
+				<td>渐进/双光近用</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>三棱镜</td>
+				<td>基地</td>
+				<td>远用瞳距（mm）</td>
+				<td>近用瞳距（mm）</td>
+				<td>瞳高(mm)</td>
+				<td>远用VA</td>
+				<td>近用VA</td>
+			</tr>
+			<tr>
+				<td class="Light_yellow">OD</td>
+				<td><input type="text" id="rightJianJinsgQJ" name="rightQJsg" onchange="getJianjsgBs()"/></td>
+				<td><input type="text" id="rightJianJinsgZJ" name="rightZJsg" onchange="getJianjsgBs()"/></td>
+				<td><input type="text" id="rightSGzhouxiang" name="rightzhouxiangsg" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" id="rightSGslj" name="rightsanlingjingsg"/></td>
+				<td>
+					<select id="rightSGjidi" name="rightjidisg">
+						<option value="">请选择</option>
+						<option value="内">内</option>
+						<option value="外">外</option>
+						<option value="上">上</option>
+						<option value="下</">下</option>
+					</select>
+				</td>
+				<td><input type="text" id="rightSGyuanyTj" name="rightyuanyongtjsg"/></td>
+				<td><input type="text" id="rightSGjinyTj" name="rightjinyongtjsg"/></td>
+				<td><input type="text" id="rightSGTonggao" name="righttonggaosg"/></td>
+				<td><input type="text" id="rightSGyuanyongVA" name="rightyuanyongVAsg"/></td>
+				<td><input type="text" id="rightSGjinyongVA" name="rightjinyongVAsg"/></td>
+			</tr>
+			<tr>
+				<td class="Light_yellow">OS</td>
+				<td><input type="text" value=" " id="leftJianJinsgQJ" name="leftQJsg" onchange="getJianjsgBs()"/></td>
+				<td><input type="text" value=" " id="leftJianJinsgZJ" name="leftZJsg" onchange="getJianjsgBs()"/></td>
+				<td><input type="text" value=" " id="leftSGzhouxiang" name="leftzhouxiangsg" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftSGslj" name="leftsanlingjingsg"/></td>
+				<td>
+					<select id="leftSGjidi" name="leftjidisg">
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value=" " id="leftSGyuanyTj" name="leftyuanyongtjsg"/></td>
+				<td><input type="text" value=" " id="leftSGjinyTj" name="leftjinyongtjsg"/></td>
+				<td><input type="text" value=" " id="leftSGTonggao" name="lefttonggaosg"/></td>
+				<td><input type="text" value=" " id="leftSGyuanyongVA" name="leftyuanyongVAsg"/></td>
+				<td><input type="text" value=" " id="leftSGjinyongVA" name="leftjinyongVAsg"/></td>
+			</tr>
+			<tr class="Light_yellow aling_left">
+				<td colspan="3">建议镜片材质：</td>
+				<td colspan="3">处理方式：</td>
+				<td colspan="5">建议镜框：</td>
+			</tr>
+			<tr>
+				<td class="Light_yellow">备注：</td>
+				<td colspan="10"><input class="aling_left" id="shuangguangRemark" name="remark" type="text" /></td>
+			</tr>
+			<tr class="Light_yellow">
+				<td> </td>
+				<td>旧瞳距(mm)</td>
+				<td>片高(mm)</td>
+				<td>片宽(mm)</td>
+				<td>中梁(mm)</td>
+				<td>镜片通道(mm)</td>
+				<td>对角线(mm)</td>
+				<td>框型</td>
+				<td colspan="3">直径(mm)</td>
+			</tr>
+			<tr>
+				<td class="Light_yellow">手动填写</td>
+				<td><input type="text" value=" " id="oldSGtj" name="oldtongju"/></td>
+				<td><input type="text" value=" " id="sgpiangao" name="piangao"/></td>
+				<td><input type="text" value=" " id="sgpiankuan" name="piankuan"/></td>
+				<td><input type="text" value=" " id="sgzhongliang" name="zhongliang"/></td>
+				<td><input type="text" value=" " id="jptd" name="jingpiantongdao"/></td>
+				<td><input type="text" value=" " id="sgduijiaoxian" name="duijiaoxian"/></td>
+				<td><input type="text" value=" " id="sgkuangxing" name="kuangxing"/></td>
+				<td colspan="3"><input type="text" value=" " id="sgzhijing" name="zhijing"/></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="zhongyong">
+		<table class="greenTab darkBlueTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_darkBlue">
+				<td>中用</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>三棱镜</td>
+				<td>基地</td>
+				<td>中用瞳距（mm）</td>
+				<td>瞳高(mm)</td>
+				<td>远用VA</td>
+			</tr>
+			<tr>
+				<td class="Light_darkBlue">OD</td>
+				<td><input type="text" id="rightZhongYongQJ" name="rightQJzy" onchange="getZhongYongBs()"/></td>
+				<td><input type="text" id="rightZhongYongZJ" name="rightZJzy" onchange="getZhongYongBs()"/></td>
+				<td><input type="text" id="rightzhongyongzx" name="rightzhouxiangzy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" id="rightzhongyongslj" name="rightsanlingjingzy"/></td>
+				<td>
+					<select id="rightzhongyongjd" name="rightjidizy">
+						<option value="">请选择</option>
+						<option value="内">内</option>
+						<option value="外">外</option>
+						<option value="上">上</option>
+						<option value="下">下</option>
+					</select>
+				</td>
+				<td><input type="text" id="rightzhongyongyuanytj" name="rightyuanyongtjzy"/></td>
+				<td><input type="text" id="rightzhongyongtg" name="righttonggaozy"/></td>
+				<td><input type="text" id="rightzhongyongVA" name="rightyuanyongVAzy"/></td>
+			</tr>
+			<tr>
+				<td class="Light_darkBlue">OS</td>
+				<td><input type="text" value=" " id="leftZhongYongQJ" name="leftQJzy" onchange="getZhongYongBs()"/></td>
+				<td><input type="text" value=" " id="leftZhongYongZJ" name="leftZJzy" onchange="getZhongYongBs()"/></td>
+				<td><input type="text" value=" " id="leftzhongyongzx" name="leftzhouxiangzy" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftzhongyongslj" name="leftsanlingjingzy"/></td>
+				<td>
+					<select id="leftzhongyongjd" name="leftjidizy">
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value=" " id="leftzhongyongyuanytj" name="leftyuanyongtjzy"/></td>
+				<td><input type="text" value=" " id="leftzhongyongtg" name="lefttonggaozy"/></td>
+				<td><input type="text" value=" " id="leftzhongyongVA" name="leftyuanyongVAzy"/></td>
+			</tr>
+			<tr class="Light_darkBlue aling_left">
+				<td colspan="3">建议镜片材质：</td>
+				<td colspan="3">处理方式：</td>
+				<td colspan="3">建议镜框：</td>
+			</tr>
+			<tr>
+				<td class="Light_darkBlue">备注：</td>
+				<td colspan="8"><input class="aling_left" type="text" id="zhongyongRemark" name="remark"  /></td>
+			</tr>
+			<tr class="Light_darkBlue">
+				<td> </td>
+				<td>旧瞳距(mm)</td>
+				<td>片高(mm)</td>
+				<td>片宽(mm)</td>
+				<td>中梁(mm)</td>
+				<td>镜片通道(mm)</td>
+				<td>对角线(mm)</td>
+				<td>框型</td>
+				<td>直径(mm)</td>
+			</tr>
+			<tr>
+				<td class="Light_darkBlue">手动填写</td>
+				<td><input type="text" value=" " id="oldzytj" name="oldtongju"/></td>
+				<td><input type="text" value=" " id="zypiangao" name="piangao"/></td>
+				<td><input type="text" value=" " id="zypiankuan" name="piankuan"/></td>
+				<td><input type="text" value=" " id="zyzhongliang" name="zhongliang"/></td>
+				<td><input type="text" value=" " id="zyjptd" name="jingpiantongdao"/></td>
+				<td><input type="text" value=" " id="zyduijiaoxian" name="duijiaoxian"/></td>
+				<td><input type="text" value=" " id="zykuangxing" name="kuangxing"/></td>
+				<td><input type="text" value=" " id="zyzhijing" name="zhijing"/></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="jiaomosx">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td> </td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>平K</td>
+				<td>陡K</td>
+				<td>e值</td>
+				<td>角膜直径</td>
+				<td>试戴片K</td>
+				<td>K1</td>
+				<td>K2</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value="" id="rightJiaoMosxQJ" name="rightQJ" onchange="getJMSXBs()"/></td>
+				<td><input type="text" value="" id="rightJiaoMosxZJ" name="rightZJ" onchange="getJMSXBs()"/></td>
+				<td><input type="text" value="" id="rightJMSXzx" name="rightzhouxiang" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value="" id="leftJiaoMosxQJ" name="leftQJ" onchange="getJMSXBs()"/></td>
+				<td><input type="text" value="" id="leftJiaoMosxZJ" name="leftZJ" onchange="getJMSXBs()"/></td>
+				<td><input type="text" value="" id="leftJMSXzx" name="leftzhouxiang" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+				<td><input type="text" value="" /></td>
+			</tr>
+			<tr class="Light_pink">
+				<td> </td>
+				<td>光度</td>
+				<td>降幅</td>
+				<td>直径</td>
+				<td>适用镜片</td>
+				<td colspan="6">片/盒数</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td colspan="6"><input type="text" value=" " /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td><input type="text" value=" " /></td>
+				<td colspan="6"><input type="text" value=" " /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="shijuexl">
+		<table class="greenTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_green">
+				<td>视觉训练</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>三棱镜</td>
+				<td style="width:11%;">基地</td>
+				<td>远用瞳距（mm）</td>
+				<td>近用瞳距（mm）</td>
+				<td>远用VA</td>
+				<td>近用VA</td>
+			</tr>
+			<tr>
+				<td class="Light_green">OD</td>
+				<td><input type="text" value="" id="rightShiJuexlQJ" name="rightQJxl" onchange="getSjxlBs()"/></td>
+				<td><input type="text" value="" id="rightShiJuexlZJ" name="rightZJxl" onchange="getSjxlBs()"/></td>
+				<td><input type="text" value="" id="rightSJXLzx" name="rightzhouxiangxl" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value="" id="rightSJXLslj" name="rightsanlingjingxl"/></td>
+				<td>
+					<select id="rightSJXLjidi" name="rightjidixl" >
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value="" id="rightSJXLyytj"/></td>
+				<td><input type="text" value="" id="rightSJXLjytj"/></td>
+				<td><input type="text" value="" id="rightSJXLyyva"/></td>
+				<td><input type="text" value="" id="rightSJXLjyva"/></td>
+			</tr>
+			<tr>
+				<td class="Light_green">OS</td>
+				<td><input type="text" value=" " id="leftShiJuexlQJ" name="leftQJxl" onchange="getSjxlBs()"/></td>
+				<td><input type="text" value=" " id="leftShiJuexlZJ" name="leftZJxl" onchange="getSjxlBs()"/></td>
+				<td><input type="text" value=" " id="leftSJXLzx" name="leftzhouxiangxl" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftSJXLslj" name="leftsanlingjingxl"/></td>
+				<td>
+					<select id="leftSJXLjidi" name="leftjidixl">
+						<option value="">请选择</option>
+						<option value="1">内</option>
+						<option value="2">外</option>
+						<option value="3">上</option>
+						<option value="4">下</option>
+					</select>
+				</td>
+				<td><input type="text" value="" id="leftSJXLyytj"/></td>
+				<td><input type="text" value="" id="leftSJXLjytj"/></td>
+				<td><input type="text" value="" id="leftSJXLyyva"/></td>
+				<td><input type="text" value="" id="leftSJXLjyva"/></td>
+			</tr>
+			<tr class="Light_green aling_left">
+				<td colspan="6">家庭训练：</td>
+				<td colspan="4">训练室训练：</td>
+			</tr>
+			<tr>
+				<td class="Light_green">备注：</td>
+				<td colspan="9"><input class="aling_left" name="remark" type="text" /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="jiaomosxVST">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td>角膜塑形镜VST</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>试戴片编号</td>
+				<td>FK</td>
+				<td>曲率半径</td>
+				<td>AC</td>
+				<td style="width:14%;">降幅</td>
+				<td>DIA</td>
+				<td>BC</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value="" id="rightVstQJ" name="rightQJvst"/></td>
+				<td><input type="text" value="" id="rightVstZJ" name="rightZJvst"/></td>
+				<td><input type="text" value="" id="rightVstzx" name="rightzhouxiangvst" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value="" id="rightVstSdjbh" name="rightVstSdjbh"/></td>
+				<td><input type="text" value="" id="rightVstFK" name="rightVstFK"/></td>
+				<td><input type="text" value="" id="rightVstQlbj" name="rightVstQlbj"/></td>
+				<td><input type="text" value="" id="rightVstAC" name="rightVstAC"/></td>
+				<td><input type="text" value="" id="rightVstJF" name="rightVstJF"/></td>
+				<td><input type="text" value="" id="rightVstDIA" name="rightVstDIA"/></td>
+				<td><input type="text" value="" id="rightVstBC" name="rightVstBC"/></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value=" " id="leftVstQJ" name="leftQJvst"/></td>
+				<td><input type="text" value="" id="leftVstZJ" name="leftZJvst"/></td>
+				<td><input type="text" value="" id="leftVstzx" name="leftzhouxiangvst" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value="" id="leftVstSdjbh" name="leftVstSdjbh"/></td>
+				<td><input type="text" value="" id="leftVstFK" name="leftVstFK"/></td>
+				<td><input type="text" value="" id="leftVstQlbj" name="leftVstQlbj"/></td>
+				<td><input type="text" value="" id="leftVstAC" name="leftVstAC"/></td>
+				<td><input type="text" value="" id="leftVstJF" name="leftVstJF"/></td>
+				<td><input type="text" value="" id="leftVstDIA" name="leftVstDIA"/></td>
+				<td><input type="text" value="" id="leftVstBC" name="leftVstBC"/></td>
+			</tr>
+			<tr class="Light_pink">
+				<td> </td>
+				<td>CP/CLY</td>
+				<td>E值</td>
+				<td>VA</td>
+				<td colspan="2">镜片颜色</td>
+				<td colspan="2">品牌</td>
+				<td colspan="3"></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value=" " id="rightVstCPCLY" name="rightVstCPCLY"/></td>
+				<td><input type="text" value=" " id="rightVstE" name="rightVstE"/></td>
+				<td><input type="text" value=" " id="rightVstVA" name="rightVstVA"/></td>
+				<td colspan="2">
+					<select id="rightVstJPColor">
+						<option value="无色">无色</option>
+						<option value="蓝色">蓝色</option>
+						<option value="粉色">粉色</option>
+					</select>
+				</td>
+				<td colspan="2"><input type="text" value=" " id="rightVstPinPai" name="rightVstPinPai"/></td>
+				<td colspan="3"><input type="text" value=" " /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value=" " id="leftVstCPCLY" name="leftVstCPCLY"/></td>
+				<td><input type="text" value=" " id="leftVstE" name="leftVstE"/></td>
+				<td><input type="text" value=" " id="leftVstVA" name="leftVstVA"/></td>
+				<td colspan="2">
+					<select id="leftVstJPColor">
+						<option value="">无色</option>
+						<option value="">蓝色</option>
+						<option value="">粉色</option>
+					</select>
+				</td>
+				<td colspan="2"><input type="text" value=" " id="leftVstPinPai" name="leftVstPinPai"/></td>
+				<td colspan="3"><input type="text" value=" " /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">备注：</td>
+				<td colspan="10"><input class="aling_left" type="text" value=" " name="remark"/></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="jiaomosxCRT">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td>角膜塑形镜CRT</td>
+				<td>球镜</td>
+				<td>柱镜</td>
+				<td>轴向</td>
+				<td>试戴片编号</td>
+				<td>BC</td>
+				<td>RZD</td>
+				<td>LZA</td>
+				<td>RZD2</td>
+				<td>LZA2</td>
+				<td>降幅</td>
+				<td>DIA</td>
+				<td>VA</td>
+				<td style="width:10%;">镜片颜色</td>
+				<td style="width:12%;">品牌</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value="" id="rightQjcrt" name="rightQjcrt"/></td>
+				<td><input type="text" value="" id="rightZjcrt" name="rightZjcrt"/></td>
+				<td><input type="text" value="" id="rightZhouxiangcrt" name="rightZhouxiangcrt"/></td>
+				<td><input type="text" value="" id="rightSdjbhcrt" name="rightSdjbhcrt"/></td>
+				<td><input type="text" value="" id="rightBCcrt" name="rightBCcrt"/></td>
+				<td><input type="text" value="" id="rightRZDcrt" name="rightRZDcrt"/></td>
+				<td><input type="text" value="" id="rightLZAcrt" name="rightLZAcrt"/></td>
+				<td><input type="text" value="" id="rightRZD2crt" name="rightRZD2crt"/></td>
+				<td><input type="text" value="" id="rightLZA2crt" name="rightLZA2crt"/></td>
+				<td><input type="text" value="" id="rightJFcrt" name="rightJFcrt"/></td>
+				<td><input type="text" value="" id="rightDIAcrt" name="rightDIAcrt"/></td>
+				<td><input type="text" value="" id="rightVAcrt" name="rightVAcrt"/></td>
+				<td>
+					<select>
+						<option value="">无色</option>
+						<option value="">蓝色</option>
+						<option value="">粉色</option>
+					</select>
+				</td>
+				<td><input type="text" value="" id="rightpinpaicrt" name="rightpinpaicrt"/></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value="" id="leftQjcrt" name="leftQjcrt"/></td>
+				<td><input type="text" value="" id="leftZjcrt" name="leftZjcrt"/></td>
+				<td><input type="text" value="" id="leftZhouxiangcrt" name="leftZhouxiangcrt"/></td>
+				<td><input type="text" value="" id="leftSdjbhcrt" name="leftSdjbhcrt"/></td>
+				<td><input type="text" value="" id="leftBCcrt" name="leftBCcrt"/></td>
+				<td><input type="text" value="" id="leftRZDcrt" name="leftRZDcrt"/></td>
+				<td><input type="text" value="" id="leftLZAcrt" name="leftLZAcrt"/></td>
+				<td><input type="text" value="" id="leftRZD2crt" name="leftRZD2crt"/></td>
+				<td><input type="text" value="" id="leftLZA2crt" name="leftLZA2crt"/></td>
+				<td><input type="text" value="" id="leftJFcrt" name="leftJFcrt"/></td>
+				<td><input type="text" value="" id="leftDIAcrt" name="leftDIAcrt"/></td>
+				<td><input type="text" value="" id="leftVAcrt" name="leftVAcrt"/></td>
+				<td>
+					<select>
+						<option value="">无色</option>
+						<option value="">蓝色</option>
+						<option value="">粉色</option>
+					</select>
+				</td>
+				<td><input type="text" value="" id="leftpinpaicrt" name="leftpinpaicrt"/></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">备注：</td>
+				<td colspan="11"><input class="aling_left" type="text" value=" " name="remark"/></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="rgp">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td>RGP</td>
+				<td>SK</td>
+				<td>FK</td>
+				<td>屈光度</td>
+				<td>BC</td>
+				<td>DIA</td>
+				<td>散光</td>
+				<td style="width:10%;">镜片颜色</td>
+				<td style="width:14%">特殊设计</td>
+				<td style="width:14%">品牌</td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OD</td>
+				<td><input type="text" value="" id="rightRGPsk" name="rightQJ"/></td>
+				<td><input type="text" value="" id="rightRGPfk" name="rightZJ"/></td>
+				<td><input type="text" value="" id="rightRGPqgd" name="rightRgpgd"/></td>
+				<td><input type="text" value="" id="rightRGPbc" name="rightBC"/></td>
+				<td><input type="text" value="" id="rightRGPdia" name="rightDIA"/></td>
+				<td><input type="text" value="" id="rightRGPsg" name="rightsg"/></td>
+				<td>
+					<select name="rightJPColor">
+						<option value="无色">无色</option>
+						<option value="蓝色">蓝色</option>
+						<option value="粉色">粉色</option>
+					</select>
+				</td>
+				<td><input type="text" value="" id="rightRGPtssj" name="rightTssj"/></td>
+				<td><input type="text" value="" id="rightRGPpinpai" name="rightPinpai"/></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">OS</td>
+				<td><input type="text" value="" id="leftRGPsk" name="leftQJ"/></td>
+				<td><input type="text" value="" id="leftRGPfk" name="leftZJ"/></td>
+				<td><input type="text" value="" id="leftRGPqgd" name="leftRgpgd"/></td>
+				<td><input type="text" value="" id="leftRGPbc" name="lefttBC"/></td>
+				<td><input type="text" value="" id="leftRGPdia" name="leftDIA"/></td>
+				<td><input type="text" value="" id="leftRGPsg" name="leftsg"/></td>
+				<td>
+					<select name="leftJPColor">
+						<option value="无色">无色</option>
+						<option value="蓝色">蓝色</option>
+						<option value="粉色">粉色</option>
+					</select>
+				</td>
+				<td><input type="text" value="" id="leftRGPtssj" name="leftTssj"/></td>
+				<td><input type="text" value="" id="leftRGPpinpai" name="leftPinpai"/></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">备注：</td>
+				<td colspan="11"><input class="aling_left" name="remark" type="text" /></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--右侧表格-->
+	<div class="greenRight" style="display: none;" id="yaopin">
+		<table class="greenTab pinkTab" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr class="Light_pink">
+				<td>药品</td>
+				<td style="border-left:none;"> </td>
+			</tr>
+			<tr>
+				<td class="Light_pink">内容</td>
+				<td><input class="aling_left" type="text" id="content" name="content" value=" " /></td>
+			</tr>
+			<tr>
+				<td class="Light_pink">药名</td>
+				<td ><input class="aling_left" type="text" id="ypName" name="ypName" value=" " /></td>
+			</tr>
+			<tr style="background:#f9d2d7;">
+				<td> </td>
+				<td class="pinkCho">
+					<input type="button" value="选择" />
+					<input class="empty" type="button" onclick="qingkong()" value="清空" />
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
+
+<!--商品结算-->
+<div class="m40" style="overflow: hidden;margin-bottom: 80px;">
+	<h3>商品结算</h3>
+	<!--上面一排金额结算表-->
+	<div class="settlement">
+		<ul class="ulA" id="ula">
+		</ul>
+		<ul class="ulB">
+			<li>
+				取镜方式：
+				<select id="mirrorWay" name="mirrorWay">
+					<option th:each="ls:${eyesWayList}"
+							th:text="${ls.eyeWay}"
+							th:value="${ls.eyeWay}"></option>
+					<!--<option value="正常">正常</option>-->
+					<!--<option value="订做7">订做7</option>-->
+					<!--<option value="订做10">订做10</option>-->
+					<!--<option value="订做15">订做15</option>-->
+					<!--<option value="订做25">订做25</option>-->
+				</select>
+			</li>
+			<li>取镜日期：<input type="text" id="mirrorTime" name="mirrorTime"/></li>
+			<li>
+				取镜地点：
+				<input id="mirorAddress" name="mirorAddress" type="text" th:value="${storeName}" readonly>
+				<input type="hidden" id="storeNum" name="storeNum" th:value="${storeNum}"/>
+				<em></em>
+			</li>
+			<li>
+				加急状态：
+				<select id="urgentStatus" name="urgentStatus">
+					<option value="正常">正常</option>
+					<option value="加急">加急</option>
+				</select>
+			</li>
+			<li><input class="youji" type="button" onclick="getYouji()"  value="填写邮寄信息" /></li>
+		</ul>
+		<ul class="ulC">
+			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney" onchange="getShishou()"/><input type="hidden" id="primeMoney" name="primeMoney"/></li>
+			<li>商品打折：<input type="text" id="saleDiscounts" name="saleDiscounts" onchange="getDiscount()"/><input type="hidden" id="saleAccount" name="saleAccount"/><input type="button" value="还原" /></li>
+			<li>一口价：<input type="text" id="fisPrice" onchange="getFixedPrice()" /><input type="button" class="qianpi" value="签批" /><input type="button" onclick="getfidHy()" value="还原" /></li>
+			<li>抹零金额：<input type="text" value="0.00" id="molingMoney" onfocus="if (value =='0.00'){value =''}" onblur="if (value ==''){value='0.00'}" name="molingMoney" onchange="getChangeValue()"/></li>
+		</ul>
+		<div class="JSbtn"><input type="submit" value="结算"/></div>
+	</div>
+
+	<!--结算下面左侧套餐盒子-->
+	<div class="taoCanbox">
+		<!--<div class="gray box1"><h4>条码扫描</h4><input type="text" id="goodsCodeSM"/></div>-->
+		<div class="gray box2">
+			<h4>套餐</h4>
+			<input class="inp1" type="button" value="套餐选择" onclick="getTaocanXz()"/>
+			<input class="inp2" type="button" value="套餐查看" onclick="getTaocanDetail()"/>
+			<input type="button" value="还原" onclick="getHYTc()"/>
+		</div>
+		<div class="gray box1"><h4>套餐名称</h4><input type="text" id="taocanName" name="taocanName"/>
+			<input type="hidden" id="taocanPrice" name="taocanPrice"/></div>
+		<div class="box3" style="display: block;" id="boxkuangjing">
+			<ul class="ulUp">
+				<li><span onclick="getJingjia()">镜架</span></li>
+				<li><span onclick="getJingpian()">镜片</span></li>
+				<li><span onclick="getKjpeijian()">镜架配件</span></li>
+				<li><span onclick="getTaiyangjing()">太阳镜</span></li>
+				<li><span onclick="getHaocai()">耗材</span></li>
+				<li><span onclick="getLaohuajing()">老花镜</span></li>
+				<li><span onclick="getShiguang()">视光</span></li>
+				<li><span onclick="getHuliye()">护理液</span></li>
+				<li><span onclick="getPeijian()">配件</span></li>
+			</ul>
+			<ul class="ulDown">
+				<li><span onclick="getZijia()">自架</span></li>
+				<li><span onclick="getZipian()">自片</span></li>
+				<li><span onclick="getZengpin()">赠品</span></li>
+			</ul>
+		</div>
+
+		<div class="box33" style="display: none;" id="boxyinxing">
+			<ul class="ulUn">
+				<li><span onclick="getYinxing()">隐形</span></li>
+				<li><span onclick="getHuliye()">护理液</span></li>
+				<li><span onclick="getYinxingpj()">隐形配件</span></li>
+				<li><span onclick="getJingjia()">镜架</span></li>
+				<li><span onclick="getKjpeijian()">镜架配件</span></li>
+				<li><span onclick="getTaiyangjing()">太阳镜</span></li>
+				<li><span onclick="getHaocai()">耗材</span></li>
+				<li><span onclick="getLaohuajing()">老花镜</span></li>
+				<li><span onclick="getShiguang()">视光</span></li>
+			</ul>
+			<ul class="ulYin">
+				<li><span onclick="getZengpin()">赠品</span></li>
+			</ul>
+		</div>
+
+		<div class="box333" style="display: none;" id="boxfuliao">
+			<ul class="ulUm">
+				<li><span onclick="getJingjia()">镜架</span></li>
+				<li><span onclick="getPeijian()">配件</span></li>
+				<li><span onclick="getJingpian()">镜片</span></li>
+				<li><span onclick="getYinxing()">隐形</span></li>
+				<li><span onclick="getHuliye()">护理液</span></li>
+				<li><span onclick="getTaiyangjing()">太阳镜</span></li>
+				<li><span onclick="getHaocai()">耗材</span></li>
+				<li><span onclick="getLaohuajing()">老花镜</span></li>
+				<li><span onclick="getShiguang()">视光</span></li>
+			</ul>
+			<ul class="ulFu">
+				<li><span onclick="getZengpin()">赠品</span></li>
+			</ul>
+		</div>
+
+		<div class="box3333" style="display: none;" id="yaopins">
+			<ul class="ulUy">
+				<li><span onclick="getTaiyangjing()">太阳镜</span></li>
+				<li><span onclick="getHaocai()">耗材</span></li>
+				<li><span onclick="getLaohuajing()">老花镜</span></li>
+				<li><span onclick="getShiguang()">视光</span></li>
+				<li><span onclick="getHuliye()">护理液</span></li>
+				<li><span onclick="getPeijian()">配件</span></li>
+			</ul>
+			<ul class="ulDown">
+				<li><span onclick="getZijia()">自架</span></li>
+				<li><span onclick="getZipian()">自片</span></li>
+				<li><span onclick="getZengpin()">赠品</span></li>
+			</ul>
+		</div>
+
+		<div class="gray box4" id="giveDev" style="display: block;">
+			<h4>赠品快捷键</h4>
+			<ul id="give">
+			</ul>
+		</div>
+		<div class="gray box5">
+			<h4>附加费用</h4>
+			<select id="additionalName" onchange="getFujia()">
+				<option value="">--请选择--</option>
+				<option th:each="ls:${addlist}"
+						th:text="${ls.additionName}"
+						th:value="${ls.price}"></option>
+			</select>
+			<h4>加工要求</h4>
+			<select id="processName" onchange="getJiagong()">
+				<option value="">--请选择--</option>
+				<option th:each="ls:${proList}"
+						th:text="${ls.processName}"
+						th:value="${ls.processName}"></option>
+			</select>
+		</div>
+	</div>
+
+	<!--结算下面右侧选择商品盒子-->
+	<div class="Choose">
+		<h4>选择商品</h4>
+		<table class="cho_tabA" cellspacing="0" cellpadding="0">
+			<thead>
+			<tr>
+				<th></th>
+				<th style="width: 300px;">商品名称</th>
+				<th>双眼</th>
+				<th style="width: 50px;">单价</th>
+				<th>可用库存</th>
+				<th>数量</th>
+				<th>原价合计</th>
+				<th>折扣率</th>
+				<th>最大折扣</th>
+				<th>折扣金额</th>
+				<th>优惠金额</th>
+				<th>抹零金额</th>
+				<th>应收金额</th>
+				<th>商品描述</th>
+				<th>删除</th>
+			</tr>
+			</thead>
+			<tbody id="goods">
+			</tbody>
+		</table>
+		<div class="cho_tabS_three">
+			<table class="cho_tabB" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<th>赠品</th>
+					<th>删除</th>
+				</tr>
+				</thead>
+				<tbody id="zengpin">
+				</tbody>
+			</table>
+
+			<table class="cho_tabC" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<th>附加费名称</th>
+					<th>金额</th>
+					<th width="80">数量</th>
+					<th>合计</th>
+					<th>删除</th>
+				</tr>
+				</thead>
+				<tbody id="fujia">
+				</tbody>
+			</table>
+
+			<table class="cho_tabB" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<th>加工要求</th>
+					<th>删除</th>
+				</tr>
+				</thead>
+				<tbody id="jiagong">
+				</tbody>
+			</table>
+		</div>
+		<!--备注-->
+		<table class="cho_beizhu" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr>
+				<td class="tdBB1">销售备注</td>
+				<td class="tdBB2"><textarea rows="2" id="saleremark" name="saleremark"></textarea></td>
+			</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</div>
+</form>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/storeSales/adds.js"></script>
+<script type="text/javascript" src="/js/appjs/storeSales/store.js"></script>
+<script type="text/javascript" src="/js/appjs/storeSales/beishu.js"></script>
+<script type="text/javascript">
+    $().ready(function(){
+        //sessionStorage.clear();
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额：0.00</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额：0.00</li>";
+        lis += "<li>应收金额：0.00</li>";
+        lis += "<li>实收金额：0.00</li>";
+        $("#ula").append(lis)
+        var now = new Date();
+        var year = now.getFullYear(); //得到年份
+        var month = now.getMonth();//得到月份
+        var date = now.getDate();//得到日期
+		var hour = now.getHours();//小时
+        var minutes = now.getMinutes();//分钟
+        var seconds = now.getSeconds();//秒
+        month = month + 1;
+        if (month < 10) month = "0" + month;
+        if (date < 10) date = "0" + date;
+        var time = "";
+        time = year + "-" + month + "-" + date;
+        //当前日期赋值给当前日期输入框中（jQuery easyUI）
+        $('#mirrorTime').val(time);
+        var myTime = "";
+        myTime = year + "-" + month + "-" + date +" "+ hour + ":"+ minutes + ":"+ seconds;
+        $("#yanguangTime").val(myTime);
+        var salenames = $("input[name='saleNames']").val();
+        $("#saleName").find("[value="+salenames+"]").attr("selected",true);
+
+    });
+
+    function zhouxiang(e){
+        var obj = parseFloat(e.value);
+        if (obj < 0 || obj > 180) {
+             layer.alert("轴向在0-180之间");
+        }
+	}
+
+    function updatePerson(){
+		$("#saleName").attr("disabled",false);
+        //document.getElementById("salename").disabled="false"
+	}
+
+    laydate.render({
+        elem: '#mirrorTime',
+        type: 'date'
+    });
+
+    function getShishou(){
+        var shishou = $("#amountMoney").val();
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额："+molingPrice+"</li>";
+        lis += "<li>应收金额："+price+"</li>";
+        lis += "<li>实收金额："+shishou+"</li>";
+        $("#ula").append(lis)
+        $("#amountMoney").val(shishou)
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+	}
+
+    var zkMoney = "0.00";
+    function getDiscount(){
+        var saleCount = $("#saleDiscounts").val();
+            layer.open({
+                type : 2,
+                title : '编辑',
+                maxmin : true,
+                shadeClose : false, // 点击遮罩关闭层
+                area : [ '500px', '220px' ],
+                content : '/information/store/getDiscount/', // iframe的url
+				btn: ['确定', '取消'],
+                yes: function(index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.sure();
+                    if ('' == rows){
+                        $("#saleDiscounts").val('');
+                        return layer.alert("该员工没有打折权限")
+					} else if ('001' != rows){
+                        $("#saleDiscounts").val('');
+                        return layer.alert("该员工没有打折权限")
+					} else {
+                        var saleDz = (parseFloat(price) * parseFloat(saleCount)).toFixed(2);
+                        zkMoney = (parseFloat(price) - parseFloat(saleDz)).toFixed(2);
+                        $("#ula").empty();
+                        var lis="";
+                        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+                        lis += "<li>折扣金额："+zkMoney+"</li>";
+                        lis += "<li>优惠金额：0.00</li>";
+                        lis += "<li>抹零金额："+molingPrice+"</li>";
+                        lis += "<li>应收金额："+price+"</li>";
+                        lis += "<li>实收金额："+saleDz+"</li>";
+                        $("#ula").append(lis)
+                        $("#amountMoney").val(saleDz)
+                        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+                        $("#saleAccount").val(rows);
+					}
+                    layer.close(index);//需要手动关闭窗口
+                }
+            });
+
+	}
+
+	function getFixedPrice(){
+        var firstPrice = $("#fisPrice").val();
+        //price = firstPrice;
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额："+molingPrice+"</li>";
+        lis += "<li>应收金额："+price+"</li>";
+        lis += "<li>实收金额："+firstPrice+"</li>";
+        $("#ula").append(lis)
+        $("#amountMoney").val(firstPrice)
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+	}
+	
+	function getfidHy() {
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额："+molingPrice+"</li>";
+        lis += "<li>应收金额："+price+"</li>";
+        if (shishouqj != 0.00){
+            lis += "<li>实收金额："+shishouqj+"</li>";
+            $("#amountMoney").val(shishouqj)
+        } else {
+            lis += "<li>实收金额："+price+"</li>";
+            $("#amountMoney").val(price)
+		}
+        $("#ula").append(lis)
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+    }
+
+    function getCheck(value){
+        if (value == "框镜"){
+            kuangjing.style="display: block";
+            yinxing.style="display: none";
+            fuliao.style="display:none"
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:block";
+            boxyinxing.style="display:none";
+            boxfuliao.style="display:none";
+            yaopins.style="display:none";
+        } else if (value == "隐形"){
+            kuangjing.style="display: none";
+            yinxing.style="display: block";
+            fuliao.style="display:none"
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:block";
+            boxfuliao.style="display:none";
+            yaopins.style="display:none";
+        } else if (value == "辅料"){
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            fuliao.style="display:block"
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:none";
+            boxfuliao.style="display:block";
+            yaopins.style="display:none";
+        }
+    }
+    var shoutian="";
+    function getChufang(value) {
+        shoutian = value;
+		if (value ==2){
+		    tab1.style="display:''";
+            tab11.style="display:''";
+            tab111.style="display:''";
+            tab1111.style="display:''";
+            tab11111.style="display:''";
+            tab111111.style="display:''";
+            tab2.style="display:none";
+            tab22.style="display:none";
+            document.getElementById("disaa").value="";
+		} else if (value ==1){
+            tab1.style="display:none";
+            tab11.style="display:none";
+            tab111.style="display:none";
+            tab1111.style="display:none";
+            tab11111.style="display:none";
+            tab111111.style="display:none";
+            tab2.style="display:''";
+            tab22.style="display:''";
+		}
+    }
+    var shoutianCFType="";
+    function getType(value) {
+        shoutianCFType = value;
+		if (value == 1){
+            fuliao.style="display:block";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:block";
+            boxyinxing.style="display:none";
+            boxfuliao.style="display:none";
+            yaopins.style="display:none"
+		} else if (value == 2){
+            fuliao.style="display:none";
+            kuangjing.style="display: block";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:block";
+            boxyinxing.style="display:none";
+            boxfuliao.style="display:none";
+            yaopins.style="display:none"
+		} else if (value == 3){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:block";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:block";
+            boxyinxing.style="display:none";
+            boxfuliao.style="display:none";
+            yaopins.style="display:none"
+		} else if (value == 4){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:block";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+		} else if (value == 5){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: block";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:block";
+            boxfuliao.style="display:none";
+            yaopins.style="display:none"
+		} else if (value == 6){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:block";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:block";
+            boxfuliao.style="display:none";
+            yaopins.style="display:none"
+		} else if (value == 7){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:block";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:none";
+            boxfuliao.style="display:block";
+            yaopins.style="display:none"
+		} else if (value == 8){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:block";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:block";
+            boxfuliao.style="display:none";
+            yaopins.style="display:none"
+		} else if (value == 9){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:block";
+            rgp.style="display:none";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:block";
+            boxfuliao.style="display:none";
+            yaopins.style="display:none"
+		} else if (value == 10){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:block";
+            yaopin.style="display:none";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:block";
+            boxfuliao.style="display:none";
+            yaopins.style="display:none"
+		} else if (value == 11){
+            fuliao.style="display:none";
+            kuangjing.style="display: none";
+            yinxing.style="display: none";
+            jianjinsg.style="display:none";
+            zhongyong.style="display:none";
+            jiaomosx.style="display:none";
+            shijuexl.style="display:none";
+            jiaomosxVST.style="display:none";
+            jiaomosxCRT.style="display:none";
+            rgp.style="display:none";
+            yaopin.style="display:block";
+            boxkuangjing.style="display:none";
+            boxyinxing.style="display:none";
+            boxfuliao.style="display:none";
+            yaopins.style="display:block"
+		}
+    }
+    document.onkeydown = function(e){
+        if((e||event).keyCode==13)
+            getSelect();
+    };
+
+    function getSelect(){
+        var cardMember = $("#cardMember").val();
+        $.ajax({
+            url : "/information/store/select",
+            type : "post",
+            data : {
+                'cardMember' : cardMember
+            },
+            success : function(r) {
+				$("#memberName").val(r.name);
+				$("#memberTel").val(r.phone1);
+				$("#memberSex").val(r.sexx);
+				$("#memberAge").val(r.age);
+				$("#memberType").val(r.cardType);
+				$("#memberPoint").val(100);
+				$("#memberSource").val(r.source);
+                // if (r.code==0) {
+                //     layer.msg(r.msg);
+                //     reLoad();
+                // }else{
+                //     layer.msg(r.msg);
+                // }
+            }
+        });
+	}
+	function check(a){
+		if (a.checked == true){
+            document.getElementById('disaa').readOnly = true;
+            outRecipel.style = "display:''";
+		} else if (a.checked == false){
+            document.getElementById('disaa').readOnly = false;
+            outRecipel.style = "display:none;";
+		}
+	}
+
+    // function shangpinSM(){
+    //     var goodsCodeSM = $("#goodsCodeSM").val();
+    //     alert(goodsCodeSM)
+    // }
+    //
+    // //条码扫描
+    // document.onkeydown = function(e){
+    //     if((e||event).keyCode==13)
+    //         shangpinSM();
+    // };
+
+    var arraystore=[]
+	var arrayunit=[]
+	var arraycount=[]
+	var arrayjp=[]
+    var html ="";
+    var price=0.00;
+    var producaNum=[];
+    var unitarray=[];
+    var goodsNumArray=[];
+    var jjArray=[];
+    var jpArray=[];
+    var eyejpArray=[];
+    var a=-1;
+    var classArray=[];
+    var leftRightArray=[];
+	function getJingjia(){
+        var toIndex = layer.open({
+            type : 2,
+            title : '镜架',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/store/jingjia/",// iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                // var rows = sessionStorage.getItem("row");
+                // alert(rows.length)
+                // if (rows.length > 0){
+                //     a=a+1;
+                // }
+                for (var i=0;i<rows.length;i++){
+                    a=a+1;
+                    var goodsNumStr = rows[i].goodsNum;
+                    var retailPrice = rows[i].retailPrice;
+                    var desc = '镜架';
+                    html = "<tr><td><input id='grp1' name=\"cho\" onchange='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")' type=\"checkbox\" /></td>";
+                    html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].goodsName+"</td>";
+                    html += "<td></td>";
+                    html += "<td>"+rows[i].retailPrice+"</td>";
+                    html += "<td>"+rows[i].goodsCount+"</td>";
+                    html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
+                    html += "<td>"+rows[i].retailPrice+"</td>";
+                    html += "<td id='zhekoulv"+i+"'>0.00</td>";
+                    html += "<td id='zhekoujj"+a+"'>0.00</td>";
+                    html += "<td id='zhekouMoneyjj"+a+"'>0.00</td>";
+                    html += "<td id='youhuiMoneyjj"+a+"'>0.00</td>";
+                    html += "<td id='molingMoneyjj"+a+"'>0.00</td>";
+                    html += "<td id='yingshouMoneyjj"+a+"'>0.00</td>";
+                    html += "<td>镜架</td>";
+                    html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                    html += "<input id='unit' name='unit' type='hidden' value='"+rows[i].unit+"'/>"
+                    html += "<input id='storeName' name='storeName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                    //html += "<input id='jjGoodsName' name='jjGoodsName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                    html += "<input id='jjGoodsName' name='jjGoodsName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                    html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
+                    html += "<input id='storeUnit' name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"' />"
+                    // html += "<input id='storeCount' name='storeCount' type='hidden' />"
+					html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                    html += "<input id='isJj' name='isJj' type='hidden' />"
+                    html += "<input id='classtype' name='classtype' type='hidden' value='1'/>"
+                    html += "<input id='leftRight' name='leftRight' type='hidden' value='空'/>"
+                    html += "<input id='yingshoujj"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
+                    html += "<input id='producaNum' name='producaNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
+                    html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
+                    html += "<input id='storeDescribe'name='storeDescribe' value='镜架' type='hidden' />"
+                    //$("#yingshouMoneyjj"+i+"").text("454")
+                    $("#goods").append(html);
+                    //document.getElementById("yingshouMoney"+rows[i].goodsNum+"").text=rows[i].retailPrice
+                    $("#yingshouMoneyjj"+a+"").text(rows[i].retailPrice)
+                    price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                    //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                    //arraystore.push(rows[i].goodsName);
+                   // arrayunit.push(rows[i].retailPrice);
+                    //unitarray.push(rows[i].unit);
+                   // goodsNumArray.push(rows[i].goodsNum);
+                    //jjArray.push(rows[i].goodsName)
+                    // arraycount.push(1)
+                    //classArray.push(1);
+                    //producaNum.push(rows[i].goodsNum);
+					$("#isJj").val("有")
+				}
+                //$("#storeName").val(arraystore);
+                //$("#storeUnit").val(arrayunit);
+                // $("#storeCount").val(arraycount);
+                //$("#classtype").val(classArray);
+                //$("#unit").val(unitarray);
+                //$("#goodsNum").val(goodsNumArray);
+                //$("#jjGoodsName").val(jjArray);
+                // $("#producaNum").val(producaNum);
+                $("#ula").empty();
+                var lis="";
+                lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+                lis += "<li>折扣金额：0.00</li>";
+                lis += "<li>优惠金额：0.00</li>";
+                lis += "<li>抹零金额："+molingPrice+"</li>";
+                lis += "<li>应收金额："+price+"</li>";
+                lis += "<li>实收金额："+price+"</li>";
+                $("#ula").append(lis)
+				$("#amountMoney").val(price)
+				$("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+                //son_msg就是子页面中的msg数据
+                //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            }
+        });
+        layer.full(toIndex)
+	}
+
+    // $("#grp1").change(function(){
+    //     alert(this.checked?"勾上了":"取消了勾选")
+    //     alert(this.value);
+    // });
+
+    function getSummoney(arg,obj) {
+        var str = arg.id;
+        var str = str.split("")
+        var targetStr = str[str.length-1]
+		if ("镜架" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneyjj"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneyjj"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+		} else if ("护理液" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneyhly"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneyhly"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+		} else if ("镜片" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneyjp"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneyjp"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        } else if ("框镜" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneyjjpj"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneyjjpj"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        } else if ("太阳镜" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneytyj"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneytyj"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        } else if ("耗材" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneyhc"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneyhc"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        } else if ("老花镜" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneylhj"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneylhj"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+		} else if ("视光" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneysg"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneysg"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+		} else if ("配件" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneypj"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneypj"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        } else if ("隐形" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneyyx"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneyyx"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        } else if ("隐形配件" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneyyxpj"+targetStr+"").text();
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2);
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneyyxpj"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        }
+
+    }
+
+	function del(obj,prices,produName) {
+	    a=a-1;
+        var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+        tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+        price = (parseFloat(price)- parseFloat(prices)).toFixed(2)
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额："+molingPrice+"</li>";
+        lis += "<li>应收金额："+price+"</li>";
+        lis += "<li>实收金额："+price+"</li>";
+        $("#ula").append(lis);
+        $("#amountMoney").val(price);
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        arraystore.remove(produName);
+        arrayunit.remove(prices);
+        arraycount.remove(1);
+        $("#storeName").val(arraystore);
+        $("#storeUnit").val(arrayunit);
+        $("#storeCount").val(arraycount);
+    }
+
+    function getJingpian(){
+	    var  rightYuanYongQJ = '';
+	    var rightYuanYongZJ = '';
+	    var leftYuanYongQJ = '';
+	    var leftYuanYongZJ = '';
+       // document.getElementById('<%=content1.ClientID%>').value;
+	    if (cfType == 1){
+            rightYuanYongQJ = $("#rightFuLiaoQJ").val();
+            rightYuanYongZJ = $("#rightFuLiaoZJ").val();
+            leftYuanYongQJ = $("#leftFuLiaoQJ").val();
+            leftYuanYongZJ = $("#leftFuLiaoZJ").val();
+		} else if (cfType == 2){
+            rightYuanYongQJ = $("#rightYuanYongQJ").val();
+            rightYuanYongZJ = $("#rightYuanYongZJ").val();
+            leftYuanYongQJ = $("#leftYuanYongQJ").val();
+            leftYuanYongZJ = $("#leftYuanYongZJ").val();
+		} else if (cfType == 3){
+            rightYuanYongQJ = $("#rightJianJinsgQJ").val();
+            rightYuanYongZJ = $("#rightJianJinsgZJ").val();
+            leftYuanYongQJ = $("#leftJianJinsgQJ").val();
+            leftYuanYongZJ = $("#leftJianJinsgZJ").val();
+		} else if (cfType == 4){
+            rightYuanYongQJ = $("#rightZhongYongQJ").val();
+            rightYuanYongZJ = $("#rightZhongYongZJ").val();
+            leftYuanYongQJ = $("#leftZhongYongQJ").val();
+            leftYuanYongZJ = $("#leftZhongYongZJ").val();
+		} else if (cfType == 5){
+            rightYuanYongQJ = $("#rightYinxingQJ").val();
+            rightYuanYongZJ = $("#rightYinxingZJ").val();
+            leftYuanYongQJ = $("#leftYinxingQJ").val();
+            leftYuanYongZJ = $("#leftYinxingZJ").val();
+		} else if (cfType == 7){
+            rightYuanYongQJ = $("#rightShiJuexlQJ").val();
+            rightYuanYongZJ = $("#rightShiJuexlZJ").val();
+            leftYuanYongQJ = $("#leftShiJuexlQJ").val();
+            leftYuanYongZJ = $("#leftShiJuexlZJ").val();
+		} else if (cfType == 8){
+            rightYuanYongQJ = $("#rightVstQJ").val();
+            rightYuanYongZJ = $("#rightVstZJ").val();
+            leftYuanYongQJ = $("#leftVstQJ").val();
+            leftYuanYongZJ = $("#leftVstZJ").val();
+        }
+		if (cfType == '' && shoutian == 2){
+            if (shoutianCFType == 1){
+                rightYuanYongQJ = $("#rightFuLiaoQJ").val();
+                rightYuanYongZJ = $("#rightFuLiaoZJ").val();
+                leftYuanYongQJ = $("#leftFuLiaoQJ").val();
+                leftYuanYongZJ = $("#leftFuLiaoZJ").val();
+            } else if (shoutianCFType == 2){
+                rightYuanYongQJ = $("#rightYuanYongQJ").val();
+                rightYuanYongZJ = $("#rightYuanYongZJ").val();
+                leftYuanYongQJ = $("#leftYuanYongQJ").val();
+                leftYuanYongZJ = $("#leftYuanYongZJ").val();
+            } else if (shoutianCFType == 3){
+                rightYuanYongQJ = $("#rightJianJinsgQJ").val();
+                rightYuanYongZJ = $("#rightJianJinsgZJ").val();
+                leftYuanYongQJ = $("#leftJianJinsgQJ").val();
+                leftYuanYongZJ = $("#leftJianJinsgZJ").val();
+            } else if (shoutianCFType == 4){
+                rightYuanYongQJ = $("#rightZhongYongQJ").val();
+                rightYuanYongZJ = $("#rightZhongYongZJ").val();
+                leftYuanYongQJ = $("#leftZhongYongQJ").val();
+                leftYuanYongZJ = $("#leftZhongYongZJ").val();
+            } else if (shoutianCFType == 5){
+                rightYuanYongQJ = $("#rightYinxingQJ").val();
+                rightYuanYongZJ = $("#rightYinxingZJ").val();
+                leftYuanYongQJ = $("#leftYinxingQJ").val();
+                leftYuanYongZJ = $("#leftYinxingZJ").val();
+            } else if (shoutianCFType == 7){
+                rightYuanYongQJ = $("#rightShiJuexlQJ").val();
+                rightYuanYongZJ = $("#rightShiJuexlZJ").val();
+                leftYuanYongQJ = $("#leftShiJuexlQJ").val();
+                leftYuanYongZJ = $("#leftShiJuexlZJ").val();
+            }  else if (shoutianCFType == 8){
+                rightYuanYongQJ = $("#rightVstQJ").val();
+                rightYuanYongZJ = $("#rightVstZJ").val();
+                leftYuanYongQJ = $("#leftVstQJ").val();
+                leftYuanYongZJ = $("#leftVstZJ").val();
+            }
+		}
+        if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
+            return layer.alert("请选择球镜度数");
+        }
+        // alert(rightYuanYongQJ == '');
+        // alert(rightYuanYongZJ == null);
+        // alert(leftYuanYongQJ);
+        // alert(leftYuanYongZJ);
+	    var str=0
+        var toIndex = layer.open({
+            type : 2,
+            title : '镜片',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/store/jingpian/"+rightYuanYongZJ+"/"+rightYuanYongQJ+"/"+leftYuanYongQJ+"/"+leftYuanYongZJ+"/"+str, // iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.sure();
+                // var rows = sessionStorage.getItem("row");
+                // alert(rows.length)
+                //arrayjp = rows.length;
+				//alert(JSON.stringify(rows));
+				var dataArray = new Array();
+				var rowsRight = window.localStorage.getItem("rowsRight");
+				var rowsLeft = window.localStorage.getItem("rowsLeft");
+				if (null != JSON.parse(rowsRight)){
+                    dataArray.push(JSON.parse(rowsRight));
+				}
+				if (null != JSON.parse(rowsLeft)){
+                    dataArray.push(JSON.parse(rowsLeft));
+				}
+                rows = dataArray;
+                localStorage.clear();
+                if (rows.length > 0){
+                    a=a+1;
+                }
+                for (var i=0;i<rows.length;i++){
+                    var goodsNumStr = rows[i][0].goodsNum;
+                    var retailPrice = rows[i][0].retailPrice;
+                    var desc = "镜片";
+                    html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
+                    html += "<td style=\"text-overflow: ellipsis; overflow: hidden;\">"+rows[i][0].goodsName+"</td>";
+                    html += "<td>"+rows[i][0].leftRight+"</td>";
+                    html += "<td>"+rows[i][0].retailPrice+"</td>";
+                    html += "<td>"+rows[i][0].goodsCount+"</td>";
+                    html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
+                    html += "<td>"+rows[i][0].retailPrice+"</td>";
+                    html += "<td id='zhekoulv"+i+"'>0.00</td>";
+                    html += "<td id='zhekoujp"+a+"'>0.00</td>";
+                    html += "<td id='zhekouMoneyjp"+a+"'>0.00</td>";
+                    html += "<td id='youhuiMoneyjp"+a+"'>0.00</td>";
+                    html += "<td id='molingMoneyjp"+a+"'>0.00</td>";
+                    html += "<td id='yingshouMoneyjp"+a+"'>0.00</td>";
+                    html += "<td>镜片</td>";
+                    html += "<td><em onclick='del(this,\"" + rows[i][0].retailPrice + "\",\""+rows[i][0].goodsName+"\")'></em></td>";
+                    html += "<input id='unit' name='unit' type='hidden' value='"+rows[i][0].unit+"'/>"
+                    html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i][0].goodsName+"'/>"
+                    html += "<input id='jpGoodsName'name='jpGoodsName' type='hidden' value='"+rows[i][0].goodsName+"'/>"
+                    html += "<input id='jpGoodsNum'name='jpGoodsNum' type='hidden' value='"+rows[i][0].goodsNum+"'/>"
+                    html += "<input id='jpGoodsCode'name='jpGoodsCode' type='hidden' value='"+rows[i][0].goodsCode+"'/>"
+                    html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i][0].goodsNum+"'/>"
+                    html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i][0].retailPrice+"'/>"
+                    // html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                    html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i][0].goodsCode+"'/>"
+                    html += "<input id='leftRight' name='leftRight' type='hidden' value='"+rows[i][0].leftRight+"'/>"
+                    html += "<input id='classtype' name='classtype' type='hidden' value='"+rows[i][0].classtype+"'/>"
+                    html += "<input id='isJp'name='isJp' type='hidden' />"
+                    html += "<input id='yingshoujp"+a+"' value='"+rows[i][0].retailPrice+"' type='hidden' />"
+                    html += "<input id='batch' name='batch' value='"+rows[i][0].batch+"' type='hidden' />"
+                    html += "<input id='storeDescribe'name='storeDescribe' value='镜片' type='hidden' />"
+                    $("#goods").append(html);
+                    //$("#yingshouMoneyjp"+i+"").text("2342")
+                    $("#yingshouMoneyjp"+a+"").text(rows[i][0].retailPrice);
+                    price = (parseFloat(price)+ parseFloat(rows[i][0].retailPrice)).toFixed(2);
+                    //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                    //arraystore.push(rows[i].goodsName);
+                    //arrayunit.push(rows[i].retailPrice);
+                    //unitarray.push(rows[i].unit);
+                   // goodsNumArray.push(rows[i].goodsNum);
+                    //jpArray.push(rows[i].goodsName)
+                    //classArray.push(rows[i].classtype);
+                    //arraycount.push(1);
+                    arrayjp.push(1);
+                }
+                $("#isJp").val(arrayjp.length);
+                //$("#classtype").val(classArray);
+                //$("#storeName").val(arraystore);
+                //$("#storeUnit").val(arrayunit);
+                //$("#storeCount").val(arraycount);
+                //$("#unit").val(unitarray);
+                //$("#goodsNum").val(goodsNumArray);
+                //$("#jpGoodsName").val(jpArray);
+                $("#ula").empty();
+                var lis="";
+                lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+                lis += "<li>折扣金额：0.00</li>";
+                lis += "<li>优惠金额：0.00</li>";
+                lis += "<li>抹零金额："+molingPrice+"</li>";
+                lis += "<li>应收金额："+price+"</li>";
+                lis += "<li>实收金额："+price+"</li>";
+                $("#ula").append(lis)
+                $("#amountMoney").val(price)
+                $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+                //son_msg就是子页面中的msg数据
+                //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+            }
+        });
+        layer.full(toIndex)
+    }
+    function getMemberAdd(){
+        var toIndex = layer.open({
+            type : 2,
+            title : '增加',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/member/add/" // iframe的url
+        });
+        layer.full(toIndex)
+    }
+    function getMemberEdit(){
+	    var id = $("#memberId").val();
+        var toIndex = layer.open({
+            type : 2,
+            title : '编辑',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/member/edit/"+ id  // iframe的url
+        });
+        layer.full(toIndex)
+    }
+    function getMemberDetail(){
+        var id = $("#memberId").val();
+        layer.open({
+            type : 2,
+            title : '详情',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '1200px', '520px' ],
+            content : "/information/highmember/detail/" + id // iframe的url
+        });
+
+	}
+    var addhtml = "";
+	var prce=0;
+	var addinal=[];
+	var addinalPrice=[];
+	function getFujia(){
+        var options=$("#additionalName option:selected")
+		if (options.val() == ''){
+            return
+		}
+        var pe = 1;
+        prce = pe;
+        price =(parseFloat(price)+ parseFloat(options.val())).toFixed(2);
+        var yjyhPrice = $("#amountMoney").val();
+        // alert(price)
+		// alert(youhuiPrice)
+		// alert(zhekouPrice)
+		// alert(parseFloat(zhekouPrice));
+		// if (youhuiPrice != 0.00 && zhekouPrice != 0.00){
+         //    price = ((parseFloat(price) - parseFloat(youhuiPrice)) * parseFloat(zhekouPrice)).toFixed(2);
+		// } else if (youhuiPrice != 0.00 && zhekouPrice == 0.00){
+         //    price = (parseFloat(price) - parseFloat(youhuiPrice)).toFixed(2);
+		// } else if (youhuiPrice == 0.00 && zhekouPrice != 0.00){
+         //    price = (parseFloat(price) * parseFloat(zhekouPrice)).toFixed(2);
+		// }
+        // alert(price)
+		if ( '' != yjyhPrice && yjyhPrice != price){
+            yjyhPrice = (parseFloat(yjyhPrice)+ parseFloat(options.val())).toFixed(2);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额："+dazhePrice+"</li>";
+            lis += "<li>优惠金额："+youhuiPrice+"</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+yjyhPrice+"</li>";
+            lis += "<li>实收金额："+yjyhPrice+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(yjyhPrice)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+		} else {
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额："+dazhePrice+"</li>";
+            lis += "<li>优惠金额："+youhuiPrice+"</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+		}
+
+		addhtml = "<tr><td>"+options.text()+"</td>";
+		addhtml += "<td>"+options.val()+"</td>";
+		addhtml += "<td><input type=\"text\" id='prival' value='1' name='additionalCount' disabled onkeyup=\"sum("+options.val()+")\"/></td>";
+		addhtml += "<td id='sumprice'>"+options.val()+"</td>";
+		addhtml += "<td><em onclick='delss(this,\"" + options.val() + "\",\"" + options.text() + "\")'></em></td>";
+		addhtml += "</tr>";
+		addhtml += "<input id='additionalCost' name='additionalCost' type='hidden'/>"
+        // addhtml += "<input id='additionalPrice' name='additionalPrice' type='hidden'/>";
+        addhtml += "<input id='additionalPrices' name='additionalPrice' type='hidden'/>";
+		//document.getElementById('additionalPrice').value = "";
+		$("#fujia").append(addhtml);
+        addinal.push(options.text());
+        addinalPrice.push(options.val());
+        $("#additionalCost").val(addinal);
+        $("#additionalPrices").val(addinalPrice)
+	}
+	var priceNum=0.00;
+    function sum(obj){
+        var yjyhPrice = $("#amountMoney").val();
+        document.getElementById('additionalPrices').value = "";
+        var privaul = $("#prival").val();
+        prce = privaul;
+        var sumprices = (parseFloat(privaul) * parseFloat(obj)).toFixed(2);
+        sumprice.innerText = sumprices;
+        //$("#sumprice").val(sumprices);
+		$("#additionalPrices").val(sumprices);
+        priceNum = sumprices;
+        //price =(parseFloat(price)+ parseFloat(sumprices)).toFixed(2);
+        // if ("" != yjyhPrice && yjyhPrice != price){
+        //     yjyhPrice = (parseFloat(yjyhPrice)+ parseFloat(sumprices)).toFixed(2);
+        //     $("#ula").empty();
+        //     var lis="";
+        //     lis =  "<li>原价金额："+price+"</li>";
+        //     lis += "<li>折扣金额："+dazhePrice+"</li>";
+        //     lis += "<li>优惠金额："+youhuiPrice+"</li>";
+        //     lis += "<li>抹零金额：0.00</li>";
+        //     lis += "<li>应收金额："+yjyhPrice+"</li>";
+        //     lis += "<li>实收金额："+yjyhPrice+"</li>";
+        //     $("#ula").append(lis)
+        //     $("#amountMoney").val(yjyhPrice)
+        //     $("#primeMoney").val(price)
+        // } else {
+        //     $("#ula").empty();
+        //     var lis="";
+        //     lis =  "<li>原价金额："+price+"</li>";
+        //     lis += "<li>折扣金额："+dazhePrice+"</li>";
+        //     lis += "<li>优惠金额："+youhuiPrice+"</li>";
+        //     lis += "<li>抹零金额：0.00</li>";
+        //     lis += "<li>应收金额："+price+"</li>";
+        //     lis += "<li>实收金额："+price+"</li>";
+        //     $("#ula").append(lis)
+        //     $("#amountMoney").val(price)
+        //     $("#primeMoney").val(price)
+        // }
+        // $("#ula").empty();
+        // var lis="";
+        // lis =  "<li>原价金额："+price+"</li>";
+        // lis += "<li>折扣金额："+zhekouPrice+"</li>";
+        // lis += "<li>优惠金额："+youhuiPrice+"</li>";
+        // lis += "<li>抹零金额：0.00</li>";
+        // lis += "<li>应收金额："+price+"</li>";
+        // lis += "<li>实收金额："+price+"</li>";
+        // $("#ula").append(lis)
+        // $("#amountMoney").val(price)
+    }
+    function delss(obj,privals,addinalname) {
+        var yjyhPrice = $("#amountMoney").val();
+        var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+        tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+		//var dd = $("#prival").val();
+		//alert(prce);
+		var dsf = (parseFloat(prce) * parseFloat(privals)).toFixed(2);
+        price = (parseFloat(price) - parseFloat(dsf)).toFixed(2);
+		if ("" != yjyhPrice && yjyhPrice != price){
+            yjyhPrice = (parseFloat(yjyhPrice) - parseFloat(dsf)).toFixed(2);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额："+dazhePrice+"</li>";
+            lis += "<li>优惠金额："+youhuiPrice+"</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+yjyhPrice+"</li>";
+            lis += "<li>实收金额："+yjyhPrice+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(yjyhPrice)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+		} else {
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis += "<li>折扣金额："+dazhePrice+"</li>";
+            lis += "<li>优惠金额："+youhuiPrice+"</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+		}
+        addinal.remove(addinalname);
+        addinalPrice.remove(privals);
+        $("#additionalCost").val(addinal);
+        $("#additionalPrices").val(addinalPrice);
+    }
+    //加工要求
+	var jiagonghtml="";
+	var ask=[];
+	function getJiagong() {
+        var options=$("#processName option:selected")
+		var jianame = options.text();
+        jiagonghtml = "<tr>";
+        jiagonghtml += "<td><input type=\"text\" value="+options.text()+"></td>";
+        jiagonghtml += "<td><em onclick='getDeljia(this,\"" + jianame + "\")'></em></td>";
+        jiagonghtml += "</tr>";
+        jiagonghtml += "<input name=\"processAsk\"id=\"processAsk\" type=\"hidden\" value='"+options.text()+"'/>"
+        $("#jiagong").append(jiagonghtml);
+        //ask.push(options.text())
+        //$("#processAsk").val(ask);
+    }
+    Array.prototype.remove = function(val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    };
+    function getDeljia(obj,jianame) {
+        var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+        tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+		ask.remove(jianame)
+        $("#processAsk").val(ask);
+	}
+	var molingPrice=0.00;
+    var molingOldPrice=0.00;
+    function getChangeValue(){
+        var molingMoney = $("#molingMoney").val();
+        if (parseInt(molingMoney) >= parseInt(price)){
+            $("#molingMoney").val(0.00);
+            return layer.alert("抹零金额不能大于实收金额");
+        }
+        if ("" == molingMoney){
+            molingPrice = 0.00;
+            molingMoney = 0.00;
+            price = (parseFloat(price) + parseFloat(molingOldPrice)).toFixed(2);
+		} else {
+            molingPrice = molingMoney;
+            molingOldPrice = molingMoney;
+            price = (parseFloat(price) - parseFloat(molingMoney)).toFixed(2);
+		}
+
+
+
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis += "<li>折扣金额："+zkMoney+"</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额："+molingPrice+"</li>";
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        if ("0.00" != zkMoney){
+            price = (parseFloat(price) - parseFloat(zkMoney)).toFixed(2);
+        }
+        lis += "<li>应收金额："+price+"</li>";
+        lis += "<li>实收金额："+price+"</li>";
+        $("#ula").append(lis)
+        $("#amountMoney").val(price)
+
+        //$("#amountMoney").val(price);
+    }
+    function getBeishu() {
+        // alert(rightYuanYongZJ);
+        // alert(undefined != rightYuanYongZJ);
+		var rightYuanYongQJ = $("#rightYuanYongQJ").val()
+		var rightYuanYongZJ = $("#rightYuanYongZJ").val();
+		var leftYuanYongQJ = $("#leftYuanYongQJ").val();
+		var leftYuanYongZJ = $("#leftYuanYongZJ").val();
+		if (rightYuanYongQJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("rightYuanYongQJ").value="";
+		}
+		if (rightYuanYongZJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("rightYuanYongZJ").value="";
+		}
+        if (leftYuanYongQJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("leftYuanYongQJ").value="";
+        }
+        if (leftYuanYongZJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("leftYuanYongZJ").value="";
+        }
+    }
+    function getyxbeishu() {
+       var rightYinxingQJ = $("#rightYinxingQJ").val();
+       var rightYinxingZJ = $("#rightYinxingZJ").val();
+       var leftYinxingQJ = $("#leftYinxingQJ").val();
+       var leftYinxingZJ = $("#leftYinxingZJ").val();
+        if (rightYinxingQJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("rightYinxingQJ").value="";
+        }
+        if (rightYinxingZJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("rightYinxingZJ").value="";
+        }
+        if (leftYinxingQJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("leftYinxingQJ").value="";
+        }
+        if (leftYinxingZJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("leftYinxingZJ").value="";
+        }
+    }
+    function getFuliaobeishu(){
+        var rightFuLiaoQJ = $("#rightFuLiaoQJ").val();
+        var rightFuLiaoZJ = $("#rightFuLiaoZJ").val();
+        var leftFuLiaoQJ = $("#leftFuLiaoQJ").val();
+        var leftFuLiaoZJ= $("#leftFuLiaoZJ").val();
+        if (rightFuLiaoQJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("rightFuLiaoQJ").value="";
+        }
+        if (rightFuLiaoZJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("rightFuLiaoZJ").value="";
+        }
+        if (leftFuLiaoQJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("leftFuLiaoQJ").value="";
+        }
+        if (leftFuLiaoZJ%0.25!=0){
+            layer.alert("球镜、柱镜、ADD应为0.25的倍数!");
+            document.getElementById("leftFuLiaoZJ").value="";
+        }
+	}
+</script>
+<script th:inline="javascript">
+    $().ready(function(){
+        var name = $("#memname").val();
+        //赠品
+        var giveList = [[${giveawayDOList}]];
+        if (giveList.length >0){
+            giveDev.style = "display:block;"
+		} else {
+            giveDev.style = "display:none;"
+		}
+		//附加费用
+		var addlist = [[${addlist}]];
+		//处方
+        var list = [[${conclusionList}]];
+		var html="";
+            for (var i = 0; i < list.length; i++) {
+                var sd = list[i];
+                var data = JSON.stringify(sd);
+                html = "<tr onclick='getData("+data+")'><td style=\"width:25%;\">"+list[i].chufang+"</td>";
+                html += "<td style=\"width:25%;\">"+list[i].yangsName+"</td>";
+                html += "<td>"+list[i].yanguangTime+"</td></tr>";
+                html += "<input id='ptometryNumber' name='ptometryNumber' type='hidden'>"
+                $("#tbodys").append(html);
+            }
+            var newli = "";
+            for (var t=0;t<giveList.length;t++){
+                newli = "<li><span onclick=getgive('"+giveList[t].giveName+"')>"+giveList[t].giveJc+"</span></li>";
+                $("#give").append(newli);
+			}
+    });
+    var cfType="";
+    function getData(obj){
+        var ss = JSON.stringify(obj);
+        var data = JSON.parse(ss);
+        console.log(data);
+        cfType = data.chufangType;
+        $("#optometryName").val(data.yangsName)
+        $("#recipelTypes").val(data.chufang);
+        $("#ptometryNumber").val(data.ptometryNum);
+        // alert(data.chufangType)
+        getType(data.chufangType);
+        if (data.chufangType == 5 || data.chufangType == 8){
+            $("#eyeType1").removeAttr("checked");
+            $("#eyeType2").attr("checked","checked");
+        } else {
+            $("#eyeType2").removeAttr("checked");
+            $("#eyeType1").attr("checked","checked");
+		}
+        if (data.chufangType == 1){
+            $("#rightFuLiaoQJ").val(data.rightsph);
+            document.getElementById("rightFuLiaoQJ").readOnly=true;
+            $("#rightFuLiaoZJ").val(data.rightcyl);
+            document.getElementById("rightFuLiaoZJ").readOnly=true;
+            $("#rightFLzhouxiang").val(data.rightzx);
+            document.getElementById("rightzhouxiang").readOnly=true;
+            $("#rightFLslj").val(data.rightprism);
+            // if (data.rightprism != ''){
+             //    document.getElementById("rightFLslj").readOnly=true;
+			// }
+			var jidi = data.rightjd;
+            //$("#rightjidi").val(jidi);
+            $("#rightFLjidi").find("[value='"+jidi+"']").attr("selected",true);
+
+            $("#rightFLyuanyTj").val(data.rightyytj);
+            // if (data.rightyytj != ''){
+             //    document.getElementById("rightFLyuanyTj").readOnly=true;
+			// }
+			$("#rightFLtonggao").val(data.righttg);
+            // if (data.righttg != ''){
+             //    document.getElementById("rightFLtonggao").readOnly=true;
+			// }
+			$("#rightFLyuanyongVA").val(data.rightjyva);
+            // if (data.rightva != ''){
+             //    document.getElementById("rightFLyuanyongVA").readOnly=true;
+			// }
+			$("#leftFuLiaoQJ").val(data.leftsph);
+            document.getElementById("leftFuLiaoQJ").readOnly=true;
+            $("#leftFuLiaoZJ").val(data.leftcyl);
+            document.getElementById("leftFuLiaoZJ").readOnly=true;
+            $("#leftFLzhouxiang").val(data.leftzx);
+            document.getElementById("leftFLzhouxiang").readOnly=true;
+            $("#leftFLslj").val(data.leftprism);
+            // if (data.leftprism != ''){
+            //     document.getElementById("leftFLslj").readOnly=true;
+            // }
+            var leftjidi = data.leftjd;
+            $("#leftFLjidi").find("[value='"+leftjidi+"']").attr("selected",true);
+            $("#leftFLyuanyTj").val(data.leftyytj);
+            // if (data.leftyytj != ''){
+            //     document.getElementById("leftFLyuanyTj").readOnly=true;
+            // }
+            $("#leftFLtonggao").val(data.leftjyva);
+            // if (data.lefttg != ''){
+            //     document.getElementById("leftFLtonggao").readOnly=true;
+            // }
+            $("#leftFLyuanyongVA").val(data.leftva);
+            // if (data.leftva != ''){
+            //     document.getElementById("leftFLyuanyongVA").readOnly=true;
+            // }
+		} else if (data.chufangType == 2){
+            $("#rightYuanYongQJ").val(data.rightsph);
+            document.getElementById("rightYuanYongQJ").readOnly=true;
+            $("#rightYuanYongZJ").val(data.rightcyl);
+            document.getElementById("rightYuanYongZJ").readOnly=true;
+            $("#rightzhouxiang").val(data.rightzx);
+            document.getElementById("rightzhouxiang").readOnly=true;
+            $("#rightsanlingjing").val(data.rightprism);
+            // if (data.rightprism != ''){
+            //     document.getElementById("rightsanlingjing").readOnly=true;
+            // }
+            var rihtjd = data.rightjd;
+			$("#rightjidi").find("[value='"+rihtjd+"']").attr("selected",true);
+            $("#rightyuanyongtj").val(data.rightyytj);
+            // if (data.rightyytj != ''){
+            //     document.getElementById("rightyuanyongtj").readOnly=true;
+            // }
+            $("#righttonggao").val(data.righttg);
+            // if (data.righttg != ''){
+            //     document.getElementById("righttonggao").readOnly=true;
+            // }
+            $("#rightyuanyongVA").val(data.rightva);
+            // if (data.rightva != ''){
+            //     document.getElementById("rightyuanyongVA").readOnly=true;
+            // }
+            $("#leftYuanYongQJ").val(data.leftsph);
+            document.getElementById("leftYuanYongQJ").readOnly=true;
+            $("#leftYuanYongZJ").val(data.leftcyl);
+            document.getElementById("leftYuanYongZJ").readOnly=true;
+            $("#leftzhouxiang").val(data.leftzx);
+            document.getElementById("leftzhouxiang").readOnly=true;
+            $("#leftsanlingjing").val(data.leftprism);
+            // if (data.leftprism != ''){
+            //     document.getElementById("leftsanlingjing").readOnly=true;
+            // }
+            var leftjd = data.leftjd;
+            $("#leftjidi").find("[value='"+leftjd+"']").attr("selected",true);
+            $("#leftyuanyongtj").val(data.leftyytj);
+            // if (data.leftyytj != ''){
+            //     document.getElementById("leftyuanyongtj").readOnly=true;
+            // }
+            $("#lefttonggao").val(data.lefttg);
+            // if (data.lefttg != ''){
+            //     document.getElementById("lefttonggao").readOnly=true;
+            // }
+            $("#leftyuanyongVA").val(data.leftva);
+            // if (data.leftva != ''){
+            //     document.getElementById("leftyuanyongVA").readOnly=true;
+            // }
+		} else if (data.chufangType == 3){
+            $("#rightJianJinsgQJ").val(data.rightsph);
+            document.getElementById("rightJianJinsgQJ").readOnly=true;
+            $("#rightJianJinsgZJ").val(data.rightcyl);
+            document.getElementById("rightJianJinsgZJ").readOnly=true;
+            $("#rightSGzhouxiang").val(data.rightzx);
+            document.getElementById("rightSGzhouxiang").readOnly=true;
+            $("#rightSGslj").val(data.rightprism);
+            // if (data.rightprism != ''){
+            //     document.getElementById("rightSGslj").readOnly=true;
+            // }
+            var rihtjd = data.rightjd;
+            $("#rightSGjidi").find("[value='"+rihtjd+"']").attr("selected",true);
+            $("#rightSGyuanyTj").val(data.rightyytj);
+            // if (data.rightyytj != ''){
+            //     document.getElementById("rightSGyuanyTj").readOnly=true;
+            // }
+            $("#rightSGjinyTj").val(data.rightjytj);
+            // if (data.rightjytj != ''){
+            //     document.getElementById("rightSGjinyTj").readOnly=true;
+            // }
+            $("#rightSGTonggao").val(data.righttg);
+            // if (data.righttg != ''){
+            //     document.getElementById("rightSGTonggao").readOnly=true;
+            // }
+            $("#rightSGyuanyongVA").val(data.rightva);
+            // if (data.rightva != ''){
+            //     document.getElementById("rightSGyuanyongVA").readOnly=true;
+            // }
+            $("#rightSGjinyongVA").val(data.rightjyva);
+            // if (data.rightjyva != ''){
+            //     document.getElementById("rightSGjinyongVA").readOnly=true;
+            // }
+            $("#leftJianJinsgQJ").val(data.leftsph);
+            document.getElementById("leftJianJinsgQJ").readOnly=true;
+            $("#leftJianJinsgZJ").val(data.leftcyl);
+            document.getElementById("leftJianJinsgZJ").readOnly=true;
+            $("#leftSGzhouxiang").val(data.leftzx);
+            document.getElementById("leftSGzhouxiang").readOnly=true;
+            $("#leftSGslj").val(data.leftprism);
+            // if (data.leftprism != ''){
+            //     document.getElementById("leftSGslj").readOnly=true;
+            // }
+            var leftjd = data.leftjd;
+            $("#leftSGjidi").find("[value='"+leftjd+"']").attr("selected",true);
+            $("#leftSGyuanyTj").val(data.leftyytj);
+            // if (data.leftyytj != ''){
+            //     document.getElementById("leftSGyuanyTj").readOnly=true;
+            // }
+            $("#leftSjinyTj").val(data.leftjytj);
+            // if (data.leftjytj != ''){
+            //     document.getElementById("leftSjinyTj").readOnly=true;
+            // }
+            $("#leftSGTonggao").val(data.lefttg);
+            // if (data.lefttg != ''){
+            //     document.getElementById("leftSGTonggao").readOnly=true;
+            // }
+            $("#leftSGyuanyongVA").val(data.leftva);
+            // if (data.leftva != ''){
+            //     document.getElementById("leftSGyuanyongVA").readOnly=true;
+            // }
+            $("#leftSGjinyongVA").val(data.leftjyva);
+            // if (data.leftjyva != ''){
+            //     document.getElementById("leftSGjinyongVA").readOnly=true;
+            // }
+		} else if (data.chufangType == 4){
+            $("#rightZhongYongQJ").val(data.rightsph);
+            document.getElementById("rightZhongYongQJ").readOnly=true;
+            $("#rightZhongYongZJ").val(data.rightcyl);
+            document.getElementById("rightZhongYongZJ").readOnly=true;
+            $("#rightzhongyongzx").val(data.rightzx);
+            document.getElementById("rightzhongyongzx").readOnly=true;
+            $("#rightzhongyongslj").val(data.rightprism);
+            // if (data.rightprism != ''){
+            //     document.getElementById("rightzhongyongslj").readOnly=true;
+            // }
+            var rihtjd = data.rightjd;
+            $("#rightzhongyongjd").find("[value='"+rihtjd+"']").attr("selected",true);
+            $("#rightzhongyongyuanytj").val(data.rightyytj);
+            // if (data.rightyytj != ''){
+            //     document.getElementById("rightzhongyongyuanytj").readOnly=true;
+            // }
+            $("#rightzhongyongtg").val(data.righttg);
+            // if (data.righttg != ''){
+            //     document.getElementById("rightzhongyongtg").readOnly=true;
+            // }
+            $("#rightzhongyongVA").val(data.rightva);
+            // if (data.rightva != ''){
+            //     document.getElementById("rightzhongyongVA").readOnly=true;
+            // }
+            $("#leftZhongYongQJ").val(data.leftsph);
+            document.getElementById("leftZhongYongQJ").readOnly=true;
+            $("#leftZhongYongZJ").val(data.leftcyl);
+            document.getElementById("leftZhongYongZJ").readOnly=true;
+            $("#leftzhongyongzx").val(data.leftzx);
+            document.getElementById("leftzhongyongzx").readOnly=true;
+            $("#leftzhongyongslj").val(data.leftprism);
+            // if (data.leftprism != ''){
+            //     document.getElementById("leftzhongyongslj").readOnly=true;
+            // }
+            var leftjd = data.leftjd;
+            $("#leftzhongyongjd").find("[value='"+leftjd+"']").attr("selected",true);
+            $("#leftzhongyongyuanytj").val(data.leftyytj);
+            // if (data.leftyytj != ''){
+            //     document.getElementById("leftzhongyongyuanytj").readOnly=true;
+            // }
+            $("#leftzhongyongtg").val(data.lefttg);
+            // if (data.lefttg != ''){
+            //     document.getElementById("leftzhongyongtg").readOnly=true;
+            // }
+            $("#leftzhongyongVA").val(data.leftva);
+            // if (data.leftva != ''){
+            //     document.getElementById("leftzhongyongVA").readOnly=true;
+            // }
+		} else if (data.chufangType == 5){
+            $("#rightYinxingQJ").val(data.rightsph);
+            document.getElementById("rightYinxingQJ").readOnly=true;
+            $("#rightYinxingZJ").val(data.rightcyl);
+            document.getElementById("rightYinxingZJ").readOnly=true;
+            $("#rightYXzhouxiang").val(data.rightzx);
+            document.getElementById("rightYXzhouxiang").readOnly=true;
+            $("#rightSYjingpian").val(data.rightsyjp);
+            // if (data.rightsyjp != ''){
+            //     document.getElementById("rightSYjingpian").readOnly=true;
+            // }
+            $("#rightPian").val(data.rightunit);
+            // if (data.rightunit != ''){
+            //     document.getElementById("rightPian").readOnly=true;
+            // }
+            $("#leftYinxingQJ").val(data.leftsph);
+            document.getElementById("leftYinxingQJ").readOnly=true;
+            $("#leftYinxingZJ").val(data.leftcyl);
+            document.getElementById("leftYinxingZJ").readOnly=true;
+            $("#leftYXzhouxiang").val(data.leftzx);
+            document.getElementById("leftYXzhouxiang").readOnly=true;
+            $("#leftSYjingpian").val(data.leftsyjp);
+            // if (data.leftsyjp != ''){
+            //     document.getElementById("leftSYjingpian").readOnly=true;
+            // }
+            $("#leftPian").val(data.leftunit);
+            // if (data.leftunit != ''){
+            //     document.getElementById("leftPian").readOnly=true;
+            // }
+		} else if (data.chufangType == 7){
+            $("#rightShiJuexlQJ").val(data.rightsph);
+            document.getElementById("rightShiJuexlQJ").readOnly=true;
+            $("#rightShiJuexlZJ").val(data.rightcyl);
+            document.getElementById("rightShiJuexlZJ").readOnly=true;
+            $("#rightSJXLzx").val(data.rightzx);
+            document.getElementById("rightSJXLzx").readOnly=true;
+            $("#rightSJXLslj").val(data.rightprism);
+            // if (data.rightprism != ''){
+            //     document.getElementById("rightSJXLslj").readOnly=true;
+            // }
+            var rihtjd = data.rightjd;
+            $("#rightSJXLjidi").find("[value='"+rihtjd+"']").attr("selected",true);
+            $("#rightSJXLyytj").val(data.rightyytj);
+            // if (data.rightyytj != ''){
+            //     document.getElementById("rightSJXLyytj").readOnly=true;
+            // }
+            $("#rightSJXLjytj").val(data.rightjytj);
+            // if (data.rightjytj != ''){
+            //     document.getElementById("rightSJXLjytj").readOnly=true;
+            // }
+            $("#rightSJXLyyva").val(data.rightva);
+            // if (data.rightva != ''){
+            //     document.getElementById("rightSJXLyyva").readOnly=true;
+            // }
+            $("#rightSJXLjyva").val(data.rightjyva);
+            // if (data.rightjyva != ''){
+            //     document.getElementById("rightSJXLjyva").readOnly=true;
+            // }
+            $("#leftShiJuexlQJ").val(data.leftsph);
+            document.getElementById("leftShiJuexlQJ").readOnly=true;
+            $("#leftShiJuexlZJ").val(data.leftcyl);
+            document.getElementById("leftShiJuexlZJ").readOnly=true;
+            $("#leftSJXLzx").val(data.leftzx);
+            document.getElementById("leftSJXLzx").readOnly=true;
+            $("#leftSJXLslj").val(data.leftprism);
+            // if (data.leftprism != ''){
+            //     document.getElementById("leftSJXLslj").readOnly=true;
+            // }
+            var leftjd = data.leftjd;
+            $("#leftSJXLjidi").find("[value='"+leftjd+"']").attr("selected",true);
+            $("#leftSJXLyytj").val(data.leftyytj);
+            // if (data.leftyytj != ''){
+            //     document.getElementById("leftSJXLyytj").readOnly=true;
+            // }
+            $("#leftSJXLjytj").val(data.leftjytj);
+            // if (data.leftjytj != ''){
+            //     document.getElementById("leftSJXLjytj").readOnly=true;
+            // }
+            $("#leftSJXLyyva").val(data.leftva);
+            // if (data.leftva != ''){
+            //     document.getElementById("leftSJXLyyva").readOnly=true;
+            // }
+            $("#leftSJXLjyva").val(data.leftjyva);
+            // if (data.leftjyva != ''){
+            //     document.getElementById("leftSJXLjyva").readOnly=true;
+            // }
+		}  else if (data.chufangType == 8){
+            $("#rightVstQJ").val(data.rightsph);
+            document.getElementById("rightVstQJ").readOnly=true;
+            $("#rightVstZJ").val(data.rightcyl);
+            document.getElementById("rightVstZJ").readOnly=true;
+            $("#rightVstzx").val(data.rightzx);
+            document.getElementById("rightVstzx").readOnly=true;
+            $("#rightVstSdjbh").val(data.rightprism);
+            $("#rightVstFK").val(data.rightjd);
+            $("#rightVstQlbj").val(data.rightyytj);
+            $("#rightVstAC").val(data.righttg);
+            $("#rightVstJF").val(data.rightva);
+            $("#rightVstDIA").val(data.rightsyjp);
+            $("#rightVstBC").val(data.rightunit);
+            $("#rightVstCPCLY").val(data.rightjytj);
+            $("#rightVstE").val(data.rightjyva);
+            $("#rightVstVA").val(data.rightqgd);
+            $("#rightVstJPColor").val(data.rightbc);
+            $("#rightVstPinPai").val(data.rightdia);
+            $("#leftVstQJ").val(data.leftsph);
+            document.getElementById("leftVstQJ").readOnly=true;
+            $("#leftVstZJ").val(data.leftcyl);
+            document.getElementById("leftVstZJ").readOnly=true;
+            $("#leftVstzx").val(data.leftzx);
+            document.getElementById("leftVstzx").readOnly=true;
+            $("#leftVstSdjbh").val(data.leftprism);
+            $("#leftVstFK").val(data.leftjd);
+            $("#leftVstQlbj").val(data.leftyytj);
+            $("#leftVstAC").val(data.lefttg);
+            $("#leftVstJF").val(data.leftva);
+            $("#leftVstDIA").val(data.leftsyjp);
+            $("#leftVstBC").val(data.leftunit);
+            $("#leftVstCPCLY").val(data.leftjytj);
+            $("#leftVstE").val(data.leftjyva);
+            $("#leftVstVA").val(data.leftqgd);
+            $("#leftVstJPColor").val(data.leftbc);
+            $("#leftVstPinPai").val(data.leftdia);
+        } else if (data.chufangType == 10){
+            $("#rightRGPqgd").val(data.rightqgd);
+            if (data.rightqgd != ''){
+                document.getElementById("rightRGPqgd").readOnly=true;
+			}
+            $("#rightRGPbc").val(data.rightbc);
+            if (data.rightbc != ''){
+                document.getElementById("rightRGPbc").readOnly=true;
+			}
+            $("#rightRGPdia").val(data.rightdia);
+            if (data.rightdia != ''){
+                document.getElementById("rightRGPdia").readOnly=true;
+			}
+            $("#rightRGPsg").val(data.rightsg);
+            if (data.rightsg != ''){
+                document.getElementById("rightRGPsg").readOnly=true;
+            }
+            $("#rightRGPtssj").val(data.righttssj);
+            if (data.righttssj != ''){
+                document.getElementById("rightRGPtssj").readOnly=true;
+            }
+
+            $("#leftRGPqgd").val(data.leftqgd);
+            document.getElementById("leftRGPqgd").readOnly=true;
+            $("#leftRGPbc").val(data.leftbc);
+            document.getElementById("leftRGPbc").readOnly=true;
+            $("#leftRGPdia").val(data.leftdia);
+            document.getElementById("leftRGPdia").readOnly=true;
+            $("#leftRGPsg").val(data.leftsg);
+            if (data.leftsg != ''){
+                document.getElementById("leftRGPsg").readOnly=true;
+            }
+            $("#leftRGPtssj").val(data.lefttssj);
+            if (data.lefttssj != ''){
+                document.getElementById("leftRGPtssj").readOnly=true;
+            }
+		}
+        // alert(obj);
+        // alert(JSON.stringify(obj));
+        // alert(obj.chufang);
+        // getType(5);
+
+	}
+    //赠品
+    var newGive=""
+	var give = [];
+    function getgive(obj) {
+        var ss = obj;
+        newGive = "<tr><td>"+obj+"</td>";
+        newGive += "<td><em onclick='dels(this,\"" + ss + "\")'></em></td>";
+        newGive += "</tr>";
+        newGive += "<input id='giveName' name='giveName' type='hidden' />";
+        $("#zengpin").append(newGive);
+        give.push(obj);
+		$("#giveName").val(give);
+    }
+    function dels(obj,str) {
+        var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+        tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+		give.remove(str)
+        $("#giveName").val(give);
+    }
+</script>
+</body>
+</html>

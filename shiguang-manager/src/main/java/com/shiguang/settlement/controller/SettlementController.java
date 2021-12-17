@@ -218,19 +218,21 @@ public class SettlementController {
 	String editMoney(@PathVariable("cardNumber") String cardNumber,Model model){
 		MemberDO memberDO = memberService.getCardNumber(cardNumber);
 		model.addAttribute("memberDO",memberDO);
-		CostDO costDO = new CostDO();
+
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Map<String,Object> map = new HashMap<>();
 		map.put("cardNumber",cardNumber);
-		String dt = sdf.format(date) + " 00:00:00";
+		String dt = sdf.format(date);
 		map.put("dateTime",dt);
 		SalesDO salesDO = salesService.findDataByNumber(map);
-		costDO.setMemberNumber(salesDO.getMemberNumber());
-		costDO.setSaleNumber(salesDO.getSaleNumber());
-		costDO.setSumMoney(salesDO.getAmountMoney());
-		costDO.setSaleName(salesDO.getSaleName());
-		model.addAttribute("costDO",costDO);
+		model.addAttribute("salesDO",salesDO);
+//		CostDO costDO = new CostDO();
+//		costDO.setMemberNumber(salesDO.getMemberNumber());
+//		costDO.setSaleNumber(salesDO.getSaleNumber());
+//		costDO.setSumMoney(salesDO.getAmountMoney());
+//		costDO.setSaleName(salesDO.getSaleName());
+//		model.addAttribute("salesDO",costDO);
 		return "settlement/jsedit";
 	}
 

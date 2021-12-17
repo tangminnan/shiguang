@@ -147,10 +147,8 @@ public class SettlementServiceImpl implements SettlementService {
 				}
 			}
 		}
-		if(this.remove(id)>0){
-			salesService.removeSaleNum(id);
-			return R.ok();
-		}
-		return R.error();
+		salesService.removeSaleNum(id);
+		this.remove(id);
+		return R.ok();
 	}
 }

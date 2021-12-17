@@ -358,7 +358,7 @@
 				from store_sales
 				<where>
 					<if test="cardNumber != null and cardNumber != ''">and member_number = #{cardNumber}</if>
-					<if test="dateTime != null and dateTime != ''">and mirror_time = #{dateTime}</if>
+					<if test="dateTime != null and dateTime != ''">and date_format(peijing_time ,'%Y-%m-%d %H:%i') = #{dateTime}</if>
 				</where>
 	</select>
 
