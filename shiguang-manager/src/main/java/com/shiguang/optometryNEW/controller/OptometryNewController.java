@@ -165,6 +165,25 @@ public class OptometryNewController {
         List<OptometryDO> optoList = optometryService.optoList(map);
         OptometryDO optometryDO = new OptometryDO();
         if (optoList.size() > 0) {
+            optometryDO.setMydriasis(optoList.get(0).getMydriasis());
+            optometryDO.setCylinderRight(optoList.get(0).getCylinderRight());
+            optometryDO.setCylinderLeft(optoList.get(0).getCylinderLeft());
+            optometryDO.setAxialRight(optoList.get(0).getAxialRight());
+            optometryDO.setAxialLeft(optoList.get(0).getAxialLeft());
+            optometryDO.setSphereRight(optoList.get(0).getSphereRight());
+            optometryDO.setSphereLeft(optoList.get(0).getSphereLeft());
+
+            optometryDO.setCylinderRight2(optoList.get(0).getCylinderRight2());
+            optometryDO.setCylinderLeft2(optoList.get(0).getCylinderLeft2());
+            optometryDO.setAxialRight2(optoList.get(0).getAxialRight2());
+            optometryDO.setAxialLeft2(optoList.get(0).getAxialLeft2());
+            optometryDO.setSphereRight2(optoList.get(0).getSphereRight2());
+            optometryDO.setSphereLeft2(optoList.get(0).getSphereLeft2());
+            //角膜散光
+            optometryDO.setCornealAstigmatismOd(optoList.get(0).getCornealAstigmatismOd());
+            optometryDO.setCornealAstigmatismOs(optoList.get(0).getCornealAstigmatismOs());
+
+
             //检影--球镜
             optometryDO.setSphJyod(optoList.get(0).getSphJyod());
             optometryDO.setSphJyos(optoList.get(0).getSphJyos());
@@ -204,39 +223,40 @@ public class OptometryNewController {
 
         }
         model.addAttribute("optometryDO", optometryDO);
-        //散瞳前
-        List<OptometryDO> list1 = optometryService.optoFrontList(cardNumber);
-        OptometryDO optometryFrontDO = new OptometryDO();
-        if (list1.size() > 0) {
-            optometryFrontDO.setCylinderRight(list1.get(0).getCylinderRight());
-            optometryFrontDO.setCylinderLeft(list1.get(0).getCylinderLeft());
-            optometryFrontDO.setAxialRight(list1.get(0).getAxialRight());
-            optometryFrontDO.setAxialLeft(list1.get(0).getAxialLeft());
-            optometryFrontDO.setSphereRight(list1.get(0).getSphereRight());
-            optometryFrontDO.setSphereLeft(list1.get(0).getSphereLeft());
-            //角膜散光
-            optometryFrontDO.setCornealAstigmatismOd(list1.get(0).getCornealAstigmatismOd());
-            optometryFrontDO.setCornealAstigmatismOs(list1.get(0).getCornealAstigmatismOs());
+//        //散瞳前
+//        List<OptometryDO> list1 = optometryService.optoFrontList(cardNumber);
+//        OptometryDO optometryFrontDO = new OptometryDO();
+//        if (list1.size() > 0) {
+//            optometryFrontDO.setCylinderRight(list1.get(0).getCylinderRight());
+//            optometryFrontDO.setCylinderLeft(list1.get(0).getCylinderLeft());
+//            optometryFrontDO.setAxialRight(list1.get(0).getAxialRight());
+//            optometryFrontDO.setAxialLeft(list1.get(0).getAxialLeft());
+//            optometryFrontDO.setSphereRight(list1.get(0).getSphereRight());
+//            optometryFrontDO.setSphereLeft(list1.get(0).getSphereLeft());
+//            //角膜散光
+//            optometryFrontDO.setCornealAstigmatismOd(list1.get(0).getCornealAstigmatismOd());
+//            optometryFrontDO.setCornealAstigmatismOs(list1.get(0).getCornealAstigmatismOs());
+//
+//        }
+//        model.addAttribute("optometryFrontDO", optometryFrontDO);
+//
+//        //散瞳后
+//        List<OptometryDO> list2 = optometryService.optoAfterList(cardNumber);
+//        OptometryDO optometryAfterDO = new OptometryDO();
+//        if (list2.size() > 0) {
+//            optometryAfterDO.setMydriasis(list2.get(0).getMydriasis());
+//            optometryAfterDO.setCylinderRight(list2.get(0).getCylinderRight());
+//            optometryAfterDO.setCylinderLeft(list2.get(0).getCylinderLeft());
+//            optometryAfterDO.setAxialRight(list2.get(0).getAxialRight());
+//            optometryAfterDO.setAxialLeft(list2.get(0).getAxialLeft());
+//            optometryAfterDO.setSphereRight(list2.get(0).getSphereRight());
+//            optometryAfterDO.setSphereLeft(list2.get(0).getSphereLeft());
+//            //角膜散光
+//            optometryAfterDO.setCornealAstigmatismOd(list2.get(0).getCornealAstigmatismOd());
+//            optometryAfterDO.setCornealAstigmatismOs(list2.get(0).getCornealAstigmatismOs());
+//        }
+//        model.addAttribute("optometryAfterDO", optometryAfterDO);
 
-        }
-        model.addAttribute("optometryFrontDO", optometryFrontDO);
-
-        //散瞳后
-        List<OptometryDO> list2 = optometryService.optoAfterList(cardNumber);
-        OptometryDO optometryAfterDO = new OptometryDO();
-        if (list2.size() > 0) {
-            optometryAfterDO.setMydriasis(list2.get(0).getMydriasis());
-            optometryAfterDO.setCylinderRight(list2.get(0).getCylinderRight());
-            optometryAfterDO.setCylinderLeft(list2.get(0).getCylinderLeft());
-            optometryAfterDO.setAxialRight(list2.get(0).getAxialRight());
-            optometryAfterDO.setAxialLeft(list2.get(0).getAxialLeft());
-            optometryAfterDO.setSphereRight(list2.get(0).getSphereRight());
-            optometryAfterDO.setSphereLeft(list2.get(0).getSphereLeft());
-            //角膜散光
-            optometryAfterDO.setCornealAstigmatismOd(list2.get(0).getCornealAstigmatismOd());
-            optometryAfterDO.setCornealAstigmatismOs(list2.get(0).getCornealAstigmatismOs());
-        }
-        model.addAttribute("optometryAfterDO", optometryAfterDO);
 
 //———生成验光号————
         Long uuid = GuuidUtil.getUUID();
@@ -658,3 +678,7 @@ public class OptometryNewController {
     }
 
 }
+
+//information/optometryNew/optometryHis
+//- ` http://xx.com/information/optometryNew/prescriptionHis `
+//- ` http://xx.com/information/optometryNew/inspectHis `

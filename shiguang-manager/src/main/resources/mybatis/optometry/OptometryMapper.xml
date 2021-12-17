@@ -293,6 +293,7 @@
     <select id="optoList" resultType="com.shiguang.optometry.domain.OptometryDO">
         select
         `id`,`member_inumber`,`mydriasis`,`sphere_right`,`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,
+        `sphere_right2`,`sphere_left2`,`cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,
         `corneal_astigmatism_os`,`corneal_astigmatism_od`,`sph_jyod`,`sph_jyos`,`cyl_jyod`,`cyl_jyos`,`axial_jyod`,
         `axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,`axial_cpos`,
         `dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`,`create_time`
@@ -307,6 +308,15 @@
             <if test="cylinderLeft != null and cylinderLeft != ''">and cylinder_left = #{cylinderLeft}</if>
             <if test="axialRight != null and axialRight != ''">and axial_right = #{axialRight}</if>
             <if test="axialLeft != null and axialLeft != ''">and axial_left = #{axialLeft}</if>
+
+
+            <if test="sphereRight2 != null and sphereRight2 != ''">and sphere_right2 = #{sphereRight2}</if>
+            <if test="sphereLeft2 != null and sphereLeft2 != ''">and sphere_left2 = #{sphereLeft2}</if>
+            <if test="cylinderRight2 != null and cylinderRight2 != ''">and cylinder_right2 = #{cylinderRight2}</if>
+            <if test="cylinderLeft2 != null and cylinderLeft2 != ''">and cylinder_left2 = #{cylinderLeft2}</if>
+            <if test="axialRight2 != null and axialRight2 != ''">and axial_right2 = #{axialRight2}</if>
+            <if test="axialLeft2 != null and axialLeft2 != ''">and axial_left2 = #{axialLeft2}</if>
+
             <if test="cornealAstigmatismOs != null and cornealAstigmatismOs != ''">and corneal_astigmatism_os =
                 #{cornealAstigmatismOs}
             </if>

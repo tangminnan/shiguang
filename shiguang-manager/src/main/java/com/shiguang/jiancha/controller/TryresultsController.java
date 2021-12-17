@@ -14,6 +14,8 @@ import com.shiguang.line.domain.YgLineDO;
 import com.shiguang.line.service.LineService;
 import com.shiguang.line.service.OptometryLineService;
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.optometry.domain.OptometryDO;
+import com.shiguang.optometry.service.OptometryService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,6 +49,9 @@ public class TryresultsController {
     //散瞳用药
     @Autowired
     private PharmacyService pharmacyService;
+    //客观验光
+    @Autowired
+    private OptometryService optometryService;
 
     @GetMapping()
     @RequiresPermissions("jiancha:tryresults:tryresults")
@@ -202,6 +207,19 @@ public class TryresultsController {
         model.addAttribute("tryresultsDO", tryresultsDO);
         //———获取当前登录用户的名称————
         model.addAttribute("optometryName", ShiroUtils.getUser().getName());
+//-----------------散瞳后
+        List<OptometryDO> optoList = optometryService.optoList(map);
+        OptometryDO optometryDO = new OptometryDO();
+        if (optoList.size() > 0) {
+            optometryDO.setMydriasis(optoList.get(0).getMydriasis());
+            optometryDO.setCylinderRight2(optoList.get(0).getCylinderRight2());
+            optometryDO.setCylinderLeft2(optoList.get(0).getCylinderLeft2());
+            optometryDO.setAxialRight2(optoList.get(0).getAxialRight2());
+            optometryDO.setAxialLeft2(optoList.get(0).getAxialLeft2());
+            optometryDO.setSphereRight2(optoList.get(0).getSphereRight2());
+            optometryDO.setSphereLeft2(optoList.get(0).getSphereLeft2());
+        }
+        model.addAttribute("optometryDO", optometryDO);
         return "optometryNew/tryedit";
     }
 

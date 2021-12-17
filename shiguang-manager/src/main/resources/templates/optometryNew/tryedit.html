@@ -446,10 +446,10 @@
                     <td class="w170">&nbsp;</td>
                     <td>是否散瞳</td>
                     <td colspan="2">
-                        <label><input id="xz1" name="mydriasis" th:value="${tryresultsDO.mydriasis}"
+                        <label><input id="xz1" name="mydriasis" th:value="${optometryDO.mydriasis}"
                                       type="radio"  >
                             是</label>
-                        <label><input id="xz2" name="mydriasis" th:value="${tryresultsDO.mydriasis}"
+                        <label><input id="xz2" name="mydriasis" th:value="${optometryDO.mydriasis}"
                                       type="radio"  >
                             否</label>
                     </td>
@@ -495,13 +495,13 @@
                     </td>
                     <td rowspan="2">散瞳后</td>
                     <td>
-                        <input name="sphereRight2"  type="text" th:value="${tryresultsDO.sphereRight2}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus/>
+                        <input name="sphereRight2"  type="text" th:value="${optometryDO.sphereRight2}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus/>
                     </td>
                     <td>
-                        <input name="cylinderRight2" type="text"  th:value="${tryresultsDO.cylinderRight2}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus/>
+                        <input name="cylinderRight2" type="text"  th:value="${optometryDO.cylinderRight2}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus/>
                     </td>
                     <td>
-                        <input id="axialRight2" name="axialRight2"  type="text" th:value="${tryresultsDO.axialRight2}"  onblur="zhouxiang(this)"
+                        <input id="axialRight2" name="axialRight2"  type="text" th:value="${optometryDO.axialRight2}"  onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
                     </td>
                 </tr>
@@ -518,13 +518,13 @@
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
                     </td>
                     <td>
-                        <input name="sphereLeft2" type="text" th:value="${tryresultsDO.sphereLeft2}"  oninput="getmoney(this,10)" autofocus/>
+                        <input name="sphereLeft2" type="text" th:value="${optometryDO.sphereLeft2}"  oninput="getmoney(this,10)" autofocus/>
                     </td>
                     <td>
-                        <input name="cylinderLeft2"  type="text" th:value="${tryresultsDO.cylinderLeft2}"  oninput="getmoney(this,10)" autofocus/>
+                        <input name="cylinderLeft2"  type="text" th:value="${optometryDO.cylinderLeft2}"  oninput="getmoney(this,10)" autofocus/>
                     </td>
                     <td>
-                        <input id="axialLeft2" name="axialLeft2" type="text" th:value="${tryresultsDO.axialLeft2}"  onblur="zhouxiang(this)"  onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" />
+                        <input id="axialLeft2" name="axialLeft2" type="text" th:value="${optometryDO.axialLeft2}"  onblur="zhouxiang(this)"  onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" />
                     </td>
                 </tr>
                 <tr>
@@ -961,8 +961,10 @@
         var choices = $("#xz1").val();
         if (choices == "1") {
             document.getElementById("xz1").checked = "checked";
+            $("#xz1").val(1);
         } else {
             document.getElementById("xz2").checked = "checked";
+            $("#xz2").val(0);
         }
     });
     function getMemberDetail() {

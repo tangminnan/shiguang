@@ -447,16 +447,16 @@
                     <td class="w170">&nbsp;</td>
                     <td>是否散瞳</td>
                     <td colspan="2">
-                        <!--                        <label><input id="xz1" name="mydriasis" th:value="${optometryAfterDO.mydriasis}"-->
+                        <!--                        <label><input id="xz1" name="mydriasis" th:value="${optometryDO.mydriasis}"-->
                         <!--                                      type="radio" onclick="return false">-->
                         <!--                            是</label>-->
-                        <!--                        <label><input id="xz2" name="mydriasis" th:value="${optometryAfterDO.mydriasis}"-->
+                        <!--                        <label><input id="xz2" name="mydriasis" th:value="${optometryDO.mydriasis}"-->
                         <!--                                      type="radio" onclick="return false">-->
                         <!--                            否</label>-->
-                        <label><input id="xz1" name="mydriasis" th:value="${optometryAfterDO.mydriasis}"
+                        <label><input id="xz1" name="mydriasis" th:value="${optometryDO.mydriasis}"
                                       type="radio"  >
                             是</label>
-                        <label><input id="xz2" name="mydriasis" th:value="${optometryAfterDO.mydriasis}"
+                        <label><input id="xz2" name="mydriasis" th:value="${optometryDO.mydriasis}"
                                       type="radio" >
                             否</label>
                     </td>
@@ -489,46 +489,46 @@
                 <tr>
                     <td>OD</td>
                     <td>
-                        <input name="sphereRight" th:value="${optometryFrontDO.sphereRight}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
+                        <input name="sphereRight" th:value="${optometryDO.sphereRight}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
                     </td>
                     <td>
-                        <input name="cylinderRight" th:value="${optometryFrontDO.cylinderRight}"  onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
+                        <input name="cylinderRight" th:value="${optometryDO.cylinderRight}"  onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
                     </td>
                     <td>
-                        <input id="axialRight" name="axialRight" th:value="${optometryFrontDO.axialRight}" onblur="zhouxiang(this)"
+                        <input id="axialRight" name="axialRight" th:value="${optometryDO.axialRight}" onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/>
                     </td>
                     <td rowspan="2">散瞳后</td>
                     <td>
-                        <input name="sphereRight2" th:value="${optometryAfterDO.sphereRight}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
+                        <input name="sphereRight2" th:value="${optometryDO.sphereRight2}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
                     </td>
                     <td>
-                        <input name="cylinderRight2" th:value="${optometryAfterDO.cylinderRight}"onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus  type="text"/>
+                        <input name="cylinderRight2" th:value="${optometryDO.cylinderRight2}"onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus  type="text"/>
                     </td>
                     <td>
-                        <input id="axialRight2" name="axialRight2" th:value="${optometryAfterDO.axialRight}" onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')"    type="text"/>
+                        <input id="axialRight2" name="axialRight2" th:value="${optometryDO.axialRight2}" onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')"    type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>OS</td>
                     <td>
-                        <input name="sphereLeft" th:value="${optometryFrontDO.sphereLeft}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
+                        <input name="sphereLeft" th:value="${optometryDO.sphereLeft}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
                     </td>
                     <td>
-                        <input name="cylinderLeft" th:value="${optometryFrontDO.cylinderLeft}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
+                        <input name="cylinderLeft" th:value="${optometryDO.cylinderLeft}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
                     </td>
                     <td>
-                        <input id="axialLeft" name="axialLeft" th:value="${optometryFrontDO.axialLeft}" type="text"
+                        <input id="axialLeft" name="axialLeft" th:value="${optometryDO.axialLeft}" type="text"
                                onblur="zhouxiang(this)"  onkeyup="value=value.replace(/[^\d]+/g,'')"  />
                     </td>
                     <td>
-                        <input name="sphereLeft2" th:value="${optometryAfterDO.sphereLeft}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
+                        <input name="sphereLeft2" th:value="${optometryDO.sphereLeft2}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
                     </td>
                     <td>
-                        <input name="cylinderLeft2" th:value="${optometryAfterDO.cylinderLeft}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
+                        <input name="cylinderLeft2" th:value="${optometryDO.cylinderLeft2}" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus type="text"/>
                     </td>
                     <td>
-                        <input id="axialLeft2" name="axialLeft2" th:value="${optometryAfterDO.axialLeft}" type="text"
+                        <input id="axialLeft2" name="axialLeft2" th:value="${optometryDO.axialLeft2}" type="text"
                                onblur="zhouxiang(this)"  onkeyup="value=value.replace(/[^\d]+/g,'')"  />
                     </td>
                 </tr>
@@ -558,7 +558,7 @@
                         <input class="short" id="pjkOd" name="pjkOd" th:value="${ocularEyesDO.pjkOd}" type="text"/> @
                         <input class="short" id="pjkOd2" name="pjkOd2" th:value="${ocularEyesDO.pjkOd2}" type="text"/>
                     </td>
-                    <td><input name="cornealAstigmatismOd" th:value="${optometryFrontDO.cornealAstigmatismOd}"
+                    <td><input name="cornealAstigmatismOd" th:value="${optometryDO.cornealAstigmatismOd}"
                                type="text"/>
                     </td>
                     <td><input name="tjod" th:value="${ocularEyesDO.pupilSizeRight}" type="text"/>
@@ -582,7 +582,7 @@
                         <input class="short" id="pjkOs" name="pjkOs" th:value="${ocularEyesDO.pjkOs}"  type="text"/> @
                         <input class="short" id="pjkOs2" name="pjkOs2" th:value="${ocularEyesDO.pjkOs2}"  type="text"/>
                     </td>
-                    <td><input name="cornealAstigmatismOs" th:value="${optometryFrontDO.cornealAstigmatismOs}"
+                    <td><input name="cornealAstigmatismOs" th:value="${optometryDO.cornealAstigmatismOs}"
                                type="text"/>
                     </td>
                     <td><input name="tjos" th:value="${ocularEyesDO.pupilSizeLeft}" type="text"/>
@@ -924,8 +924,10 @@
     // alert(choices)
     if (choices == "1") {
         document.getElementById("xz1").checked = "checked";
+        $("#xz1").val(1);
     } else {
         document.getElementById("xz2").checked = "checked";
+        $("#xz2").val(0);
     }
 
     //主观验光和试戴镜联动
