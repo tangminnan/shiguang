@@ -107,7 +107,8 @@ public class OptometryNewController {
 
 //—————眼生物学参数———————
         Map<String, Object> map = new HashMap<>();
-        List<OcularEyesDO> list = ocularEyesService.list(cardNumber);
+        map.put("cardNumber",cardNumber);
+        List<OcularEyesDO> list = ocularEyesService.list(map);
         OcularEyesDO ocularEyesDO = new OcularEyesDO();
         if (list.size() > 0) {
             //眼轴

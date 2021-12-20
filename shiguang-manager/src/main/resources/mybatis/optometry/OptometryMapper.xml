@@ -300,7 +300,7 @@
         from optometry
         <where>
             <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="memberInumber != null and memberInumber != ''">and member_inumber = #{memberInumber}</if>
+            <if test="cardNumber != null and cardNumber != ''">and member_inumber = #{cardNumber}</if>
             <if test="mydriasis != null and mydriasis != ''">and mydriasis = #{mydriasis}</if>
             <if test="sphereRight != null and sphereRight != ''">and sphere_right = #{sphereRight}</if>
             <if test="sphereLeft != null and sphereLeft != ''">and sphere_left = #{sphereLeft}</if>

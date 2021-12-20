@@ -21,8 +21,8 @@ public class OcularEyesServiceImpl implements OcularEyesService {
     }
 
     @Override
-    public List<OcularEyesDO> list(String cardNumber) {
-        return eyesDao.list(cardNumber);
+    public List<OcularEyesDO> list(Map<String, Object> map) {
+        return eyesDao.list(map);
     }
 
     @Override

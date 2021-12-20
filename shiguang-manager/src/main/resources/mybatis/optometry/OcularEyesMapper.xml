@@ -9,7 +9,11 @@
     <select id="list" resultType="com.shiguang.optometry.domain.OcularEyesDO">
         select
         `id`,`member_number`,`axis`,`axis_left`,`central_thickness_right`,`central_thickness_left`,`depth_humor_right`,`depth_humor_left`,`anterior_chamber_depth_right`,`anterior_chamber_depth_left`,`lens_thickness_right`,`lens_thickness_left`,`pupil_size_right`,`pupil_size_left`,`white_right`,`white_left`,`vitreous_thickness_right`,`vitreous_thickness_left`,`corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,`corneal_first_K2_left`,`corneal_last_K2_left`,`astigmia_first_right`,`astigmia_last_right`,`astigmia_first_left`,`astigmia_last_left`,`pjk_od`,`pjk_os`,`intraocular_od`,`intraocular_os`,`pjk_od2`,`pjk_os2`
-        from ocular_eyes where member_number = #{cardNumber} order by id desc
+        from ocular_eyes
+       <where>
+           <if test="cardNumber != null and cardNumber != ''">and member_number = #{cardNumber}</if>
+       </where>
+        order by id desc
     </select>
 
     <select id="count" resultType="int">
