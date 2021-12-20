@@ -118,17 +118,17 @@ function edit(cardNumber) {
     layer.full(toIndex)
 }
 
-function edit(cardNumber) {
-    var toIndex = layer.open({
-        type : 2,
-        title : '门店销售',
-        maxmin : true,
-        shadeClose : false, // 点击遮罩关闭层
-        area : [ '1500px', '520px' ],
-        content : prefix + '/edits/' + cardNumber // iframe的url
-    });
-    layer.full(toIndex)
-}
+// function edit(cardNumber) {
+//     var toIndex = layer.open({
+//         type : 2,
+//         title : '门店销售',
+//         maxmin : true,
+//         shadeClose : false, // 点击遮罩关闭层
+//         area : [ '1500px', '520px' ],
+//         content : prefix + '/edits/' + cardNumber // iframe的url
+//     });
+//     layer.full(toIndex)
+// }
 
 function detail(cardNumber) {
     var toIndex = layer.open({
