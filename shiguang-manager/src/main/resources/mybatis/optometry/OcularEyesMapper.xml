@@ -12,6 +12,7 @@
         from ocular_eyes
        <where>
            <if test="cardNumber != null and cardNumber != ''">and member_number = #{cardNumber}</if>
+           <if test="createTime != null and createTime != ''">and create_time LIKE concat(concat('%', #{createTime}),'%')</if>
        </where>
         order by id desc
     </select>

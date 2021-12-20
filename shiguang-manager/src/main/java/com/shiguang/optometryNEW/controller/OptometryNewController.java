@@ -104,10 +104,28 @@ public class OptometryNewController {
             memberDO.setSexx("女");
         }
         model.addAttribute("memberDO", memberDO);
+//———生成验光号————
+        Long uuid = GuuidUtil.getUUID();
+        String uuidstr = "Y" + uuid.toString();
+        model.addAttribute("uuidstr", uuidstr);
+//———获取当前登录用户的名称————
+        model.addAttribute("optometryName", ShiroUtils.getUser().getName());
+//———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String newDate = sdf.format(date);
+        model.addAttribute("createTime", newDate);
 
 //—————眼生物学参数———————
         Map<String, Object> map = new HashMap<>();
         map.put("cardNumber",cardNumber);
+        //时间
+        Calendar now = Calendar.getInstance();
+        Integer year= now.get(Calendar.YEAR);
+        Integer month= now.get(Calendar.MONTH)+1;
+        Integer day= now.get(Calendar.DAY_OF_MONTH);
+        String createTime= String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
+        map.put("createTime",createTime);
         List<OcularEyesDO> list = ocularEyesService.list(map);
         OcularEyesDO ocularEyesDO = new OcularEyesDO();
         if (list.size() > 0) {
@@ -257,20 +275,6 @@ public class OptometryNewController {
 //            optometryAfterDO.setCornealAstigmatismOs(list2.get(0).getCornealAstigmatismOs());
 //        }
 //        model.addAttribute("optometryAfterDO", optometryAfterDO);
-
-
-//———生成验光号————
-        Long uuid = GuuidUtil.getUUID();
-        String uuidstr = "Y" + uuid.toString();
-        model.addAttribute("uuidstr", uuidstr);
-//———获取当前登录用户的名称————
-        model.addAttribute("optometryName", ShiroUtils.getUser().getName());
-//———获取当前系统时间—————
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-        Date date = new Date();
-        String newDate = sdf.format(date);
-        model.addAttribute("createTime", newDate);
-
         return "optometryNew/edit";
     }
 

@@ -347,6 +347,7 @@
             <if test="addCpos != null and addCpos != ''">and add_cpos = #{addCpos}</if>
             <if test="distanceOd != null and distanceOd != ''">and distance_od = #{distanceOd}</if>
             <if test="distanceOs != null and distanceOs != ''">and distance_os = #{distanceOs}</if>
+            <if test="createTime != null and createTime != ''">and create_time LIKE concat(concat('%', #{createTime}),'%')</if>
         </where>
         order by create_time desc
     </select>
