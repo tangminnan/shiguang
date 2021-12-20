@@ -170,7 +170,8 @@
 			`intraocular_od`, 
 			`intraocular_os`, 
 			`pjk_od2`, 
-			`pjk_os2`
+			`pjk_os2`,
+			`create_time`
 		)
 		values
 		(
@@ -209,7 +210,8 @@
 			#{intraocularOd}, 
 			#{intraocularOs}, 
 			#{pjkOd2}, 
-			#{pjkOs2}
+			#{pjkOs2},
+			#{createTime}
 		)
 	</insert>
 

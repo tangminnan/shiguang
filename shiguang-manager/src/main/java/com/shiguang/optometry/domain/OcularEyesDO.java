@@ -1,6 +1,7 @@
 package com.shiguang.optometry.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class OcularEyesDO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -78,6 +79,8 @@ public class OcularEyesDO implements Serializable {
     //眼压(OS)
     private Double intraocularOs;
     private Double axisLeft;
+    //检测时间
+    private Date createTime;
 
     /**
      * 设置：主键
@@ -579,5 +582,13 @@ public class OcularEyesDO implements Serializable {
 
     public void setAxisLeft(Double axisLeft) {
         this.axisLeft = axisLeft;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
