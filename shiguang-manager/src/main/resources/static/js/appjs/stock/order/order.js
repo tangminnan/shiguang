@@ -138,7 +138,10 @@ function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
 }
 
-
+document.onkeydown = function(e){
+    if((e||event).keyCode==13)
+        reLoad();
+};
 
 
 

@@ -148,14 +148,14 @@ function load() {
                         field: 'retailPrice',
                         title: '标准零售价格'
                     },
-                    {
-                        field: 'taxPrice',
-                        title: '含税单价'
-                    },
-                    {
-                        field: 'tradePrice',
-                        title: '批发价格'
-                    },
+                    // {
+                    //     field: 'taxPrice',
+                    //     title: '含税单价'
+                    // },
+                    // {
+                    //     field: 'tradePrice',
+                    //     title: '批发价格'
+                    // },
                     // 								{
                     // 	field : 'transferPrice',
                     // 	title : '调货成本'
@@ -206,7 +206,10 @@ function load() {
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
 }
-
+document.onkeydown = function(e){
+    if((e||event).keyCode==13)
+        reLoad();
+};
 function add() {
     var toIndex = layer.open({
         type: 2,

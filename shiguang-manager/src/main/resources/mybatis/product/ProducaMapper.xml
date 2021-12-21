@@ -65,7 +65,6 @@
             <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
             <if test="styleId != null and styleId != ''">and p.style_id = #{styleId}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and p.view_good_name = #{viewGoodName}</if>
-            and p.state= 1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -117,7 +116,6 @@
             <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
             <if test="styleId != null and styleId != ''">and p.style_id = #{styleId}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and p.view_good_name = #{viewGoodName}</if>
-            and p.state= 1
         </where>
     </select>
 
