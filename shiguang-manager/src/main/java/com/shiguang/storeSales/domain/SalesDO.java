@@ -24,6 +24,7 @@ public class SalesDO implements Serializable {
 	//是否缴费
 	private String saleType;
 	private String username;
+	private String store;
 	//会员卡号
 	private String memberNumber;
 	private String memberName;
@@ -128,6 +129,14 @@ public class SalesDO implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getStore() {
+		return store;
+	}
+
+	public void setStore(String store) {
+		this.store = store;
 	}
 
 	//外来处方类型
