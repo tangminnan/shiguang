@@ -34,6 +34,7 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
                                 saleNumber: $("#saleNumber").val(),
+                                saleNumbers: $("#saleNumbers").val(),
                                 memberName:$('#memberName').val(),
                                 phone:$('#phone').val()
 							};

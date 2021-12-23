@@ -15,7 +15,7 @@
 <!--检查条件-->
 <div class="m40 tabS PHGL">
     <h3>检查条件</h3>
-      配镜单号：<input type="text" id="saleNumber" > <input type="button" onclick="getSaleGoods()" value="查询">
+      配镜单号：<input type="text" id="saleNumber" > <input type="button" style="cursor:pointer;height: 25px;width: 60px;background-color: #358afd;color: #FFFFFF;" onclick="getSaleGoods()" value="查询">
     <table border="0" cellspacing="0" cellpadding="0">
         <tbody>
         <tr>
@@ -77,13 +77,18 @@
 <script type="text/javascript">
     var html ="";
     function getSaleGoods (){
+        var saleNumber = $("#saleNumber").val();
+        alert(saleNumber);
+        if (''==saleNumber){
+            saleNumber = '无'
+        }
         var toIndex = layer.open({
             type : 2,
             title : '配镜单',
             maxmin : true,
             shadeClose : false, // 点击遮罩关闭层
             area : [ '800px', '520px' ],
-            content : "/information/unqualiffed/goods/",// iframe的url
+            content : "/information/unqualiffed/goods/"+saleNumber,// iframe的url
             cancel: function(index, layero){
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 for (var i=0;i<rows.length;i++){

@@ -49,21 +49,21 @@
 				<td>微信</td>
 				<td> - </td>
 			</tr>
-			<tr>
-				<td ><a href="#" onclick="reportDefinte()">哈尔滨中心店</a></td>
-				<td><span th:text="${shihsouTotal}"></span></td>
-				<td><span th:text="${xianjinMoney}"></span></td>
-				<td>0.00</td>
-				<td><span th:text="${yyshoufeichuMoney}"></span></td>
-				<td><span th:text="${yikatongoney}"></span></td>
-				<td>0.00</td>
-				<td><span th:text="${qtsubTotal}"></span></td>
-				<td>0.00</td>
-				<td>0.00</td>
-				<td><span th:text="${zfbMoney}"></span></td>
-				<td><span th:text="${weixinMoney}"></span></td>
-				<td>0.00</td>
-			</tr>
+			<!--<tr>-->
+				<!--<td ><a href="#" onclick="reportDefinte()">哈尔滨中心店</a></td>-->
+				<!--<td><span th:text="${shihsouTotal}"></span></td>-->
+				<!--<td><span th:text="${xianjinMoney}"></span></td>-->
+				<!--<td>0.00</td>-->
+				<!--<td><span th:text="${yyshoufeichuMoney}"></span></td>-->
+				<!--<td><span th:text="${yikatongoney}"></span></td>-->
+				<!--<td>0.00</td>-->
+				<!--<td><span th:text="${qtsubTotal}"></span></td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td><span th:text="${zfbMoney}"></span></td>-->
+				<!--<td><span th:text="${weixinMoney}"></span></td>-->
+				<!--<td>0.00</td>-->
+			<!--</tr>-->
 			<!--<tr>-->
 				<!--<td>济南中心店</td>-->
 				<!--<td>62558.00</td>-->
@@ -103,6 +103,24 @@
 	</script>
 	<script th:inline="javascript">
         $().ready(function(){
+            var list = [[${resultList}]];
+            var html =0;
+            for (var i=0;i<list.length;i++){
+                html = "<tr><td><a href='#' onclick='reportDefinte()'>"+list[i].departmentName+"</a></td>";
+                html += "<td>"+list[i].shihsouTotal+"</td>"
+				html += "<td>"+list[i].xianjinMoney+"</td>"
+				html += "<td>0.00</td>";
+                html += "<td>"+list[i].yyshoufeichuMoney+"</td>";
+                html += "<td>"+list[i].yikatongoney+"</td>"
+				html += "<td>0.00</td>"
+				html += "<td>"+list[i].qtsubTotal+"</td>"
+				html += "<td>0.00</td>";
+                html += "<td>0.00</td>";
+                html += "<td>"+list[i].zfbMoney+"</td>"
+				html += "<td>"+list[i].weixinMoney+"</td>"
+				html += "<td>0.00</td></tr>"
+				$("#reportId").append(html);
+			}
         });
         function reportDefinte(){
             var settleDateStart =  $("#settleDateStart").val();

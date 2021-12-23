@@ -106,10 +106,11 @@ function reLoad() {
      var settleDateStart = $("#settleDateStart").val();
      var settleDateEnd = $("#settleDateEnd").val();
      var saleType = $("#saleType").val();
+     var departNumber = $("#departNumber").val();
      if (0 == saleType){
          window.open("/information/saleName/salenameList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd);
 	 } else if (1 == saleType){
-         window.open("/information/saleReport/reportList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd);
+         window.open("/information/saleReport/reportList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&departNumber="+departNumber);
 	 }
 
 }

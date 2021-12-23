@@ -62,6 +62,8 @@ public class SettlementDO implements Serializable {
 	private String drawBackMoney;
 	//退款方式
 	private String drawBackWay;
+	//部门名称
+	private String departmentName;
 
 
 	/**
@@ -228,4 +230,12 @@ public class SettlementDO implements Serializable {
 	public void setSaleAcount(String saleAcount){this.saleAcount = saleAcount;}
 
 	public String getSaleAcount(){return saleAcount;}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
 }

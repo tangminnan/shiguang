@@ -30,6 +30,7 @@
             <if test="readCard != null and readCard != ''">and d.read_card = #{readCard}</if>
             <if test="companyName != null and companyName != ''">and d.company_name = #{companyName}</if>
             <if test="state != null and state != ''">and d.state = #{state}</if>
+            <if test="companyid !=null and companyid != ''">and d.company_id = #{companyid}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

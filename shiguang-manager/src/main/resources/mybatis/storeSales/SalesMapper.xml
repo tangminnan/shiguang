@@ -285,6 +285,7 @@
 			<if test="memberNumber != null and memberNumber != ''"> and s.member_number = #{memberNumber} </if>
 			<if test="saleName != null and saleName != ''"> and s.sale_name = #{saleName} </if>
 			<if test="saleNumber !=null and saleNumber != ''">and s.sale_number like concat('%', #{saleNumber},'%')</if>
+			<if test="saleNumbers !=null and saleNumbers != ''">and s.sale_number like concat('%', #{saleNumbers},'%')</if>
 			<if test="memberName !=null and memberName != ''">and m.`name` like concat('%', #{memberName},'%')</if>
 			<if test="phone !=null and phone != ''">and m.`phone_1` like concat('%', #{phone},'%')</if>
 			<if test="eyeType != null and eyeType != ''"> and s.eye_type = #{eyeType} </if>

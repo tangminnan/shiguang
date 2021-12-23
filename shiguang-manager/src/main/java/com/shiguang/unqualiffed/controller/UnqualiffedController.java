@@ -114,9 +114,12 @@ public class UnqualiffedController {
 	    return "unqualiffed/add";
 	}
 
-	@GetMapping("/goods")
+	@GetMapping("/goods/{saleNumber}")
 	@RequiresPermissions("information:unqualiffed:goods")
-	String goods(Model model){
+	String goods(@PathVariable("saleNumber") String saleNumber,Model model){
+		if(!"无".equals(saleNumber)){
+			model.addAttribute("saleNumbers",saleNumber);
+		}
 		return "unqualiffed/goods";
 	}
 
