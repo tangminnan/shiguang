@@ -3,6 +3,7 @@ package com.shiguang.report.dao;
 import com.shiguang.report.domain.SaleReportDO;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.system.domain.UserDO;
 
 import java.util.List;
 import java.util.Map;
@@ -25,4 +26,6 @@ public interface SaleReportDao {
     List<SalesDO> findSaleReportDetailForms(Map<String,Object> map);
 
     List<SettlementDO> findSaleNameSettleList(Map<String,Object> map);
+
+    List<SalesDO> findYanguangPeople(Map<String,Object> map);
 }

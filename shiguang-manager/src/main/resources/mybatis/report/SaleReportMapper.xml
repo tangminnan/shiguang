@@ -229,5 +229,20 @@
 		</where>
 		GROUP BY s.sale_number
 	</select>
+	<select id="findYanguangPeople" resultType="com.shiguang.storeSales.domain.SalesDO">
+		select u.username,u.name ,sum(s.amount_money) as amountMoney
+		from  sys_user u
+		join sys_user_role ur on u.user_id=ur.user_id
+		join jc_result r on r.optometry_name=u.name
+		join store_sales s on r.ptometry_number=s.ptometry_number
+		<where>
+			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(st.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(st.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="state !=null and state != ''">and m.state = #{state}</if>
+			and (ur.role_id = 7)
+		</where>
+		GROUP BY u.username
+	</select>
 
 </mapper>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>验光师业绩统计表</title>
+<style type="text/css">
+	*{padding: 0;margin: 0;box-sizing: border-box;font-size: 14px;}
+	.fl{float: left;}
+	.fr{float: right;}
+	.container {margin:50px auto;width: 1500px;}
+	h3{font-size: 20px;text-align: center;letter-spacing: 1px;margin-bottom:15px;}
+	table{width: 100%;border-left:1px solid #000;border-top:1px solid #000;text-align: center;color:#333;}
+	table td{border-right:1px solid #000;border-bottom:1px solid #000;padding:6px 2px;}
+	.thead{background: #dcdcdc;font-weight: bold;color:#000;}
+	/*table tr td:nth-child(1),*/
+	/*table tr td:nth-child(3),*/
+	/*table tr td:nth-child(4),*/
+	/*table tr td:nth-child(5),*/
+	/*table tr td:nth-child(6),*/
+	/*table tr td:nth-child(7),*/
+	/*table tr td:nth-child(8),*/
+	/*table tr td:nth-child(13){color:#2063fd;}*/
+
+
+</style>
+
+</head>
+<body>
+	<div class="container">
+		<h3>验光师业绩统计表</h3>
+		<input type="text" id="settleDateStart" th:value="${settleDateStart}">
+		<input type="text" id="settleDateEnd" th:value="${settleDateEnd}">
+		<input type="text" id="department" th:value="${department}">
+		<select id="companyId" name="companyId" onchange="selectgoods()" style="width: 200px">
+			<option></option>
+			<option th:each="ls:${saleReportDOS}"
+					th:text="${ls.name}"
+					th:value="${ls.name}"></option>
+		</select>
+		<table border="0" cellspacing="0" cellpadding="0" id="reportId">
+			<tbody id="detailId">
+			<tr class="thead">
+				<td>门店</td>
+				<td>工号</td>
+				<td>姓名</td>
+				<td>销售金额</td>
+				<td>镜架</td>
+				<td>配件</td>
+				<td>镜片</td>
+				<td>隐形</td>
+				<td>护理液</td>
+				<td>太阳镜</td>
+				<td>老花镜</td>
+				<td>耗材</td>
+				<td>视光</td>
+			</tr>
+			<!--<tr>-->
+				<!--<td>济南中心店</td>-->
+				<!--<td>62558.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>2354.00</td>-->
+				<!--<td>12.00</td>-->
+				<!--<td>333.00</td>-->
+				<!--<td>333.00</td>-->
+				<!--<td>120.00</td>-->
+				<!--<td>456.00</td>-->
+				<!--<td>236.00</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td>济南中心店</td>-->
+				<!--<td>62558.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>0.00</td>-->
+				<!--<td>2354.00</td>-->
+				<!--<td>12.00</td>-->
+				<!--<td>333.00</td>-->
+				<!--<td>333.00</td>-->
+				<!--<td>120.00</td>-->
+				<!--<td>456.00</td>-->
+				<!--<td>236.00</td>-->
+			<!--</tr>-->
+			</tbody>
+		</table>
+		<div>打印日期：<span th:text="${date}"></span></div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/saleReport/saleReportdy.js"></script>
+	<script type="text/javascript">
+	</script>
+	<script th:inline="javascript">
+        $().ready(function(){
+            var list = [[${saleReportDOS}]];
+            var html =0;
+            for (var i=0;i<list.length;i++){
+                html = "<tr><td>"+list[i].store+"</td>";
+                html += "<td>"+list[i].username+"</td>";
+                html += "<td>"+list[i].name+"</td>";
+                html += "<td>"+list[i].amountMoney+"</td>";
+                html += "<td>"+list[i].tyjMoney+"</td>";
+                html += "<td>"+list[i].jjpjMoney+"</td>";
+                html += "<td>"+list[i].pjMoney+"</td>";
+                html += "<td>"+list[i].yxMoney+"</td>";
+                html += "<td>"+list[i].hlyMoney+"</td>";
+                html += "<td>"+list[i].lhjMoney+"</td>";
+                html += "<td>"+list[i].sgMoney+"</td>";
+                html += "<td>"+list[i].hcMoney+"</td>";
+                html += "<td>"+list[i].addMoney+"</td>";
+                html += "</tr>";
+                $("#detailId").append(html);
+            }
+        });
+	</script>
+</body>
+</html>

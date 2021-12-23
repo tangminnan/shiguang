@@ -59,4 +59,9 @@ public class SaleReportServiceImpl implements SaleReportService {
     public List<SettlementDO> findSaleNameSettleList(Map<String, Object> map){
         return saleReportDao.findSaleNameSettleList(map);
     }
+
+    @Override
+    public List<SalesDO> findYanguangPeople(Map<String, Object> map) {
+        return saleReportDao.findYanguangPeople(map);
+    }
 }

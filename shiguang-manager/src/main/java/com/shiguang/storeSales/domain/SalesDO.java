@@ -23,6 +23,7 @@ public class SalesDO implements Serializable {
 	private String ptometryNumber;
 	//是否缴费
 	private String saleType;
+	private String username;
 	//会员卡号
 	private String memberNumber;
 	private String memberName;
@@ -120,6 +121,15 @@ public class SalesDO implements Serializable {
 	public void setLefttg(String lefttg) {this.lefttg = lefttg;}
 
 	public String getLefttg() {return lefttg;}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	//外来处方类型
 	private String outRecipel;
 	//处方类型
@@ -2739,4 +2749,5 @@ public class SalesDO implements Serializable {
 	public void setLeftVAcrt(String leftVAcrt) {
 		this.leftVAcrt = leftVAcrt;
 	}
+
 }

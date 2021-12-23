@@ -26,4 +26,10 @@ public interface SaleReportService {
     List<SalesDO> findSaleReportDetailForms(Map<String,Object> map);
 
     List<SettlementDO> findSaleNameSettleList(Map<String,Object> map);
+
+    List<SalesDO> findYanguangPeople(Map<String,Object> map);
+
+
+
+
 }

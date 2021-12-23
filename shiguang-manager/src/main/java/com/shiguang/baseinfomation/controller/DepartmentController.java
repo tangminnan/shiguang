@@ -48,6 +48,18 @@ public class DepartmentController {
         PageUtils pageUtils = new PageUtils(departmentList, total);
         return pageUtils;
     }
+    @ResponseBody
+    @GetMapping("/departmentlist")
+    @RequiresPermissions("information:department:department")
+    public PageUtils departmentlist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        query.put("state",1);
+        List<DepartmentDO> departmentList = departmentService.list(query);
+        int total = departmentService.count(query);
+        PageUtils pageUtils = new PageUtils(departmentList, total);
+        return pageUtils;
+    }
 
     @GetMapping("/add")
     @RequiresPermissions("information:department:add")
