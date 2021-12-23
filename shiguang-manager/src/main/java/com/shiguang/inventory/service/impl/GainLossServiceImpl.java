@@ -51,5 +51,15 @@ public class GainLossServiceImpl implements GainLossService {
 	public int batchRemove(Long[] ids){
 		return gainLossDao.batchRemove(ids);
 	}
+
+	@Override
+	public GainLossDO getInventoryNumber(String inventoryNumber){
+		return gainLossDao.getInventoryNumber(inventoryNumber);
+	}
+
+	@Override
+	public int removeInventoryNumber(String inventoryNumber){
+		return gainLossDao.removeInventoryNumber(inventoryNumber);
+	}
 	
 }

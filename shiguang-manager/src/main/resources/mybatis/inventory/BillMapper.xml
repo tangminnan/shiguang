@@ -115,6 +115,10 @@
 	<delete id="remove">
 		delete from inventory_bill where id = #{value}
 	</delete>
+
+	<delete id="removeInventoryId">
+		delete from inventory_bill where inventory_id = #{value}
+	</delete>
 	
 	<delete id="batchRemove">
 		delete from inventory_bill where id in 

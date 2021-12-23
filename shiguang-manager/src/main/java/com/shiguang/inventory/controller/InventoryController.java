@@ -314,10 +314,7 @@ public class InventoryController {
 	@ResponseBody
 	@RequiresPermissions("information:inventory:remove")
 	public R remove( Long id){
-		if(inventoryService.remove(id)>0){
-		return R.ok();
-		}
-		return R.error();
+		return inventoryService.removePandian(id);
 	}
 	
 	/**

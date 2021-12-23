@@ -34,4 +34,6 @@ public interface InventoryService {
 	int batchRemove(Long[] ids);
 
 	R importInventory(String documentNo, String inventoryName, String inventoryPosition, String inventoryType, List<MultipartFile> file);
+
+	R removePandian(Long id);
 }

@@ -4,10 +4,13 @@ import com.shiguang.common.utils.GuuidUtil;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.inventory.dao.BillDao;
+import com.shiguang.inventory.dao.GainLossDao;
 import com.shiguang.inventory.dao.InventoryDao;
 import com.shiguang.inventory.domain.BillDO;
+import com.shiguang.inventory.domain.GainLossDO;
 import com.shiguang.inventory.domain.InventoryDO;
 import com.shiguang.inventory.service.InventoryService;
+import com.shiguang.settlement.domain.DrawbackDO;
 import com.shiguang.stock.dao.StockDao;
 import com.shiguang.stock.domain.StockDO;
 import io.swagger.models.auth.In;
@@ -30,6 +33,8 @@ public class InventoryServiceImpl implements InventoryService {
 	private StockDao stockDao;
 	@Autowired
 	private BillDao billDao;
+	@Autowired
+	private GainLossDao gainLossDao;
 	
 	@Override
 	public InventoryDO get(Long id){
@@ -315,5 +320,30 @@ public class InventoryServiceImpl implements InventoryService {
 		this.save(inventoryDO);
 		return R.ok();
 	}
-	
+
+	@Override
+	@Transactional
+	public R removePandian(Long id){
+		InventoryDO inventoryDO = this.get(id);
+		this.remove(id);
+		if (null != inventoryDO){
+			Long inventoryId = inventoryDO.getInventoryId();
+			List<BillDO> billDOList = billDao.getInventoryId(inventoryId);
+			if (null != billDOList && billDOList.size() > 0){
+				for (BillDO billDO : billDOList){
+					billDao.removeInventoryId(billDO.getInventoryId());
+				}
+			}
+			String inventoryNumber = inventoryDO.getInventoryNumber();
+			GainLossDO gainLossDO = gainLossDao.getInventoryNumber(inventoryNumber);
+			if (null != gainLossDO){
+				gainLossDao.removeInventoryNumber(gainLossDO.getInventoryNumber());
+			}
+			return R.ok();
+		}
+//		if(inventoryService.remove(id)>0){
+//		return R.ok();
+//		}
+		return R.error();
+	}
 }

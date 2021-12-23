@@ -28,4 +28,8 @@ public interface GainLossService {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	GainLossDO getInventoryNumber(String inventoryNumber);
+
+	int removeInventoryNumber(String inventoryNumber);
 }

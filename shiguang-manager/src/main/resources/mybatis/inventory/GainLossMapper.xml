@@ -9,6 +9,13 @@
          from gain_loss gl join c_position c on c.position_id = gl.position_id where gl.id = #{value}
 	</select>
 
+    <select id="getInventoryNumber" resultType="com.shiguang.inventory.domain.GainLossDO">
+        select gl.`id`,gl.`document_no`,gl.`inventory_number`,gl.`inventory_type`,gl.`document_type`,gl.`document_date`,
+         gl.`recenue_position`,gl.`position_id`,gl.`single_name`,gl.`remark`,gl.`inventory_count`,gl.`goods_id`,gl.`department_name`,gl.`department_number`,
+         gl.`produc_code`,gl.`goods_num`,gl.`goods_name`,gl.`unitname`,gl.`mfrsid`,gl.`brandname`,`retail_price`,gl.`class_type`,gl.`examine_name`,gl.`examine_date`,gl.`examine_status`
+         from gain_loss gl where gl.inventory_number = #{value}
+    </select>
+
     <select id="list" resultType="com.shiguang.inventory.domain.GainLossDO">
         select gl.`id`,gl.`document_no`,gl.`inventory_number`,gl.`inventory_type`,gl.`document_type`,gl.`document_date`,
         gl.`recenue_position`,gl.`position_id`,c.`position_name` as recenuePosition,gl.`single_name`,gl.`remark`,gl.`inventory_count`,
@@ -135,6 +142,10 @@
 
     <delete id="remove">
 		delete from gain_loss where id = #{value}
+	</delete>
+
+    <delete id="removeInventoryNumber">
+		delete from gain_loss where inventory_number = #{value}
 	</delete>
 
     <delete id="batchRemove">

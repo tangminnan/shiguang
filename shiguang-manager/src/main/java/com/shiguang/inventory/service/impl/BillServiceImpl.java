@@ -56,5 +56,10 @@ public class BillServiceImpl implements BillService {
 	public int batchRemove(Long[] ids){
 		return billDao.batchRemove(ids);
 	}
+
+	@Override
+	public int removeInventoryId(Long inventoryId){
+		return billDao.removeInventoryId(inventoryId);
+	}
 	
 }
