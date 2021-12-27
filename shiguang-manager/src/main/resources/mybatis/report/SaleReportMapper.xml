@@ -141,27 +141,30 @@
 	<select id="findSaleReportForms" resultType="com.shiguang.settlement.domain.SettlementDO">
 		select s.`id`,s.`cost_id`,s.`sale_number`,s.`member_number`,s.`sale_name`,s.`actual_money`,s.`payment_money`,s.`change_money`,s.`pay_model`,
 		s.`model_money`,s.`pay_money`,s.`pay_way`,s.`front_money`,s.`settle_date`,s.`front_time`,d.`drawback_money` as drawBackMoney,d.`drackback_way` as drawBackWay,dt.`depart_name` as departmentName
-		 from settlement s join member m on m.card_number = s.member_number join department dt on dt.company_id = m.company_id left join drawback d on d.sale_number = s.sale_number
+		 from settlement s join member m on m.card_number = s.member_number join department dt on dt.company_id = m.company_id left join drawback d on d.sale_number = s.sale_number join sys_user su on su.username = s.sale_acount
 		 <where>
 			 <if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
 			 <if test="settleDateStart !=null and settleDateStart != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
 			 <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			 <if test="state !=null and state != ''">and m.state = #{state}</if>
-			 <if test="departNumber !=null and departNumber != ''">and dt.depart_number = #{departNumber}</if>
+			 <if test="departNumber !=null and departNumber != ''">and su.store_num = #{departNumber}</if>
 			 <if test="departType !=null and departType != ''">and dt.depart_type = #{departType}</if>
+
 		 </where>
+		GROUP BY s.sale_number
 		order by dt.depart_number
 	</select>
 
 	<select id="findSaleReportFormsCount" resultType="com.shiguang.settlement.domain.SettlementDO">
 		select count (*)
-		from settlement s join member m on m.card_number = s.member_number join department dt on dt.company_id = m.company_id  left join drawback d on d.sale_number = s.sale_number
+		from settlement s join member m on m.card_number = s.member_number join department dt on dt.company_id = m.company_id  left join drawback d on d.sale_number = s.sale_number join sys_user su on su.username = s.sale_acount
 		<where>
 			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
 			<if test="settleDateStart !=null and settleDateStart != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
 			<if test="settleDateEnd !=null and settleDateEnd != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
-			<if test="departNumber !=null and departNumber != ''">and dt.depart_number = #{departNumber}</if>
+			<if test="departNumber !=null and departNumber != ''">and su.store_num = #{departNumber}</if>
+			<if test="departType !=null and departType != ''">and dt.depart_type = #{departType}</if>
 		</where>
 	</select>
 
@@ -178,7 +181,7 @@
 			<if test="settleDateEnd !=null and settleDateEnd != ''">and date_format(st.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
 			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
-			<if test="departNumber !=null and departNumber != ''">and d.depart_number = #{departNumber}</if>
+			<if test="departNumber !=null and departNumber != ''">and s.store_num = #{departNumber}</if>
 			and s.sale_type = '1'
 		</where>
 		GROUP BY s.sale_number
@@ -192,7 +195,7 @@
 			<if test="settleDateEnd !=null and settleDateEnd != ''">and date_format(st.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
 			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
-			<if test="departNumber !=null and departNumber != ''">and d.depart_number = #{departNumber}</if>
+			<if test="departNumber !=null and departNumber != ''">and s.store_num= #{departNumber}</if>
 		</where>
 		GROUP BY s.sale_name
 	</select>
@@ -205,7 +208,7 @@
 			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
 			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
-			<if test="departNumber !=null and departNumber != ''">and d.depart_number = #{departNumber}</if>
+			<if test="departNumber !=null and departNumber != ''">and ss.store_num = #{departNumber}</if>
 			and (ss.sale_type = '1')
 		</where>
 		 GROUP BY s.sale_name
@@ -218,13 +221,13 @@
 		s.`recipel_type`,s.`optometrywl_name`,s.`recipelwl_type`,s.`taocan_name`,s.`classtype`,s.`additional_price`,s.`additional_count`,s.`unit`,s.`batch`,s.`left_right`,s.`righttg`,s.`lefttg`,
 		st.`change_money`,st.`model_money`,s.sale_type
 		from store_sales s join settlement st on st.sale_number = s.sale_number join member m on m.card_number = s.member_number
-		join department d on d.company_id = m.company_id
+		join department d on d.company_id = m.company_id join sys_user su on su.username = st.sale_acount
 		<where>
 			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
 			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(st.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
 			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(st.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
-			<if test="departNumber !=null and departNumber != ''">and d.depart_number = #{departNumber}</if>
+			<if test="departNumber !=null and departNumber != ''">and su.store_num = #{departNumber}</if>
 			and (s.sale_type = '1')
 		</where>
 		GROUP BY s.sale_number

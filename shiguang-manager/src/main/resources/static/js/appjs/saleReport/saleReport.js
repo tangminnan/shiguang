@@ -108,7 +108,7 @@ function reLoad() {
      var saleType = $("#saleType").val();
      var departNumber = $("#departNumber").val();
      if (0 == saleType){
-         window.open("/information/saleName/salenameList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd);
+         window.open("/information/saleName/salenameList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&departNumber="+departNumber);
 	 } else if (1 == saleType){
          window.open("/information/saleReport/reportList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&departNumber="+departNumber);
 	 }

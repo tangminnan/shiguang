@@ -27,7 +27,7 @@ public class SaleNameController {
     }
 
     @GetMapping("/salenameList")
-    public String salenameList(String settleDateStart,String settleDateEnd,Model model) {
+    public String salenameList(String settleDateStart,String settleDateEnd,String departNumber,Model model) {
         Map<String,Object> query = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -40,6 +40,9 @@ public class SaleNameController {
             query.put("settleDateEnd",settleDateEnd);
         } else {
             query.put("settleDateEnd",simpleDateFormat.format(date));
+        }
+        if (!"".equals(departNumber)){
+            query.put("departNumber",departNumber);
         }
         List<SalesDO> salesDOList = saleReportService.findGoodsList(query);
         List<SalesDO> saleNameList = saleReportService.findSaleNameList(query);

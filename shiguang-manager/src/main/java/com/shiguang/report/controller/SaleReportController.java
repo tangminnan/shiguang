@@ -199,6 +199,7 @@ public class SaleReportController {
 //		int total = settlementService.count(query);
 //		PageUtils pageUtils = new PageUtils(settlementList, total);
         Map<String,Object> query = new HashMap<>();
+        Map<String,Object> maps = new HashMap<>();
         query.put("state",1);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -219,6 +220,8 @@ public class SaleReportController {
         if (!"".equals(departNumber)){
             DepartmentDO departmentDO = departmentService.getDepartName(departNumber);
             model.addAttribute("departmentName",departmentDO.getDepartName());
+            query.put("departNumber",departNumber);
+            maps.put("departNumber",departNumber);
         } else {
             query.put("departType","销售门店");
         }
@@ -232,7 +235,7 @@ public class SaleReportController {
             }
         }
         List<SettlementDO> list = saleReportService.findSaleReportForms(query);
-        Map<String,Object> maps = new HashMap<>();
+
         if (null != ShiroUtils.getUser().getCompanyId()){
             maps.put("companyid",ShiroUtils.getUser().getCompanyId());
         }
@@ -469,7 +472,10 @@ public class SaleReportController {
                         if (null != salesDOs.getAdditionalPrice()){
                             String[] addPrice = salesDOs.getAdditionalPrice().split(",");
                             for (int s=0;s<addPrice.length;s++){
-                                addMoney = addMoney + Double.valueOf(addPrice[s]);
+                                if (!"".equals(addPrice[s]) && null != addPrice[s]){
+                                    addMoney = addMoney + Double.valueOf(addPrice[s]);
+                                }
+
                             }
 //                            try {
 //                                String[] addPrice = salesDOs.getAdditionalPrice().split(",");
