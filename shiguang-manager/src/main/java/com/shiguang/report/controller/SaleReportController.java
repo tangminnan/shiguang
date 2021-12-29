@@ -274,7 +274,9 @@ public class SaleReportController {
                                 yikatongoney = yikatongoney + Double.valueOf(modelMoney[i]);
                             }
                         }
-                        xianjinMoney = xianjinMoney - settlementDO.getChangeMoney();
+                        if (null != settlementDO.getChangeMoney()){
+                            xianjinMoney = xianjinMoney - settlementDO.getChangeMoney();
+                        }
                         if ("0".equals(settlementDO.getDrawBackWay())){
                             weixinMoney = weixinMoney-Double.valueOf(settlementDO.getDrawBackMoney());
                         } else if ("1".equals(settlementDO.getDrawBackWay())){
@@ -462,7 +464,10 @@ public class SaleReportController {
                                 amountMoney = amountMoney + Double.valueOf(dingjin);
                             } else {
                                 String[] modelsMoney = salesDOs.getModelMoney().split(",");
-                                String changesMoney=salesDOs.getChangeMoney();
+                                String changesMoney = "0.00";
+                                if (null != salesDOs.getChangeMoney()){
+                                    changesMoney=salesDOs.getChangeMoney();
+                                }
                                 for (int s=0;s<modelsMoney.length;s++){
                                     amountMoney = amountMoney + Double.valueOf(modelsMoney[s]);
                                     amountMoney = amountMoney - Double.valueOf(changesMoney);

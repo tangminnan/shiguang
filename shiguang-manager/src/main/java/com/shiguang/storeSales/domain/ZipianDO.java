@@ -19,6 +19,8 @@ public class ZipianDO implements Serializable {
 	private Long id;
 	//商品代码
 	private String producNum;
+	//商品条码
+	private String producCode;
 	//商品名称
 	private String producName;
 	//零售价格
@@ -60,6 +62,20 @@ public class ZipianDO implements Serializable {
 	public String getProducNum() {
 		return producNum;
 	}
+
+	/**
+	 * 设置：商品条码
+	 */
+	public void setProducCode(String producCode) {
+		this.producCode = producCode;
+	}
+	/**
+	 * 获取：商品条码
+	 */
+	public String getProducCode() {
+		return producCode;
+	}
+
 	/**
 	 * 设置：商品名称
 	 */

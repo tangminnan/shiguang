@@ -369,7 +369,7 @@
 	</select>
 	<!-- 查询自片和自架 -->
 	<select id="findZpian" resultType="com.shiguang.storeSales.domain.ZipianDO">
-		select `id`,`produc_num`,`produc_name`,`retail_price`,`sph`,`cyl`,`lightbelow`,`refractivity`,`light`,`lens` from zipian
+		select `id`,`produc_num`,`produc_code`,`produc_name`,`retail_price`,`sph`,`cyl`,`lightbelow`,`refractivity`,`light`,`lens` from zipian
 	</select>
 	<select id="countZpian" resultType="int">
 		select count(*) from zipian
