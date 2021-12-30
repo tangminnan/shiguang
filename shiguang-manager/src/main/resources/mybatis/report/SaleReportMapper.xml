@@ -342,7 +342,7 @@
 	</select>
 	<select id="findGoods" resultType="com.shiguang.storeSales.domain.SalesDO">
 		select u.store,u.username,u.name ,
-		s.goods_num,s.store_name,s.store_describe,s.classtype,s.store_count, s.store_unit,s.amount_money
+		s.sale_number,s.goods_num,s.store_name,s.store_describe,s.classtype,s.store_count, s.store_unit,s.amount_money
 		from  sys_user u
 		join sys_user_role ur on u.user_id=ur.user_id
 		join jc_result r on r.optometry_name=u.name
@@ -354,6 +354,7 @@
 			<if test="department !=null and department != ''">and u.store = #{department}</if>
 			<if test="username !=null and username != ''">and u.username = #{username}</if>
 			<if test="storeDescribe != null and storeDescribe != ''">and s.store_describe LIKE concat(concat('%', #{storeDescribe}),'%')</if>
+			<if test="brandname != null and brandname != ''">and  s.store_name LIKE concat(concat('%', #{brandname}),'%')</if>
 			and (ur.role_id = 7) and (s.sale_type=1)
 		</where>
 	</select>

@@ -5,7 +5,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>验光师业绩统计表（品种）</title>
+<title>验光师业绩统计表（商品明细）</title>
 <style type="text/css">
 	*{padding: 0;margin: 0;box-sizing: border-box;font-size: 14px;}
 	.fl{float: left;}
@@ -18,23 +18,20 @@
 	.tfoot{background: #fecccc;font-weight: bold;}
 	.tfoot td{color: #fd0c0c !important;}
 	.txt{overflow: hidden;margin:15px 0;font-weight: bold;}
-	.cBlue{color:#2063fd;}
 </style>
 
 </head>
 <body>
 <input type="hidden" id="settleDateStart" th:value="${settleDateStart}">
 <input type="hidden" id="settleDateEnd" th:value="${settleDateEnd}">
-<input type="hidden" id="username" th:value="${username}">
-<input type="hidden" id="storeDescribe" th:value="${storeDescribe}">
-<input type="hidden" id="selectGoods" th:value="${selectGoods}">
 	<div class="container">
-		<h3>验光师业绩统计表（品种）</h3>
+		<h3>验光师业绩统计表（商品明细）</h3>
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tbody id="detailId">
 			<tr class="thead">
-			  <td>品种码</td>
-			  <td>品种名称</td>
+			  <td>配镜单号</td>
+			  <td>商品代码</td>
+			  <td>商品名称</td>
 			  <td>销售数量</td>
 			  <td>销售金额</td>
 			</tr>
@@ -50,42 +47,29 @@
 <script type="text/javascript"></script>
 <script th:inline="javascript">
         $().ready(function() {
-            var listBrandMoney = [[${listBrandMoney}]];
+            var GoodsList = [[${GoodsList}]];
             var html = "";
             var allCount = 0;
             var allMoney = 0;
-            for (var i = 0; i < listBrandMoney.length; i++) {
+            for (var i = 0; i < GoodsList.length; i++) {
                 html += "<tr>";
-                html += "<td class='brandnum'>" + listBrandMoney[i].jjbrand + "</td>";
-                html += "<td class='brandname'>" + listBrandMoney[i].jjbrandname + "</td>";
-                html += "<td class='cBlue'><a href='#' onclick='reportGoods(this)'>" + listBrandMoney[i].jjCount + "</a></td>";
-                html += "<td>" + listBrandMoney[i].jjMoney + "</td>";
+                html += "<td>" + GoodsList[i].saleNumber + "</td>";
+                html += "<td>" + GoodsList[i].goodNum + "</td>";
+                html += "<td>" + GoodsList[i].goodName + "</td>";
+                html += "<td>" + GoodsList[i].count + "</td>";
+                html += "<td>" + GoodsList[i].money + "</td>";
                 html += "</tr>";
-                allCount+=listBrandMoney[i].jjCount;
-                allMoney+=listBrandMoney[i].jjMoney;
+                allCount+=GoodsList[i].count;
+                allMoney+=GoodsList[i].money;
             }
             html+="<tr class='tfoot'>";
-            html+="<td colspan='2'>总合计：</td>";
+            html+="<td colspan='3'>总合计：</td>";
             html+="<td>"+allCount+"</td>";
             html+="<td>"+allMoney+"</td>";
             html+="</tr>";
             $("#detailId").append(html);
         });
 
-
-        function reportGoods(e){
-            var brandnum=$(e).parent().prevAll().filter(".brandnum").html();
-            var brandname=$(e).parent().prevAll().filter(".brandname").html();
-            var settleDateStart=$("#settleDateStart").val();
-            var settleDateEnd=$("#settleDateEnd").val();
-            var username=$("#username").val();
-            var storeDescribe=$("#storeDescribe").val();
-            var selectGoods=$("#selectGoods").val();
-
-            window.open("/information/saleYanguang/goodsList?brandnum="+brandnum+"&brandname="+brandname+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&username="+username
-				+"&storeDescribe="+storeDescribe+"&selectGoods="+selectGoods);
-        }
 	</script>
 </body>
 </html>
