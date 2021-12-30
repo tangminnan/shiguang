@@ -14,6 +14,7 @@
         <where>
             <if test="positionNum != null and positionNum != ''">and p.position_num = #{positionNum}</if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+            and state='1'
         </where>
          order by p.position_id
     </select>

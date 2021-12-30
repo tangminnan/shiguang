@@ -13,7 +13,7 @@
         select `mfrsid`,`mfrsnum`,`mfrsname`,`mfrscontacts`,`mfrsrealname`,`mfrstelephone`,`mfrsphone`,`goodsid`,`mfrsfax`,`mfrsaddress`,
         `payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday`,
         `remarks`,`xsstate`,`state`,`payday`
-         from c_mfrs WHERE mfrsnum = #{mfrsnum} order by mfrsid
+         from c_mfrs WHERE mfrsnum = #{mfrsnum} and state='1' order by mfrsid
     </select>
     <!--//【制造商页面List】-->
     <select id="list" resultType="com.shiguang.mfrs.domain.MfrsDO">

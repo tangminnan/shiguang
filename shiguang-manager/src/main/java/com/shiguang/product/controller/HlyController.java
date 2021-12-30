@@ -174,30 +174,30 @@ public class HlyController {
         return R.ok();
     }
 
-//    /**
-//     * 删除修改状态
-//     */
-//    @ResponseBody
-//    @RequestMapping("/remove")
-//    public R updateStatus(Long id) {
-//        HlyDO hlyDO = new HlyDO();
-//        hlyDO.setState(0L);
-//        hlyDO.setId(id);
-//        if (hlyService.updateState(hlyDO) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
     /**
-     * 删除
+     * 删除修改状态
      */
     @ResponseBody
     @RequestMapping("/remove")
-    public R remove(Long id) {
-        if(hlyService.remove(id)>0){
+    public R updateStatus(Long id) {
+        HlyDO hlyDO = new HlyDO();
+        hlyDO.setState(0L);
+        hlyDO.setId(id);
+        if (hlyService.updateState(hlyDO) > 0) {
             return R.ok();
         }
         return R.error();
     }
+//    /**
+//     * 删除
+//     */
+//    @ResponseBody
+//    @RequestMapping("/remove")
+//    public R remove(Long id) {
+//        if(hlyService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 }
 

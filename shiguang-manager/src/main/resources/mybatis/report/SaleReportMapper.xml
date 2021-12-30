@@ -232,20 +232,188 @@
 		</where>
 		GROUP BY s.sale_number
 	</select>
+	<!--<select id="findYanguangPeople" resultType="com.shiguang.storeSales.domain.SalesDO">-->
+	<!--select u.store,u.username,u.name ,sum(s.amount_money) as amountMoney,sum(s.prime_money) as primeMoney,COUNT(try.ptometry_number) as usecount-->
+	<!--from  sys_user u-->
+	<!--join sys_user_role ur on u.user_id=ur.user_id-->
+	<!--join jc_tryresults try on try.optometry_name=u.name-->
+	<!--join store_sales s on try.ptometry_number=s.ptometry_number-->
+	<!--<where>-->
+	<!--<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>-->
+	<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
+	<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
+	<!--<if test="department !=null and department != ''">and u.store = #{department}</if>-->
+	<!--and (ur.role_id = 7) and (s.sale_type=1)-->
+	<!--</where>-->
+	<!--GROUP BY u.username-->
+	<!--</select>-->
+	<!--<select id="findYanguangCount" resultType="com.shiguang.storeSales.domain.SalesDO">-->
+		<!--select  COUNT(try.ptometry_number) as ygcount-->
+		<!--from  sys_user u-->
+		<!--join sys_user_role ur on u.user_id=ur.user_id-->
+		<!--join jc_tryresults try on try.optometry_name=u.name-->
+		<!--join store_sales s on try.ptometry_number=s.ptometry_number-->
+		<!--<where>-->
+			<!--<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>-->
+			<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
+			<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
+			<!--<if test="department !=null and department != ''">and u.store = #{department}</if>-->
+			<!--and (ur.role_id = 7)-->
+		<!--</where>-->
+		<!--GROUP BY u.username-->
+	<!--</select>-->
+
 	<select id="findYanguangPeople" resultType="com.shiguang.storeSales.domain.SalesDO">
-		select u.store,u.username,u.name ,sum(s.amount_money) as amountMoney
+		select  u.store,u.username,u.name
+		from  sys_user u
+		join sys_user_role ur on u.user_id=ur.user_id
+		<where>
+			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
+			<if test="department !=null and department != ''">and u.store = #{department}</if>
+			and (ur.role_id = 7)
+		</where>
+		GROUP BY u.username
+	</select>
+	<select id="findYanguangCount" resultType="int">
+		select  COUNT(try.ptometry_number) as ygcount
+		from  sys_user u
+		join sys_user_role ur on u.user_id=ur.user_id
+		left join jc_tryresults try on try.optometry_name=u.name
+		<where>
+			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="department !=null and department != ''">and u.store = #{department}</if>
+			<if test="username !=null and username != ''">and u.username = #{username}</if>
+			and (ur.role_id = 7)
+		</where>
+	</select>
+	<select id="findUseCount"  resultType="int">
+		SELECT
+		 COUNT( try.ptometry_number ) AS usecount
+		FROM
+		sys_user u
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		LEFT JOIN jc_tryresults try ON try.optometry_name = u.NAME
+		left join store_sales s on try.ptometry_number=s.ptometry_number
+		<where>
+			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="department !=null and department != ''">and u.store = #{department}</if>
+			<if test="username !=null and username != ''">and u.username = #{username}</if>
+			and (ur.role_id = 7)and (s.sale_type=1)
+		</where>
+	</select>
+	<select id="findamountMoney" resultType="int">
+		SELECT
+		ifnull(sum(s.amount_money),0)  AS amountMoney
+
+		FROM
+		sys_user u
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		LEFT JOIN jc_tryresults try ON try.optometry_name = u.NAME
+		left join store_sales s on try.ptometry_number=s.ptometry_number
+		<where>
+			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="department !=null and department != ''">and u.store = #{department}</if>
+			<if test="username !=null and username != ''">and u.username = #{username}</if>
+			and (ur.role_id = 7)and (s.sale_type=1)
+		</where>
+	</select>
+	<select id="findprimeMoney" resultType="int">
+		SELECT
+		ifnull(sum(s.prime_money),0)  AS primeMoney
+		FROM
+		sys_user u
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		LEFT JOIN jc_tryresults try ON try.optometry_name = u.NAME
+		left join store_sales s on try.ptometry_number=s.ptometry_number
+		<where>
+			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="department !=null and department != ''">and u.store = #{department}</if>
+			<if test="username !=null and username != ''">and u.username = #{username}</if>
+			and (ur.role_id = 7)and (s.sale_type=1)
+		</where>
+	</select>
+	<select id="findGoods" resultType="com.shiguang.storeSales.domain.SalesDO">
+		select u.store,u.username,u.name ,
+		s.goods_num,s.store_name,s.store_describe,s.classtype,s.store_count, s.store_unit,s.amount_money
 		from  sys_user u
 		join sys_user_role ur on u.user_id=ur.user_id
 		join jc_result r on r.optometry_name=u.name
 		join store_sales s on r.ptometry_number=s.ptometry_number
 		<where>
-			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
-			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(st.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
-			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(st.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
-			<if test="state !=null and state != ''">and m.state = #{state}</if>
-			and (ur.role_id = 7)
+			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(r.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(r.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="department !=null and department != ''">and u.store = #{department}</if>
+			<if test="username !=null and username != ''">and u.username = #{username}</if>
+			<if test="storeDescribe != null and storeDescribe != ''">and s.store_describe LIKE concat(concat('%', #{storeDescribe}),'%')</if>
+			and (ur.role_id = 7) and (s.sale_type=1)
 		</where>
-		GROUP BY u.username
+	</select>
+
+	<select id="findJj" resultType="com.shiguang.product.domain.ProducaDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname  from aa_produca a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
+	</select>
+	<select id="findpj" resultType="com.shiguang.product.domain.PartsDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname   from aa_parts a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
+	</select>
+	<select id="findjp" resultType="com.shiguang.product.domain.JpcpDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname   from aa_jpcp a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
+	</select>
+
+	<select id="findjpdz" resultType="com.shiguang.product.domain.JpdzDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname   from aa_jpdz a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
+	</select>
+	<select id="findyx" resultType="com.shiguang.product.domain.YxcpDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname   from aa_yxcp a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
+	</select>
+	<select id="findyxdz" resultType="com.shiguang.product.domain.YxdzDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname   from aa_yxdz a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
+	</select>
+	<select id="findhly" resultType="com.shiguang.product.domain.HlyDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname   from aa_hly a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
+	</select>
+	<select id="findtyj" resultType="com.shiguang.product.domain.TyjDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname   from aa_tyj a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
+	</select>
+
+	<select id="findlhj" resultType="com.shiguang.product.domain.OldlensDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname   from aa_oldlens a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
+	</select>
+	<select id="findhc" resultType="com.shiguang.product.domain.HcDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname   from aa_hc a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
+	</select>
+	<select id="findsg" resultType="com.shiguang.product.domain.ShiguangDO">
+		select a.produc_num,a.view_good_name  ,a.brandnum,b.brandname   from aa_shiguang a
+		join c_brand b on a.brandnum=b.brandnum   and a.mfrsid=b.mfrsid
+		where a.produc_num = #{value}
 	</select>
 
 </mapper>

@@ -55,21 +55,23 @@
                 <td>
                     <input id="factory" name="factory" onkeyup="liandong1(this)"
                            onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" type="text"
-                           oninput="if(value.length>9)value=value.slice(0,9)">
+                           oninput="if(value.length>8)value=value.slice(0,8)"  >
                     <em>*</em>
                 </td>
             </tr>
             <tr>
-                <td>型号：</td>
+                <td>型号：</td> 
                 <td>
                     <input id="producFactory" name="producFactory" onkeyup="liandong2(this)"
                            onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" type="text"
-                           oninput="if(value.length>9)value=value.slice(0,9)">
+                           oninput="if(value.length>8)value=value.slice(0,8)"  >
                     <em>*</em>
                 </td>
                 <td>商品编号：</td>
                 <td>
-                    <input id="proid" name="proid" type="text"/>
+                    <input id="proid" name="proid" type="text" onkeyup="choiceProid(this)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
+                           oninput="if(value.length>4)value=value.slice(0,4)"/>
                     <em>*</em>
                 </td>
                 <td>计量单位：</td>
@@ -169,9 +171,8 @@
                 </td>
                 <td>订做周期：</td>
                 <td>
-                    <input id="cycle" name="cycle" class="form-control" type="text">天
+                    <input id="cycle" name="cycle" class="form-control" type="text">天<em>*</em>
                 </td>
-                <em>*</em>
             </tr>
             <tr>
                 <td>销售状态：</td>
@@ -336,10 +337,10 @@
         var mfrsName = document.getElementById('mfrsName').value;
         //商品品种
         var brandnum = document.getElementById('brandnum').value;
-        //厂家型号
-        var factory = document.getElementById('factory').value;
-        //型号
-        var producFactory = document.getElementById('producFactory').value;
+        // //厂家型号
+        // var factory = document.getElementById('factory').value;
+        // //型号
+        // var producFactory = document.getElementById('producFactory').value;
         //商品编号
         var proid = document.getElementById('proid').value;
         //计量单位
@@ -375,11 +376,13 @@
             layer.alert("请输入商品名称");
         } else if (brandnum == "") {
             layer.alert("请选择商品品种");
-        } else if (factory == "") {
-            layer.alert("请输入厂家型号");
-        } else if (producFactory == "") {
-            layer.alert("请输入型号");
-        } else if (proid == "") {
+        }
+        // else if (factory == "") {
+        //     layer.alert("请输入厂家型号");
+        // } else if (producFactory == "") {
+        //     layer.alert("请输入型号");
+        // }
+        else if (proid == "") {
             layer.alert("请输入商品编号");
         } else if (unitid == "") {
             layer.alert("请选择计量单位");
@@ -456,7 +459,7 @@
     var a2 = document.getElementById("producCode");
     var sum;
     var sum1;
-    var a1_val = "3.00.00.000000000.0000";
+    var a1_val = "3.00.00.D00000000.0000";
 
     function change(e, k, s) {
         a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);
@@ -471,27 +474,34 @@
     function liandong1(e) {//厂家型号
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
-        // layer.alert(val);
-        // var proid = document.getElementById("proid");
+
         document.getElementById("producFactory").value = va1;
         sum = 17 - e.value.length;
-        // sum1 = 22 - proid.value.length;
+
         sum1 = 22;
         a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
+        choiceProid(document.getElementById("proid"));
     }
 
     function liandong2(e) {//型号
         var val2 = document.getElementById("producFactory").value;
         var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
-        // var proid = document.getElementById("proid");
         document.getElementById("factory").value = va2;
         sum = 17 - e.value.length
         sum1 = 22 ;
         a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
+        choiceProid(document.getElementById("proid"));
     }
 
+    function choiceProid(e) {//商品编号
+        var producFactory = document.getElementById("producFactory");
+        sum = 17 - producFactory.value.length;
+        sum1 = 22 - e.value.length;
+        a1.value = a1_val.substring(0, sum) + producFactory.value.toUpperCase() + a1_val.substring(17, sum1) + e.value.toUpperCase();
+        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
+    }
     /**
      * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位
      */

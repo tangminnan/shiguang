@@ -301,29 +301,29 @@ public class JpcpController {
         return R.ok();
     }
 
-//    /**
-//     * 删除修改状态
-//     */
-//    @ResponseBody
-//    @RequestMapping("/remove")
-//    public R updateStatus(Long id) {
-//        JpcpDO jpcpDO = new JpcpDO();
-//        jpcpDO.setState(0L);
-//        jpcpDO.setId(id);
-//        if (jpcpService.updateState(jpcpDO) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
     /**
-     * 删除
+     * 删除修改状态
      */
     @ResponseBody
     @RequestMapping("/remove")
-    public R remove(Long id) {
-        if(jpcpService.remove(id)>0){
+    public R updateStatus(Long id) {
+        JpcpDO jpcpDO = new JpcpDO();
+        jpcpDO.setState(0L);
+        jpcpDO.setId(id);
+        if (jpcpService.updateState(jpcpDO) > 0) {
             return R.ok();
         }
         return R.error();
     }
+//    /**
+//     * 删除
+//     */
+//    @ResponseBody
+//    @RequestMapping("/remove")
+//    public R remove(Long id) {
+//        if(jpcpService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 }

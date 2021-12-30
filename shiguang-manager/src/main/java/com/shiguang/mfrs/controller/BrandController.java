@@ -332,31 +332,31 @@ public class BrandController {
         return R.ok();
     }
 
-//    /**
-//     * 删除修改状态
-//     */
-//    @ResponseBody
-//    @RequestMapping("/remove")
-//    @RequiresPermissions("mfrs:mfrs:remove")
-//    public R updateStatus(Integer brandid) {
-//        BrandDO brandDO = new BrandDO();
-//        brandDO.setState(0L);
-//        brandDO.setBrandid(brandid);
-//        if (brandService.updateState(brandDO) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
     /**
-     * 删除
+     * 删除修改状态
      */
     @ResponseBody
     @RequestMapping("/remove")
-    @RequiresPermissions("mfrs:brand:remove")
-    public R remove(Integer brandid) {
-        if(brandService.remove(brandid)>0){
+    @RequiresPermissions("mfrs:mfrs:remove")
+    public R updateStatus(Integer brandid) {
+        BrandDO brandDO = new BrandDO();
+        brandDO.setState(0L);
+        brandDO.setBrandid(brandid);
+        if (brandService.updateState(brandDO) > 0) {
             return R.ok();
         }
         return R.error();
     }
+//    /**
+//     * 删除
+//     */
+//    @ResponseBody
+//    @RequestMapping("/remove")
+//    @RequiresPermissions("mfrs:brand:remove")
+//    public R remove(Integer brandid) {
+//        if(brandService.remove(brandid)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 }

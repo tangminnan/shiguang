@@ -60,9 +60,9 @@
                 </td>
                 <td>商品编号：</td>
                 <td>
-                    <input id="proid" name="proid" th:value="${jpcp.proid}"  onkeyup="liandong2(this)"
-                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" type="text"
-                           oninput="if(value.length>9)value=value.slice(0,9)">
+                    <input id="proid" name="proid" th:value="${jpcp.proid}"  type="text" onkeyup="choiceProid(this)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
+                           oninput="if(value.length>4)value=value.slice(0,4)">
                     <em>*</em>
                 </td>
             </tr>
@@ -350,21 +350,21 @@
             gradualId.style = "display: block";
         }
     }
-    var a1 = document.getElementById("producNum");
-    var a2 = document.getElementById("producCode");
-    var sum;
-    var sum1;
-    var a1_val = a1.value.substring(0, 7) + ".000000000.0000";
-    function liandong2(e) {//型号
-        var val2 = document.getElementById("proid").value;
-        var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
-        // var proid = document.getElementById("proid");
-        document.getElementById("proid").value = va2;
-        sum = 17 - e.value.length;
-        sum1 = 22 - unitid.value.length;
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + ".0000";
-        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
-    }
+    // var a1 = document.getElementById("producNum");
+    // var a2 = document.getElementById("producCode");
+    // var sum;
+    // var sum1;
+    // var a1_val = a1.value.substring(0, 7) + ".000000000.0000";
+    // function liandong2(e) {//型号
+    //     var val2 = document.getElementById("proid").value;
+    //     var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
+    //     // var proid = document.getElementById("proid");
+    //     document.getElementById("proid").value = va2;
+    //     sum = 17 - e.value.length;
+    //     sum1 = 22 - unitid.value.length;
+    //     a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + ".0000";
+    //     a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
+    // }
 
     /**
      * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位

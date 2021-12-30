@@ -255,32 +255,32 @@ ProducaController {
         return R.ok();
     }
 
-//    /**
-//     * 删除修改状态
-//     */
-//    @ResponseBody
-//    @RequestMapping("/remove")
-//    @RequiresPermissions("product:produca:remove")
-//    public R updateStatus(Long id) {
-//        ProducaDO producaDO = new ProducaDO();
-//        producaDO.setState(0L);
-//        producaDO.setId(id);
-//        if (producaService.updateState(producaDO) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
     /**
-     * 删除
+     * 删除修改状态
      */
     @ResponseBody
     @RequestMapping("/remove")
-    public R remove(Long id) {
-        if(producaService.remove(id)>0){
+    @RequiresPermissions("product:produca:remove")
+    public R updateStatus(Long id) {
+        ProducaDO producaDO = new ProducaDO();
+        producaDO.setState(0L);
+        producaDO.setId(id);
+        if (producaService.updateState(producaDO) > 0) {
             return R.ok();
         }
         return R.error();
     }
+//    /**
+//     * 删除
+//     */
+//    @ResponseBody
+//    @RequestMapping("/remove")
+//    public R remove(Long id) {
+//        if(producaService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
     //跳转制造商
     @GetMapping("/findmfrs/{goodsid}")
     @RequiresPermissions("product:produca:findmfrs")

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-right">
+							<!--<button shiro:hasPermission="information:ocular:add" type="button" class="btn  btn-primary" onclick="add()">-->
+								<!--<i class="fa fa-plus" aria-hidden="true"></i>添加-->
+							<!--</button>-->
+							<button shiro:hasPermission="information:saleReport:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
+						</div>
+						<br>
+						<div class="columns pull-left" style="display:flex; margin-top:20px;">
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+							<!--<div class="columns pull-right  nopadding">-->
+								<!--<input id="saleNum" type="text" class="form-control"-->
+									   <!--placeholder="人员工号">-->
+							<!--</div>-->
+							<div class="columns pull-right nopadding">
+								<input id="settleDateStart" type="text"
+									   placeholder="开始日期">～
+								<input id="settleDateEnd" type="text"
+									   placeholder="结束日期">
+							</div>
+						</div>
+					</div>
+					<!--<table id="exampleTable" data-mobile-responsive="true">-->
+					<!--</table>-->
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/saleReport/saleReport.js"></script>
+<script type="text/javascript">
+    laydate.render({
+        elem: '#settleDateStart',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+    laydate.render({
+        elem: '#settleDateEnd',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+</script>
+</body>
+</html>

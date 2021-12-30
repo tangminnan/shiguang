@@ -1,5 +1,6 @@
 package com.shiguang.report.dao;
 
+import com.shiguang.product.domain.*;
 import com.shiguang.report.domain.SaleReportDO;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.storeSales.domain.SalesDO;
@@ -28,4 +29,21 @@ public interface SaleReportDao {
     List<SettlementDO> findSaleNameSettleList(Map<String,Object> map);
 
     List<SalesDO> findYanguangPeople(Map<String,Object> map);
+    int findYanguangCount(Map<String,Object> map);
+    int findUseCount(Map<String,Object> map);
+    int findamountMoney(Map<String,Object> map);
+    int findprimeMoney(Map<String,Object> map);
+    List<SalesDO> findGoods(Map<String,Object> map);
+
+    ProducaDO findJj(String goodNum);
+    PartsDO findpj(String goodNum);
+    JpcpDO findjp(String goodNum);
+    JpdzDO findjpdz(String goodNum);
+    YxcpDO findyx(String goodNum);
+    YxdzDO findyxdz(String goodNum);
+    HlyDO findhly(String goodNum);
+    TyjDO findtyj(String goodNum);
+    OldlensDO findlhj(String goodNum);
+    HcDO findhc(String goodNum);
+    ShiguangDO findsg(String goodNum);
 }

@@ -245,32 +245,32 @@ public class MfrsController {
     }
 
 
-//    /**
-//     * 删除修改状态
-//     */
-//    @ResponseBody
-//    @RequestMapping("/remove")
-//    @RequiresPermissions("mfrs:mfrs:remove")
-//    public R updateStatus(Integer mfrsid) {
-//        MfrsDO mfrsDO = new MfrsDO();
-//        mfrsDO.setState(0L);
-//        mfrsDO.setMfrsid(mfrsid);
-//        if (mfrsService.updateState(mfrsDO) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
-
     /**
-     * 删除
+     * 删除修改状态
      */
-    @PostMapping( "/remove")
     @ResponseBody
+    @RequestMapping("/remove")
     @RequiresPermissions("mfrs:mfrs:remove")
-    public R remove( Integer mfrsid){
-        if(mfrsService.remove(mfrsid)>0){
+    public R updateStatus(Integer mfrsid) {
+        MfrsDO mfrsDO = new MfrsDO();
+        mfrsDO.setState(0L);
+        mfrsDO.setMfrsid(mfrsid);
+        if (mfrsService.updateState(mfrsDO) > 0) {
             return R.ok();
         }
         return R.error();
     }
+
+//    /**
+//     * 删除
+//     */
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    @RequiresPermissions("mfrs:mfrs:remove")
+//    public R remove( Integer mfrsid){
+//        if(mfrsService.remove(mfrsid)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 }

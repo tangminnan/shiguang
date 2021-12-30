@@ -61,7 +61,9 @@
                 <td>商品编号：</td>
                 <td>
                     <input id="proid" name="proid" th:value="${yxcp.proid}" class="form-control"
-                           type="text">
+                          type="text" onkeyup="choiceProid(this)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
+                           oninput="if(value.length>4)value=value.slice(0,4)">
                     <em>*</em>
                 </td>
             </tr>

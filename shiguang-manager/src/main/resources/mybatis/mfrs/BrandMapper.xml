@@ -110,7 +110,7 @@
         `type_id`,`type_name`,`registration`,`mfrsid`,`mfrsname`,`unitid`,`unitname`,`address`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,
         `productionkey`,`xsstate`,`state`,`payday`
         from c_brand
-        where brandnum = #{brandnum} order by brandid
+        where brandnum = #{brandnum} and state='1'order by brandid
     </select>
 
 

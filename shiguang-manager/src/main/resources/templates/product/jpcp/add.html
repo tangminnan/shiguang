@@ -53,7 +53,9 @@
                         </td>
                         <td>商品编号：</td>
                         <td>
-                            <input id="proid" name="proid" type="text" />
+                            <input id="proid" name="proid" type="text" onkeyup="choiceProid(this)"
+                                   onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
+                                   oninput="if(value.length>4)value=value.slice(0,4)" value="0000"/>
                             <em>*</em>
                         </td>
                     </tr>
@@ -354,20 +356,18 @@
                 // layer.alert(select2_val)
             }
             // console.log(select1_val,select2_val);
-            select1_val = ZF(select1_val)
-            select2_val = ZF(select2_val)
-            sum = select1_val.replace(".", "").replace("+", "").replace("-", "")
-                + select2_val.replace(".", "").replace("+", "").replace("-", "")
-            a1.value = a1.value.substring(0, 8) + sum.padEnd("9", "000000000") + a1.value.substring(17, 22);
+            select1_val = ZF(select1_val.indexOf("+")==0,select1_val.replace(".", "").replace("+", "").replace("-", "").padStart("4", "000000000"))
+            sum = select1_val+ select2_val.replace(".", "").replace("+", "").replace("-", "")
+            a1.value = a1.value.substring(0, 8) + sum + ".0000";
             a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");
             console.log(a1.value.substring(18, 22));
         }
-        function ZF(e) {
+        function ZF(judge,e) {
             // layer.alert(e.indexOf("+"))
-            if (e.indexOf("+") == 0) {
-                e = "Z" + e
+            if (judge) {
+                e = "CB" + e
             } else {
-                e = "F" + e
+                e = "CA" + e
             }
             return e
         }

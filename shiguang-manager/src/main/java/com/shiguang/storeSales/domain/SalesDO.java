@@ -25,6 +25,9 @@ public class SalesDO implements Serializable {
 	private String saleType;
 	private String username;
 	private String store;
+	private String createTime;
+	private String usecount;
+	private String ygcount;
 	//会员卡号
 	private String memberNumber;
 	private String memberName;
@@ -137,6 +140,30 @@ public class SalesDO implements Serializable {
 
 	public void setStore(String store) {
 		this.store = store;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getUsecount() {
+		return usecount;
+	}
+
+	public void setUsecount(String usecount) {
+		this.usecount = usecount;
+	}
+
+	public String getYgcount() {
+		return ygcount;
+	}
+
+	public void setYgcount(String ygcount) {
+		this.ygcount = ygcount;
 	}
 
 	//外来处方类型

@@ -60,20 +60,20 @@
                 </td>
                 <td>厂家型号：</td>
                 <td>
-                    <input id="factory" name="factory" th:value="${yxdz.factory}"
-                           type="text" onkeyup="liandong1(this)" oninput="if(value.length>9)value=value.slice(0,9)"
-                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
+                    <input id="factory" name="factory" th:value="${yxdz.factory}" style="background-color: #e4e4e4" readonly
+                           type="text" onkeyup="liandong1(this)"
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
+                           oninput="if(value.length>8)value=value.slice(0,8)">
                     <em>*</em>
                 </td>
             </tr>
             <tr>
                 <td>型号：</td>
                 <td>
-                    <input th:value="${yxdz.producFactory}" style="background-color: #e4e4e4"
-                           oninput="if(value.length>9)value=value.slice(0,9)"
-                           type="text" readonly>
-                    <input id="producFactory" name="producFactory" th:value="${yxdz.producFactory}"
-                           type="hidden">
+                    <input id="producFactory" name="producFactory" th:value="${yxdz.producFactory}" style="background-color: #e4e4e4" readonly
+                           onkeyup="liandong2(this)" onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" type="text"
+                           oninput="if(value.length>8)value=value.slice(0,8)" >
+
                     <em>*</em>
                 </td>
                 <td>商品编号：</td>
@@ -204,8 +204,6 @@
                     <input id="diameterYi" name="diameterYi" th:value="${yxdz.diameterYi}" style="width:30%"
                            type="text">
                 </td>
-            </tr>
-            <tr>
                 <td>接触镜类别：</td>
                 <td>
                     <select id="contactLens" name="contactLens" class="form-control" style="width:30%">
@@ -217,6 +215,9 @@
                            class="form-control"
                            type="hidden">
                 </td>
+            </tr>
+            <tr>
+
                 <td>订做周期：</td>
                 <td>
                     <input id="cycle" name="cycle" th:value="${yxdz.cycle}" class="form-control"
@@ -444,13 +445,25 @@
     function liandong1(e) {//厂家型号
         var val1 = document.getElementById("factory").value;
         var va1 = val1.replace(/[^\w\/]/ig, '').toUpperCase();
-        // layer.alert(val);
-        // var proid = document.getElementById("proid");
+
         document.getElementById("producFactory").value = va1;
-        sum = 17 - e.value.length;
-        sum1 = 22 ;
-        a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + ".0000";
-        a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
+        // alert(va1)
+        // sum = 17 - e.value.length;
+        //
+        // sum1 = 22;
+        // a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
+        // a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//复制
+    }
+
+    function liandong2(e) {//型号
+        var val2 = document.getElementById("producFactory").value;
+        var va2 = val2.replace(/[^\w\/]/ig, '').toUpperCase();
+        document.getElementById("factory").value = va2;
+        // alert(va2+"2")
+        // sum = 17 - e.value.length
+        // sum1 = 22 ;
+        // a1.value = a1_val.substring(0, sum) + e.value.toUpperCase() + a1_val.substring(17, sum1);
+        // a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
     }
 
 

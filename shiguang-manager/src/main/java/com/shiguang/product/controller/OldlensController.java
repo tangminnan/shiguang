@@ -201,30 +201,30 @@ public class OldlensController {
         oldlensService.update(oldlensDO);
         return R.ok();
     }
-//
-//    /**
-//     * 删除修改状态
-//     */
-//    @ResponseBody
-//    @RequestMapping("/remove")
-//    public R updateStatus(Long id) {
-//        OldlensDO oldlensDO = new OldlensDO();
-//        oldlensDO.setState(0L);
-//        oldlensDO.setId(id);
-//        if (oldlensService.updateState(oldlensDO) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
+
     /**
-     * 删除
+     * 删除修改状态
      */
     @ResponseBody
     @RequestMapping("/remove")
-    public R remove(Long id) {
-        if(oldlensService.remove(id)>0){
+    public R updateStatus(Long id) {
+        OldlensDO oldlensDO = new OldlensDO();
+        oldlensDO.setState(0L);
+        oldlensDO.setId(id);
+        if (oldlensService.updateState(oldlensDO) > 0) {
             return R.ok();
         }
         return R.error();
     }
+//    /**
+//     * 删除
+//     */
+//    @ResponseBody
+//    @RequestMapping("/remove")
+//    public R remove(Long id) {
+//        if(oldlensService.remove(id)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 }

@@ -1,15 +1,17 @@
 package com.shiguang.report.controller;
 
 
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.mfrs.domain.CompanyDO;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.service.CompanyService;
 import com.shiguang.mfrs.service.GoodsService;
-import com.shiguang.report.domain.SaleReportDO;
+import com.shiguang.product.domain.*;
 import com.shiguang.report.service.SaleReportService;
 
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -29,14 +34,32 @@ public class SaleYanguangController {
     //商品类别
     @Autowired
     private GoodsService goodsService;
+
     @GetMapping()
     @RequiresPermissions("information:saleYanguang:saleYanguang")
-    String saleYanguang(Model model){
+    String saleYanguang(Model model) {
         Map<String, Object> map = new HashMap<>();
         List<CompanyDO> companyList = companyService.list(map);
+//        String[] companyName = new String[companyList.size()];
+//        String companyName = "";
+//        String companyIds = "";
+//        int i = 0;
+//        for (CompanyDO gs1 : companyList) {
+//            String gsname=gs1.getName();
+//            Integer gsid=gs1.getId();
+////            companyDO.setName(gsname);
+////            companyName[i++]=String.valueOf(gsname);
+//            companyName =String.valueOf(companyName)+","+String.valueOf(gsname);
+//            companyIds =String.valueOf(companyIds)+","+String.valueOf(gsid);
+//        }
         model.addAttribute("companyList", companyList);
+//        model.addAttribute("companyName", companyName);
+//        model.addAttribute("companyIds", companyIds);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
+        //———获取当前登录用户的公司id————
+        String companyId = ShiroUtils.getUser().getCompanyId();
+        model.addAttribute("companyId", companyId);
         return "saleReport/saleYanguang";
     }
 
@@ -44,24 +67,814 @@ public class SaleYanguangController {
     @GetMapping("/findcompany/{companyId}")
 //    @RequiresPermissions("information:saleYanguang:findcompany")
     String findcompany(@PathVariable("companyId") Integer companyId, Model model) {
-        if (companyId==0){
+        if (companyId == 0) {
             model.addAttribute("companyId", "");
-        }else {
+        } else {
             model.addAttribute("companyId", companyId);
         }
         return "/baseinfomation/department/choiesDepartment";
     }
 
 
-
     @GetMapping("/findall")
-    public String reportList(Integer companyId,String settleDateStart,String settleDateEnd,
-                             String department,Integer goodsid,String mfrsname,String brandname,Model model) {
-        model.addAttribute("department",department);
-        Map<String,Object> map = new HashMap<>();
-        List<SalesDO> saleReportDOS=saleReportService.findYanguangPeople(map);
-        model.addAttribute("saleReportDOS",saleReportDOS);
+    public String reportList(Integer companyId, String settleDateStart, String settleDateEnd, String departments, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        if (companyId == 0) {
+            map.put("companyId", "");
+        } else {
+            map.put("companyId", companyId);
+        }
+        map.put("settleDateStart", settleDateStart);
+        map.put("settleDateEnd", settleDateEnd);
+
+        String[] department = departments.split(",");
+        for (int d = 0; d < department.length; d++) {
+            map.put("department", department[d]);
+            List<SalesDO> yanguangPeoples = saleReportService.findYanguangPeople(map);
+            model.addAttribute("yanguangPeoples", yanguangPeoples);
+            List<Map<String, Object>> listMoney = new ArrayList<>();
+//            if (null != yanguangPeoples && yanguangPeoples.size() > 0) {
+            for (SalesDO yanguangPeople : yanguangPeoples) {
+                String username = yanguangPeople.getUsername();
+                map.put("username", username);
+
+                int ygcount = saleReportService.findYanguangCount(map);
+                //销售金额，价钱，成交
+                int usecount = saleReportService.findUseCount(map);
+                int amountMoney = saleReportService.findamountMoney(map);
+                double primeMoney;
+                List<SalesDO> Goods = saleReportService.findGoods(map);
+                double jjMoney = 0.00;
+                double pjMoney = 0.00;
+                double jpMoney = 0.00;
+                double jpdzMoney = 0.00;
+                double yxMoney = 0.00;
+                double yxdzMoney = 0.00;
+                double hlyMoney = 0.00;
+                double tyjMoney = 0.00;
+                double lhjMoney = 0.00;
+                double hcMoney = 0.00;
+                double sgMoney = 0.00;
+
+                for (SalesDO good : Goods) {
+                    String[] storeDescribes = null;
+                    if (null != good.getStoreDescribe() && !"".equals(good.getStoreDescribe())) {
+                        storeDescribes = good.getStoreDescribe().split(",");
+                    }
+                    String[] classtypes = null;
+                    if (null != good.getClasstype() && !"".equals(good.getClasstype())) {
+                        classtypes = good.getClasstype().split(",");
+                    }
+                    String[] storeCounts = null;
+                    if (null != good.getStoreCount() && !"".equals(good.getStoreCount())) {
+                        storeCounts = good.getStoreCount().split(",");
+                    }
+                    String[] storeUnits = null;
+                    if (null != good.getStoreUnit()) {
+                        storeUnits = good.getStoreUnit().split(",");
+                    }
+                    String[] storeNames = null;
+                    if (null != good.getStoreName()) {
+                        storeNames = good.getStoreName().split(",");
+                    }
+                    if (null != storeDescribes) {
+                        for (int i = 0; i < storeDescribes.length; i++) {
+                            String goodstype = storeDescribes[i];
+                            String classtype = classtypes[i];
+                            String money = storeUnits[i];
+                            String count = storeCounts[i];
+                            String name = storeNames[i];
+                            if ("镜架".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        jjMoney = jjMoney + 0.00;
+                                    } else {
+                                        jjMoney = jjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("配件".equals(goodstype) || "镜架配件".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        pjMoney = pjMoney + 0.00;
+                                    } else {
+                                        pjMoney = pjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            }
+                            else if ("镜片".equals(goodstype)  && "1".equals(classtype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        jpMoney = jpMoney + 0.00;
+                                    } else {
+                                        jpMoney = jpMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            }else if ("镜片".equals(goodstype)  && "2".equals(classtype) ) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        jpdzMoney = jpdzMoney + 0.00;
+                                    } else {
+                                        jpdzMoney = jpdzMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("隐形".equals(goodstype)  && "1".equals(classtype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        yxMoney = yxMoney + 0.00;
+                                    } else {
+                                        yxMoney = yxMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+
+                                }
+                            } else if ("隐形".equals(goodstype)  && "2".equals(classtype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        yxdzMoney = yxdzMoney + 0.00;
+                                    } else {
+                                        yxdzMoney = yxdzMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            }
+                            else if ("护理液".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        hlyMoney = hlyMoney + 0.00;
+                                    } else {
+                                        hlyMoney = hlyMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("太阳镜".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        tyjMoney = tyjMoney + 0.00;
+                                    } else {
+                                        tyjMoney = tyjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("老花镜".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        lhjMoney = lhjMoney + 0.00;
+                                    } else {
+                                        lhjMoney = lhjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("耗材".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        hcMoney = hcMoney + 0.00;
+                                    } else {
+                                        hcMoney = hcMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("视光".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        sgMoney = sgMoney + 0.00;
+                                    } else {
+                                        sgMoney = sgMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+                primeMoney = jjMoney + pjMoney + jpMoney + jpdzMoney+ yxMoney + yxdzMoney + hlyMoney + tyjMoney + lhjMoney + hcMoney + sgMoney;
+
+                Map<String, Object> listmap = new HashMap<>();
+                listmap.put("jjMoney", new BigDecimal(jjMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("pjMoney", new BigDecimal(pjMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("jpMoney", new BigDecimal(jpMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("jpdzMoney", new BigDecimal(jpdzMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("yxMoney", new BigDecimal(yxMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("yxdzMoney", new BigDecimal(yxdzMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("hlyMoney", new BigDecimal(hlyMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("tyjMoney", new BigDecimal(tyjMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("lhjMoney", new BigDecimal(lhjMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("hcMoney", new BigDecimal(hcMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("sgMoney", new BigDecimal(sgMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("ygcount", new BigDecimal(Integer.valueOf(ygcount)));
+                listmap.put("usecount", new BigDecimal(Integer.valueOf(usecount)));
+                listmap.put("amountMoney", new BigDecimal(amountMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("primeMoney", new BigDecimal(primeMoney).setScale(2, RoundingMode.HALF_UP));
+                listMoney.add(listmap);
+//                }
+            }
+            model.addAttribute("listMoney", listMoney);
+        }
+
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String createTime = sdf.format(date);
+        model.addAttribute("createTime", createTime);
+
+        model.addAttribute("settleDateStart", settleDateStart);
+        model.addAttribute("settleDateEnd", settleDateEnd);
+        model.addAttribute("departments", departments);
         return "saleReport/saleYanguangForm";
     }
+
+@GetMapping("/Brand")
+public String Brand(String settleDateStart, String settleDateEnd,
+                      String username, String storeDescribe, String selectGoods, Model model) {
+
+    Map<String, Object> map = new HashMap<>();
+    map.put("settleDateStart", settleDateStart);
+    map.put("settleDateEnd", settleDateEnd);
+    map.put("username", username);
+    map.put("storeDescribe", storeDescribe);
+    List<SalesDO> Goods = saleReportService.findGoods(map);
+    List<Map<String, Object>> listBrand = new ArrayList<>();
+    for (SalesDO good : Goods) {
+        String[] storeDescribes = null;
+        if (null != good.getStoreDescribe() && !"".equals(good.getStoreDescribe())) {
+            storeDescribes = good.getStoreDescribe().split(",");
+        }
+        String[] storeCounts = null;
+        if (null != good.getStoreCount() && !"".equals(good.getStoreCount())) {
+            storeCounts = good.getStoreCount().split(",");
+        }
+        String[] storeUnits = null;
+        if (null != good.getStoreUnit()) {
+            storeUnits = good.getStoreUnit().split(",");
+        }
+        String[] goodsNum = null;
+        if (null != good.getGoodsNum()) {
+            goodsNum = good.getGoodsNum().split(",");
+        }
+        String[] classtypes = null;
+        if (null != good.getClasstype() && !"".equals(good.getClasstype())) {
+            classtypes = good.getClasstype().split(",");
+        }
+        if (null != storeDescribes) {
+            for (int i = 0; i < storeDescribes.length; i++) {
+                String goodstype = storeDescribes[i];
+                String classtype = classtypes[i];
+                if ("镜架".equals(selectGoods)) {
+                    if ("镜架".equals(goodstype)) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        ProducaDO producaDO = saleReportService.findJj(goodNum);
+                        String goodsBrandNum = producaDO.getBrandnum();
+                        String goodsBrandName = producaDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                } else if ("配件".equals(selectGoods)) {
+                    if ("配件".equals(goodstype) || "镜架配件".equals(goodstype)) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        PartsDO partsDO = saleReportService.findpj(goodNum);
+                        String goodsBrandNum = partsDO.getBrandnum();
+                        String goodsBrandName = partsDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                } else if ("镜片成品".equals(selectGoods)) {
+                    if ("镜片".equals(goodstype) && "1".equals(classtype) ) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        JpcpDO jpcpDO = saleReportService.findjp(goodNum);
+                        String goodsBrandNum = jpcpDO.getBrandnum();
+                        String goodsBrandName = jpcpDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                } else if ("镜片订做".equals(selectGoods)) {
+                    if ("镜片".equals(goodstype) && "2".equals(classtype) ) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        JpdzDO jpdzDO = saleReportService.findjpdz(goodNum);
+                        String goodsBrandNum = jpdzDO.getBrandnum();
+                        String goodsBrandName = jpdzDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                }else if ("隐形成品".equals(selectGoods)) {
+                    if ("隐形".equals(goodstype) && "1".equals(classtype) ) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        YxcpDO yxcpDO = saleReportService.findyx(goodNum);
+                        String goodsBrandNum = yxcpDO.getBrandnum();
+                        String goodsBrandName = yxcpDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                }else if ("隐形订做".equals(selectGoods)) {
+                    if ("隐形".equals(goodstype) && "2".equals(classtype) ) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        YxdzDO yxdzDO = saleReportService.findyxdz(goodNum);
+                        String goodsBrandNum = yxdzDO.getBrandnum();
+                        String goodsBrandName = yxdzDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                }else if ("护理液".equals(selectGoods)) {
+                    if ("护理液".equals(goodstype)) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        HlyDO hlyDO = saleReportService.findhly(goodNum);
+                        String goodsBrandNum = hlyDO.getBrandnum();
+                        String goodsBrandName = hlyDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                }else if ("太阳镜".equals(selectGoods)) {
+                    if ("太阳镜".equals(goodstype)) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        TyjDO tyjDO = saleReportService.findtyj(goodNum);
+                        String goodsBrandNum = tyjDO.getBrandnum();
+                        String goodsBrandName = tyjDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                }else if ("老花镜".equals(selectGoods)) {
+                    if ("老花镜".equals(goodstype)) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        OldlensDO oldlensDO = saleReportService.findlhj(goodNum);
+                        String goodsBrandNum = oldlensDO.getBrandnum();
+                        String goodsBrandName = oldlensDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                }else if ("耗材".equals(selectGoods)) {
+                    if ("耗材".equals(goodstype)) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        HcDO hcDO = saleReportService.findhc(goodNum);
+                        String goodsBrandNum = hcDO.getBrandnum();
+                        String goodsBrandName = hcDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                }else if ("视光".equals(selectGoods)) {
+                    if ("视光".equals(goodstype)) {
+                        String money = storeUnits[i];
+                        String count = storeCounts[i];
+                        String goodNum = goodsNum[i];
+                        ShiguangDO shiguangDO = saleReportService.findsg(goodNum);
+                        String goodsBrandNum = shiguangDO.getBrandnum();
+                        String goodsBrandName = shiguangDO.getBrandname();
+                        Map<String, Object> listmap = new HashMap<>();
+                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("count", count);
+                        listmap.put("goodsBrandNum", goodsBrandNum);
+                        listmap.put("goodsBrandName", goodsBrandName);
+                        listBrand.add(listmap);
+                    }
+                }
+
+            }
+        }
+    }
+    // 利用set不允许元素重复的性质去掉相同的元素
+    List<Map<String, Object>> listBrandMoney = new ArrayList<>();
+    Set<String> checkDuplicates = new HashSet<String>();
+    double jjMoney = 0.00;
+    int jjCount = 0;
+    String jjbrand  ;
+    String jjbrandname ;
+    for (int a = 0; a < listBrand.size(); a++) {
+
+
+        Map<String, Object> newlistmap = new HashMap<>();
+        String items =   listBrand.get(a).get("goodsBrandNum").toString();
+        String goodsBrandName = listBrand.get(a).get("goodsBrandName").toString();
+        double money =  Double.valueOf(listBrand.get(a).get("money").toString());
+        int count = Integer.valueOf(listBrand.get(a).get("count").toString());
+        money=money*count;
+        if (!checkDuplicates.add(items+goodsBrandName)) {
+            // 重复的元素
+            String cfmoney = null;
+            String cfcount = null;
+            for (int b = 0; b < listBrandMoney.size(); b++) {
+                String brandNum = listBrandMoney.get(b).get("jjbrand").toString();
+                String brandName = listBrandMoney.get(b).get("jjbrandname").toString();
+                if (String.valueOf(brandNum + brandName).equals(items + goodsBrandName)) {
+                    cfmoney=listBrandMoney.get(b).get("jjMoney").toString();
+                    cfcount=listBrandMoney.get(b).get("jjCount").toString();
+
+                }
+            }
+            jjMoney =  Double.valueOf(cfmoney) + money;
+            jjCount = Integer.valueOf(cfcount)  + count;
+            jjbrand=  listBrand.get(a).get("goodsBrandNum").toString();
+            jjbrandname =  listBrand.get(a).get("goodsBrandName").toString();
+            newlistmap.put("jjMoney", new BigDecimal(jjMoney).setScale(2, RoundingMode.HALF_UP));
+            newlistmap.put("jjCount", jjCount);
+            newlistmap.put("jjbrand", jjbrand);
+            newlistmap.put("jjbrandname", jjbrandname);
+//            listBrand.remove(a);
+//            listBrand.add(newlistmap);
+
+            for (int i = 0; i < listBrandMoney.size(); i++) {
+                String brandNum = listBrandMoney.get(i).get("jjbrand").toString();
+                String brandName = listBrandMoney.get(i).get("jjbrandname").toString();
+                if (String.valueOf(brandNum + brandName).equals(items + goodsBrandName)) {
+                    listBrandMoney.remove(i);
+                    listBrandMoney.add(newlistmap);
+                }
+            }
+        }else {
+            newlistmap.put("jjMoney", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+            newlistmap.put("jjCount", count);
+            newlistmap.put("jjbrand", items);
+            newlistmap.put("jjbrandname", goodsBrandName);
+            listBrandMoney.add(newlistmap);
+        }
+
+    }
+    model.addAttribute("listBrandMoney", listBrandMoney);
+    model.addAttribute("settleDateStart", settleDateStart);
+    model.addAttribute("settleDateEnd", settleDateEnd);
+    return "saleReport/ygGoodsBrand";
+}
+//@GetMapping("/pjBrand")
+//public String pjBrand(String settleDateStart, String settleDateEnd,
+//                      String username, String storeDescribe, Model model) {
+//
+//    Map<String, Object> map = new HashMap<>();
+//    map.put("settleDateStart", settleDateStart);
+//    map.put("settleDateEnd", settleDateEnd);
+//    map.put("username", username);
+//    map.put("storeDescribe", storeDescribe);
+//    List<SalesDO> Goods = saleReportService.findGoods(map);
+//    List<Map<String, Object>> listBrand = new ArrayList<>();
+//    for (SalesDO good : Goods) {
+//        String[] storeDescribes = null;
+//        if (null != good.getStoreDescribe() && !"".equals(good.getStoreDescribe())) {
+//            storeDescribes = good.getStoreDescribe().split(",");
+//        }
+//        String[] storeCounts = null;
+//        if (null != good.getStoreCount() && !"".equals(good.getStoreCount())) {
+//            storeCounts = good.getStoreCount().split(",");
+//        }
+//        String[] storeUnits = null;
+//        if (null != good.getStoreUnit()) {
+//            storeUnits = good.getStoreUnit().split(",");
+//        }
+//        String[] goodsNum = null;
+//        if (null != good.getGoodsNum()) {
+//            goodsNum = good.getGoodsNum().split(",");
+//        }
+//
+//        if (null != storeDescribes) {
+//            for (int i = 0; i < storeDescribes.length; i++) {
+//                String goodstype = storeDescribes[i];
+//                if ("配件".equals(goodstype) || "镜架配件".equals(goodstype)) {
+//                    String money = storeUnits[i];
+//                    String count = storeCounts[i];
+//                    String goodNum = goodsNum[i];
+//                    PartsDO partsDO = saleReportService.findpj(goodNum);
+//                    String goodsBrandNum = partsDO.getBrandnum();
+//                    String goodsBrandName = partsDO.getBrandname();
+//                    Map<String, Object> listmap = new HashMap<>();
+//                    listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+//                    listmap.put("count", count);
+//                    listmap.put("goodsBrandNum", goodsBrandNum);
+//                    listmap.put("goodsBrandName", goodsBrandName);
+//                    listBrand.add(listmap);
+//                }
+//
+//                }
+//            }
+//        }
+//    List<Map<String, Object>> listBrandMoney = new ArrayList<>();
+//    Set<String> checkDuplicates = new HashSet<String>();
+//    double jjMoney = 0.00;
+//    int jjCount = 0;
+//    String jjbrand  ;
+//    String jjbrandname ;
+//    for (int a = 0; a < listBrand.size(); a++) {//循环存在一起的集合
+//
+//
+//        Map<String, Object> newlistmap = new HashMap<>();
+//        String items =   listBrand.get(a).get("goodsBrandNum").toString();//当前循环位置的值
+//        String goodsBrandName = listBrand.get(a).get("goodsBrandName").toString();
+//        double money =  Double.valueOf(listBrand.get(a).get("money").toString());
+//        int count = Integer.valueOf(listBrand.get(a).get("count").toString());//取出每一次循环出来的值
+//        money=money*count;
+//        if (!checkDuplicates.add(items+goodsBrandName)) {//判断是否相同
+//            String cfmoney = null;
+//            String cfcount = null;
+//            for (int b = 0; b < listBrandMoney.size(); b++) {
+//                String brandNum = listBrandMoney.get(b).get("jjbrand").toString();
+//                String brandName = listBrandMoney.get(b).get("jjbrandname").toString();
+//                if (String.valueOf(brandNum + brandName).equals(items + goodsBrandName)) {
+//                    cfmoney=listBrandMoney.get(b).get("jjMoney").toString();
+//                    cfcount=listBrandMoney.get(b).get("jjCount").toString();
+//
+//                }
+//            }
+//            jjMoney =  Double.valueOf(cfmoney) + money;
+//            jjCount = Integer.valueOf(cfcount)  + count;
+//            jjbrand=  listBrand.get(a).get("goodsBrandNum").toString();
+//            jjbrandname =  listBrand.get(a).get("goodsBrandName").toString();
+//            newlistmap.put("jjMoney", new BigDecimal(jjMoney).setScale(2, RoundingMode.HALF_UP));
+//            newlistmap.put("jjCount", jjCount);
+//            newlistmap.put("jjbrand", jjbrand);
+//            newlistmap.put("jjbrandname", jjbrandname);
+//            for (int i = 0; i < listBrandMoney.size(); i++) {
+//                String brandNum = listBrandMoney.get(i).get("jjbrand").toString();
+//                String brandName = listBrandMoney.get(i).get("jjbrandname").toString();
+//                if (String.valueOf(brandNum + brandName).equals(items + goodsBrandName)) {
+//                    listBrandMoney.remove(i);
+//                    listBrandMoney.add(newlistmap);
+//                }
+//            }
+//        }else {
+//            newlistmap.put("jjMoney", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+//            newlistmap.put("jjCount", count);
+//            newlistmap.put("jjbrand", items);
+//            newlistmap.put("jjbrandname", goodsBrandName);
+//            listBrandMoney.add(newlistmap);
+//        }
+//
+//    }
+//    model.addAttribute("listBrandMoney", listBrandMoney);
+//    model.addAttribute("settleDateStart", settleDateStart);
+//    model.addAttribute("settleDateEnd", settleDateEnd);
+//    return "saleReport/ygGoodsBrand";
+//}
+//    @GetMapping("/jpBrand")
+//    public String jpBrand(String settleDateStart, String settleDateEnd,
+//                          String username, String storeDescribe, Model model) {
+//
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("settleDateStart", settleDateStart);
+//        map.put("settleDateEnd", settleDateEnd);
+//        map.put("username", username);
+//        map.put("storeDescribe", storeDescribe);
+//        List<SalesDO> Goods = saleReportService.findGoods(map);
+//        List<Map<String, Object>> listBrand = new ArrayList<>();
+//        for (SalesDO good : Goods) {
+//            String[] storeDescribes = null;
+//            if (null != good.getStoreDescribe() && !"".equals(good.getStoreDescribe())) {
+//                storeDescribes = good.getStoreDescribe().split(",");
+//            }
+//
+//            String[] classtypes = null;
+//            if (null != good.getClasstype() && !"".equals(good.getClasstype())) {
+//                classtypes = good.getClasstype().split(",");
+//            }
+//
+//            String[] storeCounts = null;
+//            if (null != good.getStoreCount() && !"".equals(good.getStoreCount())) {
+//                storeCounts = good.getStoreCount().split(",");
+//            }
+//            String[] storeUnits = null;
+//            if (null != good.getStoreUnit()) {
+//                storeUnits = good.getStoreUnit().split(",");
+//            }
+//            String[] goodsNum = null;
+//            if (null != good.getGoodsNum()) {
+//                goodsNum = good.getGoodsNum().split(",");
+//            }
+//
+//            if (null != storeDescribes) {
+//                for (int i = 0; i < storeDescribes.length; i++) {
+//                    String goodstype = storeDescribes[i];
+//                    String classtype = classtypes[i];
+//                    if ("镜片".equals(goodstype) && "1".equals(classtype) ) {
+//                        String money = storeUnits[i];
+//                        String count = storeCounts[i];
+//                        String goodNum = goodsNum[i];
+//                        JpcpDO jpcpDO = saleReportService.findjp(goodNum);
+//                        String goodsBrandNum = jpcpDO.getBrandnum();
+//                        String goodsBrandName = jpcpDO.getBrandname();
+//                        Map<String, Object> listmap = new HashMap<>();
+//                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+//                        listmap.put("count", count);
+//                        listmap.put("goodsBrandNum", goodsBrandNum);
+//                        listmap.put("goodsBrandName", goodsBrandName);
+//                        listBrand.add(listmap);
+//                    }
+//
+//                }
+//            }
+//        }
+//        List<Map<String, Object>> listBrandMoney = new ArrayList<>();
+//        Set<String> checkDuplicates = new HashSet<String>();
+//        double jjMoney = 0.00;
+//        int jjCount = 0;
+//        String jjbrand  ;
+//        String jjbrandname ;
+//        for (int a = 0; a < listBrand.size(); a++) {
+//            Map<String, Object> newlistmap = new HashMap<>();
+//            String items =   listBrand.get(a).get("goodsBrandNum").toString();
+//            String goodsBrandName = listBrand.get(a).get("goodsBrandName").toString();
+//            double money =  Double.valueOf(listBrand.get(a).get("money").toString());
+//            int count = Integer.valueOf(listBrand.get(a).get("count").toString());
+//            money=money*count;
+//            if (!checkDuplicates.add(items+goodsBrandName)) {
+//                String cfmoney = null;
+//                String cfcount = null;
+//                for (int b = 0; b < listBrandMoney.size(); b++) {
+//                    String brandNum = listBrandMoney.get(b).get("jjbrand").toString();
+//                    String brandName = listBrandMoney.get(b).get("jjbrandname").toString();
+//                    if (String.valueOf(brandNum + brandName).equals(items + goodsBrandName)) {
+//                        cfmoney=listBrandMoney.get(b).get("jjMoney").toString();
+//                        cfcount=listBrandMoney.get(b).get("jjCount").toString();
+//
+//                    }
+//                }
+//                jjMoney =  Double.valueOf(cfmoney) + money;
+//                jjCount = Integer.valueOf(cfcount)  + count;
+//                jjbrand=  listBrand.get(a).get("goodsBrandNum").toString();
+//                jjbrandname =  listBrand.get(a).get("goodsBrandName").toString();
+//                newlistmap.put("jjMoney", new BigDecimal(jjMoney).setScale(2, RoundingMode.HALF_UP));
+//                newlistmap.put("jjCount", jjCount);
+//                newlistmap.put("jjbrand", jjbrand);
+//                newlistmap.put("jjbrandname", jjbrandname);
+//                for (int i = 0; i < listBrandMoney.size(); i++) {
+//                    String brandNum = listBrandMoney.get(i).get("jjbrand").toString();
+//                    String brandName = listBrandMoney.get(i).get("jjbrandname").toString();
+//                    if (String.valueOf(brandNum + brandName).equals(items + goodsBrandName)) {
+//                        listBrandMoney.remove(i);
+//                        listBrandMoney.add(newlistmap);
+//                    }
+//                }
+//            }else {
+//                newlistmap.put("jjMoney", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+//                newlistmap.put("jjCount", count);
+//                newlistmap.put("jjbrand", items);
+//                newlistmap.put("jjbrandname", goodsBrandName);
+//                listBrandMoney.add(newlistmap);
+//            }
+//
+//        }
+//        model.addAttribute("listBrandMoney", listBrandMoney);
+//        model.addAttribute("settleDateStart", settleDateStart);
+//        model.addAttribute("settleDateEnd", settleDateEnd);
+//        return "saleReport/ygGoodsBrand";
+//    }
+//
+//    @GetMapping("/jpdzBrand")
+//    public String jpdzBrand(String settleDateStart, String settleDateEnd,
+//                          String username, String storeDescribe, Model model) {
+//
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("settleDateStart", settleDateStart);
+//        map.put("settleDateEnd", settleDateEnd);
+//        map.put("username", username);
+//        map.put("storeDescribe", storeDescribe);
+//        List<SalesDO> Goods = saleReportService.findGoods(map);
+//        List<Map<String, Object>> listBrand = new ArrayList<>();
+//        for (SalesDO good : Goods) {
+//            String[] storeDescribes = null;
+//            if (null != good.getStoreDescribe() && !"".equals(good.getStoreDescribe())) {
+//                storeDescribes = good.getStoreDescribe().split(",");
+//            }
+//
+//            String[] classtypes = null;
+//            if (null != good.getClasstype() && !"".equals(good.getClasstype())) {
+//                classtypes = good.getClasstype().split(",");
+//            }
+//
+//            String[] storeCounts = null;
+//            if (null != good.getStoreCount() && !"".equals(good.getStoreCount())) {
+//                storeCounts = good.getStoreCount().split(",");
+//            }
+//            String[] storeUnits = null;
+//            if (null != good.getStoreUnit()) {
+//                storeUnits = good.getStoreUnit().split(",");
+//            }
+//            String[] goodsNum = null;
+//            if (null != good.getGoodsNum()) {
+//                goodsNum = good.getGoodsNum().split(",");
+//            }
+//
+//            if (null != storeDescribes) {
+//                for (int i = 0; i < storeDescribes.length; i++) {
+//                    String goodstype = storeDescribes[i];
+//                    String classtype = classtypes[i];
+//                    if ("镜片".equals(goodstype) && "1".equals(classtype) ) {
+//                        String money = storeUnits[i];
+//                        String count = storeCounts[i];
+//                        String goodNum = goodsNum[i];
+//                        JpdzDO jpdzDO = saleReportService.findjpdz(goodNum);
+//                        String goodsBrandNum = jpdzDO.getBrandnum();
+//                        String goodsBrandName = jpdzDO.getBrandname();
+//                        Map<String, Object> listmap = new HashMap<>();
+//                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+//                        listmap.put("count", count);
+//                        listmap.put("goodsBrandNum", goodsBrandNum);
+//                        listmap.put("goodsBrandName", goodsBrandName);
+//                        listBrand.add(listmap);
+//                    }
+//
+//                }
+//            }
+//        }
+//        List<Map<String, Object>> listBrandMoney = new ArrayList<>();
+//        Set<String> checkDuplicates = new HashSet<String>();
+//        double jjMoney = 0.00;
+//        int jjCount = 0;
+//        String jjbrand  ;
+//        String jjbrandname ;
+//        for (int a = 0; a < listBrand.size(); a++) {
+//            Map<String, Object> newlistmap = new HashMap<>();
+//            String items =   listBrand.get(a).get("goodsBrandNum").toString();
+//            String goodsBrandName = listBrand.get(a).get("goodsBrandName").toString();
+//            double money =  Double.valueOf(listBrand.get(a).get("money").toString());
+//            int count = Integer.valueOf(listBrand.get(a).get("count").toString());
+//            money=money*count;
+//            if (!checkDuplicates.add(items+goodsBrandName)) {
+//                String cfmoney = null;
+//                String cfcount = null;
+//                for (int b = 0; b < listBrandMoney.size(); b++) {
+//                    String brandNum = listBrandMoney.get(b).get("jjbrand").toString();
+//                    String brandName = listBrandMoney.get(b).get("jjbrandname").toString();
+//                    if (String.valueOf(brandNum + brandName).equals(items + goodsBrandName)) {
+//                        cfmoney=listBrandMoney.get(b).get("jjMoney").toString();
+//                        cfcount=listBrandMoney.get(b).get("jjCount").toString();
+//
+//                    }
+//                }
+//                jjMoney =  Double.valueOf(cfmoney) + money;
+//                jjCount = Integer.valueOf(cfcount)  + count;
+//                jjbrand=  listBrand.get(a).get("goodsBrandNum").toString();
+//                jjbrandname =  listBrand.get(a).get("goodsBrandName").toString();
+//                newlistmap.put("jjMoney", new BigDecimal(jjMoney).setScale(2, RoundingMode.HALF_UP));
+//                newlistmap.put("jjCount", jjCount);
+//                newlistmap.put("jjbrand", jjbrand);
+//                newlistmap.put("jjbrandname", jjbrandname);
+//                for (int i = 0; i < listBrandMoney.size(); i++) {
+//                    String brandNum = listBrandMoney.get(i).get("jjbrand").toString();
+//                    String brandName = listBrandMoney.get(i).get("jjbrandname").toString();
+//                    if (String.valueOf(brandNum + brandName).equals(items + goodsBrandName)) {
+//                        listBrandMoney.remove(i);
+//                        listBrandMoney.add(newlistmap);
+//                    }
+//                }
+//            }else {
+//                newlistmap.put("jjMoney", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+//                newlistmap.put("jjCount", count);
+//                newlistmap.put("jjbrand", items);
+//                newlistmap.put("jjbrandname", goodsBrandName);
+//                listBrandMoney.add(newlistmap);
+//            }
+//
+//        }
+//        model.addAttribute("listBrandMoney", listBrandMoney);
+//        model.addAttribute("settleDateStart", settleDateStart);
+//        model.addAttribute("settleDateEnd", settleDateEnd);
+//        return "saleReport/ygGoodsBrand";
+//    }
 
 }

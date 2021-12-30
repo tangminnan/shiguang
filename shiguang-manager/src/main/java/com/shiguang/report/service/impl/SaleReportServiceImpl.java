@@ -1,5 +1,6 @@
 package com.shiguang.report.service.impl;
 
+import com.shiguang.product.domain.*;
 import com.shiguang.report.dao.SaleReportDao;
 import com.shiguang.report.domain.SaleReportDO;
 import com.shiguang.report.service.SaleReportService;
@@ -63,5 +64,85 @@ public class SaleReportServiceImpl implements SaleReportService {
     @Override
     public List<SalesDO> findYanguangPeople(Map<String, Object> map) {
         return saleReportDao.findYanguangPeople(map);
+    }
+
+    @Override
+    public int findYanguangCount(Map<String, Object> map) {
+        return saleReportDao.findYanguangCount(map);
+    }
+
+    @Override
+    public int findUseCount(Map<String, Object> map) {
+        return saleReportDao.findUseCount(map);
+    }
+
+    @Override
+    public int findamountMoney(Map<String, Object> map) {
+        return saleReportDao.findamountMoney(map);
+    }
+
+    @Override
+    public int findprimeMoney(Map<String, Object> map) {
+        return saleReportDao.findprimeMoney(map);
+    }
+
+    @Override
+    public List<SalesDO> findGoods(Map<String, Object> map) {
+        return saleReportDao.findGoods(map);
+    }
+
+    @Override
+    public ProducaDO findJj(String goodNum) {
+        return saleReportDao.findJj(goodNum);
+    }
+
+    @Override
+    public PartsDO findpj(String goodNum) {
+        return saleReportDao.findpj(goodNum);
+    }
+
+    @Override
+    public JpcpDO findjp(String goodNum) {
+        return saleReportDao.findjp(goodNum);
+    }
+
+    @Override
+    public JpdzDO findjpdz(String goodNum) {
+        return saleReportDao.findjpdz(goodNum);
+    }
+
+    @Override
+    public YxcpDO findyx(String goodNum) {
+        return saleReportDao.findyx(goodNum);
+    }
+
+    @Override
+    public YxdzDO findyxdz(String goodNum) {
+        return saleReportDao.findyxdz(goodNum);
+    }
+
+    @Override
+    public HlyDO findhly(String goodNum) {
+        return saleReportDao.findhly(goodNum);
+    }
+
+    @Override
+    public TyjDO findtyj(String goodNum) {
+        return saleReportDao.findtyj(goodNum);
+    }
+
+    @Override
+    public OldlensDO findlhj(String goodNum) {
+        return saleReportDao.findlhj(goodNum);
+    }
+
+    @Override
+    public HcDO findhc(String goodNum) {
+        return saleReportDao.findhc(goodNum);
+    }
+
+    @Override
+    public ShiguangDO findsg(String goodNum) {
+        return saleReportDao.findsg(goodNum);
     }
 }
