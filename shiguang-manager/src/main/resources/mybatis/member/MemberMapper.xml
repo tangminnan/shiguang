@@ -135,11 +135,73 @@
             <!--order by s.peijing_time desc-->
         <!--</otherwise>-->
     <!--</choose>-->
-    <!--<if test="offset != null and limit != null">-->
-        <!--limit #{offset}, #{limit}-->
-    <!--</if>-->
+    <if test="offset != null and limit != null">
+        limit #{offset}, #{limit}
+    </if>
 
 </select>
+
+    <select id="payCountList" resultType="com.shiguang.settlement.domain.JieKuanMoneyDO">
+        SELECT name,companyId,cardNumber,isSale,saleNumber,peijingTime,sex,departNumber,age,phone1,saleForm,state,status from(
+        SELECT
+        m.`name` as name,
+        m.company_id as companyId,
+        m.`card_number` as cardNumber,
+        s.`sale_type` AS isSale,
+        s.`sale_number` as saleNumber,
+        s.peijing_time as peijingTime,
+        m.`sex` as sex,
+        m.`depart_number` as departNumber,
+        m.`age` as age,
+        m.`phone_1` as phone1,
+        '配镜单' as saleForm,
+        m.state as state,
+        m.`status` as `status`
+        FROM
+        member m
+        JOIN store_sales s ON s.member_number = m.card_number
+        union
+        select
+        m.`name` as name,
+        m.company_id as companyId,
+        m.`card_number` as cardNumber,
+        c.is_sale AS isSale,
+        c.`sale_number` as saleNumber,
+        c.create_time as peijingTime,
+        m.`sex` as sex,
+        m.`depart_number` as departNumber,
+        m.`age` as age,
+        m.`phone_1` as phone1,
+        '检查单' as saleForm,
+        m.state as state,
+        m.`status` as `status`
+        FROM
+        member m
+        JOIN cost c ON c.member_number = m.card_number
+        ) aia
+        <where>
+            <if test="name != null and name != ''"> and name like concat('%', #{name},'%') </if>
+            <if test="companyid !=null and companyid != ''">and FIND_IN_SET(companyId,#{companyid})</if>
+            <if test="cardNumber != null and cardNumber != ''"> and cardNumber like concat('%', #{cardNumber},'%') </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="age != null and age != ''"> and age = #{age} </if>
+            <if test="phone1 != null and phone1 != ''"> and phone1 = #{phone1} </if>
+            and `status` = 0
+            and state = 1
+            <!--        <if test="isSale != null and isSale != ''"> and c.is_sale = #{isSale} </if>-->
+        </where>
+        order by peijingTime desc
+        <!--<choose>-->
+        <!--<when test="sort != null and sort.trim() != ''">-->
+        <!--order by ${sort} ${order}-->
+        <!--</when>-->
+        <!--<otherwise>-->
+        <!--group by s.`sale_number`-->
+        <!--order by s.peijing_time desc-->
+        <!--</otherwise>-->
+        <!--</choose>-->
+
+    </select>
 
     <select id="payCount" resultType="int">
         select

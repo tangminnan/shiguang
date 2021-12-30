@@ -53,6 +53,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public List<JieKuanMoneyDO> payCountList(Map<String, Object> map){
+        return memberDao.payCountList(map);
+    }
+
+    @Override
     public int count(Map<String, Object> map){
         return memberDao.count(map);
     }

@@ -136,7 +136,8 @@ public class SettlementController {
 			}
 		}
 		//int total = memberService.payCount(query);
-		PageUtils pageUtils = new PageUtils(memberDOList, memberDOList.size());
+		List<JieKuanMoneyDO> memberCountDOList = memberService.payCountList(query);
+		PageUtils pageUtils = new PageUtils(memberDOList, memberCountDOList.size());
 		return pageUtils;
 	}
 	

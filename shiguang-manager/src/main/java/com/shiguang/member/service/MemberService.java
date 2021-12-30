@@ -17,6 +17,8 @@ public interface MemberService {
 
     List<JieKuanMoneyDO> payList(Map<String,Object> map);
 
+    List<JieKuanMoneyDO> payCountList(Map<String,Object> map);
+
     int count(Map<String, Object> map);
 
     List<MemberDO> heightlist(Map<String,Object> map);
