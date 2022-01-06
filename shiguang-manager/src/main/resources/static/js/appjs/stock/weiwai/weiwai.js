@@ -102,10 +102,11 @@ function load() {
 									field : 'zhidanPeople',
 									title : '制单人'
 								},
+							// {
+							// 		field : 'danjuDay',
+							// 		title : '单据日期'
+							// 	},
 							{
-									field : 'danjuDay',
-									title : '单据日期'
-								},{
 									field : 'shTime',
 									title : '收货时间'
 								},{

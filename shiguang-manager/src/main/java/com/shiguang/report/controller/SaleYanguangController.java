@@ -285,6 +285,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
     map.put("settleDateEnd", settleDateEnd);
     map.put("username", username);
     map.put("storeDescribe", storeDescribe);
+
     List<SalesDO> Goods = saleReportService.findGoods(map);
     List<Map<String, Object>> listBrand = new ArrayList<>();
     for (SalesDO good : Goods) {
