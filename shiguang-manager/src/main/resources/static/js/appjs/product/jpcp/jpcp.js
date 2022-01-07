@@ -78,6 +78,19 @@ function load() {
                         field: 'producName',
                         title: '商品名称'
                     },
+                    {
+                        title: '商品名称',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.viewGoodName != null) {
+                                return row.viewGoodName+"-球镜:"+row.sphId+"-柱镜:"+row.cylId+"-标价:"+row.retailPrice
+
+                            } else {
+                                return ""
+                            }
+                        }
+
+                    },
                     // {
                     //     field: 'mfrsid',
                     //     title: '制造商id'

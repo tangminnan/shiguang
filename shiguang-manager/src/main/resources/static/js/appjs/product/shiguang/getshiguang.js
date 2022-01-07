@@ -52,8 +52,16 @@ function load() {
                     // 	title : '视光id'
                     // },
                     {
-                        field: 'producNum',
-                        title: '商品代码'
+                        title: '商品名称',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.viewGoodName != null) {
+                                return row.viewGoodName+"-型号:"+row.factory+"-标价:"+row.retailPrice
+
+                            } else {
+                                return ""
+                            }
+                        }
                     },
                     // {
                     //     field: 'producCode',
