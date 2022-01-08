@@ -460,6 +460,8 @@ public class StockServiceImpl implements StockService {
         return stockDao.shiguangs(stockDO);
     }
 
+
+
     /**
      * excel数据导入
      */
@@ -508,7 +510,7 @@ public class StockServiceImpl implements StockService {
                             StockDO jingjias=  stockDao.jingjias(stockDO);
                             String goodsNum=jingjias.getProducNum();
                             String goodsCode=jingjias.getProducCode();
-                            String goodsName=jingjias.getProducName();
+                            String goodsName=jingjias.getViewGoodName()+"-型号:"+jingjias.getFactory()+"-色号:"+jingjias.getProducFactorycolor()+"-标价:"+jingjias.getRetailPrice();
                             String mfrsid=jingjias.getMfrsid();
                             String brandname=jingjias.getBrandname();
                             String retailPrice=jingjias.getRetailPrice();
@@ -632,7 +634,7 @@ public class StockServiceImpl implements StockService {
                             StockDO peijians=  stockDao.peijians(stockDO);
                             String goodsNum=peijians.getProducNum();
                             String goodsCode=peijians.getProducCode();
-                            String goodsName=peijians.getProducName();
+                            String goodsName=peijians.getViewGoodName()+"-型号:"+peijians.getFactory()+"-标价:"+peijians.getRetailPrice();
                             String mfrsid=peijians.getMfrsid();
                             String brandname=peijians.getBrandname();
                             String retailPrice=peijians.getRetailPrice();
@@ -754,14 +756,16 @@ public class StockServiceImpl implements StockService {
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
                             StockDO jingpians=null;
+                            String goodsName = null;
                             if("1".equals(styles)){
                                 jingpians =  stockDao.jingpians(stockDO);
+                                goodsName =jingpians.getViewGoodName()+"-球镜:"+jingpians.getSph()+"-柱镜:"+jingpians.getCyl()+"-标价:"+jingpians.getRetailPrice();
                             }else if ("2".equals(styles)){
                                 jingpians=  stockDao.jingpiandzs(stockDO);
+                                goodsName=jingpians.getViewGoodName()+"-球镜:"+jingpians.getSphUp()+"/"+jingpians.getSphDown()+"-柱镜:"+jingpians.getCylUp()+"/"+jingpians.getCylDown()+"-标价:"+jingpians.getRetailPrice();
                             }
                             String goodsNum=jingpians.getProducNum();
                             String goodsCode=jingpians.getProducCode();
-                            String goodsName=jingpians.getProducName();
                             String mfrsid=jingpians.getMfrsid();
                             String brandname=jingpians.getBrandname();
                             String retailPrice=jingpians.getRetailPrice();
@@ -883,14 +887,17 @@ public class StockServiceImpl implements StockService {
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
                             StockDO yinxings=null;
+                            String goodsName=null;
                             if("1".equals(styles)){
                                 yinxings =  stockDao.yinxings(stockDO);
+                                  goodsName=yinxings.getViewGoodName()+"-球镜:"+yinxings.getSph()+"-柱镜:"+yinxings.getCyl()+"-标价:"+yinxings.getRetailPrice();
                             }else if ("2".equals(styles)){
                                 yinxings=  stockDao.yinxingdzs(stockDO);
+                                  goodsName=yinxings.getViewGoodName()+"-球镜:"+yinxings.getSphUp()+"/"+yinxings.getSphDown()+"-柱镜:"+yinxings.getCylUp()+"/"+yinxings.getCylDown()+"-标价:"+yinxings.getRetailPrice();
                             }
                             String goodsNum=yinxings.getProducNum();
                             String goodsCode=yinxings.getProducCode();
-                            String goodsName=yinxings.getProducName();
+
                             String mfrsid=yinxings.getMfrsid();
                             String brandname=yinxings.getBrandname();
                             String retailPrice=yinxings.getRetailPrice();
@@ -1014,7 +1021,7 @@ public class StockServiceImpl implements StockService {
                             StockDO huliyes=  stockDao.huliyes(stockDO);
                             String goodsNum=huliyes.getProducNum();
                             String goodsCode=huliyes.getProducCode();
-                            String goodsName=huliyes.getProducName();
+                            String goodsName=huliyes.getViewGoodName()+"-型号:"+huliyes.getProducFactory()+"-标价:"+huliyes.getRetailPrice();
                             String mfrsid=huliyes.getMfrsid();
                             String brandname=huliyes.getBrandname();
                             String retailPrice=huliyes.getRetailPrice();
@@ -1138,7 +1145,7 @@ public class StockServiceImpl implements StockService {
                             StockDO taiyangjings=  stockDao.taiyangjings(stockDO);
                             String goodsNum=taiyangjings.getProducNum();
                             String goodsCode=taiyangjings.getProducCode();
-                            String goodsName=taiyangjings.getProducName();
+                            String goodsName=taiyangjings.getViewGoodName()+"-型号:"+taiyangjings.getProducFactory()+"-颜色:"+taiyangjings.getProducFactorycolor()+"-标价:"+taiyangjings.getRetailPrice();
                             String mfrsid=taiyangjings.getMfrsid();
                             String brandname=taiyangjings.getBrandname();
                             String retailPrice=taiyangjings.getRetailPrice();
@@ -1262,7 +1269,7 @@ public class StockServiceImpl implements StockService {
                             StockDO laohuajings=  stockDao.laohuajings(stockDO);
                             String goodsNum=laohuajings.getProducNum();
                             String goodsCode=laohuajings.getProducCode();
-                            String goodsName=laohuajings.getProducName();
+                            String goodsName=laohuajings.getViewGoodName()+"-球镜:"+laohuajings.getSph()+"-型号:"+laohuajings.getProducFactory()+"-标价:"+laohuajings.getRetailPrice();
                             String mfrsid=laohuajings.getMfrsid();
                             String brandname=laohuajings.getBrandname();
                             String retailPrice=laohuajings.getRetailPrice();
@@ -1386,7 +1393,7 @@ public class StockServiceImpl implements StockService {
                             StockDO haocais=  stockDao.haocais(stockDO);
                             String goodsNum=haocais.getProducNum();
                             String goodsCode=haocais.getProducCode();
-                            String goodsName=haocais.getProducName();
+                            String goodsName=haocais.getViewGoodName()+"-型号:"+haocais.getProducFactory()+"-标价:"+haocais.getRetailPrice();
                             String mfrsid=haocais.getMfrsid();
                             String brandname=haocais.getBrandname();
                             String retailPrice=haocais.getRetailPrice();
@@ -1510,7 +1517,7 @@ public class StockServiceImpl implements StockService {
                             StockDO shiguangs=  stockDao.shiguangs(stockDO);
                             String goodsNum=shiguangs.getProducNum();
                             String goodsCode=shiguangs.getProducCode();
-                            String goodsName=shiguangs.getProducName();
+                            String goodsName=shiguangs.getViewGoodName()+"-型号:"+shiguangs.getProducFactory()+"-标价:"+shiguangs.getRetailPrice();
                             String mfrsid=shiguangs.getMfrsid();
                             String brandname=shiguangs.getBrandname();
                             String retailPrice=shiguangs.getRetailPrice();

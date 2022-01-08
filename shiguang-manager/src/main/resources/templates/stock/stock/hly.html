@@ -338,8 +338,16 @@
                                 title : '商品代码'
                             },
                             {
-                                field: 'producName',
-                                title: '商品名称'
+                                title: '商品名称',
+                                align: 'center',
+                                formatter: function (value, row, index) {
+                                    if (row.viewGoodName != null) {
+                                        return row.viewGoodName+"-型号:"+row.factory+"-标价:"+row.retailPrice
+
+                                    } else {
+                                        return ""
+                                    }
+                                }
                             },
                             {
                                 field: 'producFactory',
@@ -359,10 +367,10 @@
                                 field: 'retailPrice',
                                 title: '标准零售价格'
                             },
-                            {
-                                field: 'taxPrice',
-                                title: '含税成本'
-                            },
+                            // {
+                            //     field: 'taxPrice',
+                            //     title: '含税成本'
+                            // },
                                 {
                                     field: 'mainCapacity',
                                     title: '主容量'
@@ -393,7 +401,7 @@
                             //     field: 'classtype',
                             //     title: '镜片类型'
                             // },// {
-                            //     field: 'goodsxinxiid',
+                            //     field: '',
                             //     title: 'id'
                             // },
                         ]
@@ -406,84 +414,7 @@
         // $(".val").remove();
         $('#exampleTable').bootstrapTable('refresh');
     }
-    // function getHly() {
-    //     var producNum = $("#producNum").val();
-    //     var producCode = $("#producCode").val();
-    //     var producName = $("#producName").val();
-    //     var mfrsid = $("#mfrsid").val();
-    //     var brandid = $("#brandid").val();
-    //     var brandname = $("#brandname").val();
-    //     var mainCapacity = $("#mainCapacity").val();
-    //     var secondCapacity = $("#secondCapacity").val();
-    //     var producFactory = $("#producFactory").val();
-    //     var factory = $("#factory").val();
-    //     var retailPrice = $("#retailPrice").val();
-    //     var retailPrice2 = $("#retailPrice2").val();
-    //
-    //     $(".val").remove();
-    //     $.ajax({
-    //         url: '/stock/stock/selectHly',
-    //         type: 'post',
-    //         dataType: "json",
-    //         data: {
-    //             'producNum': producNum,
-    //             'producCode': producCode,
-    //             'producName': producName,
-    //             'mfrsid': mfrsid,
-    //             'brandid': brandid,
-    //             'brandname': brandname,
-    //             'mainCapacity': mainCapacity,
-    //             'secondCapacity': secondCapacity,
-    //             'producFactory': producFactory,
-    //             'factory': factory,
-    //             'retailPrice': retailPrice,
-    //             'retailPrice2': retailPrice2
-    //         },
-    //         success: function (xml) {
-    //             for (var i = 0; i < xml.length; i++) {
-    //                 if(null == xml[i].producFactory){
-    //                     xml[i].producFactory="";
-    //                 }
-    //                 if(null == xml[i].factory){
-    //                     xml[i].factory="";
-    //                 }
-    //                 if(null == xml[i].unitname){
-    //                     xml[i].unitname="";
-    //                 }
-    //                 if(null == xml[i].mainCapacity){
-    //                     xml[i].mainCapacity="";
-    //                 }
-    //                 if(null == xml[i].secondCapacity){
-    //                     xml[i].secondCapacity="";
-    //                 }
-    //                 if(null == xml[i].medicinecode){
-    //                     xml[i].medicinecode="";
-    //                 }
-    //                 if(null == xml[i].classtype){
-    //                     xml[i].classtype="";
-    //                 }
-    //                 $(".buyBtns").append("<tr class='val'> <td><input name='one' type=\"checkbox\"/></td>\n" +
-    //                     "<td name='producNum'>" + xml[i].producNum + "</td>\n" +
-    //                     "<td name='producName'>" + xml[i].producName + "</td>\n" +
-    //                     "<td name='producFactory'>" + xml[i].producFactory + "</td>\n" +
-    //                     "<td name='factory'>" + xml[i].factory + "</td>\n" +
-    //                     "<td name='unitname'>" + xml[i].unitname + "</td>\n" +
-    //                     "<td name='retailPrice'>" + xml[i].retailPrice + "</td>\n" +
-    //                     "<td name='taxPrice'>" + xml[i].taxPrice + "</td>\n" +
-    //                     "<td name='mainCapacity'>" + xml[i].mainCapacity + "</td>\n" +
-    //                     "<td name='secondCapacity'>" + xml[i].secondCapacity + "</td>\n" +
-    //                     "<td name='tradePrice'style='display: none'>" + xml[i].tradePrice + "</td>\n" +
-    //                     "<td name='transferPrice'style='display: none'>" + xml[i].transferPrice + "</td>\n" +
-    //                     "<td name='producCode'style='display: none'>" + xml[i].producCode + "</td>\n" +
-    //                     "<td name='brandname' style='display: none'>" + xml[i].brandname + "</td>" +
-    //                     "<td name='medicinecode' style='display: none'>" + xml[i].medicinecode + "</td>" +
-    //                     "<td name='classtype' style='display: none'>" + xml[i].classtype + "</td>" +
-    //                     "<td name='goodsxinxiid' style='display: none'>" + xml[i].goodsxinxiid + "</td>" +
-    //                     "</tr>");
-    //             }
-    //         }
-    //     })
-    // }
+
     function choiceBrand() {
         var goodsid = document.getElementById('goodsid').value;
         var mfrsid = document.getElementById('mfrsid').value;

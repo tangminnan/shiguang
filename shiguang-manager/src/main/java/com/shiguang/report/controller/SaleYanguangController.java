@@ -285,6 +285,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
     map.put("settleDateEnd", settleDateEnd);
     map.put("username", username);
     map.put("storeDescribe", storeDescribe);
+
     List<SalesDO> Goods = saleReportService.findGoods(map);
     List<Map<String, Object>> listBrand = new ArrayList<>();
     for (SalesDO good : Goods) {
@@ -545,6 +546,11 @@ public String Brand(String settleDateStart, String settleDateEnd,
     model.addAttribute("username", username);
     model.addAttribute("storeDescribe", storeDescribe);
     model.addAttribute("selectGoods", selectGoods);
+    //———获取当前系统时间—————
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+    Date date = new Date();
+    String createTime = sdf.format(date);
+    model.addAttribute("createTime", createTime);
     return "saleReport/ygGoodsBrand";
 }
 
@@ -882,6 +888,11 @@ public String Brand(String settleDateStart, String settleDateEnd,
 
         model.addAttribute("settleDateStart", settleDateStart);
         model.addAttribute("settleDateEnd", settleDateEnd);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String createTime = sdf.format(date);
+        model.addAttribute("createTime", createTime);
         return "saleReport/ygGoods";
     }
 }

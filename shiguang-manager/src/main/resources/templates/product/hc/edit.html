@@ -192,19 +192,19 @@
             <tr>
                 <td>税率（%）：</td>
                 <td>
-                    <input id="tax" name="tax" th:value="${hc.tax}" type="text"   autofocus>
+                    <input id="tax" name="tax" th:value="${hc.tax}" type="text"  readonly autofocus>
                     <em>*</em>
                 </td>
                 <td>含税单价：</td>
                 <td>
                     <input id="taxPrice" name="taxPrice" th:value="${hc.taxPrice}"
-                           type="text" oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus>
+                           type="text" oninput="getmoney(this,10)" onchange="shuzi(this)" readonly autofocus>
                     <!--<em>*</em>-->
                 </td>
                 <td>批发价格：</td>
                 <td colspan="3">
                     <input id="tradePrice" name="tradePrice" th:value="${hc.tradePrice}"
-                           type="text" oninput="getmoney(this,10)"  onchange="shuzi(this)" autofocus>
+                           type="text" oninput="getmoney(this,10)"  onchange="shuzi(this)" readonly autofocus>
                     <!--<em>*</em>-->
                 </td>
             </tr>
@@ -212,13 +212,13 @@
                 <td>调货成本：</td>
                 <td>
                     <input id="transferPrice" name="transferPrice" th:value="${hc.transferPrice}"
-                           type="text" oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus>
+                           type="text" oninput="getmoney(this,10)" onchange="shuzi(this)" readonly autofocus>
                     <!--<em>*</em>-->
                 </td>
                 <td>标准零售价格：</td>
                 <td colspan="3">
                     <input id="retailPrice" name="retailPrice" th:value="${hc.retailPrice}"
-                           type="text" oninput="getmoney(this,10)" onchange="shuzi(this)"  autofocus style="width: 29%">
+                           type="text" oninput="getmoney(this,10)" onchange="shuzi(this)"  readonly autofocus style="width: 29%">
                     <em>*</em>
                 </td>
             </tr>

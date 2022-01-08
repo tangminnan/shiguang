@@ -350,20 +350,20 @@
                 <td>税率（%）：</td>
                 <td>
                     <input id="tax" name="tax" th:value="${jpdz.tax}" type="text"
-                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                           oninput="value=value.replace(/[^\d]/g,'')" readonly/>
                     <em>*</em>
                 </td>
                 <td>含税单价：</td>
                 <td>
                     <input id="taxPrice" name="taxPrice" th:value="${jpdz.taxPrice}" type="text"
-                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" readonly autofocus/>
                     <!--<em>*</em>-->
                 </td>
                 <td>批发价格：</td>
                 <td colspan="3">
                     <input id="tradePrice" name="tradePrice" th:value="${jpdz.tradePrice}" type="text"
                            style="width: 60%"
-                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" readonly autofocus/>
                     <!--<em>*</em>-->
                 </td>
             </tr>
@@ -371,14 +371,14 @@
                 <td>调货成本：</td>
                 <td>
                     <input id="transferPrice" name="transferPrice" th:value="${jpdz.transferPrice}" type="text"
-                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" readonly autofocus/>
                     <!--<em>*</em>-->
                 </td>
                 <td>标准零售价格：</td>
                 <td colspan="3">
                     <input id="retailPrice" name="retailPrice" th:value="${jpdz.retailPrice}" type="text"
                            style="width: 29%"
-                           oninput="getmoney(this,10)" onchange="shuzi(this)" autofocus/>
+                           oninput="getmoney(this,10)" onchange="shuzi(this)" readonly autofocus/>
                     <em>*</em>
                 </td>
             </tr>

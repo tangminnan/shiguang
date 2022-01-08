@@ -388,11 +388,40 @@
                                 field: 'goodsCode',
                                 title: '商品条码'
                             },
+                            // {
+                            //     field: 'goodsName',
+                            //     title: '商品名称'
+                            // },
                             {
-                                field: 'goodsName',
-                                title: '商品名称'
-                            },
+                                title: '商品名称',
+                                align: 'center',
+                                formatter: function (value, row, index) {
+                                    if (row.goodsid ==1) {
+                                        return row.brandname+"-型号:"+row.factory+"-色号:"+row.jjColor+"-标价:"+row.retailPrice
+                                    }else  if (row.goodsid ==2) {
+                                        return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
+                                    }else  if (row.goodsid ==3 && row.classtype==1) {
+                                        return row.brandname+"-球镜:"+row.jpcpSph+"-柱镜:"+row.jpcpCyl+"-标价:"+row.retailPrice
+                                    }else  if (row.goodsid ==3 && row.classtype==2) {
+                                        return row.brandname+"-球镜:"+row.jpcpSphUp+"/"+row.jpcpSphDown+"-柱镜:"+row.jpcpCylUp+"/"+row.jpcpCylDown+"-标价:"+row.retailPrice
+                                    }else  if (row.goodsid ==4 && row.classtype==1) {
+                                        return row.brandname+"-球镜:"+row.yxcpSph+"-柱镜:"+row.yxcpCyl+"-标价:"+row.retailPrice
+                                    }else  if (row.goodsid ==4 && row.classtype==2) {
+                                        return row.brandname+"-球镜:"+row.yxdzSphUp+"/"+row.yxdzSphDown+"-柱镜:"+row.yxdzCylUp+"/"+row.yxdzCylDown+"-标价:"+row.retailPrice
+                                    }else  if (row.goodsid ==5) {
+                                        return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
+                                    }else  if (row.goodsid ==6) {
+                                        return row.brandname+"-型号:"+row.factory+"-颜色:"+row.tyjColor+"-标价:"+row.retailPrice
+                                    }else  if (row.goodsid ==7) {
+                                        return row.brandname+"-球镜:"+row.lhjSph+"-型号:"+row.factory+"-标价:"+row.retailPrice
+                                    }else  if (row.goodsid ==8) {
+                                        return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
+                                    }else  if (row.goodsid ==9) {
+                                        return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
+                                    }
+                                }
 
+                            },
                             {
                                 field: 'goodsCount',
                                 title: '数量'

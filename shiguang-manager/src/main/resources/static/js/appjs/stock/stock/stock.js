@@ -124,10 +124,11 @@ function showCol() {
         }else {
             var producNum =  row['producNum'];
         }
-        if(null == row['producName']){
-            var producName  ="";
+
+        if(null == row['viewGoodName']){
+            var viewGoodName  ="";
         }else {
-            var producName =  row['producName'] ;
+            var viewGoodName =  row['viewGoodName'] ;
         }
         if(null == row['producFactory']){
             var producFactory  ="";
@@ -181,7 +182,7 @@ function showCol() {
             var brandname =  row['brandname'] ;
         }
         obj.producNum = producNum;
-        obj.producName = producName;
+        obj.viewGoodName = viewGoodName;
         obj.goodsCount = 1;
         obj.producFactory = producFactory;
         obj.unitname = unitname;
@@ -193,12 +194,7 @@ function showCol() {
         obj.size = size;
         obj.producCode = producCode +"00000000";
         obj.brandname = brandname;
-        // //———获取当前系统时间—————
-        // var timeNow = new Date();
-        // var year = timeNow.getFullYear();
-        // var month = timeNow.getMonth() + 1 > 10 ? timeNow.getMonth() + 1 : '0' + (timeNow.getMonth() + 1);
-        // var date = timeNow.getDate() > 10 ? timeNow.getDate() : "0" + timeNow.getDate();
-        // obj.createTime = year + "-" + month + "-" + date;
+
         var createTime=new Date( +new Date() + 8 * 3600 * 1000 ).toJSON().substr(0,19).replace("T"," ");
         obj.createTime=createTime;
 
@@ -393,13 +389,13 @@ function showCol() {
         obj.secondCapacity = secondCapacity;
         //太阳镜
         //老花镜
-        if(null == row['degrees']){
-            var degrees  ="";
+        if(null == row['oldId']){
+            var oldId  ="";
         }else {
-            var degrees =  row['degrees'] ;
+            var oldId =  row['oldId'] ;
         }
 
-        obj.degrees = degrees;
+        obj.oldId = oldId;
         if(null == row['classtype']){
             var classtype  ="";
         }else {

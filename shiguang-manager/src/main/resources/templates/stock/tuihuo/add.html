@@ -101,7 +101,7 @@
 			<td>可用库存</td>
 			<td>数量</td>
 			<td>商品条码</td>
-			<td style="display: none">goodsxinxiid</td>
+			<!--<td style="display: none">goodsxinxiid</td>-->
 			<td style="display: none">标准零售价</td>
 			<td  >操作</td>
 		</tr>
@@ -181,7 +181,7 @@
 
                                 barHtml += "<td name='goodsCode'>" + rows[i].goodsCode + "</td>";
                                 barHtml += "<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>";
-                                barHtml += "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>";
+                                // barHtml += "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>";
                                 barHtml += "<td style='display: none' name='retailPrice'>" + rows[i].retailPrice + "</td>";
                                 barHtml += "<input name='retailPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
                                 barHtml += "<td><em  onclick='delertTr(this)'></em></td>";

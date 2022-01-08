@@ -70,8 +70,16 @@ function load() {
                     //     title: '商品条码'
                     // },
                     {
-                        field: 'producName',
-                        title: '商品名称'
+                        title: '商品名称',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (row.viewGoodName != null) {
+                                return row.viewGoodName+"-球镜:"+row.sphUp+"/"+row.sphDown+"-柱镜:"+row.cylUp+"/"+row.cylDown+"-标价:"+row.retailPrice
+
+                            } else {
+                                return ""
+                            }
+                        }
                     },
                     // {
                     //     field: 'mfrsid',
