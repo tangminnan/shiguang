@@ -268,7 +268,7 @@ public class StockController {
         String[] username2=orderDO.getUsername().split(",");
         String[] classtype2=orderDO.getClasstype().split(",");
         String[] factory2=orderDO.getFactory().split(",");
-        String[] goodsxinxiid2=orderDO.getGoodsxinxiid().toString().split(",");
+//        String[] goodsxinxiid2=orderDO.getGoodsxinxiid().toString().split(",");
         String[] createTime2=stock.getCreateTime().toString().split(",");
         for (int i = 0; i < numOrder2.length; i++) {
             OrderDO orderDO1 = new OrderDO();
@@ -384,12 +384,12 @@ public class StockController {
             }catch (ArrayIndexOutOfBoundsException e){
                 orderDO1.setUsername("");
             }
-            try {
-                String goodsxinxiid =goodsxinxiid2 [i];
-                orderDO1.setGoodsxinxiid(goodsxinxiid);
-            }catch (ArrayIndexOutOfBoundsException e){
-                orderDO1.setGoodsxinxiid("");
-            }
+//            try {
+//                String goodsxinxiid =goodsxinxiid2 [i];
+//                orderDO1.setGoodsxinxiid(goodsxinxiid);
+//            }catch (ArrayIndexOutOfBoundsException e){
+//                orderDO1.setGoodsxinxiid("");
+//            }
 
             if(null != orderDO.getClasstype()){
                 try {

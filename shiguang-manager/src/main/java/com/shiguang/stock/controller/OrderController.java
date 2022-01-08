@@ -279,12 +279,12 @@ public class OrderController {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         stockDO.setUsername("");
                     }
-                    try {
-                        String goodsxinxiid = orderkc.getGoodsxinxiid();
-                        stockDO.setGoodsxinxiid(goodsxinxiid);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        stockDO.setGoodsxinxiid("");
-                    }
+//                    try {
+//                        String goodsxinxiid = orderkc.getGoodsxinxiid();
+//                        stockDO.setGoodsxinxiid(goodsxinxiid);
+//                    } catch (ArrayIndexOutOfBoundsException e) {
+//                        stockDO.setGoodsxinxiid("");
+//                    }
 
 
                     if (null != orderkc.getClasstype()) {

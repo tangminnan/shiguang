@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>零售价调价品种</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+	<div class="m40 tabS PHGL">
+		<h3>检查条件</h3>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr>
+				<td>单据编号：</td>
+				<td>
+					<input id="number" name="number" th:value="${number}" type="text"
+						   style="background-color: #e4e4e4" readonly />
+				</td>
+				<td>单据日期：</td>
+				<td><input id="day" name="day" th:value="${createTime}" type="text"
+						   style="background-color: #e4e4e4" readonly /></td>
+				<td>单据人：</td>
+				<td><input id="people" name="people" th:value="${people}" type="text"
+						   style="background-color: #e4e4e4" readonly /></td>
+			</tr>
+			<tr>
+				<td>备注：</td>
+				<td colspan="5"><textarea id="beizhu" name="beizhu" rows="3"></textarea></td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="HH_btns">
+			<div class="Xbtn">
+				<input type="button" value="品种选择商品" onclick="getBrand()" />
+			</div>
+			<div class="Cbtn buyBtns">
+				<input type="button" class="H_bc" value="保存并审核" onclick="save()" />
+			</div>
+		</div>
+	</div>
+	<!--商品信息-->
+	<div class="m40 tabS SPmsg">
+		<h3>商品信息</h3>
+		<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+			<tbody>
+			<tr id="tab1">
+				<td style="width: 100%;" class="Choose">
+					<table >
+						<tr class="thead">
+							<td>品种代码</td>
+							<td>品种名称</td>
+							<td>所属制造商</td>
+							<td>原销售价格</td>
+							<td>调整价格</td>
+							<td>操作</td>
+						</tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji1"></tr>
+					</table>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</form>
+<div th:include="include::footer"></div>
+</body>
+<script type="text/javascript">
+    function getBrand() {
+        var toIndex = layer.open({
+            type: 2,
+            title: '品种添加',
+            maxmin: true,
+            shadeClose: false, // 点击遮罩关闭层
+            area: ['800px', '520px'],
+            content: "/retailprice/retailprice/getbrand/",// iframe的url
+            cancel: function (index, layero) {
+            }
+        });
+        layer.full(toIndex);
+    }
+</script>
+</html>

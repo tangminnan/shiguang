@@ -32,6 +32,7 @@ public class ProducaDO implements Serializable {
     //商品名称
     private String producName;
     private String viewGoodName;
+    private String goodsid;
     //制造商id
     private String  mfrsid;
     //制造商
@@ -187,6 +188,14 @@ public class ProducaDO implements Serializable {
 
     public void setViewGoodName(String viewGoodName) {
         this.viewGoodName = viewGoodName;
+    }
+
+    public String getGoodsid() {
+        return goodsid;
+    }
+
+    public void setGoodsid(String goodsid) {
+        this.goodsid = goodsid;
     }
 
     /**

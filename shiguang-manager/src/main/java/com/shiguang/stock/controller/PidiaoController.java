@@ -281,7 +281,7 @@ public class PidiaoController {
         String[] brandname1 = pidiao.getBrandname().split(",");
         String[] unit1 = pidiao.getUnit().split(",");
         String[] money1 = pidiao.getMoney().split(",");
-        String[] goodsxinxiid1 = pidiao.getGoodsxinxiid().split(",");
+//        String[] goodsxinxiid1 = pidiao.getGoodsxinxiid().split(",");
         String[] stockorder1 = pidiao.getStockorder().split(",");
 
         for (int i = 0; i < name.length; i++) {
@@ -372,12 +372,12 @@ public class PidiaoController {
             pidiaoDO.setMoney(money);
 
 
-            try {
-                String goodsxinxiid = goodsxinxiid1[i];
-                pidiaoDO.setGoodsxinxiid(goodsxinxiid);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                pidiaoDO.setGoodsxinxiid("");
-            }
+//            try {
+//                String goodsxinxiid = goodsxinxiid1[i];
+//                pidiaoDO.setGoodsxinxiid(goodsxinxiid);
+//            } catch (ArrayIndexOutOfBoundsException e) {
+//                pidiaoDO.setGoodsxinxiid("");
+//            }
             try {
                 String stockorder = stockorder1[i];
                 pidiaoDO.setStockorder(stockorder);

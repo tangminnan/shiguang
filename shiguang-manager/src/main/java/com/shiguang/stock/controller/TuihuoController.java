@@ -152,7 +152,7 @@ public class TuihuoController {
 		String[] goodsCount1 = stockDO.getGoodsCount().split(",");
 		String[] count1 = stockDO.getCount().split(",");
 		String[] goodsCode1 = stockDO.getGoodsCode().split(",");
-		String[] goodsxinxiid1 = stockDO.getGoodsxinxiid().split(",");
+//		String[] goodsxinxiid1 = stockDO.getGoodsxinxiid().split(",");
 		String[] style1 = stockDO.getStyle().split(",");
 		String[] retailProce1 = stockDO.getRetailPrice().split(",");
 
