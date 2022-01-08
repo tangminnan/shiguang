@@ -224,7 +224,7 @@
             <if test="username != null">`username` = #{username}, </if>
             <if test="returnzt != null">`returnzt` = #{returnzt} </if>
         </set>
-        where id = #{id}
+        where goods_num = #{goodsNum}
     </update>
     <!--//修改库存数量-->
     <update id="updateGoodsCount" parameterType="com.shiguang.stock.domain.StockDO">

@@ -12,6 +12,8 @@ import com.shiguang.product.domain.TechnologyDO;
 import com.shiguang.product.service.ProducaService;
 import com.shiguang.product.service.StyleService;
 import com.shiguang.product.service.TechnologyService;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
