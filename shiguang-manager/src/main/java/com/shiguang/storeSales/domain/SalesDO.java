@@ -97,6 +97,8 @@ public class SalesDO implements Serializable {
 	private String storeCount;
 	//单位
 	private String unit;
+	//品牌名称
+	private String brandName;
 	//销售备注
 	private String saleremark;
 	private String taocanName;
@@ -164,6 +166,14 @@ public class SalesDO implements Serializable {
 
 	public void setYgcount(String ygcount) {
 		this.ygcount = ygcount;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
 	}
 
 	//外来处方类型

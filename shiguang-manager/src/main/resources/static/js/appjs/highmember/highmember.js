@@ -36,7 +36,8 @@ function load() {
                         phone1: $("#phone1").val(),
                         name: $('#name').val(),
                         cardNumber: $('#cardNumber').val(),
-                        age: $("#age").val(),
+                        ageStart: $("#ageStart").val(),
+                        ageEnd: $("#ageEnd").val(),
                         departNumber: $("#departNumber").val(),
                         provinceName: $("#provinceName").val(),
                         cityName: $("#cityName").val(),
@@ -45,7 +46,8 @@ function load() {
                         source: $("#source").val(),
                         cardType: $("#cardType").val(),
                         peijingTimeStart: $("#peijingTimeStart").val(),
-                        peijingTimeEnd: $("#peijingTimeEnd").val()
+                        peijingTimeEnd: $("#peijingTimeEnd").val(),
+                        brandName: $("#brandName").val()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

@@ -42,10 +42,16 @@
 							<option value="1">女</option>
 						</select>
 						</div>
-						<div class="columns pull-right col-md-2 nopadding">
-								<input id="age" type="text" class="form-control"
-									   placeholder="会员年龄">
+						<!--<div class="columns pull-right col-md-2 nopadding">-->
+								<!--<input id="age" type="text" class="form-control"-->
+									   <!--placeholder="会员年龄">-->
 
+						<!--</div>-->
+						<div class="columns pull-right nopadding">
+							<input id="ageStart" type="text"
+								   placeholder="会员年龄">～
+							<input id="ageEnd" type="text"
+								   placeholder="会员年龄">
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
 							<input id="phone1" type="text" class="form-control"
@@ -108,9 +114,14 @@
 					</div>
 					<div class="columns pull-right nopadding">
 						<input id="peijingTimeStart" type="text"
-							   placeholder="配镜时间">
+							   placeholder="配镜时间">～
 						<input id="peijingTimeEnd" type="text"
 							   placeholder="配镜时间">
+					</div>
+					<div class="columns pull-right nopadding">
+						<input id="brandName" type="text" class="form-control"
+							   placeholder="品牌">
+						<button type="button" class="btn  btn-danger" onclick="getBrandName()">按品牌查询</button>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
 					</table>
@@ -176,6 +187,24 @@
         format: 'yyyy-MM-dd',
         type: 'date'
     });
+    
+    function getBrandName () {
+        var toIndex = layer.open({
+            type : 2,
+            title : '镜架',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/highmember/brand/",// iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                //alert(JSON.stringify(rows));
+                $("#brandName").val(rows[0].brandname);
+            }
+        });
+        layer.full(toIndex)
+    }
+    
 </script>
 </body>
 </html>
