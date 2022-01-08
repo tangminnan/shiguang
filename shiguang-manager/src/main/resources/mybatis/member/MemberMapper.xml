@@ -329,7 +329,7 @@
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
             <if test="peijingTimeStart != null and peijingTimeStart != ''"> and date_format(ss.peijing_time ,'%Y-%m-%d') &lt;= #{peijingTimeStart} </if>
             <if test="peijingTimeEnd != null and peijingTimeEnd != ''"> and date_format(ss.peijing_time ,'%Y-%m-%d') >= #{peijingTimeEnd} </if>
-            <if test="brandName != null and brandName != ''"> FIND_IN_SET(#{brandName},ss.brand_name) </if>
+            <if test="brandName != null and brandName != ''">and FIND_IN_SET(#{brandName},ss.brand_name) </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -392,7 +392,7 @@
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
             <if test="peijingTimeStart != null and peijingTimeStart != ''"> and date_format(ss.peijing_time ,'%Y-%m-%d') &lt;= #{peijingTimeStart} </if>
             <if test="peijingTimeEnd != null and peijingTimeEnd != ''"> and date_format(ss.peijing_time ,'%Y-%m-%d') >= #{peijingTimeEnd} </if>
-            <if test="brandName != null and brandName != ''"> FIND_IN_SET(#{brandName},ss.brand_name) </if>
+            <if test="brandName != null and brandName != ''">and FIND_IN_SET(#{brandName},ss.brand_name) </if>
         </where>
     </select>
 

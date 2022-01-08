@@ -2,9 +2,9 @@
 var prefix = "/information/store"
 $(function() {
 	load();
-    $('#exampleTable').bootstrapTable('hideColumn', 'goodsNum');
-    $('#exampleTable').bootstrapTable('hideColumn', 'goodsName');
-    $('#exampleTable').bootstrapTable('hideColumn', 'retailPrice');
+    $('#exampleTable').bootstrapTable('showColumn', 'goodsNum');
+    $('#exampleTable').bootstrapTable('showColumn', 'goodsName');
+    $('#exampleTable').bootstrapTable('showColumn', 'retailPrice');
     $('#exampleTable').bootstrapTable('hideColumn', 'cylqj');
     $('#exampleTable').bootstrapTable('hideColumn', 'sphqj');
     $('#exampleTable').bootstrapTable('hideColumn', 'lightbelowqj');
@@ -14,7 +14,7 @@ $(function() {
     $('#exampleTable').bootstrapTable('hideColumn', 'typeName');
     $('#exampleTable').bootstrapTable('hideColumn', 'cycle');
     // $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
-    $('#exampleTable').bootstrapTable('showColumn', 'positionName');
+    $('#exampleTable').bootstrapTable('hideColumn', 'positionName');
     $('#exampleTable').bootstrapTable('showColumn', 'goodsCount');
 });
 function load() {
@@ -191,9 +191,9 @@ function reLoad() {
         $('#exampleTable').bootstrapTable('showColumn', 'goodsCount');
     } else {
         // $('#exampleTable').bootstrapTable('hideColumn', 'checkid');
-        $('#exampleTable').bootstrapTable('hideColumn', 'goodsNum');
-        $('#exampleTable').bootstrapTable('hideColumn', 'goodsName');
-        $('#exampleTable').bootstrapTable('hideColumn', 'retailPrice');
+        $('#exampleTable').bootstrapTable('showColumn', 'goodsNum');
+        $('#exampleTable').bootstrapTable('showColumn', 'goodsName');
+        $('#exampleTable').bootstrapTable('showColumn', 'retailPrice');
         $('#exampleTable').bootstrapTable('hideColumn', 'cylqj');
         $('#exampleTable').bootstrapTable('hideColumn', 'sphqj');
         $('#exampleTable').bootstrapTable('hideColumn', 'lightbelowqj');
@@ -203,7 +203,7 @@ function reLoad() {
         $('#exampleTable').bootstrapTable('hideColumn', 'typeName');
         $('#exampleTable').bootstrapTable('hideColumn', 'cycle');
         $('#exampleTable').bootstrapTable('hideColumn', 'positionName');
-        $('#exampleTable').bootstrapTable('hideColumn', 'goodsCount');
+        $('#exampleTable').bootstrapTable('showColumn', 'goodsCount');
 	}
 }
 document.onkeydown = function(e){

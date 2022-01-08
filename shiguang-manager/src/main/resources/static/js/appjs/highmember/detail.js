@@ -1,5 +1,5 @@
 
-var prefix = "/information/highmember"
+var prefix = "/information/member"
 $(function() {
 	load();
 });
@@ -156,18 +156,22 @@ function load() {
                     {
                         field : 'settleTime',
                         title : '收款日期'
+                    },
+                    {
+                        field : 'logStatus',
+                        title : '在途状态'
+                    },
+                    {
+                        title: '操作',
+                        field: 'saleNumber',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectSale(\''
+                                + value
+                                + '\')">详情</span> ';
+                            return f;
+                        }
                     }
-                    // {
-                    //     title: '操作',
-                    //     field: 'ptometryNumber',
-                    //     align: 'center',
-                    //     formatter: function (value, row, index) {
-                    //         var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectShuju(\''
-                    //             + value
-                    //             + '\')">详情</span> ';
-                    //         return f;
-                    //     }
-                    // }
                 ]
             });
 }
@@ -190,6 +194,21 @@ function selectShuju(ptometryNumber) {
         shadeClose: false, // 点击遮罩关闭层
         area: ['800px', '520px'],
         content: '/jiancha/result/chufangall/' + ptometryNumber // iframe的url
+
+    });
+    layer.full(toIndex);
+}
+
+//销售详情
+function selectSale(saleNumber) {
+    // alert("详情")
+    var toIndex = layer.open({
+        type: 2,
+        title: '详情',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/editSale/' + saleNumber // iframe的url
 
     });
     layer.full(toIndex);

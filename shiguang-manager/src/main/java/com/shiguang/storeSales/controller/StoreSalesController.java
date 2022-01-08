@@ -1270,23 +1270,23 @@ public class StoreSalesController {
         if (null != params.get("dzType")) {
             String dzType = params.get("dzType").toString();
             if ("0".equals(params.get("jingpianType").toString())) {
-                if ("0".equals(params.get("rightYuanYongQJ"))){
+                if ("0".equals(params.get("rightYuanYongQJ").toString().trim())){
                     maps.put("rightYuanYongQJ", "0.00");
                 } else {
                     maps.put("rightYuanYongQJ", params.get("rightYuanYongQJ"));
                 }
-                if ("0".equals(params.get("rightYuanYongZJ"))){
+                if ("0".equals(params.get("rightYuanYongZJ").toString().trim())){
                     maps.put("rightYuanYongZJ", "0.00");
                 } else {
                     maps.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
                 }
             } else if ("1".equals(params.get("jingpianType").toString())) {
-                if ("0".equals(params.get("leftYuanYongQJ"))){
+                if ("0".equals(params.get("leftYuanYongQJ").toString().trim())){
                     maps.put("leftYuanYongQJ", "0.00");
                 }else {
                     maps.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
                 }
-                if ("0".equals(params.get("leftYuanYongZJ"))){
+                if ("0".equals(params.get("leftYuanYongZJ").toString().trim())){
                     maps.put("leftYuanYongZJ", "0.00");
                 } else {
                     maps.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
@@ -1859,11 +1859,28 @@ public class StoreSalesController {
         }
         if (null != params.get("yxType")) {
             if ("0".equals(params.get("jingpianType").toString())) {
-                maps.put("rightYuanYongQJ",params.get("rightYuanYongQJ"));
-                maps.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
+                if("0".equals(params.get("rightYuanYongQJ").toString().trim())){
+                    maps.put("rightYuanYongQJ","0.00");
+                } else {
+                    maps.put("rightYuanYongQJ",params.get("rightYuanYongQJ"));
+                }
+               if ("0".equals(params.get("rightYuanYongZJ").toString().trim())){
+                   maps.put("rightYuanYongZJ", "0.00");
+               } else {
+                   maps.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
+               }
             } else if ("1".equals(params.get("jingpianType").toString())) {
-                maps.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
-                maps.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
+                if ("0".equals(params.get("leftYuanYongQJ").toString().trim())){
+                    maps.put("leftYuanYongQJ", "0.00");
+                } else {
+                    maps.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
+                }
+                if ("0".equals(params.get("leftYuanYongZJ").toString().trim())){
+                    maps.put("leftYuanYongZJ", "0.00");
+                } else {
+                    maps.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
+                }
+
             }
             if ("0".equals(params.get("yxType"))) {
                 String departNumber = ShiroUtils.getUser().getStoreNum();
@@ -1876,9 +1893,9 @@ public class StoreSalesController {
                         positionId = positionDO.getPositionId();
                     }
                 }
-                query.put("positionId",positionId);
-                query.put("goodsType",goodsId);
-                List<StockDO> yxcpDOList = stockService.listYxcp(query);
+                maps.put("positionId",positionId);
+                maps.put("goodsType",goodsId);
+                List<StockDO> yxcpDOList = stockService.listYxcp(maps);
                 if (null != yxcpDOList && yxcpDOList.size() > 0){
                     for (StockDO stockDO : yxcpDOList){
                         if ("0".equals(params.get("jingpianType").toString())){
@@ -1888,7 +1905,7 @@ public class StoreSalesController {
                         }
                     }
                 }
-                int total = stockService.countYxcp(query);
+                int total = stockService.countYxcp(maps);
                 pageUtils = new PageUtils(yxcpDOList, total);
             } else if ("1".equals(params.get("yxType"))) {
                 String departNumber = ShiroUtils.getUser().getStoreNum();
