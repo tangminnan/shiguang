@@ -375,8 +375,16 @@
                                 title : '商品代码'
                             },
                             {
-                                field: 'producName',
-                                title: '商品名称'
+                                title: '商品名称',
+                                align: 'center',
+                                formatter: function (value, row, index) {
+                                    if (row.viewGoodName != null) {
+                                        return row.viewGoodName+"-球镜:"+row.sph+"-柱镜:"+row.cyl+"-标价:"+row.retailPrice
+
+                                    } else {
+                                        return ""
+                                    }
+                                }
                             },
                                 {
                                     field: 'unitname',
@@ -397,10 +405,10 @@
                                 field: 'retailPrice',
                                 title: '标准零售价格'
                             },
-                            {
-                                field: 'taxPrice',
-                                title: '含税成本'
-                            },
+                            // {
+                            //     field: 'taxPrice',
+                            //     title: '含税成本'
+                            // },
                             {
                                 field: 'sph',
                                 title: '球镜'

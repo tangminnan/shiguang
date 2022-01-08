@@ -75,10 +75,6 @@ function load() {
                     //     title: '商品条码'
                     // },
                     {
-                        field: 'producName',
-                        title: '商品名称'
-                    },
-                    {
                         title: '商品名称',
                         align: 'center',
                         formatter: function (value, row, index) {

@@ -326,8 +326,16 @@
                                 title : '商品代码'
                             },
                             {
-                                field: 'producName',
-                                title: '商品名称'
+                                title: '商品名称',
+                                align: 'center',
+                                formatter: function (value, row, index) {
+                                    if (row.viewGoodName != null) {
+                                        return row.viewGoodName+"-型号:"+row.producFactory+"-标价:"+row.retailPrice
+
+                                    } else {
+                                        return ""
+                                    }
+                                }
                             },
                             {
                                 field: 'producFactory',
@@ -343,10 +351,10 @@
                                 field: 'retailPrice',
                                 title: '标准零售价格'
                             },
-                            {
-                                field: 'taxPrice',
-                                title: '含税成本'
-                            },
+                            // {
+                            //     field: 'taxPrice',
+                            //     title: '含税成本'
+                            // },
                             // {
                             //     field: 'tradePrice',
                             //     title: '批发价格'

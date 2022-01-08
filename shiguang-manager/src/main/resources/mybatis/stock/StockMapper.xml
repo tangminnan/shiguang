@@ -1130,9 +1130,9 @@
 </select>
     <!--镜架【商】【品】【查】【询】-->
     <select id="selectJingjia" resultType="com.shiguang.product.domain.ProducaDO">
-        select  p.id as goodsxinxiid,p.produc_num,p.produc_name,b.brandname,p.produc_factory,u.unitname,
+        select  p.produc_num, b.brandname,p.produc_factory,u.unitname,
         p.factory,p.retail_price,p.tax_price,p.produc_factorycolor,m.materialname,p.size,p.produc_code,
-        p.trade_price,p.transfer_price,mfrs.medicinecode,p.classtype
+        p.trade_price,p.transfer_price,mfrs.medicinecode,p.classtype,p.view_good_name
         from aa_produca p left join c_unit u on p.unitid=u.unitid
         left join c_material m on p.materialid=m.materialid
         left join a_technology t on p.technology_id=t.technology_id
@@ -1219,9 +1219,9 @@
     </select>
     <!--配件【商】【品】【查】【询】-->
     <select id="selectPeijian" resultType="com.shiguang.product.domain.PartsDO">
-        select p.id as goodsxinxiid,p.produc_num,p.produc_name,b.brandname,p.produc_factory,u.unitname,
+        select  p.produc_num, b.brandname,p.produc_factory,u.unitname,
         p.factory,p.retail_price,p.tax_price,p.parts_style,p.produc_code,
-        p.trade_price,p.transfer_price,mfrs.medicinecode,p.classtype
+        p.trade_price,p.transfer_price,mfrs.medicinecode,p.classtype,p.view_good_name
         from aa_parts p left join c_unit u on p.unitid=u.unitid
         left join c_brand b on p.brandnum=b.brandnum AND p.`mfrsid`=b.`mfrsid`
         left join c_mfrs mfrs on p.mfrsid=mfrs.mfrsnum
@@ -1291,9 +1291,9 @@
     <!--镜片定做【商】【品】【查】【询】-->
     <select id="selectJpdz" resultType="com.shiguang.product.domain.JpdzDO">
         SELECT
-        j.id AS goodsxinxiid,
+
         j.produc_num,
-        j.produc_name,
+
         u.unitname,
         b.brandname,
         j.factory,
@@ -1315,7 +1315,8 @@
         j.transfer_price,
         mfrs.medicinecode,
         j.classtype,
-        j.produc_factory
+        j.produc_factory,
+        j.view_good_name
         FROM
         aa_jpdz j
         LEFT JOIN c_unit u ON j.unitid = u.unitid
@@ -1407,17 +1408,15 @@
     <!--镜片成品【商】【品】【查】【询】-->
     <select id="selectJpcp" resultType="com.shiguang.product.domain.JpcpDO">
         SELECT
-        j.id AS goodsxinxiid,
         j.produc_num,
-        j.produc_name,
         u.unitname,
         b.brandname,
         j.retail_price,
         j.tax_price,
-        j.sph_id as sph,
-        j.cyl_id as cyl,
-        j.lightbelow_id as lightbelow,
-        j.refractivityid as refractivityvalue,
+        j.sph_id AS sph,
+        j.cyl_id AS cyl,
+        j.lightbelow_id AS lightbelow,
+        j.refractivityid AS refractivityvalue,
         l.light_name,
         le.lens_name,
         g.gradual_name,
@@ -1427,7 +1426,8 @@
         j.transfer_price,
         mfrs.medicinecode,
         j.classtype,
-        j.produc_factory
+        j.produc_factory,
+        j.view_good_name
         FROM
         aa_jpcp j
         JOIN c_unit u ON j.unitid = u.unitid
@@ -1517,10 +1517,10 @@
     </select>
     <!--隐形订做【商】【品】【查】【询】-->
     <select id="selectYxdz" resultType="com.shiguang.product.domain.YxdzDO">
-        select y.id as goodsxinxiid,
-        y.produc_num,y.produc_name,y.produc_code,u.unitname,y.factory,y.retail_price,y.tax_price,y.sph_up,y.sph_down,y.cyl_up,y.cyl_down,
+        select
+        y.produc_num, y.produc_code,u.unitname,y.factory,y.retail_price,y.tax_price,y.sph_up,y.sph_down,y.cyl_up,y.cyl_down,
         y.curvature_one,y.curvature_yi,y.diameter_one,y.diameter_yi,pu.usage_name,pt.type_name,y.trade_price,y.transfer_price,b.brandname,
-        mfrs.medicinecode,y.classtype,y.produc_factory
+        mfrs.medicinecode,y.classtype,y.produc_factory,y.view_good_name
         	from aa_yxdz y left join c_unit u on y.unitid=u.unitid
         	left join a_cyl c on y.cyl_id=c.cyl_id
         	left join p_usage pu  on y.usage_id=pu.usage_id
@@ -1600,9 +1600,7 @@
     <!--隐形成品【商】【品】【查】【询】-->
     <select id="selectYxcp" resultType="com.shiguang.product.domain.YxcpDO">
         SELECT
-        y.id AS goodsxinxiid,
         y.produc_num,
-        y.produc_name,
         y.produc_code,
         u.unitname,
         y.factory,
@@ -1618,7 +1616,8 @@
         y.transfer_price,
         b.brandname,
         mfrs.medicinecode,
-        y.classtype
+        y.classtype,
+        y.view_good_name
         FROM
         aa_yxcp y
         LEFT JOIN c_unit u ON y.unitid = u.unitid
@@ -1703,9 +1702,9 @@
 
     <!--护理液【商】【品】【查】【询】-->
     <select id="selectHly" resultType="com.shiguang.product.domain.HlyDO">
-        select h.id as goodsxinxiid,
-        h.produc_num,h.produc_name,b.brandname,h.produc_factory,h.factory,u.unitname,h.retail_price,h.tax_price,h.main_capacity,h.second_capacity,h.produc_code,
-        h.trade_price,h.transfer_price,mfrs.medicinecode,h.classtype
+        select
+        h.produc_num, b.brandname,h.produc_factory,h.factory,u.unitname,h.retail_price,h.tax_price,h.main_capacity,h.second_capacity,h.produc_code,
+        h.trade_price,h.transfer_price,mfrs.medicinecode,h.classtype,h.view_good_name
         from aa_hly h left join c_unit u on h.unitid = u.unitid
         left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
         left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsnum
@@ -1776,11 +1775,28 @@
     </select>
     <!--太阳镜【商】【品】【查】【询】-->
     <select id="selectTyj" resultType="com.shiguang.product.domain.TyjDO">
-        select t.id as goodsxinxiid,t.produc_num,t.produc_name,t.produc_code,b.brandname, t.produc_factory,t.factory,u.unitname,
-        t.retail_price,t.tax_price,t.produc_factorycolor,t.size,t.trade_price,t.transfer_price,mfrs.medicinecode,t.classtype
-        from aa_tyj t left join c_unit u on t.unitid=u.unitid
-        left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
-        left join c_mfrs mfrs on t.mfrsid=mfrs.mfrsnum
+        SELECT
+        t.produc_num,
+        t.produc_code,
+        b.brandname,
+        t.produc_factory,
+        t.factory,
+        u.unitname,
+        t.retail_price,
+        t.tax_price,
+        t.produc_factorycolor,
+        t.size,
+        t.trade_price,
+        t.transfer_price,
+        mfrs.medicinecode,
+        t.classtype,
+        t.view_good_name
+        FROM
+        aa_tyj t
+        LEFT JOIN c_unit u ON t.unitid = u.unitid
+        LEFT JOIN c_brand b ON t.brandnum = b.brandnum
+        AND t.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_mfrs mfrs ON t.mfrsid = mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and t.produc_code = #{producCode}</if>
@@ -1854,12 +1870,29 @@
     </select>
     <!--老花镜【商】【品】【查】【询】-->
     <select id="selectLhj" resultType="com.shiguang.product.domain.OldlensDO">
-        select o.id as goodsxinxiid,
-        o.produc_num,o.produc_name,o.produc_code,b.brandname,o.produc_factory,o.factory,o.retail_price,o.tax_price,u.unitname,
-        old.degrees,o.size,o.produc_factorycolor,o.trade_price,o.transfer_price,mfrs.medicinecode,o.classtype
-        from aa_oldlens o left join c_unit u on o.unitid=u.unitid left join a_olddegrees old on o.old_id=old.old_id
-        left join c_brand b on o.brandnum=b.brandnum  AND o.`mfrsid`=b.`mfrsid`
-        left join c_mfrs mfrs on o.mfrsid=mfrs.mfrsnum
+        SELECT
+        o.produc_num,
+        o.produc_code,
+        b.brandname,
+        o.produc_factory,
+        o.factory,
+        o.retail_price,
+        o.tax_price,
+        u.unitname,
+        o.old_id,
+        o.size,
+        o.produc_factorycolor,
+        o.trade_price,
+        o.transfer_price,
+        mfrs.medicinecode,
+        o.classtype,
+        o.view_good_name
+        FROM
+        aa_oldlens o
+        LEFT JOIN c_unit u ON o.unitid = u.unitid
+        LEFT JOIN c_brand b ON o.brandnum = b.brandnum
+        AND o.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_mfrs mfrs ON o.mfrsid = mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and o.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and o.produc_code = #{producCode}</if>
@@ -1933,8 +1966,8 @@
     </select>
     <!--耗材【商】【品】【查】【询】-->
     <select id="selectHc" resultType="com.shiguang.product.domain.HcDO">
-        select h.id as goodsxinxiid,h.produc_num,h.produc_name,h.produc_code,b.brandname,u.unitname,h.retail_price,h.tax_price,h.produc_factory,
-        h.trade_price,h.transfer_price,mfrs.medicinecode ,h.classtype
+        select  h.produc_num, h.produc_code,b.brandname,u.unitname,h.retail_price,h.tax_price,h.produc_factory,
+        h.trade_price,h.transfer_price,mfrs.medicinecode ,h.classtype,h.view_good_name
         from aa_hc h left join c_unit u on h.unitid=u.unitid
         left join c_brand b on h.brandnum=b.brandnum  AND h.`mfrsid`=b.`mfrsid`
         left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsnum
@@ -2001,9 +2034,9 @@
     </select>
     <!--视光【商】【品】【查】【询】-->
     <select id="selectSg" resultType="com.shiguang.product.domain.ShiguangDO">
-        select s.id as goodsxinxiid,
-        s.produc_num,s.produc_name,s.produc_code,b.brandname,s.factory,s.produc_factory,u.unitname,s.retail_price,s.tax_price,
-        s.trade_price,s.transfer_price,mfrs.medicinecode,s.classtype
+        select
+        s.produc_num, s.produc_code,b.brandname,s.factory,s.produc_factory,u.unitname,s.retail_price,s.tax_price,
+        s.trade_price,s.transfer_price,mfrs.medicinecode,s.classtype,s.view_good_name
         from aa_shiguang s left join c_unit u on s.unitid=u.unitid
         left join c_brand b on s.brandnum=b.brandnum  AND s.`mfrsid`=b.`mfrsid`
         left join c_mfrs mfrs on s.mfrsid=mfrs.mfrsnum
@@ -2086,14 +2119,62 @@
     </select>
     <!--【库存查询】-->
     <select id="kccxList" resultType="com.shiguang.stock.domain.StockDO">
-        select  s.danju_number,s.goodsxinxiid,s.goods_num,s.goods_code,s.goods_name,s.goods_count,g.goodsname
-        as 'gdname',g.goodsid,m.mfrsname,s.brandname,s.retail_price,s.price_sum,
-        s.cost_price,s.cost_sum,s.whole_price,s.whole_sum,po.position_name,
-        s.batch,s.zhuce_number,s.produce_day,s.useday,s.factory,s.mfrsid,s.unit,s.classtype,s.returnzt
-        from stock s left join c_goods g on s.goods_type=g.goodsid left join c_mfrs m on s.mfrsid=m.mfrsnum
-        left join c_position po on s.position_id=po.position_id
-        left join c_brand b on s.brandname=b.brandname AND s.`mfrsid`=b.`mfrsid`
-        left join department d on po.depart_number=d.depart_number
+        SELECT
+        s.danju_number,
+        s.goods_num,
+        s.goods_code,
+        s.goods_name,
+        s.goods_count,
+        g.goodsname AS 'gdname',
+        g.goodsid,
+        m.mfrsname,
+        s.brandname,
+        s.retail_price,
+        s.price_sum,
+        s.cost_price,
+        s.cost_sum,
+        s.whole_price,
+        s.whole_sum,
+        po.position_name,
+        s.batch,
+        s.zhuce_number,
+        s.produce_day,
+        s.useday,
+        s.factory,
+        s.mfrsid,
+        s.unit,
+        s.classtype,
+        s.returnzt,
+        jj.produc_factorycolor AS jjColor,
+        jpcp.sph_id AS jpcpSph,
+        jpcp.cyl_id AS jpcpCyl,
+        jpdz.sph_up AS jpcpSphUp,
+        jpdz.sph_down AS jpcpSphDown,
+        jpdz.cyl_up AS jpcpCylUp,
+        jpdz.cyl_down AS jpcpCylDown,
+        yxcp.sph_id AS yxcpSph,
+        yxcp.cyl_id AS yxcpCyl,
+        yxdz.sph_up AS yxdzSphUp,
+        yxdz.sph_down AS yxdzSphDown,
+        yxdz.cyl_up AS yxdzCylUp,
+        yxdz.cyl_down AS yxdzCylDown,
+        tyj.produc_factorycolor AS tyjColor,
+        lhj.old_id AS lhjSph
+        FROM
+        stock s
+        LEFT JOIN c_goods g ON s.goods_type = g.goodsid
+        LEFT JOIN c_mfrs m ON s.mfrsid = m.mfrsnum
+        LEFT JOIN c_position po ON s.position_id = po.position_id
+        LEFT JOIN c_brand b ON s.brandname = b.brandname
+        AND s.`mfrsid` = b.`mfrsid`
+        LEFT JOIN department d ON po.depart_number = d.depart_number
+        LEFT JOIN aa_produca jj ON jj.produc_num = s.goods_num
+        LEFT JOIN aa_jpcp jpcp ON jpcp.produc_num = s.goods_num
+        LEFT JOIN aa_jpdz jpdz ON jpdz.produc_num = s.goods_num
+        LEFT JOIN aa_yxcp yxcp ON yxcp.produc_num = s.goods_num
+        LEFT JOIN aa_yxdz yxdz ON yxdz.produc_num = s.goods_num
+        LEFT JOIN aa_tyj tyj ON tyj.produc_num = s.goods_num
+        LEFT JOIN aa_oldlens lhj ON lhj.produc_num = s.goods_num
         <where>
             <!--<if test="goodsNum != null and goodsNum != ''">and  s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>-->
             <!--<if test="goodsCode != null and goodsCode != ''">and  s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
@@ -2289,17 +2370,33 @@
     </select>
 <!--a.retail_price,a.tax_price as costPrice,a.trade_price as wholePrice,a.transfer_price,-->
     <select id="jingjias" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
-        a.retail_price,a.tax_price ,a.trade_price ,a.transfer_price,
-		a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
-        from aa_produca a
-        join c_brand b on b.brandnum=a.brandnum and a.mfrsid=b.mfrsid
-        join c_unit u on a.unitid=u.unitid
-		join c_mfrs m on a.mfrsid=m.mfrsnum
+        SELECT
+	a.produc_num,
+	a.view_good_name,
+	a.produc_code,
+	a.mfrsid,
+	a.brandnum,
+	b.brandname,
+	a.retail_price,
+	a.tax_price,
+	a.trade_price,
+	a.transfer_price,
+	a.unitid,
+	u.unitname,
+	a.produc_factory,
+	a.produc_factorycolor,
+	a.classtype,
+	m.medicinecode
+FROM
+	aa_produca a
+	JOIN c_brand b ON b.brandnum = a.brandnum
+	AND a.mfrsid = b.mfrsid
+	JOIN c_unit u ON a.unitid = u.unitid
+	JOIN c_mfrs m ON a.mfrsid = m.mfrsnum
         where a.produc_num=#{goodsNum}
     </select>
     <select id="peijians" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
+        select a.produc_num,a.produc_code,a.view_good_name,a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
         a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
         from aa_parts a
@@ -2309,7 +2406,7 @@
         where a.produc_num=#{goodsNum}
     </select>
     <select id="jingpians" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
+       select a.produc_num,a.produc_code,a.view_good_name,a.sph_id as sph,a.cyl_id as cyl,  a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
         a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
         from aa_jpcp a
@@ -2319,7 +2416,8 @@
         where a.produc_num=#{goodsNum}
     </select>
     <select id="jingpiandzs" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
+         select a.produc_num,a.produc_code,a.view_good_name,a.sph_up,a.sph_down,a.cyl_up,a.cyl_down,
+				a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
         a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
         from aa_jpdz a
@@ -2329,7 +2427,7 @@
         where a.produc_num=#{goodsNum}
     </select>
     <select id="yinxings" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
+        select a.produc_num,a.produc_code,a.view_good_name,a.sph_id as sph,a.cyl_id as cyl,a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
         a.unitid,u.unitname,a.factory as produc_factory,a.classtype,m.medicinecode
         from aa_yxcp a
@@ -2339,7 +2437,8 @@
         where a.produc_num=#{goodsNum}
     </select>
     <select id="yinxingdzs" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
+        select a.produc_num,a.produc_code,a.view_good_name,a.sph_up,a.sph_down,a.cyl_up,a.cyl_down,
+				a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
         a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
         from aa_yxdz a
@@ -2349,7 +2448,7 @@
         where a.produc_num=#{goodsNum}
     </select>
     <select id="huliyes" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
+        select a.produc_num,a.produc_code,a.view_good_name,a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
         a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
         from aa_hly  a
@@ -2359,9 +2458,9 @@
         where a.produc_num=#{goodsNum}
     </select>
     <select id="taiyangjings" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
+        select a.produc_num,a.produc_code,a.view_good_name,a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
-        a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
+        a.unitid,u.unitname,a.produc_factory,a.produc_factorycolor,a.classtype,m.medicinecode
         from aa_tyj a
         join c_brand b on b.brandnum=a.brandnum and a.mfrsid=b.mfrsid
         join c_unit u on a.unitid=u.unitid
@@ -2369,9 +2468,9 @@
         where a.produc_num=#{goodsNum}
     </select>
     <select id="laohuajings" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
+        select a.produc_num,a.produc_code,a.view_good_name,a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
-        a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
+        a.unitid,u.unitname,a.produc_factory,a.old_id as sph,a.classtype,m.medicinecode
         from aa_oldlens a
         join c_brand b on b.brandnum=a.brandnum and a.mfrsid=b.mfrsid
         join c_unit u on a.unitid=u.unitid
@@ -2379,7 +2478,7 @@
         where a.produc_num=#{goodsNum}
     </select>
     <select id="haocais" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
+        select a.produc_num,a.produc_code,a.view_good_name,a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
         a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
         from aa_hc a
@@ -2389,7 +2488,7 @@
         where a.produc_num=#{goodsNum}
     </select>
     <select id="shiguangs" resultType="com.shiguang.stock.domain.StockDO">
-        select a.produc_num,a.produc_code,a.produc_name,a.mfrsid,a.brandnum,b.brandname,
+        select a.produc_num,a.produc_code,a.view_good_name,a.mfrsid,a.brandnum,b.brandname,
         a.retail_price,a.tax_price,a.trade_price,a.transfer_price,
         a.unitid,u.unitname,a.produc_factory,a.classtype,m.medicinecode
         from aa_shiguang a

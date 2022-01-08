@@ -771,8 +771,8 @@
                                 barHtml += "<tr class='val1'>";
                                 barHtml += "<td style='display: none'>" + rows[i].producNum + "</td>";//0
                                 barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";//1
-                                barHtml += "<td>" + rows[i].producName + "</td>";//2
-                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";//3
+                                barHtml += "<td>" + rows[i].viewGoodName+"-型号:"+rows[i].factory+"-色号:"+rows[i].producFactorycolor+"-标价:"+rows[i].retailPrice + "</td>";//2
+                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].viewGoodName+"-型号:"+rows[i].factory+"-色号:"+rows[i].producFactorycolor+"-标价:"+rows[i].retailPrice + "'>";//3
                                 barHtml += "<td>" + rows[i].producFactory + "</td>";//4
                                 barHtml += "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>";//5
                                 barHtml += "<td>" + rows[i].producFactorycolor + "</td>";//6
@@ -868,12 +868,11 @@
                         lable:
                         {
                             for (var i = 0; i < rows.length; i++) {
-
                                 barHtml += "<tr class='val2'>";
                                 barHtml += "<td style='display: none'>" + rows[i].producNum + "</td>";
                                 barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
-                                barHtml += "<td>" + rows[i].producName + "</td>";
-                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+                                barHtml += "<td>" + rows[i].viewGoodName+"-型号:"+rows[i].factory+"-标价:"+rows[i].retailPrice + "</td>";
+                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].viewGoodName +"-型号:"+rows[i].factory+"-标价:"+rows[i].retailPrice+ "'>";
                                 barHtml += "<td  >" + rows[i].producFactory + "</td>";
                                 barHtml += "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>";
                                 barHtml += "<td  >" + rows[i].partsStyle + "</td>";
@@ -967,8 +966,8 @@
                                 barHtml += "<tr class='val3'>";
                                 barHtml += "<td style='display: none'>" + rows[i].producNum + "</td>";
                                 barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
-                                barHtml += "<td>" + rows[i].producName + "</td>";
-                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+                                barHtml += "<td>" + rows[i].viewGoodName+"-球镜:"+rows[i].sph+"-柱镜:"+rows[i].cyl+"-标价:"+rows[i].retailPrice + "</td>";
+                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].viewGoodName+"-球镜:"+rows[i].sph+"-柱镜:"+rows[i].cyl+"-标价:"+rows[i].retailPrice + "'>";
                                 barHtml += "<td style='display: none'>" + rows[i].factory + "</td>";
                                 barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
                                 barHtml += "<td>" + rows[i].sph + "</td>";
@@ -1067,8 +1066,8 @@
                                 barHtml += "<tr class='val4'>";
                                 barHtml += "<td style='display: none'>" + rows[i].producNum + "</td>";
                                 barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
-                                barHtml += "<td>" + rows[i].producName + "</td>";
-                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+                                barHtml += "<td>" + rows[i].viewGoodName+"-球镜:"+rows[i].sph+"-柱镜:"+rows[i].cyl+"-标价:"+rows[i].retailPrice + "</td>";
+                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].viewGoodName+"-球镜:"+rows[i].sph+"-柱镜:"+rows[i].cyl+"-标价:"+rows[i].retailPrice + "'>";
                                 barHtml += "<td style='display: none'>" + rows[i].factory + "</td>";
                                 barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
                                 barHtml += "<td>" + rows[i].sph + "</td>";
@@ -1167,8 +1166,8 @@
                                 barHtml += "<tr class='val5'>";
                                 barHtml += "<td style='display: none'>" + rows[i].producNum + "</td>";
                                 barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
-                                barHtml += "<td>" + rows[i].producName + "</td>";
-                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+                                barHtml += "<td>" + rows[i].viewGoodName+"-型号:"+rows[i].factory+"-标价:"+rows[i].retailPrice + "</td>";
+                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].viewGoodName+"-型号:"+rows[i].factory+"-标价:"+rows[i].retailPrice + "'>";
                                 barHtml += "<td  >" + rows[i].producFactory + "</td>";
                                 barHtml += "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>";
                                 barHtml += "<td  >" + rows[i].mainCapacity + "</td>";
@@ -1264,8 +1263,8 @@
                                 barHtml += "<tr class='val6'>";
                                 barHtml += "<td style='display: none'>" + rows[i].producNum + "</td>";
                                 barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
-                                barHtml += "<td>" + rows[i].producName + "</td>";
-                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+                                barHtml += "<td>" + rows[i].viewGoodName+"-型号:"+rows[i].factory+"-颜色:"+rows[i].producFactorycolor+"-标价:"+rows[i].retailPrice + "</td>";
+                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].viewGoodName+"-型号:"+rows[i].factory+"-颜色:"+rows[i].producFactorycolor+"-标价:"+rows[i].retailPrice + "'>";
                                 barHtml += "<td  >" + rows[i].producFactory + "</td>";
                                 barHtml += "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>";
                                 barHtml += "<td  >" + rows[i].producFactorycolor + "</td>";
@@ -1360,12 +1359,12 @@
                                 barHtml += "<tr class='val7'>";
                                 barHtml += "<td style='display: none'>" + rows[i].producNum + "</td>";
                                 barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
-                                barHtml += "<td>" + rows[i].producName + "</td>";
-                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+                                barHtml += "<td>" + rows[i].viewGoodName+"-球镜:"+rows[i].oldId+"-型号:"+rows[i].factory+"-标价:"+rows[i].retailPrice + "</td>";
+                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].viewGoodName+"-球镜:"+rows[i].oldId+"-型号:"+rows[i].factory+"-标价:"+rows[i].retailPrice  + "'>";
                                 barHtml += "<td  >" + rows[i].producFactory + "</td>";
                                 barHtml += "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>";
                                 barHtml += "<td  >" + rows[i].size + "</td>";
-                                barHtml += "<td  >" + rows[i].degrees + "</td>";
+                                barHtml += "<td  >" + rows[i].oldId + "</td>";
                                 barHtml += "<td  >" + rows[i].producFactorycolor + "</td>";
                                 barHtml += "<td style='display: none'>" + rows[i].createTime + "</td>";
                                 barHtml += "<input name='createTime' type='hidden' value='" + rows[i].createTime + "'>";
@@ -1458,8 +1457,8 @@
                                 barHtml += "<tr class='val8'>";
                                 barHtml += "<td style='display: none'>" + rows[i].producNum + "</td>";
                                 barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
-                                barHtml += "<td>" + rows[i].producName + "</td>";
-                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+                                barHtml += "<td>" + rows[i].viewGoodName+"-型号:"+rows[i].producFactory+"-标价:"+rows[i].retailPrice + "</td>";
+                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].viewGoodName+"-型号:"+rows[i].producFactory+"-标价:"+rows[i].retailPrice + "'>";
                                 barHtml += "<td  >" + rows[i].producFactory + "</td>";
                                 barHtml += "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>";
                                 barHtml += "<td style='display: none'>" + rows[i].createTime + "</td>";
@@ -1553,8 +1552,8 @@
                                 barHtml += "<tr class='val9'>";
                                 barHtml += "<td style='display: none'>" + rows[i].producNum + "</td>";
                                 barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
-                                barHtml += "<td>" + rows[i].producName + "</td>";
-                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+                                barHtml += "<td>" + rows[i].viewGoodName+"-型号:"+rows[i].factory+"-标价:"+rows[i].retailPrice+ "</td>";
+                                barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].viewGoodName+"-型号:"+rows[i].factory+"-标价:"+rows[i].retailPrice + "'>";
                                 barHtml += "<td  >" + rows[i].producFactory + "</td>";
                                 barHtml += "<input name='factory' type='hidden' value='" + rows[i].producFactory + "'>";
                                 barHtml += "<td style='display: none'>" + rows[i].createTime + "</td>";

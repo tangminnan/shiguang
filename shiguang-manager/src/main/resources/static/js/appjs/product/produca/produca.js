@@ -78,7 +78,7 @@ function load() {
                         align: 'center',
                         formatter: function (value, row, index) {
                             if (row.viewGoodName != null) {
-                                return row.viewGoodName+"-型号:"+row.factory+"-色号:"+row.producColor+"-标价:"+row.retailPrice
+                                return row.viewGoodName+"-型号:"+row.factory+"-色号:"+row.producFactorycolor+"-标价:"+row.retailPrice
 
                             } else {
                                 return ""

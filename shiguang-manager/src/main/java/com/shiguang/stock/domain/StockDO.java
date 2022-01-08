@@ -49,6 +49,7 @@ public class StockDO implements Serializable {
     private String goodsCode;
     //商品名称
     private String goodsName;
+    private String viewGoodName;
     //数量
     private String goodsCount;
     private Integer countall;
@@ -72,6 +73,7 @@ public class StockDO implements Serializable {
     public void setGdname(String gdname) {
         this.gdname = gdname;
     }
+
     //退回状态
     private String returnzt;
 
@@ -1219,5 +1221,151 @@ public class StockDO implements Serializable {
 
     public void setNewcount(Integer newcount) {
         this.newcount = newcount;
+    }
+
+    public String getViewGoodName() {
+        return viewGoodName;
+    }
+
+    public void setViewGoodName(String viewGoodName) {
+        this.viewGoodName = viewGoodName;
+    }
+
+
+
+    private String jjColor;
+    private String jpcpSph;
+    private String jpcpCyl;
+    private String jpcpSphUp;
+    private String jpcpSphDown;
+    private String jpcpCylUp;
+    private String jpcpCylDown;
+    private String yxcpSph;
+    private String yxcpCyl;
+    private String yxdzSphUp;
+    private String yxdzSphDown;
+    private String yxdzCylUp;
+    private String yxdzCylDown;
+    private String tyjColor;
+    private String lhjSph;
+
+    public String getJjColor() {
+        return jjColor;
+    }
+
+    public void setJjColor(String jjColor) {
+        this.jjColor = jjColor;
+    }
+
+    public String getJpcpSph() {
+        return jpcpSph;
+    }
+
+    public void setJpcpSph(String jpcpSph) {
+        this.jpcpSph = jpcpSph;
+    }
+
+    public String getJpcpCyl() {
+        return jpcpCyl;
+    }
+
+    public void setJpcpCyl(String jpcpCyl) {
+        this.jpcpCyl = jpcpCyl;
+    }
+
+    public String getJpcpSphUp() {
+        return jpcpSphUp;
+    }
+
+    public void setJpcpSphUp(String jpcpSphUp) {
+        this.jpcpSphUp = jpcpSphUp;
+    }
+
+    public String getJpcpSphDown() {
+        return jpcpSphDown;
+    }
+
+    public void setJpcpSphDown(String jpcpSphDown) {
+        this.jpcpSphDown = jpcpSphDown;
+    }
+
+    public String getJpcpCylUp() {
+        return jpcpCylUp;
+    }
+
+    public void setJpcpCylUp(String jpcpCylUp) {
+        this.jpcpCylUp = jpcpCylUp;
+    }
+
+    public String getJpcpCylDown() {
+        return jpcpCylDown;
+    }
+
+    public void setJpcpCylDown(String jpcpCylDown) {
+        this.jpcpCylDown = jpcpCylDown;
+    }
+
+    public String getYxcpSph() {
+        return yxcpSph;
+    }
+
+    public void setYxcpSph(String yxcpSph) {
+        this.yxcpSph = yxcpSph;
+    }
+
+    public String getYxcpCyl() {
+        return yxcpCyl;
+    }
+
+    public void setYxcpCyl(String yxcpCyl) {
+        this.yxcpCyl = yxcpCyl;
+    }
+
+    public String getYxdzSphUp() {
+        return yxdzSphUp;
+    }
+
+    public void setYxdzSphUp(String yxdzSphUp) {
+        this.yxdzSphUp = yxdzSphUp;
+    }
+
+    public String getYxdzSphDown() {
+        return yxdzSphDown;
+    }
+
+    public void setYxdzSphDown(String yxdzSphDown) {
+        this.yxdzSphDown = yxdzSphDown;
+    }
+
+    public String getYxdzCylUp() {
+        return yxdzCylUp;
+    }
+
+    public void setYxdzCylUp(String yxdzCylUp) {
+        this.yxdzCylUp = yxdzCylUp;
+    }
+
+    public String getYxdzCylDown() {
+        return yxdzCylDown;
+    }
+
+    public void setYxdzCylDown(String yxdzCylDown) {
+        this.yxdzCylDown = yxdzCylDown;
+    }
+
+    public String getTyjColor() {
+        return tyjColor;
+    }
+
+    public void setTyjColor(String tyjColor) {
+        this.tyjColor = tyjColor;
+    }
+
+    public String getLhjSph() {
+        return lhjSph;
+    }
+
+    public void setLhjSph(String lhjSph) {
+        this.lhjSph = lhjSph;
     }
 }
