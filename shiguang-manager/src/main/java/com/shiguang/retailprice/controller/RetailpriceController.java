@@ -6,6 +6,7 @@ import java.util.*;
 import com.shiguang.common.utils.*;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.service.GoodsService;
+import com.shiguang.product.domain.PartsDO;
 import com.shiguang.product.domain.ProducaDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,9 +147,8 @@ public class RetailpriceController {
 	public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
 		//查询列表数据
 		Query query = new Query(params);
-		List<ProducaDO> jjlist = retailpriceService.jjlist(query);
-//		int total = retailpriceService.jjlistCount(query);
-			int total = jjlist.size();
+		List<PartsDO> jjlist = retailpriceService.pjlist(query);
+		int total = retailpriceService.pjlistCount(query);
 		PageUtils pageUtils = new PageUtils(jjlist, total);
 		return pageUtils;
 	}

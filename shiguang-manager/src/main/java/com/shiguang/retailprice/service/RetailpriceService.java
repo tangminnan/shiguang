@@ -1,5 +1,6 @@
 package com.shiguang.retailprice.service;
 
+import com.shiguang.product.domain.PartsDO;
 import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.retailprice.domain.RetailpriceDO;
 
@@ -29,8 +30,8 @@ public interface RetailpriceService {
 	
 	int batchRemove(Long[] ids);
 
-	List<ProducaDO> jjlist(Map<String, Object> map);
-	int jjlistCount(Map<String, Object> map);
+	List<PartsDO> pjlist(Map<String, Object> map);
+	int pjlistCount(Map<String, Object> map);
 
 
 }

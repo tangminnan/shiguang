@@ -1,5 +1,6 @@
 package com.shiguang.retailprice.service.impl;
 
+import com.shiguang.product.domain.PartsDO;
 import com.shiguang.product.domain.ProducaDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,12 +55,12 @@ public class RetailpriceServiceImpl implements RetailpriceService {
 	}
 
 	@Override
-	public List<ProducaDO> jjlist(Map<String, Object> map) {
-		return retailpriceDao.jjlist(map);
+	public List<PartsDO> pjlist(Map<String, Object> map) {
+		return retailpriceDao.pjlist(map);
 	}
 
 	@Override
-	public int jjlistCount(Map<String, Object> map) {
-		return retailpriceDao.jjlistCount(map);
+	public int pjlistCount(Map<String, Object> map) {
+		return retailpriceDao.pjlistCount(map);
 	}
 }

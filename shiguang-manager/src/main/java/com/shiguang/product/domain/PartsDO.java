@@ -41,14 +41,9 @@ public class PartsDO implements Serializable {
     //品牌
     private String brandname;
     private String brandnum;
+    private String goodsid;
 
-    public String getBrandnum() {
-        return brandnum;
-    }
 
-    public void setBrandnum(String brandnum) {
-        this.brandnum = brandnum;
-    }
 
     //厂家型号（品牌维护有
     private String factory;
@@ -94,6 +89,22 @@ public class PartsDO implements Serializable {
     public void setClasstype(String classtype) {
         this.classtype = classtype;
     }
+    public String getBrandnum() {
+        return brandnum;
+    }
+
+    public void setBrandnum(String brandnum) {
+        this.brandnum = brandnum;
+    }
+
+    public String getGoodsid() {
+        return goodsid;
+    }
+
+    public void setGoodsid(String goodsid) {
+        this.goodsid = goodsid;
+    }
+
     /**
      * 设置：配件id
      */

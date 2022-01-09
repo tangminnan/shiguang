@@ -124,7 +124,7 @@
 		</foreach>
 	</delete>
 
-	<select id="jjlist" resultType="com.shiguang.product.domain.ProducaDO">
+	<select id="pjlist" resultType="com.shiguang.product.domain.PartsDO">
 		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price from c_brand b
 		join   aa_parts a on  a.brandnum=b.brandnum   AND a.`mfrsid`=b.`mfrsid`
 		join c_mfrs m on  m.mfrsnum=b.mfrsid
@@ -136,7 +136,7 @@
 				order by ${sort} ${order}
 			</when>
 			<otherwise>
-				GROUP BY b.brandnum
+				GROUP BY  b.brandnum  ,  b.`mfrsid`,a.retail_price
 				order by b.brandid desc
 			</otherwise>
 		</choose>
@@ -144,26 +144,15 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	<select id="jjlistCount" resultType="int">
-		select count(*) from c_brand b
+	<select id="pjlistCount" resultType="int">
+		SELECT count( 0 ) FROM
+	   (
+        select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price from c_brand b
 		join   aa_parts a on  a.brandnum=b.brandnum   AND a.`mfrsid`=b.`mfrsid`
-		join c_mfrs m on  m.mfrsnum=b.mfrsid
-		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="number != null and number != ''"> and number = #{number} </if>
-			<if test="day != null and day != ''"> and day = #{day} </if>
-			<if test="people != null and people != ''"> and people = #{people} </if>
-			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
-			<if test="num != null and num != ''"> and num = #{num} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
-			<if test="mfrsnum != null and mfrsnum != ''"> and mfrsnum = #{mfrsnum} </if>
-			<if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
-			<if test="brandnum != null and brandnum != ''"> and brandnum = #{brandnum} </if>
-			<if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
-			<if test="factory != null and factory != ''"> and factory = #{factory} </if>
-			<if test="oldPrice != null and oldPrice != ''"> and old_price = #{oldPrice} </if>
-			<if test="newPrice != null and newPrice != ''"> and new_price = #{newPrice} </if>
-		</where>
+ 		join c_mfrs m on  m.mfrsnum=b.mfrsid
+ 		GROUP BY  b.brandnum  ,  b.`mfrsid`,a.retail_price
+       order by b.brandid desc
+	    ) AS temp
 	</select>
 
 </mapper>

@@ -262,6 +262,7 @@
 		<!--GROUP BY u.username-->
 	<!--</select>-->
 
+
 	<select id="findYanguangPeople" resultType="com.shiguang.storeSales.domain.SalesDO">
 		select  u.store,u.username,u.name
 		from  sys_user u

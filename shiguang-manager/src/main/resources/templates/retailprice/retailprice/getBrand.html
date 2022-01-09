@@ -199,7 +199,7 @@
 		<tr>
 			<td>商品类别：</td>
 			<td>
-				<select id="goodsType" name="goodsType" onchange="selectgoods()" style="width: 80%">
+				<select id="goodsid" name="goodsid" style="width: 80%">
 					<option value="">--请选择--</option>
 					<option th:each="ls:${goodsDOList}"
 							th:text="${ls.goodsname}"
@@ -229,11 +229,20 @@
 <script type="text/javascript">
     $(document).ready(function () {
         // var mfrsid = $("#mfrsid").val();
-        $(".val").remove();
-        $(function () {
-            load();
-        });
+        // $(".val").remove();
+        // $(function () {
+        //     load();
+        // });
         function load() {
+            
+
+        }
+    });
+    function reLoad() {
+        var goodsid=$("#goodsid").val();
+        if (goodsid=="") {
+            layer.alert("请选择商品类别！");
+		}else if (goodsid==2) {
             $('#exampleTable')
                 .bootstrapTable(
                     {
@@ -298,11 +307,8 @@
 
                         ]
                     });
+		}
 
-        }
-    });
-    function reLoad() {
-        $('#exampleTable').bootstrapTable('refresh');
     }
 </script>
 </body>
