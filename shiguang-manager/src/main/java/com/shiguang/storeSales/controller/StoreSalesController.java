@@ -873,6 +873,22 @@ public class StoreSalesController {
 //        costService.save(costDO);
         salesDO.setPeijingTime(new Date());
         salesDO.setSaleType("0");
+        if ("隐形".equals(salesDO.getEyeType())){
+            String[] classType = salesDO.getClasstype().split(",");
+            String[] storeSesc = salesDO.getStoreDescribe().split(",");
+            for(int w=0;w<storeSesc.length;w++){
+                if ("1".equals(classType[w])&& "隐形".equals(storeSesc[w])){
+                    salesDO.setEyeType("隐形(成品)");
+                    storeSesc[w] = "隐形成品";
+                }
+            }
+            StringBuilder ss = new StringBuilder();
+            for (int d=0;d<storeSesc.length;d++){
+                ss.append(storeSesc[d]).append(",");
+            }
+            ss.deleteCharAt(ss.length() - 1);
+            salesDO.setStoreDescribe(ss.toString());
+        }
         if (null != salesDO.getGoodsNum()){
             String goodsCode = salesDO.getGoodsCode();
             String storeDesc = salesDO.getStoreDescribe();
@@ -1888,7 +1904,7 @@ public class StoreSalesController {
                 if (null != departNumber){
                     Map<String, Object> map = new HashMap<>();
                     map.put("companyId", ShiroUtils.getUser().getCompanyId());
-                    PositionDO positionDO = stockService.findHegePosition(map);
+                    PositionDO positionDO = stockService.findPosition(map);
                     if (null != positionDO) {
                         positionId = positionDO.getPositionId();
                     }
