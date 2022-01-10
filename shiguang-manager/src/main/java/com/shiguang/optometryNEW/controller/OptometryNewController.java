@@ -675,7 +675,6 @@ public class OptometryNewController {
     public PageUtils shiguanglist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        query.put("xsstate",0);
         List<ShiguangDO> shiguanglist = shiguangService.getshiguang(query);
         int total = shiguangService.getshiguangcount(query);
         PageUtils pageUtils = new PageUtils(shiguanglist, total);

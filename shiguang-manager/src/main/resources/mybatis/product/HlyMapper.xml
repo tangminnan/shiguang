@@ -91,6 +91,7 @@
         h.`upday`,h.`downday`,h.`tax`,h.`tax_price`,h.`trade_price`,h.`transfer_price`,h.`retail_price`,h.`xsstate`,h.`state`,
         h.`classtype`,h.`view_good_name`
         FROM aa_hly h LEFT JOIN c_brand b ON h.brandnum = b.brandnum AND h.`mfrsid`=b.`mfrsid` LEFT JOIN c_unit u ON h.unitid = u.unitid
+        left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsnum
         <where>
             <if test="id != null and id != ''">and h.id = #{id}</if>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
@@ -116,7 +117,7 @@
             <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and h.classtype = #{classtype}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and h.view_good_name = #{viewGoodName}</if>
-           and h.state = 1
+            and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -133,6 +134,7 @@
 
     <select id="gethlycount" resultType="int">
         select count(*)   FROM aa_hly h LEFT JOIN c_brand b ON h.brandnum = b.brandnum AND h.`mfrsid`=b.`mfrsid` LEFT JOIN c_unit u ON h.unitid = u.unitid
+        left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsnum
         <where>
             <if test="id != null and id != ''">and h.id = #{id}</if>
             <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
@@ -158,7 +160,7 @@
             <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and h.classtype = #{classtype}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and h.view_good_name = #{viewGoodName}</if>
-            and h.state = 1
+            and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
 

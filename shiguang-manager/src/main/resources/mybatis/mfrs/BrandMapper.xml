@@ -81,11 +81,12 @@
              <if test="mfrsids != null and mfrsids != ''">and b.mfrsid = #{mfrsids}</if>
              <if test="goodsids != null and goodsids != ''">and b.goodsid = #{goodsids}</if>
              <if test="mfrsnames != null and mfrsnames != ''">and m.mfrsname = #{mfrsnames}</if>
-             <!--<if test="mfrsids != null and mfrsids != ''">and b.mfrsid LIKE concat('%', #{mfrsids},'%')</if>-->
-             <!--<if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat('%', #{goodsids},'%')</if>-->
-             and  b.state= 1
+             and  b.state= 1 and m.xsstate=0 and m.state=1
          </where>
         group by b.brandid order by b.xsstate desc ,b.brandid desc
+         <if test="offset != null and limit != null">
+             limit #{offset}, #{limit}
+         </if>
     </select>
     <select id="finfBrandcount" resultType="int">
     select count(*) from c_brand b   join c_mfrs m on b.mfrsid=m.mfrsnum  join c_goods good on b.goodsid=good.goodsid
@@ -98,8 +99,10 @@
             <if test="payid != null and payid != ''">and b.payid = #{payid}</if>
             <if test="mfrsids != null and mfrsids != ''">and b.mfrsid = #{mfrsids}</if>
             <if test="goodsids != null and goodsids != ''">and b.goodsid = #{goodsids}</if>
-            and  b.state= 1
+            <if test="mfrsnames != null and mfrsnames != ''">and m.mfrsname = #{mfrsnames}</if>
+            and  b.state= 1 and m.xsstate=0 and m.state=1
         </where>
+         order by b.xsstate desc ,b.brandid desc
     </select>
 
 

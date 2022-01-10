@@ -1195,7 +1195,9 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
+            <!--<if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>-->
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+
             <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and p.brandid = #{brandid}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
@@ -1207,6 +1209,7 @@
             <if test="sizes != null and sizes != ''">and p.size = #{sizes}</if>
             <if test="technologyId != null and technologyId != ''">and t.technology_id = #{technologyId}</if>
             <if test="materialid != null and materialid != ''">and m.materialid = #{materialid}</if>
+
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  p.retail_price
             </if>
@@ -1221,6 +1224,7 @@
             </if>
             and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by p.id desc
     </select>
     <!--配件【商】【品】【查】【询】-->
     <select id="selectPeijian" resultType="com.shiguang.product.domain.PartsDO">
@@ -1294,13 +1298,12 @@
             </if>
             and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by p.id desc
     </select>
     <!--镜片定做【商】【品】【查】【询】-->
     <select id="selectJpdz" resultType="com.shiguang.product.domain.JpdzDO">
         SELECT
-
         j.produc_num,
-
         u.unitname,
         b.brandname,
         j.factory,
@@ -1376,14 +1379,16 @@
         </if>
     </select>
     <select id="selectJpdzCount" resultType="int">
-    select count(*) from aa_jpdz j left join c_unit u on j.unitid=u.unitid
-        left join c_refractivity r on j.refractivityid=r.refractivityid
-        left join p_light l on j.light_id=l.light_id
-        left join p_lens le on j.lens_id=le.lens_id
-        left join p_gradual g on j.gradual_id=g.gradual_id
-        left join p_function f on j.function_id=f.function_id
-        left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid`
-        left join c_mfrs mfrs on j.mfrsid=mfrs.mfrsnum
+    select count(*)  FROM
+        aa_jpdz j
+        LEFT JOIN c_unit u ON j.unitid = u.unitid
+        LEFT JOIN p_light l ON j.light_id = l.light_id
+        LEFT JOIN p_lens le ON j.lens_id = le.lens_id
+        LEFT JOIN p_gradual g ON j.gradual_id = g.gradual_id
+        LEFT JOIN p_function f ON j.function_id = f.function_id
+        LEFT JOIN c_brand b ON j.brandnum = b.brandnum
+        AND j.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_mfrs mfrs ON j.mfrsid = mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and j.produc_code = #{producCode}</if>
@@ -1413,6 +1418,7 @@
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by j.id desc
     </select>
     <!--镜片成品【商】【品】【查】【询】-->
     <select id="selectJpcp" resultType="com.shiguang.product.domain.JpcpDO">
@@ -1488,7 +1494,8 @@
         </if>
     </select>
     <select id="selectJpcpCount" resultType="int">
-        select count(*)  FROM aa_jpcp j
+        select count(*)  FROM
+        aa_jpcp j
         JOIN c_unit u ON j.unitid = u.unitid
         LEFT JOIN p_light l ON j.light_id = l.light_id
         LEFT JOIN p_lens le ON j.lens_id = le.lens_id
@@ -1506,7 +1513,7 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
-            <if test="lightId != null and lightId != ''">and j.light_ikccxListd = #{lightId}</if>
+            <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
             <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
@@ -1525,6 +1532,7 @@
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by j.id desc
     </select>
     <!--隐形订做【商】【品】【查】【询】-->
     <select id="selectYxdz" resultType="com.shiguang.product.domain.YxdzDO">
@@ -1609,6 +1617,7 @@
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
             and y.xsstate = 0 and  y.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by y.id desc
     </select>
     <!--隐形成品【商】【品】【查】【询】-->
     <select id="selectYxcp" resultType="com.shiguang.product.domain.YxcpDO">
@@ -1712,6 +1721,7 @@
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
             and y.xsstate = 0 and  y.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by y.id desc
     </select>
 
 
@@ -1761,7 +1771,7 @@
         </if>
     </select>
     <select id="selectHlyCount" resultType="int">
-        select count(*) from aa_hly h left join c_unit u on h.unitid = u.unitid
+        select count(*)  from aa_hly h left join c_unit u on h.unitid = u.unitid
         left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
         left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsnum
         <where>
@@ -1789,6 +1799,7 @@
             </if>
             and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by h.id desc
     </select>
     <!--太阳镜【商】【品】【查】【询】-->
     <select id="selectTyj" resultType="com.shiguang.product.domain.TyjDO">
@@ -1855,9 +1866,12 @@
         </if>
     </select>
     <select id="selectTyjCount" resultType="int">
-        select count(*) from aa_tyj t left join c_unit u on t.unitid=u.unitid
-        left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
-        left join c_mfrs mfrs on t.mfrsid=mfrs.mfrsnum
+        select count(*)  FROM
+        aa_tyj t
+        LEFT JOIN c_unit u ON t.unitid = u.unitid
+        LEFT JOIN c_brand b ON t.brandnum = b.brandnum
+        AND t.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_mfrs mfrs ON t.mfrsid = mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and t.produc_code = #{producCode}</if>
@@ -1886,6 +1900,7 @@
             </if>
             and t.xsstate = 0 and  t.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by t.id desc
     </select>
     <!--老花镜【商】【品】【查】【询】-->
     <select id="selectLhj" resultType="com.shiguang.product.domain.OldlensDO">
@@ -1953,9 +1968,12 @@
         </if>
     </select>
     <select id="selectLhjCount" resultType="int">
-        select count(*)  from aa_oldlens o left join c_unit u on o.unitid=u.unitid left join a_olddegrees old on o.old_id=old.old_id
-        left join c_brand b on o.brandnum=b.brandnum  AND o.`mfrsid`=b.`mfrsid`
-        left join c_mfrs mfrs on o.mfrsid=mfrs.mfrsnum
+        select count(*)  FROM
+        aa_oldlens o
+        LEFT JOIN c_unit u ON o.unitid = u.unitid
+        LEFT JOIN c_brand b ON o.brandnum = b.brandnum
+        AND o.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_mfrs mfrs ON o.mfrsid = mfrs.mfrsnum
         <where>
             <if test="producNum != null and producNum != ''">and o.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and o.produc_code = #{producCode}</if>
@@ -1984,6 +2002,7 @@
             </if>
             and o.xsstate = 0 and  o.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by o.id desc
     </select>
     <!--耗材【商】【品】【查】【询】-->
     <select id="selectHc" resultType="com.shiguang.product.domain.HcDO">
@@ -2028,7 +2047,7 @@
         </if>
     </select>
     <select id="selectHcCount" resultType="int">
-        select count(*) from aa_hc h left join c_unit u on h.unitid=u.unitid
+        select count(*)  from aa_hc h left join c_unit u on h.unitid=u.unitid
         left join c_brand b on h.brandnum=b.brandnum  AND h.`mfrsid`=b.`mfrsid`
         left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsnum
         <where>
@@ -2054,6 +2073,7 @@
             </if>
             and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by h.id desc
     </select>
     <!--视光【商】【品】【查】【询】-->
     <select id="selectSg" resultType="com.shiguang.product.domain.ShiguangDO">
@@ -2100,7 +2120,7 @@
         </if>
     </select>
     <select id="selectSgCount" resultType="int">
-        select count(*)  from aa_shiguang s left join c_unit u on s.unitid=u.unitid
+        select count(*)   from aa_shiguang s left join c_unit u on s.unitid=u.unitid
         left join c_brand b on s.brandnum=b.brandnum  AND s.`mfrsid`=b.`mfrsid`
         left join c_mfrs mfrs on s.mfrsid=mfrs.mfrsnum
         <where>
@@ -2127,6 +2147,7 @@
             </if>
             and s.xsstate = 0 and  s.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
+        order by s.id desc
     </select>
     <!--【是否已存在商品信息】-->
     <select id="haveNum" resultType="com.shiguang.stock.domain.StockDO">

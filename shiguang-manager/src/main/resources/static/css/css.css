@@ -36,7 +36,8 @@ h1, h2, h3, h4, h5, h6{ font-size:100%;font-weight: normal;}
 
 .msgBox{overflow: hidden;}
 .msgBox ul{margin:0 10px;}
-/*.msgBox li{float: left;margin-right:30px;margin-bottom: 5px;}*/
+/*cln*/
+.msgBox li{float: left;margin-right:30px;margin-bottom: 5px;}
 .msgBox li input{border:1px solid #bfbfbf;padding:0 10px;width:160px;}
 .msgBox li input.short{width:60px;}
 .msgBox li span{background:#66b656 url(../img/xiangqing.png) no-repeat 8px center;display: inline-block;width: 60px;height: 26px;border-radius:5px;color:#fff;line-height: 26px;padding-left:25px;cursor: pointer;}
@@ -417,7 +418,7 @@ input.HbcBtn_QK,
 .HspxxBtn input:nth-child(5){background-image: url(../img/icon0.png);}
 
 .msgBox table{background: #f6f5f5;text-align: left;}
-/*.msgBox table td:nth-child(odd){text-align: right;background: #e4e4e4;}*/
+.msgBox table td:nth-child(odd){text-align: right;background: #e4e4e4;}
 .msgBox table select{width:30%;text-align: left;}
 
 .msgBoxDD_top{overflow: hidden;margin-bottom: 15px;}

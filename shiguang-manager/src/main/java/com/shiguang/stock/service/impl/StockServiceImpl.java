@@ -279,7 +279,7 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public int selectYxcpCount(Map<String, Object> map) {
-        return stockDao.selectYxdzCount(map);
+        return stockDao.selectYxcpCount(map);
     }
 
     //<!--护理液【商】【品】【查】【询】-->
