@@ -88,6 +88,8 @@ public class HlyController {
     String edit(@PathVariable("id") Long id, Model model) {
         HlyDO hly = hlyService.get(id);
         model.addAttribute("hly", hly);
+        String name=hly.getViewGoodName()+"-型号:"+hly.getProducFactory()+"-标价:"+hly.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -102,6 +104,8 @@ public class HlyController {
     String detail(@PathVariable("id") Long id, Model model) {
         HlyDO hly = hlyService.get(id);
         model.addAttribute("hly", hly);
+        String name=hly.getViewGoodName()+"-型号:"+hly.getProducFactory()+"-标价:"+hly.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);

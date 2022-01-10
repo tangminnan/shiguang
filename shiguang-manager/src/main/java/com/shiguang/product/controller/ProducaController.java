@@ -139,6 +139,8 @@ ProducaController {
         //修改时显示制造商和商品品种名称
         ProducaDO produca = producaService.get(id);
         model.addAttribute("produca", produca);
+        String name=produca.getViewGoodName()+"-型号:"+produca.getProducFactory()+"-色号:"+produca.getProducFactorycolor()+"-标价:"+produca.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -164,6 +166,8 @@ ProducaController {
         //修改时显示制造商和商品品种名称
         ProducaDO produca = producaService.get(id);
         model.addAttribute("produca", produca);
+        String name=produca.getViewGoodName()+"-型号:"+produca.getProducFactory()+"-色号:"+produca.getProducFactorycolor()+"-标价:"+produca.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);

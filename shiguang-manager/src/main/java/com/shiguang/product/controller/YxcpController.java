@@ -150,6 +150,8 @@ public class YxcpController {
     String edit(@PathVariable("id") Long id, Model model) {
         YxcpDO yxcp = yxcpService.get(id);
         model.addAttribute("yxcp", yxcp);
+        String name=yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+yxcp.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -195,6 +197,8 @@ public class YxcpController {
     String detail(@PathVariable("id") Long id, Model model) {
         YxcpDO yxcp = yxcpService.get(id);
         model.addAttribute("yxcp", yxcp);
+        String name=yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+yxcp.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -248,7 +252,7 @@ public class YxcpController {
         String cylId=yxcp.getCylId();
         String retailPrice=yxcp.getRetailPrice();
         yxcp.setViewGoodName(producName);
-        yxcp.setProducName(producName+"-球镜:"+sphId+"-柱镜:"+cylId+"-颜色:"+"-标价:"+retailPrice);
+        yxcp.setProducName(producName+"-球镜:"+sphId+"-柱镜:"+cylId+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }

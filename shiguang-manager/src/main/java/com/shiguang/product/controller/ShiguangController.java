@@ -88,6 +88,8 @@ public class ShiguangController {
     String edit(@PathVariable("id") Long id, Model model) {
         ShiguangDO shiguang = shiguangService.get(id);
         model.addAttribute("shiguang", shiguang);
+        String name=shiguang.getViewGoodName()+"-型号:"+shiguang.getProducFactory()+"-标价:"+shiguang.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -102,6 +104,8 @@ public class ShiguangController {
     String detail(@PathVariable("id") Long id, Model model) {
         ShiguangDO shiguang = shiguangService.get(id);
         model.addAttribute("shiguang", shiguang);
+        String name=shiguang.getViewGoodName()+"-型号:"+shiguang.getProducFactory()+"-标价:"+shiguang.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);

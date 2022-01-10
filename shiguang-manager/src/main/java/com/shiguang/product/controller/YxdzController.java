@@ -150,6 +150,8 @@ public class YxdzController {
     String edit(@PathVariable("id") Long id, Model model) {
         YxdzDO yxdz = yxdzService.get(id);
         model.addAttribute("yxdz", yxdz);
+        String name=yxdz.getViewGoodName()+"-球镜:"+yxdz.getSphUp()+"/"+yxdz.getSphDown()+"-柱镜:"+yxdz.getCylUp()+"/"+yxdz.getCylDown()+"-标价:"+yxdz.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -194,6 +196,8 @@ public class YxdzController {
     String detail(@PathVariable("id") Long id, Model model) {
         YxdzDO yxdz = yxdzService.get(id);
         model.addAttribute("yxdz", yxdz);
+        String name=yxdz.getViewGoodName()+"-球镜:"+yxdz.getSphUp()+"/"+yxdz.getSphDown()+"-柱镜:"+yxdz.getCylUp()+"/"+yxdz.getCylDown()+"-标价:"+yxdz.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -249,7 +253,7 @@ public class YxdzController {
         String sphDown=yxdz.getSphDown();
         String retailPrice=yxdz.getRetailPrice();
         yxdz.setViewGoodName(producName);
-        yxdz.setProducName(producName+"-球镜:"+sphUp+"/"+sphDown+"-柱镜:"+cylUp+"/"+cylDown+"-颜色:"+"-标价:"+retailPrice);
+        yxdz.setProducName(producName+"-球镜:"+sphUp+"/"+sphDown+"-柱镜:"+cylUp+"/"+cylDown +"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             return R.error("商品代码已存在");
         }

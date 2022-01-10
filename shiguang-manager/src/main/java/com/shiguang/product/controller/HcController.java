@@ -86,6 +86,8 @@ public class HcController {
     String edit(@PathVariable("id") Long id, Model model) {
         HcDO hc = hcService.get(id);
         model.addAttribute("hc", hc);
+        String name=hc.getViewGoodName()+"-型号:"+hc.getProducFactory()+"-标价:"+hc.getRetailPrice();
+        model.addAttribute("name", name);
         String sm = hc.getSmall();
         Map<String, Object> map = new HashMap<>();
         //计量单位
@@ -101,6 +103,8 @@ public class HcController {
     String detail(@PathVariable("id") Long id, Model model) {
         HcDO hc = hcService.get(id);
         model.addAttribute("hc", hc);
+        String name=hc.getViewGoodName()+"-型号:"+hc.getProducFactory()+"-标价:"+hc.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);

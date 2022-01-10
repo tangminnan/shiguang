@@ -98,6 +98,8 @@ public class PartsController {
     String edit(@PathVariable("id") Long id, Model model) {
         PartsDO parts = partsService.get(id);
         model.addAttribute("parts", parts);
+        String name=parts.getViewGoodName()+"-型号:"+parts.getProducFactory()+"-标价:"+parts.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -115,6 +117,8 @@ public class PartsController {
     String detail(@PathVariable("id") Long id, Model model) {
         PartsDO parts = partsService.get(id);
         model.addAttribute("parts", parts);
+        String name=parts.getViewGoodName()+"-型号:"+parts.getProducFactory()+"-标价:"+parts.getRetailPrice();
+        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
