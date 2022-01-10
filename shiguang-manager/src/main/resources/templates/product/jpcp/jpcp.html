@@ -419,8 +419,8 @@
                     var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                     for (var i = 0; i < rows.length; i++) {
                         $("#mfrsname").val(rows[i].mfrsname);
-                        $("#mfrsid").val(rows[i].mfrsid);
-                        // $("#mfrsNames").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsnum);
+                        // $("#mfrsnames").val(rows[i].mfrsname);
                     }
                 }
             });
@@ -447,13 +447,13 @@
                     for (var i = 0; i < rows.length; i++) {
                         $("#brandname").val(rows[i].brandname);
                         $("#brandnum").val(rows[i].brandnum);
+                        // $("#brandNames").val(rows[i].brandname);
                     }
                 }
             });
             layer.full(toIndex);
         }
     }
-
 
     //清空
     function clearText() {

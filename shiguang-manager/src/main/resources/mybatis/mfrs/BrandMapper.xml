@@ -26,7 +26,7 @@
             where brandid = #{value}
 	</select>
     <select id="list" resultType="com.shiguang.mfrs.domain.BrandDO">
-       select b.`xsstate`,b.`state`,
+        select b.`xsstate`,b.`state`,
         b.`brandid`,b.`brandnum`,b.`brandname`,b.`goodsid`,good.`goodsname`,b.`materialid`,b.`materialname`,b.`lens_id`,b.`lens_name`,b.`light_id`,
         b.`light_name`,b.`refractivityid`,b.`refractivityvalue`,b.`function_id`,b.`function_name`,b.`gradual_id`,b.`gradual_name`,b.`usage_id`,
         b.`usage_name`,b.`type_id`,b.`type_name`,b.`registration`,b.`mfrsid`,m.`mfrsname`,b.`unitid`,b.`address`,b.`payid`,b.`batchid`,b.`factory`,
@@ -41,7 +41,7 @@
             <if test="payid != null and payid != ''">and b.payid = #{payid}</if>
             <if test="mfrsids != null and mfrsids != ''">and b.mfrsid LIKE concat(concat('%', #{mfrsids}),'%')</if>
             <if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat(concat('%', #{goodsids}),'%')</if>
-            and  b.state= 1
+            and  b.state= 1 and m.xsstate=0 and m.state=1
         </where>
         group by b.brandid order by b.brandid desc
         <if test="offset != null and limit != null">
@@ -60,7 +60,7 @@
             <if test="payid != null and payid != ''">and b.payid = #{payid}</if>
             <if test="mfrsids != null and mfrsids != ''">and b.mfrsid LIKE concat('%', #{mfrsids},'%')</if>
             <if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat('%', #{goodsids},'%')</if>
-            and  b.state= 1
+            and  b.state= 1 and m.xsstate=0 and m.state=1
         </where>
     </select>
 

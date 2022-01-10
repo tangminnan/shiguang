@@ -228,16 +228,62 @@
 <div th:include="include :: footer"></div>
 <script type="text/javascript">
     $(document).ready(function () {
-        // var mfrsid = $("#mfrsid").val();
-        // $(".val").remove();
-        // $(function () {
-        //     load();
-        // });
-        function load() {
-            
-
-        }
     });
+
+
+    <!--选择制造商-->
+    function choiceMfrs() {
+        var goodsid = $("#goodsid").val();
+        if (goodsid == "") {
+            layer.alert("请选择商品类型！");
+        } else {
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findmfrs/" + goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsname").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsnum);
+                        // alert(rows[i].mfrsnum)
+                        // $("#mfrsNames").val(rows[i].mfrsname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    function choiceBrand() {
+        var goodsid = $("#goodsid").val();
+        var mfrsname = $("#mfrsname").val();
+        if (mfrsname == "") {
+            layer.alert("请选择制造商！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/kucun/stock/findbrand/" + mfrsname+"/"+goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandname").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                        // $("#brandNames").val(rows[i].brandname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+
     function reLoad() {
         var goodsid=$("#goodsid").val();
         if (goodsid=="") {
@@ -247,7 +293,7 @@
                 .bootstrapTable(
                     {
                         method: 'get', // 服务器数据的请求方式 get or post
-                        url: '/retailprice/retailprice/jjlist', // 服务器数据的加载地址
+                        url: '/retailprice/retailprice/pjlist', // 服务器数据的加载地址
                         //	showRefresh : true,
                         //	showToggle : true,
                         //	showColumns : true,
@@ -282,11 +328,10 @@
                             },
                             {
                                 title: '品种代码',
-                                align: 'center',
+                                // align: 'center',
                                 formatter: function (value, row, index) {
-                                    if (1==1) {
+                                    if (row.goodsid==2) {
                                         return row.goodsid+"."+row.mfrsid+"."+row.brandnum
-
                                     } else {
                                         return ""
                                     }

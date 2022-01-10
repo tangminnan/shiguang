@@ -22,17 +22,10 @@
         left join c_unit u on s.unitid= u.unitid
         <where>
             <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
-            <!--<if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>-->
             <if test="goodsCode != null and goodsCode != ''">and s.produc_code = #{goodsCode}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-
-
-            <!--<if test="producNum != null and producNum != ''">and s.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>-->
             <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <!--<if test="goodsCode != null and goodsCode != ''">and s.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
-            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>-->
-            <!--<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>-->
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  s.retail_price
             </if>
@@ -47,7 +40,7 @@
             </if>
             <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and s.view_good_name = #{viewGoodName}</if>
-            and  s.state= 1
+            and  s.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -63,21 +56,14 @@
 
     </select>
     <select id="count" resultType="int">
-        select count(*) from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
+        select count(*)  from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
         left join c_unit u on s.unitid= u.unitid
         <where>
             <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
-            <!--<if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>-->
             <if test="goodsCode != null and goodsCode != ''">and s.produc_code = #{goodsCode}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-
-
-            <!--<if test="producNum != null and producNum != ''">and s.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>-->
             <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <!--<if test="goodsCode != null and goodsCode != ''">and s.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
-            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>-->
-            <!--<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>-->
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  s.retail_price
             </if>
@@ -92,7 +78,7 @@
             </if>
             <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and s.view_good_name = #{viewGoodName}</if>
-            and  s.state= 1
+            and  s.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <select id="getshiguang" resultType="com.shiguang.product.domain.ShiguangDO">

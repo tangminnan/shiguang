@@ -28,17 +28,10 @@
         left join p_function f on f.function_id = j.function_id
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <!--<if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>-->
             <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-
-
-            <!--<if test="producNum != null and producNum != ''">and j.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>-->
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <!--<if test="goodsCode != null and goodsCode != ''">and j.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
-            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>-->
-            <!--<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>-->
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  j.retail_price
             </if>
@@ -51,8 +44,6 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and j.retail_price &lt;=  #{taxPrice2}
             </if>
-
-
             <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
             <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
@@ -67,7 +58,7 @@
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and j.view_good_name = #{viewGoodName}</if>
-            and j.state= 1
+            and j.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 
         <choose>
@@ -94,17 +85,10 @@
         left join p_function f on f.function_id = j.function_id
         <where>
             <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <!--<if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>-->
             <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-
-
-            <!--<if test="producNum != null and producNum != ''">and j.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>-->
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <!--<if test="goodsCode != null and goodsCode != ''">and j.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
-            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>-->
-            <!--<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>-->
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  j.retail_price
             </if>
@@ -117,8 +101,6 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and j.retail_price &lt;=  #{taxPrice2}
             </if>
-
-
             <if test="lensId != null and lensId != ''">and j.lens_id = #{lensId}</if>
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
             <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
@@ -133,8 +115,7 @@
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and j.view_good_name = #{viewGoodName}</if>
-
-            and j.state= 1
+            and j.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
 

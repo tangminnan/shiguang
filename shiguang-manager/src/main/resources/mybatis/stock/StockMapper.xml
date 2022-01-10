@@ -1170,7 +1170,8 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and p.retail_price &lt;=  #{taxPrice2}
             </if>
-            and p.state=1
+            and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
+
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1218,7 +1219,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and p.retail_price &lt;=  #{taxPrice2}
             </if>
-            and p.state=1
+            and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <!--配件【商】【品】【查】【询】-->
@@ -1251,7 +1252,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and p.retail_price &lt;=  #{taxPrice2}
             </if>
-            and p.state=1
+            and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1291,7 +1292,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and p.retail_price &lt;=  #{taxPrice2}
             </if>
-            and p.state=1
+            and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <!--镜片定做【商】【品】【查】【询】-->
@@ -1360,7 +1361,7 @@
             </if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
-            and j.state=1
+            and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1410,7 +1411,7 @@
             </if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
-            and j.state=1
+            and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <!--镜片成品【商】【品】【查】【询】-->
@@ -1472,7 +1473,7 @@
                 and j.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
-            and j.state=1
+            and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1522,7 +1523,7 @@
                 and j.retail_price &lt;=  #{taxPrice2}
             </if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
-            and j.state=1
+            and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <!--隐形订做【商】【品】【查】【询】-->
@@ -1561,7 +1562,7 @@
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
-            and y.state=1
+            and y.xsstate = 0 and  y.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1606,7 +1607,7 @@
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
-            and y.state=1
+            and y.xsstate = 0 and  y.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <!--隐形成品【商】【品】【查】【询】-->
@@ -1662,7 +1663,7 @@
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
-            and y.state=1
+            and y.xsstate = 0 and  y.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1709,7 +1710,7 @@
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
-            and y.state=1
+            and y.xsstate = 0 and  y.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
 
@@ -1745,7 +1746,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and h.retail_price &lt;=  #{taxPrice2}
             </if>
-            and h.state=1
+            and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1786,7 +1787,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and h.retail_price &lt;=  #{taxPrice2}
             </if>
-            and h.state=1
+            and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <!--太阳镜【商】【品】【查】【询】-->
@@ -1839,7 +1840,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and t.retail_price &lt;=  #{taxPrice2}
             </if>
-            and t.state=1
+            and t.xsstate = 0 and  t.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1883,7 +1884,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and t.retail_price &lt;=  #{taxPrice2}
             </if>
-            and t.state=1
+            and t.xsstate = 0 and  t.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <!--老花镜【商】【品】【查】【询】-->
@@ -1937,7 +1938,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and o.retail_price &lt;=  #{taxPrice2}
             </if>
-            and o.state=1
+            and o.xsstate = 0 and  o.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -1981,7 +1982,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and o.retail_price &lt;=  #{taxPrice2}
             </if>
-            and o.state=1
+            and o.xsstate = 0 and  o.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <!--耗材【商】【品】【查】【询】-->
@@ -2012,7 +2013,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and h.retail_price &lt;=  #{taxPrice2}
             </if>
-            and h.state=1
+            and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -2051,7 +2052,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and h.retail_price &lt;=  #{taxPrice2}
             </if>
-            and h.state=1
+            and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <!--视光【商】【品】【查】【询】-->
@@ -2084,7 +2085,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and s.retail_price &lt;=  #{taxPrice2}
             </if>
-            and s.state=1
+            and s.xsstate = 0 and  s.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -2124,7 +2125,7 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and s.retail_price &lt;=  #{taxPrice2}
             </if>
-            and s.state=1
+            and s.xsstate = 0 and  s.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
     <!--【是否已存在商品信息】-->

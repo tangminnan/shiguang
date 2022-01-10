@@ -21,17 +21,10 @@
         left join c_unit u on t.unitid= u.unitid
         <where>
             <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
-            <!--<if test="producName != null and producName != ''">and t.produc_name = #{producName}</if>-->
             <if test="goodsCode != null and goodsCode != ''">and t.produc_code = #{goodsCode}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-
-
-            <!--<if test="producNum != null and producNum != ''">and t.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>-->
             <if test="producName != null and producName != ''">and t.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <!--<if test="goodsCode != null and goodsCode != ''">and t.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
-            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>-->
-            <!--<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>-->
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  t.retail_price
             </if>
@@ -44,14 +37,13 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and t.retail_price &lt;=  #{taxPrice2}
             </if>
-
             <if test="producFactory != null and producFactory != ''">and t.produc_factory = #{producFactory}</if>
             <if test="producColor != null and producColor != ''">and t.produc_color = #{producColor}</if>
             <if test="size != null and size != ''">and t.size = #{size}</if>
             <if test="xsstate != null and xsstate != ''">and t.xsstate = #{xsstate}</if>
             <if test="styleId != null and styleId != ''">and t.style_id = #{styleId}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and t.view_good_name = #{viewGoodName}</if>
-            and  t.state= 1
+            and  t.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 
         <choose>
@@ -72,17 +64,10 @@
         left join c_unit u on t.unitid= u.unitid
         <where>
             <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
-            <!--<if test="producName != null and producName != ''">and t.produc_name = #{producName}</if>-->
             <if test="goodsCode != null and goodsCode != ''">and t.produc_code = #{goodsCode}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
-
-
-            <!--<if test="producNum != null and producNum != ''">and t.produc_num LIKE concat(concat('%', #{producNum}),'%')</if>-->
             <if test="producName != null and producName != ''">and t.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <!--<if test="goodsCode != null and goodsCode != ''">and t.produc_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
-            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>-->
-            <!--<if test="brandname != null and brandname != ''">and b.brandname LIKE concat(concat('%', #{brandname}),'%')</if>-->
             <if test="retailPrice != null and retailPrice != ''">
                 and   #{retailPrice} &lt;=  t.retail_price
             </if>
@@ -95,14 +80,13 @@
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and t.retail_price &lt;=  #{taxPrice2}
             </if>
-
             <if test="producFactory != null and producFactory != ''">and t.produc_factory = #{producFactory}</if>
             <if test="producColor != null and producColor != ''">and t.produc_color = #{producColor}</if>
             <if test="size != null and size != ''">and t.size = #{size}</if>
             <if test="xsstate != null and xsstate != ''">and t.xsstate = #{xsstate}</if>
             <if test="styleId != null and styleId != ''">and t.style_id = #{styleId}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and t.view_good_name = #{viewGoodName}</if>
-            and  t.state= 1
+            and  t.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
 

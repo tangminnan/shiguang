@@ -417,7 +417,7 @@ input.HbcBtn_QK,
 .HspxxBtn input:nth-child(5){background-image: url(../img/icon0.png);}
 
 .msgBox table{background: #f6f5f5;text-align: left;}
-.msgBox table td:nth-child(odd){text-align: right;background: #e4e4e4;}
+/*.msgBox table td:nth-child(odd){text-align: right;background: #e4e4e4;}*/
 .msgBox table select{width:30%;text-align: left;}
 
 .msgBoxDD_top{overflow: hidden;margin-bottom: 15px;}

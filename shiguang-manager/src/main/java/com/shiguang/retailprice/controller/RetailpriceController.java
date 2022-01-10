@@ -143,7 +143,7 @@ public class RetailpriceController {
 	}
 	//镜架List
 	@ResponseBody
-	@RequestMapping("/jjlist")
+	@RequestMapping("/pjlist")
 	public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
 		//查询列表数据
 		Query query = new Query(params);
