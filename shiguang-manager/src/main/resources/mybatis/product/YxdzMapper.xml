@@ -246,7 +246,10 @@
             <if test="classtype != null">`classtype` = #{classtype},</if>
             <if test="viewGoodName != null">`view_good_name` = #{viewGoodName}</if>
         </set>
-        where id = #{id}
+		<where>
+			<if test="id != null and id != ''">and id = #{id}</if>
+			<if test="producNum != null and id != ''">and produc_num = #{producNum}</if>
+		</where>
     </update>
 
     <delete id="remove">

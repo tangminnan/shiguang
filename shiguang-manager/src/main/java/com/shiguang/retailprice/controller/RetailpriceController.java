@@ -154,19 +154,9 @@ public class RetailpriceController {
 		for (int i = 0; i < goodsids.length; i++) {
 			String goodsid = goodsids[i];
 			String classtype = classtypes[i];
-
 			String num = nums[i];
-			String name = names[i];
-
-			String mfrsnum = mfrsnums[i];
-			String mfrsname = mfrsnames[i];
-
-			String brandnum = brandnums[i];
-			String brandname = brandnames[i];
-
 			String oldMoney = oldMoneys[i];
 			String newMoney = newMoneys[i];
-
 			Map<String, Object> map = new HashMap<>();
 			map.put("num", num);
 			map.put("oldMoney", oldMoney);
@@ -175,49 +165,254 @@ public class RetailpriceController {
 				String producName = null;
 				for (ProducaDO jj : jjs) {
 					String producNum = jj.getProducNum();
-					producName = jj.getBrandname() + "-型号:" + jj.getFactory() + "-色号:" + jj.getProducColor() + "-标价:" + newMoney;
+					producName = jj.getViewGoodName() + "-型号:" + jj.getFactory() + "-色号:" + jj.getProducColor() + "-标价:" + newMoney;
 					ProducaDO ProducaDO = new ProducaDO();
 					ProducaDO.setProducNum(producNum);
 					ProducaDO.setProducName(producName);
 					ProducaDO.setRetailPrice(newMoney);
 					producaService.update(ProducaDO);
 				}
-				List<StockDO> jjStocks = stockService.list(map);
-				for (StockDO jjStock : jjStocks) {
-					String goodsNum = jjStock.getGoodsNum();
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
 					stockDO.setProducName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
+
 			} else if ("2".equals(goodsid)) {
 				List<PartsDO> pjs = partsService.list(map);
+				String producName = null;
+				for (PartsDO pj : pjs) {
+					String producNum = pj.getProducNum();
+					producName = pj.getViewGoodName() + "-型号:" + pj.getFactory() + "-标价:" + newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
 			} else if ("3".equals(goodsid) && "1".equals(classtype)) {
 				List<JpcpDO> jpcps = jpcpService.list(map);
+				String producName = null;
+				for (JpcpDO jpcp : jpcps) {
+					String producNum = jpcp.getProducNum();
+					producName = jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
 			} else if ("3".equals(goodsid) && "2".equals(classtype)) {
 				List<JpdzDO> jpdzs = jpdzService.list(map);
+				String producName = null;
+				for (JpdzDO jpdz : jpdzs) {
+					String producNum = jpdz.getProducNum();
+					producName = jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
 			} else if ("4".equals(goodsid) && "1".equals(classtype)) {
 				List<YxcpDO> yxcps = yxcpService.list(map);
+				String producName = null;
+				for (YxcpDO yxcp : yxcps) {
+					String producNum = yxcp.getProducNum();
+					producName = yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
 			} else if ("4".equals(goodsid) && "2".equals(classtype)) {
 				List<YxdzDO> yxdzs = yxdzService.list(map);
+				String producName = null;
+				for (YxdzDO yxdz : yxdzs) {
+					String producNum = yxdz.getProducNum();
+					producName = yxdz.getViewGoodName()+"-球镜:"+yxdz.getSphUp()+"/"+yxdz.getSphDown()+"-柱镜:"+yxdz.getCylUp()+"/"+yxdz.getCylDown()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
 			} else if ("5".equals(goodsid)) {
 				List<HlyDO> hlys = hlyService.list(map);
+				String producName = null;
+				for (HlyDO hly : hlys) {
+					String producNum = hly.getProducNum();
+					producName = hly.getViewGoodName()+"-型号:"+hly.getProducFactory()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
 			} else if ("6".equals(goodsid)) {
 				List<TyjDO> tyjs = tyjService.list(map);
+				String producName = null;
+				for (TyjDO tyj : tyjs) {
+					String producNum = tyj.getProducNum();
+					producName = tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
 			} else if ("7".equals(goodsid)) {
 				List<OldlensDO> lhjs = oldlensService.list(map);
+				String producName = null;
+				for (OldlensDO lhj : lhjs) {
+					String producNum = lhj.getProducNum();
+					producName = lhj.getViewGoodName()+"-球镜:"+lhj.getOldId()+"-型号:"+lhj.getProducFactory()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
 			} else if ("8".equals(goodsid)) {
 				List<HcDO> hcs = hcService.list(map);
+				String producName = null;
+				for (HcDO hc : hcs) {
+					String producNum = hc.getProducNum();
+					producName = hc.getBrandname()+"-型号:"+hc.getFactory()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
 			} else if ("9".equals(goodsid)) {
 				List<ShiguangDO> sgs = shiguangService.list(map);
+				String producName = null;
+				for (ShiguangDO sg : sgs) {
+					String producNum = sg.getProducNum();
+					producName = sg.getViewGoodName()+"-型号:"+sg.getProducFactory()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
 			}
+		}
 
+		for (int i = 0; i < goodsids.length; i++) {
+			String goodsid = goodsids[i];
+			String classtype = classtypes[i];
+			String num = nums[i];
+			String name = names[i];
+			String mfrsnum = mfrsnums[i];
+			String mfrsname= mfrsnames[i];
+			String brandnum = brandnums[i];
+			String brandname = brandnames[i];
+			String oldMoney = oldMoneys[i];
+			String newMoney = newMoneys[i];
 			RetailpriceDO retailpriceDO = new RetailpriceDO();
 			retailpriceDO.setNumber(number);
 			retailpriceDO.setDay(day);
 			retailpriceDO.setPeople(people);
 			retailpriceDO.setRemarks(remarks);
+			retailpriceDO.setGoodsid(goodsid);
+			retailpriceDO.setClasstype(classtype);
 			retailpriceDO.setNum(num);
 			retailpriceDO.setName(name);
 			retailpriceDO.setMfrsnum(mfrsnum);
@@ -226,12 +421,11 @@ public class RetailpriceController {
 			retailpriceDO.setBrandname(brandname);
 			retailpriceDO.setOldPrice(oldMoney);
 			retailpriceDO.setNewPrice(newMoney);
-			retailpriceService.save(retailprice);
+			retailpriceService.save(retailpriceDO);
 		}
-//		if(retailpriceService.save(retailprice)>0){
-//			return R.ok();
-//		}
-		return R.error();
+
+
+		return R.ok();
 	}
 	/**
 	 * 修改

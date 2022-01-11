@@ -7,15 +7,15 @@ import java.util.Date;
 
 /**
  * 零售价价格调整表
- * 
+ *
  * @author wjl
  * @email bushuo@163.com
- * @date 2022-01-08 14:42:35
+ * @date 2022-01-11 17:40:12
  */
 public class RetailpriceDO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	//
+
+	//id
 	private Long id;
 	//单据编号
 	private String number;
@@ -27,11 +27,16 @@ public class RetailpriceDO implements Serializable {
 	private String remarks;
 	//商品类别
 	private String goodsid;
+	//成品定制（1成品，2订做）
 	private String classtype;
-	//商品代码
+	//品种商品代码
 	private String num;
-	//商品名称
+	//品种商品名称
 	private String name;
+	//商品代码
+	private String goodsNum;
+	//商品名称
+	private String goodsName;
 	//制造商代码
 	private String mfrsnum;
 	//制造商名称
@@ -48,13 +53,13 @@ public class RetailpriceDO implements Serializable {
 	private String newPrice;
 
 	/**
-	 * 设置：
+	 * 设置：id
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 	/**
-	 * 获取：
+	 * 获取：id
 	 */
 	public Long getId() {
 		return id;
@@ -119,39 +124,65 @@ public class RetailpriceDO implements Serializable {
 	public String getGoodsid() {
 		return goodsid;
 	}
-
-	public String getClasstype() {
-		return classtype;
-	}
-
+	/**
+	 * 设置：成品定制（1成品，2订做）
+	 */
 	public void setClasstype(String classtype) {
 		this.classtype = classtype;
 	}
-
 	/**
-	 * 设置：商品代码
+	 * 获取：成品定制（1成品，2订做）
+	 */
+	public String getClasstype() {
+		return classtype;
+	}
+	/**
+	 * 设置：品种商品代码
 	 */
 	public void setNum(String num) {
 		this.num = num;
 	}
 	/**
-	 * 获取：商品代码
+	 * 获取：品种商品代码
 	 */
 	public String getNum() {
 		return num;
 	}
-
 	/**
-	 * 设置：商品名称
+	 * 设置：品种商品名称
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	/**
-	 * 获取：商品名称
+	 * 获取：品种商品名称
 	 */
 	public String getName() {
 		return name;
+	}
+	/**
+	 * 设置：商品代码
+	 */
+	public void setGoodsNum(String goodsNum) {
+		this.goodsNum = goodsNum;
+	}
+	/**
+	 * 获取：商品代码
+	 */
+	public String getGoodsNum() {
+		return goodsNum;
+	}
+	/**
+	 * 设置：商品名称
+	 */
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+	/**
+	 * 获取：商品名称
+	 */
+	public String getGoodsName() {
+		return goodsName;
 	}
 	/**
 	 * 设置：制造商代码

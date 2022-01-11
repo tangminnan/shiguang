@@ -74,7 +74,7 @@ public class BrandDO implements Serializable {
     //厂家型号
     private String factory;
     //促销金额
-    private Double money;
+    private String money;
     //速记码
     private String shorthandcode;
     //生产企业许可证号
@@ -517,14 +517,14 @@ public class BrandDO implements Serializable {
     /**
      * 设置：促销金额
      */
-    public void setMoney(Double money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 
     /**
      * 获取：促销金额
      */
-    public Double getMoney() {
+    public String getMoney() {
         return money;
     }
 

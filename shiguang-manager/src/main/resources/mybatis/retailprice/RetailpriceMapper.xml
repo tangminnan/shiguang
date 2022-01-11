@@ -4,104 +4,124 @@
 <mapper namespace="com.shiguang.retailprice.dao.RetailpriceDao">
 
 	<select id="get" resultType="com.shiguang.retailprice.domain.RetailpriceDO">
-		select `id`,`number`,`day`,`people`,`remarks`,`num`,`name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price` from all_retailprice where id = #{value}
+		select `id`,`number`,`day`,`people`,`remarks`,`goodsid`,`classtype`,`num`,`name`,`goods_num`,`goods_name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price` from all_retailprice where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.retailprice.domain.RetailpriceDO">
-		select `id`,`number`,`day`,`people`,`remarks`,`num`,`name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price` from all_retailprice
-        <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="number != null and number != ''"> and number = #{number} </if>
-		  		  <if test="day != null and day != ''"> and day = #{day} </if>
-		  		  <if test="people != null and people != ''"> and people = #{people} </if>
-		  		  <if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
-		  		  <if test="num != null and num != ''"> and num = #{num} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="mfrsnum != null and mfrsnum != ''"> and mfrsnum = #{mfrsnum} </if>
-		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
-		  		  <if test="brandnum != null and brandnum != ''"> and brandnum = #{brandnum} </if>
-		  		  <if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
-		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
-		  		  <if test="oldPrice != null and oldPrice != ''"> and old_price = #{oldPrice} </if>
-		  		  <if test="newPrice != null and newPrice != ''"> and new_price = #{newPrice} </if>
-		  		</where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
+		select `id`,`number`,`day`,`people`,`remarks`,`goodsid`,`classtype`,`num`,`name`,`goods_num`,`goods_name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price` from all_retailprice
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="number != null and number != ''"> and number = #{number} </if>
+			<if test="day != null and day != ''"> and day = #{day} </if>
+			<if test="people != null and people != ''"> and people = #{people} </if>
+			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
+			<if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
+			<if test="classtype != null and classtype != ''"> and classtype = #{classtype} </if>
+			<if test="num != null and num != ''"> and num = #{num} </if>
+			<if test="name != null and name != ''"> and name = #{name} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
+			<if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+			<if test="mfrsnum != null and mfrsnum != ''"> and mfrsnum = #{mfrsnum} </if>
+			<if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+			<if test="brandnum != null and brandnum != ''"> and brandnum = #{brandnum} </if>
+			<if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
+			<if test="factory != null and factory != ''"> and factory = #{factory} </if>
+			<if test="oldPrice != null and oldPrice != ''"> and old_price = #{oldPrice} </if>
+			<if test="newPrice != null and newPrice != ''"> and new_price = #{newPrice} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
 			<otherwise>
-                order by id desc
+				order by id desc
 			</otherwise>
-        </choose>
+		</choose>
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
- 	<select id="count" resultType="int">
+
+	<select id="count" resultType="int">
 		select count(*) from all_retailprice
-		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="number != null and number != ''"> and number = #{number} </if>
-		  		  <if test="day != null and day != ''"> and day = #{day} </if>
-		  		  <if test="people != null and people != ''"> and people = #{people} </if>
-		  		  <if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
-		  		  <if test="num != null and num != ''"> and num = #{num} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="mfrsnum != null and mfrsnum != ''"> and mfrsnum = #{mfrsnum} </if>
-		  		  <if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
-		  		  <if test="brandnum != null and brandnum != ''"> and brandnum = #{brandnum} </if>
-		  		  <if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
-		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
-		  		  <if test="oldPrice != null and oldPrice != ''"> and old_price = #{oldPrice} </if>
-		  		  <if test="newPrice != null and newPrice != ''"> and new_price = #{newPrice} </if>
-		  		</where>
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="number != null and number != ''"> and number = #{number} </if>
+			<if test="day != null and day != ''"> and day = #{day} </if>
+			<if test="people != null and people != ''"> and people = #{people} </if>
+			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
+			<if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
+			<if test="classtype != null and classtype != ''"> and classtype = #{classtype} </if>
+			<if test="num != null and num != ''"> and num = #{num} </if>
+			<if test="name != null and name != ''"> and name = #{name} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
+			<if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+			<if test="mfrsnum != null and mfrsnum != ''"> and mfrsnum = #{mfrsnum} </if>
+			<if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+			<if test="brandnum != null and brandnum != ''"> and brandnum = #{brandnum} </if>
+			<if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
+			<if test="factory != null and factory != ''"> and factory = #{factory} </if>
+			<if test="oldPrice != null and oldPrice != ''"> and old_price = #{oldPrice} </if>
+			<if test="newPrice != null and newPrice != ''"> and new_price = #{newPrice} </if>
+		</where>
 	</select>
-	 
+
 	<insert id="save" parameterType="com.shiguang.retailprice.domain.RetailpriceDO" useGeneratedKeys="true" keyProperty="id">
 		insert into all_retailprice
 		(
-			`number`, 
-			`day`, 
-			`people`, 
-			`remarks`, 
-			`num`, 
-			`name`, 
-			`mfrsnum`, 
-			`mfrsname`, 
-			`brandnum`, 
-			`brandname`, 
-			`factory`, 
-			`old_price`, 
+			`number`,
+			`day`,
+			`people`,
+			`remarks`,
+			`goodsid`,
+			`classtype`,
+			`num`,
+			`name`,
+			`goods_num`,
+			`goods_name`,
+			`mfrsnum`,
+			`mfrsname`,
+			`brandnum`,
+			`brandname`,
+			`factory`,
+			`old_price`,
 			`new_price`
 		)
 		values
 		(
-			#{number}, 
-			#{day}, 
-			#{people}, 
-			#{remarks}, 
-			#{num}, 
-			#{name}, 
-			#{mfrsnum}, 
-			#{mfrsname}, 
-			#{brandnum}, 
-			#{brandname}, 
-			#{factory}, 
-			#{oldPrice}, 
+			#{number},
+			#{day},
+			#{people},
+			#{remarks},
+			#{goodsid},
+			#{classtype},
+			#{num},
+			#{name},
+			#{goodsNum},
+			#{goodsName},
+			#{mfrsnum},
+			#{mfrsname},
+			#{brandnum},
+			#{brandname},
+			#{factory},
+			#{oldPrice},
 			#{newPrice}
 		)
 	</insert>
-	 
+
 	<update id="update" parameterType="com.shiguang.retailprice.domain.RetailpriceDO">
-		update all_retailprice 
+		update all_retailprice
 		<set>
 			<if test="number != null">`number` = #{number}, </if>
 			<if test="day != null">`day` = #{day}, </if>
 			<if test="people != null">`people` = #{people}, </if>
 			<if test="remarks != null">`remarks` = #{remarks}, </if>
+			<if test="goodsid != null">`goodsid` = #{goodsid}, </if>
+			<if test="classtype != null">`classtype` = #{classtype}, </if>
 			<if test="num != null">`num` = #{num}, </if>
 			<if test="name != null">`name` = #{name}, </if>
+			<if test="goodsNum != null">`goods_num` = #{goodsNum}, </if>
+			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
 			<if test="mfrsnum != null">`mfrsnum` = #{mfrsnum}, </if>
 			<if test="mfrsname != null">`mfrsname` = #{mfrsname}, </if>
 			<if test="brandnum != null">`brandnum` = #{brandnum}, </if>
@@ -112,13 +132,13 @@
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="remove">
 		delete from all_retailprice where id = #{value}
 	</delete>
-	
+
 	<delete id="batchRemove">
-		delete from all_retailprice where id in 
+		delete from all_retailprice where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
