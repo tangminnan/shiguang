@@ -35,13 +35,13 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price
+                and  p.retail_price &lt;=  #{retailPrice}
             </if>
             <if test="retailPrice2 != null and retailPrice2 != ''">
                 and p.retail_price &lt;=  #{retailPrice2}
             </if>
             <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  p.tax_price
+                and   p.tax_price  &lt;=  #{taxPrice}
             </if>
             <if test="taxPrice2 != null and taxPrice2 != ''">
                 and p.retail_price &lt;=  #{taxPrice2}
@@ -54,6 +54,9 @@
             <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
             <if test="styleId != null and styleId != ''">and p.style_id = #{styleId}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and p.view_good_name = #{viewGoodName}</if>
+
+            <if test="num != null and num != ''">and p.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and p.retail_price = #{oldMoney}</if>
             and p.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
@@ -97,6 +100,9 @@
             <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
             <if test="styleId != null and styleId != ''">and p.style_id = #{styleId}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and p.view_good_name = #{viewGoodName}</if>
+
+            <if test="num != null and num != ''">and p.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and p.retail_price = #{oldMoney}</if>
            and p.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>
@@ -195,7 +201,10 @@
             <if test="classtype != null">`classtype` = #{classtype},</if>
             <if test="viewGoodName != null">`view_nood_name` = #{viewGoodName}</if>
         </set>
-        where id = #{id}
+        <where>
+        <if test="id != null and id != ''">and id = #{id}</if>
+        <if test="producNum != null and id != ''">and produc_num = #{producNum}</if>
+        </where>
     </update>
 
     <delete id="remove">

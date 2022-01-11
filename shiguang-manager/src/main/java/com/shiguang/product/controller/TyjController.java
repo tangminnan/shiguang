@@ -98,8 +98,8 @@ public class TyjController {
     String edit(@PathVariable("id") Long id, Model model) {
         TyjDO tyj = tyjService.get(id);
         model.addAttribute("tyj", tyj);
-        String name=tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+tyj.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+tyj.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -117,8 +117,8 @@ public class TyjController {
     String detail(@PathVariable("id") Long id, Model model) {
         TyjDO tyj = tyjService.get(id);
         model.addAttribute("tyj", tyj);
-        String name=tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+tyj.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+tyj.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -161,8 +161,8 @@ public class TyjController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(TyjDO tyj) {
-        String name=tyj.getBrandname()+"-型号:"+tyj.getFactory()+"-颜色:"+tyj.getProducColor()+"-标价:"+tyj.getRetailPrice();
-        tyj.setProducName(name);
+//        String name=tyj.getBrandname()+"-型号:"+tyj.getFactory()+"-颜色:"+tyj.getProducColor()+"-标价:"+tyj.getRetailPrice();
+//        tyj.setProducName(name);
         tyjService.update(tyj);
         return R.ok();
     }

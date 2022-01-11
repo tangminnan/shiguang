@@ -151,8 +151,8 @@ public class JpcpController {
     String edit(@PathVariable("id") Long id, Model model) {
         JpcpDO jpcp = jpcpService.get(id);
         model.addAttribute("jpcp", jpcp);
-        String name=jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+jpcp.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+jpcp.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -194,8 +194,8 @@ public class JpcpController {
     String detail(@PathVariable("id") Long id, Model model) {
         JpcpDO jpcp = jpcpService.get(id);
         model.addAttribute("jpcp", jpcp);
-        String name=jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+jpcp.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+jpcp.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -264,14 +264,8 @@ public class JpcpController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(JpcpDO jpcp) {
-
-//        Integer value = jpcp.getLightId();
-//        if (value != 5) {
-//            jpcp.setGradualId(1);
-//        }
-
-        String name=jpcp.getBrandname()+"-球镜:"+jpcp.getCylId()+"-柱镜:"+jpcp.getSphId()+"-颜色:"+"-标价:"+jpcp.getRetailPrice();
-        jpcp.setProducName(name);
+//        String name=jpcp.getBrandname()+"-球镜:"+jpcp.getCylId()+"-柱镜:"+jpcp.getSphId()+"-颜色:"+"-标价:"+jpcp.getRetailPrice();
+//        jpcp.setProducName(name);
         jpcpService.update(jpcp);
 
         return R.ok();

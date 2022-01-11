@@ -39,6 +39,15 @@ public class JpdzDO implements Serializable {
     private Integer brandid;
     private String brandname;
     private String brandnum;
+    private String goodsid;
+
+    public String getGoodsid() {
+        return goodsid;
+    }
+
+    public void setGoodsid(String goodsid) {
+        this.goodsid = goodsid;
+    }
 
     public String getBrandnum() {
         return brandnum;

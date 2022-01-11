@@ -86,8 +86,8 @@ public class HcController {
     String edit(@PathVariable("id") Long id, Model model) {
         HcDO hc = hcService.get(id);
         model.addAttribute("hc", hc);
-        String name=hc.getViewGoodName()+"-型号:"+hc.getProducFactory()+"-标价:"+hc.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=hc.getViewGoodName()+"-型号:"+hc.getProducFactory()+"-标价:"+hc.getRetailPrice();
+//        model.addAttribute("name", name);
         String sm = hc.getSmall();
         Map<String, Object> map = new HashMap<>();
         //计量单位
@@ -103,8 +103,8 @@ public class HcController {
     String detail(@PathVariable("id") Long id, Model model) {
         HcDO hc = hcService.get(id);
         model.addAttribute("hc", hc);
-        String name=hc.getViewGoodName()+"-型号:"+hc.getProducFactory()+"-标价:"+hc.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=hc.getViewGoodName()+"-型号:"+hc.getProducFactory()+"-标价:"+hc.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -144,8 +144,8 @@ public class HcController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(HcDO hc) {
-        String name= hc.getBrandname()+"-型号:"+hc.getFactory()+"-标价:"+hc.getRetailPrice();
-        hc.setProducName(name);
+//        String name= hc.getBrandname()+"-型号:"+hc.getFactory()+"-标价:"+hc.getRetailPrice();
+//        hc.setProducName(name);
         hcService.update(hc);
         return R.ok();
     }

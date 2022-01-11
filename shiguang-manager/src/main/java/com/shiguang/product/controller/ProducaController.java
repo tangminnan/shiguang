@@ -139,8 +139,8 @@ ProducaController {
         //修改时显示制造商和商品品种名称
         ProducaDO produca = producaService.get(id);
         model.addAttribute("produca", produca);
-        String name=produca.getViewGoodName()+"-型号:"+produca.getProducFactory()+"-色号:"+produca.getProducFactorycolor()+"-标价:"+produca.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=produca.getViewGoodName()+"-型号:"+produca.getProducFactory()+"-色号:"+produca.getProducFactorycolor()+"-标价:"+produca.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -166,8 +166,8 @@ ProducaController {
         //修改时显示制造商和商品品种名称
         ProducaDO produca = producaService.get(id);
         model.addAttribute("produca", produca);
-        String name=produca.getViewGoodName()+"-型号:"+produca.getProducFactory()+"-色号:"+produca.getProducFactorycolor()+"-标价:"+produca.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=produca.getViewGoodName()+"-型号:"+produca.getProducFactory()+"-色号:"+produca.getProducFactorycolor()+"-标价:"+produca.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -218,8 +218,8 @@ ProducaController {
     @RequestMapping("/update")
     @RequiresPermissions("product:produca:edit")
     public R update(ProducaDO produca) {
-       String name= produca.getBrandname()+"-型号:"+produca.getFactory()+"-色号:"+produca.getProducColor()+"-标价:"+produca.getRetailPrice();
-        produca.setProducName(name);
+//       String name= produca.getBrandname()+"-型号:"+produca.getFactory()+"-色号:"+produca.getProducColor()+"-标价:"+produca.getRetailPrice();
+//        produca.setProducName(name);
         producaService.update(produca);
         return R.ok();
     }

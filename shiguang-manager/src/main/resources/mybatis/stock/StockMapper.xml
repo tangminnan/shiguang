@@ -54,6 +54,10 @@
             <if test="status != null and status != ''"> and s.status = #{status} </if>
             <if test="username != null and username != ''"> and s.username = #{username} </if>
             <if test="returnzt != null and returnzt != ''"> and s.returnzt = #{returnzt} </if>
+
+
+            <if test="num != null and num != ''">and s.goods_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and s.retail_price = #{oldMoney}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -105,6 +109,9 @@
             <if test="status != null and status != ''"> and status = #{status} </if>
             <if test="username != null and username != ''"> and username = #{username} </if>
             <if test="returnzt != null and returnzt != ''"> and returnzt = #{returnzt} </if>
+
+            <if test="num != null and num != ''">and s.goods_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and s.retail_price = #{oldMoney}</if>
         </where>
     </select>
 

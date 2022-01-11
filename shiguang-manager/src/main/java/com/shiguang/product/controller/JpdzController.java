@@ -148,8 +148,8 @@ public class JpdzController {
     String edit(@PathVariable("id") Long id, Model model) {
         JpdzDO jpdz = jpdzService.get(id);
         model.addAttribute("jpdz", jpdz);
-        String name=jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+jpdz.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+jpdz.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -191,8 +191,8 @@ public class JpdzController {
     String detail(@PathVariable("id") Long id, Model model) {
         JpdzDO jpdz = jpdzService.get(id);
         model.addAttribute("jpdz", jpdz);
-        String name=jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+jpdz.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+jpdz.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -263,8 +263,8 @@ public class JpdzController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(JpdzDO jpdz) {
-        String name=jpdz.getBrandname()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-颜色:"+"-标价:"+jpdz.getRetailPrice();
-        jpdz.setProducName(name);
+//        String name=jpdz.getBrandname()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-颜色:"+"-标价:"+jpdz.getRetailPrice();
+//        jpdz.setProducName(name);
         jpdzService.update(jpdz);
         return R.ok();
     }

@@ -34,7 +34,7 @@
                 </td>
                 <td>商品名称：</td>
                 <td>
-                    <input id="producName" name="producName" th:value="${name}"
+                    <input id="producName" name="producName"  th:value="${tyj.producName}"
                            type="text" readonly style="background-color: #e4e4e4">
                     <em>*</em>
                 </td>
@@ -62,7 +62,7 @@
                 <td>
                     <input id="factory" name="factory" th:value="${tyj.factory}"
                            type="text" onkeyup="liandong1(this)" oninput="if(value.length>9)value=value.slice(0,9)"
-                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" readonly style="background-color: #e4e4e4">
                     <em>*</em>
                 </td>
             </tr>
@@ -81,7 +81,7 @@
                     <input id="producFactorycolor" name="producFactorycolor"
                            th:value="${tyj.producFactorycolor}" type="text"
                            onkeyup="liandong3(this)" oninput="if(value.length>4)value=value.slice(0,4)"
-                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()">
+                           onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" readonly style="background-color: #e4e4e4">
                     <em>*</em>
                 </td>
                 <td>色号：</td>

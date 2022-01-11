@@ -41,6 +41,9 @@
             <if test="producColor != null and producColor != ''">and o.produc_color = #{producColor}</if>
             <if test="xsstate != null and xsstate != ''">and o.xsstate = #{xsstate}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and o.view_good_name = #{viewGoodName}</if>
+
+            <if test="num != null and num != ''">and o.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and o.retail_price = #{oldMoney}</if>
             and  o.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 
@@ -82,6 +85,10 @@
             <if test="producColor != null and producColor != ''">and o.produc_color = #{producColor}</if>
             <if test="xsstate != null and xsstate != ''">and o.xsstate = #{xsstate}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and o.view_good_name = #{viewGoodName}</if>
+
+
+            <if test="num != null and num != ''">and o.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and o.retail_price = #{oldMoney}</if>
             and  o.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>

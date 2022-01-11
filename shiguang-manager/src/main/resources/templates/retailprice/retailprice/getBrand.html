@@ -199,12 +199,22 @@
 		<tr>
 			<td>商品类别：</td>
 			<td>
-				<select id="goodsid" name="goodsid" style="width: 80%">
+				<select id="goodsid" name="goodsid" onchange="selectgoods()" style="width: 80%">
 					<option value="">--请选择--</option>
 					<option th:each="ls:${goodsDOList}"
 							th:text="${ls.goodsname}"
 							th:value="${ls.goodsid}"></option>
 				</select>
+				<div id="jp" style="display: none">
+					<label class="radio-inline">
+						<input type="radio" name="classtype"  value="1" checked/> 成品片
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="classtype" value="2" /> 订做片
+					</label>
+				</div>
+				<input type="hidden" id="classtype" value="" />
+
 			</td>
 			<td>制造商：</td>
 			<td>
@@ -226,11 +236,42 @@
 	<table id="exampleTable" data-mobile-responsive="true"></table>
 </div>
 <div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/retailprice/retailprice/getBrandGoods.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-    });
-
-
+    function selectgoods() {
+        var goodsid = $("#goodsid option:selected").val();
+        if (goodsid == ""){
+            $("input[name='classtype']:checked").val('1');
+            jp.style = "display: none";
+        }if (goodsid == 1){
+            $("input[name='classtype']:checked").val('1');
+            jp.style = "display: none";
+        }else if (goodsid == 2){
+            $("input[name='classtype']:checked").val('1');
+            jp.style = "display: none";
+        }else if (goodsid == 3){
+            $("#classtype").val("") ;
+            jp.style = "display: block";
+        }else if (goodsid == 4){
+            $("#classtype").val("") ;
+            jp.style = "display: block";
+        }else if (goodsid == 5){
+            $("input[name='classtype']:checked").val('1');
+            jp.style = "display: none";
+        }else if (goodsid == 6){
+            $("input[name='classtype']:checked").val('1');
+            jp.style = "display: none";
+        }else if (goodsid == 7){
+            $("input[name='classtype']:checked").val('1');
+            jp.style = "display: none";
+        }else if (goodsid == 8){
+            $("input[name='classtype']:checked").val('1');
+            jp.style = "display: none";
+        }else if (goodsid == 9){
+            $("input[name='classtype']:checked").val('1');
+            jp.style = "display: none";
+        }
+    }
     <!--选择制造商-->
     function choiceMfrs() {
         var goodsid = $("#goodsid").val();
@@ -283,77 +324,83 @@
             layer.full(toIndex);
         }
     }
-
     function reLoad() {
         var goodsid=$("#goodsid").val();
-        if (goodsid=="") {
-            layer.alert("请选择商品类别！");
-		}else if (goodsid==2) {
-            $('#exampleTable')
-                .bootstrapTable(
-                    {
-                        method: 'get', // 服务器数据的请求方式 get or post
-                        url: '/retailprice/retailprice/pjlist', // 服务器数据的加载地址
-                        //	showRefresh : true,
-                        //	showToggle : true,
-                        //	showColumns : true,
-                        iconSize: 'outline',
-                        toolbar: '#exampleToolbar',
-                        striped: true, // 设置为true会有隔行变色效果
-                        dataType: "json", // 服务器返回的数据类型
-                        pagination: true, // 设置为true会在底部显示分页条
-                        // queryParamsType : "limit",
-                        // //设置为limit则会发送符合RESTFull格式的参数
-                        singleSelect: false, // 设置为true将禁止多选
-                        // contentType : "application/x-www-form-urlencoded",
-                        // //发送到服务器的数据编码类型
-                        pageSize: 10, // 如果设置了分页，每页数据条数
-                        pageNumber: 1, // 如果设置了分布，首页页码
-                        // pageList:[10,25,50,100,500,1200,1500,2000],
-                        smartDisplay:false,
-                        //search : true, // 是否显示搜索框
-                        showColumns: false, // 是否显示内容下拉框（选择显示的列）
-                        sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
-                        queryParams: function (params) {
-                            return {
-                                //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-                                limit: params.limit,
-                                offset: params.offset,
-                                producNum  : $("#producNum").val()
-                            };
-                        },
-                        columns: [
-                            {
-                                checkbox: true
+            if (goodsid=="") {
+                layer.alert("请选择商品类别！");
+        	}else {
+                $('#exampleTable').bootstrapTable('refresh');
+                $('#exampleTable')
+                    .bootstrapTable(
+                        {
+                            method: 'get', // 服务器数据的请求方式 get or post
+                            url: '/retailprice/retailprice/brandslist', // 服务器数据的加载地址
+                            //	showRefresh : true,
+                            //	showToggle : true,
+                            //	showColumns : true,
+                            iconSize: 'outline',
+                            toolbar: '#exampleToolbar',
+                            striped: true, // 设置为true会有隔行变色效果
+                            dataType: "json", // 服务器返回的数据类型
+                            pagination: true, // 设置为true会在底部显示分页条
+                            // queryParamsType : "limit",
+                            // //设置为limit则会发送符合RESTFull格式的参数
+                            singleSelect: false, // 设置为true将禁止多选
+                            // contentType : "application/x-www-form-urlencoded",
+                            // //发送到服务器的数据编码类型
+                            pageSize: 10, // 如果设置了分页，每页数据条数
+                            pageNumber: 1, // 如果设置了分布，首页页码
+                            // pageList:[10,25,50,100,500,1200,1500,2000],
+                            smartDisplay: false,
+                            //search : true, // 是否显示搜索框
+                            showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                            sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                            queryParams: function (params) {
+                                return {
+                                    //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                    limit: params.limit,
+                                    offset: params.offset,
+                                    mfrsname: $("#mfrsname").val(),
+                                    brandname: $("#brandname").val(),
+                                    goodsid: $("#goodsid").val(),
+                                    classtype: $("input[name='classtype']:checked").val()
+                                };
                             },
-                            {
-                                title: '品种代码',
-                                // align: 'center',
-                                formatter: function (value, row, index) {
-                                    if (row.goodsid==2) {
-                                        return row.goodsid+"."+row.mfrsid+"."+row.brandnum
-                                    } else {
-                                        return ""
+                            columns: [
+                                {
+                                    checkbox: true
+                                },
+                                {
+                                    title: '品种代码',
+                                    align: 'center',
+                                    formatter: function (value, row, index) {
+                                        return row.goodsid + "." + row.mfrsid + "." + row.brandnum
                                     }
-                                }
-                            },
-                            {
-                                field : 'brandname',
-                                title : '品种名称'
-                            },
-                            {
-                                field : 'mfrsname',
-                                title : '所属制造商'
-                            },
-                            {
-                                field : 'retailPrice',
-                                title : '标准零售价'
-                            },
+                                },
+                                {
+                                    field: 'brandname',
+                                    title: '品种名称'
+                                },
+                                {
+                                    field: 'mfrsname',
+                                    title: '所属制造商'
+                                },
+                                {
+                                    field: 'retailPrice',
+                                    title: '标准零售价'
+                                },
 
-                        ]
-                    });
-		}
-
+                            ]
+                        });
+            }
+    }
+    function clearText() {
+        var controls = document.getElementsByTagName('input');
+        for (var i = 0; i < controls.length; i++) {
+            if (controls[i].type == 'text') {
+                controls[i].value = '';
+            }
+        }
     }
 </script>
 </body>

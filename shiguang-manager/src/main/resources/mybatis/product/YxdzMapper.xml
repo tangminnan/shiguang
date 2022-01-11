@@ -46,6 +46,10 @@
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="xsstate != null and xsstate != ''">and y.xsstate = #{xsstate}</if>
 			<if test="viewGoodName != null and viewGoodName != ''">and y.view_good_name = #{viewGoodName}</if>
+
+
+			<if test="num != null and num != ''">and y.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+			<if test="oldMoney != null and oldMoney != ''">and y.retail_price = #{oldMoney}</if>
             and y.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 		<choose>
@@ -87,6 +91,9 @@
 			<if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
 			<if test="xsstate != null and xsstate != ''">and y.xsstate = #{xsstate}</if>
 			<if test="viewGoodName != null and viewGoodName != ''">and y.view_good_name = #{viewGoodName}</if>
+
+			<if test="num != null and num != ''">and y.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+			<if test="oldMoney != null and oldMoney != ''">and y.retail_price = #{oldMoney}</if>
 			and y.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
     </select>

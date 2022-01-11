@@ -103,8 +103,8 @@ public class OldlensController {
     String edit(@PathVariable("id") Long id, Model model) {
         OldlensDO oldlens = oldlensService.get(id);
         model.addAttribute("oldlens", oldlens);
-        String name=oldlens.getViewGoodName()+"-球镜:"+oldlens.getOldId()+"-型号:"+oldlens.getProducFactory()+"-标价:"+oldlens.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=oldlens.getViewGoodName()+"-球镜:"+oldlens.getOldId()+"-型号:"+oldlens.getProducFactory()+"-标价:"+oldlens.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -125,8 +125,8 @@ public class OldlensController {
     String detail(@PathVariable("id") Long id, Model model) {
         OldlensDO oldlens = oldlensService.get(id);
         model.addAttribute("oldlens", oldlens);
-        String name=oldlens.getViewGoodName()+"-球镜:"+oldlens.getOldId()+"-型号:"+oldlens.getProducFactory()+"-标价:"+oldlens.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=oldlens.getViewGoodName()+"-球镜:"+oldlens.getOldId()+"-型号:"+oldlens.getProducFactory()+"-标价:"+oldlens.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -173,8 +173,8 @@ public class OldlensController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(OldlensDO oldlens) {
-        String name=oldlens.getBrandname() +"-球镜:"+oldlens.getOldId()+"-型号:"+oldlens.getFactory()+"-标价:"+oldlens.getRetailPrice();
-        oldlens.setProducName(name);
+//        String name=oldlens.getBrandname() +"-球镜:"+oldlens.getOldId()+"-型号:"+oldlens.getFactory()+"-标价:"+oldlens.getRetailPrice();
+//        oldlens.setProducName(name);
         oldlensService.update(oldlens);
         return R.ok();
     }

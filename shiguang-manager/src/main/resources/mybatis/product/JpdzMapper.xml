@@ -66,6 +66,9 @@
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and j.view_good_name = #{viewGoodName}</if>
+
+            <if test="num != null and num != ''">and j.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and j.retail_price = #{oldMoney}</if>
             and j.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 
@@ -117,6 +120,9 @@
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and j.view_good_name = #{viewGoodName}</if>
+
+            <if test="num != null and num != ''">and j.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and j.retail_price = #{oldMoney}</if>
             and j.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 

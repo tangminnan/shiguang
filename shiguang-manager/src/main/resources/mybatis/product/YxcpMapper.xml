@@ -54,6 +54,9 @@
             <if test="cyl != null and cyl != ''">
                 and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
+
+            <if test="num != null and num != ''">and y.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and y.retail_price = #{oldMoney}</if>
             and y.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 

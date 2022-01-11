@@ -40,13 +40,7 @@ public class JpcpDO implements Serializable {
     private String brandname;
     private String brandnum;
 
-    public String getBrandnum() {
-        return brandnum;
-    }
 
-    public void setBrandnum(String brandnum) {
-        this.brandnum = brandnum;
-    }
 
     //商品编号
     private String proid;
@@ -126,6 +120,24 @@ public class JpcpDO implements Serializable {
     public void setInventoryCount(String inventoryCount){this.inventoryCount = inventoryCount;}
     public String getInventoryCount() {return inventoryCount;}
 
+
+    public String getGoodsid() {
+        return goodsid;
+    }
+
+    public void setGoodsid(String goodsid) {
+        this.goodsid = goodsid;
+    }
+
+    private String goodsid;
+
+    public String getBrandnum() {
+        return brandnum;
+    }
+
+    public void setBrandnum(String brandnum) {
+        this.brandnum = brandnum;
+    }
     /**
      * 设置：镜片成品id
      */

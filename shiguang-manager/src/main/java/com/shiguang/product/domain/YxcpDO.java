@@ -41,6 +41,15 @@ public class YxcpDO implements Serializable {
     //品牌代码
     private String brandname;
     private String brandnum;
+    private String goodsid;
+
+    public String getGoodsid() {
+        return goodsid;
+    }
+
+    public void setGoodsid(String goodsid) {
+        this.goodsid = goodsid;
+    }
 
     public String getBrandnum() {
         return brandnum;

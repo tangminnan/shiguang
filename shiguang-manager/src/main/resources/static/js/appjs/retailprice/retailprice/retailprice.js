@@ -47,9 +47,9 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
+								{
 									field : 'id', 
-									title : '' 
+									title : 'id'
 								},
 																{
 									field : 'number', 

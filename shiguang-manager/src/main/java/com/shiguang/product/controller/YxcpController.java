@@ -150,8 +150,8 @@ public class YxcpController {
     String edit(@PathVariable("id") Long id, Model model) {
         YxcpDO yxcp = yxcpService.get(id);
         model.addAttribute("yxcp", yxcp);
-        String name=yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+yxcp.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+yxcp.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -197,8 +197,8 @@ public class YxcpController {
     String detail(@PathVariable("id") Long id, Model model) {
         YxcpDO yxcp = yxcpService.get(id);
         model.addAttribute("yxcp", yxcp);
-        String name=yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+yxcp.getRetailPrice();
-        model.addAttribute("name", name);
+//        String name=yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+yxcp.getRetailPrice();
+//        model.addAttribute("name", name);
         Map<String, Object> map = new HashMap<>();
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
@@ -268,8 +268,8 @@ public class YxcpController {
     @ResponseBody
     @RequestMapping("/update")
     public R update(YxcpDO yxcp) {
-        String name=yxcp.getBrandname()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-颜色:"+"-标价:"+yxcp.getRetailPrice();
-        yxcp.setProducName(name);
+//        String name=yxcp.getBrandname()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-颜色:"+"-标价:"+yxcp.getRetailPrice();
+//        yxcp.setProducName(name);
         yxcpService.update(yxcp);
         return R.ok();
     }

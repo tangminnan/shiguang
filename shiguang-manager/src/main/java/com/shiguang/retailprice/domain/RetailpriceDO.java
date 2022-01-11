@@ -25,6 +25,9 @@ public class RetailpriceDO implements Serializable {
 	private String people;
 	//备注
 	private String remarks;
+	//商品类别
+	private String goodsid;
+	private String classtype;
 	//商品代码
 	private String num;
 	//商品名称
@@ -105,6 +108,27 @@ public class RetailpriceDO implements Serializable {
 		return remarks;
 	}
 	/**
+	 * 设置：商品类别
+	 */
+	public void setGoodsid(String goodsid) {
+		this.goodsid = goodsid;
+	}
+	/**
+	 * 获取：商品类别
+	 */
+	public String getGoodsid() {
+		return goodsid;
+	}
+
+	public String getClasstype() {
+		return classtype;
+	}
+
+	public void setClasstype(String classtype) {
+		this.classtype = classtype;
+	}
+
+	/**
 	 * 设置：商品代码
 	 */
 	public void setNum(String num) {
@@ -116,6 +140,7 @@ public class RetailpriceDO implements Serializable {
 	public String getNum() {
 		return num;
 	}
+
 	/**
 	 * 设置：商品名称
 	 */

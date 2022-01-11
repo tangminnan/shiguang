@@ -40,6 +40,10 @@
             <if test="partsStyle != null and partsStyle != ''">and p.parts_style = #{partsStyle}</if>
             <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and p.view_good_name = #{viewGoodName}</if>
+
+
+            <if test="num != null and num != ''">and p.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and p.retail_price = #{oldMoney}</if>
             and p.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
@@ -79,6 +83,9 @@
             <if test="partsStyle != null and partsStyle != ''">and p.parts_style = #{partsStyle}</if>
             <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and p.view_good_name = #{viewGoodName}</if>
+
+            <if test="num != null and num != ''">and p.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and p.retail_price = #{oldMoney}</if>
             and p.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
     </select>

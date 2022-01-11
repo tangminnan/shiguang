@@ -40,6 +40,9 @@
             </if>
             <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and h.view_good_name = #{viewGoodName}</if>
+
+            <if test="num != null and num != ''">and h.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and h.retail_price = #{oldMoney}</if>
             and  h.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 
@@ -78,6 +81,9 @@
             </if>
             <if test="xsstate != null and xsstate != ''">and h.xsstate = #{xsstate}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and h.view_good_name = #{viewGoodName}</if>
+
+            <if test="num != null and num != ''">and h.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and h.retail_price = #{oldMoney}</if>
             and  h.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 

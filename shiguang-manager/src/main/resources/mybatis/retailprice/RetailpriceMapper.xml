@@ -124,19 +124,58 @@
 		</foreach>
 	</delete>
 
-	<select id="pjlist" resultType="com.shiguang.product.domain.PartsDO">
-		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price from c_brand b
-		join   aa_parts a on  a.brandnum=b.brandnum   AND a.`mfrsid`=b.`mfrsid`
+	<select id="jjlist" resultType="com.shiguang.product.domain.ProducaDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_produca a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
 		join c_mfrs m on  m.mfrsnum=b.mfrsid
 		<where>
-			<if test="brandid != null and brandid != ''">and b.brandid = #{brandid}</if>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
 				order by ${sort} ${order}
 			</when>
 			<otherwise>
-				GROUP BY  b.brandnum  ,  b.`mfrsid`,a.retail_price
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+				order by b.brandid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="jjlistCount" resultType="int">
+		SELECT count( 0 ) FROM
+		(
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_produca a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+		order by b.brandid desc
+		) AS temp
+	</select>
+	<select id="pjlist" resultType="com.shiguang.product.domain.PartsDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_parts a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
 				order by b.brandid desc
 			</otherwise>
 		</choose>
@@ -147,12 +186,353 @@
 	<select id="pjlistCount" resultType="int">
 		SELECT count( 0 ) FROM
 	   (
-        select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price from c_brand b
-		join   aa_parts a on  a.brandnum=b.brandnum   AND a.`mfrsid`=b.`mfrsid`
+        select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_parts a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
  		join c_mfrs m on  m.mfrsnum=b.mfrsid
- 		GROUP BY  b.brandnum  ,  b.`mfrsid`,a.retail_price
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+ 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
        order by b.brandid desc
 	    ) AS temp
+	</select>
+	<select id="jpcplist" resultType="com.shiguang.product.domain.JpcpDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_jpcp a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+				order by b.brandid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="jpcplistCount" resultType="int">
+		SELECT count( 0 ) FROM
+	   (
+        select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price ,a.classtype from c_brand b
+		join   aa_jpcp a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+ 		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+ 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+       order by b.brandid desc
+	    ) AS temp
+	</select>
+	<select id="jpdzlist" resultType="com.shiguang.product.domain.JpdzDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_jpdz a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+				order by b.brandid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="jpdzlistCount" resultType="int">
+		SELECT count( 0 ) FROM
+	   (
+        select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_jpdz a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+ 		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+ 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+       order by b.brandid desc
+	    ) AS temp
+	</select>
+	<select id="yxcplist" resultType="com.shiguang.product.domain.YxcpDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_yxcp a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+				order by b.brandid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="yxcplistCount" resultType="int">
+		SELECT count( 0 ) FROM
+	   (
+        select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_yxcp a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+ 		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+ 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+       order by b.brandid desc
+	    ) AS temp
+	</select>
+	<select id="yxdzlist" resultType="com.shiguang.product.domain.YxdzDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_yxdz a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+				order by b.brandid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="yxdzlistCount" resultType="int">
+		SELECT count( 0 ) FROM
+	   (
+        select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_yxdz a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+ 		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+ 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+       order by b.brandid desc
+	    ) AS temp
+	</select>
+<select id="hlylist" resultType="com.shiguang.product.domain.HlyDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_hly a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+				order by b.brandid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="hlylistCount" resultType="int">
+		SELECT count( 0 ) FROM
+	   (
+        select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_hly a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+ 		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+ 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+       order by b.brandid desc
+	    ) AS temp
+	</select>
+
+<select id="tyjlist" resultType="com.shiguang.product.domain.TyjDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_tyj a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+				order by b.brandid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="tyjlistCount" resultType="int">
+		SELECT count( 0 ) FROM
+	   (
+        select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_tyj a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+ 		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+ 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+       order by b.brandid desc
+	    ) AS temp
+	</select>
+	<select id="lhjlist" resultType="com.shiguang.product.domain.OldlensDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_oldlens a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+				order by b.brandid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="lhjlistCount" resultType="int">
+		SELECT count( 0 ) FROM
+	   (
+        select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_oldlens a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+ 		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+ 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+       order by b.brandid desc
+	    ) AS temp
+	</select>
+
+	<select id="hclist" resultType="com.shiguang.product.domain.HcDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_hc a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+				order by b.brandid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="hclistCount" resultType="int">
+		SELECT count( 0 ) FROM
+		(
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_hc a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+		order by b.brandid desc
+		) AS temp
+	</select>
+
+	<select id="sglist" resultType="com.shiguang.product.domain.ShiguangDO">
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_shiguang a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+				order by b.brandid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="sglistCount" resultType="int">
+		SELECT count( 0 ) FROM
+		(
+		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
+		join   aa_shiguang a on  a.brandnum=b.brandnum   AND a.mfrsid=b.mfrsid
+		join c_mfrs m on  m.mfrsnum=b.mfrsid
+		<where>
+			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+		</where>
+		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
+		order by b.brandid desc
+		) AS temp
 	</select>
 
 </mapper>
