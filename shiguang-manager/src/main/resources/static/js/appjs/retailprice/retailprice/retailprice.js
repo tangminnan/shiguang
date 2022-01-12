@@ -120,6 +120,10 @@ function load() {
                         title : '调整价格'
                     },
                     {
+                        field : 'flag',
+                        title : '类型'
+                    },
+                    {
                         title : '操作',
                         field : 'id',
                         align : 'center',
@@ -149,6 +153,17 @@ function add() {
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '520px' ],
         content : prefix + '/add' // iframe的url
+    });
+    layer.full(toIndex);
+}
+function addGoods() {
+    var toIndex = layer.open({
+        type : 2,
+        title : '增加',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : prefix + '/addGoods' // iframe的url
     });
     layer.full(toIndex);
 }

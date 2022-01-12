@@ -107,6 +107,7 @@ public class JpcpDO implements Serializable {
     }
     //型号
     private String producFactory;
+    private String factory;
 
     public String getProducFactory() {
         return producFactory;
@@ -115,6 +116,15 @@ public class JpcpDO implements Serializable {
     public void setProducFactory(String producFactory) {
         this.producFactory = producFactory;
     }
+
+    public String getFactory() {
+        return factory;
+    }
+
+    public void setFactory(String factory) {
+        this.factory = factory;
+    }
+
     //盘盈盘亏的商品数量
     private String inventoryCount;
     public void setInventoryCount(String inventoryCount){this.inventoryCount = inventoryCount;}

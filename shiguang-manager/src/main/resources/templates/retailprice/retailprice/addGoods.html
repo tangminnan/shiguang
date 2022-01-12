@@ -1,0 +1,1134 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>零售价调价品种</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+	<div class="m40 tabS PHGL">
+		<h3>检查条件</h3>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr>
+				<td>单据编号：</td>
+				<td>
+					<input id="number" name="number" th:value="${number}" type="text"
+						   style="background-color: #e4e4e4" readonly />
+				</td>
+				<td>单据日期：</td>
+				<td><input id="day" name="day" th:value="${createTime}" type="text"
+						   style="background-color: #e4e4e4" readonly /></td>
+				<td>单据人：</td>
+				<td><input id="people" name="people" th:value="${people}" type="text"
+						   style="background-color: #e4e4e4" readonly /></td>
+			</tr>
+			<tr>
+				<td>商品类型：</td>
+				<td>
+					<select id="goodsid" name="goodsid" onchange="selectgoods()" style="width: 70%">
+						<option value="">--请选择--</option>
+						<option th:each="ls:${goodsDOList}"
+								th:text="${ls.goodsname}"
+								th:value="${ls.goodsid}"></option>
+					</select>
+					<div id="jp" style="display: none">
+						<label class="radio-inline">
+							<input type="radio" name="classtype"  value="1" checked /> 成品片
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="classtype" value="2" /> 订做片
+						</label>
+					</div>
+					<input type="hidden" id="classtype" value="" />
+
+				</td>
+				<td>制造商：</td>
+				<td>
+					<input id="mfrsid" name="mfrsid" type="hidden" readonly/>
+					<input id="mfrsname" name="mfrsname" type="text" readonly/>
+					<input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
+				</td>
+			</tr>
+			<tr>
+				<td>备注：</td>
+				<td colspan="5"><textarea id="beizhu" name="beizhu" rows="3"></textarea></td>
+			</tr>
+			<tr style="display: none">
+				<td>类型（商品调价）：</td>
+				<td>
+					<input  id="flag" name="flag" value="1" type="text"
+							style="background-color: #e4e4e4" readonly />
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="HH_btns">
+			<div class="Xbtn">
+				<input type="button" value="单品添加商品" onclick="choiceGoods()" />
+			</div>
+			<div class="Cbtn buyBtns">
+				<input type="button" class="H_bc" value="保存并审核" onclick="saveGoods()" />
+			</div>
+		</div>
+	</div>
+	<!--商品信息-->
+	<div class="m40 tabS SPmsg">
+		<h3>商品信息</h3>
+		<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+			<tbody>
+			<tr id="tab1">
+				<td style="width: 100%;" class="Choose">
+					<table >
+						<tr class="thead">
+							<td>商品代码</td>
+							<td>商品名称</td>
+							<td>品种</td>
+							<td>型号</td>
+							<td>原销售价格</td>
+							<td>调整价格</td>
+							<td>操作</td>
+						</tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji"></tr>
+					</table>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="Cbtn buyBtns">
+			<input type="button" class="H_bc" value="保存并审核" onclick="saveGoods()" />
+		</div>
+	</div>
+</form>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/retailprice/retailprice/addGoods.js"></script>
+</body>
+<script type="text/javascript">
+    function selectgoods() {
+        var goodsid = $("#goodsid option:selected").val();
+        if (goodsid == ""){
+            $("#mfrsid").val("");
+			$("#mfrsname").val("");
+            $(".val1").remove();
+            jp.style = "display: none";
+        }if (goodsid == 1){
+            $("#mfrsid").val("");
+            $("#mfrsname").val("");
+            $(".val1").remove();
+            jp.style = "display: none";
+        }else if (goodsid == 2){
+            $("#mfrsid").val("");
+            $("#mfrsname").val("");
+            $(".val1").remove();
+            jp.style = "display: none";
+        }else if (goodsid == 3){
+            $("#mfrsid").val("");
+            $("#mfrsname").val("");
+            $(".val1").remove();
+            $("#classtype").val("") ;
+            jp.style = "display: block";
+        }else if (goodsid == 4){
+            $("#mfrsid").val("");
+            $("#mfrsname").val("");
+            $(".val1").remove();
+            $("#classtype").val("") ;
+            jp.style = "display: block";
+        }else if (goodsid == 5){
+            $("#mfrsid").val("");
+            $("#mfrsname").val("");
+            $(".val1").remove();
+            jp.style = "display: none";
+        }else if (goodsid == 6){
+            $("#mfrsid").val("");
+            $("#mfrsname").val("");
+            $(".val1").remove();
+            jp.style = "display: none";
+        }else if (goodsid == 7){
+            $("#mfrsid").val("");
+            $("#mfrsname").val("");
+            $(".val1").remove();
+            jp.style = "display: none";
+        }else if (goodsid == 8){
+            $("#mfrsid").val("");
+            $("#mfrsname").val("");
+            $(".val1").remove();
+            jp.style = "display: none";
+        }else if (goodsid == 9){
+            $("#mfrsid").val("");
+            $("#mfrsname").val("");
+            $(".val1").remove();
+            jp.style = "display: none";
+        }
+    }
+    <!--选择制造商-->
+    function choiceMfrs() {
+        var goodsid = $("#goodsid").val();
+        if (goodsid == "") {
+            layer.alert("请选择商品类型！");
+        } else {
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findmfrs/" + goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsname").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsnum);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    var barHtml="";
+    var flag="";
+    var flags="";
+    var arr = new Array();
+    var moneyarr = new Array();
+   function choiceGoods() {
+       var goodsid = $("#goodsid").val();
+       var mfrsid = $("#mfrsid").val();
+       var mfrsname = $("#mfrsname").val();
+       if (goodsid == "") {
+           $("#classtype").val("");
+       } else {
+           $("#classtype").val("1");
+       }
+       if (goodsid == 3 || goodsid == 4) {
+           $("#classtype").val($("input[name='classtype']:checked").val());
+       }
+       var classtype = $("#classtype").val();
+       if (goodsid == "") {
+           layer.alert("请选择采购类型！");
+       } else if (goodsid != "" && mfrsname == "") {
+           layer.alert("请选择所属制造商！");
+       }
+       else if (goodsid == "1") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/jingjia/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   barHtml = "";
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+       else if (goodsid == "2") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/peijian/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   // alert(JSON.stringify(rows));
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           // alert($("input[name=danjuNumber]").html())
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               // alert(arr[index]+"循环的条码");
+                               // alert(rows[i].producCode+"选中的条码");
+                               // alert(rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum);
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   // alert("扫码和原来的一样数量加1");
+                                   // var count = moneyarr[index];
+                                   // $("input[name=goodsCount]").eq(index).val(parseInt(count) + parseInt(1));
+                                   barHtml = "";
+                                   // break lable;
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   // alert("新增111");
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           // alert("条码没有过新增");
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+       else if (goodsid == "3" && classtype == "1") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/jingpian/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   barHtml = "";
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+       else if (goodsid == "3" && classtype == "2") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/jpdz/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   barHtml = "";
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+       else if (goodsid == "4" && classtype == "1") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/yinxing/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   barHtml = "";
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+       else if (goodsid == "4" && classtype == "2") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/yxdz/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   barHtml = "";
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+       else if (goodsid == "5") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/hly/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   barHtml = "";
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+       else if (goodsid == "6") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/tyj/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   barHtml = "";
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+       else if (goodsid == "7") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/lhj/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   barHtml = "";
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+       else if (goodsid == "8") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/hc/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   barHtml = "";
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+       else if (goodsid == "9") {
+           var toIndex = layer.open({
+               type: 2,
+               title: '商品查询',
+               maxmin: true,
+               shadeClose: false, // 点击遮罩关闭层
+               area: ['800px', '520px'],
+               content: "/stock/stock/sg/" + mfrsid + "/" + mfrsname,// iframe的url
+               cancel: function (index, layero) {
+                   var rows = window[layero.find('iframe')[0]['name']].showCol();
+                   for (var i = 0; i < rows.length; i++) {
+                       barHtml += "<tr class='val1'>";
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
+                       barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                       barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
+
+                       barHtml += "<td style='display: none'>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
+                       barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
+                       barHtml += "<td style='display: none'>" + rows[i].brandname+ "</td>";//0
+                       barHtml += "<input name='name' type='hidden' value='" + rows[i].brandname + "'>";
+
+
+
+                       barHtml += "<td  >" + rows[i].producNum + "</td>";//0
+                       barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].producNum + "'>";
+                       barHtml += "<td  >" + rows[i].producName + "</td>";//0
+                       barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].producName + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsid + "</td>";//0
+                       barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
+                       barHtml += "<td  style='display: none'>" + rows[i].mfrsname + "</td>";//0
+                       barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
+
+                       barHtml += "<td  style='display: none'>" + rows[i].brandnum + "</td>";//0
+                       barHtml += "<input name='brandnum' type='hidden' value='" + rows[i].brandnum + "'>";
+                       barHtml += "<td  >" + rows[i].brandname + "</td>";//0
+                       barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+
+                       barHtml += "<td  >" + rows[i].factory + "</td>";//0
+                       barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+
+                       barHtml += "<td>" + rows[i].retailPrice + "</td>";//0
+                       barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
+                       barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
+                       barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                       barHtml += "</tr>";
+                       if ($("input[name=goodsNum]").length == 0) {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       } else if ($("input[name=goodsNum]").length != 0) {
+                           for (var as = 0; as < $("input[name=goodsNum]").length; as++) {
+                               var goodsNum = $("input[name=goodsNum]").eq(as).val();
+                               var oldPrice = $("input[name=oldPrice]").eq(as).val();
+                               arr[as] = goodsNum;
+                               moneyarr[as] = oldPrice;
+                           }
+                           for (var index = 0; index < arr.length; index++) {
+                               if (arr[index] == rows[i].producNum && moneyarr[index] == rows[i].retailPrice) {
+                                   flag = "1";
+                                   flags = "修改";
+                                   barHtml = "";
+                               } else if (arr[index] != rows[i].producNum && moneyarr[index] != rows[i].retailPrice) {
+                                   flag = "0";
+                                   flags = "新增";
+                               }
+                           }
+                       }
+                       if (flags == "新增" && flag == "0") {
+                           $(".heji").before(barHtml);
+                           barHtml = "";
+                       }
+
+                   }
+               }
+           });
+           layer.full(toIndex);
+       }
+   }
+
+
+    function delertTr(obj) {
+        var x;
+        var r=confirm("是否删除该的商品!");
+        if (r==true){
+            x="确定";
+        }
+        else{
+            x="取消";
+        }
+        if(x=="确定"){
+            var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+            tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
+            arr = new Array();
+        }
+    }
+    function getmoney(obj, maxLen) {
+        if (maxLen && obj.value.length > maxLen) {//判断长度
+            obj.value = obj.value.slice(0, 10);
+        }
+        //修复第一个字符是小数点 的情况.
+        if (obj.value !== '' && obj.value.substr(0, 1) === '.') {
+            obj.value = "";
+        }
+        //解决 粘贴不生效
+        obj.value = obj.value.replace(/^0*(0\.|[1-9])/, '$1');
+        //清除“数字”和“.”以外的字符
+        obj.value = obj.value.replace(/[^\d.]/g, "");
+        //只保留第一个小数点(.)清除多余的
+        obj.value = obj.value.replace(/\.{2,}/g, ".");
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        //只能输入两个小数
+        obj.value = obj.value.replace(/^(\d+)\.(\d\d).*$/, '$1.$2');
+        if (obj.value.indexOf(".") < 0 && obj.value !== "") {//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+            if (obj.value.substr(0, 1) === '0' && obj.value.length === 2) {
+                obj.value = obj.value.substr(1, obj.value.length);
+            }
+        }
+    }
+    function shuzi(e) {
+        var val = parseFloat(e.value);
+        val=parseInt(val*100)/100;
+        if (val > 0) {
+            e.value = val.toFixed(2)
+        } else if (val <= 0) {
+            e.value = val.toFixed(2)
+        }
+    };
+</script>
+</html>

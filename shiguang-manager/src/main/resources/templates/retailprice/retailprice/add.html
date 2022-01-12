@@ -31,6 +31,13 @@
 				<td>备注：</td>
 				<td colspan="5"><textarea id="beizhu" name="beizhu" rows="3"></textarea></td>
 			</tr>
+			<tr style="display: none">
+				<td>类型（品种调价）：</td>
+				<td>
+					<input  id="flag" name="flag" value="0" type="text"
+						   style="background-color: #e4e4e4" readonly />
+				</td>
+			</tr>
 			</tbody>
 		</table>
 		<div class="HH_btns">
@@ -58,12 +65,15 @@
 							<td>调整价格</td>
 							<td>操作</td>
 						</tr>
-						<tr style="font-weight:bold;font-size: 15px;" class="heji1"></tr>
+						<tr style="font-weight:bold;font-size: 15px;" class="heji"></tr>
 					</table>
 				</td>
 			</tr>
 			</tbody>
 		</table>
+		<div class="Cbtn buyBtns">
+			<input type="button" class="H_bc" value="保存并审核" onclick="save()" />
+		</div>
 	</div>
 </form>
 <div th:include="include::footer"></div>
@@ -74,7 +84,7 @@
     var flag="";
     var flags="";
     var arr = new Array();
-    var moneys = new Array();
+    var moneyarr = new Array();
     function getBrand() {
         var toIndex = layer.open({
             type: 2,
@@ -85,16 +95,13 @@
             content: "/retailprice/retailprice/getbrand/",// iframe的url
             cancel: function (index, layero) {
                 var rows = window[layero.find('iframe')[0]['name']].showCol();
+                // alert(JSON.stringify(rows));
                     for (var i = 0; i < rows.length; i++) {
-                        // alert(rows[i].brandname);
                         barHtml += "<tr class='val1'>";
                         barHtml += "<td style='display: none'>" + rows[i].goodsid+ "</td>";//0
-                        barHtml += "<input name='goodsid' type='hidden' value='" + rows[i].goodsid + "'>";
-                         barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
-                        barHtml += "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>";
-
-
-
+                        barHtml += "<input name='goodstype' type='hidden' value='" + rows[i].goodsid + "'>";
+						barHtml += "<td style='display: none'>" + rows[i].classtype+ "</td>";//0
+                        barHtml += "<input name='classtypes' type='hidden' value='" + rows[i].classtype + "'>";
 
                         barHtml += "<td>" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "</td>";
                         barHtml += "<input name='num' type='hidden' value='" + rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum + "'>";
@@ -110,41 +117,49 @@
                         barHtml += "<input name='mfrsnum' type='hidden' value='" + rows[i].mfrsid + "'>";
                         barHtml += "<td>" + rows[i].mfrsname+ "</td>";//0
                         barHtml += "<input name='mfrsname' type='hidden' value='" + rows[i].mfrsname + "'>";
-                        barHtml += "<td>" + rows[i].retailPrice+ "</td>";//0
 
+                        barHtml += "<td>" + rows[i].retailPrice+ "</td>";//0
                         barHtml += "<input name='oldPrice' type='hidden' value='" + rows[i].retailPrice + "'>";
                         barHtml += "<td  >" + "<input  id='newPrice' name='newPrice' oninput='getmoney(this,10)' onchange='shuzi(this)' autofocus  type='text'/>" + "</td>";
                         barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
                         barHtml += "</tr>";
+
                         if ($("input[name=num]").length == 0) {
-                            $(".heji1").before(barHtml);
+                            $(".heji").before(barHtml);
                             barHtml = "";
                         } else if ($("input[name=num]").length != 0) {
+                            // alert($("input[name=danjuNumber]").html())
                             for (var as = 0; as < $("input[name=num]").length; as++) {
                                 var num = $("input[name=num]").eq(as).val();
-                                var money = $("input[name=retailPrice]").eq(as).val();
+                                var oldPrice = $("input[name=oldPrice]").eq(as).val();
                                 arr[as] = num;
-                                moneys[as] = money;
+                                moneyarr[as] = oldPrice;
                             }
-                            // alert(arr);
-                            // alert(moneys);
                             for (var index = 0; index < arr.length; index++) {
                                 // alert(arr[index]+"循环的条码");
-                                // alert(rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum+"选中的条码");
-                                if (arr[index] == rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum && moneys[index]==rows[i].retailPrice) {
+                                // alert(rows[i].producCode+"选中的条码");
+                                // alert(rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum);
+                                if (arr[index] ==  rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum && moneyarr[index]==rows[i].retailPrice) {
                                     flag = "1";
                                     flags = "修改";
+                                    // alert("扫码和原来的一样数量加1");
+                                    // var count = moneyarr[index];
+                                    // $("input[name=goodsCount]").eq(index).val(parseInt(count) + parseInt(1));
                                     barHtml = "";
-                                } else if (arr[index] != rows[i].producCode && moneys[index] !=rows[i].retailPrice) {
+                                    // break lable;
+                                } else if (arr[index] != rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum && moneyarr[index]!=rows[i].retailPrice) {
+                                    // alert("新增111");
                                     flag = "0";
                                     flags = "新增";
                                 }
                             }
                         }
                         if (flags == "新增" && flag == "0") {
-                            $(".heji1").before(barHtml);
+                            // alert("条码没有过新增");
+                            $(".heji").before(barHtml);
                             barHtml = "";
                         }
+
                     }
             }
         });

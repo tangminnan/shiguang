@@ -753,7 +753,8 @@
                 layer.alert("请选择采购类型！");
             } else if (goodsid != "" && mfrsid == "") {
                 layer.alert("请选择所属制造商！");
-            } else if (goodVal == "镜架") {
+            }
+            else if (goodVal == "镜架") {
                 // alert(arr);
                 // $(".val1").remove();
                 var toIndex = layer.open({
@@ -854,7 +855,8 @@
                     }
                 });
                 layer.full(toIndex);
-            } else if (goodVal == "配件") {
+            }
+            else if (goodVal == "配件") {
                 // $(".val2").remove();
                 var toIndex = layer.open({
                     type: 2,
@@ -865,6 +867,7 @@
                     content: "/stock/stock/peijian/" + mfrsid + "/" + mfrsname,// iframe的url
                     cancel: function (index, layero) {
                         var rows = window[layero.find('iframe')[0]['name']].showCol();
+                        // alert(JSON.stringify(rows));
                         lable:
                         {
                             for (var i = 0; i < rows.length; i++) {
@@ -908,7 +911,7 @@
                                 barHtml += "<td  >" + "<input  id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>";
                                 barHtml += "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>";
                                 barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
-                                barHtml += "</tr>"
+                                barHtml += "</tr>";
                                 if ($("input[name=goodsCode]").length == 0) {
                                     $(".heji2").before(barHtml);
                                     barHtml = "";
@@ -949,7 +952,8 @@
                     }
                 });
                 layer.full(toIndex);
-            } else if (goodVal == "镜片") {
+            }
+            else if (goodVal == "镜片") {
                 // $(".val3").remove();
                 var toIndex = layer.open({
                     type: 2,
@@ -1048,7 +1052,8 @@
                     }
                 });
                 layer.full(toIndex);
-            } else if (goodVal == "隐形") {
+            }
+            else if (goodVal == "隐形") {
                 // $(".val4").remove();
                 var toIndex = layer.open({
                     type: 2,
@@ -1149,7 +1154,8 @@
                     }
                 });
                 layer.full(toIndex);
-            } else if (goodVal == "护理液") {
+            }
+            else if (goodVal == "护理液") {
                 // $(".val5").remove();
                 var toIndex = layer.open({
                     type: 2,
@@ -1246,7 +1252,8 @@
                     }
                 });
                 layer.full(toIndex);
-            } else if (goodVal == "太阳镜") {
+            }
+            else if (goodVal == "太阳镜") {
                 // $(".val6").remove();
                 var toIndex = layer.open({
                     type: 2,
@@ -1341,7 +1348,8 @@
                     }
                 });
                 layer.full(toIndex);
-            } else if (goodVal == "老花镜") {
+            }
+            else if (goodVal == "老花镜") {
                 // $(".val7").remove();
                 var toIndex = layer.open({
                     type: 2,
@@ -1439,7 +1447,8 @@
                     }
                 });
                 layer.full(toIndex);
-            } else if (goodVal == "耗材") {
+            }
+            else if (goodVal == "耗材") {
                 // $(".val8").remove();
                 var toIndex = layer.open({
                     type: 2,
@@ -1534,7 +1543,8 @@
                     }
                 });
                 layer.full(toIndex);
-            } else if (goodVal == "视光") {
+            }
+            else if (goodVal == "视光") {
                 // $(".val9").remove();
                 var toIndex = layer.open({
                     type: 2,
