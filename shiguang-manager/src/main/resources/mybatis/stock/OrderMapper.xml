@@ -87,7 +87,56 @@
     </select>
 
     <select id="count" resultType="int">
-       SELECT COUNT(DISTINCT danju_number) FROM stock_order
+       SELECT COUNT(DISTINCT danju_number)
+        from stock_order s
+        join c_mfrs m on s.mfrsid=m.mfrsnum
+        join c_position po on s.position_id=po.position_id
+        join department d on po.depart_number= d.depart_number
+        join c_goods g on s.goods_type=g.goodsid
+        <where>
+            <if test="id != null and id != ''">and s.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>
+            <if test="goodsCount != null and goodsCount != ''">and s.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
+            <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
+            <if test="retailPrice != null and retailPrice != ''">and s.retail_price = #{retailPrice}</if>
+            <if test="priceSum != null and priceSum != ''">and s.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and s.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and s.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and s.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and s.whole_sum = #{wholeSum}</if>
+            <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
+            <if test="positionName != null and positionName != ''">and s.position_name = #{positionName}</if>
+            <if test="createTime != null and createTime != ''">and s.create_time = #{createTime}</if>
+            <!--<if test="danjuNumber != null and danjuNumber != ''">and s.danju_number = #{danjuNumber}</if>-->
+
+            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number LIKE concat(concat('%', #{danjuNumber}),'%')</if>
+
+            <if test="orderNumber != null and orderNumber != ''">and s.order_number = #{orderNumber}</if>
+            <if test="yundanNumber != null and yundanNumber != ''">and s.yundan_number = #{yundanNumber}</if>
+            <if test="zhidanPeople != null and zhidanPeople != ''">and s.zhidan_people = #{zhidanPeople}</if>
+            <if test="danjuDay != null and danjuDay != ''">and s.danju_day = #{danjuDay}</if>
+            <if test="tuihuoNumber != null and tuihuoNumber != ''">and s.tuihuo_number = #{tuihuoNumber}</if>
+            <if test="factoryNumber != null and factoryNumber != ''">and s.factory_number = #{factoryNumber}</if>
+            <if test="beizhu != null and beizhu != ''">and s.beizhu = #{beizhu}</if>
+            <if test="unit != null and unit != ''">and s.unit = #{unit}</if>
+            <if test="batch != null and batch != ''"> and s.batch = #{batch} </if>
+            <if test="zhuceNumber != null and zhuceNumber != ''"> and s.zhuce_number = #{zhuceNumber} </if>
+            <if test="produceDay != null and produceDay != ''"> and s.produce_day = #{produceDay} </if>
+            <if test="useday != null and useday != ''"> and s.useday = #{useday} </if>
+            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
+            <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
+            <if test="classtype != null and classtype != ''">and s.classtype = #{classtype} </if>
+            <if test="factory != null and factory != ''">and s.factory = #{factory} </if>
+            <if test="status != null and status != ''">and s.status = #{status} </if>
+            <if test="username != null and username != ''">and s.username = #{username} </if>
+            <if test="returnzt != null and returnzt != ''">and s.returnzt = #{returnzt} </if>
+            <if test="stockorder != null and stockorder != ''">and s.stockorder = #{stockorder} </if>
+            <if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid} </if>
+        </where>
     </select>
 
     <insert id="save" parameterType="com.shiguang.stock.domain.OrderDO" useGeneratedKeys="true" keyProperty="id">

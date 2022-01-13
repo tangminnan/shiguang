@@ -10,6 +10,7 @@ import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.domain.TuihuoDO;
 import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,9 +126,10 @@ public class RetailpriceController {
 		String day=retailprice.getDay();
 		String people=retailprice.getPeople();
 		String remarks=retailprice.getRemarks();
+		String flag=retailprice.getFlag();
 
-		String[] goodsids =retailprice.getGoodsid().split(",");
-		String[] classtypes =retailprice.getClasstype().split(",");
+		String[] goodstypes =retailprice.getGoodstype().split(",");
+		String[] classtypess =retailprice.getClasstypes().split(",");
 		String[] nums =retailprice.getNum().split(",");
 		String[] names =retailprice.getName().split(",");
 
@@ -141,7 +143,7 @@ public class RetailpriceController {
 		String[] newMoneys =retailprice.getNewPrice().split(",");
 
 		String newmoney;
-		for (int i=0; i<goodsids.length;i++){
+		for (int i=0; i<goodstypes.length;i++){
 			try {
 				newmoney = newMoneys[i];
 			}catch (ArrayIndexOutOfBoundsException e){
@@ -151,12 +153,25 @@ public class RetailpriceController {
 				return R.error("调整价格不能为空！");
 			}
 		}
-		for (int i = 0; i < goodsids.length; i++) {
-			String goodsid = goodsids[i];
-			String classtype = classtypes[i];
+		for (int i = 0; i < goodstypes.length; i++) {
+//			String goodsid = goodsids[i];
+//			String classtype = classtypes[i];
+//			String num = nums[i];
+//			String oldMoney = oldMoneys[i];
+//			String newMoney = newMoneys[i];
+
+			String goodsid = goodstypes[i];
+			String classtype = classtypess[i];
 			String num = nums[i];
+			String name = names[i];
+			String mfrsnum = mfrsnums[i];
+			String mfrsname= mfrsnames[i];
+			String brandnum = brandnums[i];
+			String brandname = brandnames[i];
 			String oldMoney = oldMoneys[i];
 			String newMoney = newMoneys[i];
+
+
 			Map<String, Object> map = new HashMap<>();
 			map.put("num", num);
 			map.put("oldMoney", oldMoney);
@@ -171,6 +186,29 @@ public class RetailpriceController {
 					ProducaDO.setProducName(producName);
 					ProducaDO.setRetailPrice(newMoney);
 					producaService.update(ProducaDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jj.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -193,6 +231,29 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(pj.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -214,6 +275,29 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jpcp.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -235,6 +319,29 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jpdz.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -256,6 +363,29 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(yxcp.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -277,6 +407,29 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(yxdz.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -298,6 +451,29 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(hly.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -319,6 +495,29 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(tyj.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -340,6 +539,29 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(lhj.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -361,6 +583,28 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(hc.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -382,6 +626,29 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(sg.getFactory());
+					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
 				for (StockDO stock : stocks) {
@@ -395,34 +662,6 @@ public class RetailpriceController {
 			}
 		}
 
-		for (int i = 0; i < goodsids.length; i++) {
-			String goodsid = goodsids[i];
-			String classtype = classtypes[i];
-			String num = nums[i];
-			String name = names[i];
-			String mfrsnum = mfrsnums[i];
-			String mfrsname= mfrsnames[i];
-			String brandnum = brandnums[i];
-			String brandname = brandnames[i];
-			String oldMoney = oldMoneys[i];
-			String newMoney = newMoneys[i];
-			RetailpriceDO retailpriceDO = new RetailpriceDO();
-			retailpriceDO.setNumber(number);
-			retailpriceDO.setDay(day);
-			retailpriceDO.setPeople(people);
-			retailpriceDO.setRemarks(remarks);
-			retailpriceDO.setGoodsid(goodsid);
-			retailpriceDO.setClasstype(classtype);
-			retailpriceDO.setNum(num);
-			retailpriceDO.setName(name);
-			retailpriceDO.setMfrsnum(mfrsnum);
-			retailpriceDO.setMfrsname(mfrsname);
-			retailpriceDO.setBrandnum(brandnum);
-			retailpriceDO.setBrandname(brandname);
-			retailpriceDO.setOldPrice(oldMoney);
-			retailpriceDO.setNewPrice(newMoney);
-			retailpriceService.save(retailpriceDO);
-		}
 
 
 		return R.ok();
@@ -470,7 +709,7 @@ public class RetailpriceController {
 		model.addAttribute("goodsDOList", goodsDOList);
 		return "/retailprice/retailprice/getBrand";
 	}
-	//镜架List
+	//brandslist
 	@ResponseBody
 	@RequestMapping("/brandslist")
 	public PageUtils brandslist(@RequestParam Map<String, Object> params) {
@@ -493,12 +732,16 @@ public class RetailpriceController {
 			pageUtils= new PageUtils(jpcplist, total);
 		}else if ("3".equals(goods) && "2".equals(classtype)){
 			List<JpdzDO> jpdzlist = retailpriceService.jpdzlist(query);
-			int total = retailpriceService.jpcplistCount(query);
+			int total = retailpriceService.jpdzlistCount(query);
 			pageUtils= new PageUtils(jpdzlist, total);
 		}else if ("4".equals(goods) && "1".equals(classtype)){
 			List<YxcpDO> yxcplist = retailpriceService.yxcplist(query);
 			int total = retailpriceService.yxcplistCount(query);
 			pageUtils= new PageUtils(yxcplist, total);
+		}else if ("4".equals(goods) && "2".equals(classtype)){
+			List<YxdzDO> yxdzlist = retailpriceService.yxdzlist(query);
+			int total = retailpriceService.yxdzlistCount(query);
+			pageUtils= new PageUtils(yxdzlist, total);
 		}else if ("5".equals(goods)){
 			List<HlyDO> hlylist = retailpriceService.hlylist(query);
 			int total = retailpriceService.hlylistCount(query);
@@ -520,8 +763,600 @@ public class RetailpriceController {
 			int total = retailpriceService.sglistCount(query);
 			pageUtils= new PageUtils(sglist, total);
 		}
-
-
 		return pageUtils;
 	}
+
+	@GetMapping("/addGoods")
+	@RequiresPermissions("retailprice:retailprice:add")
+	String addGoods(Model model){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String createTime=df.format(new Date());// new Date()为获取当前系统时间
+		Long uuid = GuuidUtil.getUUID();
+		String uuidstr = "PC" + uuid.toString();
+		model.addAttribute("createTime",createTime);
+		model.addAttribute("number",uuidstr);
+		model.addAttribute("people", ShiroUtils.getUser().getName());
+		Map<String, Object> map = new HashMap<>();
+		List<GoodsDO> goodsDOList = goodsService.list(map);
+		model.addAttribute("goodsDOList", goodsDOList);
+		return "retailprice/retailprice/addGoods";
+	}
+
+	/**
+	 * 保存
+	 */
+	@ResponseBody
+	@PostMapping("/saveGoods")
+	@RequiresPermissions("retailprice:retailprice:add")
+	public R saveGoods( RetailpriceDO retailprice){
+		String number=retailprice.getNumber();
+		String day=retailprice.getDay();
+		String people=retailprice.getPeople();
+		String remarks=retailprice.getRemarks();
+		String flag=retailprice.getFlag();
+
+		String[] goodstypes =retailprice.getGoodstype().split(",");
+		String[] classtypess =retailprice.getClasstypes().split(",");
+		String[] nums =retailprice.getNum().split(",");
+		String[] names =retailprice.getName().split(",");
+		String[] goodsnums =retailprice.getGoodsNum().split(",");
+		String[] goodsnames =retailprice.getGoodsName().split(",");
+
+		String[] mfrsnums =retailprice.getMfrsnum().split(",");
+		String[] mfrsnames =retailprice.getMfrsname().split(",");
+
+		String[] brandnums =retailprice.getBrandnum().split(",");
+		String[] brandnames =retailprice.getBrandname().split(",");
+
+		String[] oldMoneys =retailprice.getOldPrice().split(",");
+		String[] newMoneys =retailprice.getNewPrice().split(",");
+
+		String newmoney;
+		for (int i=0; i<goodstypes.length;i++){
+			try {
+				newmoney = newMoneys[i];
+			}catch (ArrayIndexOutOfBoundsException e){
+				newmoney="";
+			}
+			if ("".equals(newmoney)){
+				return R.error("调整价格不能为空！");
+			}
+		}
+		for (int i = 0; i < goodstypes.length; i++) {
+			String goodsid = goodstypes[i];
+			String classtype = classtypess[i];
+			String num = nums[i];
+			String name = names[i];
+			String goodsnum = goodsnums[i];
+			String goodsname = goodsnames[i];
+			String mfrsnum = mfrsnums[i];
+			String mfrsname= mfrsnames[i];
+			String brandnum = brandnums[i];
+			String brandname = brandnames[i];
+			String oldMoney = oldMoneys[i];
+			String newMoney = newMoneys[i];
+
+
+			Map<String, Object> map = new HashMap<>();
+			map.put("producNum", goodsnum);
+			map.put("oldMoney", oldMoney);
+			if ("1".equals(goodsid)) {
+				List<ProducaDO> jjs = producaService.list(map);
+				String producName = null;
+				for (ProducaDO jj : jjs) {
+					String producNum = jj.getProducNum();
+					producName = jj.getViewGoodName() + "-型号:" + jj.getFactory() + "-色号:" + jj.getProducColor() + "-标价:" + newMoney;
+					ProducaDO ProducaDO = new ProducaDO();
+					ProducaDO.setProducNum(producNum);
+					ProducaDO.setProducName(producName);
+					ProducaDO.setRetailPrice(newMoney);
+					producaService.update(ProducaDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jj.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+
+			} else if ("2".equals(goodsid)) {
+				List<PartsDO> pjs = partsService.list(map);
+				String producName = null;
+				for (PartsDO pj : pjs) {
+					String producNum = pj.getProducNum();
+					producName = pj.getViewGoodName() + "-型号:" + pj.getFactory() + "-标价:" + newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(pj.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+			} else if ("3".equals(goodsid) && "1".equals(classtype)) {
+				List<JpcpDO> jpcps = jpcpService.list(map);
+				String producName = null;
+				for (JpcpDO jpcp : jpcps) {
+					String producNum = jpcp.getProducNum();
+					producName = jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jpcp.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+			} else if ("3".equals(goodsid) && "2".equals(classtype)) {
+				List<JpdzDO> jpdzs = jpdzService.list(map);
+				String producName = null;
+				for (JpdzDO jpdz : jpdzs) {
+					String producNum = jpdz.getProducNum();
+					producName = jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jpdz.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+			} else if ("4".equals(goodsid) && "1".equals(classtype)) {
+				List<YxcpDO> yxcps = yxcpService.list(map);
+				String producName = null;
+				for (YxcpDO yxcp : yxcps) {
+					String producNum = yxcp.getProducNum();
+					producName = yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(yxcp.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+			} else if ("4".equals(goodsid) && "2".equals(classtype)) {
+				List<YxdzDO> yxdzs = yxdzService.list(map);
+				String producName = null;
+				for (YxdzDO yxdz : yxdzs) {
+					String producNum = yxdz.getProducNum();
+					producName = yxdz.getViewGoodName()+"-球镜:"+yxdz.getSphUp()+"/"+yxdz.getSphDown()+"-柱镜:"+yxdz.getCylUp()+"/"+yxdz.getCylDown()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(yxdz.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+			} else if ("5".equals(goodsid)) {
+				List<HlyDO> hlys = hlyService.list(map);
+				String producName = null;
+				for (HlyDO hly : hlys) {
+					String producNum = hly.getProducNum();
+					producName = hly.getViewGoodName()+"-型号:"+hly.getProducFactory()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(hly.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+			} else if ("6".equals(goodsid)) {
+				List<TyjDO> tyjs = tyjService.list(map);
+				String producName = null;
+				for (TyjDO tyj : tyjs) {
+					String producNum = tyj.getProducNum();
+					producName = tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(tyj.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+			} else if ("7".equals(goodsid)) {
+				List<OldlensDO> lhjs = oldlensService.list(map);
+				String producName = null;
+				for (OldlensDO lhj : lhjs) {
+					String producNum = lhj.getProducNum();
+					producName = lhj.getViewGoodName()+"-球镜:"+lhj.getOldId()+"-型号:"+lhj.getProducFactory()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(lhj.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+			} else if ("8".equals(goodsid)) {
+				List<HcDO> hcs = hcService.list(map);
+				String producName = null;
+				for (HcDO hc : hcs) {
+					String producNum = hc.getProducNum();
+					producName = hc.getBrandname()+"-型号:"+hc.getFactory()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(hc.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+			} else if ("9".equals(goodsid)) {
+				List<ShiguangDO> sgs = shiguangService.list(map);
+				String producName = null;
+				for (ShiguangDO sg : sgs) {
+					String producNum = sg.getProducNum();
+					producName = sg.getViewGoodName()+"-型号:"+sg.getProducFactory()+"-标价:"+newMoney;
+					PartsDO partsDO = new PartsDO();
+					partsDO.setProducNum(producNum);
+					partsDO.setProducName(producName);
+					partsDO.setRetailPrice(newMoney);
+					partsService.update(partsDO);
+
+					RetailpriceDO retailpriceDO = new RetailpriceDO();
+					retailpriceDO.setNumber(number);
+					retailpriceDO.setDay(day);
+					retailpriceDO.setPeople(people);
+					retailpriceDO.setRemarks(remarks);
+					retailpriceDO.setFlag(flag);
+					retailpriceDO.setGoodstype(goodsid);
+					retailpriceDO.setClasstypes(classtype);
+					retailpriceDO.setNum(num);
+					retailpriceDO.setName(name);
+
+					retailpriceDO.setGoodsNum(producNum);
+					retailpriceDO.setGoodsName(producName);
+
+					retailpriceDO.setMfrsnum(mfrsnum);
+					retailpriceDO.setMfrsname(mfrsname);
+					retailpriceDO.setBrandnum(brandnum);
+					retailpriceDO.setBrandname(brandname);
+					retailpriceDO.setOldPrice(oldMoney);
+					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(sg.getFactory());
+					retailpriceService.save(retailpriceDO);
+				}
+				List<StockDO> stocks = stockService.list(map);
+				for (StockDO stock : stocks) {
+					String goodsNum = stock.getGoodsNum();
+					StockDO stockDO = new StockDO();
+					stockDO.setGoodsNum(goodsNum);
+					stockDO.setProducName(producName);
+					stockDO.setRetailPrice(newMoney);
+					stockService.update(stockDO);
+				}
+			}
+		}
+		return R.ok();
+	}
+
+	@GetMapping("/detial/{id}")
+	@RequiresPermissions("retailprice:retailprice:detial")
+	String detial(@PathVariable("id") Long id,Model model){
+		RetailpriceDO retailprice = retailpriceService.get(id);
+		model.addAttribute("retailprice", retailprice);
+		return "retailprice/retailprice/detial";
+	}
+	///详情列表
+	@ResponseBody
+	@RequestMapping(value = "/selectOrder")
+	public List<RetailpriceDO> selectOrder(String number,Model model) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("number", number);
+		List<RetailpriceDO> retailpriceDOList = retailpriceService.selectOrder(map);
+		model.addAttribute("retailpriceDOList", retailpriceDOList);
+		return retailpriceDOList;
+	}
+	//打印
+	@GetMapping("/danju")
+	String danju(String number, Model model) {
+		RetailpriceDO retailpriceDO = retailpriceService.getDanju(number);
+		model.addAttribute("retailpriceDO", retailpriceDO);
+		//———获取当前系统时间—————
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+		Date date = new Date();
+		String newday = sdf.format(date);
+		model.addAttribute("newday", newday);
+		return "/retailprice/retailprice/danju";
+	}
+
 }

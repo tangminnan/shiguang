@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author wjl
  * @email bushuo@163.com
- * @date 2022-01-11 17:40:12
+ * @date 2022-01-12 17:04:00
  */
 public class RetailpriceDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -26,9 +26,9 @@ public class RetailpriceDO implements Serializable {
 	//备注
 	private String remarks;
 	//商品类别
-	private String goodsid;
+	private String goodstype;
 	//成品定制（1成品，2订做）
-	private String classtype;
+	private String classtypes;
 	//品种商品代码
 	private String num;
 	//品种商品名称
@@ -51,6 +51,8 @@ public class RetailpriceDO implements Serializable {
 	private String oldPrice;
 	//调整价格
 	private String newPrice;
+	//0品种调价，1商品调价
+	private String flag;
 
 	/**
 	 * 设置：id
@@ -115,26 +117,26 @@ public class RetailpriceDO implements Serializable {
 	/**
 	 * 设置：商品类别
 	 */
-	public void setGoodsid(String goodsid) {
-		this.goodsid = goodsid;
+	public void setGoodstype(String goodstype) {
+		this.goodstype = goodstype;
 	}
 	/**
 	 * 获取：商品类别
 	 */
-	public String getGoodsid() {
-		return goodsid;
+	public String getGoodstype() {
+		return goodstype;
 	}
 	/**
 	 * 设置：成品定制（1成品，2订做）
 	 */
-	public void setClasstype(String classtype) {
-		this.classtype = classtype;
+	public void setClasstypes(String classtypes) {
+		this.classtypes = classtypes;
 	}
 	/**
 	 * 获取：成品定制（1成品，2订做）
 	 */
-	public String getClasstype() {
-		return classtype;
+	public String getClasstypes() {
+		return classtypes;
 	}
 	/**
 	 * 设置：品种商品代码
@@ -267,5 +269,17 @@ public class RetailpriceDO implements Serializable {
 	 */
 	public String getNewPrice() {
 		return newPrice;
+	}
+	/**
+	 * 设置：0品种调价，1商品调价
+	 */
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	/**
+	 * 获取：0品种调价，1商品调价
+	 */
+	public String getFlag() {
+		return flag;
 	}
 }

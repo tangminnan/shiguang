@@ -662,7 +662,29 @@
 		</if>
 	</select>
 	<select id="orderCount" resultType="int">
-		SELECT COUNT(DISTINCT tuihuo_num) FROM stock_tuihuo
+		SELECT COUNT(DISTINCT tuihuo_num)
+		from stock_tuihuo t
+		left join c_mfrs m on t.mfrsid=m.mfrsnum
+		left join c_position p on t.position_id=t.position_id
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
+			<if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
+			<if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
+			<if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
+			<if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
+			<if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
+			<if test="goodsxinxiid != null and goodsxinxiid != ''"> and goodsxinxiid = #{goodsxinxiid} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
+			<if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
+			<if test="factory != null and factory != ''"> and factory = #{factory} </if>
+			<if test="unit != null and unit != ''"> and unit = #{unit} </if>
+			<if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
+			<if test="count != null and count != ''"> and count = #{count} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
+			<if test="style != null and style != ''"> and style = #{style} </if>
+		</where>
 	</select>
 
 	<select id="selectOrder"  resultType="com.shiguang.stock.domain.TuihuoDO">

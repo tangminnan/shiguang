@@ -197,7 +197,7 @@
 <div class="m40 tabS msgBox">
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td>商品类别：</td>
+			<td>商品类型：</td>
 			<td>
 				<select id="goodsid" name="goodsid" onchange="selectgoods()" style="width: 80%">
 					<option value="">--请选择--</option>
@@ -207,7 +207,7 @@
 				</select>
 				<div id="jp" style="display: none">
 					<label class="radio-inline">
-						<input type="radio" name="classtype"  value="1" checked/> 成品片
+						<input type="radio" name="classtype"  value="1" checked /> 成品片
 					</label>
 					<label class="radio-inline">
 						<input type="radio" name="classtype" value="2" /> 订做片
@@ -241,13 +241,10 @@
     function selectgoods() {
         var goodsid = $("#goodsid option:selected").val();
         if (goodsid == ""){
-            $("input[name='classtype']:checked").val('1');
             jp.style = "display: none";
         }if (goodsid == 1){
-            $("input[name='classtype']:checked").val('1');
             jp.style = "display: none";
         }else if (goodsid == 2){
-            $("input[name='classtype']:checked").val('1');
             jp.style = "display: none";
         }else if (goodsid == 3){
             $("#classtype").val("") ;
@@ -256,19 +253,14 @@
             $("#classtype").val("") ;
             jp.style = "display: block";
         }else if (goodsid == 5){
-            $("input[name='classtype']:checked").val('1');
             jp.style = "display: none";
         }else if (goodsid == 6){
-            $("input[name='classtype']:checked").val('1');
             jp.style = "display: none";
         }else if (goodsid == 7){
-            $("input[name='classtype']:checked").val('1');
             jp.style = "display: none";
         }else if (goodsid == 8){
-            $("input[name='classtype']:checked").val('1');
             jp.style = "display: none";
         }else if (goodsid == 9){
-            $("input[name='classtype']:checked").val('1');
             jp.style = "display: none";
         }
     }
@@ -326,6 +318,14 @@
     }
     function reLoad() {
         var goodsid=$("#goodsid").val();
+        if (goodsid== ""){
+            $("#classtype").val("") ;
+        }else {
+            $("#classtype").val("1") ;
+        }
+        if (goodsid == 3 || goodsid == 4) {
+            $("#classtype").val($("input[name='classtype']:checked").val());
+        }
             if (goodsid=="") {
                 layer.alert("请选择商品类别！");
         	}else {
@@ -363,7 +363,7 @@
                                     mfrsname: $("#mfrsname").val(),
                                     brandname: $("#brandname").val(),
                                     goodsid: $("#goodsid").val(),
-                                    classtype: $("input[name='classtype']:checked").val()
+                                    classtype : $("#classtype").val()
                                 };
                             },
                             columns: [

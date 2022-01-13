@@ -4,19 +4,19 @@
 <mapper namespace="com.shiguang.retailprice.dao.RetailpriceDao">
 
 	<select id="get" resultType="com.shiguang.retailprice.domain.RetailpriceDO">
-		select `id`,`number`,`day`,`people`,`remarks`,`goodsid`,`classtype`,`num`,`name`,`goods_num`,`goods_name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price` from all_retailprice where id = #{value}
+		select `id`,`number`,`day`,`people`,`remarks`,`goodstype`,`classtypes`,`num`,`name`,`goods_num`,`goods_name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price`,`flag` from all_retailprice where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.retailprice.domain.RetailpriceDO">
-		select `id`,`number`,`day`,`people`,`remarks`,`goodsid`,`classtype`,`num`,`name`,`goods_num`,`goods_name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price` from all_retailprice
+		select `id`,`number`,`day`,`people`,`remarks`,`goodstype`,`classtypes`,`num`,`name`,`goods_num`,`goods_name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price`,`flag` from all_retailprice
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="number != null and number != ''"> and number = #{number} </if>
-			<if test="day != null and day != ''"> and day = #{day} </if>
-			<if test="people != null and people != ''"> and people = #{people} </if>
+			<!--<if test="number != null and number != ''"> and number = #{number} </if>-->
+			<!--<if test="day != null and day != ''"> and day = #{day} </if>-->
+			<!--<if test="people != null and people != ''"> and people = #{people} </if>-->
 			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
-			<if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
-			<if test="classtype != null and classtype != ''"> and classtype = #{classtype} </if>
+			<if test="goodstype != null and goodstype != ''"> and goodstype = #{goodstype} </if>
+			<if test="classtypes != null and classtypes != ''"> and classtypes = #{classtypes} </if>
 			<if test="num != null and num != ''"> and num = #{num} </if>
 			<if test="name != null and name != ''"> and name = #{name} </if>
 			<if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
@@ -28,12 +28,19 @@
 			<if test="factory != null and factory != ''"> and factory = #{factory} </if>
 			<if test="oldPrice != null and oldPrice != ''"> and old_price = #{oldPrice} </if>
 			<if test="newPrice != null and newPrice != ''"> and new_price = #{newPrice} </if>
+			<if test="flag != null and flag != ''"> and flag = #{flag} </if>
+
+			<if test="number != null and number != ''">and number LIKE concat(concat('%', #{number}),'%')</if>
+			<if test="people != null and people != ''">and people LIKE concat(concat('%', #{people}),'%')</if>
+			<if test="day1 !=null and day1 != ''"> and date_format(day ,'%Y-%m-%d' ) >= (#{day1})</if>
+			<if test="day2 !=null and day2 != ''"> and date_format(day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
 				order by ${sort} ${order}
 			</when>
 			<otherwise>
+				group by number
 				order by id desc
 			</otherwise>
 		</choose>
@@ -43,15 +50,15 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from all_retailprice
+		SELECT COUNT(DISTINCT number) FROM all_retailprice
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="number != null and number != ''"> and number = #{number} </if>
-			<if test="day != null and day != ''"> and day = #{day} </if>
-			<if test="people != null and people != ''"> and people = #{people} </if>
+			<!--<if test="number != null and number != ''"> and number = #{number} </if>-->
+			<!--<if test="day != null and day != ''"> and day = #{day} </if>-->
+			<!--<if test="people != null and people != ''"> and people = #{people} </if>-->
 			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
-			<if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
-			<if test="classtype != null and classtype != ''"> and classtype = #{classtype} </if>
+			<if test="goodstype != null and goodstype != ''"> and goodstype = #{goodstype} </if>
+			<if test="classtypes != null and classtypes != ''"> and classtypes = #{classtypes} </if>
 			<if test="num != null and num != ''"> and num = #{num} </if>
 			<if test="name != null and name != ''"> and name = #{name} </if>
 			<if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
@@ -63,6 +70,12 @@
 			<if test="factory != null and factory != ''"> and factory = #{factory} </if>
 			<if test="oldPrice != null and oldPrice != ''"> and old_price = #{oldPrice} </if>
 			<if test="newPrice != null and newPrice != ''"> and new_price = #{newPrice} </if>
+			<if test="flag != null and flag != ''"> and flag = #{flag} </if>
+
+			<if test="number != null and number != ''">and number LIKE concat(concat('%', #{number}),'%')</if>
+			<if test="people != null and people != ''">and people LIKE concat(concat('%', #{people}),'%')</if>
+			<if test="day1 !=null and day1 != ''"> and date_format(day ,'%Y-%m-%d' ) >= (#{day1})</if>
+			<if test="day2 !=null and day2 != ''"> and date_format(day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
 		</where>
 	</select>
 
@@ -73,8 +86,8 @@
 			`day`,
 			`people`,
 			`remarks`,
-			`goodsid`,
-			`classtype`,
+			`goodstype`,
+			`classtypes`,
 			`num`,
 			`name`,
 			`goods_num`,
@@ -85,7 +98,8 @@
 			`brandname`,
 			`factory`,
 			`old_price`,
-			`new_price`
+			`new_price`,
+			`flag`
 		)
 		values
 		(
@@ -93,8 +107,8 @@
 			#{day},
 			#{people},
 			#{remarks},
-			#{goodsid},
-			#{classtype},
+			#{goodstype},
+			#{classtypes},
 			#{num},
 			#{name},
 			#{goodsNum},
@@ -105,7 +119,8 @@
 			#{brandname},
 			#{factory},
 			#{oldPrice},
-			#{newPrice}
+			#{newPrice},
+			#{flag}
 		)
 	</insert>
 
@@ -116,8 +131,8 @@
 			<if test="day != null">`day` = #{day}, </if>
 			<if test="people != null">`people` = #{people}, </if>
 			<if test="remarks != null">`remarks` = #{remarks}, </if>
-			<if test="goodsid != null">`goodsid` = #{goodsid}, </if>
-			<if test="classtype != null">`classtype` = #{classtype}, </if>
+			<if test="goodstype != null">`goodstype` = #{goodstype}, </if>
+			<if test="classtypes != null">`classtypes` = #{classtypes}, </if>
 			<if test="num != null">`num` = #{num}, </if>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="goodsNum != null">`goods_num` = #{goodsNum}, </if>
@@ -128,7 +143,8 @@
 			<if test="brandname != null">`brandname` = #{brandname}, </if>
 			<if test="factory != null">`factory` = #{factory}, </if>
 			<if test="oldPrice != null">`old_price` = #{oldPrice}, </if>
-			<if test="newPrice != null">`new_price` = #{newPrice}</if>
+			<if test="newPrice != null">`new_price` = #{newPrice}, </if>
+			<if test="flag != null">`flag` = #{flag}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -143,6 +159,8 @@
 			#{id}
 		</foreach>
 	</delete>
+
+
 
 	<select id="jjlist" resultType="com.shiguang.product.domain.ProducaDO">
 		select m.mfrsname,b.brandname,b.goodsid,a.mfrsid,a.brandnum,a.retail_price,a.classtype from c_brand b
@@ -159,7 +177,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -178,7 +196,7 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-		order by b.brandid desc
+		order by b.brandid desc,a.id
 		) AS temp
 	</select>
 	<select id="pjlist" resultType="com.shiguang.product.domain.PartsDO">
@@ -196,7 +214,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -215,7 +233,7 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
  		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-       order by b.brandid desc
+       order by b.brandid desc,a.id
 	    ) AS temp
 	</select>
 	<select id="jpcplist" resultType="com.shiguang.product.domain.JpcpDO">
@@ -233,7 +251,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -252,7 +270,7 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
  		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-       order by b.brandid desc
+       order by b.brandid desc,a.id
 	    ) AS temp
 	</select>
 	<select id="jpdzlist" resultType="com.shiguang.product.domain.JpdzDO">
@@ -270,7 +288,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -289,7 +307,7 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
  		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-       order by b.brandid desc
+       order by b.brandid desc,a.id
 	    ) AS temp
 	</select>
 	<select id="yxcplist" resultType="com.shiguang.product.domain.YxcpDO">
@@ -307,7 +325,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -326,7 +344,7 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
  		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-       order by b.brandid desc
+       order by b.brandid desc,a.id
 	    ) AS temp
 	</select>
 	<select id="yxdzlist" resultType="com.shiguang.product.domain.YxdzDO">
@@ -344,7 +362,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -363,7 +381,7 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
  		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-       order by b.brandid desc
+       order by b.brandid desc,a.id
 	    ) AS temp
 	</select>
 <select id="hlylist" resultType="com.shiguang.product.domain.HlyDO">
@@ -381,7 +399,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -400,7 +418,7 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
  		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-       order by b.brandid desc
+       order by b.brandid desc,a.id
 	    ) AS temp
 	</select>
 
@@ -419,7 +437,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -438,7 +456,7 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
  		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-       order by b.brandid desc
+       order by b.brandid desc,a.id
 	    ) AS temp
 	</select>
 	<select id="lhjlist" resultType="com.shiguang.product.domain.OldlensDO">
@@ -456,7 +474,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -475,7 +493,7 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
  		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-       order by b.brandid desc
+       order by b.brandid desc,a.id
 	    ) AS temp
 	</select>
 
@@ -494,7 +512,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -513,7 +531,7 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-		order by b.brandid desc
+		order by b.brandid desc,a.id
 		) AS temp
 	</select>
 
@@ -532,7 +550,7 @@
 			</when>
 			<otherwise>
 				GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-				order by b.brandid desc
+				order by b.brandid desc,a.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -551,8 +569,23 @@
 			and a.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
 		</where>
 		GROUP BY  b.brandnum  ,  b.mfrsid,a.retail_price
-		order by b.brandid desc
+		order by b.brandid desc,a.id
 		) AS temp
 	</select>
-
+	<select id="selectOrder"  resultType="com.shiguang.retailprice.domain.RetailpriceDO">
+		select goods_num ,goods_name,brandname,factory,old_price,new_price
+		from  all_retailprice
+		<where>
+			<if test="number != null and number != ''"> and number = #{number} </if>
+		</where>
+		group by id
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="getDanju" resultType="com.shiguang.retailprice.domain.RetailpriceDO">
+		select `id`,`number`,`day`,`people`,`remarks`,`goodstype`,`classtypes`,`num`,`name`,`goods_num`,`goods_name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price`,`flag`
+		 from all_retailprice where number = #{value}
+		 group by number
+	</select>
 </mapper>

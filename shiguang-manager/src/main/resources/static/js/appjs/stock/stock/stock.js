@@ -116,7 +116,7 @@ function showCol() {
     var check = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     var objArray = [];
     $.each(check, function(i, row) {
-        // alert(JSON.stringify(row))
+        // alert(JSON.stringify(row));
         // ids[i] = row['id'];
         var obj = {};
         if(null == row['producNum']){
@@ -124,6 +124,7 @@ function showCol() {
         }else {
             var producNum =  row['producNum'];
         }
+
 
         if(null == row['viewGoodName']){
             var viewGoodName  ="";
@@ -447,12 +448,46 @@ function showCol() {
         obj.goodsxinxiid = goodsxinxiid;
 
 
+
+        //----------商品调价-----------
+        if(null == row['producName']){
+            var producName  ="";
+        }else {
+            var producName =  row['producName'];
+        }
+        if (null == row['goodsid']) {
+            var goodsid = "";
+        } else {
+            var goodsid = row['goodsid'];
+        }
+        if (null == row['mfrsid']) {
+            var mfrsid = "";
+        } else {
+            var mfrsid = row['mfrsid'];
+        }
+        if (null == row['brandnum']) {
+            var brandnum = "";
+        } else {
+            var brandnum = row['brandnum'];
+        }
+        if (null == row['mfrsname']) {
+            var mfrsname = "";
+        } else {
+            var mfrsname = row['mfrsname'];
+        }
+        obj.producName = producName;
+        obj.goodsid = goodsid;
+        obj.mfrsid = mfrsid;
+        obj.brandnum = brandnum;
+        obj.mfrsname = mfrsname;
+
+
+
         objArray.push(obj);
     });
     // hejiadd();
     return objArray;
 }
-
 
 function save() {
     var goodsid = document.getElementById('goodsType').value;
