@@ -23,20 +23,18 @@
 					<div class="columns pull-right">
 						<button class="btn btn-success" onclick="reLoad()">查询</button>
 					</div>
-					<div class="columns pull-right col-md-2 nopadding">
-						<input id="1" type="text" class="form-control"
+					<div class="columns pull-right col-md-1.5 nopadding">
+						<input id="number" type="text"
 							   placeholder="单据编号">
 					</div>
-					<div class="columns pull-right col-md-2 nopadding">
-						<input id="2" type="text" class="form-control"
-							   placeholder="单据日期">
+					<div class="columns pull-right col-md-4.5 nopadding">
+						<input id="day1" type="text"
+							   placeholder="开始日期">～
+						<input id="day2" type="text"
+							   placeholder="结束日期">
 					</div>
-					<div class="columns pull-right col-md-2 nopadding">
-						<input id="22" type="text" class="form-control"
-							   placeholder="单据日期">
-					</div>
-					<div class="columns pull-right col-md-2 nopadding">
-						<input id="3" type="text" class="form-control"
+					<div class="columns pull-right col-md-1.5 nopadding">
+						<input id="people" type="text"
 							   placeholder="制单人">
 					</div>
 				</div>
@@ -78,5 +76,17 @@
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/retailprice/retailprice/retailprice.js"></script>
+<script type="text/javascript">
+    laydate.render({
+        elem: '#day1',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+    laydate.render({
+        elem: '#day2',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+</script>
 </body>
 </html>

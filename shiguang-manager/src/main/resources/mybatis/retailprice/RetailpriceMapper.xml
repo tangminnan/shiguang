@@ -11,9 +11,9 @@
 		select `id`,`number`,`day`,`people`,`remarks`,`goodstype`,`classtypes`,`num`,`name`,`goods_num`,`goods_name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price`,`flag` from all_retailprice
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="number != null and number != ''"> and number = #{number} </if>
-			<if test="day != null and day != ''"> and day = #{day} </if>
-			<if test="people != null and people != ''"> and people = #{people} </if>
+			<!--<if test="number != null and number != ''"> and number = #{number} </if>-->
+			<!--<if test="day != null and day != ''"> and day = #{day} </if>-->
+			<!--<if test="people != null and people != ''"> and people = #{people} </if>-->
 			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
 			<if test="goodstype != null and goodstype != ''"> and goodstype = #{goodstype} </if>
 			<if test="classtypes != null and classtypes != ''"> and classtypes = #{classtypes} </if>
@@ -29,6 +29,11 @@
 			<if test="oldPrice != null and oldPrice != ''"> and old_price = #{oldPrice} </if>
 			<if test="newPrice != null and newPrice != ''"> and new_price = #{newPrice} </if>
 			<if test="flag != null and flag != ''"> and flag = #{flag} </if>
+
+			<if test="number != null and number != ''">and number LIKE concat(concat('%', #{number}),'%')</if>
+			<if test="people != null and people != ''">and people LIKE concat(concat('%', #{people}),'%')</if>
+			<if test="day1 !=null and day1 != ''"> and date_format(day ,'%Y-%m-%d' ) >= (#{day1})</if>
+			<if test="day2 !=null and day2 != ''"> and date_format(day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -48,9 +53,9 @@
 		SELECT COUNT(DISTINCT number) FROM all_retailprice
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="number != null and number != ''"> and number = #{number} </if>
-			<if test="day != null and day != ''"> and day = #{day} </if>
-			<if test="people != null and people != ''"> and people = #{people} </if>
+			<!--<if test="number != null and number != ''"> and number = #{number} </if>-->
+			<!--<if test="day != null and day != ''"> and day = #{day} </if>-->
+			<!--<if test="people != null and people != ''"> and people = #{people} </if>-->
 			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
 			<if test="goodstype != null and goodstype != ''"> and goodstype = #{goodstype} </if>
 			<if test="classtypes != null and classtypes != ''"> and classtypes = #{classtypes} </if>
@@ -66,6 +71,11 @@
 			<if test="oldPrice != null and oldPrice != ''"> and old_price = #{oldPrice} </if>
 			<if test="newPrice != null and newPrice != ''"> and new_price = #{newPrice} </if>
 			<if test="flag != null and flag != ''"> and flag = #{flag} </if>
+
+			<if test="number != null and number != ''">and number LIKE concat(concat('%', #{number}),'%')</if>
+			<if test="people != null and people != ''">and people LIKE concat(concat('%', #{people}),'%')</if>
+			<if test="day1 !=null and day1 != ''"> and date_format(day ,'%Y-%m-%d' ) >= (#{day1})</if>
+			<if test="day2 !=null and day2 != ''"> and date_format(day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
 		</where>
 	</select>
 
