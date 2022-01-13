@@ -110,11 +110,11 @@ public class ArrearsController {
         String modelmoney = settlementDO.getModelMoney() + paymoneys;
         settlement.setModelMoney(modelmoney);
         settlementService.update(settlement);
-        CostDO costDO = costService.get(settlementDO.getCostId());
-        if ("定金单".equals(costDO.getType())){
-            costDO.setType("配镜单");
-            costService.update(costDO);
-        }
+//        CostDO costDO = costService.get(settlementDO.getCostId());
+//        if ("定金单".equals(costDO.getType())){
+//            costDO.setType("配镜单");
+//            costService.update(costDO);
+//        }
         SalesDO salesDO = new SalesDO();
         salesDO.setSaleNumber(settlement.getSaleNumber());
         salesDO.setSaleType("1");

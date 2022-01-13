@@ -133,7 +133,7 @@
 	</select>
 	<select id="findArrearsData" resultType="com.shiguang.settlement.domain.SettlementDO">
 		select sl.`id`,sl.`sale_number`,sl.`member_number`,m.`name` as memberName,sl.`actual_money`,sl.`model_money`,sl.`pay_money`,sl.`pay_way`,sl.`front_money`,sl.`settle_date`,c.`original_price` from settlement sl
-		join cost c on c.id = sl.cost_id
+		left join cost c on c.id = sl.cost_id
 		join member m on sl.member_number = m.card_number
 		<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
 		<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
