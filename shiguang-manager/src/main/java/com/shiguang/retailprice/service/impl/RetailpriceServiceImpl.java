@@ -163,4 +163,14 @@ public class RetailpriceServiceImpl implements RetailpriceService {
 	public int sglistCount(Map<String, Object> map) {
 		return retailpriceDao.sglistCount(map);
 	}
+
+	@Override
+	public List<RetailpriceDO> selectOrder(Map<String, Object> map) {
+		return retailpriceDao.selectOrder(map);
+	}
+
+	@Override
+	public RetailpriceDO getDanju(String number) {
+		return retailpriceDao.getDanju(number);
+	}
 }

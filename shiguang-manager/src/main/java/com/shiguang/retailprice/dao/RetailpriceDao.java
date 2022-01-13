@@ -64,5 +64,7 @@ public interface RetailpriceDao {
 	List<ShiguangDO> sglist(Map<String, Object> map);
 	int sglistCount(Map<String, Object> map);
 
-
+	//详情列表
+	List<RetailpriceDO> selectOrder(Map<String, Object> map);
+	RetailpriceDO getDanju(String number);
 }

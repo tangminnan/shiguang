@@ -35,6 +35,7 @@
 				order by ${sort} ${order}
 			</when>
 			<otherwise>
+				group by number
 				order by id desc
 			</otherwise>
 		</choose>
@@ -44,7 +45,7 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from all_retailprice
+		SELECT COUNT(DISTINCT number) FROM all_retailprice
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="number != null and number != ''"> and number = #{number} </if>
@@ -561,5 +562,20 @@
 		order by b.brandid desc,a.id
 		) AS temp
 	</select>
-
+	<select id="selectOrder"  resultType="com.shiguang.retailprice.domain.RetailpriceDO">
+		select goods_num ,goods_name,brandname,factory,old_price,new_price
+		from  all_retailprice
+		<where>
+			<if test="number != null and number != ''"> and number = #{number} </if>
+		</where>
+		group by id
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="getDanju" resultType="com.shiguang.retailprice.domain.RetailpriceDO">
+		select `id`,`number`,`day`,`people`,`remarks`,`goodstype`,`classtypes`,`num`,`name`,`goods_num`,`goods_name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price`,`flag`
+		 from all_retailprice where number = #{value}
+		 group by number
+	</select>
 </mapper>

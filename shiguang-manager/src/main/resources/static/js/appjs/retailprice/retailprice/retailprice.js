@@ -56,88 +56,89 @@ function load() {
                         title : '单据编号'
                     },
                     {
+                        field : 'people',
+                        title : '制单人'
+                    },
+                    {
                         field : 'day',
                         title : '制单日期'
                     },
                     {
                         field : 'people',
-                        title : '制单人'
+                        title : '审核人'
+                    },
+                    {
+                        field : 'day',
+                        title : '生效日期'
                     },
                     {
                         field : 'remarks',
                         title : '备注'
                     },
-                    {
-                        field : 'goodsid',
-                        title : '商品类别'
-                    },
-                    {
-                        field : 'classtype',
-                        title : '成品定制（1成品，2订做）'
-                    },
-                    {
-                        field : 'num',
-                        title : '品种商品代码'
-                    },
-                    {
-                        field : 'name',
-                        title : '品种商品名称'
-                    },
-                    {
-                        field : 'goodsNum',
-                        title : '商品代码'
-                    },
-                    {
-                        field : 'goodsName',
-                        title : '商品名称'
-                    },
-                    {
-                        field : 'mfrsnum',
-                        title : '制造商代码'
-                    },
-                    {
-                        field : 'mfrsname',
-                        title : '制造商名称'
-                    },
-                    {
-                        field : 'brandnum',
-                        title : '品种代码'
-                    },
-                    {
-                        field : 'brandname',
-                        title : '品种名称'
-                    },
-                    {
-                        field : 'factory',
-                        title : '型号'
-                    },
-                    {
-                        field : 'oldPrice',
-                        title : '原销售价格'
-                    },
-                    {
-                        field : 'newPrice',
-                        title : '调整价格'
-                    },
-                    {
-                        field : 'flag',
-                        title : '类型'
-                    },
+                    // {
+                    //     field : 'goodsid',
+                    //     title : '商品类别'
+                    // },
+                    // {
+                    //     field : 'classtype',
+                    //     title : '成品定制（1成品，2订做）'
+                    // },
+                    // {
+                    //     field : 'num',
+                    //     title : '品种商品代码'
+                    // },
+                    // {
+                    //     field : 'name',
+                    //     title : '品种商品名称'
+                    // },
+                    // {
+                    //     field : 'goodsNum',
+                    //     title : '商品代码'
+                    // },
+                    // {
+                    //     field : 'goodsName',
+                    //     title : '商品名称'
+                    // },
+                    // {
+                    //     field : 'mfrsnum',
+                    //     title : '制造商代码'
+                    // },
+                    // {
+                    //     field : 'mfrsname',
+                    //     title : '制造商名称'
+                    // },
+                    // {
+                    //     field : 'brandnum',
+                    //     title : '品种代码'
+                    // },
+                    // {
+                    //     field : 'brandname',
+                    //     title : '品种名称'
+                    // },
+                    // {
+                    //     field : 'factory',
+                    //     title : '型号'
+                    // },
+                    // {
+                    //     field : 'oldPrice',
+                    //     title : '原销售价格'
+                    // },
+                    // {
+                    //     field : 'newPrice',
+                    //     title : '调整价格'
+                    // },
+                    // {
+                    //     field : 'flag',
+                    //     title : '类型'
+                    // },
                     {
                         title : '操作',
                         field : 'id',
                         align : 'center',
                         formatter : function(value, row, index) {
-                            var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                                + row.id
-                                + '\')"><i class="fa fa-edit"></i></a> ';
-                            var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                                + row.id
-                                + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-                                + row.id
-                                + '\')"><i class="fa fa-key"></i></a> ';
-                            return e + d ;
+                            var a = '<span class="btn btn-primary btn-sm'+s_detial_h+'" href="#" title="详情"  mce_href="#" onclick="detial(\''
+                                + row.id + '\')">详情</span> ';
+                            return a;
                         }
                     } ]
             });
@@ -175,6 +176,17 @@ function edit(id) {
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '520px' ],
         content : prefix + '/edit/' + id // iframe的url
+    });
+    layer.full(toIndex);
+}
+function detial(id) {
+    var toIndex = layer.open({
+        type : 2,
+        title : '详情',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : prefix + '/detial/' + id // iframe的url
     });
     layer.full(toIndex);
 }

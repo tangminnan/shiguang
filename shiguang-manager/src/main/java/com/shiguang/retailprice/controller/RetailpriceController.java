@@ -10,6 +10,7 @@ import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.domain.TuihuoDO;
 import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -206,6 +207,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jj.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -250,6 +252,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(pj.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -293,6 +296,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jpcp.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -336,6 +340,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jpdz.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -379,6 +384,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(yxcp.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -422,6 +428,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(yxdz.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -465,6 +472,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(hly.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -508,6 +516,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(tyj.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -551,6 +560,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(lhj.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -593,6 +603,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(hc.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -636,6 +647,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(sg.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -720,12 +732,16 @@ public class RetailpriceController {
 			pageUtils= new PageUtils(jpcplist, total);
 		}else if ("3".equals(goods) && "2".equals(classtype)){
 			List<JpdzDO> jpdzlist = retailpriceService.jpdzlist(query);
-			int total = retailpriceService.jpcplistCount(query);
+			int total = retailpriceService.jpdzlistCount(query);
 			pageUtils= new PageUtils(jpdzlist, total);
 		}else if ("4".equals(goods) && "1".equals(classtype)){
 			List<YxcpDO> yxcplist = retailpriceService.yxcplist(query);
 			int total = retailpriceService.yxcplistCount(query);
 			pageUtils= new PageUtils(yxcplist, total);
+		}else if ("4".equals(goods) && "2".equals(classtype)){
+			List<YxdzDO> yxdzlist = retailpriceService.yxdzlist(query);
+			int total = retailpriceService.yxdzlistCount(query);
+			pageUtils= new PageUtils(yxdzlist, total);
 		}else if ("5".equals(goods)){
 			List<HlyDO> hlylist = retailpriceService.hlylist(query);
 			int total = retailpriceService.hlylistCount(query);
@@ -856,6 +872,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jj.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -900,6 +917,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(pj.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -943,6 +961,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jpcp.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -986,6 +1005,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(jpdz.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -1029,6 +1049,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(yxcp.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -1072,6 +1093,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(yxdz.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -1115,6 +1137,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(hly.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -1158,6 +1181,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(tyj.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -1201,6 +1225,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(lhj.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -1243,6 +1268,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(hc.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -1286,6 +1312,7 @@ public class RetailpriceController {
 					retailpriceDO.setBrandname(brandname);
 					retailpriceDO.setOldPrice(oldMoney);
 					retailpriceDO.setNewPrice(newMoney);
+					retailpriceDO.setFactory(sg.getFactory());
 					retailpriceService.save(retailpriceDO);
 				}
 				List<StockDO> stocks = stockService.list(map);
@@ -1299,9 +1326,37 @@ public class RetailpriceController {
 				}
 			}
 		}
-
-
-
 		return R.ok();
 	}
+
+	@GetMapping("/detial/{id}")
+	@RequiresPermissions("retailprice:retailprice:detial")
+	String detial(@PathVariable("id") Long id,Model model){
+		RetailpriceDO retailprice = retailpriceService.get(id);
+		model.addAttribute("retailprice", retailprice);
+		return "retailprice/retailprice/detial";
+	}
+	///详情列表
+	@ResponseBody
+	@RequestMapping(value = "/selectOrder")
+	public List<RetailpriceDO> selectOrder(String number,Model model) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("number", number);
+		List<RetailpriceDO> retailpriceDOList = retailpriceService.selectOrder(map);
+		model.addAttribute("retailpriceDOList", retailpriceDOList);
+		return retailpriceDOList;
+	}
+	//打印
+	@GetMapping("/danju")
+	String danju(String number, Model model) {
+		RetailpriceDO retailpriceDO = retailpriceService.getDanju(number);
+		model.addAttribute("retailpriceDO", retailpriceDO);
+		//———获取当前系统时间—————
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+		Date date = new Date();
+		String newday = sdf.format(date);
+		model.addAttribute("newday", newday);
+		return "/retailprice/retailprice/danju";
+	}
+
 }

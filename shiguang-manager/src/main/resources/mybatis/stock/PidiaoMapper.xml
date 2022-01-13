@@ -99,58 +99,65 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
- 	<select id="countLsit" resultType="int">
-		select count(*) from stock_pidiao
-		 <where>  
-		  	<if test="id != null and id != ''"> and id = #{id} </if>
-		  	<if test="pidiaoNumber != null and pidiaoNumber != ''"> and pidiao_number = #{pidiaoNumber} </if>
-		  	<if test="guanlianNumber != null and guanlianNumber != ''"> and guanlian_number = #{guanlianNumber} </if>
-
-			 <if test="outDepartmentid != null and outDepartmentid != ''"> and out_departmentid = #{outDepartmentid} </if>
-			 <if test="outPositionid != null and outPositionid != ''"> and out_positionid = #{outPositionid} </if>
-			 <if test="inPositionid != null and inPositionid != ''"> and in_positionid = #{inPositionid} </if>
-			 <if test="inCompanyid != null and inCompanyid != ''"> and in_companyid = #{inCompanyid} </if>
-			 <if test="inDepartmentid != null and inDepartmentid != ''"> and in_departmentid = #{inDepartmentid} </if>
-
-			 <if test="outDepartment != null and outDepartment != ''"> and out_department = #{outDepartment} </if>
-		  		  <if test="outPosition != null and outPosition != ''"> and out_position = #{outPosition} </if>
-		  		  <if test="inPosition != null and inPosition != ''"> and in_position = #{inPosition} </if>
-		  		  <if test="inCompany != null and inCompany != ''"> and in_company = #{inCompany} </if>
-		  		  <if test="inDepartment != null and inDepartment != ''"> and in_department = #{inDepartment} </if>
-		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
-		  		  <if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
-		  		  <if test="outsourcingNumber != null and outsourcingNumber != ''"> and outsourcing_number = #{outsourcingNumber} </if>
-		  		  <if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
-		  		  <if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
-		  		  <if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
-		  		  <if test="needCount != null and needCount != ''"> and need_count = #{needCount} </if>
-		  		  <if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
-		  		  <if test="useCount != null and useCount != ''"> and use_count = #{useCount} </if>
-		  		  <if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
-		  		  <if test="batch != null and batch != ''"> and batch = #{batch} </if>
-		  		  <if test="zhuceNumber != null and zhuceNumber != ''"> and zhuce_number = #{zhuceNumber} </if>
-		  		  <if test="produceDay != null and produceDay != ''"> and produce_day = #{produceDay} </if>
-		  		  <if test="useday != null and useday != ''"> and useday = #{useday} </if>
-		  		  <if test="allCount != null and allCount != ''"> and all_count = #{allCount} </if>
-		  		  <if test="classtype != null and classtype != ''"> and classtype = #{classtype} </if>
-		  		  <if test="factory != null and factory != ''"> and factory = #{factory} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="username != null and username != ''"> and username = #{username} </if>
-		  		  <if test="goods != null and goods != ''"> and goods = #{goods} </if>
-			 <if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
-			 <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
-			 <if test="unit != null and unit != ''"> and unit = #{unit} </if>
-			 <if test="shTime != null and shTime != ''"> and  sh_time = #{shTime} </if>
-			 <if test="money != null and money != ''"> and money = #{money} </if>
-			 <if test="returnzt != null and returnzt != ''"> and returnzt = #{returnzt} </if>
-			 <if test="stockorder != null and stockorder != ''"> and stockorder = #{stockorder} </if>
-		  		</where>
-		group by pidiao_number
-		order by id desc
-	</select>
 	 <select id="count" resultType="int">
-		 select COUNT(DISTINCT pidiao_number) from stock_pidiao
+		 select COUNT(DISTINCT pidiao_number)
+		 from stock_pidiao p
+
+		 join c_position po on p.out_positionid=po.position_id
+		 join c_position pos on p.in_positionid=pos.position_id
+		 join department d on p.out_departmentid=d.depart_number
+		 join department de on p.in_departmentid= de.depart_number
+		 <where>
+			 <if test="id != null and id != ''"> and p.id = #{id} </if>
+			 <if test="pidiaoNumber != null and pidiaoNumber != ''">and  p.pidiao_number LIKE concat(concat('%', #{pidiaoNumber}),'%')</if>
+			 <if test="guanlianNumber != null and guanlianNumber != ''"> and p.guanlian_number = #{guanlianNumber} </if>
+
+			 <if test="outDepartmentid != null and outDepartmentid != ''"> and p.out_departmentid = #{outDepartmentid} </if>
+			 <if test="outPositionid != null and outPositionid != ''"> and p.out_pzositionid = #{outPositionid} </if>
+			 <if test="inPositionid != null and inPositionid != ''"> and p.in_positionid = #{inPositionid} </if>
+			 <if test="inCompanyid != null and inCompanyid != ''"> and p.in_companyid = #{inCompanyid} </if>
+			 <if test="inDepartmentid != null and inDepartmentid != ''"> and p.in_departmentid = #{inDepartmentid} </if>
+
+			 <if test="outDepartment != null and outDepartment != ''"> and p.out_department = #{outDepartment} </if>
+			 <if test="outPosition != null and outPosition != ''"> and p.out_position = #{outPosition} </if>
+			 <if test="inPosition != null and inPosition != ''"> and p.in_position = #{inPosition} </if>
+			 <if test="inCompany != null and inCompany != ''"> and p.in_company = #{inCompany} </if>
+			 <if test="inDepartment != null and inDepartment != ''"> and p.in_department = #{inDepartment} </if>
+
+			 <if test="zhidanPeople != null and zhidanPeople != ''"> and p.zhidan_people = #{zhidanPeople} </if>
+			 <if test="danjuDay != null and danjuDay != ''"> and p.danju_day = #{danjuDay} </if>
+			 <if test="outsourcingNumber != null and outsourcingNumber != ''"> and p.outsourcing_number = #{outsourcingNumber} </if>
+			 <if test="beizhu != null and beizhu != ''"> and p.beizhu = #{beizhu} </if>
+			 <if test="goodsNum != null and goodsNum != ''"> and p.goods_num = #{goodsNum} </if>
+			 <if test="goodsName != null and goodsName != ''"> and p.goods_name = #{goodsName} </if>
+			 <if test="needCount != null and needCount != ''"> and p.need_count = #{needCount} </if>
+			 <if test="goodsCount != null and goodsCount != ''"> and p.goods_count = #{goodsCount} </if>
+			 <if test="useCount != null and useCount != ''"> and p.use_count = #{useCount} </if>
+			 <if test="goodsCode != null and goodsCode != ''"> and p.goods_code = #{goodsCode} </if>
+			 <if test="batch != null and batch != ''"> and p.batch = #{batch} </if>
+			 <if test="zhuceNumber != null and zhuceNumber != ''"> and p.zhuce_number = #{zhuceNumber} </if>
+			 <if test="produceDay != null and produceDay != ''"> and p.produce_day = #{produceDay} </if>
+			 <if test="useday != null and useday != ''"> and p.useday = #{useday} </if>
+			 <if test="allCount != null and allCount != ''"> and p.all_count = #{allCount} </if>
+			 <if test="classtype != null and classtype != ''"> and p.classtype = #{classtype} </if>
+			 <if test="factory != null and factory != ''"> and p.factory = #{factory} </if>
+			 <if test="status != null and status != ''"> and p.status = #{status} </if>
+			 <if test="username != null and username != ''"> and p.username = #{username} </if>
+			 <if test="goods != null and goods != ''"> and p.goods = #{goods} </if>
+			 <if test="brandname != null and brandname != ''"> and p.brandname = #{brandname} </if>
+			 <if test="mfrsid != null and mfrsid != ''"> and p.mfrsid = #{mfrsid} </if>
+			 <if test="unit != null and unit != ''"> and p.unit = #{unit} </if>
+			 <if test="money != null and money != ''"> and p.money = #{money} </if>
+			 <if test="shTime != null and shTime != ''"> and p.sh_time = #{shTime} </if>
+			 <if test="returnzt != null and returnzt != ''"> and p.returnzt = #{returnzt} </if>
+			 <if test="stockorder != null and stockorder != ''"> and p.stockorder = #{stockorder} </if>
+
+			 <if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>
+			 <if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>
+
+			 <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+			 <if test="companyId != null and companyId != ''">or FIND_IN_SET(de.company_id,#{companyId})</if>
+		 </where>
 	</select>
 
 	<insert id="save" parameterType="com.shiguang.stock.domain.PidiaoDO" useGeneratedKeys="true" keyProperty="id">
