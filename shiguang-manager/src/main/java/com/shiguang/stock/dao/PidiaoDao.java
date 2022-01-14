@@ -31,6 +31,8 @@ public interface PidiaoDao {
 
 	int batchRemove(Long[] ids);
 
+	PidiaoDO getOut(Long id);
+	PidiaoDO getIn(Long id);
 	//发出接收仓位
 	List<PidiaoDO> outPosition(Map<String, Object> map);
 

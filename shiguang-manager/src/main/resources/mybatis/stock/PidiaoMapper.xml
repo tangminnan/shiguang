@@ -4,21 +4,8 @@
 <mapper namespace="com.shiguang.stock.dao.PidiaoDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.PidiaoDO">
-		select
-		c.name as ings,p.in_companyid, d.depart_name as inbm, p.in_departmentid, de.depart_name as outbm,p.out_departmentid,
-		po.position_name as outcw ,p.out_positionid,pos.position_name as incw,p.in_positionid,
-		p.`id`,p.`pidiao_number`,
-		p.`zhidan_people`,p.`danju_day`,p.`outsourcing_number`,p.`beizhu`,p.`returnzt`,p.`stockorder`
-		from stock_pidiao p
-		left join sys_user u on p.zhidan_people =u.name
-
-		left join c_company c on p.in_companyid=c.id
-		left join department d on p.in_departmentid=d.id
-		left join department de on p.out_departmentid=de.id
-
-		left join c_position po on p.out_positionid=po.position_id
-		left join c_position pos on p.in_positionid=pos.position_id
-		where p.id = #{value}
+	select *, out_department as outbm ,out_position as outcw , in_company as ings ,in_department as inbm , in_position as incw from stock_pidiao
+		where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.PidiaoDO">
@@ -33,8 +20,8 @@
 
 		join c_position po on p.out_positionid=po.position_id
 		join c_position pos on p.in_positionid=pos.position_id
-		join department d on p.out_departmentid=d.depart_number
-		join department de on p.in_departmentid= de.depart_number
+		join department d on p.out_departmentid=d.depart_number  and po.company_id=d.company_id
+		join department de on p.in_departmentid= de.depart_number  and po.company_id=de.company_id
         <where>  
 		  		  <if test="id != null and id != ''"> and p.id = #{id} </if>
 			      <if test="pidiaoNumber != null and pidiaoNumber != ''">and  p.pidiao_number LIKE concat(concat('%', #{pidiaoNumber}),'%')</if>
@@ -105,8 +92,8 @@
 
 		 join c_position po on p.out_positionid=po.position_id
 		 join c_position pos on p.in_positionid=pos.position_id
-		 join department d on p.out_departmentid=d.depart_number
-		 join department de on p.in_departmentid= de.depart_number
+		 join department d on p.out_departmentid=d.depart_number  and po.company_id=d.company_id
+		 join department de on p.in_departmentid= de.depart_number  and po.company_id=de.company_id
 		 <where>
 			 <if test="id != null and id != ''"> and p.id = #{id} </if>
 			 <if test="pidiaoNumber != null and pidiaoNumber != ''">and  p.pidiao_number LIKE concat(concat('%', #{pidiaoNumber}),'%')</if>
@@ -311,7 +298,33 @@
 		</foreach>
 	</delete>
 
+	<select id="getOut" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.pidiao_number,p.zhidan_people,p.danju_day,c.name as ings ,d.depart_name as inbm ,po.position_name as incw
+		FROM
+			stock_pidiao p
+			join c_company c on p.in_companyid=c.id
+			join department d on p.in_departmentid=d.depart_number and p.in_companyid=d.company_id
+			join c_position po on p.in_companyid=po.company_id  and p.in_departmentid=po.depart_number
+		where p.id = #{value}
+	</select>
+	<select id="getIn" resultType="com.shiguang.stock.domain.PidiaoDO">
+		select
+		c.name as ings,p.in_companyid, d.depart_name as inbm, p.in_departmentid, de.depart_name as outbm,p.out_departmentid,
+		po.position_name as outcw ,p.out_positionid,pos.position_name as incw,p.in_positionid,
+		p.`id`,p.`pidiao_number`,
+		p.`zhidan_people`,p.`danju_day`,p.`outsourcing_number`,p.`beizhu`,p.`returnzt`,p.`stockorder`
+		from stock_pidiao p
+		left join sys_user u on p.zhidan_people =u.name
 
+		left join c_company c on p.in_companyid=c.id
+		left join department d on p.in_departmentid=d.id
+		left join department de on p.out_departmentid=de.id
+
+		left join c_position po on p.out_positionid=po.position_id  and po.company_id=d.company_id
+		left join c_position pos on p.in_positionid=pos.position_id  and pos.company_id=de.company_id
+		where p.id = #{value}
+	</select>
 	<select id="outPosition" resultType="com.shiguang.stock.domain.PidiaoDO">
 		select po.position_id,po.`position_name`,d.`depart_name`,d.depart_number from c_position po
 		left join department d on po.depart_number = d.depart_number  and po.company_id=d.company_id
@@ -343,22 +356,9 @@
 		group by id
 	</select>
 	<select id="getpidiao" resultType="com.shiguang.stock.domain.PidiaoDO">
-		select
-		c.name as ings, d.depart_name as inbm, de.depart_name as outbm,
-		po.position_name as outcw ,pos.position_name as incw,
-		p.`id`,p.`pidiao_number`,
-		p.`zhidan_people`,p.`danju_day`,p.`outsourcing_number`,p.`beizhu`
-		from stock_pidiao p
-		left join sys_user u on p.zhidan_people =u.name
-
-		left join c_company c on p.in_companyid=c.id
-		left join department d on p.in_departmentid=d.id
-		left join department de on p.out_departmentid=de.id
-
-		left join c_position po on p.out_positionid=po.position_id
-		left join c_position pos on p.in_positionid=pos.position_id
-		where p.pidiao_number = #{value}
-		group by p.pidiao_number
+		select *, out_department as outbm ,out_position as outcw , in_company as ings ,in_department as inbm , in_position as incw from stock_pidiao
+		where pidiao_number = #{value}
+		group by pidiao_number
 	</select>
 
 	<select id="getpidiaoList" resultType="com.shiguang.stock.domain.PidiaoDO">

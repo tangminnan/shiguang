@@ -5,7 +5,6 @@ import java.util.*;
 
 import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.baseinfomation.service.DepartmentService;
-import com.shiguang.baseinfomation.service.impl.DepartmentServiceImpl;
 import com.shiguang.common.utils.*;
 import com.shiguang.mfrs.domain.CompanyDO;
 import com.shiguang.mfrs.domain.GoodsDO;
@@ -13,20 +12,16 @@ import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.CompanyService;
 import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.mfrs.service.PositionService;
-import com.shiguang.product.domain.*;
 import com.shiguang.stock.domain.*;
 import com.shiguang.stock.service.StockService;
 import com.shiguang.stock.service.StocklogService;
-import io.swagger.models.auth.In;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -250,6 +245,12 @@ public class PidiaoController {
         String inCompany = pidiao.getInCompany();
         String inDepartment = pidiao.getInDepartment();
         String inPosition = pidiao.getInPosition();
+
+        String outbm = pidiao.getOutbm();
+        String outcw = pidiao.getOutcw();
+        String ings = pidiao.getIngs();
+        String inbm = pidiao.getInbm();
+        String incw = pidiao.getIncw();
         String beizhu = pidiao.getBeizhu();
         String status = pidiao.getStatus();
         String shTime = pidiao.getShTime();
@@ -289,6 +290,13 @@ public class PidiaoController {
             pidiaoDO.setInCompanyid(inCompany);
             pidiaoDO.setInDepartmentid(inDepartment);
             pidiaoDO.setInPositionid(inPosition);
+
+            pidiaoDO.setOutDepartment(outbm);
+            pidiaoDO.setOutPosition(outcw);
+            pidiaoDO.setInCompany(ings);
+            pidiaoDO.setInDepartment(inbm);
+            pidiaoDO.setInPosition(incw);
+
             pidiaoDO.setBeizhu(beizhu);
             pidiaoDO.setStatus(status);
             pidiaoDO.setShTime(shTime);
