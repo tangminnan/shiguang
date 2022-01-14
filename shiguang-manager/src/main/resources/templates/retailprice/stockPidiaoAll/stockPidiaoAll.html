@@ -5,7 +5,7 @@
 	<meta name="keywords" content=""/>
 	<meta name="description" content=""/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-	<title>商品查询</title>
+	<title>批调统计表</title>
 	<link rel="stylesheet" href="/css/css.css" type="text/css">
 	<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
@@ -16,14 +16,12 @@
 	<h3>查询条件</h3>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td>所属公司：</td>
+			<td>仓位名称：</td>
 			<td>
-				<select  id="companyId" name="companyId"  data-actions-box="false"
-						 data-size="5" style="width: 200px;height: 40px;">
+				<select id="positionId" name="positionId">
 					<option value="">--请选择--</option>
-					<option th:each="ls:${companyList}"
-							th:text="${ls.name}"
-							th:value="${ls.id}"></option>
+					<option th:each="ls:${positionDOList}" th:text="${ls.positionName}"
+							th:value="${ls.positionId}"></option>
 				</select>
 			</td>
 			<td>单据号：</td>
@@ -49,48 +47,13 @@
 					   placeholder="结束日期">
 			</td>
 		</tr>
-		<tr>
-			<td>查看方式</td>
-			<td>
-				<label class="radio-inline">
-					<input type="radio" name="viewmode"  value="1" /> 按商品类型
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="viewmode" value="2" /> 按制造商
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="viewmode"  value="1" /> 按品种
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="viewmode" value="2" /> 按商品
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="viewmode" value="2" /> 按单据
-				</label>
-			</td>
-			<td>单据类型</td>
-			<td>
-				<label class="radio-inline">
-					<input type="radio" name="documenttype"  value="1" /> 采购
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="documenttype" value="2" /> 委外
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="documenttype"  value="1" /> 采购+委外
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="documenttype" value="2" /> 退货
-				</label>
-			</td>
-		</tr>
 
 		<tr>
 			<td>商品类别：</td>
-			<td  >
+			<td >
 				<select id="goodsType" name="goodsType" onchange="goodsidstr()">
 					<option value="">--请选择--</option>
-					<option th:each="ls:${goodsList}" th:text="${ls.goodsname}" th:value="${ls.goodsid}">
+					<option th:each="ls:${goodsDOList}" th:text="${ls.goodsname}" th:value="${ls.goodsid}">
 					</option>
 				</select>
 			</td>

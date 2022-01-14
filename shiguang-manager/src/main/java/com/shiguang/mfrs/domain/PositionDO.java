@@ -17,6 +17,9 @@ public class PositionDO implements Serializable {
     private Long positionId;
     //仓位代码
     private String positionNum;
+    //公司id
+    private String companyId;
+
     //部门编码
     private String departNumber;
     //部门名称
@@ -59,6 +62,15 @@ public class PositionDO implements Serializable {
     public String getPositionNum() {
         return positionNum;
     }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
 
     /**
      * 设置：部门编码

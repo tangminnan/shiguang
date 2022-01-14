@@ -280,18 +280,11 @@
             <td>
                 <input id="countall" style="color: red" readonly type="text"/>
             </td>
-            <!--<td > 当前页合计：</td>-->
-            <!--<td>-->
-                <!--<input id="heji"  style="color: red" readonly type="text"/>-->
-            <!--</td>-->
         </tr>
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
         <input type="button" value="查询" onclick="reLoad()"/>
-        <!--<input type="button" value="当前页合计" onclick="newcount()"/>-->
-        <!--<span style="color: red">当前页数量：</span>-->
-        <!--<input style="color: red;font-size: 15px;" id="countcln" name="countcln" readonly/>-->
         <input type="button" class="empty" value="清空" onclick="clearText()"/>
     </div>
 </div>
@@ -304,7 +297,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var xsstate=$("input[name='xsstate']:checked").val();
-        var positionId = $('#positionId option:selected').val();
+        // var positionId = $('#positionId option:selected').val();
         // var xsstate = 0;
         $(".cw").remove();
         $.ajax({
@@ -325,7 +318,6 @@
 
         $(function () {
             load();
-            $("#countcln").val();
             countall();
         });
 
@@ -335,9 +327,6 @@
                     {
                         method: 'get', // 服务器数据的请求方式 get or post
                         url: '/kucun/stock/selectKc', // 服务器数据的加载地址
-                        //	showRefresh : true,
-                        //	showToggle : true,
-                        //	showColumns : true,
                         iconSize: 'outline',
                         toolbar: '#exampleToolbar',
                         striped: true, // 设置为true会有隔行变色效果
@@ -363,17 +352,13 @@
                                 goodsCode : $("#goodsCode").val(),
                                 goodsName : $("#goodsName").val(),
                                 goodsType : $("#goodsType option:selected").val(),
-                                // mfrsid : $("#mfrsid").val(),
                                 mfrsname : $("#mfrsname").val(),
                                 brandname : $("#brandname").val(),
                                 retailPrice : $("#retailPrice").val(),
                                 retailPrice2 : $("#retailPrice2").val(),
                                 xsstate: $("input[name='xsstate']:checked").val(),
                                 classtype : $("#classtype").val(),
-                                kccount : $("#kccount").val(),
-                                // positionId : $('#positionId option:selected').val()
-                                // name:$('#searchName').val(),
-                                // username:$('#searchName').val()
+                                kccount : $("#kccount").val()
                             };
                         },
                         columns: [
@@ -388,10 +373,6 @@
                                 field: 'goodsCode',
                                 title: '商品条码'
                             },
-                            // {
-                            //     field: 'goodsName',
-                            //     title: '商品名称'
-                            // },
                             {
                                 title: '商品名称',
                                 align: 'center',
@@ -442,15 +423,6 @@
                                 field: 'positionName',
                                 title: '仓位'
                             },
-                            // {
-                            //     field: 'newcount',
-                            //     title: '当前页数量',
-                            //
-                            //     // formatter: function (value, row, index) {
-                            //     //     var e = "<input style='color: red;text-align: center' type='hidden' id='newcount' name='newcount' readonly value="+ row.newcount+">"
-                            //     //     return e ;
-                            //     // }
-                            // },
                             {field:'newcount',title:'当前页数量',formatter: function(value,row,index){
                                     if(row.newcount !=""){
                                         return "<span style='color: red;font-size: 15px;' readonly>"+row.newcount+"</span>";
@@ -458,16 +430,6 @@
                                         return "<span style='color: red;font-size: 15px;' readonly>"+row.newcount+"</span>";
                                     }
                                 }},
-
-                            // {field:'hasPrintStr',title:'状态',width:10,halign:'center',align:'right',styler: function(value,row,index){
-                            //         if(row.hasPrint == 'WDY'){
-                            //             return 'color:red;';
-                            //         }else{
-                            //             return 'color:blue;';
-                            //         }
-                            //     }},
-
-
                         ]
                     });
         }
@@ -569,14 +531,12 @@
         }else {
             $("#classtype").val("1") ;
         }
-        // var goodsType = $("#goodsType option:selected").val();
             if (goodsType == 3 || goodsType == 4) {
                 $("#classtype").val($("input[name='classtype']:checked").val());
             }
         $(".val").remove();
         $('#exampleTable').bootstrapTable('refresh');
         countall();
-        // newcount();
     }
     function positionChange() {
         var xsstate=$("input[name='xsstate']:checked").val();

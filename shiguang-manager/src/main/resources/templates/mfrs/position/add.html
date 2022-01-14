@@ -16,10 +16,23 @@
                                 <span style="color: red">*</span>
                             </div>
                         </div>
+                        <!--<input id="company" th:value="${company}" type="text" class="form-contro">-->
+                        <!--<div id="tab1" class="form-group" style="display: block">-->
+                            <!--<label class="col-sm-3 control-label">所属公司：</label>-->
+                            <!--<div class="col-sm-8">-->
+                            <!--<select id="companyId" name="companyId" class="form-control">-->
+                                <!--<option th:each="ls:${companyList}"-->
+                                        <!--th:text="${ls.name}"-->
+                                        <!--th:value="${ls.id}"-->
+                                <!--&gt;</option>-->
+                            <!--</select>-->
+                                <!--<span style="color: red">*</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">所属部门：</label>
                             <div class="col-sm-8">
-                                <select id="departNumber" name="departNumber" class="form-control">
+                                <select id="departNumber" name="departNumber" class="form-control" onchange="getCompony()">
                                     <option value="">请选择</option>
                                     <option th:each="ls:${departmentDOList}"
                                             th:text="${ls.departName}"
@@ -27,9 +40,9 @@
                                     ></option>
                                 </select>
                                 <span style="color: red">*</span>
-
                             </div>
                         </div>
+                        <input id="companyId" name="companyId" type="hidden" class="form-contro">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">仓位名称：</label>
                             <div class="col-sm-8">
@@ -76,7 +89,28 @@
     </div>
 </div>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/mfrs/position/add.js">
+<script type="text/javascript" src="/js/appjs/mfrs/position/add.js"></script>
+<script type="text/javascript">
+function getCompony() {
+    var departNumber=$("#departNumber").val();
+    var departName= $("#departNumber option:selected").text();
+    $.ajax({
+        url: '/mfrs/position/getCompony',
+        type: 'post',
+        dataType: "json",
+        data: {
+            'departNumber': departNumber,
+            'departName': departName
+        },
+        success: function (datajson) {
+            $(datajson).each(function (key) {  //循环读取后台传来的Json数据
+                var id = datajson[key].companyId;   //角色id
+                $("#companyId").val(id);
+            });
+        }
+    })
+}
 </script>
+
 </body>
 </html>

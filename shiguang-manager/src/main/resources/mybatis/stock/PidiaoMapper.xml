@@ -83,8 +83,8 @@
 			<if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>
 			<if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>
 
-			<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
-			<if test="companyId != null and companyId != ''">or FIND_IN_SET(de.company_id,#{companyId})</if>
+			<!--<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>-->
+			<!--<if test="companyId != null and companyId != ''">or FIND_IN_SET(de.company_id,#{companyId})</if>-->
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -155,8 +155,8 @@
 			 <if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>
 			 <if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>
 
-			 <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
-			 <if test="companyId != null and companyId != ''">or FIND_IN_SET(de.company_id,#{companyId})</if>
+			 <!--<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>-->
+			 <!--<if test="companyId != null and companyId != ''">or FIND_IN_SET(de.company_id,#{companyId})</if>-->
 		 </where>
 	</select>
 
@@ -313,10 +313,13 @@
 
 
 	<select id="outPosition" resultType="com.shiguang.stock.domain.PidiaoDO">
-		select po.position_id,po.`position_name`,d.`depart_name`,d.depart_number from c_position po  left join department d on po.depart_number=d.depart_number
+		select po.position_id,po.`position_name`,d.`depart_name`,d.depart_number from c_position po
+		left join department d on po.depart_number = d.depart_number  and po.company_id=d.company_id
 		<where>
 			<if test="outDepartment != null and outDepartment != ''">and d.depart_number = #{outDepartment}</if>
 			<if test="inDepartment != null and inDepartment != ''">and d.depart_number = #{inDepartment}</if>
+			<if test="companyIdOut != null and companyIdOut != ''">and d.company_id = #{companyIdOut}</if>
+			<if test="inCompany != null and inCompany != ''">and d.company_id = #{inCompany}</if>
 			and po.xsstate=0 and  po.state=1
 		</where>
 		group by po.position_id order by  po.position_id

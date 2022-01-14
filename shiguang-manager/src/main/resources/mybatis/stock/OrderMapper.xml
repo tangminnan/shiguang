@@ -26,7 +26,6 @@
         from stock_order s
         join c_mfrs m on s.mfrsid=m.mfrsnum
         join c_position po on s.position_id=po.position_id
-        join department d on po.depart_number= d.depart_number
         join c_goods g on s.goods_type=g.goodsid
         <where>
             <if test="id != null and id != ''">and s.id = #{id}</if>
@@ -63,7 +62,7 @@
             <if test="produceDay != null and produceDay != ''"> and s.produce_day = #{produceDay} </if>
             <if test="useday != null and useday != ''"> and s.useday = #{useday} </if>
             <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
-            <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(po.company_id,#{companyId})</if>
             <if test="classtype != null and classtype != ''">and s.classtype = #{classtype} </if>
             <if test="factory != null and factory != ''">and s.factory = #{factory} </if>
             <if test="status != null and status != ''">and s.status = #{status} </if>
@@ -128,7 +127,7 @@
             <if test="produceDay != null and produceDay != ''"> and s.produce_day = #{produceDay} </if>
             <if test="useday != null and useday != ''"> and s.useday = #{useday} </if>
             <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
-            <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(po.company_id,#{companyId})</if>
             <if test="classtype != null and classtype != ''">and s.classtype = #{classtype} </if>
             <if test="factory != null and factory != ''">and s.factory = #{factory} </if>
             <if test="status != null and status != ''">and s.status = #{status} </if>

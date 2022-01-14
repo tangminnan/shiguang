@@ -75,18 +75,11 @@ public class KcController {
         Map<String, Object> map = new HashMap<>();
         //仓位
         //———获取当前登录用户的公司id————
-        String companyId = ShiroUtils.getUser().getCompanyId();
-        if (companyId != null) {
-            if ("3".equals(companyId)) {
-                map.put("companyId",null);
-            } else {
-                map.put("companyId", companyId);
-            }
-        } else if (companyId == null) {
-            String departNumber = ShiroUtils.getUser().getStoreNum();
-            map.put("departNumber", departNumber);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
         map.put("xsstate", xsstate);
+        map.put("state", "1");
         List<PositionDO> positionList = positionService.positionList(map);
         model.addAttribute("positionList", positionList);
         return positionList;
@@ -99,16 +92,8 @@ public class KcController {
         //查询列表数据
         Query query = new Query(params);
         //———获取当前登录用户的公司id————
-        String companyid = ShiroUtils.getUser().getCompanyId();
-        if (companyid != null) {
-            if ("3".equals(companyid)) {
-                query.put("companyid", null);
-            } else {
-                query.put("companyid", companyid);
-            }
-        } else if (companyid == null) {
-            String departNumber = ShiroUtils.getUser().getStoreNum();
-            query.put("departNumber", departNumber);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
         query.put("status", "0");
         // 钱转换
@@ -128,13 +113,11 @@ public class KcController {
         }
         List<StockDO> stockDOS = stockService.kccxList(query);
 
-
         Integer count;
         Integer newcount = 0;
         for(StockDO stockDO:stockDOS){
            count =Integer.valueOf(stockDO.getGoodsCount());
             newcount+=count;
-//            stockDO.setNewcount(newcount);
         }
         for(StockDO stockDO:stockDOS){
             stockDO.setNewcount(newcount);
