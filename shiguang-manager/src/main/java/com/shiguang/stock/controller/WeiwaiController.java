@@ -115,7 +115,6 @@ public class WeiwaiController {
         String companyId = ShiroUtils.getUser().getCompanyId();
         if (companyId != null) {
             Integer companyid = Integer.valueOf(companyId);
-//			String departNumber=ShiroUtils.getUser().getStoreNum();
             Map<String, Object> map = new HashMap<>();
             map.put("companyid", companyid);
             map.put("positionOrder", 2);

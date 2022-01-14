@@ -27,37 +27,6 @@ public class PidiaoDO implements Serializable {
 	private String stockorders;
 	private String danzi;
 
-	public String getDanzi() {
-		return danzi;
-	}
-
-	public void setDanzi(String danzi) {
-		this.danzi = danzi;
-	}
-
-	public String getStockorders() {
-		return stockorders;
-	}
-
-	public void setStockorders(String stockorders) {
-		this.stockorders = stockorders;
-	}
-
-	public String getStockorder() {
-		return stockorder;
-	}
-
-	public void setStockorder(String stockorder) {
-		this.stockorder = stockorder;
-	}
-
-	public String getGoodsxinxiid() {
-		return goodsxinxiid;
-	}
-
-	public void setGoodsxinxiid(String goodsxinxiid) {
-		this.goodsxinxiid = goodsxinxiid;
-	}
 
 	//状态
 	private String status;
@@ -67,6 +36,7 @@ public class PidiaoDO implements Serializable {
 	private String pidiaoNumber;
 	//关联单号
 	private String guanlianNumber;
+	private String companyId;
 	//发出部门
 	private String outDepartmentid;
 	private String outDepartment;
@@ -132,77 +102,6 @@ public class PidiaoDO implements Serializable {
 	//退回状态
 	private String returnzt;
 
-	public String getReturnzt() {
-		return returnzt;
-	}
-
-	public void setReturnzt(String returnzt) {
-		this.returnzt = returnzt;
-	}
-
-	public String getFlags() {
-		return flags;
-	}
-
-	public void setFlags(String flags) {
-		this.flags = flags;
-	}
-
-	public String getShTime() {
-		return shTime;
-	}
-
-	public void setShTime(String shTime) {
-		this.shTime = shTime;
-	}
-
-	public String getMoney() {
-		return money;
-	}
-
-	public void setMoney(String money) {
-		this.money = money;
-	}
-
-	public String getOutbm() {
-		return outbm;
-	}
-
-	public void setOutbm(String outbm) {
-		this.outbm = outbm;
-	}
-
-	public String getOutcw() {
-		return outcw;
-	}
-
-	public void setOutcw(String outcw) {
-		this.outcw = outcw;
-	}
-
-	public String getIngs() {
-		return ings;
-	}
-
-	public void setIngs(String ings) {
-		this.ings = ings;
-	}
-
-	public String getInbm() {
-		return inbm;
-	}
-
-	public void setInbm(String inbm) {
-		this.inbm = inbm;
-	}
-
-	public String getIncw() {
-		return incw;
-	}
-
-	public void setIncw(String incw) {
-		this.incw = incw;
-	}
 
 	/**
 	 * 设置：批调id
@@ -927,5 +826,117 @@ public class PidiaoDO implements Serializable {
 
 	public void setProducFactorycolor(String producFactorycolor) {
 		this.producFactorycolor = producFactorycolor;
+	}
+
+	public String getGoodsxinxiid() {
+		return goodsxinxiid;
+	}
+
+	public void setGoodsxinxiid(String goodsxinxiid) {
+		this.goodsxinxiid = goodsxinxiid;
+	}
+
+	public String getStockorder() {
+		return stockorder;
+	}
+
+	public void setStockorder(String stockorder) {
+		this.stockorder = stockorder;
+	}
+
+	public String getStockorders() {
+		return stockorders;
+	}
+
+	public void setStockorders(String stockorders) {
+		this.stockorders = stockorders;
+	}
+
+	public String getDanzi() {
+		return danzi;
+	}
+
+	public void setDanzi(String danzi) {
+		this.danzi = danzi;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getOutbm() {
+		return outbm;
+	}
+
+	public void setOutbm(String outbm) {
+		this.outbm = outbm;
+	}
+
+	public String getOutcw() {
+		return outcw;
+	}
+
+	public void setOutcw(String outcw) {
+		this.outcw = outcw;
+	}
+
+	public String getIngs() {
+		return ings;
+	}
+
+	public void setIngs(String ings) {
+		this.ings = ings;
+	}
+
+	public String getInbm() {
+		return inbm;
+	}
+
+	public void setInbm(String inbm) {
+		this.inbm = inbm;
+	}
+
+	public String getIncw() {
+		return incw;
+	}
+
+	public void setIncw(String incw) {
+		this.incw = incw;
+	}
+
+	public String getMoney() {
+		return money;
+	}
+
+	public void setMoney(String money) {
+		this.money = money;
+	}
+
+	public String getShTime() {
+		return shTime;
+	}
+
+	public void setShTime(String shTime) {
+		this.shTime = shTime;
+	}
+
+	public String getFlags() {
+		return flags;
+	}
+
+	public void setFlags(String flags) {
+		this.flags = flags;
+	}
+
+	public String getReturnzt() {
+		return returnzt;
+	}
+
+	public void setReturnzt(String returnzt) {
+		this.returnzt = returnzt;
 	}
 }

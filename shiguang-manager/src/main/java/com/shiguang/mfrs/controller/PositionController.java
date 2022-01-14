@@ -6,8 +6,11 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.mfrs.domain.CompanyDO;
 import com.shiguang.mfrs.domain.PositionDO;
+import com.shiguang.mfrs.service.CompanyService;
 import com.shiguang.mfrs.service.PositionService;
+import com.shiguang.stock.domain.PidiaoDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,13 +57,10 @@ public class PositionController {
         //查询列表数据
         Query query = new Query(params);
         //———获取当前登录用户的公司id————
-        String companyId=ShiroUtils.getUser().getCompanyId();
-        if(companyId != null){
-            query.put("companyId",companyId);
-        }else if (companyId == null){
-            String departNumber=ShiroUtils.getUser().getStoreNum();
-            query.put("departNumber",departNumber);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
+        query.put("state",1);
         List<PositionDO> positionList = positionService.list(query);
         int total = positionService.count(query);
         PageUtils pageUtils = new PageUtils(positionList, total);
@@ -73,12 +73,8 @@ public class PositionController {
         //部门
         Map<String, Object> map = new HashMap<>();
         //———获取当前登录用户的公司id————
-        String companyId=ShiroUtils.getUser().getCompanyId();
-        if(companyId == null){
-            String departNumber=ShiroUtils.getUser().getStoreNum();
-            map.put("departNumber",departNumber);
-        }else if (companyId != null){
-            map.put("companyId",companyId);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
         map.put("status","0");
         List<DepartmentDO> departmentDOList = departmentService.list(map);
@@ -106,16 +102,14 @@ public class PositionController {
     public R save(PositionDO position) {
         //判断是否已存在
         String positionNum = position.getPositionNum();
+        String companyId = position.getCompanyId();
         Map<String, Object> map = new HashMap<>();
         map.put("positionNum", positionNum);
-//———获取当前登录用户的公司id————
-        String companyId=ShiroUtils.getUser().getCompanyId();
         map.put("companyId",companyId);
         List<PositionDO> list = positionService.haveNum(map);
         if (list.size() > 0) {
             return R.error("仓位代码已存在");
         }
-
         if (positionService.save(position) > 0) {
             return R.ok();
         }
@@ -185,5 +179,15 @@ public class PositionController {
         }
         return R.error();
     }
-
+//公司
+    @ResponseBody
+    @RequestMapping(value = "/getCompony")
+    public List<DepartmentDO> getCompony(String departNumber,String departName, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("departNumber", departNumber);
+        map.put("departName", departName);
+        List<DepartmentDO> departmentDOS = departmentService.list(map);
+        model.addAttribute("departmentDOS", departmentDOS);
+        return departmentDOS;
+    }
 }

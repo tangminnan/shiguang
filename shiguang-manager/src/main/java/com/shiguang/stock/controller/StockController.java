@@ -102,17 +102,8 @@ public class StockController {
         //查询列表数据
         Query query = new Query(params);
         //———获取当前登录用户的公司id————
-        String companyid=ShiroUtils.getUser().getCompanyId();
-        if(companyid == null){
-            String departNumber=ShiroUtils.getUser().getStoreNum();
-            query.put("departNumber",departNumber);
-        }else if (companyid != null){
-            if ("3".equals(companyid)){
-
-                query.put("companyid",null);
-            }else {
-                query.put("companyid",companyid);
-            }
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
        Object gdname=query.get("goodsid");
         if ("镜架".equals(gdname)){
@@ -169,14 +160,12 @@ public class StockController {
         model.addAttribute("goodsDOList", goodsDOList);
         //仓位
         //———获取当前登录用户的公司id————
-        String companyId=ShiroUtils.getUser().getCompanyId();
-        if(companyId == null){
-            String departNumber=ShiroUtils.getUser().getStoreNum();
-            map.put("departNumber",departNumber);
-        }else if (companyId != null){
-            map.put("companyId",companyId);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
         map.put("positionOrder","2");
+        map.put("xsstate","0");
+        map.put("state","1");
         List<PositionDO> positionDOList = positionService.list(map);
         model.addAttribute("positionDOList", positionDOList);
         //———获取当前登录用户的名称————
@@ -1965,14 +1954,14 @@ public class StockController {
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         //———获取当前登录用户的公司id————
-        String companyId=ShiroUtils.getUser().getCompanyId();
-        if(companyId == null){
-            String departNumber=ShiroUtils.getUser().getStoreNum();
-            map.put("departNumber",departNumber);
-        }else if (companyId != null){
-            map.put("companyId",companyId);
+        //仓位
+        //———获取当前登录用户的公司id————
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
         map.put("positionOrder","2");
+        map.put("xsstate","0");
+        map.put("state","1");
         List<PositionDO> positionDOList = positionService.list(map);
         model.addAttribute("positionDOList", positionDOList);
         //———获取当前登录用户的名称————

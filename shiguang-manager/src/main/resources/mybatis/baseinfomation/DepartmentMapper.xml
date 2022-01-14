@@ -21,6 +21,7 @@
             <if test="departAddress != null and departAddress != ''">and d.depart_address = #{departAddress}</if>
             <if test="departType != null and departType != ''">and d.depart_type = #{departType}</if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+            <if test="companyIds != null and companyIds != ''">and FIND_IN_SET(d.company_id,#{companyIds})</if>
             <if test="personCharge != null and personCharge != ''">and d.person_charge = #{personCharge}</if>
             <if test="status != null and status != ''">and d.status = #{status}</if>
             <if test="fanuc != null and fanuc != ''">and d.fanuc = #{fanuc}</if>
@@ -31,6 +32,7 @@
             <if test="companyName != null and companyName != ''">and d.company_name = #{companyName}</if>
             <if test="state != null and state != ''">and d.state = #{state}</if>
             <if test="companyid !=null and companyid != ''">and d.company_id = #{companyid}</if>
+             and c.xsstate=0 and c.state=1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

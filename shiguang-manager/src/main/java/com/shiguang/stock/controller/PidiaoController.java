@@ -77,7 +77,7 @@ public class PidiaoController {
         //查询列表数据
         Query query = new Query(params);
         //———获取当前登录用户的公司id————
-        String companyId = "";
+        String companyId ="";
         String departNumber = "";
         if (null != ShiroUtils.getUser().getCompanyId()) {
             companyId = ShiroUtils.getUser().getCompanyId();
@@ -86,7 +86,6 @@ public class PidiaoController {
             departNumber = ShiroUtils.getUser().getStoreNum();
             query.put("departNumber", departNumber);
         }
-
 
         List<PidiaoDO> pidiaoList = pidiaoService.list(query);
         for (PidiaoDO pidiaoDO : pidiaoList) {
@@ -108,11 +107,8 @@ public class PidiaoController {
             if (departNumber.equals(pidiaoDO.getInDepartmentid())) {
                 pidiaoDO.setFlags("0");//接收部门
             }
-
-
         }
         int total = pidiaoService.count(query);
-//        int total = pidiaoList.size();
         PageUtils pageUtils = new PageUtils(pidiaoList, total);
         return pageUtils;
     }
@@ -127,18 +123,15 @@ public class PidiaoController {
         //部门
         Map<String, Object> map = new HashMap<>();
         //———获取当前登录用户的公司id————
-        String companyId = ShiroUtils.getUser().getCompanyId();
-        if (companyId == null) {
-            String departNumber = ShiroUtils.getUser().getStoreNum();
-            map.put("departNumber", departNumber);
-        } else if (companyId != null) {
-            map.put("companyId", companyId);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyIds",ShiroUtils.getUser().getCompanyId());
         }
         map.put("status", "0");
+        map.put("state", "1");
         List<DepartmentDO> departmentDOList = departmentService.list(map);
         model.addAttribute("departmentDOList", departmentDOList);
 
-        map.put("xsstate", 0);
+        map.put("xsstate", "0");
         List<CompanyDO> companyList = companyService.list(map);
         model.addAttribute("companyList", companyList);
         //———获取当前登录用户的名称————
@@ -154,9 +147,10 @@ public class PidiaoController {
     //发出仓位
     @ResponseBody
     @RequestMapping(value = "/outposion")
-    public List<PidiaoDO> outposion(String outDepartment, Model model) {
+    public List<PidiaoDO> outposion(String outDepartment, String companyIdOut, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("outDepartment", outDepartment);
+        map.put("companyIdOut", companyIdOut);
         List<PidiaoDO> outPositiion = pidiaoService.outPosition(map);
         model.addAttribute("outPositiion", outPositiion);
         return outPositiion;
@@ -176,8 +170,9 @@ public class PidiaoController {
     //接收仓位
     @ResponseBody
     @RequestMapping(value = "/inposion")
-    public List<PidiaoDO> inposion(String inDepartment, Model model) {
+    public List<PidiaoDO> inposion(String inDepartment,String inCompany, Model model) {
         Map<String, Object> map = new HashMap<>();
+        map.put("inCompany", inCompany);
         map.put("inDepartment", inDepartment);
         List<PidiaoDO> outPositiion = pidiaoService.outPosition(map);
         model.addAttribute("outPositiion", outPositiion);
