@@ -25,18 +25,13 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and o.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  o.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and o.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  o.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and o.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(o.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(o.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(o.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(o.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="producFactory != null and producFactory != ''">and o.produc_factory = #{producFactory}</if>
             <if test="producColor != null and producColor != ''">and o.produc_color = #{producColor}</if>
             <if test="xsstate != null and xsstate != ''">and o.xsstate = #{xsstate}</if>
@@ -69,18 +64,12 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and o.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  o.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and o.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  o.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and o.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(o.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(o.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(o.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(o.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="producFactory != null and producFactory != ''">and o.produc_factory = #{producFactory}</if>
             <if test="producColor != null and producColor != ''">and o.produc_color = #{producColor}</if>
             <if test="xsstate != null and xsstate != ''">and o.xsstate = #{xsstate}</if>

@@ -1165,18 +1165,12 @@
             <if test="technologyId != null and technologyId != ''">and t.technology_id = #{technologyId}</if>
             <if test="materialid != null and materialid != ''">and m.materialid = #{materialid}</if>
 
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and p.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  p.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and p.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(p.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(p.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(p.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(p.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
 
         </where>
@@ -1217,18 +1211,11 @@
             <if test="technologyId != null and technologyId != ''">and t.technology_id = #{technologyId}</if>
             <if test="materialid != null and materialid != ''">and m.materialid = #{materialid}</if>
 
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and p.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  p.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and p.retail_price &lt;=  #{taxPrice2}
-            </if>
+            <if test="retailPrice != null and retailPrice != ''">and ABS(p.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(p.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(p.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(p.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         order by p.id desc
@@ -1251,18 +1238,12 @@
             <if test="partsStyle != null and partsStyle != ''">and p.parts_style = #{partsStyle}</if>
             <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and p.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and p.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  p.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and p.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(p.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(p.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(p.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(p.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
@@ -1291,18 +1272,12 @@
             <if test="partsStyle != null and partsStyle != ''">and p.parts_style = #{partsStyle}</if>
             <if test="producFactory != null and producFactory != ''">and p.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and p.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  p.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and p.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  p.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and p.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(p.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(p.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(p.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(p.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         order by p.id desc
@@ -1360,18 +1335,12 @@
             <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  j.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and j.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  j.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and j.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(j.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(j.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(j.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(j.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
@@ -1412,18 +1381,12 @@
             <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  j.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and j.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  j.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and j.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(j.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(j.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(j.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(j.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
@@ -1480,18 +1443,12 @@
             <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  j.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and j.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  j.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and j.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(j.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(j.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(j.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(j.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
@@ -1531,18 +1488,12 @@
             <if test="functionId != null and functionId != ''">and j.function_id = #{functionId}</if>
             <if test="gradualId != null and gradualId != ''">and j.gradual_id = #{gradualId}</if>
             <if test="factory != null and factory != ''">and j.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  j.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and j.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  j.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and j.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(j.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(j.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(j.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(j.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
@@ -1569,18 +1520,12 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producFactory != null and producFactory != ''">and y.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and y.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  y.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and y.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  y.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and y.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(y.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(y.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(y.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(y.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
@@ -1614,18 +1559,12 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producFactory != null and producFactory != ''">and y.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and y.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  y.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and y.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  y.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and y.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(y.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(y.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(y.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(y.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
@@ -1673,18 +1612,12 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producFactory != null and producFactory != ''">and y.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and y.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  y.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and y.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  y.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and y.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(y.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(y.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(y.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(y.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
@@ -1720,18 +1653,13 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producFactory != null and producFactory != ''">and y.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and y.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  y.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and y.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  y.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and y.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(y.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(y.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(y.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(y.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
+
             <if test="usageId != null and usageId != ''">and y.usage_id = #{usageId}</if>
             <if test="typeId != null and typeId != ''">and y.type_id = #{typeId}</if>
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
@@ -1760,18 +1688,12 @@
             <if test="secondCapacity != null and secondCapacity != ''">and h.second_capacity = #{secondCapacity}</if>
             <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  h.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and h.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  h.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and h.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(h.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(h.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(h.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(h.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
@@ -1801,18 +1723,12 @@
             <if test="secondCapacity != null and secondCapacity != ''">and h.second_capacity = #{secondCapacity}</if>
             <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  h.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and h.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  h.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and h.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(h.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(h.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(h.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(h.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         order by h.id desc
@@ -1857,18 +1773,12 @@
             <if test="size != null and size != ''">and t.size = #{size}</if>
             <if test="producFactory != null and producFactory != ''">and t.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and t.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  t.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and t.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  t.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and t.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(t.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(t.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(t.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(t.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and t.xsstate = 0 and  t.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
@@ -1904,18 +1814,12 @@
             <if test="size != null and size != ''">and t.size = #{size}</if>
             <if test="producFactory != null and producFactory != ''">and t.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and t.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  t.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and t.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  t.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and t.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(t.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(t.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(t.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(t.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and t.xsstate = 0 and  t.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         order by t.id desc
@@ -1961,18 +1865,12 @@
             <if test="oldId != null and oldId != ''">and o.old_id = #{oldId}</if>
             <if test="producFactory != null and producFactory != ''">and o.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and o.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  o.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and o.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  o.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and o.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(o.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(o.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(o.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(o.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and o.xsstate = 0 and  o.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
@@ -2008,18 +1906,12 @@
             <if test="oldId != null and oldId != ''">and o.old_id = #{oldId}</if>
             <if test="producFactory != null and producFactory != ''">and o.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and o.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  o.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and o.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  o.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and o.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(o.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(o.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(o.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(o.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and o.xsstate = 0 and  o.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         order by o.id desc
@@ -2041,18 +1933,12 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  h.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and h.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  h.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and h.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(h.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(h.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(h.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(h.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
@@ -2080,18 +1966,12 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producFactory != null and producFactory != ''">and h.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and h.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  h.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and h.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  h.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and h.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(h.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(h.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(h.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(h.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         order by h.id desc
@@ -2114,18 +1994,12 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producFactory != null and producFactory != ''">and s.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and s.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and s.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  s.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and s.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(s.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(s.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and s.xsstate = 0 and  s.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         <choose>
@@ -2154,18 +2028,13 @@
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producFactory != null and producFactory != ''">and s.produc_factory = #{producFactory}</if>
             <if test="factory != null and factory != ''">and s.factory = #{factory}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and s.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  s.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and s.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(s.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(s.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             and s.xsstate = 0 and  s.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
         order by s.id desc
@@ -2251,12 +2120,9 @@
 
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and s.retail_price &lt;=  #{retailPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
 
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
             <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
@@ -2308,12 +2174,10 @@
 
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and s.retail_price &lt;=  #{retailPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+
 
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
             <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
@@ -2354,12 +2218,10 @@
 
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and s.retail_price &lt;=  #{retailPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+
 
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
             <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>

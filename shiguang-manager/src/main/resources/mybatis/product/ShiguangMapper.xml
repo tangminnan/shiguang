@@ -26,18 +26,12 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and s.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  s.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and s.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(s.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(s.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and s.view_good_name = #{viewGoodName}</if>
 
@@ -67,18 +61,13 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-            <if test="retailPrice != null and retailPrice != ''">
-                and   #{retailPrice} &lt;=  s.retail_price
-            </if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">
-                and s.retail_price &lt;=  #{retailPrice2}
-            </if>
-            <if test="taxPrice != null and taxPrice != ''">
-                and   #{taxPrice} &lt;=  s.tax_price
-            </if>
-            <if test="taxPrice2 != null and taxPrice2 != ''">
-                and s.retail_price &lt;=  #{taxPrice2}
-            </if>
+
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(s.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(s.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
             <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and s.view_good_name = #{viewGoodName}</if>
 
