@@ -356,7 +356,7 @@
     </select>
     <select id="phoneOrAddres" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
         SELECT d.depart_number,d.depart_tel,d.depart_address,p.position_id,p.position_name
-        FROM department d JOIN c_position p on d.depart_number = p.depart_number
+        FROM department d JOIN c_position p on d.depart_number = p.depart_number and d.company_id=p.company_id
         <where>
             <if test="companyid != null and companyid != ''">and d.company_id = #{companyid}</if>
             <if test="positionOrder != null and positionOrder != ''">and p.position_order = #{positionOrder}</if>

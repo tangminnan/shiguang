@@ -59,6 +59,16 @@ public class PidiaoServiceImpl implements PidiaoService {
 	}
 
 	@Override
+	public PidiaoDO getOut(Long id) {
+		return pidiaoDao.getOut(id);
+	}
+
+	@Override
+	public PidiaoDO getIn(Long id) {
+		return pidiaoDao.getIn(id);
+	}
+
+	@Override
 	public List<PidiaoDO> indepartment(Map<String, Object> map) {
 		return  pidiaoDao.indepartment(map);
 	}

@@ -16,7 +16,7 @@
 		biaoge_neirong,`technical_title`,`consultation_fee`,`synopsis`,`head` from sys_user
 		<where>
 			<if test="userName != null and userName != ''"> and username = #{userName} </if>
-			<if test="conpanyId != null and conpanyId != ''"> and company_id = #{conpanyId} </if>
+			<if test="companyId != null and companyId != ''">and FIND_IN_SET(company_id,#{companyId})</if>
 		</where>
 	</select>
 

@@ -19,6 +19,7 @@ public interface PidiaoService {
 	
 	PidiaoDO get(Long id);
 
+
 	List<PidiaoDO> list(Map<String, Object> map);
 
 	int count(Map<String, Object> map);
@@ -30,6 +31,11 @@ public interface PidiaoService {
 	int remove(Long id);
 
 	int batchRemove(Long[] ids);
+
+
+	PidiaoDO getOut(Long id);
+	PidiaoDO getIn(Long id);
+
 	//发出接收仓位
 	List<PidiaoDO> outPosition(Map<String, Object> map);
 	//发出接收部门

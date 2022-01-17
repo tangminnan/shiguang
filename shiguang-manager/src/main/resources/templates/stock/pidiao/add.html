@@ -16,6 +16,7 @@
 <div class="m40 tabS msgBox">
 	<h3>单据信息</h3>
 	<input id="companyIdOut" name="companyIdOut" type="hidden" class="form-contro"/>
+
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td>批调单号：</td>
@@ -84,10 +85,17 @@
 
 		</div>
 		<div class="Cbtn buyBtns">
+			<input id="outbm" name="outbm" value="" type="hidden"/>
+			<input id="outcw" name="outcw"  value="" type="hidden"/>
+			<input id="ings" name="ings" value="" type="hidden"/>
+			<input id="inbm" name="inbm" value="" type="hidden"/>
+			<input id="incw" name="incw" value="" type="hidden"/>
+
+
 			<input name="status" value="1" type="hidden"/>
 			<input id="returnzt" name="returnzt" value="1" type="hidden"/>
 			<input name="shTime" value="" type="hidden"/>
-			<input type="button" class="H_bc" value="保存并审核" onclick="save()" />
+			<input type="button" class="H_bc" value="保存并审核" onclick="saveAll()" />
 		</div>
 	</div>
 
@@ -131,7 +139,7 @@
 		</tbody>
 	</table>
 	<div class="Cbtn buyBtns">
-		<input type="button" class="H_bc" value="保存并审核"  onclick="save()"/>
+		<input type="button" class="H_bc" value="保存并审核"  onclick="saveAll()"/>
 		<span style="color: red">当前页数量：</span>
 		<input style="color: red;font-size: 15px;" id="newcounts" name="newcount" readonly/>
 	</div>
@@ -487,6 +495,28 @@ function inposion() {
         }
 
         })
+
+	function saveAll() {
+        var outbm=$("#outbm").val();
+        if(outbm=="" || outbm==null){
+            var outDepartment = $("#outDepartment option:selected").text();
+            var outPosition = $("#outPosition option:selected").text();
+            var inCompany = $("#inCompany option:selected").text();
+            var inDepartment = $("#inDepartment option:selected").text();
+            var inPosition = $("#inPosition option:selected").text();
+            $("#outbm").val(outDepartment);
+            $("#outcw").val(outPosition);
+            $("#ings").val(inCompany);
+            $("#inbm").val(inDepartment);
+            $("#incw").val(inPosition);
+            var outbms=$("#outbm").val();
+            if (outbms!="" || outbms!=null) {
+                save();
+			}
+
+		}
+
+    }
 
 </script>
 </body>
