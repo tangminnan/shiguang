@@ -990,7 +990,7 @@
 			<li><input class="youji" type="button" onclick="getYouji()"  value="填写邮寄信息" /></li>
 		</ul>
 		<ul class="ulC">
-			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney" onchange="getShishou()"/><input type="hidden" id="primeMoney" name="primeMoney"/></li>
+			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney" readonly onchange="getShishou()"/><input type="hidden" id="primeMoney" name="primeMoney"/></li>
 			<li>商品打折：<input type="text" id="saleDiscounts" name="saleDiscounts" onchange="getDiscount()"/><input type="hidden" id="saleAccount" name="saleAccount"/><input type="button" value="还原" /></li>
 			<li>一口价：<input type="text" id="fisPrice" onchange="getFixedPrice()" /><input type="button" class="qianpi" value="签批" /><input type="button" onclick="getfidHy()" value="还原" /></li>
 			<li>抹零金额：<input type="text" value="0.00" id="molingMoney" onfocus="if (value =='0.00'){value =''}" onblur="if (value ==''){value='0.00'}" name="molingMoney" onchange="getChangeValue()"/></li>
