@@ -683,6 +683,4 @@ public class OptometryNewController {
 
 }
 
-//information/optometryNew/optometryHis
-//- ` http://xx.com/information/optometryNew/prescriptionHis `
-//- ` http://xx.com/information/optometryNew/inspectHis `
+

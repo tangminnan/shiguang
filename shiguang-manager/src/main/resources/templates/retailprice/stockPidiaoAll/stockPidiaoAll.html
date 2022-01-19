@@ -18,44 +18,47 @@
 		<tr>
 			<td>仓位名称：</td>
 			<td>
-				<select id="positionId" name="positionId">
+				<select id="positionId" name="positionId" style="width: 50%">
 					<option value="">--请选择--</option>
 					<option th:each="ls:${positionDOList}" th:text="${ls.positionName}"
 							th:value="${ls.positionId}"></option>
 				</select>
 			</td>
-			<td>单据号：</td>
+			<td>收货日期：</td>
 			<td>
-				<input id="producCode" name="producCode" type="text"/>
+				<input id="shTime1" type="text"
+					   placeholder="开始日期"  />～
+				<input id="shTime2" type="text"
+					   placeholder="结束日期" />
 			</td>
-			<td>制单人：</td>
+			<td>统计类型：</td>
 			<td>
-				<input id="2" name="producCode" type="text"/>
-			</td>
-		</tr>
-		<tr>
-			<td>仓位名称：</td>
-			<td>
-				<textarea id="departments" name="departments" readonly placeholder="请选择部门"></textarea>
-				<input type="button" class="XZ-btn" value="选择" onclick="choiceDepartment()"/>
-			</td>
-			<td>出入库时间：</td>
-			<td>
-				<input id="settleDateStart" type="text"
-					   placeholder="开始日期">～
-				<input id="settleDateEnd" type="text"
-					   placeholder="结束日期">
+				<select id="way" name="way" style="width: 50%">
+					<option value="">--请选择--</option>
+					<option value="1">汇总</option>
+					<option value="2">明细</option>
+				</select>
 			</td>
 		</tr>
-
 		<tr>
 			<td>商品类别：</td>
-			<td >
-				<select id="goodsType" name="goodsType" onchange="goodsidstr()">
+			<td>
+				<select id="goodsType" name="goodsType" onchange="selectgoods()" style="width: 50%">
 					<option value="">--请选择--</option>
-					<option th:each="ls:${goodsDOList}" th:text="${ls.goodsname}" th:value="${ls.goodsid}">
-					</option>
+					<option th:each="ls:${goodsDOList}"
+							th:text="${ls.goodsname}"
+							th:value="${ls.goodsid}"></option>
 				</select>
+				<div id="jp" style="display: none">
+					<label class="radio-inline">
+						<input type="radio" name="classtype"  value="1" checked/> 成品片
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="classtype" value="2" /> 订做片
+					</label>
+				</div>
+				<input type="hidden" id="classtype" value="" />
+
 			</td>
 			<td>制造商：</td>
 			<td>
@@ -69,15 +72,22 @@
 			</td>
 		</tr>
 		<tr>
-			<td>商品代码：</td>
-			<td>
-				<input id="producNum" name="producNum" type="text">
-			</td>
 			<td>商品名称：</td>
 			<td>
 				<input id="producName" name="producName" type="text"/>
 			</td>
-
+			<td>商品代码：</td>
+			<td>
+				<input id="producNum" name="producNum" type="text">
+			</td>
+			<td>收货状态：</td>
+			<td>
+				<select id="shstate" name="shstate" style="width: 50%">
+					<option value="">--请选择--</option>
+					<option value="1">收货</option>
+					<option value="2">未收货</option>
+				</select>
+			</td>
 		</tr>
 	</table>
 	<!--保存/清空-->
@@ -88,6 +98,96 @@
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript">
+	laydate.render({
+		elem: '#shTime1',
+		format: 'yyyy-MM-dd',
+		type: 'date'
+	});
+	laydate.render({
+		elem: '#shTime2',
+		format: 'yyyy-MM-dd',
+		type: 'date'
+	});
+
+    <!--选择制造商-->
+    function choiceMfrs() {
+        var goodsid = document.getElementById('goodsType').value;
+        if (goodsid == "") {
+            layer.alert("请选择商品类型！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findmfrs/" + goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsname").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsnum);
+                        // alert(rows[i].mfrsnum)
+                        // $("#mfrsNames").val(rows[i].mfrsname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    function choiceBrand() {
+        var goodsid = document.getElementById('goodsType').value;
+        var mfrsname = document.getElementById('mfrsname').value;
+        if (mfrsname == "") {
+            layer.alert("请选择制造商！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/kucun/stock/findbrand/" + mfrsname+"/"+goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandname").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                        // $("#brandNames").val(rows[i].brandname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    function selectgoods() {
+        var goodsType = $("#goodsType option:selected").val();
+        if (goodsType == ""){
+            jp.style = "display: none";
+        }if (goodsType == 1){
+            jp.style = "display: none";
+        }else if (goodsType == 2){
+            jp.style = "display: none";
+        }else if (goodsType == 3){
+            $("#classtype").val("") ;
+            jp.style = "display: block";
+        }else if (goodsType == 4){
+            $("#classtype").val("") ;
+            jp.style = "display: block";
+        }else if (goodsType == 5){
+            jp.style = "display: none";
+        }else if (goodsType == 6){
+            jp.style = "display: none";
+        }else if (goodsType == 7){
+            jp.style = "display: none";
+        }else if (goodsType == 8){
+            jp.style = "display: none";
+        }else if (goodsType == 9){
+            jp.style = "display: none";
+        }
+    }
     //清空
     function clearText() {
         var controls = document.getElementsByTagName('input');
@@ -97,6 +197,49 @@
             }
         }
     }
+    function reLoad() {
+        var positionId = $('#positionId').val();
+        var shTime1=$("#shTime1").val();
+        var shTime2=$("#shTime2").val();
+        var goodsType=$("#goodsType").val();
+        var way=$("#way").val();
+        var mfrsname=$("#mfrsname").val();
+        var brandname=$("#brandname").val();
+        var producName=$("#producName").val();
+        var producNum=$("#producNum").val();
+        var shstate=$("#shstate").val();
+        if (goodsType== ""){
+            $("#classtype").val("") ;
+        }else {
+            $("#classtype").val("1") ;
+        }
+        if (goodsType == 3 || goodsType == 4) {
+            $("#classtype").val($("input[name='classtype']:checked").val());
+        }
+        if(shTime1=="" || shTime1==null){
+            layer.alert("请选择收货时间(开始日期)！");
+            // var time1=document.getElementById('shTime1');
+            // time1.onclick=function () {
+            //     alert(1111111111);
+            //     laydate.render({
+            //         elem: '#shTime1',
+            //         format: 'yyyy-MM-dd',
+            //         type: 'date'
+            //     });
+            // }
+		}else if (shTime1 !="" && (shTime2=="" || shTime2==null)){
+            layer.alert("请选择收货时间(结束日期)！");
+		} else if (way=="" || way==null){
+            layer.alert("请选择统计类型！")
+		}else {
+
+
+            window.open("/stock/stock/dayinOrder?danjuNumber="+ danjuNumber);
+		}
+    }
 </script>
 </body>
 </html>
+
+
+

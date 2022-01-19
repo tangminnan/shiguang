@@ -9,12 +9,196 @@
 	<link rel="stylesheet" href="/css/css.css" type="text/css">
 	<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+	<style type="text/css">
+		.fixed-table-pagination{height: 60px;}
+		.pull-left{float: left; margin-top: 10px;margin-bottom: 10px;}
+		.pull-right{float: right; margin-top: 10px;margin-bottom: 10px;}
+
+		.pagination > li {
+			display: inline;
+			font-size: 12px;
+		}
+
+		.pagination-info {
+			line-height: 34px;
+			margin-right: 5px;
+		}
+		.btn-group {
+			position: relative;
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.pagination {
+			display: inline-block;
+			padding-left: 0px;
+			border-radius: 4px;
+		}
+
+		.pagination>li>a, .pagination>li>span {
+			position: relative;
+			float: left;
+			padding: 6px 12px;
+			margin-left: -1px;
+			line-height: 1.42857143;
+			color: #337ab7;
+			text-decoration: none;
+			background-color: #fff;
+			border: 1px solid #ddd;
+		}
+
+		.pagination>li>a, .pagination>li>span {
+			background-color: #FFFFFF;
+			border: 1px solid #DDDDDD;
+			color: inherit;
+			float: left;
+			line-height: 1.42857;
+			margin-left: -1px;
+			padding: 4px 10px;
+			position: relative;
+			text-decoration: none;
+		}
+
+		.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+			color: #777;
+			cursor: not-allowed;
+			background-color: #fff;
+			border-color: #ddd;
+		}
+
+		.fixed-table-pagination .pagination a {
+			padding: 6px 12px;
+			line-height: 1.428571429;
+		}
+
+		.pagination>li:first-child>a, .pagination>li:first-child>span {
+			margin-left: 0;
+			border-top-left-radius: 4px;
+			border-bottom-left-radius: 4px;
+		}
+
+		.fixed-table-pagination li.disabled a {
+			pointer-events: none;
+			cursor: default;
+		}
+
+
+
+		.btn-default {
+			color: #333;
+			background-color: #fff;
+			border-color: #ccc;
+		}
+
+		.btn-default {
+			background-color: #c2c2c2;
+			border-color: #c2c2c2;
+			color: #FFFFFF;
+		}
+
+		.btn-outline {
+			color: inherit;
+			background-color: transparent;
+			-webkit-transition: all .5s;
+			transition: all .5s;
+			border: 1px solid #c2c2c2;
+			padding: 5px 10px;
+			outline: none;
+		}
+
+		.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+			background-color: #f4f4f4;
+			border-color: #DDDDDD;
+			color: inherit;
+			cursor: default;
+			z-index: 2;
+		}
+
+
+		.dropdown-menu {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			z-index: 1000;
+			display: none;
+			float: left;
+			min-width: 160px;
+			padding: 5px 0;
+			margin: 2px 0 0;
+			font-size: 14px;
+			text-align: left;
+			list-style: none;
+			background-color: #fff;
+			-webkit-background-clip: padding-box;
+			background-clip: padding-box;
+			border: 1px solid #ccc;
+			border: 1px solid rgba(0,0,0,.15);
+			border-radius: 4px;
+			-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+			box-shadow: 0 6px 12px rgba(0,0,0,.175);
+		}
+
+		.dropdown-menu {
+			border: medium none;
+			display: none;
+			float: left;
+			font-size: 12px;
+			left: 0;
+			list-style: none outside none;
+			padding: 0;
+			position: absolute;
+			text-shadow: none;
+			top: 100%;
+			z-index: 1000;
+			border-radius: 0;
+			box-shadow: 0 0 3px rgba(86, 96, 117, 0.3);
+		}
+
+		.dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu {
+			top: auto;
+			bottom: 100%;
+			margin-bottom: 2px;
+		}
+		.ibox .open>.dropdown-menu {
+			left: auto;
+			right: 0;
+		}
+		.open>.dropdown-menu {
+			display: block;
+		}
+
+		.dropdown-menu>li>a {
+			display: block;
+			padding: 3px 20px;
+			clear: both;
+			font-weight: 400;
+			line-height: 1.42857143;
+			color: #333;
+			white-space: nowrap;
+		}
+
+		.dropdown-menu>li>a {
+			border-radius: 3px;
+			color: inherit;
+			line-height: 25px;
+			margin: 4px;
+			text-align: left;
+			font-weight: normal;
+		}
+		.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+			color: #fff;
+			text-decoration: none;
+			background-color: #337ab7;
+			outline: 0;
+		}
+	</style>
 </head>
 <body>
 <!--查询条件-->
 <div class="m40 tabS msgBox">
 	<h3>查询条件</h3>
-	<input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="hidden"/>
+	<input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="text"/>
+	<input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="text"/>
+	<input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="text"/>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td>配镜单号：</td>
@@ -44,39 +228,6 @@
 </div>
 <!--商品信息-->
 <div class="m40 tabS msgBoxDD">
-<!--	<table  border="0" cellspacing="0" cellpadding="0" class="buyBtns">-->
-<!--		<tbody>-->
-<!--		<tr class="thead">-->
-<!--			<td>单选</td>-->
-<!--			<td>配镜单号</td>-->
-<!--			<td>顾客姓名</td>-->
-<!--			<td>会员卡号</td>-->
-<!--			<td>顾客电话</td>-->
-<!--			<td>配镜时间</td>-->
-<!--			<td>应收金额</td>-->
-
-
-
-<!--			<td  >处方</td>-->
-<!--			<td  >球镜OD</td>-->
-<!--			<td  >柱镜OD</td>-->
-<!--			<td  >轴向OD</td>-->
-<!--			<td  >ADDOD</td>-->
-<!--			<td  >三棱镜OD</td>-->
-<!--			<td  >基底OD</td>-->
-<!--			<td  >瞳距（远）OD</td>-->
-<!--			<td  >瞳距（近）OD</td>-->
-<!--			<td  >球镜OS</td>-->
-<!--			<td  >柱镜OS</td>-->
-<!--			<td  >轴向OS</td>-->
-<!--			<td  >ADDOS</td>-->
-<!--			<td  >三棱镜OS</td>-->
-<!--			<td  >基底OS</td>-->
-<!--			<td  >瞳距（远）OS</td>-->
-<!--			<td  >瞳距（近）OS</td>-->
-<!--		</tr>-->
-<!--		</tbody>-->
-<!--	</table>-->
 	<table id="exampleTable" data-mobile-responsive="true"></table>
 </div>
 <div th:include="include :: footer"></div>
@@ -93,9 +244,10 @@
 							{
 								method: 'get', // 服务器数据的请求方式 get or post
 								url: '/stock/weiwai/selectOrder',// 服务器数据的加载地址
-								//	showRefresh : true,
-								//	showToggle : true,
-								//	showColumns : true,
+									// showRefresh : true,
+									// showToggle : true,
+									// showColumns : true,
+
 								iconSize: 'outline',
 								toolbar: '#exampleToolbar',
 								striped: true, // 设置为true会有隔行变色效果
@@ -103,7 +255,8 @@
 								pagination: true, // 设置为true会在底部显示分页条
 								// queryParamsType : "limit",
 								// //设置为limit则会发送符合RESTFull格式的参数
-								singleSelect: false, // 设置为true将禁止多选
+								// singleSelect: false, // 设置为true将禁止多选
+								singleSelect: true, // 设置为true将禁止多选 true, // 单选checkbox
 								// contentType : "application/x-www-form-urlencoded",
 								// //发送到服务器的数据编码类型
 								pageSize: 10, // 如果设置了分页，每页数据条数
@@ -126,7 +279,7 @@
 								},
 								columns: [
 									{
-										checkbox: true
+										checkbox:true
 									},
 									{
 										field : 'saleNumber',
@@ -140,11 +293,11 @@
 										field: 'memberNumber',
 										title: '会员卡号'
 									},
-											{
+									{
 										field: 'phone1',
 										title: '顾客电话'
 									},
-										{
+									{
 										field: 'settleDate',
 										title: '配镜时间'
 									},
@@ -156,78 +309,6 @@
 										field: 'mirorAddress',
 										title: '销售门店'
 									},
-									// {
-									// 	field: 'recipelType',
-									// 	title: '处方'
-									// },
-									// {
-									// 	field: 'recipelType',
-									// 	title: '处方'
-									// },
-									//
-									// 		{
-									// 	field: 'rightsph',
-									// 	title: '球镜OD'
-									// },{
-									// 	field: 'rightcyl',
-									// 	title: '柱镜OD'
-									// },{
-									// 	field: 'rightzx',
-									// 	title: '轴向OD'
-									// },{
-									// 	field: 'rightAdd',
-									// 	title: 'ADDOD'
-									// },{
-									// 	field: 'rightSlja',
-									// 	title: '三棱镜OD'
-									// },{
-									// 	field: 'rightJd',
-									// 	title: '基底OD'
-									// },{
-									// 	field: 'rightFartj',
-									// 	title: '瞳距（远）OD'
-									// },{
-									// 	field: 'rightNeartj',
-									// 	title: '瞳距（近）OD'
-									// },{
-									// 	field: 'leftsph',
-									// 	title: '球镜OS'
-									// },{
-									// 	field: 'leftcyl',
-									// 	title: '柱镜OS'
-									// },{
-									// 	field: 'leftzx',
-									// 	title: '轴向OS'
-									// },{
-									// 	field: 'leftAdd',
-									// 	title: 'ADDOS'
-									// },{
-									// 	field: 'leftSlja',
-									// 	title: '三棱镜OS'
-									// },{
-									// 	field: 'leftJd',
-									// 	title: '基底OS'
-									// },{
-									// 	field: 'leftFartj',
-									// 	title: '瞳距（远）OS'
-									// },{
-									// 	field: 'leftNeartj',
-									// 	title: '瞳距（近）OS'
-									// },
-									// {
-									// 	field: 'goodsNum',
-									// 	title: '商品代码'
-									// },
-									// {
-									// 	field: 'jpGoodsName',
-									// 	title: '商品名称'
-									// },{
-									// 	field: 'jpGoodsNum',
-									// 	title: '商品条码'
-									// },{
-									// 	field: 'leftRight',
-									// 	title: '左右'
-									// },
 								]
 							});
 
@@ -235,7 +316,6 @@
 	});
 
 	function reLoad() {
-		// $(".val").remove();
 		$('#exampleTable').bootstrapTable('refresh');
 	}
 

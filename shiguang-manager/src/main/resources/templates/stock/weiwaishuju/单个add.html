@@ -140,9 +140,9 @@
 <form class="form-horizontal m-t" id="signupForm">
     <div class="main">
         <h3>单据信息</h3>
-        <input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="hidden"/>
-        <input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="hidden"/>
-        <input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="hidden"/>
+        <input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="text"/>
+        <input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="text"/>
+        <input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="text"/>
         <table class="tabA" border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
@@ -397,9 +397,11 @@
             area: ['800px', '520px'],
             content: "/stock/weiwai/PeiJing/" + eyeStyle+ "/" +  mfrsid + "/" +  mfrsname,// iframe的url
             cancel: function (index, layero) {
+
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 for (var i = 0; i < rows.length; i++) {
-                    // alert(rows[i].rightSlja)
+
+
                     $("#departname").val(rows[i].mirorAddress);
                     $("#saleNumber").val(rows[i].saleNumber);
 

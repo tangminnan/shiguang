@@ -510,7 +510,6 @@ public class WeiwaiController {
         Long uuid = GuuidUtil.getUUID();
         String danjunum = "W" + uuid.toString();
         model.addAttribute("danjunum", danjunum);
-
         //———获取当前系统时间—————
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
         Date date = new Date();
@@ -518,22 +517,23 @@ public class WeiwaiController {
         model.addAttribute("danjuDay", newDate);
         //部门
         Map<String, Object> map = new HashMap<>();
-        //———获取当前登录用户的公司id————
-        //String departNumber=ShiroUtils.getUser().getStoreNum();
+        //———获取当前登录用户————
         if (null != ShiroUtils.getUser().getStoreNum()) {
             map.put("departNumber", ShiroUtils.getUser().getStoreNum());
         } else {
             map.put("departNumber", "");
         }
         model.addAttribute("departmentName", ShiroUtils.getUser().getStore());
-//	return "/stock/weiwai/getGoods";
         return "/stock/weiwaishuju/add";
     }
 
 
-    @GetMapping("/PeiJing/{eyeStyle}")
-    String PeiJing(@PathVariable("eyeStyle") Integer eyeStyle, Model model) {
+    @GetMapping("/PeiJing/{eyeStyle}/{mfrsid}/{mfrsname}")
+    String PeiJing(@PathVariable("eyeStyle") Integer eyeStyle,@PathVariable("mfrsid") String mfrsid,
+                   @PathVariable("mfrsname") String mfrsname, Model model) {
         model.addAttribute("eyeStyle", eyeStyle);
+        model.addAttribute("mfrsid", mfrsid);
+        model.addAttribute("mfrsname", mfrsname);
         return "/stock/weiwai/yuanPeiJing";
     }
 

@@ -25,7 +25,7 @@
                 <td>订单类型：</td>
                 <td>
                     <select id="eyeStyle" name="eyeStyle" style="width:48%" onchange="show()">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="3">框镜订做</option>
                         <option value="4">隐形订做</option>
                     </select>
@@ -340,7 +340,6 @@
     // <!--选择制造商-->
     function choiceMfrs() {
         var goodsid = document.getElementById('eyeStyle').value;
-        // layer.alert(goodsid);
         if (goodsid == "") {
             layer.alert("请选择订单类型！");
         } else {
@@ -367,8 +366,6 @@
 
 
     //点击外部配镜
-    var htmlheji = ""
-
     function waibu() {
         var eyeStyle = $('#eyeStyle').val();
         var mfrsid = $('#mfrsid').val();

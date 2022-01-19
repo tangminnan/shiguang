@@ -140,9 +140,9 @@
 <form class="form-horizontal m-t" id="signupForm">
     <div class="main">
         <h3>单据信息</h3>
-        <input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="hidden"/>
-        <input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="hidden"/>
-        <input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="hidden"/>
+        <input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="text"/>
+        <input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="text"/>
+        <input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="text"/>
         <table class="tabA" border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
@@ -351,29 +351,30 @@
                 b = b + 1;
             }
             $(".jingkuangs").before(html);
-        } else if (eyeStyle == 4) {
-            tab1.style = "display: none";
-            tab3.style = "display: none";
-            tab2.style = "display: block";
-            tab4.style = "display: block";
-            for (var a = 0; a < 2; a++) {
-                html += "<tr>";
-                html += "<td><input id='numyx" + b + "' name='numyx'   type='text' /></td>";
-                html += "<td><input id='nameyx" + b + "' name='nameyx' type='text' /></td>";
-                html += "<td><input id='leftRightYx" + b + "' name='leftRightYx'     type='text' /></td>";
-                html += "<td><input id='sphyx" + b + "'  type='text' /></td>";
-                html += "<td><input id='cylyx" + b + "'  type='text' /></td>";
-                html += "<td><input id='zxyx" + b + "'  type='text' /></td>";
-                html += "<td><input id='qulvyx" + b + "'type='text' /></td>";
-                html += "<td><input id='zjyx" + b + "'   type='text' /></td>";
-                html += "<td><input id='countyx" + b + "' name='countyx' type='text' /></td>";
-                html += "<td><input id='yaoqiuyx" + b + "' name='yaoqiuyx' type='text' /></td>";
-                html += "<td><input id='code" + b + "' name='code'  type='hidden' /></td>";
-                html += "</tr>";
-                b = b + 1;
-            }
-            $(".yinxings").before(html);
         }
+        // else if (eyeStyle == 4) {
+        //     tab1.style = "display: none";
+        //     tab3.style = "display: none";
+        //     tab2.style = "display: block";
+        //     tab4.style = "display: block";
+        //     for (var a = 0; a < 2; a++) {
+        //         html += "<tr>";
+        //         html += "<td><input id='numyx" + b + "' name='numyx'   type='text' /></td>";
+        //         html += "<td><input id='nameyx" + b + "' name='nameyx' type='text' /></td>";
+        //         html += "<td><input id='leftRightYx" + b + "' name='leftRightYx'     type='text' /></td>";
+        //         html += "<td><input id='sphyx" + b + "'  type='text' /></td>";
+        //         html += "<td><input id='cylyx" + b + "'  type='text' /></td>";
+        //         html += "<td><input id='zxyx" + b + "'  type='text' /></td>";
+        //         html += "<td><input id='qulvyx" + b + "'type='text' /></td>";
+        //         html += "<td><input id='zjyx" + b + "'   type='text' /></td>";
+        //         html += "<td><input id='countyx" + b + "' name='countyx' type='text' /></td>";
+        //         html += "<td><input id='yaoqiuyx" + b + "' name='yaoqiuyx' type='text' /></td>";
+        //         html += "<td><input id='code" + b + "' name='code'  type='hidden' /></td>";
+        //         html += "</tr>";
+        //         b = b + 1;
+        //     }
+        //     $(".yinxings").before(html);
+        // }
     });
 
     //日期
@@ -397,9 +398,11 @@
             area: ['800px', '520px'],
             content: "/stock/weiwai/PeiJing/" + eyeStyle+ "/" +  mfrsid + "/" +  mfrsname,// iframe的url
             cancel: function (index, layero) {
+
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 for (var i = 0; i < rows.length; i++) {
-                    // alert(rows[i].rightSlja)
+
+
                     $("#departname").val(rows[i].mirorAddress);
                     $("#saleNumber").val(rows[i].saleNumber);
 
@@ -502,67 +505,69 @@
                         }
                         $("#jp").append(html);
 
-                    } else if (eyeStyle == 4) {//隐形
-                        html += "<tr>";
-                        html += "<td width='250'>商品代码</td>";
-                        html += "<td width='250'>商品名称</td>";
-                        html += "<td>镜片型</td>";
-                        html += "<td>球镜</td>";
-                        html += "<td>柱镜</td>";
-                        html += "<td>轴向</td>";
-                        html += "<td>曲率</td>";
-                        html += "<td>直径</td>";
-                        html += "<td>数量</td>";
-                        html += "<td width='300'>加工要求</td>";
-                        html += "</tr>";
-                        var array = rows[i].goodsNum.split(",");//代码
-                        var goodsCode = rows[i].goodsCode.split(",");//条码
-                        var leftRight = rows[i].leftRight.split(",");//左右
-                        var storeName = rows[i].storeName.split(",");//名称
-                        var storeDescribe = rows[i].storeDescribe.split(",");//描述
-                        var storeCount = rows[i].storeCount.split(",");//数量
-                        var classtype = rows[i].classtype.split(",");//定做还是成品
-                        for (var a = 0; a < array.length; a++) {
-                            if (storeDescribe[a] == "隐形") {
-                                if (leftRight[a] == "右") {
-                                    var sphyx = rows[i].rightsph;
-                                    var cylyx = rows[i].rightcyl;
-                                    var zxyx = rows[i].rightzx;
-                                    // var qulvyx = rows[i].rightqulv;
-                                    // var zjyx = rows[i].rightzj;
-                                    var qulvyx = "";
-                                    var zjyx = "";
-                                } else if (leftRight[a] == "左") {
-                                    var sphyx = rows[i].leftsph;
-                                    var cylyx = rows[i].leftcyl;
-                                    var zxyx = rows[i].leftzx;
-                                    // var qulvyx = rows[i].leftqulv;
-                                    // var zjyx = rows[i].leftzj;
-                                    var qulvyx = "";
-                                    var zjyx = "";
-                                }
-                                if (classtype[a] == "2") {
-                                    html += "<tr>";
-                                    html += "<td><input id='numyx" + b + "' name='numyx'  value='" + array[a] + "'  type='text' /></td>";
-                                    html += "<td><input id='nameyx" + b + "' name='nameyx'  value='" + storeName[a] + "' type='text' /></td>";
-                                    html += "<td><input id='leftRightYx" + b + "' name='leftRightYx'   value='" + leftRight[a] + "'   type='text' /></td>";
-                                    html += "<td><input id='sphyx" + b + "' value='" + sphyx + "' type='text' /></td>";
-                                    html += "<td><input id='cylyx" + b + "' value='" + cylyx + "' type='text' /></td>";
-                                    html += "<td><input id='zxyx" + b + "'  value='" + zxyx + "' type='text' /></td>";
-                                    html += "<td><input id='qulvyx" + b + "' value='" + qulvyx + "' type='text' /></td>";
-                                    html += "<td><input id='zjyx" + b + "'   value='" + zjyx + "' type='text' /></td>";
-                                    html += "<td><input id='countyx" + b + "'  name='countyx' value='" + storeCount[a] + "'  type='text' /></td>";
-                                    html += "<td><input id='yaoqiuyx" + b + "' name='yaoqiuyx' value='" + rows[i].processAsk + "'  type='text' /></td>";
-                                    html += "<td><input id=' codeyx" + b + "' name='codeyx' value='" + goodsCode[a] + "' type='hidden' /></td>";
-                                    html += "</tr>";
-                                    b = b + 1;
-                                }
-
-                            }
-                        }
-                        $("#yx").append(html);
-
                     }
+
+                    // else if (eyeStyle == 4) {//隐形
+                    //     html += "<tr>";
+                    //     html += "<td width='250'>商品代码</td>";
+                    //     html += "<td width='250'>商品名称</td>";
+                    //     html += "<td>镜片型</td>";
+                    //     html += "<td>球镜</td>";
+                    //     html += "<td>柱镜</td>";
+                    //     html += "<td>轴向</td>";
+                    //     html += "<td>曲率</td>";
+                    //     html += "<td>直径</td>";
+                    //     html += "<td>数量</td>";
+                    //     html += "<td width='300'>加工要求</td>";
+                    //     html += "</tr>";
+                    //     var array = rows[i].goodsNum.split(",");//代码
+                    //     var goodsCode = rows[i].goodsCode.split(",");//条码
+                    //     var leftRight = rows[i].leftRight.split(",");//左右
+                    //     var storeName = rows[i].storeName.split(",");//名称
+                    //     var storeDescribe = rows[i].storeDescribe.split(",");//描述
+                    //     var storeCount = rows[i].storeCount.split(",");//数量
+                    //     var classtype = rows[i].classtype.split(",");//定做还是成品
+                    //     for (var a = 0; a < array.length; a++) {
+                    //         if (storeDescribe[a] == "隐形") {
+                    //             if (leftRight[a] == "右") {
+                    //                 var sphyx = rows[i].rightsph;
+                    //                 var cylyx = rows[i].rightcyl;
+                    //                 var zxyx = rows[i].rightzx;
+                    //                 // var qulvyx = rows[i].rightqulv;
+                    //                 // var zjyx = rows[i].rightzj;
+                    //                 var qulvyx = "";
+                    //                 var zjyx = "";
+                    //             } else if (leftRight[a] == "左") {
+                    //                 var sphyx = rows[i].leftsph;
+                    //                 var cylyx = rows[i].leftcyl;
+                    //                 var zxyx = rows[i].leftzx;
+                    //                 // var qulvyx = rows[i].leftqulv;
+                    //                 // var zjyx = rows[i].leftzj;
+                    //                 var qulvyx = "";
+                    //                 var zjyx = "";
+                    //             }
+                    //             if (classtype[a] == "2") {
+                    //                 html += "<tr>";
+                    //                 html += "<td><input id='numyx" + b + "' name='numyx'  value='" + array[a] + "'  type='text' /></td>";
+                    //                 html += "<td><input id='nameyx" + b + "' name='nameyx'  value='" + storeName[a] + "' type='text' /></td>";
+                    //                 html += "<td><input id='leftRightYx" + b + "' name='leftRightYx'   value='" + leftRight[a] + "'   type='text' /></td>";
+                    //                 html += "<td><input id='sphyx" + b + "' value='" + sphyx + "' type='text' /></td>";
+                    //                 html += "<td><input id='cylyx" + b + "' value='" + cylyx + "' type='text' /></td>";
+                    //                 html += "<td><input id='zxyx" + b + "'  value='" + zxyx + "' type='text' /></td>";
+                    //                 html += "<td><input id='qulvyx" + b + "' value='" + qulvyx + "' type='text' /></td>";
+                    //                 html += "<td><input id='zjyx" + b + "'   value='" + zjyx + "' type='text' /></td>";
+                    //                 html += "<td><input id='countyx" + b + "'  name='countyx' value='" + storeCount[a] + "'  type='text' /></td>";
+                    //                 html += "<td><input id='yaoqiuyx" + b + "' name='yaoqiuyx' value='" + rows[i].processAsk + "'  type='text' /></td>";
+                    //                 html += "<td><input id=' codeyx" + b + "' name='codeyx' value='" + goodsCode[a] + "' type='hidden' /></td>";
+                    //                 html += "</tr>";
+                    //                 b = b + 1;
+                    //             }
+                    //
+                    //         }
+                    //     }
+                    //     $("#yx").append(html);
+                    //
+                    // }
 
                 }
             }
