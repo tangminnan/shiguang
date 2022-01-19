@@ -334,6 +334,16 @@ public class SalesDO implements Serializable {
 	public void setModelMoney(String modelMoney){this.modelMoney = modelMoney;}
 	public String getModelMoney(){return modelMoney;}
 
+	private String mfrsid;
+
+	public String getMfrsid() {
+		return mfrsid;
+	}
+
+	public void setMfrsid(String mfrsid) {
+		this.mfrsid = mfrsid;
+	}
+
 	//近用球镜OD
 	private String rightQJjy;
 	//近用柱镜OD

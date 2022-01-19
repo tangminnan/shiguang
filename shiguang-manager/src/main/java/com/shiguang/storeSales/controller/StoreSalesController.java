@@ -1202,6 +1202,9 @@ public class StoreSalesController {
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
         Long positionId = null;
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         if (null != departNumber){
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findPosition(map);
@@ -1266,6 +1269,9 @@ public class StoreSalesController {
         PageUtils pageUtils = null;
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         if (null != departNumber) {
             map.put("departNumber", departNumber);
             PositionDO positionDO = stockService.findHegePosition(map);
@@ -1525,6 +1531,9 @@ public class StoreSalesController {
         query.put("partsStyle", "框镜");
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         Long positionId = null;
         if(null != departNumber){
             map.put("departNumber", departNumber);
@@ -1571,6 +1580,9 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
@@ -1617,6 +1629,9 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
@@ -1663,6 +1678,9 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
@@ -1710,6 +1728,9 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
@@ -1756,6 +1777,9 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
@@ -1802,6 +1826,9 @@ public class StoreSalesController {
         Query query = new Query(params);
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         Long positionId = null;
         if (null != departNumber) {
             map.put("departNumber", departNumber);
@@ -2167,6 +2194,9 @@ public class StoreSalesController {
         query.put("partsStyle", "隐形");
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         Long positionId = null;
         if (null != departNumber){
             map.put("departNumber", departNumber);
@@ -2216,6 +2246,9 @@ public class StoreSalesController {
         String departNumber = ShiroUtils.getUser().getStoreNum();
         Map<String, Object> map = new HashMap<>();
         map.put("departNumber", departNumber);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         PositionDO positionDO = stockService.findPosition(map);
         Long positionId = null;
         if (null != positionDO) {

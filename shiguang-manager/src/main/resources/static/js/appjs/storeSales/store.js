@@ -743,6 +743,7 @@ function getYinxing(){
                 html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i][0].goodsCode+"'/>"
                 html += "<input id='batch' name='batch' value='"+rows[i][0].batch+"' type='hidden' />"
                 html += "<input id='brandName' name='brandName' type='hidden' value='"+rows[i][0].brandname+"'/>"
+                html += "<input id='mfrsid' name='mfrsid' type='hidden' value='"+rows[i][0].mfrsid+"'/>"
                 html += "<input id='yingshouyx"+a+"' value='"+rows[i][0].retailPrice+"' type='hidden' />"
                 html += "<input id='storeDescribe'name='storeDescribe' value='隐形' type='hidden' />"
                 html += "</tr>";
