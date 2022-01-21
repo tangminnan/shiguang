@@ -524,7 +524,7 @@ public class WeiwaiController {
             map.put("departNumber", "");
         }
         model.addAttribute("departmentName", ShiroUtils.getUser().getStore());
-        return "/stock/weiwaishuju/jpadd";
+        return "/stock/weiwaishuju/add";
     }
 
 

@@ -128,31 +128,32 @@
                             $(".heji").before(barHtml);
                             barHtml = "";
                         } else if ($("input[name=num]").length != 0) {
-                            // alert($("input[name=danjuNumber]").html())
                             for (var as = 0; as < $("input[name=num]").length; as++) {
                                 var num = $("input[name=num]").eq(as).val();
                                 var oldPrice = $("input[name=oldPrice]").eq(as).val();
                                 arr[as] = num;
                                 moneyarr[as] = oldPrice;
                             }
+
                             for (var index = 0; index < arr.length; index++) {
                                 // alert(arr[index]+"循环的条码");
                                 // alert(rows[i].producCode+"选中的条码");
                                 // alert(rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum);
-                                if (arr[index] ==  rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum && moneyarr[index]==rows[i].retailPrice) {
+                                var numCodeName =rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum;
+                                if (arr[index] == numCodeName && moneyarr[index]==rows[i].retailPrice) {
                                     flag = "1";
                                     flags = "修改";
                                     // alert("扫码和原来的一样数量加1");
-                                    // var count = moneyarr[index];
+                                    // var count = countarr[index];
                                     // $("input[name=goodsCount]").eq(index).val(parseInt(count) + parseInt(1));
                                     barHtml = "";
-                                    // break lable;
-                                } else if (arr[index] != rows[i].goodsid + "." + rows[i].mfrsid + "." + rows[i].brandnum && moneyarr[index]!=rows[i].retailPrice) {
+                                } else  { //if (arr[index] != numCodeName && moneyarr[index]!=rows[i].retailPrice)
                                     // alert("新增111");
                                     flag = "0";
                                     flags = "新增";
                                 }
                             }
+
                         }
                         if (flags == "新增" && flag == "0") {
                             // alert("条码没有过新增");
