@@ -196,9 +196,9 @@
 <!--查询条件-->
 <div class="m40 tabS msgBox">
 	<h3>查询条件</h3>
-	<input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="text"/>
-	<input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="text"/>
-	<input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="text"/>
+	<input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="hidden"/>
+	<input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="hidden"/>
+	<input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="hidden"/>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td>配镜单号：</td>
@@ -256,7 +256,7 @@
 								// queryParamsType : "limit",
 								// //设置为limit则会发送符合RESTFull格式的参数
 								// singleSelect: false, // 设置为true将禁止多选
-								singleSelect: true, // 设置为true将禁止多选 true, // 单选checkbox
+								singleSelect: false, // 设置为true将禁止多选 true, // 单选checkbox
 								// contentType : "application/x-www-form-urlencoded",
 								// //发送到服务器的数据编码类型
 								pageSize: 10, // 如果设置了分页，每页数据条数
@@ -273,8 +273,8 @@
 										saleNumber  : $("#saleNumber").val(),
 										name  : $("#name").val(),
 										memberNumber  : $("#memberNumber").val(),
-										phone1  : $("#phone1").val()
-
+										phone1  : $("#phone1").val(),
+                                        mfrsid  : $("#mfrsid").val()
 									};
 								},
 								columns: [

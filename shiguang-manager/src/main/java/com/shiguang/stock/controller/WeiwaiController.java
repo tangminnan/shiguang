@@ -515,7 +515,7 @@ public class WeiwaiController {
         Date date = new Date();
         String newDate = sdf.format(date);
         model.addAttribute("danjuDay", newDate);
-        //部门
+        //部门selectOrder
         Map<String, Object> map = new HashMap<>();
         //———获取当前登录用户————
         if (null != ShiroUtils.getUser().getStoreNum()) {
@@ -524,7 +524,7 @@ public class WeiwaiController {
             map.put("departNumber", "");
         }
         model.addAttribute("departmentName", ShiroUtils.getUser().getStore());
-        return "/stock/weiwaishuju/add";
+        return "/stock/weiwaishuju/jpadd";
     }
 
 
@@ -562,7 +562,6 @@ public class WeiwaiController {
         query.put("saleType", 1);
         List<SalesDO> selectOrder = weiwaiService.selectOrder(query);
 		int total = weiwaiService.selectOrderCount(query);
-//        int total = 1000000;
         PageUtils pageUtils = new PageUtils(selectOrder, total);
         return pageUtils;
     }

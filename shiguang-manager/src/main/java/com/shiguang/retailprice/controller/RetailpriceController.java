@@ -199,7 +199,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(jj.getViewGoodName() + "-型号:" + jj.getFactory() + "-色号:" + jj.getProducColor() + "-标价:" +oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -244,7 +244,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(pj.getViewGoodName() + "-型号:" + pj.getFactory() + "-标价:" +oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -270,11 +270,11 @@ public class RetailpriceController {
 				for (JpcpDO jpcp : jpcps) {
 					String producNum = jpcp.getProducNum();
 					producName = jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					JpcpDO jpcpDO = new JpcpDO();
+					jpcpDO.setProducNum(producNum);
+					jpcpDO.setProducName(producName);
+					jpcpDO.setRetailPrice(newMoney);
+					jpcpService.update(jpcpDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -288,7 +288,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName( jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -314,11 +314,11 @@ public class RetailpriceController {
 				for (JpdzDO jpdz : jpdzs) {
 					String producNum = jpdz.getProducNum();
 					producName = jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					JpdzDO jpdzDO = new JpdzDO();
+					jpdzDO.setProducNum(producNum);
+					jpdzDO.setProducName(producName);
+					jpdzDO.setRetailPrice(newMoney);
+					jpdzService.update(jpdzDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -332,7 +332,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -358,11 +358,11 @@ public class RetailpriceController {
 				for (YxcpDO yxcp : yxcps) {
 					String producNum = yxcp.getProducNum();
 					producName = yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					YxcpDO yxcpDO = new YxcpDO();
+					yxcpDO.setProducNum(producNum);
+					yxcpDO.setProducName(producName);
+					yxcpDO.setRetailPrice(newMoney);
+					yxcpService.update(yxcpDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -376,7 +376,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName( yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -402,11 +402,11 @@ public class RetailpriceController {
 				for (YxdzDO yxdz : yxdzs) {
 					String producNum = yxdz.getProducNum();
 					producName = yxdz.getViewGoodName()+"-球镜:"+yxdz.getSphUp()+"/"+yxdz.getSphDown()+"-柱镜:"+yxdz.getCylUp()+"/"+yxdz.getCylDown()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					YxdzDO yxdzDO = new YxdzDO();
+					yxdzDO.setProducNum(producNum);
+					yxdzDO.setProducName(producName);
+					yxdzDO.setRetailPrice(newMoney);
+					yxdzService.update(yxdzDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -420,7 +420,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(yxdz.getViewGoodName()+"-球镜:"+yxdz.getSphUp()+"/"+yxdz.getSphDown()+"-柱镜:"+yxdz.getCylUp()+"/"+yxdz.getCylDown()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -446,11 +446,11 @@ public class RetailpriceController {
 				for (HlyDO hly : hlys) {
 					String producNum = hly.getProducNum();
 					producName = hly.getViewGoodName()+"-型号:"+hly.getProducFactory()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					HlyDO hlyDO = new HlyDO();
+					hlyDO.setProducNum(producNum);
+					hlyDO.setProducName(producName);
+					hlyDO.setRetailPrice(newMoney);
+					hlyService.update(hlyDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -464,7 +464,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName( hly.getViewGoodName()+"-型号:"+hly.getProducFactory()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -490,11 +490,11 @@ public class RetailpriceController {
 				for (TyjDO tyj : tyjs) {
 					String producNum = tyj.getProducNum();
 					producName = tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					TyjDO tyjDO = new TyjDO();
+					tyjDO.setProducNum(producNum);
+					tyjDO.setProducName(producName);
+					tyjDO.setRetailPrice(newMoney);
+					tyjService.update(tyjDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -508,7 +508,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -534,11 +534,11 @@ public class RetailpriceController {
 				for (OldlensDO lhj : lhjs) {
 					String producNum = lhj.getProducNum();
 					producName = lhj.getViewGoodName()+"-球镜:"+lhj.getOldId()+"-型号:"+lhj.getProducFactory()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					OldlensDO oldlensDO = new OldlensDO();
+					oldlensDO.setProducNum(producNum);
+					oldlensDO.setProducName(producName);
+					oldlensDO.setRetailPrice(newMoney);
+					oldlensService.update(oldlensDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -552,7 +552,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(lhj.getViewGoodName()+"-球镜:"+lhj.getOldId()+"-型号:"+lhj.getProducFactory()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -578,11 +578,11 @@ public class RetailpriceController {
 				for (HcDO hc : hcs) {
 					String producNum = hc.getProducNum();
 					producName = hc.getBrandname()+"-型号:"+hc.getFactory()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					HcDO hcDO = new HcDO();
+					hcDO.setProducNum(producNum);
+					hcDO.setProducName(producName);
+					hcDO.setRetailPrice(newMoney);
+					hcService.update(hcDO);
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -595,7 +595,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName( hc.getBrandname()+"-型号:"+hc.getFactory()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -621,11 +621,11 @@ public class RetailpriceController {
 				for (ShiguangDO sg : sgs) {
 					String producNum = sg.getProducNum();
 					producName = sg.getViewGoodName()+"-型号:"+sg.getProducFactory()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					ShiguangDO shiguangDO = new ShiguangDO();
+					shiguangDO.setProducNum(producNum);
+					shiguangDO.setProducName(producName);
+					shiguangDO.setRetailPrice(newMoney);
+					shiguangService.update(shiguangDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -639,7 +639,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(sg.getViewGoodName()+"-型号:"+sg.getProducFactory()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -864,7 +864,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(jj.getViewGoodName() + "-型号:" + jj.getFactory() + "-色号:" + jj.getProducColor() + "-标价:" + oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -909,7 +909,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(pj.getViewGoodName() + "-型号:" + pj.getFactory() + "-标价:" + oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -935,11 +935,11 @@ public class RetailpriceController {
 				for (JpcpDO jpcp : jpcps) {
 					String producNum = jpcp.getProducNum();
 					producName = jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					JpcpDO jpcpDO = new JpcpDO();
+					jpcpDO.setProducNum(producNum);
+					jpcpDO.setProducName(producName);
+					jpcpDO.setRetailPrice(newMoney);
+					jpcpService.update(jpcpDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -953,7 +953,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -979,11 +979,11 @@ public class RetailpriceController {
 				for (JpdzDO jpdz : jpdzs) {
 					String producNum = jpdz.getProducNum();
 					producName = jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					JpdzDO jpdzDO = new JpdzDO();
+					jpdzDO.setProducNum(producNum);
+					jpdzDO.setProducName(producName);
+					jpdzDO.setRetailPrice(newMoney);
+					jpdzService.update(jpdzDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -997,7 +997,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -1023,11 +1023,11 @@ public class RetailpriceController {
 				for (YxcpDO yxcp : yxcps) {
 					String producNum = yxcp.getProducNum();
 					producName = yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					YxcpDO yxcpDO = new YxcpDO();
+					yxcpDO.setProducNum(producNum);
+					yxcpDO.setProducName(producName);
+					yxcpDO.setRetailPrice(newMoney);
+					yxcpService.update(yxcpDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -1041,7 +1041,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -1067,11 +1067,11 @@ public class RetailpriceController {
 				for (YxdzDO yxdz : yxdzs) {
 					String producNum = yxdz.getProducNum();
 					producName = yxdz.getViewGoodName()+"-球镜:"+yxdz.getSphUp()+"/"+yxdz.getSphDown()+"-柱镜:"+yxdz.getCylUp()+"/"+yxdz.getCylDown()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					YxdzDO yxdzDO = new YxdzDO();
+					yxdzDO.setProducNum(producNum);
+					yxdzDO.setProducName(producName);
+					yxdzDO.setRetailPrice(newMoney);
+					yxdzService.update(yxdzDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -1085,7 +1085,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(yxdz.getViewGoodName()+"-球镜:"+yxdz.getSphUp()+"/"+yxdz.getSphDown()+"-柱镜:"+yxdz.getCylUp()+"/"+yxdz.getCylDown()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -1111,11 +1111,11 @@ public class RetailpriceController {
 				for (HlyDO hly : hlys) {
 					String producNum = hly.getProducNum();
 					producName = hly.getViewGoodName()+"-型号:"+hly.getProducFactory()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					HlyDO hlyDO = new HlyDO();
+					hlyDO.setProducNum(producNum);
+					hlyDO.setProducName(producName);
+					hlyDO.setRetailPrice(newMoney);
+					hlyService.update(hlyDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -1129,7 +1129,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(hly.getViewGoodName()+"-型号:"+hly.getProducFactory()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -1155,11 +1155,11 @@ public class RetailpriceController {
 				for (TyjDO tyj : tyjs) {
 					String producNum = tyj.getProducNum();
 					producName = tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					TyjDO tyjDO = new TyjDO();
+					tyjDO.setProducNum(producNum);
+					tyjDO.setProducName(producName);
+					tyjDO.setRetailPrice(newMoney);
+					tyjService.update(tyjDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -1173,7 +1173,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -1199,11 +1199,11 @@ public class RetailpriceController {
 				for (OldlensDO lhj : lhjs) {
 					String producNum = lhj.getProducNum();
 					producName = lhj.getViewGoodName()+"-球镜:"+lhj.getOldId()+"-型号:"+lhj.getProducFactory()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					OldlensDO oldlensDO = new OldlensDO();
+					oldlensDO.setProducNum(producNum);
+					oldlensDO.setProducName(producName);
+					oldlensDO.setRetailPrice(newMoney);
+					oldlensService.update(oldlensDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -1217,7 +1217,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(lhj.getViewGoodName()+"-球镜:"+lhj.getOldId()+"-型号:"+lhj.getProducFactory()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -1243,11 +1243,11 @@ public class RetailpriceController {
 				for (HcDO hc : hcs) {
 					String producNum = hc.getProducNum();
 					producName = hc.getBrandname()+"-型号:"+hc.getFactory()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					HcDO hcDO = new HcDO();
+					hcDO.setProducNum(producNum);
+					hcDO.setProducName(producName);
+					hcDO.setRetailPrice(newMoney);
+					hcService.update(hcDO);
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -1260,7 +1260,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(hc.getBrandname()+"-型号:"+hc.getFactory()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
@@ -1286,11 +1286,11 @@ public class RetailpriceController {
 				for (ShiguangDO sg : sgs) {
 					String producNum = sg.getProducNum();
 					producName = sg.getViewGoodName()+"-型号:"+sg.getProducFactory()+"-标价:"+newMoney;
-					PartsDO partsDO = new PartsDO();
-					partsDO.setProducNum(producNum);
-					partsDO.setProducName(producName);
-					partsDO.setRetailPrice(newMoney);
-					partsService.update(partsDO);
+					ShiguangDO shiguangDO = new ShiguangDO();
+					shiguangDO.setProducNum(producNum);
+					shiguangDO.setProducName(producName);
+					shiguangDO.setRetailPrice(newMoney);
+					shiguangService.update(shiguangDO);
 
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
@@ -1304,7 +1304,7 @@ public class RetailpriceController {
 					retailpriceDO.setName(name);
 
 					retailpriceDO.setGoodsNum(producNum);
-					retailpriceDO.setGoodsName(producName);
+					retailpriceDO.setGoodsName(sg.getViewGoodName()+"-型号:"+sg.getProducFactory()+"-标价:"+oldMoney);
 
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);

@@ -372,6 +372,7 @@
         id,
         righttg,
         lefttg,
+        mfrsid,
         depart_name AS mirorAddress,
         company_id,
         store_num,
@@ -416,6 +417,7 @@
         sa.lefttg,
         de.depart_name,
         m.company_id,
+        sa.mfrsid,
         sa.sale_type,
         sa.store_num,
         sa.left_right,
@@ -428,7 +430,7 @@
         sa.store_describe,
         sa.sale_number,
         sa.member_number,
-        m. NAME,
+        m.NAME,
         m.phone_1,
         sa.eye_type,
         sa.peijing_time AS settle_date,
@@ -457,14 +459,14 @@
         jc_kjjy k
         JOIN store_sales sa ON sa.ptometry_number = k.ptometry_number
         JOIN member m ON sa.member_number = m.card_number
-        JOIN department de ON sa.store_num = de.id
-        UNION
+        JOIN department de ON sa.store_num = de.id UNION
         SELECT
         sa.id,
         sa.righttg,
         sa.lefttg,
         de.depart_name,
         m.company_id,
+        sa.mfrsid,
         sa.sale_type,
         sa.store_num,
         sa.left_right,
@@ -477,7 +479,7 @@
         sa.store_describe,
         sa.sale_number,
         sa.member_number,
-        m. NAME,
+        m.NAME,
         m.phone_1,
         sa.eye_type,
         sa.peijing_time AS settle_date,
@@ -506,14 +508,14 @@
         jc_kjyy ky
         JOIN store_sales sa ON sa.ptometry_number = ky.ptometry_number
         JOIN member m ON sa.member_number = m.card_number
-        JOIN department de ON sa.store_num = de.id
-        UNION
+        JOIN department de ON sa.store_num = de.id UNION
         SELECT
         sa.id,
         sa.righttg,
         sa.lefttg,
         de.depart_name,
         m.company_id,
+        sa.mfrsid,
         sa.sale_type,
         sa.store_num,
         sa.left_right,
@@ -526,7 +528,7 @@
         sa.store_describe,
         sa.sale_number,
         sa.member_number,
-        m. NAME,
+        m.NAME,
         m.phone_1,
         sa.eye_type,
         sa.peijing_time AS settle_date,
@@ -555,14 +557,14 @@
         jc_sgjj sg
         JOIN store_sales sa ON sa.ptometry_number = sg.ptometry_number
         JOIN member m ON sa.member_number = m.card_number
-        JOIN department de ON sa.store_num = de.id
-        UNION
+        JOIN department de ON sa.store_num = de.id UNION
         SELECT
         sa.id,
         sa.righttg,
         sa.lefttg,
         de.depart_name,
         m.company_id,
+        sa.mfrsid,
         sa.sale_type,
         sa.store_num,
         sa.left_right,
@@ -575,7 +577,7 @@
         sa.store_describe,
         sa.sale_number,
         sa.member_number,
-        m. NAME,
+        m.NAME,
         m.phone_1,
         sa.eye_type,
         sa.peijing_time AS settle_date,
@@ -604,14 +606,14 @@
         jc_zy z
         JOIN store_sales sa ON sa.ptometry_number = z.ptometry_number
         JOIN member m ON sa.member_number = m.card_number
-        JOIN department de ON sa.store_num = de.id
-        UNION
+        JOIN department de ON sa.store_num = de.id UNION
         SELECT
         sa.id,
         sa.righttg,
         sa.lefttg,
         de.depart_name,
         m.company_id,
+        sa.mfrsid,
         sa.sale_type,
         sa.store_num,
         sa.left_right,
@@ -624,7 +626,7 @@
         sa.store_describe,
         sa.sale_number,
         sa.member_number,
-        m. NAME,
+        m.NAME,
         m.phone_1,
         sa.eye_type,
         sa.peijing_time AS settle_date,
@@ -653,14 +655,14 @@
         jc_rxjmjcj x
         LEFT JOIN store_sales sa ON sa.ptometry_number = x.ptometry_number
         LEFT JOIN member m ON sa.member_number = m.card_number
-        JOIN department de ON sa.store_num = de.id
-        UNION
+        JOIN department de ON sa.store_num = de.id UNION
         SELECT
         sa.id,
         sa.righttg,
         sa.lefttg,
         de.depart_name,
         m.company_id,
+        sa.mfrsid,
         sa.sale_type,
         sa.store_num,
         sa.left_right,
@@ -673,7 +675,7 @@
         sa.store_describe,
         sa.sale_number,
         sa.member_number,
-        m. NAME,
+        m.NAME,
         m.phone_1,
         sa.eye_type,
         sa.peijing_time AS settle_date,
@@ -702,14 +704,14 @@
         jc_sjxl sx
         JOIN store_sales sa ON sa.ptometry_number = sx.ptometry_number
         JOIN member m ON sa.member_number = m.card_number
-        JOIN department de ON sa.store_num = de.id
-        UNION
+        JOIN department de ON sa.store_num = de.id UNION
         SELECT
         sa.id,
         sa.righttg,
         sa.lefttg,
         de.depart_name,
         m.company_id,
+        sa.mfrsid,
         sa.sale_type,
         sa.store_num,
         sa.left_right,
@@ -722,7 +724,7 @@
         sa.store_describe,
         sa.sale_number,
         sa.member_number,
-        m. NAME,
+        m.NAME,
         m.phone_1,
         sa.eye_type,
         sa.peijing_time AS settle_date,
@@ -751,14 +753,14 @@
         jc_rgp rg
         JOIN store_sales sa ON sa.ptometry_number = rg.ptometry_number
         JOIN member m ON sa.member_number = m.card_number
-        JOIN department de ON sa.store_num = de.id
-        UNION
+        JOIN department de ON sa.store_num = de.id UNION
         SELECT
         sa.id,
         sa.righttg,
         sa.lefttg,
         de.depart_name,
         m.company_id,
+        sa.mfrsid,
         sa.sale_type,
         sa.store_num,
         sa.left_right,
@@ -771,7 +773,7 @@
         sa.store_describe,
         sa.sale_number,
         sa.member_number,
-        m. NAME,
+        m.NAME,
         m.phone_1,
         sa.eye_type,
         sa.peijing_time AS settle_date,
@@ -800,14 +802,14 @@
         jc_vst vs
         JOIN store_sales sa ON sa.ptometry_number = vs.ptometry_number
         JOIN member m ON sa.member_number = m.card_number
-        JOIN department de ON sa.store_num = de.id
-        UNION
+        JOIN department de ON sa.store_num = de.id UNION
         SELECT
         sa.id,
         sa.righttg,
         sa.lefttg,
         de.depart_name,
         m.company_id,
+        sa.mfrsid,
         sa.sale_type,
         sa.store_num,
         sa.left_right,
@@ -820,7 +822,7 @@
         sa.store_describe,
         sa.sale_number,
         sa.member_number,
-        m. NAME,
+        m.NAME,
         m.phone_1,
         sa.eye_type,
         sa.peijing_time AS settle_date,
@@ -853,11 +855,11 @@
         ) aia
         <where>
             <if test="classtype != null and classtype != ''">and FIND_IN_SET(#{classtype},classtype)</if>
+            <if test="mfrsid != null and mfrsid != ''">and FIND_IN_SET(#{mfrsid},mfrsid)</if>
             <if test="eyeStyles != null and eyeStyles != ''">and FIND_IN_SET(eye_type,#{eyeStyles})</if>
             <if test="departNumber != null and departNumber != ''">and store_num = #{departNumber}</if>
             <if test="saleType != null and saleType != ''">and sale_type = #{saleType}</if>
             <if test="companyId != null and companyId != ''">and company_id = #{companyId}</if>
-
 
             <if test="saleNumber != null and saleNumber != ''">and sale_number LIKE concat(concat('%', #{saleNumber}),'%')</if>
             <if test="name != null and name != ''">and name LIKE concat(concat('%', #{name}),'%')</if>
@@ -877,7 +879,508 @@
         </if>
     </select>
     <select id="selectOrderCount" resultType="int">
-        select count(*) from store_sales where classtype like '%2%';
+        SELECT count( 0 ) FROM
+        (
+        SELECT
+        id,
+        righttg,
+        lefttg,
+        mfrsid,
+        depart_name AS mirorAddress,
+        company_id,
+        store_num,
+        left_right,
+        process_ask,
+        goods_num,
+        store_name,
+        goods_code,
+        store_count,
+        classtype,
+        store_describe,
+        sale_number,
+        member_number,
+        NAME,
+        phone_1,
+        eye_type,
+        settle_date,
+        sale_name,
+        amount_money,
+        recipel_type,
+        rightsph,
+        leftsph,
+        rightcyl,
+        leftcyl,
+        rightzx,
+        leftzx,
+        rightAdd,
+        leftAdd,
+        rightSlja,
+        leftSlja,
+        rightJd,
+        leftJd,
+        rightFartj,
+        leftFartj,
+        rightNeartj,
+        leftNeartj
+        FROM
+        (
+        SELECT
+        sa.id,
+        sa.righttg,
+        sa.lefttg,
+        de.depart_name,
+        m.company_id,
+        sa.mfrsid,
+        sa.sale_type,
+        sa.store_num,
+        sa.left_right,
+        sa.process_ask,
+        sa.goods_num,
+        sa.store_name,
+        sa.goods_code,
+        sa.store_count,
+        sa.classtype,
+        sa.store_describe,
+        sa.sale_number,
+        sa.member_number,
+        m.NAME,
+        m.phone_1,
+        sa.eye_type,
+        sa.peijing_time AS settle_date,
+        sa.sale_name,
+        sa.amount_money,
+        sa.recipel_type,
+        k.kjjy_prescription_type AS chufangType,
+        k.kjjy_optometry_name AS yangsName,
+        k.kjjy_sphod AS rightsph,
+        k.kjjy_sphos AS leftsph,
+        k.kjjy_cylod AS rightcyl,
+        k.kjjy_cylos AS leftcyl,
+        k.kjjy_axialod AS rightzx,
+        k.kjjy_axialos AS leftzx,
+        '' AS rightAdd,
+        '' AS leftAdd,
+        k.kjjy_prismod AS rightSlja,
+        k.kjjy_prismos AS leftSlja,
+        k.kjjy_jdod AS rightJd,
+        k.kjjy_jdos AS leftJd,
+        k.kjjy_yytjod AS rightFartj,
+        k.kjjy_yytjos AS leftFartj,
+        '' AS rightNeartj,
+        '' AS leftNeartj
+        FROM
+        jc_kjjy k
+        JOIN store_sales sa ON sa.ptometry_number = k.ptometry_number
+        JOIN member m ON sa.member_number = m.card_number
+        JOIN department de ON sa.store_num = de.id UNION
+        SELECT
+        sa.id,
+        sa.righttg,
+        sa.lefttg,
+        de.depart_name,
+        m.company_id,
+        sa.mfrsid,
+        sa.sale_type,
+        sa.store_num,
+        sa.left_right,
+        sa.process_ask,
+        sa.goods_num,
+        sa.store_name,
+        sa.goods_code,
+        sa.store_count,
+        sa.classtype,
+        sa.store_describe,
+        sa.sale_number,
+        sa.member_number,
+        m.NAME,
+        m.phone_1,
+        sa.eye_type,
+        sa.peijing_time AS settle_date,
+        sa.sale_name,
+        sa.amount_money,
+        sa.recipel_type,
+        ky.kjyy_prescription_type AS chufangType,
+        ky.kjyy_optometry_name AS yangsName,
+        ky.kjyy_sphod AS rightsph,
+        ky.kjyy_sphos AS leftsph,
+        ky.kjyy_cylod AS rightcyl,
+        ky.kjyy_cylos AS leftcyl,
+        ky.kjyy_axialod AS rightzx,
+        ky.kjyy_axialos AS leftzx,
+        '' AS rightAdd,
+        '' AS leftAdd,
+        ky.kjyy_prismod AS rightSlja,
+        ky.kjyy_prismos AS leftSlja,
+        ky.kjyy_jdod AS rightJd,
+        ky.kjyy_jdos AS leftJd,
+        ky.kjyy_yytjod AS rightFartj,
+        ky.kjyy_yytjos AS leftFartj,
+        '' AS rightNeartj,
+        '' AS leftNeartj
+        FROM
+        jc_kjyy ky
+        JOIN store_sales sa ON sa.ptometry_number = ky.ptometry_number
+        JOIN member m ON sa.member_number = m.card_number
+        JOIN department de ON sa.store_num = de.id UNION
+        SELECT
+        sa.id,
+        sa.righttg,
+        sa.lefttg,
+        de.depart_name,
+        m.company_id,
+        sa.mfrsid,
+        sa.sale_type,
+        sa.store_num,
+        sa.left_right,
+        sa.process_ask,
+        sa.goods_num,
+        sa.store_name,
+        sa.goods_code,
+        sa.store_count,
+        sa.classtype,
+        sa.store_describe,
+        sa.sale_number,
+        sa.member_number,
+        m.NAME,
+        m.phone_1,
+        sa.eye_type,
+        sa.peijing_time AS settle_date,
+        sa.sale_name,
+        sa.amount_money,
+        sa.recipel_type,
+        sg.sgjj_prescription_type AS chufangType,
+        sg.sgjj_optometry_name AS yangsname,
+        sg.sgjj_sphod AS rightsph,
+        sg.sgjj_sphos AS leftsph,
+        sg.sgjj_cylod AS rightcyl,
+        sg.sgjj_cylos AS leftcyl,
+        sg.sgjj_axialod AS rightzx,
+        sg.sgjj_axialos AS leftzx,
+        sg.sgjj_addod AS rightAdd,
+        sg.sgjj_addos AS leftAdd,
+        '' AS rightSlja,
+        '' AS leftSlja,
+        '' AS rightJd,
+        '' AS leftJd,
+        sg.sgjj_yytjod AS rightFartj,
+        sg.sgjj_yytjos AS leftFartj,
+        sg.sgjj_jytjod AS rightNeartj,
+        sg.sgjj_jytjos AS leftNeartj
+        FROM
+        jc_sgjj sg
+        JOIN store_sales sa ON sa.ptometry_number = sg.ptometry_number
+        JOIN member m ON sa.member_number = m.card_number
+        JOIN department de ON sa.store_num = de.id UNION
+        SELECT
+        sa.id,
+        sa.righttg,
+        sa.lefttg,
+        de.depart_name,
+        m.company_id,
+        sa.mfrsid,
+        sa.sale_type,
+        sa.store_num,
+        sa.left_right,
+        sa.process_ask,
+        sa.goods_num,
+        sa.store_name,
+        sa.goods_code,
+        sa.store_count,
+        sa.classtype,
+        sa.store_describe,
+        sa.sale_number,
+        sa.member_number,
+        m.NAME,
+        m.phone_1,
+        sa.eye_type,
+        sa.peijing_time AS settle_date,
+        sa.sale_name,
+        sa.amount_money,
+        sa.recipel_type,
+        z.zy_prescription_type AS chufangType,
+        z.zy_optometry_name AS yangsname,
+        z.zy_sphod AS rightsph,
+        z.zy_sphos AS leftsph,
+        z.zy_cylod AS rightcyl,
+        z.zy_cylos AS leftcyl,
+        z.zy_axialod AS rightzx,
+        z.zy_axialos AS leftzx,
+        '' AS rightAdd,
+        '' AS leftAdd,
+        z.zy_prismod AS rightSlja,
+        z.zy_prismos AS leftSlja,
+        z.zy_jdod AS rightJd,
+        z.zy_jdos AS leftJd,
+        '' AS rightFartj,
+        '' AS leftFartj,
+        '' AS rightNeartj,
+        '' AS leftNeartj
+        FROM
+        jc_zy z
+        JOIN store_sales sa ON sa.ptometry_number = z.ptometry_number
+        JOIN member m ON sa.member_number = m.card_number
+        JOIN department de ON sa.store_num = de.id UNION
+        SELECT
+        sa.id,
+        sa.righttg,
+        sa.lefttg,
+        de.depart_name,
+        m.company_id,
+        sa.mfrsid,
+        sa.sale_type,
+        sa.store_num,
+        sa.left_right,
+        sa.process_ask,
+        sa.goods_num,
+        sa.store_name,
+        sa.goods_code,
+        sa.store_count,
+        sa.classtype,
+        sa.store_describe,
+        sa.sale_number,
+        sa.member_number,
+        m.NAME,
+        m.phone_1,
+        sa.eye_type,
+        sa.peijing_time AS settle_date,
+        sa.sale_name,
+        sa.amount_money,
+        sa.recipel_type,
+        x.rx_prescription_type AS chufangType,
+        x.rx_optometry_name AS yangsname,
+        x.rx_sphod AS rightsph,
+        x.rx_sphos AS leftsph,
+        x.rx_cylod AS rightcyl,
+        x.rx_cylos AS leftcyl,
+        x.rx_axialod AS rightzx,
+        x.rx_axialos AS leftzx,
+        '' AS rightAdd,
+        '' AS leftAdd,
+        '' AS rightSlja,
+        '' AS leftSlja,
+        '' AS rightJd,
+        '' AS leftJd,
+        '' AS rightFartj,
+        '' AS leftFartj,
+        '' AS rightNeartj,
+        '' AS leftNeartj
+        FROM
+        jc_rxjmjcj x
+        LEFT JOIN store_sales sa ON sa.ptometry_number = x.ptometry_number
+        LEFT JOIN member m ON sa.member_number = m.card_number
+        JOIN department de ON sa.store_num = de.id UNION
+        SELECT
+        sa.id,
+        sa.righttg,
+        sa.lefttg,
+        de.depart_name,
+        m.company_id,
+        sa.mfrsid,
+        sa.sale_type,
+        sa.store_num,
+        sa.left_right,
+        sa.process_ask,
+        sa.goods_num,
+        sa.store_name,
+        sa.goods_code,
+        sa.store_count,
+        sa.classtype,
+        sa.store_describe,
+        sa.sale_number,
+        sa.member_number,
+        m.NAME,
+        m.phone_1,
+        sa.eye_type,
+        sa.peijing_time AS settle_date,
+        sa.sale_name,
+        sa.amount_money,
+        sa.recipel_type,
+        sx.sjxl_prescription_type AS chufangType,
+        sx.sjxl_optometry_name AS yangsname,
+        sx.sjxl_sphod AS rightsph,
+        sx.sjxl_sphos AS leftsph,
+        sx.sjxl_cylod AS rightcyl,
+        sx.sjxl_cylos AS leftcyl,
+        sx.sjxl_axialod AS rightzx,
+        sx.sjxl_axialos AS leftzx,
+        '' AS rightAdd,
+        '' AS leftAdd,
+        sx.sjxl_sljod AS rightSlja,
+        sx.sjxl_sljos AS leftSlja,
+        sx.sjxl_jdod AS rightJd,
+        sx.sjxl_jdos AS leftJd,
+        sx.sjxl_yytjod AS rightFartj,
+        sx.sjxl_yytjos AS leftFartj,
+        sx.sjxl_jytjod AS rightNeartj,
+        sx.sjxl_jytjos AS leftNeartj
+        FROM
+        jc_sjxl sx
+        JOIN store_sales sa ON sa.ptometry_number = sx.ptometry_number
+        JOIN member m ON sa.member_number = m.card_number
+        JOIN department de ON sa.store_num = de.id UNION
+        SELECT
+        sa.id,
+        sa.righttg,
+        sa.lefttg,
+        de.depart_name,
+        m.company_id,
+        sa.mfrsid,
+        sa.sale_type,
+        sa.store_num,
+        sa.left_right,
+        sa.process_ask,
+        sa.goods_num,
+        sa.store_name,
+        sa.goods_code,
+        sa.store_count,
+        sa.classtype,
+        sa.store_describe,
+        sa.sale_number,
+        sa.member_number,
+        m.NAME,
+        m.phone_1,
+        sa.eye_type,
+        sa.peijing_time AS settle_date,
+        sa.sale_name,
+        sa.amount_money,
+        sa.recipel_type,
+        rg.rgp_prescription_type AS chufangType,
+        rg.rgp_optometry_name AS yangsname,
+        rg.rgp_sphod AS rightsph,
+        rg.rgp_sphos AS leftsph,
+        rg.rgp_cylod AS rightcyl,
+        rg.rgp_cylos AS leftcyl,
+        rg.rgp_axialod AS rightzx,
+        rg.rgp_axialos AS leftzx,
+        '' AS rightAdd,
+        '' AS leftAdd,
+        '' AS rightSlja,
+        '' AS leftSlja,
+        '' AS rightJd,
+        '' AS leftJd,
+        '' AS rightFartj,
+        '' AS leftFartj,
+        '' AS rightNeartj,
+        '' AS leftNeartj
+        FROM
+        jc_rgp rg
+        JOIN store_sales sa ON sa.ptometry_number = rg.ptometry_number
+        JOIN member m ON sa.member_number = m.card_number
+        JOIN department de ON sa.store_num = de.id UNION
+        SELECT
+        sa.id,
+        sa.righttg,
+        sa.lefttg,
+        de.depart_name,
+        m.company_id,
+        sa.mfrsid,
+        sa.sale_type,
+        sa.store_num,
+        sa.left_right,
+        sa.process_ask,
+        sa.goods_num,
+        sa.store_name,
+        sa.goods_code,
+        sa.store_count,
+        sa.classtype,
+        sa.store_describe,
+        sa.sale_number,
+        sa.member_number,
+        m.NAME,
+        m.phone_1,
+        sa.eye_type,
+        sa.peijing_time AS settle_date,
+        sa.sale_name,
+        sa.amount_money,
+        sa.recipel_type,
+        vs.vst_prescription_type AS chufangType,
+        vs.vst_optometry_name AS yangsname,
+        vs.vst_sphod AS rightsph,
+        vs.vst_sphos AS leftsph,
+        vs.vst_cylod AS rightcyl,
+        vs.vst_cylos AS leftcyl,
+        vs.vst_axialod AS rightzx,
+        vs.vst_axialos AS leftzx,
+        '' AS rightAdd,
+        '' AS leftAdd,
+        '' AS rightSlja,
+        '' AS leftSlja,
+        '' AS rightJd,
+        '' AS leftJd,
+        vs.vst_vaod AS rightFartj,
+        vs.vst_vaos AS leftFartj,
+        '' AS rightNeartj,
+        '' AS leftNeartj
+        FROM
+        jc_vst vs
+        JOIN store_sales sa ON sa.ptometry_number = vs.ptometry_number
+        JOIN member m ON sa.member_number = m.card_number
+        JOIN department de ON sa.store_num = de.id UNION
+        SELECT
+        sa.id,
+        sa.righttg,
+        sa.lefttg,
+        de.depart_name,
+        m.company_id,
+        sa.mfrsid,
+        sa.sale_type,
+        sa.store_num,
+        sa.left_right,
+        sa.process_ask,
+        sa.goods_num,
+        sa.store_name,
+        sa.goods_code,
+        sa.store_count,
+        sa.classtype,
+        sa.store_describe,
+        sa.sale_number,
+        sa.member_number,
+        m.NAME,
+        m.phone_1,
+        sa.eye_type,
+        sa.peijing_time AS settle_date,
+        sa.sale_name,
+        sa.amount_money,
+        sa.recipel_type,
+        cr.crt_prescription_type AS chufangType,
+        cr.crt_optometry_name AS yangsname,
+        cr.crt_sphod AS rightsph,
+        cr.crt_sphos AS leftsph,
+        cr.crt_cylod AS rightcyl,
+        cr.crt_cylos AS leftcyl,
+        cr.crt_axialod AS rightzx,
+        cr.crt_axialos AS leftzx,
+        '' AS rightAdd,
+        '' AS leftAdd,
+        '' AS rightSlja,
+        '' AS leftSlja,
+        '' AS rightJd,
+        '' AS leftJd,
+        cr.crt_vaod AS rightFartj,
+        cr.crt_vaod AS leftFartj,
+        '' AS rightNeartj,
+        '' AS leftNeartj
+        FROM
+        jc_crt cr
+        JOIN store_sales sa ON sa.ptometry_number = cr.ptometry_number
+        JOIN member m ON sa.member_number = m.card_number
+        JOIN department de ON sa.store_num = de.id
+        ) aia
+        <where>
+            <if test="classtype != null and classtype != ''">and FIND_IN_SET(#{classtype},classtype)</if>
+            <if test="mfrsid != null and mfrsid != ''">and FIND_IN_SET(#{mfrsid},mfrsid)</if>
+            <if test="eyeStyles != null and eyeStyles != ''">and FIND_IN_SET(eye_type,#{eyeStyles})</if>
+            <if test="departNumber != null and departNumber != ''">and store_num = #{departNumber}</if>
+            <if test="saleType != null and saleType != ''">and sale_type = #{saleType}</if>
+            <if test="companyId != null and companyId != ''">and company_id = #{companyId}</if>
+
+            <if test="saleNumber != null and saleNumber != ''">and sale_number LIKE concat(concat('%', #{saleNumber}),'%')</if>
+            <if test="name != null and name != ''">and name LIKE concat(concat('%', #{name}),'%')</if>
+            <if test="memberNumber != null and memberNumber != ''">and memberNumber LIKE concat(concat('%', #{memberNumber}),'%')</if>
+            <if test="phone1 != null and phone1 != ''">and phone1 LIKE concat(concat('%', #{phone1}),'%')</if>
+        </where>
+        group by sale_number ORDER BY id DESC
+        ) AS temp
     </select>
 
 

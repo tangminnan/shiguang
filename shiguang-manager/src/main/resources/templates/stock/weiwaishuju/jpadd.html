@@ -302,10 +302,18 @@
         type: 'date'
     });
 
-    var flag="";
-    var flags="";
-    var arr = new Array();
-    var countarr = new Array();
+    // var flag="";
+    // var flags="";
+    // var arr = new Array();
+    // var countarr = new Array();
+    var numAry = new Array();
+    var codeAry = new Array();
+    var nameAry = new Array();
+    var lfs = new Array();
+    var mss = new Array();
+    var sls = new Array();
+    var lxs = new Array();
+
     function PeiJing() {
         $("#tab1").remove();
         var html = "";
@@ -352,32 +360,43 @@
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 for (var i = 0; i < rows.length; i++) {
                     $("#departname").val(rows[i].mirorAddress);
-                    xsNumber+=rows[i].saleNumber+',';
-                    rightsphs+=rows[i].rightsph+',';
-                    rightcyls+=rows[i].rightcyl+',';
-                    rightzxs+=rows[i].rightzx+',';
-                    rightAdds+=rows[i].rightAdd+',';
-                    rightSljs+=rows[i].rightSlja+',';
-                    rightJds+=rows[i].rightJd+',';
-                    rightFartjs+=rows[i].rightFartj+',';
-                    rightNeartjs+=rows[i].rightNeartj+',';
+                    xsNumber += rows[i].saleNumber + ',';
+                    rightsphs += rows[i].rightsph + ',';
+                    rightcyls += rows[i].rightcyl + ',';
+                    rightzxs += rows[i].rightzx + ',';
+                    rightAdds += rows[i].rightAdd + ',';
+                    rightSljs += rows[i].rightSlja + ',';
+                    rightJds += rows[i].rightJd + ',';
+                    rightFartjs += rows[i].rightFartj + ',';
+                    rightNeartjs += rows[i].rightNeartj + ',';
 
-                    leftsphs+=rows[i].leftsph+',';
-                    leftcyls+=rows[i].leftcyl+',';
-                    leftzxs+=rows[i].leftzx+',';
-                    leftAdds+=rows[i].leftAdd+',';
-                    leftSljs+=rows[i].leftSlja+',';
-                    leftJds+=rows[i].leftJd+',';
-                    leftFartjs+=rows[i].leftFartj+',';
-                    leftNeartjs+=rows[i].leftNeartj+',';
+                    leftsphs += rows[i].leftsph + ',';
+                    leftcyls += rows[i].leftcyl + ',';
+                    leftzxs += rows[i].leftzx + ',';
+                    leftAdds += rows[i].leftAdd + ',';
+                    leftSljs += rows[i].leftSlja + ',';
+                    leftJds += rows[i].leftJd + ',';
+                    leftFartjs += rows[i].leftFartj + ',';
+                    leftNeartjs += rows[i].leftNeartj + ',';
 
-                    goodsNums+=rows[i].goodsNum+'!';
-                    goodsCodes+=rows[i].goodsCode+'!';
-                    leftRights+=rows[i].leftRight+'!';
-                    storeNames+=rows[i].storeName+'!';
-                    storeDescribes+=rows[i].storeDescribe+'!';
-                    storeCounts+=rows[i].storeCount+'!';
-                    classtypes+=rows[i].classtype+'!';
+                    // goodsNums += rows[i].goodsNum;
+                    // goodsCodes += rows[i].goodsCode;
+                    // leftRights += rows[i].leftRight;
+                    // storeNames += rows[i].storeName;
+                    // storeDescribes += rows[i].storeDescribe;
+                    // storeCounts += rows[i].storeCount;
+                    // classtypes += rows[i].classtype;
+
+
+
+                    numAry[i]=rows[i].goodsNum;
+                    codeAry[i]=rows[i].goodsCode;
+                    nameAry[i]=rows[i].storeName;
+                    lfs[i]=rows[i].leftRight;
+                    mss[i]=rows[i].storeDescribe;
+                    sls[i]=rows[i].storeCount;
+                    lxs[i]=rows[i].classtype;
+
 
 
                     //顾客信息
@@ -387,7 +406,7 @@
 
                 }
                 if (eyeStyle == 3) {//镜片
-                    var allLength=xsNumber.split(",");
+                    var allLength=xsNumber.split(",");//单据
 
                     var rightsph=rightsphs.split(",");
                     var rightcyl=rightsphs.split(",");
@@ -441,145 +460,23 @@
                         html+="<td><input id='leftNeartj"+b+"' name='leftNeartj' value='"+leftNeartj[b]+"' type='text'/></td>";
                         html+="</tr>";
 
+                        var numss=numAry[b];
+                        var nums111=numAry[b].split(",");
+                        var codes=codeAry[b];
+                        var names=nameAry[b];
+                        alert(numss);
+                        alert(nums111+"拆分");
+                        // for(var c= 0; c< nums.length; b++){
+                        //
+                        // }
+
                     }
                     $("#jpdushu").append(html);
 
-                    var nums = goodsNums.split("!");
-                    var codes = goodsCodes.split("!");
-                    var lfs = leftRights.split("!");
-                    var mcs = storeNames.split("!");
-                    var mss = storeDescribes.split("!");
-                    var sls = storeCounts.split("!");
-                    var cpdzs = classtypes.split("!");
-                    // alert(mss.length);
-                    // alert(mss);
-                    for(var b=0;b < nums.length; b++){
-                        var array = nums.split(",");//代码
-                        var goodsCode = codes.split(",");//条码
-                        var leftRight = lfs.split(",");//左右
-                        var storeName = mcs.split(",");//名称
-                        var storeDescribe = mss.split(",");//描述
-                        var storeCount = sls.split(",");//数量
-                        var classtype = cpdzs.split(",");//定做还是成品
-                        for (var a = 0; a < array.length; a++) {
-                            if (storeDescribe[a] == "镜片") {
-                                if (leftRight[a] == "右") {
-                                    var sph = rows[i].rightsph;
-                                    var cyl = rows[i].rightcyl;
-                                    var zx = rows[i].rightzx;
-                                    var xj = rows[i].rightAdd;
-                                    var lj = rows[i].rightSlja;
-                                    var jd = rows[i].rightJd;
-                                    var tg = rows[i].righttg;
-                                } else if (leftRight[a] == "左") {
-                                    var sph = rows[i].leftsph;
-                                    var cyl = rows[i].leftcyl;
-                                    var zx = rows[i].leftzx;
-                                    var xj = rows[i].leftAdd;
-                                    var lj = rows[i].leftSlja;
-                                    var jd = rows[i].leftJd;
-                                    var tg = rows[i].lefttg;
-                                }
-                                if (classtype[a] == "2") {
-                                    bhtml += "<tr>";
-                                    bhtml += "<td><input id='num' name='num'  value='" + array[a] + "' type='text' /></td>";
-                                    bhtml += "<td><input id='name' name='name'  value='" + storeName[a] + "' type='text' /></td>";
-                                    bhtml += "<td><input id='leftRight' name='leftRight'  value='" + leftRight[a] + "' type='text' /></td>";
-                                    bhtml += "<td><input id='sph' value='" + sph + "' type='text' /></td>";
-                                    bhtml += "<td><input id='cyl' value='" + cyl + "' type='text' /></td>";
-                                    bhtml += "<td><input id='zx'  value='" + zx + "' type='text' /></td>";
-                                    bhtml += "<td><input id='xj'  value='" + xj + "' type='text' /></td>";
-                                    bhtml += "<td><input id='lj'  value='" + lj + "' type='text' /></td>";
-                                    bhtml += "<td><input id='jd' value='" + jd + "' type='text' /></td>";
-                                    bhtml += "<td><input id='tg' value='" + tg + "' type='text' /></td>";
-                                    bhtml += "<td><input id='count' name='count'  value='" + storeCount[a] + "' type='text'/></td>";
-                                    bhtml += "<td><input id='yaoqiu' name='yaoqiu' value='" + rows[i].processAsk.replaceAll(",","") + "' type='text' /></td>";
-                                    bhtml += "<td><input id='code' name='code' value='" + goodsCode[a] + "' type='hidden' /></td>";
-                                    bhtml += "</tr>";
-                                }
 
-                            }
-                        }
-                        $("#jp").append(bhtml);
-                    }
-                    // bhtml += "<tr>";
-                    // bhtml += "<td width='250'>商品代码</td>";
-                    // bhtml += "<td width='250'>商品名称</td>";
-                    // bhtml += "<td>镜片型</td>";
-                    // bhtml += "<td>球镜</td>";
-                    // bhtml += "<td>柱镜</td>";
-                    // bhtml += "<td>轴向</td>";
-                    // bhtml += "<td>下加</td>";
-                    // bhtml += "<td>棱镜</td>";
-                    // bhtml += "<td>基底</td>";
-                    // bhtml += "<td>瞳高</td>";
-                    // bhtml += "<td>数量</td>";
-                    // bhtml += "<td width='300'>加工要求</td>";
-                    // bhtml += "</tr>";
-                    // var array = rows[i].goodsNum.split(",");//代码
-                    // var goodsCode = rows[i].goodsCode.split(",");//条码
-                    // var leftRight = rows[i].leftRight.split(",");//左右
-                    // var storeName = rows[i].storeName.split(",");//名称
-                    // var storeDescribe = rows[i].storeDescribe.split(",");//描述
-                    // var storeCount = rows[i].storeCount.split(",");//数量
-                    // var classtype = rows[i].classtype.split(",");//定做还是成品
-                    //
-                    // for (var a = 0; a < array.length; a++) {
-                    //
-                    //     if (storeDescribe[a] == "镜片") {
-                    //         if (leftRight[a] == "右") {
-                    //             var sph = rows[i].rightsph;
-                    //             var cyl = rows[i].rightcyl;
-                    //             var zx = rows[i].rightzx;
-                    //             var xj = rows[i].rightAdd;
-                    //             var lj = rows[i].rightSlja;
-                    //             var jd = rows[i].rightJd;
-                    //             var tg = rows[i].righttg;
-                    //         } else if (leftRight[a] == "左") {
-                    //             var sph = rows[i].leftsph;
-                    //             var cyl = rows[i].leftcyl;
-                    //             var zx = rows[i].leftzx;
-                    //             var xj = rows[i].leftAdd;
-                    //             var lj = rows[i].leftSlja;
-                    //             var jd = rows[i].leftJd;
-                    //             var tg = rows[i].lefttg;
-                    //         }
-                    //         if (classtype[a] == "2") {
-                    //             bhtml += "<tr>";
-                    //             bhtml += "<td><input id='num' name='num'  value='" + array[a] + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='name' name='name'  value='" + storeName[a] + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='leftRight' name='leftRight'  value='" + leftRight[a] + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='sph' value='" + sph + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='cyl' value='" + cyl + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='zx'  value='" + zx + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='xj'  value='" + xj + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='lj'  value='" + lj + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='jd' value='" + jd + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='tg' value='" + tg + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='count' name='count'  value='" + storeCount[a] + "' type='text'/></td>";
-                    //             bhtml += "<td><input id='yaoqiu' name='yaoqiu' value='" + rows[i].processAsk.replaceAll(",","") + "' type='text' /></td>";
-                    //             bhtml += "<td><input id='code' name='code' value='" + goodsCode[a] + "' type='hidden' /></td>";
-                    //             bhtml += "</tr>";
-                    //         }
-                    //
-                    //     }
-                    // }
-                    // $("#jp").append(bhtml);
+
 
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
                 $("#saleNumber").val(xsNumber);
 
             }
