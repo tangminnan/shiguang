@@ -2188,8 +2188,10 @@
 	var prce=0;
 	var addinal=[];
 	var addinalPrice=[];
-	function getFujia(){
+	// function getFujia(){
+    $("#additionalName").change(function(){
         var options=$("#additionalName option:selected")
+		//alert(options);
 		if (options.val() == ''){
             return
 		}
@@ -2250,8 +2252,11 @@
         addinal.push(options.text());
         addinalPrice.push(options.val());
         $("#additionalCost").val(addinal);
-        $("#additionalPrices").val(addinalPrice)
-	}
+        $("#additionalPrices").val(addinalPrice);
+        $(this).blur();
+	}).focus(function(){
+        $(this)[0].selectedIndex = -1;
+    });
 	var priceNum=0.00;
     function sum(obj){
         var yjyhPrice = $("#amountMoney").val();
